@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Proofs 16 of 16, equations of motion 8 of 8, transfer models 6 of 6, profiles 6 of 6,
@@ -12,20 +14,32 @@ deciding_figure: Proofs 16 of 16, equations of motion 8 of 8, transfer models 6 
 directives:
 - D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/derivation_cases
+  - evaluation/derivation_cases.py
+  - reasoning/derivation.py
+  - reasoning/proof_search.py
+  - reasoning/symbolic_nonlinear.py
+  - runtime/derivation_frames.py
+  - runtime/derivation_report.py
+  - runtime/derivation_scripts.py
+  - runtime/question_frames.py
+  - tools.py
   lean:
   - Derivations
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DERIVATION_STUDY.md
   test:
   - test_derivation.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DERIVATION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -40,12 +54,14 @@ perturbations: []
 phase: 106
 predecessors:
 - AST_INDEX_STUDY
+- CITATION_SCOPE_STUDY
 - QUESTION_SET_B_STUDY
 question: 'Can the GLM derive, rather than look up: prove or refute a propositional sequent with a checkable
   proof or countermodel, derive the equations of motion of a Lagrangian with its small oscillations, derive
   the transfer functions of a dynamic model, and solve a boundary value problem in flux form — each answer
   re-decided by a stand-alone script that shares no code with the layer?'
 recomputed_by: '`glm_universal.runtime.derivation_report.derivation_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -71,7 +87,8 @@ sections:
 - anchor: 8-re-running
   heading: 8. Re-running
 status: closed
-successors: []
+successors:
+- DERIVATION_TWO_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Derivations and proofs: the machine produces a derivation'

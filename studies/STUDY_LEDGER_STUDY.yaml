@@ -1,0 +1,110 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 8 of 10 marks, 1 of 2 amended (S4′ missed); 155 studies, all with tier 0, a phase for
+  144; 185 predecessor edges, none later than its study; stored mark counts agreeing with their figure
+  7 of 10; tamper control 7 of 7; file names 4,254 in 195 documents, 142 missing at the first reading
+  and 0 after the amended reading and the corrections.
+directives: []
+evidence: []
+faculty: maintenance
+file_refs:
+  code:
+  - corpus/study_ledger.py
+  - corpus/study_manifest.py
+  - tools.py
+  lean: []
+  lean_held: []
+  lean_missing:
+  - StudyLedger
+  missing: []
+  prose: STUDY_LEDGER_STUDY.md
+  test:
+  - test_fold_machine.py
+  - test_lattice_high.py
+  - test_study_ledger.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: STUDY_LEDGER_STUDY
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended:
+  - S4′
+  - S10′
+  declared:
+  - L1
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
+  - S9
+  - S10
+  met:
+  - L1
+  - S9
+  - S10′
+  missed:
+  - S4′
+perturbations: []
+phase: 161
+predecessors:
+- FOLD_MACHINE_STUDY
+question: Can every study be read into one machine-readable row — phase, predecessors, marks, amendments,
+  frozen path, digests, status, follow-ups — from the files alone, with nothing typed in, and can that
+  ledger check where its sources disagree and which of the files the documents name are missing?
+recomputed_by: (hand-written argument; nothing to recompute)
+related:
+- GLM_ACADEMIC_PAPER
+- HIGHER_LATTICE_STUDY
+- SOURCE_TIERS_STUDY
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-the-control
+  heading: 2. The control
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-how-it-is-measured
+  heading: 6. How it is measured
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors:
+- SOURCE_TIERS_STUDY
+superseded_by: ''
+supersedes: []
+title: The study ledger — every study as one machine-readable row, and the files the documents name
+verdict: 'Yes. The studies are one ledger read from the documents, the plan, the To-Do list and the stored
+  measurements, with nothing typed in, and the ledger is also a check: it lists where those sources disagree
+  and which file names do not resolve.'
+wobble_deps: []

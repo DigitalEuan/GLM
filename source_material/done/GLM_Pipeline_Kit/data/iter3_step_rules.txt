@@ -1,0 +1,87 @@
+================================================================================================
+ITERATION 3 — Step-rule library + Construction-C Leech snap
+================================================================================================
+
+The 6 step rules (one per substrate layer):
+  popcount [F_2] cost=1 popcount call
+  hamming [Hamming] cost=1 XOR + 1 popcount
+  sphere_packing [G_23] cost=1 combinatorial sum
+  octads [G_24] cost=759 octads (one-time)
+  theta [Lambda] cost=1 modular-form coefficient
+  pair_census [Co_0] cost=exhaustive over 98,280 axes
+
+------------------------------------------------------------------------------------------------
+[Per-task snap results — 50 samples each]
+------------------------------------------------------------------------------------------------
+Task          even parity   odd parity    wall rate     in principal  in odd        
+------------------------------------------------------------------------------------------------
+toggle        29            21            42.0          58.0          58.0          
+translate     50            0             0.0           100.0         100.0         
+reflect_v     31            19            38.0          62.0          62.0          
+flood_fill    50            0             0.0           100.0         100.0         
+bfs_shortest  50            0             0.0           100.0         100.0         
+------------------------------------------------------------------------------------------------
+
+[Rule invocation counts per task (summed across 50 samples)]
+------------------------------------------------------------------------------------------------
+Task          popcount    hamming     octads    sum_mod_8   in_leech    
+------------------------------------------------------------------------------------------------
+toggle        50          50          50        0           0           
+translate     50          50          50        0           0           
+reflect_v     50          50          50        0           0           
+flood_fill    50          50          50        0           0           
+bfs_shortest  50          50          50        0           0           
+------------------------------------------------------------------------------------------------
+
+[Sample trace for one target per task — the step rules in action]
+================================================================================================
+
+--- toggle (target_bits = 007324cf, n_ones = 13, parity = odd) ---
+  step 1: popcount       [F_2                         ]  in=7546063                    out=13               -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 4, 4, 4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4...  out=4                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 4, 4, 4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4...  out=False            -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 5, 5, 5, 1, 1, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, ...  out=0                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 5, 5, 5, 1, 1, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, ...  out=False            -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(7546063, 7538895)         out=3                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=7538895                    out=codeword weight 12  -- Nearest codeword is not an octad; weight != 8
+  WALL: parity_wall: odd-parity binary targets cannot be encoded as Leech lattice points via 4*binary + canonical glue. The substrate must escalate to a higher lattice (Barnes-Wall Lambda_32 or ternary Lambda_48) or use a non-trivial Golay-codeword lift.
+
+--- translate (target_bits = 0001863f, n_ones = 10, parity = even) ---
+  step 1: popcount       [F_2                         ]  in=99903                      out=10               -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 4, 0, 0...  out=0                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 4, 0, 0...  out=True             -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 5, 5, 1, ...  out=4                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 5, 5, 1, ...  out=True             -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(99903, 67215)             out=4                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=67215                      out=octad            -- The nearest codeword IS an octad (weight-8 codeword)
+  VERDICT: IN LEECH (principal)
+
+--- reflect_v (target_bits = 00018c38, n_ones = 7, parity = odd) ---
+  step 1: popcount       [F_2                         ]  in=101432                     out=7                -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 4, 4, 0, 0, 0...  out=4                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 4, 4, 0, 0, 0...  out=False            -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 5, 5, 1, 1, ...  out=0                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 5, 5, 1, 1, ...  out=False            -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(101432, 8620088)          out=3                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=8620088                    out=octad            -- The nearest codeword IS an octad (weight-8 codeword)
+  WALL: parity_wall: odd-parity binary targets cannot be encoded as Leech lattice points via 4*binary + canonical glue. The substrate must escalate to a higher lattice (Barnes-Wall Lambda_32 or ternary Lambda_48) or use a non-trivial Golay-codeword lift.
+
+--- flood_fill (target_bits = 00792780, n_ones = 10, parity = even) ---
+  step 1: popcount       [F_2                         ]  in=7939968                    out=10               -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 4, 4, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 4, 4, 4...  out=0                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 4, 4, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 4, 4, 4...  out=True             -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 5, 5, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, 5, 5, 5, ...  out=4                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 5, 5, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, 5, 5, 5, ...  out=True             -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(7939968, 7021824)         out=4                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=7021824                    out=octad            -- The nearest codeword IS an octad (weight-8 codeword)
+  VERDICT: IN LEECH (principal)
+
+--- bfs_shortest (target_bits = 00004001, n_ones = 2, parity = even) ---
+  step 1: popcount       [F_2                         ]  in=16385                      out=2                -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0...  out=0                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0...  out=True             -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, ...  out=4                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, ...  out=True             -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(16385, 0)                 out=2                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=0                          out=zero codeword    -- Target is itself a codeword (zero syndrome)
+  VERDICT: IN LEECH (principal)

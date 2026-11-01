@@ -2,7 +2,23 @@
 (:mod:`glm_universal.runtime.router`), the toolbox
 (:mod:`glm_universal.runtime.toolbox`) and derivation across a declared union
 of formula wheels (:mod:`glm_universal.engineering.union`), held to the marks
-``studies/CONNECTED_MACHINE_STUDY.md`` declared before any of them existed."""
+``studies/CONNECTED_MACHINE_STUDY.md`` declared before any of them existed.
+
+*Last altered 31 October 2026 (repository check): the tool module set brought
+up to Phases 175-184 as MASTER_PLAN.md records it (``pipeline_kit``,
+``frame_operators``, ``kappa_anchor``, ``colour_induction``,
+``lorentzian_lift``, ``lorentzian_evidence``, ``lorentzian_majority``); a cited
+Lean file is found through ``constants.lean_file`` (the build tree or
+``src/lean/awaiting_recovery/``) or is recorded as missing in
+``studies/_lean_files_needed.md``, and a cited study that was lost is likewise
+recorded there; the contract count re-pinned at the 223 cases of the
+evaluation, and then at 227 when the cases of the `study` and `sequence`
+kinds were added the same day.*
+
+*Last altered 1 November 2026 (Phase 186): the tool module set gains
+``hypothesis_tools`` and ``derive_query``; the contract count re-pinned at the
+237 cases of the evaluation (ten cases of the intake items absorbed ahead of
+the build).*"""
 
 from __future__ import annotations
 
@@ -38,7 +54,20 @@ class TestTheRouterReadsOnlyWhatItShould(unittest.TestCase):
         # report-hole-configuration.
         # 179 -> 188 at Phase 134: the nine cases of the carrier kind.
         # 188 -> 195 at Phase 143: the seven cases of the locate kind.
-        self.assertEqual(c["planner"], 195)
+        # 195 -> 223 after Phase 143 (31 October 2026, repository check: the
+        # count this test pinned was not moved with the cases added later,
+        # among them the `corpus` cases of Phase 154 and tool-leech-norm-12
+        # of Phase 164; 223 is the evaluation count SYSTEM.md and
+        # MASTER_PLAN.md record from Phase 165 on, and every one of them is
+        # still read by the planner).
+        # 223 -> 227 (31 October 2026, repository check): the four cases of
+        # the `study` and `sequence` kinds (study-card, study-unknown,
+        # sequence-fibonacci, sequence-unheld), read by the planner's rule 0.
+        # 227 -> 237 (1 November 2026, Phase 186): the ten cases of the
+        # intake items absorbed ahead of the build (tool rule30, tool
+        # conjecture, tool derive, the sequence kind's next reading, the plan
+        # search behind tool arc), each read by the planner first.
+        self.assertEqual(c["planner"], 237)
 
     def test_every_engineering_question_reaches_engineering(self):
         self.assertEqual(self.census["engineering"]["engineering"], 63)
@@ -117,14 +146,42 @@ class TestTheToolbox(unittest.TestCase):
                                    "shortest_tag", "toolbox",
                                    # Phase 137: the convergent and the
                                    # best approximation.
-                                   "rational_approx"})
+                                   "rational_approx",
+                                   # Phase 175: tool induce; Phase 177:
+                                   # tool frame and tool kappa; Phase 178:
+                                   # tool arc; Phase 182: tool lorentz;
+                                   # Phase 183: tool evidence; Phase 184:
+                                   # tool majority.
+                                   "pipeline_kit", "frame_operators",
+                                   "kappa_anchor", "colour_induction",
+                                   "lorentzian_lift", "lorentzian_evidence",
+                                   "lorentzian_majority",
+                                   # Phase 186: tool rule30 and tool
+                                   # conjecture (the Rule 30 study's
+                                   # hypothesis engine) and tool derive
+                                   # (the formula wheels' derivability).
+                                   "hypothesis_tools", "derive_query"})
 
     def test_every_tool_names_a_lean_file_and_a_study_that_exist(self):
+        # 31 October 2026: a file lost in the October 2026 reorganisation
+        # must be recorded in studies/_lean_files_needed.md (the pattern of
+        # tests/test_lorentzian_majority.py); a held file is found by
+        # constants.lean_file.
+        from glm_universal.constants import LEAN_FILES_NEEDED, lean_file
+        needed = LEAN_FILES_NEEDED.read_text(encoding="utf-8")
+
+        def present_or_recorded(path, lean):
+            if lean:
+                return (lean_file(path).is_file()
+                        or f"`{path.split('/')[-1]}`" in needed)
+            return ((ROOT / path).exists()
+                    or f"`{path.split('/')[-1]}`" in needed)
+
         for t in toolbox.TOOLS:
             with self.subTest(tool=t.name):
-                self.assertTrue((ROOT / t.study).exists(), t.study)
+                self.assertTrue(present_or_recorded(t.study, False), t.study)
                 for f in t.lean:
-                    self.assertTrue((ROOT / "src" / "lean" / f).exists(), f)
+                    self.assertTrue(present_or_recorded(f, True), f)
         for s in toolbox.SURFACES:
             with self.subTest(surface=s.name):
                 self.assertTrue((ROOT / s.study).exists(), s.study)

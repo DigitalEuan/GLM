@@ -1,0 +1,123 @@
+The Geometric Language Machine (GLM) system—specifically the **`glm_universal` (v1.2.0)** collective active runtime—has completed its core development phases, achieving **feature completeness** with a fully green verification suite consisting of **1,324 tests and 6,331 subtests**. 
+
+The system's current development items are detailed below followed by some concepts to experiment with and test, then some concepts regarding use of "Wobble"/"wiggle"/"noise":
+
+---
+
+### **Next "To-Do" Items (Outstanding Gaps)**
+
+#### **1. Mathematical & Geometric Extensions**
+*   **Leech Voronoi Cell Deep-Hole Finding:** Although the 23 Niemeier lattices are cataloged by their root systems, implementing the actual Voronoi cell algorithm (requiring all 196,560 facets) is needed to classify arbitrary carriers by their nearest Niemeier type.
+*   **\\(O(1)\\) LLVQ Lookup Table:** The Leech Lattice Vector Quantization module currently classifies coordinates by shell, but the constant-time \\(O(1)\\) lookup table utilizing the first few binary digits remains unbuilt.
+*   **FWHT Integration:** The exact Fast Walsh-Hadamard Transform (\\(O(N \log N)\\)) is verified but has not yet been wired directly into the substrate's Golay code group actions to accelerate the decoding bottleneck.
+*   **VOA State-Field Map:** Developing the mode operators \\(u_n\\) (for \\(n=-1,0,1\\)) on the 3-dimensional 2A subalgebra to establish the infinite-dimensional Vertex Operator Algebra (VOA) state-field map \\(Y(u, z)\\).
+
+#### **2. Linguistic, Semantic & Analogy Engineering**
+*   **Multi-Domain Analogies:** The analogy solver currently requires all operands to sit within a single domain register. A multi-domain analogy mode is needed to process queries that span registers (e.g., `heat : temperature :: force : ?`).
+*   **Arithmetic Inside Descriptions:** The query runtime cannot perform arithmetic mid-description (e.g., `what is energy divided by time` is refused, even though the verifier and real expression grammar can compute both halves).
+*   **Words as Projections:** Fully transition semantic lexicon terms into projections of underlying physics or math concepts (e.g., defining `hot` explicitly as "temperature at high scale" rather than as a standalone concept).
+
+#### **3. Chemistry & Dimensional Hardening**
+*   **General Molecules Domain:** While 52 diatomics are modeled, a generalized, multi-carrier coordinate representation for complex molecules is yet to be established.
+*   **Widen Chemistry Data Coverage:** The physical attributes in the element register remain highly sparse (covalent radii are populated for only 24/118 elements; homonuclear bond dissociation energies for only 21/118).
+*   **Unit Parser Hardening:** Address the audit script's parser exception where the steradian (`sr`) unit is treated as dimensionless, which causes mismatches across the seven luminous physical concepts.
+
+---
+
+## Concepts/Experiments - you may have some better concepts to add:
+
+### **"The outside is the whole number, the inside is the infinite"** is exactly where the under-implemented potential of the "wiggle" lies. Currently, the system uses the 1-D and 2-D Delta-Sigma modulators primarily to *represent* values (like resolving irrationals as infinite processes). To make the **computation itself literally geometric and dynamic**, we must transition from using the "wobble" as a representation tool to using the trajectory's geometry as the active computational engine. 
+
+Here are four concepts to try in order to employ "noise" and "wobble" as literal geometric computation:
+
+### 1. Broaden the Convex Hull by Expanding the Emitted Alphabet
+Under the current 24-D dynamic carrier model, every emitted state is a 24-bit Golay codeword, meaning the reachable space of the modulator is strictly bounded by the **convex hull of the 4,096 codewords**. If a target or a computational step falls outside this hull (such as the ramp target, \\(i/24\\)), the modulator's error accumulator blows up linearly and cannot converge.
+*   **How to implement it:** Expand the emitted alphabet of the quantizer. Instead of restricting snaps purely to the 4,096 codewords, allow the modulator to emit **Leech lattice points** or **scaled codewords**. This geometrically expands the convex hull, allowing the carrier to wiggle through a much larger, more expressive thermodynamic space to compute complex physical systems without hitting a precision wall - this may work like a "probe" into higher levels showing where things get "unknown" and to then to follow that "lead".
+
+### 2. Exploit Self-Organized Criticality (SOC) at the Covering Radius
+In the 24-D Golay modulator, when a target is not a codeword, the carrier sits exactly at the Information Loss boundary (mean weight 3.0), oscillating between weight 2 (stable) and weight 4 (critical). At error weight 4 (the covering radius), the Golay snap is highly ambiguous, pointing to six equidistant codewords at once.
+*   **How to implement it:** Instead of breaking these ties arbitrarily, treat this ambiguity as a **computational branching point**. You can tune the modulator's noise floor to this exact critical boundary. The resulting deterministic trajectory wiggles through these weight-4 decision spaces, and the **frequency distribution of the visited codewords** geometrically calculates multi-variable probabilities or relational ties in parallel, letting the noise itself carry the logic of the computation - an "idea space" where things are "considered".
+
+### 3. Compute Niemeier Deep-Hole Finding via Trajectory Distribution
+Instead of using heavy, static geometric algorithms (like the Voronoi cell with its 196,560 facets) to classify carriers—which is computationally expensive—let the "wobble" do the heavy lifting.
+*   **How to implement it:** Run the Delta-Sigma modulator with the target vector as an input. Because the trajectory's distribution is a deterministic reflection of the surrounding lattice geometry, you can let the carrier wiggle and use its **long-term frequency distribution** to classify which of the 23 Niemeier root systems the target sits closest to. This replaces an incredibly expensive static search with a highly elegant, dynamic, and temporal physical process - there could be several options possible to test here.
+
+### 4. Implement the Vertex Operator Algebra (VOA) State-Field Map \\(Y(u, z)\\)
+This is the ultimate realization of the "inside relationships as the infinite".
+*   **How to implement it:** Implement the mode operators \\(u_n\\) (for \\(n = -1, 0, 1\\)) on the 3-dimensional 2A subalgebra. In this framework, the vertex operator \\(Y(u, z) = \sum u_n z^{-n-1}\\) is treated as an **infinite Delta-Sigma sequence**, where each mode operator \\(u_n\\) acts as an individual, discrete "snap" of the algebra. The continuous wave propagation is thus calculated purely through the deterministic sequence of algebraic state transitions, this "State Transitions" concept could be applied more widely perhaps - I would like to see a "noise" experiment in full where we modulate "noise" and experiment with interacting noise frequencies/amplitudes/patterns to see what can be achieved is the same way as VOA to obtain irrationals and infinite values.
+
+***
+
+## Concepts regarding use of "Wobble"/"wiggle"/"noise" to try from my Ramble On app - you may have some better concepts to add:
+
+{
+  "version": 1,
+  "app": "Ramble On",
+  "project": {
+    "title": "Directive 2: Geometric Ambiguity and Conceptual Superposition",
+    "project_type": "directive",
+    "overview": "This engineering directive outlines the formal integration of geometric ambiguities\u2014specifically the weight-4 covering radius ties of the [24,12,8] Golay code\u2014as active, parallel computational vectors. Drawing on Vector Symbolic Architectures (VSAs), Category-Theoretic products, and Quantum Cognition models of bisociative humor, this design moves the GLM from a 'hard snap' error-correction paradigm to a dynamic 'computing in superposition' model. It translates mathematical potentiality into a structured parallel hypothesis engine where downstream semantic and dimensional registers act as the measurement operator that drives deterministic state collapse.",
+    "status": "ready_for_dev"
+  },
+  "blocks": [
+    {
+      "title": "Engineering: List Decoding & Parallel Hypothesis Engine",
+      "content": "At the [24,12,8] Golay covering radius of Hamming distance 4, the nearest-codeword snap is fundamentally ambiguous, yielding exactly six equidistant codewords (the six tetrads of a MOG sextet). Instead of breaking these ties arbitrarily\u2014which causes silent informational decay\u2014the implementation of 'List Decoding' retains all six candidate codewords as an active parallel hypothesis space. These candidates represent competing 'ideas' or interpretations. Rather than forcing a premature, lossy choice, the GLM carries the entire six-dimensional list forward. Downstream contextual interactions (such as evaluating dimensional homogeneity in the EXT10 physics register or stoichiometric balance in the elements register) act as a contextual measurement operator, filtering out incompatible trajectories and collapsing the superposition to the single correct 'aha!' state without heuristic guessing.",
+      "category": "Engineering",
+      "source": "assistant",
+      "stage": "organized",
+      "sort_order": 0
+    },
+    {
+      "title": "Theoretical Foundation: Vector Symbolic Computing in Superposition",
+      "content": "To prevent information loss during multi-step inference, the GLM utilizes Vector Symbolic Architecture (VSA) hyperdimensional operations. When an ambiguous point-set or coordinate hits a boundary, the candidate states are bundled algebraically into a single 24-dimensional hypervector using exact rational addition or F2 module symmetric difference (XOR). This process allows the machine to carry out 'computation in superposition' across registers. The algebraic relationships remain complete and uncollapsed, meaning the machine can perform calculations on multiple potential paths simultaneously. This preserves the 'inside infinite relationships' of the lattice, leaving the vector open to future refinement and keeping its mathematical potentiality fully operational until an explicit measurement is required.",
+      "category": "Theory",
+      "source": "assistant",
+      "stage": "organized",
+      "sort_order": 1
+    },
+    {
+      "title": "Formal Framework: Category-Theoretic Bisociation & Concept Blending",
+      "content": "Analogical reasoning, metaphor, and conceptual humor are formalized as Arthur Koestler's 'bisociation'\u2014the simultaneous vibration of a concept across two incompatible frames of reference (e.g., the physics register and the lexicon register). This is modeled mathematically as a greatest lower bound (product) in the poset category of concept trees. When the GLM evaluates a query, it computes the Greatest Common Approximation (GCA) recursively across the tree structures. If the concept trees belong to incompatible domains, they intersect at a precision boundary, creating a 'concept blend' or a 'punning' state. This boundary marks the precise point where the lower layer's view is exhausted, forcing the 'escalate' algorithm to climb the Dyadic Tower and acquire new expressive power to resolve the incongruity.",
+      "category": "Theoretical Framework",
+      "source": "assistant",
+      "stage": "organized",
+      "sort_order": 2
+    },
+    {
+      "title": "Implementation: The Dynamic Carrier Wiggle & State Collapse",
+      "content": "The cognitive tension of bisociation is physically represented by the 24-coordinate dynamic carrier, which self-organizes at the critical Information Loss boundary (mean Hamming weight 3.0), wiggling deterministically between weight 2 (stable) and weight 4 (critical/superposition). This continuous, corrective 'wiggle' is governed by a Delta-Sigma error feedback loop operating over exact fractions. A frame shift (e.g. interpreting a pun's transition from a noun to a verb) corresponds to a change in the measuring projection operator on the 4x6 MOG grid. The final judgment of 'getting a joke' or 'verifying a law' is modeled as a projective measurement onto a 2-D Hilbert subspace representing a binary coherence or funniness axis, collapsing the dynamic carrier's trajectory into a stable, deterministic state.",
+      "category": "Implementation",
+      "source": "assistant",
+      "stage": "organized",
+      "sort_order": 3
+    }
+  ],
+  "constants": [
+    {
+      "name": "GOLAY_COVERING_RADIUS_TIE_COUNT",
+      "value": "6 (The exact number of equidistant codewords at Hamming distance 4, defining the basis states of the superposition)",
+      "constant_type": "Geometric parameter"
+    },
+    {
+      "name": "COMPUTING_IN_SUPERPOSITION_METHOD",
+      "value": "VSA Bundling (rational vector addition and F2 symmetric difference to carry parallel hypotheses)",
+      "constant_type": "Algebraic method"
+    },
+    {
+      "name": "ANALOGICAL_COMPOSITION_RULE",
+      "value": "Greatest Common Approximation (gca) as a categorical product over a poset category of concept trees",
+      "constant_type": "Category-theoretic rule"
+    },
+    {
+      "name": "DYNAMIC_WIGGLE_SOC_REGIME",
+      "value": "Mean weight 3.0 (oscillating between weight 2 and weight 4 to maintain Self-Organized Criticality at the boundary)",
+      "constant_type": "Operational principle"
+    },
+    {
+      "name": "STATE_COLLAPSE_OPERATOR",
+      "value": "Projective measurement onto a 2-D Hilbert subspace representing binary coherence (NRCI) or funniness",
+      "constant_type": "Quantum-like principle"
+    }
+  ]
+}

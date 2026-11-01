@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 3 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -60,7 +62,7 @@ for nothing else — and reads no question with a phasor or a vector in it.
 
 ## 2. Declarations — written before any code of the round
 
-The corpus is [`evaluation/typed_operator_cases.py`](../glm_universal/evaluation/typed_operator_cases.py),
+The corpus is [`evaluation/typed_operator_cases.py`](../src/glm_universal/evaluation/typed_operator_cases.py),
 43 questions: 22 phasor, 9 kind and 12 vector, with expected verdicts worked
 by hand in exact fractions from the two conventions written at its head.
 
@@ -77,7 +79,7 @@ by hand in exact fractions from the two conventions written at its head.
 
 ## 3. What was built
 
-* [`runtime/typed_operators.py`](../glm_universal/runtime/typed_operators.py):
+* [`runtime/typed_operators.py`](../src/glm_universal/runtime/typed_operators.py):
   the reader. Phasors are the Smith chart's own Gaussian rationals
   (`engineering.smith.GaussQ`); `complex_power` is `V * conj(I)`,
   `power_factor` returns an exact surd and its sense, `dot` and `cross` work
@@ -92,7 +94,7 @@ by hand in exact fractions from the two conventions written at its head.
   and with the standard library only, and asserts the claimed value. Because
   the claim is a parameter of `script_for`, a mutated claim yields a script
   that fails.
-* In [`runtime/question_frames.py`](../glm_universal/runtime/question_frames.py):
+* In [`runtime/question_frames.py`](../src/glm_universal/runtime/question_frames.py):
   the frame `typed_operator`, tried before the planner's *given* phrasing is
   set aside — the planner reads no phasor, vector or typed power, so a
   question such as *given apparent power = 500 VA and power factor = 3/5
@@ -106,7 +108,7 @@ by hand in exact fractions from the two conventions written at its head.
 
 ## 4. Results
 
-Recomputed by `PYTHONPATH=. python3 -m glm_universal.tools typed-operators`.
+Recomputed by `PYTHONPATH=src python3 -m glm_universal.tools typed-operators`.
 Yes: real, reactive and apparent power, the power factor, the work and the
 torque are now separate typed operators, computed exactly from phasors, the
 power triangle or vectors, with each unit read as the kind it names, every

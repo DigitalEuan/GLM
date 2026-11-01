@@ -1,28 +1,38 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 0 wrong over 658,812 declared-case reads, 4,224 double reads, 3,840 unsure-set reads
   and 448 certified cuts; 1,771 of 1,771 weight-4 cosets lift to a certified A₁²⁴ deep hole of 48 vertices;
   the escalated estimate is right on 512 of 768.
 directives:
-- D15
 - D7
+- D15
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/carried_fork.py
+  - substrate/leech2.py
+  - substrate/superposition.py
+  - tools.py
   lean:
   - CarriedFork
   - Superposition
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CARRIED_FORK_STUDY.md
   test:
   - test_carried_fork.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CARRIED_FORK_STUDY
 junctions: []
 last_altered: ''
@@ -33,16 +43,23 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
+  declared:
+  - K1
+  - K2
+  - K3
+  - K4
   met: []
   missed: []
 perturbations: []
-phase: 64
-predecessors: []
+phase: 65
+predecessors:
+- PYTHON_SPEECH_STUDY
 question: If the six equidistant candidates of a deep-hole Golay read are carried forward instead of refused,
   can later decisions resolve them without a wrong answer, and does escalating the read to the Leech lattice
   add anything?
 recomputed_by: '`glm_universal.reasoning.carried_fork.carried_fork_report`'
+related:
+- SUBSTRATE_NATIVE_COGNITION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -64,7 +81,12 @@ sections:
 - anchor: 6-what-would-earn-the-next-round
   heading: 6. What would earn the next round
 status: closed
-successors: []
+successors:
+- DECODER_CONFIDENCE_STUDY
+- DESIGNED_SUBSTRATE_STUDY
+- NATIVE_PARITY_STUDY
+- SECOND_VIEW_STUDY
+- TIMED_QUESTION_STUDY
 superseded_by: ''
 supersedes: []
 title: 'The carried fork: six Golay candidates carried until a later decision resolves them'

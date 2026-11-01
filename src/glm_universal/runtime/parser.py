@@ -1,5 +1,10 @@
 """``glm_universal.runtime.parser`` -- deterministic semantic query parsing.
 
+*Last altered 31 October 2026 (repository check: Phase 150's `given` replies
+are carried through with a `nearest` address request again; rule 0 and the
+four lookup kinds `tool`, `corpus`, `study` and `sequence` added, the claim
+rule in :mod:`glm_universal.runtime.lookup_kinds`).*
+
 This module turns a natural-language or symbolic query into a typed
 :class:`Query`.  It does so with a fixed grammar and a fixed keyword table --
 there is no language model, no embedding, no statistical scoring and no
@@ -12,6 +17,12 @@ How a query is classified
 Rules are applied in a fixed priority order and the **first** one that fires
 wins.  The rule that fired is named in :attr:`Query.rule`.
 
+0. ``lookup_claim`` -- the text is claimed by one of the four lookup kinds
+   (``tool``, ``corpus``, ``study``, ``sequence``) under the narrow forms
+   :func:`glm_universal.runtime.lookup_kinds.claimed_kind` declares; the
+   request is carried through whole to the solver.  First, because a
+   ``tool`` request may contain ``::`` and a study question may contain a
+   directive keyword, and each must reach its own reader intact.
 1. ``analogy_operator`` -- the string contains ``::``, the proportional
    analogy operator, as in ``force : energy :: pressure : ?``.
 2. ``explicit_verb`` -- the string opens with a directive keyword from
@@ -79,7 +90,13 @@ KINDS: Tuple[str, ...] = (
     "spatial", "project", "trilinear", "coherence", "report", "angle",
     "task", "pi_groups", "meaning", "real", "compare", "measure",
     "comparative", "derive", "field", "ordering", "extremum", "carrier",
-    "locate", "hole", "unknown",
+    "locate", "hole",
+    # 31 October 2026 (repository check): the four lookup kinds, claimed by
+    # rule 0 (glm_universal.runtime.lookup_kinds) -- `corpus` (Phase 154),
+    # `tool` (the evaluation's kind since Phase 164), and the owner's `study`
+    # and `sequence` kinds.
+    "corpus", "tool", "study", "sequence",
+    "unknown",
 )
 
 #: Directive keyword -> intent.  Longest surface form is matched first, so
@@ -883,6 +900,17 @@ def parse_query(text: str, index: Optional[ConceptIndex] = None,
     if domain is not None:
         trace.append(f"domain hint {domain!r} supplied")
 
+    # -- rule 0: the lookup kinds (31 October 2026) --------------------------
+    # tool, corpus, study and sequence each claim text only by a declared,
+    # narrow form (glm_universal.runtime.lookup_kinds), so no question
+    # another rule reads is taken from it (tests/test_lookup_kinds.py runs
+    # the evaluation set through the claim).  The request goes whole to the
+    # solver: a tool's argument may hold '::' and a corpus request a leading
+    # 'address', and neither is the parser's to cut.
+    lookup = _lookup_query(text, cleaned, domain, trace)
+    if lookup is not None:
+        return lookup
+
     # -- rule 1: the analogy operator ---------------------------------------
     # Described, not coded: the shape is an operator with an operand on each
     # side, its inner operator cuts each side again, and the two trailing
@@ -942,6 +970,39 @@ def parse_query(text: str, index: Optional[ConceptIndex] = None,
     return Query(raw=text, normalised=cleaned, kind="unknown", domain=domain,
                  operands=(cleaned,), rule="unresolved", trace=tuple(trace),
                  suggestions=index.suggest(cleaned))
+
+
+def _lookup_query(text: str, cleaned: str, domain: Optional[str],
+                  trace: List[str]) -> Optional[Query]:
+    """Rule 0: a :class:`Query` of one of the four lookup kinds, or
+    ``None`` when none claims the text.
+
+    The tool kind reads the raw text, as the toolbox does (its arguments are
+    case- and punctuation-sensitive); the corpus kind carries the request
+    after the word ``corpus``; the study and sequence kinds carry the
+    question as written, with only the courtesy filler removed.
+    """
+    from .lookup_kinds import claimed_kind
+    raw = text.strip()
+    kind = claimed_kind(raw)
+    if kind is None and cleaned != raw:
+        kind = claimed_kind(cleaned)
+        if kind == "tool":
+            raw = cleaned
+    if kind is None:
+        return None
+    if kind == "tool":
+        request = raw
+    elif kind == "corpus":
+        source = raw if raw.lower().startswith("corpus") else cleaned
+        request = source[len("corpus"):].strip()
+    else:
+        request = cleaned
+    trace.append(f"rule 'lookup_claim': the {kind!r} kind claims the text; "
+                 f"request {request!r} passes to its solver whole")
+    return Query(raw=text, normalised=cleaned, kind=kind, domain=domain,
+                 operands=(), options={"request": request},
+                 rule="lookup_claim", trace=tuple(trace))
 
 
 def _described_query(text: str, cleaned: str, kind: str,
@@ -1171,11 +1232,13 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         # exact coordinates -- goes to the guarded read of the address
         # table, carried through as text like a `locate` request.
         from ..reasoning import nearest_address as _na
-        # A later conversational turn may contain the same moved-point text
-        # together with ``given``/``confirm`` evidence.  That is the ordinary
-        # nearest-tie dialogue path, not a fresh address-table request.
-        conversational = " given " in f" {lowered} " or " confirm:" in lowered
-        address = None if conversational else _na.split_request(cleaned)
+        # Phase 150: replies (`given key is reply; ...`) follow the place and
+        # are carried through with it, as a `locate` request carries them
+        _bits = re.split(r"\s+given\s+", cleaned.strip(), maxsplit=1,
+                         flags=re.IGNORECASE)
+        address = _na.split_request(_bits[0])
+        if address is not None and len(_bits) > 1:
+            address = (f"{address[0]} given {_bits[1].strip()}", address[1])
         if address is not None:
             options["address_request"] = address[0]
             if address[1] is not None:

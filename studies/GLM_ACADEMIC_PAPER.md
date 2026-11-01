@@ -7,7 +7,7 @@
 
 **Verdict.** The system rejects floating-point arithmetic entirely, operating instead with exact rational arithmetic.
 
-**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->27 query kinds<!--/figure--> and checked by <!--figure:lean-files-->425 Lean files<!--/figure--> — kept beside the studies it draws on.
+**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->31 query kinds<!--/figure--> and checked by <!--figure:lean-files-->414 Lean files<!--/figure--> — kept beside the studies it draws on.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -15,10 +15,14 @@
 
 *Last altered 23 October 2026.*
 
+*Last altered 31 October 2026 (repository check: 3 links repointed to where the files now live after the October 2026 reorganisation — the Lean tree under `src/lean/`; §20.57 (Phase 184) and §20.58 (Phase 185, the repository check, the intake and the absorbed wheels) added; later the same day §20.43 notes the Phase 185 re-take of the evidence census.)*
+
+*Last altered 1 November 2026 (Phase 186: §20.59, the intake items absorbed where they measurably help — the Rule 30 hypothesis engine, the formula wheels' derivability engine and the sequence wheel's next-term reading, measured with and without them on ARC, Rule 30 and five domains.)*
+
 ## A Technical Documentation Paper
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
-**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61) 26 September 2026 (Phases 62–66) 27 September 2026 (Phases 67–70) 1 October 2026 (Phases 71–88) 3 October 2026 (Phases 94–97) 4 October 2026 (Phases 98–101) 8 October 2026 (Phases 102–119) 9 October 2026 (Phases 120 and 121) 10 October 2026 (Phases 122–127), 11 October 2026 (Phases 128–132), 12 October 2026 (Phase 133), 13 October 2026 (Phases 134–136), 14 October 2026 (Phases 137–141), 15 October 2026 (Phases 142–145), 16 October 2026 (Phases 146–154) 17 October 2026 (Phases 155 and 156) 18 October 2026 (Phases 157–162), 19 October 2026 (Phases 163–166) 20 October 2026 (Phases 167–174), 21 October 2026 (Phases 175 and 176) and 22 October 2026 (Phases 177–181)  
+**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61) 26 September 2026 (Phases 62–66) 27 September 2026 (Phases 67–70) 1 October 2026 (Phases 71–88) 3 October 2026 (Phases 94–97) 4 October 2026 (Phases 98–101) 8 October 2026 (Phases 102–119) 9 October 2026 (Phases 120 and 121) 10 October 2026 (Phases 122–127), 11 October 2026 (Phases 128–132), 12 October 2026 (Phase 133), 13 October 2026 (Phases 134–136), 14 October 2026 (Phases 137–141), 15 October 2026 (Phases 142–145), 16 October 2026 (Phases 146–154) 17 October 2026 (Phases 155 and 156) 18 October 2026 (Phases 157–162), 19 October 2026 (Phases 163–166) 20 October 2026 (Phases 167–174), 21 October 2026 (Phases 175 and 176) 22 October 2026 (Phases 177–181) and 1 November 2026 (Phase 186)  
 **Repository:** https://github.com/DigitalEuan/GLM  
 **Status:** Working Paper — the whole system in one place: the substrate studies of the supplied archive (Parts I–IV) and the machine built on them through Phase 70 (Parts V–VI), with one ledger of what is proved, calibrated, measured, refuted and open (Part VII). Phase 61 brought the last small bodies of archive Lean under this repository's own build (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) and extended the supplied-material ledger of Appendix C to every part of the archive. The revision of 26 September adds what Phases 62–66 built: three certificate-carrying planner frames and the planner as the default path, the Python dialect, the carried fork at the Golay deep hole, and the connected machine — one question path to every surface, the eight modules nothing reached made into tools, and derivation across a declared union of formula wheels (§19.1–§19.2). The revision of 27 September adds Phases 67–70: reverse Three Column Thinking, in which the mathematics generates the language column and seven semantic operations are taken on it, widened to disjunction and a loop into the planner and then to an integer sort (§19.3); and native parity, in which every place a standard method tied or narrowly beat a Golay/Leech-native one was re-measured and the native method refined until it matched or beat it (§21.1). The revision of 2 October adds Phase 89's outside question sets (§19.6), Phase 90's typed operators (§19.7), Phase 91's frames from a declaration (§19.8), Phase 92's discourse state (§19.9) and Phase 93's register against the world (§19.10). The revision of 3 October adds Phase 96, second readings through a framed register, and Phase 97, which re-scored its two misses with argument unpacking in the dialect and the third view read on demand (§19.12), and Phases 94 and 95, the third sort and the imperative grammar (§19.11): the reverse grammar now speaks strings, tuples and ranges, and programs with state — assignment, loops, branches, functions and `match` — with every sentence read back, every value equal to CPython's and every trace replayed by a fresh interpreter; and it brings the synthesis of Part VII and the appendices up to date with Phases 89–95. The revision of 4 October adds Phase 98, symbolic parameters — answers that are formulas in letters, and one transcendental equation bounded exactly (§19.13); Phase 99, a register held in degrees Celsius and carried onto the kelvin through the scale table's first offset row (§19.14); Phase 100, the declared resampling that decides which of the retrieval figures' small leads are effects (§21.3); and Phase 101, which repaired the citation reader the address book and the retrieval relevance rest on — a bound variable `a` had been read as a citation of a declaration named `a` — checked it against the Lean elaborator's own graph, and built on the repaired graph a new question the machine answers with a checkable witness: *does one result rest on another* (§21.4). The revision of 1 October brings the paper up to Phase 88: the stepwise planner, which made the typed planner the executive of a chain of checked steps and then widened it round by round to units, register values, comparatives, folds over a column, bounds over a column with holes, kinds of quantity and a register of measurands (§19.4); the loop through the planner, in which a program in the Python dialect holds what the planner and the reverse surface derive, so that one surface's answer chooses the next question (§19.5); the complete integer decision behind reverse Three Column Thinking (§19.3); the retained UBP laws re-read, absorbed where they do work and retired where they do not (§18.4); confidence on the decoder's own readings, a hunted confidence floor and the bit-flip rate estimated from the reads (§20.5); native words (§21.2); and the iteration discipline and the merged order of work (§24.1). The revision of 8 October brings the paper from Phase 101 to Phase 119, and from it on the paper is updated in every development run (§24.2): equations in letters past linear — nonlinear elimination, cubics, the trigonometric form, quartic normal modes and roots proved to have no expression in radicals (§19.15); derivations with a checkable end, through Phase 119's copy lemma in Lean, chained copies, five-variable inequalities, rate distortion for any distortion matrix and Robin spectra at both ends and with a symbolic coefficient (§19.16); questions about the machine answered from its own documents (§19.17); what a stray-blind reading must conflate (§20.6); and the end of the retrieval round (§21.5). The revision of 9 October adds Phase 120: the outside questions that ask *why*, answered in the part a register or an exact derivation decides, over a new nuclide register read in from AME2020 and NUBASE2020, with the account refused by name (§19.18); and Phase 121: the separation criterion for the share-carrying rungs of the deep-hole ladder, read at ensembles sixteen times larger, with sorting proved non-expansive in L1 and a per-hole criterion that certifies eight of the ten reference holes (§20.7); and Phase 122: the configuration reading, which reads the affine diagram the arrival vertices form and certifies all ten, the 28-vertex pair included (§20.8). The revision of 10 October adds Phase 123: the configuration reading put into the deep-hole answering path with certified answers and absences, a reference centre for all 23 Niemeier types, and the empty norms of the power-of-two ladder tried with Construction A (§20.9); and Phase 124: a stopping rule for the certifying reading with a proved budget (§20.10); and Phase 125: the owner's DevOps ladder as a register and an old-style batch machine whose programs the machine says, reads and answers questions about with checkable scripts (§19.19); and Phase 126: inert variables, with which the batch machine certifies that a loop with a growing counter never halts (§19.20); and Phase 127: norm 256 and the hex colour (§20.11). The revision of 11 October adds Phases 128 and 129: the escalation ladder's answers certified to be the nearest carrier from two distances, first with the packing radius (safe but nearly silent, §20.12) and then with a radius stored per cell, which answers nothing wrongly on four query sets where the unguarded ladder answers up to 8 wrongly, and keeps 91 to 95 per cent of its correct answers (§20.13). It also adds Phase 130: counter lassos, with which the batch machine decides a loop past its step budget — *halts*, with the exact step count, outputs and exit code, by jumping the passes of a loop whose counters come back translated up to the first pass at which a comparison changes, or *never halts* when none ever does — each verdict proved sufficient in Lean and re-derived by a second interpreter (§19.21); and Phase 131: constant bounds and repeated output, with which it also jumps a pass that prints the same lines on every pass, stating the skipped lines exactly, and a pass whose counter is compared with a variable that is not a counter (§19.22); and Phase 132: passes that print a counter, written from a template at the translated counters, long output stated in run form, and the diagnosis of a refusal — the exact shape of the growth the machine does not jump, with the Non-Random Coherence Index reported beside it as a diagnosis that decides nothing (§19.23). The revision of 12 October adds Phase 133: the owner's separate study of whether the Golay–Leech substrate is optimal, brought in — the development now proves that no 4,096-word design in 24 bits, with any decoder, decodes correctly more often than the GLM's code on the bit-flip channel, that the six-way tie's negative space and its one-sixth cap belong to the parameters, and that a seven-bit sender tag and a soft certificate are sound new stages of the carried fork, the tag resolving every one of 680,064 tied reads (§20.14). The revision of 13 October adds Phase 134: a query kind that reads a carrier, the first that reads the substrate itself, answering through the carried fork and the stages a request supplies information for and refusing an unresolved tie or a contradicted read, and a sender tag protected by a code of its own, which absorbs two flipped tag bits where the seven-bit tag absorbs none and turns every wrong answer the decoder gives on up to seven flips into a refusal (§20.15); and Phase 135: the length of a tag bounded in the development, with the seven-bit tag proved the shortest that resolves every tie and the protected tags proved the shortest built on seven bits (§20.16); and Phase 136: the connected machine's second pass, in which the operations studies had measured but no question reached — certified continued fractions, Gosper's transform, role binding, reversible-gate distance, the tag floors, the law triage — were made tools, refused English questions were given declared openings to them, and every reasoning module was made either reachable from the answering path or declared measurement-only with its reason (§19.24).
 
@@ -52,7 +56,7 @@ Physical calibration studies anchor the substrate to measured reality: the elect
 
 Application studies demonstrate that encoding chemical elements as 24-bit data objects in the Leech lattice produces element-property correlations exceeding r = 0.90 for electronegativity and boiling point, and that spatial arithmetic operations on these encodings predict bond energies and bond orders with measurable accuracy. A machine-checked semantics on the MOG cube surface builds a complete micro-language — words with physical dimension, true sentences, connectives with measured meanings, and conversation with memory — proved in the supplied archive's own Lean development.
 
-On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->27 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->223 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->425 Lean files<!--/figure--> and <!--figure:lean-declarations-->9,126<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->19<!--/figure--> standing rules, each enforced by an instrument.
+On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->31 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->237 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->414 Lean files<!--/figure--> and <!--figure:lean-declarations-->9,400<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->22<!--/figure--> standing rules, each enforced by an instrument.
 
 Since Phase 72 the machine also reasons in chains. A stepwise planner composes planner questions, derives a target from givens across the formula wheels, stitches the steps nobody asked for and carries every step's three columns, so that each answered chain is re-checked step by step in a fresh interpreter; it reads units, register values through what they measure, conversions through a stated efficiency, and folds and order statistics over a column, bounding an answer exactly where the register is silent and refusing by name where no bound holds. Since Phase 88 the Python dialect can hold what the planner and the reverse surface derive, so a program's own branches and loops choose the next question put to another surface — a reach no single surface has — and the program's script re-runs every sub-answer's own script before binding its value. The retained laws of the UBP knowledge base have been read against the running substrate: a handful are absorbed as computed facts, the rest retired or refuted by measurement.
 
@@ -976,7 +980,7 @@ The "I am Y" study (`light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md`) examines 
 
 ### 14.1 Scope
 
-There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->425 Lean files<!--/figure--> and <!--figure:lean-declarations-->9,126<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
+There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->414 Lean files<!--/figure--> and <!--figure:lean-declarations-->9,400<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
 
 The development grew in three ways, and Appendix B lists every file under the theme it belongs to:
 
@@ -1063,7 +1067,7 @@ A selection, grouped by domain; every name is a declaration in `RequestProject/G
 
 ### 14.4 The Axiom Audit
 
-Every headline theorem is audited with `#print axioms`. The kernel-checked theorems depend only on `propext`, `Classical.choice` and `Quot.sound`; the finite searches discharged by `native_decide` additionally depend on `Lean.ofReduceBool` and `Lean.trustCompiler`, which is the compiler-trust boundary the audit makes visible rather than hides. No theorem rests on an added `axiom` declaration: hypotheses such as "π is transcendental" are arguments to theorems, never axioms. "e is irrational" was one such hypothesis, because the pinned Mathlib does not carry it, until Phase 61 proved it (`GLM.SeedRoles.eSeed_irrational`). The per-file audit is recorded in [`glm_lean/RequestProject/GLM/README.md`](../glm_lean/RequestProject/GLM/README.md).
+Every headline theorem is audited with `#print axioms`. The kernel-checked theorems depend only on `propext`, `Classical.choice` and `Quot.sound`; the finite searches discharged by `native_decide` additionally depend on `Lean.ofReduceBool` and `Lean.trustCompiler`, which is the compiler-trust boundary the audit makes visible rather than hides. No theorem rests on an added `axiom` declaration: hypotheses such as "π is transcendental" are arguments to theorems, never axioms. "e is irrational" was one such hypothesis, because the pinned Mathlib does not carry it, until Phase 61 proved it (`GLM.SeedRoles.eSeed_irrational`). The per-file audit is recorded in [`glm_lean/RequestProject/GLM/README.md`](../src/lean/RequestProject/GLM/README.md).
 
 ---
 
@@ -1194,7 +1198,7 @@ strictly — `substrate`, `data_objects`, `reasoning`, `semantics`, `recipe`,
 opt-in package, the `sandbox` holding what is not yet relied on, `signoff` and
 `corpus` holding the repository's own instruments, and `integrity.py` holding
 every SHA-256 use one level above the core. The reasoning kernel alone is
-<!--figure:reasoning-modules-->229<!--/figure--> modules.
+<!--figure:reasoning-modules-->242<!--/figure--> modules.
 
 ### 17.2 The carrier
 
@@ -1220,7 +1224,7 @@ equivalent ([`ZERO_STORAGE_V5_STUDY.md`](ZERO_STORAGE_V5_STUDY.md)).
 
 ### 17.4 The query, and the three columns
 
-A question enters as one of <!--figure:query-kinds-->27 query kinds<!--/figure-->
+A question enters as one of <!--figure:query-kinds-->31 query kinds<!--/figure-->
 — `verify`, `analogy`, `describe`, `nearest`, `product`, `cluster`, `spatial`,
 `project`, `trilinear`, `coherence`, `report`, `angle`, `task`, `pi_groups`,
 `meaning`, `real`, `compare`, `measure`, `comparative`, `derive`, `field`,
@@ -1291,8 +1295,8 @@ spelling and snapped it near a codeword, was audited and demoted to evidence: a
 hash of a spelling identifies a string and measures nothing about what the
 string means (directive D3), and `tests/test_inherited_graph.py` walks the
 imports of every module that answers a question to keep it out
-([`Semantics/Meaning.lean`](../glm_lean/RequestProject/GLM/Semantics/Meaning.lean),
-[`Semantics/Grounding.lean`](../glm_lean/RequestProject/GLM/Semantics/Grounding.lean)).
+([`Semantics/Meaning.lean`](../src/lean/RequestProject/GLM/Semantics/Meaning.lean),
+[`Semantics/Grounding.lean`](../src/lean/RequestProject/GLM/Semantics/Grounding.lean)).
 Torque and energy are the same in SI7 and different in EXT10, which adds plane
 angle, solid angle and information; the projection between them is lossy
 exactly where those exponents are nonzero, and the machine says which.
@@ -1337,7 +1341,7 @@ itself whether it is `table`, `address` or `derive` (§22.3).
 
 | operation | what it does | measured on its declared set | study |
 |---|---|---|---|
-| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->15,367<!--/figure--> rows and <!--figure:fieldsurface-pairs-->89,660<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
+| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->20,164<!--/figure--> rows and <!--figure:fieldsurface-pairs-->115,007<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
 | **ordering** | one coordinate off two rows, ordered exactly, refused across scales | answers <!--figure:ordering-answered-->4<!--/figure--> and refuses <!--figure:ordering-refused-->3<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->, every one as declared | [`ORDERING_STUDY.md`](ORDERING_STUDY.md) |
 | **extremum** | one coordinate over every row of a table, folded or refused | folds <!--figure:extremum-answered-->4<!--/figure--> and refuses <!--figure:extremum-refused-->4<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure--> columns, every one as declared | [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) |
 | **scale conversion** | a declared table of <!--figure:scales-rows-->10<!--/figure--> scales over <!--figure:scales-quantities-->4<!--/figure--> quantities | answers <!--figure:scales-answered-->7<!--/figure--> and refuses <!--figure:scales-refused-->5<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->; relates <!--figure:scales-bridged-->8<!--/figure--> of <!--figure:scales-pairs-->7,875<!--/figure--> scale pairs and refuses the rest | [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) |
@@ -2813,7 +2817,7 @@ program text be mapped onto the lattice — is asked most sharply of the Lean
 development itself, because it is a corpus whose ground truth is known.
 
 * **The Lean address book.** Each of the
-  <!--figure:lean-declarations-->9,126<!--/figure--> declarations gets a
+  <!--figure:lean-declarations-->9,400<!--/figure--> declarations gets a
   deterministic Leech address computed from 24 structural counts of its
   statement, read back exactly, with nearest-by-address sharing a source file
   far more often than a SHA-256 control or a seeded reshuffle does
@@ -3485,7 +3489,11 @@ column-3 replay found two real defects the evaluation, which checks answers
 and not replays, could not see: the trilinear template could not replay a
 triple of axis labels, and the `report language` column 3 had drifted behind
 its report. Both were repaired, and 171 of 171 replayable answers now verify.
-9 of 9 marks on the re-take (7 of 9 on the first); no answer moved.
+9 of 9 marks on the re-take (7 of 9 on the first); no answer moved. Re-taken
+on 31 October 2026 (Phase 185) on the reconstructed model, with every cited
+theorem name checked against the 9,341 declarations of the Lean build tree:
+9 of 9 marks over 227 questions, 173 of 173 replays verified, 21 cited names,
+none undeclared.
 
 ### 20.44 Contextual domain frames (Phase 170)
 
@@ -3777,6 +3785,82 @@ single tie is answered after the five bits it asks for, 600 of 600. On the
 semantic lexicon, whose relations are mostly not displacements, more examples
 help little (5.5 % → 6.2 % right per query). 13 of 15 marks.
 
+### 20.57 The declared majority rule (Phase 184)
+
+Phase 184 ([`LORENTZIAN_MAJORITY_STUDY.md`](LORENTZIAN_MAJORITY_STUDY.md))
+gave conflicting examples a declared rule with its own soundness condition.
+`LorentzianMajority.lean` proves that at most one target holds a strict
+majority of the weight (`majority_unique`), that the rule is never wrong while
+the honest examples hold at least half the weight (`majority_never_wrong`),
+that agreeing decoys below half carry it (`majority_misled`, so the condition
+is tight), and that a wrong answer needs decoys weighing at least the answer's
+own group (`majority_wrong_needs_decoys`). `tool majority` answers the decoy
+conditions the dispersion guard refused (155 and 161 right, 0 wrong) and
+refuses where a plurality vote is wrong 150 times. 8 of 8 marks; the Lean file
+was among those lost in the October 2026 reorganisation and is recorded as
+missing (`_lean_files_needed.md`), so a re-measurement reports the Lean mark
+as not met until it returns.
+
+### 20.58 The repository check, the intake and the absorbed wheels (Phase 185)
+
+Phase 185 ([`INTAKE_PIPELINE_STUDY.md`](INTAKE_PIPELINE_STUDY.md)) repaired
+the repository after its October 2026 reorganisation (code under `src/`,
+studies as YAML and Markdown pairs, one wheels folder) and gave supplied
+material a way in. The modules the reorganisation lost were rebuilt from their
+studies and tests, each marked as reconstructed, and their measurements taken
+again; where a figure moved, its study states both, and three baselines lost
+with the code are marked lost rather than imitated. Thirteen lost Lean files
+are recorded rather than replaced by placeholders. New material now enters
+`source_material/ToDo/` and is absorbed only after a study, tests, Lean
+verification and a measurement that it helps (directive D22). Two items passed
+the gates in the same phase: the integer and Monster provision wheels
+([`INTEGER_WHEEL_STUDY.md`](INTEGER_WHEEL_STUDY.md): 89 of 102 sequence and
+sporadic-order questions right, 0 wrong, against 0 without them; the 26
+sporadic orders and the uniqueness of the group of a given order proved in
+`Wheels/SporadicOrders.lean`), and fifteen formula wheels of the owner's cent
+compiler ([`CENT_WHEELS_STUDY.md`](CENT_WHEELS_STUDY.md): 63 of 64 laws
+licensed and 0 of 51 not-a-laws, with every axiom's dimensional balance and
+every verdict's certificate stated in `Wheels/CentWheels.lean`; ten supplied
+axioms that fail the dimension check were not absorbed). The Lean files of
+this phase were checked statically; their build is the owner's step. The
+check also found that the upload had carried two column-3 templates from
+before their Phase 169 repairs (§20.43's evidence model had first exposed
+them); both were restored and every replayable answer of the evaluation
+verifies again in a fresh interpreter.
+
+### 20.59 The intake items absorbed where they measurably help (Phase 186)
+
+Phase 186 ([`INTAKE_CAPABILITY_STUDY.md`](INTAKE_CAPABILITY_STUDY.md)) took
+three intake items whose work answers questions the GLM had refused and put
+them on the answering path: the Rule 30 study's hypothesis engine (`tool
+rule30`, `tool conjecture`, and a plan search behind `tool arc` that takes
+the stored ARC tasks the colour solver refuses), the cent compiler's formula
+wheels as a derivability engine (`tool derive`: whether a formula is a law of
+one wheel, with the rational combination of axioms or the separating
+functional as the reason), and a `next` reading of the sequence wheel that
+names a next term only when every stored sequence holding the terms and
+running past them agrees. The same questions were put to the GLM with and
+without them, under fourteen marks written before the study module's first
+run. With them the GLM answers 9 of the 50 stored ARC tasks where it answered
+2, 23 of 30 questions across five domains (Rule 30, number theory, physics,
+sequences, ARC) where it answered 4, 16 of 39 Rule 30 sentences on the
+answering path where it answered none, 63 of 64 formula laws and none of 51
+not-a-laws, and 27 of 45 next-term questions where it answered 5 — with 0
+wrong in every count. Twelve of the fourteen marks were met. Two were not: the
+answering path reads 16 of the 39 Rule 30 sentences right against a bar of
+20, and one of the thirteen negative controls of the next-term battery
+(*1, 2, 4, 8, 16*) is answered 32, because only one stored sequence runs past
+those terms. The ARC tasks are a development set, written against by the
+engine's author, not a held-out one. The items' Lean (`IntakeChecks/`, four
+files, 18 theorems, no `sorry`) was checked outside the project's build; by
+the owner's decision of 1 November 2026 the items are absorbed ahead of that
+build, and every answer resting on them says so until
+`scripts/rebuild_lean.sh` and `intake confirm-build` confirm them. Absorbing
+the engine also exposed one conflict with the blueprint: it drew its
+synthetic puzzles from Python's `random`, which the Universal Binary
+Principle bans from the core; it now draws from an exact integer generator of
+its own, and `report blueprint` is back at 26 confirmed claims.
+
 ### 21.1 Native parity: keeping the native method and refining it (Phase 70)
 
 The owner's instruction for Phase 70 was to retain a Golay/Leech-native method
@@ -3921,7 +4005,7 @@ operation the round built stays.
 
 | instrument | what it measures | result |
 |---|---|---|
-| end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->223<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
+| end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->237<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
 | capability probes | where the library stops, asked as user questions | 33 probes: 20 hold, 13 break — each break a located boundary, not a failure |
 | benchmark suites | solver functions against curated and exhaustive task sets | 2,389 / 2,390 across 5 suites, every suite above its declared baseline |
 | test suite | the package's own regression net | <!--figure:suite-->(not yet measured: suite)<!--/figure--> |
@@ -4048,7 +4132,7 @@ a finding written nowhere, a round re-run in full because nothing recorded what
 it depended on. The repository is built against that failure.
 
 **Standing rules with instruments.** [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)
-states <!--figure:directives-->19 standing rules<!--/figure-->, each naming the
+states <!--figure:directives-->22 standing rules<!--/figure-->, each naming the
 instrument that enforces it, and `report directives` prints each instrument's
 live verdict. Among them: no floats (D7), checked by parsing every module; an
 operation that is not the substrate's own used only at declared sites (D9,
@@ -4072,8 +4156,8 @@ carries a tier-0 block (question, verdict, deciding figure, the function that
 recomputes it), is addressed, and is checked — the verdict must be grounded in
 the document's own words, every link must resolve, and every current-state
 document must be reachable from [`ENTRY.md`](../ENTRY.md). The corpus holds
-<!--figure:corpus-documents-->244<!--/figure--> documents, of which
-<!--figure:corpus-state-documents-->239<!--/figure--> describe the system as it
+<!--figure:corpus-documents-->256<!--/figure--> documents, of which
+<!--figure:corpus-state-documents-->251<!--/figure--> describe the system as it
 is and <!--figure:corpus-archive-documents-->5<!--/figure--> are records of a
 round, and [`DIGEST.md`](../DIGEST.md) is their tier-0 reading, generated.
 
@@ -4229,7 +4313,7 @@ The following are empirical calibrations, internally consistent but not derived 
 
 The following are measurements of the machine, each against a control or a declared set, each recomputed by the instrument named in Part V:
 
-1. **No confidently wrong answer** in <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->, 28 of them refusals the machine was expected to make.
+1. **No confidently wrong answer** in <!--figure:evaluation-cases-->237 CLI cases<!--/figure-->, 28 of them refusals the machine was expected to make.
 2. **The language probe passes through the planner** (<!--figure:plans-probe-correct-->19<!--/figure--> of <!--figure:probe-questions-->20<!--/figure-->) and fails through the grammar alone (<!--figure:probe-correct-->2<!--/figure-->); the planner has been the default path since Phase 63.
 3. **Every declared operation behaves as declared**: field surface, ordering, extremum, scale conversion and conversation each answer and refuse exactly the cases declared before the run.
 4. **Escalation is safe where it is shipped**: 462 of 568 on the construction ladder and <!--figure:normesc-correct-->467<!--/figure--> on the repaired norm ladder, both with 0 wrong — on the queries they were chosen on: on three held-out perturbation sets the norm ladder answers 8, 1 and 2 wrongly, and the placement guard (§20.13) removes every one of those while keeping 91 to 95 per cent of the correct answers; the program-text operation made safe by a second reading at a counted cost.
@@ -4319,9 +4403,9 @@ The GLM is a mathematically rigorous 24-dimensional substrate with exact rationa
 - The velocity scale is exact (MONAD/13 → v/c = 0.339, but this is a definition, not a prediction)
 - The mass scale is internally consistent (0.009% error, cross-checks pass)
 - The photon as minimum-Tax octad is a mathematical fact on the Golay layer (`octad_min_tax`)
-- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->425 Lean files<!--/figure--> with no `sorry`
+- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->414 Lean files<!--/figure--> with no `sorry`
 - The encoding system predicts element properties at r > 0.90
-- The machine answers <!--figure:query-kinds-->27 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
+- The machine answers <!--figure:query-kinds-->31 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
 
 ### 26.2 What the GLM Is Not
 
@@ -4553,6 +4637,10 @@ says what each is *about* and where this paper uses it.
 | [`STACKED_DIALOGUE_STUDY.md`](STACKED_DIALOGUE_STUDY.md) | several open ties at once: a reply read against the newest open question it fits or the turn it names, closing that one only, within a window of five unrelated turns; two dialogues interleaved ending as each alone 61 of 61, 0 of 258 replies misbound; 8 of 8 marks | §20.47 |
 | [`QUOTED_MEASUREMENTS_STUDY.md`](QUOTED_MEASUREMENTS_STUDY.md) | the answer censuses guarded by the stored measurements their answers quote, re-taken last by the close; the replay gate as the sign-off instrument `replay`; 5 of 5 marks | §20.48 |
 | [`PIPELINE_KIT_STUDY.md`](PIPELINE_KIT_STUDY.md) | the owner's pipeline kit in the GLM: its bridge on `leech2`, its seven Lean files, and `tool induce` — rules induced from demonstrations, answered only when every fitting hypothesis agrees; 0 wrong in 2,250 queries; 12 of 12 marks | §20.49 |
+| [`INTAKE_PIPELINE_STUDY.md`](INTAKE_PIPELINE_STUDY.md) | the repository check and the intake: every supplied item filed open (`ToDo/`) or finished (`done/`) with one ledger record, and moved towards absorption only when each stage's evidence exists; 0 check errors | §20.58 |
+| [`INTEGER_WHEEL_STUDY.md`](INTEGER_WHEEL_STUDY.md) | the owner's integer and Monster provision wheels: 89 of 102 sequence and sporadic-order questions right, 0 wrong, against 0 without them; 28 of 28 negative controls refused | §20.58 |
+| [`CENT_WHEELS_STUDY.md`](CENT_WHEELS_STUDY.md) | the cent compiler's formula wheels: 15 of 16 new wheels sound; 63 of 64 laws and 0 of 51 not-a-laws licensed, against 1 law with the fifteen wheels alone | §20.58 |
+| [`INTAKE_CAPABILITY_STUDY.md`](INTAKE_CAPABILITY_STUDY.md) | the intake items absorbed where they measurably help: the Rule 30 hypothesis engine, the derivability engine and the next-term reading, with and without them — ARC 9 of 50 tasks (2 before, a development set), 23 of 30 across five domains (4 before), 0 wrong; 12 of 14 marks | §20.59 |
 ---
 
 ## Appendix B: The Lean Development by Theme

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: One primary statistic against a magnitude-matched null, corrected for the 4 statistics
@@ -13,18 +15,26 @@ directives:
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - corpus/checks.py
+  - reasoning/transcendental.py
+  - reasoning/wobble_landscape.py
+  - tools.py
   lean:
   - Sturmian
   - WobbleLandscape
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: WOBBLE_LANDSCAPE_STUDY.md
   test:
-  - test_wobble_landscape.py
+  - test_exactness.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: WOBBLE_LANDSCAPE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,11 +46,12 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 31
 predecessors: []
 question: Is alpha's arithmetic signature distinctive within the space the Golay–Leech substrate permits,
   or is it what a magnitude-matched number looks like?
 recomputed_by: '`glm_universal.reasoning.wobble_landscape.landscape_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -67,7 +78,7 @@ sections:
   heading: 9. Exactness, and how to re-take every number
 - anchor: 10-bridges-not-yet-tested
   heading: 10. Bridges not yet tested
-status: negative
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

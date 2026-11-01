@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *The supplied archive (`source_material/GLM-main.zip`) holds a decade of GLM
 experiments as loose scripts, notes and half-finished Lean files. This round
 went through the parts the brief named — the `glm_machine` scripts, the two
@@ -25,7 +27,7 @@ development as Lean that builds against the current Mathlib, with no `sorry`.
 Where the claim turned out to be false, the refutation was retrieved instead.*
 
 Lean: 25 files, 7,230 lines, 854 declarations, all under
-[`RequestProject/GLM/`](../glm_lean/RequestProject/GLM/) and mirrored in
+[`RequestProject/GLM/`](../src/lean/RequestProject/GLM/) and mirrored in
 `glm_lean/`.
 Checked by: `lake build`, the sorry scan, the two-copy diff and
 `glm_universal/tests/test_retrieved_lean.py`.
@@ -175,12 +177,11 @@ grep -rInw -e sorry -e admit RequestProject/GLM     # no matches
 diff -r -x README.md RequestProject/GLM glm_lean/RequestProject/GLM
 
 # the retrieval's own test
-cd overlay
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_retrieved_lean.py -q
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_retrieved_lean.py -q
 
 # the corpus these files joined
-PYTHONPATH=. python3 -m glm_universal.tools lean-address
-PYTHONPATH=. python3 GLM.py -q "report lean" --no-banner
+PYTHONPATH=src python3 -m glm_universal.tools lean-address
+PYTHONPATH=src python3 src/GLM.py -q "report lean" --no-banner
 ```
 
 Every declaration counted above is counted by the address book's parser, so the

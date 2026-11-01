@@ -1,5 +1,12 @@
 """``glm_universal.runtime.tct_engine`` -- Three Column Thinking.
 
+*Last altered 31 October 2026 (repository check: the `nearest_address`
+template re-derives Phase 150's live set and split again; the
+`report_hole_classifier`, `report_hole_ladder` and `report_hole_failures`
+templates recompute Phase 149's `l5_*` keys, and the ladder's
+`winner_is_extension`; the four lookup kinds' templates `tool`, `corpus`,
+`study` and `sequence` registered from `runtime/lookup_scripts.py`).*
+
 A Three Column Thinking (TCT) trace states one solved query three times over:
 
 **Column 1 -- Language.**
@@ -54,6 +61,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
+from .lookup_scripts import LOOKUP_TEMPLATES
 from .session import Solution, Step
 
 __all__ = [
@@ -476,30 +484,49 @@ def _body_trilinear(args: Mapping[str, object]) -> str:
     lattice's type-2 class) and computes the invariant trilinear form
     ``T(A, B, C) = <A.B, C>`` of the Griess algebra.  Wires
     ``reasoning/product.griess_trilinear``.
+
+    A bare integer operand is an axis label of the 2A class table, exactly
+    as the solver reads it (``GeometricSession._solve_trilinear``), so the
+    template writes the label itself; only a concept name is looked up in a
+    domain's objects and projected through the lattice.  Phase 169 found the
+    template looking every operand up by name, so ``trilinear 127 432 463``
+    could never be replayed (``studies/EVIDENCE_MODEL_STUDY.md`` §7.3).
+    *Restored 31 October 2026 (repository check): the October 2026 upload
+    carried the template from before that repair.*
     """
+    names = [str(args["name_a"]), str(args["name_b"]), str(args["name_c"])]
+    domains = [args.get("domain_a") or "mathematics",
+               args.get("domain_b") or "mathematics",
+               args.get("domain_c") or "mathematics"]
+    lines = []
+    if not all(n.isdigit() for n in names):
+        lines.append(f'''pools = {{
+    "physics": do.physics_objects,
+    "chemistry": do.element_objects,
+    "mathematics": do.mathematics_objects,
+    "lexicon": lambda: do.semantic_lexicon_objects()[0],
+    "spatial": spatial_objects,
+    "harmonics": do.harmonic_objects,
+    "economics": do.economics_objects,
+}}
+
+def _concept_axis(domain, name):
+    """A concept's 2A axis: its carrier's nearest Leech point's class."""
+    obj = {{o.name: o for o in pools[domain]()}}[name]
+    lat = an.nearest_lattice_point(list(obj.carrier))
+    return obj.name, leech2.class_of(list(lat.point))
+''')
+    for tag, name, domain in zip("abc", names, domains):
+        if name.isdigit():
+            # a bare integer is the axis label itself
+            lines.append(f"name_{tag}, cls_{tag} = {name!r}, {int(name)}")
+        else:
+            lines.append(f"name_{tag}, cls_{tag} = "
+                         f"_concept_axis({domain!r}, {name!r})")
+    operands = "\n".join(lines)
     return f'''# -- recompute -------------------------------------------------------------
 
-pool = {{
-    "physics": do.physics_objects(),
-    "chemistry": do.element_objects(),
-    "mathematics": do.mathematics_objects(),
-    "lexicon": do.semantic_lexicon_objects()[0],
-    "spatial": spatial_objects(),
-    "harmonics": do.harmonic_objects(),
-    "economics": do.economics_objects(),
-}}[{args["domain_a"]!r}]
-by_name = {{o.name: o for o in pool}}
-obj_a = by_name[{args["name_a"]!r}]
-obj_b = by_name[{args["name_b"]!r}]
-obj_c = by_name[{args["name_c"]!r}]
-
-# Project each carrier onto its nearest 2A axis via the Leech lattice.
-lat_a = an.nearest_lattice_point(list(obj_a.carrier))
-lat_b = an.nearest_lattice_point(list(obj_b.carrier))
-lat_c = an.nearest_lattice_point(list(obj_c.carrier))
-cls_a = leech2.class_of(list(lat_a.point))
-cls_b = leech2.class_of(list(lat_b.point))
-cls_c = leech2.class_of(list(lat_c.point))
+{operands}
 ax_a = pr.axis(cls_a)
 ax_b = pr.axis(cls_b)
 ax_c = pr.axis(cls_c)
@@ -515,9 +542,9 @@ Tac = pr.griess_form(prod_ac, prod_ac)
 Tbc = pr.griess_form(prod_bc, prod_bc)
 
 observed = {{
-    "operand_a": obj_a.name,
-    "operand_b": obj_b.name,
-    "operand_c": obj_c.name,
+    "operand_a": name_a,
+    "operand_b": name_b,
+    "operand_c": name_c,
     "axis_a": str(cls_a),
     "axis_b": str(cls_b),
     "axis_c": str(cls_c),
@@ -1722,8 +1749,22 @@ if "live" in EXPECTED or "asks" in EXPECTED:
 
 
 def _body_report_language(args) -> str:
-    """Recompute the question descriptions and the parser comparison."""
-    return '''# -- recompute -------------------------------------------------------------
+    """Recompute the question descriptions and the parser comparison.
+
+    *Restored 31 October 2026 (repository check).*  Phase 169 found this
+    column 3 behind its report in three ways (``studies/EVIDENCE_MODEL_STUDY.md``
+    §7.3) and repaired it; the October 2026 upload carried the version from
+    before the repair, so ``report language`` again failed its replay.  As
+    repaired: (1) a question is put to *both* frozen parsers --
+    ``legacy_parse`` and then ``legacy_parse_shaped``, where ``compare a and
+    b`` was frozen -- exactly as the report's own comparison does
+    (``language.build._shipped``); (2) the parser's dispatch of ``compare``
+    to its two described matchers is checked to be only that dispatch, not
+    taken for a hand-written branch; (3) every figure the report claims is
+    recomputed, the nested family, the widenings and the undescribed kinds
+    included.
+    """
+    return """# -- recompute -------------------------------------------------------------
 
 from glm_universal import language as lang
 
@@ -1736,6 +1777,10 @@ disjoint = report["disjoint"]
 narrowing = report["narrowing"]
 infix = report["infix"]
 infix_agreed = report["infix_agreement"]
+nested = report["nested"]
+nested_agreed = report["nested_agreement"]
+widening = report["widening"]
+coverage = report["coverage"]
 parts = report["undescribed_parts"]
 verdict = report["verdict"]
 
@@ -1761,6 +1806,15 @@ observed = {
     "infix_corpus": str(infix_agreed["corpus"]),
     "infix_agreed": str(infix_agreed["agreed"]),
     "infix_disagreed": str(len(infix_agreed["disagreed"])),
+    "nested_kinds": ",".join(nested["kinds"]),
+    "nested_judgements": str(nested["judgements"]),
+    "nested_corpus": str(nested_agreed["corpus"]),
+    "nested_agreed": str(nested_agreed["agreed"]),
+    "nested_widened": str(len(nested_agreed["widened"])),
+    "nested_disagreed": str(len(nested_agreed["disagreed"])),
+    "widenings": str(widening["witnesses"]),
+    "widening_unexplained": str(len(widening["unexplained"])),
+    "undescribed_kinds": str(len(coverage["undescribed_kinds"])),
     "undescribed_parts": str(len(parts)),
     "kinds_read_off": str(verdict["kinds_read_off"]),
     "kinds_covered": str(verdict["kinds_covered"]),
@@ -1769,16 +1823,20 @@ observed = {
 }
 
 # The comparison has two halves, and neither is against a stored
-# expectation.  First: the shipped parser now *reads* the descriptions for
-# these kinds, so the standing claim is against the branches it used to
-# have -- kept frozen in `language.legacy` -- and every question of the
-# generated corpus is put to the frozen branch and to the live parser.
+# expectation.  First: the shipped parser *reads* the descriptions for these
+# kinds, so the standing claim is against the branches it used to have --
+# kept frozen in `language.legacy`, in two parsers: `legacy_parse` and, for
+# the shaped kinds ('compare a and b' among them), `legacy_parse_shaped` --
+# and every question of the generated corpus is put to the frozen branches
+# and to the live parser.
 from glm_universal.runtime.parser import parse_query
 
 for _kind, _question, _fills in lang.corpus():
     _mine = lang.parse(_question)
     _live = parse_query(_question)
     _old = lang.legacy_parse(_question)
+    if _old is None:
+        _old = lang.legacy_parse_shaped(_question)
     assert _mine.matched, (_question, _mine.boundary)
     assert _mine.kind == _live.kind == _kind, (_question, _mine.kind)
     assert _old is not None and _old[0] == _kind, (_question, _old)
@@ -1787,23 +1845,42 @@ for _kind, _question, _fills in lang.corpus():
         assert str(_old[1].get(_key, "")) == _value, (_question, _key)
 
 # Second: the branches really are gone from the parser, and nothing the
-# runtime loads reaches the frozen copy.
+# runtime loads reaches the frozen copy.  `compare` keeps a dispatch -- two
+# shapes, one kind -- and that dispatch may call the two described matchers
+# and nothing else.
 import inspect
+import re as _re
 import glm_universal.runtime.parser as _parser
 
 _src = inspect.getsource(_parser)
 for _kind in lang.DESCRIBED_KINDS:
-    assert 'kind == "' + _kind + '"' not in _src, _kind
+    _head = 'if kind == "' + _kind + '":'
+    if _head not in _src:
+        continue
+    assert _kind in lang.INFIX_KINDS, _kind
+    _body = _src.split(_head, 1)[1].split("\\n    if ", 1)[0]
+    _code = [l.strip() for l in _body.splitlines()
+             if l.strip() and not l.strip().startswith("#")]
+    _calls = set(_re.findall(r"([A-Za-z_][A-Za-z0-9_]*)\\(", " ".join(_code)))
+    assert _calls <= {"_described_infix_query", "_described_query"}, _calls
 assert "language.legacy" not in _src and "import legacy" not in _src
 
-# And the second family, which has not replaced anything yet: its matcher
-# against the parser branch it describes, over its own generated corpus.
+# The infix family: its matcher against the live parser, over its own
+# generated corpus.
 for _kind, _question, _operands in lang.infix_corpus():
     _got = lang.parse_infix(_question, lang.INFIX_QUESTIONS)
     _live = parse_query(_question)
     assert getattr(_got, "matched", False), (_question, _kind)
     assert _got.kind == _live.kind == _kind, (_question, _got.kind)
-'''
+
+# The nested family: every question its shape reads is read by the live
+# parser as the same kind, and the questions its frozen branch declined are
+# exactly the declared widening.
+for _kind, _question, _expected in lang.nested_corpus():
+    _live = parse_query(_question)
+    assert _live.kind == _kind, (_question, _live.kind)
+assert not widening["unexplained"], widening["unexplained"]
+"""
 
 
 def _body_report_recipe(args) -> str:
@@ -2643,6 +2720,56 @@ if EXPECTED.get("certified") == "True":
     _ok = _m > 0 and _best < _m * _m and all(
         _d >= _m * _m for _d, _l, _i in _scored if _i not in _head)
     observed["margin"] = q(_m) if _ok else "violated"
+
+if "live" in EXPECTED or "asks" in EXPECTED:
+    # Phase 150: re-derive the live set and the split from the register
+    # attributes, apart from the question module, over the scan's head --
+    # every carrier at the least distance (GLM.NearestQuestion.HeadSet)
+    import re as _re
+    from glm_universal.reasoning import escalation as _esc
+    _objs = {{}}
+    for _reg in _esc.REGISTERS:
+        for _o in _esc._register_loader(_reg)():
+            _objs["%s:%s" % (_reg, _o.name)] = _o
+
+    def _reply_of(_key, _lab):
+        _at = dict(getattr(_objs[_lab], "attributes", {{}}) or {{}})
+        if _key.startswith("attr:"):
+            _v = repr(_at.get(_key[5:]))
+        elif _key.startswith("word:"):
+            _v = _key[5:] in set(_re.findall(
+                r"[a-z]{{4,}}", str(_at.get("gloss", "")).lower()))
+        elif _key == "choice":
+            _v = _lab
+        elif _key.startswith("confirm:"):
+            _v = _lab == _key[8:]
+        else:
+            raise AssertionError(_key)
+        if _v is True:
+            return "yes"
+        if _v is False:
+            return "no"
+        _v = str(_v)
+        if len(_v) >= 2 and _v[0] == _v[-1] and _v[0] in ("'", '"'):
+            _v = _v[1:-1]
+        return _v
+
+    _least = _scored[0][0]
+    _live = sorted(_l for _d, _l, _i in _scored if _d == _least)
+    for _key, _tok in {[list(g) for g in args.get("given", ())]!r}:
+        _live = [_x for _x in _live if _reply_of(_key, _x) == _tok]
+    if "live" in EXPECTED:
+        observed["live"] = "|".join(_live)
+    if "asks" in EXPECTED:
+        _key = EXPECTED["asks"].split(" -> ", 1)[0]
+        _groups = {{}}
+        for _x in _live:
+            _groups.setdefault(_reply_of(_key, _x), []).append(_x)
+        # a partition, groups and members sorted; it must split the live set
+        _parts = sorted(sorted(_g) for _g in _groups.values())
+        observed["asks"] = (_key + " -> " + " / ".join(
+            "|".join(_g) for _g in _parts)) if len(_parts) > 1 \
+            else "does not split"
 '''
 
 
@@ -2675,6 +2802,28 @@ else:
         "verdict": str(gate["verdict"]),
         "faithfulness_compatible": str(run["faithfulness_compatible"]),
     }
+
+if "l5" in EXPECTED or "l5_correct" in EXPECTED:
+    # Phase 149: the L5 clause, recomputed from the stored query profiles
+    # through the configuration classifier's answer rule, apart from
+    # hole_reports_l5
+    from glm_universal.reasoning import configuration_classifier as _cc
+    from glm_universal.reasoning import configuration_queries as _cq
+    _data = _cq.current()
+    _table = _cc.reference_table(_data) if _data is not None else None
+    if not _table:
+        observed["l5"] = "unavailable"
+    else:
+        _run = _cc.classify_queries(_table, _data)
+        _seed = [_r for _r in _run["rows"] if _r["kind"] == "seed"]
+        observed.update({
+            "l5_seed_correct": str(sum(1 for _r in _seed
+                                       if _r["verdict"] == "correct")),
+            "l5_seed_queries": str(len(_seed)),
+            "l5_correct": str(_run["correct"]),
+            "l5_wrong": str(_run["wrong"]),
+            "l5_refused": str(_run["refused"]),
+        })
 '''
 
 
@@ -2701,7 +2850,29 @@ else:
         "best_layer": str(tree["best"]["layer"]),
         "best_starts": str(tree["best"]["starts"]),
         "verdict": str(tree["verdict"]),
+        "winner_is_extension": str(tree.get("winner_is_extension")),
     }
+
+if "l5" in EXPECTED or "l5_passing" in EXPECTED:
+    # Phase 149: the escalation gate at L5 at every stored ensemble size,
+    # recomputed from the share ensembles, apart from hole_reports_l5
+    from glm_universal.reasoning import configuration_reading as _cr
+    from glm_universal.reasoning import share_ensemble as _se
+    _data = _se.current()
+    if _data is None:
+        observed["l5"] = "unavailable"
+    else:
+        _cells = [_cr.cell(_data, int(_n)) for _n in _data["sizes"]]
+        _pass = [_c for _c in _cells if _c["q0"] == _c["gate"]]
+        observed.update({
+            "l5_sizes": str(len(_cells)),
+            "l5_passing": str(len(_pass)),
+            "l5_smallest_passing": str(min(_c["starts"] for _c in _pass)
+                                       if _pass else None),
+            "l5_passes_without_criterion": ",".join(
+                str(_c["starts"]) for _c in _pass
+                if not _c["ratio_below_one"]),
+        })
 '''
 
 
@@ -3736,6 +3907,33 @@ else:
         "any_below_one": str(report["leave_out"]["any_below_one"]),
         "certified_types": str(report["per_type"]["count"]),
     }
+
+if "l5" in EXPECTED or "l5_failures_correct" in EXPECTED:
+    # Phase 149: the joint reading's failures through L5's answer rule and
+    # L5's per-type criterion at the failure round's cell (1920 starts),
+    # recomputed from the stores, apart from hole_reports_l5
+    from glm_universal.reasoning import configuration_classifier as _cc
+    from glm_universal.reasoning import configuration_queries as _cq
+    from glm_universal.reasoning import configuration_reading as _cr
+    from glm_universal.reasoning import share_ensemble as _se
+    _data = _cq.current()
+    _table = _cc.reference_table(_data) if _data is not None else None
+    _ens = _se.current()
+    if not _table or _ens is None:
+        observed["l5"] = "unavailable"
+    else:
+        _run = _cc.classify_queries(_table, _data)
+        _failed = [_r for _r in _run["rows"] if not _r["joint_correct"]]
+        _cell = _cr.cell(_ens, 1920)
+        observed.update({
+            "l5_failures_correct": str(sum(1 for _r in _failed
+                                           if _r["verdict"] == "correct")),
+            "l5_joint_failures": str(len(_failed)),
+            "l5_certified_types": str(_cell["locally_certified"]),
+            "l5_types": str(_cell["gate"]),
+            "l5_rho": ("n/a" if _cell["ratio"] is None
+                       else dhf.rounded(_cell["ratio"], 4)),
+        })
 '''
 
 
@@ -3964,6 +4162,9 @@ TEMPLATES = {
     "task_physics": _body_task_physics,
     "task_concepts": _body_task_concepts,
 }
+# 31 October 2026 (repository check): column 3 of the four lookup kinds
+# (tool, corpus, study, sequence), kept beside them in lookup_scripts.py.
+TEMPLATES.update(LOOKUP_TEMPLATES)
 
 
 def render_script(solution: Solution, root: Optional[str] = None) -> str:

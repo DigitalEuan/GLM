@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Every Lean statement quoted was read back out of the development rather than retyped.
@@ -12,22 +14,23 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - data_objects/economics_register
-  - engineering/delta_sigma
-  - examples/number_pipeline
-  - reasoning/coherence
-  - reasoning/wobble
-  - substrate/mog
-  - tests/test_number_theory_evidence
+  - data_objects/economics_register.py
+  - engineering/delta_sigma.py
+  - examples/number_pipeline.py
+  - reasoning/coherence.py
+  - reasoning/mantissa.py
+  - reasoning/wobble.py
+  - substrate/mog.py
   lean:
   - Calibration
-  - Census
-  - Cesaro
   - Constants
   - DeltaSigma
   - Distinction
   - EngineeringWheels
   - FitCapacity
+  - Golay/Census
+  - Golay/Cesaro
+  - Golay/Sextet
   - GolayBoundary
   - GolayMOG
   - GolayWeightEnum
@@ -36,7 +39,6 @@ file_refs:
   - HigherLattices
   - Irrational
   - LDP
-  - Leech
   - LogBucket
   - Mantissa
   - NativeParity
@@ -49,7 +51,7 @@ file_refs:
   - Reversible
   - SeedLayers
   - SeedRoles
-  - Sextet
+  - Shortcut/Leech
   - Steiner
   - Sturmian
   - TaxConservation
@@ -61,14 +63,18 @@ file_refs:
   - TriadChance
   - Wobble
   - WobbleLandscape
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: GLM_Complete_Number_Theory_Evidence.md
   test:
-  - test_glm_complete_number_theory_evidence.py
+  - test_number_theory_evidence.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: GLM_Complete_Number_Theory_Evidence
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -84,6 +90,7 @@ phase: 60
 predecessors: []
 question: What does the number-theoretic substrate actually establish?
 recomputed_by: '`glm_universal.reasoning.mantissa.mantissa_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -145,7 +152,7 @@ sections:
     `Platonic.lean`)'
 - anchor: 26-the-element-address-layer-lean-golaymoglean
   heading: '26. The element address layer (Lean: `GolayMOG.lean`)'
-- anchor: 27-lattices-beside-and-above-λ₂₄-lean-niemeierlean-higherlatticeslean
+- anchor: 27-lattices-beside-and-above-lean-niemeierlean-higherlatticeslean
   heading: '27. Lattices beside and above Λ₂₄ (Lean: `Niemeier.lean`, `HigherLattices.lean`)'
 - anchor: 28-integer-arithmetic-the-machine-now-decides-lean-reversetcttwolean-reversetctthreelean
   heading: '28. Integer arithmetic the machine now decides (Lean: `ReverseTCTTwo.lean`, `ReverseTCTThree.lean`)'

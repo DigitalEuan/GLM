@@ -39,6 +39,36 @@ infrastructure (e.g. column-3 replay, Lean declaration lookup) is too deep
 to fully reconstruct here, the adapter returns a sensible default that
 satisfies the contract (status, evidence, boundary, budget) without
 claiming a replay it did not run.*
+
+*Last altered 31 October 2026 (repository check): the declared status rule
+"a refusal in words by the evaluation's markers is ``refused``" is applied
+(:func:`refused_in_words`); the 29 October reconstruction had left it out.*
+
+*Last altered 31 October 2026 (repository check): :func:`from_define` falls
+back to :func:`glm_universal.knowledge.answer.define` when the knowledge
+object carries no ``define`` of its own (``model.Knowledge`` never did, so
+every corpus definition was refused).*
+
+*Last altered 31 October 2026 (repository check, re-read against the stored
+Phase 169 census): the kind-to-evidence table re-read from the census; every
+result keeps its evidence kind when refused (the census counts each row's
+first evidence); ``certificate`` and ``dialogue`` follow the primary kind
+when the payload is certified or replies were read; an open tie is ``open``
+with its live candidates as candidates and ambiguity, a resolved one names
+its survivor; a reason saying ``(contradicted)`` is ``contradicted``; the
+``given`` replies are the history; the witness is column 2's ``key=value``
+list; theorem names are read from the reason as well as the answer; the
+non-planner surfaces' evidence is a tuple, not a string.*
+
+*Last altered 31 October 2026 (repository check): the Lean declaration lookup
+is reconstructed.  :func:`declared_names` is every full name the Lean
+development declares (the build tree ``src/lean/RequestProject/GLM``, read by
+:func:`glm_universal.reasoning.lean_address.declaration_names`; files held
+outside it are not part of it), and :func:`cited_theorems` reads the cited
+names with the name pattern allowing Lean's prime and applies amendment R5'
+against that set; ``theorems_declared`` is the cited names the development
+declares, so a cited name that is not declared is visible to R5 (until now
+every cited name was copied into ``theorems_declared``).*
 """
 from __future__ import annotations
 
@@ -58,6 +88,8 @@ from typing import (
 __all__ = [
     "Result",
     "FIELDS",
+    "declared_names",
+    "cited_theorems",
     "from_routed",
     "from_solution",
     "from_define",
@@ -103,8 +135,20 @@ _AUX_FIELDS: Tuple[str, ...] = (
 # ---------------------------------------------------------------------------
 
 #: Map a Solution.kind to its primary evidence kind.  The first element of
-#: ``Result.evidence`` is the primary kind; ``dialogue`` is appended only
-#: by :func:`from_turn` when replies were read.
+#: ``Result.evidence`` is the primary kind; ``certificate`` follows when the
+#: answer's payload says it is certified, and ``dialogue`` when replies were
+#: read (a ``given`` clause, or a conversation turn).
+#:
+#: *Re-read 31 October 2026 (repository check).*  The first reconstruction of
+#: this table (29 October) guessed several rows; every kind the evaluation
+#: asks is now mapped as the Phase 169 census recorded it in the stored
+#: ``reasoning/_data/evidence_model_study.json`` of the upload (``analogy``,
+#: ``carrier``, ``describe``, ``field``, ``meaning`` and the other register
+#: readings are ``register``; ``verify`` is ``computation``; ``coherence`` and
+#: ``angle`` are ``lattice``; ``corpus`` is ``corpus``).  The kinds added
+#: since are mapped by what answers them: ``tool`` by a tool, ``study`` by the
+#: study manifests (``corpus``), ``sequence`` by an absorbed wheel's
+#: computation.
 _KIND_TO_EVIDENCE: Dict[str, str] = {
     # Lattice / geometric addressing.
     "nearest": "lattice",
@@ -113,13 +157,15 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "cluster": "lattice",
     "spatial": "lattice",
     "trilinear": "lattice",
+    "coherence": "lattice",
+    "angle": "lattice",
+    "hole": "lattice",
     "address": "lattice",
     "deep-hole": "lattice",
     "deep_hole": "lattice",
     "shell": "lattice",
     "configuration": "lattice",
-    # Certificate / verification.
-    "verify": "certificate",
+    # Certificate (the certificate query families).
     "prove": "certificate",
     "certificate": "certificate",
     "primality": "certificate",
@@ -127,11 +173,15 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "lucas": "certificate",
     "elliptic": "certificate",
     # Computation / derivation.
+    "verify": "computation",
     "derive": "computation",
-    "field": "computation",
-    "analogy": "computation",
     "compare": "computation",
-    "coherence": "computation",
+    "compute": "computation",
+    "real": "computation",
+    "pi_groups": "computation",
+    "task": "computation",
+    "unknown": "computation",
+    "sequence": "computation",
     "fold": "computation",
     "rate": "computation",
     "maxent": "computation",
@@ -140,26 +190,43 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "fft": "computation",
     "hamming": "computation",
     "information": "computation",
-    # Self-report / description.
-    "describe": "self-report",
+    # Self-report.
     "report": "self-report",
-    "meaning": "self-report",
     "explain": "self-report",
     "explanation": "self-report",
-    # Register.
+    # Register readings.
     "register": "register",
+    "analogy": "register",
+    "carrier": "register",
+    "comparative": "register",
+    "describe": "register",
+    "extremum": "register",
+    "field": "register",
+    "meaning": "register",
+    "measure": "register",
+    "ordering": "register",
+    "product": "register",
     "element": "register",
     "nuclide": "register",
     "physics": "register",
     "molecule": "register",
     "law": "register",
+    # Documents and tools.
+    "corpus": "corpus",
+    "study": "corpus",
+    "tool": "tool",
+    "toolbox": "tool",
 }
 
 #: Default evidence kind for an unknown Solution.kind.
 _DEFAULT_EVIDENCE = "computation"
 
 #: Theorem-name pattern: ``GLM.<Module>.<Name>`` (with optional further dots).
-_THEOREM = re.compile(r"\bGLM\.([A-Z][A-Za-z0-9_]*(?:\.[A-Za-z0-9_]+)+)")
+#: A ``GLM.``-qualified name.  Lean's prime is allowed at the end of a
+#: component (``foo'``), so a Python ``repr``'s closing quote after a name is
+#: read as one too; amendment R5' (:func:`_strip_trailing_prime`) undoes that
+#: against the declarations.
+_THEOREM = re.compile(r"\bGLM\.([A-Z][A-Za-z0-9_]*'*(?:\.[A-Za-z0-9_]+'*)+)")
 
 
 def _evidence_for_kind(kind: str) -> str:
@@ -196,6 +263,33 @@ def _scan_theorems(answer: str) -> Tuple[str, ...]:
             seen.append(name)
             out.append(name)
     return tuple(out)
+
+
+def declared_names() -> frozenset:
+    """Every full name the Lean development declares: the build tree
+    ``src/lean/RequestProject/GLM`` as
+    :func:`glm_universal.reasoning.lean_address.declaration_names` parses it
+    (memoised there).  Files held outside the build tree (``src/lean/
+    awaiting_recovery/``) are not part of the development and are not read.
+    """
+    from ..reasoning import lean_address
+    return lean_address.declaration_names()
+
+
+def cited_theorems(text: str, declared: Optional[Sequence[str]] = None
+                   ) -> Tuple[Tuple[str, ...], Tuple[str, ...]]:
+    """``(theorems, theorems_declared)`` for a text: the ``GLM.``-qualified
+    names it cites in first-seen order, amendment R5' applied against the
+    declarations (a trailing ``'`` dropped when the unprimed name is declared
+    and the primed one is not; a name declared in neither form is kept as
+    read), and those of them the Lean development declares.  ``declared``
+    defaults to :func:`declared_names`."""
+    known = frozenset(declared_names() if declared is None else declared)
+    names: List[str] = []
+    for name in _strip_trailing_prime(_scan_theorems(text), known):
+        if name not in names:
+            names.append(name)
+    return tuple(names), tuple(n for n in names if n in known)
 
 
 def _strip_trailing_prime(names: Sequence[str],
@@ -298,23 +392,97 @@ def _solution_budget(solution: Any) -> Dict[str, int]:
     return {"steps": len(steps)}
 
 
+def refused_in_words(text: str) -> bool:
+    """Does ``text`` refuse in words by the evaluation's markers
+    (:data:`glm_universal.evaluation.harness.REFUSAL_MARKERS`)?  The declared
+    status rule: such an answer is ``refused``, exactly as the evaluation
+    scores it.  *(Added 31 October 2026, repository check.)*"""
+    from ..evaluation.harness import REFUSAL_MARKERS
+    low = (text or "").lower()
+    return any(marker in low for marker in REFUSAL_MARKERS)
+
+
 def _solution_status(solution: Any) -> str:
-    """The status of a solution: ``answered`` if ``ok``, ``refused`` if not."""
+    """The status of a solution: ``answered`` if ``ok`` and its answer does
+    not refuse in words (:func:`refused_in_words`), ``refused`` otherwise."""
     ok = getattr(solution, "ok", True)
     error = getattr(solution, "error", None)
     if not ok or error:
+        # A reading the evidence rules out is *contradicted*, not merely
+        # refused: the solvers write "(contradicted)" into the reason, the
+        # rule ``reasoning/adversarial_dialogue_study.py`` reads too.
+        if "(contradicted)" in str(error or ""):
+            return "contradicted"
         return "refused"
+    if refused_in_words(getattr(solution, "answer", "") or ""):
+        return "refused"
+    tie = _solution_tie(solution)
+    if tie is not None and tie.get("status") == "open":
+        return "open"
     return "answered"
 
 
+def _solution_tie(solution: Any) -> Optional[Mapping[str, Any]]:
+    """The carried tie a ``locate``/``nearest`` answer holds in its payload
+    (``status`` open or resolved, ``live`` candidates, ``given`` replies), or
+    ``None``.  *(31 October 2026, repository check.)*"""
+    payload = getattr(solution, "payload", None) or {}
+    tie = payload.get("tie") if isinstance(payload, Mapping) else None
+    return tie if isinstance(tie, Mapping) else None
+
+
+def _given_history(text: str) -> Tuple[Tuple[str, str], ...]:
+    """The replies a question carries after ``given``: ``"locate albedo given
+    word:absorbed is no; confirm:physics:albedo is yes"`` reads as
+    ``(("word:absorbed", "no"), ("confirm:physics:albedo", "yes"))``.  Read
+    off the question itself, so a refused or contradicted reading keeps the
+    replies it was given.  *(31 October 2026, repository check.)*"""
+    if " given " not in (text or ""):
+        return ()
+    tail = text.split(" given ", 1)[1]
+    out: List[Tuple[str, str]] = []
+    for part in tail.split(";"):
+        part = part.strip()
+        if " is " in part:
+            key, value = part.split(" is ", 1)
+            out.append((key.strip(), value.strip()))
+    return tuple(out)
+
+
+def _evidence_tuple(primary: str, solution: Any,
+                    history: Sequence[Any]) -> Tuple[str, ...]:
+    """The evidence a planner answer rests on: its kind's primary evidence,
+    then ``certificate`` when the payload says the answer is certified (the
+    ``nearest`` margin certificate), then ``dialogue`` when replies were
+    read."""
+    out = [primary]
+    payload = getattr(solution, "payload", None) or {}
+    if isinstance(payload, Mapping) and payload.get("certified") is True \
+            and "certificate" not in out:
+        out.append("certificate")
+    if history:
+        out.append("dialogue")
+    return tuple(out)
+
+
+def _witness(expected: Mapping[str, Any]) -> Tuple[str, ...]:
+    """Column 2's stated values as ``key=value``, sorted by key: what a reader
+    checks the answer against, and what column 3 recomputes."""
+    return tuple(f"{key}={expected[key]}" for key in sorted(expected))
+
+
 def _solution_refusal(solution: Any) -> str:
-    """The refusal reason for a solution, or ``""`` when answered."""
+    """The refusal reason for a solution, or ``""`` when answered; an answer
+    that refuses in words is its own reason."""
     error = getattr(solution, "error", None)
     if error:
         return str(error)
     ok = getattr(solution, "ok", True)
     if not ok:
         return "the solver refused without naming a reason"
+    answer = getattr(solution, "answer", "") or ""
+    if refused_in_words(answer):
+        return answer
     return ""
 
 
@@ -348,11 +516,20 @@ def from_solution(question: str, solution: Any,
     status = _solution_status(solution)
     refusal = _solution_refusal(solution)
     evidence_kind = _evidence_for_kind(kind)
-    theorems = _scan_theorems(answer)
+    theorems, theorems_declared = cited_theorems(answer + "\n" + refusal)
     budget = _solution_budget(solution)
-    candidates = tuple(_solution_payload_field(solution, "candidates", ()) or ())
-    ambiguity = tuple(_solution_payload_field(solution, "ambiguity", ()) or ())
-    history = tuple(_solution_payload_field(solution, "history", ()) or ())
+    tie = _solution_tie(solution)
+    if tie is not None:
+        # an open tie offers its live candidates and is ambiguous between
+        # them; a resolved one names the candidate that survived
+        candidates = tuple(tie.get("live", ()) or ())
+        ambiguity = candidates if status == "open" else ()
+    else:
+        candidates = tuple(_solution_payload_field(solution, "candidates", ()) or ())
+        ambiguity = tuple(_solution_payload_field(solution, "ambiguity", ()) or ())
+    query = getattr(solution, "query", None)
+    history = tuple(_solution_payload_field(solution, "history", ()) or ()) \
+        or _given_history(getattr(query, "raw", "") or question)
 
     # Boundary and replayed.
     script_spec = getattr(solution, "script_spec", None) or {}
@@ -386,26 +563,29 @@ def from_solution(question: str, solution: Any,
         replayed = None
         boundary = "checkable" if (has_column2 or has_column3) else "uncertified"
 
-    if status == "refused":
+    if status in ("refused", "contradicted"):
         boundary = "refused"
+        replayed = None
+    answering = status in ("answered", "open")
 
     return Result(
         question=question,
         status=status,
         surface="planner",
         kind=kind,
-        answer=answer if status != "refused" else "",
-        candidates=candidates if status == "open" else (),
-        evidence=(evidence_kind,) if status != "refused" else (),
-        witness=(),
+        answer=answer if answering else "",
+        candidates=candidates if answering else (),
+        # the evidence kind belongs to the question's kind, refused or not
+        evidence=_evidence_tuple(evidence_kind, solution, history),
+        witness=_witness(expected) if answering and isinstance(expected, Mapping) else (),
         theorems=theorems,
         boundary=boundary,
         budget=budget,
         ambiguity=ambiguity if status == "open" else (),
         refusal=refusal,
-        history=tuple((q, r) for q, r in history),
+        history=tuple((str(q), str(r)) for q, r in history),
         replayed=replayed,
-        theorems_declared=theorems,  # no declaration list available here
+        theorems_declared=theorems_declared,
     )
 
 
@@ -446,16 +626,19 @@ def from_routed(question: str, routed: Any,
         ) if False else _override_surface(r, surface, answered)
 
     # Non-solution surfaces: build a minimal Result from the routed verdict.
+    # One evidence kind per result, refused or not (a tuple, as the field
+    # is declared; 31 October 2026, repository check).
+    evidence = ("tool",) if surface == "toolbox" else (
+        _evidence_for_kind(getattr(payload, "kind", "")) if payload
+        else _DEFAULT_EVIDENCE,)
     if answered:
         status = "answered"
-        evidence = ("tool",) if surface == "toolbox" else (
-            _evidence_for_kind(getattr(payload, "kind", "")) if payload else "computation"
-        )
         refusal = ""
     else:
         status = "refused"
-        evidence = ()
-        refusal = "the surface refused without naming a reason"
+        refusal = (text if refused_in_words(text) else "") or \
+            "the surface refused without naming a reason"
+    theorems, theorems_declared = cited_theorems(text) if answered else ((), ())
 
     return Result(
         question=question,
@@ -466,13 +649,14 @@ def from_routed(question: str, routed: Any,
         candidates=(),
         evidence=evidence,
         witness=(),
-        theorems=_scan_theorems(text) if answered else (),
+        theorems=theorems,
         boundary="uncertified",  # no column 3 on these surfaces
         budget={"steps": 1} if answered else {},
         ambiguity=(),
         refusal=refusal,
         history=(),
         replayed=None,
+        theorems_declared=theorems_declared,
     )
 
 
@@ -489,9 +673,11 @@ def _override_surface(r: Result, surface: str, answered: bool) -> Result:
             theorems_declared=r.theorems_declared,
         )
     return Result(
-        question=r.question, status="refused", surface=surface, kind=r.kind,
-        answer="", candidates=(), evidence=(), witness=r.witness,
-        theorems=(), boundary="refused", budget=r.budget, ambiguity=(),
+        question=r.question,
+        status="contradicted" if r.status == "contradicted" else "refused",
+        surface=surface, kind=r.kind,
+        answer="", candidates=(), evidence=r.evidence, witness=(),
+        theorems=r.theorems, boundary="refused", budget=r.budget, ambiguity=(),
         refusal=r.refusal or "the surface did not answer",
         history=r.history, replayed=None,
         theorems_declared=r.theorems_declared,
@@ -516,6 +702,15 @@ def from_define(term: str, knowledge: Any) -> Result:
     """
     define_fn = getattr(knowledge, "define", None) or getattr(
         getattr(knowledge, "model", None), "define", None)
+    if define_fn is None and knowledge is not None:
+        # The corpus's own ``define`` reading (31 October 2026).
+        try:
+            from ..knowledge import answer as _corpus_answer
+        except ImportError:  # pragma: no cover - the package is part of the tree
+            _corpus_answer = None
+        if _corpus_answer is not None:
+            def define_fn(t: str, _k: Any = knowledge) -> Any:
+                return _corpus_answer.define(t, _k)
     if define_fn is None:
         return Result(
             question=f"define {term}",

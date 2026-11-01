@@ -7,16 +7,18 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 184 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** <!--figure:reasoning-modules-->242<!--/figure--> modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the module count, which had stood at 184 since an earlier round, brought to the tree's 239.)*
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **184 modules**, one
+**Parent:** [`../README.md`](../README.md) · **Repository root:**
+[`../../README.md`](../../../README.md)
+
+**Status: implemented (GLM-3+ Step 3, extended since).** **242 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -300,8 +302,8 @@ numbers.
 ## Running it
 
 ```bash
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_reasoning.py -q   # 94 tests
-PYTHONPATH=. python3 -m pytest glm_universal/tests/ -q                    # the whole suite
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_reasoning.py -q   # 94 tests
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/ -q                    # the whole suite
 ```
 
 The reasoning kernel is also covered by `test_coherence.py` (58),
@@ -312,7 +314,7 @@ The reasoning kernel is also covered by `test_coherence.py` (58),
 `test_element_coverage.py` (40), `test_units.py` (24),
 `test_term_arithmetic.py` (40), `test_fwht_decode.py` (20),
 `test_llvq_table.py` (21) and `test_deep_holes.py` (25).  The suite-wide counts are recomputed in
-[`../../FIGURES.md`](../../FIGURES.md) rather than quoted here.
+[`../../FIGURES.md`](../../../FIGURES.md) rather than quoted here.
 
 The first test that touches the `2A` algebra builds the exhaustive
 98,280-class type-2 table (about six seconds); it is cached for the process and
@@ -548,7 +550,7 @@ Nothing is written back into the element register, so a caller that wants
 measurements still gets only measurements: an estimate is returned labelled
 as an estimate, with its residual attached.  Reachable as
 `report chemistry coverage`; the figures above are recomputed under
-*Chemistry* in [`../../FIGURES.md`](../../FIGURES.md).
+*Chemistry* in [`../../FIGURES.md`](../../../FIGURES.md).
 
 ## `reverse_tct.py` and `reverse_tct_script.py` — the language column generated from the mathematics
 
@@ -1082,3 +1084,25 @@ in use and of the seven-bit tag's kernel, and a deterministic annealing search
 over the 4,095 nonzero tag functionals for a tag in the gap between the
 floors. `tools shortest-tag`; proved facts in
 `RequestProject/GLM/ShortestTag.lean`.
+
+## `hypothesis_engine.py`, `hypothesis_tools.py`, `intake_capability_study.py` — the Rule 30 study's engine, absorbed where it measurably helps
+
+Phase 186, 1 November 2026
+([`../../../studies/INTAKE_CAPABILITY_STUDY.md`](../../../studies/INTAKE_CAPABILITY_STUDY.md)):
+`hypothesis_engine.py` is the intake item `Rule30_GLM_Study`'s Hypothesis
+Engine v18, taken into the package with four declared edits (paths through
+the intake folder, outputs only where it is told, no floats — its random
+draws come from an exact integer generator of its own, `ExactDraw`, since
+the blueprint's Universal Binary Principle bans `random` from the core — and
+no `eval`: a claim's test is read by a whitelist evaluator with a work
+budget). `hypothesis_tools.py` puts it on the answering path: `tool rule30`
+(the Rule 30 centre column and the engine's claims, each with its ring and
+the Lean theorem it rests on, open questions never called true or false),
+`tool conjecture` (a claim about every `n`, refuted by a checked
+counterexample or reported as surviving, never as proved without a Lean
+theorem) and the plan search behind `tool arc`, which takes the tasks the
+colour solver refuses. `intake_capability_study.py` measures what the
+absorbed items add, with and without them: `python3 -m glm_universal.tools
+intake-capability --write`. The items' Lean (`IntakeChecks/`) was checked
+standalone; the owner's `scripts/rebuild_lean.sh` run has still to confirm
+it, and every answer from these tools says so until then.

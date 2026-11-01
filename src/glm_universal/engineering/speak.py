@@ -1,11 +1,26 @@
 """``glm_universal.engineering.speak`` -- asking the GLM in engineering terms.
 
+*Last altered 31 October 2026 (repository check): the ``domains`` frame
+restored as the first of the frames -- the frame of the domain wheels and of
+Phase 170's declared contexts (*across domains where ...*), which the
+engineering surface read before the reorganisation (``runtime/toolbox.py``
+still describes "the ten engineering frames"; the code is
+:func:`glm_universal.engineering.domains.frame_domains`).  It reads only a
+question that ends *across domains* or *across domains where ...*, which no
+evaluation question does.*
+
 The surface
 -----------
-Eight frames read an engineering question into one of the exact operations
+Nine frames read an engineering question into one of the exact operations
 of this package, and each either answers with the working shown or refuses
 with the reason:
 
+``domains``     *derive density from mass and volume across domains* -- the
+                solve over the domain wheels, crossing only declared
+                junctions; with *where ...* the declared contexts of Phase
+                170 pin which energy, which oscillator and which body drives
+                the wave (:mod:`glm_universal.engineering.domains`,
+                :mod:`glm_universal.engineering.context_frames`);
 ``union``       *derive power from pressure and volume flow rate across
                 wheels* -- the same solve over the union of the ten wheels,
                 with a shared name one variable only across a declared
@@ -621,7 +636,17 @@ def frame_delta_sigma(t: str) -> Optional[EngAnswer]:
     return None
 
 
-FRAMES = (("union", frame_union), ("derive", frame_derive),
+def frame_domains(t: str) -> Optional["EngAnswer"]:
+    """*derive X from Y and Z across domains [where ...]*: the domain wheels
+    and the declared contexts (restored 31 October 2026).  ``None`` for any
+    other text; imported here lazily, because the domains module reads this
+    one's :class:`EngAnswer` and :class:`Refusal`."""
+    from . import domains as dmn
+    return dmn.frame_domains(t)
+
+
+FRAMES = (("domains", frame_domains),
+          ("union", frame_union), ("derive", frame_derive),
           ("wheel", frame_wheel),
           ("check", frame_check), ("smith", frame_smith),
           ("analogy", frame_analogy), ("resonance", frame_resonance),

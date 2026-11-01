@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 *Created 20 October 2026 (pre-registered 20 October 2026: §§0–6 were committed before the measurement of §7 was taken; measured 20 October 2026). Last altered 20 October 2026 (Phase 174: §7.5 notes the lines taken).*
@@ -104,7 +106,7 @@ flag of the evaluation, not yet a step of `signoff --close`.
 
 ## 7. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools evidence-in-use` (stored in
+`PYTHONPATH=src python3 -m glm_universal.tools evidence-in-use` (stored in
 `reasoning/_data/evidence_in_use_study.json`, digest-guarded over the study
 module, the gate, the evaluation cases, the result model, the router, the
 Three Column Thinking engine, `GLM.py` and the Phase 169 census; `--write`

@@ -136,9 +136,17 @@
   "scripts": 6
  },
  "census": {
+  "by_size": {
+   "2": 13,
+   "3": 2,
+   "4": 2,
+   "8": 1
+  },
   "certified": 193,
   "certified_heads": 3,
   "heads": 18,
+  "members": 48,
+  "outside": 10,
   "points": 321,
   "uncertified": 128,
   "uncertified_heads": 17
@@ -149,9 +157,13 @@
  },
  "conversations": {
   "confirmed": 48,
+  "opened": 48,
   "problems": [],
   "rejected": 156,
   "runs": 48,
+  "statuses": [
+   "confirmed"
+  ],
   "tampered": 156,
   "turns": 150,
   "verified": 150,
@@ -163,6 +175,7 @@
   "lie_contradicted": 48,
   "lie_wrong": 0,
   "lied": 48,
+  "live_outside": 0,
   "max_replies": 2,
   "replies": 54,
   "runs": 48,
@@ -171,70 +184,27 @@
   "wrong": 0
  },
  "frozen": {
-  "F1": true,
-  "asked": 223,
-  "cases": 212,
-  "moved": [
-   {
-    "cause": "Phase 154: the list of query kinds the refusal names gains 'corpus'",
-    "id": "unknown-nonsense"
-   },
-   {
-    "cause": "the tree: the Lean declaration count, measured live",
-    "id": "report-lean"
-   },
-   {
-    "cause": "Phase 162: the directives report counts the standing rules, which gain D17 (the owner's dating rule)",
-    "id": "report-directives"
-   },
-   {
-    "cause": "the tree: the address-book index over the Lean declarations",
-    "id": "report-retrieval"
-   },
-   {
-    "cause": "the tree: the overlay's stored bytes, measured live",
-    "id": "report-generated"
-   },
-   {
-    "cause": "Phase 150: the language report counts the evaluation questions, which gain the round's cases",
-    "id": "report-language"
-   },
-   {
-    "cause": "Phase 150: the query-escalation report counts the evaluation cases, which gain the round's cases",
-    "id": "report-query-escalation"
-   },
-   {
-    "cause": "the tree: the stack relay's strides are drawn from the Lean declarations",
-    "id": "report-relay"
-   },
-   {
-    "cause": "the tree: the anonymous register's queries are the relay's strides",
-    "id": "report-anonymous"
-   },
-   {
-    "cause": "Phase 150: the head is a certified junction, so the answer ends with the question that splits it (prefix kept)",
-    "id": "nearest-address-junction"
-   }
-  ],
-  "new_cases": [
-   "corpus-address",
-   "corpus-address-phrase",
-   "corpus-continue",
-   "corpus-define",
-   "corpus-unmentioned",
-   "nearest-tie-confirmed",
-   "nearest-tie-contradicted",
-   "nearest-tie-no-tie",
-   "nearest-tie-question",
-   "nearest-tie-reply",
-   "tool-leech-norm-12"
-  ],
+  "F1": false,
+  "asked": 0,
+  "baseline": "absent",
+  "cases": 0,
+  "moved": [],
+  "new_cases": [],
   "prefix_broken": [],
-  "present": 212,
-  "same_status": 212,
-  "same_text": 202,
-  "source_digest": "dd371247756ffbd7c566b4ae5d9cee1e475e03f9092957256ab7474cde837caa",
+  "present": 0,
+  "reason": "ties_ladder_baseline.json: baseline lost in the October 2026 reorganisation; a new baseline needs a frozen-path comparison before the answering path moves again",
+  "same_status": 0,
+  "same_text": 0,
+  "source_digest": "4946bfbe0bca14ab11982bf1770e976871f6505a1d07cb411b1ef353273f03ac",
   "undeclared": []
+ },
+ "lean": {
+  "declared": 6,
+  "file": "RequestProject/GLM/NearestQuestion.lean",
+  "met": true,
+  "present": true,
+  "sorry": 0,
+  "theorems": 6
  },
  "marks": {
   "C1": true,
@@ -242,11 +212,11 @@
   "D2": true,
   "D3": true,
   "E1": true,
-  "F1": true,
+  "F1": false,
   "Q1": true,
   "R1": true
  },
- "met": 8,
+ "met": 7,
  "new_cases": {
   "cases": 5,
   "passed": 5,
@@ -282,8 +252,11 @@
   "confirmed": 0,
   "contradicted": 5,
   "points": 10,
+  "reasons": [
+   "not-an-option"
+  ],
   "refused": 5
  },
- "source_digest": "87a4f20288e540b1930046495b45b5b13fda149d49c555df1ca17fcc2322ddad",
+ "source_digest": "31210aafc22e686ac9da50a8a9b297b22ad6497a5ecf673ae8954773cf1aeb8e",
  "taken": 8
 }

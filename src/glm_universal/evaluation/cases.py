@@ -29,7 +29,13 @@ answer that contradicts the ground truth, counts as a *severe* failure -- the
 scoring in :mod:`glm_universal.evaluation.harness` is deliberately harsher on
 being confidently wrong than on declining to answer.
 
-Last altered 20 October 2026 (Phase 172: `report anonymous` pinned on its claim, read off the measurement, not on counts; Phase 171: two report cases re-pinned for the corpus refreshed with AdversarialDialogue.lean, ContextFrames.lean and EvidenceInUse.lean; Phase 166: two re-pinned for PiMachine.lean).
+Last altered 1 November 2026 (Phase 186: ten cases for the intake items
+absorbed ahead of the build -- `tool rule30`, `tool conjecture`, `tool
+derive`, the sequence kind's `next` reading and the plan search behind `tool
+arc`).  Before that, 31 October 2026 (repository check: four cases for the `study` and
+`sequence` kinds added, `study-card`, `study-unknown`, `sequence-fibonacci`
+and `sequence-unheld`; `report-language` re-pinned at 30 answerable kinds).
+Before that, 20 October 2026 (Phase 172: `report anonymous` pinned on its claim, read off the measurement, not on counts; Phase 171: two report cases re-pinned for the corpus refreshed with AdversarialDialogue.lean, ContextFrames.lean and EvidenceInUse.lean; Phase 166: two re-pinned for PiMachine.lean).
 """
 
 from __future__ import annotations
@@ -670,7 +676,11 @@ _CASES: Tuple[EvalCase, ...] = (
        # unchanged, the same seven kinds described.
        # Re-pinned at Phase 154: the `corpus` kind makes the answerable
        # kinds 27; claim unchanged, the same seven kinds described.
-       "answer", contains=("7 of 27 answerable query kinds",
+       # Re-pinned 31 October 2026 (repository check): `corpus` and `tool`
+       # entered the parser's KINDS (the evaluation already covered both)
+       # and the owner's `study` and `sequence` kinds were added, so the
+       # answerable kinds are 30; claim unchanged, the same seven described.
+       "answer", contains=("7 of 30 answerable query kinds",
                            "derive, measure, task, compare by slot shape",
                            "verify, analogy, compare by infix shape",
                            "comparative by nested shape",
@@ -1448,6 +1458,81 @@ _CASES: Tuple[EvalCase, ...] = (
        "refusal", classification="boundary",
        note="A lattice address is for one word; a phrase is refused with the "
             "reason."),
+
+    # ------------- the study manifests and the wheels (31 October 2026)
+    _c("study-card", "study", "study LEECH_SHELLS_STUDY",
+       "answer", contains=("LEECH_SHELLS_STUDY (Phase 164)", "Leech shells"),
+       note="A study's card read off its manifest (studies/*.yaml) -- id, "
+            "phase, title, question, verdict; nothing stored beside the "
+            "manifests (repository check, 31 October 2026)."),
+    _c("study-unknown", "study", "study zzqx",
+       "refusal", classification="boundary",
+       note="No manifest holds the id; the study kind says so rather than "
+            "guessing a study."),
+    _c("sequence-fibonacci", "sequence", "what sequence is 1, 1, 2, 3, 5, 8",
+       "answer", contains=("A000045", "position 1"),
+       note="No stored terms start 1, 1, 2, 3, 5, 8 (A000045 is stored from "
+            "F(0) = 0), so the wheel's locate names the earliest run: "
+            "A000045 from position 1 (studies/INTEGER_WHEEL_STUDY.md)."),
+    _c("sequence-unheld", "sequence", "what sequence is 9, 17, 4, 1000, 3",
+       "refusal", classification="boundary",
+       note="No entry of the wheel holds the terms, as a prefix or as a "
+            "run; nothing is guessed."),
+
+    # ----- the intake items absorbed ahead of the build (Phase 186, 1 Nov 2026)
+    _c("tool-rule30-centre", "tool",
+       "what are the first 20 cells of rule 30's centre column",
+       "answer", contains=("11011100110001011001", "11 black, 9 white"),
+       note="tool rule30 centre: Rule 30 from one black cell, the cells the "
+            "Lean list GLM.IntakeChecks.RuleThirtyBits.centreBits_64 states "
+            "(studies/INTAKE_CAPABILITY_STUDY.md, R3)."),
+    _c("tool-rule30-claim-refuted", "tool",
+       "in rule 30, every left diagonal has eventual period dividing 8",
+       "answer", contains=("': false -- ", "left diagonal 400 has eventual period 16"),
+       note="The hypothesis engine escalates the claim and finds its "
+            "counterexample; the Lean theorem it rests on is named."),
+    _c("tool-rule30-claim-open", "tool",
+       "in rule 30, the periods of the left diagonals are unbounded",
+       "refusal", classification="boundary",
+       note="An open problem, never answered true or false: `tool rule30 "
+            "claim ...` refuses it in the engine's ring 'doesn't know' with "
+            "its proved reduction; put in English, the phrased route takes "
+            "only a tool's answers (Phase 136), so the question is refused "
+            "as unrecognised."),
+    _c("tool-conjecture-refuted", "tool", "is n^2 + n + 41 prime for every n",
+       "answer", contains=("': false -- ", "n = 40 fails"),
+       note="Euler's polynomial: refuted at its least counterexample, 40^2 + "
+            "40 + 41 = 41^2."),
+    _c("tool-conjecture-survives", "tool",
+       "check the conjecture that 6 divides n^3 - n for every n",
+       "answer", contains=("': not settled -- ", "thinks true"),
+       forbids=("': true -- ",),
+       note="A claim that survives every scale read is reported as "
+            "surviving, never as proved."),
+    _c("tool-derive-law", "tool", "is emf = magnetic_field * area / time a law",
+       "answer", contains=("derive: derivable in W16",
+                           "1 × (flux = magnetic_field * area) + 1 × (emf = flux / time)"),
+       note="tool derive: an explicit rational combination of the axioms of "
+            "one cent wheel (studies/CENT_WHEELS_STUDY.md; INTAKE_CAPABILITY_"
+            "STUDY.md, D1)."),
+    _c("tool-derive-not-a-law", "tool", "is power = force * time a law",
+       "answer", contains=("derive: not derivable",),
+       note="No single wheel's axioms derive it; pooling different wheels' "
+            "axioms is not allowed."),
+    _c("sequence-next-catalan", "sequence", "what comes next in 1, 1, 2, 5, 14, 42",
+       "answer", contains=("132", "A000108"),
+       note="The sequence wheel's next reading: the one stored sequence that "
+            "starts with the terms and runs past them (IntakeChecks/NextTerm)."),
+    _c("sequence-next-junction", "sequence", "what comes next in 1, 2",
+       "refusal", classification="boundary",
+       note="Two terms are too few: the reading asks for at least three "
+            "before it says what comes next (many stored sequences start 1, "
+            "2 and part after it), so it refuses."),
+    _c("tool-arc-plan-search", "tool", "solve the arc task d631b094",
+       "answer", contains=("RIGHT by the plan search",),
+       note="The colour solver refuses the test input and the hypothesis "
+            "engine's plan search answers it, graded against the stored "
+            "output (a development task, not a held-out one)."),
 
     # ------------------------------ the guarded read in nearest (Phase 148)
     _c("nearest-address-moved", "nearest", "nearest to C moved 8 by 1/2",

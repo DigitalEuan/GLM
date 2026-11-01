@@ -6,11 +6,13 @@
 
 **Verdict.** No reply of any kind ever made a carrier outside the ranking's head live, over 560 adversarial runs through the conversation, and Lean proves this for any replies. A consistent liar cannot be told from a truthful informant, and Lean proves that limit too. One defect was found and fixed: a number repeated from the turn before was read as an option number of the confirming question, so a confirmation nobody gave was recorded (10 wrong confirmations after a first false reply). A yes-or-no question is now answered by its words only.
 
-**Deciding figure.** 13 of 13 marks; 0 members outside the head ever live over 560 runs; echoes read as a confirmation by number 10 → 0, wrong confirmations after a false reply and an echo 10 → 1 (the remaining one within the proved limit); 118 of 118 consistent liars confirmed on the member impersonated; 223 of 223 evaluation cases unchanged.
+**Deciding figure.** 13 of 13 marks as stored (re-run live on 31 October 2026: 12 of 13, L1 not met while `AdversarialDialogue.lean` is missing, §7.5); 0 members outside the head ever live over 560 runs; echoes read as a confirmation by number 10 → 0, wrong confirmations after a false reply and an echo 10 → 1 (the remaining one within the proved limit); 118 of 118 consistent liars confirmed on the member impersonated; 223 of 223 evaluation cases unchanged.
 
 **Recomputed by.** `glm_universal.reasoning.adversarial_dialogue_study.adversarial_dialogue_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: the measurement re-run live; every figure of §7.1 comes back with the reply rule of §2 restored, and L1 is not met while `AdversarialDialogue.lean` is missing; the stored record is kept, §7.5; its run commands now start from the repository root (`PYTHONPATH=src`).)*
 
 ---
 
@@ -18,10 +20,12 @@
 
 *Last altered 20 October 2026 (Phase 172: §7.4 says which of its lines that round took).*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ## 0. What this document is
 
 A study for Phase 167. It takes Part II.5 of the owner's plan of 19 October
-2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/GLM_19OCT26_1.md),
+2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/done/GLM_19OCT26_1.md),
 *expand adversarial interactive testing*), which extends
 [`NEAREST_QUESTION_STUDY.md`](NEAREST_QUESTION_STUDY.md). Phase 150 measured
 the question at the `nearest` ties under true replies and under one false
@@ -147,7 +151,7 @@ catch it.
 
 ## 7. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools adversarial-dialogue` (stored in
+`PYTHONPATH=src python3 -m glm_universal.tools adversarial-dialogue` (stored in
 `reasoning/_data/adversarial_dialogue_study.json`, digest-guarded;
 `--write` re-takes it in about two minutes on eight cores).
 
@@ -224,6 +228,23 @@ The first and the last of these were taken by Phase 172
 stays open across unrelated turns, and the battery has been run at the
 `locate` junctions. A4 above is still taken with the conversation's
 `RESUME_OPEN_TIE` off, the reading this study measured.
+
+### 7.5 The state on 31 October 2026
+
+*Added 31 October 2026 (repository check).* Three things this round relied on
+were lost in the October 2026 reorganisation: the measurement module's
+`compute`, the reply rule of §2 in `reasoning/timed_question.py`
+(`YES_NO_BY_NUMBER`, `is_yes_no`) and `AdversarialDialogue.lean`. The first
+two were rebuilt from this document (the module from §§3–5; the rule as §2
+states it, with `tests/test_answering_question.py::test_match_reply` pinning
+it as §7.2 says), and the measurement was run live — written to a scratch
+file, not over `reasoning/_data/adversarial_dialogue_study.json`, which is
+kept as the record of §7.1. Without the rule, the new reading was the old one
+(A3 3 wrong by number, A5 7 echoes read by number, A6 9 wrong by number, 10
+wrong confirmations); with it, all 98 figures the stored record and the live
+run share are equal, A0–A9 and P as in §7.1. **L1 not met**:
+`AdversarialDialogue.lean` (9 theorems) is not in the tree
+(`studies/_lean_files_needed.md`). So 12 of 13 marks live.
 
 ## In one paragraph
 

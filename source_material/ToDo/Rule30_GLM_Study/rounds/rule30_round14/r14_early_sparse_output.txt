@@ -1,0 +1,27 @@
+Near-white (<= 3 black) and near-black (<= 3 white) windows of 24 bits; expected rate 1.386e-04 each per position
+
+Rule 30 centre column, cumulative counts:
+  first    16384 steps: near-white     4  near-black     3  (expected      2.3 each)
+  first    32768 steps: near-white    24  near-black     8  (expected      4.5 each)
+  first    65536 steps: near-white    33  near-black    26  (expected      9.1 each)
+  first   131072 steps: near-white    98  near-black    27  (expected     18.2 each)
+  first   262144 steps: near-white   124  near-black    44  (expected     36.3 each)
+  first   524288 steps: near-white   180  near-black    65  (expected     72.7 each)
+  first  1048576 steps: near-white   249  near-black   172  (expected    145.3 each)
+  first  4194304 steps: near-white   687  near-black   623  (expected    581.2 each)
+
+First 131072 steps, near-white + near-black windows: rule30 125; fair-coin null over 5000 sequences: mean 36.4, sd 13.9, 99.9th percentile 89, max 103; null sequences >= rule30: 0
+Out of sample, steps 131072..4194303: near-white 589, near-black 596, expected 563.1 each (ratio 1.052)
+
+All 32 consecutive segments of 131072 steps (look-elsewhere check), against the same null (99th percentile 73, max 103):
+  rule30: 125 43 29 48 57 53 46 20 34 30 37 50 46 26 30 25 47 34 52 35 41 71 28 28 21 17 55 46 28 38 39 31   (segments above the null maximum: 1)
+  sqrt2 : 29 34 72 30 46 33 39 24 24 34 24 17 28 61 24 70 25 31 28 44 12 37 26 18 28 26 24 25 36 29 18 30   (segments above the null maximum: 0)
+  Chance that at least one of 32 fair-coin segments exceeds the maximum of 5000 null segments: about 32/5001 = 0.6%.  The statistic was chosen after seeing the data, so this is a lead to explain, not a confirmed pattern.
+
+Neighbouring columns, first 131072 steps (near-white + near-black):
+  column -2: 51  (out of sample 131072..524287: 74, expected 109.0)
+  column -1: 43  (out of sample 131072..524287: 116, expected 109.0)
+  column +1: 65  (out of sample 131072..524287: 122, expected 109.0)
+  column +2: 81  (out of sample 131072..524287: 117, expected 109.0)
+
+Reading: a transient confined to the first segment, not a persistent pattern.  Over the first 2^17 steps the centre column has several long, almost-white stretches (isolated black cells in white), which a fair coin produces far less often; afterwards the rate is the fair-coin rate.  A transient can never be a shortcut for Problems 1-3, which are about the infinite tail.

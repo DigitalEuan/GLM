@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -313,9 +315,8 @@ development.
 ## 7. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools second-view            # every mark, about 8 minutes
-PYTHONPATH=. python3 -m glm_universal.tools second-view --quick    # one probe codeword
-PYTHONPATH=. python3 -m unittest glm_universal.tests.test_second_view
+PYTHONPATH=src python3 -m glm_universal.tools second-view            # every mark, about 8 minutes
+PYTHONPATH=src python3 -m glm_universal.tools second-view --quick    # one probe codeword
+PYTHONPATH=src python3 -m unittest glm_universal.tests.test_second_view
 lake build RequestProject.GLM.SecondView                            # from the repository root
 ```

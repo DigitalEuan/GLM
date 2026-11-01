@@ -1,5 +1,5 @@
 {
- "asked": 212,
+ "asked": 237,
  "audit": {
   "functions_watched": 18,
   "total": 0,
@@ -8,19 +8,75 @@
  "cases": 202,
  "moved": [
   {
-   "cause": "Phase 147: the list of query kinds the refusal names gains 'hole'",
+   "cause": "Phase 147: the list of query kinds the refusal names gains 'hole'; 31 October 2026: and the four lookup kinds 'corpus', 'tool', 'study' and 'sequence'",
    "id": "unknown-nonsense"
   },
   {
-   "cause": "Phases 147-148: the language report counts the query kinds and the evaluation questions, which gain the new kind and the new cases",
+   "cause": "the tree: the Lean declaration count, measured live",
+   "id": "report-lean"
+  },
+  {
+   "cause": "the tree: the directives register, measured live (16 standing rules at the baseline, 22 now)",
+   "id": "report-directives"
+  },
+  {
+   "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
+   "id": "report-hole-classifier"
+  },
+  {
+   "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
+   "id": "report-hole-ladder"
+  },
+  {
+   "cause": "the tree: the address-book index over the Lean declarations",
+   "id": "report-retrieval"
+  },
+  {
+   "cause": "the tree: the overlay's stored bytes, measured live",
+   "id": "report-generated"
+  },
+  {
+   "cause": "Phases 147-148 and 31 October 2026: the language report counts the query kinds (25 at the baseline, 30 now) and the evaluation questions of the undescribed kinds (182 at the baseline, 207 now), which gain the new kinds and the new cases",
    "id": "report-language"
+  },
+  {
+   "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
+   "id": "report-hole-failures"
   },
   {
    "cause": "Phases 147-148: the query-escalation report counts the evaluation cases, which gain the new ones",
    "id": "report-query-escalation"
+  },
+  {
+   "cause": "the tree: the stack relay's strides are drawn from the Lean declarations",
+   "id": "report-relay"
+  },
+  {
+   "cause": "the tree: the anonymous register's queries are the relay's strides",
+   "id": "report-anonymous"
   }
  ],
  "new_answers": {
+  "corpus-address": {
+   "answer": "'seven' sits at the Leech point (72, 54, 26, 54, 26, 62, 0, 0, 54, 0, 46, 0, 18, 26, 0, 46, 28, 62, 0, 0, 36, 0, 44, 2) (read back exactly: True), from its positional company 'the _' 8, 'a _' 6, '1 _' 3, 'and _' 6, 'is _' 3, 'of _' 7, 'by _' 6, 'in _' 5, '_ the' 2, '_ a' 3, '_ and' 5, '_ is' 3, '_ of' 7, '_ by' 4, '_ in' 5. Its nearest words on the lattice (squared distance): four (2544), three (3472), six (3952), two (4128), ten (4192), one (5360), corpus (5392), data (5680), report (5696), derivation (6144).",
+   "ok": true
+  },
+  "corpus-address-phrase": {
+   "answer": "unsolved: corpus (address): a lattice address is for one word, and 'golay code' is 2 tokens",
+   "ok": false
+  },
+  "corpus-continue": {
+   "answer": "a digest addresses … integrity never meaning (the corpus's own most frequent continuation; stopped: end of sentence). Witnesses: integrity (22/31, DIGEST.md#p7.s7); never (14/24, DIGEST.md#p7.s7); meaning (16/16, DIGEST.md#p7.s7)",
+   "ok": true
+  },
+  "corpus-define": {
+   "answer": "The corpus says: The Golay code is a [24, 12, 8]_2 code with weight distribution: weight 0: 1 codeword (the zero codeword) weight 8: 759 codewords weight 12: 2576 codewords weight 16: 759 codewords weight 24: 1 codeword (the all-ones codeword) Total: 4096 codewords. [source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1] Also: (data file, copula:is) The Golay code is a [24, 12, 8]_2 code with weight distribution: weight 0: 1 codeword (the zero codeword) weight 8: 759 codewords weight 12: 2576 codewords weight 16: 759 codewords weight 24: 1 codeword (the all-ones codeword) Total: 4096 c [src/glm_universal/reasoning/_data/evidence_model_study.json#p0.s0] (state document, copula:is) The Golay code is the first case and the Lean address book the second, which is why one is regenerated from twelve rows and the other is stored beside its digest. [MASTER_PLAN.md#p1085.s3]",
+   "ok": true
+  },
+  "corpus-unmentioned": {
+   "answer": "unsolved: corpus (define): the corpus mentions 'zyxwv' in 6 sentences of 5 documents but no sentence defines it by a declared pattern",
+   "ok": false
+  },
   "hole-lattice-point": {
    "answer": "unsolved: hole (lattice-point): the given point is a lattice point: distance 0, so it sits in no deep hole and has no Niemeier type however long it is read",
    "ok": false
@@ -46,7 +102,7 @@
    "ok": false
   },
   "nearest-address-junction": {
-   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin)",
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is <reply>`",
    "ok": true
   },
   "nearest-address-moved": {
@@ -60,9 +116,94 @@
   "nearest-address-uncertified": {
    "answer": "nearest to harmonics:perfect_fifth moved on 2 coordinates by 2 (codeword 102) among the 142 carriers of the address table: harmonics:perfect_fifth (|q-c|^2 = 8/1), harmonics:octave (|q-c|^2 = 24189306976481/274877906944), harmonics:perfect_fourth (|q-c|^2 = 8151589211050108069361089/77633639847061371224064); the guarded read refuses (no rung certifies the point), so the head, harmonics:perfect_fifth, is the strict nearest by scan but no margin is certified",
    "ok": true
+  },
+  "nearest-tie-confirmed": {
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? yes) leave 1 of the 2 carriers of the head: physics:albedo -- a reply never moves the answer off the scan's head (GLM.NearestQuestion.after_least); if the replies are true of the carrier meant, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant), and the confirming reply agrees",
+   "ok": true
+  },
+  "nearest-tie-contradicted": {
+   "answer": "unsolved: nearest (contradicted): the head of the ranking is {physics:absorptance, physics:albedo}, and the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? no) leave no member: some reply is false of the carrier meant, or the carrier meant is not in the head (GLM.NearestQuestion.outside_never_confirmed); the GLM reports the contradiction rather than choose",
+   "ok": false
+  },
+  "nearest-tie-no-tie": {
+   "answer": "unsolved: nearest (no-tie): the head of the ranking is the single carrier chemistry:C, so there is no tie for a reply to resolve (GLM.NearestQuestion.head_card_le_one_iff)",
+   "ok": false
+  },
+  "nearest-tie-question": {
+   "answer": "nearest to the given point among the 142 carriers of the address table: mathematics:golay_codeword_0 (|q-c|^2 = 0/1), mathematics:hexacode_word_0 (|q-c|^2 = 0/1), mathematics:high_denominator_2x3 (|q-c|^2 = 142942917478/940839860961), mathematics:axis_root_e0 (|q-c|^2 = 1/1), physics:angle (|q-c|^2 = 1/1); the guarded read refuses (no rung certifies the point), so the first 2 are at one distance (mathematics:golay_codeword_0, mathematics:hexacode_word_0) but no margin is certified; to separate them, the GLM asks: What is its field order? (2: mathematics:golay_codeword_0; 4: mathematics:hexacode_word_0) -- reply as the next turn, or ask `nearest to 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 given attr:field_order is <reply>`",
+   "ok": true
+  },
+  "nearest-tie-reply": {
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no) leave 1 of the 2 carriers of the head: physics:albedo -- a reply never moves the answer off the scan's head (GLM.NearestQuestion.after_least); if the replies are true of the carrier meant, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant); to confirm, the GLM asks: Is it exactly physics:albedo? (yes: physics:albedo; no: no member (a contradiction)) -- a carrier meant outside the head is never confirmed (GLM.NearestQuestion.outside_never_confirmed); reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is no; confirm:physics:albedo is <reply>`",
+   "ok": true
+  },
+  "sequence-fibonacci": {
+   "answer": "A000045 — The Fibonacci numbers: F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2): your terms are its terms from position 1 (counting the first stored term as 0); it starts 0 and continues 13, 21, 34, 55. [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item glm_wheels_bundle) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (IntakeChecks/NextTerm, IntakeChecks/SporadicOrderCheck, Wheels/IntegerWheel, Wheels/SporadicOrders)]",
+   "ok": true
+  },
+  "sequence-next-catalan": {
+   "answer": "132 — the next term of A000108 (Catalan numbers: C(n) = C(2n,n)/(n+1)), the only sequence on the wheel that starts 1, 1, 2, 5, 14, 42 and runs past it. [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item glm_wheels_bundle) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (IntakeChecks/NextTerm, IntakeChecks/SporadicOrderCheck, Wheels/IntegerWheel, Wheels/SporadicOrders)]",
+   "ok": true
+  },
+  "sequence-next-junction": {
+   "answer": "unsolved: sequence (NOT_ON_THE_WHEEL): Give at least 3 terms of the sequence; 2 is too few to say what comes next.",
+   "ok": false
+  },
+  "sequence-unheld": {
+   "answer": "unsolved: sequence (NOT_ON_THE_WHEEL): No sequence on the wheel holds the terms 9, 17, 4, 1000, 3 (its 161 entries are audited OEIS sequences and the 26 sporadic groups); nothing is guessed.",
+   "ok": false
+  },
+  "study-card": {
+   "answer": "LEECH_SHELLS_STUDY (Phase 164) — The Leech shells from the lattice's definition — the shapes proved, every shell counted from the Golay census; phase 164; status closed; faculty unknown; last altered 31 October 2026; Question: Can the GLM define the Leech lattice by Conway's construction from the Golay code, prove the shapes of its minimal vectors from that definition, and count every shell from the Golay census alone — checked against the theta series, which uses no Golay code — instead of reading the shells from a stored table?; Verdict: Yes. The minimal shapes are proved in Lean from Conway's definition, and every shell is counted from the Golay census walked from the generator, agreeing with the theta series on every shell through norm 14; the stored table's norm-12 shell was wrong and is corrected.; Deciding figure: 6 of 6 marks; the weight census `1, 759, 2576, 759, 1` walked from the generator; 8 of 8 shells agreeing with the theta series `E₄³ − 720Δ` through norm 14; the norm-12 shell 34,408,430,950 → 34,417,656,000.; Recomputed by: `glm_universal.reasoning.leech_shells.shell_report`; Marks: 6 declared (L1, S1, S2, S3, T1, F1); met 6; Builds on: LLVQ_TABLE_STUDY, TOOL_MACHINE_STUDY; Built on by: LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY; Also links to: GLM_ACADEMIC_PAPER, LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY, PI_MACHINE_STUDY; Code: reasoning/leech_shells.py, reasoning/llvq.py, substrate/leech2.py; Tests: test_leech_shells.py; Lean missing: LeechMachine, LeechShells, ToolMachine; Prose: studies/LEECH_SHELLS_STUDY.md",
+   "ok": true
+  },
+  "study-unknown": {
+   "answer": "unsolved: study (NOTHING_IN_THE_MANIFESTS): no study is named 'zzqx': the study manifests hold no such id (try a term search: \"which studies bear on ...\")",
+   "ok": false
+  },
+  "tool-arc-plan-search": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
+  },
+  "tool-conjecture-refuted": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
+  },
+  "tool-conjecture-survives": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
+  },
+  "tool-derive-law": {
+   "answer": "unsolved: verify: unknown concept 'is'; did you mean ['as', 'cs', 'ds', 'es', 'fs']?",
+   "ok": false
+  },
+  "tool-derive-not-a-law": {
+   "answer": "unsolved: verify: unknown concept 'is'; did you mean ['as', 'cs', 'ds', 'es', 'fs']?",
+   "ok": false
+  },
+  "tool-leech-norm-12": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
+  },
+  "tool-rule30-centre": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
+  },
+  "tool-rule30-claim-open": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
+  },
+  "tool-rule30-claim-refuted": {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus', 'tool', 'study', 'sequence'].",
+   "ok": false
   }
  },
  "new_cases": [
+  "corpus-address",
+  "corpus-address-phrase",
+  "corpus-continue",
+  "corpus-define",
+  "corpus-unmentioned",
   "hole-lattice-point",
   "hole-malformed",
   "hole-octad-pair",
@@ -72,11 +213,32 @@
   "nearest-address-junction",
   "nearest-address-moved",
   "nearest-address-point",
-  "nearest-address-uncertified"
+  "nearest-address-uncertified",
+  "nearest-tie-confirmed",
+  "nearest-tie-contradicted",
+  "nearest-tie-no-tie",
+  "nearest-tie-question",
+  "nearest-tie-reply",
+  "sequence-fibonacci",
+  "sequence-next-catalan",
+  "sequence-next-junction",
+  "sequence-unheld",
+  "study-card",
+  "study-unknown",
+  "tool-arc-plan-search",
+  "tool-conjecture-refuted",
+  "tool-conjecture-survives",
+  "tool-derive-law",
+  "tool-derive-not-a-law",
+  "tool-leech-norm-12",
+  "tool-rule30-centre",
+  "tool-rule30-claim-open",
+  "tool-rule30-claim-refuted"
  ],
  "present": 202,
  "same_status": 202,
- "same_text": 199,
- "source_digest": "45a44739f22bd51d63a9951249ea1e06219aa77d1a1bb293e8b66f6f6c01c197",
+ "same_text": 190,
+ "source_digest": "54a7bfb7b2ba769afc8105154cc7bcdbce5f588d780df64a1eaf9ccb6e1663f2",
+ "status_changed": [],
  "undeclared": []
 }

@@ -1,7 +1,9 @@
 """``glm_universal.reasoning.quoted_measurements_study`` -- the marks of
 ``studies/QUOTED_MEASUREMENTS_STUDY.md`` (Phase 174).
 
-*Created 20 October 2026.*
+*Created 20 October 2026.  Last altered 31 October 2026 (repository check:
+Q5 looks for ``evaluation/replay.py`` and ``GLM.py`` where the tree now keeps
+them, under ``src/``, instead of at the pre-reorganisation paths).*
 
 What is measured
 ----------------
@@ -133,10 +135,15 @@ def compute() -> Dict[str, object]:
     closure = ([p.relative_to(C.L.REPOSITORY_ROOT).as_posix()
                 for p in C.check_closure(replay)] if replay else [])
     unit = plan.get("replay")
+    # The paths as the tree lays them out (since the October 2026
+    # reorganisation the package and ``GLM.py`` live under ``src/``).
+    replay_rel = (qm.PACKAGE_ROOT / "evaluation" / "replay.py").resolve() \
+        .relative_to(C.L.REPOSITORY_ROOT).as_posix()
+    cli_rel = (qm.PACKAGE_ROOT.parent / "GLM.py").resolve() \
+        .relative_to(C.L.REPOSITORY_ROOT).as_posix()
     q5 = {"declared": replay is not None,
-          "closure_replay": "glm_universal/evaluation/replay.py"
-          in closure,
-          "closure_cli": "GLM.py" in closure,
+          "closure_replay": replay_rel in closure,
+          "closure_cli": cli_rel in closure,
           "state": unit.state if unit else "absent",
           "output_tail": (unit.recorded or {}).get("output_tail", "")
           if unit else ""}

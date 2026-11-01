@@ -1,29 +1,41 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '8 of 8 marks; improper queries 361 right, 0 wrong of 720 (Phase 178: 3 right); at three
-  demonstrations 179 of 180; Phase 178 answers changed 0 of 361; outside the families 0 wrong of 480.'
+  demonstrations 179 of 180; Phase 178 answers changed 0 of 361; outside the families 0 wrong of 480.
+  Re-measured 31 October 2026 on the rebuilt query generator (§7.5): 8 of 8 marks; improper 354 right,
+  0 wrong of 720; 174 of 180 at three demonstrations; 0 of 362 changed; outside 0 wrong of 480.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/frame_plane.py
+  - reasoning/frame_plane_study.py
+  - reasoning/improper_frame_study.py
+  - runtime/toolbox.py
   lean:
   - AxiomAuditAll
   - LorentzImproper
+  lean_held:
+  - LorentzImproper
+  lean_missing:
   - LorentzPlane
+  missing: []
   prose: IMPROPER_FRAME_STUDY.md
-  test:
-  - test_improper_frame.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: IMPROPER_FRAME_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -31,16 +43,34 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - I1
+  - I2
+  - I3
+  - I4
+  - I5
+  - I6
+  - L
+  - T
+  met:
+  - I1
+  - I2
+  - I3
+  - I4
+  - I5
+  - I6
+  - L
+  - T
   missed: []
 perturbations: []
-phase: 178
-predecessors: []
+phase: 179
+predecessors:
+- COLOUR_INDUCTION_STUDY
 question: Can `tool frame` in 1+2 dimensions answer a reflection, a time reversal or their compositions
   with Lorentz maps, which Phase 178 refused as outside its families, without a single wrong answer and
   without changing any answer it already gave?
 recomputed_by: '`glm_universal.reasoning.improper_frame_study.improper_frame_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -66,7 +96,8 @@ sections:
 - anchor: in-one-paragraph
   heading: In one paragraph
 status: closed
-successors: []
+successors:
+- IMPROPER_UNITS_STUDY
 superseded_by: ''
 supersedes: []
 title: Improper maps in `tool frame` — reflections, time reversal, and the four components of the Lorentz

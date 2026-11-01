@@ -1,0 +1,137 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 44 records over 42 filed items and 2 local-only files; 10 open (4 triaged, 2 study drafted,
+  1 tested, 3 Lean written) and 34 finished (21 absorbed, 13 closed); 0 check errors; 6 parts installed
+  provisionally in 16 files, 0 absorbed without a build record; 2 acceptance decisions recorded and 21
+  absorptions predating them; 0 items Lean verified (no build record yet); 24 in-place runs, 18 pass and
+  6 fail; 8 wheels surveyed with 25 Lean obligations.
+directives:
+- D22
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - constants.py
+  - corpus/yaml.py
+  - engineering/wheels.py
+  - evaluation/question_set_b_cases.py
+  - intake/actions.py
+  - intake/fallback_tests.py
+  - intake/gates.py
+  - intake/staged_reports.py
+  - lean_check.py
+  - migration/state.py
+  - reasoning/ops_ladder.py
+  - reasoning/pipeline_kit_crosscheck.py
+  - reasoning/vision_stack.py
+  - semantics/export.py
+  - tools.py
+  - wheels/__init__.py
+  lean:
+  - AxiomAuditAll
+  - GolayDeepHole
+  - HypothesisEngine/NeedsWheel
+  - Wheels/CentWheels
+  - Wheels/IntegerWheel
+  - Wheels/SporadicOrders
+  lean_held:
+  - GolayDeepHole
+  lean_missing: []
+  missing: []
+  prose: INTAKE_PIPELINE_STUDY.md
+  test:
+  - test_intake.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: INTAKE_PIPELINE_STUDY
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - N1
+  - N2
+  - N3
+  - N4
+  - N5
+  - N6
+  - N7
+  - N8
+  - N9
+  - N10
+  met:
+  - N1
+  - N2
+  - N3
+  - N4
+  - N5
+  - N6
+  - N7
+  - N8
+  - N9
+  - N10
+  missed: []
+perturbations: []
+phase: 185
+predecessors: []
+question: Can everything the owner supplies in `source_material/` be filed as open (`ToDo/`) or finished
+  (`done/`) from the records, with one ledger record per item, and moved towards absorption only when
+  each stage's evidence exists — a study whose manifest is in step with it, tests that pass against the
+  code as it now stands, Lean files in the audited build, the owner's passing build record for those files
+  and everything they import, a finished measurement accepted against the study's own declared criterion,
+  tested modules — so that a check fails whenever a record claims more than the tree holds?
+recomputed_by: '`glm_universal.intake.actions.intake_report`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-the-owner-asked-for
+  heading: 1. What the owner asked for
+- anchor: 2-the-objects
+  heading: 2. The objects
+- anchor: 3-the-marks
+  heading: 3. The marks
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The intake pipeline — supplied material, filed and gated
+verdict: 'Yes. All 42 supplied items and 2 local-only files have one record each: 10 are open in `ToDo/`
+  and 34 are finished in `done/`, 21 absorbed and 13 closed with a reason and evidence; the check passes
+  with 0 errors, and each gate refuses a scratch record that lacks its evidence, including a promotion
+  to Lean verified without a matching build record, a draft or unaccepted measurement, a stale test pass
+  and a study without its manifest in step. No item reaches Lean verified in this checkout, because the
+  owner''s build has not yet written that record; the two wheel items wait at Lean written with their
+  acceptance decisions recorded against their studies'' declared criteria, and by the owner''s decision
+  their 6 parts are installed in the package provisionally (16 files, listed in the register of provisional
+  wheels, every answer from them marked), not absorbed; the 21 earlier absorptions are marked as predating
+  acceptance decisions. Of 24 in-place runs of the supplied items'' scripts at filing, 18 pass and 6 fail;
+  the failures are five missing or changed dependencies and one tautology the item''s own suite flags,
+  not wrong answers.'
+wobble_deps: []

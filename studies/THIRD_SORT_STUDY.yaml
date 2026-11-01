@@ -1,42 +1,44 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 28 of 28 say cases as declared (0 of 28 before the round); battery 1116 of 1116 terms
   read back, 1116 distinct sentences; 21 of 21 dialect programs inside; 63 of 63 dialect cases equal CPython
   (0 of 63 before), 63 scripts verified and 63 mutants rejected; battery 0 wrong of 2830 answered; 10
   of 10 marks met.
-directives:
-- D1
-- D2
-- D3
-- D4
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/python_speech_cases
-  - evaluation/third_sort_cases
-  - reasoning/python_containers
-  - reasoning/python_speech
-  - reasoning/reverse_tct
-  - reasoning/reverse_tct_script
-  - reasoning/reverse_tct_seq
-  - runtime/third_sort_report
-  - tests/test_third_sort
+  - evaluation/python_speech_cases.py
+  - evaluation/third_sort_cases.py
+  - reasoning/python_containers.py
+  - reasoning/python_speech.py
+  - reasoning/reverse_tct.py
+  - reasoning/reverse_tct_script.py
+  - reasoning/reverse_tct_seq.py
+  - runtime/third_sort_report.py
+  - tools.py
   lean:
   - ThirdSort
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: THIRD_SORT_STUDY.md
   test:
   - test_third_sort.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: THIRD_SORT_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -48,12 +50,16 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 68
-predecessors: []
+phase: 94
+predecessors:
+- PYTHON_SPEECH_STUDY
+- REVERSE_TCT_STUDY
 question: Can the reverse grammar speak and read back strings, tuples and ranges — a third sort beside
   numbers and Golay masks, with count-first literals — and can the Python dialect answer string methods,
   list literals and dict literals exactly, refusing every mutation by name?
 recomputed_by: '`glm_universal.runtime.third_sort_report.third_sort_report`'
+related:
+- ROADMAP_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -77,7 +83,8 @@ sections:
 - anchor: 7-re-running-it
   heading: 7. Re-running it
 status: closed
-successors: []
+successors:
+- IMPERATIVE_GRAMMAR_STUDY
 superseded_by: ''
 supersedes: []
 title: 'The third sort: strings, tuples and ranges in the reverse grammar, and the dialect widened to

@@ -1,0 +1,8 @@
+range r | unknown weights | conserved on rows 0..60 | coboundaries | first T with no non-trivial law
+      1 |               1 |                       0 |            0 | 1
+      2 |               3 |                       1 |            1 | 2
+      3 |               7 |                       3 |            3 | 4
+      4 |              15 |                       7 |            7 | 11
+      5 |              31 |                      15 |           15 | 26
+      6 |              63 |                      31 |           31 | 32
+Every weight conserved on those rows is a coboundary: no non-trivial conservation law of range <= 6 in the seed run (Lean: seed_run_no_conservation_law).

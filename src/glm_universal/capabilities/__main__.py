@@ -1,9 +1,11 @@
 """Run the capability probes from the command line.
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.capabilities
-PYTHONPATH=. python3 -m glm_universal.capabilities --area reals
+PYTHONPATH=src python3 -m glm_universal.capabilities
+PYTHONPATH=src python3 -m glm_universal.capabilities --area reals
 ```
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

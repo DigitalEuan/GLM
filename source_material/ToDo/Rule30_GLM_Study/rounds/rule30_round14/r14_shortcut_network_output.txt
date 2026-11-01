@@ -1,0 +1,53 @@
+Round 14 shortcut-network study, N = 4194304 bits per sequence
+
+EXACT predictions for a pattern-free (fair-coin) sequence (enumeration of all windows):
+  block lens  d2 mix 0.00024 0.18530 0.62891 0.18530 0.00024 ; return-in-2 0.000244
+  slide lens  d2 mix 0.00044 0.18485 0.62936 0.18508 0.00028 ; return-in-2 0.000353
+  most likely network point has probability 0.000244 (uniform would be 0.000244); least likely 0.000244
+
+Lens: block   (z-scores against 40 independent fair-coin reference walks)
+  rule30   | z(points)=    +0.5 z(hops)=    -0.5 z(norms)=    -0.9 z(pairs)=    -1.1 z(return2)=    +1.6 | return-in-2 0.00029 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.186 0.628 0.186 0.000 | consistent with the no-pattern prediction
+  prng     | z(points)=    +1.7 z(hops)=    +0.0 z(norms)=    -0.8 z(pairs)=    -0.8 z(return2)=    -0.2 | return-in-2 0.00023 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.628 0.186 0.000 | consistent with the no-pattern prediction
+  sqrt2    | z(points)=    +0.6 z(hops)=    -1.5 z(norms)=    -0.2 z(pairs)=    +2.1 z(return2)=    +5.2 | return-in-2 0.00042 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.629 0.186 0.000 | PATTERN DETECTED
+  lfsr31   | z(points)=   +11.1 z(hops)=    +2.1 z(norms)=   +33.9 z(pairs)=  +257.0 z(return2)=    +8.1 | return-in-2 0.00053 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.001 0.189 0.623 0.187 0.000 | PATTERN DETECTED
+  thue     | z(points)=+1529275.5 z(hops)=+1724873.9 z(norms)=+1751371.7 z(pairs)=+3061587.1 z(return2)= +9227.3 | return-in-2 0.33330 (pred 0.00024) | points 6, hop vectors 5 | d2 mix 0.083 0.583 0.250 0.083 0.000 | PATTERN DETECTED
+  fib      | z(points)=+442309.6 z(hops)=+177106.7 z(norms)=+28723.4 z(pairs)=+19021.3 z(return2)=    -6.5 | return-in-2 0.00000 (pred 0.00024) | points 23, hop vectors 45 | d2 mix 0.000 0.418 0.582 0.000 0.000 | PATTERN DETECTED
+  period7  | z(points)=+1285976.5 z(hops)=+984962.9 z(norms)=+14984.2 z(pairs)=+11598.9 z(return2)=    -6.5 | return-in-2 0.00000 (pred 0.00024) | points 7, hop vectors 7 | d2 mix 0.000 0.000 0.714 0.286 0.000 | PATTERN DETECTED
+
+Lens: block+gray (GLM byte-wise Gray map before snapping)   (z-scores against 40 independent fair-coin reference walks)
+  rule30   | z(points)=    -0.6 z(hops)=    +0.4 z(norms)=    -0.6 z(pairs)=    +0.1 z(return2)=    +1.2 | return-in-2 0.00029 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.184 0.630 0.185 0.000 | consistent with the no-pattern prediction
+  prng     | z(points)=    +1.1 z(hops)=    -0.9 z(norms)=    -0.8 z(pairs)=    -1.3 z(return2)=    -0.3 | return-in-2 0.00023 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.186 0.628 0.185 0.000 | consistent with the no-pattern prediction
+  sqrt2    | z(points)=    +0.8 z(hops)=    -0.1 z(norms)=    +2.0 z(pairs)=    +0.8 z(return2)=    -0.9 | return-in-2 0.00021 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.186 0.628 0.185 0.000 | consistent with the no-pattern prediction
+  lfsr31   | z(points)=    +7.3 z(hops)=    +3.8 z(norms)=   +30.6 z(pairs)=  +608.0 z(return2)=   +10.3 | return-in-2 0.00065 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.001 0.189 0.626 0.184 0.000 | PATTERN DETECTED
+  thue     | z(points)=+2849324.9 z(hops)=+3133245.7 z(norms)=+86288911.6 z(pairs)=+8236232713.7 z(return2)=+12425.7 | return-in-2 0.48119 (pred 0.00024) | points 3, hop vectors 4 | d2 mix 0.532 0.468 0.000 0.000 0.000 | PATTERN DETECTED
+  fib      | z(points)=+621268.1 z(hops)=+310881.1 z(norms)=+110333.3 z(pairs)=+187946.5 z(return2)=    -6.4 | return-in-2 0.00000 (pred 0.00024) | points 18, hop vectors 35 | d2 mix 0.013 0.512 0.475 0.000 0.000 | PATTERN DETECTED
+  period7  | z(points)=+1066949.9 z(hops)=+1251514.7 z(norms)=+18720.6 z(pairs)=+16125.2 z(return2)=    -6.4 | return-in-2 0.00000 (pred 0.00024) | points 7, hop vectors 7 | d2 mix 0.000 0.000 0.714 0.286 0.000 | PATTERN DETECTED
+
+Lens: slide   (z-scores against 40 independent fair-coin reference walks)
+  rule30   | z(points)=    +0.2 z(hops)=    +0.1 z(norms)=    +0.0 z(pairs)=    +0.0 z(return2)=    +1.3 | return-in-2 0.00037 (pred 0.00035) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.629 0.185 0.000 | consistent with the no-pattern prediction
+  prng     | z(points)=    -0.7 z(hops)=    -1.0 z(norms)=    -0.7 z(pairs)=    -0.1 z(return2)=    +0.5 | return-in-2 0.00036 (pred 0.00035) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.630 0.185 0.000 | consistent with the no-pattern prediction
+  sqrt2    | z(points)=    -1.0 z(hops)=    -0.9 z(norms)=    +1.4 z(pairs)=    +1.9 z(return2)=    -1.6 | return-in-2 0.00033 (pred 0.00035) | points 4096, hop vectors 4096 | d2 mix 0.000 0.184 0.629 0.186 0.000 | consistent with the no-pattern prediction
+  lfsr31   | z(points)=  +104.3 z(hops)=   +52.4 z(norms)=  +502.5 z(pairs)=  +522.4 z(return2)=   +36.3 | return-in-2 0.00088 (pred 0.00035) | points 4096, hop vectors 4096 | d2 mix 0.001 0.187 0.628 0.184 0.000 | PATTERN DETECTED
+  thue     | z(points)=+3186775.4 z(hops)=+6436231.9 z(norms)=+160645.9 z(pairs)=+206500.7 z(return2)=   -23.8 | return-in-2 0.00000 (pred 0.00035) | points 64, hop vectors 37 | d2 mix 0.000 0.042 0.583 0.375 0.000 | PATTERN DETECTED
+  fib      | z(points)=+8292573.4 z(hops)=+8887697.5 z(norms)=+11478219.2 z(pairs)=+25994442.8 z(return2)=   -23.8 | return-in-2 0.00000 (pred 0.00035) | points 23, hop vectors 25 | d2 mix 0.000 0.000 0.361 0.562 0.077 | PATTERN DETECTED
+  period7  | z(points)=+24106438.5 z(hops)=+27840893.4 z(norms)=+16250.3 z(pairs)=+598301.1 z(return2)=   -23.8 | return-in-2 0.00000 (pred 0.00035) | points 7, hop vectors 7 | d2 mix 0.000 0.143 0.714 0.143 0.000 | PATTERN DETECTED
+
+Tie-break check: the GLM's own coset-leader table (Decoder.lean) instead of min-value leaders
+ lens block:
+  rule30   | z(points)=    +0.6 z(hops)=    +0.9 z(norms)=    -1.6 z(pairs)=    -0.0 z(return2)=    -1.0 | return-in-2 0.00021 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.628 0.186 0.000 | consistent with the no-pattern prediction
+  prng     | z(points)=    +3.9 z(hops)=    -0.0 z(norms)=    -0.4 z(pairs)=    +0.6 z(return2)=    +0.7 | return-in-2 0.00027 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.186 0.629 0.184 0.000 | consistent with the no-pattern prediction
+  sqrt2    | z(points)=    +0.4 z(hops)=    -3.0 z(norms)=    -0.7 z(pairs)=    -1.0 z(return2)=    +0.6 | return-in-2 0.00026 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.630 0.185 0.000 | consistent with the no-pattern prediction
+  lfsr31   | z(points)=   +12.7 z(hops)=    +1.8 z(norms)=   +45.5 z(pairs)=  +736.1 z(return2)=    +8.6 | return-in-2 0.00056 (pred 0.00024) | points 4096, hop vectors 4096 | d2 mix 0.001 0.188 0.625 0.186 0.000 | PATTERN DETECTED
+ lens slide:
+  rule30   | z(points)=    -0.1 z(hops)=    +0.3 z(norms)=    +1.7 z(pairs)=    +1.3 z(return2)=    +2.1 | return-in-2 0.00043 (pred 0.00039) | points 4096, hop vectors 4096 | d2 mix 0.001 0.185 0.629 0.185 0.000 | consistent with the no-pattern prediction
+  prng     | z(points)=    -0.6 z(hops)=    -0.7 z(norms)=    -0.0 z(pairs)=    +0.4 z(return2)=    -0.7 | return-in-2 0.00037 (pred 0.00039) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.630 0.185 0.000 | consistent with the no-pattern prediction
+  sqrt2    | z(points)=    -0.3 z(hops)=    +0.6 z(norms)=    +0.8 z(pairs)=    +1.1 z(return2)=    -0.9 | return-in-2 0.00037 (pred 0.00039) | points 4096, hop vectors 4096 | d2 mix 0.000 0.185 0.629 0.186 0.000 | consistent with the no-pattern prediction
+  lfsr31   | z(points)=   +90.4 z(hops)=   +46.2 z(norms)=  +303.6 z(pairs)=  +269.8 z(return2)=   +27.0 | return-in-2 0.00094 (pred 0.00039) | points 4096, hop vectors 4096 | d2 mix 0.001 0.187 0.627 0.184 0.000 | PATTERN DETECTED
+
+Slide lens, return-in-2 events in 16 consecutive segments of 262144 steps:
+  rule30: 167 88 105 97 76 93 78 71 98 99 127 80 78 135 77 76
+  rule30 z-scores: +4.3 -0.2 +0.7 +0.3 -0.9 +0.0 -0.8 -1.2 +0.3 +0.4 +2.0 -0.7 -0.8 +2.4 -0.9 -0.9
+  fair-coin reference segments: mean 92.2, sd 17.5, min 46, max 157 (over 1024 segments); reference segments >= rule30's first segment: 0 of 1024
+  out-of-sample: rule30 after the first segment has return-in-2 rate 0.000350 vs the exact prediction 0.000353
+
+(statistics: chi-square of points / hop vectors / hop norms / consecutive norm pairs against the exact prediction, and the return-in-2 rate; each converted to a z-score against the reference walks; 'PATTERN DETECTED' if some |z| > 5.  elapsed 86s)

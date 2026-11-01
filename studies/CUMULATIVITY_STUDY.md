@@ -2,12 +2,7 @@
 
 ## Tier 0 — the coarse read
 
-**Question.** The information-loss round found a real design flaw by asking
-whether a layer refines the one below it, and the flaw was reported rather than
-quietly patched. Can that question be turned from an inspection anyone might
-run into a condition every layer family has to satisfy before it ships — and
-does the rule, once written down, keep a cumulativity failure distinct from a
-conflation, whose remedy is different?
+**Question.** The information-loss round found a real design flaw by asking whether a layer refines the one below it, and the flaw was reported rather than quietly patched. Can that question be turned from an inspection anyone might run into a condition every layer family has to satisfy before it ships — and does the rule, once written down, keep a cumulativity failure distinct from a conflation, whose remedy is different?
 
 **Verdict.** Yes on both counts. Three declared layer families are checked here, seven refinement edges hold on their probe sets, two declared non-edges are witnessed, no shipped family carries a defect, and the conflations each rung inflicts are reported beside the edges as resolutions rather than as defects.
 
@@ -16,6 +11,8 @@ conflation, whose remedy is different?
 **Recomputed by.** `glm_universal.reasoning.cumulativity.cumulativity_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the wording is unchanged).*
 
 ---
 

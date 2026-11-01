@@ -2,13 +2,7 @@
 
 ## Tier 0 — the coarse read
 
-**Question.** Directive D13 lets a stalled result be re-read at a finer layer,
-and then constrains the practice: rank candidates by whether there is an
-**identifiable discarded quantity** at the coarse reading, not by how
-disappointing the original result was. Nothing implemented that clause. Can the
-whole standing set of stalled results be ranked by it, *before* the next
-re-reading, and does the ranking then say anything a list sorted by
-disappointment would not?
+**Question.** Directive D13 lets a stalled result be re-read at a finer layer, and then constrains the practice: rank candidates by whether there is an **identifiable discarded quantity** at the coarse reading, not by how disappointing the original result was. Nothing implemented that clause. Can the whole standing set of stalled results be ranked by it, *before* the next re-reading, and does the ranking then say anything a list sorted by disappointment would not?
 
 **Verdict.** Yes, and it changes the order. Eight stalled results are registered; one names a quantity the reading discarded and is licensed for a re-reading, two have already been recovered that way, one is a statement no reading settles, and four discarded nothing — so escalation is not licensed for them and each names what is needed instead.
 
@@ -17,6 +11,8 @@ disappointment would not?
 **Recomputed by.** `glm_universal.reasoning.review_sweep.review_sweep_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the wording is unchanged); its run commands now start from the repository root (`PYTHONPATH=src`).*
 
 ---
 
@@ -184,7 +180,7 @@ cases where the rule pointed at something and the something was there.
 
 ```
 python3 -m glm_universal.tools review                 # the register, ranked
-PYTHONPATH=. python3 GLM.py -q "report review sweep"
+PYTHONPATH=src python3 src/GLM.py -q "report review sweep"
 python3 -m pytest glm_universal/tests/test_review_sweep.py
 ```
 

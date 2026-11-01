@@ -673,7 +673,11 @@ def nearest_terms(prims: Sequence[str], tier: Optional[int] = None,
 def note_terms() -> List[List[str]]:
     """The bullet terms of the note's ten DevOps tiers, read from the
     supplied file (the control of mark O2)."""
-    text = (_ROOT / NOTE).read_text(encoding="utf-8-sig")
+    # Last altered 31 October 2026 (repository check): the note is a supplied
+    # item, found through constants.source_material_item.
+    from ..constants import source_material_item
+    text = source_material_item("devops_ladder/DevOps-Ladder.txt").read_text(
+        encoding="utf-8-sig")
     text = text.split("**How to use this", 1)[0]
     tiers: List[List[str]] = []
     for line in text.splitlines():

@@ -12,13 +12,15 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/reasoning/pcgs.py`](../glm_universal/reasoning/pcgs.py),
-tests [`glm_universal/tests/test_pcgs.py`](../glm_universal/tests/test_pcgs.py).
-Formal development: [`RequestProject/GLM/PCGS.lean`](../glm_lean/RequestProject/GLM/PCGS.lean).
-Sources: [`source_material/pcgs_wider_landscape_v4.txt`](../source_material/pcgs_wider_landscape_v4.txt),
-[`source_material/pcgs_wider_landscape.py`](../source_material/pcgs_wider_landscape.py),
-[`source_material/pcgs_glm_integration.py`](../source_material/pcgs_glm_integration.py).
-Run: `PYTHONPATH=. python3 -c "from glm_universal.reasoning import pcgs; print(pcgs.pcgs_report())"`
+*Last altered 31 October 2026 (repository check: 6 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`, the Lean tree under `src/lean/` and supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
+Code: [`glm_universal/reasoning/pcgs.py`](../src/glm_universal/reasoning/pcgs.py),
+tests [`glm_universal/tests/test_pcgs.py`](../src/glm_universal/tests/test_pcgs.py).
+Formal development: [`RequestProject/GLM/PCGS.lean`](../src/lean/RequestProject/GLM/PCGS.lean).
+Sources: [`source_material/pcgs_wider_landscape_v4.txt`](../source_material/done/pcgs_wider_landscape_v4.txt),
+[`source_material/pcgs_wider_landscape.py`](../source_material/done/pcgs_wider_landscape.py),
+[`source_material/pcgs_glm_integration.py`](../source_material/done/pcgs_glm_integration.py).
+Run: `PYTHONPATH=src python3 -c "from glm_universal.reasoning import pcgs; print(pcgs.pcgs_report())"`
 from the overlay root, or `python3 -m pytest glm_universal/tests/test_pcgs.py`
 (about a second).
 

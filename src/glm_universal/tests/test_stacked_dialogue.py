@@ -21,11 +21,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from glm_universal.constants import lean_file
+from glm_universal.lean_check import audited_or_held
+
 from glm_universal.reasoning import stacked_dialogue_study as sds
 from glm_universal.runtime import conversation as cv
 from glm_universal.runtime.conversation import Conversation
 
-_LEAN = (Path(__file__).resolve().parents[2] / "lean" / sds.LEAN_FILE)
+# in the build tree, or held in awaiting_recovery/ (STATUS.md, item 0)
+_LEAN = lean_file(sds.LEAN_FILE)
 _ALBEDO = "locate physics:albedo"                 # asks: mentions 'absorbed'?
 _ACOUSTIC = "locate physics:acoustic_absorption"  # asks: what is its unit?
 
@@ -40,6 +44,7 @@ def test_lean_file_states_the_theorems_without_sorry():
         assert f"theorem {name}" in text, name
     assert "sorry" not in text
     assert sds.lean_marks()["met"]
+    assert audited_or_held("RequestProject.GLM.StackedDialogue")
 
 
 def test_an_older_question_can_be_answered():

@@ -2,26 +2,17 @@
 
 ## Tier 0 — the coarse read
 
-**Question.** The deep-hole round stopped because its statistic could not tell
-the same hole from itself under a changed ensemble. Is that a property of the
-hole, or of the layer it was read at — and does escalating the reading, in the
-declared ladder below, cross the boundary?
+**Question.** The deep-hole round stopped because its statistic could not tell the same hole from itself under a changed ensemble. Is that a property of the hole, or of the layer it was read at — and does escalating the reading, in the declared ladder below, cross the boundary?
 
-**Verdict.** It was the layer. Escalating the reading takes the sanity count
-from **3 of 10** at the first round's cell to **10 of 10** — the gate — at the
-joint reading with 1920 starts, where the full query set comes out **40 of
-44** against 12 for the vertex-count baseline. The passing cell is the
-extension rung of §14, decided after the twelve pre-registered cells were
-measured, and is reported as an extension throughout; the best pre-registered
-cell is 9 of 10.
+**Verdict.** It was the layer. Escalating the reading takes the sanity count from **3 of 10** at the first round's cell to **10 of 10** — the gate — at the joint reading with 1920 starts, where the full query set is named **40 of 44** correctly against 12 for the vertex-count baseline. The passing cell is the extension rung of §14, decided after the twelve pre-registered cells were measured, and is reported as an extension throughout; the best pre-registered cell is 9 of 10.
 
-**Deciding figure.** The number of the ten reference holes that keep their own
-label under a bare seed change: 3 of 10 at `(L₁, 240)`, 9 of 10 at
-`(L₄, 960)`, 10 of 10 at `(L₄, 1920)`.
+**Deciding figure.** The number of the ten reference holes that keep their own label under a bare seed change: 3 of 10 at `(L₁, 240)`, 9 of 10 at `(L₄, 960)`, 10 of 10 at `(L₄, 1920)`.
 
 **Recomputed by.** `glm_universal.reasoning.deep_hole_escalation.deep_hole_escalation_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the verdict's later sentences, which the check had never read, reworded in the body's own words where they used words the body does not, with the meaning unchanged); its run commands now start from the repository root (`PYTHONPATH=src`).*
 
 ---
 
@@ -329,10 +320,9 @@ only declared non-exact operation is the digest of N1 (§6). The only
 non-enumerable step is the start offsets (§2).
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools escalation --write
-PYTHONPATH=. python3 GLM.py -q "report hole ladder" -c 1
-PYTHONPATH=. python3 -m glm_universal.corpus --write
+PYTHONPATH=src python3 -m glm_universal.tools escalation --write
+PYTHONPATH=src python3 src/GLM.py -q "report hole ladder" -c 1
+PYTHONPATH=src python3 -m glm_universal.corpus --write
 ```
 
 ---

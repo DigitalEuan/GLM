@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../../README.md`](../../../README.md) · **Study:**
 [`studies/CORPUS_KNOWLEDGE_STUDY.md`](../../../studies/CORPUS_KNOWLEDGE_STUDY.md)
@@ -47,18 +49,17 @@ pre-registered marks (nine in Phase 154, eight in Phase 155).
 ## Using it
 
 ```bash
-cd overlay
 python3 GLM.py -q "corpus define golay code"
 python3 GLM.py -q "corpus context of nrci at paragraph scale"
 python3 GLM.py -q "corpus words like decoder" --verify-tct
 python3 GLM.py -q "corpus continue a digest addresses"
 python3 GLM.py -q "corpus address of seven" --verify-tct
-PYTHONPATH=. python3 -m glm_universal.tools corpus-ask what is a syndrome
-PYTHONPATH=. python3 -m glm_universal.tools corpus-knowledge          # the stored marks
-PYTHONPATH=. python3 -m glm_universal.tools corpus-knowledge --write  # re-take them
-PYTHONPATH=. python3 -m glm_universal.tools corpus-definitions        # Phase 155's marks
-PYTHONPATH=. python3 -m glm_universal.tools friction                  # Phase 156's marks
-PYTHONPATH=. python3 -m glm_universal.tools friction-two              # Phase 157's marks
+PYTHONPATH=src python3 -m glm_universal.tools corpus-ask what is a syndrome
+PYTHONPATH=src python3 -m glm_universal.tools corpus-knowledge          # the stored marks
+PYTHONPATH=src python3 -m glm_universal.tools corpus-knowledge --write  # re-take them
+PYTHONPATH=src python3 -m glm_universal.tools corpus-definitions        # Phase 155's marks
+PYTHONPATH=src python3 -m glm_universal.tools friction                  # Phase 156's marks
+PYTHONPATH=src python3 -m glm_universal.tools friction-two              # Phase 157's marks
 ```
 
 The first call after the corpus moves re-reads the changed files and recounts
@@ -80,7 +81,7 @@ all of this.
   (positive pointwise mutual information without a logarithm).
 * **Additive.** The model of two disjoint collections is the sum of their
   models, and the order documents arrive in cannot change it — proved in
-  [`CorpusKnowledge.lean`](../../glm_lean/RequestProject/GLM/CorpusKnowledge.lean)
+  [`CorpusKnowledge.lean`](../../lean/RequestProject/GLM/CorpusKnowledge.lean)
   (`train_append`, `train_perm`) and checked on the real corpus by the study.
 * **Witnessed.** A count is positive exactly when some sentence carries the
   feature (`train_pos_iff`); `define` and `continue_text` name the sentence.

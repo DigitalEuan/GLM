@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 8 marks met; 164,051,805 pairs in 62 census groups with 28 distinct histograms;
@@ -12,14 +14,19 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/agree_channel_marks.py
   lean:
   - Agree
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: AGREE_CHANNEL_STUDY.md
   test:
   - test_agree_channel.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: AGREE_CHANNEL_STUDY
 junctions: []
 last_altered: ''
@@ -30,17 +37,34 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - G1
+  - G2
+  - G3
+  - G4
+  - G5
+  - G6
+  - G7
+  - G8
+  met:
+  - G1
+  - G2
+  - G3
+  - G4
+  - G5
+  - G6
+  - G7
+  - G8
   missed: []
 perturbations: []
-phase: 80
+phase: 81
 predecessors:
 - CONFIDENCE_FLOOR_STUDY
 question: Can the second reading (`agree`, two reads of one carrier) be given an exact channel measure,
   so that it joins the confidence-floor hunt, and what does it add where the decoder alone has no working
   floor?
 recomputed_by: '`glm_universal.reasoning.agree_channel_marks.agree_channel_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -56,7 +80,8 @@ sections:
 - anchor: 3-what-this-round-moved-and-what-it-leaves
   heading: 3. What this round moved, and what it leaves
 status: closed
-successors: []
+successors:
+- RATE_POSTERIOR_STUDY
 superseded_by: ''
 supersedes: []
 title: The second reading's channel — an exact measure for `agree`, and its place in the hunt

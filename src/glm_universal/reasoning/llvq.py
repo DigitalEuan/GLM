@@ -53,6 +53,12 @@ What this module does NOT do:
   gives the *classification* layer beside it.
 
 Everything is exact integer / Fraction arithmetic.
+
+*Last altered 31 October 2026 (repository check): the shell table is again
+derived as Phase 164 made it -- counted from the Golay census by
+``reasoning/leech_shells.py``, checked against the theta series and raising
+on a disagreement.  The reorganisation had brought back the earlier stored
+table, whose fifth entry (34,408,430,950) Phase 164 found wrong.*
 """
 
 from __future__ import annotations
@@ -65,6 +71,9 @@ from ..reasoning import analogy as an
 
 __all__ = [
     "LEECH_SHELLS",
+    "TOP_SHELL",
+    "ShellDisagreement",
+    "leech_shells",
     "shell_of",
     "shell_summary",
     "angular_search",
@@ -85,14 +94,48 @@ __all__ = [
 #: coefficient of theta_Lambda at q^n is the count of vectors of
 #: squared norm 8n (so the minimal vectors at norm^2 = 16 correspond to
 #: the q^2 coefficient of 196560).
-LEECH_SHELLS: Tuple[Tuple[int, int, str], ...] = (
-    (0, 1, "the origin"),
-    (16, 196560, "the minimal vectors (the kissing configuration)"),
-    (24, 16773120, "the second shell"),
-    (32, 398034000, "the third shell"),
-    (40, 4629381120, "the fourth shell"),
-    (48, 34408430950, "the fifth shell"),
-)
+#: The names of the shells, keyed by ``t`` (true norm ``2 t``, squared norm
+#: ``8 t`` in the Lambda convention used here).
+_SHELL_NAMES: Dict[int, str] = {
+    0: "the origin",
+    2: "the minimal vectors (the kissing configuration)",
+    3: "the second shell",
+    4: "the third shell",
+    5: "the fourth shell",
+    6: "the fifth shell",
+}
+
+#: The highest shell catalogued: true norm 12 (squared norm 48 here).
+TOP_SHELL = 6
+
+
+class ShellDisagreement(ValueError):
+    """The shells counted from the Golay census disagree with the theta
+    series; the catalogue refuses rather than hold either."""
+
+
+def leech_shells(top: int = TOP_SHELL) -> Tuple[Tuple[int, int, str], ...]:
+    """The catalogue ``(norm2, count, name)``, *derived*: every shell counted
+    from the lattice's definition over the Golay code's weight census
+    (:func:`glm_universal.reasoning.leech_shells.shells`) and checked against
+    the theta series (:func:`~glm_universal.reasoning.leech_shells.modular_shells`);
+    a disagreement raises :class:`ShellDisagreement`.  Empty shells (true norm
+    2) are left out, as the stored table always left them out."""
+    from . import leech_shells as ls
+    census = ls.shells(top)
+    theta = list(ls.modular_shells(top))
+    counts = [c for _, c in census]
+    if counts != theta:
+        raise ShellDisagreement(
+            f"llvq: the Golay census counts {counts} and the theta series "
+            f"{theta}")
+    return tuple((8 * t, c, _SHELL_NAMES.get(t, f"the shell of norm {2 * t}"))
+                 for t, c in census if c)
+
+
+#: Phase 164: the table is the derived catalogue.  The stored table it
+#: replaced had a wrong fifth entry (34,408,430,950 for 34,417,656,000).
+LEECH_SHELLS: Tuple[Tuple[int, int, str], ...] = leech_shells()
 
 
 def shell_summary() -> List[Dict[str, object]]:

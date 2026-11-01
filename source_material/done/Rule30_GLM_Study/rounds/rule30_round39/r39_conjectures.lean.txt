@@ -1,0 +1,46 @@
+-- Round 39: the hypothesis engine's hand-off to the prover (not part of the Lean build).
+-- Statements use the package's names (RequestProject/GLM/Rule30/LeftDiagonalPeriods.lean,
+-- WhiteDiagonals.lean).  Closed statements point to their theorems; open ones are sorry-guarded.
+
+namespace GLM.Rule30
+
+/-! ## Closed this round (proved in Lean, every index) -/
+-- white(D+2) ⟺ diagonals D and D+1 eventually coincide        : ldiag_white_iff_coincide
+--   (any row with a left edge)                                  : ldiagOf_white_iff_coincide
+-- no two adjacent white left diagonals                          : ldiag_no_two_consecutive_white
+-- a finite check closes a regime (4^Q + 1 diagonals)            : ldiag_regime_finite_check
+-- finitely many whites ⇒ left side periodic in D                : ldiag_periodic_in_D_of_finitely_many_white
+-- after every white diagonal another within 4^Q + 1             : ldiag_white_after_white
+-- infinitely many eventually white left diagonals               : ldiag_infinitely_many_white
+-- unbounded periods ⟺ odd white diagonals for every 2^m         : ldiag_periods_unbounded_iff
+
+/-! ## Open: To Do 45 in its sharpened form -/
+
+/-- H39-1 (open).  For every `m` some white left diagonal has an outer neighbour of odd parity
+over `2 ^ m`.  Equivalent to unbounded left-diagonal periods (`ldiag_periods_unbounded_iff`). -/
+theorem odd_white_for_every_period : ∀ m, ∃ w : ℕ, OddWhiteAt (2 ^ m) w := by
+  sorry
+
+/-! ## Measured beyond the automaton's reach (EMP: exact computation with the proved laws) -/
+
+/-- H39-2 (EMP, `scan_driver.py`).  The next eventually white left diagonal after 87866 is
+1420878968, and its outer parity is even (so the period 32 is kept there). -/
+theorem next_white_after_87866 :
+    EventuallyWhite (ldiag 1420878968) ∧
+      ∀ D : ℕ, 87866 < D → D < 1420878968 → ¬ EventuallyWhite (ldiag D) := by
+  sorry
+
+/-- H39-3 (EMP, conditional on one bit the automaton's transient decides).  Either the first
+period-64 left diagonal is 2107985255 (open bit 1 at 1420878968), or the whites continue at
+3340408059 (even), then 4989445007 or 8429393530 (both even). -/
+theorem first_period_64_dichotomy :
+    (¬ EvPer (ldiag 2107985255) 32) ∨ EventuallyWhite (ldiag 3340408059) := by
+  sorry
+
+end GLM.Rule30
+
+namespace GLM.HypothesisEngine
+-- Benchmarks (all closed): euler_dvd_iff, euler_composite_of_mod, fermat_five_not_prime,
+-- two_squares_law, moser_junction, moser_split, josephus_closed_form, gcd_trap_refuted,
+-- midpoint_bug_iff_overflow, midpoint_fixed_correct (Benchmarks.lean, BenchmarksData.lean).
+end GLM.HypothesisEngine

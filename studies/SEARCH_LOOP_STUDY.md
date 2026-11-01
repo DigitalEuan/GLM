@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 **What this document is.**
 [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) read the archive area by
 area for *exact claims* — counts, identities, bounds — and closed
@@ -37,14 +39,13 @@ undetermined. This study is that, and the measurement is the part the archive
 never had.
 
 The formal half is
-[`RequestProject/GLM/SearchLoop.lean`](../glm_lean/RequestProject/GLM/SearchLoop.lean),
+[`RequestProject/GLM/SearchLoop.lean`](../src/lean/RequestProject/GLM/SearchLoop.lean),
 the computational half is `glm_universal.reasoning.search_loop`, the test that
 pins the two against each other is
 `glm_universal/tests/test_search_loop.py`, and the report prints with
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report searchloop" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report searchloop" --verify-tct
 ```
 
 whose third column re-derives every figure below in a fresh interpreter

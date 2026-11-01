@@ -9,18 +9,18 @@
   "to_first": 0
  },
  "S1": {
-  "addressed": 23,
+  "addressed": 14,
   "asked": 61,
   "misbound": 0,
-  "replies": 258,
+  "replies": 255,
   "same_first": 61,
   "same_second": 61,
   "second_open": 61
  },
  "S2": {
-  "fit_both": 23,
-  "names_first": 23,
-  "to_newest": 23
+  "fit_both": 14,
+  "names_first": 14,
+  "to_newest": 14
  },
  "S3": {
   "answered": 61,
@@ -39,11 +39,12 @@
  },
  "S5": {
   "read": [],
-  "tried": 4683
+  "tried": 4977
  },
  "lean": {
   "declared": 16,
   "file": "RequestProject/GLM/StackedDialogue.lean",
+  "held": true,
   "met": true,
   "sorry": 0,
   "theorems": 16
@@ -60,7 +61,7 @@
  },
  "met": 8,
  "pairs": 21,
- "source_digest": "151e8876aeef2edb841cf39c08d67269a188028c6bc08d44f54303c96a03ae82",
+ "source_digest": "4a3f7a3572881db19b6c9b2a4d6d49f79a0ca7496550676b7d9309590d329687",
  "taken": 8,
  "ties": 21
 }

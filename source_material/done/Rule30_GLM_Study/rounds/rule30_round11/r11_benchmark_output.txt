@@ -1,0 +1,192 @@
+== D1 [frame] expected REJECT, got REJECT: PASS
+CLAIM  The center column observer can distinguish wheel 30 from wheel 86.
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  the centre column of the impulse run is invariant under the mirror (wheel r -> its mirror image, cell j -> -j), and the impulse is mirror-symmetric
+   WITNESS / REFERENCE  column 0 of wheels 30 and 86 agree at every t < 256 (computed) and for every t (Lean: GLM.Rule30.ecaColumn_mirror, seed_mirror; for 30/86: ecaColumn_eightySix_centre, centre_column_class)
+   NEXT TEST  move the observer off-centre: column 1 separates them (Lean: column_one_separates_mirror, column_one_identifies; 8 values suffice)
+   (computed from the register, matched to the Lean theorem)
+== D2 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  column 1 distinguishes wheel 30 from wheel 86
+   ANSWER  VERDICT  ACCEPT [EMP (finite witness computed here)]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  column 1 of wheel 30 and of wheel 86 from the impulse first differ at t = 2: 0 vs 1
+   NEXT TEST  none: a finite witness settles a claim of distinguishability
+   (computed from the register, matched to the Lean theorem)
+== D3 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  column 0 distinguishes wheel 30 from wheel 62
+   ANSWER  VERDICT  ACCEPT [EMP (finite witness computed here)]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  column 0 of wheel 30 and of wheel 62 from the impulse first differ at t = 5: 1 vs 0
+   NEXT TEST  none: a finite witness settles a claim of distinguishability
+   (computed from the register, matched to the Lean theorem)
+== D4 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  the wobble at column 0 equals the wobble at column 0
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  the gap D_0(N) - D_-0(N) is 0 for every N (Lean: chiralGap_centre)
+   NEXT TEST  none
+   (computed from the register, matched to the Lean theorem)
+== D5 [frame] expected REJECT, got REJECT: PASS
+CLAIM  the wobble at column 2 equals the wobble at column -2
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  a column and its mirror column agree only at the centre: the mirror maps column c of wheel 30 to column -c of wheel 86, not of wheel 30
+   WITNESS / REFERENCE  D_2(N) != D_-2(N) first at N = 6: -2 vs 0 (Lean: GLM.Rule30.chiralGap_first); the gap is wheel 30 minus wheel 86 at column 2 (chiralGap_eq_thirty_sub_eightySix)
+   NEXT TEST  measure the size of the gap: to N = 10^6 it stays within a random-walk range (r30_chiral_gap_c_N, EMP)
+   (computed from the register, matched to the Lean theorem)
+== D6 [frame] expected REJECT, got REJECT: PASS
+CLAIM  right diagonal 5 is balanced
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  a right diagonal is periodic, but periodicity does not force balance; only anti-periodic diagonals are forced to be balanced
+   WITNESS / REFERENCE  diagonal 5: least period 8, 3 black per period, frequency 3/8 (Lean: rdiag_five_not_half)
+   NEXT TEST  ask which diagonals are anti-periodic (r30_rdiag_D); infinitely many are (infinitely_many_balanced_rdiag)
+   (computed from the register, matched to the Lean theorem)
+== D7 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  right diagonal 7 is balanced
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  diagonal 7 is anti-periodic with half-period 16: |D(N)| <= 16 for every N and frequency 1/2 (Lean: wobble_antiPeriodic_bound, antiPeriodic_hasFrequencyHalf, rdiag_seven_bounded)
+   NEXT TEST  none
+   (computed from the register, matched to the Lean theorem)
+== D8 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  right diagonal 8 is balanced
+   ANSWER  VERDICT  ACCEPT [EMP (period and count computed; a periodic sequence balanced over a period has frequency 1/2)]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  diagonal 8: least period 32, 16 black per period (balanced, not anti-periodic)
+   NEXT TEST  none
+   (computed from the register, matched to the Lean theorem)
+== D9 [frame] expected REJECT, got REJECT: PASS
+CLAIM  rows 0..3 determine wheel 30
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  rows 0..3 never show every neighbourhood wheel 30's table needs
+   WITNESS / REFERENCE  2 wheels reproduce rows 0..3: [30, 62] (Lean: rows_three_do_not_identify: wheel 62)
+   NEXT TEST  show row 4: rows 0..4 determine wheel 30 (rows_identify_thirty)
+   (computed from the register, matched to the Lean theorem)
+== D10 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  rows 0..4 determine wheel 30
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  only wheel 30 reproduces rows 0..4 of the impulse run among the 128 wheels with f(000)=0 (Lean: rows_identify_thirty for T >= 4)
+   NEXT TEST  none
+   (computed from the register, matched to the Lean theorem)
+== D11 [frame] expected REJECT, got REJECT: PASS
+CLAIM  For almost every initial row the centre column has frequency 1/2, hence the seed's centre column has frequency 1/2
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  the seed is a single row of fair-coin measure 0; 'almost every row' says nothing about it
+   WITNESS / REFERENCE  Lean: bernoulliRow_seed_null, measure_theory_boundary, exists_row_with_biased_column
+   NEXT TEST  a seed-specific argument (SeedFSTypical is one sufficient one)
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D12 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  for almost every row the centre column is not eventually periodic
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  Lean: ae_column_frequency_half, ae_column_not_eventuallyPeriodic, ae_problems_one_and_two
+   NEXT TEST  none
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D13 [frame] expected REJECT, got REJECT: PASS
+CLAIM  the wobble arrow tells left from right
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  the arrow -sign D(N) is unchanged by the mirror, for every N, wheel, row and column
+   WITNESS / REFERENCE  Lean: observerArrow_mirror, observerArrow_eightySix
+   NEXT TEST  read an off-centre column instead (column_one_identifies)
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D14 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  the wobble arrow is reversed by swapping the colours
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  Lean: observerArrow_complement, observerArrow_oneThirtyFive
+   NEXT TEST  none
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D15 [frame] expected REJECT, got REJECT: PASS
+CLAIM  the right-edge zero boundary forces frequency 1/2
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  the right-white boundary alone does not force balance: the left half matters
+   WITNESS / REFERENCE  Lean: exists_row_with_biased_column (a right-white row whose centre column has frequency 1/3), column_inverse_exists, seed_unique_preimage
+   NEXT TEST  use the seed's left edge as well (both edges white): no theorem on file
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D16 [frame] expected REJECT, got REJECT: PASS
+CLAIM  every right diagonal is balanced
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  periodicity of a diagonal does not force balance
+   WITNESS / REFERENCE  Lean: rdiag_five_not_half (diagonal 5 has frequency 3/8)
+   NEXT TEST  ask for infinitely many instead (infinitely_many_balanced_rdiag)
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D17 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  infinitely many right diagonals are balanced
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  Lean: infinitely_many_balanced_rdiag, exists_antiPeriodic_rdiag
+   NEXT TEST  none
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D18 [frame] expected REJECT, got REJECT: PASS
+CLAIM  the centre column is eventually constant
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  a constant tail would make two adjacent columns eventually periodic
+   WITNESS / REFERENCE  Lean: centerCol_not_eventually_constant, column_not_eventually_constant
+   NEXT TEST  period 2 and higher are OPEN
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D19 [frame] expected REJECT, got REJECT: PASS
+CLAIM  two different columns are both eventually periodic
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  two distinct columns can never both be eventually periodic
+   WITNESS / REFERENCE  Lean: not_both_columns_periodic, seed_at_most_one_periodic_column
+   NEXT TEST  Problem 1 asks that the centre is not the (at most one) exception
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D20 [frame] expected ACCEPT, got ACCEPT: PASS
+CLAIM  whiteDiagonalCount n is odd for all n >= 2
+   ANSWER  VERDICT  ACCEPT [FORMAL]
+   MISSING HYPOTHESIS  none
+   WITNESS / REFERENCE  Lean: whiteDiagonalCount_odd, topMonomialConjecture_holds, center_anfDegree_eq (Round 8)
+   NEXT TEST  none
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D21 [frame] expected REJECT, got REJECT: PASS
+CLAIM  the ANF degree is 2n-1, so the centre bit is hard to compute
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  degree is a property of the map on all rows, not of its value on the seed; the all-white row has the same map and a periodic column
+   WITNESS / REFERENCE  Lean: map_properties_cannot_decide_periodicity, wholeCone_compatible_with_periodicity
+   NEXT TEST  a seed-specific argument
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== D22 [frame] expected OPEN, got OPEN: PASS
+CLAIM  Problem 1 is proved
+   ANSWER  VERDICT  OPEN [OPEN]
+   MISSING HYPOTHESIS  a seed-specific reason why the centre is not the one possibly periodic column
+   WITNESS / REFERENCE  proved: period 1 excluded (centerCol_not_eventually_constant), at most one periodic column (seed_at_most_one_periodic_column), equivalences problem1_iff_fsObservers_fail
+   NEXT TEST  exclude period 2 for the centre column
+   (a settled frame: the statement is open; the frame carries what is proved around it)
+== D23 [frame] expected OPEN, got OPEN: PASS
+CLAIM  the centre column has frequency 1/2
+   ANSWER  VERDICT  OPEN [OPEN]
+   MISSING HYPOTHESIS  a seed-specific genericity statement (e.g. SeedFSTypical)
+   WITNESS / REFERENCE  proved: P2 <=> D(N) = o(N) (problem2_iff_wobble); holds for almost every row; no finite certificate decides it (no_finite_certificate_problem2)
+   NEXT TEST  a bound D(N) = o(N) for the seed
+   (a settled frame: the statement is open; the frame carries what is proved around it)
+== H1 [heldout] expected REJECT, got REFUSE: FAIL
+CLAIM  the observer at the centre can tell apart wheel 30 and wheel 86
+   REFUSED refused: the claim is in no declared frame; frames: column C distinguishes wheel R from wheel S; the wobble at column C equals the wobble at column -C; right diagonal D is balanced; rows 0..T determine wheel 30; and the settled frames (almost every row ..., the arrow ..., right edge ..., every/infinitely many right diagonals ..., eventually constant, two columns periodic, whiteDiagonalCoun
+== H2 [heldout] expected REJECT, got REFUSE: FAIL
+CLAIM  the centre column of rule 30 and rule 86 differ somewhere
+   REFUSED refused: the claim is in no declared frame; frames: column C distinguishes wheel R from wheel S; the wobble at column C equals the wobble at column -C; right diagonal D is balanced; rows 0..T determine wheel 30; and the settled frames (almost every row ..., the arrow ..., right edge ..., every/infinitely many right diagonals ..., eventually constant, two columns periodic, whiteDiagonalCoun
+== H3 [heldout] expected REJECT, got REJECT: PASS
+CLAIM  the wobble arrow records chirality
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  the arrow -sign D(N) is unchanged by the mirror, for every N, wheel, row and column
+   WITNESS / REFERENCE  Lean: observerArrow_mirror, observerArrow_eightySix
+   NEXT TEST  read an off-centre column instead (column_one_identifies)
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== H4 [heldout] expected REJECT, got REJECT: PASS
+CLAIM  pinning the right half white gives balance
+   ANSWER  VERDICT  REJECT [FORMAL]
+   MISSING HYPOTHESIS  the right-white boundary alone does not force balance: the left half matters
+   WITNESS / REFERENCE  Lean: exists_row_with_biased_column (a right-white row whose centre column has frequency 1/3), column_inverse_exists, seed_unique_preimage
+   NEXT TEST  use the seed's left edge as well (both edges white): no theorem on file
+   (a settled frame: the verdict is a Lean theorem carried by the frame)
+== H5 [heldout] expected REJECT, got REFUSE: FAIL
+CLAIM  diagonal number 5 behind the right edge has frequency one half
+   REFUSED refused: the claim is in no declared frame; frames: column C distinguishes wheel R from wheel S; the wobble at column C equals the wobble at column -C; right diagonal D is balanced; rows 0..T determine wheel 30; and the settled frames (almost every row ..., the arrow ..., right edge ..., every/infinitely many right diagonals ..., eventually constant, two columns periodic, whiteDiagonalCoun
+== R1 [refuse] expected REFUSE, got REFUSE: PASS
+CLAIM  the centre column is normal in base 2
+   REFUSED refused: the claim is in no declared frame; frames: column C distinguishes wheel R from wheel S; the wobble at column C equals the wobble at column -C; right diagonal D is balanced; rows 0..T determine wheel 30; and the settled frames (almost every row ..., the arrow ..., right edge ..., every/infinitely many right diagonals ..., eventually constant, two columns periodic, whiteDiagonalCoun
+== R2 [refuse] expected REFUSE, got REFUSE: PASS
+CLAIM  rule 110 is Turing complete
+   REFUSED refused: the claim is in no declared frame; frames: column C distinguishes wheel R from wheel S; the wobble at column C equals the wobble at column -C; right diagonal D is balanced; rows 0..T determine wheel 30; and the settled frames (almost every row ..., the arrow ..., right edge ..., every/infinitely many right diagonals ..., eventually constant, two columns periodic, whiteDiagonalCoun
+
+SCORE by split: frame: 23/23; heldout: 2/5; refuse: 2/2

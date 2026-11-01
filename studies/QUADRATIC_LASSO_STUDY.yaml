@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 8 marks; 12 of 12 programs as declared; 21 of 21 questions as declared; 18 of 18
@@ -14,18 +16,22 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/batch_machine
-  - reasoning/batch_speech
-  - reasoning/quadratic_lasso
-  - tests/test_quadratic_lasso
+  - reasoning/batch_machine.py
+  - reasoning/batch_speech.py
+  - reasoning/quadratic_lasso.py
+  - tools.py
   lean:
   - CounterLasso
   - QuadraticLasso
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: QUADRATIC_LASSO_STUDY.md
   test:
   - test_quadratic_lasso.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: QUADRATIC_LASSO_STUDY
 junctions: []
 last_altered: ''
@@ -36,20 +42,38 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - Q1
+  - Q2
+  - Q3
+  - Q4
+  - Q5
+  - Q6
+  - Q7
+  - Q8
+  met:
+  - Q1
+  - Q2
+  - Q4
+  - Q5
+  - Q6
+  - Q7
+  - Q8
+  missed:
+  - Q3
 perturbations: []
 phase: 142
 predecessors:
 - AFFINE_OUTPUT_STUDY
 - CONSTANT_BOUND_STUDY
 - COUNTER_LASSO_STUDY
+- OPERATIONS_LADDER_STUDY
 question: Can GLM-BAT's counter-lasso reading decide loops whose variables grow quadratically — an accumulator
   that adds a counter on every pass — by jumping to the exact first pass at which a comparison changes,
   or by certifying that none ever does, without changing any verdict it already gave and without a verdict
   a long plain run contradicts?
 recomputed_by: '`glm_universal.reasoning.quadratic_lasso.quadratic_lasso_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

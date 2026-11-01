@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 39 goal and narrative chains read a register value and carry an exact interval;
@@ -10,16 +12,22 @@ deciding_figure: 8 of 39 goal and narrative chains read a register value and car
   of 5 marks met.
 directives: []
 evidence: []
-faculty: derivation
+faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/held_precision.py
+  - tools.py
   lean:
+  - CognitionRoundTwo
   - HeldPrecision
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: HELD_PRECISION_STUDY.md
-  test:
-  - test_held_precision.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: HELD_PRECISION_STUDY
 junctions: []
 last_altered: ''
@@ -30,17 +38,28 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - H1
+  - H2
+  - H3
+  - H4
+  - H5
+  met:
+  - H1
+  - H2
+  - H4
+  - H5
+  missed:
+  - H3
 perturbations: []
-phase: 86
+phase: 76
 predecessors:
-- MEASURANDS_STUDY
 - STEPWISE_TWO_STUDY
 question: When a register value feeds a formula-wheel derivation, what does its stated precision do to
   the answer, and can the GLM say so exactly?
 recomputed_by: '`glm_universal.reasoning.held_precision.held_precision_report`'
+related:
+- MEASURANDS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -58,7 +77,8 @@ sections:
 - anchor: 4-addendum-phase-86-h3-is-no-longer-met
   heading: '4. Addendum (Phase 86): H3 is no longer met'
 status: closed
-successors: []
+successors:
+- MEASURANDS_STUDY
 superseded_by: ''
 supersedes: []
 title: Held precision — a register value's stated precision carried through a derivation

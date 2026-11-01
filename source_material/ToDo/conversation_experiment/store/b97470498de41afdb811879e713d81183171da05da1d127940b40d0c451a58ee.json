@@ -1,0 +1,82 @@
+{
+  "arity": 2,
+  "created_turn": 0,
+  "final_answer": "kinetic_energy",
+  "intent": "verify",
+  "plan": {
+    "failed_step": null,
+    "final_answer": "kinetic_energy",
+    "final_verified": true,
+    "hypothesis": null,
+    "intent": "verify",
+    "steps": [
+      {
+        "derivation_node": "plan:0",
+        "failure_reason": "",
+        "op": "resolve",
+        "result": "resolved 2 concept(s): energy, mass",
+        "status": "ok",
+        "target": "energy, mass"
+      },
+      {
+        "derivation_node": "plan:1",
+        "failure_reason": "",
+        "op": "retrieve",
+        "result": "5 neighbours retrieved",
+        "status": "ok",
+        "target": "nearest to energy"
+      },
+      {
+        "derivation_node": "plan:2",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "verified via nearest d\u00b2=0",
+        "status": "ok",
+        "target": "kinetic_energy"
+      },
+      {
+        "derivation_node": "plan:3",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "verified via nearest d\u00b2=0",
+        "status": "ok",
+        "target": "potential_energy"
+      },
+      {
+        "derivation_node": "plan:4",
+        "failure_reason": "coherence or dimensional check failed",
+        "op": "verify",
+        "result": "verification failed",
+        "status": "failed",
+        "target": "torque"
+      },
+      {
+        "derivation_node": "plan:5",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "verified via nearest d\u00b2=1/2",
+        "status": "ok",
+        "target": "enthalpy"
+      },
+      {
+        "derivation_node": "plan:6",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "verified via nearest d\u00b2=1/2",
+        "status": "ok",
+        "target": "gibbs_energy"
+      },
+      {
+        "derivation_node": "plan:7",
+        "failure_reason": "",
+        "op": "explain",
+        "result": "verified answer: kinetic_energy via nearest d\u00b2=0",
+        "status": "ok",
+        "target": "kinetic_energy"
+      }
+    ]
+  },
+  "plan_hash": "b97470498de41afdb811879e713d81183171da05da1d127940b40d0c451a58ee",
+  "shape": "verify:2",
+  "stored_at": "deterministic"
+}

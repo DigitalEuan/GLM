@@ -4,13 +4,15 @@
 
 **Question.** Can every chain the stepwise planner answers be said as a GLM-BAT program and run by the batch machine, with drift and rollback as planner checks that gate the answer, without moving any answer the planner or the evaluation gives?
 
-**Verdict.** Yes. All 174 chains the stepwise planner answers among its 283 recorded texts are said as GLM-BAT, read back to the identical lines, run by the batch machine to a halt, leave no drift and are promoted by the gated pipeline, so the gate refused nothing the planner answered. A lie in the last computed step is found at that step in 87 of 87 chains, and the pipeline does not promote and leaves no file. The machine checks what it computes, not what it carries: of the 2,494 steps, 180 are computed and 2,314 carried as data, and a lie in a carried step is caught only downstream, in 87 of 168 cases. No mark was missed.
+**Verdict.** Yes. All 174 chains the stepwise planner answers among its 283 recorded texts are said as GLM-BAT, read back to the identical lines, run by the batch machine to a halt, leave no drift and are promoted by the gated pipeline, so the gate refused nothing the planner answered. A lie in the last computed step is found at that step in 87 of 87 chains, and the pipeline does not promote and leaves no file. The machine checks what it computes, not what it carries: of the 2,494 steps, 180 are computed and 2,314 carried as data, and a lie in a carried step is caught only downstream, in 87 of 168 cases. No mark was missed. Re-measured on 31 October 2026 (repository check) by the reconstructed measurement module, 5 of the 7 measured marks hold: P1 to P5 are met over the reconstruction's 187 chains, and F1 and F2 are not met because their baselines were lost in the October 2026 reorganisation; §7.5 gives the figures.
 
-**Deciding figure.** 7 of 7 measured marks and L1; 174/174 chains said, run, drift-free and promoted (15,092 lines, 15,457 machine steps); lies in a computed step 87/87 found, none promoted; 348/348 column-3 mutants rejected; 283/283 recorded texts and 212/212 evaluation statuses unchanged.
+**Deciding figure.** 5 of 7 measured marks and L1, re-measured 31 October 2026 (187/187 chains said, run, drift-free and promoted; 104/104 lies found; 374/374 mutants rejected; F1 and F2: baselines lost); the round recorded 7 of 7 measured marks and L1; 174/174 chains said, run, drift-free and promoted (15,092 lines, 15,457 machine steps); lies in a computed step 87/87 found, none promoted; 348/348 column-3 mutants rejected; 283/283 recorded texts and 212/212 evaluation statuses unchanged.
 
 **Recomputed by.** `glm_universal.reasoning.planner_ladder_study.planner_ladder_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured; 5 of 7 measured marks by the reconstructed module, where the round recorded 7 of 7 — F1 and F2 not met, their baselines lost, §7.5; the round's record is kept as written.)*
 
 ---
 
@@ -182,3 +184,26 @@ leaves nothing behind when it disagrees (`rollback_journal`).
   the stepwise planner is.
 * The typed planner and the plan search (`planner`, `tool machine`) are not
   gated by the machine.
+
+### 7.5 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement
+module (`reasoning/planner_ladder_study.py`) was lost in the October 2026
+reorganisation and rebuilt from this document and the tests; the measurement
+was taken again (`tools planner-ladder --write`). The figures are **the
+reconstruction's**: its corpus of texts is rebuilt (270 texts, where the round
+recorded 283), so the counts differ from §7.1 and do not replace it.
+
+| mark | the round's record (§7.1) | re-measured | met |
+|---|---|---|---|
+| **P1** | 174/174 said, read back and halted | 187/187 read back, 187/187 halted with exit 0 (21860 lines, 34115 machine steps) | yes |
+| **P2** | 174/174 drift-free | 187/187 chains; 190 computed and 2342 carried steps | yes |
+| **P3** | 174/174 promoted | 187/187 | yes |
+| **P4** | 87/87 lies found, none promoted | 104/104 found at the step, 104/104 rolled back; read lies (post hoc) 88 caught downstream, 93 unseen of 181 | yes |
+| **P5** | 348/348 mutants rejected | 187/187 run and 187/187 pipeline scripts verify; 374/374 mutants rejected | yes |
+| **F1** | 283/283 recorded texts unchanged | not measured: `reasoning/_data/planner_ladder_baseline.json` was lost in the October 2026 reorganisation | no |
+| **F2** | 212/212 evaluation statuses unchanged | not measured: the shared frozen path's baseline (`reasoning/_data/ties_ladder_baseline.json`) was lost | no |
+
+So **5 of 7 measured marks** (L1 by the build: `PlannerLadder.lean`, 12 of 12
+theorems, no `sorry`). F1 and F2 cannot come back as recorded: a baseline taken
+now would compare the answering path with itself.

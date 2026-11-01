@@ -14,6 +14,10 @@ Three things are pinned here.
   default and selected by ``--exhaustive`` or ``GLM_EXHAUSTIVE=1``, and the
   sign-off runner turns it on for every ``-all`` form -- checked here by
   running pytest twice over a temporary test file.
+
+*Last altered 31 October 2026 (repository check): the four marker tests skip,
+with the reason, when no real pytest is installed -- they drive
+``python3 -m pytest`` in a subprocess, which needs pytest itself.*
 """
 
 from __future__ import annotations
@@ -273,7 +277,32 @@ MARKED_TEST = textwrap.dedent(
 )
 
 
+def _pytest_installed() -> bool:
+    """Is a real pytest importable by a fresh interpreter?  The marker tests
+    below run ``python3 -m pytest`` in a subprocess, so they can only be
+    exercised where pytest is installed (``ITERATE.md`` §0.1, hazard 6: it
+    cannot be installed in the owner's sandbox, where these tests skip with
+    that reason rather than fail as if the marker were broken)."""
+    probe = subprocess.run([sys.executable, "-c", "import pytest, sys; "
+                            "sys.exit(0 if hasattr(pytest, 'main') else 1)"],
+                           cwd=str(OVERLAY), capture_output=True, text=True)
+    return probe.returncode == 0
+
+
+_PYTEST_INSTALLED = None
+
+
+def _require_pytest() -> None:
+    global _PYTEST_INSTALLED
+    if _PYTEST_INSTALLED is None:
+        _PYTEST_INSTALLED = _pytest_installed()
+    if not _PYTEST_INSTALLED:
+        pytest.skip("pytest is not installed: the exhaustive marker is "
+                    "checked by running pytest in a subprocess")
+
+
 def _run_pytest(path, extra=(), env=None):
+    _require_pytest()
     command = [sys.executable, "-m", "pytest", str(path), "-q", "--no-header",
                *extra]
     return subprocess.run(command, cwd=str(OVERLAY), capture_output=True,

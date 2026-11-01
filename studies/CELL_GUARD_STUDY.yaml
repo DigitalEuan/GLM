@@ -1,28 +1,33 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 9 marks (L1, Q1, N1, N2, S1, S2, S3, U1; K1 missed); guarded ladder 30, 12 and 12
   correct with 0 wrong on the three sets; unguarded ladder 467/0, 435/8 and 426/1 (middle-out order);
   union-retired ladder 388 correct, 0 wrong on the third set.
-directives:
-- D12
+directives: []
 evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/cell_guard
-  - tests/test_cell_guard
+  - reasoning/cell_guard.py
+  - tools.py
   lean:
   - CellGuard
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CELL_GUARD_STUDY.md
   test:
   - test_cell_guard.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CELL_GUARD_STUDY
 junctions: []
 last_altered: ''
@@ -33,16 +38,37 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - Q1
+  - N1
+  - N2
+  - S1
+  - S2
+  - S3
+  - K1
+  - U1
+  met:
+  - L1
+  - Q1
+  - N1
+  - N2
+  - S1
+  - S2
+  - S3
+  - U1
+  missed:
+  - K1
 perturbations: []
-phase: 123
-predecessors: []
+phase: 128
+predecessors:
+- NORM_256_HEX_STUDY
 question: Can each rung of the escalation ladder be made to answer only when its answer is provably the
   nearest carrier to the query — using two distances it already has, not a search over every carrier —
   and does that remove the wrong answers the ladder gives on held-out perturbations, at what cost in answers?
 recomputed_by: '`glm_universal.reasoning.cell_guard.cell_guard_report`'
+related:
+- PLACEMENT_GUARD_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -66,7 +92,8 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- PLACEMENT_GUARD_STUDY
 superseded_by: ''
 supersedes: []
 title: The cell guard — a ladder answer certified to be the nearest carrier

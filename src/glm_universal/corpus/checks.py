@@ -306,19 +306,36 @@ def archive_report() -> Dict[str, object]:
 
 
 def corpus_checks() -> Dict[str, object]:
-    """Every document check, and one verdict over all of them."""
+    """Every document check, and one verdict over all of them.
+
+    *Last altered 31 October 2026 (repository check): the study manifests
+    are a gate too -- every ``studies/X.md`` has its ``X.yaml``, every
+    manifest validates against ``studies/_schema/study.schema.yaml``, and
+    none has drifted from what ``study_manifest`` derives from its document
+    and the tree (``python3 -m glm_universal.corpus.study_manifest --sync``
+    repairs drift).  Also 31 October 2026: no study links to a file that is
+    not in the tree, short of one recorded absent (``study_links``; ``python3
+    -m glm_universal.corpus.study_links --fix`` repoints moved files).*
+    """
     from . import measurements as ms
+    from . import study_links as sl
+    from . import study_manifest as sm
     tiers = tier_report()
     reach = reachability_report()
     archive = archive_report()
     lean = ms.state()
+    manifests = sm.manifest_report()
+    links = sl.links_report()
     return {
         "tiers": tiers,
         "reachability": reach,
         "archive": archive,
         "measurements": lean,
+        "manifests": manifests,
+        "study_links": links,
         "holds": (bool(tiers["holds"]) and bool(reach["holds"])
-                  and bool(lean["fresh"])),
+                  and bool(lean["fresh"]) and bool(manifests["holds"])
+                  and bool(links["holds"])),
     }
 
 
@@ -432,11 +449,20 @@ def yaml_mirror_report() -> Dict[str, object]:
         except Exception as exc:
             failures.append((str(path), f"cannot read markdown: {exc}"))
             continue
-        # Compare the four tier-0 fields.
-        yaml_tier0 = data.get("tier0", data)
+        # Compare the four tier-0 fields, each read from where its schema
+        # stores it (:func:`yaml.mirror_field_map`: ``tier0.figure`` in
+        # ``glm-study/v1``, ``deciding_figure`` in a study manifest).
+        # (Last altered 31 October 2026, repository check: the manifests'
+        # ``deciding_figure`` and ``recomputed_by`` were looked up as
+        # ``figure`` and ``recomputed``, which they never carry.)
+        field_map = _yaml.mirror_field_map(schema.name)
         mismatch = False
         for field in ("question", "verdict", "figure", "recomputed"):
-            yaml_val = yaml_tier0.get(field, "")
+            yaml_val: object = data
+            for key in field_map.get(field, field).split("."):
+                yaml_val = (yaml_val.get(key, "")
+                            if isinstance(yaml_val, dict) else "")
+            yaml_val = "" if yaml_val is None else yaml_val
             md_val = md_tier0.get(field, "")
             # Normalise both for comparison (strip emphasis, links, whitespace).
             if normalise(str(yaml_val)) != normalise(str(md_val)):

@@ -12,9 +12,11 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**Code:** [`../glm_universal/sandbox/attention_simulator.py`](../glm_universal/sandbox/attention_simulator.py)
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
+**Code:** [`../glm_universal/sandbox/attention_simulator.py`](../src/glm_universal/sandbox/attention_simulator.py)
 (the sandbox occupant; nothing the system computes with imports it)
-**Run:** `PYTHONPATH=. python3 -c "from glm_universal.sandbox import attention_simulator as a; a.attention_report()"`
+**Run:** `PYTHONPATH=src python3 -c "from glm_universal.sandbox import attention_simulator as a; a.attention_report()"`
 **Paper:** arXiv 2506.18739v2 (Dutta, Chakrabarty, Ansari, Das; the uploaded preprint).
 
 Yes, exactly: every elementary operation of the paper's construction agrees with the shipped ground truth with zero error, the simulator `U` reproduces the paper's own demonstrations with zero error on every exact stage (the paper's float error 3.38e-06 becomes 6.4e-105 at declared depth), and every head count matches the paper's tables — but the exponential is not exact and cannot be, two of the paper's stated conditions are looser than the truth (the coverage bound is conservative by a factor of two; the hierarchy corollary silently needs a padding mask), and on the live registers raw attention scoring is norm-dominated and inverts at low depth, so the module stays in the sandbox: a compiled library, not yet a faculty.
@@ -257,14 +259,13 @@ study; it is the first line of the work that would follow promotion.
 ## Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.sandbox import attention_simulator as a; import json; print(json.dumps(a.promotion_checklist(), default=str, indent=2))"
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "from glm_universal.sandbox import attention_simulator as a; import json; print(json.dumps(a.promotion_checklist(), default=str, indent=2))"
+PYTHONPATH=src python3 -c "
 from glm_universal.runtime.session import GeometricSession
 from glm_universal.sandbox import attention_simulator as a
 print(a.attention_report()['paper_demo']['stage_errors'])
 print(a.temperature_report(GeometricSession()))"
-PYTHONPATH=. python3 -c "from glm_universal import sandbox; print(sandbox.occupancy_report()['modules'])"
+PYTHONPATH=src python3 -c "from glm_universal import sandbox; print(sandbox.occupancy_report()['modules'])"
 ```
 
 The experiment harness that produced the figures this memo quotes (head

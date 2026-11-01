@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 *Created 22 October 2026 (pre-registered and measured 22 October 2026, in the
@@ -118,7 +120,7 @@ is now a theorem about the lattice, for every shell.
 ## 6. How it is measured
 
 `lake build RequestProject.GLM.LeechShellCount` and `lake build` (the audit);
-`PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as
+`PYTHONPATH=src python3 -c "from glm_universal.reasoning import leech_shells as
 L; print(L.proved_shells_check(7))"` from ``;
 `tests/test_leech_shell_count.py`; and the evaluation case
 `tool-leech-norm-12`.

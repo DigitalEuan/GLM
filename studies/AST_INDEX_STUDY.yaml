@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 'On 467 query sites of the 11,669-site index under rename-and-commute, hit@1: `ast_v2`
@@ -10,23 +12,36 @@ deciding_figure: 'On 467 query sites of the 11,669-site index under rename-and-c
   on 467 of 467 under every perturbation; the matcher and the reference agree on 8,398 of 8,398 calls;
   106 integer classes, 3,350 evaluations, 0 failures; marks A1, A3, A5, A6 and A7 met, A2 and A4 not met.'
 directives:
-- D15
 - D7
+- D15
 evidence: []
-faculty: addressing
+faculty: unknown
 file_refs:
   code:
-  - tests/test_ast_index
+  - engineering/speak.py
+  - evaluation/ast_index_cases.py
+  - reasoning/ast_index.py
+  - reasoning/python_substrate.py
+  - reasoning/symbolic.py
+  - runtime/ast_index_frames.py
+  - runtime/ast_index_report.py
+  - runtime/outside_frames.py
+  - runtime/typed_operators.py
+  - tools.py
   lean:
   - AstIndex
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: AST_INDEX_STUDY.md
   test:
   - test_ast_index.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: AST_INDEX_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,12 +53,15 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 64
-predecessors: []
+phase: 105
+predecessors:
+- PYTHON_SPEECH_STUDY
 question: Can the structural address of a Python expression be indexed as a retrieval key, beside the
   Lean corpus addresses, so that the GLM finds the places — in its own code and in the archived scripts
   — where a structurally equal expression is already computed?
 recomputed_by: '`glm_universal.runtime.ast_index_report.ast_index_report`'
+related:
+- DERIVATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -73,7 +91,8 @@ sections:
 - anchor: 9-re-running-it
   heading: 9. Re-running it
 status: closed
-successors: []
+successors:
+- DERIVATION_STUDY
 superseded_by: ''
 supersedes: []
 title: The AST address as a retrieval key

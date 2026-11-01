@@ -1,0 +1,228 @@
+{
+  "N": 1000000,
+  "empirical_timing": {
+    "data": [
+      {
+        "n": 1000,
+        "seconds": 0.00948190689086914,
+        "cells_per_second": 105464.01810409856,
+        "bit_ops_per_second": 105464018.10409857,
+        "log2_n": 9.965784284662087,
+        "log2_seconds": -6.720607058307427
+      },
+      {
+        "n": 5000,
+        "seconds": 0.048458099365234375,
+        "cells_per_second": 103181.9255294025,
+        "bit_ops_per_second": 515909627.64701253,
+        "log2_n": 12.287712379549449,
+        "log2_seconds": -4.367118369593897
+      },
+      {
+        "n": 10000,
+        "seconds": 0.10223531723022461,
+        "cells_per_second": 97813.55671329226,
+        "bit_ops_per_second": 978135567.1329225,
+        "log2_n": 13.287712379549449,
+        "log2_seconds": -3.2900344329445432
+      },
+      {
+        "n": 50000,
+        "seconds": 0.6493487358093262,
+        "cells_per_second": 77000.22690839876,
+        "bit_ops_per_second": 3850011345.4199386,
+        "log2_n": 15.609640474436812,
+        "log2_seconds": -0.6229346023375701
+      },
+      {
+        "n": 100000,
+        "seconds": 1.5391318798065186,
+        "cells_per_second": 64971.690413280776,
+        "bit_ops_per_second": 6497169041.328077,
+        "log2_n": 16.609640474436812,
+        "log2_seconds": 0.6221168536228187
+      }
+    ],
+    "fit_slope_log_log": 1.106783829102635,
+    "interpretation": "O(n^slope)"
+  },
+  "anf_degree": {
+    "table": [
+      {
+        "n": 1,
+        "anf_degree": 2,
+        "seconds": 4.982948303222656e-05,
+        "lower_bound_n": 1,
+        "upper_bound_2n": 2
+      },
+      {
+        "n": 2,
+        "anf_degree": 3,
+        "seconds": 0.00011372566223144531,
+        "lower_bound_n": 2,
+        "upper_bound_2n": 4
+      },
+      {
+        "n": 3,
+        "anf_degree": 5,
+        "seconds": 0.0006248950958251953,
+        "lower_bound_n": 3,
+        "upper_bound_2n": 6
+      },
+      {
+        "n": 4,
+        "anf_degree": 7,
+        "seconds": 0.0037512779235839844,
+        "lower_bound_n": 4,
+        "upper_bound_2n": 8
+      },
+      {
+        "n": 5,
+        "anf_degree": 9,
+        "seconds": 0.022162675857543945,
+        "lower_bound_n": 5,
+        "upper_bound_2n": 10
+      },
+      {
+        "n": 6,
+        "anf_degree": 11,
+        "seconds": 0.11963963508605957,
+        "lower_bound_n": 6,
+        "upper_bound_2n": 12
+      }
+    ]
+  },
+  "short_recurrence": {
+    "table": [
+      {
+        "k": 1,
+        "consistent": false,
+        "n_distinct_patterns": 2,
+        "universe_size": 2,
+        "coverage": 1.0,
+        "n_conflicts": 499232
+      },
+      {
+        "k": 2,
+        "consistent": false,
+        "n_distinct_patterns": 4,
+        "universe_size": 4,
+        "coverage": 1.0,
+        "n_conflicts": 499405
+      },
+      {
+        "k": 3,
+        "consistent": false,
+        "n_distinct_patterns": 8,
+        "universe_size": 8,
+        "coverage": 1.0,
+        "n_conflicts": 499859
+      },
+      {
+        "k": 4,
+        "consistent": false,
+        "n_distinct_patterns": 16,
+        "universe_size": 16,
+        "coverage": 1.0,
+        "n_conflicts": 499889
+      },
+      {
+        "k": 5,
+        "consistent": false,
+        "n_distinct_patterns": 32,
+        "universe_size": 32,
+        "coverage": 1.0,
+        "n_conflicts": 500219
+      },
+      {
+        "k": 6,
+        "consistent": false,
+        "n_distinct_patterns": 64,
+        "universe_size": 64,
+        "coverage": 1.0,
+        "n_conflicts": 500497
+      },
+      {
+        "k": 7,
+        "consistent": false,
+        "n_distinct_patterns": 128,
+        "universe_size": 128,
+        "coverage": 1.0,
+        "n_conflicts": 500573
+      },
+      {
+        "k": 8,
+        "consistent": false,
+        "n_distinct_patterns": 256,
+        "universe_size": 256,
+        "coverage": 1.0,
+        "n_conflicts": 499666
+      },
+      {
+        "k": 9,
+        "consistent": false,
+        "n_distinct_patterns": 512,
+        "universe_size": 512,
+        "coverage": 1.0,
+        "n_conflicts": 498993
+      },
+      {
+        "k": 10,
+        "consistent": false,
+        "n_distinct_patterns": 1024,
+        "universe_size": 1024,
+        "coverage": 1.0,
+        "n_conflicts": 499694
+      },
+      {
+        "k": 11,
+        "consistent": false,
+        "n_distinct_patterns": 2048,
+        "universe_size": 2048,
+        "coverage": 1.0,
+        "n_conflicts": 498663
+      },
+      {
+        "k": 12,
+        "consistent": false,
+        "n_distinct_patterns": 4096,
+        "universe_size": 4096,
+        "coverage": 1.0,
+        "n_conflicts": 497967
+      },
+      {
+        "k": 13,
+        "consistent": false,
+        "n_distinct_patterns": 8192,
+        "universe_size": 8192,
+        "coverage": 1.0,
+        "n_conflicts": 495318
+      },
+      {
+        "k": 14,
+        "consistent": false,
+        "n_distinct_patterns": 16384,
+        "universe_size": 16384,
+        "coverage": 1.0,
+        "n_conflicts": 492233
+      },
+      {
+        "k": 15,
+        "consistent": false,
+        "n_distinct_patterns": 32768,
+        "universe_size": 32768,
+        "coverage": 1.0,
+        "n_conflicts": 484078
+      },
+      {
+        "k": 16,
+        "consistent": false,
+        "n_distinct_patterns": 65536,
+        "universe_size": 65536,
+        "coverage": 1.0,
+        "n_conflicts": 467001
+      }
+    ]
+  },
+  "interpretation": "No deterministic recurrence of length <= 16 reproduces the Rule 30 center column. Combined with the linear complexity stabilising near N/2 (Problem 1), the evidence is consistent with -- but does not prove -- that no shortcut of sub-linear complexity exists for computing a(n)."
+}

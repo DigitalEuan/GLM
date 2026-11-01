@@ -7,11 +7,11 @@
   ]
  },
  "R3": {
-  "refused": 46,
-  "with_reason": 46
+  "refused": 50,
+  "with_reason": 50
  },
  "R4": {
-  "answered": 177,
+  "answered": 187,
   "unclassified": []
  },
  "R5": {
@@ -26,26 +26,9 @@
    "GLM.CoordinateJunction.jread_origin",
    "GLM.CoordinateJunction.jread_unique_in_ball",
    "GLM.CoordinateJunction.no_read_separates",
-   "GLM.Feedback.efAverage_error_le_identity",
-   "GLM.Feedback.efErr_abs_le_half",
-   "GLM.Feedback.efOut_equivariant",
-   "GLM.Feedback.halfFeedback_dead_zone",
    "GLM.Golay24.tag_flags_miscorrection",
    "GLM.Golay24.weight4_resolved_le_4096",
-   "GLM.HigherLattices.BarnesWall.mk_injective",
-   "GLM.HigherLattices.BarnesWall.norm_dvd_eight",
-   "GLM.HigherLattices.BarnesWall.norm_ge_of_ne_zero",
-   "GLM.HigherLattices.Ternary.even_norm_ge_eighteen",
-   "GLM.Info.casDouble_sum",
-   "GLM.Info.casOut_error",
-   "GLM.Info.casTriangular_error_lt",
-   "GLM.Info.dsBit_eq_floor_diff",
-   "GLM.Info.ds_resonance_lock",
-   "GLM.Info.ds_zero_run_length_lt",
-   "GLM.Info.firstOrder_triangular_error_ge",
-   "GLM.Info.mAverage_error_le",
-   "GLM.Info.mState_periodic",
-   "GLM.Info.not_tendsto_avg_of_separating",
+   "GLM.IntakeChecks.RuleThirtyBits.centreBits_64",
    "GLM.NearestAddress.ranking_head_origin",
    "GLM.NearestAddress.ranking_tail_outside",
    "GLM.NearestQuestion.after_least",
@@ -53,27 +36,18 @@
    "GLM.NearestQuestion.outside_never_confirmed",
    "GLM.NearestQuestion.resolved_is_meant",
    "GLM.NormFamily.family_tower",
-   "GLM.Shell.avg_mem_convexHull",
-   "GLM.Shell.gibbsFreq_error_le",
-   "GLM.Shell.gibbsWeight_le_inv",
-   "GLM.Shell.gibbsWeight_mono",
-   "GLM.Shell.gibbsWeight_uniform",
-   "GLM.Shell.sAverage_error_le",
-   "GLM.Shell.sState_norm_le",
-   "GLM.Shell.shAverage_error_le",
-   "GLM.Shell.shState_norm_le",
+   "GLM.Rule30.not_leftDiagPeriodDivides_eight",
    "GLM.TimedQuestion.contradicted_not_truthful",
-   "GLM.TimedQuestion.resolved_eq_truth",
-   "GLM.VOA.borcherds_commutator_fails",
-   "GLM.VOA.form_invariant"
+   "GLM.TimedQuestion.resolved_eq_truth"
   ],
+  "declarations": 9400,
   "undeclared": []
  },
  "R6": {
-  "answered": 177,
+  "answered": 187,
   "failed": [],
-  "replayable": 171,
-  "verified": 171
+  "replayable": 174,
+  "verified": 174
  },
  "R7": {
   "history_ok": 8,
@@ -85,17 +59,13 @@
   "define": [
    {
     "ambiguity": [],
-    "answer": "* the Golay code is doubly even, so Hamming-weight parity is constant on every coset (pop_parity_of_coset); * the cosets the legacy engine fails on are exactly those whose leader has weight 4, which is even; * hence every output of legacySn",
+    "answer": "The Golay code is a [24, 12, 8]_2 code with weight distribution: weight 0: 1 codeword (the zero codeword) weight 8: 759 codewords weight 12: 2576 codewords weight 16: 759 codewords weight 24: 1 codeword (the all-ones codeword) Total: 4096 c",
     "boundary": "corpus:strong",
     "budget": {
-     "documents": 314,
-     "mentions": 904
+     "documents": 202,
+     "mentions": 468
     },
-    "candidates": [
-     "glm_lean/RequestProject/GLM/Shortcut/Substrate.lean#p4.s0",
-     "glm_universal/knowledge/_data/corpus_definitions.json#p136.s0",
-     "source_material/GLM-main.zip/GLM-main/leech_lattice/LATTICE_SHORTCUT_METHOD.md#p47.s0"
-    ],
+    "candidates": [],
     "evidence": [
      "corpus"
     ],
@@ -109,26 +79,22 @@
     "theorems": [],
     "theorems_declared": [],
     "witness": [
-     "glm_lean/RequestProject/GLM/Shortcut/Substrate.lean#p4.s0",
+     "source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1",
      "pattern=copula:is",
      "strength=2",
-     "source=Lean doc comment",
-     "support=5"
+     "source=archive or supplied",
+     "support=4"
     ]
    },
    {
     "ambiguity": [],
-    "answer": "The Leech lattice: 196,560 minimal vectors (1,104 + 97,152 + 98,304), all norm² = 32, mod-8 glue verified.",
-    "boundary": "corpus:strong",
+    "answer": "The Leech lattice, the Golay code and the MOG all live in 24 coordinates.",
+    "boundary": "corpus:weak",
     "budget": {
-     "documents": 359,
-     "mentions": 1025
+     "documents": 218,
+     "mentions": 660
     },
-    "candidates": [
-     "source_material/GLM-main.zip/GLM-main/GMHGL/ubp_checkpoint_v5.4.1.md#p14.s0",
-     "source_material/GLM-main.zip/GLM-main/GMHGL/doc/lee_golay_essay.md#p80.s5",
-     "source_material/GLM-main.zip/GLM-main/glm_lean/doc/glm_paper.py#p8.s0"
-    ],
+    "candidates": [],
     "evidence": [
      "corpus"
     ],
@@ -142,10 +108,10 @@
     "theorems": [],
     "theorems_declared": [],
     "witness": [
-     "source_material/GLM-main.zip/GLM-main/GMHGL/ubp_checkpoint_v5.4.1.md#p14.s0",
-     "pattern=gloss::",
-     "strength=0",
-     "source=archive or supplied",
+     "studies/INFINITE_VALUES_STUDY.md#p56.s1",
+     "pattern=gloss:,",
+     "strength=3",
+     "source=state document",
      "support=3"
     ]
    },
@@ -154,14 +120,10 @@
     "answer": "*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and glm_universal.corpus.checks.tier_report fails if they stop being.*",
     "boundary": "corpus:strong",
     "budget": {
-     "documents": 224,
-     "mentions": 495
+     "documents": 283,
+     "mentions": 485
     },
-    "candidates": [
-     "CAPABILITY_ASSESSMENT.md#p6.s0",
-     "studies/GLM_ACADEMIC_PAPER.md#p1411.s0",
-     "source_material/devops_ladder/DevOps-Ladder.txt#p167.s0"
-    ],
+    "candidates": [],
     "evidence": [
      "corpus"
     ],
@@ -175,11 +137,11 @@
     "theorems": [],
     "theorems_declared": [],
     "witness": [
-     "CAPABILITY_ASSESSMENT.md#p6.s0",
+     "src/glm_universal/reasoning/_data/evidence_model_study.json#p2.s0",
      "pattern=copula:is",
      "strength=1",
-     "source=tier-0",
-     "support=12"
+     "source=data file",
+     "support=6"
     ]
    },
    {
@@ -187,14 +149,10 @@
     "answer": "* the register is *derived* -- every class names a quantity the physics register already holds, and the dimension, unit and EXT10 exponents in a class carrier are read from there rather than typed a second time; * the carrier round trips, s",
     "boundary": "corpus:strong",
     "budget": {
-     "documents": 533,
-     "mentions": 4160
+     "documents": 552,
+     "mentions": 3653
     },
-    "candidates": [
-     "glm_universal/tests/test_comparison_classes.py#p2.s0",
-     "glm_universal/knowledge/_data/corpus_definitions.json#p172.s0",
-     "studies/GLM_ACADEMIC_PAPER.md#p1406.s0"
-    ],
+    "candidates": [],
     "evidence": [
      "corpus"
     ],
@@ -208,11 +166,11 @@
     "theorems": [],
     "theorems_declared": [],
     "witness": [
-     "glm_universal/tests/test_comparison_classes.py#p2.s0",
+     "src/glm_universal/reasoning/_data/evidence_model_study.json#p3.s0",
      "pattern=copula:is",
      "strength=2",
-     "source=docstring",
-     "support=8"
+     "source=data file",
+     "support=6"
     ]
    },
    {
@@ -220,16 +178,14 @@
     "answer": "",
     "boundary": "refused",
     "budget": {
-     "mentions": 4
+     "mentions": 6
     },
     "candidates": [],
-    "evidence": [
-     "corpus"
-    ],
+    "evidence": [],
     "history": [],
     "kind": "corpus:define",
     "question": "define yalog",
-    "refusal": "the corpus mentions 'yalog' in 4 sentences of 3 documents but no sentence defines it by a declared pattern",
+    "refusal": "the corpus mentions 'yalog' in 6 sentences of 4 documents but no sentence defines it by a declared pattern",
     "replayed": null,
     "status": "refused",
     "surface": "corpus",
@@ -240,11 +196,8 @@
   ],
   "turns": [
    {
-    "ambiguity": [
-     "physics:absorptance",
-     "physics:albedo"
-    ],
-    "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the head is the certified junction of 2 live carriers, so to separate them the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is <reply>`",
+    "ambiguity": [],
+    "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is <reply>`",
     "boundary": "uncertified",
     "budget": {
      "turn": 0
@@ -254,9 +207,19 @@
      "physics:albedo"
     ],
     "evidence": [
-     "lattice"
+     "lattice",
+     "dialogue"
     ],
-    "history": [],
+    "history": [
+     [
+      "physics:absorptance",
+      "yes"
+     ],
+     [
+      "physics:albedo",
+      "no"
+     ]
+    ],
     "kind": "nearest",
     "question": "nearest to albedo moved 4 by 1/4",
     "refusal": "",
@@ -270,8 +233,11 @@
     ]
    },
    {
-    "ambiguity": [],
-    "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no) leave 1 of the 2 carriers of the head: physics:albedo (GLM.AnsweringQuestion.after_reply; a reply never moves the answer off the head, GLM.NearestQuestion.after_least); if the replies are true of the carrier meant and it is in the head, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant); to confirm, the GLM asks: Is it exactly physics:albedo? (yes: physics:albedo; no: no member (a contradiction)) -- a carrier meant outside the head is never confirmed (GLM.NearestQuestion.outside_never_confirmed); reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is no; confirm:physics:albedo is <reply>`",
+    "ambiguity": [
+     "yes",
+     "no"
+    ],
+    "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no) leave 1 of the 2 carriers of the head: physics:albedo -- a reply never moves the answer off the scan's head (GLM.NearestQuestion.after_least); if the replies are true of the carrier meant, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant); to confirm, the GLM asks: Is it exactly physics:albedo? (yes: physics:albedo; no: no member (a contradiction)) -- a carrier meant outside the head is never confirmed (GLM.NearestQuestion.outside_never_confirmed); reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is no; confirm:physics:albedo is <reply>`",
     "boundary": "uncertified",
     "budget": {
      "turn": 1
@@ -285,15 +251,15 @@
     ],
     "history": [
      [
-      "word:absorbed",
-      "no"
+      "physics:albedo",
+      "yes"
      ]
     ],
     "kind": "nearest",
     "question": "nearest to albedo moved 4 by 1/4 given word:absorbed is no",
     "refusal": "",
     "replayed": null,
-    "status": "answered",
+    "status": "open",
     "surface": "conversation",
     "theorems": [],
     "theorems_declared": [],
@@ -304,38 +270,38 @@
   ]
  },
  "R9": {
-  "fields_ok": 223,
-  "results": 223
+  "fields_ok": 237,
+  "results": 237
  },
- "cases": 223,
+ "cases": 237,
  "census": {
   "by_boundary": {
-   "certified": 171,
+   "certified": 174,
    "checkable": 5,
-   "refused": 46,
-   "uncertified": 1
+   "refused": 50,
+   "uncertified": 8
   },
   "by_evidence": {
-   "computation": 26,
-   "corpus": 5,
+   "computation": 31,
+   "corpus": 7,
    "lattice": 44,
    "register": 78,
    "self-report": 69,
-   "tool": 1
+   "tool": 8
   },
   "by_status": {
-   "answered": 172,
+   "answered": 182,
    "contradicted": 3,
    "open": 5,
-   "refused": 43
+   "refused": 47
   },
   "by_surface": {
-   "planner": 222,
-   "toolbox": 1
+   "planner": 229,
+   "toolbox": 8
   },
-  "steps": 843,
-  "with_candidates": 20,
-  "with_theorems": 29,
+  "steps": 860,
+  "with_candidates": 23,
+  "with_theorems": 26,
   "with_witness": 179
  },
  "errors": [],
@@ -361,34 +327,7 @@
   "data_objects/_data/world_ame2020.json",
   "data_objects/_data/world_ciaaw_2024.json",
   "data_objects/_data/world_nist_ie.json",
-  "engineering/_data/context_frames_study.json",
-  "engineering/_data/domains.json",
-  "engineering/_data/oscillator_junction.json",
-  "engineering/_data/oscillator_junction_frozen.json",
-  "knowledge/_data/confidence_curve.json",
-  "knowledge/_data/corpus_definitions.json",
-  "knowledge/_data/corpus_definitions_first.json",
-  "knowledge/_data/corpus_knowledge.json",
-  "knowledge/_data/corpus_knowledge_first.json",
-  "knowledge/_data/friction.json",
-  "knowledge/_data/friction_first.json",
-  "knowledge/_data/friction_frozen_path.json",
-  "knowledge/_data/friction_survey.json",
-  "knowledge/_data/friction_survey_first.json",
-  "knowledge/_data/friction_survey_settled.json",
-  "knowledge/_data/friction_two.json",
-  "knowledge/_data/friction_two_eval_before.json",
-  "knowledge/_data/friction_two_frozen.json",
-  "knowledge/_data/friction_two_respell_first.json",
-  "knowledge/_data/friction_two_survey.json",
-  "knowledge/_data/friction_two_survey_first.json",
   "knowledge/_data/source_tiers.json",
-  "knowledge/_data/source_tiers_first.json",
-  "knowledge/_data/thermo_friction.json",
-  "knowledge/_data/thermo_friction_blind_spot.json",
-  "knowledge/_data/thermo_friction_eval_before.json",
-  "knowledge/_data/thermo_friction_first.json",
-  "knowledge/_data/thermo_friction_frozen.json",
   "reasoning/_data/address_read_study.json",
   "reasoning/_data/address_table.json",
   "reasoning/_data/adversarial_dialogue_study.json",
@@ -401,11 +340,11 @@
   "reasoning/_data/budget_guard_baseline.json",
   "reasoning/_data/budget_guard_frozen.json",
   "reasoning/_data/budget_reading_study.json",
-  "reasoning/_data/carried_read_baseline.json",
   "reasoning/_data/carried_read_study.json",
   "reasoning/_data/cell_guard.json",
   "reasoning/_data/citation_scope.json",
   "reasoning/_data/citation_scope_legacy.json",
+  "reasoning/_data/colour_induction_study.json",
   "reasoning/_data/configuration_queries.json",
   "reasoning/_data/controller_addresses.json",
   "reasoning/_data/coordinate_junction_study.json",
@@ -416,13 +355,15 @@
   "reasoning/_data/document_tree.json",
   "reasoning/_data/document_tree_frozen.json",
   "reasoning/_data/empty_rungs.json",
-  "reasoning/_data/fold_machine_baseline.json",
   "reasoning/_data/fold_machine_study.json",
-  "reasoning/_data/fold_machine_study_first.json",
+  "reasoning/_data/frame_operator_study.json",
+  "reasoning/_data/frame_plane_study.json",
   "reasoning/_data/hole_census.json",
-  "reasoning/_data/hole_l5_baseline.json",
-  "reasoning/_data/hole_reports_l5.json",
+  "reasoning/_data/hole_reports_l5_study.json",
   "reasoning/_data/imperative_baseline.json",
+  "reasoning/_data/improper_frame_study.json",
+  "reasoning/_data/improper_units_study.json",
+  "reasoning/_data/intake_capability_study.json",
   "reasoning/_data/junction_table.json",
   "reasoning/_data/l5_first_budget.json",
   "reasoning/_data/ladder_escalation.json",
@@ -432,6 +373,9 @@
   "reasoning/_data/lean_addresses.json",
   "reasoning/_data/lean_citation_reference.json",
   "reasoning/_data/lean_lexical_addresses.json",
+  "reasoning/_data/lorentzian_evidence_study.json",
+  "reasoning/_data/lorentzian_lift_study.json",
+  "reasoning/_data/lorentzian_majority_study.json",
   "reasoning/_data/native_parity.json",
   "reasoning/_data/native_words.json",
   "reasoning/_data/nearest_address_study.json",
@@ -441,8 +385,9 @@
   "reasoning/_data/operation_escalation.json",
   "reasoning/_data/patience_census.json",
   "reasoning/_data/physics_relations.json",
+  "reasoning/_data/pipeline_ask_study.json",
+  "reasoning/_data/pipeline_kit_study.json",
   "reasoning/_data/placement_guard.json",
-  "reasoning/_data/planner_ladder_baseline.json",
   "reasoning/_data/planner_ladder_study.json",
   "reasoning/_data/probe_budget.json",
   "reasoning/_data/query_escalation.json",
@@ -451,17 +396,15 @@
   "reasoning/_data/share_ensemble.json",
   "reasoning/_data/stacked_dialogue_study.json",
   "reasoning/_data/stray_blind.json",
-  "reasoning/_data/ties_ladder_baseline.json",
   "reasoning/_data/ties_ladder_frozen.json",
-  "reasoning/_data/tool_machine_baseline.json",
   "reasoning/_data/tool_machine_study.json",
-  "reasoning/_data/tool_machine_study_first.json",
   "reasoning/_data/typed_plans.json",
   "reasoning/_data/unpacking_baseline.json",
   "reasoning/_data/unresolved_laws_106.json",
   "reasoning/_data/wobble_landscape.json",
   "runtime/_data/register_lexicon.json",
-  "runtime/_data/respell_table.json"
+  "runtime/_data/respell_table.json",
+  "wheels/_data/provisional.json"
  ],
  "rows": [
   {
@@ -669,7 +612,14 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "M",
+    "g",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -699,7 +649,16 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "s",
+    "l",
+    "o",
+    "w",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -729,7 +688,13 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "S",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -759,7 +724,21 @@
    "budget": {
     "steps": 9
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "f",
+    "r",
+    "e",
+    "q",
+    "u",
+    "e",
+    "n",
+    "c",
+    "y",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -789,7 +768,14 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "K",
+    "r",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -819,7 +805,14 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "S",
+    "i",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -849,7 +842,15 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "g",
+    "a",
+    "s",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -879,7 +880,16 @@
    "budget": {
     "steps": 7
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "t",
+    "i",
+    "m",
+    "e",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -904,7 +914,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: analogy: Ca -> Sc is a step of (+0 period, +1 group) in the derived table coordinates, but the step is well defined -- (+0 period, +1 group) -- but period 6, group 3 holds 15 elements (the f-block sits there), so it names no single element",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -934,7 +944,16 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "[",
+    "'",
+    "w",
+    "o",
+    "r",
+    "k",
+    "'",
+    "]"
+   ],
    "evidence": [
     "register"
    ],
@@ -959,7 +978,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: analogy: temperature effort_of heat -- the energy-conjugate pairing of the thermal row, in which heat is the transfer and temperature the effort, but acceleration occupies no column of the conjugate register, so the relation has no side for it to enter on; the register's names are ['amount', 'angle', 'area', 'charge', 'chemical_potential', 'chemical_work', 'electrical_work', 'entropy', 'flow_work', 'force', 'heat', 'length', 'pressure', 'rotational_work', 'surface_tension', 'surface_work', 'temperature', 'torque', 'voltage', 'volume', 'work'] (the role_typed criterion); and the three terms do not share a register: physics holds acceleration, temperature but not heat.  The query was answerable only in 'lexicon', which holds all three words but is not where the question lives, so transporting a displacement there would name a carrier without meaning it",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -1172,7 +1191,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: resolve: 'unobtainium' names no carrier in any enabled domain; did you mean ['actinium', 'einsteinium', 'neptunium', 'nobelium', 'potassium']?",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -1563,7 +1582,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "trilinear 1 2 3: an operand did not resolve to a 2A axis",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -1994,7 +2013,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "'justice' denotes nothing determinate: no determinate referent: the term is not a numeral, a number word, a Roman numeral, an arithmetic expression, an SI defining constant, an element, a chemical formula or named species, a register quantity or an operator",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -2010,15 +2029,12 @@
    "ok_flag": true,
    "question": "meaning of justice",
    "refusal": "'justice' denotes nothing determinate: no determinate referent: the term is not a numeral, a number word, a Roman numeral, an arithmetic expression, an SI defining constant, an element, a chemical formula or named species, a register quantity or an operator",
-   "replayed": true,
+   "replayed": null,
    "status": "refused",
    "surface": "planner",
    "theorems": [],
    "theorems_declared": [],
-   "witness": [
-    "grounded_justice=False",
-    "terms=['justice']"
-   ]
+   "witness": []
   },
   {
    "ambiguity": [],
@@ -2162,7 +2178,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: real: divide: division by an exact zero.  A quotient by an exact zero names no value, so there is nothing to approximate",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -2199,7 +2215,7 @@
    "expect": "answer",
    "history": [],
    "id": "tool-leech-norm-12",
-   "kind": "toolbox",
+   "kind": "",
    "ok_flag": true,
    "question": "the number of vectors of norm 12 in the leech lattice",
    "refusal": "",
@@ -2208,9 +2224,7 @@
    "surface": "toolbox",
    "theorems": [],
    "theorems_declared": [],
-   "witness": [
-    "surface=toolbox"
-   ]
+   "witness": []
   },
   {
    "ambiguity": [],
@@ -2316,7 +2330,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "0.1 + 0.2 and 0.3 are not distinguished at 2**-256; equality of two processes is not decidable, so the machine does not claim it",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 3
@@ -2332,25 +2346,16 @@
    "ok_flag": true,
    "question": "is 0.1 + 0.2 equal to 0.3",
    "refusal": "0.1 + 0.2 and 0.3 are not distinguished at 2**-256; equality of two processes is not decidable, so the machine does not claim it",
-   "replayed": true,
+   "replayed": null,
    "status": "refused",
    "surface": "planner",
    "theorems": [],
    "theorems_declared": [],
-   "witness": [
-    "left=0.1 + 0.2",
-    "left_decimal=0.30000000000000000000",
-    "order=0",
-    "relation=equal",
-    "right=0.3",
-    "right_decimal=0.30000000000000000000",
-    "settled_at=None",
-    "verdict=undecided"
-   ]
+   "witness": []
   },
   {
    "ambiguity": [],
-   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole', 'corpus'].",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -2676,7 +2681,11 @@
     "refines_integer_to_rational=True",
     "refines_rational_to_griess=True",
     "refines_substrate_to_integer=True",
-    "resolution_griess=7"
+    "resolution_griess=7",
+    "resolution_integer=5",
+    "resolution_rational=7",
+    "resolution_substrate=3",
+    "resolution_universal=7"
    ]
   },
   {
@@ -2764,7 +2773,16 @@
     "mean_exceeds_packing_radius=True",
     "pairwise_disjoint=True",
     "parity_alternates=True",
-    "rational_bundle_distinguishes=256"
+    "rational_bundle_distinguishes=256",
+    "rational_bundle_recovers_input=True",
+    "refuted_status=refuted",
+    "settles_in_distribution=False",
+    "tie_count=6",
+    "two_step_average_error=5819/181398528",
+    "two_step_average_mean_distance=76017479/22674816",
+    "uniform_is_stationary=True",
+    "uniquely_read_cosets=2325",
+    "value_at_target=7/2"
    ]
   },
   {
@@ -3012,7 +3030,8 @@
     "permutation_damage=4088",
     "referentially_intact=True",
     "roles_agree=4680",
-    "shared_codewords=4096"
+    "shared_codewords=4096",
+    "worst_nrci_gap=[73388745838707041895775751, 149740024735028945115535877603328]"
    ]
   },
   {
@@ -3563,7 +3582,21 @@
     "verdict_real_sqrt_to_arbitrary_precision=holds",
     "verdict_real_surrogate_on_a_grid_point=breaks",
     "verdict_real_tower_exposes_every_stand_in=holds",
-    "verdict_real_transcendental_constants=holds"
+    "verdict_real_transcendental_constants=holds",
+    "verdict_real_transcendental_functions=holds",
+    "verdict_real_value_as_carrier=breaks",
+    "verdict_real_written_arithmetic=holds",
+    "verdict_runtime_admits_what_it_cannot_parse=holds",
+    "verdict_runtime_answer_reruns_itself=holds",
+    "verdict_runtime_answers_about_irrationals=holds",
+    "verdict_runtime_arithmetic_inside_a_describe=holds",
+    "verdict_runtime_orders_two_reals=holds",
+    "verdict_scale_more_than_24_coordinates=breaks",
+    "verdict_scale_precision_has_no_ceiling=holds",
+    "verdict_semantics_open_vocabulary=breaks",
+    "verdict_semantics_refuses_an_ambiguous_term=holds",
+    "verdict_substrate_repair_radius=breaks",
+    "verdict_tax_conservation_above_bits=breaks"
    ]
   },
   {
@@ -3666,30 +3699,8 @@
    "replayed": true,
    "status": "answered",
    "surface": "planner",
-   "theorems": [
-    "GLM.Info.mAverage_error_le",
-    "GLM.Info.mState_periodic",
-    "GLM.Info.casOut_error",
-    "GLM.Info.casDouble_sum",
-    "GLM.Info.casTriangular_error_lt",
-    "GLM.Info.firstOrder_triangular_error_ge",
-    "GLM.Feedback.efAverage_error_le_identity",
-    "GLM.Feedback.efErr_abs_le_half",
-    "GLM.Feedback.halfFeedback_dead_zone",
-    "GLM.Feedback.efOut_equivariant"
-   ],
-   "theorems_declared": [
-    "GLM.Info.mAverage_error_le",
-    "GLM.Info.mState_periodic",
-    "GLM.Info.casOut_error",
-    "GLM.Info.casDouble_sum",
-    "GLM.Info.casTriangular_error_lt",
-    "GLM.Info.firstOrder_triangular_error_ge",
-    "GLM.Feedback.efAverage_error_le_identity",
-    "GLM.Feedback.efErr_abs_le_half",
-    "GLM.Feedback.halfFeedback_dead_zone",
-    "GLM.Feedback.efOut_equivariant"
-   ],
+   "theorems": [],
+   "theorems_declared": [],
    "witness": [
     "cascade_double_sum=1/3",
     "cascade_double_sum_equals_state=True",
@@ -3714,7 +3725,22 @@
     "feedback_not_equivariant=False",
     "feedback_within_bound=True",
     "open_orbit_closed=False",
-    "open_period_sum=4/3"
+    "open_period_sum=4/3",
+    "signal_bit_mean=63/128",
+    "signal_input_mean=287/576",
+    "signal_period=12",
+    "signal_within_bound=True",
+    "state_stayed_in_range=True",
+    "third_error_128=1/24384",
+    "third_error_16=0/1",
+    "third_error_32=1/1488",
+    "third_error_64=0/1",
+    "third_error_8=1/84",
+    "third_single_128=1/192",
+    "third_single_16=1/24",
+    "third_single_32=1/48",
+    "third_single_64=1/96",
+    "third_single_8=1/12"
    ]
   },
   {
@@ -3738,18 +3764,8 @@
    "replayed": true,
    "status": "answered",
    "surface": "planner",
-   "theorems": [
-    "GLM.HigherLattices.BarnesWall.norm_ge_of_ne_zero",
-    "GLM.HigherLattices.BarnesWall.mk_injective",
-    "GLM.HigherLattices.Ternary.even_norm_ge_eighteen",
-    "GLM.HigherLattices.BarnesWall.norm_dvd_eight"
-   ],
-   "theorems_declared": [
-    "GLM.HigherLattices.BarnesWall.norm_ge_of_ne_zero",
-    "GLM.HigherLattices.BarnesWall.mk_injective",
-    "GLM.HigherLattices.Ternary.even_norm_ge_eighteen",
-    "GLM.HigherLattices.BarnesWall.norm_dvd_eight"
-   ],
+   "theorems": [],
+   "theorems_declared": [],
    "witness": [
     "N1_minimum=4/1",
     "N2_extremal=True",
@@ -3774,7 +3790,11 @@
     "kissing_32=146880",
     "levels_usable=True",
     "minimum_32=4",
-    "minimum_48=6"
+    "minimum_48=6",
+    "outer_minimum_weight=16",
+    "round_trip=True",
+    "ternary_minimum_weight=15",
+    "ternary_self_dual=True"
    ]
   },
   {
@@ -3798,30 +3818,8 @@
    "replayed": true,
    "status": "answered",
    "surface": "planner",
-   "theorems": [
-    "GLM.Shell.shAverage_error_le",
-    "GLM.Info.not_tendsto_avg_of_separating",
-    "GLM.Shell.sAverage_error_le",
-    "GLM.Shell.gibbsWeight_uniform",
-    "GLM.Shell.gibbsWeight_le_inv",
-    "GLM.Shell.gibbsWeight_mono",
-    "GLM.Shell.sState_norm_le",
-    "GLM.Shell.shState_norm_le",
-    "GLM.Shell.avg_mem_convexHull",
-    "GLM.Shell.gibbsFreq_error_le"
-   ],
-   "theorems_declared": [
-    "GLM.Shell.shAverage_error_le",
-    "GLM.Info.not_tendsto_avg_of_separating",
-    "GLM.Shell.sAverage_error_le",
-    "GLM.Shell.gibbsWeight_uniform",
-    "GLM.Shell.gibbsWeight_le_inv",
-    "GLM.Shell.gibbsWeight_mono",
-    "GLM.Shell.sState_norm_le",
-    "GLM.Shell.shState_norm_le",
-    "GLM.Shell.avg_mem_convexHull",
-    "GLM.Shell.gibbsFreq_error_le"
-   ],
+   "theorems": [],
+   "theorems_declared": [],
    "witness": [
     "gibbs_bound=1/12",
     "gibbs_candidates=6",
@@ -3846,7 +3844,10 @@
     "outside_final_state2=144/1",
     "outside_gap=1/1",
     "outside_separated=True",
-    "outside_support=4/1"
+    "outside_support=4/1",
+    "outside_target=5/1",
+    "shell_norm2=32",
+    "shell_size=196560"
    ]
   },
   {
@@ -3937,7 +3938,46 @@
     "ones_1/3=3333",
     "ones_Liouville=1100",
     "ones_alpha=72",
-    "ones_e**pi_-_pi=9990"
+    "ones_e**pi_-_pi=9990",
+    "ones_e_-_2=7182",
+    "ones_omega_surrogate=5671",
+    "ones_phi_-_1=6180",
+    "ones_pi_-_3=1415",
+    "ones_sqrt(2)_-_1=4142",
+    "oscillator_SNR_0_dB=1.000",
+    "oscillator_SNR_10_dB=0.469",
+    "oscillator_SNR_20_dB=0.081",
+    "oscillator_SNR_40_dB=0.011",
+    "oscillator_pure_signal=0.000",
+    "resonance_locked=True",
+    "resonant_entropy=0/1",
+    "scan_best_high=1.000",
+    "scan_best_low=0.985",
+    "scan_best_q=79/10",
+    "scan_hits=0",
+    "scan_points=391",
+    "steps=10000",
+    "sweep_1/1=0.000",
+    "sweep_1/2=0.649",
+    "sweep_11/10=1.000",
+    "sweep_13/10=0.672",
+    "sweep_3/2=0.465",
+    "sweep_3/5=0.710",
+    "sweep_4/5=0.920",
+    "sweep_6/5=0.840",
+    "sweep_7/10=0.798",
+    "sweep_7/5=0.552",
+    "sweep_9/10=0.987",
+    "targets=9",
+    "zero_run_1/3=2",
+    "zero_run_Liouville=9",
+    "zero_run_alpha=137",
+    "zero_run_e**pi_-_pi=1",
+    "zero_run_e_-_2=1",
+    "zero_run_omega_surrogate=1",
+    "zero_run_phi_-_1=1",
+    "zero_run_pi_-_3=7",
+    "zero_run_sqrt(2)_-_1=2"
    ]
   },
   {
@@ -3987,7 +4027,46 @@
     "display6_17_contractive=2.26e-6",
     "display6_23_accumulative=7.92e-2",
     "display6_23_contractive=6.99e-7",
-    "display6_3_accumulative=6.05e+19"
+    "display6_3_accumulative=6.05e+19",
+    "display6_3_contractive=1.00e-6",
+    "display6_5_accumulative=1.65e+10",
+    "display6_5_contractive=2.00e-6",
+    "display6_7_accumulative=1.57e+6",
+    "display6_7_contractive=3.00e-6",
+    "display_diverges_by_step_two=False",
+    "exact_11_accumulative=-3.28e+7",
+    "exact_11_contractive=-1.00e+0",
+    "exact_13_accumulative=-2.52e+6",
+    "exact_13_contractive=-1.00e+0",
+    "exact_17_accumulative=-8.68e+4",
+    "exact_17_contractive=-1.00e+0",
+    "exact_23_accumulative=-4.76e+3",
+    "exact_23_contractive=-1.00e+0",
+    "exact_3_accumulative=-6.48e+24",
+    "exact_3_contractive=-1.00e+0",
+    "exact_5_accumulative=-5.49e+15",
+    "exact_5_contractive=-1.00e+0",
+    "exact_7_accumulative=-3.40e+11",
+    "exact_7_contractive=-1.00e+0",
+    "lossless_11_accumulative=4.53e-7",
+    "lossless_11_contractive=9.09e-17",
+    "lossless_13_accumulative=2.05e-8",
+    "lossless_13_contractive=9.34e-16",
+    "lossless_17_accumulative=2.24e-10",
+    "lossless_17_contractive=2.22e-16",
+    "lossless_23_accumulative=2.94e-11",
+    "lossless_23_contractive=2.66e-17",
+    "lossless_3_accumulative=7.49e+10",
+    "lossless_3_contractive=4.44e-16",
+    "lossless_5_accumulative=4.19e+1",
+    "lossless_5_contractive=2.22e-16",
+    "lossless_7_accumulative=3.55e-3",
+    "lossless_7_contractive=2.25e-16",
+    "lossless_onset_at_three=46",
+    "onset_exceptions=2",
+    "rows=14",
+    "steps=200",
+    "truncation_never_helps=True"
    ]
   },
   {
@@ -4011,16 +4090,8 @@
    "replayed": true,
    "status": "answered",
    "surface": "planner",
-   "theorems": [
-    "GLM.Info.ds_zero_run_length_lt",
-    "GLM.Info.dsBit_eq_floor_diff",
-    "GLM.Info.ds_resonance_lock"
-   ],
-   "theorems_declared": [
-    "GLM.Info.ds_zero_run_length_lt",
-    "GLM.Info.dsBit_eq_floor_diff",
-    "GLM.Info.ds_resonance_lock"
-   ],
+   "theorems": [],
+   "theorems_declared": [],
    "witness": [
     "claim_count=58",
     "confirmed=33",
@@ -4045,7 +4116,106 @@
     "section_22=2.3",
     "section_23=2.3",
     "section_24=2.3",
-    "section_25=2.3"
+    "section_25=2.3",
+    "section_26=2.4",
+    "section_27=2.4",
+    "section_28=3.2",
+    "section_29=3.2",
+    "section_3=1.3",
+    "section_30=3.2",
+    "section_31=3.2",
+    "section_32=3.2",
+    "section_33=4",
+    "section_34=4",
+    "section_35=4",
+    "section_36=4",
+    "section_37=4",
+    "section_38=4",
+    "section_39=4.4",
+    "section_4=1.3",
+    "section_40=5.1",
+    "section_41=5.1",
+    "section_42=5.1",
+    "section_43=5.2",
+    "section_44=5.2",
+    "section_45=5.2",
+    "section_46=5.2",
+    "section_47=5.2",
+    "section_48=5.2",
+    "section_49=5.3",
+    "section_5=1.3",
+    "section_50=5.3",
+    "section_51=5.4",
+    "section_52=6.1",
+    "section_53=6.1",
+    "section_54=6.1",
+    "section_55=6.1",
+    "section_56=6.2",
+    "section_57=6.2",
+    "section_6=1.3",
+    "section_7=1.3",
+    "section_8=1.3",
+    "section_9=1.4",
+    "section_labels=1.3,1.4,2.2,2.3,2.4,3.2,4,4.4,5.1,5.2,5.3,5.4,6.1,6.2",
+    "sections=6",
+    "verdict_0=confirmed",
+    "verdict_1=confirmed",
+    "verdict_10=confirmed",
+    "verdict_11=refuted",
+    "verdict_12=confirmed",
+    "verdict_13=not implemented",
+    "verdict_14=not reproduced",
+    "verdict_15=refuted",
+    "verdict_16=refuted",
+    "verdict_17=refuted",
+    "verdict_18=confirmed",
+    "verdict_19=confirmed",
+    "verdict_2=confirmed",
+    "verdict_20=confirmed",
+    "verdict_21=refuted",
+    "verdict_22=confirmed",
+    "verdict_23=not reproduced",
+    "verdict_24=not reproduced",
+    "verdict_25=confirmed",
+    "verdict_26=confirmed",
+    "verdict_27=confirmed",
+    "verdict_28=confirmed",
+    "verdict_29=not reproduced",
+    "verdict_3=confirmed",
+    "verdict_30=confirmed",
+    "verdict_31=confirmed",
+    "verdict_32=refuted",
+    "verdict_33=confirmed",
+    "verdict_34=confirmed",
+    "verdict_35=confirmed",
+    "verdict_36=confirmed",
+    "verdict_37=confirmed",
+    "verdict_38=not reproduced",
+    "verdict_39=not implemented",
+    "verdict_4=confirmed",
+    "verdict_40=confirmed",
+    "verdict_41=refuted",
+    "verdict_42=confirmed",
+    "verdict_43=confirmed",
+    "verdict_44=confirmed",
+    "verdict_45=refuted",
+    "verdict_46=confirmed",
+    "verdict_47=confirmed",
+    "verdict_48=refuted",
+    "verdict_49=confirmed",
+    "verdict_5=refuted",
+    "verdict_50=refuted",
+    "verdict_51=not implemented",
+    "verdict_52=confirmed",
+    "verdict_53=confirmed",
+    "verdict_54=refuted",
+    "verdict_55=not reproduced",
+    "verdict_56=not reproduced",
+    "verdict_57=not reproduced",
+    "verdict_6=refuted",
+    "verdict_7=refuted",
+    "verdict_8=confirmed",
+    "verdict_9=confirmed"
    ]
   },
   {
@@ -4139,7 +4309,88 @@
     "section_21=G5.1",
     "section_22=G5.0",
     "section_23=G5.1",
-    "section_24=G5.2"
+    "section_24=G5.2",
+    "section_25=G5.1",
+    "section_26=G5.1",
+    "section_27=G6.1",
+    "section_28=I2.1",
+    "section_29=I2.1",
+    "section_3=G3.1",
+    "section_30=I2.2",
+    "section_31=I3.1",
+    "section_32=I2.2",
+    "section_33=I2.2",
+    "section_34=I6.5",
+    "section_35=I6.5",
+    "section_36=I6.2",
+    "section_37=I6.3",
+    "section_38=I6.4",
+    "section_39=I6.1",
+    "section_4=G3.1",
+    "section_40=I6.1",
+    "section_41=I6.3",
+    "section_42=I5.3",
+    "section_43=I7.1",
+    "section_44=I7.1",
+    "section_45=I7.2",
+    "section_46=I7.2",
+    "section_47=I7.3",
+    "section_48=I7.3",
+    "section_5=G3.1",
+    "section_6=G3.1",
+    "section_7=G3.1",
+    "section_8=G3.2",
+    "section_9=G2.1",
+    "sections=G2.1,G3.1,G3.2,G4.1,G4.2,G4.3,G5.0,G5.1,G5.2,G6.1,I2.1,I2.2,I3.1,I5.3,I6.1,I6.2,I6.3,I6.4,I6.5,I7.1,I7.2,I7.3",
+    "verdict_0=confirmed",
+    "verdict_1=confirmed",
+    "verdict_10=confirmed",
+    "verdict_11=confirmed",
+    "verdict_12=confirmed",
+    "verdict_13=confirmed",
+    "verdict_14=refuted",
+    "verdict_15=confirmed",
+    "verdict_16=refuted",
+    "verdict_17=refuted",
+    "verdict_18=refuted",
+    "verdict_19=refuted",
+    "verdict_2=confirmed",
+    "verdict_20=not reproduced",
+    "verdict_21=confirmed",
+    "verdict_22=refuted",
+    "verdict_23=refuted",
+    "verdict_24=refuted",
+    "verdict_25=refuted",
+    "verdict_26=not reproduced",
+    "verdict_27=confirmed",
+    "verdict_28=confirmed",
+    "verdict_29=confirmed",
+    "verdict_3=confirmed",
+    "verdict_30=refuted",
+    "verdict_31=confirmed",
+    "verdict_32=confirmed",
+    "verdict_33=confirmed",
+    "verdict_34=confirmed",
+    "verdict_35=confirmed",
+    "verdict_36=refuted",
+    "verdict_37=refuted",
+    "verdict_38=refuted",
+    "verdict_39=confirmed",
+    "verdict_4=not reproduced",
+    "verdict_40=refuted",
+    "verdict_41=confirmed",
+    "verdict_42=not implemented",
+    "verdict_43=confirmed",
+    "verdict_44=refuted",
+    "verdict_45=confirmed",
+    "verdict_46=refuted",
+    "verdict_47=confirmed",
+    "verdict_48=refuted",
+    "verdict_5=not reproduced",
+    "verdict_6=not reproduced",
+    "verdict_7=confirmed",
+    "verdict_8=confirmed",
+    "verdict_9=confirmed"
    ]
   },
   {
@@ -4163,23 +4414,17 @@
    "replayed": true,
    "status": "answered",
    "surface": "planner",
-   "theorems": [
-    "GLM.VOA.borcherds_commutator_fails",
-    "GLM.VOA.form_invariant"
-   ],
-   "theorems_declared": [
-    "GLM.VOA.borcherds_commutator_fails",
-    "GLM.VOA.form_invariant"
-   ],
+   "theorems": [],
+   "theorems_declared": [],
    "witness": [
     "all_within_one_over_n=True",
     "claim_count=39",
     "confirmed=26",
     "core_clean=True",
-    "core_modules=351",
+    "core_modules=382",
     "not_implemented=0",
     "not_reproduced=4",
-    "outside_core_violations=27",
+    "outside_core_violations=24",
     "rate_rows=20",
     "refuted=9",
     "section_0=1",
@@ -4195,7 +4440,72 @@
     "section_18=5.1",
     "section_19=5.1",
     "section_2=2.1",
-    "section_20=5.1"
+    "section_20=5.1",
+    "section_21=5.1",
+    "section_22=5.2",
+    "section_23=5.3",
+    "section_24=5.3",
+    "section_25=6",
+    "section_26=6",
+    "section_27=6",
+    "section_28=6",
+    "section_29=6",
+    "section_3=2.1",
+    "section_30=6",
+    "section_31=6",
+    "section_32=6",
+    "section_33=6.2",
+    "section_34=7.1",
+    "section_35=7.2",
+    "section_36=7.3",
+    "section_37=7",
+    "section_38=7",
+    "section_4=2.2",
+    "section_5=2.2",
+    "section_6=2.2",
+    "section_7=2.3",
+    "section_8=2.3",
+    "section_9=2.3",
+    "sections=1,2.1,2.2,2.3,3.1,4.1,4.2,5.1,5.2,5.3,6,6.2,7,7.1,7.2,7.3",
+    "verdict_0=confirmed",
+    "verdict_1=refuted",
+    "verdict_10=confirmed",
+    "verdict_11=not reproduced",
+    "verdict_12=confirmed",
+    "verdict_13=confirmed",
+    "verdict_14=confirmed",
+    "verdict_15=confirmed",
+    "verdict_16=confirmed",
+    "verdict_17=not reproduced",
+    "verdict_18=not reproduced",
+    "verdict_19=confirmed",
+    "verdict_2=confirmed",
+    "verdict_20=confirmed",
+    "verdict_21=refuted",
+    "verdict_22=confirmed",
+    "verdict_23=confirmed",
+    "verdict_24=confirmed",
+    "verdict_25=confirmed",
+    "verdict_26=confirmed",
+    "verdict_27=refuted",
+    "verdict_28=confirmed",
+    "verdict_29=confirmed",
+    "verdict_3=confirmed",
+    "verdict_30=refuted",
+    "verdict_31=confirmed",
+    "verdict_32=refuted",
+    "verdict_33=refuted",
+    "verdict_34=refuted",
+    "verdict_35=confirmed",
+    "verdict_36=refuted",
+    "verdict_37=not reproduced",
+    "verdict_38=refuted",
+    "verdict_4=confirmed",
+    "verdict_5=confirmed",
+    "verdict_6=confirmed",
+    "verdict_7=confirmed",
+    "verdict_8=confirmed",
+    "verdict_9=confirmed"
    ]
   },
   {
@@ -4291,7 +4601,17 @@
     "exact_terminates_19=False",
     "exact_terminates_23=False",
     "exact_terminates_29=False",
-    "exact_terminates_3=False"
+    "exact_terminates_3=False",
+    "exact_terminates_31=False",
+    "exact_terminates_5=False",
+    "exact_terminates_7=False",
+    "max_distance_before_collapse=23",
+    "max_significand_hamming=3",
+    "min_retained_bits=53",
+    "periods=2,4,3,10,12,8,18,11,28,5",
+    "precision=53",
+    "primes=3,5,7,11,13,17,19,23,29,31",
+    "refuted=1"
    ]
   },
   {
@@ -4344,7 +4664,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report lean: 5759 declarations of the Lean development carry a deterministic Leech address, read back exactly 5759/5759 times with 0 coordinate errors; 4944 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 1196 times against 34 for a SHA-256 control and a chance rate of 93218/16580161",
+   "answer": "report lean: 9400 declarations of the Lean development carry a deterministic Leech address, read back exactly 9400/9400 times with 0 coordinate errors; 7672 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 2186 times against 41 for a SHA-256 control and a chance rate of 31413/7362550",
    "boundary": "certified",
    "budget": {
     "steps": 6
@@ -4367,34 +4687,34 @@
    "theorems_declared": [],
    "witness": [
     "cache_verdict=fresh",
-    "collision_classes=511",
-    "control_same_file=34",
+    "collision_classes=796",
+    "control_same_file=41",
     "coordinate_errors=0",
     "covering_radius=4",
-    "declarations=5759",
-    "distinct_addresses=4944",
-    "distinct_features=4944",
+    "declarations=9400",
+    "distinct_addresses=7672",
+    "distinct_features=7672",
     "feature_beats_control=True",
-    "feature_linked=234",
-    "feature_same_file=1196",
-    "files=245",
+    "feature_linked=328",
+    "feature_same_file=2186",
+    "files=408",
     "hash_is_chance_like=True",
-    "largest_class=19",
-    "linked_chance=12240/16580161",
-    "moved=5759",
-    "read_back_exact=5759",
-    "same_file_chance=93218/16580161",
+    "largest_class=34",
+    "linked_chance=1117/2208765",
+    "moved=9400",
+    "read_back_exact=9400",
+    "same_file_chance=31413/7362550",
     "scale=9",
-    "shuffled_same_file=12",
+    "shuffled_same_file=19",
     "worst_residual=3"
    ]
   },
   {
    "ambiguity": [],
-   "answer": "report directives: 17 standing rules, 17 of them with every named instrument present in the tree, 0 defects",
+   "answer": "report directives: 22 standing rules, 22 of them with every named instrument present in the tree, 0 defects",
    "boundary": "certified",
    "budget": {
-    "steps": 19
+    "steps": 24
    },
    "candidates": [],
    "evidence": [
@@ -4413,12 +4733,12 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "count=17",
+    "count=22",
     "defects=0",
-    "instrumented=17",
-    "keys=D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15,D16,D17",
+    "instrumented=22",
+    "keys=D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15,D16,D17,D18,D19,D20,D21,D22",
     "sound=True",
-    "words=2091"
+    "words=3188"
    ]
   },
   {
@@ -4428,7 +4748,9 @@
    "budget": {
     "steps": 5
    },
-   "candidates": [],
+   "candidates": [
+    "8"
+   ],
    "evidence": [
     "self-report"
    ],
@@ -4468,7 +4790,9 @@
     "stabiliser_1=288",
     "stabiliser_2=200",
     "stabiliser_4=16",
-    "stabiliser_8=8"
+    "stabiliser_8=8",
+    "stabiliser_total=816",
+    "truth_survives=True"
    ]
   },
   {
@@ -4518,7 +4842,26 @@
     "none_mean_proposals=835/2",
     "none_minimal=8",
     "none_solved=8",
-    "none_verified=8"
+    "none_verified=8",
+    "random_mean_proposals=1895/6",
+    "random_minimal=12",
+    "random_solved=12",
+    "random_verified=12",
+    "reachable=24",
+    "reachable_in_register=599",
+    "register=726",
+    "targets=32",
+    "unreachable=8",
+    "verdict_address_beats_carrier=True",
+    "verdict_address_beats_no_guidance=True",
+    "verdict_address_beats_random=True",
+    "verdict_address_matches_exact=False",
+    "verdict_every_answer_is_minimal=False",
+    "verdict_every_answer_is_verified=True",
+    "verdict_exact_heuristic_solves_everything=True",
+    "verdict_invariant_refusals_need_no_search=True",
+    "verdict_native_resolution_collapses=True",
+    "width=2"
    ]
   },
   {
@@ -4636,10 +4979,10 @@
     "cache=fresh",
     "cells=16",
     "gate=10",
+    "l5_passes_without_criterion=480",
     "l5_passing=8",
     "l5_sizes=8",
-    "l5_smallest=240",
-    "l5_without=480",
+    "l5_smallest_passing=240",
     "reproduces=True",
     "verdict=the law descends",
     "winner_is_extension=True"
@@ -4647,7 +4990,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report retrieval: the address book used as an index over 5759 Lean declarations, scored on 206 queries against every control.  The address finds a relative in its top 5 for 76 of them -- 1269/100 times the closed-form chance of 29/1000 -- and beats the digest (7/206), the seeded reshuffle (5/103), a random ranking (5/206) and name search (25/103).  It is beaten decisively by a plain lexical search over the statement text (169/206), ranking the raw feature vectors without any lattice scores 38/103, and an address book built from the identifiers rather than the syntax reaches 60/103 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 293658 pairs with 0 violations, so a radius search prunes the corpus to 2046/97903 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
+   "answer": "report retrieval: the address book used as an index over 9400 Lean declarations, scored on 200 queries against every control.  The address finds a relative in its top 5 for 92 of them -- 2099/100 times the closed-form chance of 11/500 -- and beats the digest (3/200), the seeded reshuffle (1/100), a random ranking (1/25) and name search (19/100).  It is beaten decisively by a plain lexical search over the statement text (163/200), ranking the raw feature vectors without any lattice scores 47/100, and an address book built from the identifiers rather than the syntax reaches 53/100 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 469950 pairs with 0 violations, so a radius search prunes the corpus to 677/29375 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
    "boundary": "certified",
    "budget": {
     "steps": 6
@@ -4669,35 +5012,44 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "address_hit_rate=38/103",
-    "chance=105092789239899015/3615501785827491812",
-    "corpus=5759",
-    "digest_hit_rate=7/206",
-    "features_hit_rate=38/103",
+    "address_hit_rate=23/50",
+    "chance=66911736080809982/3053056686490065645",
+    "corpus=9400",
+    "digest_hit_rate=3/200",
+    "features_hit_rate=47/100",
     "goal_features_reproduced=0",
-    "goal_queries=102",
+    "goal_queries=100",
     "hybrid_beats_text=False",
     "k=5",
     "lean_file=RequestProject/GLM/Retrieval.lean",
-    "lexical_hit_rate=60/103",
-    "mean_shortlist=2046/17",
-    "name_hit_rate=25/103",
-    "pairs_checked=293658",
-    "queries=206",
-    "random_hit_rate=5/206",
-    "shuffled_hit_rate=5/103",
-    "text_hit_rate=169/206",
-    "times_chance=1333874445256744552/105092789239899015",
-    "times_chance_rounded=1269/100",
+    "lexical_hit_rate=53/100",
+    "mean_shortlist=5416/25",
+    "name_hit_rate=19/100",
+    "pairs_checked=469950",
+    "queries=200",
+    "random_hit_rate=1/25",
+    "shuffled_hit_rate=1/100",
+    "text_hit_rate=163/200",
+    "times_chance=14044060757854301967/669117360808099820",
+    "times_chance_rounded=2099/100",
     "verdict_address_beats_chance=True",
     "verdict_address_beats_digest=True",
     "verdict_address_beats_name=True",
-    "verdict_address_beats_random=True"
+    "verdict_address_beats_random=True",
+    "verdict_address_beats_shuffled=True",
+    "verdict_address_beats_text=False",
+    "verdict_guarantee_holds=True",
+    "verdict_hybrid_beats_text=False",
+    "verdict_lattice_matches_raw_features=False",
+    "verdict_lexical_beats_structural=True",
+    "verdict_lexical_beats_text=False",
+    "verdict_text_beats_address=True",
+    "violations=0"
    ]
   },
   {
    "ambiguity": [],
-   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 11823278/11843043 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
+   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 3368237/3372190 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
    "boundary": "certified",
    "budget": {
     "steps": 7
@@ -4728,8 +5080,8 @@
     "fix_checked=196656",
     "fix_exact=True",
     "minimal_vectors=196560",
-    "repo_generated_bytes=11823278",
-    "repo_generated_fraction=11823278/11843043",
+    "repo_generated_bytes=16841185",
+    "repo_generated_fraction=3368237/3372190",
     "repo_primary_bytes=19765",
     "sextet_confirmed=200",
     "sextet_distinct_outputs=1",
@@ -4742,7 +5094,14 @@
     "storage_all_verified=True",
     "storage_generator_bytes=24648",
     "storage_ratio=3149815/8216",
-    "storage_stored_bytes=9449445"
+    "storage_stored_bytes=9449445",
+    "verdict_fix_exact=True",
+    "verdict_generator_claims_met=False",
+    "verdict_sieve_complete=False",
+    "verdict_sieve_sound=True",
+    "verdict_snap_sound=False",
+    "verdict_snap_sound_near=False",
+    "verdict_storage_verified=True"
    ]
   },
   {
@@ -4792,7 +5151,21 @@
     "stage_lattice-completion=6",
     "stage_lean-address=6",
     "stage_name-coordinate=6",
-    "stage_noise-experiment=6"
+    "stage_noise-experiment=6",
+    "stage_pipeline=6",
+    "stage_query-escalation=6",
+    "stage_relative-measure=6",
+    "stage_reverse-call-planner=6",
+    "stage_review-sweep=6",
+    "stage_semantics=6",
+    "stage_shell-sigma=6",
+    "stage_stack-relay=6",
+    "stage_study-catalog=6",
+    "stage_unification-blueprint=6",
+    "stage_wobble-landscape=6",
+    "stage_zero-storage=6",
+    "stages=studied,implemented,wired,tested,formalised,verified",
+    "total_tests=3320"
    ]
   },
   {
@@ -4981,7 +5354,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report: unknown subject 'nonsense subject'.  Try one of: relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, hole configuration, cumulativity, query escalation, review sweep, routes",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -5051,7 +5424,36 @@
     "denotation_verdicts=quantity:2,ambiguous:3,polymorphic:7,carrier:13,process:27,abstraction:31",
     "denotations=83",
     "differs_by=22",
-    "gained=108"
+    "gained=108",
+    "hot_in_stellar_surface=44000/1",
+    "hot_in_tea=363/1",
+    "lexicon_agreement=True",
+    "measure_only_resolution=57",
+    "measure_resolution=67",
+    "quantities=density,force,frequency,illuminance,length,luminous_intensity,mass,pressure,temperature,velocity,volume",
+    "refines=True",
+    "refusal_reasons=quantity mismatch,quantity mismatch,quantity mismatch,no such measure word",
+    "related_to=110",
+    "replacement_refines=False",
+    "replacement_violations=55",
+    "residue=82",
+    "residue_by_kind=no_single_factor:2,not_a_quantity:80",
+    "residue_by_pos=absent:6,adjective:9,noun:38,verb:27",
+    "same_dimension_as=6",
+    "scale_words=64",
+    "scaled_words=12",
+    "shared_words=12",
+    "static_agreement=True",
+    "static_resolution=23",
+    "transport_answered=18",
+    "transport_cases=26",
+    "transport_control_answered=1",
+    "unscaled_words=11",
+    "uses=67",
+    "violations=0",
+    "witness_replacement_violations=253",
+    "witness_uses=79",
+    "witness_widening_violations=0"
    ]
   },
   {
@@ -5101,7 +5503,36 @@
     "denotation_verdicts=quantity:2,ambiguous:3,polymorphic:7,carrier:13,process:27,abstraction:31",
     "denotations=83",
     "differs_by=22",
-    "gained=108"
+    "gained=108",
+    "hot_in_stellar_surface=44000/1",
+    "hot_in_tea=363/1",
+    "lexicon_agreement=True",
+    "measure_only_resolution=57",
+    "measure_resolution=67",
+    "quantities=density,force,frequency,illuminance,length,luminous_intensity,mass,pressure,temperature,velocity,volume",
+    "refines=True",
+    "refusal_reasons=quantity mismatch,quantity mismatch,quantity mismatch,no such measure word",
+    "related_to=110",
+    "replacement_refines=False",
+    "replacement_violations=55",
+    "residue=82",
+    "residue_by_kind=no_single_factor:2,not_a_quantity:80",
+    "residue_by_pos=absent:6,adjective:9,noun:38,verb:27",
+    "same_dimension_as=6",
+    "scale_words=64",
+    "scaled_words=12",
+    "shared_words=12",
+    "static_agreement=True",
+    "static_resolution=23",
+    "transport_answered=18",
+    "transport_cases=26",
+    "transport_control_answered=1",
+    "unscaled_words=11",
+    "uses=67",
+    "violations=0",
+    "witness_replacement_violations=253",
+    "witness_uses=79",
+    "witness_widening_violations=0"
    ]
   },
   {
@@ -5150,7 +5581,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report language: 7 of 27 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 203 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
+   "answer": "report language: 7 of 30 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 217 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
    "boundary": "certified",
    "budget": {
     "steps": 9
@@ -5195,7 +5626,18 @@
     "nested_widened=148",
     "openings=17",
     "openings_disjoint=True",
-    "outside=203"
+    "outside=217",
+    "phrasings=47",
+    "preamble_forms=48",
+    "round_trips=947",
+    "shape_families=3",
+    "slots=7",
+    "undescribed_kinds=23",
+    "undescribed_parts=3",
+    "verdict=described",
+    "widening_unexplained=0",
+    "widenings=1",
+    "witnesses=6"
    ]
   },
   {
@@ -5265,11 +5707,10 @@
     "correct=40",
     "failures=4",
     "l5_certified_types=10",
-    "l5_correct=4",
-    "l5_failures=4",
-    "l5_ratio_below_one=True",
-    "l5_refused=0",
-    "l5_wrong=0",
+    "l5_failures_correct=4",
+    "l5_joint_failures=4",
+    "l5_rho=0.3048",
+    "l5_types=10",
     "layer=joint",
     "negative_stands=True",
     "queries=44",
@@ -5318,7 +5759,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report query escalation: over 223 evaluation cases no answer moves and no principled refusal is converted (safety = True), and 4 of 18 declared probes resolve above the first rung, 2 of the refusals as certified absences",
+   "answer": "report query escalation: over 237 evaluation cases no answer moves and no principled refusal is converted (safety = True), and 4 of 18 declared probes resolve above the first rung, 2 of the refusals as certified absences",
    "boundary": "certified",
    "budget": {
     "steps": 5
@@ -5342,7 +5783,7 @@
    "witness": [
     "answers_moved=0",
     "cache=fresh",
-    "cases=223",
+    "cases=237",
     "certified_absences=2",
     "principled_refusals_converted=0",
     "probes=18",
@@ -5353,7 +5794,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 344 -> 348 of 412 (ahead), a disjoint held-out stride 340 -> 343 of 411 (ahead) and bare goal queries 684 -> 686 of 823 (ahead), carrying 9 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 2, so the gain is the substrate's rather than the list padding's, and the gate fires on only 40 of 1646 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
+   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 329 -> 337 of 409 (ahead), a disjoint held-out stride 347 -> 350 of 409 (ahead) and bare goal queries 676 -> 680 of 818 (ahead), carrying 15 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 0, so the gain is the substrate's rather than the list padding's, and the gate fires on only 42 of 1636 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -5375,35 +5816,43 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "carried=9",
-    "corpus=5759",
+    "carried=15",
+    "corpus=9400",
     "gate=1/10",
-    "goal_fired=20",
-    "goal_leader_hits=684",
-    "goal_queries=823",
-    "goal_relay_hits=686",
-    "holdout_fired=10",
-    "holdout_leader_hits=340",
-    "holdout_queries=411",
-    "holdout_relay_hits=343",
+    "goal_fired=21",
+    "goal_leader_hits=676",
+    "goal_queries=818",
+    "goal_relay_hits=680",
+    "holdout_fired=4",
+    "holdout_leader_hits=347",
+    "holdout_queries=409",
+    "holdout_relay_hits=350",
     "lean_file=RequestProject/GLM/Relay.lean",
     "lost=0",
-    "tuning_fired=10",
-    "tuning_leader_hits=344",
-    "tuning_queries=412",
-    "tuning_relay_hits=348",
+    "tuning_fired=17",
+    "tuning_leader_hits=329",
+    "tuning_queries=409",
+    "tuning_relay_hits=337",
     "verdict_carried_outnumber_lost=True",
     "verdict_gain_holds_across_the_gate=True",
     "verdict_gain_never_below_across_the_gate=True",
     "verdict_gain_strict_gates=5",
     "verdict_gain_strict_to_gate=1/4",
     "verdict_gate_fires_rarely=True",
-    "verdict_geometry_carries_more_than_control=True"
+    "verdict_geometry_carries_more_than_control=True",
+    "verdict_geometry_carries_more_than_name=True",
+    "verdict_geometry_never_carries_fewer_than_control=True",
+    "verdict_relay_beats_text_on_every_set=True",
+    "verdict_relay_never_below_leader=True",
+    "vision_filter_saving=346/363",
+    "vision_leader_solves=1",
+    "vision_puzzles=50",
+    "vision_relay_solves=2"
    ]
   },
   {
    "ambiguity": [],
-   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 823 queries the text search falls 684 -> 57 of 823 and the identifier address book 356 -> 35 of 823, against the 23 hits chance gives, while the structural address holds 152 -> 152 of 823 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (823 of 823 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 519 of 823 and lifts the leader 57 -> 103.  The carry set is a class, not a residue.  Standing, read off the measurement: 1 of its 12 checks fails (text_is_within_twice_chance)",
+   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 818 queries the text search falls 676 -> 48 of 818 and the identifier address book 280 -> 23 of 818, against the 17 hits chance gives, while the structural address holds 118 -> 117 of 818 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (818 of 818 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 501 of 818 and lifts the leader 48 -> 81.  The carry set is a class, not a residue.  Standing, read off the measurement: 1 of its 12 checks fails (text_is_within_twice_chance)",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -5425,30 +5874,38 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "anonymous_address_hits=152",
-    "anonymous_digest_hits=25",
-    "anonymous_lexical_hits=35",
-    "anonymous_name_hits=4",
-    "anonymous_random_hits=20",
-    "anonymous_text_hits=57",
-    "chance_at_5=619728071809993789/21666684245650673019",
-    "corpus=5759",
-    "fired=519",
-    "invariant_queries=823",
-    "leader_hits=57",
+    "anonymous_address_hits=117",
+    "anonymous_digest_hits=18",
+    "anonymous_lexical_hits=23",
+    "anonymous_name_hits=8",
+    "anonymous_random_hits=36",
+    "anonymous_text_hits=48",
+    "chance_at_5=5439353052694839032/249740036954887369761",
+    "corpus=9400",
+    "fired=501",
+    "invariant_queries=818",
+    "leader_hits=48",
     "lean_file=RequestProject/GLM/Anonymous.lean",
-    "plain_address_hits=152",
-    "plain_digest_hits=26",
-    "plain_lexical_hits=356",
-    "plain_name_hits=197",
-    "plain_random_hits=20",
-    "plain_text_hits=684",
-    "queries=823",
-    "relay_hits=103",
+    "plain_address_hits=118",
+    "plain_digest_hits=23",
+    "plain_lexical_hits=280",
+    "plain_name_hits=135",
+    "plain_random_hits=36",
+    "plain_text_hits=676",
+    "queries=818",
+    "relay_hits=81",
     "verdict_address_holds=True",
     "verdict_address_is_above_twice_chance=True",
     "verdict_address_is_the_clear_leader=True",
-    "verdict_address_stays_above_the_control=True"
+    "verdict_address_stays_above_the_control=True",
+    "verdict_gate_hands_over=True",
+    "verdict_lexical_collapses_too=True",
+    "verdict_only_the_type_vocabulary_moves=True",
+    "verdict_placeholders_are_fresh=True",
+    "verdict_relay_beats_text_in_the_register=True",
+    "verdict_text_collapses_without_the_names=True",
+    "verdict_text_is_within_twice_chance=False",
+    "verdict_text_leads_when_the_names_are_there=True"
    ]
   },
   {
@@ -5742,7 +6199,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: measure: 'large' measures volume and 'room' is a class of length; a word cannot be measured against a class of another quantity",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -5767,7 +6224,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: measure: 'expensive' is neither a lexicon adjective nor a word on any measure scale, so there is nothing to measure it with",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -5792,7 +6249,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: measure: 'hot' measures temperature and 'walking' is a class of velocity; a word cannot be measured against a class of another quantity",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -5981,7 +6438,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: comparative: 'hot' in 'tea' measures temperature and 'fast' in 'walking' measures velocity; magnitudes of different quantities are not comparable",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6006,7 +6463,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: comparative: 'hotter' is a temperature comparative and the two uses measure velocity; a scale word cannot order magnitudes of another quantity",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6031,7 +6488,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: comparative: 'tepid' sits exactly at the middle of the temperature scale, so 'tepid'-er names no direction on it",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6155,7 +6612,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: derive: no description derives 'cents'; the described domains are comparison, harmonics, economics",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6342,7 +6799,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: field: the row 'C' is held by element, carrier:chemistry, carrier:lexicon and has no field 'boiling_point'; it answers to: arity, atomic_radius_pm, atomic_weight_u, boiling_point_K, covalent_radius_pm, density_g_per_cm3, electron_affinity_eV, electron_configuration, electronegativity_pauling, forms, group_block, group_block_code, has_property, has_symbol, homonuclear_bde_kJ_per_mol, ionization_energy_eV, is_a, kind, melting_point_K, missing_fields, n_primitives_set, name, period, physical_dims, pos, primitives, standard_state, standard_state_code, symbol, triples, valence_electrons, year_discovered, z",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6367,7 +6824,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: field: element holds the row 'He' and records 'electronegativity_pauling' as missing for it; the surface refuses a missing field rather than answering with a blank",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6392,7 +6849,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: field: no row named 'unobtainium'; nearest rows: Ac (carrier:chemistry), Es (carrier:chemistry), K (carrier:chemistry), No (carrier:chemistry), Np (carrier:chemistry)",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6545,7 +7002,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: ordering (not-ordered): kind of energy is 'semantic_concept', which is a label rather than a quantity; the ordering operation reads a coordinate with an order and refuses one without",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6570,7 +7027,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: ordering (different-scale): line of GLM.NormFamily.family_tower is read on the lean:line scale and line of rung_audit on the python:line scale, and the conversion table declares no unit for 'lean:line' or 'python:line'; a conversion is a fact someone wrote down, not a guess from a field name, and the 10 scales it does declare are element:atomic_weight_u, molecule:molar_mass_u, element:ionization_energy_eV, element:electron_affinity_eV, element:homonuclear_bde_kJ_per_mol, element:melting_point_K, element:boiling_point_K, fixed_point:temperature_C, element:atomic_radius_pm, element:covalent_radius_pm; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6599,7 +7056,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: ordering (unreadable): the row 'water' is held by molecule, carrier:lexicon, carrier:molecules and has no field 'atomic_weight_u'; it answers to: arity, atom_count, charge, composition, contains, counts, distinct_elements, electron_count, elements, essential_for, form_of, formula, heteroatom_count, hill_formula, is_a, kind, missing_fields, molar_mass_u, n_primitives_set, name, physical_dims, pos, primitives, triples, valence_electron_total",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6629,9 +7086,7 @@
    "budget": {
     "steps": 4
    },
-   "candidates": [
-    "Og"
-   ],
+   "candidates": [],
    "evidence": [
     "register"
    ],
@@ -6663,9 +7118,7 @@
    "budget": {
     "steps": 4
    },
-   "candidates": [
-    "H"
-   ],
+   "candidates": [],
    "evidence": [
     "register"
    ],
@@ -6697,9 +7150,7 @@
    "budget": {
     "steps": 4
    },
-   "candidates": [
-    "iron(III) sulfate"
-   ],
+   "candidates": [],
    "evidence": [
     "register"
    ],
@@ -6731,22 +7182,7 @@
    "budget": {
     "steps": 4
    },
-   "candidates": [
-    "atom",
-    "bond",
-    "carbon",
-    "chlorine",
-    "computer",
-    "instrument",
-    "ion",
-    "liquid",
-    "molecule",
-    "neutron",
-    "proton",
-    "sky",
-    "solid",
-    "water"
-   ],
+   "candidates": [],
    "evidence": [
     "register"
    ],
@@ -6773,7 +7209,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: extremum (incomplete): 23 of 118 rows have no reading of 'electronegativity_pauling' (the register records it as missing): element:Ar, element:Bh, element:Cn, element:Db, element:Ds, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6798,7 +7234,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: extremum (mixed-scale): 'line' is read on 2 scales -- lean:line, python:line -- and the conversion table declares no unit for 'lean:line'; a column gathered from a scale nobody declared is not one column, so the rows gathered here are not one column; the extremum of two scales together is a fact about neither, and the operation refuses rather than taking it. Name one table to ask for one of them",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6823,7 +7259,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: extremum (not-ordered): name of Ac is 'Actinium', which is a label rather than a quantity; 118 of 118 rows read that way, and a column of labels has no extremum",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6848,7 +7284,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: extremum (no-such-column): the table element holds no reading of 'boiling_point' at all",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6879,7 +7315,7 @@
     "steps": 2
    },
    "candidates": [
-    "9098659"
+    9098659
    ],
    "evidence": [
     "register"
@@ -6910,7 +7346,7 @@
     "steps": 2
    },
    "candidates": [
-    "9098659"
+    9098659
    ],
    "evidence": [
     "register"
@@ -6935,7 +7371,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: carrier (open-fork): 0xca97a1 is at coset weight 4 from six codewords (0x428781, 0x8ad5a3, 0xca3729, 0xce93e0, 0xdb9fa5, 0xe896b1) and nothing in the request resolves the tie; no function of the received word can (GLM.Golay24.weight4_resolved_le_4096), so give the sender's tag, a protected tag or a soft reading",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -6970,12 +7406,12 @@
     "steps": 3
    },
    "candidates": [
-    "4360065",
-    "9098659",
-    "13252393",
-    "13538272",
-    "14393253",
-    "15242929"
+    4360065,
+    9098659,
+    13252393,
+    13538272,
+    14393253,
+    15242929
    ],
    "evidence": [
     "register"
@@ -7006,12 +7442,12 @@
     "steps": 3
    },
    "candidates": [
-    "4360065",
-    "9098659",
-    "13252393",
-    "13538272",
-    "14393253",
-    "15242929"
+    4360065,
+    9098659,
+    13252393,
+    13538272,
+    14393253,
+    15242929
    ],
    "evidence": [
     "register"
@@ -7036,7 +7472,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: carrier (contradicted): no candidate of 0xca9781 (0x428781) is consistent with the sender tag; the carrier or the tag took more corruption than the stage assumes, and an intact tag disagrees with every wrong codeword a decoder could answer on up to seven flips (GLM.Golay24.tag_flags_miscorrection)",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7071,12 +7507,12 @@
     "steps": 3
    },
    "candidates": [
-    "4360065",
-    "9098659",
-    "13252393",
-    "13538272",
-    "14393253",
-    "15242929"
+    4360065,
+    9098659,
+    13252393,
+    13538272,
+    14393253,
+    15242929
    ],
    "evidence": [
     "register"
@@ -7101,7 +7537,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: carrier (not-a-word): 0x1000000 is not a 24-bit word: it needs 25 bits",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7126,7 +7562,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: carrier (tag-width): the sender tag has seven bits, and 0x154 needs 9; a fifteen-bit tag is a 'protected tag'",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7265,7 +7701,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for harmonics:perfect_fifth moved on 2 coordinates by 2 (codeword 102) -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7294,7 +7730,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (ambiguous-name): 'water' names 2 carriers: molecules:water, lexicon:water; say which register",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7319,7 +7755,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (unknown-name): 'Fe' names none of the 142 carriers the address table holds",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7450,7 +7886,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for mathematics:golay_codeword_0 -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7479,7 +7915,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (dimension): a carrier has 24 coordinates; the request gives 3",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7617,7 +8053,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (contradicted): albedo reads as the junction {physics:absorptance, physics:albedo}, and the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? no) leave no member: some reply is false of the carrier meant, or the carrier meant is not in the junction (GLM.TimedQuestion.contradicted_not_truthful); the GLM reports the contradiction rather than choose",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7656,7 +8092,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: locate (no-tie): chemistry:C reads as the single carrier chemistry:C at rung C, so there is no tie for the 1 given reply to resolve; ask `locate C` alone",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7786,7 +8222,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: hole (lattice-point): the given point is a lattice point: distance 0, so it sits in no deep hole and has no Niemeier type however long it is read",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7811,7 +8247,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: hole (malformed): a walk is named by its index, a whole number, not 'x'",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7836,10 +8272,10 @@
   },
   {
    "ambiguity": [],
-   "answer": "The corpus says: * the Golay code is doubly even, so Hamming-weight parity is constant on every coset (pop_parity_of_coset); * the cosets the legacy engine fails on are exactly those whose leader has weight 4, which is even; * hence every output of legacySnap has even weight (legacySnap_even_weight), and therefore every jump norm between two such states is even (legacy_even_quantisation) — for any encoder, any integers, primes or not. [glm_lean/RequestProject/GLM/Shortcut/Substrate.lean#p4.s0] Also: (data file, copula:is) * the Golay code is doubly even, so Hamming-weight parity is constant on every coset (pop_parity_of_coset); * the cosets the legacy engine fails on are exactly those whose leader has weight 4, which is even; * hence every output of legacySn [glm_universal/knowledge/_data/corpus_definitions.json#p136.s0] (archive or supplied, copula:is) the Golay code is doubly even, so Hamming-weight parity is constant on each coset; [source_material/GLM-main.zip/GLM-main/leech_lattice/LATTICE_SHORTCUT_METHOD.md#p47.s0]",
+   "answer": "The corpus says: The Golay code is a [24, 12, 8]_2 code with weight distribution: weight 0: 1 codeword (the zero codeword) weight 8: 759 codewords weight 12: 2576 codewords weight 16: 759 codewords weight 24: 1 codeword (the all-ones codeword) Total: 4096 codewords. [source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1] Also: (data file, copula:is) The Golay code is a [24, 12, 8]_2 code with weight distribution: weight 0: 1 codeword (the zero codeword) weight 8: 759 codewords weight 12: 2576 codewords weight 16: 759 codewords weight 24: 1 codeword (the all-ones codeword) Total: 4096 c [src/glm_universal/reasoning/_data/evidence_model_study.json#p0.s0] (state document, copula:is) The Golay code is the first case and the Lean address book the second, which is why one is regenerated from twelve rows and the other is stored beside its digest. [MASTER_PLAN.md#p1085.s3]",
    "boundary": "certified",
    "budget": {
-    "steps": 3
+    "steps": 1
    },
    "candidates": [],
    "evidence": [
@@ -7858,15 +8294,24 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "head=glm_lean/RequestProject/GLM/Shortcut/Substrate.lean#p4.s0"
+    "context=24,binary,lattice,12,leech,extended,weight,one,lean,substrate,glm,mog",
+    "documents=202",
+    "head=source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1",
+    "mentions=468",
+    "pattern=copula:is",
+    "ranking=source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1 | src/glm_universal/reasoning/_data/evidence_model_study.json#p0.s0 | MASTER_PLAN.md#p1085.s3",
+    "reading=define",
+    "strength=2",
+    "support=4",
+    "term=golay code"
    ]
   },
   {
    "ambiguity": [],
-   "answer": "a digest addresses … integrity never meaning the corpus's own most frequent continuation stopped end of the same way (the corpus's own most frequent continuation; stopped: end of sentence). Witnesses: integrity (34/61, DIGEST.md#p12.s1); never (26/36, DIGEST.md#p12.s1); meaning (28/28, DIGEST.md#p12.s1); the (17/38, glm_universal/knowledge/_data/friction_survey.json#p1484.s0); corpus's (17/62, glm_universal/knowledge/_data/friction_survey.json#p1484.s0)",
+   "answer": "a digest addresses … integrity never meaning (the corpus's own most frequent continuation; stopped: end of sentence). Witnesses: integrity (22/31, DIGEST.md#p7.s7); never (14/24, DIGEST.md#p7.s7); meaning (16/16, DIGEST.md#p7.s7)",
    "boundary": "certified",
    "budget": {
-    "steps": 3
+    "steps": 1
    },
    "candidates": [],
    "evidence": [
@@ -7885,12 +8330,17 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "text=integrity never meaning the corpus's own most frequent continuation stopped end of the same way"
+    "continuation=integrity never meaning",
+    "counts=22/31,14/24,16/16",
+    "prefix=a digest addresses",
+    "reading=continue",
+    "stop=end",
+    "witnesses=DIGEST.md#p7.s7 | DIGEST.md#p7.s7 | DIGEST.md#p7.s7"
    ]
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: corpus (unsupported): the corpus mentions 'zyxwv' in 49 sentences of 17 documents but no sentence defines it by a declared pattern",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7905,7 +8355,7 @@
    "kind": "corpus",
    "ok_flag": false,
    "question": "corpus define zyxwv",
-   "refusal": "corpus (unsupported): the corpus mentions 'zyxwv' in 49 sentences of 17 documents but no sentence defines it by a declared pattern",
+   "refusal": "corpus (define): the corpus mentions 'zyxwv' in 6 sentences of 5 documents but no sentence defines it by a declared pattern",
    "replayed": null,
    "status": "refused",
    "surface": "planner",
@@ -7915,10 +8365,10 @@
   },
   {
    "ambiguity": [],
-   "answer": "'seven' sits at the Leech point (72, 0, 26, 62, 52, 0, 0, 36, -2, 72, 36, 0, 18, 18, 26, 54, 36, 0, -2, 0, 0, 0, 0, 0) (read back exactly: True), from its positional company 'the _' 8, 'is _' 3, 'of _' 7, 'and _' 6, 'in _' 4, 'to _' 8, 'it _' 4, '_ the' 2, '_ a' 2, '_ is' 3, '_ of' 6, '_ and' 4. Its nearest words on the lattice (squared distance): six (4208), fourteen (4896), fifteen (4976), ten (5472), two (5904), five (6096), four (6800), electron (7072), three (7456), smallest (7664).",
+   "answer": "'seven' sits at the Leech point (72, 54, 26, 54, 26, 62, 0, 0, 54, 0, 46, 0, 18, 26, 0, 46, 28, 62, 0, 0, 36, 0, 44, 2) (read back exactly: True), from its positional company 'the _' 8, 'a _' 6, '1 _' 3, 'and _' 6, 'is _' 3, 'of _' 7, 'by _' 6, 'in _' 5, '_ the' 2, '_ a' 3, '_ and' 5, '_ is' 3, '_ of' 7, '_ by' 4, '_ in' 5. Its nearest words on the lattice (squared distance): four (2320), three (3472), six (4000), two (4128), ten (4192), one (5360), corpus (5392), data (5680), report (5696), derivation (6144).",
    "boundary": "certified",
    "budget": {
-    "steps": 4
+    "steps": 1
    },
    "candidates": [],
    "evidence": [
@@ -7937,12 +8387,17 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "coordinates=8,0,3,7,6,0,0,4,0,8,4,0,2,2,3,6,4,0,0,0,0,0,0,0"
+    "address=72,54,26,54,26,62,0,0,54,0,46,0,18,26,0,46,28,62,0,0,36,0,44,2",
+    "anchors=the,a,1,and,is,of,2,0,by,t,in,3",
+    "coordinates=8,6,3,6,3,7,0,0,6,0,5,0,2,3,0,5,3,7,0,0,4,0,5,0",
+    "readback=True",
+    "reading=address",
+    "word=seven"
    ]
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: corpus (unsupported): a lattice address is for one word, and 'golay code' is 2 tokens",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -7957,10 +8412,380 @@
    "kind": "corpus",
    "ok_flag": false,
    "question": "corpus address of golay code",
-   "refusal": "corpus (unsupported): a lattice address is for one word, and 'golay code' is 2 tokens",
+   "refusal": "corpus (address): a lattice address is for one word, and 'golay code' is 2 tokens",
    "replayed": null,
    "status": "refused",
    "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "LEECH_SHELLS_STUDY (Phase 164) — The Leech shells from the lattice's definition — the shapes proved, every shell counted from the Golay census; phase 164; status closed; faculty unknown; last altered 31 October 2026; Question: Can the GLM define the Leech lattice by Conway's construction from the Golay code, prove the shapes of its minimal vectors from that definition, and count every shell from the Golay census alone — checked against the theta series, which uses no Golay code — instead of reading the shells from a stored table?; Verdict: Yes. The minimal shapes are proved in Lean from Conway's definition, and every shell is counted from the Golay census walked from the generator, agreeing with the theta series on every shell through norm 14; the stored table's norm-12 shell was wrong and is corrected.; Deciding figure: 6 of 6 marks; the weight census `1, 759, 2576, 759, 1` walked from the generator; 8 of 8 shells agreeing with the theta series `E₄³ − 720Δ` through norm 14; the norm-12 shell 34,408,430,950 → 34,417,656,000.; Recomputed by: `glm_universal.reasoning.leech_shells.shell_report`; Marks: 6 declared (L1, S1, S2, S3, T1, F1); met 6; Builds on: LLVQ_TABLE_STUDY, TOOL_MACHINE_STUDY; Built on by: LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY; Also links to: GLM_ACADEMIC_PAPER, LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY, PI_MACHINE_STUDY; Code: reasoning/leech_shells.py, reasoning/llvq.py, substrate/leech2.py; Tests: test_leech_shells.py; Lean missing: LeechMachine, LeechShells, ToolMachine; Prose: studies/LEECH_SHELLS_STUDY.md",
+   "boundary": "certified",
+   "budget": {
+    "steps": 2
+   },
+   "candidates": [],
+   "evidence": [
+    "corpus"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "study-card",
+   "kind": "study",
+   "ok_flag": true,
+   "question": "study LEECH_SHELLS_STUDY",
+   "refusal": "",
+   "replayed": true,
+   "status": "answered",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": [
+    "code=0",
+    "lines=14",
+    "named=LEECH_SHELLS_STUDY,LLVQ_TABLE_STUDY,TOOL_MACHINE_STUDY,LEECH_KISSING_STUDY,LEECH_SHELL_COUNT_STUDY,GLM_ACADEMIC_PAPER,PI_MACHINE_STUDY"
+   ]
+  },
+  {
+   "ambiguity": [],
+   "answer": "",
+   "boundary": "refused",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "corpus"
+   ],
+   "expect": "refusal",
+   "history": [],
+   "id": "study-unknown",
+   "kind": "study",
+   "ok_flag": false,
+   "question": "study zzqx",
+   "refusal": "study (NOTHING_IN_THE_MANIFESTS): no study is named 'zzqx': the study manifests hold no such id (try a term search: \"which studies bear on ...\")",
+   "replayed": null,
+   "status": "refused",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "A000045 — The Fibonacci numbers: F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2): your terms are its terms from position 1 (counting the first stored term as 0); it starts 0 and continues 13, 21, 34, 55. [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item glm_wheels_bundle) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (IntakeChecks/NextTerm, IntakeChecks/SporadicOrderCheck, Wheels/IntegerWheel, Wheels/SporadicOrders)]",
+   "boundary": "certified",
+   "budget": {
+    "steps": 3
+   },
+   "candidates": [],
+   "evidence": [
+    "computation"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "sequence-fibonacci",
+   "kind": "sequence",
+   "ok_flag": true,
+   "question": "what sequence is 1, 1, 2, 3, 5, 8",
+   "refusal": "",
+   "replayed": true,
+   "status": "answered",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": [
+    "claim=1, 1, 2, 3, 5, 8",
+    "id=A000045",
+    "position=1"
+   ]
+  },
+  {
+   "ambiguity": [],
+   "answer": "",
+   "boundary": "refused",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "computation"
+   ],
+   "expect": "refusal",
+   "history": [],
+   "id": "sequence-unheld",
+   "kind": "sequence",
+   "ok_flag": false,
+   "question": "what sequence is 9, 17, 4, 1000, 3",
+   "refusal": "sequence (NOT_ON_THE_WHEEL): No sequence on the wheel holds the terms 9, 17, 4, 1000, 3 (its 161 entries are audited OEIS sequences and the 26 sporadic groups); nothing is guessed.",
+   "replayed": null,
+   "status": "refused",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "rule30: the first 20 cells of Rule 30's centre column from one black cell: 11011100110001011001; 11 black, 9 white (share of black 11/20); the cells are those GLM.IntakeChecks.RuleThirtyBits.centreBits_64 proves [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item Rule30_GLM_Study) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (Escalation, HypothesisEngine, HypothesisEngine/NeedsWheel, HypothesisEngine/Wheel, IntakeChecks/RuleThirtyBits, Rule30, Rule30/DriveWheel, Rule30/LeftDiagonalPeriods)] [read as `tool rule30 centre 20`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-rule30-centre",
+   "kind": "",
+   "ok_flag": true,
+   "question": "what are the first 20 cells of rule 30's centre column",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
+   "theorems": [
+    "GLM.IntakeChecks.RuleThirtyBits.centreBits_64"
+   ],
+   "theorems_declared": [
+    "GLM.IntakeChecks.RuleThirtyBits.centreBits_64"
+   ],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "rule30: 'every left diagonal has eventual period dividing 8': false -- on the engine's wheel it is in the ring 'knows' (refuted-on-escalation: counterexample at rational (scale 1000): left diagonal 400 has eventual period 16); Lean: GLM.Rule30.not_leftDiagPeriodDivides_eight [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item Rule30_GLM_Study) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (Escalation, HypothesisEngine, HypothesisEngine/NeedsWheel, HypothesisEngine/Wheel, IntakeChecks/RuleThirtyBits, Rule30, Rule30/DriveWheel, Rule30/LeftDiagonalPeriods)] [read as `tool rule30 claim every left diagonal has eventual period dividing 8`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-rule30-claim-refuted",
+   "kind": "",
+   "ok_flag": true,
+   "question": "in rule 30, every left diagonal has eventual period dividing 8",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
+   "theorems": [
+    "GLM.Rule30.not_leftDiagPeriodDivides_eight"
+   ],
+   "theorems_declared": [
+    "GLM.Rule30.not_leftDiagPeriodDivides_eight"
+   ],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "",
+   "boundary": "refused",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "computation"
+   ],
+   "expect": "refusal",
+   "history": [],
+   "id": "tool-rule30-claim-open",
+   "kind": "unknown",
+   "ok_flag": false,
+   "question": "in rule 30, the periods of the left diagonals are unbounded",
+   "refusal": "unrecognised query",
+   "replayed": null,
+   "status": "refused",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "conjecture: 'isprime(n**2 + n + 41) for every n >= 0': false -- on the engine's wheel it is in the ring 'knows' (refuted-on-escalation: counterexample at integer (scale 100): n = 40 fails) [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item Rule30_GLM_Study) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (Escalation, HypothesisEngine, HypothesisEngine/NeedsWheel, HypothesisEngine/Wheel, IntakeChecks/RuleThirtyBits, Rule30, Rule30/DriveWheel, Rule30/LeftDiagonalPeriods)] [read as `tool conjecture n^2 + n + 41 is prime for every n`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-conjecture-refuted",
+   "kind": "",
+   "ok_flag": true,
+   "question": "is n^2 + n + 41 prime for every n",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "conjecture: '(n**3 - n) % (6) == 0 for every n >= 0': not settled -- on the engine's wheel it is in the ring 'thinks true' (survives-to: no counterexample at any of the five scales (up to 20000); open beyond); to settle it: survives every read (to 20000); data cannot prove a universal claim [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item Rule30_GLM_Study) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (Escalation, HypothesisEngine, HypothesisEngine/NeedsWheel, HypothesisEngine/Wheel, IntakeChecks/RuleThirtyBits, Rule30, Rule30/DriveWheel, Rule30/LeftDiagonalPeriods)] [read as `tool conjecture 6 divides n^3 - n for every n`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-conjecture-survives",
+   "kind": "",
+   "ok_flag": true,
+   "question": "check the conjecture that 6 divides n^3 - n for every n",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "derive: derivable in W16 (Magnetic flux and induction) -- the relation of emf = magnetic_field * area / time (exponents left minus right, and the coefficient's prime exponents) is exactly 1 × (flux = magnetic_field * area) + 1 × (emf = flux / time) [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item cent_compiler_v12) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (IntakeChecks/Derivability, Wheels/CentWheels)] [read as `tool derive emf = magnetic_field * area / time`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-derive-law",
+   "kind": "",
+   "ok_flag": true,
+   "question": "is emf = magnetic_field * area / time a law",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "derive: not derivable -- none of the 30 wheels derives it, and no single wheel's axioms name all of its quantities (each wheel is asked on its own; pooling the axioms of different wheels conflates their quantities). Named by: force: W5, W6; power: W1, W2, W4, W5, W15; time: W11, W15, W16, W23, W28, W29 [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item cent_compiler_v12) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (IntakeChecks/Derivability, Wheels/CentWheels)] [read as `tool derive power = force * time`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-derive-not-a-law",
+   "kind": "",
+   "ok_flag": true,
+   "question": "is power = force * time a law",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "132 — the next term of A000108 (Catalan numbers: C(n) = C(2n,n)/(n+1)), the only sequence on the wheel that starts 1, 1, 2, 5, 14, 42 and runs past it. [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item glm_wheels_bundle) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (IntakeChecks/NextTerm, IntakeChecks/SporadicOrderCheck, Wheels/IntegerWheel, Wheels/SporadicOrders)]",
+   "boundary": "certified",
+   "budget": {
+    "steps": 3
+   },
+   "candidates": [],
+   "evidence": [
+    "computation"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "sequence-next-catalan",
+   "kind": "sequence",
+   "ok_flag": true,
+   "question": "what comes next in 1, 1, 2, 5, 14, 42",
+   "refusal": "",
+   "replayed": true,
+   "status": "answered",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": [
+    "claim=1, 1, 2, 5, 14, 42",
+    "ids=A000108",
+    "next=132"
+   ]
+  },
+  {
+   "ambiguity": [],
+   "answer": "",
+   "boundary": "refused",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "computation"
+   ],
+   "expect": "refusal",
+   "history": [],
+   "id": "sequence-next-junction",
+   "kind": "sequence",
+   "ok_flag": false,
+   "question": "what comes next in 1, 2",
+   "refusal": "sequence (NOT_ON_THE_WHEEL): Give at least 3 terms of the sequence; 2 is too few to say what comes next.",
+   "replayed": null,
+   "status": "refused",
+   "surface": "planner",
+   "theorems": [],
+   "theorems_declared": [],
+   "witness": []
+  },
+  {
+   "ambiguity": [],
+   "answer": "arc d631b094: RIGHT from 4 training pairs; the colour solver of tool induce refused 1 of 1 test input(s), which went to the hypothesis engine's plan search (an answer only when every consistent program of least depth agrees); test 1: 44444 -- RIGHT by the plan search (count_to_row; depth 1: 1 consistent program(s) agree) (each answer graded against the stored output) [absorbed ahead of the build: absorbed by the owner's decision of 1 November 2026 (intake item Rule30_GLM_Study) on its measurements and a standalone Lean check; the owner's build (scripts/rebuild_lean.sh) has still to confirm its Lean (Escalation, HypothesisEngine, HypothesisEngine/NeedsWheel, HypothesisEngine/Wheel, IntakeChecks/RuleThirtyBits, Rule30, Rule30/DriveWheel, Rule30/LeftDiagonalPeriods)] [read as `tool arc d631b094`]",
+   "boundary": "uncertified",
+   "budget": {
+    "steps": 1
+   },
+   "candidates": [],
+   "evidence": [
+    "tool"
+   ],
+   "expect": "answer",
+   "history": [],
+   "id": "tool-arc-plan-search",
+   "kind": "",
+   "ok_flag": true,
+   "question": "solve the arc task d631b094",
+   "refusal": "",
+   "replayed": null,
+   "status": "answered",
+   "surface": "toolbox",
    "theorems": [],
    "theorems_declared": [],
    "witness": []
@@ -7972,9 +8797,7 @@
    "budget": {
     "steps": 3
    },
-   "candidates": [
-    "chemistry:C"
-   ],
+   "candidates": [],
    "evidence": [
     "lattice",
     "certificate"
@@ -8012,9 +8835,7 @@
    "budget": {
     "steps": 3
    },
-   "candidates": [
-    "mathematics:golay_codeword_1"
-   ],
+   "candidates": [],
    "evidence": [
     "lattice",
     "certificate"
@@ -8052,8 +8873,7 @@
    },
    "candidates": [],
    "evidence": [
-    "lattice",
-    "certificate"
+    "lattice"
    ],
    "expect": "answer",
    "history": [],
@@ -8079,7 +8899,7 @@
     "physics:absorptance",
     "physics:albedo"
    ],
-   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the head is the certified junction of 2 live carriers, so to separate them the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is <reply>`",
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is <reply>`",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -8121,7 +8941,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: nearest (ambiguous-name): 'water' names 2 carriers: molecules:water, lexicon:water; say which register",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -8149,7 +8969,7 @@
     "mathematics:golay_codeword_0",
     "mathematics:hexacode_word_0"
    ],
-   "answer": "nearest to the given point among the 142 carriers of the address table: mathematics:golay_codeword_0 (|q-c|^2 = 0/1), mathematics:hexacode_word_0 (|q-c|^2 = 0/1), mathematics:high_denominator_2x3 (|q-c|^2 = 142942917478/940839860961), mathematics:axis_root_e0 (|q-c|^2 = 1/1), physics:angle (|q-c|^2 = 1/1); the guarded read refuses (no rung certifies the point), so the first 2 are at one distance (mathematics:golay_codeword_0, mathematics:hexacode_word_0) but no margin is certified; the head is a tie of 2 live carriers the scan found, with no margin certified, so to separate them the GLM asks: What is its field order? (2: mathematics:golay_codeword_0; 4: mathematics:hexacode_word_0) -- reply as the next turn, or ask `nearest to 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 given attr:field_order is <reply>`",
+   "answer": "nearest to the given point among the 142 carriers of the address table: mathematics:golay_codeword_0 (|q-c|^2 = 0/1), mathematics:hexacode_word_0 (|q-c|^2 = 0/1), mathematics:high_denominator_2x3 (|q-c|^2 = 142942917478/940839860961), mathematics:axis_root_e0 (|q-c|^2 = 1/1), physics:angle (|q-c|^2 = 1/1); the guarded read refuses (no rung certifies the point), so the first 2 are at one distance (mathematics:golay_codeword_0, mathematics:hexacode_word_0) but no margin is certified; to separate them, the GLM asks: What is its field order? (2: mathematics:golay_codeword_0; 4: mathematics:hexacode_word_0) -- reply as the next turn, or ask `nearest to 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 given attr:field_order is <reply>`",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -8159,8 +8979,7 @@
     "mathematics:hexacode_word_0"
    ],
    "evidence": [
-    "lattice",
-    "certificate"
+    "lattice"
    ],
    "expect": "answer",
    "history": [],
@@ -8184,7 +9003,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no) leave 1 of the 2 carriers of the head: physics:albedo (GLM.AnsweringQuestion.after_reply; a reply never moves the answer off the head, GLM.NearestQuestion.after_least); if the replies are true of the carrier meant and it is in the head, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant); to confirm, the GLM asks: Is it exactly physics:albedo? (yes: physics:albedo; no: no member (a contradiction)) -- a carrier meant outside the head is never confirmed (GLM.NearestQuestion.outside_never_confirmed); reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is no; confirm:physics:albedo is <reply>`",
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no) leave 1 of the 2 carriers of the head: physics:albedo -- a reply never moves the answer off the scan's head (GLM.NearestQuestion.after_least); if the replies are true of the carrier meant, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant); to confirm, the GLM asks: Is it exactly physics:albedo? (yes: physics:albedo; no: no member (a contradiction)) -- a carrier meant outside the head is never confirmed (GLM.NearestQuestion.outside_never_confirmed); reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is no; confirm:physics:albedo is <reply>`",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -8215,7 +9034,6 @@
    "theorems": [
     "GLM.NearestAddress.ranking_tail_outside",
     "GLM.CoordinateJunction.jread_origin",
-    "GLM.AnsweringQuestion.after_reply",
     "GLM.NearestQuestion.after_least",
     "GLM.NearestQuestion.resolved_is_meant",
     "GLM.NearestQuestion.outside_never_confirmed"
@@ -8223,7 +9041,6 @@
    "theorems_declared": [
     "GLM.NearestAddress.ranking_tail_outside",
     "GLM.CoordinateJunction.jread_origin",
-    "GLM.AnsweringQuestion.after_reply",
     "GLM.NearestQuestion.after_least",
     "GLM.NearestQuestion.resolved_is_meant",
     "GLM.NearestQuestion.outside_never_confirmed"
@@ -8239,7 +9056,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? yes) leave 1 of the 2 carriers of the head: physics:albedo (GLM.AnsweringQuestion.after_reply; a reply never moves the answer off the head, GLM.NearestQuestion.after_least); if the replies are true of the carrier meant and it is in the head, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant), and the confirming reply agrees",
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? yes) leave 1 of the 2 carriers of the head: physics:albedo -- a reply never moves the answer off the scan's head (GLM.NearestQuestion.after_least); if the replies are true of the carrier meant, it is physics:albedo (GLM.NearestQuestion.resolved_is_meant), and the confirming reply agrees",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -8274,14 +9091,12 @@
    "theorems": [
     "GLM.NearestAddress.ranking_tail_outside",
     "GLM.CoordinateJunction.jread_origin",
-    "GLM.AnsweringQuestion.after_reply",
     "GLM.NearestQuestion.after_least",
     "GLM.NearestQuestion.resolved_is_meant"
    ],
    "theorems_declared": [
     "GLM.NearestAddress.ranking_tail_outside",
     "GLM.CoordinateJunction.jread_origin",
-    "GLM.AnsweringQuestion.after_reply",
     "GLM.NearestQuestion.after_least",
     "GLM.NearestQuestion.resolved_is_meant"
    ],
@@ -8296,7 +9111,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: nearest (contradicted): the head of the ranking of physics:albedo moved on 4 coordinates by 1/4 (codeword 16) is the certified junction {physics:absorptance, physics:albedo}, and the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? no) leave no member: some reply is false of the carrier meant, or the carrier meant is not in the head (GLM.NearestQuestion.outside_never_confirmed, GLM.TimedQuestion.contradicted_not_truthful); the GLM reports the contradiction rather than choose",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -8321,23 +9136,21 @@
    "kind": "nearest",
    "ok_flag": false,
    "question": "nearest to albedo moved 4 by 1/4 given word:absorbed is no; confirm:physics:albedo is no",
-   "refusal": "nearest (contradicted): the head of the ranking of physics:albedo moved on 4 coordinates by 1/4 (codeword 16) is the certified junction {physics:absorptance, physics:albedo}, and the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? no) leave no member: some reply is false of the carrier meant, or the carrier meant is not in the head (GLM.NearestQuestion.outside_never_confirmed, GLM.TimedQuestion.contradicted_not_truthful); the GLM reports the contradiction rather than choose",
+   "refusal": "nearest (contradicted): the head of the ranking is {physics:absorptance, physics:albedo}, and the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? no) leave no member: some reply is false of the carrier meant, or the carrier meant is not in the head (GLM.NearestQuestion.outside_never_confirmed); the GLM reports the contradiction rather than choose",
    "replayed": null,
    "status": "contradicted",
    "surface": "planner",
    "theorems": [
-    "GLM.NearestQuestion.outside_never_confirmed",
-    "GLM.TimedQuestion.contradicted_not_truthful"
+    "GLM.NearestQuestion.outside_never_confirmed"
    ],
    "theorems_declared": [
-    "GLM.NearestQuestion.outside_never_confirmed",
-    "GLM.TimedQuestion.contradicted_not_truthful"
+    "GLM.NearestQuestion.outside_never_confirmed"
    ],
    "witness": []
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: nearest (no-tie): the head of the ranking of chemistry:C moved on 8 coordinates by 1/2 (codeword 29) is the single carrier chemistry:C, so there is no tie for the 1 given reply to resolve (GLM.NearestQuestion.head_card_le_one_iff); ask without 'given'",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -8358,7 +9171,7 @@
    "kind": "nearest",
    "ok_flag": false,
    "question": "nearest to C moved 8 by 1/2 given word:absorbed is no",
-   "refusal": "nearest (no-tie): the head of the ranking of chemistry:C moved on 8 coordinates by 1/2 (codeword 29) is the single carrier chemistry:C, so there is no tie for the 1 given reply to resolve (GLM.NearestQuestion.head_card_le_one_iff); ask without 'given'",
+   "refusal": "nearest (no-tie): the head of the ranking is the single carrier chemistry:C, so there is no tie for a reply to resolve (GLM.NearestQuestion.head_card_le_one_iff)",
    "replayed": null,
    "status": "refused",
    "surface": "planner",
@@ -8441,9 +9254,7 @@
    "budget": {
     "steps": 4
    },
-   "candidates": [
-    "iron(III) sulfate"
-   ],
+   "candidates": [],
    "evidence": [
     "register"
    ],
@@ -8470,7 +9281,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: ordering (different-scale): atomic_weight_u of C is read on the element:atomic_weight_u scale and melting_point_K of Fe on the element:melting_point_K scale, and element:atomic_weight_u measures mass and element:melting_point_K measures temperature; the table relates scales of one quantity and declares no conversion between two quantities; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -8495,7 +9306,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "unsolved: extremum (incomplete): 40 of 250 rows have no reading of 'temperature' (the register records it as missing): element:Bh, element:Cn, element:Db, element:Ds, element:Fl, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
+   "answer": "",
    "boundary": "refused",
    "budget": {
     "steps": 1
@@ -8519,6 +9330,6 @@
    "witness": []
   }
  ],
- "source_digest": "5357cdc0d75e809fb9e0c8f6815a91907368bbb4ac1b4cd01a3eaa2c2026ae4f",
+ "source_digest": "77f372fa8515a7302ae771c16b91c28697f83adc862721d0aa387a54bf12cb0c",
  "taken": 9
 }

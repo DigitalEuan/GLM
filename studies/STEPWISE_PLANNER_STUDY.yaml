@@ -1,35 +1,42 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 57 of 57 declared questions and 4 of 4 follow-ups as declared, 0 wrong, where the planner
   alone answers 0 of the 30 compound questions; 43 of 43 chain scripts verified (149 of 149 steps aligned)
   and 172 of 172 declared mutations rejected; 8 of 8 marks met.
 directives:
-- D15
 - D3
-- D4
 - D7
+- D15
 evidence: []
 faculty: derivation
 file_refs:
   code:
-  - evaluation/stepwise_cases
-  - reasoning/stepwise_script
-  - runtime/stepwise
+  - evaluation/stepwise_cases.py
+  - reasoning/lean_address.py
+  - reasoning/retrieval.py
+  - reasoning/stepwise_script.py
+  - runtime/stepwise.py
   lean:
   - StepwisePlanner
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: STEPWISE_PLANNER_STUDY.md
   test:
-  - test_stepwise_planner.py
+  - test_stepwise.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: STEPWISE_PLANNER_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -37,16 +44,37 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
+  met:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
   missed: []
 perturbations: []
-phase: 58
-predecessors: []
+phase: 72
+predecessors:
+- CONNECTED_MACHINE_STUDY
+- SEMANTIC_PLAN_STUDY
 question: Can the typed planner, which answers one question with one plan, be made the executive of a
   *chain* of steps — composing its own answers, finding the steps a question does not ask for, and carrying
   the three columns step by step — without answering anything wrongly?
 recomputed_by: '`glm_universal.runtime.stepwise.stepwise_report`'
+related:
+- STEPWISE_TWO_STUDY
+- SUBSTRATE_NATIVE_COGNITION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -68,7 +96,9 @@ sections:
 - anchor: 6-what-this-leaves
   heading: 6. What this leaves
 status: closed
-successors: []
+successors:
+- PLANNER_LOOP_STUDY
+- STEPWISE_TWO_STUDY
 superseded_by: ''
 supersedes: []
 title: 'The stepwise planner: the typed planner as the executive of a chain of steps'

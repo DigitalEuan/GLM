@@ -12,7 +12,9 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 29 October 2026.*
+*Last altered 31 October 2026 (repository check: every command run from the repository root with `PYTHONPATH=src`; 22 directives, live verdict 22 of 22; rows for the intake, the study manifests, the study index and links, the Lean static check and the two owner-run scripts; the rows re-measured on the rebuilt modules, and the absorbed wheels; later the same day the new wheels staged until the owner's Lean build, and the intake rows: Lean written / Lean verified, the build record, staged code; then the new wheels installed provisionally by the owner's decision).*
+
+*Last altered 1 November 2026 (Phase 186: the intake-capability row; the intake items absorbed ahead of the owner's Lean build, and the paragraph on the hypothesis engine, `tool derive` and the next-term reading).*
 
 ---
 
@@ -28,13 +30,20 @@ account is in
 
 ## 1. Where the work stands, in one table
 
+Every command here is run from the repository root. The package lives in `src/`, so a
+`python3 -m glm_universal…` command needs `PYTHONPATH=src` (written out in most rows;
+`src/GLM.py` sets it itself), and a path written `glm_universal/…` means
+`src/glm_universal/…`. `lake build` cannot be run in every environment a round works in;
+`scripts/rebuild_lean.sh` and `scripts/check_repository.sh` are the two commands the owner
+runs locally, and their logs in `scripts/logs/` are read by the next round.
+
 | instrument | command | result |
 |---|---|---|
 | test suite | `python3 -m pytest src/glm_universal/tests -q` | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure--> / <!--figure:evaluation-case-count-->223<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->237<!--/figure--> / <!--figure:evaluation-case-count-->237<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->425 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->414 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -77,6 +86,11 @@ account is in
 | the study ledger (every study as one machine-readable row; the files the documents name) | `python3 -m glm_universal.tools study-ledger [--json] [--issues] [--files]` | **155** studies, each read from its own file, the plan, the To-Do list and its stored measurement — phase, predecessors (acyclic by construction, `GLM.StudyLedger.no_cycle`), marks met and missed, amendments, frozen path, digests, status, follow-ups; phase for **144**, study and plan agreeing **28 / 29**; stored counts agree **7 / 10** (2 differ by the Lean mark, 1 unexplained); follow-ups **30 / 30** resolve; file names **4,254**, **0** missing after the corrections of Phase 161; 3 supplied files outside version control, by the owner's decision of 18 October 2026; nothing stored, so never stale; 8 of 10 marks, 1 of 2 amended ([`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md)) |
 | corpus source tiers (every corpus experiment read on five tiers and on the written tier, the supplied tier and both) | `python3 -m glm_universal.tools source-tiers [--write] [--json]` | **2,268** documents, **1,036** supplied (46% of sentences, 39% of tokens); split exact (`GLM.SourceTiers.train_filter_add`); written test **82,245** right with the whole corpus against **80,274** with the written tier alone; supplied tier out costs **1,971**, a size-matched pseudo-tier **9,629**; K3′ precision on written text: whole 56.4%, excluded 54.5%, down-weighted 54.6%, confirmed **57.9%** keeping 94.5%; `define` **45 / 60** bold terms, 4 from supplied sentences; no answer moved; 7 of 8 marks, 0 of 1 amended ([`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md)) |
 | date stamps (directive D17) | `python3 -m glm_universal.tools dates [--json]` | every `Created …` / `Last altered …` stamp in the repository's own files, with the defects a stamp shows by itself (not a date, after today, altered before created); `source_material/`, generated documents and stored data exempt; forward from 18 October 2026 |
+| the intake of new material (directive D22) | `PYTHONPATH=src python3 -m glm_universal.intake status`; `… intake check` | every item supplied in `source_material/ToDo/` or filed in `done/` has a record in `source_material/INTAKE.yaml` with its stage (received → triaged → study drafted → tested → Lean written → Lean verified → measured → absorbed, or closed) and the evidence each stage needs, *Lean verified* only against the build record `scripts/logs/lean_build_evidence.json` that `scripts/rebuild_lean.sh` writes after a passing build (the item's Lean files and every file they import, byte for byte); code waiting for that build is staged in its item and tested there (`staged:` tests), or, by the owner's decision, installed in the package marked provisional (`intake provisional`, the register `wheels/_data/provisional.json`); `check` fails if the ledger and the folders disagree, a stage lacks its evidence, a staged file would overwrite a package file, or the provisional register and the ledger disagree ([`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md)) |
+| the study manifests (every study's `.yaml` beside its `.md`) | `PYTHONPATH=src python3 -m glm_universal.corpus.study_manifest --check` (`--sync` rewrites the generated fields) | every study document has a manifest validated against `studies/_schema/study.schema.yaml`, and no generated field (verdict, deciding figure, marks, file references, dates) has drifted from its document |
+| the study index (the `study` query kind) and the studies' links | `PYTHONPATH=src python3 -m glm_universal.corpus.study_index`; `… corpus.study_links --scope all` | `python3 src/GLM.py -q "study colour induction"` answers from the manifests; every relative link in the documents resolves, or points at a file recorded absent (`studies/_lean_files_needed.md`, local-only supplied items) |
+| the Lean tree, statically (no Lean needed) | `PYTHONPATH=src python3 -m glm_universal.lean_check` | every import resolves inside `src/lean/`, `module` files import only `module` files, `AxiomAuditAll.lean` lists every built file, no `sorry` or `admit`, and the files waiting in `src/lean/awaiting_recovery/` stay out of the build |
+| the owner-run checks | `scripts/rebuild_lean.sh`; `scripts/check_repository.sh` | the first rebuilds `.lake` (`lake exe cache get`, `lake build`, the axiom audit) and, when its static check, build and `sorry` scan all pass, writes the build record `scripts/logs/lean_build_evidence.json` the intake reads; the second runs every Python gate; both write `scripts/logs/*_latest.log` and exit 1 when a required step fails (0 only when all pass) |
 | the corpus as what the GLM knows (counted, not trained; the `corpus` query kind) | `python3 -m glm_universal.tools corpus-knowledge` | the repository and `source_material/` (zip members included) read by rule into folder, document, paragraph, sentence and token: **2,187** documents, **184,118** sentences, **2,655,147** tokens; next token **21.5%** on **25,435** novel held-out sentences against **6.9%** (most frequent token) and **2.7%** (order control), rising with every quarter of training documents; counts equal after halving and after reversing the documents (`GLM.CorpusKnowledge.train_append`, `train_perm`); words used like *seven*: *eight, ten, four, nine, five, six, …*; `define`, `context`, `similar`, `related`, `continue`, `spread`, every answer with its witness sentence and column 3 recounting it by brute force; 7 of 9 marks, K3, K8 and both amended marks missed ([`CORPUS_KNOWLEDGE_STUDY.md`](studies/CORPUS_KNOWLEDGE_STUDY.md)) |
 | the corpus's definitions graded, and a word's place on the lattice | `python3 -m glm_universal.tools corpus-definitions` | the paper's **27**-term glossary held out of the corpus and `define` graded against it by shared content words: the pattern ranking **17** against **17** for the first-mention control, the context ranking **26** against **17** (adopted by `corpus define`); every one of **11,157** words given a Leech address from its counts, read back exactly (`GLM.CorpusDefinitions.coord_le_cap`, `coord_mono`); with positional coordinates the number words find number words for **64 / 120** lattice neighbours against **1 / 120** for the control; `corpus address of X`; 3 of 8 marks, 3 of 6 amended marks ([`CORPUS_DEFINITIONS_STUDY.md`](studies/CORPUS_DEFINITIONS_STUDY.md)) |
 | friction: what holds when the question moves, contact over the whole prompt, stick-slip | `python3 -m glm_universal.tools friction` | the **222** evaluation questions moved by seven declared perturbations, each run scored hold / stick / slip: surface motion holds **625 / 650**; refusals read as refusals, **7** slips in **1,291** runs before `settle_question` and **0** after, with **1,136 / 1,291** holding; contact over the whole prompt **4,201** against **4,312** next words correct for the two-token patch, loaded **4,515**; the sticking reader never switches more (`GLM.Friction.held_switches_le`) and cuts returns **15 → 1**; 5 of 12 marks, 5 of 9 amended, 3 of 4 fix marks ([`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md)) |
@@ -137,6 +151,37 @@ account is in
 | Lorentzian lift | `python3 -m glm_universal.tools lorentzian-lift` | the owner's `iter10_lorentzian.py` audited: every Golay tie an A_1^24 deep hole named by a null vector of II_25,1 (128 of 128 sampled); no reflection-invariant rule breaks a tie; two tied readings **586** right, **0** wrong of 600 under summed scores; 11 of 12 marks ([`LORENTZIAN_LIFT_STUDY.md`](studies/LORENTZIAN_LIFT_STUDY.md); row added in Phase 183) |
 | Lorentzian evidence | `python3 -m glm_universal.tools lorentzian-evidence` | the lift as an evidence space: the Golay decoy **61** wrong → **27** under the certificate guard, **0** right answers lost on any condition, the 27 indistinguishable from honest readings; the settling question **600** of 600 with five bits (random five 391); physics relations with a decoy example **0** wrong (first example alone 87 and 38); 13 of 15 marks ([`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md)) |
 | Lorentzian majority | `python3 -m glm_universal.tools lorentzian-majority` | the declared majority rule for conflicting examples: never wrong while the honest examples hold at least half (proved, `majority_never_wrong`), tight below half (`majority_misled`); physics relations decoy3 **155** and decoy5 **161** right, **0** wrong, where the guard answers 0; collude5 **0** wrong where the plurality vote is wrong 150 times; 8 of 8 marks ([`LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md)) |
+| intake capability | `python3 -m glm_universal.tools intake-capability` | the intake items absorbed ahead of the owner's Lean build (Phase 186), each part with and without them: the 50 stored ARC tasks **9** right, **0** wrong (colour solver alone **2**; a development set); the Rule 30 battery **39 / 39** with the engine's ledger, and on the answering path **16** right, **0** wrong of **39** (before: none answered); conjectures **12 / 12**; `tool derive` **63** of 64 laws, **0** of 51 not-a-laws; next terms **27** right, **0** wrong of 45 (before **5**), **12 / 13** controls refused; **30** questions across five domains **23** right, **0** wrong (before **4**); 12 of 14 marks ([`INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md)) |
+
+**Rows re-measured on 31 October 2026 (repository check).** The modules behind
+several rows were lost in the October 2026 reorganisation and rebuilt from
+their studies; their measurements were taken again on the rebuilt code, and
+where a row above still quotes its round's record the current figure is here
+(each study states both): the L5 hole reports 5 of 6 measured marks (the F1
+baseline was lost with the code); the carried read 11 of 12; the fold machine
+8 of 9 and 1 of 1 amended; the tool machine 8 of 9; the planner ladder 5 of 7
+(two baselines lost); the question in the answering path 9 of 10; the
+adversarial replies 12 of 13 and the nearest question 7 of 8 live (a Lean
+file missing, a baseline lost); colour induction 7 of 12 with 942 right, 0
+wrong, 138 refused of 1,080 in-vocabulary queries, and the frame plane 6 of 8
+(the reconstruction's generators); the Lorentzian lift 10 of 12 (an exact
+query generator, `GolayDeepHole.lean` held); corpus source tiers 2 of 9 on the
+rebuilt module. New rows' instruments: `python3 -m glm_universal.intake
+status` (the intake ledger),
+`glm_universal.wheels.integer_wheel_study.integer_wheel_report` (the integer
+and Monster provision wheels: 89 of 102 questions right, 0 wrong) and
+`glm_universal.wheels.cent_wheels_study.cent_wheels_report` (the cent
+compiler's formula wheels: 63 of 64 laws licensed, 0 of 51 not-a-laws). Both
+wheel families are in the package **provisionally**, by the owner's decision:
+listed in `src/glm_universal/wheels/_data/provisional.json`, their answers
+carrying a provisional note, and confirmed (the note dropped) when the owner's
+Lean build record verifies their Lean files and the intake absorbs them.
+*Since 1 November 2026 (Phase 186)* both families, and the Rule 30 study's
+hypothesis engine, are **absorbed ahead of the build** by the owner's
+decision, on their measurements and a standalone Lean check: the register
+gives them the state *absorbed ahead of the build*, their answers carry that
+note, and `python3 -m glm_universal.intake confirm-build <id>` drops it when
+the owner's build record verifies their Lean files.
 
 The test-suite row is the sign-off ledger's own count, recorded by
 `python3 -m glm_universal.signoff --release`, which runs each test file in its
@@ -152,7 +197,7 @@ taken from a run that selects them.
 The package is `glm_universal` **v1.23.0**: eleven sub-packages, 152 modules,
 **<!--figure:registers-->8 registers<!--/figure-->** holding 1,143 carriers (physics 726, chemistry 118, molecules
 51, mathematics 22, lexicon 149, spatial 28, harmonics 28, economics 21) beside
-a 45-class comparison register, **<!--figure:query-kinds-->27 query kinds<!--/figure-->**
+a 45-class comparison register, **<!--figure:query-kinds-->31 query kinds<!--/figure-->**
 one of which dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks.
 
 ---
@@ -1218,6 +1263,27 @@ kappa` (*what is the anchor kappa*). Recomputed by `tools colour-induction`
 and `tools frame-plane`. Write-up:
 [`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md).
 
+**The intake items on the answering path (Phase 186).** The Rule 30 study's
+hypothesis engine is `reasoning/hypothesis_engine.py` (exact; a work-bounded
+evaluator, `safe_predicate`, in place of `eval`), and
+`reasoning/hypothesis_tools.py` asks it: `tool rule30` (the centre column; a
+claim about Rule 30, answered with the engine's ring — *knows*, *thinks
+true*, *doesn't know* — and the Lean theorem it rests on; the 39-claim
+battery), `tool conjecture` (a claim about every `n`, escalated scale by scale
+within a stated work budget, refuted with its counterexample or reported as
+surviving, never proved), and the plan search behind `tool arc` on the test
+inputs the colour solver refuses (an answer only when every consistent program
+of least depth agrees). `tool derive` (`wheels/derive_query.py`) asks a law of
+each of the thirty formula wheels on its own and answers *derivable* with the
+explicit rational combination, or *not derivable*. The sequence kind's `next`
+reading answers *what comes next in ...* from the one stored sequence that
+starts with the terms and runs past them, and refuses at a junction. English
+reaches them all (*in rule 30, ...*; *is n^2 + n + 41 prime for every n*; *is
+force = mass * acceleration a law*). The finite claims they rest on are four
+standalone Lean files in `IntakeChecks/`. Recomputed by `tools
+intake-capability`. Write-up:
+[`INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md).
+
 **Improper maps in the frame plane.** Since Phase 179 `tool frame` on
 `(E, px, py)` also declares the spatial `reflection` and the three improper
 components of the Lorentz group — `lorentz_parity` (determinant `−1`, time
@@ -1361,8 +1427,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->9,126<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->9,126<!--/figure-->/<!--figure:lean-declarations-->9,126<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->9,400<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->9,400<!--/figure-->/<!--figure:lean-declarations-->9,400<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1376,10 +1442,12 @@ where the structural address holds 258 → 182. Write-up:
 [`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md).
 
 **The standing rules, as instruments.**
-[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) states <!--figure:directives-->19 standing rules<!--/figure--> and
+[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) states <!--figure:directives-->22 standing rules<!--/figure--> and
 names the instrument for each. `reasoning/directives.py` parses that file and
-gives each instrument a live verdict (`report directives`) — **16 of 16** with
-every named instrument present; `reasoning/pipeline.py` reads the stage each
+gives each instrument a live verdict (`report directives`) — **22 of 22** with
+every named instrument present (D17 date stamps, D18 wobble, D19 reversibility,
+D20 generate-don't-store, D21 the constants single source in
+`src/glm_universal/constants.py`, D22 the intake); `reasoning/pipeline.py` reads the stage each
 piece of work has reached off the tree rather than from prose — **30 of 30
 rows** through all six stages (`report pipeline`); `glm_universal/signoff/`
 computes a module's dependency closure with `ast` and plans a run against
@@ -1405,8 +1473,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->15,367<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->89,660<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->20,164<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->115,007<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1577,12 +1645,11 @@ re-running proves nothing; if a byte in the closure differs, the unit is run
 again. Nothing is skipped silently.
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.corpus --check            # documents, ~30 s
 PYTHONPATH=src python3 -m glm_universal.signoff --verify          # what still holds
 PYTHONPATH=src python3 -m glm_universal.signoff --plan            # what would run
 PYTHONPATH=src python3 -m glm_universal.signoff --why             # and why each unit would
-PYTHONPATH=src python3 -m glm_universal.signoff --impact ../DIGEST.md  # what an edit would cost
+PYTHONPATH=src python3 -m glm_universal.signoff --impact DIGEST.md  # what an edit would cost
 PYTHONPATH=src python3 -m glm_universal.signoff --run-everything --jobs 8
 PYTHONPATH=src python3 -m glm_universal.signoff --release --jobs 8   # closing a round
 PYTHONPATH=src python3 -m glm_universal.signoff --release --resume --jobs 8  # after one was interrupted
@@ -1603,7 +1670,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->219 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->260 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation`, `replay` and
 `figures`. `replay` (Phase 174) is the evaluation's replay gate of Phase 171,
 column 3 run for every case expected answered, so the close runs it when what
@@ -1658,11 +1725,10 @@ document drifting from the code.
 lake build                                                   # the Lean files, no sorry
 rg -n 'sorry|admit' -g '*.lean' glm_lean             # expect nothing
 
-cd src
 PYTHONPATH=src GLM_EXHAUSTIVE=1 python3 -m pytest src/glm_universal/tests -q
 PYTHONPATH=src python3 -m glm_universal.capabilities           # 33 probes
 PYTHONPATH=src python3 -m glm_universal.benchmarks             # 5 suites
-PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->237 CLI cases<!--/figure-->
 PYTHONPATH=src python3 -m glm_universal.figures --write        # regenerate FIGURES.md
 PYTHONPATH=src python3 -m glm_universal.corpus --refresh       # every derived artefact
 PYTHONPATH=src python3 -m glm_universal.corpus --check          # exit 1 on any drift
@@ -1674,11 +1740,10 @@ answer's figures in a fresh interpreter and compares them with what was
 printed:
 
 ```bash
-cd src
-PYTHONPATH=src python3 GLM.py -q "report analogies"  --verify-tct
-PYTHONPATH=src python3 GLM.py -q "report chemistry coverage" --verify-tct
-PYTHONPATH=src python3 GLM.py -q "report lean"       --verify-tct
-PYTHONPATH=src python3 GLM.py -q "report escalation" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report analogies"  --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report chemistry coverage" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report lean"       --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report escalation" --verify-tct
 PYTHONPATH=src python3 -m glm_universal.tools pipeline      # the wiring stages
 PYTHONPATH=src python3 -m glm_universal.tools directives    # the standing rules
 PYTHONPATH=src python3 -m glm_universal.tools signoff       # the ledger summary

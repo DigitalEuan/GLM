@@ -1,5 +1,10 @@
 """``glm_universal.runtime.semantic_plan`` -- typed question plans.
 
+*Last altered 31 October 2026 (repository check: the typed planner's
+machine gate of Phase 153 restored in :func:`ask_planned`
+(:mod:`glm_universal.reasoning.typed_ladder`); it was lost in the October
+2026 reorganisation).*
+
 Why this module exists
 ----------------------
 The pre-registered language probe (:data:`glm_universal.reasoning.blockers.
@@ -1853,6 +1858,14 @@ def _trace(planned: Planned) -> Tuple[Dict[str, object], ...]:
                   "faculty": o.faculty} for o in planned.outcomes)
 
 
+def _machine_summary(machine) -> Dict[str, object]:
+    """What the payload carries of the machine's verdict (Phase 153)."""
+    return {k: machine.get(k) for k in (
+        "admitted", "status", "exit", "lines", "machine_steps", "drift",
+        "promoted", "computed", "read_register", "read_question",
+        "carried")}
+
+
 def ask_planned(session, text: str) -> Solution:
     """Answer ``text`` through the typed planner, or through the grammar.
 
@@ -1886,10 +1899,30 @@ def ask_planned(session, text: str) -> Solution:
         expected["plan_kind"] = "query" if o.plan.query is not None \
             else "compute"
         expected["faculty"] = o.faculty
+        # Phase 153 (studies/CARRIED_READ_STUDY.md): an answered arith,
+        # convert, gcd, lcm or prime plan is said as a chain and run by the
+        # batch machine in its reading mode (typed_ladder.plan_check); a plan
+        # the machine disagrees with is refused as MACHINE_DRIFT.  The
+        # program goes to the payload, never to the answer text.
+        from ..reasoning import typed_ladder as tl
+        machine = tl.plan_check(planned) if tl.ON else None
+        if machine is not None and not machine["admitted"]:
+            reason = (f"{tl.REFUSAL}: the batch machine disagrees with the "
+                      f"{o.plan.compute} plan (GLM.CarriedRead."
+                      f"first_lie_drifts); nothing was promoted")
+            return Solution(query=query, kind="plan",
+                            answer=f"refused: {reason}", ok=False,
+                            error=reason,
+                            payload={"plan": trace, "verdict": "refused",
+                                     "machine": _machine_summary(machine)},
+                            steps=(Step("machine", reason,
+                                        f"drift = {machine['drift']}"),))
+        payload = {"plan": trace, "verdict": "answered"}
+        if machine is not None:
+            payload["machine"] = _machine_summary(machine)
         return Solution(query=query, kind=o.kind or o.plan.intent,
                         answer=o.answer, steps=steps, expected=expected,
-                        payload={"plan": trace, "verdict": "answered"},
-                        ok=True)
+                        payload=payload, ok=True)
     if planned.verdict == "ambiguous":
         return Solution(query=query, kind="plan", answer=f"refused: "
                         f"{planned.reason}", ok=False,

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: <!--figure:normesc-correct-->467<!--/figure--> of <!--figure:normesc-queries-->568<!--/figure-->
@@ -14,17 +16,24 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - tests/test_norm_family
+  - reasoning/norm_escalation.py
+  - substrate/construction_ladder.py
+  - tools.py
   lean:
+  - ConstructionLadder
   - NormFamily
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: NORM_FAMILY_STUDY.md
   test:
   - test_norm_family.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: NORM_FAMILY_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,13 +45,16 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
-predecessors: []
+phase: 40
+predecessors:
+- CONSTRUCTION_LADDER_STUDY
 question: Escalation reads a carrier at rung after rung until one rung resolves it, and what decides whether
   a rung can resolve a perturbed query is its minimum squared norm. Does indexing the rungs by that quantity
   — one rung at every power of two, generated rather than named — read more queries than the eleven named
   construction rungs, and does it still refuse rather than answer wrongly?
 recomputed_by: '`glm_universal.reasoning.norm_escalation.measure`'
+related:
+- OPERATION_ESCALATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -64,7 +76,8 @@ sections:
 - anchor: 6-limits-and-what-the-next-round-should-take
   heading: 6. Limits, and what the next round should take
 status: closed
-successors: []
+successors:
+- LATTICE_COMPLETION_STUDY
 superseded_by: ''
 supersedes: []
 title: The norm family — the ladder re-indexed by minimum squared norm, and the rung that had to be retired

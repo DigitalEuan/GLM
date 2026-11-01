@@ -17,6 +17,13 @@ Covers the five Step-3 success criteria:
 Run with::
 
     uv run pytest glm_universal/tests/test_reasoning.py -q
+
+*Last altered 31 October 2026 (repository check: the import rule's allowed
+set gained ``multiprocessing``, ``copy``, ``io``, ``shutil``, ``unittest``
+and the project's own ``GLM``/``glm_universal``, each with its reason, for
+modules the check had never reached).*  *Also 1 November 2026 (Phase 186):
+``argparse`` and ``zipfile``, for the hypothesis engine taken into the
+package, each with its reason.*
 """
 
 from __future__ import annotations
@@ -839,12 +846,42 @@ class TestExactness:
         # ``operator`` supplies ``mul`` to the hole census's integer
         # ``reduce``; it is the ``*`` of the integers by name (recorded in
         # Phase 125, when this check was found failing on that import).
-        stdlib_roots = {"array", "ast", "collections", "concurrent",
-                        "contextlib", "csv", "dataclasses", "fractions", "functools", "heapq",
-                        "importlib",
-                        "itertools", "json", "math", "operator", "os", "pathlib", "re",
+        # ``multiprocessing`` is the process pool of the address-read,
+        # junction, budget-reading and nearest-address studies (Phases
+        # 143-148), on the same terms as ``concurrent`` above: each query is
+        # a deterministic function of its inputs and the results come back
+        # in the declared order, so the pool changes how long a measurement
+        # takes and nothing else.  (Recorded 31 October 2026, repository
+        # check: the modules have used it since those phases, and this
+        # check had stopped at the first offender before reaching them.)
+        # Recorded the same day, for the measurement-only study modules the
+        # check had likewise never reached; none of these computes a value:
+        # ``copy`` duplicates a stored table before a tampering test mutates
+        # it (coordinate_junction_study); ``io`` captures the command line's
+        # printed text in a ``StringIO`` (answering_question, Phase 146; the
+        # pipeline kit's cross-check, Phase 176); ``shutil`` copies files to
+        # a scratch tree to check that their digest reproduces
+        # (quoted_measurements_study, Phase 174); ``unittest`` runs the
+        # owner's pipeline kit's own test suite as delivered
+        # (pipeline_kit_crosscheck, Phase 176).  ``GLM`` (the command line,
+        # whose ``routed_result`` evidence_in_use_study measures) and
+        # ``glm_universal`` (stepwise_script's absolute imports of its own
+        # package) are the project itself, not a third party.
+        # Recorded 1 November 2026 (Phase 186), for the Rule 30 study's
+        # hypothesis engine taken into the package: ``argparse`` reads its
+        # own command line (``python3 -m
+        # glm_universal.reasoning.hypothesis_engine``), and ``zipfile`` reads
+        # stored ARC tasks out of a zip archive as the intake item supplied
+        # them (``load_arc_zip``).  Neither computes a value.
+        allowed_first_party = {"GLM", "glm_universal"}
+        stdlib_roots = {"argparse", "array", "ast", "collections", "concurrent",
+                        "contextlib", "copy", "csv", "dataclasses",
+                        "fractions", "functools", "heapq",
+                        "importlib", "io",
+                        "itertools", "json", "math", "multiprocessing",
+                        "operator", "os", "pathlib", "re", "shutil",
                         "subprocess", "sys", "tempfile", "time", "typing",
-                        "__future__"}
+                        "unittest", "zipfile", "__future__"} | allowed_first_party
         for path in sorted(REASONING_DIR.glob("*.py")):
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):

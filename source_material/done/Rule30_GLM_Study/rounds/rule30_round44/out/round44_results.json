@@ -1,0 +1,1777 @@
+{
+ "rule30": {
+  "tasks": 40,
+  "scores": {
+   "base (no wheel)": {
+    "right": 8,
+    "wrong": 12,
+    "overclaim": 15,
+    "abstain": 5,
+    "n": 40
+   },
+   "guard only": {
+    "right": 18,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 22,
+    "n": 40
+   },
+   "requested provisions": {
+    "right": 28,
+    "wrong": 0,
+    "overclaim": 12,
+    "abstain": 0,
+    "n": 40
+   },
+   "requested + guard": {
+    "right": 40,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 0,
+    "n": 40
+   },
+   "all provisions + guard": {
+    "right": 40,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 0,
+    "n": 40
+   },
+   "random same-size + guard": [
+    {
+     "right": 40,
+     "wrong": 0,
+     "overclaim": 0,
+     "abstain": 0,
+     "n": 40
+    },
+    {
+     "right": 40,
+     "wrong": 0,
+     "overclaim": 0,
+     "abstain": 0,
+     "n": 40
+    },
+    {
+     "right": 40,
+     "wrong": 0,
+     "overclaim": 0,
+     "abstain": 0,
+     "n": 40
+    },
+    {
+     "right": 40,
+     "wrong": 0,
+     "overclaim": 0,
+     "abstain": 0,
+     "n": 40
+    },
+    {
+     "right": 40,
+     "wrong": 0,
+     "overclaim": 0,
+     "abstain": 0,
+     "n": 40
+    }
+   ]
+  },
+  "requested": [
+   "RANGE-CENTRE",
+   "TOOL-BM",
+   "RANGE-LDIAG",
+   "RANGE-SEEDS",
+   "RECOMPUTE",
+   "LEDGER",
+   "IMPLICATIONS"
+  ],
+  "unmet_needs": [
+   "range:ldiag:predicted",
+   "test:APP.conversation.reset",
+   "test:APP.deephole.ladder",
+   "test:APP.evidence.prediction",
+   "test:APP.lattice.addressing",
+   "test:APP.rcalculus.model",
+   "test:APP.retrieval.uniformity",
+   "test:GAP.centre.diagonal.connection",
+   "test:GAP.chain.explanation",
+   "test:GAP.ratio.growing"
+  ],
+  "ablation": {
+   "without RANGE-CENTRE": {
+    "right": 39,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 1,
+    "n": 40
+   },
+   "without TOOL-BM": {
+    "right": 40,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 0,
+    "n": 40
+   },
+   "without RANGE-LDIAG": {
+    "right": 40,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 0,
+    "n": 40
+   },
+   "without RANGE-SEEDS": {
+    "right": 39,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 1,
+    "n": 40
+   },
+   "without RECOMPUTE": {
+    "right": 40,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 0,
+    "n": 40
+   },
+   "without LEDGER": {
+    "right": 30,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 10,
+    "n": 40
+   },
+   "without IMPLICATIONS": {
+    "right": 37,
+    "wrong": 0,
+    "overclaim": 0,
+    "abstain": 3,
+    "n": 40
+   }
+  },
+  "full": {
+   "needs": {
+    "H02": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.preperiod.gt.D' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "H02"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.preperiod.gt.D",
+      "because": "'LD.preperiod.gt.D' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H02"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H03": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.preperiod.envelope' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "H03"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.preperiod.envelope",
+      "because": "'LD.preperiod.envelope' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H03"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H16": [
+     {
+      "kind": "range",
+      "signature": "range:centre",
+      "because": "'CC.no.short.period' is a finite statement beyond the base range of 'centre'",
+      "blocks": [
+       "H16"
+      ],
+      "acceptance": "an exact computation on the stated range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:CC.no.short.period",
+      "because": "a certificate would settle it",
+      "blocks": [
+       "H16"
+      ],
+      "acceptance": "a Lean certificate"
+     }
+    ],
+    "H17": [
+     {
+      "kind": "range",
+      "signature": "range:centre",
+      "because": "'CC.balance.sqrt' survived only the base range of 'centre'; a larger exact range can refute it",
+      "blocks": [
+       "H17"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:CC.balance.sqrt",
+      "because": "'CC.balance.sqrt' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H17"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H19": [
+     {
+      "kind": "range",
+      "signature": "range:lc",
+      "because": "'CC.lc.half' survived only the base range of 'lc'; a larger exact range can refute it",
+      "blocks": [
+       "H19"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:CC.lc.half",
+      "because": "'CC.lc.half' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H19"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H23": [
+     {
+      "kind": "test",
+      "signature": "test:APP.lattice.addressing",
+      "because": "'APP.lattice.addressing' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H23"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H24": [
+     {
+      "kind": "test",
+      "signature": "test:APP.rcalculus.model",
+      "because": "'APP.rcalculus.model' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H24"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H25": [
+     {
+      "kind": "test",
+      "signature": "test:APP.evidence.prediction",
+      "because": "'APP.evidence.prediction' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H25"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H26": [
+     {
+      "kind": "test",
+      "signature": "test:APP.deephole.ladder",
+      "because": "'APP.deephole.ladder' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H26"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H27": [
+     {
+      "kind": "test",
+      "signature": "test:APP.retrieval.uniformity",
+      "because": "'APP.retrieval.uniformity' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H27"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H28": [
+     {
+      "kind": "test",
+      "signature": "test:APP.conversation.reset",
+      "because": "'APP.conversation.reset' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H28"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H29": [
+     {
+      "kind": "test",
+      "signature": "test:GAP.ratio.growing",
+      "because": "'GAP.ratio.growing' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H29"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H30": [
+     {
+      "kind": "fact",
+      "signature": "fact:GAP.next.estimate",
+      "because": "'GAP.next.estimate' extrapolates beyond all data; it needs an independent cross-check",
+      "blocks": [
+       "H30"
+      ],
+      "acceptance": "a proved law or an independent computation"
+     },
+     {
+      "kind": "range",
+      "signature": "range:ldiag:predicted",
+      "because": "the predicted index is beyond every range",
+      "blocks": [
+       "H30"
+      ],
+      "acceptance": "a computation reaching the predicted index"
+     }
+    ],
+    "H31": [
+     {
+      "kind": "test",
+      "signature": "test:GAP.chain.explanation",
+      "because": "'GAP.chain.explanation' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H31"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H32": [
+     {
+      "kind": "fact",
+      "signature": "fact:implication:IMP.transient.aperiodic",
+      "because": "'IMP.transient.aperiodic' asserts that one statement follows from another; that is a claim about all models, not about the data",
+      "blocks": [
+       "H32"
+      ],
+      "acceptance": "a proof of the implication or a counterexample to the argument form"
+     }
+    ],
+    "H33": [
+     {
+      "kind": "fact",
+      "signature": "fact:implication:IMP.gaps.unbounded",
+      "because": "'IMP.gaps.unbounded' asserts that one statement follows from another; that is a claim about all models, not about the data",
+      "blocks": [
+       "H33"
+      ],
+      "acceptance": "a proof of the implication or a counterexample to the argument form"
+     }
+    ],
+    "H34": [
+     {
+      "kind": "test",
+      "signature": "test:GAP.centre.diagonal.connection",
+      "because": "'GAP.centre.diagonal.connection' has no executable test; without one it is not evidence of anything",
+      "blocks": [
+       "H34"
+      ],
+      "acceptance": "an executable test with a pass/fail outcome"
+     }
+    ],
+    "H35": [
+     {
+      "kind": "tool",
+      "signature": "tool:recompute:rcalc",
+      "because": "'APPTEST.rcalculus.match' reports a number and a comparison; re-run both",
+      "blocks": [
+       "H35"
+      ],
+      "acceptance": "the recomputed number and comparison"
+     }
+    ],
+    "H36": [
+     {
+      "kind": "tool",
+      "signature": "tool:recompute:centre",
+      "because": "'APPTEST.uniformity.benchmark' reports a number and a comparison; re-run both",
+      "blocks": [
+       "H36"
+      ],
+      "acceptance": "the recomputed number and comparison"
+     }
+    ],
+    "H39": [
+     {
+      "kind": "range",
+      "signature": "range:seeds",
+      "because": "'WOBBLE.transportable' survived only the base range of 'seeds'; a larger exact range can refute it",
+      "blocks": [
+       "H39"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:WOBBLE.transportable",
+      "because": "'WOBBLE.transportable' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H39"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H40": [
+     {
+      "kind": "range",
+      "signature": "range:centre",
+      "because": "'DS.accumulator.growing' survived only the base range of 'centre'; a larger exact range can refute it",
+      "blocks": [
+       "H40"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:DS.accumulator.growing",
+      "because": "'DS.accumulator.growing' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H40"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H44": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'TAX.conserved.at.jumps' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "H44"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:TAX.conserved.at.jumps",
+      "because": "'TAX.conserved.at.jumps' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "H44"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "H11": [
+     {
+      "kind": "fact",
+      "signature": "fact:LD.periods.unbounded",
+      "because": "'LD.periods.unbounded' is listed as unknown; the ledger may already settle it or an equivalent form",
+      "blocks": [
+       "H11"
+      ],
+      "acceptance": "a ledger entry"
+     }
+    ],
+    "H41": [
+     {
+      "kind": "fact",
+      "signature": "fact:LD.period.law.explained",
+      "because": "'LD.period.law.explained' is listed as unknown; the ledger may already settle it or an equivalent form",
+      "blocks": [
+       "H41"
+      ],
+      "acceptance": "a ledger entry"
+     }
+    ],
+    "V3": [
+     {
+      "kind": "fact",
+      "signature": "fact:implication:IMP.white.forces.parity",
+      "because": "'IMP.white.forces.parity' asserts that one statement follows from another; that is a claim about all models, not about the data",
+      "blocks": [
+       "V3"
+      ],
+      "acceptance": "a proof of the implication or a counterexample to the argument form"
+     }
+    ],
+    "N5": [
+     {
+      "kind": "fact",
+      "signature": "fact:TAX.closed.form",
+      "because": "'TAX.closed.form' is listed as unknown; the ledger may already settle it or an equivalent form",
+      "blocks": [
+       "N5"
+      ],
+      "acceptance": "a ledger entry"
+     }
+    ],
+    "L-H01": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.period.divides.8' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "L-H01"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.period.divides.8",
+      "because": "'LD.period.divides.8' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "L-H01"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "L-H04": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.white.finite' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "L-H04"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.white.finite",
+      "because": "'LD.white.finite' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "L-H04"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "L-H06": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.period.divides.16' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "L-H06"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.period.divides.16",
+      "because": "'LD.period.divides.16' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "L-H06"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "L-H13": [
+     {
+      "kind": "fact",
+      "signature": "fact:RD.lp.le.2^D",
+      "because": "'RD.lp.le.2^D' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "L-H13"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "L-H14": [
+     {
+      "kind": "fact",
+      "signature": "fact:RD.lp.gt.half",
+      "because": "'RD.lp.gt.half' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "L-H14"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "L-H15": [
+     {
+      "kind": "fact",
+      "signature": "fact:RD.periodic.or.anti",
+      "because": "'RD.periodic.or.anti' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "L-H15"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "X1": [
+     {
+      "kind": "range",
+      "signature": "range:centre",
+      "because": "'CC.words.10' is a finite statement beyond the base range of 'centre'",
+      "blocks": [
+       "X1"
+      ],
+      "acceptance": "an exact computation on the stated range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:CC.words.10",
+      "because": "a certificate would settle it",
+      "blocks": [
+       "X1"
+      ],
+      "acceptance": "a Lean certificate"
+     }
+    ],
+    "X2": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.period.divides.16' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "X2"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.period.divides.16",
+      "because": "'LD.period.divides.16' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "X2"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "X3": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.white.alone' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "X3"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.white.alone",
+      "because": "'LD.white.alone' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "X3"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "X4": [
+     {
+      "kind": "range",
+      "signature": "range:centre",
+      "because": "'CC.wobble.80' is a finite statement beyond the base range of 'centre'",
+      "blocks": [
+       "X4"
+      ],
+      "acceptance": "an exact computation on the stated range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:CC.wobble.80",
+      "because": "a certificate would settle it",
+      "blocks": [
+       "X4"
+      ],
+      "acceptance": "a Lean certificate"
+     }
+    ],
+    "X5": [
+     {
+      "kind": "fact",
+      "signature": "fact:R30.parity.descends",
+      "because": "'R30.parity.descends' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "X5"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "X6": [
+     {
+      "kind": "range",
+      "signature": "range:ldiag",
+      "because": "'LD.white.infinite' survived only the base range of 'ldiag'; a larger exact range can refute it",
+      "blocks": [
+       "X6"
+      ],
+      "acceptance": "a refutation, or survival on the larger range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:LD.white.infinite",
+      "because": "'LD.white.infinite' is a statement about all indices; finite data cannot prove it",
+      "blocks": [
+       "X6"
+      ],
+      "acceptance": "a Lean theorem or a refutation"
+     }
+    ],
+    "X7": [
+     {
+      "kind": "range",
+      "signature": "range:centre",
+      "because": "'CC.balance.sqrt.1e5' is a finite statement beyond the base range of 'centre'",
+      "blocks": [
+       "X7"
+      ],
+      "acceptance": "an exact computation on the stated range"
+     },
+     {
+      "kind": "fact",
+      "signature": "fact:CC.balance.sqrt.1e5",
+      "because": "a certificate would settle it",
+      "blocks": [
+       "X7"
+      ],
+      "acceptance": "a Lean certificate"
+     }
+    ],
+    "X8": [
+     {
+      "kind": "fact",
+      "signature": "fact:P1",
+      "because": "'P1' is listed as unknown; the ledger may already settle it or an equivalent form",
+      "blocks": [
+       "X8"
+      ],
+      "acceptance": "a ledger entry"
+     }
+    ]
+   },
+   "requested": [
+    "RANGE-CENTRE",
+    "TOOL-BM",
+    "RANGE-LDIAG",
+    "RANGE-SEEDS",
+    "RECOMPUTE",
+    "LEDGER",
+    "IMPLICATIONS"
+   ],
+   "unmet_needs": [
+    "range:ldiag:predicted",
+    "test:APP.conversation.reset",
+    "test:APP.deephole.ladder",
+    "test:APP.evidence.prediction",
+    "test:APP.lattice.addressing",
+    "test:APP.rcalculus.model",
+    "test:APP.retrieval.uniformity",
+    "test:GAP.centre.diagonal.connection",
+    "test:GAP.chain.explanation",
+    "test:GAP.ratio.growing"
+   ],
+   "conditions": {
+    "base (no wheel)": {
+     "score": {
+      "right": 8,
+      "wrong": 12,
+      "overclaim": 15,
+      "abstain": 5,
+      "n": 40
+     },
+     "answers": {
+      "H02": true,
+      "H03": true,
+      "H16": true,
+      "H17": true,
+      "H19": true,
+      "H23": true,
+      "H24": true,
+      "H25": true,
+      "H26": true,
+      "H27": true,
+      "H28": true,
+      "H29": true,
+      "H30": true,
+      "H31": true,
+      "H32": true,
+      "H33": true,
+      "H34": true,
+      "H35": true,
+      "H36": true,
+      "H39": true,
+      "H40": true,
+      "H44": true,
+      "H11": null,
+      "H41": null,
+      "V3": true,
+      "N5": true,
+      "L-H01": true,
+      "L-H04": true,
+      "L-H06": true,
+      "L-H13": true,
+      "L-H14": true,
+      "L-H15": true,
+      "X1": null,
+      "X2": true,
+      "X3": true,
+      "X4": null,
+      "X5": false,
+      "X6": null,
+      "X7": null,
+      "X8": null
+     },
+     "decided_by": {
+      "H02": "base",
+      "H03": "base",
+      "H16": "base",
+      "H17": "base",
+      "H19": "base",
+      "H23": "base",
+      "H24": "base",
+      "H25": "base",
+      "H26": "base",
+      "H27": "base",
+      "H28": "base",
+      "H29": "base",
+      "H30": "base",
+      "H31": "base",
+      "H32": "base",
+      "H33": "base",
+      "H34": "base",
+      "H35": "base",
+      "H36": "base",
+      "H39": "base",
+      "H40": "base",
+      "H44": "base",
+      "H11": "base",
+      "H41": "base",
+      "V3": "base",
+      "N5": "base",
+      "L-H01": "base",
+      "L-H04": "base",
+      "L-H06": "base",
+      "L-H13": "base",
+      "L-H14": "base",
+      "L-H15": "base",
+      "X1": "base",
+      "X2": "base",
+      "X3": "base",
+      "X4": "base",
+      "X5": "base",
+      "X6": "base",
+      "X7": "base",
+      "X8": "base"
+     },
+     "provisions": [],
+     "seconds": 0.006
+    },
+    "guard only": {
+     "score": {
+      "right": 18,
+      "wrong": 0,
+      "overclaim": 0,
+      "abstain": 22,
+      "n": 40
+     },
+     "answers": {
+      "H02": null,
+      "H03": null,
+      "H16": null,
+      "H17": null,
+      "H19": null,
+      "H23": null,
+      "H24": null,
+      "H25": null,
+      "H26": null,
+      "H27": null,
+      "H28": null,
+      "H29": null,
+      "H30": null,
+      "H31": null,
+      "H32": null,
+      "H33": null,
+      "H34": null,
+      "H35": null,
+      "H36": null,
+      "H39": null,
+      "H40": null,
+      "H44": null,
+      "H11": null,
+      "H41": null,
+      "V3": null,
+      "N5": null,
+      "L-H01": null,
+      "L-H04": null,
+      "L-H06": null,
+      "L-H13": null,
+      "L-H14": null,
+      "L-H15": null,
+      "X1": null,
+      "X2": null,
+      "X3": null,
+      "X4": null,
+      "X5": false,
+      "X6": null,
+      "X7": null,
+      "X8": null
+     },
+     "decided_by": {
+      "H02": "base",
+      "H03": "base",
+      "H16": "base",
+      "H17": "base",
+      "H19": "base",
+      "H23": "base",
+      "H24": "base",
+      "H25": "base",
+      "H26": "base",
+      "H27": "base",
+      "H28": "base",
+      "H29": "base",
+      "H30": "base",
+      "H31": "base",
+      "H32": "base",
+      "H33": "base",
+      "H34": "base",
+      "H35": "base",
+      "H36": "base",
+      "H39": "base",
+      "H40": "base",
+      "H44": "base",
+      "H11": "base",
+      "H41": "base",
+      "V3": "base",
+      "N5": "base",
+      "L-H01": "base",
+      "L-H04": "base",
+      "L-H06": "base",
+      "L-H13": "base",
+      "L-H14": "base",
+      "L-H15": "base",
+      "X1": "base",
+      "X2": "base",
+      "X3": "base",
+      "X4": "base",
+      "X5": "base",
+      "X6": "base",
+      "X7": "base",
+      "X8": "base"
+     },
+     "provisions": [],
+     "seconds": 0.001
+    },
+    "requested provisions": {
+     "score": {
+      "right": 28,
+      "wrong": 0,
+      "overclaim": 12,
+      "abstain": 0,
+      "n": 40
+     },
+     "answers": {
+      "H02": null,
+      "H03": true,
+      "H16": true,
+      "H17": null,
+      "H19": false,
+      "H23": true,
+      "H24": true,
+      "H25": true,
+      "H26": true,
+      "H27": true,
+      "H28": true,
+      "H29": true,
+      "H30": null,
+      "H31": true,
+      "H32": false,
+      "H33": false,
+      "H34": true,
+      "H35": true,
+      "H36": false,
+      "H39": false,
+      "H40": true,
+      "H44": true,
+      "H11": null,
+      "H41": false,
+      "V3": false,
+      "N5": false,
+      "L-H01": false,
+      "L-H04": false,
+      "L-H06": false,
+      "L-H13": true,
+      "L-H14": true,
+      "L-H15": true,
+      "X1": true,
+      "X2": false,
+      "X3": false,
+      "X4": true,
+      "X5": false,
+      "X6": true,
+      "X7": true,
+      "X8": null
+     },
+     "decided_by": {
+      "H02": "LEDGER",
+      "H03": "base",
+      "H16": "RANGE-CENTRE",
+      "H17": "LEDGER",
+      "H19": "TOOL-BM",
+      "H23": "base",
+      "H24": "base",
+      "H25": "base",
+      "H26": "base",
+      "H27": "base",
+      "H28": "base",
+      "H29": "base",
+      "H30": "LEDGER",
+      "H31": "base",
+      "H32": "IMPLICATIONS",
+      "H33": "IMPLICATIONS",
+      "H34": "base",
+      "H35": "base",
+      "H36": "RANGE-CENTRE",
+      "H39": "RANGE-SEEDS",
+      "H40": "base",
+      "H44": "LEDGER",
+      "H11": "LEDGER",
+      "H41": "LEDGER",
+      "V3": "IMPLICATIONS",
+      "N5": "LEDGER",
+      "L-H01": "RANGE-LDIAG",
+      "L-H04": "RANGE-LDIAG",
+      "L-H06": "LEDGER",
+      "L-H13": "LEDGER",
+      "L-H14": "LEDGER",
+      "L-H15": "LEDGER",
+      "X1": "RANGE-CENTRE",
+      "X2": "LEDGER",
+      "X3": "LEDGER",
+      "X4": "RANGE-CENTRE",
+      "X5": "LEDGER",
+      "X6": "LEDGER",
+      "X7": "RANGE-CENTRE",
+      "X8": "LEDGER"
+     },
+     "provisions": [
+      "RANGE-CENTRE",
+      "TOOL-BM",
+      "RANGE-LDIAG",
+      "RANGE-SEEDS",
+      "RECOMPUTE",
+      "LEDGER",
+      "IMPLICATIONS"
+     ],
+     "seconds": 12.925
+    },
+    "requested + guard": {
+     "score": {
+      "right": 40,
+      "wrong": 0,
+      "overclaim": 0,
+      "abstain": 0,
+      "n": 40
+     },
+     "answers": {
+      "H02": null,
+      "H03": null,
+      "H16": true,
+      "H17": null,
+      "H19": false,
+      "H23": null,
+      "H24": null,
+      "H25": null,
+      "H26": null,
+      "H27": null,
+      "H28": null,
+      "H29": null,
+      "H30": null,
+      "H31": null,
+      "H32": false,
+      "H33": false,
+      "H34": null,
+      "H35": null,
+      "H36": false,
+      "H39": false,
+      "H40": null,
+      "H44": true,
+      "H11": null,
+      "H41": false,
+      "V3": false,
+      "N5": false,
+      "L-H01": false,
+      "L-H04": false,
+      "L-H06": false,
+      "L-H13": true,
+      "L-H14": true,
+      "L-H15": true,
+      "X1": true,
+      "X2": false,
+      "X3": false,
+      "X4": true,
+      "X5": false,
+      "X6": true,
+      "X7": true,
+      "X8": null
+     },
+     "decided_by": {
+      "H02": "LEDGER",
+      "H03": "base",
+      "H16": "RANGE-CENTRE",
+      "H17": "LEDGER",
+      "H19": "TOOL-BM",
+      "H23": "base",
+      "H24": "base",
+      "H25": "base",
+      "H26": "base",
+      "H27": "base",
+      "H28": "base",
+      "H29": "base",
+      "H30": "LEDGER",
+      "H31": "base",
+      "H32": "IMPLICATIONS",
+      "H33": "IMPLICATIONS",
+      "H34": "base",
+      "H35": "base",
+      "H36": "RANGE-CENTRE",
+      "H39": "RANGE-SEEDS",
+      "H40": "base",
+      "H44": "LEDGER",
+      "H11": "LEDGER",
+      "H41": "LEDGER",
+      "V3": "IMPLICATIONS",
+      "N5": "LEDGER",
+      "L-H01": "RANGE-LDIAG",
+      "L-H04": "RANGE-LDIAG",
+      "L-H06": "LEDGER",
+      "L-H13": "LEDGER",
+      "L-H14": "LEDGER",
+      "L-H15": "LEDGER",
+      "X1": "RANGE-CENTRE",
+      "X2": "LEDGER",
+      "X3": "LEDGER",
+      "X4": "RANGE-CENTRE",
+      "X5": "LEDGER",
+      "X6": "LEDGER",
+      "X7": "RANGE-CENTRE",
+      "X8": "LEDGER"
+     },
+     "provisions": [
+      "RANGE-CENTRE",
+      "TOOL-BM",
+      "RANGE-LDIAG",
+      "RANGE-SEEDS",
+      "RECOMPUTE",
+      "LEDGER",
+      "IMPLICATIONS"
+     ],
+     "seconds": 0.611
+    },
+    "all provisions + guard": {
+     "score": {
+      "right": 40,
+      "wrong": 0,
+      "overclaim": 0,
+      "abstain": 0,
+      "n": 40
+     },
+     "answers": {
+      "H02": null,
+      "H03": null,
+      "H16": true,
+      "H17": null,
+      "H19": false,
+      "H23": null,
+      "H24": null,
+      "H25": null,
+      "H26": null,
+      "H27": null,
+      "H28": null,
+      "H29": null,
+      "H30": null,
+      "H31": null,
+      "H32": false,
+      "H33": false,
+      "H34": null,
+      "H35": null,
+      "H36": false,
+      "H39": false,
+      "H40": null,
+      "H44": true,
+      "H11": null,
+      "H41": false,
+      "V3": false,
+      "N5": false,
+      "L-H01": false,
+      "L-H04": false,
+      "L-H06": false,
+      "L-H13": true,
+      "L-H14": true,
+      "L-H15": true,
+      "X1": true,
+      "X2": false,
+      "X3": false,
+      "X4": true,
+      "X5": false,
+      "X6": true,
+      "X7": true,
+      "X8": null
+     },
+     "decided_by": {
+      "H02": "LEDGER",
+      "H03": "base",
+      "H16": "RANGE-CENTRE",
+      "H17": "LEDGER",
+      "H19": "TOOL-BM",
+      "H23": "base",
+      "H24": "base",
+      "H25": "base",
+      "H26": "base",
+      "H27": "base",
+      "H28": "base",
+      "H29": "base",
+      "H30": "LEDGER",
+      "H31": "base",
+      "H32": "IMPLICATIONS",
+      "H33": "IMPLICATIONS",
+      "H34": "base",
+      "H35": "base",
+      "H36": "RANGE-CENTRE",
+      "H39": "RANGE-SEEDS",
+      "H40": "base",
+      "H44": "LEDGER",
+      "H11": "LEDGER",
+      "H41": "LEDGER",
+      "V3": "IMPLICATIONS",
+      "N5": "LEDGER",
+      "L-H01": "RANGE-LDIAG",
+      "L-H04": "RANGE-LDIAG",
+      "L-H06": "LEDGER",
+      "L-H13": "LEDGER",
+      "L-H14": "LEDGER",
+      "L-H15": "LEDGER",
+      "X1": "RANGE-CENTRE",
+      "X2": "LEDGER",
+      "X3": "LEDGER",
+      "X4": "RANGE-CENTRE",
+      "X5": "LEDGER",
+      "X6": "LEDGER",
+      "X7": "RANGE-CENTRE",
+      "X8": "LEDGER"
+     },
+     "provisions": [
+      "RANGE-CENTRE",
+      "TOOL-BM",
+      "RANGE-LDIAG",
+      "RANGE-SEEDS",
+      "RECOMPUTE",
+      "LEDGER",
+      "IMPLICATIONS"
+     ],
+     "seconds": 0.609
+    },
+    "random same-size + guard": {
+     "draws": [
+      {
+       "provisions": [
+        "RANGE-SEEDS",
+        "RECOMPUTE",
+        "LEDGER",
+        "RANGE-CENTRE",
+        "IMPLICATIONS",
+        "TOOL-BM",
+        "RANGE-LDIAG"
+       ],
+       "score": {
+        "right": 40,
+        "wrong": 0,
+        "overclaim": 0,
+        "abstain": 0,
+        "n": 40
+       }
+      },
+      {
+       "provisions": [
+        "RANGE-LDIAG",
+        "RANGE-CENTRE",
+        "TOOL-BM",
+        "LEDGER",
+        "IMPLICATIONS",
+        "RANGE-SEEDS",
+        "RECOMPUTE"
+       ],
+       "score": {
+        "right": 40,
+        "wrong": 0,
+        "overclaim": 0,
+        "abstain": 0,
+        "n": 40
+       }
+      },
+      {
+       "provisions": [
+        "TOOL-BM",
+        "RECOMPUTE",
+        "RANGE-LDIAG",
+        "RANGE-SEEDS",
+        "LEDGER",
+        "IMPLICATIONS",
+        "RANGE-CENTRE"
+       ],
+       "score": {
+        "right": 40,
+        "wrong": 0,
+        "overclaim": 0,
+        "abstain": 0,
+        "n": 40
+       }
+      },
+      {
+       "provisions": [
+        "RANGE-LDIAG",
+        "RANGE-CENTRE",
+        "IMPLICATIONS",
+        "RECOMPUTE",
+        "RANGE-SEEDS",
+        "LEDGER",
+        "TOOL-BM"
+       ],
+       "score": {
+        "right": 40,
+        "wrong": 0,
+        "overclaim": 0,
+        "abstain": 0,
+        "n": 40
+       }
+      },
+      {
+       "provisions": [
+        "RECOMPUTE",
+        "RANGE-CENTRE",
+        "IMPLICATIONS",
+        "LEDGER",
+        "TOOL-BM",
+        "RANGE-LDIAG",
+        "RANGE-SEEDS"
+       ],
+       "score": {
+        "right": 40,
+        "wrong": 0,
+        "overclaim": 0,
+        "abstain": 0,
+        "n": 40
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "arc_synthetic": {
+  "dev_size": 44,
+  "heldout_size": 120,
+  "dev_base": {
+   "right": 12,
+   "wrong": 0,
+   "refused": 32,
+   "n": 44,
+   "primitives": 7,
+   "seconds": 0.02
+  },
+  "dev_need_counts": {
+   "primitive:gravity-down": 4,
+   "primitive:fill-enclosed": 4,
+   "primitive:scale": 4,
+   "primitive:crop": 4,
+   "primitive:connect": 4,
+   "primitive:remove-isolated": 4,
+   "primitive:mirror-h": 4,
+   "primitive:unknown": 4
+  },
+  "requested": [
+   "gravity_down",
+   "fill_enclosed",
+   "scale",
+   "crop_largest",
+   "draw_lines",
+   "denoise",
+   "mirror_h"
+  ],
+  "conditions": {
+   "base (no wheel)": [
+    {
+     "right": 19,
+     "wrong": 0,
+     "refused": 101,
+     "n": 120,
+     "primitives": 7,
+     "seconds": 0.05
+    },
+    {
+     "flip_h": {
+      "right": 6
+     },
+     "rot90": {
+      "right": 6
+     },
+     "recolour": {
+      "right": 6
+     },
+     "gravity_down": {
+      "refused": 6
+     },
+     "flip_gravity": {
+      "refused": 6
+     },
+     "gravity_left": {
+      "refused": 6
+     },
+     "fill_enclosed": {
+      "refused": 6
+     },
+     "scale2": {
+      "refused": 6
+     },
+     "scale3_flip": {
+      "refused": 6
+     },
+     "tile2x2": {
+      "refused": 6
+     },
+     "crop_largest": {
+      "refused": 6
+     },
+     "connect": {
+      "refused": 6
+     },
+     "denoise": {
+      "refused": 5,
+      "right": 1
+     },
+     "mirror_complete": {
+      "refused": 6
+     },
+     "recolour_by_size": {
+      "refused": 6
+     },
+     "hollow": {
+      "refused": 6
+     },
+     "count_bar": {
+      "refused": 6
+     },
+     "rot90_tile": {
+      "refused": 6
+     },
+     "control_shuffle": {
+      "refused": 6
+     },
+     "control_parity": {
+      "refused": 6
+     }
+    }
+   ],
+   "requested (from development needs)": [
+    {
+     "right": 72,
+     "wrong": 0,
+     "refused": 48,
+     "n": 120,
+     "primitives": 14,
+     "seconds": 0.25
+    },
+    {
+     "flip_h": {
+      "right": 6
+     },
+     "rot90": {
+      "right": 6
+     },
+     "recolour": {
+      "right": 6
+     },
+     "gravity_down": {
+      "right": 6
+     },
+     "flip_gravity": {
+      "right": 6
+     },
+     "gravity_left": {
+      "refused": 6
+     },
+     "fill_enclosed": {
+      "right": 6
+     },
+     "scale2": {
+      "right": 6
+     },
+     "scale3_flip": {
+      "right": 6
+     },
+     "tile2x2": {
+      "refused": 6
+     },
+     "crop_largest": {
+      "right": 6
+     },
+     "connect": {
+      "right": 6
+     },
+     "denoise": {
+      "right": 6
+     },
+     "mirror_complete": {
+      "right": 6
+     },
+     "recolour_by_size": {
+      "refused": 6
+     },
+     "hollow": {
+      "refused": 6
+     },
+     "count_bar": {
+      "refused": 6
+     },
+     "rot90_tile": {
+      "refused": 6
+     },
+     "control_shuffle": {
+      "refused": 6
+     },
+     "control_parity": {
+      "refused": 6
+     }
+    }
+   ],
+   "all provisions": [
+    {
+     "right": 106,
+     "wrong": 0,
+     "refused": 14,
+     "n": 120,
+     "primitives": 22,
+     "seconds": 0.32
+    },
+    {
+     "flip_h": {
+      "right": 6
+     },
+     "rot90": {
+      "right": 6
+     },
+     "recolour": {
+      "right": 6
+     },
+     "gravity_down": {
+      "right": 6
+     },
+     "flip_gravity": {
+      "right": 6
+     },
+     "gravity_left": {
+      "right": 6
+     },
+     "fill_enclosed": {
+      "right": 6
+     },
+     "scale2": {
+      "right": 6
+     },
+     "scale3_flip": {
+      "right": 6
+     },
+     "tile2x2": {
+      "right": 6
+     },
+     "crop_largest": {
+      "right": 6
+     },
+     "connect": {
+      "right": 6
+     },
+     "denoise": {
+      "refused": 2,
+      "right": 4
+     },
+     "mirror_complete": {
+      "right": 6
+     },
+     "recolour_by_size": {
+      "right": 6
+     },
+     "hollow": {
+      "right": 6
+     },
+     "count_bar": {
+      "right": 6
+     },
+     "rot90_tile": {
+      "right": 6
+     },
+     "control_shuffle": {
+      "refused": 6
+     },
+     "control_parity": {
+      "refused": 6
+     }
+    }
+   ],
+   "random same-size": [
+    {
+     "provisions": [
+      "scale",
+      "gravity_right",
+      "tile",
+      "denoise",
+      "gravity_down",
+      "gravity_up",
+      "count_bar"
+     ],
+     "score": {
+      "right": 66,
+      "wrong": 0,
+      "refused": 54,
+      "n": 120,
+      "primitives": 14,
+      "seconds": 0.34
+     }
+    },
+    {
+     "provisions": [
+      "gravity_up",
+      "scale",
+      "draw_lines",
+      "gravity_down",
+      "count_bar",
+      "gravity_left",
+      "hollow"
+     ],
+     "score": {
+      "right": 67,
+      "wrong": 0,
+      "refused": 53,
+      "n": 120,
+      "primitives": 14,
+      "seconds": 0.35
+     }
+    },
+    {
+     "provisions": [
+      "gravity_up",
+      "tile",
+      "mirror_v",
+      "recolour_by_size",
+      "gravity_left",
+      "hollow",
+      "count_bar"
+     ],
+     "score": {
+      "right": 55,
+      "wrong": 2,
+      "refused": 63,
+      "n": 120,
+      "primitives": 14,
+      "seconds": 0.31
+     }
+    },
+    {
+     "provisions": [
+      "tile",
+      "gravity_down",
+      "draw_lines",
+      "gravity_up",
+      "gravity_left",
+      "mirror_h",
+      "mirror_v"
+     ],
+     "score": {
+      "right": 61,
+      "wrong": 0,
+      "refused": 59,
+      "n": 120,
+      "primitives": 14,
+      "seconds": 0.37
+     }
+    },
+    {
+     "provisions": [
+      "draw_lines",
+      "recolour_by_size",
+      "tile",
+      "gravity_down",
+      "gravity_left",
+      "hollow",
+      "count_bar"
+     ],
+     "score": {
+      "right": 73,
+      "wrong": 2,
+      "refused": 45,
+      "n": 120,
+      "primitives": 14,
+      "seconds": 0.26
+     }
+    }
+   ],
+   "on-demand (per-puzzle needs)": {
+    "right": 108,
+    "wrong": 0,
+    "refused": 12,
+    "loads": 90,
+    "n": 120
+   }
+  },
+  "diagnosis": {
+   "refused_by_base": 101,
+   "need_stated": 89,
+   "unknown": 12,
+   "need_served_and_solved": 89
+  }
+ },
+ "arc_real": {
+  "tests": 53,
+  "V1": {
+   "on-demand": {
+    "right": 2,
+    "wrong": 0,
+    "refused": 51
+   },
+   "stated_needs": {
+    "primitive:unknown": 37,
+    "primitive:recolour-objectwise": 12,
+    "primitive:gravity-down": 2,
+    "primitive:fill-enclosed": 1,
+    "primitive:crop": 1,
+    "primitive:gravity-left": 1,
+    "primitive:gravity-right": 1,
+    "primitive:gravity-up": 1,
+    "primitive:scale": 1
+   }
+  },
+  "V2": {
+   "on-demand": {
+    "right": 2,
+    "wrong": 0,
+    "refused": 51
+   },
+   "stated_needs": {
+    "primitive:unknown": 37,
+    "primitive:recolour-objectwise": 12,
+    "primitive:gravity-down": 2,
+    "primitive:fill-enclosed": 1,
+    "primitive:crop": 1,
+    "primitive:gravity-left": 1,
+    "primitive:gravity-right": 1,
+    "primitive:gravity-up": 1,
+    "primitive:scale": 1
+   }
+  },
+  "base": {
+   "refused": 53
+  }
+ },
+ "seconds": 23.7
+}

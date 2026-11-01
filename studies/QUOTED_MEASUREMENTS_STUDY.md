@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 *Created 20 October 2026 (pre-registered and measured 20 October 2026, in one session; the marks were written with the measuring module before its first run, and none was restated).*
@@ -85,7 +87,7 @@ still owed (pytest is not installed here).
 
 ## 4. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools quoted-measurements` (computed
+`PYTHONPATH=src python3 -m glm_universal.tools quoted-measurements` (computed
 when asked, nothing stored).
 
 | Mark | What | Result |

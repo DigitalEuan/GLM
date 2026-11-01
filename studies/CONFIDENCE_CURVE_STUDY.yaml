@@ -1,29 +1,35 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '6 of 8 marks; balanced guard `(1, 1/5)`: 33.7% at 42.4% held out (31.7% at 37.3% calibrated);
   sure guard `(2, 2/3)`: 62.0% at 7.3% held out, 2.95 times the unguarded 21.0%; candidate top three:
   32.7% hit at 98.4%; C1 and C3 missed.'
-directives:
-- D1
-- D2
+directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - knowledge/confidence_curve.py
+  - knowledge/glossary.py
+  - tools.py
   lean: []
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CONFIDENCE_CURVE_STUDY.md
-  test:
-  - test_confidence_curve.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CONFIDENCE_CURVE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -31,17 +37,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - D1
+  - D2
+  met:
+  - C2
+  - C4
+  - C5
+  - C6
+  - D1
+  - D2
+  missed:
+  - C1
+  - C3
 perturbations: []
-phase: 154
-predecessors: []
+phase: 168
+predecessors:
+- CORPUS_KNOWLEDGE_STUDY
 question: Can the counted corpus model declare operating points on its precision/coverage curve — a sure
   mode, a balanced mode and a candidate mode — chosen on a calibration fold by rules written before the
   held-out measurement, and do they hold on held-out text; and can a definition carry a description of
   its own quality that tells a good one from a weak one?
 recomputed_by: '`glm_universal.knowledge.confidence_curve.confidence_curve_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

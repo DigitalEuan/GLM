@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Every address in the corpus decoded both ways, with nothing changed.
@@ -12,22 +14,26 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/analogy
-  - reasoning/fwht_decode
-  - reasoning/llvq
-  - reasoning/llvq_table
-  - substrate/mog
-  - tests/test_llvq_table
+  - reasoning/analogy.py
+  - reasoning/fwht_decode.py
+  - reasoning/lean_address.py
+  - reasoning/llvq.py
+  - reasoning/llvq_table.py
+  - substrate/mog.py
   lean:
   - LLVQTable
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: LLVQ_TABLE_STUDY.md
   test:
   - test_llvq_table.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: LLVQ_TABLE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -43,6 +49,7 @@ phase: 24
 predecessors: []
 question: Can the quantiser's 4,096-codeword scan be replaced by the MOG's own structure?
 recomputed_by: '`glm_universal.reasoning.llvq_table.llvq_table_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -64,7 +71,9 @@ sections:
 - anchor: 7-what-recomputes-each-figure
   heading: 7. What recomputes each figure
 status: closed
-successors: []
+successors:
+- LEAN_ADDRESS_STUDY
+- LEECH_SHELLS_STUDY
 superseded_by: ''
 supersedes: []
 title: 'The LLVQ table: the quantiser''s search, replaced by a lookup'

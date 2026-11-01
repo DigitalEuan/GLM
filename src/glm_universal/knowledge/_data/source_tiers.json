@@ -1,0 +1,317 @@
+{
+ "amended": {
+  "T5'": true
+ },
+ "amended_met": 1,
+ "amended_taken": 1,
+ "census": {
+  "tiers": {
+   "code": {
+    "documents": 841,
+    "sentences": 35302,
+    "tokens": 531239
+   },
+   "core": {
+    "documents": 69,
+    "sentences": 12581,
+    "tokens": 394096
+   },
+   "lean": {
+    "documents": 397,
+    "sentences": 9400,
+    "tokens": 539516
+   },
+   "studies": {
+    "documents": 277,
+    "sentences": 41319,
+    "tokens": 818171
+   },
+   "supplied": {
+    "documents": 615,
+    "sentences": 52798,
+    "tokens": 988210
+   }
+  },
+  "total": {
+   "documents": 2199,
+   "sentences": 151400,
+   "tokens": 3271232
+  }
+ },
+ "define": {
+  "supplied": {
+   "answer_tiers": {
+    "supplied": 27
+   },
+   "answered": 27,
+   "terms": 60
+  },
+  "whole": {
+   "answer_tiers": {
+    "code": 8,
+    "core": 11,
+    "lean": 4,
+    "studies": 24,
+    "supplied": 1
+   },
+   "answered": 48,
+   "terms": 60
+  },
+  "written": {
+   "answer_tiers": {
+    "code": 9,
+    "core": 11,
+    "lean": 4,
+    "studies": 24
+   },
+   "answered": 48,
+   "terms": 60
+  }
+ },
+ "glossary": {
+  "supplied": {
+   "agree": 5,
+   "agree_top": 5,
+   "answered": 15,
+   "control_total": 26,
+   "terms": 27,
+   "total_grade": 14
+  },
+  "whole": {
+   "agree": 9,
+   "agree_top": 12,
+   "answered": 20,
+   "control_total": 27,
+   "terms": 27,
+   "total_grade": 28
+  },
+  "written": {
+   "agree": 6,
+   "agree_top": 10,
+   "answered": 16,
+   "control_total": 29,
+   "terms": 27,
+   "total_grade": 20
+  }
+ },
+ "lean": {
+  "path": "src/lean/RequestProject/GLM/SourceTiers.lean",
+  "present": false,
+  "sorry": null
+ },
+ "marks": {
+  "L1": false,
+  "T1": false,
+  "T2": false,
+  "T3": false,
+  "T4": true,
+  "T5": true,
+  "T6": false,
+  "T7": false,
+  "T8": false
+ },
+ "met": 2,
+ "prediction": {
+  "by_slice": {
+   "supplied": {
+    "supplied": {
+     "accuracy": "10295/45256",
+     "majority_answered": 10905,
+     "majority_precision": "5708/10905",
+     "majority_right": 5708,
+     "positions": 90512,
+     "right": 20590
+    },
+    "written": {
+     "accuracy": "16961/149069",
+     "majority_answered": 33450,
+     "majority_precision": "1509/5575",
+     "majority_right": 9054,
+     "positions": 447207,
+     "right": 50883
+    }
+   },
+   "whole": {
+    "supplied": {
+     "accuracy": "23041/90512",
+     "majority_answered": 13582,
+     "majority_precision": "7945/13582",
+     "majority_right": 7945,
+     "positions": 90512,
+     "right": 23041
+    },
+    "written": {
+     "accuracy": "91787/447207",
+     "majority_answered": 50741,
+     "majority_precision": "27118/50741",
+     "majority_right": 27118,
+     "positions": 447207,
+     "right": 91787
+    }
+   },
+   "written": {
+    "supplied": {
+     "accuracy": "16431/90512",
+     "majority_answered": 9709,
+     "majority_precision": "659/1387",
+     "majority_right": 4613,
+     "positions": 90512,
+     "right": 16431
+    },
+    "written": {
+     "accuracy": "91519/447207",
+     "majority_answered": 48254,
+     "majority_precision": "1147/2098",
+     "majority_right": 26381,
+     "positions": 447207,
+     "right": 91519
+    }
+   }
+  },
+  "control": {
+   "written": {
+    "documents_left_out": 491,
+    "positions": 447207,
+    "right": 89021
+   }
+  },
+  "cost": {
+   "pseudo": 2766,
+   "supplied": 268
+  },
+  "held_documents": 439,
+  "left_out": {
+   "code": {
+    "written": {
+     "documents_left_out": 675,
+     "positions": 447207,
+     "right": 86780
+    }
+   },
+   "core": {
+    "written": {
+     "documents_left_out": 55,
+     "positions": 447207,
+     "right": 85545
+    }
+   },
+   "lean": {
+    "written": {
+     "documents_left_out": 319,
+     "positions": 447207,
+     "right": 83315
+    }
+   },
+   "studies": {
+    "written": {
+     "documents_left_out": 220,
+     "positions": 447207,
+     "right": 86315
+    }
+   },
+   "supplied": {
+    "written": {
+     "documents_left_out": 491,
+     "positions": 447207,
+     "right": 91519
+    }
+   }
+  },
+  "policies": {
+   "supplied": {
+    "policies": {
+     "confirmed": {
+      "answered": 9856,
+      "precision": "73/128",
+      "right": 5621
+     },
+     "downweighted": {
+      "answered": 15521,
+      "precision": "8433/15521",
+      "right": 8433
+     },
+     "downweighted_unweighted": {
+      "answered": 13773,
+      "precision": "7733/13773",
+      "right": 7733
+     },
+     "excluded": {
+      "answered": 9709,
+      "precision": "659/1387",
+      "right": 4613
+     },
+     "whole": {
+      "answered": 13582,
+      "precision": "7945/13582",
+      "right": 7945
+     }
+    },
+    "positions": 90512
+   },
+   "written": {
+    "policies": {
+     "confirmed": {
+      "answered": 48341,
+      "precision": "26788/48341",
+      "right": 26788
+     },
+     "downweighted": {
+      "answered": 60885,
+      "precision": "32101/60885",
+      "right": 32101
+     },
+     "downweighted_unweighted": {
+      "answered": 52069,
+      "precision": "27877/52069",
+      "right": 27877
+     },
+     "excluded": {
+      "answered": 48254,
+      "precision": "1147/2098",
+      "right": 26381
+     },
+     "whole": {
+      "answered": 50741,
+      "precision": "27118/50741",
+      "right": 27118
+     }
+    },
+    "positions": 447207
+   }
+  },
+  "test_sentences": {
+   "supplied": 4386,
+   "written": 17916
+  },
+  "training_documents": 1760
+ },
+ "source_digest": "23fe13bdfe03064d7313b1a53da59e4fa9fa4cc2e8a1a43e6f4d581e7808af5e",
+ "taken": 9,
+ "unmeasured": {
+  "T1": "the subject of T1 was not recorded anywhere that survived (SOURCE_TIERS_STUDY.md §5)",
+  "T3": "the subject of T3 was not recorded anywhere that survived (SOURCE_TIERS_STUDY.md §5)",
+  "T6": "the subject of T6 was not recorded anywhere that survived (SOURCE_TIERS_STUDY.md §5)",
+  "T7": "the subject of T7 was not recorded anywhere that survived (SOURCE_TIERS_STUDY.md §5)",
+  "T8": "no answer of the GLM moves: needs the evaluation's frozen-path comparison, not run here"
+ },
+ "words": {
+  "supplied": {
+   "asked": 12,
+   "hits": 31,
+   "neighbours": 120,
+   "share": "31/120"
+  },
+  "whole": {
+   "asked": 12,
+   "hits": 60,
+   "neighbours": 120,
+   "share": "1/2"
+  },
+  "written": {
+   "asked": 12,
+   "hits": 62,
+   "neighbours": 120,
+   "share": "31/60"
+  }
+ }
+}

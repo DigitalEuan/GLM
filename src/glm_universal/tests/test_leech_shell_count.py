@@ -18,6 +18,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from glm_universal.constants import lean_file
+from glm_universal.lean_check import audited_or_held
 from glm_universal.reasoning import leech_shells as ls
 
 _ROOT = Path(__file__).resolve().parents[3]
@@ -25,7 +27,7 @@ _GLM = _ROOT / "src" / "lean" / "RequestProject" / "GLM"
 
 
 def test_lean_file_states_the_theorems_without_sorry():
-    text = (_GLM / "LeechShellCount.lean").read_text(encoding="utf-8")
+    text = lean_file("LeechShellCount.lean").read_text(encoding="utf-8")
     for name in ls.SHELL_COUNT_LEAN_THEOREMS:
         assert f"theorem {name}" in text, name
     assert "sorry" not in text
@@ -33,8 +35,8 @@ def test_lean_file_states_the_theorems_without_sorry():
 
 
 def test_lean_file_is_audited():
-    audit = (_GLM / "AxiomAuditAll.lean").read_text(encoding="utf-8")
-    assert "import RequestProject.GLM.LeechShellCount" in audit
+    # audited, or held in awaiting_recovery/ until LeechShells.lean returns
+    assert audited_or_held("RequestProject.GLM.LeechShellCount")
 
 
 def test_proved_sizes_agree_three_ways():

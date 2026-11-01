@@ -34,11 +34,21 @@ Two declared rules shape the counts and are the same for every document:
   sentences of a document are counted, in first-occurrence order);
 * the stop-word list :data:`STOPWORDS` decides which tokens are *content*
   words for the ``window`` table; the n-gram tables keep every token.
+
+*Last altered 31 October 2026 (repository check): digests taken through
+``glm_universal.integrity`` rather than ``hashlib`` (the D9 digest
+inventory declares no digest site here); every digest value is unchanged.*
+
+*Last altered 31 October 2026 (repository check): ``CACHE_SCHEMA`` 4 -> 6 and
+a ``schema`` field on :class:`Knowledge`, checked by :func:`load` before any
+cached document is reused -- the reader's rule changed (words-only tokens,
+Python docstrings read, the sentence-end repair, the JSON/CSV prose rule and
+one sentence per table row; see ``reader.py``), and a
+cached document is otherwise reused whenever its file digest is unchanged.*
 """
 
 from __future__ import annotations
 
-import hashlib
 import os
 import pickle
 import sys
@@ -47,6 +57,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Dict, FrozenSet, Iterable, List, Optional, Sequence, Tuple
 
+from .. import integrity
 from . import reader as rd
 
 #: The co-occurrence window, in tokens, either side, inside one sentence.
@@ -151,24 +162,24 @@ class Model:
 
     def signature(self) -> str:
         """A SHA-256 of every count, in sorted order: equal iff the counts are."""
-        h = hashlib.sha256()
-        h.update(f"{self.documents},{self.sentences},{self.tokens},"
+        parts: List[bytes] = []
+        parts.append(f"{self.documents},{self.sentences},{self.tokens},"
                  f"{self.window_pairs}".encode())
         for key in sorted(self.unigram):
-            h.update(f"u{key}={self.unigram[key]};".encode())
+            parts.append(f"u{key}={self.unigram[key]};".encode())
         for b in sorted(self.ctx1):
             row = self.ctx1[b]
             for c in sorted(row):
-                h.update(f"1{b}|{c}={row[c]};".encode())
+                parts.append(f"1{b}|{c}={row[c]};".encode())
         for ab in sorted(self.ctx2):
             row = self.ctx2[ab]
             for c in sorted(row):
-                h.update(f"2{ab[0]} {ab[1]}|{c}={row[c]};".encode())
+                parts.append(f"2{ab[0]} {ab[1]}|{c}={row[c]};".encode())
         for key in sorted(self.df):
-            h.update(f"d{key}={self.df[key]};".encode())
+            parts.append(f"d{key}={self.df[key]};".encode())
         for key in sorted(self.window):
-            h.update(f"w{key[0]} {key[1]}={self.window[key]};".encode())
-        return h.hexdigest()
+            parts.append(f"w{key[0]} {key[1]}={self.window[key]};".encode())
+        return integrity.sha256_hex(b"".join(parts))
 
     def merge(self, other: "Model") -> "Model":
         """The sum of two models (the counts of the union of their corpora).
@@ -301,18 +312,22 @@ def cache_directory(environ=os.environ) -> Path:
 
 CACHE_DIRECTORY = cache_directory()
 CACHE_FILE = "knowledge.pickle"
-CACHE_SCHEMA = 4
+#: Bumped whenever the reader's rule changes, so that no document read by an
+#: older rule is reused (5, then 6: 31 October 2026, the reader's words-only
+#: tokeniser, Python docstrings, the sentence-end repair, the JSON/CSV
+#: more-words-than-numbers rule and one sentence per table row).
+CACHE_SCHEMA = 6
 
 
 def _file_digests() -> Dict[str, str]:
-    return {path: hashlib.sha256(data).hexdigest() for path, data in rd.iter_sources()}
+    return {path: integrity.sha256_hex(data) for path, data in rd.iter_sources()}
 
 
 def corpus_digest(digests: Dict[str, str]) -> str:
-    h = hashlib.sha256(f"schema={CACHE_SCHEMA};".encode())
+    parts = [f"schema={CACHE_SCHEMA};".encode()]
     for path in sorted(digests):
-        h.update(f"{path}={digests[path]};".encode())
-    return h.hexdigest()
+        parts.append(f"{path}={digests[path]};".encode())
+    return integrity.sha256_hex(b"".join(parts))
 
 
 @dataclass
@@ -327,6 +342,7 @@ class Knowledge:
     postings: Dict[str, Tuple[int, ...]]   # token -> sentence ids
     sentences: Tuple[rd.Sentence, ...]
     reread: int = 0                         # documents re-read on this load
+    schema: int = 0                         # the CACHE_SCHEMA it was read under
 
     def sentence_ids(self, token: str) -> Tuple[int, ...]:
         return self.postings.get(token, ())
@@ -346,7 +362,7 @@ def _read_documents_incremental(previous: Dict[str, rd.Document]
     digests: Dict[str, str] = {}
     reread = 0
     for path, data in rd.iter_sources():
-        digest = hashlib.sha256(data).hexdigest()
+        digest = integrity.sha256_hex(data)
         digests[path] = digest
         old = previous.get(path)
         if old is not None and old.digest == digest:
@@ -384,6 +400,9 @@ def load(rebuild: bool = False) -> Knowledge:
                 cached = pickle.load(handle)
         except Exception:  # pragma: no cover - a corrupt cache is rebuilt
             cached = None
+    if cached is not None and getattr(cached, "schema", 0) != CACHE_SCHEMA:
+        # Read under an older reader rule: nothing of it may be reused.
+        cached = None
     if cached is not None:
         digest = corpus_digest(_file_digests())
         if cached.digest == digest:
@@ -442,4 +461,4 @@ def build(documents: Tuple[rd.Document, ...], digest: str = "") -> Knowledge:
     return Knowledge(digest=digest, documents=documents, model=model,
                      contexts=context_sets(model),
                      positions=positional_sets(model), postings=_postings(sentences),
-                     sentences=sentences)
+                     sentences=sentences, schema=CACHE_SCHEMA)

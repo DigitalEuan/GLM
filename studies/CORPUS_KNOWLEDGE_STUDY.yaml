@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 9 marks, both amended marks missed; next token 21.5% against 6.9% (most frequent
@@ -11,17 +13,27 @@ deciding_figure: 7 of 9 marks, both amended marks missed; next token 21.5% again
 directives:
 - D15
 evidence: []
-faculty: unknown
+faculty: refusal
 file_refs:
   code:
-  - tests/test_corpus_knowledge
+  - knowledge/answer.py
+  - knowledge/ask.py
+  - knowledge/model.py
+  - knowledge/reader.py
+  - knowledge/study.py
+  - tools.py
   lean:
   - CorpusKnowledge
+  - Retrieval
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CORPUS_KNOWLEDGE_STUDY.md
   test:
   - test_corpus_knowledge.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CORPUS_KNOWLEDGE_STUDY
 junctions: []
 last_altered: ''
@@ -37,12 +49,15 @@ marks:
   missed: []
 perturbations: []
 phase: 154
-predecessors: []
+predecessors:
+- BLOCKERS_STUDY
 question: Can the project's own corpus — every study, state document, Lean file, Python module, JSON and
   CSV the GLM has accumulated, read as folder, document, paragraph, sentence and token — be used directly
   as the GLM's knowledge, giving it the surrounding-word context an LLM gets from training, without letting
   chance or a float into the system?
 recomputed_by: '`glm_universal.knowledge.study.corpus_knowledge_report`'
+related:
+- GLM_ACADEMIC_PAPER
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -66,7 +81,10 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- CONFIDENCE_CURVE_STUDY
+- CORPUS_DEFINITIONS_STUDY
+- SOURCE_TIERS_STUDY
 superseded_by: ''
 supersedes: []
 title: The corpus as what the GLM knows — counting instead of training

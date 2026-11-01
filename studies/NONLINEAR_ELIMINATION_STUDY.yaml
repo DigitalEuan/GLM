@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 4 of 7 marks met; 9 of 10 declared systems with exactly the declared branches; 5 of 5
@@ -10,20 +12,27 @@ deciding_figure: 4 of 7 marks met; 9 of 10 declared systems with exactly the dec
   the other 2 being its two `NONLINEAR` refusals; planted battery 19 of 60 answered, 0 wrong.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/nonlinear_cases
+  - evaluation/nonlinear_cases.py
+  - reasoning/symbolic_nonlinear.py
+  - runtime/nonlinear_report.py
+  - tools.py
   lean:
   - NonlinearElimination
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: NONLINEAR_ELIMINATION_STUDY.md
   test:
-  - test_nonlinear_elimination.py
+  - test_nonlinear.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: NONLINEAR_ELIMINATION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -31,17 +40,33 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - E1
+  - E2
+  - E3
+  - E4
+  - E5
+  - E6
+  - E7
+  met:
+  - E2
+  - E3
+  - E4
+  - E7
+  missed:
+  - E1
+  - E5
+  - E6
 perturbations: []
-phase: 98
-predecessors: []
+phase: 103
+predecessors:
+- SYMBOLIC_PARAMETERS_STUDY
 question: Phase 98's solver refuses `NONLINEAR` every system in which an unknown appears in a product
   or in two powers, even when the system has a closed answer. Can a second layer answer those systems
   exactly, giving every real solution as a branch, without answering anything wrongly and without moving
   an earlier answer?
 recomputed_by: '`glm_universal.runtime.nonlinear_report.nonlinear_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -65,7 +90,8 @@ sections:
 - anchor: 7-re-running-it
   heading: 7. Re-running it
 status: closed
-successors: []
+successors:
+- CUBIC_RADICAL_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Nonlinear elimination: systems in letters that substitution cannot isolate'

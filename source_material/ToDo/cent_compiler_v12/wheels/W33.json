@@ -1,0 +1,144 @@
+{
+  "id": "W33",
+  "title": "Multi-Phase Heat & Mass Transfer",
+  "axioms": [
+    "heat_transfer_coefficient = thermal_conductivity / characteristic_length",
+    "nusselt_number = heat_transfer_coefficient * characteristic_length / thermal_conductivity"
+  ],
+  "cases": [
+    {
+      "id": "W33-01",
+      "equation": "thermal_conductivity = heat_transfer_coefficient * characteristic_length",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W33-02",
+      "equation": "characteristic_length = thermal_conductivity / heat_transfer_coefficient",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W33-03",
+      "equation": "heat_transfer_coefficient = nusselt_number * thermal_conductivity / characteristic_length",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W33-N1",
+      "equation": "nusselt_number = thermal_conductivity / heat_transfer_coefficient",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "characteristic_length",
+    "heat_transfer_coefficient",
+    "nusselt_number",
+    "thermal_conductivity"
+  ],
+  "dimensions": {
+    "characteristic_length": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "heat_transfer_coefficient": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -3,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    "nusselt_number": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "thermal_conductivity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        1,
+        -3,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

@@ -129,8 +129,21 @@ def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-def _read(rel: str) -> Optional[str]:
+def _path(rel: str) -> Path:
+    """The file a repository-relative name means.
+
+    Last altered 31 October 2026 (repository check): the code facts name
+    ``glm_universal/...`` paths, which since the October 2026 reorganisation
+    live under ``src/``; they are read there, by the reading and by the
+    column-3 script alike."""
     p = REPO / rel
+    if not p.exists() and rel.startswith("glm_universal/"):
+        p = PACKAGE.parent / rel
+    return p
+
+
+def _read(rel: str) -> Optional[str]:
+    p = _path(rel)
     try:
         return p.read_text(encoding="utf-8")
     except OSError:
@@ -992,7 +1005,7 @@ def _script(tp: Topic, quotes: Sequence[Tuple[str, str]],
             facts: Sequence[Tuple[str, str]]) -> str:
     lines = ["import re", "from fractions import Fraction",
              "norm = lambda s: re.sub(r'\\s+', ' ', s).strip()",
-             f"QUOTES = {[(str(REPO / p), f) for p, f in quotes]!r}",
+             f"QUOTES = {[(str(_path(p)), f) for p, f in quotes]!r}",
              "for p, f in QUOTES:",
              "    assert norm(f) in norm(open(p, encoding='utf-8').read()), "
              "('quote moved', p, f[:60])",
@@ -1001,7 +1014,7 @@ def _script(tp: Topic, quotes: Sequence[Tuple[str, str]],
              "    src = open(p, encoding='utf-8').read()",
              "    assert re.search(r'\\b(theorem|lemma|def)\\s+' + "
              "re.escape(n) + r'\\b', src), ('theorem moved', n)",
-             f"FACTS = {[(str(REPO / p), rx) for p, rx in facts]!r}",
+             f"FACTS = {[(str(_path(p)), rx) for p, rx in facts]!r}",
              "for p, rx in FACTS:",
              "    assert re.search(rx, open(p, encoding='utf-8').read(), "
              "re.M), ('fact moved', p)",
@@ -1104,7 +1117,7 @@ def mutated(tp: Topic, text: str, kind: str) -> Answer:
     if kind == "script-quote":
         p, f = tp.quotes[0]
         rd.script = rd.script.replace(
-            "QUOTES = [", "QUOTES = [(" f"{str(REPO / p)!r}, "
+            "QUOTES = [", "QUOTES = [(" f"{str(_path(p))!r}, "
             "'a sentence that is not in it'), ", 1)
         return rd
     if kind == "script-claim":

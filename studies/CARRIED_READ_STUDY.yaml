@@ -1,32 +1,47 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: 13 of 13 marks; 174/174 chains admitted with 2,087 register reads, 102 question reads,
+deciding_figure: '11 of 12 measured marks and L1, re-measured 31 October 2026 (187/187 chains admitted;
+  lies found 134/134, 54/54, 35/35; typed plans 41/41; field reads 7,716/7,716; F1: baseline lost); the
+  round recorded 13 of 13 marks; 174/174 chains admitted with 2,087 register reads, 102 question reads,
   213 computed and 92 carried steps; lies found at their step 121/121 (register), 54/54 (question, 3 more
   are other numbers of the question), 42/42 (computed); typed plans 42/42 admitted and 42/42 lies refused;
-  field reads 7,716/7,716 admitted and 7,716/7,716 lies refused; 697/697 texts unchanged.
+  field reads 7,716/7,716 admitted and 7,716/7,716 lies refused; 697/697 texts unchanged.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/carried_read_study
-  - reasoning/register_files
-  - tests/test_carried_read
+  - reasoning/carried_read.py
+  - reasoning/carried_read_study.py
+  - reasoning/planner_ladder.py
+  - reasoning/register_files.py
+  - reasoning/ties_ladder_frozen.py
+  - reasoning/typed_ladder.py
+  - runtime/semantic_plan.py
+  - runtime/session.py
+  - runtime/stepwise.py
+  - tools.py
   lean:
   - CarriedRead
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CARRIED_READ_STUDY.md
   test:
   - test_carried_read.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CARRIED_READ_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -34,16 +49,44 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - R1
+  - R2
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - T1
+  - T2
+  - S1
+  - S2
+  - F1
+  met:
+  - L1
+  - R1
+  - R2
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - T1
+  - T2
+  - S1
+  - S2
+  missed:
+  - F1
 perturbations: []
-phase: 151
-predecessors: []
+phase: 153
+predecessors:
+- PLANNER_LADDER_STUDY
 question: Can the batch machine check the values a chain carries by reading the session's registers and
   the question itself, and can the typed planner's computations and the session's field answers be run
   and gated by the same machine, without moving any answer?
 recomputed_by: '`glm_universal.reasoning.carried_read_study.carried_read_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -67,16 +110,20 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- FOLD_MACHINE_STUDY
 superseded_by: ''
 supersedes: []
 title: The machine reads what it carries — the registers as files, the typed planner and the field reads
   through GLM-BAT
-verdict: Yes. The machine is given its own copy of the registers (8,408 entries in 11 tables) and the
-  question's numbers, and of the 2,314 steps Phase 151 carried as data it now reads 2,189 and computes
+verdict: 'Yes. The machine is given its own copy of the registers (8,408 entries in 11 tables) and the
+  question''s numbers, and of the 2,314 steps Phase 151 carried as data it now reads 2,189 and computes
   33 more, with 92 still carried; every answered chain is still admitted. A lie at a register read is
   found at its own step every time, a lie at a given whenever it is not another number of the same question,
-  and a lie at a newly computed step every time. The typed planner's 42 exact computations and 7,716 field
-  answers of the session's default domains run through the same machine, every honest one admitted and
-  every altered one refused, and no answer moved. No mark was missed.
+  and a lie at a newly computed step every time. The typed planner''s 42 exact computations and 7,716
+  field answers of the session''s default domains run through the same machine, every honest one admitted
+  and every altered one refused, and no answer moved. No mark was missed. Re-measured on 31 October 2026
+  (repository check) by the reconstructed measurement module, 11 of the 12 measured marks hold: every
+  chain, register, question, computed, typed and field mark is met over the reconstruction''s 187 chains,
+  and F1 is not met because its baseline was lost in the October 2026 reorganisation; §7.5 gives the figures.'
 wobble_deps: []

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 1. What this round took, and from where
@@ -262,8 +264,7 @@ question shapes are still hand-translated into the system's own grammar.
 ## 10. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools scales          # the measurement
+PYTHONPATH=src python3 -m glm_universal.tools scales          # the measurement
 python3 GLM.py -q "order atomic_weight_u of carbon and molar_mass_u of water"
 python3 GLM.py -q "largest mass"
 python3 GLM.py -q "largest temperature"

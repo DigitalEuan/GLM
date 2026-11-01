@@ -6,11 +6,13 @@
 
 **Verdict.** Declaring the three improper components of the Lorentz group times a change of units as families, completed as the proper `lorentz_units` is, answered 238 of the 480 queries of four scaled improper families right where the Phase 179 family set answered none, with 0 wrong anywhere; each of the 238 answers names the component and the scale and recomposes; and the 717 answers of the Phase 179 family set are unchanged. `LorentzUnits.lean` proves the change of units divides out, that a positive scale keeps the signs the component is read from, that the eight families exhaust the maps keeping the Minkowski form up to a positive square, and that two demonstrations still never fix the component.
 
-**Deciding figure.** 8 of 8 marks; scaled improper queries 238 right, 0 wrong of 480 (Phase 179's families: 0 right); at three demonstrations 118 of 120; Phase 179 answers changed 0 of 717; outside the families 0 wrong of 480.
+**Deciding figure.** 8 of 8 marks; scaled improper queries 238 right, 0 wrong of 480 (Phase 179's families: 0 right); at three demonstrations 118 of 120; Phase 179 answers changed 0 of 717; outside the families 0 wrong of 480. Re-measured 31 October 2026 on the rebuilt query generator (§7.4): 8 of 8 marks; 237 right, 0 wrong of 480; 117 of 120 at three demonstrations; 0 of 716 changed; outside 0 wrong of 480.
 
 **Recomputed by.** `glm_universal.reasoning.improper_units_study.improper_units_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured on the rebuilt query generator of `reasoning/frame_plane_study.py`; 8 of 8 marks as before, the counts moved, §7.4.)*
 
 ---
 
@@ -139,6 +141,30 @@ It answers the first remaining line of `STATUS.md` §2.1 item 10 (*an improper
 map times a change of units*). Left: holding `tool frame`'s ask open in the
 conversation as Phase 173 does; 3+1 dimensions; the TAX refractive-index
 test and the κ decisions.
+
+### 7.4 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The query generator this study
+draws from (`reasoning/frame_plane_study.py`) was lost in the October 2026
+reorganisation and rebuilt from `COLOUR_INDUCTION_STUDY.md`; this study's own
+module is the one of Phase 181. The measurement was taken again on the
+rebuilt generator (`tools improper-units --write`), so the queries are drawn
+the same way but are not those of §7.1, and the counts move; every mark is
+met, as before.
+
+| mark | result | met |
+|---|---|---|
+| **U1** | new 237 right, 0 wrong, 243 refused of 480; regression 716 right, 0 wrong, 724 refused of 1,440 | yes |
+| **U2** | 117 of 120 at three demonstrations (120 of 120 at four) | yes |
+| **U3** | outside: 0 right, 0 wrong, 480 refused of 480 | yes |
+| **U4** | Phase 179 set answered 716; changed 0 | yes |
+| **U5** | 237 of 237 named, scaled and recomposed | yes |
+| **U6** | first fit: 93 wrong on the new families, 177 on the regression set | yes |
+| **L** | `LorentzUnits.lean` states its 9 theorems with no `sorry` — read from the copy held in `src/lean/awaiting_recovery/` until `LorentzPlane.lean` and `LorentzImproper.lean` return, so it is not in the build or `AxiomAuditAll` now | yes |
+| **T** | `6,2,-2`, `lorentz_parity`, scale `2`; refused at two pairs, asking for `2,0,1` | yes |
+
+So **8 of 8 marks**, with 237 where §7.1 has 238, 117 of 120 where it has
+118, and 716 where it has 717.
 
 ## In one paragraph
 

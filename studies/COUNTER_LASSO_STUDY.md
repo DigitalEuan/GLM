@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -220,7 +222,7 @@ reported either way; C5 and C6 bind it.
 
 *Written after the measurement. §§0–6 above are as they were committed.*
 
-`PYTHONPATH=. python3 -m glm_universal.tools counter-lasso` takes every mark
+`PYTHONPATH=src python3 -m glm_universal.tools counter-lasso` takes every mark
 except C1 and C7 in about forty seconds; `tests/test_counter_lasso.py` (10
 tests) pins them.
 

@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 **Status: implemented (v1.2.0), current.** Four modules, **33 probes**, no
 data file, no third-party dependency, and nothing here is float or random.
@@ -36,10 +38,10 @@ work item.
 
 ```bash
 cd /path/to/GLM                       # repo root, where GLM.py lives
-PYTHONPATH=. python3 -m glm_universal.capabilities
-PYTHONPATH=. python3 -m glm_universal.capabilities --area reals
-PYTHONPATH=. python3 -m glm_universal.capabilities --probe real_equality_is_decidable
-PYTHONPATH=. python3 GLM.py -q "report capabilities" -c 1
+PYTHONPATH=src python3 -m glm_universal.capabilities
+PYTHONPATH=src python3 -m glm_universal.capabilities --area reals
+PYTHONPATH=src python3 -m glm_universal.capabilities --probe real_equality_is_decidable
+PYTHONPATH=src python3 src/GLM.py -q "report capabilities" -c 1
 ```
 
 ```python
@@ -89,7 +91,7 @@ Nothing here scores anything. There is no pass rate.
 
 **33 probes: 20 hold, 13 break, 0 errored, 0 surprises.** The counts are
 recomputed under *Capability probes* in
-[`../../FIGURES.md`](../../FIGURES.md).
+[`../../FIGURES.md`](../../../FIGURES.md).
 
 | area | holds | breaks |
 |---|---|---|

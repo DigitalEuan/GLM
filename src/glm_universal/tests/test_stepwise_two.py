@@ -253,7 +253,7 @@ class TestWiring(unittest.TestCase):
         self.assertIn("ANSWER  3", out.getvalue())
 
     def test_the_lean_file_and_the_surface(self):
-        lean = ROOT / "glm_lean/RequestProject/GLM/StepwiseFrames.lean"
+        lean = ROOT / "src/lean/RequestProject/GLM/StepwiseFrames.lean"
         self.assertTrue(lean.exists())
         text = lean.read_text(encoding="utf-8")
         for name in ("mean_perm", "le_mean", "mean_le", "parity_witness",

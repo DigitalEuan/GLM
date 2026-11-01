@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *The first pass over `source_material/GLM-main.zip` retrieved eleven results
 ([`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md)) and left two questions
 open ([`ARCHIVE_DEEP_DIVE_STUDY.md`](ARCHIVE_DEEP_DIVE_STUDY.md)). Read a second
@@ -20,15 +22,14 @@ time, with the first pass's Lean development in hand, **eight more results came
 back**. This is their runtime half: each section recomputes what its Lean file
 proves, from the substrate this package already carries.*
 
-Module: [`glm_universal/reasoning/salvage_second.py`](../glm_universal/reasoning/salvage_second.py)
+Module: [`glm_universal/reasoning/salvage_second.py`](../src/glm_universal/reasoning/salvage_second.py)
 — one call, `second_pass_report()`.
 Tests: `glm_universal/tests/test_salvage_second.py` — 39 test methods.
 Arithmetic: exact `int` and `Fraction` (D7). `π` enters only as a rational
 enclosure computed from Machin's formula, never as a float.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.reasoning.salvage_second import second_pass_report as r; print(r())"
+PYTHONPATH=src python3 -c "from glm_universal.reasoning.salvage_second import second_pass_report as r; print(r())"
 ```
 
 | Lean file | archive source | what it settles |

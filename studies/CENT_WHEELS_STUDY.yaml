@@ -1,0 +1,133 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: '63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at
+  least 56, at most 0), against 1 of 64 laws with the fifteen wheels alone (bar: at most 4); 26 of 26
+  supplied negative controls refused; 10 supplied axioms failing at SI7, 0 absorbed.'
+directives:
+- D22
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - engineering/domains.py
+  - engineering/wheels.py
+  - lean_check.py
+  - wheels/__init__.py
+  - wheels/cent_wheels.py
+  - wheels/cent_wheels_study.py
+  - wheels/lean_cent_data.py
+  - wheels/w11.py
+  - wheels/w15.py
+  lean:
+  - AxiomAuditAll
+  - ConnectedMachine
+  - Wheels/CentWheels
+  lean_held: []
+  lean_missing: []
+  missing: []
+  prose: CENT_WHEELS_STUDY.md
+  test:
+  - test_cent_wheels.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: CENT_WHEELS_STUDY
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - I1
+  - D1
+  - D2
+  - E1
+  - E2
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - A1
+  - L1
+  - M1
+  - M2
+  - M3
+  - M4
+  - I4
+  met:
+  - I1
+  - D1
+  - D2
+  - E1
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - L1
+  - M1
+  - M2
+  - M3
+  - I4
+  missed:
+  - E2
+perturbations: []
+phase: 185
+predecessors: []
+question: Of the 31 formula wheels supplied with `cent_compiler_v12`, which are sound — every axiom dimensionally
+  balanced on its own table, every case's stated derivability equal to exact span membership, every negative
+  control refused — and do the sound ones, absorbed, let the GLM's exact engine answer derivability questions
+  in the new domains that it refuses without them, with no answer wrong?
+recomputed_by: '`glm_universal.wheels.cent_wheels_study.cent_wheels_report`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-the-item-offers-and-what-is-taken-from-it
+  heading: 1. What the item offers, and what is taken from it
+- anchor: 2-the-objects
+  heading: 2. The objects
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-the-battery-fixed-before-the-wiring
+  heading: 4. The battery, fixed before the wiring
+- anchor: 5-lean-obligations
+  heading: 5. Lean obligations
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-files
+  heading: 7. Files
+- anchor: 8-the-measurement
+  heading: 8. The measurement
+status: closed
+successors:
+- INTAKE_CAPABILITY_STUDY
+superseded_by: ''
+supersedes: []
+title: The cent compiler's wheels — which of the 31 supplied wheels are sound, and do the sound ones let
+  the GLM answer derivability questions in new domains, with nothing wrong?
+verdict: 'Yes, with one pre-registered mark not met. After rule R, 15 of the 16 new wheels are sound and
+  pass the absorption rule (W35 loses both axioms and does not), and with them the GLM''s exact engine
+  licenses 63 of the 64 law questions of the pre-registered battery and 0 of its 51 not-a-law questions,
+  where the fifteen wheels alone license 1 law; every negative control is refused and every verdict on
+  the 15 has a Lean proof written, whose build is the owner''s to confirm; until it is, the 15 wheels
+  are in the package provisionally, and say so. Mark E2 is not met: besides its two additions, the supplied
+  W4 omits the repository''s case W4-M1.'
+wobble_deps: []

@@ -12,6 +12,9 @@ tests pin:
 * the **conversation**: a reply is read only right after a question, and is
   rewritten to the previous query with the reply added;
 * the answering path's loop on the full registers (Q1).
+
+*Last altered 31 October 2026 (repository check: test_match_reply pins the
+Phase 167 reply rule, the old reading under the switch).*
 """
 
 from __future__ import annotations
@@ -92,13 +95,24 @@ def test_reply_order_does_not_matter():
 
 
 def test_match_reply():
+    # Phase 167 (ADVERSARIAL_DIALOGUE_STUDY.md §7.2): a yes-or-no question is
+    # answered by the words only; the old reading ("2" read as option 2, no)
+    # holds under the switch.  (Re-pinned 31 October 2026, repository check.)
     tie = tq.junction_tie(["physics:absorptance", "physics:albedo"])
     record = tq.question_record(tie, tq.pending_question(tie))
+    assert tq.is_yes_no(record)
     assert tq.match_reply(record, "No") == "no"
-    assert tq.match_reply(record, "2") == "no"
+    assert tq.match_reply(record, "2") is None
     assert tq.match_reply(record, "yes.") == "yes"
     assert tq.match_reply(record, "maybe") is None
     assert tq.match_reply(record, "3") is None
+    saved = tq.YES_NO_BY_NUMBER
+    tq.YES_NO_BY_NUMBER = True
+    try:
+        assert tq.match_reply(record, "2") == "no"
+        assert tq.match_reply(record, "3") is None
+    finally:
+        tq.YES_NO_BY_NUMBER = saved
 
 
 def test_match_reply_prefers_the_text_of_an_option_to_its_number():

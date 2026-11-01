@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -192,10 +194,10 @@ remain statements about this round. `tests/test_route_choices.py`.
 
 From ``:
 
-* `PYTHONPATH=. python3 -m glm_universal.tools cubic-trig` runs every mark in
+* `PYTHONPATH=src python3 -m glm_universal.tools cubic-trig` runs every mark in
   about two minutes; `--quick` skips the batteries, the Phase 104 re-read and
   the outside texts; `--json` gives the rows.
-* `PYTHONPATH=. python3 -m unittest glm_universal.tests.test_cubic_trig` runs
+* `PYTHONPATH=src python3 -m unittest glm_universal.tests.test_cubic_trig` runs
   the tests in a few seconds.
 * `lake build RequestProject.GLM.CubicTrig` from the repository root builds
   the Lean file.

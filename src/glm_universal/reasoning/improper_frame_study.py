@@ -210,11 +210,13 @@ def synthetic() -> Dict[str, object]:
 
 
 def _lean() -> Dict[str, object]:
-    root = Path(__file__).resolve().parents[2] / "lean"
-    text = (root / fp.LEAN_FILE_IMPROPER).read_text(encoding="utf-8")
+    from ..constants import LEAN_HOLDING_DIR, lean_file
+    path = lean_file(fp.LEAN_FILE_IMPROPER)   # built tree, or awaiting_recovery/
+    text = path.read_text(encoding="utf-8") if path.exists() else ""
     found = [t for t in fp.LEAN_THEOREMS_IMPROPER if f"theorem {t}" in text]
     return {"declared": len(fp.LEAN_THEOREMS_IMPROPER),
-            "theorems": len(found), "sorry": text.count("sorry")}
+            "theorems": len(found), "sorry": text.count("sorry"),
+            "held": LEAN_HOLDING_DIR in path.parents}
 
 
 def _tool() -> Dict[str, object]:

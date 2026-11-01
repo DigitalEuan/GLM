@@ -1,0 +1,38 @@
+================================================================================================
+EXPERIMENT B (Notes 1-2) -- Trace supervision vs. final-answer-only
+================================================================================================
+
+Tiny binary recurrent GLM (T=2, linear recurrence, sigmoid readout):
+  z_D = A(D)       -- task encoder = y1 XOR x1 (the F_2 displacement)
+  b_0 = E(x_q)    -- binary encoder (query flattened into first 24 of 32 cells)
+  b_t+1 = F_θ(b_t, z_D) = W_t b_t + U_t z + c_t  (linear, per-step)
+  r_t = sigmoid(R b_t + d)  (shared readout)
+
+Training:
+  FINAL_ONLY : minimize BCE(r_{T-1}, y) only.
+  TRACE      : minimize Σ_t BCE(r_t, u_t) at every step (λ_trace = 1.0).
+  Same architecture, same data, same optimizer; only the loss differs.
+
+3 seeds, 500 train / 100 val per seed, 60 epochs, 4x6 grids, lr=0.5.
+
+------------------------------------------------------------------------------------------------
+Task          Regime        best EM (mean ± std)      final EM      best IMR      epoch@best  
+------------------------------------------------------------------------------------------------
+toggle        FINAL_ONLY    0.093 ± 0.034        0.067         0.704         28.3        
+toggle        TRACE         0.250 ± 0.051        0.100         0.954         38.0        
+translate     FINAL_ONLY    1.000 ± 0.000        1.000         0.636         0.0         
+translate     TRACE         1.000 ± 0.000        1.000         0.792         0.0         
+reflect_v     FINAL_ONLY    0.900 ± 0.029        0.893         0.793         41.7        
+reflect_v     TRACE         0.853 ± 0.037        0.837         0.996         33.7        
+flood_fill    FINAL_ONLY    1.000 ± 0.000        1.000         0.857         0.0         
+flood_fill    TRACE         1.000 ± 0.000        1.000         1.000         0.0         
+bfs_shortest  FINAL_ONLY    0.887 ± 0.021        0.883         0.824         48.3        
+bfs_shortest  TRACE         0.860 ± 0.008        0.847         0.967         37.3        
+------------------------------------------------------------------------------------------------
+
+Verdict (TRACE best EM - FINAL_ONLY best EM, per task):
+  toggle        : +0.157 EM (mean of 3 seeds)
+  translate     : +0.000 EM (mean of 3 seeds)
+  reflect_v     : -0.047 EM (mean of 3 seeds)
+  flood_fill    : +0.000 EM (mean of 3 seeds)
+  bfs_shortest  : -0.027 EM (mean of 3 seeds)

@@ -12,14 +12,16 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/reasoning/explanation_anchors.py`](../glm_universal/reasoning/explanation_anchors.py),
-[`glm_universal/data_objects/nuclides.py`](../glm_universal/data_objects/nuclides.py),
-[`glm_universal/runtime/explanation_frames.py`](../glm_universal/runtime/explanation_frames.py),
-[`glm_universal/runtime/explanation_report.py`](../glm_universal/runtime/explanation_report.py),
-[`glm_universal/evaluation/explanation_cases.py`](../glm_universal/evaluation/explanation_cases.py),
-[`glm_universal/runtime/question_frames.py`](../glm_universal/runtime/question_frames.py).
-Tests: [`glm_universal/tests/test_explanations.py`](../glm_universal/tests/test_explanations.py).
-Lean: [`RequestProject/GLM/ExplanationAnchors.lean`](../glm_lean/RequestProject/GLM/ExplanationAnchors.lean).
+*Last altered 31 October 2026 (repository check: 8 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
+Code: [`glm_universal/reasoning/explanation_anchors.py`](../src/glm_universal/reasoning/explanation_anchors.py),
+[`glm_universal/data_objects/nuclides.py`](../src/glm_universal/data_objects/nuclides.py),
+[`glm_universal/runtime/explanation_frames.py`](../src/glm_universal/runtime/explanation_frames.py),
+[`glm_universal/runtime/explanation_report.py`](../src/glm_universal/runtime/explanation_report.py),
+[`glm_universal/evaluation/explanation_cases.py`](../src/glm_universal/evaluation/explanation_cases.py),
+[`glm_universal/runtime/question_frames.py`](../src/glm_universal/runtime/question_frames.py).
+Tests: [`glm_universal/tests/test_explanations.py`](../src/glm_universal/tests/test_explanations.py).
+Lean: [`RequestProject/GLM/ExplanationAnchors.lean`](../src/lean/RequestProject/GLM/ExplanationAnchors.lean).
 
 ---
 
@@ -226,9 +228,9 @@ of 21; 3 of 3 disputes; 35 of 35 paraphrases; 5 of 35 held out, 0 misread;
 From ``:
 
 ```
-PYTHONPATH=. python3 -m glm_universal.tools explanations
-PYTHONPATH=. python3 -m glm_universal.tools explanations --json
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_explanations.py
+PYTHONPATH=src python3 -m glm_universal.tools explanations
+PYTHONPATH=src python3 -m glm_universal.tools explanations --json
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_explanations.py
 ```
 
 and `lake build RequestProject.GLM.ExplanationAnchors` at the repository root

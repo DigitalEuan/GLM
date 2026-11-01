@@ -127,7 +127,11 @@ def repository_root() -> Path:
 
 
 def _find(relative: str) -> Optional[Path]:
-    candidates = [repository_root() / relative, Path.cwd() / relative]
+    # Last altered 31 October 2026 (repository check): the ARC state is a
+    # supplied item, filed under source_material/ToDo or source_material/done.
+    from ..constants import source_material_item
+    candidates = [source_material_item(relative), repository_root() / relative,
+                  Path.cwd() / relative]
     for candidate in candidates:
         if candidate.is_file():
             return candidate
@@ -151,7 +155,8 @@ def faces_path() -> Optional[Path]:
 
 def canonical_path() -> Path:
     """Where the migrated state is written."""
-    return repository_root() / "arc_agi_17/results/glm_state_canonical.json"
+    from ..constants import source_material_item
+    return source_material_item("arc_agi_17/results/glm_state_canonical.json")
 
 
 def _read_json(path: Path) -> object:

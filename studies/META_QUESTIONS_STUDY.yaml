@@ -1,37 +1,43 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 6 of 7 marks met; 18 of 18 questions answered with the declared fragment; 30 quotes and
   24 theorems found at read time; 11 of 11 declared disputes and no others; 4 of 4 mutation kinds caught
   on 18 of 18 questions; 35 of 36 paraphrases (31 of 36 at the first run); 17 of 18 held-out rewordings;
   0 of 296 other texts read; 10 named theorems, 0 `sorry`.
-directives:
-- D15
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/meta_question_cases
-  - reasoning/meta_evidence
-  - runtime/meta_frames
-  - runtime/meta_report
-  - runtime/question_frames
-  - tests/test_meta_questions
-  - tests/test_question_frames
+  - evaluation/meta_question_cases.py
+  - reasoning/meta_evidence.py
+  - runtime/meta_frames.py
+  - runtime/meta_report.py
+  - runtime/question_frames.py
+  - tools.py
   lean:
+  - IntegerDecision
   - MetaAnswers
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: META_QUESTIONS_STUDY.md
   test:
   - test_meta_questions.py
+  - test_question_frames.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: META_QUESTIONS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -39,18 +45,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - T1
+  - T2
+  - T3
+  - T4
+  - T5
+  - T6
+  - T7
+  met:
+  - T1
+  - T2
+  - T3
+  - T4
+  - T6
+  - T7
+  missed:
+  - T5
 perturbations: []
-phase: 0
-predecessors: []
+phase: 117
+predecessors:
+- ITERATION_COST_STUDY
+- QUESTION_SET_B_STUDY
 question: 'Eighteen of the outside questions (class M of the Capability Failure Matrix, track M of `QUESTION_SET_B_STUDY.md`
   §8) ask about the GLM itself: how it compares distances without a square root, why it refuses `UNCORRECTABLE`
   past weight 3, how its integer procedure stops, how Lean checks a rational inverse. Can the machine
   answer them from its own studies, code and Lean development, quoting what it reads at the time it reads
   it, and say so when a question''s premise is not what the documents say?'
 recomputed_by: '`glm_universal.runtime.meta_report.meta_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

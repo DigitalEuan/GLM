@@ -1,0 +1,49 @@
+================================================================================================
+ITERATION 8 PHASE 3 — F_2 combiner for binary transformations
+================================================================================================
+
+Per rec #2: use the substrate's combiner.apply_op() at the F_2 level for
+binary transformations that don't need lattice-level snap.
+
+Combiner survey: 8/16 are affine over F_2, 8/16 are Golay-closed.
+
+------------------------------------------------------------------------------------------------
+[Per-task results — F_2 combiner test]
+------------------------------------------------------------------------------------------------
+
+--- toggle ---
+  task: toggle
+  n_samples: 50
+  combiner_index: 6
+  combiner_name: XOR (a XOR b)
+  b_value: all-ones (0xFFFFFF)
+  exact_count: 50
+  exact_rate: 1.0
+  golay_closed_count: 0
+  golay_closed_rate: 0.0
+
+--- reflect_v ---
+  task: reflect_v
+  n_samples: 50
+  matches_with_constant_xor_mask: 0
+  matches_with_constant_xor_mask_rate: 0.0
+  development_issue: reflect_v is a PERMUTATION of cells, not a coordinatewise Boolean op. No fixed F_2 combiner can express it. The substrate's combiner.apply_op() is insufficient for permutation-based tasks. Development requirement: extend the combiner to handle permutations, or use the lattice-level snap for these tasks.
+
+--- translate ---
+  task: translate
+  n_samples: 50
+  matches_with_constant_xor_mask: 0
+  matches_with_constant_xor_mask_rate: 0.0
+  development_issue: translate is also a PERMUTATION (move a block). No fixed F_2 combiner works. Same development issue as reflect_v.
+
+------------------------------------------------------------------------------------------------
+Interpretation:
+  * Toggle: should be solved EXACTLY by combiner 6 (XOR) with b=all-ones.
+    Expected: 100% exact match. This tests whether the F_2 combiner is
+    sufficient for NOT-style binary operations.
+  * Reflect_v: a PERMUTATION of cells, not a coordinatewise Boolean op.
+    No fixed F_2 combiner can express it. Expected: ~0% with constant mask.
+    DEVELOPMENT ISSUE: the substrate's combiner.apply_op() is insufficient
+    for permutation-based tasks. Either extend it, or use the lattice
+    snap for these tasks.
+  * Translate: also a permutation. Same issue.

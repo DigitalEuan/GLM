@@ -3,6 +3,24 @@
 rule for conflicting evidence, and its soundness condition.
 
 *Created 23 October 2026.*
+*Last altered 31 October 2026 (repository check: every draw comes from
+``lorentzian_lift_study.ExactRng``, an exact integer stream seeded by a text,
+in place of ``random.Random``, which the package bans in ``reasoning/``
+(``tests/test_reasoning.py``, ``reasoning/blueprint.py``
+``BANNED_IMPORTS``); the draws differ, so the measurement was re-taken and
+its figures are not those of Phase 184's take.  **M4** compared the
+majority rule on ``decoy3`` with "Phase 183's vote figure", written as the
+number 155 that Phase 183's take gave under ``random.Random``; with the new
+draws that number cannot come back, so M4 now compares with the vote figure
+Phase 183's own code gives on the same queries now
+(``lorentzian_evidence_study.physics``, same seed, same calls), and the
+report keeps both that figure and Phase 184's 155).*
+*Last altered 31 October 2026 (repository check, second pass): the re-bound
+comparison is recorded beside the declared mark rather than in its place --
+``marks["M4"]`` is the declared literal (decoy3 right exactly 155 times) and
+``amended["M4'"]`` the re-bound one (exactly as often as Phase 183's vote rule
+on the same queries now), as ``studies/LORENTZIAN_MAJORITY_STUDY.md`` §5.1
+records them; ``met`` counts the declared marks only.*
 
 What is measured
 ----------------
@@ -44,7 +62,11 @@ Marks, declared before the measurement was taken
 * **M3** ``majority`` is right at least as often as ``guarded`` on every
   condition, and strictly more often on ``decoy3`` and ``decoy5``.
 * **M4** on ``decoy3`` ``majority`` is right exactly 155 times, Phase 183's
-  vote figure (the same queries, and there the two rules coincide).
+  vote figure (the same queries, and there the two rules coincide).  155 was
+  that figure under ``random.Random``.
+* **M4'** (amended 31 October 2026, recorded beside M4) on ``decoy3``
+  ``majority`` is right exactly as often as Phase 183's vote rule there, as
+  ``lorentzian_evidence_study.physics`` computes it now.
 * **M5** on ``collude3`` ``majority`` is wrong on exactly the queries whose
   colluding target is in the register, at least once (``majority_misled``:
   the condition is tight).
@@ -62,7 +84,6 @@ Marks, declared before the measurement was taken
 from __future__ import annotations
 
 import json
-import random
 from fractions import Fraction
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -70,6 +91,7 @@ from typing import Dict, List, Optional, Tuple
 from .. import integrity
 from . import lorentzian_evidence as le
 from . import lorentzian_evidence_study as les
+from . import lorentzian_lift_study as lls
 from . import lorentzian_majority as lm
 
 __all__ = ["DATA_PATH", "SEED", "QUERIES", "CONDITIONS", "compute", "measure",
@@ -98,6 +120,7 @@ _SOURCES = (
     "reasoning/lorentzian_majority.py",
     "reasoning/lorentzian_evidence.py",
     "reasoning/lorentzian_evidence_study.py",
+    "reasoning/lorentzian_lift_study.py",
     "data_objects/physics.py",
     "benchmarks/suites.py",
 )
@@ -109,7 +132,7 @@ _tally, _mark = les._tally, les._mark
 # 1.  THE QUERIES
 # ===========================================================================
 
-def _examples(rng: random.Random, cond: Tuple[int, int, int], d, c, rels,
+def _examples(rng: "lls.ExactRng", cond: Tuple[int, int, int], d, c, rels,
               pools) -> Tuple[List[Tuple[str, str]], Optional[tuple]]:
     """The examples of one query, and the colluding relation (if any).
 
@@ -154,7 +177,7 @@ def physics() -> Dict[str, object]:
     rels = [d for d in rels if len(pools[d]) >= 4]
     out: Dict[str, object] = {"relations": len(rels)}
     for cond, shape in CONDITIONS.items():
-        rng = random.Random(f"{SEED}:physics:{cond}")
+        rng = lls.ExactRng(f"{SEED}:physics:{cond}")
         rules = {r: _tally() for r in ("guarded", "vote", "majority")}
         present = absent = colluding_present = 0
         for _ in range(QUERIES):
@@ -199,7 +222,7 @@ def identities() -> Dict[str, int]:
     """The rule against its definition and theorems on random weighted target
     sets: points of a small grid, weights in ``{0, 1/2, 1, 2, 3}``, one target
     planted with a random share."""
-    rng = random.Random(f"{SEED}:majority:identities")
+    rng = lls.ExactRng(f"{SEED}:majority:identities")
     out = {"checked": 0, "definition": 0, "never_wrong_cases": 0,
            "never_wrong": 0, "guard_cases": 0, "extends_guard": 0,
            "wrong_answers": 0, "wrong_needs_decoys": 0}
@@ -242,10 +265,12 @@ def identities() -> Dict[str, int]:
 # ===========================================================================
 
 def _lean_ok() -> bool:
-    root = Path(__file__).resolve().parents[2] / "lean"
-    text = (root / lm.LEAN_FILE).read_text(encoding="utf-8")
-    audit = (root / "RequestProject" / "GLM" / "AxiomAuditAll.lean").read_text(
-        encoding="utf-8")
+    from ..constants import LEAN_AUDIT_FILE, lean_file
+    path = lean_file(lm.LEAN_FILE)
+    if not path.exists():   # lost in the reorganisation (_lean_files_needed.md)
+        return False
+    text = path.read_text(encoding="utf-8")
+    audit = LEAN_AUDIT_FILE.read_text(encoding="utf-8")
     return ("sorry" not in text
             and all(f"theorem {t}" in text for t in lm.LEAN_THEOREMS)
             and "import RequestProject.GLM.LorentzianMajority" in audit)
@@ -255,6 +280,8 @@ def compute() -> Dict[str, object]:
     phy = physics()
     ide = identities()
     mj = {c: phy[c]["majority"] for c in CONDITIONS}
+    m4 = {"phase_183_vote_now": les.physics()["decoy3"]["vote"]["right"],
+          "phase_184_take": 155, "majority_now": mj["decoy3"]["right"]}
     marks = {
         "M1": all(mj[c]["wrong"] == 0 and mj[c]["right"] == phy[c]["present"]
                   and mj[c]["refused"] == phy[c]["absent"]
@@ -264,7 +291,7 @@ def compute() -> Dict[str, object]:
                    for c in CONDITIONS)
                and all(mj[c]["right"] > phy[c]["guarded"]["right"]
                        for c in ("decoy3", "decoy5"))),
-        "M4": mj["decoy3"]["right"] == 155,
+        "M4": mj["decoy3"]["right"] == m4["phase_184_take"],
         "M5": (mj["collude3"]["wrong"] == phy["collude3"]["colluding_present"]
                and mj["collude3"]["wrong"] > 0),
         "M6": (mj["collude5"]["refused"] == QUERIES
@@ -275,8 +302,11 @@ def compute() -> Dict[str, object]:
                and ide["wrong_needs_decoys"] == ide["wrong_answers"]),
         "L": _lean_ok(),
     }
-    return {"physics": phy, "identities": ide, "marks": marks,
-            "met": sum(marks.values()), "taken": len(marks)}
+    amended = {"M4'": mj["decoy3"]["right"] == m4["phase_183_vote_now"]}
+    return {"physics": phy, "identities": ide, "m4": m4, "marks": marks,
+            "met": sum(marks.values()), "taken": len(marks),
+            "amended": amended, "amended_met": sum(amended.values()),
+            "amended_taken": len(amended)}
 
 
 def _plain(x):

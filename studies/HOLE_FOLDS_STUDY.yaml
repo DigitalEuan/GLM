@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 34 of 34 declared questions (11 order, 8 bounded, 8 rank, 7 present-rows) and 2 of 2
@@ -11,28 +13,33 @@ deciding_figure: 34 of 34 declared questions (11 order, 8 bounded, 8 rank, 7 pre
   completions with both ends attained; 26 of 26 chain scripts verified (843 of 843 steps aligned) and
   every mutation rejected, 15 of 15 hole lies included; 8 of 8 marks met.
 directives:
-- D15
 - D3
 - D7
+- D15
 evidence: []
-faculty: refusal
+faculty: derivation
 file_refs:
   code:
-  - evaluation/stepwise_four_cases
-  - reasoning/stepwise_script
-  - runtime/declared_frames
-  - runtime/stepwise
-  - runtime/stepwise_four
+  - evaluation/stepwise_four_cases.py
+  - reasoning/stepwise_script.py
+  - runtime/declared_frames.py
+  - runtime/stepwise.py
+  - runtime/stepwise_four.py
+  - runtime/toolbox.py
   lean:
   - HoleBounds
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: HOLE_FOLDS_STUDY.md
   test:
-  - test_hole_folds.py
+  - test_stepwise_four.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: HOLE_FOLDS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -40,17 +47,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - H1
+  - H2
+  - H3
+  - H4
+  - H5
+  - H6
+  - H7
+  - H8
+  met:
+  - H1
+  - H2
+  - H3
+  - H4
+  - H5
+  - H6
+  - H7
+  - H8
   missed: []
 perturbations: []
-phase: 84
+phase: 85
 predecessors:
 - STEPWISE_THREE_STUDY
 question: What can the stepwise planner say about the median, the ends and the rank of a column when some
   readings are missing — and can it answer the present-rows question as its own question — without answering
   anything wrongly?
 recomputed_by: '`glm_universal.runtime.stepwise_four.stepwise_four_report`'
+related:
+- COLUMN_EXTREMUM_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -72,7 +97,10 @@ sections:
 - anchor: 6-what-this-leaves
   heading: 6. What this leaves
 status: closed
-successors: []
+successors:
+- DECLARED_FRAMES_STUDY
+- DISCOURSE_STATE_STUDY
+- FOLD_MACHINE_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Folds with a hole: the median, the ends and the rank of a column, bounded where the register is

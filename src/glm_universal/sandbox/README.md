@@ -4,21 +4,22 @@
 
 **Question.** What is in this directory, and what would it take for any of it to leave?
 
-**Verdict.** Three occupants — the reverse-call planner, the four-register memory split and the Lean-source generator — isolated from everything the system computes with, each carrying a promotion checklist that is computed rather than asserted, and no checklist yet says ready.
+**Verdict.** Five occupants — the reverse-call planner, the four-register memory split, the Lean-source generator, the attention simulator and the aggregation bench — isolated from everything the system computes with, each carrying a promotion checklist that is computed rather than asserted, and no checklist yet says ready.
 
-**Deciding figure.** 3 modules, 0 of them ready, and 0 modules that compute an answer importing them.
+**Deciding figure.** 5 modules, 0 of them ready, and 0 modules that compute an answer importing them.
 
 **Recomputed by.** `glm_universal.sandbox.occupancy_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
-Three occupants — the reverse-call planner, the four-register memory split and
-the Lean-source generator — isolated from everything the system computes with,
-each carrying a promotion checklist that is computed rather than asserted:
-3 modules, 0 of them ready, and 0 modules that compute an answer importing
+Five occupants — the reverse-call planner, the four-register memory split, the
+Lean-source generator, the attention simulator and the aggregation bench — isolated
+from everything the system computes with, each carrying a promotion checklist that
+is computed rather than asserted, and no checklist yet says ready:
+5 modules, 0 of them ready, and 0 modules that compute an answer importing
 them.
 
 Those three numbers are read out of the directory itself by
@@ -26,9 +27,12 @@ Those three numbers are read out of the directory itself by
 `promotion_checklist()` and walks the package's import graph:
 
 ```
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal import sandbox; print(sandbox.occupancy_report()['modules'])"
+PYTHONPATH=src python3 -c "from glm_universal import sandbox; print(sandbox.occupancy_report()['modules'])"
 ```
+
+*Last altered 31 October 2026 (repository check): the attention simulator and the aggregation
+bench listed as occupants (they were absorbed into this directory from the supplied `attention`
+item, but the occupant list had not been told); the command is run from the repository root.*
 
 A module lives here when it is worth running and not yet worth relying on. The
 rule of the directory is short enough to state in full.
@@ -61,6 +65,8 @@ rule of the directory is short enough to state in full.
 | `planner.py` | the reverse-call planner: a problem-driven front end that inspects a problem and selects tools by precondition, instead of dispatching on a query kind decided before the problem is read | **not ready** — the safety gate holds, the utility gate does not |
 | `memory_split.py` | the supplied four-register memory split — working, episodic, semantic and procedural — run over the conversation layer's own declared follow-ups and scored against licensing | **not ready** — all three lines are false; where it gains an answer it gains it by choosing a member of an `ambiguous-antecedent` refusal |
 | `lean_generation.py` | the supplied carrier-to-Lean generator, with the *real* round trip in place of the supplied check: write the source, read it back with `reasoning.lean_address.parse_file`, re-quantise | **not ready** — four of five lines are false; the generated source parses but no declaration survives the round trip |
+| `attention_simulator.py` | the supplied exact attention simulator on the GLM substrate (`source_material/ToDo/attention`, [`ATTENTION_SIMULATOR_STUDY.md`](../../../studies/ATTENTION_SIMULATOR_STUDY.md)) | **not ready** — no query kind is wired to it, its Lean specification is not written (the intake's next step), and its study is not registered in the corpus |
+| `aggregation_bench.py` | the supplied aggregation bench: fifteen ways of combining readings, scored against the shipped selector ([`AGGREGATION_BENCH_STUDY.md`](../../../studies/AGGREGATION_BENCH_STUDY.md)) | **not ready** — the same three lines are false |
 
 Run them:
 

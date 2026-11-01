@@ -1,0 +1,134 @@
+--- a/b/glm_universal/runtime/session.py	2026-10-24 04:47:28.467885217 +0000
++++ b/glm_universal/runtime/session.py	2026-10-24 04:47:28.490545747 +0000
+@@ -83,6 +83,7 @@
+ 
+ from .. import data_objects as do
+ from ..data_objects.base import DataObject
++from ..data_objects import automata as ca  # Round 9: the cellular-automaton register
+ from ..reasoning import analogy as an
+ from ..reasoning import analogy_models as am
+ from ..reasoning import coherence as co
+@@ -113,6 +114,7 @@
+                       ResolutionReports, SemanticsReports,
+                       SignalReports, SubstrateReports)
+ from .solution import (InferenceRecord, Solution, SolverError, Step, q)
++from . import wheel_report as wr  # Round 9: answers about the automata register
+ 
+ __all__ = [
+     "SolverError", "DOMAINS", "DEFAULT_SUBSPACE", "REPORT_SUBJECTS",
+@@ -144,6 +146,7 @@
+     "hole ladder", "hole failures", "hole configuration", "cumulativity",
+     "query escalation",
+     "review sweep", "routes",
++    "wheel",
+ )
+ 
+ #: The canonical names of the worked end-to-end tasks ``task <name>`` runs.
+@@ -152,7 +155,7 @@
+ #: The registers a session can load, in a fixed order.
+ DOMAINS: Tuple[str, ...] = (
+     "physics", "chemistry", "molecules", "mathematics", "lexicon",
+-    "spatial", "harmonics", "economics",
++    "spatial", "harmonics", "economics", "automata",
+ )
+ 
+ #: The subspace an analogy uses when the query does not name one.  A raw
+@@ -187,6 +190,9 @@
+     # occasion: the economics study reads prices through the whole vector
+     # and says so in ``reasoning/economics.price_vector``.
+     "economics": None,
++    # Round 9.  A wheel carrier holds a truth table, its ANF and five small invariants; a run
++    # carrier holds a parameter, an exact value and counts.  No subspace is invented here.
++    "automata": None,
+ }
+ 
+ 
+@@ -389,6 +395,8 @@
+             loaded = do.harmonic_objects()
+         elif domain == "economics":
+             loaded = do.economics_objects()
++        elif domain == "automata":
++            loaded = ca.automata_objects()
+         else:  # pragma: no cover -- guarded by the constructor
+             raise SolverError(f"register: no loader for {domain!r}")
+         self._registers[domain] = tuple(loaded)
+@@ -1087,6 +1095,8 @@
+             if fallback is not None:
+                 return fallback
+             raise exc
++        if obj.domain == "automata":
++            return wr.describe(query, obj)
+         params = obj.parameters()
+         stack = obj.stack()
+         address = obj.monster_address()
+@@ -2069,6 +2079,8 @@
+                             "report <subject>"),),
+                 payload={"subjects": list(REPORT_SUBJECTS)})
+ 
++        if subject in wr.WHEEL_SUBJECTS:
++            return wr.report_wheel(query)
+         if subject in ("relations", "verifier", "relation"):
+             return self._report_relations(query)
+         if subject in ("leech distribution", "leech", "distribution",
+@@ -2324,8 +2336,13 @@
+         if not notation:
+             raise SolverError(
+                 "real: no value given.  Try 'approximate sqrt(2) to 20 places'")
++        # Round 9: a carrier of the automata register stands for its exact value.
+         try:
+-            value = xr.parse_real(notation)
++            notation_eval, wheel_notes = ca.substitute_values(notation)
++        except ValueError as error:
++            raise SolverError(f"real: {error}") from None
++        try:
++            value = xr.parse_real(notation_eval)
+         except ZeroDivisionError as error:
+             raise SolverError(
+                 f"real: {error}.  A quotient by an exact zero names no "
+@@ -2393,6 +2410,13 @@
+                  f"|average - target| = {error} <= 1/{ticks}"),
+         ]
+ 
++        if wheel_notes:
++            steps.insert(0, Step(
++                "carriers",
++                "Each register name is replaced by the exact value its carrier holds, with the "
++                "evidence class and the Lean reference that certify it.",
++                "; ".join(wheel_notes)))
++
+         expected = {
+             "notation": notation,
+             "places": str(places),
+@@ -2445,9 +2469,16 @@
+             raise SolverError(
+                 "compare: two values are needed, e.g. "
+                 "'is sqrt(2) greater than 7/5'")
++        # Round 9: a carrier of the automata register stands for its exact value.
+         try:
+-            left = xr.parse_real(left_text)
+-            right = xr.parse_real(right_text)
++            left_eval, left_notes = ca.substitute_values(left_text)
++            right_eval, right_notes = ca.substitute_values(right_text)
++        except ValueError as error:
++            raise SolverError(f"compare: {error}") from None
++        wheel_notes = left_notes + right_notes
++        try:
++            left = xr.parse_real(left_eval)
++            right = xr.parse_real(right_eval)
+         except ZeroDivisionError as error:
+             raise SolverError(
+                 f"compare: {error}.  A quotient by an exact zero names no "
+@@ -2508,6 +2539,13 @@
+                  f"relation asked: {relation}; verdict: {verdict}"),
+         ]
+ 
++        if wheel_notes:
++            steps.insert(0, Step(
++                "carriers",
++                "Each register name is replaced by the exact value its carrier holds, with the "
++                "evidence class and the Lean reference that certify it.",
++                "; ".join(wheel_notes)))
++
+         expected = {
+             "left": left_text,
+             "right": right_text,

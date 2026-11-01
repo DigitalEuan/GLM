@@ -5,9 +5,9 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 184 (the declared majority rule, `tool majority`), Phase 183 (the Lorentzian evidence space) and Phase 182 (the Lorentzian lift of the ambiguous space, the owner's `iter10_lorentzian.py` audited) are closed, and before them Phases 180 (every Leech shell proved) and 181 (improper Lorentz families with a change of units in `tool frame`), in `MASTER_PLAN.md`. The next round starts from `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
+**Verdict.** No round is in flight: Phase 186, the intake items absorbed where they measurably help (1 November 2026), is closed in `MASTER_PLAN.md`, and the next round starts from `STATUS.md` §2.1. Two steps are owed on the owner's machine: the Lean build (`scripts/rebuild_lean.sh`), then `confirm-build` for the three items absorbed ahead of it, and the test-file sign-off (no pytest here).
 
-**Deciding figure.** 0 steps outstanding.
+**Deciding figure.** 2 steps outstanding, both the owner's.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -15,7 +15,9 @@ know to carry the round on?
 and the figure above are grounded in the body below, and
 `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 29 October 2026.*
+*Last altered 31 October 2026 (repository check: the status below; the two steps owed on the owner's machine and the intake promotions that follow the build).*
+
+*Last altered 1 November 2026 (Phase 186: closed; the build now confirms the three items absorbed ahead of it with `confirm-build`).*
 
 ---
 
@@ -43,34 +45,41 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 184 (29 October 2026; the declared majority
-rule for conflicting evidence, taken from `STATUS.md` §2.1 item 11's first
-line) is closed: `LorentzianMajority.lean` (in `AxiomAuditAll.lean`);
-`reasoning/lorentzian_majority.py` (`tool majority`); `tools
-lorentzian-majority` (8 of 8 marks); `tests/test_lorentzian_majority.py` run by
-hand, all passing. Write-up: `studies/LORENTZIAN_MAJORITY_STUDY.md`.
-Phase 183 (owner's request, 29 October 2026; the
-Lorentzian evidence space, taken from `STATUS.md` §2.1 item 11) is closed:
-`LorentzianEvidence.lean` (in `AxiomAuditAll.lean`);
-`reasoning/lorentzian_evidence.py` (`tool evidence`, and the certificate guard
-and settling question in `tool lorentz`); `tools lorentzian-evidence` (13 of 15
-marks); `tests/test_lorentzian_evidence.py` run by hand, all passing. Write-up:
-`studies/LORENTZIAN_EVIDENCE_STUDY.md`.
-Phase 182 (owner's request, 22 October 2026; the
-Lorentzian lift of the ambiguous space, the owner's `iter10_lorentzian.py`
-audited) is closed: `LorentzianLift.lean` and `GolayDeepHole.lean` (in
-`AxiomAuditAll.lean`); `reasoning/lorentzian_lift.py` (`tool lorentz`);
-`tools lorentzian-lift` (11 of 12 marks); `tests/test_lorentzian_lift.py` run
-by hand, all passing. Write-up: `studies/LORENTZIAN_LIFT_STUDY.md`.
-Phases 180 and 181 (taken from `STATUS.md` §2.1
-items 2 and 10, 22 October 2026) are closed. Phase 180:
-`LeechShellCount.lean` (the Leech shell procedure proved for every shell, in
-`AxiomAuditAll.lean`); `reasoning/leech_shells.py` (`proved_shells_check`);
-`tests/test_leech_shell_count.py` run by hand, all passing. Write-up:
-`studies/LEECH_SHELL_COUNT_STUDY.md`. Phase 181: `LorentzUnits.lean` (9
-theorems, in `AxiomAuditAll.lean`); `reasoning/frame_plane.py` (three units
-families); `tools improper-units` (8 of 8); `tests/test_improper_units.py` run
-by hand, all passing. Write-up: `studies/IMPROPER_UNITS_STUDY.md`.
+**No round is in flight.** Phase 186 (1 November 2026; the intake items
+absorbed where they measurably help, by the owner's decision of that day,
+[`INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md)) is closed:
+its record is in `MASTER_PLAN.md`. Phase 185 (31 October 2026; the repository
+check after the October 2026 reorganisation, taken from `STATUS.md` §2.1 item
+0) is closed: its record is in `MASTER_PLAN.md`, what it left is `STATUS.md`
+§1b, and the intake items still in `source_material/ToDo/` are listed with
+their next step by `PYTHONPATH=src python3 -m glm_universal.intake status`.
+Phases 184 and earlier are closed as recorded there.
+
+**Two steps owed, both on the owner's machine:**
+
+* **The Lean build.** No Lean toolchain here. Resume with
+  `scripts/rebuild_lean.sh` from the repository root; it builds, runs the axiom
+  audit, writes `scripts/logs/lean_build_latest.log` and, when everything
+  passes, the build record `scripts/logs/lean_build_evidence.json` (summary
+  line ends `record=0`; the script exits 0 only then, and 1 naming the failed
+  steps otherwise). The files it is the first build of:
+  `Wheels/IntegerWheel.lean`, `Wheels/SporadicOrders.lean`,
+  `Wheels/CentWheels.lean`, the restored `Rule30/SidewaysPeriodTwo.lean`, the
+  renamed Rule 30 files, the four standalone checks
+  `IntakeChecks/RuleThirtyBits.lean`, `SporadicOrderCheck.lean`,
+  `NextTerm.lean` and `Derivability.lean` (built here only on their own, with
+  Lean 4.34 and Mathlib) and the regenerated `AxiomAuditAll.lean`. With the
+  record written, the three items absorbed ahead of it on 1 November 2026 are
+  confirmed by the commands in `STATUS.md` §2.3 (`intake confirm-build
+  Rule30_GLM_Study`, `intake confirm-build cent_compiler_v12`, `intake
+  confirm-build glm_wheels_bundle`); until then they are listed in
+  `wheels/_data/provisional.json` as *absorbed ahead of the build* and every
+  answer from them says so.
+* **The release sign-off** (owed since Phase 134): the test-file sign-off,
+  the gate the evaluation's own runs do not replace. pytest is not installable
+  here (no package index). Resume with `python3 -m pip install pytest`, then
+  `scripts/check_repository.sh` (every Python gate, with a log) and
+  `PYTHONPATH=src python3 -m glm_universal.signoff --close --jobs 8`.
 
 **Standing hazards — read before running anything:** [`ITERATE.md`](ITERATE.md)
 §0.1, *Run-order hazards*. The two that cost the most:
@@ -82,9 +91,3 @@ by hand, all passing. Write-up: `studies/IMPROPER_UNITS_STUDY.md`.
   budget-guard frozen path, and `nearest-question` reads the ties-ladder
   frozen path. Re-take `queryesc`, `budget-guard-frozen` and
   `ties-ladder-frozen` first, then the rest, then refresh the corpus last.
-
-**One step owed: the release sign-off** (owed since Phase 134): the test-file
-sign-off, the gate the evaluation's own runs do not replace. pytest is still
-not installable here (no package index). Resume with
-`python3 -m pip install pytest`, then
-`PYTHONPATH=src python3 -m glm_universal.signoff --close --jobs 8`.

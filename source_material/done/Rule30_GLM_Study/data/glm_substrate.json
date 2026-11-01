@@ -1,0 +1,78 @@
+{
+  "N": 1000000,
+  "golay_codeword_rate": {
+    "n_windows": 41666,
+    "n_hits": 8,
+    "expected_count": 10.17236328125,
+    "expected_rate_per_window": 0.000244140625,
+    "empirical_rate_per_window": 0.00019200307204915277,
+    "sample_hits": [
+      [
+        4678,
+        13342924
+      ],
+      [
+        6321,
+        15641564
+      ],
+      [
+        8284,
+        705200
+      ],
+      [
+        9272,
+        5827378
+      ],
+      [
+        13341,
+        4423073
+      ]
+    ],
+    "golay_code_size": 4096
+  },
+  "hexacode_rate": {
+    "n_windows": 83333,
+    "n_hits": 1296,
+    "expected_count": 1302.078125,
+    "empirical_rate_per_window": 0.015552062208248833,
+    "expected_rate_per_window": 0.015625,
+    "sample_hits": [
+      [
+        8,
+        3185
+      ],
+      [
+        89,
+        317
+      ],
+      [
+        91,
+        1859
+      ],
+      [
+        158,
+        884
+      ],
+      [
+        178,
+        3640
+      ]
+    ],
+    "hexacode_size": 64
+  },
+  "leech_distance": {
+    "n_windows": 200,
+    "n_sampled_minimal_vectors": 8192,
+    "min_distance_sq": 13.0,
+    "max_distance_sq": 23.0,
+    "mean_distance_sq": 17.94,
+    "median_distance_sq": 18.0,
+    "lattice_minimal_norm_sq": 4
+  },
+  "elapsed_seconds": {
+    "golay": 6.679438591003418,
+    "hexacode": 6.495144844055176,
+    "leech": 6.333743572235107
+  },
+  "interpretation": "If the Rule 30 center column were a uniform Bernoulli(1/2) source, the empirical Golay codeword hit rate should be close to 1/4096 = 0.000244, and the hexacode hit rate close to 1/64 = 0.015625. We report whether the empirical rates are consistent with this null hypothesis via a chi-square test."
+}

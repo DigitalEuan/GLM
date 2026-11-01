@@ -1,37 +1,43 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 10 of 10 marks met; 35 of 35 questions answered with the declared fragment (3 FULL, 32
   with the account refused); 25 read a register; 35 of 35 scripts verified, script-claim 35 of 35 and
   register-row 21 of 21 caught; 3 of 3 disputes; 35 of 35 paraphrases; 5 of 35 held-out rewordings, 0
   misread; 0 of 279 other texts read; 3558 ground states, 253 stable; 15 named theorems, 0 `sorry`.
-directives:
-- D15
+directives: []
 evidence: []
-faculty: derivation
+faculty: unknown
 file_refs:
   code:
-  - data_objects/nuclides
-  - evaluation/explanation_cases
-  - reasoning/explanation_anchors
-  - runtime/explanation_frames
-  - runtime/explanation_report
-  - runtime/question_frames
-  - tests/test_explanations
+  - data_objects/nuclides.py
+  - evaluation/explanation_cases.py
+  - reasoning/explanation_anchors.py
+  - reasoning/proof_search.py
+  - runtime/explanation_frames.py
+  - runtime/explanation_report.py
+  - runtime/question_frames.py
+  - tools.py
   lean:
   - ExplanationAnchors
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: EXPLANATION_ANCHOR_STUDY.md
   test:
-  - test_explanation_anchor.py
+  - test_explanations.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: EXPLANATION_ANCHOR_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -39,11 +45,31 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - E1
+  - E2
+  - E3
+  - E4
+  - E5
+  - E6
+  - E7
+  - E8
+  - E9
+  - E10
+  met:
+  - E1
+  - E2
+  - E3
+  - E4
+  - E5
+  - E6
+  - E7
+  - E8
+  - E9
+  - E10
   missed: []
 perturbations: []
-phase: 107
+phase: 120
 predecessors:
 - DERIVATION_TWO_STUDY
 - QUESTION_SET_B_STUDY
@@ -54,6 +80,7 @@ question: 'Thirty-two of the outside questions (class E of the Capability Failur
   answer the part of each that a register or an exact derivation decides, refuse the rest by name, and
   say so when a register contradicts the question''s premise?'
 recomputed_by: '`glm_universal.runtime.explanation_report.explanation_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

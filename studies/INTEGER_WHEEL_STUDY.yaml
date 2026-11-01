@@ -1,0 +1,117 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: '89 of 102 questions answered right and 0 wrong with the wheels (bar: at least 85, 0
+  wrong), against 0 of 102 through the command line without them; 28 of 28 negative controls refused or
+  left alone; 0 false identifications in 8517 soundness checks.'
+directives:
+- D22
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - lean_check.py
+  - tools.py
+  - wheels/cfsg_import.py
+  - wheels/cfsg_seed.py
+  - wheels/integer_wheel.py
+  - wheels/integer_wheel_study.py
+  - wheels/lean_wheel_data.py
+  - wheels/monster_wheel.py
+  - wheels/oeis_reference.py
+  - wheels/oeis_seed.py
+  - wheels/sequence_query.py
+  lean:
+  - AxiomAuditAll
+  - Wheels/IntegerWheel
+  - Wheels/SporadicOrders
+  lean_held: []
+  lean_missing: []
+  missing: []
+  prose: INTEGER_WHEEL_STUDY.md
+  test:
+  - test_integer_wheel.py
+  - test_monster_wheel.py
+  - test_wheels.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: INTEGER_WHEEL_STUDY
+junctions: []
+last_altered: 1 November 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - A
+  - S1
+  - S2
+  - S3
+  - S4
+  - C
+  - R
+  - L
+  - T
+  met:
+  - A
+  - S1
+  - S2
+  - S3
+  - S4
+  - L
+  - T
+  missed: []
+perturbations: []
+phase: 185
+predecessors: []
+question: Does the GLM, given the supplied Integer Wheel and Monster Wheel (`glm_wheels_bundle`), answer
+  sequence-identification and sporadic-group-order questions that it currently refuses, with no answer
+  confidently wrong?
+recomputed_by: '`glm_universal.wheels.integer_wheel_study.integer_wheel_report`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-taken-and-what-is-left
+  heading: 1. What is taken, and what is left
+- anchor: 2-the-objects
+  heading: 2. The objects
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-the-question-set-fixed-before-the-wiring
+  heading: 4. The question set, fixed before the wiring
+- anchor: 5-lean-obligations
+  heading: 5. Lean obligations
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors:
+- INTAKE_CAPABILITY_STUDY
+superseded_by: ''
+supersedes: []
+title: The Integer Wheel and the Monster Wheel — can the GLM name a sequence and a sporadic group, with
+  nothing confidently wrong?
+verdict: 'Yes, for these two kinds of question: with the audited wheels the GLM''s query surface answers
+  89 of the 102 pre-registered questions right and 0 wrong (57 of the 70 sequence questions and all 32
+  sporadic-group questions), where the GLM''s command line without them answers 0 of them; all 28 negative
+  controls are refused or left alone, and no soundness check finds a false identification. The supplied
+  data unaudited would have answered 6 of the questions wrongly, and on the item''s own Rule 30 / ARC
+  battery the Monster Wheel adds 0 identifications and finds 0 sporadic orders: no help there.'
+wobble_deps: []

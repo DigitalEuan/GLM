@@ -31,6 +31,11 @@ all, so the measurement is stored beside the digest of its sources
 Exactness
 ---------
 Strings, ints and :class:`fractions.Fraction` only.
+
+*Last altered 31 October 2026 (repository check): ``_SOURCES`` lists
+``runtime/reports/address.py``, where the address family of solvers moved
+verbatim out of ``runtime/session.py``; F1 reads the causes of the texts
+later rounds moved (``LATER_CAUSES``), as ``budget_guard_frozen`` does.*
 """
 
 from __future__ import annotations
@@ -47,7 +52,7 @@ from . import timed_question as tq
 
 __all__ = [
     "LEAN_FILE", "LEAN_THEOREMS", "BASELINE_PATH", "DISCOURSE_BEFORE_PATH",
-    "DATA_PATH", "TREE_CAUSES", "JUNCTION_CASES", "CONTROLS",
+    "DATA_PATH", "TREE_CAUSES", "LATER_CAUSES", "JUNCTION_CASES", "CONTROLS",
     "sample_junctions", "conversation_run", "f1_frozen_path",
     "c_dialogues", "q1_loop", "r1_controls", "r1_reports", "d1_converse",
     "measure", "write_measurements", "measurements", "state",
@@ -75,6 +80,34 @@ TREE_CAUSES: Dict[str, str] = {
     "report-generated": "the overlay's stored bytes, measured live",
 }
 
+#: Texts moved by rounds after this baseline was taken, each with its cause --
+#: the same causes ``budget_guard_frozen.DECLARED_CAUSES`` declares for the
+#: same cases.  *Added 31 October 2026 (repository check), after a re-take
+#: found these seven texts moved; each move was read against the baseline
+#: text: the refusal's list of kinds and the language and escalation counts
+#: grow with the kinds and cases added since, the directives register grew
+#: from 16 to 22 rules, and Phase 149 appends the L5 clause to the three hole
+#: reports, keeping their text verbatim as its prefix.*
+LATER_CAUSES: Dict[str, str] = {
+    "unknown-nonsense": "Phase 147: the list of query kinds the refusal names "
+                        "gains 'hole'; 31 October 2026: and the four lookup "
+                        "kinds 'corpus', 'tool', 'study' and 'sequence'",
+    "report-language": "Phases 147-148 and 31 October 2026: the language "
+                       "report counts the query kinds and the evaluation "
+                       "questions, which gain the new kinds and cases",
+    "report-query-escalation": "Phases 147-148: the query-escalation report "
+                               "counts the evaluation cases, which gain the "
+                               "new ones",
+    "report-directives": "the directives register, measured live (16 standing "
+                         "rules at the baseline, 22 now)",
+    "report-hole-classifier": "Phase 149: the report keeps its round's text "
+                              "and adds the L5 clause",
+    "report-hole-ladder": "Phase 149: the report keeps its round's text and "
+                          "adds the L5 clause",
+    "report-hole-failures": "Phase 149: the report keeps its round's text and "
+                            "adds the L5 clause",
+}
+
 #: The junction answers of ``locate``: the round's own cause.
 JUNCTION_CASES: Tuple[str, ...] = ("locate-junction", "locate-junction-moved")
 
@@ -88,6 +121,7 @@ _SOURCES: Tuple[str, ...] = (
     "reasoning/_data/answering_question_baseline.json",
     "reasoning/_data/answering_question_discourse_before.json",
     "runtime/session.py",
+    "runtime/reports/address.py",
     "runtime/conversation.py",
     "runtime/discourse.py",
     "runtime/tct_engine.py",
@@ -126,6 +160,8 @@ def f1_frozen_path(session=None) -> Dict[str, object]:
             cause = "this round: the junction answer ends with its question"
         elif cid in TREE_CAUSES:
             cause = "the tree: " + TREE_CAUSES[cid]
+        elif cid in LATER_CAUSES:
+            cause = "a later round: " + LATER_CAUSES[cid]
         else:
             cause = "undeclared"
         rows.append({"id": cid, "present": True,
@@ -509,11 +545,13 @@ def answering_question_report() -> Dict[str, object]:
     f1, e1, c, q1, r1, d1 = (data["f1"], data["e1"], data["c"], data["q1"],
                              data["r1"], data["d1"])
     tree = {"the tree: " + v for v in TREE_CAUSES.values()}
+    later = {"a later round: " + v for v in LATER_CAUSES.values()}
     marks = {
         "F1": (f1["present"] == f1["cases"] == f1["same_status"]
                and not f1["undeclared"]
                and all(m["cause"].startswith("this round")
-                       or m["cause"] in tree for m in f1["moved"])),
+                       or m["cause"] in tree
+                       or m["cause"] in later for m in f1["moved"])),
         "E1": e1["cases"] > 0 and e1["as_declared"] == e1["cases"],
         "C1": (c["c1"]["confirmed_on_truth"] == c["runs"] == 13
                and c["c1"]["wrong"] == 0

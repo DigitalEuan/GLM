@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 4 links repointed to where the files now live after the October 2026 reorganisation — the Lean tree under `src/lean/` and supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 **Read this first.** Two figures the existing documents quote were re-examined
@@ -19,7 +21,7 @@ while this study was being designed, and both readings are corrected below
 before anything new is measured.
 
 * The **"wobble entropy 0.062"** row for alpha in
-  [`source_material/glm_study_findings_catalog.md`](../source_material/glm_study_findings_catalog.md)
+  [`source_material/glm_study_findings_catalog.md`](../source_material/done/glm_study_findings_catalog.md)
   is not a measurement of structure. The density of ones in the stream is
   exactly the slope, so the Shannon entropy of the raw bit stream is the binary
   entropy of the slope and nothing else: it carries the *magnitude* of alpha
@@ -46,7 +48,7 @@ signature unusual against a stated null? — and answers with one number.
 The delta–sigma modulator chasing a constant `t` in `(0, 1)` emits
 `b_n = floor((n+1)t) - floor(n t)`, which is the **Sturmian (mechanical) word of
 slope `t`**. That identity is `GLM.Info.dsBit_eq_floor_diff` in
-[`RequestProject/GLM/Sturmian.lean`](../glm_lean/RequestProject/GLM/Sturmian.lean), and
+[`RequestProject/GLM/Sturmian.lean`](../src/lean/RequestProject/GLM/Sturmian.lean), and
 everything below is a consequence of it rather than an experimental finding.
 
 Write `s = 1/t`. The `j`-th one sits at `n_j = ceil(j*s) - 1`, so the gap
@@ -61,7 +63,7 @@ gap lengths**, which is the two-distance form of the Three-Distance Theorem for
 the first-return map. (The three-distance count appears at finite `N` only
 because the last, truncated gap is counted as a third length.) The bound is a
 theorem, not an observation:
-[`RequestProject/GLM/WobbleLandscape.lean`](../glm_lean/RequestProject/GLM/WobbleLandscape.lean),
+[`RequestProject/GLM/WobbleLandscape.lean`](../src/lean/RequestProject/GLM/WobbleLandscape.lean),
 `GLM.Landscape.gap_mem_pair`.
 
 The multiplicities are closed-form too. With `a_0 = floor(s)` and
@@ -327,7 +329,7 @@ distance 8, so the balls of radius 3 about the codewords are disjoint and
 
 giving `Pr[d_min <= 3] = 9523200 / 16777216 = 2325 / 4096` exactly, which is
 about 0.82 bits. The identity is `GLM.Landscape.golay_ball_count` in
-[`RequestProject/GLM/WobbleLandscape.lean`](../glm_lean/RequestProject/GLM/WobbleLandscape.lean).
+[`RequestProject/GLM/WobbleLandscape.lean`](../src/lean/RequestProject/GLM/WobbleLandscape.lean).
 The full coset-weight distribution — 1, 24, 276, 2024, 1771 cosets of weight 0,
 1, 2, 3, 4 — is recomputed from the code itself, so the tail at any observed
 distance is exact.
@@ -387,10 +389,9 @@ logarithms are exact rational brackets with a proved error bound, from
 Directive D7, and `tests/test_exactness.py` is its instrument.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report landscape" -c 1
-PYTHONPATH=. python3 -m glm_universal.tools landscape --write
-PYTHONPATH=. python3 -m glm_universal.corpus --write
+PYTHONPATH=src python3 src/GLM.py -q "report landscape" -c 1
+PYTHONPATH=src python3 -m glm_universal.tools landscape --write
+PYTHONPATH=src python3 -m glm_universal.corpus --write
 ```
 
 Every table below is a generated block emitted from a measurement cache that is

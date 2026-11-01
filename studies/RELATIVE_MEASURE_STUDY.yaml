@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: The comparison-class register, the widening measured, and the queries that refuse at
@@ -12,24 +14,28 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - data_objects/comparison_classes
-  - reasoning/measure_view
-  - runtime/session
-  - tests/test_comparative
-  - tests/test_comparison_classes
-  - tests/test_measure_words
+  - data_objects/comparison_classes.py
+  - reasoning/dimension_layers.py
+  - reasoning/measure_view.py
+  - runtime/session.py
   lean:
   - Comparative
   - Cumulative
   - MeasureView
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: RELATIVE_MEASURE_STUDY.md
   test:
-  - test_relative_measure.py
+  - test_comparative.py
+  - test_comparison_classes.py
+  - test_measure_words.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RELATIVE_MEASURE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -41,10 +47,13 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 16
 predecessors: []
 question: What did the proposal's steps actually buy, once built?
 recomputed_by: '`glm_universal.reasoning.measure_view.measure_report`'
+related:
+- INFORMATION_LOSS_STUDY
+- RELATIVE_MEASURE_PROPOSAL
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -57,7 +66,7 @@ sections:
   heading: 2. The comparison-class register (step 3)
 - anchor: 3-what-the-widening-gains-step-4
   heading: 3. What the widening gains (step 4)
-- anchor: 4-the-related_to-residue-step-2
+- anchor: 4-the-relatedto-residue-step-2
   heading: 4. The `related_to` residue (step 2)
 - anchor: 5-the-query-and-its-tested-refusal-step-5
   heading: 5. The query, and its tested refusal (step 5)
@@ -66,7 +75,8 @@ sections:
 - anchor: 7-where-to-look
   heading: 7. Where to look
 status: closed
-successors: []
+successors:
+- DENOTATION_STUDY
 superseded_by: ''
 supersedes: []
 title: Measure words as relative measures — the widening, measured

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 6 of 7 marks; 10 of 10 programs with the declared verdict and end, 8 of 10 with the declared
@@ -11,24 +13,30 @@ deciding_figure: 6 of 7 marks; 10 of 10 programs with the declared verdict and e
   halting in 200,000 steps.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/batch_machine
-  - reasoning/batch_speech
-  - reasoning/constant_bound
-  - reasoning/counter_lasso
+  - evaluation/cases.py
+  - reasoning/batch_machine.py
+  - reasoning/batch_speech.py
+  - reasoning/constant_bound.py
+  - reasoning/counter_lasso.py
+  - tools.py
   lean:
   - ConstantBound
   - CounterLasso
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CONSTANT_BOUND_STUDY.md
   test:
   - test_constant_bound.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CONSTANT_BOUND_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,18 +44,34 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - B1
+  - B2
+  - B3
+  - B4
+  - B5
+  - B6
+  - B7
+  met:
+  - B1
+  - B3
+  - B4
+  - B5
+  - B6
+  - B7
+  missed:
+  - B2
 perturbations: []
-phase: 130
+phase: 131
 predecessors:
 - COUNTER_LASSO_STUDY
+- OPERATIONS_LADDER_STUDY
 question: Can GLM-BAT's counter-lasso reading also jump a pass that writes the same lines on every pass,
   and a pass whose counter is compared with a variable that is not a counter, so that the two halting
   controls Phase 130 refused (L10, L11) are answered exactly, without changing any verdict it already
   gave and without a verdict a long plain run contradicts?
 recomputed_by: '`glm_universal.reasoning.constant_bound.constant_bound_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -71,7 +95,9 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- AFFINE_OUTPUT_STUDY
+- QUADRATIC_LASSO_STUDY
 superseded_by: ''
 supersedes: []
 title: Constant bounds and repeated output — two more counter lassos

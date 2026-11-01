@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: re-measured; 9 of 9 measured marks and L1 as recorded — W1 met again once the census's stale declarations were removed, §7.8; the Phase 143 record is kept as written.)*
+
 ---
 
 ## 0. What this document is
@@ -348,3 +350,26 @@ What remains of item 1 of `STATUS.md` §2.1 is §5's first bullet: the
 escalation reports, the `nearest` kind and the evaluation's pinned cases still
 read what they read before, and giving them the guarded read under a
 frozen-path comparison is the next step.
+
+### 7.8 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement was
+taken again (`tools address-read --write`) after the October 2026
+reorganisation. A first re-take the same day found W1 not met: the tool census
+listed seven stale declarations (modules declared measurement-only that the
+answering path now reaches), so 8 of the 9 measured marks held. With the
+census's declarations brought up to date in `runtime/toolbox.py`, the re-take
+gives:
+
+| figure | Phase 143 (§7.6) | first re-take | re-taken |
+|---|---|---|---|
+| tools reached by the census | 165 of 184 | 186 of 239 | 193 of 239 |
+| declared measurement-only | — | 53 | 46 |
+| stale declarations | 0 | 7 | 0 |
+| undeclared modules | 0 | 0 | 0 |
+| earlier evaluation cases, diverted to `locate` | 0 | 209, 0 | 213, 0 |
+| W1 | met | not met | met |
+| measured marks met | 9 of 9 | 8 of 9 | 9 of 9 |
+
+A1–A4, O1, C1, T1 and Q1 are unchanged from the first re-take. With L1, 10 of
+10 marks hold, as recorded.

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 18 queries carried against 0 lost, where a digest-and-reshuffle relay carries 2.
@@ -12,15 +14,21 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - tests/test_stack
+  - reasoning/stack.py
+  - reasoning/vision_stack.py
   lean:
+  - Admission
+  - Calibration
   - CarriedFork
   - CognitionRoundTwo
   - ConnectedMachine
   - DesignedSubstrate
   - Distinction
   - EngineeringWheels
+  - FitCapacity
+  - Gen3
   - GolayMOG
+  - IntakeChecks/SporadicOrderCheck
   - NativeParity
   - PythonSpeech
   - Relay
@@ -28,14 +36,18 @@ file_refs:
   - ReverseTCTThree
   - ReverseTCTTwo
   - SeedRoles
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: STACK_RELAY_STUDY.md
   test:
-  - test_stack_relay.py
+  - test_stack.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: STACK_RELAY_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -47,11 +59,13 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 59
+phase: 0
 predecessors: []
 question: Can the faculties of the machine be arranged so that the geometry carries the queries the text
   layer cannot read?
 recomputed_by: '`glm_universal.reasoning.stack.relay_report`'
+related:
+- ADDRESS_RETRIEVAL_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

@@ -4,9 +4,9 @@
 
 **Question.** Can the answers of the planner, the grammar, the toolbox, the lattice reads, the corpus and the conversation be read into one result representation that exposes, for each, its answer or candidate set, its kind of evidence, its witness, the theorem behind it, its certification boundary, its cost, its open tie, its refusal reason, its reply history and whether it was replayed — truthfully, over the whole evaluation?
 
-**Verdict.** Yes, after two repairs the census itself found. All 223 evaluation questions read into the ten fields; the model's status agrees with the evaluation on all of them, where the surfaces' own solved flag alone disagrees on two; every refusal names its reason. The first take missed two marks: 26 cited theorem names did not resolve, all of them a Python repr's closing quote read as a prime (an extractor artefact, amended), and two answers' own column 3 did not reproduce them — the trilinear template could not replay a triple of axis labels and the language report's column 3 had drifted behind its report. Both were real defects of the replay, fixed; on the re-take every one of the 171 replayable answers verifies.
+**Verdict.** Yes, after two repairs the census itself found. All 223 evaluation questions read into the ten fields; the model's status agrees with the evaluation on all of them, where the surfaces' own solved flag alone disagrees on two; every refusal names its reason. The first take missed two marks: 26 cited theorem names did not resolve, all of them a Python repr's closing quote read as a prime (an extractor artefact, amended), and two answers' own column 3 did not reproduce them — the trilinear template could not replay a triple of axis labels and the language report's column 3 had drifted behind its report. Both were real defects of the replay, fixed; on the re-take every one of the 171 replayable answers verifies. Re-taken on 31 October 2026 on the reconstructed model, with the Lean declaration lookup restored so that every cited name is checked against the declarations of the build tree, over the 227 questions the evaluation now holds: 9 of 9 marks again (§7.6).
 
-**Deciding figure.** 9 of 9 marks on the re-take (7 of 9 on the first: R5 and R6 missed); 171 of 171 column-3 replays verified (169 of 171 first); 50 cited theorem names, all declared; status: 172 answered, 5 open, 3 contradicted, 43 refused; boundary: 171 certified, 5 checkable, 46 refused, 1 uncertified.
+**Deciding figure.** Phase 169 record (20 October 2026): 9 of 9 marks on the re-take (7 of 9 on the first: R5 and R6 missed); 171 of 171 column-3 replays verified (169 of 171 first); 50 cited theorem names, all declared; status: 172 answered, 5 open, 3 contradicted, 43 refused; boundary: 171 certified, 5 checkable, 46 refused, 1 uncertified. Re-taken 31 October 2026 on the reconstructed model (§7.6): 9 of 9 marks; 173 of 173 replays verified; 21 cited names, none undeclared among the 9,341 declarations of the build tree; status: 174 answered, 5 open, 3 contradicted, 45 refused; boundary: 173 certified, 5 checkable, 48 refused, 1 uncertified.
 
 **Recomputed by.** `glm_universal.reasoning.evidence_model_study.evidence_model_report`
 
@@ -16,10 +16,12 @@
 
 *Created 20 October 2026 (pre-registered 20 October 2026: §§0–6 were committed before the census of §7 was taken; measured 20 October 2026).*
 
+*Last altered 1 November 2026 (Phase 186: re-taken over the 237 evaluation cases, noted in §7.6). Earlier, 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`); §7.3 records that the two replay repairs were lost with the upload and restored; later the same day §7.6 added — the re-take on the reconstructed model with the Lean declaration lookup restored — and the tier-0 block and the closing figures now give that re-take beside the Phase 169 record.)*
+
 ## 0. What this document is
 
 A pre-registration for Phase 169. It takes Part II.1 of the owner's plan of
-19 October 2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/GLM_19OCT26_1.md),
+19 October 2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/done/GLM_19OCT26_1.md),
 *create a unified evidence and result model*): bring the planner, corpus,
 domain, lattice, certificate and conversation systems toward a common result
 representation exposing ten things — the answer or candidate set; the type of
@@ -101,13 +103,18 @@ its theorems are only those its text names.
 
 ## 7. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools evidence-model` (stored in
+`PYTHONPATH=src python3 -m glm_universal.tools evidence-model` (stored in
 `reasoning/_data/evidence_model_study.json`, digest-guarded over the model,
 the router, the session, the conversation, the Three Column Thinking engine
-and the evaluation; `--write` re-takes it in about nine minutes with eight
+and the evaluation -- and, since 31 October 2026, over the Lean tree R5 reads
+and its parser; `--write` re-takes it in about nine minutes with eight
 processes).
 
-### 7.1 The census
+§7.1–§7.5 are the Phase 169 record of 20 October 2026, kept as it was taken
+over the 223 questions of that day. The stored file holds the re-take of 31
+October 2026 on the reconstructed model, which §7.6 reports.
+
+### 7.1 The census (Phase 169 record)
 
 | field | what the 223 questions show |
 |---|---|
@@ -125,7 +132,7 @@ the numeral-arithmetic description and the toolbox's Leech-norm answer, none
 of which has a column 3; five of them are `checkable` (their column-2 claims
 exist) and the toolbox answer is `uncertified`.
 
-### 7.2 The marks
+### 7.2 The marks (Phase 169 record)
 
 | mark | first take | re-take | met |
 |---|---|---|---|
@@ -166,6 +173,11 @@ is met. Nothing was wrong with any answer.
   claimed since (the nested family, the widenings, the undescribed kinds).
   All three are repaired; the report's figures did not change.
 
+*Added 31 October 2026 (repository check):* the October 2026 upload carried
+both templates from before these repairs, so both replays failed again; the
+repairs are restored in `runtime/tct_engine.py` as described above, and the
+replay gate passes (173 of 173 replayable answers verified).
+
 Neither defect was visible to the evaluation, which checks the answer and
 not its replay; both were visible to the model the first time every answer
 was read with its replay beside it — which is what Part II.1 asked the model
@@ -192,8 +204,71 @@ their own objects: the model is offered beside them, not yet in place of them.
 * The evidence kind is declared by query kind; inferring it from the
   computation the answer actually ran is open.
 
+### 7.6 Re-taken on 31 October 2026
+
+*Added 31 October 2026 (repository check).* `runtime/evidence.py` was lost in
+the October 2026 reorganisation and reconstructed from §1 of this study. Until
+this re-take the reconstruction did not look the cited names up at all: it
+copied every cited name into the list of declared ones, so R5 could not fail
+whatever an answer cited. The lookup is now restored. `declared_names` reads
+every full name the Lean development declares -- the build tree
+`src/lean/RequestProject/GLM` as `reasoning/lean_address.py` parses it, 9,341
+declarations when this was taken; the files held in `src/lean/awaiting_recovery/`
+are not part of the development -- and `cited_theorems` reads the cited names
+with the name pattern allowing Lean's prime and applies amendment R5′ against
+those declarations, so a cited name the development does not declare is
+counted against R5. `tests/test_evidence_model.py` checks this through the
+adapter: an invented name is cited and not declared, a declared name read out
+of a `repr` loses the closing quote, a declared primed name keeps its prime,
+and an undeclared citation fails R5.
+
+The census, over the 227 questions the evaluation holds now (four more than
+on 20 October), with column 3 replayed:
+
+| field | the re-take |
+|---|---|
+| surface | planner and grammar 226, toolbox 1 |
+| status | answered 174, open 5, contradicted 3, refused 45 |
+| evidence | register 78, self-report 69, lattice 44, computation 28, corpus 7, tool 1 |
+| boundary | certified 173, checkable 5, refused 48, uncertified 1 |
+| candidates | 23 results carry a candidate set |
+| theorems | 24 results cite a `GLM.` name (10 `locate`, 7 `nearest`, 3 `hole`, 2 `carrier`, 1 `field`, 1 `ordering`); 21 distinct names, none undeclared |
+| witness | 178 results carry witness values |
+| budget | 848 solution steps in all |
+
+| mark | the re-take | met |
+|---|---|---|
+| **R1** | 227 results, no exception | met |
+| **R2** | status agrees with the evaluation on all 227; the solved flag alone disagrees on 2 (`meaning-open-vocabulary`, `compare-equality`) | met |
+| **R3** | 48 of 48 refused or contradicted results name a reason | met |
+| **R4** | 0 of 179 answered or open results unclassified | met |
+| **R5** | 21 names cited, 0 undeclared among the 9,341 declarations (R5′ applied in the adapter) | met |
+| **R6** | 173 replayable, 173 of 173 verified | met |
+| **R7** | 5 of 5 open ties carry candidates and ambiguity; 8 of 8 questions with `given` replies carry one history entry per reply | met |
+| **R8** | `golay code`, `tier 0` and `register` answered with boundary `corpus:strong`, `leech lattice` with `corpus:weak`, each with a witness address; `yalog` refused with its reason; the tie opens on `physics:absorptance` and `physics:albedo`, and the reply `no` leaves `physics:albedo` with one history entry | met |
+| **R9** | 227 of 227 expose all ten fields | met |
+
+**9 of 9 marks.** The re-take cites fewer names than the record (21 against
+50, in 24 results against 29). The record's list of names is not in the
+upload, so which citations went cannot be said name by name; the answers that
+cite Lean names now are the `locate`, `nearest`, `hole`, `carrier`, `field`
+and `ordering` answers counted above, several of them from modules rebuilt
+after the reorganisation. The six answered results without a replay are the
+four `describe` answers, the numeral-arithmetic description and the toolbox's
+Leech-norm answer, as in the record.
+
+*Re-taken 1 November 2026 (Phase 186), over the 237 questions the evaluation
+holds since the intake items were absorbed (ten more).* 237 results, no
+exception. Surface: planner and grammar 229, toolbox 8 (1 before). Status:
+answered 182, contradicted 3, open 5, refused 47. Evidence: register 78,
+self-report 69, lattice 44, computation 31, corpus 7, tool 8. Boundary:
+certified 174, checkable 5, refused 50, uncertified 8 (1 before). Column 3
+replayed 174 of the 187 answers, all 174 verified. 23 names cited, none
+undeclared among the 9,400 declarations; the solved flag alone still disagrees
+with the evaluation on 2. **9 of 9 marks**, as before.
+
 ## In one paragraph
 
-Yes, after two repairs the census itself found. All 223 evaluation questions read into the ten fields; the model's status agrees with the evaluation on all of them, where the surfaces' own solved flag alone disagrees on two; every refusal names its reason. The first take missed two marks: 26 cited theorem names did not resolve, all of them a Python repr's closing quote read as a prime (an extractor artefact, amended), and two answers' own column 3 did not reproduce them — the trilinear template could not replay a triple of axis labels and the language report's column 3 had drifted behind its report. Both were real defects of the replay, fixed; on the re-take every one of the 171 replayable answers verifies.
+Yes, after two repairs the census itself found. All 223 evaluation questions read into the ten fields; the model's status agrees with the evaluation on all of them, where the surfaces' own solved flag alone disagrees on two; every refusal names its reason. The first take missed two marks: 26 cited theorem names did not resolve, all of them a Python repr's closing quote read as a prime (an extractor artefact, amended), and two answers' own column 3 did not reproduce them — the trilinear template could not replay a triple of axis labels and the language report's column 3 had drifted behind its report. Both were real defects of the replay, fixed; on the re-take every one of the 171 replayable answers verifies. Re-taken on 31 October 2026 on the reconstructed model, with the Lean declaration lookup restored so that every cited name is checked against the declarations of the build tree, over the 227 questions the evaluation now holds: 9 of 9 marks again (§7.6).
 
-The figures: 9 of 9 marks on the re-take (7 of 9 on the first: R5 and R6 missed); 171 of 171 column-3 replays verified (169 of 171 first); 50 cited theorem names, all declared; status: 172 answered, 5 open, 3 contradicted, 43 refused; boundary: 171 certified, 5 checkable, 46 refused, 1 uncertified.
+The figures: Phase 169 record (20 October 2026): 9 of 9 marks on the re-take (7 of 9 on the first: R5 and R6 missed); 171 of 171 column-3 replays verified (169 of 171 first); 50 cited theorem names, all declared; status: 172 answered, 5 open, 3 contradicted, 43 refused; boundary: 171 certified, 5 checkable, 46 refused, 1 uncertified. Re-taken 31 October 2026 on the reconstructed model (§7.6): 9 of 9 marks; 173 of 173 replays verified; 21 cited names, none undeclared among the 9,341 declarations of the build tree; status: 174 answered, 5 open, 3 contradicted, 45 refused; boundary: 173 certified, 5 checkable, 48 refused, 1 uncertified.

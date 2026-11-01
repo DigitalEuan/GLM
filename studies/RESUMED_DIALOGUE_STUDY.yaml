@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 9 of 9 marks; replies read after an unrelated turn 0 of 61 → 183 of 183, every one ending
@@ -12,17 +14,25 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/resumed_dialogue_study.py
+  - runtime/conversation.py
+  - tools.py
   lean:
   - ResumedDialogue
+  lean_held:
+  - ResumedDialogue
+  lean_missing:
+  - AdversarialDialogue
+  missing: []
   prose: RESUMED_DIALOGUE_STUDY.md
-  test:
-  - test_resumed_dialogue.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RESUMED_DIALOGUE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -30,17 +40,38 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - L1
+  - R0
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  - R6
+  - P
+  met:
+  - L1
+  - R0
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  - R6
+  - P
   missed: []
 perturbations: []
-phase: 167
+phase: 172
 predecessors:
+- ADVERSARIAL_DIALOGUE_STUDY
 - ANSWERING_QUESTION_STUDY
 question: When the question at a tie is left unanswered for a turn or three and then answered, can the
   conversation read the reply against the question it answers, without ever reading a reply against the
   wrong question or taking a whole query for one?
 recomputed_by: '`glm_universal.reasoning.resumed_dialogue_study.resumed_dialogue_report`'
+related:
+- STACKED_DIALOGUE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -65,8 +96,9 @@ sections:
   heading: 7. What came out
 - anchor: in-one-paragraph
   heading: In one paragraph
-status: open
-successors: []
+status: closed
+successors:
+- STACKED_DIALOGUE_STUDY
 superseded_by: ''
 supersedes: []
 title: The open tie kept across turns — a reply read after the conversation has moved on

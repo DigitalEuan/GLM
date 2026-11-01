@@ -1,0 +1,553 @@
+# Round 37, To Do 40: per-phase observer-clock slack of every wheel, p <= 8, d <= 28 (EMP, exact search)
+# columns: p hub phase word slack(d<=D) argmax_d  | per wheel: least/greatest phase
+1 1 0 1 [1] 2 28
+WHEEL p=1 hub=1: hub slack 2; least 2 at phase 0 (word 1); greatest 2 at phase 0 (word 1); spread 0; tightest turn-cost gap -
+2 1 0 1 [10] 5 11
+2 1 1 2 [01] 3 12
+WHEEL p=2 hub=1: hub slack 5; least 3 at phase 1 (word 2); greatest 5 at phase 0 (word 1); spread 2; tightest turn-cost gap 0
+3 1 0 1 [100] 8 22
+3 1 1 4 [001] 6 23
+3 1 2 2 [010] 5 24
+WHEEL p=3 hub=1: hub slack 8; least 5 at phase 2 (word 2); greatest 8 at phase 0 (word 1); spread 3; tightest turn-cost gap 0
+3 3 0 3 [110] 3 3
+3 3 1 5 [101] 2 27
+3 3 2 6 [011] 3 8
+WHEEL p=3 hub=3: hub slack 3; least 2 at phase 1 (word 5); greatest 3 at phase 0 (word 3); spread 1; tightest turn-cost gap 1
+4 1 0 1 [1000] 3 16
+4 1 1 8 [0001] 1 17
+4 1 2 4 [0010] 3 13
+4 1 3 2 [0100] 4 15
+WHEEL p=4 hub=1: hub slack 3; least 1 at phase 1 (word 8); greatest 4 at phase 3 (word 2); spread 3; tightest turn-cost gap 0
+4 3 0 3 [1100] 2 24
+4 3 1 9 [1001] 3 12
+4 3 2 12 [0011] 4 2
+4 3 3 6 [0110] 3 3
+WHEEL p=4 hub=3: hub slack 2; least 2 at phase 0 (word 3); greatest 4 at phase 2 (word 12); spread 2; tightest turn-cost gap 0
+4 7 0 7 [1110] 5 8
+4 7 1 11 [1101] 4 7
+4 7 2 13 [1011] 4 1
+4 7 3 14 [0111] 3 17
+WHEEL p=4 hub=7: hub slack 5; least 3 at phase 3 (word 14); greatest 5 at phase 0 (word 7); spread 2; tightest turn-cost gap 1
+5 1 0 1 [10000] 4 5
+5 1 1 16 [00001] 3 1
+5 1 2 8 [00010] 2 2
+5 1 3 4 [00100] 4 19
+5 1 4 2 [01000] 3 20
+WHEEL p=5 hub=1: hub slack 4; least 2 at phase 2 (word 8); greatest 4 at phase 0 (word 1); spread 2; tightest turn-cost gap 0
+5 3 0 3 [11000] 3 16
+5 3 1 17 [10001] 4 6
+5 3 2 24 [00011] 2 9
+5 3 3 12 [00110] 3 2
+5 3 4 6 [01100] 4 15
+WHEEL p=5 hub=3: hub slack 3; least 2 at phase 2 (word 24); greatest 4 at phase 1 (word 17); spread 2; tightest turn-cost gap 0
+5 5 0 5 [10100] 1 17
+5 5 1 18 [01001] 6 8
+5 5 2 9 [10010] 5 9
+5 5 3 20 [00101] 3 10
+5 5 4 10 [01010] 2 11
+WHEEL p=5 hub=5: hub slack 1; least 1 at phase 0 (word 5); greatest 6 at phase 1 (word 18); spread 5; tightest turn-cost gap 0
+5 7 0 7 [11100] 4 15
+5 7 1 19 [11001] 6 7
+5 7 2 25 [10011] 4 8
+5 7 3 28 [00111] 4 1
+5 7 4 14 [01110] 3 24
+WHEEL p=5 hub=7: hub slack 4; least 3 at phase 4 (word 14); greatest 6 at phase 1 (word 19); spread 3; tightest turn-cost gap 0
+5 11 0 11 [11010] 4 12
+5 11 1 21 [10101] 4 16
+5 11 2 26 [01011] 4 13
+5 11 3 13 [10110] 3 14
+5 11 4 22 [01101] 4 3
+WHEEL p=5 hub=11: hub slack 4; least 3 at phase 3 (word 13); greatest 4 at phase 0 (word 11); spread 1; tightest turn-cost gap 0
+5 15 0 15 [11110] 4 24
+5 15 1 23 [11101] 5 9
+5 15 2 27 [11011] 3 10
+5 15 3 29 [10111] 3 10
+5 15 4 30 [01111] 1 20
+WHEEL p=5 hub=15: hub slack 4; least 1 at phase 4 (word 30); greatest 5 at phase 1 (word 23); spread 4; tightest turn-cost gap 0
+6 1 0 1 [100000] 2 12
+6 1 1 32 [000001] 2 1
+6 1 2 16 [000010] 1 9
+6 1 3 8 [000100] 2 1
+6 1 4 4 [001000] 2 16
+6 1 5 2 [010000] 3 11
+WHEEL p=6 hub=1: hub slack 2; least 1 at phase 2 (word 16); greatest 3 at phase 5 (word 2); spread 2; tightest turn-cost gap 0
+6 3 0 3 [110000] 4 6
+6 3 1 33 [100001] 3 20
+6 3 2 48 [000011] 5 5
+6 3 3 24 [000110] 4 6
+6 3 4 12 [001100] 3 7
+6 3 5 6 [011000] 3 15
+WHEEL p=6 hub=3: hub slack 4; least 3 at phase 1 (word 33); greatest 5 at phase 2 (word 48); spread 2; tightest turn-cost gap 0
+6 5 0 5 [101000] 3 9
+6 5 1 34 [010001] 2 1
+6 5 2 17 [100010] 2 9
+6 5 3 40 [000101] 4 1
+6 5 4 20 [001010] 3 2
+6 5 5 10 [010100] 2 8
+WHEEL p=6 hub=5: hub slack 3; least 2 at phase 1 (word 34); greatest 4 at phase 3 (word 40); spread 2; tightest turn-cost gap 0
+6 7 0 7 [111000] 3 12
+6 7 1 35 [110001] 2 24
+6 7 2 49 [100011] 3 11
+6 7 3 56 [000111] 5 13
+6 7 4 28 [001110] 4 14
+6 7 5 14 [011100] 3 15
+WHEEL p=6 hub=7: hub slack 3; least 2 at phase 1 (word 35); greatest 5 at phase 3 (word 56); spread 3; tightest turn-cost gap 0
+6 11 0 11 [110100] 3 20
+6 11 1 37 [101001] 4 27
+6 11 2 50 [010011] 2 28
+6 11 3 25 [100110] 3 23
+6 11 4 44 [001101] 3 2
+6 11 5 22 [011010] 3 28
+WHEEL p=6 hub=11: hub slack 3; least 2 at phase 2 (word 50); greatest 4 at phase 1 (word 37); spread 2; tightest turn-cost gap 0
+6 13 0 13 [101100] 5 24
+6 13 1 38 [011001] 6 15
+6 13 2 19 [110010] 5 16
+6 13 3 41 [100101] 4 6
+6 13 4 52 [001011] 2 15
+6 13 5 26 [010110] 6 23
+WHEEL p=6 hub=13: hub slack 5; least 2 at phase 4 (word 52); greatest 6 at phase 1 (word 38); spread 4; tightest turn-cost gap 0
+6 15 0 15 [111100] 5 28
+6 15 1 39 [111001] 9 14
+6 15 2 51 [110011] 7 15
+6 15 3 57 [100111] 7 23
+6 15 4 60 [001111] 5 24
+6 15 5 30 [011110] 6 27
+WHEEL p=6 hub=15: hub slack 5; least 5 at phase 0 (word 15); greatest 9 at phase 1 (word 39); spread 4; tightest turn-cost gap 0
+6 23 0 23 [111010] 7 16
+6 23 1 43 [110101] 5 17
+6 23 2 53 [101011] 3 18
+6 23 3 58 [010111] 11 13
+6 23 4 29 [101110] 10 14
+6 23 5 46 [011101] 8 15
+WHEEL p=6 hub=23: hub slack 7; least 3 at phase 2 (word 53); greatest 11 at phase 3 (word 58); spread 8; tightest turn-cost gap 0
+6 31 0 31 [111110] 4 12
+6 31 1 47 [111101] 5 13
+6 31 2 55 [111011] 3 28
+6 31 3 59 [110111] 5 23
+6 31 4 61 [101111] 4 21
+6 31 5 62 [011111] 2 22
+WHEEL p=6 hub=31: hub slack 4; least 2 at phase 5 (word 62); greatest 5 at phase 1 (word 47); spread 3; tightest turn-cost gap 0
+7 1 0 1 [1000000] 1 2
+7 1 1 64 [0000001] 3 2
+7 1 2 32 [0000010] 2 3
+7 1 3 16 [0000100] 3 1
+7 1 4 8 [0001000] 2 2
+7 1 5 4 [0010000] 1 7
+7 1 6 2 [0100000] 2 1
+WHEEL p=7 hub=1: hub slack 1; least 1 at phase 0 (word 1); greatest 3 at phase 1 (word 64); spread 2; tightest turn-cost gap 0
+7 3 0 3 [1100000] 4 23
+7 3 1 65 [1000001] 3 1
+7 3 2 96 [0000011] 3 6
+7 3 3 48 [0000110] 3 5
+7 3 4 24 [0001100] 3 14
+7 3 5 12 [0011000] 4 12
+7 3 6 6 [0110000] 5 22
+WHEEL p=7 hub=3: hub slack 4; least 3 at phase 1 (word 65); greatest 5 at phase 6 (word 6); spread 2; tightest turn-cost gap 0
+7 5 0 5 [1010000] 4 16
+7 5 1 66 [0100001] 2 17
+7 5 2 33 [1000010] 2 1
+7 5 3 80 [0000101] 2 11
+7 5 4 40 [0001010] 2 5
+7 5 5 20 [0010100] 1 6
+7 5 6 10 [0101000] 3 1
+WHEEL p=7 hub=5: hub slack 4; least 1 at phase 5 (word 20); greatest 4 at phase 0 (word 5); spread 3; tightest turn-cost gap 0
+7 7 0 7 [1110000] 5 14
+7 7 1 67 [1100001] 3 15
+7 7 2 97 [1000011] 4 3
+7 7 3 112 [0000111] 2 4
+7 7 4 56 [0001110] 1 5
+7 7 5 28 [0011100] 5 10
+7 7 6 14 [0111000] 4 11
+WHEEL p=7 hub=7: hub slack 5; least 1 at phase 4 (word 56); greatest 5 at phase 0 (word 7); spread 4; tightest turn-cost gap 0
+7 9 0 9 [1001000] 3 2
+7 9 1 68 [0010001] 1 3
+7 9 2 34 [0100010] 3 13
+7 9 3 17 [1000100] 2 14
+7 9 4 72 [0001001] 1 1
+7 9 5 36 [0010010] 0 18
+7 9 6 18 [0100100] 4 1
+WHEEL p=7 hub=9: hub slack 3; least 0 at phase 5 (word 36); greatest 4 at phase 6 (word 18); spread 4; tightest turn-cost gap 0
+7 11 0 11 [1101000] 5 17
+7 11 1 69 [1010001] 3 18
+7 11 2 98 [0100011] 5 4
+7 11 3 49 [1000110] 4 5
+7 11 4 88 [0001101] 4 4
+7 11 5 44 [0011010] 3 9
+7 11 6 22 [0110100] 6 16
+WHEEL p=7 hub=11: hub slack 5; least 3 at phase 1 (word 69); greatest 6 at phase 6 (word 22); spread 3; tightest turn-cost gap 0
+7 13 0 13 [1011000] 8 15
+7 13 1 70 [0110001] 6 16
+7 13 2 35 [1100010] 7 21
+7 13 3 81 [1000101] 5 22
+7 13 4 104 [0001011] 8 6
+7 13 5 52 [0010110] 7 7
+7 13 6 26 [0101100] 6 8
+WHEEL p=7 hub=13: hub slack 8; least 5 at phase 3 (word 81); greatest 8 at phase 0 (word 13); spread 3; tightest turn-cost gap 0
+7 15 0 15 [1111000] 7 24
+7 15 1 71 [1110001] 5 25
+7 15 2 99 [1100011] 3 26
+7 15 3 113 [1000111] 1 27
+7 15 4 120 [0001111] 2 9
+7 15 5 60 [0011110] 2 1
+7 15 6 30 [0111100] 3 17
+WHEEL p=7 hub=15: hub slack 7; least 1 at phase 3 (word 113); greatest 7 at phase 0 (word 15); spread 6; tightest turn-cost gap 0
+7 19 0 19 [1100100] 4 11
+7 19 1 73 [1001001] 5 13
+7 19 2 100 [0010011] 3 25
+7 19 3 50 [0100110] 2 26
+7 19 4 25 [1001100] 3 6
+7 19 5 76 [0011001] 6 9
+7 19 6 38 [0110010] 5 10
+WHEEL p=7 hub=19: hub slack 4; least 2 at phase 3 (word 50); greatest 6 at phase 5 (word 76); spread 4; tightest turn-cost gap 0
+7 21 0 21 [1010100] 4 6
+7 21 1 74 [0101001] 2 7
+7 21 2 37 [1010010] 3 13
+7 21 3 82 [0100101] 2 23
+7 21 4 41 [1001010] 3 1
+7 21 5 84 [0010101] 1 2
+7 21 6 42 [0101010] 4 1
+WHEEL p=7 hub=21: hub slack 4; least 1 at phase 5 (word 84); greatest 4 at phase 0 (word 21); spread 3; tightest turn-cost gap 0
+7 23 0 23 [1110100] 4 21
+7 23 1 75 [1101001] 3 10
+7 23 2 101 [1010011] 3 3
+7 23 3 114 [0100111] 3 24
+7 23 4 57 [1001110] 3 10
+7 23 5 92 [0011101] 6 1
+7 23 6 46 [0111010] 5 2
+WHEEL p=7 hub=23: hub slack 4; least 3 at phase 1 (word 75); greatest 6 at phase 5 (word 92); spread 3; tightest turn-cost gap 0
+7 27 0 27 [1101100] 8 16
+7 27 1 77 [1011001] 6 17
+7 27 2 102 [0110011] 4 18
+7 27 3 51 [1100110] 3 20
+7 27 4 89 [1001101] 12 13
+7 27 5 108 [0011011] 10 14
+7 27 6 54 [0110110] 9 15
+WHEEL p=7 hub=27: hub slack 8; least 3 at phase 3 (word 51); greatest 12 at phase 4 (word 89); spread 9; tightest turn-cost gap 0
+7 29 0 29 [1011100] 4 1
+7 29 1 78 [0111001] 4 3
+7 29 2 39 [1110010] 3 6
+7 29 3 83 [1100101] 3 14
+7 29 4 105 [1001011] 3 3
+7 29 5 116 [0010111] 1 18
+7 29 6 58 [0101110] 2 2
+WHEEL p=7 hub=29: hub slack 4; least 1 at phase 5 (word 116); greatest 4 at phase 0 (word 29); spread 3; tightest turn-cost gap 0
+7 31 0 31 [1111100] 3 22
+7 31 1 79 [1111001] 4 2
+7 31 2 103 [1110011] 3 25
+7 31 3 115 [1100111] 3 14
+7 31 4 121 [1001111] 3 20
+7 31 5 124 [0011111] 5 3
+7 31 6 62 [0111110] 4 4
+WHEEL p=7 hub=31: hub slack 3; least 3 at phase 0 (word 31); greatest 5 at phase 5 (word 124); spread 2; tightest turn-cost gap 0
+7 43 0 43 [1101010] 5 23
+7 43 1 85 [1010101] 3 24
+7 43 2 106 [0101011] 6 4
+7 43 3 53 [1010110] 5 5
+7 43 4 90 [0101101] 3 6
+7 43 5 45 [1011010] 5 7
+7 43 6 86 [0110101] 6 22
+WHEEL p=7 hub=43: hub slack 5; least 3 at phase 1 (word 85); greatest 6 at phase 2 (word 106); spread 3; tightest turn-cost gap 0
+7 47 0 47 [1111010] 5 15
+7 47 1 87 [1110101] 4 6
+7 47 2 107 [1101011] 5 9
+7 47 3 117 [1010111] 4 18
+7 47 4 122 [0101111] 3 2
+7 47 5 61 [1011110] 3 1
+7 47 6 94 [0111101] 3 15
+WHEEL p=7 hub=47: hub slack 5; least 3 at phase 4 (word 122); greatest 5 at phase 0 (word 47); spread 2; tightest turn-cost gap 1
+7 55 0 55 [1110110] 6 11
+7 55 1 91 [1101101] 4 12
+7 55 2 109 [1011011] 9 28
+7 55 3 118 [0110111] 1 13
+7 55 4 59 [1101110] 3 5
+7 55 5 93 [1011101] 4 1
+7 55 6 110 [0111011] 3 20
+WHEEL p=7 hub=55: hub slack 6; least 1 at phase 3 (word 118); greatest 9 at phase 2 (word 109); spread 8; tightest turn-cost gap 0
+7 63 0 63 [1111110] 6 23
+7 63 1 95 [1111101] 4 24
+7 63 2 111 [1111011] 3 8
+7 63 3 119 [1110111] 5 8
+7 63 4 123 [1101111] 3 15
+7 63 5 125 [1011111] 3 28
+7 63 6 126 [0111111] 7 22
+WHEEL p=7 hub=63: hub slack 6; least 3 at phase 2 (word 111); greatest 7 at phase 6 (word 126); spread 4; tightest turn-cost gap 0
+8 1 0 1 [10000000] 2 1
+8 1 1 128 [00000001] 2 7
+8 1 2 64 [00000010] 1 8
+8 1 3 32 [00000100] 1 1
+8 1 4 16 [00001000] 1 1
+8 1 5 8 [00010000] 2 10
+8 1 6 4 [00100000] 3 5
+8 1 7 2 [01000000] 2 6
+WHEEL p=8 hub=1: hub slack 2; least 1 at phase 2 (word 64); greatest 3 at phase 6 (word 4); spread 2; tightest turn-cost gap 0
+8 3 0 3 [11000000] 3 10
+8 3 1 129 [10000001] 2 3
+8 3 2 192 [00000011] 4 1
+8 3 3 96 [00000110] 3 2
+8 3 4 48 [00001100] 2 10
+8 3 5 24 [00011000] 3 5
+8 3 6 12 [00110000] 3 19
+8 3 7 6 [01100000] 3 14
+WHEEL p=8 hub=3: hub slack 3; least 2 at phase 1 (word 129); greatest 4 at phase 2 (word 192); spread 2; tightest turn-cost gap 0
+8 5 0 5 [10100000] 3 2
+8 5 1 130 [01000001] 1 23
+8 5 2 65 [10000010] 1 18
+8 5 3 160 [00000101] 1 1
+8 5 4 80 [00001010] 1 2
+8 5 5 40 [00010100] 3 1
+8 5 6 20 [00101000] 4 9
+8 5 7 10 [01010000] 4 1
+WHEEL p=8 hub=5: hub slack 3; least 1 at phase 1 (word 130); greatest 4 at phase 6 (word 20); spread 3; tightest turn-cost gap 0
+8 7 0 7 [11100000] 2 27
+8 7 1 131 [11000001] 3 9
+8 7 2 193 [10000011] 3 2
+8 7 3 224 [00000111] 3 2
+8 7 4 112 [00001110] 2 3
+8 7 5 56 [00011100] 2 6
+8 7 6 28 [00111000] 4 25
+8 7 7 14 [01110000] 3 26
+WHEEL p=8 hub=7: hub slack 2; least 2 at phase 0 (word 7); greatest 4 at phase 6 (word 28); spread 2; tightest turn-cost gap 0
+8 9 0 9 [10010000] 4 1
+8 9 1 132 [00100001] 2 2
+8 9 2 66 [01000010] 3 24
+8 9 3 33 [10000100] 3 1
+8 9 4 144 [00001001] 2 23
+8 9 5 72 [00010010] 1 24
+8 9 6 36 [00100100] 2 19
+8 9 7 18 [01001000] 3 1
+WHEEL p=8 hub=9: hub slack 4; least 1 at phase 5 (word 72); greatest 4 at phase 0 (word 9); spread 3; tightest turn-cost gap 0
+8 11 0 11 [11010000] 9 10
+8 11 1 133 [10100001] 7 11
+8 11 2 194 [01000011] 5 12
+8 11 3 97 [10000110] 4 13
+8 11 4 176 [00001101] 3 24
+8 11 5 88 [00011010] 3 14
+8 11 6 44 [00110100] 4 2
+8 11 7 22 [01101000] 4 7
+WHEEL p=8 hub=11: hub slack 9; least 3 at phase 4 (word 176); greatest 9 at phase 0 (word 11); spread 6; tightest turn-cost gap 0
+8 13 0 13 [10110000] 4 6
+8 13 1 134 [01100001] 2 7
+8 13 2 67 [11000010] 3 11
+8 13 3 161 [10000101] 4 24
+8 13 4 208 [00001011] 6 1
+8 13 5 104 [00010110] 5 2
+8 13 6 52 [00101100] 4 3
+8 13 7 26 [01011000] 5 5
+WHEEL p=8 hub=13: hub slack 4; least 2 at phase 1 (word 134); greatest 6 at phase 4 (word 208); spread 4; tightest turn-cost gap 0
+8 15 0 15 [11110000] 7 6
+8 15 1 135 [11100001] 5 9
+8 15 2 195 [11000011] 3 10
+8 15 3 225 [10000111] 1 11
+8 15 4 240 [00001111] 3 18
+8 15 5 120 [00011110] 2 19
+8 15 6 60 [00111100] 2 1
+8 15 7 30 [01111000] 1 2
+WHEEL p=8 hub=15: hub slack 7; least 1 at phase 3 (word 225); greatest 7 at phase 0 (word 15); spread 6; tightest turn-cost gap 0
+8 19 0 19 [11001000] 3 24
+8 19 1 137 [10010001] 7 12
+8 19 2 196 [00100011] 5 13
+8 19 3 98 [01000110] 4 14
+8 19 4 49 [10001100] 3 15
+8 19 5 152 [00011001] 1 16
+8 19 6 76 [00110010] 5 18
+8 19 7 38 [01100100] 4 19
+WHEEL p=8 hub=19: hub slack 3; least 1 at phase 5 (word 152); greatest 7 at phase 1 (word 137); spread 6; tightest turn-cost gap 0
+8 21 0 21 [10101000] 4 2
+8 21 1 138 [01010001] 5 17
+8 21 2 69 [10100010] 4 18
+8 21 3 162 [01000101] 2 19
+8 21 4 81 [10001010] 2 9
+8 21 5 168 [00010101] 2 1
+8 21 6 84 [00101010] 1 17
+8 21 7 42 [01010100] 5 1
+WHEEL p=8 hub=21: hub slack 4; least 1 at phase 6 (word 84); greatest 5 at phase 1 (word 138); spread 4; tightest turn-cost gap 0
+8 23 0 23 [11101000] 2 24
+8 23 1 139 [11010001] 3 8
+8 23 2 197 [10100011] 5 7
+8 23 3 226 [01000111] 5 2
+8 23 4 113 [10001110] 4 3
+8 23 5 184 [00011101] 4 25
+8 23 6 92 [00111010] 4 1
+8 23 7 46 [01110100] 3 28
+WHEEL p=8 hub=23: hub slack 2; least 2 at phase 0 (word 23); greatest 5 at phase 2 (word 197); spread 3; tightest turn-cost gap 0
+8 25 0 25 [10011000] 2 6
+8 25 1 140 [00110001] 5 6
+8 25 2 70 [01100010] 4 7
+8 25 3 35 [11000100] 3 8
+8 25 4 145 [10001001] 4 10
+8 25 5 200 [00010011] 3 1
+8 25 6 100 [00100110] 2 2
+8 25 7 50 [01001100] 3 5
+WHEEL p=8 hub=25: hub slack 2; least 2 at phase 0 (word 25); greatest 5 at phase 1 (word 140); spread 3; tightest turn-cost gap 0
+8 27 0 27 [11011000] 7 14
+8 27 1 141 [10110001] 5 15
+8 27 2 198 [01100011] 4 22
+8 27 3 99 [11000110] 3 23
+8 27 4 177 [10001101] 8 3
+8 27 5 216 [00011011] 10 11
+8 27 6 108 [00110110] 9 12
+8 27 7 54 [01101100] 8 13
+WHEEL p=8 hub=27: hub slack 7; least 3 at phase 3 (word 99); greatest 10 at phase 5 (word 216); spread 7; tightest turn-cost gap 0
+8 29 0 29 [10111000] 6 9
+8 29 1 142 [01110001] 4 10
+8 29 2 71 [11100010] 6 28
+8 29 3 163 [11000101] 5 8
+8 29 4 209 [10001011] 5 10
+8 29 5 232 [00010111] 3 26
+8 29 6 116 [00101110] 2 27
+8 29 7 58 [01011100] 4 13
+WHEEL p=8 hub=29: hub slack 6; least 2 at phase 6 (word 116); greatest 6 at phase 0 (word 29); spread 4; tightest turn-cost gap 0
+8 31 0 31 [11111000] 2 16
+8 31 1 143 [11110001] 4 2
+8 31 2 199 [11100011] 6 27
+8 31 3 227 [11000111] 5 7
+8 31 4 241 [10001111] 3 23
+8 31 5 248 [00011111] 4 19
+8 31 6 124 [00111110] 3 20
+8 31 7 62 [01111100] 3 8
+WHEEL p=8 hub=31: hub slack 2; least 2 at phase 0 (word 31); greatest 6 at phase 2 (word 199); spread 4; tightest turn-cost gap 0
+8 37 0 37 [10100100] 3 18
+8 37 1 146 [01001001] 2 2
+8 37 2 73 [10010010] 3 9
+8 37 3 164 [00100101] 3 16
+8 37 4 82 [01001010] 2 17
+8 37 5 41 [10010100] 5 1
+8 37 6 148 [00101001] 4 8
+8 37 7 74 [01010010] 3 9
+WHEEL p=8 hub=37: hub slack 3; least 2 at phase 1 (word 146); greatest 5 at phase 5 (word 41); spread 3; tightest turn-cost gap 0
+8 39 0 39 [11100100] 4 24
+8 39 1 147 [11001001] 3 21
+8 39 2 201 [10010011] 4 2
+8 39 3 228 [00100111] 5 23
+8 39 4 114 [01001110] 7 22
+8 39 5 57 [10011100] 6 23
+8 39 6 156 [00111001] 4 24
+8 39 7 78 [01110010] 5 23
+WHEEL p=8 hub=39: hub slack 4; least 3 at phase 1 (word 147); greatest 7 at phase 4 (word 114); spread 4; tightest turn-cost gap 0
+8 43 0 43 [11010100] 6 8
+8 43 1 149 [10101001] 4 13
+8 43 2 202 [01010011] 6 20
+8 43 3 101 [10100110] 5 21
+8 43 4 178 [01001101] 5 5
+8 43 5 89 [10011010] 4 6
+8 43 6 172 [00110101] 3 28
+8 43 7 86 [01101010] 7 7
+WHEEL p=8 hub=43: hub slack 6; least 3 at phase 6 (word 172); greatest 7 at phase 7 (word 86); spread 4; tightest turn-cost gap 0
+8 45 0 45 [10110100] 4 6
+8 45 1 150 [01101001] 5 7
+8 45 2 75 [11010010] 7 11
+8 45 3 165 [10100101] 5 12
+8 45 4 210 [01001011] 4 1
+8 45 5 105 [10010110] 3 2
+8 45 6 180 [00101101] 2 5
+8 45 7 90 [01011010] 3 22
+WHEEL p=8 hub=45: hub slack 4; least 2 at phase 6 (word 180); greatest 7 at phase 2 (word 75); spread 5; tightest turn-cost gap 0
+8 47 0 47 [11110100] 8 2
+8 47 1 151 [11101001] 7 4
+8 47 2 203 [11010011] 5 10
+8 47 3 229 [10100111] 3 11
+8 47 4 242 [01001111] 2 16
+8 47 5 121 [10011110] 4 11
+8 47 6 188 [00111101] 2 12
+8 47 7 94 [01111010] 1 13
+WHEEL p=8 hub=47: hub slack 8; least 1 at phase 7 (word 94); greatest 8 at phase 0 (word 47); spread 7; tightest turn-cost gap 0
+8 53 0 53 [10101100] 3 5
+8 53 1 154 [01011001] 4 10
+8 53 2 77 [10110010] 3 11
+8 53 3 166 [01100101] 1 27
+8 53 4 83 [11001010] 4 11
+8 53 5 169 [10010101] 6 3
+8 53 6 212 [00101011] 4 4
+8 53 7 106 [01010110] 4 4
+WHEEL p=8 hub=53: hub slack 3; least 1 at phase 3 (word 166); greatest 6 at phase 5 (word 169); spread 5; tightest turn-cost gap 0
+8 55 0 55 [11101100] 4 22
+8 55 1 155 [11011001] 6 12
+8 55 2 205 [10110011] 4 13
+8 55 3 230 [01100111] 3 6
+8 55 4 115 [11001110] 6 11
+8 55 5 185 [10011101] 5 12
+8 55 6 220 [00111011] 3 13
+8 55 7 110 [01110110] 4 10
+WHEEL p=8 hub=55: hub slack 4; least 3 at phase 3 (word 230); greatest 6 at phase 1 (word 155); spread 3; tightest turn-cost gap 0
+8 59 0 59 [11011100] 4 26
+8 59 1 157 [10111001] 7 21
+8 59 2 206 [01110011] 5 22
+8 59 3 103 [11100110] 5 19
+8 59 4 179 [11001101] 6 24
+8 59 5 217 [10011011] 4 25
+8 59 6 236 [00110111] 4 15
+8 59 7 118 [01101110] 3 16
+WHEEL p=8 hub=59: hub slack 4; least 3 at phase 7 (word 118); greatest 7 at phase 1 (word 157); spread 4; tightest turn-cost gap 0
+8 61 0 61 [10111100] 3 12
+8 61 1 158 [01111001] 2 25
+8 61 2 79 [11110010] 5 18
+8 61 3 167 [11100101] 7 4
+8 61 4 211 [11001011] 8 22
+8 61 5 233 [10010111] 6 23
+8 61 6 244 [00101111] 5 10
+8 61 7 122 [01011110] 4 11
+WHEEL p=8 hub=61: hub slack 3; least 2 at phase 1 (word 158); greatest 8 at phase 4 (word 211); spread 6; tightest turn-cost gap 0
+8 63 0 63 [11111100] 5 4
+8 63 1 159 [11111001] 3 5
+8 63 2 207 [11110011] 5 21
+8 63 3 231 [11100111] 3 27
+8 63 4 243 [11001111] 7 4
+8 63 5 249 [10011111] 5 5
+8 63 6 252 [00111111] 4 10
+8 63 7 126 [01111110] 3 11
+WHEEL p=8 hub=63: hub slack 5; least 3 at phase 1 (word 159); greatest 7 at phase 4 (word 243); spread 4; tightest turn-cost gap 0
+8 87 0 87 [11101010] 5 21
+8 87 1 171 [11010101] 5 8
+8 87 2 213 [10101011] 5 2
+8 87 3 234 [01010111] 3 3
+8 87 4 117 [10101110] 3 27
+8 87 5 186 [01011101] 4 8
+8 87 6 93 [10111010] 6 27
+8 87 7 174 [01110101] 7 28
+WHEEL p=8 hub=87: hub slack 5; least 3 at phase 3 (word 234); greatest 7 at phase 7 (word 174); spread 4; tightest turn-cost gap 0
+8 91 0 91 [11011010] 11 14
+8 91 1 173 [10110101] 9 15
+8 91 2 214 [01101011] 7 16
+8 91 3 107 [11010110] 6 17
+8 91 4 181 [10101101] 9 3
+8 91 5 218 [01011011] 7 4
+8 91 6 109 [10110110] 14 12
+8 91 7 182 [01101101] 12 13
+WHEEL p=8 hub=91: hub slack 11; least 6 at phase 3 (word 107); greatest 14 at phase 6 (word 109); spread 8; tightest turn-cost gap 0
+8 95 0 95 [11111010] 3 20
+8 95 1 175 [11110101] 5 2
+8 95 2 215 [11101011] 12 27
+8 95 3 235 [11010111] 10 28
+8 95 4 245 [10101111] 6 23
+8 95 5 250 [01011111] 6 2
+8 95 6 125 [10111110] 5 18
+8 95 7 190 [01111101] 3 19
+WHEEL p=8 hub=95: hub slack 3; least 3 at phase 0 (word 95); greatest 12 at phase 2 (word 215); spread 9; tightest turn-cost gap 0
+8 111 0 111 [11110110] 4 28
+8 111 1 183 [11101101] 4 24
+8 111 2 219 [11011011] 7 3
+8 111 3 237 [10110111] 5 4
+8 111 4 246 [01101111] 6 13
+8 111 5 123 [11011110] 5 21
+8 111 6 189 [10111101] 3 22
+8 111 7 222 [01111011] 3 14
+WHEEL p=8 hub=111: hub slack 4; least 3 at phase 6 (word 189); greatest 7 at phase 2 (word 219); spread 4; tightest turn-cost gap 0
+8 127 0 127 [11111110] 3 16
+8 127 1 191 [11111101] 6 8
+8 127 2 223 [11111011] 4 9
+8 127 3 239 [11110111] 5 16
+8 127 4 247 [11101111] 3 23
+8 127 5 251 [11011111] 5 26
+8 127 6 253 [10111111] 3 27
+8 127 7 254 [01111111] 3 23
+WHEEL p=8 hub=127: hub slack 3; least 3 at phase 0 (word 127); greatest 6 at phase 1 (word 191); spread 3; tightest turn-cost gap 0
+# turn-cost bound checked on 2876 ordered phase pairs: 0 violations
+# per period: wheels, hub attains least, hub attains greatest, max spread, per-period slack (max over all phases), max over wheels of least-phase slack, turn bound 2(p-1)
+PERIOD 1: wheels 1, hub least 1, hub greatest 1, max spread 0, per-period slack 2, best-phase slack 2, 2(p-1) = 0
+PERIOD 2: wheels 1, hub least 0, hub greatest 1, max spread 2, per-period slack 5, best-phase slack 3, 2(p-1) = 2
+PERIOD 3: wheels 2, hub least 0, hub greatest 2, max spread 3, per-period slack 8, best-phase slack 5, 2(p-1) = 4
+PERIOD 4: wheels 3, hub least 1, hub greatest 1, max spread 3, per-period slack 5, best-phase slack 3, 2(p-1) = 6
+PERIOD 5: wheels 6, hub least 1, hub greatest 2, max spread 5, per-period slack 6, best-phase slack 3, 2(p-1) = 8
+PERIOD 6: wheels 9, hub least 1, hub greatest 0, max spread 8, per-period slack 11, best-phase slack 5, 2(p-1) = 10
+PERIOD 7: wheels 18, hub least 2, hub greatest 7, max spread 9, per-period slack 12, best-phase slack 5, 2(p-1) = 12
+PERIOD 8: wheels 30, hub least 6, hub greatest 5, max spread 9, per-period slack 14, best-phase slack 6, 2(p-1) = 14

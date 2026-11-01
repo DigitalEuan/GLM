@@ -43,6 +43,9 @@ has a bounded reading, not a wrong one, and
 :mod:`glm_universal.corpus.checks` is what holds the two ends together.
 
 Nothing here constructs a float, and nothing here writes.
+
+*Last altered 31 October 2026 (repository check): a tier-0 field wrapped over
+several lines is read whole.*
 """
 
 from __future__ import annotations
@@ -291,15 +294,31 @@ def _parse_tier0(sections: Tuple[Section, ...]) -> Tuple[Optional["Tier0"],
         lines = section.text.splitlines()
         found: Dict[str, str] = {}
         last = 0
+        current: Optional[str] = None
         for offset, line in enumerate(lines):
+            matched = False
             for field, label in _FIELD_LABELS.items():
                 match = re.match(r"\*\*" + re.escape(label) + r"\*\*\s*(.+?)\s*$",
                                  line)
                 if match:
                     found[field] = match.group(1).strip()
                     last = max(last, offset)
+                    current, matched = field, True
             if line.startswith(TIER0_FOOTER):
                 last = max(last, offset)
+                current = None
+            elif not matched:
+                # A field wrapped over several lines is read whole (added 31
+                # October 2026: only its first line used to be read, so the
+                # tier report grounded a truncated verdict).  A blank line, a
+                # heading, a list item or another bold label ends the field.
+                text = line.strip()
+                if (current is not None and text
+                        and not text.startswith(("**", "#", "* ", "- ", "|"))):
+                    found[current] = f"{found[current]} {text}"
+                    last = max(last, offset)
+                else:
+                    current = None
         end = section.start + last + 1
         if len(found) == len(_FIELD_LABELS):
             return (Tier0(**found), (section.start, end))

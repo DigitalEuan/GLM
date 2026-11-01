@@ -27,9 +27,22 @@ bumps to 6), the checks are gated off behind
 the protocol adoption).  This module is the passive registry; the gate
 checks in ``corpus/checks.py`` read it but do not run until the flag is
 flipped.*
+
+*Last altered 31 October 2026 (repository check): ``yaml_files`` walks with
+``os.walk`` (``Path.walk`` is Python 3.12+ and the package runs on 3.11);
+``glm-study-manifest/v1`` manifests are now also validated against the schema
+file itself (``studies/_schema/study.schema.yaml``, read through
+``constants.STUDY_SCHEMA_FILE``) by :func:`validate_with_schema`, a validator
+for the subset of JSON Schema that file uses; :func:`mirror_field_map` names,
+per schema, the YAML key each tier-0 field is stored under;
+:func:`mirror_target` finds a manifest's document beside it (it looked at the
+repository root, so no manifest's mirror was ever found); ``yaml_files`` skips
+schema definitions (``*.schema.yaml``), which are not manifests.*
 """
 from __future__ import annotations
 
+import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
@@ -54,6 +67,9 @@ __all__ = [
     "yaml_files",
     "mirror_target",
     "field_paths",
+    "validate_with_schema",
+    "study_schema",
+    "mirror_field_map",
 ]
 
 
@@ -255,6 +271,99 @@ def _validate_glm_study_card_v1(data: Mapping[str, Any]) -> List[str]:
     return errors
 
 
+# ---------------------------------------------------------------------------
+# A validator for the JSON-Schema subset the study schema file uses
+# ---------------------------------------------------------------------------
+
+_JSON_TYPES: Dict[str, Tuple[type, ...]] = {
+    "object": (dict,),
+    "array": (list,),
+    "string": (str,),
+    "integer": (int,),
+    "boolean": (bool,),
+    "number": (int,),   # D7: no floats; a number in a manifest is an int
+}
+
+
+def validate_with_schema(data: Any, schema: Mapping[str, Any],
+                         path: str = "") -> List[str]:
+    """Validate ``data`` against a JSON-Schema mapping, returning errors.
+
+    Supports exactly the keywords ``studies/_schema/study.schema.yaml`` uses:
+    ``type``, ``const``, ``enum``, ``required``, ``properties``, ``items``,
+    ``pattern``, ``minimum`` and ``minItems``.  Keys a schema does not name
+    are allowed (the schema declares no ``additionalProperties``).  A
+    ``bool`` is not accepted where an ``integer`` is asked for.
+    """
+    errors: List[str] = []
+    where = path or "<root>"
+    kind = schema.get("type")
+    if isinstance(kind, str) and kind in _JSON_TYPES:
+        ok = isinstance(data, _JSON_TYPES[kind])
+        if kind in ("integer", "number") and isinstance(data, bool):
+            ok = False
+        if not ok:
+            errors.append(f"{where}: must be {kind}, got {type(data).__name__}")
+            return errors
+    if "const" in schema and data != schema["const"]:
+        errors.append(f"{where}: must be {schema['const']!r}, got {data!r}")
+    if "enum" in schema and data not in schema["enum"]:
+        errors.append(f"{where}: {data!r} is not one of {list(schema['enum'])}")
+    if "pattern" in schema and isinstance(data, str):
+        if re.search(str(schema["pattern"]), data) is None:
+            errors.append(f"{where}: {data!r} does not match "
+                          f"{schema['pattern']!r}")
+    if "minimum" in schema and isinstance(data, int) \
+            and not isinstance(data, bool) and data < schema["minimum"]:
+        errors.append(f"{where}: {data} is below the minimum "
+                      f"{schema['minimum']}")
+    if isinstance(data, dict):
+        for name in schema.get("required", ()) or ():
+            if name not in data:
+                errors.append(f"{where}: missing required field {name!r}")
+        properties = schema.get("properties") or {}
+        for name, sub in properties.items():
+            if name in data and isinstance(sub, Mapping):
+                errors.extend(validate_with_schema(
+                    data[name], sub, f"{path}.{name}" if path else name))
+    if isinstance(data, list):
+        if "minItems" in schema and len(data) < schema["minItems"]:
+            errors.append(f"{where}: needs at least {schema['minItems']} "
+                          f"items, has {len(data)}")
+        items = schema.get("items")
+        if isinstance(items, Mapping):
+            for index, item in enumerate(data):
+                errors.extend(validate_with_schema(item, items,
+                                                   f"{where}[{index}]"))
+    return errors
+
+
+_SCHEMA_CACHE: Dict[str, Any] = {}
+
+
+def study_schema() -> Optional[Mapping[str, Any]]:
+    """The parsed study manifest schema, or ``None`` when it cannot be read
+    (PyYAML absent, or the file missing).  Cached on the file's mtime."""
+    from ..constants import STUDY_SCHEMA_FILE
+    try:
+        import yaml as _pyyaml
+    except ImportError:
+        return None
+    try:
+        stamp = str(STUDY_SCHEMA_FILE.stat().st_mtime_ns)
+    except OSError:
+        return None
+    if _SCHEMA_CACHE.get("stamp") != stamp:
+        try:
+            parsed = _pyyaml.safe_load(STUDY_SCHEMA_FILE.read_text(
+                encoding="utf-8"))
+        except Exception:
+            return None
+        _SCHEMA_CACHE["stamp"] = stamp
+        _SCHEMA_CACHE["schema"] = parsed if isinstance(parsed, dict) else None
+    return _SCHEMA_CACHE.get("schema")
+
+
 def _validate_glm_study_manifest_v1(data: Mapping[str, Any]) -> List[str]:
     """Validator for ``glm-study-manifest/v1`` -- the semantic manifest.
 
@@ -291,6 +400,12 @@ def _validate_glm_study_manifest_v1(data: Mapping[str, Any]) -> List[str]:
     fr = data.get("file_refs")
     if not isinstance(fr, Mapping) or "prose" not in fr:
         errors.append("file_refs.prose is required")
+    # And the schema file itself, where it can be read (31 October 2026).
+    schema = study_schema()
+    if schema is not None:
+        for error in validate_with_schema(dict(data), schema):
+            if error not in errors:
+                errors.append(error)
     return errors
 
 
@@ -415,6 +530,12 @@ def yaml_files(root: Optional[Path] = None) -> List[Path]:
     repository root), excluding ``.git``, ``.lake``, ``__pycache__``,
     ``source_material``, and the knowledge cache.
 
+    Schema definitions (``*.schema.yaml``, e.g.
+    ``studies/_schema/study.schema.yaml``) are skipped: they describe
+    documents, they are not documents, and declare no ``schema:`` of their
+    own (31 October 2026, repository check: before this the gate's schema
+    check reported the study schema itself as an invalid manifest).
+
     Returns paths in sorted order for deterministic iteration.
     """
     from ..constants import REPOSITORY_ROOT
@@ -423,9 +544,13 @@ def yaml_files(root: Optional[Path] = None) -> List[Path]:
     skip = {".git", ".lake", "__pycache__", ".pytest_cache",
             "source_material", "_knowledge_cache", "node_modules"}
     out: List[Path] = []
-    for dirpath, dirnames, filenames in Path(root).walk():  # type: ignore[union-attr]
-        dirnames[:] = [d for d in dirnames if d not in skip]
+    #  ``os.walk`` rather than ``Path.walk``: the latter is Python 3.12+, and
+    #  the package runs on 3.11 (repository check, 31 October 2026).
+    for dirpath, dirnames, filenames in os.walk(Path(root)):
+        dirnames[:] = sorted(d for d in dirnames if d not in skip)
         for name in filenames:
+            if name.endswith((".schema.yaml", ".schema.yml")):
+                continue
             if name.endswith(".yaml") or name.endswith(".yml"):
                 out.append(Path(dirpath) / name)
     return sorted(out)
@@ -445,22 +570,56 @@ def mirror_target(yaml_path: Path, data: Mapping[str, Any]) -> Optional[Path]:
             from ..constants import REPOSITORY_ROOT
             # The path is relative to the Rule30_GLM_Study/ package root.
             # Try both the repo root and the Rule30_GLM_Study/ subdirectory.
+            # (Last altered 31 October 2026, repository check: the package
+            # is a supplied item, found through source_material_item.)
+            from ..constants import source_material_item
             root = REPOSITORY_ROOT
-            for base in (root / "Rule30_GLM_Study", root):
+            package = source_material_item("Rule30_GLM_Study")
+            for base in (package, root):
                 candidate = base / md_path
                 if candidate.exists():
                     return candidate
             # Return the expected path even if it doesn't exist (the
             # mirror check will report it as a broken link).
-            return root / "Rule30_GLM_Study" / md_path
+            return package / md_path
     elif schema_name == "glm-study-manifest/v1":
+        #  ``file_refs.prose`` names the study's document beside its manifest
+        #  (``ADDRESS_READ_STUDY.md`` next to ``ADDRESS_READ_STUDY.yaml``);
+        #  a repo-relative path is accepted too.
+        #  (Last altered 31 October 2026, repository check: the name was
+        #  read from the repository root, so every manifest's mirror was
+        #  "not found".)
         fr = data.get("file_refs")
         if isinstance(fr, Mapping):
             prose = fr.get("prose")
-            if isinstance(prose, str):
+            if isinstance(prose, str) and prose:
                 from ..constants import REPOSITORY_ROOT
-                return REPOSITORY_ROOT / prose
+                beside = Path(yaml_path).parent / prose
+                if beside.exists():
+                    return beside
+                rooted = REPOSITORY_ROOT / prose
+                if rooted.exists():
+                    return rooted
+                return beside
     return None
+
+
+def mirror_field_map(schema_name: str) -> Dict[str, str]:
+    """Where each tier-0 field (``question``, ``verdict``, ``figure``,
+    ``recomputed``) is stored in a YAML of the named schema.
+
+    ``glm-study/v1`` nests them under ``tier0.`` with the inventory's names;
+    ``glm-study-manifest/v1`` keeps them at the top level as ``question``,
+    ``verdict``, ``deciding_figure`` and ``recomputed_by``.  Other schemas
+    mirror nothing and get an empty map.
+    """
+    if schema_name == "glm-study/v1":
+        return {"question": "tier0.question", "verdict": "tier0.verdict",
+                "figure": "tier0.figure", "recomputed": "tier0.recomputed"}
+    if schema_name == "glm-study-manifest/v1":
+        return {"question": "question", "verdict": "verdict",
+                "figure": "deciding_figure", "recomputed": "recomputed_by"}
+    return {}
 
 
 def field_paths(data: Any, prefix: str = "") -> List[str]:

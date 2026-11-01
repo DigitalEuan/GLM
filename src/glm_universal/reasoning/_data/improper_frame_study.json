@@ -1,0 +1,533 @@
+{
+ "demos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "improper": [
+  "reflect",
+  "reflect_line",
+  "time_reverse",
+  "lorentz_parity",
+  "lorentz_time",
+  "lorentz_pt"
+ ],
+ "lean": {
+  "declared": 19,
+  "held": true,
+  "sorry": 0,
+  "theorems": 19
+ },
+ "marks": {
+  "I1": true,
+  "I2": true,
+  "I3": true,
+  "I4": true,
+  "I5": true,
+  "I6": true,
+  "L": true,
+  "T": true
+ },
+ "met": 8,
+ "out_vocab": [
+  "shear",
+  "squeeze",
+  "improper_units",
+  "swap"
+ ],
+ "proper": [
+  "identity",
+  "rotation",
+  "boost_x",
+  "lorentz",
+  "thomas",
+  "lorentz_units"
+ ],
+ "queries": 30,
+ "source_digest": "f4da52431a0ecec601374b4a1e75c423c429dd08ac9ef02a97b84605e1a5d67f",
+ "synthetic": {
+  "by_demos": {
+   "1": {
+    "improper": {
+     "queries": 180,
+     "refused": 180,
+     "right": 0,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "proper": {
+     "queries": 180,
+     "refused": 180,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "2": {
+    "improper": {
+     "queries": 180,
+     "refused": 180,
+     "right": 0,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 118,
+     "right": 2,
+     "wrong": 0
+    },
+    "proper": {
+     "queries": 180,
+     "refused": 177,
+     "right": 3,
+     "wrong": 0
+    }
+   },
+   "3": {
+    "improper": {
+     "queries": 180,
+     "refused": 6,
+     "right": 174,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 90,
+     "right": 30,
+     "wrong": 0
+    },
+    "proper": {
+     "queries": 180,
+     "refused": 3,
+     "right": 177,
+     "wrong": 0
+    }
+   },
+   "4": {
+    "improper": {
+     "queries": 180,
+     "refused": 0,
+     "right": 180,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 90,
+     "right": 30,
+     "wrong": 0
+    },
+    "proper": {
+     "queries": 180,
+     "refused": 0,
+     "right": 180,
+     "wrong": 0
+    }
+   }
+  },
+  "changed": [],
+  "components": {
+   "answers": 354,
+   "named_right": 354,
+   "split_ok": 354
+  },
+  "families": {
+   "boost_x": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 26,
+     "right": 90,
+     "wrong": 4
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "identity": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 120,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 58,
+     "right": 62,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 58,
+     "right": 62,
+     "wrong": 0
+    }
+   },
+   "improper_units": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 29,
+     "right": 62,
+     "wrong": 29
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "lorentz": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 29,
+     "right": 90,
+     "wrong": 1
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "lorentz_parity": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 60,
+     "wrong": 30
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "lorentz_pt": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 59,
+     "wrong": 31
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "lorentz_time": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 62,
+     "right": 58,
+     "wrong": 0
+    }
+   },
+   "lorentz_units": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "reflect": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 63,
+     "wrong": 57
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "reflect_line": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 63,
+     "wrong": 57
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "rotation": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 119,
+     "wrong": 1
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 59,
+     "right": 61,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 59,
+     "right": 61,
+     "wrong": 0
+    }
+   },
+   "shear": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 110,
+     "right": 3,
+     "wrong": 7
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 118,
+     "right": 2,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 118,
+     "right": 2,
+     "wrong": 0
+    }
+   },
+   "squeeze": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 114,
+     "right": 0,
+     "wrong": 6
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "swap": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "thomas": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 29,
+     "right": 90,
+     "wrong": 1
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 62,
+     "right": 58,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 62,
+     "right": 58,
+     "wrong": 0
+    }
+   },
+   "time_reverse": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   }
+  },
+  "phase_178_answered": 362,
+  "totals": {
+   "first_fit": {
+    "improper": {
+     "queries": 720,
+     "refused": 120,
+     "right": 425,
+     "wrong": 175
+    },
+    "out": {
+     "queries": 480,
+     "refused": 373,
+     "right": 65,
+     "wrong": 42
+    },
+    "proper": {
+     "queries": 720,
+     "refused": 114,
+     "right": 599,
+     "wrong": 7
+    }
+   },
+   "phase_178": {
+    "improper": {
+     "queries": 720,
+     "refused": 720,
+     "right": 0,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 480,
+     "refused": 478,
+     "right": 2,
+     "wrong": 0
+    },
+    "proper": {
+     "queries": 720,
+     "refused": 360,
+     "right": 360,
+     "wrong": 0
+    }
+   },
+   "shipped": {
+    "improper": {
+     "queries": 720,
+     "refused": 366,
+     "right": 354,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 480,
+     "refused": 418,
+     "right": 62,
+     "wrong": 0
+    },
+    "proper": {
+     "queries": 720,
+     "refused": 360,
+     "right": 360,
+     "wrong": 0
+    }
+   }
+  }
+ },
+ "taken": 8,
+ "tool": {
+  "answer": "3,1,-1",
+  "answer_ok": true,
+  "ask": "2,0,1",
+  "cites": true,
+  "component": "lorentz_parity",
+  "refuse_ok": false
+ }
+}

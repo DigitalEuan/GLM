@@ -11,6 +11,11 @@ rather than a decoration:
   from the feature map rather than from the quantiser;
 * the digest guard reports a stale address book rather than answering from it.
 
+*Last altered 31 October 2026 (repository check): the package README is read
+at ``src/glm_universal/README.md``, where the October 2026 reorganisation put
+it; a file that declares nothing must be a root or an audit file (imports,
+``open``, ``#print axioms``, ``#guard_axioms`` only).*
+
 Nothing here recomputes the whole book -- one nearest-point decode costs about
 a tenth of a second and there are hundreds of declarations.  The stored book is
 spot-checked by re-deriving a handful of addresses from scratch, which is what
@@ -36,9 +41,37 @@ class TestParser(unittest.TestCase):
         self.assertIsNotNone(la.lean_root())
         self.assertGreater(len(la.lean_files()), 30)
 
+    #: What a root or audit file may hold besides comments: it gathers the
+    #: development (imports) or checks it (``#print axioms``,
+    #: ``#guard_axioms``), and declares nothing of its own.
+    _ROOT_OR_AUDIT = re.compile(
+        r"^(?:module|(?:public\s+)?import\s|open\s|#print\s+axioms\s|"
+        r"#guard_axioms\w*\b|set_option\s|namespace\s|end\b|section\b|"
+        r"@\[expose\]\s+public\s+section)")
+    #: The continuation lines of a ``#guard_axioms`` list: names only.
+    _NAMES_ONLY = re.compile(r"^[A-Za-z_][\w.'’]*(?:\s+[A-Za-z_][\w.'’]*)*$")
+    _DECLARING = re.compile(r"^(?:theorem|lemma|def|abbrev|instance|structure|"
+                            r"inductive|class|axiom|example|opaque)\b")
+
+    @classmethod
+    def _declares_nothing_by_design(cls, path) -> bool:
+        text = Path(path).read_text(encoding="utf-8")
+        text = re.sub(r"/-.*?-/", "", text, flags=re.S)
+        lines = [line.split("--", 1)[0].strip() for line in text.splitlines()]
+        return all(not line or cls._ROOT_OR_AUDIT.match(line)
+                   or (cls._NAMES_ONLY.match(line)
+                       and not cls._DECLARING.match(line))
+                   for line in lines)
+
     def test_declarations_are_found_in_every_file(self):
+        root = la.lean_root()
         files = {d.file for d in la.declarations()}
-        self.assertEqual(len(files), len(la.lean_files()))
+        silent = [path for path in la.lean_files()
+                  if path.relative_to(root).as_posix() not in files]
+        not_by_design = [path.relative_to(root).as_posix() for path in silent
+                         if not self._declares_nothing_by_design(path)]
+        self.assertEqual(not_by_design, [])
+        self.assertEqual(len(files) + len(silent), len(la.lean_files()))
 
     def test_names_are_fully_qualified_and_unique(self):
         names = [d.name for d in la.declarations()]
@@ -431,6 +464,36 @@ class TestTheFastRoutinesAreTheDefinitions(unittest.TestCase):
                 self.assertEqual(la.nearest_points_exhaustive(points),
                                  la.nearest_points(points))
 
+    def test_the_scan_and_the_packed_search_each_match_brute_force(self):
+        """Both methods behind :func:`nearest_points`, checked separately.
+
+        Small random sets with negative coordinates, repeated points and
+        widths other than 24, so the shift, the tie read-out and the
+        self-exclusion of the packed search are all exercised (31 Oct 2026).
+        """
+        import itertools
+        values = (-7, -1, 0, 2, 5, 40)
+        for width in (1, 2, 3, 24):
+            for size in (2, 3, 7, 19):
+                cycle = itertools.cycle(values)
+                points = sorted({tuple((next(cycle) * (i + 1) + k * k) % 23 - 11
+                                       for k in range(width))
+                                 for i in range(size)})
+                if len(points) < 2:
+                    continue
+                expected = la.nearest_points_exhaustive(points)
+                with self.subTest(width=width, size=size):
+                    self.assertEqual(expected, la._nearest_points_scan(points))
+                    self.assertEqual(expected,
+                                     la._nearest_points_packed(points))
+
+    def test_the_packed_search_declines_coordinates_too_large_to_hold(self):
+        huge = 1 << 40
+        points = [(0,) * 24, (huge,) + (0,) * 23]
+        self.assertIsNone(la._nearest_points_packed(points))
+        self.assertEqual(la.nearest_points_exhaustive(points),
+                         la.nearest_points(points))
+
     def test_ties_are_reported_in_full(self):
         """Three points equidistant from a fourth: all three are winners."""
         origin = (0,) * 24
@@ -493,7 +556,10 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
     #: ``GLM.Sakuma.third._proof_1`` is an auxiliary constant the elaborator
     #: generates, named in ``citation_reference.py`` as an example of what the
     #: reference holds and the source parser does not.
-    IGNORED = {"GLM.py", "GLM.lean", "GLM.Sakuma.third._proof_1"}
+    #: ``GLM.main`` and ``GLM.routed_result`` are functions of the command
+    #: line script imported as a module, and ``GLM.py's`` is prose about it.
+    IGNORED = {"GLM.py", "GLM.py's", "GLM.lean", "GLM.Sakuma.third._proof_1",
+               "GLM.main", "GLM.routed_result"}
 
     #: This file deliberately cites names that do not exist, to check that
     #: they are refused, and is therefore excluded from its own audit.
@@ -501,9 +567,12 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
 
     #: Files whose ``GLM....`` names are fixtures of a toy development, not
     #: citations of this one (Phase 101's scoped-reader tests).
-    FIXTURES = frozenset({"test_citation_scope.py"})
+    #: ``test_intake.py`` registers a toy item whose Lean is ``GLM.Demo``.
+    FIXTURES = frozenset({"test_citation_scope.py", "test_intake.py"})
 
-    CITATION = re.compile(r"\bGLM(?:\.[A-Za-z_][A-Za-z0-9_']*)+")
+    #: A Lean *module* name (``RequestProject.GLM.X``) is a file, not a
+    #: declaration, so a ``GLM`` preceded by a dot is not read as a citation.
+    CITATION = re.compile(r"(?<![.\w])GLM(?:\.[A-Za-z_][A-Za-z0-9_']*)+")
 
     @classmethod
     def setUpClass(cls):
@@ -517,6 +586,27 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
     def known(self, name):
         return name in self.names or name in self.namespaces
 
+    @staticmethod
+    def recorded_absent(name):
+        """A citation into a file the repository records as not built: held
+        in ``src/lean/awaiting_recovery/`` or missing and named in
+        ``studies/_lean_files_needed.md``.  Such a citation is not stale -- the
+        file is accounted for -- and it resolves again when the file returns."""
+        from glm_universal import lean_check
+        from glm_universal.constants import LEAN_FILES_NEEDED
+        parts = name.split(".")
+        if len(parts) < 2:
+            return False
+        stem = parts[1]
+        held = {h["module"].split(".")[-1] for h in lean_check.held_files()}
+        registry = (LEAN_FILES_NEEDED.read_text(encoding="utf-8")
+                    if LEAN_FILES_NEEDED.is_file() else "")
+        return stem in held or f"`{stem}.lean`" in registry
+
+    def test_a_citation_into_a_held_file_is_accounted_for(self):
+        self.assertTrue(self.recorded_absent("GLM.LeechShellCount.shellArr_correct"))
+        self.assertFalse(self.recorded_absent("GLM.Address.no_such_theorem"))
+
     def test_every_lean_name_cited_in_the_package_resolves(self):
         root = Path(la.__file__).resolve().parent.parent
         stale = {}
@@ -525,7 +615,8 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
                     or path.name in self.FIXTURES):
                 continue
             for cited in self.CITATION.findall(path.read_text(encoding="utf-8")):
-                if cited in self.IGNORED or self.known(cited):
+                if (cited in self.IGNORED or self.known(cited)
+                        or self.recorded_absent(cited)):
                     continue
                 stale.setdefault(cited, set()).add(path.name)
         self.assertEqual(
@@ -575,8 +666,8 @@ class TestDocumentsQuoteTheCurrentCorpus(unittest.TestCase):
         return [
             ("SYSTEM.md", "the {n} declarations"),
             ("SYSTEM.md", "Read back exactly {n}/{n}"),
-            ("glm_universal/README.md", "for each of the {n}"),
-            ("glm_universal/README.md", "**{n}/{n}**"),
+            ("src/glm_universal/README.md", "for each of the {n}"),
+            ("src/glm_universal/README.md", "**{n}/{n}**"),
             # That row is a generated block, and the generator writes counts
             # with a thousands separator, so the phrase is checked in the
             # form the study actually renders.

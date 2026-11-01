@@ -1,0 +1,39 @@
+================================================================================================
+ITERATION 8 PHASE 1 — Junction method for shared Leech coordinates
+================================================================================================
+
+Per user input: the 'Junction' GLM method could help — many things are
+practically the same operation and the GLM can understand that way also.
+
+The substrate's coordinate_junction.py implements junctions: a junction is
+the set of carriers at one exact coordinate vector. For our binary targets,
+the 'coordinate' is the Leech CLASS (mod 2Λ). Carriers sharing a Leech class
+are in the same junction.
+
+------------------------------------------------------------------------------------------------
+[Junction distribution — 50 samples per task, 250 carriers total]
+------------------------------------------------------------------------------------------------
+  n_carriers:        250
+  n_unique_coords:   147
+  n_junctions:       17  (groups of >= 2 carriers sharing a coord)
+  n_singletons:      130
+  junction_sizes:   [2, 4, 19, 31, 2, 2, 10, 21, 3, 5]...
+
+------------------------------------------------------------------------------------------------
+[Junction-task correlation — do same-coord carriers come from same task?]
+------------------------------------------------------------------------------------------------
+  same_task_junctions:    7/10 (70.0%)
+  mixed_task_junctions:   3/10 (30.0%)
+  same_parity_junctions:  10/10 (100.0%)
+  mixed_parity_junctions:0/10 (0.0%)
+
+Interpretation:
+  * If same_task_rate is high, junctions correlate with task family — the
+    GLM can use junction membership as a task discriminator.
+  * If same_parity_rate is high, junctions correlate with parity — the
+    GLM can use junction membership as a parity discriminator (the user's
+    'many things are practically the same operation' insight).
+  * If mixed_parity_rate is high, junctions contain both even AND odd
+    parity targets — meaning the Leech class doesn't distinguish parity.
+    This would be a development issue: the coordinate (Leech class) needs
+    to be enriched to separate parity.

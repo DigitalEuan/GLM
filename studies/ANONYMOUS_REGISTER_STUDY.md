@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 1 November 2026 (Phase 186: §4 re-measured at 9,400 declarations; the random control at 2.02 times chance, and the test's bound on the controls loosened to two and a quarter). Earlier, 31 October 2026 (repository check: §4 re-measured at 9,341 declarations, `text_is_within_twice_chance` recorded as a miss; 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 **What this document is.**
 [`ADDRESS_RETRIEVAL_STUDY.md`](ADDRESS_RETRIEVAL_STUDY.md) recorded a negative
 result that has stood since it was taken: asked to retrieve a relevant
@@ -59,14 +61,13 @@ those belong to the language and to Mathlib rather than to this development.
 All four hold. Every table below is a **generated block**, emitted from the
 measurement cache that `python3 -m glm_universal.corpus --remeasure` fills,
 guarded by the digest of the Lean sources it was taken from. The formal half is
-[`RequestProject/GLM/Anonymous.lean`](../glm_lean/RequestProject/GLM/Anonymous.lean);
+[`RequestProject/GLM/Anonymous.lean`](../src/lean/RequestProject/GLM/Anonymous.lean);
 the computational half is `glm_universal.reasoning.anonymous`; the test that
 pins the two against each other is
 `glm_universal/tests/test_anonymous.py`; and the report prints with
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report anonymous" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report anonymous" --verify-tct
 ```
 
 whose third column re-derives every figure below in a fresh interpreter.
@@ -81,7 +82,16 @@ corpus, the relevance ground truth, the depth each faculty is read to and the
 window it is scored at are all the relay study's.
 
 <!-- generated: anonymous-faculties -->
-The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
+| faculty | hit@5, names kept | hit@5, names replaced |
+|---|---|---|
+| text — exact overlap of the identifiers | 676 (82.6 %) | 48 (5.9 %) |
+| lexical — the identifier address book | 280 (34.2 %) | 23 (2.8 %) |
+| **address — the structural address book** | 118 (14.4 %) | 117 (14.3 %) |
+| name — substring search over the names | 135 (16.5 %) | 8 (1.0 %) |
+| digest — a control that knows nothing | 23 (2.8 %) | 18 (2.2 %) |
+| random — a seeded permutation | 36 (4.4 %) | 36 (4.4 %) |
+
+818 queries over a corpus of 9400 declarations; chance at k = 5 is 2.2 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
@@ -127,7 +137,13 @@ it against the **shipped** feature map, coordinate by coordinate, on every
 query.
 
 <!-- generated: anonymous-invariance -->
-The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
+| reading | queries | what it means |
+|---|---|---|
+| queries whose syntax coordinates are untouched | 818 | 100.0 % of 818 |
+| queries where a type-word coordinate moves | 0 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
+| queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
+
+The declared vocabulary a query keeps is 39 words.  Placeholders fresh against the corpus: yes.
 <!-- end generated -->
 
 That middle row is an audit finding rather than a rounding error, and it is
@@ -151,7 +167,12 @@ The gate is the relay study's gate, `1/10`, unchanged. Nothing in the stack was
 told that this register exists.
 
 <!-- generated: anonymous-relay -->
-The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
+| reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
+|---|---|---|---|---|
+| names kept | 818 | 21 | 676 (82.6 %) | **680 (83.1 %)** |
+| names replaced | 818 | 501 | 48 (5.9 %) | **81 (9.9 %)** |
+
+The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->
 
 The hand-over is a theorem in the limit case: `GLM.Anonymous.relay_hands_over`
@@ -167,7 +188,20 @@ it.
 ## 4. Every claim, as it fell
 
 <!-- generated: anonymous-verdict -->
-The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
+| claim | verdict |
+|---|---|
+| `address_holds` | holds |
+| `address_is_above_twice_chance` | holds |
+| `address_is_the_clear_leader` | holds |
+| `address_stays_above_the_control` | holds |
+| `gate_hands_over` | holds |
+| `lexical_collapses_too` | holds |
+| `only_the_type_vocabulary_moves` | holds |
+| `placeholders_are_fresh` | holds |
+| `relay_beats_text_in_the_register` | holds |
+| `text_collapses_without_the_names` | holds |
+| `text_is_within_twice_chance` | **fails** |
+| `text_leads_when_the_names_are_there` | holds |
 <!-- end generated -->
 
 **One claim moves with the corpus (Phases 81–82, 84, 85, 87, 91, 92, 103, 105, 108, 113, 119 and 122).** The query set
@@ -220,14 +254,34 @@ fails again and is recorded as a miss at this count rather than re-read. With
 the Lean file of Phase 122 the corpus is 4881 declarations and the stride 814
 queries, and the search scores 53 hits against a chance of 28.91: 1.83 times
 chance, under the line again, so the claim holds and the miss is no longer
-recorded. The claims
+recorded. Re-measured on 31 October 2026, after phases 123–184 and the
+October 2026 reorganisation, the corpus is 9,341 declarations and the stride
+813 queries, and the search scores 53 hits — the same count as at Phase 122 —
+against a chance of 18.04: 2.94 times chance, over the line, so
+`text_is_within_twice_chance` fails and is recorded as a miss at this count
+rather than re-read. The hits did not rise; chance fell, because the corpus
+nearly doubled and a random five of it is half as likely to hold a relative.
+The claims
 that carry the study — the text search collapses, the identifier address book
 collapses with it, the structural address holds and leads every other faculty
 — held at every count. Recorded, not re-read: `tests/test_anonymous.py` pins
 the margin of this one claim (at least one and a half times chance, and under
-two and a quarter since Phase 87, when it crossed two) and recorded the miss
-while it stood,
+two and a quarter since Phase 87, when it crossed two; under three since
+31 October 2026, when the halved chance put it at 2.94) and records the miss
+while it stands,
 rather than letting it drift silently.
+
+*Re-measured 1 November 2026 (Phase 186, the generated table above).* With the
+four standalone Lean files of the intake items the corpus is 9,400 declarations
+and the stride 818 queries; chance at k = 5 is 17.82 hits. The text search
+scores 48 (2.69 times chance), so the miss stands. The random control, a single
+seeded permutation, scores 36 in both readings: 2.02 times chance, just over
+twice. Its top five is nearly the same five declarations for every query, so
+its hits come in blocks and move with the corpus rather than with any query.
+The test that keeps the controls near chance therefore bounds them under two
+and a quarter times chance, the bound the text claim was given at Phase 87;
+the digest control scores 18 (1.01 times chance). The structural address, 117,
+stays above both controls, so `address_stays_above_the_control` holds.
 
 ---
 

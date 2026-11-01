@@ -33,12 +33,46 @@ call-sites in ``knowledge/model.py``, the monkey-patch in
 ``word_address.py`` and ``corpus/inventory.py``.  It is a faithful
 reconstruction of the documented behaviour; if a discrepancy with the
 original is found, the original's behaviour is the spec.*
+
+*Last altered 31 October 2026 (repository check): digests taken through
+``glm_universal.integrity`` rather than ``hashlib`` (the D9 digest
+inventory declares no digest site here); every digest value is unchanged.*
+
+*Last altered 31 October 2026 (repository check): four repairs of the
+reconstruction.  (1) Python files were all dropped: ``_read_python`` called
+``ast.get_docstring`` on every node of the tree, which raises ``TypeError``
+on the first node that cannot carry a docstring, and ``read_bytes`` swallowed
+it, so the model held no ``.py`` document at all; docstrings are now read
+from modules, classes and functions only (cleaned of their indentation).
+(2) The tokeniser kept every punctuation character as a token and dropped
+digit runs; it now reads word runs only (one token per run of letters,
+digits and underscore, an apostrophe
+inside a word kept).  The evidence that the original was words-only: the
+original answers stored in ``reasoning/_data/evidence_model_study.json``
+(the ``corpus continue a digest addresses`` answer reads "integrity never
+meaning the corpus's own most frequent continuation" -- no comma token, and
+*corpus's* one token -- and the ``corpus address of seven`` answer's
+positional anchors are *the, a, is, of, and, …, in, to, it*, with no
+punctuation among the twelve most frequent tokens);
+``CORPUS_KNOWLEDGE_STUDY.md`` §7.2 (K1: the most frequent token is *the*);
+and ``reasoning/evidence_model_study.DEFINE_TERMS``, which asks ``define``
+for *tier 0* (digits are tokens).  (3) ``_split_sentences`` cut a sentence
+at every period, against the rule this module states (a sentence end is
+followed by whitespace or the end of the line), so a dotted module name or
+a decimal was cut into several sentences; it now requires the whitespace.
+(4) Two rules ``CORPUS_KNOWLEDGE_STUDY.md`` §1 documents for the reader and
+the reconstruction had left out: a JSON string or CSV cell is prose only
+with *more words than numbers* (besides its five words), and in Markdown *a
+table row is one sentence* (a table is its own paragraph, one sentence per
+row, rather than rows run together up to the next full stop).
+Every count of the model moves with it;
+the cache schema in ``model.py`` was bumped so no document read by the old
+rule is reused.*
 """
 from __future__ import annotations
 
 import ast
 import csv
-import hashlib
 import io
 import json
 import re
@@ -56,6 +90,8 @@ from typing import (
     Sequence,
     Tuple,
 )
+
+from .. import integrity
 
 __all__ = [
     "Document",
@@ -79,7 +115,7 @@ __all__ = [
 #: The repository root.  ``knowledge/reader.py`` lives at
 #: ``glm_universal/knowledge/reader.py`` -- three directories below the root
 #: -- so three ``parent`` calls reach it (matching the convention in
-#: ``corpus/inventory.py`` line 80).
+#: ``corpus/inventory.py``, ``REPOSITORY_ROOT``).
 _HERE = Path(__file__).resolve()
 REPOSITORY_ROOT = _HERE.parent.parent.parent.parent
 
@@ -97,7 +133,7 @@ SKIP_DIRECTORIES: FrozenSet[str] = frozenset({
 })
 
 #: Files never read by the walk.  The session working note is the only one
-#: (mirrors ``corpus/inventory.py`` line 92).
+#: (mirrors ``corpus/inventory.py`` ``SESSION_NOTES``).
 SESSION_NOTES: FrozenSet[str] = frozenset({"ARISTOTLE_SUMMARY.md"})
 
 #: The footer that closes a Tier-0 block (mirrors ``corpus/inventory.py``
@@ -179,9 +215,12 @@ _TIER0_HEADING = re.compile(r"^##\s+Tier\s*0\b", re.IGNORECASE)
 #: these so a paragraph becomes one or more sentences.
 _SENTENCE_END = re.compile(r"(?<=[.!?])\s+|(?<=[.!?])$")
 
-#: A token: a maximal run of letters (incl. underscore) or a single other
-#: character.  This is the simple, deterministic tokeniser the corpus uses.
-_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_]*|[^A-Za-z0-9_\s]")
+#: A token: a maximal run of word characters (letters, digits, underscore),
+#: an apostrophe inside a word kept (``corpus's`` is one token).  Punctuation
+#: is never a token.  This is the simple, deterministic tokeniser the corpus
+#: uses (31 October 2026: words only, as the original was -- see the module
+#: docstring).
+_TOKEN = re.compile(r"\w+(?:'\w+)*")
 
 
 def top_folder(path: str) -> str:
@@ -211,9 +250,9 @@ def _immediate_folder(path: str) -> str:
 def _tokenise(text: str) -> Tuple[str, ...]:
     """Lower-case, deterministic tokenisation, preserving order.
 
-    Letters/underscore runs become one token; every other non-space
-    character becomes its own token.  Whitespace is dropped.  Empty tokens
-    are never produced.
+    Word runs become one token (letters, digits and underscore, an
+    apostrophe inside a word kept); punctuation is never a token.
+    Whitespace is dropped.  Empty tokens are never produced.
     """
     out: List[str] = []
     for m in _TOKEN.finditer(text):
@@ -237,7 +276,10 @@ def _split_sentences(text: str) -> List[str]:
     # Walk the regex, splitting after each sentence-end.
     out: List[str] = []
     start = 0
-    for m in re.finditer(r"[.!?]+[\"'\)\]]*\s*", text):
+    # A sentence end must be followed by whitespace or the end of the text
+    # (31 October 2026: the pattern had ``\s*``, so ``glm_universal.knowledge``
+    # and ``21.5%`` were cut at every period).
+    for m in re.finditer(r"[.!?]+[\"'\)\]]*(?:\s+|$)", text):
         end = m.end()
         chunk = text[start:end].strip()
         if chunk:
@@ -252,6 +294,38 @@ def _split_sentences(text: str) -> List[str]:
 def _word_count(text: str) -> int:
     """Cheap word count by whitespace split."""
     return len(text.split())
+
+
+def _is_prose(text: str) -> bool:
+    """The JSON/CSV prose rule (``CORPUS_KNOWLEDGE_STUDY.md`` §1): at least
+    :data:`MIN_PROSE_WORDS` words, and more words than numbers -- a token
+    holding a letter is a word, a token of digits alone a number."""
+    if _word_count(text) < MIN_PROSE_WORDS:
+        return False
+    words = numbers = 0
+    for tok in _tokenise(text):
+        if tok.isdigit():
+            numbers += 1
+        elif any(ch.isalpha() for ch in tok):
+            words += 1
+    return words > numbers
+
+
+def _is_table_row(line: str) -> bool:
+    """A Markdown table row: a line whose first non-blank character is ``|``."""
+    return line.lstrip().startswith("|")
+
+
+def _is_table(text: str) -> bool:
+    """A paragraph made of table rows only."""
+    lines = [ln for ln in text.split("\n") if ln.strip()]
+    return bool(lines) and all(_is_table_row(ln) for ln in lines)
+
+
+def _table_rows(text: str) -> List[str]:
+    """A table paragraph's sentences: one per row (``CORPUS_KNOWLEDGE_STUDY.md``
+    §1, *a table row is one sentence*)."""
+    return [ln.strip() for ln in text.split("\n") if ln.strip()]
 
 
 # ---------------------------------------------------------------------------
@@ -313,7 +387,10 @@ def _read_markdown(path: str, data: str) -> Optional[Document]:
             buf.append(_HEADING.sub(r"\2", line))
             i += 1
             continue
-        # Normal line: accumulate.
+        # Normal line: accumulate.  A table row never shares a paragraph
+        # with prose: the paragraph breaks where a table starts or ends.
+        if buf and _is_table_row(line) != _is_table_row(buf[0]):
+            _flush(in_tier0)
         buf.append(line)
         i += 1
     _flush(in_tier0)
@@ -321,12 +398,12 @@ def _read_markdown(path: str, data: str) -> Optional[Document]:
     if not paragraphs:
         return None
 
-    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+    digest = integrity.sha256_hex(data.encode("utf-8"))
     folder = _immediate_folder(path)
     sentences: List[Sentence] = []
     para_objs: List[Paragraph] = []
     for p_idx, (ptext, tier0) in enumerate(paragraphs):
-        s_list = _split_sentences(ptext)
+        s_list = _table_rows(ptext) if _is_table(ptext) else _split_sentences(ptext)
         s_objs: List[Sentence] = []
         for s_idx, stext in enumerate(s_list):
             toks = _tokenise(stext)
@@ -371,7 +448,7 @@ def _read_text(path: str, data: str) -> Optional[Document]:
     paragraphs = [p.strip() for p in re.split(r"\n\s*\n", data) if p.strip()]
     if not paragraphs:
         return None
-    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+    digest = integrity.sha256_hex(data.encode("utf-8"))
     folder = _immediate_folder(path)
     sentences: List[Sentence] = []
     para_objs: List[Paragraph] = []
@@ -413,7 +490,12 @@ def _read_python(path: str, data: str) -> Optional[Document]:
         tree = None
     if tree is not None:
         for node in ast.walk(tree):
-            doc = ast.get_docstring(node, clean=False)
+            # Only these nodes can carry a docstring; ``ast.get_docstring``
+            # raises TypeError on any other (31 October 2026).
+            if not isinstance(node, (ast.Module, ast.ClassDef,
+                                     ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            doc = ast.get_docstring(node, clean=True)
             if doc:
                 paragraphs.append(doc)
 
@@ -441,7 +523,7 @@ def _read_python(path: str, data: str) -> Optional[Document]:
     if not paragraphs:
         return None
 
-    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+    digest = integrity.sha256_hex(data.encode("utf-8"))
     folder = _immediate_folder(path)
     sentences: List[Sentence] = []
     para_objs: List[Paragraph] = []
@@ -514,7 +596,7 @@ def _read_lean(path: str, data: str) -> Optional[Document]:
     if not paragraphs:
         return None
     return _read_text_from_paragraphs(path, paragraphs, _immediate_folder(path),
-                                      hashlib.sha256(data.encode("utf-8")).hexdigest())
+                                      integrity.sha256_hex(data.encode("utf-8")))
 
 
 def _read_text_from_paragraphs(path: str, paragraphs: List[str],
@@ -551,7 +633,7 @@ def _collect_json_strings(obj, out: List[str]) -> None:
     """Recursively collect every string value (not keys) from a parsed JSON
     object.  Object keys are not prose."""
     if isinstance(obj, str):
-        if _word_count(obj) >= MIN_PROSE_WORDS:
+        if _is_prose(obj):
             out.append(obj)
     elif isinstance(obj, dict):
         for v in obj.values():
@@ -572,7 +654,7 @@ def _read_json(path: str, data: str) -> Optional[Document]:
     _collect_json_strings(obj, strings)
     if not strings:
         return None
-    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+    digest = integrity.sha256_hex(data.encode("utf-8"))
     return _read_text_from_paragraphs(path, strings, _immediate_folder(path), digest)
 
 
@@ -590,11 +672,11 @@ def _read_csv(path: str, data: str) -> Optional[Document]:
     cells: List[str] = []
     for row in reader:
         for cell in row:
-            if _word_count(cell) >= MIN_PROSE_WORDS:
+            if _is_prose(cell):
                 cells.append(cell)
     if not cells:
         return None
-    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+    digest = integrity.sha256_hex(data.encode("utf-8"))
     return _read_text_from_paragraphs(path, cells, _immediate_folder(path), digest)
 
 

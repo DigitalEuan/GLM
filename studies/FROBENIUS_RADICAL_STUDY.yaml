@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 9 of 9 marks met; 6 of 6 non-solvable questions certified; 5 of 5 solvable controls and
@@ -15,18 +17,26 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - evaluation/frobenius_radical_cases
-  - tests/test_frobenius_radical
+  - evaluation/frobenius_radical_cases.py
+  - reasoning/symbolic_factor.py
+  - reasoning/symbolic_nonlinear.py
+  - runtime/frobenius_radical_report.py
+  - runtime/quintic_radical_report.py
+  - tools.py
   lean:
   - FrobeniusRadicals
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: FROBENIUS_RADICAL_STUDY.md
   test:
   - test_frobenius_radical.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: FROBENIUS_RADICAL_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -34,11 +44,29 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - F6
+  - F7
+  - F8
+  - F9
+  met:
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - F6
+  - F7
+  - F8
+  - F9
   missed: []
 perturbations: []
-phase: 112
+phase: 113
 predecessors:
 - QUINTIC_RADICAL_STUDY
 question: Phase 112's radical-free certificate reads the Galois group through complex conjugation, so
@@ -47,6 +75,8 @@ question: Phase 112's radical-free certificate reads the Galois group through co
   say with a proved reason when no root is expressible in radicals, and never say it of a polynomial whose
   group is solvable?
 recomputed_by: '`glm_universal.runtime.frobenius_radical_report.frobenius_radical_report`'
+related:
+- PRIMITIVE_RADICAL_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -66,7 +96,8 @@ sections:
 - anchor: 5-re-running-it
   heading: 5. Re-running it
 status: closed
-successors: []
+successors:
+- PRIMITIVE_RADICAL_STUDY
 superseded_by: ''
 supersedes: []
 title: Roots with no expression in radicals, read from one Frobenius element

@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 **The question.** XOR keeps turning up in this system, and the objection is a
 fair one. `a ^ b` throws away which of the two operands supplied each bit: from
 the result you cannot recover the pair. If the substrate is meant to be exact,
@@ -21,13 +23,13 @@ justified rather than assumed. So: is XOR a *choice*, and could something else
 be used?
 
 This document is the answer. It has three parts, and each is a theorem in
-[`RequestProject/GLM/Combiner.lean`](../glm_lean/RequestProject/GLM/Combiner.lean)
+[`RequestProject/GLM/Combiner.lean`](../src/lean/RequestProject/GLM/Combiner.lean)
 rather than an argument here. The computational half is
 `glm_universal.reasoning.combiner`, the test that pins it is
 `glm_universal/tests/test_combiner.py`, and the whole thing prints with
 
 ```
-PYTHONPATH=. python3 -c "from glm_universal.runtime.session import GeometricSession; \
+PYTHONPATH=src python3 -c "from glm_universal.runtime.session import GeometricSession; \
 print(GeometricSession().ask('report combiner').answer)"
 ```
 

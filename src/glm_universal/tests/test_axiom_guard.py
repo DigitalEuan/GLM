@@ -19,8 +19,10 @@ from pathlib import Path
 
 _LEAN = Path(__file__).resolve().parents[2] / "lean"
 _GLM = _LEAN / "RequestProject" / "GLM"
-_KIT = Path(__file__).resolve().parents[3] / "source_material" / \
-    "GLM_Pipeline_Kit" / "GLMKit" / "AxiomAudit.lean"
+# Last altered 31 October 2026 (repository check): the kit is a supplied item,
+# found through constants.source_material_item wherever it is filed.
+from glm_universal.constants import source_material_item  # noqa: E402
+_KIT = source_material_item("GLM_Pipeline_Kit/GLMKit/AxiomAudit.lean")
 
 
 def _module(p: Path) -> str:

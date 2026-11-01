@@ -44,6 +44,9 @@ module                     subjects
 ``reasoning``              searchloop
 ``recipe``                 recipe
 ``language``               language
+``address``                (query kinds, not subjects) nearest, hole, locate
+``lookup``                 (query kinds, not subjects) tool, corpus, study,
+                           sequence
 =========================  ==================================================
 
 The import direction is unchanged and still one-way: a report module imports
@@ -52,12 +55,23 @@ the sub-package that computes its subject, the parser and
 module.  :data:`~glm_universal.runtime.session.REPORT_SUBJECTS` remains the
 one list of subject names, and ``_solve_report`` in the session remains the
 one dispatcher.
+
+*Last altered 31 October 2026 (repository check): the address family --
+``_solve_nearest_address``, ``_solve_hole``, ``_solve_locate`` and their two
+helpers -- moved from the session into* ``address`` *(class*
+``AddressReports`` *), because the session had grown back past its
+4500-line budget.  They answer query kinds rather than report subjects, so
+:data:`REPORT_SUBJECTS` is unchanged.  The same day the four lookup kinds
+(``tool``, ``corpus``, ``study``, ``sequence``) were added in* ``lookup``
+*(class* ``LookupReports`` *).*
 """
 from __future__ import annotations
 
+from .address import AddressReports
 from .development import DevelopmentReports
 from .language import LanguageReports
 from .lattice_geometry import LatticeGeometryReports
+from .lookup import LookupReports
 from .ledgers import LedgerReports
 from .migration import MigrationReports
 from .reasoning import ReasoningReports
@@ -82,10 +96,13 @@ REPORT_MIXINS = (
     RecipeReports,
     LanguageReports,
     ReasoningReports,
+    AddressReports,
+    LookupReports,
 )
 
 __all__ = [
-    "DevelopmentReports", "LanguageReports", "LatticeGeometryReports",
+    "AddressReports", "DevelopmentReports", "LanguageReports",
+    "LatticeGeometryReports", "LookupReports",
     "LedgerReports", "MigrationReports", "ReasoningReports", "RecipeReports",
     "RegisterReports",
     "ResolutionReports", "SemanticsReports", "SignalReports",

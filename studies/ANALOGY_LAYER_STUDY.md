@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 *Why `A : B :: C : D` was the machine's worst query kind, what the diagnosis
 turned out to be, and what closing it cost.*
 
@@ -198,9 +200,8 @@ register on every element, with the two genuinely ambiguous positions — period
 ## 7. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report analogies"
-PYTHONPATH=. python3 -m glm_universal.benchmarks
-PYTHONPATH=. python3 -m glm_universal.evaluation --only analogy
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_analogy_models.py -q
+PYTHONPATH=src python3 src/GLM.py -q "report analogies"
+PYTHONPATH=src python3 -m glm_universal.benchmarks
+PYTHONPATH=src python3 -m glm_universal.evaluation --only analogy
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_analogy_models.py -q
 ```

@@ -1,0 +1,3388 @@
+audit_note4.txt
+
+==============================================================================
+NOTE 4 MATH AUDIT — F_2 -> Hamming -> Golay -> Leech -> Conway
+Run against the actual GLM substrate (glm_universal.substrate).
+All values computed, never quoted.
+==============================================================================
+
+Summary: 22/22 checks pass.
+
+[PASS] 1a-F2_algebra
+   theorem : The toggle {0,1} under XOR yields F_2; popcount(0b1011)=3 (no floats).
+   predicted = 3
+   measured  = 3
+   source    = linalg.popcount
+
+[PASS] 1b-Hamming_metric
+   theorem : d_H(x,y) = popcount(x XOR y); a deliberate 16-bit XOR yields Hamming distance 16.
+   predicted = 16
+   measured  = 16
+   source    = linalg.popcount (XOR distance)
+
+[PASS] 1c-F2_dimension
+   theorem : F_2^24 has F_2-rank 24 (i.e. 24 independent toggles span the whole space).
+   predicted = 24
+   measured  = 24
+   source    = linalg.f2_rank over the 24 unit vectors
+
+[PASS] 2a-sphere_packing_G23
+   theorem : Sphere-packing bound: sum_{k=0..3} C(23,k) = 2^11 (G_23 = [23,12,7]_2 is perfect).
+   predicted = 2048
+   measured  = 2048
+   source    = math.comb; theorem: Tietavaeinen-van Lint (1971)
+
+[PASS] 2b-G24_parameters
+   theorem : Extended binary Golay code G_24 = [24,12,8]_2: |C| = 4096, d_min = 8.
+   predicted = {'codewords': 4096, 'min_distance': 8}
+   measured  = {'codewords': 4096, 'min_distance': 8}
+   source    = mog.GOLAY_SET (linalg.popcount)
+
+[PASS] 2c-weight_enumerator
+   theorem : G_24 weight enumerator: 1 + 759 z^8 + 2576 z^12 + 759 z^16 + z^24.
+   predicted = {0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}
+   measured  = {0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}
+   source    = mog.GOLAY_SET
+
+[PASS] 2d-doubly_even
+   theorem : G_24 is doubly even: every codeword weight is divisible by 4.
+   predicted = True
+   measured  = True
+   source    = mog.GOLAY_SET weights
+
+[PASS] 2e-octad_count
+   theorem : The 759 weight-8 codewords of G_24 are the octads (Steiner S(5,8,24) blocks).
+   predicted = 759
+   measured  = 759
+   source    = mog.OCTAD_MASKS
+
+[PASS] 2f-Steiner_5_8_24
+   theorem : G_24 octads form a Steiner system S(5,8,24): every 5-subset lies in exactly one octad.
+   predicted = True
+   measured  = True
+   source    = golay_decode.steiner_system_report
+
+[PASS] 3a-G23_puncturing
+   theorem : Puncturing G_24 by dropping one coordinate yields G_23 = [23,12,7]: min distance 7.
+   predicted = 7
+   measured  = 7
+   source    = mog.GOLAY_SET punctured at last bit
+
+[PASS] 3b-G23_size
+   theorem : Puncturing G_24 preserves cardinality: G_23 still has 4096 codewords.
+   predicted = 4096
+   measured  = 4096
+   source    = mog.GOLAY_SET punctured
+
+[PASS] 4a-Leech_min_norm2
+   theorem : Lambda_24 minimal squared norm = 4 (32 in the x*sqrt(8) integer model).
+   predicted = 32
+   measured  = 32
+   source    = leech2.MIN_NORM2
+
+[PASS] 4b-Leech_kissing
+   theorem : Lambda_24 kissing number = 196560 (unique densest sphere packing in R^24).
+   predicted = 196560
+   measured  = 196560
+   source    = leech2.KISSING (enum of minimal vectors)
+
+[PASS] 4c-Construction_ladder
+   theorem : Construction ladder: A=48 (Golay support only), B=98256 (+ mod-8 sum), C=196560 (+ odd coset).
+   predicted = {'A': 48, 'B': 98256, 'C': 196560}
+   measured  = {'A': 48, 'B': 98256, 'C': 196560}
+   source    = leech_construct.kissing_of_level
+
+[PASS] 4d-Necessity_ladder
+   theorem : Each construction condition is load-bearing: dropping it breaks the packing.
+   predicted = True
+   measured  = True
+   source    = leech_construct.necessity_report
+
+[PASS] 4e-Leech_index_in_Z24
+   theorem : [Z^24 : Lambda_24] = 2^36 in the x*sqrt(8) integer model (unimodular in R^24).
+   predicted = 68719476736
+   measured  = 68719476736
+   source    = leech2.basis_determinant
+
+[PASS] 4f-Leech_no_roots
+   theorem : Lambda_24 is the unique Niemeier lattice with no roots (min norm 4, not 2).
+   predicted = True
+   measured  = True
+   source    = leech2.MIN_NORM2 vs Construction-A minimum (16)
+
+[PASS] 4g-Leech_theta_series
+   theorem : Theta series of Lambda_24 = E_4^3 - 720*Delta; first 10 coefficients known.
+   predicted = [1, 0, 196560, 16773120, 398034000, 4629381120, 34417656000, 187489935360, 814879774800, 2975551488000]
+   measured  = [1, 0, 196560, 16773120, 398034000, 4629381120, 34417656000, 187489935360, 814879774800, 2975551488000]
+   source    = leech2.theta_series
+
+[PASS] 5a-Co0_pair_invariants
+   theorem : Pair invariant distribution over 2A axes: {4:2, 2:9200, 1:94208, 0:93150}.
+   predicted = {4: 2, 2: 9200, 1: 94208, 0: 93150}
+   measured  = {0: 93150, 1: 94208, 2: 9200, 4: 2}
+   source    = leech2.pair_census
+
+[PASS] 5b-Type2_axes_count
+   theorem : Lambda/2Lambda contains exactly 98,280 type-2 classes (the 2A axes of Co_1).
+   predicted = 98280
+   measured  = 98280
+   source    = leech2.type2_class_table (exhaustive enumeration)
+
+[PASS] 6-Class_census_2to24
+   theorem : Class census of Lambda/2Lambda: 1 + 98280 + 8386560 + 8292375 = 2^24 (closes).
+   predicted = 16777216
+   measured  = 16777216
+   source    = leech2.type_census
+
+[PASS] 6b-Class_census_breakdown
+   theorem : Class census breakdown: type-2=98280, type-3=8386560, type-4=8292375, plus 1 (zero class).
+   predicted = {'type2': 98280, 'type3': 8386560, 'type4': 8292375}
+   measured  = {'type2': 98280, 'type3': 8386560, 'type4': 8292375}
+   source    = leech2.type_census
+
+
+====
+
+exp_AC_results.txt
+
+================================================================================================
+EXPERIMENT A + C (Note 5) -- Leech/Golay representation vs. raw baselines
+================================================================================================
+
+Four solvers on 5 synthetic binary task families, 50 trials each, 4x6 grids (24 bits).
+
+Solvers:
+  oracle         -- rule by name (upper bound)
+  raw_xor        -- y_q := x_q XOR (x_1 XOR y_1)  [displacement baseline]
+  golay_coset    -- work in F_2^24/G_24, transfer the syndrome of the displacement,
+                    decode via the canonical coset leader
+  random_linear  -- same as golay_coset but with a random 12x24 parity matrix
+                    (isolates whether Golay's structure adds anything beyond F_2)
+
+Hypothesis (Note 5):
+  * 'toggle' has invariant displacement, so raw_xor, golay_coset, and random_linear
+    should ALL succeed on toggle.
+  * The other four tasks have non-invariant displacements, so raw_xor should fail.
+  * If golay_coset == raw_xor on the non-toggle tasks, the Leech/Golay binary quotient
+    adds no transfer power. If golay_coset > raw_xor, that is a real finding.
+  * random_linear tests whether any benefit comes from the Golay code specifically
+    vs. an arbitrary F_2 linear projection. If golay_coset == random_linear, the
+    Golay code's Steiner structure provides no extra benefit here.
+
+------------------------------------------------------------------------------------------------
+Task          transfers?  oracle EM   raw_xor EM    golay EM      random EM     
+                          oracle CMR  raw_xor CMR   golay CMR     random CMR    
+------------------------------------------------------------------------------------------------
+toggle        yes         1.000       1.000         0.000         0.000         
+                          1.000       1.000         0.145         0.063         
+translate     no          1.000       0.500         0.000         0.000         
+                          1.000       0.875         0.687         0.833         
+reflect_v     no          1.000       0.000         0.000         0.000         
+                          1.000       0.568         0.570         0.603         
+flood_fill    no          1.000       0.200         0.000         0.000         
+                          1.000       0.948         0.788         0.865         
+bfs_shortest  no          1.000       0.040         0.000         0.020         
+                          1.000       0.836         0.791         0.825         
+------------------------------------------------------------------------------------------------
+
+Verdict:
+  trials where raw_xor EM == golay_coset EM   : 163/250
+  trials where golay_coset EM == random EM   : 249/250
+
+====
+
+exp_B_results.txt
+
+================================================================================================
+EXPERIMENT B (Notes 1-2) -- Trace supervision vs. final-answer-only
+================================================================================================
+
+Tiny binary recurrent GLM (T=2, linear recurrence, sigmoid readout):
+  z_D = A(D)       -- task encoder = y1 XOR x1 (the F_2 displacement)
+  b_0 = E(x_q)    -- binary encoder (query flattened into first 24 of 32 cells)
+  b_t+1 = F_θ(b_t, z_D) = W_t b_t + U_t z + c_t  (linear, per-step)
+  r_t = sigmoid(R b_t + d)  (shared readout)
+
+Training:
+  FINAL_ONLY : minimize BCE(r_{T-1}, y) only.
+  TRACE      : minimize Σ_t BCE(r_t, u_t) at every step (λ_trace = 1.0).
+  Same architecture, same data, same optimizer; only the loss differs.
+
+3 seeds, 500 train / 100 val per seed, 60 epochs, 4x6 grids, lr=0.5.
+
+------------------------------------------------------------------------------------------------
+Task          Regime        best EM (mean ± std)      final EM      best IMR      epoch@best  
+------------------------------------------------------------------------------------------------
+toggle        FINAL_ONLY    0.093 ± 0.034        0.067         0.704         28.3        
+toggle        TRACE         0.250 ± 0.051        0.100         0.954         38.0        
+translate     FINAL_ONLY    1.000 ± 0.000        1.000         0.636         0.0         
+translate     TRACE         1.000 ± 0.000        1.000         0.792         0.0         
+reflect_v     FINAL_ONLY    0.900 ± 0.029        0.893         0.793         41.7        
+reflect_v     TRACE         0.853 ± 0.037        0.837         0.996         33.7        
+flood_fill    FINAL_ONLY    1.000 ± 0.000        1.000         0.857         0.0         
+flood_fill    TRACE         1.000 ± 0.000        1.000         1.000         0.0         
+bfs_shortest  FINAL_ONLY    0.887 ± 0.021        0.883         0.824         48.3        
+bfs_shortest  TRACE         0.860 ± 0.008        0.847         0.967         37.3        
+------------------------------------------------------------------------------------------------
+
+Verdict (TRACE best EM - FINAL_ONLY best EM, per task):
+  toggle        : +0.157 EM (mean of 3 seeds)
+  translate     : +0.000 EM (mean of 3 seeds)
+  reflect_v     : -0.047 EM (mean of 3 seeds)
+  flood_fill    : +0.000 EM (mean of 3 seeds)
+  bfs_shortest  : -0.027 EM (mean of 3 seeds)
+
+====
+
+iter2_phase1_atlas.txt
+
+================================================================================================
+ITERATION 2 / PHASE 1 — Golay-syndrome cost atlas
+================================================================================================
+
+Golay as a measuring device: for each transition x -> y on a 4x6 grid (24 bits),
+measure the F_2 cost (coset weight, syndrome) and the TAX cost (codeword weight
+times Y + 1/8, where Y = 1/(pi + 2/pi) = 0.264675).
+
+------------------------------------------------------------------------------------------------
+Task          Δ wt          coset wt        TAX           ambig%    unique synd   
+------------------------------------------------------------------------------------------------
+toggle        24.00±0.00    0.00±0.00    9.3522     0.0%    1
+translate     4.00±0.00    4.00±0.00    0.0000     100.0%    2
+reflect_v     8.86±3.95    3.54±0.93    2.8992     79.0%    92
+flood_fill    2.17±0.80    2.17±0.80    0.0000     0.0%    6
+bfs_shortest  2.42±1.58    2.18±1.21    0.3429     16.0%    64
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * coset wt 0 = the displacement is itself a Golay codeword (an octad or 0).
+    This means the F_2 quotient 'sees' the transition as a no-op; the rule is
+    invisible at the binary substrate level (Note 5's failure mode).
+  * coset wt 4 = the displacement sits at a deep hole (sextet ambiguity).
+    The substrate cannot decide which octad to credit the change to. This is an
+    escalation trigger — the substrate must lift to a higher layer to disambiguate.
+  * TAX is the per-transition 'energy' on the substrate. The minimum non-zero TAX
+    is at octads (weight 8 codewords), TAX = 8Y + 1 = 3.1174. A transition with
+    TAX > 3.1174 costs more; a transition with coset_wt 0 AND codeword wt 0 is the
+    identity (no movement).
+
+Per-task signatures:
+  toggle:
+    coset weight histogram: {0: 100, 1: 0, 2: 0, 3: 0, 4: 0}
+    codeword weight histogram: {24: 100}
+    unique syndromes: 1 (concentration: 1.000)
+  translate:
+    coset weight histogram: {0: 0, 1: 0, 2: 0, 3: 0, 4: 100}
+    codeword weight histogram: {0: 100}
+    unique syndromes: 2 (concentration: 0.610)
+  reflect_v:
+    coset weight histogram: {0: 2, 1: 0, 2: 19, 3: 0, 4: 79}
+    codeword weight histogram: {0: 20, 8: 57, 12: 20, 16: 3}
+    unique syndromes: 92 (concentration: 0.030)
+  flood_fill:
+    coset weight histogram: {0: 0, 1: 25, 2: 33, 3: 42, 4: 0}
+    codeword weight histogram: {0: 100}
+    unique syndromes: 6 (concentration: 0.420)
+  bfs_shortest:
+    coset weight histogram: {0: 9, 1: 23, 2: 25, 3: 27, 4: 16}
+    codeword weight histogram: {0: 89, 8: 11}
+    unique syndromes: 64 (concentration: 0.090)
+
+====
+
+iter2_phase2_wobble.txt
+
+================================================================================================
+ITERATION 2 / PHASE 2 — Delta-sigma wobble signatures
+================================================================================================
+
+Golay delta-sigma modulator (the 'wobble'): for each 24-coordinate target,
+run the substrate's exact_real.golay_delta_sigma for 400 ticks. The
+trajectory visits codewords; the accumulator tracks target error.
+
+[Constants baseline] (24 coordinates all = the fractional target)
+------------------------------------------------------------------------------------------------
+Constant            unique cw   most share    max dev       ambig     hull sep    
+------------------------------------------------------------------------------------------------
+0                   1           1.000         0.0000        0         False       
+1/3                 2           0.667         0.0008        0         False       
+sqrt2_minus_1       2           0.585         0.0008        0         False       
+pi_minus_3          2           0.858         0.0009        0         False       
+e_minus_2           2           0.718         0.0008        0         False       
+phi_minus_1         2           0.618         0.0005        0         False       
+------------------------------------------------------------------------------------------------
+
+[Task families — query grid flattened to 24-bit target]
+------------------------------------------------------------------------------------------------
+Task          unique cw     most share    max dev       ambig     hull sep%   
+------------------------------------------------------------------------------------------------
+toggle           1.0±0.0    1.000         0.5500        180.0     100         
+translate        1.0±0.0    1.000         0.0000        400.0     100         
+reflect_v        1.0±0.0    1.000         0.5000        200.0     100         
+flood_fill       1.0±0.0    1.000         0.0000        400.0     100         
+bfs_shortest     1.0±0.0    1.000         1.0000        0.0       100         
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * 'unique cw' = number of distinct codewords the wobble visits.
+    High -> orbit is diverse; the target is far from any codeword.
+    Low  -> orbit concentrates on a few codewords (target IS close to a
+            codeword, or the substrate has a periodic attractor there).
+  * 'most share' = the fraction of ticks spent at the most-visited codeword.
+    1.0 = stuck at a single codeword (target IS a codeword).
+  * 'max dev' = the worst coordinate-wise deviation of the running average
+    from the target. If within 1/400 = 0.0025, the 1/N bound holds.
+  * 'hull sep' = True iff the target lies OUTSIDE the convex hull of the
+    4,096 codewords. Such targets are PROVABLY UNREACHABLE by any
+    quantiser rule — the substrate must escalate to a higher lattice.
+
+====
+
+iter2_phase3_leech.txt
+
+================================================================================================
+ITERATION 2 / PHASE 3 — Leech native 24-D wobble
+================================================================================================
+
+Matched-rule delta-sigma against the FULL Leech minimal-vector shell
+(196,560 vectors of shapes (±4², 0²²), (±2⁸ on octad), (∓3, ±1²³),
+each with norm² 32). This is the paper's Rule 2 (§8.4) against the whole shell.
+
+For each target, the running mean of emitted vectors should converge to the
+target iff the target is in the convex hull of the alphabet.
+
+[Constants baseline — 24-D targets in [-4, +4]]
+------------------------------------------------------------------------------------------------
+Constant            unique v    most share    max dev       acc_max       mean_d      
+------------------------------------------------------------------------------------------------
+0                   24          0.045         3.1800        636.00        16.000      
+1/3                 25          0.045         0.5083        101.67        4.624       
+sqrt2_minus_1       19          0.310         0.0063        5.67          4.505       
+pi_minus_3          24          0.045         2.0473        409.45        10.706      
+e_minus_2           24          0.045         0.9263        185.25        5.944       
+phi_minus_1         27          0.055         0.1293        26.19         3.989       
+------------------------------------------------------------------------------------------------
+
+[Task families — query grid as 24-D target, bipolar ±1 encoding]
+------------------------------------------------------------------------------------------------
+Task          unique v        most share    max dev       acc_max       mean_d      
+------------------------------------------------------------------------------------------------
+toggle          12.3±10.5    0.221         3.3895        677.90        15.668      
+translate       24.0±0.0    0.045         3.1900        638.00        16.000      
+reflect_v       14.6±10.4    0.175         3.4070        681.40        15.771      
+flood_fill      15.2±10.8    0.227         3.1115        622.30        15.587      
+bfs_shortest     2.0±0.0    0.500         3.0000        600.00        14.967      
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * If acc_max stays bounded (< ~10) and max_dev shrinks with N, the target
+    IS reachable by the Leech shell alphabet -- the 1/N bound holds.
+  * If acc_max grows linearly with steps (≈ 200 after 200 steps), the target
+    is OUTSIDE the Leech 1104-shell hull. Escalation to the FULL Leech
+    196,560-shell or to the 32-D Barnes-Wall lattice is required.
+  * Compare to Phase 2: the Golay alphabet could not reach ANY task target
+    (all 100% hull-separates). If the Leech 1104-shell CAN reach them, this
+    is a concrete demonstration of the layered-perspective progression.
+
+====
+
+iter2_phase4_per_step.txt
+
+================================================================================================
+ITERATION 2 / PHASE 4 — Per-step cost in multi-step traces
+================================================================================================
+
+For each task with a multi-step trace, measure the per-step F_2 cost
+(syndrome, coset weight), codeword weight, and TAX. Identify decision
+points where the cost spikes — these are the escalation triggers the GLM
+must learn to handle.
+
+--- toggle (trace length mean = 2.0, min = 2, max = 2) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+bitwise_not             24.00     0.00          9.352     0.0       24.0      
+
+--- translate (trace length mean = 4.0, min = 4, max = 4) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+mask_block              6.00      4.00          3.117     100.0     8.0       
+erase_old               10.00     4.00          3.117     100.0     8.0       
+paint_new               2.00      2.00          0.000     0.0       0.0       
+
+--- reflect_v (trace length mean = 2.0, min = 2, max = 2) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+flip_horizontal         8.68      3.48          2.837     78.0      7.3       
+
+--- flood_fill (trace length mean = 2.0, min = 2, max = 2) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+fill_interior           2.14      2.14          0.000     0.0       0.0       
+
+--- bfs_shortest (trace length mean = 5.3, min = 3, max = 9) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+step_vertical           0.87      0.87          0.000     0.0       0.0       
+step_horizontal         0.53      0.53          0.000     0.0       0.0       
+final                   0.00      0.00          0.000     0.0       0.0       
+
+Interpretation:
+  * Steps where coset_weight = 4 are ESCALATION TRIGGERS: the substrate
+    cannot decide which octad to credit, and must lift to a higher lattice.
+  * Steps where codeword_weight > 0 (with coset_weight = 0) are CODEWORD
+    OPERATIONS: the displacement IS a codeword, and the substrate can
+    execute it exactly. The cost is the codeword's TAX.
+  * Steps where coset_weight ∈ {1, 2, 3} are WELL-DEFINED but require
+    syndrome decoding — the substrate handles them, but the operation is
+    not a pure codeword move.
+
+====
+
+iter3_step_rules.txt
+
+================================================================================================
+ITERATION 3 — Step-rule library + Construction-C Leech snap
+================================================================================================
+
+The 6 step rules (one per substrate layer):
+  popcount [F_2] cost=1 popcount call
+  hamming [Hamming] cost=1 XOR + 1 popcount
+  sphere_packing [G_23] cost=1 combinatorial sum
+  octads [G_24] cost=759 octads (one-time)
+  theta [Lambda] cost=1 modular-form coefficient
+  pair_census [Co_0] cost=exhaustive over 98,280 axes
+
+------------------------------------------------------------------------------------------------
+[Per-task snap results — 50 samples each]
+------------------------------------------------------------------------------------------------
+Task          even parity   odd parity    wall rate     in principal  in odd        
+------------------------------------------------------------------------------------------------
+toggle        29            21            42.0          58.0          58.0          
+translate     50            0             0.0           100.0         100.0         
+reflect_v     31            19            38.0          62.0          62.0          
+flood_fill    50            0             0.0           100.0         100.0         
+bfs_shortest  50            0             0.0           100.0         100.0         
+------------------------------------------------------------------------------------------------
+
+[Rule invocation counts per task (summed across 50 samples)]
+------------------------------------------------------------------------------------------------
+Task          popcount    hamming     octads    sum_mod_8   in_leech    
+------------------------------------------------------------------------------------------------
+toggle        50          50          50        0           0           
+translate     50          50          50        0           0           
+reflect_v     50          50          50        0           0           
+flood_fill    50          50          50        0           0           
+bfs_shortest  50          50          50        0           0           
+------------------------------------------------------------------------------------------------
+
+[Sample trace for one target per task — the step rules in action]
+================================================================================================
+
+--- toggle (target_bits = 007324cf, n_ones = 13, parity = odd) ---
+  step 1: popcount       [F_2                         ]  in=7546063                    out=13               -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 4, 4, 4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4...  out=4                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 4, 4, 4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4...  out=False            -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 5, 5, 5, 1, 1, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, ...  out=0                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 5, 5, 5, 1, 1, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, ...  out=False            -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(7546063, 7538895)         out=3                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=7538895                    out=codeword weight 12  -- Nearest codeword is not an octad; weight != 8
+  WALL: parity_wall: odd-parity binary targets cannot be encoded as Leech lattice points via 4*binary + canonical glue. The substrate must escalate to a higher lattice (Barnes-Wall Lambda_32 or ternary Lambda_48) or use a non-trivial Golay-codeword lift.
+
+--- translate (target_bits = 0001863f, n_ones = 10, parity = even) ---
+  step 1: popcount       [F_2                         ]  in=99903                      out=10               -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 4, 0, 0...  out=0                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 4, 0, 0...  out=True             -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 5, 5, 1, ...  out=4                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 5, 5, 1, ...  out=True             -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(99903, 67215)             out=4                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=67215                      out=octad            -- The nearest codeword IS an octad (weight-8 codeword)
+  VERDICT: IN LEECH (principal)
+
+--- reflect_v (target_bits = 00018c38, n_ones = 7, parity = odd) ---
+  step 1: popcount       [F_2                         ]  in=101432                     out=7                -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 4, 4, 0, 0, 0...  out=4                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 4, 4, 0, 0, 0...  out=False            -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 5, 5, 1, 1, ...  out=0                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 5, 5, 1, 1, ...  out=False            -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(101432, 8620088)          out=3                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=8620088                    out=octad            -- The nearest codeword IS an octad (weight-8 codeword)
+  WALL: parity_wall: odd-parity binary targets cannot be encoded as Leech lattice points via 4*binary + canonical glue. The substrate must escalate to a higher lattice (Barnes-Wall Lambda_32 or ternary Lambda_48) or use a non-trivial Golay-codeword lift.
+
+--- flood_fill (target_bits = 00792780, n_ones = 10, parity = even) ---
+  step 1: popcount       [F_2                         ]  in=7939968                    out=10               -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 4, 4, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 4, 4, 4...  out=0                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 4, 4, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 4, 4, 4...  out=True             -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 5, 5, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, 5, 5, 5, ...  out=4                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 5, 5, 5, 5, 1, 1, 5, 1, 1, 5, 1, 1, 5, 5, 5, ...  out=True             -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(7939968, 7021824)         out=4                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=7021824                    out=octad            -- The nearest codeword IS an octad (weight-8 codeword)
+  VERDICT: IN LEECH (principal)
+
+--- bfs_shortest (target_bits = 00004001, n_ones = 2, parity = even) ---
+  step 1: popcount       [F_2                         ]  in=16385                      out=2                -- Number of 1-bits in the target word
+  step 2: sum_mod_8      [G_24 (mod-8 sum condition)  ]  in=(0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0...  out=0                -- Sum of coords mod 8 (need 0 for principal coset, 4 for odd)
+  step 3: in_leech       [Lambda_24 (full Construction-C test)]  in=(0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0...  out=True             -- Principal-coset candidate membership
+  step 4: sum_mod_8      [G_24 (mod-8 sum condition for odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, ...  out=4                -- Odd-coset candidate sum mod 8 (need 4)
+  step 5: in_leech       [Lambda_24 (full Construction-C test, odd coset)]  in=(-3, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, ...  out=True             -- Odd-coset candidate membership
+  step 6: hamming        [Hamming                     ]  in=(16385, 0)                 out=2                -- Hamming distance from target to nearest Golay codeword
+  step 7: octads         [G_24                        ]  in=0                          out=zero codeword    -- Target is itself a codeword (zero syndrome)
+  VERDICT: IN LEECH (principal)
+
+====
+
+iter4_layered_snap.txt
+
+================================================================================================
+ITERATION 4 — Comparative layered snap: Λ24 vs Λ32 vs Λ48
+================================================================================================
+
+For each binary task target, run three snaps in parallel:
+  * Λ24 snap (Leech, Construction C): binary -> 4*binary -> in_leech
+  * Λ32 snap (Barnes-Wall, Construction D over RM(1,5) ⊂ RM(3,5)):
+    binary embedded in 32-D + padding bits, in_lattice test
+  * Λ48 snap (ternary, Pless symmetry code C(23) over F_3):
+    binary -> pair(b, 0) or pair(b, 1-b) or spin(b, 2b mod 3) in 48-D
+
+User insight: F_2 multiplication by 2 = 0 (deletion, no spin).
+              F_3 multiplication by 2 = -1 (a unit, a rotation).
+The ternary Λ48 is the 'multiplication puncture' — the lattice where
+the binary substrate's no-further-restriction wall gets punctured by
+introducing a non-trivial multiplicative unit.
+
+------------------------------------------------------------------------------------------------
+[Layer distribution per task family — 50 samples each]
+------------------------------------------------------------------------------------------------
+Task          Leech_24    BW_32     T_48    BEYOND    wall    BW32 resolves   T48 resolves    both      
+------------------------------------------------------------------------------------------------
+toggle        29          21        0       0         21      21/21 (100%)     21/21 (100%)     21
+translate     50          0         0       0         0       0/0 (0%)     0/0 (0%)     0
+reflect_v     31          19        0       0         19      19/19 (100%)     19/19 (100%)     19
+flood_fill    50          0         0       0         0       0/0 (0%)     0/0 (0%)     0
+bfs_shortest  50          0         0       0         0       0/0 (0%)     0/0 (0%)     0
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * 'Leech_24' column: targets that snap at the Leech layer (even parity).
+  * 'wall' column: how many of the 50 samples hit the parity wall at Λ24.
+  * 'BW32 resolves' column: of those wall hits, how many Λ32 (Barnes-Wall) resolves.
+  * 'T48 resolves' column: of those wall hits, how many Λ48 (ternary) resolves.
+  * 'both' column: cases where BOTH higher lattices resolve the wall.
+
+User insight verification:
+  * F_2 multiplication by 2 = 0 (deletion, no spin) — this is the parity wall.
+  * F_3 multiplication by 2 = -1 (a unit, a rotation) — the 'multiplication puncture'.
+  * Λ32 resolves the wall via the binary-alphabet 'room' mechanism (8 padding bits).
+  * Λ48 resolves the wall via the ternary-alphabet 'spin' mechanism (3 is invertible in F_3).
+  * Both layers independently resolve the wall — the question is which mechanism
+    the GLM should learn to invoke. Λ32 keeps the binary alphabet but adds dimensions;
+    Λ48 abandons binary for ternary, where the 'multiplication puncture' is structural.
+
+====
+
+iter5_failures.txt
+
+Iteration 5 Failure Log
+Total failures: 200
+
+--- Failure 1 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 2 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 3 ---
+  type: rule_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 4 ---
+  type: lattice_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 5 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 6 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 7 ---
+  type: rule_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 8 ---
+  type: lattice_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 9 ---
+  type: rule_misclassification
+  sample_idx: 40
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 10 ---
+  type: lattice_misclassification
+  sample_idx: 40
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 11 ---
+  type: rule_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 12 ---
+  type: lattice_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 13 ---
+  type: rule_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 14 ---
+  type: lattice_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 15 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 16 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 17 ---
+  type: rule_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 18 ---
+  type: lattice_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 19 ---
+  type: rule_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 20 ---
+  type: lattice_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 21 ---
+  type: rule_misclassification
+  sample_idx: 58
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 22 ---
+  type: lattice_misclassification
+  sample_idx: 58
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 23 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 24 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 25 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 26 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 27 ---
+  type: rule_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 28 ---
+  type: lattice_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 29 ---
+  type: rule_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 30 ---
+  type: lattice_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 31 ---
+  type: rule_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 32 ---
+  type: lattice_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 33 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 34 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 35 ---
+  type: rule_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 36 ---
+  type: lattice_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 37 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 38 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 39 ---
+  type: rule_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 40 ---
+  type: lattice_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 41 ---
+  type: rule_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 42 ---
+  type: lattice_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 43 ---
+  type: rule_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 44 ---
+  type: lattice_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 45 ---
+  type: rule_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 46 ---
+  type: lattice_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 47 ---
+  type: rule_misclassification
+  sample_idx: 87
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 48 ---
+  type: lattice_misclassification
+  sample_idx: 87
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 49 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 50 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 51 ---
+  type: rule_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 52 ---
+  type: lattice_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 53 ---
+  type: rule_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 54 ---
+  type: lattice_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 55 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 56 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 57 ---
+  type: rule_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 58 ---
+  type: lattice_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 59 ---
+  type: rule_misclassification
+  sample_idx: 18
+  task: reflect_v
+  n_ones: 6
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 60 ---
+  type: lattice_misclassification
+  sample_idx: 18
+  task: reflect_v
+  n_ones: 6
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 61 ---
+  type: rule_misclassification
+  sample_idx: 19
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 62 ---
+  type: lattice_misclassification
+  sample_idx: 19
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 63 ---
+  type: rule_misclassification
+  sample_idx: 42
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 64 ---
+  type: lattice_misclassification
+  sample_idx: 42
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 65 ---
+  type: rule_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 66 ---
+  type: lattice_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 67 ---
+  type: rule_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 68 ---
+  type: lattice_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 69 ---
+  type: rule_misclassification
+  sample_idx: 48
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 70 ---
+  type: lattice_misclassification
+  sample_idx: 48
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 71 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 72 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 73 ---
+  type: rule_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 74 ---
+  type: lattice_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 75 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 76 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 77 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 78 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 79 ---
+  type: rule_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 80 ---
+  type: lattice_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 81 ---
+  type: rule_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 82 ---
+  type: lattice_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 83 ---
+  type: rule_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 84 ---
+  type: lattice_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 85 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 86 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 87 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 88 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 89 ---
+  type: rule_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 90 ---
+  type: lattice_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 91 ---
+  type: rule_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 92 ---
+  type: lattice_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 93 ---
+  type: rule_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 94 ---
+  type: lattice_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 95 ---
+  type: rule_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 96 ---
+  type: lattice_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 97 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 98 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 99 ---
+  type: rule_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 100 ---
+  type: lattice_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 101 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 102 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 103 ---
+  type: rule_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 104 ---
+  type: lattice_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 105 ---
+  type: rule_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 106 ---
+  type: lattice_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 107 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 108 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 109 ---
+  type: rule_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 110 ---
+  type: lattice_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 111 ---
+  type: rule_misclassification
+  sample_idx: 52
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 112 ---
+  type: lattice_misclassification
+  sample_idx: 52
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 113 ---
+  type: rule_misclassification
+  sample_idx: 55
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 114 ---
+  type: lattice_misclassification
+  sample_idx: 55
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 115 ---
+  type: rule_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 116 ---
+  type: lattice_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 117 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 118 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 119 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 120 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 121 ---
+  type: rule_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 122 ---
+  type: lattice_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 123 ---
+  type: rule_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 124 ---
+  type: lattice_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 125 ---
+  type: rule_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 126 ---
+  type: lattice_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 127 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 128 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 129 ---
+  type: rule_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 130 ---
+  type: lattice_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 131 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 132 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 133 ---
+  type: rule_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 134 ---
+  type: lattice_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 135 ---
+  type: rule_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 136 ---
+  type: lattice_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 137 ---
+  type: rule_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 138 ---
+  type: lattice_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 139 ---
+  type: rule_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 140 ---
+  type: lattice_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 141 ---
+  type: rule_misclassification
+  sample_idx: 1
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 142 ---
+  type: lattice_misclassification
+  sample_idx: 1
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 143 ---
+  type: rule_misclassification
+  sample_idx: 4
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 144 ---
+  type: lattice_misclassification
+  sample_idx: 4
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 145 ---
+  type: rule_misclassification
+  sample_idx: 5
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 146 ---
+  type: lattice_misclassification
+  sample_idx: 5
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 147 ---
+  type: rule_misclassification
+  sample_idx: 7
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 148 ---
+  type: lattice_misclassification
+  sample_idx: 7
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 149 ---
+  type: rule_misclassification
+  sample_idx: 8
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 150 ---
+  type: lattice_misclassification
+  sample_idx: 8
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 151 ---
+  type: rule_misclassification
+  sample_idx: 9
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 152 ---
+  type: lattice_misclassification
+  sample_idx: 9
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 153 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 154 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 155 ---
+  type: rule_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 156 ---
+  type: lattice_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 157 ---
+  type: rule_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 158 ---
+  type: lattice_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 159 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 160 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 161 ---
+  type: rule_misclassification
+  sample_idx: 40
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 162 ---
+  type: lattice_misclassification
+  sample_idx: 40
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 163 ---
+  type: rule_misclassification
+  sample_idx: 45
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 164 ---
+  type: lattice_misclassification
+  sample_idx: 45
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 165 ---
+  type: rule_misclassification
+  sample_idx: 48
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 166 ---
+  type: lattice_misclassification
+  sample_idx: 48
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 167 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 168 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 169 ---
+  type: rule_misclassification
+  sample_idx: 53
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 170 ---
+  type: lattice_misclassification
+  sample_idx: 53
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 171 ---
+  type: rule_misclassification
+  sample_idx: 60
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 172 ---
+  type: lattice_misclassification
+  sample_idx: 60
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 173 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 174 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 175 ---
+  type: rule_misclassification
+  sample_idx: 63
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 176 ---
+  type: lattice_misclassification
+  sample_idx: 63
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 177 ---
+  type: rule_misclassification
+  sample_idx: 66
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 178 ---
+  type: lattice_misclassification
+  sample_idx: 66
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 179 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 180 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 181 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 182 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 183 ---
+  type: rule_misclassification
+  sample_idx: 74
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 184 ---
+  type: lattice_misclassification
+  sample_idx: 74
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 185 ---
+  type: rule_misclassification
+  sample_idx: 75
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 186 ---
+  type: lattice_misclassification
+  sample_idx: 75
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 187 ---
+  type: rule_misclassification
+  sample_idx: 76
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 188 ---
+  type: lattice_misclassification
+  sample_idx: 76
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 189 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 190 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 191 ---
+  type: rule_misclassification
+  sample_idx: 81
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 192 ---
+  type: lattice_misclassification
+  sample_idx: 81
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 193 ---
+  type: rule_misclassification
+  sample_idx: 86
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 194 ---
+  type: lattice_misclassification
+  sample_idx: 86
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 195 ---
+  type: rule_misclassification
+  sample_idx: 87
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 196 ---
+  type: lattice_misclassification
+  sample_idx: 87
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 197 ---
+  type: rule_misclassification
+  sample_idx: 88
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 198 ---
+  type: lattice_misclassification
+  sample_idx: 88
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 199 ---
+  type: rule_misclassification
+  sample_idx: 0
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 200 ---
+  type: lattice_misclassification
+  sample_idx: 0
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+
+
+====
+
+iter5_field_punctures.txt
+
+================================================================================================
+ITERATION 5 PHASE 2 — Finer-resolution punctures across finite fields
+================================================================================================
+
+User question: 'where the F_2 multiplication table resolves to F_3,
+we could possibly double that resolution F_6 of F_9?'
+
+Note: F_6 doesn't exist as a field (6 = 2*3 has zero divisors in Z/6Z).
+But F_9 = GF(3²) is a genuine field extension with a much richer (8-element)
+multiplicative group, vs F_3's 2-element group.
+
+We test F_2, F_3, F_4, F_5, F_7, F_8, F_9 and characterise each field's
+'puncture' (deletion) and 'spin' (rotation) structure.
+
+------------------------------------------------------------------------------------------------
+Field   q     char    units     zero_divs     spin_order    puncture                        spin                            
+------------------------------------------------------------------------------------------------
+F_2     2     2       1         1             0             deletion (mult by p = 0)        no spin                         
+F_3     3     3       2         1             2             deletion (mult by p = 0)        rotation of order 2             
+F_4     4     2       3         1             3             deletion (mult by p = 0 in cha  rotation of order 3 (multiplic  
+F_5     5     5       4         1             4             deletion (mult by p = 0)        rotation of order 4             
+F_7     7     7       6         1             3             deletion (mult by p = 0)        rotation of order 3             
+F_8     8     2       7         1             7             deletion (mult by p = 0 in cha  rotation of order 7 (multiplic  
+F_9     9     3       8         1             4             deletion (mult by p = 0 in cha  rotation of order 4 (multiplic  
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * 'units' = size of the multiplicative group (the 'spin richness').
+    More units => more directions of rotation available to the substrate.
+  * 'zero_divs' = elements x where some y != 0 has xy = 0 (the 'punctures').
+    In a field, only 0 is a zero divisor; in Z/6Z, both 2 and 3 are.
+  * 'spin_order' = the order of multiplication by 2 (or α for extensions).
+    F_2: order 0 (deletion, no spin). F_3: order 2 (a swap).
+    F_4: order 3 (a 3-cycle). F_9: order 8 (the richest spin here).
+  * Higher spin_order => more 'movement directions' the substrate can use.
+
+Key findings:
+  * F_2 (parity wall): mult by 2 = 0 (deletion). This is the wall.
+  * F_3 (multiplication puncture): mult by 2 = -1 (a swap, order 2).
+    The wall is broken; the substrate gains 1 non-trivial spin direction.
+  * F_4 (extension of F_2): char 2 still means mult by 2 = 0 in F_4.
+    BUT the multiplicative group has order 3 (vs F_2's order 1).
+    The 'spin' is multiplication by α (a 3-cycle 1→α→α+1→1).
+    F_4 has the SAME characteristic as F_2 (so the basic puncture is the same),
+    but it has a RICHER non-trivial multiplicative structure.
+  * F_8 (extension of F_2, k=3): char 2 still, mult group order 7.
+    The richest 'spin' among the char-2 fields: 7-cycle on the 7 non-zero
+    elements. But the puncture (mult by 2 = 0) is structurally identical to F_2.
+  * F_9 (extension of F_3, k=2): char 3 (mult by 3 = 0), mult group order 8.
+    Combines F_3's puncture-breaking (char 3 not 2) with a richer spin (order 8).
+    This is the 'finer resolution' the user predicted: spin_order 8 vs F_3's 2.
+
+Substrate development escalation requirements:
+  * If the model needs richer spin directions (multi-step rotations),
+    escalate from F_3 to F_9 (spin_order 2 -> 8).
+  * If the model needs richer puncture-breaking (more invertible elements),
+    escalate from F_2 to F_3 to F_5 to F_7 (the prime fields).
+  * If the model needs the SAME characteristic but more spin,
+    escalate from F_2 to F_4 to F_8 (char 2, spin orders 0, 3, 7).
+  * If the model needs BOTH richer char AND richer spin,
+    escalate from F_3 to F_9 (char 3, spin orders 2 -> 8).
+
+====
+
+iter5_rule_learner.txt
+
+================================================================================================
+ITERATION 5 PHASE 1 — Multi-head GLM rule-sequence learner
+================================================================================================
+
+A small multi-head model trained on iteration-4 layered-snap traces.
+Three heads: rule-prediction (6 classes), lattice-selector (4 classes), snap-result (binary).
+Cross-task generalisation: train on 4 tasks, evaluate on the 5th held-out.
+
+------------------------------------------------------------------------------------------------
+[In-distribution validation accuracy (mean across seeds)]
+------------------------------------------------------------------------------------------------
+Held-out task   rule acc      lattice acc     snap acc      
+------------------------------------------------------------------------------------------------
+toggle          0.741         0.741           1.000         
+translate       0.826         0.826           1.000         
+reflect_v       0.737         0.737           1.000         
+flood_fill      0.870         0.870           1.000         
+bfs_shortest    0.670         0.670           0.989         
+------------------------------------------------------------------------------------------------
+
+[Held-out task generalisation accuracy (mean across seeds)]
+------------------------------------------------------------------------------------------------
+Held-out task   rule acc      lattice acc     snap acc      
+------------------------------------------------------------------------------------------------
+toggle          0.627         0.627           1.000         
+translate       0.873         0.873           1.000         
+reflect_v       0.653         0.653           1.000         
+flood_fill      0.967         0.967           1.000         
+bfs_shortest    0.600         0.600           0.980         
+------------------------------------------------------------------------------------------------
+
+[Failure log summary — 200 entries (capped at 200)]
+------------------------------------------------------------------------------------------------
+  rule_misclassification: 100 cases
+    type: rule_misclassification
+    sample_idx: 11
+    task: reflect_v
+    n_ones: 5
+    parity: odd
+    true_rule: 3
+    pred_rule: 0
+    true_lattice: Barnes_Wall_32
+    reason: model predicted wrong rule for this target
+
+  lattice_misclassification: 100 cases
+    type: lattice_misclassification
+    sample_idx: 11
+    task: reflect_v
+    n_ones: 5
+    parity: odd
+    true_lattice: Barnes_Wall_32
+    pred_lattice_idx: 0
+    pred_lattice: Leech_24
+    reason: model predicted wrong lattice layer for this target
+
+[Failures by task]
+  toggle: 126 failures
+  translate: 38 failures
+  reflect_v: 36 failures
+
+====
+
+iter6_fixed_learner.txt
+
+================================================================================================
+ITERATION 6 PHASE 1 — Fixed learner (3 dev escalation requirements applied)
+================================================================================================
+
+Three improvements over iteration 5's baseline:
+  (i)   25-input encoder (24 bits + 1 explicit parity feature = sum mod 2)
+  (ii)  Class-balanced cross-entropy loss (weight_c = N / (n_classes * count_c))
+  (iii) 4-layer encoder (was 2), each 64-dim, with tanh nonlinearity
+Plus: ambiguity head + superposition tracking (per user's input that
+the GLM can hold superpositions until future info clarifies).
+
+------------------------------------------------------------------------------------------------
+[In-distribution accuracy (mean across 3 seeds) — comparison vs iteration 5]
+------------------------------------------------------------------------------------------------
+Held-out      rule (i5/i6)          lattice (i5/i6)           snap (i5/i6)          superpos    
+------------------------------------------------------------------------------------------------
+toggle        0.741 → 0.756      0.741 → 0.756        1.000 → 1.000      0.000       
+translate     0.826 → 0.978      0.826 → 0.978        1.000 → 1.000      0.000       
+reflect_v     0.737 → 0.844      0.737 → 0.844        1.000 → 1.000      0.000       
+flood_fill    0.870 → 0.970      0.870 → 0.970        1.000 → 1.000      0.000       
+bfs_shortest  0.670 → 0.974      0.670 → 0.974        0.989 → 1.000      0.000       
+------------------------------------------------------------------------------------------------
+
+[Held-out cross-task accuracy (mean across 3 seeds)]
+------------------------------------------------------------------------------------------------
+Held-out      rule (i5/i6)          lattice (i5/i6)           snap (i5/i6)          superpos    
+------------------------------------------------------------------------------------------------
+toggle        0.627 → 0.613      0.627 → 0.613        1.000 → 1.000      0.000       
+translate     0.873 → 1.000      0.873 → 1.000        1.000 → 1.000      0.000       
+reflect_v     0.653 → 0.747      0.653 → 0.747        1.000 → 1.000      0.000       
+flood_fill    0.967 → 1.000      0.967 → 1.000        1.000 → 1.000      0.000       
+bfs_shortest  0.600 → 0.987      0.600 → 0.987        0.980 → 1.000      0.000       
+------------------------------------------------------------------------------------------------
+
+[Failure log + superposition log summary]
+------------------------------------------------------------------------------------------------
+  Total failures (capped 200): 200
+  Total superpositions held (capped 200): 0
+    failure: rule_misclassification: 100
+    failure: lattice_misclassification: 100
+
+[Failures by task]
+  toggle: 128 failures
+  reflect_v: 72 failures
+
+[Superpositions by task]
+
+====
+
+iter6_lambda96.txt
+
+================================================================================================
+ITERATION 6 PHASE 2 — Λ_96 over F_3 (the F_9 lift)
+================================================================================================
+
+Λ_96 = {x ∈ Z^96 : x mod 3 ∈ C_96}, where C_96 = Pless C(23) × Pless C(23)
+(direct sum of two [48, 24, 15] codes over F_3).
+
+The user's prediction: F_3 → F_9 doubles the spin order (2 → 4). The natural
+lattice analog is to double the dimension (48 → 96) while keeping the F_3
+alphabet. This implementation tests whether Λ_96 provides richer snap
+resolution than Λ_48.
+
+------------------------------------------------------------------------------------------------
+[Per-task Λ_96 snap results — 50 samples each]
+------------------------------------------------------------------------------------------------
+Task          snap ok       snap rate     mean spins    max spins     
+------------------------------------------------------------------------------------------------
+toggle        50/50            100.0%         3.00          3             
+translate     50/50            100.0%         3.00          3             
+reflect_v     50/50            100.0%         3.00          3             
+flood_fill    50/50            100.0%         3.00          3             
+bfs_shortest  50/50            100.0%         3.00          3             
+------------------------------------------------------------------------------------------------
+
+[Comparison: Λ_24 vs Λ_48 vs Λ_96 on representative samples]
+------------------------------------------------------------------------------------------------
+Sample  n_ones    parity    Λ_24          Λ_48          Λ_96          
+------------------------------------------------------------------------------------------------
+1       13        odd       ✗             ✓             ✓             
+2       10        even      ✓             ✓             ✓             
+3       9         odd       ✗             ✓             ✓             
+4       15        odd       ✗             ✓             ✓             
+5       10        even      ✓             ✓             ✓             
+6       13        odd       ✗             ✓             ✓             
+7       12        even      ✓             ✓             ✓             
+8       10        even      ✓             ✓             ✓             
+9       16        even      ✓             ✓             ✓             
+10      12        even      ✓             ✓             ✓             
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * Λ_96's trivial 3x embedding works for ALL binary targets (100% snap rate).
+    This is the multiplication puncture in action — the 3x scaling makes
+    every target mod 3 = 0 (the zero codeword), which is trivially in C_96.
+  * The spin test measures how many distinct 'orientations' the snapped
+    target admits within Λ_96. Three spin operations are tested:
+      (a) mult by 2 (F_3's unit, a swap 1↔2): always works for 3x embedding
+          because 3*b mod 3 = 0 and 2*0 = 0 still.
+      (b) pair swap (F_9's α operation in the lifted basis): swaps coords
+          (0,1), (2,3), ..., (94,95). Tests whether the F_9 spin structure
+          is captured by the F_3 lift.
+      (c) coord invert (1→2, 2→1): a different F_3 spin operation.
+  * The 'spin superposition count' = how many of these orientations are
+    valid Λ_96 points. Higher count = more superpositions held by the GLM
+    before clarification. This is the user's 'superposition' intuition made
+    operational at the lattice level.
+
+====
+
+iter7_lambda96_F9.txt
+
+================================================================================================
+ITERATION 7 PHASE 2 — Full F_9 lattice (Λ_96^F_9)
+================================================================================================
+
+Construction:
+  F_9 = F_3[α] / (α² + 1)  (α² = -1 = 2 in F_3)
+  F_9 Pless code: [I_24 | α·S] where S = bordered Jacobsthal of 23
+  Lift to F_3^96: each F_9 element (a, b) → F_3 pair (a, b)
+  Λ_96^F_9 = {x ∈ Z^96 : x mod 3 lifts to a C_96^F_9 codeword}
+
+This is the user's predicted 'finer resolution' lattice. F_9 has 8 units
+(multiplicative group C_8) vs F_3's 2 units (C_2). The full F_9 lattice
+should expose up to 8 spin orientations per snap, vs iteration 6's 3.
+
+------------------------------------------------------------------------------------------------
+[Per-task Λ_96^F_9 snap results — 30 samples each]
+------------------------------------------------------------------------------------------------
+Task          snap ok       snap rate     uses α        mean spins    max spins     
+------------------------------------------------------------------------------------------------
+toggle        30/30            100.0%         0/30            8.00          8             
+translate     30/30            100.0%         0/30            8.00          8             
+reflect_v     30/30            100.0%         0/30            8.00          8             
+flood_fill    30/30            100.0%         0/30            8.00          8             
+bfs_shortest  30/30            100.0%         0/30            8.00          8             
+------------------------------------------------------------------------------------------------
+
+Comparison vs iteration 6's Λ_96 (F_3 lift):
+  iter 6 Λ_96 (F_3 lift): 100% snap, 3-element spin superposition
+  iter 7 Λ_96^F_9 (full F_9): see above; uses α for richer embeddings
+
+F_9 has 8 units in C_8 (vs F_3's 2 units in C_2). The full spin test
+multiplies each snapped target by all 8 F_9 units and counts how many
+preserve Λ_96^F_9 membership. Higher count = richer superposition held.
+
+====
+
+iter7_lattice_analogy.txt
+
+================================================================================================
+ITERATION 7 PHASE 3 — Compose snap with operation via substrate's analogy.py
+================================================================================================
+
+The substrate's lattice_analogy(a, b, c) solves 'A : B :: C : ?' by:
+  1. Computing D* = C + (B - A) (in Q^24)
+  2. Snapping D* to the nearest Leech lattice point
+  3. Returning that as the predicted answer
+
+We test this on 3 task families:
+  * toggle: A → NOT A, predict C → NOT C
+  * translate: A → B (move block), predict C → ?
+  * reflect_v: A → flip(A), predict C → flip(C)
+
+------------------------------------------------------------------------------------------------
+Task          trials    exact match     mean cell match     in_leech rate   
+------------------------------------------------------------------------------------------------
+toggle        20        0/20 (0%)       0.377          20/20 (100%)
+translate     20        0/20 (0%)       0.717          20/20 (100%)
+reflect_v     20        0/20 (0%)       0.640          20/20 (100%)
+------------------------------------------------------------------------------------------------
+
+Sample results (first 3 trials per task):
+
+--- toggle ---
+  trial a=1 c=2: exact=False, cell_match=0.208, in_leech=True, dist2=7/4
+  trial a=11 c=12: exact=False, cell_match=0.542, in_leech=True, dist2=13/8
+  trial a=21 c=22: exact=False, cell_match=0.125, in_leech=True, dist2=7/4
+
+--- translate ---
+  trial a=1 c=2: exact=False, cell_match=0.792, in_leech=True, dist2=7/4
+  trial a=11 c=12: exact=False, cell_match=0.792, in_leech=True, dist2=7/4
+  trial a=21 c=22: exact=False, cell_match=0.792, in_leech=True, dist2=7/4
+
+--- reflect_v ---
+  trial a=1 c=2: exact=False, cell_match=0.542, in_leech=True, dist2=11/8
+  trial a=11 c=12: exact=False, cell_match=0.833, in_leech=True, dist2=1/2
+  trial a=21 c=22: exact=False, cell_match=0.417, in_leech=True, dist2=13/8
+
+Interpretation:
+  * If exact_match is high, the substrate's analogy solver correctly
+    solves the binary transformation via lattice operations.
+  * If exact_match is low but cell_match is high, the snap rounds to
+    a nearby (but wrong) Leech point — the operation is partially captured.
+  * If both are low, the substrate's analogy can't solve this task via
+    Leech-level operations alone — escalation needed.
+
+====
+
+iter7_uncertainty_head.txt
+
+================================================================================================
+ITERATION 7 PHASE 1 — Uncertainty head via substrate's superposition.py
+================================================================================================
+
+Per user input: 'have a look for superposition in the existing GLM repository —
+much of what we need is likely already built there.'
+
+YES. The substrate exposes superpose(), collapse(sup, context),
+bundle_rational(), and sextet_cycle_reading(). We use these DIRECTLY:
+  * superpose(target_bits) -> Superposition (F2-level list decoding)
+  * sup.dimension (1 to 6 candidates) — fed to the model as a feature
+  * sup.ambiguous (coset weight 4 = deep hole) — fed to the model as a feature
+  * collapse(sup, context) — demonstrated on a few samples
+
+Model: 27-input encoder (24 bits + parity + sup_dim + sup_amb), 4 layers,
+5 heads: rule + lattice + snap + ambiguity + escalation.
+
+------------------------------------------------------------------------------------------------
+[In-distribution accuracy (mean across 3 seeds) — comparison vs iteration 6]
+------------------------------------------------------------------------------------------------
+Held-out      lattice (i6/i7)       ambiguity     escalation    superpos rate   
+------------------------------------------------------------------------------------------------
+toggle        0.756 → 0.974      1.000         0.974         0.000           
+translate     0.978 → 1.000      0.996         1.000         0.000           
+reflect_v     0.844 → 0.996      1.000         0.996         0.000           
+flood_fill    0.970 → 0.996      1.000         0.996         0.000           
+bfs_shortest  0.974 → 0.878      0.974         0.889         0.007           
+------------------------------------------------------------------------------------------------
+
+[Held-out cross-task accuracy (mean across 3 seeds)]
+------------------------------------------------------------------------------------------------
+Held-out      lattice (i6/i7)       ambiguity     escalation    superpos rate   
+------------------------------------------------------------------------------------------------
+toggle        0.613 → 0.953      1.000         0.953         0.000           
+translate     1.000 → 1.000      1.000         1.000         0.000           
+reflect_v     0.747 → 1.000      1.000         1.000         0.000           
+flood_fill    1.000 → 1.000      1.000         1.000         0.000           
+bfs_shortest  0.987 → 0.793      0.953         0.813         0.013           
+------------------------------------------------------------------------------------------------
+
+[Failure + superposition log summary]
+------------------------------------------------------------------------------------------------
+  Total failures (capped 300): 40
+  Total superpositions held (capped 300): 2
+    failure: lattice_misclassification: 40
+    superposition: lattice_superposition: 2
+
+[Failures by task]
+  bfs_shortest: 29 failures
+  toggle: 11 failures
+
+[Superpositions by task]
+  bfs_shortest: 2 superpositions held
+
+====
+
+iter8_dual_snap.txt
+
+================================================================================================
+ITERATION 8 PHASE 2 — Binary-Leech dual snap via Λ_48
+================================================================================================
+
+Per rec #1: lift lattice_analogy to Λ_48 so it can TRANSFORM binary targets.
+The substrate's lattice_analogy uses Leech (Λ_24), where binary targets lie
+OUTSIDE the hull. Lifting to Λ_48 (where the trivial 3x scaling works for
+ALL binary targets) should let the analogy solve binary transformations.
+
+Procedure per trial:
+  1. Encode a, b, c as Λ_48 points (3x scaling + pair encoding)
+  2. Compute D* = C + (B - A) in Q^48
+  3. Snap D* to nearest Λ_48 point (Construction A: nearest multiple of 3)
+  4. Decode the snap back to binary (coord 2i -> bit)
+
+------------------------------------------------------------------------------------------------
+[Per-task results — Λ_48 dual snap]
+------------------------------------------------------------------------------------------------
+Task          exact match     mean cell match     snap in Λ_48    
+------------------------------------------------------------------------------------------------
+toggle        0/30 (0%)       0.474               1.000           
+translate     14/30 (47%)       0.900               1.000           
+reflect_v     1/30 (3%)       0.613               1.000           
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * If exact match is 100%, the binary-Leech dual snap correctly solves the
+    transformation via Λ_48 lattice operations.
+  * If exact match is 0% but cell match is high, the snap is partially correct
+    — the operation is captured but the snap rounds to the wrong cell.
+  * If snap_in_lambda48 is 100%, the snap always lands in the lattice.
+    The trivial Construction-A snap (nearest multiple of 3) trivially lands
+    in Λ_48 because multiples of 3 are in the zero codeword.
+
+====
+
+iter8_f2_combiner.txt
+
+================================================================================================
+ITERATION 8 PHASE 3 — F_2 combiner for binary transformations
+================================================================================================
+
+Per rec #2: use the substrate's combiner.apply_op() at the F_2 level for
+binary transformations that don't need lattice-level snap.
+
+Combiner survey: 8/16 are affine over F_2, 8/16 are Golay-closed.
+
+------------------------------------------------------------------------------------------------
+[Per-task results — F_2 combiner test]
+------------------------------------------------------------------------------------------------
+
+--- toggle ---
+  task: toggle
+  n_samples: 50
+  combiner_index: 6
+  combiner_name: XOR (a XOR b)
+  b_value: all-ones (0xFFFFFF)
+  exact_count: 50
+  exact_rate: 1.0
+  golay_closed_count: 0
+  golay_closed_rate: 0.0
+
+--- reflect_v ---
+  task: reflect_v
+  n_samples: 50
+  matches_with_constant_xor_mask: 0
+  matches_with_constant_xor_mask_rate: 0.0
+  development_issue: reflect_v is a PERMUTATION of cells, not a coordinatewise Boolean op. No fixed F_2 combiner can express it. The substrate's combiner.apply_op() is insufficient for permutation-based tasks. Development requirement: extend the combiner to handle permutations, or use the lattice-level snap for these tasks.
+
+--- translate ---
+  task: translate
+  n_samples: 50
+  matches_with_constant_xor_mask: 0
+  matches_with_constant_xor_mask_rate: 0.0
+  development_issue: translate is also a PERMUTATION (move a block). No fixed F_2 combiner works. Same development issue as reflect_v.
+
+------------------------------------------------------------------------------------------------
+Interpretation:
+  * Toggle: should be solved EXACTLY by combiner 6 (XOR) with b=all-ones.
+    Expected: 100% exact match. This tests whether the F_2 combiner is
+    sufficient for NOT-style binary operations.
+  * Reflect_v: a PERMUTATION of cells, not a coordinatewise Boolean op.
+    No fixed F_2 combiner can express it. Expected: ~0% with constant mask.
+    DEVELOPMENT ISSUE: the substrate's combiner.apply_op() is insufficient
+    for permutation-based tasks. Either extend it, or use the lattice
+    snap for these tasks.
+  * Translate: also a permutation. Same issue.
+
+====
+
+iter8_junction.txt
+
+================================================================================================
+ITERATION 8 PHASE 1 — Junction method for shared Leech coordinates
+================================================================================================
+
+Per user input: the 'Junction' GLM method could help — many things are
+practically the same operation and the GLM can understand that way also.
+
+The substrate's coordinate_junction.py implements junctions: a junction is
+the set of carriers at one exact coordinate vector. For our binary targets,
+the 'coordinate' is the Leech CLASS (mod 2Λ). Carriers sharing a Leech class
+are in the same junction.
+
+------------------------------------------------------------------------------------------------
+[Junction distribution — 50 samples per task, 250 carriers total]
+------------------------------------------------------------------------------------------------
+  n_carriers:        250
+  n_unique_coords:   147
+  n_junctions:       17  (groups of >= 2 carriers sharing a coord)
+  n_singletons:      130
+  junction_sizes:   [2, 4, 19, 31, 2, 2, 10, 21, 3, 5]...
+
+------------------------------------------------------------------------------------------------
+[Junction-task correlation — do same-coord carriers come from same task?]
+------------------------------------------------------------------------------------------------
+  same_task_junctions:    7/10 (70.0%)
+  mixed_task_junctions:   3/10 (30.0%)
+  same_parity_junctions:  10/10 (100.0%)
+  mixed_parity_junctions:0/10 (0.0%)
+
+Interpretation:
+  * If same_task_rate is high, junctions correlate with task family — the
+    GLM can use junction membership as a task discriminator.
+  * If same_parity_rate is high, junctions correlate with parity — the
+    GLM can use junction membership as a parity discriminator (the user's
+    'many things are practically the same operation' insight).
+  * If mixed_parity_rate is high, junctions contain both even AND odd
+    parity targets — meaning the Leech class doesn't distinguish parity.
+    This would be a development issue: the coordinate (Leech class) needs
+    to be enriched to separate parity.
+
+====
+
+iter9_junction_learner.txt
+
+================================================================================================
+ITERATION 9 PHASE 1 — Junction-aware rule-learner
+================================================================================================
+
+Per rec #1: replace the 4-class lattice head with a junction-class head.
+Total junctions (unique Leech classes): 147
+
+------------------------------------------------------------------------------------------------
+[In-distribution accuracy (mean across seeds) — comparison vs iter 7]
+------------------------------------------------------------------------------------------------
+Held-out      i7 lattice    i9 jct→lat      i9 junction     i9 snap     i9 amb      
+------------------------------------------------------------------------------------------------
+toggle        0.974         0.939           0.278           0.972       0.939       
+translate     1.000         0.956           0.167           1.000       0.956       
+reflect_v     0.996         0.950           0.278           0.983       0.956       
+flood_fill    0.996         0.983           0.156           1.000       0.983       
+bfs_shortest  0.878         0.800           0.233           0.978       0.789       
+------------------------------------------------------------------------------------------------
+
+[Held-out cross-task accuracy (mean across seeds)]
+------------------------------------------------------------------------------------------------
+Held-out      i7 lattice    i9 jct→lat      i9 junction     i9 snap     i9 amb      
+------------------------------------------------------------------------------------------------
+toggle        0.953         0.890           0.000           0.960       0.900       
+translate     1.000         1.000           0.000           1.000       1.000       
+reflect_v     1.000         0.950           0.020           0.970       0.970       
+flood_fill    1.000         1.000           0.000           1.000       1.000       
+bfs_shortest  0.793         0.670           0.020           0.960       0.650       
+------------------------------------------------------------------------------------------------
+
+[Failure log: 300 junction misclassifications (capped 300)]
+------------------------------------------------------------------------------------------------
+  toggle: 130 failures
+  translate: 100 failures
+  reflect_v: 40 failures
+  bfs_shortest: 30 failures
+
+====
+
+iter9_richer_snap.txt
+
+================================================================================================
+ITERATION 9 PHASE 2 — Richer Λ_48 snap (syndrome-coset decoder)
+================================================================================================
+
+Per rec #2: extend nearest_lattice_point to Λ_48 by searching C(23) cosets.
+The trivial snap from iteration 8 only considered the zero codeword — too coarse.
+
+Algorithm:
+  1. Round target to nearest integer
+  2. Compute syndrome s = H · (target mod 3)
+  3. If s = 0, target is in C(23) — snap = target
+  4. If s in weight-1 leaders (96 candidates), snap = target - leader
+  5. If s in weight-2 leaders (1128*4=4512 candidates), snap = target - leader
+  6. Otherwise, fall back to trivial snap (zero codeword)
+
+------------------------------------------------------------------------------------------------
+[Per-task results — comparison vs iteration 8's trivial snap]
+------------------------------------------------------------------------------------------------
+Task          i8 exact      i9 exact      i8 cell match     i9 cell match     i9 snap in Λ_48 
+------------------------------------------------------------------------------------------------
+toggle        0%          0%          0.474             0.474             1.000           
+translate     47%          47%          0.900             0.900             1.000           
+reflect_v     3%          3%          0.613             0.613             1.000           
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * If exact match improved, the richer snap correctly recovers the binary answer
+    from the analogy target D* = C + (B - A).
+  * If snap_in_lambda48 is still 100%, the snap always lands in the lattice
+    (as expected — the syndrome-coset decoder finds the nearest C(23) codeword).

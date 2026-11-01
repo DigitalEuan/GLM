@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 5 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -58,7 +60,7 @@ moving to a newer table is a new snapshot with a new digest.
 ## 2. The reading — written before any code of the round
 
 The reading is stated at the head of
-[`register_world_cases.py`](../glm_universal/evaluation/register_world_cases.py),
+[`register_world_cases.py`](../src/glm_universal/evaluation/register_world_cases.py),
 committed before any code. What was seen first is said there too: the
 snapshots were checked for transcription by a throw-away comparison, so the
 *counts* in the list cases were seen before the declaration. What the
@@ -113,26 +115,26 @@ outcome, with the measured layer still the register; R8 the Lean file.
 
 ## 3. What was built
 
-* [`runtime/register_world.py`](../glm_universal/runtime/register_world.py)
+* [`runtime/register_world.py`](../src/glm_universal/runtime/register_world.py)
   — the report. It reads the two snapshots and the register, opens nothing for
   writing, and gives every cell its verdict, both sides as written, and the
   reason; molecules through their elements; the mutation audit.
 * The consistency frame of
-  [`runtime/semantic_plan.py`](../glm_universal/runtime/semantic_plan.py)
+  [`runtime/semantic_plan.py`](../src/glm_universal/runtime/semantic_plan.py)
   — *is the atomic weight of X consistent with the standard value* — now reads
   the frozen world for every element in all three fields and for a molecule's
   molar mass, and refuses by name: `WORLD_SILENT`, `REGISTER_SILENT`,
   `STANDARD_UNDECLARED`. A new frame, *which elements have an X inconsistent
   with the standard value*, lists a field's discrepant rows. Both are reached
   through the router and `GLM.py -q`.
-* [`reasoning/element_completion.py`](../glm_universal/reasoning/element_completion.py)
+* [`reasoning/element_completion.py`](../src/glm_universal/reasoning/element_completion.py)
   — the nested holdout moved here from the substrate-cognition module (its Y5
   figures are unchanged: it now reads them from here), the second gate, the
   narrowing domain, and a `domain` on each rule. The nested figures take about
   half a minute of exact arithmetic, so they are kept beside the digest of the
   files they read (`_derived/completion_nested_gate.json`) and recomputed only
   when one of them moves. `report completion` gains a step for the nested gate.
-* [`runtime/register_world_report.py`](../glm_universal/runtime/register_world_report.py)
+* [`runtime/register_world_report.py`](../src/glm_universal/runtime/register_world_report.py)
   and `tools register-world` — the marks.
 
 ## 4. Results
@@ -275,9 +277,8 @@ list frame: a whole field's discrepancies are recovered from one question.
 ## 7. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools register-world          # R1-R7
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_register_world.py
+PYTHONPATH=src python3 -m glm_universal.tools register-world          # R1-R7
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_register_world.py
 python3 GLM.py -q "which elements have an ionization energy inconsistent with the standard value"
 python3 GLM.py -q "is the electron configuration of lawrencium consistent with the standard value"
 python3 GLM.py -q "report completion"

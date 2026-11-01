@@ -1,0 +1,99 @@
+{
+ "about": "Wheel families installed in src/glm_universal/wheels/ ahead of their Lean build, by the owner's decision of 31 October 2026 ('keep them in the wheels folder now, clearly marked provisional until my Lean build log confirms them'). Each entry is an intake item of source_material/INTAKE.yaml whose parts are recorded 'provisional'. Answers that rest on these wheels say so (glm_universal.wheels.provisional_status). Written by the intake: `python3 -m glm_universal.intake advance <item> absorbed` (or `absorb-staged <item>`) removes an item's entry once the build record of scripts/rebuild_lean.sh verifies its Lean files; `python3 -m glm_universal.intake check` requires this file and the ledger to agree. Created 31 October 2026 (repository check). Since 1 November 2026 an entry may also have the state 'absorbed ahead of the build': the owner's decision of that day ('Absorb the ones that measurably help now, based on your measurements and standalone Lean check; record that my own rebuild_lean.sh run still has to confirm them') absorbed the item on its measurements and a standalone Lean check; answers resting on it say that the owner's build still has to confirm it, and `python3 -m glm_universal.intake confirm-build <item>` removes the entry once the build record verifies the item's Lean files.",
+ "items": {
+  "Rule30_GLM_Study": {
+   "date": "1 November 2026",
+   "decision": "Absorb the ones that measurably help now, based on your measurements and standalone Lean check; record that my own rebuild_lean.sh run still has to confirm them",
+   "lean": [
+    "Escalation",
+    "HypothesisEngine",
+    "HypothesisEngine/NeedsWheel",
+    "HypothesisEngine/Wheel",
+    "IntakeChecks/RuleThirtyBits",
+    "Rule30",
+    "Rule30/DriveWheel",
+    "Rule30/LeftDiagonalPeriods"
+   ],
+   "modules": [
+    "reasoning/hypothesis_engine",
+    "reasoning/hypothesis_tools"
+   ],
+   "standalone": [
+    "IntakeChecks/RuleThirtyBits"
+   ],
+   "state": "absorbed ahead of the build",
+   "study": "INTAKE_CAPABILITY_STUDY",
+   "wheels": []
+  },
+  "cent_compiler_v12": {
+   "date": "1 November 2026",
+   "decision": "Absorb the ones that measurably help now, based on your measurements and standalone Lean check; record that my own rebuild_lean.sh run still has to confirm them",
+   "lean": [
+    "IntakeChecks/Derivability",
+    "Wheels/CentWheels"
+   ],
+   "modules": [
+    "wheels/cent_wheels",
+    "wheels/cent_wheels_study",
+    "wheels/derive_query",
+    "wheels/lean_cent_data"
+   ],
+   "standalone": [
+    "IntakeChecks/Derivability"
+   ],
+   "state": "absorbed ahead of the build",
+   "study": "CENT_WHEELS_STUDY",
+   "wheels": [
+    "W16",
+    "W17",
+    "W18",
+    "W19",
+    "W20",
+    "W21",
+    "W22",
+    "W23",
+    "W24",
+    "W25",
+    "W28",
+    "W29",
+    "W32",
+    "W33",
+    "W34"
+   ]
+  },
+  "glm_wheels_bundle": {
+   "date": "1 November 2026",
+   "decision": "Absorb the ones that measurably help now, based on your measurements and standalone Lean check; record that my own rebuild_lean.sh run still has to confirm them",
+   "lean": [
+    "IntakeChecks/NextTerm",
+    "IntakeChecks/SporadicOrderCheck",
+    "Wheels/IntegerWheel",
+    "Wheels/SporadicOrders"
+   ],
+   "modules": [
+    "wheels/cfsg_import",
+    "wheels/cfsg_seed",
+    "wheels/factorint",
+    "wheels/integer_wheel",
+    "wheels/integer_wheel_study",
+    "wheels/lean_wheel_data",
+    "wheels/monster_wheel",
+    "wheels/next_term_battery",
+    "wheels/oeis_reference",
+    "wheels/oeis_seed",
+    "wheels/sequence_query"
+   ],
+   "standalone": [
+    "IntakeChecks/NextTerm",
+    "IntakeChecks/SporadicOrderCheck"
+   ],
+   "state": "absorbed ahead of the build",
+   "study": "INTEGER_WHEEL_STUDY",
+   "wheels": [
+    "IW",
+    "MW"
+   ]
+  }
+ },
+ "schema": "glm-provisional-wheels/v1"
+}

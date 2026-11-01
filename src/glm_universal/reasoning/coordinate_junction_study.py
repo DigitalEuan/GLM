@@ -21,6 +21,10 @@ build, F1 by ``python3 -m glm_universal.evaluation``):
   and three mutations of every junction answer.
 
 Exactness: integers and :class:`~fractions.Fraction` throughout.
+
+*Last altered 31 October 2026 (repository check): ``_SOURCES`` lists
+``runtime/reports/address.py``, where the address family of solvers moved
+verbatim out of ``runtime/session.py``.*
 """
 
 from __future__ import annotations
@@ -501,7 +505,8 @@ _SOURCES: Tuple[str, ...] = (
     "reasoning/coordinate_junction_study.py",
     "reasoning/coordinate_junction.py", "reasoning/address_read.py",
     "reasoning/address_read_study.py", "reasoning/address_table.py",
-    "runtime/session.py", "runtime/parser.py", "runtime/tct_engine.py",
+    "runtime/session.py", "runtime/reports/address.py",
+    "runtime/parser.py", "runtime/tct_engine.py",
     "reasoning/escalation.py") + tuple(AT._SOURCES)
 
 

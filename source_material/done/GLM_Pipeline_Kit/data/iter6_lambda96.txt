@@ -1,0 +1,56 @@
+================================================================================================
+ITERATION 6 PHASE 2 — Λ_96 over F_3 (the F_9 lift)
+================================================================================================
+
+Λ_96 = {x ∈ Z^96 : x mod 3 ∈ C_96}, where C_96 = Pless C(23) × Pless C(23)
+(direct sum of two [48, 24, 15] codes over F_3).
+
+The user's prediction: F_3 → F_9 doubles the spin order (2 → 4). The natural
+lattice analog is to double the dimension (48 → 96) while keeping the F_3
+alphabet. This implementation tests whether Λ_96 provides richer snap
+resolution than Λ_48.
+
+------------------------------------------------------------------------------------------------
+[Per-task Λ_96 snap results — 50 samples each]
+------------------------------------------------------------------------------------------------
+Task          snap ok       snap rate     mean spins    max spins     
+------------------------------------------------------------------------------------------------
+toggle        50/50            100.0%         3.00          3             
+translate     50/50            100.0%         3.00          3             
+reflect_v     50/50            100.0%         3.00          3             
+flood_fill    50/50            100.0%         3.00          3             
+bfs_shortest  50/50            100.0%         3.00          3             
+------------------------------------------------------------------------------------------------
+
+[Comparison: Λ_24 vs Λ_48 vs Λ_96 on representative samples]
+------------------------------------------------------------------------------------------------
+Sample  n_ones    parity    Λ_24          Λ_48          Λ_96          
+------------------------------------------------------------------------------------------------
+1       13        odd       ✗             ✓             ✓             
+2       10        even      ✓             ✓             ✓             
+3       9         odd       ✗             ✓             ✓             
+4       15        odd       ✗             ✓             ✓             
+5       10        even      ✓             ✓             ✓             
+6       13        odd       ✗             ✓             ✓             
+7       12        even      ✓             ✓             ✓             
+8       10        even      ✓             ✓             ✓             
+9       16        even      ✓             ✓             ✓             
+10      12        even      ✓             ✓             ✓             
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * Λ_96's trivial 3x embedding works for ALL binary targets (100% snap rate).
+    This is the multiplication puncture in action — the 3x scaling makes
+    every target mod 3 = 0 (the zero codeword), which is trivially in C_96.
+  * The spin test measures how many distinct 'orientations' the snapped
+    target admits within Λ_96. Three spin operations are tested:
+      (a) mult by 2 (F_3's unit, a swap 1↔2): always works for 3x embedding
+          because 3*b mod 3 = 0 and 2*0 = 0 still.
+      (b) pair swap (F_9's α operation in the lifted basis): swaps coords
+          (0,1), (2,3), ..., (94,95). Tests whether the F_9 spin structure
+          is captured by the F_3 lift.
+      (c) coord invert (1→2, 2→1): a different F_3 spin operation.
+  * The 'spin superposition count' = how many of these orientations are
+    valid Λ_96 points. Higher count = more superpositions held by the GLM
+    before clarification. This is the user's 'superposition' intuition made
+    operational at the lattice level.

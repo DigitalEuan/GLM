@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '12 of 12 marks; wrong answers 0 of 2,250 (controls: 12 and 19); flood fill and shortest
@@ -11,21 +13,25 @@ deciding_figure: '12 of 12 marks; wrong answers 0 of 2,250 (controls: 12 and 19)
 directives:
 - D13
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/pipeline_kit
-  - reasoning/pipeline_kit_study
+  - reasoning/pipeline_kit.py
+  - reasoning/pipeline_kit_study.py
+  - tools.py
   lean:
   - PipelineInduction
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: PIPELINE_KIT_STUDY.md
-  test:
-  - test_pipeline_kit.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: PIPELINE_KIT_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -33,16 +39,42 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - B
+  - L1
+  - L2
+  - K
+  - D
+  - S
+  - G
+  - R
+  - M
+  - W
+  - A
+  - T
+  met:
+  - B
+  - L1
+  - L2
+  - K
+  - D
+  - S
+  - G
+  - R
+  - M
+  - W
+  - A
+  - T
   missed: []
 perturbations: []
 phase: 175
-predecessors: []
+predecessors:
+- BLOCKERS_STUDY
 question: Can the owner's 9-iteration pipeline kit be brought into the GLM so that it solves tasks given
   as demonstrations, closes the two task families the kit left open, chains two operators when one does
   not fit, works on bit strings as well as grids, and never gives a wrong answer it could have refused?
 recomputed_by: '`glm_universal.reasoning.pipeline_kit_study.pipeline_kit_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -68,7 +100,9 @@ sections:
 - anchor: in-one-paragraph
   heading: In one paragraph
 status: closed
-successors: []
+successors:
+- COLOUR_INDUCTION_STUDY
+- FRAME_OPERATOR_STUDY
 superseded_by: ''
 supersedes: []
 title: The pipeline kit in the GLM — rules induced from demonstrations, answered only when every fitting

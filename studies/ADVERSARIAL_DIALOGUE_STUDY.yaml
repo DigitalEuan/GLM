@@ -1,30 +1,41 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: 13 of 13 marks; 0 members outside the head ever live over 560 runs; echoes read as a
-  confirmation by number 10 → 0, wrong confirmations after a false reply and an echo 10 → 1 (the remaining
-  one within the proved limit); 118 of 118 consistent liars confirmed on the member impersonated; 223
-  of 223 evaluation cases unchanged.
-directives:
-- D2
+deciding_figure: '13 of 13 marks as stored (re-run live on 31 October 2026: 12 of 13, L1 not met while
+  `AdversarialDialogue.lean` is missing, §7.5); 0 members outside the head ever live over 560 runs; echoes
+  read as a confirmation by number 10 → 0, wrong confirmations after a false reply and an echo 10 → 1
+  (the remaining one within the proved limit); 118 of 118 consistent liars confirmed on the member impersonated;
+  223 of 223 evaluation cases unchanged.'
+directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/adversarial_dialogue_study.py
+  - reasoning/timed_question.py
+  - tools.py
   lean:
+  - AnsweringQuestion
+  - NearestQuestion
+  lean_held: []
+  lean_missing:
   - AdversarialDialogue
+  missing: []
   prose: ADVERSARIAL_DIALOGUE_STUDY.md
   test:
-  - test_adversarial_dialogue.py
+  - test_answering_question.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ADVERSARIAL_DIALOGUE_STUDY
 junctions: []
-last_altered: '20 October 2026 (Phase 172: §7.4 says which of its lines that round took)'
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -32,18 +43,45 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - A0
+  - A1
+  - A2
+  - A2b
+  - A3
+  - A4
+  - A5
+  - A6
+  - A7
+  - A8
+  - A9
+  - P
+  met:
+  - A0
+  - A1
+  - A2
+  - A2b
+  - A3
+  - A4
+  - A5
+  - A6
+  - A7
+  - A8
+  - A9
+  - P
+  missed:
+  - L1
 perturbations: []
-phase: 172
+phase: 167
 predecessors:
 - NEAREST_QUESTION_STUDY
-- RESUMED_DIALOGUE_STUDY
 question: When the replies to the question at a `nearest` tie are false, contradictory, repeated, unanswered,
   malformed or close to two options, does the conversation ever promote a carrier the ranking excluded,
   and where does it confirm a member the replies did not honestly single out?
 recomputed_by: '`glm_universal.reasoning.adversarial_dialogue_study.adversarial_dialogue_report`'
+related:
+- RESUMED_DIALOGUE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -69,7 +107,8 @@ sections:
 - anchor: in-one-paragraph
   heading: In one paragraph
 status: closed
-successors: []
+successors:
+- RESUMED_DIALOGUE_STUDY
 superseded_by: ''
 supersedes: []
 title: Adversarial replies at the `nearest` ties — what dialogue may and may not do when the informant

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: The proposed Leech sieve is sound and 99.4 % incomplete, with the one-line repair stated.
@@ -11,20 +13,25 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - evaluation/cases
-  - reasoning/generative
-  - tests/test_generative
+  - evaluation/cases.py
+  - reasoning/deep_holes.py
+  - reasoning/generative.py
+  - runtime/session.py
   lean:
   - Tower
   - ZeroStorage
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ZERO_STORAGE_STUDY.md
   test:
-  - test_zero_storage.py
+  - test_generative.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ZERO_STORAGE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -40,6 +47,8 @@ phase: 0
 predecessors: []
 question: How far does generate-rather-than-store go, and where does it have to be checked?
 recomputed_by: '`glm_universal.reasoning.generative.zero_storage_report`'
+related:
+- ITERATION_COST_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

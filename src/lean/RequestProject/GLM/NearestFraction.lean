@@ -6,7 +6,8 @@ public import RequestProject.GLM.ToolValues
 /-!
 # The nearest fraction: the classical best-approximation theorem
 
-The formal half of `studies/NEAREST_FRACTION_STUDY.md` (Phase 138). Until
+The formal half of `studies/TOOL_VERDICTS_STUDY.md` (Phase 138; the study
+was cited as NEAREST_FRACTION_STUDY.md until 31 October 2026). Until
 Phase 137 the tool `best approximation` picked two candidates — the last
 convergent `p_k / q_k` within the denominator bound `N` and the
 semiconvergent `(p_(k-1) + j p_k) / (q_(k-1) + j q_k)` with the largest `j`

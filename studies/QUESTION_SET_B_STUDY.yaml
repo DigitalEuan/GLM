@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 'Set B: 14 of 14 by audit (protocol +10: 11 right, 1 disputed answer); Outside O1: 27
@@ -11,25 +13,33 @@ deciding_figure: 'Set B: 14 of 14 by audit (protocol +10: 11 right, 1 disputed a
 directives:
 - D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/exact_forms
-  - runtime/outside_frames
-  - runtime/question_frames
-  - tests/test_question_frames
+  - evaluation/question_set_b.py
+  - reasoning/exact_forms.py
+  - reasoning/real_expr.py
+  - reasoning/transcendental.py
+  - runtime/outside_frames.py
+  - runtime/parser.py
+  - runtime/question_frames.py
+  - tools.py
   lean:
   - ConnectedMachine
   - QuestionSetB
   - QuestionSetBAnswers
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: QUESTION_SET_B_STUDY.md
   test:
-  - test_question_set_b.py
+  - test_question_frames.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: QUESTION_SET_B_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -42,11 +52,14 @@ marks:
   missed: []
 perturbations: []
 phase: 89
-predecessors:
-- CONTRACT_MATRIX_STUDY
+predecessors: []
 question: What do the two outside question sets the owner supplied in Phase 89 find, and how far can declared
   question frames, each answer checked by its own column-3 script, carry the machine into them?
 recomputed_by: '`glm_universal.evaluation.question_set_b.report`'
+related:
+- CONTRACT_MATRIX_STUDY
+- EXPLANATION_ANCHOR_STUDY
+- META_QUESTIONS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -74,7 +87,12 @@ sections:
 - anchor: 9-re-running
   heading: 9. Re-running
 status: closed
-successors: []
+successors:
+- CITATION_SCOPE_STUDY
+- DERIVATION_STUDY
+- EXPLANATION_ANCHOR_STUDY
+- META_QUESTIONS_STUDY
+- SYMBOLIC_PARAMETERS_STUDY
 superseded_by: ''
 supersedes: []
 title: The outside question sets — Set B, Outside O1, and the Capability Failure Matrix

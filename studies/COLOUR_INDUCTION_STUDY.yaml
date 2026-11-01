@@ -1,0 +1,144 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 'Part A 8 of 12 marks (C2, C4, R2, R3 missed): 683 right, 0 wrong, 397 refused of 1,080
+  in-vocabulary queries; 302 of 360 at three demonstrations; ARC 2 of 50 right, 0 wrong. Part B 8 of 8
+  marks at the second take: 536 right, 0 wrong of 1,080 inside the families, 0 wrong of 360 outside; Thomas–Wigner
+  60 of 60.'
+directives:
+- D13
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/colour_induction.py
+  - reasoning/colour_induction_study.py
+  - reasoning/frame_plane.py
+  - reasoning/frame_plane_study.py
+  lean:
+  - AxiomAuditAll
+  - LorentzImproper
+  lean_held:
+  - LorentzImproper
+  lean_missing:
+  - ColourInduction
+  - LorentzPlane
+  missing: []
+  prose: COLOUR_INDUCTION_STUDY.md
+  test:
+  - test_colour_induction.py
+  - test_connected_machine.py
+  - test_frame_plane.py
+  wheel: []
+follow_ups: []
+hand_fields:
+- marks
+id: COLOUR_INDUCTION_STUDY
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - R1
+  - R2
+  - R3
+  - B
+  - L
+  - T
+  - P1
+  - P2
+  - P3
+  - P4
+  - P5
+  - P6
+  met:
+  - C1
+  - C3
+  - C5
+  - C6
+  - R1
+  - B
+  - L
+  - T
+  - P1
+  - P2
+  - P3
+  - P4
+  - P5
+  - P6
+  missed:
+  - C2
+  - C4
+  - R2
+  - R3
+perturbations: []
+phase: 178
+predecessors:
+- FRAME_OPERATOR_STUDY
+- PIPELINE_ASK_STUDY
+- PIPELINE_KIT_STUDY
+question: Can the agreement gate of `tool induce` be carried from 0/1 grids to colour grids whose shape
+  may change — and onto the 50 stored ARC tasks — without a wrong answer (part A), and can `tool frame`
+  be widened to states `(E, px, py)` in 1+2 dimensions, reading the Thomas–Wigner rotation exactly (part
+  B)?
+recomputed_by: (hand-written argument; nothing to recompute)
+related:
+- GLM_ACADEMIC_PAPER
+- IMPROPER_FRAME_STUDY
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-part-a-what-was-built
+  heading: 1. Part A — what was built
+- anchor: 2-part-a-the-marks
+  heading: 2. Part A — the marks
+- anchor: 3-part-a-what-came-out
+  heading: 3. Part A — what came out
+- anchor: 4-part-b-what-was-built
+  heading: 4. Part B — what was built
+- anchor: 5-part-b-the-marks
+  heading: 5. Part B — the marks
+- anchor: 6-part-b-what-came-out
+  heading: 6. Part B — what came out
+- anchor: 7-the-lean-files-and-the-wiring
+  heading: 7. The Lean files and the wiring
+- anchor: 8-disclosed-and-the-state-of-the-files
+  heading: 8. Disclosed, and the state of the files
+- anchor: 9-what-is-left
+  heading: 9. What is left
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors:
+- IMPROPER_FRAME_STUDY
+superseded_by: ''
+supersedes: []
+title: Colour induction and the frame plane — `tool induce` on colour grids and objects, `tool arc`, and
+  `tool frame` in 1+2 dimensions
+verdict: Partly. On colour grids the gate gives 0 wrong answers in its vocabulary but falls short of the
+  declared coverage, and on the stored ARC tasks it answers only the 2 the vision stack solves, with 0
+  wrong — the vocabulary binds, not the gate; `tool frame` in 1+2 dimensions gives 0 wrong answers inside
+  and outside its families and reads all 60 Thomas–Wigner queries with their exact Wigner rotation.
+wobble_deps: []

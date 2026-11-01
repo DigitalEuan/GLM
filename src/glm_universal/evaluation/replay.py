@@ -20,7 +20,9 @@ model's status disagrees with what the case expects, or when the process
 errs.  An answer with no column 3 (``replayed`` is ``None``) is counted, not
 failed: the surfaces without a column 3 are named in the study.
 
-    PYTHONPATH=. python3 -m glm_universal.evaluation --replay --jobs 8
+    PYTHONPATH=src python3 -m glm_universal.evaluation --replay --jobs 8
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

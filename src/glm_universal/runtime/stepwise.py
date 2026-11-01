@@ -1,6 +1,10 @@
 """``glm_universal.runtime.stepwise`` -- the typed planner as the executive of
 a chain of steps.
 
+*Last altered 31 October 2026 (repository check: the machine's gate of
+Phases 151 and 153 restored -- :func:`_ladder_gate`, :data:`LADDER`,
+:data:`READ`; it was lost in the October 2026 reorganisation).*
+
 Why this module exists
 ----------------------
 The typed planner (:mod:`glm_universal.runtime.semantic_plan`) answers one
@@ -135,6 +139,22 @@ TOOL_VERDICTS = True
 #: only by the round's own control, which restores the old refusal.
 CERTIFIED_PRIMALITY = True
 
+#: Phase 151 (``studies/PLANNER_LADDER_STUDY.md``): every answered chain is
+#: said as a GLM-BAT program and run by the batch machine
+#: (:mod:`glm_universal.reasoning.planner_ladder`); a chain whose run does
+#: not halt cleanly, drifts from the planner's claims or is not promoted by
+#: the gated pipeline is refused as ``MACHINE_DRIFT`` (:func:`_ladder_gate`).
+#: The program goes to the steps and the payload, never to the answer text.
+LADDER = True
+
+#: Phase 153 (``studies/CARRIED_READ_STUDY.md``): the gate runs in the
+#: reading mode -- a register value is read from the registers written as
+#: files, a given from the question's own numbers, and gcd, lcm, parity,
+#: primality, comparisons and the folds are computed
+#: (:mod:`glm_universal.reasoning.carried_read`).  Switched off only by the
+#: round's own control.
+READ = True
+
 #: The relation words of the search's stopping test (all strict ``>``).
 _ABOVE = r"(?:is )?(?:above|over|greater than|more than|larger than|bigger " \
     r"than|exceeds|exceeding)"
@@ -173,6 +193,9 @@ class StepAnswer:
     reason: str = ""
     readings: Tuple[Tuple[str, str], ...] = ()
     trials: int = 0
+    #: Phase 151: the chain's GLM-BAT ladder (``planner_ladder.Ladder``),
+    #: set by :func:`_ladder_gate` when the machine admits the chain.
+    ladder: Optional[object] = None
 
     @property
     def answered(self) -> bool:
@@ -2619,13 +2642,52 @@ def reads(text: str) -> bool:
 
 def answer(session, text: str) -> StepAnswer:
     """The stepwise verdict on ``text``: goal mode when it reads as a goal,
-    composition otherwise; ``unread`` when neither reads it."""
+    composition otherwise; ``unread`` when neither reads it.  An answered
+    chain is kept only through the machine's gate (:func:`_ladder_gate`)."""
     two = _round_two_goal(text)
     if two is not None:
-        return goal_two(session, text, two)
+        return _ladder_gate(session, goal_two(session, text, two))
     if parse_goal(text) is not None:
-        return goal(session, text)
-    return compose(session, text)
+        return _ladder_gate(session, goal(session, text))
+    return _ladder_gate(session, compose(session, text))
+
+
+def _ladder_gate(session, a: StepAnswer) -> StepAnswer:
+    """Phase 151 (``studies/PLANNER_LADDER_STUDY.md``), in the reading mode of
+    Phase 153 when :data:`READ` is on: the answered chain said as GLM-BAT and
+    run by the batch machine.  It is kept only when the run halts with exit
+    code 0, leaves no drift against the planner's claims (one file per step)
+    and the gated pipeline promotes (``GLM.PlannerLadder.no_drift_iff``,
+    ``promoted_iff_no_drift``); otherwise it is refused as ``MACHINE_DRIFT``,
+    with nothing promoted (``rollback_journal``).
+
+    *Reconstructed 31 October 2026 (repository check): the original gate was
+    lost in the October 2026 reorganisation; rebuilt from
+    studies/PLANNER_LADDER_STUDY.md §0, studies/CARRIED_READ_STUDY.md,
+    MASTER_PLAN.md (Phases 151, 153, 160, 163) and the callers in GLM.py.*
+    """
+    if not LADDER or a.verdict != "answered" or a.chain is None:
+        return a
+    from ..reasoning import carried_read as cr
+    from ..reasoning import planner_ladder as pl
+    seed = cr.seed_files(a.chain, session) if READ else None
+    c = pl.check_chain(a.chain, say=False, read=READ, files=seed,
+                       ladder=True)
+    if c["admitted"]:
+        a.ladder = c["ladder"]
+        return a
+    if c["first_drift"] is not None:
+        where = f"step {c['first_drift']} drifts from the planner's claim"
+    elif c["error"]:
+        where = f"the program was not run ({c['error']})"
+    else:
+        where = (f"the run ended {c['status']} with exit code {c['exit']}"
+                 f"{'' if c['promoted'] else ' and the pipeline did not promote'}")
+    return StepAnswer(a.text, "refused", refusal="MACHINE_DRIFT",
+                      reason=f"the batch machine disagrees with the chain: "
+                             f"{where} (GLM.PlannerLadder.drift_eq_lies); "
+                             f"nothing was promoted",
+                      readings=a.readings, trials=a.trials)
 
 
 class StepwiseConversation:
@@ -2654,7 +2716,8 @@ class StepwiseConversation:
         if t in ("why", "why so", "show the steps", "how") and prev:
             a = StepAnswer(text, prev.verdict, chain=prev.chain,
                            refusal=prev.refusal, reason=prev.reason,
-                           readings=prev.readings, trials=0)
+                           readings=prev.readings, trials=0,
+                           ladder=prev.ladder)
         elif t.startswith("then ") and prev is not None:
             if prev.chain is None:
                 a = StepAnswer(text, "refused", refusal="UNKNOWN_STEP",
@@ -2668,6 +2731,8 @@ class StepwiseConversation:
                              s.detail, "follow-up") for s in a.chain.steps)
                     a.chain = Chain(prev.chain.question + " ; " + text,
                                     steps, a.chain.kind)
+                    # Phase 151: a follow-up's chain passes the same gate
+                    a = _ladder_gate(self.session, a)
         else:
             a = answer(self.session, text)
         self.turns.append(text)
@@ -2693,12 +2758,27 @@ def chain_solution(a: StepAnswer):
                       for s in a.chain.steps)
         steps += (SolStep("answer", ss.answer_sentence(a.chain),
                           f"answer = s{len(a.chain.steps)}"),)
+        machine = None
+        if a.ladder is not None:
+            # Phase 151: the program goes to the steps and the payload,
+            # never to the answer text
+            from ..reasoning import planner_ladder as pl
+            machine = pl.describe(a.ladder)
+            steps += (SolStep("machine",
+                              "The chain is said as a GLM-BAT program and "
+                              "run by the batch machine; it is kept because "
+                              "the run halts with exit code 0, leaves no "
+                              "drift against the planner's claims and the "
+                              "gated pipeline promotes "
+                              "(GLM.PlannerLadder.promoted_iff_no_drift).",
+                              f"{machine['program']}; {machine['drift']}; "
+                              f"{machine['pipeline']}"),)
         return Solution(query=query, kind="stepwise", answer=a.value,
                         steps=steps, ok=True,
                         expected={"value": a.value, "faculty": "derive",
                                   "steps": str(len(a.chain.steps))},
                         payload={"stepwise": a.as_dict(),
-                                 "faculty": "derive"})
+                                 "faculty": "derive", "machine": machine})
     body = a.summary()
     return Solution(query=query, kind="stepwise", answer=body, ok=False,
                     error=body, steps=(SolStep("refused", body, body),),

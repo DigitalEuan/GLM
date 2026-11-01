@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -20,7 +22,7 @@ A **pre-registration** for Phase 159 (§§0–6 are committed before any code of
 the round is written; the evaluation run the frozen path compares against,
 `_data/thermo_friction_eval_before.json`, was taken before that commit; §7 is
 what came out). It takes Part I of the owner's plan of 19 October 2026
-([`source_material/GLM_19OCT26_1.md`](../source_material/GLM_19OCT26_1.md)),
+([`source_material/GLM_19OCT26_1.md`](../source_material/done/GLM_19OCT26_1.md)),
 which `STATUS.md` §2.0 maps onto To-Do item 4 (friction, the third pass): the
 three lines Phase 157 left ([`FRICTION_TWO_STUDY.md`](FRICTION_TWO_STUDY.md)
 §7.7, items 1–3).

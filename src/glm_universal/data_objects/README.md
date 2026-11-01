@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 **Status: implemented (Step 2), extended since.** Eight domains, one carrier
 shape: every object here is a point of $\mathbb{Q}^{24}$ with an exact 2-adic
@@ -24,7 +26,7 @@ As loaded by the runtime (`GeometricSession.register`), the registers are
 physics **726**, chemistry **118**, **51 molecules**, mathematics **22**,
 lexicon **149** (the semantic lexicon), spatial **28**, harmonics **28**,
 economics **21** — 1,143 carriers in all.
-The live counts are recomputed in [`../../FIGURES.md`](../../FIGURES.md) under
+The live counts are recomputed in [`../../FIGURES.md`](../../../FIGURES.md) under
 *Registers*; `spatial` is built in the runtime rather than here. The tables
 below record the *verification sweep* over the frozen snapshots at the time it
 was run, and give the register sizes of that run; the sizes above are the
@@ -482,9 +484,9 @@ establish.
 ## Verify
 
 ```bash
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_data_objects.py -q      # 81 tests
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_semantic_lexicon.py -q  # 39 tests
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_molecules.py -q         # 39 tests
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_data_objects.py -q      # 81 tests
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_semantic_lexicon.py -q  # 39 tests
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_molecules.py -q         # 39 tests
 ```
 
 ---

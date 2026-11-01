@@ -1,0 +1,424 @@
+==============================================================================
+Q: report wheel steps
+A: report wheel steps: the first 16 steps of wheel 00011110 at the centre; D(16) = 2
+  [the step law]
+     words: Each new centre cell is the rule applied to the three cells above it: left, centre, right.  Over GF(2) the rule of wheel 00011110 is f = L + C + R + C*R.
+     maths: a(t+1) = f(x_t(-1), a(t), x_t(1));  D(N) = 2*#{i < N : a(i) = 1} - N, so D(t+1) = D(t) + (2 a(t) - 1)  (Lean: ecaEvolve_succ, ecaRule_30, wobble_succ)
+  [steps]
+     words: The first 16 steps at the centre, each recomputed.
+     maths: t=0: (0,1,0) -> a(1)=1, D(1)=1, arrow=-1; t=1: (1,1,1) -> a(2)=0, D(2)=2, arrow=-1; t=2: (1,0,0) -> a(3)=1, D(3)=1, arrow=-1; t=3: (0,1,1) -> a(4)=1, D(4)=2, arrow=-1; t=4: (0,1,0) -> a(5)=1, D(5)=3, arrow=-1; t=5: (1,1,1) -> a(6)=0, D(6)=4, arrow=-1; t=6: (0,0,0) -> a(7)=0, D(7)=3, arrow=-1; t=7: (1,0,0) -> a(8)=1, D(8)=2, arrow=-1; t=8: (0,1,1) -> a(9)=1, D(9)=3, arrow=-1; t=9: (1,1,0) -> a(10)=0, D(10)=4, arrow=-1; t=10: (1,0,1) -> a(11)=0, D(11)=3, arrow=-1; t=11: (1,0,1) -> a(12)=0, D(12)=2, arrow=-1; t=12: (0,0,1) -> a(13)=1, D(13)=1, arrow=-1; t=13: (1,1,1) -> a(14)=0, D(14)=2, arrow=-1; t=14: (1,0,0) -> a(15)=1, D(15)=1, arrow=-1; t=15: (0,1,0) -> a(16)=1, D(16)=2, arrow=-1
+  [neighbourhoods at the centre]
+     words: How often each neighbourhood occurs above the centre cell in the first 1000 steps (an exact count, not a theorem).
+     maths: 000: 144, 001: 130, 010: 115, 011: 129, 100: 106, 101: 139, 110: 111, 111: 126
+  [boundary]
+     words: What the steps do not establish.
+     maths: Every step is exact, and the step law holds for every t, but no finite number of steps decides questions 1 or 2 (no_finite_certificate_problem1/2).
+==============================================================================
+Q: describe r30_step_0
+A: wheel_30_step_0: step 0 -> 1 at column 0: row 0 on [-0,0] = 1; centre neighbourhood (L,C,R) = (0,1,0); a(1) = L + C + R + C*R = 0 + 1 + 0 + 0 = 1 (mod 2); D(1) = 1; arrow(1) = -sign D = -1 [EMP]
+  [carrier]
+     words: wheel_30_step_0 is a carrier of the automata register (aliases: r30_step_0, wheel_00011110_step_0).  It is one step of the run at the centre: the neighbourhood read, the rule applied.
+     maths: step 0 -> 1 at column 0: row 0 on [-0,0] = 1; centre neighbourhood (L,C,R) = (0,1,0); a(1) = L + C + R + C*R = 0 + 1 + 0 + 0 = 1 (mod 2); D(1) = 1; arrow(1) = -sign D = -1
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; value_num=1; value_den=1; evidence_rank=1; aux01=1; aux03=1; aux04=2; aux05=1
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: GLM.Rule30.ecaEvolve_succ (the step law, every t), ecaRule_30, wobble_succ; values match centerCol_first_30 / list20000 (Compute.lean)
+  [recomputation]
+     words: Rows 0 and 1 are evolved again from the impulse and the centre cell is read off; the local rule is applied to the centre neighbourhood by hand.
+     maths: (L,C,R) = (0,1,0); f = L + C + R + C*R = 1; evolved a(1) = 1; agrees: True
+  [arrow]
+     words: After this step the observer's arrow points the way that would bring the accumulator back to zero.
+     maths: D(1) = 1; arrow(1) = -sign D = -1 (towards white)
+  [boundary]
+     words: What this carrier does not establish.
+     maths: One step of one finite run.  The step law holds at every t, but a step, or any finite number of them, says nothing about the limit questions 1 and 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2).
+==============================================================================
+Q: describe r30_step_5
+A: wheel_30_step_5: step 5 -> 6 at column 0: row 5 on [-5,5] = 11011110111; centre neighbourhood (L,C,R) = (1,1,1); a(6) = L + C + R + C*R = 1 + 1 + 1 + 1 = 0 (mod 2); D(6) = 4; arrow(6) = -sign D = -1 [EMP]
+  [carrier]
+     words: wheel_30_step_5 is a carrier of the automata register (aliases: r30_step_5, wheel_00011110_step_5).  It is one step of the run at the centre: the neighbourhood read, the rule applied.
+     maths: step 5 -> 6 at column 0: row 5 on [-5,5] = 11011110111; centre neighbourhood (L,C,R) = (1,1,1); a(6) = L + C + R + C*R = 1 + 1 + 1 + 1 = 0 (mod 2); D(6) = 4; arrow(6) = -sign D = -1
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=5; value_den=1; evidence_rank=1; aux00=1; aux01=1; aux02=1; aux04=10; aux05=9
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: GLM.Rule30.ecaEvolve_succ (the step law, every t), ecaRule_30, wobble_succ; values match centerCol_first_30 / list20000 (Compute.lean)
+  [recomputation]
+     words: Rows 5 and 6 are evolved again from the impulse and the centre cell is read off; the local rule is applied to the centre neighbourhood by hand.
+     maths: (L,C,R) = (1,1,1); f = L + C + R + C*R = 0; evolved a(6) = 0; agrees: True
+  [arrow]
+     words: After this step the observer's arrow points the way that would bring the accumulator back to zero.
+     maths: D(6) = 4; arrow(6) = -sign D = -1 (towards white)
+  [boundary]
+     words: What this carrier does not establish.
+     maths: One step of one finite run.  The step law holds at every t, but a step, or any finite number of them, says nothing about the limit questions 1 and 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2).
+==============================================================================
+Q: describe r30_step_6
+A: wheel_30_step_6: step 6 -> 7 at column 0: row 6 on [-6,6] = 1100100001001; centre neighbourhood (L,C,R) = (0,0,0); a(7) = L + C + R + C*R = 0 + 0 + 0 + 0 = 0 (mod 2); D(7) = 3; arrow(7) = -sign D = -1 [EMP]
+  [carrier]
+     words: wheel_30_step_6 is a carrier of the automata register (aliases: r30_step_6, wheel_00011110_step_6).  It is one step of the run at the centre: the neighbourhood read, the rule applied.
+     maths: step 6 -> 7 at column 0: row 6 on [-6,6] = 1100100001001; centre neighbourhood (L,C,R) = (0,0,0); a(7) = L + C + R + C*R = 0 + 0 + 0 + 0 = 0 (mod 2); D(7) = 3; arrow(7) = -sign D = -1
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=6; value_den=1; evidence_rank=1; aux04=10; aux05=5
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: GLM.Rule30.ecaEvolve_succ (the step law, every t), ecaRule_30, wobble_succ; values match centerCol_first_30 / list20000 (Compute.lean)
+  [recomputation]
+     words: Rows 6 and 7 are evolved again from the impulse and the centre cell is read off; the local rule is applied to the centre neighbourhood by hand.
+     maths: (L,C,R) = (0,0,0); f = L + C + R + C*R = 0; evolved a(7) = 0; agrees: True
+  [arrow]
+     words: After this step the observer's arrow points the way that would bring the accumulator back to zero.
+     maths: D(7) = 3; arrow(7) = -sign D = -1 (towards white)
+  [boundary]
+     words: What this carrier does not establish.
+     maths: One step of one finite run.  The step law holds at every t, but a step, or any finite number of them, says nothing about the limit questions 1 and 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2).
+==============================================================================
+Q: describe r30_step_63
+A: wheel_30_step_63: step 63 -> 64 at column 0: row 63 on [-63,63] = 1101111001101001110100101111001001011111001001011001111011110101010111110010111011010001001011110001001000110010111111111111111; centre neighbourhood (L,C,R) = (0,1,0); a(64) = L + C + R + C*R = 0 + 1 + 0 + 0 = 1 (mod 2); D(64) = 6; arrow(64) = -sign D = -1 [EMP]
+  [carrier]
+     words: wheel_30_step_63 is a carrier of the automata register (aliases: r30_step_63, wheel_00011110_step_63).  It is one step of the run at the centre: the neighbourhood read, the rule applied.
+     maths: step 63 -> 64 at column 0: row 63 on [-63,63] = 1101111001101001110100101111001001011111001001011001111011110101010111110010111011010001001011110001001000110010111111111111111; centre neighbourhood (L,C,R) = (0,1,0); a(64) = L + C + R + C*R = 0 + 1 + 0 + 0 = 1 (mod 2); D(64) = 6; arrow(64) = -sign D = -1
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=63; value_num=1; value_den=1; evidence_rank=1; aux01=1; aux03=1; aux04=70; aux05=78
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: GLM.Rule30.ecaEvolve_succ (the step law, every t), ecaRule_30, wobble_succ; values match centerCol_first_30 / list20000 (Compute.lean)
+  [recomputation]
+     words: Rows 63 and 64 are evolved again from the impulse and the centre cell is read off; the local rule is applied to the centre neighbourhood by hand.
+     maths: (L,C,R) = (0,1,0); f = L + C + R + C*R = 1; evolved a(64) = 1; agrees: True
+  [arrow]
+     words: After this step the observer's arrow points the way that would bring the accumulator back to zero.
+     maths: D(64) = 6; arrow(64) = -sign D = -1 (towards white)
+  [boundary]
+     words: What this carrier does not establish.
+     maths: One step of one finite run.  The step law holds at every t, but a step, or any finite number of them, says nothing about the limit questions 1 and 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2).
+==============================================================================
+Q: report wheel induction
+A: report wheel induction: rows 0..4 of the impulse run determine wheel 00011110 among all 256; rows 0..3 leave {30, 62}; the existing induction families do not fit
+  [existing families]
+     words: The GLM's induction solver (pipeline kit: permutations, XOR masks, shifts and their compositions) on rows 0..3 of the run.
+     maths: status unsolved; 3 demonstrations of 1x11 grids; tier 1: 0 of 76 hypotheses fit; tier 2: 0 of 0 hypotheses fit
+  [the wheel family]
+     words: The radius-1 family: every one of the 256 tables is tried; the reading answers only when every survivor gives the same next row.
+     maths: rows 0..1: 16 survivor(s), unseen ['011', '101', '110', '111'], row 2 refused; rows 0..2: 2 survivor(s) [30, 62], unseen ['101'], row 3 answered (True against the true row); rows 0..3: 2 survivor(s) [30, 62], unseen ['101'], row 4 refused; rows 0..4: 1 survivor(s) [30], unseen none, row 5 answered (True against the true row); rows 0..5: 1 survivor(s) [30], unseen none, row 6 answered (True against the true row); rows 0..6: 1 survivor(s) [30], unseen none, row 7 answered (True against the true row)
+  [why the refusals are exact]
+     words: A wheel fits the rows iff it agrees on the neighbourhoods they show; the next row follows iff each of its neighbourhoods was shown.  So refusing exactly when the survivors disagree is refusing exactly when the query needs an unseen neighbourhood.
+     maths: Lean: rows_agree_iff, next_row_determined_iff (WheelInduction.lean); rows_identify_thirty (rows 0..4 determine 30), rows_three_do_not_identify and row_four_not_determined (wheel 62 shares rows 0..3, differs at 101)
+  [boundary]
+     words: What this does not establish.
+     maths: Identifying the rule from its rows is a fact about the 256 tables; it says nothing about questions 1-3 for the run.
+==============================================================================
+Q: describe r30_induction_rows_1
+A: wheel_30_induction_rows_1: rows 0..1 of the impulse run, read as 1 demonstrations row -> next row, are reproduced by 16 of the wheels with f(0,0,0) = 0; unseen neighbourhoods ['011', '101', '110', '111']; row 2 is NOT determined (row 1 contains unseen ['011', '110', '111']) [EMP]
+  [carrier]
+     words: wheel_30_induction_rows_1 is a carrier of the automata register (aliases: r30_induction_rows_1, wheel_00011110_induction_rows_1).  It is the ARC-style reading: which wheels reproduce rows of the diagram, and whether the next row follows.
+     maths: rows 0..1 of the impulse run, read as 1 demonstrations row -> next row, are reproduced by 16 of the wheels with f(0,0,0) = 0; unseen neighbourhoods ['011', '101', '110', '111']; row 2 is NOT determined (row 1 contains unseen ['011', '110', '111'])
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=1; value_num=16; value_den=1; evidence_rank=1; aux00=4
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: count computed here; law: rows_agree_iff, next_row_determined_iff
+  [recomputation]
+     words: The induction is re-run: every one of the 256 tables is tried against the 1 demonstrations, then asked for row 2.
+     maths: survivors 16; refused: ['011', '110', '111'] unseen; candidates ['0100010', '0100110', '0101010', '0101110']; survivors = 2^(#unseen): True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: describe r30_induction_rows_2
+A: wheel_30_induction_rows_2: rows 0..2 of the impulse run, read as 2 demonstrations row -> next row, are reproduced by 2 of the wheels with f(0,0,0) = 0: [30, 62]; unseen neighbourhoods ['101']; row 3 is determined [EMP]
+  [carrier]
+     words: wheel_30_induction_rows_2 is a carrier of the automata register (aliases: r30_induction_rows_2, wheel_00011110_induction_rows_2).  It is the ARC-style reading: which wheels reproduce rows of the diagram, and whether the next row follows.
+     maths: rows 0..2 of the impulse run, read as 2 demonstrations row -> next row, are reproduced by 2 of the wheels with f(0,0,0) = 0: [30, 62]; unseen neighbourhoods ['101']; row 3 is determined
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=2; value_num=2; value_den=1; evidence_rank=1; aux00=1; aux01=1
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: count computed here; law: rows_agree_iff, next_row_determined_iff
+  [recomputation]
+     words: The induction is re-run: every one of the 256 tables is tried against the 2 demonstrations, then asked for row 3.
+     maths: survivors [30, 62]; answered 011011110 (true row 011011110); survivors = 2^(#unseen): True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: describe r30_induction_rows_3
+A: wheel_30_induction_rows_3: rows 0..3 of the impulse run, read as 3 demonstrations row -> next row, are reproduced by 2 of the wheels with f(0,0,0) = 0: [30, 62]; unseen neighbourhoods ['101']; row 4 is NOT determined (row 3 contains unseen ['101']) [EMP]
+  [carrier]
+     words: wheel_30_induction_rows_3 is a carrier of the automata register (aliases: r30_induction_rows_3, wheel_00011110_induction_rows_3).  It is the ARC-style reading: which wheels reproduce rows of the diagram, and whether the next row follows.
+     maths: rows 0..3 of the impulse run, read as 3 demonstrations row -> next row, are reproduced by 2 of the wheels with f(0,0,0) = 0: [30, 62]; unseen neighbourhoods ['101']; row 4 is NOT determined (row 3 contains unseen ['101'])
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=3; value_num=2; value_den=1; evidence_rank=1; aux00=1
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: count computed here; FORMAL parts: rows_three_do_not_identify (wheel 62 has the same rows 0..3), row_four_not_determined, thirty_sixtyTwo_differ_only_at_101, rows_agree_iff
+  [recomputation]
+     words: The induction is re-run: every one of the 256 tables is tried against the 3 demonstrations, then asked for row 4.
+     maths: survivors [30, 62]; refused: ['101'] unseen; candidates ['01100100010', '01101100010']; survivors = 2^(#unseen): True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: describe r30_induction_rows_4
+A: wheel_30_induction_rows_4: rows 0..4 of the impulse run, read as 4 demonstrations row -> next row, are reproduced by 1 of the wheels with f(0,0,0) = 0: [30]; unseen neighbourhoods none; row 5 is determined [FORMAL]
+  [carrier]
+     words: wheel_30_induction_rows_4 is a carrier of the automata register (aliases: r30_induction_rows_4, wheel_00011110_induction_rows_4).  It is the ARC-style reading: which wheels reproduce rows of the diagram, and whether the next row follows.
+     maths: rows 0..4 of the impulse run, read as 4 demonstrations row -> next row, are reproduced by 1 of the wheels with f(0,0,0) = 0: [30]; unseen neighbourhoods none; row 5 is determined
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=4; value_num=1; value_den=1; evidence_rank=4; aux01=1
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.rows_identify_thirty (rows 0..4 determine wheel 30 among all 256); next_row_determined_iff
+  [recomputation]
+     words: The induction is re-run: every one of the 256 tables is tried against the 4 demonstrations, then asked for row 5.
+     maths: survivors [30]; answered 0110111101110 (true row 0110111101110); survivors = 2^(#unseen): True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: is r30_induction_rows_3 greater than 1
+A: true: r30_induction_rows_3 > 1
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_induction_rows_3 = 2 [EMP: count computed here; FORMAL parts: rows_three_do_not_identify (wheel 62 has the same rows 0..3), row_four_not_determined, thirty_sixtyTwo_differ_only_at_101, rows_agree_iff]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_induction_rows_3 = 2.00000000000000000000..., 1 = 1.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; separated at 2**-8
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: greater; verdict: True
+==============================================================================
+Q: report wheel observer
+A: report wheel observer: the centre column gives the class {30, 86} and never less; every column with 1 <= |c| <= 5 gives wheel 30
+  [columns]
+     words: For each column c, the least number of values (from t = 0) after which the column of the impulse run leaves only wheel 30, or, at the centre, only its class.
+     maths: c=-5: 10 values -> [30]; c=-4: 10 values -> [30]; c=-3: 8 values -> [30]; c=-2: 12 values -> [30]; c=-1: 11 values -> [30]; c=0: 7 values -> [30, 86]; c=1: 8 values -> [30]; c=2: 8 values -> [30]; c=3: 12 values -> [30]; c=4: 11 values -> [30]; c=5: 13 values -> [30]
+  [the centre]
+     words: The centre column cannot separate wheel 30 from its mirror image 86, however long it is watched.  So nothing computed from the centre column alone (its frequency, its wobble D(N), any finite-state observer) can tell which way the run is oriented.
+     maths: Lean: centre_column_class : ecaColumn r seed 0 = centerCol <-> r = 30 or r = 86 (r < 256); centre_prefix_class (7 values); centre_six_not_enough
+  [off the centre]
+     words: One cell to either side, the column determines the wheel.
+     maths: Lean: column_one_identifies (8 values, column_one_seven_not_enough); offCentre_column_identifies (every 1 <= |c| <= 5)
+  [boundary]
+     words: What this does not establish.
+     maths: Which wheel produced a column is a fact about the 256 tables.  Questions 1-3 are about the centre column of 30 (= that of 86), and stay OPEN.
+==============================================================================
+Q: describe r30_observer_column_0
+A: wheel_30_observer_column_0: the observer at the centre column sees, among all 256 wheels, exactly the class {30, 86} (30 and its mirror image) after 7 values, and never less however long it watches: the centre cannot tell left from right [FORMAL]
+  [carrier]
+     words: wheel_30_observer_column_0 is a carrier of the automata register (aliases: r30_observer_column_0, wheel_00011110_observer_column_0).  It is what an observer standing at one column can tell about the wheel.
+     maths: the observer at the centre column sees, among all 256 wheels, exactly the class {30, 86} (30 and its mirror image) after 7 values, and never less however long it watches: the centre cannot tell left from right
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; value_num=7; value_den=1; evidence_rank=4; aux00=2
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.centre_column_class (the whole column: exactly {30, 86}), centre_prefix_class (7 values), centre_six_not_enough
+  [recomputation]
+     words: All 256 wheels are evolved from the impulse and read at column 0, with 7 and with 6 values.
+     maths: 7 values: survivors [30, 86]; 6 values: [30, 86, 175, 245]
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: describe r30_observer_column_1
+A: wheel_30_observer_column_1: the observer at column 1 identifies wheel 30 among all 256 after exactly 8 values: one cell off-centre the orientation is readable [FORMAL]
+  [carrier]
+     words: wheel_30_observer_column_1 is a carrier of the automata register (aliases: r30_observer_column_1, wheel_00011110_observer_column_1).  It is what an observer standing at one column can tell about the wheel.
+     maths: the observer at column 1 identifies wheel 30 among all 256 after exactly 8 values: one cell off-centre the orientation is readable
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=1; value_num=8; value_den=1; evidence_rank=4; aux00=1
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.column_one_identifies, column_one_prefix_identifies (8 values), column_one_seven_not_enough
+  [recomputation]
+     words: All 256 wheels are evolved from the impulse and read at column 1, with 8 and with 7 values.
+     maths: 8 values: survivors [30]; 7 values: 36 survivors
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: describe r30_observer_column_m1
+A: wheel_30_observer_column_m1: the observer at column -1 identifies wheel 30 among all 256; 11 values suffice and 10 do not [FORMAL]
+  [carrier]
+     words: wheel_30_observer_column_m1 is a carrier of the automata register (aliases: r30_observer_column_m1, wheel_00011110_observer_column_m1).  It is what an observer standing at one column can tell about the wheel.
+     maths: the observer at column -1 identifies wheel 30 among all 256; 11 values suffice and 10 do not
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=-1; value_num=11; value_den=1; evidence_rank=4; aux00=1
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.offCentre_column_identifies (columns 1 <= |c| <= 5, 13 values); the least number 11 is computed here
+  [recomputation]
+     words: All 256 wheels are evolved from the impulse and read at column -1, with 11 and with 10 values.
+     maths: 11 values: survivors [30]; 10 values: [30, 83]
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says which wheel produced the data, not how that wheel's run behaves in the limit.  Identifying the rule is a fact about the 256 tables; questions 1-3 stay OPEN for wheel 30 (and the same for 86, which the centre cannot tell apart from it).
+==============================================================================
+Q: is r30_observer_column_0 greater than r30_observer_column_1
+A: false: r30_observer_column_0 < r30_observer_column_1
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_observer_column_0 = 7 [FORMAL: GLM.Rule30.centre_column_class (the whole column: exactly {30, 86}), centre_prefix_class (7 values), centre_six_not_enough]; r30_observer_column_1 = 8 [FORMAL: GLM.Rule30.column_one_identifies, column_one_prefix_identifies (8 values), column_one_seven_not_enough]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_observer_column_0 = 7.00000000000000000000..., r30_observer_column_1 = 8.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; separated at 2**-8
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: greater; verdict: False
+==============================================================================
+Q: report wheel perspective
+A: report wheel perspective: the arrow is unchanged by the mirror and reversed by the colour swap; the centre column cannot see the mirror
+  [three frames]
+     words: The same run seen three ways: as it is; in a mirror (wheel 86 from the impulse); with the colours swapped (wheel 135 from the complemented impulse).
+     maths: N=10: D_30=4, D_86=4, D_135(complemented)=-4; N=100: D_30=4, D_86=4, D_135(complemented)=-4; N=1000: D_30=-38, D_86=-38, D_135(complemented)=38
+  [mirror]
+     words: Reflecting space leaves the arrow unchanged, for every N and every wheel, row and column.  The arrow carries no left/right information.
+     maths: observerArrow(mirror r, x(-.), -c) = observerArrow(r, x, c)  (Lean: observerArrow_mirror, observerArrow_eightySix)
+  [colour]
+     words: Swapping the colours reverses the arrow, for every N.  The arrow is a statement about which colour the observer calls black.
+     maths: observerArrow(complement r, not x, c) = -observerArrow(r, x, c)  (Lean: observerArrow_complement, observerArrow_oneThirtyFive)
+  [time]
+     words: Reading the first N values backwards: the accumulator after k backward steps is D(N) - D(N - k).
+     maths: Lean: wobble_reverse (Perspective.lean); e.g. N = 1000: backward D(10) = 2, D(100) = -2
+  [what the observer Y can read]
+     words: The colour frame is in the arrow; the spatial frame is not in the centre column at all (centre_column_class), but is read one cell off-centre (column_one_identifies).
+     maths: arrow: colour frame (sign flips), not spatial frame (invariant); position: spatial frame needs an off-centre column
+  [boundary]
+     words: What this does not establish.
+     maths: How the arrow transforms, not its long-run behaviour: question 2 (D(N)/N -> 0) stays OPEN.
+==============================================================================
+Q: describe r30_arrow_mirror
+A: wheel_30_arrow_mirror: reflecting space (wheel r -> mirror r, row x(j) -> x(-j), column c -> -c) multiplies the observer's arrow -sign D(N) by +1 for every N: the arrow cannot record which way is right; for the impulse, wheel 86 has the same D(N) as wheel 30 [FORMAL]
+  [carrier]
+     words: wheel_30_arrow_mirror is a carrier of the automata register (aliases: r30_arrow_mirror, wheel_00011110_arrow_mirror).  It is how the observer's arrow changes when the frame of view is changed.
+     maths: reflecting space (wheel r -> mirror r, row x(j) -> x(-j), column c -> -c) multiplies the observer's arrow -sign D(N) by +1 for every N: the arrow cannot record which way is right; for the impulse, wheel 86 has the same D(N) as wheel 30
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; value_num=1; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.observerArrow_mirror, wobble_eightySix, observerArrow_eightySix
+  [recomputation]
+     words: Wheel 86 is evolved from the impulse and its accumulator compared with wheel 30's for every N <= 400.
+     maths: D_86(N) = D_30(N) for all N <= 400: True; D(400) = 14
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says how the arrow transforms under a change of frame, for every N.  It does not say what sign the arrow takes in the long run, nor whether D(N)/N -> 0 (question 2, OPEN).
+==============================================================================
+Q: describe r30_arrow_colour
+A: wheel_30_arrow_colour: swapping the colours (wheel r -> complement r, row x -> not x) multiplies the observer's arrow by -1 for every N: the arrow records the colour frame; wheel 135 on the complemented impulse has D(N) = -D_30(N) [FORMAL]
+  [carrier]
+     words: wheel_30_arrow_colour is a carrier of the automata register (aliases: r30_arrow_colour, wheel_00011110_arrow_colour).  It is how the observer's arrow changes when the frame of view is changed.
+     maths: swapping the colours (wheel r -> complement r, row x -> not x) multiplies the observer's arrow by -1 for every N: the arrow records the colour frame; wheel 135 on the complemented impulse has D(N) = -D_30(N)
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; value_num=-1; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.observerArrow_complement, wobble_complement, wobble_oneThirtyFive, observerArrow_oneThirtyFive
+  [recomputation]
+     words: Wheel 135 is evolved from the complemented impulse (black background carried exactly) and its accumulator compared for every N <= 400.
+     maths: D_135(N) = -D_30(N) for all N <= 400: True; D_30(400) = 14, D_135(400) = -14
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This says how the arrow transforms under a change of frame, for every N.  It does not say what sign the arrow takes in the long run, nor whether D(N)/N -> 0 (question 2, OPEN).
+==============================================================================
+Q: compare r30_arrow_mirror and r30_arrow_colour
+A: r30_arrow_mirror > r30_arrow_colour
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_arrow_mirror = 1 [FORMAL: GLM.Rule30.observerArrow_mirror, wobble_eightySix, observerArrow_eightySix]; r30_arrow_colour = -1 [FORMAL: GLM.Rule30.observerArrow_complement, wobble_complement, wobble_oneThirtyFive, observerArrow_oneThirtyFive]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_arrow_mirror = 1.00000000000000000000..., r30_arrow_colour = -1.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; separated at 2**-8
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: compare; verdict: r30_arrow_mirror > r30_arrow_colour
+==============================================================================
+Q: describe r30_question_aperiodicity
+A: wheel_30_question_1: NOT exists p > 0, N : for all n >= N, a(n+p) = a(n),  a(n) = T_30^n(delta_0)(0).  PROVED partial: no column is eventually constant (p = 1); at most one column of the run is eventually periodic; no two adjacent columns are; same answer as for wheel 86 (mirror) and for wheel 135 on the complemented impulse. [OPEN]
+  [carrier]
+     words: wheel_30_question_1 is a carrier of the automata register (aliases: r30_question_aperiodicity, wheel_00011110_q1).  It is one of the three questions about the run of wheel 00011110 from the impulse row delta_0, read at column 0, carried as an exact statement.
+     maths: NOT exists p > 0, N : for all n >= N, a(n+p) = a(n),  a(n) = T_30^n(delta_0)(0).  PROVED partial: no column is eventually constant (p = 1); at most one column of the run is eventually periodic; no two adjacent columns are; same answer as for wheel 86 (mirror) and for wheel 135 on the complemented impulse.
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=1
+  [evidence]
+     words: Evidence class OPEN: stated exactly, not proved.
+     maths: Lean: GLM.Rule30.Problem1 = WheelProblem1 30 seed 0 (problem1_iff_wheel); column_not_eventually_constant, seed_at_most_one_periodic_column, problem1_iff_eightySix, problem1_iff_oneThirtyFive
+  [recomputation]
+     words: No finite recomputation applies to an open statement.
+     maths: none
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is an open statement.  The register holds its exact form and the proved facts around it; it does not hold a value for it, and no finite run decides it (Lean: no_finite_certificate_problem1 / no_finite_certificate_problem2).
+==============================================================================
+Q: real value r30_question_balance
+A: unsolved: real: r30_question_balance is an OPEN statement and has no value: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2.
+  [failure]
+     words: The query parsed as 'real' but could not be solved.
+     maths: error: real: r30_question_balance is an OPEN statement and has no value: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2.
+==============================================================================
+tool induce 0001000 -> 0011100 ; 0011100 -> 0110010 ? 0110010
+next row: 1101111 (wheel family, all 2 survivors agree)
+2 demonstrations, rows of width [7]
+seen table entries: 000->0, 001->1, 010->1, 011->1, 100->1, 110->0, 111->0
+unseen: ['101']; surviving wheels: 2 = 2^1 [30, 62]
+the query needs ['001', '010', '011', '100', '110']
+answered: every survivor gives the same next row
+figures: {'status': 'answered', 'survivors': 2, 'unseen': 1}
+==============================================================================
+tool induce 0001000 -> 0011100 ; 0011100 -> 0110010 ; 0110010 -> 1101111 ? 1101111
+refused: the demonstrations never show ['101']; candidate next rows ['1001000', '1011000']
+3 demonstrations, rows of width [7]
+seen table entries: 000->0, 001->1, 010->1, 011->1, 100->1, 110->0, 111->0
+unseen: ['101']; surviving wheels: 2 = 2^1 [30, 62]
+the query needs ['011', '101', '110', '111']
+refused: ['101'] never shown; the survivors give 2 different next rows
+figures: {'status': 'refused', 'survivors': 2, 'unseen': 1}
+==============================================================================
+tool induce 000010000 -> 000111000 ; 000111000 -> 001100100 ; 001100100 -> 011011110 ; 011011110 -> 110010001 ? 110010001
+next row: 101111011 (wheel family, all 1 survivors agree)
+4 demonstrations, rows of width [9]
+seen table entries: 000->0, 001->1, 010->1, 011->1, 100->1, 101->0, 110->0, 111->0
+unseen: none; surviving wheels: 1 = 2^0 [30]
+the query needs ['000', '001', '010', '011', '100', '110']
+answered: every survivor gives the same next row
+figures: {'status': 'answered', 'survivors': 1, 'unseen': 0}
+==============================================================================
+tool induce 0001000 / 0011100 / 0110010 ? 0110010
+next row: 1101111 (wheel family, all 2 survivors agree)
+2 demonstrations, rows of width [7]
+seen table entries: 000->0, 001->1, 010->1, 011->1, 100->1, 110->0, 111->0
+unseen: ['101']; surviving wheels: 2 = 2^1 [30, 62]
+the query needs ['001', '010', '011', '100', '110']
+answered: every survivor gives the same next row
+figures: {'status': 'answered', 'survivors': 2, 'unseen': 1}
+==============================================================================
+observer readings of the centre column:
+  observer at column 0, 5 values: 6 wheels survive [30, 62, 86, 118, 175, 245]
+  observer at column 0, 6 values: 4 wheels survive [30, 86, 175, 245]
+  observer at column 0, 7 values: 2 wheels survive [30, 86]
+  observer at column 0, 50 values: 2 wheels survive [30, 86]
+  observer at column 0, 500 values: 2 wheels survive [30, 86]

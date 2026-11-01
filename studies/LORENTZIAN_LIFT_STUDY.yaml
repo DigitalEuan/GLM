@@ -1,34 +1,46 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '11 of 12 marks; one tied reading: every rule at chance or refusing (the script''s rule
   0 right of 600); two tied readings 586 right, 0 wrong of 600; readings 4+4+6: 594 right against 0 for
-  the set collapse; decoy: 216 wrong, 61 with the guard (mark M11 not met).'
+  the set collapse; decoy: 216 wrong, 61 with the guard (mark M11 not met). Re-measured 31 October 2026
+  with an exact integer generator in place of `random` (§5.1): 10 of 12 marks (M11 and L not met); two
+  tied readings 588 right, 0 wrong of 600; 4+4+6: 597 right against 0; decoy: 234 wrong, 69 with the guard.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/lorentzian_lift
-  - reasoning/lorentzian_lift_study
-  - tests/test_lorentzian_lift
+  - reasoning/lorentzian_lift.py
+  - reasoning/lorentzian_lift_study.py
+  - reasoning/tie_break.py
+  - substrate/superposition.py
+  - tools.py
   lean:
   - AxiomAuditAll
   - GolayDeepHole
-  - LeechShells
   - LorentzianLift
+  lean_held:
+  - GolayDeepHole
+  lean_missing:
+  - LeechShells
+  missing: []
   prose: LORENTZIAN_LIFT_STUDY.md
   test:
   - test_lorentzian_lift.py
+  - test_reasoning.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: LORENTZIAN_LIFT_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,15 +48,40 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - M1
+  - M2
+  - M3
+  - M4
+  - M5
+  - M6
+  - M7
+  - M8
+  - M9
+  - M10
+  - M11
+  - L
+  met:
+  - M1
+  - M2
+  - M3
+  - M4
+  - M5
+  - M6
+  - M7
+  - M8
+  - M9
+  - M10
+  missed:
+  - M11
+  - L
 perturbations: []
 phase: 182
 predecessors: []
 question: Does lifting the GLM's ambiguous 24-bit space to the Lorentzian lattice II_25,1, as `iter10_lorentzian.py`
   proposes, resolve its ties, and if not, what can the lift be made to do for the GLM's reasoning?
 recomputed_by: '`glm_universal.reasoning.lorentzian_lift_study.lorentzian_lift_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -70,7 +107,8 @@ sections:
 - anchor: 8-reproduce
   heading: 8. Reproduce
 status: closed
-successors: []
+successors:
+- LORENTZIAN_EVIDENCE_STUDY
 superseded_by: ''
 supersedes: []
 title: The Lorentzian lift of the ambiguous space — the owner's `iter10_lorentzian.py` audited and repaired

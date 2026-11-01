@@ -1,4 +1,4 @@
-"""``glm_universal.reasoning.wobble_registry`` -- the Wobble registry (D17).
+"""``glm_universal.reasoning.wobble_registry`` -- the Wobble registry (D18).
 
 An irrational or infinite quantity -- pi, e, sqrt(2), log 2, an infinite
 sum, a limit -- is never stored as a constant beyond the certified
@@ -10,13 +10,17 @@ This module is the registry of wobble sources.  Each entry names the
 quantity, the generator (a Python function paired with a Lean theorem
 proving the enclosure), the certified width, and the consumers.
 
-*Note:* This module (``wobble_registry``) is the D17 directive registry.
+*Note:* This module (``wobble_registry``) is the D18 directive registry.
 The existing ``reasoning/wobble.py`` module is a different concept: the
 delta-sigma bit-stream wobble signature of a constant (Sturmian
 sequences, Shannon entropy, autocorrelation).  The two are unrelated;
 the name collision is resolved by this module's ``_registry`` suffix.
 
 *Created 29 October 2026 (Iteration 10, Phase R4).*
+
+
+*Last altered 31 October 2026 (repository check): renumbered D17 -> D18 when
+the date rule was restored to D17 (owner's decision of 30 October 2026).*
 """
 from __future__ import annotations
 

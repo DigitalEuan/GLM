@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Eight results, each recomputing what its Lean file proves, in exact arithmetic.
@@ -12,25 +14,28 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/salvage_second
-  - tests/test_salvage_second
+  - reasoning/salvage_second.py
   lean:
   - ConditionalInduction
-  - CubeMirror
+  - Cube/Stabiliser
+  - Cube/Surface
+  - Golay/CubeMirror
   - GrayJump
   - GridTension
   - ModeAlgebra
   - ReadQuantum
-  - Stabiliser
-  - Surface
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: SOURCE_SALVAGE_SECOND_PASS.md
   test:
-  - test_source_salvage_second_pass.py
+  - test_salvage_second.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: SOURCE_SALVAGE_SECOND_PASS
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -46,6 +51,10 @@ phase: 0
 predecessors: []
 question: Read a second time, with the first pass's Lean in hand, what else does the archive give up?
 recomputed_by: '`glm_universal.reasoning.salvage_second.second_pass_report`'
+related:
+- ARCHIVE_DEEP_DIVE_STUDY
+- RETRIEVED_LEAN_STUDY
+- SOURCE_SALVAGE_AUDIT
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

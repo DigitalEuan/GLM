@@ -8,7 +8,7 @@
 
 **Deciding figure.** 8 of 9 marks (X5 missed as written, X5′ met); 10 of 10 theorems, 0 `sorry`; battery 21 of 23 and 9 of 9 with and without the rotating-body join, 0 wrong; census 16,215 questions, 0 answers changed by a pin, 12 ambiguities resolved by each of the two energy pins; 4 of 4 declared refusals; evaluation 223 of 223.
 
-**Recomputed by.** `glm_universal.reasoning.frame_plane_study.frame_plane_report`
+**Recomputed by.** `glm_universal.engineering.context_frames_study.context_frames_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
@@ -16,10 +16,12 @@
 
 *Created 20 October 2026 (pre-registered 20 October 2026: §§0–6 were committed before the measurement of §7 was taken; measured 20 October 2026).*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ## 0. What this document is
 
 A pre-registration for Phase 170. It takes Part II.3 of the owner's plan of
-19 October 2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/GLM_19OCT26_1.md),
+19 October 2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/done/GLM_19OCT26_1.md),
 *add contextual domain frames*) and with it To-Do item 5 of `STATUS.md` §2.1
 (*the domain wheels, the rest*): *which energy*
 ([`DOMAIN_WHEELS_STUDY.md`](DOMAIN_WHEELS_STUDY.md) §7.5) and *which body
@@ -121,7 +123,7 @@ surfaces do not offer them.
 
 ## 7. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools context-frames` (stored in
+`PYTHONPATH=src python3 -m glm_universal.tools context-frames` (stored in
 `engineering/_data/context_frames_study.json`, digest-guarded over the Lean
 file, the module, the domain wheels, the engineering surface and the domain
 battery; `--write` re-takes it in about four minutes on eight processes).

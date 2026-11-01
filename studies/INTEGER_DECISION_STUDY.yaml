@@ -1,27 +1,34 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '22 of 22 declared questions answered as declared, 0 wrong (round three refused all 22);
   600 of 600 battery questions agree with enumeration, 0 undecided (round three: 31); 22 of 22 scripts
   `VERIFIED`, 22 of 22 mutants rejected; 6 of 6 marks met.'
-directives:
-- D15
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/integer_decision_cases
+  - evaluation/integer_decision_cases.py
+  - reasoning/integer_decision.py
+  - reasoning/reverse_tct_int.py
+  - tools.py
   lean:
   - IntegerDecision
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: INTEGER_DECISION_STUDY.md
-  test:
-  - test_integer_decision.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: INTEGER_DECISION_STUDY
 junctions: []
 last_altered: ''
@@ -32,16 +39,29 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - Z1
+  - Z2
+  - Z3
+  - Z4
+  - Z5
+  - Z6
+  met:
+  - Z1
+  - Z2
+  - Z3
+  - Z4
+  - Z5
+  - Z6
   missed: []
 perturbations: []
-phase: 69
+phase: 79
 predecessors:
 - REVERSE_TCT_STUDY
 question: Can the integer sort of Reverse Three Column Thinking decide every linear question it reads,
   with a certificate a fresh interpreter checks, instead of refusing `INTEGER_UNDECIDED`?
 recomputed_by: '`glm_universal.reasoning.integer_decision.decision_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

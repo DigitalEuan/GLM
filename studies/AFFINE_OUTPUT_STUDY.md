@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -285,7 +287,7 @@ their answers either way).
 
 *Written after the measurement. §§0–6 above are as they were committed.*
 
-`PYTHONPATH=. python3 -m glm_universal.tools affine-output` takes every mark
+`PYTHONPATH=src python3 -m glm_universal.tools affine-output` takes every mark
 except A1 and A9 in about three minutes; `tests/test_affine_output.py` (13
 tests) pins them as measured.
 

@@ -13,13 +13,15 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *[`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) closed eleven retrievals
 from the supplied archive. Two of them closed with a number rather than with a
 verdict, and both numbers invited a second question that the audit did not ask.
 This document asks them. Both answers are negative, and both are more useful
 than the positive would have been.*
 
-Module: [`glm_universal/reasoning/deep_dive.py`](../glm_universal/reasoning/deep_dive.py)
+Module: [`glm_universal/reasoning/deep_dive.py`](../src/glm_universal/reasoning/deep_dive.py)
 — one call, `deep_dive_report()`.
 Tests: `glm_universal/tests/test_deep_dive.py` — 23 test methods.
 Specification: `RequestProject/GLM/TriadChance.lean` and
@@ -28,8 +30,7 @@ Arithmetic: exact `int` and `Fraction` (D7). Every census below is a full
 enumeration, never a sample (D2).
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.reasoning.deep_dive import deep_dive_report as r; print(r())"
+PYTHONPATH=src python3 -c "from glm_universal.reasoning.deep_dive import deep_dive_report as r; print(r())"
 ```
 
 ---

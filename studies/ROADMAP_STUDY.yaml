@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 49 open items; 6 of them are the measurand register, 4 the loop, 4 the discourse state,
@@ -12,14 +14,18 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - runtime/measurands.py
   lean:
-  - ObserverY
+  - ScaleConversion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ROADMAP_STUDY.md
-  test:
-  - test_roadmap.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ROADMAP_STUDY
 junctions: []
 last_altered: ''
@@ -34,21 +40,26 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 87
-predecessors:
-- CARRIED_FORK_STUDY
-- CONNECTED_MACHINE_STUDY
-- HOLE_FOLDS_STUDY
-- LAW_TRIAGE_STUDY
-- MEASURANDS_STUDY
-- MEASURAND_REGISTER_STUDY
-- RATE_POSTERIOR_STUDY
-- REVERSE_TCT_STUDY
-- STEPWISE_THREE_STUDY
+phase: 0
+predecessors: []
 question: Of the items `STATUS.md` §3.4 names for the next round, which are the same piece of work under
   different names, which depend on which, and in what order should they be taken so that each round leaves
   the next one cheaper?
 recomputed_by: (hand-written argument; nothing to recompute)
+related:
+- CARRIED_FORK_STUDY
+- CONNECTED_MACHINE_STUDY
+- CONVERSATION_STUDY
+- HOLE_FOLDS_STUDY
+- LAW_TRIAGE_STUDY
+- MEASURANDS_STUDY
+- MEASURAND_REGISTER_STUDY
+- PYTHON_SPEECH_STUDY
+- RATE_POSTERIOR_STUDY
+- REVERSE_TCT_STUDY
+- SCALE_CONVERSION_STUDY
+- STEPWISE_THREE_STUDY
+- SUBSTRATE_NATIVE_COGNITION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -67,7 +78,7 @@ sections:
   heading: 4. The order
 - anchor: 5-what-this-does-not-settle
   heading: 5. What this does not settle
-status: open
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

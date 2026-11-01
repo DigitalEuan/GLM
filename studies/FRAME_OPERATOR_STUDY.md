@@ -20,11 +20,13 @@ first measurement (commit "Phase 177 (pre-registration)"). After the first take
 the mechanism gained one rule, the evidence guard; §7.2 says why and gives both
 takes. No mark was changed.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ## 0. What this document is
 
 A study for Phase 177, taken at the owner's request of 21 October 2026. The
 owner's document
-[`source_material/Lorentz boosts.pdf`](../source_material/Lorentz%20boosts.pdf)
+[`source_material/Lorentz boosts.pdf`](../source_material/done/Lorentz%20boosts.pdf)
 extends the pipeline kit
 ([`PIPELINE_KIT_STUDY.md`](PIPELINE_KIT_STUDY.md)) towards dimension
 projection, layered stacking and operational use for ARC-style puzzles and

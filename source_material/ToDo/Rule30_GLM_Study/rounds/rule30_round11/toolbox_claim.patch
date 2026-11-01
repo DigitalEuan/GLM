@@ -1,0 +1,44 @@
+--- a/glm_universal/runtime/toolbox.py
++++ b/glm_universal/runtime/toolbox.py
+@@ -996,6 +996,15 @@
+     return ToolResult(ok, text, figures)
+ 
+ 
++def _claim(arg: str) -> ToolResult:
++    """``CLAIM``: a claim about Rule 30 / the 256 wheels in a declared claim frame, decided with
++    a four-part trace (verdict, missing hypothesis, witness or Lean reference, next test), or
++    refused (Rule 30 study, Round 11; ``reasoning/wheel_claims.py``)."""
++    from ..reasoning import wheel_claims as wc
++    ok, text, figures = wc.claim_text(arg)
++    return ToolResult(ok, text, figures)
++
++
+ def _arc(arg: str) -> ToolResult:
+     """``NAME``: a stored ARC task's demonstrations induced by the colour
+     solver, every test input answered or refused, and each answer checked
+@@ -1213,6 +1222,16 @@
+          ("RequestProject/GLM/ColourInduction.lean",),
+          "studies/COLOUR_INDUCTION_STUDY.md", _arc,
+          takes="a task name, or nothing for the list"),
++    Tool("claim", "reasoning.wheel_claims", "a claim about Rule 30 and the 256 "
++         "wheels, read in a declared claim frame and decided: computed frames "
++         "(column distinguishes wheels, mirror wobble, right-diagonal balance, "
++         "rows determine the wheel) compute the verdict and name the Lean theorem; "
++         "settled frames carry a proved theorem or non-implication; anything else "
++         "is refused (Rule 30 study, Round 11)", "derive, refusal",
++         ("RequestProject/GLM/Rule30/Observer.lean",
++          "RequestProject/GLM/Rule30/ChiralLeak.lean",
++          "RequestProject/GLM/Rule30/RightDiagonalBalance.lean"),
++         "rule30_round11/README.md", _claim, takes="CLAIM"),
+     Tool("frame", "reasoning.frame_operators", "an operator on exact "
+          "rational 2-vectors inferred from example pairs, layer by layer: the "
+          "invariant kept (E^2-p^2 or E^2+p^2) says which family it can be, "
+@@ -1312,6 +1331,8 @@
+      "tool wiring"),
+     (r"(?:solve|answer|try) (?:the )?arc (?:task|puzzle) ([0-9a-f]{8})",
+      "tool arc {1}"),
++    (r"(?:check|assess|judge|verify)(?: the)? claim:? (.+)", "tool claim {1}"),
++    (r"is it true that (.+)", "tool claim {1}"),
+     (r"(?:which|what) (?:frame )?operator (?:maps|takes|sends) (.+\?.+)",
+      "tool frame {1}"),
+     (r"(?:boost|transform) (.+\?.+)", "tool frame {1}"),

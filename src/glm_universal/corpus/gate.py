@@ -29,6 +29,10 @@ Three properties keep that honest.
 * **It can be refused.**  ``--check --all`` ignores the record and runs the
   whole pass, which is also what the release does; the record is an
   optimisation, and nothing depends on it being there.
+
+*Last altered 31 October 2026 (repository check): the command's path is taken
+from the package root, which moved to ``src/`` in the reorganisation; the
+study manifests and their schema are part of the closure.*
 """
 
 from __future__ import annotations
@@ -51,7 +55,10 @@ GATE_PATH = rules.PROJECT_ROOT / ".glm_corpus_gate.json"
 #: rather than trusted, because a digest means nothing without its rule.
 SCHEMA = 1
 
-_COMMAND = rules.PROJECT_ROOT / "glm_universal" / "corpus" / "__main__.py"
+#: The documents check itself (fixed 31 October 2026: the package moved to
+#: ``src/glm_universal`` in the reorganisation, so it is found from the
+#: package root, not from the repository root).
+_COMMAND = rules.PACKAGE_ROOT / "corpus" / "__main__.py"
 
 
 def _closure() -> Iterable[Path]:
@@ -61,8 +68,13 @@ def _closure() -> Iterable[Path]:
     check walks the whole corpus, so it reads a document by its being there
     rather than by a module naming it (:func:`rules.written_documents`).
     """
+    from ..constants import STUDIES_DIR, STUDY_SCHEMA_FILE
+    # The study manifests and their schema are read by the manifest gate
+    # (added 31 October 2026), so a hand edit to one re-opens the check.
+    manifests = set(STUDIES_DIR.glob("*.yaml")) | {STUDY_SCHEMA_FILE}
     return tuple(sorted(set(rules.unit_closure(_COMMAND))
-                        | set(rules.written_documents())))
+                        | set(rules.written_documents())
+                        | manifests))
 
 
 def inputs_digest() -> str:

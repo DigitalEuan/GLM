@@ -1,0 +1,202 @@
+schema: glm-study-rounds/v1
+sources:
+  - RequestProject/GLM/Rule30/HISTORY.md
+  - RULE30_STUDY.md section 2
+before_lean: the owner's seven rounds, computed with Z.ai and translated with Qwen.ai; described in the study folder (README.md, VERIFICATION_DIRECTIVE.md, pdfs/) and in RULE30_STUDY.md section 2.1
+rounds:
+  - round: 1
+    phase: "Lean Rounds 1–3: checking the claims"
+    title: null
+    record: null
+  - round: 2
+    phase: "Lean Rounds 1–3: checking the claims"
+    title: results
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 2)
+  - round: 3
+    phase: "Lean Rounds 1–3: checking the claims"
+    title: the 32-state phase space and the wobble certificate
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 3)
+  - round: 4
+    phase: "Rounds 4–12: widening the lens"
+    title: ascending to measure theory and seed-specific structure
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 4)
+  - round: 5
+    phase: "Rounds 4–12: widening the lens"
+    title: finite-state observers, the diagonal bridge, and a machine model
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 5)
+  - round: 6
+    phase: "Rounds 4–12: widening the lens"
+    title: the full feedback push (waves, boundaries, rule spaces, the parity count)
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 6)
+  - round: 7
+    phase: "Rounds 4–12: widening the lens"
+    title: two new partial results on Problem 1
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 7)
+  - round: 8
+    phase: "Rounds 4–12: widening the lens"
+    title: the degree formula `deg a(n) = 2n − 1` is proved for all `n ≥ 2` (`TopMonomial.lean`)
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 8)
+  - round: 9
+    phase: "Rounds 4–12: widening the lens"
+    title: the light cone is fully essential, and the family of wheels
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 9)
+  - round: 10
+    phase: "Rounds 4–12: widening the lens"
+    title: the GLM reads Rule 30 step by step — inducing the wheel, and the observer's frame
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 10)
+  - round: 11
+    phase: "Rounds 4–12: widening the lens"
+    title: the seed's right edge, the off-centre observer, the moving frame
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 11)
+  - round: 12
+    phase: "Rounds 4–12: widening the lens"
+    title: different reads of the wobble, the theorem wheel, and a discussion with the GLM
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 12)
+  - round: 13
+    phase: "Rounds 13–20: what a proof would take"
+    title: the stack lift, the propose-and-check loop, and the chemistry lab
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 13)
+  - round: 14
+    phase: "Rounds 13–20: what a proof would take"
+    title: what a proof would take, and shortcut paths
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 14)
+  - round: 15
+    phase: "Rounds 13–20: what a proof would take"
+    title: following the "what a proof would take" leads, and ideas from aperiodic tilings
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 15)
+  - round: 16
+    phase: "Rounds 13–20: what a proof would take"
+    title: the period-2 rung, weight growth closed, the triangle question, GLM operators
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 16)
+  - round: 17
+    phase: "Rounds 13–20: what a proof would take"
+    title: spinning the triangle and the pyramid; spin as a multiplication factor
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 17)
+  - round: 18
+    phase: "Rounds 13–20: what a proof would take"
+    title: the `C·R` injector, the odd parity lock on `M_{n+1}`, and the three analogies
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 18)
+  - round: 19
+    phase: "Rounds 13–20: what a proof would take"
+    title: the triangle as the side view of a hole; the period-3 to period-6 rungs
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 19)
+  - round: 20
+    phase: "Rounds 13–20: what a proof would take"
+    title: audit
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 20)
+  - round: 21
+    phase: "Rounds 21–27: the half-line machine"
+    title: Problem 1 needs only the left half-line
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 21)
+  - round: 22
+    phase: "Rounds 21–27: the half-line machine"
+    title: the first tests are exactly independent; the prefix search
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 22)
+  - round: 23
+    phase: "Rounds 21–27: the half-line machine"
+    title: the power-series ladder (your concept file) and the exact counting law
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 23)
+  - round: 24
+    phase: "Rounds 21–27: the half-line machine"
+    title: alternatives to XOR; Kronecker's converse
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 24)
+  - round: 25
+    phase: "Rounds 21–27: the half-line machine"
+    title: tuning by ear — pruned, directed search for an unknown law
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 25)
+  - round: 26
+    phase: "Rounds 21–27: the half-line machine"
+    title: the conjecture loop — the GLM proposes lemmas, tests them, narrows, loops
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 26)
+  - round: 27
+    phase: "Rounds 21–27: the half-line machine"
+    title: post-edge witnesses, ranking functions and width reduction
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 27)
+  - round: 28
+    phase: "Rounds 28–30: the GLM made operational"
+    title: the GLM made operational on the package; local-rule induction for ARC; documentation
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 28)
+  - round: 29
+    phase: "Rounds 28–30: the GLM made operational"
+    title: a stepwise planner for puzzles; the inner-survivor form refuted
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 29)
+  - round: 30
+    phase: "Rounds 28–30: the GLM made operational"
+    title: one pipeline (plan, ask, gate, statements) for the GLM Rule 30 investigation
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 30)
+  - round: 31
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: the sideways observer; barrier diagonals; exact arithmetic throughout
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 31)
+  - round: 32
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: "`M₂₄` orbits of seed patterns, and how much of `M₂₄` Rule 30 keeps"
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 32)
+  - round: 33
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: the observer's clock (test-count and halving laws), period 2 read sideways, the GLM grown to match
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 33)
+  - round: 34
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: does period 4 have a finite slack? The divisor rule and the observer's phase; the GLM takes its own step
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 34)
+  - round: 35
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: a faster verified checker, the slacks further out, and black runs as window reads
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 35)
+  - round: 36
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: the drive wheel
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 36)
+  - round: 37
+    phase: "Rounds 31–37: the observer's viewpoints"
+    title: the cost of a turn, the observer's best phase, the GLM indexed by hubs
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 37)
+  - round: 38
+    phase: "Rounds 38–42: the hypothesis engine"
+    title: the hypothesis engine — statements, held-out falsification, laws, a prediction
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 38)
+  - round: 39
+    phase: "Rounds 38–42: the hypothesis engine"
+    title: the engine pushed further — white diagonals never stop; the engine off Rule 30
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 39)
+  - round: 40
+    phase: "Rounds 38–42: the hypothesis engine"
+    title: settling times, the open bit, and the left side of every row
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 40)
+  - round: 41
+    phase: "Rounds 38–42: the hypothesis engine"
+    title: the self-dialogue engine — v10 reviewed, v11 rebuilt
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 41)
+  - round: 42
+    phase: "Rounds 38–42: the hypothesis engine"
+    title: engine v13 checked; reasoning guards; the TAX route closed
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 42)
+  - round: 43
+    phase: "Rounds 43–47: the GLM's architecture checked"
+    title: the escalation-boundaries sketch checked; the master view rebuilt
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 43)
+  - round: 44
+    phase: "Rounds 43–47: the GLM's architecture checked"
+    title: the escalation sketch corrected; the needs wheel measured
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 44)
+  - round: 45
+    phase: "Rounds 43–47: the GLM's architecture checked"
+    title: the Hypothesis Engine gate loop made to work (engine v17)
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 45)
+  - round: 46
+    phase: "Rounds 43–47: the GLM's architecture checked"
+    title: engine v18 and the wheel contract in Lean
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 46)
+  - round: 47
+    phase: "Rounds 43–47: the GLM's architecture checked"
+    title: the 2-adic layer tower; the full `M₂₄` census; MOG subgroups
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 47)
+  - round: 48
+    phase: "Round 48: triangles and lines"
+    title: white triangles, left-down vs right-down lines, bands printed from the right
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 48)
+  - round: 49
+    phase: "Round 49: the tidy-up"
+    title: the tidy-up — the journey written up, the package prepared for the GLM
+    record: RequestProject/GLM/Rule30/HISTORY.md (Round 49)

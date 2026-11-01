@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 1. A commitment is not a mechanism
@@ -149,7 +151,7 @@ malformed unit — which would be noise dressed up as a finding.
 
 ## 7. The formal side
 
-[`RequestProject/GLM/Admission.lean`](../glm_lean/RequestProject/GLM/Admission.lean)
+[`RequestProject/GLM/Admission.lean`](../src/lean/RequestProject/GLM/Admission.lean)
 models the door as three partial functions from a name to something a register
 computed. There is deliberately no fourth field: the door **cannot make** a
 coordinate, only pass one on, which is the `grounded` clause expressed as a
@@ -172,9 +174,8 @@ type.
 ## 8. How to re-run it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report admission').answer)"
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_admission.py -q
+PYTHONPATH=src python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report admission').answer)"
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_admission.py -q
 cd .. && lake build RequestProject.GLM.Admission
 ```
 

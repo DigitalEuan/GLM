@@ -14,7 +14,7 @@ https://github.com/DigitalEuan/GLM
 
 **Verdict.** This repository holds the Geometric Language Machine system and many studies that came out of developing it so far.
 
-**Deciding figure.** <!--figure:registers-->8 registers<!--/figure--> of carriers, reached through <!--figure:query-kinds-->27 query kinds<!--/figure--> one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
+**Deciding figure.** <!--figure:registers-->8 registers<!--/figure--> of carriers, reached through <!--figure:query-kinds-->31 query kinds<!--/figure--> one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
 
 **Recomputed by.** `glm_universal.figures.figures`
 
@@ -22,14 +22,15 @@ https://github.com/DigitalEuan/GLM
 
 ---
 
-*Last altered 30 October 2026 (repository check: directives D17–D21 renumbered, constants single-source rule D21; earlier 29 October 2026 reorganisation: the repository restructured under src/, studies as YAML+MD pairs, wheels centralized, Rule30 Lean absorbed).*
+*Last altered 31 October 2026 (repository check: directives D17–D22 — date stamps restored as D17, Wobble/Reversibility/Generate-don't-store renumbered D18–D20, constants single source D21, the intake of new material D22; `source_material/` filed into `ToDo/` and `done/`; lost modules reconstructed and marked; study manifests read as data; later the same day absorption tied to the owner's Lean build record, and the two wheel items installed in the wheels folder marked provisional until it confirms them). Earlier: 29 October 2026 reorganisation: the repository restructured under src/, studies as YAML+MD pairs, wheels centralized, Rule30 Lean absorbed.*
 
 This repository holds the Geometric Language Machine system and many studies that came out of developing it so far.
 
 *Rewritten in Phase 133.* The supplied files of the owner's substrate study
 had been unpacked over the repository root and had replaced this front door;
-they now live in [`source_material/substrate_study/`](source_material/substrate_study/README.md),
-and this file was written again from the current state documents.
+they now live with the rest of the supplied material in
+[`source_material/`](source_material/README.md), and this file was written again
+from the current state documents.
 
 ## Where to start
 
@@ -43,7 +44,7 @@ and this file was written again from the current state documents.
 5. [`ITERATE.md`](ITERATE.md) — how a round is picked up, worked and closed.
 
 > **Before running anything** — two notes that have cost work before (all
-> eight are in [`ITERATE.md`](ITERATE.md) §0.1, *Run-order hazards*):
+> nine are in [`ITERATE.md`](ITERATE.md) §0.1, *Run-order hazards*):
 >
 > * **Don't edit documents while `corpus --refresh` is running.** It
 >   rewrites them from the copies it read when it started.
@@ -63,11 +64,11 @@ the extended binary Golay code, the Leech lattice, and exact integer and
 rational arithmetic on them — no floating point on any path that feeds a
 result. The package lives in [`src/glm_universal/`](src/glm_universal/README.md) as
 `glm_universal`, and holds <!--figure:registers-->8 registers<!--/figure-->
-of carriers reached through <!--figure:query-kinds-->27 query kinds<!--/figure-->,
+of carriers reached through <!--figure:query-kinds-->31 query kinds<!--/figure-->,
 one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
 The formal development is
 [`src/lean/RequestProject/GLM/`](src/lean/RequestProject/GLM/README.md),
-<!--figure:lean-files-->425 Lean files<!--/figure--> with no `sorry`, built
+<!--figure:lean-files-->414 Lean files<!--/figure--> with no `sorry`, built
 from the repository root with `lake build`.
 
 ```bash
@@ -77,21 +78,29 @@ PYTHONPATH=src python3 -m glm_universal.tools --help      # the study instrument
 
 ## 1b. What this round closed
 
-Phase 160 ([`studies/FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md)),
-Part II.2 of the owner's plan of 19 October 2026: the remaining carried folds.
-When the planner answers *the median atomic number of the halogens*, *the rank
-of iron by atomic weight among the transition metals* or *the heaviest of the
-noble gases*, the batch machine GLM-BAT now recomputes the answer itself from the
-readings it finds in its own copy of the register, instead of taking the
-planner's value as data. It has no sort, so it counts: a reading is at a
-position of the sorted column exactly when the readings below it and the
-readings at most it bracket that position (proved in `FoldMachine.lean`). The
-program offers a witness for each position, and the machine checks it by
-counting, so a wrong witness stops the run and can never change the value.
-Declared holes are checked as absences from the register. All 48 such folds
-are now computed (carried steps 92 → 44), a lie at each is caught at its own
-step, and no answer moved. The record of every round is
-[`MASTER_PLAN.md`](MASTER_PLAN.md).
+The repository check of 31 October 2026 put the repository back together after the October
+reorganisation and the arrival of new supplied material (the full record is in
+[`STATUS.md`](STATUS.md) §1b and [`MASTER_PLAN.md`](MASTER_PLAN.md)):
+
+* **Lost parts reconstructed or recorded.** Python modules lost in the reorganisation
+  (for example `runtime/respell.py`, `runtime/sinter.py`, `reasoning/carried_read.py`,
+  `reasoning/planner_ladder.py`, `reasoning/hole_reports_l5.py`, `corpus/dates.py`) were
+  rebuilt from their studies and tests; each says *Reconstructed 31 October 2026* in its
+  docstring. Lean files that existed only as placeholders are recorded as missing in
+  [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md), and the files that
+  import them wait in `src/lean/awaiting_recovery/`, out of the build.
+* **Studies as data.** Every study has a validated YAML manifest; the GLM answers `study`
+  questions from them, and `glm_universal.corpus.study_manifest`, `study_index` and
+  `study_links` keep the manifests, the index and the links honest.
+* **New material has a way in.** The owner's material goes into `source_material/ToDo/`
+  and is taken through the intake (directive D22,
+  [`source_material/README.md`](source_material/README.md)) to a Lean-verified, measured
+  stage before anything is absorbed — Lean verified meaning that the owner's build record
+  matches the item's Lean files — and finished items are filed in `source_material/done/`.
+* **Two owner-run scripts** — `scripts/rebuild_lean.sh` (rebuilds `.lake` and runs the
+  axiom audit) and `scripts/check_repository.sh` (every Python gate) — write their logs to
+  `scripts/logs/` for the next round to read, since `lake build` could not be run here; each
+  exits 1 when a required step fails and 0 only when every step passes.
 
 ## 2. What the machine can actually do so far, measured
 
@@ -102,10 +111,26 @@ capability probes and the test suite are listed with their commands and
 current figures in [`SYSTEM.md`](SYSTEM.md) §1; refusals are stated as
 boundaries, never hidden.
 
-## 3. The supplied documents, read as claim ledgers
+## 3. The supplied material, and the intake
 
-The material the owner supplied is in [`source_material/`](source_material/).
-Each document that makes claims is restated sentence by sentence and given
+The material the owner supplies goes into [`source_material/`](source_material/README.md):
+`ToDo/` holds what is still being taken in, `done/` what has been absorbed or closed, and
+`INTAKE.yaml` is the ledger of every item and its stage. An item is absorbed into the
+package only after it has a study, has been tested, has its Lean written and then verified
+by a passing build (the record `scripts/rebuild_lean.sh` writes, matched against the item's
+Lean files and everything they import) and has been measured to help the GLM (directive D22;
+the pipeline itself is [`studies/INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md)).
+The two wheel items of the repository check — the Integer and Monster wheels
+(`glm_wheels_bundle`) and fifteen cent formula wheels (`cent_compiler_v12`) — are tested and
+measured, and by the owner's decision are already in the one wheels folder,
+`src/glm_universal/wheels/`, **marked provisional** until that build confirms them: the GLM
+answers from them, and every such answer says it rests on a provisional wheel.
+
+```bash
+PYTHONPATH=src python3 -m glm_universal.intake status
+```
+
+Each supplied document that makes claims is restated sentence by sentence and given
 verdicts — for example
 [`studies/GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](studies/GLM_UNIFICATION_BLUEPRINT_AUDIT.md)
 and [`studies/GLM_STUDY_CATALOG_AUDIT.md`](studies/GLM_STUDY_CATALOG_AUDIT.md)
@@ -135,10 +160,15 @@ stops being grounded in its document or a link breaks.
 
 | path | what |
 |---|---|
-| `` | the package `glm_universal`, the CLI `GLM.py` and the Lean development `src/lean/` |
-| `studies/` | one study per question, each with its pre-registered marks and what came out |
-| `source_material/` | the material the owner supplied, kept as supplied |
+| `src/` | the package `glm_universal` (`src/glm_universal/`), the CLI `src/GLM.py` and the Lean development `src/lean/` |
+| `src/glm_universal/wheels/` | the one wheels folder: every wheel the GLM uses, once it has passed the intake |
+| `studies/` | one study per question (`.md`) with its manifest (`.yaml`), its pre-registered marks and what came out |
+| `source_material/` | the material the owner supplied: `ToDo/`, `done/` and the `INTAKE.yaml` ledger |
+| `scripts/` | the two owner-run scripts and their logs (`scripts/logs/`) |
 | `archive/` | records of earlier rounds |
+
+Every command in these documents is run from the repository root, with `PYTHONPATH=src`
+for the package (`src/GLM.py` adds it itself).
 
 ## The layout in one paragraph
 
@@ -151,6 +181,6 @@ what the rounds were drawn from.
 
 Every count in a state document that can move — registers, query kinds,
 report subjects, Lean files, test files — is an inline figure rewritten by
-`corpus --refresh` from the code that computes it (`glm_universal/figures.py`,
-[`FIGURES.md`](FIGURES.md)), and `tests/test_figures.py`
+`corpus --refresh` from the code that computes it (`src/glm_universal/figures.py`,
+[`FIGURES.md`](FIGURES.md)), and `src/glm_universal/tests/test_figures.py`
 fails if a document drifts from it.

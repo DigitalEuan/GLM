@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 **Status: implemented.** Five suites, 2,390 scored tasks, results written as
 data into [`results/`](results/). The contract this directory was reserved
@@ -22,11 +24,11 @@ under — evidence tier declared first, results as data, negative results
 reported — is now enforced by the harness rather than promised in prose.
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.benchmarks             # run and print
-PYTHONPATH=. python3 -m glm_universal.benchmarks --write     # write results/
-PYTHONPATH=. python3 -m glm_universal.benchmarks --list
-PYTHONPATH=. python3 -m glm_universal.benchmarks golay_correction
-PYTHONPATH=. python3 GLM.py -q "report benchmarks" -c 1      # through the runtime
+PYTHONPATH=src python3 -m glm_universal.benchmarks             # run and print
+PYTHONPATH=src python3 -m glm_universal.benchmarks --write     # write results/
+PYTHONPATH=src python3 -m glm_universal.benchmarks --list
+PYTHONPATH=src python3 -m glm_universal.benchmarks golay_correction
+PYTHONPATH=src python3 src/GLM.py -q "report benchmarks" -c 1      # through the runtime
 ```
 
 Exit code 0 when every suite beat its declared baseline, 1 when any suite

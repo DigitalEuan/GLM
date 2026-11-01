@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -230,8 +232,7 @@ It claims exactly the faculty measured, under the perturbation declared:
 ## 6. How to re-run this
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools blockers           # the stored measurement
-PYTHONPATH=. python3 -m glm_universal.tools blockers --write   # re-take it (about a minute)
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_blockers.py -q
+PYTHONPATH=src python3 -m glm_universal.tools blockers           # the stored measurement
+PYTHONPATH=src python3 -m glm_universal.tools blockers --write   # re-take it (about a minute)
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_blockers.py -q
 ```

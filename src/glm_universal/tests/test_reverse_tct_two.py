@@ -201,7 +201,7 @@ class TestW6TheRelay(unittest.TestCase):
 class TestTheLeanFile(unittest.TestCase):
 
     def test_the_proved_names_are_there(self):
-        text = (ROOT / "glm_lean/RequestProject/GLM/ReverseTCTTwo.lean").read_text(
+        text = (ROOT / "src/lean/RequestProject/GLM/ReverseTCTTwo.lean").read_text(
             encoding="utf-8")
         self.assertNotIn("sorry", text)
         for name in ("render_prefix_free", "render_injective",

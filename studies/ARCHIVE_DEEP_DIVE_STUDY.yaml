@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Two questions, two negative answers, every census a full enumeration in exact arithmetic.
@@ -14,20 +16,24 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/deep_dive
-  - tests/test_deep_dive
+  - reasoning/deep_dive.py
+  - substrate/golay_decode.py
   lean:
   - LDP
   - Relaxation
   - TriadChance
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ARCHIVE_DEEP_DIVE_STUDY.md
   test:
-  - test_archive_deep_dive.py
+  - test_deep_dive.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ARCHIVE_DEEP_DIVE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -43,6 +49,10 @@ phase: 0
 predecessors: []
 question: Are the archive's 44 balanced octads structure or chance, and is its relaxation a decoder?
 recomputed_by: '`glm_universal.reasoning.deep_dive.deep_dive_report`'
+related:
+- RETRIEVED_LEAN_STUDY
+- SOURCE_SALVAGE_AUDIT
+- SOURCE_SALVAGE_SECOND_PASS
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

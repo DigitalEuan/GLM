@@ -1,14 +1,16 @@
 """Run the benchmark suites from the command line.
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.benchmarks
-PYTHONPATH=. python3 -m glm_universal.benchmarks --write
-PYTHONPATH=. python3 -m glm_universal.benchmarks golay_correction
+PYTHONPATH=src python3 -m glm_universal.benchmarks
+PYTHONPATH=src python3 -m glm_universal.benchmarks --write
+PYTHONPATH=src python3 -m glm_universal.benchmarks golay_correction
 ```
 
 Exit code 0 when every suite beat its baseline, 1 when any suite returned a
 null or below-baseline result.  A null result is not a crash, so it is not
 reported as one — but it is not a success either, and the exit code says so.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

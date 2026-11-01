@@ -372,12 +372,52 @@
   "cases": 198,
   "moved": [
    {
-    "cause": "undeclared",
+    "cause": "a later round: Phase 147: the list of query kinds the refusal names gains 'hole'; 31 October 2026: and the four lookup kinds 'corpus', 'tool', 'study' and 'sequence'",
+    "id": "unknown-nonsense"
+   },
+   {
+    "cause": "the tree: the Lean declaration count, measured live",
+    "id": "report-lean"
+   },
+   {
+    "cause": "a later round: the directives register, measured live (16 standing rules at the baseline, 22 now)",
+    "id": "report-directives"
+   },
+   {
+    "cause": "a later round: Phase 149: the report keeps its round's text and adds the L5 clause",
+    "id": "report-hole-classifier"
+   },
+   {
+    "cause": "a later round: Phase 149: the report keeps its round's text and adds the L5 clause",
+    "id": "report-hole-ladder"
+   },
+   {
+    "cause": "the tree: the address-book index over the Lean declarations",
+    "id": "report-retrieval"
+   },
+   {
+    "cause": "the tree: the overlay's stored bytes, measured live",
+    "id": "report-generated"
+   },
+   {
+    "cause": "a later round: Phases 147-148 and 31 October 2026: the language report counts the query kinds and the evaluation questions, which gain the new kinds and cases",
     "id": "report-language"
    },
    {
-    "cause": "undeclared",
+    "cause": "a later round: Phase 149: the report keeps its round's text and adds the L5 clause",
+    "id": "report-hole-failures"
+   },
+   {
+    "cause": "a later round: Phases 147-148: the query-escalation report counts the evaluation cases, which gain the new ones",
     "id": "report-query-escalation"
+   },
+   {
+    "cause": "the tree: the stack relay's strides are drawn from the Lean declarations",
+    "id": "report-relay"
+   },
+   {
+    "cause": "the tree: the anonymous register's queries are the relay's strides",
+    "id": "report-anonymous"
    },
    {
     "cause": "this round: the junction answer ends with its question",
@@ -389,18 +429,40 @@
    }
   ],
   "new_cases": [
+   "corpus-address",
+   "corpus-address-phrase",
+   "corpus-continue",
+   "corpus-define",
+   "corpus-unmentioned",
+   "hole-lattice-point",
+   "hole-malformed",
+   "hole-octad-pair",
+   "hole-patience-refused",
+   "hole-walk",
    "locate-reply",
    "locate-reply-confirmed",
    "locate-reply-contradicted",
-   "locate-reply-no-tie"
+   "locate-reply-no-tie",
+   "nearest-address-ambiguous",
+   "nearest-address-junction",
+   "nearest-address-moved",
+   "nearest-address-point",
+   "nearest-address-uncertified",
+   "nearest-tie-confirmed",
+   "nearest-tie-contradicted",
+   "nearest-tie-no-tie",
+   "nearest-tie-question",
+   "nearest-tie-reply",
+   "sequence-fibonacci",
+   "sequence-unheld",
+   "study-card",
+   "study-unknown",
+   "tool-leech-norm-12"
   ],
   "present": 198,
   "same_status": 198,
-  "same_text": 194,
-  "undeclared": [
-   "report-language",
-   "report-query-escalation"
-  ]
+  "same_text": 184,
+  "undeclared": []
  },
  "q1": {
   "junctions": 104,
@@ -429,22 +491,22 @@
      "path": "/discourse/census/distinct_taken"
     },
     {
-     "after": "5167",
+     "after": "6114",
      "before": "5129",
      "path": "/discourse/census/strings"
     },
     {
-     "after": 26,
+     "after": 35,
      "before": 24,
      "path": "/discourse/census/taken"
     },
     {
-     "after": "26",
+     "after": "35",
      "before": "24",
      "path": "/discourse/census/taken_count"
     }
    ]
   }
  },
- "source_digest": "06e2a2a2e4e5f8b24ead8f5fa389a2d357c8e3675665b9a88feef536624f4bfe"
+ "source_digest": "eb4fcf394f977ac95450786451d56e2758c2af17a2d9be7e70d4b0adaabcfbb0"
 }

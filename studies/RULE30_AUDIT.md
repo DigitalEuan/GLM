@@ -1,5 +1,21 @@
 # Rule 30 / GLM study — Audit (Round 20, updated in Rounds 21–42)
 
+## Tier 0 — the coarse read
+
+**Question.** What is the status of the Rule 30 / GLM study: what has been tried, what came of it, what is still missing in the GLM's own terms, and what is left to do?
+
+**Verdict.** All three Wolfram Rule 30 prize problems are still open. The project has not solved any of them, and nothing in it claims to.
+
+**Deciding figure.** None of the three prize problems solved; the missing theorems listed in §3.1, any one of which would answer its problem.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: this tier-0 block added so that the document keeps the corpus's tier contract like the other `RULE30_*` documents; the text below the rule is unchanged).*
+
+---
+
 **Read `PROJECT_DIRECTIVE.md` first** for the goal, the rules and the current focus; this file is
 the status. It defines what the project is, what has been tried and what came of
 it, what is still missing (in the GLM's own terms), and what is left to do. The detailed results

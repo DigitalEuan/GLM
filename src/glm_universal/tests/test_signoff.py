@@ -355,20 +355,54 @@ class TestDocumentClosure(unittest.TestCase):
         imports the module that walks the tree, the closure widens again and
         the test above is the only thing that would notice.
         """
-        reader = (Path(L.PROJECT_ROOT) / "glm_universal" / "reasoning"
-                  / "lean_book.py")
+        reader = L.PACKAGE_ROOT / "reasoning" / "lean_book.py"
         closure = set(L.unit_closure(reader))
         self.assertFalse(set(L.lean_sources()) <= closure)
         modules = {p.name for p in closure if p.suffix == ".py"}
         self.assertNotIn("lean_address.py", modules)
 
     def test_the_lean_index_holds_every_file_once(self):
+        """Every Lean source is indexed once, under its own name.
+
+        Until the October 2026 reorganisation every name was held by one
+        file; five names now repeat in different folders (``Golay.lean`` in
+        ``PipelineKit/`` and ``Shortcut/``, for instance), so the index maps
+        such a name to each copy and a *path* token is resolved to the one
+        it names (31 October 2026, repository check).
+        """
         index = L.lean_index()
         self.assertIn("Sturmian.lean", index)
         self.assertIn("Meaning.lean", index)
+        indexed = [p for paths in index.values() for p in paths]
+        self.assertEqual(len(indexed), len(set(indexed)))
+        self.assertEqual(set(indexed),
+                         {p for p in L.lean_sources() if p.suffix == ".lean"})
         for name, paths in index.items():
             with self.subTest(lean=name):
-                self.assertEqual(len(paths), 1, name)
+                self.assertTrue(all(p.name == name for p in paths))
+                self.assertEqual(len({p.parent for p in paths}), len(paths))
+
+    def test_a_lean_path_names_one_file_and_a_bare_name_every_copy(self):
+        index = L.lean_index()
+        twins = sorted(name for name, paths in index.items() if len(paths) > 1)
+        if not twins:
+            self.skipTest("no Lean file name repeats")
+        name = twins[0]
+        first = index[name][0]
+        parts = first.parts
+        relative = Path(*parts[parts.index("RequestProject"):])
+        with tempfile.TemporaryDirectory() as folder:
+            by_path = Path(folder) / "names_a_path.py"
+            by_path.write_text(f'LEAN = "{relative.as_posix()}"\n',
+                               encoding="utf-8")
+            by_name = Path(folder) / "names_a_name.py"
+            by_name.write_text(f'LEAN = "{name}"\n', encoding="utf-8")
+            exact = [p for p in L.referenced_documents((by_path,))
+                     if p.suffix == ".lean"]
+            every = [p for p in L.referenced_documents((by_name,))
+                     if p.suffix == ".lean"]
+        self.assertEqual(exact, [first])
+        self.assertEqual(sorted(every), sorted(index[name]))
 
     def test_a_lean_pattern_still_pulls_in_the_whole_development(self):
         """A pattern cannot be resolved to a file: the safe direction.
@@ -1021,6 +1055,11 @@ class TestTheCloseSettlesInOnePass(unittest.TestCase):
         self.assertFalse(R._uses_docstrings('S = "get_docstring"\n'))
         self.assertTrue(R._uses_docstrings("import m\nD = m.__doc__\n"))
         self.assertTrue(R._uses_docstrings("print(__doc__)\n"))
+        # Writing a docstring is not reading one (31 October 2026).
+        self.assertFalse(R._uses_docstrings(
+            "def f():\n    pass\nf.__doc__ = 'set here'\n"))
+        self.assertTrue(R._uses_docstrings(
+            "def f():\n    pass\nf.__doc__ = g.__doc__\n"))
         self.assertTrue(R._uses_docstrings(
             "from ast import get_docstring\n"))
         self.assertFalse(R._reads_docstrings(R.PACKAGE_ROOT / "signoff"

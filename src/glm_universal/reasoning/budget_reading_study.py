@@ -23,6 +23,12 @@ beside the digest of its sources (``tools budget-reading --write``).
 Exactness
 ---------
 Integers, strings and :class:`fractions.Fraction` only.
+
+*Last altered 31 October 2026 (repository check): ``_SOURCES`` lists
+``runtime/reports/address.py``, where the address family of solvers moved
+verbatim out of ``runtime/session.py``.*
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -77,7 +83,8 @@ _SOURCES: Tuple[str, ...] = (
     "reasoning/budget_reading_study.py", "reasoning/hole_reading.py",
     "reasoning/deep_holes.py", "reasoning/voronoi_walk.py",
     "reasoning/fwht_decode.py", "reasoning/niemeier.py",
-    "runtime/session.py", "runtime/parser.py", "runtime/tct_engine.py",
+    "runtime/session.py", "runtime/reports/address.py",
+    "runtime/parser.py", "runtime/tct_engine.py",
     "runtime/toolbox.py", "runtime/reports/lattice_geometry.py",
 )
 
@@ -367,6 +374,6 @@ def budget_reading_report() -> Dict[str, object]:
     if not st["fresh"]:
         return {"available": False,
                  "reason": f"the stored measurement is {st['verdict']}; "
-                           f"re-take it with `PYTHONPATH=. python3 -m "
+                           f"re-take it with `PYTHONPATH=src python3 -m "
                            f"glm_universal.tools budget-reading --write`"}
     return dict(measurements(), available=True)

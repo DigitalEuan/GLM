@@ -15,15 +15,17 @@ bm.write_results()                    # the same, written into results/
 From the command line:
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.benchmarks            # run and print
-PYTHONPATH=. python3 -m glm_universal.benchmarks --write    # and write results/
-PYTHONPATH=. python3 GLM.py -q "report benchmarks" -c 1     # through the runtime
+PYTHONPATH=src python3 -m glm_universal.benchmarks            # run and print
+PYTHONPATH=src python3 -m glm_universal.benchmarks --write    # and write results/
+PYTHONPATH=src python3 src/GLM.py -q "report benchmarks" -c 1     # through the runtime
 ```
 
 The rules the harness enforces are in :mod:`.harness`: a declared evidence
 tier before any score, exact rational arithmetic, and findings — including
 null and negative results — reported beside the numbers rather than in place
 of them.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

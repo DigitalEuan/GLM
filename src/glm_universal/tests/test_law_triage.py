@@ -76,7 +76,10 @@ class TestServedAndSource(unittest.TestCase):
             self.assertTrue(row["ok"], law)
 
     def test_source(self):
-        archive = pathlib.Path(__file__).resolve().parents[3] / lt.ZIP_PATH
+        # Last altered 31 October 2026 (intake, D22): the archive is a supplied
+        # item, found through constants.source_material_item wherever it is filed.
+        from glm_universal.constants import source_material_item
+        archive = source_material_item(pathlib.Path(lt.ZIP_PATH).name)
         if not archive.exists():
             self.skipTest("the archive is not present")
         raw = zipfile.ZipFile(archive).read(lt.KB_MEMBER)

@@ -14,7 +14,7 @@
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 A few modules turn the substrate, the carriers and the reasoning kernel
 into something a person can hold a conversation with:
@@ -39,11 +39,11 @@ molecules 51, mathematics 22, lexicon 149, spatial 28, harmonics 28,
 economics 21.  `molecules` is the
 newest: 51 molecules and ions, every coordinate derived from the element
 register rather than tabulated.  The counts here are the ones
-[`../../FIGURES.md`](../../FIGURES.md) recomputes under *Registers*.
+[`../../FIGURES.md`](../../../FIGURES.md) recomputes under *Registers*.
 
 ## The query kinds
 
-`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->27 query kinds<!--/figure-->** — twenty-three
+`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->31 query kinds<!--/figure-->** — twenty-three
 answering kinds plus `unknown`, the honest fallback.
 
 | Kind | Surface | What it does | Wired in |

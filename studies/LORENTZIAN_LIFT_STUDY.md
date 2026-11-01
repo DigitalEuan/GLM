@@ -6,11 +6,13 @@
 
 **Verdict.** The lift certifies every Golay tie exactly as a deep hole of the Leech lattice of type A_1^24, named by a null vector of II_25,1, but no reflection or other reflection-invariant rule can break a tie; summing Lorentzian scores over further readings resolves ties, with 0 wrong answers on readings that each contain the sent codeword among their nearest, and it answers where the existing set collapse refuses, at the cost of being misled by a reading of a different message.
 
-**Deciding figure.** 11 of 12 marks; one tied reading: every rule at chance or refusing (the script's rule 0 right of 600); two tied readings 586 right, 0 wrong of 600; readings 4+4+6: 594 right against 0 for the set collapse; decoy: 216 wrong, 61 with the guard (mark M11 not met).
+**Deciding figure.** 11 of 12 marks; one tied reading: every rule at chance or refusing (the script's rule 0 right of 600); two tied readings 586 right, 0 wrong of 600; readings 4+4+6: 594 right against 0 for the set collapse; decoy: 216 wrong, 61 with the guard (mark M11 not met). Re-measured 31 October 2026 with an exact integer generator in place of `random` (§5.1): 10 of 12 marks (M11 and L not met); two tied readings 588 right, 0 wrong of 600; 4+4+6: 597 right against 0; decoy: 234 wrong, 69 with the guard.
 
 **Recomputed by.** `glm_universal.reasoning.lorentzian_lift_study.lorentzian_lift_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured with an exact integer query generator in place of Python's `random`; 10 of 12 marks where the first measurement had 11 of 12 — M11 still missed, L now missed because `GolayDeepHole.lean` is held, §5.1; its run commands now start from the repository root (`PYTHONPATH=src`).)*
 
 ---
 
@@ -200,6 +202,54 @@ answers exactly what `min` answers because it leaves the point where it was.
 
 11 of 12 marks.
 
+### 5.1 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The measurement drew its queries
+from Python's `random` module, which the import rules of `reasoning/` do not
+allow (`tests/test_reasoning.py`, the blueprint's banned imports). It now draws
+them from `ExactRng` in `reasoning/lorentzian_lift_study.py`: an integer
+stream seeded by a text, with exact rejection sampling, so the queries are
+drawn the same way (a random codeword, errors of the stated weights, 600 per
+condition) but are not the ones of §5. Taken again with
+`tools lorentzian-lift --write`:
+
+**One reading** (a tie): `min` 108 right, 492 wrong; `script` 0 right, 600
+wrong; `reflection` 108 right, 492 wrong; `weyl` 600 refused; `script_w` 21
+right, 89 wrong, 490 refused; `lorentz` 600 refused.
+
+| readings | `lorentz` right / wrong / refused | `lorentz_guarded` | `intersect` (set collapse) | `first_min` right |
+|---|---|---|---|---|
+| 4+0 | 600 / 0 / 0 | 600 / 0 / 0 | 600 / 0 / 0 | 114 |
+| 4+1 | 600 / 0 / 0 | 600 / 0 / 0 | 600 / 0 / 0 | 96 |
+| 4+2 | 600 / 0 / 0 | 600 / 0 / 0 | 600 / 0 / 0 | 102 |
+| 4+3 | 600 / 0 / 0 | 600 / 0 / 0 | 600 / 0 / 0 | 86 |
+| 4+4 | 588 / 0 / 12 | 588 / 0 / 12 | 588 / 0 / 12 | 92 |
+| 4+5 | 480 / 4 / 116 | 480 / 4 / 116 | 0 / 4 / 596 | 100 |
+| 4+6 | 309 / 29 / 262 | 309 / 29 / 262 | 0 / 22 / 578 | 107 |
+| 4+4+4 | 600 / 0 / 0 | 600 / 0 / 0 | 600 / 0 / 0 | 107 |
+| 4+4+6 | 597 / 0 / 3 | 597 / 0 / 3 | 0 / 0 / 600 | 106 |
+| decoy | 22 / 234 / 344 | 3 / 69 / 528 | 0 / 2 / 598 | 98 |
+
+| mark | result | met |
+|---|---|---|
+| **M1** | reflection fixed and Weyl score flat, 600 of 600 | yes |
+| **M2** | the script's rule 0 of 600 | yes |
+| **M3** | `lorentz` on one reading: 0 wrong, 600 refused | yes |
+| **M4** | `lorentz` on 4+4: 588 right, 0 wrong | yes |
+| **M5** | `lorentz` on 4+4+4: 600 right | yes |
+| **M6** | `lorentz` on 4+k, k ≤ 3: 600 of 600 each | yes |
+| **M7** | decoy: `lorentz` right on 22 of 600 | yes |
+| **M8** | `lorentz` right at least as often as `intersect` in every condition | yes |
+| **M9** | census 128 of 128 | yes |
+| **M10** | the script audit | yes |
+| **M11** | guarded: 69 wrong on the decoy | no |
+| **L** | `GolayDeepHole.lean` is held in `src/lean/awaiting_recovery/` until `LeechShells.lean` (lost in the October 2026 reorganisation) returns, so it is not imported by the axiom audit `AxiomAuditAll.lean`, which this mark requires | no |
+
+So **10 of 12 marks**: M11 not met, as in §5, and L not met while
+`GolayDeepHole.lean` is held. The decoy is what moved most (216 wrong under
+`lorentz`, 61 guarded, became 234 and 69); the conclusions of §§6–7 stand on
+both measurements.
+
 ## 6. What it achieves for the GLM's reasoning
 
 Under the standing target (`PROJECT_DIRECTIVES.md`) the measured gains are:
@@ -255,9 +305,8 @@ within the guard, and refused otherwise.
 ## 8. Reproduce
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools lorentzian-lift          # the stored marks
-PYTHONPATH=. python3 -m glm_universal.tools lorentzian-lift --write  # re-take (~3 minutes)
+PYTHONPATH=src python3 -m glm_universal.tools lorentzian-lift          # the stored marks
+PYTHONPATH=src python3 -m glm_universal.tools lorentzian-lift --write  # re-take (~3 minutes)
 python3 GLM.py -q "tool lorentz 15"                                   # a tie, refused with its certificate
 python3 GLM.py -q "tool lorentz 15; 0"                                # resolved by a second reading
 lake build RequestProject.GLM.LorentzianLift RequestProject.GLM.GolayDeepHole

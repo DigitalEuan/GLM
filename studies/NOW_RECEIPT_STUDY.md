@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 5 links repointed to where the files now live after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ---
 
 ## 0a. The reading in one paragraph
@@ -21,7 +23,7 @@ The identity holds and the reading of it does not: the accumulator is exactly th
 The same reading, recomputed rather than written:
 
 <!-- generated: now-tier -->
-**The accumulator is exactly the fractional part of the integral of its input, and that is all it is.**  Over 20 runs of the supplied demonstrations the state recovers the emitted count 20 times out of 20 — and so does the target and the tick count with the state withheld, 20 times out of 20, so the receipt adds nothing to what the program already says.  Enumerated exhaustively, 4,096 histories leave 4 distinct receipts, the largest class holding 1,024 of them.  The same identity is what makes the shipped modulator cheap: at the 512 ticks the `real` query kind runs, the average costs 2 µs read off the target against 2207 µs run as a loop, with identical output.
+**The accumulator is exactly the fractional part of the integral of its input, and that is all it is.**  Over 20 runs of the supplied demonstrations the state recovers the emitted count 20 times out of 20 — and so does the target and the tick count with the state withheld, 20 times out of 20, so the receipt adds nothing to what the program already says.  Enumerated exhaustively, 4,096 histories leave 4 distinct receipts, the largest class holding 1,024 of them.  The same identity is what makes the shipped modulator cheap: at the 512 ticks the `real` query kind runs, the average costs 2 µs read off the target against 1953 µs run as a loop, with identical output.
 <!-- end generated -->
 
 ---
@@ -31,11 +33,11 @@ The same reading, recomputed rather than written:
 The supplied material is four studies and a script, kept in `source_material/`
 where supplied material lives and unedited:
 
-* [`HISTORY_RECORDED_NOW_STUDY.md`](../source_material/HISTORY_RECORDED_NOW_STUDY.md) — the six-dimensional `NowMoment`, the delta-sigma "2", the three levels of recovery;
-* [`HISTORY_RECORDED_NOW_V2_STUDY.md`](../source_material/HISTORY_RECORDED_NOW_V2_STUDY.md) — the same, self-contained, with recovery run out to 1,024 ticks;
-* [`HISTORY_RECORDED_NOW_V3_STUDY.md`](../source_material/HISTORY_RECORDED_NOW_V3_STUDY.md) — collisions between moments, the geometric tax as an arrow of time, an information-theoretic "holographic bound";
-* [`HISTORY_RECORDED_NOW_V4_STUDY.md`](../source_material/HISTORY_RECORDED_NOW_V4_STUDY.md) — the framework wired into a query loop, higher-lattice escalation, a differential tax, a zero-storage rollback;
-* [`history_recorded_now.py`](../source_material/history_recorded_now.py) — the v1 script, which imports this package and **runs here unmodified**.
+* [`HISTORY_RECORDED_NOW_STUDY.md`](../source_material/done/HISTORY_RECORDED_NOW_STUDY.md) — the six-dimensional `NowMoment`, the delta-sigma "2", the three levels of recovery;
+* [`HISTORY_RECORDED_NOW_V2_STUDY.md`](../source_material/done/HISTORY_RECORDED_NOW_V2_STUDY.md) — the same, self-contained, with recovery run out to 1,024 ticks;
+* [`HISTORY_RECORDED_NOW_V3_STUDY.md`](../source_material/done/HISTORY_RECORDED_NOW_V3_STUDY.md) — collisions between moments, the geometric tax as an arrow of time, an information-theoretic "holographic bound";
+* [`HISTORY_RECORDED_NOW_V4_STUDY.md`](../source_material/ToDo/HISTORY_RECORDED_NOW_V4_STUDY.md) — the framework wired into a query loop, higher-lattice escalation, a differential tax, a zero-storage rollback;
+* [`history_recorded_now.py`](../source_material/done/history_recorded_now.py) — the v1 script, which imports this package and **runs here unmodified**.
 
 That last point matters and is the reason this round was worth taking: the
 supplied work is not a description of a system somewhere else, it is a program
@@ -309,8 +311,8 @@ modulator computes by looping. `exact_real.delta_sigma_average` and
 <!-- generated: now-shortcut -->
 | ticks | average: loop | average: read off | bits: loop | bits: read off |
 |---:|---:|---:|---:|---:|
-| 512 | 2207 µs | 2 µs | 2169 µs | 81 µs |
-| 4,096 | 17342 µs | 2 µs | 17519 µs | 670 µs |
+| 512 | 1953 µs | 2 µs | 1950 µs | 57 µs |
+| 4,096 | 15647 µs | 2 µs | 15658 µs | 433 µs |
 
 Identical output on every case measured: True. The shipped `real` query kind runs 512 ticks per question, which is the first row.  The theorems are `GLM.NowReceipt.const_count_eq_floor`, `GLM.NowReceipt.const_bit_eq_floor_diff`.
 <!-- end generated -->

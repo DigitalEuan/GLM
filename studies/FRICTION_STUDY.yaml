@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 5 of 12 marks, 5 of 9 amended marks, 3 of 4 fix marks; after the fix 1,136 of 1,291 perturbed
@@ -12,17 +14,21 @@ evidence: []
 faculty: refusal
 file_refs:
   code:
-  - knowledge/friction
-  - knowledge/friction_study
-  - knowledge/friction_survey
-  - tests/test_friction
+  - knowledge/friction.py
+  - knowledge/friction_study.py
+  - knowledge/friction_survey.py
+  - tools.py
   lean:
   - Friction
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: FRICTION_STUDY.md
   test:
   - test_friction.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: FRICTION_STUDY
 junctions: []
 last_altered: ''
@@ -44,6 +50,9 @@ question: Read through the owner's analogy of friction — tiny peaks and valley
   that touches the whole prompt predict the next word better than the two-word patch, and does a reading
   that sticks until the evidence clearly beats it change its mind less without reading worse?
 recomputed_by: '`glm_universal.knowledge.friction_study.friction_report`'
+related:
+- FRICTION_TWO_STUDY
+- OSCILLATOR_JUNCTION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -69,7 +78,10 @@ sections:
 - anchor: 8-the-method-analogy-as-a-development-tool-the-owners-note
   heading: '8. The method: analogy as a development tool (the owner''s note)'
 status: closed
-successors: []
+successors:
+- FRICTION_TWO_STUDY
+- OSCILLATOR_JUNCTION_STUDY
+- THERMO_FRICTION_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Friction: what holds when the question moves, and contact over the whole prompt'

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { size: 794px 1123px; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #f1f0ef; }
+  * { box-sizing: border-box; }
+  .poster {
+    position: relative; width: 794px; height: 1123px;
+    background: #f1f0ef; overflow: hidden;
+    font-family: 'DejaVu Sans', 'Liberation Sans', sans-serif;
+  }
+  /* Layer 1: background grid (clipped) */
+  .layer1 {
+    position: absolute; inset: 0; overflow: hidden; z-index: 1;
+    background-image:
+      linear-gradient(to right, rgba(80,73,51,0.05) 0.5px, transparent 0.5px),
+      linear-gradient(to bottom, rgba(80,73,51,0.05) 0.5px, transparent 0.5px);
+    background-size: 66px 66px;
+  }
+  /* Layer 2: structure */
+  .layer2 { position: absolute; inset: 0; z-index: 2; }
+  .anchorline {
+    position: absolute; left: 95px; top: 112px; width: 6px; height: 899px;
+    background: #504933;
+  }
+  /* Layer 3: content */
+  .layer3 { position: absolute; inset: 0; z-index: 3; }
+  .kicker {
+    position: absolute; left: 141px; top: 168px; width: 560px;
+    font-size: 15px; font-weight: 400; letter-spacing: 3px;
+    color: rgba(28,28,26,0.62); text-transform: uppercase;
+  }
+  .hero {
+    position: absolute; left: 141px; top: 300px; width: 600px;
+    font-size: 58px; line-height: 1.15; font-weight: 700;
+    color: #1c1c1a; letter-spacing: -0.5px;
+  }
+  .hero2 {
+    position: absolute; left: 141px; top: 434px; width: 600px;
+    font-size: 58px; line-height: 1.15; font-weight: 700;
+    color: #87702a; letter-spacing: -0.5px;
+  }
+  .summary {
+    position: absolute; left: 141px; top: 562px; width: 476px;
+    font-size: 16.5px; line-height: 1.6; font-weight: 400;
+    color: rgba(28,28,26,0.85);
+  }
+  .stats {
+    position: absolute; left: 141px; top: 742px; width: 560px;
+    display: flex; gap: 28px;
+  }
+  .stat { width: 168px; }
+  .stat .n { font-size: 34px; font-weight: 700; color: #504933; }
+  .stat .n em { font-style: normal; color: #87702a; }
+  .stat .l {
+    margin-top: 6px; font-size: 10.5px; line-height: 1.45;
+    letter-spacing: 0.6px; text-transform: uppercase;
+    color: rgba(28,28,26,0.6);
+  }
+  .meta {
+    position: absolute; left: 141px; top: 906px; width: 560px;
+    font-size: 14px; line-height: 1.65; color: rgba(28,28,26,0.75);
+  }
+  .meta b { color: #1c1c1a; font-weight: 600; }
+  .footer {
+    position: absolute; left: 141px; top: 1044px; width: 560px;
+    font-size: 12.5px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(28,28,26,0.5);
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="layer1"></div>
+  <div class="layer2"><div class="anchorline"></div></div>
+  <div class="layer3">
+    <div class="kicker">Findings memo &middot; computational experiment</div>
+    <div class="hero">Attention<br>is a compiled</div>
+    <div class="hero2">library</div>
+    <div class="summary">
+      The universal simulator U of arXiv 2506.18739v2 &mdash; soft attention
+      &sigma;(XAX<sup>T</sup>)XV built from transpose, multiplication,
+      softmax and hard selection alone &mdash; ported onto GLM&rsquo;s exact
+      24-coordinate rational substrate. Every elementary operation verified
+      against shipped ground truth at zero error; the costs, the coverage
+      boundary, and one silent inversion, measured rather than asserted.
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">0<em>*</em></div><div class="l">error on every exact stage (paper: 3.4e-06)</div></div>
+      <div class="stat"><div class="n">2d</div><div class="l">true coverage bound; the paper&rsquo;s theorem says d</div></div>
+      <div class="stat"><div class="n">1<span style="font-size:20px">/</span>12</div><div class="l">rows where inner-product argmax matches shipped nearest</div></div>
+    </div>
+    <div class="meta">
+      <b>Source paper</b> &nbsp;On the Existence of Universal Simulators of Attention (arXiv 2506.18739v2)<br>
+      <b>Host system</b> &nbsp;GLM, the substrate-native cognitive architecture &mdash; github.com/DigitalEuan/GLM<br>
+      <b>Deliverable</b> &nbsp;sandbox module &middot; study &middot; experiment suite &middot; this memo &nbsp;&nbsp;|&nbsp;&nbsp; 13 October 2026
+    </div>
+    <div class="footer">ATTN-SIM &middot; FINDINGS &middot; EXACT ARITHMETIC THROUGHOUT</div>
+  </div>
+</div>
+</body>
+</html>

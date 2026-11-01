@@ -1,0 +1,151 @@
+========================================================================
+GLM CLOSING EXPERIMENTS — Lean compile + round-trip + extension queries
+========================================================================
+
+========================================================================
+CLOSING I1 — Compile Lean proofs (capture type errors as research signal)
+========================================================================
+  Lean compiler: Lean (version 4.34.0, x86_64-unknown-linux-gnu, commit 293d5d0c0c3f3dded4688b3ccd6a33939ac5102b, Release)
+
+  --- Stage 1: compile original generated theorems ---
+  Compiled: failed
+  Errors: 8
+  By category: {'syntax': 6, 'unknown_tactic': 1, 'unsolved_goal': 1}
+  First 5 errors:
+    line 5:81 [syntax] expected token
+    line 19:70 [syntax] expected token
+    line 30:56 [syntax] expected token
+    line 40:3 [unknown_tactic] unknown tactic
+    line 39:40 [unsolved_goal] unsolved goals
+
+  --- Stage 2: apply common fixes and recompile ---
+  Applied 5 fixes: ['added universe declarations', 'declared α, β as Prop (implications valid)', 'replaced `rfl X` with `exact X`', 'added `sorry` fallback after `use`', 'added `open Nat`']
+  Compiled: failed
+  Errors: 8 (down from 8)
+  By category: {'syntax': 6, 'unknown_tactic': 1, 'unsolved_goal': 1}
+  Remaining errors:
+    line 16:81 [syntax] expected token
+    line 31:70 [syntax] expected token
+    line 43:56 [syntax] expected token
+    line 53:3 [unknown_tactic] unknown tactic
+    line 52:40 [unsolved_goal] unsolved goals
+    line 62:56 [syntax] expected token
+    line 74:35 [syntax] expected token
+    line 84:77 [syntax] expected token
+
+  --- Stage 3: research-signal analysis ---
+    glm_produces_undeclared_vars: 1 cases
+      e.g. unknown tactic
+    glm_tactic_syntax_mismatch: 6 cases
+      e.g. expected token
+      e.g. expected token
+    glm_unsolved_goals_after_use: 1 cases
+      e.g. unsolved goals
+
+========================================================================
+CLOSING I2 — Bidirectional Lean → GLM → Lean round-trip
+========================================================================
+  Parse Lean → feature vectors → regenerate Lean → re-parse
+  Check feature vectors preserved.
+
+  --- Stage 1: parse original Lean source ---
+  Source has 13 lines
+  Parsed 5 declaration(s)
+  Feature vectors extracted:
+    [0] (0, 0, 0, 0, 0, 0, 0, 1)... (len=24)
+    [1] (0, 1, 0, 0, 0, 0, 0, 1)... (len=24)
+    [2] (0, 0, 0, 0, 0, 0, 0, 0)... (len=24)
+    [3] (0, 0, 0, 0, 0, 0, 0, 1)... (len=24)
+    [4] (1, 1, 0, 0, 0, 0, 0, 1)... (len=24)
+
+  --- Stage 2: regenerate Lean from feature vectors ---
+  Regenerated source (242 chars):
+    theorem simple_eq  : (y1 = y1) := by sorry
+    
+    theorem exists_witness (y1 : Nat) : (y1 = y1) := by sorry
+    
+    def my_def  : True := by sorry
+    
+    theorem double_univ  : (y1 = y1) := by sorry
+    
+
+  --- Stage 3: re-parse regenerated source ---
+  Reparsed 5 declaration(s)
+
+  --- Stage 4: compare feature vectors ---
+  Round-trip preserved: False
+  Mismatches (5):
+    simple_eq: features differ
+    exists_witness: features differ
+    my_def: features differ
+    double_univ: features differ
+    nested: features differ
+
+  Regenerated source saved to /home/z/my-project/download/glm_roundtripped.lean
+
+========================================================================
+CLOSING I3 — Proposed extensions as new query targets
+========================================================================
+  Accept a midpoint carrier, then run analogies with it.
+  Does the extension produce sensible results?
+
+
+  --- Extension: midpoint_force_wavelength (force → wavelength) ---
+    proposed: status=verified, dim=L M^(1/2) T^-1
+    accepted: True
+    --- Analogies using midpoint_force_wavelength ---
+      ○ force:wavelength::midpoint_force_wavelength:?
+          answer: length (d²=13/32, tied=4)
+          sensible: False
+          interpretation: answer 'length' EXT10 dim differs from target by up to 1 — extension may not bri
+      ○ force:midpoint_force_wavelength::wavelength:?
+          answer: None (d²=None, tied=0)
+          sensible: False
+          interpretation: analogy failed: resolve: 'midpoint_force_wavelength' names no carrier in any ena
+      ○ wavelength:midpoint_force_wavelength::force:?
+          answer: None (d²=None, tied=0)
+          sensible: False
+          interpretation: analogy failed: resolve: 'midpoint_force_wavelength' names no carrier in any ena
+
+  --- Extension: midpoint_speed_mass (speed_of_light → mass) ---
+    proposed: status=verified, dim=L^(1/2) M^(1/2) T^(-1/2)
+    accepted: True
+    --- Analogies using midpoint_speed_mass ---
+      ✓ speed_of_light:mass::midpoint_speed_mass:?
+          answer: mass (d²=165/16, tied=2)
+          sensible: True
+          interpretation: answer 'mass' EXT10 dim is close to target (max diff = 1/2, d²=165/16) — dimensi
+      ○ speed_of_light:midpoint_speed_mass::mass:?
+          answer: None (d²=None, tied=0)
+          sensible: False
+          interpretation: analogy failed: resolve: 'midpoint_speed_mass' names no carrier in any enabled d
+      ○ mass:midpoint_speed_mass::speed_of_light:?
+          answer: None (d²=None, tied=0)
+          sensible: False
+          interpretation: analogy failed: resolve: 'midpoint_speed_mass' names no carrier in any enabled d
+
+  --- Extension: midpoint_energy_freq (energy → frequency) ---
+    proposed: status=verified, dim=L M^(1/2) T^(-3/2)
+    accepted: True
+    --- Analogies using midpoint_energy_freq ---
+      ✓ energy:frequency::midpoint_energy_freq:?
+          answer: curvature (d²=9/32, tied=3)
+          sensible: True
+          interpretation: answer 'curvature' EXT10 dim is close to target (max diff = 1/2, d²=9/32) — dime
+      ○ energy:midpoint_energy_freq::frequency:?
+          answer: None (d²=None, tied=0)
+          sensible: False
+          interpretation: analogy failed: resolve: 'midpoint_energy_freq' names no carrier in any enabled 
+      ○ frequency:midpoint_energy_freq::energy:?
+          answer: None (d²=None, tied=0)
+          sensible: False
+          interpretation: analogy failed: resolve: 'midpoint_energy_freq' names no carrier in any enabled 
+
+========================================================================
+SUMMARY
+========================================================================
+  I1 Lean compile: original 8 errors → fixed 8 errors (fixes: ['added universe declarations', 'declared α, β as Prop (implications valid)', 'replaced `rfl X` with `exact X`', 'added `sorry` fallback after `use`', 'added `open Nat`'])
+     research signal: {'glm_produces_undeclared_vars': 1, 'glm_tactic_syntax_mismatch': 6, 'glm_unsolved_goals_after_use': 1, 'glm_proposition_too_abstract': 0}
+  I2 round-trip: False
+     declarations: 5 → 5
+  I3 extension queries: 9 total, 2 sensible

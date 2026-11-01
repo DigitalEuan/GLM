@@ -5,6 +5,16 @@
 # human reader reads and the corpus --check grounds the tier-0 verdict
 # against.  This schema defines the YAML's shape.
 #
+# Last altered 31 October 2026 (repository check): directive numbers follow
+# PROJECT_DIRECTIVES.md after the date rule was restored to D17 (D1-D22).
+# Also 31 October 2026 (repository check, studies): `phase` 0 means unknown;
+# new optional fields `related`, `hand_fields`, `file_refs.lean_held`,
+# `file_refs.lean_missing` and `file_refs.missing`; code paths are relative to
+# src/glm_universal and end in .py.  Every field marked "derived" below is
+# written by `python3 -m glm_universal.corpus.study_manifest --sync` from the
+# paired .md and the tree, and `--check` fails when a manifest has drifted;
+# a derived field named in `hand_fields` is kept as written instead.
+#
 # The schema is intentionally permissive: only `id`, `question`,
 # `verdict`, and `file_refs.prose` are required.  Every other field is
 # optional and may be empty.  This lets the converter auto-extract what
@@ -39,8 +49,11 @@ properties:
     description: The study's stable id (the .md filename without extension)
   phase:
     type: integer
-    minimum: 1
-    description: The development phase this study belongs to (if known)
+    minimum: 0
+    description: >-
+      The development phase this study belongs to, 0 when unknown (derived:
+      the study's own "pre-registration for Phase N", else the MASTER_PLAN
+      phase record that names it as its study, else the paper's subsection)
   status:
     type: string
     enum: [open, measured, closed, archived, negative, unknown]
@@ -63,6 +76,13 @@ properties:
   title:
     type: string
     description: The H1 title of the .md (without the leading #)
+
+  hand_fields:
+    type: array
+    items: { type: string }
+    description: >-
+      Derived fields (dotted paths, e.g. faculty or marks.met) set by hand;
+      the sync keeps their written values instead of re-deriving them
 
   # ── marks (D5, D15) ─────────────────────────────────────────────────
   marks:
@@ -95,6 +115,12 @@ properties:
   superseded_by:
     type: string
     description: The study id that retires this one, if any
+  related:
+    type: array
+    items: { type: string }
+    description: >-
+      Study ids the .md links to that are not predecessors (a later or equal
+      phase, or a phase unknown on either side); derived
 
   # ── junctions (wheels) ──────────────────────────────────────────────
   junctions:
@@ -110,10 +136,10 @@ properties:
   # ── directive tags ──────────────────────────────────────────────────
   directives:
     type: array
-    items: { type: string, pattern: "^D([1-9]|1[0-9])$" }
-    description: The directives this study implements (D1-D19)
+    items: { type: string, pattern: "^D([1-9]|1[0-9]|2[0-9])$" }
+    description: The directives this study implements (D1-D22; renumbered 31 October 2026)
 
-  # ── wobble dependencies (D17) ───────────────────────────────────────
+  # ── wobble dependencies (D18) ───────────────────────────────────────
   wobble_deps:
     type: array
     items:
@@ -125,7 +151,7 @@ properties:
         lean_theorem: { type: string }
         enclosure_width: { type: string }
 
-  # ── reversibility class (D18) ───────────────────────────────────────
+  # ── reversibility class (D19) ───────────────────────────────────────
   reversibility:
     type: object
     properties:
@@ -191,6 +217,24 @@ properties:
       lean: { type: array, items: { type: string } }
       test: { type: array, items: { type: string } }
       wheel: { type: array, items: { type: string } }
+      lean_held:
+        type: array
+        items: { type: string }
+        description: >-
+          The cited Lean files that sit in src/lean/awaiting_recovery (held out
+          of the build until a file they import returns); a subset of lean
+      lean_missing:
+        type: array
+        items: { type: string }
+        description: >-
+          Lean files the .md cites that are not in the repository and are
+          recorded in studies/_lean_files_needed.md
+      missing:
+        type: array
+        items: { type: string }
+        description: >-
+          Code and test files the .md cites by a package path that do not
+          exist (paths relative to src/glm_universal)
 
   # ── follow-ups ──────────────────────────────────────────────────────
   follow_ups:

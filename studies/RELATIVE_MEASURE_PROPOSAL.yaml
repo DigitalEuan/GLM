@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Everything measured from the code as it stands is in the first section; everything after
@@ -12,18 +14,26 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - data_objects/physics
-  - data_objects/semantic_lexicon
-  - reasoning/analogy_models
-  - reasoning/information_loss
+  - data_objects/physics.py
+  - data_objects/semantic_lexicon.py
+  - reasoning/analogy.py
+  - reasoning/analogy_models.py
+  - reasoning/dimension_layers.py
+  - reasoning/information_loss.py
   lean:
   - Cumulative
   - LayerChain
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: RELATIVE_MEASURE_PROPOSAL.md
   test:
-  - test_relative_measure_proposal.py
+  - test_analogy_models.py
+  - test_lexicon_subspaces.py
+  - test_semantic_lexicon.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RELATIVE_MEASURE_PROPOSAL
 junctions: []
 last_altered: ''
@@ -42,6 +52,8 @@ phase: 0
 predecessors: []
 question: What would it take for `hot` to become a relative measure rather than a static concept?
 recomputed_by: (hand-written argument; nothing to recompute)
+related:
+- INFORMATION_LOSS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

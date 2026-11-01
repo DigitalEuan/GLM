@@ -1,0 +1,676 @@
+{
+ "arc": {
+  "colour": {
+   "grids": 53,
+   "refused": 51,
+   "right": 2,
+   "tasks_right": [
+    "1e0a9b12",
+    "ae58858e"
+   ],
+   "tasks_wrong": [],
+   "wrong": 0
+  },
+  "colour_answers_unchanged": true,
+  "combined": {
+   "grids": 53,
+   "refused": 44,
+   "right": 9,
+   "tasks_right": [
+    "1e0a9b12",
+    "45737921",
+    "484b58aa",
+    "662c240a",
+    "7953d61e",
+    "ae58858e",
+    "b91ae062",
+    "bc4146bd",
+    "d631b094"
+   ],
+   "tasks_wrong": [],
+   "wrong": 0
+  },
+  "development_set": true,
+  "plan": {
+   "grids": 53,
+   "refused": 44,
+   "right": 9,
+   "tasks_right": [
+    "1e0a9b12",
+    "45737921",
+    "484b58aa",
+    "662c240a",
+    "7953d61e",
+    "ae58858e",
+    "b91ae062",
+    "bc4146bd",
+    "d631b094"
+   ],
+   "tasks_wrong": [],
+   "wrong": 0
+  },
+  "synthetic": {
+   "all_provisions": {
+    "refused": 4,
+    "right": 46
+   },
+   "base": {
+    "refused": 46,
+    "right": 4
+   },
+   "on_demand": {
+    "refused": 4,
+    "right": 46
+   },
+   "random_same_size": [
+    {
+     "refused": 35,
+     "right": 15
+    },
+    {
+     "refused": 38,
+     "right": 12
+    }
+   ]
+  },
+  "tasks": 50,
+  "tool_agrees": 50,
+  "tool_disagrees": [],
+  "vision_stack_solved": [
+   "1e0a9b12",
+   "ae58858e"
+  ]
+ },
+ "cross_domain": {
+  "by_domain": {
+   "arc": {
+    "with": {
+     "refused": 5,
+     "right": 1,
+     "unread": 0,
+     "wrong": 0
+    },
+    "without": {
+     "refused": 5,
+     "right": 1,
+     "unread": 0,
+     "wrong": 0
+    }
+   },
+   "number": {
+    "with": {
+     "refused": 0,
+     "right": 6,
+     "unread": 0,
+     "wrong": 0
+    },
+    "without": {
+     "refused": 6,
+     "right": 0,
+     "unread": 0,
+     "wrong": 0
+    }
+   },
+   "physics": {
+    "with": {
+     "refused": 0,
+     "right": 6,
+     "unread": 0,
+     "wrong": 0
+    },
+    "without": {
+     "refused": 6,
+     "right": 0,
+     "unread": 0,
+     "wrong": 0
+    }
+   },
+   "rule30": {
+    "with": {
+     "refused": 0,
+     "right": 6,
+     "unread": 0,
+     "wrong": 0
+    },
+    "without": {
+     "refused": 5,
+     "right": 1,
+     "unread": 0,
+     "wrong": 0
+    }
+   },
+   "sequence": {
+    "with": {
+     "refused": 2,
+     "right": 4,
+     "unread": 0,
+     "wrong": 0
+    },
+    "without": {
+     "refused": 4,
+     "right": 2,
+     "unread": 0,
+     "wrong": 0
+    }
+   }
+  },
+  "questions": 30,
+  "rows": [
+   {
+    "domain": "rule30",
+    "id": "X01",
+    "question": "what are the first 20 cells of rule 30's centre column",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "rule30",
+    "id": "X02",
+    "question": "show the rule 30 centre column up to 64 cells",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "rule30",
+    "id": "X03",
+    "question": "in rule 30, the least period of right diagonal D divides 2^D",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "rule30",
+    "id": "X04",
+    "question": "in rule 30, every left diagonal has eventual period dividing 8",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "rule30",
+    "id": "X05",
+    "question": "in rule 30, the centre column is not eventually periodic with period p ≤ 100 and preperiod ≤ 1000",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "rule30",
+    "id": "X06",
+    "question": "in rule 30, the periods of the left diagonals are unbounded",
+    "with": "right",
+    "without": "right"
+   },
+   {
+    "domain": "number",
+    "id": "X07",
+    "question": "is n^2 + n + 41 prime for every n",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "number",
+    "id": "X08",
+    "question": "is it true that 2^n > n for every n",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "number",
+    "id": "X09",
+    "question": "is 2^n - 1 prime for every n >= 2",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "number",
+    "id": "X10",
+    "question": "check the conjecture that 6 divides n^3 - n for every n",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "number",
+    "id": "X11",
+    "question": "is n^2 + 1 prime for every n >= 1",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "number",
+    "id": "X12",
+    "question": "is it true that n^2 - n + 41 is prime for every n",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "physics",
+    "id": "X13",
+    "question": "is force = mass * acceleration a law",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "physics",
+    "id": "X14",
+    "question": "is energy = mass * speed_of_light a law",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "physics",
+    "id": "X15",
+    "question": "does power = force * velocity follow from the wheels",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "physics",
+    "id": "X16",
+    "question": "is emf = magnetic_field * area / time a law",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "physics",
+    "id": "X17",
+    "question": "is power = force * time a law",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "physics",
+    "id": "X18",
+    "question": "is voltage = current * resistance a law",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "sequence",
+    "id": "X19",
+    "question": "what comes next in 1, 1, 2, 5, 14, 42",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "sequence",
+    "id": "X20",
+    "question": "what comes next in 1, 2, 6, 24, 120",
+    "with": "refused",
+    "without": "refused"
+   },
+   {
+    "domain": "sequence",
+    "id": "X21",
+    "question": "what comes next in 2, 3, 5, 7, 11, 13",
+    "with": "right",
+    "without": "refused"
+   },
+   {
+    "domain": "sequence",
+    "id": "X22",
+    "question": "what comes next in 1, 3, 6, 10, 15",
+    "with": "refused",
+    "without": "refused"
+   },
+   {
+    "domain": "sequence",
+    "id": "X23",
+    "question": "what comes next in 9, 9, 9, 1",
+    "with": "right",
+    "without": "right"
+   },
+   {
+    "domain": "sequence",
+    "id": "X24",
+    "question": "what comes next in 1, 2",
+    "with": "right",
+    "without": "right"
+   },
+   {
+    "domain": "arc",
+    "id": "X25",
+    "question": "solve the arc task 00dbd492",
+    "with": "refused",
+    "without": "refused"
+   },
+   {
+    "domain": "arc",
+    "id": "X26",
+    "question": "solve the arc task 1e0a9b12",
+    "with": "right",
+    "without": "right"
+   },
+   {
+    "domain": "arc",
+    "id": "X27",
+    "question": "solve the arc task 1f642eb9",
+    "with": "refused",
+    "without": "refused"
+   },
+   {
+    "domain": "arc",
+    "id": "X28",
+    "question": "solve the arc task 2697da3f",
+    "with": "refused",
+    "without": "refused"
+   },
+   {
+    "domain": "arc",
+    "id": "X29",
+    "question": "solve the arc task 2753e76c",
+    "with": "refused",
+    "without": "refused"
+   },
+   {
+    "domain": "arc",
+    "id": "X30",
+    "question": "solve the arc task 2bcee788",
+    "with": "refused",
+    "without": "refused"
+   }
+  ],
+  "with": {
+   "refused": 7,
+   "right": 23,
+   "unread": 0,
+   "wrong": 0
+  },
+  "without": {
+   "refused": 26,
+   "right": 4,
+   "unread": 0,
+   "wrong": 0
+  }
+ },
+ "derive": {
+  "fifteen_wheels_laws_licensed": 1,
+  "fifteen_wheels_not_laws_licensed": 0,
+  "laws": 64,
+  "not_laws": 51,
+  "questions": 115,
+  "tool_agrees_with_study": true,
+  "tool_laws_licensed": 63,
+  "tool_not_laws_licensed": 0
+ },
+ "general": {
+  "conjecture_tally": {
+   "abstain": 0,
+   "overclaim": 0,
+   "refused": 0,
+   "right": 12,
+   "wrong": 0
+  },
+  "conjectures": [
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C01",
+    "least_counterexample": 40,
+    "ring": "knows",
+    "stated_counterexample": 40,
+    "truth": false
+   },
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C02",
+    "least_counterexample": 41,
+    "ring": "knows",
+    "stated_counterexample": 41,
+    "truth": false
+   },
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C03",
+    "least_counterexample": 4,
+    "ring": "knows",
+    "stated_counterexample": 4,
+    "truth": false
+   },
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C04",
+    "least_counterexample": 3,
+    "ring": "knows",
+    "stated_counterexample": 3,
+    "truth": false
+   },
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C05",
+    "least_counterexample": 5,
+    "ring": "knows",
+    "stated_counterexample": 5,
+    "truth": false
+   },
+   {
+    "answer": null,
+    "grade": "right",
+    "id": "C06",
+    "least_counterexample": null,
+    "ring": "thinks true",
+    "stated_counterexample": null,
+    "truth": true
+   },
+   {
+    "answer": null,
+    "grade": "right",
+    "id": "C07",
+    "least_counterexample": null,
+    "ring": "thinks true",
+    "stated_counterexample": null,
+    "truth": true
+   },
+   {
+    "answer": null,
+    "grade": "right",
+    "id": "C08",
+    "least_counterexample": null,
+    "ring": "thinks true",
+    "stated_counterexample": null,
+    "truth": true
+   },
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C09",
+    "least_counterexample": 25,
+    "ring": "knows",
+    "stated_counterexample": 25,
+    "truth": false
+   },
+   {
+    "answer": null,
+    "grade": "right",
+    "id": "C10",
+    "least_counterexample": null,
+    "ring": "thinks true",
+    "stated_counterexample": null,
+    "truth": true
+   },
+   {
+    "answer": null,
+    "grade": "right",
+    "id": "C11",
+    "least_counterexample": null,
+    "ring": "thinks true",
+    "stated_counterexample": null,
+    "truth": true
+   },
+   {
+    "answer": false,
+    "grade": "right",
+    "id": "C12",
+    "least_counterexample": 15,
+    "ring": "knows",
+    "stated_counterexample": 15,
+    "truth": false
+   }
+  ],
+  "false_claims": 7,
+  "false_with_counterexample": [
+   "C01",
+   "C02",
+   "C03",
+   "C04",
+   "C05",
+   "C09",
+   "C12"
+  ],
+  "with_ledger": {
+   "abstain": 0,
+   "n": 10,
+   "overclaim": 0,
+   "right": 10,
+   "wrong": 0
+  },
+  "without_ledger": {
+   "abstain": 4,
+   "n": 10,
+   "overclaim": 0,
+   "right": 6,
+   "wrong": 0
+  }
+ },
+ "lean": {
+  "files": [
+   {
+    "audited": true,
+    "declared": 5,
+    "file": "IntakeChecks/RuleThirtyBits",
+    "present": true,
+    "sorry": 0,
+    "stated": 5
+   },
+   {
+    "audited": true,
+    "declared": 4,
+    "file": "IntakeChecks/SporadicOrderCheck",
+    "present": true,
+    "sorry": 0,
+    "stated": 4
+   },
+   {
+    "audited": true,
+    "declared": 5,
+    "file": "IntakeChecks/NextTerm",
+    "present": true,
+    "sorry": 0,
+    "stated": 5
+   },
+   {
+    "audited": true,
+    "declared": 4,
+    "file": "IntakeChecks/Derivability",
+    "present": true,
+    "sorry": 0,
+    "stated": 4
+   }
+  ],
+  "standalone": "built with Lean 4.34 and Mathlib outside the project's build; the owner's scripts/rebuild_lean.sh has still to confirm them"
+ },
+ "marks": {
+  "A1": true,
+  "A2": true,
+  "A3": true,
+  "D1": true,
+  "G1": true,
+  "G2": true,
+  "L1": true,
+  "R1": true,
+  "R2": false,
+  "R3": true,
+  "S1": true,
+  "S2": false,
+  "X1": true,
+  "X2": true
+ },
+ "met": 12,
+ "next_terms": {
+  "controls": 13,
+  "questions": 45,
+  "with_wheels": {
+   "controls": {
+    "right": 12,
+    "wrong": 1
+   },
+   "positive": {
+    "refused": 18,
+    "right": 27,
+    "wrong": 0
+   }
+  },
+  "with_wheels_first_rule": {
+   "controls": {
+    "right": 11,
+    "wrong": 2
+   },
+   "positive": {
+    "refused": 18,
+    "right": 27,
+    "wrong": 0
+   }
+  },
+  "without_next": {
+   "controls": {
+    "right": 13,
+    "wrong": 0
+   },
+   "positive": {
+    "refused": 40,
+    "right": 5,
+    "wrong": 0
+   }
+  }
+ },
+ "rule30": {
+  "answered_with": 16,
+  "answered_without": 0,
+  "battery_with_ledger": {
+   "abstain": 0,
+   "n": 39,
+   "overclaim": 0,
+   "right": 39,
+   "wrong": 0
+  },
+  "battery_without_ledger": {
+   "abstain": 15,
+   "n": 39,
+   "overclaim": 0,
+   "right": 24,
+   "wrong": 0
+  },
+  "centre_1000_black": 481,
+  "centre_1000_matches_plain": true,
+  "centre_64_matches_lean": true,
+  "claims": 39,
+  "recognised": 17,
+  "routed_with": {
+   "abstain": 0,
+   "overclaim": 0,
+   "refused": 23,
+   "right": 16,
+   "unscored": 0,
+   "wrong": 0
+  },
+  "routed_without": {
+   "abstain": 0,
+   "overclaim": 0,
+   "refused": 39,
+   "right": 0,
+   "unscored": 0,
+   "wrong": 0
+  },
+  "tool": {
+   "abstain": 0,
+   "overclaim": 0,
+   "refused": 0,
+   "right": 17,
+   "unscored": 22,
+   "wrong": 0
+  }
+ },
+ "source_digest": "611fa1e704c3b88e43380c835eda4ac5db6c42b5ed5a6391307787f519494a3b",
+ "taken": 14
+}

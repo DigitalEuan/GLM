@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 7 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *The Leech quantiser is the hot path of every address, and it was a scan: for
 each of the two congruence classes of Λ, form the cost of all 4,096 Golay
 codewords and keep the cheapest. This study replaces the scan by the MOG's own
@@ -21,13 +23,13 @@ structure — a 16-entry column table, the 64 hexacode words, 128 classes of 32
 anywhere moved. None did.*
 
 Code:
-[`glm_universal/reasoning/llvq_table.py`](../glm_universal/reasoning/llvq_table.py).
+[`glm_universal/reasoning/llvq_table.py`](../src/glm_universal/reasoning/llvq_table.py).
 Query: `report llvq`.
 Formal development:
-[`RequestProject/GLM/LLVQTable.lean`](../glm_lean/RequestProject/GLM/LLVQTable.lean).
+[`RequestProject/GLM/LLVQTable.lean`](../src/lean/RequestProject/GLM/LLVQTable.lean).
 Tests: `glm_universal/tests/test_llvq_table.py`.
 The reference it must agree with:
-[`glm_universal/reasoning/analogy.py`](../glm_universal/reasoning/analogy.py)
+[`glm_universal/reasoning/analogy.py`](../src/glm_universal/reasoning/analogy.py)
 `nearest_lattice_point`.
 
 ---
@@ -41,12 +43,12 @@ round, and the original to-do list had asked for it in the form
 > currently classifies coordinates by shell, but the constant-time `O(1)`
 > lookup table utilizing the first few binary digits remains unbuilt.
 
-[`reasoning/llvq.py`](../glm_universal/reasoning/llvq.py) said the same
+[`reasoning/llvq.py`](../src/glm_universal/reasoning/llvq.py) said the same
 thing about itself, in its own docstring: it classifies a vector by *shell*
 without a codebook, and it does not build the table.
 
 Two earlier rounds had already been at the same wall from other sides.
-[`reasoning/fwht_decode.py`](../glm_universal/reasoning/fwht_decode.py)
+[`reasoning/fwht_decode.py`](../src/glm_universal/reasoning/fwht_decode.py)
 showed that the 4,096 coset costs are one Walsh–Hadamard transform — and
 measured that this is *not* a speed-up for this code, because `n = 2k` makes
 the transform cost exactly what the direct summation costs (49,152 either
@@ -67,7 +69,7 @@ the scan returns?*
 ## 2. The table
 
 Under the MOG alignment the package already carries
-([`substrate/mog.py`](../glm_universal/substrate/mog.py)), a 24-bit
+([`substrate/mog.py`](../src/glm_universal/substrate/mog.py)), a 24-bit
 word is a 4 × 6 grid. Each column is a 4-bit value, and a column has three
 readings: its **GF(4) label** (the XOR of the row labels of its set cells), its
 **parity**, and its **top bit**. Three facts, all checked over all 4,096
@@ -115,7 +117,7 @@ cheaper pattern in every column, and if the resulting parity is wrong, pay the
 **smallest of the six differences**.
 
 That is not asserted here — it is
-[`LLVQTable.lean`](../glm_lean/RequestProject/GLM/LLVQTable.lean):
+[`LLVQTable.lean`](../src/lean/RequestProject/GLM/LLVQTable.lean):
 
 | theorem | what it says |
 |---|---|
@@ -218,14 +220,13 @@ named.
 ## 7. What recomputes each figure
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report llvq" --verify-tct
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_llvq_table.py -q
-PYTHONPATH=. python3 -c "from glm_universal.reasoning import llvq_table as lt; \
+PYTHONPATH=src python3 src/GLM.py -q "report llvq" --verify-tct
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_llvq_table.py -q
+PYTHONPATH=src python3 -c "from glm_universal.reasoning import llvq_table as lt; \
     print(lt.corpus_report())"          # §5, the whole corpus, ~3 minutes
-PYTHONPATH=. python3 -c "from glm_universal.reasoning import llvq_table as lt; \
+PYTHONPATH=src python3 -c "from glm_universal.reasoning import llvq_table as lt; \
     print(lt.search_cost_report(samples=40))"     # §4
-PYTHONPATH=. python3 -c "from glm_universal.reasoning import llvq_table as lt; \
+PYTHONPATH=src python3 -c "from glm_universal.reasoning import llvq_table as lt; \
     print(lt.agreement_report(samples=40))"       # §5, the 107 vectors
 cd .. && lake build RequestProject.GLM.LLVQTable  # §3
 ```

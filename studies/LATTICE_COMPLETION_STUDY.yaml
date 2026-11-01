@@ -1,32 +1,46 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 10 of 14 marks met as declared (A1, A3, A4 and C2 missed); 44 of 44 queries answered
   correctly with 0 false absences; 20 of 23 types certified as declared and 23 of 23 post hoc, `ρ = 0.1929`
   at `(L5, 7680)` over all 23; norm 2 filled, norm 256 empty; 10 theorems, 0 `sorry`.
 directives:
-- D12
 - D4
-- D8
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/configuration_classifier
-  - reasoning/empty_rungs
-  - reasoning/hole_census
-  - reasoning/lattice_completion
+  - reasoning/configuration_classifier.py
+  - reasoning/configuration_reading.py
+  - reasoning/deep_holes.py
+  - reasoning/empty_rungs.py
+  - reasoning/hole_census.py
+  - reasoning/lattice_completion.py
+  - reasoning/norm_escalation.py
+  - reasoning/patience_census.py
+  - reasoning/share_ensemble.py
+  - reasoning/voronoi_walk.py
+  - tools.py
   lean:
+  - DeepHoleFailure
   - LatticeCompletion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: LATTICE_COMPLETION_STUDY.md
   test:
-  - test_lattice_completion.py
+  - test_configuration_classifier.py
+  - test_empty_rungs.py
+  - test_hole_census.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: LATTICE_COMPLETION_STUDY
 junctions: []
 last_altered: ''
@@ -37,17 +51,48 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - A1
+  - A2
+  - A3
+  - A4
+  - B1
+  - B2
+  - B3
+  - B4
+  - B5
+  - B6
+  - C1
+  - C2
+  - C3
+  met:
+  - L1
+  - A2
+  - B1
+  - B2
+  - B3
+  - B4
+  - B5
+  - B6
+  - C1
+  - C3
+  missed:
+  - A1
+  - A3
+  - A4
+  - C2
 perturbations: []
-phase: 122
-predecessors: []
+phase: 123
+predecessors:
+- NORM_FAMILY_STUDY
 question: 'Can the three lattice items of the To-Do list be closed together: the configuration reading
   `L5` put into the deep-hole answering path with certified answers and absences, a reference centre reached
   for every one of the 23 Niemeier types and read by `L5`, and the two empty norms (2 and 256) of the
   power-of-two family filled by Construction A rungs that keep the ladder safe?'
 recomputed_by: '`glm_universal.reasoning.lattice_completion.lattice_completion_report`'
+related:
+- HOLE_REPORTS_L5_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -71,7 +116,10 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- HOLE_REPORTS_L5_STUDY
+- NORM_256_HEX_STUDY
+- PROBE_BUDGET_STUDY
 superseded_by: ''
 supersedes: []
 title: The lattice round — the configuration reading answers, all 23 holes are reached, and the empty

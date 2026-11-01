@@ -1,0 +1,190 @@
+{
+  "id": "W34",
+  "title": "Biomechanics & Hemodynamics",
+  "axioms": [
+    "vascular_resistance = viscosity * length / pipe_radius^4",
+    "volume_flow_rate = pressure / vascular_resistance"
+  ],
+  "cases": [
+    {
+      "id": "W34-01",
+      "equation": "viscosity = vascular_resistance * pipe_radius^4 / length",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W34-02",
+      "equation": "pipe_radius = (viscosity * length / vascular_resistance)^(1/4)",
+      "expected_dimensional": true,
+      "expected_derivable": false,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "4th root; dimensionally consistent but fractional power"
+    },
+    {
+      "id": "W34-03",
+      "equation": "pressure = volume_flow_rate * vascular_resistance",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W34-N1",
+      "equation": "vascular_resistance = pipe_radius^4 / (viscosity * length)",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "length",
+    "pipe_radius",
+    "pressure",
+    "vascular_resistance",
+    "viscosity",
+    "volume_flow_rate"
+  ],
+  "dimensions": {
+    "length": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "pipe_radius": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "pressure": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "vascular_resistance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -4,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "viscosity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "volume_flow_rate": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        3,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

@@ -4,7 +4,9 @@
 Three Column Thinking: Language / Math / Script for each query.
 
 Run:
-    PYTHONPATH=. python3 glm_universal/examples/demo_tct.py
+    PYTHONPATH=src python3 src/glm_universal/examples/demo_tct.py
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

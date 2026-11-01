@@ -1,5 +1,21 @@
 # Round 37: the cost of a turn, the observer's best phase, and the GLM indexed by hubs
 
+## Tier 0 — the coarse read
+
+**Question.** What is the exact cost of a turn of a wheel, are the one-run hubs hubs for every period, and does indexing the GLM by hubs make it consult its theorems (Round 37, To Do 39, 40 and 41)?
+
+**Verdict.** Exact, proved for all `d`: starting the clock `m` steps later costs `m` + (tests skipped), and each wheel has a best phase; the hubs `1^(q−1)0` are hubs for every `q ≥ 2`, and what remains is exactly the codes of length `d ≥ q − 3`; consultation went from 0/11 to 11/11. None of the three prize problems is settled.
+
+**Deciding figure.** In 66 of the 69 wheels with more than one phase (periods 2–8, `d ≤ 28`) some pair of phases attains the bound exactly; consultation 0/11 → 11/11; the hub index exact on all 8178 words of period `≤ 12`.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: this tier-0 block added so that the document keeps the corpus's tier contract like the other `RULE30_*` documents; the text below the rule is unchanged).*
+
+---
+
 This round took **To Do 39, 40 and 41**, with To Do 41 first: measurable results and exact
 improvement requirements. None of the three prize problems is settled.
 

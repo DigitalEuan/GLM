@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: One primary statistic against a digest control, a seeded reshuffle and the vertex-count
@@ -10,25 +12,34 @@ deciding_figure: One primary statistic against a digest control, a seeded reshuf
 directives:
 - D3
 - D4
-- D5
 - D6
 - D7
 evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/deep_hole_classifier
+  - corpus/checks.py
+  - reasoning/deep_hole_classifier.py
+  - reasoning/deep_holes.py
+  - reasoning/niemeier.py
+  - reasoning/transcendental.py
+  - reasoning/voronoi_walk.py
+  - tools.py
   lean:
-  - Census
   - DeepHoleClassifier
+  - Golay/Census
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DEEP_HOLE_STUDY.md
   test:
-  - test_deep_hole.py
+  - test_deep_hole_classifier.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DEEP_HOLE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -40,11 +51,12 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 33
 predecessors: []
 question: Can the distribution of trajectories that arrive at a deep hole of the Leech lattice name the
   hole's Coxeter–Dynkin type, and does it beat the plain vertex count?
 recomputed_by: '`glm_universal.reasoning.deep_hole_classifier.deep_hole_classifier_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -80,7 +92,8 @@ sections:
 - anchor: 13-what-this-study-does-not-do
   heading: 13. What this study does not do
 status: closed
-successors: []
+successors:
+- DEEP_HOLE_FAILURE_STUDY
 superseded_by: ''
 supersedes: []
 title: The Niemeier deep holes, classified from trajectories

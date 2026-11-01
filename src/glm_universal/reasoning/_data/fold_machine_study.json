@@ -1,0 +1,113 @@
+{
+ "amended": {
+  "M4'": true
+ },
+ "amended_met": 1,
+ "amended_taken": 1,
+ "chains": {
+  "admitted": 187,
+  "by_fn": {
+   "even": 2,
+   "max": 1,
+   "max:k": 4,
+   "mean": 3,
+   "median": 14,
+   "min:k": 1,
+   "odd": 2,
+   "q1": 3,
+   "q3": 2,
+   "rank": 6,
+   "sum": 2,
+   "top": 8
+  },
+  "carried_off": 92,
+  "carried_on": 44,
+  "chains": 187,
+  "failures": [],
+  "folds": 70,
+  "folds_carried_off": 48,
+  "folds_carried_on": 0,
+  "folds_newly_computed": 48,
+  "hole_lies": 25,
+  "hole_lies_stopped": 25,
+  "lies": 48,
+  "lies_found": 48,
+  "max_lines": 2152,
+  "max_question": "what is the median of the valence electrons of all the elements",
+  "max_steps": 6041,
+  "mutants": 96,
+  "mutants_rejected": 96,
+  "read_back": 187,
+  "said": 187,
+  "script_failures": [],
+  "scripts": 48,
+  "scripts_ok": 48,
+  "witness_runs": 33,
+  "witness_same": 3,
+  "witness_stopped": 30,
+  "witness_wrong": 0
+ },
+ "corpus": {
+  "chains": 187,
+  "texts": 270
+ },
+ "first_note": "the first measurement (at which M4 was missed, 22 of 24 hole lies stopped) was lost in the October 2026 reorganisation; M4 and M4' are both measured on the machine as it now stands",
+ "frozen": {
+  "baseline": false,
+  "gate": true,
+  "measured": false,
+  "note": "F1 not measured: the baseline (reasoning/_data/fold_machine_baseline.json) is absent; take it with the switch off",
+  "same_status": 0,
+  "same_text": 0,
+  "texts": 0
+ },
+ "lean": {
+  "declared": 10,
+  "file": "FoldMachine.lean",
+  "met": false,
+  "missing": [
+   "kth_lt_iff",
+   "kth_eq_iff",
+   "kth_window",
+   "window_unique",
+   "stablePos_lt",
+   "stablePos_strict",
+   "stablePos_tie",
+   "stablePos_injective",
+   "hole_needle_iff",
+   "absent_iff"
+  ],
+  "present": false,
+  "sorry": false,
+  "theorems": 0
+ },
+ "marks": {
+  "F1": false,
+  "K1": true,
+  "M1": true,
+  "M2": true,
+  "M3": true,
+  "M4": true,
+  "M5": true,
+  "M6": true,
+  "P1": true
+ },
+ "met": 8,
+ "rest_hold_again": false,
+ "source_digest": "86c4a9e561f658a6e6cbe10a0509b7640c6b6d30b6a6e6d02a08c5f1c324740e",
+ "switches": "tool_machine.ON off; fold_machine.ON off and on",
+ "synthetic": {
+  "admitted": 2458,
+  "answered": 2458,
+  "carried": 0,
+  "columns": 3000,
+  "failures": [],
+  "lies": 2430,
+  "lies_refused": 2430,
+  "machine_silent": 542,
+  "refused_by_planner": 542,
+  "with_holes": 1136,
+  "with_ties": 1671
+ },
+ "taken": 9
+}

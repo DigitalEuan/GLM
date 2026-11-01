@@ -30,6 +30,9 @@ which drifts fails a run rather than misleading a reader.
 
 * **Exactness.**  No float is constructed anywhere in the corpus report: every
   rate is a :class:`~fractions.Fraction` and every distance an ``int``.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
+*Last altered 1 November 2026 (Phase 186): the recorded median excess is 24 (ITERATION_COST_STUDY.md §5l).*
 """
 
 from __future__ import annotations
@@ -58,8 +61,10 @@ from glm_universal.corpus import report as rp
 
 class TestTheCorpusIsEnumeratedByRule(unittest.TestCase):
 
-    def test_the_repository_root_is_the_one_holding_the_overlay(self):
-        self.assertTrue((inv.REPOSITORY_ROOT / "overlay").is_dir())
+    def test_the_repository_root_is_the_one_holding_the_package(self):
+        # Since the reorganisation (29 Oct 2026) the package lives under
+        # ``src/`` rather than ``overlay/``; the root is where ENTRY.md is.
+        self.assertTrue((inv.REPOSITORY_ROOT / "src" / "glm_universal").is_dir())
         self.assertTrue((inv.REPOSITORY_ROOT / "ENTRY.md").is_file())
 
     def test_source_material_is_not_part_of_the_written_corpus(self):
@@ -467,8 +472,11 @@ class TestTheIterationCost(unittest.TestCase):
                              + self.RECORDED_MEDIAN_EXCESS)
 
     #: How far the median single-file cost may stand above half the
-    #: any-Lean-file row, as recorded (Phase 115: by one).
-    RECORDED_MEDIAN_EXCESS = 1
+    #: any-Lean-file row, as recorded (Phase 115: by one; re-measured 31
+    #: October 2026 after the reorganisation: by 23, every glob unit reaching
+    #: the ledger's tree walk; 1 November 2026, Phase 186: by 24, three of its
+    #: five new test files taking the whole development -- ITERATION_COST_STUDY.md §5l).
+    RECORDED_MEDIAN_EXCESS = 24
 
     def test_no_module_on_the_answering_path_reads_the_development(self):
         """The §5e rule, pinned at the modules that have broken it.
@@ -494,6 +502,17 @@ class TestTheIterationCost(unittest.TestCase):
                 carried = development & closure
                 self.assertLess(len(carried), len(development),
                                 f"{module} carries the whole development")
+        #  The wheels package is in every router-reaching closure; on 31
+        #  October 2026 its provisional note built Lean names with a literal
+        #  suffix, which put the whole development in 223 closures
+        #  (ITERATION_COST_STUDY.md §5l).
+        wheels = Path(R.__file__).resolve().parents[1] / "wheels"
+        for module in ("__init__.py", "cent_wheels.py", "sequence_query.py"):
+            with self.subTest(module=f"wheels/{module}"):
+                closure = set(R.unit_closure(wheels / module))
+                carried = development & closure
+                self.assertLess(len(carried), len(development),
+                                f"wheels/{module} carries the whole development")
 
     def test_no_reading_of_the_cost_is_a_float(self):
         def walk(value):
@@ -647,7 +666,7 @@ class TestEveryStoredMeasurementIsAccountedFor(unittest.TestCase):
 
     def test_a_stale_cache_is_described_with_its_command(self):
         rows = ({"module": "example", "fresh": False, "command": "example",
-                 "retake": "PYTHONPATH=. python3 -m glm_universal.tools "
+                 "retake": "PYTHONPATH=src python3 -m glm_universal.tools "
                            "example --write"},)
         lines = ca.describe({"rows": rows, "without_a_command": ()})
         self.assertEqual(1, len(lines))

@@ -1,27 +1,38 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: The parser is worth <!--figure:oracle-parser-worth-->4<!--/figure--> questions of <!--figure:oracle-questions-->20<!--/figure-->;
   a surface onto what the registers already hold is worth <!--figure:oracle-surface-->10<!--/figure-->.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - tests/test_probe_oracle
-  lean: []
+  - reasoning/blockers.py
+  - reasoning/probe_oracle.py
+  - substrate/norm_family.py
+  - tools.py
+  lean:
+  - NormFamily
+  - ProbeOracle
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: PROBE_ORACLE_STUDY.md
   test:
   - test_probe_oracle.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: PROBE_ORACLE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -33,11 +44,13 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
-predecessors: []
+phase: 45
+predecessors:
+- BLOCKERS_STUDY
 question: The language probe refuses seventeen of twenty questions. How many of those refusals are the
   parser, and how many are the system having nothing to say?
 recomputed_by: '`glm_universal.reasoning.probe_oracle.oracle_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -61,7 +74,8 @@ sections:
 - anchor: 8-re-running-it
   heading: 8. Re-running it
 status: closed
-successors: []
+successors:
+- SEMANTIC_PLAN_STUDY
 superseded_by: ''
 supersedes: []
 title: Hand-translating the probe — separating *cannot parse* from *cannot answer*

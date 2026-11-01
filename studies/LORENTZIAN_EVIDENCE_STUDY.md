@@ -6,11 +6,13 @@
 
 **Verdict.** The lift is an evidence space: any finite set of weighted cues, in any dimension, sums to one vector that is the lifted consensus plus the Weyl vector times the cues' disagreement, so cues add, a tie is the consensus on a mirror, disagreement is minus the Lorentzian norm, and analogy is evidence with weights 1, −1, 1; in use it refuses what it should — answers outside the tie's certificate, examples that do not state one relation, a name the dimension layer cannot choose — at no cost in right answers, and a tie asks the one question that settles it, but where relations are not displacements it helps little, and the decoy readings it still answers wrongly carry no information that could tell them from honest ones.
 
-**Deciding figure.** 13 of 15 marks; Golay decoy 61 wrong → 27 under the certificate guard with 0 right answers lost on any condition, and all 27 indistinguishable from honest readings; the settling question 600 of 600 with five bits (random five 391); physics relations with a decoy example 0 wrong against 87 and 38 for the first example alone; names 10 wrong of 13 → class certificates holding the expected name 12 times; semantic relations 6.7 % precise.
+**Deciding figure.** 13 of 15 marks; Golay decoy 61 wrong → 27 under the certificate guard with 0 right answers lost on any condition, and all 27 indistinguishable from honest readings; the settling question 600 of 600 with five bits (random five 391); physics relations with a decoy example 0 wrong against 87 and 38 for the first example alone; names 10 wrong of 13 → class certificates holding the expected name 12 times; semantic relations 6.7 % precise. Re-measured 31 October 2026 with an exact integer generator in place of `random` (§6.1): 13 of 15 marks again (G5 and P4 not met); decoy 69 wrong → 31, all 31 indistinguishable; random five 392; first example alone wrong 73 and 47; semantic precision 390 of 5977.
 
 **Recomputed by.** `glm_universal.reasoning.lorentzian_evidence_study.lorentzian_evidence_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured with an exact integer query generator in place of Python's `random`; 13 of 15 marks as before, the counts moved, §6.1; its run commands now start from the repository root (`PYTHONPATH=src`).)*
 
 ---
 
@@ -20,6 +22,8 @@ measurement. G2 and G3 were written after a prototype run of the Golay decoy
 census, and G5b after a trial run showed that G5 mis-states the theorem it
 was meant to test; all three are labelled so. Measured 23 October 2026, one
 take.*
+
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged.)*
 
 ## 0. What this document is
 
@@ -64,7 +68,7 @@ norm), and when no amount of combining can choose (a mirror).
 
 ## 2. What is proved
 
-**[`glm_lean/RequestProject/GLM/LorentzianEvidence.lean`](../glm_lean/RequestProject/GLM/LorentzianEvidence.lean)**
+**[`glm_lean/RequestProject/GLM/LorentzianEvidence.lean`](../src/lean/RequestProject/GLM/LorentzianEvidence.lean)**
 — over `ℚ`, for any dimension `n`, any finite index set and any weights, built
 on Phase 182's `LorentzianLift.lean`.
 
@@ -256,6 +260,68 @@ summing examples of a relation that is not a displacement cannot make it one.
 
 13 of 15 marks.
 
+### 6.1 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The measurement drew its Golay
+readings, its settling-question controls and its physics and semantic examples
+from Python's `random` module, which the import rules of `reasoning/` do not
+allow (`tests/test_reasoning.py`, the blueprint's banned imports). It now draws
+them from the exact integer generator of `reasoning/lorentzian_lift_study.py`
+(`ExactRng`), so the queries are drawn the same way but are not those of
+§§3–5. The Lean file is read through `constants.lean_file`. Taken again with
+`tools lorentzian-evidence --write`:
+
+| readings | `guarded` right / wrong / refused | `certificate` | `dispersion` |
+|---|---|---|---|
+| 4+0, 4+1, 4+2, 4+3 | 600 / 0 / 0 each | 600 / 0 / 0 each | 600 / 0 / 0 each |
+| 4+4 | 588 / 0 / 12 | 588 / 0 / 12 | 588 / 0 / 12 |
+| 4+5 | 480 / 4 / 116 | 480 / 4 / 116 | 480 / 4 / 116 |
+| 4+6 | 309 / 29 / 262 | 309 / 22 / 269 | 309 / 29 / 262 |
+| 4+4+4 | 600 / 0 / 0 | 600 / 0 / 0 | 600 / 0 / 0 |
+| 4+4+6 | 597 / 0 / 3 | 597 / 0 / 3 | 597 / 0 / 3 |
+| decoy | 3 / 69 / 528 | 3 / 31 / 566 | 3 / 69 / 528 |
+
+The certificate guard removes 38 of the 69 wrong decoy answers and 7 of the 29
+on 4+6, losing no right answer; the 31 left are all indistinguishable from an
+honest set. The settling question: the five asked positions 600 right of 600;
+five random positions 392 right, 0 wrong, 208 still tied; every four of the
+five asked positions leave some candidate unsettled on 600 of 600, and 97 of
+600 tied readings had no four-subset that failed on the sent codeword (86 in
+§3).
+
+| condition | `first` | `lorentz` | `guarded` | `vote` |
+|---|---|---|---|---|
+| clean1 | 157 / 0 / 143 | 157 / 64 / 79 | 157 / 0 / 143 | 157 / 0 / 143 |
+| clean2 | 147 / 0 / 153 | 147 / 68 / 85 | 147 / 0 / 153 | 147 / 0 / 153 |
+| clean3 | 154 / 0 / 146 | 154 / 74 / 72 | 154 / 0 / 146 | 154 / 0 / 146 |
+| decoy2 | 75 / 73 / 152 | 1 / 138 / 161 | 0 / 0 / 300 | 0 / 0 / 300 |
+| decoy3 | 85 / 47 / 168 | 64 / 211 / 25 | 0 / 0 / 300 | 138 / 0 / 162 |
+
+Names: 13 class answers, 12 holding the expected name. Semantic relations
+(14): at `k = 1` 171 right of 3143 queries, at `k = 3` 217 of 3346; all answers
+at `k = 2, 3` right 390 of 5977, the low-dispersion half 232 of 2989 (§5: 199
+of 2984 and 125 of 1492).
+
+| mark | result | met |
+|---|---|---|
+| **E1** | identities exact on 200, 200, 200 | yes |
+| **G1** | certificate guard right exactly as often as `guarded`, every condition | yes |
+| **G2** | certificate guard 31 wrong on the decoy against 69 | yes |
+| **G3** | 31 of 31 remaining decoy errors indistinguishable from an honest set | yes |
+| **G4** | dispersion guard right exactly as often as `guarded` on every honest condition | yes |
+| **G5** | first half 600 of 600; the second half mis-states the theorem (97 of 600) | no |
+| **G5b** | 600 of 600 | yes |
+| **G6** | five random positions 392 against 600 | yes |
+| **P1** | `guarded` 0 wrong on every physics condition | yes |
+| **P2** | clean conditions: `guarded` right on every present target, refusing the rest | yes |
+| **P3** | decoy conditions: `guarded` refuses all; `first` and `lorentz` wrong | yes |
+| **P4** | 12 of 13, the reciprocal relation | no |
+| **S1** | right per query 171 of 3143 at `k = 1`, 217 of 3346 at `k = 3` | yes |
+| **S2** | low-dispersion half 232 of 2989 against all answers 390 of 5977 | yes |
+| **L** | the Lean file, no `sorry`, audited | yes |
+
+So **13 of 15 marks** again, G5 and P4 not met as in §6.
+
 ## 7. What it gives the GLM's reasoning
 
 Under the standing target ([`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)),
@@ -304,9 +370,8 @@ layer, hardly at all among the semantic primitives.
 ## 9. Reproduce
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools lorentzian-evidence          # the stored marks
-PYTHONPATH=. python3 -m glm_universal.tools lorentzian-evidence --write  # re-take (~10 minutes)
+PYTHONPATH=src python3 -m glm_universal.tools lorentzian-evidence          # the stored marks
+PYTHONPATH=src python3 -m glm_universal.tools lorentzian-evidence --write  # re-take (~10 minutes)
 python3 GLM.py -q "tool lorentz 15"                                       # a tie, with the five positions it asks for
 python3 GLM.py -q "tool lorentz 15; @0=0 5=0 6=0 7=0 11=0"                # settled by those bits
 python3 GLM.py -q "tool evidence velocity : acceleration, mass : density :: momentum"   # refused: no one relation

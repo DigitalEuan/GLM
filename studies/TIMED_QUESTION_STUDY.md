@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -187,7 +189,7 @@ declared informant:
 
 ## 7. What came out
 
-Measured by `PYTHONPATH=. python3 -m glm_universal.tools timed-question`
+Measured by `PYTHONPATH=src python3 -m glm_universal.tools timed-question`
 (about ten seconds; computed live, no cache) after §§0–6 were committed.
 
 | mark | result | |

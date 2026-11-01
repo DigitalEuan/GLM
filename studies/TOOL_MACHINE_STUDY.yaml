@@ -1,0 +1,121 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 8 of 9 marks and L1, 1 of 1 amended (F1′); carried steps 44 → 0; 174 of 174 chains admitted
+  and read back; held-out control 2,785 of 2,785 admitted, 215 tool refusals unwritten; the Leech kissing
+  number 196,560 counted from the generator rows (759 octads); F1 699 of 702 at the first measurement,
+  702 of 702 asked off and on in the same run.
+directives: []
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - reasoning/planner_ladder.py
+  - reasoning/tool_machine.py
+  - reasoning/tool_machine_study.py
+  - runtime/toolbox.py
+  - tools.py
+  lean: []
+  lean_held: []
+  lean_missing:
+  - LeechMachine
+  - ToolMachine
+  missing: []
+  prose: TOOL_MACHINE_STUDY.md
+  test:
+  - test_tool_machine.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: TOOL_MACHINE_STUDY
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended:
+  - F1′
+  declared:
+  - L1
+  - T1
+  - T2
+  - T3
+  - T4
+  - T5
+  - K1
+  - G1
+  - P1
+  - F1
+  met:
+  - L1
+  - T1
+  - T2
+  - T3
+  - T4
+  - T5
+  - K1
+  - G1
+  - P1
+  - F1′
+  missed:
+  - F1
+perturbations: []
+phase: 163
+predecessors:
+- FOLD_MACHINE_STUDY
+- TOOL_VALUES_STUDY
+- TOOL_VERDICTS_STUDY
+question: Can GLM-BAT compute the 44 steps of the stepwise planner's answered chains that Phase 160 left
+  carried — tool answers (convergents, continued-fraction terms, nearest fractions, gate moves), a conversion,
+  axiom steps, and `choose` and `first` steps — from definitions and checked witnesses rather than repeating
+  the planner's values, and count the Leech kissing number from the Golay code's generator?
+recomputed_by: (hand-written argument; nothing to recompute)
+related:
+- GLM_ACADEMIC_PAPER
+- LEECH_SHELLS_STUDY
+- PI_MACHINE_STUDY
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-the-control
+  heading: 2. The control
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-how-it-is-measured
+  heading: 6. How it is measured
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors:
+- LEECH_SHELLS_STUDY
+- PI_MACHINE_STUDY
+superseded_by: ''
+supersedes: []
+title: The machine works the tools out — convergents, nearest fractions, gate moves and the Leech kissing
+  number computed in GLM-BAT
+verdict: 'Yes. The batch machine no longer repeats any step of an answered chain: it computes each one
+  from definitions, checks every witness it is offered, and counts the Leech kissing number from the Golay
+  code''s generator.'
+wobble_deps: []

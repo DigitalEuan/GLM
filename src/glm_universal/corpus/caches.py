@@ -34,6 +34,8 @@ Both halves are **computed, not listed**:
 
 So a new study with a cache, or a renamed sub-command, cannot leave a stale
 figure with no way to find it.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -236,7 +238,7 @@ def cache_states() -> Tuple[Dict[str, object], ...]:
             "fresh": fresh,
             "drift": drift,
             "command": command,
-            "retake": (f"PYTHONPATH=. python3 -m glm_universal.tools "
+            "retake": (f"PYTHONPATH=src python3 -m glm_universal.tools "
                        f"{command} --write" if command else None),
         })
     return tuple(rows)

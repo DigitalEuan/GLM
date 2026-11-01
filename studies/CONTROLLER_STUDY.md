@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 **What this document is.**
 [`SEARCH_LOOP_STUDY.md`](SEARCH_LOOP_STUDY.md) retrieved the archive's
 procedure — filter on every observation, then rank — and proved what one pass
@@ -67,14 +69,13 @@ The answer, before the tables:
    seconds.
 
 The formal half is
-[`RequestProject/GLM/Controller.lean`](../glm_lean/RequestProject/GLM/Controller.lean),
+[`RequestProject/GLM/Controller.lean`](../src/lean/RequestProject/GLM/Controller.lean),
 the computational half is `glm_universal.reasoning.controller`, the test that
 pins them together is `glm_universal/tests/test_controller.py`
 (25 tests, 181 subtests), and the report prints with
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report controller" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report controller" --verify-tct
 ```
 
 ---

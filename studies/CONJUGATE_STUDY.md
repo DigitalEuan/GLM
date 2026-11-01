@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 1. The question, and why it was refused
@@ -171,7 +173,7 @@ factor's role.
 
 ## 8. The formal side
 
-[`RequestProject/GLM/Conjugate.lean`](../glm_lean/RequestProject/GLM/Conjugate.lean)
+[`RequestProject/GLM/Conjugate.lean`](../src/lean/RequestProject/GLM/Conjugate.lean)
 carries the part of the argument that is not a measurement:
 
 * the register is sound — a row's effort and extent exponents sum to energy's,
@@ -186,9 +188,8 @@ carries the part of the argument that is not a measurement:
 ## 9. How to re-run it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report conjugates').answer)"
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_conjugate.py -q
+PYTHONPATH=src python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report conjugates').answer)"
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_conjugate.py -q
 cd .. && lake build RequestProject.GLM.Conjugate
 ```
 

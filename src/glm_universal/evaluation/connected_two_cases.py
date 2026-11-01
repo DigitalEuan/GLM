@@ -17,6 +17,12 @@ toolbox.wiring_census`).  This module holds what that is measured against:
 * :func:`measure` -- the marks W1-W8 of the study, taken.
 
 Exact throughout: integers and ``Fraction``.
+
+*Last altered 1 November 2026 (Phase 186): W6 exempts the eight evaluation
+cases written to put the new openings of ``tool rule30``, ``tool
+conjecture``, ``tool derive`` and ``tool arc`` to the command line
+(:data:`PHASE186_OPENING_CASES`): they are read by an opening on purpose, and
+the mark now also requires that each of them is.*
 """
 
 from __future__ import annotations
@@ -27,7 +33,19 @@ from typing import Dict, List, Sequence, Tuple
 
 __all__ = ["PHRASED", "TOOL_CASES", "PI_TERMS", "RATIONAL_EXPRESSIONS",
            "MOBIUS_CASES", "LEAN_FILE", "LEAN_THEOREMS", "quadratic_cf", "mobius_quadratic_cf", "e_terms",
-           "measure"]
+           "PHASE186_OPENING_CASES", "measure"]
+
+
+#: The evaluation cases written at Phase 186 (1 November 2026) to put the
+#: English openings of ``tool rule30``, ``tool conjecture``, ``tool derive``
+#: and ``tool arc`` to the command line.  Each is read by an opening on
+#: purpose; W6 exempts them and requires that they are, and holds every other
+#: declared text to the rule.
+PHASE186_OPENING_CASES: Tuple[str, ...] = (
+    "tool-rule30-centre", "tool-rule30-claim-refuted", "tool-rule30-claim-open",
+    "tool-conjecture-refuted", "tool-conjecture-survives", "tool-derive-law",
+    "tool-derive-not-a-law", "tool-arc-plan-search",
+)
 
 
 #: ``(question, fragment or "refuse")`` -- English the planner refuses, read by
@@ -238,13 +256,20 @@ def measure() -> Dict[str, object]:
                    "met": all(r["sound"] and not r["complete"]
                               for r in rrows)}
 
-    # W6 -- non-interference
+    # W6 -- non-interference (Phase 186: the cases written for the new
+    # openings are exempt, and must be read by one)
+    from .cases import CASES
+    exempt = {c.question for c in CASES if c.id in PHASE186_OPENING_CASES}
     sets = router._declared_sets()
     texts = [t for v in sets.values() for t in v] + \
         [t for t, _ in cc.ROUTED_MIXED]
-    matched = [t for t in texts if tb.phrase_tool(t) is not None]
+    matched = [t for t in texts
+               if t not in exempt and tb.phrase_tool(t) is not None]
+    unread = [t for t in exempt if tb.phrase_tool(t) is None]
     marks["W6"] = {"declared_texts": len(texts), "matched": len(matched),
-                   "met": not matched}
+                   "exempt": len(exempt), "exempt_unread": len(unread),
+                   "met": not matched and not unread
+                   and len(exempt) == len(PHASE186_OPENING_CASES)}
 
     # W7 -- the phrased battery, through the router
     session = GeometricSession()

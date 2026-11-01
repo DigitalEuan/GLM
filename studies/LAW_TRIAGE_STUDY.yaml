@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '5 of 5 marks met; 106 laws: 0 absorbed, 3 already served, 3 refuted, 100 retired (42
@@ -13,13 +15,18 @@ directives:
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/law_triage.py
   lean: []
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: LAW_TRIAGE_STUDY.md
   test:
   - test_law_triage.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: LAW_TRIAGE_STUDY
 junctions: []
 last_altered: ''
@@ -30,16 +37,28 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - B1
+  - B2
+  - B3
+  - B4
+  - B5
+  met:
+  - B1
+  - B2
+  - B3
+  - B4
+  - B5
   missed: []
 perturbations: []
-phase: 81
+phase: 83
 predecessors:
 - LAW_ABSORPTION_STUDY
 question: Do any of the 106 laws the law review left unresolved give the GLM a measurable service it does
   not already have?
 recomputed_by: '`glm_universal.reasoning.law_triage.law_triage_report`'
+related:
+- LAW_REGISTER_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

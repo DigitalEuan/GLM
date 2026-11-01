@@ -8,6 +8,16 @@ against the protocol flag (``YAML_PROTOCOL_ENABLED``).
 The tests are designed to pass whether the protocol is enabled or not:
 when the flag is False, the gate checks return passive reports and the
 schema/validator tests still run (they don't depend on the flag).
+
+*Last altered 31 October 2026 (repository check): runs on Python 3.11 (the
+registry's ``yaml_files`` no longer uses the 3.12-only ``Path.walk``); new
+tests for the schema-file validator (``validate_with_schema``), for the study
+manifests validating against ``studies/_schema/study.schema.yaml`` itself,
+and for ``mirror_field_map``.  Later the same day: a study manifest's mirror
+is the document beside it, and with the tier-0 fields read where the manifest
+schema stores them every study manifest agrees with its document.  Also the
+same day: schema definitions (``*.schema.yaml``) are not walked as manifests,
+and the gate's schema check holds over the whole tree.*
 """
 from __future__ import annotations
 
@@ -189,6 +199,104 @@ class TestGateChecksRunWhenFlagOn(unittest.TestCase):
         self.assertTrue(r["holds"])
 
 
+class TestRunsOnThisPython(unittest.TestCase):
+    """The registry walks the tree with ``os.walk`` (3.11+)."""
+
+    def test_yaml_files_walks(self):
+        files = yml.yaml_files()
+        self.assertTrue(any(p.parent.name == "studies" for p in files))
+        self.assertFalse(any("__pycache__" in p.parts for p in files))
+        self.assertEqual(files, sorted(files))
+        # Schema definitions are not manifests (31 October 2026).
+        self.assertFalse(any(p.name.endswith(".schema.yaml") for p in files))
+
+    def test_every_yaml_file_validates(self):
+        """The gate's schema check holds over the whole tree (31 October
+        2026: it used to count the study schema itself as invalid)."""
+        try:
+            import yaml as _pyyaml  # noqa: F401
+        except ImportError:  # pragma: no cover
+            self.skipTest("PyYAML not installed")
+        report = checks.yaml_schema_report()
+        if not report["enabled"]:
+            self.skipTest("YAML protocol not enabled")
+        self.assertEqual([], report["failures"])
+        self.assertTrue(report["holds"])
+
+
+class TestSchemaFileValidator(unittest.TestCase):
+    """``validate_with_schema`` over the subset of JSON Schema the study
+    schema uses, and the study manifests against the schema file."""
+
+    SCHEMA = {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+            "id": {"type": "string", "pattern": "^[A-Z_]+$"},
+            "phase": {"type": "integer", "minimum": 0},
+            "status": {"type": "string", "enum": ["open", "closed"]},
+            "tags": {"type": "array", "items": {"type": "string"}},
+            "pair": {"type": "array", "minItems": 2},
+            "schema": {"type": "string", "const": "x/v1"},
+        },
+    }
+
+    def test_valid(self):
+        self.assertEqual(yml.validate_with_schema(
+            {"id": "A_B", "phase": 3, "status": "open", "tags": ["x"],
+             "pair": [1, 2], "schema": "x/v1", "extra": 1}, self.SCHEMA), [])
+
+    def test_each_keyword_fails(self):
+        cases = [
+            {"phase": 1},                       # required
+            {"id": "a"},                        # pattern
+            {"id": "A", "phase": -1},           # minimum
+            {"id": "A", "phase": True},         # a bool is not an integer
+            {"id": "A", "status": "maybe"},     # enum
+            {"id": "A", "tags": ["x", 3]},      # items type
+            {"id": "A", "pair": [1]},           # minItems
+            {"id": "A", "schema": "y/v1"},      # const
+            ["not", "a", "mapping"],            # type
+        ]
+        for data in cases:
+            self.assertNotEqual(yml.validate_with_schema(data, self.SCHEMA),
+                                [], data)
+
+    @unittest.skipUnless(_yaml_available(), "PyYAML not installed")
+    def test_study_schema_loads(self):
+        schema = yml.study_schema()
+        self.assertIsNotNone(schema)
+        self.assertIn("file_refs", schema["properties"])
+        pattern = schema["properties"]["directives"]["items"]["pattern"]
+        import re
+        for name in ("D1", "D17", "D22"):
+            self.assertRegex(name, pattern)
+        self.assertIsNone(re.search(pattern, "D0"))
+
+    @unittest.skipUnless(_yaml_available(), "PyYAML not installed")
+    def test_manifest_validator_uses_the_schema_file(self):
+        """A manifest the old lenient validator accepted but the schema
+        rejects (a bad directive tag, a bad file_refs list) is refused."""
+        base = {"schema": "glm-study-manifest/v1", "id": "X_STUDY",
+                "question": "q", "verdict": "v",
+                "file_refs": {"prose": "X_STUDY.md"}}
+        self.assertEqual(yml.validate(base), [])
+        bad = dict(base, directives=["D99"])
+        self.assertNotEqual(yml.validate(bad), [])
+        bad = dict(base, file_refs={"prose": "X_STUDY.md", "code": [1]})
+        self.assertNotEqual(yml.validate(bad), [])
+
+    def test_mirror_field_map(self):
+        self.assertEqual(yml.mirror_field_map("glm-study-manifest/v1")["figure"],
+                         "deciding_figure")
+        self.assertEqual(
+            yml.mirror_field_map("glm-study-manifest/v1")["recomputed"],
+            "recomputed_by")
+        self.assertEqual(yml.mirror_field_map("glm-study/v1")["figure"],
+                         "tier0.figure")
+        self.assertEqual(yml.mirror_field_map("glm-study-card/v1"), {})
+
+
 class TestMirrorTarget(unittest.TestCase):
     """The mirror_target function resolves the markdown path correctly."""
 
@@ -200,6 +308,34 @@ class TestMirrorTarget(unittest.TestCase):
         target = yml.mirror_target(Path("/dummy"), data)
         self.assertIsNotNone(target)
         self.assertTrue(str(target).endswith("README.md"))
+
+    def test_manifest_mirror_is_the_document_beside_it(self):
+        """A ``glm-study-manifest/v1`` manifest names its document by file
+        name (``file_refs.prose``); the mirror is the file beside it, not a
+        file of that name at the repository root."""
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "X_STUDY.md").write_text("# X\n", encoding="utf-8")
+            data = {"schema": "glm-study-manifest/v1",
+                    "file_refs": {"prose": "X_STUDY.md"}}
+            target = yml.mirror_target(folder / "X_STUDY.yaml", data)
+            self.assertEqual(target, folder / "X_STUDY.md")
+
+    @unittest.skipUnless(_yaml_available(), "PyYAML not installed")
+    def test_every_study_manifest_mirrors_its_document(self):
+        """With the fields read through ``mirror_field_map`` (``deciding_figure``,
+        ``recomputed_by``), every study manifest agrees with its document's
+        tier-0 block."""
+        saved = yml.YAML_PROTOCOL_ENABLED
+        yml.YAML_PROTOCOL_ENABLED = True
+        try:
+            r = checks.yaml_mirror_report()
+        finally:
+            yml.YAML_PROTOCOL_ENABLED = saved
+        studies = [f for f in r["failures"] if "/studies/" in f[0]]
+        self.assertEqual(studies, [])
+        self.assertGreater(r["checked"], 150)
 
 
 if __name__ == "__main__":

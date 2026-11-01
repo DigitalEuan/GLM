@@ -1,161 +1,178 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Rounds 2 to 49, one section per round.
-directives:
-- D1
+directives: []
 evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/wobble_normalize
+  - reasoning/frozen_path.py
+  - reasoning/lattice_completion.py
+  - reasoning/pipeline.py
+  - reasoning/search_loop.py
+  - runtime/parser.py
+  - runtime/reports/__init__.py
+  - runtime/reports/lattice_geometry.py
+  - runtime/session.py
+  - runtime/stepwise.py
+  - runtime/tct_engine.py
+  - substrate/golay_decode.py
   lean:
-  - AdicPeriod
-  - AdicTower
-  - AdicTowerData
-  - AmortizedHalving
-  - ArrowIndependence
-  - BarrierDiagonalsData
-  - Benchmarks
-  - BenchmarksData
-  - BlackRunWindow
-  - ChemistryLab
-  - ChiralLeak
-  - ColumnInverse
-  - ConeGeometry
-  - ConjectureLoop
-  - ConjectureLoopData
-  - DegreeData
-  - DiagonalCoupling
-  - DiagonalSearch
-  - DiagonalSearchData
-  - Diagonals
-  - DialogueChecks
-  - DriveWheel
-  - DriveWheelData
-  - EchoBound
-  - ElementaryCA
-  - Ergodic
   - Escalation
-  - FiniteState
-  - Frontier
-  - Funnel
-  - GLM
-  - GateLoop
-  - GateLoopData
-  - GolayTies
-  - HalfLineMachine
-  - HalfLineMachineData
-  - HankelKronecker
-  - Injector
-  - InjectorAnalogies
-  - InjectorData
-  - InnerSurvivorData
-  - Invariance
-  - LatticeConeFraction
-  - LayerStack
-  - LeechResidue
-  - LeftDiagonalPeriods
-  - LeftDiagonalPeriodsData
-  - LeftWhiteCompactness
-  - LeftWhiteLift
-  - LocalRuleInduction
-  - MachineModel
-  - MachineModelData
-  - MasterStep
-  - MathieuCensus
-  - MathieuCensusOrbits
-  - MathieuMOG
-  - MathieuOrbits
-  - MathieuOrbitsData
-  - MathieuRule30Data
-  - NeedsWheel
+  - Escalation/GolayTies
+  - Escalation/LayerStack
+  - Escalation/LeechResidue
+  - Escalation/MasterStep
+  - Escalation/Niemeier
+  - Escalation/Rule30Parity
+  - HypothesisEngine/Benchmarks
+  - HypothesisEngine/BenchmarksData
+  - HypothesisEngine/DialogueChecks
+  - HypothesisEngine/GateLoop
+  - HypothesisEngine/GateLoopData
+  - HypothesisEngine/NeedsWheel
+  - HypothesisEngine/TaxChecks
+  - HypothesisEngine/TaxChecksData
+  - HypothesisEngine/Wheel
+  - HypothesisEngine/WheelChecksData
   - Niemeier
-  - NoConstantColumn
-  - Observer
-  - OnePeriodicColumn
-  - OneRunFamily
-  - ParityReduction
-  - ParityReductionData
-  - PeriodTwoHalfLine
-  - PeriodTwoHalfLineData
-  - Perspective
-  - PhaseSpace32
-  - Pipeline
-  - PipelineData
-  - PlanSearch
-  - PostEdgeSpec
-  - PowerSeriesLadder
-  - PowerSeriesLadderData
-  - PrefixSearch
-  - PrefixSearchData
-  - Problem3Quantifiers
-  - ProofRoutes
-  - ProofRoutesData
-  - ReadAngle
-  - RightDiagonalBalance
   - Rule30
-  - Rule30Parity
-  - Rule30PowerSeriesLadder
+  - Rule30/AdicPeriod
+  - Rule30/AdicTower
+  - Rule30/AdicTowerData
+  - Rule30/AmortizedHalving
+  - Rule30/ArrowIndependence
+  - Rule30/BarrierDiagonalsData
+  - Rule30/BlackRunWindow
+  - Rule30/ChemistryLab
+  - Rule30/ChiralLeak
+  - Rule30/ColumnInverse
+  - Rule30/ConeGeometry
+  - Rule30/ConjectureLoop
+  - Rule30/ConjectureLoopData
+  - Rule30/DegreeData
+  - Rule30/DiagonalCoupling
+  - Rule30/DiagonalSearch
+  - Rule30/DiagonalSearchData
+  - Rule30/Diagonals
+  - Rule30/DriveWheel
+  - Rule30/DriveWheelData
+  - Rule30/EchoBound
+  - Rule30/ElementaryCA
+  - Rule30/Ergodic
+  - Rule30/FiniteState
+  - Rule30/Frontier
+  - Rule30/Funnel
+  - Rule30/HalfLineMachine
+  - Rule30/HalfLineMachineData
+  - Rule30/HankelKronecker
+  - Rule30/Injector
+  - Rule30/InjectorAnalogies
+  - Rule30/InjectorData
+  - Rule30/InnerSurvivorData
+  - Rule30/Invariance
+  - Rule30/LatticeConeFraction
+  - Rule30/LeftDiagonalPeriods
+  - Rule30/LeftDiagonalPeriodsData
+  - Rule30/LeftWhiteCompactness
+  - Rule30/LeftWhiteLift
+  - Rule30/LocalRuleInduction
+  - Rule30/MachineModel
+  - Rule30/MachineModelData
+  - Rule30/MathieuCensus
+  - Rule30/MathieuCensusOrbits
+  - Rule30/MathieuMOG
+  - Rule30/MathieuOrbits
+  - Rule30/MathieuOrbitsData
+  - Rule30/MathieuRule30Data
+  - Rule30/NoConstantColumn
+  - Rule30/Observer
+  - Rule30/OnePeriodicColumn
+  - Rule30/OneRunFamily
+  - Rule30/ParityReduction
+  - Rule30/ParityReductionData
+  - Rule30/PeriodTwoHalfLine
+  - Rule30/PeriodTwoHalfLineData
+  - Rule30/Perspective
+  - Rule30/PhaseSpace32
+  - Rule30/Pipeline
+  - Rule30/PipelineData
+  - Rule30/PlanSearch
+  - Rule30/PostEdgeSpec
+  - Rule30/PowerSeriesLadder
+  - Rule30/PowerSeriesLadderData
+  - Rule30/PrefixSearch
+  - Rule30/PrefixSearchData
+  - Rule30/Problem3Quantifiers
+  - Rule30/ProofRoutes
+  - Rule30/ProofRoutesData
+  - Rule30/ReadAngle
+  - Rule30/RightDiagonalBalance
+  - Rule30/RuleSpace
+  - Rule30/RunBoundData
+  - Rule30/RunBoundEighteen
+  - Rule30/RunBoundPeriods
+  - Rule30/RunBoundSearch
+  - Rule30/RunCountGeneral
+  - Rule30/RunCountLaw
+  - Rule30/SeedBoundary
+  - Rule30/ShortcutNetwork
+  - Rule30/ShortcutNetworkData
+  - Rule30/SidewaysPeriodTwo
+  - Rule30/SidewaysView
+  - Rule30/Spectral
+  - Rule30/SpinLattice
+  - Rule30/SpinQuaternion
+  - Rule30/SpinSweep
+  - Rule30/TestCountLaw
+  - Rule30/TestCountLawData
+  - Rule30/TestCountPeriods
+  - Rule30/TestCountPeriodsData
+  - Rule30/TestHalving
+  - Rule30/TestHalvingData
+  - Rule30/TileLeads
+  - Rule30/TopMonomial
+  - Rule30/Transients
+  - Rule30/TransientsData
+  - Rule30/Triangles
+  - Rule30/TrianglesData
+  - Rule30/TuningByEar
+  - Rule30/TuningByEarData
+  - Rule30/TurnCost
+  - Rule30/TurnCostData
+  - Rule30/Unpredictability
+  - Rule30/WeightGrowth
+  - Rule30/WheelInduction
+  - Rule30/WhiteDiagonals
+  - Rule30/WholeCone
+  - Rule30/WobbleCertificate
+  - Rule30/WobbleLenses
+  - Rule30/WobbleLensesData
+  - Rule30/WobbleNormalized
+  - Rule30/XorAlternatives
+  - Rule30/XorAlternativesData
   - Rule30Study
-  - RuleSpace
-  - RunBoundData
-  - RunBoundEighteen
-  - RunBoundPeriods
-  - RunBoundSearch
-  - RunCountGeneral
-  - RunCountLaw
   - SearchLoop
-  - SeedBoundary
-  - ShortcutNetwork
-  - ShortcutNetworkData
-  - SidewaysPeriodTwo
-  - SidewaysView
-  - Spectral
-  - SpinLattice
-  - SpinQuaternion
-  - SpinSweep
-  - TaxChecks
-  - TaxChecksData
-  - TestCountLaw
-  - TestCountLawData
-  - TestCountPeriods
-  - TestCountPeriodsData
-  - TestHalving
-  - TestHalvingData
-  - TileLeads
-  - TopMonomial
-  - Transients
-  - TransientsData
-  - Triangles
-  - TrianglesData
-  - TuningByEar
-  - TuningByEarData
-  - TurnCost
-  - TurnCostData
-  - Unpredictability
-  - WeightGrowth
-  - Wheel
-  - WheelChecksData
-  - WheelInduction
-  - WhiteDiagonals
-  - WholeCone
   - Wobble
-  - WobbleCertificate
-  - WobbleLenses
-  - WobbleLensesData
-  - WobbleNormalized
-  - XorAlternatives
-  - XorAlternativesData
+  lean_held: []
+  lean_missing: []
+  missing:
+  - reasoning/theorem_wheel.py
+  - reasoning/wheel_induction.py
+  - tests/test_round42.py
+  - tests/test_round45.py
   prose: RULE30_HISTORY.md
-  test:
-  - test_rule30_history.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RULE30_HISTORY
 junctions: []
 last_altered: ''
@@ -174,6 +191,7 @@ phase: 0
 predecessors: []
 question: What happened in each development round of the Rule 30 / GLM study?
 recomputed_by: (hand-written argument; nothing to recompute)
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -212,7 +230,7 @@ sections:
   heading: 'Round 16: the period-2 rung, weight growth closed, the triangle question, GLM operators'
 - anchor: round-17-spinning-the-triangle-and-the-pyramid-spin-as-a-multiplication-factor
   heading: 'Round 17: spinning the triangle and the pyramid; spin as a multiplication factor'
-- anchor: round-18-the-cr-injector-the-odd-parity-lock-on-m_n1-and-the-three-analogies
+- anchor: round-18-the-cr-injector-the-odd-parity-lock-on-mn1-and-the-three-analogies
   heading: 'Round 18: the `C·R` injector, the odd parity lock on `M_{n+1}`, and the three analogies'
 - anchor: round-19-the-triangle-as-the-side-view-of-a-hole-the-period-3-to-period-6-rungs
   heading: 'Round 19: the triangle as the side view of a hole; the period-3 to period-6 rungs'
@@ -240,7 +258,7 @@ sections:
   heading: 'Round 30: one pipeline (plan, ask, gate, statements) for the GLM Rule 30 investigation'
 - anchor: round-31-the-sideways-observer-barrier-diagonals-exact-arithmetic-throughout
   heading: 'Round 31: the sideways observer; barrier diagonals; exact arithmetic throughout'
-- anchor: round-32-m₂₄-orbits-of-seed-patterns-and-how-much-of-m₂₄-rule-30-keeps
+- anchor: round-32-m-orbits-of-seed-patterns-and-how-much-of-m-rule-30-keeps
   heading: 'Round 32: `M₂₄` orbits of seed patterns, and how much of `M₂₄` Rule 30 keeps'
 - anchor: round-33-the-observers-clock-test-count-and-halving-laws-period-2-read-sideways-the-glm-grown-to-match
   heading: 'Round 33: the observer''s clock (test-count and halving laws), period 2 read sideways, the
@@ -272,7 +290,7 @@ sections:
   heading: 'Round 45: the Hypothesis Engine gate loop made to work (engine v17)'
 - anchor: round-46-engine-v18-and-the-wheel-contract-in-lean
   heading: 'Round 46: engine v18 and the wheel contract in Lean'
-- anchor: round-47-the-2-adic-layer-tower-the-full-m₂₄-census-mog-subgroups
+- anchor: round-47-the-2-adic-layer-tower-the-full-m-census-mog-subgroups
   heading: 'Round 47: the 2-adic layer tower; the full `M₂₄` census; MOG subgroups'
 - anchor: round-48-white-triangles-left-down-vs-right-down-lines-bands-printed-from-the-right
   heading: 'Round 48: white triangles, left-down vs right-down lines, bands printed from the right'

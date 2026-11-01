@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 638 of 638 texts read alike by the generated and the hand-written readers; 54 of 54 declared
@@ -12,37 +14,34 @@ deciding_figure: 638 of 638 texts read alike by the generated and the hand-writt
   with both ends attained; 41 of 41 chain scripts verified (858 of 858 steps aligned) and every mutation
   rejected; 3 of 3 declared moves; 9 of 9 marks met.
 directives:
-- D1
 - D15
-- D2
-- D3
-- D4
-- D5
-- D6
-- D7
-- D8
-- D9
 evidence: []
-faculty: unknown
+faculty: derivation
 file_refs:
   code:
-  - evaluation/stepwise_five_cases
-  - reasoning/stepwise_script
-  - runtime/declared_frames
-  - runtime/frame_declarations
-  - runtime/quantity_units
-  - runtime/stepwise
-  - runtime/stepwise_five
+  - evaluation/stepwise_five_cases.py
+  - reasoning/stepwise_script.py
+  - runtime/declared_frames.py
+  - runtime/frame_declarations.py
+  - runtime/quantity_units.py
+  - runtime/stepwise.py
+  - runtime/stepwise_five.py
+  - runtime/toolbox.py
   lean:
   - DeclaredFrames
+  - HoleBounds
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DECLARED_FRAMES_STUDY.md
   test:
-  - test_declared_frames.py
+  - test_stepwise_five.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DECLARED_FRAMES_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -50,16 +49,39 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+  - D6
+  - D7
+  - D8
+  - D9
+  met:
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+  - D6
+  - D7
+  - D8
+  - D9
   missed: []
 perturbations: []
-phase: 0
-predecessors: []
+phase: 91
+predecessors:
+- HOLE_FOLDS_STUDY
+- STEPWISE_THREE_STUDY
 question: Can the stepwise planner's fold frames be generated from a declaration rather than written by
   hand, and can the widenings the last two rounds left be added as entries in that declaration without
   answering anything wrongly?
 recomputed_by: '`glm_universal.runtime.stepwise_five.stepwise_five_report`'
+related:
+- ROADMAP_STUDY
+- SUBSTRATE_NATIVE_COGNITION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

@@ -13,7 +13,11 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 30 October 2026.*
+*Last altered 31 October 2026 (repository check: §1 commands from the repository root, §1b replaced by the repository-check status, §2.1 item 0 taken and its remainder stated, §2.2 the Lean-corpus reports and the iteration cost re-measured, §2.3 the owner's two scripts and the missing Lean files; later the same day the two wheel items held back from absorption until the owner's Lean build, the build-record gate and `scripts/apply_reorganisation.sh` made content-checked; then the intake's acceptance decisions and current test results, its test runner where pytest is absent, and the two scripts' exit status; then, by the owner's decision, the two wheel items installed provisionally in the wheels folder, marked as such until the Lean build log confirms them; then the result model's Lean declaration lookup restored and its census re-taken).*
+
+*Last altered 1 November 2026 (repository check: §1 records the final hand run of the whole test suite and of the other gates on the final tree, and the six tests that wait on the Lean build; the two planner fallback tests re-counted).*
+
+*Last altered 1 November 2026 (Phase 186: the intake items absorbed ahead of the owner's Lean build by the owner's decision -- "Just closed", §2.1 item 0's remainder and §2.3's `confirm-build` steps).*
 
 > **Positioning.** Before starting a round, read the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md): what is claimed, what is
@@ -54,15 +58,18 @@ standing instruction; it is a row of the close checklist, `ITERATE.md` §4.1).
 
 **Where the files are.** The Lean development lives in one place only,
 [`src/lean/RequestProject/`](src/lean/RequestProject/GLM/README.md)
-(`lakefile.toml` sets `srcDir = "glm_lean"`); there is no
+(`lakefile.toml` sets `srcDir = "src/lean"`); there is no
 `RequestProject/` folder at the repository root, so a path written as
 `RequestProject/GLM/X.lean` in a record means
 `src/lean/RequestProject/GLM/X.lean`. The studies are in
-[`studies/`](studies/), the Python package in `glm_universal/`. A file
+[`studies/`](studies/), the Python package in `src/glm_universal/` (a path written as
+`glm_universal/…` in a record means `src/glm_universal/…`), and the supplied material in
+[`source_material/`](source_material/README.md) (`ToDo/` and `done/`). Every command is run
+from the repository root with `PYTHONPATH=src`. A file
 audit after Phase 158 (the owner asked whether
 [`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md),
 [`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md) and Lean
-files had gone missing) found every file present: 232 Lean files (231 under
+files had gone missing) found every file present: 232 Lean source files (231 under
 `GLM/` plus `Main.lean`), all building with `lake build` and 0 `sorry`, and
 all 160 study documents. What was wrong was 261 rows of the Properties table
 still pointing at the old root path `RequestProject/GLM/…`; they now point at
@@ -71,7 +78,7 @@ still pointing at the old root path `RequestProject/GLM/…`; they now point at
 **Repository hygiene: the knowledge cache and the push size.** On 22 October
 2026 pushes were failing because the git server rejected them as too large.
 The cause was the regenerated counted-knowledge cache,
-`glm_universal/knowledge/_knowledge_cache/knowledge.pickle` (about
+`src/glm_universal/knowledge/_knowledge_cache/knowledge.pickle` (about
 135 MB), which was tracked by git: it is rewritten whenever any corpus file
 moves, so every round committed another full copy. It is now untracked and
 listed in `.gitignore`, and so is the rest of that directory (the two
@@ -81,18 +88,53 @@ missing counts the corpus once and writes it (about a minute on this corpus;
 later readings load it in seconds, and a changed file is the only file read
 again). The environment variable `GLM_KNOWLEDGE_CACHE` moves the cache
 directory out of the tree if wanted. The fix is held by
-[`test_repository_hygiene.py`](glm_universal/tests/test_repository_hygiene.py):
+[`test_repository_hygiene.py`](src/glm_universal/tests/test_repository_hygiene.py):
 it fails if any cache file is tracked or not ignored, if any tracked file
 exceeds 10 MB, or if an absent, deleted or corrupt cache is not rebuilt to the
 same knowledge. One consequence to keep in mind: `GLM-main.zip` is also kept
 out of version control but *is* read by the corpus, so a clone without it
-counts a smaller corpus than this working tree does.
+counts a smaller corpus than this working tree does (since the repository check of
+31 October 2026 its place is `source_material/done/GLM-main.zip`, recorded in the intake
+ledger as a local-only item).
 
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
 Every part of the owner's plan of 19 October 2026 has been taken (§2.0); the
 next round starts from §2.1.
 
-**Just closed: Phase 184 — the declared majority rule** (23 October 2026;
+**Just closed: Phase 186 — the intake items absorbed where they measurably
+help** (1 November 2026;
+[`INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md), record in
+`MASTER_PLAN.md` "Phase 186"), from the owner's request of that day and the
+owner's decision: *"Absorb the ones that measurably help now, based on your
+measurements and standalone Lean check; record that my own rebuild_lean.sh run
+still has to confirm them."* The Rule 30 study's hypothesis engine is on the
+answering path as `tool rule30`, `tool conjecture` and the plan search behind
+`tool arc`; the thirty formula wheels as `tool derive`; the sequence wheel's
+`next` reading answers *what comes next in ...*. With them the GLM answers 9 of
+the 50 stored ARC tasks right where it answered 2 (a development set, not a
+held-out one), 16 of the 39 Rule 30 battery sentences right on the answering
+path where it answered none, 63 of 64 formula laws and 0 of 51 not-a-laws, 27
+of 45 next-term questions right where it answered 5, and 23 of 30 questions
+across five domains where it answered 4 — 0 wrong throughout, one of 13
+negative controls answered (`1, 2, 4, 8, 16` continued with 32). 12 of 14
+marks. `Rule30_GLM_Study`, `glm_wheels_bundle` and the cent wheels of
+`cent_compiler_v12` are **absorbed ahead of the build**: four standalone Lean
+files (`IntakeChecks/`) were built on their own with a newer Lean and Mathlib,
+and the owner's `scripts/rebuild_lean.sh` has still to confirm every Lean file
+of the three items (§2.3); every answer resting on them says so. The
+evaluation answers 237 of 237 (187 answered, 50 refused as expected, 0
+confidently wrong). The re-takes after the ten new cases found two conflicts,
+both fixed: the engine imported `random`, which the blueprint's Universal
+Binary Principle bans from the core (it now draws from an exact generator of
+its own, and `report blueprint` is back at 26 confirmed claims), and the
+study's Rule 30 simulation was an unclassified `^` site (now classified).
+The sandbox planner's two exhaustive fallback readings were re-counted at 237
+cases: 46 refusals reach it, all 46 stop, and it marks nine ill formed
+(`studies/REVERSE_CALL_PLANNER_STUDY.md` §5).
+
+**Before it, Phase 185 — the repository check** (31 October 2026; §1b).
+
+**Before that, Phase 184 — the declared majority rule** (23 October 2026;
 [`LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md), record
 in `MASTER_PLAN.md` "Phase 184"), §2.1 item 11's first line.
 `LorentzianMajority.lean` proves that the target a strict majority of the
@@ -151,46 +193,159 @@ earlier; each is recorded in `MASTER_PLAN.md`.
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest src/glm_universal/tests -q` | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
-| benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
-| capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->425 Lean files<!--/figure-->, **0 `sorry`** |
-| corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
+| test suite | `PYTHONPATH=src python3 -m pytest src/glm_universal/tests -q` | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
+| end-to-end CLI evaluation | `PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->237<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
+| benchmark suites | `PYTHONPATH=src python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
+| capability probes | `PYTHONPATH=src python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
+| Lean development | `scripts/rebuild_lean.sh` (`lake build` from the repository root) | <!--figure:lean-files-->414 Lean files<!--/figure-->, **0 `sorry`** |
+| corpus | `PYTHONPATH=src python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
-**<!--figure:query-kinds-->27 query kinds<!--/figure-->** one of which
+**<!--figure:query-kinds-->31 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->9,126<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->9,126<!--/figure-->/<!--figure:lean-declarations-->9,126<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->9,400<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->9,400<!--/figure-->/<!--figure:lean-declarations-->9,400<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
 ---
 
-## 1b. Reorganisation status (29 October 2026)
+## 1b. Repository check (31 October 2026)
 
-The repository has been reorganised across 15 iterations:
+The reorganisation of 29 October 2026 moved the code under `src/`, turned every
+study into a `.yaml` + `.md` pair, gathered the wheels into one folder and took
+in the Rule 30 development. On 31 October 2026 the repository was checked end
+to end and repaired. What that left:
 
-- **Phase R1** (iter 5): executable code moved to `src/` (`glm_universal/`, `lean/`, `GLM.py`)
-- **Phase R2** (iter 6): all 15 wheels centralized under `src/glm_universal/wheels/`
-- **Phase R3** (iter 8): every study converted to a `.yaml` + `.md` pair (189 manifests)
-- **Phase R4** (iter 10): Wobble subsystem (D17) — `reasoning/wobble_registry.py`
-- **Phase R5** (iter 10): Reversibility ledger (D18) — `reasoning/reversibility.py`
-- **Phase R6** (iter 10): Generate-don't-store (D19) — `reasoning/generate_not_store.py`
-- **Stage 3** (iter 10): signoff schema bumped 5->6; YAML_PROTOCOL_ENABLED=True
-- **Rule30 absorption** (iter 7): 156 Lean files absorbed into `src/lean/` (412 total)
-- **Stub implementation** (iters 12-15): 13 of 24 stub modules now have real implementations
-
-Remaining (both need Lean installed):
-- **Phase 5**: 5 reasoning study stubs (`hole_reports_l5`, `ties_ladder_frozen`, `planner_ladder`, `carried_read`, `l5_first_budget`)
-- **Phase 6**: 6 deep-runtime stubs (`evidence`, `frame_plane_study`, `adversarial_dialogue_study`, `nearest_question_study`, `reader`, `model`)
-
-The 19 directives (D1-D19) are in `PROJECT_DIRECTIVES.md`, enforced by `reasoning/directives.py`.
-The fundamental constants are centralized in `src/glm_universal/constants.py`.
-The 12 missing Lean files (placeholders) are documented in `studies/_lean_files_needed.md` — each needs to be recovered from the owner's development environment.
-The study ledger (`corpus/study_ledger.py`) reads the YAML manifests and verifies the predecessor graph is acyclic (153 edges, 189 studies).
+* **One way to run anything.** Every command starts from the repository root:
+  `PYTHONPATH=src python3 src/GLM.py -q "..."` and `PYTHONPATH=src python3 -m
+  glm_universal.<module>`. The run commands in the documents and modules were
+  rewritten to that form. The moves and deletions the check made are listed in
+  `scripts/apply_reorganisation.sh`, which brings an older checkout to the same
+  tree.
+* **The directives.** 22 (D1–D22) in [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md):
+  D17 (date every altered file) restored under its own number, Wobble D18,
+  Reversibility D19, Generate-don't-store D20, D21 *`glm_universal.constants`
+  is the single source of constants*, D22 *new material enters through the
+  intake*.
+* **Lost code, reconstructed and marked.** The modules the reorganisation
+  lost were rebuilt from their studies, their tests and this plan; each says
+  *Reconstructed 31 October 2026* in its docstring. Among them:
+  `runtime/respell.py`, `runtime/sinter.py`, `reasoning/carried_read.py`,
+  `reasoning/planner_ladder.py`, `reasoning/hole_reports_l5.py`,
+  `reasoning/fold_machine.py`, `reasoning/typed_ladder.py`,
+  `reasoning/colour_induction.py`, `corpus/dates.py`, the knowledge layer's
+  `answer`, `ask`, `glossary`, `friction*`, `source_tiers` and
+  `confidence_curve`, and `engineering/context_frames.py`, `domains.py` and
+  `oscillator_junction.py`. Their studies were measured again, and where a
+  figure moved the study states old and new. Three baselines that were lost
+  with the code cannot be re-taken and are marked lost where they are quoted:
+  the ties-ladder frozen path, the first-take baseline of
+  `HOLE_REPORTS_L5_STUDY.md` (F1), and the first take of
+  `PLANNER_LADDER_STUDY.md`.
+* **Lean.** `Rule30/SidewaysPeriodTwo.lean` restored; thirteen files recorded
+  missing in [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md),
+  and the six complete files that import one of them held out of the build in
+  `src/lean/awaiting_recovery/`; a root-namespace scratch file moved to
+  `src/lean/scratch/`; the Rule 30 name clashes renamed; `AxiomAuditAll.lean`
+  regenerated by `python3 -m glm_universal.lean_check --write-audit`. New:
+  `Wheels/IntegerWheel.lean`, `Wheels/SporadicOrders.lean` and
+  `Wheels/CentWheels.lean`. **None of this has been built in the session that
+  made it** (no Lean toolchain there): the owner's `scripts/rebuild_lean.sh`
+  builds, audits and writes a log to `scripts/logs/`.
+* **Wiring.** Four lookup kinds in the parser — `tool`, `corpus`, `study`
+  (answered from the study manifests, `studies/*.yaml`) and `sequence` (the
+  Integer and Monster wheels, installed provisionally: every answer from them
+  says so) — make
+  **<!--figure:query-kinds-->31 query kinds<!--/figure-->**, and the evaluation
+  set has <!--figure:evaluation-case-count-->237<!--/figure--> cases. The
+  manifests are synchronised with their studies, every relative link in the
+  written documents resolves, the Lean address book holds
+  <!--figure:lean-declarations-->9,400<!--/figure--> declarations, and building
+  a session no longer imports the walk of the whole Lean development (the
+  sign-off ledger's closure test).
+* **The intake.** `source_material/ToDo/` (not yet taken through) and
+  `source_material/done/` (absorbed or closed), with every item and its stage
+  in `source_material/INTAKE.yaml` and the gates in `python3 -m
+  glm_universal.intake` (`status`, `check`, `show`, `register`, `scaffold`,
+  `advance`, `retest`, `accept`, `provisional`, `absorb-staged`, `close`); the pipeline is
+  [`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md). The line has
+  two Lean stages: *Lean written* (the files are in the tree and the audit, and
+  the static check passes) and *Lean verified*, which is granted only against
+  the build record `scripts/logs/lean_build_evidence.json` that
+  `scripts/rebuild_lean.sh` writes after a passing build, matched byte for
+  byte against the item's Lean files and every file they import. Nothing is
+  absorbed before that. **Installed provisionally, not absorbed:**
+  `glm_wheels_bundle` (the Integer and Monster provision wheels,
+  [`INTEGER_WHEEL_STUDY.md`](studies/INTEGER_WHEEL_STUDY.md)) and the fifteen
+  formula wheels of `cent_compiler_v12`
+  ([`CENT_WHEELS_STUDY.md`](studies/CENT_WHEELS_STUDY.md)) were tested, given
+  Lean files and measured in this check. By the owner's decision of 31 October
+  2026 they are in the one wheels folder, `src/glm_universal/wheels/`, with
+  their tests in `src/glm_universal/tests/`, **clearly marked provisional
+  until the owner's Lean build log confirms them**: the register
+  `src/glm_universal/wheels/_data/provisional.json` lists them, their parts
+  are recorded `provisional` in the ledger, both items stand at *Lean
+  written*, and every answer that rests on them carries a `provisional:` note
+  (the `sequence` lookup, `wheels.answer_derivability`). The owner's build
+  promotes them and clears the marks (§2.3).
+  `Rule30_GLM_Study` also waits at *Lean written*. Closed: `R_Calculus`
+  (continued in `Rule30_GLM_Study`).
+* **Replays and results.** Two column-3 templates the upload carried from
+  before their Phase 169 repairs (`trilinear` on bare axis labels, `report
+  language`) are restored, and the replay gate verifies every replayable
+  answer of the evaluation; the reconstructed result model was re-read
+  against the stored Phase 169 census and its Lean declaration lookup
+  restored (it had taken every cited name as declared, so R5 could not
+  fail), then re-taken: 9 of 9 marks, 21 cited names checked against the
+  9,341 declarations of the build tree, none undeclared
+  (`studies/EVIDENCE_MODEL_STUDY.md` §7.6; at Phase 186, 23 against 9,400),
+  and the evidence-in-use census is 7 of 7. The evaluation answers all
+  <!--figure:evaluation-case-count-->237<!--/figure--> cases (the 227 of the
+  repository check in 176 s on eight processes; with Phase 186's ten, in 242 s
+  on six): the three Lean-corpus reports that had passed the 300-second
+  limit at 9,341 declarations were made fast without moving an answer
+  (§2.2). The three test
+  files the reorganisation lost are rebuilt from their rows in
+  `src/glm_universal/tests/README.md`, with no row marked lost; with the
+  provisional wheels' three test files and the migration script's test, the suite had
+  255 files at the repository check, and Phase 186 added five:
+  <!--figure:test-files-->260 test files<!--/figure-->.
+* **The owner-run checks.** `scripts/rebuild_lean.sh` (the Lean build and
+  axiom audit) and `scripts/check_repository.sh` (tests under pytest,
+  evaluation, corpus check, Lean tree check), each writing its log to
+  `scripts/logs/` and exiting 1 when any required step fails (0 only when all
+  pass; the log's last lines name the failures). The session ran the test files by hand with a stand-in
+  runner (pytest cannot be installed there); that is a hand run, not the
+  sign-off. Its last full pass was taken on 1 November 2026 (Phase 186) on
+  the final tree. All 260 files were run, each in its own process, with the
+  exhaustive cases deselected as `check_repository.sh` deselects them
+  (`test_intake.py` through the package's own runner,
+  `python3 -m glm_universal.intake.fallback_tests`, since the stand-in cannot
+  load it): 6,521 passed, 76 skipped and 6 failing. (At the repository check,
+  over the 255 files then in the suite, 6,447 passed with the same 76 skipped
+  and the same 6 failing.) The exhaustive cases of `test_sandbox_planner.py`
+  were run as well at Phase 186 and pass. The 76 skipped are 72 exhaustive cases and the 4
+  in `test_derived.py` that run pytest itself in a subprocess. The 6 failing
+  are one in `test_citation_scope.py` and five in `test_proof_dependency.py`.
+  All six read the elaborator's citation graph, which was taken over the tree
+  before the reorganisation; only a passing Lean build can re-take it, and
+  `scripts/rebuild_lean.sh` does so (§2.3). Run that script before
+  `check_repository.sh`; these six are expected to fail until it has passed.
+  The exhaustive cases (`GLM_EXHAUSTIVE=1`, 32 files) were then run as well,
+  and all pass. Two of them, in `test_sandbox_planner.py`, still held the
+  fallback counts of 188 evaluation cases. The owner's sign-off ledger of
+  13 October 2026 already records that file failing twice. They now hold the
+  counts at 227 cases (`studies/REVERSE_CALL_PLANNER_STUDY.md` §5). The other
+  gates of `check_repository.sh` pass on the same tree:
+  * the static Lean check is OK;
+  * `report directives` gives 22 rules and 0 defects;
+  * `tools dates` is sound;
+  * `intake check` gives 0 errors;
+  * `corpus --check` is current;
+  * the smoke query answers;
+  * the evaluation answers all 227 cases with no failures.
 
 ## 2. To Do
 
@@ -203,7 +358,7 @@ record the round in `MASTER_PLAN.md`.
 ### 2.0 The owner's plan of 19 October 2026 — every part taken
 
 The owner's development plan,
-[`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md), set
+[`source_material/GLM_19OCT26_1.md`](source_material/done/GLM_19OCT26_1.md), set
 the direction for Phases 159–174. Every part has been taken once, and what
 each left is a line of §2.1 or §2.2: Part I, thermomechanical friction (Phase
 159, [`THERMO_FRICTION_STUDY.md`](studies/THERMO_FRICTION_STUDY.md); item 4);
@@ -270,6 +425,46 @@ Rule30_GLM_Study (loads of lean already made).
 - prioritise the ones that have lean already - test for the GLM's reasoning abilities/scope 
 for measurable improvement then absorb into the GLM system for use, then move into the studies 
 that need deeper investigation and fixing/testing.
+
+   **Taken on 31 October 2026 (repository check; §1b says what it left).**
+   The constants rule is directive D21 and is stated in `ITERATE.md` §0.2,
+   `ENTRY.md` and `SYSTEM.md`; `tests/test_constants.py` holds the modules
+   that still build a path by hand to a ratchet that may only shrink. The
+   intake is directive D22: `source_material/ToDo/` and `done/`, the ledger
+   `source_material/INTAKE.yaml` and `python3 -m glm_universal.intake`, as
+   [`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md) describes.
+   Every supplied item has a ledger record and a stage. Tested, given Lean
+   files and measured, and **installed provisionally, not absorbed, until the
+   Lean build log confirms them** (the owner's decision of 31 October 2026):
+   `glm_wheels_bundle` and the fifteen formula wheels W16–W34 of
+   `cent_compiler_v12`, in the one wheels folder, listed in
+   `src/glm_universal/wheels/_data/provisional.json`, their parts recorded
+   `provisional` in the ledger and every answer from them marked.
+   Closed: `R_Calculus`. **What remains of item 0:**
+   * the Lean build on the owner's machine — `scripts/rebuild_lean.sh`, then
+     the log back (§2.3); the new and restored Lean files have been checked
+     here only statically (imports, the audit list, no `sorry`), and no item
+     is *Lean verified* until that build's record matches its files;
+   * *Updated 1 November 2026 (Phase 186).* `glm_wheels_bundle` and
+     `Rule30_GLM_Study` are **absorbed ahead of the build** by the owner's
+     decision of that day and filed in `done/`; the fifteen cent wheels of
+     `cent_compiler_v12` likewise, its compiler, SPICE emission, applications
+     and notes still open in `ToDo/`
+     ([`CENT_WHEELS_STUDY.md`](studies/CENT_WHEELS_STUDY.md) §1, §6). The
+     hypothesis engine's effect on the GLM's answers is measured in
+     [`INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md). After
+     the owner's build, `intake confirm-build <id>` for each of the three
+     confirms them (§2.3);
+   * `attention` is *tested*: its finite claims are owed Lean before it can
+     be absorbed;
+   * `conversation_experiment` and `formula_wheel` have drafted studies;
+     `GLM_IMPROVEMENT_ROADMAP`, `glm_vision_experiments_v14`, `hidden_memory`
+     and `HISTORY_RECORDED_NOW_V4_STUDY` are triaged. `python3 -m
+     glm_universal.intake status` gives each one's next step;
+   * the thirteen missing Lean files
+     ([`_lean_files_needed.md`](studies/_lean_files_needed.md)): each study
+     that cites one reports its Lean mark as not met until the file returns
+     or a new proof is written.
 
 1. **The question at the other three ties** (left by Phases 145, 146, 148
    and 150; *postponed by the owner* until more such ties accumulate as new
@@ -651,21 +846,27 @@ round from §2.1 or taken as a short round of its own.
   would close the gap between the factorisation and the group element. The
   16-modular-factor cap (lattice reduction past it).
   [`PRIMITIVE_RADICAL_STUDY.md`](studies/PRIMITIVE_RADICAL_STUDY.md) §4.
-* **`report relay` near the evaluation's ceiling** (left by Phase 184). With
-  6,224 Lean declarations `report relay` takes about 230 seconds on its own,
-  most of it the 1,660 ranking queries of the relay study (each a full scan
-  of the address table, the text ranking and the name ranking); on eight
-  evaluation processes it can pass the 300-second ceiling. Phase 184 fixed the
-  same drift in `report lean` (199 → 56 seconds, `nearest_points` pruned on
-  the principal axis); the relay's rankings want the same treatment — an exact
-  pruned `k`-nearest search, or the ranked lists cached by digest — not a
-  higher ceiling.
+* **`report relay` near the evaluation's ceiling** (left by Phase 184;
+  *taken in part 31 October 2026*). With 9,341 declarations the three
+  Lean-corpus reports had passed the 300-second ceiling (`report lean`,
+  `report relay`, `report anonymous`: the three errors of the 31 October
+  evaluation). The repository check made the searches fast without changing
+  an answer: `nearest_points` first tries an exact all-pairs search on packed
+  integer columns (the SHA-256 control's census 276 → 9 seconds), and the
+  text, name and address rankings select their top `k` with `heapq.nsmallest`
+  over cached name tokens. Alone, the three reports now take about 24, 117
+  and 109 seconds; the outputs were compared with the old code's, ranking by
+  ranking, before the change was kept. What is left is the relay's 1,626
+  ranking queries themselves — the ranked lists cached by digest would take
+  the last two minutes off.
 * **The router's reach into the Lean tree** (left by Phase 115). Every unit
   that reaches the router takes the whole Lean development through
-  `reasoning/lean_address.py`'s tree walker, and the median cost of one Lean
-  edit now stands one unit above half the units that name any Lean file;
-  split the walker out of the module the answering path reads.
-  [`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5k.
+  `reasoning/lean_address.py`'s tree walker (and the sign-off ledger's), and
+  the median cost of one Lean edit stands above half the units that name any
+  Lean file — by one at Phase 115, by 23 when re-measured on 31 October 2026
+  (143 against half of 241); split the walker out of the module the answering
+  path reads.
+  [`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5k, §5l.
 * **Derivations, the rest** (left by Phase 119). Six or more variables
   (`TOO_MANY_VARIABLES`); claims that neither Zhang–Yeung nor chains of two
   copies decide (8 of the 40 five-variable battery claims and Phase 118's 3
@@ -753,6 +954,55 @@ round from §2.1 or taken as a short round of its own.
 
 ### 2.3 Waiting on the owner
 
+* **From the repository check (31 October 2026):**
+  * run `scripts/rebuild_lean.sh` and `scripts/check_repository.sh` on a
+    machine with Lean (elan) and pytest, and send back the two logs in
+    `scripts/logs/`; the next round fixes whatever they report (once the
+    build passes, `rebuild_lean.sh` also re-takes the elaborator's citation
+    graph, which the citation-scope and proof-dependency tests read — the
+    stored one was taken over the tree before the reorganisation). The test-suite
+    row of §1 stays *not yet measured* until a close runs there (`python3 -m
+    glm_universal.signoff --close --jobs 8` needs pytest);
+  * *From Phase 186 (1 November 2026):* when `rebuild_lean.sh` passes,
+    confirm the three items absorbed ahead of the build:
+    `PYTHONPATH=src python3 -m glm_universal.intake confirm-build
+    Rule30_GLM_Study`, then `... confirm-build cent_compiler_v12` and
+    `... confirm-build glm_wheels_bundle`. Each checks the build record against
+    the item's Lean files (the four new `IntakeChecks/*.lean` among them, built
+    here only on their own with Lean 4.34 and Mathlib) and their imports, and
+    removes the item from `wheels/_data/provisional.json`, so its answers stop
+    carrying the note. If the build fails on one of those files, the item
+    stays absorbed ahead of the build and the next round fixes the file. The
+    paragraph below is the earlier route, kept for the record: it no longer
+    applies to these three items;
+  * when `rebuild_lean.sh` passes (it exits 0 and its log ends `== result:
+    PASSED`, with `record=0` in the summary line), promote
+    the items that wait on it: `PYTHONPATH=src python3 -m glm_universal.intake
+    advance glm_wheels_bundle absorbed` (checks the build record against
+    `Wheels/IntegerWheel.lean`, `Wheels/SporadicOrders.lean` and their imports,
+    re-runs the tests, turns the provisional parts absorbed and removes the
+    item from `wheels/_data/provisional.json`, so its answers stop carrying the
+    provisional note, and files the item in `done/`); `... advance
+    cent_compiler_v12 measured` and then `... absorb-staged cent_compiler_v12`
+    (the fifteen cent wheels, confirmed the same way; the compiler parts stay
+    open); `... advance Rule30_GLM_Study lean_verified`. If the build fails on
+    a wheel's Lean file, the wheels stay installed and marked provisional and
+    the next round fixes the Lean file.
+    A refusal names the Lean file that does not match the record. Each of
+    these runs the item's named tests again where their last pass was taken
+    against other code (absorption always runs them all), so a promotion
+    never rests on a stale pass; `... retest <id> --stale` runs them ahead;
+  * move the two supplied files kept out of version control,
+    `GLM-main.zip` and `Lorentz boosts.pdf`, into `source_material/done/`
+    (the ledger already records them there);
+  * on any older checkout, run `scripts/apply_reorganisation.sh --dry-run` and
+    then `scripts/apply_reorganisation.sh` once from the repository root to
+    make the check's moves and deletions (it deletes only files whose bytes it
+    knows, and keeps and reports anything else); since 1 November 2026 it also
+    files `Rule30_GLM_Study` and `glm_wheels_bundle` in `source_material/done/`;
+  * if any of the thirteen missing Lean files turns up, put it back at
+    `src/lean/RequestProject/GLM/` and move the held files that wait for it
+    back beside it ([`_lean_files_needed.md`](studies/_lean_files_needed.md)).
 * **Outside material:** a register that arrives anonymous on its own (item 4)
   — goals from a second Lean development, or from a generator, scored against
   the anonymous-register controls.
@@ -793,7 +1043,7 @@ return the same answers and the same refusals.
 
 The close is one exact sequence, written out with its measured cost in
 [`ITERATE.md`](ITERATE.md) §4. In short: finish the work and write it down
-(study, `MASTER_PLAN.md` phase, this list), then from `` run
+(study, `MASTER_PLAN.md` phase, this list), then from the repository root run
 `corpus --refresh`, `corpus --check` and `signoff --close --jobs 8` once,
 touch no document afterwards, and commit. The test-suite row above is the
 sign-off ledger's own count, recorded by the close.

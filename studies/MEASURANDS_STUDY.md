@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 7 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -36,7 +38,7 @@ them.
 
 ## 1. The objects
 
-Declared in [`runtime/measurands.py`](../glm_universal/runtime/measurands.py);
+Declared in [`runtime/measurands.py`](../src/glm_universal/runtime/measurands.py);
 exact rational throughout (D7).
 
 * **Unit kinds.** A unit name may carry a kind; a quantity of a different
@@ -68,7 +70,7 @@ exact rational throughout (D7).
 ## 2. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/measurand_cases.py`](../glm_universal/evaluation/measurand_cases.py),
+[`evaluation/measurand_cases.py`](../src/glm_universal/evaluation/measurand_cases.py),
 every expected answer worked from the Brochure: 10 kind questions (5 refused
 `KIND_MISMATCH`, 5 answered in the unit of the right kind), 15 temperature
 questions (8 answered, 7 refused by one of the new names), 6 constant
@@ -87,17 +89,17 @@ cases whose verdict the round changes, with reasons (§4).
 
 ## 3. What was built
 
-* [`runtime/measurands.py`](../glm_universal/runtime/measurands.py) —
+* [`runtime/measurands.py`](../src/glm_universal/runtime/measurands.py) —
   the declarations of §1, behind the switch `ACTIVE`.
-* [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py) —
+* [`runtime/stepwise.py`](../src/glm_universal/runtime/stepwise.py) —
   `_kind_check` and `_kind_failure`; the offset reading and register kinds in
   `goal_two`; the kind filter and the constants fallback in `_goal_core`;
   the five new refusals.
-* [`reasoning/stepwise_script.py`](../glm_universal/reasoning/stepwise_script.py)
+* [`reasoning/stepwise_script.py`](../src/glm_universal/reasoning/stepwise_script.py)
   — a `constant` step, and a unit step with an offset, in both columns, the
-  readers and the generated script; [`reasoning/held_precision.py`](../glm_universal/reasoning/held_precision.py)
+  readers and the generated script; [`reasoning/held_precision.py`](../src/glm_universal/reasoning/held_precision.py)
   reads a constant as a leaf.
-* [`runtime/measurand_report.py`](../glm_universal/runtime/measurand_report.py)
+* [`runtime/measurand_report.py`](../src/glm_universal/runtime/measurand_report.py)
   — the measurement and the kinds-off control; `tools measurands`;
   `tests/test_measurands.py`.
 

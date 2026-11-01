@@ -1,0 +1,53 @@
+================================================================================================
+ITERATION 7 PHASE 1 — Uncertainty head via substrate's superposition.py
+================================================================================================
+
+Per user input: 'have a look for superposition in the existing GLM repository —
+much of what we need is likely already built there.'
+
+YES. The substrate exposes superpose(), collapse(sup, context),
+bundle_rational(), and sextet_cycle_reading(). We use these DIRECTLY:
+  * superpose(target_bits) -> Superposition (F2-level list decoding)
+  * sup.dimension (1 to 6 candidates) — fed to the model as a feature
+  * sup.ambiguous (coset weight 4 = deep hole) — fed to the model as a feature
+  * collapse(sup, context) — demonstrated on a few samples
+
+Model: 27-input encoder (24 bits + parity + sup_dim + sup_amb), 4 layers,
+5 heads: rule + lattice + snap + ambiguity + escalation.
+
+------------------------------------------------------------------------------------------------
+[In-distribution accuracy (mean across 3 seeds) — comparison vs iteration 6]
+------------------------------------------------------------------------------------------------
+Held-out      lattice (i6/i7)       ambiguity     escalation    superpos rate   
+------------------------------------------------------------------------------------------------
+toggle        0.756 → 0.974      1.000         0.974         0.000           
+translate     0.978 → 1.000      0.996         1.000         0.000           
+reflect_v     0.844 → 0.996      1.000         0.996         0.000           
+flood_fill    0.970 → 0.996      1.000         0.996         0.000           
+bfs_shortest  0.974 → 0.878      0.974         0.889         0.007           
+------------------------------------------------------------------------------------------------
+
+[Held-out cross-task accuracy (mean across 3 seeds)]
+------------------------------------------------------------------------------------------------
+Held-out      lattice (i6/i7)       ambiguity     escalation    superpos rate   
+------------------------------------------------------------------------------------------------
+toggle        0.613 → 0.953      1.000         0.953         0.000           
+translate     1.000 → 1.000      1.000         1.000         0.000           
+reflect_v     0.747 → 1.000      1.000         1.000         0.000           
+flood_fill    1.000 → 1.000      1.000         1.000         0.000           
+bfs_shortest  0.987 → 0.793      0.953         0.813         0.013           
+------------------------------------------------------------------------------------------------
+
+[Failure + superposition log summary]
+------------------------------------------------------------------------------------------------
+  Total failures (capped 300): 40
+  Total superpositions held (capped 300): 2
+    failure: lattice_misclassification: 40
+    superposition: lattice_superposition: 2
+
+[Failures by task]
+  bfs_shortest: 29 failures
+  toggle: 11 failures
+
+[Superpositions by task]
+  bfs_shortest: 2 superpositions held

@@ -43,6 +43,10 @@ run:
 Exactness
 ---------
 Strings and integers only.
+
+*Last altered 31 October 2026 (repository check): ``_SOURCES`` lists
+``runtime/reports/address.py``, where the address family of solvers moved
+verbatim out of ``runtime/session.py``.*
 """
 
 from __future__ import annotations
@@ -87,6 +91,7 @@ _SOURCES: Tuple[str, ...] = (
     "reasoning/timed_question.py",
     "reasoning/coordinate_junction.py",
     "runtime/session.py",
+    "runtime/reports/address.py",
     "runtime/parser.py",
     "runtime/conversation.py",
     "evaluation/cases.py",
@@ -359,12 +364,16 @@ def hijack_control(args):
 # ── the marks ─────────────────────────────────────────────────────────────
 
 def lean_marks() -> Dict[str, object]:
-    root = Path(__file__).resolve().parents[2]
-    path = root / "lean" / LEAN_FILE
+    from ..constants import LEAN_HOLDING_DIR, lean_file
+    path = lean_file(LEAN_FILE)   # built tree, or awaiting_recovery/
     text = path.read_text(encoding="utf-8") if path.exists() else ""
     found = [t for t in LEAN_THEOREMS if f"theorem {t}" in text]
+    # A file held in awaiting_recovery/ declares its theorems but is not
+    # built until the file it imports is recovered (STATUS.md, item 0).
+    held = LEAN_HOLDING_DIR in path.parents
     return {"file": LEAN_FILE, "declared": len(LEAN_THEOREMS),
             "theorems": len(found), "sorry": text.count("sorry"),
+            "held": held,
             "met": len(found) == len(LEAN_THEOREMS) and "sorry" not in text}
 
 

@@ -1,0 +1,20 @@
+{
+ "frozen": {
+  "F1": false,
+  "asked": 0,
+  "baseline": "absent",
+  "cases": 0,
+  "moved": [],
+  "new_cases": [],
+  "prefix_broken": [],
+  "present": 0,
+  "reason": "ties_ladder_baseline.json: baseline lost in the October 2026 reorganisation; a new baseline needs a frozen-path comparison before the answering path moves again",
+  "same_status": 0,
+  "same_text": 0,
+  "undeclared": []
+ },
+ "marks": {
+  "F1": false
+ },
+ "source_digest": "4946bfbe0bca14ab11982bf1770e976871f6505a1d07cb411b1ef353273f03ac"
+}

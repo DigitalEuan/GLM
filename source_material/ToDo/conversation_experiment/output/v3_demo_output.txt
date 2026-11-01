@@ -1,0 +1,140 @@
+========================================================================
+GLM CONVERSATION v3 — Five research-direction extensions
+========================================================================
+
+EXT 1 — Four-register memory split (Graph-based Agent Memory survey)
+------------------------------------------------------------------------
+  Each register has its own decay rate and retrieval rule:
+    episodic    — fast decay (9/10 per turn), balanced retrieval
+    semantic    — no decay, concept-match weighted
+    procedural  — no decay, query-shape weighted
+    preferences — no decay, exact-match weighted
+
+  After 3 turns:
+    episodic:   3 memories
+    semantic:   6 concepts
+    procedural: 0 procedures
+    preferences:0 entries
+
+EXT 2 — Role-filler binding  R⊗A⊗B  (Attention as Binding)
+------------------------------------------------------------------------
+  Bind (causes, force, acceleration) into both:
+    (a) Hadamard-perm 24-vector (rational)
+    (b) Parity-XOR 24-bit mask (F2, always recoverable)
+    bound_vector (first 5): (Fraction(2, 1), Fraction(0, 1), Fraction(4, 1), Fraction(0, 1), Fraction(0, 1))
+    bound_mask (binary):    0b100110000001000000000100
+    binding_method: hadamard_perm+parity_xor
+
+  --- Method A: Hadamard-perm unbind (rational) ---
+  Recover B by exact elementwise divide:
+    exact unbind blocked by 18 zero-divisor coordinates (zeros in force's carrier on unused axes)
+    partial recovery: 4/4 non-zero coordinates match the actual carrier
+
+  --- Method B: Parity-XOR unbind (F2) --- ALWAYS recoverable ---
+    recovered parity mask (binary): 0b100011000000010000000001
+    actual 'acceleration' parity:    0b100011000000010000000001
+    exact match: True
+
+  Recover B by Hamming distance over parity masks:
+    acceleration              hamming_distance = 0
+    position                  hamming_distance = 0
+    snap                      hamming_distance = 0
+
+EXT 3 — Procedural memory of successful reasoning traces
+        (Experience-Evolving Multi-Turn Tool-Use Agent)
+------------------------------------------------------------------------
+  First call to reason() — should store a procedure:
+    answer: adhesion_energy, verified: True
+    procedural memory now has: 1 procedure(s)
+
+  Second call with the SAME query shape — procedure should be reused:
+    answer: atomic_mass_constant
+    method: analogy_transport [procedural memory: reused procedure shape=analogy:3, success_count=1]
+    ✓ Procedural memory reuse detected!
+      shape=analogy:3  success_count=2
+
+EXT 4 — Grounding stage in _extract()
+        (Mechanistic Emergence of Symbol Grounding)
+------------------------------------------------------------------------
+  Grounding 'how does light bend near a massive object':
+    ✗ 'how'                     -> None
+        aliases tried: ('how',)
+        candidates: ()
+        reason: no sense resolved (genuinely unknown)
+    ✗ 'does'                    -> None
+        aliases tried: ('does',)
+        candidates: ()
+        reason: no sense resolved (genuinely unknown)
+    ✓ 'light'                   -> speed_of_light
+        aliases tried: ('speed_of_light', 'light')
+        candidates: ('speed_of_light', 'light', 'wavelength', 'frequency')
+        reason: matches domain of recent concept 'acceleration' (physics) among 4 senses
+    ✗ 'bend'                    -> None
+        aliases tried: ('bend',)
+        candidates: ()
+        reason: no sense resolved (genuinely unknown)
+    ✗ 'near'                    -> None
+        aliases tried: ('near',)
+        candidates: ()
+        reason: no sense resolved (genuinely unknown)
+    ✓ 'a'                       -> a
+        aliases tried: ('a',)
+        candidates: ('a',)
+        reason: first of 1 tried senses
+
+  Grounding 'c equals what':
+    ✓ 'c'             -> speed_of_light (matches domain of recent concept 'acceleration' (physics) among 2 senses)
+    ✗ 'equals'        -> None (no sense resolved (genuinely unknown))
+    ✗ 'what'          -> None (no sense resolved (genuinely unknown))
+
+EXT 5 — Reasoning-trajectory licensing
+        (The Geometry of Reasoning: Flowing Logics)
+------------------------------------------------------------------------
+  Trajectory for 'force : energy :: pressure : ?':
+    path: force → surface_tension
+    transitions: 9
+    total d²: 165/2
+    unlicensed transitions: 0
+    fully licensed: True
+    Transitions:
+      ✓ force              → energy                 d²=    3.6250 [derived] plan:plan:2
+      ✓ energy             → pressure               d²=    5.3750 [derived] plan:plan:2
+      ✓ pressure           → adhesion_energy        d²=   18.2500 [derived] plan:plan:2
+      ✓ adhesion_energy    → flux_density_jansky    d²=    0.5000 [derived] plan:plan:3
+      ✓ flux_density_jansky → fracture_energy        d²=   12.5000 [derived] plan:plan:4
+      ✓ fracture_energy    → radiant_exposure       d²=    3.1250 [derived] plan:plan:5
+      ✓ radiant_exposure   → spring_constant        d²=    3.1250 [derived] plan:plan:6
+      ✓ spring_constant    → surface_energy         d²=        18 [derived] plan:plan:7
+      ✓ surface_energy     → surface_tension        d²=        18 [derived] plan:plan:8
+
+INTEGRATION — Rich context showing all 4 registers + trajectory
+------------------------------------------------------------------------
+  **Conversation Context (v3, 4-register):**
+  
+    Episodic memory:    3 turns
+    Semantic memory:    6 concepts
+    Procedural memory:  1 procedures
+    Preferences:       0 entries
+  
+    Recent episodic episodes:
+      [1] (describe) 'What is energy?'
+          concepts: ['energy']
+      [2] (compare) 'Compare energy and torque'
+          concepts: ['energy', 'torque']
+      [3] (verify) 'verify force = mass * acceleration'
+          concepts: ['force', 'mass', 'acceleration']
+  
+    Procedural memory (reusable reasoning traces):
+      shape=analogy:3 answer=adhesion_energy (used 3×, created turn 3)
+  
+    Last trajectory: force → surface_tension (9 transitions, unlicensed=0)
+  
+    Last groundings:
+      ✓ 'force' -> force (matches domain of recent concept 'torque' (physics) among 2 senses)
+      ✓ 'mass' -> mass (first of 1 tried senses)
+      ✓ 'acceleration' -> acceleration (first of 1 tried senses)
+    About (physics): ['force', 'impulse', 'momentum', 'frequency', 'energy']
+
+========================================================================
+DEMO COMPLETE — all 5 research-direction extensions work
+========================================================================

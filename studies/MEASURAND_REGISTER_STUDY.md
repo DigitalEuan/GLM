@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 3 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -74,7 +76,7 @@ Three things the planner could not do before this round:
 
 ## 2. Declarations — written before any code of the round
 
-The corpus is [`evaluation/measurand_register_cases.py`](../glm_universal/evaluation/measurand_register_cases.py),
+The corpus is [`evaluation/measurand_register_cases.py`](../src/glm_universal/evaluation/measurand_register_cases.py),
 30 questions: 12 register, 14 conversion and 4 charge, with expected verdicts
 worked by hand in exact fractions from the register's values, the SI's exact
 defining constants, the wheels' axioms and the declared conversion laws.
@@ -92,12 +94,12 @@ defining constants, the wheels' axioms and the declared conversion laws.
 
 ## 3. What was built
 
-* [`runtime/measurand_register.py`](../glm_universal/runtime/measurand_register.py):
+* [`runtime/measurand_register.py`](../src/glm_universal/runtime/measurand_register.py):
   the register of measurands (9 rows, one per declared register scale), the
   4 conversion laws `C1`–`C4`, the elementary charge and the percent as
   units, the comparability census, and the three switches the controls use
   (`ACTIVE`, `RESTRICT`, `NAIVE`).
-* In [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py):
+* In [`runtime/stepwise.py`](../src/glm_universal/runtime/stepwise.py):
   `goal_two` reads an efficiency named in the question, refuses
   `EFFICIENCY_UNDECLARED` and `EFFICIENCY_OUT_OF_RANGE`, and brings only the
   named laws into scope (`_LAWS_IN_SCOPE`, empty for every earlier question);
@@ -115,7 +117,7 @@ defining constants, the wheels' axioms and the declared conversion laws.
 
 ## 4. Results
 
-Recomputed by `PYTHONPATH=. python3 -m glm_universal.tools measurand-register`.
+Recomputed by `PYTHONPATH=src python3 -m glm_universal.tools measurand-register`.
 Yes on every mark: all eight are met.
 
 | mark | result |

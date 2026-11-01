@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 3 of 8 marks, 3 of 6 amended marks; graded agreement 26 against 17 for the first-mention
@@ -14,19 +16,24 @@ evidence: []
 faculty: addressing
 file_refs:
   code:
-  - knowledge/glossary
-  - knowledge/word_address
-  - tests/test_corpus_definitions
+  - knowledge/definitions_study.py
+  - knowledge/glossary.py
+  - knowledge/word_address.py
+  - tools.py
   lean:
   - Address
   - CorpusDefinitions
   - CorpusKnowledge
   - Layers
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CORPUS_DEFINITIONS_STUDY.md
   test:
   - test_corpus_definitions.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CORPUS_DEFINITIONS_STUDY
 junctions:
 - rule: ''
@@ -53,6 +60,8 @@ question: When the GLM answers "what is X" from its corpus, is the answer a good
   a held-out glossary rather than counted as found — and can a word be given a Leech address from its
   corpus counts that carries how the word is used?
 recomputed_by: '`glm_universal.knowledge.definitions_study.corpus_definitions_report`'
+related:
+- GLM_ACADEMIC_PAPER
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -76,7 +85,8 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- SOURCE_TIERS_STUDY
 superseded_by: ''
 supersedes: []
 title: The corpus's definitions graded, and a word's place on the lattice

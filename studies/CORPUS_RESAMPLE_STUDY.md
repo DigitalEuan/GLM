@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -129,7 +131,7 @@ test pins each verdict that is an effect.
 
 ## 3. What was built
 
-* [`reasoning/corpus_resample.py`](../glm_universal/reasoning/corpus_resample.py):
+* [`reasoning/corpus_resample.py`](../src/glm_universal/reasoning/corpus_resample.py):
   the census (every declaration of the pool asked as a declaration query and
   as a goal query under the ten rankings, each kept 108 places down), the two
   families, the declared rule, the sign test, and the marks' own checks. The
@@ -146,7 +148,7 @@ test pins each verdict that is an effect.
 
 ## 4. Results
 
-Measured by `PYTHONPATH=. python3 -m glm_universal.tools corpus-resample`
+Measured by `PYTHONPATH=src python3 -m glm_universal.tools corpus-resample`
 over the tree as it stood when the measurement was taken: 4,572
 declarations in 171 Lean files, every one with a relative, so the census is
 4,572 declaration queries and 4,572 goal queries. The declaration said 170

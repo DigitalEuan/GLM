@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: re-measured; 7 of 7 measured marks and L1 as recorded, the frozen path's same-text count and the census moved by later rounds' declared causes, §7.6.)*
+
 ---
 
 ## 0. What this document is
@@ -246,3 +248,27 @@ certified*, and the head may not be where the point came from.
   full; ranking a point against a whole register would need a table over it.
 * A refused point gets the scan's ranking with *no margin is certified*; it
   does not get a question that would split a tie (the *question at the other ties* item of `STATUS.md` §2.1).
+
+### 7.6 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement was
+taken again (`tools nearest-address --write`) after the October 2026
+reorganisation. 7 of 7 measured marks hold, as recorded; N1–N4 and Q1 give the
+figures of §7.1 unchanged (0 disagreements, 0 gap violations and 0 origin
+violations over 2362 certified points of 2982; battery 8 of 8, reads 5 of 5,
+column 3 8 of 8, mutants 16 of 16). What moved:
+
+| figure | recorded (§7.1) | re-measured |
+|---|---|---|
+| A0: evaluation questions with 0 unguarded ladder calls | 212 | 227 |
+| F1: baseline cases present and same status | 202 of 202 | 202 of 202 |
+| F1: same text | 199 | 190 |
+| F1: undeclared moved texts | 0 | 0 |
+| W1: tools reached by the census, of the reasoning modules | — | 193 of 239 (46 declared measurement-only, 0 stale, 0 undeclared) |
+
+The twelve moved texts are `unknown-nonsense`, `report-lean`, `report-directives`, `report-hole-classifier`, `report-hole-ladder`, `report-retrieval`, `report-generated`, `report-language`, `report-hole-failures`, `report-query-escalation`, `report-relay` and `report-anonymous`; each carries a declared cause in
+`reasoning/budget_guard_frozen.py` (the reports the tree measures of itself,
+the four lookup kinds added to the refusal's list and the language report's
+counts on 31 October 2026, the standing rules counted live, and Phase 149's L5
+clause). The stored measurement before this re-take gave the census as 177 of
+216 (39 declared).

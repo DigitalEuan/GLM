@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 7 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -178,30 +180,30 @@ after the measurement.
 
 ## 3. What was built
 
-* [`reasoning/reverse_tct_seq.py`](../glm_universal/reasoning/reverse_tct_seq.py)
+* [`reasoning/reverse_tct_seq.py`](../src/glm_universal/reasoning/reverse_tct_seq.py)
   — the third sort: its terms and statements, the realiser of §1 (characters
   spelled by name, every literal count first), a reader that extends the
   Phase 67 reader with the new heads and refuses a non-canonical spelling,
   the translation from CPython's AST, an exact evaluator with its own slice
   clamping and code-point arithmetic, `say_third_sort`, its own column-3
   script and mutation, and the depth-two battery.
-* [`reasoning/reverse_tct.py`](../glm_universal/reasoning/reverse_tct.py)
+* [`reasoning/reverse_tct.py`](../src/glm_universal/reasoning/reverse_tct.py)
   — `say` asks the earlier grammar first and falls to the third sort only on
   `NOT_IN_FRAGMENT` or `UNREADABLE`;
-  [`reasoning/reverse_tct_script.py`](../glm_universal/reasoning/reverse_tct_script.py)
+  [`reasoning/reverse_tct_script.py`](../src/glm_universal/reasoning/reverse_tct_script.py)
   dispatches a certificate of kind `say-seq` to the third sort's script.
-* [`reasoning/python_containers.py`](../glm_universal/reasoning/python_containers.py)
+* [`reasoning/python_containers.py`](../src/glm_universal/reasoning/python_containers.py)
   — the string methods over code points (ASCII where Unicode tables would be
   needed), the list and dict snapshots, and the dict views; the evaluator in
-  [`reasoning/python_speech.py`](../glm_universal/reasoning/python_speech.py)
+  [`reasoning/python_speech.py`](../src/glm_universal/reasoning/python_speech.py)
   admits list and dict displays, `list`, `sorted` and the methods, and refuses
   every in-place change `MUTABLE_CONTAINER`. The substrate prelude's `same`
   compares lists and dicts in type and value.
-* [`evaluation/python_speech_cases.py`](../glm_universal/evaluation/python_speech_cases.py)
+* [`evaluation/python_speech_cases.py`](../src/glm_universal/evaluation/python_speech_cases.py)
   — the Phase 64 refusals are kept as `PHASE64_REFUSAL_CASES`; the two the
   round answers are named in `SUPERSEDED_BY_PHASE94` (`list-literal`,
   `unsupported-attribute`) and `REFUSAL_CASES` is the other 24.
-* [`runtime/third_sort_report.py`](../glm_universal/runtime/third_sort_report.py)
+* [`runtime/third_sort_report.py`](../src/glm_universal/runtime/third_sort_report.py)
   and `tools third-sort` — the marks.
 
 ## 4. Results
@@ -300,9 +302,8 @@ no `sorry` (L):
 ## 7. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools third-sort            # T1-T6, D1-D4
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_third_sort.py
+PYTHONPATH=src python3 -m glm_universal.tools third-sort            # T1-T6, D1-D4
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_third_sort.py
 python3 GLM.py -q "say: sum(range(1, 11))"
 python3 GLM.py --python "'-'.join(sorted(['b', 'a']))"
 cd .. && lake build RequestProject.GLM.ThirdSort                    # L

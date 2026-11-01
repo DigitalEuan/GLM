@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 *What happens when the six-fold Golay tie is carried instead of broken, and
 what happens when the emitted alphabet is widened.*
 
@@ -353,10 +355,9 @@ one place, `archive/MASTER_PLAN_ARCHIVE.md` §7.9, and mirrored in `STATUS.md`.
 lake build
 
 # the package study, recomputed
-cd overlay
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_superposition.py -q
-PYTHONPATH=. python3 GLM.py -q "report superposition" -c 1
-PYTHONPATH=. python3 GLM.py -q "report superposition" --verify-tct
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_superposition.py -q
+PYTHONPATH=src python3 src/GLM.py -q "report superposition" -c 1
+PYTHONPATH=src python3 src/GLM.py -q "report superposition" --verify-tct
 ```
 
 The last command regenerates the whole study in a fresh interpreter from the

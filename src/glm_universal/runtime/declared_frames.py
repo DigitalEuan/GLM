@@ -47,17 +47,10 @@ __all__ = ["COMPARATIVES", "COUNT_NOUNS", "DECLARED_SETS", "FOLD_FUNCTIONS",
 #: The register table folds and comparatives read.
 ELEMENT_TABLE = "element"
 
-#: ``word -> (register phrase, direction, gloss)``.  Direction ``>`` names
-#: the row with the larger value, ``<`` the row with the smaller.
-COMPARATIVES: Dict[str, Tuple[str, str, str]] = {
-    "heavier": ("atomic weight", ">", "the larger standard atomic weight"),
-    "lighter": ("atomic weight", "<", "the smaller standard atomic weight"),
-    "denser": ("density", ">", "the larger density at standard state"),
-    "older": ("year discovered", "<",
-              "the earlier recorded year of discovery"),
-    "newer": ("year discovered", ">",
-              "the later recorded year of discovery"),
-}
+#: ``word -> (register phrase, direction, gloss)``: held by
+#: :mod:`glm_universal.runtime.comparatives` (31 October 2026) and re-exported.
+from .comparatives import COMPARATIVES  # noqa: E402
+
 
 #: ``count noun -> register phrase`` added by round three to round two's
 #: :data:`glm_universal.evaluation.stepwise_two_cases.COUNT_NOUNS`.

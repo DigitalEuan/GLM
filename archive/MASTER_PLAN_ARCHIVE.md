@@ -367,7 +367,7 @@ answer in a fresh interpreter and asserts it key by key.
 
 ### 3.4 The 24-D carrier, bounded — **done, with a certificate**
 
-The dynamic carrier of [`DYNAMIC_CARRIER_STUDY.md`](../source_material/DYNAMIC_CARRIER_STUDY.md)
+The dynamic carrier of [`DYNAMIC_CARRIER_STUDY.md`](../source_material/done/DYNAMIC_CARRIER_STUDY.md)
 is implemented exactly and then tested against its own proposal. It survives in
 one dimension and fails in twenty-four, and the failure is the more interesting
 result:

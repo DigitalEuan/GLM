@@ -6,6 +6,8 @@ public import RequestProject.GLM.Rule30.NoConstantColumn
 /-!
 # Round 12: reading the wobble through different lenses — the strobe (clock) lens
 
+*Last altered 31 October 2026 (repository check: `wobble_not` renamed `wobble_neg_of_not`: `ElementaryCA.lean` declares the same name, and `Rule30.lean` imports both).*
+
 The wobble `D(N) = ∑_{t<N} w(t)` reads the centre column *continuously*, one bit per step.
 A **strobe read** with stride `p` and phase `r` reads only every `p`-th bit:
 
@@ -168,7 +170,7 @@ theorem hasFrequencyHalf_of_strobes (a : ℕ → Bool) {p : ℕ} (hp : 0 < p)
   refine this.congr (fun M => ?_)
   rw [wobble_strobe_sum, ← Finset.sum_div]; push_cast; rfl
 
-theorem wobble_not (a : ℕ → Bool) (n : ℕ) : wobble (fun t => !a t) n = - wobble a n := by
+theorem wobble_neg_of_not (a : ℕ → Bool) (n : ℕ) : wobble (fun t => !a t) n = - wobble a n := by
   induction n with
   | zero => simp
   | succ n ih => rw [wobble_succ, wobble_succ, ih]; cases a n <;> simp <;> ring
@@ -179,7 +181,7 @@ theorem hasFrequencyHalf_not {a : ℕ → Bool} (h : HasFrequencyHalf a) :
   have := h.neg
   simp only [neg_zero] at this
   refine this.congr (fun n => ?_)
-  rw [wobble_not]; push_cast; ring
+  rw [wobble_neg_of_not]; push_cast; ring
 
 /-- An eventually constant sequence does not have frequency `1/2`. -/
 theorem not_hasFrequencyHalf_of_eventually_const (a : ℕ → Bool) (b : Bool) (N : ℕ)

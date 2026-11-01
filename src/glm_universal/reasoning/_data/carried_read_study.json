@@ -1,0 +1,240 @@
+{
+ "chains": {
+  "admitted": 187,
+  "c_found": 35,
+  "c_lies": 35,
+  "carried": 92,
+  "carried_downstream": 5,
+  "carried_found_at_step": 0,
+  "carried_lies": 37,
+  "carried_ops": {
+   "axiom": 7,
+   "choose": 3,
+   "first": 3,
+   "fold": 48,
+   "planned": 31
+  },
+  "carried_unseen": 32,
+  "chains": 187,
+  "computed": 226,
+  "escaped": [],
+  "failures": [],
+  "lie_failures": [],
+  "lines": 25193,
+  "machine_steps": 37546,
+  "max_lines": 1684,
+  "mutants": 374,
+  "mutants_rejected": 374,
+  "newly_computed": 36,
+  "q_found": 54,
+  "q_in_question": 4,
+  "q_in_question_seen": 0,
+  "q_lies": 58,
+  "read": 2214,
+  "read_question": 103,
+  "read_register": 2111,
+  "reg_found": 134,
+  "reg_lies": 134,
+  "script_failures": [],
+  "scripts_pipeline": 187,
+  "scripts_run": 187,
+  "steps": 2532
+ },
+ "corpus": {
+  "chains": 187,
+  "texts": 270
+ },
+ "fields": {
+  "admitted": 7716,
+  "answered": 8408,
+  "answered_by_other_table": {
+   "carrier:chemistry -> element": 590,
+   "carrier:molecules -> molecule": 102
+  },
+  "asked": 8408,
+  "failures": [],
+  "lies": 7716,
+  "read": 7716,
+  "refused": 7716
+ },
+ "frozen": {
+  "baseline": false,
+  "gates": {
+   "semantic_plan": true,
+   "session": true,
+   "stepwise": true
+  },
+  "measured": false,
+  "note": "F1 not measured: the baseline (reasoning/_data/carried_read_baseline.json) is absent; take it with the gates switched off",
+  "same_status": 0,
+  "same_text": 0,
+  "texts": 0
+ },
+ "lean": {
+  "declared": 8,
+  "file": "CarriedRead.lean",
+  "met": true,
+  "missing": [],
+  "present": true,
+  "sorry": false,
+  "theorems": 8
+ },
+ "marks": {
+  "C1": true,
+  "C2": true,
+  "C3": true,
+  "C4": true,
+  "C5": true,
+  "F1": false,
+  "R1": true,
+  "R2": true,
+  "S1": true,
+  "S2": true,
+  "T1": true,
+  "T2": true
+ },
+ "met": 11,
+ "registers": {
+  "duplicated": 0,
+  "entries": 8408,
+  "holding": 10,
+  "left_out": 2438,
+  "snapshot": {
+   "agree": 1965,
+   "differ": [],
+   "pairs": 1965
+  },
+  "tables": [
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 1965,
+    "found_exit": 0,
+    "left_out": 0,
+    "path": "reg/element.txt",
+    "table": "element"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 459,
+    "found_exit": 0,
+    "left_out": 51,
+    "path": "reg/molecule.txt",
+    "table": "molecule"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 56,
+    "found_exit": 0,
+    "left_out": 0,
+    "path": "reg/fixed_point.txt",
+    "table": "fixed_point"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 708,
+    "found_exit": 0,
+    "left_out": 118,
+    "path": "reg/carrier_chemistry.txt",
+    "table": "carrier:chemistry"
+   },
+   {
+    "all_found": false,
+    "altered_exit": null,
+    "duplicated": 0,
+    "entries": 0,
+    "found_exit": null,
+    "left_out": 126,
+    "path": "reg/carrier_economics.txt",
+    "table": "carrier:economics"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 252,
+    "found_exit": 0,
+    "left_out": 0,
+    "path": "reg/carrier_harmonics.txt",
+    "table": "carrier:harmonics"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 596,
+    "found_exit": 0,
+    "left_out": 897,
+    "path": "reg/carrier_lexicon.txt",
+    "table": "carrier:lexicon"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 118,
+    "found_exit": 0,
+    "left_out": 0,
+    "path": "reg/carrier_mathematics.txt",
+    "table": "carrier:mathematics"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 153,
+    "found_exit": 0,
+    "left_out": 153,
+    "path": "reg/carrier_molecules.txt",
+    "table": "carrier:molecules"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 4004,
+    "found_exit": 0,
+    "left_out": 1078,
+    "path": "reg/carrier_physics.txt",
+    "table": "carrier:physics"
+   },
+   {
+    "all_found": true,
+    "altered_exit": 0,
+    "duplicated": 0,
+    "entries": 97,
+    "found_exit": 0,
+    "left_out": 15,
+    "path": "reg/carrier_spatial.txt",
+    "table": "carrier:spatial"
+   }
+  ]
+ },
+ "source_digest": "259619efa9cb8e99e98cfa816f4bdb410b3292df04b7ec28f344c4922ffc8c73",
+ "switches": "fold_machine.ON and tool_machine.ON off",
+ "taken": 12,
+ "typed": {
+  "admitted": 41,
+  "answered": 155,
+  "by_kind": {
+   "arith": 9,
+   "convert": 13,
+   "gcd": 7,
+   "lcm": 1,
+   "prime": 11
+  },
+  "carried_last": 0,
+  "failures": [],
+  "lies": 41,
+  "refused": 41,
+  "said": 41,
+  "texts": 197
+ }
+}

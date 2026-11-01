@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 8 marks; 680,064 of 680,064 tied reads resolved by the tag, 0 wrong (0 by the hard
@@ -11,24 +13,31 @@ deciding_figure: 7 of 8 marks; 680,064 of 680,064 tied reads resolved by the tag
   7,254,016 received words at distance 4, equal to the proved floor.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/designed_substrate
-  - tests/test_designed_substrate
+  - reasoning/carried_fork.py
+  - reasoning/designed_substrate.py
+  - substrate/golay_decode.py
+  - tools.py
   lean:
   - CarriedFork
-  - Code
   - DesignedSubstrate
+  - Golay/Code
   - Packing
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DESIGNED_SUBSTRATE_STUDY.md
   test:
   - test_designed_substrate.py
+  - test_stack.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DESIGNED_SUBSTRATE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,9 +45,25 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
+  met:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S8
+  missed:
+  - S7
 perturbations: []
 phase: 133
 predecessors:
@@ -48,6 +73,8 @@ question: Is the Golay–Leech 24-dimensional substrate optimal for the GLM, can
   system improve on it, and does bringing the owner's substrate study into the GLM measurably widen what
   its reasoning can resolve?
 recomputed_by: '`glm_universal.reasoning.designed_substrate.designed_substrate_report`'
+related:
+- HIGHER_LATTICE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -71,7 +98,8 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- PROTECTED_TAG_STUDY
 superseded_by: ''
 supersedes: []
 title: The designed substrate — is the Golay–Leech carrier optimal for the GLM, and what resolves its

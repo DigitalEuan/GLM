@@ -106,6 +106,9 @@ from __future__ import annotations
 
 import json
 import re
+import sys
+from array import array
+from operator import mul as _mul, sub as _sub
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
@@ -510,9 +513,19 @@ def legacy_citation_graph() -> Dict[str, frozenset]:
 
 _BINDER_GROUP = re.compile(
     r"[({⦃\[]\s*((?:[A-Za-z_][\w'!?]*\s+)*[A-Za-z_][\w'!?]*)\s*:(?!=)")
+# Last altered 31 October 2026 (repository check): the identifier inside
+# ``_QUANT`` is possessive (``*+``).  Without it a quantifier with no
+# delimiter after it (``funext centerCol_eq_fast`` followed by blank lines,
+# say) made the engine try every split of every identifier -- exponential in
+# the identifier's length -- and the citation graph never finished on the
+# 8,996 declarations of the tree since the Rule30 files arrived (8 of them
+# never returned).  Of the delimiters only ``in`` after a ``'``, ``!`` or
+# ``?`` could begin inside an identifier, so the matches are unchanged in
+# practice: on every declaration where the old pattern returns within a
+# second (8,988 of 8,996), the two patterns give identical matches.
 _QUANT = re.compile(
     r"(?:(?<![\w'])(?:fun|λ)|∀|∃!|∃|∑|∏|⋃|⋂|⨆|⨅|Σ|Π)"
-    r"((?:\s*(?:[A-Za-z_][\w'!?]*|[⟨⟩(),_]))+?)\s*(?:,|=>|↦|:|∈|∉|⊆|<|≤|>|≥|\bin\b)")
+    r"((?:\s*(?:[A-Za-z_][\w'!?]*+|[⟨⟩(),_]))+?)\s*(?:,|=>|↦|:|∈|∉|⊆|<|≤|>|≥|\bin\b)")
 _TACTIC_BINDER = re.compile(
     r"(?<![\w.'])(?:intro|intros|rintro|introv|obtain|rcases|cases'|"
     r"induction'|with|let|have|set|generalize|refine'?|choose|lift|"
@@ -880,7 +893,18 @@ def name_hash_vector(name: str) -> Tuple[int, ...]:
 
 
 def squared_distance(a: Sequence[int], b: Sequence[int]) -> int:
-    """Squared Euclidean distance -- an integer, since both are integer points."""
+    """Squared Euclidean distance -- an integer, since both are integer points.
+
+    Computed with ``map`` over the coordinates (the retrieval censuses call
+    this tens of millions of times); for anything other than two integer
+    points the original coordinate-by-coordinate ``int`` reading is used, so
+    the value is the same either way.
+    """
+    if type(a) is tuple and type(b) is tuple:
+        diffs = list(map(_sub, a, b))
+        total = sum(map(_mul, diffs, diffs))
+        if type(total) is int:
+            return total
     return sum((int(x) - int(y)) ** 2 for x, y in zip(a, b))
 
 
@@ -1332,8 +1356,29 @@ def nearest_points(points: Sequence[Sequence[int]]
     full set of ties are unchanged.  :func:`nearest_points_exhaustive` is the
     same answer computed by brute force, and the two are checked against each
     other.
+
+    Since 31 Oct 2026 the search first tries :func:`_nearest_points_packed`,
+    the same all-pairs answer computed a coordinate column at a time on
+    packed integers; at 9,341 declarations the pruning above leaves the
+    evenly spread SHA-256 control almost unpruned (minutes), while the packed
+    form takes seconds.  The scan remains the fallback.
     """
     distinct = sorted({tuple(point) for point in points})
+    if len(distinct) < 2:
+        return {point: (0, ()) for point in distinct}
+    packed = _nearest_points_packed(distinct)
+    if packed is not None:
+        return packed
+    return _nearest_points_scan(distinct)
+
+
+def _nearest_points_scan(distinct: Sequence[Tuple[int, ...]]
+                         ) -> Dict[Tuple[int, ...], Tuple[int, Tuple[Tuple[int, ...], ...]]]:
+    """The pruned outward scan of :func:`nearest_points`, on distinct points.
+
+    Used when :func:`_nearest_points_packed` cannot hold the coordinates;
+    checked against :func:`nearest_points_exhaustive` on its own.
+    """
     if len(distinct) < 2:
         return {point: (0, ()) for point in distinct}
     width = len(distinct[0])
@@ -1373,6 +1418,95 @@ def nearest_points(points: Sequence[Sequence[int]]
                 cursor += step
         out[point] = (best if best is not None else 0,
                       tuple(sorted(winners)))
+    return out
+
+
+#: Width in bits of one packed field in :func:`_nearest_points_packed`.
+_FIELD_BITS = 64
+
+
+def _pack_fields(values: Sequence[int]) -> int:
+    """One integer holding ``values`` as consecutive 64-bit fields, low first."""
+    fields = array("Q", values)
+    if sys.byteorder == "big":
+        fields.byteswap()
+    return int.from_bytes(fields.tobytes(), "little")
+
+
+def _unpack_fields(number: int, count: int) -> "array[int]":
+    """The ``count`` 64-bit fields of ``number``, low first."""
+    fields = array("Q")
+    fields.frombytes(number.to_bytes(count * (_FIELD_BITS // 8), "little"))
+    if sys.byteorder == "big":
+        fields.byteswap()
+    return fields
+
+
+def _nearest_points_packed(distinct: Sequence[Tuple[int, ...]]
+                           ) -> Optional[Dict[Tuple[int, ...],
+                                              Tuple[int, Tuple[Tuple[int, ...], ...]]]]:
+    """:func:`nearest_points` for points that are spread out, still exact.
+
+    The scan in :func:`nearest_points` prunes well when the points cluster
+    (the feature addresses do), but a control whose points are spread evenly
+    over the lattice -- the SHA-256 digest control -- leaves the pruning
+    almost nothing to discard, and the scan becomes the all-pairs loop run
+    one Python step at a time.  At 9,341 declarations that is minutes.
+
+    This is the same all-pairs answer computed a column at a time.  After a
+    shift that makes every coordinate non-negative (squared distances do
+    not change under a shift), each coordinate column is held as one large
+    integer with one 64-bit field per point.  For a point ``p``,
+
+        ``K + |q|^2 - 2 p.q``  for every ``q`` at once
+
+    is ``base - 2 * sum_k p_k * column_k`` -- 24 integer multiplications --
+    and ``|p - q|^2`` is that field minus ``K`` plus ``|p|^2``.  ``K`` is
+    chosen so that every field stays in ``[0, 2^63)``, so no field borrows
+    from or carries into its neighbour and each field is the exact integer.
+    The minimum and every tie are then read off the fields.  Nothing is a
+    float and nothing is approximated; :func:`nearest_points_exhaustive` is
+    checked against it in ``tests/test_lean_address.py``.
+
+    Returns ``None`` (and the caller falls back to the scan) when the
+    coordinates are too large for the fields, or the platform's ``array``
+    has no 64-bit unsigned type.
+    """
+    if array("Q").itemsize * 8 != _FIELD_BITS:
+        return None
+    count = len(distinct)
+    width = len(distinct[0])
+    low = min(min(point) for point in distinct)
+    shifted = [tuple(value - low for value in point) for point in distinct]
+    top = max(max(point) for point in shifted)
+    room = width * top * top
+    offset = 2 * room                       # K: K - 2 p.q + |q|^2 >= room > 0
+    if offset + room >= 1 << (_FIELD_BITS - 1):
+        return None
+    columns = [_pack_fields([point[k] for point in shifted])
+               for k in range(width)]
+    norms = [sum(value * value for value in point) for point in shifted]
+    base = _pack_fields([offset + norm for norm in norms])
+    excluded = (1 << _FIELD_BITS) - 1
+    out: Dict[Tuple[int, ...], Tuple[int, Tuple[Tuple[int, ...], ...]]] = {}
+    for index, point in enumerate(shifted):
+        dot = 0
+        for k, value in enumerate(point):
+            if value:
+                dot += value * columns[k]
+        fields = _unpack_fields(base - 2 * dot, count)
+        fields[index] = excluded            # a point is not its own neighbour
+        least = min(fields)
+        winners = []
+        at = fields.index(least)
+        while True:
+            winners.append(distinct[at])
+            try:
+                at = fields.index(least, at + 1)
+            except ValueError:
+                break
+        best = least - offset + norms[index]
+        out[distinct[index]] = (best, tuple(sorted(winners)))
     return out
 
 

@@ -1,28 +1,40 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: 7 of 7 measured marks and L1; 174/174 chains said, run, drift-free and promoted (15,092
+deciding_figure: '5 of 7 measured marks and L1, re-measured 31 October 2026 (187/187 chains said, run,
+  drift-free and promoted; 104/104 lies found; 374/374 mutants rejected; F1 and F2: baselines lost); the
+  round recorded 7 of 7 measured marks and L1; 174/174 chains said, run, drift-free and promoted (15,092
   lines, 15,457 machine steps); lies in a computed step 87/87 found, none promoted; 348/348 column-3 mutants
-  rejected; 283/283 recorded texts and 212/212 evaluation statuses unchanged.
+  rejected; 283/283 recorded texts and 212/212 evaluation statuses unchanged.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/planner_ladder.py
+  - reasoning/planner_ladder_study.py
+  - reasoning/ties_ladder_frozen.py
+  - runtime/stepwise.py
+  - tools.py
   lean:
   - PlannerLadder
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: PLANNER_LADDER_STUDY.md
-  test:
-  - test_planner_ladder.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: PLANNER_LADDER_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -30,16 +42,34 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - P1
+  - P2
+  - P3
+  - P4
+  - P5
+  - F1
+  - F2
+  met:
+  - L1
+  - P1
+  - P2
+  - P3
+  - P4
+  - P5
+  missed:
+  - F1
+  - F2
 perturbations: []
 phase: 151
-predecessors: []
+predecessors:
+- OPERATIONS_LADDER_STUDY
 question: Can every chain the stepwise planner answers be said as a GLM-BAT program and run by the batch
   machine, with drift and rollback as planner checks that gate the answer, without moving any answer the
   planner or the evaluation gives?
 recomputed_by: '`glm_universal.reasoning.planner_ladder_study.planner_ladder_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -63,7 +93,9 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- CARRIED_READ_STUDY
+- FOLD_MACHINE_STUDY
 superseded_by: ''
 supersedes: []
 title: The operations ladder in the stepwise planner — the chain as a GLM-BAT program
@@ -73,5 +105,7 @@ verdict: 'Yes. All 174 chains the stepwise planner answers among its 283 recorde
   step is found at that step in 87 of 87 chains, and the pipeline does not promote and leaves no file.
   The machine checks what it computes, not what it carries: of the 2,494 steps, 180 are computed and 2,314
   carried as data, and a lie in a carried step is caught only downstream, in 87 of 168 cases. No mark
-  was missed.'
+  was missed. Re-measured on 31 October 2026 (repository check) by the reconstructed measurement module,
+  5 of the 7 measured marks hold: P1 to P5 are met over the reconstruction''s 187 chains, and F1 and F2
+  are not met because their baselines were lost in the October 2026 reorganisation; §7.5 gives the figures.'
 wobble_deps: []

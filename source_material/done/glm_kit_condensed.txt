@@ -1,0 +1,677 @@
+__init__.py
+
+"""GLM Pipeline Kit -- the verified, working core of the 9-iteration pipeline study.
+
+Pure Python (standard library only).  Every function here mirrors a definition in the
+Lean library `GLMKit` (see ../../GLMKit/), where the corresponding facts are proved.
+
+Bit convention: a 24-bit word ``w`` has coordinate ``i`` at bit ``i`` (LSB first), exactly as
+in the Lean files.  Grids are flattened row-major with ``grid_to_word(..., msb_first=True)``
+reproducing the study scripts' convention (first cell = bit 23).
+"""
+from . import golay, leech, lattices, fields, analogy, tasks, pipeline  # noqa: F401
+
+__version__ = "1.0.0"
+
+
+
+====
+
+analogy.py
+
+"""Analogy / operator primitives (Lean: GLMKit/Analogy.lean, GLMKit/Permutation.lean)."""
+from __future__ import annotations
+from typing import List, Sequence
+
+
+def xor_analogy(a: int, b: int, c: int) -> int:
+    """F_2 analogy A:B::C:D with D = C xor (A xor B).  Exact iff the displacement x xor f(x)
+    is the same for A and C (`xor_analogy_exact_iff`); always exact for toggle / XOR-mask rules."""
+    return c ^ a ^ b
+
+
+def threshold_analogy(a: Sequence[int], b: Sequence[int], c: Sequence[int]) -> List[int]:
+    """Iteration 8's Lambda_48 dual snap (kept for reference -- BUGGY): bit = [3(c+b-a) >= 2].
+    On toggle it is exact only when A == C (`threshold_analogy_toggle_iff`)."""
+    return [1 if 3 * (ci + bi - ai) >= 2 else 0 for ai, bi, ci in zip(a, b, c)]
+
+
+def parity_analogy(a: Sequence[int], b: Sequence[int], c: Sequence[int]) -> List[int]:
+    """FIX: decode the integer analogy by parity -- equals xor_analogy (`parity_decode_eq_xor`)."""
+    return [(ci + bi - ai) % 2 for ai, bi, ci in zip(a, b, c)]
+
+
+def permute_op(bits: Sequence[int], perm: Sequence[int]) -> List[int]:
+    """FIX for DI1/DI3: out[i] = bits[perm[i]].  Permutations preserve weight, hence parity and
+    the lattice layer (`wt_comp_perm`, `leech_layer_perm`)."""
+    return [bits[perm[i]] for i in range(len(perm))]
+
+
+def reflect_v_perm(h: int, w: int) -> List[int]:
+    """Cell permutation of the vertical-axis mirror on a row-major h x w grid (`reflectV`)."""
+    return [r * w + (w - 1 - c) for r in range(h) for c in range(w)]
+
+
+def reflect_h_perm(h: int, w: int) -> List[int]:
+    return [(h - 1 - r) * w + c for r in range(h) for c in range(w)]
+
+
+def rotate180_perm(h: int, w: int) -> List[int]:
+    return [(h - 1 - r) * w + (w - 1 - c) for r in range(h) for c in range(w)]
+
+
+def shift_perm(h: int, w: int, dy: int, dx: int, rows: int | None = None) -> List[int]:
+    """Cyclic shift by (dy, dx) of the top `rows` rows (default all); other rows stay fixed.
+    out[r][c] = in[r - dy][c - dx]."""
+    rows = h if rows is None else rows
+    perm = []
+    for r in range(h):
+        for c in range(w):
+            if r < rows:
+                perm.append(((r - dy) % rows) * w + (c - dx) % w)
+            else:
+                perm.append(r * w + c)
+    return perm
+
+
+def permutation_library(h: int, w: int):
+    """Candidate geometric cell permutations (the hypothesis space for permute_op)."""
+    lib = {"identity": list(range(h * w)), "reflect_v": reflect_v_perm(h, w),
+           "reflect_h": reflect_h_perm(h, w), "rotate180": rotate180_perm(h, w)}
+    for dy in range(-2, 3):
+        for dx in range(-2, 3):
+            if (dy, dx) != (0, 0):
+                lib[f"shift({dy},{dx})"] = shift_perm(h, w, dy, dx)
+                lib[f"shift({dy},{dx})_keep_last_row"] = shift_perm(h, w, dy, dx, rows=h - 1)
+    return lib
+
+
+def consistent_permutations(pairs, h: int, w: int):
+    """All library permutations consistent with every demo pair: a superposition of hypotheses
+    that further demonstrations collapse."""
+    return {name: p for name, p in permutation_library(h, w).items()
+            if all(permute_op(x, p) == list(y) for x, y in pairs)}
+
+
+def learn_permutation(pairs) -> List[int] | None:
+    """Infer a cell permutation consistent with all demo pairs (x, y) (lists of bits), if one is
+    determined uniquely by them; returns None if ambiguous or inconsistent."""
+    n = len(pairs[0][0])
+    perm = []
+    for i in range(n):
+        cands = [j for j in range(n) if all(y[i] == x[j] for x, y in pairs)]
+        if len(cands) != 1:
+            return None
+        perm.append(cands[0])
+    return perm
+
+====
+
+fields.py
+
+"""Finite-field puncture/spin table (Lean: GLMKit/Fields.lean).
+
+Elements of F_{p^k} are tuples of k coefficients over F_p, reduced by a monic irreducible.
+"""
+from __future__ import annotations
+from itertools import product
+from typing import Dict, List, Tuple
+
+# monic irreducible polynomials, coefficients c_0..c_{k-1} of x^k + ... (x^k = -sum c_i x^i)
+IRREDUCIBLE = {
+    (2, 2): (1, 1),      # x^2 + x + 1
+    (2, 3): (1, 1, 0),   # x^3 + x + 1
+    (3, 2): (1, 0),      # x^2 + 1   (alpha^2 = -1, alpha has order 4)
+}
+
+
+def _mul(a, b, p, k, red):
+    prod = [0] * (2 * k - 1)
+    for i, x in enumerate(a):
+        for j, y in enumerate(b):
+            prod[i + j] = (prod[i + j] + x * y) % p
+    for d in range(2 * k - 2, k - 1, -1):
+        c = prod[d]
+        if c:
+            prod[d] = 0
+            for i in range(k):
+                prod[d - k + i] = (prod[d - k + i] - c * red[i]) % p
+    return tuple(prod[:k])
+
+
+def field(p: int, k: int = 1):
+    red = IRREDUCIBLE.get((p, k), ())
+    elems = list(product(range(p), repeat=k))
+    one = tuple([1] + [0] * (k - 1))
+    mul = (lambda a, b: _mul(a, b, p, k, red)) if k > 1 else (lambda a, b: ((a[0] * b[0]) % p,))
+    return elems, one, mul
+
+
+def order(x, one, mul) -> int:
+    cur, n = x, 1
+    while cur != one:
+        cur = mul(cur, x)
+        n += 1
+        if n > 1000:
+            return 0
+    return n
+
+
+def table() -> List[Dict]:
+    rows = []
+    for (p, k) in [(2, 1), (3, 1), (2, 2), (5, 1), (7, 1), (2, 3), (3, 2)]:
+        elems, one, mul = field(p, k)
+        zero = tuple([0] * k)
+        units = [e for e in elems if e != zero]
+        assert all(any(mul(u, v) == one for v in units) for u in units), "not a field"
+        orders = sorted({order(u, one, mul) for u in units})
+        alpha = tuple([0, 1] + [0] * (k - 2)) if k > 1 else ((2 % p),)
+        rows.append({
+            "field": f"F_{p**k}", "q": p ** k, "char": p, "units": len(units),
+            "spin_element": "alpha" if k > 1 else "2",
+            "spin_order": 0 if alpha == zero else order(alpha, one, mul),
+            "max_unit_order": max(orders),            # = q - 1 (cyclic group)
+        })
+    return rows
+
+
+def zmod6_zero_divisors() -> List[Tuple[int, int]]:
+    return [(a, b) for a in range(1, 6) for b in range(1, 6) if (a * b) % 6 == 0]
+
+
+====
+
+glm_bridge.py
+
+"""Optional bridge to the full GLM substrate (glm_universal).
+
+NOT executed in the verification session (the GLM repository was not available there).
+Use it inside the GLM system to confirm that the GLM's own substrate satisfies the theorems
+proved in GLMKit.  The Lean theorems `parity_wall`, `parity_wall_glue`, `eight_mul_mem` and
+`junction_iff` are proved for ANY binary code containing 0, so they must hold for the
+substrate's MOG-ordered Golay code too; any failure here indicates a bug in the substrate
+(or a different lattice model), not in the kit.
+
+    from glm_universal.substrate import leech2
+    from glm_kit import glm_bridge
+    print(glm_bridge.check_substrate(leech2))
+"""
+from __future__ import annotations
+import random
+from typing import Dict
+
+
+def _bits_msb(w: int):
+    """The study scripts' convention: coordinate i = bit (23 - i)."""
+    return [(w >> (23 - i)) & 1 for i in range(24)]
+
+
+def check_substrate(leech2, trials: int = 2000, seed: int = 0) -> Dict[str, int]:
+    rng = random.Random(seed)
+    glue = (-3,) + (1,) * 23
+    fails = {"parity_wall": 0, "parity_wall_glue": 0, "eight_mul": 0, "junction_parity": 0}
+    for _ in range(trials):
+        w = rng.getrandbits(24)
+        b = _bits_msb(w)
+        even = sum(b) % 2 == 0
+        if bool(leech2.in_leech(tuple(4 * x for x in b))) != even:
+            fails["parity_wall"] += 1
+        if bool(leech2.in_leech(tuple(4 * x + g for x, g in zip(b, glue)))) != even:
+            fails["parity_wall_glue"] += 1
+        if not leech2.in_leech(tuple(8 * x for x in b)):
+            fails["eight_mul"] += 1
+        # junction: same class_of for two even 4x-embeddings must imply equal wt mod 4
+        w2 = rng.getrandbits(24)
+        b2 = _bits_msb(w2)
+        if even and sum(b2) % 2 == 0:
+            try:
+                same = leech2.class_of(tuple(4 * x for x in b)) == leech2.class_of(tuple(4 * x for x in b2))
+            except Exception:
+                same = False
+            if same and (sum(b) - sum(b2)) % 4 != 0:
+                fails["junction_parity"] += 1
+    fails["trials"] = trials
+    return fails
+
+
+====
+
+golay.py
+
+"""Binary Golay code G24 (Lean: GLMKit/Golay.lean)."""
+from __future__ import annotations
+from functools import lru_cache
+from itertools import combinations
+from typing import Dict, List, Tuple
+
+N = 24
+GEN_POLY = 0xC75          # x^11+x^10+x^6+x^5+x^4+x^2+1, generator of cyclic G23
+ALL_ONES = (1 << N) - 1
+
+
+def popcount(w: int) -> int:
+    return bin(w & ALL_ONES).count("1")
+
+
+def extend_parity(w: int) -> int:
+    """Append the overall parity bit (coordinate 23)."""
+    return w | ((popcount(w) & 1) << 23)
+
+
+ROWS: List[int] = [extend_parity(GEN_POLY << i) for i in range(12)]
+
+
+@lru_cache(maxsize=1)
+def codewords() -> Tuple[int, ...]:
+    code = [0]
+    for r in ROWS:
+        code = code + [c ^ r for c in code]
+    return tuple(code)
+
+
+@lru_cache(maxsize=1)
+def codeword_set() -> frozenset:
+    return frozenset(codewords())
+
+
+def syndrome(w: int) -> int:
+    """12-bit syndrome.  G24 is self-dual, so the generator rows are also parity checks."""
+    s = 0
+    for k, r in enumerate(ROWS):
+        s |= (popcount(w & r) & 1) << k
+    return s
+
+
+def is_codeword(w: int) -> bool:
+    return 0 <= w <= ALL_ONES and syndrome(w) == 0
+
+
+@lru_cache(maxsize=1)
+def leader_table() -> Dict[int, int]:
+    """Syndrome -> minimum-weight coset leader (weights 0..4; 4096 cosets)."""
+    table: Dict[int, int] = {}
+    for wt in range(5):
+        for pos in combinations(range(N), wt):
+            e = 0
+            for p in pos:
+                e |= 1 << p
+            s = syndrome(e)
+            if s not in table:
+                table[s] = e
+        if len(table) == 4096:
+            break
+    return table
+
+
+def decode(w: int) -> Tuple[int, int]:
+    """Nearest-codeword decoding: returns (codeword, error pattern)."""
+    e = leader_table()[syndrome(w)]
+    return w ^ e, e
+
+
+def octads() -> List[int]:
+    return [c for c in codewords() if popcount(c) == 8]
+
+
+def weight_enumerator() -> Dict[int, int]:
+    out: Dict[int, int] = {}
+    for c in codewords():
+        out[popcount(c)] = out.get(popcount(c), 0) + 1
+    return dict(sorted(out.items()))
+
+
+====
+
+lattices.py
+
+"""Higher lattice layers (Lean: GLMKit/Lattices.lean, GLMKit/Pless.lean)."""
+from __future__ import annotations
+from typing import List, Sequence
+
+
+def qr23(x: int) -> int:
+    """Quadratic character of F_23 with values in F_3 (0, 1, 2 = -1)."""
+    x %= 23
+    if x == 0:
+        return 0
+    return 1 if any((y * y) % 23 == x for y in range(1, 23)) else 2
+
+
+def pless_S() -> List[List[int]]:
+    """Bordered Jacobsthal matrix S of the Pless symmetry code C(23) over F_3 (entries 0,1,2)."""
+    S = [[0] * 24 for _ in range(24)]
+    for j in range(1, 24):
+        S[0][j] = 1
+        S[j][0] = 2
+    for i in range(1, 24):
+        for j in range(1, 24):
+            S[i][j] = qr23(j - i)
+    return S
+
+
+def pless_generator() -> List[List[int]]:
+    """[I_24 | S]: generator (and, since C(23) is self-dual, also parity-check) matrix."""
+    S = pless_S()
+    return [[1 if j == i else 0 for j in range(24)] + S[i] for i in range(24)]
+
+
+def in_construction_A(x: Sequence[int], p: int, check: Sequence[Sequence[int]]) -> bool:
+    """x in Z^n with (x mod p) in the code {c : check . c = 0 mod p}."""
+    return all(sum(h * (v % p) for h, v in zip(row, x)) % p == 0 for row in check)
+
+
+def in_lambda48(x: Sequence[int]) -> bool:
+    """Construction A over the self-dual Pless code C(23) (length 48)."""
+    return in_construction_A(x, 3, pless_generator())
+
+
+def snap_fixes_lattice_points_warning() -> str:
+    return ("For a linear code, D* = C + (B - A) of three lattice points is already a lattice "
+            "point, so every snap that fixes lattice points is a no-op on it "
+            "(Lean: snap_analogy_noop).  A 'richer snap' cannot change the answer.")
+
+
+====
+
+leech.py
+
+"""Leech lattice layer (Lean: GLMKit/Leech.lean).
+
+Integer model scaled by sqrt(8) (Conway & Sloane, SPLAG ch.4 s.11):
+x in Z^24 is in Lambda_24 iff for some m in {0,1}
+  * every x_i = m (mod 2),
+  * {i : x_i = 2+m (mod 4)} is a Golay codeword,
+  * sum(x) = 4m (mod 8).
+"""
+from __future__ import annotations
+from typing import Callable, Sequence, Tuple
+
+from . import golay
+
+GLUE24 = (-3,) + (1,) * 23
+
+
+def vec_to_mask(bits: Sequence[int]) -> int:
+    m = 0
+    for i, b in enumerate(bits):
+        if b:
+            m |= 1 << i
+    return m
+
+
+def word_to_bits(w: int, n: int = 24) -> Tuple[int, ...]:
+    return tuple((w >> i) & 1 for i in range(n))
+
+
+def in_leech_like(x: Sequence[int], is_codeword: Callable[[int], bool] = golay.is_codeword) -> bool:
+    """Lean `LeechMem`: membership relative to any binary code (default: G24)."""
+    s = sum(x)
+    if all(v % 2 == 0 for v in x):
+        return is_codeword(vec_to_mask([v % 4 == 2 for v in x])) and s % 8 == 0
+    if all(v % 2 == 1 for v in x):
+        return is_codeword(vec_to_mask([v % 4 == 3 for v in x])) and s % 8 == 4
+    return False
+
+
+def in_leech(x: Sequence[int]) -> bool:
+    return in_leech_like(x)
+
+
+def embed4(w: int) -> Tuple[int, ...]:
+    """Iteration-3 embedding b -> 4b.  In Lambda_24 iff popcount(b) is even (`parity_wall`)."""
+    return tuple(4 * b for b in word_to_bits(w))
+
+
+def embed4_glue(w: int) -> Tuple[int, ...]:
+    """Odd-coset candidate 4b + (-3,1^23).  Same rule (`parity_wall_glue`)."""
+    return tuple(4 * b + g for b, g in zip(word_to_bits(w), GLUE24))
+
+
+def embed8(w: int) -> Tuple[int, ...]:
+    """FIX: b -> 8b is ALWAYS in Lambda_24 (`eight_mul_mem`) -- no escalation needed."""
+    return tuple(8 * b for b in word_to_bits(w))
+
+
+def hits_parity_wall(w: int) -> bool:
+    """Exact replacement for the learned 'lattice head': the 4x embedding fails iff odd weight."""
+    return golay.popcount(w) % 2 == 1
+
+
+def junction_label(w: int) -> Tuple[int, int]:
+    """Exact Lambda/2Lambda class of 4b (`junction_iff`): (Golay syndrome of b, wt(b) mod 4).
+
+    Two 4x-embedded words are in the same junction iff their labels agree.
+    """
+    return golay.syndrome(w), golay.popcount(w) % 4
+
+
+def same_class(x: Sequence[int], y: Sequence[int]) -> bool:
+    """x = y (mod 2 Lambda): (x - y)/2 is an integer Leech vector."""
+    d = [a - b for a, b in zip(x, y)]
+    if any(v % 2 for v in d):
+        return False
+    return in_leech([v // 2 for v in d])
+
+
+====
+
+pipeline.py
+
+"""The corrected, working pipeline assembled from the verified pieces.
+
+    encode   : grid -> 24-bit word                         (tasks.grid_to_word)
+    measure  : Golay syndrome, coset leader, parity       (golay.*)
+    layer    : exact parity rule instead of a learned head (leech.hits_parity_wall)
+    embed    : 8x embedding, always a Leech point          (leech.embed8)
+    junction : exact Lambda/2Lambda label (syndrome, wt%4) (leech.junction_label)
+    operate  : F_2 XOR analogy for coordinatewise rules, learned cell permutation for
+               permutation rules (analogy.xor_analogy / analogy.learn_permutation)
+"""
+from __future__ import annotations
+from typing import Dict, List, Sequence, Tuple
+
+from . import analogy, golay, leech, tasks
+
+
+def measure(word: int) -> Dict:
+    cw, err = golay.decode(word)
+    return {
+        "popcount": golay.popcount(word),
+        "parity": golay.popcount(word) % 2,
+        "syndrome": golay.syndrome(word),
+        "nearest_codeword": cw,
+        "distance_to_code": golay.popcount(err),
+        "is_codeword": err == 0,
+        "hits_parity_wall_4x": leech.hits_parity_wall(word),
+        "leech_point_8x": leech.embed8(word),
+        "junction": leech.junction_label(word),
+    }
+
+
+def solve(demos: Sequence[Tuple[tasks.Grid, tasks.Grid]], query: tasks.Grid):
+    """Infer a rule from demonstration pairs and apply it to the query.
+
+    Returns (prediction grid or None, rule name).
+    All rules consistent with every demo are kept as a superposition of hypotheses:
+      1. constant XOR displacement (toggle, any XOR-mask rule)
+      2. a geometric cell permutation from `analogy.permutation_library` consistent with all
+         demos (reflect_v, translate-as-shift, ...)
+      3. (fallback) any cell permutation uniquely determined by the demos
+    An answer is returned only if all surviving hypotheses agree on the query; otherwise the
+    result is "ambiguous:<hypotheses>" and more demonstrations are needed.
+    Use at least 2 demonstrations: with one demo every rule has a constant XOR displacement.
+    """
+    H, W = len(query), len(query[0])
+    flat = [(tasks.flatten(x), tasks.flatten(y)) for x, y in demos]
+    q = tasks.flatten(query)
+    hypotheses = {}                       # rule name -> predicted flat output
+    deltas = {tuple(a ^ b for a, b in zip(x, y)) for x, y in flat}
+    if len(deltas) == 1:
+        d = next(iter(deltas))
+        hypotheses["xor_displacement"] = tuple(a ^ b for a, b in zip(q, d))
+    for name, p in analogy.consistent_permutations(flat, H, W).items():
+        hypotheses["permutation:" + name] = tuple(analogy.permute_op(q, p))
+    if not hypotheses:
+        perm = analogy.learn_permutation(flat)
+        if perm is not None:
+            hypotheses["cell_permutation"] = tuple(analogy.permute_op(q, perm))
+    if not hypotheses:
+        return None, "unsolved"
+    outs = set(hypotheses.values())
+    rule = "|".join(sorted(hypotheses))
+    if len(outs) == 1:          # every surviving hypothesis agrees: the superposition collapses
+        out = list(next(iter(outs)))
+        return [out[r * W:(r + 1) * W] for r in range(H)], rule
+    return None, "ambiguous:" + rule
+
+
+====
+
+tasks.py
+
+"""Synthetic binary task families with verified transformation traces (stdlib port of the
+study's scripts/bin_tasks.py; same five families and the same trace step names).
+
+NOTE: the study used numpy's default_rng, this port uses random.Random, so individual samples
+differ from the study's samples; the families, shapes and trace structure are identical.
+"""
+from __future__ import annotations
+import random
+from typing import Dict, List, Tuple
+
+Grid = List[List[int]]
+
+
+def new_grid(h: int, w: int) -> Grid:
+    return [[0] * w for _ in range(h)]
+
+
+def copy(g: Grid) -> Grid:
+    return [row[:] for row in g]
+
+
+def flatten(g: Grid) -> List[int]:
+    return [v for row in g for v in row]
+
+
+def grid_to_word(g: Grid, msb_first: bool = True) -> int:
+    """Row-major word.  msb_first=True matches the study scripts (first cell = highest bit)."""
+    cells = flatten(g)
+    w = 0
+    if msb_first:
+        for v in cells:
+            w = (w << 1) | (v & 1)
+    else:
+        for i, v in enumerate(cells):
+            w |= (v & 1) << i
+    return w
+
+
+def gen_toggle(seed: int, H: int = 4, W: int = 6, **kw):
+    rng = random.Random(seed)
+    x = [[rng.randint(0, 1) for _ in range(W)] for _ in range(H)]
+    y = [[1 - v for v in row] for row in x]
+    return x, y, [("init", copy(x)), ("bitwise_not", copy(y))]
+
+
+def gen_translate(seed: int, H: int = 4, W: int = 6, dx: int = 1, dy: int = 1,
+                  bh: int = 2, bw: int = 2, **kw):
+    rng = random.Random(seed)
+    floor = H >= 4
+    rows_avail = H - 1 if floor else H
+    top = rng.randint(0, max(0, rows_avail - bh - dy))
+    left = rng.randint(0, max(0, W - bw - dx))
+    x = new_grid(H, W)
+    for r in range(top, top + bh):
+        for c in range(left, left + bw):
+            x[r][c] = 1
+    if floor:
+        x[H - 1] = [1] * W
+    mask = new_grid(H, W)
+    for r in range(top, top + bh):
+        for c in range(left, left + bw):
+            mask[r][c] = 1
+    erased = copy(x)
+    for r in range(top, top + bh):
+        for c in range(left, left + bw):
+            erased[r][c] = 0
+    painted = copy(erased)
+    for r in range(top + dy, top + dy + bh):
+        for c in range(left + dx, left + dx + bw):
+            painted[r][c] = 1
+    if floor:
+        painted[H - 1] = [1] * W
+    y = copy(painted)
+    return x, y, [("init", copy(x)), ("mask_block", mask), ("erase_old", erased),
+                  ("paint_new", painted)]
+
+
+def gen_reflect_v(seed: int, H: int = 4, W: int = 6, **kw):
+    rng = random.Random(seed)
+    x = new_grid(H, W)
+    for _ in range(rng.randint(2, 4)):
+        bh, bw = rng.randint(1, 2), rng.randint(1, 2)
+        t, l = rng.randint(0, H - bh), rng.randint(0, W - bw)
+        for r in range(t, t + bh):
+            for c in range(l, l + bw):
+                x[r][c] = 1
+    y = [row[::-1] for row in x]
+    return x, y, [("init", copy(x)), ("flip_horizontal", copy(y))]
+
+
+def gen_flood_fill(seed: int, H: int = 4, W: int = 6, **kw):
+    rng = random.Random(seed)
+    h = rng.randint(max(3, H // 2), H)
+    w = rng.randint(max(3, W // 2), W)
+    top, left = rng.randint(0, H - h), rng.randint(0, W - w)
+    x = new_grid(H, W)
+    for c in range(left, left + w):
+        x[top][c] = x[top + h - 1][c] = 1
+    for r in range(top, top + h):
+        x[r][left] = x[r][left + w - 1] = 1
+    y = copy(x)
+    for r in range(top + 1, top + h - 1):
+        for c in range(left + 1, left + w - 1):
+            y[r][c] = 1
+    return x, y, [("init", copy(x)), ("fill_interior", copy(y))]
+
+
+def gen_bfs_shortest(seed: int, H: int = 4, W: int = 6, **kw):
+    rng = random.Random(seed)
+    cells = set()
+    while len(cells) < 2:
+        cells.add((rng.randrange(H), rng.randrange(W)))
+    (r1, c1), (r2, c2) = sorted(cells)
+    x = new_grid(H, W)
+    x[r1][c1] = x[r2][c2] = 1
+    trace = [("init", copy(x))]
+    cur = copy(x)
+    r, c = r1, c1
+    while r != r2:
+        r += 1 if r2 > r else -1
+        cur[r][c] = 1
+        trace.append(("step_vertical", copy(cur)))
+    while c != c2:
+        c += 1 if c2 > c else -1
+        cur[r][c] = 1
+        trace.append(("step_horizontal", copy(cur)))
+    trace.append(("final", copy(cur)))
+    return x, copy(cur), trace
+
+
+TASKS = {
+    "toggle": gen_toggle,
+    "translate": gen_translate,
+    "reflect_v": gen_reflect_v,
+    "flood_fill": gen_flood_fill,
+    "bfs_shortest": gen_bfs_shortest,
+}
+
+
+def verify_trace(x: Grid, y: Grid, trace) -> bool:
+    """A trace is well-formed iff it starts at x and ends at y (the TraceViT/Note-2 requirement)."""
+    return trace[0][1] == x and trace[-1][1] == y
+
+
+def sample(name: str, seed: int, H: int = 4, W: int = 6, **kw) -> Tuple[Grid, Grid, list]:
+    return TASKS[name](seed, H=H, W=W, **kw)

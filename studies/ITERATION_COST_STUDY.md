@@ -6,23 +6,25 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,873<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->823<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,167<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/corpus/cost.py`](../glm_universal/corpus/cost.py),
-[`glm_universal/reasoning/lean_address.py`](../glm_universal/reasoning/lean_address.py),
-[`glm_universal/corpus/address.py`](../glm_universal/corpus/address.py),
-[`glm_universal/derived.py`](../glm_universal/derived.py),
-[`glm_universal/signoff/rules.py`](../glm_universal/signoff/rules.py),
-[`glm_universal/signoff/ledger.py`](../glm_universal/signoff/ledger.py).
-Tests: [`glm_universal/tests/test_corpus.py`](../glm_universal/tests/test_corpus.py),
-[`glm_universal/tests/test_lean_address.py`](../glm_universal/tests/test_lean_address.py),
-[`glm_universal/tests/test_derived.py`](../glm_universal/tests/test_derived.py),
-[`glm_universal/tests/test_sandbox_planner.py`](../glm_universal/tests/test_sandbox_planner.py).
-Run: `cd overlay && PYTHONPATH=. python3 -m glm_universal.corpus --refresh`.
+*Last altered 1 November 2026 (Phase 186: §5a table re-measured after five test files and four Lean files were added; §5l extended). Earlier, 31 October 2026 (repository check: §5a table re-measured, again after the wheels' test files were staged and a third time after they returned with the provisional wheels, and §5l added; 10 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
+Code: [`glm_universal/corpus/cost.py`](../src/glm_universal/corpus/cost.py),
+[`glm_universal/reasoning/lean_address.py`](../src/glm_universal/reasoning/lean_address.py),
+[`glm_universal/corpus/address.py`](../src/glm_universal/corpus/address.py),
+[`glm_universal/derived.py`](../src/glm_universal/derived.py),
+[`glm_universal/signoff/rules.py`](../src/glm_universal/signoff/rules.py),
+[`glm_universal/signoff/ledger.py`](../src/glm_universal/signoff/ledger.py).
+Tests: [`glm_universal/tests/test_corpus.py`](../src/glm_universal/tests/test_corpus.py),
+[`glm_universal/tests/test_lean_address.py`](../src/glm_universal/tests/test_lean_address.py),
+[`glm_universal/tests/test_derived.py`](../src/glm_universal/tests/test_derived.py),
+[`glm_universal/tests/test_sandbox_planner.py`](../src/glm_universal/tests/test_sandbox_planner.py).
+Run: `PYTHONPATH=src python3 -m glm_universal.corpus --refresh`.
 
 ---
 
@@ -73,8 +75,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 5,965 | 11,104 | 823 | 11,107 |
-| corpus sections | 7,554 | 11,769 | 0 | 15,108 |
+| Lean declarations | 9,400 | 17,072 | 0 | 18,800 |
+| corpus sections | 2,761 | 5,095 | 0 | 5,522 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -93,10 +95,10 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 223 |
+| evaluation cases per report | 237 |
 | reports taken per check, before | 5 |
-| reports taken per check, now | 1 |
-| stored report | stale |
+| reports taken per check, now | 0 |
+| stored report | fresh |
 
 The store is keyed on the import closure of `glm_universal.sandbox.planner` -- the code the report is derived from, and not the documents that quote it -- so a documentation round does not re-take it and a change to the planner does.
 <!-- end generated -->
@@ -122,7 +124,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->215 test files<!--/figure--> today
+the suite is <!--figure:test-files-->260 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -130,7 +132,7 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-164 figures are registered and 660 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+164 figures are registered and 589 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
 The registry: `binding-ambiguous`, `binding-as-declared`, `binding-carriers`, `binding-control-wrong`, `binding-declared-count`, `binding-largest-fibre`, `binding-nameable`, `binding-product-recoverable`, `binding-product-zero`, `binding-readings`, `binding-reasons`, `binding-recovered`, `binding-refused`, `binding-roles`, `conversation-alone`, `conversation-answered`, `conversation-as-declared`, `conversation-control-rows`, `conversation-control-wrong`, `conversation-declared-count`, `conversation-reasons`, `conversation-refused`, `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `extremum-answered`, `extremum-as-declared`, `extremum-declared-count`, `extremum-reasons`, `extremum-reasons-declared`, `extremum-refused`, `extremum-ties`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `ordering-answered`, `ordering-as-declared`, `ordering-declared-count`, `ordering-held`, `ordering-parsed-after`, `ordering-parsed-before`, `ordering-reasons`, `ordering-refused`, `ordering-surface-after`, `ordering-surface-before`, `ordering-surface-parsed`, `planner-reports-per-check`, `plans-ambiguous`, `plans-bare-probe-correct`, `plans-bare-probe-refused`, `plans-bare-probe-wrong`, `plans-frames`, `plans-gained`, `plans-gains-address`, `plans-gains-derive`, `plans-gains-table`, `plans-held-bare-correct`, `plans-held-bare-correct-refusal`, `plans-held-bare-wrong`, `plans-held-correct`, `plans-held-correct-refusal`, `plans-held-total`, `plans-held-wrong`, `plans-probe-correct`, `plans-probe-refused`, `plans-probe-wrong`, `plans-questions`, `plans-stress-bare-correct`, `plans-stress-bare-wrong`, `plans-stress-correct`, `plans-stress-correct-refusal`, `plans-stress-first-correct`, `plans-stress-first-refused`, `plans-stress-refused`, `plans-stress-wrong`, `plans-units`, `planstore-coarse-wrong`, `planstore-declared-count`, `planstore-refusals`, `planstore-refusals-replayed`, `planstore-replayed`, `planstore-trials-first`, `planstore-trials-replayed`, `planstore-worst-case`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `scales-answered`, `scales-as-declared`, `scales-bridged`, `scales-declared`, `scales-numeric`, `scales-pairs`, `scales-quantities`, `scales-refused`, `scales-rows`, `scales-still-refused`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
@@ -185,12 +187,21 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 186 |
-| Lean files | 210 |
-| units an edit to *any* Lean file used to make stale | 172 |
-| units one Lean file makes stale now, median | 82 |
-| units the worst single Lean file makes stale | 156 |
-| units that read the tree with a glob, so are stale whenever it moves | 82 |
+| test units in the suite | 260 |
+| Lean files | 418 |
+| units an edit to *any* Lean file used to make stale | 247 |
+| units one Lean file makes stale now, median | 147 |
+| units the worst single Lean file makes stale | 231 |
+| units that read the tree with a glob, so are stale whenever it moves | 147 |
+
+*Re-measured 31 October 2026, after the October 2026 reorganisation, again
+after the new wheels' three test files were staged in their intake items,
+and a third time after they came back with the wheels, installed
+provisionally (§5l); and on 1 November 2026, after Phase 186 added five test
+files and four Lean files (§5l, last paragraph).
+The table had last been re-measured at Phase 136 (186 units, 210 Lean
+files, median 82, glob row 82); the phase-by-phase account below runs to
+that point and is kept as the record it is.*
 
 The Lean row counts distinct file names the ledger tracks, so it is the
 development's 185 files under `RequestProject/GLM/`, the reference tool and
@@ -889,6 +900,71 @@ the end-to-end reading stays with the instrument (`tools primitive-degree`).
 The excess is back to one. Serving the router's two Lean lookups from the
 stored book is still the cut that would retire the line.
 
+## 5l. The re-measure after the reorganisation (31 October 2026)
+
+The table in §5a had not been re-measured since Phase 136, while phases
+137–184 added units and Lean files and the October 2026 reorganisation moved
+the package from `overlay/` to `src/` and the Lean development to
+`src/lean/`. Re-measured by `cost.lean_blast_radius` on 31 October 2026: 254
+units, 414 Lean file names tracked by the ledger, 241 units naming any Lean
+file, a median of 143 and 143 units taking the whole development.
+
+Every one of the 143 takes it the way §5k describes: its closure holds
+`signoff/rules.py`, the ledger, which walks the tree with the `.lean`
+suffix (all 143), and in 122 of them `reasoning/lean_address.py` as well.
+No module added or reconstructed in the repository check brought a new
+walker onto the answering path — the modules that import the sign-off
+package are the same seven as before the reorganisation — so the median has
+moved with the router-reaching units that phases 137–184 added, one by one,
+exactly as §5k predicted. The excess over the half-line is now 23 (143
+against half of 241, 120), and `tests/test_corpus.py` records that figure
+(`RECORDED_MEDIAN_EXCESS = 23`) rather than hiding it; a larger one fails.
+The cut that would retire the line is unchanged: serve the router's two
+Lean lookups from the stored book, and keep the ledger's tree walk out of
+the closures that only use a derived store. It stays a To-Do line in
+[`STATUS.md`](../STATUS.md) §2.2.
+
+Later the same day the new wheels were held back from absorption until the
+owner's Lean build, and their three test files (`test_integer_wheel.py`,
+`test_monster_wheel.py`, `test_cent_wheels.py`) moved with the code into the
+intake items' `staged/` folders. Re-measured after that move, the table above
+reads 252 units, 239 naming any Lean file, a median of 141 and 141 units
+taking the whole development, every one of them through the ledger and 122
+through `reasoning/lean_address.py` as well: all three staged files were glob
+units, so every row but the file count moved by two. The excess is now 22
+(141 against half of 239, 119). `RECORDED_MEDIAN_EXCESS` stays 23, the figure
+measured with those files in the suite, so absorbing them again does not
+trip the ceiling.
+
+The owner then chose to keep the new wheels in the wheels folder, marked
+*provisional* until the Lean build log confirms them, and the three test
+files came back to `tests/` with them. Re-measured after that return, the
+table above reads 255 units, 242 naming any Lean file, a median of 144, a
+worst single file of 226 and 144 units taking the whole development — every
+row but the file count moved back by three, and the excess is 23 again (144
+against half of 242, 121), at the recorded ceiling and not over it. The
+first measure after the return read 223 units taking the whole development:
+the note an answer carries when it rests on a provisional wheel
+(`wheels.provisional_status`) built the Lean file names with a literal
+`.lean` suffix, which the ledger reads as a walk over the whole development
+— and `wheels/__init__.py` is in every router-reaching closure. The note now
+quotes the register's module names without the suffix, and the figures above
+are the measure after that fix.
+
+On 1 November 2026 Phase 186 absorbed three intake items ahead of the owner's
+Lean build. It added five test files (`test_hypothesis_engine.py`,
+`test_hypothesis_tools.py`, `test_derive_query.py`, `test_sequence_next.py`,
+`test_intake_capability_study.py`) and four standalone Lean files
+(`RequestProject/GLM/IntakeChecks/`). Re-measured after them, the table above
+reads 260 units, 418 Lean file names, 247 units naming any Lean file, a median
+of 147, a worst single file of 231 and 147 units taking the whole development.
+All five new files name a Lean file, and three of them take the whole
+development the way §5k describes, so the median and the glob row moved by
+three. The excess over the half-line is
+now 24 (147 against half of 247, 123), and `tests/test_corpus.py` records it
+(`RECORDED_MEDIAN_EXCESS = 24`). The cause is the one §5k names, and the cut
+that would retire it is unchanged.
+
 ## 6. What this does not establish
 
 It does not make anything faster that was not repetition. The measurement cache
@@ -909,5 +985,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 22,873 vectors; rebuilding them against the stored books decodes 823.**  The planner's report, one pass over 223 evaluation cases, is quoted by 5 generated blocks and is now taken 1 times per check instead of 5.  660 figures inside sentences, across 32 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 22,167 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 237 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  589 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

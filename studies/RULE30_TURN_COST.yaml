@@ -1,0 +1,75 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: In 66 of the 69 wheels with more than one phase (periods 2–8, `d ≤ 28`) some pair of
+  phases attains the bound exactly; consultation 0/11 → 11/11; the hub index exact on all 8178 words of
+  period `≤ 12`.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Rule30/OneRunFamily
+  - Rule30/TurnCost
+  - Rule30/TurnCostData
+  lean_held: []
+  lean_missing: []
+  missing: []
+  prose: RULE30_TURN_COST.md
+  test: []
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: RULE30_TURN_COST
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What is the exact cost of a turn of a wheel, are the one-run hubs hubs for every period, and
+  does indexing the GLM by hubs make it consult its theorems (Round 37, To Do 39, 40 and 41)?
+recomputed_by: (hand-written argument; nothing to recompute)
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-exact-cost-of-a-turn-to-do-40-formal
+  heading: 1. The exact cost of a turn (To Do 40) — FORMAL
+- anchor: 2-an-infinite-family-of-hubs-to-do-39-formal-partly
+  heading: 2. An infinite family of hubs (To Do 39) — FORMAL, partly
+- anchor: 3-the-glm-indexed-by-hubs-to-do-41-measured
+  heading: 3. The GLM indexed by hubs (To Do 41) — measured
+- anchor: 4-exact-improvement-requirements
+  heading: 4. Exact improvement requirements
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Round 37: the cost of a turn, the observer''s best phase, and the GLM indexed by hubs'
+verdict: 'Exact, proved for all `d`: starting the clock `m` steps later costs `m` + (tests skipped), and
+  each wheel has a best phase; the hubs `1^(q−1)0` are hubs for every `q ≥ 2`, and what remains is exactly
+  the codes of length `d ≥ q − 3`; consultation went from 0/11 to 11/11. None of the three prize problems
+  is settled.'
+wobble_deps: []

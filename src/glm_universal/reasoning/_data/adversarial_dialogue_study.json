@@ -96,6 +96,9 @@
   "confirmed": 0,
   "contradicted": 5,
   "points": 10,
+  "reasons": [
+   "not-an-option"
+  ],
   "refused": 5
  },
  "A8": {
@@ -119,9 +122,10 @@
  "lean": {
   "declared": 9,
   "file": "RequestProject/GLM/AdversarialDialogue.lean",
-  "met": true,
+  "met": false,
+  "present": false,
   "sorry": 0,
-  "theorems": 9
+  "theorems": 0
  },
  "marks": {
   "A0": true,
@@ -135,11 +139,18 @@
   "A7": true,
   "A8": true,
   "A9": true,
-  "L1": true,
+  "L1": false,
   "P": true
  },
  "members": 48,
- "met": 13,
- "source_digest": "c8ba7e0e4037839a48d98a1fd559a0f81e06b69586e7c33b699c071cb8bc19bb",
- "taken": 13
+ "met": 12,
+ "phase": 167,
+ "reading": {
+  "note": "on: an option number read on every question; off: a yes-or-no question answered by its words only",
+  "switch": "timed_question.YES_NO_BY_NUMBER",
+  "switch_present": true
+ },
+ "source_digest": "c99a403b70b30af5dbdadad595d15c6fb7354690fcae42252f366918eb5161cb",
+ "taken": 13,
+ "unopened": 0
 }

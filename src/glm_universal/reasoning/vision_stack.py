@@ -72,8 +72,10 @@ from . import stack as st
 Grid = Tuple[Tuple[int, ...], ...]
 
 #: Where the puzzles live: the 50 ARC-AGI training tasks kept with the package.
-DATA_DIR = (Path(__file__).resolve().parents[2] / "arc_agi_17" / "data"
-            / "training")
+#: Last altered 31 October 2026 (repository check): the puzzles are a supplied
+#: item, found through ``constants.source_material_item``.
+from ..constants import source_material_item  # noqa: E402
+DATA_DIR = source_material_item("arc_agi_17/data/training")
 
 
 # ===========================================================================

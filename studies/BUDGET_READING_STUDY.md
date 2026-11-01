@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: re-measured; 8 of 8 measured marks and L1 as recorded, the frozen path's same-text count and the census moved by later rounds' declared causes, §7.5.)*
+
 ---
 
 ## 0. What this document is
@@ -251,3 +253,25 @@ certificate.
   them is a re-take of those six measurements, not an answer change.
 * The `hole` kind reads a walk, the two constructions or 24 coordinates; it
   does not read a hole named by its Niemeier type.
+
+### 7.5 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement was
+taken again (`tools budget-reading --write`) after the October 2026
+reorganisation. 8 of 8 measured marks hold, as recorded; H1–H4, R1 and Q1 give
+the figures of §7.1 unchanged (256 of 256 held-out walks certified under the
+rule, the frozen walk reading 225; 0 disagreements; 0 readings at the budget,
+median 25 and longest 174 starts; the same five types; battery 11 of 11, reads
+2 of 2, column 3 8 of 8, mutants 16 of 16). What moved:
+
+| figure | recorded (§7.1) | re-measured |
+|---|---|---|
+| F1: baseline cases present and same status | 202 of 202 | 202 of 202 |
+| F1: same text | 199 | 190 |
+| F1: undeclared moved texts | 0 | 0 |
+| W1: earlier evaluation cases read as `hole` | 0 | 0 of 222 |
+| W1: tools reached by the census, of the reasoning modules | — | 193 of 239 (46 declared measurement-only, 0 stale, 0 undeclared) |
+
+The twelve moved texts are `unknown-nonsense`, `report-lean`, `report-directives`, `report-hole-classifier`, `report-hole-ladder`, `report-retrieval`, `report-generated`, `report-language`, `report-hole-failures`, `report-query-escalation`, `report-relay` and `report-anonymous`; each carries a declared cause in
+`reasoning/budget_guard_frozen.py`. The stored measurement before this
+re-take gave 218 earlier cases and the census as 177 of 216 (39 declared).

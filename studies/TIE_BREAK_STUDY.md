@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 6 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *Most of this development's Leech addresses are not unique. The scaled feature
 vector sits exactly equidistant from several lattice points, and which of them
 becomes the address is settled by the decoder's tie-break — an implementation
@@ -24,22 +26,22 @@ single address is provably unchanged, and the pairwise figures of the address
 study move by one declaration in two thousand.*
 
 Code:
-[`glm_universal/reasoning/tie_break.py`](../glm_universal/reasoning/tie_break.py).
+[`glm_universal/reasoning/tie_break.py`](../src/glm_universal/reasoning/tie_break.py).
 Query: `report tiebreak`.
 Formal development:
-[`RequestProject/GLM/TieBreak.lean`](../glm_lean/RequestProject/GLM/TieBreak.lean).
+[`RequestProject/GLM/TieBreak.lean`](../src/lean/RequestProject/GLM/TieBreak.lean).
 Tests: `glm_universal/tests/test_tie_break.py`.
 The decoder it describes:
-[`glm_universal/reasoning/analogy.py`](../glm_universal/reasoning/analogy.py)
+[`glm_universal/reasoning/analogy.py`](../src/glm_universal/reasoning/analogy.py)
 `nearest_lattice_point`, on the hot path through
-[`llvq_table.py`](../glm_universal/reasoning/llvq_table.py).
+[`llvq_table.py`](../src/glm_universal/reasoning/llvq_table.py).
 
 ---
 
 ## 1. The question, and where it came from
 
 The stability measurement in
-[`reasoning/stability.py`](../glm_universal/reasoning/stability.py)
+[`reasoning/stability.py`](../src/glm_universal/reasoning/stability.py)
 asked how far an input may move
 before its address does, and got an answer nobody had asked for: for most of
 the corpus the answer is **zero**. The input lies exactly on a bisector, two
@@ -119,8 +121,7 @@ and the same least member (directive D2).
 Whole development, scale 9, nothing sampled:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.reasoning import tie_break as tb
 import json; print(json.dumps(tb.tie_census(), default=str, indent=1))"
 ```
@@ -236,8 +237,7 @@ The figures the address study computes from **pairs** of addresses have no
 such protection, and they do move.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.reasoning import tie_break as tb
 import json; print(json.dumps(tb.canonical_separation(), default=str, indent=1))"
 ```
@@ -300,7 +300,7 @@ have saved.
 
 ## 8. What is proved, and what is only measured
 
-Proved, in [`RequestProject/GLM/TieBreak.lean`](../glm_lean/RequestProject/GLM/TieBreak.lean),
+Proved, in [`RequestProject/GLM/TieBreak.lean`](../src/lean/RequestProject/GLM/TieBreak.lean),
 against no assumption about this corpus:
 
 | Lean name | what it says | what it licenses here |
@@ -353,30 +353,29 @@ computed at all.
 ## 10. Reproducing every number here
 
 ```bash
-cd overlay
 
 # the report, at the size a report can afford
-PYTHONPATH=. python3 GLM.py -q "report tiebreak" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report tiebreak" --verify-tct
 
 # §3, the whole corpus
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.reasoning import tie_break as tb
 import json; print(json.dumps(tb.tie_census(), default=str, indent=1))"
 
 # §5 and §6, both address books, figure by figure
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.reasoning import tie_break as tb
 import json; print(json.dumps(tb.canonical_separation(), default=str, indent=1))"
 
 # §7, every scale from 1 to 24
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.reasoning import tie_break as tb
 import json; print(json.dumps(
     tb.scale_tie_table(scales=tuple(range(1, 25)), sample=40),
     default=str, indent=1))"
 
 # the tests
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_tie_break.py -q
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_tie_break.py -q
 ```
 
 The Lean file builds with the rest of the development:

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 26 of 35 analogy items for the control and every eligible method, 8 of 8 planted queries
@@ -14,16 +16,20 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - sandbox/aggregation_bench
+  - runtime/session.py
+  - sandbox/aggregation_bench.py
   lean: []
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: AGGREGATION_BENCH_STUDY.md
-  test:
-  - test_aggregation_bench.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: AGGREGATION_BENCH_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -42,6 +48,7 @@ question: 'Attention is one way for an architecture to mix a register. Fifteen m
   — run on the same registers under the same instruments: which of them is *best*, by a bar written down
   before the first measurement?'
 recomputed_by: '`glm_universal.sandbox.aggregation_bench.bench_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

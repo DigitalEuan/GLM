@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 1 November 2026 (Phase 186: re-taken over the 237 evaluation cases, noted in §7.5). Earlier, 31 October 2026 (repository check: re-measured; 9 of 9 marks as recorded, R4's count of replies read against the newest question and R5's tries moved, §7.5; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 *Created 20 October 2026 (pre-registered and measured 20 October 2026, in one session; the marks were written with the measuring module before its first run, and none was restated). Last altered 20 October 2026 (Phase 173: §7.4 notes the lines taken).*
@@ -142,7 +144,7 @@ an interruption neither helps nor hurts it.
 
 ## 7. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools resumed-dialogue` (stored in
+`PYTHONPATH=src python3 -m glm_universal.tools resumed-dialogue` (stored in
 `reasoning/_data/resumed_dialogue_study.json`, digest-guarded; `--write`
 re-takes it in about two minutes on eight cores).
 
@@ -211,6 +213,26 @@ question.
 * A true reply that is no option of the question (the carrier meant outside
   the head) is still refused `not-an-option` without saying it is evidence
   that the carrier meant is not in the head (left by Phases 150 and 167).
+
+### 7.5 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement was
+taken again (`tools resumed-dialogue --write`) after the October 2026
+reorganisation, with `ResumedDialogue.lean` held in `awaiting_recovery/`
+(L1 read from its declarations: 10 of 10 theorems, 0 `sorry`). 9 of 9 marks hold, as
+recorded; R0–R3, R6 and P give the figures of §7.1. What moved:
+
+| figure | recorded (§7.1) | re-measured |
+|---|---|---|
+| R4: bound to the superseded question | 0 of 48 | 0 of 48 |
+| R4: read against the newest question | 19 of 48 | 13 of 48 |
+| R5: tries read as a reply | 0 of 4,683 (223 questions at each of 21 ties) | 0 of 4,767 (227 questions at each of 21 ties) |
+
+R5's tries grow with the evaluation (227 cases). Fewer superseded replies are
+options of the newest question since the dialogue path's October 2026 repairs. Re-taken 1 November 2026
+(Phase 186) over the 237 cases the evaluation now holds: R5 is 0 of 4,977 (237
+questions at each of 21 ties), and every mark is as before.
+Switching the Phase 167 reply rule back off in memory (yes-or-no questions read by option number again, nothing written) gives 16 addressed replies and still 13 read in R4, so the reconstructed rule accounts for 2 of the moved replies; the rest is not attributed.
 
 ## In one paragraph
 

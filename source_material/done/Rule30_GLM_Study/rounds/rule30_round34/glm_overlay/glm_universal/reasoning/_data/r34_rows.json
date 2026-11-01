@@ -1,0 +1,102 @@
+[
+ {
+  "id": "C325",
+  "class": "FORMAL",
+  "status": "proved",
+  "claim": "Divisor rule: a word of period p written out over a multiple q drives the half-line machine identically (driveN_repeat); so TestCountLinear q c gives TestCountLinear p c and HalfLineDies q gives HalfLineDies p when p | q, refutations pass to multiples, and every period with divisor 2m+1 needs slack >= m - 1",
+  "lean": [
+   "TestCountPeriods.driveN_repeat",
+   "repeatWord_pos",
+   "testCountLinear_of_dvd",
+   "not_testCountLinear_of_dvd",
+   "halfLineDies_of_dvd",
+   "testCountLinear_mono",
+   "testCountLinear_slack_ge_of_dvd"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "notes": "Round 34"
+ },
+ {
+  "id": "C326",
+  "class": "FORMAL",
+  "status": "proved",
+  "claim": "The observer's phase: TestSlack bd c (every code of length d fails within d + c tests of the drive bd); starting the clock one step later turns a code of length d into one of length d + 1 (halfStep_length) and skips at most one test, so TestSlack (bd shifted by 1) c gives TestSlack bd (c + 2), and c + 1 when the skipped time is white; s steps cost at most 2 s",
+  "lean": [
+   "TestCountPeriods.TestSlack",
+   "halfStep_length",
+   "testsBefore_shift",
+   "failsWithinTests_of_shift",
+   "testSlack_of_shift",
+   "testSlack_of_shift_white",
+   "testSlack_of_shift_iter"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "notes": "Round 34; the user's perspective idea: the read position changes the excess by a bounded amount"
+ },
+ {
+  "id": "C327",
+  "class": "CERT",
+  "status": "proved",
+  "claim": "Observer-clock slacks on longer ranges: every code of length d <= 30 fails within d + 7 tests of every period-4 word (with not_testCountLinear_four_six the least period-4 slack on d <= 30 is exactly 7); period 3 slack 8 on d <= 28; period 2 slack 5 on d <= 34; refuted slacks lifted to all multiples (4m: 6, 3m: 7, 2m: 4)",
+  "lean": [
+   "TestCountPeriodsData.testCountLinearUpTo_four_seven",
+   "testCountLinearUpTo_three_eight_long",
+   "testCountLinearUpTo_two_five_long",
+   "not_testCountLinear_mul_four",
+   "not_testCountLinear_mul_three",
+   "not_testCountLinear_mul_two",
+   "frontier_round34",
+   "SlackCert.testCountLinearUpTo_of_rangeChecks"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler"
+  ],
+  "notes": "Round 34; To Do 35; finite ranges for the bounds, refutations for all d"
+ },
+ {
+  "id": "C328",
+  "class": "EMP",
+  "status": "observed",
+  "claim": "Exact excess table (test_slack34.c, every code): no period-4 word exceeds excess 7 on d <= 37 (all 15 words), the record-setting three-black words stay within 7 to d >= 102; period 3 record 8 (word 100, d = 22) unchanged to d = 42; period 2 record 5 to d = 54; period 1 alternates 0, 2 to d = 300",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 34; To Do 35; exact integer arithmetic"
+ },
+ {
+  "id": "C329",
+  "class": "EMP",
+  "status": "observed",
+  "claim": "Downward drift: for the words with many tests per period (110 and the three-black period-4 words) the excess on the upper half of the searched range is at most 3, well below the record; for the one-black period-4 words it is at most -1; the rotations 0111, 1110, 1101, 1011 have records 7, 6, 5, 4",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 34; supports a finite period-4 slack; not a proof"
+ },
+ {
+  "id": "C330",
+  "class": "GLM",
+  "status": "built",
+  "claim": "GLM Round 34: tool slack (the exact excess search, three columns, Occam reading of when the record was last raised), the divisor rule in the theorem wheel (cited Lean theorems), lifted refutations in tool discuss, tool clock and tool next on the Round 34 frontier; consultation alignment 1/7 before and 7/7 after (development questions)",
+  "lean": [
+   "TestCountPeriods.testCountLinear_of_dvd",
+   "halfLineDies_of_dvd"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "notes": "Round 34; rule30_round34/"
+ }
+]

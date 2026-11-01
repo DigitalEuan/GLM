@@ -5,6 +5,12 @@
 census records the stored measurements its answers quote, ``quoted``, and
 its digest covers them -- ``studies/QUOTED_MEASUREMENTS_STUDY.md``).*
 
+*Last altered 31 October 2026 (repository check): R5 reads the declarations
+of the Lean development (``runtime.evidence.declared_names``), so the digest
+also covers the parser (``reasoning/lean_address.py``) and the Lean tree
+itself (:func:`glm_universal.reasoning.lean_address.tree_digest`): a change
+to the development makes the stored census stale.*
+
 Every question of the end-to-end evaluation is routed as the command line
 routes it (``runtime.router.route``) and read into the common result model
 (``runtime.evidence.Result``), with column 3 replayed where the answer has
@@ -52,6 +58,7 @@ _SOURCES: Tuple[str, ...] = (
     "runtime/tct_engine.py",
     "evaluation/cases.py",
     "evaluation/harness.py",
+    "reasoning/lean_address.py",
 )
 
 #: The caches downstream of this one, never counted as quoted: the Phase 171
@@ -173,7 +180,8 @@ def _compute() -> Dict[str, object]:
         "R4": {"answered": len(answered),
                "unclassified": [r["id"] for r in answered
                                 if r["evidence"][0] == "unclassified"]},
-        "R5": {"cited": cited, "undeclared": undeclared},
+        "R5": {"cited": cited, "undeclared": undeclared,
+               "declarations": len(evm.declared_names())},
         "R6": {"answered": len(answered), "replayable": len(replayable),
                "verified": len(replayable) - len(replay_failed),
                "failed": replay_failed},
@@ -216,16 +224,19 @@ def _marks(r: Dict[str, object]) -> Dict[str, bool]:
 
 
 def module_digest(quoted: Optional[List[str]] = None) -> str:
-    """The digest of the sources and, since Phase 174, of the stored
-    measurements the census's answers quoted (``quoted``, as recorded; by
-    default the stored measurement's own list)."""
+    """The digest of the sources, of the Lean tree R5 reads (31 October
+    2026) and, since Phase 174, of the stored measurements the census's
+    answers quoted (``quoted``, as recorded; by default the stored
+    measurement's own list)."""
     root = Path(__file__).resolve().parent.parent
     if quoted is None:
         stored = measurements()
         quoted = list((stored or {}).get("quoted", ()))
     names = [root / n for n in sorted(set(_SOURCES))]
     names += [p for p in qm.existing(quoted) if p not in names]
-    return integrity.tree_digest(names, root)
+    from . import lean_address
+    return integrity.sha256_hex(
+        f"{integrity.tree_digest(names, root)}\nlean:{lean_address.tree_digest()}".encode("utf-8"))
 
 
 def measure() -> Dict[str, object]:

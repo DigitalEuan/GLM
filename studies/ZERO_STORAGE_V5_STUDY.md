@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 2 links repointed to where the files now live after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged.)*
+
 *The zero-storage substrate reached v4 with one stored table left in it: a
 4096-word set of Golay codewords, consulted on every membership decision. v5
 removes it — the code is self-dual, so its twelve generator rows are also a
@@ -28,8 +30,8 @@ Code: [`glm_zero_storage_substrate_v5.py`](scripts/glm_zero_storage_substrate_v5
 [`glm_zero_storage_substrate_v4.py`](scripts/glm_zero_storage_substrate_v4.py) so
 the two can be run side by side).
 Formal development:
-[`RequestProject/GLM/ZeroStorageV5.lean`](../glm_lean/RequestProject/GLM/ZeroStorageV5.lean),
-building on [`ZeroStorage.lean`](../glm_lean/RequestProject/GLM/ZeroStorage.lean).
+[`RequestProject/GLM/ZeroStorageV5.lean`](../src/lean/RequestProject/GLM/ZeroStorageV5.lean),
+building on [`ZeroStorage.lean`](../src/lean/RequestProject/GLM/ZeroStorage.lean).
 Run: `python3 studies/scripts/glm_zero_storage_substrate_v5.py --test` (about six seconds,
 exits 0), `--ledger`, `--demo`, `--report`, and `--test --full` for the
 sixteen-million-word sweep.

@@ -1,0 +1,393 @@
+{
+ "white_criterion": [
+  {
+   "id": "G01",
+   "text": "white(D) \u27fa pattern(D-2) = pattern(D-1)",
+   "origin": "mechanism",
+   "parent": null,
+   "status": "law-holds",
+   "witness": null,
+   "class": "Pi1",
+   "lean": "ldiag_white_iff_coincide / ldiagOf_white_iff_coincide (WhiteDiagonals.lean)",
+   "evidence": [
+    [
+     "data 2..19999",
+     true,
+     "exact on 19998 indices (4 events)"
+    ],
+    [
+     "held-out 2..59999",
+     true,
+     "passes"
+    ],
+    [
+     "prover",
+     true,
+     "proved for every D and every left-edge row"
+    ]
+   ]
+  },
+  {
+   "id": "G02",
+   "text": "white(D) \u27fa pattern(D-2) = pattern(D-1) \u2227 odd(D-2)",
+   "origin": "mechanism",
+   "parent": null,
+   "status": "refuted-heldout",
+   "witness": 53207,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "data 2..19999",
+     true,
+     "exact on 19998 indices (4 events)"
+    ],
+    [
+     "held-out 2..59999",
+     false,
+     "fails at k=53207"
+    ]
+   ]
+  },
+  {
+   "id": "G03",
+   "text": "white(D) \u27fa pattern(D-2) = pattern(D-1) \u2227 odd(D-1)",
+   "origin": "mechanism",
+   "parent": null,
+   "status": "refuted-heldout",
+   "witness": 53207,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "data 2..19999",
+     true,
+     "exact on 19998 indices (4 events)"
+    ],
+    [
+     "held-out 2..59999",
+     false,
+     "fails at k=53207"
+    ]
+   ]
+  },
+  {
+   "id": "G04",
+   "text": "white(D) \u27fa pattern(D-2) = pattern(D-1) \u2227 lp(D-1) = lp(D-2)",
+   "origin": "mechanism",
+   "parent": null,
+   "status": "implied",
+   "witness": null,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "data 2..19999",
+     true,
+     "exact on 19998 indices (4 events)"
+    ],
+    [
+     "held-out 2..59999",
+     true,
+     "passes"
+    ],
+    [
+     "junction",
+     true,
+     "lp(D-1) = lp(D-2) holds wherever pattern(D-2) = pattern(D-1) does (equal eventual patterns have equal least period): no separating observation exists; keep G01 (Occam)"
+    ]
+   ]
+  },
+  {
+   "id": "G05",
+   "text": "no two adjacent left diagonals are both eventually white",
+   "origin": "lift",
+   "parent": null,
+   "status": "survives",
+   "witness": null,
+   "class": "Pi1",
+   "lean": "ldiag_no_two_consecutive_white (WhiteDiagonals.lean)",
+   "evidence": [
+    [
+     "dev 0..19998",
+     true,
+     "passes"
+    ],
+    [
+     "held-out 0..59998",
+     true,
+     "passes"
+    ]
+   ]
+  }
+ ],
+ "regime_stats": {
+  "1": {
+   "Q": 1,
+   "sources": 1,
+   "states": 2,
+   "on_chains": 2,
+   "on_white_free_cycles": 0,
+   "white_free_fraction": "0",
+   "random_model_fraction": "1/2",
+   "mean_regime_length": "2",
+   "odd_terminals": 1,
+   "antiperiodic_sources": 0,
+   "antiperiodic_odd": 0,
+   "even_terminals": 0,
+   "can_stay_even_forever": 0
+  },
+  "2": {
+   "Q": 2,
+   "sources": 3,
+   "states": 12,
+   "on_chains": 10,
+   "on_white_free_cycles": 2,
+   "white_free_fraction": "1/6",
+   "random_model_fraction": "1/4",
+   "mean_regime_length": "10/3",
+   "odd_terminals": 2,
+   "antiperiodic_sources": 2,
+   "antiperiodic_odd": 2,
+   "even_terminals": 1,
+   "can_stay_even_forever": 0
+  },
+  "4": {
+   "Q": 4,
+   "sources": 15,
+   "states": 240,
+   "on_chains": 226,
+   "on_white_free_cycles": 14,
+   "white_free_fraction": "7/120",
+   "random_model_fraction": "1/16",
+   "mean_regime_length": "226/15",
+   "odd_terminals": 8,
+   "antiperiodic_sources": 4,
+   "antiperiodic_odd": 4,
+   "even_terminals": 7,
+   "can_stay_even_forever": 4
+  },
+  "8": {
+   "Q": 8,
+   "sources": 255,
+   "states": 65280,
+   "on_chains": 59770,
+   "on_white_free_cycles": 5510,
+   "white_free_fraction": "551/6528",
+   "random_model_fraction": "1/256",
+   "mean_regime_length": "11954/51",
+   "odd_terminals": 128,
+   "antiperiodic_sources": 16,
+   "antiperiodic_odd": 16,
+   "even_terminals": 127,
+   "can_stay_even_forever": 60
+  },
+  "16": {
+   "Q": 16,
+   "sources": 65535,
+   "states": 4294901760,
+   "on_chains": 4293628202,
+   "on_white_free_cycles": 1273558,
+   "white_free_fraction": "636779/2147450880",
+   "random_model_fraction": "1/65536",
+   "mean_regime_length": "4293628202/65535",
+   "odd_terminals": 32768,
+   "antiperiodic_sources": 256,
+   "antiperiodic_odd": 112,
+   "even_terminals": 32767,
+   "can_stay_even_forever": 972
+  }
+ },
+ "regime_hypotheses": [
+  {
+   "id": "G01",
+   "text": "random-permutation model: the fraction of states on white-free cycles is about 1/2^Q (within a factor 4)",
+   "origin": "lift",
+   "parent": null,
+   "status": "refuted-heldout",
+   "witness": 8,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "dev Q \u2208 [1, 2, 4]",
+     true,
+     "passes"
+    ],
+    [
+     "held-out Q \u2208 [8, 16]",
+     false,
+     "fails at Q = 8"
+    ]
+   ]
+  },
+  {
+   "id": "G02",
+   "text": "a regime that starts right after a doubling (anti-periodic source) always ends at an odd white diagonal (so the periods would double for ever)",
+   "origin": "lift",
+   "parent": null,
+   "status": "refuted-heldout",
+   "witness": 16,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "dev Q \u2208 [1, 2, 4]",
+     true,
+     "passes"
+    ],
+    [
+     "held-out Q \u2208 [8, 16]",
+     false,
+     "fails at Q = 16"
+    ]
+   ]
+  },
+  {
+   "id": "G03",
+   "text": "exactly 2^(Q\u22121) of the 2^Q \u2212 1 sources end at an odd white diagonal",
+   "origin": "lift",
+   "parent": null,
+   "status": "survives",
+   "witness": null,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "dev Q \u2208 [1, 2, 4]",
+     true,
+     "passes"
+    ],
+    [
+     "held-out Q \u2208 [8, 16]",
+     true,
+     "passes"
+    ],
+    [
+     "reason",
+     true,
+     "\u03a6 is injective, so the chains pair sources (0, B) with terminals (A, 0) one-to-one, A ranging over all non-zero patterns; 2^(Q\u22121) of those have odd weight (informal proof, not in Lean)"
+    ]
+   ]
+  },
+  {
+   "id": "G04",
+   "text": "the mean regime length from a source is 2^Q up to a factor (1 + 2^(1\u2212Q))",
+   "origin": "lift",
+   "parent": null,
+   "status": "survives",
+   "witness": null,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "dev Q \u2208 [1, 2, 4]",
+     true,
+     "passes"
+    ],
+    [
+     "held-out Q \u2208 [8, 16]",
+     true,
+     "passes"
+    ]
+   ]
+  },
+  {
+   "id": "G05",
+   "text": "for Q \u2265 4 some choice of the open bits keeps every white diagonal even for ever (so the eventual patterns alone cannot force a doubling)",
+   "origin": "lift",
+   "parent": null,
+   "status": "survives",
+   "witness": null,
+   "class": "Pi1",
+   "lean": null,
+   "evidence": [
+    [
+     "dev Q \u2208 [1, 2, 4]",
+     true,
+     "passes"
+    ],
+    [
+     "held-out Q \u2208 [8, 16]",
+     true,
+     "passes"
+    ]
+   ]
+  },
+  {
+   "id": "G06",
+   "text": "every regime ends: after each white diagonal another comes within 4^Q + 1 diagonals; there are infinitely many white diagonals",
+   "origin": "mechanism",
+   "parent": null,
+   "status": "proved",
+   "witness": null,
+   "class": "Pi1",
+   "lean": "white_after_white, ldiag_white_after_white, ldiag_infinitely_many_white",
+   "evidence": [
+    [
+     "prover",
+     true,
+     "Lean (WhiteDiagonals.lean), every D"
+    ]
+   ]
+  }
+ ],
+ "scan": {
+  "start": 87867,
+  "Q": 32,
+  "first": {
+   "white": 1420878968,
+   "outer_parity": 0,
+   "outer": "dae372fa",
+   "steps": 1420791100
+  },
+  "branches": [
+   {
+    "open_bits": [
+     0
+    ],
+    "after_white": 1420878968,
+    "post_white_pattern": "93425cac",
+    "white": 3340408059,
+    "outer_parity": 0,
+    "outer": "4e27c559",
+    "steps": 1919529090
+   },
+   {
+    "open_bits": [
+     1
+    ],
+    "after_white": 1420878968,
+    "post_white_pattern": "6cbda353",
+    "white": 2107985254,
+    "outer_parity": 1,
+    "outer": "ed91e45c",
+    "steps": 687106285
+   },
+   {
+    "open_bits": [
+     0,
+     0
+    ],
+    "after_white": 3340408059,
+    "post_white_pattern": "743a866e",
+    "white": 4989445007,
+    "outer_parity": 0,
+    "outer": "2c52d13c",
+    "steps": 1649036947
+   },
+   {
+    "open_bits": [
+     0,
+     1
+    ],
+    "after_white": 3340408059,
+    "post_white_pattern": "8bc57991",
+    "white": 8429393530,
+    "outer_parity": 0,
+    "outer": "5d3bd0b6",
+    "steps": 5088985470
+   }
+  ]
+ }
+}

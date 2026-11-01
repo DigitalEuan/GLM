@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -137,7 +139,26 @@ generated from it and refuse to print when it is stale).
 ### 3.1 The Lean corpus
 
 <!-- generated: nativewords-lean -->
-The native-words measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-words --write`.
+| queries | ranking | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
+|---|---|---|---|---|---|---|---|
+| declarations | *classes* — Golay classes alone, then Leech distance | 110 | 139 | 144 | 154 | 35.9 % | 0.618 |
+| declarations | **letters** — part letter words alone, then classes, then Leech distance | 137 | 171 | 175 | 179 | 52.5 % | 0.751 |
+| declarations | *lexical* — the lexical Leech address (ledger rows 4 and 5) | 77 | 98 | 108 | 119 | 23.8 % | 0.439 |
+| declarations | *parts* — the parts as strings, then Leech distance (post-hoc control for `letters`) | 136 | 167 | 174 | 180 | 52.9 % | 0.745 |
+| declarations | *text* — token overlap, ties by name (the standard) | 138 | 164 | 166 | 174 | 52.0 % | 0.740 |
+| declarations | *text_leech* — token overlap, ties by Leech distance | 138 | 167 | 175 | 179 | 53.7 % | 0.752 |
+| declarations | *text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`) | 138 | 169 | 173 | 179 | 54.0 % | 0.752 |
+| declarations | **words_native** — Golay names, then part letter words, then classes, then Leech distance | 139 | 170 | 173 | 179 | 53.9 % | 0.756 |
+| goals | *classes* — Golay classes alone, then Leech distance | 52 | 66 | 68 | 76 | 38.0 % | 0.594 |
+| goals | **letters** — part letter words alone, then classes, then Leech distance | 70 | 81 | 85 | 89 | 56.6 % | 0.757 |
+| goals | *lexical* — the lexical Leech address (ledger rows 4 and 5) | 23 | 32 | 40 | 49 | 14.1 % | 0.292 |
+| goals | *parts* — the parts as strings, then Leech distance (post-hoc control for `letters`) | 69 | 83 | 87 | 92 | 56.4 % | 0.762 |
+| goals | *text* — token overlap, ties by name (the standard) | 71 | 85 | 88 | 89 | 57.4 % | 0.775 |
+| goals | *text_leech* — token overlap, ties by Leech distance | 71 | 84 | 88 | 92 | 58.0 % | 0.774 |
+| goals | *text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`) | 70 | 84 | 88 | 92 | 57.4 % | 0.772 |
+| goals | **words_native** — Golay names, then part letter words, then classes, then Leech distance | 72 | 84 | 88 | 91 | 57.8 % | 0.779 |
+
+204 declaration queries and 101 goal queries over 9,341 declarations and a vocabulary of 10,863 tokens.  The Golay names are injective on the vocabulary: yes; the top ten of `words_native` carry the overlaps of the top ten of `text` on 204 of 204 declaration queries and 101 of 101 goal queries.
 <!-- end generated -->
 
 At the reading taken when the round closed: hits at 1, 3, 5 and 10 on the
@@ -161,7 +182,19 @@ rank. The Golay words do better inside the same ties (**W4 met**: 190 against
 ### 3.2 The documents
 
 <!-- generated: nativewords-documents -->
-The native-words measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-words --write`.
+| ranking | queries with a hit at 5 | precision@5 |
+|---|---|---|
+| *classes* — Golay classes alone, then Leech distance | 37 / 60 | 22.7 % |
+| **letters** — part letter words alone, then classes, then Leech distance | 40 / 60 | 29.0 % |
+| *lexical* — the lexical Leech address (ledger rows 4 and 5) | 10 / 60 | 3.7 % |
+| *parts* — the parts as strings, then Leech distance (post-hoc control for `letters`) | 38 / 60 | 28.3 % |
+| *text* — token overlap, ties by name (the standard) | 41 / 60 | 30.0 % |
+| *text_leech* — token overlap, ties by Leech distance | 41 / 60 | 30.0 % |
+| *text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`) | 41 / 60 | 30.0 % |
+| *text*, as shipped by the document layer (a control on the one above) | 41 / 60 | 30.0 % |
+| **words_native** — Golay names, then part letter words, then classes, then Leech distance | 41 / 60 | 30.0 % |
+
+60 section queries over 2,750 sections and a vocabulary of 17,917 words.  The Golay names are injective: yes; the top five of `words_native` carry the overlaps of the top five of `text` on 60 of 60 queries.
 <!-- end generated -->
 
 `words_native` equals `text` on the 60 section queries (the same hits at 5
@@ -185,7 +218,24 @@ among the marks. `parts` ranks by the parts themselves as strings, where
 with the parts as strings in place of the Golay layers.
 
 <!-- generated: nativewords-marks -->
-The native-words measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-words --write`.
+| mark | what it asks | outcome |
+|---|---|---|
+| **W1** | Golay names injective; `words_native` carries the token overlaps of `text` | met |
+| **W2** | `words_native` ≥ `text` at every k and MRR@10 (declarations and goals) | **not met** |
+| **W3** | `words_native` ≥ `text` (documents, hit@5 and precision@5) | met |
+| **W4** | `words_native` ≥ `text_leech` at hit@5 on all three sets | **not met** |
+| **W5** | `letters` > the lexical Leech address at hit@5 (declarations and documents) | met |
+| **W6** | `text_leech` ≥ `text` at every k (declarations and goals) | **not met** |
+
+3 of 6 marks met.
+
+Reported beside the marks and not counted among them, because they were not declared before the measurement:
+
+| comparison | outcome |
+|---|---|
+| `letters` ≥ `parts` in hits at every k, on all three sets | **does not hold** |
+| `letters` ≥ `text` in hits at every k, on all three sets | **does not hold** |
+| `words_native` ≥ `text_parts` in hits at every k, on all three sets | **does not hold** |
 <!-- end generated -->
 
 Three readings follow, each post hoc and each for the next round to declare

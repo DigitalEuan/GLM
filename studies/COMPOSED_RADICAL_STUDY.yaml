@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 8 marks met; 5 of 5 compositions certified; 6 of 6 solvable controls silent; 2 of
@@ -14,18 +16,28 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - evaluation/composed_radical_cases
-  - tests/test_composed_radical
+  - evaluation/composed_radical_cases.py
+  - reasoning/symbolic_factor.py
+  - reasoning/symbolic_nonlinear.py
+  - runtime/composed_radical_report.py
+  - runtime/primitive_radical_report.py
+  - tools.py
   lean:
   - ComposedRadicals
+  - PrimitiveRadicals
+  - QuinticRadicals
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: COMPOSED_RADICAL_STUDY.md
   test:
   - test_composed_radical.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: COMPOSED_RADICAL_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -33,11 +45,27 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - C7
+  - C8
+  met:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - C7
+  - C8
   missed: []
 perturbations: []
-phase: 114
+phase: 115
 predecessors:
 - PRIMITIVE_RADICAL_STUDY
 question: Phase 114's certificates need a primitive Galois group, so `solve symbolically` says nothing
@@ -45,6 +73,7 @@ question: Phase 114's certificates need a primitive Galois group, so `solve symb
   decomposition `g(h(x))` exactly, certify the outer polynomial instead, and still never certify a polynomial
   whose group is solvable?
 recomputed_by: '`glm_universal.runtime.composed_radical_report.composed_radical_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -64,7 +93,8 @@ sections:
 - anchor: 5-re-running-it
   heading: 5. Re-running it
 status: closed
-successors: []
+successors:
+- PRIMITIVE_DEGREE_STUDY
 superseded_by: ''
 supersedes: []
 title: Roots with no expression in radicals, through a composition

@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 ```
 recipe/
@@ -97,11 +99,10 @@ carriers with no two objects sharing one.
 ## Reachable as
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report recipe" --verify-tct
-PYTHONPATH=. python3 GLM.py -q "derive span_ratio of tea"
-PYTHONPATH=. python3 GLM.py -q "derive euler_gradus of perfect_fifth"
-PYTHONPATH=. python3 GLM.py -q "derive cents of perfect_fifth"   # refused
+PYTHONPATH=src python3 src/GLM.py -q "report recipe" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "derive span_ratio of tea"
+PYTHONPATH=src python3 src/GLM.py -q "derive euler_gradus of perfect_fifth"
+PYTHONPATH=src python3 src/GLM.py -q "derive cents of perfect_fifth"   # refused
 ```
 
 A coordinate no description derives is refused with the reason, and an object

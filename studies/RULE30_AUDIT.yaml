@@ -1,0 +1,223 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: None of the three prize problems solved; the missing theorems listed in §3.1, any one
+  of which would answer its problem.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/harness.py
+  - reasoning/adversarial_dialogue_study.py
+  - reasoning/budget_guard_frozen.py
+  - reasoning/carried_read.py
+  - reasoning/colour_induction.py
+  - reasoning/combiner.py
+  - reasoning/frame_plane_study.py
+  - reasoning/nearest_address_study.py
+  - reasoning/nearest_question_study.py
+  - reasoning/planner_ladder.py
+  - runtime/evidence.py
+  - runtime/respell.py
+  - runtime/sinter.py
+  - tools.py
+  lean:
+  - Escalation/GolayTies
+  - Escalation/LayerStack
+  - Escalation/LeechResidue
+  - Escalation/MasterStep
+  - Escalation/Niemeier
+  - Escalation/Rule30Parity
+  - HypothesisEngine
+  - HypothesisEngine/Benchmarks
+  - HypothesisEngine/BenchmarksData
+  - HypothesisEngine/DialogueChecks
+  - HypothesisEngine/GateLoop
+  - HypothesisEngine/GateLoopData
+  - HypothesisEngine/NeedsWheel
+  - HypothesisEngine/TaxChecks
+  - HypothesisEngine/TaxChecksData
+  - HypothesisEngine/Wheel
+  - HypothesisEngine/WheelChecksData
+  - Rule30
+  - Rule30/AdicPeriod
+  - Rule30/AdicTower
+  - Rule30/AdicTowerData
+  - Rule30/AmortizedHalving
+  - Rule30/ArrowIndependence
+  - Rule30/BarrierDiagonalsData
+  - Rule30/BlackRunWindow
+  - Rule30/Compute
+  - Rule30/ConeSeparation
+  - Rule30/ConjectureLoop
+  - Rule30/ConjectureLoopData
+  - Rule30/DiagCert
+  - Rule30/DiagCertThree
+  - Rule30/DiagCertTwo
+  - Rule30/DiagonalSearch
+  - Rule30/DiagonalSearchData
+  - Rule30/DriveWheel
+  - Rule30/DriveWheelData
+  - Rule30/EchoBound
+  - Rule30/Frontier
+  - Rule30/HalfLineLightCone
+  - Rule30/HalfLineMachine
+  - Rule30/HalfLineMachineData
+  - Rule30/HankelKronecker
+  - Rule30/InnerSurvivorData
+  - Rule30/LeftDiagonalPeriods
+  - Rule30/LeftDiagonalPeriodsData
+  - Rule30/LocalRuleInduction
+  - Rule30/MachineModel
+  - Rule30/MathieuCensus
+  - Rule30/MathieuCensusOrbits
+  - Rule30/MathieuMOG
+  - Rule30/MathieuOrbits
+  - Rule30/MathieuOrbitsData
+  - Rule30/MathieuRule30Data
+  - Rule30/OneRunFamily
+  - Rule30/PeriodTwoHalfLine
+  - Rule30/PeriodTwoHalfLineData
+  - Rule30/Pipeline
+  - Rule30/PipelineData
+  - Rule30/PlanSearch
+  - Rule30/PostEdgeSpec
+  - Rule30/PowerSeriesLadder
+  - Rule30/PowerSeriesLadderData
+  - Rule30/PrefixSearch
+  - Rule30/PrefixSearchData
+  - Rule30/Prizes
+  - Rule30/ProofRoutes
+  - Rule30/ProofRoutesData
+  - Rule30/RunCountLaw
+  - Rule30/ShortcutNetworkData
+  - Rule30/SidewaysPeriodTwo
+  - Rule30/SidewaysView
+  - Rule30/SlackCert
+  - Rule30/SlackCertThreeTwo
+  - Rule30/TestCountLaw
+  - Rule30/TestCountLawData
+  - Rule30/TestCountPeriods
+  - Rule30/TestCountPeriodsData
+  - Rule30/TestHalving
+  - Rule30/TestHalvingData
+  - Rule30/TopMonomial
+  - Rule30/Transients
+  - Rule30/TransientsData
+  - Rule30/Triangles
+  - Rule30/TrianglesData
+  - Rule30/TuningByEar
+  - Rule30/TuningByEarData
+  - Rule30/TurnCost
+  - Rule30/TurnCostData
+  - Rule30/WeightGrowth
+  - Rule30/WhiteDiagonals
+  - Rule30/WobbleCertificate
+  - Rule30/WobbleNormalized
+  - Wobble
+  lean_held: []
+  lean_missing: []
+  missing:
+  - tests/test_round28.py
+  prose: RULE30_AUDIT.md
+  test: []
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: RULE30_AUDIT
+junctions: []
+last_altered: 31 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'What is the status of the Rule 30 / GLM study: what has been tried, what came of it, what is
+  still missing in the GLM''s own terms, and what is left to do?'
+recomputed_by: (hand-written argument; nothing to recompute)
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-we-are-doing
+  heading: 1. What we are doing
+- anchor: 2-what-we-have-tried-and-what-came-of-it
+  heading: 2. What we have tried, and what came of it
+- anchor: 3-what-is-missing-as-the-glm-defines-it
+  heading: 3. What is missing (as the GLM defines it)
+- anchor: 4-to-do
+  heading: 4. To Do
+- anchor: 5-analysis-directions-aristotles-suggestions
+  heading: 5. Analysis directions (Aristotle's suggestions)
+- anchor: 6-what-rounds-4348-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Rounds 43–48 added
+- anchor: 6-what-round-42-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 42 added
+- anchor: 6-what-round-41-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 41 added
+- anchor: 6-what-round-40-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 40 added
+- anchor: 6-what-round-39-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 39 added
+- anchor: 6-what-round-38-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 38 added
+- anchor: 6-what-round-37-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 37 added
+- anchor: 6-what-round-36-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 36 added
+- anchor: 6-what-round-35-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺⁺. What Round 35 added
+- anchor: 6-what-round-34-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺⁺. What Round 34 added
+- anchor: 6-what-round-33-added
+  heading: 6⁺⁺⁺⁺⁺⁺⁺. What Round 33 added
+- anchor: 6-what-round-32-added
+  heading: 6⁺⁺⁺⁺⁺⁺. What Round 32 added
+- anchor: 6-what-round-31-added
+  heading: 6⁺⁺⁺⁺⁺. What Round 31 added
+- anchor: 6-what-round-30-added
+  heading: 6⁺⁺⁺⁺. What Round 30 added
+- anchor: 6-what-round-29-added
+  heading: 6⁺⁺⁺. What Round 29 added
+- anchor: 6-what-round-28-added
+  heading: 6⁺⁺. What Round 28 added
+- anchor: 6-what-round-27-added
+  heading: 6⁺. What Round 27 added
+- anchor: 6-what-round-26-added
+  heading: 6. What Round 26 added
+- anchor: 6-what-round-25-added
+  heading: 6⁰. What Round 25 added
+- anchor: 6-what-round-23-added
+  heading: 6′. What Round 23 added
+- anchor: 6a-what-round-22-added
+  heading: 6a. What Round 22 added
+- anchor: 6b-what-round-21-added
+  heading: 6b. What Round 21 added
+- anchor: 6c-what-round-20-added
+  heading: 6c. What Round 20 added
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Rule 30 / GLM study — Audit (Round 20, updated in Rounds 21–42)
+verdict: All three Wolfram Rule 30 prize problems are still open. The project has not solved any of them,
+  and nothing in it claims to.
+wobble_deps: []

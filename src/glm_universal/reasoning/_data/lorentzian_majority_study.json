@@ -1,129 +1,139 @@
 {
+ "amended": {
+  "M4'": true
+ },
+ "amended_met": 1,
+ "amended_taken": 1,
  "identities": {
   "checked": 300,
   "definition": 300,
-  "extends_guard": 133,
-  "guard_cases": 133,
-  "never_wrong": 229,
-  "never_wrong_cases": 229,
-  "wrong_answers": 40,
-  "wrong_needs_decoys": 40
+  "extends_guard": 123,
+  "guard_cases": 123,
+  "never_wrong": 224,
+  "never_wrong_cases": 224,
+  "wrong_answers": 45,
+  "wrong_needs_decoys": 45
+ },
+ "m4": {
+  "majority_now": 138,
+  "phase_183_vote_now": 138,
+  "phase_184_take": 155
  },
  "marks": {
-  "L": true,
+  "L": false,
   "M1": true,
   "M2": true,
   "M3": true,
-  "M4": true,
+  "M4": false,
   "M5": true,
   "M6": true,
   "M7": true
  },
- "met": 8,
+ "met": 6,
  "physics": {
   "clean1": {
-   "absent": 152,
+   "absent": 143,
    "colluding_present": 0,
    "guarded": {
-    "refused": 152,
-    "right": 148,
+    "refused": 143,
+    "right": 157,
     "wrong": 0
    },
    "majority": {
-    "refused": 152,
-    "right": 148,
+    "refused": 143,
+    "right": 157,
     "wrong": 0
    },
-   "present": 148,
+   "present": 157,
    "shape": [
     1,
     0,
     0
    ],
    "vote": {
-    "refused": 152,
-    "right": 148,
+    "refused": 143,
+    "right": 157,
     "wrong": 0
    }
   },
   "clean2": {
-   "absent": 134,
+   "absent": 153,
    "colluding_present": 0,
    "guarded": {
-    "refused": 134,
-    "right": 166,
+    "refused": 153,
+    "right": 147,
     "wrong": 0
    },
    "majority": {
-    "refused": 134,
-    "right": 166,
+    "refused": 153,
+    "right": 147,
     "wrong": 0
    },
-   "present": 166,
+   "present": 147,
    "shape": [
     2,
     0,
     0
    ],
    "vote": {
-    "refused": 134,
-    "right": 166,
+    "refused": 153,
+    "right": 147,
     "wrong": 0
    }
   },
   "clean3": {
-   "absent": 154,
+   "absent": 146,
    "colluding_present": 0,
    "guarded": {
-    "refused": 154,
-    "right": 146,
+    "refused": 146,
+    "right": 154,
     "wrong": 0
    },
    "majority": {
-    "refused": 154,
-    "right": 146,
+    "refused": 146,
+    "right": 154,
     "wrong": 0
    },
-   "present": 146,
+   "present": 154,
    "shape": [
     3,
     0,
     0
    ],
    "vote": {
-    "refused": 154,
-    "right": 146,
+    "refused": 146,
+    "right": 154,
     "wrong": 0
    }
   },
   "collude3": {
-   "absent": 130,
-   "colluding_present": 148,
+   "absent": 144,
+   "colluding_present": 137,
    "guarded": {
     "refused": 300,
     "right": 0,
     "wrong": 0
    },
    "majority": {
-    "refused": 152,
+    "refused": 163,
     "right": 0,
-    "wrong": 148
+    "wrong": 137
    },
-   "present": 170,
+   "present": 156,
    "shape": [
     1,
     2,
     0
    ],
    "vote": {
-    "refused": 152,
+    "refused": 163,
     "right": 0,
-    "wrong": 148
+    "wrong": 137
    }
   },
   "collude5": {
-   "absent": 135,
-   "colluding_present": 150,
+   "absent": 140,
+   "colluding_present": 154,
    "guarded": {
     "refused": 300,
     "right": 0,
@@ -134,20 +144,20 @@
     "right": 0,
     "wrong": 0
    },
-   "present": 165,
+   "present": 160,
    "shape": [
     1,
     2,
     2
    ],
    "vote": {
-    "refused": 150,
+    "refused": 146,
     "right": 0,
-    "wrong": 150
+    "wrong": 154
    }
   },
   "decoy2": {
-   "absent": 145,
+   "absent": 156,
    "colluding_present": 0,
    "guarded": {
     "refused": 300,
@@ -159,7 +169,7 @@
     "right": 0,
     "wrong": 0
    },
-   "present": 155,
+   "present": 144,
    "shape": [
     1,
     0,
@@ -172,7 +182,7 @@
    }
   },
   "decoy3": {
-   "absent": 145,
+   "absent": 162,
    "colluding_present": 0,
    "guarded": {
     "refused": 300,
@@ -180,24 +190,24 @@
     "wrong": 0
    },
    "majority": {
-    "refused": 145,
-    "right": 155,
+    "refused": 162,
+    "right": 138,
     "wrong": 0
    },
-   "present": 155,
+   "present": 138,
    "shape": [
     2,
     0,
     1
    ],
    "vote": {
-    "refused": 145,
-    "right": 155,
+    "refused": 162,
+    "right": 138,
     "wrong": 0
    }
   },
   "decoy4": {
-   "absent": 151,
+   "absent": 131,
    "colluding_present": 0,
    "guarded": {
     "refused": 300,
@@ -209,20 +219,20 @@
     "right": 0,
     "wrong": 0
    },
-   "present": 149,
+   "present": 169,
    "shape": [
     2,
     0,
     2
    ],
    "vote": {
-    "refused": 151,
-    "right": 149,
+    "refused": 131,
+    "right": 169,
     "wrong": 0
    }
   },
   "decoy5": {
-   "absent": 139,
+   "absent": 150,
    "colluding_present": 0,
    "guarded": {
     "refused": 300,
@@ -230,24 +240,24 @@
     "wrong": 0
    },
    "majority": {
-    "refused": 139,
-    "right": 161,
+    "refused": 150,
+    "right": 150,
     "wrong": 0
    },
-   "present": 161,
+   "present": 150,
    "shape": [
     3,
     0,
     2
    ],
    "vote": {
-    "refused": 139,
-    "right": 161,
+    "refused": 150,
+    "right": 150,
     "wrong": 0
    }
   },
   "relations": 8
  },
- "source_digest": "13d209f02bc67c44d0096fece64c92fa97f7deae422a75c5e68198cc7202eddf",
+ "source_digest": "e62f3dab2d240bcbe730c58aaec72e8f532b55ca4e93d87491d9aa1a708582d7",
  "taken": 8
 }

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 1. What this round took, and from where
@@ -261,8 +263,7 @@ of the split that are not answered without it* — is **none**. The promotion
 checklist is computed, and its utility line is the one that fails:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.sandbox.memory_split
+PYTHONPATH=src python3 -m glm_universal.sandbox.memory_split
 ```
 
 ## 6. The Lean generator: a check that never read what it generated
@@ -361,12 +362,11 @@ sandbox.
 ## 9. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools binding
-PYTHONPATH=. python3 -m glm_universal.runtime.plan_store
-PYTHONPATH=. python3 -m glm_universal.sandbox.memory_split
-PYTHONPATH=. python3 -m glm_universal.sandbox.lean_generation
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_role_binding.py \
+PYTHONPATH=src python3 -m glm_universal.tools binding
+PYTHONPATH=src python3 -m glm_universal.runtime.plan_store
+PYTHONPATH=src python3 -m glm_universal.sandbox.memory_split
+PYTHONPATH=src python3 -m glm_universal.sandbox.lean_generation
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_role_binding.py \
     glm_universal/tests/test_plan_store.py \
     glm_universal/tests/test_supplied_sandbox.py -q
 cd .. && lake build RequestProject.GLM.RoleBinding RequestProject.GLM.PlanStore

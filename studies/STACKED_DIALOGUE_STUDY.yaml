@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 8 marks on the first take; first-tie replies read behind a second question 0 of
@@ -13,17 +15,26 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/stacked_dialogue_study.py
+  - runtime/conversation.py
+  - tools.py
   lean:
+  - ResumedDialogue
   - StackedDialogue
+  lean_held:
+  - ResumedDialogue
+  - StackedDialogue
+  lean_missing: []
+  missing: []
   prose: STACKED_DIALOGUE_STUDY.md
-  test:
-  - test_stacked_dialogue.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: STACKED_DIALOGUE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -31,11 +42,27 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - L1
+  - S0
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - P
+  met:
+  - L1
+  - S0
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - P
   missed: []
 perturbations: []
-phase: 172
+phase: 173
 predecessors:
 - RESUMED_DIALOGUE_STUDY
 question: When a second tie's question is put before the first is answered, can the conversation keep
@@ -43,6 +70,7 @@ question: When a second tie's question is put before the first is answered, can 
   than one, and close a question that has been left alone too long, without ever reading a reply against
   the wrong question or taking a whole query for one?
 recomputed_by: '`glm_universal.reasoning.stacked_dialogue_study.stacked_dialogue_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -67,7 +95,7 @@ sections:
   heading: 7. What came out
 - anchor: in-one-paragraph
   heading: In one paragraph
-status: open
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

@@ -2,19 +2,18 @@
 
 ## Tier 0 — the coarse read
 
-**Question.** The deep-hole rounds are the only place in this repository where
-a refusal was answered by raising the resolution of the reading instead of
-stopping. Can that be made a step of the ordinary query loop — with a declared
-ladder, a stated cost, and a rule that stops it turning a principled refusal
-into an answer — without moving any answer the runtime already gives?
+**Question.** The deep-hole rounds are the only place in this repository where a refusal was answered by raising the resolution of the reading instead of stopping. Can that be made a step of the ordinary query loop — with a declared ladder, a stated cost, and a rule that stops it turning a principled refusal into an answer — without moving any answer the runtime already gives?
 
 **Verdict.** Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences.
 
-**Deciding figure.** Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
+**Deciding figure.** Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung. Re-measured 31 October 2026 over 227 evaluation cases: 0 answers moved, 0 principled refusals converted, 4 of 18 probes above the first rung. Re-measured 1 November 2026 over 237 evaluation cases: 0 answers moved, 0 principled refusals converted, 4 of 18 probes above the first rung.
 
 **Recomputed by.** `glm_universal.reasoning.query_escalation.query_escalation_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the wording is unchanged. Re-measured the same day over the 227 evaluation cases, §7.6; both gates hold as recorded.)*
+*Last altered 1 November 2026 (Phase 186: re-measured over the 237 evaluation cases, §7.7; both gates hold as recorded.)*
 
 ---
 
@@ -25,7 +24,9 @@ Yes, and at no cost to what the runtime already does: over the whole evaluation 
 The same reading, recomputed rather than written:
 
 <!-- generated: queryesc-tier -->
-The stored measurements of the escalation loop do not describe the modules as they now stand (`stale`), so nothing is reported here rather than a figure taken from code that has moved.  Run `python3 -m glm_universal.tools queryesc --write`.
+**Both gates hold.**  Over the whole evaluation set of 237 cases, all 181 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 50 declared refusals, **15** are classified non-escalatable before the ladder is climbed.
+
+The loop buys something: of the 18 declared probes, 8 are answered and 4 of those are reached *above* the first rung — 'nearest to k_B', 'describe energie', 'describe oxigen', 'nearest to velocty' — at a cost of 3, 5, 5, 5 against 1 for a direct answer.  2 refusals are certified absences within the declared radius of 2 edits.
 <!-- end generated -->
 
 ---
@@ -165,32 +166,205 @@ it, so when a source moves the block says so and the corpus check fails.*
 ### 7.1 The tower and the ladders
 
 <!-- generated: queryesc-ladders -->
-The stored measurements of the escalation loop do not describe the modules as they now stand (`stale`), so nothing is reported here rather than a figure taken from code that has moved.  Run `python3 -m glm_universal.tools queryesc --write`.
+| rung | reading | cost | what it reads |
+|---|---|---|---|
+| `L1` | the register reading | 1 | The query answered from the register its surface terms name. |
+| `L2` | the semantics reading | 2 | The operands resolved through the reference layer, and the query re-asked with what they denote. |
+| `L3` | the neighbourhood reading | 4 | A lookup, named as one: the unique alias within the declared radius answers, and an empty shortlist within it is a certified absence. |
+
+| query kind | ladder | rungs | cost of climbing to the top |
+|---|---|---|---|
+| `analogy` | L1 -> L2 | 2 | 3 |
+| `angle` | L1 -> L2 | 2 | 3 |
+| `cluster` | L1 -> L2 | 2 | 3 |
+| `coherence` | L1 -> L2 | 2 | 3 |
+| `comparative` | L1 | 1 | 1 |
+| `compare` | L1 | 1 | 1 |
+| `derive` | L1 | 1 | 1 |
+| `describe` | L1 -> L2 -> L3 | 3 | 7 |
+| `extremum` | L1 | 1 | 1 |
+| `meaning` | L1 | 1 | 1 |
+| `measure` | L1 | 1 | 1 |
+| `nearest` | L1 -> L2 -> L3 | 3 | 7 |
+| `ordering` | L1 | 1 | 1 |
+| `pi_groups` | L1 -> L2 | 2 | 3 |
+| `product` | L1 | 1 | 1 |
+| `project` | L1 -> L2 | 2 | 3 |
+| `real` | L1 | 1 | 1 |
+| `report` | L1 | 1 | 1 |
+| `spatial` | L1 -> L2 -> L3 | 3 | 7 |
+| `task` | L1 | 1 | 1 |
+| `trilinear` | L1 | 1 | 1 |
+| `unknown` | L1 | 1 | 1 |
+| `verify` | L1 -> L2 | 2 | 3 |
+
+10 of 23 declared kinds have a ladder taller than one rung, and the tallest is 3.  A one-rung ladder is a declaration that no rung of this tower reads that kind's refusals, not an omission.
 <!-- end generated -->
 
 ### 7.2 Gate 1 — safety
 
 <!-- generated: queryesc-safety -->
-The stored measurements of the escalation loop do not describe the modules as they now stand (`stale`), so nothing is reported here rather than a figure taken from code that has moved.  Run `python3 -m glm_universal.tools queryesc --write`.
+| check | reading |
+|---|---|
+| evaluation cases run both ways | 237 |
+| answered by the direct path | 181 |
+| answers that moved | 0 |
+| answers that cost more than the first rung | 0 |
+| principled refusals converted into answers | 0 |
+| gate 1 | `True` |
+
+A question the register answers is answered exactly as it was — same text, same rung, same cost — and the ladder is recorded in the payload beside the answer rather than written into it.
 <!-- end generated -->
 
 ### 7.3 Gate 2 — the probes
 
 <!-- generated: queryesc-probes -->
-The stored measurements of the escalation loop do not describe the modules as they now stand (`stale`), so nothing is reported here rather than a figure taken from code that has moved.  Run `python3 -m glm_universal.tools queryesc --write`.
+| probe | kind | ladder | outcome | rung | cost | classification |
+|---|---|---|---|---|---|---|
+| `describe energy` | describe | L1 -> L2 -> L3 | answered | L1 | 1 | — |
+| `nearest to c` | nearest | L1 -> L2 -> L3 | answered | L1 | 1 | — |
+| `nearest to k_B` | nearest | L1 -> L2 -> L3 | answered | L2 | 3 | — |
+| `nearest to N_A` | nearest | L1 -> L2 -> L3 | answered | L1 | 1 | — |
+| `describe energie` | describe | L1 -> L2 -> L3 | answered | L3 | 5 | — |
+| `describe oxigen` | describe | L1 -> L2 -> L3 | answered | L3 | 5 | — |
+| `nearest to velocty` | nearest | L1 -> L2 -> L3 | answered | L3 | 5 | — |
+| `describe watter` | describe | L1 -> L2 -> L3 | refused | L3 | 1 | absent |
+| `describe unobtainium` | describe | L1 -> L2 -> L3 | refused, absence certified | L3 | 1 | absent |
+| `describe justice` | describe | L1 -> L2 -> L3 | refused, absence certified | L3 | 1 | absent |
+| `report nonsense subject` | report | L1 | refused | L1 | 1 | absent |
+| `Ca : Sc :: Ba : ?` | analogy | L1 -> L2 | refused | L1 | 1 | underdetermined |
+| `heat : temperature :: acceleration : ?` | analogy | L1 -> L2 | refused | L1 | 1 | ungrounded |
+| `please compute the square root of a banana` | unknown | L1 | refused | L1 | 1 | ill-formed |
+| `is 0.1 + 0.2 equal to 0.3` | compare | L1 | answered | L1 | 1 | — |
+| `measure large in room` | measure | L1 | refused | L1 | 1 | ungrounded |
+| `derive cents of perfect_fifth` | derive | L1 | refused | L1 | 1 | ungrounded |
+| `approximate 1/0 to 5 places` | real | L1 | refused | L1 | 1 | ill-formed |
+
+Answered by rung: L1 4, L2 1, L3 3.  Gate 2 asks for at least one probe resolving above the first rung and there are 4: `True`.
 <!-- end generated -->
 
 ### 7.4 The refusals, classified
 
 <!-- generated: queryesc-classified -->
-The stored measurements of the escalation loop do not describe the modules as they now stand (`stale`), so nothing is reported here rather than a figure taken from code that has moved.  Run `python3 -m glm_universal.tools queryesc --write`.
+| case | kind | classification | escalated | outcome |
+|---|---|---|---|---|
+| analogy-empty-table-position | analogy | underdetermined | no | refused at L1 |
+| analogy-conjugate-unplaced | analogy | ungrounded | no | refused at L1 |
+| describe-unknown-word | describe | absent | yes | refused at L3 |
+| trilinear-nonaxes | trilinear | ill-formed | no | refused at L1 |
+| meaning-open-vocabulary | meaning | answered as a refusal in prose | no | answered |
+| real-divide-by-zero | real | ill-formed | no | refused at L1 |
+| compare-equality | compare | answered as a refusal in prose | no | answered |
+| unknown-nonsense | unknown | ill-formed | no | refused at L1 |
+| report-unknown-subject | report | absent | yes | refused at L1 |
+| measure-large-room | measure | ungrounded | no | refused at L1 |
+| measure-expensive-market | measure | ungrounded | no | refused at L1 |
+| measure-hot-walking | measure | ungrounded | no | refused at L1 |
+| comparative-cross-quantity | comparative | ungrounded | no | refused at L1 |
+| comparative-wrong-scale-marker | comparative | ungrounded | no | refused at L1 |
+| comparative-midpoint-word | comparative | ungrounded | no | refused at L1 |
+| derive-undescribed-coordinate | derive | ungrounded | no | refused at L1 |
+| field-unknown-field | field | absent | yes | refused at L1 |
+| field-missing-value | field | absent | yes | refused at L1 |
+| field-unknown-row | field | absent | yes | refused at L1 |
+| ordering-nominal | ordering | absent | yes | refused at L1 |
+| ordering-across-scales | ordering | absent | yes | refused at L1 |
+| ordering-unreadable | ordering | absent | yes | refused at L1 |
+| extremum-holes | extremum | absent | yes | refused at L1 |
+| extremum-two-tables | extremum | absent | yes | refused at L1 |
+| extremum-nominal | extremum | absent | yes | refused at L1 |
+| extremum-absent | extremum | absent | yes | refused at L1 |
+| carrier-tie | carrier | absent | yes | refused at L1 |
+| carrier-flagged | carrier | absent | yes | refused at L1 |
+| carrier-not-a-word | carrier | absent | yes | refused at L1 |
+| carrier-tag-width | carrier | absent | yes | refused at L1 |
+| locate-uncertified | locate | absent | yes | refused at L1 |
+| locate-ambiguous | locate | absent | yes | refused at L1 |
+| locate-unknown | locate | absent | yes | refused at L1 |
+| locate-junction-crowded | locate | absent | yes | refused at L1 |
+| locate-dimension | locate | absent | yes | refused at L1 |
+| locate-reply-contradicted | locate | absent | yes | refused at L1 |
+| locate-reply-no-tie | locate | absent | yes | refused at L1 |
+| hole-lattice-point | hole | absent | yes | refused at L1 |
+| hole-malformed | hole | absent | yes | refused at L1 |
+| corpus-unmentioned | corpus | absent | yes | refused at L1 |
+| corpus-address-phrase | corpus | absent | yes | refused at L1 |
+| study-unknown | study | absent | yes | refused at L1 |
+| sequence-unheld | sequence | absent | yes | refused at L1 |
+| tool-rule30-claim-open | tool | ill-formed | no | refused at L1 |
+| sequence-next-junction | sequence | absent | yes | refused at L1 |
+| nearest-address-ambiguous | nearest | absent | yes | refused at L3 |
+| nearest-tie-contradicted | nearest | absent | yes | refused at L3 |
+| nearest-tie-no-tie | nearest | absent | yes | refused at L3 |
+| scales-different-quantity | ordering | absent | yes | refused at L1 |
+| scales-quantity-with-holes | extremum | absent | yes | refused at L1 |
+
+15 of 50 declared refusals are non-escalatable, decided by 14 declared markers before any rung above the first is run.  The 35 that were climbed — describe-unknown-word, report-unknown-subject, field-unknown-field, field-missing-value, field-unknown-row, ordering-nominal, ordering-across-scales, ordering-unreadable, extremum-holes, extremum-two-tables, extremum-nominal, extremum-absent, carrier-tie, carrier-flagged, carrier-not-a-word, carrier-tag-width, locate-uncertified, locate-ambiguous, locate-unknown, locate-junction-crowded, locate-dimension, locate-reply-contradicted, locate-reply-no-tie, hole-lattice-point, hole-malformed, corpus-unmentioned, corpus-address-phrase, study-unknown, sequence-unheld, sequence-next-junction, nearest-address-ambiguous, nearest-tie-contradicted, nearest-tie-no-tie, scales-different-quantity, scales-quantity-with-holes — are absences, and the ladder returned a refusal at the top of the tower for each of them, which is a stronger statement than the refusal at the first rung was.
 <!-- end generated -->
 
 ### 7.5 What the round establishes
 
 <!-- generated: queryesc-establishes -->
-The stored measurements of the escalation loop do not describe the modules as they now stand (`stale`), so nothing is reported here rather than a figure taken from code that has moved.  Run `python3 -m glm_universal.tools queryesc --write`.
+**Escalation is a step of the loop and costs nothing where it is not needed.**  All 181 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
+
+**A refusal now carries its layer.**  Every refusal reports the rung it was made at and whether the ladder was climbed; 2 of the probes return an absence certified within 2 edits of an enumerated index, which is a refusal that knows its own radius rather than a shrug.
+
+**The rule against converting a principled refusal holds, and it bites.**  15 of the 50 declared refusals are non-escalatable and are never climbed; none of them is answered at any rung.
+
+**The loop has instances rather than only machinery.**  4 declared probes resolve above the first rung: one by resolving a constant through the reference layer, the rest by a lookup that names its layer.  Each is reported as more expensive than a direct answer, which is the point of charging for rungs.
 <!-- end generated -->
+
+### 7.6 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement was
+taken again (`tools queryesc --write`) after the October 2026 reorganisation,
+when the evaluation had grown to 227 cases (the four lookup kinds `corpus`,
+`tool`, `study` and `sequence` and their cases among them). Both gates hold as
+recorded:
+
+| figure | the stored measurement before (223 cases) | re-measured (227 cases) |
+|---|---|---|
+| evaluation cases | 223 | 227 |
+| answered directly | 174 | 180 |
+| answers moved by the loop | 0 | 0 |
+| answers costing more than the first rung | 0 | 0 |
+| principled refusals converted | 0 | 0 |
+| declared probes, answered, resolved above the first rung | 18, 8, 4 | 18, 8, 4 |
+| certified absences | 2 | 2 |
+| declared refusals classified | 46 (31 absent, 8 ungrounded, 4 ill-formed, 1 underdetermined) | 48 (34 absent, 8 ungrounded, 3 ill-formed, 1 underdetermined) |
+
+The six newly answered cases are `report-retrieval` and five of the new
+lookup cases (`corpus-define`, `corpus-continue`, `corpus-address`,
+`study-card`, `sequence-fibonacci`); `corpus-unmentioned` is now classified an
+absence rather than ill-formed, and `study-unknown` and `sequence-unheld` are
+new absences.
+
+### 7.7 Re-measured on 1 November 2026
+
+*Added 1 November 2026 (Phase 186: re-measured).* Taken again (`tools queryesc
+--write`) after Phase 186 added ten cases for the intake items absorbed ahead
+of the build (`tool rule30`, `tool conjecture`, `tool derive`, the sequence
+kind's `next` reading and the plan search behind `tool arc`). Both gates hold
+as recorded:
+
+| figure | the stored measurement before (227 cases) | re-measured (237 cases) |
+|---|---|---|
+| evaluation cases | 227 | 237 |
+| answered directly | 180 | 181 |
+| answers moved by the loop | 0 | 0 |
+| answers costing more than the first rung | 0 | 0 |
+| principled refusals converted | 0 | 0 |
+| declared probes, answered, resolved above the first rung | 18, 8, 4 | 18, 8, 4 |
+| certified absences | 2 | 2 |
+| declared refusals classified | 48 (34 absent, 8 ungrounded, 3 ill-formed, 1 underdetermined) | 50 (35 absent, 8 ungrounded, 4 ill-formed, 1 underdetermined) |
+
+The one newly answered case is `sequence-next-catalan`. The eight new `tool`
+cases are put in English: the command line answers seven of them by its
+phrased tool route (Phase 136), after every other surface refuses, and refuses
+the eighth, the open Rule 30 claim. The session this study reads does not take
+that route, so the seven count here as not answered directly, and none
+moves. `tool-rule30-claim-open` is classified ill-formed
+and `sequence-next-junction` an absence.
 
 ---
 

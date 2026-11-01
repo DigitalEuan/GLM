@@ -1,0 +1,181 @@
+{
+ "round": 34,
+ "frontier": "GLM.Rule30.TestCountPeriodsData.frontier_round34",
+ "narrowest": [
+  "HalfLineDies2",
+  "TestCountLinear2",
+  "AmortizedHalving241"
+ ],
+ "items": [
+  {
+   "id": 34,
+   "title": "Halving on the observer's clock",
+   "kind": "EMP -> Lean",
+   "status": "partly R33",
+   "bears_on": "TestCountLinear2",
+   "target": "TestHalving p e: for every word of period p, at most 2^(d-1+e) / 2^m codes of length d are alive m tests after the edge (implies TestCountLinear p (e + 1))",
+   "finite_step": "extend the halving certificates (period 2 beyond d = 18, period 3 with its growing excess) and find a per-test halving mechanism; TestHalving.lean, TestHalvingData.lean",
+   "script": "gcc -O2 -o test_halving34 scripts/test_halving34.c && ./test_halving34 4 24",
+   "cost": 3
+  },
+  {
+   "id": 29,
+   "title": "The sideways reader for period 2",
+   "kind": "Lean",
+   "status": "partly R33",
+   "bears_on": "HalfLineDies2",
+   "target": "an invariant of the sideways map, preserved for admissible inputs, that excludes finite rows",
+   "finite_step": "search low-degree Boolean invariants of consecutive column pairs of the reconstruction in the free bits (columns 1-5 are in closed form: SidewaysTwo.col2_even ... col5_even)",
+   "script": "python3 scripts/sideways_period_two.py",
+   "cost": 3
+  },
+  {
+   "id": 27,
+   "title": "Beyond Occam",
+   "kind": "GLM",
+   "status": "open",
+   "bears_on": null,
+   "target": "fewer wrong answers on a fresh held-out puzzle set with no regression",
+   "finite_step": "implement 'prefer plans whose fitted maps are total on the query keys' and score once on a fresh frozen set",
+   "script": "python3 rule30_round30/pipeline_bench.py",
+   "cost": 3
+  },
+  {
+   "id": 31,
+   "title": "Eight to twelve defects",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": null,
+   "target": "the M24 orbits of 8-12 marked cells, each equal to an explicit set",
+   "finite_step": "separating invariants (octad intersection profile) plus checked orbit certificates (certOK)",
+   "script": "cc -O2 scripts/m24_orbit_census.c && ./a.out",
+   "cost": 3
+  },
+  {
+   "id": 33,
+   "title": "MOG subgroups",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": null,
+   "target": "generators of the sextet, octad and trio stabilisers in the GLM labelling, with certified orbits",
+   "finite_step": "deterministic generator search, then certOK certificates",
+   "script": "python3 scripts/m24_search.py",
+   "cost": 4
+  },
+  {
+   "id": 32,
+   "title": "The geometry side of the M24 idea",
+   "kind": "Lean/GLM",
+   "status": "open",
+   "bears_on": null,
+   "target": "the intersection of a target geometry's site permutations with the laid-out M24",
+   "finite_step": null,
+   "ask": "which 24-site geometry (diamond supercell shape, lattice, ARC grid) should be laid out?",
+   "cost": 3
+  },
+  {
+   "id": 1,
+   "title": "Period-2 rung, uniformly in d",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": "HalfLineDies2",
+   "target": "HalfLineDies 2 (or TestCountLinear 2 c, AmortizedHalving 2 c e, HalfLineLinear 2 a b for all d)",
+   "finite_step": null,
+   "cost": 5
+  },
+  {
+   "id": 5,
+   "title": "The strobe lens, one stride at a time",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": "SeedAPBalanced",
+   "target": "SeedAPBalanced for one stride",
+   "finite_step": null,
+   "cost": 5
+  },
+  {
+   "id": 13,
+   "title": "The automaticity rung",
+   "kind": "Lean",
+   "status": "partly",
+   "bears_on": null,
+   "target": "CentreNotTwoAutomatic (an infinite 2-kernel)",
+   "finite_step": null,
+   "cost": 5
+  },
+  {
+   "id": 14,
+   "title": "The OR-type class",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": null,
+   "target": "non-periodicity of one centre column among wheels 30, 45, 75, 135",
+   "finite_step": null,
+   "cost": 5
+  },
+  {
+   "id": 16,
+   "title": "The tuning excess",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": "P1",
+   "target": "any EchoLogBound a b for all n",
+   "finite_step": null,
+   "cost": 5
+  },
+  {
+   "id": 20,
+   "title": "A useful finite quotient",
+   "kind": "Lean",
+   "status": "negative R31",
+   "bears_on": "HalfLineDies2",
+   "target": "a measure on the prefix tree",
+   "finite_step": null,
+   "cost": 5
+  },
+  {
+   "id": 30,
+   "title": "Word families with long lives",
+   "kind": "EMP -> Lean",
+   "status": "done R33",
+   "bears_on": "HalfLineDies2",
+   "target": "Lmax_w(d)/d bounded per word: the observer-clock law",
+   "finite_step": null,
+   "cost": 0
+  },
+  {
+   "id": 35,
+   "title": "Does period 4 have a finite observer-clock slack?",
+   "kind": "EMP -> Lean",
+   "status": "partly R34",
+   "bears_on": "TestCountLinear2",
+   "target": "TestCountLinear 4 7 for every d (least slack 7 is exact on d <= 30, frontier_round34); no refuting family seen: no word exceeds 7 to d = 37, the record words stay within 7 to d = 102 (C328)",
+   "finite_step": null,
+   "script": "./test_slack34 4 14 1 120",
+   "cost": 2,
+   "ask": null
+  },
+  {
+   "id": 36,
+   "title": "Why the excess drifts down for words with many tests",
+   "kind": "EMP -> Lean",
+   "status": "open (new R34)",
+   "bears_on": "TestCountLinear2",
+   "target": "a per-test statement after the edge: for words with two adjacent black cells the alive count falls by more than half per test on average (C329), which would give TestHalving with excess 0 eventually",
+   "finite_step": "measure the exact alive counts A_d(n) per test after the edge for 110 and 0111 (extend test_halving34.c, which reports the per-word halving excess, to print A_d(n)) and fit the decay rate",
+   "script": "gcc -O2 -o test_halving34 scripts/test_halving34.c && ./test_halving34 4 24",
+   "cost": 2
+  },
+  {
+   "id": 37,
+   "title": "A faster certificate checker (light-cone search in Lean)",
+   "kind": "Lean",
+   "status": "open (new R34)",
+   "bears_on": "TestCountLinear2",
+   "target": "a verified version of test_slack34.c's incremental light-cone search, so the slack certificates reach d = 40 (period 4) and d = 44 (period 2)",
+   "finite_step": "define the diagonal-by-diagonal search, prove it sound against dDiesBy, replace prefixSearch in tcWordCheck",
+   "script": "lake build RequestProject.GLM.Rule30.TestCountPeriodsData",
+   "cost": 4
+  }
+ ]
+}

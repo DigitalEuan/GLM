@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 12 of 12 marks met; 33 of 33 declared programs and refusals as declared (0 before); 680,064
@@ -10,24 +12,32 @@ deciding_figure: 12 of 12 marks met; 33 of 33 declared programs and refusals as 
   of 84,480 independent three-view reads resolved, 0 wrong; 346 open second errors for every first error
   and every frame.
 directives:
-- D15
 - D7
+- D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - tests/test_unpacking
+  - evaluation/unpacking_cases.py
+  - reasoning/python_speech.py
+  - reasoning/second_view.py
+  - runtime/unpacking_report.py
+  - tools.py
   lean:
+  - Golay/Sextet
   - OnDemandView
-  - Sextet
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: UNPACKING_RESCORE_STUDY.md
   test:
-  - test_unpacking_rescore.py
+  - test_unpacking.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: UNPACKING_RESCORE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -35,11 +45,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - U1
+  - U2
+  - U3
+  - U4
+  - U5
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  - R6
+  - R7
+  met:
+  - U1
+  - U2
+  - U3
+  - U4
+  - U5
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  - R6
+  - R7
   missed: []
 perturbations: []
-phase: 96
+phase: 97
 predecessors:
 - SECOND_VIEW_STUDY
 question: 'Phase 96 missed two of its nine marks, V8 and V4. Can the dialect be given argument unpacking
@@ -47,6 +81,7 @@ question: 'Phase 96 missed two of its nine marks, V8 and V4. Can the dialect be 
   declaration for independent faults in place of V4''s false analogy, and fewer view reads for the same
   answers?'
 recomputed_by: '`glm_universal.runtime.unpacking_report.unpacking_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

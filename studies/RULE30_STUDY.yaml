@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 428 ledger rows (259 FORMAL, 67 CERT, 9 EXH, 79 EMP, 4 DEF, 9 OPEN, 1 GLM) over 160 Lean
@@ -11,38 +13,40 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - corpus/inventory.py
   lean:
   - AxiomAuditAll
-  - Basic
-  - Benchmarks
-  - ColumnInverse
-  - ConjectureLoop
-  - Data
   - Escalation
-  - Frontier
-  - GLM
-  - LeftWhiteCompactness
-  - LocalRuleInduction
-  - MachineModel
-  - Observer
-  - Pipeline
-  - PlanSearch
-  - Prizes
-  - Problem3Quantifiers
+  - HypothesisEngine
+  - HypothesisEngine/Benchmarks
   - Rule30
+  - Rule30/Basic
+  - Rule30/ColumnInverse
+  - Rule30/ConjectureLoop
+  - Rule30/Frontier
+  - Rule30/LeftWhiteCompactness
+  - Rule30/LocalRuleInduction
+  - Rule30/MachineModel
+  - Rule30/Observer
+  - Rule30/Pipeline
+  - Rule30/PlanSearch
+  - Rule30/Prizes
+  - Rule30/Problem3Quantifiers
+  - Rule30/TuningByEar
+  - Rule30/WheelInduction
   - Rule30Study
-  - TuningByEar
-  - WheelInduction
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: RULE30_STUDY.md
-  test:
-  - test_rule30.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RULE30_STUDY
 junctions: []
-last_altered: '27 October 2026 (Round 49: the journey written up, the package tidied and prepared for
-  the GLM)'
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -59,6 +63,7 @@ predecessors: []
 question: What did the Rule 30 study establish about Wolfram's three prize problems, and what does it
   hand on to the GLM?
 recomputed_by: (hand-written argument; nothing to recompute)
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -83,7 +88,7 @@ sections:
   heading: 8. What is machine-checked
 - anchor: 9-where-it-is-reachable
   heading: 9. Where it is reachable
-status: negative
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

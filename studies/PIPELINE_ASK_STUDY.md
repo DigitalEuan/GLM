@@ -19,6 +19,8 @@
 the same day. The cross-check's third mark was narrowed after its first take
 (§7.3).*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ## 0. What this document is
 
 A study for Phase 176, taken at the owner's request of 21 October 2026, in two
@@ -27,7 +29,7 @@ parts.
 **Part 1, the late files.** Phase 175 brought the owner's pipeline kit into
 the GLM without five files its `README.md` names. They arrived this round and
 were placed in the kit's folder,
-[`source_material/GLM_Pipeline_Kit/`](../source_material/GLM_Pipeline_Kit/README.md),
+[`source_material/GLM_Pipeline_Kit/`](../source_material/done/GLM_Pipeline_Kit/README.md),
 as the owner asked: `python/tests/test_kit.py`, `python/run_pipeline_demo.py`,
 `GLMKit/AxiomAudit.lean`, and the Lean root `GLMKit.lean`, `lakefile.toml` and
 `lean-toolchain` (uploaded as `lean-toolchain.txt`, renamed back). The upload

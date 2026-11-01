@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -184,7 +186,7 @@ fifteen-bit tag `0x1a54`. The weight-4 error is coordinates 1, 9, 14, 22
 
 ## 7. The measurement
 
-`PYTHONPATH=. python3 -m glm_universal.tools protected-tag` (about two
+`PYTHONPATH=src python3 -m glm_universal.tools protected-tag` (about two
 minutes); `tests/test_carrier_read.py` pins every figure below.
 
 ### 7.1 The verdict

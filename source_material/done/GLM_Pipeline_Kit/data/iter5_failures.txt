@@ -1,0 +1,2202 @@
+Iteration 5 Failure Log
+Total failures: 200
+
+--- Failure 1 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 2 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 3 ---
+  type: rule_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 4 ---
+  type: lattice_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 5 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 6 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 7 ---
+  type: rule_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 8 ---
+  type: lattice_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 9 ---
+  type: rule_misclassification
+  sample_idx: 40
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 10 ---
+  type: lattice_misclassification
+  sample_idx: 40
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 11 ---
+  type: rule_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 12 ---
+  type: lattice_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 13 ---
+  type: rule_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 14 ---
+  type: lattice_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 15 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 16 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 17 ---
+  type: rule_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 18 ---
+  type: lattice_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 19 ---
+  type: rule_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 20 ---
+  type: lattice_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 21 ---
+  type: rule_misclassification
+  sample_idx: 58
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 22 ---
+  type: lattice_misclassification
+  sample_idx: 58
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 23 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 24 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 25 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 26 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 27 ---
+  type: rule_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 28 ---
+  type: lattice_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 29 ---
+  type: rule_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 30 ---
+  type: lattice_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 31 ---
+  type: rule_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 32 ---
+  type: lattice_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 33 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 34 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 35 ---
+  type: rule_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 36 ---
+  type: lattice_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 37 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 38 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 39 ---
+  type: rule_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 40 ---
+  type: lattice_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 41 ---
+  type: rule_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 42 ---
+  type: lattice_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 43 ---
+  type: rule_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 44 ---
+  type: lattice_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 45 ---
+  type: rule_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 46 ---
+  type: lattice_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 47 ---
+  type: rule_misclassification
+  sample_idx: 87
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 48 ---
+  type: lattice_misclassification
+  sample_idx: 87
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 49 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 50 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 51 ---
+  type: rule_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 52 ---
+  type: lattice_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 53 ---
+  type: rule_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 54 ---
+  type: lattice_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 55 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 56 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 57 ---
+  type: rule_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 58 ---
+  type: lattice_misclassification
+  sample_idx: 17
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 59 ---
+  type: rule_misclassification
+  sample_idx: 18
+  task: reflect_v
+  n_ones: 6
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 60 ---
+  type: lattice_misclassification
+  sample_idx: 18
+  task: reflect_v
+  n_ones: 6
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 61 ---
+  type: rule_misclassification
+  sample_idx: 19
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 62 ---
+  type: lattice_misclassification
+  sample_idx: 19
+  task: reflect_v
+  n_ones: 4
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 63 ---
+  type: rule_misclassification
+  sample_idx: 42
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 64 ---
+  type: lattice_misclassification
+  sample_idx: 42
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 65 ---
+  type: rule_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 66 ---
+  type: lattice_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 67 ---
+  type: rule_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 68 ---
+  type: lattice_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 69 ---
+  type: rule_misclassification
+  sample_idx: 48
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 70 ---
+  type: lattice_misclassification
+  sample_idx: 48
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 71 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 72 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 73 ---
+  type: rule_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 74 ---
+  type: lattice_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 75 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 76 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 77 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 78 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 79 ---
+  type: rule_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 80 ---
+  type: lattice_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 81 ---
+  type: rule_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 82 ---
+  type: lattice_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 83 ---
+  type: rule_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 84 ---
+  type: lattice_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 85 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 86 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 87 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 88 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 89 ---
+  type: rule_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 90 ---
+  type: lattice_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 91 ---
+  type: rule_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 92 ---
+  type: lattice_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 93 ---
+  type: rule_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 94 ---
+  type: lattice_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 95 ---
+  type: rule_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 96 ---
+  type: lattice_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 97 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 98 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 99 ---
+  type: rule_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 100 ---
+  type: lattice_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 101 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 102 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 103 ---
+  type: rule_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 104 ---
+  type: lattice_misclassification
+  sample_idx: 43
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 105 ---
+  type: rule_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 106 ---
+  type: lattice_misclassification
+  sample_idx: 47
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 107 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 108 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 109 ---
+  type: rule_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 110 ---
+  type: lattice_misclassification
+  sample_idx: 51
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 111 ---
+  type: rule_misclassification
+  sample_idx: 52
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 112 ---
+  type: lattice_misclassification
+  sample_idx: 52
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 113 ---
+  type: rule_misclassification
+  sample_idx: 55
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 114 ---
+  type: lattice_misclassification
+  sample_idx: 55
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 115 ---
+  type: rule_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 116 ---
+  type: lattice_misclassification
+  sample_idx: 57
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 117 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 118 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 119 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 120 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 121 ---
+  type: rule_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 122 ---
+  type: lattice_misclassification
+  sample_idx: 70
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 123 ---
+  type: rule_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 124 ---
+  type: lattice_misclassification
+  sample_idx: 71
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 125 ---
+  type: rule_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 126 ---
+  type: lattice_misclassification
+  sample_idx: 72
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 127 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 128 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 129 ---
+  type: rule_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 130 ---
+  type: lattice_misclassification
+  sample_idx: 76
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 131 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 132 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: toggle
+  n_ones: 9
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 133 ---
+  type: rule_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 134 ---
+  type: lattice_misclassification
+  sample_idx: 82
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 135 ---
+  type: rule_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 136 ---
+  type: lattice_misclassification
+  sample_idx: 83
+  task: toggle
+  n_ones: 11
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 137 ---
+  type: rule_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 138 ---
+  type: lattice_misclassification
+  sample_idx: 84
+  task: toggle
+  n_ones: 21
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 139 ---
+  type: rule_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 140 ---
+  type: lattice_misclassification
+  sample_idx: 85
+  task: toggle
+  n_ones: 15
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 141 ---
+  type: rule_misclassification
+  sample_idx: 1
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 142 ---
+  type: lattice_misclassification
+  sample_idx: 1
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 143 ---
+  type: rule_misclassification
+  sample_idx: 4
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 144 ---
+  type: lattice_misclassification
+  sample_idx: 4
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 145 ---
+  type: rule_misclassification
+  sample_idx: 5
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 146 ---
+  type: lattice_misclassification
+  sample_idx: 5
+  task: toggle
+  n_ones: 12
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 147 ---
+  type: rule_misclassification
+  sample_idx: 7
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 148 ---
+  type: lattice_misclassification
+  sample_idx: 7
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 149 ---
+  type: rule_misclassification
+  sample_idx: 8
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 150 ---
+  type: lattice_misclassification
+  sample_idx: 8
+  task: toggle
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 151 ---
+  type: rule_misclassification
+  sample_idx: 9
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 152 ---
+  type: lattice_misclassification
+  sample_idx: 9
+  task: toggle
+  n_ones: 16
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 153 ---
+  type: rule_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 154 ---
+  type: lattice_misclassification
+  sample_idx: 11
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 155 ---
+  type: rule_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 156 ---
+  type: lattice_misclassification
+  sample_idx: 13
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 157 ---
+  type: rule_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 158 ---
+  type: lattice_misclassification
+  sample_idx: 15
+  task: reflect_v
+  n_ones: 5
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 159 ---
+  type: rule_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 160 ---
+  type: lattice_misclassification
+  sample_idx: 16
+  task: reflect_v
+  n_ones: 7
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 161 ---
+  type: rule_misclassification
+  sample_idx: 40
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 162 ---
+  type: lattice_misclassification
+  sample_idx: 40
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 163 ---
+  type: rule_misclassification
+  sample_idx: 45
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 164 ---
+  type: lattice_misclassification
+  sample_idx: 45
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 165 ---
+  type: rule_misclassification
+  sample_idx: 48
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 166 ---
+  type: lattice_misclassification
+  sample_idx: 48
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 167 ---
+  type: rule_misclassification
+  sample_idx: 50
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 168 ---
+  type: lattice_misclassification
+  sample_idx: 50
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 169 ---
+  type: rule_misclassification
+  sample_idx: 53
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 170 ---
+  type: lattice_misclassification
+  sample_idx: 53
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 171 ---
+  type: rule_misclassification
+  sample_idx: 60
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 172 ---
+  type: lattice_misclassification
+  sample_idx: 60
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 173 ---
+  type: rule_misclassification
+  sample_idx: 62
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 174 ---
+  type: lattice_misclassification
+  sample_idx: 62
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 175 ---
+  type: rule_misclassification
+  sample_idx: 63
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 176 ---
+  type: lattice_misclassification
+  sample_idx: 63
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 177 ---
+  type: rule_misclassification
+  sample_idx: 66
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 178 ---
+  type: lattice_misclassification
+  sample_idx: 66
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 179 ---
+  type: rule_misclassification
+  sample_idx: 69
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 180 ---
+  type: lattice_misclassification
+  sample_idx: 69
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 181 ---
+  type: rule_misclassification
+  sample_idx: 73
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 182 ---
+  type: lattice_misclassification
+  sample_idx: 73
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 183 ---
+  type: rule_misclassification
+  sample_idx: 74
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 184 ---
+  type: lattice_misclassification
+  sample_idx: 74
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 185 ---
+  type: rule_misclassification
+  sample_idx: 75
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 186 ---
+  type: lattice_misclassification
+  sample_idx: 75
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 187 ---
+  type: rule_misclassification
+  sample_idx: 76
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 188 ---
+  type: lattice_misclassification
+  sample_idx: 76
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 189 ---
+  type: rule_misclassification
+  sample_idx: 77
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 190 ---
+  type: lattice_misclassification
+  sample_idx: 77
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 191 ---
+  type: rule_misclassification
+  sample_idx: 81
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 192 ---
+  type: lattice_misclassification
+  sample_idx: 81
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 193 ---
+  type: rule_misclassification
+  sample_idx: 86
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 194 ---
+  type: lattice_misclassification
+  sample_idx: 86
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 195 ---
+  type: rule_misclassification
+  sample_idx: 87
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 196 ---
+  type: lattice_misclassification
+  sample_idx: 87
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 197 ---
+  type: rule_misclassification
+  sample_idx: 88
+  task: translate
+  n_ones: 10
+  parity: even
+  true_rule: 0
+  pred_rule: 3
+  true_lattice: Leech_24
+  reason: model predicted wrong rule for this target
+
+--- Failure 198 ---
+  type: lattice_misclassification
+  sample_idx: 88
+  task: translate
+  n_ones: 10
+  parity: even
+  true_lattice: Leech_24
+  pred_lattice_idx: 1
+  pred_lattice: Barnes_Wall_32
+  reason: model predicted wrong lattice layer for this target
+
+--- Failure 199 ---
+  type: rule_misclassification
+  sample_idx: 0
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_rule: 3
+  pred_rule: 0
+  true_lattice: Barnes_Wall_32
+  reason: model predicted wrong rule for this target
+
+--- Failure 200 ---
+  type: lattice_misclassification
+  sample_idx: 0
+  task: toggle
+  n_ones: 13
+  parity: odd
+  true_lattice: Barnes_Wall_32
+  pred_lattice_idx: 0
+  pred_lattice: Leech_24
+  reason: model predicted wrong lattice layer for this target

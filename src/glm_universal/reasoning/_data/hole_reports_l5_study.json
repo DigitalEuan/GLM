@@ -1,0 +1,235 @@
+{
+ "frozen": {
+  "asked": 0,
+  "baseline": "absent",
+  "cases": 0,
+  "moved": [],
+  "new_cases": [],
+  "prefix_broken": [],
+  "prefix_cases": 3,
+  "prefix_kept": 0,
+  "present": 0,
+  "reason": "hole_l5_baseline.json: baseline lost in the October 2026 reorganisation; a new baseline needs a frozen-path comparison before the answering path moves again",
+  "same_status": 0,
+  "same_text": 0,
+  "undeclared": []
+ },
+ "lean": {
+  "declared": 4,
+  "file": "RequestProject/GLM/HoleReportsL5.lean",
+  "met": true,
+  "present": true,
+  "sorry": 0,
+  "theorems": 4
+ },
+ "marks": {
+  "C1": true,
+  "D1": true,
+  "E1": true,
+  "F1": false,
+  "Q1": true,
+  "R1": true
+ },
+ "met": 5,
+ "questions": {
+  "answered": 4,
+  "clause_reports": 3,
+  "clauses": 3,
+  "mutants": 8,
+  "mutants_rejected": 8,
+  "mutants_unformed": 0,
+  "questions": 4,
+  "rows": [
+   {
+    "answered": true,
+    "clause": true,
+    "mutants": [
+     {
+      "key": "correct",
+      "rejected": true
+     },
+     {
+      "key": "l5_correct",
+      "rejected": true
+     }
+    ],
+    "question": "report hole classifier",
+    "script": true
+   },
+   {
+    "answered": true,
+    "clause": true,
+    "mutants": [
+     {
+      "key": "best_q0",
+      "rejected": true
+     },
+     {
+      "key": "l5_passing",
+      "rejected": true
+     }
+    ],
+    "question": "report hole ladder",
+    "script": true
+   },
+   {
+    "answered": true,
+    "clause": true,
+    "mutants": [
+     {
+      "key": "correct",
+      "rejected": true
+     },
+     {
+      "key": "l5_failures_correct",
+      "rejected": true
+     }
+    ],
+    "question": "report hole failures",
+    "script": true
+   },
+   {
+    "answered": true,
+    "clause": null,
+    "mutants": [
+     {
+      "key": "correct",
+      "rejected": true
+     },
+     {
+      "key": "queries",
+      "rejected": true
+     }
+    ],
+    "question": "report hole configuration",
+    "script": true
+   }
+  ],
+  "scripts": 4
+ },
+ "readings": {
+  "classifier": {
+   "absences": 396,
+   "answered": 44,
+   "available": true,
+   "correct": 44,
+   "false_absences": 0,
+   "queries": 44,
+   "refused": 0,
+   "sanity_holds": true,
+   "seed_correct": 10,
+   "seed_queries": 10,
+   "starts": 1920,
+   "within_answered": 44,
+   "within_radius": 44,
+   "wrong": 0
+  },
+  "failures": {
+   "available": true,
+   "joint_failures": 4,
+   "l5_correct": 4,
+   "l5_refused": 0,
+   "l5_wrong": 0,
+   "locally_certified": 10,
+   "names": [
+    "hole 5 · translation",
+    "hole 7 · translation",
+    "hole 9 · negation",
+    "hole 9 · permutation"
+   ],
+   "names_as_recorded": true,
+   "rho": "15518751299/50912000095",
+   "rho_below_one": true,
+   "starts": 1920,
+   "types": 10
+  },
+  "ladder": {
+   "available": true,
+   "cells": [
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "59972/77211",
+     "ratio_below_one": true,
+     "starts": 240
+    },
+    {
+     "gate": 10,
+     "locally_certified": 9,
+     "q0": 10,
+     "ratio": "5177162/4960415",
+     "ratio_below_one": false,
+     "starts": 480
+    },
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "41249421325/52584019421",
+     "ratio_below_one": true,
+     "starts": 960
+    },
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "15518751299/50912000095",
+     "ratio_below_one": true,
+     "starts": 1920
+    },
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "1296075136/5083248755",
+     "ratio_below_one": true,
+     "starts": 3840
+    },
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "6109000/35521317",
+     "ratio_below_one": true,
+     "starts": 7680
+    },
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "2218755348075/19890468967993",
+     "ratio_below_one": true,
+     "starts": 15360
+    },
+    {
+     "gate": 10,
+     "locally_certified": 10,
+     "q0": 10,
+     "ratio": "448792276349039/3558689702732502",
+     "ratio_below_one": true,
+     "starts": 30720
+    }
+   ],
+   "joint_first_passing": 1920,
+   "passes_without_criterion": [
+    480
+   ],
+   "passing": 8,
+   "sizes": 8,
+   "smallest_passing": 240,
+   "starts": [
+    240,
+    480,
+    960,
+    1920,
+    3840,
+    7680,
+    15360,
+    30720
+   ]
+  }
+ },
+ "source_digest": "1900de9c795debcecac3e67fd642de42ea8937b6a3428f3ba61059a8f0b50749",
+ "taken": 6
+}

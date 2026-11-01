@@ -20,6 +20,11 @@ that matter while it is in there:
 The tool registry, the parser and the budget are checked cheaply.  The two
 readings that run the whole evaluation set are marked ``exhaustive``:
 they certify rather than sample, and the sign-off runner turns them on.
+
+*Last altered 1 November 2026 (repository check): the two exhaustive
+fallback readings re-counted over the 227 evaluation cases (37 refusals reach
+the planner, all stop, three marked ill formed); and again at Phase 186, over
+237 cases (46 reach the planner, all stop, nine marked ill formed).*
 """
 
 from __future__ import annotations
@@ -269,8 +274,21 @@ def test_the_fallback_is_measured_over_the_whole_evaluation_set(report):
     #  with holes in it), and twenty since the carrier query kind (Phase
     #  134) added its four (an open six-way tie, a tag that contradicts every
     #  candidate, a value wider than 24 bits and a tag wider than 7 bits).
+    #  Thirty-seven since the later kinds added theirs (re-read 1 November
+    #  2026, at 227 cases: locate 7, nearest 3, hole 2, corpus 2, study 1,
+    #  sequence 1, and the tool question `tool-leech-norm-12`, which the
+    #  session refuses and the command line then answers through the
+    #  toolbox).  The owner's sign-off of 13 October 2026 already recorded
+    #  this file failing on the old count of twenty.
+    #  Forty-six since Phase 186 (re-read 1 November 2026, at 237 cases):
+    #  seven tool questions the session refuses and the command line answers
+    #  through the toolbox (`tool-rule30-centre`, `tool-rule30-claim-refuted`,
+    #  `tool-conjecture-refuted`, `tool-conjecture-survives`,
+    #  `tool-derive-law`, `tool-derive-not-a-law`, `tool-arc-plan-search`),
+    #  and two refusals the evaluation expects (`tool-rule30-claim-open`,
+    #  `sequence-next-junction`).
     #  The measurement moved with the evaluation set; what it says did not.
-    assert fallback["planner_consulted"] == 20
+    assert fallback["planner_consulted"] == 46
     assert fallback["gained"] == ()
     assert fallback["principled_refusals_offered_to_the_planner"] == ()
     assert fallback["safety_holds"] is True
@@ -313,8 +331,8 @@ def test_the_gate_is_measured_against_a_set_the_module_did_not_choose():
 
 
 @pytest.mark.exhaustive
-def test_the_by_product_is_two_questions_the_shipped_classifier_does_not_mark():
-    """The planner marks two refusals ill formed that the shipped list misses.
+def test_the_by_product_is_the_questions_the_shipped_classifier_does_not_mark():
+    """The planner marks refusals ill formed that the shipped list misses.
 
     Sixteen refusals reach the planner since the declared conversion table
     added two to the extremum kind's four, the ordering kind's three and the
@@ -322,17 +340,44 @@ def test_the_by_product_is_two_questions_the_shipped_classifier_does_not_mark():
     the two it marked when four reached it, so the by-product is the same
     finding over a larger set each time the set grows.  The carrier kind
     (Phase 134) brought four more, twenty in all, and all twenty stop.
+
+    Re-read 1 November 2026 (repository check), at 227 cases: thirty-seven
+    reach the planner and all thirty-seven stop.  The planner marks three:
+    the two it always marked, and the tool question on the Leech lattice's
+    norm-12 shell, which the session refuses (the command line answers it
+    through the toolbox afterwards, so the evaluation counts it answered).
+    The owner's sign-off of 13 October 2026 already recorded this file
+    failing on the old counts.
+
+    Re-read 1 November 2026 (Phase 186), at 237 cases: forty-six reach the
+    planner and all forty-six stop.  The planner marks nine: the three
+    above, and six of the nine questions Phase 186 added -- the Rule 30
+    centre column, the two Rule 30 diagonal claims, the two conjectures over
+    every n, and the ARC task.  Five of those six the session refuses and
+    the command line answers through the toolbox, like the Leech question;
+    the evaluation expects the open Rule 30 claim refused.  The two
+    derivation questions and the two-term sequence are not marked.
     """
     rows = [row for row in pl.fallback_rows() if row["planner_consulted"]]
-    assert len(rows) == 20
+    assert len(rows) == 46
     stopped = [row for row in rows
                if not row["planner_answered"]
                and row["refusal_tag"] == esl.ESCALATABLE]
-    assert len(stopped) == 20
+    assert len(stopped) == 46
     marked_by_the_planner = [row["question"] for row in stopped
                              if pl.ask(str(row["question"])).refusal_tag
                              != esl.ESCALATABLE]
-    assert len(marked_by_the_planner) == 2
+    assert sorted(marked_by_the_planner) == sorted([
+        "trilinear 1 2 3",
+        "please compute the square root of a banana",
+        "the number of vectors of norm 12 in the leech lattice",
+        "what are the first 20 cells of rule 30's centre column",
+        "in rule 30, every left diagonal has eventual period dividing 8",
+        "in rule 30, the periods of the left diagonals are unbounded",
+        "is n^2 + n + 41 prime for every n",
+        "check the conjecture that 6 divides n^3 - n for every n",
+        "solve the arc task d631b094",
+    ])
 
 
 # ---------------------------------------------------------------------------

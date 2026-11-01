@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: <!--figure:conversation-as-declared-->15<!--/figure--> of <!--figure:conversation-declared-count-->15<!--/figure-->
@@ -11,22 +13,30 @@ deciding_figure: <!--figure:conversation-as-declared-->15<!--/figure--> of <!--f
   named reasons, against <!--figure:conversation-alone-->0<!--/figure--> answered without the conversation.
 directives:
 - D15
-- D8
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - tests/test_conversation
+  - reasoning/role_binding.py
+  - runtime/conversation.py
+  - runtime/plan_store.py
+  - tools.py
   lean:
   - Conversation
+  - PlanStore
+  - RoleBinding
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CONVERSATION_STUDY.md
   test:
   - test_conversation.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CONVERSATION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,12 +48,14 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 54
 predecessors: []
 question: A round's worth of supplied material builds a conversational GLM on top of this substrate. Run
   against the package as it is now, what in it is real, and what does the one operation worth keeping
   answer and refuse?
 recomputed_by: '`glm_universal.runtime.conversation.conversation_report`'
+related:
+- SUPPLIED_PORTS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -71,7 +83,8 @@ sections:
 - anchor: 10-re-running-it
   heading: 10. Re-running it
 status: closed
-successors: []
+successors:
+- DISCOURSE_STATE_STUDY
 superseded_by: ''
 supersedes: []
 title: The turn that refers back — what the supplied conversation material was worth, and what licensing

@@ -1,0 +1,275 @@
+{
+ "lean": "GLM.Rule30.PipelineData.frontier_round30",
+ "frontier": [
+  {
+   "family": "HalfLineLinear",
+   "period": 2,
+   "param_name": "a",
+   "param": 1,
+   "offset": 20,
+   "range": 20,
+   "lean": "GLM.Rule30.PipelineData.sharp_2_1_20"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 2,
+   "param_name": "a",
+   "param": 2,
+   "offset": 9,
+   "range": 20,
+   "lean": "GLM.Rule30.PipelineData.sharp_2_2_9"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 2,
+   "param_name": "a",
+   "param": 3,
+   "offset": 5,
+   "range": 20,
+   "lean": "GLM.Rule30.PipelineData.sharp_2_3_5"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 2,
+   "param_name": "a",
+   "param": 4,
+   "offset": 4,
+   "range": 20,
+   "lean": "GLM.Rule30.PipelineData.sharp_2_4_4"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 2,
+   "param_name": "a",
+   "param": 5,
+   "offset": 3,
+   "range": 20,
+   "lean": "GLM.Rule30.PipelineData.sharp_2_5_3"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 2,
+   "param_name": "a",
+   "param": 6,
+   "offset": 2,
+   "range": 20,
+   "lean": "GLM.Rule30.PipelineData.sharp_2_6_2"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 3,
+   "param_name": "a",
+   "param": 1,
+   "offset": 39,
+   "range": 18,
+   "lean": "GLM.Rule30.PipelineData.sharp_3_1_39"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 3,
+   "param_name": "a",
+   "param": 2,
+   "offset": 21,
+   "range": 18,
+   "lean": "GLM.Rule30.PipelineData.sharp_3_2_21"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 3,
+   "param_name": "a",
+   "param": 3,
+   "offset": 7,
+   "range": 18,
+   "lean": "GLM.Rule30.PipelineData.sharp_3_3_7"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 3,
+   "param_name": "a",
+   "param": 4,
+   "offset": 4,
+   "range": 18,
+   "lean": "GLM.Rule30.PipelineData.sharp_3_4_4"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 3,
+   "param_name": "a",
+   "param": 5,
+   "offset": 3,
+   "range": 18,
+   "lean": "GLM.Rule30.PipelineData.sharp_3_5_3"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 3,
+   "param_name": "a",
+   "param": 6,
+   "offset": 2,
+   "range": 18,
+   "lean": "GLM.Rule30.PipelineData.sharp_3_6_2"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 4,
+   "param_name": "a",
+   "param": 1,
+   "offset": 59,
+   "range": 16,
+   "lean": "GLM.Rule30.PipelineData.sharp_4_1_59"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 4,
+   "param_name": "a",
+   "param": 2,
+   "offset": 44,
+   "range": 16,
+   "lean": "GLM.Rule30.PipelineData.sharp_4_2_44"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 4,
+   "param_name": "a",
+   "param": 3,
+   "offset": 29,
+   "range": 16,
+   "lean": "GLM.Rule30.PipelineData.sharp_4_3_29"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 4,
+   "param_name": "a",
+   "param": 4,
+   "offset": 14,
+   "range": 16,
+   "lean": "GLM.Rule30.PipelineData.sharp_4_4_14"
+  },
+  {
+   "family": "HalfLineLinear",
+   "period": 4,
+   "param_name": "a",
+   "param": 5,
+   "offset": 9,
+   "range": 16,
+   "lean": "GLM.Rule30.PipelineData.sharp_4_5_9"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 2,
+   "param_name": "c",
+   "param": 1,
+   "offset": 11,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_2_1_11"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 2,
+   "param_name": "c",
+   "param": 2,
+   "offset": 3,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_2_2_3"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 2,
+   "param_name": "c",
+   "param": 3,
+   "offset": 2,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_2_3_2"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 2,
+   "param_name": "c",
+   "param": 4,
+   "offset": 1,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_2_4_1"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 3,
+   "param_name": "c",
+   "param": 1,
+   "offset": 14,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_3_1_14"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 3,
+   "param_name": "c",
+   "param": 2,
+   "offset": 4,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_3_2_4"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 3,
+   "param_name": "c",
+   "param": 3,
+   "offset": 2,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_3_3_2"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 3,
+   "param_name": "c",
+   "param": 4,
+   "offset": 1,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_3_4_1"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 4,
+   "param_name": "c",
+   "param": 1,
+   "offset": 19,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_4_1_19"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 4,
+   "param_name": "c",
+   "param": 2,
+   "offset": 6,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_4_2_6"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 4,
+   "param_name": "c",
+   "param": 3,
+   "offset": 4,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_4_3_4"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 4,
+   "param_name": "c",
+   "param": 4,
+   "offset": 3,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_4_4_3"
+  },
+  {
+   "family": "AmortizedHalving",
+   "period": 4,
+   "param_name": "c",
+   "param": 5,
+   "offset": 2,
+   "range": 12,
+   "lean": "GLM.Rule30.PipelineData.sharpA_4_5_2"
+  }
+ ]
+}

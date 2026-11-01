@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 4 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -153,7 +155,7 @@ after the measurement.
 
 ## 3. What was built
 
-* [`reasoning/reverse_tct_imp.py`](../glm_universal/reasoning/reverse_tct_imp.py)
+* [`reasoning/reverse_tct_imp.py`](../src/glm_universal/reasoning/reverse_tct_imp.py)
   — the imperative grammar: the realiser of §1 (each earlier term spelled
   through the earlier realisers, with its children realised here so that a
   nested call, choice or grammar-word name is spelled the imperative way), a
@@ -164,11 +166,11 @@ after the measurement.
   with the trace, the final values and the result in column 1, its own
   column-3 script (an interpreter of its own over the third sort's own script
   evaluator, lifted out of that script) and its mutation, and the battery.
-* [`reasoning/reverse_tct.py`](../glm_universal/reasoning/reverse_tct.py)
+* [`reasoning/reverse_tct.py`](../src/glm_universal/reasoning/reverse_tct.py)
   — `say` asks the imperative grammar only after the third sort cannot read
-  the text; [`reasoning/reverse_tct_script.py`](../glm_universal/reasoning/reverse_tct_script.py)
+  the text; [`reasoning/reverse_tct_script.py`](../src/glm_universal/reasoning/reverse_tct_script.py)
   dispatches a certificate of kind `say-imp` to its script.
-* [`runtime/imperative_report.py`](../glm_universal/runtime/imperative_report.py)
+* [`runtime/imperative_report.py`](../src/glm_universal/runtime/imperative_report.py)
   and `tools imperative` — the marks, and the post-hoc differential battery.
 * `RequestProject/GLM/ImperativeGrammar.lean` — §5.
 
@@ -290,9 +292,8 @@ only and no `sorry` (L):
 ## 7. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools imperative            # I1-I9
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_imperative_grammar.py
+PYTHONPATH=src python3 -m glm_universal.tools imperative            # I1-I9
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_imperative_grammar.py
 python3 GLM.py -q $'say: a, b = 1071, 462\nwhile b:\n    a, b = b, a % b\na'
 cd .. && lake build RequestProject.GLM.ImperativeGrammar           # L
 ```

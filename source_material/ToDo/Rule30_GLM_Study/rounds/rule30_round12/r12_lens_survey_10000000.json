@@ -1,0 +1,94 @@
+{
+ "centre": {
+  "plain wobble D(N)": [
+   4440,
+   1.4040512811147603
+  ],
+  "strobe max|z| (p<=16, 135 phases)": [
+   null,
+   2.6807567563016206
+  ],
+  "strobe chi2/dof worst p": [
+   15,
+   1.931199931199931
+  ],
+  "echo max|z| (lags 1..64)": [
+   46,
+   2.577262220747154
+  ],
+  "words k=4 chi2/dof": [
+   null,
+   0.922676376802913
+  ],
+  "words k=8 chi2/dof": [
+   null,
+   0.8868518643257168
+  ],
+  "words k=12 chi2/dof": [
+   null,
+   0.9795190083866602
+  ],
+  "Walsh max|z| (1023 window characters, width 10)": [
+   "0b1001000111",
+   3.4800881310553127
+  ],
+  "arrow: returns to D=0": [
+   339,
+   0.10720121267970806
+  ],
+  "arrow: fraction of time D>0": [
+   null,
+   0.9935251
+  ],
+  "Cesaro mean of D": [
+   null,
+   0.7514762397156064
+  ]
+ },
+ "control": {
+  "plain wobble D(N)": [
+   -522,
+   -0.16507089386078938
+  ],
+  "strobe max|z| (p<=16, 135 phases)": [
+   null,
+   2.600657147722475
+  ],
+  "strobe chi2/dof worst p": [
+   9,
+   1.3892522389252238
+  ],
+  "echo max|z| (lags 1..64)": [
+   6,
+   2.227509052075422
+  ],
+  "words k=4 chi2/dof": [
+   null,
+   0.6206858862057659
+  ],
+  "words k=8 chi2/dof": [
+   null,
+   0.8734828322222963
+  ],
+  "words k=12 chi2/dof": [
+   null,
+   0.9717427013223439
+  ],
+  "Walsh max|z| (1023 window characters, width 10)": [
+   "0b100011011",
+   -2.9443980543622006
+  ],
+  "arrow: returns to D=0": [
+   3307,
+   1.045765222217683
+  ],
+  "arrow: fraction of time D>0": [
+   null,
+   0.5533192
+  ],
+  "Cesaro mean of D": [
+   null,
+   0.07090385269586393
+  ]
+ }
+}

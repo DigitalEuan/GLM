@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -24,7 +26,7 @@ The owner asked for many more domains and wheels, and in particular for
 things out* — "like a sandbox, but more in the way we have the GLM learn the
 information as a language so it can reason with it" — starting from the
 supplied research note
-[`source_material/devops_ladder/DevOps-Ladder.txt`](../source_material/devops_ladder/DevOps-Ladder.txt),
+[`source_material/devops_ladder/DevOps-Ladder.txt`](../source_material/done/devops_ladder/DevOps-Ladder.txt),
 "but do what works properly for the GLM". This round is not on the To-Do list
 of [`STATUS.md`](../STATUS.md) §2.1; it is taken at the owner's direction, and
 the record says so.

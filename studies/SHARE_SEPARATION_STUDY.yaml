@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 3 of 6 marks met (H1–H3; H4–H6 missed); 16 of 16 ladder cells reproduced exactly; best
@@ -12,16 +14,20 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/share_ensemble
-  - reasoning/share_separation
-  - tests/test_share_separation
+  - reasoning/share_ensemble.py
+  - reasoning/share_separation.py
+  - tools.py
   lean:
   - ShareSeparation
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: SHARE_SEPARATION_STUDY.md
   test:
   - test_share_separation.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: SHARE_SEPARATION_STUDY
 junctions: []
 last_altered: ''
@@ -32,15 +38,31 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - H1
+  - H2
+  - H3
+  - H4
+  - H5
+  - H6
+  met:
+  - H1
+  - H2
+  - H3
+  missed:
+  - H4
+  - H5
+  - H6
 perturbations: []
-phase: 0
-predecessors: []
+phase: 121
+predecessors:
+- STRAY_BLIND_STUDY
 question: Does a share-carrying rung of the deep-hole ladder reach the separation criterion `ρ = 2W/B
   < 1`, and what bounds the share part's seed shift?
 recomputed_by: '`glm_universal.reasoning.share_separation.share_separation_report`'
+related:
+- CONFIGURATION_READING_STUDY
+- DEEP_HOLE_ESCALATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -64,7 +86,8 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- CONFIGURATION_READING_STUDY
 superseded_by: ''
 supersedes: []
 title: The separation criterion for the share-carrying rungs — lattice item 6

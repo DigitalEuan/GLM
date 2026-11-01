@@ -14,12 +14,18 @@ which is where ``self`` comes from: the loaded registers, the concept index
 and the shared helpers.  Splitting them out of the session keeps each family
 beside a docstring that says which sub-package computes it, and keeps the
 dispatcher readable as a dispatcher.
+
+*Last altered 31 October 2026 (repository check): Phase 149's L5 clauses
+restored in ``report hole classifier``, ``report hole ladder`` and ``report
+hole failures`` (:mod:`glm_universal.reasoning.hole_reports_l5`); the wiring
+was lost in the October 2026 reorganisation.*
 """
 from __future__ import annotations
 
 from ...reasoning import deep_hole_classifier as dhc
 from ...reasoning import deep_hole_escalation as esc
 from ...reasoning import deep_hole_failures as dhf
+from ...reasoning import hole_reports_l5 as hl5
 from ...reasoning import lattice_completion as ltc
 from ...reasoning import deep_holes as dhl
 from ...reasoning import facets as fa
@@ -547,6 +553,17 @@ class LatticeGeometryReports:
             "verdict": str(gate["verdict"]),
             "faithfulness_compatible": str(run["faithfulness_compatible"]),
         }
+        # Phase 149: the round's answer is kept verbatim and gains the clause
+        # saying what the configuration reading L5 answers to its question
+        l5 = hl5.classifier_reading()
+        expected.update(hl5.classifier_expected(l5))
+        clause = hl5.classifier_clause(l5)
+        l5_tail = "" if clause is None else "; " + clause
+        steps.append(Step(
+            "the same question read at L5",
+            "Phase 149 (studies/HOLE_REPORTS_L5_STUDY.md): the first round's question -- do the arrivals name the hole, stopped by the sanity query -- asked of the configuration reading L5 through its answer rule (GLM.HoleReportsL5.rule_sound); the round's own answer is a record and is not rewritten.",
+            clause if clause is not None else
+            "L5 reading unavailable: " + str(l5.get("reason", ""))))
         return Solution(
             query=query, kind="report",
             answer=f"report hole classifier: over {method['queries']} "
@@ -560,7 +577,7 @@ class LatticeGeometryReports:
                    f"because the pre-registered sanity query fails "
                    f"(sanity holds = {gate['sanity_holds']}) and the verdict "
                    f"fixed in advance for that case is "
-                   f"'{gate['verdict']}'",
+                   f"'{gate['verdict']}'{l5_tail}",
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_hole_classifier", "args": {}},
             payload={"report": {"types": table["size"],
@@ -649,6 +666,17 @@ class LatticeGeometryReports:
             "verdict": str(tree["verdict"]),
             "winner_is_extension": str(tree.get("winner_is_extension")),
         }
+        # Phase 149: the round's answer is kept verbatim and gains the clause
+        # saying what the configuration reading L5 answers to its question
+        l5 = hl5.ladder_reading()
+        expected.update(hl5.ladder_expected(l5))
+        clause = hl5.ladder_clause(l5)
+        l5_tail = "" if clause is None else "; " + clause
+        steps.append(Step(
+            "the same question read at L5",
+            "Phase 149 (studies/HOLE_REPORTS_L5_STUDY.md): the escalation gate -- every reference recognises itself under a seed change -- read at L5 at every stored ensemble size; the gate follows from the answer rule (GLM.HoleReportsL5.gate_of_rule) and the global criterion is sufficient, not necessary (GLM.HoleReportsL5.criterion_not_necessary).",
+            clause if clause is not None else
+            "L5 reading unavailable: " + str(l5.get("reason", ""))))
         run = report.get("run")
         tail = ""
         if run:
@@ -672,7 +700,7 @@ class LatticeGeometryReports:
                    f"returns {bottom['q0']} of {gate} and the best cell of "
                    f"the ladder, {best['layer']} at {best['starts']} starts, "
                    f"returns {best['q0']} of {gate}, so the verdict fixed in "
-                   f"advance for that case is '{tree['verdict']}'{tail}",
+                   f"advance for that case is '{tree['verdict']}'{tail}{l5_tail}",
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_hole_ladder", "args": {}},
             payload={"report": {"cells": len(cells),
@@ -1357,6 +1385,17 @@ class LatticeGeometryReports:
             "any_below_one": str(leave_out["any_below_one"]),
             "certified_types": str(per_type["count"]),
         }
+        # Phase 149: the round's answer is kept verbatim and gains the clause
+        # saying what the configuration reading L5 answers to its question
+        l5 = hl5.failures_reading()
+        expected.update(hl5.failures_expected(l5))
+        clause = hl5.failures_clause(l5)
+        l5_tail = "" if clause is None else "; " + clause
+        steps.append(Step(
+            "the same question read at L5",
+            "Phase 149 (studies/HOLE_REPORTS_L5_STUDY.md): the joint reading's failures through L5's answer rule at the same cell, and L5's own per-type criterion there (GLM.HoleReportsL5.rule_fires_of_resolvesAt).",
+            clause if clause is not None else
+            "L5 reading unavailable: " + str(l5.get("reason", ""))))
         return Solution(
             query=query, kind="report",
             answer=f"report hole failures: at the single declared cell "
@@ -1371,7 +1410,7 @@ class LatticeGeometryReports:
                    f"stands at rho = "
                    f"{dhf.rounded(spread['rho_seed'], 4)}, and "
                    f"{per_type['count']} of {per_type['total']} types satisfy "
-                   f"the criterion type by type",
+                   f"the criterion type by type{l5_tail}",
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_hole_failures", "args": {}},
             payload={"report": {"cell": dict(cell),

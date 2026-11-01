@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 6 of 9 marks (L1, J1, J2, J3, T1, F1 met; J4, J5, Q1 missed on the zero junction); 0
@@ -12,23 +14,29 @@ deciding_figure: 6 of 9 marks (L1, J1, J2, J3, T1, F1 met; J4, J5, Q1 missed on 
 directives:
 - D4
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/coordinate_junction
-  - reasoning/coordinate_junction_study
-  - runtime/session
-  - tests/test_coordinate_junction
+  - reasoning/coordinate_junction.py
+  - reasoning/coordinate_junction_study.py
+  - runtime/session.py
+  - runtime/tct_engine.py
+  - tools.py
   lean:
+  - AddressRead
   - CoordinateJunction
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: COORDINATE_JUNCTION_STUDY.md
   test:
   - test_coordinate_junction.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: COORDINATE_JUNCTION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,17 +44,37 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - J1
+  - J2
+  - J3
+  - J4
+  - J5
+  - T1
+  - Q1
+  - F1
+  met:
+  - L1
+  - J1
+  - J2
+  - J3
+  - T1
+  - F1
+  missed:
+  - J4
+  - J5
+  - Q1
 perturbations: []
-phase: 66
+phase: 144
 predecessors:
+- ADDRESS_READ_STUDY
 - CONNECTED_MACHINE_STUDY
 question: Can Phase 66's junction rule — a name two wheels share is one quantity only where a declared
   junction says so, and is split otherwise — let the address read answer the carriers it refuses because
   another carrier has exactly their coordinates, without changing any answer it already gives?
 recomputed_by: '`glm_universal.reasoning.coordinate_junction_study.junction_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

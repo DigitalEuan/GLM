@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **What this document answers.** Does the attached material —
 `cardinal_geometry_synthesis.md`, `DYNAMIC_CARRIER_STUDY.md` and
 `geometric_substrate_study.py` — provide what is needed to get the GLM working
@@ -25,8 +27,8 @@ Every number quoted below is produced by running the code. Nothing here is
 asserted from the outside: the package recomputes it on demand with
 
 ```bash
-cd overlay && PYTHONPATH=. python3 GLM.py -q "report infinite values" -c 1
-cd overlay && PYTHONPATH=. python3 -m glm_universal.capabilities
+PYTHONPATH=src python3 src/GLM.py -q "report infinite values" -c 1
+PYTHONPATH=src python3 -m glm_universal.capabilities
 ```
 
 and the mathematical claims are machine-checked in Lean under
@@ -284,9 +286,9 @@ question a user would ask, each answered by running the real code, and each
 reporting the exact place the capability stops:
 
 ```bash
-cd overlay && PYTHONPATH=. python3 -m glm_universal.capabilities
-cd overlay && PYTHONPATH=. python3 -m glm_universal.capabilities --area reals
-cd overlay && PYTHONPATH=. python3 GLM.py -q "report capabilities" -c 1
+PYTHONPATH=src python3 -m glm_universal.capabilities
+PYTHONPATH=src python3 -m glm_universal.capabilities --area reals
+PYTHONPATH=src python3 src/GLM.py -q "report capabilities" -c 1
 ```
 
 At the time of writing: **33 probes, 19 hold, 14 break, 0 errors, 0

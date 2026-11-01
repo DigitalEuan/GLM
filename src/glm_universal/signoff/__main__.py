@@ -5,21 +5,21 @@ answer censuses last, ``CENSUS_LAST``).*
 
 ::
 
-    PYTHONPATH=. python3 -m glm_universal.signoff --plan
-    PYTHONPATH=. python3 -m glm_universal.signoff --run
-    PYTHONPATH=. python3 -m glm_universal.signoff --only-stale --jobs 8
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-all
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-checks
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-checks-all
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-everything
-    PYTHONPATH=. python3 -m glm_universal.signoff --release
-    PYTHONPATH=. python3 -m glm_universal.signoff --release --resume
-    PYTHONPATH=. python3 -m glm_universal.signoff --close
-    PYTHONPATH=. python3 -m glm_universal.signoff --verify
-    PYTHONPATH=. python3 -m glm_universal.signoff --verify-release
-    PYTHONPATH=. python3 -m glm_universal.signoff --closure test_wobble.py
-    PYTHONPATH=. python3 -m glm_universal.signoff --why
-    PYTHONPATH=. python3 -m glm_universal.signoff --impact ../STATUS.md
+    PYTHONPATH=src python3 -m glm_universal.signoff --plan
+    PYTHONPATH=src python3 -m glm_universal.signoff --run
+    PYTHONPATH=src python3 -m glm_universal.signoff --only-stale --jobs 8
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-all
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-checks
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-checks-all
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-everything
+    PYTHONPATH=src python3 -m glm_universal.signoff --release
+    PYTHONPATH=src python3 -m glm_universal.signoff --release --resume
+    PYTHONPATH=src python3 -m glm_universal.signoff --close
+    PYTHONPATH=src python3 -m glm_universal.signoff --verify
+    PYTHONPATH=src python3 -m glm_universal.signoff --verify-release
+    PYTHONPATH=src python3 -m glm_universal.signoff --closure test_wobble.py
+    PYTHONPATH=src python3 -m glm_universal.signoff --why
+    PYTHONPATH=src python3 -m glm_universal.signoff --impact ../STATUS.md
 
 ``--run`` (equivalently ``--only-stale``) runs the stale *test files*;
 ``--run-checks`` runs the stale *instruments* (``lake build``, the evaluation,
@@ -60,6 +60,8 @@ how long did they last take.
 
 Exit codes: ``0`` everything asked for succeeded, ``1`` a test failed or a
 signature did not hold, ``2`` the arguments were not understood.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

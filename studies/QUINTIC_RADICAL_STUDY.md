@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -180,9 +182,9 @@ citation `quintic_in_letters_no_radical_formula`); it still meets 7 of 7.
 
 From ``:
 
-* `PYTHONPATH=. python3 -m glm_universal.tools quintic-radical` runs every mark
+* `PYTHONPATH=src python3 -m glm_universal.tools quintic-radical` runs every mark
   in about 15 s. `--quick` skips the batteries and `--json` gives the rows.
-* `PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_quintic_radical.py`
+* `PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_quintic_radical.py`
   runs the tests in about 10 s.
 * `lake build RequestProject.GLM.QuinticRadicals` from the repository root
   builds the Lean file.

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 1. What this round took, and from where
@@ -57,11 +59,11 @@ fields of water                      -- the field names that row answers to
 | `carrier:molecules` | `carrier` | 51 | 6 | the attributes every carrier of the molecules register keeps |
 | `carrier:physics` | `carrier` | 726 | 7 | the attributes every carrier of the physics register keeps |
 | `carrier:spatial` | `carrier` | 28 | 7 | the attributes every carrier of the spatial register keeps |
-| `lean` | `address` | 5,965 | 5 | the Lean address book: one row per declaration of the development |
-| `python` | `code` | 8,073 | 6 | the package's own top-level functions and classes, read by an AST walk |
+| `lean` | `address` | 9,400 | 5 | the Lean address book: one row per declaration of the development |
+| `python` | `code` | 9,435 | 6 | the package's own top-level functions and classes, read by an AST walk |
 | `function` | `function` | 3 | 26 | the declared zero-argument functions whose returned mapping is addressable by key |
 
-14 tables, 15,367 rows and 89,660 addressable (row, field) pairs over 197 distinct field names.
+14 tables, 20,164 rows and 115,007 addressable (row, field) pairs over 197 distinct field names.
 <!-- end generated -->
 
 Four things about that list are deliberate.
@@ -233,9 +235,8 @@ for.
 ## 8. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools fieldsurface        # the measurement
-PYTHONPATH=. python3 -m glm_universal.tools oracle              # the frozen reading
+PYTHONPATH=src python3 -m glm_universal.tools fieldsurface        # the measurement
+PYTHONPATH=src python3 -m glm_universal.tools oracle              # the frozen reading
 python3 GLM.py -q "field atomic_weight_u of carbon"             # one answer
 python3 GLM.py -q "fields of water"                             # the listing shape
 python3 -m pytest glm_universal/tests/test_field_surface.py -q

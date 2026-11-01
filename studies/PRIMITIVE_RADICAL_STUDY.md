@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -196,10 +198,10 @@ themselves, which the Python side decides.
 
 From ``:
 
-* `PYTHONPATH=. python3 -m glm_universal.tools primitive-radical` runs every
+* `PYTHONPATH=src python3 -m glm_universal.tools primitive-radical` runs every
   mark in about 40 s. `--quick` skips the batteries and the Phase 113
   regression, and `--json` gives the rows.
-* `PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_primitive_radical.py`
+* `PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_primitive_radical.py`
   runs the tests in about 30 s.
 * `lake build RequestProject.GLM.PrimitiveRadicals` from the repository root
   builds the Lean file.

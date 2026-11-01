@@ -1,20 +1,25 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 'Hits at 5 for the native word ranking against the standard: 190 against 182 of 211 declaration
   queries and 94 against 92 of 103 goal queries, level on the 60 document queries; 5 of 6 marks met.'
 directives:
-- D15
 - D3
 - D7
+- D15
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/golay_words.py
+  - reasoning/native_words.py
+  - tools.py
   lean:
   - HeldPrecision
   - LawAbsorption
@@ -22,14 +27,18 @@ file_refs:
   - NativeParity
   - NativeWords
   - StepwiseFrames
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: NATIVE_WORDS_STUDY.md
   test:
   - test_native_words.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: NATIVE_WORDS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -37,16 +46,32 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - W1
+  - W2
+  - W3
+  - W4
+  - W5
+  - W6
+  met:
+  - W1
+  - W2
+  - W3
+  - W5
+  missed:
+  - W4
+  - W6
 perturbations: []
-phase: 70
-predecessors: []
+phase: 71
+predecessors:
+- NATIVE_PARITY_STUDY
 question: Can the word-overlap ranking — the standard method that stays far ahead of every lexical Leech
   address — be computed on Golay words of the tokens instead of on the tokens, and refined past the standard
   ranking?
 recomputed_by: '`glm_universal.reasoning.native_words.native_words_report`'
+related:
+- CITATION_SCOPE_STUDY
+- CORPUS_RESAMPLE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -68,7 +93,9 @@ sections:
 - anchor: 6-next-round
   heading: 6. Next round
 status: closed
-successors: []
+successors:
+- CITATION_SCOPE_STUDY
+- CORPUS_RESAMPLE_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Native words: word overlap computed on Golay words of the tokens'

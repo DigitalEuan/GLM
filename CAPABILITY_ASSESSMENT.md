@@ -13,6 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: the end-to-end CLI evaluation re-taken, 227 of 227, §1 and §2; re-taken again after the sequence wheels were staged: 178 answered, 49 refused; and again after they were installed provisionally by the owner's decision: 179 answered, 48 refused).*
+
+*Last altered 1 November 2026 (Phase 186: the intake items absorbed where they measurably help — ten evaluation cases added for `tool rule30`, `tool conjecture`, `tool derive`, the sequence kind's `next` reading and the plan search behind `tool arc`; the evaluation re-taken, 237 of 237, 187 answered and 50 refused, §1 and §2; a new subsection of §2 states what the absorbed items add.)*
+
 > **Positioning.** Before starting a round, read the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md): what is claimed, what is
 > not, and why an absence at one layer is not a refutation. It is stated once,
@@ -24,10 +28,9 @@ machine was run.
 Four instruments were used, and all four can be re-run on demand:
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=src python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->237 CLI cases<!--/figure-->
 PYTHONPATH=src python3 -m pytest src/glm_universal/tests -q                 # the test suite
 ```
 
@@ -45,9 +48,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **195 cases: 195 passed** — 159 answered correctly, 36 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **237 cases: 237 passed** — 187 answered correctly, 50 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored (re-taken 1 Nov 2026, 242 s on six processes; every answer resting on the intake items absorbed ahead of the owner's Lean build says so) |
 | test suite | the package's own regression net | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->425 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->414 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -59,17 +62,19 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`glm_universal/evaluation/`. Each of its 195 cases starts `GLM.py` in a
+`glm_universal/evaluation/`. Each of its 237 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all <!--figure:query-kinds-->27 query kinds<!--/figure-->** the runtime recognises and every one of its
+question set covers **all <!--figure:query-kinds-->31 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-36 of the 195 questions are ones the machine **should refuse**. Answering them
+50 of the 237 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
+
+*Re-taken 1 Nov 2026 (`PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 6`, 242 s on six processes), after the ten Phase 186 cases were added (two `sequence`, eight `tool`). Before that, re-taken 31 Oct 2026 (`--jobs 8`, 176 s on eight processes). The first run that day had three errors, all time-outs rather than wrong answers — `report lean`, `report relay` and `report anonymous` had passed the 300 s per-case limit as the Lean development grew to 9,341 declarations; the address and ranking searches were then made fast without moving an answer (STATUS.md §2.2), and all three now answer within the limit.*
 
 | query kind | passed | wrong | unexpected refusals | errors |
 |---|---|---|---|---|
@@ -80,26 +85,31 @@ confidently is scored worse than refusing them.
 | `coherence` | 2 / 2 | 0 | 0 | 0 |
 | `comparative` | 7 / 7 | 0 | 0 | 0 |
 | `compare` | 4 / 4 | 0 | 0 | 0 |
+| `corpus` | 5 / 5 | 0 | 0 | 0 |
 | `derive` | 4 / 4 | 0 | 0 | 0 |
 | `describe` | 8 / 8 | 0 | 0 | 0 |
 | `extremum` | 10 / 10 | 0 | 0 | 0 |
 | `field` | 8 / 8 | 0 | 0 | 0 |
-| `locate` | 7 / 7 | 0 | 0 | 0 |
+| `hole` | 5 / 5 | 0 | 0 | 0 |
+| `locate` | 14 / 14 | 0 | 0 | 0 |
 | `meaning` | 6 / 6 | 0 | 0 | 0 |
 | `measure` | 9 / 9 | 0 | 0 | 0 |
-| `nearest` | 4 / 4 | 0 | 0 | 0 |
+| `nearest` | 14 / 14 | 0 | 0 | 0 |
 | `ordering` | 10 / 10 | 0 | 0 | 0 |
 | `pi_groups` | 2 / 2 | 0 | 0 | 0 |
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
 | `real` | 5 / 5 | 0 | 0 | 0 |
 | `report` | 69 / 69 | 0 | 0 | 0 |
+| `sequence` | 4 / 4 | 0 | 0 | 0 |
 | `spatial` | 2 / 2 | 0 | 0 | 0 |
+| `study` | 2 / 2 | 0 | 0 | 0 |
 | `task` | 3 / 3 | 0 | 0 | 0 |
+| `tool` | 9 / 9 | 0 | 0 | 0 |
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **195 / 195** | 0 | 0 | 0 |
+| **total** | **237 / 237** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
 failure in an earlier round — is now 11 / 11, and the set has grown from 8
@@ -107,15 +117,41 @@ cases to 11 since it was fixed. And there are **no unexpected refusals at all**:
 machine never declined a question it was supposed to answer, so the clean sheet
 is not bought with over-caution.
 
+### What the intake items absorbed at Phase 186 add
+
+The evaluation shows that the ten new cases pass; it does not show how much the
+absorbed items help, because it asks each question once. That is measured in
+[`studies/INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md)
+(`PYTHONPATH=src python3 -m glm_universal.tools intake-capability --write`),
+which puts the same questions to the GLM with and without the three items:
+
+| what was asked | without the items | with them |
+|---|---|---|
+| the 50 stored ARC tasks (53 test grids) | 2 tasks right | **9 tasks right, 0 wrong** |
+| 30 questions across five domains (Rule 30, number theory, physics, sequences, ARC) | 4 right | **23 right, 0 wrong**, 7 refused |
+| the engine's 39 Rule 30 sentences on the answering path | 0 answered | **16 right, 0 wrong** |
+| twelve conjectures about every `n` | no tool to ask (`tool conjecture` is new) | **12 of 12 right**: 7 refuted at their least counterexample, 5 left *thinks true*, none called proved |
+| formula-law questions (64 laws, 51 not-a-laws) | 1 law licensed (the fifteen registry wheels) | **63 of 64 laws, 0 of 51 not-a-laws** |
+| next-term questions (45, and 13 negative controls) | 5 right | **27 right, 0 wrong**, 18 refused; 12 of 13 controls refused |
+
+Twelve of the study's fourteen marks are met. Two are not: the answering path
+reads 16 of the 39 Rule 30 sentences right where the bar was 20, and one
+negative control (*1, 2, 4, 8, 16*) is answered 32. Two caveats bound the
+ARC figure: the fifty tasks are a **development set** — the engine's plan
+search was written by the intake item's author against these same tasks — so
+the figure says what the GLM now answers on them, not how it would do on
+unseen tasks; and the items' Lean was checked standalone, so until the owner's
+`scripts/rebuild_lean.sh` confirms it every answer resting on the items says so.
+
 ### The refusals it got right
 
-All 36 refusal cases refused, and all 36 are **boundaries** — each is a theorem
+All 50 refusal cases refused, and all 50 are **boundaries** — each is a theorem
 or a deliberate commitment, and cannot be closed by writing more code. There
 is no longer a **gap** case: the last one is closed below.
 
-*The list below was written when the set held 178 cases and 28 refusals; the eight refusal cases added since (four in the `carrier` kind, four in the `locate` kind) are boundaries of the same sort, each stated with its reason in `glm_universal/evaluation/cases.py`.*
+*The list below was written when the set held 178 cases and 28 refusals; the twenty-two refusal cases added since (among them four in the `carrier` kind, four in the `locate` kind, and at Phase 186 an open Rule 30 claim and a next-term question with too few terms) are boundaries of the same sort, each stated with its reason in `glm_universal/evaluation/cases.py`.*
 
-**Boundaries — 28 of the 36.**
+**Boundaries — the 28 in the list as first written.**
 
 | case | question | why the refusal is correct |
 |---|---|---|
@@ -493,7 +529,6 @@ a vertex algebra on its own.
 ## 7. Re-running this assessment
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.capabilities
 PYTHONPATH=src python3 -m glm_universal.benchmarks
 PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8 --json eval.json

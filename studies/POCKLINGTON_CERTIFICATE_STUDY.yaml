@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '6 of 7 marks. First held-out set: 0 wrong, but 0 of the 5 primes Phase 139 refused certified
@@ -12,24 +14,31 @@ deciding_figure: '6 of 7 marks. First held-out set: 0 wrong, but 0 of the 5 prim
   cases changed.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/pocklington_certificate_cases
-  - reasoning/primality_certificate
-  - tests/test_pocklington_certificate
+  - evaluation/pocklington_certificate_cases.py
+  - evaluation/primality_certificate_cases.py
+  - reasoning/primality_certificate.py
+  - reasoning/stepwise_script.py
+  - tools.py
   lean:
   - LucasCertificate
   - PocklingtonCertificate
   - PrimalityCertificate
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: POCKLINGTON_CERTIFICATE_STUDY.md
   test:
   - test_pocklington_certificate.py
+  - test_primality_certificate.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: POCKLINGTON_CERTIFICATE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -37,16 +46,24 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
+  declared:
+  - Q1
+  - Q2
+  - Q3
+  - Q4
+  - Q5
+  - Q6
+  - Q7
   met: []
   missed: []
 perturbations: []
-phase: 139
+phase: 140
 predecessors: []
 question: Can primes that Phase 139 refused because their `p - 1` does not factor within the work budget
   be certified instead, by certificates proved sound in Lean that need only part of `p - 1` (Pocklington)
   or the factorisation of `p + 1` (N+1), without changing any answer Phase 139 gave?
 recomputed_by: '`glm_universal.evaluation.pocklington_certificate_cases.measure`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -59,7 +76,7 @@ sections:
   heading: 1. What was built
 - anchor: 2-what-is-proved
   heading: 2. What is proved
-- anchor: 3-the-held-out-sets-evaluationpocklington_certificate_casespy
+- anchor: 3-the-held-out-sets-evaluationpocklingtoncertificatecasespy
   heading: 3. The held-out sets (`evaluation/pocklington_certificate_cases.py`)
 - anchor: 4-the-marks
   heading: 4. The marks

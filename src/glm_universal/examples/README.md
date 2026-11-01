@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 Six runnable scripts and one generated transcript. Each script has a `main`
 and runs standalone; each is also importable, so the test suite can exercise
@@ -35,15 +37,15 @@ printed.
 
 | Generated file | How to regenerate |
 |---|---|
-| `reasoning_showcase_transcript.md` | `PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py --markdown > glm_universal/examples/reasoning_showcase_transcript.md` — do not edit by hand. `tests/test_reasoning_showcase.py` (14 tests) checks that the showcase still reproduces. |
+| `reasoning_showcase_transcript.md` | `PYTHONPATH=src python3 src/glm_universal/examples/reasoning_showcase.py --markdown > glm_universal/examples/reasoning_showcase_transcript.md` — do not edit by hand. `tests/test_reasoning_showcase.py` (14 tests) checks that the showcase still reproduces. |
 
 ## Running
 
 ```bash
 cd /path/to/GLM                       # repo root, where GLM.py lives
-PYTHONPATH=. python3 glm_universal/examples/demo_tct.py
-PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py
-PYTHONPATH=. python3 glm_universal/examples/semantic_replacement.py
+PYTHONPATH=src python3 src/glm_universal/examples/demo_tct.py
+PYTHONPATH=src python3 src/glm_universal/examples/reasoning_showcase.py
+PYTHONPATH=src python3 src/glm_universal/examples/semantic_replacement.py
 ```
 
 Options:

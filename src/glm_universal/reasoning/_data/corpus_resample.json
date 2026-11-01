@@ -1,194 +1,413 @@
 {
- "census": 4739,
- "corpus_digest": "f1dd21efdd08ce426b2fc408075a0b6b1a8f0df2a672e1d9602ebcf275158176",
- "depth": 108,
+ "census": 9341,
+ "corpus_digest": "c52bbb7de6943497d93bde20bfbbc456f746ffa379393a1cd9e93ce0bf30ed18",
+ "depth": 291,
  "drop_queries": {
   "declarations": [
-   206,
-   205,
-   206,
-   206,
-   206,
-   206,
    203,
-   206,
-   205,
-   206,
-   206,
-   206,
-   205,
-   205,
-   205,
-   206,
-   206,
-   205,
-   206,
-   205,
-   206,
-   205,
-   205,
-   205,
-   205,
-   206,
-   206,
-   206,
-   206,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   202,
+   201,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   202,
+   202,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   204,
+   204,
+   204,
+   204,
    204,
    203,
-   205,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
    204,
-   206,
-   206,
-   205,
-   206,
-   206,
-   206,
-   206,
-   205,
-   206,
-   206,
-   205,
-   206,
-   206,
-   205,
-   204,
-   206,
-   206,
-   206,
-   206,
-   205,
-   206,
-   204,
-   206,
-   205,
-   206,
-   204,
-   205,
-   206,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
    204,
    202,
-   206,
-   205,
-   206,
-   206,
-   205,
-   205,
-   206,
-   205,
-   205,
-   205,
-   206,
-   206,
-   205,
-   206,
-   206,
-   205,
-   206,
-   206,
-   206,
-   206,
-   205,
-   206,
-   206,
-   206,
-   205,
-   205,
+   202,
+   203,
+   202,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
    204,
-   206,
-   206,
-   206,
-   206,
-   205,
-   205,
-   206,
-   206,
-   206,
-   204,
-   206,
-   206,
-   206,
-   206,
-   204,
-   205,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   204,
-   206,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
    204,
    204,
-   206,
    204,
-   205,
-   206,
-   206,
-   206,
-   206,
-   205,
-   206,
-   205,
-   205,
-   205,
-   205,
-   205,
-   205,
-   206,
-   205,
-   205,
-   205,
-   206,
-   205,
-   206,
    204,
-   205,
-   205,
-   205,
    204,
-   206,
-   205,
-   205,
-   205,
-   206,
-   206,
-   206,
-   206,
-   205,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
    204,
-   206,
-   205,
-   206,
-   205,
-   206,
-   206,
-   205,
-   206,
-   206,
-   206,
-   205,
-   205,
-   205,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   205,
-   205,
-   206,
-   205,
-   205,
-   205
+   204,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   201,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   202,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203
   ],
   "goals": [
    101,
@@ -197,33 +416,6 @@
    101,
    101,
    101,
-   102,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   103,
-   101,
-   101,
-   101,
-   101,
-   100,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   102,
-   102,
-   101,
-   102,
    101,
    101,
    101,
@@ -236,32 +428,6 @@
    101,
    101,
    101,
-   101,
-   101,
-   102,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   102,
-   101,
-   101,
-   101,
-   102,
-   103,
-   101,
-   102,
-   101,
-   101,
-   101,
-   101,
-   101,
-   101,
-   100,
-   101,
-   103,
    101,
    101,
    101,
@@ -278,24 +444,10 @@
    101,
    101,
    101,
-   103,
-   103,
-   102,
    101,
    101,
    101,
    101,
-   103,
-   103,
-   101,
-   101,
-   101,
-   102,
-   101,
-   101,
-   101,
-   101,
-   102,
    101,
    101,
    101,
@@ -305,8 +457,6 @@
    101,
    102,
    101,
-   102,
-   102,
    101,
    102,
    101,
@@ -318,13 +468,87 @@
    101,
    101,
    101,
-   103,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   101,
    100,
    101,
-   103,
    101,
-   103,
-   103,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   100,
+   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
    101,
    101,
    101,
@@ -332,8 +556,39 @@
    102,
    101,
    101,
-   103,
-   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
    101,
    101,
    101,
@@ -356,7 +611,11 @@
    101,
    101,
    101,
-   103,
+   101,
+   101,
+   100,
+   101,
+   102,
    101,
    101,
    101,
@@ -375,42 +634,221 @@
    101,
    101,
    101,
-   103
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   100,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   100,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   100,
+   101,
+   101,
+   101,
+   101,
+   100
   ]
  },
  "faithfulness": {
-  "corpus": 4739,
+  "corpus": 9341,
   "met": true,
   "mismatches": [],
-  "pool": 4739
+  "pool": 9341
  },
- "files": 185,
+ "files": 404,
  "filter_check": {
   "files": [
    {
     "differ": 0,
-    "file": "Gen3.lean",
+    "file": "Wheels/CentWheels.lean",
     "queries": 202
    },
    {
     "differ": 0,
-    "file": "PrimitiveRadicals.lean",
-    "queries": 206
+    "file": "Rule30/DiagCertFour1.lean",
+    "queries": 204
    },
    {
     "differ": 0,
     "file": "Address.lean",
-    "queries": 206
+    "queries": 203
    },
    {
     "differ": 0,
-    "file": "MeasurandKinds.lean",
-    "queries": 206
+    "file": "Retrieval.lean",
+    "queries": 203
    },
    {
     "differ": 0,
     "file": "ZeroStorageV5.lean",
-    "queries": 205
+    "queries": 203
    }
   ],
   "met": true
@@ -423,15 +861,23 @@
     "file": "Address.lean"
    },
    {
+    "changed": 18,
+    "file": "AddressRead.lean"
+   },
+   {
     "changed": 0,
     "file": "Admission.lean"
+   },
+   {
+    "changed": 7,
+    "file": "AffineOutput.lean"
    },
    {
     "changed": 2,
     "file": "Agree.lean"
    },
    {
-    "changed": 14,
+    "changed": 13,
     "file": "AlignmentPoints.lean"
    },
    {
@@ -439,11 +885,23 @@
     "file": "Anonymous.lean"
    },
    {
+    "changed": 6,
+    "file": "AnsweringQuestion.lean"
+   },
+   {
     "changed": 0,
     "file": "AstIndex.lean"
    },
    {
-    "changed": 14,
+    "changed": 0,
+    "file": "AxiomGuard.lean"
+   },
+   {
+    "changed": 0,
+    "file": "BudgetReading.lean"
+   },
+   {
+    "changed": 22,
     "file": "Calibration.lean"
    },
    {
@@ -451,12 +909,24 @@
     "file": "CarriedFork.lean"
    },
    {
+    "changed": 1,
+    "file": "CarriedRead.lean"
+   },
+   {
     "changed": 3,
     "file": "Cascade.lean"
    },
    {
+    "changed": 9,
+    "file": "CellGuard.lean"
+   },
+   {
     "changed": 3,
     "file": "CelsiusRegister.lean"
+   },
+   {
+    "changed": 8,
+    "file": "CertifiedStreams.lean"
    },
    {
     "changed": 0,
@@ -483,6 +953,10 @@
     "file": "Completion.lean"
    },
    {
+    "changed": 1,
+    "file": "ComposedRadicals.lean"
+   },
+   {
     "changed": 0,
     "file": "Computable.lean"
    },
@@ -495,15 +969,23 @@
     "file": "ConfidenceFloor.lean"
    },
    {
+    "changed": 4,
+    "file": "ConfigurationReading.lean"
+   },
+   {
     "changed": 0,
     "file": "Conjugate.lean"
    },
    {
-    "changed": 0,
+    "changed": 145,
     "file": "ConnectedMachine.lean"
    },
    {
-    "changed": 52,
+    "changed": 8,
+    "file": "ConstantBound.lean"
+   },
+   {
+    "changed": 83,
     "file": "Constants.lean"
    },
    {
@@ -519,16 +1001,36 @@
     "file": "Conversation.lean"
    },
    {
+    "changed": 5,
+    "file": "CoordinateJunction.lean"
+   },
+   {
     "changed": 13,
     "file": "CoordinateOrder.lean"
+   },
+   {
+    "changed": 4,
+    "file": "CopyLemma.lean"
    },
    {
     "changed": 1,
     "file": "Corpus.lean"
    },
    {
+    "changed": 0,
+    "file": "CorpusDefinitions.lean"
+   },
+   {
+    "changed": 0,
+    "file": "CorpusKnowledge.lean"
+   },
+   {
     "changed": 1,
     "file": "CorpusResample.lean"
+   },
+   {
+    "changed": 22,
+    "file": "CounterLasso.lean"
    },
    {
     "changed": 44,
@@ -579,11 +1081,11 @@
     "file": "DeepHoleClassifier.lean"
    },
    {
-    "changed": 11,
+    "changed": 20,
     "file": "DeepHoleEscalation.lean"
    },
    {
-    "changed": 1,
+    "changed": 5,
     "file": "DeepHoleFailure.lean"
    },
    {
@@ -599,8 +1101,12 @@
     "file": "Derivations.lean"
    },
    {
-    "changed": 0,
+    "changed": 4,
     "file": "DerivationsTwo.lean"
+   },
+   {
+    "changed": 24,
+    "file": "DesignedSubstrate.lean"
    },
    {
     "changed": 0,
@@ -619,6 +1125,14 @@
     "file": "DocumentTree.lean"
    },
    {
+    "changed": 2,
+    "file": "DomainWheels.lean"
+   },
+   {
+    "changed": 3,
+    "file": "EllipticCertificate.lean"
+   },
+   {
     "changed": 8,
     "file": "Endianness.lean"
    },
@@ -631,8 +1145,40 @@
     "file": "Escalation.lean"
    },
    {
+    "changed": 3,
+    "file": "Escalation/GolayTies.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Escalation/LayerStack.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Escalation/LeechResidue.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Escalation/MasterStep.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Escalation/Niemeier.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Escalation/Rule30Parity.lean"
+   },
+   {
     "changed": 0,
     "file": "EscalationLoop.lean"
+   },
+   {
+    "changed": 0,
+    "file": "EvidenceInUse.lean"
+   },
+   {
+    "changed": 0,
+    "file": "ExplanationAnchors.lean"
    },
    {
     "changed": 0,
@@ -659,7 +1205,15 @@
     "file": "Foundations.lean"
    },
    {
-    "changed": 4,
+    "changed": 1,
+    "file": "Friction.lean"
+   },
+   {
+    "changed": 2,
+    "file": "FrictionTwo.lean"
+   },
+   {
+    "changed": 5,
     "file": "FrobeniusRadicals.lean"
    },
    {
@@ -679,7 +1233,7 @@
     "file": "Golay/Cesaro.lean"
    },
    {
-    "changed": 343,
+    "changed": 399,
     "file": "Golay/Code.lean"
    },
    {
@@ -691,7 +1245,7 @@
     "file": "Golay/Dynamics.lean"
    },
    {
-    "changed": 42,
+    "changed": 54,
     "file": "Golay/Sextet.lean"
    },
    {
@@ -703,7 +1257,7 @@
     "file": "GolayMOG.lean"
    },
    {
-    "changed": 26,
+    "changed": 44,
     "file": "GolayWeightEnum.lean"
    },
    {
@@ -727,6 +1281,10 @@
     "file": "HeldPrecision.lean"
    },
    {
+    "changed": 3,
+    "file": "HexRung.lean"
+   },
+   {
     "changed": 0,
     "file": "HigherLattices.lean"
    },
@@ -735,12 +1293,60 @@
     "file": "HoleBounds.lean"
    },
    {
-    "changed": 9,
+    "changed": 3,
+    "file": "HoleReportsL5.lean"
+   },
+   {
+    "changed": 8,
     "file": "HullExpansion.lean"
+   },
+   {
+    "changed": 3,
+    "file": "HypothesisEngine/Benchmarks.lean"
+   },
+   {
+    "changed": 3,
+    "file": "HypothesisEngine/BenchmarksData.lean"
+   },
+   {
+    "changed": 1,
+    "file": "HypothesisEngine/DialogueChecks.lean"
+   },
+   {
+    "changed": 0,
+    "file": "HypothesisEngine/GateLoop.lean"
+   },
+   {
+    "changed": 2,
+    "file": "HypothesisEngine/GateLoopData.lean"
+   },
+   {
+    "changed": 0,
+    "file": "HypothesisEngine/NeedsWheel.lean"
+   },
+   {
+    "changed": 7,
+    "file": "HypothesisEngine/TaxChecks.lean"
+   },
+   {
+    "changed": 6,
+    "file": "HypothesisEngine/TaxChecksData.lean"
+   },
+   {
+    "changed": 0,
+    "file": "HypothesisEngine/Wheel.lean"
+   },
+   {
+    "changed": 13,
+    "file": "HypothesisEngine/WheelChecksData.lean"
    },
    {
     "changed": 1,
     "file": "ImperativeGrammar.lean"
+   },
+   {
+    "changed": 3,
+    "file": "InertCounter.lean"
    },
    {
     "changed": 0,
@@ -751,7 +1357,11 @@
     "file": "Irrational.lean"
    },
    {
-    "changed": 24,
+    "changed": 13,
+    "file": "KappaAnchor.lean"
+   },
+   {
+    "changed": 23,
     "file": "LDP.lean"
    },
    {
@@ -759,11 +1369,15 @@
     "file": "LLVQTable.lean"
    },
    {
+    "changed": 7,
+    "file": "LatticeCompletion.lean"
+   },
+   {
     "changed": 5,
     "file": "LawAbsorption.lean"
    },
    {
-    "changed": 19,
+    "changed": 18,
     "file": "LawRegister.lean"
    },
    {
@@ -783,6 +1397,18 @@
     "file": "LogBucket.lean"
    },
    {
+    "changed": 14,
+    "file": "LorentzianEvidence.lean"
+   },
+   {
+    "changed": 22,
+    "file": "LorentzianLift.lean"
+   },
+   {
+    "changed": 6,
+    "file": "LucasCertificate.lean"
+   },
+   {
     "changed": 0,
     "file": "Mantissa.lean"
    },
@@ -797,6 +1423,10 @@
    {
     "changed": 44,
     "file": "MeasureView.lean"
+   },
+   {
+    "changed": 0,
+    "file": "MetaAnswers.lean"
    },
    {
     "changed": 0,
@@ -815,8 +1445,24 @@
     "file": "NativeWords.lean"
    },
    {
+    "changed": 6,
+    "file": "NearestAddress.lean"
+   },
+   {
+    "changed": 9,
+    "file": "NearestFraction.lean"
+   },
+   {
+    "changed": 6,
+    "file": "NearestQuestion.lean"
+   },
+   {
     "changed": 0,
     "file": "Niemeier.lean"
+   },
+   {
+    "changed": 11,
+    "file": "NonShannon.lean"
    },
    {
     "changed": 0,
@@ -831,8 +1477,16 @@
     "file": "NowReceipt.lean"
    },
    {
-    "changed": 7,
+    "changed": 6,
     "file": "OnDemandView.lean"
+   },
+   {
+    "changed": 18,
+    "file": "OperationsLadder.lean"
+   },
+   {
+    "changed": 1,
+    "file": "OscillatorJunction.lean"
    },
    {
     "changed": 0,
@@ -848,7 +1502,55 @@
    },
    {
     "changed": 0,
+    "file": "PiMachine.lean"
+   },
+   {
+    "changed": 4,
+    "file": "PipelineAsk.lean"
+   },
+   {
+    "changed": 11,
+    "file": "PipelineInduction.lean"
+   },
+   {
+    "changed": 0,
+    "file": "PipelineKit/Analogy.lean"
+   },
+   {
+    "changed": 0,
+    "file": "PipelineKit/Fields.lean"
+   },
+   {
+    "changed": 3,
+    "file": "PipelineKit/Golay.lean"
+   },
+   {
+    "changed": 0,
+    "file": "PipelineKit/Lattices.lean"
+   },
+   {
+    "changed": 14,
+    "file": "PipelineKit/Leech.lean"
+   },
+   {
+    "changed": 4,
+    "file": "PipelineKit/Permutation.lean"
+   },
+   {
+    "changed": 0,
+    "file": "PipelineKit/Pless.lean"
+   },
+   {
+    "changed": 6,
+    "file": "PlacementGuard.lean"
+   },
+   {
+    "changed": 0,
     "file": "PlanStore.lean"
+   },
+   {
+    "changed": 6,
+    "file": "PlannerLadder.lean"
    },
    {
     "changed": 0,
@@ -860,15 +1562,39 @@
    },
    {
     "changed": 4,
+    "file": "PocklingtonCertificate.lean"
+   },
+   {
+    "changed": 2,
+    "file": "PrimalityCertificate.lean"
+   },
+   {
+    "changed": 2,
+    "file": "PrimitiveDegree.lean"
+   },
+   {
+    "changed": 5,
     "file": "PrimitiveRadicals.lean"
+   },
+   {
+    "changed": 3,
+    "file": "ProbeBudget.lean"
    },
    {
     "changed": 0,
     "file": "ProbeOracle.lean"
    },
    {
+    "changed": 15,
+    "file": "ProtectedTag.lean"
+   },
+   {
     "changed": 0,
     "file": "PythonSpeech.lean"
+   },
+   {
+    "changed": 4,
+    "file": "QuadraticLasso.lean"
    },
    {
     "changed": 0,
@@ -895,7 +1621,7 @@
     "file": "QuestionSetBMatrix.lean"
    },
    {
-    "changed": 0,
+    "changed": 1,
     "file": "QuinticRadicals.lean"
    },
    {
@@ -907,11 +1633,15 @@
     "file": "RateRepair.lean"
    },
    {
+    "changed": 0,
+    "file": "RationalBoost.lean"
+   },
+   {
     "changed": 12,
     "file": "Reachable.lean"
    },
    {
-    "changed": 11,
+    "changed": 10,
     "file": "ReadQuantum.lean"
    },
    {
@@ -956,7 +1686,563 @@
    },
    {
     "changed": 0,
+    "file": "RobinBoth.lean"
+   },
+   {
+    "changed": 0,
     "file": "RoleBinding.lean"
+   },
+   {
+    "changed": 77,
+    "file": "Rule30/ANF.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Rule30/ANFData.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/AdicPeriod.lean"
+   },
+   {
+    "changed": 12,
+    "file": "Rule30/AdicTower.lean"
+   },
+   {
+    "changed": 6,
+    "file": "Rule30/AdicTowerData.lean"
+   },
+   {
+    "changed": 101,
+    "file": "Rule30/AdjacentColumns.lean"
+   },
+   {
+    "changed": 78,
+    "file": "Rule30/AmortizedHalving.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/ArrowIndependence.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/BarrierDiagonalsData.lean"
+   },
+   {
+    "changed": 627,
+    "file": "Rule30/Basic.lean"
+   },
+   {
+    "changed": 3,
+    "file": "Rule30/BlackRunWindow.lean"
+   },
+   {
+    "changed": 3,
+    "file": "Rule30/ChemistryLab.lean"
+   },
+   {
+    "changed": 10,
+    "file": "Rule30/ChiralLeak.lean"
+   },
+   {
+    "changed": 8,
+    "file": "Rule30/ColumnInverse.lean"
+   },
+   {
+    "changed": 52,
+    "file": "Rule30/Compute.lean"
+   },
+   {
+    "changed": 8,
+    "file": "Rule30/ConeGeometry.lean"
+   },
+   {
+    "changed": 42,
+    "file": "Rule30/ConeSeparation.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Rule30/ConjectureLoop.lean"
+   },
+   {
+    "changed": 22,
+    "file": "Rule30/ConjectureLoopData.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Rule30/DegreeData.lean"
+   },
+   {
+    "changed": 25,
+    "file": "Rule30/DiagCert.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertFour1.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertFour2.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertFour4.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertFour8.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertFourRest.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertThree.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/DiagCertTwo.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/DiagonalCoupling.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/DiagonalSearch.lean"
+   },
+   {
+    "changed": 24,
+    "file": "Rule30/DiagonalSearchData.lean"
+   },
+   {
+    "changed": 28,
+    "file": "Rule30/Diagonals.lean"
+   },
+   {
+    "changed": 36,
+    "file": "Rule30/DriveWheel.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Rule30/DriveWheelData.lean"
+   },
+   {
+    "changed": 20,
+    "file": "Rule30/EchoBound.lean"
+   },
+   {
+    "changed": 152,
+    "file": "Rule30/ElementaryCA.lean"
+   },
+   {
+    "changed": 28,
+    "file": "Rule30/Ergodic.lean"
+   },
+   {
+    "changed": 29,
+    "file": "Rule30/FiniteState.lean"
+   },
+   {
+    "changed": 38,
+    "file": "Rule30/Frontier.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/Funnel.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Rule30/HalfLineLightCone.lean"
+   },
+   {
+    "changed": 273,
+    "file": "Rule30/HalfLineMachine.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/HalfLineMachineData.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/HankelKronecker.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/Injector.lean"
+   },
+   {
+    "changed": 6,
+    "file": "Rule30/InjectorAnalogies.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/InjectorData.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/InnerSurvivorData.lean"
+   },
+   {
+    "changed": 8,
+    "file": "Rule30/Invariance.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/LatticeConeFraction.lean"
+   },
+   {
+    "changed": 78,
+    "file": "Rule30/LeftDiagonalPeriods.lean"
+   },
+   {
+    "changed": 31,
+    "file": "Rule30/LeftDiagonalPeriodsData.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Rule30/LeftWhiteCompactness.lean"
+   },
+   {
+    "changed": 21,
+    "file": "Rule30/LeftWhiteLift.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Rule30/LocalRuleInduction.lean"
+   },
+   {
+    "changed": 11,
+    "file": "Rule30/MachineModel.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/MachineModelData.lean"
+   },
+   {
+    "changed": 71,
+    "file": "Rule30/MathieuCensus.lean"
+   },
+   {
+    "changed": 29,
+    "file": "Rule30/MathieuCensusOrbits.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/MathieuMOG.lean"
+   },
+   {
+    "changed": 142,
+    "file": "Rule30/MathieuOrbits.lean"
+   },
+   {
+    "changed": 112,
+    "file": "Rule30/MathieuOrbitsData.lean"
+   },
+   {
+    "changed": 25,
+    "file": "Rule30/MathieuRule30Data.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/NoConstantColumn.lean"
+   },
+   {
+    "changed": 16,
+    "file": "Rule30/Observer.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/OnePeriodicColumn.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/OneRunFamily.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/ParityReduction.lean"
+   },
+   {
+    "changed": 15,
+    "file": "Rule30/ParityReductionData.lean"
+   },
+   {
+    "changed": 82,
+    "file": "Rule30/PeriodTwoHalfLine.lean"
+   },
+   {
+    "changed": 10,
+    "file": "Rule30/PeriodTwoHalfLineData.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/Perspective.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Rule30/PhaseSpace32.lean"
+   },
+   {
+    "changed": 8,
+    "file": "Rule30/Pipeline.lean"
+   },
+   {
+    "changed": 6,
+    "file": "Rule30/PipelineData.lean"
+   },
+   {
+    "changed": 11,
+    "file": "Rule30/PlanSearch.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/PostEdgeSpec.lean"
+   },
+   {
+    "changed": 33,
+    "file": "Rule30/PowerSeriesLadder.lean"
+   },
+   {
+    "changed": 24,
+    "file": "Rule30/PowerSeriesLadderData.lean"
+   },
+   {
+    "changed": 58,
+    "file": "Rule30/PrefixSearch.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/PrefixSearchData.lean"
+   },
+   {
+    "changed": 64,
+    "file": "Rule30/Prizes.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Rule30/Problem3Quantifiers.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Rule30/ProofRoutes.lean"
+   },
+   {
+    "changed": 15,
+    "file": "Rule30/ProofRoutesData.lean"
+   },
+   {
+    "changed": 63,
+    "file": "Rule30/ReadAngle.lean"
+   },
+   {
+    "changed": 12,
+    "file": "Rule30/RightDiagonalBalance.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/RuleSpace.lean"
+   },
+   {
+    "changed": 22,
+    "file": "Rule30/RunBoundData.lean"
+   },
+   {
+    "changed": 6,
+    "file": "Rule30/RunBoundEighteen.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/RunBoundPeriods.lean"
+   },
+   {
+    "changed": 25,
+    "file": "Rule30/RunBoundSearch.lean"
+   },
+   {
+    "changed": 17,
+    "file": "Rule30/RunCountGeneral.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Rule30/RunCountLaw.lean"
+   },
+   {
+    "changed": 13,
+    "file": "Rule30/SeedBoundary.lean"
+   },
+   {
+    "changed": 8,
+    "file": "Rule30/ShortcutNetwork.lean"
+   },
+   {
+    "changed": 12,
+    "file": "Rule30/ShortcutNetworkData.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Rule30/SidewaysPeriodTwo.lean"
+   },
+   {
+    "changed": 11,
+    "file": "Rule30/SidewaysView.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Rule30/SlackCert.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/SlackCertFour1.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/SlackCertFour2.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/SlackCertFour4.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/SlackCertFour8.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/SlackCertFourRest.lean"
+   },
+   {
+    "changed": 3,
+    "file": "Rule30/SlackCertThreeTwo.lean"
+   },
+   {
+    "changed": 3,
+    "file": "Rule30/Spectral.lean"
+   },
+   {
+    "changed": 27,
+    "file": "Rule30/SpinLattice.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Rule30/SpinQuaternion.lean"
+   },
+   {
+    "changed": 11,
+    "file": "Rule30/SpinSweep.lean"
+   },
+   {
+    "changed": 68,
+    "file": "Rule30/TestCountLaw.lean"
+   },
+   {
+    "changed": 33,
+    "file": "Rule30/TestCountLawData.lean"
+   },
+   {
+    "changed": 31,
+    "file": "Rule30/TestCountPeriods.lean"
+   },
+   {
+    "changed": 18,
+    "file": "Rule30/TestCountPeriodsData.lean"
+   },
+   {
+    "changed": 11,
+    "file": "Rule30/TestHalving.lean"
+   },
+   {
+    "changed": 13,
+    "file": "Rule30/TestHalvingData.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/TileLeads.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/TopMonomial.lean"
+   },
+   {
+    "changed": 13,
+    "file": "Rule30/Transients.lean"
+   },
+   {
+    "changed": 18,
+    "file": "Rule30/TransientsData.lean"
+   },
+   {
+    "changed": 12,
+    "file": "Rule30/Triangles.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/TrianglesData.lean"
+   },
+   {
+    "changed": 30,
+    "file": "Rule30/TuningByEar.lean"
+   },
+   {
+    "changed": 11,
+    "file": "Rule30/TuningByEarData.lean"
+   },
+   {
+    "changed": 20,
+    "file": "Rule30/TurnCost.lean"
+   },
+   {
+    "changed": 12,
+    "file": "Rule30/TurnCostData.lean"
+   },
+   {
+    "changed": 20,
+    "file": "Rule30/Unpredictability.lean"
+   },
+   {
+    "changed": 16,
+    "file": "Rule30/WeightGrowth.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Rule30/WheelInduction.lean"
+   },
+   {
+    "changed": 29,
+    "file": "Rule30/WhiteDiagonals.lean"
+   },
+   {
+    "changed": 17,
+    "file": "Rule30/WholeCone.lean"
+   },
+   {
+    "changed": 104,
+    "file": "Rule30/Wobble.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Rule30/WobbleCertificate.lean"
+   },
+   {
+    "changed": 13,
+    "file": "Rule30/WobbleLenses.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Rule30/WobbleLensesData.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Rule30/WobbleNormalized.lean"
+   },
+   {
+    "changed": 17,
+    "file": "Rule30/XorAlternatives.lean"
+   },
+   {
+    "changed": 14,
+    "file": "Rule30/XorAlternativesData.lean"
    },
    {
     "changed": 15,
@@ -979,7 +2265,7 @@
     "file": "SecondReading.lean"
    },
    {
-    "changed": 13,
+    "changed": 12,
     "file": "SecondView.lean"
    },
    {
@@ -1003,6 +2289,10 @@
     "file": "Semantics/Meaning.lean"
    },
    {
+    "changed": 3,
+    "file": "ShareSeparation.lean"
+   },
+   {
     "changed": 0,
     "file": "ShellSigma.lean"
    },
@@ -1015,7 +2305,7 @@
     "file": "Shortcut/FactorMap.lean"
    },
    {
-    "changed": 48,
+    "changed": 53,
     "file": "Shortcut/Golay.lean"
    },
    {
@@ -1023,11 +2313,11 @@
     "file": "Shortcut/GolayWeights.lean"
    },
    {
-    "changed": 49,
+    "changed": 50,
     "file": "Shortcut/GrayCode.lean"
    },
    {
-    "changed": 37,
+    "changed": 40,
     "file": "Shortcut/Leech.lean"
    },
    {
@@ -1037,6 +2327,10 @@
    {
     "changed": 9,
     "file": "Shortcut/Substrate.lean"
+   },
+   {
+    "changed": 16,
+    "file": "ShortestTag.lean"
    },
    {
     "changed": 0,
@@ -1107,6 +2401,14 @@
     "file": "TieBreak.lean"
    },
    {
+    "changed": 12,
+    "file": "TimedQuestion.lean"
+   },
+   {
+    "changed": 8,
+    "file": "ToolValues.lean"
+   },
+   {
     "changed": 0,
     "file": "Totient.lean"
    },
@@ -1131,7 +2433,7 @@
     "file": "TriadChance.lean"
    },
    {
-    "changed": 1,
+    "changed": 0,
     "file": "TypedOperators.lean"
    },
    {
@@ -1141,6 +2443,18 @@
    {
     "changed": 0,
     "file": "Vagueness.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Wheels/CentWheels.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Wheels/IntegerWheel.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Wheels/SporadicOrders.lean"
    },
    {
     "changed": 6,
@@ -1159,9 +2473,9 @@
     "file": "ZeroStorageV5.lean"
    }
   ],
-  "files_with_change": 114,
-  "largest": 343,
-  "total": 1898
+  "files_with_change": 310,
+  "largest": 627,
+  "total": 6205
  },
  "lean_file": "RequestProject/GLM/CorpusResample.lean",
  "marks": {
@@ -1174,29 +2488,52 @@
  "met": 4,
  "offset_queries": {
   "declarations": [
-   207,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206,
-   206
+   204,
+   204,
+   204,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203,
+   203
   ],
   "goals": [
    101,
@@ -1238,6 +2575,52 @@
    101,
    101,
    101,
+   101,
+   101,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
    100,
    100,
    100,
@@ -1248,65 +2631,65 @@
    100
   ]
  },
- "pool": 4739,
- "source_digest": "9147e4e0ff50ac1c156f58c09ea7bb4442fc26d3a64eaec14cb239d6ee9f61c8",
+ "pool": 9341,
+ "source_digest": "4d4d5041d5042f22dd3f9f9b4e74ceed70a6a369b50a473600aa763696c781c0",
  "strides": {
-  "declarations": 23,
-  "goals": 47
+  "declarations": 46,
+  "goals": 93
  },
  "study": "studies/CORPUS_RESAMPLE_STUDY.md",
  "verdicts": {
   "a": {
    "declarations": {
     "discordance": {
-     "first_only": 164,
-     "second_only": 104,
+     "first_only": 341,
+     "second_only": 222,
      "sign_test": {
-      "__fraction__": "8811689929272033233597223249695814347479400413559790627771791864042853521353/29642774844752946028434172162224104410437116074403984394101141506025761187823616"
+      "__fraction__": "141785784757981553779773227222897908528648875653364860746108435375838301377190556570984081620338747770668043444166645408452412589135948622820057114715861431696435/235872651551346334515097161311766805682307576276027526773512893765351510149509303255382920323603672971341773439422740306235661539370299539535089640714543502728087207936"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "7/37"
+     "__fraction__": "5/404"
     },
     "opposite_offsets": {
-     "__fraction__": "2/23"
+     "__fraction__": "1/23"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "73/185"
+       "__fraction__": "71/202"
       },
       "ge_offsets": {
-       "__fraction__": "14/23"
+       "__fraction__": "19/46"
       },
       "gt_file_drops": {
-       "__fraction__": "47/185"
+       "__fraction__": "91/404"
       },
       "gt_offsets": {
-       "__fraction__": "11/23"
+       "__fraction__": "8/23"
       },
       "lt_file_drops": {
-       "__fraction__": "112/185"
+       "__fraction__": "131/202"
       },
       "lt_offsets": {
-       "__fraction__": "9/23"
+       "__fraction__": "27/46"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "119/185"
+       "__fraction__": "193/202"
       },
       "ge_offsets": {
        "__fraction__": "20/23"
       },
       "gt_file_drops": {
-       "__fraction__": "69/185"
+       "__fraction__": "381/404"
       },
       "gt_offsets": {
-       "__fraction__": "20/23"
+       "__fraction__": "19/23"
       },
       "lt_file_drops": {
-       "__fraction__": "66/185"
+       "__fraction__": "9/202"
       },
       "lt_offsets": {
        "__fraction__": "3/23"
@@ -1314,154 +2697,154 @@
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "91/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "17/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "15/37"
-      },
-      "gt_offsets": {
-       "__fraction__": "17/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "94/185"
-      },
-      "lt_offsets": {
-       "__fraction__": "6/23"
-      }
-     },
-     "5": {
-      "ge_file_drops": {
-       "__fraction__": "32/37"
+       "__fraction__": "387/404"
       },
       "ge_offsets": {
        "__fraction__": "19/23"
       },
       "gt_file_drops": {
-       "__fraction__": "116/185"
+       "__fraction__": "191/202"
       },
       "gt_offsets": {
-       "__fraction__": "15/23"
+       "__fraction__": "17/23"
       },
       "lt_file_drops": {
-       "__fraction__": "5/37"
+       "__fraction__": "17/404"
       },
       "lt_offsets": {
        "__fraction__": "4/23"
       }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "399/404"
+      },
+      "ge_offsets": {
+       "__fraction__": "20/23"
+      },
+      "gt_file_drops": {
+       "__fraction__": "389/404"
+      },
+      "gt_offsets": {
+       "__fraction__": "35/46"
+      },
+      "lt_file_drops": {
+       "__fraction__": "5/404"
+      },
+      "lt_offsets": {
+       "__fraction__": "3/23"
+      }
      }
     },
     "share_file_drops": {
-     "__fraction__": "5/37"
+     "__fraction__": "35/101"
     },
     "share_offsets": {
-     "__fraction__": "11/23"
+     "__fraction__": "15/46"
     },
     "verdict": "draw"
    },
    "goals": {
     "discordance": {
-     "first_only": 140,
-     "second_only": 104,
+     "first_only": 267,
+     "second_only": 228,
      "sign_test": {
-      "__fraction__": "175617380444526448813453753643038558489426167938867237146438993652301643/7067388259113537318333190002971674063309935587502475832486424805170479104"
+      "__fraction__": "4477333971654939054712579461099920830105539632135273395940870887354920396428514588407816780585505078148816990124179508115658025509798936457530996379/51146728248377216718956089012931236753385031969422887335676427626502090568823039920051095192592252455482604439493126109519019633529459266458258243584"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "36/185"
+     "__fraction__": "11/101"
     },
     "opposite_offsets": {
-     "__fraction__": "4/47"
+     "__fraction__": "20/93"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "82/185"
+       "__fraction__": "207/404"
       },
       "ge_offsets": {
-       "__fraction__": "30/47"
+       "__fraction__": "11/31"
       },
       "gt_file_drops": {
-       "__fraction__": "38/185"
+       "__fraction__": "147/404"
       },
       "gt_offsets": {
-       "__fraction__": "19/47"
+       "__fraction__": "23/93"
       },
       "lt_file_drops": {
-       "__fraction__": "103/185"
+       "__fraction__": "197/404"
       },
       "lt_offsets": {
-       "__fraction__": "17/47"
+       "__fraction__": "20/31"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "121/185"
+       "__fraction__": "97/101"
       },
       "ge_offsets": {
-       "__fraction__": "37/47"
+       "__fraction__": "67/93"
       },
       "gt_file_drops": {
-       "__fraction__": "76/185"
+       "__fraction__": "311/404"
       },
       "gt_offsets": {
-       "__fraction__": "28/47"
+       "__fraction__": "41/93"
       },
       "lt_file_drops": {
-       "__fraction__": "64/185"
+       "__fraction__": "4/101"
       },
       "lt_offsets": {
-       "__fraction__": "10/47"
+       "__fraction__": "26/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "10/37"
+       "__fraction__": "195/404"
       },
       "ge_offsets": {
-       "__fraction__": "36/47"
+       "__fraction__": "2/3"
       },
       "gt_file_drops": {
-       "__fraction__": "22/185"
+       "__fraction__": "159/404"
       },
       "gt_offsets": {
-       "__fraction__": "28/47"
+       "__fraction__": "46/93"
       },
       "lt_file_drops": {
-       "__fraction__": "27/37"
+       "__fraction__": "209/404"
       },
       "lt_offsets": {
-       "__fraction__": "11/47"
+       "__fraction__": "1/3"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "146/185"
+       "__fraction__": "267/404"
       },
       "ge_offsets": {
-       "__fraction__": "33/47"
+       "__fraction__": "2/3"
       },
       "gt_file_drops": {
-       "__fraction__": "124/185"
+       "__fraction__": "1/2"
       },
       "gt_offsets": {
-       "__fraction__": "27/47"
+       "__fraction__": "44/93"
       },
       "lt_file_drops": {
-       "__fraction__": "39/185"
+       "__fraction__": "137/404"
       },
       "lt_offsets": {
-       "__fraction__": "14/47"
+       "__fraction__": "1/3"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "12/185"
+     "__fraction__": "113/404"
     },
     "share_offsets": {
-     "__fraction__": "19/47"
+     "__fraction__": "4/31"
     },
     "verdict": "draw"
    }
@@ -1469,34 +2852,34 @@
   "b": {
    "declarations": {
     "discordance": {
-     "first_only": 33,
-     "second_only": 62,
+     "first_only": 94,
+     "second_only": 146,
      "sign_test": {
-      "__fraction__": "1186216547677175014271119/309485009821345068724781056"
+      "__fraction__": "421823040201758367523171708037887148059297861972568442295875527086875/441711766194596082395824375185729628956870974218904739530401550323154944"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "97/185"
+     "__fraction__": "37/202"
     },
     "opposite_offsets": {
-     "__fraction__": "9/23"
+     "__fraction__": "1/2"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "31/185"
+       "__fraction__": "247/404"
       },
       "ge_offsets": {
        "__fraction__": "6/23"
       },
       "gt_file_drops": {
-       "__fraction__": "22/185"
+       "__fraction__": "197/404"
       },
       "gt_offsets": {
-       "__fraction__": "5/23"
+       "__fraction__": "3/23"
       },
       "lt_file_drops": {
-       "__fraction__": "154/185"
+       "__fraction__": "157/404"
       },
       "lt_offsets": {
        "__fraction__": "17/23"
@@ -1504,174 +2887,174 @@
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "26/37"
+       "__fraction__": "133/404"
       },
       "ge_offsets": {
-       "__fraction__": "12/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "56/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "6/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "11/37"
-      },
-      "lt_offsets": {
        "__fraction__": "11/23"
-      }
-     },
-     "3": {
-      "ge_file_drops": {
-       "__fraction__": "11/37"
-      },
-      "ge_offsets": {
-       "__fraction__": "7/23"
       },
       "gt_file_drops": {
-       "__fraction__": "21/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "3/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "26/37"
-      },
-      "lt_offsets": {
-       "__fraction__": "16/23"
-      }
-     },
-     "5": {
-      "ge_file_drops": {
-       "__fraction__": "52/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "8/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "26/185"
+       "__fraction__": "53/404"
       },
       "gt_offsets": {
        "__fraction__": "5/23"
       },
       "lt_file_drops": {
-       "__fraction__": "133/185"
+       "__fraction__": "271/404"
       },
       "lt_offsets": {
-       "__fraction__": "15/23"
+       "__fraction__": "12/23"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "331/404"
+      },
+      "ge_offsets": {
+       "__fraction__": "9/23"
+      },
+      "gt_file_drops": {
+       "__fraction__": "135/202"
+      },
+      "gt_offsets": {
+       "__fraction__": "5/23"
+      },
+      "lt_file_drops": {
+       "__fraction__": "73/404"
+      },
+      "lt_offsets": {
+       "__fraction__": "14/23"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "307/404"
+      },
+      "ge_offsets": {
+       "__fraction__": "17/46"
+      },
+      "gt_file_drops": {
+       "__fraction__": "237/404"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/23"
+      },
+      "lt_file_drops": {
+       "__fraction__": "97/404"
+      },
+      "lt_offsets": {
+       "__fraction__": "29/46"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "2/185"
+     "__fraction__": "69/404"
     },
     "share_offsets": {
-     "__fraction__": "0/1"
+     "__fraction__": "1/23"
     },
     "verdict": "draw"
    },
    "goals": {
     "discordance": {
-     "first_only": 50,
-     "second_only": 57,
+     "first_only": 167,
+     "second_only": 135,
      "sign_test": {
-      "__fraction__": "11400594073477334793088425123139/20282409603651670423947251286016"
+      "__fraction__": "37824353349420509153525361965460669884193415936948624318923056618669594962917895597492543/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "7/37"
+     "__fraction__": "47/202"
     },
     "opposite_offsets": {
-     "__fraction__": "9/47"
+     "__fraction__": "13/93"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "28/37"
+       "__fraction__": "155/202"
       },
       "ge_offsets": {
-       "__fraction__": "26/47"
+       "__fraction__": "50/93"
       },
       "gt_file_drops": {
-       "__fraction__": "93/185"
+       "__fraction__": "53/101"
       },
       "gt_offsets": {
-       "__fraction__": "18/47"
+       "__fraction__": "34/93"
       },
       "lt_file_drops": {
-       "__fraction__": "9/37"
+       "__fraction__": "47/202"
       },
       "lt_offsets": {
-       "__fraction__": "21/47"
+       "__fraction__": "43/93"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "138/185"
+       "__fraction__": "55/202"
       },
       "ge_offsets": {
-       "__fraction__": "32/47"
+       "__fraction__": "58/93"
       },
       "gt_file_drops": {
-       "__fraction__": "73/185"
+       "__fraction__": "45/404"
       },
       "gt_offsets": {
-       "__fraction__": "19/47"
+       "__fraction__": "11/31"
       },
       "lt_file_drops": {
-       "__fraction__": "47/185"
+       "__fraction__": "147/202"
       },
       "lt_offsets": {
-       "__fraction__": "15/47"
+       "__fraction__": "35/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "94/185"
+       "__fraction__": "205/404"
       },
       "ge_offsets": {
-       "__fraction__": "27/47"
+       "__fraction__": "64/93"
       },
       "gt_file_drops": {
-       "__fraction__": "38/185"
+       "__fraction__": "34/101"
       },
       "gt_offsets": {
-       "__fraction__": "12/47"
+       "__fraction__": "46/93"
       },
       "lt_file_drops": {
-       "__fraction__": "91/185"
+       "__fraction__": "199/404"
       },
       "lt_offsets": {
-       "__fraction__": "20/47"
+       "__fraction__": "29/93"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "131/185"
+       "__fraction__": "257/404"
       },
       "ge_offsets": {
-       "__fraction__": "27/47"
+       "__fraction__": "65/93"
       },
       "gt_file_drops": {
-       "__fraction__": "89/185"
+       "__fraction__": "169/404"
       },
       "gt_offsets": {
-       "__fraction__": "16/47"
+       "__fraction__": "49/93"
       },
       "lt_file_drops": {
-       "__fraction__": "54/185"
+       "__fraction__": "147/404"
       },
       "lt_offsets": {
-       "__fraction__": "20/47"
+       "__fraction__": "28/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "53/185"
+     "__fraction__": "31/202"
     },
     "share_offsets": {
-     "__fraction__": "10/47"
+     "__fraction__": "19/93"
     },
     "verdict": "draw"
    }
@@ -1679,14 +3062,14 @@
   "c": {
    "declarations": {
     "discordance": {
-     "first_only": 132,
-     "second_only": 37,
+     "first_only": 281,
+     "second_only": 76,
      "sign_test": {
-      "__fraction__": "19120005580352061242780769015468201715/187072209578355573530071658587684226515959365500928"
+      "__fraction__": "3308127956229157604558152422108959266854054986077554028434760117451792805594185/36695977855841144185773134324833391052745039826692497979801421430190766017415756929120296849762010984873984"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "14/185"
+     "__fraction__": "0/1"
     },
     "opposite_offsets": {
      "__fraction__": "0/1"
@@ -1694,87 +3077,87 @@
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "129/185"
+       "__fraction__": "291/404"
       },
       "ge_offsets": {
-       "__fraction__": "22/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "98/185"
-      },
-      "gt_offsets": {
        "__fraction__": "19/23"
       },
+      "gt_file_drops": {
+       "__fraction__": "59/101"
+      },
+      "gt_offsets": {
+       "__fraction__": "31/46"
+      },
       "lt_file_drops": {
-       "__fraction__": "56/185"
+       "__fraction__": "113/404"
       },
       "lt_offsets": {
-       "__fraction__": "1/23"
+       "__fraction__": "4/23"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "122/185"
+       "__fraction__": "1/1"
       },
       "ge_offsets": {
-       "__fraction__": "21/23"
+       "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "84/185"
+       "__fraction__": "403/404"
       },
       "gt_offsets": {
-       "__fraction__": "19/23"
+       "__fraction__": "45/46"
       },
       "lt_file_drops": {
-       "__fraction__": "63/185"
+       "__fraction__": "0/1"
       },
       "lt_offsets": {
-       "__fraction__": "2/23"
+       "__fraction__": "0/1"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "147/185"
+       "__fraction__": "1/1"
       },
       "ge_offsets": {
-       "__fraction__": "20/23"
+       "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "119/185"
+       "__fraction__": "403/404"
       },
       "gt_offsets": {
-       "__fraction__": "20/23"
+       "__fraction__": "45/46"
       },
       "lt_file_drops": {
-       "__fraction__": "38/185"
+       "__fraction__": "0/1"
       },
       "lt_offsets": {
-       "__fraction__": "3/23"
+       "__fraction__": "0/1"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "144/185"
+       "__fraction__": "1/1"
       },
       "ge_offsets": {
-       "__fraction__": "21/23"
+       "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "117/185"
+       "__fraction__": "1/1"
       },
       "gt_offsets": {
-       "__fraction__": "20/23"
+       "__fraction__": "45/46"
       },
       "lt_file_drops": {
-       "__fraction__": "41/185"
+       "__fraction__": "0/1"
       },
       "lt_offsets": {
-       "__fraction__": "2/23"
+       "__fraction__": "0/1"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "77/185"
+     "__fraction__": "291/404"
     },
     "share_offsets": {
      "__fraction__": "19/23"
@@ -1783,105 +3166,105 @@
    },
    "goals": {
     "discordance": {
-     "first_only": 110,
-     "second_only": 35,
+     "first_only": 213,
+     "second_only": 75,
      "sign_test": {
-      "__fraction__": "888616964341503802341909379721107/2787593149816327892691964784081045188247552"
+      "__fraction__": "11017866506172740976869729361873442826393173791692815021170504678840191/62165404551223330269422781018352605012557018849668464680057997111644937126566671941632"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "22/185"
+     "__fraction__": "0/1"
     },
     "opposite_offsets": {
-     "__fraction__": "0/1"
+     "__fraction__": "5/93"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "117/185"
+       "__fraction__": "75/101"
       },
       "ge_offsets": {
-       "__fraction__": "35/47"
+       "__fraction__": "46/93"
       },
       "gt_file_drops": {
-       "__fraction__": "53/185"
+       "__fraction__": "60/101"
       },
       "gt_offsets": {
-       "__fraction__": "26/47"
+       "__fraction__": "34/93"
       },
       "lt_file_drops": {
-       "__fraction__": "68/185"
+       "__fraction__": "26/101"
       },
       "lt_offsets": {
-       "__fraction__": "12/47"
+       "__fraction__": "47/93"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "158/185"
+       "__fraction__": "403/404"
       },
       "ge_offsets": {
-       "__fraction__": "43/47"
+       "__fraction__": "86/93"
       },
       "gt_file_drops": {
-       "__fraction__": "126/185"
+       "__fraction__": "98/101"
       },
       "gt_offsets": {
-       "__fraction__": "34/47"
+       "__fraction__": "21/31"
       },
       "lt_file_drops": {
-       "__fraction__": "27/185"
+       "__fraction__": "1/404"
       },
       "lt_offsets": {
-       "__fraction__": "4/47"
+       "__fraction__": "7/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "84/185"
+       "__fraction__": "161/202"
       },
       "ge_offsets": {
-       "__fraction__": "44/47"
+       "__fraction__": "80/93"
       },
       "gt_file_drops": {
-       "__fraction__": "38/185"
+       "__fraction__": "227/404"
       },
       "gt_offsets": {
-       "__fraction__": "37/47"
+       "__fraction__": "22/31"
       },
       "lt_file_drops": {
-       "__fraction__": "101/185"
+       "__fraction__": "41/202"
       },
       "lt_offsets": {
-       "__fraction__": "3/47"
+       "__fraction__": "13/93"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "33/37"
+       "__fraction__": "197/202"
       },
       "ge_offsets": {
-       "__fraction__": "43/47"
+       "__fraction__": "82/93"
       },
       "gt_file_drops": {
-       "__fraction__": "123/185"
+       "__fraction__": "335/404"
       },
       "gt_offsets": {
-       "__fraction__": "36/47"
+       "__fraction__": "70/93"
       },
       "lt_file_drops": {
-       "__fraction__": "4/37"
+       "__fraction__": "5/202"
       },
       "lt_offsets": {
-       "__fraction__": "4/47"
+       "__fraction__": "11/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "42/185"
+     "__fraction__": "119/202"
     },
     "share_offsets": {
-     "__fraction__": "30/47"
+     "__fraction__": "12/31"
     },
     "verdict": "draw"
    }
@@ -1889,209 +3272,209 @@
   "d": {
    "declarations": {
     "discordance": {
-     "first_only": 19,
-     "second_only": 38,
+     "first_only": 58,
+     "second_only": 85,
      "sign_test": {
-      "__fraction__": "589002516963499/36028797018963968"
+      "__fraction__": "20441137998670073080752019557225128799173/696898287454081973172991196020261297061888"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "129/185"
+     "__fraction__": "85/404"
     },
     "opposite_offsets": {
-     "__fraction__": "8/23"
+     "__fraction__": "9/23"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "58/185"
+       "__fraction__": "59/101"
       },
       "ge_offsets": {
-       "__fraction__": "10/23"
+       "__fraction__": "17/46"
       },
       "gt_file_drops": {
-       "__fraction__": "3/37"
-      },
-      "gt_offsets": {
-       "__fraction__": "5/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "127/185"
-      },
-      "lt_offsets": {
-       "__fraction__": "13/23"
-      }
-     },
-     "10": {
-      "ge_file_drops": {
-       "__fraction__": "4/5"
-      },
-      "ge_offsets": {
-       "__fraction__": "18/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "39/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "8/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "1/5"
-      },
-      "lt_offsets": {
-       "__fraction__": "5/23"
-      }
-     },
-     "3": {
-      "ge_file_drops": {
-       "__fraction__": "29/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "9/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "14/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "5/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "156/185"
-      },
-      "lt_offsets": {
-       "__fraction__": "14/23"
-      }
-     },
-     "5": {
-      "ge_file_drops": {
-       "__fraction__": "18/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "8/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "9/185"
+       "__fraction__": "81/202"
       },
       "gt_offsets": {
        "__fraction__": "4/23"
       },
       "lt_file_drops": {
-       "__fraction__": "167/185"
+       "__fraction__": "42/101"
       },
       "lt_offsets": {
-       "__fraction__": "15/23"
+       "__fraction__": "29/46"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "141/202"
+      },
+      "ge_offsets": {
+       "__fraction__": "25/46"
+      },
+      "gt_file_drops": {
+       "__fraction__": "27/101"
+      },
+      "gt_offsets": {
+       "__fraction__": "11/46"
+      },
+      "lt_file_drops": {
+       "__fraction__": "61/202"
+      },
+      "lt_offsets": {
+       "__fraction__": "21/46"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "81/101"
+      },
+      "ge_offsets": {
+       "__fraction__": "11/23"
+      },
+      "gt_file_drops": {
+       "__fraction__": "249/404"
+      },
+      "gt_offsets": {
+       "__fraction__": "13/46"
+      },
+      "lt_file_drops": {
+       "__fraction__": "20/101"
+      },
+      "lt_offsets": {
+       "__fraction__": "12/23"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "285/404"
+      },
+      "ge_offsets": {
+       "__fraction__": "25/46"
+      },
+      "gt_file_drops": {
+       "__fraction__": "147/404"
+      },
+      "gt_offsets": {
+       "__fraction__": "13/46"
+      },
+      "lt_file_drops": {
+       "__fraction__": "119/404"
+      },
+      "lt_offsets": {
+       "__fraction__": "21/46"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "9/185"
+     "__fraction__": "147/404"
     },
     "share_offsets": {
-     "__fraction__": "4/23"
+     "__fraction__": "3/46"
     },
     "verdict": "draw"
    },
    "goals": {
     "discordance": {
-     "first_only": 34,
-     "second_only": 29,
+     "first_only": 140,
+     "second_only": 68,
      "sign_test": {
-      "__fraction__": "44290561599403837/72057594037927936"
+      "__fraction__": "137115064300345450894945944080455346348084917127380124227/205688069665150755269371147819668813122841983204197482918576128"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "4/37"
+     "__fraction__": "5/101"
     },
     "opposite_offsets": {
-     "__fraction__": "9/47"
+     "__fraction__": "4/31"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "161/185"
+       "__fraction__": "187/202"
       },
       "ge_offsets": {
-       "__fraction__": "34/47"
+       "__fraction__": "20/31"
       },
       "gt_file_drops": {
-       "__fraction__": "134/185"
+       "__fraction__": "163/202"
       },
       "gt_offsets": {
-       "__fraction__": "23/47"
+       "__fraction__": "41/93"
       },
       "lt_file_drops": {
-       "__fraction__": "24/185"
+       "__fraction__": "15/202"
       },
       "lt_offsets": {
-       "__fraction__": "13/47"
+       "__fraction__": "11/31"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "172/185"
+       "__fraction__": "47/101"
       },
       "ge_offsets": {
-       "__fraction__": "43/47"
+       "__fraction__": "23/31"
       },
       "gt_file_drops": {
-       "__fraction__": "67/185"
+       "__fraction__": "31/202"
       },
       "gt_offsets": {
-       "__fraction__": "19/47"
+       "__fraction__": "25/93"
       },
       "lt_file_drops": {
-       "__fraction__": "13/185"
+       "__fraction__": "54/101"
       },
       "lt_offsets": {
-       "__fraction__": "4/47"
+       "__fraction__": "8/31"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "143/185"
+       "__fraction__": "83/101"
       },
       "ge_offsets": {
-       "__fraction__": "31/47"
+       "__fraction__": "74/93"
       },
       "gt_file_drops": {
-       "__fraction__": "77/185"
+       "__fraction__": "201/404"
       },
       "gt_offsets": {
-       "__fraction__": "14/47"
+       "__fraction__": "56/93"
       },
       "lt_file_drops": {
-       "__fraction__": "42/185"
+       "__fraction__": "18/101"
       },
       "lt_offsets": {
-       "__fraction__": "16/47"
+       "__fraction__": "19/93"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "151/185"
+       "__fraction__": "367/404"
       },
       "ge_offsets": {
-       "__fraction__": "36/47"
+       "__fraction__": "80/93"
       },
       "gt_file_drops": {
-       "__fraction__": "72/185"
+       "__fraction__": "119/202"
       },
       "gt_offsets": {
-       "__fraction__": "15/47"
+       "__fraction__": "17/31"
       },
       "lt_file_drops": {
-       "__fraction__": "34/185"
+       "__fraction__": "37/404"
       },
       "lt_offsets": {
-       "__fraction__": "11/47"
+       "__fraction__": "13/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "22/37"
+     "__fraction__": "129/404"
     },
     "share_offsets": {
-     "__fraction__": "17/47"
+     "__fraction__": "13/31"
     },
     "verdict": "draw"
    }
@@ -2099,209 +3482,209 @@
   "e": {
    "declarations": {
     "discordance": {
-     "first_only": 33,
-     "second_only": 56,
+     "first_only": 83,
+     "second_only": 130,
      "sign_test": {
-      "__fraction__": "1484491942405972296026653/77371252455336267181195264"
+      "__fraction__": "5137707310677040883471054881444899827412908814961185786045059/3291009114642412084309938365114701009965471731267159726697218048"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "164/185"
+     "__fraction__": "291/404"
     },
     "opposite_offsets": {
-     "__fraction__": "19/23"
+     "__fraction__": "33/46"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "19/185"
+       "__fraction__": "219/404"
       },
       "ge_offsets": {
-       "__fraction__": "10/23"
+       "__fraction__": "11/46"
       },
       "gt_file_drops": {
-       "__fraction__": "2/37"
+       "__fraction__": "79/202"
       },
       "gt_offsets": {
-       "__fraction__": "6/23"
+       "__fraction__": "7/46"
       },
       "lt_file_drops": {
-       "__fraction__": "166/185"
+       "__fraction__": "185/404"
       },
       "lt_offsets": {
-       "__fraction__": "13/23"
+       "__fraction__": "35/46"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "107/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "13/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "31/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "5/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "78/185"
-      },
-      "lt_offsets": {
-       "__fraction__": "10/23"
-      }
-     },
-     "3": {
-      "ge_file_drops": {
-       "__fraction__": "34/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "8/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "17/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "8/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "151/185"
-      },
-      "lt_offsets": {
-       "__fraction__": "15/23"
-      }
-     },
-     "5": {
-      "ge_file_drops": {
-       "__fraction__": "47/185"
+       "__fraction__": "117/202"
       },
       "ge_offsets": {
        "__fraction__": "11/23"
       },
       "gt_file_drops": {
-       "__fraction__": "21/185"
+       "__fraction__": "93/404"
       },
       "gt_offsets": {
-       "__fraction__": "4/23"
+       "__fraction__": "6/23"
       },
       "lt_file_drops": {
-       "__fraction__": "138/185"
+       "__fraction__": "85/202"
       },
       "lt_offsets": {
        "__fraction__": "12/23"
       }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "151/202"
+      },
+      "ge_offsets": {
+       "__fraction__": "21/46"
+      },
+      "gt_file_drops": {
+       "__fraction__": "121/202"
+      },
+      "gt_offsets": {
+       "__fraction__": "5/23"
+      },
+      "lt_file_drops": {
+       "__fraction__": "51/202"
+      },
+      "lt_offsets": {
+       "__fraction__": "25/46"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "193/404"
+      },
+      "ge_offsets": {
+       "__fraction__": "19/46"
+      },
+      "gt_file_drops": {
+       "__fraction__": "113/404"
+      },
+      "gt_offsets": {
+       "__fraction__": "13/46"
+      },
+      "lt_file_drops": {
+       "__fraction__": "211/404"
+      },
+      "lt_offsets": {
+       "__fraction__": "27/46"
+      }
      }
     },
     "share_file_drops": {
-     "__fraction__": "47/185"
+     "__fraction__": "193/404"
     },
     "share_offsets": {
-     "__fraction__": "11/23"
+     "__fraction__": "19/46"
     },
     "verdict": "draw"
    },
    "goals": {
     "discordance": {
-     "first_only": 52,
-     "second_only": 48,
+     "first_only": 182,
+     "second_only": 103,
      "sign_test": {
-      "__fraction__": "121116636238381142849939157815/158456325028528675187087900672"
+      "__fraction__": "3246417025190961450820296481014089944895967170360680398748645292914521756868049/971334446112864535459730953411759453321203419526069760625906204869452142602604249088"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "107/185"
+     "__fraction__": "153/404"
     },
     "opposite_offsets": {
-     "__fraction__": "30/47"
+     "__fraction__": "43/93"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "137/185"
+       "__fraction__": "181/202"
       },
       "ge_offsets": {
-       "__fraction__": "33/47"
+       "__fraction__": "65/93"
       },
       "gt_file_drops": {
-       "__fraction__": "88/185"
+       "__fraction__": "161/202"
       },
       "gt_offsets": {
-       "__fraction__": "26/47"
+       "__fraction__": "47/93"
       },
       "lt_file_drops": {
-       "__fraction__": "48/185"
+       "__fraction__": "21/202"
       },
       "lt_offsets": {
-       "__fraction__": "14/47"
+       "__fraction__": "28/93"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "28/37"
+       "__fraction__": "43/101"
       },
       "ge_offsets": {
-       "__fraction__": "36/47"
+       "__fraction__": "59/93"
       },
       "gt_file_drops": {
-       "__fraction__": "61/185"
+       "__fraction__": "65/404"
       },
       "gt_offsets": {
-       "__fraction__": "19/47"
+       "__fraction__": "1/3"
       },
       "lt_file_drops": {
-       "__fraction__": "9/37"
+       "__fraction__": "58/101"
       },
       "lt_offsets": {
-       "__fraction__": "11/47"
+       "__fraction__": "34/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "56/185"
+       "__fraction__": "317/404"
       },
       "ge_offsets": {
-       "__fraction__": "32/47"
+       "__fraction__": "74/93"
       },
       "gt_file_drops": {
-       "__fraction__": "26/185"
+       "__fraction__": "227/404"
       },
       "gt_offsets": {
-       "__fraction__": "20/47"
+       "__fraction__": "19/31"
       },
       "lt_file_drops": {
-       "__fraction__": "129/185"
+       "__fraction__": "87/404"
       },
       "lt_offsets": {
-       "__fraction__": "15/47"
+       "__fraction__": "19/93"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "22/37"
+       "__fraction__": "175/202"
       },
       "ge_offsets": {
-       "__fraction__": "35/47"
+       "__fraction__": "74/93"
       },
       "gt_file_drops": {
-       "__fraction__": "78/185"
+       "__fraction__": "251/404"
       },
       "gt_offsets": {
-       "__fraction__": "17/47"
+       "__fraction__": "50/93"
       },
       "lt_file_drops": {
-       "__fraction__": "15/37"
+       "__fraction__": "27/202"
       },
       "lt_offsets": {
-       "__fraction__": "12/47"
+       "__fraction__": "19/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "22/37"
+     "__fraction__": "175/202"
     },
     "share_offsets": {
-     "__fraction__": "35/47"
+     "__fraction__": "74/93"
     },
     "verdict": "draw"
    }
@@ -2309,14 +3692,14 @@
   "f": {
    "declarations": {
     "discordance": {
-     "first_only": 149,
-     "second_only": 31,
+     "first_only": 321,
+     "second_only": 69,
      "sign_test": {
-      "__fraction__": "10080794087766339292817601500705717/95780971304118053647396689196894323976171195136475136"
+      "__fraction__": "373991367848106732686239234205701438874540032522392821349653834381265728837039/630432099142311667396464641602297820881275828327447146687172694467931548343955369782628260078158650252906047844909056"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "1/185"
+     "__fraction__": "0/1"
     },
     "opposite_offsets": {
      "__fraction__": "0/1"
@@ -2324,79 +3707,79 @@
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "174/185"
+       "__fraction__": "319/404"
       },
       "ge_offsets": {
-       "__fraction__": "20/23"
+       "__fraction__": "45/46"
       },
       "gt_file_drops": {
-       "__fraction__": "161/185"
+       "__fraction__": "109/202"
       },
       "gt_offsets": {
-       "__fraction__": "19/23"
+       "__fraction__": "43/46"
       },
       "lt_file_drops": {
-       "__fraction__": "11/185"
+       "__fraction__": "85/404"
       },
       "lt_offsets": {
-       "__fraction__": "3/23"
+       "__fraction__": "1/46"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "134/185"
+       "__fraction__": "1/1"
       },
       "ge_offsets": {
-       "__fraction__": "22/23"
+       "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "91/185"
+       "__fraction__": "1/1"
       },
       "gt_offsets": {
-       "__fraction__": "21/23"
+       "__fraction__": "1/1"
       },
       "lt_file_drops": {
-       "__fraction__": "51/185"
+       "__fraction__": "0/1"
       },
       "lt_offsets": {
-       "__fraction__": "1/23"
+       "__fraction__": "0/1"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "183/185"
+       "__fraction__": "1/1"
       },
       "ge_offsets": {
-       "__fraction__": "22/23"
+       "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "181/185"
+       "__fraction__": "100/101"
       },
       "gt_offsets": {
        "__fraction__": "22/23"
       },
       "lt_file_drops": {
-       "__fraction__": "2/185"
+       "__fraction__": "0/1"
       },
       "lt_offsets": {
-       "__fraction__": "1/23"
+       "__fraction__": "0/1"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "184/185"
+       "__fraction__": "399/404"
       },
       "ge_offsets": {
        "__fraction__": "22/23"
       },
       "gt_file_drops": {
-       "__fraction__": "35/37"
+       "__fraction__": "199/202"
       },
       "gt_offsets": {
-       "__fraction__": "21/23"
+       "__fraction__": "22/23"
       },
       "lt_file_drops": {
-       "__fraction__": "1/185"
+       "__fraction__": "5/404"
       },
       "lt_offsets": {
        "__fraction__": "1/23"
@@ -2404,114 +3787,114 @@
      }
     },
     "share_file_drops": {
-     "__fraction__": "126/185"
+     "__fraction__": "157/202"
     },
     "share_offsets": {
-     "__fraction__": "19/23"
+     "__fraction__": "43/46"
     },
     "verdict": "draw"
    },
    "goals": {
     "discordance": {
-     "first_only": 110,
-     "second_only": 39,
+     "first_only": 217,
+     "second_only": 158,
      "sign_test": {
-      "__fraction__": "56110409214398955348009107427199503/11150372599265311570767859136324180752990208"
+      "__fraction__": "12966020574860085073901096277188736486116966660783950470283873058266990805804896628414936853507341519293144253/4809815209520810450717656262224562232065397860164239095208531909697964083434718092213655548692006303809402830848"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "4/37"
+     "__fraction__": "9/404"
     },
     "opposite_offsets": {
-     "__fraction__": "3/47"
+     "__fraction__": "4/31"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "84/185"
+       "__fraction__": "43/101"
       },
       "ge_offsets": {
-       "__fraction__": "30/47"
+       "__fraction__": "44/93"
       },
       "gt_file_drops": {
-       "__fraction__": "38/185"
+       "__fraction__": "81/404"
       },
       "gt_offsets": {
-       "__fraction__": "20/47"
+       "__fraction__": "9/31"
       },
       "lt_file_drops": {
-       "__fraction__": "101/185"
+       "__fraction__": "58/101"
       },
       "lt_offsets": {
-       "__fraction__": "17/47"
+       "__fraction__": "49/93"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "153/185"
+       "__fraction__": "100/101"
       },
       "ge_offsets": {
-       "__fraction__": "44/47"
+       "__fraction__": "80/93"
       },
       "gt_file_drops": {
-       "__fraction__": "128/185"
+       "__fraction__": "191/202"
       },
       "gt_offsets": {
-       "__fraction__": "35/47"
+       "__fraction__": "64/93"
       },
       "lt_file_drops": {
-       "__fraction__": "32/185"
+       "__fraction__": "1/101"
       },
       "lt_offsets": {
-       "__fraction__": "3/47"
+       "__fraction__": "13/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "156/185"
+       "__fraction__": "125/202"
       },
       "ge_offsets": {
-       "__fraction__": "41/47"
+       "__fraction__": "2/3"
       },
       "gt_file_drops": {
-       "__fraction__": "20/37"
+       "__fraction__": "33/101"
       },
       "gt_offsets": {
-       "__fraction__": "34/47"
+       "__fraction__": "41/93"
       },
       "lt_file_drops": {
-       "__fraction__": "29/185"
+       "__fraction__": "77/202"
       },
       "lt_offsets": {
-       "__fraction__": "6/47"
+       "__fraction__": "1/3"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "166/185"
+       "__fraction__": "315/404"
       },
       "ge_offsets": {
-       "__fraction__": "42/47"
+       "__fraction__": "70/93"
       },
       "gt_file_drops": {
-       "__fraction__": "143/185"
+       "__fraction__": "179/404"
       },
       "gt_offsets": {
-       "__fraction__": "36/47"
+       "__fraction__": "49/93"
       },
       "lt_file_drops": {
-       "__fraction__": "19/185"
+       "__fraction__": "89/404"
       },
       "lt_offsets": {
-       "__fraction__": "5/47"
+       "__fraction__": "23/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "66/185"
+     "__fraction__": "127/404"
     },
     "share_offsets": {
-     "__fraction__": "26/47"
+     "__fraction__": "29/93"
     },
     "verdict": "draw"
    }
@@ -2519,105 +3902,105 @@
   "g": {
    "declarations": {
     "discordance": {
-     "first_only": 67,
-     "second_only": 57,
+     "first_only": 101,
+     "second_only": 98,
      "sign_test": {
-      "__fraction__": "4456356406811768661591949822409184155/10633823966279326983230456482242756608"
+      "__fraction__": "89115063434173982075697108636637142173324613401997885101171/100433627766186892221372630771322662657637687111424552206336"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "3/185"
+     "__fraction__": "5/404"
     },
     "opposite_offsets": {
-     "__fraction__": "2/23"
+     "__fraction__": "3/46"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "178/185"
-      },
-      "ge_offsets": {
-       "__fraction__": "19/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "168/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "14/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "7/185"
-      },
-      "lt_offsets": {
-       "__fraction__": "4/23"
-      }
-     },
-     "10": {
-      "ge_file_drops": {
-       "__fraction__": "33/37"
+       "__fraction__": "331/404"
       },
       "ge_offsets": {
        "__fraction__": "16/23"
       },
       "gt_file_drops": {
-       "__fraction__": "94/185"
+       "__fraction__": "251/404"
       },
       "gt_offsets": {
-       "__fraction__": "8/23"
+       "__fraction__": "21/46"
       },
       "lt_file_drops": {
-       "__fraction__": "4/37"
+       "__fraction__": "73/404"
       },
       "lt_offsets": {
        "__fraction__": "7/23"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "377/404"
+      },
+      "ge_offsets": {
+       "__fraction__": "15/23"
+      },
+      "gt_file_drops": {
+       "__fraction__": "179/202"
+      },
+      "gt_offsets": {
+       "__fraction__": "11/23"
+      },
+      "lt_file_drops": {
+       "__fraction__": "27/404"
+      },
+      "lt_offsets": {
+       "__fraction__": "8/23"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "1/5"
+       "__fraction__": "307/404"
       },
       "ge_offsets": {
-       "__fraction__": "11/23"
+       "__fraction__": "29/46"
       },
       "gt_file_drops": {
-       "__fraction__": "23/185"
+       "__fraction__": "241/404"
       },
       "gt_offsets": {
-       "__fraction__": "7/23"
+       "__fraction__": "21/46"
       },
       "lt_file_drops": {
-       "__fraction__": "4/5"
+       "__fraction__": "97/404"
       },
       "lt_offsets": {
-       "__fraction__": "12/23"
+       "__fraction__": "17/46"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "46/185"
+       "__fraction__": "345/404"
       },
       "ge_offsets": {
-       "__fraction__": "17/23"
+       "__fraction__": "27/46"
       },
       "gt_file_drops": {
-       "__fraction__": "27/185"
+       "__fraction__": "139/202"
       },
       "gt_offsets": {
-       "__fraction__": "10/23"
+       "__fraction__": "19/46"
       },
       "lt_file_drops": {
-       "__fraction__": "139/185"
+       "__fraction__": "59/404"
       },
       "lt_offsets": {
-       "__fraction__": "6/23"
+       "__fraction__": "19/46"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "11/185"
+     "__fraction__": "221/404"
     },
     "share_offsets": {
-     "__fraction__": "6/23"
+     "__fraction__": "4/23"
     },
     "verdict": "draw"
    }
@@ -2625,105 +4008,105 @@
   "h": {
    "goals": {
     "discordance": {
-     "first_only": 39,
-     "second_only": 57,
+     "first_only": 44,
+     "second_only": 88,
      "sign_test": {
-      "__fraction__": "1628001448293891823040427949/19807040628566084398385987584"
+      "__fraction__": "27262631881039299393273849741965323/170141183460469231731687303715884105728"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "15/37"
+     "__fraction__": "181/404"
     },
     "opposite_offsets": {
-     "__fraction__": "14/47"
+     "__fraction__": "37/93"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "172/185"
+       "__fraction__": "94/101"
       },
       "ge_offsets": {
-       "__fraction__": "37/47"
+       "__fraction__": "23/31"
       },
       "gt_file_drops": {
-       "__fraction__": "48/185"
+       "__fraction__": "83/404"
       },
       "gt_offsets": {
-       "__fraction__": "7/47"
+       "__fraction__": "25/93"
       },
       "lt_file_drops": {
-       "__fraction__": "13/185"
+       "__fraction__": "7/101"
       },
       "lt_offsets": {
-       "__fraction__": "10/47"
+       "__fraction__": "8/31"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "96/185"
+       "__fraction__": "93/202"
       },
       "ge_offsets": {
-       "__fraction__": "26/47"
+       "__fraction__": "56/93"
       },
       "gt_file_drops": {
-       "__fraction__": "33/185"
+       "__fraction__": "73/404"
       },
       "gt_offsets": {
-       "__fraction__": "15/47"
+       "__fraction__": "17/93"
       },
       "lt_file_drops": {
-       "__fraction__": "89/185"
+       "__fraction__": "109/202"
       },
       "lt_offsets": {
-       "__fraction__": "21/47"
+       "__fraction__": "37/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "88/185"
+       "__fraction__": "87/404"
       },
       "ge_offsets": {
-       "__fraction__": "31/47"
+       "__fraction__": "16/31"
       },
       "gt_file_drops": {
-       "__fraction__": "1/5"
+       "__fraction__": "11/202"
       },
       "gt_offsets": {
-       "__fraction__": "17/47"
+       "__fraction__": "6/31"
       },
       "lt_file_drops": {
-       "__fraction__": "97/185"
+       "__fraction__": "317/404"
       },
       "lt_offsets": {
-       "__fraction__": "16/47"
+       "__fraction__": "15/31"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "14/37"
+       "__fraction__": "81/101"
       },
       "ge_offsets": {
-       "__fraction__": "26/47"
+       "__fraction__": "49/93"
       },
       "gt_file_drops": {
-       "__fraction__": "33/185"
+       "__fraction__": "26/101"
       },
       "gt_offsets": {
-       "__fraction__": "12/47"
+       "__fraction__": "16/93"
       },
       "lt_file_drops": {
-       "__fraction__": "23/37"
+       "__fraction__": "20/101"
       },
       "lt_offsets": {
-       "__fraction__": "21/47"
+       "__fraction__": "44/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "14/185"
+     "__fraction__": "11/202"
     },
     "share_offsets": {
-     "__fraction__": "9/47"
+     "__fraction__": "5/31"
     },
     "verdict": "draw"
    }
@@ -2731,10 +4114,10 @@
   "i": {
    "declarations": {
     "discordance": {
-     "first_only": 234,
-     "second_only": 35,
+     "first_only": 367,
+     "second_only": 50,
      "sign_test": {
-      "__fraction__": "7727711566381760617267043644278460297192663/29642774844752946028434172162224104410437116074403984394101141506025761187823616"
+      "__fraction__": "22610139972199222392056417464528068489945305486759161908036656213/21153791001287955166461289857048673274508949854856999017108761448780985319561963066406054734070889115122918784800747465736192"
      }
     },
     "opposite_file_drops": {
@@ -2746,22 +4129,22 @@
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "1/1"
+       "__fraction__": "401/404"
       },
       "ge_offsets": {
-       "__fraction__": "1/1"
+       "__fraction__": "45/46"
       },
       "gt_file_drops": {
-       "__fraction__": "1/1"
+       "__fraction__": "100/101"
       },
       "gt_offsets": {
-       "__fraction__": "1/1"
+       "__fraction__": "45/46"
       },
       "lt_file_drops": {
-       "__fraction__": "0/1"
+       "__fraction__": "3/404"
       },
       "lt_offsets": {
-       "__fraction__": "0/1"
+       "__fraction__": "1/46"
       }
      },
      "10": {
@@ -2772,10 +4155,10 @@
        "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "1/1"
+       "__fraction__": "401/404"
       },
       "gt_offsets": {
-       "__fraction__": "1/1"
+       "__fraction__": "45/46"
       },
       "lt_file_drops": {
        "__fraction__": "0/1"
@@ -2792,7 +4175,7 @@
        "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "1/1"
+       "__fraction__": "403/404"
       },
       "gt_offsets": {
        "__fraction__": "1/1"
@@ -2812,7 +4195,7 @@
        "__fraction__": "1/1"
       },
       "gt_file_drops": {
-       "__fraction__": "184/185"
+       "__fraction__": "100/101"
       },
       "gt_offsets": {
        "__fraction__": "1/1"
@@ -2826,114 +4209,114 @@
      }
     },
     "share_file_drops": {
-     "__fraction__": "1/1"
+     "__fraction__": "401/404"
     },
     "share_offsets": {
-     "__fraction__": "1/1"
+     "__fraction__": "45/46"
     },
     "verdict": "effect"
    },
    "goals": {
     "discordance": {
-     "first_only": 123,
-     "second_only": 34,
+     "first_only": 146,
+     "second_only": 35,
      "sign_test": {
-      "__fraction__": "2802391088326614020205177194714421/5708990770823839524233143877797980545530986496"
+      "__fraction__": "19588823758556253786086863996348306951/766247770432944429179173513575154591809369561091801088"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "0/1"
+     "__fraction__": "3/202"
     },
     "opposite_offsets": {
-     "__fraction__": "0/1"
+     "__fraction__": "4/93"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "184/185"
+       "__fraction__": "99/101"
       },
       "ge_offsets": {
-       "__fraction__": "45/47"
+       "__fraction__": "85/93"
       },
       "gt_file_drops": {
-       "__fraction__": "176/185"
+       "__fraction__": "189/404"
       },
       "gt_offsets": {
-       "__fraction__": "34/47"
+       "__fraction__": "58/93"
       },
       "lt_file_drops": {
-       "__fraction__": "1/185"
+       "__fraction__": "2/101"
       },
       "lt_offsets": {
-       "__fraction__": "2/47"
+       "__fraction__": "8/93"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "34/37"
+       "__fraction__": "323/404"
       },
       "ge_offsets": {
-       "__fraction__": "43/47"
+       "__fraction__": "82/93"
       },
       "gt_file_drops": {
-       "__fraction__": "143/185"
+       "__fraction__": "97/202"
       },
       "gt_offsets": {
-       "__fraction__": "36/47"
+       "__fraction__": "59/93"
       },
       "lt_file_drops": {
-       "__fraction__": "3/37"
+       "__fraction__": "81/404"
       },
       "lt_offsets": {
-       "__fraction__": "4/47"
+       "__fraction__": "11/93"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "176/185"
+       "__fraction__": "389/404"
       },
       "ge_offsets": {
-       "__fraction__": "44/47"
+       "__fraction__": "83/93"
       },
       "gt_file_drops": {
-       "__fraction__": "143/185"
+       "__fraction__": "87/101"
       },
       "gt_offsets": {
-       "__fraction__": "37/47"
+       "__fraction__": "19/31"
       },
       "lt_file_drops": {
-       "__fraction__": "9/185"
+       "__fraction__": "15/404"
       },
       "lt_offsets": {
-       "__fraction__": "3/47"
+       "__fraction__": "10/93"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "183/185"
+       "__fraction__": "401/404"
       },
       "ge_offsets": {
-       "__fraction__": "44/47"
+       "__fraction__": "85/93"
       },
       "gt_file_drops": {
-       "__fraction__": "162/185"
+       "__fraction__": "94/101"
       },
       "gt_offsets": {
-       "__fraction__": "35/47"
+       "__fraction__": "71/93"
       },
       "lt_file_drops": {
-       "__fraction__": "2/185"
+       "__fraction__": "3/404"
       },
       "lt_offsets": {
-       "__fraction__": "3/47"
+       "__fraction__": "8/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "162/185"
+     "__fraction__": "78/101"
     },
     "share_offsets": {
-     "__fraction__": "38/47"
+     "__fraction__": "67/93"
     },
     "verdict": "draw"
    }
@@ -2941,161 +4324,161 @@
   "j": {
    "declarations": {
     "discordance": {
-     "first_only": 2,
-     "second_only": 1,
+     "first_only": 3,
+     "second_only": 2,
      "sign_test": {
       "__fraction__": "1/1"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "157/185"
+     "__fraction__": "71/101"
     },
     "opposite_offsets": {
-     "__fraction__": "14/23"
+     "__fraction__": "27/46"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "36/37"
-      },
-      "ge_offsets": {
-       "__fraction__": "21/23"
-      },
-      "gt_file_drops": {
-       "__fraction__": "16/185"
-      },
-      "gt_offsets": {
-       "__fraction__": "4/23"
-      },
-      "lt_file_drops": {
-       "__fraction__": "1/37"
-      },
-      "lt_offsets": {
-       "__fraction__": "2/23"
-      }
-     },
-     "10": {
-      "ge_file_drops": {
-       "__fraction__": "183/185"
+       "__fraction__": "99/101"
       },
       "ge_offsets": {
        "__fraction__": "22/23"
       },
       "gt_file_drops": {
-       "__fraction__": "0/1"
+       "__fraction__": "39/404"
       },
       "gt_offsets": {
-       "__fraction__": "0/1"
+       "__fraction__": "3/23"
       },
       "lt_file_drops": {
-       "__fraction__": "2/185"
+       "__fraction__": "2/101"
       },
       "lt_offsets": {
        "__fraction__": "1/23"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "199/202"
+      },
+      "ge_offsets": {
+       "__fraction__": "45/46"
+      },
+      "gt_file_drops": {
+       "__fraction__": "5/101"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/23"
+      },
+      "lt_file_drops": {
+       "__fraction__": "3/202"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/46"
       }
      },
      "3": {
       "ge_file_drops": {
-       "__fraction__": "184/185"
+       "__fraction__": "403/404"
       },
       "ge_offsets": {
-       "__fraction__": "21/23"
+       "__fraction__": "45/46"
       },
       "gt_file_drops": {
-       "__fraction__": "9/185"
+       "__fraction__": "43/404"
       },
       "gt_offsets": {
        "__fraction__": "2/23"
       },
       "lt_file_drops": {
-       "__fraction__": "1/185"
+       "__fraction__": "1/404"
       },
       "lt_offsets": {
-       "__fraction__": "2/23"
+       "__fraction__": "1/46"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "1/1"
+       "__fraction__": "391/404"
       },
       "ge_offsets": {
-       "__fraction__": "1/1"
+       "__fraction__": "22/23"
       },
       "gt_file_drops": {
-       "__fraction__": "7/185"
+       "__fraction__": "11/202"
       },
       "gt_offsets": {
-       "__fraction__": "1/23"
+       "__fraction__": "3/46"
       },
       "lt_file_drops": {
-       "__fraction__": "0/1"
+       "__fraction__": "13/404"
       },
       "lt_offsets": {
-       "__fraction__": "0/1"
+       "__fraction__": "1/23"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "157/185"
+     "__fraction__": "71/101"
     },
     "share_offsets": {
-     "__fraction__": "14/23"
+     "__fraction__": "27/46"
     },
     "verdict": "fails"
    },
    "goals": {
     "discordance": {
      "first_only": 1,
-     "second_only": 3,
+     "second_only": 1,
      "sign_test": {
-      "__fraction__": "5/8"
+      "__fraction__": "1/1"
      }
     },
     "opposite_file_drops": {
-     "__fraction__": "166/185"
+     "__fraction__": "97/101"
     },
     "opposite_offsets": {
-     "__fraction__": "37/47"
+     "__fraction__": "29/31"
     },
     "per_k": {
      "1": {
       "ge_file_drops": {
-       "__fraction__": "183/185"
+       "__fraction__": "403/404"
       },
       "ge_offsets": {
-       "__fraction__": "45/47"
+       "__fraction__": "92/93"
       },
       "gt_file_drops": {
-       "__fraction__": "1/37"
+       "__fraction__": "1/404"
       },
       "gt_offsets": {
-       "__fraction__": "2/47"
+       "__fraction__": "0/1"
       },
       "lt_file_drops": {
-       "__fraction__": "2/185"
+       "__fraction__": "1/404"
       },
       "lt_offsets": {
-       "__fraction__": "2/47"
+       "__fraction__": "1/93"
       }
      },
      "10": {
       "ge_file_drops": {
-       "__fraction__": "1/1"
+       "__fraction__": "399/404"
       },
       "ge_offsets": {
-       "__fraction__": "46/47"
+       "__fraction__": "92/93"
       },
       "gt_file_drops": {
        "__fraction__": "0/1"
       },
       "gt_offsets": {
-       "__fraction__": "1/47"
-      },
-      "lt_file_drops": {
        "__fraction__": "0/1"
       },
+      "lt_file_drops": {
+       "__fraction__": "5/404"
+      },
       "lt_offsets": {
-       "__fraction__": "1/47"
+       "__fraction__": "1/93"
       }
      },
      "3": {
@@ -3103,10 +4486,10 @@
        "__fraction__": "1/1"
       },
       "ge_offsets": {
-       "__fraction__": "1/1"
+       "__fraction__": "91/93"
       },
       "gt_file_drops": {
-       "__fraction__": "1/185"
+       "__fraction__": "0/1"
       },
       "gt_offsets": {
        "__fraction__": "0/1"
@@ -3115,35 +4498,35 @@
        "__fraction__": "0/1"
       },
       "lt_offsets": {
-       "__fraction__": "0/1"
+       "__fraction__": "2/93"
       }
      },
      "5": {
       "ge_file_drops": {
-       "__fraction__": "182/185"
+       "__fraction__": "100/101"
       },
       "ge_offsets": {
-       "__fraction__": "44/47"
+       "__fraction__": "92/93"
       },
       "gt_file_drops": {
-       "__fraction__": "8/185"
+       "__fraction__": "5/404"
       },
       "gt_offsets": {
-       "__fraction__": "1/47"
+       "__fraction__": "1/93"
       },
       "lt_file_drops": {
-       "__fraction__": "3/185"
+       "__fraction__": "1/101"
       },
       "lt_offsets": {
-       "__fraction__": "3/47"
+       "__fraction__": "1/93"
       }
      }
     },
     "share_file_drops": {
-     "__fraction__": "166/185"
+     "__fraction__": "97/101"
     },
     "share_offsets": {
-     "__fraction__": "37/47"
+     "__fraction__": "29/31"
     },
     "verdict": "fails"
    }

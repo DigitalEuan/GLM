@@ -1,11 +1,11 @@
 {
  "amended": {
-  "F1'": true
+  "F1'": false
  },
- "amended_met": 1,
+ "amended_met": 0,
  "amended_taken": 1,
  "chains": {
-  "admitted": 174,
+  "admitted": 187,
   "by_category": {
    "axiom": 7,
    "choose": 3,
@@ -19,151 +19,42 @@
   },
   "carried_off": 44,
   "carried_on": 0,
-  "chains": 174,
+  "chains": 187,
   "failures": [],
   "lies": 20,
   "lies_found": 20,
-  "max_lines": 1783,
+  "max_lines": 2152,
   "max_question": "what is the median of the valence electrons of all the elements",
-  "max_steps": 3046,
-  "max_steps_question": "the first convergent of pi whose denominator is above 1000",
+  "max_steps": 6041,
+  "max_steps_question": "what are the bounds on the mean ionization energy of all the elements",
   "mutants": 40,
   "mutants_rejected": 40,
   "newly_computed": 44,
-  "read_back": 174,
-  "said": 174,
+  "read_back": 187,
+  "said": 187,
+  "script_failures": [],
   "scripts": 20,
   "scripts_ok": 20,
-  "witness_runs": 2,
-  "witness_stopped": 2
+  "still_carried": {},
+  "witness_runs": 1,
+  "witness_stopped": 1
  },
- "first": {
-  "frozen": {
-   "by_set": {
-    "adversarial": [
-     20,
-     20,
-     20
-    ],
-    "compositions": [
-     30,
-     30,
-     30
-    ],
-    "evaluation": [
-     222,
-     222,
-     219
-    ],
-    "paraphrases": [
-     60,
-     60,
-     60
-    ],
-    "probe-canonical": [
-     20,
-     20,
-     20
-    ],
-    "probe-paraphrase": [
-     20,
-     20,
-     20
-    ],
-    "stepwise": [
-     283,
-     283,
-     283
-    ],
-    "stress": [
-     47,
-     47,
-     47
-    ]
-   },
-   "moved": [
-    "evaluation:corpus-continue",
-    "evaluation:corpus-unmentioned",
-    "evaluation:corpus-address"
-   ],
-   "same_status": 702,
-   "same_text": 699,
-   "texts": 702
-  },
-  "marks": {
-   "F1": false,
-   "G1": true,
-   "K1": true,
-   "P1": true,
-   "T1": true,
-   "T2": true,
-   "T3": true,
-   "T4": true,
-   "T5": true
-  }
+ "corpus": {
+  "chains": 187,
+  "texts": 270
  },
+ "first_note": "the first measurement (F1 699 of 702) was lost in the October 2026 reorganisation",
  "frozen": {
-  "by_set": {
-   "adversarial": [
-    20,
-    20,
-    20
-   ],
-   "compositions": [
-    30,
-    30,
-    30
-   ],
-   "evaluation": [
-    222,
-    222,
-    212
-   ],
-   "paraphrases": [
-    60,
-    60,
-    60
-   ],
-   "probe-canonical": [
-    20,
-    20,
-    20
-   ],
-   "probe-paraphrase": [
-    20,
-    20,
-    20
-   ],
-   "stepwise": [
-    283,
-    283,
-    283
-   ],
-   "stress": [
-    47,
-    47,
-    47
-   ]
-  },
-  "moved": [
-   "evaluation:report-lean",
-   "evaluation:report-retrieval",
-   "evaluation:report-generated",
-   "evaluation:report-language",
-   "evaluation:report-query-escalation",
-   "evaluation:report-relay",
-   "evaluation:report-anonymous",
-   "evaluation:corpus-continue",
-   "evaluation:corpus-unmentioned",
-   "evaluation:corpus-address"
-  ],
-  "same_status": 702,
-  "same_text": 692,
-  "texts": 702
+  "gate": true,
+  "measured": false,
+  "note": "F1 and F1' not measured by this reconstruction: the gate is present, take the baseline and add the comparison before reporting them",
+  "same_status": 0,
+  "same_text": 0,
+  "texts": 0
  },
  "held_out": {
-  "admitted": 2785,
-  "answered": 2785,
+  "admitted": 2776,
+  "answered": 2776,
   "by_kind": {
    "best value": [
     429,
@@ -187,8 +78,8 @@
    ],
    "gates moves": [
     428,
-    213,
-    213
+    204,
+    204
    ],
    "gates verdict": [
     428,
@@ -201,14 +92,55 @@
     429
    ]
   },
+  "carried": 0,
   "failure_count": 0,
   "failures": [],
-  "lies": 2785,
-  "lies_refused": 2785,
-  "machine_silent": 215,
-  "max_steps": 6503,
+  "lies": 2776,
+  "lies_refused": 2776,
+  "machine_silent": 224,
+  "max_steps": 6294,
   "questions": 3000,
-  "refused_by_tool": 215
+  "refused_by_tool": 224
+ },
+ "lean": {
+  "leech_machine": {
+   "declared": 5,
+   "file": "LeechMachine.lean",
+   "met": false,
+   "missing": [
+    "gray_step",
+    "gray_nodup",
+    "machine_octads",
+    "machine_codewords",
+    "leech_kissing_from_census"
+   ],
+   "present": false,
+   "sorry": false,
+   "theorems": 0
+  },
+  "met": false,
+  "tool_machine": {
+   "declared": 12,
+   "file": "ToolMachine.lean",
+   "met": false,
+   "missing": [
+    "euclidTerms_eq",
+    "lockstep_certified",
+    "pi_enclosure",
+    "eT_div",
+    "e_enclosure",
+    "sqrt_enclosure",
+    "convRun_eq",
+    "between_of_ends",
+    "side_of_ends",
+    "nearest_of_nearer",
+    "gateArith_spec",
+    "machineDist_sound"
+   ],
+   "present": false,
+   "sorry": false,
+   "theorems": 0
+  }
  },
  "leech": {
   "admitted": 4,
@@ -218,7 +150,7 @@
   "failures": [],
   "lies": 4,
   "lies_found": 4,
-  "machine_steps": 163831,
+  "machine_steps": 163857,
   "texts": 4,
   "uncounted": 1,
   "uncounted_carried": 1,
@@ -241,26 +173,9 @@
   "T5": true
  },
  "met": 8,
- "paired": {
-  "moved": [],
-  "off_moved_since_baseline": [
-   "evaluation:tool-leech-norm-12",
-   "evaluation:report-lean",
-   "evaluation:report-retrieval",
-   "evaluation:report-generated",
-   "evaluation:report-language",
-   "evaluation:report-query-escalation",
-   "evaluation:report-relay",
-   "evaluation:report-anonymous",
-   "evaluation:corpus-continue",
-   "evaluation:corpus-unmentioned",
-   "evaluation:corpus-address"
-  ],
-  "same_status": 703,
-  "same_text": 703,
-  "texts": 703
- },
+ "paired": {},
  "rest_hold_again": true,
- "source_digest": "fc38ae57ee93babbfce83316eb08e5ca685228fdb983b75b1e5bc282d9361ffb",
+ "source_digest": "c1a08f717765a4e783eebe35a61639bce5f5097fb9616919a039d765328a80fc",
+ "switches": "fold_machine.ON on; tool_machine.ON off and on",
  "taken": 9
 }

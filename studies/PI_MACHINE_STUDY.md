@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 *Created 19 October 2026 (pre-registered 19 October 2026; measured 19 October 2026, in the same session: the marks of §5 were written before the measurement of §7, but not committed separately).*
@@ -100,7 +102,7 @@ answers and refusals (223 of 223).
 ## 6. How it is measured
 
 `lake build RequestProject.GLM.PiMachine` from the repository root;
-`PYTHONPATH=. python3 -m glm_universal.tools pi-machine` from ``;
+`PYTHONPATH=src python3 -m glm_universal.tools pi-machine` from ``;
 `tests/test_pi_machine.py`.
 
 ## 7. What came out

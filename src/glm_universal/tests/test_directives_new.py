@@ -1,5 +1,8 @@
-"""Tests for the three new directive subsystems: Wobble (D17),
-Reversibility (D18), and Generate-don't-store (D19).
+"""Tests for the three new directive subsystems: Wobble (D18),
+Reversibility (D19), and Generate-don't-store (D20).
+
+*Last altered 31 October 2026 (repository check): directive numbers updated
+after the date rule was restored to D17.*
 """
 from __future__ import annotations
 
@@ -10,7 +13,7 @@ from glm_universal.reasoning import wobble_registry as wobble, reversibility, ge
 
 
 class TestWobble(unittest.TestCase):
-    """The Wobble registry (D17)."""
+    """The Wobble registry (D18)."""
 
     def test_registry_has_builtin_sources(self):
         """pi, e, and sqrt(2) are registered."""
@@ -43,7 +46,7 @@ class TestWobble(unittest.TestCase):
 
 
 class TestReversibility(unittest.TestCase):
-    """The Reversibility ledger (D18)."""
+    """The Reversibility ledger (D19)."""
 
     def test_ledger_has_builtin_operations(self):
         """golay.encode, corpus.ask, combiner.xor are registered."""
@@ -84,7 +87,7 @@ class TestReversibility(unittest.TestCase):
 
 
 class TestGenerateNotStore(unittest.TestCase):
-    """The Generate-don't-store registry (D19)."""
+    """The Generate-don't-store registry (D20)."""
 
     def test_registry_has_builtin_regenerators(self):
         """FIGURES.md and DIGEST.md are registered."""

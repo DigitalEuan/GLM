@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -298,10 +300,9 @@ written beside the reading it updates.
 ## 5. Re-running
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools citation-scope              # the stored measurement
-PYTHONPATH=. python3 -m glm_universal.tools citation-scope --reference --write   # re-take (needs lake build)
-PYTHONPATH=. python3 -m glm_universal.tools dependency
+PYTHONPATH=src python3 -m glm_universal.tools citation-scope              # the stored measurement
+PYTHONPATH=src python3 -m glm_universal.tools citation-scope --reference --write   # re-take (needs lake build)
+PYTHONPATH=src python3 -m glm_universal.tools dependency
 python3 GLM.py -q "does cites_mem rest on resolve_mem" -c 1,2,3
 ```
 

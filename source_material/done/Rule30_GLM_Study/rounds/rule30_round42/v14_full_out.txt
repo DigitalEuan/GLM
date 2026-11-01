@@ -1,0 +1,193 @@
+== Left diagonals ldiag D t = a(t)(D - t) ==
+  dev range D < 200: settled exactly at t = 259 (period 64 certificate)
+  held-out D < 2000: settled exactly at t = 2617
+  held-out D < 20000: settled exactly at t = 26834
+  mechanism miner: period jumps at D = [3, 8, 29, 400]
+    white(D-1)                       necessary=True sufficient=True (holds at 4)
+    odd-parity(D-2)                  necessary=True sufficient=False (holds at 10197)
+    white(D-1) ∧ odd-parity(D-2)     necessary=True sufficient=True (holds at 4)
+  junction: the data cannot separate the laws ['white(D-1)', 'white(D-1) ∧ odd-parity(D-2)']; the separating observation is a white diagonal whose outer neighbour has even parity
+  predictor: white diagonals ahead [53207, 58286, 87866]; odd parity before 87866 ⇒ predicted first period-32 diagonal D = 87867 (5.7s)
+== Right diagonals rdiag D t = a(t)(t - D) ==
+  least-period exponents, dev D ≤ 8: [0, 1, 1, 2, 3, 3, 4, 5, 5]
+== Centre column a(t) ==
+== Controls ==
+  rule 30, seed 11            : settled at t = 501, periods [1, 2, 4, 8], white [2, 7, 28, 399]
+  rule 30, seed 101           : settled at t = 501, periods [1, 2, 4, 8], white [2, 7, 28, 399]
+  rule 86 (mirror), seed 1    : first 400 left diagonals not periodic with period | 64 by t = 2400
+  rule 90 (linear), seed 1    : first 400 left diagonals not periodic with period | 64 by t = 2400
+  rule 45, seed 1             : first 400 left diagonals not periodic with period | 64 by t = 2400
+== Seed memory (hypotheses born from the controls) ==
+== Prediction chain (M=32, M=64) ==
+  chaining from D=87867 (period 32 confirmed)
+  no period-64 jump predicted below 400000 (1.5s)
+== Applications ==
+  6 applications identified
+== Gap analysis (hypothesis-driven generation) ==
+  jump diagonals: [0, 3, 8, 29, 400, 87867]
+  periods:        [1, 2, 4, 8, 16, 32]
+  gaps:           [3, 5, 21, 371, 87467]
+  gap ratios:     ['5/3', '21/5', '53/3', '87467/371']
+  gap ratios (decimal): [1.6666666666666667, 4.2, 17.666666666666668, 235.76010781671158]
+  ratio-of-ratios: ['63/25', '265/63', '262401/19663']
+  ratio-of-ratios (decimal): [2.52, 4.2063492063492065, 13.34491176321009]
+  conservative estimate: next gap ratio >= 22951428267/7294973 (3146.2)
+  conservative estimate: next gap >= 2007492576229689/7294973 (275188486)
+  conservative estimate: next jump D >= 2008133563622280/7294973 (275276353)
+== Application tests ==
+  APP.deephole.ladder test:
+    construction ladder norms: [2, 4, 8, 16, 32, 64]
+    period-doubling D's:       [0, 3, 8, 29, 400, 87867]
+  APP.rcalculus.model test:
+    centre biases:  [-82, 65, 181, 246, -153, 43, -45]
+    pipeline biases: [100, 99, 99, 98, 96, 92, 84]
+  APP.retrieval.uniformity test:
+    centre 2-bit gap: 185
+    Thue-Morse 2-bit gap: 10000
+== Tool-driven hypothesis generation ==
+  NRCI-driven generation:
+  TAX-driven generation (collecting all defects for the correlation test):
+  Extended miner with TAX-defect predicate:
+  Wobble-driven generation:
+    rule 30, seed 11: wobble = 3200/731 (4.3776) at N=1462
+    rule 30, seed 101: wobble = 3200/731 (4.3776) at N=1462
+  Delta-sigma-driven generation:
+    N=1000: accumulator range = 8 (8.0)
+    N=5000: accumulator range = 29 (29.0)
+    N=10000: accumulator range = 30 (30.0)
+    N=20000: accumulator range = 107 (107.0)
+  Ledger feedback:
+    H37: refuted (refuted-heldout) — not a ledger candidate
+    H38: refuted (refuted-heldout) — not a ledger candidate
+    H39: NEW TO THE LEDGER — the wobble maximum D(N)^2/N is the same across Rule 30 seeds...
+    H40: NEW TO THE LEDGER — the delta-sigma accumulator range grows with N: {1000: '8', ...
+== TAX-period-doubling correlation (v13 key improvement) ==
+  TAX defects found: 19654 in D ∈ [2, 20000)
+  period-doubling diagonals in range: [3, 8, 29, 400]
+  [full range] empirical mean distance d̄ = 188989339/19654 (9615.821)
+  [full range] null-model expected mean  = 634009/66 (9606.197)
+  [full range] ratio (empirical/null)    = 6236648187/6230406443 (1.0010)
+  [full range] mechanism index (1-ratio) = -6241744/6230406443 (-0.0010)
+  [full range] within-1 defects: empirical=4, null=11.79, excess=-7.79
+  [full range] within-5 defects: empirical=21, null=33.42, excess=-12.42
+  [full range] within-20 defects: empirical=74, null=87.47, excess=-13.47
+  [full range] interpretation: No clustering: empirical mean distance 188989339/19654 is 1.001× the null expectation. The TAX defects are consistent with a uniform distribution.
+  [magnitude]  M_jump = 0 (0.00), M_other = 348817/9997 (34.89)
+  [magnitude]  ratio M_jump/M_other = 0 (0.0000)
+  [magnitude]  mechanism index = -1 (-1.0000)
+  [magnitude]  jump D=3: |defect|=0, rank 19655/19998 (0.9828 percentile)
+  [magnitude]  jump D=8: |defect|=0, rank 19655/19998 (0.9828 percentile)
+  [magnitude]  jump D=29: |defect|=0, rank 19655/19998 (0.9828 percentile)
+  [magnitude]  jump D=400: |defect|=0, rank 19655/19998 (0.9828 percentile)
+  [magnitude]  interpretation: ANTI-mechanism: jump magnitudes average 0 (0.0), non-jump 348817/9997 (34.9). Ratio 0.000× — the period-doubling diagonals have SMALLER TAX defects than typical. The TAX tool actively contradicts the mechanism hypothesis.
+  [small range D<50] 38 defects, 3 jumps
+  [small range] empirical mean d̄ = 309/38 (8.132)
+  [small range] null expected mean = 109/16 (6.812)
+  [small range] ratio = 2472/2071 (1.1936)
+  [small range] interpretation: No clustering: empirical mean distance 309/38 is 1.194× the null expectation. The TAX defects are consistent with a uniform distribution.
+== Tool-augmented self-dialogue ==
+  [engine] I have generated 45 hypotheses. I will now analyse the data using the GLM's own tools.
+  [engine] The GLM has a Wobble tool — it measures how far a binary sequence deviates from balanced. I will run it on the centre column.
+  [engine] Wobble result: max D(N)^2/N = 175561/24979 (7.0283) at N = 24979. Final density = 10031/20000 (0.501550). Balanced (Sturmian-like) = False.
+  [engine] The centre column is NOT balanced — the deviation reaches 7.0283. The GLM's WobbleCertificate certifies this for N up to 10^6. My computation agrees: the wobble grows slowly, consistent with an O(sqrt(N)) bound.
+  [engine] The GLM has an NRCI tool — the Non-Random Coherence Index. It measures whether a sequence has more or fewer runs than a random permutation.
+  [engine] NRCI result: 300830000/300007117 (1.002743). Actual runs = 30083, expected = 30000.7. Interpretation: random-like (NRCI ≈ 1).
+  [engine] NRCI ≈ 1 — the centre column's run structure is indistinguishable from random. This is consistent with Rule 30 being computationally irreducible: no simple clustering or anti-clustering pattern exists.
+  [engine] I will also run NRCI on the eventual patterns of the left diagonals.
+  [engine] Diagonal NRCI summary: 16 random-like, 18 clustered, 8 anti-clustered (of 42 diagonals analysed).
+  [engine] Clustered diagonals (NRCI < 0.9): [8, 12, 13, 14, 17, 19, 20, 21, 24, 26]. These have hidden structure — fewer runs than random.
+  [engine] The GLM has a TAX tool — it checks whether the TAX conservation law holds. On the binary substrate layer, TAX(a XOR b) = TAX(a) + TAX(b) - 2*TAX(a AND b) is exact. I will check this between consecutive left diagonals' eventual patterns.
+  [engine] TAX result: 10 of 48 consecutive diagonal pairs conserve TAX. 38 pairs have a TAX defect.
+  [engine] TAX defects at D = [4, 5, 9, 10, 11, 12, 13, 14, 15, 16]. The defect means the quadratic identity fails — the integer-layer violation the GLM proves. The diagonals are binary (substrate level), so TAX conservation should hold — the defects indicate the patterns are not independent (their AND has nonzero weight, which breaks the quadratic identity).
+  [engine] The GLM treats irrationals as processes — delta-sigma modulators. I will check whether the centre column is consistent with a delta-sigma modulator tracking 1/2.
+  [engine] Delta-sigma result: accumulator range = [-141, 22] (width 163). Density converging to 1/2: False.
+  [engine] The centre column is NOT a simple delta-sigma output tracking 1/2 — the accumulator range is 163.0000 (unbounded).
+  [engine] v13 NEW — the TAX-period-doubling correlation test (three-way):
+  [engine] [1/3 full-range] I computed ALL 19654 TAX defects in D ∈ [2, 20000) and measured their distance to the nearest period-doubling diagonal in 4 jumps ['3', '8', '29', '400'].
+  [engine] [1/3 full-range] Empirical mean distance: 188989339/19654 (9615.821).
+  [engine] [1/3 full-range] Uniform-null expected mean: 634009/66 (9606.197).
+  [engine] [1/3 full-range] Ratio empirical/null: 6236648187/6230406443 (1.0010). Mechanism index: -0.0010.
+  [engine] [1/3 full-range] Within-1 defects: empirical 4, null 11.79 (excess -7.79).
+  [engine] [1/3 full-range] Within-5: empirical 21, null 33.42, excess -12.42.
+  [engine] [1/3 full-range] Within-20: empirical 74, null 87.47, excess -13.47.
+  [engine] [1/3 full-range] Interpretation: No clustering: empirical mean distance 188989339/19654 is 1.001× the null expectation. The TAX defects are consistent with a uniform distribution.
+  [engine] [2/3 magnitude] Because TAX defects are nearly ubiquitous (~98% of consecutive diagonal pairs share at least one bit), presence/absence cannot distinguish jumps. The magnitude test asks the finer question: do jumps have LARGER |tax_defect| than typical?
+  [engine] [2/3 magnitude] Mean |defect| at jumps: 0 (0.00).
+  [engine] [2/3 magnitude] Mean |defect| at non-jumps: 348817/9997 (34.89).
+  [engine] [2/3 magnitude] Ratio M_jump/M_other: 0 (0.0000). Magnitude mechanism index: -1.0000.
+  [engine] [2/3 magnitude] Jump D=3: |defect|=0, rank 19655/19998 (top 98.3%).
+  [engine] [2/3 magnitude] Jump D=8: |defect|=0, rank 19655/19998 (top 98.3%).
+  [engine] [2/3 magnitude] Jump D=29: |defect|=0, rank 19655/19998 (top 98.3%).
+  [engine] [2/3 magnitude] Jump D=400: |defect|=0, rank 19655/19998 (top 98.3%).
+  [engine] [2/3 magnitude] Interpretation: ANTI-mechanism: jump magnitudes average 0 (0.0), non-jump 348817/9997 (34.9). Ratio 0.000× — the period-doubling diagonals have SMALLER TAX defects than typical. The TAX tool actively contradicts the mechanism hypothesis.
+  [engine] [3/3 small-range] Restricting to D<50 (matching v12's scan): 38 defects, 3 jumps.
+  [engine] [3/3 small-range] Empirical mean distance: 309/38 (8.132).
+  [engine] [3/3 small-range] Null expected: 109/16 (6.812).
+  [engine] [3/3 small-range] Ratio: 2472/2071 (1.1936).
+  [engine] [3/3 small-range] Interpretation: No clustering: empirical mean distance 309/38 is 1.194× the null expectation. The TAX defects are consistent with a uniform distribution.
+  [engine] COMBINED VERDICT: NONE of the three tests support the TAX-mechanism hypothesis. TAX defects are essentially uniform in space AND in magnitude — the period-doubling diagonals are NOT distinguished by TAX conservation breakdown. This is an honest negative result: the suggested connection from the previous round does not survive exact testing.
+  [engine] FLAG v13 docstring 'conserved iff w(a AND b) in {0, w(a), w(b)}': the stated criterion is wrong -- 276 cases satisfy it but are false, 6 are true but fail it (of 819 checked).
+  [engine] OK   closed form 'defect = -2(3c^2 - 2c(a+b) + ab)': the stated criterion agrees with the truth on all 819 cases checked.
+  [engine] FLAG 'TAX is conserved at every period doubling' (v13 POSITIVE FINDING): EXPLAINED -- every event satisfies 'white(D-1)' (hypothesis of the doubling law ldiag_doubles), and the feature holds at all 4 domain points where 'white(D-1)' holds; proved in general: GLM.HypothesisEngine.Tax.tax_conserved_at_doubling. Not a new mechanism.
+  [engine] OK   statistics alone: 4 of 4 events carry the feature (expected 0.069); exact P(X >= 4) = 8.61e-08, P(X <= 4) = 1. A statistics-only engine would call this significant; the explained-away guard shows it is forced by white(D-1).
+  [engine] FLAG 'TAX is CONSERVED only at the white diagonals' (v13 cross-domain lift): false -- 336 of the 344 feature points lie outside the claimed set (first: 6).
+  [engine] OK   every asserted claim belongs to a hypothesis that was not refuted.
+  [engine] Corrected conclusion: TAX conservation is the same as 3c^2 - 2c(a+b) + ab = 0 for the weights a, b and overlap c (any Y). It holds whenever one pattern is white, so it holds at every period doubling (white(D-1)); it also holds at many pairs with no white member. TAX defects therefore neither mark nor explain the doublings; the doubling law white(D-1) and odd(D-2) remains the explanation.
+  [engine] Computational cost of this dialogue: wobble 0.052s, NRCI 0.004s, TAX 0.000s, delta-sigma 0.098s. Total: 0.154s.
+  [engine] What should I check next?
+  [engine] 1. (v14) Do not extend the TAX clustering test: every doubling has defect 0 because it needs white(D-1), so a jump itself never carries a TAX defect at any range. Spend the budget on the predicted period-64 doubling at 2107985255 (ledger C381, EMP) instead.
+  [engine] 2. (v14) The Lean side is done: PeriodJump(D) -> TAXDefect(D-1, D) is FALSE at every doubling (tax_conserved_at_doubling); the TAX defect is -2(3c^2 - 2c(a+b) + ab) (tax_defect_eq). Next: look for an invariant that is not forced by white(D-1), e.g. the parity of D-2 read two out (doubling_read_two_out).
+  [engine] 3. Test the cross-domain lift: pick a structural statement about the GLM's TAX conservation boundary (e.g., 'TAX defects cluster around boundary points'), test it on Rule 30 first, then check whether it holds in the GLM's larger substrate.
+  [engine] In total: 45 hypotheses, 93 tool calls, 0.154s computational cost. Every claim is grounded in exact integer or Fraction arithmetic.
+== Guards (v14) ==
+  [FLAG] v13 docstring 'conserved iff w(a AND b) in {0, w(a), w(b)}': the stated criterion is wrong -- 276 cases satisfy it but are false, 6 are true but fail it (of 819 checked).
+  [ok  ] closed form 'defect = -2(3c^2 - 2c(a+b) + ab)': the stated criterion agrees with the truth on all 819 cases checked.
+  [FLAG] 'TAX is conserved at every period doubling' (v13 POSITIVE FINDING): EXPLAINED -- every event satisfies 'white(D-1)' (hypothesis of the doubling law ldiag_doubles), and the feature holds at all 4 domain points where 'white(D-1)' holds; proved in general: GLM.HypothesisEngine.Tax.tax_conserved_at_doubling. Not a new mechanism.
+  [ok  ] statistics alone: 4 of 4 events carry the feature (expected 0.069); exact P(X >= 4) = 8.61e-08, P(X <= 4) = 1. A statistics-only engine would call this significant; the explained-away guard shows it is forced by white(D-1).
+  [FLAG] 'TAX is CONSERVED only at the white diagonals' (v13 cross-domain lift): false -- 336 of the 344 feature points lie outside the claimed set (first: 6).
+  [ok  ] every asserted claim belongs to a hypothesis that was not refuted.
+
+Guards (v14):
+  [FLAG] v13 docstring 'conserved iff w(a AND b) in {0, w(a), w(b)}': the stated criterion is wrong -- 276 cases satisfy it but are false, 6 are true but fail it (of 819 checked).
+  [ok  ] closed form 'defect = -2(3c^2 - 2c(a+b) + ab)': the stated criterion agrees with the truth on all 819 cases checked.
+  [FLAG] 'TAX is conserved at every period doubling' (v13 POSITIVE FINDING): EXPLAINED -- every event satisfies 'white(D-1)' (hypothesis of the doubling law ldiag_doubles), and the feature holds at all 4 domain points where 'white(D-1)' holds; proved in general: GLM.HypothesisEngine.Tax.tax_conserved_at_doubling. Not a new mechanism.
+  [ok  ] statistics alone: 4 of 4 events carry the feature (expected 0.069); exact P(X >= 4) = 8.61e-08, P(X <= 4) = 1. A statistics-only engine would call this significant; the explained-away guard shows it is forced by white(D-1).
+  [FLAG] 'TAX is CONSERVED only at the white diagonals' (v13 cross-domain lift): false -- 336 of the 344 feature points lie outside the claimed set (first: 6).
+  [ok  ] every asserted claim belongs to a hypothesis that was not refuted.
+
+Engine: GLM Hypothesis Engine v14 (v13 + reasoning guards)
+Status counts: {'refuted-heldout': 10, 'survives': 27, 'refuted-by-prediction': 1, 'law-holds': 3, 'prediction-confirmed': 1, 'open': 2, 'refuted-by-guard': 1}
+Predictions: [{'predicted': 87867, 'confirmed': True, 'white_diagonals_on_the_way': [53207, 58286, 87866]}]
+Prediction chain: []
+Tool-generated hypotheses: 9
+Tool calls: 93
+Dialogue utterances: 53
+Tool costs: {'wobble': 0.05193519592285156, 'nrci': 0.0036025047302246094, 'tax': 8.082389831542969e-05, 'delta_sigma': 0.0983724594116211}
+
+TAX-period-doubling correlation:
+  TAX defects: 19654 in D ∈ [2, 20000)
+  Jumps in range: 4
+  Empirical mean distance: 188989339/19654 (9615.821)
+  Null expected mean:      634009/66 (9606.197)
+  Ratio:                   6236648187/6230406443 (1.0010)
+  Mechanism index:         -6241744/6230406443 (-0.0010)
+  Interpretation: No clustering: empirical mean distance 188989339/19654 is 1.001× the null expectation. The TAX defects are consistent with a uniform distribution.
+
+  Magnitude test (do jumps have LARGER |defect|?):
+    M_jump:  0 (0.00)
+    M_other: 348817/9997 (34.89)
+    Ratio:   0 (0.0000)
+    jump D=3: |defect|=0, rank 19655/19998 (top 98.3%)
+    jump D=8: |defect|=0, rank 19655/19998 (top 98.3%)
+    jump D=29: |defect|=0, rank 19655/19998 (top 98.3%)
+    jump D=400: |defect|=0, rank 19655/19998 (top 98.3%)
+    Interpretation: ANTI-mechanism: jump magnitudes average 0 (0.0), non-jump 348817/9997 (34.9). Ratio 0.000× — the period-doubling diagonals have SMALLER TAX defects than typical. The TAX tool actively contradicts the mechanism hypothesis.
+
+  Small-range test (D<50):
+    Defects: 38, jumps: 3
+    Empirical mean: 309/38 (8.132)
+    Null expected:  109/16 (6.812)
+    Ratio:          2472/2071 (1.1936)
+    Interpretation: No clustering: empirical mean distance 309/38 is 1.194× the null expectation. The TAX defects are consistent with a uniform distribution.
+
+Wall-clock: {'left-diagonals': 13.13, 'right-diagonals': 0.03, 'centre': 1.56, 'controls': 0.02, 'seed-memory': 2.32, 'applications': 0.0, 'gap-analysis': 0.0, 'application-tests': 0.01, 'tool-generation': 0.71, 'tax-correlation': 0.03, 'total': 26.35}

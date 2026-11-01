@@ -2,10 +2,7 @@
 
 ## Tier 0 — the coarse read
 
-**Question.** The escalated deep-hole reading names 40 of 44 and certifies
-nothing. Which of four pre-registered mechanisms accounts for the four it does
-not name, and is that mechanism the same one that holds the separation ratio
-`ρ = 2W/B` above 1?
+**Question.** The escalated deep-hole reading names 40 of 44 and certifies nothing. Which of four pre-registered mechanisms accounts for the four it does not name, and is that mechanism the same one that holds the separation ratio `ρ = 2W/B` above 1?
 
 **Verdict.** All four failures are near misses at rank 2, and the type whose within-type spread stalls the separation ratio is the type the failures belong to, so the two open questions are one mechanism and not two. The global ratio stays above 1 and the pre-registered negative stands; read type by type, three of the ten types do satisfy the criterion.
 
@@ -14,6 +11,8 @@ not name, and is that mechanism the same one that holds the separation ratio
 **Recomputed by.** `glm_universal.reasoning.deep_hole_failures.deep_hole_failure_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the wording is unchanged).*
 
 ---
 

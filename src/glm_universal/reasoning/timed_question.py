@@ -44,6 +44,12 @@ the **direct choice** (*which of these do you mean?*), which always resolves.
 Exactness
 ---------
 ``int`` masks, strings and :class:`fractions.Fraction` only.  No float, no RNG.
+
+*Last altered 31 October 2026 (repository check): the reply rule of Phase 167
+(``studies/ADVERSARIAL_DIALOGUE_STUDY.md`` §2) -- :data:`YES_NO_BY_NUMBER`
+and :func:`is_yes_no` -- was not in this checkout (lost in the October 2026
+reorganisation) and is reconstructed from the study: a yes-or-no question is
+answered by the words only, never by an option number.*
 """
 
 from __future__ import annotations
@@ -69,7 +75,7 @@ __all__ = [
     "ANSWER_LEAN_FILE", "ANSWER_LEAN_THEOREMS", "GivenError",
     "answer_token", "split_given", "join_given", "question_of",
     "apply_given", "pending_question", "question_record",
-    "describe_question", "match_reply",
+    "describe_question", "match_reply", "YES_NO_BY_NUMBER", "is_yes_no",
 ]
 
 LEAN_FILE = "RequestProject/GLM/TimedQuestion.lean"
@@ -949,11 +955,29 @@ def describe_question(record: Dict[str, object]) -> str:
     return f"{record['text']} ({'; '.join(parts)})"
 
 
+#: Phase 167 (``studies/ADVERSARIAL_DIALOGUE_STUDY.md`` §2 and §7.2): a
+#: question whose options are *yes* and *no* -- the confirming question and the
+#: gloss-word questions -- is answered by those words only, never by an option
+#: number, because a number repeated from the turn before was read against the
+#: new question's options.  Off by default; on restores the old reading.
+YES_NO_BY_NUMBER: bool = False
+
+
+def is_yes_no(record: Dict[str, object]) -> bool:
+    """Whether the options of ``record`` are exactly *yes* and *no* (case
+    ignored): the questions :data:`YES_NO_BY_NUMBER` is about."""
+    replies = sorted(str(o["reply"]).lower()
+                     for o in record.get("options", ()))
+    return replies == ["no", "yes"]
+
+
 def match_reply(record: Dict[str, object], text: str) -> Optional[str]:
     """The reply token ``text`` gives to the question ``record``, or
     ``None`` when it is not a reply to it.  Accepted: the option's number
-    (1-based), its token, the token in quotes, or -- for the direct choice --
-    a member's name without its register prefix; case is ignored."""
+    (1-based) -- except on a yes-or-no question while
+    :data:`YES_NO_BY_NUMBER` is off --, its token, the token in quotes, or --
+    for the direct choice -- a member's name without its register prefix;
+    case is ignored."""
     said = text.strip().rstrip("?.!").strip()
     if len(said) >= 2 and said[0] == said[-1] and said[0] in "'\"":
         said = said[1:-1]
@@ -966,6 +990,8 @@ def match_reply(record: Dict[str, object], text: str) -> Optional[str]:
     if not hits and record.get("kind") == "choice":
         hits = [t for t in tokens if ":" in t
                 and t.split(":", 1)[1].lower() == low]
-    if not hits and low.isdigit() and 1 <= int(low) <= len(offered):
+    by_number = YES_NO_BY_NUMBER or not is_yes_no(record)
+    if (not hits and by_number and low.isdigit()
+            and 1 <= int(low) <= len(offered)):
         hits = [offered[int(low) - 1]]
     return hits[0] if len(hits) == 1 else None

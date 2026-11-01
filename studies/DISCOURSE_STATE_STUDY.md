@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 7 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. Where this comes from
@@ -25,7 +27,7 @@ only the planner's). All three are the next round named by
 [`CONNECTED_MACHINE_STUDY.md`](CONNECTED_MACHINE_STUDY.md) §6.
 
 Before this round the conversation layer
-([`runtime/conversation.py`](../glm_universal/runtime/conversation.py),
+([`runtime/conversation.py`](../src/glm_universal/runtime/conversation.py),
 Phase 55) binds three surface shapes and refuses everything else: *describe
 it* after the fourteen-row tie at the top of the lexicon's `abstract_concrete`
 column is refused `ambiguous-antecedent`; *describe the one before that* binds
@@ -81,7 +83,7 @@ the head of the declared cases before any code of the round:
 ## 3. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/discourse_cases.py`](../glm_universal/evaluation/discourse_cases.py),
+[`evaluation/discourse_cases.py`](../src/glm_universal/evaluation/discourse_cases.py),
 committed with §1 and before any code: 7 column cases (0b), 16 fourth-shape
 cases (D = 0a: 4 for *the one before that*, 8 plural, 4 *why?*) and 6
 surface cases (K3), each a whole conversation with its expected outcome — a
@@ -105,7 +107,7 @@ The measurement is `glm_universal.runtime.discourse_report.discourse_report`.
 
 ## 4. What was built
 
-* [`runtime/discourse.py`](../glm_universal/runtime/discourse.py) —
+* [`runtime/discourse.py`](../src/glm_universal/runtime/discourse.py) —
   `Discourse`, a subclass of Phase 55's `Conversation`: the set a turn
   produced (`COLUMN_KINDS`: an `extremum` tie and a `column` turn), the
   column (`ColumnBinding`, a `column` solution whose cells are the rows'
@@ -114,13 +116,13 @@ The measurement is `glm_universal.runtime.discourse_report.discourse_report`.
   recorded as a turn, the `surfaces=True` licence through
   `router.ask_routed`, the rows read from a routed question
   (`ROW_DOMAINS`), and whole first. `carry=False` is the round's switch.
-* [`runtime/discourse_report.py`](../glm_universal/runtime/discourse_report.py)
+* [`runtime/discourse_report.py`](../src/glm_universal/runtime/discourse_report.py)
   — the measurement; `tools discourse-state`;
   `tests/test_discourse_state.py`.
 * **Wiring.** `GLM.py --converse TEXT` (repeatable): successive texts are one
   conversation over every surface, a column printed row by row, a refusal
   with its reason. `-q`, `--ask` and `--steps` are unchanged.
-* [`RequestProject/GLM/DiscourseState.lean`](../glm_lean/RequestProject/GLM/DiscourseState.lean)
+* [`RequestProject/GLM/DiscourseState.lean`](../src/lean/RequestProject/GLM/DiscourseState.lean)
   — §6.
 
 ## 5. Results
@@ -153,9 +155,9 @@ answered there, each row by the surface that would answer it written out.
 
 ## 6. What is proved rather than measured
 
-[`RequestProject/GLM/DiscourseState.lean`](../glm_lean/RequestProject/GLM/DiscourseState.lean)
+[`RequestProject/GLM/DiscourseState.lean`](../src/lean/RequestProject/GLM/DiscourseState.lean)
 states the new operation over the same turns as
-[`RequestProject/GLM/Conversation.lean`](../glm_lean/RequestProject/GLM/Conversation.lean),
+[`RequestProject/GLM/Conversation.lean`](../src/lean/RequestProject/GLM/Conversation.lean),
 with one more bit per turn — whether its answer side is a set the turn
 produced — and builds with no `sorry`:
 
@@ -209,9 +211,8 @@ produced — and builds with no `sorry`:
 ## 8. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools discourse-state
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_discourse_state.py
+PYTHONPATH=src python3 -m glm_universal.tools discourse-state
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_discourse_state.py
 python3 GLM.py --converse "smallest charge in molecule" \
                --converse "what is the molar mass of it" --converse "why?"
 cd .. && lake build RequestProject.GLM.DiscourseState

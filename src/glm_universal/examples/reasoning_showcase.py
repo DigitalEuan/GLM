@@ -22,7 +22,7 @@ capability claim is bounded from both sides.
 
 Run::
 
-    PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py
+    PYTHONPATH=src python3 src/glm_universal/examples/reasoning_showcase.py
 
 Options::
 
@@ -30,6 +30,8 @@ Options::
     --markdown      emit GitHub-flavoured Markdown instead of plain text
     --only SECTION  run one section only (substring match, case-insensitive)
     --timeout N     per-script wall-clock ceiling in seconds (default 180)
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

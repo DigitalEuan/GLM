@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 5 of 6 marks met; 1,776,804 resolved-fork readings each equal to a brute-force posterior
@@ -12,14 +14,21 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/decoder_confidence.py
+  - reasoning/decoder_confidence_marks.py
+  - tools.py
   lean:
   - DecoderConfidence
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DECODER_CONFIDENCE_STUDY.md
   test:
   - test_decoder_confidence.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DECODER_CONFIDENCE_STUDY
 junctions: []
 last_altered: ''
@@ -30,17 +39,25 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
   met: []
   missed: []
 perturbations: []
-phase: 75
+phase: 77
 predecessors:
 - CARRIED_FORK_STUDY
 - LAW_ABSORPTION_STUDY
 question: When the decoder, the carried fork or the second reading gives an answer, how likely is that
   answer to be the codeword that was sent, and can the GLM say so exactly?
 recomputed_by: '`glm_universal.reasoning.decoder_confidence_marks.decoder_confidence_report`'
+related:
+- CONFIDENCE_FLOOR_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -56,7 +73,9 @@ sections:
 - anchor: 3-what-this-round-moved-and-what-it-leaves
   heading: 3. What this round moved, and what it leaves
 status: closed
-successors: []
+successors:
+- CONFIDENCE_FLOOR_STUDY
+- DESIGNED_SUBSTRATE_STUDY
 superseded_by: ''
 supersedes: []
 title: Decoder confidence — the absorbed law attached to the decoder's own readings

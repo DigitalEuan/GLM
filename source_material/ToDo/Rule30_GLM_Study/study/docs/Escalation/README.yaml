@@ -1,0 +1,129 @@
+schema: glm-study/v1
+id: readme
+path: RequestProject/GLM/Escalation/README.md
+title: GLM Escalation — the master view, checked (Rounds 43–44)
+kind: readme
+archive: false
+tier0:
+  question: What does the escalation folder hold, and how is the owner's escalation sketch checked?
+  verdict: "The folder checks the owner's escalation sketch in Lean: residue views, the master step, the Golay substrate, the Niemeier list and the Leech residue syndromes, with a corrected edition of the sketch section by section."
+  figure: Golay coset census 1, 24, 276, 2024, 1771 with covering radius 4; 23 root systems, of which the sketch lists 22.
+  recomputed: (hand-written argument; nothing to recompute)
+last_altered: null
+summary: "Root module: `RequestProject/GLM/Escalation.lean` in this package. The package root `RequestProject/GLM/Rule30Study.lean` imports the six modules directly instead, and a merge into the GLM copies this folder but not `Escalation.lean`, because the GLM has its own, different module of that name. This folder depends only on Mathlib and two files of the Rule 30 package: `Rule30/Basic.lean` for the Rule 30 step, and `Rule30/ShortcutNetworkData.lean` for the GLM's Golay generator rows. Start with `GLM_Escalation_Boundaries_Exploration_CORRECTED.md` (the owner's sketch, corrected section by section, Round 44) or `MASTER_VIEW.md` (the verdict table, Round 43)."
+tags: []
+source:
+  head: |+
+    # GLM Escalation — the master view, checked (Rounds 43–44)
+
+  trailing_newline: true
+  newline: lf
+sections:
+  - heading: Tier 0 — the coarse read
+    anchor: tier-0-the-coarse-read
+    role: tier0
+    body: |
+      **Question.** What does the escalation folder hold, and how is the owner's escalation sketch checked?
+
+      **Verdict.** The folder checks the owner's escalation sketch in Lean: residue views, the master step, the Golay substrate, the Niemeier list and the Leech residue syndromes, with a corrected edition of the sketch section by section.
+
+      **Deciding figure.** Golay coset census 1, 24, 276, 2024, 1771 with covering radius 4; 23 root systems, of which the sketch lists 22.
+
+      **Recomputed by.** (hand-written argument; nothing to recompute)
+
+      *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `tools/tier0_check.py` (or the GLM's corpus check, after a merge) fails if they stop being.*
+
+      Root module: `RequestProject/GLM/Escalation.lean` in this package. The package root
+      `RequestProject/GLM/Rule30Study.lean` imports the six modules directly instead, and a merge into
+      the GLM copies this folder but not `Escalation.lean`, because the GLM has its own, different module
+      of that name. This folder depends only on Mathlib and two
+      files of the Rule 30 package: `Rule30/Basic.lean` for the Rule 30 step, and
+      `Rule30/ShortcutNetworkData.lean` for the GLM's Golay generator rows. Start with
+      `GLM_Escalation_Boundaries_Exploration_CORRECTED.md` (the owner's sketch, corrected section by
+      section, Round 44) or `MASTER_VIEW.md` (the verdict table, Round 43).
+
+      | File | Contents | Class |
+      |---|---|---|
+      | `GLM_Escalation_Boundaries_Exploration_CORRECTED.md` | Round 44: the full corrected edition of the owner's sketch, same sections; every claim tagged FORMAL / CERT / CLASSICAL / REPORTED / PROPOSAL, with the Lean name | — |
+      | `MASTER_VIEW.md` | The revised master view: the owner's `GLM_Escalation_Boundaries_Exploration.md`, checked statement by statement and rebuilt on the shipped GLM stack | — |
+      | `LayerStack.lean` | Views, refinement, congruence. Residue views refine exactly by divisibility; `8 ∣ 144`; mod 256 does not refine mod 144; (mod 144, mod 256) = mod 2304; only injective views refine the identity; no floor-residue filter resolves `1/2 + 1/2`; the sketch's mod-4 computation is wrong; congruence is not monotone | FORMAL |
+      | `MasterStep.lean` | The unified master step `Machine.step` on (carrier, layer). Roll-back deadlocks; the snap is the only layer-changer; the arrow (escalation-only snaps give a monotone, eventually constant layer); graded escalation `escalate` is correct and minimal; the sketch's five filters fail on its own example; no complete lattice decoder is continuous | FORMAL |
+      | `GolayTies.lean` | The GLM's 24-bit Golay substrate. For every word: one codeword within 3, or none within 3 and exactly six at 4. Coset census 1, 24, 276, 2024, 1771; covering radius 4; weight ≥ 5 errors are never decoded correctly | CERT (`native_decide` on the 4096 coset representatives; the reduction from all 2²⁴ words is proved) |
+      | `Niemeier.lean` | Round 44: the ADE root systems of rank 24 with equal Coxeter numbers are exactly 23 (`rank_cox_classification`); the sketch's list has 22 and misses `E₆⁴` (`niemeier23_diff_sketch22`) | FORMAL (`decide +kernel`) |
+      | `LeechResidue.lean` | Round 44: Leech lattice in Conway's integer coordinates from the GLM's Golay code; `LeechZ + mℤ²⁴ = LeechZ` for `8 ∣ m`, so the residue syndromes mod 8, 144, 256 are one and the same (`leechZ_add_smul`, `leechZ_sub_of_modEq`) | FORMAL (examples by `decide`) |
+      | `Rule30Parity.lean` | The parity law of Rule 30: `parity(step x) = parity(x) + #(11 pairs)` mod 2. The step does not descend to parity, and (parity, pair parity) does not fix the next pair parity | FORMAL |
+
+      Build: `lake build RequestProject.GLM.Escalation`. `GolayTies` takes about 10 minutes, because
+      its certificate checks 4096 × 4096 word pairs. The other files take seconds.
+
+      Executable companion (standard library only): `rule30_round43/escalation_checks.py`, 15 checks,
+      about 5 s. Ledger rows C393–C399 and C400–C401 in `../Rule30/claims.csv`.
+    subsections: []
+    tables:
+      - header:
+          - File
+          - Contents
+          - Class
+        rows:
+          - - "`GLM_Escalation_Boundaries_Exploration_CORRECTED.md`"
+            - "Round 44: the full corrected edition of the owner's sketch, same sections; every claim tagged FORMAL / CERT / CLASSICAL / REPORTED / PROPOSAL, with the Lean name"
+            - —
+          - - "`MASTER_VIEW.md`"
+            - "The revised master view: the owner's `GLM_Escalation_Boundaries_Exploration.md`, checked statement by statement and rebuilt on the shipped GLM stack"
+            - —
+          - - "`LayerStack.lean`"
+            - Views, refinement, congruence. Residue views refine exactly by divisibility; `8 ∣ 144`; mod 256 does not refine mod 144; (mod 144, mod 256) = mod 2304; only injective views refine the identity; no floor-residue filter resolves `1/2 + 1/2`; the sketch's mod-4 computation is wrong; congruence is not monotone
+            - FORMAL
+          - - "`MasterStep.lean`"
+            - The unified master step `Machine.step` on (carrier, layer). Roll-back deadlocks; the snap is the only layer-changer; the arrow (escalation-only snaps give a monotone, eventually constant layer); graded escalation `escalate` is correct and minimal; the sketch's five filters fail on its own example; no complete lattice decoder is continuous
+            - FORMAL
+          - - "`GolayTies.lean`"
+            - "The GLM's 24-bit Golay substrate. For every word: one codeword within 3, or none within 3 and exactly six at 4. Coset census 1, 24, 276, 2024, 1771; covering radius 4; weight ≥ 5 errors are never decoded correctly"
+            - CERT (`native_decide` on the 4096 coset representatives; the reduction from all 2²⁴ words is proved)
+          - - "`Niemeier.lean`"
+            - "Round 44: the ADE root systems of rank 24 with equal Coxeter numbers are exactly 23 (`rank_cox_classification`); the sketch's list has 22 and misses `E₆⁴` (`niemeier23_diff_sketch22`)"
+            - FORMAL (`decide +kernel`)
+          - - "`LeechResidue.lean`"
+            - "Round 44: Leech lattice in Conway's integer coordinates from the GLM's Golay code; `LeechZ + mℤ²⁴ = LeechZ` for `8 ∣ m`, so the residue syndromes mod 8, 144, 256 are one and the same (`leechZ_add_smul`, `leechZ_sub_of_modEq`)"
+            - FORMAL (examples by `decide`)
+          - - "`Rule30Parity.lean`"
+            - "The parity law of Rule 30: `parity(step x) = parity(x) + #(11 pairs)` mod 2. The step does not descend to parity, and (parity, pair parity) does not fix the next pair parity"
+            - FORMAL
+    links: []
+    code_blocks: 0
+  - heading: "Round 47: a layered tower that is a chain"
+    anchor: round-47-a-layered-tower-that-is-a-chain
+    body: |
+      The owner suggested a layered, p-adic-like system. The moduli `2, 4, 8, 144, 256` of the sketch do
+      not refine one another (`LayerStack.lean`). The 2-adic tower `ℤ/2 ← ℤ/4 ← ℤ/8 ← ⋯` does: each layer
+      is the previous one plus one cell. `../Rule30/AdicTower.lean` and `../Rule30/AdicPeriod.lean` prove
+      that on this tower Problem 1 is exactly 2-adic irrationality of the centre column, and that the
+      denominator of a layer relation fixes the period while its numerator bounds the preperiod.
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+derived:
+  links: []
+  lean_files:
+    - ../Rule30/AdicPeriod.lean
+    - ../Rule30/AdicTower.lean
+    - Escalation.lean
+    - GolayTies.lean
+    - LayerStack.lean
+    - LeechResidue.lean
+    - MasterStep.lean
+    - Niemeier.lean
+    - RequestProject/GLM/Escalation.lean
+    - RequestProject/GLM/Rule30Study.lean
+    - Rule30/Basic.lean
+    - Rule30/ShortcutNetworkData.lean
+    - Rule30Parity.lean
+  lean_modules:
+    - RequestProject.GLM.Escalation
+  python_modules:
+    - rule30_round43/escalation_checks.py
+    - tools/tier0_check.py
+  commands: []
+  word_count: 708
+  line_count: 47

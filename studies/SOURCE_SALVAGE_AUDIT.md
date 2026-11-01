@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *[`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) is the Lean half of the
 archive round: what the supplied archive claimed, and what of it is a theorem.
 This document is the **runtime half**. Every number those Lean files prove is
@@ -20,7 +22,7 @@ recomputed here from the substrate the package already carries, so the audit is
 a measurement rather than a quotation, and a claim that stopped being true would
 fail the suite rather than age quietly in a paragraph.*
 
-Module: [`glm_universal/reasoning/salvage.py`](../glm_universal/reasoning/salvage.py)
+Module: [`glm_universal/reasoning/salvage.py`](../src/glm_universal/reasoning/salvage.py)
 — one call, `salvage_report()`, returns every section below.
 Tests: `glm_universal/tests/test_salvage.py` — 24 test methods.
 Specification: the eleven Lean files named in the table, by directive D8.
@@ -30,8 +32,7 @@ that are irrational are returned as a **bracket**, never as a rounded decimal.
 Recompute everything in this document with:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.reasoning.salvage import salvage_report as r; print(r())"
+PYTHONPATH=src python3 -c "from glm_universal.reasoning.salvage import salvage_report as r; print(r())"
 ```
 
 ---

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 8 marks; 17 of 17 composed questions as declared (13 answered, 4 refused as declared);
@@ -13,24 +15,29 @@ deciding_figure: 8 of 8 marks; 17 of 17 composed questions as declared (13 answe
 directives:
 - D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/tool_values_cases
-  - reasoning/rational_approx
-  - reasoning/stepwise_script
-  - runtime/router
-  - runtime/stepwise
-  - runtime/tool_values
-  - runtime/toolbox
-  - tests/test_tool_values
+  - evaluation/tool_values_cases.py
+  - reasoning/rational_approx.py
+  - reasoning/stepwise_script.py
+  - runtime/router.py
+  - runtime/stepwise.py
+  - runtime/tool_values.py
+  - runtime/toolbox.py
+  - tools.py
   lean:
+  - StepwisePlanner
   - ToolValues
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: TOOL_VALUES_STUDY.md
   test:
   - test_tool_values.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: TOOL_VALUES_STUDY
 junctions: []
 last_altered: ''
@@ -41,8 +48,24 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - V1
+  - V2
+  - V3
+  - V4
+  - V5
+  - V6
+  - V7
+  - V8
+  met:
+  - V1
+  - V2
+  - V3
+  - V4
+  - V5
+  - V6
+  - V7
+  - V8
   missed: []
 perturbations: []
 phase: 137
@@ -51,6 +74,7 @@ question: Can the stepwise planner take a number from a tool — a continued-fra
   the nearest fraction under a denominator bound, a gate distance, a Leech shell count — and compose it
   with arithmetic, predicates and function forms, without changing any answer the GLM already gives?
 recomputed_by: '`glm_universal.evaluation.tool_values_cases.measure`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -63,7 +87,7 @@ sections:
   heading: 1. What was built
 - anchor: 2-what-is-proved-requestprojectglmtoolvalueslean
   heading: 2. What is proved (`RequestProject/GLM/ToolValues.lean`)
-- anchor: 3-the-batteries-evaluationtool_values_casespy
+- anchor: 3-the-batteries-evaluationtoolvaluescasespy
   heading: 3. The batteries (`evaluation/tool_values_cases.py`)
 - anchor: 4-the-marks
   heading: 4. The marks
@@ -74,7 +98,8 @@ sections:
 - anchor: 7-files
   heading: 7. Files
 status: closed
-successors: []
+successors:
+- TOOL_MACHINE_STUDY
 superseded_by: ''
 supersedes: []
 title: Tool values — a tool's answer handed to the planner as a number

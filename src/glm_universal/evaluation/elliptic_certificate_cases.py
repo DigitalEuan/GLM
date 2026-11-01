@@ -27,6 +27,10 @@ Its verdicts come from published sources, not from the new code:
 The questions state the numbers as decimal literals; a question is answered
 right, refused, or answered **wrong** -- and wrong is the only outcome the
 marks forbid.
+
+*Last altered 31 October 2026 (repository check: the measurement's timings
+read with ``time.monotonic_ns`` and rendered exactly by ``_elapsed``, in
+place of the float clock ``time.perf_counter``; D7).*
 """
 
 from __future__ import annotations
@@ -166,6 +170,24 @@ def lean_entry(e) -> str:
     return ".ec " + " ".join(str(v) for v in e)
 
 
+
+def _elapsed(start_ns: int, places: int, end_ns: "int | None" = None) -> str:
+    """Seconds since ``start_ns`` (a :func:`time.monotonic_ns` reading) as an
+    exact decimal string rounded half up to ``places`` places -- the clock
+    read in integers, so no float is constructed (D7).
+
+    *Added 31 October 2026 (repository check): the timings were taken with
+    ``time.perf_counter()``, a float clock the D7/D9 float inventory
+    (``reasoning/exactness.py``) does not declare here.*
+    """
+    import time
+    end = time.monotonic_ns() if end_ns is None else end_ns
+    unit = 10 ** (9 - places)
+    q = (end - start_ns + unit // 2) // unit
+    if places == 0:
+        return str(q)
+    return f"{q // 10 ** places}.{q % 10 ** places:0{places}d}"
+
 def measure(scripts: bool = True) -> dict:
     """The marks E1-E6 of ``studies/ELLIPTIC_CERTIFICATE_STUDY.md`` §4."""
     import random
@@ -196,11 +218,11 @@ def measure(scripts: bool = True) -> dict:
     rows = []
     certs: Dict[str, dict] = {}
     for cid, name, n, want in HELD_OUT:
-        t0 = time.perf_counter()
+        t0 = time.monotonic_ns()
         before, _ = _verdict_with(n, False)
-        t1 = time.perf_counter()
+        t1 = time.monotonic_ns()
         after, cert = _verdict_with(n, True)
-        t2 = time.perf_counter()
+        t2 = time.monotonic_ns()
         with flags(True):
             routed = pcc.answer_of(router.route(session, question(n)))
         if cert is not None:
@@ -212,9 +234,9 @@ def measure(scripts: bool = True) -> dict:
                      "elliptic_entries": sum(
                          len(e) == 7 for e in cert.get("chain", ()))
                      if cert else 0,
-                     "seconds_140": round(t1 - t0, 1),
-                     "seconds_141": round(t2 - t1, 1),
-                     "seconds": round(time.perf_counter() - t0, 1)})
+                     "seconds_140": _elapsed(t0, 1, t1),
+                     "seconds_141": _elapsed(t1, 1, t2),
+                     "seconds": _elapsed(t0, 1)})
     wrong = [r for r in rows
              if any(r[k] not in ("refuse", r["want"])
                     for k in ("phase140", "phase141", "routed"))]

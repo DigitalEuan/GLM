@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -188,8 +190,7 @@ casus irreducibilis crash is now a named refusal.
 ## 8. Re-running
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools derivation            # all marks (a few minutes)
-PYTHONPATH=. python3 -m glm_universal.tools derivation --quick    # a battery of 200
-PYTHONPATH=. python3 -m unittest glm_universal.tests.test_derivation
+PYTHONPATH=src python3 -m glm_universal.tools derivation            # all marks (a few minutes)
+PYTHONPATH=src python3 -m glm_universal.tools derivation --quick    # a battery of 200
+PYTHONPATH=src python3 -m unittest glm_universal.tests.test_derivation
 ```

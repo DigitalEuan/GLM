@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 5 of 6 marks; floors 7, 9, 11 bits for any tag and 7, 11, 15 for tags built on seven
@@ -15,19 +17,23 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/shortest_tag
-  - tests/test_shortest_tag
+  - reasoning/shortest_tag.py
+  - tools.py
   lean:
   - ProtectedTag
   - ShortestTag
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: SHORTEST_TAG_STUDY.md
   test:
   - test_shortest_tag.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: SHORTEST_TAG_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -35,9 +41,21 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  met:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S6
+  missed:
+  - S5
 perturbations: []
 phase: 135
 predecessors:
@@ -45,6 +63,7 @@ predecessors:
 question: Are the GLM's sender tags (seven bits) and protected tags (eleven and fifteen bits) as short
   as such tags can be, or would fewer bits do?
 recomputed_by: '`glm_universal.reasoning.shortest_tag.shortest_tag_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

@@ -1,27 +1,38 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the
   plain runtime; and over 188 evaluation cases, 20 refusals offered to the planner and 0 answers gained.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - tests/test_sandbox_planner
-  lean: []
+  - reasoning/exact_real.py
+  - reasoning/term_arithmetic.py
+  - runtime/escalation_loop.py
+  - sandbox/planner.py
+  - tools.py
+  lean:
+  - NormFamily
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: REVERSE_CALL_PLANNER_STUDY.md
   test:
-  - test_reverse_call_planner.py
+  - test_sandbox_planner.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: REVERSE_CALL_PLANNER_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -35,18 +46,14 @@ marks:
 perturbations: []
 phase: 0
 predecessors: []
-question: 'The runtime decides a query''s *kind* before it looks at the
-
-  problem, and one kind means one solver. An older proposal in the source
-
-  material inverts that: parse the string into a problem, then let a planner
-
-  select every tool whose declared precondition the problem satisfies. Does that
-
-  inversion buy anything the current system does not already have — and can it be
-
-  made safe enough to promote out of a sandbox?'
+question: 'The runtime decides a query''s *kind* before it looks at the problem, and one kind means one
+  solver. An older proposal in the source material inverts that: parse the string into a problem, then
+  let a planner select every tool whose declared precondition the problem satisfies. Does that inversion
+  buy anything the current system does not already have — and can it be made safe enough to promote out
+  of a sandbox?'
 recomputed_by: '`glm_universal.sandbox.planner.planner_report`'
+related:
+- QUERY_ESCALATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

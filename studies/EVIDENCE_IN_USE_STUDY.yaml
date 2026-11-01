@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 7 marks on the fifth take (4, 6, 6 and 7 of 7 on the first four); `--result` agrees
@@ -12,19 +14,27 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - evaluation/cases.py
+  - evaluation/replay.py
+  - reasoning/evidence_in_use_study.py
+  - reasoning/evidence_model_study.py
+  - tools.py
   lean:
+  - EvidenceInUse
+  lean_held: []
+  lean_missing:
   - AdversarialDialogue
   - ContextFrames
-  - EvidenceInUse
+  missing: []
   prose: EVIDENCE_IN_USE_STUDY.md
-  test:
-  - test_evidence_in_use.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: EVIDENCE_IN_USE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -32,16 +42,33 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - L1
+  - U1
+  - U2
+  - U3
+  - U4
+  - U5
+  - U6
+  met:
+  - L1
+  - U1
+  - U2
+  - U3
+  - U4
+  - U5
+  - U6
   missed: []
 perturbations: []
-phase: 169
-predecessors: []
+phase: 171
+predecessors:
+- EVIDENCE_MODEL_STUDY
 question: Can the command line print any answer as the one result model of Phase 169, without changing
   what it answers, and can the end-to-end evaluation replay column 3 for every answered case, so that
   a replay which no longer reproduces its answer fails the gate instead of going unseen?
 recomputed_by: '`glm_universal.reasoning.evidence_in_use_study.evidence_in_use_report`'
+related:
+- QUOTED_MEASUREMENTS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -67,7 +94,8 @@ sections:
 - anchor: in-one-paragraph
   heading: In one paragraph
 status: closed
-successors: []
+successors:
+- QUOTED_MEASUREMENTS_STUDY
 superseded_by: ''
 supersedes: []
 title: The evidence model in use — every answer as one result on the command line, and column 3 in the

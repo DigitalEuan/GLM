@@ -3,6 +3,14 @@
 evidence space for reasoning in general.
 
 *Created 23 October 2026.*
+*Last altered 31 October 2026 (repository check: every draw comes from
+``lorentzian_lift_study.ExactRng``, an exact integer stream seeded by a text,
+in place of ``random.Random``, which the package bans in ``reasoning/``
+(``tests/test_reasoning.py``, ``reasoning/blueprint.py``
+``BANNED_IMPORTS``); the draws differ, so the measurement was re-taken and
+its figures are not those of Phase 183's take.  The Lean file and the
+audit are read through ``constants.lean_file`` and
+``constants.LEAN_AUDIT_FILE``, not a path written here).*
 
 What is measured
 ----------------
@@ -102,7 +110,6 @@ Exactness
 from __future__ import annotations
 
 import json
-import random
 from fractions import Fraction
 from itertools import combinations
 from pathlib import Path
@@ -197,7 +204,7 @@ def golay() -> Dict[str, object]:
 
 def settling() -> Dict[str, object]:
     """The settling question on Phase 182's single tied readings."""
-    rng = random.Random(f"{SEED}:settle")
+    rng = lls.ExactRng(f"{SEED}:settle")
     asked = _tally()
     rand = _tally()
     no_four = 0
@@ -265,7 +272,7 @@ def physics() -> Dict[str, object]:
     class_points = {"|".join(map(str, e)): e for e in cls}
     out: Dict[str, object] = {"relations": len(rels)}
     for cond, (k, decoy) in PHYS_CONDITIONS.items():
-        rng = random.Random(f"{SEED}:physics:{cond}")
+        rng = lls.ExactRng(f"{SEED}:physics:{cond}")
         rules = {r: _tally() for r in ("first", "lorentz", "guarded", "vote")}
         present = absent = 0
         for _ in range(PHYS_QUERIES):
@@ -356,7 +363,7 @@ def semantic() -> Dict[str, object]:
         for c in sorted(truth):
             others = [(a, b) for a, b in pairs if a != c and b != c]
             for k in (1, 2, 3):
-                rng = random.Random(f"{SEED}:semantic:{r}:{c}:{k}")
+                rng = lls.ExactRng(f"{SEED}:semantic:{r}:{c}:{k}")
                 sets = list(combinations(others, k))
                 if len(sets) > SEM_CAP:
                     sets = rng.sample(sets, SEM_CAP)
@@ -408,7 +415,7 @@ def _tally_set(t: Dict[str, int], ok: Optional[bool]) -> None:
 # ===========================================================================
 
 def identities() -> Dict[str, int]:
-    rng = random.Random(f"{SEED}:identities")
+    rng = lls.ExactRng(f"{SEED}:identities")
     checked = held = null_ok = 0
     for trial in range(200):
         kind = trial % 3
@@ -443,10 +450,12 @@ def identities() -> Dict[str, int]:
 
 
 def _lean_ok() -> bool:
-    root = Path(__file__).resolve().parents[2] / "lean"
-    text = (root / le.LEAN_FILE).read_text(encoding="utf-8")
-    audit = (root / "RequestProject" / "GLM" / "AxiomAuditAll.lean").read_text(
-        encoding="utf-8")
+    from ..constants import LEAN_AUDIT_FILE, lean_file
+    path = lean_file(le.LEAN_FILE)
+    if not path.exists() or not LEAN_AUDIT_FILE.exists():
+        return False
+    text = path.read_text(encoding="utf-8")
+    audit = LEAN_AUDIT_FILE.read_text(encoding="utf-8")
     return ("sorry" not in text
             and all(f"theorem {t}" in text for t in le.LEAN_THEOREMS)
             and "import RequestProject.GLM.LorentzianEvidence" in audit)

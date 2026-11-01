@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -78,7 +80,7 @@ the smaller contract change (A 0, B and C 1, D 2).
 
 ## 3. The matrix
 
-`PYTHONPATH=. python3 -m glm_universal.tools contract-matrix` from ``
+`PYTHONPATH=src python3 -m glm_universal.tools contract-matrix` from ``
 (about two minutes):
 
 | variant | frame I broken (on grid, at 1/5) | frame I worst residual/(1−t) | frame II broken (on grid, at 1/5) | frame II worst on grid | retention S=20 at 1/20, floor 999/1000 | at 1/10 | mean on-grid retention | prior promise broken |
@@ -165,7 +167,7 @@ only.
 
 ## 7. Re-running
 
-`PYTHONPATH=. python3 -m glm_universal.tools contract-matrix` (`--json` for
+`PYTHONPATH=src python3 -m glm_universal.tools contract-matrix` (`--json` for
 every row). Tests: `glm_universal/tests/test_contract_matrix.py` — the fast
 cases check the engine's identities on short sessions; the whole matrix, which
 decides the production baseline, is an exhaustive case.

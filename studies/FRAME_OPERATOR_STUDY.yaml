@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 17 of 18 marks (F4 missed); integrity failures 0 of 78,161; in-vocabulary wrong answers
@@ -10,24 +12,30 @@ deciding_figure: 17 of 18 marks (F4 missed); integrity failures 0 of 78,161; in-
   at the first take, 0 at the second; κ shifts 0.105 %, 0.158 %, 0.435 %, 1.55 %.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/frame_operators
-  - reasoning/kappa_anchor
+  - reasoning/frame_operator_study.py
+  - reasoning/frame_operators.py
+  - reasoning/kappa_anchor.py
+  - tools.py
   lean:
   - AxiomAuditAll
   - Calibration
   - KappaAnchor
+  - PipelineInduction
   - RationalBoost
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: FRAME_OPERATOR_STUDY.md
-  test:
-  - test_frame_operator.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: FRAME_OPERATOR_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -41,12 +49,14 @@ marks:
 perturbations: []
 phase: 177
 predecessors:
+- BLOCKERS_STUDY
 - PIPELINE_KIT_STUDY
 question: 'Taking the owner''s `Lorentz boosts.pdf` further: can the GLM carry out rational Lorentz boosts
   exactly, infer an unknown frame operator from example pairs by reading the invariant layer first and
   fitting in the light-cone layer, and never confuse a change of frame with a change of units; and what
   does the work-energy anchor κ = 190 kJ/mol actually do, how fine is it, and what is it for?'
 recomputed_by: '`glm_universal.reasoning.frame_operator_study.frame_operator_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -65,7 +75,7 @@ sections:
   heading: 4. What is measured, and the marks
 - anchor: 5-faculties
   heading: 5. Faculties
-- anchor: 6-the-anchor-κ-the-owners-three-questions
+- anchor: 6-the-anchor-the-owners-three-questions
   heading: '6. The anchor κ: the owner''s three questions'
 - anchor: 7-what-came-out
   heading: 7. What came out
@@ -74,7 +84,8 @@ sections:
 - anchor: 9-what-is-not-claimed
   heading: 9. What is not claimed
 status: closed
-successors: []
+successors:
+- COLOUR_INDUCTION_STUDY
 superseded_by: ''
 supersedes: []
 title: Frame operators — Lorentz boosts in exact arithmetic, operators inferred layer by layer, and the

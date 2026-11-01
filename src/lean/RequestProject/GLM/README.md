@@ -16,9 +16,9 @@
 *Last altered 21 October 2026* (Phase 175: `PipelineInduction.lean` and the
 seven files of the owner's pipeline kit under `PipelineKit/`).
 
-**<!--figure:lean-files-->425 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
+**<!--figure:lean-files-->414 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
 toolchain already pinned by `glm_lean/lean-toolchain` — and all
-<!--figure:lean-file-count-->425<!--/figure--> of them free of `sorry`.
+<!--figure:lean-file-count-->414<!--/figure--> of them free of `sorry`.
 Every theorem below has been checked with `#print axioms`; none depends on
 anything beyond `propext`, `Classical.choice` and `Quot.sound`, except the
 finite exhaustive checks discharged by `native_decide` — in `Golay/Sextet.lean`,

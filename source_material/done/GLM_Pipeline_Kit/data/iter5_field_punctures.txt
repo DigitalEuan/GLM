@@ -1,0 +1,61 @@
+================================================================================================
+ITERATION 5 PHASE 2 — Finer-resolution punctures across finite fields
+================================================================================================
+
+User question: 'where the F_2 multiplication table resolves to F_3,
+we could possibly double that resolution F_6 of F_9?'
+
+Note: F_6 doesn't exist as a field (6 = 2*3 has zero divisors in Z/6Z).
+But F_9 = GF(3²) is a genuine field extension with a much richer (8-element)
+multiplicative group, vs F_3's 2-element group.
+
+We test F_2, F_3, F_4, F_5, F_7, F_8, F_9 and characterise each field's
+'puncture' (deletion) and 'spin' (rotation) structure.
+
+------------------------------------------------------------------------------------------------
+Field   q     char    units     zero_divs     spin_order    puncture                        spin                            
+------------------------------------------------------------------------------------------------
+F_2     2     2       1         1             0             deletion (mult by p = 0)        no spin                         
+F_3     3     3       2         1             2             deletion (mult by p = 0)        rotation of order 2             
+F_4     4     2       3         1             3             deletion (mult by p = 0 in cha  rotation of order 3 (multiplic  
+F_5     5     5       4         1             4             deletion (mult by p = 0)        rotation of order 4             
+F_7     7     7       6         1             3             deletion (mult by p = 0)        rotation of order 3             
+F_8     8     2       7         1             7             deletion (mult by p = 0 in cha  rotation of order 7 (multiplic  
+F_9     9     3       8         1             4             deletion (mult by p = 0 in cha  rotation of order 4 (multiplic  
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * 'units' = size of the multiplicative group (the 'spin richness').
+    More units => more directions of rotation available to the substrate.
+  * 'zero_divs' = elements x where some y != 0 has xy = 0 (the 'punctures').
+    In a field, only 0 is a zero divisor; in Z/6Z, both 2 and 3 are.
+  * 'spin_order' = the order of multiplication by 2 (or α for extensions).
+    F_2: order 0 (deletion, no spin). F_3: order 2 (a swap).
+    F_4: order 3 (a 3-cycle). F_9: order 8 (the richest spin here).
+  * Higher spin_order => more 'movement directions' the substrate can use.
+
+Key findings:
+  * F_2 (parity wall): mult by 2 = 0 (deletion). This is the wall.
+  * F_3 (multiplication puncture): mult by 2 = -1 (a swap, order 2).
+    The wall is broken; the substrate gains 1 non-trivial spin direction.
+  * F_4 (extension of F_2): char 2 still means mult by 2 = 0 in F_4.
+    BUT the multiplicative group has order 3 (vs F_2's order 1).
+    The 'spin' is multiplication by α (a 3-cycle 1→α→α+1→1).
+    F_4 has the SAME characteristic as F_2 (so the basic puncture is the same),
+    but it has a RICHER non-trivial multiplicative structure.
+  * F_8 (extension of F_2, k=3): char 2 still, mult group order 7.
+    The richest 'spin' among the char-2 fields: 7-cycle on the 7 non-zero
+    elements. But the puncture (mult by 2 = 0) is structurally identical to F_2.
+  * F_9 (extension of F_3, k=2): char 3 (mult by 3 = 0), mult group order 8.
+    Combines F_3's puncture-breaking (char 3 not 2) with a richer spin (order 8).
+    This is the 'finer resolution' the user predicted: spin_order 8 vs F_3's 2.
+
+Substrate development escalation requirements:
+  * If the model needs richer spin directions (multi-step rotations),
+    escalate from F_3 to F_9 (spin_order 2 -> 8).
+  * If the model needs richer puncture-breaking (more invertible elements),
+    escalate from F_2 to F_3 to F_5 to F_7 (the prime fields).
+  * If the model needs the SAME characteristic but more spin,
+    escalate from F_2 to F_4 to F_8 (char 2, spin orders 0, 3, 7).
+  * If the model needs BOTH richer char AND richer spin,
+    escalate from F_3 to F_9 (char 3, spin orders 2 -> 8).

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 8 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -88,7 +90,7 @@ Exact throughout (D7); no digest decides a meaning (D3).
 ## 2. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/stepwise_five_cases.py`](../glm_universal/evaluation/stepwise_five_cases.py),
+[`evaluation/stepwise_five_cases.py`](../src/glm_universal/evaluation/stepwise_five_cases.py),
 committed with this section and before any code: 12 order questions (10 to
 be answered, 2 refused), 12 superlative questions (8 answered, 4 refused),
 12 bound and present-count questions (9 answered, 3 refused), 6 class
@@ -116,7 +118,7 @@ The measurement is `glm_universal.runtime.stepwise_five.stepwise_five_report`.
 
 ## 3. What was built
 
-* [`runtime/frame_declarations.py`](../glm_universal/runtime/frame_declarations.py)
+* [`runtime/frame_declarations.py`](../src/glm_universal/runtime/frame_declarations.py)
   — the declaration and the reader generated from it. `VOCABULARIES` (the
   fold words and the fold each means, by round), `FRAMES` (10 entries: 3 of
   round three, 3 of round four, 4 of round five, each a template with typed
@@ -129,28 +131,28 @@ The measurement is `glm_universal.runtime.stepwise_five.stepwise_five_report`.
   the control) and `ROUND_FIVE`/`DECLARE_ROUND_FIVE` (the round-five entries
   and widenings), `emptied()` (the control of D1) and `declared_verdict()`
   (an earlier corpus's verdict, moved where `MOVED` says).
-* [`runtime/declared_frames.py`](../glm_universal/runtime/declared_frames.py)
+* [`runtime/declared_frames.py`](../src/glm_universal/runtime/declared_frames.py)
   — the sets the register does not hold as one value (`UNION_SETS`: *the
   metals*, *the rare earths*, *rare earth elements*) and the comparatives
   declared per table (`TABLE_COMPARATIVES`: over the molecule table, *heavier*
   and *lighter* by molar mass).
-* [`runtime/quantity_units.py`](../glm_universal/runtime/quantity_units.py)
+* [`runtime/quantity_units.py`](../src/glm_universal/runtime/quantity_units.py)
   — `FIFTH_PREFIXES`, the twelve remaining exact SI prefixes, read only while
   round five is on.
-* [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py) —
+* [`runtime/stepwise.py`](../src/glm_universal/runtime/stepwise.py) —
   the generated reader hooked into the function and segment readings; the
   builders `_build_top` (superlatives and the top `k`) and `_build_bounds`;
   the comparative builder dispatching by table; and the refusals
   `ORDER_OUT_OF_RANGE`, `TOP_K_TIE`, `RANGE_UNDECLARED`, `TABLE_MISMATCH` and
   `COMPARATIVE_UNDECLARED` in the precedence list.
-* [`reasoning/stepwise_script.py`](../glm_universal/reasoning/stepwise_script.py)
+* [`reasoning/stepwise_script.py`](../src/glm_universal/reasoning/stepwise_script.py)
   — `order_positions` (the positions an order fold averages, `None` when
   the set is too small), `top_rows`, the range-aware `fold_value`, the column
   1 and 2 forms of the new folds and their readers, and in the generated
   script its own `positions`, `top_of`, set membership through the declared
   unions and the table-aware comparative, so a script re-derives every new
   answer from the register without the planner.
-* [`runtime/stepwise_five.py`](../glm_universal/runtime/stepwise_five.py)
+* [`runtime/stepwise_five.py`](../src/glm_universal/runtime/stepwise_five.py)
   — the measurement (`stepwise_five_report`), round four's reader and the
   hand-written readers as the controls, the completions census of D6;
   `tools stepwise-five`; `tests/test_stepwise_five.py`. The reports of rounds
@@ -159,7 +161,7 @@ The measurement is `glm_universal.runtime.stepwise_five.stepwise_five_report`.
 * **Wiring.** Nothing new on the question path: every new question reaches
   the stepwise planner through `GLM.py --ask` and `GLM.py --steps` as before.
   The planner's surface in `runtime/toolbox.py` now cites the new Lean file.
-* [`RequestProject/GLM/DeclaredFrames.lean`](../glm_lean/RequestProject/GLM/DeclaredFrames.lean)
+* [`RequestProject/GLM/DeclaredFrames.lean`](../src/lean/RequestProject/GLM/DeclaredFrames.lean)
   — §5.
 
 ## 4. Results

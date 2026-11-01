@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 14 of 14 points carried onto the ITS-90 kelvin column; 10 of 10 ordering, 3 of 3 column
@@ -15,20 +17,36 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - data_objects/fixed_points
-  - evaluation/celsius_register_cases
-  - reasoning/scale_conversion
-  - runtime/fields
+  - data_objects/fixed_points.py
+  - engineering/union.py
+  - engineering/wheels.py
+  - evaluation/celsius_register_cases.py
+  - reasoning/coordinate_order.py
+  - reasoning/scale_conversion.py
+  - reasoning/stepwise_script.py
+  - runtime/celsius_register_report.py
+  - runtime/fields.py
+  - runtime/measurand_register.py
+  - runtime/quantity_units.py
+  - runtime/semantic_plan.py
+  - runtime/stepwise.py
+  - tools.py
   lean:
   - CelsiusRegister
+  - MeasurandKinds
+  - ScaleConversion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CELSIUS_REGISTER_STUDY.md
   test:
   - test_celsius_register.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CELSIUS_REGISTER_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,16 +54,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - C7
+  - C8
+  met:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - C7
+  - C8
   missed: []
 perturbations: []
-phase: 86
-predecessors: []
+phase: 99
+predecessors:
+- MEASURAND_REGISTER_STUDY
 question: Can the system hold a register whose readings are in degrees Celsius, carry them through the
   scale table's first offset row, and use them — ordered against the element register's kelvins and fed
   to the stepwise planner as levels — without answering anything wrongly?
 recomputed_by: '`glm_universal.runtime.celsius_register_report.celsius_register_report`'
+related:
+- SCALE_CONVERSION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

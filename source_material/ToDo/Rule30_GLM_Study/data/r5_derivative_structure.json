@@ -1,0 +1,985 @@
+{
+  "positions": {
+    "n1_col-1": {
+      "n": 1,
+      "target_col": -1,
+      "width": 3,
+      "n_evals": 8,
+      "n_nonzero": 3,
+      "max_degree": 2,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -1,
+            0
+          ],
+          "weight": 2
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 2,
+        "2": 1
+      }
+    },
+    "n1_col0": {
+      "n": 1,
+      "target_col": 0,
+      "width": 3,
+      "n_evals": 8,
+      "n_nonzero": 4,
+      "max_degree": 2,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            0,
+            1
+          ],
+          "weight": 2
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 3,
+        "2": 1
+      }
+    },
+    "n1_col1": {
+      "n": 1,
+      "target_col": 1,
+      "width": 3,
+      "n_evals": 8,
+      "n_nonzero": 2,
+      "max_degree": 1,
+      "n_top_monomials": 2,
+      "top_monomials": [
+        {
+          "columns": [
+            0
+          ],
+          "weight": 1
+        },
+        {
+          "columns": [
+            1
+          ],
+          "weight": 1
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 2
+      }
+    },
+    "n2_col-1": {
+      "n": 2,
+      "target_col": -1,
+      "width": 5,
+      "n_evals": 32,
+      "n_nonzero": 9,
+      "max_degree": 3,
+      "n_top_monomials": 2,
+      "top_monomials": [
+        {
+          "columns": [
+            -2,
+            0,
+            1
+          ],
+          "weight": 3
+        },
+        {
+          "columns": [
+            -1,
+            0,
+            1
+          ],
+          "weight": 3
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 2,
+        "2": 5,
+        "3": 2
+      }
+    },
+    "n2_col0": {
+      "n": 2,
+      "target_col": 0,
+      "width": 5,
+      "n_evals": 32,
+      "n_nonzero": 10,
+      "max_degree": 3,
+      "n_top_monomials": 2,
+      "top_monomials": [
+        {
+          "columns": [
+            -1,
+            1,
+            2
+          ],
+          "weight": 3
+        },
+        {
+          "columns": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 3,
+        "2": 5,
+        "3": 2
+      }
+    },
+    "n2_col1": {
+      "n": 2,
+      "target_col": 1,
+      "width": 5,
+      "n_evals": 32,
+      "n_nonzero": 4,
+      "max_degree": 2,
+      "n_top_monomials": 2,
+      "top_monomials": [
+        {
+          "columns": [
+            0,
+            2
+          ],
+          "weight": 2
+        },
+        {
+          "columns": [
+            1,
+            2
+          ],
+          "weight": 2
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 2,
+        "2": 2
+      }
+    },
+    "n3_col-1": {
+      "n": 3,
+      "target_col": -1,
+      "width": 7,
+      "n_evals": 128,
+      "n_nonzero": 29,
+      "max_degree": 5,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ],
+          "weight": 5
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 5,
+        "2": 11,
+        "3": 8,
+        "4": 4,
+        "5": 1
+      }
+    },
+    "n3_col0": {
+      "n": 3,
+      "target_col": 0,
+      "width": 7,
+      "n_evals": 128,
+      "n_nonzero": 30,
+      "max_degree": 5,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -1,
+            0,
+            1,
+            2,
+            3
+          ],
+          "weight": 5
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 6,
+        "2": 11,
+        "3": 8,
+        "4": 4,
+        "5": 1
+      }
+    },
+    "n3_col1": {
+      "n": 3,
+      "target_col": 1,
+      "width": 7,
+      "n_evals": 128,
+      "n_nonzero": 16,
+      "max_degree": 4,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "weight": 4
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 5,
+        "2": 7,
+        "3": 3,
+        "4": 1
+      }
+    },
+    "n4_col-1": {
+      "n": 4,
+      "target_col": -1,
+      "width": 9,
+      "n_evals": 512,
+      "n_nonzero": 121,
+      "max_degree": 7,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+          ],
+          "weight": 7
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 3,
+        "2": 18,
+        "3": 37,
+        "4": 35,
+        "5": 20,
+        "6": 7,
+        "7": 1
+      }
+    },
+    "n4_col0": {
+      "n": 4,
+      "target_col": 0,
+      "width": 9,
+      "n_evals": 512,
+      "n_nonzero": 122,
+      "max_degree": 7,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "weight": 7
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 4,
+        "2": 18,
+        "3": 37,
+        "4": 35,
+        "5": 20,
+        "6": 7,
+        "7": 1
+      }
+    },
+    "n4_col1": {
+      "n": 4,
+      "target_col": 1,
+      "width": 9,
+      "n_evals": 512,
+      "n_nonzero": 52,
+      "max_degree": 6,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "weight": 6
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 3,
+        "2": 11,
+        "3": 19,
+        "4": 13,
+        "5": 5,
+        "6": 1
+      }
+    },
+    "n5_col-1": {
+      "n": 5,
+      "target_col": -1,
+      "width": 11,
+      "n_evals": 2048,
+      "n_nonzero": 345,
+      "max_degree": 9,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -4,
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "weight": 9
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 8,
+        "2": 32,
+        "3": 68,
+        "4": 91,
+        "5": 79,
+        "6": 47,
+        "7": 15,
+        "8": 4,
+        "9": 1
+      }
+    },
+    "n5_col0": {
+      "n": 5,
+      "target_col": 0,
+      "width": 11,
+      "n_evals": 2048,
+      "n_nonzero": 346,
+      "max_degree": 9,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "weight": 9
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 9,
+        "2": 32,
+        "3": 68,
+        "4": 91,
+        "5": 79,
+        "6": 47,
+        "7": 15,
+        "8": 4,
+        "9": 1
+      }
+    },
+    "n5_col1": {
+      "n": 5,
+      "target_col": 1,
+      "width": 11,
+      "n_evals": 2048,
+      "n_nonzero": 180,
+      "max_degree": 8,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "weight": 8
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 8,
+        "2": 24,
+        "3": 43,
+        "4": 50,
+        "5": 36,
+        "6": 16,
+        "7": 2,
+        "8": 1
+      }
+    },
+    "n6_col-1": {
+      "n": 6,
+      "target_col": -1,
+      "width": 13,
+      "n_evals": 8192,
+      "n_nonzero": 1359,
+      "max_degree": 11,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -5,
+            -4,
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "weight": 11
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 4,
+        "2": 33,
+        "3": 118,
+        "4": 240,
+        "5": 314,
+        "6": 292,
+        "7": 203,
+        "8": 107,
+        "9": 38,
+        "10": 9,
+        "11": 1
+      }
+    },
+    "n6_col0": {
+      "n": 6,
+      "target_col": 0,
+      "width": 13,
+      "n_evals": 8192,
+      "n_nonzero": 1360,
+      "max_degree": 11,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -4,
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "weight": 11
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 5,
+        "2": 33,
+        "3": 118,
+        "4": 240,
+        "5": 314,
+        "6": 292,
+        "7": 203,
+        "8": 107,
+        "9": 38,
+        "10": 9,
+        "11": 1
+      }
+    },
+    "n6_col1": {
+      "n": 6,
+      "target_col": 1,
+      "width": 13,
+      "n_evals": 8192,
+      "n_nonzero": 654,
+      "max_degree": 10,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "weight": 10
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 4,
+        "2": 23,
+        "3": 76,
+        "4": 142,
+        "5": 168,
+        "6": 133,
+        "7": 71,
+        "8": 29,
+        "9": 7,
+        "10": 1
+      }
+    }
+  },
+  "derivatives": {
+    "n1_d_dxn": {
+      "n": 1,
+      "var_col": 1,
+      "width": 3,
+      "n_nonzero": 2,
+      "max_degree": 1,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            0
+          ],
+          "weight": 1
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1,
+        "1": 1
+      }
+    },
+    "n1_d_dx_minus_n": {
+      "n": 1,
+      "var_col": -1,
+      "width": 3,
+      "n_nonzero": 1,
+      "max_degree": 0,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [],
+          "weight": 0
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1
+      }
+    },
+    "n2_d_dxn": {
+      "n": 2,
+      "var_col": 2,
+      "width": 5,
+      "n_nonzero": 6,
+      "max_degree": 2,
+      "n_top_monomials": 2,
+      "top_monomials": [
+        {
+          "columns": [
+            -1,
+            1
+          ],
+          "weight": 2
+        },
+        {
+          "columns": [
+            0,
+            1
+          ],
+          "weight": 2
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1,
+        "1": 3,
+        "2": 2
+      }
+    },
+    "n2_d_dx_minus_n": {
+      "n": 2,
+      "var_col": -2,
+      "width": 5,
+      "n_nonzero": 1,
+      "max_degree": 0,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [],
+          "weight": 0
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1
+      }
+    },
+    "n3_d_dxn": {
+      "n": 3,
+      "var_col": 3,
+      "width": 7,
+      "n_nonzero": 14,
+      "max_degree": 4,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -1,
+            0,
+            1,
+            2
+          ],
+          "weight": 4
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1,
+        "1": 4,
+        "2": 5,
+        "3": 3,
+        "4": 1
+      }
+    },
+    "n3_d_dx_minus_n": {
+      "n": 3,
+      "var_col": -3,
+      "width": 7,
+      "n_nonzero": 1,
+      "max_degree": 0,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [],
+          "weight": 0
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1
+      }
+    },
+    "n4_d_dxn": {
+      "n": 4,
+      "var_col": 4,
+      "width": 9,
+      "n_nonzero": 70,
+      "max_degree": 6,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+          ],
+          "weight": 6
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1,
+        "1": 7,
+        "2": 18,
+        "3": 22,
+        "4": 15,
+        "5": 6,
+        "6": 1
+      }
+    },
+    "n4_d_dx_minus_n": {
+      "n": 4,
+      "var_col": -4,
+      "width": 9,
+      "n_nonzero": 1,
+      "max_degree": 0,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [],
+          "weight": 0
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1
+      }
+    },
+    "n5_d_dxn": {
+      "n": 5,
+      "var_col": 5,
+      "width": 11,
+      "n_nonzero": 166,
+      "max_degree": 8,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "weight": 8
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1,
+        "1": 8,
+        "2": 25,
+        "3": 41,
+        "4": 43,
+        "5": 31,
+        "6": 13,
+        "7": 3,
+        "8": 1
+      }
+    },
+    "n5_d_dx_minus_n": {
+      "n": 5,
+      "var_col": -5,
+      "width": 11,
+      "n_nonzero": 1,
+      "max_degree": 0,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [],
+          "weight": 0
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1
+      }
+    },
+    "n6_d_dxn": {
+      "n": 6,
+      "var_col": 6,
+      "width": 13,
+      "n_nonzero": 706,
+      "max_degree": 10,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [
+            -4,
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "weight": 10
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1,
+        "1": 10,
+        "2": 42,
+        "3": 98,
+        "4": 146,
+        "5": 159,
+        "6": 132,
+        "7": 78,
+        "8": 31,
+        "9": 8,
+        "10": 1
+      }
+    },
+    "n6_d_dx_minus_n": {
+      "n": 6,
+      "var_col": -6,
+      "width": 13,
+      "n_nonzero": 1,
+      "max_degree": 0,
+      "n_top_monomials": 1,
+      "top_monomials": [
+        {
+          "columns": [],
+          "weight": 0
+        }
+      ],
+      "monomials_by_degree": {
+        "0": 1
+      }
+    }
+  },
+  "cone_separation": {
+    "n1": {
+      "n": 1,
+      "n_left_cone_monomials": 3,
+      "n_right_cone_monomials": 1,
+      "left_cone_max_degree": 2,
+      "right_cone_max_degree": 1,
+      "left_cone_degree_distribution": {
+        "1": 2,
+        "2": 1
+      },
+      "right_cone_degree_distribution": {
+        "1": 1
+      }
+    },
+    "n2": {
+      "n": 2,
+      "n_left_cone_monomials": 4,
+      "n_right_cone_monomials": 6,
+      "left_cone_max_degree": 3,
+      "right_cone_max_degree": 3,
+      "left_cone_degree_distribution": {
+        "1": 1,
+        "2": 2,
+        "3": 1
+      },
+      "right_cone_degree_distribution": {
+        "1": 2,
+        "2": 3,
+        "3": 1
+      }
+    },
+    "n3": {
+      "n": 3,
+      "n_left_cone_monomials": 15,
+      "n_right_cone_monomials": 15,
+      "left_cone_max_degree": 4,
+      "right_cone_max_degree": 5,
+      "left_cone_degree_distribution": {
+        "1": 2,
+        "2": 5,
+        "3": 6,
+        "4": 2
+      },
+      "right_cone_degree_distribution": {
+        "1": 4,
+        "2": 6,
+        "3": 2,
+        "4": 2,
+        "5": 1
+      }
+    },
+    "n4": {
+      "n": 4,
+      "n_left_cone_monomials": 26,
+      "n_right_cone_monomials": 96,
+      "left_cone_max_degree": 6,
+      "right_cone_max_degree": 7,
+      "left_cone_degree_distribution": {
+        "1": 1,
+        "2": 3,
+        "3": 9,
+        "4": 8,
+        "5": 4,
+        "6": 1
+      },
+      "right_cone_degree_distribution": {
+        "1": 3,
+        "2": 15,
+        "3": 28,
+        "4": 27,
+        "5": 16,
+        "6": 6,
+        "7": 1
+      }
+    },
+    "n5": {
+      "n": 5,
+      "n_left_cone_monomials": 129,
+      "n_right_cone_monomials": 217,
+      "left_cone_max_degree": 8,
+      "right_cone_max_degree": 9,
+      "left_cone_degree_distribution": {
+        "1": 2,
+        "2": 5,
+        "3": 19,
+        "4": 39,
+        "5": 35,
+        "6": 21,
+        "7": 7,
+        "8": 1
+      },
+      "right_cone_degree_distribution": {
+        "1": 7,
+        "2": 27,
+        "3": 49,
+        "4": 52,
+        "5": 44,
+        "6": 26,
+        "7": 8,
+        "8": 3,
+        "9": 1
+      }
+    },
+    "n6": {
+      "n": 6,
+      "n_left_cone_monomials": 332,
+      "n_right_cone_monomials": 1028,
+      "left_cone_max_degree": 10,
+      "right_cone_max_degree": 11,
+      "left_cone_degree_distribution": {
+        "1": 1,
+        "2": 6,
+        "3": 27,
+        "4": 67,
+        "5": 88,
+        "6": 76,
+        "7": 46,
+        "8": 16,
+        "9": 4,
+        "10": 1
+      },
+      "right_cone_degree_distribution": {
+        "1": 4,
+        "2": 27,
+        "3": 91,
+        "4": 173,
+        "5": 226,
+        "6": 216,
+        "7": 157,
+        "8": 91,
+        "9": 34,
+        "10": 8,
+        "11": 1
+      }
+    }
+  }
+}

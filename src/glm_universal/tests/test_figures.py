@@ -14,6 +14,9 @@ Beyond the equality check, the individual figures are checked against the
 modules that produce them, so that a *wrong* generator is caught as well as a
 stale file, and the READMEs that quote the headline counts are checked to
 quote the current ones.
+
+*Last altered 31 October 2026 (repository check): package-relative paths
+resolve under ``src/``, and the Lean README is ``lean/RequestProject/GLM``.*
 """
 
 from __future__ import annotations
@@ -41,8 +44,20 @@ _REPO = _OVERLAY
 
 
 def _repo_file(relative: str) -> str:
-    """A repository-relative path, as an absolute one."""
-    return os.path.normpath(os.path.join(_REPO, relative))
+    """A repository-relative path, as an absolute one.
+
+    Since the October 2026 reorganisation the package and the Lean tree live
+    under ``src/`` (``src/glm_universal/``, ``src/lean/``), so a path written
+    package-relative (``glm_universal/README.md``) is looked for there when
+    the root does not hold it.  Before this the checks of the package's
+    READMEs were silently skipped (the file "did not exist").  *(31 October
+    2026, repository check.)*
+    """
+    direct = os.path.normpath(os.path.join(_REPO, relative))
+    if os.path.exists(direct):
+        return direct
+    under_src = os.path.normpath(os.path.join(_REPO, "src", relative))
+    return under_src if os.path.exists(under_src) else direct
 
 
 #: Everything after this marker in a document is an archive of what was true
@@ -313,7 +328,7 @@ def _headline_claims():
          f"{evaluation['cases']} cases"),
         ("glm_universal/tests/README.md", "test files",
          f"{tests['test_files']} test files"),
-        ("glm_lean/RequestProject/GLM/README.md", "Lean files",
+        ("lean/RequestProject/GLM/README.md", "Lean files",
          lean_files),
     ]
     return tuple(out)
@@ -492,7 +507,7 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             "glm_universal/runtime/README.md",
             "glm_universal/capabilities/README.md",
             "glm_universal/evaluation/README.md",
-            "glm_lean/RequestProject/GLM/README.md",
+            "lean/RequestProject/GLM/README.md",
         ]
         for path in documents:
             full = _repo_file(path)
@@ -538,7 +553,7 @@ _SENTENCE_DOCUMENTS = (
     "glm_universal/runtime/README.md",
     "glm_universal/capabilities/README.md",
     "glm_universal/evaluation/README.md",
-    "glm_lean/RequestProject/GLM/README.md",
+    "lean/RequestProject/GLM/README.md",
 )
 
 

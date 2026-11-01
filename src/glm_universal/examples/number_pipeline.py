@@ -33,11 +33,12 @@ The stages, and the layer each one reads at::
 
 Run it with::
 
-    cd overlay
-    PYTHONPATH=. python3 -m glm_universal.examples.number_pipeline
+    PYTHONPATH=src python3 -m glm_universal.examples.number_pipeline
 
 Everything is exact: integers and :class:`~fractions.Fraction` only, no float
 is constructed anywhere in this file (D7).
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

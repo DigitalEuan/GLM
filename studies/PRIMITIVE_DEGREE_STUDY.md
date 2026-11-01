@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -177,11 +179,11 @@ and is not used by the layer.
 
 From ``:
 
-* `PYTHONPATH=. python3 -m glm_universal.tools primitive-degree` runs every
+* `PYTHONPATH=src python3 -m glm_universal.tools primitive-degree` runs every
   mark in about four minutes, most of it Phase 115's report for D8, which
   re-reads Phases 114 and 112. `--quick` skips the batteries and the
   regression (D4–D6, D8), and `--json` gives the rows.
-* `PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_primitive_degree.py`
+* `PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_primitive_degree.py`
   runs the tests in a few seconds.
 * `lake build RequestProject.GLM.PrimitiveDegree` from the repository root
   builds the Lean file.

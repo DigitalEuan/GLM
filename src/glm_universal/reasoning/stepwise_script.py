@@ -1921,7 +1921,7 @@ def mutants(chain: Chain) -> Dict[str, Dict[str, object]]:
         out["hole-lie"] = data
     # word-lie (round three): a declared comparative's direction reversed,
     # its value and both columns re-rendered to agree.
-    from ..runtime.declared_frames import COMPARATIVES
+    from ..runtime.comparatives import COMPARATIVES
     word = next((x for x in steps if x.op == "comparative" or (
         x.op == "compare" and x.detail.get("relation") in COMPARATIVES)),
         None)

@@ -14,11 +14,15 @@
 
 *Last altered 27 October 2026 (Round 49: the journey written up, the package tidied and prepared for the GLM).*
 
+*Last altered 31 October 2026 (repository check: this document is the README of the supplied package `Rule30_GLM_Study`, copied into `studies/`, so its links were written against the package root; they now point to where the files live — the Lean tree under `src/lean/` and the package under `source_material/ToDo/Rule30_GLM_Study/`. Seven files it names were not among the supplied files and are not in the tree — `MERGE_INTO_GLM.md`, `tools/STUDY_YAML.md`, `tools/glm_study_yaml.py`, `study/modules.yaml`, `study/claims.yaml`, `study/study_folders.yaml`, `study/open_questions.yaml` — and neither is `RequestProject/GLM/Rule30/DEVELOPMENT.md`; they are named without a link. The text is otherwise unchanged.)*
+
+*Last altered 1 November 2026 (Phase 186: the package is absorbed ahead of the owner's Lean build and filed in `source_material/done/Rule30_GLM_Study/`; its links now point there. The text is otherwise unchanged.)*
+
 This is the one document to read first. It records how the study went (§2), keeps the best of
 what it found (§3), says where everything is (§4), answers whether the package can be merged into
-the GLM (§5, details in [`MERGE_INTO_GLM.md`](MERGE_INTO_GLM.md)), prepares the move to YAML
+the GLM (§5, details in `MERGE_INTO_GLM.md`), prepares the move to YAML
 study documents (§6) and lists what is left (§7). A machine-readable copy of all of it is in
-[`study/`](study/README.md).
+[`study/`](../source_material/done/Rule30_GLM_Study/study/).
 
 **Authors.** E. R. A. Craig — study, concept, GLM/UBP framework (project owner). The first seven
 rounds were computed with Z.ai and translated with Qwen.ai. Aristotle by Harmonic — Lean 4
@@ -47,7 +51,7 @@ spoke), the *theorem wheel* (statements, proved implications and proved non-impl
 later, the *hypothesis engine*, *gates*, *layers* and *escalation*.
 
 **Evidence classes**, used in every document and in the ledger
-[`claims.csv`](RequestProject/GLM/Rule30/claims.csv):
+[`claims.csv`](../src/lean/RequestProject/GLM/Rule30/claims.csv):
 
 | Class | Meaning |
 |---|---|
@@ -57,7 +61,7 @@ later, the *hypothesis engine*, *gates*, *layers* and *escalation*.
 | DEF | definition, diagnostic or informal argument |
 | OPEN | stated as a Lean `Prop`, not proved |
 
-**Standing rules** (from [`PROJECT_DIRECTIVE.md`](RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md)):
+**Standing rules** (from [`PROJECT_DIRECTIVE.md`](../src/lean/RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md)):
 every claim carries its class; open status lives in a `Prop`, never an `axiom`; no finite range
 decides P1 or P2 (`no_finite_certificate_problem1/2`); facts about the map from *all* rows cannot by
 themselves give non-periodicity for every row, because the all-white row shares them (error E2), so a
@@ -143,7 +147,7 @@ T1 cone separation preserved, T2 wobble bound ⇒ normality, T3 weight growth "u
   seed column, so those coefficients alone cannot imply P1 (error E8,
   `injector_lock_compatible_with_periodicity`). This blocks that one implication; it does not rule
   out a further bridge that also uses the seed's actual evolution.
-* **Audit** (Round 20): [`AUDIT.md`](RequestProject/GLM/Rule30/AUDIT.md) and `Frontier.lean`, which
+* **Audit** (Round 20): [`AUDIT.md`](../src/lean/RequestProject/GLM/Rule30/AUDIT.md) and `Frontier.lean`, which
   re-checks the whole frontier in six theorems.
 
 ### 2.5 Rounds 21–27: the half-line machine
@@ -175,7 +179,7 @@ implies P1 (`problem1_of_halfLineDies`); no cell to the right is involved.
 
 ### 2.6 Rounds 28–30: the GLM made operational
 
-* The GLM's theorem wheel reads the whole ledger as carriers ([`glm/r28_wheel.json`](RequestProject/GLM/Rule30/glm/README.md)).
+* The GLM's theorem wheel reads the whole ledger as carriers ([`glm/r28_wheel.json`](../src/lean/RequestProject/GLM/Rule30/glm/)).
 * **Local-rule induction** for any grid and any reader is proved sound and complete
   (`LocalRuleInduction.lean`), and runs as the GLM's ARC fallback: it answers only when the
   demonstrations determine the answer.
@@ -231,8 +235,8 @@ implies P1 (`problem1_of_halfLineDies`); no cell to the right is involved.
 ### 2.9 Rounds 43–47: the GLM's architecture checked
 
 * The owner's **escalation-boundaries sketch** was checked statement by statement and rebuilt
-  ([`Escalation/MASTER_VIEW.md`](RequestProject/GLM/Escalation/MASTER_VIEW.md), corrected edition in
-  [`GLM_Escalation_Boundaries_Exploration_CORRECTED.md`](RequestProject/GLM/Escalation/GLM_Escalation_Boundaries_Exploration_CORRECTED.md)):
+  ([`Escalation/MASTER_VIEW.md`](../src/lean/RequestProject/GLM/Escalation/MASTER_VIEW.md), corrected edition in
+  [`GLM_Escalation_Boundaries_Exploration_CORRECTED.md`](../src/lean/RequestProject/GLM/Escalation/GLM_Escalation_Boundaries_Exploration_CORRECTED.md)):
   the state is (carrier, layer), the snap is the only layer-changer, escalation is a
   least-resolving-layer search (all kept and proved); the 2/4/8/144/256 modulus table, the half-unit
   example, "a fixed syndrome table is stable" and "roll back on failure" are corrected; the
@@ -259,10 +263,10 @@ prints from the right side in (`column_from_right`), and the right edge repeats 
 
 ### 2.11 Round 49: the tidy-up
 
-This document; [`MERGE_INTO_GLM.md`](MERGE_INTO_GLM.md) and the merge tool; a single
+This document; `MERGE_INTO_GLM.md` and the merge tool; a single
 non-colliding package root `RequestProject/GLM/Rule30Study.lean`; the machine-readable copy in
-[`study/`](study/README.md); the YAML parser/creator for study documents
-([`tools/STUDY_YAML.md`](tools/STUDY_YAML.md)); a tier-0 block at the top of every document of the
+[`study/`](../source_material/done/Rule30_GLM_Study/study/); the YAML parser/creator for study documents
+(`tools/STUDY_YAML.md`); a tier-0 block at the top of every document of the
 package, so that each one meets the GLM's corpus contract and reads as a study at its coarsest
 level; a short front-door `README.md` (its old round summaries moved, unchanged, to `HISTORY.md`
 Appendix D). No mathematical result was added or changed.
@@ -276,7 +280,7 @@ it wanted. (2) "Seed, not map" (E2): it redirected everything towards facts abou
 hypothesis engine (Round 38): the first new theorems proposed by the machine itself.
 
 **The error record** (institutional memory; full table in
-[`HISTORY.md`](RequestProject/GLM/Rule30/HISTORY.md), Round 3, Track 4, and `AUDIT.md` §2.3):
+[`HISTORY.md`](../src/lean/RequestProject/GLM/Rule30/HISTORY.md), Round 3, Track 4, and `AUDIT.md` §2.3):
 
 | | Error | Correction |
 |---|---|---|
@@ -457,38 +461,38 @@ RequestProject/GLM/Escalation/          6 Lean files + guides (escalation bounda
 ```
 
 Every Lean file starts with a docstring listing its results; `…Data.lean` files hold the
-certificates. [`study/modules.yaml`](study/modules.yaml) lists every file with its topic, evidence
+certificates. `study/modules.yaml` lists every file with its topic, evidence
 class, round and the ledger rows it backs.
 
 ### 4.2 Lean files by topic
 
 | Topic | Files | Guide |
 |---|---|---|
-| Foundations | `Basic`, `Compute`, `Prizes`, `Problem3Quantifiers`, `MachineModel(Data)`, `ElementaryCA`, `Frontier` | [`Rule30/README.md`](RequestProject/GLM/Rule30/README.md) |
+| Foundations | `Basic`, `Compute`, `Prizes`, `Problem3Quantifiers`, `MachineModel(Data)`, `ElementaryCA`, `Frontier` | [`Rule30/README.md`](../src/lean/RequestProject/GLM/Rule30/README.md) |
 | P1: proved partial results | `NoConstantColumn`, `AdjacentColumns`, `OnePeriodicColumn`, `ChiralLeak`, `Diagonals`, `RightDiagonalBalance`, `ReadAngle`, `SeedBoundary` | same |
 | P1: exact reformulations | `FiniteState`, `Spectral`, `RuleSpace`, `WobbleLenses(Data)`, `PowerSeriesLadder(Data)`, `HankelKronecker`, `TuningByEar(Data)`, `EchoBound`, `ShortcutNetwork(Data)`, `AdicTower`, `AdicPeriod`, `AdicTowerData` | same |
-| P1: the half-line machine | `LeftWhiteLift`, `LeftWhiteCompactness`, `RunBound*`, `PeriodTwoHalfLine(Data)`, `HalfLineMachine(Data)`, `HalfLineLightCone`, `PrefixSearch(Data)`, `RunCount*`, `XorAlternatives(Data)`, `AmortizedHalving`, `ConjectureLoop(Data)`, `PostEdgeSpec`, `ProofRoutes(Data)`, `InnerSurvivorData`, `SidewaysView`, `BarrierDiagonalsData`, `TileLeads` | [`AUDIT.md`](RequestProject/GLM/Rule30/AUDIT.md) |
-| P1: observer's clock, drive wheel | `TestCount*`, `TestHalving(Data)`, `SidewaysPeriodTwo`, `SlackCert*`, `DiagonalSearch(Data)`, `DiagCert*`, `BlackRunWindow`, `DriveWheel(Data)`, `TurnCost(Data)`, `OneRunFamily` | [`TEST_COUNT.md`](RequestProject/GLM/Rule30/TEST_COUNT.md), [`WHEEL.md`](RequestProject/GLM/Rule30/WHEEL.md), [`TURN_COST.md`](RequestProject/GLM/Rule30/TURN_COST.md) |
-| The left side, triangles | `LeftDiagonalPeriods(Data)`, `Transients(Data)`, `WhiteDiagonals`, `Triangles(Data)` | [`HYPOTHESIS_ENGINE.md`](RequestProject/GLM/Rule30/HYPOTHESIS_ENGINE.md), [`TRIANGLES.md`](RequestProject/GLM/Rule30/TRIANGLES.md) |
-| P2: wobble, arrow, measure | `Wobble`, `WobbleCertificate`, `WobbleNormalized`, `Perspective`, `ArrowIndependence`, `Ergodic`, `Invariance`, `Unpredictability`, `ColumnInverse` | [`Rule30/README.md`](RequestProject/GLM/Rule30/README.md) |
+| P1: the half-line machine | `LeftWhiteLift`, `LeftWhiteCompactness`, `RunBound*`, `PeriodTwoHalfLine(Data)`, `HalfLineMachine(Data)`, `HalfLineLightCone`, `PrefixSearch(Data)`, `RunCount*`, `XorAlternatives(Data)`, `AmortizedHalving`, `ConjectureLoop(Data)`, `PostEdgeSpec`, `ProofRoutes(Data)`, `InnerSurvivorData`, `SidewaysView`, `BarrierDiagonalsData`, `TileLeads` | [`AUDIT.md`](../src/lean/RequestProject/GLM/Rule30/AUDIT.md) |
+| P1: observer's clock, drive wheel | `TestCount*`, `TestHalving(Data)`, `SidewaysPeriodTwo`, `SlackCert*`, `DiagonalSearch(Data)`, `DiagCert*`, `BlackRunWindow`, `DriveWheel(Data)`, `TurnCost(Data)`, `OneRunFamily` | [`TEST_COUNT.md`](../src/lean/RequestProject/GLM/Rule30/TEST_COUNT.md), [`WHEEL.md`](../src/lean/RequestProject/GLM/Rule30/WHEEL.md), [`TURN_COST.md`](../src/lean/RequestProject/GLM/Rule30/TURN_COST.md) |
+| The left side, triangles | `LeftDiagonalPeriods(Data)`, `Transients(Data)`, `WhiteDiagonals`, `Triangles(Data)` | [`HYPOTHESIS_ENGINE.md`](../src/lean/RequestProject/GLM/Rule30/HYPOTHESIS_ENGINE.md), [`TRIANGLES.md`](../src/lean/RequestProject/GLM/Rule30/TRIANGLES.md) |
+| P2: wobble, arrow, measure | `Wobble`, `WobbleCertificate`, `WobbleNormalized`, `Perspective`, `ArrowIndependence`, `Ergodic`, `Invariance`, `Unpredictability`, `ColumnInverse` | [`Rule30/README.md`](../src/lean/RequestProject/GLM/Rule30/README.md) |
 | ANF and P3 background | `ConeSeparation`, `ANF(Data)`, `DegreeData`, `ParityReduction(Data)`, `TopMonomial`, `WeightGrowth`, `PhaseSpace32`, `WholeCone`, `DiagonalCoupling`, `Injector*` | same |
-| Geometry | `ConeGeometry`, `LatticeConeFraction`, `SpinSweep`, `SpinLattice`, `SpinQuaternion`, `Funnel`, `ChemistryLab` | [`HISTORY.md`](RequestProject/GLM/Rule30/HISTORY.md) |
-| `M₂₄` and Golay | `MathieuOrbits(Data)`, `MathieuRule30Data`, `MathieuCensus`, `MathieuCensusOrbits`, `MathieuMOG` | [`M24_ORBITS.md`](RequestProject/GLM/Rule30/M24_ORBITS.md) |
-| GLM reasoning | `Observer`, `WheelInduction`, `LocalRuleInduction`, `PlanSearch`, `Pipeline(Data)` | [`glm/README.md`](RequestProject/GLM/Rule30/glm/README.md) |
-| Hypothesis Engine | `HypothesisEngine/*` | [`HypothesisEngine/README.md`](RequestProject/GLM/HypothesisEngine/README.md) |
-| Escalation | `Escalation/*` | [`Escalation/README.md`](RequestProject/GLM/Escalation/README.md) |
+| Geometry | `ConeGeometry`, `LatticeConeFraction`, `SpinSweep`, `SpinLattice`, `SpinQuaternion`, `Funnel`, `ChemistryLab` | [`HISTORY.md`](../src/lean/RequestProject/GLM/Rule30/HISTORY.md) |
+| `M₂₄` and Golay | `MathieuOrbits(Data)`, `MathieuRule30Data`, `MathieuCensus`, `MathieuCensusOrbits`, `MathieuMOG` | [`M24_ORBITS.md`](../src/lean/RequestProject/GLM/Rule30/M24_ORBITS.md) |
+| GLM reasoning | `Observer`, `WheelInduction`, `LocalRuleInduction`, `PlanSearch`, `Pipeline(Data)` | [`glm/README.md`](../src/lean/RequestProject/GLM/Rule30/glm/) |
+| Hypothesis Engine | `HypothesisEngine/*` | [`HypothesisEngine/README.md`](../src/lean/RequestProject/GLM/HypothesisEngine/README.md) |
+| Escalation | `Escalation/*` | [`Escalation/README.md`](../src/lean/RequestProject/GLM/Escalation/README.md) |
 
 ### 4.3 Which document for what
 
 | Document | For |
 |---|---|
 | this file | the journey, the best findings, the map |
-| [`PROJECT_DIRECTIVE.md`](RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md) | goal, rules of evidence, focus, what counts as progress |
-| [`AUDIT.md`](RequestProject/GLM/Rule30/AUDIT.md) | status, missing theorems (§3), the numbered To Do list (§4) |
-| [`DEVELOPMENT.md`](RequestProject/GLM/Rule30/DEVELOPMENT.md) | how to run a round: the loop, the checks, the conventions |
-| [`HISTORY.md`](RequestProject/GLM/Rule30/HISTORY.md) | the detailed record of every round |
+| [`PROJECT_DIRECTIVE.md`](../src/lean/RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md) | goal, rules of evidence, focus, what counts as progress |
+| [`AUDIT.md`](../src/lean/RequestProject/GLM/Rule30/AUDIT.md) | status, missing theorems (§3), the numbered To Do list (§4) |
+| `DEVELOPMENT.md` | how to run a round: the loop, the checks, the conventions |
+| [`HISTORY.md`](../src/lean/RequestProject/GLM/Rule30/HISTORY.md) | the detailed record of every round |
 | topic guides | `TEST_COUNT.md`, `WHEEL.md`, `TURN_COST.md`, `HYPOTHESIS_ENGINE.md`, `TRIANGLES.md`, `M24_ORBITS.md`, `HypothesisEngine/README.md`, `Escalation/README.md`, `Escalation/MASTER_VIEW.md` |
-| [`claims.csv`](RequestProject/GLM/Rule30/claims.csv) | the evidence ledger (also as [`study/claims.yaml`](study/claims.yaml)) |
+| [`claims.csv`](../src/lean/RequestProject/GLM/Rule30/claims.csv) | the evidence ledger (also as `study/claims.yaml`) |
 
 ### 4.4 The study folders (GLM-side code)
 
@@ -498,7 +502,7 @@ The Python side of each round lives in the owner's study tree, one folder per ro
 `rule30_round37` (GLM overlays with `setup_round*.sh`, benchmarks), `rule30_round38` …
 `rule30_round45` (the hypothesis engine v5–v17, guards, escalation checks), and `glm_engine/`
 (engine v18). Rounds 17–27 and 31–32, 35–36, 46–49 were Lean-only or kept their scripts in
-`RequestProject/GLM/Rule30/scripts/`. [`study/study_folders.yaml`](study/study_folders.yaml)
+`RequestProject/GLM/Rule30/scripts/`. `study/study_folders.yaml`
 lists every folder with its round, purpose and entry points. The owner's original material
 (Rounds 1–7) is at the root of that tree: `README.md`, `VERIFICATION_DIRECTIVE.md`, `pdfs/`,
 `scripts/`, `lean/`, `data/`, `figures/`.
@@ -522,7 +526,7 @@ are kept in separate files.
 ## 5. Merging into the GLM
 
 **Yes — the package can be merged as it is, and a tool does it.** The details and the manual
-recipe are in [`MERGE_INTO_GLM.md`](MERGE_INTO_GLM.md); in short:
+recipe are in `MERGE_INTO_GLM.md`; in short:
 
 * **Same build.** The GLM repository (`glm_repo.zip`, snapshot of 23 October 2026) uses the same Lean
   toolchain (4.28.0), the same Mathlib commit and the same library name `RequestProject`, with its
@@ -563,12 +567,12 @@ use, and will write future studies in YAML. This round prepares it:
   `glm_universal.corpus.inventory.Document`: path, title, sections with GitHub-style anchors, the
   four tier-0 fields `question`, `verdict`, `figure`, `recomputed`, links, archive flag — plus a
   lossless layer, so that YAML → Markdown reproduces the original byte for byte.
-* **A parser/creator** ([`tools/glm_study_yaml.py`](tools/glm_study_yaml.py), guide
-  [`tools/STUDY_YAML.md`](tools/STUDY_YAML.md)): `md2yaml`, `yaml2md` (render), `new` (a study from
+* **A parser/creator** (`tools/glm_study_yaml.py`, guide
+  `tools/STUDY_YAML.md`): `md2yaml`, `yaml2md` (render), `new` (a study from
   the template), `validate`, `roundtrip`, `index`, `query`, `get`. Standard library only, with its
   own YAML reader and writer; it uses PyYAML only if asked.
 * **Applied here first.** Every document of this package is converted in
-  [`study/docs/`](study/README.md), indexed in [`study/index.yaml`](study/index.yaml), and
+  [`study/docs/`](../source_material/done/Rule30_GLM_Study/study/), indexed in [`study/index.yaml`](../source_material/done/Rule30_GLM_Study/study/index.yaml), and
   regenerated by `tools/build_study_yaml.py`. The hand-maintained files `rule30.yaml`,
   `findings.yaml` and `lessons.yaml`, and the generated `rounds.yaml`, `open_questions.yaml` and
   `study_folders.yaml`, show the shape a study's knowledge takes when it is meant to be queried
@@ -578,7 +582,7 @@ use, and will write future studies in YAML. This round prepares it:
   `archive/`, `source_material/` and ``) convert to YAML and render back byte for byte,
   PyYAML reads every emitted file as the same object, and the 2111 sections agree with the GLM's
   own document model on headings, anchors, tier 0 and links. Details in
-  [`tools/STUDY_YAML.md`](tools/STUDY_YAML.md); 43 unit tests in `tools/test_glm_study_yaml.py`.
+  `tools/STUDY_YAML.md`; 43 unit tests in `tools/test_glm_study_yaml.py`.
 
 ---
 
@@ -598,10 +602,10 @@ use, and will write future studies in YAML. This round prepares it:
 unbounded (45)? can the open bit at a white diagonal be decided from finite data (46)? run-up
 universality (47) and the period-64 prediction (48); does period 4 have a finite observer-clock slack
 (35)? are the white triangles near the left edge bounded (52)? The full list, with status, is
-[`study/open_questions.yaml`](study/open_questions.yaml).
+`study/open_questions.yaml`.
 
-**How to continue.** Read [`PROJECT_DIRECTIVE.md`](RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md)
-and [`DEVELOPMENT.md`](RequestProject/GLM/Rule30/DEVELOPMENT.md); pick an item from `AUDIT.md` §4;
+**How to continue.** Read [`PROJECT_DIRECTIVE.md`](../src/lean/RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md)
+and `DEVELOPMENT.md`; pick an item from `AUDIT.md` §4;
 state the target as a `Prop` first; record every claim in `claims.csv` with its class; close the
 round with the checklist (build, no `sorry`, `ledger_check.py`, `build_study_yaml.py all`, a
 `HISTORY.md` section). Inside the GLM, write the round's study in YAML with
@@ -629,8 +633,8 @@ disproves any of the three prize problems.
 ## 9. Where it is reachable
 
 * Lean: `RequestProject/GLM/Rule30Study.lean` imports everything; each topic's files are listed in
-  §4.2 and in [`study/modules.yaml`](study/modules.yaml).
-* Ledger: [`claims.csv`](RequestProject/GLM/Rule30/claims.csv) and
-  [`study/claims.yaml`](study/claims.yaml); as GLM wheel carriers in
-  [`glm/r28_wheel.json`](RequestProject/GLM/Rule30/glm/README.md).
+  §4.2 and in `study/modules.yaml`.
+* Ledger: [`claims.csv`](../src/lean/RequestProject/GLM/Rule30/claims.csv) and
+  `study/claims.yaml`; as GLM wheel carriers in
+  [`glm/r28_wheel.json`](../src/lean/RequestProject/GLM/Rule30/glm/).
 * Queries: `python3 tools/glm_study_yaml.py query study/index.yaml --text "half-line"`.

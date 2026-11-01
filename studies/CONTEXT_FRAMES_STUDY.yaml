@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 9 marks (X5 missed as written, X5′ met); 10 of 10 theorems, 0 `sorry`; battery 21
@@ -14,14 +16,19 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - engineering/context_frames
-  lean:
+  - engineering/context_frames.py
+  - engineering/context_frames_study.py
+  - tools.py
+  lean: []
+  lean_held: []
+  lean_missing:
   - ContextFrames
+  missing: []
   prose: CONTEXT_FRAMES_STUDY.md
-  test:
-  - test_context_frames.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CONTEXT_FRAMES_STUDY
 junctions:
 - rule: ''
@@ -29,17 +36,35 @@ junctions:
   wheels:
   - W9
   - W13
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
   refinement_of: ''
   resolutions_tried: []
 marks:
-  amended: []
-  declared: []
-  met: []
-  missed: []
+  amended:
+  - X5′
+  declared:
+  - X1
+  - X2
+  - X3
+  - X4
+  - X5
+  - X6
+  - X7
+  - X8
+  met:
+  - X1
+  - X2
+  - X3
+  - X4
+  - X6
+  - X7
+  - X8
+  - X5′
+  missed:
+  - X5
 perturbations: []
 phase: 170
 predecessors:
@@ -49,7 +74,8 @@ question: Can a question say the context a shared name is meant in — whether a
   which oscillator is meant, whether a rotating body drives the wave — so that the domain wheels recover
   the relationship the union refuses, without identifying the quantities globally and without changing
   any answer given without a context?
-recomputed_by: '`glm_universal.reasoning.frame_plane_study.frame_plane_report`'
+recomputed_by: '`glm_universal.engineering.context_frames_study.context_frames_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

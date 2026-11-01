@@ -1,40 +1,41 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: 'The number of the ten reference holes that keep their own
-
-  label under a bare seed change: 3 of 10 at `(L₁, 240)`, 9 of 10 at
-
-  `(L₄, 960)`, 10 of 10 at `(L₄, 1920)`.'
+deciding_figure: 'The number of the ten reference holes that keep their own label under a bare seed change:
+  3 of 10 at `(L₁, 240)`, 9 of 10 at `(L₄, 960)`, 10 of 10 at `(L₄, 1920)`.'
 directives:
-- D11
 - D3
 - D4
-- D5
 - D6
 - D7
-- D9
 evidence: []
 faculty: unknown
 file_refs:
   code:
-  - reasoning/deep_hole_escalation
+  - reasoning/deep_hole_escalation.py
+  - tools.py
   lean:
   - Cumulative
   - DeepHoleEscalation
   - Layers
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DEEP_HOLE_ESCALATION_STUDY.md
   test:
   - test_deep_hole_escalation.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DEEP_HOLE_ESCALATION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -48,14 +49,14 @@ marks:
 perturbations: []
 phase: 0
 predecessors: []
-question: 'The deep-hole round stopped because its statistic could not tell
-
-  the same hole from itself under a changed ensemble. Is that a property of the
-
-  hole, or of the layer it was read at — and does escalating the reading, in the
-
-  declared ladder below, cross the boundary?'
+question: The deep-hole round stopped because its statistic could not tell the same hole from itself under
+  a changed ensemble. Is that a property of the hole, or of the layer it was read at — and does escalating
+  the reading, in the declared ladder below, cross the boundary?
 recomputed_by: '`glm_universal.reasoning.deep_hole_escalation.deep_hole_escalation_report`'
+related:
+- DEEP_HOLE_STUDY
+- INFORMATION_LOSS_STUDY
+- SHARE_SEPARATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -97,17 +98,9 @@ successors: []
 superseded_by: ''
 supersedes: []
 title: The deep-hole ladder — escalating the reading until the law descends
-verdict: 'It was the layer. Escalating the reading takes the sanity count
-
-  from **3 of 10** at the first round''s cell to **10 of 10** — the gate — at the
-
-  joint reading with 1920 starts, where the full query set comes out **40 of
-
-  44** against 12 for the vertex-count baseline. The passing cell is the
-
-  extension rung of §14, decided after the twelve pre-registered cells were
-
-  measured, and is reported as an extension throughout; the best pre-registered
-
-  cell is 9 of 10.'
+verdict: It was the layer. Escalating the reading takes the sanity count from **3 of 10** at the first
+  round's cell to **10 of 10** — the gate — at the joint reading with 1920 starts, where the full query
+  set is named **40 of 44** correctly against 12 for the vertex-count baseline. The passing cell is the
+  extension rung of §14, decided after the twelve pre-registered cells were measured, and is reported
+  as an extension throughout; the best pre-registered cell is 9 of 10.
 wobble_deps: []

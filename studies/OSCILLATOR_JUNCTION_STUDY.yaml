@@ -1,27 +1,35 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 'B chosen: O1, O2, O3 met (O4 met); not-entailed oscillator answers A 6, B 0, C 0, D
   0; preservation lost A 0, B 0, C 0, D 8 of 249; battery answered A 21, B 21, C 17, D 21 of 23.'
-directives:
-- D3
+directives: []
 evidence: []
 faculty: derivation
 file_refs:
   code:
-  - engineering/oscillator_junction
-  - tests/test_oscillator_junction
+  - engineering/domains.py
+  - engineering/domains_reread.py
+  - engineering/oscillator_junction.py
+  - tools.py
   lean:
   - OscillatorJunction
+  lean_held: []
+  lean_missing: []
+  missing:
+  - evaluation/domain_cases.py
   prose: OSCILLATOR_JUNCTION_STUDY.md
   test:
   - test_oscillator_junction.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: OSCILLATOR_JUNCTION_STUDY
 junctions:
 - rule: ''
@@ -46,8 +54,9 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 157
+phase: 158
 predecessors:
+- DOMAIN_WHEELS_STUDY
 - FRICTION_STUDY
 question: The junction between wave kinematics (W9) and the mass-spring oscillator (W13) joins `frequency`
   and `angle`, and through the older junction between rotational mechanics and waves (W4/W9) it makes
@@ -55,6 +64,7 @@ question: The junction between wave kinematics (W9) and the mass-spring oscillat
   declared rule, which junction keeps every declared answer and gives no answer that ties an oscillator
   to a rotating body it was never said to be coupled to?
 recomputed_by: '`glm_universal.engineering.oscillator_junction.report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -78,7 +88,8 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- CONTEXT_FRAMES_STUDY
 superseded_by: ''
 supersedes: []
 title: 'The oscillator junction: which angular quantity an oscillator shares, tried four ways'

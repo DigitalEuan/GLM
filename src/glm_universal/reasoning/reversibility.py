@@ -1,4 +1,4 @@
-"""``glm_universal.reasoning.reversibility`` -- the Reversibility ledger (D18).
+"""``glm_universal.reasoning.reversibility`` -- the Reversibility ledger (D19).
 
 Every operation in the substrate is tagged with one of four reversibility
 classes:
@@ -20,6 +20,12 @@ ships with its inverse proved in Lean.  A declared-lossy operation ships
 with a witnessing pair.  A forward-only operation used in a context that
 expects its inverse is a bug, caught by the instrument.
 
+*Last altered 31 October 2026 (repository check): the Golay inverses cite the
+theorems the development has (``GLM.Golay24.decode_encode``, and
+``GLM.Golay24.exists_encode``, whose proof shows ``encode (decode c) = c`` on a
+codeword); the two loss citations named theorems that do not exist and are
+empty until ``Reversibility.lean`` is written (directive D8).*
+
 *Created 29 October 2026 (Iteration 10, Phase R5).  The measurements
 already exist (COMBINER_STUDY measures XOR's loss; INFORMATION_LOSS_STUDY
 lists what each layer cannot see); this module makes the requirement
@@ -31,6 +37,10 @@ The Lean formalization (``Reversibility.lean``, to be written) will prove:
     composes to the identity.
   * ``lossy_witness`` -- a declared-lossy operation's witness is a true
     pair of inputs mapping to the same output.
+
+
+*Last altered 31 October 2026 (repository check): renumbered D18 -> D19 when
+the date rule was restored to D17 (owner's decision of 30 October 2026).*
 """
 from __future__ import annotations
 
@@ -200,14 +210,14 @@ register(Operation(
     name="golay.encode",
     cls="bijective",
     inverse="golay.decode",
-    inverse_lean="GLM.Golay.Code.decode_encode_inverse",
+    inverse_lean="GLM.Golay24.decode_encode",
     consumers=("substrate/golay_decode.py", "substrate/mog.py"),
 ))
 register(Operation(
     name="golay.decode",
     cls="bijective",
     inverse="golay.encode",
-    inverse_lean="GLM.Golay.Code.encode_decode_inverse",
+    inverse_lean="GLM.Golay24.exists_encode",
     consumers=("substrate/golay_decode.py",),
 ))
 register(Operation(
@@ -231,13 +241,15 @@ register(Operation(
     name="combiner.xor",
     cls="declared_lossy",
     loss_witness="2^24-to-one: any two 24-bit words with the same XOR digest",
-    loss_lean="GLM.Combiner.xor_pigeonhole",
+    #  No Lean statement of this loss exists yet (it would live in the
+    #  ``Reversibility.lean`` named below); the witness above is the record.
+    loss_lean="",
     consumers=("reasoning/combiner.py",),
 ))
 register(Operation(
     name="sha256",
     cls="declared_lossy",
     loss_witness="any two inputs with the same hash (existence proved by pigeonhole)",
-    loss_lean="GLM.Reversibility.sha256_pigeonhole",
+    loss_lean="",
     consumers=("integrity.py",),
 ))

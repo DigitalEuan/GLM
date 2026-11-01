@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '8 of 9 marks met; 6 of 6 algebraic and 4 of 4 radical systems with exactly the declared
@@ -15,17 +17,26 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - evaluation/cubic_radical_cases
+  - evaluation/cubic_radical_cases.py
+  - reasoning/symbolic_algebraic.py
+  - reasoning/symbolic_nonlinear.py
+  - runtime/cubic_radical_report.py
+  - runtime/symbolic_frames.py
+  - tools.py
   lean:
   - CubicRadicals
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CUBIC_RADICAL_STUDY.md
   test:
   - test_cubic_radical.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CUBIC_RADICAL_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -33,18 +44,38 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - K1
+  - K2
+  - K3
+  - K4
+  - K5
+  - K6
+  - K7
+  - K8
+  - K9
+  met:
+  - K1
+  - K2
+  - K3
+  - K4
+  - K5
+  - K7
+  - K8
+  - K9
+  missed:
+  - K6
 perturbations: []
-phase: 98
-predecessors: []
+phase: 104
+predecessors:
+- NONLINEAR_ELIMINATION_STUDY
 question: 'The nonlinear elimination study left three follow-ups: the cubic that most pairs of conics
   leave, quadratics whose coefficients hold a square root (nested radicals), and Phase 98''s positive-root
   answers such as circle and line. Can the branch layer answer the first two exactly and without a wrong
   answer, and does keeping both tracks for the third, with the branch set as the default, give a stronger
   answer without losing the substitution reading?'
 recomputed_by: '`glm_universal.runtime.cubic_radical_report.cubic_radical_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -72,7 +103,9 @@ sections:
 - anchor: 9-re-running-it
   heading: 9. Re-running it
 status: closed
-successors: []
+successors:
+- CUBIC_TRIG_STUDY
+- QUINTIC_RADICAL_STUDY
 superseded_by: ''
 supersedes: []
 title: Cubics, nested square roots and the positive-root dual track

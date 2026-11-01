@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 10 of 10 marks (L1, A1, A2, A3, A4, O1, C1, T1, Q1, W1); correct/wrong 445/0, 402/0,
@@ -10,29 +12,39 @@ deciding_figure: 10 of 10 marks (L1, A1, A2, A3, A4, O1, C1, T1, Q1, W1); correc
   0 wrong, 17 refused, 15 of them exact duplicate carriers; 12 of 12 tamperings refused; 0 of 195 evaluation
   cases read as `locate` other than the 7 new ones.
 directives:
-- D12
 - D4
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/address_read
-  - reasoning/address_read_study
-  - runtime/session
-  - runtime/tct_engine
-  - runtime/toolbox
-  - tests/test_address_read
+  - reasoning/address_read.py
+  - reasoning/address_read_study.py
+  - reasoning/address_table.py
+  - reasoning/cell_guard.py
+  - reasoning/ladder_escalation.py
+  - reasoning/norm256_hex.py
+  - reasoning/placement_guard.py
+  - reasoning/quadratic_lasso.py
+  - runtime/parser.py
+  - runtime/session.py
+  - runtime/tct_engine.py
+  - runtime/toolbox.py
+  - tools.py
   lean:
   - AddressRead
   - PlacementGuard
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ADDRESS_READ_STUDY.md
   test:
   - test_address_read.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ADDRESS_READ_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -40,19 +52,42 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - L1
+  - A1
+  - A2
+  - A3
+  - A4
+  - O1
+  - C1
+  - T1
+  - Q1
+  - W1
+  met:
+  - L1
+  - A1
+  - A2
+  - A3
+  - A4
+  - O1
+  - C1
+  - T1
+  - Q1
+  - W1
   missed: []
 perturbations: []
-phase: 129
+phase: 143
 predecessors:
 - COUNTER_LASSO_STUDY
 - PLACEMENT_GUARD_STUDY
+- PROTECTED_TAG_STUDY
 question: Can the GLM answer a question by reading a carrier off the construction ladder by its address
   — a point in, a named carrier out — with every answer certified by the placement guard from a stored
   table kept beside the digest of the carriers it came from, without changing any answer the evaluation
   already pins?
 recomputed_by: '`glm_universal.reasoning.address_read_study.address_read_report`'
+related:
+- NEAREST_ADDRESS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -76,7 +111,8 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- COORDINATE_JUNCTION_STUDY
 superseded_by: ''
 supersedes: []
 title: The address read — a ladder carrier read by its address, under the placement guard

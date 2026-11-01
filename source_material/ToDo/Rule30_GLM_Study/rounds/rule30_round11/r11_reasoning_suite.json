@@ -1,0 +1,246 @@
+{
+ "format": "tool claim <claim> -> VERDICT / MISSING HYPOTHESIS / WITNESS-REFERENCE / NEXT TEST",
+ "scoring": "1 point if the verdict matches (REFUSE = the tool refused); for REJECT items the missing hypothesis or witness must also contain the keyword",
+ "items": [
+  {
+   "id": "D1",
+   "split": "frame",
+   "claim": "The center column observer can distinguish wheel 30 from wheel 86.",
+   "verdict": "REJECT",
+   "keyword": "mirror",
+   "reference": "centre_column_class"
+  },
+  {
+   "id": "D2",
+   "split": "frame",
+   "claim": "column 1 distinguishes wheel 30 from wheel 86",
+   "verdict": "ACCEPT",
+   "keyword": "differ",
+   "reference": "column_one_separates_mirror"
+  },
+  {
+   "id": "D3",
+   "split": "frame",
+   "claim": "column 0 distinguishes wheel 30 from wheel 62",
+   "verdict": "ACCEPT",
+   "keyword": "differ",
+   "reference": "(computed witness)"
+  },
+  {
+   "id": "D4",
+   "split": "frame",
+   "claim": "the wobble at column 0 equals the wobble at column 0",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "chiralGap_centre"
+  },
+  {
+   "id": "D5",
+   "split": "frame",
+   "claim": "the wobble at column 2 equals the wobble at column -2",
+   "verdict": "REJECT",
+   "keyword": "mirror",
+   "reference": "chiralGap_first"
+  },
+  {
+   "id": "D6",
+   "split": "frame",
+   "claim": "right diagonal 5 is balanced",
+   "verdict": "REJECT",
+   "keyword": "anti-periodic",
+   "reference": "rdiag_five_not_half"
+  },
+  {
+   "id": "D7",
+   "split": "frame",
+   "claim": "right diagonal 7 is balanced",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "rdiag_seven_bounded"
+  },
+  {
+   "id": "D8",
+   "split": "frame",
+   "claim": "right diagonal 8 is balanced",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "(computed)"
+  },
+  {
+   "id": "D9",
+   "split": "frame",
+   "claim": "rows 0..3 determine wheel 30",
+   "verdict": "REJECT",
+   "keyword": "neighbourhood",
+   "reference": "rows_three_do_not_identify"
+  },
+  {
+   "id": "D10",
+   "split": "frame",
+   "claim": "rows 0..4 determine wheel 30",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "rows_identify_thirty"
+  },
+  {
+   "id": "D11",
+   "split": "frame",
+   "claim": "For almost every initial row the centre column has frequency 1/2, hence the seed's centre column has frequency 1/2",
+   "verdict": "REJECT",
+   "keyword": "measure 0",
+   "reference": "bernoulliRow_seed_null"
+  },
+  {
+   "id": "D12",
+   "split": "frame",
+   "claim": "for almost every row the centre column is not eventually periodic",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "ae_column_not_eventuallyPeriodic"
+  },
+  {
+   "id": "D13",
+   "split": "frame",
+   "claim": "the wobble arrow tells left from right",
+   "verdict": "REJECT",
+   "keyword": "mirror",
+   "reference": "observerArrow_mirror"
+  },
+  {
+   "id": "D14",
+   "split": "frame",
+   "claim": "the wobble arrow is reversed by swapping the colours",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "observerArrow_complement"
+  },
+  {
+   "id": "D15",
+   "split": "frame",
+   "claim": "the right-edge zero boundary forces frequency 1/2",
+   "verdict": "REJECT",
+   "keyword": "left half",
+   "reference": "exists_row_with_biased_column"
+  },
+  {
+   "id": "D16",
+   "split": "frame",
+   "claim": "every right diagonal is balanced",
+   "verdict": "REJECT",
+   "keyword": "periodicity",
+   "reference": "rdiag_five_not_half"
+  },
+  {
+   "id": "D17",
+   "split": "frame",
+   "claim": "infinitely many right diagonals are balanced",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "infinitely_many_balanced_rdiag"
+  },
+  {
+   "id": "D18",
+   "split": "frame",
+   "claim": "the centre column is eventually constant",
+   "verdict": "REJECT",
+   "keyword": "adjacent",
+   "reference": "centerCol_not_eventually_constant"
+  },
+  {
+   "id": "D19",
+   "split": "frame",
+   "claim": "two different columns are both eventually periodic",
+   "verdict": "REJECT",
+   "keyword": "two distinct columns",
+   "reference": "seed_at_most_one_periodic_column"
+  },
+  {
+   "id": "D20",
+   "split": "frame",
+   "claim": "whiteDiagonalCount n is odd for all n >= 2",
+   "verdict": "ACCEPT",
+   "keyword": "",
+   "reference": "whiteDiagonalCount_odd"
+  },
+  {
+   "id": "D21",
+   "split": "frame",
+   "claim": "the ANF degree is 2n-1, so the centre bit is hard to compute",
+   "verdict": "REJECT",
+   "keyword": "all rows",
+   "reference": "map_properties_cannot_decide_periodicity"
+  },
+  {
+   "id": "D22",
+   "split": "frame",
+   "claim": "Problem 1 is proved",
+   "verdict": "OPEN",
+   "keyword": "seed-specific",
+   "reference": "OPEN"
+  },
+  {
+   "id": "D23",
+   "split": "frame",
+   "claim": "the centre column has frequency 1/2",
+   "verdict": "OPEN",
+   "keyword": "seed-specific",
+   "reference": "OPEN"
+  },
+  {
+   "id": "H1",
+   "split": "heldout",
+   "claim": "the observer at the centre can tell apart wheel 30 and wheel 86",
+   "verdict": "REJECT",
+   "keyword": "mirror",
+   "reference": "centre_column_class"
+  },
+  {
+   "id": "H2",
+   "split": "heldout",
+   "claim": "the centre column of rule 30 and rule 86 differ somewhere",
+   "verdict": "REJECT",
+   "keyword": "mirror",
+   "reference": "centre_column_class"
+  },
+  {
+   "id": "H3",
+   "split": "heldout",
+   "claim": "the wobble arrow records chirality",
+   "verdict": "REJECT",
+   "keyword": "mirror",
+   "reference": "observerArrow_mirror"
+  },
+  {
+   "id": "H4",
+   "split": "heldout",
+   "claim": "pinning the right half white gives balance",
+   "verdict": "REJECT",
+   "keyword": "left half",
+   "reference": "exists_row_with_biased_column"
+  },
+  {
+   "id": "H5",
+   "split": "heldout",
+   "claim": "diagonal number 5 behind the right edge has frequency one half",
+   "verdict": "REJECT",
+   "keyword": "anti-periodic",
+   "reference": "rdiag_five_not_half"
+  },
+  {
+   "id": "R1",
+   "split": "refuse",
+   "claim": "the centre column is normal in base 2",
+   "verdict": "REFUSE",
+   "keyword": "",
+   "reference": ""
+  },
+  {
+   "id": "R2",
+   "split": "refuse",
+   "claim": "rule 110 is Turing complete",
+   "verdict": "REFUSE",
+   "keyword": "",
+   "reference": ""
+  }
+ ]
+}

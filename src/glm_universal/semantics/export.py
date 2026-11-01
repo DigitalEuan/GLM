@@ -50,8 +50,10 @@ __all__ = [
 
 #: Where the ARC-era pipeline kept its state, and where these documents go
 #: beside it -- beside, not over.
-DEFAULT_RESULTS = (Path(__file__).resolve().parents[2]
-                   / "arc_agi_17" / "results")
+#: Last altered 31 October 2026 (repository check): the ARC state is a
+#: supplied item, found through ``constants.source_material_item``.
+from ..constants import source_material_item  # noqa: E402
+DEFAULT_RESULTS = source_material_item("arc_agi_17/results")
 
 
 def carrier_strings(meaning: Meaning) -> List[str]:

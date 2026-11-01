@@ -2,7 +2,7 @@
 """What the inherited concept graph contained, and what replaces it.
 
 Run:
-    PYTHONPATH=. python3 glm_universal/examples/semantic_replacement.py
+    PYTHONPATH=src python3 src/glm_universal/examples/semantic_replacement.py
 
 The script does four things, in the order in which they have to be done:
 
@@ -17,6 +17,8 @@ The script does four things, in the order in which they have to be done:
    it.  ``--no-write`` prints the summary and writes nothing.
 
 Nothing here is quoted from a previous run: every number is recomputed.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

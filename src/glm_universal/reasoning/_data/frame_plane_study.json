@@ -1,0 +1,419 @@
+{
+ "demos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "inside": [
+  "identity",
+  "units",
+  "rotation",
+  "boost_x",
+  "boost_y",
+  "boost",
+  "lorentz",
+  "thomas",
+  "lorentz_units"
+ ],
+ "lean": {
+  "declared": 13,
+  "file": "RequestProject/GLM/LorentzPlane.lean",
+  "held": false,
+  "present": false,
+  "sorry": 0,
+  "theorems": 0
+ },
+ "marks": {
+  "L": false,
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4": false,
+  "P5": true,
+  "P6": true,
+  "T": true
+ },
+ "met": 6,
+ "outside": [
+  "reflect",
+  "time_reverse",
+  "shear"
+ ],
+ "phase": 178,
+ "queries": 30,
+ "source_digest": "7a4cfd8442fc13136628cb6adadd8d3da201428a9ee28d56799de5e60d081993",
+ "synthetic": {
+  "by_demos": {
+   "1": {
+    "inside": {
+     "queries": 270,
+     "refused": 270,
+     "right": 0,
+     "wrong": 0
+    },
+    "outside": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "2": {
+    "inside": {
+     "queries": 270,
+     "refused": 270,
+     "right": 0,
+     "wrong": 0
+    },
+    "outside": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "3": {
+    "inside": {
+     "queries": 270,
+     "refused": 7,
+     "right": 263,
+     "wrong": 0
+    },
+    "outside": {
+     "queries": 90,
+     "refused": 32,
+     "right": 58,
+     "wrong": 0
+    }
+   },
+   "4": {
+    "inside": {
+     "queries": 270,
+     "refused": 0,
+     "right": 270,
+     "wrong": 0
+    },
+    "outside": {
+     "queries": 90,
+     "refused": 30,
+     "right": 60,
+     "wrong": 0
+    }
+   }
+  },
+  "families": {
+   "boost": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "boost_x": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 29,
+     "right": 89,
+     "wrong": 2
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "boost_y": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 28,
+     "right": 90,
+     "wrong": 2
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "identity": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 120,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "lorentz": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 62,
+     "right": 58,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 62,
+     "right": 58,
+     "wrong": 0
+    }
+   },
+   "lorentz_units": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "reflect": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 60,
+     "wrong": 60
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 62,
+     "right": 58,
+     "wrong": 0
+    }
+   },
+   "rotation": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 119,
+     "wrong": 1
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "shear": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 115,
+     "right": 1,
+     "wrong": 4
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "thomas": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 61,
+     "right": 59,
+     "wrong": 0
+    }
+   },
+   "time_reverse": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 30,
+     "right": 90,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 120,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   },
+   "units": {
+    "first_fit": {
+     "queries": 120,
+     "refused": 0,
+     "right": 120,
+     "wrong": 0
+    },
+    "phase_178": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 120,
+     "refused": 60,
+     "right": 60,
+     "wrong": 0
+    }
+   }
+  },
+  "statuses": {
+   "answered": 651,
+   "outside_span": 671,
+   "unfit": 115,
+   "untested": 3
+  },
+  "thomas": {
+   "not_pure": 59,
+   "queries": 60,
+   "right": 59,
+   "wigner_exact": 59
+  },
+  "totals": {
+   "first_fit": {
+    "inside": {
+     "queries": 1080,
+     "refused": 177,
+     "right": 898,
+     "wrong": 5
+    },
+    "outside": {
+     "queries": 360,
+     "refused": 145,
+     "right": 151,
+     "wrong": 64
+    }
+   },
+   "phase_178": {
+    "inside": {
+     "queries": 1080,
+     "refused": 547,
+     "right": 533,
+     "wrong": 0
+    },
+    "outside": {
+     "queries": 360,
+     "refused": 360,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "shipped": {
+    "inside": {
+     "queries": 1080,
+     "refused": 547,
+     "right": 533,
+     "wrong": 0
+    },
+    "outside": {
+     "queries": 360,
+     "refused": 242,
+     "right": 118,
+     "wrong": 0
+    }
+   }
+  }
+ },
+ "taken": 8,
+ "tool": {
+  "answer": "43/9,-29/9,-7/3",
+  "answer_ok": true,
+  "pure_boost": false,
+  "refuse_ok": false,
+  "refuse_status": "outside_span",
+  "wigner": "15/17,-8/17"
+ },
+ "two_component": {
+  "differ": [],
+  "same_text": 200,
+  "same_tool": 200,
+  "tasks": 200
+ }
+}

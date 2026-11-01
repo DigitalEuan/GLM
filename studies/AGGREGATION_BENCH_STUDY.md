@@ -12,9 +12,11 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**Code:** [`../glm_universal/sandbox/aggregation_bench.py`](../glm_universal/sandbox/aggregation_bench.py)
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the package under `src/glm_universal/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
+**Code:** [`../glm_universal/sandbox/aggregation_bench.py`](../src/glm_universal/sandbox/aggregation_bench.py)
 (the sandbox occupant; nothing the system computes with imports it)
-**Run:** `PYTHONPATH=. python3 -c "from glm_universal.runtime.session import GeometricSession; from glm_universal.sandbox import aggregation_bench as b; b.bench_report(GeometricSession())"`
+**Run:** `PYTHONPATH=src python3 -c "from glm_universal.runtime.session import GeometricSession; from glm_universal.sandbox import aggregation_bench as b; b.bench_report(GeometricSession())"`
 
 The incumbent wins: the shipped hard selector `nearest_weights` meets every line of the pre-registered bar, and no newcomer exceeds it — the eligible set is five fully exact distance-family methods (the selector, Shepard IDW, Borda, and the two originals: the neighborhood mean and the exact bridge), all tying the selector's 26 of 35 analogy items, while the entire inner-product family — raw and Cauchy–Schwarz attention, linear attention, the polynomial family, top-k sparse, and the Padé softmax — is captured by giant decoys on 8 of 8 planted queries and answers 0 of 35 analogy items, so the module stays in the sandbox: a measured comparison, not yet a faculty.
 
@@ -330,12 +332,12 @@ computes an answer imports it.
 
 ```
 cd <repo root>
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.runtime.session import GeometricSession
 from glm_universal.sandbox import aggregation_bench as b
 import json
 print(json.dumps(b.bench_report(GeometricSession()), default=str))"
-PYTHONPATH=. python3 -c "
+PYTHONPATH=src python3 -c "
 from glm_universal.sandbox import aggregation_bench as b
 import json
 print(json.dumps(b.promotion_checklist(), default=str, indent=2))"

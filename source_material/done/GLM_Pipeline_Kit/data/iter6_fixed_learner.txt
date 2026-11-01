@@ -1,0 +1,46 @@
+================================================================================================
+ITERATION 6 PHASE 1 — Fixed learner (3 dev escalation requirements applied)
+================================================================================================
+
+Three improvements over iteration 5's baseline:
+  (i)   25-input encoder (24 bits + 1 explicit parity feature = sum mod 2)
+  (ii)  Class-balanced cross-entropy loss (weight_c = N / (n_classes * count_c))
+  (iii) 4-layer encoder (was 2), each 64-dim, with tanh nonlinearity
+Plus: ambiguity head + superposition tracking (per user's input that
+the GLM can hold superpositions until future info clarifies).
+
+------------------------------------------------------------------------------------------------
+[In-distribution accuracy (mean across 3 seeds) — comparison vs iteration 5]
+------------------------------------------------------------------------------------------------
+Held-out      rule (i5/i6)          lattice (i5/i6)           snap (i5/i6)          superpos    
+------------------------------------------------------------------------------------------------
+toggle        0.741 → 0.756      0.741 → 0.756        1.000 → 1.000      0.000       
+translate     0.826 → 0.978      0.826 → 0.978        1.000 → 1.000      0.000       
+reflect_v     0.737 → 0.844      0.737 → 0.844        1.000 → 1.000      0.000       
+flood_fill    0.870 → 0.970      0.870 → 0.970        1.000 → 1.000      0.000       
+bfs_shortest  0.670 → 0.974      0.670 → 0.974        0.989 → 1.000      0.000       
+------------------------------------------------------------------------------------------------
+
+[Held-out cross-task accuracy (mean across 3 seeds)]
+------------------------------------------------------------------------------------------------
+Held-out      rule (i5/i6)          lattice (i5/i6)           snap (i5/i6)          superpos    
+------------------------------------------------------------------------------------------------
+toggle        0.627 → 0.613      0.627 → 0.613        1.000 → 1.000      0.000       
+translate     0.873 → 1.000      0.873 → 1.000        1.000 → 1.000      0.000       
+reflect_v     0.653 → 0.747      0.653 → 0.747        1.000 → 1.000      0.000       
+flood_fill    0.967 → 1.000      0.967 → 1.000        1.000 → 1.000      0.000       
+bfs_shortest  0.600 → 0.987      0.600 → 0.987        0.980 → 1.000      0.000       
+------------------------------------------------------------------------------------------------
+
+[Failure log + superposition log summary]
+------------------------------------------------------------------------------------------------
+  Total failures (capped 200): 200
+  Total superpositions held (capped 200): 0
+    failure: rule_misclassification: 100
+    failure: lattice_misclassification: 100
+
+[Failures by task]
+  toggle: 128 failures
+  reflect_v: 72 failures
+
+[Superpositions by task]

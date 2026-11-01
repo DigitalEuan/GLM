@@ -42,87 +42,87 @@
   },
   "tasks": 24
  },
- "corpus_digest": "a5a8c74a8f96bae15b1de84d5a2b538903f26ab54e6dddf93e14fdc2e7c2ac62",
+ "corpus_digest": "a685e51b50cf21cb84056eb025e79bd364feb5e748243c67dbb89497ac751fcd",
  "declarations": {
-  "met_against_address": true,
-  "met_against_features": false,
+  "met_against_address": false,
+  "met_against_features": true,
   "native2_against_features": true,
   "native2_like_for_like": true,
   "schemes": {
    "address": {
     "hits": {
-     "1": 49,
+     "1": 54,
      "10": 97,
-     "3": 66,
-     "5": 77
-    },
-    "mrr_at_10": {
-     "__fraction__": "38923/130410"
-    },
-    "precision_at_5": {
-     "__fraction__": "118/1035"
-    },
-    "queries": 207
-   },
-   "features": {
-    "hits": {
-     "1": 49,
-     "10": 99,
      "3": 71,
      "5": 81
     },
     "mrr_at_10": {
-     "__fraction__": "53231/173880"
+     "__fraction__": "165269/514080"
     },
     "precision_at_5": {
-     "__fraction__": "14/115"
+     "__fraction__": "14/85"
     },
-    "queries": 207
+    "queries": 204
    },
-   "features2": {
+   "features": {
     "hits": {
-     "1": 56,
-     "10": 108,
-     "3": 80,
-     "5": 87
-    },
-    "mrr_at_10": {
-     "__fraction__": "44687/130410"
-    },
-    "precision_at_5": {
-     "__fraction__": "136/1035"
-    },
-    "queries": 207
-   },
-   "native": {
-    "hits": {
-     "1": 51,
-     "10": 99,
-     "3": 69,
+     "1": 53,
+     "10": 94,
+     "3": 70,
      "5": 79
     },
     "mrr_at_10": {
-     "__fraction__": "160283/521640"
+     "__fraction__": "40807/128520"
     },
     "precision_at_5": {
-     "__fraction__": "122/1035"
+     "__fraction__": "163/1020"
     },
-    "queries": 207
+    "queries": 204
+   },
+   "features2": {
+    "hits": {
+     "1": 59,
+     "10": 97,
+     "3": 77,
+     "5": 84
+    },
+    "mrr_at_10": {
+     "__fraction__": "44179/128520"
+    },
+    "precision_at_5": {
+     "__fraction__": "181/1020"
+    },
+    "queries": 204
+   },
+   "native": {
+    "hits": {
+     "1": 55,
+     "10": 97,
+     "3": 72,
+     "5": 80
+    },
+    "mrr_at_10": {
+     "__fraction__": "9839/30240"
+    },
+    "precision_at_5": {
+     "__fraction__": "41/255"
+    },
+    "queries": 204
    },
    "native2": {
     "hits": {
-     "1": 56,
-     "10": 108,
-     "3": 80,
-     "5": 87
+     "1": 59,
+     "10": 97,
+     "3": 77,
+     "5": 84
     },
     "mrr_at_10": {
-     "__fraction__": "44687/130410"
+     "__fraction__": "44179/128520"
     },
     "precision_at_5": {
-     "__fraction__": "136/1035"
+     "__fraction__": "181/1020"
     },
-    "queries": 207
+    "queries": 204
    }
   }
  },
@@ -134,143 +134,143 @@
   "native2_against_raw": true,
   "native2_like_for_like": true,
   "queries": 60,
-  "readback_checked": 1613,
-  "readback_exact": 1613,
+  "readback_checked": 2750,
+  "readback_exact": 2750,
   "schemes": {
    "lexical": {
-    "hits": 15,
+    "hits": 10,
     "precision_at_5": {
-     "__fraction__": "19/300"
+     "__fraction__": "11/300"
     }
    },
    "lexical_native": {
-    "hits": 17,
+    "hits": 10,
     "precision_at_5": {
-     "__fraction__": "7/100"
+     "__fraction__": "1/25"
     }
    },
    "lexical_native2": {
-    "hits": 17,
+    "hits": 10,
     "precision_at_5": {
-     "__fraction__": "7/100"
+     "__fraction__": "1/25"
     }
    },
    "lexical_raw": {
-    "hits": 17,
+    "hits": 10,
     "precision_at_5": {
-     "__fraction__": "7/100"
+     "__fraction__": "1/25"
     }
    },
    "lexical_raw2": {
-    "hits": 17,
+    "hits": 10,
     "precision_at_5": {
-     "__fraction__": "7/100"
+     "__fraction__": "1/25"
     }
    },
    "text": {
-    "hits": 46,
+    "hits": 41,
     "precision_at_5": {
-     "__fraction__": "19/50"
+     "__fraction__": "3/10"
     }
    },
    "text_native": {
-    "hits": 47,
+    "hits": 41,
     "precision_at_5": {
-     "__fraction__": "23/60"
+     "__fraction__": "3/10"
     }
    }
   },
-  "units": 1613
+  "units": 2750
  },
  "exactness": {
-  "checked": 4739,
+  "checked": 9341,
   "covering_radius": 4,
-  "exact": 4739,
+  "exact": 9341,
   "failures": 0,
   "max_residual": 3,
   "met": true
  },
  "goals": {
   "lexical_readback_exact": 101,
-  "met_against_address": true,
+  "met_against_address": false,
   "met_against_features": false,
   "native2_against_features": true,
-  "native2_like_for_like": true,
+  "native2_like_for_like": false,
   "queries": 101,
   "readback_exact": 101,
   "schemes": {
    "address": {
     "hits": {
-     "1": 5,
-     "10": 14,
-     "3": 8,
-     "5": 8
+     "1": 6,
+     "10": 21,
+     "3": 12,
+     "5": 16
     },
     "mrr_at_10": {
-     "__fraction__": "2491/36360"
+     "__fraction__": "12703/127260"
     },
     "precision_at_5": {
-     "__fraction__": "13/505"
+     "__fraction__": "26/505"
     },
     "queries": 101
    },
    "features": {
     "hits": {
-     "1": 5,
-     "10": 16,
-     "3": 10,
-     "5": 11
+     "1": 9,
+     "10": 22,
+     "3": 14,
+     "5": 15
     },
     "mrr_at_10": {
-     "__fraction__": "19939/254520"
+     "__fraction__": "10279/84840"
     },
     "precision_at_5": {
-     "__fraction__": "16/505"
+     "__fraction__": "26/505"
     },
     "queries": 101
    },
    "features2": {
     "hits": {
-     "1": 7,
-     "10": 18,
-     "3": 11,
-     "5": 14
+     "1": 9,
+     "10": 24,
+     "3": 16,
+     "5": 17
     },
     "mrr_at_10": {
-     "__fraction__": "1046/10605"
+     "__fraction__": "8257/63630"
     },
     "precision_at_5": {
-     "__fraction__": "18/505"
+     "__fraction__": "28/505"
     },
     "queries": 101
    },
    "native": {
     "hits": {
-     "1": 5,
-     "10": 17,
-     "3": 9,
-     "5": 10
+     "1": 9,
+     "10": 20,
+     "3": 13,
+     "5": 15
     },
     "mrr_at_10": {
-     "__fraction__": "1063/14140"
+     "__fraction__": "9767/84840"
     },
     "precision_at_5": {
-     "__fraction__": "3/101"
+     "__fraction__": "5/101"
     },
     "queries": 101
    },
    "native2": {
     "hits": {
-     "1": 7,
-     "10": 18,
-     "3": 11,
-     "5": 14
+     "1": 9,
+     "10": 23,
+     "3": 16,
+     "5": 17
     },
     "mrr_at_10": {
-     "__fraction__": "1046/10605"
+     "__fraction__": "2729/21210"
     },
     "precision_at_5": {
-     "__fraction__": "18/505"
+     "__fraction__": "28/505"
     },
     "queries": 101
    }
@@ -373,20 +373,20 @@
   ]
  },
  "marks": {
-  "N1": false,
-  "N1_address": true,
+  "N1": true,
+  "N1_address": false,
   "N2": false,
   "N3": true,
   "N4a": true,
   "N4b": true,
   "N5": true,
   "N6": true,
-  "N7": true,
+  "N7": false,
   "N8": true
  },
  "round_one": {
-  "N1": false,
-  "N1_address": true,
+  "N1": true,
+  "N1_address": false,
   "N2": false,
   "N3": true,
   "N4a": true,
@@ -395,9 +395,9 @@
  },
  "round_two": {
   "N6": true,
-  "N7": true,
+  "N7": false,
   "N8": true
  },
- "source_digest": "eaad60c27a5cbe2296d539a24b4780e0124976804920d09457de03231fce53bc",
+ "source_digest": "c30e79ec1e27d81761d52f205554a2b7c8c1ad50330b816d3341d529779ac9f7",
  "study": "studies/NATIVE_PARITY_STUDY.md"
 }

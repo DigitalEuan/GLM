@@ -264,7 +264,7 @@ class TestWiring(unittest.TestCase):
                                    if k != "moved"})
 
     def test_the_lean_file_and_the_surface(self):
-        lean = ROOT / "glm_lean/RequestProject/GLM/DeclaredFrames.lean"
+        lean = ROOT / "src/lean/RequestProject/GLM/DeclaredFrames.lean"
         self.assertTrue(lean.exists())
         text = lean.read_text(encoding="utf-8")
         for name in ("countP_append_bounds", "countP_fill_low",

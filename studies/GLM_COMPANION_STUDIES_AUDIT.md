@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **What this document is.** Two companion preprints sit beside the main GLM
 paper:
 
@@ -41,9 +43,8 @@ on demand, by `glm_universal.reasoning.companion` and the instrument it is
 built on, `glm_universal.reasoning.containers`. Ask the running system:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report companion"  --verify-tct
-PYTHONPATH=. python3 GLM.py -q "report containers" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report companion"  --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report containers" --verify-tct
 ```
 
 Both return `VERIFIED True`: column 3 of the Three Column Thinking payload
@@ -258,11 +259,10 @@ rows are recorded as an open gap rather than as a pass.
 ## How to re-run it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_containers.py \
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_containers.py \
                               glm_universal/tests/test_companion.py -q
-PYTHONPATH=. python3 GLM.py -q "report containers" --verify-tct
-PYTHONPATH=. python3 GLM.py -q "report companion"  --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report containers" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report companion"  --verify-tct
 ```
 
 The verdicts above are allowed to move when the package does — that is what a

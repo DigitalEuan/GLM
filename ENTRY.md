@@ -14,15 +14,22 @@
 
 ---
 
-*Last altered 29 October 2026 (Reorganisation: src/ layout, YAML study pairs, 19 directives, wheels centralized).*
+*Last altered 31 October 2026 (repository check: commands run from the repository root; 22 directives; the studies taken in through the intake; the intake of new material through `source_material/ToDo/` and `done/`; the study manifests as data; the two owner-run check scripts; the Phase 183 session note in `archive/` listed under its new name; later the same day the Lean written / Lean verified stages and the two wheel items staged until the owner's Lean build, then the intake's `retest` and `accept`, then the two wheel items installed provisionally by the owner's decision). Earlier: 29 October 2026 (reorganisation: src/ layout, YAML study pairs, wheels centralized).*
+
+*Last altered 1 November 2026 (repository check: the two owner-run scripts listed in the order to run them, the Lean build first).*
 
 ## Picking the work up, in one screen
 
+Every command runs from the repository root (the package is under `src/`).
+
 ```bash
-cd src
-PYTHONPATH=src python3 -m glm_universal.corpus --check       # is the tree as the last round left it?  ~30 s
+PYTHONPATH=src python3 -m glm_universal.corpus --check       # is the tree as the last round left it?
 PYTHONPATH=src python3 -m glm_universal.signoff --verify      # which checks are still signed
+PYTHONPATH=src python3 -m glm_universal.lean_check            # the Lean tree, statically (seconds)
+PYTHONPATH=src python3 -m glm_universal.intake status         # the supplied material and its stage
 PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+scripts/rebuild_lean.sh         # a fresh .lake and `lake build`, with a log (needs Lean); run it first
+scripts/check_repository.sh     # every Python gate, with a log in scripts/logs/
 ```
 
 0. **Read the run-order hazards first** ([`ITERATE.md`](ITERATE.md) §0.1).
@@ -32,7 +39,7 @@ PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay co
    `budget-guard-frozen` and `ties-ladder-frozen` first, then the rest, then
    refresh the corpus last.
 1. Read [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning
-   section, the target, the <!--figure:directives-->19 standing rules<!--/figure--> and *The round, end to end*.
+   section, the target, the <!--figure:directives-->22 standing rules<!--/figure--> and *The round, end to end*.
 2. Read [`STATUS.md`](STATUS.md) — the To-Do list: §1 (where the work
    stands) and §2.1 (the next round, sharpest first). **Take one of those.**
 3. Use [`DIGEST.md`](DIGEST.md) to find the two or three studies that bear on
@@ -107,11 +114,15 @@ needed to understand the state now, and nothing in it has been deleted.
 
 Then, as the task requires:
 
-* the package — [`glm_universal/README.md`](glm_universal/README.md) and
-  [`glm_universal/README.md`](glm_universal/README.md), which
-  reach every sub-package README;
+* the package — [`src/glm_universal/README.md`](src/glm_universal/README.md), which
+  reaches every sub-package README; the one source of constants and shared paths is
+  [`src/glm_universal/constants.py`](src/glm_universal/constants.py) (directive D21);
 * the formal development —
-  [`src/lean/RequestProject/GLM/README.md`](src/lean/RequestProject/GLM/README.md);
+  [`src/lean/RequestProject/GLM/README.md`](src/lean/RequestProject/GLM/README.md), and the
+  register of Lean files lost in the October 2026 reorganisation and of the files held back
+  until they return, [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md);
+* new material and how it is brought in — [`source_material/README.md`](source_material/README.md)
+  and [`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md) (see below);
 * the generated figures — [`FIGURES.md`](FIGURES.md);
 * whether the machine reasons —
   [`REASONING_CAPABILITY.md`](REASONING_CAPABILITY.md);
@@ -123,8 +134,8 @@ Two instruments, and the division of labour between them is measured rather
 than assumed (`studies/CORPUS_ADDRESS_STUDY.md`).
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+PYTHONPATH=src python3 -m glm_universal.corpus.study_index "golay"   # the study manifests, as data
 ```
 
 returns a shortlist of sections that is **complete up to a stated radius** —
@@ -133,6 +144,43 @@ the list, by `GLM.Retrieval.complete_shortlist` — with the ranking inside the
 list done lexically, because that is what retrieves. An empty shortlist is a
 proof that the corpus holds nothing within the radius, which is the property
 that makes it safe not to read the rest.
+
+The second instrument reads the study manifests (`studies/*.yaml`, one beside every study, kept in
+step with its document by `python3 -m glm_universal.corpus.study_manifest --sync`) rather than the
+prose: `glm_universal.corpus.study_index` answers which studies name a module, a Lean file or a
+test, what a study's marks are, what came before and after it, and which studies still lack their
+Lean half. The GLM's own `study` question kind is answered from it.
+
+## New material: the intake
+
+The owner puts new material — a full study, a rough concept note, code, data or Lean — in
+`source_material/ToDo/`. It is then taken through declared stages (directive D22 in
+[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md)): *received*, *triaged*, *study drafted*,
+*tested*, *Lean written* (the Lean files are in the tree and the audit, and the static check
+passes), *Lean verified* (the owner's `scripts/rebuild_lean.sh` built them, and its build record
+matches those files and everything they import), *measured* (does it make the GLM derive, address
+or refuse better?) and *absorbed* into the package — a wheel into `src/glm_universal/wheels/`, the
+one wheels folder — or *closed* with its reason. Code tested before its Lean is built waits in the
+item's own `staged/` folder and is installed only on absorption — unless the owner decides to
+install it ahead of the build, in which case it goes into the package **marked provisional**
+(`python3 -m glm_universal.intake provisional <id> --decision "..."`; the register
+`src/glm_universal/wheels/_data/provisional.json`; every answer it gives says so) until absorption
+confirms it. Either way the item is then filed
+in `source_material/done/`. The ledger is
+`source_material/INTAKE.yaml`; [`source_material/README.md`](source_material/README.md) is the
+how-to and [`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md) the study of the pipeline
+itself.
+
+```bash
+PYTHONPATH=src python3 -m glm_universal.intake status            # every item, its stage, its next step
+PYTHONPATH=src python3 -m glm_universal.intake register <path>   # record a newly supplied item
+PYTHONPATH=src python3 -m glm_universal.intake scaffold <id>     # draft its study and manifest
+PYTHONPATH=src python3 -m glm_universal.intake advance <id> <stage>  # move on a stage, only once its gate passes
+PYTHONPATH=src python3 -m glm_universal.intake retest <id> --stale    # re-run tests whose pass is not current
+PYTHONPATH=src python3 -m glm_universal.intake accept <id> --criterion .. --result .. --mark ..  # the decision measured needs
+PYTHONPATH=src python3 -m glm_universal.intake close <id> --reason .. --evidence ..  # finish without absorption
+PYTHONPATH=src python3 -m glm_universal.intake check             # ledger and folders agree
+```
 
 ## The studies
 
@@ -233,6 +281,26 @@ first and descend into the few that bear on the task.
 [`PYTHON_SPEECH_STUDY.md`](studies/PYTHON_SPEECH_STUDY.md) ·
 [`CARRIED_FORK_STUDY.md`](studies/CARRIED_FORK_STUDY.md)
 
+**Recovered after the reorganisation (31 October 2026).** The study documents the reorganisation
+lost, rebuilt from the records and re-measured where their code could be:
+[`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md) ·
+[`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md) ·
+[`LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md) ·
+[`LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md) ·
+[`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md) ·
+[`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md) ·
+[`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md); and the intake itself,
+[`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md).
+
+**Taken through the intake (31 October 2026), absorption waiting on the Lean build.** Supplied
+material checked, given Lean files and measured; by the owner's decision its wheels are in
+`src/glm_universal/wheels/` already, **marked provisional** until the owner's build record verifies
+those Lean files and absorption confirms them:
+[`INTEGER_WHEEL_STUDY.md`](studies/INTEGER_WHEEL_STUDY.md) (the integer and Monster provision
+wheels, from `glm_wheels_bundle`) ·
+[`CENT_WHEELS_STUDY.md`](studies/CENT_WHEELS_STUDY.md) (fifteen formula wheels W16–W34 from
+`cent_compiler_v12`, corrected where their own tables fail the dimension check).
+
 **Written up as papers.**
 [`GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) ·
 [`GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md)
@@ -255,11 +323,19 @@ made against a list rather than a hope.
   written. The rules themselves are current and are in
   [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md); only the rationale is here,
   and its figures are frozen at the round that measured them.
+* [`archive/PHASE_183_SESSION_NOTE_ARCHIVE.md`](archive/PHASE_183_SESSION_NOTE_ARCHIVE.md)
+  — the session note left by the Phase 183 round (the Lorentzian evidence
+  space), kept as it was written; it was filed in `archive/` under the
+  session note's own name during the October 2026 reorganisation and was
+  renamed on 31 October 2026 so that the name `ARISTOTLE_SUMMARY.md` again
+  means only the working note at the root.
 * [`ARISTOTLE_SUMMARY.md`](ARISTOTLE_SUMMARY.md) — the working notes left by
   the sessions that built this repository. Rewritten after every session, so
   since Phase 111 it is outside the corpus the checks read.
 * `source_material/` — what was supplied rather than written here, kept exactly
-  as received.
+  as received: `ToDo/` holds what is still to be taken through the intake, `done/`
+  what has been absorbed or closed, and `INTAKE.yaml` records every item and its stage
+  (see *New material* above). Supplied files are filed, never edited.
 
 The first two now sit under `archive/`, which is one of the three ways the
 archive rule recognises a record of a round; they were `MASTER_PLAN_ARCHIVE.md`
@@ -283,7 +359,6 @@ now on: a compressed archive is material a reader cannot search.
 ## What keeps this file honest
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.corpus --check
 ```
 

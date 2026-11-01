@@ -80,19 +80,19 @@
    "4+4": {
     "budget": "5",
     "certificate": {
-     "refused": 14,
-     "right": 586,
+     "refused": 12,
+     "right": 588,
      "wrong": 0
     },
     "dispersion": {
-     "refused": 14,
-     "right": 586,
+     "refused": 12,
+     "right": 588,
      "wrong": 0
     },
     "dispersion_triggered": 0,
     "guarded": {
-     "refused": 14,
-     "right": 586,
+     "refused": 12,
+     "right": 588,
      "wrong": 0
     }
    },
@@ -118,83 +118,83 @@
    "4+4+6": {
     "budget": "8",
     "certificate": {
-     "refused": 6,
-     "right": 594,
+     "refused": 3,
+     "right": 597,
      "wrong": 0
     },
     "dispersion": {
-     "refused": 6,
-     "right": 594,
+     "refused": 3,
+     "right": 597,
      "wrong": 0
     },
     "dispersion_triggered": 0,
     "guarded": {
-     "refused": 6,
-     "right": 594,
+     "refused": 3,
+     "right": 597,
      "wrong": 0
     }
    },
    "4+5": {
     "budget": "5",
     "certificate": {
-     "refused": 102,
-     "right": 495,
-     "wrong": 3
+     "refused": 116,
+     "right": 480,
+     "wrong": 4
     },
     "dispersion": {
-     "refused": 102,
-     "right": 495,
-     "wrong": 3
+     "refused": 116,
+     "right": 480,
+     "wrong": 4
     },
     "dispersion_triggered": 0,
     "guarded": {
-     "refused": 102,
-     "right": 495,
-     "wrong": 3
+     "refused": 116,
+     "right": 480,
+     "wrong": 4
     }
    },
    "4+6": {
     "budget": "5",
     "certificate": {
-     "refused": 265,
-     "right": 318,
-     "wrong": 17
+     "refused": 269,
+     "right": 309,
+     "wrong": 22
     },
     "dispersion": {
-     "refused": 258,
-     "right": 318,
-     "wrong": 24
+     "refused": 262,
+     "right": 309,
+     "wrong": 29
     },
     "dispersion_triggered": 0,
     "guarded": {
-     "refused": 258,
-     "right": 318,
-     "wrong": 24
+     "refused": 262,
+     "right": 309,
+     "wrong": 29
     }
    },
    "decoy": {
     "budget": "5",
     "certificate": {
-     "refused": 563,
-     "right": 10,
-     "wrong": 27
+     "refused": 566,
+     "right": 3,
+     "wrong": 31
     },
     "dispersion": {
-     "refused": 529,
-     "right": 10,
-     "wrong": 61
+     "refused": 528,
+     "right": 3,
+     "wrong": 69
     },
     "dispersion_triggered": 0,
     "guarded": {
-     "refused": 529,
-     "right": 10,
-     "wrong": 61
+     "refused": 528,
+     "right": 3,
+     "wrong": 69
     }
    }
   },
   "decoy_census": {
-   "certificate_wrong": 27,
-   "honest_looking": 27
+   "certificate_wrong": 31,
+   "honest_looking": 31
   }
  },
  "identities": {
@@ -222,83 +222,83 @@
  "met": 13,
  "physics": {
   "clean1": {
-   "absent": 152,
+   "absent": 143,
    "first": {
-    "refused": 152,
-    "right": 148,
+    "refused": 143,
+    "right": 157,
     "wrong": 0
    },
    "guarded": {
-    "refused": 152,
-    "right": 148,
+    "refused": 143,
+    "right": 157,
     "wrong": 0
    },
    "lorentz": {
-    "refused": 99,
-    "right": 148,
-    "wrong": 53
+    "refused": 79,
+    "right": 157,
+    "wrong": 64
    },
-   "present": 148,
+   "present": 157,
    "vote": {
-    "refused": 152,
-    "right": 148,
+    "refused": 143,
+    "right": 157,
     "wrong": 0
    }
   },
   "clean2": {
-   "absent": 134,
+   "absent": 153,
    "first": {
-    "refused": 134,
-    "right": 166,
+    "refused": 153,
+    "right": 147,
     "wrong": 0
    },
    "guarded": {
-    "refused": 134,
-    "right": 166,
+    "refused": 153,
+    "right": 147,
     "wrong": 0
    },
    "lorentz": {
-    "refused": 76,
-    "right": 166,
-    "wrong": 58
+    "refused": 85,
+    "right": 147,
+    "wrong": 68
    },
-   "present": 166,
+   "present": 147,
    "vote": {
-    "refused": 134,
-    "right": 166,
+    "refused": 153,
+    "right": 147,
     "wrong": 0
    }
   },
   "clean3": {
-   "absent": 154,
+   "absent": 146,
    "first": {
-    "refused": 154,
-    "right": 146,
+    "refused": 146,
+    "right": 154,
     "wrong": 0
    },
    "guarded": {
-    "refused": 154,
-    "right": 146,
+    "refused": 146,
+    "right": 154,
     "wrong": 0
    },
    "lorentz": {
-    "refused": 77,
-    "right": 146,
-    "wrong": 77
+    "refused": 72,
+    "right": 154,
+    "wrong": 74
    },
-   "present": 146,
+   "present": 154,
    "vote": {
-    "refused": 154,
-    "right": 146,
+    "refused": 146,
+    "right": 154,
     "wrong": 0
    }
   },
   "decoy2": {
-   "absent": 145,
+   "absent": 156,
    "first": {
-    "refused": 133,
-    "right": 80,
-    "wrong": 87
+    "refused": 152,
+    "right": 75,
+    "wrong": 73
    },
    "guarded": {
     "refused": 300,
@@ -307,10 +307,10 @@
    },
    "lorentz": {
     "refused": 161,
-    "right": 2,
-    "wrong": 137
+    "right": 1,
+    "wrong": 138
    },
-   "present": 155,
+   "present": 144,
    "vote": {
     "refused": 300,
     "right": 0,
@@ -318,11 +318,11 @@
    }
   },
   "decoy3": {
-   "absent": 145,
+   "absent": 162,
    "first": {
-    "refused": 149,
-    "right": 113,
-    "wrong": 38
+    "refused": 168,
+    "right": 85,
+    "wrong": 47
    },
    "guarded": {
     "refused": 300,
@@ -330,14 +330,14 @@
     "wrong": 0
    },
    "lorentz": {
-    "refused": 12,
-    "right": 73,
-    "wrong": 215
+    "refused": 25,
+    "right": 64,
+    "wrong": 211
    },
-   "present": 155,
+   "present": 138,
    "vote": {
-    "refused": 145,
-    "right": 155,
+    "refused": 162,
+    "right": 138,
     "wrong": 0
    }
   },
@@ -482,51 +482,51 @@
   "shipped_name_wrong": 10
  },
  "semantic": {
-  "answers_k23": 5968,
+  "answers_k23": 5977,
   "by_k": {
    "1": {
     "lorentz": {
-     "refused": 399,
-     "right": 172,
-     "wrong": 2572
+     "refused": 388,
+     "right": 171,
+     "wrong": 2584
     },
     "queries": 3143,
     "vote": {
-     "refused": 399,
-     "right": 172,
-     "wrong": 2572
+     "refused": 388,
+     "right": 171,
+     "wrong": 2584
     }
    },
    "2": {
     "lorentz": {
-     "refused": 521,
-     "right": 191,
-     "wrong": 2634
+     "refused": 526,
+     "right": 173,
+     "wrong": 2647
     },
     "queries": 3346,
     "vote": {
-     "refused": 2300,
-     "right": 91,
-     "wrong": 955
+     "refused": 2355,
+     "right": 69,
+     "wrong": 922
     }
    },
    "3": {
     "lorentz": {
-     "refused": 203,
-     "right": 207,
-     "wrong": 2936
+     "refused": 189,
+     "right": 217,
+     "wrong": 2940
     },
     "queries": 3346,
     "vote": {
-     "refused": 2497,
-     "right": 94,
-     "wrong": 755
+     "refused": 2389,
+     "right": 111,
+     "wrong": 846
     }
    }
   },
-  "median_dispersion": "145/96",
-  "precision_all": "199/2984",
-  "precision_low_dispersion_half": "125/1492",
+  "median_dispersion": "49/32",
+  "precision_all": "390/5977",
+  "precision_low_dispersion_half": "232/2989",
   "relations": 14
  },
  "settling": {
@@ -535,18 +535,18 @@
    "right": 600,
    "wrong": 0
   },
-  "no_four_settle": 86,
+  "no_four_settle": 97,
   "no_four_settle_every": 600,
   "queries": 600,
   "question_sizes": {
    "5": 600
   },
   "random5": {
-   "refused": 209,
-   "right": 391,
+   "refused": 208,
+   "right": 392,
    "wrong": 0
   }
  },
- "source_digest": "aadd150f3d52517d753394de6a2604332c3dcf7fdc86a275e7192de673b8bf7f",
+ "source_digest": "735b9ee30528e4790370ca04d43bf5f7ec08684fcfa4bdc6ea9e8dc5a2c630d1",
  "taken": 15
 }

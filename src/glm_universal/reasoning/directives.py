@@ -121,7 +121,10 @@ def _resolves(name: str) -> bool:
     if name.startswith("report "):
         from ..runtime.session import REPORT_SUBJECTS
         return name[len("report "):].strip() in REPORT_SUBJECTS
-    if name.startswith("glm_universal"):
+    if name.startswith("glm_universal") and "/" not in name:
+        # A dotted module.  A path such as ``glm_universal/README.md`` falls
+        # through to the document branches below (fixed 31 October 2026: it
+        # used to be read as a module name and so never resolved).
         parts = name.split(".")[1:]
         base = PACKAGE_ROOT.joinpath(*parts)
         return base.with_suffix(".py").is_file() or (base / "__init__.py").is_file()

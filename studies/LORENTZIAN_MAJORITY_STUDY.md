@@ -6,17 +6,21 @@
 
 **Verdict.** The rule is declared and proved: split the examples into agreeing groups, each a null vector in the evidence space, and answer the target a strict majority of the weight states; it is never wrong while the honest examples hold at least half the weight and always right above half, the condition is tight because agreeing decoys below half carry it, a wrong answer needs decoys weighing at least the answer's own group, and wherever the guard answers the rule answers the same; in measurement it recovers every right answer the guard gave up on honest majorities at no wrong answer, refuses where a plurality vote is misled by a colluding pair, but refuses as well where a plurality would have been right because the decoys happened to disagree.
 
-**Deciding figure.** 8 of 8 marks; decoy3 155 right, 0 wrong (guard 0 right); decoy5 161 right, 0 wrong (guard 0 right); collude5 0 wrong where the plurality vote is wrong 150 times; collude3 148 wrong, exactly the queries the tightness theorem predicts; decoy4 0 right where the vote has 149.
+**Deciding figure.** 8 of 8 marks; decoy3 155 right, 0 wrong (guard 0 right); decoy5 161 right, 0 wrong (guard 0 right); collude5 0 wrong where the plurality vote is wrong 150 times; collude3 148 wrong, exactly the queries the tightness theorem predicts; decoy4 0 right where the vote has 149. Re-measured 31 October 2026 with an exact integer generator in place of `random` (§5.1): 6 of 8 declared marks and M4′ (M4 and L not met); decoy3 138 right, 0 wrong; decoy5 150 right, 0 wrong; collude5 0 wrong where the vote is wrong 154 times; collude3 137 wrong; decoy4 0 right where the vote has 169.
 
 **Recomputed by.** `glm_universal.reasoning.lorentzian_majority_study.lorentzian_majority_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured with an exact integer query generator in place of Python's `random`; M4, a literal figure of the old stream, is re-bound as M4′, and L is not met because `LorentzianMajority.lean` was lost, §5.1; its run commands now start from the repository root (`PYTHONPATH=src`).)*
 
 ---
 
 *Created 23 October 2026. Pre-registered 23 October 2026: the marks (§5) were
 written into `reasoning/lorentzian_majority_study.py` and committed before the
 measurement was first run. Measured 23 October 2026, one take.*
+
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged.)*
 
 ## 0. What this document is
 
@@ -52,7 +56,7 @@ disagreeing ones.
 
 ## 2. What is proved
 
-**[`glm_lean/RequestProject/GLM/LorentzianMajority.lean`](../glm_lean/RequestProject/GLM/LorentzianMajority.lean)**
+**[`glm_lean/RequestProject/GLM/LorentzianMajority.lean`](../src/lean/RequestProject/GLM/LorentzianMajority.lean)**
 — over `ℚ` weights, any finite index set, and targets in any type with
 decidable equality (the evidence-space statements in any dimension `n`),
 built on Phase 183's `LorentzianEvidence.lean`.
@@ -157,6 +161,58 @@ the 40 wrong answers has decoys weighing at least its own group.
 
 8 of 8 marks.
 
+### 5.1 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The measurement drew its examples
+and queries from Python's `random` module, which the import rules of
+`reasoning/` do not allow (`tests/test_reasoning.py`, the blueprint's banned
+imports). It now draws them from the exact integer generator of
+`reasoning/lorentzian_lift_study.py` (`ExactRng`), so the queries are drawn
+the same way (300 per condition) but are not those of §3. Taken again with
+`tools lorentzian-majority --write`:
+
+| condition | (good, colluding, independent) | `guarded` | `vote` (plurality) | `majority` |
+|---|---|---|---|---|
+| clean1 | (1, 0, 0) | 157 / 0 / 143 | 157 / 0 / 143 | 157 / 0 / 143 |
+| clean2 | (2, 0, 0) | 147 / 0 / 153 | 147 / 0 / 153 | 147 / 0 / 153 |
+| clean3 | (3, 0, 0) | 154 / 0 / 146 | 154 / 0 / 146 | 154 / 0 / 146 |
+| decoy2 | (1, 0, 1) | 0 / 0 / 300 | 0 / 0 / 300 | 0 / 0 / 300 |
+| decoy3 | (2, 0, 1) | 0 / 0 / 300 | 138 / 0 / 162 | 138 / 0 / 162 |
+| decoy4 | (2, 0, 2) | 0 / 0 / 300 | 169 / 0 / 131 | 0 / 0 / 300 |
+| decoy5 | (3, 0, 2) | 0 / 0 / 300 | 150 / 0 / 150 | 150 / 0 / 150 |
+| collude3 | (1, 2, 0) | 0 / 0 / 300 | 0 / 137 / 163 | 0 / 137 / 163 |
+| collude5 | (1, 2, 2) | 0 / 0 / 300 | 0 / 154 / 146 | 0 / 0 / 300 |
+
+Collude3 is wrong on exactly the 137 queries whose colluding target is a
+register class. Identities on 300 random weighted sets: the definition 300 of
+300; never anything else in the 224 sets where the planted target holds at
+least half the weight; the guard's answer in the 123 sets whose
+positive-weight cues agree; each of the 45 wrong answers has decoys weighing at
+least its own group.
+
+**M4 was a literal.** As declared it asks for exactly 155 right on decoy3,
+"Phase 183's vote figure" — the figure Phase 183's vote gave on the queries
+`random` drew. On the new queries Phase 183's own vote gives 138, and the
+rule 138. The measurement module now compares the rule with Phase 183's vote
+taken on the same queries, which is what the mark meant; that is a re-bound
+mark, M4′, recorded beside the declared one.
+
+| mark | result | met |
+|---|---|---|
+| **M1** | honest majority (clean1–3, decoy3, decoy5): never wrong, right on every present target, refusing the rest | yes |
+| **M2** | honest exactly half (decoy2, decoy4): never wrong | yes |
+| **M3** | right at least as often as `guarded` everywhere, strictly more on decoy3 and decoy5 (138 and 150 against 0) | yes |
+| **M4** | decoy3 right exactly 155 times: 138 | no |
+| **M4′** | *(re-bound 31 October 2026)* decoy3 right exactly as often as Phase 183's vote on the same queries: 138 and 138 | yes |
+| **M5** | collude3 wrong on exactly the queries whose colluding target is present (137 of 137) | yes |
+| **M6** | collude5: refuses all 300; the plurality vote 154 wrong | yes |
+| **M7** | identities on 300 random weighted sets | yes |
+| **L** | `LorentzianMajority.lean` was lost in the October 2026 reorganisation (`studies/_lean_files_needed.md`) | no |
+
+So **6 of 8 declared marks and M4′**: M4 not met as a literal of the old
+stream, L not met while the Lean file is missing. (The measurement module
+counts the re-bound mark under its old key and reports 7 of 8.)
+
 ## 6. What it gives the GLM's reasoning
 
 Under the standing target ([`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)),
@@ -198,9 +254,8 @@ or believe a strict majority — and the study measures both.
 ## 8. Reproduce
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools lorentzian-majority          # the stored marks
-PYTHONPATH=. python3 -m glm_universal.tools lorentzian-majority --write  # re-take (~10 seconds)
+PYTHONPATH=src python3 -m glm_universal.tools lorentzian-majority          # the stored marks
+PYTHONPATH=src python3 -m glm_universal.tools lorentzian-majority --write  # re-take (~10 seconds)
 python3 GLM.py -q "tool majority velocity : acceleration, length : velocity, mass : density :: momentum"
 python3 GLM.py -q "tool majority velocity : acceleration, mass : density :: momentum"   # refused: one against one
 lake build RequestProject.GLM.LorentzianMajority

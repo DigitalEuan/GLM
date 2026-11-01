@@ -1,0 +1,61 @@
+--- a/glm_universal/runtime/toolbox.py
++++ b/glm_universal/runtime/toolbox.py
+@@ -1005,6 +1005,23 @@
+     return ToolResult(ok, text, figures)
+ 
+ 
++def _theorem(arg: str) -> ToolResult:
++    """``[wheel | axioms | lenses | derive A => B]``: the Rule 30 theorem wheel -- statements,
++    spokes (Lean theorems), negative controls and the axiom hub (Rule 30 study, Round 12;
++    ``reasoning/theorem_wheel.py``)."""
++    from ..reasoning import theorem_wheel as tw
++    ok, text, figures = tw.theorem_text(arg)
++    return ToolResult(ok, text, figures)
++
++
++def _discuss(arg: str) -> ToolResult:
++    """``QUESTION``: a question about the dynamics of Rule 30 read over the theorem wheel in five
++    stages, broad to narrow (Rule 30 study, Round 12; ``reasoning/theorem_wheel.py``)."""
++    from ..reasoning import theorem_wheel as tw
++    ok, text, figures = tw.discuss_text(arg)
++    return ToolResult(ok, text, figures)
++
++
+ def _arc(arg: str) -> ToolResult:
+     """``NAME``: a stored ARC task's demonstrations induced by the colour
+     solver, every test input answered or refused, and each answer checked
+@@ -1232,6 +1249,21 @@
+           "RequestProject/GLM/Rule30/ChiralLeak.lean",
+           "RequestProject/GLM/Rule30/RightDiagonalBalance.lean"),
+          "rule30_round11/README.md", _claim, takes="CLAIM"),
++    Tool("theorem", "reasoning.theorem_wheel", "the Rule 30 theorem wheel: named "
++         "statements, spokes that are Lean theorems with their axiom footprint, negative "
++         "controls, and derivation certificates by chaining (Rule 30 study, Round 12)",
++         "derive, refusal",
++         ("RequestProject/GLM/Rule30/WobbleLenses.lean",
++          "RequestProject/GLM/Rule30/ReadAngle.lean",
++          "RequestProject/GLM/Rule30/FiniteState.lean"),
++         "rule30_round12/README.md", _theorem,
++         takes="wheel | axioms | lenses | derive A => B"),
++    Tool("discuss", "reasoning.theorem_wheel", "a question about the dynamics of Rule 30 "
++         "read over the theorem wheel, broad to narrow: target, lenses, narrowed sufficient "
++         "hypotheses with their arrow, evidence on file, and the gap (Rule 30 study, Round 12)",
++         "derive, refusal",
++         ("RequestProject/GLM/Rule30/WobbleLenses.lean",),
++         "rule30_round12/README.md", _discuss, takes="QUESTION"),
+     Tool("frame", "reasoning.frame_operators", "an operator on exact "
+          "rational 2-vectors inferred from example pairs, layer by layer: the "
+          "invariant kept (E^2-p^2 or E^2+p^2) says which family it can be, "
+@@ -1333,6 +1365,12 @@
+      "tool arc {1}"),
+     (r"(?:check|assess|judge|verify)(?: the)? claim:? (.+)", "tool claim {1}"),
+     (r"is it true that (.+)", "tool claim {1}"),
++    (r"(?:discuss|think about|reason about)(?: the)? (.+)", "tool discuss {1}"),
++    (r"(?:how (?:could|can|might) we (?:prove|settle|decide)|what would (?:suffice|be enough) "
++     r"(?:for|to prove)) (.+)", "tool discuss {1}"),
++    (r"(?:show|list)(?: me)? the theorem wheel", "tool theorem wheel"),
++    (r"(?:which|what) axioms (?:do|does) (?:the )?(?:rule 30 )?(?:theorems?|spokes?) (?:rest on|use)",
++     "tool theorem axioms"),
+     (r"(?:which|what) (?:frame )?operator (?:maps|takes|sends) (.+\?.+)",
+      "tool frame {1}"),
+     (r"(?:boost|transform) (.+\?.+)", "tool frame {1}"),

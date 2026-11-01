@@ -1,0 +1,3088 @@
+{
+ "engine": "v18",
+ "title": "Rule 30",
+ "use_ledger": true,
+ "hypotheses": [
+  {
+   "hid": "H01",
+   "key": "LD.period.divides",
+   "params": {
+    "m": 8
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "every left diagonal has eventual period dividing 8",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: left diagonal 400 has eventual period 16",
+    "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight"
+   ],
+   "profile": {
+    "claim": "every left diagonal has eventual period dividing 8",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "D < 100: all periods divide 8"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": true,
+      "detail": "D < 400: all periods divide 8"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": false,
+      "detail": "left diagonal 400 has eventual period 16"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational"
+     ],
+     "direction": "flipped at rational",
+     "settled": "rational"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at rational (scale 1000): left diagonal 400 has eventual period 16"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H02",
+   "key": "LD.period.divides.below",
+   "params": {
+    "m": 8,
+    "N": 400
+   },
+   "class": "finite",
+   "origin": "narrow",
+   "deps": [
+    [
+     "H01",
+     "derived"
+    ]
+   ],
+   "text": "every left diagonal D < 400 has eventual period dividing 8",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "EXACT whole range: all D < 400 computed",
+    "CERT LeftDiagonalPeriodsData.leftDiag_period_eight_below_400"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[exact] new -> verified-exact: all D < 400 computed",
+    "[ledger] verified-exact -> proved: CERT LeftDiagonalPeriodsData.leftDiag_period_eight_below_400"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H03",
+   "key": "LD.period.divides",
+   "params": {
+    "m": 16
+   },
+   "class": "Pi1",
+   "origin": "re-lift",
+   "deps": [
+    [
+     "H01",
+     "derived"
+    ]
+   ],
+   "text": "every left diagonal has eventual period dividing 16",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 5000",
+    "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen"
+   ],
+   "profile": {
+    "claim": "every left diagonal has eventual period dividing 16",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "D < 100: all periods divide 16"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": true,
+      "detail": "D < 400: all periods divide 16"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "D < 1000: all periods divide 16"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": true,
+      "detail": "D < 2500: all periods divide 16"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "D < 5000: all periods divide 16"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 5000); open beyond",
+    "[ledger] survives-to -> refuted-by-ledger: CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H04",
+   "key": "LD.white.exactly",
+   "params": {
+    "S": [
+     2,
+     7,
+     28
+    ]
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "the eventually white left diagonals are exactly [2, 7, 28]",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: white diagonals below 400: [2, 7, 28, 399]",
+    "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+   ],
+   "profile": {
+    "claim": "the eventually white left diagonals are exactly [2, 7, 28]",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "white diagonals below 100: [2, 7, 28]"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": false,
+      "detail": "white diagonals below 400: [2, 7, 28, 399]"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer"
+     ],
+     "direction": "flipped at integer",
+     "settled": "integer"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at integer (scale 400): white diagonals below 400: [2, 7, 28, 399]"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H05",
+   "key": "LD.white.below",
+   "params": {
+    "S": [
+     2,
+     7,
+     28
+    ],
+    "N": 100
+   },
+   "class": "finite",
+   "origin": "narrow",
+   "deps": [
+    [
+     "H04",
+     "derived"
+    ]
+   ],
+   "text": "the eventually white left diagonals below 100 are exactly [2, 7, 28]",
+   "status": "verified-exact",
+   "ring": "knows",
+   "backing": [
+    "EXACT whole range: white diagonals below 100: [2, 7, 28]"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[exact] new -> verified-exact: white diagonals below 100: [2, 7, 28]"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H06",
+   "key": "LD.white.exactly",
+   "params": {
+    "S": [
+     2,
+     7,
+     28,
+     399
+    ]
+   },
+   "class": "Pi1",
+   "origin": "re-lift",
+   "deps": [
+    [
+     "H04",
+     "derived"
+    ]
+   ],
+   "text": "the eventually white left diagonals are exactly [2, 7, 28, 399]",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 5000",
+    "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+   ],
+   "profile": {
+    "claim": "the eventually white left diagonals are exactly [2, 7, 28, 399]",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "white diagonals below 100: [2, 7, 28]"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": true,
+      "detail": "white diagonals below 400: [2, 7, 28, 399]"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "white diagonals below 1000: [2, 7, 28, 399]"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": true,
+      "detail": "white diagonals below 2500: [2, 7, 28, 399]"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "white diagonals below 5000: [2, 7, 28, 399]"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 5000); open beyond",
+    "[ledger] survives-to -> refuted-by-ledger: FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H07",
+   "key": "LD.white.finite",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [],
+   "text": "only finitely many left diagonals are eventually white",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "FORMAL WhiteDiagonals.ldiag_infinitely_many_white"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[ledger] new -> refuted-by-ledger: FORMAL WhiteDiagonals.ldiag_infinitely_many_white"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H08",
+   "key": "LD.preperiod.gt.D",
+   "params": {},
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "for D ≥ 20 the transient of left diagonal D is longer than D (so the centre column, which reads diagonal D at time D, reads it inside its transient)",
+   "status": "survives-to",
+   "ring": "thinks-true",
+   "backing": [
+    "escalation: survives every read, up to 5000",
+    "CERT LeftDiagonalPeriodsData.centerCol_read_in_transient (20 ≤ D < 20000)"
+   ],
+   "profile": {
+    "claim": "for D ≥ 20 the transient of left diagonal D is longer than D (so the centre column, which reads diagonal D at time D, reads it inside its transient)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "20 ≤ D < 100"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": true,
+      "detail": "20 ≤ D < 400"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "20 ≤ D < 1000"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": true,
+      "detail": "20 ≤ D < 2500"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "20 ≤ D < 5000"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 5000); open beyond"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H09",
+   "key": "LD.preperiod.envelope",
+   "params": {
+    "lo": "30/29",
+    "hi": "71/48"
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "for D ≥ 20: 30/29 ≤ pre(D)/D ≤ 71/48",
+   "status": "survives-to",
+   "ring": "thinks-true",
+   "backing": [
+    "escalation: survives every read, up to 5000"
+   ],
+   "profile": {
+    "claim": "for D ≥ 20: 30/29 ≤ pre(D)/D ≤ 71/48",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "20 ≤ D < 100"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": true,
+      "detail": "20 ≤ D < 400"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "20 ≤ D < 1000"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": true,
+      "detail": "20 ≤ D < 2500"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "20 ≤ D < 5000"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 5000); open beyond"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H10",
+   "key": "LD.period.law",
+   "params": {},
+   "class": "Pi1",
+   "origin": "mine",
+   "deps": [],
+   "text": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D−1) ∧ odd-parity(D−2)",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 5000",
+    "FORMAL LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, ldiag_keeps_of_even"
+   ],
+   "profile": {
+    "claim": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D−1) ∧ odd-parity(D−2)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "3 ≤ D < 100"
+     },
+     {
+      "layer": "integer",
+      "scale": 400,
+      "verdict": true,
+      "detail": "3 ≤ D < 400"
+     },
+     {
+      "layer": "rational",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "3 ≤ D < 1000"
+     },
+     {
+      "layer": "griess",
+      "scale": 2500,
+      "verdict": true,
+      "detail": "3 ≤ D < 2500"
+     },
+     {
+      "layer": "universal",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "3 ≤ D < 5000"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 5000); open beyond",
+    "[ledger] survives-to -> proved: FORMAL LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, ldiag_keeps_of_even"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H11",
+   "key": "LD.doubling.below",
+   "params": {
+    "S": [
+     3,
+     8,
+     29,
+     400
+    ],
+    "N": 5001
+   },
+   "class": "finite",
+   "origin": "measure",
+   "deps": [],
+   "text": "the period-doubling diagonals below 5001 are exactly [3, 8, 29, 400]",
+   "status": "verified-exact",
+   "ring": "knows",
+   "backing": [
+    "EXACT whole range: doubling diagonals below 5001: [3, 8, 29, 400]"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[exact] new -> verified-exact: doubling diagonals below 5001: [3, 8, 29, 400]"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H12",
+   "key": "LD.periods.unbounded",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [
+    [
+     "H10",
+     "derived"
+    ]
+   ],
+   "text": "the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)",
+   "status": "open",
+   "ring": "doesn't-know",
+   "backing": [
+    "FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[ledger] new -> open: FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H13",
+   "key": "LD.seed.forgetting",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed)",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "FORMAL LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[ledger] new -> proved: FORMAL LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H14",
+   "key": "RD.lp.le.2^D",
+   "params": {},
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "every right diagonal D is periodic from time 0 with period 2^D",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 12",
+    "FORMAL Diagonals.rdiag_periodic"
+   ],
+   "profile": {
+    "claim": "every right diagonal D is periodic from time 0 with period 2^D",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 6,
+      "verdict": true,
+      "detail": "D ≤ 6"
+     },
+     {
+      "layer": "integer",
+      "scale": 8,
+      "verdict": true,
+      "detail": "D ≤ 8"
+     },
+     {
+      "layer": "rational",
+      "scale": 9,
+      "verdict": true,
+      "detail": "D ≤ 9"
+     },
+     {
+      "layer": "griess",
+      "scale": 10,
+      "verdict": true,
+      "detail": "D ≤ 10"
+     },
+     {
+      "layer": "universal",
+      "scale": 12,
+      "verdict": true,
+      "detail": "D ≤ 12"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 12); open beyond",
+    "[ledger] survives-to -> proved: FORMAL Diagonals.rdiag_periodic"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H15",
+   "key": "RD.lp.gt.half",
+   "params": {},
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "for D ≥ 1 the least eventual period of right diagonal D exceeds ⌈D/2⌉",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 12",
+    "FORMAL Diagonals.rdiag_not_periodic"
+   ],
+   "profile": {
+    "claim": "for D ≥ 1 the least eventual period of right diagonal D exceeds ⌈D/2⌉",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 6,
+      "verdict": true,
+      "detail": "1 ≤ D ≤ 6"
+     },
+     {
+      "layer": "integer",
+      "scale": 8,
+      "verdict": true,
+      "detail": "1 ≤ D ≤ 8"
+     },
+     {
+      "layer": "rational",
+      "scale": 9,
+      "verdict": true,
+      "detail": "1 ≤ D ≤ 9"
+     },
+     {
+      "layer": "griess",
+      "scale": 10,
+      "verdict": true,
+      "detail": "1 ≤ D ≤ 10"
+     },
+     {
+      "layer": "universal",
+      "scale": 12,
+      "verdict": true,
+      "detail": "1 ≤ D ≤ 12"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 12); open beyond",
+    "[ledger] survives-to -> proved: FORMAL Diagonals.rdiag_not_periodic"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H16",
+   "key": "RD.lp.formula",
+   "params": {
+    "b": 1,
+    "c": 3
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "the least period of right diagonal D is 2^(D − ⌊(D + 1)/3⌋)",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: D = 10: period 64, formula gives 128"
+   ],
+   "profile": {
+    "claim": "the least period of right diagonal D is 2^(D − ⌊(D + 1)/3⌋)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 6,
+      "verdict": true,
+      "detail": "D ≤ 6"
+     },
+     {
+      "layer": "integer",
+      "scale": 8,
+      "verdict": true,
+      "detail": "D ≤ 8"
+     },
+     {
+      "layer": "rational",
+      "scale": 9,
+      "verdict": true,
+      "detail": "D ≤ 9"
+     },
+     {
+      "layer": "griess",
+      "scale": 10,
+      "verdict": false,
+      "detail": "D = 10: period 64, formula gives 128"
+     },
+     {
+      "layer": "universal",
+      "scale": 12,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess"
+     ],
+     "direction": "flipped at griess",
+     "settled": "griess"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at griess (scale 10): D = 10: period 64, formula gives 128"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H17",
+   "key": "CC.no.short.period",
+   "params": {
+    "p": 64,
+    "tau": 30000
+   },
+   "class": "finite",
+   "origin": "registry",
+   "deps": [],
+   "text": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 30000",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "EXACT whole range: for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 30000 was found",
+    "CERT GateLoopData.centre_no_short_period_30000"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[exact] new -> verified-exact: for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 30000 was found",
+    "[ledger] verified-exact -> proved: CERT GateLoopData.centre_no_short_period_30000"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H18",
+   "key": "CC.not.eventually.constant",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [],
+   "text": "the centre column is not eventually constant",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "FORMAL NoConstantColumn.centerCol_not_eventually_constant"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[ledger] new -> proved: FORMAL NoConstantColumn.centerCol_not_eventually_constant"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H19",
+   "key": "CC.balance.sqrt",
+   "params": {
+    "c": 2
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "|#black − #white| ≤ 2·√N for every prefix length N",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: N = 1459: D(N)²/N = 5929/1459 > 4",
+    "CERT WobbleCertificate.wobble_sq_ratio_cert (D(24979)^2/24979 = 175561/24979 > c^2)"
+   ],
+   "profile": {
+    "claim": "|#black − #white| ≤ 2·√N for every prefix length N",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "N ≤ 1000"
+     },
+     {
+      "layer": "integer",
+      "scale": 4000,
+      "verdict": false,
+      "detail": "N = 1459: D(N)²/N = 5929/1459 > 4"
+     },
+     {
+      "layer": "rational",
+      "scale": 20000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "griess",
+      "scale": 50000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "universal",
+      "scale": 160000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer"
+     ],
+     "direction": "flipped at integer",
+     "settled": "integer"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at integer (scale 4000): N = 1459: D(N)²/N = 5929/1459 > 4"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H20",
+   "key": "CC.balance.sqrt",
+   "params": {
+    "c": 3
+   },
+   "class": "Pi1",
+   "origin": "re-lift",
+   "deps": [
+    [
+     "H19",
+     "derived"
+    ]
+   ],
+   "text": "|#black − #white| ≤ 3·√N for every prefix length N",
+   "status": "survives-to",
+   "ring": "thinks-true",
+   "backing": [
+    "escalation: survives every read, up to 160000",
+    "CERT WobbleCertificate.wobble_sq_ratio_cert (holds for N <= 10^6)"
+   ],
+   "profile": {
+    "claim": "|#black − #white| ≤ 3·√N for every prefix length N",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "N ≤ 1000"
+     },
+     {
+      "layer": "integer",
+      "scale": 4000,
+      "verdict": true,
+      "detail": "N ≤ 4000"
+     },
+     {
+      "layer": "rational",
+      "scale": 20000,
+      "verdict": true,
+      "detail": "N ≤ 20000"
+     },
+     {
+      "layer": "griess",
+      "scale": 50000,
+      "verdict": true,
+      "detail": "N ≤ 50000"
+     },
+     {
+      "layer": "universal",
+      "scale": 160000,
+      "verdict": true,
+      "detail": "N ≤ 160000"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 160000); open beyond"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H21",
+   "key": "CC.lc.near.half",
+   "params": {
+    "b": 10
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "|2·L(n) − n| ≤ 10 for all n (L = linear complexity of the centre column)",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: n = 11101: |2·L(n) − n| = 11 > 10",
+    "CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)"
+   ],
+   "profile": {
+    "claim": "|2·L(n) − n| ≤ 10 for all n (L = linear complexity of the centre column)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 3000,
+      "verdict": true,
+      "detail": "n ≤ 3000"
+     },
+     {
+      "layer": "integer",
+      "scale": 6000,
+      "verdict": true,
+      "detail": "n ≤ 6000"
+     },
+     {
+      "layer": "rational",
+      "scale": 9000,
+      "verdict": true,
+      "detail": "n ≤ 9000"
+     },
+     {
+      "layer": "griess",
+      "scale": 12000,
+      "verdict": false,
+      "detail": "n = 11101: |2·L(n) − n| = 11 > 10"
+     },
+     {
+      "layer": "universal",
+      "scale": 20000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess"
+     ],
+     "direction": "flipped at griess",
+     "settled": "griess"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at griess (scale 12000): n = 11101: |2·L(n) − n| = 11 > 10"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H22",
+   "key": "CC.lc.near.half",
+   "params": {
+    "b": 11
+   },
+   "class": "Pi1",
+   "origin": "re-lift",
+   "deps": [
+    [
+     "H21",
+     "derived"
+    ]
+   ],
+   "text": "|2·L(n) − n| ≤ 11 for all n (L = linear complexity of the centre column)",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: n = 16082: |2·L(n) − n| = 12 > 11",
+    "CERT WheelChecksData.ledger_C160_overstated (2·L(19521) − 19521 ≥ 13)"
+   ],
+   "profile": {
+    "claim": "|2·L(n) − n| ≤ 11 for all n (L = linear complexity of the centre column)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 3000,
+      "verdict": true,
+      "detail": "n ≤ 3000"
+     },
+     {
+      "layer": "integer",
+      "scale": 6000,
+      "verdict": true,
+      "detail": "n ≤ 6000"
+     },
+     {
+      "layer": "rational",
+      "scale": 9000,
+      "verdict": true,
+      "detail": "n ≤ 9000"
+     },
+     {
+      "layer": "griess",
+      "scale": 12000,
+      "verdict": true,
+      "detail": "n ≤ 12000"
+     },
+     {
+      "layer": "universal",
+      "scale": 20000,
+      "verdict": false,
+      "detail": "n = 16082: |2·L(n) − n| = 12 > 11"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "flipped at universal",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at universal (scale 20000): n = 16082: |2·L(n) − n| = 12 > 11"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H23",
+   "key": "CC.lc.near.half",
+   "params": {
+    "b": 13
+   },
+   "class": "Pi1",
+   "origin": "re-lift",
+   "deps": [
+    [
+     "H22",
+     "derived"
+    ]
+   ],
+   "text": "|2·L(n) − n| ≤ 13 for all n (L = linear complexity of the centre column)",
+   "status": "survives-to",
+   "ring": "thinks-true",
+   "backing": [
+    "escalation: survives every read, up to 20000"
+   ],
+   "profile": {
+    "claim": "|2·L(n) − n| ≤ 13 for all n (L = linear complexity of the centre column)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 3000,
+      "verdict": true,
+      "detail": "n ≤ 3000"
+     },
+     {
+      "layer": "integer",
+      "scale": 6000,
+      "verdict": true,
+      "detail": "n ≤ 6000"
+     },
+     {
+      "layer": "rational",
+      "scale": 9000,
+      "verdict": true,
+      "detail": "n ≤ 9000"
+     },
+     {
+      "layer": "griess",
+      "scale": 12000,
+      "verdict": true,
+      "detail": "n ≤ 12000"
+     },
+     {
+      "layer": "universal",
+      "scale": 20000,
+      "verdict": true,
+      "detail": "n ≤ 20000"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 20000); open beyond"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H24",
+   "key": "CC.words.cover",
+   "params": {
+    "f": "3/2"
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "every word of length k occurs in the first ⌈3/2·k·2^k⌉ bits of the centre column",
+   "status": "survives-to",
+   "ring": "thinks-true",
+   "backing": [
+    "escalation: survives every read, up to 13"
+   ],
+   "profile": {
+    "claim": "every word of length k occurs in the first ⌈3/2·k·2^k⌉ bits of the centre column",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 9,
+      "verdict": true,
+      "detail": "k ≤ 9"
+     },
+     {
+      "layer": "integer",
+      "scale": 10,
+      "verdict": true,
+      "detail": "k ≤ 10"
+     },
+     {
+      "layer": "rational",
+      "scale": 11,
+      "verdict": true,
+      "detail": "k ≤ 11"
+     },
+     {
+      "layer": "griess",
+      "scale": 12,
+      "verdict": true,
+      "detail": "k ≤ 12"
+     },
+     {
+      "layer": "universal",
+      "scale": 13,
+      "verdict": true,
+      "detail": "k ≤ 13"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 13); open beyond"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H25",
+   "key": "CC.seed.same",
+   "params": {
+    "seeds": [
+     3,
+     5
+    ]
+   },
+   "class": "Pi1",
+   "origin": "observe",
+   "deps": [],
+   "text": "seeds 11, 101 give the same centre column as seed 1",
+   "status": "survives-to",
+   "ring": "thinks-true",
+   "backing": [
+    "escalation: survives every read, up to 160000"
+   ],
+   "profile": {
+    "claim": "seeds 11, 101 give the same centre column as seed 1",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 10000,
+      "verdict": true,
+      "detail": "first 10000 bits agree"
+     },
+     {
+      "layer": "integer",
+      "scale": 20000,
+      "verdict": true,
+      "detail": "first 20000 bits agree"
+     },
+     {
+      "layer": "rational",
+      "scale": 40000,
+      "verdict": true,
+      "detail": "first 40000 bits agree"
+     },
+     {
+      "layer": "griess",
+      "scale": 80000,
+      "verdict": true,
+      "detail": "first 80000 bits agree"
+     },
+     {
+      "layer": "universal",
+      "scale": 160000,
+      "verdict": true,
+      "detail": "first 160000 bits agree"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 160000); open beyond"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H26",
+   "key": "CC.wobble.transport",
+   "params": {},
+   "class": "Pi1",
+   "origin": "transport",
+   "deps": [
+    [
+     "H20",
+     "uses"
+    ]
+   ],
+   "text": "the wobble maximum D(N)²/N on N ≤ 20000 is the same for every seed (the Wobble transports across seeds)",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+   ],
+   "profile": {
+    "claim": "the wobble maximum D(N)²/N on N ≤ 20000 is the same for every seed (the Wobble transports across seeds)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 2,
+      "verdict": true,
+      "detail": "all odd seeds of width ≤ 2"
+     },
+     {
+      "layer": "integer",
+      "scale": 3,
+      "verdict": false,
+      "detail": "seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+     },
+     {
+      "layer": "rational",
+      "scale": 4,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "griess",
+      "scale": 5,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "universal",
+      "scale": 6,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer"
+     ],
+     "direction": "flipped at integer",
+     "settled": "integer"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at integer (scale 3): seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H27",
+   "key": "CC.uniformity.vs.tm",
+   "params": {
+    "more": true
+   },
+   "class": "comparison",
+   "origin": "measure",
+   "deps": [],
+   "text": "the centre column's 2-bit block counts on its first 60000 bits are more uniform than Thue–Morse's (max − min gap)",
+   "status": "verified-exact",
+   "ring": "knows",
+   "backing": [
+    "EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[recompute] new -> verified-exact: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H28",
+   "key": "CC.arrow.agreement",
+   "params": {
+    "N": 160000
+   },
+   "class": "measurement",
+   "origin": "measure",
+   "deps": [],
+   "text": "on the first 160000 bits the next bit follows the observer's arrow (−sign D(n)) at a fraction 79955/159703 of the steps",
+   "status": "measured",
+   "ring": "knows",
+   "backing": [
+    "EXACT recomputation: exact count on 160000 bits: 79955/159703"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[recompute] new -> measured: exact count on 160000 bits: 79955/159703"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H29",
+   "key": "CC.arrow.below.half",
+   "params": {
+    "n0": 1000
+   },
+   "class": "Pi1",
+   "origin": "lift",
+   "deps": [],
+   "text": "for every N ≥ 1000, fewer than half of the first N steps follow the observer's arrow (the run leans away from 1/2)",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: N = 4672: 2331 of 4662 steps follow the arrow"
+   ],
+   "profile": {
+    "claim": "for every N ≥ 1000, fewer than half of the first N steps follow the observer's arrow (the run leans away from 1/2)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 4000,
+      "verdict": true,
+      "detail": "1000 ≤ N ≤ 4000"
+     },
+     {
+      "layer": "integer",
+      "scale": 20000,
+      "verdict": false,
+      "detail": "N = 4672: 2331 of 4662 steps follow the arrow"
+     },
+     {
+      "layer": "rational",
+      "scale": 50000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "griess",
+      "scale": 100000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     },
+     {
+      "layer": "universal",
+      "scale": 160000,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer"
+     ],
+     "direction": "flipped at integer",
+     "settled": "integer"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at integer (scale 20000): N = 4672: 2331 of 4662 steps follow the arrow"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H30",
+   "key": "PRIZE.1",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [],
+   "text": "Prize problem 1: the centre column is not eventually periodic",
+   "status": "open",
+   "ring": "doesn't-know",
+   "backing": [
+    "escalation: survives every read, up to 60000",
+    "FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem1); sufficient targets in Frontier.frontier_sufficient_targets"
+   ],
+   "profile": {
+    "claim": "Prize problem 1: the centre column is not eventually periodic",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 2000,
+      "verdict": true,
+      "detail": "for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 2000 was found"
+     },
+     {
+      "layer": "integer",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 5000 was found"
+     },
+     {
+      "layer": "rational",
+      "scale": 10000,
+      "verdict": true,
+      "detail": "for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 10000 was found"
+     },
+     {
+      "layer": "griess",
+      "scale": 30000,
+      "verdict": true,
+      "detail": "for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 30000 was found"
+     },
+     {
+      "layer": "universal",
+      "scale": 60000,
+      "verdict": true,
+      "detail": "for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 60000 was found"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> open: finite proxy holds up to 60000; a Pi2 claim is never decided by data (NeedsWheel.finite_data_never_forces_infinitely_many)",
+    "[ledger] open -> open: FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem1); sufficient targets in Frontier.frontier_sufficient_targets"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H31",
+   "key": "PRIZE.2",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [],
+   "text": "Prize problem 2: black and white occur with equal limiting frequency 1/2 in the centre column",
+   "status": "open",
+   "ring": "doesn't-know",
+   "backing": [
+    "escalation: survives every read, up to 160000",
+    "FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem2); a C·√N wobble bound suffices (Prizes.problem2_of_sqrt_bound)"
+   ],
+   "profile": {
+    "claim": "Prize problem 2: black and white occur with equal limiting frequency 1/2 in the centre column",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "N ≤ 1000"
+     },
+     {
+      "layer": "integer",
+      "scale": 4000,
+      "verdict": true,
+      "detail": "N ≤ 4000"
+     },
+     {
+      "layer": "rational",
+      "scale": 20000,
+      "verdict": true,
+      "detail": "N ≤ 20000"
+     },
+     {
+      "layer": "griess",
+      "scale": 50000,
+      "verdict": true,
+      "detail": "N ≤ 50000"
+     },
+     {
+      "layer": "universal",
+      "scale": 160000,
+      "verdict": true,
+      "detail": "N ≤ 160000"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> open: finite proxy holds up to 160000; a Pi2 claim is never decided by data (NeedsWheel.finite_data_never_forces_infinitely_many)",
+    "[ledger] open -> open: FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem2); a C·√N wobble bound suffices (Prizes.problem2_of_sqrt_bound)"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H32",
+   "key": "PRIZE.3",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [],
+   "text": "Prize problem 3: the n-th centre cell can be computed with less than O(n) work",
+   "status": "open",
+   "ring": "doesn't-know",
+   "backing": [
+    "FORMAL open; reduction Problem3Quantifiers.problem3_of_eventual"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[ledger] new -> open: FORMAL open; reduction Problem3Quantifiers.problem3_of_eventual"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H33",
+   "key": "PRIZE.ae",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "Problems 1 and 2 hold for almost every initial row (fair-coin measure)",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "FORMAL Ergodic.ae_problems_one_and_two"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[ledger] new -> proved: FORMAL Ergodic.ae_problems_one_and_two"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H34",
+   "key": "IMP.transient.implies.aperiodic",
+   "params": {},
+   "class": "implication",
+   "origin": "implication",
+   "deps": [],
+   "text": "the centre column's aperiodicity follows from the transient bound (it reads diagonal D inside its transient)",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[implication] new -> refuted-by-ledger: FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H35",
+   "key": "IMP.finite.data.decides.unbounded",
+   "params": {},
+   "class": "implication",
+   "origin": "implication",
+   "deps": [],
+   "text": "the finite gap data between period doublings implies that the periods are unbounded",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[implication] new -> refuted-by-ledger: FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H36",
+   "key": "IMP.sqrt.wobble.implies.P2",
+   "params": {},
+   "class": "implication",
+   "origin": "implication",
+   "deps": [],
+   "text": "a bound |D(N)| ≤ C·√N for all large N implies prize problem 2",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "FORMAL Prizes.problem2_of_sqrt_bound"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[implication] new -> proved: FORMAL Prizes.problem2_of_sqrt_bound"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H37",
+   "key": "IMP.arrow.moves.to.half",
+   "params": {},
+   "class": "implication",
+   "origin": "implication",
+   "deps": [],
+   "text": "the running frequency moves towards 1/2 exactly when the next bit follows the observer's arrow −sign D(n)",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "FORMAL Perspective.deviation_decreases_iff"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[implication] new -> proved: FORMAL Perspective.deviation_decreases_iff"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H38",
+   "key": "IMP.survival.implies.truth",
+   "params": {},
+   "class": "implication",
+   "origin": "implication",
+   "deps": [],
+   "text": "a universal claim that survives every range searched is true",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "FORMAL GateLoop.survives_as_proved_unsound; Benchmarks.gcd_trap_refuted"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[implication] new -> refuted-by-ledger: FORMAL GateLoop.survives_as_proved_unsound; Benchmarks.gcd_trap_refuted"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H39",
+   "key": "IMP.tax.explains.doubling",
+   "params": {},
+   "class": "implication",
+   "origin": "implication",
+   "deps": [],
+   "text": "TAX conservation is the mechanism behind the period-doubling law",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "FORMAL the doubling law is proved from the left step alone: LeftDiagonalPeriods.ldiag_doubles, ldiag_keeps_of_even"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[implication] new -> refuted-by-ledger: FORMAL the doubling law is proved from the left step alone: LeftDiagonalPeriods.ldiag_doubles, ldiag_keeps_of_even"
+   ],
+   "truth": false
+  }
+ ],
+ "conflicts": [],
+ "rollback": [],
+ "dialogue": [
+  "I hold 39 claims: 29 known (proved, verified, measured or refuted), 6 surviving every read, 4 not known.",
+  "Data: 160000 centre bits, linear complexity to 20000, left diagonals D ≤ 5000 (computed in 3.13 s).",
+  "Wobble: max D(N)²/N = 175561/24979 at N = 24979; D(160000) = -90.",
+  "Observer arrow (−sign D(n), the 'Wobble as perspective' read): followed at 79955/159703 ≈ 0.50065 of the steps; the frequency moves towards 1/2 exactly on those steps (Perspective.deviation_decreases_iff).",
+  "Proved in Lean (10):",
+  "  H02: every left diagonal D < 400 has eventual period dividing 8 — CERT LeftDiagonalPeriodsData.leftDiag_period_eight_below_400",
+  "  H10: a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D−1) ∧ odd-parity(D−2) — FORMAL LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, ldiag_keeps_of_even",
+  "  H13: a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed) — FORMAL LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference",
+  "  H14: every right diagonal D is periodic from time 0 with period 2^D — FORMAL Diagonals.rdiag_periodic",
+  "  H15: for D ≥ 1 the least eventual period of right diagonal D exceeds ⌈D/2⌉ — FORMAL Diagonals.rdiag_not_periodic",
+  "  H17: the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 30000 — CERT GateLoopData.centre_no_short_period_30000",
+  "  H18: the centre column is not eventually constant — FORMAL NoConstantColumn.centerCol_not_eventually_constant",
+  "  H33: Problems 1 and 2 hold for almost every initial row (fair-coin measure) — FORMAL Ergodic.ae_problems_one_and_two",
+  "  H36: a bound |D(N)| ≤ C·√N for all large N implies prize problem 2 — FORMAL Prizes.problem2_of_sqrt_bound",
+  "  H37: the running frequency moves towards 1/2 exactly when the next bit follows the observer's arrow −sign D(n) — FORMAL Perspective.deviation_decreases_iff",
+  "Verified exactly (finite claim, whole range) (3):",
+  "  H05: the eventually white left diagonals below 100 are exactly [2, 7, 28] — EXACT whole range: white diagonals below 100: [2, 7, 28]",
+  "  H11: the period-doubling diagonals below 5001 are exactly [3, 8, 29, 400] — EXACT whole range: doubling diagonals below 5001: [3, 8, 29, 400]",
+  "  H27: the centre column's 2-bit block counts on its first 60000 bits are more uniform than Thue–Morse's (max − min gap) — EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform",
+  "Measured exactly (1):",
+  "  H28: on the first 160000 bits the next bit follows the observer's arrow (−sign D(n)) at a fraction 79955/159703 of the steps — EXACT recomputation: exact count on 160000 bits: 79955/159703",
+  "Survive every read (universal claims: open beyond the largest read) (6):",
+  "  H08: for D ≥ 20 the transient of left diagonal D is longer than D (so the centre column, which reads diagonal D at time D, reads it inside its transient) — CERT LeftDiagonalPeriodsData.centerCol_read_in_transient (20 ≤ D < 20000)",
+  "  H09: for D ≥ 20: 30/29 ≤ pre(D)/D ≤ 71/48 — escalation: survives every read, up to 5000",
+  "  H20: |#black − #white| ≤ 3·√N for every prefix length N — CERT WobbleCertificate.wobble_sq_ratio_cert (holds for N <= 10^6)",
+  "  H23: |2·L(n) − n| ≤ 13 for all n (L = linear complexity of the centre column) — escalation: survives every read, up to 20000",
+  "  H24: every word of length k occurs in the first ⌈3/2·k·2^k⌉ bits of the centre column — escalation: survives every read, up to 13",
+  "  H25: seeds 11, 101 give the same centre column as seed 1 — escalation: survives every read, up to 160000",
+  "Open (no finite data decides these) (4):",
+  "  H12: the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity) — FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff",
+  "  H30: Prize problem 1: the centre column is not eventually periodic — FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem1); sufficient targets in Frontier.frontier_sufficient_targets",
+  "  H31: Prize problem 2: black and white occur with equal limiting frequency 1/2 in the centre column — FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem2); a C·√N wobble bound suffices (Prizes.problem2_of_sqrt_bound)",
+  "  H32: Prize problem 3: the n-th centre cell can be computed with less than O(n) work — FORMAL open; reduction Problem3Quantifiers.problem3_of_eventual",
+  "Refuted — do not say these (15):",
+  "  H01: NOT 'every left diagonal has eventual period dividing 8' — CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight",
+  "  H03: NOT 'every left diagonal has eventual period dividing 16' — CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen",
+  "  H04: NOT 'the eventually white left diagonals are exactly [2, 7, 28]' — FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)",
+  "  H06: NOT 'the eventually white left diagonals are exactly [2, 7, 28, 399]' — FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)",
+  "  H07: NOT 'only finitely many left diagonals are eventually white' — FORMAL WhiteDiagonals.ldiag_infinitely_many_white",
+  "  H16: NOT 'the least period of right diagonal D is 2^(D − ⌊(D + 1)/3⌋)' — EXACT counterexample: D = 10: period 64, formula gives 128",
+  "  H19: NOT '|#black − #white| ≤ 2·√N for every prefix length N' — CERT WobbleCertificate.wobble_sq_ratio_cert (D(24979)^2/24979 = 175561/24979 > c^2)",
+  "  H21: NOT '|2·L(n) − n| ≤ 10 for all n (L = linear complexity of the centre column)' — CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)",
+  "  H22: NOT '|2·L(n) − n| ≤ 11 for all n (L = linear complexity of the centre column)' — CERT WheelChecksData.ledger_C160_overstated (2·L(19521) − 19521 ≥ 13)",
+  "  H26: NOT 'the wobble maximum D(N)²/N on N ≤ 20000 is the same for every seed (the Wobble transports across seeds)' — EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)",
+  "  H29: NOT 'for every N ≥ 1000, fewer than half of the first N steps follow the observer's arrow (the run leans away from 1/2)' — EXACT counterexample: N = 4672: 2331 of 4662 steps follow the arrow",
+  "  H34: NOT 'the centre column's aperiodicity follows from the transient bound (it reads diagonal D inside its transient)' — FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic",
+  "  H35: NOT 'the finite gap data between period doublings implies that the periods are unbounded' — FORMAL NeedsWheel.finite_data_never_forces_infinitely_many",
+  "  H38: NOT 'a universal claim that survives every range searched is true' — FORMAL GateLoop.survives_as_proved_unsound; Benchmarks.gcd_trap_refuted",
+  "  H39: NOT 'TAX conservation is the mechanism behind the period-doubling law' — FORMAL the doubling law is proved from the left step alone: LeftDiagonalPeriods.ldiag_doubles, ldiag_keeps_of_even",
+  "Arrows that flipped (refuted only by reading higher):",
+  "  H01: read substrate → integer → rational; flipped at rational",
+  "  H04: read substrate → integer; flipped at integer",
+  "  H16: read substrate → integer → rational → griess; flipped at griess",
+  "  H19: read substrate → integer; flipped at integer",
+  "  H21: read substrate → integer → rational → griess; flipped at griess",
+  "  H22: read substrate → integer → rational → griess → universal; flipped at universal",
+  "  H26: read substrate → integer; flipped at integer",
+  "  H29: read substrate → integer; flipped at integer"
+ ],
+ "dialogue_consistency": {
+  "spoken": 24,
+  "spoken_without_backing_or_unspeakable": [],
+  "ok": true
+ },
+ "score": {
+  "right": 39,
+  "wrong": 0,
+  "overclaim": 0,
+  "abstain": 0,
+  "n": 39
+ },
+ "wheel": {
+  "engine": "GLM Hypothesis Engine v18",
+  "title": "Rule 30",
+  "format": "glm-wheel/2",
+  "rings": {
+   "knows": [
+    {
+     "hid": "H01",
+     "key": "LD.period.divides",
+     "params": {
+      "m": 8
+     },
+     "class": "Pi1",
+     "statement": "every left diagonal has eventual period dividing 8",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: left diagonal 400 has eventual period 16",
+      "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational"
+      ],
+      "direction": "flipped at rational",
+      "settled": "rational"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H02",
+     "key": "LD.period.divides.below",
+     "params": {
+      "m": 8,
+      "N": 400
+     },
+     "class": "finite",
+     "statement": "every left diagonal D < 400 has eventual period dividing 8",
+     "status": "proved",
+     "backing": [
+      "EXACT whole range: all D < 400 computed",
+      "CERT LeftDiagonalPeriodsData.leftDiag_period_eight_below_400"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H03",
+     "key": "LD.period.divides",
+     "params": {
+      "m": 16
+     },
+     "class": "Pi1",
+     "statement": "every left diagonal has eventual period dividing 16",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "escalation: survives every read, up to 5000",
+      "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H04",
+     "key": "LD.white.exactly",
+     "params": {
+      "S": [
+       2,
+       7,
+       28
+      ]
+     },
+     "class": "Pi1",
+     "statement": "the eventually white left diagonals are exactly [2, 7, 28]",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: white diagonals below 400: [2, 7, 28, 399]",
+      "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer"
+      ],
+      "direction": "flipped at integer",
+      "settled": "integer"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H05",
+     "key": "LD.white.below",
+     "params": {
+      "S": [
+       2,
+       7,
+       28
+      ],
+      "N": 100
+     },
+     "class": "finite",
+     "statement": "the eventually white left diagonals below 100 are exactly [2, 7, 28]",
+     "status": "verified-exact",
+     "backing": [
+      "EXACT whole range: white diagonals below 100: [2, 7, 28]"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H06",
+     "key": "LD.white.exactly",
+     "params": {
+      "S": [
+       2,
+       7,
+       28,
+       399
+      ]
+     },
+     "class": "Pi1",
+     "statement": "the eventually white left diagonals are exactly [2, 7, 28, 399]",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "escalation: survives every read, up to 5000",
+      "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H07",
+     "key": "LD.white.finite",
+     "params": {},
+     "class": "Pi2",
+     "statement": "only finitely many left diagonals are eventually white",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL WhiteDiagonals.ldiag_infinitely_many_white"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H10",
+     "key": "LD.period.law",
+     "params": {},
+     "class": "Pi1",
+     "statement": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D−1) ∧ odd-parity(D−2)",
+     "status": "proved",
+     "backing": [
+      "escalation: survives every read, up to 5000",
+      "FORMAL LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, ldiag_keeps_of_even"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H11",
+     "key": "LD.doubling.below",
+     "params": {
+      "S": [
+       3,
+       8,
+       29,
+       400
+      ],
+      "N": 5001
+     },
+     "class": "finite",
+     "statement": "the period-doubling diagonals below 5001 are exactly [3, 8, 29, 400]",
+     "status": "verified-exact",
+     "backing": [
+      "EXACT whole range: doubling diagonals below 5001: [3, 8, 29, 400]"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H13",
+     "key": "LD.seed.forgetting",
+     "params": {},
+     "class": "Pi1",
+     "statement": "a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed)",
+     "status": "proved",
+     "backing": [
+      "FORMAL LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H14",
+     "key": "RD.lp.le.2^D",
+     "params": {},
+     "class": "Pi1",
+     "statement": "every right diagonal D is periodic from time 0 with period 2^D",
+     "status": "proved",
+     "backing": [
+      "escalation: survives every read, up to 12",
+      "FORMAL Diagonals.rdiag_periodic"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H15",
+     "key": "RD.lp.gt.half",
+     "params": {},
+     "class": "Pi1",
+     "statement": "for D ≥ 1 the least eventual period of right diagonal D exceeds ⌈D/2⌉",
+     "status": "proved",
+     "backing": [
+      "escalation: survives every read, up to 12",
+      "FORMAL Diagonals.rdiag_not_periodic"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H16",
+     "key": "RD.lp.formula",
+     "params": {
+      "b": 1,
+      "c": 3
+     },
+     "class": "Pi1",
+     "statement": "the least period of right diagonal D is 2^(D − ⌊(D + 1)/3⌋)",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: D = 10: period 64, formula gives 128"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess"
+      ],
+      "direction": "flipped at griess",
+      "settled": "griess"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H17",
+     "key": "CC.no.short.period",
+     "params": {
+      "p": 64,
+      "tau": 30000
+     },
+     "class": "finite",
+     "statement": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 30000",
+     "status": "proved",
+     "backing": [
+      "EXACT whole range: for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 30000 was found",
+      "CERT GateLoopData.centre_no_short_period_30000"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H18",
+     "key": "CC.not.eventually.constant",
+     "params": {},
+     "class": "Pi2",
+     "statement": "the centre column is not eventually constant",
+     "status": "proved",
+     "backing": [
+      "FORMAL NoConstantColumn.centerCol_not_eventually_constant"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H19",
+     "key": "CC.balance.sqrt",
+     "params": {
+      "c": 2
+     },
+     "class": "Pi1",
+     "statement": "|#black − #white| ≤ 2·√N for every prefix length N",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: N = 1459: D(N)²/N = 5929/1459 > 4",
+      "CERT WobbleCertificate.wobble_sq_ratio_cert (D(24979)^2/24979 = 175561/24979 > c^2)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer"
+      ],
+      "direction": "flipped at integer",
+      "settled": "integer"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H21",
+     "key": "CC.lc.near.half",
+     "params": {
+      "b": 10
+     },
+     "class": "Pi1",
+     "statement": "|2·L(n) − n| ≤ 10 for all n (L = linear complexity of the centre column)",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 11101: |2·L(n) − n| = 11 > 10",
+      "CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess"
+      ],
+      "direction": "flipped at griess",
+      "settled": "griess"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H22",
+     "key": "CC.lc.near.half",
+     "params": {
+      "b": 11
+     },
+     "class": "Pi1",
+     "statement": "|2·L(n) − n| ≤ 11 for all n (L = linear complexity of the centre column)",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 16082: |2·L(n) − n| = 12 > 11",
+      "CERT WheelChecksData.ledger_C160_overstated (2·L(19521) − 19521 ≥ 13)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "flipped at universal",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H26",
+     "key": "CC.wobble.transport",
+     "params": {},
+     "class": "Pi1",
+     "statement": "the wobble maximum D(N)²/N on N ≤ 20000 is the same for every seed (the Wobble transports across seeds)",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer"
+      ],
+      "direction": "flipped at integer",
+      "settled": "integer"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H27",
+     "key": "CC.uniformity.vs.tm",
+     "params": {
+      "more": true
+     },
+     "class": "comparison",
+     "statement": "the centre column's 2-bit block counts on its first 60000 bits are more uniform than Thue–Morse's (max − min gap)",
+     "status": "verified-exact",
+     "backing": [
+      "EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H28",
+     "key": "CC.arrow.agreement",
+     "params": {
+      "N": 160000
+     },
+     "class": "measurement",
+     "statement": "on the first 160000 bits the next bit follows the observer's arrow (−sign D(n)) at a fraction 79955/159703 of the steps",
+     "status": "measured",
+     "backing": [
+      "EXACT recomputation: exact count on 160000 bits: 79955/159703"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H29",
+     "key": "CC.arrow.below.half",
+     "params": {
+      "n0": 1000
+     },
+     "class": "Pi1",
+     "statement": "for every N ≥ 1000, fewer than half of the first N steps follow the observer's arrow (the run leans away from 1/2)",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: N = 4672: 2331 of 4662 steps follow the arrow"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer"
+      ],
+      "direction": "flipped at integer",
+      "settled": "integer"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H33",
+     "key": "PRIZE.ae",
+     "params": {},
+     "class": "Pi1",
+     "statement": "Problems 1 and 2 hold for almost every initial row (fair-coin measure)",
+     "status": "proved",
+     "backing": [
+      "FORMAL Ergodic.ae_problems_one_and_two"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H34",
+     "key": "IMP.transient.implies.aperiodic",
+     "params": {},
+     "class": "implication",
+     "statement": "the centre column's aperiodicity follows from the transient bound (it reads diagonal D inside its transient)",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H35",
+     "key": "IMP.finite.data.decides.unbounded",
+     "params": {},
+     "class": "implication",
+     "statement": "the finite gap data between period doublings implies that the periods are unbounded",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H36",
+     "key": "IMP.sqrt.wobble.implies.P2",
+     "params": {},
+     "class": "implication",
+     "statement": "a bound |D(N)| ≤ C·√N for all large N implies prize problem 2",
+     "status": "proved",
+     "backing": [
+      "FORMAL Prizes.problem2_of_sqrt_bound"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H37",
+     "key": "IMP.arrow.moves.to.half",
+     "params": {},
+     "class": "implication",
+     "statement": "the running frequency moves towards 1/2 exactly when the next bit follows the observer's arrow −sign D(n)",
+     "status": "proved",
+     "backing": [
+      "FORMAL Perspective.deviation_decreases_iff"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H38",
+     "key": "IMP.survival.implies.truth",
+     "params": {},
+     "class": "implication",
+     "statement": "a universal claim that survives every range searched is true",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL GateLoop.survives_as_proved_unsound; Benchmarks.gcd_trap_refuted"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H39",
+     "key": "IMP.tax.explains.doubling",
+     "params": {},
+     "class": "implication",
+     "statement": "TAX conservation is the mechanism behind the period-doubling law",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL the doubling law is proved from the left step alone: LeftDiagonalPeriods.ldiag_doubles, ldiag_keeps_of_even"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    }
+   ],
+   "thinks-true": [
+    {
+     "hid": "H08",
+     "key": "LD.preperiod.gt.D",
+     "params": {},
+     "class": "Pi1",
+     "statement": "for D ≥ 20 the transient of left diagonal D is longer than D (so the centre column, which reads diagonal D at time D, reads it inside its transient)",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 5000",
+      "CERT LeftDiagonalPeriodsData.centerCol_read_in_transient (20 ≤ D < 20000)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H09",
+     "key": "LD.preperiod.envelope",
+     "params": {
+      "lo": "30/29",
+      "hi": "71/48"
+     },
+     "class": "Pi1",
+     "statement": "for D ≥ 20: 30/29 ≤ pre(D)/D ≤ 71/48",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 5000"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H20",
+     "key": "CC.balance.sqrt",
+     "params": {
+      "c": 3
+     },
+     "class": "Pi1",
+     "statement": "|#black − #white| ≤ 3·√N for every prefix length N",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 160000",
+      "CERT WobbleCertificate.wobble_sq_ratio_cert (holds for N <= 10^6)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H23",
+     "key": "CC.lc.near.half",
+     "params": {
+      "b": 13
+     },
+     "class": "Pi1",
+     "statement": "|2·L(n) − n| ≤ 13 for all n (L = linear complexity of the centre column)",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 20000"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H24",
+     "key": "CC.words.cover",
+     "params": {
+      "f": "3/2"
+     },
+     "class": "Pi1",
+     "statement": "every word of length k occurs in the first ⌈3/2·k·2^k⌉ bits of the centre column",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 13"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H25",
+     "key": "CC.seed.same",
+     "params": {
+      "seeds": [
+       3,
+       5
+      ]
+     },
+     "class": "Pi1",
+     "statement": "seeds 11, 101 give the same centre column as seed 1",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 160000"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    }
+   ],
+   "doesn't-know": [
+    {
+     "hid": "H12",
+     "key": "LD.periods.unbounded",
+     "params": {},
+     "class": "Pi2",
+     "statement": "the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)",
+     "status": "open",
+     "backing": [
+      "FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H30",
+     "key": "PRIZE.1",
+     "params": {},
+     "class": "Pi2",
+     "statement": "Prize problem 1: the centre column is not eventually periodic",
+     "status": "open",
+     "backing": [
+      "escalation: survives every read, up to 60000",
+      "FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem1); sufficient targets in Frontier.frontier_sufficient_targets"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H31",
+     "key": "PRIZE.2",
+     "params": {},
+     "class": "Pi2",
+     "statement": "Prize problem 2: black and white occur with equal limiting frequency 1/2 in the centre column",
+     "status": "open",
+     "backing": [
+      "escalation: survives every read, up to 160000",
+      "FORMAL open; no finite prefix decides it (WobbleCertificate.no_finite_certificate_problem2); a C·√N wobble bound suffices (Prizes.problem2_of_sqrt_bound)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H32",
+     "key": "PRIZE.3",
+     "params": {},
+     "class": "Pi2",
+     "statement": "Prize problem 3: the n-th centre cell can be computed with less than O(n) work",
+     "status": "open",
+     "backing": [
+      "FORMAL open; reduction Problem3Quantifiers.problem3_of_eventual"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    }
+   ]
+  },
+  "needs": [
+   {
+    "kind": "proof",
+    "signature": "proof:LD.preperiod.gt.D",
+    "because": "survives every read (to 5000); data cannot prove a universal claim",
+    "blocks": [
+     "H08"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:LD.preperiod.envelope",
+    "because": "survives every read (to 5000); data cannot prove a universal claim",
+    "blocks": [
+     "H09"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:LD.periods.unbounded",
+    "because": "open: no finite data decides it",
+    "blocks": [
+     "H12"
+    ],
+    "acceptance": "a Lean proof, or a proved reduction to a smaller open target"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:CC.balance.sqrt",
+    "because": "survives every read (to 160000); data cannot prove a universal claim",
+    "blocks": [
+     "H20"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:CC.lc.near.half",
+    "because": "survives every read (to 20000); data cannot prove a universal claim",
+    "blocks": [
+     "H23"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:CC.words.cover",
+    "because": "survives every read (to 13); data cannot prove a universal claim",
+    "blocks": [
+     "H24"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:CC.seed.same",
+    "because": "survives every read (to 160000); data cannot prove a universal claim",
+    "blocks": [
+     "H25"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:PRIZE.1",
+    "because": "open: no finite data decides it",
+    "blocks": [
+     "H30"
+    ],
+    "acceptance": "a Lean proof, or a proved reduction to a smaller open target"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:PRIZE.2",
+    "because": "open: no finite data decides it",
+    "blocks": [
+     "H31"
+    ],
+    "acceptance": "a Lean proof, or a proved reduction to a smaller open target"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:PRIZE.3",
+    "because": "open: no finite data decides it",
+    "blocks": [
+     "H32"
+    ],
+    "acceptance": "a Lean proof, or a proved reduction to a smaller open target"
+   }
+  ],
+  "language_wheel": [
+   {
+    "concept": "every left diagonal has eventual period dividing 8",
+    "verdict": false,
+    "key": "LD.period.divides",
+    "params": {
+     "m": 8
+    },
+    "backing": "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight"
+   },
+   {
+    "concept": "every left diagonal D < 400 has eventual period dividing 8",
+    "verdict": true,
+    "key": "LD.period.divides.below",
+    "params": {
+     "m": 8,
+     "N": 400
+    },
+    "backing": "CERT LeftDiagonalPeriodsData.leftDiag_period_eight_below_400"
+   },
+   {
+    "concept": "every left diagonal has eventual period dividing 16",
+    "verdict": false,
+    "key": "LD.period.divides",
+    "params": {
+     "m": 16
+    },
+    "backing": "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen"
+   },
+   {
+    "concept": "the eventually white left diagonals are exactly [2, 7, 28]",
+    "verdict": false,
+    "key": "LD.white.exactly",
+    "params": {
+     "S": [
+      2,
+      7,
+      28
+     ]
+    },
+    "backing": "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+   },
+   {
+    "concept": "the eventually white left diagonals below 100 are exactly [2, 7, 28]",
+    "verdict": true,
+    "key": "LD.white.below",
+    "params": {
+     "S": [
+      2,
+      7,
+      28
+     ],
+     "N": 100
+    },
+    "backing": "EXACT whole range: white diagonals below 100: [2, 7, 28]"
+   },
+   {
+    "concept": "the eventually white left diagonals are exactly [2, 7, 28, 399]",
+    "verdict": false,
+    "key": "LD.white.exactly",
+    "params": {
+     "S": [
+      2,
+      7,
+      28,
+      399
+     ]
+    },
+    "backing": "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)"
+   },
+   {
+    "concept": "only finitely many left diagonals are eventually white",
+    "verdict": false,
+    "key": "LD.white.finite",
+    "params": {},
+    "backing": "FORMAL WhiteDiagonals.ldiag_infinitely_many_white"
+   },
+   {
+    "concept": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D−1) ∧ odd-parity(D−2)",
+    "verdict": true,
+    "key": "LD.period.law",
+    "params": {},
+    "backing": "FORMAL LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, ldiag_keeps_of_even"
+   },
+   {
+    "concept": "the period-doubling diagonals below 5001 are exactly [3, 8, 29, 400]",
+    "verdict": true,
+    "key": "LD.doubling.below",
+    "params": {
+     "S": [
+      3,
+      8,
+      29,
+      400
+     ],
+     "N": 5001
+    },
+    "backing": "EXACT whole range: doubling diagonals below 5001: [3, 8, 29, 400]"
+   },
+   {
+    "concept": "a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed)",
+    "verdict": true,
+    "key": "LD.seed.forgetting",
+    "params": {},
+    "backing": "FORMAL LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference"
+   },
+   {
+    "concept": "every right diagonal D is periodic from time 0 with period 2^D",
+    "verdict": true,
+    "key": "RD.lp.le.2^D",
+    "params": {},
+    "backing": "FORMAL Diagonals.rdiag_periodic"
+   },
+   {
+    "concept": "for D ≥ 1 the least eventual period of right diagonal D exceeds ⌈D/2⌉",
+    "verdict": true,
+    "key": "RD.lp.gt.half",
+    "params": {},
+    "backing": "FORMAL Diagonals.rdiag_not_periodic"
+   },
+   {
+    "concept": "the least period of right diagonal D is 2^(D − ⌊(D + 1)/3⌋)",
+    "verdict": false,
+    "key": "RD.lp.formula",
+    "params": {
+     "b": 1,
+     "c": 3
+    },
+    "backing": "EXACT counterexample: D = 10: period 64, formula gives 128"
+   },
+   {
+    "concept": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 30000",
+    "verdict": true,
+    "key": "CC.no.short.period",
+    "params": {
+     "p": 64,
+     "tau": 30000
+    },
+    "backing": "CERT GateLoopData.centre_no_short_period_30000"
+   },
+   {
+    "concept": "the centre column is not eventually constant",
+    "verdict": true,
+    "key": "CC.not.eventually.constant",
+    "params": {},
+    "backing": "FORMAL NoConstantColumn.centerCol_not_eventually_constant"
+   },
+   {
+    "concept": "|#black − #white| ≤ 2·√N for every prefix length N",
+    "verdict": false,
+    "key": "CC.balance.sqrt",
+    "params": {
+     "c": 2
+    },
+    "backing": "CERT WobbleCertificate.wobble_sq_ratio_cert (D(24979)^2/24979 = 175561/24979 > c^2)"
+   },
+   {
+    "concept": "|2·L(n) − n| ≤ 10 for all n (L = linear complexity of the centre column)",
+    "verdict": false,
+    "key": "CC.lc.near.half",
+    "params": {
+     "b": 10
+    },
+    "backing": "CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)"
+   },
+   {
+    "concept": "|2·L(n) − n| ≤ 11 for all n (L = linear complexity of the centre column)",
+    "verdict": false,
+    "key": "CC.lc.near.half",
+    "params": {
+     "b": 11
+    },
+    "backing": "CERT WheelChecksData.ledger_C160_overstated (2·L(19521) − 19521 ≥ 13)"
+   },
+   {
+    "concept": "the wobble maximum D(N)²/N on N ≤ 20000 is the same for every seed (the Wobble transports across seeds)",
+    "verdict": false,
+    "key": "CC.wobble.transport",
+    "params": {},
+    "backing": "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+   },
+   {
+    "concept": "the centre column's 2-bit block counts on its first 60000 bits are more uniform than Thue–Morse's (max − min gap)",
+    "verdict": true,
+    "key": "CC.uniformity.vs.tm",
+    "params": {
+     "more": true
+    },
+    "backing": "EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+   },
+   {
+    "concept": "on the first 160000 bits the next bit follows the observer's arrow (−sign D(n)) at a fraction 79955/159703 of the steps",
+    "verdict": "measured",
+    "key": "CC.arrow.agreement",
+    "params": {
+     "N": 160000
+    },
+    "backing": "EXACT recomputation: exact count on 160000 bits: 79955/159703"
+   },
+   {
+    "concept": "for every N ≥ 1000, fewer than half of the first N steps follow the observer's arrow (the run leans away from 1/2)",
+    "verdict": false,
+    "key": "CC.arrow.below.half",
+    "params": {
+     "n0": 1000
+    },
+    "backing": "EXACT counterexample: N = 4672: 2331 of 4662 steps follow the arrow"
+   },
+   {
+    "concept": "Problems 1 and 2 hold for almost every initial row (fair-coin measure)",
+    "verdict": true,
+    "key": "PRIZE.ae",
+    "params": {},
+    "backing": "FORMAL Ergodic.ae_problems_one_and_two"
+   },
+   {
+    "concept": "the centre column's aperiodicity follows from the transient bound (it reads diagonal D inside its transient)",
+    "verdict": false,
+    "key": "IMP.transient.implies.aperiodic",
+    "params": {},
+    "backing": "FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+   },
+   {
+    "concept": "the finite gap data between period doublings implies that the periods are unbounded",
+    "verdict": false,
+    "key": "IMP.finite.data.decides.unbounded",
+    "params": {},
+    "backing": "FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+   },
+   {
+    "concept": "a bound |D(N)| ≤ C·√N for all large N implies prize problem 2",
+    "verdict": true,
+    "key": "IMP.sqrt.wobble.implies.P2",
+    "params": {},
+    "backing": "FORMAL Prizes.problem2_of_sqrt_bound"
+   },
+   {
+    "concept": "the running frequency moves towards 1/2 exactly when the next bit follows the observer's arrow −sign D(n)",
+    "verdict": true,
+    "key": "IMP.arrow.moves.to.half",
+    "params": {},
+    "backing": "FORMAL Perspective.deviation_decreases_iff"
+   },
+   {
+    "concept": "a universal claim that survives every range searched is true",
+    "verdict": false,
+    "key": "IMP.survival.implies.truth",
+    "params": {},
+    "backing": "FORMAL GateLoop.survives_as_proved_unsound; Benchmarks.gcd_trap_refuted"
+   },
+   {
+    "concept": "TAX conservation is the mechanism behind the period-doubling law",
+    "verdict": false,
+    "key": "IMP.tax.explains.doubling",
+    "params": {},
+    "backing": "FORMAL the doubling law is proved from the left step alone: LeftDiagonalPeriods.ldiag_doubles, ldiag_keeps_of_even"
+   }
+  ],
+  "counts": {
+   "knows": 29,
+   "thinks-true": 6,
+   "doesn't-know": 4
+  }
+ },
+ "data": {
+  "centre_bits": 160000,
+  "lc_to": 20000,
+  "diagonals_to": 5000,
+  "seconds": 3.13
+ }
+}

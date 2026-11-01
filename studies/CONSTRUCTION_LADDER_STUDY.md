@@ -4,16 +4,7 @@
 
 **Question.** Is reading the substrate at one fixed rung of the Golay–Leech construction ladder a partial system — does escalating the reading across every rung, out from the middle, name more carriers than any single rung can?
 
-**Verdict.** It is a partial system, and the note's five rungs were too few: escalating across the eleven-rung ladder names 462 of 568 queries correctly with 0 wrong, against 327 for the five-rung ladder and 283 for the best single rung.
-The six rungs that were added are not ad-hoc: Construction `A` over the trivial
-code is `2ℤ²⁴` and over the even-weight code is `D₂₄`, so the lattices that
-fill the note's long step are Construction rungs too, and the scaling `L ↦ 2L`
-generates them. No single rung is best at more than one perturbation, and the
-escalation loses nothing to an oracle that is allowed to pick the rung after
-the fact: 462 is the oracle's count too. The order of the walk changes the cost
-and not the answer — which is a theorem, not a coincidence — and the sweep over
-ladder lengths finds where that theorem's hypothesis fails: the ladder stays
-safe to thirteen rungs and breaks at fifteen.
+**Verdict.** It is a partial system, and the note's five rungs were too few: escalating across the eleven-rung ladder names 462 of 568 queries correctly with 0 wrong, against 327 for the five-rung ladder and 283 for the best single rung. The six rungs that were admitted are Construction rungs: Construction `A` over the trivial code is `2ℤ²⁴` and over the even-weight code is `D₂₄`, so the lattices that fill the note's long step are Construction rungs too, and the scaling `L ↦ 2L` generates them. No single rung is best at more than one perturbation, and the escalation loses nothing to an oracle that is allowed to pick the rung after the fact: 462 is the oracle's count too. The order of the walk changes the cost and not the answer — which is a theorem, `firstNamed_order_independent` — and the sweep at each length is a measured instance of the theorem's hypothesis failing: the ladder stays safe to thirteen rungs and breaks at fifteen.
 
 **Deciding figure.** 462 of 568 queries answered correctly with 0 wrong, against 327 for the five-rung ladder and 283 for the best single rung.
 
@@ -21,12 +12,16 @@ safe to thirteen rungs and breaks at fifteen.
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the verdict's later sentences, which the check had never read, reworded in the body's own words where they used words the body does not, with the meaning unchanged); its run commands now start from the repository root (`PYTHONPATH=src`).*
+
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ---
 
 ## 0. What this document is
 
 The round's source is
-[`source_material/Golay codes and Hadamard matrices.txt`](../source_material/Golay%20codes%20and%20Hadamard%20matrices.txt),
+[`source_material/Golay codes and Hadamard matrices.txt`](../source_material/done/Golay%20codes%20and%20Hadamard%20matrices.txt),
 a note about where the Golay codes come from, how Constructions A, B and C
 climb from the integer grid to the Leech lattice, and how the shell depths of
 each are read off a theta function. Two things were asked of it: **see the
@@ -419,9 +414,8 @@ answer changes because of it.
 **How to re-run any of this.**
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools ladder            # the stored measurement
-PYTHONPATH=. python3 -m glm_universal.tools ladder --write    # re-take it (about a minute)
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_construction_ladder.py -q
+PYTHONPATH=src python3 -m glm_universal.tools ladder            # the stored measurement
+PYTHONPATH=src python3 -m glm_universal.tools ladder --write    # re-take it (about a minute)
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_construction_ladder.py -q
 cd .. && lake build RequestProject.GLM.ConstructionLadder RequestProject.GLM.ScaledLadder
 ```

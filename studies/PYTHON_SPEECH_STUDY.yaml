@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 83 of 83 value cases equal to CPython with every column-3 script printing VERIFIED True
@@ -11,19 +13,25 @@ deciding_figure: 83 of 83 value cases equal to CPython with every column-3 scrip
 directives:
 - D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/python_speech_cases
-  - reasoning/python_speech
-  - reasoning/python_substrate
+  - evaluation/python_speech_cases.py
+  - reasoning/python_speech.py
+  - reasoning/python_substrate.py
+  - runtime/python_tct.py
+  - tools.py
   lean:
   - PythonSpeech
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: PYTHON_SPEECH_STUDY.md
   test:
   - test_python_speech.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: PYTHON_SPEECH_STUDY
 junctions: []
 last_altered: ''
@@ -38,10 +46,11 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 64
 predecessors: []
 question: Can the GLM speak Python?
 recomputed_by: '`glm_universal.reasoning.python_speech.python_speech_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -65,7 +74,11 @@ sections:
 - anchor: 7-next
   heading: 7. Next
 status: closed
-successors: []
+successors:
+- AST_INDEX_STUDY
+- CARRIED_FORK_STUDY
+- PLANNER_LOOP_STUDY
+- THIRD_SORT_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Python speech: the GLM reading and evaluating Python on the substrate'

@@ -19,6 +19,8 @@ from __future__ import annotations
 from fractions import Fraction as F
 from pathlib import Path
 
+from glm_universal.constants import lean_file
+from glm_universal.lean_check import audited_or_held
 from glm_universal.reasoning import frame_plane as fp
 from glm_universal.reasoning import improper_units_study as ius
 from glm_universal.runtime.toolbox import run_tool
@@ -37,13 +39,12 @@ def _pairs(m, inputs):
 
 
 def test_lean_file_states_the_theorems_without_sorry():
-    text = (_ROOT / fp.LEAN_FILE_UNITS).read_text(encoding="utf-8")
+    text = lean_file(fp.LEAN_FILE_UNITS).read_text(encoding="utf-8")
     for name in fp.LEAN_THEOREMS_UNITS:
         assert f"theorem {name}" in text, name
     assert "sorry" not in text
-    audit = (_ROOT / "RequestProject" / "GLM" / "AxiomAuditAll.lean").read_text(
-        encoding="utf-8")
-    assert "import RequestProject.GLM.LorentzUnits" in audit
+    # audited, or held in awaiting_recovery/ until LorentzPlane.lean returns
+    assert audited_or_held("RequestProject.GLM.LorentzUnits")
 
 
 def test_scaled_improper_maps_are_answered_and_named():

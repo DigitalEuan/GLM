@@ -43,12 +43,18 @@ import ast
 import os
 from typing import Dict, Tuple
 
-__all__ = ["planner", "memory_split", "lean_generation", "occupancy_report",
+__all__ = ["planner", "memory_split", "lean_generation", "attention_simulator",
+           "aggregation_bench", "occupancy_report",
            "importing_modules", "computing_importers", "OCCUPANTS",
            "DECLARED_IMPORTERS", "COMPUTING_PACKAGES"]
 
 #: The occupants, in the order they arrived.
-OCCUPANTS: Tuple[str, ...] = ("planner", "memory_split", "lean_generation")
+#: *Last altered 31 October 2026 (repository check): the attention simulator
+#: and the aggregation bench, absorbed into the sandbox from the supplied
+#: ``attention`` item (ATTENTION_SIMULATOR_STUDY, AGGREGATION_BENCH_STUDY),
+#: are listed; each already carried its promotion checklist.*
+OCCUPANTS: Tuple[str, ...] = ("planner", "memory_split", "lean_generation",
+                              "attention_simulator", "aggregation_bench")
 
 #: The declared exceptions to "nothing imports the sandbox": the documentation
 #: layer, which has to be able to recompute what it reports, and the study

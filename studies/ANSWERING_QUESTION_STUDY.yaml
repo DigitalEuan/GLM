@@ -1,36 +1,47 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: '8 of 10 marks; dialogues 13/13 confirmed on the truth, 0 wrong, 15 replies in all (each
-  run at most `n - 1` and `Nat.clog 2 n + 1`); column 3 41/41 turns verified, 43/43 altered claims rejected;
-  one false reply 13/13 contradicted, 0 wrong; full registers 387/387 resolved, 0 wrong, 1280 questions
-  (Phase 145: 1280); frozen path 198/198 present and same status, 194 same text.'
-directives:
-- D1
+deciding_figure: '9 of 10 marks, re-measured 31 October 2026 (F1: 198/198 present and same status, 184
+  same text, 0 undeclared; R1 missed); the round recorded 8 of 10 marks; dialogues 13/13 confirmed on
+  the truth, 0 wrong, 15 replies in all (each run at most `n - 1` and `Nat.clog 2 n + 1`); column 3 41/41
+  turns verified, 43/43 altered claims rejected; one false reply 13/13 contradicted, 0 wrong; full registers
+  387/387 resolved, 0 wrong, 1280 questions (Phase 145: 1280); frozen path 198/198 present and same status,
+  194 same text.'
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/answering_question
-  - reasoning/timed_question
-  - runtime/conversation
-  - runtime/session
-  - runtime/tct_engine
-  - tests/test_answering_question
+  - reasoning/answering_question.py
+  - reasoning/budget_guard_frozen.py
+  - reasoning/frozen_path.py
+  - reasoning/timed_question.py
+  - runtime/conversation.py
+  - runtime/discourse.py
+  - runtime/session.py
+  - runtime/tct_engine.py
+  - tools.py
   lean:
   - AnsweringQuestion
+  - TimedQuestion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ANSWERING_QUESTION_STUDY.md
   test:
   - test_answering_question.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ANSWERING_QUESTION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,15 +49,37 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - L1
+  - F1
+  - E1
+  - C1
+  - C2
+  - C3
+  - Q1
+  - R1
+  - T1
+  - D1
+  met:
+  - L1
+  - F1
+  - E1
+  - C1
+  - C2
+  - C3
+  - Q1
+  - T1
+  - D1
+  missed:
+  - R1
 perturbations: []
-phase: 145
-predecessors: []
+phase: 146
+predecessors:
+- TIMED_QUESTION_STUDY
 question: Can the question Phase 145 computed for a tie be put into the GLM's own answer, and the reply
   taken as the conversation's next turn, without moving any answer the evaluation pins?
 recomputed_by: '`glm_universal.reasoning.answering_question.answering_question_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -70,14 +103,20 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- NEAREST_QUESTION_STUDY
+- RESUMED_DIALOGUE_STUDY
 superseded_by: ''
 supersedes: []
 title: The question in the answering path — a reply is the next turn
-verdict: Yes. A `locate` junction answer now ends with the question that would split it, and a reply typed
-  as the next turn is read as an answer to it. 13 of 13 dialogues end confirmed on the member meant, with
-  0 wrong. A false reply always ends in a refused contradiction. Every turn is verified by column 3. The
-  frozen path keeps all 198 statuses. 8 of 10 marks were met. F1 and R1 were missed only because the round's
-  four new evaluation cases moved two evaluation-set counts and one census of earlier texts, causes the
-  pre-registration did not name.
+verdict: 'Yes. A `locate` junction answer now ends with the question that would split it, and a reply
+  typed as the next turn is read as an answer to it. 13 of 13 dialogues end confirmed on the member meant,
+  with 0 wrong. A false reply always ends in a refused contradiction. Every turn is verified by column
+  3. The frozen path keeps all 198 statuses. 8 of 10 marks were met. F1 and R1 were missed only because
+  the round''s four new evaluation cases moved two evaluation-set counts and one census of earlier texts,
+  causes the pre-registration did not name. Re-measured on 31 October 2026 (repository check), 9 of 10
+  marks hold: F1 is met in the re-take, every one of the 14 moved texts carrying a declared cause (this
+  round''s junction answers, the tree''s own figures, and the later rounds'' causes declared on 31 October
+  2026), and R1 is still missed, its census of earlier texts having grown with the evaluation; §7.6 gives
+  the figures.'
 wobble_deps: []

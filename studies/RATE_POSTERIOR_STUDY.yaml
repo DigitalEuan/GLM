@@ -1,25 +1,33 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 7 marks met; the promise kept under the prior in 35 of 35 cells; 525 fixed-rate
   cells classified, 37 broken — 35 at 1/5 and 2 on the grid; 10 of 10 runtime programs as computed.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/rate_posterior_marks.py
+  - tools.py
   lean:
   - RatePosterior
   - RateRepair
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: RATE_POSTERIOR_STUDY.md
   test:
   - test_rate_posterior.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RATE_POSTERIOR_STUDY
 junctions: []
 last_altered: ''
@@ -30,17 +38,28 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
+  declared:
+  - J1
+  - J2
+  - J3
+  - J4
+  - J5
+  - J6
+  - J7
+  - J8
+  - J9
   met: []
   missed: []
 perturbations: []
-phase: 80
+phase: 82
 predecessors:
+- AGREE_CHANNEL_STUDY
 - CONFIDENCE_FLOOR_STUDY
 question: Can the decoder and the second reading estimate the bit-flip rate from the reads themselves,
   instead of having the caller declare it, and what does a confidence marginalized over that estimate
   promise?
 recomputed_by: '`glm_universal.reasoning.rate_posterior_marks.rate_posterior_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -58,7 +77,9 @@ sections:
 - anchor: 4-the-repairs-measured-phase-86
   heading: 4. The repairs, measured (Phase 86)
 status: closed
-successors: []
+successors:
+- CONTRACT_MATRIX_STUDY
+- SECOND_VIEW_STUDY
 superseded_by: ''
 supersedes: []
 title: The rate from the machine's own readings — a posterior over declared rates, and the soft channel

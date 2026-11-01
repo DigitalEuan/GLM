@@ -1,0 +1,10 @@
+random rows, 100 trials, T=8192
+right edge equal to +t at every step in every trial: yes
+  t=    64  mean left speed 0.2380   mean right speed 1.0000
+  t=   128  mean left speed 0.2341   mean right speed 1.0000
+  t=   256  mean left speed 0.2375   mean right speed 1.0000
+  t=   512  mean left speed 0.2396   mean right speed 1.0000
+  t=  1024  mean left speed 0.2407   mean right speed 1.0000
+  t=  2048  mean left speed 0.2410   mean right speed 1.0000
+  t=  4096  mean left speed 0.2430   mean right speed 1.0000
+  t=  8192  mean left speed 0.2432   mean right speed 1.0000

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 1. What this round took, and from where
@@ -321,10 +323,9 @@ column is Phase 56's, and what it records is written up in
 ## 10. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools conversation        # the declared set, both controls
-PYTHONPATH=. python3 -m glm_universal.runtime.conversation      # the same, terse
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_conversation.py -q
+PYTHONPATH=src python3 -m glm_universal.tools conversation        # the declared set, both controls
+PYTHONPATH=src python3 -m glm_universal.runtime.conversation      # the same, terse
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_conversation.py -q
 cd .. && lake build RequestProject.GLM.Conversation
 ```
 

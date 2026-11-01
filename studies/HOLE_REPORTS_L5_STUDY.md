@@ -4,13 +4,15 @@
 
 **Question.** Can the three deep-hole reports that still named a hole only with their own rounds' readings — `report hole classifier`, `report hole ladder` and `report hole failures` — answer by the configuration reading `L5` as well, keeping each round's record verbatim, under a frozen-path comparison of the whole evaluation?
 
-**Verdict.** Yes. Each of the three reports keeps its round's answer verbatim and adds what `L5` says to that round's question. For the classifier, the sanity query that stopped the first round holds at `L5` for 10 of 10 seed queries, and all 44 queries are answered correctly. For the ladder, `L5` passes the escalation gate at every one of its 8 measured sizes, already at 240 starts, where the joint reading needed 1920. At 480 starts it passes with ρ above one, which is the global criterion being sufficient but not necessary. For the failures, `L5` answers all four of the joint reading's failures correctly and meets the criterion for 10 of 10 types at 1920 starts. The whole evaluation keeps all 212 statuses, and only the three intended texts moved, each with its old text as its prefix. 6 of 6 measured marks were met, and L1 by the build. Taking column 3 also found that the `report hole ladder` script had never verified, because its template missed one key. That is now fixed.
+**Verdict.** Yes. Each of the three reports keeps its round's answer verbatim and adds what `L5` says to that round's question. For the classifier, the sanity query that stopped the first round holds at `L5` for 10 of 10 seed queries, and all 44 queries are answered correctly. For the ladder, `L5` passes the escalation gate at every one of its 8 measured sizes, already at 240 starts, where the joint reading needed 1920. At 480 starts it passes with ρ above one, which is the global criterion being sufficient but not necessary. For the failures, `L5` answers all four of the joint reading's failures correctly and meets the criterion for 10 of 10 types at 1920 starts. The whole evaluation keeps all 212 statuses, and only the three intended texts moved, each with its old text as its prefix. 6 of 6 measured marks were met, and L1 by the build. Taking column 3 also found that the `report hole ladder` script had never verified, because its template missed one key. That is now fixed. Re-measured on 31 October 2026 (repository check), 4 of the 6 measured marks held at first: Q1 was not met because the answering-path half of the round was lost in the October 2026 reorganisation, so the three reports carried no clause. With that half restored the same day, 5 of the 6 hold: Q1 is met again (3 of 3 clauses, 4 of 4 scripts verify, 8 of 8 mutants rejected), and F1 is not met because its baseline was lost; §7.5 gives the figures.
 
-**Deciding figure.** 6 of 6 measured marks and L1; seed queries 10/10 and 44/44 answered correctly at `L5`; gate at 8/8 sizes, smallest 240 starts, passing with ρ ≥ 1 at 480; 4/4 joint failures answered correctly, 10/10 types certified at 1920 starts (ρ = 0.3048); battery 4/4 answered, 4/4 scripts verify, 8/8 mutants rejected; frozen path 212/212 same status, 209 same text, 3/3 prefixes kept, 0 undeclared.
+**Deciding figure.** 5 of 6 measured marks and L1, re-measured 31 October 2026 (Q1: 3 of 3 clauses, 4 of 4 scripts verify, 8 of 8 mutants rejected; F1: baseline lost); Phase 149 recorded 6 of 6 measured marks; seed queries 10/10 and 44/44 answered correctly at `L5`; gate at 8/8 sizes, smallest 240 starts, passing with ρ ≥ 1 at 480; 4/4 joint failures answered correctly, 10/10 types certified at 1920 starts (ρ = 0.3048); battery 4/4 answered, 4/4 scripts verify, 8/8 mutants rejected; frozen path 212/212 same status, 209 same text, 3/3 prefixes kept, 0 undeclared.
 
 **Recomputed by.** `glm_universal.reasoning.hole_reports_l5_study.hole_reports_l5_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured; 4 of 6 measured marks at first, 5 of 6 once the answering-path half was restored, where Phase 149 recorded 6 of 6 — F1 not met, §7.5; the Phase 149 record is kept as written.)*
 
 ---
 
@@ -169,3 +171,46 @@ escalation round on. The template now recomputes the key, and
 * The 480-start cell is the one place where the gate holds without the global
   criterion. Its per-type criterion holds for 9 of 10 types, so the tenth
   type's self-recognition there is observed, not certified.
+
+### 7.5 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The measurement module, the
+reading module and this round's answering-path half were lost in the October
+2026 reorganisation. The two modules were rebuilt from this document and the
+tests (`reasoning/hole_reports_l5.py`, `reasoning/hole_reports_l5_study.py`),
+and the measurement was taken again (`tools hole-reports-l5 --write`).
+Re-measured on 31 October 2026 (repository check), 4 of the 6 measured marks held at first: Q1 was not met because the answering-path half of the round was lost in the October 2026 reorganisation, so the three reports carried no clause. With that half restored the same day, 5 of the 6 hold: Q1 is met again (3 of 3 clauses, 4 of 4 scripts verify, 8 of 8 mutants rejected), and F1 is not met because its baseline was lost; §7.5 gives the figures.
+
+| mark | result | met |
+|---|---|---|
+| **C1** | seed queries 10 of 10 named as themselves; 44 correct, 0 wrong, 0 refused of 44 (as in §7.1) | yes |
+| **D1** | the gate passes at 8 of 8 sizes, the smallest at 240; at 480 without the global criterion (as in §7.1) | yes |
+| **E1** | the four failures all answered correctly; 10 of 10 types certified at 1920 starts, ρ = 15518751299/50912000095 = 0.3048 (as in §7.1) | yes |
+| **R1** | 44 queries inside their own radius, 44 answered (as in §7.1) | yes |
+| **Q1** | first re-take: 4 of 4 reports answered, 0 of 3 with the clause; 3 of 4 scripts verify (the `report hole ladder` script fails again: its template lacks `winner_is_extension`, the defect of §7.3); 4 of 8 mutants rejected (the three clause keys are absent, so their mutants cannot be formed, and the ladder's script does not verify). Re-taken after the answering-path half was restored: 4 of 4 answered, 3 of 3 with the clause, 4 of 4 scripts verify, 8 of 8 mutants rejected, 0 unformed | no → yes |
+| **F1** | not measured: `reasoning/_data/hole_l5_baseline.json`, the baseline frozen before the answering-path edit, was lost in the October 2026 reorganisation; a new baseline needs a frozen-path comparison before the answering path moves again | no |
+
+So **Q1 and F1 not met**. Q1 comes back when the answering-path half is
+restored: the three reports in `runtime/reports/lattice_geometry.py` appending
+the clauses of `reasoning/hole_reports_l5.py`, and the column-3 templates in
+`runtime/tct_engine.py` recomputing the `l5_*` keys and `winner_is_extension`.
+F1 cannot come back as recorded: the baseline is gone, and one taken now would
+compare the answering path with itself.
+
+*Added 31 October 2026 (repository check: re-measured).* The answering-path
+half was restored the same day: the three reports in
+`runtime/reports/lattice_geometry.py` append the clauses of
+`reasoning/hole_reports_l5.py`, and the column-3 templates in
+`runtime/tct_engine.py` recompute the `l5_*` keys and `winner_is_extension`.
+The measurement was taken again (`tools hole-reports-l5 --write`):
+
+| figure | first re-take | after the restoration |
+|---|---|---|
+| reports with the clause | 0 of 3 | 3 of 3 |
+| column-3 scripts verifying | 3 of 4 | 4 of 4 |
+| mutants rejected | 4 of 8 (3 unformed) | 8 of 8 (0 unformed) |
+| Q1 | not met | met |
+| measured marks met | 4 of 6 | 5 of 6 |
+
+C1, D1, E1 and R1 are unchanged. So **F1 alone is not met**, for the reason
+above.

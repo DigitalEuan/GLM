@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 ```
 language/
@@ -222,10 +224,9 @@ an optional way of saying the equation out loud.
 ## Reachable as
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report language" --verify-tct
-PYTHONPATH=. python3 GLM.py -q "derive span_ratio of tea"
-PYTHONPATH=. python3 GLM.py -q "please measure hot in tea"
+PYTHONPATH=src python3 src/GLM.py -q "report language" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "derive span_ratio of tea"
+PYTHONPATH=src python3 src/GLM.py -q "please measure hot in tea"
 ```
 
 ## Where the rest of it is

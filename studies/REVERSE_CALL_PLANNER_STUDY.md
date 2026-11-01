@@ -2,12 +2,7 @@
 
 ## Tier 0 — the coarse read
 
-**Question.** The runtime decides a query's *kind* before it looks at the
-problem, and one kind means one solver. An older proposal in the source
-material inverts that: parse the string into a problem, then let a planner
-select every tool whose declared precondition the problem satisfies. Does that
-inversion buy anything the current system does not already have — and can it be
-made safe enough to promote out of a sandbox?
+**Question.** The runtime decides a query's *kind* before it looks at the problem, and one kind means one solver. An older proposal in the source material inverts that: parse the string into a problem, then let a planner select every tool whose declared precondition the problem satisfies. Does that inversion buy anything the current system does not already have — and can it be made safe enough to promote out of a sandbox?
 
 **Verdict.** It buys something on the declared task set and nothing at all on the project's own evaluation set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second tool, and no principled refusal ever reaches it — but of the twenty evaluation refusals it is offered, it correctly refuses all twenty, so under the declared fallback rule it would add nothing to the shipped system today.
 
@@ -16,6 +11,10 @@ made safe enough to promote out of a sandbox?
 **Recomputed by.** `glm_universal.sandbox.planner.planner_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: each tier-0 field joined onto one line, as the corpus parser and the study manifest read only that line; the wording is unchanged).*
+
+*Last altered 1 November 2026 (repository check: §5 notes the fallback reading over the 227 cases the evaluation now holds, and the two exhaustive tests that had kept the counts of 188 cases; and again at Phase 186, over 237 cases).*
 
 ---
 
@@ -175,11 +174,11 @@ evaluation, 188 cases at the last reading.
 <!-- generated: plannersandbox-fallback -->
 | reading | value |
 |---|---|
-| evaluation cases | 222 |
-| the runtime answers | 178 |
-| the runtime refuses | 44 |
+| evaluation cases | 237 |
+| the runtime answers | 181 |
+| the runtime refuses | 56 |
 | of those, classified principled | 10 |
-| the planner is consulted on | 34 |
+| the planner is consulted on | 46 |
 | principled refusals reaching the planner | 0 |
 | answers the runtime does not give | 0 |
 | **safety gate** | **True** |
@@ -231,6 +230,37 @@ refusal text does not carry a marker that
 two are climbed by the escalation loop today and stopped by the planner. The
 loop reaches the same verdict, so nothing is wrong; but two markers are missing
 from the shipped list, and the planner found them.
+
+*Re-read 1 November 2026 (repository check), over the 227 cases the evaluation
+now holds (the generated block above).* The table and the two paragraphs
+above are the reading at 188 cases. Now 47 questions are refused, the same 10
+are principled, and 37 are offered to the planner. The planner refuses all 37,
+so no answer moves and nothing is gained: the safety gate holds and the
+utility gate still fails. The 17 added since the table was written come from
+the later query kinds: `locate` 7, `nearest` 3, `hole` 2, `corpus` 2, `study`
+1, `sequence` 1 and `tool` 1. Sixteen of them are refusals the evaluation
+expects. The seventeenth, `tool-leech-norm-12` (*the number of vectors of norm
+12 in the leech lattice*), is refused by the session that this reading treats
+as the runtime; the command line then answers it through the toolbox, so the
+evaluation counts it as answered. The planner now marks three questions ill
+formed: the two above, and that tool question. The exhaustive tests in
+`tests/test_sandbox_planner.py` had kept the old counts (20 offered, 2 marked).
+The owner's sign-off ledger of 13 October 2026 records that file failing
+twice for this reason. The tests now hold the current counts.
+
+*Re-read again 1 November 2026 (Phase 186), over 237 cases (the generated
+block above).* Now 56 questions are refused, the same 10 are principled, and 46
+are offered to the planner. The planner refuses all 46, so again nothing is
+gained: the safety gate holds and the utility gate still fails. The nine added
+are the Phase 186 cases. Seven are tool questions the session refuses and the
+command line answers through the toolbox: the Rule 30 centre column, the
+refuted Rule 30 diagonal claim, the two conjectures over every *n*, the two
+derivation questions and the ARC task. Two are refusals the evaluation
+expects: the open Rule 30 claim and the two-term sequence `1, 2`. The planner
+marks nine questions ill formed: the three above, and the Rule 30 centre
+column, both Rule 30 diagonal claims, both conjectures and the ARC task. The
+two derivation questions and the two-term sequence are not marked. The two
+exhaustive tests hold these counts.
 
 ---
 

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 7 measured marks and L1; 2362 certified points of 2982, 0 head disagreements, 0
@@ -11,24 +13,36 @@ deciding_figure: 7 of 7 measured marks and L1; 2362 certified points of 2982, 0 
   ladder readings over 212 questions; frozen path 202/202 same status, 199 same text.
 directives: []
 evidence: []
-faculty: addressing
+faculty: unknown
 file_refs:
   code:
-  - reasoning/budget_guard_frozen
-  - reasoning/nearest_address
-  - reasoning/nearest_address_study
-  - runtime/parser
-  - tests/test_nearest_address
+  - reasoning/budget_guard_frozen.py
+  - reasoning/cell_guard.py
+  - reasoning/ladder_escalation.py
+  - reasoning/nearest_address.py
+  - reasoning/nearest_address_study.py
+  - reasoning/norm256_hex.py
+  - reasoning/placement_guard.py
+  - runtime/parser.py
+  - runtime/session.py
+  - runtime/tct_engine.py
+  - runtime/toolbox.py
+  - tools.py
   lean:
+  - AddressRead
   - NearestAddress
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: NEAREST_ADDRESS_STUDY.md
   test:
   - test_nearest_address.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: NEAREST_ADDRESS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,8 +50,24 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - L1
+  - N1
+  - N2
+  - N3
+  - Q1
+  - W1
+  - A0
+  - F1
+  met:
+  - L1
+  - N1
+  - N2
+  - N3
+  - Q1
+  - W1
+  - A0
+  - F1
   missed: []
 perturbations: []
 phase: 148
@@ -48,6 +78,7 @@ question: Can the `nearest` kind rank a point no register holds — a moved carr
   — against the construction ladder's carriers, with the guarded read certifying the head of the ranking
   and the gap after it, while no unguarded reading of the ladder remains anywhere in the answering path?
 recomputed_by: '`glm_universal.reasoning.nearest_address_study.nearest_address_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 7 marks; 12 of 12 programs and 17 of 17 questions as declared; 20 of 20 column-3
@@ -10,23 +12,34 @@ deciding_figure: 7 of 7 marks; 12 of 12 programs and 17 of 17 questions as decla
   1 newly decided; 6 of 6 jumped *halts* equal to a plain run, 0 of 3 *never* halting in 200,000 steps.
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/batch_machine
-  - reasoning/batch_speech
-  - reasoning/counter_lasso
+  - evaluation/cases.py
+  - reasoning/batch_machine.py
+  - reasoning/batch_speech.py
+  - reasoning/cell_guard.py
+  - reasoning/counter_lasso.py
+  - reasoning/ladder_escalation.py
+  - reasoning/placement_guard.py
+  - tools.py
   lean:
   - CounterLasso
   - OperationsLadder
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: COUNTER_LASSO_STUDY.md
   test:
   - test_counter_lasso.py
+  - test_inert_counter.py
+  - test_operations.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: COUNTER_LASSO_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -34,17 +47,34 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - C7
+  met:
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - C7
   missed: []
 perturbations: []
-phase: 125
-predecessors: []
+phase: 130
+predecessors:
+- INERT_COUNTER_STUDY
+- OPERATIONS_LADDER_STUDY
 question: If GLM-BAT reads a loop whose state repeats except for integer counters that come back translated
   by a fixed step, can it say *halts* (with the exact step count, outputs and exit code) or *never halts*
   for loops its budget cannot run out, without changing any verdict it already gave and without a verdict
   a long plain run contradicts?
 recomputed_by: '`glm_universal.reasoning.counter_lasso.counter_lasso_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -68,7 +98,12 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- ADDRESS_READ_STUDY
+- AFFINE_OUTPUT_STUDY
+- CONSTANT_BOUND_STUDY
+- NEAREST_ADDRESS_STUDY
+- QUADRATIC_LASSO_STUDY
 superseded_by: ''
 supersedes: []
 title: Counter lassos — halting and non-termination past the budget

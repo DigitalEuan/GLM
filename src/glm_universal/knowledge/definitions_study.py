@@ -1,17 +1,31 @@
-"""``glm_universal.knowledge.definitions_study`` -- Phase 155's measurement of ``corpus define`` against the held-out glossary (pattern ranking G1-G4, context ranking G1'-G4') and the word-on-Leech-lattice experiment (W1-W4, W2', W3').  8 marks + 6 amended marks.
+"""``glm_universal.knowledge.definitions_study`` -- the measurement of Phase 155.
 
-*Reconstructed 29 October 2026 (Iteration 4 of the reorganisation).  The
-original ``definitions_study.py`` was lost in the upload; this version is a working
-stub that exposes the standard 8-function study apparatus.  The stored
-measurement JSON (``_data/corpus_definitions.json``) does not exist, so the report
-function returns ``available=False``; the CLI subcommand ``corpus-definitions``
-prints the re-take instruction and exits 1.  When the full corpus
-infrastructure is restored, run ``tools corpus-definitions --write`` to take
-the measurement.*
+``studies/CORPUS_DEFINITIONS_STUDY.md``: ``corpus define`` graded against the
+held-out glossary of the paper (:mod:`~glm_universal.knowledge.glossary`) --
+G1-G4 under define's own (pattern) ranking and the amended G1'-G4' under the
+context ranking -- and a word's place on the Leech lattice
+(:mod:`~glm_universal.knowledge.word_address`) -- W1-W4 under the window
+scheme and the amended W2', W3' under the positional scheme.  8 marks and 6
+amended marks.
+
+:func:`compute` takes the measurement from the corpus as it now is (a minute
+or two: two address books and 54 graded definitions).  Nothing here writes:
+the stored measurement (``_data/corpus_definitions.json``) is written only by
+``tools corpus-definitions --write``, and :func:`corpus_definitions_report`
+reports it absent or stale when it is.
+
+*Created 31 October 2026 (repository check).*
+
+*Reconstructed 31 October 2026 (repository check): the original was lost in
+the October 2026 reorganisation (the 29 October placeholder returned every
+mark false); rebuilt from studies/CORPUS_DEFINITIONS_STUDY.md §§2 and 7,
+MASTER_PLAN.md Phase 155 and the report shape read by tools.py
+``_corpus_definitions``.*
 """
 from __future__ import annotations
 
 import json
+from fractions import Fraction
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -29,6 +43,7 @@ DATA_PATH = _HERE / "_data" / "corpus_definitions.json"
 
 _SOURCES: Tuple[str, ...] = (
     "knowledge/definitions_study.py",
+    "knowledge/answer.py",
     "knowledge/glossary.py",
     "knowledge/word_address.py",
     "knowledge/model.py",
@@ -49,26 +64,47 @@ def _plain(x: Any) -> Any:
     return x
 
 
-from fractions import Fraction
-
-
 def compute(knowledge: Any = None) -> Dict[str, object]:
-    """Run the measurement and return the report dict.
-
-    *Working stub.*  Returns the report dict shape with all marks
-    ``False``, so the stored JSON (when it exists) carries the true
-    marks and the CLI handler can pretty-print them.
-    """
-    marks: Dict[str, bool] = {m: False for m in ("G1", "G2", "G3", "G4", "W1", "W2", "W3", "W4",)}
+    """Take the Phase 155 measurement from the corpus as it now is."""
+    from . import glossary as gl
+    from . import model as mdl
+    from . import word_address as wa
+    knowledge = mdl.load() if knowledge is None else knowledge
+    removed = gl.held_out_ids(knowledge)
+    held = gl.hold_out(knowledge)
+    graded = gl.grade_definitions(held, "pattern")
+    graded_context = gl.grade_definitions(held, "context")
+    words = wa.compute(knowledge, "window")
+    words_positional = wa.compute(knowledge, "positional")
+    g = gl.marks(graded)
+    gc = gl.marks(graded_context)
+    marks: Dict[str, bool] = {
+        "G1": g["G1"], "G2": g["G2"], "G3": g["G3"], "G4": g["G4"],
+        "W1": words["marks"]["W1"], "W2": words["marks"]["W2"],
+        "W3": words["marks"]["W3"], "W4": words["marks"]["W4"],
+    }
+    amended: Dict[str, bool] = {
+        "G1'": gc["G1"], "G2'": gc["G2"], "G3'": gc["G3"], "G4'": gc["G4"],
+        "W2'": words_positional["marks"]["W2"], "W3'": words_positional["marks"]["W3"],
+    }
     return {
-        "graded": {"total_grade": 0, "control_total": 0, "wins": 0, "losses": 0, "agree": 0, "terms": 0, "agree_top": 0, "mismatched_total": 0},
-        "graded_context": {"total_grade": 0, "control_total": 0, "wins": 0, "losses": 0, "agree": 0, "terms": 0, "agree_top": 0, "mismatched_total": 0},
-        "words": {"words": 0, "distinct_addresses": 0, "readback": 0, "number_share": 0, "number_control_share": 0, "plural_hits": 0, "pairs": 0, "plural_control_hits": 0},
-        "words_positional": {"words": 0, "distinct_addresses": 0, "readback": 0, "number_share": 0, "number_control_share": 0, "plural_hits": 0, "pairs": 0, "plural_control_hits": 0},
-
+        "corpus": {"documents": len(knowledge.documents),
+                   "sentences": len(knowledge.sentences),
+                   "digest": knowledge.digest},
+        "glossary": {"terms": len(gl.GLOSSARY), "held_out": len(removed),
+                     "held_out_addresses": [knowledge.sentences[i].address
+                                            for i in removed],
+                     "leaks": graded["leaks"] + graded_context["leaks"]},
+        "graded": graded,
+        "graded_context": graded_context,
+        "words": words,
+        "words_positional": words_positional,
         "marks": marks,
         "met": sum(1 for v in marks.values() if v),
         "taken": len(marks),
+        "amended": amended,
+        "amended_met": sum(1 for v in amended.values() if v),
+        "amended_taken": len(amended),
     }
 
 
@@ -127,13 +163,18 @@ def current() -> Optional[Dict[str, object]]:
 
 
 def corpus_definitions_report() -> Dict[str, object]:
+    """If fresh: the stored measurement with ``available=True``.  Else: why
+    not (absent or stale) and the command that re-takes it; the live
+    figures are :func:`compute`'s."""
     stored = current()
     if stored is not None:
         out = dict(stored)
         out["available"] = True
         return out
+    verdict = state()["verdict"]
     return {
         "available": False,
-        "reason": (f"the stored measurement is absent; re-take it with "
+        "verdict": verdict,
+        "reason": (f"the stored measurement is {verdict}; re-take it with "
                    f"python3 -m glm_universal.tools corpus-definitions --write"),
     }

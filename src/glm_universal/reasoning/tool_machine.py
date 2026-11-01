@@ -82,7 +82,8 @@ from typing import List, Mapping, Optional, Sequence, Tuple
 __all__ = [
     "ON", "LEAN_FILE", "LEAN_THEOREMS", "E_TERMS", "SQRT_SCALE", "PI_LOW",
     "PI_HIGH", "PI_SUMMED", "PI_TERMS", "PI_LEAN_FILE", "PI_LEAN_THEOREMS",
-    "pi_ends", "pi_lines", "Unsaid", "handles", "parse_tool", "enclosure_kind",
+    "pi_ends", "pi_lines", "Unsaid", "handles", "parse_tool", "parse_word",
+    "enclosure_kind",
     "numeric", "verdict", "choose_or_first", "subroutines", "TOOL_KINDS",
 ]
 
@@ -180,12 +181,30 @@ def parse_tool(text: str) -> Optional[Tuple[str, Tuple[object, ...]]]:
         return "llvq", ()
     m = re.match(r"^tool gates\s+(\S+)\s+to\s+(\S+)$", t, re.IGNORECASE)
     if m:
-        from ..runtime.toolbox import _parse_word
-        a, c = _parse_word(m.group(1)), _parse_word(m.group(2))
+        a, c = parse_word(m.group(1)), parse_word(m.group(2))
         if a is None or c is None:
             return None
         return "gates", (a, c)
     return None
+
+
+def parse_word(text: str) -> Optional[int]:
+    """A 24-bit word as ``tool gates`` reads it: ``0x..``, ``#..`` (hex),
+    ``0b..`` (binary) or decimal, underscores ignored; ``None`` when it does
+    not parse or is outside ``[0, 2**24)``.  (The toolbox's rule, held here
+    since 31 October 2026 so that this module does not import the toolbox;
+    :mod:`glm_universal.runtime.toolbox` re-exports it as ``_parse_word``.)"""
+    t = text.strip().lower().replace("_", "")
+    try:
+        if t.startswith("0x") or t.startswith("#"):
+            value = int(t.lstrip("#")[2:] if t.startswith("0x") else t[1:], 16)
+        elif t.startswith("0b"):
+            value = int(t[2:], 2)
+        else:
+            value = int(t)
+    except ValueError:
+        return None
+    return value if 0 <= value < (1 << 24) else None
 
 
 def enclosure_kind(expr: str) -> Optional[Tuple[str, int]]:

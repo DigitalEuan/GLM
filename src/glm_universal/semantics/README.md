@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 ```
 semantics/
@@ -127,10 +129,10 @@ two / four       : divides           -- 2 divides 4: 4 = 2 * 2
 ## Using it
 
 ```bash
-PYTHONPATH=. python3 GLM.py -q "meaning of water"
-PYTHONPATH=. python3 GLM.py -q "relate energy torque"
-PYTHONPATH=. python3 GLM.py -q "report semantics"
-PYTHONPATH=. python3 glm_universal/examples/semantic_replacement.py
+PYTHONPATH=src python3 src/GLM.py -q "meaning of water"
+PYTHONPATH=src python3 src/GLM.py -q "relate energy torque"
+PYTHONPATH=src python3 src/GLM.py -q "report semantics"
+PYTHONPATH=src python3 src/glm_universal/examples/semantic_replacement.py
 ```
 
 ```python

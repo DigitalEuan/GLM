@@ -29,6 +29,10 @@ Two phrasings (``h11``, ``h12``) say *a prime*; the stepwise reader's
 pattern ``is (.+) (?:a )?prime`` captured *… a* greedily, which was seen in
 exploration before this set was written and is fixed in the same round, so
 those two are declared as known, not held out.
+
+*Last altered 31 October 2026 (repository check: the measurement's timings
+read with ``time.monotonic_ns`` and rendered exactly by ``_elapsed``, in
+place of the float clock ``time.perf_counter``; D7).*
 """
 
 from __future__ import annotations
@@ -146,6 +150,24 @@ def _tampered(cert: dict) -> List[Tuple[str, dict]]:
         out.append(("cert-other", c))
     return out
 
+
+
+def _elapsed(start_ns: int, places: int, end_ns: "int | None" = None) -> str:
+    """Seconds since ``start_ns`` (a :func:`time.monotonic_ns` reading) as an
+    exact decimal string rounded half up to ``places`` places -- the clock
+    read in integers, so no float is constructed (D7).
+
+    *Added 31 October 2026 (repository check): the timings were taken with
+    ``time.perf_counter()``, a float clock the D7/D9 float inventory
+    (``reasoning/exactness.py``) does not declare here.*
+    """
+    import time
+    end = time.monotonic_ns() if end_ns is None else end_ns
+    unit = 10 ** (9 - places)
+    q = (end - start_ns + unit // 2) // unit
+    if places == 0:
+        return str(q)
+    return f"{q // 10 ** places}.{q % 10 ** places:0{places}d}"
 
 def measure(scripts: bool = True) -> dict:
     """The marks P1-P6."""
@@ -265,7 +287,7 @@ def measure(scripts: bool = True) -> dict:
     scale = []
     for p in MERSENNE_PRIME_EXPONENTS:
         n = 2 ** p - 1
-        t0 = time.perf_counter()
+        t0 = time.monotonic_ns()
         try:
             v, cert = pc.verdict(n)
             row = {"n": f"2^{p}-1", "want": "prime", "got": v,
@@ -274,14 +296,14 @@ def measure(scripts: bool = True) -> dict:
         except pc.NoCertificate as exc:
             row = {"n": f"2^{p}-1", "want": "prime", "got": "refuse",
                    "cofactor_digits": len(str(exc.cofactor))}
-        row["seconds"] = round(time.perf_counter() - t0, 3)
+        row["seconds"] = _elapsed(t0, 3)
         scale.append(row)
     for name, n in LARGE_COMPOSITES:
-        t0 = time.perf_counter()
+        t0 = time.monotonic_ns()
         v, cert = pc.verdict(n)
         scale.append({"n": name, "want": "not prime", "got": v,
                       "kind": cert["kind"],
-                      "seconds": round(time.perf_counter() - t0, 3)})
+                      "seconds": _elapsed(t0, 3)})
     wrong6 = [r for r in scale if r["got"] not in ("refuse", r["want"])]
     certified = [r for r in scale if r["got"] == r["want"]]
     marks["P6"] = {"cases": len(scale), "certified": len(certified),

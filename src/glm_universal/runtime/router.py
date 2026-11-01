@@ -1,5 +1,9 @@
 """``glm_universal.runtime.router`` -- one question path to every surface.
 
+*Last altered 31 October 2026 (repository check: text the lookup kinds
+``corpus``, ``study`` and ``sequence`` claim is sent to the planner before
+the frames are consulted).*
+
 The rule
 --------
 The surfaces of :data:`glm_universal.runtime.toolbox.SURFACES` are tried in
@@ -40,7 +44,12 @@ The readers
                  of rational distributions, ...); every reading's column-3
                  script is run under ``python3 -I`` before it is output;
 ``engineering``  a question one of its frames reads;
-``planner``      everything else.  When the planner and the grammar both
+``planner``      text one of the lookup kinds ``corpus``, ``study`` or
+                 ``sequence`` claims (:mod:`glm_universal.runtime.
+                 lookup_kinds`), before any frame is consulted -- *what does
+                 FOLD_MACHINE_STUDY depend on* is a question about a study,
+                 not about a Lean declaration (added 31 October 2026); and
+                 everything else.  When the planner and the grammar both
                  refuse, the stepwise planner
                  (:mod:`glm_universal.runtime.stepwise`) reads the text as a
                  chain of planner steps -- composition, goals over the
@@ -139,6 +148,11 @@ def reader_of(text: str) -> str:
         return "reverse"
     if python_reads(text):
         return "python"
+    # 31 October 2026 (repository check): a text a lookup kind claims goes
+    # to the planner, whose rule 0 reads it, before a frame can take it.
+    from .lookup_kinds import claimed_kind
+    if claimed_kind(text) in ("corpus", "study", "sequence"):
+        return "planner"
     if FRAMES:
         from .planner_bridge import frame_of
         if frame_of(text) is not None:

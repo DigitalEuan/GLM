@@ -22,6 +22,10 @@ What belongs here, and nowhere else:
 Everything here is pure except :func:`run_one`. Nothing imports the modules it
 hashes — the closure is computed from the source with :mod:`ast`, so hashing a
 module cannot execute it.
+
+*Last altered 31 October 2026 (repository check): a unit's environment puts
+``src/`` on ``PYTHONPATH`` (the package moved there in the reorganisation);
+the Lean root comment names ``src/lean``.*
 """
 
 from __future__ import annotations
@@ -555,8 +559,9 @@ REPOSITORY_ROOT = PROJECT_ROOT
 #: Non-source files that can be a dependency, by suffix.
 DOCUMENT_SUFFIXES = (".md", ".txt")
 
-#: Where the Lean development lives.  There is one copy, ``glm_lean``;
-#: the repository's ``lakefile.toml`` builds it in place (``srcDir``).
+#: Where the Lean development lives.  There is one copy, ``src/lean`` (it was
+#: ``glm_lean`` before the October 2026 reorganisation); the repository's
+#: ``lakefile.toml`` builds it in place (``srcDir``).
 LEAN_ROOTS = (PROJECT_ROOT / "src" / "lean",)
 
 #: Build files that decide what ``lake build`` does.
@@ -779,6 +784,13 @@ def _uses_docstrings(source: str) -> bool:
         return True                     # unreadable: over-hash (D4)
     wanted = {"__doc__", "get_docstring"}
     for node in ast.walk(tree):
+        #  Assigning a docstring (``f.__doc__ = "..."``) writes it; it is
+        #  not a read (31 October 2026, repository check: the absorbed
+        #  wheels set their provisions' docstrings, and reading that as a
+        #  docstring reader put every document any docstring mentions into
+        #  the closure of every session).
+        if isinstance(getattr(node, "ctx", None), (ast.Store, ast.Del)):
+            continue
         if isinstance(node, ast.Attribute) and node.attr in wanted:
             return True
         if isinstance(node, ast.Name) and node.id in wanted:
@@ -836,6 +848,27 @@ def lean_index() -> Dict[str, Tuple[Path, ...]]:
     return _lean_index_cache
 
 
+def _lean_path_exact(token: str) -> Optional[Path]:
+    """The one Lean source a path token names, or ``None``.
+
+    The token is tried below each of :data:`LEAN_ROOTS` as written, from its
+    ``RequestProject/`` component on, and relative to ``RequestProject/GLM``
+    (the form :func:`glm_universal.constants.lean_file` accepts).
+    """
+    sources = set(lean_sources())
+    token = token.lstrip("./")
+    tails = [token]
+    if "RequestProject/" in token:
+        tails.append(token[token.index("RequestProject/"):])
+    for root in LEAN_ROOTS:
+        for tail in tails:
+            for base in (root, root / "RequestProject" / "GLM"):
+                candidate = (base / tail).resolve()
+                if candidate in sources:
+                    return candidate
+    return None
+
+
 def referenced_documents(paths: Iterable[Path]) -> Tuple[Path, ...]:
     """Documents and Lean sources named by the string constants of ``paths``.
 
@@ -861,9 +894,18 @@ def referenced_documents(paths: Iterable[Path]) -> Tuple[Path, ...]:
         for cleaned in _name_tokens(source, docstrings=docstrings):
             name = cleaned.rsplit("/", 1)[-1]
             if name.endswith(".lean"):
-                #  Resolved by name, whether the token was a bare name
-                #  or a path: there is one copy of the development.
-                if name in lean:
+                #  A path token names one file when it resolves to one
+                #  (``"RequestProject/GLM/Shortcut/Golay.lean"``); a bare
+                #  name, or a path that does not resolve, takes every file
+                #  of that name -- five names repeat in different folders
+                #  since the October 2026 reorganisation (``Golay.lean``,
+                #  ``Leech.lean``, ``Niemeier.lean``, ``Permutation.lean``,
+                #  ``Wobble.lean``), so resolving by name alone would pull
+                #  in both copies for a token that names one.
+                exact = _lean_path_exact(cleaned) if "/" in cleaned else None
+                if exact is not None:
+                    out.add(exact)
+                elif name in lean:
                     out.update(lean[name])
                 elif "*" in name or name == ".lean":
                     wants_lean = True
@@ -1048,6 +1090,13 @@ def _parse_pytest_summary(text: str) -> Dict[str, int]:
 def run_environment(exhaustive: bool) -> Dict[str, str]:
     """The environment a unit runs in: this one, plus the exhaustive switch."""
     env = dict(os.environ)
+    # The package lives under ``src/`` since the October 2026 reorganisation;
+    # a unit run from the repository root must still import it (added 31
+    # October 2026).
+    src = str(PACKAGE_ROOT.parent)
+    paths = [p for p in env.get("PYTHONPATH", "").split(os.pathsep) if p]
+    if src not in paths:
+        env["PYTHONPATH"] = os.pathsep.join([src] + paths)
     if exhaustive:
         env[EXHAUSTIVE_ENV] = "1"
     else:

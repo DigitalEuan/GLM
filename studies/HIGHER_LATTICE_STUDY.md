@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 6 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *What the machine gains by climbing above the Leech lattice, and what it has to
 give up to get there. The 32-dimensional Barnes–Wall rung and its
 three-resolution address; the 48-dimensional ternary rung and its factor of
@@ -20,14 +22,14 @@ three-resolution address; the 48-dimensional ternary rung and its factor of
 the alphabet is a sphere rather than a ball.*
 
 Code:
-[`glm_universal/substrate/lattice32.py`](../glm_universal/substrate/lattice32.py),
-[`glm_universal/substrate/lattice48.py`](../glm_universal/substrate/lattice48.py),
-[`glm_universal/reasoning/higher_lattices.py`](../glm_universal/reasoning/higher_lattices.py),
-[`glm_universal/reasoning/shell_sigma.py`](../glm_universal/reasoning/shell_sigma.py).
+[`glm_universal/substrate/lattice32.py`](../src/glm_universal/substrate/lattice32.py),
+[`glm_universal/substrate/lattice48.py`](../src/glm_universal/substrate/lattice48.py),
+[`glm_universal/reasoning/higher_lattices.py`](../src/glm_universal/reasoning/higher_lattices.py),
+[`glm_universal/reasoning/shell_sigma.py`](../src/glm_universal/reasoning/shell_sigma.py).
 Queries: `report lattices`, `report shells`.
 Formal development:
-[`RequestProject/GLM/HigherLattices.lean`](../glm_lean/RequestProject/GLM/HigherLattices.lean),
-[`RequestProject/GLM/ShellSigma.lean`](../glm_lean/RequestProject/GLM/ShellSigma.lean).
+[`RequestProject/GLM/HigherLattices.lean`](../src/lean/RequestProject/GLM/HigherLattices.lean),
+[`RequestProject/GLM/ShellSigma.lean`](../src/lean/RequestProject/GLM/ShellSigma.lean).
 Tests: `glm_universal/tests/test_lattice32.py`,
 `test_lattice48.py`, `test_higher_lattices.py`, `test_shell_sigma.py`.
 
@@ -431,20 +433,19 @@ inside the proved bound at every temperature.
 ## 7. Reproducing every number here
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report lattices" --no-banner
-PYTHONPATH=. python3 GLM.py -q "report shells"   --no-banner
+PYTHONPATH=src python3 src/GLM.py -q "report lattices" --no-banner
+PYTHONPATH=src python3 src/GLM.py -q "report shells"   --no-banner
 
 # with column-3 verification (slower: a fresh interpreter per subject)
-PYTHONPATH=. python3 GLM.py -q "report lattices" --verify-tct --no-banner
-PYTHONPATH=. python3 GLM.py -q "report shells"   --verify-tct --no-banner
+PYTHONPATH=src python3 src/GLM.py -q "report lattices" --verify-tct --no-banner
+PYTHONPATH=src python3 src/GLM.py -q "report shells"   --verify-tct --no-banner
 
 # the exhaustive certificates, opt-in
-PYTHONPATH=. python3 -c "from glm_universal.substrate import lattice48 as l; \
+PYTHONPATH=src python3 -c "from glm_universal.substrate import lattice48 as l; \
     print(l.lattice48_report(exhaustive=True)['full_weight_census'])"
 
 # the tests
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_lattice32.py \
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_lattice32.py \
     glm_universal/tests/test_lattice48.py \
     glm_universal/tests/test_higher_lattices.py \
     glm_universal/tests/test_shell_sigma.py -q

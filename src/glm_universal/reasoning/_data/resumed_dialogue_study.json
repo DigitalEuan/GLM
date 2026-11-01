@@ -50,12 +50,12 @@
  },
  "R4": {
   "asked": 48,
-  "read": 19,
+  "read": 13,
   "to_first": 0
  },
  "R5": {
   "read": [],
-  "tried": 4683
+  "tried": 4977
  },
  "R6": {
   "first_false": 13,
@@ -70,6 +70,7 @@
  "lean": {
   "declared": 10,
   "file": "RequestProject/GLM/ResumedDialogue.lean",
+  "held": true,
   "met": true,
   "sorry": 0,
   "theorems": 10
@@ -90,7 +91,7 @@
   "nearest": 48
  },
  "met": 9,
- "source_digest": "424bd03cf7f8cf1d1d276b21c34af54ece7e7ef048eb885dfc6dc15f9dd2040a",
+ "source_digest": "64da285ccf7c5c4bd0642ad6239998898a41fe6bde210cf0368b72e24e3827f5",
  "taken": 9,
  "ties": {
   "locate": 3,

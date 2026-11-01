@@ -1,0 +1,26 @@
+Local-rule induction on 50 stored ARC tasks
+
+mode ladder    RIGHT  1  WRONG  0  REFUSED 49
+   a85d4709   RIGHT reader=row3
+
+mode listened  RIGHT  1  WRONG  0  REFUSED 49
+   a85d4709   RIGHT reader=row3
+
+mode guess     RIGHT  1  WRONG 16  REFUSED 33
+   1e0a9b12   WRONG reader=rays4 (guessed)
+   1f642eb9   WRONG reader=blind-rays8 (guessed)
+   2bcee788   WRONG reader=moore2 (guessed)
+   3345333e   WRONG reader=mask5x5 (guessed)
+   36d67576   WRONG reader=mask5x5 (guessed)
+   396d80d7   WRONG reader=moore1 (guessed)
+   45737921   WRONG reader=raymask8 (guessed)
+   46c35fc7   WRONG reader=moore1 (guessed)
+   484b58aa   WRONG reader=rays8 (guessed)
+   50846271   WRONG reader=mask5x5 (guessed)
+   575b1a71   WRONG reader=mask5x5 (guessed)
+   712bf12e   WRONG reader=mask5x5 (guessed)
+   782b5218   WRONG reader=mask5x5 (guessed)
+   9caf5b84   WRONG reader=vn1 (guessed)
+   a85d4709   RIGHT reader=row3 (guessed)
+   ae58858e   WRONG reader=mask5x5 (guessed)
+   d43fd935   WRONG reader=rays4 (guessed)

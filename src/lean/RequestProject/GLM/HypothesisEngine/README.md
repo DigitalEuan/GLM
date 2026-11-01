@@ -1,5 +1,21 @@
 # GLM Hypothesis Engine — the portable module
 
+## Tier 0 — the coarse read
+
+**Question.** What does the GLM Hypothesis Engine's portable module hold, what contract does the engine keep, and what did it give on the eight benchmark problems with known answers?
+
+**Verdict.** The engine's core is not specific to Rule 30: a puzzle supplies an indexed family of exact invariants, the core never sees the answer and never uses floats, and the engine never says "proved"; only the prover does.
+
+**Deciding figure.** The eight benchmark problems, each with the engine's final statement and the Lean theorems that check it (the table of results).
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: this tier-0 block added so that the document keeps the corpus's tier contract like the other `RULE30_*` documents; the text below the rule is unchanged).*
+
+---
+
 The engine began as a Rule 30 tool (Rounds 38–39, `../Rule30/HYPOTHESIS_ENGINE.md`), but its core
 is not specific to Rule 30. This folder holds the parts meant to move into the GLM for other
 investigations: the Lean checks of the engine's verdicts on problems other than Rule 30, and this

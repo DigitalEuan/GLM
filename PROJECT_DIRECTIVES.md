@@ -134,7 +134,7 @@ it. It is on the close checklist of [`ITERATE.md`](ITERATE.md) §4.1.
 
 **Standing rules for anyone — person or machine — working on this repository.**
 
-These are not style preferences. There are <!--figure:directive-count-->19<!--/figure-->
+These are not style preferences. There are <!--figure:directive-count-->22<!--/figure-->
 of them, and each one exists because ignoring it has cost
 this project time or fidelity; each one names the **instrument** that
 enforces it, so that a directive can be checked rather than remembered.
@@ -161,9 +161,12 @@ if this file and the module disagree.
 | D14 | Something not yet relied on lives in the sandbox, with a computed promotion checklist. | `glm_universal.sandbox.planner`, `tests/test_sandbox_planner.py` |
 | D15 | A round says which of derivation, addressing and refusal it moved, or that it moved none. | `glm_universal.reasoning.blockers`, `CAPABILITY_ASSESSMENT.md`, `report capabilities` |
 | D16 | Run the cheapest gate that could fail; sign off only what moved. | `glm_universal.signoff`, `glm_universal.corpus.cost`, `ITERATE.md` |
-| D17 | Wobble, don't store: an irrational or infinite quantity is never stored as a constant beyond the certified enclosure that computes it. | `glm_universal.reasoning.wobble_registry`, `tests/test_directives_new.py` |
-| D18 | Reversibility is declared: every operation is tagged bijective/has_inverse/forward_only/declared_lossy, and inverses ship with their operations. | `glm_universal.reasoning.reversibility`, `tests/test_reversibility.py` |
-| D19 | Generate-don't-store: a stored file may be read at runtime only if a regenerator for it is registered, and the regenerator's output matches the stored digest. | `glm_universal.reasoning.generate_not_store`, `tests/test_generate_not_store.py` |
+| D17 | Date every file a round creates or alters, in the file itself. | `glm_universal.corpus.dates`, `tests/test_dates.py`, `ITERATE.md` |
+| D18 | Wobble, don't store: an irrational or infinite quantity is never stored as a constant beyond the certified enclosure that computes it. | `glm_universal.reasoning.wobble_registry`, `tests/test_directives_new.py` |
+| D19 | Reversibility is declared: every operation is tagged bijective/has_inverse/forward_only/declared_lossy, and inverses ship with their operations. | `glm_universal.reasoning.reversibility`, `tests/test_directives_new.py` |
+| D20 | Generate-don't-store: a stored file may be read at runtime only if a regenerator for it is registered, and the regenerator's output matches the stored digest. | `glm_universal.reasoning.generate_not_store`, `tests/test_directives_new.py` |
+| D21 | Every fundamental constant, shared path and pinned value is defined once, in `glm_universal.constants`, and imported from there. | `glm_universal.constants`, `tests/test_constants.py` |
+| D22 | New material enters through `source_material/ToDo/` and is absorbed only through the intake gates: a study pair in step, tests passing against the current code, Lean written, Lean verified by the owner's passing build record (the named files and everything they import), a measured gain accepted against the study's declared criterion; code waits in the item's `staged/` until then, or, by the owner's decision, is installed marked provisional; the item is filed in `source_material/done/`. | `glm_universal.intake`, `tests/test_intake.py`, `source_material/README.md` |
 
 ---
 
@@ -470,5 +473,168 @@ closure has.
 **Checked by** `glm_universal.signoff`, `glm_universal.corpus.cost`, `ITERATE.md`. The argument this rule was written with —
 what it cost to learn, and the examples current at the time — is `D16`
 in [`archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md).
+
+---
+
+## D17 — Date every file a round creates or alters
+
+**The rule.** Every file a round creates carries `Created <day Month year>` in
+the file itself, and every file it alters carries `Last altered <day Month
+year>`, with a short note of what changed where it helps the next reader. A
+study also says when its marks were pre-registered and when they were
+measured. The date lives in the file, not only in the commit history, because
+the repository travels as an upload and the history does not always travel
+with it. The owner's instruction of 18 October 2026; generated documents,
+stored measurements and everything under `source_material/` are exempt (the
+supplied material stays as supplied).
+
+**Checked by** `glm_universal.corpus.dates`, `tests/test_dates.py`, `ITERATE.md`.
+`python3 -m glm_universal.tools dates` lists every stamp and fails on a stamp
+that is not a date, lies after today, or says a file was altered before it was
+made. *Restored to the number D17 on 31 October 2026:* the reorganisation had
+reused D17–D19 for the three rules below while every record still cited the
+date rule as D17 (owner's decision of 30 October 2026).
+
+---
+
+## D18 — Wobble, don't store
+
+**The rule.** An irrational or infinite quantity — `π`, `e`, `√2`, the carrier
+regime's `Y = 1/(π + 2/π)` — is never written down as a constant beyond the
+certified enclosure that computes it. The quantity is *generated* on demand by
+a registered source (a series, a continued fraction, a Delta-Sigma stream)
+that returns exact rational bounds at the precision asked for, and anything
+that reads it reads the enclosure, never a typed-in decimal. "The outside is
+the whole number, the inside is the infinite": the stored thing is the
+process, not a truncation of its output.
+
+**Checked by** `glm_universal.reasoning.wobble_registry`, `tests/test_directives_new.py`.
+*Numbered D17 in the reorganisation of 29 October 2026; renumbered D18 on 31
+October 2026.*
+
+---
+
+## D19 — Reversibility is declared
+
+**The rule.** Every operation the machine performs on a carrier is tagged with
+what it loses: *bijective*, *has_inverse* (the inverse ships beside it and is
+tested to undo it), *forward_only* (no inverse exists, and the reason is
+stated), or *declared_lossy* (it discards information on purpose, and the
+loss is measured). An operation without a tag is a defect, because an answer
+that passed through an undeclared lossy step cannot say what it no longer
+knows.
+
+**Checked by** `glm_universal.reasoning.reversibility`, `tests/test_directives_new.py`.
+*Numbered D18 in the reorganisation of 29 October 2026; renumbered D19 on 31
+October 2026.*
+
+---
+
+## D20 — Generate, don't store
+
+**The rule.** A stored file may be read at runtime only if a regenerator for it
+is registered and the regenerator's output matches the stored digest. A cache
+is allowed — some measurements take minutes — but it is a cache of something
+the repository can recompute, never a source of truth in its own right; a
+file that nothing can regenerate is either promoted to a declared input (and
+said to be one) or removed.
+
+**Checked by** `glm_universal.reasoning.generate_not_store`, `tests/test_directives_new.py`.
+*Numbered D19 in the reorganisation of 29 October 2026; renumbered D20 on 31
+October 2026.*
+
+---
+
+## D21 — One source of constants
+
+**The rule.** Every fundamental constant (the carrier dimension, the Golay and
+Leech parameters, the carrier regime values), every shared path (the Lean
+tree, the studies, the input folder, the wheels package) and every pinned
+value the tests rely on is defined exactly once, in
+[`src/glm_universal/constants.py`](src/glm_universal/constants.py), and every
+other module imports it from there. A value typed in a second place is a
+defect even when it agrees today, because the day it stops agreeing nothing
+notices. Changing a constant changes `constants_digest()`, which every
+sign-off closure includes, so a constant cannot move without every check that
+depends on it being re-run. The owner's instruction of 30 October 2026
+(`STATUS.md` item 0); [`ITERATE.md`](ITERATE.md) §0.2 says how to add one.
+
+**Checked by** `glm_universal.constants`, `tests/test_constants.py`.
+
+---
+
+## D22 — New material comes in through the intake
+
+**The rule.** Everything the owner supplies — a full study such as
+`cent_compiler_v12`, a rough concept note, code, data, Lean — is put in
+`source_material/ToDo/` and recorded in `source_material/INTAKE.yaml`. It
+then moves through declared stages: *received*, *triaged*, *study drafted*
+(a `studies/*_STUDY.md` with a Tier-0 block and its `.yaml` manifest, valid
+and stating the same question, verdict and deciding figure), *tested* (each
+named test's last result a pass, taken against the code as it now stands),
+*Lean written*
+(its claims stated in `src/lean/`, imported by `AxiomAuditAll.lean`, and the
+static check `python3 -m glm_universal.lean_check` passes — a preliminary
+gate, not a build), *Lean verified* (the owner's `scripts/rebuild_lean.sh`
+has run `lake build` with the axiom audit and the `sorry` scan, all passing,
+and its build record `scripts/logs/lean_build_evidence.json` matches the
+item's Lean files *and every file they import*, byte for byte, under the
+same toolchain and Mathlib pins), *measured* (does it make the GLM derive,
+address or refuse better? — a finished, closed study, and a recorded
+acceptance decision against the study's own declared criterion and met
+marks), and *absorbed* (installed into the package — a
+wheel into `src/glm_universal/wheels/`, the one wheels folder). Promotion to
+*Lean verified* or any later stage re-reads the build record at that moment;
+a Lean file changed since is no longer verified. Every promotion likewise
+accepts only test passes taken against the code as it now stands (each
+result carries the fingerprint of the code it ran against), and absorption
+runs every named test again before it installs anything. Code prepared for the
+package before then waits in the item's own `staged/` folder: its tests run
+against it in a scratch view of the package (`staged:` tests), nothing in the
+package imports it, and only absorption installs it (`intake advance <id>
+absorbed`, or `intake absorb-staged <id>` for the staged parts of an item
+whose other parts stay open). **Provisional install, by the owner's
+decision only.** Where the owner decides that tested, measured code should
+serve before its build (as on 31 October 2026 for the two wheel items: "keep
+them in the wheels folder now, clearly marked provisional until my Lean build
+log confirms them"), `intake provisional <id> --decision "..."` installs the
+staged parts into the package and records them `provisional`: the decision is
+quoted in the ledger, the item is listed in the register
+`src/glm_universal/wheels/_data/provisional.json`, the item stays at its stage
+(no promotion is implied), and every answer resting on the code carries a
+`provisional:` note. Absorption on a matching build record confirms the parts
+and removes the register entry; until then the code is relied on only as
+marked. An item that does not help is *closed* with
+its reason, which is a result too. Either way the item is then filed in
+`source_material/done/`. Nothing supplied is relied on before it has passed
+its gates, and the supplied files themselves stay as supplied (they are
+filed, not edited, except where the owner asked for a fix in place). The
+owner's instruction of 31 October 2026.
+
+**Before the build record.** Items recorded *absorbed* before this rule had a
+build record (21 in the ledger, each with a `lean_build` entry saying so)
+were absorbed by earlier rounds whose Lean was built then; the reorganised
+tree has not been rebuilt since, so they are not yet re-verified against a
+record. The first passing `scripts/rebuild_lean.sh` writes one, and
+`intake check` then warns wherever an absorbed item's Lean file no longer
+matches it. Acceptance decisions were first recorded the same day; the 21
+earlier absorptions carry `legacy_absorption` in place of one, which the
+ledger check accepts only for a finished record in `done/` and no promotion
+accepts. The two wheel items of this repository check (`glm_wheels_bundle`,
+and the 15 cent wheels of `cent_compiler_v12`) are held at *Lean written*
+with their acceptance recorded, their wheels installed provisionally by the
+owner's decision, waiting for that build to confirm them.
+
+**Checked by** `glm_universal.intake`, `tests/test_intake.py`, `source_material/README.md`.
+`python3 -m glm_universal.intake status` shows every item and its stage, and
+`python3 -m glm_universal.intake check` fails when the ledger and the folders
+disagree, a stage is claimed without its evidence, a staged file would
+overwrite a different file in the package, or the provisional register and
+the ledger disagree (a provisional part in `done/`, a register entry with no
+provisional part, a provisional module missing from the package).
+
+*Last altered 31 October 2026: Lean written / Lean verified split, the build
+record gate, staged code; the synchronised manifest, current test results and
+the acceptance decision; the provisional install by the owner's decision.*
 
 ---

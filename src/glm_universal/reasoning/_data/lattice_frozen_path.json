@@ -9,6 +9,11 @@
   "carrier-tag-width",
   "carrier-tie",
   "carrier-two-flips",
+  "corpus-address",
+  "corpus-address-phrase",
+  "corpus-continue",
+  "corpus-define",
+  "corpus-unmentioned",
   "hole-lattice-point",
   "hole-malformed",
   "hole-octad-pair",
@@ -33,7 +38,27 @@
   "nearest-address-moved",
   "nearest-address-point",
   "nearest-address-uncertified",
-  "report-hole-configuration"
+  "nearest-tie-confirmed",
+  "nearest-tie-contradicted",
+  "nearest-tie-no-tie",
+  "nearest-tie-question",
+  "nearest-tie-reply",
+  "report-hole-configuration",
+  "sequence-fibonacci",
+  "sequence-next-catalan",
+  "sequence-next-junction",
+  "sequence-unheld",
+  "study-card",
+  "study-unknown",
+  "tool-arc-plan-search",
+  "tool-conjecture-refuted",
+  "tool-conjecture-survives",
+  "tool-derive-law",
+  "tool-derive-not-a-law",
+  "tool-leech-norm-12",
+  "tool-rule30-centre",
+  "tool-rule30-claim-open",
+  "tool-rule30-claim-refuted"
  ],
  "rows": [
   {
@@ -552,7 +577,7 @@
   {
    "after_ok": false,
    "before_ok": false,
-   "cause": "Phase 134: the list of query kinds the refusal names gains 'carrier'",
+   "cause": "Phase 134 and after: the list of query kinds the refusal names gains 'carrier', 'locate', 'hole' and (31 October 2026) the four lookup kinds 'corpus', 'tool', 'study' and 'sequence'",
    "id": "unknown-nonsense",
    "present": true,
    "same_status": true,
@@ -984,11 +1009,11 @@
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": null,
+   "cause": "the tree: the directives register, measured live (16 standing rules at the baseline, 22 now)",
    "id": "report-directives",
    "present": true,
    "same_status": true,
-   "same_text": true
+   "same_text": false
   },
   {
    "after_ok": true,
@@ -1020,20 +1045,20 @@
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": null,
+   "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
    "id": "report-hole-classifier",
    "present": true,
    "same_status": true,
-   "same_text": true
+   "same_text": false
   },
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": null,
+   "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
    "id": "report-hole-ladder",
    "present": true,
    "same_status": true,
-   "same_text": true
+   "same_text": false
   },
   {
    "after_ok": true,
@@ -1137,7 +1162,7 @@
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": "this round: the count of evaluation questions of the undescribed kinds gains the new case",
+   "cause": "this round and after: the language report counts the answerable query kinds (23 at the baseline, 30 on 31 October 2026) and the evaluation questions of the undescribed kinds (158 at the baseline, 207 on 31 October 2026), which gain each new kind and case",
    "id": "report-language",
    "present": true,
    "same_status": true,
@@ -1155,20 +1180,20 @@
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": null,
+   "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
    "id": "report-hole-failures",
    "present": true,
    "same_status": true,
-   "same_text": true
+   "same_text": false
   },
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": "this round: the query-escalation report counts the evaluation cases, which gain the new one, and it is re-taken over them",
+   "cause": null,
    "id": "report-query-escalation",
    "present": true,
    "same_status": true,
-   "same_text": false
+   "same_text": true
   },
   {
    "after_ok": true,
@@ -1639,5 +1664,5 @@
    "same_text": true
   }
  ],
- "source_digest": "4e128cb99b93a1c60cd14df4e10427991823abdcda0f943c77f3c2e8192731ab"
+ "source_digest": "c730246f175875aa1725554c976aa809f2c3032bb617ecb67745c62e2b8065ee"
 }

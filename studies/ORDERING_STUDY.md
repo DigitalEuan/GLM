@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 1. What this round took, and from where
@@ -257,9 +259,8 @@ the question already gives.
 ## 9. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools ordering          # the measurement
-PYTHONPATH=. python3 -m glm_universal.tools fieldsurface      # the reading before it
+PYTHONPATH=src python3 -m glm_universal.tools ordering          # the measurement
+PYTHONPATH=src python3 -m glm_universal.tools fieldsurface      # the reading before it
 python3 GLM.py -q "order abstract_concrete of energy and water"
 python3 GLM.py -q "order line of GLM.NormFamily.family_tower and rung_audit"
 python3 -m pytest glm_universal/tests/test_coordinate_order.py -q

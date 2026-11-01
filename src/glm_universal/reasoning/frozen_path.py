@@ -30,6 +30,14 @@ and refused, and no moved text is undeclared.
 Exactness
 ---------
 Strings and booleans only.
+
+*Last altered 31 October 2026 (repository check): four declared causes added
+(``report-directives`` and the three ``report hole`` reports of Phase 149),
+after a re-take found those texts moved for exactly those reasons The causes
+of ``unknown-nonsense`` and ``report-language`` now name every kind and count
+their texts gained since the baseline, through the four lookup kinds wired on
+31 October 2026 (checked by diffing the baseline answers against the live
+ones).*
 """
 
 from __future__ import annotations
@@ -58,8 +66,11 @@ DECLARED_CAUSES: Dict[str, str] = {
                               "the refusal gains 'hole configuration'",
     "report-pipeline": "this round: the pipeline gains the lattice-completion "
                        "row",
-    "report-language": "this round: the count of evaluation questions of the "
-                       "undescribed kinds gains the new case",
+    "report-language": "this round and after: the language report counts the "
+                       "answerable query kinds (23 at the baseline, 30 on 31 "
+                       "October 2026) and the evaluation questions of the "
+                       "undescribed kinds (158 at the baseline, 207 on 31 "
+                       "October 2026), which gain each new kind and case",
     "report-lean": "the tree: the Lean declaration count, measured live",
     "report-retrieval": "the tree: the address-book index over the Lean "
                         "declarations, measured live",
@@ -71,8 +82,22 @@ DECLARED_CAUSES: Dict[str, str] = {
     "report-query-escalation": "this round: the query-escalation report "
                                "counts the evaluation cases, which gain the "
                                "new one, and it is re-taken over them",
-    "unknown-nonsense": "Phase 134: the list of query kinds the refusal "
-                        "names gains 'carrier'",
+    "unknown-nonsense": "Phase 134 and after: the list of query kinds the "
+                        "refusal names gains 'carrier', 'locate', 'hole' and "
+                        "(31 October 2026) the four lookup kinds 'corpus', "
+                        "'tool', 'study' and 'sequence'",
+    # Added 31 October 2026 (repository check): a re-take found these four
+    # texts moved, each by exactly the change named (checked by diffing the
+    # baseline answer against the live one; the same four causes are declared
+    # in budget_guard_frozen.DECLARED_CAUSES).
+    "report-directives": "the tree: the directives register, measured live "
+                         "(16 standing rules at the baseline, 22 now)",
+    "report-hole-classifier": "Phase 149: the report keeps its round's text "
+                              "and adds the L5 clause",
+    "report-hole-ladder": "Phase 149: the report keeps its round's text and "
+                          "adds the L5 clause",
+    "report-hole-failures": "Phase 149: the report keeps its round's text and "
+                            "adds the L5 clause",
 }
 
 _SOURCES: Tuple[str, ...] = (

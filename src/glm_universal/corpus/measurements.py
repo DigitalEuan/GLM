@@ -20,10 +20,12 @@ and a stale cache is reported rather than answered from -- the blocks that read
 it say so, and :func:`glm_universal.corpus.checks.corpus_checks` fails.  Taking
 the measurements again is one command::
 
-    cd overlay && PYTHONPATH=. python3 -m glm_universal.corpus --remeasure
+    PYTHONPATH=src python3 -m glm_universal.corpus --remeasure
 
 Every rate here is an exact :class:`~fractions.Fraction`; nothing is a float,
 in the cache or out of it.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

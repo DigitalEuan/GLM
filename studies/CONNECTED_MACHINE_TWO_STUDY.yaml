@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 8 marks; 157 of 177 reasoning modules reached from the answering path (153 before),
@@ -12,25 +14,52 @@ deciding_figure: 8 of 8 marks; 157 of 177 reasoning modules reached from the ans
 directives:
 - D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/connected_two_cases
-  - reasoning/substrate_cognition
-  - runtime/router
-  - runtime/toolbox
-  - tests/test_connected_two
+  - evaluation/connected_two_cases.py
+  - reasoning/affine_output.py
+  - reasoning/batch_machine.py
+  - reasoning/cell_guard.py
+  - reasoning/citation_scope.py
+  - reasoning/constant_bound.py
+  - reasoning/corpus_resample.py
+  - reasoning/counter_lasso.py
+  - reasoning/document_tree.py
+  - reasoning/inert_counter.py
+  - reasoning/law_triage.py
+  - reasoning/native_parity.py
+  - reasoning/native_words.py
+  - reasoning/norm256_hex.py
+  - reasoning/now_float_control.py
+  - reasoning/now_receipt.py
+  - reasoning/operation_escalation.py
+  - reasoning/placement_guard.py
+  - reasoning/probe_budget.py
+  - reasoning/role_binding.py
+  - reasoning/second_reading.py
+  - reasoning/shortest_tag.py
+  - reasoning/stray_blind.py
+  - reasoning/substrate_cognition.py
+  - reasoning/typed_plans.py
+  - runtime/router.py
+  - runtime/toolbox.py
+  - tools.py
   lean:
   - CertifiedStreams
   - ConnectedMachine
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CONNECTED_MACHINE_TWO_STUDY.md
   test:
-  - test_connected_machine_two.py
+  - test_connected_two.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CONNECTED_MACHINE_TWO_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,8 +67,24 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - W1
+  - W2
+  - W3
+  - W4
+  - W5
+  - W6
+  - W7
+  - W8
+  met:
+  - W1
+  - W2
+  - W3
+  - W4
+  - W5
+  - W6
+  - W7
+  - W8
   missed: []
 perturbations: []
 phase: 136
@@ -47,6 +92,7 @@ predecessors: []
 question: Which operations that earlier studies built and measured could no question reach, and can they
   be put in the answering path without changing any answer the GLM already gives?
 recomputed_by: '`glm_universal.evaluation.connected_two_cases.measure`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

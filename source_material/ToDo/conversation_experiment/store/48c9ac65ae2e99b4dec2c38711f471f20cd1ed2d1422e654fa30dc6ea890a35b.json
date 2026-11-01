@@ -1,0 +1,98 @@
+{
+  "arity": 3,
+  "created_turn": 0,
+  "final_answer": "adhesion_energy",
+  "intent": "analogy",
+  "plan": {
+    "failed_step": null,
+    "final_answer": "adhesion_energy",
+    "final_verified": true,
+    "hypothesis": null,
+    "intent": "analogy",
+    "steps": [
+      {
+        "derivation_node": "plan:0",
+        "failure_reason": "",
+        "op": "resolve",
+        "result": "resolved 3 concept(s): force, energy, pressure",
+        "status": "ok",
+        "target": "force, energy, pressure"
+      },
+      {
+        "derivation_node": "plan:1",
+        "failure_reason": "",
+        "op": "derive",
+        "result": "7 candidate(s): adhesion_energy, flux_density_jansky, fracture_energy, radiant_exposure, spring_constant",
+        "status": "ambiguous",
+        "target": "force:energy::pressure:?"
+      },
+      {
+        "derivation_node": "plan:2",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192adhesion_energy) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:adhesion_energy"
+      },
+      {
+        "derivation_node": "plan:3",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192flux_density_jansky) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:flux_density_jansky"
+      },
+      {
+        "derivation_node": "plan:4",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192fracture_energy) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:fracture_energy"
+      },
+      {
+        "derivation_node": "plan:5",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192radiant_exposure) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:radiant_exposure"
+      },
+      {
+        "derivation_node": "plan:6",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192spring_constant) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:spring_constant"
+      },
+      {
+        "derivation_node": "plan:7",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192surface_energy) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:surface_energy"
+      },
+      {
+        "derivation_node": "plan:8",
+        "failure_reason": "",
+        "op": "verify",
+        "result": "EXT10 ratio transport holds: \u0394(force\u2192energy) = \u0394(pressure\u2192surface_tension) = (Fraction(1, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1), Fraction(0, 1))",
+        "status": "ok",
+        "target": "analogy force:energy::pressure:surface_tension"
+      },
+      {
+        "derivation_node": "plan:9",
+        "failure_reason": "",
+        "op": "explain",
+        "result": "verified answer: adhesion_energy via analogy_transport",
+        "status": "ok",
+        "target": "adhesion_energy"
+      }
+    ]
+  },
+  "plan_hash": "48c9ac65ae2e99b4dec2c38711f471f20cd1ed2d1422e654fa30dc6ea890a35b",
+  "shape": "analogy:3",
+  "stored_at": "deterministic"
+}

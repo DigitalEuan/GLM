@@ -1,0 +1,2 @@
+PAT 32107985254 64b6e599709a5412
+exit 0 (target 32107985254: a PAT line means no white diagonal in 2107985255..32107985254)

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Every address audited on the shipped data rather than asserted, and lookup by address
@@ -10,23 +12,28 @@ deciding_figure: Every address audited on the shipped data rather than asserted,
 directives:
 - D3
 evidence: []
-faculty: addressing
+faculty: unknown
 file_refs:
   code:
-  - migration/state
-  - migration/store
-  - substrate/isomorphism
-  - tests/test_state_migration
+  - migration/state.py
+  - migration/store.py
+  - runtime/session.py
+  - runtime/tct_engine.py
+  - substrate/isomorphism.py
   lean:
   - Endianness
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: HEXCOLOUR_STUDY.md
   test:
-  - test_hexcolour.py
+  - test_state_migration.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: HEXCOLOUR_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,10 +45,11 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 17
 predecessors: []
 question: Are the hexcolour addresses carrying anything, and is anything ever looked up by one?
 recomputed_by: '`glm_universal.migration.store.store_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

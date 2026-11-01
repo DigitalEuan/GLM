@@ -1,6 +1,10 @@
 """``glm_universal.engineering.union`` -- derivation across a declared union
 of formula wheels.
 
+*Last altered 31 October 2026 (repository check: :func:`derive_relations`
+orders a wheel outside the ten -- a domain wheel -- after them instead of
+raising; nothing changes for the ten).*
+
 What this module is
 -------------------
 The ``derive`` frame of :mod:`glm_universal.engineering.speak` derives inside
@@ -213,8 +217,12 @@ def derive_relations(target: str, inputs: Sequence[str],
     kept = [(base_name(y), e) for y, e in powers if e]
     formula = wh.render_monomial(coef, kept)
     order = {w.id: i for i, w in enumerate(wh.WHEELS)}
+    # 31 October 2026 (repository check): a wheel outside wh.WHEELS (the
+    # domain wheels W11 and on) sorts after the ten, by id -- `order.get`
+    # alone returned None for it and the sort raised TypeError.
     used = tuple(sorted({system.owners[i] for i in range(n) if x[i]},
-                        key=order.get))
+                        key=lambda wid: (order.get(wid, len(order)),
+                                         str(wid))))
     weights = tuple((system.owners[i], system.axioms[i], x[i])
                     for i in range(n) if x[i])
     return Found(formula, target, tuple(inputs), used, weights)

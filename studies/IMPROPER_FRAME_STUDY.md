@@ -6,11 +6,13 @@
 
 **Verdict.** Declaring the three improper components of the Lorentz group as families, beside the proper orthochronous one, and the spatial reflection beside the rotation, turned 361 of the 720 improper queries into right answers where Phase 178 answered 3, with 0 wrong; every improper answer names its component and splits exactly into a proper map after a reflection or time reversal; and on all 1,920 queries the 361 answers the Phase 178 family set gives are unchanged. `LorentzImproper.lean` proves the four components exhaust the group and that two demonstrations never fix the component (any Lorentz map has a partner in another component agreeing with it on both), so the span guard's refusals stay.
 
-**Deciding figure.** 8 of 8 marks; improper queries 361 right, 0 wrong of 720 (Phase 178: 3 right); at three demonstrations 179 of 180; Phase 178 answers changed 0 of 361; outside the families 0 wrong of 480.
+**Deciding figure.** 8 of 8 marks; improper queries 361 right, 0 wrong of 720 (Phase 178: 3 right); at three demonstrations 179 of 180; Phase 178 answers changed 0 of 361; outside the families 0 wrong of 480. Re-measured 31 October 2026 on the rebuilt query generator (§7.5): 8 of 8 marks; improper 354 right, 0 wrong of 720; 174 of 180 at three demonstrations; 0 of 362 changed; outside 0 wrong of 480.
 
 **Recomputed by.** `glm_universal.reasoning.improper_frame_study.improper_frame_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured on the rebuilt query generator of `reasoning/frame_plane_study.py`; 8 of 8 marks as before, the counts moved, §7.5.)*
 
 ---
 
@@ -198,6 +200,45 @@ of units as a family (it is the one improper case still refused); 3+1
 dimensions, where the same four components hold and the split is the same;
 holding `tool frame`'s ask open in the conversation as Phase 173 does; and
 the TAX refractive-index test and the κ decisions of item 10, untouched.
+
+### 7.5 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The query generator this study
+draws from (`reasoning/frame_plane_study.py`: its seeded integer stream, its
+rotations, boosts and timelike inputs) was lost in the October 2026
+reorganisation and rebuilt from `COLOUR_INDUCTION_STUDY.md`; this study's own
+module is the one of Phase 179. The measurement was taken again on the
+rebuilt generator (`tools improper-frame --write`). The queries are therefore
+not the 1,920 of §7.1 but 1,920 drawn the same way, so the counts move; every
+mark is met, as before.
+
+| solver | improper right / wrong / refused | proper right / wrong / refused | outside right / wrong / refused |
+|---|---|---|---|
+| shipped | 354 / 0 / 366 | 360 / 0 / 360 | 62 / 0 / 418 |
+| Phase 178 families | 0 / 0 / 720 | 360 / 0 / 360 | 2 / 0 / 478 |
+| first fit | 425 / 175 / 120 | 599 / 7 / 114 | 65 / 42 / 373 |
+
+By demonstrations, improper queries, shipped: 0 of 180 right at one, 0 of 180
+at two, 174 of 180 at three, 180 of 180 at four, 0 wrong anywhere. Of the 354
+improper answers, 354 name the true component and 354 splits recompose. The
+Phase 178 family set answered 362 of the 1,920 queries; the widening changed 0
+of them. The outside line now counts the `improper_units` family that Phase
+181 made a declared family (62 right, 0 wrong), as `IMPROPER_UNITS_STUDY.md`
+§7.2 records.
+
+| mark | result | met |
+|---|---|---|
+| **I1** | shipped: 0 wrong on the in-vocabulary families, every demonstration count | yes |
+| **I2** | 174 of 180 improper queries right at three demonstrations | yes |
+| **I3** | outside: 0 wrong | yes |
+| **I4** | Phase 178 family set answered 362; changed 0 | yes |
+| **I5** | 354 of 354 improper answers name the true component; 354 splits recompose | yes |
+| **I6** | first fit: 175 wrong improper answers, 7 proper | yes |
+| **L** | `LorentzImproper.lean` states its 19 theorems with no `sorry` — read from the copy held in `src/lean/awaiting_recovery/` until `LorentzPlane.lean` returns, so it is not in the build or the axiom audit now | yes |
+| **T** | `3,1,-1` naming `lorentz_parity`; the two-pair version refused, asking about `2,0,1` | yes |
+
+So **8 of 8 marks**, with 354 where §7.1 has 361, 174 of 180 where it has 179,
+and 362 where it has 361.
 
 ## In one paragraph
 

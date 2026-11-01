@@ -48,16 +48,17 @@ What it is careful about
 
 Typical use::
 
-    cd overlay
-    PYTHONPATH=. python3 -m glm_universal.signoff --plan     # what would run
-    PYTHONPATH=. python3 -m glm_universal.signoff --run      # run the stale ones
-    PYTHONPATH=. python3 -m glm_universal.signoff --verify   # re-check signatures
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-all  # ignore the ledger
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-checks    # the rest
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-everything
+    PYTHONPATH=src python3 -m glm_universal.signoff --plan     # what would run
+    PYTHONPATH=src python3 -m glm_universal.signoff --run      # run the stale ones
+    PYTHONPATH=src python3 -m glm_universal.signoff --verify   # re-check signatures
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-all  # ignore the ledger
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-checks    # the rest
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-everything
 
 The ledger is ``.glm_signoff.json``, committed with the code, so the
 saving carries between sessions rather than being rebuilt every time.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

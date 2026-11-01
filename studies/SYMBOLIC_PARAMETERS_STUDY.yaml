@@ -1,35 +1,41 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 8 marks met; 13 of 13 class-S questions answered and verified, 0 wrong; 13 of 13
   variants; 18 of 18 declared systems; 8 of 8 refusals; 44 of 44 mutants rejected (43 of 44 as first measured);
   27 of 27 framed outside answers and 14 of 14 Set B verdicts unchanged; 87 of 87 answered random systems
   verified after the printer repair (53 of 87 before).
-directives:
-- D3
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/symbolic
-  - runtime/symbolic_frames
-  - runtime/symbolic_outside
-  - runtime/symbolic_report
-  - tests/test_symbolic
+  - evaluation/symbolic_cases.py
+  - reasoning/symbolic.py
+  - runtime/symbolic_frames.py
+  - runtime/symbolic_outside.py
+  - runtime/symbolic_report.py
+  - tools.py
   lean:
   - SymbolicParameters
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: SYMBOLIC_PARAMETERS_STUDY.md
   test:
-  - test_symbolic_parameters.py
+  - test_symbolic.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: SYMBOLIC_PARAMETERS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -37,17 +43,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
+  met:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S6
+  - S7
+  - S8
+  missed:
+  - S5
 perturbations: []
-phase: 0
-predecessors: []
+phase: 98
+predecessors:
+- QUESTION_SET_B_STUDY
 question: Question Set B left 13 outside questions whose answer is a closed formula in letters (class
   S) and one transcendental equation (class T). Can the machine answer them with a verified reading, by
   writing the governing laws as equations in letters and eliminating the unknowns exactly, without answering
   anything wrongly and without moving an earlier answer?
 recomputed_by: '`glm_universal.runtime.symbolic_report.symbolic_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -71,7 +95,8 @@ sections:
 - anchor: 7-re-running-it
   heading: 7. Re-running it
 status: closed
-successors: []
+successors:
+- NONLINEAR_ELIMINATION_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Symbolic parameters: answers that are formulas in letters'

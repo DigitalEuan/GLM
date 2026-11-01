@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -304,9 +306,8 @@ sample.
 **How to re-run any of this.**
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools normladder          # the stored measurement
-PYTHONPATH=. python3 -m glm_universal.tools normladder --write  # re-take it (about half an hour)
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_norm_family.py -q
+PYTHONPATH=src python3 -m glm_universal.tools normladder          # the stored measurement
+PYTHONPATH=src python3 -m glm_universal.tools normladder --write  # re-take it (about half an hour)
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_norm_family.py -q
 cd .. && lake build RequestProject.GLM.NormFamily
 ```

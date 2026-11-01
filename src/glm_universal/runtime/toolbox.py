@@ -22,6 +22,40 @@ caller can actually ask of them; their censuses stay in their studies.
 the eight is *reachable*, recorded there with the reason.
 
 Last altered 20 October 2026 (Phase 167: `adversarial_dialogue_study` declared in the wiring census; Phase 169: `evidence_model_study`; Phase 170: the engineering surface's ten frames; Phase 171: `evidence_in_use_study`; Phase 172: `resumed_dialogue_study`; Phase 173: `stacked_dialogue_study`; Phase 174: `quoted_measurements_study`). Last altered 21 October 2026 (Phase 175: `tool induce`, the owner's pipeline kit as a reachable tool; `pipeline_kit_study` declared in the wiring census).
+Last altered 31 October 2026 (repository check: the `tool` wiring of Phases
+176-184 restored -- `tool frame`, `tool kappa`, `tool lorentz`, `tool
+evidence`, `tool majority`, `tool arc`, the colour route of `tool induce`, the
+English routes for `tool arc`, `tool frame` and `tool kappa`, and the wiring
+census's declarations for the studies of those phases and for the directive
+instruments; the answering-path gates lost in the same reorganisation (the
+stepwise planner's ladder gate, the typed planner's and the `field` kind's
+machine checks, and the L5 clauses of the hole reports) were restored by the
+same repository check, so the modules they reach need no declaration; `tool
+llvq` takes its shells from the Golay census of `reasoning/leech_shells.py`;
+seven wiring-census declarations removed because the `study` query kind's
+import of the corpus package now reaches them by the census's rule -- see
+:data:`MEASUREMENT_ONLY`).
+Last altered 1 November 2026 (Phase 186: the intake items absorbed where they
+measurably help -- `tool rule30` and `tool conjecture`, the Rule 30 study's
+hypothesis engine on the answering path; `tool derive`, the formula wheels'
+derivability engine; the engine's plan search behind `tool arc` for the test
+inputs the colour solver refuses; their English routes; and
+`intake_capability_study` declared in the wiring census).
+
+*Partly reconstructed 31 October 2026 (repository check): this file is the
+Phase 175 toolbox; the wiring Phases 176-184 added to it was lost in the
+October 2026 reorganisation and is rebuilt here from MASTER_PLAN.md (Phases
+176-184), SYSTEM.md, the studies (FRAME_OPERATOR, IMPROPER_FRAME,
+IMPROPER_UNITS, LORENTZIAN_LIFT, LORENTZIAN_EVIDENCE, LORENTZIAN_MAJORITY),
+the tests, the `*_text` functions of the reasoning modules it calls, and the
+fragments of the later toolbox that survive in the supplied Rule 30 rounds
+(`rule30_round10/toolbox_wheel_induction.patch`,
+`rule30_round11/toolbox_claim.patch`, `rule30_round12/toolbox_round12.patch`,
+`rule30_round30/apply_round30.py` and the Round 11 stand-in for
+`reasoning/colour_induction.py`, which records that module's interface).  The
+Rule 30 rounds' own tools (claim, theorem, discuss, pipeline) are supplied
+material, not part of the GLM, and are not added.  Each rebuilt function says
+so in its docstring.*
 """
 
 from __future__ import annotations
@@ -138,18 +172,52 @@ def _moonshine(arg: str) -> ToolResult:
                        "v2_dimension": r["v2_dimension"]})
 
 
+#: The shells ``tool llvq`` counts: true norm ``2 t`` for ``t = 0 .. 6``.
+LLVQ_TOP_SHELL = 6
+
+
 def _llvq(arg: str) -> ToolResult:
+    """The Leech shells, counted from the Golay census.
+
+    *Last altered 31 October 2026 (repository check):* since Phase 164 the
+    shells are counted from the lattice's definition over the Golay code's
+    weight census (``reasoning/leech_shells.py``) and checked against the
+    theta series; this checkout's ``reasoning/llvq.py`` holds the earlier
+    stored table again (its norm-12 entry, 34,408,430,950, is the wrong one
+    Phase 164 corrected), so the tool takes the shells from the census itself
+    and names any entry of the stored table the census refutes, as the text
+    it gives has said since Phase 164.  The figures keep their keys:
+    ``shell_counts`` is keyed by ``8 t`` (four times the true norm), the
+    convention of :func:`glm_universal.reasoning.llvq.shell_summary`.
+    """
+    from ..reasoning import leech_shells as ls
     from ..reasoning import llvq as l
     r = l.llvq_report()
-    shells = "; ".join(f"norm {s['norm2']}: {s['count']}"
-                       for s in r["shells"])
-    return ToolResult(True, f"llvq: {r['n_shells_catalogued']} Leech shells "
-                      f"counted from the Golay census ({shells}); kissing "
-                      f"number {r['kissing_number']}",
-                      {"kissing_number": r["kissing_number"],
-                       "shells": r["n_shells_catalogued"],
-                       "shell_counts": {str(s["norm2"]): s["count"]
-                                        for s in r["shells"]}})
+    census = ls.shells(LLVQ_TOP_SHELL)
+    theta = list(ls.modular_shells(LLVQ_TOP_SHELL))
+    if [c for _, c in census] != theta:
+        return ToolResult(False, "llvq: refused -- the shells counted from "
+                          "the Golay census disagree with the theta series "
+                          f"({[c for _, c in census]} against {theta})",
+                          {"census": [c for _, c in census], "theta": theta})
+    rows = [(8 * t, c) for t, c in census if c]
+    stored = {s["norm2"]: s["count"] for s in r["shells"]}
+    refuted = [(n, stored[n], c) for n, c in rows
+               if n in stored and stored[n] != c]
+    kissing = dict(census)[2]
+    shells = "; ".join(f"norm {n}: {c}" for n, c in rows)
+    text = (f"llvq: {len(rows)} Leech shells counted from the Golay census "
+            f"({shells}); kissing number {kissing}")
+    if refuted:
+        text += ("; the stored catalogue of reasoning/llvq.py disagrees at "
+                 + ", ".join(f"norm {n} ({old}, not {new})"
+                             for n, old, new in refuted)
+                 + ", which the census and the theta series both refute")
+    return ToolResult(True, text,
+                      {"kissing_number": kissing,
+                       "shells": len(rows),
+                       "shell_counts": {str(n): c for n, c in rows},
+                       "stored_refuted": [str(n) for n, _, _ in refuted]})
 
 
 def _pcgs(arg: str) -> ToolResult:
@@ -552,18 +620,11 @@ def _bind(arg: str) -> ToolResult:
                       {"word": bound.word, "recovered": back})
 
 
-def _parse_word(text: str) -> Optional[int]:
-    t = text.strip().lower().replace("_", "")
-    try:
-        if t.startswith("0x") or t.startswith("#"):
-            value = int(t.lstrip("#")[2:] if t.startswith("0x") else t[1:], 16)
-        elif t.startswith("0b"):
-            value = int(t[2:], 2)
-        else:
-            value = int(t)
-    except ValueError:
-        return None
-    return value if 0 <= value < (1 << 24) else None
+#: A 24-bit word as ``tool gates`` reads it (``0x..``, ``#..``, ``0b..`` or
+#: decimal): the rule is :func:`glm_universal.reasoning.tool_machine.parse_word`
+#: (moved there 31 October 2026, so the tool machine need not import this
+#: module and, through it, the Lean address book's walk of the development).
+from ..reasoning.tool_machine import parse_word as _parse_word  # noqa: E402
 
 
 def _gates(arg: str) -> ToolResult:
@@ -817,6 +878,62 @@ MEASUREMENT_ONLY: Mapping[str, str] = {
     "carried_read_study": "the measurement of Phase 153; the reads it "
                           "measures are made by the stepwise gate, the "
                           "typed planner's gate and the `field` query kind",
+    "fold_machine_study": "the measurement of Phase 160; the folds it "
+                          "measures are computed by the batch machine the "
+                          "stepwise planner's gate runs",
+    "tool_machine_study": "the measurement of Phase 163; the tool answers "
+                          "it measures are worked out by the batch machine "
+                          "the stepwise planner's gate runs",
+    "pipeline_ask_study": "the measurement of Phase 176 (`tools "
+                          "pipeline-ask`); the ask it measures is the one "
+                          "`tool induce`'s ambiguous refusal names",
+    "pipeline_kit_crosscheck": "the cross-check of Phase 176 (`tools "
+                               "pipeline-kit-crosscheck`): the owner's kit "
+                               "suite and demo run against `tool induce`",
+    "frame_operator_study": "the measurement of Phase 177 (`tools "
+                            "frame-operators`); the operator inference it "
+                            "measures is `tool frame`, the anchor `tool "
+                            "kappa`",
+    "intake_capability_study": "the measurement of Phase 186 (`tools "
+                               "intake-capability`); the tools it measures "
+                               "are `tool arc`, `tool rule30`, `tool "
+                               "conjecture`, `tool derive` and the sequence "
+                               "lookup's next-term reading",
+    "colour_induction_study": "the measurement of Phase 178, part A (`tools "
+                              "colour-induction`); the colour solver it "
+                              "measures is `tool induce` on colour grids and "
+                              "`tool arc`",
+    "frame_plane_study": "the measurement of Phase 178 (`tools "
+                         "frame-plane`); the frame plane it measures is "
+                         "`tool frame` on 3-component states",
+    "improper_frame_study": "the measurement of Phase 179 (`tools "
+                            "improper-frame`); the improper families it "
+                            "measures are reached through `tool frame`",
+    "improper_units_study": "the measurement of Phase 181 (`tools "
+                            "improper-units`); the improper families times "
+                            "a change of units are reached through `tool "
+                            "frame`",
+    "lorentzian_lift_study": "the measurement of Phase 182 (`tools "
+                             "lorentzian-lift`); the lift it measures is "
+                             "`tool lorentz`",
+    "lorentzian_evidence_study": "the measurement of Phase 183 (`tools "
+                                 "lorentzian-evidence`); the guard and the "
+                                 "settling question it measures are in "
+                                 "`tool lorentz`, the evidence space is "
+                                 "`tool evidence`",
+    "lorentzian_majority_study": "the measurement of Phase 184 (`tools "
+                                 "lorentzian-majority`); the rule it "
+                                 "measures is `tool majority`",
+    "reversibility": "the D19 reversibility ledger: every operation's "
+                     "class and its consumers checked over the tree by the "
+                     "directive instruments, not a question",
+    "wobble_registry": "the D18 wobble registry: the enclosure generators "
+                       "of irrational quantities and their consumers, "
+                       "checked by the directive instruments, not a question",
+    "generate_not_store": "the D20 generate-don't-store audit of the "
+                          "import graph: every runtime read of a stored file "
+                          "needs a registered regenerator; an instrument, "
+                          "not a question",
     "adversarial_dialogue_study": "the measurement of Phase 167; the replies "
                                   "it measures are read by the conversation "
                                   "at the `nearest` query kind's tied heads",
@@ -847,58 +964,21 @@ MEASUREMENT_ONLY: Mapping[str, str] = {
     "document_tree": "the retrieval line, parked at the owner's direction "
                      "(Phase 106)",
     "corpus_resample": "the declared resampling of two corpus measurements",
-    "native_parity": "the measuring half of `tool native parity`, whose "
-                     "operation lives in native_ledger",
-    "native_words": "the measuring half of `tool native words`, whose "
-                    "operation lives in golay_words",
-    "now_receipt": "an audit of a supplied study's claims; its capture "
-                   "takes a 24-coordinate composition no question supplies",
-    "now_float_control": "the float control of the now-receipt audit (D11)",
-    "operation_escalation": "measures the answering path's operations under "
-                            "one refusal contract",
-    "second_reading": "measures guards on those operations; the adopted one "
-                      "is already in the answering path",
-    "frame_operator_study": "the Archive 25 frame-operator measurement; it "
-                            "is read by the study instrument, not a query",
-    "frame_operators": "the Archive 25 frame-operator implementation; it is "
-                       "called by the frame study instrument",
-    "frame_plane": "the Archive 25 frame-plane implementation; it is called "
-                   "by the frame study instrument",
-    "frame_plane_study": "the Archive 25 frame-plane measurement; it is read "
-                         "by the study instrument, not a query",
-    "generate_not_store": "directive D19's document-backed measurement; it is "
-                          "not a direct query surface",
-    "improper_frame_study": "the Archive 25 improper-frame measurement; it is "
-                            "read by the study instrument, not a query",
-    "improper_units_study": "the Archive 25 improper-units measurement; it is "
-                            "read by the study instrument, not a query",
-    "kappa_anchor": "the Archive 25 calibration measurement; it is reached "
-                    "through the frame study instrument",
-    "leech_shells": "the Archive 25 Leech-shell measurement; it is read by "
-                    "the formal study instrument",
-    "lorentzian_evidence": "the Archive 25 Lorentzian evidence implementation; "
-                          "it is called by its study instrument",
-    "lorentzian_evidence_study": "the Archive 25 Lorentzian evidence "
-                                 "measurement; it is not a direct query",
-    "lorentzian_lift": "the Archive 25 Lorentzian-lift implementation; it is "
-                      "called by its study instrument",
-    "lorentzian_lift_study": "the Archive 25 Lorentzian-lift measurement; it "
-                             "is not a direct query",
-    "lorentzian_majority": "the Archive 25 majority implementation; it is "
-                           "called by its study instrument",
-    "lorentzian_majority_study": "the Archive 25 majority measurement; it is "
-                                 "not a direct query",
-    "pipeline_ask_study": "the Archive 25 separating-question measurement; it "
-                          "is read by the study instrument",
-    "pipeline_kit_crosscheck": "the Archive 25 Pipeline Kit cross-check; it is "
-                               "not a direct query",
-    "reversibility": "directive D18's document-backed measurement; it is not a "
-                     "direct query surface",
-    "tool_machine": "the retained tool-machine study implementation; it is "
-                    "measured through the batch machine",
-    "wobble_registry": "directive D17's document-backed measurement; it is not "
-                       "a direct query surface",
-    "typed_plans": "measures the typed planner on held-out questions",
+    # 31 October 2026 (repository check): seven declarations removed --
+    # native_parity ("the measuring half of `tool native parity`, whose
+    # operation lives in native_ledger"), native_words ("the measuring half
+    # of `tool native words`, whose operation lives in golay_words"),
+    # now_receipt ("an audit of a supplied study's claims"),
+    # now_float_control ("the float control of the now-receipt audit"),
+    # operation_escalation, second_reading and typed_plans ("measurements of
+    # the answering path").  The `study` query kind imports
+    # glm_universal.corpus.study_index, so the census's import closure now
+    # passes through the corpus package, whose document renderer
+    # (corpus/render.py, corpus/address.py) imports these seven inside the
+    # functions that render their figures.  By the census's rule -- every
+    # import statement read from source -- they are reached, and a
+    # declaration of a reached module is stale.  No query calls those
+    # renderer functions; importing study_index loads none of the seven.
 }
 
 
@@ -968,12 +1048,411 @@ def wiring_census() -> Dict[str, object]:
     }
 
 
+# ===========================================================================
+# THE COLOUR SOLVER -- read lazily, refused by name while it is missing
+# ===========================================================================
+
+#: Where the colour solver of Phase 178 lives, and what is said while it is
+#: not in the checkout.
+COLOUR_MODULE = "reasoning/colour_induction.py"
+COLOUR_MISSING = ("reasoning/colour_induction.py, the colour solver of Phase "
+                  "178, is not in this checkout (lost in the October 2026 "
+                  "reorganisation), so no answer is given")
+
+ColourGrid = Tuple[Tuple[int, ...], ...]
+
+
+def _colour_solver():
+    """The colour solver module, or ``None`` when its file is absent.
+
+    *Reconstructed 31 October 2026 (repository check).*  Only the module's
+    absence is caught: an error raised while importing a module that is
+    present is not hidden.
+    """
+    import importlib.util
+    root = __name__.rsplit(".", 2)[0]
+    if importlib.util.find_spec(root + ".reasoning.colour_induction") is None:
+        return None
+    from ..reasoning import colour_induction as ci
+    return ci
+
+
+def _colour_grid(text: str) -> Optional[ColourGrid]:
+    """A rectangular grid of colours ``0``-``9``: rows split by ``/``, each
+    row a digit string (``0120``) or cells split by commas or spaces
+    (``0 1 2 0``); ``None`` otherwise.  The reading of the Round 11 stand-in
+    for the colour solver, which records the module's task syntax."""
+    rows = [r.strip() for r in text.strip().split("/")]
+    if not rows or any(not r for r in rows):
+        return None
+    out: List[Tuple[int, ...]] = []
+    for r in rows:
+        cells = r.replace(",", " ").split()
+        if len(cells) == 1 and len(cells[0]) > 1:
+            cells = list(cells[0])
+        if not cells or any(len(c) != 1 or not c.isdigit() for c in cells):
+            return None
+        out.append(tuple(int(c) for c in cells))
+    if len({len(r) for r in out}) != 1:
+        return None
+    return tuple(out)
+
+
+def _colour_task(arg: str):
+    """``(pairs, query)`` when ``IN -> OUT ; ... ? QUERY`` reads as colour
+    grids throughout, else ``None``."""
+    if "?" not in arg:
+        return None
+    left, qtext = arg.rsplit("?", 1)
+    query = _colour_grid(qtext)
+    if query is None:
+        return None
+    pairs = []
+    for part in [p for p in left.split(";") if p.strip()]:
+        if "->" not in part:
+            return None
+        a, b = part.split("->", 1)
+        x, y = _colour_grid(a), _colour_grid(b)
+        if x is None or y is None:
+            return None
+        pairs.append((x, y))
+    return (pairs, query) if pairs else None
+
+
+def _shape(g) -> Tuple[int, int]:
+    return (len(g), len(g[0]) if len(g) else 0)
+
+
+def _colour_reason(pairs, query) -> str:
+    """Why a task is for the colour solver, or ``""`` if it is binary and
+    every pair keeps its shape (Phase 178: *a task whose grids carry more
+    than two colours or change shape*)."""
+    grids = [g for p in pairs for g in p] + [query]
+    colours = sorted({v for g in grids for row in g for v in row})
+    why = []
+    if any(v not in (0, 1) for v in colours):
+        why.append(f"colours {', '.join(map(str, colours))}")
+    changed = sum(1 for a, b in pairs if _shape(a) != _shape(b))
+    if changed:
+        why.append(f"{changed} demonstration{'' if changed == 1 else 's'} "
+                   "change shape")
+    return " and ".join(why)
+
+
 def _induce(arg: str) -> ToolResult:
     """``IN -> OUT ; IN -> OUT ? QUERY``: the rule the demonstrations
     determine, applied to the query, or the refusal that says why not
-    (Phase 175; ``reasoning/pipeline_kit.py``)."""
+    (Phase 175; ``reasoning/pipeline_kit.py``).
+
+    *Reconstructed 31 October 2026 (repository check): the colour route of
+    Phase 178 was lost in the October 2026 reorganisation; rebuilt from
+    MASTER_PLAN.md Phase 178, SYSTEM.md, the surviving context line of
+    ``rule30_round10/toolbox_wheel_induction.patch`` (``ok, text, figures =
+    ci.induce_colour_text(pairs, query)``) and the Round 11 stand-in, which
+    records the interface (``parse_task``, ``is_colour_task``,
+    ``induce_colour_text``, ``arc_text``).*  A task whose grids carry more
+    than two colours or change shape goes to the colour solver; while
+    ``reasoning/colour_induction.py`` is missing it is refused, naming the
+    module.  Binary tasks whose grids keep their shape go to the pipeline
+    kit unchanged.
+    """
     from ..reasoning import pipeline_kit as pk
+    ci = _colour_solver()
+    if ci is not None and hasattr(ci, "parse_task") \
+            and hasattr(ci, "is_colour_task"):
+        pairs, query, _why = ci.parse_task(arg)
+        colour = pairs is not None and bool(ci.is_colour_task(pairs, query))
+        reason = _colour_reason(pairs, query) if colour else ""
+    else:
+        task = _colour_task(arg)
+        pairs, query = task if task is not None else (None, None)
+        reason = _colour_reason(pairs, query) if task is not None else ""
+        colour = bool(reason)
+    if colour:
+        if ci is None:
+            grids = [g for p in pairs for g in p] + [query]
+            return ToolResult(False, f"induce: refused -- this is a colour "
+                              f"or shape-changing task ({reason}), which "
+                              f"goes to the colour solver, and "
+                              f"{COLOUR_MISSING}; binary tasks whose grids "
+                              f"keep their shape are read by the pipeline "
+                              f"kit as before",
+                              {"status": "unavailable", "route": "colour",
+                               "missing": COLOUR_MODULE,
+                               "colours": sorted({v for g in grids
+                                                  for row in g
+                                                  for v in row}),
+                               "demonstrations": len(pairs)})
+        ok, text, figures = ci.induce_colour_text(pairs, query)
+        return ToolResult(ok, text, figures)
     ok, text, figures = pk.induce_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _arc_dir():
+    from ..constants import source_material_item
+    return source_material_item("arc_agi_17/data/training")
+
+
+def _arc_tasks() -> List[str]:
+    d = _arc_dir()
+    return sorted(p.stem for p in d.glob("*.json")) if d.is_dir() else []
+
+
+def _as_grid(value) -> Optional[ColourGrid]:
+    if isinstance(value, str):
+        return _colour_grid(value)
+    if isinstance(value, (list, tuple)) and value and all(
+            isinstance(r, (list, tuple)) for r in value):
+        try:
+            return tuple(tuple(int(v) for v in r) for r in value)
+        except (TypeError, ValueError):
+            return None
+    return None
+
+
+def _grid_text(g: ColourGrid) -> str:
+    return "/".join("".join(str(v) for v in row) for row in g)
+
+
+def _arc(arg: str) -> ToolResult:
+    """``NAME``: a stored ARC task's demonstrations induced by the colour
+    solver, every test input answered or refused, and each answer checked
+    against the stored output (Phase 178); ``tool arc`` with no name lists
+    the stored tasks.
+
+    *Reconstructed 31 October 2026 (repository check): the original was lost
+    in the October 2026 reorganisation; rebuilt from MASTER_PLAN.md Phase
+    178, SYSTEM.md, the ``Tool("arc", ...)`` entry and ``_arc`` docstring
+    surviving in ``rule30_round11/toolbox_claim.patch`` and
+    ``rule30_round12/toolbox_round12.patch``, and the arc route of
+    ``rule30_round30/apply_round30.py`` (a graded task's figure ``status`` is
+    ``right`` or ``wrong``).*  The tasks are the 50 of the supplied
+    ``arc_agi_17/data/training``.  While ``reasoning/colour_induction.py`` is
+    missing every task is refused, naming the module; no answer is invented.
+    """
+    import json
+    name = arg.strip().removesuffix(".json").lower()
+    tasks = _arc_tasks()
+    ci = _colour_solver()
+    if not name:
+        if not tasks:
+            return ToolResult(False, "arc: refused -- no stored ARC task is "
+                              "in the supplied arc_agi_17/data/training",
+                              {"tasks": [], "count": 0})
+        tail = ("" if ci is not None else
+                f"; every one is refused while {COLOUR_MODULE} is missing")
+        return ToolResult(True, f"arc: {len(tasks)} stored ARC tasks "
+                          f"(arc_agi_17, training): {', '.join(tasks)}; "
+                          f"`tool arc NAME` induces one's demonstrations with "
+                          f"the colour solver and checks every test answer "
+                          f"against the stored output{tail}",
+                          {"tasks": tasks, "count": len(tasks),
+                           "solver": ci is not None})
+    if name not in tasks:
+        return ToolResult(False, f"arc: refused -- {name!r} is not one of the "
+                          f"{len(tasks)} stored ARC tasks; `tool arc` lists "
+                          "them", {"task": name, "count": len(tasks)})
+    data = json.loads((_arc_dir() / f"{name}.json").read_text(
+        encoding="utf-8"))
+    train, test = data.get("train", []), data.get("test", [])
+    if ci is None:
+        return ToolResult(False, f"arc: refused -- task {name} is stored "
+                          f"({len(train)} demonstrations, {len(test)} test "
+                          f"input{'' if len(test) == 1 else 's'}), but its "
+                          f"demonstrations are induced by the colour solver, "
+                          f"and {COLOUR_MISSING}",
+                          {"status": "unavailable", "missing": COLOUR_MODULE,
+                           "task": name, "demonstrations": len(train),
+                           "tests": len(test)})
+    if hasattr(ci, "arc_text"):
+        # Phase 186: a test input the colour solver refuses goes to the plan
+        # search of the Rule 30 study's hypothesis engine
+        # (reasoning/hypothesis_tools.py); its answers are graded the same way.
+        ht = _hypothesis_tools()
+        ok, text, figures = (ht.arc_combined_text(name) if ht is not None
+                             else ci.arc_text(name))
+        return ToolResult(ok, text, figures)
+    # The solver without its own ARC driver: each test input is put to
+    # ``induce_colour_text`` and its answer graded here.
+    pairs = [(tuple(map(tuple, p["input"])), tuple(map(tuple, p["output"])))
+             for p in train]
+    rows = []
+    for i, t in enumerate(test):
+        query = tuple(map(tuple, t["input"]))
+        want = tuple(map(tuple, t["output"])) if "output" in t else None
+        ok_i, text_i, fig_i = ci.induce_colour_text(pairs, query)
+        got = _as_grid(fig_i.get("answer")) if ok_i else None
+        status = ("refused" if got is None else "unchecked" if want is None
+                  else "right" if got == want else "wrong")
+        rows.append({"test": i, "status": status,
+                     "answer": None if got is None else _grid_text(got),
+                     "said": text_i})
+    counts = {s: sum(1 for r in rows if r["status"] == s)
+              for s in ("right", "wrong", "refused", "unchecked")}
+    overall = ("wrong" if counts["wrong"] else
+               "right" if rows and counts["right"] == len(rows) else
+               "partial" if counts["right"] else "refused")
+    said = "; ".join(f"test {r['test'] + 1}: {r['status']}"
+                     + (f" ({r['answer']})" if r["answer"] else "")
+                     for r in rows)
+    return ToolResult(overall == "right", f"arc {name}: {counts['right']} of "
+                      f"{len(rows)} test input(s) answered right, "
+                      f"{counts['wrong']} wrong, {counts['refused']} refused, "
+                      f"each answer checked against the stored output; "
+                      f"{said}",
+                      {"status": overall, "task": name,
+                       "demonstrations": len(train), "tests": len(rows),
+                       **counts, "rows": rows})
+
+
+# ===========================================================================
+# THE TOOLS OF PHASE 186 -- the intake items on the answering path
+# ===========================================================================
+
+#: Where the hypothesis engine's tools live, and what is said while they are
+#: not installed (they come from the intake item Rule30_GLM_Study).
+HYPOTHESIS_MODULE = "reasoning/hypothesis_tools.py"
+HYPOTHESIS_MISSING = ("reasoning/hypothesis_tools.py, the Rule 30 study's "
+                      "hypothesis engine on the answering path (intake item "
+                      "Rule30_GLM_Study), is not installed, so no answer is "
+                      "given")
+
+
+def _hypothesis_tools():
+    """The module of ``tool rule30`` and ``tool conjecture``, or ``None``
+    while it is not installed (read lazily, refused by name)."""
+    try:
+        from ..reasoning import hypothesis_tools
+    except ImportError:
+        return None
+    return hypothesis_tools
+
+
+def _rule30(arg: str) -> ToolResult:
+    """``centre N`` | ``claim SENTENCE`` | ``battery``: Rule 30 through the
+    hypothesis engine (Phase 186; :func:`glm_universal.reasoning.hypothesis_tools.rule30_text`)."""
+    ht = _hypothesis_tools()
+    if ht is None:
+        return ToolResult(False, f"rule30: refused -- {HYPOTHESIS_MISSING}",
+                          {"status": "unavailable", "missing": HYPOTHESIS_MODULE})
+    ok, text, figures = ht.rule30_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _conjecture(arg: str) -> ToolResult:
+    """A claim about every ``n`` read at five nested scales, or a registered
+    claim of the general domain (Phase 186;
+    :func:`glm_universal.reasoning.hypothesis_tools.conjecture_text`)."""
+    ht = _hypothesis_tools()
+    if ht is None:
+        return ToolResult(False, f"conjecture: refused -- {HYPOTHESIS_MISSING}",
+                          {"status": "unavailable", "missing": HYPOTHESIS_MODULE})
+    ok, text, figures = ht.conjecture_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _derive(arg: str) -> ToolResult:
+    """Does an equation follow from the formula wheels -- the fifteen
+    registry wheels, then the cent wheels, one wheel at a time -- with the
+    certificate or the separating functional (Phase 186;
+    :func:`glm_universal.wheels.derive_query.derive_text`)."""
+    from ..wheels import derive_query
+    ok, text, figures = derive_query.derive_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+# ===========================================================================
+# THE TOOLS OF PHASES 177-184 -- frames, the anchor, the Lorentzian lift
+# ===========================================================================
+
+FRAME_PLANE_USAGE = ("tool frame E,px,py -> E,px,py ; ... ? E,px,py (exact "
+                     "rationals, e.g. tool frame 1,0,0 -> -1,0,0 ; 2,1,0 -> "
+                     "-2,1,0 ; 2,0,1 -> -2,0,1 ? 3,1,1)")
+
+
+def _frame(arg: str) -> ToolResult:
+    """``E,p -> E',p' ; ... ? E,p``: an operator on exact rational 2-vectors
+    inferred from example pairs (Phase 177, ``reasoning/frame_operators.py``);
+    3-component states ``(E, px, py)`` go to the frame plane (Phase 178,
+    ``reasoning/frame_plane.py``), with the improper families of Phase 179
+    and the improper families times a change of units of Phase 181.
+
+    *Reconstructed 31 October 2026 (repository check): the original was lost
+    in the October 2026 reorganisation; rebuilt from MASTER_PLAN.md Phases
+    177-181 (``tool frame`` sends 3-component states to the frame plane,
+    2-component unchanged), SYSTEM.md and the tests.*
+    """
+    from ..reasoning import frame_operators as fo
+    from ..reasoning import frame_plane as fp
+    task = fp.parse_plane_task(arg)
+    if task is not None:
+        ok, text, figures = fp.plane_text(*task)
+        return ToolResult(ok, text, figures)
+    if "?" in arg and len(arg.rsplit("?", 1)[1].split(",")) == 3:
+        return ToolResult(False, "refused: a task on 3-component states "
+                          "needs every state as E,px,py; "
+                          + FRAME_PLANE_USAGE, {"dimensions": "1+2"})
+    ok, text, figures = fo.frame_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _kappa(arg: str) -> ToolResult:
+    """``[VALUE in kJ/mol]``: the anchor kappa read as a unit (Phase 177,
+    ``reasoning/kappa_anchor.py``).
+
+    *Reconstructed 31 October 2026 (repository check): the original was lost
+    in the October 2026 reorganisation; rebuilt from MASTER_PLAN.md Phase 177
+    and ``kappa_anchor.kappa_text``.*
+    """
+    from ..reasoning import kappa_anchor as ka
+    ok, text, figures = ka.kappa_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _lorentz(arg: str) -> ToolResult:
+    """``MASK [; MASK ...] [; @POS=BIT ...]``: one message read one or more
+    times, decoded in the Lorentzian lift (Phase 182); since Phase 183 the
+    answer must lie inside the first reading's tie, a single tie is refused
+    with the five bits that settle it (figure ``ask``), and ``@POS=BIT``
+    gives them back (``reasoning/lorentzian_lift.py``,
+    ``reasoning/lorentzian_evidence.py``).
+
+    *Reconstructed 31 October 2026 (repository check): the original was lost
+    in the October 2026 reorganisation; rebuilt from MASTER_PLAN.md Phases
+    182-183 and ``lorentzian_lift.resolve_text``.*
+    """
+    from ..reasoning import lorentzian_lift as ll
+    ok, text, figures = ll.resolve_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _evidence(arg: str) -> ToolResult:
+    """``A : B [, A2 : B2 ...] :: C``: one relation stated by one or more
+    examples, applied to ``C`` over the physics register; examples that
+    disagree are refused (Phase 183, ``reasoning/lorentzian_evidence.py``).
+
+    *Reconstructed 31 October 2026 (repository check): the original was lost
+    in the October 2026 reorganisation; rebuilt from MASTER_PLAN.md Phase 183
+    and ``lorentzian_evidence.evidence_text``.*
+    """
+    from ..reasoning import lorentzian_evidence as le
+    ok, text, figures = le.evidence_text(arg)
+    return ToolResult(ok, text, figures)
+
+
+def _majority(arg: str) -> ToolResult:
+    """``A : B [, A2 : B2 ...] :: C``: examples of a relation that may
+    conflict; the target a strict majority states answers, the outvoted
+    examples are named and the decoys a wrong answer would need are stated
+    (Phase 184, ``reasoning/lorentzian_majority.py``).
+
+    *Reconstructed 31 October 2026 (repository check): the original was lost
+    in the October 2026 reorganisation; rebuilt from MASTER_PLAN.md Phase 184
+    and ``lorentzian_majority.majority_text``.*
+    """
+    from ..reasoning import lorentzian_majority as lm
+    ok, text, figures = lm.majority_text(arg)
     return ToolResult(ok, text, figures)
 
 
@@ -992,6 +1471,19 @@ def _wiring(arg: str) -> ToolResult:
             return ToolResult(True, f"wiring: reasoning/{key}.py answers "
                               f"`tool {modules[key]}`",
                               {"module": key, "reached": True})
+        # 31 October 2026 (repository check): a module reached through
+        # another (frame_plane through `tool frame`, say) is reached too.
+        from pathlib import Path
+        unreached = set(c["declared"]) | set(c["undeclared"])
+        path = Path(__file__).resolve().parents[1] / "reasoning" / f"{key}.py"
+        if key.isidentifier() and path.exists() and key not in unreached:
+            return ToolResult(True, f"wiring: reasoning/{key}.py is reached "
+                              "from the answering path",
+                              {"module": key, "reached": True})
+        if key in c["undeclared"]:
+            return ToolResult(False, f"wiring: reasoning/{key}.py is reached "
+                              "by no query and declares no reason",
+                              {"module": key, "reached": False})
         return ToolResult(False, f"wiring: {name!r} is not a reasoning module "
                           "declared unreached or named by a tool", {})
     ok = not c["undeclared"] and not c["stale_declarations"]
@@ -1110,11 +1602,107 @@ TOOLS: Tuple[Tool, ...] = (
          "demonstration pairs of 0/1 grids or bit strings and applied to a "
          "query: every operator hypothesis that fits all the pairs is kept, "
          "and the query is answered only when they all agree (the owner's "
-         "pipeline kit)", "derive, refusal",
+         "pipeline kit); an ambiguous refusal names the input to ask about "
+         "(Phase 176); a task with more colours or grids that change shape "
+         "goes to the colour solver (Phase 178), refused by name if "
+         "reasoning/colour_induction.py is missing", "derive, refusal",
          ("RequestProject/GLM/PipelineInduction.lean",
-          "RequestProject/GLM/PipelineKit/Permutation.lean"),
+          "RequestProject/GLM/PipelineKit/Permutation.lean",
+          "RequestProject/GLM/PipelineAsk.lean"),
          "studies/PIPELINE_KIT_STUDY.md", _induce,
          takes="IN -> OUT ; IN -> OUT ? QUERY"),
+    # The six entries below: *Reconstructed 31 October 2026 (repository
+    # check): lost in the October 2026 reorganisation; rebuilt from
+    # MASTER_PLAN.md Phases 177-184, SYSTEM.md and the fragments of the
+    # `arc` and `frame` entries in the Rule 30 rounds' toolbox patches.*
+    Tool("arc", "reasoning.colour_induction", "a stored ARC task's "
+         "demonstrations induced by the colour solver, every test input "
+         "answered or refused and each answer checked against the stored "
+         "output (refused by name if reasoning/colour_induction.py is "
+         "missing)", "derive, refusal",
+         ("RequestProject/GLM/ColourInduction.lean",),
+         "studies/COLOUR_INDUCTION_STUDY.md", _arc,
+         takes="a task name, or nothing for the list"),
+    Tool("frame", "reasoning.frame_operators", "an operator on exact "
+         "rational 2-vectors inferred from example pairs, layer by layer: the "
+         "invariant kept (E^2-p^2 or E^2+p^2) says which family it can be, "
+         "the light-cone or complex layer fits it, and the query is answered "
+         "only when every fitting family agrees and one is tested; states "
+         "(E, px, py) go to the frame plane: boosts along any axis, "
+         "rotations, reflections and the four components of the Lorentz "
+         "group, each also times a change of units, a Lorentz answer split "
+         "into a pure boost times its exact Wigner rotation",
+         "derive, refusal",
+         ("RequestProject/GLM/RationalBoost.lean",
+          "RequestProject/GLM/LorentzPlane.lean",
+          "RequestProject/GLM/LorentzImproper.lean",
+          "RequestProject/GLM/LorentzUnits.lean"),
+         "studies/FRAME_OPERATOR_STUDY.md", _frame,
+         takes="E,p -> E',p' ; ... ? E,p (or E,px,py states)"),
+    Tool("kappa", "reasoning.kappa_anchor", "the anchor kappa = 190 kJ/mol "
+         "read as a unit: the chain at an anchor, the proof that "
+         "dimensionless outputs are free of it, its source in the diatomic "
+         "register (D0(Br2)) and its refinement budget", "derive",
+         ("RequestProject/GLM/KappaAnchor.lean",),
+         "studies/FRAME_OPERATOR_STUDY.md", _kappa,
+         takes="an anchor in kJ/mol, or nothing"),
+    Tool("lorentz", "reasoning.lorentzian_lift", "one message read one or "
+         "more times, decoded in the Lorentzian lift to II_25,1: a single "
+         "Golay tie refused with its certificate (an A_1^24 deep hole) and "
+         "the five sent bits that settle it, further readings scored in the "
+         "same frame and added, an answer outside the first reading's tie "
+         "refused", "derive, refusal",
+         ("RequestProject/GLM/LorentzianLift.lean",
+          "RequestProject/GLM/GolayDeepHole.lean",
+          "RequestProject/GLM/LorentzianEvidence.lean"),
+         "studies/LORENTZIAN_LIFT_STUDY.md", _lorentz,
+         takes="MASK [; MASK ...] [; @POS=BIT ...]"),
+    Tool("evidence", "reasoning.lorentzian_evidence", "one relation stated "
+         "by one or more examples, applied over the physics register in the "
+         "Lorentzian evidence space: examples that disagree are refused, "
+         "examples that agree give the dimension class and every name in it",
+         "derive, refusal", ("RequestProject/GLM/LorentzianEvidence.lean",),
+         "studies/LORENTZIAN_EVIDENCE_STUDY.md", _evidence,
+         takes="A : B [, A2 : B2 ...] :: C"),
+    Tool("majority", "reasoning.lorentzian_majority", "examples of a "
+         "relation that may conflict: the target a strict majority of them "
+         "states answers, the outvoted examples are named and the decoys a "
+         "wrong answer would need are stated", "derive, refusal",
+         ("RequestProject/GLM/LorentzianMajority.lean",
+          "RequestProject/GLM/LorentzianEvidence.lean"),
+         "studies/LORENTZIAN_MAJORITY_STUDY.md", _majority,
+         takes="A : B [, A2 : B2 ...] :: C"),
+    # Phase 186: the intake items absorbed where they measurably help.
+    Tool("rule30", "reasoning.hypothesis_tools", "Rule 30 through the Rule 30 "
+         "study's hypothesis engine: the first N cells of the centre column "
+         "(the first 64 proved in Lean, the step proved to be Rule 30), a "
+         "sentence about Rule 30 put through the engine's gates and answered "
+         "with its ring (knows / thinks true / doesn't know) and the Lean "
+         "theorems it rests on, or the engine's 39-claim battery",
+         "derive, refusal",
+         ("RequestProject/GLM/IntakeChecks/RuleThirtyBits.lean",
+          "RequestProject/GLM/HypothesisEngine/Wheel.lean",
+          "RequestProject/GLM/HypothesisEngine/NeedsWheel.lean"),
+         "studies/INTAKE_CAPABILITY_STUDY.md", _rule30,
+         takes="centre N | claim SENTENCE | battery"),
+    Tool("conjecture", "reasoning.hypothesis_tools", "a claim about every n "
+         "read at five nested scales: a counterexample refutes it, surviving "
+         "every read is reported as surviving (never as proved); or a "
+         "registered claim of the general domain answered with its Lean "
+         "theorem", "derive, refusal",
+         ("RequestProject/GLM/HypothesisEngine/Benchmarks.lean",
+          "RequestProject/GLM/HypothesisEngine/NeedsWheel.lean"),
+         "studies/INTAKE_CAPABILITY_STUDY.md", _conjecture,
+         takes="a predicate in n [for every n >= K], or a registered name"),
+    Tool("derive", "wheels.derive_query", "does an equation between named "
+         "quantities follow from the formula wheels (the fifteen registry "
+         "wheels, then the cent wheels, one wheel at a time): the explicit "
+         "rational combination of a wheel's axioms, or a separating "
+         "functional", "derive, refusal",
+         ("RequestProject/GLM/IntakeChecks/Derivability.lean",
+          "RequestProject/GLM/Wheels/CentWheels.lean"),
+         "studies/CENT_WHEELS_STUDY.md", _derive,
+         takes="EQUATION [in W16]"),
     Tool("wiring", "runtime.toolbox", "which reasoning modules a query can "
          "reach, and the declared reason for each one it cannot", "address",
          ("RequestProject/GLM/ConnectedMachine.lean",),
@@ -1159,6 +1747,46 @@ TOOL_PHRASES: Tuple[Tuple[str, str], ...] = (
      "tool induce {1}"),
     (r"which reasoning modules (?:can a query reach|are reached|are wired)",
      "tool wiring"),
+    # Phase 178: English routes for `tool arc`, `tool frame` and `tool kappa`.
+    # *Reconstructed 31 October 2026 (repository check): the arc and frame
+    # routes as they survive in `rule30_round11/toolbox_claim.patch` and
+    # `rule30_round12/toolbox_round12.patch`; the kappa route rebuilt from
+    # SYSTEM.md ("what is the anchor kappa").*
+    (r"(?:solve|answer|try) (?:the )?arc (?:task|puzzle) ([0-9a-f]{8})",
+     "tool arc {1}"),
+    (r"(?:which|what) (?:frame )?operator (?:maps|takes|sends) (.+\?.+)",
+     "tool frame {1}"),
+    (r"(?:boost|transform) (.+\?.+)", "tool frame {1}"),
+    (r"(?:what is |what's |explain |read )?(?:the )?anchor (?:kappa|\u03ba)",
+     "tool kappa"),
+    (r"(?:what is |what's |explain |read )?(?:the )?anchor (?:kappa|\u03ba) "
+     r"(?:at|of|=) (\d+(?:\.\d+)?)(?: ?kj/mol)?", "tool kappa {1}"),
+    # Phase 186: English routes for `tool rule30`, `tool conjecture` and
+    # `tool derive` (consulted, like every route here, only after every
+    # surface has refused; the tool's answer is kept only if it answers).
+    (r"(?:what are |give me |list |show )?(?:the )?first (\d+) (?:cells|bits|"
+     r"terms|values) of (?:the )?rule[ -]?30(?:'s)? cent(?:re|er) column"
+     r"(?: from (?:a|one) (?:single )?black cell)?", "tool rule30 centre {1}"),
+    (r"(?:what is |show )?(?:the )?rule[ -]?30(?:'s)? cent(?:re|er) column "
+     r"(?:for|to|up to) (\d+)(?: steps| cells| bits)?", "tool rule30 centre {1}"),
+    (r"(?:is it true that |check (?:that |whether )?|test (?:whether )?)?in "
+     r"rule[ -]?30,? (.+)", "tool rule30 claim {1}"),
+    (r"(?:is it true that |check whether |check that )(.*\b(?:diagonal|"
+     r"diagonals|centre column|center column|TAX)\b.*)", "tool rule30 claim {1}"),
+    (r"(?:score|run) the rule[ -]?30 (?:battery|claims|domain)",
+     "tool rule30 battery"),
+    (r"is it true that ((?:.+) for (?:every|all|each) (?:integer |natural "
+     r"number )?n(?:\s*(?:>=|\u2265)\s*\d+)?)", "tool conjecture {1}"),
+    (r"is (.+) (prime|even|odd) for ((?:every|all|each) (?:integer |natural "
+     r"number )?n(?:\s*(?:>=|\u2265)\s*\d+)?)", "tool conjecture {1} is {2} for {3}"),
+    (r"(?:test|check) the conjecture (?:that )?(.+)", "tool conjecture {1}"),
+    (r"does (.+=.+) follow from (?:wheel )?(w\d{1,2})", "tool derive {1} in {2}"),
+    (r"is (.+=.+) a (?:law|valid law|physical law)", "tool derive {1}"),
+    (r"does (.+=.+) follow(?: from the (?:formula )?wheels)?", "tool derive {1}"),
+    (r"is (.+=.+) derivable(?: from the (?:formula )?wheels)?", "tool derive {1}"),
+    (r"(?:can|could) (.+=.+) be derived(?: from the (?:formula )?wheels)?",
+     "tool derive {1}"),
+    (r"derive (.+=.+)", "tool derive {1}"),
 )
 
 
@@ -1186,10 +1814,29 @@ def tool_named(name: str) -> Optional[Tool]:
     return None
 
 
-def reads_tool(text: str) -> bool:
-    """Whether the toolbox reads ``text``."""
-    t = text.strip().lower()
-    return t == "tools" or t.startswith("tool ") or t == "tool"
+#: Whether the toolbox reads a text: the rule is held by
+#: :func:`glm_universal.runtime.lookup_kinds.reads_tool` (31 October 2026),
+#: so that the parser can ask it without importing this module.
+from .lookup_kinds import reads_tool  # noqa: E402  (re-exported)
+
+
+def _cited(path: str, lean: bool = False) -> str:
+    """A cited Lean file (``lean=True``) or study by name, marked ``(held)``
+    when it waits in ``src/lean/awaiting_recovery/`` and ``(missing)`` when
+    it is not in the repository (31 October 2026, repository check: several
+    files were lost in the October 2026 reorganisation,
+    ``studies/_lean_files_needed.md``).  The caller says which kind it is,
+    rather than this function testing the name's suffix: a bare Lean suffix
+    in this module would make every importer of the toolbox depend on the
+    whole development under the sign-off closure rule."""
+    from ..constants import LEAN_HOLDING_DIR, REPOSITORY_ROOT, lean_file
+    name = path.split("/")[-1]
+    if lean:
+        p = lean_file(path)
+        if not p.is_file():
+            return name + " (missing)"
+        return name + (" (held)" if LEAN_HOLDING_DIR in p.parents else "")
+    return name + ("" if (REPOSITORY_ROOT / path).exists() else " (missing)")
 
 
 def catalogue_text() -> str:
@@ -1200,8 +1847,8 @@ def catalogue_text() -> str:
     for t in TOOLS:
         arg = f" <{t.takes}>" if t.takes else ""
         lines.append(f"  tool {t.name}{arg}: {t.summary} "
-                     f"[{', '.join(x.split('/')[-1] for x in t.lean)}; "
-                     f"{t.study.split('/')[-1]}]")
+                     f"[{', '.join(_cited(x, lean=True) for x in t.lean)}; "
+                     f"{_cited(t.study)}]")
     return "\n".join(lines)
 
 

@@ -1,38 +1,72 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: '9 of 9 marks on the re-take (7 of 9 on the first: R5 and R6 missed); 171 of 171 column-3
-  replays verified (169 of 171 first); 50 cited theorem names, all declared; status: 172 answered, 5 open,
-  3 contradicted, 43 refused; boundary: 171 certified, 5 checkable, 46 refused, 1 uncertified.'
+deciding_figure: 'Phase 169 record (20 October 2026): 9 of 9 marks on the re-take (7 of 9 on the first:
+  R5 and R6 missed); 171 of 171 column-3 replays verified (169 of 171 first); 50 cited theorem names,
+  all declared; status: 172 answered, 5 open, 3 contradicted, 43 refused; boundary: 171 certified, 5 checkable,
+  46 refused, 1 uncertified. Re-taken 31 October 2026 on the reconstructed model (§7.6): 9 of 9 marks;
+  173 of 173 replays verified; 21 cited names, none undeclared among the 9,341 declarations of the build
+  tree; status: 174 answered, 5 open, 3 contradicted, 45 refused; boundary: 173 certified, 5 checkable,
+  48 refused, 1 uncertified.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - runtime/evidence
+  - reasoning/evidence_model_study.py
+  - reasoning/lean_address.py
+  - runtime/evidence.py
+  - runtime/tct_engine.py
+  - tools.py
   lean: []
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: EVIDENCE_MODEL_STUDY.md
   test:
   - test_evidence_model.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: EVIDENCE_MODEL_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
   refinement_of: ''
   resolutions_tried: []
 marks:
-  amended: []
-  declared: []
-  met: []
-  missed: []
+  amended:
+  - R5′
+  declared:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  - R6
+  - R7
+  - R8
+  - R9
+  met:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R7
+  - R8
+  - R9
+  - R5′
+  missed:
+  - R5
+  - R6
 perturbations: []
 phase: 169
 predecessors: []
@@ -42,6 +76,7 @@ question: Can the answers of the planner, the grammar, the toolbox, the lattice 
   its open tie, its refusal reason, its reply history and whether it was replayed — truthfully, over the
   whole evaluation?
 recomputed_by: '`glm_universal.reasoning.evidence_model_study.evidence_model_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -67,7 +102,8 @@ sections:
 - anchor: in-one-paragraph
   heading: In one paragraph
 status: closed
-successors: []
+successors:
+- EVIDENCE_IN_USE_STUDY
 superseded_by: ''
 supersedes: []
 title: One evidence and result model — every answer and refusal of the evaluation read into the same ten
@@ -79,5 +115,7 @@ verdict: 'Yes, after two repairs the census itself found. All 223 evaluation que
   artefact, amended), and two answers'' own column 3 did not reproduce them — the trilinear template could
   not replay a triple of axis labels and the language report''s column 3 had drifted behind its report.
   Both were real defects of the replay, fixed; on the re-take every one of the 171 replayable answers
-  verifies.'
+  verifies. Re-taken on 31 October 2026 on the reconstructed model, with the Lean declaration lookup restored
+  so that every cited name is checked against the declarations of the build tree, over the 227 questions
+  the evaluation now holds: 9 of 9 marks again (§7.6).'
 wobble_deps: []

@@ -1,0 +1,11 @@
+--- /tmp/parser_orig.py	2026-10-24 04:47:28.470426687 +0000
++++ glm_universal/runtime/parser.py	2026-10-24 04:47:28.491274297 +0000
+@@ -219,7 +219,7 @@
+ #: collision is reported in :attr:`Query.trace` rather than hidden.
+ DOMAIN_PRIORITY: Tuple[str, ...] = (
+     "physics", "chemistry", "molecules", "mathematics", "spatial",
+-    "harmonics", "economics", "lexicon",
++    "harmonics", "economics", "automata", "lexicon",
+ )
+ 
+ #: Directive keywords that govern **only** when they open the question.

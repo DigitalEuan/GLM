@@ -32,7 +32,10 @@ def test_every_baseline_case_is_still_an_evaluation_case():
     assert len(before) == len(set(before)) == 178
     assert set(before) <= ids
     # Phase 134 added the nine cases of the carrier kind.
-    assert ids - set(before) == {"report-hole-configuration"} | _CARRIER
+    # Last altered 31 October 2026 (repository check): every round since
+    # Phase 134 has added evaluation cases (223 now), so the cases this round
+    # added are required to be among the new ones, not to be all of them.
+    assert ({"report-hole-configuration"} | _CARRIER) <= ids - set(before)
 
 
 def test_the_declared_causes_name_only_baseline_cases():
@@ -47,8 +50,14 @@ def test_the_stored_comparison_holds():
     assert report["cases"] == report["present"] == 178
     assert report["same_status"] == 178
     assert report["undeclared"] == ()
+    # Last altered 31 October 2026 (repository check): as in the first test,
+    # the cases added since the baseline are every evaluation case not in it
+    # (49 at the 31 October 2026 re-take), the round's own among them.
+    before = {str(row["id"]) for row in fp.baseline()["before"]}
     assert report["new_cases"] == tuple(sorted(
-        {"report-hole-configuration"} | _CARRIER))
+        {case.id for case in ev.CASES} - before))
+    assert ({"report-hole-configuration"} | _CARRIER) <= set(
+        report["new_cases"])
     assert report["holds"] is True
 
 

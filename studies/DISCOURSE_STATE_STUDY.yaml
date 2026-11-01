@@ -1,43 +1,41 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 29 of 29 declared follow-ups as declared (7 column, 16 fourth-shape, 6 surface), 0 wrong;
   Phase 55's layer gives 0 of the 20 new-behaviour cases as declared; the session alone as the licence
   answers 0 of the 5 surface answers; 15 of 15 of Phase 55's follow-ups keep their outcome but the 1 declared
   move; 32 of 32 column cells equal the answer asked alone; 8 of 8 marks met.
-directives:
-- D1
-- D2
-- D3
-- D4
-- D5
-- D6
-- D7
-- D8
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/discourse_cases
-  - runtime/conversation
-  - runtime/discourse
-  - runtime/discourse_report
-  - tests/test_discourse_state
+  - evaluation/discourse_cases.py
+  - runtime/conversation.py
+  - runtime/discourse.py
+  - runtime/discourse_report.py
+  - tools.py
   lean:
   - Conversation
   - DiscourseState
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DISCOURSE_STATE_STUDY.md
   test:
   - test_discourse_state.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DISCOURSE_STATE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -45,16 +43,37 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+  - D6
+  - D7
+  - D8
+  met:
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+  - D6
+  - D7
+  - D8
   missed: []
 perturbations: []
-phase: 55
-predecessors: []
+phase: 92
+predecessors:
+- CONNECTED_MACHINE_STUDY
+- CONVERSATION_STUDY
+- HOLE_FOLDS_STUDY
 question: Can the conversation carry what an earlier turn left behind further than one substituted name
   — a set a fold produced, *the one before that*, *both of them*, *why?* — and bind a follow-up whose
   rewritten question only another surface of the machine answers?
 recomputed_by: '`glm_universal.runtime.discourse_report.discourse_report`'
+related:
+- ROADMAP_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

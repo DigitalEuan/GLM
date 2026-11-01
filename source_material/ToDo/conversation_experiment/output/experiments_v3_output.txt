@@ -1,0 +1,167 @@
+========================================================================
+GLM DEEP EXPERIMENTS — Lean generation + persistence + missing-nodes
+========================================================================
+
+========================================================================
+DEEP G1 — Lean theorem generation (multi-way checked)
+========================================================================
+
+  --- Generate Lean source for physics carriers ---
+
+  ✓ energy (kind=def, forall=2, exists=1)
+      namespace GLM5
+      def energy_stmt (x1 : α) (x2 : α) (y1 : β) : (((((¬(x1 → y1)) ∧ (¬(x2 → y1))) ∧ (∑ i, f i)) ∧ (∑ i, f i)) ∧ (n > 0)) := by sorry
+      end GLM5
+      round-trip: matches
+
+  ✓ force (kind=def, forall=1, exists=1)
+      def force_stmt (x1 : α) (y1 : β) : ((((¬(x1 → y1)) ∧ (¬(x1 → y1))) ∧ (∑ i, f i)) ∧ (n > 0)) := by sorry
+      
+      round-trip: matches
+
+  ✓ speed_of_light (kind=theorem, forall=1, exists=0)
+      theorem speed_of_light_stmt (x1 : α) : ((¬(x1 → y1)) ∧ (∑ i, f i)) := by sorry
+      
+      round-trip: matches
+
+  ✓ mass (kind=theorem, forall=0, exists=1)
+      theorem mass_stmt (y1 : β) : (n > 0) := by sorry
+      
+      round-trip: matches
+
+  ✓ momentum (kind=def, forall=1, exists=1)
+      def momentum_stmt (x1 : α) (y1 : β) : (((¬(x1 → y1)) ∧ (∑ i, f i)) ∧ (n > 0)) := by sorry
+      
+      round-trip: matches
+
+  ✓ curvature (kind=theorem, forall=-1, exists=0)
+      theorem curvature_stmt (x1 : α) : (∑ i, f i) := by sorry
+      
+      round-trip: matches
+
+  ✓ planck_constant (kind=theorem, forall=2, exists=1)
+      namespace GLM12
+      theorem planck_constant_stmt (x1 : α) (x2 : α) (y1 : β) : ((((¬(x1 → y1)) ∧ (∑ i, f i)) ∧ (∑ i, f i)) ∧ (n > 0)) := by sorry
+      end GLM12
+      round-trip: matches
+
+  ✓ gravitational_constant (kind=def, forall=3, exists=-1)
+      def gravitational_constant_stmt (x1 : α) (x2 : α) (x3 : α) (y1 : β) : ((((((¬(x1 → y1)) ∧ (¬(x2 → y1))) ∧ (∑ i, f i)) ∧ (∑ i, f i)) ∧ (∑ i, f i)) ∧ (n > 0)) := by sorry
+      
+      round-trip: matches
+
+  ✓ wavelength (kind=theorem, forall=1, exists=0)
+      theorem wavelength_stmt (x1 : α) : (∑ i, f i) := by sorry
+      
+      round-trip: matches
+
+  ✓ frequency (kind=theorem, forall=0, exists=0)
+      namespace GLM1
+      theorem frequency_stmt  : (¬(x1 → y1)) := by sorry
+      end GLM1
+      round-trip: matches
+
+  --- INVERSE: find carriers matching a target Lean shape ---
+  Target shape: forall=2, exists=1, kind=def
+  Top-5 nearest carriers (Hamming distance):
+    ○ energy                          distance=2
+    ○ kinetic_energy                  distance=2
+    ○ potential_energy                distance=2
+    ○ binding_energy                  distance=3
+    ○ enthalpy                        distance=3
+
+========================================================================
+DEEP G2 — Persistent procedure store (deterministic, no LLM drift)
+========================================================================
+  Design: content-addressed (SHA-256), append-only,
+         success_count recomputed from audit log.
+
+  --- Phase 1: run queries to populate store ---
+    force : energy :: pressure : ?                          -> verified=True, answer=adhesion_energy
+    verify energy = mass * speed_of_light^2                 -> verified=True, answer=kinetic_energy
+    verify force = mass * acceleration                      -> verified=False, answer=None
+    describe energy                                         -> verified=True, answer=kinetic_energy
+    energy : mass :: wavelength : ?                         -> verified=True, answer=adhesion_energy
+
+  --- Phase 2: inspect persistent store ---
+    Persistent store enabled: True
+    Procedures stored:        3
+    Total replays recorded:   23
+    Per-procedure:
+      shape=verify:2         answer=kinetic_energy                  used=7×
+      shape=describe:1       answer=kinetic_energy                  used=6×
+      shape=analogy:3        answer=adhesion_energy                 used=13×
+
+  --- Phase 3: simulate a NEW session by loading the store ---
+    Loaded 3 procedures from persistent store into new session.
+    Re-running queries in new session (should hit procedural replay):
+      force : energy :: pressure : ?                          -> method=procedural_replay (success_count=14)
+      verify energy = mass * speed_of_light^2                 -> method=procedural_replay (success_count=8)
+      verify force = mass * acceleration                      -> method=nearest d²=1/4
+    Stats: {'reason_calls': 3, 'procedural_hits': 2, 'procedural_misses': 1, 'full_reason_runs': 1}
+    Procedural hits: 2 / 3 reasons
+
+  --- Phase 4: determinism check ---
+    Session 2 procedure_count: 3
+    Session 3 procedure_count: 3
+    Session 2 total_replays:   25
+    Session 3 total_replays:   25
+    Deterministic across sessions: True
+
+========================================================================
+DEEP G3 — Missing node proposer (unlicensed = information signal)
+========================================================================
+  Instead of rejecting unlicensed trajectories, treat them as
+  signals that a node is missing from the register.
+  Compute midpoint → find nearest register carrier → propose.
+
+  --- Constructed unlicensed trajectory: force → wavelength ---
+    transition: force → wavelength
+    licence: unlicensed
+    d²: 13/8
+
+    PROPOSED MISSING NODE:
+      The trajectory from force to wavelength is unlicensed.
+      The exact midpoint carrier (24-vector) is closest to:
+        'impulse'  (d²=5/32)
+
+      Interpretation:
+        The register may be MISSING a node at the midpoint between
+        'force' and 'wavelength'. The carrier 'impulse'
+        is the closest existing entry, but it's still 5/32
+        away — suggesting the conceptual gap is real.
+
+      Top-5 nearest candidates to investigate:
+        - impulse                         d²=5/32
+        - momentum                        d²=5/32
+        - speed                           d²=5/32
+        - velocity                        d²=5/32
+        - acceleration                    d²=13/32
+
+  --- Constructed unlicensed: speed_of_light → mass ---
+    transition: speed_of_light → mass
+    licence: unlicensed
+    d²: 165/4
+
+    PROPOSED MISSING NODE:
+      midpoint nearest: code_rate (d²=3/16)
+      This is the carrier whose geometric position is closest
+      to the midpoint between 'speed_of_light' and 'mass'.
+      In physics, this conceptual gap is bridged by E=mc² —
+      the carrier 'energy' should be near the midpoint.
+      Is 'energy' in top-5 nearest? False
+      Top-5 nearest candidates:
+         code_rate                       d²=3/16
+         computational_rate              d²=3/16
+         fisher_information              d²=3/16
+         channel_capacity                d²=5/16
+         friction_velocity               d²=5/16
+
+========================================================================
+SUMMARY
+========================================================================
+  G1 Lean theorems generated: 10
+  G1 inverse matches found: 5
+  G2 persistent procedures: 3
+  G2 deterministic across sessions: True
+  G3 missing-node proposals: 2

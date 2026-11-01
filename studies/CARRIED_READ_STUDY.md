@@ -4,13 +4,15 @@
 
 **Question.** Can the batch machine check the values a chain carries by reading the session's registers and the question itself, and can the typed planner's computations and the session's field answers be run and gated by the same machine, without moving any answer?
 
-**Verdict.** Yes. The machine is given its own copy of the registers (8,408 entries in 11 tables) and the question's numbers, and of the 2,314 steps Phase 151 carried as data it now reads 2,189 and computes 33 more, with 92 still carried; every answered chain is still admitted. A lie at a register read is found at its own step every time, a lie at a given whenever it is not another number of the same question, and a lie at a newly computed step every time. The typed planner's 42 exact computations and 7,716 field answers of the session's default domains run through the same machine, every honest one admitted and every altered one refused, and no answer moved. No mark was missed.
+**Verdict.** Yes. The machine is given its own copy of the registers (8,408 entries in 11 tables) and the question's numbers, and of the 2,314 steps Phase 151 carried as data it now reads 2,189 and computes 33 more, with 92 still carried; every answered chain is still admitted. A lie at a register read is found at its own step every time, a lie at a given whenever it is not another number of the same question, and a lie at a newly computed step every time. The typed planner's 42 exact computations and 7,716 field answers of the session's default domains run through the same machine, every honest one admitted and every altered one refused, and no answer moved. No mark was missed. Re-measured on 31 October 2026 (repository check) by the reconstructed measurement module, 11 of the 12 measured marks hold: every chain, register, question, computed, typed and field mark is met over the reconstruction's 187 chains, and F1 is not met because its baseline was lost in the October 2026 reorganisation; §7.5 gives the figures.
 
-**Deciding figure.** 13 of 13 marks; 174/174 chains admitted with 2,087 register reads, 102 question reads, 213 computed and 92 carried steps; lies found at their step 121/121 (register), 54/54 (question, 3 more are other numbers of the question), 42/42 (computed); typed plans 42/42 admitted and 42/42 lies refused; field reads 7,716/7,716 admitted and 7,716/7,716 lies refused; 697/697 texts unchanged.
+**Deciding figure.** 11 of 12 measured marks and L1, re-measured 31 October 2026 (187/187 chains admitted; lies found 134/134, 54/54, 35/35; typed plans 41/41; field reads 7,716/7,716; F1: baseline lost); the round recorded 13 of 13 marks; 174/174 chains admitted with 2,087 register reads, 102 question reads, 213 computed and 92 carried steps; lies found at their step 121/121 (register), 54/54 (question, 3 more are other numbers of the question), 42/42 (computed); typed plans 42/42 admitted and 42/42 lies refused; field reads 7,716/7,716 admitted and 7,716/7,716 lies refused; 697/697 texts unchanged.
 
 **Recomputed by.** `glm_universal.reasoning.carried_read_study.carried_read_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured; 11 of 12 measured marks by the reconstructed module, where the round recorded 12 of 12 and L1 — F1 not met, its baseline lost, §7.5; the round's record is kept as written.)*
 
 ---
 
@@ -234,3 +236,34 @@ questions they withhold nothing, because nothing disagrees.
 * The plan search and the typed planner's other plan kinds (ordering,
   extremum, linear, Bezout, factorise, substrate facts) are not yet said as
   GLM-BAT.
+
+### 7.5 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement
+module (`reasoning/carried_read_study.py`) was lost in the October 2026
+reorganisation and rebuilt from this document and the tests; the answering-path
+gates of this round (`runtime/stepwise.py`, `runtime/semantic_plan.py`,
+`runtime/session.py`) are present again, and the measurement was taken again
+(`tools carried-read --write`). The figures are **the reconstruction's**: its
+corpus of texts is rebuilt (270 texts, where the round recorded 283 stepwise
+texts), so the counts differ from §7.1 and do not replace it. The table gives the
+round's record beside the re-measured figure for every mark.
+
+| mark | the round's record (§7.1) | re-measured | met |
+|---|---|---|---|
+| **R1** | 8,408 entries in 11 tables, 0 duplicated; snapshot 1,965 of 1,965 | 8408 entries in 11 tables, 0 duplicated keys (2438 not sayable); snapshot 1965/1965 agree | yes |
+| **R2** | every entry found, no altered entry found, 10 tables | the same, 10 tables | yes |
+| **C1** | 174 of 174 admitted; 2,087 register reads, 102 question reads, 213 computed, 92 carried | 187/187 admitted; 226 computed, 2214 read (2111 register, 103 question), 92 carried | yes |
+| **C2** | 121 of 121 register lies | 134/134 first drift at the lie, rolled back | yes |
+| **C3** | 54 of 54 question lies; 3 are other numbers of the question | 54/54 caught; 4 lies are other numbers of the question | yes |
+| **C4** | 42 of 42 computed lies | 35/35 | yes |
+| **C5** | 174/174 run and pipeline scripts; 348 of 348 mutants | 187/187 run, 187/187 pipeline; 374/374 mutants rejected | yes |
+| **T1** | 42 of 42 said typed plans admitted | 41/41 admitted (arith 9, convert 13, gcd 7, lcm 1, prime 11) | yes |
+| **T2** | 42 of 42 altered claims refused | 41/41 refused | yes |
+| **S1** | 7,716 of 7,716 read and admitted (8,408 asked) | 7716/7716 admitted (8408 asked) | yes |
+| **S2** | 7,716 of 7,716 refused | 7716/7716 refused | yes |
+| **F1** | 697 of 697 texts unchanged | not measured: `reasoning/_data/carried_read_baseline.json` was lost in the October 2026 reorganisation | no |
+
+So **11 of 12 measured marks** (L1 by the build: `CarriedRead.lean`, 8 of 8
+theorems, no `sorry`). F1 cannot come back as recorded: a baseline taken now
+would compare the answering path with itself.

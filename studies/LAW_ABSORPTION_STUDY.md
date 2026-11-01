@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Why this round, and what it is not
@@ -140,7 +142,7 @@ only the standard axioms.
 **Summary.** Eleven laws are absorbed as computed self-knowledge of the substrate: questions the GLM refused before this round are now answered from the running code. Two were already GLM definitions, three were retested in dimensionless form and refused, and forty-nine are retired with a reason each.
 
 Recomputed by `glm_universal.reasoning.law_absorption.law_absorption_report`
-(`PYTHONPATH=. python3 -m glm_universal.tools law-absorption`); pinned by
+(`PYTHONPATH=src python3 -m glm_universal.tools law-absorption`); pinned by
 `tests/test_law_absorption.py`; the corrections are theorems of
 `RequestProject/GLM/LawAbsorption.lean`. All 8 of 8 marks met.
 

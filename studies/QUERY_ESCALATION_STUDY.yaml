@@ -1,29 +1,39 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted;
-  of 18 declared probes, 4 resolve above the first rung.
+deciding_figure: 'Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted;
+  of 18 declared probes, 4 resolve above the first rung. Re-measured 31 October 2026 over 227 evaluation
+  cases: 0 answers moved, 0 principled refusals converted, 4 of 18 probes above the first rung. Re-measured
+  1 November 2026 over 237 evaluation cases: 0 answers moved, 0 principled refusals converted, 4 of 18
+  probes above the first rung.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/query_escalation.py
+  - runtime/escalation_loop.py
   lean:
   - Escalation
   - EscalationLoop
   - Layers
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: QUERY_ESCALATION_STUDY.md
-  test:
-  - test_query_escalation.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: QUERY_ESCALATION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -35,18 +45,14 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 35
 predecessors: []
-question: 'The deep-hole rounds are the only place in this repository where
-
-  a refusal was answered by raising the resolution of the reading instead of
-
-  stopping. Can that be made a step of the ordinary query loop — with a declared
-
-  ladder, a stated cost, and a rule that stops it turning a principled refusal
-
-  into an answer — without moving any answer the runtime already gives?'
+question: The deep-hole rounds are the only place in this repository where a refusal was answered by raising
+  the resolution of the reading instead of stopping. Can that be made a step of the ordinary query loop
+  — with a declared ladder, a stated cost, and a rule that stops it turning a principled refusal into
+  an answer — without moving any answer the runtime already gives?
 recomputed_by: '`glm_universal.reasoning.query_escalation.query_escalation_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -76,7 +82,8 @@ sections:
 - anchor: 9-what-this-study-does-not-do
   heading: 9. What this study does not do
 status: closed
-successors: []
+successors:
+- CONSTRUCTION_LADDER_STUDY
 superseded_by: ''
 supersedes: []
 title: Escalation as a step of the query loop

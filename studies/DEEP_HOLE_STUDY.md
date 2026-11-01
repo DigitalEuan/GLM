@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. What this document is
@@ -29,7 +31,7 @@ already.
 
 The question is *not* "what are the deep holes of a Niemeier lattice" — that is
 tabulated, and
-[`RequestProject/GLM/Golay/Census.lean`](../glm_lean/RequestProject/GLM/Golay/Census.lean)
+[`RequestProject/GLM/Golay/Census.lean`](../src/lean/RequestProject/GLM/Golay/Census.lean)
 already carries a census for one lattice. The question is whether the
 **distribution of trajectories that reach a hole** carries enough structure to
 *name* the hole, so that the classification is a measurement of the substrate
@@ -379,10 +381,9 @@ sample could have crept in is the trajectory ensemble, and §2 declares what is
 used instead of an enumeration and why.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools deepholes --write
-PYTHONPATH=. python3 GLM.py -q "report hole classifier" -c 1
-PYTHONPATH=. python3 -m glm_universal.corpus --write
+PYTHONPATH=src python3 -m glm_universal.tools deepholes --write
+PYTHONPATH=src python3 src/GLM.py -q "report hole classifier" -c 1
+PYTHONPATH=src python3 -m glm_universal.corpus --write
 ```
 
 ---

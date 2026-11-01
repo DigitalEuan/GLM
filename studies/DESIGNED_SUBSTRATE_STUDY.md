@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 0. What this document is
@@ -21,7 +23,7 @@ the code that measures it exists. §§0–6 are as they were committed; §7 is w
 came out.
 
 The owner brought in a separate study, *Designed Dimensions × GLM*, now kept
-at [`source_material/substrate_study/`](../source_material/substrate_study/README.md)
+at [`source_material/substrate_study/`](../source_material/done/substrate_study/README.md)
 (its record is `glm_package/README.md` there, its theorem index
 `glm_package/THEOREMS.md`, its reference implementation `glm_substrate.py`).
 That study asked whether the Golay–Leech substrate is optimal or whether a
@@ -208,7 +210,7 @@ to the received word is unique and is not the one sent.
 
 ## 7. The measurement
 
-`PYTHONPATH=. python3 -m glm_universal.tools designed-substrate` (about a
+`PYTHONPATH=src python3 -m glm_universal.tools designed-substrate` (about a
 minute); `tests/test_designed_substrate.py` pins every figure below.
 
 ### 7.1 The verdict

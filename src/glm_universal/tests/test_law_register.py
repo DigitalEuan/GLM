@@ -31,7 +31,10 @@ class TestRegister(unittest.TestCase):
         self.assertEqual(verdicts.count("RETAINED-NUM"), 49)
 
     def test_frozen_copy_is_the_supplied_file(self):
-        supplied = ROOT / lr.SOURCE_PATH
+        # Last altered 31 October 2026 (repository check): the supplied file is
+        # filed under source_material/ToDo or done; constants finds it.
+        from glm_universal.constants import source_material_item
+        supplied = source_material_item(Path(lr.SOURCE_PATH).name)
         if supplied.exists():
             self.assertEqual(supplied.read_bytes(), lr.DATA_PATH.read_bytes())
 

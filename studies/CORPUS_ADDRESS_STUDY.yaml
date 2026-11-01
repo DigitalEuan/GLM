@@ -1,29 +1,38 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Reading every current-state document at tier 0 costs a small fraction of reading them
   in full, and the completeness bound held on every pair checked with 0 violations.
 directives: []
 evidence: []
-faculty: addressing
+faculty: unknown
 file_refs:
   code:
-  - tests/test_corpus
+  - corpus/inventory.py
+  - corpus/render.py
+  - corpus/report.py
+  - figures.py
   lean:
   - Corpus
   - Retrieval
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CORPUS_ADDRESS_STUDY.md
   test:
-  - test_corpus_address.py
+  - test_corpus.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CORPUS_ADDRESS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -41,6 +50,7 @@ question: The project's own prose had grown past what one session can read. Can 
   — generate rather than store, a truncated read is coarse rather than wrong, a derived table only beside
   the digest of its inputs — be applied to the documents themselves?
 recomputed_by: '`glm_universal.corpus.report.corpus_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -65,7 +75,7 @@ sections:
   heading: 8. What would falsify this
 - anchor: 9-what-this-does-not-claim
   heading: 9. What this does not claim
-status: negative
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

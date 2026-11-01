@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -358,12 +360,11 @@ Nothing was removed. The work taken instead is
 ## 9. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools ast-index            # the stored report
-PYTHONPATH=. python3 -m glm_universal.tools ast-index --live     # measure now (about a minute)
-PYTHONPATH=. python3 -m glm_universal.tools ast-index --write    # re-take and store
-PYTHONPATH=. python3 -m glm_universal.tools ast-index --ask "where is \`x * x + y * y\` computed?"
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_ast_index.py
+PYTHONPATH=src python3 -m glm_universal.tools ast-index            # the stored report
+PYTHONPATH=src python3 -m glm_universal.tools ast-index --live     # measure now (about a minute)
+PYTHONPATH=src python3 -m glm_universal.tools ast-index --write    # re-take and store
+PYTHONPATH=src python3 -m glm_universal.tools ast-index --ask "where is \`x * x + y * y\` computed?"
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_ast_index.py
 ```
 
 The snapshot is never re-taken by these; `tools ast-index --freeze` takes a

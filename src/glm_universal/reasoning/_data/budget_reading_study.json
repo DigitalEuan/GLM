@@ -113,7 +113,7 @@
   "cases": 202,
   "moved": [
    {
-    "cause": "Phase 147: the list of query kinds the refusal names gains 'hole' (and, at Phase 154, 'corpus')",
+    "cause": "Phase 147: the list of query kinds the refusal names gains 'hole'; 31 October 2026: and the four lookup kinds 'corpus', 'tool', 'study' and 'sequence'",
     "id": "unknown-nonsense"
    },
    {
@@ -121,15 +121,15 @@
     "id": "report-lean"
    },
    {
-    "cause": "Phase 162: the directives report counts the standing rules, which gain D17 (the owner's dating rule)",
+    "cause": "the tree: the directives register, measured live (16 standing rules at the baseline, 22 now)",
     "id": "report-directives"
    },
    {
-    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
+    "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
     "id": "report-hole-classifier"
    },
    {
-    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
+    "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
     "id": "report-hole-ladder"
    },
    {
@@ -141,11 +141,11 @@
     "id": "report-generated"
    },
    {
-    "cause": "Phases 147-148: the language report counts the query kinds and the evaluation questions, which gain the new kind and the new cases",
+    "cause": "Phases 147-148 and 31 October 2026: the language report counts the query kinds (25 at the baseline, 30 now) and the evaluation questions of the undescribed kinds (182 at the baseline, 207 now), which gain the new kinds and the new cases",
     "id": "report-language"
    },
    {
-    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
+    "cause": "Phase 149: the report keeps its round's text and adds the L5 clause",
     "id": "report-hole-failures"
    },
    {
@@ -5410,7 +5410,7 @@
    "seed": 23440960
   }
  ],
- "source_digest": "2ae2de84b5b67d1c965fca39738ec7737f5ea2e0e7e4ba64c33c0487beb0b983",
+ "source_digest": "629a6d5e1cbd59559b5e1bbce488667e5a99217e6a2db1cde00e33c43a29a4c3",
  "taken": 8,
  "wiring": {
   "census": {
@@ -5423,6 +5423,7 @@
     "budget_reading_study",
     "carried_read_study",
     "citation_scope",
+    "colour_induction_study",
     "constant_bound",
     "coordinate_junction_study",
     "corpus_resample",
@@ -5431,37 +5432,44 @@
     "evidence_in_use_study",
     "evidence_model_study",
     "fold_machine_study",
+    "frame_operator_study",
+    "frame_plane_study",
+    "generate_not_store",
     "hole_reports_l5_study",
+    "improper_frame_study",
+    "improper_units_study",
     "inert_counter",
+    "intake_capability_study",
     "l5_first_budget",
-    "native_parity",
-    "native_words",
+    "lorentzian_evidence_study",
+    "lorentzian_lift_study",
+    "lorentzian_majority_study",
     "nearest_address_study",
     "nearest_question_study",
-    "now_float_control",
-    "now_receipt",
-    "operation_escalation",
     "operations",
     "pi_machine_study",
+    "pipeline_ask_study",
+    "pipeline_kit_crosscheck",
+    "pipeline_kit_study",
     "planner_ladder_study",
     "probe_budget",
     "quadratic_lasso",
     "quoted_measurements_study",
     "resumed_dialogue_study",
-    "second_reading",
+    "reversibility",
     "stacked_dialogue_study",
     "stray_blind",
     "ties_ladder_frozen",
     "tool_machine_study",
-    "typed_plans"
+    "wobble_registry"
    ],
-   "reached": 177,
-   "reasoning": 216,
+   "reached": 195,
+   "reasoning": 242,
    "stale_declarations": [],
    "undeclared": []
   },
   "diverted": [],
-  "earlier_cases": 218,
+  "earlier_cases": 232,
   "hole_reading_reached": true
  }
 }

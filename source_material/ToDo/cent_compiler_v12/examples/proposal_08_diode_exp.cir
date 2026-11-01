@@ -1,0 +1,9 @@
+* Diode exponential: I = Is * exp(V / Vt)
+* ¢: exp(V) → I
+* Vt = 25.85mV at 300K, Is = 1e-12 A
+VIN 1 0 DC 0.7
+D1 1 0 DIODE_EXP
+.MODEL DIODE_EXP D(IS=1e-12 N=1)
+.OP
+.PRINT DC I(D1)
+.END

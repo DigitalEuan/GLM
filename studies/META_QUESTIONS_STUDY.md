@@ -12,14 +12,16 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/reasoning/meta_evidence.py`](../glm_universal/reasoning/meta_evidence.py),
-[`glm_universal/runtime/meta_frames.py`](../glm_universal/runtime/meta_frames.py),
-[`glm_universal/runtime/meta_report.py`](../glm_universal/runtime/meta_report.py),
-[`glm_universal/evaluation/meta_question_cases.py`](../glm_universal/evaluation/meta_question_cases.py),
-[`glm_universal/runtime/question_frames.py`](../glm_universal/runtime/question_frames.py).
-Tests: [`glm_universal/tests/test_meta_questions.py`](../glm_universal/tests/test_meta_questions.py),
-[`glm_universal/tests/test_question_frames.py`](../glm_universal/tests/test_question_frames.py).
-Lean: [`RequestProject/GLM/MetaAnswers.lean`](../glm_lean/RequestProject/GLM/MetaAnswers.lean).
+*Last altered 31 October 2026 (repository check: 8 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
+Code: [`glm_universal/reasoning/meta_evidence.py`](../src/glm_universal/reasoning/meta_evidence.py),
+[`glm_universal/runtime/meta_frames.py`](../src/glm_universal/runtime/meta_frames.py),
+[`glm_universal/runtime/meta_report.py`](../src/glm_universal/runtime/meta_report.py),
+[`glm_universal/evaluation/meta_question_cases.py`](../src/glm_universal/evaluation/meta_question_cases.py),
+[`glm_universal/runtime/question_frames.py`](../src/glm_universal/runtime/question_frames.py).
+Tests: [`glm_universal/tests/test_meta_questions.py`](../src/glm_universal/tests/test_meta_questions.py),
+[`glm_universal/tests/test_question_frames.py`](../src/glm_universal/tests/test_question_frames.py).
+Lean: [`RequestProject/GLM/MetaAnswers.lean`](../src/lean/RequestProject/GLM/MetaAnswers.lean).
 
 ---
 
@@ -173,9 +175,9 @@ of [`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md) §5k is not used.
 From ``:
 
 ```
-PYTHONPATH=. python3 -m glm_universal.tools meta-questions
-PYTHONPATH=. python3 -m glm_universal.tools meta-questions --json
-PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_meta_questions.py
+PYTHONPATH=src python3 -m glm_universal.tools meta-questions
+PYTHONPATH=src python3 -m glm_universal.tools meta-questions --json
+PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_meta_questions.py
 ```
 
 and `lake build` at the repository root for the Lean file.

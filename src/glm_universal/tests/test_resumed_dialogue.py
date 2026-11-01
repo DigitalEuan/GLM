@@ -21,10 +21,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from glm_universal.constants import lean_file
+from glm_universal.lean_check import audited_or_held
+
 from glm_universal.reasoning import resumed_dialogue_study as rds
 from glm_universal.runtime.conversation import Conversation
 
-_LEAN = (Path(__file__).resolve().parents[2] / "lean" / rds.LEAN_FILE)
+# in the build tree, or held in awaiting_recovery/ (STATUS.md, item 0)
+_LEAN = lean_file(rds.LEAN_FILE)
 _LOCATE = "locate physics:albedo"
 
 
@@ -38,6 +42,7 @@ def test_lean_file_states_the_theorems_without_sorry():
         assert f"theorem {name}" in text, name
     assert "sorry" not in text
     assert rds.lean_marks()["met"]
+    assert audited_or_held("RequestProject.GLM.ResumedDialogue")
 
 
 def test_reply_after_unrelated_turns_binds_the_same_query():

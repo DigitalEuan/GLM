@@ -1,0 +1,17 @@
+normalisation operator: moments N <= 12 exact; D(1e6)=1536 -> N=1000000 D=1536 z=+1.536 (z^2 = 36864/15625) ; D(1e7)=4440 -> N=10000000 D=4440 z=+1.404 (z^2 = 12321/6250)
+ok  old=P1   new=P2       rung=None  | Is the wobble bounded over a long period of time?
+ok  old=P2   new=P2       rung=None  | How long does the frequency take to settle in the long run?
+ok  old=P1   new=P1       rung=LeftWhiteAperiodic2  | Does the centre column eventually alternate with period 2?
+ok  old=P3   new=P3       rung=None  | What is the running time needed to compute a(n)?
+ok  old=None new=P2       rung=SqrtWobble  | Is D(N)/sqrt(N) bounded for the centre column?
+ok  old=P1   new=P1       rung=None  | Is the column eventually periodic?
+ok  old=None new=GEOMETRY rung=None  | What angle does the light cone triangle make?
+ok  old=P1   new=None     rung=None  | Is the frequency periodic?
+
+READING  form=limit; object=centre; property=periodicity | scores P1:8 | target P1 | rung LeftWhiteAperiodic2
+READING  form=limit; object=centre; property=periodicity | scores P1:8 | target P1 | rung LeftWhiteAperiodic2
+  rung LeftWhiteAperiodic2: no column of any left-white row is eventually 2-periodic (the next rung after period 1) [OPEN]
+    evidence: CERT runBound_two_upTo_sixteen (d <= 16, exact; witnesses runBound_two_witness)
+    evidence: EMP r16_period_runs: exact values continue 35,34,33,32,31,31,30,34 for d = 19..26; the run ends on a few 'barrier' diagonals: d + run = 8, 24, 41, 54, 55, 60 in blocks
+  the wheel chains declared spokes only; it cannot invent a spoke, and finite evidence cannot close an infinite claim (no_finite_certificate_problem1/2)
+all Round 16 tests passed

@@ -4,14 +4,14 @@
 the relative link prefixes were adjusted for the new location; no sentence and
 no figure was touched.*
 
-The archival half of [`README.md`](../glm_universal/README.md): the change log, and the
+The archival half of [`README.md`](../src/glm_universal/README.md): the change log, and the
 write-up of each round as it was finished.
 
 <!-- figures:history -->
 
 *Everything in this file is an archive.  The counts in it were true when
 the row was written and are deliberately left alone — for the package as it
-is now, see [`README.md`](../glm_universal/README.md) and [`FIGURES.md`](../FIGURES.md), which is
+is now, see [`README.md`](../src/glm_universal/README.md) and [`FIGURES.md`](../FIGURES.md), which is
 regenerated from the code.*
 
 

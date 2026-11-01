@@ -5,6 +5,8 @@ public import RequestProject.GLM.Rule30.ElementaryCA
 /-!
 # Round 24: alternatives to XOR
 
+*Last altered 31 October 2026 (repository check: `eventuallyPeriodic_of_eventually_const` renamed `eventuallyPeriodic_of_eventually_const_at`: `NoConstantColumn.lean` declares the same name, and `Rule30.lean` imports both).*
+
 Rule 30 is `new = L xor (C or R)`.  This file tests whether the *implementation choice* of the
 XOR matters, in two senses.
 
@@ -136,7 +138,7 @@ theorem eventuallyPeriodic_of_eventually_eq {a b : ℕ → Bool} (hb : Eventuall
     rw [h n (by omega), h (n + p) (by omega), hN n (by omega)]⟩
 
 /-- Eventually constant sequences are eventually periodic. -/
-theorem eventuallyPeriodic_of_eventually_const {a : ℕ → Bool} (b : Bool) (M : ℕ)
+theorem eventuallyPeriodic_of_eventually_const_at {a : ℕ → Bool} (b : Bool) (M : ℕ)
     (h : ∀ n ≥ M, a n = b) : EventuallyPeriodic a :=
   ⟨1, one_pos, M, fun n hn => by rw [h n hn, h (n + 1) (by omega)]⟩
 
@@ -543,7 +545,7 @@ theorem periodic_254 : EventuallyPeriodic (centreOf 254) := ⟨2, two_pos, 3, fu
 theorem periodic_0 : EventuallyPeriodic (centreOf 0) := not_not.mp (not_wheelProblem1_zero seed 0)
 
 theorem periodic_60 : EventuallyPeriodic (centreOf 60) :=
-  eventuallyPeriodic_of_eventually_const true 0 fun n _ => (ecaEvolve_60_seed n).2
+  eventuallyPeriodic_of_eventually_const_at true 0 fun n _ => (ecaEvolve_60_seed n).2
 
 theorem periodic_90 : EventuallyPeriodic (centreOf 90) := not_not.mp not_wheelProblem1_ninety
 
@@ -551,18 +553,18 @@ theorem periodic_105 : EventuallyPeriodic (centreOf 105) :=
   eventuallyPeriodic_of_eventually_parity true 0 fun n _ => centre105 n
 
 theorem periodic_150 : EventuallyPeriodic (centreOf 150) :=
-  eventuallyPeriodic_of_eventually_const true 0 fun n _ => centre150 n
+  eventuallyPeriodic_of_eventually_const_at true 0 fun n _ => centre150 n
 
 theorem periodic_165 : EventuallyPeriodic (centreOf 165) :=
-  eventuallyPeriodic_of_eventually_const true 1 fun n hn => by
+  eventuallyPeriodic_of_eventually_const_at true 1 fun n hn => by
     obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
     exact centre165 m
 
 theorem periodic_195 : EventuallyPeriodic (centreOf 195) :=
-  eventuallyPeriodic_of_eventually_const false 1 fun n hn => (ecaEvolve_195_seed n hn).2
+  eventuallyPeriodic_of_eventually_const_at false 1 fun n hn => (ecaEvolve_195_seed n hn).2
 
 theorem periodic_210 : EventuallyPeriodic (centreOf 210) :=
-  eventuallyPeriodic_of_eventually_const false 1 fun n hn => by
+  eventuallyPeriodic_of_eventually_const_at false 1 fun n hn => by
     show ecaEvolve 210 seed n 0 = false
     rw [(ecaEvolve_210_seed n 0).1]
     have := ecaColumn_ninety_centre n
@@ -570,10 +572,10 @@ theorem periodic_210 : EventuallyPeriodic (centreOf 210) :=
     rw [this]; exact decide_eq_false (by omega)
 
 theorem periodic_225 : EventuallyPeriodic (centreOf 225) :=
-  eventuallyPeriodic_of_eventually_const true 5 centre225_eventually_black
+  eventuallyPeriodic_of_eventually_const_at true 5 centre225_eventually_black
 
 theorem periodic_255 : EventuallyPeriodic (centreOf 255) :=
-  eventuallyPeriodic_of_eventually_const true 1 fun n hn => by
+  eventuallyPeriodic_of_eventually_const_at true 1 fun n hn => by
     obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
     exact centre255 m
 

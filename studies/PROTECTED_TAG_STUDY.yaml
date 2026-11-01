@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 6 of 7 marks; 680,064 of 680,064 tied reads resolved by each protected tag, 0 wrong (28,096
@@ -11,24 +13,29 @@ deciding_figure: 6 of 7 marks; 680,064 of 680,064 tied reads resolved by each pr
 directives:
 - D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/cases
-  - reasoning/carrier_read
-  - runtime/parser
-  - tests/test_carrier_read
+  - evaluation/cases.py
+  - reasoning/carrier_read.py
+  - runtime/parser.py
+  - runtime/session.py
+  - tools.py
   lean:
   - DesignedSubstrate
   - ProtectedTag
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: PROTECTED_TAG_STUDY.md
   test:
-  - test_protected_tag.py
+  - test_carrier_read.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: PROTECTED_TAG_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,15 +43,31 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - P1
+  - P2
+  - P3
+  - P4
+  - P5
+  - P6
+  - P7
+  met:
+  - P1
+  - P2
+  - P3
+  - P4
+  - P6
+  - P7
+  missed:
+  - P5
 perturbations: []
-phase: 133
-predecessors: []
+phase: 134
+predecessors:
+- DESIGNED_SUBSTRATE_STUDY
 question: Can the GLM answer a question about a carrier with the stages Phase 133 proved sound, and can
   the sender tag be made to survive its own corruption?
 recomputed_by: '`glm_universal.reasoning.carrier_read.protected_tag_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -68,7 +91,9 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- ADDRESS_READ_STUDY
+- SHORTEST_TAG_STUDY
 superseded_by: ''
 supersedes: []
 title: The protected tag — a carrier read in the answering path, and a sender tag with a code of its own

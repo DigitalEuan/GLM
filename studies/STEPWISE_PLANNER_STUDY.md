@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 4 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -89,7 +91,7 @@ meaning (D3).
 ## 2. Declarations — written before any stepwise code
 
 The corpus is
-[`evaluation/stepwise_cases.py`](../glm_universal/evaluation/stepwise_cases.py),
+[`evaluation/stepwise_cases.py`](../src/glm_universal/evaluation/stepwise_cases.py),
 committed with this section and before the module: 30 composition questions
 (22 to be answered, 2 declared `AMBIGUOUS`, 6 refused by name), 21 goal
 questions, 6 narratives and 4 two-turn conversations. Every expected answer
@@ -119,7 +121,7 @@ value), was added beside the four declared ones and is reported separately.
 
 ## 3. What was built
 
-* [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py) — the
+* [`runtime/stepwise.py`](../src/glm_universal/runtime/stepwise.py) — the
   stepwise planner: the composition grammar (operator words, function forms,
   predicates, verb forms over *it*, `then`), the leaf asker (every part is one
   question to `semantic_plan.plan_question`, cached per question; a register
@@ -130,7 +132,7 @@ value), was added beside the four declared ones and is reported separately.
   non-zero values), the consistency veto, the deferral-and-stitch agenda, the
   follow-up conversation keyed by SHA-256, the `Solution` the router returns,
   and `stepwise_report`.
-* [`reasoning/stepwise_script.py`](../glm_universal/reasoning/stepwise_script.py)
+* [`reasoning/stepwise_script.py`](../src/glm_universal/reasoning/stepwise_script.py)
   — the step, the chain, the declared templates of column 1 and column 2 and
   their readers, the in-process step gate, the chain's column-3 script (its own
   readers, its own arithmetic, the register re-read, the question re-parsed
@@ -143,7 +145,7 @@ value), was added beside the four declared ones and is reported separately.
   step. `GLM.py --steps TEXT` asks the stepwise planner directly, and
   successive `--steps` are one conversation, so `then …` and `why?` follow on.
   `tools stepwise` takes the measurement.
-* [`RequestProject/GLM/StepwisePlanner.lean`](../glm_lean/RequestProject/GLM/StepwisePlanner.lean)
+* [`RequestProject/GLM/StepwisePlanner.lean`](../src/lean/RequestProject/GLM/StepwisePlanner.lean)
   — §5.
 * `tests/test_stepwise.py` — the marks, a three-chain sample of S5 by default
   and the full script census as an exhaustive case.

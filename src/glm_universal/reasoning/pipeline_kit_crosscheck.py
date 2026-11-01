@@ -62,9 +62,11 @@ __all__ = ["KIT_ROOT", "KIT_PYTHON", "DEMO_FAMILIES", "QUERIES", "DEMOS",
            "README_KIT", "kit_package", "run_kit_suite", "demo_protocol",
            "crosscheck_report"]
 
-#: The kit as delivered, in the owner's source material.
-KIT_ROOT: Path = Path(__file__).resolve().parents[3] / "source_material" / \
-    "GLM_Pipeline_Kit"
+#: The kit as delivered, in the owner's source material (Last altered
+#: 31 October 2026, repository check: found through
+#: ``constants.source_material_item``, wherever the kit is filed).
+from ..constants import source_material_item  # noqa: E402
+KIT_ROOT: Path = source_material_item("GLM_Pipeline_Kit")
 KIT_PYTHON: Path = KIT_ROOT / "python"
 
 #: ``run_pipeline_demo.py``'s families and sizes.

@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '(an equivalence for every period p, no figure to count: HalfLineDies p holds exactly
@@ -13,14 +15,17 @@ faculty: unknown
 file_refs:
   code: []
   lean:
-  - BlackRunWindow
-  - DriveWheel
-  - DriveWheelData
+  - Rule30/BlackRunWindow
+  - Rule30/DriveWheel
+  - Rule30/DriveWheelData
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: RULE30_WHEEL.md
-  test:
-  - test_rule30_wheel.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RULE30_WHEEL
 junctions: []
 last_altered: ''
@@ -40,6 +45,7 @@ predecessors: []
 question: Do the periodic drives of the half-line machine form one wheel, and can the wheel skip the slow
   iterations?
 recomputed_by: (hand-written argument; nothing to recompute)
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -58,7 +64,7 @@ sections:
   heading: 5. What the wheel does not do
 - anchor: 6-for-the-glm
   heading: 6. For the GLM
-- anchor: 7-round-37-follow-up-turn_costmd
+- anchor: 7-round-37-follow-up-turncostmd
   heading: 7. Round 37 follow-up (`TURN_COST.md`)
 status: closed
 successors: []

@@ -6,11 +6,13 @@
 
 **Verdict.** Yes. A `nearest` answer whose ranking head is a tie now ends with the question that splits it, and its `given` replies are read as the next turn. Over the 18 distinct tied heads of Phase 148's six sets, with each of the 48 members as the carrier meant, true replies confirmed the member meant in 48 of 48 runs and never a wrong one, with at most 2 replies; one false reply ended contradicted in 48 of 48. A carrier meant outside the head was never confirmed. Every one of the 212 evaluation cases keeps its status, and the junction answer keeps its old text as a verbatim prefix. No mark was missed.
 
-**Deciding figure.** 8 of 8 measured marks and L1; 321 tied points, 18 distinct heads; 48/48 confirmed on the member meant, 0 wrong, at most 2 replies; 48/48 contradicted after one false reply; 0 of 10 outside-head points confirmed; 150/150 conversation turns verify, 156/156 altered claims rejected; frozen path 212/212 same status, 0 undeclared.
+**Deciding figure.** 8 of 8 measured marks and L1 as stored; re-measured live on 31 October 2026 and stored, 7 of 8 (F1 not met: the shared baseline was lost, §7.5); 321 tied points, 18 distinct heads; 48/48 confirmed on the member meant, 0 wrong, at most 2 replies; 48/48 contradicted after one false reply; 0 of 10 outside-head points confirmed; 150/150 conversation turns verify, 156/156 altered claims rejected; frozen path 212/212 same status, 0 undeclared.
 
 **Recomputed by.** `glm_universal.reasoning.nearest_question_study.nearest_question_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: the measurement re-run live; every figure of §7.1 comes back except F1, whose shared baseline was lost; the re-take is now the stored measurement, §7.5.)*
 
 ---
 
@@ -191,6 +193,27 @@ carrier meant is not in the head at all (D3), the truthful reply is either
 no option of the question (refused `not-an-option`, five points of the
 acoustic head) or leaves no member (contradicted, five points at the zero
 cell); in neither case is a member confirmed (`outside_never_confirmed`).
+
+### 7.5 The state on 31 October 2026
+
+*Added 31 October 2026 (repository check).* The measurement module's
+`compute` was lost in the October 2026 reorganisation and rebuilt from this
+document and the stored measurement; it was run live (first to a scratch
+file; the stored `reasoning/_data/nearest_question_study.json` is now this
+re-take, current against the code, so that the repository's measurement check
+holds — the record of §7.1 is §7.1 itself, and the original file is in the
+repository's history). Every figure of §§7.1–7.2 comes back: 321 tied points, 193
+certified and 128 not, 18 heads (3 and 17); D1 48 of 48 with 54 replies, at
+most 2; D2 48 of 48 contradicted; D3 0 confirmed, 5 contradicted, 5 refused;
+C1 48 of 48, 150 of 150 turns verify, 156 of 156 altered claims rejected; Q1 10
+of 10; R1 0 of 12 read; E1 5 of 5. One mark does not come back:
+
+| mark | result | met |
+|---|---|---|
+| **F1** | not measured: the shared baseline `reasoning/_data/ties_ladder_baseline.json` was lost in the October 2026 reorganisation; a new baseline needs a frozen-path comparison before the answering path moves again (`tools ties-ladder-frozen` records exactly that, asking no case) | no |
+
+So 7 of 8 measured marks live; L1 is unchanged (`NearestQuestion.lean` is in
+the tree).
 
 ### 7.4 What is left
 

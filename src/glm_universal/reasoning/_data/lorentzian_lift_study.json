@@ -1,0 +1,318 @@
+{
+ "census": {
+  "distance": {
+   "agree": 128,
+   "by_weight": {
+    "1": 2,
+    "2": 12,
+    "3": 56,
+    "4": 58
+   },
+   "sampled": 128
+  },
+  "holes": {
+   "a1_24_certified": 128,
+   "at_covering_radius": 128,
+   "eight_each": 128,
+   "lift_not_in_ii": 128,
+   "null_in_ii": 128,
+   "orthogonal": 128,
+   "sampled": 128,
+   "vertices_48": 128
+  }
+ },
+ "marks": {
+  "L": false,
+  "M1": true,
+  "M10": true,
+  "M11": false,
+  "M2": true,
+  "M3": true,
+  "M4": true,
+  "M5": true,
+  "M6": true,
+  "M7": true,
+  "M8": true,
+  "M9": true
+ },
+ "met": 10,
+ "several": {
+  "4+0": {
+   "first_min": {
+    "refused": 0,
+    "right": 114,
+    "wrong": 486
+   },
+   "intersect": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   }
+  },
+  "4+1": {
+   "first_min": {
+    "refused": 0,
+    "right": 96,
+    "wrong": 504
+   },
+   "intersect": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   }
+  },
+  "4+2": {
+   "first_min": {
+    "refused": 0,
+    "right": 102,
+    "wrong": 498
+   },
+   "intersect": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   }
+  },
+  "4+3": {
+   "first_min": {
+    "refused": 0,
+    "right": 86,
+    "wrong": 514
+   },
+   "intersect": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   }
+  },
+  "4+4": {
+   "first_min": {
+    "refused": 0,
+    "right": 92,
+    "wrong": 508
+   },
+   "intersect": {
+    "refused": 12,
+    "right": 588,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 12,
+    "right": 588,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 12,
+    "right": 588,
+    "wrong": 0
+   }
+  },
+  "4+4+4": {
+   "first_min": {
+    "refused": 0,
+    "right": 107,
+    "wrong": 493
+   },
+   "intersect": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 0,
+    "right": 600,
+    "wrong": 0
+   }
+  },
+  "4+4+6": {
+   "first_min": {
+    "refused": 0,
+    "right": 106,
+    "wrong": 494
+   },
+   "intersect": {
+    "refused": 600,
+    "right": 0,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 3,
+    "right": 597,
+    "wrong": 0
+   },
+   "lorentz_guarded": {
+    "refused": 3,
+    "right": 597,
+    "wrong": 0
+   }
+  },
+  "4+5": {
+   "first_min": {
+    "refused": 0,
+    "right": 100,
+    "wrong": 500
+   },
+   "intersect": {
+    "refused": 596,
+    "right": 0,
+    "wrong": 4
+   },
+   "lorentz": {
+    "refused": 116,
+    "right": 480,
+    "wrong": 4
+   },
+   "lorentz_guarded": {
+    "refused": 116,
+    "right": 480,
+    "wrong": 4
+   }
+  },
+  "4+6": {
+   "first_min": {
+    "refused": 0,
+    "right": 107,
+    "wrong": 493
+   },
+   "intersect": {
+    "refused": 578,
+    "right": 0,
+    "wrong": 22
+   },
+   "lorentz": {
+    "refused": 262,
+    "right": 309,
+    "wrong": 29
+   },
+   "lorentz_guarded": {
+    "refused": 262,
+    "right": 309,
+    "wrong": 29
+   }
+  },
+  "decoy": {
+   "first_min": {
+    "refused": 0,
+    "right": 98,
+    "wrong": 502
+   },
+   "intersect": {
+    "refused": 598,
+    "right": 0,
+    "wrong": 2
+   },
+   "lorentz": {
+    "refused": 344,
+    "right": 22,
+    "wrong": 234
+   },
+   "lorentz_guarded": {
+    "refused": 528,
+    "right": 3,
+    "wrong": 69
+   }
+  }
+ },
+ "single": {
+  "ambiguous": 600,
+  "queries": 600,
+  "reflection_fixed": 600,
+  "rules": {
+   "lorentz": {
+    "refused": 600,
+    "right": 0,
+    "wrong": 0
+   },
+   "min": {
+    "refused": 0,
+    "right": 108,
+    "wrong": 492
+   },
+   "reflection": {
+    "refused": 0,
+    "right": 108,
+    "wrong": 492
+   },
+   "script": {
+    "refused": 0,
+    "right": 0,
+    "wrong": 600
+   },
+   "script_w": {
+    "refused": 490,
+    "right": 21,
+    "wrong": 89
+   },
+   "weyl": {
+    "refused": 600,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "script_candidate": 0,
+  "script_codeword": 2,
+  "script_disambiguated": 600,
+  "script_roots": [
+   {
+    "center_norm_raw": "16",
+    "name": "octad_pair",
+    "norm": "17",
+    "weyl_inner": "-1"
+   },
+   {
+    "center_norm_raw": "16",
+    "name": "dodecad_triangle",
+    "norm": "17",
+    "weyl_inner": "-1"
+   }
+  ],
+  "weyl_flat": 600
+ },
+ "source_digest": "ffabfcdea9a3d97dacd298d250842af3633cb2cc4d673189a01f2c1570663196",
+ "taken": 12
+}

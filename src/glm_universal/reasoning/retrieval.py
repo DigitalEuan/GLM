@@ -105,10 +105,16 @@ not close the gap.  What the lattice does earn here is exactness: the lossless
 read-back of :mod:`~glm_universal.reasoning.lean_address` and the two
 guarantees above -- a complete shortlist and a certified absence.
 ``studies/ADDRESS_RETRIEVAL_STUDY.md`` states it with the numbers.
+
+*Last altered 31 October 2026 (repository check): a sampled declaration the
+live Lean tree no longer states is skipped and counted (``_live_sample``)
+rather than failing the read; the book's own verdict says it is stale.*
 """
 
 from __future__ import annotations
 
+import functools
+import heapq
 import json
 import re
 from dataclasses import dataclass
@@ -226,8 +232,14 @@ def identifier_tokens(text: str) -> FrozenSet[str]:
     return frozenset(token.lower() for token in _IDENT.findall(text))
 
 
+@functools.lru_cache(maxsize=None)
 def name_tokens(name: str) -> FrozenSet[str]:
-    """A fully qualified name split into words: dots, underscores, camel case."""
+    """A fully qualified name split into words: dots, underscores, camel case.
+
+    A pure function of the name, so it is computed once per name and reused:
+    the relay and anonymous censuses ask it of every declaration once per
+    query (15 million calls at 9,341 declarations before it was cached).
+    """
     out = set()
     for part in re.split(r"[._]", name):
         for word in re.findall(r"[A-Z]?[a-z0-9']+|[A-Z]+(?![a-z])", part):
@@ -429,17 +441,14 @@ def rank_by_point(table: Mapping[str, Tuple[int, ...]],
     """
     files = file_of()
     names = candidates if candidates is not None else tuple(table)
-    scored = []
-    for name in names:
-        if name == exclude or name not in table:
-            continue
-        distance = la.squared_distance(point, table[name])
-        scored.append((distance, name))
-    scored.sort()
+    distance = la.squared_distance
+    scored = [(distance(point, table[name]), name) for name in names
+              if name != exclude and name in table]
+    # ``nsmallest`` is ``sorted(scored)[:k]`` without sorting the rest.
     return tuple(Candidate(name=name, file=files.get(name, ""),
                            score=Fraction(distance),
                            metric="squared_distance")
-                 for distance, name in scored[:k])
+                 for distance, name in heapq.nsmallest(k, scored))
 
 
 # ---------------------------------------------------------------------------
@@ -590,18 +599,29 @@ def rank_by_text(text: str, k: int, exclude: Optional[str] = None,
     query = identifier_tokens(text)
     table = statement_tokens()
     names = candidates if candidates is not None else corpus()
+    empty: FrozenSet[str] = frozenset()
+    # The ranking is ``sorted((-overlap, name))[:k]``.  Every positive
+    # overlap sorts ahead of every zero one, and the zeros tie and fall back
+    # to name order, so the exact fractions are only built for the
+    # declarations that share a token with the query.
     scored = []
+    zeros = []
     for name in names:
         if name == exclude:
             continue
-        other = table.get(name, frozenset())
-        union = len(query | other)
-        overlap = Fraction(len(query & other), union) if union else Fraction(0)
-        scored.append((-overlap, name))
-    scored.sort()
+        other = table.get(name, empty)
+        shared = len(query & other)
+        if shared:
+            scored.append((-Fraction(shared, len(query | other)), name))
+        else:
+            zeros.append(name)
+    ranked = heapq.nsmallest(k, scored)
+    if len(ranked) < k:
+        ranked += [(Fraction(0), name)
+                   for name in heapq.nsmallest(k - len(ranked), zeros)]
     return tuple(Candidate(name=name, file=files.get(name, ""),
                            score=-overlap, metric="overlap")
-                 for overlap, name in scored[:k])
+                 for overlap, name in ranked)
 
 
 def rank_by_name(text: str, k: int, exclude: Optional[str] = None,
@@ -611,16 +631,11 @@ def rank_by_name(text: str, k: int, exclude: Optional[str] = None,
     files = file_of()
     query = identifier_tokens(text)
     names = candidates if candidates is not None else corpus()
-    scored = []
-    for name in names:
-        if name == exclude:
-            continue
-        shared = len(query & name_tokens(name))
-        scored.append((-shared, name))
-    scored.sort()
+    scored = [(-len(query & name_tokens(name)), name) for name in names
+              if name != exclude]
     return tuple(Candidate(name=name, file=files.get(name, ""),
                            score=Fraction(-shared), metric="overlap")
-                 for shared, name in scored[:k])
+                 for shared, name in heapq.nsmallest(k, scored))
 
 
 @memo
@@ -788,6 +803,23 @@ def query_sample(size: int) -> Tuple[str, ...]:
     return tuple(name for name in chosen if relatives(name))
 
 
+def _live_sample(size: int) -> Tuple[Tuple[str, ...], Dict[str, object],
+                                     Tuple[str, ...]]:
+    """:func:`query_sample` restricted to the declarations the live Lean tree
+    still states, the live declarations by name, and the sampled names the
+    tree no longer states.
+
+    *Added 31 October 2026 (repository check):* a stale address book (D4)
+    names declarations the tree has dropped; they are skipped and counted --
+    the report carries the book's verdict beside them -- instead of the read
+    failing on the first missing name.
+    """
+    decls = {d.name: d for d in la.declarations()}
+    sampled = query_sample(size)
+    return (tuple(n for n in sampled if n in decls), decls,
+            tuple(n for n in sampled if n not in decls))
+
+
 def _score(found: Sequence[Candidate], relevant: FrozenSet[str], k: int
            ) -> Tuple[int, int, Fraction]:
     """Hit, hits-in-window and reciprocal rank for one ranking."""
@@ -807,13 +839,12 @@ def declaration_query_report() -> Dict[str, object]:
     contributes over the raw counts, and ``lexical`` says what it would
     contribute if it were given the identifiers instead of the syntax.
     """
-    names = query_sample(SAMPLE)
+    names, decls, absent = _live_sample(SAMPLE)
     size = len(corpus())
     top = max(K_LADDER)
     totals = {scheme: {k: {"hit": 0, "found": 0, "rr": Fraction(0)}
                        for k in K_LADDER} for scheme in SCHEMES}
     chance = {k: Fraction(0) for k in K_LADDER}
-    decls = {d.name: d for d in la.declarations()}
     for name in names:
         relevant = relatives(name)
         text = strip_declaration_head(decls[name].statement)
@@ -851,6 +882,7 @@ def declaration_query_report() -> Dict[str, object]:
         }
     return {
         "queries": count,
+        "absent_from_tree": len(absent),
         "corpus": size,
         "k_ladder": K_LADDER,
         "schemes": rows,
@@ -871,13 +903,12 @@ def goal_query_report() -> Dict[str, object]:
     namespace sits) are zero rather than correct.  What that costs is the
     difference between this table and :func:`declaration_query_report`.
     """
-    names = query_sample(GOAL_SAMPLE)
+    names, decls, _absent = _live_sample(GOAL_SAMPLE)
     size = len(corpus())
     top = max(K_LADDER)
     schemes = ("address", "lexical", "text", "name", "digest", "random")
     totals = {scheme: {k: {"hit": 0, "found": 0, "rr": Fraction(0)}
                        for k in K_LADDER} for scheme in schemes}
-    decls = {d.name: d for d in la.declarations()}
     reproduced = 0
     book = la.address_book()
     for name in names:
@@ -939,8 +970,7 @@ def hybrid_report() -> Dict[str, object]:
     what the numbers show is that every shortlist costs accuracy, so the
     address is not a free filter for this task.
     """
-    names = query_sample(SAMPLE)
-    decls = {d.name: d for d in la.declarations()}
+    names, decls, _absent = _live_sample(SAMPLE)
     table = _point_table("address")
     k = K_DEFAULT
     rows = []

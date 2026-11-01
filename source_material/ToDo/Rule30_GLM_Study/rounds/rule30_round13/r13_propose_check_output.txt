@@ -1,0 +1,50 @@
+PART A  rows -> wheel (propose row T+1, check, repeat)
+  rows 0..0: 256 wheels fit; 8 different proposals for row 1; neighbourhoods shown by rows 0..0: 3/8
+  rows 0..1:  32 wheels fit; 9 different proposals for row 2; neighbourhoods shown by rows 0..1: 6/8
+  rows 0..2:   2 wheels fit; 1 different proposals for row 3; neighbourhoods shown by rows 0..2: 6/8
+      every fitting wheel proposes the same row 3 = 1101111: CHECK OK, the row is now derived, not observed
+  rows 0..3:   2 wheels fit; 2 different proposals for row 4; neighbourhoods shown by rows 0..3: 7/8
+      CHECK OK  row 4 = 110010001   proposed by wheels [30]
+      refuted   row 4 = 110110001   proposed by wheels [62]
+  rows 0..4:   1 wheels fit; 1 different proposals for row 5; neighbourhoods shown by rows 0..4: 8/8
+      every fitting wheel proposes the same row 5 = 11011110111: CHECK OK, the row is now derived, not observed
+  rows 0..5:   1 wheels fit; 1 different proposals for row 6; neighbourhoods shown by rows 0..5: 8/8
+      every fitting wheel proposes the same row 6 = 1100100001001: CHECK OK, the row is now derived, not observed
+  rows 0..6:   1 wheels fit; 1 different proposals for row 7; neighbourhoods shown by rows 0..6: 8/8
+      every fitting wheel proposes the same row 7 = 110111100111111: CHECK OK, the row is now derived, not observed
+  rows 0..7:   1 wheels fit; 1 different proposals for row 8; neighbourhoods shown by rows 0..7: 8/8
+      every fitting wheel proposes the same row 8 = 11001000111000001: CHECK OK, the row is now derived, not observed
+  rows 0..8:   1 wheels fit; 1 different proposals for row 9; neighbourhoods shown by rows 0..8: 8/8
+      every fitting wheel proposes the same row 9 = 1101111011001000111: CHECK OK, the row is now derived, not observed
+  Why row 4: the neighbourhood 101 first appears in row 3, so rows 1..3 were produced
+  without ever using it, and wheels 30 and 62 differ only on 101. Row 4 is the first row
+  produced with 101, so it is the first proposal that separates them. From rows 0..4 on
+  only wheel 30 is left and every later proposal is confirmed: the loop runs through the
+  whole stack, but it never again learns anything new.
+
+PART B  the centre column: propose 'period p from time N', find the refutation
+  p = 1: every proposal with N <= 1500 is refuted; longest wait 11 steps (at N = 1269)  (proved horizon: refuted by time 4N + 6)
+  p = 2: every proposal with N <= 1500 is refuted; longest wait 10 steps (at N = 1269)
+  p = 3: every proposal with N <= 1500 is refuted; longest wait 9 steps (at N = 1269)
+  p = 4: every proposal with N <= 1500 is refuted; longest wait 9 steps (at N = 1085)
+  p = 5: every proposal with N <= 1500 is refuted; longest wait 8 steps (at N = 225)
+  p = 6: every proposal with N <= 1500 is refuted; longest wait 11 steps (at N = 1350)
+  p = 7: every proposal with N <= 1500 is refuted; longest wait 11 steps (at N = 783)
+  p = 8: every proposal with N <= 1500 is refuted; longest wait 10 steps (at N = 216)
+  The waits are tiny, but no finite table closes the loop for every N (Lean:
+  no_finite_certificate_problem1). A horizon valid for EVERY N is a run bound.
+
+PART C  the lifted loop: every left-white row at once
+  The longest p-periodic run at distance d from the black edge, over ALL left-white rows
+  (exact search; Lean re-checks p = 2 for d <= 7 and p = 3..6 for d <= 4):
+    p = 1: d = 0.. -> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    p = 2: d = 0.. -> 1, 7, 6, 5, 5, 8, 9, 9, 16, 15
+    p = 3: d = 0.. -> 4, 7, 9, 8, 8, 9, 13, 12
+    p = 4: d = 0.. -> 7, 7, 9, 9, 10, 12, 13, 13
+    p = 5: d = 0.. -> 5, 10, 9, 9, 10, 12, 12, 13
+    p = 6: d = 0.. -> 6, 14, 13, 13, 12, 12, 15, 15
+  p = 1 is proved for every d (runBound_one: at most 3d + 5). If such a bound existed for
+  every p, Problem 1 would follow (problem1_of_runBoundsAll), and the loop of Part B would
+  have a guaranteed horizon N + B_p(N) + 1 for every proposal (refutation_horizon_of_runBound).
+  Conversely a bound exists for p exactly when no left-white row has an eventually
+  p-periodic column (leftWhiteAperiodic_iff_runBound, a compactness argument).

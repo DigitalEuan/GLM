@@ -2,13 +2,12 @@
 
 ::
 
-    cd overlay
-    PYTHONPATH=. python3 -m glm_universal.corpus
-    PYTHONPATH=. python3 -m glm_universal.corpus --check
-    PYTHONPATH=. python3 -m glm_universal.corpus --refresh
-    PYTHONPATH=. python3 -m glm_universal.corpus --write
-    PYTHONPATH=. python3 -m glm_universal.corpus --remeasure
-    PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+    PYTHONPATH=src python3 -m glm_universal.corpus
+    PYTHONPATH=src python3 -m glm_universal.corpus --check
+    PYTHONPATH=src python3 -m glm_universal.corpus --refresh
+    PYTHONPATH=src python3 -m glm_universal.corpus --write
+    PYTHONPATH=src python3 -m glm_universal.corpus --remeasure
+    PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
 
 ``--refresh`` is the one to reach for after a change: it rebuilds the two
 address books, then the measurements taken from them, then the generated
@@ -20,6 +19,11 @@ figures for the previous tree wearing the current tree's digest, and
 
 Exit codes: ``0`` if what was asked for holds, ``1`` if a check found a defect
 or a generated artefact was stale, ``2`` if the arguments were not understood.
+
+*Last altered 31 October 2026 (repository check): the report prints the
+study-manifest gate.*
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -67,6 +71,18 @@ def _print_report() -> int:
         print(f"  unreachable: {path}")
     for source, target in checks["reachability"]["broken_links"]:
         print(f"  broken link: {source} -> {target}")
+    # The study manifests (studies/*.yaml) against their documents and the
+    # tree; added 31 October 2026 with the gate in ``checks.corpus_checks``.
+    manifests = checks.get("manifests") or {}
+    if manifests:
+        print(f"study manifests    "
+              f"{'hold' if manifests.get('holds', True) else 'FAIL'}")
+        if not manifests.get("holds", True):
+            print(f"  study manifests: {len(manifests.get('drifted', ()))} "
+                  f"drifted, {len(manifests.get('missing', ()))} missing, "
+                  f"{len(manifests.get('orphans', ()))} orphaned, "
+                  f"{len(manifests.get('invalid', ()))} invalid -- run "
+                  f"python3 -m glm_universal.corpus.study_manifest --sync")
     return 0 if data["holds"] else 1
 
 

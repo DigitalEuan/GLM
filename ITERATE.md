@@ -6,13 +6,13 @@
 
 **Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round with one incremental command: write the finding down, refresh, check, `signoff --close`.
 
-**Deciding figure.** The suite is <!--figure:test-files-->219 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->260 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 29 October 2026.*
+*Last altered 31 October 2026 (repository check: commands from the repository root; §0.2 the constants single source, D21; §0.3 new material through the intake, D22; §0.4 when Lean cannot be run; hazard 9; later the same day §0.3 the Lean written / Lean verified stages and staged code, then the acceptance decision and current test results; then the provisional install by the owner's decision).*
 
 ---
 
@@ -24,7 +24,7 @@ could have skipped, or writes a finding nowhere and loses it.
 
 ## 0. The five-minute pick-up
 
-**Before running anything, read §0.1, *Run-order hazards*.** Eight short
+**Before running anything, read §0.1, *Run-order hazards*.** Nine short
 rules — the first two are *don't edit documents while `corpus --refresh` is
 running* and *after editing `evaluation/cases.py`, re-take `queryesc`,
 `budget-guard-frozen` and `ties-ladder-frozen` first, then the rest, then
@@ -48,7 +48,6 @@ line instead of failing every unit.
 Then run this and follow what it says.
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.corpus --check     # is the tree as the last round left it?  ~3 s if nothing moved
 PYTHONPATH=src python3 -m glm_universal.signoff --verify    # which units and instruments are still signed
 PYTHONPATH=src python3 -m glm_universal.signoff --why       # if anything is stale: which kind of file moved
@@ -75,9 +74,8 @@ finding down, then refresh, check, close, commit.
 **Using the system itself**, rather than maintaining it:
 
 ```bash
-cd src
-python3 GLM.py -q "address of golay"                    # one query, 23 kinds
-python3 GLM.py -q "report lean"                         # 66 report subjects ('report routes' lists the route choices)
+python3 src/GLM.py -q "address of golay"                    # one query, 23 kinds
+python3 src/GLM.py -q "report lean"                         # 66 report subjects ('report routes' lists the route choices)
 PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Leech lattice?"
 PYTHONPATH=src python3 -m glm_universal.tools --help      # the study instruments
 ```
@@ -100,7 +98,7 @@ learned by losing time or work to it; keep the list, and add to it.*
    `ties-ladder-frozen` first, then the rest, then refresh the corpus last:
 
    ```bash
-   cd src; export PYTHONPATH=src
+   export PYTHONPATH=src
    for t in queryesc budget-guard-frozen ties-ladder-frozen; do python3 -m glm_universal.tools $t --write; done
    python3 -c "from glm_universal.corpus import caches; print('\n'.join(caches.describe()))"   # the rest, with their commands
    # ... re-take each one it names ...
@@ -152,12 +150,85 @@ learned by losing time or work to it; keep the list, and add to it.*
    in the order of hazard 2; run the evaluation; write every document; then
    `corpus --refresh` **last**, `corpus --check`, commit. Never touch a
    document after the last refresh without refreshing again.
+9. **The Lean address book is slow to read cold.** With about 9,000
+   declarations, the first `report lean` in a process spends about six
+   minutes in the exact nearest-neighbour separation check
+   (`lean_address.separation_report`), and `report retrieval` about a
+   minute and a half; later readings in the same process are memoised. After
+   a new Lean file, rebuild the book with `corpus --refresh` before either.
+
+### 0.2 Constants, shared paths and pinned values — one place only
+
+*Added 31 October 2026 (repository check), at the owner's direction: directive D21.*
+
+Every fundamental constant (the Golay length 24, the Leech dimension, the carrier regime
+`CARRIER_Y`, `CARRIER_Q` and `CARRIER_BUDGET` of `Constants.lean`, …), every shared path (the
+repository root, `studies/`, `source_material/`, the Lean source directory, a named Lean file)
+and every pinned value (the sign-off schema, the null-model seed) is defined once, in
+[`src/glm_universal/constants.py`](src/glm_universal/constants.py), and imported from there.
+A module that needs a Lean file asks `constants.lean_file(name)`; one that needs a supplied
+item asks `constants.source_material_item(name)`, which finds it in `ToDo/` or `done/`. A new
+constant is added to `constants.py` first and then used. `test_constants.py` holds the rule:
+it fails if a mirrored copy of a constant (in a sub-package or in the Lean file) disagrees with
+`constants.py` or a declared path does not exist, and its `LEGACY_PATH_SITES` list — the
+modules that still build a shared path by hand — may only shrink. This rule is upheld in
+every round, and every top-level document passes it on.
+
+### 0.3 New material — through the intake, never straight in
+
+*Added 31 October 2026 (repository check): directive D22.*
+
+The owner supplies new material — a full study such as `cent_compiler_v12`, a rough concept
+note, code, data or Lean — by putting it in `source_material/ToDo/`. A round takes it in with
+the intake ([`source_material/README.md`](source_material/README.md),
+[`INTAKE_PIPELINE_STUDY.md`](studies/INTAKE_PIPELINE_STUDY.md)):
+
+```bash
+PYTHONPATH=src python3 -m glm_universal.intake status              # what is waiting, and its next step
+PYTHONPATH=src python3 -m glm_universal.intake register <path>     # record a newly supplied item
+PYTHONPATH=src python3 -m glm_universal.intake scaffold <id>       # draft studies/<ID>_STUDY.md + .yaml
+PYTHONPATH=src python3 -m glm_universal.intake advance <id> <stage>  # only once the stage's gate passes
+PYTHONPATH=src python3 -m glm_universal.intake accept <id> --criterion .. --result .. --mark ..  # before measured
+PYTHONPATH=src python3 -m glm_universal.intake check               # ledger and folders agree
+```
+
+The stages are received, triaged, study drafted, tested, **Lean written** (in the tree and the
+audit; `python3 -m glm_universal.lean_check` passes), **Lean verified** (the build record
+`scripts/logs/lean_build_evidence.json`, written by the owner's `scripts/rebuild_lean.sh` after a
+passing build, matches the item's Lean files and every file they import), measured (does it
+make the GLM derive, address or refuse better, against a declared baseline? — a finished, closed
+study, and an acceptance decision quoting the study's declared criterion and its met marks) and
+absorbed —
+code into the package, a wheel into `src/glm_universal/wheels/`, the one wheels folder — or
+closed with its reason. Nothing is absorbed before its Lean verification: code a round has
+ported and tested waits in the item's `staged/` folder (tested there with `staged:` tests) and
+`intake advance <id> absorbed` (or `intake absorb-staged <id>`) installs it once the build
+record allows, after running every named test again. Only the owner can decide that such code
+serves before its build: `intake provisional <id> --decision "<the owner's words>"` installs it
+marked provisional (the register `src/glm_universal/wheels/_data/provisional.json`; every answer
+from it carries a `provisional:` note), and absorption later confirms it — as for the two wheel
+items of 31 October 2026. A promotion counts only test passes
+taken against the code as it now stands. The supplied files
+are kept as supplied: fixes are made in the package copy, never in `source_material/`. When an
+item is absorbed or closed, it is filed in `source_material/done/`.
+
+### 0.4 When Lean cannot be run here
+
+Not every environment a round works in has Lean. Then the round checks the Lean tree
+statically (`PYTHONPATH=src python3 -m glm_universal.lean_check`: imports, `module`
+discipline, the audit file's list, no `sorry`), records every new or changed Lean file as
+*owed a build*, and the owner runs `scripts/rebuild_lean.sh` (which rebuilds `.lake` from
+scratch and runs the axiom audit) and `scripts/check_repository.sh` locally. Their logs land in
+`scripts/logs/` (each script exits 1 when a required step fails); the next round reads them first and fixes what they report. A Lean file that
+needs a file the repository no longer has waits in `src/lean/awaiting_recovery/`, out of the
+build, and the missing file is recorded in
+[`studies/_lean_files_needed.md`](studies/_lean_files_needed.md).
 
 ## 1. Orient — four short reads, in this order
 
 1. [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning section
    (what is claimed and what is not), the standing target, and the
-   <!--figure:directives-->19 standing rules<!--/figure-->. Everything else assumes these have been read.
+   <!--figure:directives-->22 standing rules<!--/figure-->. Everything else assumes these have been read.
 2. [`STATUS.md`](STATUS.md) §1 — where the work stands in one screen (the
    full instrument table is [`SYSTEM.md`](SYSTEM.md) §1).
 3. [`STATUS.md`](STATUS.md) §2, the To-Do list — §2.1 is the next round,
@@ -170,7 +241,6 @@ learned by losing time or work to it; keep the list, and add to it.*
 Then confirm the tree is where the last round left it:
 
 ```bash
-cd src
 PYTHONPATH=src python3 -m glm_universal.corpus --check       # documents, ~30 s
 PYTHONPATH=src python3 -m glm_universal.signoff --verify     # what is still signed
 ```
@@ -199,7 +269,7 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
 | **close** | `python3 -m glm_universal.signoff --close --jobs 8` | the release question -- every unit and instrument signed with the exhaustive cases on -- paying only what is owed: unsigned, changed, failed, or signed fast; then `--verify-release` | once, closing the round, and again if it was interrupted |
-| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->219 test files<!--/figure--> and all 7 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
+| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->260 test files<!--/figure--> and all 7 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
 
 All three are run from `` with `PYTHONPATH=src`.
 
@@ -368,11 +438,10 @@ numbers, no figure markers (`corpus --check` fails a figure in a record).
 
 ```bash
 python3 -m pip install pytest                                 # once per session, if missing
-cd src
 PYTHONPATH=src python3 -m glm_universal.corpus --refresh        # derived layer, in the one order that converges
 PYTHONPATH=src python3 -m glm_universal.corpus --check          # documents gate; fix anything it names before closing
 PYTHONPATH=src python3 -m glm_universal.signoff --close --jobs 8
-cd .. && git add -A && git commit -m "Phase N: ..."
+git add -A && git commit -m "Phase N: ..."
 ```
 
 `--close` works in four stages (Phase 109): (0) re-take every stale

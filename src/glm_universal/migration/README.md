@@ -14,7 +14,7 @@
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 Three modules that take the repository's *actual persisted state* —
 `arc_agi_17/results/glm_state.json` and its companions — and bring it into

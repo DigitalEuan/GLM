@@ -23,11 +23,19 @@ the build and the test):
   evaluation itself is run by ``python3 -m glm_universal.evaluation``).
 
 Exactness: integers and :class:`~fractions.Fraction` throughout.
+
+*Last altered 31 October 2026 (repository check): the tampering copy of the
+stored table is a JSON round trip instead of ``copy.deepcopy`` (the table is
+JSON, so the copy is exact), so the module imports only what the reasoning
+package's import rule allows.*
+
+*Last altered 31 October 2026 (repository check): ``_SOURCES`` lists
+``runtime/reports/address.py``, where the address family of solvers moved
+verbatim out of ``runtime/session.py``.*
 """
 
 from __future__ import annotations
 
-import copy
 import json
 import multiprocessing
 import tempfile
@@ -255,7 +263,7 @@ def read_sets(rows=None, table=None, jobs: int = 6) -> Dict[str, object]:
 def _tampered(stored: Dict[str, object], how: str, rows):
     """``(stored, rows, path)`` after one tampering; ``path`` is a file to
     read the table from, or ``None`` to use ``stored`` as given."""
-    t = copy.deepcopy(stored)
+    t = json.loads(json.dumps(stored))  # a deep copy of the JSON table
     rung = AT.LADDER[0]
     single = t["rungs"][rung]["single"]
     rows = tuple(rows)
@@ -492,7 +500,8 @@ DATA_PATH: Path = (Path(__file__).resolve().parent / "_data"
 
 _SOURCES: Tuple[str, ...] = (
     "reasoning/address_read_study.py", "reasoning/address_read.py",
-    "reasoning/address_table.py", "runtime/session.py", "runtime/parser.py",
+    "reasoning/address_table.py", "runtime/session.py",
+    "runtime/reports/address.py", "runtime/parser.py",
     "runtime/tct_engine.py", "runtime/toolbox.py") + tuple(PG._SOURCES)
 
 

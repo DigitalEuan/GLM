@@ -90,11 +90,12 @@ the digest of the sources it was taken from (:func:`module_digest`), so a
 change to this module makes the cache *stale* and the generated blocks say so
 (D4).  Re-take it with::
 
-    cd overlay
-    PYTHONPATH=. python3 -m glm_universal.tools landscape --write
+    PYTHONPATH=src python3 -m glm_universal.tools landscape --write
 
 The command line lives in :mod:`glm_universal.tools`, one module above the core, because the six
 core sub-packages are libraries and not programs.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

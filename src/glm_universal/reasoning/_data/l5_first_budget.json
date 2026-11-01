@@ -1,0 +1,90 @@
+{
+ "at_1920": {
+  "absences": 396,
+  "correct": 44,
+  "false_absence_queries": [],
+  "false_absences": 0,
+  "nearest_correct": 44,
+  "queries": 44,
+  "refused": 0,
+  "refused_queries": [],
+  "seed_correct": 10,
+  "seed_queries": 10,
+  "starts": 1920,
+  "within_answered": 44,
+  "within_radius": 44,
+  "wrong": 0,
+  "wrong_queries": []
+ },
+ "ensemble_check": {
+  "agree": 20,
+  "available": true,
+  "checked": 20
+ },
+ "ensembles": 54,
+ "marks": {
+  "P0": true,
+  "R1": true,
+  "W1": true
+ },
+ "met": 3,
+ "prefix": {
+  "prefix": 6,
+  "rows": [
+   {
+    "prefix": true,
+    "seed": 20260825
+   },
+   {
+    "prefix": true,
+    "seed": 20260826
+   },
+   {
+    "prefix": true,
+    "seed": 20260827
+   },
+   {
+    "prefix": true,
+    "seed": 20260828
+   },
+   {
+    "prefix": true,
+    "seed": 20260829
+   },
+   {
+    "prefix": true,
+    "seed": 20260830
+   }
+  ],
+  "seeds": 6
+ },
+ "reading": {
+  "absences": 397,
+  "correct": 43,
+  "false_absence_queries": [
+   "walk 6 · sibling centre"
+  ],
+  "false_absences": 1,
+  "nearest_correct": 44,
+  "queries": 44,
+  "refused": 1,
+  "refused_queries": [
+   {
+    "nearest": "E_8^3",
+    "own_distance": "48/77",
+    "own_radius": "2611/13630",
+    "query": "walk 6 · sibling centre",
+    "truth": "E_8^3"
+   }
+  ],
+  "seed_correct": 10,
+  "seed_queries": 10,
+  "starts": 240,
+  "within_answered": 43,
+  "within_radius": 43,
+  "wrong": 0,
+  "wrong_queries": []
+ },
+ "source_digest": "d5b19978b79f2b3ef9dd6bca839e86397674cfbbe77d2dd18f48cdd4f4de74d9",
+ "taken": 3
+}

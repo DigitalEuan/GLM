@@ -2,7 +2,11 @@
 :mod:`glm_universal.runtime.toolbox`, the English openings the router reads
 after a refusal, the wiring census, and the marks of
 ``studies/CONNECTED_MACHINE_TWO_STUDY.md``
-(:mod:`glm_universal.evaluation.connected_two_cases`)."""
+(:mod:`glm_universal.evaluation.connected_two_cases`).
+
+*Last altered 1 November 2026 (Phase 186): the eight evaluation cases written
+for the new English openings are exempted from
+``test_no_declared_text_matches_an_opening``, and must match one.*"""
 
 from __future__ import annotations
 
@@ -117,10 +121,21 @@ class TestTheOpenings(unittest.TestCase):
     declared English."""
 
     def test_no_declared_text_matches_an_opening(self):
+        # The evaluation cases written at Phase 186 for the new openings are
+        # read by an opening on purpose (c2.PHASE186_OPENING_CASES), and are
+        # exempt; no other declared text may be.
+        from glm_universal.evaluation.cases import CASES
+        exempt = {c.question for c in CASES
+                  if c.id in c2.PHASE186_OPENING_CASES}
+        self.assertEqual(len(exempt), len(c2.PHASE186_OPENING_CASES))
         sets = router._declared_sets()
         for texts in sets.values():
             for text in texts:
+                if text in exempt:
+                    continue
                 self.assertIsNone(toolbox.phrase_tool(text), text)
+        for text in exempt:
+            self.assertIsNotNone(toolbox.phrase_tool(text), text)
 
     def test_openings(self):
         self.assertEqual(toolbox.phrase_tool("What is the continued fraction "

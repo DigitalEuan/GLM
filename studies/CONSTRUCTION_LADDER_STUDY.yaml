@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 462 of 568 queries answered correctly with 0 wrong, against 327 for the five-rung ladder
@@ -12,18 +14,28 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - tests/test_construction_ladder
+  - reasoning/ladder_escalation.py
+  - reasoning/monster_stack.py
+  - reasoning/moonshine.py
+  - runtime/escalation_loop.py
+  - substrate/construction_ladder.py
+  - substrate/golay_paley.py
+  - tools.py
   lean:
   - ConstructionLadder
   - ScaledLadder
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: CONSTRUCTION_LADDER_STUDY.md
   test:
   - test_construction_ladder.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: CONSTRUCTION_LADDER_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -35,12 +47,18 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
-predecessors: []
+phase: 39
+predecessors:
+- QUERY_ESCALATION_STUDY
 question: Is reading the substrate at one fixed rung of the Golay–Leech construction ladder a partial
   system — does escalating the reading across every rung, out from the middle, name more carriers than
   any single rung can?
 recomputed_by: '`glm_universal.reasoning.ladder_escalation.ladder_escalation_report`'
+related:
+- ADDRESS_RETRIEVAL_STUDY
+- NORM_FAMILY_STUDY
+- OPERATION_ESCALATION_STUDY
+- ZERO_STORAGE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -64,29 +82,19 @@ sections:
 - anchor: 6-limits-and-what-the-next-round-should-take
   heading: 6. Limits, and what the next round should take
 status: closed
-successors: []
+successors:
+- NORM_FAMILY_STUDY
 superseded_by: ''
 supersedes: []
 title: The construction ladder — the full escalation, generated on the fly, walked out from the middle
 verdict: 'It is a partial system, and the note''s five rungs were too few: escalating across the eleven-rung
   ladder names 462 of 568 queries correctly with 0 wrong, against 327 for the five-rung ladder and 283
-  for the best single rung.
-
-  The six rungs that were added are not ad-hoc: Construction `A` over the trivial
-
-  code is `2ℤ²⁴` and over the even-weight code is `D₂₄`, so the lattices that
-
-  fill the note''s long step are Construction rungs too, and the scaling `L ↦ 2L`
-
-  generates them. No single rung is best at more than one perturbation, and the
-
-  escalation loses nothing to an oracle that is allowed to pick the rung after
-
-  the fact: 462 is the oracle''s count too. The order of the walk changes the cost
-
-  and not the answer — which is a theorem, not a coincidence — and the sweep over
-
-  ladder lengths finds where that theorem''s hypothesis fails: the ladder stays
-
-  safe to thirteen rungs and breaks at fifteen.'
+  for the best single rung. The six rungs that were admitted are Construction rungs: Construction `A`
+  over the trivial code is `2ℤ²⁴` and over the even-weight code is `D₂₄`, so the lattices that fill the
+  note''s long step are Construction rungs too, and the scaling `L ↦ 2L` generates them. No single rung
+  is best at more than one perturbation, and the escalation loses nothing to an oracle that is allowed
+  to pick the rung after the fact: 462 is the oracle''s count too. The order of the walk changes the cost
+  and not the answer — which is a theorem, `firstNamed_order_independent` — and the sweep at each length
+  is a measured instance of the theorem''s hypothesis failing: the ladder stays safe to thirteen rungs
+  and breaks at fifteen.'
 wobble_deps: []

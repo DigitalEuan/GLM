@@ -28,6 +28,11 @@ That is the split the feedback asked for: what was thought of stays prose, what
 was measured becomes output.
 
 Nothing here is a float, and nothing here writes unless asked to.
+
+*Last altered 31 October 2026 (repository check): the external generators'
+paths and commands follow the ``src/`` layout.*
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -143,7 +148,7 @@ def render_digest() -> str:
         "This file is generated.  Do not edit it by hand -- run",
         "",
         "```",
-        "cd overlay && PYTHONPATH=. python3 -m glm_universal.corpus --write",
+        "PYTHONPATH=src python3 -m glm_universal.corpus --write",
         "```",
         "",
         "and commit the result.  `tests/test_corpus.py` compares it against a "
@@ -1190,11 +1195,15 @@ def block_stack_vision() -> str:
 #: block and nothing counts their lines as prose someone has to read -- but
 #: they cannot be re-rendered from here, because one needs ``pytest`` and the
 #: Lean tree and the other runs a live session.
+#: (Paths and commands updated 31 October 2026 for the ``src/`` layout of the
+#: reorganisation: the transcript's path had stopped matching the inventory's,
+#: so it was counted as a hand-written document with no tier-0 block.)
 EXTERNAL: Dict[str, str] = {
     "FIGURES.md":
-        "python3 -m glm_universal.figures --write --lean-root ..",
-    "glm_universal/examples/reasoning_showcase_transcript.md":
-        "python3 -m glm_universal.examples.reasoning_showcase --write",
+        "PYTHONPATH=src python3 -m glm_universal.figures --write",
+    "src/glm_universal/examples/reasoning_showcase_transcript.md":
+        "PYTHONPATH=src python3 -m glm_universal.examples.reasoning_showcase "
+        "--markdown > src/glm_universal/examples/reasoning_showcase_transcript.md",
 }
 
 #: Every generated document, however it is written.
@@ -4563,7 +4572,7 @@ def _native_parity() -> Optional[Mapping[str, object]]:
 def _native_parity_stale() -> str:
     return ("The native-parity measurements do not describe the sources, the "
             "Lean tree and the corpus as they now stand, so nothing is "
-            "reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools "
+            "reported here.  Run `PYTHONPATH=src python3 -m glm_universal.tools "
             "native-parity --write`.")
 
 
@@ -4717,7 +4726,7 @@ def _native_words() -> Optional[Mapping[str, object]]:
 def _native_words_stale() -> str:
     return ("The native-words measurements do not describe the sources, the "
             "Lean tree and the corpus as they now stand, so nothing is "
-            "reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools "
+            "reported here.  Run `PYTHONPATH=src python3 -m glm_universal.tools "
             "native-words --write`.")
 
 

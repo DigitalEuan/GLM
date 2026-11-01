@@ -13,16 +13,18 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 3 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *What the wobble can compute once it stops being a way of writing a number
 down. Cascaded loops, interacting tones, closed orbits, dither and error
 feedback through a matrix — each measured exactly and each bound to a
 theorem.*
 
-Code: [`glm_universal/reasoning/noise_lab.py`](../glm_universal/reasoning/noise_lab.py).
+Code: [`glm_universal/reasoning/noise_lab.py`](../src/glm_universal/reasoning/noise_lab.py).
 Query: `report noise` (aliases `report wobble`, `report wiggle`,
 `report dither`, `report cascade`).
-Formal development: [`RequestProject/GLM/Cascade.lean`](../glm_lean/RequestProject/GLM/Cascade.lean)
-and [`RequestProject/GLM/Feedback.lean`](../glm_lean/RequestProject/GLM/Feedback.lean).
+Formal development: [`RequestProject/GLM/Cascade.lean`](../src/lean/RequestProject/GLM/Cascade.lean)
+and [`RequestProject/GLM/Feedback.lean`](../src/lean/RequestProject/GLM/Feedback.lean).
 Tests: `glm_universal/tests/test_noise_lab.py`.
 
 ---
@@ -261,9 +263,8 @@ Nothing above is blocked by what this round found; they are simply not done.
 ## 8. Reproducing it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report noise" --verify-tct   # VERIFIED True
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_noise_lab.py -q
+PYTHONPATH=src python3 src/GLM.py -q "report noise" --verify-tct   # VERIFIED True
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_noise_lab.py -q
 ```
 
 and, for the theorems,

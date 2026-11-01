@@ -1,35 +1,44 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 9 marks; 10 of 10 programs as declared; 19 of 20 questions as declared; 8 of 8 diagnoses
   as declared and 8 of 8 closed forms predictive; 33 of 33 column-3 scripts verify and 167 of 167 mutations
   rejected; 26 of 26 earlier programs, 35 of 35 earlier questions and 300 of 300 generated programs unchanged;
   8 of 8 jumped *halts* equal to a plain run.
-directives:
-- D2
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/affine_output
-  - reasoning/batch_machine
-  - reasoning/batch_speech
-  - reasoning/constant_bound
+  - evaluation/cases.py
+  - reasoning/affine_output.py
+  - reasoning/batch_machine.py
+  - reasoning/batch_speech.py
+  - reasoning/constant_bound.py
+  - tools.py
   lean:
   - AffineOutput
   - ConstantBound
+  - SearchLoop
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: AFFINE_OUTPUT_STUDY.md
   test:
   - test_affine_output.py
+  - test_stack.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: AFFINE_OUTPUT_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -37,20 +46,40 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - A1
+  - A2
+  - A3
+  - A4
+  - A5
+  - A6
+  - A7
+  - A8
+  - A9
+  met:
+  - A1
+  - A2
+  - A5
+  - A6
+  - A7
+  - A8
+  - A9
+  missed:
+  - A3
+  - A4
 perturbations: []
 phase: 132
 predecessors:
 - CONSTANT_BOUND_STUDY
 - COUNTER_LASSO_STUDY
-- STACK_RELAY_STUDY
+- OPERATIONS_LADDER_STUDY
 question: Can GLM-BAT's counter-lasso reading jump a pass that prints a counter, state output past 100,000
   lines in a short checkable form, and say *why* when it still cannot decide — with the Non-Random Coherence
   Index reported as a diagnosis only — without changing any verdict it already gave and without a verdict
   a long plain run contradicts?
 recomputed_by: '`glm_universal.reasoning.affine_output.affine_output_report`'
+related:
+- STACK_RELAY_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -74,7 +103,8 @@ sections:
 - anchor: 7-the-measurement
   heading: 7. The measurement
 status: closed
-successors: []
+successors:
+- QUADRATIC_LASSO_STUDY
 superseded_by: ''
 supersedes: []
 title: Passes that print a counter, long output, and the diagnosis of a refusal

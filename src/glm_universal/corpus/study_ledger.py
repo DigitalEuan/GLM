@@ -16,106 +16,96 @@ upload; this version reads the YAML manifests (which now carry the
 predecessor edges, populated by the converter in iteration 9) instead of
 parsing the .md bodies directly.  The acyclicity check is the Python
 face of the Lean theorem ``GLM.StudyLedger.no_cycle`` (to be rebuilt).*
+
+*Last altered 31 October 2026 (repository check): the manifests are read
+through :func:`glm_universal.corpus.study_manifest.load_manifests`, the one
+loader the study index shares, and the studies folder comes from
+``constants.STUDIES_DIR`` (D21); the predecessor edges are now derived from
+each study's links by ``study_manifest --sync`` (a link to a study of strictly
+earlier phase), so the ledger also checks that every edge points to an
+earlier phase; ``missing_files`` reads the file references in their new form
+(code paths relative to ``src/glm_universal``; Lean files through
+``constants.lean_file``, so a held file counts as present; the cited files
+recorded missing count as missing); the tamper control is real (each of the
+first seven edges reversed in a copy of the graph must be seen as a cycle);
+``untracked_files`` says plainly that it does not consult version control.*
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Set, Tuple
 
-try:
-    import yaml as _yaml
-except ImportError:
-    _yaml = None
+from .. import constants as C
+from . import study_manifest as sm
 
 __all__ = [
     "ledger", "ledger_json", "ledger_issues", "study_ledger_report",
-    "missing_files", "STUDIES_DIR",
+    "missing_files", "untracked_files", "tamper_control", "STUDIES_DIR",
 ]
 
+#: The studies folder (``constants.STUDIES_DIR``; kept as a module name
+#: because callers import it from here).
+STUDIES_DIR: Path = C.STUDIES_DIR
 
-def _studies_dir() -> Path:
-    from ..constants import REPOSITORY_ROOT
-    return REPOSITORY_ROOT / "studies"
-
-
-STUDIES_DIR = _studies_dir()
-
-
-def _load_manifest(yaml_path: Path) -> Optional[Dict[str, Any]]:
-    """Load a YAML manifest, or None if it can't be parsed."""
-    if _yaml is None:
-        return None
-    try:
-        data = _yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
-        if isinstance(data, dict):
-            return data
-    except Exception:
-        pass
-    return None
+#: How many edges the tamper control reverses.
+TAMPER_EDGES = 7
 
 
 def _load_all_manifests() -> Dict[str, Dict[str, Any]]:
-    """Load every ``studies/*.yaml`` manifest, keyed by study id."""
-    out: Dict[str, Dict[str, Any]] = {}
-    if _yaml is None:
-        return out
-    for yaml_path in sorted(STUDIES_DIR.glob("*.yaml")):
-        data = _load_manifest(yaml_path)
-        if data and "id" in data:
-            out[data["id"]] = data
-    return out
+    """Every study manifest, keyed by study id (the shared loader)."""
+    return {sid: dict(data) for sid, data in sm.load_manifests().items()}
 
 
-def _compute_successors(manifests: Dict[str, Dict[str, Any]]) -> Dict[str, List[str]]:
+def _preds(manifest: Mapping[str, Any]) -> List[str]:
+    preds = manifest.get("predecessors") or []
+    return [p for p in preds if isinstance(p, str)]
+
+
+def _compute_successors(manifests: Mapping[str, Mapping[str, Any]]
+                        ) -> Dict[str, List[str]]:
     """Compute the successor relation by inverting predecessors."""
     successors: Dict[str, List[str]] = {sid: [] for sid in manifests}
     for sid, manifest in manifests.items():
-        for pred in manifest.get("predecessors", []):
+        for pred in _preds(manifest):
             if pred in successors:
                 successors[pred].append(sid)
-    # Sort for determinism
     return {sid: sorted(succs) for sid, succs in successors.items()}
 
 
-def _check_acyclic(manifests: Dict[str, Dict[str, Any]]) -> Tuple[bool, List[str]]:
+def _check_acyclic(manifests: Mapping[str, Mapping[str, Any]]
+                   ) -> Tuple[bool, List[str]]:
     """Check that the predecessor graph is acyclic.
 
     Returns (is_acyclic, cycle_path).  If a cycle is found, cycle_path is
     the list of study ids forming the cycle; otherwise it's empty.
+    Iterative, so a long chain cannot exhaust the recursion limit.
     """
-    # DFS-based cycle detection
     WHITE, GRAY, BLACK = 0, 1, 2
     color: Dict[str, int] = {sid: WHITE for sid in manifests}
-    parent: Dict[str, Optional[str]] = {sid: None for sid in manifests}
-
-    def dfs(u: str) -> Optional[List[str]]:
-        color[u] = GRAY
-        for v in manifests[u].get("predecessors", []):
-            if v not in color:
-                continue  # predecessor not in the ledger
-            if color[v] == GRAY:
-                # Found a cycle: trace back from u to v
-                cycle = [v, u]
-                p = parent[u]
-                while p is not None and p != v:
-                    cycle.append(p)
-                    p = parent[p]
-                cycle.reverse()
-                return cycle
-            if color[v] == WHITE:
-                parent[v] = u
-                result = dfs(v)
-                if result is not None:
-                    return result
-        color[u] = BLACK
-        return None
-
-    for sid in sorted(manifests):
-        if color[sid] == WHITE:
-            cycle = dfs(sid)
-            if cycle is not None:
-                return False, cycle
+    for root in sorted(manifests):
+        if color[root] != WHITE:
+            continue
+        path: List[str] = [root]
+        iters = [iter(_preds(manifests[root]))]
+        color[root] = GRAY
+        while iters:
+            advanced = False
+            for nxt in iters[-1]:
+                if nxt not in color:
+                    continue  # a predecessor not in the ledger
+                if color[nxt] == GRAY:
+                    start = path.index(nxt)
+                    return False, path[start:] + [nxt]
+                if color[nxt] == WHITE:
+                    color[nxt] = GRAY
+                    path.append(nxt)
+                    iters.append(iter(_preds(manifests[nxt])))
+                    advanced = True
+                    break
+            if not advanced:
+                color[path.pop()] = BLACK
+                iters.pop()
     return True, []
 
 
@@ -123,8 +113,9 @@ def ledger() -> Dict[str, Any]:
     """The study ledger: every study as one machine-readable row.
 
     Returns a dict with:
-      * ``studies`` -- list of {id, phase, status, faculty, predecessors,
-        successors, directives, junctions}
+      * ``studies`` -- list of {id, title, phase, status, faculty,
+        predecessors, successors, related, directives, junctions, marks
+        (counts), lean_missing, lean_held}
       * ``edges`` -- the predecessor edge count
       * ``acyclic`` -- whether the graph is acyclic
       * ``cycle`` -- the cycle path if not acyclic
@@ -141,22 +132,31 @@ def ledger() -> Dict[str, Any]:
 
     for sid in sorted(manifests):
         m = manifests[sid]
-        preds = m.get("predecessors", [])
+        preds = _preds(m)
         succs = successors.get(sid, [])
         edge_count += len(preds)
-        if m.get("phase", 0) > 0:
+        phase = m.get("phase", 0) or 0
+        if phase > 0:
             with_phase += 1
         if preds:
             with_predecessors += 1
+        marks = m.get("marks") or {}
+        refs = m.get("file_refs") or {}
         studies.append({
             "id": sid,
-            "phase": m.get("phase", 0),
+            "title": m.get("title", ""),
+            "phase": phase,
             "status": m.get("status", "unknown"),
             "faculty": m.get("faculty", "unknown"),
             "predecessors": preds,
             "successors": succs,
-            "directives": m.get("directives", []),
-            "junctions": m.get("junctions", []),
+            "related": list(m.get("related") or []),
+            "directives": list(m.get("directives") or []),
+            "junctions": list(m.get("junctions") or []),
+            "marks": {k: len(marks.get(k) or [])
+                      for k in ("declared", "met", "missed", "amended")},
+            "lean_missing": list(refs.get("lean_missing") or []),
+            "lean_held": list(refs.get("lean_held") or []),
         })
 
     return {
@@ -178,43 +178,76 @@ def ledger_json() -> str:
     return json.dumps(ledger(), indent=1, sort_keys=True, default=str) + "\n"
 
 
-def ledger_issues(led: Optional[Dict[str, Any]] = None) -> List[Tuple[str, str, str]]:
+def ledger_issues(led: Optional[Dict[str, Any]] = None
+                  ) -> List[Tuple[str, str, str]]:
     """The disagreements between the ledger's sources.
 
-    Returns a list of (study_id, issue_kind, detail) triples.  Currently
-    checks:
-      * studies with phase 0 (unknown phase)
-      * predecessors that don't exist in the ledger
-      * cycles (if any)
+    Returns a list of (study_id, issue_kind, detail) triples:
+      * ``no phase`` -- no phase could be read for the study;
+      * ``missing predecessor`` -- an edge to a study with no manifest;
+      * ``predecessor not earlier`` -- an edge whose target's phase is not
+        strictly earlier (the derivation never writes one; a hand edit can);
+      * ``cycle`` -- if any.
     """
     if led is None:
         led = ledger()
     manifests = _load_all_manifests()
     issues: List[Tuple[str, str, str]] = []
-
     for sid in sorted(manifests):
         m = manifests[sid]
-        if m.get("phase", 0) == 0:
-            issues.append((sid, "no phase", "phase not extracted from the .md body"))
-        for pred in m.get("predecessors", []):
+        phase = m.get("phase", 0) or 0
+        if phase == 0:
+            issues.append((sid, "no phase",
+                           "no phase read from the .md or the round records"))
+        for pred in _preds(m):
             if pred not in manifests:
                 issues.append((sid, "missing predecessor",
                                f"predecessor {pred} not in the ledger"))
-
+                continue
+            other = manifests[pred].get("phase", 0) or 0
+            if not (phase > 0 and 0 < other < phase):
+                issues.append((sid, "predecessor not earlier",
+                               f"{pred} (phase {other}) is not earlier than "
+                               f"phase {phase}"))
     if not led["acyclic"]:
         issues.append(("GRAPH", "cycle", " -> ".join(led["cycle"])))
-
     return issues
 
 
+def tamper_control(edges: int = TAMPER_EDGES) -> Dict[str, int]:
+    """Reverse each of the first ``edges`` predecessor edges (sorted) in a
+    copy of the graph -- the predecessor made to build on its successor --
+    and count how often the cycle check sees it.  Every reversal closes a
+    cycle, so a sound check sees all of them."""
+    manifests = _load_all_manifests()
+    pairs = sorted((sid, pred) for sid, m in manifests.items()
+                   for pred in _preds(m) if pred in manifests)[:edges]
+    caught = 0
+    for sid, pred in pairs:
+        copy = {k: dict(v) for k, v in manifests.items()}
+        copy[pred]["predecessors"] = _preds(copy[pred]) + [sid]
+        acyclic, _cycle = _check_acyclic(copy)
+        caught += int(not acyclic)
+    return {"tampered": len(pairs), "caught": caught}
+
+
 def study_ledger_report() -> Dict[str, Any]:
-    """A summary report for the CLI."""
+    """A summary report for the CLI (``tools study-ledger``)."""
     led = ledger()
     issues = ledger_issues(led)
     issue_kinds: Dict[str, int] = {}
     for _sid, kind, _detail in issues:
         issue_kinds[kind] = issue_kinds.get(kind, 0) + 1
     mf = missing_files()
+    tamper = tamper_control()
+    ordered = not any(kind in ("missing predecessor", "predecessor not earlier")
+                      for _s, kind, _d in issues)
+    marks = {
+        "L1": led["counts"]["studies"] > 0,      # the ledger loads
+        "L2": bool(led["acyclic"]),              # the graph is acyclic
+        "L3": ordered,                            # every edge to an earlier phase
+        "L4": tamper["caught"] == tamper["tampered"] and tamper["tampered"] > 0,
+    }
     return {
         "summary": {
             "studies": led["counts"]["studies"],
@@ -224,22 +257,18 @@ def study_ledger_report() -> Dict[str, Any]:
             "acyclic": led["acyclic"],
         },
         "issue_kinds": issue_kinds,
-        "tamper_caught": 0,
-        "tampered": 0,
+        "tamper_caught": tamper["caught"],
+        "tampered": tamper["tampered"],
         "files": {
             "named": mf["named"],
             "missing": mf["missing"],
         },
-        "marks": {
-            "L1": True,  # the ledger loads
-            "L2": led["acyclic"],  # the graph is acyclic
-            "L3": len(issues) == 0,  # no issues
-        },
-        "met": sum(1 for v in [True, led["acyclic"], len(issues) == 0] if v),
-        "taken": 3,
+        "marks": marks,
+        "met": sum(1 for v in marks.values() if v),
+        "taken": len(marks),
         "amended_met": 0,
         "amended_taken": 0,
-        "holds": led["acyclic"],
+        "holds": bool(led["acyclic"]) and ordered,
     }
 
 
@@ -247,27 +276,35 @@ def missing_files() -> Dict[str, Any]:
     """Check that every file referenced by the studies exists.
 
     Returns a report with ``documents``, ``named``, ``archive_members``,
-    ``placeholders``, ``missing``.
+    ``placeholders``, ``missing`` (a list of ``(study, kind, ref)``).  A Lean
+    file held in ``src/lean/awaiting_recovery`` exists; the files a manifest
+    records as missing (``file_refs.lean_missing`` and ``file_refs.missing``)
+    are missing.
     """
     manifests = _load_all_manifests()
-    from ..constants import REPOSITORY_ROOT
+    package = C.PACKAGE_ROOT
     named = 0
     missing: List[Tuple[str, str, str]] = []
-    for sid, m in manifests.items():
-        fr = m.get("file_refs", {})
+    for sid in sorted(manifests):
+        fr = manifests[sid].get("file_refs") or {}
         for kind in ("code", "lean", "test"):
-            for ref in fr.get(kind, []):
+            for ref in fr.get(kind) or []:
                 named += 1
                 if kind == "lean":
-                    candidate = REPOSITORY_ROOT / "src" / "lean" / "RequestProject" / "GLM" / (ref + ".lean")
+                    candidate = C.lean_file(ref)
                 elif kind == "code":
-                    candidate = REPOSITORY_ROOT / "src" / "glm_universal" / (ref + ".py")
-                elif kind == "test":
-                    candidate = REPOSITORY_ROOT / "src" / "glm_universal" / "tests" / ref
+                    candidate = package / ref
                 else:
-                    continue
-                if not candidate.exists():
+                    candidate = package / "tests" / ref
+                if not candidate.is_file():
                     missing.append((sid, kind, ref))
+        for ref in fr.get("lean_missing") or []:
+            named += 1
+            missing.append((sid, "lean", ref))
+        for ref in fr.get("missing") or []:
+            named += 1
+            missing.append((sid, "test" if ref.startswith("tests/") else "code",
+                            ref))
     return {
         "documents": len(manifests),
         "named": named,
@@ -280,7 +317,8 @@ def missing_files() -> Dict[str, Any]:
 def untracked_files() -> Dict[str, Any]:
     """Files on disk that version control does not hold.
 
-    *Stub:* returns empty (the full implementation would call
-    ``git ls-files``).
+    *Not measured:* the ledger does not run ``git`` (the repository travels
+    as an upload, and the history does not always travel with it), so this
+    reports nothing rather than guessing; ``measured`` says so.
     """
-    return {"untracked": []}
+    return {"untracked": [], "measured": False}

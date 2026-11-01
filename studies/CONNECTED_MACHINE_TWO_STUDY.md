@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 1 November 2026 (Phase 186: W6 exempts the eight evaluation cases written for the new openings, §4).*
+
 ---
 
 ## 0. What this document is
@@ -153,6 +155,15 @@ case the certification exists for. W6 is the non-interference rule of
 refusals in W7 include an opening the tool refuses (`continued fraction of
 banana`, an ambiguous binding, a law in neither register), so the fallback
 is seen to keep a refusal rather than invent an answer.
+
+*Added 1 November 2026 (Phase 186).* W6 is still met, with one declared
+change. Phase 186 added English openings for `tool rule30`, `tool
+conjecture`, `tool derive` and `tool arc`, and eight evaluation cases written
+to be read by them
+(`glm_universal.evaluation.connected_two_cases.PHASE186_OPENING_CASES`). W6
+now exempts exactly those eight and requires that an opening reads each of
+them; of the other declared texts (453 in all on 1 November 2026), none
+matches an opening.
 
 ## 5. What this round does not do
 

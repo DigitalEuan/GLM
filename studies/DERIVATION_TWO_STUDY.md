@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -283,9 +285,8 @@ claim.
 ## 8. Re-running
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools derivation-two          # all marks (under a minute)
-PYTHONPATH=. python3 -m glm_universal.tools derivation-two --quick  # batteries of 100
-PYTHONPATH=. python3 -m unittest glm_universal.tests.test_derivation_two
+PYTHONPATH=src python3 -m glm_universal.tools derivation-two          # all marks (under a minute)
+PYTHONPATH=src python3 -m glm_universal.tools derivation-two --quick  # batteries of 100
+PYTHONPATH=src python3 -m unittest glm_universal.tests.test_derivation_two
 lake build RequestProject.GLM.DerivationsTwo                       # from the project root
 ```

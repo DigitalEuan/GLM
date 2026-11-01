@@ -1,31 +1,42 @@
-# Summary of changes for run 97fcfeda-6b2b-40a0-b51a-2bce86c24d7e
-This round is **Phase 184, the declared majority rule**. It takes the first line of To-Do item 11 in `STATUS.md` §2.1: a majority rule for conflicting examples, with its own soundness condition. It also fixes a slowdown that was making the end-to-end evaluation time out. Nothing else from the To-Do list was taken.
+# Summary of changes for run fef50c6a-9f92-431f-aba8-6b1139c2a1bd
+**The intake items that measurably help the GLM are now part of it, absorbed ahead of your Lean build as you decided.** Your own `scripts/rebuild_lean.sh` run still has to confirm their Lean files. The project's full Lean build could not be run here: this environment has no Lean toolchain or pytest where the repository runs, and no network.
 
-**Lean** (`glm_lean/RequestProject/GLM/LorentzianMajority.lean`, added to `AxiomAuditAll.lean`). It builds with no `sorry`, and the whole-development audit reports 10069 theorems on the standard axioms only. The rule splits the examples into groups that state the same target. It answers the target whose group holds more than half the total weight, and refuses if none does. Proved, for any finite set of examples, any rational weights and targets of any type:
-- At most one target can hold more than half the weight (`majority_unique`), and the rule answers exactly that target (`majorityRule_eq_some_iff`).
-- **Soundness condition** (`majority_never_wrong`, `majority_sound`): if the examples stating the true target hold at least half the weight, the rule never answers anything else. If they hold more than half, it answers correctly.
-- **The condition is tight** (`majority_misled`): below half, wrong examples that agree with each other decide the answer. No rule that reads only the answers can check the condition; the caller has to supply it.
-- **A wrong answer needs many wrong examples** (`majority_wrong_needs_decoys`): if an answer is backed by \(g\) of \(k\) examples, at least \(g\) of them must be wrong for it to be wrong.
-- Each agreeing group has zero spread in the evidence space (`group_disp_zero`, `group_evid_null`), and wherever Phase 183's dispersion guard answers, the rule gives the same answer (`majority_extends_guard`).
+**Standalone Lean check.** The four new files in `src/lean/RequestProject/GLM/IntakeChecks/` were each built on their own with Lean 4.34 and Mathlib, using the exact files in the repository. They are `RuleThirtyBits`, `SporadicOrderCheck`, `NextTerm` and `Derivability`. They contain no `sorry` and use only Lean's standard axioms. These check mathematical facts the new answers cite; they are not proofs about the Python code itself. They have not yet been built inside your project.
 
-**Python:**
-- `reasoning/lorentzian_majority.py`, exposed as a new **`tool majority A : B, … :: C`**. It names the examples it outvoted and states with each answer how many examples would have to be wrong for the answer to be wrong. `tool evidence` is unchanged.
-- A new measurement, `tools lorentzian-majority`, whose marks were committed before the first run: **8 of 8 met**. Physics relations, 300 queries per condition:
-  - two good examples and one decoy: 155 right, 0 wrong, where the guard answers none (this reproduces Phase 183's figure);
-  - three good and two decoys: 161 right, 0 wrong;
-  - one good example and two decoys that agree: 148 wrong, exactly the cases `majority_misled` predicts;
-  - one good, two agreeing decoys and two other decoys: the rule refuses all 300, where a simple plurality vote is wrong 150 times.
-- **The cost:** with two good examples against two decoys that disagree with each other, a plurality vote gets 149 right and the majority rule refuses all of them. This is in the study.
-- New tests in `tests/test_lorentzian_majority.py`.
-- New write-up: `studies/LORENTZIAN_MAJORITY_STUDY.md`.
+**What was absorbed**
+- **`Rule30_GLM_Study`:** its hypothesis engine now answers as `tool rule30`, `tool conjecture`, and as the plan search behind `tool arc`.
+- **`glm_wheels_bundle`:** its formula wheels answer as `tool derive`, and the sequence wheel now answers *what comes next in …*.
+- **`cent_compiler_v12`:** its cent wheels are absorbed.
 
-**The evaluation fix.** With 6,224 Lean declarations, `report lean` took about 199 seconds, and the 8-process evaluation timed out on it and on `report relay` (221 of 223 passed). I changed the nearest-neighbour search in `lean_address.nearest_points` to sort points along an integer principal axis and stop scanning using an exact bound. `report lean` now takes about 56 seconds and every figure is unchanged; the test comparing the search with brute force passes. `report relay` is still about 230 seconds when run alone and is now a To-Do line in `STATUS.md` §2.2.
+All three items are recorded as "absorbed ahead of the build", and every answer that rests on them says so.
 
-**Checks run:**
-- End-to-end evaluation: 223 of 223 on 8 processes.
-- `corpus --check`: current.
-- `tools dates`: 0 defects.
-- Every measurement made stale by the code changes was re-taken. Their marks are unchanged, except `native_words` W2, which moved from not met to met; that mark had not been re-taken for several corpus updates, so the change reflects the larger corpus.
-- `test_lorentzian_majority`, `test_lorentzian_evidence`, `test_axiom_guard`, `test_connected_machine` and the fast-search tests all pass when run by hand. pytest can't be installed here, so the full test-suite sign-off is still owed, as in earlier rounds.
+**Measured effect** (full details in `studies/INTAKE_CAPABILITY_STUDY.md` and `CAPABILITY_ASSESSMENT.md`). There were 0 wrong answers throughout, and 12 of the 14 pre-registered marks were met.
 
-**Records updated:** `STATUS.md` (the "Just closed" paragraph, item 11, a new §2.2 line), `MASTER_PLAN.md` (Phase 184), `SYSTEM.md`, the academic paper (§20.57 and result 48), `WHITEBOARD.md` and `tests/README.md`. The proved theorems and the rule's definition are registered in the Properties table. All work is committed and pushed.
+| Area | With the intake items | Without |
+|---|---|---|
+| ARC tasks (development set, not held-out) | 9 of 50 | 2 |
+| Rule 30 battery, on the answering path | 16 of 39 | 0 |
+| Next-term questions | 27 of 45 | 5 |
+| Mixed questions across five domains | 23 of 30 | 4 |
+| Formula laws derived | 63 of 64 | — |
+| Non-laws wrongly accepted | 0 of 51 | — |
+
+- **Missed mark R2 (Rule 30):** fewer than the target of 20 battery sentences were answered on the answering path.
+- **Missed mark S2 (next terms):** 1 of 13 negative controls was answered; `1, 2, 4, 8, 16` was continued with 32.
+- **Evaluation:** all 237 questions pass (187 answered, 50 refused as expected).
+
+**Fixes made along the way**
+- The engine had used Python's `random`, which the blueprint's Universal Binary Principle bans. It now uses its own exact generator, `ExactDraw`, and `report blueprint` is back to 26 confirmed claims.
+- The Rule 30 `^` operation is now classified as a permitted operation.
+- Recorded figures were brought up to date with the larger evaluation set and corpus: the sandbox-planner counts, the anonymous-register control bound, the iteration-cost table, and study links into `source_material/done/`.
+- Every affected measurement was re-taken. The corpus check, figures check and intake check all pass.
+
+**Tests.** pytest is not installed here, so all 260 test files were run by hand with a substitute runner. 6,521 passed, 76 were skipped and 6 fail. The six failures read the Lean citation graph, which only a passing Lean build re-creates. This hand run is not your sign-off.
+
+**What you need to run**
+1. Copy the delivered files over your checkout, then run `scripts/apply_reorganisation.sh` to clear the old copies of the two items now in `source_material/done/`.
+2. Run `scripts/rebuild_lean.sh`. This also re-creates the citation graph.
+3. Run `PYTHONPATH=src python3 -m glm_universal.intake confirm-build` once each for `Rule30_GLM_Study`, `cent_compiler_v12` and `glm_wheels_bundle`.
+4. Run the pytest sign-off: `scripts/check_repository.sh`, then `python3 -m glm_universal.signoff --close --jobs 8`.
+
+All changed files have been delivered, including the two items' full folders under `source_material/done/`. The work is on branch `intake-absorption`.

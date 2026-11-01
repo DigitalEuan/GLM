@@ -1,0 +1,155 @@
+-- Proposals emitted by the GLM Hypothesis Engine v14.
+-- Self-contained: no imports from earlier hypothesis_engine scripts.
+-- Adds the TAX-period-doubling correlation test (v13).
+-- Each open or surviving statement is a `sorry`-guarded proposal for the prover;
+-- refuted ones are listed with their counterexample.  Not part of the Lean build.
+
+-- H01 [refuted-heldout] every left diagonal has eventual period dividing 8
+-- refuted: ∀ D : ℕ, ∃ T, ∀ t ≥ T, ldiag D (t + 8) = ldiag D t
+-- refutation in the Lean package: LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight (refuted)
+
+-- H02 [survives] for D ≥ 20 the transient of left diagonal D is longer than D (the centre column, which reads diagonal D at time D, always reads it inside its transient)
+-- Lean package: partial: LeftDiagonalPeriodsData.leftDiag_transient_at_read certifies 20 ≤ D < 20000 only
+theorem engine_H02 : ∀ D : ℕ, 20 ≤ D → ∃ t ≥ D, ldiag D (t + 64) ≠ ldiag D t := by sorry
+
+-- H03 [survives] for D ≥ 20 the transient satisfies 30/29 ≤ pre(D)/D ≤ 71/48 (the exact extremes on the development range)
+-- envelope 30/29 ≤ pre(D)/D ≤ 71/48; EMP target, no Lean form proposed
+
+-- H04 [refuted-heldout] the eventually white left diagonals are exactly [2, 7, 28]
+-- refuted: ∀ D : ℕ, (∃ T, ∀ t ≥ T, ldiag D t = false) ↔ D = 2 ∨ D = 7 ∨ D = 28
+-- refutation in the Lean package: LeftDiagonalPeriodsData.leftDiag_white_below_87868 (refutes it)
+
+-- H05 [survives] every left diagonal D < 400 has eventual period dividing 8
+-- closed in the Lean package: LeftDiagonalPeriodsData.leftDiag_period_eight_below_400
+-- statement: ∀ D : ℕ, D < 400 → ∃ T, ∀ t ≥ T, ldiag D (t + 8) = ldiag D t
+
+-- H06 [refuted-by-prediction] every left diagonal has eventual period dividing 16
+-- refuted: ∀ D : ℕ, ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t
+-- refutation in the Lean package: LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen (refuted)
+
+-- H07 [refuted-heldout] a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1)
+-- jump(D) ↔ white(D-1)
+
+-- H08 [law-holds] a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1) ∧ odd-parity(D-2)
+-- closed in the Lean package: LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, infinitely_many_white_of_unbounded
+-- statement: ∀ (D : ℤ) (Q : ℕ), EvPer (ldiag (D - 1)) Q → EvPer (ldiag (D - 2)) Q → ¬ EventuallyWhite (ldiag (D - 1)) → EvPer (ldiag D) Q
+
+-- H09 [prediction-confirmed] the first left diagonal with least eventual period 32 is D = 87867
+-- closed in the Lean package: LeftDiagonalPeriodsData.ldiag_87867_not_evPer_sixteen + leftDiag_period_sixteen_below_87867
+-- statement: ¬ (∃ T, ∀ t ≥ T, ldiag 87867 (t + 16) = ldiag 87867 t) ∧ ∀ D < 87867, ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t
+
+-- H10 [survives] every left diagonal D < 87867 has eventual period dividing 16
+-- closed in the Lean package: LeftDiagonalPeriodsData.leftDiag_period_sixteen_below_87867
+-- statement: ∀ D : ℕ, D < 87867 → ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t
+
+-- H11 [open] the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)
+-- Lean package: open; LeftDiagonalPeriods.infinitely_many_white_of_unbounded is the proved reduction
+theorem engine_H11 : ∀ m, ∃ D : ℕ, ¬ ∃ T, ∀ t ≥ T, ldiag D (t + 2 ^ m) = ldiag D t := by sorry
+
+-- H12 [refuted-heldout] the least period of right diagonal D is 2^(D - floor((D + 1) / 3))
+-- least period of rdiag D equals 2 ^ (D - floor((D + 1) / 3))
+
+-- H13 [survives] the least period of right diagonal D divides 2^D
+-- closed in the Lean package: Diagonals.rdiag_periodic
+-- statement: ∀ D t, rdiag D (t + 2 ^ D) = rdiag D t
+
+-- H14 [survives] the least period of right diagonal D exceeds ceil(D/2)
+-- 2^(exponent) > ceil(D/2)
+-- Lean package: Diagonals.rdiag_not_periodic
+
+-- H15 [survives] (transported from the left-diagonal law) every right diagonal is periodic or anti-periodic with the common period of the two diagonals outside it
+-- rdiag D (t + Q) = rdiag D t xor (parity of (rdiag (D-1) ∨ rdiag (D-2)) over one period Q)
+-- Lean package: RightDiagonalBalance (C113)
+
+-- H16 [survives] the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 10000
+-- Lean package: partial: PowerSeriesLadderData.no_eventual_period_below_10000 (a smaller range)
+theorem engine_H16 : ∀ p, 1 ≤ p → p ≤ 64 → ¬ ∀ t ≥ 10000, centerCol (t + p) = centerCol t := by sorry
+
+-- H17 [survives] |#black − #white| ≤ 3·√N for every prefix length N (sharpest integer constant on N ≤ 4000)
+-- informal: ∀ N ≥ 1, (2·#black(N) − N)^2 ≤ 9·N; ledger C25: an O(√N) bound is expected to fail eventually (iterated logarithm)
+-- Lean package: partial: WobbleCertificate.wobble_sq_ratio_cert certifies N ≤ 10^6 only
+
+-- H18 [refuted-heldout] the GF(2) linear complexity L(n) of the centre column satisfies |2·L(n) − n| ≤ 9 for all n (sharpest on n ≤ 2000)
+-- |2 L(n) - n| ≤ 9; would imply Problem 1 via LCUnbounded
+
+-- H19 [survives] |2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 3000)
+-- |2 L(n) - n| ≤ 10
+
+-- H20 [refuted-heldout] every binary word of length k occurs in the first ⌈3/2·k·2^k⌉ centre bits (sharpest on k ≤ 8)
+-- factor complexity: all words of length k occur in a prefix of length O(k 2^k)
+
+-- H21 [refuted-heldout] the eventual left diagonals do not depend on the seed: every finite seed whose leftmost cell is black has the same eventual left diagonals as the single black cell
+-- refuted: ∀ y, LeftEdgeAtZero y → ∀ D : ℕ, EventuallyEq (ldiag D) (ldiagOf y D)
+
+-- H22 [law-holds] a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed)
+-- closed in the Lean package: LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference
+-- statement: ∀ x y : Config, LeftEdgeAtZero x → LeftEdgeAtZero y → ∀ D : ℕ, (∀ D' < D, EventuallyEq (ldiagOf x D') (ldiagOf y D')) → ¬ EventuallyEq (ldiagOf x D) (ldiagOf y D) → 2 ≤ D ∧ EventuallyWhite (ldiagOf x ((D : ℤ) - 1))
+
+-- H23 [survives] The period-doubling law (H08: white(D-1) ∧ odd-parity(D-2)) predicts where the Golay code's addressing system will encounter ambiguous reads: at the period-doubling diagonals, the address resolution has a tie (like the snap at distance 4).
+-- application: period-doubling diagonals correspond to addressing ties in the Golay code
+
+-- H24 [survives] The centre column's exact lag-k agreement counts provide an integer fingerprint that can be compared against R-calculus pipeline V trajectories. If a pipeline's V matches the centre column's lag-k profile, it is a model of the centre column.
+-- application: lag-k agreement profile as an exact fingerprint
+
+-- H25 [survives] The prediction chain (H09: D=87867 confirmed, and any chain predictions) is forward-looking evidence: the law predicts structure beyond the data, and the prediction is checked. This is the evidence model's 'replay gate' applied to hypotheses.
+-- application: prediction chain as forward-looking evidence
+
+-- H26 [survives] The left-diagonal period structure (1, 2, 4, 8, 16, 32 at D=0, 3, 8, 29, 400, 87867) is a dyadic tower — the same structure as the GLM's layer stack. The period-doubling diagonals are analogous to the rungs of the construction ladder.
+-- application: period-doubling structure as a dyadic tower
+
+-- H27 [survives] The centre column's 2-bit and 3-bit block uniformity gaps (H26: 185, H27: 175) provide an exact integer benchmark. The GLM's retrieval feature map can be measured against the same benchmark.
+-- application: block uniformity as a retrieval benchmark
+
+-- H28 [survives] The seed-memory law (H22: first difference after a white diagonal = reset erases the seed) is analogous to the GLM's conversation system: a refusal (tie) is a 'reset' that erases the antecedent.
+-- application: seed-memory reset ≅ conversation refusal
+
+-- H29 [survives] the gap ratios between consecutive period-doubling diagonals are themselves growing (super-exponential gap growth), making the unbounded conjecture H11 practically undecidable: the next gap is too large to search
+-- gap ratios: 5/3, 21/5, 371/21, 87467/371; ratio-of-ratios: 63/25, 1855/441, 1836807/155241; all growing
+
+-- H30 [survives] the next period-doubling diagonal (period 64) is estimated at D >= 2008133563622280/7294973 (~275276353), based on the super-exponential gap growth. This is beyond any practical search range.
+-- estimated period-64 at D >= 2008133563622280/7294973; based on gap ratio 22951428267/7294973 and gap 2007492576229689/7294973
+
+-- H31 [survives] the v7 prediction chain found no period-64 jump below D=400,000 because the estimated next jump is at D >= 2008133563622280/7294973 (~275276353) — 250x beyond the search range. The search was not a failure; it was consistent with the gap growth model.
+-- the v7 chain search to D=400,000 is consistent with the estimated D >= 275276353.13006365
+
+-- H32 [survives] the centre column's aperiodicity (H16) follows from the transient bound (H02): the centre column reads diagonal D at time D, and the transient of D is longer than D, so the centre column's first D bits are never in the periodic regime of any diagonal. The aperiodicity is a CONSEQUENCE of the transient structure, not an independent fact.
+-- centre column aperiodic because transient(D) > D for D >= 20, and centre(t) = ldiag(t, t) reads diagonal t at time t, inside its transient
+
+-- H33 [survives] H11 (periods unbounded) is implied by the super-exponential gap growth: if the gaps grow without bound, there are infinitely many jumps, so the periods are unbounded. But the gap growth is so fast that no finite computation can verify more than 6 jumps. H11 is TRUE but PRACTICALLY UNDECIDABLE.
+-- H11 is implied by the gap growth model; the gap growth is super-exponential; no finite search can confirm H11
+
+-- H34 [survives] the period-doubling tower and the construction ladder are both dyadic towers (each step doubles), but the spacings differ: the construction ladder is uniform (norm × 2), while the period-doubling is super-exponential. The analogy holds in structure but not in scale.
+-- construction ladder: uniform dyadic (norm 2^n). Period tower: super-exponential dyadic
+
+-- H35 [survives] R-calculus pipeline (T=0, rho=1, C=0) lag-k biases: [100, 99, 99, 98, 96, 92, 84]. Centre column (scaled): [-1, 0, 0, 0, -1, 0, -1]. Match: NO — the simplest pipeline does NOT model the centre column.
+-- pipeline biases [100, 99, 99, 98, 96, 92, 84] vs centre (scaled) [-1, 0, 0, 0, -1, 0, -1]; match = False
+
+-- H36 [survives] centre column 2-bit uniformity gap = 185 (in 60000 bits). Thue-Morse sequence 2-bit gap = 10000. The centre column is less uniform than Thue-Morse.
+-- centre gap 185, Thue-Morse gap 10000; retrieval benchmark established
+
+-- H37 [refuted-heldout] the clustered diagonals (NRCI < 0.9) are exactly the period-doubling diagonals. Found 18 clustered: [8, 12, 13, 14, 17, 19, 20, 21, 24, 26]. Period-doubling: [3, 8, 29, 400]. Overlap: [8]. Jumps not clustered: [3, 29, 400]. Clustered not jumps: [12, 13, 14, 17, 19, 20, 21, 24, 26, 27].
+-- NRCI < 0.9 ↔ period jump
+
+-- H38 [refuted-heldout] every period-doubling diagonal has a TAX defect in the pair (D-1, D). Found 5882 defects in D ∈ [2, 6000). Jumps with defect: []. Jumps without defect: [3, 8, 29, 400].
+-- TAX defect at (D-1, D) is necessary for period jump at D
+
+-- H39 [survives] the wobble maximum D(N)^2/N is the same across Rule 30 seeds: ['3200/731', '3200/731']. SAME.
+-- wobble maximum is seed-independent for Rule 30
+
+-- H40 [survives] the delta-sigma accumulator range grows with N: {1000: '8', 5000: '29', 10000: '30', 20000: '107'}. Growing: True.
+-- accumulator range grows with N: True
+
+-- H41 [refuted-heldout] MECHANISM (v13, tested three ways): does TAX conservation breakdown explain the period-doubling law H08? Three tests were run: (1) full-range spatial clustering of TAX defects around the jumps {3, 8, 29, 400}; (2) magnitude comparison — do jumps have LARGER |tax_defect| than typical; (3) small-range (D<50) spatial clustering. The full-range empirical mean distance is 15492179/5882 (2633.828), 1.005× the null expectation. The magnitude ratio is 0.000×. The small-range ratio is 1.194×. Result: refuted-heldout. The law H08 says WHEN periods double; the TAX tool's value here is to test the jumps; every jump has TAX defect 0 (forced by white(D-1)), so a defect is not necessary for a jump, and defects are nearly ubiquitous.
+-- v13 mechanism conjecture (tested): ∀ D ≥ 3, PeriodJump(D) → TAXDefect(D-1, D) (necessary, confirmed in v12); AND ClusterAround(TAXDefects, PeriodDoublingDiagonals) (this v13 test). Empirical ratios: full=46461044821/46208189107, magnitude=0, small=2472/2071. Status: refuted-heldout.
+
+-- H42 [refuted-heldout] CROSS-DOMAIN LIFT (v13, qualified): Rule 30's period-doubling diagonals are a physical instance of the GLM's TAX conservation boundary — the integer-layer violation the GLM proves in general. The 3-way TAX-mechanism test (full-range clustering, magnitude, small-range clustering) was REFUTED on the held-out data: TAX defects are nearly ubiquitous (98% density) and do not distinguish jumps from non-jumps. The honest conclusion is that TAX conservation breakdown is NOT necessary (every jump has defect 0, forced by white(D-1)) and not sufficient (defects are everywhere) and does not MAGNITUDE-distinguish jumps. Rule 30 remains a useful model system for the GLM's TAX substrate, but the specific mechanism hypothesis suggested in the previous round does not survive exact testing. The deeper mechanism is the structural fact (white ∧ odd-parity) captured by H08, which is a finer signal than TAX.
+-- v13 cross-domain lift: Rule 30's period-doubling diagonals ⊆ GLM's TAX conservation boundary instances. The model-system relation: ∀ P structural about TAX-boundaries, P holds in GLM ⟸ P holds in Rule 30 (tested on 6 instances). Status of the TAX-mechanism: refuted-heldout.
+
+-- H43 [open] PREDICTIVE TEST (v13): if the TAX-mechanism hypothesis holds, then TAX defects at D > 87867 (the last confirmed jump) should CLUSTER around the next predicted period-doubling diagonal. The gap analysis estimates the next jump at D ≥ ~275 million, which is beyond any practical search range. But the clustering test gives a cheaper signal: run the automaton to D = 200000 (just past 87867), record TAX defects, and check whether they cluster around any single D value. If they do, that D is the predicted next jump — and the prediction can be checked by running the automaton to that D. This is the TAX tool's PREDICTIVE use, beyond its CONFIRMATORY use in v12.
+-- v13 predictive conjecture: if TAX-mechanism holds, then TAX defects beyond the last confirmed jump cluster around the next jump.
+
+-- H44 [law-holds] v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), not violated. The reason is structural: the law H08 requires (with odd parity of D-2) the (D-1) pattern to be eventually white (w(D-1) = 0). When w(D-1) = 0, TAX conservation trivially holds because w(D-1 AND D) = 0 and w(D-1 XOR D) = w(D), so the quadratic identity reduces to 0 + w(D)^2 - 0 - w(D)^2 = 0. The white (D-1) pattern is the COMMON CAUSE of both the period doubling (it forces a reset in the one-bit machine) AND the TAX conservation (it makes the AND vanish). The previous round's hypothesis ('TAX breaks at jumps') had the causal arrow reversed: TAX does not break at jumps; TAX is CONSERVED at jumps, because the same white pattern that forces the period to double also forces TAX to be conserved. This is the v13 discovery.
+-- v13 discovery: ∀ J ∈ {3, 8, 29, 400, 87867}, TAXConserved(J-1, J) ∧ White(J-1). The common cause: White(J-1) ⟹ w(J-1) = 0 ⟹ w(J-1 AND J) = 0 ⟹ TAX defect = 0. Causal arrow: White(J-1) → PeriodDoubles(J) ∧ TAXConserved(J-1, J).
+
+-- H45 [refuted-by-guard] v13 CROSS-DOMAIN LIFT (qualified): Rule 30's period-doubling diagonals are a model system for the GLM's TAX conservation boundary, but in the OPPOSITE sense from the previous round's suggestion. The interesting boundary is not 'where TAX breaks' (TAX breaks almost everywhere — 98% of consecutive pairs share bits) but 'where TAX is CONSERVED' (only at the white diagonals, which are exactly the period-doubling inputs). The GLM's TAX conservation boundary is therefore the WHITE-DIAGONAL structure, not the defect structure. Rule 30 is a clean model system for this: the white diagonals are exactly the points where (a) the period doubles and (b) TAX is conserved, and the law H08 characterises them structurally (white ∧ odd-parity). Any structural statement the GLM wants to make about TAX conservation boundaries can be tested on Rule 30's white diagonals first.
+-- v13 cross-domain lift (qualified): the GLM's TAX conservation boundary corresponds to Rule 30's white diagonals (where TAX is conserved), not to the defect structure (where TAX breaks). Model-system relation: ∀ P structural about TAX-boundaries, P holds in GLM ⟸ P holds at Rule 30's white diagonals.

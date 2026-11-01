@@ -1,26 +1,37 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Of 63 preregistered questions the surface answers 53 correctly and refuses 10 correctly
   with 0 wrong, against 0 correct and 53 refused through both existing paths; the stress set written after
   the first run scored 27 correct, 10 correct refusals and 1 scored wrong on its first run.
-directives:
-- D15
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
-  code: []
+  code:
+  - engineering/delta_sigma.py
+  - engineering/smith.py
+  - engineering/speak.py
+  - engineering/study.py
+  - engineering/wheels.py
+  - evaluation/engineering_heldout.py
+  - tools.py
   lean:
   - EngineeringWheels
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ENGINEERING_LANGUAGE_STUDY.md
-  test:
-  - test_engineering_language.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ENGINEERING_LANGUAGE_STUDY
 junctions: []
 last_altered: ''
@@ -43,6 +54,7 @@ question: The formula-wheel session record built three standalone engineering st
   load onto the Smith chart, carry a problem between a spring and a circuit, say what a delta-sigma loop
   does — and answer them exactly, or refuse with a reason, without a wrong answer?
 recomputed_by: '`glm_universal.engineering.study.engineering_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

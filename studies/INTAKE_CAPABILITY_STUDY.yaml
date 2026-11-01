@@ -1,0 +1,136 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: '12 of 14 marks (R2, S2 missed). ARC: 9 of 50 tasks right, 0 wrong (2 before); across
+  domains 23 right, 0 wrong of 30 (4 before); Rule 30 on the answering path 16 right, 0 wrong of 39 (0
+  before); formula laws 63 of 64 licensed, 0 of 51 not-a-laws; next terms 27 right, 0 wrong of 45 (5 before),
+  12 of 13 controls refused.'
+directives:
+- D15
+- D22
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - reasoning/hypothesis_engine.py
+  - reasoning/hypothesis_tools.py
+  - reasoning/intake_capability_study.py
+  - runtime/toolbox.py
+  - tools.py
+  - wheels/derive_query.py
+  - wheels/next_term_battery.py
+  - wheels/sequence_query.py
+  lean:
+  - AxiomAuditAll
+  - IntakeChecks/Derivability
+  - IntakeChecks/NextTerm
+  - IntakeChecks/RuleThirtyBits
+  - IntakeChecks/SporadicOrderCheck
+  lean_held: []
+  lean_missing: []
+  missing: []
+  prose: INTAKE_CAPABILITY_STUDY.md
+  test:
+  - test_derive_query.py
+  - test_hypothesis_engine.py
+  - test_hypothesis_tools.py
+  - test_intake_capability_study.py
+  - test_sequence_next.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: INTAKE_CAPABILITY_STUDY
+junctions: []
+last_altered: 1 November 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - A1
+  - A2
+  - A3
+  - R1
+  - R2
+  - R3
+  - G1
+  - G2
+  - D1
+  - S1
+  - S2
+  - X1
+  - X2
+  - L1
+  met:
+  - A1
+  - A2
+  - A3
+  - R1
+  - R3
+  - G1
+  - G2
+  - D1
+  - S1
+  - X1
+  - X2
+  - L1
+  missed:
+  - R2
+  - S2
+perturbations: []
+phase: 186
+predecessors:
+- CENT_WHEELS_STUDY
+- INTEGER_WHEEL_STUDY
+question: Do the three intake items that were ready for absorption — the Rule 30 study's hypothesis engine
+  (`Rule30_GLM_Study`), the cent compiler's formula wheels (`cent_compiler_v12`) and the wheels bundle's
+  sequence wheel (`glm_wheels_bundle`) — measurably help the GLM on the stored ARC tasks, on Rule 30,
+  and on general reasoning across domains, with nothing answered wrong, when the same questions are put
+  to the GLM with and without them?
+recomputed_by: '`glm_universal.reasoning.intake_capability_study.intake_capability_report`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built-phase-186
+  heading: 1. What was built (Phase 186)
+- anchor: 2-the-switch-the-glm-without-phase-186
+  heading: '2. The switch: the GLM without Phase 186'
+- anchor: 3-the-marks
+  heading: 3. The marks
+- anchor: 4-the-development-set-caveat
+  heading: 4. The development-set caveat
+- anchor: 5-the-measurement-1-november-2026
+  heading: 5. The measurement (1 November 2026)
+- anchor: 6-lean-the-standalone-check
+  heading: '6. Lean: the standalone check'
+- anchor: 7-what-follows
+  heading: 7. What follows
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The intake items absorbed where they measurably help — what the hypothesis engine, the formula
+  wheels and the next-term reading add to the GLM on ARC, on Rule 30 and on reasoning across domains
+verdict: Yes, with two pre-registered marks not met. With the three items wired in, the GLM answers 9
+  of the 50 stored ARC tasks where it answered 2, answers Rule 30 claims, conjectures about every n, formula-law
+  questions and next-term questions that it refused before, and across thirty questions in five domains
+  answers 23 right where it answered 4, with 0 wrong; but the ARC tasks are a development set, not a held-out
+  one, the answering path reads only 16 of the 39 Rule 30 sentences right (the bar was 20), and one of
+  the 13 negative controls of the next-term battery is answered where it should be refused. The items'
+  Lean was checked standalone; the owner's build has still to confirm it.
+wobble_deps: []

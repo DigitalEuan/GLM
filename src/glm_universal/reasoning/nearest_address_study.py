@@ -21,6 +21,15 @@ Stored beside the digest of its sources (``tools nearest-address --write``).
 Exactness
 ---------
 Integers, strings and :class:`fractions.Fraction` only.
+
+*Last altered 31 October 2026 (repository check): ``wiring`` excludes the
+Phase 150 ``nearest-tie-*`` cases from W1's earlier cases again.*
+
+*Last altered 31 October 2026 (repository check): ``_SOURCES`` lists
+``runtime/reports/address.py``, where the address family of solvers moved
+verbatim out of ``runtime/session.py``.*
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -75,7 +84,8 @@ _SOURCES: Tuple[str, ...] = (
     "reasoning/nearest_address_study.py", "reasoning/nearest_address.py",
     "reasoning/address_read.py", "reasoning/address_table.py",
     "reasoning/address_read_study.py", "reasoning/coordinate_junction.py",
-    "runtime/session.py", "runtime/parser.py", "runtime/tct_engine.py",
+    "runtime/session.py", "runtime/reports/address.py",
+    "runtime/parser.py", "runtime/tct_engine.py",
     "runtime/toolbox.py",
 )
 
@@ -215,8 +225,13 @@ def wiring() -> Dict[str, object]:
     from ..runtime.parser import parse_query
     from ..runtime.toolbox import wiring_census
     census = wiring_census()
+    # The Phase 150 cases (``nearest-tie-*``) reach the address path on
+    # purpose, so W1's count of earlier ``nearest`` cases excludes them, as
+    # Phase 150 recorded (restored 31 October 2026, repository check: the
+    # exclusion was lost in the October 2026 reorganisation).
     earlier = [c for c in CASES if c.kind == "nearest"
-               and not c.id.startswith(("nearest-address", "nearest-tie"))]
+               and not c.id.startswith("nearest-address")
+               and not c.id.startswith("nearest-tie")]
     diverted = [c.id for c in earlier
                 if parse_query(c.question).options.get("address_request")]
     return {"census": census,
@@ -331,6 +346,6 @@ def nearest_address_report() -> Dict[str, object]:
     if not st["fresh"]:
         return {"available": False,
                  "reason": f"the stored measurement is {st['verdict']}; "
-                           f"re-take it with `PYTHONPATH=. python3 -m "
+                           f"re-take it with `PYTHONPATH=src python3 -m "
                            f"glm_universal.tools nearest-address --write`"}
     return dict(measurements(), available=True)

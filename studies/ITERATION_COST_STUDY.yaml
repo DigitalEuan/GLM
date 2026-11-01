@@ -1,37 +1,71 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,873<!--/figure-->
-  vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->823<!--/figure-->; the
-  planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure-->
-  times per check.
+deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,167<!--/figure-->
+  vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's
+  report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times
+  per check.
 directives:
 - D16
 evidence: []
-faculty: derivation
+faculty: unknown
 file_refs:
   code:
-  - corpus/address
-  - corpus/cost
-  - reasoning/lean_address
-  - signoff/ledger
-  - signoff/rules
-  - tests/test_corpus
-  - tests/test_derived
-  - tests/test_lean_address
-  - tests/test_sandbox_planner
+  - corpus/address.py
+  - corpus/caches.py
+  - corpus/cost.py
+  - corpus/gate.py
+  - corpus/measurements.py
+  - corpus/render.py
+  - derived.py
+  - evaluation/cases.py
+  - reasoning/ast_index.py
+  - reasoning/citation_reference.py
+  - reasoning/corpus_resample.py
+  - reasoning/counter_lasso.py
+  - reasoning/deep_dive.py
+  - reasoning/directives.py
+  - reasoning/explanation_anchors.py
+  - reasoning/golay_words.py
+  - reasoning/law_absorption.py
+  - reasoning/law_register.py
+  - reasoning/lean_address.py
+  - reasoning/lean_book.py
+  - reasoning/meta_evidence.py
+  - reasoning/native_ledger.py
+  - reasoning/native_parity.py
+  - reasoning/native_words.py
+  - reasoning/primitive_degree_groups.py
+  - reasoning/proof_dependency.py
+  - reasoning/query_escalation.py
+  - reasoning/retrieval.py
+  - reasoning/salvage.py
+  - reasoning/sign_test.py
+  - reasoning/wobble.py
+  - runtime/derivation_four_frames.py
+  - runtime/derivation_three_marks.py
+  - runtime/toolbox.py
+  - sandbox/planner.py
+  - signoff/__main__.py
+  - signoff/checks.py
+  - signoff/ledger.py
+  - signoff/rules.py
+  - tools.py
+  - wheels/__init__.py
   lean:
+  - Address
   - AffineOutput
   - Agree
   - AstIndex
   - CellGuard
   - CelsiusRegister
   - CertifiedStreams
-  - CitationReference
   - CitationScope
   - ComposedRadicals
   - ConfidenceFloor
@@ -56,7 +90,6 @@ file_refs:
   - IntegerDecision
   - LatticeCompletion
   - LawRegister
-  - Main
   - MeasurandKinds
   - MeasurandRegister
   - MetaAnswers
@@ -86,14 +119,101 @@ file_refs:
   - Sturmian
   - ThirdSort
   - TypedOperators
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ITERATION_COST_STUDY.md
   test:
-  - test_iteration_cost.py
+  - test_affine_output.py
+  - test_agree_channel.py
+  - test_ast_index.py
+  - test_carrier_read.py
+  - test_cell_guard.py
+  - test_celsius_register.py
+  - test_cent_wheels.py
+  - test_citation_scope.py
+  - test_composed_radical.py
+  - test_confidence_floor.py
+  - test_configuration_classifier.py
+  - test_configuration_reading.py
+  - test_connected_two.py
+  - test_constant_bound.py
+  - test_contract_matrix.py
+  - test_corpus.py
+  - test_corpus_resample.py
+  - test_counter_lasso.py
+  - test_cubic_trig.py
+  - test_decoder_confidence.py
+  - test_derivation.py
+  - test_derivation_four.py
+  - test_derivation_three.py
+  - test_derivation_two.py
+  - test_derive_query.py
+  - test_derived.py
+  - test_designed_substrate.py
+  - test_discourse_state.py
+  - test_document_tree.py
+  - test_empty_rungs.py
+  - test_explanations.py
+  - test_frobenius_radical.py
+  - test_frozen_path.py
+  - test_held_precision.py
+  - test_hole_census.py
+  - test_hypothesis_engine.py
+  - test_hypothesis_tools.py
+  - test_imperative_grammar.py
+  - test_inert_counter.py
+  - test_intake_capability_study.py
+  - test_integer_decision.py
+  - test_integer_wheel.py
+  - test_law_absorption.py
+  - test_law_register.py
+  - test_law_triage.py
+  - test_lean_address.py
+  - test_llvq_table.py
+  - test_measurand_register.py
+  - test_measurands.py
+  - test_meta_questions.py
+  - test_monster_wheel.py
+  - test_native_parity.py
+  - test_native_words.py
+  - test_norm256_hex.py
+  - test_operations.py
+  - test_placement_guard.py
+  - test_planner_loop.py
+  - test_primitive_degree.py
+  - test_primitive_radical.py
+  - test_probe_budget.py
+  - test_proof_dependency.py
+  - test_python_speech.py
+  - test_question_frames.py
+  - test_rate_posterior.py
+  - test_register_world.py
+  - test_reverse_tct_int.py
+  - test_reverse_tct_two.py
+  - test_route_choices.py
+  - test_sandbox_planner.py
+  - test_second_view.py
+  - test_sequence_next.py
+  - test_share_separation.py
+  - test_sharpening.py
+  - test_shortest_tag.py
+  - test_signoff.py
+  - test_stepwise.py
+  - test_stepwise_five.py
+  - test_stepwise_four.py
+  - test_stepwise_three.py
+  - test_stepwise_two.py
+  - test_stray_blind.py
+  - test_third_sort.py
+  - test_typed_operators.py
+  - test_unpacking.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ITERATION_COST_STUDY
 junctions: []
-last_altered: ''
+last_altered: 1 November 2026
 layer:
   non_edges: []
   primary: ''
@@ -105,11 +225,14 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 114
 predecessors: []
 question: Everything this repository claims is recomputed from the tree. What does one iteration of that
   cost, and how much of the cost is work that did not need doing?
 recomputed_by: '`glm_universal.corpus.cost.cost_report`'
+related:
+- META_QUESTIONS_STUDY
+- ZERO_STORAGE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -148,10 +271,14 @@ sections:
   heading: 5j. The address book's reach, cut where it was imported
 - anchor: 5k-the-half-line-the-routers-reach-crossed
   heading: 5k. The half-line the router's reach crossed
+- anchor: 5l-the-re-measure-after-the-reorganisation-31-october-2026
+  heading: 5l. The re-measure after the reorganisation (31 October 2026)
 - anchor: 6-what-this-does-not-establish
   heading: 6. What this does not establish
 status: closed
-successors: []
+successors:
+- META_QUESTIONS_STUDY
+- PRIMITIVE_DEGREE_STUDY
 superseded_by: ''
 supersedes: []
 title: 'What a round costs: the rebuild chain, measured and cut'

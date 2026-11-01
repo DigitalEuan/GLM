@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 6 of 6 marks; 14 of 14 held-out verdict questions as expected (12 answered, 2 refused
@@ -15,20 +17,25 @@ evidence: []
 faculty: unknown
 file_refs:
   code:
-  - evaluation/tool_verdicts_cases
-  - reasoning/rational_approx
-  - reasoning/stepwise_script
-  - runtime/stepwise
-  - runtime/tool_values
-  - runtime/toolbox
-  - tests/test_tool_verdicts
+  - evaluation/tool_verdicts_cases.py
+  - reasoning/rational_approx.py
+  - reasoning/stepwise_script.py
+  - runtime/stepwise.py
+  - runtime/tool_values.py
+  - runtime/toolbox.py
+  - tools.py
   lean:
   - NearestFraction
+  - SubstrateCognition
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: TOOL_VERDICTS_STUDY.md
   test:
   - test_tool_verdicts.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: TOOL_VERDICTS_STUDY
 junctions: []
 last_altered: ''
@@ -39,17 +46,30 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - T1
+  - T2
+  - T3
+  - T4
+  - T5
+  - T6
+  met:
+  - T1
+  - T2
+  - T3
+  - T4
+  - T5
+  - T6
   missed: []
 perturbations: []
-phase: 137
+phase: 138
 predecessors: []
 question: Can the stepwise planner use a tool's yes/no answer — as the answer, as the test of a conditional,
   and as the stopping test of a search — with every step re-checked in a fresh interpreter; can it read
   Phase 137's two unread phrasings by a general rule, measured on a fresh held-out set; and can the nearest-fraction
   tool drop its 20,000 bound by proving the classical closest-fraction theorem in Lean?
 recomputed_by: '`glm_universal.evaluation.tool_verdicts_cases.measure`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -62,7 +82,7 @@ sections:
   heading: 1. What was built
 - anchor: 2-what-is-proved-requestprojectglmnearestfractionlean
   heading: 2. What is proved (`RequestProject/GLM/NearestFraction.lean`)
-- anchor: 3-the-held-out-sets-evaluationtool_verdicts_casespy
+- anchor: 3-the-held-out-sets-evaluationtoolverdictscasespy
   heading: 3. The held-out sets (`evaluation/tool_verdicts_cases.py`)
 - anchor: 4-the-marks
   heading: 4. The marks
@@ -75,7 +95,8 @@ sections:
 - anchor: 8-files
   heading: 8. Files
 status: closed
-successors: []
+successors:
+- TOOL_MACHINE_STUDY
 superseded_by: ''
 supersedes: []
 title: Tool verdicts — a tool's yes/no answer in the planner, and the nearest fraction without a bound

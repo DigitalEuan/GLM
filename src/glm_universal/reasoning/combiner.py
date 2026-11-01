@@ -32,6 +32,20 @@ theorems, is ``RequestProject/GLM/Combiner.lean``, and by D8 that file is the
 specification where the two disagree.
 
 Everything is exact.  No float is constructed anywhere in this module.
+
+*Last altered 31 October 2026 (repository check): ``XOR_SITES`` gained the
+nine modules of Phases 150 and 175-183 whose ``^`` sites had never been
+classified (frame-plane sampler, Leech shells, the Lorentzian lift and
+evidence modules and studies, the pipeline kit and its question, the open
+tie).*  *Last altered 31 October 2026 (repository check, second pass): the
+new ``wheels/oeis_reference.py`` (intake of the wheels bundle, directive D22)
+is classified -- its one ``^`` is the Rule 30 update.*  *Last altered
+1 November 2026 (Phase 186): ``reasoning/hypothesis_engine.py``, the Rule 30
+study's hypothesis engine absorbed from the intake, is classified -- the
+Rule 30 update, Berlekamp-Massey over GF(2) and the period scan.*  *Also
+1 November 2026 (Phase 186): ``reasoning/intake_capability_study.py`` is
+classified -- its one ``^`` is the plain Rule 30 simulation the study checks
+``tool rule30`` against.*
 """
 
 from __future__ import annotations
@@ -468,6 +482,31 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "encoding, and the Golay cross-check against the substrate's own table"),
     ("reasoning/product.py", ("group-law",),
      "the axis label of a 2A pair; the product itself is axis_product"),
+    ("reasoning/frame_plane_study.py", ("group-law",),
+     "the study's xorshift sampler: each step adds a word to its own shift "
+     "in F2^64, an invertible F2-linear map, so nothing is lost"),
+    ("reasoning/leech_shells.py", ("group-law",),
+     "the Golay census enumerates codewords by adding generator rows (a Gray "
+     "walk over the span)"),
+    ("reasoning/lorentzian_evidence.py", ("group-law",),
+     "a tie's sextet block is the received word plus a nearest codeword "
+     "(the tetrad separating the candidates)"),
+    ("reasoning/lorentzian_evidence_study.py", ("metric",),
+     "Hamming distance between readings (the dispersion guard)"),
+    ("reasoning/lorentzian_lift.py", ("group-law", "metric"),
+     "Hamming distance to a candidate, and the support of a candidate plus "
+     "the received word"),
+    ("reasoning/lorentzian_lift_study.py", ("group-law",),
+     "a reading is the sent codeword plus an error pattern in F2^24"),
+    ("reasoning/pipeline_ask.py", ("group-law",),
+     "a candidate question flips one cell of a grid: adding a unit vector "
+     "in F2^cells"),
+    ("reasoning/pipeline_kit.py", ("group-law",),
+     "a demonstration's mask is the input plus the output in F2^cells, and "
+     "applying it adds the mask back"),
+    ("reasoning/timed_question.py", ("group-law",),
+     "a probe fork's received word is the transmitted codeword plus an "
+     "error pattern in F2^24"),
     ("reasoning/role_binding.py", ("group-law", "metric"),
      "the role-filler binding is addition in F2^24 -- the key is the role's "
      "permutation of a reading added to the reading, and unbinding adds it "
@@ -511,6 +550,21 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
     ("substrate/superposition.py", ("group-law", "retired"),
      "the coset group law, and bundle_f2 -- the retired lossy bundle, kept "
      "because its degeneracy is the reported result"),
+    ("wheels/oeis_reference.py", ("group-law",),
+     "Rule 30 run from a single cell (new = left XOR (centre OR right)): the "
+     "update adds two rows as vectors in F2^n to recompute the sequence the "
+     "reference audit checks; it combines no meanings"),
+    ("reasoning/hypothesis_engine.py", ("group-law",),
+     "the Rule 30 study's hypothesis engine (Phase 186): the Rule 30 update "
+     "(new = left XOR (centre OR right)), Berlekamp-Massey over GF(2) (the "
+     "discrepancy and the connection-polynomial update add vectors in F2^n) "
+     "and the period scan (two rows of the space-time diagram added in "
+     "F2^n: a set bit is a cell where they differ, and one bit at a time is "
+     "cleared from the set of new differences); it combines no meanings"),
+    ("reasoning/intake_capability_study.py", ("group-law",),
+     "the intake capability study (Phase 186): the plain Rule 30 simulation "
+     "(new = left XOR (centre OR right)) that ``tool rule30`` is checked "
+     "against adds two rows as vectors in F2^n; it combines no meanings"),
 )
 
 #: What each retired site was replaced by.

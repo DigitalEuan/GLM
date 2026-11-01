@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 recoveries succeed with
@@ -10,29 +12,30 @@ deciding_figure: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 
   rather than 512 loop steps.
 directives:
 - D11
-- D2
-- D7
-- D9
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/exact_real
-  - reasoning/now_float_control
-  - reasoning/now_receipt
-  - tests/test_now_receipt
+  - reasoning/exact_real.py
+  - reasoning/now_float_control.py
+  - reasoning/now_receipt.py
   lean:
   - DeltaSigma
   - NowReceipt
   - Sturmian
+  - ZeroStorageV5
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: NOW_RECEIPT_STUDY.md
   test:
   - test_now_receipt.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: NOW_RECEIPT_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -44,12 +47,14 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 49
 predecessors: []
 question: Four supplied studies claim that the present state of an exact-rational process is the exact
   integral of everything that led to it, so the state is the receipt of its own history. Restated exactly,
   which parts of that hold, and does any of it buy the GLM anything measurable?
 recomputed_by: '`glm_universal.reasoning.now_receipt.now_receipt_report`'
+related:
+- DEEP_HOLE_ESCALATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 1. The gap was never the 66
@@ -126,7 +128,7 @@ record of why asking is necessary.
 
 ## 6. The formal side
 
-[`RequestProject/GLM/Vagueness.lean`](../glm_lean/RequestProject/GLM/Vagueness.lean)
+[`RequestProject/GLM/Vagueness.lean`](../src/lean/RequestProject/GLM/Vagueness.lean)
 carries the part that is not a measurement:
 
 * the router is **total** — every triple gets a route, so a referral cannot be
@@ -146,9 +148,8 @@ carries the part that is not a measurement:
 ## 7. How to re-run it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report vagueness').answer)"
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_vagueness.py -q
+PYTHONPATH=src python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report vagueness').answer)"
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_vagueness.py -q
 cd .. && lake build RequestProject.GLM.Vagueness
 ```
 

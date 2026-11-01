@@ -1,10 +1,10 @@
 """Run the end-to-end CLI evaluation.
 
-    PYTHONPATH=. python3 -m glm_universal.evaluation
-    PYTHONPATH=. python3 -m glm_universal.evaluation --only report --jobs 8
-    PYTHONPATH=. python3 -m glm_universal.evaluation --json results.json
-    PYTHONPATH=. python3 -m glm_universal.evaluation --replay --jobs 8
-    PYTHONPATH=. python3 -m glm_universal.evaluation --replay-only --jobs 8
+    PYTHONPATH=src python3 -m glm_universal.evaluation
+    PYTHONPATH=src python3 -m glm_universal.evaluation --only report --jobs 8
+    PYTHONPATH=src python3 -m glm_universal.evaluation --json results.json
+    PYTHONPATH=src python3 -m glm_universal.evaluation --replay --jobs 8
+    PYTHONPATH=src python3 -m glm_universal.evaluation --replay-only --jobs 8
 
 ``--replay`` (Phase 171) also runs column 3 for every case expected answered
 (``evaluation/replay.py``) and fails when a replay does not verify.
@@ -16,6 +16,8 @@ of ``signoff --close`` and re-runs only when what it read has moved.
 ``--replay``).*
 
 Exit code 0 when every case passes, 1 when any case fails.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

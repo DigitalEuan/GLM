@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 216,723 widened terms and 18,500 mask terms round-trip with 0 collisions; 650 of 650
@@ -10,27 +12,37 @@ deciding_figure: 216,723 widened terms and 18,500 mask terms round-trip with 0 c
   agree or are consistent, against 0 of 15 answered when the sentences are given verbatim; 92 of 92 round-two
   scripts VERIFIED True and 84 of 84 mutated certificates rejected; over the integers 29 of 29 entailment
   and 10 of 10 bounds cases as declared, 34 of 34 scripts VERIFIED True and 34 of 34 mutants rejected.
-directives:
-- D15
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - evaluation/reverse_tct_cases
-  - evaluation/reverse_tct_int_cases
-  - evaluation/reverse_tct_two_cases
+  - evaluation/reverse_tct_cases.py
+  - evaluation/reverse_tct_int_cases.py
+  - evaluation/reverse_tct_two_cases.py
+  - reasoning/reverse_tct.py
+  - reasoning/reverse_tct_int.py
+  - reasoning/reverse_tct_script.py
+  - runtime/tct_engine.py
+  - tools.py
   lean:
   - ReverseTCT
   - ReverseTCTThree
   - ReverseTCTTwo
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: REVERSE_TCT_STUDY.md
   test:
   - test_reverse_tct.py
+  - test_reverse_tct_int.py
+  - test_reverse_tct_two.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: REVERSE_TCT_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,11 +50,40 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - W1
+  - W2
+  - W3
+  - W4
+  - W5
+  - W6
+  - W7
+  - W8
+  - X1
+  - X2
+  - X3
+  - X4
+  - X5
+  - X6
+  - X7
+  met:
+  - W1
+  - W2
+  - W3
+  - W4
+  - W5
+  - W6
+  - W7
+  - W8
+  - X1
+  - X2
+  - X3
+  - X4
+  - X6
+  - X7
   missed: []
 perturbations: []
-phase: 68
+phase: 67
 predecessors: []
 question: Can the script and the mathematics generate the language column, rather than the other way round,
   so that every generated sentence reads back to exactly the mathematics it came from, and do semantic
@@ -51,6 +92,8 @@ question: Can the script and the mathematics generate the language column, rathe
   the generated questions handed on to the planner — and, in round three (Phase 69), over the integers,
   with floor quotient and remainder split into residue cases?
 recomputed_by: '`glm_universal.reasoning.reverse_tct_script.reverse_two_report`'
+related:
+- INTEGER_DECISION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -84,7 +127,12 @@ sections:
 - anchor: 12-next
   heading: 12. Next
 status: closed
-successors: []
+successors:
+- IMPERATIVE_GRAMMAR_STUDY
+- INTEGER_DECISION_STUDY
+- NATIVE_PARITY_STUDY
+- PLANNER_LOOP_STUDY
+- THIRD_SORT_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Reverse Three Column Thinking: the language column generated from the mathematics and the script'

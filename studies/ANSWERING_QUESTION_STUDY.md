@@ -4,13 +4,15 @@
 
 **Question.** Can the question Phase 145 computed for a tie be put into the GLM's own answer, and the reply taken as the conversation's next turn, without moving any answer the evaluation pins?
 
-**Verdict.** Yes. A `locate` junction answer now ends with the question that would split it, and a reply typed as the next turn is read as an answer to it. 13 of 13 dialogues end confirmed on the member meant, with 0 wrong. A false reply always ends in a refused contradiction. Every turn is verified by column 3. The frozen path keeps all 198 statuses. 8 of 10 marks were met. F1 and R1 were missed only because the round's four new evaluation cases moved two evaluation-set counts and one census of earlier texts, causes the pre-registration did not name.
+**Verdict.** Yes. A `locate` junction answer now ends with the question that would split it, and a reply typed as the next turn is read as an answer to it. 13 of 13 dialogues end confirmed on the member meant, with 0 wrong. A false reply always ends in a refused contradiction. Every turn is verified by column 3. The frozen path keeps all 198 statuses. 8 of 10 marks were met. F1 and R1 were missed only because the round's four new evaluation cases moved two evaluation-set counts and one census of earlier texts, causes the pre-registration did not name. Re-measured on 31 October 2026 (repository check), 9 of 10 marks hold: F1 is met in the re-take, every one of the 14 moved texts carrying a declared cause (this round's junction answers, the tree's own figures, and the later rounds' causes declared on 31 October 2026), and R1 is still missed, its census of earlier texts having grown with the evaluation; §7.6 gives the figures.
 
-**Deciding figure.** 8 of 10 marks; dialogues 13/13 confirmed on the truth, 0 wrong, 15 replies in all (each run at most `n - 1` and `Nat.clog 2 n + 1`); column 3 41/41 turns verified, 43/43 altered claims rejected; one false reply 13/13 contradicted, 0 wrong; full registers 387/387 resolved, 0 wrong, 1280 questions (Phase 145: 1280); frozen path 198/198 present and same status, 194 same text.
+**Deciding figure.** 9 of 10 marks, re-measured 31 October 2026 (F1: 198/198 present and same status, 184 same text, 0 undeclared; R1 missed); the round recorded 8 of 10 marks; dialogues 13/13 confirmed on the truth, 0 wrong, 15 replies in all (each run at most `n - 1` and `Nat.clog 2 n + 1`); column 3 41/41 turns verified, 43/43 altered claims rejected; one false reply 13/13 contradicted, 0 wrong; full registers 387/387 resolved, 0 wrong, 1280 questions (Phase 145: 1280); frozen path 198/198 present and same status, 194 same text.
 
 **Recomputed by.** `glm_universal.reasoning.answering_question.answering_question_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 31 October 2026 (repository check: re-measured; 9 of 10 marks where the round recorded 8 of 10 — F1 met with the later rounds' causes declared, R1 still missed, §7.6; the round's record is kept as written; its run commands now start from the repository root (`PYTHONPATH=src`).)*
 
 ---
 
@@ -147,7 +149,7 @@ puts none.
 
 ## 7. What came out
 
-Measured by `PYTHONPATH=. python3 -m glm_universal.tools answering-question
+Measured by `PYTHONPATH=src python3 -m glm_universal.tools answering-question
 --write` (about twenty minutes, stored beside the digest of its sources) after
 §§0–6 were committed. It was taken twice. §7.1 says why, and both takes are
 reported.
@@ -271,3 +273,38 @@ It leaves:
 * questions chosen by what a user can answer;
 * a reply carried across an unrelated turn. Today a reply is read only
   immediately after the question.
+
+### 7.6 Re-measured on 31 October 2026
+
+*Added 31 October 2026 (repository check: re-measured).* The measurement was
+taken again (`tools answering-question --write`) after the October 2026
+reorganisation, twice. The first re-take found 7 moved texts with no declared
+cause: `unknown-nonsense`, `report-directives`, `report-hole-classifier`,
+`report-hole-ladder`, `report-hole-failures`, `report-language` and
+`report-query-escalation`. Each moved for a reason a round after this one
+introduced (the refusal's list of query kinds gaining `hole` and, on 31 October
+2026, the four lookup kinds `corpus`, `tool`, `study` and `sequence`; the
+standing rules counted live, 16 → 22; Phase 149's L5 clause appended to the
+three hole reports, their old text kept as the prefix; the evaluation's counts).
+`reasoning/answering_question.py` now declares these later rounds' causes
+(`LATER_CAUSES`, the same wording as `reasoning/budget_guard_frozen.py`), and
+the second re-take gives:
+
+| mark | the round's record (§7) | re-measured | |
+|---|---|---|---|
+| **F1** | 198/198 present and same status, 194 same text; 2 moved texts undeclared | 198/198 present, 198/198 same status, 184 same text; 14 moved texts, 0 undeclared (2 junction answers of this round, 5 figures the tree measures of itself, 7 later rounds' causes) | met |
+| **E1** | 4/4 | 4/4 new cases as declared | met |
+| **C1** | 13/13 confirmed, 0 wrong, 15 replies | 13/13 confirmed on the member meant, 0 wrong, 15 replies | met |
+| **C2** | 41/41 | 41/41 turns verified | met |
+| **C3** | 13/13 contradicted | 13/13 contradicted, 0 ended wrong | met |
+| **Q1** | 387/387, 1280 questions | 387/387 resolved, 0 wrong, 1280 questions | met |
+| **R1** | 0 of 12 controls read; 5 differences (shapes 3 → 4; census strings 5129 → 5167, taken 24 → 26, distinct 16 → 17) | 0 of 12 controls read; 5 differences (shapes 3 → 4; census strings 5129 → 6114, taken 24 → 35, distinct 16 → 17) | missed |
+| **T1** | 43/43 | 43/43 altered claims rejected | met |
+| **D1** | as declared | as declared | met |
+
+So **9 of 10 marks** hold in the re-measurement (L1 by the build), every moved
+text carrying a declared cause (this round's junction answers, the tree's own
+figures, the later rounds' causes) and R1's census having grown with the
+evaluation. F1 is met there only because the later rounds' causes are now declared; this round's own F1,
+recorded in §7, stays missed. R1's census of earlier declared texts reads the
+evaluation cases' notes, which have grown with the evaluation (227 cases).

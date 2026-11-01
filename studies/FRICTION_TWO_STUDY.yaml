@@ -1,32 +1,38 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 14 marks (T3, T4, H1, H2, N1, N3, N4 met; T1, T2, T5, W1, W2, W3, N2 missed), 1
   of 2 amended (T1′ met, T2′ missed) and 2 of 2 shipped marks (T1″, T2″); typo runs 193 of 194 hold after
   the round, 0 slip.
-directives:
-- D13
+directives: []
 evidence: []
 faculty: refusal
 file_refs:
   code:
-  - evaluation/harness
-  - knowledge/friction_two
-  - knowledge/friction_two_study
-  - runtime/respell
-  - tests/test_friction_two
+  - evaluation/cases.py
+  - evaluation/harness.py
+  - knowledge/friction_two.py
+  - knowledge/friction_two_study.py
+  - runtime/respell.py
+  - tools.py
   lean:
   - Friction
   - FrictionTwo
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: FRICTION_TWO_STUDY.md
   test:
   - test_friction_two.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: FRICTION_TWO_STUDY
 junctions: []
 last_altered: ''
@@ -50,6 +56,8 @@ question: Can a transposed letter be read back by the word's spelling and its us
   from reinforcing itself; and does a sticking margin set from how often the leader has changed keep the
   reader's informative changes of mind while removing its flip-flops?
 recomputed_by: '`glm_universal.knowledge.friction_two_study.friction_two_report`'
+related:
+- DOMAIN_WHEELS_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -73,7 +81,8 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- THERMO_FRICTION_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Friction, the rest: a did-you-mean read by spelling and by use, the harness reading refusals,

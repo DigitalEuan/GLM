@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 47 of 47 declared questions (18 comparative, 6 count-noun, 6 prefix, 17 fold) and 2 of
@@ -11,30 +13,34 @@ deciding_figure: 47 of 47 declared questions (18 comparative, 6 count-noun, 6 pr
   aligned) and every mutation rejected, 13 of 13 member lies and 11 of 11 word lies included; 8 of 8 marks
   met.
 directives:
-- D15
 - D3
 - D7
+- D15
 evidence: []
-faculty: refusal
+faculty: derivation
 file_refs:
   code:
-  - evaluation/stepwise_three_cases
-  - reasoning/stepwise_script
-  - runtime/declared_frames
-  - runtime/quantity_units
-  - runtime/stepwise
-  - runtime/stepwise_three
+  - evaluation/stepwise_three_cases.py
+  - reasoning/stepwise_script.py
+  - runtime/declared_frames.py
+  - runtime/quantity_units.py
+  - runtime/stepwise.py
+  - runtime/stepwise_three.py
   lean:
   - StepwiseFrames
   - StepwiseWiden
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: STEPWISE_THREE_STUDY.md
   test:
   - test_stepwise_three.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: STEPWISE_THREE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -42,17 +48,35 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - V1
+  - V2
+  - V3
+  - V4
+  - V5
+  - V6
+  - V7
+  - V8
+  met:
+  - V1
+  - V2
+  - V3
+  - V4
+  - V5
+  - V6
+  - V7
+  - V8
   missed: []
 perturbations: []
-phase: 73
+phase: 84
 predecessors:
 - STEPWISE_TWO_STUDY
 question: Can the stepwise planner read the widenings round two named — comparatives such as *heavier*
   with a declared field, *how many more* over further count nouns, the tera- and pico- prefixes, and sums,
   means and parity counts over a whole column — without answering anything wrongly?
 recomputed_by: '`glm_universal.runtime.stepwise_three.stepwise_three_report`'
+related:
+- COLUMN_EXTREMUM_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -74,7 +98,9 @@ sections:
 - anchor: 6-what-this-leaves
   heading: 6. What this leaves
 status: closed
-successors: []
+successors:
+- DECLARED_FRAMES_STUDY
+- HOLE_FOLDS_STUDY
 superseded_by: ''
 supersedes: []
 title: 'The stepwise planner, round three: declared comparatives, further count nouns, tera and pico,

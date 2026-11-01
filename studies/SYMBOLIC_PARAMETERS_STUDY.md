@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -206,10 +208,10 @@ standard axioms (`propext`, `Classical.choice`, `Quot.sound`):
 
 From ``:
 
-* `PYTHONPATH=. python3 -m glm_universal.tools symbolic` runs the full
+* `PYTHONPATH=src python3 -m glm_universal.tools symbolic` runs the full
   report in about 80 s. Add `--quick` to skip S6, `--battery` for §4.1, and
   `--json` for the rows.
-* `PYTHONPATH=. python3 -m unittest glm_universal.tests.test_symbolic` runs
+* `PYTHONPATH=src python3 -m unittest glm_universal.tests.test_symbolic` runs
   the tests in about 1 s.
 * `lake build RequestProject.GLM.SymbolicParameters` from the repository root
   builds the Lean file.

@@ -1,0 +1,625 @@
+{
+ "arc": {
+  "refused": 48,
+  "right": [
+   "1e0a9b12",
+   "ae58858e"
+  ],
+  "tasks": 50,
+  "vision_stack_solved": [
+   "1e0a9b12",
+   "ae58858e"
+  ],
+  "wrong": []
+ },
+ "binary": {
+  "differ": [],
+  "queries": 200,
+  "routed_to_colour": 0,
+  "same_router": 200,
+  "same_tool": 200
+ },
+ "demos": [
+  2,
+  3,
+  4
+ ],
+ "in_vocab": [
+  "flip_h",
+  "gravity_down",
+  "crop",
+  "scale2",
+  "tile2x2",
+  "mirror_h",
+  "complete_h",
+  "flip_v_then_scale2",
+  "colour_map",
+  "recolour_by_size",
+  "enclosed_fill",
+  "half_logic"
+ ],
+ "lean": {
+  "declared": 5,
+  "file": "RequestProject/GLM/ColourInduction.lean",
+  "held": false,
+  "present": false,
+  "sorry": 0,
+  "theorems": 0
+ },
+ "marks": {
+  "B": true,
+  "C1": true,
+  "C2": true,
+  "C3": false,
+  "C4": false,
+  "C5": true,
+  "C6": true,
+  "L": false,
+  "R1": true,
+  "R2": false,
+  "R3": false,
+  "T": true
+ },
+ "met": 7,
+ "out_vocab": [
+  "translate_right",
+  "extend_right",
+  "hollow",
+  "count_bar"
+ ],
+ "queries": 30,
+ "source_digest": "8862ea6efafef6d95f8064de371bb81a2c230d3f04d84a2e4afb18dcfaf3d31e",
+ "synthetic": {
+  "by_demos": {
+   "2": {
+    "in": {
+     "queries": 360,
+     "refused": 95,
+     "right": 265,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 113,
+     "right": 6,
+     "wrong": 1
+    }
+   },
+   "3": {
+    "in": {
+     "queries": 360,
+     "refused": 27,
+     "right": 333,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 119,
+     "right": 1,
+     "wrong": 0
+    }
+   },
+   "4": {
+    "in": {
+     "queries": 360,
+     "refused": 16,
+     "right": 344,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 120,
+     "refused": 119,
+     "right": 0,
+     "wrong": 1
+    }
+   }
+  },
+  "families": {
+   "colour_map": {
+    "eager": {
+     "queries": 90,
+     "refused": 1,
+     "right": 89,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 5,
+     "right": 85,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 8,
+     "right": 82,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 12,
+     "right": 78,
+     "wrong": 0
+    }
+   },
+   "complete_h": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 89,
+     "wrong": 1
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 8,
+     "right": 82,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 8,
+     "right": 82,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 8,
+     "right": 82,
+     "wrong": 0
+    }
+   },
+   "count_bar": {
+    "eager": {
+     "queries": 90,
+     "refused": 79,
+     "right": 7,
+     "wrong": 4
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 82,
+     "right": 7,
+     "wrong": 1
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 82,
+     "right": 7,
+     "wrong": 1
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 82,
+     "right": 7,
+     "wrong": 1
+    }
+   },
+   "crop": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 11,
+     "right": 79,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 11,
+     "right": 79,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 11,
+     "right": 79,
+     "wrong": 0
+    }
+   },
+   "enclosed_fill": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    }
+   },
+   "extend_right": {
+    "eager": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "flip_h": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    }
+   },
+   "flip_v_then_scale2": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 4,
+     "right": 86,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 4,
+     "right": 86,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 4,
+     "right": 86,
+     "wrong": 0
+    }
+   },
+   "gravity_down": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 89,
+     "wrong": 1
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 7,
+     "right": 83,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 7,
+     "right": 83,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 7,
+     "right": 83,
+     "wrong": 0
+    }
+   },
+   "half_logic": {
+    "eager": {
+     "queries": 90,
+     "refused": 6,
+     "right": 84,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 7,
+     "right": 83,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 6,
+     "right": 84,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 7,
+     "right": 83,
+     "wrong": 0
+    }
+   },
+   "hollow": {
+    "eager": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 90,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "mirror_h": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 26,
+     "right": 64,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 26,
+     "right": 64,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 26,
+     "right": 64,
+     "wrong": 0
+    }
+   },
+   "recolour_by_size": {
+    "eager": {
+     "queries": 90,
+     "refused": 10,
+     "right": 77,
+     "wrong": 3
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 26,
+     "right": 62,
+     "wrong": 2
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 18,
+     "right": 72,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 28,
+     "right": 62,
+     "wrong": 0
+    }
+   },
+   "scale2": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 16,
+     "right": 74,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 16,
+     "right": 74,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 16,
+     "right": 74,
+     "wrong": 0
+    }
+   },
+   "tile2x2": {
+    "eager": {
+     "queries": 90,
+     "refused": 0,
+     "right": 90,
+     "wrong": 0
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 19,
+     "right": 71,
+     "wrong": 0
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 19,
+     "right": 71,
+     "wrong": 0
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 19,
+     "right": 71,
+     "wrong": 0
+    }
+   },
+   "translate_right": {
+    "eager": {
+     "queries": 90,
+     "refused": 89,
+     "right": 0,
+     "wrong": 1
+    },
+    "first_take": {
+     "queries": 90,
+     "refused": 89,
+     "right": 0,
+     "wrong": 1
+    },
+    "no_span_rule": {
+     "queries": 90,
+     "refused": 89,
+     "right": 0,
+     "wrong": 1
+    },
+    "shipped": {
+     "queries": 90,
+     "refused": 89,
+     "right": 0,
+     "wrong": 1
+    }
+   }
+  },
+  "first_take_wrong": [
+   "recolour_by_size/2/6",
+   "recolour_by_size/2/14",
+   "translate_right/2/7",
+   "count_bar/4/28"
+  ],
+  "invariant": {
+   "changed": [],
+   "queries": 1440,
+   "skipped": 403660
+  },
+  "span_rule": {
+   "cost": 15,
+   "prevented": []
+  },
+  "statuses": {
+   "ambiguous": 97,
+   "answered": 951,
+   "undefined": 1,
+   "unread": 24,
+   "unsolved": 352,
+   "untested": 15
+  },
+  "totals": {
+   "eager": {
+    "in": {
+     "queries": 1080,
+     "refused": 17,
+     "right": 1058,
+     "wrong": 5
+    },
+    "out": {
+     "queries": 360,
+     "refused": 348,
+     "right": 7,
+     "wrong": 5
+    }
+   },
+   "first_take": {
+    "in": {
+     "queries": 1080,
+     "refused": 129,
+     "right": 949,
+     "wrong": 2
+    },
+    "out": {
+     "queries": 360,
+     "refused": 351,
+     "right": 7,
+     "wrong": 2
+    }
+   },
+   "no_span_rule": {
+    "in": {
+     "queries": 1080,
+     "refused": 123,
+     "right": 957,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 360,
+     "refused": 351,
+     "right": 7,
+     "wrong": 2
+    }
+   },
+   "shipped": {
+    "in": {
+     "queries": 1080,
+     "refused": 138,
+     "right": 942,
+     "wrong": 0
+    },
+    "out": {
+     "queries": 360,
+     "refused": 351,
+     "right": 7,
+     "wrong": 2
+    }
+   }
+  }
+ },
+ "taken": 12,
+ "tool": {
+  "arc_ok": true,
+  "arc_status": "right",
+  "colour_answer": "430/050",
+  "colour_ok": true,
+  "colour_solver": "colour"
+ }
+}

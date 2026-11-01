@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Ledger rows C393–C399; 144 = 8·18, so the claim that 8 does not divide 144 is false.
@@ -10,21 +12,27 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/deep_holes.py
+  - reasoning/dimension_layers.py
+  - substrate/golay_decode.py
   lean:
   - Escalation
-  - GolayTies
+  - Escalation/GolayTies
+  - Escalation/MasterStep
+  - Escalation/Rule30Parity
   - LayerChain
   - Layers
-  - MasterStep
-  - Perspective
-  - ReadAngle
-  - Rule30Parity
+  - Rule30/Perspective
+  - Rule30/ReadAngle
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: RULE30_MASTER_VIEW.md
-  test:
-  - test_rule30_master_view.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RULE30_MASTER_VIEW
 junctions: []
 last_altered: ''
@@ -43,6 +51,7 @@ phase: 0
 predecessors: []
 question: Which statements of the owner's escalation sketch hold for the GLM that actually ships?
 recomputed_by: (hand-written argument; nothing to recompute)
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

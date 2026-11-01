@@ -64,8 +64,11 @@ class OutsideItem:
 
 @lru_cache(maxsize=None)
 def set_b() -> Tuple[SetBItem, ...]:
-    path = os.path.join(source_dir(),
-                        "Improved_Question_Set_B_Benchmark_Suite.txt")
+    # Last altered 31 October 2026 (repository check): the question sets are
+    # supplied items, found through constants.source_material_item.
+    from ..constants import source_material_item
+    path = str(source_material_item(
+        "Improved_Question_Set_B_Benchmark_Suite.txt"))
     raw = open(path, encoding="utf-8").read()
     arr = json.loads(raw[raw.index("[\n  {"):])
     return tuple(SetBItem(a["id"], a["category"], a["query"],
@@ -105,7 +108,8 @@ SET_B_AUDIT: Dict[str, Tuple[str, str, str]] = {
 
 @lru_cache(maxsize=None)
 def outside() -> Tuple[OutsideItem, ...]:
-    path = os.path.join(source_dir(), "Outside_Question_Set_B_candidate_O1.txt")
+    from ..constants import source_material_item
+    path = str(source_material_item("Outside_Question_Set_B_candidate_O1.txt"))
     lines = open(path, encoding="utf-8").read().splitlines()
     items: List[List[object]] = []
     section, diff, cur = "", "", None

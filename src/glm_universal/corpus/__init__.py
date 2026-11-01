@@ -36,11 +36,12 @@ So the corpus is treated as the substrate treats anything else.
 
 Command line::
 
-    cd overlay
-    PYTHONPATH=. python3 -m glm_universal.corpus            # report
-    PYTHONPATH=. python3 -m glm_universal.corpus --check    # fail if stale
-    PYTHONPATH=. python3 -m glm_universal.corpus --write    # regenerate
-    PYTHONPATH=. python3 -m glm_universal.corpus --ask "..."  # certified shortlist
+    PYTHONPATH=src python3 -m glm_universal.corpus            # report
+    PYTHONPATH=src python3 -m glm_universal.corpus --check    # fail if stale
+    PYTHONPATH=src python3 -m glm_universal.corpus --write    # regenerate
+    PYTHONPATH=src python3 -m glm_universal.corpus --ask "..."  # certified shortlist
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

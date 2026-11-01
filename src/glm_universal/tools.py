@@ -8,12 +8,12 @@ here, one module above the core, next to :mod:`glm_universal.figures`.
 
 ::
 
-    PYTHONPATH=. python3 -m glm_universal.tools lean-address
-    PYTHONPATH=. python3 -m glm_universal.tools lean-address --write
-    PYTHONPATH=. python3 -m glm_universal.tools lean-address --speak NAME
-    PYTHONPATH=. python3 -m glm_universal.tools pipeline
-    PYTHONPATH=. python3 -m glm_universal.tools directives
-    PYTHONPATH=. python3 -m glm_universal.tools signoff
+    PYTHONPATH=src python3 -m glm_universal.tools lean-address
+    PYTHONPATH=src python3 -m glm_universal.tools lean-address --write
+    PYTHONPATH=src python3 -m glm_universal.tools lean-address --speak NAME
+    PYTHONPATH=src python3 -m glm_universal.tools pipeline
+    PYTHONPATH=src python3 -m glm_universal.tools directives
+    PYTHONPATH=src python3 -m glm_universal.tools signoff
 
 Last altered 21 October 2026 (Phase 167: ``adversarial-dialogue``; Phase 168:
 ``confidence-curve``; Phase 169: ``evidence-model``; Phase 170:
@@ -21,8 +21,24 @@ Last altered 21 October 2026 (Phase 167: ``adversarial-dialogue``; Phase 168:
 ``resumed-dialogue``; Phase 173: ``stacked-dialogue``; Phase 174:
 ``quoted-measurements``; Phase 175: ``pipeline-kit``).
 
+Last altered 31 October 2026 (repository check: the lost Phase 176-184
+subcommands ``colour-induction``, ``frame-operators``, ``frame-plane``,
+``improper-frame``, ``improper-units``, ``lorentzian-lift``,
+``lorentzian-evidence``, ``lorentzian-majority``, ``pipeline-ask`` and
+``pipeline-kit-crosscheck`` reconstructed).  Last altered 31 October 2026
+(repository check, second pass: ``dates`` added; the study handlers print an
+amended mark beside its original; third pass: ``domains`` says when the
+census is not taken, and ``oscjunction --write`` stores the full measurement).
+
 Exit codes: ``0`` if what was asked for holds, ``1`` if a report found a
 defect, ``2`` if the arguments were not understood.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
+
+*Last altered 1 November 2026 (Phase 186): ``intake-capability`` added, the
+marks of ``studies/INTAKE_CAPABILITY_STUDY.md``; ``connected-two`` says how
+many declared texts W6 exempts (the cases written for the Phase 186
+openings) and how many of them an opening reads.*
 """
 
 from __future__ import annotations
@@ -878,7 +894,10 @@ def _connected_two(args: argparse.Namespace) -> int:
         print(f"W5 rational       {r['text']}: {r['emitted']} term(s) "
               f"emitted, sound {r['sound']}, complete {r['complete']}")
     print(f"W6 interference   {m['W6']['matched']} of "
-          f"{m['W6']['declared_texts']} declared texts match an opening")
+          f"{m['W6']['declared_texts']} declared texts match an opening "
+          f"(the {m['W6'].get('exempt', 0)} cases written for the Phase 186 "
+          f"openings exempt, {m['W6'].get('exempt', 0) - m['W6'].get('exempt_unread', 0)} "
+          "of them read by one)")
     print(f"W7 phrased        {m['W7']['as_declared']} of "
           f"{m['W7']['questions']} as declared ({m['W7']['answered']} "
           "answered)")
@@ -1713,6 +1732,8 @@ def _budget_guard_frozen(args: argparse.Namespace) -> int:
           f"{report['same_status']} same status, {report['same_text']} same "
           f"text; moved {[m['id'] for m in report['moved']]}; undeclared "
           f"{report['undeclared']}; new cases {len(report['new_cases'])}")
+    if report.get("status_changed"):
+        print(f"   status changed {report['status_changed']}")
     print(f"A0 ladder audit   {audit['total']} unguarded readings of the "
           f"construction ladder over {report['asked']} questions "
           f"({audit['functions_watched']} functions watched)")
@@ -1776,6 +1797,10 @@ def _ties_ladder_frozen(args: argparse.Namespace) -> int:
     if args.json:
         print(json.dumps(_plain(f), indent=1, sort_keys=True))
         return 0 if stored["marks"]["F1"] else 1
+    if f.get("reason"):
+        # the baseline is absent (31 October 2026): say why F1 is not met
+        print(f"F1 not met        {f['reason']}")
+        return 1
     print(f"F1 frozen path    {f['present']}/{f['cases']} present, "
           f"{f['same_status']} same status, {f['same_text']} same text; "
           f"moved {[m['id'] for m in f['moved']]}; undeclared "
@@ -2081,11 +2106,15 @@ def _domains(args: argparse.Namespace) -> int:
         print(f"junction {k:8s} {', '.join(v['names'])}")
     print("battery  " + ", ".join(f"{k} {v}" for k, v in
                                   sorted(report["battery"]["tally"].items())))
-    if "census" in report:
+    if report.get("census"):
         c = report["census"]
         print(f"census   gained {c['gained']} (right {c['gained_right']}); "
               f"naive-new {c['naive_new']} (refused {c['naive_refused']})"
               + ("" if report.get("census_fresh", True) else "  [stale]"))
+    else:
+        #  (Repository check, 31 October 2026: an absent census is said, not
+        #  printed as a crash.)
+        print("census   not taken (domains --write takes and stores it)")
     if "post_hoc" in report:
         rr = report["post_hoc"]
         print(f"         post hoc (not a mark): {rr['one_wheel']} one-wheel answers "
@@ -2104,7 +2133,10 @@ def _oscjunction(args: argparse.Namespace) -> int:
     if args.write:
         from concurrent.futures import ProcessPoolExecutor
         with ProcessPoolExecutor(max_workers=max(1, args.jobs)) as pool:
-            got = dict(zip(osj.VARIANTS, pool.map(osj.measure,
+            #  The stored record is the full measurement (preservation set
+            #  and census), as the docstring says; ``measure`` alone leaves
+            #  O2 and O3 unmeasured.  (Repository check, 31 October 2026.)
+            got = dict(zip(osj.VARIANTS, pool.map(osj.measure_full,
                                                    list(osj.VARIANTS))))
         print(f"wrote {osj.write(got)}")
     report = osj.report()
@@ -2333,6 +2365,390 @@ def _pipeline_kit(args: argparse.Namespace) -> int:
     return 0 if r["met"] == r["taken"] else 1
 
 
+# ── Phases 176-184: frames, colour induction, the Lorentzian studies ──────
+#
+# *Reconstructed 31 October 2026 (repository check): these ten subcommands
+# were lost in the October 2026 reorganisation; rebuilt from SYSTEM.md's
+# instrument rows, MASTER_PLAN.md Phases 176-184 and the studies' own
+# modules, after the pattern of ``_pipeline_kit``.  Each prints the stored
+# report's figures and ``N of M marks`` and exits 0 only when every mark is
+# met; ``--write`` re-takes the stored measurement first.*
+
+def _study_marks(r) -> int:
+    """Every mark, met or not, the ``N of M marks`` line, any amended mark
+    (recorded beside its original, never in its place), and the exit code."""
+    print("marks  " + "  ".join(f"{k} {'met' if v else 'NOT met'}"
+                                for k, v in r["marks"].items()))
+    print(f"{r['met']} of {r['taken']} marks")
+    if r.get("amended"):
+        print("amended  " + "  ".join(f"{k} {'met' if v else 'NOT met'}"
+                                      for k, v in r["amended"].items()))
+    return 0 if r["met"] == r["taken"] else 1
+
+
+def _study_stored(args: argparse.Namespace, report_fn):
+    """The stored report: ``(report, None)`` to print, or ``(None, exit
+    code)`` when it is absent, stale, or printed as JSON.  Each handler calls
+    ``<module>.write_measurements()`` itself on ``--write`` (31 October 2026),
+    so that ``corpus.caches`` can read the re-taking command off the handler.
+    """
+    report = report_fn()
+    if not report.get("available"):
+        print(report["reason"])
+        return None, 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return None, 0 if report["met"] == report["taken"] else 1
+    return report, None
+
+
+def _rwr(t) -> str:
+    return (f"{t['right']} right, {t['wrong']} wrong, {t['refused']} refused"
+            + (f" of {t['queries']}" if "queries" in t else ""))
+
+
+def _colour_induction(args: argparse.Namespace) -> int:
+    """Colour induction (Phase 178, part A): the marks of
+    ``studies/COLOUR_INDUCTION_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import colour_induction_study as cis
+    if args.write:
+        print(f"wrote {cis.write_measurements()}")
+    r, code = _study_stored(args, cis.colour_induction_report)
+    if r is None:
+        return code
+    s = r["synthetic"]
+    for solver, sides in s["totals"].items():
+        print(f"{solver:13s} in vocabulary {_rwr(sides['in'])}; outside "
+              f"{_rwr(sides['out'])}")
+    for d, row in s["by_demos"].items():
+        print(f"  shipped at {d} demonstrations, in vocabulary: "
+              f"{_rwr(row['in'])}")
+    inv, span = s["invariant"], s["span_rule"]
+    print(f"C5 invariant reading: {inv['skipped']} hypotheses skipped over "
+          f"{inv['queries']} queries; {len(inv['changed'])} verdicts change "
+          "without it")
+    print(f"C4 span rule: {len(span['prevented'])} wrong answers prevented, "
+          f"{span['cost']} right answers refused; first take (unread "
+          f"survivors set aside): {len(s['first_take_wrong'])} wrong")
+    a = r["arc"]
+    print(f"R  ARC: {len(a['right'])} of {a['tasks']} right "
+          f"({', '.join(a['right'])}), {len(a['wrong'])} wrong, "
+          f"{a['refused']} refused; the vision stack solves "
+          f"{len(a['vision_stack_solved'])}")
+    b = r["binary"]
+    print(f"B  binary tasks unchanged: {b['same_router']} of {b['queries']} "
+          f"through the router, {b['same_tool']} through tool induce")
+    lean, tl = r["lean"], r["tool"]
+    print(f"L  {lean['file']}: {'present' if lean['present'] else 'missing'}, "
+          f"{lean['theorems']}/{lean['declared']} recorded theorems, sorry "
+          f"{lean['sorry']}")
+    print(f"T  tool induce: {tl['colour_answer']} by the "
+          f"{tl['colour_solver']} solver; tool arc 1e0a9b12: "
+          f"{tl['arc_status']}")
+    return _study_marks(r)
+
+
+def _frame_operators(args: argparse.Namespace) -> int:
+    """Frame operators and the anchor kappa (Phase 177): the marks of
+    ``studies/FRAME_OPERATOR_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import frame_operator_study as fos
+    if args.write:
+        print(f"wrote {fos.write_measurements()}")
+    r, code = _study_stored(args, fos.frame_operator_report)
+    if r is None:
+        return code
+    for solver, sides in r["totals"].items():
+        print(f"{solver:11s} in vocabulary {_rwr(sides['in'])}; outside "
+              f"{_rwr(sides['out'])}")
+    ia = r["integrity"]
+    print(f"E  integrity: {sum(ia['checks'].values())} checks, "
+          f"{sum(ia['failures'].values())} failures")
+    k, tl = r["kappa"], r["tool"]
+    print(f"K  kappa inside the D0(Br2) interval: {k['within']}; outputs "
+          f"free of kappa: {k['kappa_free']}; knobs {', '.join(k['order'])}")
+    for f, v in r["lean"].items():
+        print(f"L  {f}: {v['theorems']}/{v['declared']} theorems, sorry "
+              f"{v['sorry']}")
+    print(f"T  tool frame: refused ({tl['refuse_status']}, ask "
+          f"{tl['ask']}); answered {tl['answer']}; tool kappa "
+          f"{'answers' if tl['kappa_ok'] else 'refuses'}")
+    return _study_marks(r)
+
+
+def _frame_plane(args: argparse.Namespace) -> int:
+    """``tool frame`` in 1+2 dimensions (Phase 178, part B): the marks of
+    ``studies/COLOUR_INDUCTION_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import frame_plane_study as fps
+    if args.write:
+        print(f"wrote {fps.write_measurements()}")
+    r, code = _study_stored(args, fps.frame_plane_report)
+    if r is None:
+        return code
+    s = r["synthetic"]
+    for solver, sides in s["totals"].items():
+        print(f"{solver:10s} inside {_rwr(sides['inside'])}; outside "
+              f"{_rwr(sides['outside'])}")
+    for d, row in s["by_demos"].items():
+        print(f"  shipped at {d} demonstrations, inside: "
+              f"{_rwr(row['inside'])}")
+    th, two = s["thomas"], r["two_component"]
+    print(f"P4 Thomas-Wigner: {th['right']} of {th['queries']} right at three "
+          f"or more demonstrations, {th['wigner_exact']} with the exact "
+          f"Wigner rotation, {th['not_pure']} named not a pure boost")
+    print(f"P6 2-component tasks unchanged: {two['same_text']} of "
+          f"{two['tasks']} through frame_tool_text, {two['same_tool']} "
+          "through tool frame")
+    lean, tl = r["lean"], r["tool"]
+    print(f"L  {lean['file']}: {'present' if lean['present'] else 'missing'}, "
+          f"{lean['theorems']}/{lean['declared']} theorems, sorry "
+          f"{lean['sorry']}")
+    print(f"T  tool frame: answered {tl['answer']} with Wigner rotation "
+          f"{tl['wigner']}; one pair {tl['refuse_status']}")
+    return _study_marks(r)
+
+
+def _improper_frame(args: argparse.Namespace) -> int:
+    """Improper maps in ``tool frame`` (Phase 179): the marks of
+    ``studies/IMPROPER_FRAME_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import improper_frame_study as ifs
+    if args.write:
+        print(f"wrote {ifs.write_measurements()}")
+    r, code = _study_stored(args, ifs.improper_frame_report)
+    if r is None:
+        return code
+    s = r["synthetic"]
+    for solver, sides in s["totals"].items():
+        print(f"{solver:10s} improper {_rwr(sides['improper'])}; proper "
+              f"{_rwr(sides['proper'])}; outside {_rwr(sides['out'])}")
+    for d, row in s["by_demos"].items():
+        print(f"  shipped at {d} demonstrations, improper: "
+              f"{_rwr(row['improper'])}")
+    c = s["components"]
+    print(f"I4 Phase 178 answers changed: {len(s['changed'])} of "
+          f"{s['phase_178_answered']}")
+    print(f"I5 improper answers at three or more demonstrations: "
+          f"{c['answers']}, true component named {c['named_right']}, split "
+          f"recomposes {c['split_ok']}")
+    lean, tl = r["lean"], r["tool"]
+    print(f"L  {lean['theorems']}/{lean['declared']} theorems, sorry "
+          f"{lean['sorry']}")
+    print(f"T  tool frame: answered {tl['answer']} ({tl['component']}); two "
+          f"pairs refused citing plane_partner {tl['cites']}, ask {tl['ask']}")
+    return _study_marks(r)
+
+
+def _improper_units(args: argparse.Namespace) -> int:
+    """Improper maps times a change of units (Phase 181): the marks of
+    ``studies/IMPROPER_UNITS_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import improper_units_study as ius
+    if args.write:
+        print(f"wrote {ius.write_measurements()}")
+    r, code = _study_stored(args, ius.improper_units_report)
+    if r is None:
+        return code
+    s = r["synthetic"]
+    for solver, sides in s["totals"].items():
+        print(f"{solver:10s} " + "; ".join(f"{side} {_rwr(t)}"
+                                           for side, t in sides.items()))
+    for d, row in s["by_demos"].items():
+        print(f"  shipped at {d} demonstrations, new: {_rwr(row['new'])}")
+    print(f"U4 Phase 179 answers changed: {len(s['changed'])} of "
+          f"{s['phase_179_answered']}")
+    print(f"U5 named: " + ", ".join(f"{k} {v}" for k, v in s["named"].items()))
+    lean, tl = r["lean"], r["tool"]
+    print(f"L  {lean['theorems']}/{lean['declared']} theorems, sorry "
+          f"{lean['sorry']}")
+    print("T  tool frame: " + ", ".join(f"{k} {v}" for k, v in tl.items()))
+    return _study_marks(r)
+
+
+def _lorentzian_lift(args: argparse.Namespace) -> int:
+    """The Lorentzian lift of the ambiguous space (Phase 182): the marks of
+    ``studies/LORENTZIAN_LIFT_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import lorentzian_lift_study as lls
+    if args.write:
+        print(f"wrote {lls.write_measurements()}")
+    r, code = _study_stored(args, lls.lorentzian_lift_report)
+    if r is None:
+        return code
+    one = r["single"]
+    print(f"one reading ({lls.QUERIES} queries): " + "; ".join(
+        f"{rule} {_rwr(t)}" for rule, t in one["rules"].items()))
+    for cond, rules in r["several"].items():
+        print(f"  {cond:6s} " + "; ".join(f"{rule} {_rwr(t)}"
+                                         for rule, t in rules.items()))
+    cen = r["census"]
+    print("M9 census: " + ", ".join(f"{k} {v}" for k, v in
+                                    cen["holes"].items())
+          + f"; decoder distance agrees {cen['distance']['agree']} of "
+          f"{cen['distance']['sampled']}")
+    return _study_marks(r)
+
+
+def _lorentzian_evidence(args: argparse.Namespace) -> int:
+    """The Lorentzian evidence space (Phase 183): the marks of
+    ``studies/LORENTZIAN_EVIDENCE_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import lorentzian_evidence_study as les
+    if args.write:
+        print(f"wrote {les.write_measurements()}")
+    r, code = _study_stored(args, les.lorentzian_evidence_report)
+    if r is None:
+        return code
+    ide = r["identities"]
+    print(f"E1 identities: decomposition {ide['decomposition']}, null iff "
+          f"agree {ide['null_iff_agree']} of {ide['checked']}")
+    for cond, row in r["golay"]["conditions"].items():
+        print(f"  golay {cond:6s} guarded {_rwr(row['guarded'])}; "
+              f"certificate {_rwr(row['certificate'])}")
+    sett = r["settling"]
+    print(f"G5 settling question: asked {sett['asked']['right']} of "
+          f"{sett['queries']}, five random positions "
+          f"{sett['random5']['right']}")
+    for cond, row in r["physics"].items():
+        if not isinstance(row, dict) or "guarded" not in row:
+            continue                  # "relations": how many were drawn
+        print(f"  physics {cond:8s} guarded {_rwr(row['guarded'])}; first "
+              f"{_rwr(row['first'])}; vote {_rwr(row['vote'])}")
+    sem = r["semantic"]
+    print(f"S  semantic precision {sem['precision_all']} overall, "
+          f"{sem['precision_low_dispersion_half']} on the low-dispersion half")
+    return _study_marks(r)
+
+
+def _lorentzian_majority(args: argparse.Namespace) -> int:
+    """The declared majority rule (Phase 184): the marks of
+    ``studies/LORENTZIAN_MAJORITY_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import lorentzian_majority_study as lms
+    if args.write:
+        print(f"wrote {lms.write_measurements()}")
+    r, code = _study_stored(args, lms.lorentzian_majority_report)
+    if r is None:
+        return code
+    for cond, row in r["physics"].items():
+        if not isinstance(row, dict) or "majority" not in row:
+            continue                  # "relations": how many were drawn
+        print(f"  {cond:8s} majority {_rwr(row['majority'])}; vote "
+              f"{_rwr(row['vote'])}; guard {_rwr(row['guarded'])}")
+    print("M7 identities: " + ", ".join(f"{k} {v}" for k, v in
+                                        r["identities"].items()))
+    if "m4" in r:
+        m4 = r["m4"]
+        print(f"M4 decoy3: majority {m4['majority_now']} right, Phase 183's "
+              f"vote now {m4['phase_183_vote_now']} (Phase 184's take: "
+              f"{m4['phase_184_take']})")
+    return _study_marks(r)
+
+
+def _pipeline_ask(args: argparse.Namespace) -> int:
+    """Asking for the separating example (Phase 176): the marks of
+    ``studies/PIPELINE_ASK_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import pipeline_ask_study as pas
+    if args.write:
+        print(f"wrote {pas.write_measurements()}")
+    r, code = _study_stored(args, pas.pipeline_ask_report)
+    if r is None:
+        return code
+    t = r["totals"]
+    print(f"ambiguous refusals {t['ambiguous']} of {t['queries']} queries: "
+          f"after asking {t['right']} right, {t['wrong']} wrong, "
+          f"{t['still_refused']} still refused ({t['asks']} asks, "
+          f"{t['one_ask']} settled by one)")
+    print(f"shrink: {t['shrink_exceptions']} exceptions in "
+          f"{t['shrink_checked']}; unscored control {t['control_right']} "
+          f"right, {t['control_wrong']} wrong, {t['control_asks']} asks")
+    lean, tl = r["lean"], r["tool"]
+    print(f"L  {lean['file']}: {lean['theorems']}/{lean['declared']} "
+          f"theorems, sorry {lean['sorry']}")
+    print(f"T  tool induce refused ({tl['status']}), ask {tl['ask']}")
+    return _study_marks(r)
+
+
+# ── Phase 186: the intake items absorbed where they measurably help ───────
+
+def _intake_capability(args: argparse.Namespace) -> int:
+    """The intake items absorbed on 1 November 2026 (Phase 186): the marks of
+    ``studies/INTAKE_CAPABILITY_STUDY.md`` -- ARC, Rule 30, general reasoning,
+    formula laws, next terms and thirty questions across five domains, each
+    with and without the Phase 186 additions (``--write`` re-takes them)."""
+    from .reasoning import intake_capability_study as ics
+    if args.write:
+        print(f"wrote {ics.write_measurements()}")
+    r, code = _study_stored(args, ics.intake_capability_report)
+    if r is None:
+        return code
+    a = r["arc"]
+    for key, label in (("colour", "colour solver alone"), ("plan", "plan search alone"),
+                       ("combined", "tool arc now")):
+        t = a[key]
+        print(f"ARC {label:19s} {t['right']} right, {t['wrong']} wrong, {t['refused']} "
+              f"refused of {t['grids']} test grids; tasks right "
+              f"{len(t['tasks_right'])} of {a['tasks']}")
+    print(f"    tasks right with the plan search: {', '.join(a['combined']['tasks_right'])}"
+          " (a development set, not a held-out one)")
+    r30 = r["rule30"]
+    wl, wol = r30["battery_with_ledger"], r30["battery_without_ledger"]
+    print(f"Rule 30 battery of {r30['claims']}: with the ledger {wl['right']} right, "
+          f"{wl['wrong']} wrong, {wl['overclaim']} overclaimed; without it {wol['right']} "
+          f"right, {wol['wrong']} wrong, {wol['abstain']} abstained")
+    rw, rwo = r30["routed_with"], r30["routed_without"]
+    print(f"Rule 30 on the answering path ('in rule 30, ...'): without Phase 186 "
+          f"{rwo['right']} right of {r30['claims']} ({r30['answered_without']} answered); "
+          f"with it {rw['right']} right, {rw['wrong']} wrong ({r30['answered_with']} "
+          f"answered; the recognisers read {r30['recognised']})")
+    print(f"Rule 30 centre column to 1000: {r30['centre_1000_black']} black; matches the "
+          f"plain simulation {r30['centre_1000_matches_plain']}, the Lean list "
+          f"{r30['centre_64_matches_lean']}")
+    g = r["general"]
+    print(f"general domain: with the ledger {g['with_ledger']['right']} right, without "
+          f"{g['without_ledger']['right']} right and {g['without_ledger']['abstain']} "
+          f"abstained; conjectures {_rwr(g['conjecture_tally'])}")
+    d = r["derive"]
+    print(f"tool derive: {d['tool_laws_licensed']} of {d['laws']} laws, "
+          f"{d['tool_not_laws_licensed']} of {d['not_laws']} not-a-laws licensed "
+          f"(the fifteen registry wheels alone: {d['fifteen_wheels_laws_licensed']} laws)")
+    s = r["next_terms"]
+    w, wo = s["with_wheels"], s["without_next"]
+    print(f"next terms: with the next reading {_rwr(w['positive'])} of "
+          f"{s['questions']}, controls {w['controls']['right']} refused of "
+          f"{s['controls']}; without {_rwr(wo['positive'])}")
+    x = r["cross_domain"]
+    for dom, row in x["by_domain"].items():
+        print(f"  {dom:9s} without {row['without']['right']} right; with "
+              f"{row['with']['right']} right, {row['with']['wrong']} wrong")
+    print(f"across domains ({x['questions']} questions): without Phase 186 "
+          f"{x['without']['right']} right; with it {x['with']['right']} right, "
+          f"{x['with']['wrong']} wrong, {x['with']['refused']} refused")
+    for f in r["lean"]["files"]:
+        print(f"L  {f['file']}: {'present' if f['present'] else 'missing'}, "
+              f"{f['stated']}/{f['declared']} theorems, sorry {f['sorry']}, "
+              f"audited {f['audited']}")
+    print(f"   {r['lean']['standalone']}")
+    return _study_marks(r)
+
+
+def _pipeline_kit_crosscheck(args: argparse.Namespace) -> int:
+    """The pipeline kit's late files run against the GLM (Phase 176):
+    ``pipeline_kit_crosscheck.crosscheck_report()``, computed now (a few
+    seconds; nothing is stored)."""
+    from .reasoning import pipeline_kit_crosscheck as pkc
+    r = pkc.crosscheck_report()
+    if not r.get("available"):
+        print(r["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(r), indent=1, sort_keys=True))
+        return 0 if r["met"] == r["taken"] else 1
+    su = r["suite"]
+    print(f"K1 the kit's suite: {su['ran']} tests, {su['failures']} "
+          f"failures, {su['errors']} errors")
+    for fam, row in r["demo"].items():
+        print(f"  {fam:13s} kit {_rwr(row['kit'])}; GLM {_rwr(row['glm'])}")
+    for who, t in r["totals"].items():
+        print(f"   total {who}: {_rwr(t)}"
+              + (f", {t['forced']} refusals forced" if "forced" in t else ""))
+    return _study_marks(r)
+
+
 def _stacked_dialogue(args: argparse.Namespace) -> int:
     """Several open ties at once (Phase 173): the marks of
     ``studies/STACKED_DIALOGUE_STUDY.md`` (``--write`` re-takes them)."""
@@ -2470,7 +2886,9 @@ def _evidence_model(args: argparse.Namespace) -> int:
     print(f"column 3 replayed {r6['replayable']} of {r6['answered']} answers: "
           f"{r6['verified']} verified, failed {r6['failed'] or 'none'}")
     print(f"GLM names cited {len(report['R5']['cited'])}, undeclared "
-          f"{len(report['R5']['undeclared'])}; ok-flag alone disagrees with "
+          f"{len(report['R5']['undeclared'])} (against "
+          f"{report['R5'].get('declarations', '?')} declarations of the Lean "
+          f"development); ok-flag alone disagrees with "
           f"the evaluation on {len(report['R2']['ok_flag_disagree'])}")
     print(" ".join(f"{k} {'met' if v else 'missed'}"
                    for k, v in report["marks"].items()))
@@ -4242,7 +4660,10 @@ def _law_triage(args) -> int:
     import pathlib
     import zipfile
     raw = None
-    archive = pathlib.Path(__file__).resolve().parents[2] / lt.ZIP_PATH
+    # Last altered 31 October 2026 (repository check): the archive is a
+    # supplied item, found through constants.source_material_item.
+    from .constants import source_material_item
+    archive = source_material_item("GLM-main.zip")
     if archive.exists():
         raw = zipfile.ZipFile(archive).read(lt.KB_MEMBER)
     report = lt.law_triage_report(raw)
@@ -4366,7 +4787,8 @@ def _ast_index_freeze() -> int:
         name = path.relative_to(root).as_posix()
         files["live"]["read" if got is not None else "skipped"] += 1
         rows.extend(["live", name, ln, col, text] for ln, col, text in got or ())
-    with zipfile.ZipFile(root / "source_material" / "GLM-main.zip") as z:
+    from .constants import source_material_item
+    with zipfile.ZipFile(source_material_item("GLM-main.zip")) as z:
         for name in sorted(n for n in z.namelist() if n.endswith(".py")):
             src = z.read(name).decode("utf-8", errors="replace")
             got = ai.sites_of_source(src)
@@ -6594,6 +7016,112 @@ def _parser() -> argparse.ArgumentParser:
                       help="re-take the stored measurement (~1 minute)")
     pksp.add_argument("--json", action="store_true")
     pksp.set_defaults(handler=_pipeline_kit)
+
+    # Phases 176-184 (reconstructed 31 October 2026, repository check: the
+    # parser blocks were lost in the October 2026 reorganisation).  One
+    # block per sub-command, as everywhere else in this file, so that
+    # corpus.caches can read the re-taking command off the parser.
+    cisp = sub.add_parser(
+        "colour-induction",
+        help="tool induce on colour grids whose shape may change: "
+             "parameter-free operators, two-step compositions, fitted "
+             "families, the invariant reading and the span rule; tool arc "
+             "on stored ARC tasks (Phase 178, part A)")
+    cisp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~3 minutes)")
+    cisp.add_argument("--json", action="store_true")
+    cisp.set_defaults(handler=_colour_induction)
+
+    fosp = sub.add_parser(
+        "frame-operators",
+        help="tool frame: frame operators read from demonstrations behind "
+             "the agreement gate, and the anchor kappa (Phase 177)")
+    fosp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~1 minute)")
+    fosp.add_argument("--json", action="store_true")
+    fosp.set_defaults(handler=_frame_operators)
+
+    fpsp = sub.add_parser(
+        "frame-plane",
+        help="tool frame in 1+2 dimensions: rotations, boosts in any "
+             "direction and the Thomas-Wigner rotation (Phase 178, part B)")
+    fpsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~1 minute)")
+    fpsp.add_argument("--json", action="store_true")
+    fpsp.set_defaults(handler=_frame_plane)
+
+    ifsp = sub.add_parser(
+        "improper-frame",
+        help="improper maps in tool frame: reflections and time reversal "
+             "named by their component (Phase 179)")
+    ifsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~2 minutes)")
+    ifsp.add_argument("--json", action="store_true")
+    ifsp.set_defaults(handler=_improper_frame)
+
+    iusp = sub.add_parser(
+        "improper-units",
+        help="improper maps times a change of units in tool frame (Phase "
+             "181)")
+    iusp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~2 minutes)")
+    iusp.add_argument("--json", action="store_true")
+    iusp.set_defaults(handler=_improper_units)
+
+    llsp = sub.add_parser(
+        "lorentzian-lift",
+        help="the Lorentzian lift of the ambiguous space: deep holes, "
+             "several readings and the guarded rule (Phase 182)")
+    llsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~2 minutes)")
+    llsp.add_argument("--json", action="store_true")
+    llsp.set_defaults(handler=_lorentzian_lift)
+
+    lesp = sub.add_parser(
+        "lorentzian-evidence",
+        help="the Lorentzian evidence space: Golay and physics conditions, "
+             "the settling question and the semantic precision (Phase 183)")
+    lesp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~5 minutes)")
+    lesp.add_argument("--json", action="store_true")
+    lesp.set_defaults(handler=_lorentzian_evidence)
+
+    lmsp = sub.add_parser(
+        "lorentzian-majority",
+        help="the declared majority rule against the vote and the guard "
+             "(Phase 184)")
+    lmsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~1 minute)")
+    lmsp.add_argument("--json", action="store_true")
+    lmsp.set_defaults(handler=_lorentzian_majority)
+
+    pasp = sub.add_parser(
+        "pipeline-ask",
+        help="asking for the separating example when tool induce refuses "
+             "an ambiguous task (Phase 176)")
+    pasp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~1 minute)")
+    pasp.add_argument("--json", action="store_true")
+    pasp.set_defaults(handler=_pipeline_ask)
+
+    pkcp = sub.add_parser(
+        "pipeline-kit-crosscheck",
+        help="the pipeline kit's late files run against the GLM: the kit's "
+             "own suite and its demonstrations, computed now (Phase 176)")
+    pkcp.add_argument("--json", action="store_true")
+    pkcp.set_defaults(handler=_pipeline_kit_crosscheck)
+
+    # Phase 186 (1 November 2026): the intake items absorbed where they
+    # measurably help.
+    icsp = sub.add_parser(
+        "intake-capability",
+        help="what the intake items absorbed on 1 November 2026 add on ARC, "
+             "Rule 30, general reasoning, formula laws, next terms and thirty "
+             "questions across five domains, with and without them (Phase 186)")
+    icsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~2 minutes)")
+    icsp.add_argument("--json", action="store_true")
+    icsp.set_defaults(handler=_intake_capability)
 
     qmsp = sub.add_parser(
         "quoted-measurements",

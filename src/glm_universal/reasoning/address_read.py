@@ -35,6 +35,8 @@ Exactness
 ---------
 Integers and :class:`~fractions.Fraction` throughout.  No float, no
 randomness.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -109,7 +111,7 @@ def load_table(stored: Optional[Dict[str, object]] = None, rows=None
             "stale-table",
             f"the stored address table is {st['verdict']} "
             f"({', '.join(st['failed'])} digest does not hold), so no radius "
-            f"in it can be trusted; re-take it with `PYTHONPATH=. python3 -m "
+            f"in it can be trusted; re-take it with `PYTHONPATH=src python3 -m "
             f"glm_universal.tools address-table --write`")
     try:
         return AT.parse(stored)                        # type: ignore[arg-type]

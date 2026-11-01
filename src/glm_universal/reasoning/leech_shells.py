@@ -306,8 +306,8 @@ def proved_shell_sizes() -> Dict[int, int]:
     theorem moves this reading."""
     import re
     from pathlib import Path
-    path = (Path(__file__).resolve().parents[2] / "lean"
-            / SHELL_COUNT_LEAN_FILE)
+    from ..constants import lean_file
+    path = lean_file(SHELL_COUNT_LEAN_FILE)   # built tree, or awaiting_recovery/
     text = path.read_text(encoding="utf-8")
     start = text.index("theorem leech_shell_sizes")
     body = text[start:text.index(":= by", start)]

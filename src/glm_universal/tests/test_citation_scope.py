@@ -4,6 +4,13 @@ the type-word repair, and the marks declared in
 
 The measurement itself is read from the stored record when it is current
 (``tools citation-scope --write``) and re-taken otherwise.
+
+*Last altered 31 October 2026 (repository check): the one-letter-sink test
+no longer pins ``GLM.Heisenberg.a`` as the legacy reader's sink -- which
+declaration a bare ``a`` resolves to depends on the corpus, and on the
+9,070-declaration tree the legacy edges spread over several one-letter
+names -- it checks that the legacy reader still sends more than 1000 edges to
+one-letter names while the current reader sends fewer than 50 to each.*
 """
 
 from __future__ import annotations
@@ -111,10 +118,14 @@ class TestTheReader(unittest.TestCase):
         for targets in graph.values():
             for target in targets:
                 cited[target] = cited.get(target, 0) + 1
-        self.assertLess(cited.get("GLM.Heisenberg.a", 0), 50)
+        one_letter = {d.name for d in la.declarations()
+                      if len(d.name.rsplit(".", 1)[-1]) == 1}
+        self.assertIn("GLM.Heisenberg.a", one_letter)
+        for name in one_letter:
+            self.assertLess(cited.get(name, 0), 50, name)
         legacy = la.legacy_citation_graph()
-        self.assertGreater(sum(1 for t in legacy.values()
-                               if "GLM.Heisenberg.a" in t), 1000)
+        self.assertGreater(sum(1 for targets in legacy.values()
+                               for t in targets if t in one_letter), 1000)
 
 
 class TestTheTypeWords(unittest.TestCase):

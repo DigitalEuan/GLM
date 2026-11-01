@@ -4,6 +4,12 @@
 ``II_{25,1}`` measured.
 
 *Created 22 October 2026.*
+*Last altered 31 October 2026 (repository check: the queries and the census
+are drawn by :class:`ExactRng`, an exact integer stream seeded by a text, in
+place of ``random.Random``, which the package bans in ``reasoning/``
+(``tests/test_reasoning.py``, ``reasoning/blueprint.py``
+``BANNED_IMPORTS``); the draws differ, so the measurement was re-taken and
+its figures are not those of Phase 182's take).*
 
 What is measured
 ----------------
@@ -68,13 +74,12 @@ Marks (declared before the first measurement)
 
 Exactness
 ---------
-``Fraction`` only.
+``Fraction`` only; the draws are integers from :class:`ExactRng`.
 """
 
 from __future__ import annotations
 
 import json
-import random
 from fractions import Fraction
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
@@ -87,7 +92,8 @@ from . import lorentzian_lift as ll
 
 __all__ = ["DATA_PATH", "QUERIES", "CENSUS", "CONDITIONS", "script_rule",
            "script_roots", "compute", "measure", "write_measurements",
-           "measurements", "state", "current", "lorentzian_lift_report"]
+           "measurements", "state", "current", "lorentzian_lift_report",
+           "ExactRng"]
 
 _HERE = Path(__file__).resolve().parent
 DATA_PATH: Path = _HERE / "_data" / "lorentzian_lift_study.json"
@@ -106,6 +112,74 @@ _SOURCES = (
     "substrate/golay_decode.py",
     "substrate/leech2.py",
 )
+
+
+class ExactRng:
+    """An exact integer stream seeded by a text (no ``random``).
+
+    The seed's UTF-8 bytes are folded into a 64-bit state, one linear
+    congruential step per byte; the stream is then Knuth's MMIX recurrence,
+    read from its high bits; an integer below ``n`` is drawn by rejection
+    (no modulo bias).  The methods the three Lorentzian studies use --
+    ``randrange``, ``choice``, ``sample``, ``getrandbits`` -- have the
+    signatures of ``random.Random``'s, not its values: the same seed gives
+    the same draws on every run and platform, but not Python's draws.
+    *Created 31 October 2026 (repository check).*
+    """
+
+    _A = 6364136223846793005
+    _C = 1442695040888963407
+    _M = 1 << 64
+
+    def __init__(self, seed: object) -> None:
+        s = 0x9E3779B97F4A7C15
+        for byte in str(seed).encode("utf-8"):
+            s = (s * self._A + byte + 1) % self._M
+        self.state = s
+        for _ in range(4):
+            self._step()
+
+    def _step(self) -> int:
+        self.state = (self.state * self._A + self._C) % self._M
+        return self.state
+
+    def getrandbits(self, k: int) -> int:
+        """A ``k``-bit integer, 32 high bits of the state per step."""
+        out, have = 0, 0
+        while have < k:
+            take = min(32, k - have)
+            out = (out << take) | (self._step() >> (64 - take))
+            have += take
+        return out
+
+    def randrange(self, start: int, stop: Optional[int] = None) -> int:
+        """An integer in ``[start, stop)`` (``[0, start)`` with one
+        argument), by rejection."""
+        if stop is None:
+            start, stop = 0, start
+        n = stop - start
+        if n <= 0:
+            raise ValueError("empty range")
+        k = max(1, (n - 1).bit_length())
+        while True:
+            v = self.getrandbits(k)
+            if v < n:
+                return start + v
+
+    def choice(self, seq: Sequence):
+        return seq[self.randrange(len(seq))]
+
+    def sample(self, population, k: int) -> list:
+        """``k`` distinct members, in draw order (a partial Fisher--Yates
+        shuffle of a copy)."""
+        pool = list(population)
+        if not 0 <= k <= len(pool):
+            raise ValueError("sample larger than population")
+        for i in range(k):
+            j = self.randrange(i, len(pool))
+            pool[i], pool[j] = pool[j], pool[i]
+        return pool[:k]
+
 
 #: condition -> error weights of the readings (``None`` marks the decoy).
 CONDITIONS: Dict[str, Tuple[Optional[int], ...]] = {
@@ -169,7 +243,7 @@ def script_rule(mask: int, roots: Sequence[Dict[str, object]]) -> int:
 # 2.  THE QUERIES
 # ===========================================================================
 
-def _error(rng: random.Random, weight: int) -> int:
+def _error(rng: ExactRng, weight: int) -> int:
     e = 0
     for i in rng.sample(range(24), weight):
         e |= 1 << i
@@ -178,7 +252,7 @@ def _error(rng: random.Random, weight: int) -> int:
 
 def _queries(condition: str) -> List[Tuple[int, List[int]]]:
     weights = CONDITIONS[condition]
-    rng = random.Random(f"{SEED}:{condition}")
+    rng = ExactRng(f"{SEED}:{condition}")
     words = mog.GOLAY_MASKS
     out = []
     for _ in range(QUERIES):
@@ -298,7 +372,7 @@ def several_readings() -> Dict[str, object]:
 def census() -> Dict[str, object]:
     """Sampled weight-4 cosets lifted; sampled words decoded exactly."""
     from .analogy import nearest_lattice_point
-    rng = random.Random(f"{SEED}:census")
+    rng = ExactRng(f"{SEED}:census")
     holes = {"sampled": 0, "vertices_48": 0, "eight_each": 0,
              "a1_24_certified": 0, "orthogonal": 0, "null_in_ii": 0,
              "lift_not_in_ii": 0, "at_covering_radius": 0}
@@ -334,11 +408,10 @@ def census() -> Dict[str, object]:
 # ===========================================================================
 
 def _lean_ok() -> bool:
-    root = Path(__file__).resolve().parents[2] / "lean"
-    text = "".join((root / f).read_text(encoding="utf-8")
-                   for f in ll.LEAN_FILES)
-    audit = (root / "RequestProject" / "GLM" / "AxiomAuditAll.lean").read_text(
-        encoding="utf-8")
+    from ..constants import LEAN_AUDIT_FILE, lean_file
+    text = "".join(lean_file(f).read_text(encoding="utf-8")
+                   for f in ll.LEAN_FILES if lean_file(f).exists())
+    audit = LEAN_AUDIT_FILE.read_text(encoding="utf-8")
     return ("sorry" not in text
             and all(f"theorem {t}" in text for t in ll.LEAN_THEOREMS)
             and "import RequestProject.GLM.LorentzianLift" in audit

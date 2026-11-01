@@ -1,33 +1,39 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 13 of 19 marks (A3, A5, A7, B2, B3, B4, B5, C1, C2, C3, C4, C5, C6 met; A1, A2, A4, A6,
   B1, B6 missed) and 1 of 1 amended (B6′ met); sintering ships.
 directives: []
 evidence: []
-faculty: unknown
+faculty: refusal
 file_refs:
   code:
-  - knowledge/friction
-  - knowledge/thermo_friction
-  - knowledge/thermo_friction_study
-  - runtime/respell
-  - runtime/sinter
-  - tests/test_thermo_friction
-  lean:
+  - knowledge/friction.py
+  - knowledge/thermo_friction.py
+  - knowledge/thermo_friction_study.py
+  - runtime/respell.py
+  - runtime/sinter.py
+  - tools.py
+  lean: []
+  lean_held: []
+  lean_missing:
   - ThermoFriction
+  missing: []
   prose: THERMO_FRICTION_STUDY.md
   test:
   - test_thermo_friction.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: THERMO_FRICTION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -49,6 +55,7 @@ question: 'Can measured friction be used as a signal for recovery: does a heat-g
   and does a bounded fallback to a register lexicon read back a technical word the corpus barely uses
   without loosening ordinary correction?'
 recomputed_by: '`glm_universal.knowledge.thermo_friction_study.thermo_friction_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

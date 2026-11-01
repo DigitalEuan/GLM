@@ -7,7 +7,7 @@ every query kind and every report subject, each with an expected answer or an
 expected refusal, each run through ``GLM.py`` in a fresh interpreter and
 scored automatically.
 
-    PYTHONPATH=. python3 -m glm_universal.evaluation
+    PYTHONPATH=src python3 -m glm_universal.evaluation
 
 A refusal that was expected counts as a pass; a refusal that was not counts as
 a gap; a confident answer where the honest answer is a refusal, or an answer
@@ -19,6 +19,8 @@ implementation: crossing it is a work item).
 
 The write-up of a full run is ``CAPABILITY_ASSESSMENT.md`` at the top of the
 repository.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from .cases import CASES, EvalCase, cases_by_kind

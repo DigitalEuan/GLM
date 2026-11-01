@@ -1,34 +1,43 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: Hits at 5 on 211 declaration queries, 95 for the two-book native ranking against 87 for
   the raw features; on 103 goal queries, 30 against 26; on the 24 controller tasks the read-back scorer
   solves 24 against 18 for the shipped Leech scorer.
 directives:
-- D15
 - D7
+- D15
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/native_parity.py
+  - tools.py
   lean:
   - Address
+  - Controller
   - LawRegister
   - NativeParity
   - StepwiseFrames
   - StepwisePlanner
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: NATIVE_PARITY_STUDY.md
   test:
   - test_native_parity.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: NATIVE_PARITY_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,18 +45,46 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
-  missed: []
+  declared:
+  - N1
+  - N2
+  - N3
+  - N4a
+  - N4b
+  - N5
+  - N6
+  - N7
+  - N8
+  - T1
+  - T2
+  - T3
+  met:
+  - N1
+  - N3
+  - N4a
+  - N4b
+  - N5
+  - N6
+  - N8
+  missed:
+  - N2
+  - N7
 perturbations: []
 phase: 70
 predecessors:
 - CARRIED_FORK_STUDY
 - REVERSE_TCT_STUDY
-- STACK_RELAY_STUDY
 question: Where a standard method equals, or only narrowly beats, a Golay/Leech-native method of the GLM,
   can the native method be kept and refined until it matches or beats the standard one?
 recomputed_by: '`glm_universal.reasoning.native_parity.native_parity_report`'
+related:
+- ADDRESS_RETRIEVAL_STUDY
+- CITATION_SCOPE_STUDY
+- CONTROLLER_STUDY
+- CORPUS_ADDRESS_STUDY
+- CORPUS_RESAMPLE_STUDY
+- DOCUMENT_TREE_STUDY
+- STACK_RELAY_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -69,13 +106,17 @@ sections:
 - anchor: 6-next-round
   heading: 6. Next round
 status: closed
-successors: []
+successors:
+- CITATION_SCOPE_STUDY
+- CORPUS_RESAMPLE_STUDY
+- DOCUMENT_TREE_STUDY
+- NATIVE_WORDS_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Native parity: where a standard method ties or narrowly beats a native one, refine the native
   one'
 verdict: On the Lean corpus the native ranking that reads two Leech books, each in its two layers, matches
-  the like-for-like standard ranking exactly and beats the raw feature vector, and on the document corpus
-  the native and standard rankings stay within one relevant section of each other, so the native method
-  is kept.
+  the like-for-like standard ranking score for score (the hits differ only inside ties) and beats the
+  raw feature vector, and on the document corpus the native and standard rankings stay within one relevant
+  section of each other, so the native method is kept.
 wobble_deps: []

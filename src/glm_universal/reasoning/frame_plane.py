@@ -7,6 +7,9 @@ from example pairs, with the Thomas--Wigner rotation read off exactly
 improper families times a change of units, ``UNITS_OF``,
 ``PHASE_179_FAMILIES``; before it Phase 179: the improper families,
 ``improper_split``, ``PHASE_178_FAMILIES``).*
+*Last altered 31 October 2026 (repository check: :func:`frame_tool_text`,
+the whole of ``tool frame`` -- 3-component tasks here, every other task to
+``frame_operators.frame_text`` -- as one entry point for the toolbox).*
 
 Where it comes from
 -------------------
@@ -106,7 +109,8 @@ __all__ = [
     "LEAN_FILE_IMPROPER", "LEAN_THEOREMS_IMPROPER", "COMPONENTS", "PARITY",
     "TIME_REV", "component", "improper_split", "reflect",
     "PHASE_178_FAMILIES", "PHASE_179_FAMILIES", "UNITS_OF",
-    "LEAN_FILE_UNITS", "LEAN_THEOREMS_UNITS",
+    "LEAN_FILE_UNITS", "LEAN_THEOREMS_UNITS", "parse_plane_task",
+    "frame_tool_text",
 ]
 
 LEAN_FILE = "RequestProject/GLM/LorentzPlane.lean"
@@ -789,3 +793,14 @@ def parse_plane_task(arg: str):
             return None
         pairs.append((x, y))
     return (pairs, query) if pairs else None
+
+
+def frame_tool_text(arg: str) -> Tuple[bool, str, Dict[str, object]]:
+    """The whole of ``tool frame``: a task on 3-component states
+    ``(E, px, py)`` goes to :func:`plane_text`; every other task to
+    :func:`frame_operators.frame_text` (Phase 177), exactly as before."""
+    task = parse_plane_task(arg)
+    if task is not None:
+        return plane_text(*task)
+    from . import frame_operators as fo
+    return fo.frame_text(arg)

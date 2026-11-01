@@ -244,7 +244,7 @@ class TestWiring(unittest.TestCase):
         self.assertIn("ANSWER  316", out.getvalue())
 
     def test_the_lean_file_and_the_surface(self):
-        lean = ROOT / "glm_lean/RequestProject/GLM/StepwiseWiden.lean"
+        lean = ROOT / "src/lean/RequestProject/GLM/StepwiseWiden.lean"
         self.assertTrue(lean.exists())
         text = lean.read_text(encoding="utf-8")
         for name in ("winner_swap", "winner_flip_ne", "winner_eq_none_iff",

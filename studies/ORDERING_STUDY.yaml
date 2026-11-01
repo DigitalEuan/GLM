@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: <!--figure:ordering-as-declared-->7<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->
@@ -12,20 +14,29 @@ deciding_figure: <!--figure:ordering-as-declared-->7<!--/figure--> of <!--figure
 directives:
 - D7
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - tests/test_coordinate_order
+  - reasoning/coordinate_order.py
+  - reasoning/scale_conversion.py
+  - tools.py
   lean:
   - CoordinateOrder
+  - FieldSurface
+  - NormFamily
+  - ScaleConversion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: ORDERING_STUDY.md
   test:
-  - test_ordering.py
+  - test_coordinate_order.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: ORDERING_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -37,12 +48,16 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 57
 predecessors: []
 question: The field surface answered nine of ten held-and-unreachable probe questions and named the tenth
   as needing an operation rather than a surface. Built, what does that operation answer, and what must
   it refuse?
 recomputed_by: '`glm_universal.reasoning.coordinate_order.comparison_report`'
+related:
+- COLUMN_EXTREMUM_STUDY
+- FIELD_SURFACE_STUDY
+- SCALE_CONVERSION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -68,7 +83,8 @@ sections:
 - anchor: 9-re-running-it
   heading: 9. Re-running it
 status: closed
-successors: []
+successors:
+- SEMANTIC_PLAN_STUDY
 superseded_by: ''
 supersedes: []
 title: The ordering operation — one coordinate, two rows, and the refusal that is the point of it

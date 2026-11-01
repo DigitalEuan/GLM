@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; §6 now quotes the English-answered count, a registered figure no document quoted; the text is otherwise unchanged.)*
+
 ---
 
 ## 1. What this experiment is
@@ -167,7 +169,9 @@ word.
 
 The refusal count was reading as one failure and is three, in a ratio that
 inverts the obvious conclusion. A parser is the expensive instrument and it is
-worth <!--figure:oracle-parser-worth-->4<!--/figure--> of twenty. A *field
+worth <!--figure:oracle-parser-worth-->4<!--/figure--> of twenty — the six
+the grammar answers less the <!--figure:oracle-english-->2<!--/figure--> already answered in
+English. A *field
 surface* — one query kind that returns a named field of a named register row,
 and its obvious extension to a named function's named key — is the cheap one,
 and it is worth <!--figure:oracle-surface-->10<!--/figure-->.
@@ -201,10 +205,9 @@ seventeen things the system cannot do.
 ## 8. Re-running it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.tools oracle          # the split, in one screen
-PYTHONPATH=. python3 -m glm_universal.tools oracle --json   # the same as data
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_probe_oracle.py -q
+PYTHONPATH=src python3 -m glm_universal.tools oracle          # the split, in one screen
+PYTHONPATH=src python3 -m glm_universal.tools oracle --json   # the same as data
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_probe_oracle.py -q
 ```
 
 The experiment keeps **no measurement cache**: it asks a live session twenty

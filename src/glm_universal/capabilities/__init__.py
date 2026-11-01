@@ -17,8 +17,8 @@ cap.capability_report()              # all of them, grouped by area
 From the command line:
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.capabilities
-PYTHONPATH=. python3 GLM.py -q "report capabilities" -c 1
+PYTHONPATH=src python3 -m glm_universal.capabilities
+PYTHONPATH=src python3 src/GLM.py -q "report capabilities" -c 1
 ```
 
 A probe that comes back ``breaks`` is not a failure.  Several of the
@@ -26,6 +26,8 @@ boundaries here are theorems -- the Golay repair radius, the undecidability of
 equality between two processes, the convex hull that bounds what the 24-D
 dynamic carrier can reach -- and will never move.  The others are the work
 list.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

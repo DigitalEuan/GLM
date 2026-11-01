@@ -2,7 +2,12 @@
 stepwise planner (:mod:`glm_universal.runtime.tool_values`), the convergent
 and best-approximation tools (:mod:`glm_universal.reasoning.rational_approx`),
 and the marks of ``studies/TOOL_VALUES_STUDY.md``
-(:mod:`glm_universal.evaluation.tool_values_cases`)."""
+(:mod:`glm_universal.evaluation.tool_values_cases`).
+
+*Last altered 31 October 2026 (repository check: the declared tool-value
+evaluation cases exempted from ``test_no_declared_text_is_read``).*  *Also
+1 November 2026 (Phase 186): the eight tool cases written for the new English
+openings are not tool-value cases and are held to the rule.*"""
 
 from __future__ import annotations
 
@@ -148,11 +153,30 @@ class TestComposition(unittest.TestCase):
         self.assertIn("355/113", r.text)
 
     def test_no_declared_text_is_read(self):
+        # Last altered 31 October 2026 (repository check): the evaluation's
+        # declared tool-value cases (kind "tool"; since Phase 164 the case
+        # tool-leech-norm-12, "the number of vectors of norm 12 in the leech
+        # lattice", answered through this leaf -- LEECH_SHELL_COUNT_STUDY.md
+        # mark F1: "no other case reads a shell") are read on purpose and are
+        # exempt; no other declared text may be.
+        # Altered 1 November 2026 (Phase 186): the eight tool cases written
+        # for the English openings of ``tool rule30``, ``tool conjecture``,
+        # ``tool derive`` and ``tool arc`` are read by those openings, not by
+        # this leaf, so they are held to the rule like any other text.
+        from glm_universal.evaluation import connected_two_cases as c2
+        from glm_universal.evaluation.cases import CASES
+        phase186 = set(c2.PHASE186_OPENING_CASES)
+        exempt = {c.question for c in CASES
+                  if c.kind == "tool" and c.id not in phase186}
         sets = router._declared_sets()
         for texts in sets.values():
             for t in texts:
+                if t in exempt:
+                    continue
                 with self.subTest(t=t):
                     self.assertIsNone(tool_values.read_value(t))
+        for t in exempt:
+            self.assertIsNotNone(tool_values.read_value(t), t)
 
 
 class TestTheStudy(unittest.TestCase):

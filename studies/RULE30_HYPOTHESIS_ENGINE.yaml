@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 1 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: v4 passed all 5 inputs with known answers, including periodic ones; the v5 prediction
@@ -11,20 +13,25 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/hypothesis_engine.py
   lean:
-  - Benchmarks
-  - BenchmarksData
-  - ConjectureLoop
-  - DialogueChecks
-  - LeftDiagonalPeriods
-  - LeftDiagonalPeriodsData
-  - WhiteDiagonals
+  - HypothesisEngine/Benchmarks
+  - HypothesisEngine/BenchmarksData
+  - HypothesisEngine/DialogueChecks
+  - Rule30/ConjectureLoop
+  - Rule30/LeftDiagonalPeriods
+  - Rule30/LeftDiagonalPeriodsData
+  - Rule30/WhiteDiagonals
+  lean_held: []
+  lean_missing: []
+  missing:
+  - tests/test_round38.py
   prose: RULE30_HYPOTHESIS_ENGINE.md
-  test:
-  - test_rule30_hypothesis_engine.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: RULE30_HYPOTHESIS_ENGINE
 junctions: []
 last_altered: ''
@@ -43,6 +50,7 @@ phase: 0
 predecessors: []
 question: Can the owner's Hypothesis Engine produce real, checkable results on Rule 30?
 recomputed_by: (hand-written argument; nothing to recompute)
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -73,7 +81,7 @@ sections:
   heading: 11. Every answer an action, every implication a checked edge
 - anchor: 12-round-42-v13-checked-and-guards-against-plausible-but-wrong-sentences
   heading: '12. Round 42: v13 checked, and guards against plausible but wrong sentences'
-status: negative
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

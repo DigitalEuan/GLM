@@ -27,6 +27,13 @@ it is stored beside the digest of its sources
 Exactness
 ---------
 Strings, booleans and ints only.
+
+*Last altered 31 October 2026 (repository check): the record names the cases
+whose status changed (``status_changed``), and ``report-directives`` and the
+three ``report hole`` reports of Phase 149 gained declared causes; the causes
+of ``unknown-nonsense`` and ``report-language`` name the four lookup kinds
+wired on 31 October 2026 and the counts they moved, checked by diffing the
+baseline answers against the live ones.*
 """
 
 from __future__ import annotations
@@ -61,15 +68,34 @@ DECLARED_CAUSES: Dict[str, str] = {
     "report-generated": "the tree: the overlay's stored bytes, measured live",
     # the new kind
     "unknown-nonsense": "Phase 147: the list of query kinds the refusal names "
-                        "gains 'hole'",
-    "report-language": "Phases 147-148: the language report counts the query "
-                       "kinds and the evaluation questions, which gain the "
-                       "new kind and the new cases",
+                        "gains 'hole'; 31 October 2026: and the four lookup "
+                        "kinds 'corpus', 'tool', 'study' and 'sequence'",
+    "report-language": "Phases 147-148 and 31 October 2026: the language "
+                       "report counts the query kinds (25 at the baseline, 30 "
+                       "now) and the evaluation questions of the undescribed "
+                       "kinds (182 at the baseline, 207 now), which gain the "
+                       "new kinds and the new cases",
     "report-query-escalation": "Phases 147-148: the query-escalation report "
                                "counts the evaluation cases, which gain the "
                                "new ones",
     "report-routes": "Phase 147: the route table lists the query kinds, which "
                      "gain 'hole'",
+    # Added 31 October 2026 (repository check), after a re-take found this
+    # text moved: the report counts the standing rules, measured live, and the
+    # register grew from the baseline's 16 to 22 (D17-D22, the last added on
+    # 31 October 2026).  The answer's status and form are unchanged.
+    "report-directives": "the tree: the directives register, measured live "
+                         "(16 standing rules at the baseline, 22 now)",
+    # Added 31 October 2026 (repository check), after a re-take found these
+    # three texts moved: Phase 149 (HOLE_REPORTS_L5_STUDY.md) came after this
+    # baseline and gives each of the three reports the L5 clause, keeping the
+    # round's own text verbatim as its prefix.
+    "report-hole-classifier": "Phase 149: the report keeps its round's text "
+                              "and adds the L5 clause",
+    "report-hole-ladder": "Phase 149: the report keeps its round's text and "
+                          "adds the L5 clause",
+    "report-hole-failures": "Phase 149: the report keeps its round's text and "
+                            "adds the L5 clause",
 }
 
 #: The functions that read the construction ladder without the guard: the
@@ -163,6 +189,8 @@ def f1_frozen_path(session=None) -> Dict[str, object]:
         "same_text": sum(r["present"] and r["same_text"] for r in rows),
         "moved": [{"id": r["id"], "cause": r["cause"]} for r in moved],
         "undeclared": [r["id"] for r in moved if r["cause"] == "undeclared"],
+        "status_changed": [r["id"] for r in rows
+                           if r["present"] and not r["same_status"]],
         "new_cases": new,
         "new_answers": {cid: {"ok": answers[cid][0],
                               "answer": answers[cid][1]} for cid in new},

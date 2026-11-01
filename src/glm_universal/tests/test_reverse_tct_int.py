@@ -200,7 +200,7 @@ class TestTheSurface(unittest.TestCase):
 class TestTheLeanFile(unittest.TestCase):
 
     def test_the_proved_names_are_there(self):
-        text = (ROOT / "glm_lean/RequestProject/GLM/ReverseTCTThree.lean").read_text(
+        text = (ROOT / "src/lean/RequestProject/GLM/ReverseTCTThree.lean").read_text(
             encoding="utf-8")
         self.assertNotIn("sorry", text)
         for name in ("residue_split_pos", "residue_split_neg",

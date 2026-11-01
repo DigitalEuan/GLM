@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: <!--figure:binding-as-declared-->12<!--/figure--> of <!--figure:binding-declared-count-->12<!--/figure-->
@@ -11,26 +13,35 @@ deciding_figure: <!--figure:binding-as-declared-->12<!--/figure--> of <!--figure
   follow-ups including <!--figure:planstore-refusals-replayed-->7<!--/figure--> of <!--figure:planstore-refusals-->7<!--/figure-->
   refusals; and the two sandbox pieces are unpromoted.
 directives:
-- D15
-- D3
 - D4
-- D8
+- D15
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - tests/test_plan_store
-  - tests/test_role_binding
-  - tests/test_supplied_sandbox
-  lean: []
+  - reasoning/role_binding.py
+  - runtime/conversation.py
+  - runtime/plan_store.py
+  - sandbox/lean_generation.py
+  - sandbox/memory_split.py
+  - tools.py
+  lean:
+  - PlanStore
+  - RoleBinding
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: SUPPLIED_PORTS_STUDY.md
   test:
-  - test_supplied_ports.py
+  - test_plan_store.py
+  - test_role_binding.py
+  - test_supplied_sandbox.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: SUPPLIED_PORTS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -42,13 +53,15 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 54
+phase: 0
 predecessors: []
 question: 'Phase 54 read, ran and left four parts of the supplied conversational material unported: a
   role–filler binding, a content-addressed store of resolved plans, a four-register memory split and a
   generator of Lean source from carriers. Taken one at a time, with the measurement each was told to make,
   which of them is worth shipping?'
 recomputed_by: '`glm_universal.reasoning.role_binding.binding_report`'
+related:
+- CONVERSATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -73,7 +86,7 @@ sections:
   heading: 8. Limits
 - anchor: 9-re-running-it
   heading: 9. Re-running it
-status: negative
+status: closed
 successors: []
 superseded_by: ''
 supersedes: []

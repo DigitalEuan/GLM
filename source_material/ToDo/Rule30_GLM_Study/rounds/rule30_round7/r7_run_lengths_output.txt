@@ -1,0 +1,5 @@
+first 20 centre-column bits: 11011100110001011001
+time steps: 20000
+number of runs: 10063
+longest run: 14 starting at [11109]
+worst ratio run/(3N+6) over runs with N>=1: 1/5

@@ -3,6 +3,11 @@
 *Last altered 20 October 2026 (Phase 174: the ``replay`` instrument -- the
 evaluation's replay gate as a step of the close).*
 
+*Last altered 31 October 2026 (repository check): the command line is
+``src/GLM.py`` since the reorganisation, and ``lean-sorry-free`` runs
+``glm_universal.lean_check`` over ``src/lean`` instead of a grep over the old
+``glm_lean`` folder.*
+
 The test suite is not the only thing this project re-runs from scratch every
 session.  ``lake build`` compiles the Lean development, the end-to-end
 evaluation drives the CLI once per question in a fresh interpreter, the
@@ -22,10 +27,11 @@ Both kinds of unit share one ledger file, under separate keys, so a single
 
 ::
 
-    cd overlay
-    PYTHONPATH=. python3 -m glm_universal.signoff --plan          # both
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-checks    # stale ones
-    PYTHONPATH=. python3 -m glm_universal.signoff --run-checks-all
+    PYTHONPATH=src python3 -m glm_universal.signoff --plan          # both
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-checks    # stale ones
+    PYTHONPATH=src python3 -m glm_universal.signoff --run-checks-all
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -99,11 +105,12 @@ CHECKS: Tuple[Check, ...] = (
     Check(
         name="lean-sorry-free",
         description="no sorry or admit anywhere in the Lean development",
-        command=("grep", "-rInw", "--include=*.lean", "-e", "sorry",
-                 "-e", "admit", "glm_lean/RequestProject"),
-        where="repository",
+        # The static check reads the Lean sources with comments removed, so a
+        # docstring saying "no `sorry`" is not a sorry (a plain grep was; and
+        # the tree moved from glm_lean/ to src/lean/ in the reorganisation).
+        command=(sys.executable, "-m", "glm_universal.lean_check"),
+        entry_points=("lean_check.py",),
         lean=True,
-        ok_returncodes=(1,),
         expected_seconds=1,
     ),
     Check(
@@ -126,7 +133,7 @@ CHECKS: Tuple[Check, ...] = (
         command=(sys.executable, "-m", "glm_universal.evaluation",
                  "--jobs", "8"),
         entry_points=("evaluation/__main__.py",),
-        extra=("GLM.py",),
+        extra=("src/GLM.py",),
         expected_seconds=240,
     ),
     Check(
@@ -139,7 +146,7 @@ CHECKS: Tuple[Check, ...] = (
         command=(sys.executable, "-m", "glm_universal.evaluation",
                  "--replay-only", "--jobs", "8"),
         entry_points=("evaluation/__main__.py", "evaluation/replay.py"),
-        extra=("GLM.py",),
+        extra=("src/GLM.py",),
         expected_seconds=540,
     ),
     Check(

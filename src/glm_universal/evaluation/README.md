@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the case count, which had stood at 195, follows the set.)*
+
 The other measuring instruments in this package look at the machine from the
 inside. `capabilities/` asks the library where it stops; `benchmarks/` scores
 solver functions on curated and exhaustive task sets. Neither of them goes
@@ -24,13 +26,12 @@ evaluation itself can prime — and scores exactly what a user would see: the
 process's exit code and the `ANSWER` or `UNSOLVED` line it printed.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 195 cases
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8            # in parallel
-PYTHONPATH=. python3 -m glm_universal.evaluation --only analogy      # one query kind
-PYTHONPATH=. python3 -m glm_universal.evaluation --case report-superposition
-PYTHONPATH=. python3 -m glm_universal.evaluation --list              # the question set
-PYTHONPATH=. python3 -m glm_universal.evaluation --json results.json
+PYTHONPATH=src python3 -m glm_universal.evaluation                     # all 237 cases
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8            # in parallel
+PYTHONPATH=src python3 -m glm_universal.evaluation --only analogy      # one query kind
+PYTHONPATH=src python3 -m glm_universal.evaluation --case report-superposition
+PYTHONPATH=src python3 -m glm_universal.evaluation --list              # the question set
+PYTHONPATH=src python3 -m glm_universal.evaluation --json results.json
 ```
 
 The exit code is 0 when every case passes and 1 when any case fails, so the
@@ -38,7 +39,7 @@ harness can be used as a gate.
 
 ## The question set
 
-`cases.py` holds **<!--figure:evaluation-cases-->223 CLI cases<!--/figure-->**. Between them they cover **all <!--figure:query-kinds-->27 query kinds<!--/figure-->**
+`cases.py` holds **<!--figure:evaluation-cases-->237 CLI cases<!--/figure-->**. Between them they cover **all <!--figure:query-kinds-->31 query kinds<!--/figure-->**
 the runtime recognises (including `unknown`, the kind a question gets when
 nothing else claims it) and **all <!--figure:report-subjects-->67 report subjects<!--/figure-->**. Coverage is not
 asserted in prose: `test_evaluation.py` compares `KINDS_COVERED` and
@@ -109,7 +110,7 @@ its outcome and, for a failure, the exact point at which it stops (`stops_at`).
 
 | file | what it holds |
 |---|---|
-| `cases.py` | the 195 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
+| `cases.py` | the <!--figure:evaluation-case-count-->237<!--/figure--> cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
 | `harness.py` | `run_case`, `run_all`, `evaluation_report`, `format_report`, `write_json` |
 | `__main__.py` | the command line above |
 

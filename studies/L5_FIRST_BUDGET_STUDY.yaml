@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '3 of 3 marks; at 240 starts 43 correct, 0 wrong, 1 refused of 44 (1920 starts: 44, 0,
@@ -10,15 +12,22 @@ deciding_figure: '3 of 3 marks; at 240 starts 43 correct, 0 wrong, 1 refused of 
   396, 0); prefix property 6/6 seeds.'
 directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
-  code: []
-  lean: []
+  code:
+  - reasoning/l5_first_budget.py
+  - tools.py
+  lean:
+  - HoleReportsL5
+  - LatticeCompletion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: L5_FIRST_BUDGET_STUDY.md
-  test:
-  - test_l5_first_budget.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: L5_FIRST_BUDGET_STUDY
 junctions: []
 last_altered: ''
@@ -29,15 +38,23 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - P0
+  - W1
+  - R1
+  met:
+  - P0
+  - W1
+  - R1
   missed: []
 perturbations: []
-phase: 149
-predecessors: []
+phase: 152
+predecessors:
+- HOLE_REPORTS_L5_STUDY
 question: Does the configuration reading `L5`'s answer rule name the escalation round's 44 queries at
   240 starts, the classifier round's budget, where Phase 149 had measured them only at 1920?
 recomputed_by: '`glm_universal.reasoning.l5_first_budget.l5_first_budget_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

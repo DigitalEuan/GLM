@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. What this document is
@@ -228,7 +230,7 @@ claimed junction, and its members' coordinates equal.
 
 ## 7. What came out
 
-Measured by `PYTHONPATH=. python3 -m glm_universal.tools junction-read`
+Measured by `PYTHONPATH=src python3 -m glm_universal.tools junction-read`
 (cache `reasoning/_data/coordinate_junction_study.json`, kept beside the
 digest of its sources and of both stored tables); the junction table is
 `tools junction-table`. **6 of 9 marks met.** The three missed marks miss for

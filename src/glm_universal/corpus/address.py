@@ -58,11 +58,13 @@ instead of answering.  Nothing here answers from a stale book.
 
 Regenerate with::
 
-    PYTHONPATH=. python3 -m glm_universal.corpus --write
+    PYTHONPATH=src python3 -m glm_universal.corpus --write
 
 Nothing here constructs a float: coordinates are integers, distances are
 integer squared Euclidean distances, and every rate is a
 :class:`~fractions.Fraction`.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations

@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -427,7 +429,7 @@ numerator or denominator of 10¹² or more).
 
 ## 8. Round two — results
 
-Taken by `PYTHONPATH=. python3 -m glm_universal.tools reverse-tct --two`
+Taken by `PYTHONPATH=src python3 -m glm_universal.tools reverse-tct --two`
 (W1–W6, W8) and `tests/test_reverse_tct_two.py`; the Lean file is
 `RequestProject/GLM/ReverseTCTTwo.lean` (W7).
 
@@ -593,7 +595,7 @@ refutation at `c`, at most 64 steps, else `INTEGER_UNDECIDED`.
 
 ## 11. Round three — results
 
-Taken by `PYTHONPATH=. python3 -m glm_universal.tools reverse-tct --three`
+Taken by `PYTHONPATH=src python3 -m glm_universal.tools reverse-tct --three`
 (X1–X5) and `tests/test_reverse_tct_int.py`; the Lean file is
 `RequestProject/GLM/ReverseTCTThree.lean` (X6); the code is
 `reasoning/reverse_tct_int.py`.

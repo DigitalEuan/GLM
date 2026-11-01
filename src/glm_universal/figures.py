@@ -343,6 +343,13 @@ def benchmark_figures() -> Dict[str, object]:
 _HOLE = re.compile(r"\b(sorry|admit)\b")
 
 
+def _strip_lean_comments(text: str) -> str:
+    """Lean source with its comments and string literals blanked
+    (:func:`glm_universal.lean_check._strip_comments`)."""
+    from .lean_check import _strip_comments
+    return _strip_comments(text)
+
+
 
 def lean_figures(root: Optional[str] = None) -> Dict[str, object]:
     """The Lean development: files, lines and remaining ``sorry``s.
@@ -370,12 +377,17 @@ def lean_figures(root: Optional[str] = None) -> Dict[str, object]:
                 path = os.path.join(dirpath, filename)
                 files.append(os.path.relpath(path, candidate))
                 with open(path, encoding="utf-8") as handle:
-                    for line in handle:
-                        lines += 1
-                        # Whole words only: "admitted" and "admits" occur in
-                        # the prose of several docstrings and are not holes.
-                        if _HOLE.search(line):
-                            sorries += 1
+                    text = handle.read()
+                lines += len(text.splitlines())
+                # Whole words only, and in code only: "admitted" occurs in
+                # the prose of several docstrings, and a doc comment saying
+                # "no `sorry`" (Rule30/TopMonomial.lean) is not a hole.  The
+                # comment stripper is the one the static check uses
+                # (glm_universal.lean_check), so the two counts agree.
+                # (31 October 2026, repository check.)
+                for line in _strip_lean_comments(text).splitlines():
+                    if _HOLE.search(line):
+                        sorries += 1
         return {
             "root": os.path.relpath(candidate,
                                     os.path.dirname(os.path.dirname(

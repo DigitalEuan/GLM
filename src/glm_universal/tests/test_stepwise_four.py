@@ -227,7 +227,7 @@ class TestWiring(unittest.TestCase):
         self.assertEqual([], r["declared_refusals_answered"])
 
     def test_the_lean_file_and_the_surface(self):
-        lean = ROOT / "glm_lean/RequestProject/GLM/HoleBounds.lean"
+        lean = ROOT / "src/lean/RequestProject/GLM/HoleBounds.lean"
         self.assertTrue(lean.exists())
         text = lean.read_text(encoding="utf-8")
         for name in ("kth_le_iff", "kth_append_le", "le_kth_append",

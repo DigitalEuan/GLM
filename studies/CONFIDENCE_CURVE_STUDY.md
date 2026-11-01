@@ -16,10 +16,12 @@
 
 *Created 20 October 2026 (pre-registered 20 October 2026: §§0–6 were committed before any figure of the calibration or held-out fold was read; measured 20 October 2026, §7).*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ## 0. What this document is
 
 A pre-registration for Phase 168. It takes Part II.4 of the owner's plan of
-19 October 2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/GLM_19OCT26_1.md),
+19 October 2026 ([`source_material/GLM_19OCT26_1.md`](../source_material/done/GLM_19OCT26_1.md),
 *develop an explicit corpus confidence curve*), which is To-Do item 3 of
 `STATUS.md` §2.1: *the counted model knows when it is right only at low
 coverage (K3′: 54% precision at 10.7%); declare a point on that curve before
@@ -120,7 +122,7 @@ with its counts.
 
 ## 7. What came out
 
-`PYTHONPATH=. python3 -m glm_universal.tools confidence-curve` (stored in
+`PYTHONPATH=src python3 -m glm_universal.tools confidence-curve` (stored in
 `knowledge/_data/confidence_curve.json`, digest-guarded; `--write` re-takes it
 in about five minutes). The corpus read had 2,294 documents, dealt by path
 digest into folds of 439, 506, 481, 443 and 425.

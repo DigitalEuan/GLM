@@ -1,0 +1,852 @@
+schema: glm-study/v1
+id: glm_escalation_boundaries_exploration_corrected
+path: RequestProject/GLM/Escalation/GLM_Escalation_Boundaries_Exploration_CORRECTED.md
+title: "The Geometric Language Machine: Escalation Boundaries, Modular Escapement, and Deep-Hole Syndrome Decoding — corrected edition (Round 44)"
+kind: document
+archive: false
+tier0:
+  question: What does the owner's escalation sketch say once every statement is checked?
+  verdict: The corrected edition keeps the sketch's sections and aims; each statement is kept, repaired or replaced, and every claim has an evidence tag (FORMAL, CERT, CLASSICAL, REPORTED or PROPOSAL) and its Lean name.
+  figure: 8 sections, as in the sketch; Round 44.
+  recomputed: (hand-written argument; nothing to recompute)
+last_altered: null
+summary: "**A corrected edition of the owner's sketch `GLM_Escalation_Boundaries_Exploration.md`.** It keeps the sketch's sections, numbering and aims. Each statement is either kept, repaired, or replaced, and the reason is given at that point. The original file is unchanged."
+tags: []
+source:
+  head: |+
+    # The Geometric Language Machine: Escalation Boundaries, Modular Escapement, and Deep-Hole Syndrome Decoding — corrected edition (Round 44)
+
+  trailing_newline: true
+  newline: lf
+sections:
+  - heading: Tier 0 — the coarse read
+    anchor: tier-0-the-coarse-read
+    role: tier0
+    body: |
+      **Question.** What does the owner's escalation sketch say once every statement is checked?
+
+      **Verdict.** The corrected edition keeps the sketch's sections and aims; each statement is kept, repaired or replaced, and every claim has an evidence tag (FORMAL, CERT, CLASSICAL, REPORTED or PROPOSAL) and its Lean name.
+
+      **Deciding figure.** 8 sections, as in the sketch; Round 44.
+
+      **Recomputed by.** (hand-written argument; nothing to recompute)
+
+      *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `tools/tier0_check.py` (or the GLM's corpus check, after a merge) fails if they stop being.*
+
+      **A corrected edition of the owner's sketch `GLM_Escalation_Boundaries_Exploration.md`.** It keeps
+      the sketch's sections, numbering and aims. Each statement is either kept, repaired, or replaced, and
+      the reason is given at that point. The original file is unchanged.
+
+      How to read this edition:
+
+      * Text in normal type is the corrected statement.
+      * **[Correction]** blocks explain what was wrong in the sketch and what replaces it.
+      * Evidence tags (as in `../Rule30/claims.csv`):
+        * **FORMAL**: a Lean proof in this package, standard axioms only.
+        * **CERT**: a Lean finite certificate (`native_decide`).
+        * **CLASSICAL**: a published theorem, cited and not re-proved here.
+        * **REPORTED**: stated by the GLM repository (`glm_repo.zip`), not re-checked.
+        * **PROPOSAL**: a design choice. It can be adopted or not; nothing proves or refutes it.
+      * Every Lean name cited below lives in `RequestProject/GLM/Escalation/` (namespace
+        `GLM.Escalation`, sub-namespaces `Machine`, `View`, `Leech`, `Niemeier`). The sketch's Lean
+        snippets were proposals that did not compile (`x*` is not an identifier, `Q 24`, `L.View`,
+        `match_syndrome` and `decoder_table` were undefined, and `snap_L24_syn` was `sorry`). They are
+        replaced by pointers to compiled declarations.
+      * `MASTER_VIEW.md` (Round 43) is the verdict table. This edition is the full corrected text.
+        Ledger rows: C393–C399 (Round 43) and C400–C405 (this round).
+
+      ---
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 1. Introduction — the exploratory stance
+    anchor: "1-introduction-the-exploratory-stance"
+    body: |
+      This document is an exploration. Where it now makes a mathematical claim, the claim is checked.
+      The GLM Technical Specification gives a Master Operator Equation, a five-layer hierarchy, a
+      congruence predicate, and a worked example of addition breaking down at the substrate. The sketch
+      correctly found three loose places in the spec: the composition order of the equation, the role of
+      the side-conditions, and how `snap_Λ₂₄` resolves ties.
+
+      The sketch's central thesis was that the "5-bit modular escapement filters" (residues mod 2, 4, 8,
+      144, 256) and complete syndrome decoding at the deep holes are two views of one structure.
+
+      **[Correction]** That thesis does not survive checking, for three reasons:
+
+      1. The five moduli are not a refinement chain (§3).
+      2. The residue filters do not resolve the sketch's own example (§4).
+      3. Three of the five residue "syndromes" carry no information about the Leech lattice at all (§5).
+
+      What does survive is the useful core:
+
+      * **the layer as part of the state;**
+      * **escalation as "the least layer that resolves";**
+      * **the snap as the place where ties are detected and the layer is chosen.**
+
+      All three are proved below in a corrected form. The "escalation boundary" is real. It is
+      crossed by escalating the **reading** (what a layer perceives), not by changing a modulus.
+
+      ---
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 2. The Master Equation, re-examined
+    anchor: "2-the-master-equation-re-examined"
+    body: |
+      The spec's form is
+
+        Ψ_{n+1} = (R_gate ∘ snap_Λ₂₄[ΔΣ(x_n*)]) Ψ_n, subject to TCT ≡ VERIFIED and L_k ∈ ℚ²⁴.
+
+      The sketch's four observations are **kept**:
+
+      * **Composition order.** Read ΔΣ_{x*} as an update rule on the carrier. Then one tick is
+        R_gate ∘ snap ∘ ΔΣ_{x*}.
+      * **Layer tracking.** The layer must be an output of the step.
+      * **The TCT guard.** The spec does not say what happens when TCT fails.
+      * **Snap resolution.** "Nearest" is ambiguous on ties.
+
+      One repair:
+
+      **[Correction]** The carrier lives in ℚ²⁴, so an irrational target x* is never *held* by the
+      carrier. The ΔΣ modulator produces a sequence of rational carriers whose running average tends to
+      x*. "Irrational" describes the target of the process, not any state. This matters in §6.2.
+
+      ### 2.1 An improved form (kept, with one semantic fix)
+
+        ⟨Ψ_{n+1}, k_{n+1}⟩ = let Ψ̂ = ΔΣ_{x*}(Ψ_n); let ⟨Ψ̄, k'⟩ = snap(Ψ̂, k_n) in
+                  if TCT(Ψ_n, Ψ̂, Ψ̄) then ⟨R_gate(Ψ̄), k'⟩ else ⟨Ψ_n, k_n⟩.
+
+      Points 1, 2 and 4 of the sketch (the state is a pair; the composition is explicit; the snap is
+      parameterised by the layer) are kept. This is exactly `Machine.step` in `MasterStep.lean`
+      (FORMAL definitions): the structure `Machine C K` has fields `modulate`, `snap : C → K → C × K`,
+      `gate` and `tct`.
+
+      **[Correction to point 3: "TCT failure leaves the state unchanged".]** With a fixed target this
+      is a **deadlock**. A rejected state is rejected on every later tick, so the run never moves again
+      (`Machine.step_of_reject`, `Machine.iterate_of_reject`, FORMAL). Roll-back alone therefore
+      cannot be the semantics. **Recommended (PROPOSAL):**
+
+      * **on rejection, escalate the layer and retry;**
+      * if the top layer still rejects, report a terminal **stall**.
+
+      This turns the sketch's "stall is a meaningful event" into a terminal, reportable state.
+
+      ### 2.2 The Lean form
+
+      The sketch's snippet is replaced by the compiled declarations:
+
+      * `GLM.Escalation.Machine` — the four ingredients of a tick;
+      * `Machine.step` — one tick, exactly the formula of §2.1;
+      * `Machine.accepts` — whether TCT accepts at a state.
+
+      Making the layer part of the state (`C × K`) makes escalation visible in the type, as the sketch
+      intended.
+
+      ### 2.3 What the improved form reveals
+
+      * **The trajectory is a sequence of (carrier, layer) states.** Kept.
+      * **A TCT failure stalls the run.** Corrected: under roll-back it stalls **for ever**
+        (`iterate_of_reject`). See §2.1.
+      * **The snap is the only place the layer can change.** Kept and proved: if the snap never changes
+        the layer, no tick does (`Machine.layer_preserved_of_snap`, `Machine.layer_preserved_iterate`,
+        FORMAL).
+
+      ---
+    subsections:
+      - 2.1 An improved form (kept, with one semantic fix)
+      - 2.2 The Lean form
+      - 2.3 What the improved form reveals
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 3. The five layers and their modular escapements
+    anchor: "3-the-five-layers-and-their-modular-escapements"
+    body: |
+      The spec's order is Substrate ≺ Integer ≺ Rational ≺ Griess ≺ Universal. Here L' ≺ L means
+      "every distinction made by L is also made by L'" (`View.Refines`, `LayerStack.lean`).
+
+      **[Correction]** The sketch proposed that the layers *are* the residue filters mod 2, 4, 8, 144,
+      256, and that their divisibility forces the order. Both parts fail:
+
+      * For residue views, mod m' refines mod m **iff m ∣ m'** (`residue_refines_iff`, FORMAL).
+        * 2 ∣ 4 ∣ 8, so the first three are a chain.
+        * 8 ∣ 144 (144 = 8·18), so mod 144 **does** refine mod 8 arithmetically
+          (`eight_dvd_144`, `residue_144_refines_8`, FORMAL). The sketch said "8 ∤ 144".
+        * 144 ∤ 256 (9 ∤ 256), so mod 256 does **not** refine mod 144
+          (`residue_256_not_refines_144`, FORMAL). The common refinement of mod 144 and mod 256 is
+          mod 2304 = lcm(144, 256) (`residue_pair_indist_iff`, `lcm_144_256`).
+      * The sketch's Rational layer perceives the **identity** (lossless). A view refines the identity
+        only if it is injective (`View.refines_identity_iff`), and no residue view is injective
+        (`residue_not_refines_identity`, FORMAL). So no residue layer can sit above the Rational layer
+        in the order.
+
+      ### 3.1 The layer correspondence (corrected)
+
+      The shipped GLM (`LayerChain.lean` in `glm_repo.zip`, REPORTED) assigns layers by **what each
+      layer reads**. The stack is **cumulative**: each layer keeps the reading of the one below.
+
+      | Layer | Reads (two carriers look the same when …) | Lossless? | Meaningful modulus |
+      |---|---|---|---|
+      | Substrate | the 24 parity bits ⌊cᵢ⌋ mod 2 agree | no | 2 (parity), exactly |
+      | Integer | parity bits **and** the seven SI7 exponents agree | no | none |
+      | Rational | the exact rational carriers agree | yes | none (identity) |
+      | Griess | carrier **and** 2A axes agree | yes | none |
+      | Universal | every lower reading agrees | yes | none |
+
+      The substrate's error-correcting structure is the 12-bit **Golay syndrome** (4096 cosets of the
+      extended Golay code), not a residue filter (§5).
+
+      **[Correction to the table rows of the sketch]**
+
+      * *Integer = "q mod 4", signed residue.* The sketch's mod-4 readings are inconsistent (§4.1). A
+        residue of ⌊q⌋ is not "integer arithmetic". The shipped Integer layer adds the SI7 exponents to
+        the parity bits instead.
+      * *Rational = "mod 8 = sign + exponent + mantissa".* This contradicts "perceive = identity" in the
+        same row. Three bits hold eight values, which is lossy. A mini-float is a different reading
+        (§4.1).
+      * *Griess = "mod 144 = 12 × 12 coordinate split from the Coxeter plane of the Monster".*
+        Not supported:
+        * 144 = 12·12 is a product, while a 12 + 12 split of 24 coordinates is a sum;
+        * a Coxeter plane (of a Coxeter element of a reflection group) is 2-dimensional;
+        * the Monster is not a reflection group, and no "12 + 12 Coxeter split" of the Griess algebra
+          is known to us.
+
+        The numbers 24 = 2·12 do appear in the Golay code (length 24, dimension 12), which the
+        substrate already uses.
+      * *Universal = "mod 256 = bytes".* Byte addressing is a storage format, not a perception of the
+        carrier. In the shipped stack the Universal layer is the join of all lower readings.
+
+      ### 3.2 Why this order? (corrected)
+
+      * **Substrate ≺ Integer ≺ Rational** holds because each reading includes the previous one
+        (cumulative pairs). This is *resolution* refinement: more distinctions.
+      * **Rational ≺ Griess ≺ Universal** also holds by construction. These layers are already lossless,
+        so they add **structure** (2A axes, the Griess product, observables), not distinctions. The GLM's
+        register audit shows this: 1,040 entries resolve into 415 → 544 → 757 → 757 → 757 classes
+        (REPORTED), and 757 is the number of distinct carriers.
+
+      **Improvement 1 (corrected).** The two regimes are *resolution refinement* (Substrate → Integer
+      → Rational) and *structural enrichment* (Rational → Griess → Universal). The sketch put the boundary
+      in the right place, at the Rational layer, but for the wrong reason ("arithmetic vs geometric
+      moduli").
+
+      ### 3.3 The layer stack diagram (corrected)
+
+      ```mermaid
+      graph TB
+          subgraph "Structural enrichment (lossless; adds operations, not distinctions)"
+              U["Universal<br/>join of all readings"]
+              G["Griess<br/>carrier + 2A axes"]
+              R2["Rational<br/>exact carrier (identity)"]
+          end
+          subgraph "Resolution refinement (lossy readings)"
+              R1["Integer<br/>parity bits + SI7 exponents"]
+              S["Substrate<br/>24 parity bits; Golay syndrome"]
+          end
+          U -->|"adds structure"| G
+          G -->|"adds structure"| R2
+          R2 -->|"refines"| R1
+          R1 -->|"refines"| S
+      ```
+
+      ### 3.4 What each layer can compute
+
+      By the GLM's `descends_iff_congruent`, an operation descends to a layer iff it is congruent there.
+      In this package, `View.Congruent` is the predicate and `View.congruent_of_injective` (FORMAL) says
+      **every** operation is congruent at a lossless layer.
+
+      | Layer | Descends | Fails |
+      |---|---|---|
+      | Substrate | XOR/AND on parity bits | ℚ-addition (half-unit: 1/2 + 1/2), one Rule 30 step on rows (`step_not_congruent_parity`, FORMAL) |
+      | Integer | whatever is determined by parity + SI7 exponents | ℚ-addition in general |
+      | Rational | every operation on ℚ²⁴ (lossless) | — |
+      | Griess | every operation on ℚ²⁴, plus the Griess-layer observables | — |
+      | Universal | every operation (lossless) | — |
+
+      **[Correction]** The sketch said irrational targets need the Griess layer and that "the
+      irrational is treated as a process over the 12+12 split". In fact no carrier is irrational
+      (§2). A ΔΣ run tracking √2 is a rational-carrier process, so it lives at the Rational layer. The
+      Griess layer adds structure, not the ability to hold irrationals.
+
+      ### 3.5 The Lean formalisation
+
+      Replaced by the compiled `LayerStack.lean` (FORMAL):
+
+      * `View C` — a reading `perceive : C → V`;
+      * `View.Indist`, `View.Refines`, `View.Congruent`;
+      * `View.residue m` on ℤ, `floorResidue m` and `scaledResidue m` on ℚ.
+
+      **[Correction]** The sketch's key claim was "`modulus` is the smallest m such that `perceive`
+      factors through q mod m". It has no meaning for the lossless layers: the identity factors through
+      no residue map. It is true only for the substrate (m = 2).
+
+      ---
+    subsections:
+      - 3.1 The layer correspondence (corrected)
+      - 3.2 Why this order? (corrected)
+      - 3.3 The layer stack diagram (corrected)
+      - 3.4 What each layer can compute
+      - 3.5 The Lean formalisation
+    tables:
+      - header:
+          - Layer
+          - Reads (two carriers look the same when …)
+          - Lossless?
+          - Meaningful modulus
+        rows:
+          - - Substrate
+            - the 24 parity bits ⌊cᵢ⌋ mod 2 agree
+            - "no"
+            - 2 (parity), exactly
+          - - Integer
+            - parity bits **and** the seven SI7 exponents agree
+            - "no"
+            - none
+          - - Rational
+            - the exact rational carriers agree
+            - "yes"
+            - none (identity)
+          - - Griess
+            - carrier **and** 2A axes agree
+            - "yes"
+            - none
+          - - Universal
+            - every lower reading agrees
+            - "yes"
+            - none
+      - header:
+          - Layer
+          - Descends
+          - Fails
+        rows:
+          - - Substrate
+            - XOR/AND on parity bits
+            - "ℚ-addition (half-unit: 1/2 + 1/2), one Rule 30 step on rows (`step_not_congruent_parity`, FORMAL)"
+          - - Integer
+            - whatever is determined by parity + SI7 exponents
+            - ℚ-addition in general
+          - - Rational
+            - every operation on ℚ²⁴ (lossless)
+            - —
+          - - Griess
+            - every operation on ℚ²⁴, plus the Griess-layer observables
+            - —
+          - - Universal
+            - every operation (lossless)
+            - —
+    links: []
+    code_blocks: 1
+  - heading: "4. Escalation mechanics: from binary to graded"
+    anchor: "4-escalation-mechanics-from-binary-to-graded"
+    body: |
+      The trigger is kept: escalate when two carriers are indistinguishable at L_k but their results
+      under the operation are not.
+
+      ### 4.1 Graded escalation (corrected)
+
+      The correct statement (FORMAL, `MasterStep.lean`):
+
+        escalate(cong, k) = the least layer j ≥ k at which `cong j` holds, if there is one.
+
+      * `escalate_spec`: the returned layer resolves, and no layer between k and it does.
+      * `escalate_eq_none_iff`: escalation fails exactly when no layer at or above k resolves.
+      * `escalate_isSome_of_top`: if the top layer resolves, escalation always succeeds. A lossless top
+        layer always resolves.
+
+      Skipping layers is legitimate; it is just this minimum.
+
+      **[Correction: the half-unit walk-through.]**
+
+      * **mod 2:** correct, it fails. ⌊1/2⌋ mod 2 = 0 and 0 + 0 = 0, but ⌊1⌋ mod 2 = 1.
+      * **mod 4:** the sketch's line is an **arithmetic error**. It mixes two readings:
+        * the floor residue ⌊q⌋ mod 4 gives 0, 0 and 1, so it fails;
+        * the scaled reading ⌊4q⌋ mod 4 gives 2 and 2, and ⌊4·1⌋ mod 4 = 0 = 2 + 2 mod 4, so it is
+          **consistent** on this example (`scaled_four_half_consistent`, FORMAL).
+
+        The sketch wrote "perceive₄(1) = 1", which uses the first reading on the result and the second
+        on the operands.
+      * **mod 8:** no floor-residue filter resolves the half-unit sum, for any m ≥ 2
+        (`floorResidue_add_not_congruent`). In particular none of 2, 4, 8, 144, 256 does
+        (`five_floor_filters_fail`, FORMAL). The sketch's "mini-float" is not a residue mod 8. It is a
+        different, lossy reading: with 3 bits, 1/3 is not representable and sums must round.
+
+      So on the sketch's own five-filter stack, escalation from the substrate returns **none**. In the
+      shipped GLM the half-unit sum is resolved because the Rational layer reads the carrier exactly
+      (the GLM's own `substrate_addition_not_congruent` / `glmRationalLayer_congruentOn`, REPORTED).
+
+      ### 4.2 The escalation flow (corrected)
+
+      ```mermaid
+      stateDiagram-v2
+          [*] --> Substrate
+          Substrate --> Integer: not congruent at Substrate,\ncongruent at Integer
+          Substrate --> Rational: not congruent at Substrate or Integer\n(e.g. 1/2 + 1/2)
+          Integer --> Rational: not congruent at Integer
+          Rational --> Rational: every operation is congruent\n(lossless) — escalation stops here
+          Rational --> Griess: only to use Griess structure\n(an enrichment request, not a congruence failure)
+          Griess --> Universal: enrichment request
+      ```
+
+      ### 4.3 The half-unit case study (corrected)
+
+      Path: Substrate (fails) → Integer (fails: parity + SI7 exponents do not determine 1/2 + 1/2) →
+      Rational (succeeds, lossless). Graded escalation goes straight to Rational because Rational is the
+      least resolving layer.
+
+      **[Correction to Improvement 2: "graded escalation distinguishes kinds of failure".]** The
+      failure at mod 2 and the failure at mod 4 are the same failure: floor does not commute with
+      addition. No residue filter removes it; only a lossless reading does.
+
+      Also, **congruence is not monotone under refinement** (`congruent_not_monotone`, FORMAL): a
+      coarse layer can be congruent where a finer one is not. So escalation cannot be a threshold search
+      on a "kind" detector. Each layer must be tested on its own, which is what `escalate` does.
+
+      ### 4.4 The Lean formalisation
+
+      Replaced by `escalate` and its three theorems (§4.1).
+
+      **[Correction]** The sketch's `graded_escalation_correct` (every failure escalates to a
+      resolving layer above) is **false** on its own five-filter stack (`graded_escalation_claim_false`,
+      FORMAL). Its correct form is `escalate_isSome_of_top`: escalation succeeds whenever the top layer
+      resolves.
+
+      ---
+    subsections:
+      - 4.1 Graded escalation (corrected)
+      - 4.2 The escalation flow (corrected)
+      - 4.3 The half-unit case study (corrected)
+      - 4.4 The Lean formalisation
+    tables: []
+    links: []
+    code_blocks: 1
+  - heading: 5. Complete syndrome decoding at the deep-hole boundary
+    anchor: "5-complete-syndrome-decoding-at-the-deep-hole-boundary"
+    body: |
+      ### 5.1 The deep-hole geometry of Λ₂₄
+
+      Kept (CLASSICAL, scale with minimal norm 4):
+
+      * Λ₂₄ is the unique even unimodular lattice in dimension 24 with no roots;
+      * it has 196,560 minimal vectors (norm 4);
+      * its covering radius is √2;
+      * its deep holes, the points at distance √2 from the lattice, fall into **23 types** under the
+        automorphisms of Λ₂₄;
+      * these 23 types correspond one-to-one to the 23 Niemeier lattices *with roots*. The type of a
+        deep hole is read from the extended Dynkin diagram of its nearest lattice points (Conway–Parker–
+        Sloane).
+
+      **[Correction: the list.]** The sketch lists 22 root systems and calls them 23. **E₆⁴ is
+      missing**, also from its `DeepHoleType`. The correct list is in the table below.
+
+      The root system of a Niemeier lattice with roots is an ADE system of rank 24 whose components all
+      have the same Coxeter number h. `Niemeier.lean` (FORMAL) checks the combinatorial side:
+
+      * exactly 23 ADE multisets satisfy these conditions (`rank_cox_classification`,
+        `niemeier23_valid`, `niemeier23_card`, `niemeier23_nodup`);
+      * the sketch's 22 are among them, and the only one missing is E₆⁴ (`sketch22_sub`,
+        `niemeier23_diff_sketch22`).
+
+      | h | root system(s) | h | root system(s) |
+      |---|---|---|---|
+      | 2 | A₁²⁴ | 13 | A₁₂² |
+      | 3 | A₂¹² | 14 | D₈³ |
+      | 4 | A₃⁸ | 16 | A₁₅ D₉ |
+      | 5 | A₄⁶ | 18 | A₁₇ E₇, D₁₀ E₇² |
+      | 6 | A₅⁴ D₄, D₄⁶ | 22 | D₁₂² |
+      | 7 | A₆⁴ | 25 | A₂₄ |
+      | 8 | A₇² D₅² | 30 | D₁₆ E₈, E₈³ |
+      | 9 | A₈³ | 46 | D₂₄ |
+      | 10 | A₉² D₆, D₆⁴ | | |
+      | 12 | A₁₁ D₇ E₆, **E₆⁴** | | |
+
+      **[Correction: "plus the shallow hole corresponding to Λ₂₄ itself".]** This is wrong. Λ₂₄ has no
+      roots and corresponds to no hole. Holes of Λ₂₄ that are not deep (shallow holes) are a separate,
+      larger classification (CLASSICAL, not checked here). The sketch's radial figure should drop the
+      grey "shallow" node and add E₆⁴.
+
+      ### 5.2 Why nearest-vector decoding fails at ties (corrected)
+
+      The snapping-instability problem is real. The proposed fix is not.
+
+      **[Correction]** A fixed coset-leader table (a "complete syndrome decoder") makes the snap
+      **deterministic**: the same input always gives the same output. It does **not** make it
+      **stable**. No choice of leaders is continuous (`no_continuous_leader`, FORMAL). Take an
+      integer-valued linear functional φ reading a lattice vector v as 1. Then
+      t ↦ φ(ℓ(tv) − tv) is integer-valued and drops by 1 between t = 0 and t = 1, so it must jump.
+
+      Jumps happen at **every** Voronoi wall, not only at deep holes. Deep holes are particular Voronoi
+      vertices, where many walls meet. The sketch's sentence "the deep holes are exactly the points where
+      the section is discontinuous" should read: "the section is discontinuous on the Voronoi walls; the
+      deep holes are the worst of these points, where many nearest lattice points tie."
+
+      **At the substrate**, the GLM's own Golay code shows exactly where ties occur (CERT,
+      `GolayTies.lean`):
+
+      * every 24-bit word has either exactly one codeword within distance 3, or none within distance 3
+        and **exactly six** at distance 4 (`golay_decoding_dichotomy`);
+      * the 4096 cosets split 1, 24, 276, 2024, 1771 by distance 0–4 (`golay_coset_census`), so the
+        covering radius is 4 (`golay_covering_radius`);
+      * errors of weight ≥ 5 are never decoded correctly by any nearest-codeword rule
+        (`golay_heavy_error_never_decoded`).
+
+      The right response to a tie is to **report** it. The GLM's `golay_decode.decode_complete` already
+      returns all six leaders with status `ambiguous` (REPORTED).
+
+      ### 5.3 The residue filters as syndrome selectors — refuted
+
+      **[Correction]** The sketch defines syn_m(v) = (v mod m) + Λ^{(m)} and claims that the quotient
+      ℝ²⁴/(Λ₂₄ + mℤ²⁴) is a finite group of order m²⁴ and that the five residues select deep-hole types.
+      Work in Conway's integer coordinates, √8·Λ₂₄ = `LeechZ` ⊂ ℤ²⁴, built from the GLM's own Golay
+      code (`LeechResidue.lean`).
+
+      * **LeechZ + mℤ²⁴ = LeechZ whenever 8 ∣ m** (`Leech.leechZ_add_smul`, FORMAL). This covers
+        m = 8, 144, 256 (`Leech.eight_dvd_sketch_moduli`). Two integer vectors that agree mod m differ
+        by a lattice vector (`Leech.leechZ_sub_of_modEq`, FORMAL). So the "syndrome mod m" is the
+        lattice coset itself, the **same** for 8, 144 and 256: three of the five filters are one
+        filter.
+      * The quotient ℝ²⁴/Λ₂₄ is a 24-dimensional **torus**, not a finite group. On integer vectors the
+        index is not m²⁴ either. For m = 2 it is 2²³, because every lattice vector has all coordinates of
+        the same parity (part of the definition of `LeechZ`), so the lattice reduces mod 2 to
+        {0, (1,…,1)}.
+      * Sanity checks that the coordinates are right (`Leech.leechZ_examples`, `Leech.leechZ_octad`,
+        `decide`): 8eᵢ, (4,4,0,…), (−3,1²³) and an octad of 2s are lattice vectors; eᵢ is not.
+      * Deep-hole types are invariants of the automorphism group of Λ₂₄. A coordinate residue has no
+        reason to be one, and no computation supports the assignments "mod 2 ↔ A₁²⁴", "mod 4 ↔ A₂¹², A₃⁸",
+        and so on.
+
+      **What classifies deep holes**, correctly:
+
+      * *Mathematically:* the extended Dynkin diagram of the hole's nearest lattice points. In
+        summary form this is the Coxeter number h of the table above, with a further invariant needed in
+        the five cases h = 6, 10, 12, 18, 30, where two root systems share h.
+      * *In the shipped GLM:* `deep_holes.classify_carrier` walks to the hole, certifies its vertex set
+        and reads the diagram (REPORTED).
+
+      ### 5.4 The decoding flow (corrected)
+
+      ```mermaid
+      flowchart TD
+          V["Input carrier (from ΔΣ)"] --> D["Complete decode at the current layer:<br/>list ALL nearest points"]
+          D --> U{"how many?"}
+          U -->|"one"| OK["status = unique<br/>commit (subject to TCT)"]
+          U -->|"k ≥ 2 (tie)"| T["status = tie(k)<br/>escalate the reading (§4)"]
+          U -->|"none within radius"| B["status = beyond-radius<br/>detect, do not guess"]
+          T --> E{"a layer resolves?"}
+          E -->|"yes"| OK
+          E -->|"no (top reached)"| ST["status = stall (terminal)"]
+      ```
+
+      ### 5.5 The connection to the 23 Niemeier lattices (corrected)
+
+      The correspondence of deep-hole types and Niemeier lattices with roots is CLASSICAL.
+
+      **[Correction]** The sketch also claimed that "A-types are arithmetic and need mod 2, 4, 8; D-types
+      need mod 144; E-types need mod 256", so that "the filters are root-system classifiers". This is
+      not supported, and §5.3 shows the higher filters are blind. The classifier that works is the
+      diagram, or h with a tie-break (§5.3). It is not a residue cascade.
+
+      ### 5.6 The Lean formalisation
+
+      The sketch's `classify_deep_hole` cascade has two defects:
+
+      * its `DeepHoleType` lacks `E6_4`;
+      * it falls back to `E8_3` whenever nothing matches, which would silently label unclassified
+        inputs.
+
+      The compiled replacements are `Niemeier.niemeier23` (the 23 types), `rank_cox_classification`,
+      and `LeechResidue.lean` for the syndromes.
+
+      **[Correction: "Conjecture (cascade consistency)".]** The conjecture is **moot**. The mod-8, 144
+      and 256 syndromes are identical (§5.3), so the cascade's last three stages return the same
+      information. "Consistency" holds trivially for them and they cannot distinguish types.
+
+      ### 5.7 What this reveals about the snap (corrected)
+
+      1. **Stability.** False as claimed. The snap is deterministic, not stable (§5.2).
+      2. **Layer-awareness.** Kept, and strengthened. The snap returns (point, status, layer) with
+         status ∈ {unique, tie(k), beyond-radius}.
+      3. **Root-system sensitivity.** Not via residues. Via the hole's diagram, yes.
+
+      **Improvement 3 (corrected).** "The snap is the layer selection" holds in this form: the
+      layer is `escalate` applied to the predicate "the reading at this layer gives a unique answer".
+      A tie is an escalation trigger, not something a table should hide.
+
+      ---
+    subsections:
+      - 5.1 The deep-hole geometry of Λ₂₄
+      - 5.2 Why nearest-vector decoding fails at ties (corrected)
+      - 5.3 The residue filters as syndrome selectors — refuted
+      - 5.4 The decoding flow (corrected)
+      - 5.5 The connection to the 23 Niemeier lattices (corrected)
+      - 5.6 The Lean formalisation
+      - 5.7 What this reveals about the snap (corrected)
+    tables:
+      - header:
+          - h
+          - root system(s)
+          - h
+          - root system(s)
+        rows:
+          - - "2"
+            - A₁²⁴
+            - "13"
+            - A₁₂²
+          - - "3"
+            - A₂¹²
+            - "14"
+            - D₈³
+          - - "4"
+            - A₃⁸
+            - "16"
+            - A₁₅ D₉
+          - - "5"
+            - A₄⁶
+            - "18"
+            - A₁₇ E₇, D₁₀ E₇²
+          - - "6"
+            - A₅⁴ D₄, D₄⁶
+            - "22"
+            - D₁₂²
+          - - "7"
+            - A₆⁴
+            - "25"
+            - A₂₄
+          - - "8"
+            - A₇² D₅²
+            - "30"
+            - D₁₆ E₈, E₈³
+          - - "9"
+            - A₈³
+            - "46"
+            - D₂₄
+          - - "10"
+            - A₉² D₆, D₆⁴
+            - ""
+            - ""
+          - - "12"
+            - A₁₁ D₇ E₆, **E₆⁴**
+            - ""
+            - ""
+    links: []
+    code_blocks: 1
+  - heading: 6. The unified master equation (corrected)
+    anchor: "6-the-unified-master-equation-corrected"
+    body: |2
+        ⟨Ψ_{n+1}, k_{n+1}⟩ = if TCT(Ψ_n, Ψ̂, Ψ̄) then ⟨R_gate(Ψ̄), k'⟩ else REJECT(Ψ_n, k_n)
+
+      where
+
+      * Ψ̂ = ΔΣ_{x*}(Ψ_n);
+      * ⟨Ψ̄, status, k'⟩ = snap(Ψ̂, k_n), with k' = escalate("unique at layer j", k_n);
+      * REJECT = escalate-and-retry, or a terminal stall at the top layer (§2.1).
+
+      The sketch's `classify(syn₂, syn₄, syn₈, syn₁₄₄, syn₂₅₆)` is removed (§5.3).
+
+      ### 6.1 What the unified equation reveals (corrected)
+
+      * **The layer is an output of the snap.** Kept. If the snap ignores the incoming layer, two
+        accepted ticks from the same carrier land on the same layer (`Machine.layer_of_input`, FORMAL).
+        Whether the snap *should* ignore the incoming layer is a PROPOSAL. It conflicts with the arrow
+        below.
+      * **"TCT failure rolls back the escalation".** Corrected: roll-back deadlocks
+        (`iterate_of_reject`). Use escalate-on-reject.
+      * **Filters internal to the snap.** Replaced: expose the **status** (unique / tie / beyond) as
+        the diagnostic observable. This answers the sketch's own request in §8.2.
+
+      ### 6.2 The trajectory of a computation (corrected)
+
+      **[Correction]** The sketch's example table cannot occur:
+
+      * the rows (√2, 0, …) and (√2, π, …) are not ℚ²⁴ carriers;
+      * the deep-hole labels (A₄⁶ for (1/2, 0, …), D₁₆E₈ for √2, …) were not computed from anything;
+      * a rational carrier such as (1, 0, …, 0) is generally not at a deep hole at all.
+
+      A correct trajectory, using the shipped readings and the half-unit example:
+
+      | Tick | Carrier | Layer | Snap status | Reason |
+      |---|---|---|---|---|
+      | 0 | integer carrier (1, 0, …, 0) | Substrate | unique | parity reading suffices for the requested operation |
+      | 1 | half-unit operands (1/2, …) with operation + | Rational | unique | Substrate and Integer are not congruent for +; Rational is the least resolving layer |
+      | 2 | ΔΣ step towards target √2 (rational carrier) | Rational | unique | the target is irrational, the carrier is not |
+      | 3 | TCT rejects | Rational → Griess | — | escalate-on-reject (PROPOSAL) |
+      | 4 | TCT rejects at the top layer | Universal | stall | terminal, reported |
+
+      **The arrow (the owner's Wobble/Observer idea).** Suppose the snap only escalates. Then along
+      every run the layer index is non-decreasing and, in a finite stack, eventually constant
+      (`Machine.layer_monotone`, `Machine.layer_eventually_const`, FORMAL). So the layer gives the run a
+      **direction** and names where it settles. This is a precise version of "which way the run is
+      converging". The sketch's oscillating trajectory (up and down) gives no arrow. One must choose:
+
+      * a **monotone snap**, which gives an arrow; or
+      * a **layer as a pure function of the input**, which gives oscillation and no arrow.
+
+      The Rule 30-level Wobble/read-angle results (`../Rule30/Wobble*.lean`, `ReadAngle.lean`,
+      `Perspective.lean`) give a separate, finer direction on the space-time diagram.
+
+      ### 6.3 The Lean formalisation
+
+      Replaced by `Machine.step` together with `escalate`.
+
+      **[Correction]** The sketch's `layer_for_hole_type` table was said to be "fixed by the
+      root-system structure of the Niemeier lattices". It is not: it is an arbitrary assignment, and it
+      omits E₆⁴.
+
+      ---
+    subsections:
+      - 6.1 What the unified equation reveals (corrected)
+      - 6.2 The trajectory of a computation (corrected)
+      - 6.3 The Lean formalisation
+    tables:
+      - header:
+          - Tick
+          - Carrier
+          - Layer
+          - Snap status
+          - Reason
+        rows:
+          - - "0"
+            - integer carrier (1, 0, …, 0)
+            - Substrate
+            - unique
+            - parity reading suffices for the requested operation
+          - - "1"
+            - half-unit operands (1/2, …) with operation +
+            - Rational
+            - unique
+            - Substrate and Integer are not congruent for +; Rational is the least resolving layer
+          - - "2"
+            - ΔΣ step towards target √2 (rational carrier)
+            - Rational
+            - unique
+            - the target is irrational, the carrier is not
+          - - "3"
+            - TCT rejects
+            - Rational → Griess
+            - —
+            - escalate-on-reject (PROPOSAL)
+          - - "4"
+            - TCT rejects at the top layer
+            - Universal
+            - stall
+            - terminal, reported
+    links: []
+    code_blocks: 0
+  - heading: 7. Real-system correspondences
+    anchor: "7-real-system-correspondences"
+    body: |
+      These are kept as **analogies**. Corrections of fact:
+
+      * **7.1 Floating point.** The five IEEE 754 status flags (invalid, divide-by-zero, overflow,
+        underflow, inexact) are correctly listed. Note that IEEE 754 does not "escalate" integer overflow
+        to floating point; integer and floating units are separate. The analogy is best for the
+        *inexact* flag, which signals "this operation did not descend exactly to this representation".
+        That is precisely a congruence failure.
+      * **7.2 CPU rings.** A system call goes from ring 3 directly to ring 0; it does not climb one
+        ring at a time. Mainstream operating systems use only rings 0 and 3. The analogy with
+        "escalate to the least layer that resolves" is therefore closer than the sketch said.
+      * **7.3 OSI.** Kept as the weakest structural analogy: the layers wrap one another and do not
+        refine one another.
+      * **7.4 Type systems — made exact where possible.** A layer's indistinguishability is an
+        equivalence relation. "op descends to the layer" means exactly that op lifts to the quotient
+        (`Quotient.lift₂` / `Quotient.map₂`). `descends_iff_congruent` is the universal property of the
+        quotient. The sketch's mapping "mod 144 = algebraic numbers?, mod 256 = byte-addressable?" is
+        removed (§3).
+      * **7.5 Database isolation.** Kept as an analogy.
+
+      **Improvement 4/5 (corrected).** Formalise layers as quotients (setoids) and operations as maps
+      that lift. That is exact. "Universes `Type_k`" is a different notion (size, not resolution) and
+      should not be used for layers.
+
+      ---
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 8. Improvements and open questions (status after checking)
+    anchor: "8-improvements-and-open-questions-status-after-checking"
+    body: |
+      ### 8.1 The five improvements
+
+      | # | Improvement | Status |
+      |---|---|---|
+      | 1 | Two regimes of refinement | **kept, re-founded**: resolution refinement vs structural enrichment (§3.2) |
+      | 2 | Graded escalation | **kept as `escalate`** (least resolving layer, FORMAL); the five-filter version is false (§4) |
+      | 3 | The snap is the layer selection | **kept in corrected form**: the snap returns a status, and ties trigger `escalate` (§5.7) |
+      | 4 | Stratified type system | **made exact as quotients** (§7.4) |
+      | 5 | Unified master equation | **compiled** (`Machine.step`); roll-back replaced by escalate-on-reject (§2.1, §6) |
+
+      ### 8.2 Open questions — answered or updated
+
+      * **Cascade consistency.** Answered: moot. Three of the five syndromes are identical (§5.3).
+      * **Justification of the geometric moduli (144, 256).** Answered negatively. 144 refines 8, 256
+        does not refine 144, and neither refines the lossless Rational layer (§3).
+      * **TCT semantics.** Answered in part: pure roll-back deadlocks (FORMAL). Escalate-on-reject with a
+        terminal stall is the recommended semantics (PROPOSAL).
+      * **Type-system formalisation.** Answered: quotients and lifts (§7.4).
+      * **Deep-hole type as a runtime observable.** Updated: expose the snap **status**. The deep-hole
+        type itself is computed by the GLM's `classify_carrier` (REPORTED).
+      * **Real-system identification.** Remains analogy, except type systems / quotients (§7.4).
+      * **Still open:** whether a monotone (escalate-only) snap is compatible with everything the GLM
+        needs (§6.2), and how the layer arrow relates to the Rule 30 read-angle arrow. All three Rule 30
+        prize problems remain **open**.
+
+      ### 8.3 What this edition is
+
+      This is the owner's exploration with its errors fixed. Every remaining mathematical claim is
+      FORMAL, CERT, CLASSICAL (cited), REPORTED (from the GLM's own repository), or marked PROPOSAL.
+      Its value is that the GLM can take back the parts that are now solid:
+
+      * the (carrier, layer) state;
+      * `escalate`, with its correctness, minimality and termination;
+      * the deadlock warning;
+      * the tie/status snap;
+      * the arrow theorem;
+      * the correct 23-type list.
+
+      It should not take back the residue cascade, which is now refuted.
+    subsections:
+      - 8.1 The five improvements
+      - 8.2 Open questions — answered or updated
+      - 8.3 What this edition is
+    tables:
+      - header:
+          - "#"
+          - Improvement
+          - Status
+        rows:
+          - - "1"
+            - Two regimes of refinement
+            - "**kept, re-founded**: resolution refinement vs structural enrichment (§3.2)"
+          - - "2"
+            - Graded escalation
+            - "**kept as `escalate`** (least resolving layer, FORMAL); the five-filter version is false (§4)"
+          - - "3"
+            - The snap is the layer selection
+            - "**kept in corrected form**: the snap returns a status, and ties trigger `escalate` (§5.7)"
+          - - "4"
+            - Stratified type system
+            - "**made exact as quotients** (§7.4)"
+          - - "5"
+            - Unified master equation
+            - "**compiled** (`Machine.step`); roll-back replaced by escalate-on-reject (§2.1, §6)"
+    links: []
+    code_blocks: 0
+derived:
+  links: []
+  lean_files:
+    - GolayTies.lean
+    - LayerChain.lean
+    - LayerStack.lean
+    - LeechResidue.lean
+    - MasterStep.lean
+    - Niemeier.lean
+    - Perspective.lean
+    - ReadAngle.lean
+  lean_modules: []
+  python_modules:
+    - tools/tier0_check.py
+  commands: []
+  word_count: 4870
+  line_count: 609

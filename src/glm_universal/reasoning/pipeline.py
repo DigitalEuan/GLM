@@ -52,6 +52,8 @@ may import, so a report subject dispatching to it would break the isolation the
 sandbox exists to provide.  Such a row reaches "wired" and "verified" by
 declaration, is reported as unwired by design, and carries its recomputation
 guarantee through the generated blocks of its study instead.
+
+*Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
 """
 
 from __future__ import annotations
@@ -449,7 +451,7 @@ def verify_commands() -> Tuple[str, ...]:
     """The commands that actually run column 3 for every wired subject."""
     rows = [stage_report(row) for row in REGISTRY]
     return tuple(
-        f'PYTHONPATH=. python3 GLM.py -q "report {r["subject"]}" --verify-tct'
+        f'PYTHONPATH=src python3 src/GLM.py -q "report {r["subject"]}" --verify-tct'
         for r in rows if r["stages"]["wired"])
 
 

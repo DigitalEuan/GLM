@@ -13,8 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
-[`../../README.md`](../../README.md)
+[`../../README.md`](../../../README.md)
 
 **Status: implemented, current.** 7 modules, one derived data directory, no
 third-party dependency, and no float anywhere: every rate is a `Fraction` and
@@ -44,13 +46,13 @@ checked** rather than maintained by memory.
 
 ```bash
 cd /path/to/GLM                       # repo root, where GLM.py lives
-PYTHONPATH=. python3 -m glm_universal.corpus            # the report
-PYTHONPATH=. python3 -m glm_universal.corpus --check    # exit 1 on any drift
-PYTHONPATH=. python3 -m glm_universal.corpus --check --all  # the full pass, ignoring the stored verdict
-PYTHONPATH=. python3 -m glm_universal.corpus --refresh  # rebuild everything derived, in order
-PYTHONPATH=. python3 -m glm_universal.corpus --write    # regenerate the blocks
-PYTHONPATH=. python3 -m glm_universal.corpus --remeasure  # re-take the Lean measurements
-PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+PYTHONPATH=src python3 -m glm_universal.corpus            # the report
+PYTHONPATH=src python3 -m glm_universal.corpus --check    # exit 1 on any drift
+PYTHONPATH=src python3 -m glm_universal.corpus --check --all  # the full pass, ignoring the stored verdict
+PYTHONPATH=src python3 -m glm_universal.corpus --refresh  # rebuild everything derived, in order
+PYTHONPATH=src python3 -m glm_universal.corpus --write    # regenerate the blocks
+PYTHONPATH=src python3 -m glm_universal.corpus --remeasure  # re-take the Lean measurements
+PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
 ```
 
 `--refresh` is the one command to reach for after a change. It rebuilds the
@@ -82,7 +84,7 @@ re-deriving it. Only a pass is recorded, so a failure is never skipped, and
 
 ## What is proved rather than asserted
 
-[`RequestProject/GLM/Corpus.lean`](../../glm_lean/RequestProject/GLM/Corpus.lean)
+[`RequestProject/GLM/Corpus.lean`](../../lean/RequestProject/GLM/Corpus.lean)
 carries the part of this that is a theorem: that the tiered read is sound (a
 tier-0 claim is implied by the body it summarises), that the archive rule
 partitions the corpus, that a derived artefact is usable exactly when its

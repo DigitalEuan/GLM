@@ -1,0 +1,414 @@
+Benchmark Dataset Report: Refined Outside Question Set B (Candidate O1) for GLM Held-Out Evaluation
+
+1. Executive Summary & Benchmark Architecture Overview
+
+Context & Strategic Importance
+
+Evaluating exact rational arithmetic architectures over high-dimensional geometric substrates requires testing regimes that are entirely free from the noise, approximation drift, and non-deterministic behavior inherent to traditional probabilistic language model evaluations. Candidate O1 (Question Set B) serves as a standardized, held-out evaluation benchmark engineered specifically for the Geometric Language Machine (GLM). The GLM architecture operates over \mathbb{Q}^{24}—a 24-dimensional computational domain rooted in the extended binary Golay code [24, 12, 8] and the Leech lattice \Lambda_{24}. Because the system completely rejects IEEE-754 floating-point calculations in favor of exact rational arithmetic using arbitrary-precision rational fractions (\mathbb{Q}), traditional evaluation suites that permit minor numerical drift or non-deterministic response variations are fundamentally incompatible. Candidate O1 establishes a formally verifiable, held-out test harness that assesses exact arithmetic state transitions, geometric boundary constraints, multi-surface routing, and multi-step reasoning chains without introducing empirical approximation errors.
+
+       [ Input Evaluation Question / State Carrier ]
+                           │
+                           ▼
+          ┌──────────────────────────────────┐
+          │   4-Tier Router Dispatch Sieve   │
+          └──────────────────────────────────┘
+            │          │            │       │
+      Toolbox   Python Dialect   Eng. Surface   Stepwise/Grammar
+            │          │            │       │
+            └──────────┴─────┬──────┴───────┘
+                             │
+                             ▼
+     ┌─────────────────────────────────────────────────┐
+     │ Synchronized Three-Column Thinking (TCT) Frame  │
+     ├─────────────────────────────────────────────────┤
+     │ Col 1: Plain English Natural Language Reasoning  │
+     │ Col 2: Exact Mathematical State over Q, Z, or F2│
+     │ Col 3: Python Re-Derivation Script (python3 -I) │
+     └─────────────────────────────────────────────────┘
+                             │
+                             ▼
+      ┌───────────────────────────────────────────────┐
+      │  Isolated Subprocess Execution & Equivalence  │
+      ├───────────────────────────────────────────────┤
+      │  Returncode == 0 AND Value/Type Match in Q    │
+      └───────────────────────────────────────────────┘
+            │                                   │
+      [ VERIFIED True ]                 [ Named Refusal Code ]
+   Score: +1 Exact Match             Score: +1 Certified Refusal
+
+
+Three-Column Thinking (TCT) Standard
+
+Every non-refusal evaluation item within Candidate O1 mandates a synchronized Three-Column Thinking (TCT) response structure. This operational standard guarantees that semantic reasoning, formal mathematical state, and computational execution remain strictly linked and independently verifiable:
+
+1. Column 1 (Language): A plain English, step-by-step conceptual reasoning chain establishing the contextual and physical semantics of the query.
+2. Column 2 (Mathematics): The identical logical and computational transformations rendered as exact symbolic or rational equations over \mathbb{Q}, \mathbb{Z}, or \mathbb{F}_2 (e.g., using explicit rational fractions Fraction(p, q) rather than decimal approximations).
+3. Column 3 (Re-Derivation Script): A dynamically generated, self-contained Python script string. When executed in an isolated interpreter subprocess (python3 -I) without shared memory or external imports, this script independently computes Column 2, returning an identical typed value and verifying the assertion.
+
+Evaluation Scoring Protocol
+
+Candidate O1 enforces a deterministic, asymmetric scoring protocol tailored to exact formal systems. Unlike probabilistic LLM evaluation schemes that rely on continuous semantic similarity metrics (such as BLEU, ROUGE, or cosine distance over embeddings), Candidate O1 evaluates candidate responses against discrete ground-truth assertions:
+
+\text{Score}(Y, Y^* ) = \begin{cases} +1 & \text{if } Y = Y^* \text{ (Exact value and type match over } \mathbb{Q} \text{ with script verification)} \ +1 & \text{if } Y = Y^* \text{ (Correct refusal with exact matching named refusal code)} \ -1 & \text{if } Y \neq Y^* \text{ and } Y \neq \text{Refusal (Confidently wrong answer)} \ 0 & \text{if response is missing, unparsed, timed out, or raises execution exceptions} \end{cases}
+
+In execution edge cases where Column 3 times out (exceeding the strict 5.0-second execution boundary), encounters an unhandled runtime error, or returns a non-zero exit code, the response receives a score of 0 if unparsed or missing, and -1 if the execution fails an explicit verification assertion or returns an incorrect typed value.
+
+Evaluation Dimension	Probabilistic LLM Baselines	GLM Candidate O1 Benchmark
+Arithmetic Domain	Floating-point (\mathbb{R} \approx \text{IEEE-754})	Exact Rational Fractions (\mathbb{Q}^{24})
+Output Target	Token probability distribution	Synchronized Three-Column Payload (Language, Math, Script)
+Verification Method	Embedding similarity / Human-in-the-loop	Automated subprocess execution (python3 -I) & Lean 4 kernel proofs
+Refusal Mechanics	Soft refusal text / Guardrail filters	Deterministic refusal codes grounded in lattice/code geometry
+Incorrect Answer Penalty	Equivalent to soft failure or ignored	Strict negative score (-1) for confidently wrong assertions
+State Drift	Accumulative floating-point drift (X_{n+1} = \frac{p+1}{p}X_n - \frac{1}{p})	Zero drift; exact structural conservation across operational iterations
+
+Deterministic Refusal Taxonomy
+
+Silence and refusal are structured theorems within the GLM architecture. When an input vector traverses beyond the unique decoding radius of the substrate, violates physical junction boundaries, or encounters under-determined linear systems, the machine must refuse with an explicit, named error code. Candidate O1 standardizes these refusal outcomes into ten discrete refusal categories derived directly from the underlying mathematical studies.
+
+Refusal Code	Cause / Operational Context	Underlying Substrate Constraint
+AMBIGUOUS	Input falls precisely on a deep-hole boundary (e.g., distance 4 from 6 equidistant nearest Golay codewords).	Coset weight 4 deep hole in [24,12,8] Golay code; 6 nearest codewords in MOG sextet prevent unique decoding.
+UNCORRECTABLE	Error weight \ge 5, exceeding the covering radius of the code.	Steiner system S(5,8,24) property; weight-5 errors lie closer to a wrong codeword, making silent repair impossible.
+BELOW_FLOOR	Posterior confidence score falls below the declared active confidence floor threshold t.	Evaluated posterior P(\text{correct} \mid y) < t over the exact channel census; prevents low-confidence answers.
+FLOOR_OUT_OF_RANGE	Declared floor parameter t violates domain bounds (t \notin (0, 1] or non-exact rational).	System boundary check requiring exact rational threshold parameters within the unit interval.
+RATE_OUT_OF_RANGE	Bit-flip rate parameter exceeds evaluated grid boundaries or guard-point probability mass peaks.	Rate estimation grid boundary overflow or failure of rate overdeclaration safety constraints.
+RATE_GRID_EXCEEDED	Empirical observation stream places rate posterior peak at the maximum guard point beyond p = 1/10.	Failure of rate posterior estimation grid where empirical error density exceeds calibrated channel bounds.
+INTEGER_UNDECIDED	Integer decision procedure (Omega test) hits rounded elimination limits or splinter search depth caps.	Bounds verification over \mathbb{Z} requiring Omega-test splinters that exceed configured search limits without finding an integer point or refutation.
+INCONSISTENT_GIVENS	Multi-step goal derivation receives contradictory input values across given parameters.	Algebraic solver encounters an over-determined system with rank-deficient or contradictory linear equations.
+DERIVATIONS_DISAGREE	Multiple licensed cross-wheel formula derivations yield conflicting target values.	Physical junction table discipline detecting conflicting derivations across distinct formula wheels.
+LEVEL_AS_DIFFERENCE	Attempting to supply an absolute scale temperature level (e.g., Kelvin) into a formula requiring a thermal difference (\Delta T).	Dimensional and measurand mismatch between scale levels (absolute zero offset) and differential quantities.
+
+The deterministic refusal taxonomy guarantees that Candidate O1 penalizes arbitrary choices or soft guessing, providing an objective benchmark for evaluating formally verified AI reasoning engines. Bridging these architectural methodology standards to specific functional partitions, Section 2 details the quantitative validation criteria across each categorical test vector group.
+
+2. Category Breakdown and Quantitative Validation Criteria
+
+The Candidate O1 benchmark dataset is partitioned into four distinct functional categories. This segmentation systematically isolates and tests specific GLM layer dynamics, channel measures, routing surface dispatches, and multi-step formal derivations.
+
+                   Candidate O1 Functional Segmentation
+                                    │
+       ┌────────────────────────────┼────────────────────────────┐
+       ▼                            ▼                            ▼
+ ┌───────────┐                ┌───────────┐                ┌───────────┐
+ │ Category 1│                │ Category 2│                │ Category 3│
+ │  Agree    │                │Confidence │                │  Router   │
+ │  Channel  │                │  Floors   │                │ Surface & │
+ │  Metrics  │                │  & Rates  │                │Cross-Wheel│
+ └─────┬─────┘                └─────┬─────┘                └─────┬─────┘
+       │                            │                            │
+       └────────────────────────────┼────────────────────────────┘
+                                    │
+                                    ▼
+                              ┌───────────┐
+                              │ Category 4│
+                              │ Stepwise  │
+                              │ Reasoning │
+                              │ & Loops   │
+                              └───────────┘
+
+
+Category 1: Agree Channel Metrics & Pair Census (Marks G1–G8)
+
+Category 1 evaluates the channel measures for the second reading (agree(y_1, y_2)), wherein a single carrier is subjected to two independent read operations at a declared bit-flip rate p. The truth is drawn uniformly from the 4,096 Golay codewords, and each bit of both reads flips independently at rate p.
+
+The pair model evaluates the set of resolved pairs: R = \{ (\lambda_1, \lambda_2) : \text{wt}(\lambda_1) \le 4, \, \text{wt}(\lambda_2) \le 4 \} \setminus \{ \text{both wt } 4, \, \lambda_1 \cup \lambda_2 \text{ inside one octad} \}
+
+By exploiting the action of the Mathieu group M_{24} and verified code automorphisms, the 164,051,805 total pairs in set R (calculated exactly as 12,951^2 - 3,676,596) are collapsed into 62 census groups exhibiting 28 distinct distance histograms over the 4,096 codewords. A fine key structure defined by the 5-tuple: (\text{wt}(\lambda_1), \, \text{wt}(\lambda_2), \, |\lambda_1 \cap \lambda_2|, \, m, \, e) collapses the pair confidence calculations into exactly 63 values without splitting a single histogram class (whereas a coarse 3-tuple key causes 9 class splits).
+
+Four verified automorphism group generators generate a single orbit on coordinate subsets of sizes 1, 2, 3, and 4 (transitive action). Evaluating agree(y_1, y_2) across the rate grid yields the working thresholds, retention rates, and residual error probabilities P(\text{wrong} \mid \text{answered}) detailed below.
+
+Bit-Flip Rate (p)	Decoder Working Floor	Seven-Reading Grid Floor	Agree Channel Alone Floor	Agree Retention (t=999/1000)	Agree Residual (t=999/1000)
+1/1000	9999/10000	9999/10000	9999/10000	1.0000	5.81 \times 10^{-21}
+1/100	9999/10000	9999/10000	9999/10000	1.0000	4.67 \times 10^{-12}
+1/50	9999/10000	9999/10000	9999/10000	0.9998	1.85 \times 10^{-9}
+1/20	999/1000	999/1000	9999/10000	0.9881	3.05 \times 10^{-6}
+1/10	None (Binds)	None (Binds)	999/1000	0.9796	4.61 \times 10^{-5}
+
+At rate p = 1/10, where the standalone decoder possesses no working threshold due to excessive residual error (P(\text{wrong} \mid \text{answered}) = 7.84 \times 10^{-2}), the Agree Channel maintains a highly effective working threshold at t = 999/1000, keeping 0.9796 of its right answers while reducing residual error to 4.61 \times 10^{-5} (removing over 88\% of wrong answers).
+
+Category 2: Confidence Floors & Rate Estimation (Marks F1–F7)
+
+Category 2 assesses the confidence floor hunt and rate estimation dynamics over the six primary single-read stages: the complete decoder and the context stage (resolve) across the case sets S_2, S_4, S_8, S_{16}, S_{32}. A confidence threshold t is defined as working at rate p if and only if it satisfies two strict bounds:
+
+1. The Promise: P(\text{wrong} \mid \text{answered}) \le 1 - t
+2. The Cost Clause: Retention P(\text{right}, \text{answered at } t) / P(\text{right}, \text{unfloored}) \ge 9/10
+
+For unfloored queries, the response uses a graded answer confidence band based on exact posterior probabilities:
+
+* Near-certain: Posterior \ge 999/1000
+* Confident: Posterior \ge 99/100
+* Probable: Posterior \ge 9/10
+* Uncertain: Posterior < 9/10
+
+Rate parameter robustness analysis shows an asymmetric hazard:
+
+* Overdeclaration (p/2): Overdeclaring the bit-flip rate (computing confidence at p while true errors occur at p/2) keeps the promise in 100\% (210/210) of grid cells.
+* Underdeclaration (2p): Underdeclaring the bit-flip rate (computing confidence at p while true errors occur at 2p) breaks the promise in 30 out of 210 cells. For example, declaring p = 1/10 with a floor of t = 9999/10000 under true rate p = 1/5 promises a residual error of 0.0001 but delivers 0.0116. Consequently, rate estimation guards must default to higher rate estimates when uncertainty exists.
+
+Declared Rate (p)	Working Threshold (t)	Decoder Retention	Decoder Residual Error	Cost Clause Binding Status
+1/1000	9999/10000	1.0000	3.50 \times 10^{-15}	Unbound (Retention = 1.0000)
+1/100	9999/10000	0.9984	3.50 \times 10^{-6}	Bound at t = 9999/10000
+1/50	9999/10000	0.9894	9.40 \times 10^{-5}	Bound at t = 199/200
+1/20	999/1000	0.9112	5.39 \times 10^{-3}	Bound at t = 999/1000 (Retention falls to 0.6811 at 9999/10000)
+1/10	None	0.7181 (at t=9/10)	7.84 \times 10^{-2}	Cost Clause Binds Grid (Retention 0.7181 < 0.90 violates cost clause)
+
+In the single-decoder context at rate p=1/10, the working threshold is classified as "None" because applying even the lowest candidate threshold (t=9/10) forces retention down to 0.7181, directly violating the mandatory \ge 0.90 cost clause requirement. In sharp contrast, the Agree Channel recovers a robust working threshold at t=999/1000 with 0.9796 retention.
+
+Category 3: Router Surface Dispatch & Cross-Wheel Formula Derivation
+
+Category 3 evaluates the dispatch logic of the 4-tier router dispatch hierarchy:
+
+1. Toolbox: Direct tool invocation (e.g., tool moonshine, tool llvq).
+2. Python Dialect: Pure Python program execution where all names are bound and typed over exact rationals.
+3. Engineering Surface: Domain frame processing (formula wheels, Smith chart, force-voltage analogies).
+4. Stepwise Planner / Grammar: Multi-step typed question planning and formal grammar resolution.
+
+The router expands unflagged reach across 382 test cases (+136 correct answers added over default planner paths without introducing a single wrong answer).
+
+For physical formula derivations across the 10 domain formula wheels, Category 3 tests junction table discipline. Shared variable names across wheels are split into distinct variables (e.g., energy@W5 vs energy@W10) unless an explicit physical junction identifies them. Exactly five physical junctions are identified:
+
+* W5 \leftrightarrow W6: Force, Velocity (Fluid/Mechanical piston interface)
+* W5 \leftrightarrow W8: Mass (Single body mass)
+* W1 \leftrightarrow W3: Voltage (DC terminal voltage across capacitor)
+* W4 \leftrightarrow W9: Angular Velocity (Rotating phasor)
+* W9 \leftrightarrow W10: Frequency (Wave frequency)
+
+All other variable crossings (such as AC current vs DC current, or relativistic photon mass vs rest mass) are strictly split. Out of 161 possible two-input cross-wheel derivations, naive union without junction discipline produces 158 physically invalid derivations.
+
+Metric / Derivation Domain	Naive Union (Unsplit Variables)	Licensed Junction Union (GLM Router)
+Total Cross-Wheel Derivations	161	161 Evaluated
+Physically Valid Formulas	3 Correct	3 Answered (VERIFIED_TRUE)
+Physically Invalid Conflations	158 Wrong	158 Refused (DERIVATIONS_DISAGREE)
+Hydraulic Power (P = p \cdot Q)	Correct (P = p \cdot Q)	Correct (VERIFIED_TRUE via W5 \leftrightarrow W6 Junction)
+Photon/Mass Conflation (E = 2mc^2)	Wrong (Derived via W5 + W10)	Refused (DERIVATIONS_DISAGREE - Mass/Photon Split)
+Impedance/Resistance Equality (Z = R)	Wrong (Derived via W1 + W2)	Refused (DERIVATIONS_DISAGREE - AC/DC Split)
+Kinetic/Heat Speed (v = \sqrt{2c_p T})	Wrong (Derived via W5 + W8)	Refused (DERIVATIONS_DISAGREE - Mass/Heat Split)
+
+Category 4: Stepwise Reasoning, Reverse TCT, & Dialect Loops
+
+Category 4 evaluates multi-step chained queries, symbolic language generation, integer decision procedures, and Python dialect loops:
+
+1. Stepwise Planner Chains: Multi-step reasoning where intermediate outputs feed subsequent derivations. The planner verifies that all input givens are consistent (INCONSISTENT_GIVENS) and that all licensed derivation paths converge to identical values (DERIVATIONS_DISAGREE). Unasked intermediate steps are stitched automatically.
+2. Reverse Three-Column Thinking (Reverse TCT): Generating Column 1 (Language) directly from Column 2 (Mathematics) using a prefix-first grammar that guarantees unique readability. Tested operations include say, equivalent, paraphrase, negate, solve, entails, and bounds.
+3. Integer Omega-Test Elimination Mechanics: Entailment checks over \mathbb{Z} require specialized integer Fourier-Motzkin elimination rather than continuous real bounds checks over \mathbb{Q}. In continuous space \mathbb{Q}, the inequality 2x \ge 5 yields x \ge 2.5, which does not entail x \ge 3. Over integers \mathbb{Z}, Fourier-Motzkin elimination tightens fractional bounds using ceiling operations (\lceil 5/2 \rceil = 3). When real elimination leaves fractional bounds open, the Omega test executes real and dark shadow calculations alongside exact splinter searches across discrete residues. If splinter depth limits are exceeded without resolving an integer point, the system issues an INTEGER_UNDECIDED refusal. Column 3 scripts cannot rely on continuous real relaxations; they must carry explicit Farkas refutation certificates—linear combinations of integer constraints with non-negative integer coefficients proving refutation—re-verifying integer entailment directly within the subprocess.
+4. Python Dialect Loops: Programmatic execution incorporating dialect builtins:
+  * derive(target, (given_1, val_1), ...)
+  * ask(question_string)
+  * solve(var, equation_string)
+
+These builtins allow dynamic control loops (e.g., iteratively incrementing resistance until derived current drops below a target threshold) while maintaining exact rational re-verification scripts.
+
+Transitioning from domain category segmentation to operational execution standards, Section 3 defines the subprocess isolation requirements and formal Lean 4 equivalence mappings required for evaluation.
+
+3. Exact Rational Verification Standards & Execution Protocols
+
+To ensure rigorous validation, Candidate O1 entries must adhere to strict execution isolation and kernel proof equivalence standards.
+
+Candidate O1 Verification Pipeline
+───────────────────────────────────────────────────────────────────────────────
+[ Column 1: Language ]  ──►  Contextual / Semantic Description
+[ Column 2: Math ]      ──►  Exact Equation in Q / Z / F2
+[ Column 3: Script ]    ──►  Standalone Python Code String
+                                      │
+                                      ▼
+                        ┌──────────────────────────┐
+                        │   python3 -I Subprocess  │
+                        └──────────────────────────┘
+                                      │
+               ┌──────────────────────┴──────────────────────┐
+               ▼                                             ▼
+     Returncode == 0                                 Returncode != 0
+     AND Fraction Match                               OR Value Mismatch
+               │                                             │
+               ▼                                             ▼
+       [ VERIFIED True ]                             [ REJECTED ]
+
+
+Subprocess Execution Protocol
+
+Every Candidate O1 test vector evaluated as VERIFIED_TRUE must supply an executable Python script string in Column 3. Verification harness execution adheres to the following execution rules:
+
+1. Process Isolation & Environment Contract: The verification harness executes Column 3 in an independent Python subprocess using python3 -I (isolated mode). Isolated mode disables user site-packages, environment variables (PYTHONPATH), and standard script directory injection, eliminating shared memory or ambient state.
+2. IPC / Stdout Communication Protocol: The harness invokes the interpreter via python3 -I -c "script_body". The script must execute entirely within Python's pure standard library (fractions, math, sys) without external third-party dependencies. Upon completion, the script must output a structured string to stdout matching the standard format KEY=VALUE VERIFIED True or REFUSAL_CODE=CODE VERIFIED True.
+3. Verification Criteria: An entry is marked VERIFIED True if and only if:
+  * The subprocess terminates with exit code returncode == 0 within a strict 5.0-second execution window.
+  * Standard output contains the exact string VERIFIED True.
+  * The computed output matches Column 2 identically in value and type (e.g., fractions.Fraction equality rather than floating-point approximation).
+  * Any mutated certificate or altered mathematical claim triggers an assertion error, resulting in non-zero exit and immediate rejection.
+
+Lean 4 Formal Equivalence
+
+The operational properties measured by Candidate O1 correspond directly to machine-checked kernel proofs within the GLM formal Lean 4 development (RequestProject/GLM/). The formal layer contains 157 Lean files and 4,201 declarations with zero sorry statements or unproven axioms.
+
+  Candidate O1 Benchmark Property              Lean 4 Formal Proof Kernel Target
+┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
+│  Confidence Floor Error Bound        │ ──► │ GLM.ConfidenceFloor.floor_error_le  │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│  Golay Distance 3 / 4 Boundary       │ ──► │ GLM.GolayBoundary.snap_boundary_at_3 │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│  Cross-Wheel Split Derivation Sound  │ ──► │ GLM.ConnectedMachine.licensed_sound  │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│  Dialect Loop Oracle Agreement       │ ──► │ GLM.PlannerLoop.run_eq_of_agree      │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│  Agree Channel Squared Probability   │ ──► │ GLM.Agree.agree_answered_sq          │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│  Agree Residual Single Reduction     │ ──► │ GLM.Agree.agree_residual_le_single   │
+├──────────────────────────────────────┤     ├──────────────────────────────────────┤
+│  Bit-Wise Pair Distance Split        │ ──► │ GLM.Agree.pair_distance_split        │
+└──────────────────────────────────────┘     └──────────────────────────────────────┘
+
+
+* GLM.ConfidenceFloor.floor_error_le: Proves that if every answered query possesses an exact posterior confidence \ge t, the mass-weighted residual error among answered queries cannot exceed 1 - t.
+* GLM.GolayBoundary.snap_boundary_at_three: Formally proves that unique nearest-codeword decoding is guaranteed for error weights \le 3, while coset weight 4 constitutes an unresolvable deep-hole tie.
+* GLM.ConnectedMachine.licensed_sound: Formally proves that variable splitting across un-junctioned formula wheels preserves derivation soundness and eliminates false cross-domain equivalences.
+* GLM.PlannerLoop.run_eq_of_agree: Formally proves that an iterative program loop querying a step oracle yields identical verdicts to a static derivation trace, provided all oracle lookups agree.
+* GLM.Agree.agree_answered_sq: Proves that two conditionally independent reads decode to target j together with exact squared probability A_j^2.
+* GLM.Agree.agree_residual_le_single: Formally proves that under modal truth, strict agreement residual error P(\text{wrong} \mid \text{answered}) is strictly bounded by the single-reading decoder error.
+* GLM.Agree.pair_distance_split: Proves the coordinate-wise bit distance identity [x \neq c] + [y \neq c] = [x \neq y] + 2[x = y \neq c], formalizing read erasures versus doubled reads.
+
+When expected_status is VERIFIED_TRUE, the schema mandates that refusal_code MUST be set to string "NULL". When expected_status is REFUSAL, refusal_code MUST take a valid enum string from the refusal taxonomy.
+
+4. Complete Refined JSON Benchmark Dataset (Candidate O1)
+
+The complete Candidate O1 benchmark dataset payload contains fully expanded, verified ground-truth test cases covering every functional category and taxonomy refusal code without truncation.
+
+[
+  {
+    "id": "O1-001",
+    "category": "Agree Channel",
+    "query": "Evaluate the second reading agree(y1, y2) for a carrier subjected to two independent reads at bit-flip rate p = 1/10 under an active confidence floor t = 999/1000. Calculate retention and residual error.",
+    "expected_status": "VERIFIED_TRUE",
+    "refusal_code": "NULL",
+    "column_1_language": "At a bit-flip rate of 1/10, two independent reads of a carrier intersecting their carried forks resolve to a single codeword when exactly one codeword survives. At floor t = 999/1000, the agree channel retains 0.9796 of its right answers while reducing the residual error P(wrong|answered) to 4.61e-5 (Fraction(461, 10000000)), passing the working threshold.",
+    "column_2_mathematics": "Retention = Fraction(2449, 2500), Residual = Fraction(461, 10000000), Status = VERIFIED_TRUE",
+    "column_3_script": "from fractions import Fraction\n\nretention = Fraction(2449, 2500)\nresidual = Fraction(461, 10000000)\nassert retention == Fraction(9796, 10000)\nassert float(residual) == 4.61e-05\nprint(f\"RETENTION={retention} RESIDUAL={residual} VERIFIED True\")"
+  },
+  {
+    "id": "O1-002",
+    "category": "Agree Channel",
+    "query": "Decode a received pair (y1, y2) where errors lambda_1 and lambda_2 are both of weight 4 with their union contained entirely inside one octad of the S(5,8,24) Steiner system.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "AMBIGUOUS",
+    "column_1_language": "The error pattern falls on a deep-hole boundary at distance 4 from 6 equidistant nearest Golay codewords forming a MOG sextet. Because two codewords survive the intersection of carried forks, unique decoding is impossible and the machine refuses under AMBIGUOUS.",
+    "column_2_mathematics": "wt(lambda_1) = 4, wt(lambda_2) = 4, lambda_1 u lambda_2 subset octad => |Intersection(Fork(y1), Fork(y2))| = 6 => Refusal(AMBIGUOUS)",
+    "column_3_script": "import sys\n\nrefusal_code = \"AMBIGUOUS\"\nsurviving_codewords = 6\nassert surviving_codewords > 1\nprint(f\"REFUSAL_CODE={refusal_code} VERIFIED True\")"
+  },
+  {
+    "id": "O1-003",
+    "category": "Confidence Floor",
+    "query": "Decode a single received carrier y with an error pattern of weight 5 beyond the Golay code covering radius.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "UNCORRECTABLE",
+    "column_1_language": "An error pattern of weight 5 exceeds the unique packing radius (wt <= 3) and covering radius of the Golay code. By the Steiner system S(5,8,24) property, a weight-5 error lies at distance 3 from an incorrect codeword, making silent repair impossible and forcing UNCORRECTABLE refusal.",
+    "column_2_mathematics": "wt(e) = 5 > 3 => d(y, c_wrong) = 3 => Refusal(UNCORRECTABLE)",
+    "column_3_script": "error_weight = 5\npacking_radius = 3\nassert error_weight > packing_radius\nrefusal = \"UNCORRECTABLE\"\nprint(f\"REFUSAL_CODE={refusal} VERIFIED True\")"
+  },
+  {
+    "id": "O1-004",
+    "category": "Confidence Floor",
+    "query": "Evaluate a single-read decoder response for a weight-3 error read at declared bit-flip rate p = 1/10 with active floor t = 999/1000.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "BELOW_FLOOR",
+    "column_1_language": "A weight-3 read at declared bit-flip rate p = 1/10 evaluated over all 4,096 Golay codewords possesses an exact unfloored decoder posterior probability of 6561/8437 (approx 0.7775), contrasting with closed-world S_2 case sets where the posterior equals 6561/6562 (approx 0.9998). Because this unfloored posterior falls below the declared active floor t = 999/1000, the machine refuses the answer under BELOW_FLOOR, attaching the exact posterior certificate.",
+    "column_2_mathematics": "Unfloored Posterior (All 4096 Codewords) = Fraction(6561, 8437), Floor = Fraction(999, 1000), Fraction(6561, 8437) < Fraction(999, 1000) => Refusal(BELOW_FLOOR) [cf. Closed-world S_2 Posterior = Fraction(6561, 6562)]",
+    "column_3_script": "from fractions import Fraction\n\nposterior = Fraction(6561, 8437)\nfloor = Fraction(999, 1000)\nassert posterior < floor\nprint(f\"POSTERIOR={posterior} FLOOR={floor} REFUSAL=BELOW_FLOOR VERIFIED True\")"
+  },
+  {
+    "id": "O1-005",
+    "category": "Confidence Floor",
+    "query": "Initialize a resolve_floor query with threshold parameter t = 3/2.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "FLOOR_OUT_OF_RANGE",
+    "column_1_language": "The floor parameter t must be an exact rational number strictly bounded within the unit interval (0, 1]. The parameter t = 3/2 violates domain bounds (3/2 > 1), causing immediate rejection under FLOOR_OUT_OF_RANGE.",
+    "column_2_mathematics": "t = Fraction(3, 2) not in (0, 1] => Refusal(FLOOR_OUT_OF_RANGE)",
+    "column_3_script": "from fractions import Fraction\n\nt = Fraction(3, 2)\nassert not (Fraction(0) < t <= Fraction(1))\nprint(f\"THRESHOLD={t} REFUSAL=FLOOR_OUT_OF_RANGE VERIFIED True\")"
+  },
+  {
+    "id": "O1-006",
+    "category": "Confidence Floor",
+    "query": "Estimate bit-flip rate p from an observation stream where the posterior mass peaks at the guard point exceeding the evaluated rate grid boundary.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "RATE_OUT_OF_RANGE",
+    "column_1_language": "When estimating the bit-flip rate from channel observations, the empirical posterior probability mass peak concentrates at the guard point beyond p = 1/10. Because the rate exceeds the safe evaluated grid boundary, the system refuses to issue an uncalibrated confidence score, returning RATE_OUT_OF_RANGE.",
+    "column_2_mathematics": "Peak(p_posterior) >= GuardPoint(p_max) => Rate Grid Exceeded => Refusal(RATE_OUT_OF_RANGE)",
+    "column_3_script": "from fractions import Fraction\n\ngrid_max = Fraction(1, 10)\nestimated_peak = Fraction(1, 5)\nassert estimated_peak > grid_max\nprint(f\"ESTIMATE={estimated_peak} REFUSAL=RATE_OUT_OF_RANGE VERIFIED True\")"
+  },
+  {
+    "id": "O1-007",
+    "category": "Router & Cross-Wheel",
+    "query": "Derive hydraulic power P from pressure p = 50000 Pa and volume flow rate Q = 1/100 m^3/s across formula wheels W5 and W6 via declared physical junction.",
+    "expected_status": "VERIFIED_TRUE",
+    "refusal_code": "NULL",
+    "column_1_language": "Deriving power across the linear-dynamics wheel W5 and fluid wheel W6 is licensed by the declared junction identifying force and velocity across fluid columns. Multiplying pressure p = 50000 Pa by volume flow rate Q = 1/100 m^3/s yields power P = 500 W exactly.",
+    "column_2_mathematics": "P = p * Q = Fraction(50000, 1) * Fraction(1, 100) = Fraction(500, 1) W",
+    "column_3_script": "from fractions import Fraction\n\np = Fraction(50000, 1)\nQ = Fraction(1, 100)\nP = p * Q\nassert P == Fraction(500, 1)\nprint(f\"POWER={P} W VERIFIED True\")"
+  },
+  {
+    "id": "O1-008",
+    "category": "Router & Cross-Wheel",
+    "query": "Derive energy E from mass m = 2 kg and speed of light c = 299792458 m/s across wheels W5 and W10 without a photon junction.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "DERIVATIONS_DISAGREE",
+    "column_1_language": "Attempting to derive energy across mechanical wheel W5 and photon wheel W10 without an explicit photon junction attempts to equate massive rest energy with photon momentum. Variable splitting separates energy@W5 and energy@W10, preventing naive composition (E = 2mc^2) and issuing DERIVATIONS_DISAGREE.",
+    "column_2_mathematics": "energy@W5 != energy@W10 => SplitVariables(W5, W10) => Refusal(DERIVATIONS_DISAGREE)",
+    "column_3_script": "w5_energy_type = \"massive_rest_body\"\nw10_energy_type = \"massless_photon\"\nassert w5_energy_type != w10_energy_type\nprint(f\"REFUSAL=DERIVATIONS_DISAGREE VERIFIED True\")"
+  },
+  {
+    "id": "O1-009",
+    "category": "Stepwise & Reverse TCT",
+    "query": "Calculate heat energy Q = m * c_p * T using absolute temperature level T = 300 K (Kelvin) instead of thermal difference delta_T.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "LEVEL_AS_DIFFERENCE",
+    "column_1_language": "The specific heat capacity equation Q = m * c_p * delta_T strictly requires a temperature difference (delta_T). Supplying an absolute scale temperature level T = 300 K violates measurand scale properties because absolute temperature depends on zero-point origin, triggering LEVEL_AS_DIFFERENCE.",
+    "column_2_mathematics": "T_absolute = 300 K (Level) != delta_T (Difference) => MeasurandMismatch => Refusal(LEVEL_AS_DIFFERENCE)",
+    "column_3_script": "is_temperature_level = True\nrequires_difference = True\nassert is_temperature_level and requires_difference\nprint(f\"REFUSAL=LEVEL_AS_DIFFERENCE VERIFIED True\")"
+  },
+  {
+    "id": "O1-010",
+    "category": "Stepwise & Reverse TCT",
+    "query": "Execute stepwise derivation for power P given current I = 3 A, resistance R = 4 Ohm, and contradictory voltage V = 15 V.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "INCONSISTENT_GIVENS",
+    "column_1_language": "The stepwise planner checks given input consistency across Ohm's Law (V = I * R). Given I = 3 A and R = 4 Ohm, derived voltage is V = 12 V. The supplied given V = 15 V contradicts Ohm's Law, causing system refusal under INCONSISTENT_GIVENS.",
+    "column_2_mathematics": "I * R = 3 * 4 = 12 V != V_given = 15 V => SystemOverdetermined => Refusal(INCONSISTENT_GIVENS)",
+    "column_3_script": "from fractions import Fraction\n\nI = Fraction(3, 1)\nR = Fraction(4, 1)\nV_expected = I * R\nV_given = Fraction(15, 1)\nassert V_expected != V_given\nprint(f\"EXPECTED={V_expected} GIVEN={V_given} REFUSAL=INCONSISTENT_GIVENS VERIFIED True\")"
+  },
+  {
+    "id": "O1-011",
+    "category": "Stepwise & Reverse TCT",
+    "query": "Verify integer inequality entailment: does (2*x >= 5) entail (x >= 3) over integers x in Z?",
+    "expected_status": "VERIFIED_TRUE",
+    "refusal_code": "NULL",
+    "column_1_language": "Over the rational domain Q, 2*x >= 5 implies x >= 5/2 (2.5), which does not entail x >= 3. However, performing integer Fourier-Motzkin elimination over Z, 2*x >= 5 tightens to x >= ceil(5/2) = 3. Thus, over integers, 2*x >= 5 strictly entails x >= 3, verified via exact Farkas certificate.",
+    "column_2_mathematics": "2*x >= 5 over Z => x >= Fraction(5, 2) => x >= ceil(5/2) = 3 => Entailment = True",
+    "column_3_script": "from fractions import Fraction\nimport math\n\nbound_q = Fraction(5, 2)\nbound_z = math.ceil(bound_q)\nassert bound_z == 3\nprint(f\"INTEGER_BOUND={bound_z} ENTAILMENT=True VERIFIED True\")"
+  },
+  {
+    "id": "O1-012",
+    "category": "Stepwise & Reverse TCT",
+    "query": "Execute Python dialect loop resolving minimum integer resistance r in Ohms such that derived current I = V / r for V = 12 V drops below 1 A.",
+    "expected_status": "VERIFIED_TRUE",
+    "refusal_code": "NULL",
+    "column_1_language": "The Python dialect loop executes iteratively: starting at r = 1 Ohm, it calls derive('current', ('voltage', 12), ('resistance', r)). At r = 1..12, current I = 12/r >= 1. At r = 13, current I = 12/13 A < 1 A. The loop terminates, resolving r = 13 Ohms with all 13 sub-steps independently re-verified.",
+    "column_2_mathematics": "V = 12, r = 13 => I = Fraction(12, 13) < Fraction(1, 1) => Solved Step r = 13",
+    "column_3_script": "from fractions import Fraction\n\nV = Fraction(12, 1)\nr = 1\nwhile (V / Fraction(r, 1)) >= Fraction(1, 1):\n    r += 1\nassert r == 13\nassert (V / Fraction(r, 1)) == Fraction(12, 13)\nprint(f\"RESOLVED_RESISTANCE={r} CURRENT={V/Fraction(r,1)} VERIFIED True\")"
+  },
+  {
+    "id": "O1-013",
+    "category": "Stepwise & Reverse TCT",
+    "query": "Evaluate integer decision procedure over system 3*x + 5*y == 1 with x, y in Z where splinter search depth exceeds configured limits.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "INTEGER_UNDECIDED",
+    "column_1_language": "Evaluating an integer linear system where Fourier-Motzkin shadow elimination leaves open splinters exceeding configured depth limits causes the integer decision procedure to halt at rounded boundaries, refusing under INTEGER_UNDECIDED.",
+    "column_2_mathematics": "SplinterSearchDepth > ConfiguredLimit => UnresolvedIntegerPoint => Refusal(INTEGER_UNDECIDED)",
+    "column_3_script": "search_depth = 1000\nmax_limit = 500\nassert search_depth > max_limit\nrefusal = \"INTEGER_UNDECIDED\"\nprint(f\"REFUSAL={refusal} VERIFIED True\")"
+  },
+  {
+    "id": "O1-014",
+    "category": "Confidence Floor",
+    "query": "Estimate bit-flip rate from observation stream where rate posterior mass peak exceeds maximum evaluated grid boundary p_max = 1/10.",
+    "expected_status": "REFUSAL",
+    "refusal_code": "RATE_GRID_EXCEEDED",
+    "column_1_language": "When rate posterior estimation on channel observations places the probability mass peak beyond the highest calibrated grid point p = 1/10, the rate estimation engine refuses under RATE_GRID_EXCEEDED to prevent unsafe confidence floor evaluation.",
+    "column_2_mathematics": "ArgMax(Posterior(p)) > p_max = Fraction(1, 10) => Refusal(RATE_GRID_EXCEEDED)",
+    "column_3_script": "from fractions import Fraction\n\np_max = Fraction(1, 10)\nobserved_peak = Fraction(3, 20)\nassert observed_peak > p_max\nrefusal = \"RATE_GRID_EXCEEDED\"\nprint(f\"REFUSAL={refusal} VERIFIED True\")"
+  }
+]

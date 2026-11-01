@@ -27,6 +27,10 @@ or answered **wrong** -- and wrong is the only outcome the marks forbid.
 written (``2^521 - 1`` certified; ``2^607 - 1``, ``2^1279 - 1``,
 ``2^2203 - 1`` and ``2^2281 - 1`` refused by the work budget), declared so
 they are not counted as held out.
+
+*Last altered 31 October 2026 (repository check: the measurement's timings
+read with ``time.monotonic_ns`` and rendered exactly by ``_elapsed``, in
+place of the float clock ``time.perf_counter``; D7).*
 """
 
 from __future__ import annotations
@@ -201,6 +205,24 @@ def _verdict_with(n: int, pocklington: bool,
             return "refuse", None
 
 
+
+def _elapsed(start_ns: int, places: int, end_ns: "int | None" = None) -> str:
+    """Seconds since ``start_ns`` (a :func:`time.monotonic_ns` reading) as an
+    exact decimal string rounded half up to ``places`` places -- the clock
+    read in integers, so no float is constructed (D7).
+
+    *Added 31 October 2026 (repository check): the timings were taken with
+    ``time.perf_counter()``, a float clock the D7/D9 float inventory
+    (``reasoning/exactness.py``) does not declare here.*
+    """
+    import time
+    end = time.monotonic_ns() if end_ns is None else end_ns
+    unit = 10 ** (9 - places)
+    q = (end - start_ns + unit // 2) // unit
+    if places == 0:
+        return str(q)
+    return f"{q // 10 ** places}.{q % 10 ** places:0{places}d}"
+
 def measure(scripts: bool = True) -> dict:
     """The marks Q1-Q6 of ``studies/POCKLINGTON_CERTIFICATE_STUDY.md`` §4."""
     import random
@@ -236,7 +258,7 @@ def measure(scripts: bool = True) -> dict:
     # is post hoc, since part B was chosen from this set's refusals)
     rows = []
     for cid, name, n, want in HELD_OUT:
-        t0 = time.perf_counter()
+        t0 = time.monotonic_ns()
         before, _ = _verdict_with(n, False)
         after, cert = _verdict_with(n, True)
         with flags(True, False):
@@ -247,7 +269,7 @@ def measure(scripts: bool = True) -> dict:
                      "phase140": after, "routed": routed,
                      "with_lucas": with_lucas,
                      "kind": cert["kind"] if cert else None,
-                     "seconds": round(time.perf_counter() - t0, 3)})
+                     "seconds": _elapsed(t0, 3)})
     wrong = [r for r in rows
              if any(r[k] not in ("refuse", r["want"])
                     for k in ("phase139", "phase140", "routed", "with_lucas"))]
@@ -373,7 +395,7 @@ def measure(scripts: bool = True) -> dict:
     # Q7 -- part B's held-out set, every control on
     rows_b = []
     for cid, name, n, want in HELD_OUT_B:
-        t0 = time.perf_counter()
+        t0 = time.monotonic_ns()
         before, _ = _verdict_with(n, True, False)
         after, cert = _verdict_with(n, True, True)
         with flags(True, True):
@@ -382,7 +404,7 @@ def measure(scripts: bool = True) -> dict:
                        "without": before, "phase140": after,
                        "routed": routed,
                        "kind": cert["kind"] if cert else None,
-                       "seconds": round(time.perf_counter() - t0, 3)})
+                       "seconds": _elapsed(t0, 3)})
     wrong_b = [r for r in rows_b
                if any(r[k] not in ("refuse", r["want"])
                       for k in ("without", "phase140", "routed"))]
@@ -400,11 +422,11 @@ def measure(scripts: bool = True) -> dict:
     # Q8 (reported, not a mark) -- the numbers seen in exploration
     marks_known = []
     for name, n, want in KNOWN:
-        t0 = time.perf_counter()
+        t0 = time.monotonic_ns()
         v, cert = _verdict_with(n, True, True)
         marks_known.append({"n": name, "want": want, "got": v,
                             "kind": cert["kind"] if cert else None,
-                            "seconds": round(time.perf_counter() - t0, 3)})
+                            "seconds": _elapsed(t0, 3)})
 
     return {"marks": marks, "known": marks_known,
             "met": sum(bool(m["met"]) for m in marks.values()),

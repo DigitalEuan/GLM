@@ -62,6 +62,12 @@ drives the bench measures wall time outside the package).  A method that
 cannot answer raises :class:`ValueError` -- a refusal is an answer, and the
 bench records it as one.  Ties are broken by label so every method is a
 deterministic function of its inputs, never of dict ordering.
+
+*Last altered 31 October 2026 (repository check): the Pade refusal message
+printed the exponent range and the validity bound through ``float``; it now
+prints them as exact truncated decimals (``coherence.decimal_str``), so the
+module holds no float site at all, as its conventions say; the checklist
+computes the bench once per process when called without a session.*
 """
 
 from __future__ import annotations
@@ -74,6 +80,7 @@ from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 from ..reasoning import analogy as _an
 from ..reasoning import metric as _metric
+from ..reasoning.coherence import decimal_str as _decimal_str
 
 __all__ = [
     "Method", "METHODS", "METHOD_NAMES", "RefusalError",
@@ -557,9 +564,9 @@ def pade_softmax(query: Sequence[Fraction], rows: Rows,
     valid = _pade_validity(m)
     if rng >= valid:
         raise RefusalError(
-            f"pade_softmax: exponent range {float(rng):.3g} reaches the "
-            f"[{m}/{m}] validity bound {float(valid):.3g}; raise m or "
-            f"lower t")
+            f"pade_softmax: exponent range {_decimal_str(rng, 4)} reaches "
+            f"the [{m}/{m}] validity bound {_decimal_str(valid, 4)}; raise m "
+            f"or lower t")
     raw = {name: _pade_exp(x, m) for name, x in shifted.items()}
     return _normalize(raw)
 
@@ -1430,6 +1437,9 @@ def _pade_bound_enforced() -> bool:
         return False
 
 
+#: The bench computed with a fresh session, kept for the process.
+_DEFAULT_REPORT: Optional[Dict[str, object]] = None
+
 def promotion_checklist(session=None,
                         report: Optional[Dict[str, object]] = None
                         ) -> Dict[str, object]:
@@ -1448,9 +1458,17 @@ def promotion_checklist(session=None,
     """
     if report is None:
         if session is None:
-            from ..runtime.session import GeometricSession
-            session = GeometricSession()
-        report = bench_report(session)
+            #  Computed once per process: the bench is deterministic, and
+            #  the occupancy report and its test each ask for the checklist
+            #  (about three minutes a computation).  *Added 31 October 2026
+            #  (repository check), when the bench joined the occupant list.*
+            global _DEFAULT_REPORT
+            if _DEFAULT_REPORT is None:
+                from ..runtime.session import GeometricSession
+                _DEFAULT_REPORT = bench_report(GeometricSession())
+            report = _DEFAULT_REPORT
+        else:
+            report = bench_report(session)
     methods = report["methods"]
     valid = report["validity"]
     e1 = [n for n, e in methods.items() if e["exactness"] == "E1"]

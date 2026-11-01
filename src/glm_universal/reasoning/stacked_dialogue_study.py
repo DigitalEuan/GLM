@@ -314,12 +314,16 @@ def window_runs(args: Tie) -> Dict[str, int]:
 # ── the marks ─────────────────────────────────────────────────────────────
 
 def lean_marks() -> Dict[str, object]:
-    root = Path(__file__).resolve().parents[2]
-    path = root / "lean" / LEAN_FILE
+    from ..constants import LEAN_HOLDING_DIR, lean_file
+    path = lean_file(LEAN_FILE)   # built tree, or awaiting_recovery/
     text = path.read_text(encoding="utf-8") if path.exists() else ""
     found = [t for t in LEAN_THEOREMS if f"theorem {t}" in text]
+    # A file held in awaiting_recovery/ declares its theorems but is not
+    # built until the file it imports is recovered (STATUS.md, item 0).
+    held = LEAN_HOLDING_DIR in path.parents
     return {"file": LEAN_FILE, "declared": len(LEAN_THEOREMS),
             "theorems": len(found), "sorry": text.count("sorry"),
+            "held": held,
             "met": len(found) == len(LEAN_THEOREMS) and "sorry" not in text}
 
 

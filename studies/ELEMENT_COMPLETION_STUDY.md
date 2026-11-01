@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 ---
 
 ## 1. The gap as it stood
@@ -165,7 +167,7 @@ wants only measurements asks for measurements and gets them.
 
 ## 7. The formal side
 
-[`RequestProject/GLM/Completion.lean`](../glm_lean/RequestProject/GLM/Completion.lean)
+[`RequestProject/GLM/Completion.lean`](../src/lean/RequestProject/GLM/Completion.lean)
 proves what the layering claims, so that the claims do not rest on the
 implementation being careful:
 
@@ -180,9 +182,8 @@ implementation being careful:
 ## 8. How to re-run it
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report completion').answer)"
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_element_completion.py -q
+PYTHONPATH=src python3 -c "from glm_universal.runtime.session import GeometricSession as S; print(S().ask('report completion').answer)"
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_element_completion.py -q
 cd .. && lake build RequestProject.GLM.Completion
 ```
 

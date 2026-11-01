@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: <!--figure:probe-correct-->2<!--/figure--> correct, <!--figure:probe-wrong-->1<!--/figure-->
@@ -11,20 +13,31 @@ deciding_figure: <!--figure:probe-correct-->2<!--/figure--> correct, <!--figure:
   correct and at most 1 wrong.
 directives: []
 evidence: []
-faculty: derivation
+faculty: unknown
 file_refs:
   code:
-  - tests/test_blockers
+  - data_objects/semantic_lexicon.py
+  - reasoning/blockers.py
+  - reasoning/norm_escalation.py
+  - reasoning/operation_escalation.py
+  - reasoning/probe_oracle.py
+  - runtime/session.py
+  - substrate/norm_family.py
+  - tools.py
   lean:
   - NormFamily
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: BLOCKERS_STUDY.md
   test:
   - test_blockers.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: BLOCKERS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -36,12 +49,14 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
+phase: 40
 predecessors: []
 question: Between what this system does now and reasoning over natural language, mathematics, physics,
   chemistry and Python script, what is actually in the way — and can each obstacle be demonstrated with
   a measurement rather than described with an adjective?
 recomputed_by: '`glm_universal.reasoning.blockers.measure`'
+related:
+- PROBE_ORACLE_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -65,7 +80,14 @@ sections:
 - anchor: 6-how-to-re-run-this
   heading: 6. How to re-run this
 status: closed
-successors: []
+successors:
+- CORPUS_KNOWLEDGE_STUDY
+- FRAME_OPERATOR_STUDY
+- LORENTZIAN_EVIDENCE_STUDY
+- LORENTZIAN_MAJORITY_STUDY
+- PIPELINE_KIT_STUDY
+- PROBE_ORACLE_STUDY
+- SEMANTIC_PLAN_STUDY
 superseded_by: ''
 supersedes: []
 title: What is holding the GLM back — six blockers, each with its measurement and the smallest experiment

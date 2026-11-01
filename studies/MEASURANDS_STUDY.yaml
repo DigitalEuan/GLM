@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 31 of 31 declared questions as declared (10 kind, 15 temperature, 6 constant), 0 wrong;
@@ -12,25 +14,30 @@ deciding_figure: 31 of 31 declared questions as declared (10 kind, 15 temperatur
 directives:
 - D7
 evidence: []
-faculty: derivation
+faculty: unknown
 file_refs:
   code:
-  - evaluation/measurand_cases
-  - reasoning/held_precision
-  - reasoning/stepwise_script
-  - runtime/measurand_report
-  - runtime/measurands
-  - runtime/stepwise
+  - evaluation/measurand_cases.py
+  - reasoning/held_precision.py
+  - reasoning/stepwise_script.py
+  - runtime/measurand_report.py
+  - runtime/measurands.py
+  - runtime/stepwise.py
+  - tools.py
   lean:
   - MeasurandKinds
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: MEASURANDS_STUDY.md
   test:
   - test_measurands.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: MEASURANDS_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -38,17 +45,34 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - M1
+  - M2
+  - M3
+  - M4
+  - M5
+  - M6
+  - M7
+  met:
+  - M1
+  - M2
+  - M3
+  - M4
+  - M5
+  - M6
+  - M7
   missed: []
 perturbations: []
-phase: 72
-predecessors: []
+phase: 86
+predecessors:
+- HELD_PRECISION_STUDY
+- STEPWISE_TWO_STUDY
 question: Can the stepwise planner tell apart quantities that share a dimension but not a kind — a torque
   from an energy, a frequency from an angular velocity, a temperature level from a temperature difference
   — and supply the SI's exactly defined constants where the givens alone derive nothing, without answering
   anything wrongly?
 recomputed_by: '`glm_universal.runtime.measurand_report.measurand_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -70,7 +94,9 @@ sections:
 - anchor: 6-what-this-leaves
   heading: 6. What this leaves
 status: closed
-successors: []
+successors:
+- MEASURAND_REGISTER_STUDY
+- TYPED_OPERATORS_STUDY
 superseded_by: ''
 supersedes: []
 title: 'Measurands: kinds of quantity, temperature levels and differences, and the SI''s defining constants

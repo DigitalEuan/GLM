@@ -1,0 +1,84 @@
+-- Proposals emitted by the GLM Hypothesis Engine v5 (Round 38).
+-- Each open or surviving statement is a `sorry`-guarded proposal for the prover;
+-- refuted ones are listed with their counterexample.  Not part of the Lean build.
+
+-- H01 [refuted-heldout] every left diagonal has eventual period dividing 8
+-- refuted: ∀ D : ℕ, ∃ T, ∀ t ≥ T, ldiag D (t + 8) = ldiag D t
+-- refutation in the Lean package: LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight (refuted)
+
+-- H02 [survives] for D ≥ 20 the transient of left diagonal D is longer than D (the centre column, which reads diagonal D at time D, always reads it inside its transient)
+-- Lean package: partial: LeftDiagonalPeriodsData.leftDiag_transient_at_read certifies 20 ≤ D < 20000 only
+theorem engine_H02 : ∀ D : ℕ, 20 ≤ D → ∃ t ≥ D, ldiag D (t + 64) ≠ ldiag D t := by sorry
+
+-- H03 [survives] for D ≥ 20 the transient satisfies 30/29 ≤ pre(D)/D ≤ 71/48 (the exact extremes on the development range)
+-- envelope 30/29 ≤ pre(D)/D ≤ 71/48; EMP target, no Lean form proposed
+
+-- H04 [refuted-heldout] the eventually white left diagonals are exactly [2, 7, 28]
+-- refuted: ∀ D : ℕ, (∃ T, ∀ t ≥ T, ldiag D t = false) ↔ D = 2 ∨ D = 7 ∨ D = 28
+-- refutation in the Lean package: LeftDiagonalPeriodsData.leftDiag_white_below_87868 (refutes it)
+
+-- H05 [survives] every left diagonal D < 400 has eventual period dividing 8
+-- closed in the Lean package: LeftDiagonalPeriodsData.leftDiag_period_eight_below_400
+-- statement: ∀ D : ℕ, D < 400 → ∃ T, ∀ t ≥ T, ldiag D (t + 8) = ldiag D t
+
+-- H06 [refuted-by-prediction] every left diagonal has eventual period dividing 16
+-- refuted: ∀ D : ℕ, ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t
+-- refutation in the Lean package: LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen (refuted)
+
+-- H07 [refuted-heldout] a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1)
+-- jump(D) ↔ white(D-1)
+
+-- H08 [law-holds] a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1) ∧ odd-parity(D-2)
+-- closed in the Lean package: LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, infinitely_many_white_of_unbounded
+-- statement: ∀ (D : ℤ) (Q : ℕ), EvPer (ldiag (D - 1)) Q → EvPer (ldiag (D - 2)) Q → ¬ EventuallyWhite (ldiag (D - 1)) → EvPer (ldiag D) Q
+
+-- H09 [prediction-confirmed] the first left diagonal with least eventual period 32 is D = 87867
+-- closed in the Lean package: LeftDiagonalPeriodsData.ldiag_87867_not_evPer_sixteen + leftDiag_period_sixteen_below_87867
+-- statement: ¬ (∃ T, ∀ t ≥ T, ldiag 87867 (t + 16) = ldiag 87867 t) ∧ ∀ D < 87867, ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t
+
+-- H10 [survives] every left diagonal D < 87867 has eventual period dividing 16
+-- closed in the Lean package: LeftDiagonalPeriodsData.leftDiag_period_sixteen_below_87867
+-- statement: ∀ D : ℕ, D < 87867 → ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t
+
+-- H11 [open] the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)
+-- Lean package: open; LeftDiagonalPeriods.infinitely_many_white_of_unbounded is the proved reduction
+theorem engine_H11 : ∀ m, ∃ D : ℕ, ¬ ∃ T, ∀ t ≥ T, ldiag D (t + 2 ^ m) = ldiag D t := by sorry
+
+-- H12 [refuted-heldout] the least period of right diagonal D is 2^(D - floor((D + 1) / 3))
+-- least period of rdiag D equals 2 ^ (D - floor((D + 1) / 3))
+
+-- H13 [survives] the least period of right diagonal D divides 2^D
+-- closed in the Lean package: Diagonals.rdiag_periodic
+-- statement: ∀ D t, rdiag D (t + 2 ^ D) = rdiag D t
+
+-- H14 [survives] the least period of right diagonal D exceeds ceil(D/2)
+-- 2^(exponent) > ceil(D/2)
+-- Lean package: Diagonals.rdiag_not_periodic
+
+-- H15 [survives] (transported from the left-diagonal law) every right diagonal is periodic or anti-periodic with the common period of the two diagonals outside it
+-- rdiag D (t + Q) = rdiag D t xor (parity of (rdiag (D-1) ∨ rdiag (D-2)) over one period Q)
+-- Lean package: RightDiagonalBalance (C113)
+
+-- H16 [survives] the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 30000
+-- Lean package: partial: PowerSeriesLadderData.no_eventual_period_below_10000 (a smaller range)
+theorem engine_H16 : ∀ p, 1 ≤ p → p ≤ 64 → ¬ ∀ t ≥ 30000, centerCol (t + p) = centerCol t := by sorry
+
+-- H17 [survives] |#black − #white| ≤ 3·√N for every prefix length N (sharpest integer constant on N ≤ 4000)
+-- informal: ∀ N ≥ 1, (2·#black(N) − N)^2 ≤ 9·N; ledger C25: an O(√N) bound is expected to fail eventually (iterated logarithm)
+-- Lean package: partial: WobbleCertificate.wobble_sq_ratio_cert certifies N ≤ 10^6 only
+
+-- H18 [refuted-heldout] the GF(2) linear complexity L(n) of the centre column satisfies |2·L(n) − n| ≤ 9 for all n (sharpest on n ≤ 2000)
+-- |2 L(n) - n| ≤ 9; would imply Problem 1 via LCUnbounded
+
+-- H19 [survives] |2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 6000)
+-- |2 L(n) - n| ≤ 10
+
+-- H20 [survives] every binary word of length k occurs in the first ⌈3/2·k·2^k⌉ centre bits (sharpest on k ≤ 8)
+-- factor complexity: all words of length k occur in a prefix of length O(k 2^k)
+
+-- H21 [refuted-heldout] the eventual left diagonals do not depend on the seed: every finite seed whose leftmost cell is black has the same eventual left diagonals as the single black cell
+-- refuted: ∀ y, LeftEdgeAtZero y → ∀ D : ℕ, EventuallyEq (ldiag D) (ldiagOf y D)
+
+-- H22 [law-holds] a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed)
+-- closed in the Lean package: LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference
+-- statement: ∀ x y : Config, LeftEdgeAtZero x → LeftEdgeAtZero y → ∀ D : ℕ, (∀ D' < D, EventuallyEq (ldiagOf x D') (ldiagOf y D')) → ¬ EventuallyEq (ldiagOf x D) (ldiagOf y D) → 2 ≤ D ∧ EventuallyWhite (ldiagOf x ((D : ℤ) - 1))

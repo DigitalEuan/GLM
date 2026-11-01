@@ -50,8 +50,11 @@ proposition, `P`, `Q`, `f` and `n` free.  The command is in the study; it is
 not run from the test suite because a Mathlib elaboration is minutes, not
 milliseconds.
 
-    cd .. && cp source_material/conversation_experiment/lean/glm_generated_theorems.lean /tmp/gen.lean
+    cd .. && cp source_material/ToDo/conversation_experiment/lean/glm_generated_theorems.lean /tmp/gen.lean
     sed -i '1i import Mathlib' /tmp/gen.lean && lake env lean /tmp/gen.lean
+
+(Last altered 31 October 2026, repository check: the supplied folder is now
+filed under ``source_material/ToDo/``.)
 
 What would earn a promotion
 ---------------------------

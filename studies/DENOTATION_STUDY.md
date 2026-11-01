@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: 3 links repointed to where the files now live after the October 2026 reorganisation — the package under `src/glm_universal/` and the Lean tree under `src/lean/`; the text is unchanged; its run commands now start from the repository root (`PYTHONPATH=src`).)*
+
 *The lexicon's `related_to` triples were split by `reasoning/measure_view.py`
 into 27 that the physics register converts and 39 that it declines. Thirty-eight
 of those 39 declined for one reason — an endpoint reaches no dimension the
@@ -22,14 +24,14 @@ undimensioned endpoints is decided by name, with its reason written down, and
 the second pass then measures exactly what the decisions change.*
 
 Registers:
-[`glm_universal/data_objects/denotation.py`](../glm_universal/data_objects/denotation.py).
+[`glm_universal/data_objects/denotation.py`](../src/glm_universal/data_objects/denotation.py).
 Reading:
-[`glm_universal/reasoning/denotation_view.py`](../glm_universal/reasoning/denotation_view.py).
+[`glm_universal/reasoning/denotation_view.py`](../src/glm_universal/reasoning/denotation_view.py).
 Query: `report denotations` (aliases `report denotation`, `report residue`,
 `report related_to`, `report vocabulary`; the same subject as `report measure`,
 whose §§10–12 are this study).
 Formal development:
-[`RequestProject/GLM/Denotation.lean`](../glm_lean/RequestProject/GLM/Denotation.lean).
+[`RequestProject/GLM/Denotation.lean`](../src/lean/RequestProject/GLM/Denotation.lean).
 Tests: `glm_universal/tests/test_denotation.py` (26 tests, 187
 subtests).
 Companion: [`RELATIVE_MEASURE_STUDY.md`](RELATIVE_MEASURE_STUDY.md), whose §4
@@ -291,23 +293,22 @@ this round made — `gravity` — is reported beside a triple that still decline
 ## 8. Reproducing every number here
 
 ```bash
-cd overlay
 
 # the whole thing, with the third column re-deriving it in a fresh interpreter
-PYTHONPATH=. python3 GLM.py -q "report denotations" --no-banner
-PYTHONPATH=. python3 GLM.py -q "report denotations" --verify-tct --no-banner
+PYTHONPATH=src python3 src/GLM.py -q "report denotations" --no-banner
+PYTHONPATH=src python3 src/GLM.py -q "report denotations" --verify-tct --no-banner
 
 # the register, the coverage check, the second pass and the closure claim
-PYTHONPATH=. python3 -c "from glm_universal.reasoning import denotation_view as d; \
+PYTHONPATH=src python3 -c "from glm_universal.reasoning import denotation_view as d; \
     print(d.denotation_report()['closure'])"
 
 # the sweep that says the search is exhausted, and the transport audit
-PYTHONPATH=. python3 -c "from glm_universal.reasoning import measure_view as m; \
+PYTHONPATH=src python3 -c "from glm_universal.reasoning import measure_view as m; \
     print({k: v for k, v in m.basis_sweep().items() if isinstance(v, int)}); \
     print(m.transport_audit()['answered'], m.transport_audit()['control_answered'])"
 
 # the tests
-PYTHONPATH=. python3 -m pytest glm_universal/tests/test_denotation.py -q
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests/test_denotation.py -q
 ```
 
 The Lean side:

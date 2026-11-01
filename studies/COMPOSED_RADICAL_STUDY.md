@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -155,11 +157,11 @@ Dedekind's theorem, as in Phases 113 and 114.
 
 From ``:
 
-* `PYTHONPATH=. python3 -m glm_universal.tools composed-radical` runs every
+* `PYTHONPATH=src python3 -m glm_universal.tools composed-radical` runs every
   mark in about two minutes, most of it Phase 114's and Phase 112's reports
   for C8. `--quick` skips the batteries and the regressions, and `--json`
   gives the rows.
-* `PYTHONPATH=. python3 -m pytest -q glm_universal/tests/test_composed_radical.py`
+* `PYTHONPATH=src python3 -m pytest -q glm_universal/tests/test_composed_radical.py`
   runs the tests.
 * `lake build RequestProject.GLM.ComposedRadicals` from the repository root
   builds the Lean file.

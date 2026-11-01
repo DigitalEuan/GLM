@@ -1,7 +1,8 @@
 """Tests for the answer censuses guarded by what their answers quote, and
 the replay gate as a sign-off instrument (Phase 174).
 
-*Created 20 October 2026.*
+*Created 20 October 2026.  Last altered 31 October 2026 (repository check:
+the replay closure is looked up at the ``src/`` layout).*
 
 ``studies/QUOTED_MEASUREMENTS_STUDY.md`` pre-registered its marks.  These
 tests pin:
@@ -69,5 +70,12 @@ def test_the_replay_instrument_is_declared():
     assert "--replay-only" in replay.command
     closure = {p.relative_to(C.L.REPOSITORY_ROOT).as_posix()
                for p in C.check_closure(replay)}
-    assert "glm_universal/evaluation/replay.py" in closure
-    assert "GLM.py" in closure
+    # The tree's layout since the October 2026 reorganisation: the package
+    # and the command line live under ``src/``.
+    root = C.L.REPOSITORY_ROOT
+    replay_rel = (qm.PACKAGE_ROOT / "evaluation" / "replay.py").resolve() \
+        .relative_to(root).as_posix()
+    cli_rel = (qm.PACKAGE_ROOT.parent / "GLM.py").resolve() \
+        .relative_to(root).as_posix()
+    assert replay_rel in closure
+    assert cli_rel in closure

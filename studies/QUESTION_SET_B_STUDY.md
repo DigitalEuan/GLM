@@ -12,6 +12,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 ---
 
 ## 0. Where this comes from
@@ -428,7 +430,7 @@ already is from it:
 
 ## 9. Re-running
 
-`PYTHONPATH=. python3 -m glm_universal.tools question-set-b` from ``
+`PYTHONPATH=src python3 -m glm_universal.tools question-set-b` from ``
 (about a minute and a half; `--json` for the rows, `--no-variants` to skip
 §6). `GLM.py -q '<question>' -c 1,2,3` for one question with its three
 columns and gate line. Tests: `glm_universal/tests/test_question_frames.py`.

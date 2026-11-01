@@ -1,0 +1,3009 @@
+# source_material/INTAKE.yaml -- the intake ledger (directive D22)
+#
+# Created 31 October 2026 (repository check).  One record per supplied item
+# (a folder or a loose file directly under source_material/ToDo/ or
+# source_material/done/).  Read and written by `python3 -m glm_universal.intake`;
+# `python3 -m glm_universal.intake check` fails when this file and the folders
+# disagree, or when a record claims a stage without its evidence.
+#
+# Stages, in order: received -> triaged -> study_drafted -> tested ->
+# lean_written -> lean_verified -> measured -> absorbed (filed in done/), or
+# closed with a reason (filed in done/).  lean_written: the Lean files are in
+# the build tree and the audit and the static check passes; lean_verified:
+# the owner's build record scripts/logs/lean_build_evidence.json (written by
+# scripts/rebuild_lean.sh after a passing build) matches those files and
+# everything they import, and lean_build records which build that was.  `stage` is the stage of the item's open work;
+# parts taken earlier are listed under `parts` with where they went.  A part's
+# status is absorbed, closed, open, staged (its code waits in the item's
+# staged/ folder for the build record) or provisional (its code is installed
+# in the package ahead of the build record by the owner's decision, recorded
+# in src/glm_universal/wheels/_data/provisional.json; answers resting on it say
+# so; absorption on a verifying build record makes it absorbed and removes the
+# register entry).  staged, provisional and open parts keep an item in ToDo/.
+# ahead_of_build (added 1 November 2026) marks an item absorbed ahead of the
+# build by the owner's decision, on its measurements and a standalone Lean
+# check -- {decision, date, standalone (the Lean files checked on their own),
+# check (how), confirm} -- in place of lean_build; its register entry has the
+# state "absorbed ahead of the build", and `python3 -m glm_universal.intake
+# confirm-build <id>` replaces the field by lean_build once the build record
+# of scripts/rebuild_lean.sh verifies the item's Lean files.
+#
+# Field guide: tests are package-relative (`tests/test_x.py`, run with pytest,
+# or where it is not installed with `python3 -m
+# glm_universal.intake.fallback_tests`, which never passes a file in which no
+# test ran), `item:<path> [args]` (a script inside the item, run
+# with python3 in a scratch copy of the item; `item:` alone runs a single-file
+# item), `call:<module>.<function>` (a study's recompute function, called in
+# a fresh interpreter) or `staged:<path>` (a test run against the item's
+# staged/ code in a scratch overlay of the package); test_results holds
+# {test, result, detail, date, fingerprint} entries, newest last (a detail is
+# written by the intake -- the exit code, what it means and, for a package
+# test, the counts -- and never copies what the test printed): `tested`
+# needs the last result of every named test to be `pass`, and a promotion
+# accepts only a pass whose fingerprint is that of the code as it now stands
+# (the package, the item and its staged files), running any other again;
+# lean names are relative to src/lean/RequestProject/GLM; absorbed_into names
+# modules relative to src/glm_universal (`reasoning/pcgs`); measured starts
+# with the id of the closed, finished study whose deciding figure records the
+# measurement; acceptance is the decision against that study's declared
+# criterion -- {study, criterion, result (both quoted from the study), marks
+# (met marks that carry the help), decision: accept, date} -- written by
+# `python3 -m glm_universal.intake accept` and required by every promotion to
+# measured or beyond; legacy_absorption marks a record absorbed by an earlier
+# round, before acceptance decisions were recorded (done/ and absorbed only;
+# no promotion accepts it); local_only marks a file kept on the owner's
+# machine and out of version control (*.zip, *.pdf).
+
+schema: glm-intake-ledger/v1
+created: 31 October 2026
+last_altered: 1 November 2026
+items:
+- id: GLM_IMPROVEMENT_ROADMAP
+  path: ToDo/GLM_IMPROVEMENT_ROADMAP.md
+  kind: plan
+  offers: 'A prioritised roadmap: P0 reproducible release and evaluation hygiene; P1 a typed semantic
+    IR and planner; P2 held-out and adversarial evaluation; P3 typed compositional derivation; P4
+    typed multi-turn state; P5 external-ground-truth validation; P6 a program-text register; P7 sparse
+    chemistry completion.'
+  stage: triaged
+  studies:
+  - SEMANTIC_PLAN_STUDY
+  parts:
+  - part: P1 typed semantic IR and planner; P2 held-out evaluation
+    status: absorbed
+    studies:
+    - SEMANTIC_PLAN_STUDY
+    absorbed_into:
+    - runtime/semantic_plan
+    - reasoning/typed_plans
+    lean:
+    - SemanticPlan
+  - part: P0 reproducible release and evaluation hygiene
+    status: open
+  - part: P3 typed compositional derivation (30 preregistered tasks)
+    status: open
+  - part: P4 typed multi-turn state and set-valued references
+    status: open
+  - part: P5 external-ground-truth validation
+    status: open
+  - part: P6 program-text register
+    status: open
+  - part: P7 sparse chemistry completion
+    status: open
+  last_action: '31 October 2026: filed in ToDo/ (moved from source_material/GLM_IMPROVEMENT_ROADMAP.md);
+    tests run in place on scratch copies; record written'
+  next_step: choose the next work package (the roadmap's order puts P3 next) and `scaffold GLM_IMPROVEMENT_ROADMAP
+    --study <ID>` for it; P1-P2 are taken.
+- id: HISTORY_RECORDED_NOW_V4_STUDY
+  path: ToDo/HISTORY_RECORDED_NOW_V4_STUDY.md
+  kind: full study
+  offers: 'History recorded in the now, v4: NowMoment wired into the live query loop ("6 of 6 resolved"),
+    deep-hole superpositions resolved by 32D/48D escalation, a differential tax, a zero-storage rollback.'
+  stage: triaged
+  studies:
+  - NOW_RECEIPT_STUDY
+  parts:
+  - part: the differential tax max(0, dTAX)
+    status: closed
+    studies:
+    - NOW_RECEIPT_STUDY
+    note: reproduced; the v4 boundary is confirmed (NOW_RECEIPT_STUDY)
+  - part: the query-loop integration ("6 of 6 resolved")
+    status: open
+    note: 'no control: nothing shows a nonsense string would not resolve at the same rung'
+  - part: the 32D/48D higher-lattice escalation
+    status: open
+    note: argued from code distance, not computed; v4 notes the 32D run did not happen
+  last_action: '31 October 2026: filed in ToDo/ (moved from source_material/HISTORY_RECORDED_NOW_V4_STUDY.md);
+    tests run in place on scratch copies; record written'
+  next_step: scaffold a study for the query-loop integration with a nonsense-string control, or for
+    the 48D tie claim measured on the carrier (see DEEP_HOLE_ESCALATION_STUDY).
+- id: R_Calculus
+  path: done/R_Calculus
+  kind: code
+  offers: 'The residual calculus: a notation (residual_notation_1.txt) and two scripts, 01/r_calculus.py
+    and 02/r_calculus_v2.py, with their supplied outputs.'
+  stage: closed
+  test_results:
+  - test: item:01/r_calculus.py
+    result: fail
+    detail: 'failed (exit 1): the command ended without success; the script imports `geometric_corpus_prototype`,
+      which the item does not supply'
+    date: 31 October 2026
+  - test: item:02/r_calculus_v2.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  parts:
+  - part: the residual calculus as a hypothesis engine
+    status: closed
+    note: closed with the item, 31 October 2026
+  closed_reason: 'continued in Rule30_GLM_Study: the owner''s STATUS.md §2.1 item 0 says R_Calculus
+    becomes hypothesis_engine.py in Rule30_GLM_Study, which carries the residual-calculus idea on
+    as a hypothesis engine (16/16 of its tests pass); nothing separate to absorb'
+  evidence:
+  - STATUS.md §2.1 item 0 (owner's note); source_material Rule30_GLM_Study glm_engine/hypothesis_engine.py;
+    item test 02/r_calculus_v2.py passes, 01/r_calculus.py needs geometric_corpus_prototype, which
+    was never supplied
+  last_action: '31 October 2026: closed and filed in done/'
+- id: Rule30_GLM_Study
+  path: done/Rule30_GLM_Study
+  kind: Lean
+  offers: 'The Rule 30 study: a Lean package (Rule30, Escalation, HypothesisEngine with Wheel and
+    NeedsWheel), the hypothesis engine (glm_engine/hypothesis_engine.py, v4-v16 in scripts/), the
+    wheel (scripts/glm_wheel.py, glm_wheel.json), rounds, figures and the study record.'
+  stage: absorbed
+  studies:
+  - RULE30_STUDY
+  - RULE30_HYPOTHESIS_ENGINE
+  - RULE30_WHEEL
+  - INTAKE_CAPABILITY_STUDY
+  tests:
+  - item:glm_engine/test_hypothesis_engine.py
+  - tests/test_hypothesis_engine.py
+  - tests/test_hypothesis_tools.py
+  - tests/test_intake_capability_study.py
+  test_results:
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:tools/test_glm_study_yaml.py
+    result: fail
+    detail: 'failed (exit 1): the command ended without success; the script imports `glm_study_yaml`,
+      which the item does not supply'
+    date: 31 October 2026
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:d75d0b164d2645e9b2f06384ebfa2674f8436d2aad4dcf22213a828b178504be
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:9ef1d4c5dfe3c4b0efe79dbbc368d2136aefc8d8ba4f3fbd8ef86f62cd4324b7
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:712f23f26bef09e8040cb156729d02e80d7c23b9a3c52065a77ef73b948b039a
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cdd97654fd5cd2a82c31439244ca761e2423f60a54615200557daea98c036443
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:1c1469188f2b0765014fa43f8241e06107dedc2b17e3a48dbdedba3e22faa74c
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:66ff0c31aadba5505e4527ff05c5fda18fb2b2b8203b46178b32bbd91ddcdb4b
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:2e140f290c6a70e15d4b379624c0550cfc4460937959c9309136abe404c55ff4
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:c07693f78aa2bca22dbee07d12b376dc42f68989a3d1c5f9c267d27a890018d1
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:f0ea5a63619037b2b7e12d2ca0f081ccbb19fd56c7869420bda712b08570cec2
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:9e32d8f8c0b883769cefe71df5d40b8037a9967a60d93bee6d2e4f0d348823fc
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6d836b50610f4d90aad3f04a9450d6f967449713cfbfb78bf27530017b88ca48
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:905d23036b854c4078df49fa334dbaefafd3ea9c267dc3dc16c8636b20a59408
+  - test: item:glm_engine/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:f12a6b5156e8ea0f46a86149f38427cf4e424136483452225cbc8b22f8900fe1
+  - test: tests/test_hypothesis_engine.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 9 passed, 0 failed,
+      0 skipped of 9 collected'
+    date: 1 November 2026
+    fingerprint: sha256:f12a6b5156e8ea0f46a86149f38427cf4e424136483452225cbc8b22f8900fe1
+  - test: tests/test_hypothesis_tools.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 22 passed, 0 failed,
+      0 skipped of 22 collected'
+    date: 1 November 2026
+    fingerprint: sha256:f12a6b5156e8ea0f46a86149f38427cf4e424136483452225cbc8b22f8900fe1
+  - test: tests/test_intake_capability_study.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 8 passed, 0 failed,
+      0 skipped of 8 collected'
+    date: 1 November 2026
+    fingerprint: sha256:f12a6b5156e8ea0f46a86149f38427cf4e424136483452225cbc8b22f8900fe1
+  lean:
+  - Rule30
+  - Escalation
+  - HypothesisEngine
+  - HypothesisEngine/Wheel
+  - HypothesisEngine/NeedsWheel
+  - Rule30/DriveWheel
+  - Rule30/LeftDiagonalPeriods
+  - IntakeChecks/RuleThirtyBits
+  ahead_of_build:
+    decision: Absorb the ones that measurably help now, based on your measurements and standalone
+      Lean check; record that my own rebuild_lean.sh run still has to confirm them
+    date: 1 November 2026
+    standalone:
+    - IntakeChecks/RuleThirtyBits
+    check: built standalone with Lean 4.34 and Mathlib (standard axioms only), outside the project
+      build, on 1 November 2026; the project build (Lean v4.28, scripts/rebuild_lean.sh) has not been
+      run
+    confirm: scripts/rebuild_lean.sh, then `python3 -m glm_universal.intake confirm-build Rule30_GLM_Study`
+  measured: 'INTAKE_CAPABILITY_STUDY §5 (1 November 2026, glm_universal.reasoning.intake_capability_study.intake_capability_report):
+    with the hypothesis engine wired in (tool rule30, tool conjecture, the plan search behind tool
+    arc) the GLM answers 9 of the 50 stored ARC tasks right, 0 wrong (2 without it; a development
+    set, not a held-out one), 16 of the 39 Rule 30 battery sentences right on the answering path,
+    0 wrong (0 without it; bar 20, R2 missed: the recognisers read 17), 12 of 12 conjectures right;
+    the battery 39 of 39 with the ledger; 12 of 14 marks met (R2, S2 missed; S2 concerns the sequence
+    wheel)'
+  acceptance:
+    study: INTAKE_CAPABILITY_STUDY
+    criterion: The hypothesis engine of `Rule30_GLM_Study` is absorbed when, wired in, the GLM answers
+      right questions it refused without it on the stored ARC tasks, on Rule 30 or on conjectures
+      about every n, with 0 wrong answers there (A1, R1, G1, G2), and its standalone Lean check holds
+      (L1).
+    result: With the hypothesis engine the GLM answers 9 of the 50 stored ARC tasks right (2 without
+      it), 16 of the 39 Rule 30 sentences right on the answering path (0 without it) and 12 of 12
+      conjectures right, with 0 wrong; the Rule 30 battery is 39 right with the ledger and the general
+      domain 10 right.
+    marks:
+    - A1
+    - A2
+    - A3
+    - R1
+    - R3
+    - G1
+    - G2
+    - X1
+    - L1
+    decision: accept
+    date: 1 November 2026
+  absorbed_into:
+  - reasoning/hypothesis_engine
+  - reasoning/hypothesis_tools
+  parts:
+  - part: the Lean package
+    status: absorbed
+    lean:
+    - Rule30
+    - Escalation
+    - HypothesisEngine
+    - HypothesisEngine/Wheel
+    - HypothesisEngine/NeedsWheel
+    - Rule30/DriveWheel
+    - Rule30/LeftDiagonalPeriods
+    note: in src/lean/RequestProject/GLM (Rule30/, Escalation/, HypothesisEngine/), imported by AxiomAuditAll.lean
+  - part: the hypothesis engine and the wheel (Python)
+    status: absorbed
+    note: 'the engine (glm_engine/hypothesis_engine.py, version 18) installed in the package on 1
+      November 2026 (Phase 186) as reasoning/hypothesis_engine (exact; a work-bounded evaluator in
+      place of eval) and reasoning/hypothesis_tools (tool rule30, tool conjecture, the plan search
+      behind tool arc), tested by tests/test_hypothesis_engine.py and tests/test_hypothesis_tools.py,
+      measured in INTAKE_CAPABILITY_STUDY; the wheel (scripts/glm_wheel.py, glm_wheel.json) is not
+      copied into the package: the engine''s Rule 30 domain derives its rings afresh (39 claims, mark
+      R1), and the engine''s command turn reads the item''s glm_wheel.json where the item is filed;
+      absorbed ahead of the build on 1 November 2026 by the owner''s decision, on its measurements
+      and a standalone Lean check; the owner''s build has still to confirm it'
+    studies:
+    - INTAKE_CAPABILITY_STUDY
+    absorbed_into:
+    - reasoning/hypothesis_engine
+    - reasoning/hypothesis_tools
+    lean:
+    - IntakeChecks/RuleThirtyBits
+  wheels:
+  - name: Rule 30 verification wheel
+    file: glm_wheel.json (scripts/glm_wheel.py)
+    what: three rings (KNOWS 4, THINKS-TRUE 24, DOESN'T-KNOW 7 entries), 3 verifications and a language
+      wheel of 13 entries mapping hypotheses to Lean names
+    test_result: 11 of the 13 language-wheel entries cite Lean names; every name they cite is present
+      in src/lean; H44 is marked not formalised and WHEEL-VERIFY is an arithmetic record (the next
+      period-doubling diagonal estimated at 2008133563622280/7294973)
+    overlap: Rule30/DriveWheel.lean, HypothesisEngine/Wheel.lean (the wheel contract)
+    lean_obligations:
+    - every Lean name the language wheel cites resolves to a theorem in the build (a name check, no
+      new mathematics)
+    - WHEEL-VERIFY's estimate is exact rational arithmetic from the recorded gaps (a norm_num fact)
+    lean:
+    - HypothesisEngine/Wheel
+    - Rule30/DriveWheel
+  last_action: '1 November 2026: absorbed ahead of the build by the owner''s decision (0 file(s) installed);
+    filed in done/'
+  next_step: 'owner: run scripts/rebuild_lean.sh; when its build record verifies the Lean files, `python3
+    -m glm_universal.intake confirm-build Rule30_GLM_Study`'
+- id: attention
+  path: ToDo/attention
+  kind: code
+  offers: An exact attention simulator and an aggregation bench on the GLM substrate, with their experiments,
+    figures and two study documents.
+  stage: tested
+  studies:
+  - ATTENTION_SIMULATOR_STUDY
+  - AGGREGATION_BENCH_STUDY
+  tests:
+  - call:glm_universal.sandbox.attention_simulator.attention_report
+  test_results:
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+  - test: 'bench_report(GeometricSession()) (AGGREGATION_BENCH_STUDY''s recompute function; needs
+      a session, so not a call: test)'
+    result: pass
+    detail: returned in 192 s
+    date: 31 October 2026
+  - test: item:attention_experiments.py, item:aggregation_experiments.py
+    result: error
+    detail: 'not run: they need matplotlib, which this checkout lacks'
+    date: 31 October 2026
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:a3582286a9d9afd74dcd5915a3be4234ed30636fecb83eab0d523bbd1be7aa66
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:526a95216dcb4cd2f904462797690b7b4835fd13e0e38f93e88acae0cdf5ab6d
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:c4fe6f2d0223ba81d660ef651c7894e45bf93fc8832225bd2e1cc90b7d9f0f4a
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:b2cde73fb396be248bd6bc2a6ca6159e4717040bdc40bb9460192b12c9a2cbfb
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:736261662176aca84f2d6978e2ffbafdbc0f7d83a14c8537e7999ad96b303946
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:178389fa0e0ee40bffb0d050feb1056f7be6849dd071426fd87114387ac96678
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:bb3283e74257c79de455edebbf725137e5c509c4ec40f5a1a9ccdd9f7ebd1880
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:417d1db98cb368e2f0848d020bebe15557dbc7eb08fea13ad346472c033ce91d
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:78845ce2398ca54e41342b52fe4be62d8bc47acf59ba51cf2313f7fed823a01b
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:9ea8010fa766ed50cdb46edca65174e23e3e28eb94fecc8a30da99dcde5081b3
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 31 October 2026
+    fingerprint: sha256:6c3788849621b5278c072652f88101d15645f8db90b86e4cbce11b6f173f8ee0
+  - test: call:glm_universal.sandbox.attention_simulator.attention_report
+    result: pass
+    detail: 'passed (exit 0): the function returned and no check in its result reads False'
+    date: 1 November 2026
+    fingerprint: sha256:8a7ff9ae2b432835da3912c6664884e96a696e72eb8467e7350511dbc9840f83
+  lean_obligations:
+  - 'the construction''s head counts at d = 24: transpose 1, softmax 3, matrix product 19 (8 for 2x12
+    by 12x2), inverse 6'
+  - 'feasibility: Y2 = X A X^T needs n <= 2d, so n <= 48 at d = 24 (the literal maximum the report
+    gives)'
+  - 'the coverage boundary at d = 3: refused at n = 7, passed at n = 6'
+  parts:
+  - part: the simulator and the bench as sandbox modules
+    status: absorbed
+    studies:
+    - ATTENTION_SIMULATOR_STUDY
+    - AGGREGATION_BENCH_STUDY
+    absorbed_into:
+    - sandbox/attention_simulator
+    - sandbox/aggregation_bench
+    note: sandboxed (not on the answering path); attention_simulator.py is byte-identical to the item's,
+      aggregation_bench.py differs only by a float-free refusal message
+  - part: promotion out of the sandbox
+    status: open
+  last_action: '1 November 2026: tests run again: 1 of 1 passed'
+  next_step: Lean verification of the finite claims in lean_obligations (the studies cite only Constants.lean);
+    then measure promotion against the GLM without it.
+- id: cent_compiler_v12
+  path: ToDo/cent_compiler_v12
+  kind: full study
+  offers: 'cent_compiler v2.0, a cross-domain physical compiler (pound -> cent -> delta): it decomposes
+    an abstract operation into atomic steps, enumerates physical implementations, escalates through
+    five fidelity layers and emits a SPICE netlist; 31 JSON wheels (72 axioms, 119 cases), 22 application
+    proposals, a framework and a validation report.'
+  stage: lean_written
+  studies:
+  - CENT_WHEELS_STUDY
+  - INTAKE_CAPABILITY_STUDY
+  tests:
+  - item:cent test
+  - item:tests/show_work.py
+  - tests/test_cent_wheels.py
+  - tests/test_wheels.py
+  - tests/test_derive_query.py
+  test_results:
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:tests/test_all.py
+    result: fail
+    detail: 'failed (exit 1): the command ended without success; one of the 15 checks in the item''s
+      own test script failed'
+    date: 31 October 2026
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+  - test: staged:src/glm_universal/tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6be2b63f954ab029ac7022f1ee5932256efbf903b0e756cf138794b3c0a78fac
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6be2b63f954ab029ac7022f1ee5932256efbf903b0e756cf138794b3c0a78fac
+  - test: staged:src/glm_universal/tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:6be2b63f954ab029ac7022f1ee5932256efbf903b0e756cf138794b3c0a78fac
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:6be2b63f954ab029ac7022f1ee5932256efbf903b0e756cf138794b3c0a78fac
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:359fec5947874daa42d6824bcf98331358364173d203cf0e63e2fad398d23f41
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:359fec5947874daa42d6824bcf98331358364173d203cf0e63e2fad398d23f41
+  - test: staged:src/glm_universal/tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:359fec5947874daa42d6824bcf98331358364173d203cf0e63e2fad398d23f41
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:359fec5947874daa42d6824bcf98331358364173d203cf0e63e2fad398d23f41
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:555a0ad4a8e514643b204b1b32072e54ace5e982527010a03ac39ef7c2f2c536
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:555a0ad4a8e514643b204b1b32072e54ace5e982527010a03ac39ef7c2f2c536
+  - test: staged:src/glm_universal/tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:555a0ad4a8e514643b204b1b32072e54ace5e982527010a03ac39ef7c2f2c536
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:555a0ad4a8e514643b204b1b32072e54ace5e982527010a03ac39ef7c2f2c536
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:97eccf49be242175c8b7f5e85e24ff7cd1219119f093e8ba875ef697bfdad6f5
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:97eccf49be242175c8b7f5e85e24ff7cd1219119f093e8ba875ef697bfdad6f5
+  - test: staged:src/glm_universal/tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:97eccf49be242175c8b7f5e85e24ff7cd1219119f093e8ba875ef697bfdad6f5
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:97eccf49be242175c8b7f5e85e24ff7cd1219119f093e8ba875ef697bfdad6f5
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:606f5358c89990a43db9ce40efc591d8bb5dc8798450c82e1bc225996ecee5b5
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:606f5358c89990a43db9ce40efc591d8bb5dc8798450c82e1bc225996ecee5b5
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:606f5358c89990a43db9ce40efc591d8bb5dc8798450c82e1bc225996ecee5b5
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:606f5358c89990a43db9ce40efc591d8bb5dc8798450c82e1bc225996ecee5b5
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:dc0646d0c679c6fb4c42d23d5e906c2603130b43cad28bf7340df6970657c774
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:dc0646d0c679c6fb4c42d23d5e906c2603130b43cad28bf7340df6970657c774
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:dc0646d0c679c6fb4c42d23d5e906c2603130b43cad28bf7340df6970657c774
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:dc0646d0c679c6fb4c42d23d5e906c2603130b43cad28bf7340df6970657c774
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:7ded2f49134c49a876ccb23f72489d346ce0c9158c52fae0d38012c0105a9b41
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:7ded2f49134c49a876ccb23f72489d346ce0c9158c52fae0d38012c0105a9b41
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:7ded2f49134c49a876ccb23f72489d346ce0c9158c52fae0d38012c0105a9b41
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:7ded2f49134c49a876ccb23f72489d346ce0c9158c52fae0d38012c0105a9b41
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:152180c3e7d212025abf0e32ee38487a8c50e727eecbbb32d530d7289c888000
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:152180c3e7d212025abf0e32ee38487a8c50e727eecbbb32d530d7289c888000
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:152180c3e7d212025abf0e32ee38487a8c50e727eecbbb32d530d7289c888000
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:152180c3e7d212025abf0e32ee38487a8c50e727eecbbb32d530d7289c888000
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:4d6d5e4895e3e7ca06cf795c8cdcc3dec1532704cb08f56583848063dc41c103
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:4d6d5e4895e3e7ca06cf795c8cdcc3dec1532704cb08f56583848063dc41c103
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:4d6d5e4895e3e7ca06cf795c8cdcc3dec1532704cb08f56583848063dc41c103
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:4d6d5e4895e3e7ca06cf795c8cdcc3dec1532704cb08f56583848063dc41c103
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:876e9035870fac073d928c81881a76532e1cb9d28912468599e492a9ee43548d
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:876e9035870fac073d928c81881a76532e1cb9d28912468599e492a9ee43548d
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:876e9035870fac073d928c81881a76532e1cb9d28912468599e492a9ee43548d
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:876e9035870fac073d928c81881a76532e1cb9d28912468599e492a9ee43548d
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:9fe3e979184a74ecae4adc3530581fd0449ab4a261b12f0478e14f8bb099548c
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:9fe3e979184a74ecae4adc3530581fd0449ab4a261b12f0478e14f8bb099548c
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 31 October 2026
+    fingerprint: sha256:9fe3e979184a74ecae4adc3530581fd0449ab4a261b12f0478e14f8bb099548c
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:9fe3e979184a74ecae4adc3530581fd0449ab4a261b12f0478e14f8bb099548c
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:f51cf5e1a973d9f401f6a6a73aa7d79f5e2d4db0057a19a7259e1aa7236c200a
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:f51cf5e1a973d9f401f6a6a73aa7d79f5e2d4db0057a19a7259e1aa7236c200a
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 1 November 2026
+    fingerprint: sha256:f51cf5e1a973d9f401f6a6a73aa7d79f5e2d4db0057a19a7259e1aa7236c200a
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 1 November 2026
+    fingerprint: sha256:f51cf5e1a973d9f401f6a6a73aa7d79f5e2d4db0057a19a7259e1aa7236c200a
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:2f0cba8afa0a349d90b119ab9e6031576f68973f88c317687e41340777b050b2
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:2f0cba8afa0a349d90b119ab9e6031576f68973f88c317687e41340777b050b2
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 1 November 2026
+    fingerprint: sha256:2f0cba8afa0a349d90b119ab9e6031576f68973f88c317687e41340777b050b2
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 1 November 2026
+    fingerprint: sha256:2f0cba8afa0a349d90b119ab9e6031576f68973f88c317687e41340777b050b2
+  - test: tests/test_derive_query.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 9 passed, 0 failed,
+      0 skipped of 9 collected'
+    date: 1 November 2026
+    fingerprint: sha256:2f0cba8afa0a349d90b119ab9e6031576f68973f88c317687e41340777b050b2
+  lean:
+  - Wheels/CentWheels
+  - IntakeChecks/Derivability
+  lean_check: '31 October 2026: OK'
+  ahead_of_build:
+    decision: Absorb the ones that measurably help now, based on your measurements and standalone
+      Lean check; record that my own rebuild_lean.sh run still has to confirm them
+    date: 1 November 2026
+    standalone:
+    - IntakeChecks/Derivability
+    check: built standalone with Lean 4.34 and Mathlib (standard axioms only), outside the project
+      build, on 1 November 2026; the project build (Lean v4.28, scripts/rebuild_lean.sh) has not been
+      run
+    confirm: scripts/rebuild_lean.sh, then `python3 -m glm_universal.intake confirm-build cent_compiler_v12`
+  lean_obligations:
+  - 'Wheels/CentWheels (GLM.CentWheels), written 31 October 2026 from the numbers of the absorbed
+    data: dimL (a table''s dimension map), derivable_of_combo, not_derivable_of_dot (via ConnectedMachine.not_derivable_of_functional);
+    per absorbed wheel W16-W25, W28, W29, W32-W34 axioms_balanced (each axiom''s two sides have equal
+    exponent vectors over L M T I H N J A) and q_<case> for every case, control and CENT_WHEELS_STUDY
+    section-4 question (Derivable by an explicit rational combination, or not, by a separating functional);
+    W4Ext / W6Ext (the additions balance, q_W4_04, q_W6_03 derivable, q_W6_03_without_addition refused);
+    W11Dom-W15Dom (axioms balanced at SI7, the three A residuals stated, the 14 supplied cases derivable);
+    Supplied.<W>_axiom_<i>_residual and _unbalanced for the 10 supplied axioms that fail at SI7 on
+    their own tables; 183 theorems'
+  - the Lean build is confirmed only by the owner rebuild log (scripts/rebuild_lean.sh); here the
+    static check (python3 -m glm_universal.lean_check) passed, every theorem was type-checked in sections
+    by the round under Lean 4 + Mathlib against a stand-in identical to ConnectedMachine.Derivable,
+    and tests/test_cent_wheels.py reads the file and re-checks every vector, table, certificate and
+    verdict against the Python in exact arithmetic (wheels/lean_cent_data.agreement)
+  measured: 'CENT_WHEELS_STUDY §8 (31 October 2026, glm_universal.wheels.cent_wheels_study.cent_wheels_report):
+    with the 15 absorbed cent wheels the GLM''s exact engine licenses 63 of the 64 pre-registered
+    law questions and 0 of the 51 not-a-law questions (bars: at least 56, at most 0), against 1 of
+    64 laws with the fifteen wheels W01-W15 alone (bar: at most 4); 26 of 26 supplied negative controls
+    refused; 10 supplied axioms fail at SI7 (the record''s seven plus W21, W25 and W29 axiom 2), 0
+    absorbed; W22-03 settled not derivable; 16 of 17 marks met or reported, E2 not met (the supplied
+    W4 also omits the repository case W4-M1)'
+  acceptance:
+    study: CENT_WHEELS_STUDY
+    criterion: A wheel of W16–W35 is absorbed when, after rule R, it has at least one axiom; every
+      axiom balances at SI7 on its (corrected) table; S2 and S5 hold for it; and every one of its
+      cases has a settled flag equal to span membership — each proved in Lean (L1).
+    result: '63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at
+      least 56, at most 0), against 1 of 64 laws with the fifteen wheels alone (bar: at most 4); 26
+      of 26 supplied negative controls refused; 10 supplied axioms failing at SI7, 0 absorbed.'
+    marks:
+    - I1
+    - D1
+    - D2
+    - E1
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+    - L1
+    - M1
+    - M2
+    - M3
+    - I4
+    decision: accept
+    date: 31 October 2026
+  parts:
+  - part: wheels/W16.json ... W34.json, wheels/index.json (the new formula wheels W16-W25, W28, W29,
+      W32-W34)
+    status: absorbed
+    studies:
+    - CENT_WHEELS_STUDY
+    - INTAKE_CAPABILITY_STUDY
+    absorbed_into:
+    - wheels/cent_wheels
+    - wheels/cent_wheels_study
+    - wheels/lean_cent_data
+    - wheels/derive_query
+    lean:
+    - Wheels/CentWheels
+    - IntakeChecks/Derivability
+    note: 'installed provisionally in src/glm_universal/wheels/ by the owner''s decision of 31 October
+      2026 ("keep them in the wheels folder now, clearly marked provisional until my Lean build log
+      confirms them"), recorded in src/glm_universal/wheels/_data/provisional.json; Lean written,
+      the owner''s build pending: 15 wheels as Python literals (the package never reads source_material/),
+      with the corrections of rule R recorded in CORRECTIONS (W21 axiom 1 and table, W25 axioms 1-2
+      and cases, W29 axiom 2 and case, W34 table, seven flags) and the drops in DROPPED (W22 axiom
+      2, W32 axiom 2, W33 axiom 1); registered as the cent family CENT_WHEEL_IDS / cent_family / answer_derivability
+      in wheels/__init__.py (ALL_WHEELS unchanged); answer_derivability carries the provisional note
+      when a cent wheel answers; the supplied files are unchanged; absorbed ahead of the build on
+      1 November 2026 by the owner''s decision, on its measurements and a standalone Lean check; the
+      owner''s build has still to confirm it'
+  - part: wheels/W35.json (electrophysiology)
+    status: closed
+    studies:
+    - CENT_WHEELS_STUDY
+    note: 'evaluated and not absorbed: both axioms fail at SI7 on their own table and cannot be corrected
+      without guessing (Nernst needs a logarithm; Fick a 1/length); recorded in DROPPED and NOT_ABSORBED,
+      their residuals proved in Wheels/CentWheels (Supplied)'
+  - part: wheels/W1.json ... W10.json (the engineering wheels, with the W4 and W6 additions)
+    status: absorbed
+    studies:
+    - CENT_WHEELS_STUDY
+    - INTAKE_CAPABILITY_STUDY
+    absorbed_into:
+    - wheels/cent_wheels
+    - wheels/derive_query
+    lean:
+    - Wheels/CentWheels
+    - IntakeChecks/Derivability
+    note: 'installed provisionally with the cent family (wheels/cent_wheels.py, the owner''s decision
+      of 31 October 2026): W1-W3, W5, W7-W10 identical to engineering/wheels.py (nothing new); the
+      W4 and W6 additions kept as data (ENGINEERING_ADDITIONS, extended_wheel) with Lean W4Ext / W6Ext;
+      engineering/wheels.py W4 and W6 unchanged (attaching the additions is a separate decision);
+      the supplied W4 also omits the repository case W4-M1, which the absorbed data keeps (mark E2
+      not met); absorbed ahead of the build on 1 November 2026 by the owner''s decision, on its measurements
+      and a standalone Lean check; the owner''s build has still to confirm it'
+  - part: wheels/W11.json ... W15.json (the domain wheels and their 14 cases)
+    status: absorbed
+    studies:
+    - CENT_WHEELS_STUDY
+    - INTAKE_CAPABILITY_STUDY
+    absorbed_into:
+    - wheels/cent_wheels
+    - wheels/derive_query
+    lean:
+    - Wheels/CentWheels
+    - IntakeChecks/Derivability
+    note: 'installed provisionally with the cent family (wheels/cent_wheels.py, the owner''s decision
+      of 31 October 2026): axioms identical as relations to wheels/w11-w15; the 14 cases kept as DOMAIN_CASES
+      with Lean W11Dom-W15Dom; angle convention SI7 decides, the A residuals of W13 axiom 3 and W14
+      axioms 1-2 stated; wheels/w11-w15 unchanged; absorbed ahead of the build on 1 November 2026
+      by the owner''s decision, on its measurements and a standalone Lean check; the owner''s build
+      has still to confirm it'
+  - part: 'cent, cent_compiler/*.py (the compiler: grammar, pattern matcher, substrate library, cost
+      function, isomorphism gate, hypothesis bridge, simulators, delta-sigma, its own wheel copies)
+      and tests/ (test_all.py, show_work.py, test_applications.py, extract_wheels.py, generate_new_wheels.py)'
+    status: open
+    note: 'not evaluated (CENT_WHEELS_STUDY sections 1 and 6); run in place: cent test pass (7/7),
+      show_work.py pass, test_all.py 14/15 because proposal 07 is filed by the item itself as DIMENSIONAL
+      CHECK (a declared tautology), not a plain bug, so nothing was fixed'
+  - part: cent_compiler/spice_emitter.py and examples/*.cir (the SPICE emission, 22 netlists)
+    status: open
+    note: not evaluated
+  - part: applications/proposal_01 ... proposal_22 (the 22 application proposals)
+    status: open
+    note: not evaluated; proposals 13, 15, 17, 18 and 19 rest on axioms CENT_WHEELS_STUDY corrected
+      or dropped (W22, W25, W32, W34, W35)
+  - part: expansion/, CENT_FRAMEWORK.md, VALIDATION_REPORT.md, README.md, examples/demo_output.txt
+      (notes and reports)
+    status: open
+    note: not evaluated
+  wheels:
+  - name: cent W1-W10
+    file: wheels/W1.json ... W10.json
+    what: the ten engineering formula wheels
+    test_result: 'read by the GLM''s own exact engine: axioms and cases of W1-W3, W5, W7-W10 identical
+      to engineering/wheels.py; W4 adds the axiom energy = 1/2 * moment_of_inertia * angular_velocity^2
+      and one case; W6 adds the axiom power = pressure * volume_flow_rate'
+    overlap: engineering/wheels.py W1-W10 and EngineeringWheels.lean
+    lean_obligations:
+    - 'W4: the new axiom balances over Z^8 and the new case is derivable from the W4 axioms'
+    - 'W6: the new axiom balances over Z^8; every existing W6 case keeps its derivability'
+    - everything else is already EngineeringWheels.lean
+  - name: cent W11-W15
+    file: wheels/W11.json ... W15.json
+    what: the five domain wheels (uniform motion; density and amount; period and the mass-spring oscillator;
+      inductors and the LC circuit; charge and energy over time)
+    test_result: 'axioms identical to src/glm_universal/wheels/w11-w15, which have 0 cases; cent supplies
+      2-3 cases each (14 in all). Two W13 and W14 axioms fail the dimension check only on the angle
+      axis A (angular_frequency carries rad, spring_constant and reactance do not): spring_constant
+      = mass * angular_frequency^2; reactance = inductance * angular_frequency; inductance * capacitance
+      * angular_frequency^2 = 1'
+    overlap: src/glm_universal/wheels/w11-w15 and DomainWheels.lean
+    lean_obligations:
+    - for each axiom, the exponent vectors over Z^8 (L, M, T, I, H, N, J, A) of its two sides, taken
+      from the wheel's own dimensions table, are equal
+    - for each case, the stated expected_derivable flag equals membership of the case's relation vector
+      in the Q-span of the axioms' relation vectors (a finite linear-algebra fact, decided by exact
+      row reduction)
+    - for each negative control (the -N cases), its relation vector is not in that span
+    - 'fix the angle convention first: either angle dimensionless (A dropped) or the three W13/W14
+      axioms carry rad explicitly; the obligation is stated after that choice'
+  - name: cent W16-W35
+    file: wheels/W16.json ... W35.json (W26, W27, W30, W31 absent)
+    what: '16 new wheels: induction, gravitation, ideal gas, EM waves, elasticity, fracture, kinetics,
+      electrochemistry, semiconductors, plasma/MHD, Josephson, spintronics, capillarity, heat and
+      mass transfer, haemodynamics, electrophysiology (34 axioms, 64 cases)'
+    test_result: 'over all 31 wheels the GLM''s engine agrees with the stated derivability on 104
+      cases, disagrees on 1 (W22-03) and cannot parse 18 (fractional powers in W21, W24-03, W25, W29,
+      W34-02: ''a power must be an integer literal''); dimension check agrees on 89, disagrees on
+      11, 5 unknown. Seven axioms of the new wheels fail the dimension check on their own tables:
+      W22 rate_constant = pre_exponential_factor * concentration / rate_constant (self-referential);
+      W25 cyclotron_frequency = magnetic_field / mass (charge missing); W32 capillary_height = surface_tension
+      * wetting_coefficient / (viscosity * capillary_radius); W34 vascular_resistance = viscosity
+      * length / pipe_radius^4 and volume_flow_rate = pressure / vascular_resistance (the table gives
+      resistance T^+1); W35 membrane_voltage = temperature / valence (k_B/e missing) and ion_flux
+      = diffusion_coefficient * ion_concentration'
+    overlap: 'none: no existing wheel covers these domains'
+    lean_obligations:
+    - for each axiom, the exponent vectors over Z^8 (L, M, T, I, H, N, J, A) of its two sides, taken
+      from the wheel's own dimensions table, are equal
+    - for each case, the stated expected_derivable flag equals membership of the case's relation vector
+      in the Q-span of the axioms' relation vectors (a finite linear-algebra fact, decided by exact
+      row reduction)
+    - for each negative control (the -N cases), its relation vector is not in that span
+    - the seven failing axioms are corrected or dropped before absorption; proposals 13, 15, 17, 18
+      and 19 rest on them
+    - fractional powers (square roots in W21, W24, W25, W29, W34) need Q-valued exponent vectors,
+      so the span statement is over Q for exponents as well
+    - 'W22-03 (diffusion_coefficient = diffusion_flux / concentration_gradient): settle whether it
+      is derivable; the engine says no, the wheel says yes'
+  last_action: '1 November 2026: staged and provisional parts absorbed ahead of the build by the owner''s
+    decision (0 file(s) installed); 4 part(s) still open'
+  next_step: 'owner: run scripts/rebuild_lean.sh; when its build record verifies the Lean files, `python3
+    -m glm_universal.intake confirm-build cent_compiler_v12`; the open part(s) (cent, cent_compiler/*.py
+    (the compiler: grammar, pattern matcher, substrate library, cost function, isomorphism gate, hypothesis
+    bridge, simulators, delta-sigma, its own wheel copies) and tests/ (test_all.py, show_work.py,
+    test_applications.py, extract_wheels.py, generate_new_wheels.py), cent_compiler/spice_emitter.py
+    and examples/*.cir (the SPICE emission, 22 netlists), applications/proposal_01 ... proposal_22
+    (the 22 application proposals), expansion/, CENT_FRAMEWORK.md, VALIDATION_REPORT.md, README.md,
+    examples/demo_output.txt (notes and reports)) stay open: measure them or close them'
+- id: conversation_experiment
+  path: ToDo/conversation_experiment
+  kind: code
+  offers: Eight conversation and experiment scripts (v1-v8), a research document, five output transcripts,
+    four generated Lean files and a small persistent store.
+  stage: study_drafted
+  studies:
+  - CONVERSATION_STUDY
+  - SUPPLIED_PORTS_STUDY
+  test_results:
+  - test: item:scripts/glm_conversation.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_conversation_v2.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_conversation_v2_extensions.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_experiments.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_experiments_v2.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_experiments_v3.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_experiments_v4.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:scripts/glm_experiments_v5.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  parts:
+  - part: four pieces taken (role binding, the conversation register, the plan store, Lean generation
+      in the sandbox)
+    status: absorbed
+    studies:
+    - CONVERSATION_STUDY
+    - SUPPLIED_PORTS_STUDY
+    absorbed_into:
+    - runtime/conversation
+    - runtime/plan_store
+    - reasoning/role_binding
+    - sandbox/lean_generation
+    lean:
+    - Conversation
+    - PlanStore
+    - RoleBinding
+  - part: two claims refuted
+    status: closed
+    studies:
+    - CONVERSATION_STUDY
+  - part: trajectory licensing
+    status: open
+    note: measurement declared in CONVERSATION_STUDY; not taken
+  - part: missing-node proposer
+    status: open
+    note: measurement declared in CONVERSATION_STUDY; not taken
+  last_action: '31 October 2026: filed in ToDo/ (moved from source_material/conversation_experiment);
+    tests run in place on scratch copies; record written'
+  next_step: name tests for the two open parts (the measurements CONVERSATION_STUDY declares), then
+    advance to tested.
+- id: formula_wheel
+  path: ToDo/formula_wheel
+  kind: code
+  offers: The formula-wheel session record with three scripts (formula wheel v2, the suite, the multi-domain
+    evidence suite) and a table of Smith-chart matching candidates.
+  stage: study_drafted
+  studies:
+  - ENGINEERING_LANGUAGE_STUDY
+  tests:
+  - item:02_glm_formula_wheel_study_v2.py
+  test_results:
+  - test: item:02_glm_formula_wheel_study_v2.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:06_glm_formula_wheel_suite.py
+    result: fail
+    detail: 'failed (exit 1): the command ended without success; the script imports `glm_formula_wheel_study_v2`,
+      which the item does not supply under that name'
+    date: 31 October 2026
+  - test: item:08_glm_multidomain_evidence_suite.py
+    result: fail
+    detail: 'failed (exit 1): the command ended without success; the script imports `glm_delta_sigma_audio_study`,
+      which the item does not supply'
+    date: 31 October 2026
+  parts:
+  - part: 'Priority 1: the cases through the real register'
+    status: absorbed
+    studies:
+    - ENGINEERING_LANGUAGE_STUDY
+    absorbed_into:
+    - engineering/wheels
+    - engineering/speak
+    lean:
+    - EngineeringWheels
+  - part: the blind ranking of glm_smith_matching_candidates.csv
+    status: open
+  - part: 'Priority 5: typed operators (complex power with conjugation)'
+    status: open
+  wheels:
+  - name: formula wheel v2 (02_glm_formula_wheel_study_v2.py)
+    file: 02_glm_formula_wheel_study_v2.py
+    what: a standalone formula wheel of 41 cases checked against their own expectations
+    test_result: runs; its own check reports 41 of 41
+    overlap: taken into engineering/wheels.py W1-W10 by ENGINEERING_LANGUAGE_STUDY
+    lean_obligations:
+    - none beyond EngineeringWheels.lean for the taken cases
+    lean:
+    - EngineeringWheels
+  last_action: '31 October 2026: filed in ToDo/ (moved from source_material/formula_wheel); tests
+    run in place on scratch copies; record written'
+  next_step: scaffold a study for the blind ranking of the candidate table (it needs the load model
+    first); 06 and 08 need glm_smith_chart_study and glm_delta_sigma_audio_study, which were not supplied.
+- id: glm_vision_experiments_v14
+  path: ToDo/glm_vision_experiments_v14.py
+  kind: code
+  offers: 'The consolidated self-inspecting agent of fourteen vision experiments: a filter, an understanding
+    and a cross-domain check, applied to the GLM''s own substrate.'
+  stage: triaged
+  test_results:
+  - test: 'item:'
+    result: fail
+    detail: 'failed (exit 1): the command ended without success; the script uses `Meaning.calendar_day`,
+      which the repository''s `Meaning` does not define'
+    date: 31 October 2026
+  last_action: '31 October 2026: filed in ToDo/ (moved from source_material/glm_vision_experiments_v14.py);
+    tests run in place on scratch copies; record written'
+  next_step: port it to the current package API (it calls Meaning.calendar_day and modulator_target,
+    which the package no longer has), then scaffold its study; or close it if reasoning/vision_stack.py
+    already carries what it offers.
+- id: glm_wheels_bundle
+  path: done/glm_wheels_bundle
+  kind: code
+  offers: 'Two new wheels wired to the Wheel/NeedsWheel contract: the Integer Wheel (183 curated OEIS
+    sequences: a prefix -> an OEIS id) and the Monster Wheel (the 26 sporadic groups by order and
+    exponent vector, five group-theory sequences, absorbing CFSG Lean files; 240 entries), with tests,
+    an OEIS seed, a CFSG seed and parser, and glm_wheel.py.'
+  stage: absorbed
+  studies:
+  - INTEGER_WHEEL_STUDY
+  - INTAKE_CAPABILITY_STUDY
+  tests:
+  - item:test_integer_wheel.py
+  - item:test_monster_wheel.py
+  - item:verify_cfsg_orders.py
+  - item:monster_wheel_rule30_arc_test.py
+  - tests/test_integer_wheel.py
+  - tests/test_monster_wheel.py
+  - tests/test_wheels.py
+  - tests/test_sequence_next.py
+  test_results:
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 46 passed, 0 failed,
+      0 skipped of 46 collected'
+    date: 31 October 2026
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+  - test: staged:src/glm_universal/tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 46 passed, 0 failed,
+      0 skipped of 46 collected'
+    date: 31 October 2026
+  - test: staged:src/glm_universal/tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: staged:src/glm_universal/tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: staged:src/glm_universal/tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:71b83eeda612ceecdfbe55c50f135ef90105fe1015952cd6ffcc6e3db9162738
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: staged:src/glm_universal/tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: staged:src/glm_universal/tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest)'
+    date: 31 October 2026
+    fingerprint: sha256:a74bcf8eb0e1d1debea1a0c86cc4e35a05e5a62b86619dd977768623b323fde2
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: staged:src/glm_universal/tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 46 passed, 0 failed,
+      0 skipped of 46 collected'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: staged:src/glm_universal/tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:cfc183d3501a5e328dac9ff52be0bc2293d81b28e3b9f14d195f56c6e643a346
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: staged:src/glm_universal/tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 46 passed, 0 failed,
+      0 skipped of 46 collected'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: staged:src/glm_universal/tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:e81217f8c8e44724255c32a9310cbef9cb7fcc2b6da71ba8f2fb8dbd29df8ca1
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:076e7e2fecc14429f6d663cd475f8448a7b3e12e5a2a0fd1799301ccdcdba77e
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:5e37a714b40c86f2e8bd4be7e216fd2cf4d89e5351c1b0b6839ca3bf10e08e83
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:39265f5e26b1ae02f7caf999574d4ea64df4892e951cfc9ab025a3a56b0645a4
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:02345b2e05c4749c4a6f20a823933f557ae1af0173e58cf83a1f72a565515321
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:cfff7791fbef35f10896bfe7eff34dc1b860e1d384a44188ce7067e9486e676e
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:6aafd9b0a80b414b2ef0c4ea4ac5e9642d94aa0b246a934d99a84aba1337d637
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 31 October 2026
+    fingerprint: sha256:281723d8ad249d185e6488c96758db12cb2ff432c32fafcca9ad636bfc20a16f
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 1 November 2026
+    fingerprint: sha256:1cc699da8445be3c63d147fc396befb4b4de6e774b356523cbb9b0e40db9a4c8
+  - test: item:test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: item:test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: item:verify_cfsg_orders.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: item:monster_wheel_rule30_arc_test.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: tests/test_integer_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 47 passed, 0 failed,
+      0 skipped of 47 collected'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: tests/test_monster_wheel.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 24 passed, 0 failed,
+      0 skipped of 24 collected'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  - test: tests/test_sequence_next.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 17 passed, 0 failed,
+      0 skipped of 17 collected'
+    date: 1 November 2026
+    fingerprint: sha256:e0cd552cc60aa7e6b487cfd43951f41022c0a9667f04c797ed8f1429dd2af661
+  lean:
+  - Wheels/IntegerWheel
+  - Wheels/SporadicOrders
+  - IntakeChecks/NextTerm
+  - IntakeChecks/SporadicOrderCheck
+  lean_check: '31 October 2026: OK'
+  ahead_of_build:
+    decision: Absorb the ones that measurably help now, based on your measurements and standalone
+      Lean check; record that my own rebuild_lean.sh run still has to confirm them
+    date: 1 November 2026
+    standalone:
+    - IntakeChecks/NextTerm
+    - IntakeChecks/SporadicOrderCheck
+    check: built standalone with Lean 4.34 and Mathlib (standard axioms only), outside the project
+      build, on 1 November 2026; the project build (Lean v4.28, scripts/rebuild_lean.sh) has not been
+      run
+    confirm: scripts/rebuild_lean.sh, then `python3 -m glm_universal.intake confirm-build glm_wheels_bundle`
+  lean_obligations:
+  - 'Wheels/IntegerWheel (GLM.IntegerWheel): provision_sound, provision_complete, speak_sound, speak_eq_none,
+    speak_isSome, speak_exact, speak_least, merge_keeps, mem_merge, merge_self, merge_speak_sound;
+    termsA000045/A000032/A000142/A000108/A000040/A000079/A000290/A000217 equal to their closed forms'
+  - 'Wheels/SporadicOrders (GLM.SporadicOrders): sporadicOrders (26 groups), order_M11 ... order_M
+    (each order equals its factorisation), sporadicOrders_nodup, sporadicNames_nodup, findByOrder_sound,
+    findByOrder_complete'
+  - the Lean build is confirmed only by the owner rebuild log (scripts/rebuild_lean.sh); here the
+    static check (python3 -m glm_universal.lean_check) passed and tests/test_integer_wheel.py and
+    tests/test_monster_wheel.py read both files and agree with the Python data
+  measured: 'INTEGER_WHEEL_STUDY §7 (31 October 2026, glm_universal.wheels.integer_wheel_study.integer_wheel_report):
+    89 of 102 pre-registered questions answered right and 0 wrong through glm_universal.wheels.sequence_query
+    (bar: at least 85, 0 wrong), against 0 of 102 through python3 src/GLM.py -q; 28 of 28 negative
+    controls refused or left alone; 0 false identifications in 8517 soundness checks; the supplied
+    data unaudited answers 6 wrongly (control C); the item''s own Rule 30 / ARC battery: 0 additional
+    identifications, 0 sporadic orders (no help there)'
+  acceptance:
+    study: INTEGER_WHEEL_STUDY
+    criterion: of the 102 questions of §4.1–4.2, at least 85 receive the expected identification and
+      0 a wrong one
+    result: '89 of 102 questions answered right and 0 wrong with the wheels (bar: at least 85, 0 wrong),
+      against 0 of 102 through the command line without them; 28 of 28 negative controls refused or
+      left alone; 0 false identifications in 8517 soundness checks.'
+    marks:
+    - A
+    - S1
+    - S2
+    - S3
+    - S4
+    - L
+    - T
+    decision: accept
+    date: 31 October 2026
+  absorbed_into:
+  - wheels/integer_wheel
+  - wheels/monster_wheel
+  - wheels/oeis_seed
+  - wheels/cfsg_seed
+  - wheels/cfsg_import
+  - wheels/factorint
+  - wheels/oeis_reference
+  - wheels/sequence_query
+  - wheels/lean_wheel_data
+  - wheels/integer_wheel_study
+  - wheels/next_term_battery
+  parts:
+  - part: integer_wheel.py, monster_wheel.py, oeis_seed.py, cfsg_seed.py, factorint_compat.py (the
+      two wheels and their data)
+    status: absorbed
+    studies:
+    - INTEGER_WHEEL_STUDY
+    - INTAKE_CAPABILITY_STUDY
+    absorbed_into:
+    - wheels/integer_wheel
+    - wheels/monster_wheel
+    - wheels/oeis_seed
+    - wheels/cfsg_seed
+    - wheels/cfsg_import
+    - wheels/factorint
+    - wheels/oeis_reference
+    - wheels/sequence_query
+    - wheels/lean_wheel_data
+    - wheels/next_term_battery
+    lean:
+    - Wheels/IntegerWheel
+    - Wheels/SporadicOrders
+    - IntakeChecks/NextTerm
+    - IntakeChecks/SporadicOrderCheck
+    note: 'installed provisionally in src/glm_universal/wheels/ by the owner''s decision of 31 October
+      2026 ("keep them in the wheels folder now, clearly marked provisional until my Lean build log
+      confirms them"), recorded in src/glm_universal/wheels/_data/provisional.json; Lean written,
+      the owner''s build pending: data unchanged; the wheels hold only the entries the independent
+      reference (wheels/oeis_reference) verifies: 107 of the 183 OEIS entries and 2 of the 5 group-theory
+      entries, plus the 26 groups, their exponent vectors and the sorted orders (local id CFSG-SPORADIC-ORDERS);
+      registered as PROVISION_WHEELS (IW, MW) in wheels/__init__.py, beside W01-W15; answers resting
+      on them carry the provisional note; absorbed ahead of the build on 1 November 2026 by the owner''s
+      decision, on its measurements and a standalone Lean check; the owner''s build has still to confirm
+      it'
+  - part: test_integer_wheel.py, test_monster_wheel.py (the item tests)
+    status: absorbed
+    studies:
+    - INTEGER_WHEEL_STUDY
+    note: ported to tests/test_integer_wheel.py and tests/test_monster_wheel.py (unittest; installed
+      provisionally with the wheels), with Lean-agreement tests; where the item asserted an identification
+      the audit holds out (A010505, A001155, A000720, A051023) the port asserts the audit verdict;
+      absorbed ahead of the build on 1 November 2026 by the owner's decision, on its measurements
+      and a standalone Lean check; the owner's build has still to confirm it
+  - part: monster_wheel_rule30_arc_test.py (the Rule 30 / ARC battery)
+    status: absorbed
+    studies:
+    - INTEGER_WHEEL_STUDY
+    absorbed_into:
+    - wheels/integer_wheel_study
+    note: 'taken as wheels/integer_wheel_study (the measurement of INTEGER_WHEEL_STUDY; installed
+      provisionally with the wheels); the battery is mark R: 0 additional identifications, 0 sporadic
+      orders (no help there); absorbed ahead of the build on 1 November 2026 by the owner''s decision,
+      on its measurements and a standalone Lean check; the owner''s build has still to confirm it'
+  - part: verify_cfsg_orders.py, bulk_parse_cfsg.py (one-off scripts against a local CFSG clone)
+    status: closed
+    note: the order check they make is Wheels/SporadicOrders.lean (order_M11 ... order_M) and mark
+      L; the parser itself is absorbed as MonsterWheel.parse_cfsg_lean_file
+  - part: glm_wheel.py (bundle copy of the Rule 30 verification wheel)
+    status: closed
+    note: belongs to Rule30_GLM_Study (scripts/glm_wheel.py; differs by a guarded import); not taken
+      (INTEGER_WHEEL_STUDY section 1)
+  - part: INTEGER_WHEEL.md, MONSTER_WHEEL.md, worklog.md (notes)
+    status: closed
+    studies:
+    - INTEGER_WHEEL_STUDY
+    note: read; their claims are measured in INTEGER_WHEEL_STUDY (marks A, S1-S4, R)
+  wheels:
+  - name: Integer Wheel
+    file: 'integer_wheel.py (data: oeis_seed.py)'
+    what: 'provisions Sequence[int] -> Optional[OEIS id]: speaks an id only when the queried prefix
+      is a prefix of the entry''s stored terms; exact matches preferred to longer ones, ties broken
+      by the alphabetically first id; merge keeps the old entries and adds new ids'
+    test_result: 'test_integer_wheel.py 102 of 102 after the in-place fix (sympy was missing; factorint_compat.py
+      added); audit_soundness: 183 of 183 sound'
+    overlap: 'none: no existing wheel maps integer sequences; it instantiates the provision contract
+      of HypothesisEngine/NeedsWheel.lean and HypothesisEngine/Wheel.lean'
+    lean_obligations:
+    - 'Sound: with alpha = List Int and truth x = (the spoken entry''s stored terms start with x),
+      every provision p of the wheel satisfies NeedsWheel''s Sound truth p'
+    - speak returns an id only if that entry's terms start with the claim (speak_sound), and returns
+      the exact-length match when one exists, else the least id among prefix matches
+    - 'merge_sound: merging two sound wheels is sound; merge is idempotent on ids'
+    - for every entry whose terms come from a closed-form generator in oeis_seed.py (Fibonacci, Lucas,
+      primes, factorials, Catalan, Bell, ...), the stored terms equal the generator's first n values,
+      checked by decide/norm_num on the finite lists
+    lean:
+    - HypothesisEngine/NeedsWheel
+    - HypothesisEngine/Wheel
+  - name: Monster Wheel
+    file: 'monster_wheel.py (data: cfsg_seed.py)'
+    what: the Integer Wheel plus the 26 sporadic simple groups keyed by order (a single integer) and
+      by the prime-exponent vector of the order, five group-theory OEIS sequences and the sorted sporadic
+      orders; find_by_order, find_by_factorization, find_by_exponent_vector; absorbs CFSG Lean files
+    test_result: 'test_monster_wheel.py 110 of 110 after the fix; verify_cfsg_orders.py: all 26 orders
+      equal their factorisations; monster_wheel_rule30_arc_test.py runs and reports no measurable
+      improvement on Rule 30 or ARC (0)'
+    overlap: a superset of the Integer Wheel; no existing wheel holds group orders
+    lean_obligations:
+    - each of the 26 stored orders equals the product of its stored prime powers (26 norm_num/decide
+      facts, e.g. |M11| = 2^4 * 3^2 * 5 * 11 = 7920)
+    - the exponent vector of each order over the primes 2..73 is the stored one
+    - find_by_order n = some g only if the stored order of g is n, and the 26 orders are distinct,
+      so the answer is unique
+    - every Integer Wheel entry is kept (superset), so the Integer Wheel's soundness carries over
+    lean:
+    - HypothesisEngine/NeedsWheel
+  - name: glm_wheel.py (bundle copy)
+    file: glm_wheel.py
+    what: the Rule 30 study's verification wheel (rings KNOWS / THINKS-TRUE / DOESN'T-KNOW) with the
+      two new wheels wired in
+    test_result: 'not run: needs matplotlib and the v16 hypothesis engine; differs from Rule30_GLM_Study/scripts/glm_wheel.py
+      only by a guarded import'
+    overlap: Rule30_GLM_Study/scripts/glm_wheel.py
+    lean_obligations:
+    - as for Rule30_GLM_Study's glm_wheel.json
+  last_action: '1 November 2026: absorbed ahead of the build by the owner''s decision (0 file(s) installed);
+    filed in done/'
+  next_step: 'owner: run scripts/rebuild_lean.sh; when its build record verifies the Lean files, `python3
+    -m glm_universal.intake confirm-build glm_wheels_bundle`'
+- id: hidden_memory
+  path: ToDo/hidden_memory
+  kind: concept note
+  offers: A directive to test whether a binary memory state helps the GLM detect and exploit hidden
+    state that one observation cannot reveal (after 'The extraction of work from hidden degrees of
+    freedom'), explicitly not as evidence of physical friction.
+  stage: triaged
+  last_action: '31 October 2026: filed in ToDo/ (moved from source_material/hidden_memory); tests
+    run in place on scratch copies; record written'
+  next_step: 'scaffold its study: the memory-on/memory-off comparison with the controls the note asks
+    for.'
+- id: devops_ladder
+  path: done/devops_ladder
+  kind: concept note
+  offers: 'A ten-tier DevOps ladder (DevOps-Ladder.txt): 97 operational terms, each defined as a composition
+    of lower ones, from the machine substrate to culture.'
+  stage: absorbed
+  studies: &id001
+  - OPERATIONS_LADDER_STUDY
+  tests:
+  - tests/test_operations.py
+  test_results:
+  - test: tests/test_operations.py
+    result: pass
+    detail: 'passed: 12 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - OperationsLadder
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names OperationsLadder.lean Phase 125. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'OPERATIONS_LADDER_STUDY: 9 of 9 marks; 25 of 25 runs, 18 of 18 questions, 6 of 6 English
+    programs, 78 of 78 lines read back, 41 of 41 scripts verify and 158 of 158 mutations rejected;
+    14 of 14 cross-overs resolve; H 185/242 against 3/4; post hoc, 299 of 299 decided generated programs
+    agree between the machine and column 3.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/ops_ladder
+  - reasoning/operations
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  parts:
+  - part: the ladder as a register of 97 layered terms, and GLM-BAT, a batch machine from its two
+      lowest tiers
+    status: absorbed
+    studies:
+    - OPERATIONS_LADDER_STUDY
+    absorbed_into:
+    - reasoning/ops_ladder
+    - reasoning/batch_machine
+  evidence: *id001
+  last_action: '31 October 2026: filed in done/ (moved from source_material/devops_ladder); record
+    written from the studies, gates checked'
+- id: GLM_Pipeline_Kit
+  path: done/GLM_Pipeline_Kit
+  kind: full study
+  offers: 'The GLM pipeline kit: the GLMKit Lean development (Golay, Leech, lattices, fields, permutations,
+    Pless, analogy, an axiom audit), the pipeline''s scripts and data in condensed form, findings,
+    a worklog and an ARC run record.'
+  stage: absorbed
+  studies: &id002
+  - PIPELINE_KIT_STUDY
+  - PIPELINE_ASK_STUDY
+  tests:
+  - tests/test_pipeline_kit.py
+  - tests/test_pipeline_kit_crosscheck.py
+  - tests/test_axiom_guard.py
+  test_results:
+  - test: tests/test_pipeline_kit.py
+    result: pass
+    detail: 'passed: 7 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  - test: tests/test_pipeline_kit_crosscheck.py
+    result: pass
+    detail: 'passed: 3 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  - test: tests/test_axiom_guard.py
+    result: pass
+    detail: 'passed: 3 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - PipelineKit/Golay
+  - PipelineKit/Leech
+  - PipelineKit/Lattices
+  - PipelineKit/Fields
+  - PipelineKit/Permutation
+  - PipelineKit/Pless
+  - PipelineKit/Analogy
+  - PipelineKit/AxiomAudit
+  - PipelineInduction
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names AxiomAudit.lean Phase 176, PipelineInduction.lean Phase 175. The reorganised tree
+    has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns wherever
+    a file no longer matches it'
+  measured: 'PIPELINE_KIT_STUDY: 12 of 12 marks; wrong answers 0 of 2,250 (controls: 12 and 19); flood
+    fill and shortest path 0 → 49 of 50 each at four demonstrations; the three two-step families 0
+    → 47, 50 and 50 of 50; bridge failures 0 in 2,000 words.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/pipeline_kit
+  - reasoning/pipeline_kit_crosscheck
+  parts:
+  - part: the GLMKit Lean development
+    status: absorbed
+    lean:
+    - PipelineKit/Golay
+    - PipelineKit/Leech
+    - PipelineKit/AxiomAudit
+    studies:
+    - PIPELINE_KIT_STUDY
+  - part: the pipeline's cell-rule solver, rebuilt exactly
+    status: absorbed
+    studies:
+    - PIPELINE_KIT_STUDY
+    absorbed_into:
+    - reasoning/pipeline_kit
+  - part: the neural learners of iterations 1, 5, 6, 7 and 9
+    status: closed
+    note: not re-run; the kit's own audit marks them unverified (PIPELINE_KIT_STUDY)
+  evidence: *id002
+  last_action: '31 October 2026: filed in done/ (moved from source_material/GLM_Pipeline_Kit); record
+    written from the studies, gates checked'
+- id: HISTORY_RECORDED_NOW_STUDY
+  path: done/HISTORY_RECORDED_NOW_STUDY.md
+  kind: full study
+  offers: 'History recorded in the now (v1): the claim that a carrier''s accumulator records the history
+    of the run, with supplied recoveries of past states.'
+  stage: absorbed
+  studies: &id003
+  - NOW_RECEIPT_STUDY
+  tests:
+  - tests/test_now_receipt.py
+  test_results:
+  - test: tests/test_now_receipt.py
+    result: pass
+    detail: 'passed: 22 passed, 2 skipped (run by hand from the repository root, before the intake
+      recorded its own runs)'
+    date: 31 October 2026
+  lean:
+  - NowReceipt
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names NowReceipt.lean Phase 49. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'NOW_RECEIPT_STUDY: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 recoveries
+    succeed with the state withheld; and the 512 ticks the `real` query kind runs per question are
+    now one multiplication rather than 512 loop steps.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/now_receipt
+  parts:
+  - part: 'the accumulator identity, corrected: a function of the program and the tick count, made
+      a cheap shipped path'
+    status: absorbed
+    studies:
+    - NOW_RECEIPT_STUDY
+    absorbed_into:
+    - reasoning/now_receipt
+    lean:
+    - NowReceipt
+  - part: the reading that the accumulator records the run
+    status: closed
+    note: 'refuted: the recoveries succeed as well with the state withheld (NOW_RECEIPT_STUDY)'
+  evidence: *id003
+  last_action: '31 October 2026: filed in done/ (moved from source_material/HISTORY_RECORDED_NOW_STUDY.md);
+    record written from the studies, gates checked'
+- id: HISTORY_RECORDED_NOW_V2_STUDY
+  path: done/HISTORY_RECORDED_NOW_V2_STUDY.md
+  kind: full study
+  offers: 'History recorded in the now (v2): the claim that a carrier''s accumulator records the history
+    of the run, with supplied recoveries of past states.'
+  stage: absorbed
+  studies: &id004
+  - NOW_RECEIPT_STUDY
+  tests:
+  - tests/test_now_receipt.py
+  test_results:
+  - test: tests/test_now_receipt.py
+    result: pass
+    detail: 'passed: 22 passed, 2 skipped (run by hand from the repository root, before the intake
+      recorded its own runs)'
+    date: 31 October 2026
+  lean:
+  - NowReceipt
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names NowReceipt.lean Phase 49. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'NOW_RECEIPT_STUDY: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 recoveries
+    succeed with the state withheld; and the 512 ticks the `real` query kind runs per question are
+    now one multiplication rather than 512 loop steps.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/now_receipt
+  parts:
+  - part: 'the accumulator identity, corrected: a function of the program and the tick count, made
+      a cheap shipped path'
+    status: absorbed
+    studies:
+    - NOW_RECEIPT_STUDY
+    absorbed_into:
+    - reasoning/now_receipt
+    lean:
+    - NowReceipt
+  - part: the reading that the accumulator records the run
+    status: closed
+    note: 'refuted: the recoveries succeed as well with the state withheld (NOW_RECEIPT_STUDY)'
+  evidence: *id004
+  last_action: '31 October 2026: filed in done/ (moved from source_material/HISTORY_RECORDED_NOW_V2_STUDY.md);
+    record written from the studies, gates checked'
+- id: HISTORY_RECORDED_NOW_V3_STUDY
+  path: done/HISTORY_RECORDED_NOW_V3_STUDY.md
+  kind: full study
+  offers: 'History recorded in the now (v3): the claim that a carrier''s accumulator records the history
+    of the run, with supplied recoveries of past states.'
+  stage: absorbed
+  studies: &id005
+  - NOW_RECEIPT_STUDY
+  tests:
+  - tests/test_now_receipt.py
+  test_results:
+  - test: tests/test_now_receipt.py
+    result: pass
+    detail: 'passed: 22 passed, 2 skipped (run by hand from the repository root, before the intake
+      recorded its own runs)'
+    date: 31 October 2026
+  lean:
+  - NowReceipt
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names NowReceipt.lean Phase 49. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'NOW_RECEIPT_STUDY: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 recoveries
+    succeed with the state withheld; and the 512 ticks the `real` query kind runs per question are
+    now one multiplication rather than 512 loop steps.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/now_receipt
+  parts:
+  - part: 'the accumulator identity, corrected: a function of the program and the tick count, made
+      a cheap shipped path'
+    status: absorbed
+    studies:
+    - NOW_RECEIPT_STUDY
+    absorbed_into:
+    - reasoning/now_receipt
+    lean:
+    - NowReceipt
+  - part: the reading that the accumulator records the run
+    status: closed
+    note: 'refuted: the recoveries succeed as well with the state withheld (NOW_RECEIPT_STUDY)'
+  evidence: *id005
+  last_action: '31 October 2026: filed in done/ (moved from source_material/HISTORY_RECORDED_NOW_V3_STUDY.md);
+    record written from the studies, gates checked'
+- id: history_recorded_now
+  path: done/history_recorded_now.py
+  kind: code
+  offers: 'History recorded in the now (the script): the claim that a carrier''s accumulator records
+    the history of the run, with supplied recoveries of past states.'
+  stage: absorbed
+  studies: &id006
+  - NOW_RECEIPT_STUDY
+  tests:
+  - tests/test_now_receipt.py
+  test_results:
+  - test: tests/test_now_receipt.py
+    result: pass
+    detail: 'passed: 22 passed, 2 skipped (run by hand from the repository root, before the intake
+      recorded its own runs)'
+    date: 31 October 2026
+  lean:
+  - NowReceipt
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names NowReceipt.lean Phase 49. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'NOW_RECEIPT_STUDY: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 recoveries
+    succeed with the state withheld; and the 512 ticks the `real` query kind runs per question are
+    now one multiplication rather than 512 loop steps.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/now_receipt
+  parts:
+  - part: 'the accumulator identity, corrected: a function of the program and the tick count, made
+      a cheap shipped path'
+    status: absorbed
+    studies:
+    - NOW_RECEIPT_STUDY
+    absorbed_into:
+    - reasoning/now_receipt
+    lean:
+    - NowReceipt
+  - part: the reading that the accumulator records the run
+    status: closed
+    note: 'refuted: the recoveries succeed as well with the state withheld (NOW_RECEIPT_STUDY)'
+  evidence: *id006
+  last_action: '31 October 2026: filed in done/ (moved from source_material/history_recorded_now.py);
+    record written from the studies, gates checked'
+- id: pcgs_glm_integration
+  path: done/pcgs_glm_integration.py
+  kind: code
+  offers: 'The PCGS landscape: candidate systems for the GLM''s substrate and how to integrate them.'
+  stage: absorbed
+  studies: &id007
+  - PCGS_STUDY
+  tests:
+  - tests/test_pcgs.py
+  test_results:
+  - test: tests/test_pcgs.py
+    result: pass
+    detail: 'passed: 45 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - PCGS
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'PCGS_STUDY: 6 systems against the 6 admission criteria: 3 proved, 1 a checked transcription,
+    2 tested.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/pcgs
+  evidence: *id007
+  last_action: '31 October 2026: filed in done/ (moved from source_material/pcgs_glm_integration.py);
+    record written from the studies, gates checked'
+- id: pcgs_wider_landscape
+  path: done/pcgs_wider_landscape.py
+  kind: code
+  offers: 'The PCGS landscape: candidate systems for the GLM''s substrate and how to integrate them.'
+  stage: absorbed
+  studies: &id008
+  - PCGS_STUDY
+  tests:
+  - tests/test_pcgs.py
+  test_results:
+  - test: tests/test_pcgs.py
+    result: pass
+    detail: 'passed: 45 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - PCGS
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'PCGS_STUDY: 6 systems against the 6 admission criteria: 3 proved, 1 a checked transcription,
+    2 tested.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/pcgs
+  evidence: *id008
+  last_action: '31 October 2026: filed in done/ (moved from source_material/pcgs_wider_landscape.py);
+    record written from the studies, gates checked'
+- id: pcgs_wider_landscape_v4
+  path: done/pcgs_wider_landscape_v4.txt
+  kind: concept note
+  offers: 'The PCGS landscape: candidate systems for the GLM''s substrate and how to integrate them.'
+  stage: absorbed
+  studies: &id009
+  - PCGS_STUDY
+  tests:
+  - tests/test_pcgs.py
+  test_results:
+  - test: tests/test_pcgs.py
+    result: pass
+    detail: 'passed: 45 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - PCGS
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'PCGS_STUDY: 6 systems against the 6 admission criteria: 3 proved, 1 a checked transcription,
+    2 tested.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/pcgs
+  evidence: *id009
+  last_action: '31 October 2026: filed in done/ (moved from source_material/pcgs_wider_landscape_v4.txt);
+    record written from the studies, gates checked'
+- id: substrate_study
+  path: done/substrate_study
+  kind: full study
+  offers: 'The owner''s designed-substrate study (README and a glm_package): can a designed carrier
+    beat the Golay carrier in the GLM''s regime?'
+  stage: absorbed
+  studies: &id010
+  - DESIGNED_SUBSTRATE_STUDY
+  tests:
+  - tests/test_designed_substrate.py
+  test_results:
+  - test: tests/test_designed_substrate.py
+    result: pass
+    detail: 'passed: 11 passed, 3 skipped (run by hand from the repository root, before the intake
+      recorded its own runs)'
+    date: 31 October 2026
+  lean:
+  - DesignedSubstrate
+  - CarriedFork
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names DesignedSubstrate.lean Phase 133, CarriedFork.lean Phase 65. The reorganised tree
+    has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns wherever
+    a file no longer matches it'
+  measured: 'DESIGNED_SUBSTRATE_STUDY: 7 of 8 marks; 680,064 of 680,064 tied reads resolved by the
+    tag, 0 wrong (0 by the hard word alone); 768 of 768 gentle reads resolved by the soft certificate,
+    0 wrong, and 0 of 768 K4b reads; 0 silent four-flip miscorrections for the GLM''s code against
+    2,695 to 4,480 for each declared alternative; 7,254,016 received words at distance 4, equal to
+    the proved floor.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/designed_substrate
+  - reasoning/carried_fork
+  evidence: *id010
+  last_action: '31 October 2026: filed in done/ (moved from source_material/substrate_study); record
+    written from the studies, gates checked'
+- id: Golay_codes_and_Hadamard_matrices
+  path: done/Golay codes and Hadamard matrices.txt
+  kind: concept note
+  offers: A note on the construction ladder from Hadamard matrices and Paley constructions to the
+    Golay code, proposed as five rungs of escalation.
+  stage: absorbed
+  studies: &id011
+  - CONSTRUCTION_LADDER_STUDY
+  tests:
+  - tests/test_construction_ladder.py
+  test_results:
+  - test: tests/test_construction_ladder.py
+    result: pass
+    detail: 'passed: 47 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - ConstructionLadder
+  - ScaledLadder
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names ConstructionLadder.lean Phase 39, ScaledLadder.lean Phase 39. The reorganised tree
+    has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns wherever
+    a file no longer matches it'
+  measured: 'CONSTRUCTION_LADDER_STUDY: 462 of 568 queries answered correctly with 0 wrong, against
+    327 for the five-rung ladder and 283 for the best single rung.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - substrate/construction_ladder
+  - substrate/golay_paley
+  evidence: *id011
+  last_action: '31 October 2026: filed in done/ (moved from source_material/Golay codes and Hadamard
+    matrices.txt); record written from the studies, gates checked'
+- id: UBP_LAW_GLM_REVIEW
+  path: done/UBP_LAW_GLM_REVIEW.md
+  kind: full study
+  offers: 'A three-round review of the UBP law register for the GLM: structural laws and numeric formulas.'
+  stage: absorbed
+  studies: &id012
+  - LAW_REGISTER_STUDY
+  - LAW_TRIAGE_STUDY
+  tests:
+  - tests/test_law_register.py
+  - tests/test_law_triage.py
+  test_results:
+  - test: tests/test_law_register.py
+    result: pass
+    detail: 'passed: 27 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  - test: tests/test_law_triage.py
+    result: pass
+    detail: 'passed: 10 passed, 1 skipped (run by hand from the repository root, before the intake
+      recorded its own runs)'
+    date: 31 October 2026
+  lean:
+  - LawRegister
+  - Relaxation
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names LawRegister.lean Phase 74. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'LAW_REGISTER_STUDY: 10 of 16 exact rows are structural or overclaimed, each citing Lean;
+    2 of 21 external formulas admitted at p < 1/100 (both m_mu/m_e, 158 and 13204 standard deviations
+    from the measurement); refusing a six-way tie withholds 5 wrong answers per right answer given
+    up; 9 of 9 marks met.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/law_register
+  parts:
+  - part: the structural half
+    status: absorbed
+    studies:
+    - LAW_REGISTER_STUDY
+    absorbed_into:
+    - reasoning/law_register
+    lean:
+    - LawRegister
+  - part: the numeric half (Round 2 §6, 106 laws)
+    status: closed
+    studies:
+    - LAW_TRIAGE_STUDY
+    note: two muon formulas survive the look-elsewhere test; the rest are refused by name
+  evidence: *id012
+  last_action: '31 October 2026: filed in done/ (moved from source_material/UBP_LAW_GLM_REVIEW.md);
+    record written from the studies, gates checked'
+- id: retained_laws_verified_65
+  path: done/retained_laws_verified_65.csv
+  kind: data
+  offers: The 65 laws retained by Round 2 of the UBP law review, with their verification status.
+  stage: absorbed
+  studies: &id013
+  - LAW_ABSORPTION_STUDY
+  - LAW_REGISTER_STUDY
+  tests:
+  - tests/test_law_absorption.py
+  test_results:
+  - test: tests/test_law_absorption.py
+    result: pass
+    detail: 'passed: 17 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - LawAbsorption
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names LawAbsorption.lean Phase 75. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'LAW_ABSORPTION_STUDY: 36 of 36 declared substrate questions answered or refused as declared
+    through the typed planner, 0 wrong, against 0 answered before the round; 0 of 4687 existing evaluation
+    texts read by the new frame; 8 of 8 marks met.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/law_absorption
+  evidence: *id013
+  last_action: '31 October 2026: filed in done/ (moved from source_material/retained_laws_verified_65.csv);
+    record written from the studies, gates checked'
+- id: Improved_Question_Set_B_Benchmark_Suite
+  path: done/Improved_Question_Set_B_Benchmark_Suite.txt
+  kind: data
+  offers: Question Set B (the improved benchmark suite)
+  stage: absorbed
+  studies: &id014
+  - QUESTION_SET_B_STUDY
+  tests:
+  - tests/test_question_frames.py
+  test_results:
+  - test: tests/test_question_frames.py
+    result: pass
+    detail: 'passed: 16 passed (run by hand from the repository root, before the intake recorded its
+      own runs); passed when run alone (2 of the 16 failed in a parallel run under heavy load)'
+    date: 31 October 2026
+  lean:
+  - QuestionSetB
+  - QuestionSetBAnswers
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names QuestionSetB.lean Phase 89, QuestionSetBAnswers.lean Phase 90. The reorganised tree
+    has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns wherever
+    a file no longer matches it'
+  measured: 'QUESTION_SET_B_STUDY: Set B: 14 of 14 by audit (protocol +10: 11 right, 1 disputed answer);
+    Outside O1: 27 of 112 framed and correct, 0 wrong, 85 located boundaries in six classes; 41 framed
+    questions, 0 verdicts changed by the contract variant; 177 of 177 contract questions identical
+    through the routed `-q`.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - runtime/question_frames
+  - evaluation/question_set_b_cases
+  evidence: *id014
+  last_action: '31 October 2026: filed in done/ (moved from source_material/Improved_Question_Set_B_Benchmark_Suite.txt);
+    record written from the studies, gates checked'
+  note: still read in place by evaluation/question_set_b_cases.py; runtime/question_frames loads runtime/outside_frames
+    for the outside questions
+- id: Outside_Question_Set_B_candidate_O1
+  path: done/Outside_Question_Set_B_candidate_O1.txt
+  kind: data
+  offers: Outside questions for Set B (candidate O1)
+  stage: absorbed
+  studies: &id015
+  - QUESTION_SET_B_STUDY
+  tests:
+  - tests/test_question_frames.py
+  test_results:
+  - test: tests/test_question_frames.py
+    result: pass
+    detail: 'passed: 16 passed (run by hand from the repository root, before the intake recorded its
+      own runs); passed when run alone (2 of the 16 failed in a parallel run under heavy load)'
+    date: 31 October 2026
+  lean:
+  - QuestionSetB
+  - QuestionSetBAnswers
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names QuestionSetB.lean Phase 89, QuestionSetBAnswers.lean Phase 90. The reorganised tree
+    has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns wherever
+    a file no longer matches it'
+  measured: 'QUESTION_SET_B_STUDY: Set B: 14 of 14 by audit (protocol +10: 11 right, 1 disputed answer);
+    Outside O1: 27 of 112 framed and correct, 0 wrong, 85 located boundaries in six classes; 41 framed
+    questions, 0 verdicts changed by the contract variant; 177 of 177 contract questions identical
+    through the routed `-q`.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - runtime/question_frames
+  - evaluation/question_set_b_cases
+  evidence: *id015
+  last_action: '31 October 2026: filed in done/ (moved from source_material/Outside_Question_Set_B_candidate_O1.txt);
+    record written from the studies, gates checked'
+  note: still read in place by evaluation/question_set_b_cases.py; runtime/question_frames loads runtime/outside_frames
+    for the outside questions
+- id: substrate_native_cognitive_1
+  path: done/substrate_native_cognitive_1.txt
+  kind: concept note
+  offers: 'Things to try for substrate-native cognition: frames the typed planner could answer from
+    the substrate itself.'
+  stage: absorbed
+  studies: &id016
+  - SUBSTRATE_NATIVE_COGNITION_STUDY
+  tests:
+  - tests/test_substrate_cognition.py
+  test_results:
+  - test: tests/test_substrate_cognition.py
+    result: pass
+    detail: 'passed: 28 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - SubstrateCognition
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'SUBSTRATE_NATIVE_COGNITION_STUDY: 26 of 33 declared round-two questions answered correctly
+    and 7 refused correctly, with 0 wrong, against 0 answered by the grammar alone.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/substrate_cognition
+  evidence: *id016
+  last_action: '31 October 2026: filed in done/ (moved from source_material/substrate_native_cognitive_1.txt);
+    record written from the studies, gates checked'
+- id: iter10_lorentzian
+  path: done/iter10_lorentzian.py
+  kind: code
+  offers: Lift the GLM's ambiguous 24-bit space to the Lorentzian lattice II_25,1 to resolve its ties.
+  stage: absorbed
+  studies: &id017
+  - LORENTZIAN_LIFT_STUDY
+  tests:
+  - tests/test_lorentzian_lift.py
+  test_results:
+  - test: tests/test_lorentzian_lift.py
+    result: pass
+    detail: 'passed: 6 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - LorentzianLift
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names LorentzianLift.lean Phase 182. The reorganised tree has no build record yet; scripts/rebuild_lean.sh
+    writes one, and intake check then warns wherever a file no longer matches it'
+  measured: 'LORENTZIAN_LIFT_STUDY: 11 of 12 marks; one tied reading: every rule at chance or refusing
+    (the script''s rule 0 right of 600); two tied readings 586 right, 0 wrong of 600; readings 4+4+6:
+    594 right against 0 for the set collapse; decoy: 216 wrong, 61 with the guard (mark M11 not met).'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/lorentzian_lift
+  parts:
+  - part: the lift as a certificate of every Golay tie, and summed Lorentzian scores over further
+      readings
+    status: absorbed
+    studies:
+    - LORENTZIAN_LIFT_STUDY
+    absorbed_into:
+    - reasoning/lorentzian_lift
+    lean:
+    - LorentzianLift
+    - GolayDeepHole
+  - part: a reflection-invariant rule that breaks a tie
+    status: closed
+    note: 'refuted: no reflection-invariant rule can break a tie (LORENTZIAN_LIFT_STUDY)'
+  evidence: *id017
+  last_action: '31 October 2026: filed in done/ (moved from source_material/iter10_lorentzian.py);
+    record written from the studies, gates checked'
+- id: DYNAMIC_CARRIER_STUDY
+  path: done/DYNAMIC_CARRIER_STUDY.md
+  kind: concept note
+  offers: 'What the GLM needs to carry infinite values: a dynamic carrier for irrational and transcendental
+    values.'
+  stage: absorbed
+  studies: &id018
+  - INFINITE_VALUES_STUDY
+  tests:
+  - tests/test_exact_real.py
+  - tests/test_transcendental.py
+  test_results:
+  - test: tests/test_exact_real.py
+    result: pass
+    detail: 'passed: 90 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  - test: tests/test_transcendental.py
+    result: pass
+    detail: 'passed: 83 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - Computable
+  - Transcendental
+  - Irrational
+  - Reachable
+  - DeltaSigma
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'INFINITE_VALUES_STUDY: What the machine can now do, and — in more detail — what it provably
+    cannot.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/exact_real
+  - reasoning/real_expr
+  - reasoning/transcendental
+  evidence: *id018
+  last_action: '31 October 2026: filed in done/ (moved from source_material/DYNAMIC_CARRIER_STUDY.md);
+    record written from the studies, gates checked'
+- id: cardinal_geometry_synthesis
+  path: done/cardinal_geometry_synthesis.md
+  kind: concept note
+  offers: 'What the GLM needs to carry infinite values: a synthesis of cardinal geometry for the carrier.'
+  stage: absorbed
+  studies: &id019
+  - INFINITE_VALUES_STUDY
+  tests:
+  - tests/test_exact_real.py
+  - tests/test_transcendental.py
+  test_results:
+  - test: tests/test_exact_real.py
+    result: pass
+    detail: 'passed: 90 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  - test: tests/test_transcendental.py
+    result: pass
+    detail: 'passed: 83 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - Computable
+  - Transcendental
+  - Irrational
+  - Reachable
+  - DeltaSigma
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'INFINITE_VALUES_STUDY: What the machine can now do, and — in more detail — what it provably
+    cannot.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/exact_real
+  - reasoning/real_expr
+  - reasoning/transcendental
+  evidence: *id019
+  last_action: '31 October 2026: filed in done/ (moved from source_material/cardinal_geometry_synthesis.md);
+    record written from the studies, gates checked'
+- id: geometric_substrate_study
+  path: done/geometric_substrate_study.py
+  kind: code
+  offers: 'What the GLM needs to carry infinite values: a geometric substrate study script.'
+  stage: absorbed
+  studies: &id020
+  - INFINITE_VALUES_STUDY
+  tests:
+  - tests/test_exact_real.py
+  - tests/test_transcendental.py
+  test_results:
+  - test: tests/test_exact_real.py
+    result: pass
+    detail: 'passed: 90 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  - test: tests/test_transcendental.py
+    result: pass
+    detail: 'passed: 83 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - Computable
+  - Transcendental
+  - Irrational
+  - Reachable
+  - DeltaSigma
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them. The reorganised
+    tree has no build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns
+    wherever a file no longer matches it'
+  measured: 'INFINITE_VALUES_STUDY: What the machine can now do, and — in more detail — what it provably
+    cannot.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/exact_real
+  - reasoning/real_expr
+  - reasoning/transcendental
+  evidence: *id020
+  last_action: '31 October 2026: filed in done/ (moved from source_material/geometric_substrate_study.py);
+    record written from the studies, gates checked'
+- id: glm_zero_storage_substrate_v3
+  path: done/glm_zero_storage_substrate_v3.txt
+  kind: concept note
+  offers: 'Zero storage: generate the substrate''s tables instead of storing them, with a Leech sieve.'
+  stage: absorbed
+  studies: &id021
+  - ZERO_STORAGE_STUDY
+  - ZERO_STORAGE_V5_STUDY
+  tests:
+  - tests/test_generative.py
+  test_results:
+  - test: tests/test_generative.py
+    result: pass
+    detail: 'passed: 16 passed (run by hand from the repository root, before the intake recorded its
+      own runs)'
+    date: 31 October 2026
+  lean:
+  - ZeroStorage
+  - ZeroStorageV5
+  - Tower
+  lean_build: 'before the build record existed: absorbed before the intake pipeline of 31 October
+    2026, its Lean files recorded as built and audited in the round that absorbed them; MASTER_PLAN.md
+    first names ZeroStorage.lean Phase 38, ZeroStorageV5.lean Phase 38. The reorganised tree has no
+    build record yet; scripts/rebuild_lean.sh writes one, and intake check then warns wherever a file
+    no longer matches it'
+  measured: 'ZERO_STORAGE_STUDY: The proposed Leech sieve is sound and 99.4 % incomplete, with the
+    one-line repair stated.'
+  legacy_absorption: absorbed by an earlier round into the modules named in absorbed_into, before
+    the intake recorded acceptance decisions (31 October 2026); its measurement is the closed study
+    cited in measured
+  absorbed_into:
+  - reasoning/generative
+  - reasoning/deep_holes
+  evidence: *id021
+  last_action: '31 October 2026: filed in done/ (moved from source_material/glm_zero_storage_substrate_v3.txt);
+    record written from the studies, gates checked'
+- id: GLM_19OCT26_1
+  path: done/GLM_19OCT26_1.md
+  kind: plan
+  offers: The owner's development plan of 19 October 2026 (Parts I and II.1-II.7), which set the direction
+    for Phases 159-174.
+  stage: closed
+  parts:
+  - part: I thermomechanical friction
+    status: absorbed
+    studies:
+    - THERMO_FRICTION_STUDY
+  - part: II.1 one evidence and result model
+    status: absorbed
+    studies:
+    - EVIDENCE_MODEL_STUDY
+  - part: II.2 the carried-value gaps
+    status: absorbed
+    studies:
+    - FOLD_MACHINE_STUDY
+    - TOOL_MACHINE_STUDY
+  - part: II.3 contextual domain frames
+    status: absorbed
+    studies:
+    - CONTEXT_FRAMES_STUDY
+  - part: II.4 a corpus confidence curve
+    status: absorbed
+    studies:
+    - CONFIDENCE_CURVE_STUDY
+  - part: II.5 adversarial interactive testing
+    status: absorbed
+    studies:
+    - ADVERSARIAL_DIALOGUE_STUDY
+  - part: II.6 a machine-readable study ledger
+    status: absorbed
+    studies:
+    - STUDY_LEDGER_STUDY
+  - part: II.7 corpus source tiers
+    status: absorbed
+    studies:
+    - SOURCE_TIERS_STUDY
+  closed_reason: 'Every part taken once (STATUS.md §2.0); it is a plan, not a body to absorb: each
+    part became a study and what each left is a line of STATUS.md §2.1 or §2.2.'
+  evidence:
+  - STATUS.md §2.0
+  - THERMO_FRICTION_STUDY
+  - EVIDENCE_MODEL_STUDY
+  - FOLD_MACHINE_STUDY
+  - TOOL_MACHINE_STUDY
+  - CONTEXT_FRAMES_STUDY
+  - CONFIDENCE_CURVE_STUDY
+  - ADVERSARIAL_DIALOGUE_STUDY
+  - STUDY_LEDGER_STUDY
+  - SOURCE_TIERS_STUDY
+  last_action: '31 October 2026: filed in done/ (moved from source_material/GLM_19OCT26_1.md); closed
+    with the recorded reason'
+- id: ToDo_01
+  path: done/ToDo_01.txt
+  kind: plan
+  offers: The owner's working list of outstanding gaps, concepts to test and the wobble/wiggle/noise
+    ideas.
+  stage: closed
+  studies:
+  - GEOMETRIC_AMBIGUITY_STUDY
+  closed_reason: 'A working list, not a body to absorb: its items are carried in the phase record
+    (MASTER_PLAN.md), and its wobble/wiggle/noise part is answered by GEOMETRIC_AMBIGUITY_STUDY.'
+  evidence:
+  - MASTER_PLAN.md
+  - GEOMETRIC_AMBIGUITY_STUDY
+  - studies/GLM_ACADEMIC_PAPER.md
+  last_action: '31 October 2026: filed in done/ (moved from source_material/ToDo_01.txt); closed with
+    the recorded reason'
+- id: REVERSE_CALL_PLANNER_README
+  path: done/REVERSE_CALL_PLANNER_README.md
+  kind: concept note
+  offers: 'A reverse-call planner: work backwards from a goal through tool calls.'
+  stage: closed
+  studies:
+  - REVERSE_CALL_PLANNER_STUDY
+  closed_reason: 'Studied in the sandbox and not promoted: it answers five declared tasks the plain
+    runtime refuses but nothing on the project''s evaluation set, so the utility gate fails (REVERSE_CALL_PLANNER_STUDY);
+    the port stays as sandbox/planner.py.'
+  evidence:
+  - REVERSE_CALL_PLANNER_STUDY
+  - src/glm_universal/sandbox/planner.py
+  last_action: '31 October 2026: filed in done/ (moved from source_material/REVERSE_CALL_PLANNER_README.md);
+    closed with the recorded reason'
+- id: glm_reverse_call_planner_v2
+  path: done/glm_reverse_call_planner_v2.py
+  kind: code
+  offers: 'A reverse-call planner: work backwards from a goal through tool calls.'
+  stage: closed
+  studies:
+  - REVERSE_CALL_PLANNER_STUDY
+  closed_reason: 'Studied in the sandbox and not promoted: it answers five declared tasks the plain
+    runtime refuses but nothing on the project''s evaluation set, so the utility gate fails (REVERSE_CALL_PLANNER_STUDY);
+    the port stays as sandbox/planner.py.'
+  evidence:
+  - REVERSE_CALL_PLANNER_STUDY
+  - src/glm_universal/sandbox/planner.py
+  last_action: '31 October 2026: filed in done/ (moved from source_material/glm_reverse_call_planner_v2.py);
+    closed with the recorded reason'
+- id: arc_agi_17
+  path: done/arc_agi_17
+  kind: data
+  offers: The ARC-AGI round-17 state and results (the concept graph glm_state.json and the run results).
+  stage: closed
+  studies:
+  - HEXCOLOUR_STUDY
+  - STACK_RELAY_STUDY
+  closed_reason: Data the GLM reads in place (migration/state.py, semantics/export.py, reasoning/vision_stack.py),
+    studied by HEXCOLOUR_STUDY and STACK_RELAY_STUDY; there is nothing further to absorb.
+  evidence:
+  - HEXCOLOUR_STUDY
+  - STACK_RELAY_STUDY
+  - src/glm_universal/migration/state.py
+  last_action: '31 October 2026: filed in done/ (moved from source_material/arc_agi_17); closed with
+    the recorded reason'
+- id: data_condensed
+  path: done/data_condensed.txt
+  kind: data
+  offers: A condensed text form of part of the GLM pipeline kit.
+  stage: closed
+  studies:
+  - PIPELINE_KIT_STUDY
+  closed_reason: A byte-identical copy of done/GLM_Pipeline_Kit/condensed/data_condensed.txt (compared
+    byte for byte on 31 October 2026); its intake is the kit's.
+  evidence:
+  - source_material/done/GLM_Pipeline_Kit/condensed/data_condensed.txt
+  - PIPELINE_KIT_STUDY
+  last_action: '31 October 2026: filed in done/ (moved from source_material/data_condensed.txt); closed
+    with the recorded reason'
+- id: glm_kit_condensed
+  path: done/glm_kit_condensed.txt
+  kind: data
+  offers: A condensed text form of part of the GLM pipeline kit.
+  stage: closed
+  studies:
+  - PIPELINE_KIT_STUDY
+  closed_reason: A byte-identical copy of done/GLM_Pipeline_Kit/condensed/glm_kit_condensed.txt (compared
+    byte for byte on 31 October 2026); its intake is the kit's.
+  evidence:
+  - source_material/done/GLM_Pipeline_Kit/condensed/glm_kit_condensed.txt
+  - PIPELINE_KIT_STUDY
+  last_action: '31 October 2026: filed in done/ (moved from source_material/glm_kit_condensed.txt);
+    closed with the recorded reason'
+- id: scripts_condensed
+  path: done/scripts_condensed.txt
+  kind: data
+  offers: A condensed text form of part of the GLM pipeline kit.
+  stage: closed
+  studies:
+  - PIPELINE_KIT_STUDY
+  closed_reason: A byte-identical copy of done/GLM_Pipeline_Kit/condensed/scripts_condensed.txt (compared
+    byte for byte on 31 October 2026); its intake is the kit's.
+  evidence:
+  - source_material/done/GLM_Pipeline_Kit/condensed/scripts_condensed.txt
+  - PIPELINE_KIT_STUDY
+  last_action: '31 October 2026: filed in done/ (moved from source_material/scripts_condensed.txt);
+    closed with the recorded reason'
+- id: glm_study_findings_catalog
+  path: done/glm_study_findings_catalog.md
+  kind: concept note
+  offers: A catalogue of findings across the GLM studies.
+  stage: closed
+  studies:
+  - GLM_STUDY_CATALOG_AUDIT
+  closed_reason: 'Audited: every testable sentence restated as a claim and given one of four verdicts
+    (GLM_STUDY_CATALOG_AUDIT); what held is carried by the studies the audit cites.'
+  evidence:
+  - GLM_STUDY_CATALOG_AUDIT
+  last_action: '31 October 2026: filed in done/ (moved from source_material/glm_study_findings_catalog.md);
+    closed with the recorded reason'
+- id: glm_unification_blueprint
+  path: done/glm_unification_blueprint.md
+  kind: plan
+  offers: A blueprint for unifying the GLM's parts.
+  stage: closed
+  studies:
+  - GLM_UNIFICATION_BLUEPRINT_AUDIT
+  closed_reason: 'Audited: every testable sentence restated as a claim and given one of four verdicts
+    (GLM_UNIFICATION_BLUEPRINT_AUDIT).'
+  evidence:
+  - GLM_UNIFICATION_BLUEPRINT_AUDIT
+  last_action: '31 October 2026: filed in done/ (moved from source_material/glm_unification_blueprint.md);
+    closed with the recorded reason'
+- id: GLM_main
+  path: done/GLM-main.zip
+  local_only: true
+  kind: data
+  offers: The upstream GLM-main repository snapshot (gitignored; on the owner's machine).
+  stage: closed
+  closed_reason: Data read in place by `tools law-triage` and the AST index (tools.py, through constants.source_material_item);
+    kept untouched and out of version control at the owner's instruction of 18 October 2026 (MASTER_PLAN.md).
+    Not in this checkout.
+  evidence:
+  - MASTER_PLAN.md
+  - src/glm_universal/tools.py
+  last_action: '31 October 2026: filed in done/ (moved from source_material/GLM-main.zip); closed
+    with the recorded reason'
+- id: Lorentz_boosts
+  path: done/Lorentz boosts.pdf
+  local_only: true
+  kind: concept note
+  offers: The owner's document reading a Lorentz boost as a puzzle move, and the work-energy anchor
+    kappa (gitignored; on the owner's machine).
+  stage: closed
+  studies:
+  - FRAME_OPERATOR_STUDY
+  closed_reason: 'Taken by FRAME_OPERATOR_STUDY: rational boosts and the kappa anchor are in reasoning/frame_operators.py
+    and reasoning/kappa_anchor.py, proved in RationalBoost.lean. Not in this checkout, so its record
+    is closed rather than gated as absorbed.'
+  evidence:
+  - FRAME_OPERATOR_STUDY
+  - src/glm_universal/reasoning/frame_operators.py
+  last_action: '31 October 2026: filed in done/ (moved from source_material/Lorentz boosts.pdf); closed
+    with the recorded reason'

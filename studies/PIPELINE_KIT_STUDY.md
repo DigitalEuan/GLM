@@ -18,11 +18,13 @@
 were written after one exploratory pass, not before any measurement; what that
 pass changed is §7.2, and one mark was narrowed after its first take, §7.3.*
 
+*Last altered 31 October 2026 (repository check: 1 link repointed to where the file now lives after the October 2026 reorganisation — supplied items under `source_material/done/` or `source_material/ToDo/`; the text is unchanged.)*
+
 ## 0. What this document is
 
 A study for Phase 175, taken at the owner's request of 21 October 2026: the
 files of the 9-iteration GLM pipeline study were delivered into
-[`source_material/GLM_Pipeline_Kit/`](../source_material/GLM_Pipeline_Kit/README.md)
+[`source_material/GLM_Pipeline_Kit/`](../source_material/done/GLM_Pipeline_Kit/README.md)
 (its `README.md`, `FINDINGS.md`, `worklog.md`, the original study document
 `ARC_20Oct2026.txt`, and the condensed files split back into `python/glm_kit/`
 (9 modules), `GLMKit/` (7 Lean files), `scripts/` (40) and `data/` (22)), with

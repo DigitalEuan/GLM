@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 'The rank the correct label takes in each of the four: 2, 2, 2, 2. The worst within-type
@@ -12,17 +14,23 @@ directives: []
 evidence: []
 faculty: unknown
 file_refs:
-  code: []
+  code:
+  - reasoning/deep_hole_escalation.py
+  - reasoning/deep_hole_failures.py
+  - tools.py
   lean:
   - DeepHoleFailure
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: DEEP_HOLE_FAILURE_STUDY.md
-  test:
-  - test_deep_hole_failure.py
+  test: []
   wheel: []
 follow_ups: []
+hand_fields: []
 id: DEEP_HOLE_FAILURE_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -34,16 +42,15 @@ marks:
   met: []
   missed: []
 perturbations: []
-phase: 0
-predecessors: []
-question: 'The escalated deep-hole reading names 40 of 44 and certifies
-
-  nothing. Which of four pre-registered mechanisms accounts for the four it does
-
-  not name, and is that mechanism the same one that holds the separation ratio
-
-  `ρ = 2W/B` above 1?'
+phase: 35
+predecessors:
+- DEEP_HOLE_STUDY
+question: The escalated deep-hole reading names 40 of 44 and certifies nothing. Which of four pre-registered
+  mechanisms accounts for the four it does not name, and is that mechanism the same one that holds the
+  separation ratio `ρ = 2W/B` above 1?
 recomputed_by: '`glm_universal.reasoning.deep_hole_failures.deep_hole_failure_report`'
+related:
+- DEEP_HOLE_ESCALATION_STUDY
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1

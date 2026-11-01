@@ -1,8 +1,10 @@
 # GLM study manifest (glm-study-manifest/v1)
-# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
-# The .md is the prose backup; this YAML is the semantic face the GLM reads.
-# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
-# or by a future round of the reorganisation.
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 31 October 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '9 of 9 marks; Golay fork: waiting 768/768 resolved (mean 209/24 reports, max 13), coordinate
@@ -11,29 +13,28 @@ deciding_figure: '9 of 9 marks; Golay fork: waiting 768/768 resolved (mean 209/2
   104/104 unchanged by waiting, 387/387 resolved by asking, 0 wrong, 385 without the direct choice, mean
   1280/387 questions against a `Nat.clog 2` mean of 1174/387 and a one-by-one mean of 1253/129; 6 of 6
   dialogues.'
-directives:
-- D1
-- D2
-- D3
-- D4
-- D5
-- D6
+directives: []
 evidence: []
-faculty: refusal
+faculty: unknown
 file_refs:
   code:
-  - reasoning/timed_question
-  - tests/test_timed_question
+  - reasoning/timed_question.py
+  - tools.py
   lean:
+  - CoordinateJunction
   - TimedQuestion
+  lean_held: []
+  lean_missing: []
+  missing: []
   prose: TIMED_QUESTION_STUDY.md
   test:
   - test_timed_question.py
   wheel: []
 follow_ups: []
+hand_fields: []
 id: TIMED_QUESTION_STUDY
 junctions: []
-last_altered: ''
+last_altered: 31 October 2026
 layer:
   non_edges: []
   primary: ''
@@ -41,8 +42,26 @@ layer:
   resolutions_tried: []
 marks:
   amended: []
-  declared: []
-  met: []
+  declared:
+  - L1
+  - G1
+  - G2
+  - G3
+  - G4
+  - R1
+  - R2
+  - R3
+  - D1
+  met:
+  - L1
+  - G1
+  - G2
+  - G3
+  - G4
+  - R1
+  - R2
+  - R3
+  - D1
   missed: []
 perturbations: []
 phase: 145
@@ -52,6 +71,7 @@ question: When the GLM meets a tie it cannot separate with what it has, can it h
   **time** resolve it — information that a later step supplies — and can it work out and **ask for exactly
   the information it needs**, rather than refusing or waiting for whatever happens to arrive?
 recomputed_by: '`glm_universal.reasoning.timed_question.timed_question_report`'
+related: []
 reversibility:
   class: unknown
 schema: glm-study-manifest/v1
@@ -75,7 +95,8 @@ sections:
 - anchor: 7-what-came-out
   heading: 7. What came out
 status: closed
-successors: []
+successors:
+- ANSWERING_QUESTION_STUDY
 superseded_by: ''
 supersedes: []
 title: Time and the question — resolving a tie by information that comes later

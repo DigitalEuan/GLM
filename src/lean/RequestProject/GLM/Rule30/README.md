@@ -188,7 +188,7 @@ ledger exists and that its axioms match its evidence class.
 
 Use the merge tool at the top of the project: `python3 tools/merge_into_glm.py /path/to/glm_repo`
 checks the GLM checkout and shows the plan, and `--apply` merges. The full guide, the manual recipe
-and the gates to run afterwards are in [`MERGE_INTO_GLM.md`](../../../MERGE_INTO_GLM.md). In short:
+and the gates to run afterwards are in `MERGE_INTO_GLM.md`. In short:
 this folder, `Rule30.lean`, `../HypothesisEngine/`, `../HypothesisEngine.lean`, the folder
 `../Escalation/` and `../Rule30Study.lean` go into `glm_repo/glm_lean/RequestProject/GLM/`
 (the module names already match). Do **not** copy `RequestProject/GLM.lean` or

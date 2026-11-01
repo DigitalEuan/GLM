@@ -13,6 +13,8 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
 *What `substrate/isomorphism.py`, `migration/state.py`, `migration/store.py`,
 `RequestProject/GLM/Endianness.lean` and `report state migration` say about the
 address layer, and what auditing it measured.*
@@ -20,8 +22,7 @@ address layer, and what auditing it measured.*
 Every figure below is recomputed by the code that reports it. Run
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report state migration" --verify-tct
+PYTHONPATH=src python3 src/GLM.py -q "report state migration" --verify-tct
 ```
 
 and the third column re-derives the whole study in a fresh interpreter and
