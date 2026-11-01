@@ -367,12 +367,22 @@ def repair_target(document: Path, target: str) -> Optional[str]:
     already exists or is recorded absent).  A candidate that exists wins over
     one that is recorded absent."""
     doc_dir = document.parent
-    if _exists(doc_dir, target):
-        return target
     path, hash_, fragment = target.partition("#")
     rel = _repo_relative(doc_dir, path)
     if rel is None:
         return None
+    # A reorganisation can leave a compatibility copy at the old flat
+    # source_material/ path while the authoritative item now lives under
+    # done/ or ToDo/.  Follow the moved item when that explicit destination
+    # exists; otherwise retain the normal rule that an existing target wins.
+    if rel.startswith("source_material/"):
+        rest = rel.split("/", 1)[1]
+        if not rest.startswith(("done/", "ToDo/")):
+            for candidate in _moved(rel):
+                if candidate.exists() and candidate.parent.name in ("done", "ToDo"):
+                    return _relative(candidate, doc_dir, path, hash_, fragment)
+    if _exists(doc_dir, target):
+        return target
     if _recorded(rel):
         return target
     candidates = list(_candidates(document, path, rel))
