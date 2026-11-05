@@ -1,0 +1,206 @@
+{
+  "id": "W14",
+  "title": "Inductors and the LC circuit",
+  "axioms": [
+    "reactance = inductance * angular_frequency",
+    "inductance * capacitance * angular_frequency^2 = 1",
+    "energy = 1/2 * inductance * current^2"
+  ],
+  "cases": [
+    {
+      "id": "W14-01",
+      "equation": "angular_frequency = 1 / (inductance * capacitance * angular_frequency)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "rearranged: omega^2 = 1/(LC)"
+    },
+    {
+      "id": "W14-02",
+      "equation": "reactance = inductance * angular_frequency",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W14-03",
+      "equation": "energy = 1/2 * inductance * current^2",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "angular_frequency",
+    "capacitance",
+    "current",
+    "energy",
+    "inductance",
+    "reactance"
+  ],
+  "dimensions": {
+    "angular_frequency": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "capacitance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -2,
+        -1,
+        4,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "current": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "energy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "inductance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reactance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W3",
+      "name_in_this_wheel": "capacitance",
+      "name_in_other_wheel": "capacitance",
+      "reason": "the LC circuit's capacitor = the electrostatics capacitor"
+    },
+    {
+      "other_wheel": "W1",
+      "name_in_this_wheel": "current",
+      "name_in_other_wheel": "current",
+      "reason": "the inductor's current = the circuit's current"
+    }
+  ],
+  "non_identities": [
+    {
+      "other_wheel": "W13",
+      "name": "angular_frequency",
+      "reason": "a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)"
+    },
+    {
+      "other_wheel": "W3",
+      "name": "energy",
+      "reason": "the capacitor's stored energy against the inductor's"
+    }
+  ]
+}

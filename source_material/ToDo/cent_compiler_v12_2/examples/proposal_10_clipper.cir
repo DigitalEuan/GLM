@@ -1,0 +1,12 @@
+* Op-amp clipper: V_out = tanh(V_in) (approximated by zener clipping)
+* ¢: sat(V_in) → V_out
+* Zener diodes clip at ±3.0V
+VIN 1 0 DC 5.0
+R1 1 2 1k
+D1 2 0 ZENER_POS
+D2 0 2 ZENER_NEG
+.MODEL ZENER_POS D(BV=3.0 IBV=1e-3)
+.MODEL ZENER_NEG D(BV=3.0 IBV=1e-3)
+.OP
+.PRINT DC V(2)
+.END

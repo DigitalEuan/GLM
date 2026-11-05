@@ -1,0 +1,144 @@
+{
+  "id": "W2",
+  "title": "Sinusoidal AC impedance and power",
+  "axioms": [
+    "voltage = current * impedance",
+    "power = voltage * current"
+  ],
+  "cases": [
+    {
+      "id": "W2-01",
+      "equation": "impedance = voltage / current",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W2-02",
+      "equation": "reactance = inductance * angular_velocity",
+      "expected_dimensional": true,
+      "expected_derivable": false,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": false,
+      "note": "needs an inductor-reactance axiom"
+    },
+    {
+      "id": "W2-03",
+      "equation": "power = voltage * current",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_underspecified",
+      "expected_dimensional_explicit": null,
+      "note": "dimensions cannot tell P, Q, S or conjugation apart"
+    },
+    {
+      "id": "W2-N1",
+      "equation": "impedance = voltage * current",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "current",
+    "impedance",
+    "power",
+    "voltage"
+  ],
+  "dimensions": {
+    "current": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "impedance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "power": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "voltage": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}
