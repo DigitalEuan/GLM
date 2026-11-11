@@ -1,0 +1,7 @@
+file: sample_Golay_Code.lean | ticks: 1686
+corruption model: slip (level 1.0)
+sieve: parity 0, Golay cond. 0, sum 0, clean 1686  (of 1686 sampled)
+class syndrome: 1686 of 1686 ticks change their Lambda/2Lambda class; error class types {2: 1686}
+detection: 1686 of 1686 corrupted ticks detected, 0 false alarms
+correction: 1670/1686 ticks decoded to the true part (99.1%); 4 resolved by class lookup alone
+class of kw:theorem: type 2 of Lambda/2Lambda (Monster index space)

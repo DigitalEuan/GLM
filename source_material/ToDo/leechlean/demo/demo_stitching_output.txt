@@ -1,0 +1,38 @@
+library: 29,422 parts, 80,375 joinings, 55,269 (part, frame) contexts, from 442 trusted files (1,487,625 tokens)
+
+authoring Golay/Code_v2.lean: rename syn_eq_iff_isCodeword_symmDiff -> cosets_named_by_syndromes; add corollary syn_eq_coset
+ticks: 1746  (structural: 1053)
+
+-- classification --
+context-verified ticks: 1,741 (99.7%)
+part-known ticks:      0
+new ticks:             5
+known joinings:        1,736   new joinings: 9
+
+-- the delta (the parts in question) --
+  comment:/- # The extended binary Golay code, c   count 1  address [18, 0, 0, 0]...  energy 78
+  comment:/-- The syndromes name the cosets: equ   count 1  address [18, 0, 0, 0]...  energy 90
+  ident:cosets_named_by_syndromes                  count 2  address [0, 0, 18, 0]...  energy 86
+  ident:syn_eq_coset                               count 1  address [0, 0, 18, 2]...  energy 88
+  new addresses on the Leech lattice: True
+  extended codebook still injective:  True
+
+-- projection --
+byte-exact through the extended codebook: True
+projected file written: stitched_Golay_Code_v2.lean (ready for a Lean toolchain; not compiled here -- this sandbox has no Lean/Mathlib)
+
+-- provenance of the stitched proof body --
+  sym:(                        under f:theorem|body=by|len2=5     attested in 324 library files
+  ident:a                      under f:theorem|body=by|len2=5     attested in 133 library files
+  ident:b                      under f:theorem|body=by|len2=5     attested in 109 library files
+  sym::                        under f:theorem|body=by|len2=5     attested in 329 library files
+  ident:Word                   under f:theorem|body=by|len2=5     attested in 24 library files
+  sym:)                        under f:theorem|body=by|len2=5     attested in 324 library files
+
+-- query: 'prove this' (sampled continuation of the new theorem) --
+  by
+      exact (by (a : (0, :=
+        (- ((0, :
+      rw (0, (by
+  theorem (t =
+  [unverified graph proposal; greedy top-1 continuation accuracy over the corpus: 40.6%]

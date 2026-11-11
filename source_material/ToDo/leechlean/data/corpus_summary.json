@@ -1,0 +1,353 @@
+{
+ "files": 442,
+ "modules": {
+  "Cube": 5,
+  "Escalation": 6,
+  "Golay": 6,
+  "HypothesisEngine": 10,
+  "IntakeChecks": 4,
+  "PipelineKit": 8,
+  "RequestProject": 243,
+  "Rule30": 139,
+  "Semantics": 2,
+  "Shortcut": 8,
+  "Wheels": 3,
+  "awaiting_recovery": 6,
+  "scratch": 1,
+  "tools": 1
+ },
+ "total_token_parts": 1487625,
+ "distinct_parts": 39992,
+ "granularity_counts": {
+  "token": 29422,
+  "bigram": 10421,
+  "frame": 63,
+  "tactic": 86
+ },
+ "top50": [
+  {
+   "rank": 1,
+   "part": "ws: ",
+   "count": 526563,
+   "surprisal_bits": 1.498
+  },
+  {
+   "rank": 2,
+   "part": "ws:\n",
+   "count": 59596,
+   "surprisal_bits": 4.642
+  },
+  {
+   "rank": 3,
+   "part": "sym:(",
+   "count": 59039,
+   "surprisal_bits": 4.655
+  },
+  {
+   "rank": 4,
+   "part": "sym:)",
+   "count": 59039,
+   "surprisal_bits": 4.655
+  },
+  {
+   "rank": 5,
+   "part": "sym:,",
+   "count": 49218,
+   "surprisal_bits": 4.918
+  },
+  {
+   "rank": 6,
+   "part": "sym::",
+   "count": 40173,
+   "surprisal_bits": 5.211
+  },
+  {
+   "rank": 7,
+   "part": "ws:  ",
+   "count": 22881,
+   "surprisal_bits": 6.023
+  },
+  {
+   "rank": 8,
+   "part": "sym::=",
+   "count": 19517,
+   "surprisal_bits": 6.252
+  },
+  {
+   "rank": 9,
+   "part": "ws:    ",
+   "count": 17989,
+   "surprisal_bits": 6.37
+  },
+  {
+   "rank": 10,
+   "part": "num:1",
+   "count": 16428,
+   "surprisal_bits": 6.501
+  },
+  {
+   "rank": 11,
+   "part": "kw:by",
+   "count": 14982,
+   "surprisal_bits": 6.634
+  },
+  {
+   "rank": 12,
+   "part": "sym:[",
+   "count": 14426,
+   "surprisal_bits": 6.688
+  },
+  {
+   "rank": 13,
+   "part": "sym:]",
+   "count": 14426,
+   "surprisal_bits": 6.688
+  },
+  {
+   "rank": 14,
+   "part": "num:0",
+   "count": 14137,
+   "surprisal_bits": 6.717
+  },
+  {
+   "rank": 15,
+   "part": "ws:\n\n",
+   "count": 12914,
+   "surprisal_bits": 6.848
+  },
+  {
+   "rank": 16,
+   "part": "sym:=",
+   "count": 12185,
+   "surprisal_bits": 6.932
+  },
+  {
+   "rank": 17,
+   "part": "b:sym:)|sym:(",
+   "count": 10305,
+   "surprisal_bits": 7.174
+  },
+  {
+   "rank": 18,
+   "part": "b:sym::=|kw:by",
+   "count": 9573,
+   "surprisal_bits": 7.28
+  },
+  {
+   "rank": 19,
+   "part": "num:2",
+   "count": 8718,
+   "surprisal_bits": 7.415
+  },
+  {
+   "rank": 20,
+   "part": "ident:n",
+   "count": 8508,
+   "surprisal_bits": 7.45
+  },
+  {
+   "rank": 21,
+   "part": "b:num:1|sym:)",
+   "count": 8398,
+   "surprisal_bits": 7.469
+  },
+  {
+   "rank": 22,
+   "part": "sym:+",
+   "count": 8396,
+   "surprisal_bits": 7.469
+  },
+  {
+   "rank": 23,
+   "part": "b:num:0|sym:,",
+   "count": 8032,
+   "surprisal_bits": 7.533
+  },
+  {
+   "rank": 24,
+   "part": "b:sym:)|sym:,",
+   "count": 7864,
+   "surprisal_bits": 7.564
+  },
+  {
+   "rank": 25,
+   "part": "sym:=>",
+   "count": 7598,
+   "surprisal_bits": 7.613
+  },
+  {
+   "rank": 26,
+   "part": "b:sym:,|sym:(",
+   "count": 7591,
+   "surprisal_bits": 7.615
+  },
+  {
+   "rank": 27,
+   "part": "ident:h",
+   "count": 7494,
+   "surprisal_bits": 7.633
+  },
+  {
+   "rank": 28,
+   "part": "ident:t",
+   "count": 7423,
+   "surprisal_bits": 7.647
+  },
+  {
+   "rank": 29,
+   "part": "sym:-",
+   "count": 7264,
+   "surprisal_bits": 7.678
+  },
+  {
+   "rank": 30,
+   "part": "kw:have",
+   "count": 7111,
+   "surprisal_bits": 7.709
+  },
+  {
+   "rank": 31,
+   "part": "ident:i",
+   "count": 7086,
+   "surprisal_bits": 7.714
+  },
+  {
+   "rank": 32,
+   "part": "b:sym:)|sym::",
+   "count": 7064,
+   "surprisal_bits": 7.718
+  },
+  {
+   "rank": 33,
+   "part": "sym:*",
+   "count": 6777,
+   "surprisal_bits": 7.778
+  },
+  {
+   "rank": 34,
+   "part": "ident:x",
+   "count": 6741,
+   "surprisal_bits": 7.786
+  },
+  {
+   "rank": 35,
+   "part": "kw:theorem",
+   "count": 6725,
+   "surprisal_bits": 7.789
+  },
+  {
+   "rank": 36,
+   "part": "ident:\u2115",
+   "count": 6403,
+   "surprisal_bits": 7.86
+  },
+  {
+   "rank": 37,
+   "part": "ident:_",
+   "count": 6326,
+   "surprisal_bits": 7.878
+  },
+  {
+   "rank": 38,
+   "part": "b:sym:,|num:1",
+   "count": 6201,
+   "surprisal_bits": 7.906
+  },
+  {
+   "rank": 39,
+   "part": "ident:a",
+   "count": 6157,
+   "surprisal_bits": 7.917
+  },
+  {
+   "rank": 40,
+   "part": "sym:\u2192",
+   "count": 6126,
+   "surprisal_bits": 7.924
+  },
+  {
+   "rank": 41,
+   "part": "ws:      ",
+   "count": 6113,
+   "surprisal_bits": 7.927
+  },
+  {
+   "rank": 42,
+   "part": "ident:rw",
+   "count": 6016,
+   "surprisal_bits": 7.95
+  },
+  {
+   "rank": 43,
+   "part": "b:ident:rw|sym:[",
+   "count": 6016,
+   "surprisal_bits": 7.95
+  },
+  {
+   "rank": 44,
+   "part": "ident:c",
+   "count": 5840,
+   "surprisal_bits": 7.993
+  },
+  {
+   "rank": 45,
+   "part": "b:sym:)|sym:)",
+   "count": 5515,
+   "surprisal_bits": 8.075
+  },
+  {
+   "rank": 46,
+   "part": "b:sym::|ident:\u2115",
+   "count": 5454,
+   "surprisal_bits": 8.091
+  },
+  {
+   "rank": 47,
+   "part": "ident:k",
+   "count": 5450,
+   "surprisal_bits": 8.093
+  },
+  {
+   "rank": 48,
+   "part": "sym:|",
+   "count": 5237,
+   "surprisal_bits": 8.15
+  },
+  {
+   "rank": 49,
+   "part": "ident:simp",
+   "count": 4992,
+   "surprisal_bits": 8.219
+  },
+  {
+   "rank": 50,
+   "part": "b:sym:(|num:0",
+   "count": 4986,
+   "surprisal_bits": 8.221
+  }
+ ],
+ "coverage": {
+  "10": 0.4008,
+  "100": 0.6212,
+  "1000": 0.8191,
+  "10000": 0.9618
+ },
+ "landmarks": [
+  "sym:(",
+  "sym:)",
+  "sym:,",
+  "sym::",
+  "sym::=",
+  "num:1",
+  "kw:by",
+  "sym:[",
+  "sym:]",
+  "num:0",
+  "sym:=",
+  "num:2",
+  "ident:n",
+  "sym:+",
+  "sym:=>",
+  "ident:h"
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "files": 442,
+ "exact_round_trips": 442,
+ "n_failures": 0,
+ "failures": [],
+ "raw_bytes": 4830283,
+ "address_stream_bytes_int8": 35703000,
+ "expansion_factor": 7.391,
+ "n_tokens": 1487625
+}

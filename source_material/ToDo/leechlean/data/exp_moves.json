@@ -1,0 +1,404 @@
+{
+ "repertoire": {
+  "distinct_moves": 80361,
+  "total_moves": 1487183,
+  "norm2_mean": 653.663941464143,
+  "norm2_median": 592.0,
+  "type_census_distinct": {
+   "3": 39992,
+   "4": 39842,
+   "0": 1,
+   "2": 526
+  },
+  "type_census_weighted": {
+   "3": 800401,
+   "4": 660171,
+   "0": 8824,
+   "2": 17787
+  },
+  "top50_share": 0.39086514571508685,
+  "top5": [
+   {
+    "move": [
+     0,
+     -2,
+     -2,
+     6,
+     -2,
+     2,
+     4,
+     0,
+     4,
+     0,
+     -2,
+     -4,
+     0,
+     2,
+     4,
+     4,
+     0,
+     4,
+     -2,
+     0,
+     2,
+     -2,
+     -2,
+     2
+    ],
+    "count": 50931,
+    "norm2": 176,
+    "type": 3
+   },
+   {
+    "move": [
+     0,
+     0,
+     2,
+     -2,
+     2,
+     0,
+     -6,
+     0,
+     -4,
+     2,
+     -2,
+     2,
+     2,
+     0,
+     -4,
+     -2,
+     4,
+     -4,
+     0,
+     2,
+     0,
+     -2,
+     2,
+     0
+    ],
+    "count": 47193,
+    "norm2": 144,
+    "type": 3
+   },
+   {
+    "move": [
+     -2,
+     0,
+     -2,
+     6,
+     4,
+     0,
+     0,
+     0,
+     4,
+     0,
+     -4,
+     -4,
+     4,
+     4,
+     4,
+     2,
+     -2,
+     4,
+     -2,
+     2,
+     0,
+     0,
+     -4,
+     2
+    ],
+    "count": 40012,
+    "norm2": 208,
+    "type": 3
+   },
+   {
+    "move": [
+     2,
+     0,
+     2,
+     -6,
+     -4,
+     0,
+     0,
+     0,
+     -4,
+     0,
+     4,
+     4,
+     -4,
+     -4,
+     -4,
+     -2,
+     2,
+     -4,
+     2,
+     -2,
+     0,
+     0,
+     4,
+     -2
+    ],
+    "count": 36325,
+    "norm2": 208,
+    "type": 3
+   },
+   {
+    "move": [
+     0,
+     0,
+     0,
+     -2,
+     -2,
+     -2,
+     -2,
+     0,
+     -4,
+     0,
+     2,
+     2,
+     0,
+     -4,
+     -4,
+     -4,
+     0,
+     -4,
+     2,
+     0,
+     0,
+     0,
+     2,
+     -4
+    ],
+    "count": 34112,
+    "norm2": 128,
+    "type": 4
+   }
+  ],
+  "null_norm2_mean": 954.0408,
+  "null_norm2_median": 976.0,
+  "distinct_move_classes": 63257,
+  "moves_per_class_mean": 1.2703890478524116,
+  "class_type_census": {
+   "by_distinct_class": {
+    "3": 31489,
+    "4": 31369,
+    "0": 1,
+    "2": 398
+   },
+   "by_move_count": {
+    "0": 1,
+    "2": 526,
+    "3": 39992,
+    "4": 39842
+   }
+  }
+ },
+ "closure": {
+  "consecutive_pairs": 1486741,
+  "composed_in_repertoire": 591417,
+  "in_repertoire_rate": 0.3977942358487457,
+  "same_file_rate": 0.3322515488575347,
+  "null_rate": 0.028228,
+  "null_n": 500000
+ },
+ "journeys": {
+  "n_declarations": 9188,
+  "by_shape": {
+   "theorem|by": {
+    "count": 5317,
+    "median_tortuosity": 100.04347826086956,
+    "median_ctrl_tortuosity": 85.83695652173915,
+    "p_tortuosity_gt_ctrl": 0.9983073161557269,
+    "median_net2": 368.0,
+    "mean_path2": 55407.60278352454,
+    "mean_class_type_entropy": 1.0637863657853206
+   },
+   "def|term": {
+    "count": 2143,
+    "median_tortuosity": 39.23076923076923,
+    "median_ctrl_tortuosity": 32.13833333333334,
+    "p_tortuosity_gt_ctrl": 0.9967335510965936,
+    "median_net2": 416.0,
+    "mean_path2": 27744.05972935138,
+    "mean_class_type_entropy": 1.0410667989188804
+   },
+   "theorem|term": {
+    "count": 1199,
+    "median_tortuosity": 63.21739130434783,
+    "median_ctrl_tortuosity": 54.458695652173915,
+    "p_tortuosity_gt_ctrl": 0.9991659716430359,
+    "median_net2": 368.0,
+    "mean_path2": 30178.575479566305,
+    "mean_class_type_entropy": 1.0439222514667603
+   },
+   "lemma|by": {
+    "count": 203,
+    "median_tortuosity": 83.56,
+    "median_ctrl_tortuosity": 68.068,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 400.0,
+    "mean_path2": 41776.63054187192,
+    "mean_class_type_entropy": 1.0764996946107381
+   },
+   "structure|term": {
+    "count": 78,
+    "median_tortuosity": 31.317073170731707,
+    "median_ctrl_tortuosity": 25.37560975609756,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 656.0,
+    "mean_path2": 26158.97435897436,
+    "mean_class_type_entropy": 1.0109403633547638
+   },
+   "abbrev|term": {
+    "count": 78,
+    "median_tortuosity": 10.909090909090908,
+    "median_ctrl_tortuosity": 8.735227272727272,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 704.0,
+    "mean_path2": 10778.051282051281,
+    "mean_class_type_entropy": 0.9473769806231308
+   },
+   "inductive|term": {
+    "count": 64,
+    "median_tortuosity": 32.375,
+    "median_ctrl_tortuosity": 26.661249999999995,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 640.0,
+    "mean_path2": 32533.0,
+    "mean_class_type_entropy": 0.9847082115387458
+   },
+   "instance|term": {
+    "count": 33,
+    "median_tortuosity": 20.536585365853657,
+    "median_ctrl_tortuosity": 17.85853658536585,
+    "p_tortuosity_gt_ctrl": 0.9696969696969697,
+    "median_net2": 656.0,
+    "mean_path2": 28223.030303030304,
+    "mean_class_type_entropy": 1.0876413700212788
+   },
+   "lemma|term": {
+    "count": 25,
+    "median_tortuosity": 55.28,
+    "median_ctrl_tortuosity": 44.346,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 400.0,
+    "mean_path2": 74133.76,
+    "mean_class_type_entropy": 1.0303509367687373
+   },
+   "example|by": {
+    "count": 23,
+    "median_tortuosity": 16.029411764705884,
+    "median_ctrl_tortuosity": 13.302941176470588,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 544.0,
+    "mean_path2": 10936.347826086956,
+    "mean_class_type_entropy": 1.1238588383541837
+   },
+   "instance|by": {
+    "count": 21,
+    "median_tortuosity": 22.317073170731707,
+    "median_ctrl_tortuosity": 17.962195121951215,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 656.0,
+    "mean_path2": 16302.47619047619,
+    "mean_class_type_entropy": 1.0148233630957597
+   },
+   "example|term": {
+    "count": 3,
+    "median_tortuosity": 30.029411764705884,
+    "median_ctrl_tortuosity": 27.273529411764706,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 544.0,
+    "mean_path2": 23061.333333333332,
+    "mean_class_type_entropy": 1.1410689282336661
+   },
+   "def|by": {
+    "count": 1,
+    "median_tortuosity": 162.8846153846154,
+    "median_ctrl_tortuosity": 147.61346153846156,
+    "p_tortuosity_gt_ctrl": 1.0,
+    "median_net2": 416.0,
+    "mean_path2": 67760.0,
+    "mean_class_type_entropy": 1.406935959493878
+   }
+  }
+ },
+ "models": {
+  "part_bigram": {
+   "hits": 603973,
+   "acc": 0.40623955349317736,
+   "unseen": 0.01985819991511635
+  },
+  "move_bigram": {
+   "hits": 681294,
+   "acc": 0.45824659439673754,
+   "unseen": 0.04953451878975558
+  },
+  "class_bigram": {
+   "hits": 577332,
+   "acc": 0.3883204942891869,
+   "unseen": 0.03113185147917492
+  },
+  "class_first_hybrid_k8": {
+   "hits": 626581,
+   "acc": 0.4214459680603414,
+   "unseen": 0.019688029051462226
+  }
+ },
+ "energy_split": {
+  "theorem|by": {
+   "n": 5317,
+   "mean_stmt_energy": 25.40074179092224,
+   "mean_body_energy": 27.699849088464802,
+   "median_ratio_body_over_stmt": 1.0966887417218543
+  },
+  "def|term": {
+   "n": 1938,
+   "mean_stmt_energy": 24.152492442924355,
+   "mean_body_energy": 27.709323882511004,
+   "median_ratio_body_over_stmt": 1.123584056425226
+  },
+  "theorem|term": {
+   "n": 1194,
+   "mean_stmt_energy": 26.254207961645594,
+   "mean_body_energy": 30.298594344644886,
+   "median_ratio_body_over_stmt": 1.1545872839371811
+  },
+  "instance|by": {
+   "n": 21,
+   "mean_stmt_energy": 25.051768019328865,
+   "mean_body_energy": 31.66833667585548,
+   "median_ratio_body_over_stmt": 1.2789115646258504
+  },
+  "example|by": {
+   "n": 23,
+   "mean_stmt_energy": 26.4124555702835,
+   "mean_body_energy": 25.44375745027919,
+   "median_ratio_body_over_stmt": 0.924187725631769
+  },
+  "abbrev|term": {
+   "n": 78,
+   "mean_stmt_energy": 30.9580606610584,
+   "mean_body_energy": 28.94910791203826,
+   "median_ratio_body_over_stmt": 0.95858241670652
+  },
+  "lemma|by": {
+   "n": 203,
+   "mean_stmt_energy": 24.35853415499145,
+   "mean_body_energy": 27.54222418584963,
+   "median_ratio_body_over_stmt": 1.112781954887218
+  },
+  "lemma|term": {
+   "n": 24,
+   "mean_stmt_energy": 24.29078870501682,
+   "mean_body_energy": 28.025169317829448,
+   "median_ratio_body_over_stmt": 1.0832508759139223
+  },
+  "instance|term": {
+   "n": 33,
+   "mean_stmt_energy": 29.665546024439305,
+   "mean_body_energy": 27.60625707497158,
+   "median_ratio_body_over_stmt": 0.9129032258064517
+  }
+ }
+}

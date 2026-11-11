@@ -1,0 +1,13 @@
+{
+ "n_targets_part": 4000,
+ "leech_mean_err2_part_targets": 1.5731758441043975,
+ "z24_mean_err2_part_targets": 1.6546564605158205,
+ "ratio_part_targets": 0.9507567774001726,
+ "n_targets_white": 3000,
+ "leech_mean_err2_white": 1.5730046819326386,
+ "z24_mean_err2_white": 2.006409377055053,
+ "ratio_white": 0.783989897535989,
+ "theoretical_nsm_leech": 0.0658,
+ "theoretical_nsm_z24": 0.08333333333333333,
+ "theoretical_ratio_white": 0.7896
+}

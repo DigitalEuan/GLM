@@ -1,0 +1,188 @@
+{
+ "file": "Golay/Code_v2.lean",
+ "derived_from": "RequestProject/GLM/Golay/Code.lean",
+ "edit": "rename syn_eq_iff_isCodeword_symmDiff -> cosets_named_by_syndromes; add corollary syn_eq_coset",
+ "ticks": 1746,
+ "structural_ticks": 1053,
+ "tick_status": {
+  "new": 5,
+  "ctx": 1741
+ },
+ "join_status": {
+  "new": 9,
+  "known": 1736
+ },
+ "new_parts": [
+  {
+   "part": "comment:/-\n# The extended binary Golay code, concretely\n\n`GolayBoundary.lean` proves what happens at the snap radius for *any* code of\nminimum distance 8.  This file introduces the actual code the GLM substrate\nuses \u2014 the systematic `[24, 12, 8]` extended binary Golay code with generator\n`G = [I\u2081\u2082 | B]` and the symmetric parity block `B` of\n`glm_universal/substrate/mog.py` \u2014 so that the sharper facts (how *many*\ncodewords tie at the covering radius, and what their supports look like) can be\nstated and proved about it rather than assumed.\n\nA word is its support: a `Finset (Fin 24)`.  Symmetric difference is addition,\nso the code is the kernel of the syndrome map `syn s = \u2211 k \u2208 s, col k` into\n`Fin 12 \u2192 ZMod 2`, where `col k` is the `k`-th column of `H = [B | I\u2081\u2082]`.\n\nThe content of this file is the algebra of that map:\n\n* `syn_symmDiff` \u2014 the syndrome is additive over symmetric difference;\n* `cosets_named_by_syndromes` \u2014 two words share a syndrome exactly when\n  they differ by a codeword, i.e. syndromes name the cosets;\n* `hdist` and its metric lemmas, expressed through `syn`.\n\nThe computational facts about this particular `B` live in `Golay/Sextet.lean`.\n-/",
+   "count": 1,
+   "address": [
+    18,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -2,
+    4,
+    -4,
+    6,
+    -6,
+    -2,
+    -4,
+    0,
+    -6,
+    2,
+    4,
+    -4,
+    -4,
+    -4,
+    4,
+    4,
+    -6
+   ],
+   "energy": 78
+  },
+  {
+   "part": "comment:/-- The syndromes name the cosets: equal syndromes give a codeword\ndifference, ready for transport along the coset. -/",
+   "count": 1,
+   "address": [
+    18,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    -6,
+    8,
+    4,
+    -2,
+    -2,
+    2,
+    -8,
+    -6,
+    -4,
+    -2,
+    0,
+    -2,
+    -8,
+    -6,
+    -6,
+    2
+   ],
+   "energy": 90
+  },
+  {
+   "part": "ident:cosets_named_by_syndromes",
+   "count": 2,
+   "address": [
+    0,
+    0,
+    18,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -2,
+    -8,
+    6,
+    0,
+    2,
+    4,
+    4,
+    6,
+    0,
+    -8,
+    0,
+    2,
+    8,
+    -4,
+    6,
+    -2
+   ],
+   "energy": 86
+  },
+  {
+   "part": "ident:syn_eq_coset",
+   "count": 1,
+   "address": [
+    0,
+    0,
+    18,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -2,
+    -6,
+    -4,
+    -8,
+    4,
+    -4,
+    -2,
+    4,
+    -4,
+    -6,
+    0,
+    6,
+    4,
+    6,
+    8
+   ],
+   "energy": 88
+  }
+ ],
+ "projection_byte_exact": true,
+ "new_addresses_on_lattice": true,
+ "codebook_still_injective": true,
+ "tick_status_seq": "ncccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccncccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccncccnccccccccccccccccccccccccccccccccccccccccccccncccccccccccccc",
+ "join_status_seq": "nkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkknnkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkknnkknnkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkknnkkkkkkkkkkkkk",
+ "ctx_reuse_examples": [
+  {
+   "part": "sym:(",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 324
+  },
+  {
+   "part": "ident:a",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 133
+  },
+  {
+   "part": "ident:b",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 109
+  },
+  {
+   "part": "sym::",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 329
+  },
+  {
+   "part": "ident:Word",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 24
+  },
+  {
+   "part": "sym:)",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 324
+  },
+  {
+   "part": "ident:syn",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 11
+  },
+  {
+   "part": "sym:=",
+   "frame": "f:theorem|body=by|len2=5",
+   "files_attesting_context": 305
+  }
+ ]
+}

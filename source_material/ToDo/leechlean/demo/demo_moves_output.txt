@@ -1,0 +1,32 @@
+the repertoire: 80,361 distinct moves over 1,487,183 ticks
+  mean |d|^2 654, median 592  --  random part pairs: 954
+  top 50 moves carry 39% of all ticks
+  the most frequent happenings:
+     50,931x  |d|^2  176  type 3   'ws: ' -> 'sym:('
+     47,193x  |d|^2  144  type 3   'sym:,' -> 'ws: '
+     40,012x  |d|^2  208  type 3   'ws: ' -> 'sym::'
+     36,325x  |d|^2  208  type 3   'sym::' -> 'ws: '
+     34,112x  |d|^2  128  type 4   'sym:)' -> 'ws: '
+     22,880x  |d|^2  160  type 4   'ws:\n' -> 'ws:  '
+
+the index space: moves occupy 63,257 of 2^24 = 16,777,216 Lambda/2Lambda classes (1.27 moves per occupied class)
+  class types of moves: type 2 (minimal-vector classes, the X_r basis of the Griess algebra): 526, type 3 (q=1): 39992, type 4 (frames): 39842
+  class pairing <x,y> mod 2 well defined on Lambda/2Lambda: True
+  class law verified live: kappa(d1)(*)kappa(d2) = kappa(d1+d2) on the corpus's two most common moves
+  (classes compose by reduction of the sum -- the group algebra of the 16,777,216-class index space)
+
+the journey of a proof: syn_eq_iff_isCodeword_symmDiff (216 ticks, statement 39 + proof 177)
+  energy: statement mean 24 -> proof mean 24 lattice units
+  moves: mean |d|^2 264; class types {3: 103, 4: 111, 2: 1}
+  net displacement |A_end - A_0|^2 = 368 -- shorter than one AVERAGE corpus move (654): proofs return closer than they wander (this proof's own moves average 264)
+  tortuosity path^2/net^2 = 154.1 -- the corpus median for theorem|by is 100.0 (shuffled control 85.8)
+  the proof's first moves, as a word in the repertoire:
+    |d|^2  224 (known)  |d|^2  176 (known)  |d|^2  160 (known)  |d|^2  336 (known)
+    |d|^2  384 (known)  |d|^2  480 (known)  |d|^2  544 (known)  |d|^2  160 (known)
+
+does the move algebra help build?  greedy top-1, leave-one-file-out:
+   40.6%  predict the next PART (baseline)
+   45.8%  predict the next MOVE
+   38.8%  predict the next CLASS
+   42.1%  class-first, then part
+  the happening between addresses is the more predictable primitive.

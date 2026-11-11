@@ -1,0 +1,37 @@
+{
+ "n_files": 442,
+ "n_modules": 14,
+ "pca_variance_2d": 0.5340306714240974,
+ "nn1_structural_centroid": 0.7760180995475113,
+ "nn1_all_token_centroid": 0.7601809954751131,
+ "nn1_control_permuted_addresses": 0.6380090497737556,
+ "nn1_control_random_labels": 0.41855203619909503,
+ "balanced_modules": [
+  "HypothesisEngine",
+  "PipelineKit",
+  "RequestProject",
+  "Rule30",
+  "Shortcut"
+ ],
+ "nn1_balanced": 0.8799019607843137,
+ "nn1_balanced_control": 0.7156862745098039,
+ "kmeans_purity": 0.7828054298642534,
+ "kmeans_purity_control": 0.6561085972850679,
+ "fingerprints_are_lattice_points": true,
+ "module_sizes": {
+  "Cube": 5,
+  "Escalation": 6,
+  "Golay": 6,
+  "HypothesisEngine": 10,
+  "IntakeChecks": 4,
+  "PipelineKit": 8,
+  "RequestProject": 243,
+  "Rule30": 139,
+  "Semantics": 2,
+  "Shortcut": 8,
+  "Wheels": 3,
+  "awaiting_recovery": 6,
+  "scratch": 1,
+  "tools": 1
+ }
+}

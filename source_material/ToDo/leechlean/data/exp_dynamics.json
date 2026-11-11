@@ -1,0 +1,12 @@
+{
+ "files": 442,
+ "mean_path2": 964752.2533936652,
+ "mean_path2_shuffled": 834641.8823529412,
+ "ratio_path2_real_over_shuffled": 1.1558876612732751,
+ "n_files_real_shorter": 0,
+ "mean_energy_per_tick": 27.18871354876611,
+ "mean_displacement2": 2040788367.0950227,
+ "work_integral_on_lattice": true,
+ "total_tokens": 1487625,
+ "total_energy_lattice_units": 38601590.0
+}

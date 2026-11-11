@@ -1,0 +1,514 @@
+{
+ "n_tokens": 2800,
+ "n_files": 14,
+ "conditions": [
+  {
+   "model": "jitter",
+   "param": "p=0.05",
+   "sieve": {
+    "mod2": 822,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 678
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 1258,
+    "quant_moved": 1542
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 1258,
+    "quant_moved": 1542,
+    "class_unique": 2790,
+    "class_empty": 0
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 1258
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 1542,
+    "n_detected": 1542,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2800,
+    "class_changing": 0,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {}
+   }
+  },
+  {
+   "model": "jitter",
+   "param": "p=0.1",
+   "sieve": {
+    "mod2": 1192,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 308
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 577,
+    "quant_moved": 2223
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 577,
+    "quant_moved": 2223,
+    "class_unique": 2790,
+    "class_empty": 0
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 577
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2223,
+    "n_detected": 2223,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2800,
+    "class_changing": 0,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {}
+   }
+  },
+  {
+   "model": "jitter",
+   "param": "p=0.2",
+   "sieve": {
+    "mod2": 1460,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 40
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 77,
+    "quant_moved": 2723
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 77,
+    "quant_moved": 2723,
+    "class_unique": 2790,
+    "class_empty": 0
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 77
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2723,
+    "n_detected": 2723,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2800,
+    "class_changing": 0,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {}
+   }
+  },
+  {
+   "model": "jitter",
+   "param": "p=0.3",
+   "sieve": {
+    "mod2": 1495,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 5
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 13,
+    "quant_moved": 2787
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 13,
+    "quant_moved": 2787,
+    "class_unique": 2789,
+    "class_empty": 1
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 13
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2787,
+    "n_detected": 2787,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2799,
+    "class_changing": 1,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {
+     "2": 1
+    }
+   }
+  },
+  {
+   "model": "flip_k",
+   "param": "k=1",
+   "sieve": {
+    "mod2": 1500,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 0
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0,
+    "quant_moved": 2800
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0,
+    "quant_moved": 2800,
+    "class_unique": 2790,
+    "class_empty": 0
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2800,
+    "n_detected": 2800,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2800,
+    "class_changing": 0,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {}
+   }
+  },
+  {
+   "model": "flip_k",
+   "param": "k=2",
+   "sieve": {
+    "mod2": 0,
+    "mod4-golay": 1500,
+    "mod8-sum": 0,
+    "clean": 0
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0,
+    "quant_moved": 2800
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0,
+    "quant_moved": 2800,
+    "class_unique": 2790,
+    "class_empty": 0
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2800,
+    "n_detected": 2800,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2800,
+    "class_changing": 0,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {}
+   }
+  },
+  {
+   "model": "flip_k",
+   "param": "k=3",
+   "sieve": {
+    "mod2": 1500,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 0
+   },
+   "two_stage": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0,
+    "quant_moved": 2800
+   },
+   "class_assisted": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0,
+    "quant_moved": 2800,
+    "class_unique": 2790,
+    "class_empty": 0
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2800,
+    "n_detected": 2800,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2800,
+    "class_changing": 0,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {}
+   }
+  },
+  {
+   "model": "flip_k",
+   "param": "k=4",
+   "sieve": {
+    "mod2": 0,
+    "mod4-golay": 0,
+    "mod8-sum": 1500,
+    "clean": 0
+   },
+   "two_stage": {
+    "correct": 2778,
+    "rate": 0.9921428571428571,
+    "lattice_in": 0,
+    "quant_moved": 2800
+   },
+   "class_assisted": {
+    "correct": 2756,
+    "rate": 0.9842857142857143,
+    "lattice_in": 0,
+    "quant_moved": 2800,
+    "class_unique": 75,
+    "class_empty": 2723
+   },
+   "raw": {
+    "correct": 2800,
+    "rate": 1.0,
+    "lattice_in": 0
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2800,
+    "n_detected": 2800,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 55,
+    "class_changing": 2745,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {
+     "2": 2689,
+     "4": 56
+    }
+   }
+  },
+  {
+   "model": "flip_k",
+   "param": "k=6",
+   "sieve": {
+    "mod2": 0,
+    "mod4-golay": 1500,
+    "mod8-sum": 0,
+    "clean": 0
+   },
+   "two_stage": {
+    "correct": 2621,
+    "rate": 0.9360714285714286,
+    "lattice_in": 0,
+    "quant_moved": 2800
+   },
+   "class_assisted": {
+    "correct": 2610,
+    "rate": 0.9321428571428572,
+    "lattice_in": 0,
+    "quant_moved": 2800,
+    "class_unique": 11,
+    "class_empty": 2789
+   },
+   "raw": {
+    "correct": 2766,
+    "rate": 0.9878571428571429,
+    "lattice_in": 0
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2800,
+    "n_detected": 2800,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 0,
+    "class_changing": 2800,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {
+     "4": 2800
+    }
+   }
+  },
+  {
+   "model": "slip",
+   "param": "p=0.2",
+   "sieve": {
+    "mod2": 0,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 1500
+   },
+   "two_stage": {
+    "correct": 2799,
+    "rate": 0.9996428571428572,
+    "lattice_in": 2800,
+    "quant_moved": 0
+   },
+   "class_assisted": {
+    "correct": 2798,
+    "rate": 0.9992857142857143,
+    "lattice_in": 2800,
+    "quant_moved": 0,
+    "class_unique": 2218,
+    "class_empty": 574
+   },
+   "raw": {
+    "correct": 2799,
+    "rate": 0.9996428571428572,
+    "lattice_in": 2800
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 575,
+    "n_detected": 575,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 2225,
+    "class_changing": 575,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {
+     "2": 575
+    }
+   }
+  },
+  {
+   "model": "slip",
+   "param": "p=1.0",
+   "sieve": {
+    "mod2": 0,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 1500
+   },
+   "two_stage": {
+    "correct": 2768,
+    "rate": 0.9885714285714285,
+    "lattice_in": 2800,
+    "quant_moved": 0
+   },
+   "class_assisted": {
+    "correct": 2760,
+    "rate": 0.9857142857142858,
+    "lattice_in": 2800,
+    "quant_moved": 0,
+    "class_unique": 7,
+    "class_empty": 2792
+   },
+   "raw": {
+    "correct": 2768,
+    "rate": 0.9885714285714285,
+    "lattice_in": 2800
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 2800,
+    "n_detected": 2800,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 0,
+    "class_changing": 2800,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {
+     "2": 2800
+    }
+   }
+  },
+  {
+   "model": "burst",
+   "param": "p=0.10",
+   "sieve": {
+    "mod2": 960,
+    "mod4-golay": 0,
+    "mod8-sum": 0,
+    "clean": 540
+   },
+   "two_stage": {
+    "correct": 2693,
+    "rate": 0.9617857142857142,
+    "lattice_in": 1020,
+    "quant_moved": 1780
+   },
+   "class_assisted": {
+    "correct": 2691,
+    "rate": 0.9610714285714286,
+    "lattice_in": 1020,
+    "quant_moved": 1780,
+    "class_unique": 1017,
+    "class_empty": 1778
+   },
+   "raw": {
+    "correct": 2768,
+    "rate": 0.9885714285714285,
+    "lattice_in": 1020
+   },
+   "syndrome": {
+    "n": 2800,
+    "n_corrupted": 1780,
+    "n_detected": 1780,
+    "detection_rate": 1.0,
+    "false_alarms": 0,
+    "class_preserving": 1020,
+    "class_changing": 1780,
+    "min_nonzero_norm2_class_preserving": null,
+    "bound_128_respected": true,
+    "error_class_types": {
+     "4": 907,
+     "3": 846,
+     "2": 27
+    }
+   }
+  }
+ ],
+ "note": "correction rate = fraction of ticks whose decoded part equals the true part; decoders: two_stage (lattice then codebook), class_assisted (lattice, then Lambda/2Lambda class lookup), raw (codebook only, no lattice)"
+}

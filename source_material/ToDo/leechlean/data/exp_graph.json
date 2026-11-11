@@ -1,0 +1,630 @@
+{
+ "n_parts": 20458,
+ "n_directed_edges": 105282,
+ "n_edges_count_ge2": 43335,
+ "constituent_census": {
+  "word": 18244,
+  "number": 1757,
+  "string": 326,
+  "symbol": 131
+ },
+ "edge_norm2_top": {
+  "288": 1574,
+  "224": 1505,
+  "304": 1503,
+  "368": 1469,
+  "240": 1466,
+  "336": 1465,
+  "256": 1441,
+  "320": 1425,
+  "272": 1413,
+  "352": 1391,
+  "384": 1381,
+  "208": 1365
+ },
+ "edge_class_types": {
+  "0": 72,
+  "2": 502,
+  "3": 21752,
+  "4": 21009
+ },
+ "null_class_types": {
+  "2": 0.007002334111370457,
+  "3": 0.49816605535178393,
+  "4": 0.4948316105368456
+ },
+ "edge_type_by_constituent_pair": {
+  "number->number|t3": 74,
+  "number->number|t4": 77,
+  "number->symbol|t3": 664,
+  "number->symbol|t4": 637,
+  "number->word|t3": 166,
+  "number->word|t4": 183,
+  "string->symbol|t3": 109,
+  "string->symbol|t4": 79,
+  "symbol->number|t3": 529,
+  "symbol->number|t4": 548,
+  "symbol->string|t3": 100,
+  "symbol->string|t4": 70,
+  "symbol->symbol|t3": 287,
+  "symbol->symbol|t4": 283,
+  "symbol->word|t2": 88,
+  "symbol->word|t3": 6840,
+  "symbol->word|t4": 6576,
+  "word->number|t3": 386,
+  "word->number|t4": 333,
+  "word->symbol|t2": 65,
+  "word->symbol|t3": 5607,
+  "word->symbol|t4": 5604,
+  "word->word|t2": 293,
+  "word->word|t3": 6973,
+  "word->word|t4": 6611
+ },
+ "reuse_vs_geometry": {
+  "mean_norm2_shared10plus": 194.49202845229334,
+  "mean_norm2_single_file": 397.68708157698984,
+  "median_norm2_shared10plus": 176.0,
+  "median_norm2_single_file": 384.0,
+  "n_shared10plus": 4077,
+  "n_single_file": 16132
+ },
+ "edge_norm2_mean": 345.7410407292027,
+ "null_norm2_mean": 924.3721240413471,
+ "n_universal_parts": 11,
+ "universal_examples": [
+  {
+   "part": "sym::",
+   "files": 423,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym::=",
+   "files": 423,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym:(",
+   "files": 413,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym:)",
+   "files": 413,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym:,",
+   "files": 408,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym:[",
+   "files": 406,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym:]",
+   "files": 406,
+   "constituent": "symbol"
+  },
+  {
+   "part": "sym:=>",
+   "files": 384,
+   "constituent": "symbol"
+  },
+  {
+   "part": "kw:fun",
+   "files": 379,
+   "constituent": "word"
+  },
+  {
+   "part": "kw:if",
+   "files": 198,
+   "constituent": "word"
+  },
+  {
+   "part": "kw:then",
+   "files": 198,
+   "constituent": "word"
+  }
+ ],
+ "shared_joins": [
+  {
+   "u": "sym::=",
+   "v": "kw:by",
+   "files": 419,
+   "count": 9573,
+   "modules": 13,
+   "edge_norm2": 96,
+   "edge_energy": 12,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym:)",
+   "v": "sym::",
+   "files": 405,
+   "count": 7064,
+   "modules": 14,
+   "edge_norm2": 80,
+   "edge_energy": 10,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:)",
+   "v": "sym:(",
+   "files": 403,
+   "count": 10305,
+   "modules": 13,
+   "edge_norm2": 64,
+   "edge_energy": 8,
+   "edge_class_type": 4
+  },
+  {
+   "u": "ident:rw",
+   "v": "sym:[",
+   "files": 386,
+   "count": 6016,
+   "modules": 13,
+   "edge_norm2": 112,
+   "edge_energy": 14,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:)",
+   "v": "sym:)",
+   "files": 385,
+   "count": 5515,
+   "modules": 13,
+   "edge_norm2": 0,
+   "edge_energy": 0,
+   "edge_class_type": 0
+  },
+  {
+   "u": "sym:)",
+   "v": "sym::=",
+   "files": 383,
+   "count": 2887,
+   "modules": 13,
+   "edge_norm2": 64,
+   "edge_energy": 8,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym:)",
+   "v": "sym:=",
+   "files": 373,
+   "count": 3438,
+   "modules": 13,
+   "edge_norm2": 64,
+   "edge_energy": 8,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym::",
+   "v": "sym:(",
+   "files": 367,
+   "count": 2672,
+   "modules": 12,
+   "edge_norm2": 112,
+   "edge_energy": 14,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:)",
+   "v": "sym:.",
+   "files": 358,
+   "count": 3629,
+   "modules": 13,
+   "edge_norm2": 96,
+   "edge_energy": 12,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym:]",
+   "v": "kw:at",
+   "files": 343,
+   "count": 2114,
+   "modules": 13,
+   "edge_norm2": 64,
+   "edge_energy": 8,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym::",
+   "v": "ident:\u2115",
+   "files": 338,
+   "count": 5454,
+   "modules": 12,
+   "edge_norm2": 80,
+   "edge_energy": 10,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym::",
+   "v": "sym:\u2200",
+   "files": 332,
+   "count": 2016,
+   "modules": 12,
+   "edge_norm2": 80,
+   "edge_energy": 10,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:}",
+   "v": "sym:(",
+   "files": 330,
+   "count": 2333,
+   "modules": 12,
+   "edge_norm2": 320,
+   "edge_energy": 40,
+   "edge_class_type": 4
+  },
+  {
+   "u": "ident:h",
+   "v": "sym::",
+   "files": 328,
+   "count": 1446,
+   "modules": 12,
+   "edge_norm2": 224,
+   "edge_energy": 28,
+   "edge_class_type": 4
+  },
+  {
+   "u": "kw:by",
+   "v": "ident:rw",
+   "files": 327,
+   "count": 1794,
+   "modules": 13,
+   "edge_norm2": 96,
+   "edge_energy": 12,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym:(",
+   "v": "kw:by",
+   "files": 323,
+   "count": 3276,
+   "modules": 13,
+   "edge_norm2": 160,
+   "edge_energy": 20,
+   "edge_class_type": 4
+  },
+  {
+   "u": "ident:simp",
+   "v": "ident:only",
+   "files": 320,
+   "count": 1865,
+   "modules": 12,
+   "edge_norm2": 32,
+   "edge_energy": 4,
+   "edge_class_type": 2
+  },
+  {
+   "u": "kw:by",
+   "v": "kw:have",
+   "files": 317,
+   "count": 1269,
+   "modules": 12,
+   "edge_norm2": 32,
+   "edge_energy": 4,
+   "edge_class_type": 2
+  },
+  {
+   "u": "ident:only",
+   "v": "sym:[",
+   "files": 317,
+   "count": 1797,
+   "modules": 12,
+   "edge_norm2": 64,
+   "edge_energy": 8,
+   "edge_class_type": 4
+  },
+  {
+   "u": "ident:simp",
+   "v": "sym:[",
+   "files": 316,
+   "count": 1931,
+   "modules": 13,
+   "edge_norm2": 64,
+   "edge_energy": 8,
+   "edge_class_type": 4
+  },
+  {
+   "u": "sym:?",
+   "v": "ident:_",
+   "files": 315,
+   "count": 1621,
+   "modules": 13,
+   "edge_norm2": 32,
+   "edge_energy": 4,
+   "edge_class_type": 2
+  },
+  {
+   "u": "sym:(",
+   "v": "kw:fun",
+   "files": 311,
+   "count": 2389,
+   "modules": 13,
+   "edge_norm2": 80,
+   "edge_energy": 10,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:)",
+   "v": "kw:theorem",
+   "files": 310,
+   "count": 954,
+   "modules": 13,
+   "edge_norm2": 240,
+   "edge_energy": 30,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:]",
+   "v": "kw:theorem",
+   "files": 309,
+   "count": 1272,
+   "modules": 12,
+   "edge_norm2": 400,
+   "edge_energy": 50,
+   "edge_class_type": 3
+  },
+  {
+   "u": "sym:(",
+   "v": "ident:h",
+   "files": 305,
+   "count": 1277,
+   "modules": 12,
+   "edge_norm2": 160,
+   "edge_energy": 20,
+   "edge_class_type": 4
+  }
+ ],
+ "modules": [
+  "Cube",
+  "Escalation",
+  "Golay",
+  "HypothesisEngine",
+  "IntakeChecks",
+  "PipelineKit",
+  "RequestProject",
+  "Rule30",
+  "Semantics",
+  "Shortcut",
+  "Wheels",
+  "awaiting_recovery",
+  "scratch",
+  "tools"
+ ],
+ "module_part_counts": {
+  "Cube": 649,
+  "Escalation": 695,
+  "Golay": 742,
+  "HypothesisEngine": 790,
+  "IntakeChecks": 372,
+  "PipelineKit": 532,
+  "RequestProject": 13278,
+  "Rule30": 7040,
+  "Semantics": 355,
+  "Shortcut": 624,
+  "Wheels": 832,
+  "awaiting_recovery": 764,
+  "scratch": 91,
+  "tools": 65
+ },
+ "doc_freq_mean": 4.208866946915632,
+ "parts_in_1_file": 14388,
+ "parts_in_10plus_files": 797,
+ "instruction_joins": {
+  "n_edges": 568,
+  "top": [
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:simp",
+    "count": 478,
+    "files": 191,
+    "norm2": 400,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:have",
+    "count": 356,
+    "files": 190,
+    "norm2": 528,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:simp",
+    "count": 353,
+    "files": 164,
+    "norm2": 384,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:rw",
+    "count": 307,
+    "files": 158,
+    "norm2": 480,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:rw",
+    "count": 275,
+    "files": 146,
+    "norm2": 496,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:exact",
+    "count": 251,
+    "files": 116,
+    "norm2": 336,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:have",
+    "count": 219,
+    "files": 120,
+    "norm2": 512,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:omega",
+    "count": 211,
+    "files": 91,
+    "norm2": 320,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:intro",
+    "count": 199,
+    "files": 121,
+    "norm2": 224,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:cases",
+    "count": 198,
+    "files": 44,
+    "norm2": 416,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:cases",
+    "count": 193,
+    "files": 67,
+    "norm2": 464,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=7",
+    "tactic": "t:simp",
+    "count": 188,
+    "files": 90,
+    "norm2": 400,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:unfold",
+    "count": 187,
+    "files": 110,
+    "norm2": 480,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=4",
+    "tactic": "t:native_decide",
+    "count": 174,
+    "files": 48,
+    "norm2": 544,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=7",
+    "tactic": "t:have",
+    "count": 154,
+    "files": 101,
+    "norm2": 560,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:induction",
+    "count": 153,
+    "files": 86,
+    "norm2": 384,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:exact",
+    "count": 153,
+    "files": 78,
+    "norm2": 352,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:native_decide",
+    "count": 147,
+    "files": 50,
+    "norm2": 400,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=term|len2=5",
+    "tactic": "t:norm_num",
+    "count": 146,
+    "files": 13,
+    "norm2": 912,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:unfold",
+    "count": 143,
+    "files": 82,
+    "norm2": 384,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=7",
+    "tactic": "t:exact",
+    "count": 141,
+    "files": 62,
+    "norm2": 304,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:intro",
+    "count": 140,
+    "files": 95,
+    "norm2": 256,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:norm_num",
+    "count": 140,
+    "files": 45,
+    "norm2": 400,
+    "class_type": 3
+   },
+   {
+    "frame": "f:theorem|body=by|len2=5",
+    "tactic": "t:decide",
+    "count": 136,
+    "files": 72,
+    "norm2": 512,
+    "class_type": 4
+   },
+   {
+    "frame": "f:theorem|body=by|len2=6",
+    "tactic": "t:ring",
+    "count": 135,
+    "files": 66,
+    "norm2": 448,
+    "class_type": 4
+   }
+  ],
+  "mean_norm2": 599.0140845070423,
+  "class_types": {
+   "0": 0,
+   "2": 3,
+   "3": 289,
+   "4": 276
+  }
+ }
+}

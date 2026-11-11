@@ -1,0 +1,32 @@
+{
+ "n_parts": 39992,
+ "n_classes_occupied": 39390,
+ "occupancy_histogram": {
+  "1": 38801,
+  "2": 577,
+  "3": 11,
+  "4": 1
+ },
+ "class_types_of_codebook": {
+  "2": 414,
+  "3": 19617,
+  "4": 19359
+ },
+ "granularity_by_class_type": {
+  "bigram|type2": 89,
+  "bigram|type3": 5136,
+  "bigram|type4": 5196,
+  "frame|type2": 1,
+  "frame|type3": 22,
+  "frame|type4": 40,
+  "tactic|type2": 2,
+  "tactic|type3": 38,
+  "tactic|type4": 46,
+  "token|type2": 333,
+  "token|type3": 14701,
+  "token|type4": 14388
+ },
+ "codebook_min_dist2": 32.00000000000001,
+ "codebook_packing_radius": 2.8284271247461903,
+ "parts_per_class_mean": 1.0152830667682153
+}

@@ -1,0 +1,19 @@
+file: /home/z/my-project/download/leechlean/demo/sample_Golay_Code.lean
+tokens (ticks): 1686
+addresses on the Leech lattice: 1686 / 1686
+byte-exact round trip: True
+total energy: 42200 lattice units (10550 bits of surprisal)
+path length^2: 450896 (shuffled control 407056, ratio 1.108)
+work integral ends at lattice point W = [-84, 230, 1602, 3370, 3716, 10050, 4010, 558, 5878, -1392, -2818, -3202, -3310, -1314, 1228, 430, -942, 1774, 908, 544, 2254, 72, -166, -876] (on lattice: True)
+
+first 6 ticks:
+  tick 0: comment:/-
+# The extended binary G   energy   82 address [0, 18, 2, 0, 0, 0, 0, 0, 2, 12, 2, -2, -2, 2, 0, -8, 6, 4, -4, -4, -4, 0, 0, 0]
+  tick 1: ws:
+                                 energy   20 address [0, 0, 0, 0, 2, 8, 2, 0, 2, -2, 0, 2, 2, -4, 2, 2, -2, 4, -4, 0, 2, 2, -2, 0]
+  tick 2: kw:import                            energy   44 address [13, -1, 1, 1, -1, -1, -1, 3, 3, 11, 3, -3, -3, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1]
+  tick 3: ws:                                  energy    8 address [0, 0, 2, 0, 2, 4, 0, 0, 0, 0, -2, 0, -2, -2, -2, -2, 0, -2, 2, 0, 2, 0, 2, -2]
+  tick 4: ident:Mathlib                        energy   76 address [14, 0, 0, 0, 0, 0, 0, 10, 4, 16, 2, -4, 0, 0, 2, 0, -2, 2, 2, 2, 0, 0, 0, 0]
+  tick 5: ws:
+
+                                energy   30 address [2, 0, 0, 0, 0, 8, 6, 4, 0, -2, -2, -4, -2, -2, 4, 4, -2, -2, 0, -4, 0, -4, -4, 0]
