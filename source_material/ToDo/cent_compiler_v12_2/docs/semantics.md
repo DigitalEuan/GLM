@@ -226,8 +226,9 @@ value.
 | `summary` | primitive census, atomic/composite split, ∆ counts |
 | `program` | a `cent-program/1` exact program, or `null` |
 | `bindings` | initial values for synthetic wires (`_one` for numeric literals) |
-| `spice` | chosen template name and the netlist text |
+| `spice` | structural template decision (`template`, `status`, `detail`) and the netlist text; unmatched DAGs carry `status: gap` and a null netlist |
 | `notes` | why an exact program is unavailable, when it is |
+| `output_certificate` | `cent-output-certificate/1`: subject schema, declared checks, gaps, status and an explicit non-physical claim |
 
 Program JSON encodes every rational as `{"num": "...", "den": "..."}`, so a
 bundle round-trips without a float. `program_from_dict` re-validates the loaded
@@ -235,3 +236,24 @@ program with the same static checker used at compile time. `run_material`
 supplies the bundle's `bindings`, accepts overrides, defaults any remaining
 numeric input to `0`, and refuses to invent a value for any other kind of
 input.
+
+## 9. Output certificates
+
+Every public compiler JSON payload and saved material bundle carries one
+`output_certificate` block with schema `cent-output-certificate/1`. The block
+contains:
+
+| Key | Contents |
+|-----|----------|
+| `subject_schema` | the schema of the payload or nested subject being certified |
+| `status` | `certified`, `partial` or `gap` |
+| `checks` | the declared exact/structural checks and their `pass`/`gap` status |
+| `gaps` | every remaining declared gap, preserved rather than summarized away |
+| `claim` | the explicit limit: no measured-device, fabrication or physical proof |
+
+`certified` requires at least one check, every check passing and no remaining
+gap. A payload with passing checks and any gap is `partial`; a payload with no
+passing check is `gap`. The certificate is derived from the subject's own
+audit, plan, regression or check records; it never turns a missing route into a
+pass. CLI JSON envelopes and browser success responses attach the certificate
+through `cent_compiler/output_certificate.py`.

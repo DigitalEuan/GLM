@@ -1,0 +1,508 @@
+# Round 38 — the GLM Hypothesis Engine (v5): statements, falsification, mechanisms, predictions
+
+## Tier 0 — the coarse read
+
+**Question.** Can the owner's Hypothesis Engine produce real, checkable results on Rule 30?
+
+**Verdict.** Rebuilt as v5, the engine keeps the v4 loop but changes what is guessed and how it is checked; on Rule 30 it gave a new theorem about the left side, two refuted conjectures, and a prediction that was then confirmed, all proved or certified in Lean.
+
+**Deciding figure.** v4 passed all 5 inputs with known answers, including periodic ones; the v5 prediction reached 87,000 diagonals beyond the data.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `tools/tier0_check.py` (or the GLM's corpus check, after a merge) fails if they stop being.*
+
+This round takes the owner's **Hypothesis Engine v4** (`glm_hypothesis_engine_v4.py`, the
+"sorry generator") and rebuilds it so that it produces real, checkable results on Rule 30. It
+keeps the v4 loop — a cheap guess, a rigorous check, a refinement that reads *why* the check
+failed, then another guess — and changes what is guessed and how it is checked. Running it on
+Rule 30 gave a new theorem about the left side of the automaton, two refuted conjectures, and a
+prediction 87,000 diagonals beyond the data, which was then confirmed. All of these are proved or
+certified in Lean.
+
+The code is in the study folder `rule30_round38/` (Python, exact arithmetic only). The Lean
+results are `LeftDiagonalPeriods.lean` (FORMAL) and `LeftDiagonalPeriodsData.lean` (CERT).
+
+---
+
+## 1. What v4 does, and why it cannot answer a puzzle question
+
+v4 parses theorem names from nine bundled Lean files. It turns each into a 24-bit pattern `T`, a
+rotation `ρ` and a correction strength `C`, runs a Golay-style correction loop, and compares the
+loop's popcount trajectory with the puzzle's 24-bit block popcounts. It uses six statistics
+(mean, standard deviation, cycle, autocorrelation, histogram, DFT shape), combined with float
+weights and a pass threshold of 3.0.
+
+`rule30_round38/engine_benchmark.py` (Part 1) runs v4 unchanged on five inputs with known answers:
+
+| input | truth | v4 verdict |
+|---|---|---|
+| Rule 30 centre column | open (P1, P2) | **passed** |
+| LFSR `x^10 + x^7 + 1` | a linear recurrence, period 1023 | **passed** |
+| `1101000` repeated | periodic, period 7 | **passed** |
+| `10` repeated | periodic, period 2 | **passed** |
+| `1` repeated | constant | **passed** |
+
+So v4 gives the same verdict whether a sequence is chaotic, linear or periodic. There are three
+reasons:
+
+1. **A v4 "hypothesis" is not a statement about the puzzle.** It is a parameter triple
+   `(T, ρ, C)`, derived from the text of a theorem name. Nothing about the input is asserted, so
+   a "pass" cannot be true or false of the puzzle.
+2. **The check cannot discriminate.** Any sequence whose blocks have a similar popcount spread
+   scores below the threshold. The single control is one pseudo-random sequence made with
+   Python's `hash`, and for Rule 30 the margin over it was 2.112 against 2.186.
+3. **It breaks project rule 7.** It uses floating point inside the score and `hash` for the
+   control (`PROJECT_DIRECTIVE.md` §3.7: integers, exact rationals or bit vectors only).
+
+The v4 *architecture* is sound and is kept: cheap guess → rigorous check → failure-guided
+refinement → loop. The parts that change are what a guess is and what a check does.
+
+## 2. v5: the design
+
+| v4 | v5 |
+|---|---|
+| guess = parameter triple `(T, ρ, C)` | guess = a **statement**: a quantified claim with an exact test for each instance and a Lean rendering |
+| check = float distance between summary statistics | check = **falsification on exact data**: a development range, then held-out ranges the generator never saw, then control systems |
+| refine = nudge `T`, `ρ`, `C` | refine = **cut** (the range where it holds), **narrow** (the sharpest parameter the data allow), **mine** (a local cause that separates the failing instances from the passing ones, proposed as a law) |
+| one hashed random control | **controls with a meaning**: the mirror rule 86, other seeds, the linear rule 90, rule 45; each statement gets a scope label |
+| verdict "passed" | statuses `refuted-dev`, `refuted-heldout`, `survives` (on a stated range), `law-holds`, `prediction-confirmed`, `open` — never "proved" unless Lean proves it |
+| — | **junctions**: when two laws fit the data equally, the engine names the observation that would separate them (`ConjectureLoop.junction_split`) |
+| — | **prediction**: a law that holds is used to compute far beyond the data, and the prediction is checked |
+| — | **credit**: novelty against `claims.csv`, scored only after generation (the generator never reads the ledger) |
+| — | **output for the prover**: `r38_conjectures.lean.txt`, with a `sorry`-guarded statement for each open survivor; statements already closed in the package point to their Lean theorems |
+
+The puzzle-independent part — lift, check, escalate, cut, narrow, mine, junction — is
+`rule30_round38/glm_hypothesis_core.py`. It works on any *indexed family of exact invariants*, and
+it is the piece intended to move into the GLM. Each of its steps has a proved contract in
+`ConjectureLoop.lean`:
+
+* one failing level refutes (`refuted_of_fail`);
+* a true statement passes every level (`SurvivesTo.of_holds`);
+* narrowing rises to the least true parameter and never passes it (`narrow_eventually_eq`,
+  `narrow_le_of_holds`);
+* tied candidates form a junction that only a separating read splits (`junction_split`).
+
+## 3. What it found on Rule 30 (one run, about 20 seconds)
+
+22 hypotheses: 10 lifts, 2 cuts, 3 narrowings, 3 mechanism laws, 1 analogy, 1 template,
+1 control-born hypothesis and 1 prediction.
+
+### 3.1 The left diagonals: lift → refute → mine → prove → predict → confirm
+
+`ldiag D t = a(t)(D − t)` is the cell `D` steps inside the left edge. The ledger had an `EMP`
+observation for `D ≤ 200`: periods at most 8 (C133).
+
+1. **Lift.** From `D < 200` the engine proposes *"every left diagonal has eventual period dividing
+   8"*. It passes the development range.
+2. **Held-out refutation.** At `D < 2000` it fails at `D = 400`. The engine reads the
+   counterexample: diagonal 399 is **eventually white**. Lean: `not_leftDiagPeriodDivides_eight`.
+3. **Cut and narrow.** *"every D < 400 has period dividing 8"* (Lean:
+   `leftDiag_period_eight_below_400`). *"every left diagonal has period dividing 16"* survives all
+   data to `D < 20000`.
+4. **Mine.** The period jumps (`D = 3, 8, 29, 400`) are matched exactly by two laws: *"D − 1 is
+   eventually white"* and *"D − 1 is eventually white and D − 2 has odd parity"*. The data cannot
+   tell them apart, so they form a **junction**. The separating observation would be a white
+   diagonal next to an even-parity one.
+5. **Prove.** The second law is a theorem for every `D`. A left diagonal is a one-bit machine
+   driven by the two diagonals outside it, `u(t+1) = a(t) xor (b(t) or u(t))`, and a black input
+   `b` *resets* it. Lean: `one_bit_reset`, `one_bit_doubles`, `ldiag_evPer_of_not_white`,
+   `ldiag_doubles`.
+   * Consequence: `infinitely_many_white_of_unbounded`. If the periods are unbounded, infinitely
+     many left diagonals are eventually white.
+6. **Predict.** The law makes each diagonal's eventual pattern a function of the two before it,
+   except at white diagonals, where one bit is left open. So the engine can run the patterns
+   forward at O(1) cost per diagonal. It settles each open bit with one exact run of the
+   automaton.
+   * It meets white diagonals at 53207 and 58286. Both have even parity outside them, and no jump
+     follows. This is the separating observation: it refutes the simpler law and keeps the proved
+     one.
+   * At 87866 the parity outside is odd, so the engine predicts that **D = 87867 is the first
+     left diagonal with period 32**.
+7. **Confirm.** A direct run of the automaton confirms it. Lean: `ldiag_87867_not_evPer_sixteen`
+   and `leftDiag_period_sixteen_below_87867`, so `not_leftDiagPeriodDivides_sixteen`. The narrowed
+   lift "period dividing 16" is refuted; no held-out range used in the run reached it.
+
+The least periods 1, 2, 4, 8, 16, 32 first appear at `D = 0, 3, 8, 29, 400, 87867`. The
+eventually white left diagonals below 87868 are exactly `2, 7, 28, 399, 53207, 58286, 87866`
+(Lean: `leftDiag_white_below_87868`). Whether the periods are unbounded is **open**
+(`r38_conjectures.lean.txt`, H11).
+
+### 3.2 Hypotheses born from the controls: does the left side remember the seed?
+
+The controls showed that the seeds `11` and `101` have exactly the same eventual left diagonals
+as the single black cell. The engine proposed *"the eventual left side does not depend on the
+seed"*.
+
+* It tested all 512 seeds of width ≤ 10, and the statement is false.
+* The first difference always sits at `D ∈ {3, 8, 29, 400}`, one past a white diagonal.
+* The mined law, *"a row can first differ from the seed only one past an eventually white
+  diagonal"*, is a theorem: `first_difference_after_white` (a reset erases the past,
+  `one_bit_sync`).
+* With the certified white list it becomes `seed_first_difference`. For **every** row white on
+  `(−∞, 0)` and black at 0, the first left diagonal below 87868 on which it differs eventually
+  from the single cell is one of `3, 8, 29, 400, 53208, 58287, 87867`.
+
+### 3.3 The centre column and the three questions
+
+The engine treats the questions honestly. No finite range decides P1 or P2
+(`no_finite_certificate_problem1/2`), so survivors here are reported as `EMP`/`CERT` on their
+range only.
+
+* **P1-adjacent, certified.** *"for D ≥ 20 the transient of left diagonal D is longer than D"*
+  survives to `D < 20000`. Since the centre column reads diagonal `D` at time `D`, this says the
+  centre column always reads the left diagonals inside their transients. Lean (CERT,
+  `20 ≤ t < 20000`): `leftDiag_transient_at_read`, `centerCol_read_in_transient`. The exact
+  envelope on the data is `30/29 ≤ pre(D)/D ≤ 71/48` (EMP).
+* **P1 rungs.** No period `p ≤ 64` with preperiod `≤ 30000` (EMP on `n < 60000`). This
+  rediscovers C235 on a longer range.
+* **P2.** The sharpest integer constant in `|D(N)| ≤ c√N` is 3 on `N ≤ 4000`. It survives to
+  60000, with the exact maximum `175561/24979`, which rediscovers C22. The ledger (C25) expects
+  any `O(√N)` bound to fail eventually.
+* **P1/P3.** The linear complexity satisfies `|2L(n) − n| ≤ 9` on `n ≤ 2000`. This is refuted at
+  `n ≤ 6000` (the value is 10) and narrowed to 10. It rediscovers C160.
+* **Right diagonals.** A closed-form lift `2^(D − ⌊(D+1)/3⌋)` fits the ledger's `D ≤ 8` (C50)
+  exactly. It fails at `D = 10`. The analogy transport of the left law ("periodic or
+  anti-periodic with the outer period") rediscovers C113. The bounds C48 and C49 are rediscovered
+  as well.
+
+### 3.4 Scorecard (`engine_benchmark_output.md`)
+
+* **False claims a development-only check would have made:** 4 (period ≤ 8, the white list
+  `{2, 7, 28}`, the right-diagonal closed form, linear complexity ≤ 9). All 4 were caught by the
+  held-out ranges.
+* **Rediscoveries of ledger facts** (the generator never reads the ledger): 7 (C22, C48, C49,
+  C113, C133, C160, C235).
+* **Standing statements new to the ledger:** 7. Three of them are proved for every index in
+  Lean (the period law, the seed-forgetting law, and the 87867 prediction with its cut). The
+  others are certified on a range or open.
+* **Predictions:** 1 made, 1 confirmed (`D = 87867`).
+* **Ablations:**
+  * without held-out ranges, 4 of 10 lifts would stand although false;
+  * without controls, the seed-memory question and its law never arise;
+  * without the mechanism miner, the "period dividing 16" lift stands unrefuted.
+
+## 4. Where this leaves the puzzle questions
+
+No prize problem is settled. The engine's Rule 30 results add three things:
+
+* **A new exact structure theorem about the left side.** Periods grow only through eventually
+  white diagonals with an odd neighbour, and a row's memory of its seed survives only through
+  them.
+* **A sharper picture of what the centre column sees.** It reads every left diagonal in
+  `20 ≤ D < 20000` before that diagonal settles (CERT). So the regular left wedge never reaches
+  the centre, which is consistent with P1, and it is now a checked fact on that range rather than
+  an observation.
+* **A working loop for To Do 44.** The GLM now proposes statements itself: lifts, mechanism laws,
+  analogies, control-born questions and predictions. It checks them on held-out data and hands
+  the survivors to the prover. Three of its proposals were proved here for every index.
+
+## 5. The owner's "perspective" idea in the engine
+
+The mechanism law tells the engine **where to look next**. The predictor runs the proved law
+forward and stops only where the law leaves a bit open (the white diagonals). That is the
+observer's arrow made operational: the run converges towards the next place where new
+information can enter, instead of scanning blindly.
+
+## 6. Moving it into the GLM
+
+* `glm_hypothesis_core.py` is puzzle-independent. A puzzle supplies `observe(hi) → {k: {invariant:
+  exact value}}`, and the core does the rest. `demo()` reproduces §3.1 steps 1–4 from Rule 30's
+  left diagonals.
+* `hypothesis_engine.py` is the Rule 30 instance, with the family-specific predictor and the
+  controls.
+* The output contract for the prover is `r38_conjectures.lean.txt`.
+* **Exactness rule:** integers, `Fraction`s and bit vectors only. Floats are used only for
+  wall-clock timing.
+* **Tests:** `test_round38.py` (about 20 seconds) pins the observatory to OEIS A051023 and to the
+  Lean certificates' numbers, and checks the engine's statuses and the prediction.
+
+---
+
+# Round 39 — pushing the engine further: new theories on Rule 30, and the engine off Rule 30
+
+Study folder: `rule30_round39/`. Lean: `WhiteDiagonals.lean` (FORMAL, Rule 30) and
+`../HypothesisEngine/Benchmarks.lean`, `../HypothesisEngine/BenchmarksData.lean` (the benchmarks).
+The portable module is described in `../HypothesisEngine/README.md`.
+
+## 7. Core v6: what was added
+
+The Round 38 loop (lift → check → cut/narrow → mine → junction) is kept. Round 39 adds four steps
+to `glm_hypothesis_core.py`, all exact:
+
+* **Residue miner** (`mine_residue`): the smallest modulus `m` and residue set `S` with
+  "event ⟺ k mod m ∈ S" on the data. Residues never observed are reported, not guessed.
+* **Closed-form miner** (`mine_formula`): the lowest-degree polynomial (exact Newton differences),
+  the shortest linear recurrence (exact Berlekamp–Massey over ℚ), and template fits
+  `a·k + b·g(k) + c` for supplied reference sequences `g`. Each is fitted on the development range
+  only and becomes a statement to be checked on held-out data. An interpolant with no spare
+  development point is labelled as such.
+* **Junction resolution** (`junction`): when two forms or laws fit the same data, the core
+  computes the first index where their predictions differ, observes it, and keeps the one that is
+  right. When the extra condition of a tied law holds wherever the shorter law holds, it is marked
+  `implied` (no separating observation can exist) and the shorter law is kept.
+* **Evidence classes**: each statement is tagged FINITE, Pi1 ("for all k") or Pi2 ("for all,
+  exists"). A Pi1 or Pi2 survivor is never reported as more than "survives on a range".
+
+## 8. Rule 30: the theories the engine generated this round
+
+### 8.1 Which diagonals are white? (mined → proved)
+
+On `D < 20000` the miner returned four tied laws for "diagonal `D` is eventually white". Here
+"pattern" means a diagonal's eventual periodic pattern:
+1. pattern(D−2) = pattern(D−1);
+2. law 1 ∧ odd parity of D−2;
+3. law 1 ∧ odd parity of D−1;
+4. law 1 ∧ lp(D−1) = lp(D−2).
+
+* The held-out range `D < 60000` refutes laws 2 and 3. The separating observation is the white
+  diagonal 53207, whose outer parity is even.
+* Law 4 is marked `implied`: equal patterns have equal periods.
+* Law 1 is a theorem for every `D`, and for every row with a left edge:
+  * `white_iff_coincide`, `ldiag_white_iff_coincide`, `ldiagOf_white_iff_coincide`;
+  * with the lift `ldiag_no_two_consecutive_white`.
+
+The mechanism: if `D` is white, its two inputs must agree. Conversely, agreeing inputs plus one
+black cell switch the machine off for good.
+
+### 8.2 Between two white diagonals: the regime map (exhaustive statistics → models tested)
+
+Between white diagonals the eventual patterns evolve by `Φ(A, B) = (B, F(A, B))` on pairs of
+`Q`-periodic patterns (`F` is the reset solution, `one_bit_reset`). `Φ` is **injective**: Rule 30
+is left-permutive, so the machine runs backwards (`sync_backward`). Each orbit is therefore either:
+* a **chain**: it starts just after a white diagonal, at a state `(0, B)`, and ends at the next
+  one, at a state `(A, 0)`; or
+* a **cycle** that never meets a white diagonal.
+
+`rule30_engine_r39.py --full` followed all `2^Q − 1` chains for `Q = 1, 2, 4, 8, 16`. For
+`Q = 16` that is 4.29·10⁹ states, about 20 s on 60 cores, using the rotation symmetry. It then
+tested five statements on development `Q ≤ 4` and held-out `Q ∈ {8, 16}`:
+
+| statement | verdict |
+|---|---|
+| random-permutation model: about `1/2^Q` of the states lie on white-free cycles | **refuted** at `Q = 8`: 8.4 % against 0.39 %; at `Q = 16`, 0.030 % against 0.0015 % |
+| a regime started by a doubling always ends in another doubling | **refuted** at `Q = 16` (112/256), consistent with Rule 30's own even white 53207 |
+| exactly `2^(Q−1)` of the `2^Q − 1` chains end at an odd white diagonal | survives; there is an informal proof (chains pair sources with all non-zero end patterns), not formalised |
+| the mean regime length from a source is `2^Q` | survives; it is an exact counting identity up to the cycle states |
+| for `Q ≥ 4` some choice of the open bits keeps every white diagonal even for ever | survives (4/7, 60/127, 972/32767 end patterns can stay even) |
+
+The last row explains why no eventual-pattern argument alone can settle To Do 45: whether the
+period doubles depends on one bit at each white diagonal, and that bit is decided by the
+automaton's transient.
+
+### 8.3 The structural theorems (proved, every `D`)
+
+The injectivity of `Φ` also gives exact theorems, all in `WhiteDiagonals.lean`:
+
+* `regime_finite_check` / `ldiag_regime_finite_check`: **a finite check closes a regime**. If no
+  diagonal in the next `4^Q + 1` is white, none ever is.
+* `regime_periodic` / `ldiag_periodic_in_D_of_finitely_many_white`: if there are only finitely
+  many white diagonals, the left side is periodic in `D` from some point on, with a period at
+  most `4^Q`.
+* `white_after_white`, `ldiag_white_after_white`: **there is no last white diagonal**.
+  * Why: a white-free future would make the diagonals periodic in `D` back to the last white one,
+    so it would recur.
+  * The next white diagonal comes within `4^Q + 1`.
+* `ldiag_infinitely_many_white`: **Rule 30 has infinitely many eventually white left
+  diagonals.** Round 38 knew seven and had only "unbounded periods ⇒ infinitely many".
+* `ldiag_periods_unbounded_iff`: **the periods are unbounded iff, for every `m`, some white
+  diagonal has an outer neighbour of odd parity over `2^m`** (`OddWhiteAt`).
+
+So To Do 45 is now sharper. White diagonals never stop; what is open is only their parities.
+Round 38's AUDIT entry called To Do 45 "equivalent to infinitely many white diagonals". That was
+too strong: the infinitely-many half is now a theorem, while unboundedness remains open.
+
+### 8.4 The next white diagonal (prediction by the proved laws, EMP)
+
+`scan_driver.py` reads the exact eventual patterns of diagonals 87867–87868 from the automaton.
+It checks `F` against the automaton at 87869, then iterates `F` in C (`regime_scan.c`, about
+35 ns per diagonal).
+
+* **The next eventually white left diagonal after 87866 is D = 1,420,878,968.** Its outer
+  parity is even, so the period 32 is kept there. The search took 1.42·10⁹ diagonals; the
+  regime statistics predicted a gap of about `2^32 ≈ 4.3·10⁹`.
+* Past that white diagonal, the laws leave **one bit open**: the next diagonal's pattern is `u`
+  or not-`u`. The automaton cannot be run that far, so the driver followed both branches:
+  * bit 1: odd white diagonal at 2,107,985,254, so the **first period-64 diagonal would be
+    2,107,985,255**;
+  * bit 0: even white diagonal at 3,340,408,059, then (bit 00) 4,989,445,007 or (bit 01)
+    8,429,393,530, both even.
+
+These are `EMP` results. The laws behind them are proved; the computation itself is not
+machine-checked. They are recorded as sorry-guarded statements in
+`rule30_round39/r39_conjectures.lean.txt` (H39-2, H39-3).
+
+### 8.5 What this means for the prize questions
+
+No prize problem is settled. The left wedge is now understood as follows:
+* it is periodic in `t` on every diagonal;
+* it has infinitely many white "reset" diagonals;
+* it is either periodic in `D` too (if, from some point on, every white diagonal is even) or its
+  periods grow without bound.
+
+Round 38's certificate says the centre column reads each left diagonal inside its transient. So
+none of this structure reaches the centre column directly. P1–P3 still need the transient region.
+
+## 9. The engine off Rule 30 (general reasoning)
+
+`general_benchmarks.py` runs the same core, unchanged, on eight problems with known answers. The
+core sees only an exact observer. Lean checks every verdict.
+
+| problem | what the engine did | Lean |
+|---|---|---|
+| Euler's `n² + n + 41` | lift "always prime" refuted at held-out `n = 40`; read the counterexample (factor 41); residue law "41 divides the value ⟺ `n mod 41 ∈ {0, 40}`" | `euler_dvd_iff`, `euler_composite_of_mod` |
+| Fermat numbers | "always prime" refuted at `n = 5`; "coprime to all earlier" survives | `fermat_five_not_prime`, `fermat_pairwise_coprime` |
+| primes as `a² + b²` | residue law `p mod 4 ∈ {1, 2}` (residue 0 never observed) | `two_squares_law` |
+| circle regions (Moser) | junction between `2^(n−1)` and a quartic on `n ≤ 5`; separating observation `n = 6` (31); quartic survives to `n = 12` | `moser_junction`, `moser_split` |
+| Josephus (every 2nd) | template fit `J(n) = 2n − 2·2^⌊log₂ n⌋` on `n < 40`; holds to 1500 | `josephus_closed_form` (every `n`), `josephus_eq_sim` |
+| Collatz | "reaches 1" survives but is tagged Pi2 (no finite certificate); every bound on the stopping time refuted three times, so the engine proposes "unbounded" | `collatz_reaches_one_below` (CERT), `collatz_27_slow` |
+| `gcd(n¹⁷ + 9, (n+1)¹⁷ + 9) = 1` | **survives every sampled range** (`n < 10⁵`); the structural reader takes the resultant, reduces it modulo its large factor and **finds the 52-digit counterexample** | `gcd_trap_survives`, `gcd_trap_refuted` (kernel `decide`) |
+| 16-bit midpoint (debugging) | "result in `[lo, hi]`" refuted on large inputs; law "fails ⟺ `lo + hi` overflows"; the fix survives | `midpoint_bug_iff_overflow`, `midpoint_fixed_correct` (every input) |
+
+Totals:
+* 9 false statements that passed development data were caught.
+* The final law or form is correct on 8/8 problems.
+* On 8/8 problems nothing false was asserted beyond its range.
+
+The gcd trap is the lesson for the GLM. Sampling cannot refute a false Pi1 statement whose first
+counterexample is astronomically far away. A structural step (here the resultant: a common factor
+must divide it) can.
+
+# Round 40 — the engine on the open bit (To Do 45, 46)
+
+## 10. Hypotheses, tests and what came of them
+
+The round followed the engine's loop by hand, with exact programs (study folder
+`rule30_round40/`, every result EMP unless a Lean name is given). Each hypothesis was written down
+before its run.
+
+| # | Hypothesis | Test | Outcome |
+|---|---|---|---|
+| H1 | Rows with a left edge share the seed's white diagonals up to the first even one. | 399 random rows, then Lean | confirmed, then **proved** through `53207` (`left_edge_rows_agree_up_to_shift`) |
+| H2 | At an even white diagonal the branch is a coin toss across rows. | 301 random rows; 20 fully random bands up to width 99 999 | **refuted**: every row takes the seed's branch at `53207` and `58286` |
+| H3 | Settling slope ≈ 1. | exact settling certificate, `W = 100 000` | slope 1.3308–1.3331 for every row; proved bound `1 + D·Q` (`ldiag_perFrom_linear`) |
+| H7 | The bit is the value forced by the "certified reset" recursion. | recursion vs automaton | **refuted** (slope 2; white at 72575 instead of 58286) |
+| H8 | Rows synchronise deep inside the transient. | best-shift agreement times | **refuted** (agreement only near settling) |
+| H9 | **Run-up universality**: a driven stretch from any filling reproduces the bit after a long enough run-up. | against the automaton at `53207`, `58286` | **validated** for run-up ≥ 1000 (8/8); fails for ≤ 300 |
+
+**Why H9 can hold at even but not at odd white diagonals.** At an odd white diagonal the two
+choices differ by a time shift (`odd_white_complement_is_shift`, proved), and a stretch driven by
+periodic inputs commutes with that shift, so nothing can prefer one choice; the data show 2/8 to
+6/8. At an even white diagonal there is no such symmetry, and the data show a definite answer.
+
+**Prediction.** With H9, the open bit at `1420878968` is Round 39's bit 1 in all 24 runs; the next
+white diagonal is `2107985254` with odd parity, so the period becomes 64 at `2107985255` (C381).
+By the proved theorem the bit there does not matter, so the pattern law alone continues the scan
+(C382).
+
+**Lessons for the engine (portable).**
+1. *Validate a proxy against ground truth at known instances before using it to predict*
+   (H9 was checked at the two known even white diagonals before it was applied).
+2. *Use symmetries to decide which quantities can be universal*: a quantity that a symmetry of the
+   setup swaps cannot be fixed by the dynamics (odd white diagonals), and is safe to ignore.
+3. *A refuted "randomness" hypothesis is a lead*: H2's failure is what opened the run-up idea.
+
+# Round 41 — the self-dialogue (the owner's v10, reviewed and rebuilt)
+
+## 11. Every answer an action, every implication a checked edge
+
+`hypothesis_engine_v10.py` adds a self-dialogue: for each strong hypothesis the engine states it,
+then asks *what would refute it?*, *what does it imply?*, *how does it connect?*, *what next?*. This
+is the right loop for a GLM that steers its own investigation, and v11 keeps it. What changes is
+how the questions are answered.
+
+**What v10 does** (static audit, `rule30_round41/v10_audit.py`, C387).
+* Its answers are mostly fixed sentences selected by keywords in the hypothesis text: 15 of 24
+  `speak(...)` sites.
+* Some sentences carry stale numbers ("next instance estimated at D ≥ 275 million"; the ledger now
+  has 1,420,878,968 and a predicted doubling at 2,107,985,255).
+* Some carry fixed claims about data ("the law holds on Rule 30 with different seeds but not on
+  other rules").
+* It cannot run here: its `hypothesis_engine_v8` is missing.
+* Two of its fixed implications are mathematically wrong or overstated, and are settled in Lean
+  (`../HypothesisEngine/DialogueChecks.lean`):
+
+| v10 says | Lean says |
+|---|---|
+| transient longer than `D` ⟹ centre column aperiodic | **does not follow** (`transient_read_does_not_imply_aperiodic`). A family satisfies the premise for every period while its diagonal read is constant. For Rule 30 the premise is certified, so this sentence would have claimed Problem 1. |
+| aperiodic ⟹ no finite automaton generates it | true for automata reading the column (`eventuallyPeriodic_iff_exists_fsObserver`); **false** for automata reading `n` in binary (`aperiodic_but_automatic`, Thue–Morse). So Problem 1 does not settle Problem 3. |
+
+**What v11 does** (`rule30_round41/glm_dialogue.py`).
+
+| question | answer |
+|---|---|
+| state | from the record only: status, class, largest index checked, witness |
+| refute? | runs fresh held-out ranges, doubling up to a budget. Pi2 statements are not sampled; FINITE statements are already fully checked. |
+| implies? | only edges of `knowledge.json` (`follows` / `equivalent` / `does-not-follow`), each citing a Lean theorem or a ledger claim |
+| connects? | parent and children, shared witness, same invariant |
+| next? | executes: read the counterexample (mine a law for the failing event), narrow a refuted bound, propose "unbounded" after 3 refuted bounds, split junctions, report ties (as equivalences when an edge says so), cite ledger facts, hand to the prover |
+
+A guard checks that every number of 3 or more digits that it utters was computed in the run or is
+in the ledger.
+
+**Rule 30, from `D < 400` only** (`r41_dialogue.md`, C388).
+
+| the dialogue's own step | result |
+|---|---|
+| extend "white exactly at 2, 7, 28, 399" | refuted at **53207** |
+| read that counterexample | mined `white(D) ⟺ pattern(D−2) = pattern(D−1)`, the proved criterion `ldiag_white_iff_coincide` (a tied variant is equivalent by definition) |
+| extend "period divides 8" | refuted at **400**; three laws mined for "band period changes at `D`" |
+| extend the three laws | `white(D−1)` alone refuted at **53208**. `white(D−1) ∧ odd(D−2)` (proved: `ldiag_doubles`, `ldiag_keeps_of_even`) and `white(D−1) ∧ odd(D−3)` stay tied; they are **equivalent** (`doubling_law_tie_unsplittable`, new), so the dialogue does not ask for more data |
+| narrow and extend | "period divides 16" refuted at **87867**; "divides 32" survives to 131071, with the ledger's EMP prediction (C381) cited |
+| transient survivor | what follows (CERT `centerCol_read_in_transient`) and what does not (Problem 1) |
+
+**Benchmarks.** The eight Round 39 problems, unchanged. The dialogue extends every survivor and
+proposes "Collatz stopping times are unbounded" after four refuted bounds. It reports the
+midpoint tie as an equivalence, and never reads "survives" as "holds". 0 of 266 utterances in all
+nine transcripts carry an ungrounded number.
+
+**Lessons for the GLM (portable).**
+1. *An utterance is a claim.* It needs a provenance: record, action, or checked edge.
+2. *Implications need a checked graph.* Plausible implications are where false proofs come from.
+3. *Know when data cannot decide.* For Pi2 statements and for logically equivalent laws, the next
+   step is the prover, not more sampling.
+4. *Refutations drive discovery.* Every law in the Rule 30 run came from a counterexample the
+   dialogue found itself.
+
+
+## 12. Round 42: v13 checked, and guards against plausible but wrong sentences
+
+The owner's `hypothesis_engine_v13.py` is self-contained and runs. It adds a **TAX tool**
+(`TAX(w) = Y·w + w²/8`) and asks whether TAX defects between consecutive left diagonals explain
+the period doublings. Its three tests say no, which is correct. Some sentences around the tests are
+wrong, though, and each is now settled (`rule30_round42/v13_audit.md`, C389–C392).
+
+| v13 statement | verdict | Lean |
+|---|---|---|
+| "`Y` irrational ⟹ conservation ⟺ quadratic identity" | true for every real `Y` | `tax_conserved_iff_defect_zero` |
+| "⟺ `w(a AND b) ∈ {0, w(a), w(b)}`" | false both ways; defect `= −2(3c² − 2c(a+b) + ab)` | `tax_defect_eq`, `docstring_criterion_wrong` |
+| "TAX breakdown is NECESSARY for a jump" | false at every doubling | `tax_conserved_at_doubling` |
+| "positive finding: conserved at the jumps" | forced by `white(D−1)`, which every doubling needs | `tax_conserved_of_right_empty` |
+| "conserved only at the white diagonals" | false: 15 non-trivial conserved pairs below 400 (CERT); 116 conserved pairs below 6000, 8 with a white member (EMP) | `tax_conserved_not_only_white`, `tax_conserved_pairs_below_400` |
+
+**Guards (portable, `rule30_round42/glm_guards.py`).** Every number in the wrong sentences was
+right. What went wrong was the reasoning, in five recurring ways, each of which now has a guard:
+
+1. *identity*: a criterion stated in prose is brute-forced against the truth;
+2. *explained-away*: before reporting "F holds at the events", check whether a known law's premise
+   holds at the events and forces F;
+3. *coincidence*: an exact hypergeometric tail, which counts every placement. This is the test
+   v13's header promised but never implemented. Here it gives `P ≈ 10⁻⁷` for "4 of 4 jumps
+   conserved", even though the coincidence is fully explained by guard 2. A statistics-only engine
+   would have reported a discovery;
+4. *exclusivity*: an "only at S" claim is checked against every feature point;
+5. *consistency*: no sentence may assert a claim whose hypothesis the run refuted.
+
+**v14** (`rule30_round42/make_v14.py`) is v13 with 19 named patches. It fixes the TAX docstring,
+labels a refuted hypothesis as refuted instead of "new to the ledger", and runs the guards inside
+the engine. The guard sentences replace v13's fixed TAX conclusions. On v13's TAX section the guards
+flag 3 of the 6 statements they check, and the consistency guard passes on v14's own output.
+
+**Prize questions.** Unchanged: all three are open. The TAX route is now closed in Lean. A TAX
+defect never marks a doubling, and conservation is a property of three weights only, so it cannot
+carry the parity information the doubling law needs.
+
+**Lessons for the GLM (portable).**
+1. *A significant coincidence is not a mechanism.* First ask which known premise forces it.
+2. *State criteria so they can be checked.* An "iff" in a docstring is a claim like any other.
+3. *Summaries must be generated from the final statuses*, not written alongside the tests.

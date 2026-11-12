@@ -1,0 +1,10 @@
+classes 269  senses 3  test sizes [2539, 1939, 5000, 5000]
+REF continuous class model         test=0.6783  wsj_subj=0.644 wsj_obj=0.715 brown_subj=0.658 brown_obj=0.696
+v6 global 24 rules                 test=0.6180  wsj_subj=0.606 wsj_obj=0.626 brown_subj=0.631 brown_obj=0.608  ties=0.27
+v7 per-verb 6 cells                test=0.6179  wsj_subj=0.604 wsj_obj=0.633 brown_subj=0.615 brown_obj=0.619  ties=0.41
+v7 per-verb 12 cells               test=0.6390  wsj_subj=0.618 wsj_obj=0.654 brown_subj=0.635 brown_obj=0.648  ties=0.23
+v7 per-verb 24 cells               test=0.6551  wsj_subj=0.637 wsj_obj=0.671 brown_subj=0.647 brown_obj=0.665  ties=0.13
+v7 per-verb 48 cells               test=0.6643  wsj_subj=0.642 wsj_obj=0.683 brown_subj=0.655 brown_obj=0.678  ties=0.08
+ABLATION 24 random per-verb        test=0.5844  wsj_subj=0.562 wsj_obj=0.603 brown_subj=0.586 brown_obj=0.587  ties=0.35
+
+wrote results/exp4_perverb_senses3.json

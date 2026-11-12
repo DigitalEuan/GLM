@@ -1,0 +1,71 @@
+{
+  "schema": "cent-addition-declarations/1",
+  "description": "Declared normalized profile for the addition/subtraction method lab. These are ideal assumptions, not measured device values.",
+  "units": "normalized effort/flow",
+  "sign_convention": "positive-into-the-declared-junction",
+  "reference": "normalized-zero",
+  "input_range": ["-1", "1"],
+  "resolution": "exact rational",
+  "source_impedance": "0",
+  "load_impedance": "infinite",
+  "methods": {
+    "opamp-summing": {
+      "junction": "1-junction",
+      "effort": "voltage",
+      "flow": "current",
+      "gain": "1",
+      "offset": "0",
+      "r_in": "1",
+      "r_f": "1",
+      "supply": "5"
+    },
+    "kvl-series": {
+      "junction": "0-junction",
+      "effort": "voltage",
+      "flow": "current",
+      "gain": "1",
+      "offset": "0",
+      "source_impedance": "0"
+    },
+    "switched-capacitor": {
+      "junction": "1-junction",
+      "effort": "voltage",
+      "flow": "current",
+      "gain": "1",
+      "offset": "0",
+      "c_a": "1",
+      "c_b": "1",
+      "c_f": "1",
+      "clock_phase": "2"
+    },
+    "current-mode": {
+      "junction": "1-junction",
+      "effort": "voltage",
+      "flow": "current",
+      "gain": "1",
+      "offset": "0",
+      "r_f": "1",
+      "input_impedance": "0",
+      "output_impedance": "infinite"
+    },
+    "mechanical-force": {
+      "junction": "0-junction",
+      "effort": "force",
+      "flow": "velocity",
+      "gain": "1",
+      "offset": "0",
+      "mass": "1",
+      "constraint": "force-output"
+    },
+    "fluid-reversed": {
+      "junction": "1-junction",
+      "effort": "pressure",
+      "flow": "volume_flow_rate",
+      "gain": "1",
+      "offset": "0",
+      "pressure_drop": "0",
+      "leakage": "0",
+      "port_direction": "a-in_b-out"
+    }
+  }
+}

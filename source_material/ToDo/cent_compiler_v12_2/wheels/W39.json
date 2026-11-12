@@ -1,0 +1,250 @@
+{
+ "id": "W39",
+ "title": "Magnetic Circuits & Reluctance",
+ "axioms": [
+  "magnetomotive_force = turns * current",
+  "magnetic_flux = magnetomotive_force * permeance",
+  "permeance = permeability * area / length"
+ ],
+ "cases": [
+  {
+   "id": "W39-01",
+   "equation": "current = magnetomotive_force / turns",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W39-02",
+   "equation": "magnetic_flux = magnetomotive_force * permeability * area / length",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "linear magnetic circuit; saturation and hysteresis are separate"
+  },
+  {
+   "id": "W39-03",
+   "equation": "permeability = magnetic_flux * length / (magnetomotive_force * area)",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W39-N1",
+   "equation": "magnetic_flux = magnetomotive_force * permeability",
+   "expected_dimensional": false,
+   "expected_derivable": false,
+   "physical_status": "negative_control",
+   "expected_dimensional_explicit": null,
+   "note": "permeance is missing length and area; flux is not mmf times permeability"
+  }
+ ],
+ "quantities": [
+  "area",
+  "current",
+  "length",
+  "magnetic_flux",
+  "magnetomotive_force",
+  "permeability",
+  "permeance",
+  "turns"
+ ],
+ "dimensions": {
+  "area": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "current": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "length": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "magnetic_flux": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -2,
+    -1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "magnetomotive_force": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "permeability": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    1,
+    -2,
+    -2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "permeance": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -2,
+    -2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "turns": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "junctions": [
+  {
+   "other_wheel": "W16",
+   "name_in_this_wheel": "magnetic_flux",
+   "name_in_other_wheel": "flux",
+   "reason": "magnetic-circuit flux is induction flux"
+  }
+ ],
+ "non_identities": [
+  {
+   "other_wheel": "W1",
+   "name": "magnetomotive_force",
+   "reason": "ampere-turns has the dimension of current but is not current; identifying them would erase the turns count"
+  }
+ ]
+}

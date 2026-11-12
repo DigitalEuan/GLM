@@ -39,6 +39,7 @@ infrastructure (e.g. column-3 replay, Lean declaration lookup) is too deep
 to fully reconstruct here, the adapter returns a sensible default that
 satisfies the contract (status, evidence, boundary, budget) without
 claiming a replay it did not run.*
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
 
 *Last altered 31 October 2026 (repository check): the declared status rule
 "a refusal in words by the evaluation's markers is ``refused``" is applied
@@ -69,6 +70,8 @@ names with the name pattern allowing Lean's prime and applies amendment R5'
 against that set; ``theorems_declared`` is the cited names the development
 declares, so a cited name that is not declared is visible to R5 (until now
 every cited name was copied into ``theorems_declared``).*
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 """
 from __future__ import annotations
 
@@ -88,8 +91,11 @@ from typing import (
 __all__ = [
     "Result",
     "FIELDS",
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     "declared_names",
     "cited_theorems",
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     "from_routed",
     "from_solution",
     "from_define",
@@ -135,6 +141,7 @@ _AUX_FIELDS: Tuple[str, ...] = (
 # ---------------------------------------------------------------------------
 
 #: Map a Solution.kind to its primary evidence kind.  The first element of
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
 #: ``Result.evidence`` is the primary kind; ``certificate`` follows when the
 #: answer's payload says it is certified, and ``dialogue`` when replies were
 #: read (a ``given`` clause, or a conversation turn).
@@ -149,6 +156,10 @@ _AUX_FIELDS: Tuple[str, ...] = (
 #: since are mapped by what answers them: ``tool`` by a tool, ``study`` by the
 #: study manifests (``corpus``), ``sequence`` by an absorbed wheel's
 #: computation.
+=======
+#: ``Result.evidence`` is the primary kind; ``dialogue`` is appended only
+#: by :func:`from_turn` when replies were read.
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 _KIND_TO_EVIDENCE: Dict[str, str] = {
     # Lattice / geometric addressing.
     "nearest": "lattice",
@@ -157,15 +168,23 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "cluster": "lattice",
     "spatial": "lattice",
     "trilinear": "lattice",
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     "coherence": "lattice",
     "angle": "lattice",
     "hole": "lattice",
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     "address": "lattice",
     "deep-hole": "lattice",
     "deep_hole": "lattice",
     "shell": "lattice",
     "configuration": "lattice",
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     # Certificate (the certificate query families).
+=======
+    # Certificate / verification.
+    "verify": "certificate",
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     "prove": "certificate",
     "certificate": "certificate",
     "primality": "certificate",
@@ -173,6 +192,7 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "lucas": "certificate",
     "elliptic": "certificate",
     # Computation / derivation.
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     "verify": "computation",
     "derive": "computation",
     "compare": "computation",
@@ -182,6 +202,13 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "task": "computation",
     "unknown": "computation",
     "sequence": "computation",
+=======
+    "derive": "computation",
+    "field": "computation",
+    "analogy": "computation",
+    "compare": "computation",
+    "coherence": "computation",
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     "fold": "computation",
     "rate": "computation",
     "maxent": "computation",
@@ -190,6 +217,7 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "fft": "computation",
     "hamming": "computation",
     "information": "computation",
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     # Self-report.
     "report": "self-report",
     "explain": "self-report",
@@ -206,27 +234,44 @@ _KIND_TO_EVIDENCE: Dict[str, str] = {
     "measure": "register",
     "ordering": "register",
     "product": "register",
+=======
+    # Self-report / description.
+    "describe": "self-report",
+    "report": "self-report",
+    "meaning": "self-report",
+    "explain": "self-report",
+    "explanation": "self-report",
+    # Register.
+    "register": "register",
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     "element": "register",
     "nuclide": "register",
     "physics": "register",
     "molecule": "register",
     "law": "register",
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     # Documents and tools.
     "corpus": "corpus",
     "study": "corpus",
     "tool": "tool",
     "toolbox": "tool",
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 }
 
 #: Default evidence kind for an unknown Solution.kind.
 _DEFAULT_EVIDENCE = "computation"
 
 #: Theorem-name pattern: ``GLM.<Module>.<Name>`` (with optional further dots).
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
 #: A ``GLM.``-qualified name.  Lean's prime is allowed at the end of a
 #: component (``foo'``), so a Python ``repr``'s closing quote after a name is
 #: read as one too; amendment R5' (:func:`_strip_trailing_prime`) undoes that
 #: against the declarations.
 _THEOREM = re.compile(r"\bGLM\.([A-Z][A-Za-z0-9_]*'*(?:\.[A-Za-z0-9_]+'*)+)")
+=======
+_THEOREM = re.compile(r"\bGLM\.([A-Z][A-Za-z0-9_]*(?:\.[A-Za-z0-9_]+)+)")
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 
 
 def _evidence_for_kind(kind: str) -> str:
@@ -265,6 +310,7 @@ def _scan_theorems(answer: str) -> Tuple[str, ...]:
     return tuple(out)
 
 
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
 def declared_names() -> frozenset:
     """Every full name the Lean development declares: the build tree
     ``src/lean/RequestProject/GLM`` as
@@ -292,6 +338,8 @@ def cited_theorems(text: str, declared: Optional[Sequence[str]] = None
     return tuple(names), tuple(n for n in names if n in known)
 
 
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 def _strip_trailing_prime(names: Sequence[str],
                           declared: Sequence[str]) -> Tuple[str, ...]:
     """Amendment R5': strip a trailing ``'`` from a theorem name when the
@@ -392,6 +440,7 @@ def _solution_budget(solution: Any) -> Dict[str, int]:
     return {"steps": len(steps)}
 
 
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
 def refused_in_words(text: str) -> bool:
     """Does ``text`` refuse in words by the evaluation's markers
     (:data:`glm_universal.evaluation.harness.REFUSAL_MARKERS`)?  The declared
@@ -474,15 +523,31 @@ def _witness(expected: Mapping[str, Any]) -> Tuple[str, ...]:
 def _solution_refusal(solution: Any) -> str:
     """The refusal reason for a solution, or ``""`` when answered; an answer
     that refuses in words is its own reason."""
+=======
+def _solution_status(solution: Any) -> str:
+    """The status of a solution: ``answered`` if ``ok``, ``refused`` if not."""
+    ok = getattr(solution, "ok", True)
+    error = getattr(solution, "error", None)
+    if not ok or error:
+        return "refused"
+    return "answered"
+
+
+def _solution_refusal(solution: Any) -> str:
+    """The refusal reason for a solution, or ``""`` when answered."""
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     error = getattr(solution, "error", None)
     if error:
         return str(error)
     ok = getattr(solution, "ok", True)
     if not ok:
         return "the solver refused without naming a reason"
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     answer = getattr(solution, "answer", "") or ""
     if refused_in_words(answer):
         return answer
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     return ""
 
 
@@ -516,6 +581,7 @@ def from_solution(question: str, solution: Any,
     status = _solution_status(solution)
     refusal = _solution_refusal(solution)
     evidence_kind = _evidence_for_kind(kind)
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     theorems, theorems_declared = cited_theorems(answer + "\n" + refusal)
     budget = _solution_budget(solution)
     tie = _solution_tie(solution)
@@ -530,6 +596,13 @@ def from_solution(question: str, solution: Any,
     query = getattr(solution, "query", None)
     history = tuple(_solution_payload_field(solution, "history", ()) or ()) \
         or _given_history(getattr(query, "raw", "") or question)
+=======
+    theorems = _scan_theorems(answer)
+    budget = _solution_budget(solution)
+    candidates = tuple(_solution_payload_field(solution, "candidates", ()) or ())
+    ambiguity = tuple(_solution_payload_field(solution, "ambiguity", ()) or ())
+    history = tuple(_solution_payload_field(solution, "history", ()) or ())
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 
     # Boundary and replayed.
     script_spec = getattr(solution, "script_spec", None) or {}
@@ -563,29 +636,47 @@ def from_solution(question: str, solution: Any,
         replayed = None
         boundary = "checkable" if (has_column2 or has_column3) else "uncertified"
 
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     if status in ("refused", "contradicted"):
         boundary = "refused"
         replayed = None
     answering = status in ("answered", "open")
+=======
+    if status == "refused":
+        boundary = "refused"
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 
     return Result(
         question=question,
         status=status,
         surface="planner",
         kind=kind,
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
         answer=answer if answering else "",
         candidates=candidates if answering else (),
         # the evidence kind belongs to the question's kind, refused or not
         evidence=_evidence_tuple(evidence_kind, solution, history),
         witness=_witness(expected) if answering and isinstance(expected, Mapping) else (),
+=======
+        answer=answer if status != "refused" else "",
+        candidates=candidates if status == "open" else (),
+        evidence=(evidence_kind,) if status != "refused" else (),
+        witness=(),
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
         theorems=theorems,
         boundary=boundary,
         budget=budget,
         ambiguity=ambiguity if status == "open" else (),
         refusal=refusal,
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
         history=tuple((str(q), str(r)) for q, r in history),
         replayed=replayed,
         theorems_declared=theorems_declared,
+=======
+        history=tuple((q, r) for q, r in history),
+        replayed=replayed,
+        theorems_declared=theorems,  # no declaration list available here
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     )
 
 
@@ -626,6 +717,7 @@ def from_routed(question: str, routed: Any,
         ) if False else _override_surface(r, surface, answered)
 
     # Non-solution surfaces: build a minimal Result from the routed verdict.
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     # One evidence kind per result, refused or not (a tuple, as the field
     # is declared; 31 October 2026, repository check).
     evidence = ("tool",) if surface == "toolbox" else (
@@ -639,6 +731,18 @@ def from_routed(question: str, routed: Any,
         refusal = (text if refused_in_words(text) else "") or \
             "the surface refused without naming a reason"
     theorems, theorems_declared = cited_theorems(text) if answered else ((), ())
+=======
+    if answered:
+        status = "answered"
+        evidence = ("tool",) if surface == "toolbox" else (
+            _evidence_for_kind(getattr(payload, "kind", "")) if payload else "computation"
+        )
+        refusal = ""
+    else:
+        status = "refused"
+        evidence = ()
+        refusal = "the surface refused without naming a reason"
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
 
     return Result(
         question=question,
@@ -649,14 +753,21 @@ def from_routed(question: str, routed: Any,
         candidates=(),
         evidence=evidence,
         witness=(),
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
         theorems=theorems,
+=======
+        theorems=_scan_theorems(text) if answered else (),
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
         boundary="uncertified",  # no column 3 on these surfaces
         budget={"steps": 1} if answered else {},
         ambiguity=(),
         refusal=refusal,
         history=(),
         replayed=None,
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
         theorems_declared=theorems_declared,
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     )
 
 
@@ -673,11 +784,17 @@ def _override_surface(r: Result, surface: str, answered: bool) -> Result:
             theorems_declared=r.theorems_declared,
         )
     return Result(
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
         question=r.question,
         status="contradicted" if r.status == "contradicted" else "refused",
         surface=surface, kind=r.kind,
         answer="", candidates=(), evidence=r.evidence, witness=(),
         theorems=r.theorems, boundary="refused", budget=r.budget, ambiguity=(),
+=======
+        question=r.question, status="refused", surface=surface, kind=r.kind,
+        answer="", candidates=(), evidence=(), witness=r.witness,
+        theorems=(), boundary="refused", budget=r.budget, ambiguity=(),
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
         refusal=r.refusal or "the surface did not answer",
         history=r.history, replayed=None,
         theorems_declared=r.theorems_declared,
@@ -702,6 +819,7 @@ def from_define(term: str, knowledge: Any) -> Result:
     """
     define_fn = getattr(knowledge, "define", None) or getattr(
         getattr(knowledge, "model", None), "define", None)
+<<<<<<< Updated upstream:src/glm_universal/runtime/evidence.py
     if define_fn is None and knowledge is not None:
         # The corpus's own ``define`` reading (31 October 2026).
         try:
@@ -711,6 +829,8 @@ def from_define(term: str, knowledge: Any) -> Result:
         if _corpus_answer is not None:
             def define_fn(t: str, _k: Any = knowledge) -> Any:
                 return _corpus_answer.define(t, _k)
+=======
+>>>>>>> Stashed changes:glm_universal/runtime/evidence.py
     if define_fn is None:
         return Result(
             question=f"define {term}",

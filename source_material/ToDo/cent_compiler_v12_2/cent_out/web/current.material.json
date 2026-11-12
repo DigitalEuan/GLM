@@ -1,0 +1,63 @@
+{
+  "bindings": {},
+  "dag": {
+    "inputs": [
+      "resistance",
+      "voltage"
+    ],
+    "ops": [
+      {
+        "const": null,
+        "inputs": [
+          "voltage",
+          "resistance"
+        ],
+        "op": "div",
+        "output": "current"
+      }
+    ],
+    "outputs": [
+      "current"
+    ]
+  },
+  "expression": "voltage / resistance",
+  "notes": [],
+  "program": {
+    "inputs": {
+      "resistance": "numeric",
+      "voltage": "numeric"
+    },
+    "instructions": [
+      {
+        "inputs": [
+          "voltage",
+          "resistance"
+        ],
+        "op": "div",
+        "out": "current",
+        "params": {}
+      }
+    ],
+    "name": "current",
+    "outputs": {
+      "current": "current"
+    },
+    "schema": "cent-program/1"
+  },
+  "relation": "current = voltage / resistance",
+  "schema": "cent-material/1",
+  "spice": {
+    "netlist": "* Analog divider: V_out = V_num / V_den\n* \u00a2: div(V_num, V_den) \u2192 V_out\n* Uses op-amp + multiplier in feedback: V_out = 10 * V_num / V_den\nVNUM 1 0 DC 5.0\nVDEN 2 0 DC 2.0\nEOUT 3 0 1 4 1e6\nEMULT 4 0 VALUE = { V(3) * V(2) / 10.0 }\nR1 4 0 1k\n.OP\n.PRINT DC V(3)\n.END\n",
+    "template": "divider"
+  },
+  "summary": {
+    "atomic": 0,
+    "composite": 1,
+    "delta_sigma": 0,
+    "implementations": 2,
+    "primitives": {
+      "div": 1
+    }
+  },
+  "target": "current"
+}

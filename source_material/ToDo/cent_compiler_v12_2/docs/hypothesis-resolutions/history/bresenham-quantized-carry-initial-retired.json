@@ -1,0 +1,126 @@
+{
+  "ok": true,
+  "schema": "cent-hypothesis-resolution/1",
+  "lead": {
+    "id": "bresenham-quantized-carry",
+    "operation": "quantized_carry",
+    "title": "Bresenham error-accumulator carry",
+    "statement": "A Bresenham line walk and the delta-sigma error-feedback loop both carry a residual.  A structural correspondence is a lead only; no equivalence, reconstruction error bound or target adapter is declared.",
+    "candidate_chain": [
+      "quantize",
+      "accum",
+      "delay"
+    ],
+    "source": "user-supplied review lead (2026-11-11)",
+    "status": "doesnt_know",
+    "needs": [
+      "proof:state and update equivalence between Bresenham and first-order delta-sigma",
+      "test:line-walk code against the declared delta-sigma reconstruction",
+      "negative-control:a non-error-feedback raster walk that should not match"
+    ],
+    "gaps": [
+      "no Bresenham contract, exact implementation or target vector",
+      "no quantization law or reconstruction claim"
+    ],
+    "admitted": false,
+    "promotion_requires": [
+      "declared mechanism card with an explicit supported operation",
+      "operation semantics and at least one fixed reference test",
+      "exact probe or target adapter evidence",
+      "reviewed promotion; no automatic supported_operations change"
+    ],
+    "supported_operations_changed": false
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "need": "proof:state and update equivalence between Bresenham and first-order delta-sigma",
+      "kind": "proof",
+      "prompt": "Provide the exact proof or derivation, or a path to it, for: state and update equivalence between Bresenham and first-order delta-sigma",
+      "answered": true,
+      "answer": "absent: no state/update equivalence proof exists; docs/REFINEMENT_DIVE.md:23 records the gap"
+    },
+    {
+      "id": "q2",
+      "need": "test:line-walk code against the declared delta-sigma reconstruction",
+      "kind": "test",
+      "prompt": "Provide the test, vector set or result, or a path to it, for: line-walk code against the declared delta-sigma reconstruction",
+      "answered": true,
+      "answer": "absent: no Bresenham line-walk implementation or reconstruction test exists; the delta-sigma target at cent_compiler/targets/glm.py:302 tests scalar carry only"
+    },
+    {
+      "id": "q3",
+      "need": "negative-control:a non-error-feedback raster walk that should not match",
+      "kind": "negative-control",
+      "prompt": "Provide the negative-control result or path for: a non-error-feedback raster walk that should not match",
+      "answered": true,
+      "answer": "absent: no non-error-feedback raster control exists; the stateless uniform quantizer in tests/test_transfer_contracts.py is a delta-sigma baseline, not a raster walk"
+    }
+  ],
+  "answers": {
+    "q1": "absent: no state/update equivalence proof exists; docs/REFINEMENT_DIVE.md:23 records the gap",
+    "q2": "absent: no Bresenham line-walk implementation or reconstruction test exists; the delta-sigma target at cent_compiler/targets/glm.py:302 tests scalar carry only",
+    "q3": "absent: no non-error-feedback raster control exists; the stateless uniform quantizer in tests/test_transfer_contracts.py is a delta-sigma baseline, not a raster walk"
+  },
+  "answered": 3,
+  "total": 3,
+  "status": "retired",
+  "active": false,
+  "next_question": null,
+  "decision": "retire",
+  "decision_note": "Retire after evidence audit: no Bresenham implementation, state/update proof or raster negative control. The existing delta-sigma target and its uniform-quantizer baseline validate scalar carry, but do not establish Bresenham equivalence.",
+  "knowledge_state": "doesnt_know",
+  "technical_validation": "not performed; answers are retained as supplied evidence",
+  "supported_operations_changed": false,
+  "checks": [
+    {
+      "name": "need coverage",
+      "status": "pass",
+      "detail": "3/3 declared needs answered"
+    },
+    {
+      "name": "admission gate",
+      "status": "pass",
+      "detail": "supported_operations is unchanged; no promotion occurs"
+    },
+    {
+      "name": "retirement note",
+      "status": "pass",
+      "detail": "a retire decision has a recorded reason"
+    }
+  ],
+  "gaps": [
+    "supplied answers are not automatically verified as proofs or tests",
+    "keeping a lead does not promote it to a mechanism card or supported operation",
+    "retirement is recorded, not erased from the pre-admission registry"
+  ],
+  "headline": "bresenham-quantized-carry: retired (3/3 needs answered)",
+  "output_certificate": {
+    "schema": "cent-output-certificate/1",
+    "subject_schema": "cent-hypothesis-resolution/1",
+    "status": "partial",
+    "checks": [
+      {
+        "name": "need coverage",
+        "status": "pass",
+        "detail": "3/3 declared needs answered"
+      },
+      {
+        "name": "admission gate",
+        "status": "pass",
+        "detail": "supported_operations is unchanged; no promotion occurs"
+      },
+      {
+        "name": "retirement note",
+        "status": "pass",
+        "detail": "a retire decision has a recorded reason"
+      }
+    ],
+    "gaps": [
+      "supplied answers are not automatically verified as proofs or tests",
+      "keeping a lead does not promote it to a mechanism card or supported operation",
+      "retirement is recorded, not erased from the pre-admission registry"
+    ],
+    "claim": "This certificate covers only the declared exact/structural checks in this payload; it is not measured-device, fabrication, physical-proof or manufacturing evidence."
+  }
+}

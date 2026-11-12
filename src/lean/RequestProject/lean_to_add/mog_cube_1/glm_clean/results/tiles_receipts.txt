@@ -1,0 +1,130 @@
+
+==============================================================================
+0  THE GEOMETRY: which cube reading survives
+==============================================================================
+  claim     : six whole 4x6 MOG grids cannot be the six faces of a cube with consistent edge matching
+  reason    : a cube face is a square: its four sides are congruent and each is shared with a neighbouring face. A 4x6 grid has two sides of 6 cells and two of 4 cells, so at four of the twelve cube edges a 6-cell side would have to be glued to a 4-cell side.
+  resolution: the cube is realised one level down: 6 faces x 4 cells = 24 cells = one MOG object, one hexacode digit per face.
+
+  the MOG grid rebuilt from the hexacode (so the columns are faces):
+    dimension              12
+    n_words                4096
+    min_distance           8
+    doubly_even            True
+    self_dual              True
+    decompose_failures     0
+    decompose_checked      4096
+    n_fibres               128
+    fibre_sizes            [32]
+    weight enumerator      {0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}
+
+==============================================================================
+1  THE RECEIPTS OF SECTION 6
+==============================================================================
+  PASS          Y = 0.2646754...
+  PASS          Q = 0.3896754...
+  PASS          8Q = 3.1174032... (8 x the rounded Q)
+  PASS          24Q = 9.3522096 < 10
+  PASS          calibrated ladder 1 / .5 / .4 / .333 / .25
+  PASS          Leech A / B / C = 0.688262 / 0.620447 / 0.491347
+  PASS          196560 minimal vectors
+  PASS          AM-GM cap 0.353553 > Y, equality at sqrt 2
+  PASS          2325 shallow / 1771 deep syndromes
+  PASS          snap repairs every defect of weight <= 3, uniquely
+  PASS          13 . L == wobble exactly (as Fractions)
+  PASS          wobble = 0.81757..., L = 0.062890...
+  PASS          MOG / hexacode: 0 failures out of 4096
+  PASS          the MOG grid really is the Golay code
+  UNVERIFIABLE  Y_CONST = 0.232150 (nesting surcharge)
+                this constant comes from ubp_unified_v5.py, which is not in the repository, and it is not derivable from anything that is; it is carried as a stipulated parameter
+
+  passed 14 of 15; 0 failed; 1 unverifiable
+
+==============================================================================
+2  THE TILE TAXONOMY, WITH RECEIPTS
+==============================================================================
+  T0 vacuum          HW= 0 q=0 leaders=1 TAX_MOG= 0.0000 NRCI=1.0000 NRCI_cal=1.0000  T0 vacuum
+  T_reg(8)           HW= 8 q=0 leaders=1 TAX_MOG= 3.1174 NRCI=0.7623 NRCI_cal=0.5000  T_reg(w=8)
+  T_reg(12)          HW=12 q=0 leaders=1 TAX_MOG= 4.6761 NRCI=0.6814 NRCI_cal=0.4000  T_reg(w=12)
+  T_reg(16)          HW=16 q=0 leaders=1 TAX_MOG= 6.2348 NRCI=0.6160 NRCI_cal=0.3333  T_reg(w=16)
+  T_reg(24)          HW=24 q=0 leaders=1 TAX_MOG= 9.3522 NRCI=0.5167 NRCI_cal=0.2500  T_reg(w=24)
+  T_def(1)           HW= 1 q=1 leaders=1 TAX_MOG= 0.7794 NRCI=0.9277 NRCI_cal=0.8889  T_def(1) transient
+  T_def(2)           HW= 2 q=2 leaders=1 TAX_MOG= 1.5587 NRCI=0.8651 NRCI_cal=0.8000  T_def(2) transient
+  T_def(3)           HW= 3 q=3 leaders=1 TAX_MOG= 2.3381 NRCI=0.8105 NRCI_cal=0.7273  T_def(3) transient
+  T_def(4) anchor    HW= 4 q=4 leaders=6 TAX_MOG= 3.1174 NRCI=0.7623 NRCI_cal=0.6667  T_def(4) persistent / anchor
+
+==============================================================================
+3  ANCHORS ARE FORCED, NOT CHOSEN
+==============================================================================
+  cosets by leader weight : {0: 1, 1: 24, 2: 276, 3: 2024, 4: 1771}
+  shallow (q <= 3)        : 2325  -- transient, the substrate names the failing cells and heals them
+  deep (q = 4)            : 1771  -- six leaders tie, no repair is preferred, so only these may anchor
+
+==============================================================================
+4  THE MATCHING RULE, AND WHAT IT MAKES THE TILING DO
+==============================================================================
+  every triple of faces is an information set (hexacode is MDS): True
+  the update incoming (-x,-y,-z) -> outgoing (+x,+y,+z) is GF(4)-linear: True
+  its matrix (0, 1, w, w2 written out):
+      [ w  w2  w2 ]
+      [ w2  w  w2 ]
+      [ w2  w2  w ]
+  multiplicative order of the matrix: 3
+  so the assembly is a deterministic, reversible, GF(4)-linear three-dimensional automaton whose propagator has period 3.
+  propagated a 125-cell block from its three boundary planes: all joins legal = True, reversible = True
+
+==============================================================================
+5  HOW MANY LEGAL ASSEMBLIES THERE ARE (exact counts)
+==============================================================================
+  hexacode layer, counted by profile DP, against the closed form
+  4^(nx.ny + ny.nz + nz.nx):
+    1x1x1    counted             64   formula             64   agree
+    2x1x1    counted           1024   formula           1024   agree
+    3x1x1    counted          16384   formula          16384   agree
+    4x1x1    counted         262144   formula         262144   agree
+    2x2x1    counted          65536   formula          65536   agree
+    3x2x1    counted        4194304   formula        4194304   agree
+    2x2x2    counted       16777216   formula       16777216   agree
+
+  Consequence, and it is exact: the number of legal assemblies of a box is 4 to the area
+  of its three incoming boundary planes.  The hexacode layer carries SURFACE entropy only;
+  the interior is computed, not chosen.  Each (hexacode word, parity) is carried by 32
+  of the 4096 lawful tiles, so the whole tile count is 2 . 32^N . 4^area, i.e. exactly
+  5 bits per tile of volume entropy, all of it below the hexacode.
+
+==============================================================================
+6  PHI, E, AND THE THIRTEEN SINKS -- WHAT IS EARNED AND WHAT IS NOT
+==============================================================================
+  Fibonacci substitution S -> SD, D -> S: ratio after 40 steps 1.618033988749895
+  phi                                    1.618033988749895   error 4.27e-17
+  BUT the substitution is stipulated.  Nothing in the Golay/MOG/Leech arithmetic forces it,
+  and no ratio of the substrate's own counts is phi:
+      759/2576 octads:dodecads     0.294643   
+      2325/1771 shallow:deep       1.312818   
+      4096/759                     5.396574   
+      24/12                        2.000000   
+      196560/98304                 1.999512   
+  [stip] phi.  Emergence claimed, not delivered.
+
+  Growth: the measured growth constants of legal assemblies are
+      1-D  512 tiles per cell   (16 at the hexacode layer)
+      2-D  128 per cell         (4 at the hexacode layer)
+      3-D   32 per cell         (1 at the hexacode layer: deterministic)
+  all powers of two, exactly.  e does not appear, and cannot: these growth constants are
+  integers, and the hexacode layer is deterministic in three dimensions.  [open] stays open,
+  and is now sharper -- if e is to appear it must come from some other process entirely.
+
+  wobble = frac(pi.phi.e) = 0.8175802272
+  L      = wobble / 13    = 0.0628907867
+  13 . L == wobble exactly, as Fractions: True
+  |M24| = 244823040 = {2: 10, 3: 3, 5: 1, 7: 1, 11: 1, 23: 1}
+  13 divides |M24|                : False
+  13 is an element order of M24   : False
+  code parameters divisible by 13 : [196560]
+  13 divides neither the order of M24 nor any parameter of the Golay code, and is not an element order of M24. It does divide the kissing number 196560 = 13 x 15120, which is the one foothold it has. On this evidence 13 stays a stipulation [stip] and 'why 13' stays [open].
+
+==============================================================================
+7  THE ADMISSIBILITY WINDOW IS WIDER THAN ADVERTISED
+==============================================================================
+  NRCI in [0.7, 0.8] with B = 10 holds for weights [7, 8, 9, 10]
+  the window does not single out weight 8; that the keystone is an octad is an extra stipulation.

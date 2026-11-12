@@ -1,0 +1,60 @@
+{
+ "O_h": {
+  "order": 48,
+  "exhaustive": true,
+  "cyclic_octad_modules": 61,
+  "invariant_golay_codes": 0,
+  "example_basis": null,
+  "seconds": 21.5
+ },
+ "T_d": {
+  "order": 24,
+  "exhaustive": true,
+  "cyclic_octad_modules": 115,
+  "invariant_golay_codes": 0,
+  "example_basis": null,
+  "seconds": 69.7
+ },
+ "O": {
+  "order": 24,
+  "exhaustive": false,
+  "cyclic_octad_modules": 1235,
+  "invariant_golay_codes": ">= 1",
+  "example_basis": [
+   9110820,
+   4341582,
+   2401832,
+   1205058,
+   657065,
+   330073,
+   199221,
+   43622,
+   21913,
+   13226,
+   7800,
+   255
+  ],
+  "seconds": 6.7
+ },
+ "T_h": {
+  "order": 24,
+  "exhaustive": false,
+  "cyclic_octad_modules": 481,
+  "invariant_golay_codes": ">= 1",
+  "example_basis": [
+   8949254,
+   4741416,
+   2639961,
+   1219092,
+   607464,
+   428174,
+   256884,
+   38451,
+   27084,
+   13116,
+   4010,
+   255
+  ],
+  "seconds": 5.9
+ }
+}

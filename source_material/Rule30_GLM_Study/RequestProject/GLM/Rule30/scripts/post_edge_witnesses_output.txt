@@ -1,0 +1,452 @@
+=== drive word 10 (driveN 2 1) ===
+
+d=1 Lmax=2 excess=2 alive_at_edge=1 witnesses=1
+  population (t: alive): 0:1 1:1 2:1 3:0
+  plateaus (first test, ending test, alive, killed at the end): [(0, 2, 1, 1)]
+  witness S=1 cells=1 edge_state=1 death=2
+
+d=2 Lmax=6 excess=5 alive_at_edge=1 witnesses=1
+  population (t: alive): 1:1 2:1 3:1 4:1 5:1 6:1 7:0
+  plateaus (first test, ending test, alive, killed at the end): [(2, 6, 1, 1)]
+  witness S=3 cells=11 edge_state=011 death=6
+
+d=3 Lmax=4 excess=2 alive_at_edge=2 witnesses=1
+  population (t: alive): 2:2 3:1 4:1 5:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=5 cells=101 edge_state=10011 death=4
+
+d=4 Lmax=6 excess=3 alive_at_edge=2 witnesses=1
+  population (t: alive): 3:2 4:2 5:1 6:1 7:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=11 cells=1101 edge_state=0111011 death=6
+
+d=5 Lmax=8 excess=4 alive_at_edge=4 witnesses=1
+  population (t: alive): 4:4 5:2 6:2 7:1 8:1 9:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=29 cells=10111 edge_state=110111011 death=8
+
+d=6 Lmax=10 excess=5 alive_at_edge=4 witnesses=1
+  population (t: alive): 5:4 6:4 7:2 8:2 9:1 10:1 11:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=43 cells=110101 edge_state=01101111011 death=10
+
+d=7 Lmax=12 excess=6 alive_at_edge=8 witnesses=1
+  population (t: alive): 6:8 7:5 8:5 9:1 10:1 11:1 12:1 13:0
+  plateaus (first test, ending test, alive, killed at the end): [(10, 12, 1, 1)]
+  witness S=67 cells=1100001 edge_state=1100000010011 death=12
+
+d=8 Lmax=10 excess=3 alive_at_edge=8 witnesses=2
+  population (t: alive): 7:8 8:8 9:2 10:2 11:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=171 cells=11010101 edge_state=011111001111011 death=10
+  witness S=253 cells=10111111 edge_state=010001000010011 death=10
+
+d=9 Lmax=18 excess=10 alive_at_edge=16 witnesses=1
+  population (t: alive): 8:16 9:12 10:12 11:4 12:4 13:4 14:4 15:4 16:4 17:1 18:1 19:0
+  plateaus (first test, ending test, alive, killed at the end): [(12, 16, 4, 3)]
+  witness S=331 cells=110100101 edge_state=11010011100010011 death=18
+
+d=10 Lmax=14 excess=5 alive_at_edge=16 witnesses=11
+  population (t: alive): 9:16 10:16 11:12 12:12 13:11 14:11 15:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=683 cells=1101010101 edge_state=0110001001101111011 death=14
+  witness S=797 cells=1011100011 edge_state=0110001001101111011 death=14
+  witness S=853 cells=1010101011 edge_state=0110111101000010011 death=14
+  witness S=867 cells=1100011011 edge_state=0110111101000010011 death=14
+  witness S=893 cells=1011111011 edge_state=0110111101000010011 death=14
+  witness S=925 cells=1011100111 edge_state=1000101001000010011 death=14
+  witness S=949 cells=1010110111 edge_state=1010000011100010011 death=14
+  witness S=963 cells=1100001111 edge_state=1010000011100010011 death=14
+  witness S=971 cells=1101001111 edge_state=1010000011100010011 death=14
+  witness S=981 cells=1010101111 edge_state=0101001100100010011 death=14
+  witness S=995 cells=1100011111 edge_state=0101001100100010011 death=14
+
+d=11 Lmax=30 excess=20 alive_at_edge=32 witnesses=2
+  population (t: alive): 10:32 11:15 12:15 13:9 14:9 15:4 16:4 17:2 18:2 19:2 20:2 21:2 22:2 23:2 24:2 25:2 26:2 27:2 28:2 29:2 30:2 31:0
+  plateaus (first test, ending test, alive, killed at the end): [(18, 30, 2, 2)]
+  witness S=1493 cells=10101011101 edge_state=110100101001000010011 death=30
+     inner column: k=6 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=1507 cells=11000111101 edge_state=110100101001000010011 death=30
+     inner column: k=6 word=2 t=6..19 inner=1601(len 11) inner_life=13
+
+d=12 Lmax=16 excess=5 alive_at_edge=32 witnesses=1
+  population (t: alive): 11:32 12:32 13:14 14:14 15:1 16:1 17:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=2379 cells=110100101001 edge_state=10000101110101101111011 death=16
+     inner column: k=6 word=2 t=0..9 inner=37(len 6) inner_life=9
+
+d=13 Lmax=28 excess=16 alive_at_edge=64 witnesses=2
+  population (t: alive): 12:64 13:26 14:26 15:16 16:16 17:8 18:8 19:4 20:4 21:4 22:4 23:2 24:2 25:2 26:2 27:2 28:2 29:0
+  plateaus (first test, ending test, alive, killed at the end): [(20, 22, 4, 2), (24, 28, 2, 2)]
+  witness S=6581 cells=1010110110011 edge_state=1011100110111101000010011 death=28
+     inner column: k=6 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=6595 cells=1100001110011 edge_state=1011100110111101000010011 death=28
+     inner column: k=6 word=2 t=4..17 inner=1601(len 11) inner_life=13
+
+d=14 Lmax=32 excess=19 alive_at_edge=64 witnesses=3
+  population (t: alive): 13:64 14:64 15:32 16:32 17:15 18:15 19:9 20:9 21:8 22:8 23:3 24:3 25:3 26:3 27:3 28:3 29:3 30:3 31:3 32:3 33:0
+  plateaus (first test, ending test, alive, killed at the end): [(24, 32, 3, 3)]
+  witness S=11083 cells=11010010110101 edge_state=011001111000111001101111011 death=32
+  witness S=11165 cells=10111001110101 edge_state=011001111000111001101111011 death=32
+  witness S=11307 cells=11010100001101 edge_state=011001111000111001101111011 death=32
+
+d=15 Lmax=26 excess=12 alive_at_edge=128 witnesses=1
+  population (t: alive): 14:128 15:71 16:71 17:32 18:32 19:22 20:22 21:2 22:2 23:1 24:1 25:1 26:1 27:0
+  plateaus (first test, ending test, alive, killed at the end): [(24, 26, 1, 1)]
+  witness S=25853 cells=101111110010011 edge_state=11000011100100011101000010011 death=26
+     inner column: k=6 word=2 t=2..15 inner=1601(len 11) inner_life=13
+
+d=16 Lmax=30 excess=15 alive_at_edge=128 witnesses=3
+  population (t: alive): 15:128 16:128 17:54 18:54 19:26 20:26 21:18 22:18 23:11 24:11 25:8 26:8 27:6 28:6 29:3 30:3 31:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=52149 cells=1010110111010011 edge_state=0101010101101000111001101111011 death=30
+  witness S=52163 cells=1100001111010011 edge_state=0101010101101000111001101111011 death=30
+  witness S=52171 cells=1101001111010011 edge_state=0101010101101000111001101111011 death=30
+
+d=17 Lmax=30 excess=14 alive_at_edge=256 witnesses=4
+  population (t: alive): 16:256 17:144 18:144 19:64 20:64 21:45 22:45 23:29 24:29 25:8 26:8 27:6 28:6 29:4 30:4 31:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=67915 cells=11010010100100001 edge_state=110000100000101100110011100010011 death=30
+     inner column: k=6 word=2 t=0..9 inner=1061(len 11) inner_life=9
+  witness S=84821 cells=10101010110100101 edge_state=110100111100000011110011100010011 death=30
+     inner column: k=11 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=84835 cells=11000110110100101 edge_state=110100111100000011110011100010011 death=30
+     inner column: k=11 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=84861 cells=10111110110100101 edge_state=110100111100000011110011100010011 death=30
+     inner column: k=11 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+
+d=18 Lmax=30 excess=13 alive_at_edge=256 witnesses=10
+  population (t: alive): 17:256 18:256 19:124 20:124 21:68 22:68 23:24 24:24 25:19 26:19 27:14 28:14 29:10 30:10 31:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=218453 cells=101010101010101011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=218467 cells=110001101010101011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=218493 cells=101111101010101011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=221621 cells=101011011000011011 edge_state=01100111100010110010011101000010011 death=30
+  witness S=221635 cells=110000111000011011 edge_state=01100111100010110010011101000010011 death=30
+  witness S=222133 cells=101011011100011011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=222147 cells=110000111100011011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=222155 cells=110100111100011011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=228821 cells=101010111011111011 edge_state=01100111101110110010011101000010011 death=30
+  witness S=228835 cells=110001111011111011 edge_state=01100111101110110010011101000010011 death=30
+
+d=19 Lmax=38 excess=20 alive_at_edge=512 witnesses=9
+  population (t: alive): 18:512 19:261 20:261 21:135 22:135 23:62 24:62 25:38 26:38 27:34 28:34 29:20 30:20 31:17 32:17 33:12 34:12 35:9 36:9 37:9 38:9 39:0
+  plateaus (first test, ending test, alive, killed at the end): [(36, 38, 9, 9)]
+  witness S=272125 cells=1011111101100100001 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=381995 cells=1101010000101011101 edge_state=1101010101000011100100011101000010011 death=38
+     inner column: k=6 word=2 t=23..32 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=382293 cells=1010101010101011101 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=382307 cells=1100011010101011101 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=382333 cells=1011111010101011101 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=385949 cells=1011100111000111101 edge_state=1101010101000011100100011101000010011 death=38
+     inner column: k=6 word=2 t=23..32 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=385973 cells=1010110111000111101 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=385987 cells=1100001111000111101 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+  witness S=385995 cells=1101001111000111101 edge_state=1011111011000011100100011101000010011 death=38
+     inner column: k=14 word=2 t=6..19 inner=1601(len 11) inner_life=13
+
+d=20 Lmax=30 excess=11 alive_at_edge=512 witnesses=2
+  population (t: alive): 19:512 20:512 21:216 22:216 23:106 24:106 25:39 26:39 27:13 28:13 29:2 30:2 31:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=592203 cells=11010010100100001001 edge_state=011001001101111101001110111001101111011 death=30
+     inner column: k=6 word=2 t=0..9 inner=9253(len 14) inner_life=9
+  witness S=607133 cells=10111001110000101001 edge_state=011010101001100101001110111001101111011 death=30
+     inner column: k=6 word=2 t=7..17 inner=1831395(len 21) inner_life=10
+
+d=21 Lmax=36 excess=16 alive_at_edge=1024 witnesses=10
+  population (t: alive): 20:1024 21:526 22:526 23:280 24:280 25:153 26:153 27:90 28:90 29:56 30:56 31:27 32:27 33:12 34:12 35:10 36:10 37:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=1684821 cells=101010101010110110011 edge_state=10101101110000101110110010011101000010011 death=36
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1684835 cells=110001101010110110011 edge_state=10101101110000101110110010011101000010011 death=36
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1684861 cells=101111101010110110011 edge_state=10101101110000101110110010011101000010011 death=36
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1684939 cells=110100111010110110011 edge_state=11010100011000101110110010011101000010011 death=36
+     inner column: k=6 word=2 t=21..30 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1688405 cells=101010101100001110011 edge_state=11010100011000101110110010011101000010011 death=36
+     inner column: k=6 word=2 t=21..30 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1688419 cells=110001101100001110011 edge_state=11010100011000101110110010011101000010011 death=36
+     inner column: k=6 word=2 t=21..30 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1688445 cells=101111101100001110011 edge_state=11010100011000101110110010011101000010011 death=36
+     inner column: k=6 word=2 t=21..30 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1688501 cells=101011011100001110011 edge_state=10101101110000101110110010011101000010011 death=36
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1688515 cells=110000111100001110011 edge_state=10101101110000101110110010011101000010011 death=36
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+  witness S=1688523 cells=110100111100001110011 edge_state=10101101110000101110110010011101000010011 death=36
+     inner column: k=14 word=2 t=4..17 inner=1601(len 11) inner_life=13
+
+d=22 Lmax=40 excess=19 alive_at_edge=1024 witnesses=6
+  population (t: alive): 21:1024 22:1024 23:509 24:509 25:249 26:249 27:113 28:113 29:61 30:61 31:38 32:38 33:21 34:21 35:6 36:6 37:6 38:6 39:6 40:6 41:0
+  plateaus (first test, ending test, alive, killed at the end): [(36, 40, 6, 6)]
+  witness S=2858293 cells=1010110010111001110101 edge_state=0101010101010110010001101000111001101111011 death=40
+  witness S=2858563 cells=1100001001111001110101 edge_state=0101010101010110010001101000111001101111011 death=40
+  witness S=2894507 cells=1101010101010100001101 edge_state=0101010101010110010001101000111001101111011 death=40
+  witness S=2894621 cells=1011100011010100001101 edge_state=0101010101010110010001101000111001101111011 death=40
+  witness S=3097501 cells=1011100111000010111101 edge_state=0101010101010110010001101000111001101111011 death=40
+  witness S=3159083 cells=1101010000101100000011 edge_state=0101010101010110010001101000111001101111011 death=40
+=== drive word 01 (driveN 2 2) ===
+
+d=1 Lmax=7 excess=7 alive_at_edge=1 witnesses=1
+  population (t: alive): 0:1 1:1 2:1 3:1 4:1 5:1 6:1 7:1 8:0
+  plateaus (first test, ending test, alive, killed at the end): [(1, 7, 1, 1)]
+  witness S=1 cells=1 edge_state=1 death=7
+
+d=2 Lmax=3 excess=2 alive_at_edge=2 witnesses=1
+  population (t: alive): 1:2 2:1 3:1 4:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=2 cells=01 edge_state=111 death=3
+
+d=3 Lmax=5 excess=3 alive_at_edge=2 witnesses=2
+  population (t: alive): 2:2 3:2 4:2 5:2 6:0
+  plateaus (first test, ending test, alive, killed at the end): [(3, 5, 2, 2)]
+  witness S=5 cells=101 edge_state=10011 death=5
+  witness S=6 cells=011 edge_state=10011 death=5
+
+d=4 Lmax=5 excess=2 alive_at_edge=4 witnesses=1
+  population (t: alive): 3:4 4:1 5:1 6:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=10 cells=0101 edge_state=1111011 death=5
+
+d=5 Lmax=9 excess=5 alive_at_edge=4 witnesses=2
+  population (t: alive): 4:4 5:4 6:2 7:2 8:2 9:2 10:0
+  plateaus (first test, ending test, alive, killed at the end): [(7, 9, 2, 2)]
+  witness S=21 cells=10101 edge_state=100010011 death=9
+  witness S=22 cells=01101 edge_state=100010011 death=9
+
+d=6 Lmax=9 excess=4 alive_at_edge=8 witnesses=3
+  population (t: alive): 5:8 6:5 7:5 8:3 9:3 10:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=37 cells=101001 edge_state=10100111011 death=9
+  witness S=38 cells=011001 edge_state=10100111011 death=9
+  witness S=58 cells=010111 edge_state=10100010011 death=9
+
+d=7 Lmax=9 excess=3 alive_at_edge=8 witnesses=6
+  population (t: alive): 6:8 7:8 8:6 9:6 10:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=65 cells=1000001 edge_state=1001000010011 death=9
+  witness S=85 cells=1010101 edge_state=1001000010011 death=9
+  witness S=86 cells=0110101 edge_state=1001000010011 death=9
+  witness S=106 cells=0101011 edge_state=1011001111011 death=9
+  witness S=113 cells=1000111 edge_state=1011001111011 death=9
+  witness S=122 cells=0101111 edge_state=0111111111011 death=9
+
+d=8 Lmax=17 excess=10 alive_at_edge=16 witnesses=1
+  population (t: alive): 7:16 8:5 9:5 10:3 11:3 12:1 13:1 14:1 15:1 16:1 17:1 18:0
+  plateaus (first test, ending test, alive, killed at the end): [(13, 17, 1, 1)]
+  witness S=129 cells=10000001 edge_state=101111101111011 death=17
+
+d=9 Lmax=15 excess=7 alive_at_edge=16 witnesses=8
+  population (t: alive): 8:16 9:16 10:10 11:10 12:10 13:10 14:8 15:8 16:0
+  plateaus (first test, ending test, alive, killed at the end): [(11, 13, 10, 2)]
+  witness S=277 cells=101010001 edge_state=10101001000010011 death=15
+  witness S=278 cells=011010001 edge_state=10101001000010011 death=15
+  witness S=314 cells=010111001 edge_state=01010100000010011 death=15
+  witness S=321 cells=100000101 edge_state=10000011100010011 death=15
+  witness S=341 cells=101010101 edge_state=10000011100010011 death=15
+  witness S=342 cells=011010101 edge_state=10000011100010011 death=15
+  witness S=485 cells=101001111 edge_state=01011111001111011 death=15
+  witness S=486 cells=011001111 edge_state=01011111001111011 death=15
+
+d=10 Lmax=17 excess=8 alive_at_edge=32 witnesses=2
+  population (t: alive): 9:32 10:19 11:19 12:8 13:8 14:8 15:8 16:2 17:2 18:0
+  plateaus (first test, ending test, alive, killed at the end): [(13, 15, 8, 6)]
+  witness S=890 cells=0101111011 edge_state=1100011101000010011 death=17
+  witness S=897 cells=1000000111 edge_state=1100011101000010011 death=17
+
+d=11 Lmax=15 excess=5 alive_at_edge=32 witnesses=2
+  population (t: alive): 10:32 11:32 12:20 13:20 14:2 15:2 16:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=1962 cells=01010101111 edge_state=101011101111101111011 death=15
+  witness S=1969 cells=10001101111 edge_state=101011101111101111011 death=15
+
+d=12 Lmax=29 excess=18 alive_at_edge=64 witnesses=3
+  population (t: alive): 11:64 12:25 13:25 14:10 15:10 16:8 17:8 18:6 19:6 20:6 21:6 22:6 23:6 24:3 25:3 26:3 27:3 28:3 29:3 30:0
+  plateaus (first test, ending test, alive, killed at the end): [(19, 23, 6, 3), (25, 29, 3, 3)]
+  witness S=3349 cells=101010001011 edge_state=11000010000011100010011 death=29
+     inner column: k=6 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=3350 cells=011010001011 edge_state=11000010000011100010011 death=29
+     inner column: k=6 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=3706 cells=010111100111 edge_state=11000010000011100010011 death=29
+     inner column: k=6 word=1 t=5..18 inner=1601(len 11) inner_life=13
+
+d=13 Lmax=23 excess=11 alive_at_edge=64 witnesses=1
+  population (t: alive): 12:64 13:64 14:22 15:22 16:13 17:13 18:3 19:3 20:3 21:3 22:1 23:1 24:0
+  plateaus (first test, ending test, alive, killed at the end): [(19, 21, 3, 2)]
+  witness S=4225 cells=1000000100001 edge_state=0101011001000011100010011 death=23
+
+d=14 Lmax=27 excess=14 alive_at_edge=128 witnesses=2
+  population (t: alive): 13:128 14:77 15:77 16:45 17:45 18:24 19:24 20:14 21:14 22:4 23:4 24:2 25:2 26:2 27:2 28:0
+  plateaus (first test, ending test, alive, killed at the end): [(25, 27, 2, 2)]
+  witness S=14117 cells=10100100111011 edge_state=110100101100110011100010011 death=27
+     inner column: k=6 word=1 t=3..16 inner=1601(len 11) inner_life=13
+  witness S=14118 cells=01100100111011 edge_state=110100101100110011100010011 death=27
+     inner column: k=6 word=1 t=3..16 inner=1601(len 11) inner_life=13
+
+d=15 Lmax=31 excess=17 alive_at_edge=128 witnesses=6
+  population (t: alive): 14:128 15:128 16:70 17:70 18:30 19:30 20:22 21:22 22:13 23:13 24:9 25:9 26:6 27:6 28:6 29:6 30:6 31:6 32:0
+  plateaus (first test, ending test, alive, killed at the end): [(27, 31, 6, 6)]
+  witness S=27242 cells=010101100101011 edge_state=10001101010111001011001111011 death=31
+  witness S=27249 cells=100011100101011 edge_state=10001101010111001011001111011 death=31
+  witness S=27258 cells=010111100101011 edge_state=10001101010111001011001111011 death=31
+  witness S=27777 cells=100000010011011 edge_state=10001101010111001011001111011 death=31
+  witness S=28949 cells=101010001000111 edge_state=10001101010111001011001111011 death=31
+  witness S=28950 cells=011010001000111 edge_state=10001101010111001011001111011 death=31
+
+d=16 Lmax=25 excess=10 alive_at_edge=256 witnesses=10
+  population (t: alive): 15:256 16:117 17:117 18:65 19:65 20:22 21:22 22:14 23:14 24:10 25:10 26:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=33045 cells=1010100010000001 edge_state=1010101011110000111001101111011 death=25
+  witness S=33046 cells=0110100010000001 edge_state=1010101011110000111001101111011 death=25
+  witness S=37669 cells=1010010011001001 edge_state=1010101011110000111001101111011 death=25
+     inner column: k=7 word=2 t=0..9 inner=294(len 9) inner_life=9
+  witness S=37670 cells=0110010011001001 edge_state=1010101011110000111001101111011 death=25
+     inner column: k=7 word=2 t=0..9 inner=294(len 9) inner_life=9
+  witness S=46394 cells=0101110010101101 edge_state=1100011111110100001011001111011 death=25
+     inner column: k=7 word=2 t=4..13 inner=6438(len 13) inner_life=9
+  witness S=46657 cells=1000001001101101 edge_state=1100011111110100001011001111011 death=25
+     inner column: k=7 word=2 t=4..13 inner=6438(len 13) inner_life=9
+  witness S=46677 cells=1010101001101101 edge_state=1100011111110100001011001111011 death=25
+     inner column: k=7 word=2 t=4..13 inner=6438(len 13) inner_life=9
+  witness S=46678 cells=0110101001101101 edge_state=1100011111110100001011001111011 death=25
+     inner column: k=7 word=2 t=4..13 inner=6438(len 13) inner_life=9
+  witness S=57210 cells=0101111011111011 edge_state=1011111100001011110011100010011 death=25
+     inner column: k=6 word=1 t=0..14 inner=893(len 10) inner_life=14
+  witness S=57217 cells=1000000111111011 edge_state=1011111100001011110011100010011 death=25
+     inner column: k=6 word=1 t=1..14 inner=1601(len 11) inner_life=13
+
+d=17 Lmax=31 excess=15 alive_at_edge=256 witnesses=9
+  population (t: alive): 16:256 17:256 18:147 19:147 20:94 21:94 22:52 23:52 24:27 25:27 26:21 27:21 28:15 29:15 30:9 31:9 32:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=82049 cells=10000001000000101 edge_state=010111101100101011110011100010011 death=31
+     inner column: k=7 word=2 t=0..9 inner=641(len 10) inner_life=9
+  witness S=82197 cells=10101000100000101 edge_state=100000011100001011110011100010011 death=31
+  witness S=82198 cells=01101000100000101 edge_state=100000011100001011110011100010011 death=31
+  witness S=87361 cells=10000010101010101 edge_state=100000011100001011110011100010011 death=31
+  witness S=87381 cells=10101010101010101 edge_state=100000011100001011110011100010011 death=31
+  witness S=87382 cells=01101010101010101 edge_state=100000011100001011110011100010011 death=31
+  witness S=87589 cells=10100100011010101 edge_state=100000011100001011110011100010011 death=31
+  witness S=87590 cells=01100100011010101 edge_state=100000011100001011110011100010011 death=31
+  witness S=87610 cells=01011100011010101 edge_state=100000011100001011110011100010011 death=31
+
+d=18 Lmax=33 excess=16 alive_at_edge=512 witnesses=2
+  population (t: alive): 17:512 18:237 19:237 20:144 21:144 22:83 23:83 24:24 25:24 26:12 27:12 28:10 29:10 30:2 31:2 32:2 33:2 34:0
+  plateaus (first test, ending test, alive, killed at the end): [(31, 33, 2, 2)]
+  witness S=140821 cells=101010000110010001 edge_state=10101011110111101101001011001111011 death=33
+  witness S=140822 cells=011010000110010001 edge_state=10101011110111101101001011001111011 death=33
+
+d=19 Lmax=29 excess=11 alive_at_edge=512 witnesses=14
+  population (t: alive): 18:512 19:512 20:264 21:264 22:86 23:86 24:49 25:49 26:38 27:38 28:14 29:14 30:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=342634 cells=0101011001011100101 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=342641 cells=1000111001011100101 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=342650 cells=0101111001011100101 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=343169 cells=1000000100111100101 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=409877 cells=1010100010000010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=409878 cells=0110100010000010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=414501 cells=1010010011001010011 edge_state=1000110101001110000011110011100010011 death=29
+  witness S=414502 cells=0110010011001010011 edge_state=1000110101001110000011110011100010011 death=29
+  witness S=415041 cells=1000001010101010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=415061 cells=1010101010101010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=415062 cells=0110101010101010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=415269 cells=1010010001101010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=415270 cells=0110010001101010011 edge_state=1000110111011110000011110011100010011 death=29
+  witness S=415290 cells=0101110001101010011 edge_state=1000110111011110000011110011100010011 death=29
+
+d=20 Lmax=37 excess=18 alive_at_edge=1024 witnesses=15
+  population (t: alive): 19:1024 20:455 21:455 22:253 23:253 24:144 25:144 26:105 27:105 28:67 29:67 30:50 31:50 32:29 33:29 34:15 35:15 36:15 37:15 38:0
+  plateaus (first test, ending test, alive, killed at the end): [(35, 37, 15, 15)]
+  witness S=857409 cells=10000010101010001011 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857429 cells=10101010101010001011 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857430 cells=01101010101010001011 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857637 cells=10100100011010001011 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857638 cells=01100100011010001011 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857658 cells=01011100011010001011 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857706 cells=01010110011010001011 edge_state=110101010011111100001011110011100010011 death=37
+     inner column: k=6 word=1 t=22..31 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=857713 cells=10001110011010001011 edge_state=110101010011111100001011110011100010011 death=37
+     inner column: k=6 word=1 t=22..31 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=948773 cells=10100100010111100111 edge_state=110101010011111100001011110011100010011 death=37
+     inner column: k=6 word=1 t=22..31 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=948774 cells=01100100010111100111 edge_state=110101010011111100001011110011100010011 death=37
+     inner column: k=6 word=1 t=22..31 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=948794 cells=01011100010111100111 edge_state=110101010011111100001011110011100010011 death=37
+     inner column: k=6 word=1 t=22..31 inner=59703792053(len 36) inner_life=12
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=948842 cells=01010110010111100111 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=948849 cells=10001110010111100111 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=948858 cells=01011110010111100111 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+  witness S=949377 cells=10000001001111100111 edge_state=110001111011111100001011110011100010011 death=37
+     inner column: k=14 word=1 t=5..18 inner=1601(len 11) inner_life=13
+
+d=21 Lmax=35 excess=15 alive_at_edge=1024 witnesses=10
+  population (t: alive): 20:1024 21:1024 22:489 23:489 24:265 25:265 26:100 27:100 28:29 29:29 30:13 31:13 32:11 33:11 34:10 35:10 36:0
+  plateaus (first test, ending test, alive, killed at the end): []
+  witness S=1357333 cells=101010000110110100101 edge_state=01011100101011100111100011110011100010011 death=35
+     inner column: k=9 word=2 t=7..19 inner=455509(len 19) inner_life=12
+     inner column: k=15 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=1357334 cells=011010000110110100101 edge_state=01011100101011100111100011110011100010011 death=35
+     inner column: k=9 word=2 t=7..19 inner=455509(len 19) inner_life=12
+     inner column: k=15 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=1360762 cells=010111101100001100101 edge_state=01011100101011100111100011110011100010011 death=35
+     inner column: k=9 word=2 t=7..19 inner=455509(len 19) inner_life=12
+     inner column: k=15 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=1360769 cells=100000011100001100101 edge_state=01011100101011100111100011110011100010011 death=35
+     inner column: k=9 word=2 t=7..19 inner=455509(len 19) inner_life=12
+     inner column: k=15 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=1431146 cells=010101100110101110101 edge_state=01011100101011100111100011110011100010011 death=35
+     inner column: k=9 word=2 t=8..19 inner=822870(len 20) inner_life=11
+     inner column: k=15 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=1431153 cells=100011100110101110101 edge_state=01011100101011100111100011110011100010011 death=35
+     inner column: k=9 word=2 t=8..19 inner=822870(len 20) inner_life=11
+     inner column: k=15 word=2 t=21..30 inner=116814179(len 27) inner_life=10
+  witness S=1917057 cells=100000010000001010111 edge_state=01100111101111101100111111001011001111011 death=35
+     inner column: k=7 word=2 t=0..9 inner=14977(len 14) inner_life=9
+     inner column: k=13 word=2 t=9..18 inner=102851(len 17) inner_life=12
+  witness S=1981717 cells=101010001011110001111 edge_state=01100111101111101100111111001011001111011 death=35
+     inner column: k=13 word=2 t=9..18 inner=102851(len 17) inner_life=12
+  witness S=1981718 cells=011010001011110001111 edge_state=01100111101111101100111111001011001111011 death=35
+     inner column: k=13 word=2 t=9..18 inner=102851(len 17) inner_life=12
+  witness S=1982074 cells=010111100111110001111 edge_state=01100111101111101100111111001011001111011 death=35
+     inner column: k=13 word=2 t=9..18 inner=102851(len 17) inner_life=12
+
+d=22 Lmax=41 excess=20 alive_at_edge=2048 witnesses=6
+  population (t: alive): 21:2048 22:1047 23:1047 24:562 25:562 26:295 27:295 28:148 29:148 30:81 31:81 32:38 33:38 34:25 35:25 36:8 37:8 38:6 39:6 40:6 41:6 42:0
+  plateaus (first test, ending test, alive, killed at the end): [(39, 41, 6, 6)]
+  witness S=2124325 cells=1010010001010110000001 edge_state=1100011011000100110010111111001011001111011 death=41
+  witness S=2124326 cells=0110010001010110000001 edge_state=1100011011000100110010111111001011001111011 death=41
+  witness S=2124346 cells=0101110001010110000001 edge_state=1100011011000100110010111111001011001111011 death=41
+  witness S=2126145 cells=1000001010001110000001 edge_state=1100011011000100110010111111001011001111011 death=41
+  witness S=2126165 cells=1010101010001110000001 edge_state=1100011011000100110010111111001011001111011 death=41
+  witness S=2126166 cells=0110101010001110000001 edge_state=1100011011000100110010111111001011001111011 death=41
+
+=== inner codes shared by witnesses of different lengths ===
+inner code 1601 (cells 10000010011) under word 2: in witnesses (word, d, S) [(1, 11, 1493), (1, 11, 1507), (1, 13, 6581), (1, 13, 6595), (1, 15, 25853), (1, 19, 272125), (1, 19, 381995), (1, 19, 382293), (1, 19, 382307), (1, 19, 382333), (1, 19, 385949), (1, 19, 385973), (1, 19, 385987), (1, 19, 385995), (1, 21, 1684821), (1, 21, 1684835), (1, 21, 1684861), (1, 21, 1684939), (1, 21, 1688405), (1, 21, 1688419), (1, 21, 1688445), (1, 21, 1688501), (1, 21, 1688515), (1, 21, 1688523), (2, 12, 3349), (2, 12, 3350), (2, 12, 3706), (2, 14, 14117), (2, 14, 14118), (2, 16, 57217), (2, 20, 857409), (2, 20, 857429), (2, 20, 857430), (2, 20, 857637), (2, 20, 857638), (2, 20, 857658), (2, 20, 857706), (2, 20, 857713), (2, 20, 948773), (2, 20, 948774), (2, 20, 948794), (2, 20, 948842), (2, 20, 948849), (2, 20, 948858), (2, 20, 949377)]
+inner code 116814179 (cells 110001101000111001101111011) under word 1: in witnesses (word, d, S) [(1, 17, 84821), (1, 17, 84835), (1, 17, 84861), (2, 21, 1357333), (2, 21, 1357334), (2, 21, 1360762), (2, 21, 1360769), (2, 21, 1431146), (2, 21, 1431153)]
+inner code 59703792053 (cells 101011011000100111111001011001111011) under word 1: in witnesses (word, d, S) [(1, 19, 381995), (1, 19, 385949), (1, 21, 1684939), (1, 21, 1688405), (1, 21, 1688419), (1, 21, 1688445), (2, 20, 857706), (2, 20, 857713), (2, 20, 948773), (2, 20, 948774), (2, 20, 948794)]

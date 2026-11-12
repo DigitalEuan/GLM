@@ -1,0 +1,29 @@
+==============================================================================
+£  velocity = (2 * energy / mass)^(1/2)
+==============================================================================
+
+1. ¢ DAG — 3 primitive(s)
+   _scale1        = scale(energy)  [factor 2]
+   _div2          = div(_scale1, mass)
+   velocity       = sqrt(_div2)
+
+2. ¢ primitives
+   div x1, scale x1, sqrt x1
+   atomic: 1   composite: 2
+
+3. ∆ implementations
+   40 total, 10 delta-sigma
+
+4. Top ∆ by ¢_cost
+   #   cost  domain        carrier     ∆Σ   components
+   1   9     electrical    temporal    no   resistor divider, op-amp + multipli...
+   2   12    electrical    static      no   resistor divider, lever or gear tra...
+   3   15    electrical    temporal    YES  resistor divider, op-amp + multipli...
+   4   15    electrical    static      YES  resistor divider, lever or gear tra...
+   5   16    electrical    spatial     no   resistor divider, op-amp + multipli...
+   6   17    mechanical    spatial     no   lever, lever or gear train, square-...
+
+5. Generated material
+   SPICE: opamp_sqrt (21 lines)
+   Exact program: 3 instruction(s), inputs: energy, mass, outputs: velocity
+   Save with:  cent report "<£>" --save cent_out

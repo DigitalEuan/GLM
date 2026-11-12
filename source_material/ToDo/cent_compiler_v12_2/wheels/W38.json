@@ -1,0 +1,234 @@
+{
+ "id": "W38",
+ "title": "Gears & Mechanical Transmissions",
+ "axioms": [
+  "output_torque = gear_ratio * input_torque",
+  "output_angular_velocity = input_angular_velocity / gear_ratio",
+  "input_power = input_torque * input_angular_velocity",
+  "output_power = output_torque * output_angular_velocity"
+ ],
+ "cases": [
+  {
+   "id": "W38-01",
+   "equation": "gear_ratio = output_torque / input_torque",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W38-02",
+   "equation": "input_angular_velocity = output_angular_velocity * gear_ratio",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W38-03",
+   "equation": "output_power = input_power",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "model_convention",
+   "expected_dimensional_explicit": null,
+   "note": "ideal lossless gearbox; efficiency is a separate dissipation channel"
+  },
+  {
+   "id": "W38-N1",
+   "equation": "output_torque = input_torque / gear_ratio",
+   "expected_dimensional": true,
+   "expected_derivable": false,
+   "physical_status": "negative_control",
+   "expected_dimensional_explicit": null,
+   "note": "dimensionally plausible but the ratio divides speed, not input torque"
+  }
+ ],
+ "quantities": [
+  "gear_ratio",
+  "input_angular_velocity",
+  "input_power",
+  "input_torque",
+  "output_angular_velocity",
+  "output_power",
+  "output_torque"
+ ],
+ "dimensions": {
+  "gear_ratio": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "input_angular_velocity": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  "input_power": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "input_torque": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    -1
+   ]
+  },
+  "output_angular_velocity": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  "output_power": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "output_torque": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    -1
+   ]
+  }
+ },
+ "junctions": [
+  {
+   "other_wheel": "W4",
+   "name_in_this_wheel": "input_torque",
+   "name_in_other_wheel": "torque",
+   "reason": "gearbox input torque is the shaft torque"
+  },
+  {
+   "other_wheel": "W4",
+   "name_in_this_wheel": "input_angular_velocity",
+   "name_in_other_wheel": "angular_velocity",
+   "reason": "gearbox input speed is the shaft speed"
+  },
+  {
+   "other_wheel": "W5",
+   "name_in_this_wheel": "input_power",
+   "name_in_other_wheel": "power",
+   "reason": "mechanical power is the translated body power"
+  }
+ ],
+ "non_identities": []
+}

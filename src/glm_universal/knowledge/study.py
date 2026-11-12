@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:src/glm_universal/knowledge/study.py
 """``glm_universal.knowledge.study`` -- the measurement of Phase 154.
 
 ``studies/CORPUS_KNOWLEDGE_STUDY.md``: the corpus counted rather than trained,
@@ -545,3 +546,56 @@ def corpus_knowledge_report() -> Dict[str, object]:
         "reason": (f"the stored measurement is {verdict}; re-take it with "
                    f"python3 -m glm_universal.tools corpus-knowledge --write"),
     }
+=======
+"""``glm_universal.knowledge.study`` -- the corpus-knowledge measurement.
+
+The measurement of ``CORPUS_KNOWLEDGE_STUDY.md``: the corpus read by rule
+into folder, document, paragraph, sentence and token, with the
+co-occurrence model, the next-token baseline, and the word-place-on-the-
+lattice experiment.
+
+*Reconstructed 29 October 2026 (Iteration 2 of the reorganisation).  The
+original ``study.py`` was lost in the upload; this version is a minimal
+stub that exposes the two names ``word_address.py`` imports
+(``NUMBER_WORDS`` and ``plural_pairs``), so the knowledge package imports
+cleanly and the dependent tests collect.  The full corpus-knowledge
+measurement (``compute``/``measure``/``write_measurements``/``state``/
+``current``/``module_digest``/``corpus_knowledge_report``) is not
+reconstructed here; it would require the full session infrastructure and
+the stored measurement JSON.  Re-take the stored measurement with
+``python3 -m glm_universal.tools corpus-knowledge --write`` once the full
+module is restored.*
+"""
+from __future__ import annotations
+
+from typing import Any, Dict, List, Tuple
+
+__all__ = ["NUMBER_WORDS", "plural_pairs"]
+
+
+#: The number words the corpus-knowledge study grades (per
+#: CORPUS_KNOWLEDGE_STUDY.md: "words used like *seven*: *eight, ten, four,
+#: nine, five, six, …*").  These are the English cardinal number words the
+#: corpus's next-token baseline is graded against.
+NUMBER_WORDS: Tuple[str, ...] = (
+    "zero", "one", "two", "three", "four", "five", "six", "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty",
+    "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
+    "hundred", "thousand", "million", "billion",
+)
+
+
+def plural_pairs(knowledge: Any) -> List[Tuple[str, str]]:
+    """The (singular, plural) pairs the corpus's number-word neighbours
+    are graded against.
+
+    *This is a working stub.*  The full implementation would scan the
+    corpus's vocabulary for ``(word, word + "s")`` pairs where both forms
+    appear with sufficient frequency, and return them as the
+    co-occurrence neighbours of the number words.  The stub returns an
+    empty list; ``word_address.compute`` degrades gracefully (no
+    plural-pair neighbours are added to the address book).
+    """
+    return []
+>>>>>>> Stashed changes:glm_universal/knowledge/study.py

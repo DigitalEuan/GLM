@@ -1,0 +1,2153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>cent — £ → ¢ → ∆</title>
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #121821;
+    --panel-2: #0e141b;
+    --line: #263241;
+    --text: #e6edf3;
+    --muted: #8fa1b3;
+    --accent: #7ee787;
+    --accent-2: #79c0ff;
+    --warn: #ffa657;
+    --bad: #ff7b72;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: radial-gradient(1200px 600px at 15% -10%, #16222e 0%, var(--bg) 55%) fixed;
+    color: var(--text);
+    font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 0 20px 60px;
+  }
+  header {
+    max-width: 1160px; margin: 0 auto; padding: 28px 0 18px;
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .brand { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand .arrow { color: var(--accent); font-weight: 500; }
+  header .tag { color: var(--muted); font-size: 13px; }
+  main { max-width: 1160px; margin: 0 auto; }
+
+  .query {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px; box-shadow: 0 18px 40px rgba(0,0,0,.25);
+  }
+  label.field { display: block; font-size: 12px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  #relation {
+    flex: 1 1 420px; min-width: 0; padding: 13px 14px; font: 15px/1.4 var(--mono);
+    color: var(--text); background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 8px; outline: none;
+  }
+  #relation:focus { border-color: var(--accent-2); box-shadow: 0 0 0 3px rgba(121,192,255,.15); }
+  button {
+    font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--panel-2); color: var(--text); padding: 10px 16px;
+  }
+  button:hover { border-color: var(--accent-2); }
+  button:disabled { opacity: .5; cursor: default; }
+  #go {
+    background: var(--accent); color: #06130a; border-color: var(--accent);
+    font-weight: 700; padding: 0 22px;
+  }
+  #go:hover { filter: brightness(1.08); }
+  .examples { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .chip {
+    padding: 5px 11px; font-size: 12.5px; color: var(--muted);
+    background: transparent; border: 1px dashed var(--line);
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent-2); }
+  .settings {
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--muted);
+  }
+  .settings input[type="number"] {
+    width: 68px; margin-left: 6px; padding: 4px 6px; font: 13px var(--mono);
+    color: var(--text); background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .settings label { display: inline-flex; align-items: center; gap: 7px; }
+  #status { margin-left: auto; }
+
+  .error {
+    margin: 16px 0 0; padding: 12px 14px; border-radius: 8px;
+    border: 1px solid rgba(255,123,114,.4); background: rgba(255,123,114,.08);
+    color: var(--bad); font-family: var(--mono); font-size: 13px; white-space: pre-wrap;
+  }
+  .error-inline { color: var(--bad); font-family: var(--mono); font-size: 13px; margin: 0; }
+
+  #results { margin-top: 22px; display: grid; gap: 16px; }
+  .summary { display: flex; gap: 8px; flex-wrap: wrap; }
+  .stat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 13px; font-size: 13px; color: var(--muted);
+  }
+  .stat b { color: var(--text); font-weight: 600; }
+  .stat.accent b { color: var(--accent); }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; min-width: 0;
+  }
+  .card h2 {
+    margin: 0 0 12px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  .card h2 .count { color: var(--text); letter-spacing: 0; text-transform: none; }
+  .mono { font-family: var(--mono); }
+  .dag { display: grid; gap: 6px; }
+  .dagrow {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline;
+    font: 13px/1.5 var(--mono); padding: 5px 0; border-bottom: 1px dashed rgba(38,50,65,.7);
+  }
+  .dagrow:last-child { border-bottom: 0; }
+  .dagrow .out { color: var(--accent-2); }
+  .dagrow .op { color: var(--accent); }
+  .dagrow .factor { color: var(--warn); font-size: 12px; }
+  .prims { display: flex; gap: 8px; flex-wrap: wrap; }
+  .prim {
+    font: 13px var(--mono); padding: 5px 10px; border-radius: 6px;
+    background: var(--panel-2); border: 1px solid var(--line);
+  }
+  .prim b { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .note { margin: 0; font-size: 13px; color: var(--muted); }
+
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; }
+  td.mono, th.mono { font-family: var(--mono); }
+  tbody tr:last-child td { border-bottom: 0; }
+  .ds { color: var(--warn); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .program { display: grid; gap: 7px; font: 13px/1.5 var(--mono); }
+  .ins { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ins .idx { color: var(--muted); width: 20px; }
+  .ins .out { color: var(--accent-2); }
+  .ins .op { color: var(--accent); }
+  .io { margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+  .io code { color: var(--text); font-family: var(--mono); }
+
+  .fields { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .fields .binding {
+    font: 12.5px var(--mono); color: var(--muted); padding: 8px 10px;
+    border: 1px dashed var(--line); border-radius: 6px;
+  }
+  .fields label { font-size: 12.5px; color: var(--muted); }
+  .fields input {
+    display: block; width: 110px; margin-top: 4px; padding: 6px 8px;
+    font: 13px var(--mono); color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  .runbar { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+  .runbar input {
+    width: 64px; margin-left: 5px; padding: 4px 6px; font: 13px var(--mono);
+    color: var(--text); background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  #runOut { margin-top: 12px; }
+
+  .files { display: grid; gap: 8px; margin-bottom: 12px; }
+  .filelink {
+    display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px;
+    color: var(--text); text-decoration: none; font: 13px var(--mono);
+    background: var(--panel-2);
+  }
+  .filelink:hover { border-color: var(--accent-2); }
+  .filelink .size { color: var(--muted); }
+  .bundle {
+    display: inline-block; padding: 9px 16px; border-radius: 8px; text-decoration: none;
+    background: rgba(126,231,135,.12); border: 1px solid rgba(126,231,135,.45);
+    color: var(--accent); font-weight: 600; font-size: 13.5px;
+  }
+  .bundle:hover { background: rgba(126,231,135,.18); }
+  details { margin-top: 14px; }
+  summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+  pre {
+    margin: 10px 0 0; padding: 12px; background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 8px; overflow: auto; max-height: 340px;
+    font: 12px/1.55 var(--mono); color: #c9d5e1;
+  }
+  /* --- section tabs --- */
+  .tabs { max-width: 1160px; margin: 0 auto 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tab { padding: 8px 14px; font-size: 13px; color: var(--muted); background: transparent; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-color: var(--accent-2); background: rgba(121,192,255,.09); }
+
+  /* --- wheel browser --- */
+  .wheelList { display: grid; gap: 7px; max-height: 640px; overflow: auto; padding-right: 2px; }
+  .wheelItem {
+    width: 100%; text-align: left; display: flex; align-items: baseline; gap: 8px;
+    padding: 8px 10px; background: var(--panel-2); font-size: 13px;
+  }
+  .wheelItem:hover { border-color: var(--accent-2); }
+  .wheelItem.active { border-color: var(--accent-2); background: rgba(121,192,255,.08); }
+  .wheelItem .wid { font: 700 12px var(--mono); color: var(--accent); flex: 0 0 auto; }
+  .wheelItem .wtitle { min-width: 0; }
+  .wheelItem .wmeta { margin-left: auto; color: var(--muted); font: 11.5px var(--mono); white-space: nowrap; }
+  .badge {
+    display: inline-block; padding: 1px 7px; border-radius: 999px;
+    font: 11px var(--mono); border: 1px solid var(--line); color: var(--muted);
+  }
+  .badge.pass { color: var(--accent); border-color: rgba(126,231,135,.45); }
+  .badge.gap { color: var(--bad); border-color: rgba(255,123,114,.45); }
+  .badge.stop { color: var(--warn); border-color: rgba(255,166,87,.45); }
+  .badge.info { color: var(--accent-2); border-color: rgba(121,192,255,.45); }
+  .badge.out { color: var(--muted); }
+  .badge.candidate { color: var(--accent-2); border-color: rgba(121,192,255,.45); }
+  .badge.stop { color: var(--warn); border-color: rgba(255,166,87,.45); }
+  .quantities { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 4px; }
+  .quantity { font: 12px var(--mono); color: var(--muted); padding: 2px 7px; border: 1px solid var(--line); border-radius: 5px; }
+  .axiom { font: 12.5px/1.5 var(--mono); padding: 6px 9px; margin: 5px 0; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; }
+  .wheelSection { margin-top: 16px; }
+  .wheelSection h3 { margin: 0 0 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+  /* --- concept map --- */
+  .conceptHead { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+  .conceptHead h2 { margin: 0 0 4px; font-size: 20px; }
+  .conceptHead .sig { font: 12.5px var(--mono); color: var(--muted); }
+  .conceptHead .headline { margin: 10px 0 0; font-size: 13px; color: var(--text); }
+  .conceptStats { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .tree, .tree ul { list-style: none; margin: 0; padding-left: 18px; }
+  .tree { padding-left: 0; }
+  .treeNode { position: relative; padding: 7px 0 7px 14px; border-left: 1px solid var(--line); }
+  .tree > .treeNode { border-left: 0; padding-left: 0; }
+  .treeHead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .treeLabel { font-weight: 600; font-size: 13.5px; }
+  .treeDetail { margin: 2px 0 0 17px; font-size: 12.5px; color: var(--muted); font-family: var(--mono); overflow-wrap: anywhere; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+  .dot.pass { background: var(--accent); }
+  .dot.gap { background: var(--bad); }
+  .dot.stop { background: var(--warn); }
+  .dot.info { background: var(--accent-2); }
+  .dot.out { background: var(--muted); }
+  .treeChildren { margin-top: 3px; }
+  .treeAction { font-size: 11.5px; padding: 2px 8px; color: var(--accent-2); background: transparent; }
+  .catalogueGroup { margin: 14px 0 6px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .methodGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 7px; }
+  .methodBtn { display: flex; flex-direction: column; gap: 2px; text-align: left; padding: 8px 10px; background: var(--panel-2); }
+  .methodBtn:hover { border-color: var(--accent-2); }
+  .methodBtn .mname { font-size: 13px; }
+  .methodBtn .mmeta { font: 11.5px var(--mono); color: var(--muted); }
+  .mflags { display: flex; gap: 4px; margin-top: 2px; }
+  .flag { font: 10.5px var(--mono); padding: 0 5px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); }
+  .flag.on { color: var(--accent); border-color: rgba(126,231,135,.4); }
+  /* --- method discovery --- */
+  .discoverHead { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+  .discoverHead h2 { margin: 0 0 4px; font-size: 20px; }
+  .discoverHead .headline { margin: 8px 0 0; font-size: 13px; color: var(--text); }
+  .discoverProblem { margin-top: 10px; font: 12.5px/1.6 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+  .methodGroups { display: grid; gap: 16px; }
+  .methodGroup { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .methodGroup > h2 { margin: 0 0 12px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .methodList { display: grid; gap: 10px; }
+  .methodCard { background: var(--panel-2); border: 1px solid var(--line); border-radius: 9px; padding: 12px 14px; }
+  .methodCard h3 { margin: 0; font-size: 15px; }
+  .methodMeta { margin-top: 3px; font: 11.5px var(--mono); color: var(--muted); }
+  .methodDescription { margin: 8px 0 0; font-size: 13px; color: var(--text); }
+  .methodLine { margin-top: 7px; font-size: 12.5px; color: var(--muted); }
+  .methodLine b { color: var(--text); font-weight: 600; }
+  .methodGaps { margin: 8px 0 0; padding-left: 18px; font-size: 12px; color: var(--muted); }
+  .methodGaps li { margin: 3px 0; }
+  .methodSolver { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 9px; }
+  .solverLink { padding: 5px 10px; font-size: 12px; color: var(--accent-2); background: transparent; border-color: rgba(121,192,255,.4); }
+  /* --- constrained design --- */
+  .compareCard { margin-top: 16px; }
+  .compareRoutes { display: flex; gap: 14px; flex-wrap: wrap; margin: 10px 0; font-size: 12.5px; color: var(--muted); }
+  .compareRoutes label { display: inline-flex; gap: 6px; align-items: center; }
+  .compareRoutes input { accent-color: var(--accent-2); }
+  .compareExport { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+  .designGrid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+  .designCard { min-width: 0; }
+  .designMeta { margin: 0 0 10px; font: 11.5px/1.5 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+  .designFields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+  .designFields label { font-size: 12px; color: var(--muted); }
+  .designFields input {
+    display: block; width: 100%; margin-top: 4px; padding: 7px 8px;
+    font: 12.5px var(--mono); color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  .designFields input:focus { border-color: var(--accent-2); outline: none; }
+  .designActions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .designSolve { background: rgba(121,192,255,.12); border-color: rgba(121,192,255,.45); color: var(--accent-2); }
+  .designResult { margin-top: 12px; }
+  .physicalDeck { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .physicalDeck pre { margin: 8px 0 0; padding: 10px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; overflow: auto; max-height: 280px; font: 11.5px/1.45 var(--mono); color: var(--text); }
+  .physicalStages { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+  .physicalStage { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; background: var(--panel-2); font: 11px var(--mono); }
+  .designSummary { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .designStatus { font: 11px var(--mono); padding: 2px 7px; border: 1px solid var(--line); border-radius: 999px; }
+  .designStatus.pass { color: var(--accent); border-color: rgba(126,231,135,.45); }
+  .designStatus.partial { color: var(--accent-2); border-color: rgba(121,192,255,.45); }
+  .designStatus.gap { color: var(--bad); border-color: rgba(255,123,114,.45); }
+  .dynamicMetrics { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+  .dynamicMetric { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; background: var(--panel-2); font: 11px var(--mono); }
+  .dynamicMetric b { display: block; color: var(--muted); font-weight: 400; }
+  .dynamicTrace { max-height: 320px; overflow: auto; }
+  .designSelected { margin-top: 10px; padding: 9px 10px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 7px; font-size: 12.5px; }
+  .designSelected div { margin: 3px 0; }
+  .designRejects { margin-top: 10px; }
+  .designPlan { display: grid; gap: 6px; margin-top: 10px; }
+  .designPlanRow { display: flex; gap: 7px; align-items: baseline; flex-wrap: wrap; font-size: 12px; }
+  .designPlanRow .name { color: var(--text); font-weight: 600; }
+  .designPlanRow .detail { color: var(--muted); }
+  .designGaps { margin-top: 10px; }
+  .evidencePills { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
+  .evidencePill { font: 10.5px var(--mono); padding: 1px 6px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+  .evidencePill.pass { color: var(--accent); border-color: rgba(126,231,135,.45); }
+  .evidencePill.gap { color: var(--bad); border-color: rgba(255,123,114,.45); }
+  .wheelPill { font: 11px var(--mono); padding: 2px 7px; border: 1px solid var(--line); border-radius: 5px; color: var(--accent-2); background: transparent; }
+  .wheelPill:hover { border-color: var(--accent-2); }
+  footer { max-width: 1160px; margin: 26px auto 0; color: var(--muted); font-size: 12px; }
+  @media (max-width: 640px) {
+    body { padding: 0 12px 40px; }
+    #go { flex: 1 1 auto; }
+    .settings { gap: 12px; }
+    #status { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">cent <span class="arrow">£ → ¢ → ∆</span></div>
+  <div class="tag">compile a £, browse the wheel substrate, map abstract ∆ concepts</div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <button class="tab active" type="button" data-panel="compile">Compile £</button>
+  <button class="tab" type="button" data-panel="methods">Find methods</button>
+  <button class="tab" type="button" data-panel="design">Design solver</button>
+  <button class="tab" type="button" data-panel="wheels">Wheels</button>
+  <button class="tab" type="button" data-panel="concepts">Concept map</button>
+</nav>
+
+<main>
+  <section id="panel-compile" class="panel">
+  <form class="query" id="query" autocomplete="off">
+    <label class="field" for="relation">Target relation (£)</label>
+    <div class="row">
+      <input id="relation" name="relation" spellcheck="false"
+             value="velocity = (2 * energy / mass)^(1/2)"
+             aria-label="Target relation" />
+      <button id="go" type="submit">Compile</button>
+    </div>
+    <div class="examples" aria-label="Example queries">
+      <button type="button" class="chip" data-q="velocity = (2 * energy / mass)^(1/2)">velocity</button>
+      <button type="button" class="chip" data-q="force = mass * acceleration">force</button>
+      <button type="button" class="chip" data-q="current = voltage / resistance">current</button>
+      <button type="button" class="chip" data-q="energy = mass * velocity^2 / 2">kinetic energy</button>
+      <button type="button" class="chip" data-q="pressure = force / area">pressure</button>
+      <button type="button" class="chip" data-q="decay = exp(-t / tau)">decay</button>
+    </div>
+    <div class="settings">
+      <label>top ∆ <input id="top" type="number" value="6" min="1" max="200"></label>
+      <label><input id="save" type="checkbox" checked> save material</label>
+      <span id="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <div id="error" class="error" role="alert" hidden></div>
+
+  <section id="results" hidden>
+    <div class="summary" id="summary"></div>
+
+    <div class="grid">
+      <article class="card">
+        <h2>¢ DAG <span class="count" id="dagcount"></span></h2>
+        <div class="dag" id="dag"></div>
+      </article>
+      <article class="card">
+        <h2>¢ primitives <span class="count" id="primcount"></span></h2>
+        <div class="prims" id="primitives"></div>
+        <p class="io" id="primmeta"></p>
+      </article>
+    </div>
+
+    <article class="card">
+      <h2>∆ implementations <span class="count" id="implcount"></span></h2>
+      <div class="tablewrap">
+        <table id="delta">
+          <thead>
+            <tr><th>#</th><th>cost</th><th>domain</th><th>carrier</th><th>∆Σ</th><th>components</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+
+    <div class="grid">
+      <article class="card">
+        <h2>Exact program</h2>
+        <div id="program"></div>
+      </article>
+      <article class="card">
+        <h2>Run exact core</h2>
+        <div id="runInputs" class="fields"></div>
+        <div class="runbar">
+          <label>ticks <input id="ticks" type="number" value="1" min="1" max="1000"></label>
+          <label>seed <input id="seed" type="number" value="0"></label>
+          <button id="run" type="button">Run</button>
+          <span id="runStatus" class="muted" aria-live="polite"></span>
+        </div>
+        <div id="runOut"></div>
+      </article>
+    </div>
+
+    <article class="card">
+      <h2>Generated material</h2>
+      <div id="files"></div>
+      <details>
+        <summary>Text report</summary>
+        <pre id="reporttext"></pre>
+      </details>
+    </article>
+
+    <article class="card" id="notesCard" hidden>
+      <h2>Notes</h2>
+      <ul id="notes" class="note"></ul>
+    </article>
+  </section>
+  </section>
+
+  <section id="panel-wheels" class="panel" hidden>
+    <div class="query">
+      <label class="field" for="wheelSearch">Wheel substrate</label>
+      <div class="row">
+        <input id="wheelSearch" placeholder="Search id, title, axiom, case or quantity…" autocomplete="off"
+               aria-label="Search wheels by id, title, axiom, case or quantity" />
+        <button id="wheelReload" type="button">Reload</button>
+      </div>
+      <div class="settings"><span id="wheelSummary" class="muted" aria-live="polite"></span></div>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <h2>Wheels <span class="count" id="wheelCount"></span></h2>
+        <div id="wheelList" class="wheelList"><p class="note">Loading wheels…</p></div>
+      </article>
+      <article class="card">
+        <h2 id="wheelTitle">Select a wheel</h2>
+        <div id="wheelDetail"><p class="note">Choose a wheel from the list to read its axioms, cases, dimensions and junctions.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="panel-concepts" class="panel" hidden>
+    <div class="query">
+      <label class="field" for="concept">Abstract ∆ concept</label>
+      <div class="row">
+        <input id="concept" placeholder="delta-sigma, PID, Kalman, translinear, square root…"
+               autocomplete="off" aria-label="Abstract delta concept" />
+        <button id="conceptGo" type="button">Map concept</button>
+      </div>
+      <div class="examples" aria-label="Example concepts">
+        <button type="button" class="chip concept-chip" data-c="delta-sigma">delta-sigma</button>
+        <button type="button" class="chip concept-chip" data-c="PID">PID</button>
+        <button type="button" class="chip concept-chip" data-c="phase-locked loop">PLL</button>
+        <button type="button" class="chip concept-chip" data-c="Kalman">Kalman</button>
+        <button type="button" class="chip concept-chip" data-c="translinear">translinear</button>
+        <button type="button" class="chip concept-chip" data-c="state space">state space</button>
+        <button type="button" class="chip concept-chip" data-c="saturation">saturation</button>
+        <button type="button" class="chip concept-chip" data-c="hysteresis">hysteresis</button>
+        <button type="button" class="chip concept-chip" data-c="square root">square root</button>
+      </div>
+      <p class="io">Every match is one of the 41 exact contracts. The tree marks the exact path and where the physical path stops.</p>
+    </div>
+    <div id="conceptError" class="error" role="alert" hidden></div>
+    <div id="conceptResult"></div>
+    <article class="card" id="catalogueCard">
+      <h2>∆ method map <span class="count" id="catalogueCount"></span></h2>
+      <p class="note" id="catalogueNote"></p>
+      <div id="catalogue"></div>
+    </article>
+  </section>
+
+  <section id="panel-methods" class="panel" hidden>
+    <div class="query">
+      <label class="field" for="problem">Problem statement</label>
+      <div class="row">
+        <input id="problem" placeholder="e.g. carry an irrational value as a physical signal"
+               value="compute an irrational value with an analog method"
+               autocomplete="off" aria-label="Physical problem statement" />
+        <button id="discoverGo" type="button">Find methods</button>
+      </div>
+      <div class="examples" aria-label="Example problems">
+        <button type="button" class="chip problem-chip" data-problem="compute an irrational value with an analog method">irrational / analog</button>
+        <button type="button" class="chip problem-chip" data-problem="carry an irrational value as a physical signal">carry irrational</button>
+        <button type="button" class="chip problem-chip" data-problem="compute a square root in a mechanical domain">root / mechanical</button>
+        <button type="button" class="chip problem-chip" data-problem="solve an equilibrium equation physically">equilibrium</button>
+        <button type="button" class="chip problem-chip" data-problem="compute a power law with a translinear circuit">power law</button>
+        <button type="button" class="chip problem-chip" data-problem="compute a square root, then carry the result as a bitstream">compute → carry</button>
+      </div>
+      <p class="io">Searches the exact contracts and declared substrate tables. It separates computing a relation from carrying a value, and reports missing materials instead of inventing a circuit.</p>
+    </div>
+    <div id="discoverError" class="error" role="alert" hidden></div>
+    <div id="discoverResult"></div>
+  </section>
+
+  <section id="panel-design" class="panel" hidden>
+    <div class="query">
+      <label class="field">Declared design spaces</label>
+      <p class="io" style="margin-top:0">Each route below searches only its declared alternatives. The solver evaluates every candidate through the exact device binding, checks the requested range endpoints, accuracy and cost ceiling, and selects the cheapest passing design. Netlist, measurement and dynamic gaps remain explicit.</p>
+      <div class="settings"><span id="designSummary" class="muted" aria-live="polite"></span></div>
+    </div>
+    <article class="card compareCard">
+      <h2>Method comparison</h2>
+      <p class="note">Solve any set of declared routes under shared requested constraints. A blank input keeps each route's own declared default; costs remain declared complexity units, and no cross-route scalar winner is claimed.</p>
+      <div id="compareRoutes" class="compareRoutes"></div>
+      <div id="compareFields" class="designFields"></div>
+      <div class="designActions">
+        <button id="compareGo" class="designSolve" type="button">Compare exact routes</button>
+        <span id="compareStatus" class="muted" aria-live="polite"></span>
+      </div>
+      <div id="compareError" class="error" role="alert" hidden></div>
+      <div id="compareOut" class="designResult"></div>
+    </article>
+    <div id="designError" class="error" role="alert" hidden></div>
+    <div id="designSpaces" class="designGrid"><p class="note">Loading declared design spaces…</p></div>
+  </section>
+</main>
+
+<footer>
+  Exact rationals in the core · material bundles are <span class="mono">cent-material/1</span> ·
+  files are written only to the server's output folder.
+</footer>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const state = { last: null, wheels: null, wheelId: null, catalogue: null, design: null, compare: null, comparison: null };
+
+  function node(tag, cls, text) {
+    const el = document.createElement(tag);
+    if (cls) el.className = cls;
+    if (text !== undefined && text !== null) el.textContent = String(text);
+    return el;
+  }
+  function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+  function showError(message) {
+    const box = $("error");
+    box.textContent = message;
+    box.hidden = false;
+  }
+  function hideError() { $("error").hidden = true; }
+
+  function downloadText(name, text, type) {
+    const blob = new Blob([text], { type });
+    const url = URL.createObjectURL(blob);
+    const link = node("a");
+    link.href = url;
+    link.download = name;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
+  async function get(path, params) {
+    const url = new URL(path, window.location.origin);
+    for (const [key, value] of Object.entries(params || {})) {
+      if (Array.isArray(value)) value.forEach((item) => url.searchParams.append(key, item));
+      else if (value !== undefined && value !== null) url.searchParams.set(key, value);
+    }
+    const res = await fetch(url);
+    let data;
+    try { data = await res.json(); }
+    catch { throw new Error("server returned " + res.status); }
+    if (!res.ok || !data.ok) throw new Error(data.error || ("server returned " + res.status));
+    return data;
+  }
+
+  function stat(label, value, accent) {
+    const el = node("div", "stat" + (accent ? " accent" : ""));
+    el.append(node("span", null, label + " "), node("b", null, value));
+    return el;
+  }
+
+  function renderSummary(d) {
+    const box = $("summary");
+    clear(box);
+    box.append(
+      stat("£", d.target, true),
+      stat("¢ steps", d.dag.length),
+      stat("∆", d.implementations),
+      stat("∆Σ", d.delta_sigma),
+      stat("SPICE", d.template || "none"),
+    );
+  }
+
+  function renderDag(d) {
+    const box = $("dag");
+    clear(box);
+    $("dagcount").textContent = d.dag.length ? d.dag.length + " step(s)" : "";
+    if (!d.dag.length) {
+      box.append(node("p", "note", "The expression is a bare input."));
+      return;
+    }
+    for (const op of d.dag) {
+      const row = node("div", "dagrow");
+      row.append(
+        node("span", "out", op.output),
+        node("span", "muted", "="),
+        node("span", "op", op.op),
+        node("span", "muted", "(" + op.inputs.join(", ") + ")"),
+      );
+      if (op.const !== null) row.append(node("span", "factor", "[× " + op.const + "]"));
+      box.append(row);
+    }
+  }
+
+  function renderPrimitives(d) {
+    const box = $("primitives");
+    clear(box);
+    let total = 0;
+    for (const prim of d.primitives) {
+      total += prim.count;
+      const chip = node("span", "prim");
+      chip.append(node("b", null, prim.name), node("span", "muted", " ×" + prim.count));
+      box.append(chip);
+    }
+    $("primcount").textContent = total ? total + " total" : "";
+    $("primmeta").textContent =
+      "atomic " + d.atomic + " · composite " + d.composite +
+      " · " + d.implementations + " ∆ (" + d.delta_sigma + " delta-sigma)";
+  }
+
+  function renderDelta(d) {
+    const body = document.querySelector("#delta tbody");
+    clear(body);
+    $("implcount").textContent = d.implementations + " found · top " + d.top.length;
+    for (const impl of d.top) {
+      const tr = node("tr");
+      tr.append(
+        node("td", "mono", impl.rank),
+        node("td", "mono", impl.cost),
+        node("td", null, impl.domain),
+        node("td", null, impl.carrier),
+        node("td", impl.delta_sigma ? "ds" : "dash", impl.delta_sigma ? "∆Σ" : "—"),
+        node("td", null, impl.components.join(", ")),
+      );
+      body.append(tr);
+    }
+    if (!d.top.length) {
+      const tr = node("tr");
+      const td = node("td", "muted", "No ranked implementations.");
+      td.colSpan = 6;
+      tr.append(td);
+      body.append(tr);
+    }
+  }
+
+  function renderProgram(d) {
+    const box = $("program");
+    clear(box);
+    if (!d.program) {
+      box.append(node("p", "note",
+        "No exact program for this £ — see Notes. The ¢/∆ report above is still complete."));
+      return;
+    }
+    const list = node("div", "program");
+    d.program.instructions.forEach((ins, i) => {
+      const row = node("div", "ins");
+      row.append(
+        node("span", "idx", String(i + 1).padStart(2, "0")),
+        node("span", "op", ins.op),
+        node("span", "muted", "(" + ins.inputs.join(", ") + ")"),
+        node("span", "muted", "→"),
+        node("span", "out", ins.output),
+      );
+      const params = Object.entries(ins.params);
+      if (params.length) {
+        row.append(node("span", "factor", "[" + params.map(([k, v]) => k + "=" + v).join(", ") + "]"));
+      }
+      list.append(row);
+    });
+    box.append(list);
+    const io = node("p", "io");
+    io.append(
+      node("span", null, "inputs: "),
+      node("code", null, d.program.inputs.map((i) => i.name).join(", ") || "(none)"),
+      node("span", null, "  ·  outputs: "),
+      node("code", null, d.program.outputs.join(", ") || "(none)"),
+    );
+    box.append(io);
+  }
+
+  function renderRunner(d) {
+    const box = $("runInputs");
+    clear(box);
+    clear($("runOut"));
+    $("runStatus").textContent = "";
+    const canRun = Boolean(d.program);
+    $("run").disabled = !canRun;
+    $("ticks").disabled = !canRun;
+    $("seed").disabled = !canRun;
+    if (!canRun) {
+      box.append(node("p", "note", "This material has no exact program to run."));
+      return;
+    }
+    for (const input of d.program.inputs) {
+      if (input.binding !== null) {
+        box.append(node("span", "binding", input.name + " = " + input.binding));
+        continue;
+      }
+      const label = node("label", null, input.name);
+      const field = document.createElement("input");
+      field.type = "text";
+      field.value = "1";
+      field.dataset.wire = input.name;
+      field.spellcheck = false;
+      field.setAttribute("aria-label", input.name);
+      label.append(field);
+      box.append(label);
+    }
+  }
+
+  function renderRun(data) {
+    const box = $("runOut");
+    clear(box);
+    if (!data.rows.length) {
+      box.append(node("p", "note", "No ticks returned."));
+      return;
+    }
+    const wrap = node("div", "tablewrap");
+    const table = node("table");
+    const head = node("tr");
+    head.append(node("th", "mono", "t"));
+    for (const wire of data.wires) head.append(node("th", "mono", wire));
+    table.append(head);
+    for (const row of data.rows) {
+      const tr = node("tr");
+      tr.append(node("td", "mono", row.t));
+      for (const wire of data.wires) {
+        tr.append(node("td", "mono", row.values[wire] === undefined ? "—" : row.values[wire]));
+      }
+      table.append(tr);
+    }
+    wrap.append(table);
+    box.append(wrap);
+  }
+
+  function bytesLabel(n) {
+    if (n < 1024) return n + " B";
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + " KB";
+    return (n / (1024 * 1024)).toFixed(1) + " MB";
+  }
+
+  function renderFiles(d) {
+    const box = $("files");
+    clear(box);
+    if (!d.files.length) {
+      box.append(node("p", "note",
+        "Saving is off. Tick “save material” and compile again to collect the bundle."));
+      return;
+    }
+    const list = node("div", "files");
+    for (const file of d.files) {
+      const link = node("a", "filelink");
+      link.href = file.url;
+      link.download = file.name;
+      link.append(node("span", null, file.name), node("span", "size", bytesLabel(file.bytes)));
+      list.append(link);
+    }
+    box.append(list);
+    if (d.bundle) {
+      const link = node("a", "bundle", "Download bundle (.zip)");
+      link.href = d.bundle.url;
+      link.download = d.bundle.name;
+      box.append(link);
+    }
+  }
+
+  function renderNotes(d) {
+    const card = $("notesCard");
+    const list = $("notes");
+    clear(list);
+    if (!d.notes.length) { card.hidden = true; return; }
+    card.hidden = false;
+    for (const note of d.notes) list.append(node("li", null, note));
+  }
+
+  function render(d) {
+    $("results").hidden = false;
+    renderSummary(d);
+    renderDag(d);
+    renderPrimitives(d);
+    renderDelta(d);
+    renderProgram(d);
+    renderRunner(d);
+    renderFiles(d);
+    renderNotes(d);
+    $("reporttext").textContent = d.report_text;
+  }
+
+  async function compile() {
+    const relation = $("relation").value.trim();
+    if (!relation) { showError("Type a target relation first."); return; }
+    hideError();
+    $("go").disabled = true;
+    $("status").textContent = "compiling…";
+    const started = performance.now();
+    try {
+      const data = await get("/api/report", {
+        relation,
+        top: Number($("top").value) || 6,
+        save: $("save").checked ? "1" : "0",
+      });
+      state.last = data;
+      render(data);
+      $("status").textContent = "compiled in " + Math.round(performance.now() - started) + " ms";
+    } catch (err) {
+      $("status").textContent = "";
+      showError(err.message);
+    } finally {
+      $("go").disabled = false;
+    }
+  }
+
+  async function runExact() {
+    const d = state.last;
+    if (!d || !d.id) {
+      clear($("runOut"));
+      $("runOut").append(node("p", "error-inline", "Compile a £ first; the runner uses the cached report."));
+      return;
+    }
+    const sets = {};
+    document.querySelectorAll("#runInputs input[data-wire]").forEach((el) => {
+      if (el.value.trim() !== "") sets[el.dataset.wire] = el.value.trim();
+    });
+    const ticks = Math.max(1, Math.min(1000, Number($("ticks").value) || 1));
+    $("run").disabled = true;
+    $("runStatus").textContent = "running…";
+    try {
+      const data = await get("/api/eval", {
+        id: d.id,
+        ticks,
+        seed: Number($("seed").value) || 0,
+        set: Object.entries(sets).map(([name, value]) => name + ":" + value),
+      });
+      renderRun(data);
+      $("runStatus").textContent = data.ticks + " tick(s)";
+    } catch (err) {
+      clear($("runOut"));
+      $("runOut").append(node("p", "error-inline", err.message));
+      $("runStatus").textContent = "";
+    } finally {
+      $("run").disabled = false;
+    }
+  }
+
+  // ----------------------------------------------------------------
+  // wheels
+  // ----------------------------------------------------------------
+  function yesNo(value) { return value ? "yes" : "no"; }
+
+  async function loadWheels(force) {
+    if (state.wheels && !force) { renderWheelList(); return; }
+    $("wheelSummary").textContent = "loading wheels…";
+    try {
+      state.wheels = await get("/api/wheels");
+      renderWheelList();
+      if (state.wheelId) openWheel(state.wheelId);
+    } catch (err) {
+      $("wheelSummary").textContent = err.message;
+    }
+  }
+
+  function renderWheelList() {
+    const data = state.wheels;
+    if (!data) return;
+    const query = ($("wheelSearch").value || "").trim().toLowerCase();
+    const box = $("wheelList");
+    clear(box);
+    const items = data.wheels.filter((wheel) =>
+      !query || (wheel.id + " " + wheel.title + " " + wheel.family + " " + (wheel.keywords || ""))
+        .toLowerCase().includes(query)
+    );
+    $("wheelCount").textContent = items.length + " shown";
+    $("wheelSummary").textContent =
+      data.total_wheels + " wheels · " + data.total_axioms + " axioms · " +
+      data.total_cases + " cases · " + data.total_spokes + " spokes · axes " +
+      data.axes.join(" · ") +
+      (data.reserved && data.reserved.length ? " · reserved " + data.reserved.join(", ") : "");
+    if (!items.length) {
+      box.append(node("p", "note", "No wheel matches that search."));
+      return;
+    }
+    for (const wheel of items) {
+      const button = node("button", "wheelItem" + (wheel.id === state.wheelId ? " active" : ""));
+      button.type = "button";
+      button.append(
+        node("span", "wid", wheel.id),
+        node("span", "wtitle", wheel.title),
+        node("span", "wmeta", wheel.n_axioms + " ax · " + wheel.n_cases + " cases · " + wheel.n_spokes + " sp"),
+      );
+      button.addEventListener("click", () => openWheel(wheel.id));
+      box.append(button);
+    }
+  }
+
+  async function openWheel(id) {
+    state.wheelId = id;
+    renderWheelList();
+    $("wheelTitle").textContent = id + " — loading…";
+    try {
+      const data = await get("/api/wheels/" + encodeURIComponent(id));
+      renderWheelDetail(data.wheel);
+    } catch (err) {
+      $("wheelTitle").textContent = "Wheel " + id;
+      clear($("wheelDetail"));
+      $("wheelDetail").append(node("p", "error-inline", err.message));
+    }
+  }
+
+  function wheelSection(title) {
+    const wrap = node("div", "wheelSection");
+    wrap.append(node("h3", null, title));
+    return wrap;
+  }
+
+  function renderWheelDetail(wheel) {
+    $("wheelTitle").textContent = wheel.id + " — " + wheel.title;
+    const box = $("wheelDetail");
+    clear(box);
+    const badges = node("div", "quantities");
+    badges.append(
+      node("span", "badge info", wheel.family),
+      node("span", "badge", wheel.axioms.length + " axioms"),
+      node("span", "badge", wheel.cases.length + " cases"),
+      node("span", "badge", wheel.quantities.length + " quantities"),
+      node("span", "badge", (wheel.spoke_count || 0) + " spokes"),
+    );
+    box.append(badges);
+
+    const quantities = node("div", "quantities");
+    for (const quantity of wheel.quantities) quantities.append(node("span", "quantity", quantity));
+    box.append(quantities);
+
+    const axioms = wheelSection("Axioms");
+    for (const axiom of wheel.axioms) axioms.append(node("div", "axiom", axiom));
+    box.append(axioms);
+
+    const spokes = wheelSection("Spokes");
+    const spokeList = wheel.spokes || [];
+    spokes.append(node("p", "note",
+      "Two-input formulas derived from the axioms by exact linear algebra; the other quantities cancel."));
+    if (!spokeList.length) {
+      spokes.append(node("p", "note", "No two-input spoke is derivable from these axioms."));
+    } else {
+      const spokeDetails = node("details");
+      spokeDetails.append(node("summary", null, "show " + spokeList.length + " derived formulas"));
+      const spokeWrap = node("div", "tablewrap");
+      const spokeTable = node("table");
+      const spokeHead = node("tr");
+      for (const label of ["target", "inputs", "formula", "certificate"]) {
+        spokeHead.append(node("th", label === "target" || label === "inputs" ? "mono" : null, label));
+      }
+      spokeTable.append(spokeHead);
+      for (const spoke of spokeList) {
+        const tr = node("tr");
+        tr.append(
+          node("td", "mono", spoke.target),
+          node("td", "mono", spoke.inputs.join(", ")),
+          node("td", "mono", spoke.formula),
+          node("td", "mono", spoke.certificate.map((item) => item.axiom + " ×" + item.weight).join(" · ")),
+        );
+        spokeTable.append(tr);
+      }
+      spokeWrap.append(spokeTable);
+      spokeDetails.append(spokeWrap);
+      spokes.append(spokeDetails);
+    }
+    box.append(spokes);
+
+    const cases = wheelSection("Cases");
+    const wrap = node("div", "tablewrap");
+    const table = node("table");
+    const head = node("tr");
+    for (const label of ["id", "equation", "dimensional", "derivable", "status"]) {
+      head.append(node("th", label === "id" ? "mono" : null, label));
+    }
+    table.append(head);
+    for (const item of wheel.cases) {
+      const tr = node("tr");
+      tr.append(
+        node("td", "mono", item.id),
+        node("td", "mono", item.equation),
+        node("td", "mono" + (item.expected_dimensional ? "" : " dash"), yesNo(item.expected_dimensional)),
+        node("td", "mono" + (item.expected_derivable ? "" : " dash"), yesNo(item.expected_derivable)),
+        node("td", null, String(item.physical_status).replaceAll("_", " ")),
+      );
+      table.append(tr);
+    }
+    wrap.append(table);
+    cases.append(wrap);
+    box.append(cases);
+
+    const dimensions = wheelSection("Dimensions");
+    const details = node("details");
+    details.append(node("summary", null, "show axes and exponents"));
+    const dimWrap = node("div", "tablewrap");
+    const dimTable = node("table");
+    const dimHead = node("tr");
+    dimHead.append(node("th", null, "quantity"));
+    const first = wheel.quantities.length ? wheel.dimensions[wheel.quantities[0]] : null;
+    for (const axis of (first ? first.axes : [])) dimHead.append(node("th", "mono", axis));
+    dimTable.append(dimHead);
+    for (const quantity of wheel.quantities) {
+      const dim = wheel.dimensions[quantity];
+      if (!dim) continue;
+      const tr = node("tr");
+      tr.append(node("td", "mono", quantity));
+      for (const exponent of dim.exponents) tr.append(node("td", "mono", exponent));
+      dimTable.append(tr);
+    }
+    dimWrap.append(dimTable);
+    details.append(dimWrap);
+    dimensions.append(details);
+    box.append(dimensions);
+
+    if (wheel.junctions.length) {
+      const junctions = wheelSection("Junctions");
+      for (const link of wheel.junctions) {
+        const other = link.wheel_a === wheel.id ? link.wheel_b : link.wheel_a;
+        const here = link.wheel_a === wheel.id ? link.name_a : (link.name_b || link.name_a);
+        const there = link.wheel_a === wheel.id ? (link.name_b || link.name_a) : link.name_a;
+        junctions.append(node("div", "axiom", wheel.id + "." + here + " ↔ " + other + "." + there + " — " + link.reason));
+      }
+      box.append(junctions);
+    }
+    if (wheel.non_identities.length) {
+      const non = wheelSection("Non-identities");
+      for (const link of wheel.non_identities) {
+        const other = link.wheel_a === wheel.id ? link.wheel_b : link.wheel_a;
+        non.append(node("div", "axiom", link.name + " ↔ " + other + " — " + link.reason));
+      }
+      box.append(non);
+    }
+  }
+
+  // ----------------------------------------------------------------
+  // concept map
+  // ----------------------------------------------------------------
+  async function loadCatalogue(force) {
+    if (state.catalogue && !force) return;
+    try {
+      const data = await get("/api/concepts");
+      state.catalogue = data.catalogue;
+      renderCatalogue();
+    } catch (err) {
+      $("catalogueNote").textContent = err.message;
+    }
+  }
+
+  function renderCatalogue() {
+    const data = state.catalogue;
+    if (!data) return;
+    $("catalogueCount").textContent = data.total + " contracts";
+    $("catalogueNote").textContent = data.note;
+    const box = $("catalogue");
+    clear(box);
+    for (const group of data.groups) {
+      box.append(node("div", "catalogueGroup", group.label));
+      const grid = node("div", "methodGrid");
+      for (const method of group.methods) {
+        const button = node("button", "methodBtn");
+        button.type = "button";
+        button.title = method.summary || method.signature;
+        button.append(
+          node("span", "mname", method.name),
+          node("span", "mmeta", method.kind + " · " + method.signature),
+        );
+        const flags = node("span", "mflags");
+        for (const [label, on] of [["E", method.exact], ["S", method.simulated], ["A", method.applied]]) {
+          flags.append(node("span", "flag" + (on ? " on" : ""), label));
+        }
+        button.append(flags);
+        button.addEventListener("click", () => mapConcept(method.id));
+        grid.append(button);
+      }
+      box.append(grid);
+    }
+  }
+
+  function treeItem(item) {
+    const li = node("li", "treeNode " + item.status);
+    const head = node("div", "treeHead");
+    head.append(node("span", "dot " + item.status), node("span", "treeLabel", item.label));
+    if (item.method) {
+      const action = node("button", "treeAction", "explore");
+      action.type = "button";
+      action.addEventListener("click", () => mapConcept(item.method));
+      head.append(action);
+    }
+    if (item.wheel) {
+      const action = node("button", "treeAction", "open wheel");
+      action.type = "button";
+      action.addEventListener("click", () => {
+        showPanel("wheels");
+        loadWheels().then(() => openWheel(item.wheel));
+      });
+      head.append(action);
+    }
+    li.append(head, node("p", "treeDetail", item.detail));
+    if (item.children && item.children.length) {
+      const children = node("ul", "treeChildren");
+      for (const child of item.children) children.append(treeItem(child));
+      li.append(children);
+    }
+    return li;
+  }
+
+  function conceptSuggestions(list) {
+    const examples = node("div", "examples");
+    for (const suggestion of list) {
+      const button = node("button", "chip", suggestion.name);
+      button.type = "button";
+      button.addEventListener("click", () => mapConcept(suggestion.id));
+      examples.append(button);
+    }
+    return examples;
+  }
+
+  function renderConcept(data) {
+    const box = $("conceptResult");
+    clear(box);
+    if (!data.matched) {
+      const card = node("article", "card");
+      card.append(node("h2", null, "No exact contract matched “" + data.query + "”"));
+      card.append(node("p", "note",
+        "The explorer only maps concepts that exist in the 41-contract vocabulary. Nothing was invented."));
+      if (data.suggestions.length) card.append(conceptSuggestions(data.suggestions));
+      box.append(card);
+      return;
+    }
+
+    const method = data.method;
+    const head = node("article", "conceptHead");
+    head.append(node("h2", null, method.name));
+    head.append(node("div", "sig", method.id + " · " + method.kind + " · " + method.tier + " · " + method.signature));
+    head.append(node("p", "headline", data.headline));
+    const stats = node("div", "conceptStats");
+    stats.append(
+      stat("exact", data.counts.exact + "/" + data.counts.exact_total, true),
+      stat("physical", data.counts.physical + "/" + data.counts.physical_total),
+      stat("contract", method.status.replaceAll("_", " ")),
+    );
+    head.append(stats);
+    head.append(node("p", "io", method.summary));
+    box.append(head);
+
+    const treeCard = node("article", "card");
+    treeCard.append(node("h2", null, "Concept tree"));
+    const tree = node("ul", "tree");
+    for (const branch of data.branches) tree.append(treeItem(branch));
+    treeCard.append(tree);
+    box.append(treeCard);
+
+    if (data.suggestions.length) {
+      const card = node("article", "card");
+      card.append(node("h2", null, "Nearby contracts"));
+      card.append(conceptSuggestions(data.suggestions));
+      box.append(card);
+    }
+  }
+
+  async function mapConcept(value) {
+    const query = String(value !== undefined ? value : $("concept").value).trim();
+    if (!query) {
+      $("conceptError").textContent = "Type a concept first.";
+      $("conceptError").hidden = false;
+      return;
+    }
+    $("concept").value = query;
+    $("conceptError").hidden = true;
+    const box = $("conceptResult");
+    clear(box);
+    box.append(node("p", "note", "mapping…"));
+    try {
+      const data = await get("/api/concepts", { q: query });
+      renderConcept(data);
+    } catch (err) {
+      clear(box);
+      $("conceptError").textContent = err.message;
+      $("conceptError").hidden = false;
+    }
+  }
+
+  async function findMethods(value) {
+    const query = String(value !== undefined ? value : $("problem").value).trim();
+    if (!query) {
+      $("discoverError").textContent = "Describe the problem first.";
+      $("discoverError").hidden = false;
+      return;
+    }
+    $("problem").value = query;
+    $("discoverError").hidden = true;
+    const box = $("discoverResult");
+    clear(box);
+    box.append(node("p", "note", "searching declared methods…"));
+    try {
+      const data = await get("/api/discover", { q: query });
+      renderDiscovery(data);
+    } catch (err) {
+      clear(box);
+      $("discoverError").textContent = err.message;
+      $("discoverError").hidden = false;
+    }
+  }
+
+  function renderDiscovery(data) {
+    const box = $("discoverResult");
+    clear(box);
+    const head = node("article", "discoverHead");
+    head.append(node("h2", null, data.matched ? "Candidate methods" : "No recognised goal"));
+    head.append(node("p", "headline", data.headline));
+    if (data.problem) {
+      const multi = (data.problem.steps || []).length > 1;
+      const goals = (data.problem.goals || []).join(", ");
+      const constraints = (data.problem.constraints || []);
+      head.append(node("div", "discoverProblem",
+        multi
+          ? "interpreted as: " + data.problem.steps.length + " ordered goal steps" +
+            (constraints.length ? " · " + constraints.join(", ") : "")
+          : "interpreted as: " + data.problem.behavior + " / " + data.problem.object +
+            (goals ? " · " + goals : "") +
+            (constraints.length ? " · " + constraints.join(", ") : "")));
+    }
+    if ((data.steps || []).length > 1) {
+      const stepBox = node("div", "discoverProblem");
+      for (const step of data.steps) {
+        stepBox.append(node("div", null,
+          "step " + step.index + ": " + step.behavior + " / " + step.object +
+          " · " + (step.goals || []).join(", ") +
+          (step.method_count !== undefined ? " · " + step.method_count + " candidate(s)" : "")));
+      }
+      head.append(stepBox);
+    }
+    if ((data.notes || []).length) {
+      for (const note of data.notes) head.append(node("p", "io", note));
+    }
+    box.append(head);
+
+    if ((data.pipeline || []).length) {
+      const flow = node("article", "card");
+      flow.append(node("h2", null, "Compiler pipeline"));
+      for (const stage of data.pipeline) {
+        const row = node("div", "dagrow");
+        row.append(
+          node("span", "badge " + stage.status, stage.status),
+          node("span", "out", stage.label),
+          node("span", "muted", stage.detail),
+        );
+        flow.append(row);
+      }
+      box.append(flow);
+    }
+
+    if (!data.matched) {
+      const card = node("article", "card");
+      card.append(node("h2", null, "Try a recognised goal"));
+      if ((data.suggestions || []).length) {
+        const examples = node("div", "examples");
+        for (const suggestion of data.suggestions) {
+          const button = node("button", "chip", suggestion.name);
+          button.type = "button";
+          button.addEventListener("click", () => findMethods(suggestion.name));
+          examples.append(button);
+        }
+        card.append(examples);
+      }
+      box.append(card);
+      return;
+    }
+
+    const groups = node("div", "methodGroups");
+    for (const group of data.groups || []) {
+      const section = node("article", "methodGroup");
+      section.append(node("h2", null, group.label + " · " + group.count));
+      const list = node("div", "methodList");
+      for (const method of group.methods) {
+        const card = node("article", "methodCard");
+        card.append(node("h3", null, method.name));
+        card.append(node("div", "methodMeta",
+          method.domain_label + " · " + method.carrier + " · " + method.route +
+          " · " + method.contract_status_label + " · score " + method.score));
+        card.append(node("p", "methodDescription", method.description));
+        if ((method.components || []).length) {
+          const line = node("p", "methodLine");
+          line.append(node("b", null, "material: "), node("span", null, method.components.join(", ")));
+          card.append(line);
+        }
+        const coverage = node("p", "methodLine");
+        coverage.append(node("b", null, "coverage: "), node("span", null, method.coverage));
+        card.append(coverage);
+        const pills = node("div", "evidencePills");
+        for (const evidence of method.evidence || []) {
+          if (!["exact contract", "dynamic simulation", "application / demo", "route model", "route simulation"].includes(evidence.kind)) continue;
+          pills.append(node("span", "evidencePill " + evidence.status,
+            evidence.kind + ": " + evidence.status));
+        }
+        if (pills.childElementCount) card.append(pills);
+        const wheelGrounding = method.wheel_grounding || {};
+        if ((wheelGrounding.candidates || []).length) {
+          const grounds = node("div", "methodLine");
+          grounds.append(node("b", null, "wheel graph proofs: "));
+          for (const item of wheelGrounding.candidates) {
+            const pill = node("span", "evidencePill pass", item.wheel + " " + item.axiom_id);
+            pill.title = item.equation + " → " + item.formula;
+            grounds.append(pill, node("span", "muted", " "));
+          }
+          card.append(grounds);
+        }
+        if ((method.wheel_material || []).length) {
+          const wheels = node("div", "methodLine");
+          wheels.append(node("b", null, "wheel text candidates: "));
+          for (const item of method.wheel_material) {
+            const button = node("button", "wheelPill", item.wheel);
+            button.type = "button";
+            button.title = item.title + " — " + item.scope;
+            button.addEventListener("click", () => {
+              showPanel("wheels");
+              loadWheels().then(() => openWheel(item.wheel));
+            });
+            wheels.append(button, node("span", "muted", " "));
+          }
+          card.append(wheels);
+        }
+        const declaredBridges = (method.wheel_mappings || []).filter(
+          (item) => item.status === "declared"
+        );
+        if (declaredBridges.length) {
+          const bridges = node("div", "methodLine");
+          bridges.append(node("b", null, "typed wheel bridges: "));
+          for (const item of declaredBridges) {
+            const ports = (item.ports || [])
+              .filter((port) => port.status === "pass")
+              .map((port) => port.method_port + "→" + port.wheel_quantity)
+              .join(", ");
+            bridges.append(node("span", null, item.wheel + " [" + ports + "] "));
+          }
+          card.append(bridges);
+        }
+        if (method.design) {
+          const solver = node("div", "methodSolver");
+          const button = node("button", "solverLink", "Solve declared design");
+          button.type = "button";
+          button.title = method.design.name + " — " + method.design.options.length + " declared options";
+          button.addEventListener("click", async () => {
+            showPanel("design");
+            await loadDesign();
+            focusDesign(method.design.route);
+          });
+          solver.append(button, node("span", "muted", method.design.options.length + " declared options"));
+          card.append(solver);
+        }
+        if ((method.gaps || []).length) {
+          const gaps = node("ul", "methodGaps");
+          for (const gap of method.gaps.slice(0, 4)) gaps.append(node("li", null, gap));
+          card.append(gaps);
+        }
+        list.append(card);
+      }
+      section.append(list);
+      groups.append(section);
+    }
+    box.append(groups);
+
+    if ((data.gaps || []).length) {
+      const card = node("article", "card");
+      card.append(node("h2", null, "System gaps"));
+      const list = node("ul", "note");
+      for (const gap of data.gaps) list.append(node("li", null, gap));
+      card.append(list);
+      box.append(card);
+    }
+  }
+
+  function exact(value) {
+    if (value === null || value === undefined) return "—";
+    if (typeof value === "object") {
+      if ("num" in value && "den" in value) {
+        return String(value.den) === "1" ? String(value.num) : value.num + "/" + value.den;
+      }
+      return JSON.stringify(value);
+    }
+    return String(value);
+  }
+
+  function decimal(value, places) {
+    if (!value || typeof value !== "object" || !("num" in value) || !("den" in value)) {
+      return exact(value);
+    }
+    const count = places || 10;
+    let numerator = BigInt(value.num);
+    const denominator = BigInt(value.den);
+    const negative = numerator < 0n;
+    if (negative) numerator = -numerator;
+    const scale = 10n ** BigInt(count);
+    const scaled = numerator * scale / denominator;
+    const digits = scaled.toString().padStart(count + 1, "0");
+    return (negative ? "-" : "") + digits.slice(0, -count) + "." + digits.slice(-count);
+  }
+
+  function paramsText(params) {
+    const values = Object.entries(params || {}).map(([key, value]) => key + "=" + exact(value));
+    return values.length ? values.join(", ") : "—";
+  }
+
+  function designFailures(design) {
+    const items = [];
+    for (const candidate of design.candidates || []) {
+      for (const failure of candidate.failures || []) {
+        items.push(candidate.option.name + ": " + failure);
+      }
+    }
+    if (!items.length) return null;
+    const box = node("div", "designRejects");
+    box.append(node("div", "methodMeta", "Rejected candidates"));
+    const list = node("ul", "methodGaps");
+    for (const item of items) list.append(node("li", null, item));
+    box.append(list);
+    return box;
+  }
+
+  function renderDesignResult(box, design) {
+    clear(box);
+    const summary = node("div", "designSummary");
+    summary.append(
+      node("span", "designStatus " + (design.status === "solved" ? "pass" : "gap"), design.status),
+      node("span", "muted", design.route_name),
+    );
+    box.append(summary);
+
+    if (design.ranking) {
+      const ranking = node("div", "designSelected");
+      ranking.append(node("div", null, "Pareto ranking · " + design.ranking.profile));
+      ranking.append(node("div", "mono",
+        "front: " + ((design.ranking.front || []).join(", ") || "none")));
+      ranking.append(node("div", "muted", design.ranking.rule));
+      box.append(ranking);
+    }
+
+    const wrap = node("div", "tablewrap");
+    const table = node("table");
+    const head = node("thead");
+    const headRow = node("tr");
+    for (const label of ["option", "cost", "max error", "pareto", "bandwidth", "status"]) {
+      headRow.append(node("th", null, label));
+    }
+    head.append(headRow);
+    table.append(head);
+    const body = node("tbody");
+    for (const candidate of design.candidates || []) {
+      const tr = node("tr");
+      const error = node("td", "mono", decimal(candidate.max_relative_error));
+      error.title = exact(candidate.max_relative_error);
+      const rank = node("td", "mono",
+        candidate.pareto_rank == null ? "—" : String(candidate.pareto_rank));
+      rank.title = (candidate.dominated_by || []).length
+        ? "dominated by " + candidate.dominated_by.join(", ")
+        : "non-dominated";
+      tr.append(
+        node("td", "mono", candidate.option.name),
+        node("td", "mono", exact(candidate.option.cost)),
+        error,
+        rank,
+        node("td", "mono", candidate.bandwidth ? candidate.bandwidth.status : "—"),
+        node("td", candidate.status === "pass" ? "ds" : "dash", candidate.status),
+      );
+      body.append(tr);
+    }
+    table.append(body);
+    wrap.append(table);
+    box.append(wrap);
+
+    if (design.selected) {
+      const selected = node("div", "designSelected");
+      selected.append(node("div", null, "selected " + design.selected.option.name));
+      selected.append(node("div", "mono", "parameters: " + paramsText(design.selected.option.parameters)));
+      const errorLine = node("div", "muted",
+        "cost " + exact(design.selected.option.cost) +
+        " · max relative error " + decimal(design.selected.max_relative_error));
+      errorLine.title = exact(design.selected.max_relative_error);
+      selected.append(errorLine);
+      const checks = (design.selected.binding || {}).checks || [];
+      if (checks.length) {
+        const passed = checks.filter((check) => check.passed).length;
+        selected.append(node("div", "muted", "device checks " + passed + "/" + checks.length + " passed"));
+      }
+      if (design.constraints && design.constraints.min_bandwidth && design.selected.bandwidth) {
+        selected.append(node("div", "muted", design.selected.bandwidth.detail));
+      }
+      box.append(selected);
+    } else {
+      box.append(node("p", "error-inline", "No declared candidate satisfies these constraints."));
+    }
+
+    const rejects = designFailures(design);
+    if (rejects) box.append(rejects);
+
+    const plan = node("div", "designPlan");
+    for (const step of design.verification_plan || []) {
+      const row = node("div", "designPlanRow");
+      row.append(
+        node("span", "badge " + step.status, step.status),
+        node("span", "name", step.name),
+        node("span", "detail", step.detail),
+      );
+      if (step.command) row.append(node("code", "mono", step.command));
+      plan.append(row);
+    }
+    box.append(plan);
+
+    if ((design.gaps || []).length) {
+      const details = node("details", "designGaps");
+      details.append(node("summary", null, "Remaining gaps and limits"));
+      const gaps = node("ul", "methodGaps");
+      for (const gap of design.gaps) gaps.append(node("li", null, gap));
+      details.append(gaps);
+      box.append(details);
+    }
+  }
+
+  function renderPhysical(box, plan) {
+    clear(box);
+    const selected = (plan.selected || {}).option || "—";
+    const summary = node("div", "designSummary");
+    summary.append(
+      node("span", "designStatus pass", "reference"),
+      node("span", "muted", plan.route_name + " · " + selected),
+    );
+    box.append(summary);
+    box.append(node("p", "note", plan.status));
+
+    const stages = node("div", "physicalStages");
+    for (const block of (plan.layout || {}).blocks || []) {
+      stages.append(node("div", "physicalStage",
+        block.stage + " · " + (block.parts || []).join(", ")));
+    }
+    box.append(stages);
+
+    const wrap = node("div", "tablewrap");
+    const table = node("table");
+    const head = node("thead");
+    const headRow = node("tr");
+    for (const label of ["ref", "role", "value", "nodes"]) headRow.append(node("th", null, label));
+    head.append(headRow);
+    table.append(head);
+    const body = node("tbody");
+    for (const part of plan.parts || []) {
+      const tr = node("tr");
+      const value = node("td", "mono", part.expression || part.value_text || "behavioral");
+      value.title = part.expression || exact(part.value);
+      tr.append(
+        node("td", "mono", part.ref),
+        node("td", part.role),
+        value,
+        node("td", "mono", (part.nodes || []).join(" / ")),
+      );
+      body.append(tr);
+    }
+    table.append(body);
+    wrap.append(table);
+    box.append(wrap);
+
+    const checks = (plan.checks || []).filter((check) => check.status === "pass").length;
+    box.append(node("div", "muted",
+      "reference checks " + checks + "/" + (plan.checks || []).length +
+      " · floorplan " + plan.layout.coordinate_unit));
+
+    const deck = node("details", "physicalDeck");
+    deck.append(node("summary", null, "Reference SPICE deck (not simulated)"));
+    deck.append(node("pre", null, plan.spice));
+    box.append(deck);
+
+    const gaps = node("details", "designGaps");
+    gaps.append(node("summary", null, "Remaining physical gaps"));
+    const list = node("ul", "methodGaps");
+    for (const gap of plan.gaps || []) list.append(node("li", null, gap));
+    gaps.append(list);
+    box.append(gaps);
+  }
+
+  function renderFabrication(box, plan) {
+    clear(box);
+    const summary = node("div", "designSummary");
+    summary.append(
+      node("span", "designStatus " + (plan.passed ? "pass" : "gap"), plan.status),
+      node("span", "muted", plan.route_name + " · " +
+        (plan.footprints || []).length + " footprints · " +
+        (plan.traces || []).length + " traces"),
+    );
+    box.append(summary);
+    box.append(node("p", "note", plan.claim));
+    const board = plan.board || {};
+    box.append(node("div", "muted",
+      "board " + decimal(board.width) + " × " + decimal(board.height) + " mm · " +
+      "stackup " + ((plan.stackup || {}).layers || []).length + " layers · " +
+      "vias " + (plan.vias || []).length +
+      ((plan.unrouted_nets || []).length
+        ? " · declared control labels " + plan.unrouted_nets.join(", ")
+        : "")));
+
+    const wrap = node("div", "tablewrap");
+    const table = node("table");
+    const head = node("thead");
+    const headRow = node("tr");
+    for (const label of ["ref", "package", "row", "x / y", "P (W)", "Tj (K)"]) {
+      headRow.append(node("th", null, label));
+    }
+    head.append(headRow);
+    table.append(head);
+    const body = node("tbody");
+    for (const item of plan.footprints || []) {
+      const tr = node("tr");
+      tr.append(
+        node("td", "mono", item.ref),
+        node("td", item.package),
+        node("td", item.row),
+        node("td", "mono", decimal(item.x) + " / " + decimal(item.y)),
+        node("td", "mono", decimal(item.dissipation)),
+        node("td", "mono", decimal(item.junction_temperature)),
+      );
+      body.append(tr);
+    }
+    table.append(body);
+    wrap.append(table);
+    box.append(wrap);
+
+    const passed = (plan.checks || []).filter((check) => check.status === "pass").length;
+    box.append(node("div", "muted",
+      "declared-rule checks " + passed + "/" + (plan.checks || []).length +
+      " · not a fabrication sign-off"));
+
+    const gaps = node("details", "designGaps");
+    gaps.append(node("summary", null, "Remaining fabrication gaps"));
+    const list = node("ul", "methodGaps");
+    for (const gap of plan.gaps || []) list.append(node("li", null, gap));
+    gaps.append(list);
+    box.append(gaps);
+  }
+
+  function intervalText(value) {
+    if (value && typeof value === "object" && "lo" in value && "hi" in value) {
+      return "[" + decimal(value.lo) + ", " + decimal(value.hi) + "]";
+    }
+    if (value && typeof value === "object" && "num" in value && "den" in value) {
+      const text = exact(value);
+      return text.length > 40 ? decimal(value) : text;
+    }
+    return exact(value);
+  }
+
+  function renderDynamics(box, result) {
+    clear(box);
+    const summary = node("div", "designSummary");
+    summary.append(
+      node("span", "designStatus " + result.status, result.status),
+      node("span", "muted", result.route_name + " · " + result.selected_option),
+    );
+    box.append(summary);
+    box.append(node("p", "note", result.model));
+
+    if (Object.keys(result.metrics || {}).length) {
+      const metrics = node("div", "dynamicMetrics");
+      for (const [name, value] of Object.entries(result.metrics)) {
+        const item = node("div", "dynamicMetric");
+        item.append(node("b", null, name), node("span", null, intervalText(value)));
+        metrics.append(item);
+      }
+      box.append(metrics);
+    }
+
+    if ((result.checks || []).length) {
+      const checks = node("div", "designPlan");
+      for (const check of result.checks) {
+        const row = node("div", "designPlanRow");
+        row.append(
+          node("span", "badge " + check.status, check.status),
+          node("span", "name", check.name),
+          node("span", "detail", check.detail),
+        );
+        checks.append(row);
+      }
+      box.append(checks);
+    }
+
+    if ((result.trace || []).length) {
+      const hasState = result.trace.some((point) => point.state_before);
+      const wrap = node("div", "tablewrap dynamicTrace");
+      const table = node("table");
+      const head = node("thead");
+      const headRow = node("tr");
+      const columns = hasState
+        ? ["tick", "state before", "level", "feedback"]
+        : ["tick", "time (s)", "output", "target"];
+      for (const label of columns) headRow.append(node("th", null, label));
+      head.append(headRow);
+      table.append(head);
+      const body = node("tbody");
+      for (const point of result.trace) {
+        const tr = node("tr");
+        if (hasState) {
+          tr.append(
+            node("td", "mono", point.tick),
+            node("td", "mono", intervalText(point.state_before)),
+            node("td", "mono", point.level),
+            node("td", "mono", exact(point.feedback)),
+          );
+        } else {
+          tr.append(
+            node("td", "mono", point.tick),
+            node("td", "mono", decimal(point.time)),
+            node("td", "mono", intervalText(point.output)),
+            node("td", "mono", intervalText(point.target)),
+          );
+        }
+        body.append(tr);
+      }
+      table.append(body);
+      wrap.append(table);
+      box.append(wrap);
+    }
+
+    if (result.certificates && Object.keys(result.certificates).length) {
+      const certificates = node("div", "designPlan");
+      certificates.append(node("h3", null, "Certificates"));
+      for (const [name, certificate] of Object.entries(result.certificates)) {
+        const row = node("div", "designPlanRow");
+        row.append(
+          node("span", "badge " + (certificate.status || "gap"), certificate.status || "gap"),
+          node("span", "name", name),
+          node("span", "detail", certificate.detail || ""),
+        );
+        certificates.append(row);
+      }
+      box.append(certificates);
+    }
+
+    if ((result.gaps || []).length) {
+      const details = node("details", "designGaps");
+      details.append(node("summary", null, "Dynamic gaps and limits"));
+      const list = node("ul", "methodGaps");
+      for (const gap of result.gaps) list.append(node("li", null, gap));
+      details.append(list);
+      box.append(details);
+    }
+  }
+
+  function renderCompareControls(data) {
+    const routeBox = $("compareRoutes");
+    clear(routeBox);
+    const routeControls = [];
+    for (const space of data.spaces) {
+      const label = node("label", null);
+      const checkbox = node("input");
+      checkbox.type = "checkbox";
+      checkbox.value = space.route;
+      checkbox.checked = true;
+      label.append(checkbox, node("span", null, space.route));
+      routeBox.append(label);
+      routeControls.push({ route: space.route, input: checkbox });
+    }
+    const fields = $("compareFields");
+    clear(fields);
+    const input = designField("shared input", "", "blank = route defaults");
+    const range = designField("shared range", "", "optional MIN:MAX");
+    const accuracy = designField("accuracy", data.spaces[0]?.default_accuracy || "1/100", "exact limit");
+    const maxCost = designField("max cost", "", "no ceiling");
+    const minBandwidth = designField("min bandwidth", "", "optional Hz");
+    const ranking = designField("ranking", "auto", "auto | exact-static | dynamic-aware");
+    fields.append(
+      input.label, range.label, accuracy.label,
+      maxCost.label, minBandwidth.label, ranking.label,
+    );
+    state.compare = {
+      routes: routeControls,
+      input,
+      range,
+      accuracy,
+      maxCost,
+      minBandwidth,
+      ranking,
+    };
+  }
+
+  function renderComparison(box, comparison) {
+    clear(box);
+    const summary = node("div", "designSummary");
+    const solved = comparison.solved_count + "/" + comparison.rows.length;
+    summary.append(
+      node("span", "designStatus " + (comparison.solved_count ? "pass" : "gap"), solved + " solved"),
+      node("span", "muted", comparison.profile + " · " + comparison.routes.join(", ")),
+    );
+    box.append(summary);
+    box.append(node("p", "note", comparison.note));
+
+    const actions = node("div", "compareExport");
+    const jsonButton = node("button", "solverLink", "Download comparison JSON");
+    jsonButton.type = "button";
+    jsonButton.addEventListener("click", () => {
+      if (state.comparison) {
+        downloadText("cent-comparison.json", JSON.stringify(state.comparison, null, 2), "application/json");
+      }
+    });
+    const markdownButton = node("button", "solverLink", "Download comparison Markdown");
+    markdownButton.type = "button";
+    markdownButton.addEventListener("click", () => {
+      downloadText("cent-comparison.md", comparison.markdown || "# Method comparison\n", "text/markdown");
+    });
+    actions.append(jsonButton, markdownButton);
+    box.append(actions);
+
+    const wrap = node("div", "tablewrap");
+    const table = node("table");
+    const head = node("thead");
+    const headRow = node("tr");
+    for (const label of ["route", "status", "selected", "cost", "max relative error", "rank", "front"]) {
+      headRow.append(node("th", null, label));
+    }
+    head.append(headRow);
+    table.append(head);
+    const body = node("tbody");
+    for (const row of comparison.rows) {
+      const tr = node("tr");
+      const routeCell = node("td");
+      const open = node("button", "solverLink", row.route);
+      open.type = "button";
+      open.title = "Open this route's declared design space";
+      open.addEventListener("click", () => {
+        showPanel("design");
+        focusDesign(row.route);
+      });
+      routeCell.append(open);
+      const statusCell = node("td");
+      statusCell.append(node("span", "badge " + (row.status === "solved" ? "pass" : "gap"), row.status));
+      tr.append(
+        routeCell,
+        statusCell,
+        node("td", "mono", row.selected_option || "—"),
+        node("td", "mono", row.selected_cost_text || "—"),
+        node("td", "mono", row.max_relative_error_text || "—"),
+        node("td", "mono", row.pareto_rank === null ? "—" : row.pareto_rank),
+        node("td", "mono", row.front.join(", ") || "—"),
+      );
+      body.append(tr);
+    }
+    table.append(body);
+    wrap.append(table);
+    box.append(wrap);
+
+    if ((comparison.gaps || []).length) {
+      const details = node("details", "designGaps");
+      details.append(node("summary", null, "Comparison gaps and limits"));
+      const list = node("ul", "methodGaps");
+      for (const gap of comparison.gaps) list.append(node("li", null, gap));
+      details.append(list);
+      box.append(details);
+    }
+  }
+
+  async function runComparison() {
+    const controls = state.compare;
+    if (!controls) return;
+    const errorBox = $("compareError");
+    const out = $("compareOut");
+    errorBox.hidden = true;
+    const routes = controls.routes
+      .filter((item) => item.input.checked)
+      .map((item) => item.route);
+    if (!routes.length) {
+      errorBox.textContent = "Select at least one declared route.";
+      errorBox.hidden = false;
+      return;
+    }
+    const range = controls.range.input.value.trim();
+    if (range && !range.includes(":")) {
+      errorBox.textContent = "Shared range expects MIN:MAX.";
+      errorBox.hidden = false;
+      return;
+    }
+    const request = {
+      routes: routes.join(","),
+      input: controls.input.input.value.trim() || null,
+      range: range || null,
+      accuracy: controls.accuracy.input.value.trim() || "1/100",
+      max_cost: controls.maxCost.input.value.trim() || null,
+      min_bandwidth: controls.minBandwidth.input.value.trim() || null,
+      ranking: controls.ranking.input.value.trim() || "auto",
+    };
+    const go = $("compareGo");
+    const status = $("compareStatus");
+    go.disabled = true;
+    status.textContent = "solving declared routes…";
+    clear(out);
+    try {
+      const payload = await get("/api/compare", request);
+      state.comparison = payload;
+      renderComparison(out, payload.comparison);
+      status.textContent = payload.comparison.solved_count + "/" + payload.comparison.rows.length + " solved";
+    } catch (err) {
+      clear(out);
+      out.append(node("p", "error-inline", err.message));
+      status.textContent = "comparison failed";
+    } finally {
+      go.disabled = false;
+    }
+  }
+
+  function designField(labelText, value, placeholder) {
+    const label = node("label", null, labelText);
+    const input = node("input", "designInput");
+    input.type = "text";
+    input.value = value || "";
+    input.placeholder = placeholder || "";
+    input.setAttribute("aria-label", labelText);
+    label.append(input);
+    return { label, input };
+  }
+
+  function renderDesignSpaces(data) {
+    const box = $("designSpaces");
+    clear(box);
+    $("designSummary").textContent =
+      data.spaces.length + " declared route(s) · exact constraints · declared complexity units";
+    for (const space of data.spaces) {
+      const card = node("article", "card designCard");
+      card.id = "design-" + space.route;
+      card.append(node("h2", null, space.name));
+      card.append(node("div", "designMeta",
+        space.route + " · input domain " + space.input_domain + " · " + space.options.length + " declared options"));
+      const fields = node("div", "designFields");
+      const input = designField("input", space.default_input, "exact operating point");
+      const rangeMin = designField("range min", "", "optional");
+      const rangeMax = designField("range max", "", "optional");
+      const accuracy = designField("accuracy", space.default_accuracy, "exact limit");
+      const maxCost = designField("max cost", "", "no ceiling");
+      const minBandwidth = designField("min bandwidth", "", "optional Hz");
+      const ranking = designField("ranking", "auto", "auto | exact-static | dynamic-aware");
+      fields.append(
+        input.label, rangeMin.label, rangeMax.label, accuracy.label,
+        maxCost.label, minBandwidth.label, ranking.label,
+      );
+      card.append(fields);
+      const actions = node("div", "designActions");
+      const go = node("button", "designSolve", "Solve declared design");
+      go.type = "button";
+      const emit = node("button", "solverLink", "Emit reference netlist / floorplan");
+      emit.type = "button";
+      emit.disabled = true;
+      const fabricate = node("button", "solverLink", "Fabricate geometry");
+      fabricate.type = "button";
+      fabricate.disabled = true;
+      const dynamic = node("button", "solverLink", "Run dynamic check");
+      dynamic.type = "button";
+      dynamic.disabled = true;
+      const status = node("span", "muted");
+      status.setAttribute("aria-live", "polite");
+      actions.append(go, emit, fabricate, dynamic, status);
+      card.append(actions);
+      const out = node("div", "designResult");
+      card.append(out);
+      const physicalOut = node("div", "designResult");
+      card.append(physicalOut);
+      const fabricateOut = node("div", "designResult");
+      card.append(fabricateOut);
+      const dynamicOut = node("div", "designResult");
+      card.append(dynamicOut);
+      let solvedRequest = null;
+      go.addEventListener("click", async () => {
+        const low = rangeMin.input.value.trim();
+        const high = rangeMax.input.value.trim();
+        if ((low && !high) || (!low && high)) {
+          clear(out);
+          out.append(node("p", "error-inline", "Enter both range endpoints or leave both blank."));
+          return;
+        }
+        go.disabled = true;
+        emit.disabled = true;
+        fabricate.disabled = true;
+        dynamic.disabled = true;
+        solvedRequest = null;
+        status.textContent = "evaluating declared candidates…";
+        clear(out);
+        try {
+          const request = {
+            route: space.route,
+            input: input.input.value.trim() || null,
+            range: low && high ? low + ":" + high : null,
+            accuracy: accuracy.input.value.trim() || space.default_accuracy,
+            max_cost: maxCost.input.value.trim() || null,
+            min_bandwidth: minBandwidth.input.value.trim() || null,
+            ranking: ranking.input.value.trim() || "auto",
+          };
+          const payload = await get("/api/solve", request);
+          renderDesignResult(out, payload.design);
+          clear(physicalOut);
+          clear(fabricateOut);
+          clear(dynamicOut);
+          solvedRequest = request;
+          const solved = payload.design.status === "solved";
+          emit.disabled = !solved;
+          fabricate.disabled = !solved;
+          dynamic.disabled = !solved;
+          status.textContent = solved ? "solved" : "no declared candidate";
+        } catch (err) {
+          clear(out);
+          clear(physicalOut);
+          clear(fabricateOut);
+          clear(dynamicOut);
+          solvedRequest = null;
+          emit.disabled = true;
+          fabricate.disabled = true;
+          dynamic.disabled = true;
+          out.append(node("p", "error-inline", err.message));
+          status.textContent = "failed";
+        } finally {
+          go.disabled = false;
+        }
+      });
+      emit.addEventListener("click", async () => {
+        if (!solvedRequest) return;
+        emit.disabled = true;
+        status.textContent = "emitting reference topology…";
+        try {
+          const payload = await get("/api/physical", solvedRequest);
+          renderPhysical(physicalOut, payload.physical);
+          status.textContent = "reference netlist emitted";
+        } catch (err) {
+          clear(physicalOut);
+          physicalOut.append(node("p", "error-inline", err.message));
+          status.textContent = "failed";
+        } finally {
+          emit.disabled = false;
+        }
+      });
+      fabricate.addEventListener("click", async () => {
+        if (!solvedRequest) return;
+        fabricate.disabled = true;
+        status.textContent = "deriving declared geometry…";
+        try {
+          const payload = await get("/api/fabricate", solvedRequest);
+          renderFabrication(fabricateOut, payload.fabrication);
+          status.textContent = payload.fabrication.passed
+            ? "declared geometry emitted"
+            : "geometry emitted with rule gaps";
+        } catch (err) {
+          clear(fabricateOut);
+          fabricateOut.append(node("p", "error-inline", err.message));
+          status.textContent = "geometry failed";
+        } finally {
+          fabricate.disabled = false;
+        }
+      });
+      dynamic.addEventListener("click", async () => {
+        if (!solvedRequest) return;
+        dynamic.disabled = true;
+        status.textContent = "running sampled-data model…";
+        try {
+          const payload = await get("/api/dynamics", {
+            ...solvedRequest,
+            samples: 64,
+          });
+          renderDynamics(dynamicOut, payload.dynamics);
+          status.textContent = payload.dynamics.status === "partial"
+            ? "dynamic check partial"
+            : payload.dynamics.status;
+        } catch (err) {
+          clear(dynamicOut);
+          dynamicOut.append(node("p", "error-inline", err.message));
+          status.textContent = "dynamic check failed";
+        } finally {
+          dynamic.disabled = false;
+        }
+      });
+      box.append(card);
+    }
+  }
+
+  async function loadDesign() {
+    if (state.design) return;
+    const box = $("designSpaces");
+    clear(box);
+    box.append(node("p", "note", "Loading declared design spaces…"));
+    $("designError").hidden = true;
+    try {
+      state.design = await get("/api/design");
+      renderCompareControls(state.design);
+      renderDesignSpaces(state.design);
+    } catch (err) {
+      clear(box);
+      $("designError").textContent = err.message;
+      $("designError").hidden = false;
+    }
+  }
+
+  function focusDesign(route) {
+    const card = $("design-" + route);
+    if (!card) return;
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    const input = card.querySelector("input");
+    if (input) input.focus({ preventScroll: true });
+  }
+
+  function showPanel(name) {
+    const panels = { compile: "panel-compile", methods: "panel-methods", design: "panel-design", wheels: "panel-wheels", concepts: "panel-concepts" };
+    for (const [key, id] of Object.entries(panels)) $(id).hidden = key !== name;
+    document.querySelectorAll(".tab[data-panel]").forEach((tab) => {
+      tab.classList.toggle("active", tab.dataset.panel === name);
+    });
+    if (name === "methods" && !$("discoverResult").childElementCount) findMethods();
+    if (name === "design") loadDesign();
+    if (name === "wheels") loadWheels();
+    if (name === "concepts") loadCatalogue();
+  }
+
+  $("query").addEventListener("submit", (event) => { event.preventDefault(); compile(); });
+  $("run").addEventListener("click", runExact);
+  document.querySelectorAll(".chip[data-q]").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      $("relation").value = chip.dataset.q;
+      compile();
+    });
+  });
+  document.querySelectorAll(".tab[data-panel]").forEach((tab) => {
+    tab.addEventListener("click", () => showPanel(tab.dataset.panel));
+  });
+  $("compareGo").addEventListener("click", runComparison);
+  $("wheelSearch").addEventListener("input", renderWheelList);
+  $("wheelReload").addEventListener("click", () => loadWheels(true));
+  $("conceptGo").addEventListener("click", () => mapConcept());
+  $("concept").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") { event.preventDefault(); mapConcept(); }
+  });
+  document.querySelectorAll(".concept-chip").forEach((chip) => {
+    chip.addEventListener("click", () => mapConcept(chip.dataset.c));
+  });
+  $("discoverGo").addEventListener("click", () => findMethods());
+  $("problem").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") { event.preventDefault(); findMethods(); }
+  });
+  document.querySelectorAll(".problem-chip").forEach((chip) => {
+    chip.addEventListener("click", () => findMethods(chip.dataset.problem));
+  });
+
+  compile();
+})();
+</script>
+</body>
+</html>

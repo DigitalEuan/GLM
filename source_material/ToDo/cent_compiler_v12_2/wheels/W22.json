@@ -28,10 +28,10 @@
       "id": "W22-03",
       "equation": "diffusion_coefficient = diffusion_flux / concentration_gradient",
       "expected_dimensional": true,
-      "expected_derivable": true,
+      "expected_derivable": false,
       "physical_status": "physically_supported",
       "expected_dimensional_explicit": null,
-      "note": ""
+      "note": "Fick law is not a declared W22 axiom; this case is a dimensional check only."
     },
     {
       "id": "W22-N1",
@@ -134,6 +134,72 @@
         0,
         0,
         1,
+        0,
+        0
+      ]
+    },
+    "concentration_gradient": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -4,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "diffusion_flux": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -2,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "diffusion_coefficient": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        0,
+        -1,
+        0,
+        0,
+        0,
         0,
         0
       ]

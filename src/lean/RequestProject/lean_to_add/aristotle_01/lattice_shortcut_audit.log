@@ -1,0 +1,123 @@
+
+==============================================================================
+A.  Reproduction of lattice_shortcut_directory_standalone.json
+==============================================================================
+  jump vectors reproduced : 36/36
+  jump norms reproduced   : 36/36
+  (the composite branch of the generator maps prime-power channels,
+   NOT the bit-shift channels -- that is why consecutive integers do
+   not behave like a Gray code in this catalogue)
+
+==============================================================================
+B.  lattice_shortcut.py agrees with the substrate
+==============================================================================
+  OK  encoder (factor branch) identical on 200 integers
+  OK  encoder (shift branch) identical
+  OK  legacy snap (weight <= 3 corrector) identical
+  OK  Leech symmetry tax identical (exact rationals)
+  OK  NRCI identical (exact rationals)
+  OK  TGIC 3-axis orthogonality identical
+  OK  TGIC 6-face coherence identical
+  OK  TGIC master stability identical
+
+==============================================================================
+C.  Section-4 benchmark table (now auditable: TGIC files supplied)
+==============================================================================
+  sample sets that reproduce the table:
+    deep primes     = [1000003, 1000033, 1000037, 1000039, 1000081, 1000099, 1000117, 1000121, 1000133, 1000151]
+    deep composites = [1000000, 1000001, 1000002, 1000004, 1000005, 1000006, 1000007, 1000008, 1000009, 1000010]
+
+  metric                            primes   published    composites   published
+  propeller_imbalance             0.000000    0.000000 OK    0.622207    0.622207 OK
+  tgic_3_axis_orthogonality       0.536182    0.536182 OK    0.540989    0.540989 OK
+  tgic_6_face_coherence           0.721295    0.664642 <<    0.758866    0.758866 OK
+  runecube_face_tax               3.896754    5.247629 <<    3.273274    3.273274 OK
+  tgic_master_stability           0.663450    0.663450 OK    0.681089    0.681089 OK
+
+  internal consistency of the published PRIME column:
+    stability implied by its own orthogonality+coherence entries = 0.644566
+    stability actually printed in the table                      = 0.663450
+    -> the coherence / tax cells of the prime column are inconsistent
+       with its own stability cell; the recomputed values are
+       coherence = 0.721295, tax = 3.896754
+
+==============================================================================
+D.  Headline claims
+==============================================================================
+  D1  'adjacent deep integers jump with d^2 in {8,10,12}'
+      observed on 1000033..1000050 : [8, 10, 12, 14]
+      verdict: FALSE as stated (values [8, 10, 12, 14] occur)
+      also: under the pure Gray (shift) encoder consecutive integers
+      differ in exactly one bit, d^2_raw = 1 -- the {8,10,12} values
+      come from the factor encoder, not from lattice geometry
+      raw d^2 under the shift encoder: [1]
+
+  D2  'even quantisation d^2 in 2Z at 100%'
+      odd jump norms in 2999 consecutive transitions: 0
+      every legacy-snapped state has even weight: True
+      verdict: TRUE, and it is a theorem, not data.  Golay is doubly
+      even, so Hamming-weight parity is constant on each coset; the
+      cosets the legacy snap fails on are exactly those with weight-4
+      leaders (even).  Hence every snapped state has even weight and
+      every d^2 is even -- for ANY encoder and ANY integers, primes
+      or not.  It carries no information about primality.
+
+  D3  'd^2 = 8 steps are Class-B minimal-vector octad hops'
+      TRUE for genuine codewords, but with the legacy snap
+      141/300 states are not codewords, so the classification of
+      the published table is accidental (norms 0,2,4,6 are impossible
+      between real codewords: minimum distance is 8)
+      With the complete decoder every d^2 = 8 step is an exact
+      minimal (norm-32) Leech vector -- see part F.
+
+==============================================================================
+E.  Propeller imbalance as a prime detector
+==============================================================================
+  definition: coefficient of variation of log p over the DISTINCT
+  prime factors of n (so it ignores exponents entirely).
+  composites in [1000000,1010000) : 9247
+    with imbalance < 0.1500 (claimed impossible) : 248 (2.68%)
+    with imbalance < 0.0010 ('Smooth', as primes) : 1
+    example 1005973 = 997 × 1009         imbalance 0.000866  (Smooth)
+    example 1018081 = 1009^2             imbalance 0.000000  (Smooth)
+    example 1048576 = 2^20               imbalance 0.000000  (Smooth)
+  verdict: 'primes 0.0000' is TRUE but vacuous (every prime power
+  gives 0 too); 'composites > 0.1500' is FALSE.  The statistic
+  measures the spread of the distinct prime factors, not primality.
+
+==============================================================================
+F.  The corrected pipeline (complete decoder)
+==============================================================================
+  interfacial 1000033..1000050 [factor]
+    d^2 : [16, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 8, 8, 12, 12, 12]
+    all 4 | d^2 : True   all Leech vectors : True   octads : 17.6471%
+  interfacial 1000033..1000050 [shift]
+    d^2 : [8, 8, 8, 8, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]
+    all 4 | d^2 : True   all Leech vectors : True   octads : 88.2353%
+  prime trajectory (20 primes) [shift]
+    d^2 : [8, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 8, 8, 8, 8, 0]
+    all 4 | d^2 : True   all Leech vectors : True   octads : 73.6842%
+  10000 consecutive integers [shift]: {"steps": 9999, "d2_histogram": {"0": 2517, "8": 7482}, "octad_rate_pct": 74.8275, "collision_rate_pct": 25.1725, "all_quantised_by_4": true, "all_even": true, "all_leech_vectors": true, "mean_d2": 5.9862, "distinct_states": 526, "integers": 10000, "legacy_non_codeword_rate_pct": 43.16}
+  written: lattice_shortcut_directory_corrected.json
+
+==============================================================================
+G.  tgic_v3.py compared with ubp_tgic_engine.py
+==============================================================================
+  tgic_v3 self-tests: {'golay_filter': True, 'three_six_nine': True, 'relational_simulator': True, 'validation': True}
+  Golay layer: codewords=4096 octads=759 weights={0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}
+
+  metric                          primes  composites
+  axis score (3)                0.536182    0.540989
+  face score (6)                0.721295    0.757219
+  stability                     0.663450    0.680540
+  face vectors left un-snapped (not codewords): 0/30 primes, 9/30 composites
+  v3 changes that matter:
+    * the 9-neighbour rule no longer counts the node itself (v6.2 did);
+    * faces are snapped only when the decoder certifies the result,
+      which is honest but still leaves face vectors off-code (9/60 here);
+      v6.2 instead re-encoded the information half, which always gives
+      a codeword but can move the state by up to 12 bits.
+    * with the complete decoder of lattice_shortcut.py both problems
+      disappear: every face vector is the nearest codeword, <= 4 bits away.
+
+written: lattice_shortcut_audit.json

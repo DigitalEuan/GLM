@@ -1,0 +1,70 @@
+{
+  "schema": "cent-proposal-index/1",
+  "operation": "difference",
+  "target": "glm-reference",
+  "summary": {
+    "proposals": 3,
+    "ready_for_execution": 3,
+    "needs_target_adapter": 0,
+    "needs_target_vectors": 0,
+    "needs_environment": 0,
+    "review_counts": {
+      "unreviewed": 3
+    },
+    "mechanisms": [
+      "fluid-continuity",
+      "kcl-conservation",
+      "opamp-summing"
+    ],
+    "domains": [
+      "electronics",
+      "fluidics"
+    ]
+  },
+  "review": {
+    "schema": "cent-proposal-review-summary/1",
+    "events": 0,
+    "states": {},
+    "counts": {
+      "unreviewed": 3,
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    },
+    "decisions": {
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    }
+  },
+  "review_ledger": null,
+  "proposals": [
+    {
+      "id": "proposal-difference-to-glm-reference-via-fluid-continuity",
+      "rank": 1,
+      "mechanism": "fluid-continuity",
+      "readiness": "ready-for-execution",
+      "review_state": "unreviewed",
+      "file": "proposal-difference-to-glm-reference-via-fluid-continuity.json",
+      "handoff": "python3 cent transfer \"difference\" --target \"glm-reference\" --mechanism \"fluid-continuity\" --validate --json"
+    },
+    {
+      "id": "proposal-difference-to-glm-reference-via-kcl-conservation",
+      "rank": 2,
+      "mechanism": "kcl-conservation",
+      "readiness": "ready-for-execution",
+      "review_state": "unreviewed",
+      "file": "proposal-difference-to-glm-reference-via-kcl-conservation.json",
+      "handoff": "python3 cent transfer \"difference\" --target \"glm-reference\" --mechanism \"kcl-conservation\" --validate --json"
+    },
+    {
+      "id": "proposal-difference-to-glm-reference-via-opamp-summing",
+      "rank": 3,
+      "mechanism": "opamp-summing",
+      "readiness": "ready-for-execution",
+      "review_state": "unreviewed",
+      "file": "proposal-difference-to-glm-reference-via-opamp-summing.json",
+      "handoff": "python3 cent transfer \"difference\" --target \"glm-reference\" --mechanism \"opamp-summing\" --validate --json"
+    }
+  ]
+}

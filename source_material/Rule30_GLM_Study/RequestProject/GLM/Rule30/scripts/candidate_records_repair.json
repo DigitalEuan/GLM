@@ -1,0 +1,1072 @@
+[
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 9",
+  "key": [
+   "LIN",
+   2,
+   9
+  ],
+  "origin": "supplied",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d m: #alive(d, d-1+m) * 2^floor(m/4) <= 2^(d-1+1)",
+  "key": [
+   "AMORT",
+   4,
+   1
+  ],
+  "origin": "supplied",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_amortized",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 15817
+ },
+ {
+  "statement": "forall d: Lmax(d+2) <= Lmax(d) + 12",
+  "key": [
+   "WS",
+   0,
+   12
+  ],
+  "origin": "supplied",
+  "quantifiers": "for all d >= 1",
+  "target": "WordDies(word 10) via wordDies_of_widthStep",
+  "smallest_counterexample": [
+   12,
+   16,
+   32
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 12
+ },
+ {
+  "statement": "forall d: Lmax(d+2) <= Lmax(d) + 16",
+  "key": [
+   "WS",
+   0,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all d >= 1",
+  "target": "WordDies(word 10) via wordDies_of_widthStep",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 16
+ },
+ {
+  "statement": "potential 1 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   1,
+   2
+  ],
+  "origin": "supplied",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   1,
+   1,
+   0
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 3
+ },
+ {
+  "statement": "potential 2 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   2,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   1,
+   1,
+   0
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 3
+ },
+ {
+  "statement": "potential 3 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   3,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 4 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   4,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   1,
+   1,
+   0
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 3
+ },
+ {
+  "statement": "potential 5 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   5,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   1,
+   1,
+   0
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 3
+ },
+ {
+  "statement": "potential 6 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   6,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 7 drops over every surviving post-edge window of 2 steps",
+  "key": [
+   "RANK",
+   7,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   1,
+   1,
+   0
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 3
+ },
+ {
+  "statement": "potential 0 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   0,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 1 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   1,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 2 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   2,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 3 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   3,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 4 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   4,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   2
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 5 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   5,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   1
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 6 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   6,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   2,
+   3,
+   2
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 10
+ },
+ {
+  "statement": "potential 7 drops over every surviving post-edge window of 4 steps",
+  "key": [
+   "RANK",
+   7,
+   4
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   5,
+   29,
+   4
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 56
+ },
+ {
+  "statement": "potential 0 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   0,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   285,
+   8
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 253
+ },
+ {
+  "statement": "potential 1 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   1,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   285,
+   8
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 253
+ },
+ {
+  "statement": "potential 2 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   2,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   285,
+   8
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 253
+ },
+ {
+  "statement": "potential 3 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   3,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   331,
+   8
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 301
+ },
+ {
+  "statement": "potential 4 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   4,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   331,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 301
+ },
+ {
+  "statement": "potential 5 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   5,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   285,
+   8
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 253
+ },
+ {
+  "statement": "potential 6 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   6,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   331,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 301
+ },
+ {
+  "statement": "potential 7 drops over every surviving post-edge window of 8 steps",
+  "key": [
+   "RANK",
+   7,
+   8
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   9,
+   331,
+   8
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 301
+ },
+ {
+  "statement": "potential 0 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   0,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 1 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   1,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 2 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   2,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 3 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   3,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 4 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   4,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 5 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   5,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 6 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   6,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 7 drops over every surviving post-edge window of 16 steps",
+  "key": [
+   "RANK",
+   7,
+   16
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": [
+   11,
+   1493,
+   10
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 863
+ },
+ {
+  "statement": "potential 0 drops over every surviving post-edge window of 32 steps",
+  "key": [
+   "RANK",
+   0,
+   32
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via wordDies_of_ranking",
+  "smallest_counterexample": "vacuous: no surviving window of this length in range",
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (vacuous on the range)",
+  "cost_work": 18552
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 0",
+  "key": [
+   "LIN",
+   1,
+   0
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   1,
+   2
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 1
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 2",
+  "key": [
+   "LIN",
+   1,
+   2
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   2,
+   6
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 2
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 5",
+  "key": [
+   "LIN",
+   1,
+   5
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   7,
+   12
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 7
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 6",
+  "key": [
+   "LIN",
+   1,
+   6
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   9,
+   18
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 9
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 10",
+  "key": [
+   "LIN",
+   1,
+   10
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   11,
+   30
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 11
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 20",
+  "key": [
+   "LIN",
+   1,
+   20
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 4",
+  "key": [
+   "LIN",
+   1,
+   4
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   2,
+   6
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 2
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 8",
+  "key": [
+   "LIN",
+   1,
+   8
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   9,
+   18
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 9
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 12",
+  "key": [
+   "LIN",
+   1,
+   12
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   11,
+   30
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 11
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 16",
+  "key": [
+   "LIN",
+   1,
+   16
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   11,
+   30
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 11
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 24",
+  "key": [
+   "LIN",
+   1,
+   24
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 28",
+  "key": [
+   "LIN",
+   1,
+   28
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 32",
+  "key": [
+   "LIN",
+   1,
+   32
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 36",
+  "key": [
+   "LIN",
+   1,
+   36
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 1*d + 40",
+  "key": [
+   "LIN",
+   1,
+   40
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 0",
+  "key": [
+   "LIN",
+   2,
+   0
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   1,
+   2
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 1
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 1",
+  "key": [
+   "LIN",
+   2,
+   1
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   2,
+   6
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 2
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 3",
+  "key": [
+   "LIN",
+   2,
+   3
+  ],
+  "origin": "repaired",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   11,
+   30
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 11
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 4",
+  "key": [
+   "LIN",
+   2,
+   4
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   11,
+   30
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 11
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 8",
+  "key": [
+   "LIN",
+   2,
+   8
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": [
+   11,
+   30
+  ],
+  "tested_range": "d <= 18",
+  "formal_status": "refuted (finite counterexample)",
+  "cost_work": 11
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 12",
+  "key": [
+   "LIN",
+   2,
+   12
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 16",
+  "key": [
+   "LIN",
+   2,
+   16
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 20",
+  "key": [
+   "LIN",
+   2,
+   20
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ },
+ {
+  "statement": "forall d S (len S = d): first failure <= 2*d + 24",
+  "key": [
+   "LIN",
+   2,
+   24
+  ],
+  "origin": "generated",
+  "quantifiers": "for all code lengths d >= 1 and codes of length d",
+  "target": "WordDies(word 10) via halfLineDies_of_linear",
+  "smallest_counterexample": null,
+  "tested_range": "d <= 18",
+  "formal_status": "OPEN (survives the range; not proved)",
+  "cost_work": 18
+ }
+]

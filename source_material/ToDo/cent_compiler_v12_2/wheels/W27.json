@@ -1,0 +1,280 @@
+{
+  "id": "W27",
+  "title": "Cosmology & Cosmic Expansion",
+  "axioms": [
+    "recession_velocity = hubble_constant * distance",
+    "critical_density = hubble_constant^2 / gravitational_constant",
+    "hubble_time = 1 / hubble_constant",
+    "horizon_distance = speed_of_light / hubble_constant"
+  ],
+  "cases": [
+    {
+      "id": "W27-01",
+      "equation": "hubble_constant = recession_velocity / distance",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "Inverse of the local Hubble law v = H0*d; no relativistic correction or peculiar velocity is declared."
+    },
+    {
+      "id": "W27-02",
+      "equation": "critical_density = hubble_constant^2 / gravitational_constant",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "Critical density rho_c = 3*H0^2/(8*pi*G); the monomial convention omits the dimensionless 3/(8*pi) factor."
+    },
+    {
+      "id": "W27-03",
+      "equation": "hubble_time = 1 / hubble_constant",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "Definition of the Hubble time."
+    },
+    {
+      "id": "W27-04",
+      "equation": "horizon_distance = speed_of_light / hubble_constant",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "Definition of the Hubble horizon distance c/H0."
+    },
+    {
+      "id": "W27-N1",
+      "equation": "recession_velocity = hubble_constant / distance",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": "Negative control: dividing by distance instead of multiplying breaks the Hubble-law dimensions."
+    }
+  ],
+  "quantities": [
+    "recession_velocity",
+    "hubble_constant",
+    "distance",
+    "critical_density",
+    "gravitational_constant",
+    "hubble_time",
+    "horizon_distance",
+    "speed_of_light"
+  ],
+  "dimensions": {
+    "recession_velocity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "hubble_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "distance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "critical_density": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "gravitational_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        3,
+        -1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "hubble_time": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "horizon_distance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "speed_of_light": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "provenance": {
+    "status": "sourced",
+    "domain": "cosmology/cosmic expansion",
+    "conventions": [
+      "The Hubble law is declared in its local, low-redshift form v = H0*d; no relativistic distance measure is asserted.",
+      "The critical-density monomial omits the exact dimensionless factor 3/(8*pi); the case is labelled model_convention.",
+      "The Hubble time and Hubble horizon are definitions under the declared H0, not measurements or a full Lambda-CDM model."
+    ],
+    "sources": [
+      {
+        "id": "HOGG-DISTANCE",
+        "title": "Distance measures in cosmology (Hogg)",
+        "url": "https://ned.ipac.caltech.edu/level5/Hogg/Hogg2.html",
+        "supports": "v = H0*d, t_H = 1/H0 and D_H = c/H0 in the local expansion limit"
+      },
+      {
+        "id": "FRIEMAN-COSMOLOGY",
+        "title": "Cosmology (Frieman, NED Level 5)",
+        "url": "https://ned.ipac.caltech.edu/level5/March08/Frieman/Frieman2.html",
+        "supports": "Hubble expansion and critical-density definitions"
+      },
+      {
+        "id": "WEINBERG-NOTES",
+        "title": "Cosmology notes (Ohio State, Weinberg)",
+        "url": "https://www.astronomy.ohio-state.edu/weinberg.21/A8873/notes4.pdf",
+        "supports": "rho_c = 3*H0^2/(8*pi*G)"
+      },
+      {
+        "id": "PDG-2025-ASTRO",
+        "title": "PDG 2025 Astrophysical Constants",
+        "url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-astrophysical-constants.pdf",
+        "supports": "G and c values and units"
+      }
+    ]
+  }
+}

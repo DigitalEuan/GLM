@@ -1,0 +1,210 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-sqrt-to-glm-reference-via-orifice-pressure-flow",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 3,
+  "score": 13,
+  "match_reasons": [
+    "declared support for sqrt",
+    "stateful false match"
+  ],
+  "operation": {
+    "id": "sqrt",
+    "name": "square root",
+    "semantics": "root is the nonnegative value whose square is x.",
+    "reference": {
+      "kind": "exact-interval",
+      "expression": "sqrt_q(x)",
+      "path": "cent_compiler/interval.py"
+    },
+    "source_tests": [
+      {
+        "id": "sqrt-four",
+        "kind": "exact",
+        "inputs": {
+          "x": "4"
+        },
+        "expected": "2",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_core.py"
+        ],
+        "note": "perfect square"
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "positive exact rational",
+        "precision": "integer in 1..64",
+        "tolerance": "positive exact rational"
+      },
+      "outputs": {
+        "root": "certified rational enclosure",
+        "checker": "independent sqrt_q enclosure",
+        "passed": "boolean for overlap and declared width"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "root = exp((1/2) * log(x))"
+    },
+    "adapter": null
+  },
+  "mechanism": {
+    "id": "orifice-pressure-flow",
+    "name": "orifice pressure-flow square root",
+    "principle": "A nonlinear orifice provides the pressure/flow restriction and a pressure-feedback path is declared as the square-root realization.",
+    "source_domains": [
+      "fluidics"
+    ],
+    "primitive_chain": [
+      "mult",
+      "eq"
+    ],
+    "carrier": "pressure/flow",
+    "laws": [
+      "pressure-flow relation through a shaped orifice; feedback via the pressure differential"
+    ],
+    "invariants": [
+      "the declared orifice restriction and pressure-feedback topology are preserved",
+      "the feedback is algebraic; no time-integrated state is declared"
+    ],
+    "failure_modes": [
+      "reverse flow, cavitation and compressibility are not modeled",
+      "no calibrated discharge coefficient or pressure/flow data are declared",
+      "no exact fluidic solver is declared"
+    ],
+    "evidence_level": "structural"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "declared support for sqrt",
+      "stateful false match"
+    ],
+    "source_law": [
+      "pressure-flow relation through a shaped orifice; feedback via the pressure differential"
+    ],
+    "target_semantics": "root is the nonnegative value whose square is x.",
+    "preserved": [
+      "the declared orifice restriction and pressure-feedback topology are preserved",
+      "the feedback is algebraic; no time-integrated state is declared"
+    ],
+    "relaxed": [],
+    "validity": [
+      "declared pressure and flow operating range",
+      "fluid properties, orifice geometry and discharge behavior must be declared"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation sqrt",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/substrate_library.py",
+        "cent_compiler/pattern_matcher.py"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "mechanism primitive chain",
+      "target": "target operation decomposition",
+      "law": "mult -> eq",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/substrate_library.py",
+        "cent_compiler/pattern_matcher.py"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    },
+    {
+      "source": "mechanism feedback path",
+      "target": "target feedback path",
+      "law": "preserve the feedback topology; target loop dynamics remain undeclared",
+      "kind": "feedback",
+      "provenance": [
+        "cent_compiler/substrate_library.py",
+        "cent_compiler/pattern_matcher.py"
+      ],
+      "gaps": [
+        "target loop dynamics and stability are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "needs-target-adapter",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": null,
+    "fixed_vectors": [],
+    "next_action": "Declare a target adapter and fixed vectors for this operation and mechanism, then run the target certificate."
+  },
+  "evidence": {
+    "candidate_level": "structural",
+    "mechanism_level": "structural",
+    "target_level": "not-executed",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "orifice-pressure-flow declares support for sqrt"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "3 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "gap",
+      "detail": "no executable adapter for this operation/mechanism"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "no exact pressure-flow law or calibrated orifice model",
+    "no target adapter or target test",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/interval.py",
+    "cent_compiler/assembly.py",
+    "tests/test_assembly.py",
+    "cent_compiler/substrate_library.py",
+    "cent_compiler/pattern_matcher.py",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/targets/glm.py"
+  ]
+}

@@ -1,0 +1,99 @@
+# The observer's clock — guide to Rounds 33–35
+
+## Tier 0 — the coarse read
+
+**Question.** Does the half-line machine fail within a bounded number of questions on the observer's clock?
+
+**Verdict.** On the observer's clock the half-line machine fails after about d questions, whatever the word; no slack works for all periods, period 1 has slack exactly 2, and the per-period laws pass to divisors.
+
+**Deciding figure.** Period 1: slack exactly 2; a steered word of period 2m+1 lets a code pass m questions.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `tools/tier0_check.py` (or the GLM's corpus check, after a merge) fails if they stop being.*
+
+This guide covers the files `TestCountLaw.lean`, `TestCountLawData.lean`, `TestHalving.lean`,
+`TestHalvingData.lean`, `SidewaysPeriodTwo.lean` (Round 33) and `TestCountPeriods.lean`,
+`SlackCert*.lean`, `TestCountPeriodsData.lean` (Round 34) and `DiagonalSearch.lean`, `DiagCert*.lean`,
+`DiagonalSearchData.lean`, `BlackRunWindow.lean` (Round 35). Evidence classes as in `claims.csv`:
+**FORMAL** (proved for all parameters), **CERT** (proved by a finite check on a stated range),
+**EMP** (computed outside Lean, exact integer arithmetic, not a proof).
+
+## 1. The idea
+
+The half-line machine (`HalfLineMachine.lean`) holds the cells to the left of a periodic column
+as a code `S` of length `d`. At each **black** drive time the column asks one question of the cell
+next to it (`col_black_forces_left`); at white times it asks nothing. So the machine has its own
+clock: one tick per question. That is the proper time of the observer `Y` who reads the
+half-line from the column. On this clock the longest lives of all drive words line up: a code of
+`d` cells fails after about `d` questions, whatever the word.
+
+* `testsBefore bd t` — questions before time `t`; `FailsWithinTests bd S n` — the machine fails
+  one of its first `n` questions.
+* `TestCountLinear p c` — every code of length `d` fails within `d + c` questions of every
+  non-white word of period `p`. It gives `HalfLineDies p`, and for all periods Problem 1
+  (`problem1_of_testCountLinear`).
+* `TestSlack bd c` (Round 34) — the same for one drive.
+
+## 2. What is proved
+
+| Result | Class | Lean |
+|---|---|---|
+| No slack works for all periods (a steered word of period `2m+1` lets a code pass `m` questions) | FORMAL | `not_testCountBound`, `testCountLinear_slack_ge` |
+| Period 1: slack exactly 2 | FORMAL | `testCountLinear_one`, `not_testCountLinear_one_one` |
+| Halving with excess `e` gives the test-count law with slack `e` | FORMAL | `testCountLinear_of_testHalving` |
+| **Divisor rule** (R34): a word of period `p` written out over `q = m p` drives the machine identically, so per-period laws pass to divisors and refutations to multiples | FORMAL | `driveN_repeat`, `testCountLinear_of_dvd`, `halfLineDies_of_dvd`, `not_testCountLinear_of_dvd` |
+| **The observer's phase** (R34): starting the clock one step later costs at most 2 in the slack (1 if the skipped time is white), `2 s` for `s` steps | FORMAL | `halfStep_length`, `testSlack_of_shift`, `testSlack_of_shift_white`, `testSlack_of_shift_iter` |
+| Least slack on a range: period 2 is 5 on `d ≤ 34`, period 3 is 8 on `d ≤ 28`, **period 4 is 7 on `d ≤ 30`** | CERT | `testCountLinearUpTo_two_five_long`, `…_three_eight_long`, `testCountLinearUpTo_four_seven` with `not_testCountLinear_two_four`, `…_three_seven`, `…_four_six` |
+| Every period divisible by 4 needs slack ≥ 7, by 3 needs ≥ 8, every even period needs ≥ 5 | FORMAL from CERT witnesses | `not_testCountLinear_mul_four`, `_mul_three`, `_mul_two` |
+| Round 34 frontier | | `TestCountPeriodsData.frontier_round34` |
+| **Faster checker** (R35): the diagonal search, one anti-diagonal of the machine per node, is sound | FORMAL | `DiagonalSearch.diagSearch_sound`, `dDiesBy_of_diagSearch`, `nextDiag_spec` |
+| Least slack further out (R35): period 2 is 5 on `d ≤ 42`, period 3 is 8 on `d ≤ 32`, **period 4 is 7 on `d ≤ 32`** | CERT | `testCountLinearUpTo_two_five_42`, `…_three_eight_32`, `…_four_seven_32` |
+| Back to Rule 30 (R35): in every left-white row a non-white periodic column at distance `d` from the left edge lasts at most `2(d+5)` (p = 2, `d ≤ 42`), `3(d+8)` (p = 3, `d ≤ 32`), `4(d+7)` (p = 4, `d ≤ 32`) steps | FORMAL bridge + CERT | `drivenRunBoundUpTo_of_testCountLinearUpTo`, `runBound_two_upTo_42`, … |
+| **A black run is one window read** (R35): the `r` questions of a run of `r` black times pass iff the `r` cells next to the column show `runWord r b` (`0101…`, last cell flipped iff the run is followed by white); a run of length `≥ d + t + 3` from time `t` kills every code of length `d`, for every drive | FORMAL | `blackRun_window`, `blackRun_word`, `blackPair_window`, `dDiesBy_of_long_blackRun` |
+| Round 35 frontier | | `DiagCert.frontier_round35` |
+
+## 3. To Do 35 — does period 4 have a finite slack?
+
+Round 33 found that the period-4 slack 5, exact on `d ≤ 22`, is broken at `d = 30` (the code
+`974520100` passes 36 questions of `0111`). Round 34 took the step the GLM's `tool next` named:
+
+* **EMP.** An exact exhaustive search (study folder `rule30_round34/test_slack34.c`, light cone
+  kept incrementally, one diagonal per bit) found no period-4 word above slack 7 on `d ≤ 37`
+  (all 15 words), and the three-black words (`0111, 1110, 1101, 1011`) stay within 7 to
+  `d ≥ 102`. On the upper half of their searched ranges their excess is at most 3: it drifts
+  downwards.
+* **CERT.** Slack 7 is certified for every period-4 word on `d ≤ 30`, so with
+  `not_testCountLinear_four_six` the least period-4 slack on that range is exactly 7.
+* **Answer so far.** No family refuting every slack was found; the evidence points to the finite
+  slack 7. `TestCountLinear 4 7` for all `d` remains open (it would give `HalfLineDies 4`, hence
+  `HalfLineDies 2` by the divisor rule).
+
+## 4. The perspective reading (the user's wobble/observer idea)
+
+The phase of the drive word is *where the observer starts listening*. `testSlack_of_shift` says
+the excess measured from a later start bounds the excess from an earlier start, up to 1 or 2 per
+step, and only in that direction (an arrow from the later perspective to the earlier one).
+Measured: the four rotations `0111 → 1110 → 1101 → 1011` have records `7, 6, 5, 4` on their
+searched ranges, one step of phase changing the record by one (EMP).
+
+## 5. A bookkeeping identity (EMP data, exact reason)
+
+Before the edge every question halves the codes exactly (`survivors_card`): at the edge
+`2^(d - 1 - n_edge)` codes are alive, where `n_edge` is the number of questions before time
+`d - 1`. Hence for the longest-living code
+
+  excess = (questions after the edge until the last code dies) − (free bits left at the edge) − 1.
+
+So a negative excess means the deterministic questions after the edge remove more than half of the
+survivors on average. The exact alive counts for `110`, the three-black period-4 words, `10`,
+`100` and `1` for `d ≤ 25` are in `rule30_round34/alive_decay34_output.txt` (To Do 36).
+
+## 6. Open
+
+`TestCountLinear 2 c` for any `c` (the period-2 rung, To Do 1/34), `TestCountLinear 4 7` for all
+`d` (To Do 35), and a reason for the downward drift (To Do 36). Round 35 reduced the last one to a
+sharper question: since a black run asks one window question (`blackRun_word`), the post-edge
+tests remove about half per question if the windows next to the column stay spread out
+among the surviving codes; proving that is To Do 38. The faster checker (To Do 37) is done, but it
+only gains a constant factor. No prize problem is settled.

@@ -1,0 +1,513 @@
+{
+ "problems_one_and_two_of_seed_fsTypical": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "apBalanced_of_fsTypical": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "not_eventuallyPeriodic_of_apBalanced": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "hasFrequencyHalf_of_apBalanced": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem2_of_sqrt_bound": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem2_iff_wobble": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem2_iff_totalEcho": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_iff_fsObservers_fail": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_iff_lag_mismatch": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_iff_strobes": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_of_no_resonance": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_of_other_periodic_column": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "centerCol_not_eventually_constant": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "seed_at_most_one_periodic_column": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "offCentre_pair_problem1": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "rdiag_periodic": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "ldiag_eventually_periodic": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "infinitely_many_balanced_rdiag": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "topMonomialConjecture_holds": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "wholeConeDependence_holds": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "ae_fsTypical": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "wobble_1e6": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "wobble_sq_ratio_cert": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "arrow_last_flip_1e6": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "strobe_wobble_table": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "exists_apBalanced_not_fsTypical": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "map_properties_cannot_decide_periodicity": [
+  "propext"
+ ],
+ "exists_row_with_biased_column": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "rdiag_five_not_half": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "no_finite_certificate_problem1": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "no_finite_certificate_problem2": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "exists_balanced_persistent_arrow": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "not_forall_sqrt_bound": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "sqrt_bound_fails_below": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "exists_row_with_periodic_column": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "column_one_separates_mirror": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_of_leftWhiteAperiodicAll": [
+  "propext",
+  "Quot.sound"
+ ],
+ "leftWhiteAperiodicAll_iff_runBoundsAll": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_iff_every_proposal_refuted": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "leftWhiteAperiodic_one": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "refutation_horizon_one": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "runBound_two_upTo_seven": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "runBound_two_sharp": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "runBound_small_periods": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "seed_run_no_conservation_law": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "problem1_iff_no_jumpRule": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_iff_no_linearJumpRule": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "eventuallyPeriodic_iff_jumpRule": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "jumpRule_hits_half_of_seedFSTypical": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_of_lensWalk_not_evPeriodic": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "problem1_iff_lensWalk_not_evPeriodic": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "lens_freq_of_blockNormal": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "hasFrequencyHalf_of_blockNormal_one": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "golayWord_xor": [
+  "propext",
+  "Quot.sound"
+ ],
+ "golay_weight_census": [
+  "propext",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler"
+ ],
+ "golay_octad_distance": [
+  "propext",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler"
+ ],
+ "centerCol_no_linear_rule_128": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "centerCol_no_tap_rule": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "centerCol_lookback_one": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "topMonomial_unique": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "topMonomial_unique_at": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "topDegree_weight_growth": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "runBound_two_upTo_sixteen": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "runBound_two_witness": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "leftWhiteAperiodic_two_of_linearBound": [
+  "propext",
+  "Quot.sound"
+ ],
+ "influence_right_ray": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "influence_left_ray_fast": [
+  "propext",
+  "Quot.sound"
+ ],
+ "influence_left_ray_stalls": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "axisCone_fraction": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "lightCone_ball_fraction": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "lightCone_cube_fraction": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "sum_wordWobble_sq": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "mean_sq_zScore": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "card_large_zScore_le": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "spin_sweep_triangle": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "spin_tri_moments": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "spin_sweep_pyramid": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "spin_core_pyramid": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "helical_planes_distinct": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "helical_planes_dense": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "lattice_collected_iff": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "collected_counts": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "rot_lattice_iff": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "pyramid_orbit": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "pyramid_spin_stabilizer": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "spun_half_turn_read": [
+  "propext",
+  "Quot.sound"
+ ],
+ "spun_axis_invariant": [
+  "propext",
+  "Quot.sound"
+ ],
+ "rule30_spin_readable": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "rule90_spin_halfturn_invisible": [
+  "propext",
+  "Quot.sound"
+ ],
+ "rule30_row_not_mirror": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "spun_half_turn_visible_every_row": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "double_rotation_closes_iff": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "double_rotation_section_dense": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "conj_fixes_axis": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "left_mul_no_fixed_vector": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "left_right_double_rotation": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "runBound_two_upTo_eighteen": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ],
+ "runBound_two_witness18": [
+  "propext",
+  "Classical.choice",
+  "Lean.ofReduceBool",
+  "Lean.trustCompiler",
+  "Quot.sound"
+ ]
+}

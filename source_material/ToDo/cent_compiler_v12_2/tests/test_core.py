@@ -75,7 +75,8 @@ from cent_compiler.program import (  # noqa: E402
     analyse,
     coerce_input,
 )
-from cent_compiler.evaluator import Evaluator, run_program  # noqa: E402
+from cent_compiler.evaluator import HANDLERS, Evaluator, run_program  # noqa: E402
+from cent_compiler import vocabulary  # noqa: E402
 from cent_compiler.resolution import Layer, resolve  # noqa: E402
 
 CHECKS: list[tuple[str, str, object]] = []
@@ -748,6 +749,32 @@ def _single(op, params, inputs, in_kind="numeric", out="y"):
         (Instruction(op, ("x",), out, params),), {out: out},
     )
     return [row[out] for row in Evaluator(program).run([{"x": v} for v in inputs])]
+
+
+@check("coverage", "every vocabulary primitive has a contract and capability record")
+def _():
+    ops = vocabulary.ALL_PRIMITIVES
+    expect(len(ops) == 41 and len(set(ops)) == 41, "the vocabulary declares 41 unique primitives")
+    expect(set(vocabulary.CONTRACTS) == set(ops), "every primitive has a contract")
+    report = vocabulary.capability_report()
+    expect(
+        report["atomic_count"] == 29 and report["composite_count"] == 12,
+        "the capability report preserves the atomic/composite split",
+    )
+    expect(set(report["contracts"]) == set(ops), "the capability report covers every primitive")
+    expect(
+        all(contract.status in vocabulary.STATUS_ORDER for contract in vocabulary.CONTRACTS.values())
+        and sum(len(items) for items in report["by_status"].values()) == len(ops),
+        "every contract has a classified capability status",
+    )
+
+
+@check("coverage", "every vocabulary primitive has dispatch and wire-kind coverage")
+def _():
+    ops = set(vocabulary.ALL_PRIMITIVES)
+    expect(set(HANDLERS) == ops, "every primitive has an evaluator handler")
+    expect(ops <= set(vocabulary.INPUT_KINDS), "every primitive declares its input kinds")
+    expect(ops <= set(vocabulary.OUTPUT_KIND), "every primitive declares its output kind")
 
 
 @check("coverage", "sum, neg, mult and scale compose exactly")

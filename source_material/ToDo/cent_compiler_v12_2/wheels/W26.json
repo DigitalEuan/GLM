@@ -1,0 +1,407 @@
+{
+  "id": "W26",
+  "title": "Astrophysics & Stellar Structure",
+  "axioms": [
+    "luminosity = stefan_boltzmann_constant * radius^2 * temperature^4",
+    "schwarzschild_radius = 2 * gravitational_constant * mass / speed_of_light^2",
+    "orbital_velocity^2 = gravitational_constant * mass / orbital_radius",
+    "hawking_temperature = hbar * speed_of_light^3 / (gravitational_constant * mass * boltzmann_constant)"
+  ],
+  "cases": [
+    {
+      "id": "W26-01",
+      "equation": "stefan_boltzmann_constant = luminosity / (radius^2 * temperature^4)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "Inverse of the blackbody luminosity law L = 4*pi*R^2*sigma*T^4; the monomial convention omits 4*pi and is checked on its displayed dimensions."
+    },
+    {
+      "id": "W26-02",
+      "equation": "mass = schwarzschild_radius * speed_of_light^2 / (2 * gravitational_constant)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "Exact algebraic inverse of r_s = 2GM/c^2."
+    },
+    {
+      "id": "W26-03",
+      "equation": "orbital_radius = gravitational_constant * mass / orbital_velocity^2",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "Exact algebraic inverse of the circular-orbit relation v^2 = GM/r."
+    },
+    {
+      "id": "W26-04",
+      "equation": "mass = hbar * speed_of_light^3 / (gravitational_constant * boltzmann_constant * hawking_temperature)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "Inverse of the Hawking temperature T_H = hbar*c^3/(8*pi*G*M*k_B); the monomial convention omits 8*pi."
+    },
+    {
+      "id": "W26-N1",
+      "equation": "luminosity = stefan_boltzmann_constant * radius^2 / temperature^4",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": "Negative control: inverting the temperature power breaks the exact Stefan-Boltzmann dimensions."
+    }
+  ],
+  "quantities": [
+    "luminosity",
+    "stefan_boltzmann_constant",
+    "radius",
+    "temperature",
+    "schwarzschild_radius",
+    "gravitational_constant",
+    "mass",
+    "speed_of_light",
+    "orbital_velocity",
+    "orbital_radius",
+    "hawking_temperature",
+    "hbar",
+    "boltzmann_constant"
+  ],
+  "dimensions": {
+    "luminosity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "stefan_boltzmann_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -3,
+        0,
+        -4,
+        0,
+        0,
+        0
+      ]
+    },
+    "radius": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "temperature": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "schwarzschild_radius": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "gravitational_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        3,
+        -1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "speed_of_light": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "orbital_velocity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "orbital_radius": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "hawking_temperature": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "hbar": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "boltzmann_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "provenance": {
+    "status": "sourced",
+    "domain": "astrophysics/stellar structure and relativistic compact objects",
+    "conventions": [
+      "The declared monomials omit conventional 4*pi and 8*pi factors where the source equation carries them; those cases are labelled model_convention.",
+      "The exact dimension checks use the displayed monomial. The omitted factors are dimensionless and do not change the exponent vectors.",
+      "No measured stellar mass, radius, luminosity or temperature is asserted; the wheel declares algebraic relations only."
+    ],
+    "sources": [
+      {
+        "id": "PDG-2025-ASTRO",
+        "title": "PDG 2025 Astrophysical Constants",
+        "url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-astrophysical-constants.pdf",
+        "supports": "G, c, hbar, k_B and Stefan-Boltzmann constant conventions"
+      },
+      {
+        "id": "UNL-LUMINOSITY",
+        "title": "Luminosity and the Stefan-Boltzmann law",
+        "url": "https://astro.unl.edu/newRTs/Luminosity/Background/HR_Luminosity1.html",
+        "supports": "L = 4*pi*R^2*sigma*T^4"
+      },
+      {
+        "id": "HAWKING-1974",
+        "title": "Black hole explosions? (Hawking radiation)",
+        "url": "https://doi.org/10.1038/248030a0",
+        "supports": "T_H = hbar*c^3/(8*pi*G*M*k_B)"
+      },
+      {
+        "id": "NASA-SCHWARZSCHILD",
+        "title": "The Anatomy of Black Holes - Schwarzschild radius",
+        "url": "https://imagine.gsfc.nasa.gov/educators/blackholes/imagine/page22.html",
+        "supports": "R = 2GM/c^2"
+      },
+      {
+        "id": "ORBIT-LIBRETEXTS",
+        "title": "Satellite Orbits and Energy (OpenStax via LibreTexts)",
+        "url": "https://phys.libretexts.org/Bookshelves/University_Physics/University_Physics_(OpenStax)/Book%3A_University_Physics_I_-_Mechanics_Sound_Oscillations_and_Waves_(OpenStax)/13%3A_Gravitation/13.05%3A_Satellite_Orbits_and_Energy",
+        "supports": "v_orbit = sqrt(G*M/r) for a circular orbit"
+      },
+      {
+        "id": "CARROLL-OSTLIE",
+        "title": "An Introduction to Modern Astrophysics, 2nd edition",
+        "url": "https://doi.org/10.1017/9781108380980",
+        "supports": "Stellar luminosity, circular orbital motion and relativistic compact objects"
+      }
+    ]
+  }
+}

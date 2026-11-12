@@ -1,0 +1,11 @@
+$ python3 r48_triangles.py 10000
+rows 100 <= t < 10000
+longest white run by eighth of row (left -> right): [16, 16, 16, 23, 20, 21, 20, 35]
+runs of length >= 8 by eighth: [26872, 25057, 25219, 24511, 24356, 24179, 24360, 24679]
+runs of length >= 12 by eighth: [1604, 2529, 1865, 1579, 1494, 1467, 1494, 1939]
+runs of length >= 16 by eighth: [36, 295, 98, 95, 71, 94, 86, 269]
+runs of length >= 20 by eighth: [0, 0, 0, 7, 1, 4, 1, 119]
+record white runs one cell inside the right edge (t, length): [(2, 2), (4, 3), (8, 5), (16, 6), (32, 8), (64, 14), (128, 15), (256, 23), (512, 24), (1024, 26), (2048, 28), (4096, 33), (8192, 35)]
+finished black line segments, rows < 2000:
+  left-down : count 1000216 mean length 1.988 max 21
+  right-down: count 1500493 mean length 1.332 max 14

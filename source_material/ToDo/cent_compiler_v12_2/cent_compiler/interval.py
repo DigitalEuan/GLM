@@ -163,12 +163,20 @@ class Interval:
         return result
 
     # -- certified transcendental functions -------------------------------
-    def exp(self, prec_bits: int = _DEFAULT_PREC, max_terms: int = _MAX_TERMS) -> "Interval":
+    def exp(
+        self,
+        prec_bits: int = _DEFAULT_PREC,
+        max_terms: int = _MAX_TERMS,
+        *,
+        round_places: int | None = None,
+    ) -> "Interval":
         """Enclosure of ``exp(x)`` for the whole interval."""
         if self.is_point:
-            return exp_q(self.lo, prec_bits, max_terms)
+            return exp_q(self.lo, prec_bits, max_terms, round_places=round_places)
         # Monotone: evaluate both endpoints.
-        return exp_q(self.lo, prec_bits, max_terms) | exp_q(self.hi, prec_bits, max_terms)
+        return exp_q(
+            self.lo, prec_bits, max_terms, round_places=round_places
+        ) | exp_q(self.hi, prec_bits, max_terms, round_places=round_places)
 
     def log(self, prec_bits: int = _DEFAULT_PREC, max_terms: int = _MAX_TERMS) -> "Interval":
         """Enclosure of ``log(x)``; requires strictly positive endpoints."""
@@ -246,15 +254,23 @@ def sqrt_q(x: Any, prec_bits: int = _DEFAULT_PREC) -> Interval:
 # ---------------------------------------------------------------------------
 
 def _exp_series(y: Q, tol: Q, max_terms: int) -> Interval:
-    """Taylor enclosure of exp(y) for |y| <= 1/2, using e^|y| <= 2."""
+    """Taylor enclosure of exp(y) for |y| <= 1/2, using e^|y| <= 2.
+
+    The remainder power and factorial are carried forward by multiplication;
+    recomputing ``abs(y) ** (n + 1)`` and ``factorial(n + 1)`` at every term
+    would repeat large-integer gcd work inside a long transient.
+    """
     term = Fraction(1)
     total = Fraction(1)
+    ay = abs(y)
+    power = ay
+    factorial = 1
     n = 0
     while True:
         n += 1
         term = term * y / n
         total += term
-        remainder = 2 * abs(y) ** (n + 1) / math.factorial(n + 1)
+        remainder = 2 * power * ay / (factorial * (n + 1))
         if remainder <= tol:
             return Interval(total, total + remainder)
         if n >= max_terms:
@@ -263,10 +279,41 @@ def _exp_series(y: Q, tol: Q, max_terms: int) -> Interval:
                 "exp series did not reach the requested width",
                 detail={"terms": n, "tol": format_q(tol)},
             )
+        power *= ay
+        factorial *= n + 1
 
 
-def exp_q(x: Any, prec_bits: int = _DEFAULT_PREC, max_terms: int = _MAX_TERMS) -> Interval:
-    """Certified enclosure of ``exp(x)`` for any rational ``x``."""
+def _round_interval_outward(value: Interval, places: int) -> Interval:
+    """Widen an enclosure to a fixed decimal grid.
+
+    This is used only as an internal size control for long transient runs.  It
+    preserves containment by rounding the lower endpoint down and the upper
+    endpoint up with integer arithmetic.
+    """
+    scale = 10 ** places
+    lo_scaled = value.lo * scale
+    hi_scaled = value.hi * scale
+    lo = lo_scaled.numerator // lo_scaled.denominator
+    hi = -((-hi_scaled.numerator) // hi_scaled.denominator)
+    return Interval(Fraction(lo, scale), Fraction(hi, scale))
+
+
+def exp_q(
+    x: Any,
+    prec_bits: int = _DEFAULT_PREC,
+    max_terms: int = _MAX_TERMS,
+    *,
+    round_places: int | None = None,
+) -> Interval:
+    """Certified enclosure of ``exp(x)`` for any rational ``x``.
+
+    ``round_places`` optionally rounds each intermediate result outward to a
+    fixed decimal grid.  Exact repeated squaring otherwise multiplies the
+    denominator by its own size at every step, which makes long interval
+    transients needlessly expensive; the outward grid keeps containment while
+    bounding that growth.  The default ``None`` preserves the unbounded exact
+    behaviour used by the rest of the exact core.
+    """
     x = _m(x)
     if x == 0:
         return Interval.point(Fraction(1))
@@ -282,8 +329,12 @@ def exp_q(x: Any, prec_bits: int = _DEFAULT_PREC, max_terms: int = _MAX_TERMS) -
     # Account for error amplification by k squarings (relative error doubles).
     tol = Fraction(1, 1 << (prec_bits + k + 4))
     interval = _exp_series(y, tol, max_terms)
+    if round_places is not None:
+        interval = _round_interval_outward(interval, round_places)
     for _ in range(k):
         interval = Interval(interval.lo * interval.lo, interval.hi * interval.hi)
+        if round_places is not None:
+            interval = _round_interval_outward(interval, round_places)
     if negative:
         interval = interval.reciprocal()
     # exp is strictly positive.

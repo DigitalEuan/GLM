@@ -204,6 +204,22 @@ class Decomposer:
             self.ops.append(COp("mult", (l, r), out))
             return out
 
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
+            l = self.visit(node.left)
+            r = self.visit(node.right)
+            out = self._fresh("sum")
+            self.ops.append(COp("sum", (l, r), out))
+            return out
+
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Sub):
+            l = self.visit(node.left)
+            r = self.visit(node.right)
+            neg = self._fresh("neg")
+            self.ops.append(COp("neg", (r,), neg))
+            out = self._fresh("sum")
+            self.ops.append(COp("sum", (l, neg), out))
+            return out
+
         if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div):
             l = self.visit(node.left)
             r = self.visit(node.right)

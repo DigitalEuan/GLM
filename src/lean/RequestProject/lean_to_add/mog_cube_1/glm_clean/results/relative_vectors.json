@@ -1,0 +1,216 @@
+{
+  "experiment": "The Path: Concepts as Relative Vectors",
+  "n_concepts": 28,
+  "concepts": {
+    "left": {
+      "vector": [
+        -1,
+        0,
+        0
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "right": {
+      "vector": [
+        1,
+        0,
+        0
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "up": {
+      "vector": [
+        0,
+        1,
+        0
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "down": {
+      "vector": [
+        0,
+        -1,
+        0
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "forward": {
+      "vector": [
+        0,
+        0,
+        1
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "back": {
+      "vector": [
+        0,
+        0,
+        -1
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "center": {
+      "vector": [
+        0,
+        0,
+        0
+      ],
+      "domain": "direction",
+      "reference": "center"
+    },
+    "freezing": {
+      "vector": [
+        0.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "cold": {
+      "vector": [
+        10.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "cool": {
+      "vector": [
+        20.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "tepid": {
+      "vector": [
+        30.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "warm": {
+      "vector": [
+        40.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "hot": {
+      "vector": [
+        60.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "boiling": {
+      "vector": [
+        100.0
+      ],
+      "domain": "temperature",
+      "reference": "freezing"
+    },
+    "red": {
+      "vector": [
+        0.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "orange": {
+      "vector": [
+        80.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "yellow": {
+      "vector": [
+        120.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "green": {
+      "vector": [
+        170.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "blue": {
+      "vector": [
+        230.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "indigo": {
+      "vector": [
+        260.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "violet": {
+      "vector": [
+        320.0
+      ],
+      "domain": "color",
+      "reference": "red"
+    },
+    "tiny": {
+      "vector": [
+        0.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    },
+    "small": {
+      "vector": [
+        3.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    },
+    "medium": {
+      "vector": [
+        9.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    },
+    "big": {
+      "vector": [
+        14.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    },
+    "large": {
+      "vector": [
+        19.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    },
+    "huge": {
+      "vector": [
+        39.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    },
+    "giant": {
+      "vector": [
+        62.0
+      ],
+      "domain": "size",
+      "reference": "tiny"
+    }
+  }
+}

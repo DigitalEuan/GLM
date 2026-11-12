@@ -4,7 +4,7 @@ Given a target relation (the £), this module builds one report containing:
 
 * the ¢ DAG the formula decomposes into, and the primitive census;
 * every ∆ implementation, with the top few ranked by ¢_cost;
-* the generated SPICE netlist for the dominant primitive;
+* the structurally matched SPICE netlist, or an explicit template gap;
 * an exact-core program when the DAG maps onto the evaluator's vocabulary.
 
 The same report can be written as a self-contained *material bundle*
@@ -31,6 +31,7 @@ from .cost_function import rank_and_prune
 from .evaluator import Evaluator
 from .exact import CentError, ErrorCode, format_q, q_to_json
 from .grammar import CGraph, COp, decompose_formula, preprocess_formula
+from .hypothesis_bridge import LAYERS, escalate
 from .interval import Interval
 from .port import PhysicalPort
 from .program import (
@@ -40,24 +41,120 @@ from .program import (
     decode_exact,
     program_from_dict,
 )
-from .spice_emitter import generate_spice_netlist
+from .output_certificate import attach_certificate
+from .spice_emitter import (
+    SpiceTemplateMatch,
+    generate_spice_netlist,
+    select_spice_template,
+)
 from .substrate_library import enumerate_delta
 from .vocabulary import ATOMIC_PRIMITIVES, COMPOSITE_PRIMITIVES, NUMERIC
 
 MATERIAL_SCHEMA = "cent-material/1"
+COMPILE_SCHEMA = "cent-compile/1"
 CONST_PREFIX = "const:"
 
-#: SPICE template chosen for a set of ¢ primitives (first match wins).
-_TEMPLATE_ORDER: tuple[tuple[str, str], ...] = (
-    ("sqrt", "opamp_sqrt"),
-    ("accum", "rc_integrator"),
-    ("exp", "diode_exp"),
-    ("log", "log_amp"),
-    ("sat", "clipper"),
-    ("div", "divider"),
-    ("mult", "multiplier"),
-    ("sum", "kcl_summer"),
-)
+#: Reference values for the existing electrical fidelity model.  These are
+#: screening defaults, not datasheet or measured device values.  Non-electrical
+#: candidates do not inherit Johnson/shot-noise checks they cannot justify.
+REFERENCE_FIDELITY_PARAMS: dict[str, Any] = {
+    "v_in_range": [0, 10],
+    "opamp_gain": 1e5,
+    "bandwidth_hz": 1e6,
+    "temperature": 300,
+    "resistance": 1000,
+    "signal_level": 1.0,
+    "current": 1e-3,
+    "component_tolerance": 0.01,
+    "n_components": 3,
+}
+
+
+def fidelity_trace(impl: Any) -> dict[str, Any]:
+    """Run or explicitly gap the five-layer cascade for one ∆ candidate.
+
+    The existing layer model is electrical.  Applying its Johnson-noise and
+    shot-noise checks to a mechanical or fluidic candidate would be a category
+    error, so those domains keep all five layer slots with explicit gaps.
+    """
+    domain = str(impl.substrate_domain)
+    component = ", ".join(impl.components[:2]) or "(no component)"
+    if domain != "electrical":
+        layers = [{
+            "layer": LAYERS[0].name,
+            "status": "pass",
+            "detail": "declared proposal; ideal operator model only",
+        }]
+        for layer in LAYERS[1:]:
+            layers.append({
+                "layer": layer.name,
+                "status": "gap",
+                "detail": f"no declared {layer.name} model for the {domain} domain",
+            })
+        return {
+            "component": component,
+            "domain": domain,
+            "profile": "domain-aware; no cross-domain noise model borrowed",
+            "direction": "not escalated",
+            "converged": False,
+            "flip_layer": None,
+            "layers": layers,
+        }
+
+    params = {
+        **REFERENCE_FIDELITY_PARAMS,
+        "n_components": max(1, len(impl.components)),
+        "carrier": impl.carrier_type,
+        "is_delta_sigma": bool(impl.is_delta_sigma),
+    }
+    arrow = escalate(params)
+    layers = [
+        {
+            "layer": name,
+            "status": "pass" if passed else "gap",
+            "detail": detail,
+        }
+        for name, passed, detail in arrow.reads
+    ]
+    return {
+        "component": component,
+        "domain": domain,
+        "profile": "reference electrical screening defaults; not datasheet or measured values",
+        "direction": arrow.direction,
+        "converged": arrow.converged,
+        "flip_layer": arrow.flip_layer,
+        "layers": layers,
+    }
+
+
+def render_fidelity_trace(fidelity: Iterable[Mapping[str, Any]]) -> list[str]:
+    """Render the layer trace shared by the CLI and the report renderer."""
+    lines = ["   Fidelity trace (reference profile; not device values):"]
+    items = list(fidelity)
+    if not items:
+        lines.append("     (no ranked candidate to escalate)")
+        return lines
+    for item in items:
+        lines.append(
+            f"     {item['component']} [{item['domain']}]: {item['direction']}"
+        )
+        for layer in item["layers"]:
+            lines.append(
+                f"       [{layer['status']:<4}] {layer['layer']}: {layer['detail']}"
+            )
+    return lines
+
+
+def proposal_boundary() -> dict[str, Any]:
+    """The limitation carried by every compile proposal."""
+    return {
+        "status": "not-fabricated",
+        "claim": "This is a declared ∆ proposal, not a fabricated or measured device.",
+        "missing_evidence": [
+            "fabricated and measured device",
+            "manufacturing sign-off",
+        ],
+    }
 
 HELP = """\
 Commands
@@ -92,15 +189,9 @@ def split_relation(text: str) -> tuple[str, str]:
     return target, expression
 
 
-def select_template(ops: Sequence[str] | set[str]) -> str | None:
-    """Pick the SPICE template for a primitive set, or ``None``."""
-    present = set(ops)
-    if "accum" in present and "wrap" in present:
-        return "delta_sigma"
-    for op, template in _TEMPLATE_ORDER:
-        if op in present:
-            return template
-    return None
+def select_template(dag: CGraph) -> SpiceTemplateMatch:
+    """Return a structural SPICE-template decision for the whole DAG."""
+    return select_spice_template(dag)
 
 
 def program_from_dag(dag: CGraph, name: str = "relation") -> tuple[Program | None, dict[str, Fraction], list[str]]:
@@ -191,15 +282,19 @@ class Report:
     delta_sigma_count: int
     top: tuple[tuple[Any, Any], ...]
     template: str | None
+    template_status: str
+    template_detail: str
+    template_decision: Mapping[str, Any]
     netlist: str | None
     program: Program | None
     bindings: Mapping[str, Fraction]
     notes: tuple[str, ...]
+    fidelity: tuple[dict[str, Any], ...] = ()
 
     # -- serialisation ----------------------------------------------------
     def material(self) -> dict[str, Any]:
         """A self-contained, JSON-serialisable material bundle."""
-        return {
+        return attach_certificate({
             "schema": MATERIAL_SCHEMA,
             "relation": self.relation,
             "target": self.target,
@@ -226,9 +321,80 @@ class Report:
             },
             "program": None if self.program is None else self.program.as_dict(),
             "bindings": {wire: q_to_json(value) for wire, value in self.bindings.items()},
-            "spice": {"template": self.template, "netlist": self.netlist},
+            "spice": {
+                "template": self.template,
+                "status": self.template_status,
+                "detail": self.template_detail,
+                "decision": dict(self.template_decision),
+                "netlist": self.netlist,
+            },
+            "fidelity": list(self.fidelity),
             "notes": list(self.notes),
+        })
+
+
+def compile_payload(relation: str, top_n: int = 6) -> dict[str, Any]:
+    """Return the tooling view of one £ compile.
+
+    This wraps :func:`build_report`; it is not a second solver.  Each proposal
+    carries its domain, carrier, components and the declared six-axis cost
+    breakdown so a rank can be audited without parsing the text view.
+    """
+    report = build_report(relation, top_n=top_n)
+    proposals = [
+        {
+            "rank": index,
+            "domain": impl.substrate_domain,
+            "carrier": impl.carrier_type,
+            "delta_sigma": bool(impl.is_delta_sigma),
+            "components": list(impl.components),
+            "boundary": proposal_boundary(),
+            "cost": {
+                "total": cost.total,
+                "component_count": cost.component_count_score,
+                "domain_consistency": cost.domain_consistency_score,
+                "carrier_consistency": cost.carrier_consistency_score,
+                "implementation": cost.implementation_cost_score,
+                "precision": cost.precision_score,
+                "speed": cost.speed_score,
+            },
         }
+        for index, (impl, cost) in enumerate(report.top, 1)
+    ]
+    return {
+        "ok": bool(report.impl_count and report.top),
+        "schema": COMPILE_SCHEMA,
+        "relation": report.relation,
+        "target": report.target,
+        "expression": report.expression,
+        "dag": [
+            {
+                "op": op.op,
+                "inputs": list(op.inputs),
+                "output": op.output,
+                "const": None if op.const is None else q_to_json(op.const),
+            }
+            for op in report.ops
+        ],
+        "summary": {
+            "primitives": dict(report.primitive_counts),
+            "atomic": report.atomic_count,
+            "composite": report.composite_count,
+            "implementations": report.impl_count,
+            "delta_sigma": report.delta_sigma_count,
+        },
+        "proposals": proposals,
+        "boundary": proposal_boundary(),
+        "spice": {
+            "template": report.template,
+            "status": report.template_status,
+            "detail": report.template_detail,
+            "decision": dict(report.template_decision),
+            "netlist": report.netlist,
+        },
+        "fidelity": list(report.fidelity),
+        "notes": list(report.notes),
+    }
 
 
 def build_report(relation: str, top_n: int = 6) -> Report:
@@ -249,13 +415,16 @@ def build_report(relation: str, top_n: int = 6) -> Report:
         notes.append(f"∆ ranking failed: {exc}")
         top = ()
 
-    ops_set = {op.op for op in dag.ops}
-    template = select_template(ops_set)
+    template_match = select_template(dag)
+    template = template_match.template
     netlist = generate_spice_netlist(template) if template else None
+    if template_match.status != "match":
+        notes.append(template_match.detail)
     program, bindings, program_notes = program_from_dag(dag, name=target)
     notes.extend(program_notes)
 
     counts = Counter(op.op for op in dag.ops)
+    fidelity = tuple(fidelity_trace(impl) for impl, _ in top)
     return Report(
         relation=relation.strip(),
         target=target,
@@ -270,10 +439,18 @@ def build_report(relation: str, top_n: int = 6) -> Report:
         delta_sigma_count=sum(1 for impl in implementations if impl.is_delta_sigma),
         top=top,
         template=template,
+        template_status=template_match.status,
+        template_detail=template_match.detail,
+        template_decision={
+            "structural": template_match.structural,
+            "basis": template_match.selection_basis,
+            "proposal_effect": template_match.proposal_effect,
+        },
         netlist=netlist,
         program=program,
         bindings=bindings,
         notes=tuple(notes),
+        fidelity=fidelity,
     )
 
 
@@ -335,13 +512,19 @@ def render_report(report: Report) -> str:
         lines.append("   (no ranked implementations)")
 
     lines.append("")
+    lines.extend(render_fidelity_trace(report.fidelity))
+
+    lines.append("")
     lines.append("5. Generated material")
     if report.template and report.netlist:
         lines.append(
             f"   SPICE: {report.template} ({len(report.netlist.splitlines())} lines)"
         )
     else:
-        lines.append("   SPICE: no template for these ¢ primitives")
+        lines.append("   SPICE: no structural template; see Notes for the gap")
+    lines.append(
+        "   Template decision is structural; it does not filter ∆ proposals."
+    )
     if report.program is not None:
         lines.append(
             f"   Exact program: {len(report.program.instructions)} instruction(s), "

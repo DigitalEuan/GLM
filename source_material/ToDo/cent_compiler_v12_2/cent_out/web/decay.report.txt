@@ -1,0 +1,26 @@
+==============================================================================
+£  decay = exp(-t / tau)
+==============================================================================
+
+1. ¢ DAG — 3 primitive(s)
+   _neg1          = neg(t)
+   _div2          = div(_neg1, tau)
+   decay          = exp(_div2)
+
+2. ¢ primitives
+   div x1, exp x1, neg x1
+   atomic: 2   composite: 1
+
+3. ∆ implementations
+   4 total, 0 delta-sigma
+
+4. Top ∆ by ¢_cost
+   #   cost  domain        carrier     ∆Σ   components
+   1   8     electrical    temporal    no   op-amp + multiplier in feedback (a/...
+   2   10    mechanical    static      no   lever or gear train, Arrhenius rate...
+   3   11    electrical    static      no   lever or gear train, BJT/diode (I =...
+
+5. Generated material
+   SPICE: diode_exp (9 lines)
+   Exact program: 3 instruction(s), inputs: t, tau, outputs: decay
+   Save with:  cent report "<£>" --save cent_out

@@ -33,6 +33,7 @@ call-sites in ``knowledge/model.py``, the monkey-patch in
 ``word_address.py`` and ``corpus/inventory.py``.  It is a faithful
 reconstruction of the documented behaviour; if a discrepancy with the
 original is found, the original's behaviour is the spec.*
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
 
 *Last altered 31 October 2026 (repository check): digests taken through
 ``glm_universal.integrity`` rather than ``hashlib`` (the D9 digest
@@ -68,11 +69,17 @@ row, rather than rows run together up to the next full stop).
 Every count of the model moves with it;
 the cache schema in ``model.py`` was bumped so no document read by the old
 rule is reused.*
+=======
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 """
 from __future__ import annotations
 
 import ast
 import csv
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
+=======
+import hashlib
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 import io
 import json
 import re
@@ -91,8 +98,11 @@ from typing import (
     Tuple,
 )
 
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
 from .. import integrity
 
+=======
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 __all__ = [
     "Document",
     "Sentence",
@@ -115,9 +125,15 @@ __all__ = [
 #: The repository root.  ``knowledge/reader.py`` lives at
 #: ``glm_universal/knowledge/reader.py`` -- three directories below the root
 #: -- so three ``parent`` calls reach it (matching the convention in
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
 #: ``corpus/inventory.py``, ``REPOSITORY_ROOT``).
 _HERE = Path(__file__).resolve()
 REPOSITORY_ROOT = _HERE.parent.parent.parent.parent
+=======
+#: ``corpus/inventory.py`` line 80).
+_HERE = Path(__file__).resolve()
+REPOSITORY_ROOT = _HERE.parent.parent.parent
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 
 #: Directories never entered by the walk.  Mirrors ``corpus/inventory.py``'s
 #: ``SKIP_DIRECTORIES`` minus the ones the reader *does* enter
@@ -133,7 +149,11 @@ SKIP_DIRECTORIES: FrozenSet[str] = frozenset({
 })
 
 #: Files never read by the walk.  The session working note is the only one
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
 #: (mirrors ``corpus/inventory.py`` ``SESSION_NOTES``).
+=======
+#: (mirrors ``corpus/inventory.py`` line 92).
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 SESSION_NOTES: FrozenSet[str] = frozenset({"ARISTOTLE_SUMMARY.md"})
 
 #: The footer that closes a Tier-0 block (mirrors ``corpus/inventory.py``
@@ -215,12 +235,18 @@ _TIER0_HEADING = re.compile(r"^##\s+Tier\s*0\b", re.IGNORECASE)
 #: these so a paragraph becomes one or more sentences.
 _SENTENCE_END = re.compile(r"(?<=[.!?])\s+|(?<=[.!?])$")
 
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
 #: A token: a maximal run of word characters (letters, digits, underscore),
 #: an apostrophe inside a word kept (``corpus's`` is one token).  Punctuation
 #: is never a token.  This is the simple, deterministic tokeniser the corpus
 #: uses (31 October 2026: words only, as the original was -- see the module
 #: docstring).
 _TOKEN = re.compile(r"\w+(?:'\w+)*")
+=======
+#: A token: a maximal run of letters (incl. underscore) or a single other
+#: character.  This is the simple, deterministic tokeniser the corpus uses.
+_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_]*|[^A-Za-z0-9_\s]")
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 
 
 def top_folder(path: str) -> str:
@@ -250,9 +276,15 @@ def _immediate_folder(path: str) -> str:
 def _tokenise(text: str) -> Tuple[str, ...]:
     """Lower-case, deterministic tokenisation, preserving order.
 
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
     Word runs become one token (letters, digits and underscore, an
     apostrophe inside a word kept); punctuation is never a token.
     Whitespace is dropped.  Empty tokens are never produced.
+=======
+    Letters/underscore runs become one token; every other non-space
+    character becomes its own token.  Whitespace is dropped.  Empty tokens
+    are never produced.
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
     """
     out: List[str] = []
     for m in _TOKEN.finditer(text):
@@ -276,10 +308,14 @@ def _split_sentences(text: str) -> List[str]:
     # Walk the regex, splitting after each sentence-end.
     out: List[str] = []
     start = 0
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
     # A sentence end must be followed by whitespace or the end of the text
     # (31 October 2026: the pattern had ``\s*``, so ``glm_universal.knowledge``
     # and ``21.5%`` were cut at every period).
     for m in re.finditer(r"[.!?]+[\"'\)\]]*(?:\s+|$)", text):
+=======
+    for m in re.finditer(r"[.!?]+[\"'\)\]]*\s*", text):
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
         end = m.end()
         chunk = text[start:end].strip()
         if chunk:
@@ -296,6 +332,7 @@ def _word_count(text: str) -> int:
     return len(text.split())
 
 
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
 def _is_prose(text: str) -> bool:
     """The JSON/CSV prose rule (``CORPUS_KNOWLEDGE_STUDY.md`` §1): at least
     :data:`MIN_PROSE_WORDS` words, and more words than numbers -- a token
@@ -328,6 +365,8 @@ def _table_rows(text: str) -> List[str]:
     return [ln.strip() for ln in text.split("\n") if ln.strip()]
 
 
+=======
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 # ---------------------------------------------------------------------------
 # Markdown
 # ---------------------------------------------------------------------------
@@ -387,10 +426,14 @@ def _read_markdown(path: str, data: str) -> Optional[Document]:
             buf.append(_HEADING.sub(r"\2", line))
             i += 1
             continue
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
         # Normal line: accumulate.  A table row never shares a paragraph
         # with prose: the paragraph breaks where a table starts or ends.
         if buf and _is_table_row(line) != _is_table_row(buf[0]):
             _flush(in_tier0)
+=======
+        # Normal line: accumulate.
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
         buf.append(line)
         i += 1
     _flush(in_tier0)
@@ -398,12 +441,20 @@ def _read_markdown(path: str, data: str) -> Optional[Document]:
     if not paragraphs:
         return None
 
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
     digest = integrity.sha256_hex(data.encode("utf-8"))
+=======
+    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
     folder = _immediate_folder(path)
     sentences: List[Sentence] = []
     para_objs: List[Paragraph] = []
     for p_idx, (ptext, tier0) in enumerate(paragraphs):
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
         s_list = _table_rows(ptext) if _is_table(ptext) else _split_sentences(ptext)
+=======
+        s_list = _split_sentences(ptext)
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
         s_objs: List[Sentence] = []
         for s_idx, stext in enumerate(s_list):
             toks = _tokenise(stext)
@@ -448,7 +499,11 @@ def _read_text(path: str, data: str) -> Optional[Document]:
     paragraphs = [p.strip() for p in re.split(r"\n\s*\n", data) if p.strip()]
     if not paragraphs:
         return None
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
     digest = integrity.sha256_hex(data.encode("utf-8"))
+=======
+    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
     folder = _immediate_folder(path)
     sentences: List[Sentence] = []
     para_objs: List[Paragraph] = []
@@ -490,12 +545,16 @@ def _read_python(path: str, data: str) -> Optional[Document]:
         tree = None
     if tree is not None:
         for node in ast.walk(tree):
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
             # Only these nodes can carry a docstring; ``ast.get_docstring``
             # raises TypeError on any other (31 October 2026).
             if not isinstance(node, (ast.Module, ast.ClassDef,
                                      ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
             doc = ast.get_docstring(node, clean=True)
+=======
+            doc = ast.get_docstring(node, clean=False)
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
             if doc:
                 paragraphs.append(doc)
 
@@ -523,7 +582,11 @@ def _read_python(path: str, data: str) -> Optional[Document]:
     if not paragraphs:
         return None
 
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
     digest = integrity.sha256_hex(data.encode("utf-8"))
+=======
+    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
     folder = _immediate_folder(path)
     sentences: List[Sentence] = []
     para_objs: List[Paragraph] = []
@@ -596,7 +659,11 @@ def _read_lean(path: str, data: str) -> Optional[Document]:
     if not paragraphs:
         return None
     return _read_text_from_paragraphs(path, paragraphs, _immediate_folder(path),
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
                                       integrity.sha256_hex(data.encode("utf-8")))
+=======
+                                      hashlib.sha256(data.encode("utf-8")).hexdigest())
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
 
 
 def _read_text_from_paragraphs(path: str, paragraphs: List[str],
@@ -633,7 +700,11 @@ def _collect_json_strings(obj, out: List[str]) -> None:
     """Recursively collect every string value (not keys) from a parsed JSON
     object.  Object keys are not prose."""
     if isinstance(obj, str):
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
         if _is_prose(obj):
+=======
+        if _word_count(obj) >= MIN_PROSE_WORDS:
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
             out.append(obj)
     elif isinstance(obj, dict):
         for v in obj.values():
@@ -654,7 +725,11 @@ def _read_json(path: str, data: str) -> Optional[Document]:
     _collect_json_strings(obj, strings)
     if not strings:
         return None
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
     digest = integrity.sha256_hex(data.encode("utf-8"))
+=======
+    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
     return _read_text_from_paragraphs(path, strings, _immediate_folder(path), digest)
 
 
@@ -672,11 +747,19 @@ def _read_csv(path: str, data: str) -> Optional[Document]:
     cells: List[str] = []
     for row in reader:
         for cell in row:
+<<<<<<< Updated upstream:src/glm_universal/knowledge/reader.py
             if _is_prose(cell):
                 cells.append(cell)
     if not cells:
         return None
     digest = integrity.sha256_hex(data.encode("utf-8"))
+=======
+            if _word_count(cell) >= MIN_PROSE_WORDS:
+                cells.append(cell)
+    if not cells:
+        return None
+    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+>>>>>>> Stashed changes:glm_universal/knowledge/reader.py
     return _read_text_from_paragraphs(path, cells, _immediate_folder(path), digest)
 
 

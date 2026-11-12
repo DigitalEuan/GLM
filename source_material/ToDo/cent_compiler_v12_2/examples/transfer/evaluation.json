@@ -1,0 +1,1077 @@
+{
+  "ok": true,
+  "schema": "cent-transfer-evaluation/1",
+  "algorithm": "declared-mechanism-corpus/1",
+  "target": {
+    "schema": "cent-target/1",
+    "id": "glm-reference",
+    "kind": "software",
+    "description": "Declared exact-rational software target for quantized-carry, exact KCL and normalized fluid sum, exact-difference and log-domain square-root operations. It is a reference adapter experiment, not a GLM model, a GLM runtime or a performance measurement.",
+    "interface": {
+      "contract": "python callable with exact rational inputs and JSON-safe outputs",
+      "operations": [
+        "quantized_carry",
+        "sum",
+        "difference",
+        "sqrt"
+      ],
+      "interfaces": {
+        "quantized_carry": {
+          "inputs": {
+            "x": "exact rational in [0, full_scale]",
+            "samples": "positive integer",
+            "quantum": "positive exact rational",
+            "full_scale": "positive integer multiple of quantum",
+            "integrator_limit": "positive exact rational"
+          },
+          "outputs": {
+            "code": "bounded integer code sequence",
+            "mean": "exact rational code mean",
+            "error": "mean - x",
+            "peak_state": "nonnegative exact rational",
+            "bounded": "boolean",
+            "passed": "boolean for bounded state and declared reconstruction"
+          },
+          "state": "one exact rational accumulator plus the declared feedback history",
+          "feedback": "delayed quantized level matching the exact route's effective loop history"
+        },
+        "sum": {
+          "inputs": {
+            "a": "exact rational",
+            "b": "exact rational"
+          },
+          "outputs": {
+            "total": "exact rational"
+          },
+          "state": "none",
+          "feedback": "none"
+        },
+        "difference": {
+          "inputs": {
+            "a": "exact rational",
+            "b": "exact rational"
+          },
+          "outputs": {
+            "total": "exact rational"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "a - b is negation of b followed by exact sum"
+        },
+        "sqrt": {
+          "inputs": {
+            "x": "positive exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "root": "certified rational enclosure",
+            "checker": "independent sqrt_q enclosure",
+            "passed": "boolean for overlap and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "root = exp((1/2) * log(x))"
+        }
+      },
+      "precision": "exact rational",
+      "latency": {
+        "kind": "declared reference-operation step count",
+        "unit": "steps",
+        "quantized_carry": "samples",
+        "sum": 1,
+        "difference": 1,
+        "sqrt": "1 route evaluation"
+      },
+      "bit_budget": {
+        "kind": "declared reference-operation output width",
+        "unit": "bits",
+        "quantized_carry": "ceil(log2(full_scale / quantum + 1)) per code",
+        "sum": "exact rational result; no fixed-width limit",
+        "difference": "exact rational result; no fixed-width limit",
+        "sqrt": "precision bits per enclosure"
+      }
+    },
+    "constraints": {
+      "exact_rational": true,
+      "no_binary_float": true,
+      "reference_only": true,
+      "no_real_glm_interface": true,
+      "no_glm_performance_claim": true,
+      "reference_budgets_declared": true,
+      "fixed_test_vectors": true
+    },
+    "evidence_required": [
+      "executable target adapter",
+      "fixed target vectors",
+      "pass/fail certificate"
+    ],
+    "provenance": [
+      "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+      "cent_compiler/assembly.py",
+      "cent_compiler/targets/glm.py"
+    ],
+    "gaps": [
+      "no real GLM interface, model call or runtime integration",
+      "reference-operation latency and bit budgets are declared; no external GLM, numerical-backend or hardware budget is connected",
+      "no GLM performance improvement or measured target result is claimed"
+    ]
+  },
+  "corpus": {
+    "known_valid": [
+      {
+        "id": "sqrt-declared-mechanisms",
+        "kind": "known-valid",
+        "operation": "sqrt",
+        "expected_mechanisms": [
+          "cam-profile",
+          "log-domain-sqrt",
+          "orifice-pressure-flow"
+        ],
+        "rationale": "Three cards explicitly declare sqrt support; one is source-simulated and two are structural.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "sum-declared-mechanisms",
+        "kind": "known-valid",
+        "operation": "sum",
+        "expected_mechanisms": [
+          "fluid-continuity",
+          "kcl-conservation",
+          "opamp-summing"
+        ],
+        "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-sum support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "difference-declared-mechanisms",
+        "kind": "known-valid",
+        "operation": "difference",
+        "expected_mechanisms": [
+          "fluid-continuity",
+          "kcl-conservation",
+          "opamp-summing"
+        ],
+        "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-difference support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "quantized-carry-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "quantized_carry",
+        "expected_mechanisms": [
+          "delta-sigma-error-feedback"
+        ],
+        "rationale": "The delta-sigma card explicitly declares quantized-carry support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      }
+    ],
+    "known_invalid": [
+      {
+        "id": "mult-not-orifice",
+        "kind": "known-invalid",
+        "operation": "mult",
+        "forbidden_mechanisms": [
+          "orifice-pressure-flow"
+        ],
+        "rationale": "The orifice card contains a mult primitive but declares only sqrt support; primitive overlap must not create a transfer.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "log-not-log-domain-sqrt",
+        "kind": "known-invalid",
+        "operation": "log",
+        "forbidden_mechanisms": [
+          "log-domain-sqrt"
+        ],
+        "rationale": "The log-domain card contains log and exp primitives but declares only sqrt support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "exp-not-log-domain-sqrt",
+        "kind": "known-invalid",
+        "operation": "exp",
+        "forbidden_mechanisms": [
+          "log-domain-sqrt"
+        ],
+        "rationale": "The log-domain card contains an exp primitive but declares only sqrt support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "sqrt-not-delta-sigma",
+        "kind": "known-invalid",
+        "operation": "sqrt",
+        "forbidden_mechanisms": [
+          "delta-sigma-error-feedback"
+        ],
+        "rationale": "Delta-sigma is a quantized-carry mechanism; it must not appear for sqrt merely because both are nonlinear operations.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "quantized-carry-not-pll",
+        "kind": "known-invalid",
+        "operation": "quantized_carry",
+        "forbidden_mechanisms": [
+          "pll-phase-tracking"
+        ],
+        "rationale": "The PLL card is stateful and feedback-based but supports phase and frequency operations, not quantized carry.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      }
+    ],
+    "unadapted": [
+      {
+        "id": "mult-no-declared-mechanism",
+        "kind": "unadapted",
+        "operation": "mult",
+        "expected_mechanisms": [],
+        "rationale": "No production mechanism card declares mult support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "div-no-declared-mechanism",
+        "kind": "unadapted",
+        "operation": "div",
+        "expected_mechanisms": [],
+        "rationale": "No production mechanism card declares div support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "exp-no-declared-mechanism",
+        "kind": "unadapted",
+        "operation": "exp",
+        "expected_mechanisms": [],
+        "rationale": "No production mechanism card declares exp support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "log-no-declared-mechanism",
+        "kind": "unadapted",
+        "operation": "log",
+        "expected_mechanisms": [],
+        "rationale": "No production mechanism card declares log support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "reciprocal-no-declared-mechanism",
+        "kind": "unadapted",
+        "operation": "reciprocal",
+        "expected_mechanisms": [],
+        "rationale": "No production mechanism card declares reciprocal support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "sign-no-declared-mechanism",
+        "kind": "unadapted",
+        "operation": "sign",
+        "expected_mechanisms": [],
+        "rationale": "No production mechanism card declares sign support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      }
+    ],
+    "refused": [
+      {
+        "id": "griess-product-refused",
+        "kind": "refused",
+        "operation": "griess_product",
+        "expected_mechanisms": [],
+        "rationale": "The negative-control name from the transfer specification has no production operation contract.",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ]
+      },
+      {
+        "id": "matrix-vector-refused",
+        "kind": "refused",
+        "operation": "matrix_vector_product",
+        "expected_mechanisms": [],
+        "rationale": "A generic multiplier must not be accepted as a matrix-vector transfer; this name has no production contract.",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ]
+      },
+      {
+        "id": "track-phase-refused",
+        "kind": "refused",
+        "operation": "track_phase",
+        "expected_mechanisms": [],
+        "rationale": "The PLL card declares this source operation, but no production operation contract or target adapter exists, so retrieval refuses it.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/transfer_engine.py"
+        ]
+      }
+    ]
+  },
+  "known_valid": [
+    {
+      "id": "sqrt-declared-mechanisms",
+      "kind": "known-valid",
+      "operation": "sqrt",
+      "expected": [
+        "cam-profile",
+        "log-domain-sqrt",
+        "orifice-pressure-flow"
+      ],
+      "retrieved": [
+        "cam-profile",
+        "log-domain-sqrt",
+        "orifice-pressure-flow"
+      ],
+      "missing": [],
+      "unexpected": [],
+      "passed": true,
+      "evidence_total": 3,
+      "evidence_complete": 3,
+      "adapter_available": [
+        "log-domain-sqrt"
+      ],
+      "unadapted": [
+        "cam-profile",
+        "orifice-pressure-flow"
+      ],
+      "candidates": [
+        {
+          "mechanism": "cam-profile",
+          "evidence_level": "structural",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no exact cam solver or fabricated profile",
+            "no target adapter or target test"
+          ]
+        },
+        {
+          "mechanism": "log-domain-sqrt",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target evidence is software-only; no measured junction or physical route",
+            "no measured bit-budget or latency contract"
+          ]
+        },
+        {
+          "mechanism": "orifice-pressure-flow",
+          "evidence_level": "structural",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no exact pressure-flow law or calibrated orifice model",
+            "no target adapter or target test"
+          ]
+        }
+      ],
+      "rationale": "Three cards explicitly declare sqrt support; one is source-simulated and two are structural.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "sum-declared-mechanisms",
+      "kind": "known-valid",
+      "operation": "sum",
+      "expected": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "missing": [],
+      "unexpected": [],
+      "passed": true,
+      "evidence_total": 3,
+      "evidence_complete": 3,
+      "adapter_available": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no pressure/flow scaling, device binding or reference netlist",
+            "target coverage is normalized-flow software only; no measured junction"
+          ]
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no physical voltage/current mapping or reference netlist",
+            "target coverage is software reference/live KCL only; no physical junction measurement"
+          ]
+        },
+        {
+          "mechanism": "opamp-summing",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no device values, reference netlist or physical voltage scaling",
+            "target coverage is normalized-voltage software only; no measured amplifier"
+          ]
+        }
+      ],
+      "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-sum support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "difference-declared-mechanisms",
+      "kind": "known-valid",
+      "operation": "difference",
+      "expected": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "missing": [],
+      "unexpected": [],
+      "passed": true,
+      "evidence_total": 3,
+      "evidence_complete": 3,
+      "adapter_available": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no pressure/flow scaling, device binding or reference netlist",
+            "target coverage is normalized-flow software only; no measured junction"
+          ]
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no physical voltage/current mapping or reference netlist",
+            "target coverage is software reference/live KCL only; no physical junction measurement"
+          ]
+        },
+        {
+          "mechanism": "opamp-summing",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no device values, reference netlist or physical voltage scaling",
+            "target coverage is normalized-voltage software only; no measured amplifier"
+          ]
+        }
+      ],
+      "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-difference support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "quantized-carry-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "quantized_carry",
+      "expected": [
+        "delta-sigma-error-feedback"
+      ],
+      "retrieved": [
+        "delta-sigma-error-feedback"
+      ],
+      "missing": [],
+      "unexpected": [],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "delta-sigma-error-feedback"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "delta-sigma-error-feedback",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is reference-only; no live GLM carry adapter",
+            "no measured bit-budget or latency contract"
+          ]
+        }
+      ],
+      "rationale": "The delta-sigma card explicitly declares quantized-carry support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    }
+  ],
+  "known_invalid": [
+    {
+      "id": "mult-not-orifice",
+      "kind": "known-invalid",
+      "operation": "mult",
+      "forbidden": [
+        "orifice-pressure-flow"
+      ],
+      "retrieved": [],
+      "forbidden_hits": [],
+      "unexpected": [],
+      "passed": true,
+      "rationale": "The orifice card contains a mult primitive but declares only sqrt support; primitive overlap must not create a transfer.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "log-not-log-domain-sqrt",
+      "kind": "known-invalid",
+      "operation": "log",
+      "forbidden": [
+        "log-domain-sqrt"
+      ],
+      "retrieved": [],
+      "forbidden_hits": [],
+      "unexpected": [],
+      "passed": true,
+      "rationale": "The log-domain card contains log and exp primitives but declares only sqrt support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "exp-not-log-domain-sqrt",
+      "kind": "known-invalid",
+      "operation": "exp",
+      "forbidden": [
+        "log-domain-sqrt"
+      ],
+      "retrieved": [],
+      "forbidden_hits": [],
+      "unexpected": [],
+      "passed": true,
+      "rationale": "The log-domain card contains an exp primitive but declares only sqrt support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "sqrt-not-delta-sigma",
+      "kind": "known-invalid",
+      "operation": "sqrt",
+      "forbidden": [
+        "delta-sigma-error-feedback"
+      ],
+      "retrieved": [
+        "cam-profile",
+        "log-domain-sqrt",
+        "orifice-pressure-flow"
+      ],
+      "forbidden_hits": [],
+      "unexpected": [],
+      "passed": true,
+      "rationale": "Delta-sigma is a quantized-carry mechanism; it must not appear for sqrt merely because both are nonlinear operations.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "quantized-carry-not-pll",
+      "kind": "known-invalid",
+      "operation": "quantized_carry",
+      "forbidden": [
+        "pll-phase-tracking"
+      ],
+      "retrieved": [
+        "delta-sigma-error-feedback"
+      ],
+      "forbidden_hits": [],
+      "unexpected": [],
+      "passed": true,
+      "rationale": "The PLL card is stateful and feedback-based but supports phase and frequency operations, not quantized carry.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    }
+  ],
+  "unadapted": [
+    {
+      "id": "mult-no-declared-mechanism",
+      "kind": "unadapted",
+      "operation": "mult",
+      "expected": [],
+      "retrieved": [],
+      "passed": true,
+      "rationale": "No production mechanism card declares mult support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "div-no-declared-mechanism",
+      "kind": "unadapted",
+      "operation": "div",
+      "expected": [],
+      "retrieved": [],
+      "passed": true,
+      "rationale": "No production mechanism card declares div support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "exp-no-declared-mechanism",
+      "kind": "unadapted",
+      "operation": "exp",
+      "expected": [],
+      "retrieved": [],
+      "passed": true,
+      "rationale": "No production mechanism card declares exp support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "log-no-declared-mechanism",
+      "kind": "unadapted",
+      "operation": "log",
+      "expected": [],
+      "retrieved": [],
+      "passed": true,
+      "rationale": "No production mechanism card declares log support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "reciprocal-no-declared-mechanism",
+      "kind": "unadapted",
+      "operation": "reciprocal",
+      "expected": [],
+      "retrieved": [],
+      "passed": true,
+      "rationale": "No production mechanism card declares reciprocal support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "sign-no-declared-mechanism",
+      "kind": "unadapted",
+      "operation": "sign",
+      "expected": [],
+      "retrieved": [],
+      "passed": true,
+      "rationale": "No production mechanism card declares sign support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    }
+  ],
+  "refused": [
+    {
+      "id": "griess-product-refused",
+      "kind": "refused",
+      "operation": "griess_product",
+      "passed": true,
+      "detail": "\"unknown operation contract 'griess_product'; known: difference, div, exp, log, mult, quantized_carry, reciprocal, sign, sqrt, sum\"",
+      "rationale": "The negative-control name from the transfer specification has no production operation contract.",
+      "provenance": [
+        "tests/test_transfer_contracts.py"
+      ]
+    },
+    {
+      "id": "matrix-vector-refused",
+      "kind": "refused",
+      "operation": "matrix_vector_product",
+      "passed": true,
+      "detail": "\"unknown operation contract 'matrix_vector_product'; known: difference, div, exp, log, mult, quantized_carry, reciprocal, sign, sqrt, sum\"",
+      "rationale": "A generic multiplier must not be accepted as a matrix-vector transfer; this name has no production contract.",
+      "provenance": [
+        "tests/test_transfer_contracts.py"
+      ]
+    },
+    {
+      "id": "track-phase-refused",
+      "kind": "refused",
+      "operation": "track_phase",
+      "passed": true,
+      "detail": "\"unknown operation contract 'track_phase'; known: difference, div, exp, log, mult, quantized_carry, reciprocal, sign, sqrt, sum\"",
+      "rationale": "The PLL card declares this source operation, but no production operation contract or target adapter exists, so retrieval refuses it.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/transfer_engine.py"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "operation": "sqrt",
+      "mechanism": "log-domain-sqrt",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "sqrt-two",
+        "sqrt-half",
+        "sqrt-nine"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sum",
+      "mechanism": "fluid-continuity",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "flow-half-plus-third",
+        "flow-negative-plus-half",
+        "flow-zero-plus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sum",
+      "mechanism": "kcl-conservation",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "half-plus-third",
+        "negative-plus-half",
+        "zero-plus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sum",
+      "mechanism": "opamp-summing",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "opamp-half-plus-third",
+        "opamp-negative-plus-half",
+        "opamp-zero-plus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "difference",
+      "mechanism": "fluid-continuity",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "flow-half-minus-third",
+        "flow-negative-minus-half",
+        "flow-zero-minus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "difference",
+      "mechanism": "kcl-conservation",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "half-minus-third",
+        "negative-minus-half",
+        "zero-minus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "difference",
+      "mechanism": "opamp-summing",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "opamp-half-minus-third",
+        "opamp-negative-minus-half",
+        "opamp-zero-minus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "quantized_carry",
+      "mechanism": "delta-sigma-error-feedback",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "half-12",
+        "third-8",
+        "two-fifths-12"
+      ],
+      "artifact": true,
+      "vectors": 3
+    }
+  ],
+  "unadapted_candidates": [
+    {
+      "operation": "sqrt",
+      "mechanism": "cam-profile",
+      "gaps": [
+        "no exact cam solver or fabricated profile",
+        "no target adapter or target test"
+      ]
+    },
+    {
+      "operation": "sqrt",
+      "mechanism": "orifice-pressure-flow",
+      "gaps": [
+        "no exact pressure-flow law or calibrated orifice model",
+        "no target adapter or target test"
+      ]
+    }
+  ],
+  "unadapted_refusals": [
+    {
+      "id": "cam-profile-refusal",
+      "kind": "unadapted-refusal",
+      "operation": "sqrt",
+      "mechanism": "cam-profile",
+      "rationale": "No exact cam profile law, fixed profile or displacement range is declared. A target adapter would invent the geometry, so T1 records a refusal instead of fabricating one.",
+      "required_evidence": [
+        "an exact cam profile law and declared displacement range",
+        "fixed input/output vectors derived from that profile",
+        "an independent target implementation with a passing certificate"
+      ],
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "tests/test_transfer_contracts.py"
+      ]
+    },
+    {
+      "id": "orifice-pressure-flow-refusal",
+      "kind": "unadapted-refusal",
+      "operation": "sqrt",
+      "mechanism": "orifice-pressure-flow",
+      "rationale": "No exact pressure-flow restriction law, calibrated geometry or fluid properties are declared. A target adapter would invent the calibration, so T1 records a refusal instead of fabricating one.",
+      "required_evidence": [
+        "an exact pressure-flow restriction law with declared fluid properties",
+        "fixed pressure/flow vectors from that calibration",
+        "an independent target implementation with a passing certificate"
+      ],
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "tests/test_transfer_contracts.py"
+      ]
+    }
+  ],
+  "metrics": {
+    "expected_candidates": 10,
+    "retrieved_expected_candidates": 10,
+    "candidate_recall": "10/10",
+    "case_recall": "4/4",
+    "missing_candidates": [],
+    "unlabelled_candidates": [],
+    "negative_control_failures": 0,
+    "negative_control_pass_rate": "5/5",
+    "false_positive_candidates": [],
+    "false_positive_rate": "0/5",
+    "unadapted_operations": 6,
+    "unadapted_retrievals": 0,
+    "unadapted_candidates": 2,
+    "unadapted_refusals": 2,
+    "unadapted_refusal_failures": [],
+    "target_testable": 8,
+    "target_passed": 8,
+    "target_failed": 0,
+    "target_pass_rate": "8/8",
+    "artifact_count": 8,
+    "retrieval_evidence_complete": 10,
+    "retrieval_evidence_total": 10,
+    "retrieval_evidence_completeness": "10/10",
+    "target_evidence_complete": 8,
+    "target_evidence_total": 8,
+    "target_evidence_completeness": "8/8"
+  },
+  "checks": [
+    {
+      "name": "known-valid candidate recall",
+      "status": "pass",
+      "detail": "10/10 expected candidate(s) retrieved"
+    },
+    {
+      "name": "known-valid case recall",
+      "status": "pass",
+      "detail": "4/4 case(s) complete"
+    },
+    {
+      "name": "negative controls",
+      "status": "pass",
+      "detail": "5/5 control(s) passed"
+    },
+    {
+      "name": "unadapted operations",
+      "status": "pass",
+      "detail": "6/6 operation(s) remain unretrieved"
+    },
+    {
+      "name": "refused operations",
+      "status": "pass",
+      "detail": "3/3 unknown operation(s) refused"
+    },
+    {
+      "name": "target pass rate",
+      "status": "pass",
+      "detail": "8/8 executable pair(s) passed"
+    },
+    {
+      "name": "retrieval evidence completeness",
+      "status": "pass",
+      "detail": "10/10 expected candidate(s) carry complete retrieval evidence"
+    },
+    {
+      "name": "target evidence completeness",
+      "status": "pass",
+      "detail": "8/8 target row(s) carry tests and an artifact"
+    },
+    {
+      "name": "no unlabelled false positives",
+      "status": "pass",
+      "detail": "0 unlabelled candidate(s)"
+    },
+    {
+      "name": "unadapted candidate refusals",
+      "status": "pass",
+      "detail": "2 refusal record(s); missing=0, stale=0"
+    }
+  ],
+  "gaps": [
+    "known-valid is declared mechanism support, not independent external ground truth; the corpus cannot establish a mechanism that no card declares",
+    "the six zero-mechanism operations are valid operation contracts with no declared transfer, not invalid operations",
+    "target pass rate covers only the five glm-reference adapter pairs; no live GLM, physical or measured target is exercised",
+    "the corpus is fixed and small; it reports regression and false-positive control, not general retrieval quality",
+    "the two remaining supported candidates carry T1 refusal records, not evidence that their mechanisms are impossible; new exact laws reopen them"
+  ],
+  "headline": "10/10 expected candidates retrieved; 5/5 negative controls passed; 8/8 target pairs passed.",
+  "output_certificate": {
+    "schema": "cent-output-certificate/1",
+    "subject_schema": "cent-transfer-evaluation/1",
+    "status": "partial",
+    "checks": [
+      {
+        "name": "known-valid candidate recall",
+        "status": "pass",
+        "detail": "10/10 expected candidate(s) retrieved"
+      },
+      {
+        "name": "known-valid case recall",
+        "status": "pass",
+        "detail": "4/4 case(s) complete"
+      },
+      {
+        "name": "negative controls",
+        "status": "pass",
+        "detail": "5/5 control(s) passed"
+      },
+      {
+        "name": "unadapted operations",
+        "status": "pass",
+        "detail": "6/6 operation(s) remain unretrieved"
+      },
+      {
+        "name": "refused operations",
+        "status": "pass",
+        "detail": "3/3 unknown operation(s) refused"
+      },
+      {
+        "name": "target pass rate",
+        "status": "pass",
+        "detail": "8/8 executable pair(s) passed"
+      },
+      {
+        "name": "retrieval evidence completeness",
+        "status": "pass",
+        "detail": "10/10 expected candidate(s) carry complete retrieval evidence"
+      },
+      {
+        "name": "target evidence completeness",
+        "status": "pass",
+        "detail": "8/8 target row(s) carry tests and an artifact"
+      },
+      {
+        "name": "no unlabelled false positives",
+        "status": "pass",
+        "detail": "0 unlabelled candidate(s)"
+      },
+      {
+        "name": "unadapted candidate refusals",
+        "status": "pass",
+        "detail": "2 refusal record(s); missing=0, stale=0"
+      }
+    ],
+    "gaps": [
+      "known-valid is declared mechanism support, not independent external ground truth; the corpus cannot establish a mechanism that no card declares",
+      "the six zero-mechanism operations are valid operation contracts with no declared transfer, not invalid operations",
+      "target pass rate covers only the five glm-reference adapter pairs; no live GLM, physical or measured target is exercised",
+      "the corpus is fixed and small; it reports regression and false-positive control, not general retrieval quality",
+      "the two remaining supported candidates carry T1 refusal records, not evidence that their mechanisms are impossible; new exact laws reopen them"
+    ],
+    "claim": "This certificate covers only the declared exact/structural checks in this payload; it is not measured-device, fabrication, physical-proof or manufacturing evidence."
+  }
+}

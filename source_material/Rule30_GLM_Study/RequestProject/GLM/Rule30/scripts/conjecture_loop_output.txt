@@ -1,0 +1,250 @@
+Round 26 conjecture loop (EMP).  Data: centre column to n = 131072, half-line machine for periods 2, 3, all words.
+
+Round 0: seeds and analogies
+    + propose ECHO(2, 2)               [SEED: TuneExcessLog (Round 25)]
+    + propose WIN(2, 4, 1, 2)          [SEED: To Do 1/10 'post-edge halving']
+    + propose WIN(3, 6, 1, 2)          [SEED: To Do 1/10 'post-edge halving']
+    + propose ECHO(2, 0)               [ANALOGY: random sequence, longest echo ~ 2 log2 n]
+    + propose ECHO(2, 4)               [ANALOGY: random sequence, longest echo ~ 2 log2 n]
+    + propose ECHO(2, 8)               [ANALOGY: random sequence, longest echo ~ 2 log2 n]
+    + propose ECHO(0, 16)              [ANALOGY: Round 25 max excess 16 for n <= 1000]
+    + propose ECHO(0, 24)              [ANALOGY: Round 25 max excess 16 for n <= 1000]
+    + propose ECHO(3, 0)               [NARROW: steeper than the random-sequence slope]
+    + propose ECHO(1, 8)               [NARROW: between the constant and the slope-2 forms]
+    + propose LIN(2, 1, 2)             [ANALOGY: constDrive_dies (period 1 dies by d+2)]
+    + propose LIN(3, 1, 2)             [ANALOGY: constDrive_dies (period 1 dies by d+2)]
+    = Rule86->Rule30 counting law: refuted in Lean (runCountW_eightySix vs runCountW_thirty_edge); logged, not re-tested
+
+Round 1: test level n <= 100 (echo), d <= 8 (half-line)
+    - prune   WIN(2, 4, 1, 2)          word 01, d=1: 1 alive at t=0, still 1 at t+4 (plateau)
+    - prune   WIN(3, 6, 1, 2)          word 100, d=1: 1 alive at t=0, still 1 at t+6 (plateau)
+    - prune   LIN(2, 1, 2)             word 01, d=1: 1 code(s) alive at time 3
+    - prune   LIN(3, 1, 2)             word 100, d=1: 1 code(s) alive at time 3
+    survivors: ECHO(2, 2), ECHO(2, 0), ECHO(2, 4), ECHO(2, 8), ECHO(0, 16), ECHO(0, 24), ECHO(3, 0), ECHO(1, 8)
+    frontier ECHO(a=0): least b standing at n <= 100 is 10
+    frontier ECHO(a=1): least b standing at n <= 100 is 5
+    frontier ECHO(a=2): least b standing at n <= 100 is 0
+    frontier ECHO(a=3): least b standing at n <= 100 is 0
+    frontier LIN(p=2, a=1): least b at d <= 8 is 10
+    frontier LIN(p=2, a=2): least b at d <= 8 is 6
+    frontier LIN(p=2, a=3): least b at d <= 8 is 5
+    frontier LIN(p=3, a=1): least b at d <= 8 is 17
+    frontier LIN(p=3, a=2): least b at d <= 8 is 10
+    frontier LIN(p=3, a=3): least b at d <= 8 is 7
+    new proposals:
+    + propose ECHO(0, 10)              [NARROW: frontier at n <= 100]
+    + propose ECHO(0, 9)               [NARROW: probe below the frontier]
+    + propose ECHO(1, 5)               [NARROW: frontier at n <= 100]
+    + propose ECHO(1, 4)               [NARROW: probe below the frontier]
+    + propose LIN(2, 1, 10)            [NARROW: frontier at d <= 8]
+    + propose LIN(2, 2, 6)             [NARROW: frontier at d <= 8]
+    + propose LIN(2, 3, 5)             [NARROW: frontier at d <= 8]
+    + propose LIN(3, 1, 17)            [NARROW: frontier at d <= 8]
+    + propose LIN(3, 2, 10)            [NARROW: frontier at d <= 8]
+    + propose LIN(3, 3, 7)             [NARROW: frontier at d <= 8]
+    + propose AMORT(2, 2, 1)           [REPAIR of WIN(2, 4, 1, 2): amortise the halving]
+    + propose AMORT(2, 2, 0)           [REPAIR of WIN(2, 4, 1, 2): amortise, no slack]
+    + propose AMORT(2, 3, 1)           [REPAIR of WIN(2, 4, 1, 2): amortise the halving]
+    + propose AMORT(2, 3, 0)           [REPAIR of WIN(2, 4, 1, 2): amortise, no slack]
+    + propose WIN(2, 8, 1, 2)          [NARROW: longer window than WIN(2, 4, 1, 2)]
+    + propose WIN(2, 12, 1, 2)         [NARROW: longer window than WIN(2, 4, 1, 2)]
+    + propose AMORT(3, 3, 1)           [REPAIR of WIN(3, 6, 1, 2): amortise the halving]
+    + propose AMORT(3, 3, 0)           [REPAIR of WIN(3, 6, 1, 2): amortise, no slack]
+    + propose AMORT(3, 4, 1)           [REPAIR of WIN(3, 6, 1, 2): amortise the halving]
+    + propose AMORT(3, 4, 0)           [REPAIR of WIN(3, 6, 1, 2): amortise, no slack]
+    + propose WIN(3, 12, 1, 2)         [NARROW: longer window than WIN(3, 6, 1, 2)]
+    + propose WIN(3, 18, 1, 2)         [NARROW: longer window than WIN(3, 6, 1, 2)]
+
+Round 2: test level n <= 1000 (echo), d <= 11 (half-line)
+    - prune   ECHO(0, 10)              n=156: echo of length 11 (period 125) > 0*7+10
+    - prune   ECHO(0, 9)               n=40: echo of length 10 (period 11) > 0*5+9
+    - prune   ECHO(1, 5)               n=158: echo of length 13 (period 125) > 1*7+5
+    - prune   ECHO(1, 4)               n=40: echo of length 10 (period 11) > 1*5+4
+    - prune   LIN(2, 1, 10)            word 10, d=11: 2 code(s) alive at time 21
+    - prune   LIN(2, 2, 6)             word 10, d=11: 2 code(s) alive at time 28
+    - prune   LIN(3, 1, 17)            word 001, d=10: 6 code(s) alive at time 27
+    - prune   AMORT(2, 2, 1)           word 01, d=1, m=4: 1 alive, bound exceeded
+    - prune   AMORT(2, 2, 0)           word 10, d=1, m=2: 1 alive, bound exceeded
+    - prune   AMORT(2, 3, 1)           word 01, d=1, m=6: 1 alive, bound exceeded
+    - prune   AMORT(2, 3, 0)           word 01, d=1, m=3: 1 alive, bound exceeded
+    - prune   WIN(2, 8, 1, 2)          word 10, d=11: 2 alive at t=17, still 2 at t+8 (plateau)
+    - prune   WIN(2, 12, 1, 2)         word 10, d=11: 2 alive at t=17, still 2 at t+12 (plateau)
+    - prune   AMORT(3, 3, 1)           word 100, d=1, m=6: 1 alive, bound exceeded
+    - prune   AMORT(3, 3, 0)           word 100, d=1, m=3: 1 alive, bound exceeded
+    - prune   AMORT(3, 4, 0)           word 100, d=1, m=4: 1 alive, bound exceeded
+    survivors: ECHO(2, 2), ECHO(2, 0), ECHO(2, 4), ECHO(2, 8), ECHO(0, 16), ECHO(0, 24), ECHO(3, 0), ECHO(1, 8), LIN(2, 3, 5), LIN(3, 2, 10), LIN(3, 3, 7), AMORT(3, 4, 1), WIN(3, 12, 1, 2), WIN(3, 18, 1, 2)
+    frontier ECHO(a=0): least b standing at n <= 1000 is 16
+    frontier ECHO(a=1): least b standing at n <= 1000 is 8
+    frontier ECHO(a=2): least b standing at n <= 1000 is 0
+    frontier ECHO(a=3): least b standing at n <= 1000 is 0
+    frontier LIN(p=2, a=1): least b at d <= 11 is 20
+    frontier LIN(p=2, a=2): least b at d <= 11 is 9
+    frontier LIN(p=2, a=3): least b at d <= 11 is 5
+    frontier LIN(p=3, a=1): least b at d <= 11 is 20
+    frontier LIN(p=3, a=2): least b at d <= 11 is 10
+    frontier LIN(p=3, a=3): least b at d <= 11 is 7
+    frontier AMORT(p=2, c=2): least slack e at d <= 11 is 3
+    frontier AMORT(p=2, c=3): least slack e at d <= 11 is 2
+    frontier AMORT(p=2, c=4): least slack e at d <= 11 is 1
+    frontier AMORT(p=3, c=3): least slack e at d <= 11 is 2
+    frontier AMORT(p=3, c=4): least slack e at d <= 11 is 1
+    frontier AMORT(p=3, c=6): least slack e at d <= 11 is 1
+    junction  ECHO(2, 0) ~ ECHO(0, 16): both touched by the data at n = [448]
+      meet proposal: excess <= min(2 log2 n + 0, 0 log2 n + 16); the two bounds cross, so the meet is strictly sharper than either
+    junction  ECHO(2, 0) ~ ECHO(1, 8): both touched by the data at n = [448]
+      meet proposal: excess <= min(2 log2 n + 0, 1 log2 n + 8); the two bounds cross, so the meet is strictly sharper than either
+    junction  ECHO(0, 16) ~ ECHO(1, 8): both touched by the data at n = [448]
+      meet proposal: excess <= min(0 log2 n + 16, 1 log2 n + 8); the two bounds cross, so the meet is strictly sharper than either
+    new proposals:
+    + propose ECHO(0, 15)              [NARROW: probe below the frontier]
+    + propose ECHO(1, 7)               [NARROW: probe below the frontier]
+    + propose LIN(2, 1, 20)            [NARROW: frontier at d <= 11]
+    + propose LIN(2, 2, 9)             [NARROW: frontier at d <= 11]
+    + propose LIN(3, 1, 20)            [NARROW: frontier at d <= 11]
+    + propose AMORT(2, 2, 3)           [NARROW: frontier at d <= 11]
+    + propose AMORT(2, 3, 2)           [NARROW: frontier at d <= 11]
+    + propose AMORT(2, 4, 1)           [NARROW: frontier at d <= 11]
+    + propose AMORT(3, 3, 2)           [NARROW: frontier at d <= 11]
+    + propose AMORT(3, 6, 1)           [NARROW: frontier at d <= 11]
+    + propose WIN(2, 16, 1, 2)         [NARROW: longer window than WIN(2, 8, 1, 2)]
+    + propose WIN(2, 24, 1, 2)         [NARROW: longer window than WIN(2, 8, 1, 2)]
+    + propose WIN(2, 36, 1, 2)         [NARROW: longer window than WIN(2, 12, 1, 2)]
+    + propose MEET((2, 0), (0, 16))    [JUNCTION meet of ECHO(2, 0), ECHO(0, 16)]
+    + propose MEET((2, 0), (1, 8))     [JUNCTION meet of ECHO(2, 0), ECHO(1, 8)]
+    + propose MEET((0, 16), (1, 8))    [JUNCTION meet of ECHO(0, 16), ECHO(1, 8)]
+
+Round 3: test level n <= 10000 (echo), d <= 14 (half-line)
+    - prune   ECHO(2, 0)               n=1994: echo of length 21 (period 1767) > 2*10+0
+    - prune   ECHO(0, 16)              n=1419: echo of length 17 (period 230) > 0*10+16
+    - prune   ECHO(0, 24)              n=4200: echo of length 25 (period 1372) > 0*12+24
+    - prune   ECHO(1, 8)               n=1992: echo of length 19 (period 1767) > 1*10+8
+    - prune   LIN(3, 2, 10)            word 001, d=13: 11 code(s) alive at time 36
+    - prune   WIN(3, 12, 1, 2)         word 001, d=13: 13 alive at t=27, still 8 at t+12 (plateau)
+    - prune   ECHO(0, 15)              n=448: echo of length 16 (period 150) > 0*8+15
+    - prune   ECHO(1, 7)               n=448: echo of length 16 (period 150) > 1*8+7
+    - prune   LIN(3, 1, 20)            word 001, d=13: 11 code(s) alive at time 33
+    - prune   MEET((2, 0), (0, 16))    n=1994: echo of length 21 (period 1767) > 2*10+0
+    - prune   MEET((2, 0), (1, 8))     n=1994: echo of length 21 (period 1767) > 2*10+0
+    - prune   MEET((0, 16), (1, 8))    n=1419: echo of length 17 (period 230) > 0*10+16
+    survivors: ECHO(2, 2), ECHO(2, 4), ECHO(2, 8), ECHO(3, 0), LIN(2, 3, 5), LIN(3, 3, 7), AMORT(3, 4, 1), WIN(3, 18, 1, 2), LIN(2, 1, 20), LIN(2, 2, 9), AMORT(2, 2, 3), AMORT(2, 3, 2), AMORT(2, 4, 1), AMORT(3, 3, 2), AMORT(3, 6, 1), WIN(2, 16, 1, 2), WIN(2, 24, 1, 2), WIN(2, 36, 1, 2)
+    frontier ECHO(a=0): least b standing at n <= 10000 is 25
+    frontier ECHO(a=1): least b standing at n <= 10000 is 13
+    frontier ECHO(a=2): least b standing at n <= 10000 is 2
+    frontier ECHO(a=3): least b standing at n <= 10000 is 0
+    frontier LIN(p=2, a=1): least b at d <= 14 is 20
+    frontier LIN(p=2, a=2): least b at d <= 14 is 9
+    frontier LIN(p=2, a=3): least b at d <= 14 is 5
+    frontier LIN(p=3, a=1): least b at d <= 14 is 29
+    frontier LIN(p=3, a=2): least b at d <= 14 is 16
+    frontier LIN(p=3, a=3): least b at d <= 14 is 7
+    frontier AMORT(p=2, c=2): least slack e at d <= 14 is 3
+    frontier AMORT(p=2, c=3): least slack e at d <= 14 is 2
+    frontier AMORT(p=2, c=4): least slack e at d <= 14 is 1
+    frontier AMORT(p=3, c=3): least slack e at d <= 14 is 2
+    frontier AMORT(p=3, c=4): least slack e at d <= 14 is 1
+    frontier AMORT(p=3, c=6): least slack e at d <= 14 is 1
+    new proposals:
+    + propose ECHO(0, 25)              [NARROW: frontier at n <= 10000]
+    + propose ECHO(1, 13)              [NARROW: frontier at n <= 10000]
+    + propose ECHO(1, 12)              [NARROW: probe below the frontier]
+    + propose ECHO(2, 1)               [NARROW: probe below the frontier]
+    + propose LIN(3, 1, 29)            [NARROW: frontier at d <= 14]
+    + propose LIN(3, 2, 16)            [NARROW: frontier at d <= 14]
+    + propose WIN(3, 24, 1, 2)         [NARROW: longer window than WIN(3, 12, 1, 2)]
+    + propose WIN(3, 36, 1, 2)         [NARROW: longer window than WIN(3, 12, 1, 2)]
+
+Round 4: test level n <= 131072 (echo), d <= 17 (half-line)
+    - prune   ECHO(0, 25)              n=19177: echo of length 26 (period 16664) > 0*14+25
+    - prune   ECHO(1, 13)              n=19179: echo of length 28 (period 16664) > 1*14+13
+    - prune   ECHO(1, 12)              n=3103: echo of length 24 (period 2532) > 1*11+12
+    - prune   ECHO(2, 1)               n=1995: echo of length 22 (period 1767) > 2*10+1
+    survivors: ECHO(2, 2), ECHO(2, 4), ECHO(2, 8), ECHO(3, 0), LIN(2, 3, 5), LIN(3, 3, 7), AMORT(3, 4, 1), WIN(3, 18, 1, 2), LIN(2, 1, 20), LIN(2, 2, 9), AMORT(2, 2, 3), AMORT(2, 3, 2), AMORT(2, 4, 1), AMORT(3, 3, 2), AMORT(3, 6, 1), WIN(2, 16, 1, 2), WIN(2, 24, 1, 2), WIN(2, 36, 1, 2), LIN(3, 1, 29), LIN(3, 2, 16), WIN(3, 24, 1, 2), WIN(3, 36, 1, 2)
+    frontier ECHO(a=0): least b standing at n <= 131072 is 33
+    frontier ECHO(a=1): least b standing at n <= 131072 is 17
+    frontier ECHO(a=2): least b standing at n <= 131072 is 2
+    frontier ECHO(a=3): least b standing at n <= 131072 is 0
+    frontier LIN(p=2, a=1): least b at d <= 17 is 20
+    frontier LIN(p=2, a=2): least b at d <= 17 is 9
+    frontier LIN(p=2, a=3): least b at d <= 17 is 5
+    frontier LIN(p=3, a=1): least b at d <= 17 is 29
+    frontier LIN(p=3, a=2): least b at d <= 17 is 16
+    frontier LIN(p=3, a=3): least b at d <= 17 is 7
+    frontier AMORT(p=2, c=2): least slack e at d <= 17 is 3
+    frontier AMORT(p=2, c=3): least slack e at d <= 17 is 2
+    frontier AMORT(p=2, c=4): least slack e at d <= 17 is 1
+    frontier AMORT(p=3, c=3): least slack e at d <= 17 is 2
+    frontier AMORT(p=3, c=4): least slack e at d <= 17 is 1
+    frontier AMORT(p=3, c=6): least slack e at d <= 17 is 1
+    new proposals:
+    + propose ECHO(0, 33)              [NARROW: frontier at n <= 131072]
+    + propose ECHO(0, 32)              [NARROW: probe below the frontier]
+    + propose ECHO(1, 17)              [NARROW: frontier at n <= 131072]
+    + propose ECHO(1, 16)              [NARROW: probe below the frontier]
+
+Final report
+  refuted candidates (each refutation is one finite instance; the starred ones are certified in Lean, ConjectureLoopData.lean):
+    WIN(2, 4, 1, 2)          refuted (round 1)    word 01, d=1: 1 alive at t=0, still 1 at t+4 (plateau)
+    WIN(3, 6, 1, 2)          refuted (round 1)    word 100, d=1: 1 alive at t=0, still 1 at t+6 (plateau)
+    ECHO(2, 0)               refuted (round 3)    n=1994: echo of length 21 (period 1767) > 2*10+0
+    ECHO(0, 16)              refuted (round 3)    n=1419: echo of length 17 (period 230) > 0*10+16
+    ECHO(0, 24)              refuted (round 3)    n=4200: echo of length 25 (period 1372) > 0*12+24
+    ECHO(1, 8)               refuted (round 3)    n=1992: echo of length 19 (period 1767) > 1*10+8
+    LIN(2, 1, 2)             refuted (round 1)    word 01, d=1: 1 code(s) alive at time 3
+    LIN(3, 1, 2)             refuted (round 1)    word 100, d=1: 1 code(s) alive at time 3
+    ECHO(0, 10)              refuted (round 2)    n=156: echo of length 11 (period 125) > 0*7+10
+    ECHO(0, 9)               refuted (round 2)    n=40: echo of length 10 (period 11) > 0*5+9
+    ECHO(1, 5)               refuted (round 2)    n=158: echo of length 13 (period 125) > 1*7+5
+    ECHO(1, 4)               refuted (round 2)    n=40: echo of length 10 (period 11) > 1*5+4
+    LIN(2, 1, 10)            refuted (round 2)    word 10, d=11: 2 code(s) alive at time 21
+    LIN(2, 2, 6)             refuted (round 2)    word 10, d=11: 2 code(s) alive at time 28
+    LIN(3, 1, 17)            refuted (round 2)    word 001, d=10: 6 code(s) alive at time 27
+    LIN(3, 2, 10)            refuted (round 3)    word 001, d=13: 11 code(s) alive at time 36
+    AMORT(2, 2, 1)           refuted (round 2)    word 01, d=1, m=4: 1 alive, bound exceeded
+    AMORT(2, 2, 0)           refuted (round 2)    word 10, d=1, m=2: 1 alive, bound exceeded
+    AMORT(2, 3, 1)           refuted (round 2)    word 01, d=1, m=6: 1 alive, bound exceeded
+    AMORT(2, 3, 0)           refuted (round 2)    word 01, d=1, m=3: 1 alive, bound exceeded
+    WIN(2, 8, 1, 2)          refuted (round 2)    word 10, d=11: 2 alive at t=17, still 2 at t+8 (plateau)
+    WIN(2, 12, 1, 2)         refuted (round 2)    word 10, d=11: 2 alive at t=17, still 2 at t+12 (plateau)
+    AMORT(3, 3, 1)           refuted (round 2)    word 100, d=1, m=6: 1 alive, bound exceeded
+    AMORT(3, 3, 0)           refuted (round 2)    word 100, d=1, m=3: 1 alive, bound exceeded
+    AMORT(3, 4, 0)           refuted (round 2)    word 100, d=1, m=4: 1 alive, bound exceeded
+    WIN(3, 12, 1, 2)         refuted (round 3)    word 001, d=13: 13 alive at t=27, still 8 at t+12 (plateau)
+    ECHO(0, 15)              refuted (round 3)    n=448: echo of length 16 (period 150) > 0*8+15
+    ECHO(1, 7)               refuted (round 3)    n=448: echo of length 16 (period 150) > 1*8+7
+    LIN(3, 1, 20)            refuted (round 3)    word 001, d=13: 11 code(s) alive at time 33
+    MEET((2, 0), (0, 16))    refuted (round 3)    n=1994: echo of length 21 (period 1767) > 2*10+0
+    MEET((2, 0), (1, 8))     refuted (round 3)    n=1994: echo of length 21 (period 1767) > 2*10+0
+    MEET((0, 16), (1, 8))    refuted (round 3)    n=1419: echo of length 17 (period 230) > 0*10+16
+    ECHO(0, 25)              refuted (round 4)    n=19177: echo of length 26 (period 16664) > 0*14+25
+    ECHO(1, 13)              refuted (round 4)    n=19179: echo of length 28 (period 16664) > 1*14+13
+    ECHO(1, 12)              refuted (round 4)    n=3103: echo of length 24 (period 2532) > 1*11+12
+    ECHO(2, 1)               refuted (round 4)    n=1995: echo of length 22 (period 1767) > 2*10+1
+  surviving candidates (evidence only up to the last level), with the proved implication:
+    ECHO(2, 2)               -> problem1_of_echoLogBound   [SEED: TuneExcessLog (Round 25)]
+    ECHO(2, 4)               -> problem1_of_echoLogBound   [ANALOGY: random sequence, longest echo ~ 2 log2 n]
+    ECHO(2, 8)               -> problem1_of_echoLogBound   [ANALOGY: random sequence, longest echo ~ 2 log2 n]
+    ECHO(3, 0)               -> problem1_of_echoLogBound   [NARROW: steeper than the random-sequence slope]
+    LIN(2, 3, 5)             -> halfLineDies_of_linear   [NARROW: frontier at d <= 8]
+    LIN(3, 3, 7)             -> halfLineDies_of_linear   [NARROW: frontier at d <= 8]
+    AMORT(3, 4, 1)           -> halfLineDies_of_amortized   [REPAIR of WIN(3, 6, 1, 2): amortise the halving]
+    WIN(3, 18, 1, 2)         -> (no proved implication)   [NARROW: longer window than WIN(3, 6, 1, 2)]
+    LIN(2, 1, 20)            -> halfLineDies_of_linear   [NARROW: frontier at d <= 11]
+    LIN(2, 2, 9)             -> halfLineDies_of_linear   [NARROW: frontier at d <= 11]
+    AMORT(2, 2, 3)           -> halfLineDies_of_amortized   [NARROW: frontier at d <= 11]
+    AMORT(2, 3, 2)           -> halfLineDies_of_amortized   [NARROW: frontier at d <= 11]
+    AMORT(2, 4, 1)           -> halfLineDies_of_amortized   [NARROW: frontier at d <= 11]
+    AMORT(3, 3, 2)           -> halfLineDies_of_amortized   [NARROW: frontier at d <= 11]
+    AMORT(3, 6, 1)           -> halfLineDies_of_amortized   [NARROW: frontier at d <= 11]
+    WIN(2, 16, 1, 2)         -> (no proved implication)   [NARROW: longer window than WIN(2, 8, 1, 2)]
+    WIN(2, 24, 1, 2)         -> (no proved implication)   [NARROW: longer window than WIN(2, 8, 1, 2)]
+    WIN(2, 36, 1, 2)         -> (no proved implication)   [NARROW: longer window than WIN(2, 12, 1, 2)]
+    LIN(3, 1, 29)            -> halfLineDies_of_linear   [NARROW: frontier at d <= 14]
+    LIN(3, 2, 16)            -> halfLineDies_of_linear   [NARROW: frontier at d <= 14]
+    WIN(3, 24, 1, 2)         -> (no proved implication)   [NARROW: longer window than WIN(3, 12, 1, 2)]
+    WIN(3, 36, 1, 2)         -> (no proved implication)   [NARROW: longer window than WIN(3, 12, 1, 2)]
+    ECHO(0, 33)              -> problem1_of_echoLogBound   [NARROW: frontier at n <= 131072]
+    ECHO(0, 32)              -> problem1_of_echoLogBound   [NARROW: probe below the frontier]
+    ECHO(1, 17)              -> problem1_of_echoLogBound   [NARROW: frontier at n <= 131072]
+    ECHO(1, 16)              -> problem1_of_echoLogBound   [NARROW: probe below the frontier]
+
+  echo records (n, longest echo, period): [(2, 1, 1), (5, 2, 3), (7, 3, 4), (12, 4, 4), (19, 5, 7), (32, 6, 25), (33, 7, 25), (34, 8, 25), (35, 9, 25), (40, 10, 11), (156, 11, 125), (157, 12, 125), (158, 13, 125), (414, 14, 30), (415, 15, 30), (448, 16, 150), (1419, 17, 230), (1935, 18, 683), (1992, 19, 1767), (1993, 20, 1767), (1994, 21, 1767), (1995, 22, 1767), (3102, 23, 2532), (3103, 24, 2532), (4200, 25, 1372), (19177, 26, 16664), (19178, 27, 16664), (19179, 28, 16664), (19180, 29, 16664), (83151, 30, 37595), (83152, 31, 37595), (83153, 32, 37595), (83154, 33, 37595)]

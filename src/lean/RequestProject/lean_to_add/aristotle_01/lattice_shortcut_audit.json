@@ -1,0 +1,191 @@
+{
+  "A_reproduction": {
+    "jump_vectors": "36/36",
+    "jump_norms": "36/36"
+  },
+  "B_cross_check": {
+    "encoder_factor": true,
+    "encoder_shift": true,
+    "legacy_snap": true,
+    "symmetry_tax": true,
+    "nrci": true,
+    "tgic_orthogonality": true,
+    "tgic_coherence": true,
+    "tgic_stability": true
+  },
+  "C_benchmark_table": {
+    "primes": [
+      1000003,
+      1000033,
+      1000037,
+      1000039,
+      1000081,
+      1000099,
+      1000117,
+      1000121,
+      1000133,
+      1000151
+    ],
+    "composites": [
+      1000000,
+      1000001,
+      1000002,
+      1000004,
+      1000005,
+      1000006,
+      1000007,
+      1000008,
+      1000009,
+      1000010
+    ],
+    "rows": {
+      "propeller_imbalance": {
+        "primes_recomputed": 0.0,
+        "primes_published": 0.0,
+        "primes_match": true,
+        "composites_recomputed": 0.622207,
+        "composites_published": 0.622207,
+        "composites_match": true
+      },
+      "tgic_3_axis_orthogonality": {
+        "primes_recomputed": 0.536182,
+        "primes_published": 0.536182,
+        "primes_match": true,
+        "composites_recomputed": 0.540989,
+        "composites_published": 0.540989,
+        "composites_match": true
+      },
+      "tgic_6_face_coherence": {
+        "primes_recomputed": 0.721295,
+        "primes_published": 0.664642,
+        "primes_match": false,
+        "composites_recomputed": 0.758866,
+        "composites_published": 0.758866,
+        "composites_match": true
+      },
+      "runecube_face_tax": {
+        "primes_recomputed": 3.896754,
+        "primes_published": 5.247629,
+        "primes_match": false,
+        "composites_recomputed": 3.273274,
+        "composites_published": 3.273274,
+        "composites_match": true
+      },
+      "tgic_master_stability": {
+        "primes_recomputed": 0.66345,
+        "primes_published": 0.66345,
+        "primes_match": true,
+        "composites_recomputed": 0.681089,
+        "composites_published": 0.681089,
+        "composites_match": true
+      }
+    },
+    "prime_column_self_consistent": false
+  },
+  "D_claims": {
+    "adjacency_observed_d2": [
+      8,
+      10,
+      12,
+      14
+    ],
+    "adjacency_raw_shift_d2": [
+      1
+    ],
+    "even_quantisation_odd_steps": 0,
+    "legacy_states_all_even_weight": true,
+    "non_codeword_states_per_300": 141
+  },
+  "E_propeller": {
+    "composites_tested": 9247,
+    "composites_below_0_15": 248,
+    "composites_below_0_001": 1,
+    "counterexamples": [
+      1005973,
+      1018081,
+      1048576
+    ]
+  },
+  "F_corrected": {
+    "interfacial 1000033..1000050 [factor]": {
+      "steps": 17,
+      "d2_histogram": {
+        "8": 3,
+        "12": 13,
+        "16": 1
+      },
+      "octad_rate_pct": 17.6471,
+      "collision_rate_pct": 0.0,
+      "all_quantised_by_4": true,
+      "all_even": true,
+      "all_leech_vectors": true,
+      "mean_d2": 11.5294
+    },
+    "interfacial 1000033..1000050 [shift]": {
+      "steps": 17,
+      "d2_histogram": {
+        "0": 2,
+        "8": 15
+      },
+      "octad_rate_pct": 88.2353,
+      "collision_rate_pct": 11.7647,
+      "all_quantised_by_4": true,
+      "all_even": true,
+      "all_leech_vectors": true,
+      "mean_d2": 7.0588
+    },
+    "prime trajectory (20 primes) [shift]": {
+      "steps": 19,
+      "d2_histogram": {
+        "0": 5,
+        "8": 14
+      },
+      "octad_rate_pct": 73.6842,
+      "collision_rate_pct": 26.3158,
+      "all_quantised_by_4": true,
+      "all_even": true,
+      "all_leech_vectors": true,
+      "mean_d2": 5.8947
+    },
+    "stats_10000": {
+      "steps": 9999,
+      "d2_histogram": {
+        "0": 2517,
+        "8": 7482
+      },
+      "octad_rate_pct": 74.8275,
+      "collision_rate_pct": 25.1725,
+      "all_quantised_by_4": true,
+      "all_even": true,
+      "all_leech_vectors": true,
+      "mean_d2": 5.9862,
+      "distinct_states": 526,
+      "integers": 10000,
+      "legacy_non_codeword_rate_pct": 43.16
+    }
+  },
+  "G_tgic_v3": {
+    "self_tests": {
+      "golay_filter": true,
+      "three_six_nine": true,
+      "relational_simulator": true,
+      "validation": true
+    },
+    "axis_score": {
+      "primes": 0.536182,
+      "composites": 0.540989
+    },
+    "face_score": {
+      "primes": 0.721295,
+      "composites": 0.757219
+    },
+    "stability": {
+      "primes": 0.66345,
+      "composites": 0.68054
+    },
+    "uncorrected_face_vectors": {
+      "primes": "0/30",
+      "composites": "9/30"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+codewords 4096 octads 759
+gM0 [1, 2, 3, 4, 5, 0, 8, 22, 23, 10, 12, 6, 21, 19, 13, 20, 14, 18, 16, 17, 9, 15, 11, 7] automorphism: True
+gM1 [23, 22, 21, 20, 19, 0, 2, 7, 3, 10, 13, 16, 18, 5, 9, 4, 15, 11, 17, 6, 12, 8, 1, 14] automorphism: True
+gM0 inverse [5, 0, 1, 2, 3, 4, 11, 23, 6, 20, 9, 22, 10, 14, 16, 21, 18, 19, 17, 13, 15, 12, 7, 8]
+gM1 inverse [5, 22, 6, 8, 15, 13, 19, 7, 21, 14, 9, 17, 20, 10, 23, 16, 11, 18, 12, 4, 3, 2, 1, 0]
+orbit of 1 cells: 24
+orbit of 2 cells: 276
+orbit of 3 cells: 2024
+orbit of 4 cells: 10626
+orbit of 5 cells: 42504
+orbit of octad 9335: 759
+orbit of dodecad 8190: 2576
+GLM labelling, turns preserving the code: [0, 12]
+rotation-test survivors among 8-cell patterns: 423 (octads: 759)
+element of type 12^2: [4, 10, 11, 22, 7, 16, 5, 9, 1, 15, 14, 19, 0, 2, 3, 18, 23, 12, 13, 17, 6, 8, 20, 21]
+tau0 [0, 1, 14, 7, 2, 15, 13, 4, 23, 6, 3, 16, 22, 12, 5, 8, 17, 20, 10, 18, 11, 21, 9, 19]
+tau0 inverse [0, 1, 4, 10, 7, 14, 9, 3, 15, 22, 18, 20, 13, 6, 2, 5, 11, 16, 19, 23, 17, 21, 12, 8]
+tau0 labelling, turns preserving the laid-out code: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]

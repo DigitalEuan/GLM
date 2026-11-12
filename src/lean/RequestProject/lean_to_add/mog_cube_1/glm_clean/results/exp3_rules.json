@@ -1,0 +1,260 @@
+{
+  "report": {
+    "REF continuous class model": {
+      "dev_subj": 0.6768,
+      "dev_obj": 0.6798,
+      "wsj_subj": 0.6343,
+      "wsj_obj": 0.6787,
+      "brown_subj": 0.6574,
+      "brown_obj": 0.6827,
+      "test_mean": 0.6633
+    },
+    "v5 searched 24 classes": {
+      "dev_subj": 0.6326,
+      "dev_subj_tie": 0.36,
+      "dev_obj": 0.6226,
+      "dev_obj_tie": 0.288,
+      "wsj_subj": 0.5947,
+      "wsj_subj_tie": 0.334,
+      "wsj_obj": 0.6287,
+      "wsj_obj_tie": 0.3,
+      "brown_subj": 0.6385,
+      "brown_subj_tie": 0.322,
+      "brown_obj": 0.6052,
+      "brown_obj_tie": 0.285,
+      "dev_mean": 0.6276,
+      "test_mean": 0.6168
+    },
+    "v6 searched 24 rules": {
+      "dev_subj": 0.6574,
+      "dev_subj_tie": 0.32,
+      "dev_obj": 0.6336,
+      "dev_obj_tie": 0.313,
+      "wsj_subj": 0.6081,
+      "wsj_subj_tie": 0.314,
+      "wsj_obj": 0.623,
+      "wsj_obj_tie": 0.297,
+      "brown_subj": 0.6393,
+      "brown_subj_tie": 0.301,
+      "brown_obj": 0.6001,
+      "brown_obj_tie": 0.32,
+      "dev_mean": 0.6455,
+      "test_mean": 0.6176
+    },
+    "ABLATION 24 random rules": {
+      "dev_subj": 0.519,
+      "dev_subj_tie": 0.661,
+      "dev_obj": 0.5218,
+      "dev_obj_tie": 0.623,
+      "wsj_subj": 0.5061,
+      "wsj_subj_tie": 0.652,
+      "wsj_obj": 0.499,
+      "wsj_obj_tie": 0.64,
+      "brown_subj": 0.5178,
+      "brown_subj_tie": 0.668,
+      "brown_obj": 0.5208,
+      "brown_obj_tie": 0.648,
+      "dev_mean": 0.5204,
+      "test_mean": 0.5109
+    },
+    "v6 6 rules": {
+      "dev_subj": 0.6036,
+      "dev_subj_tie": 0.444,
+      "dev_obj": 0.584,
+      "dev_obj_tie": 0.474,
+      "wsj_subj": 0.5857,
+      "wsj_subj_tie": 0.443,
+      "wsj_obj": 0.5859,
+      "wsj_obj_tie": 0.485,
+      "brown_subj": 0.6129,
+      "brown_subj_tie": 0.41,
+      "brown_obj": 0.5712,
+      "brown_obj_tie": 0.479,
+      "dev_mean": 0.5938,
+      "test_mean": 0.5889
+    },
+    "v6 12 rules": {
+      "dev_subj": 0.6328,
+      "dev_subj_tie": 0.434,
+      "dev_obj": 0.6116,
+      "dev_obj_tie": 0.452,
+      "wsj_subj": 0.5998,
+      "wsj_subj_tie": 0.422,
+      "wsj_obj": 0.5952,
+      "wsj_obj_tie": 0.454,
+      "brown_subj": 0.6219,
+      "brown_subj_tie": 0.415,
+      "brown_obj": 0.5834,
+      "brown_obj_tie": 0.458,
+      "dev_mean": 0.6222,
+      "test_mean": 0.6001
+    },
+    "v6 48 rules": {
+      "dev_subj": 0.6788,
+      "dev_subj_tie": 0.258,
+      "dev_obj": 0.6532,
+      "dev_obj_tie": 0.254,
+      "wsj_subj": 0.6085,
+      "wsj_subj_tie": 0.246,
+      "wsj_obj": 0.622,
+      "wsj_obj_tie": 0.256,
+      "brown_subj": 0.6355,
+      "brown_subj_tie": 0.246,
+      "brown_obj": 0.6136,
+      "brown_obj_tie": 0.25,
+      "dev_mean": 0.666,
+      "test_mean": 0.6199
+    }
+  },
+  "dev_score": 0.6455,
+  "history": [
+    0.5297,
+    0.5538,
+    0.5658,
+    0.5762,
+    0.5847,
+    0.5917,
+    0.5974,
+    0.6021,
+    0.6068,
+    0.6105,
+    0.6141,
+    0.6176,
+    0.6208,
+    0.6237,
+    0.6263,
+    0.6286,
+    0.6308,
+    0.6327,
+    0.6345,
+    0.6362,
+    0.638,
+    0.6397,
+    0.6412,
+    0.6427,
+    0.6455,
+    0.6455
+  ],
+  "cells": [
+    {
+      "class": "object.n.01",
+      "direction": "forbid",
+      "tau": 0.3
+    },
+    {
+      "class": "whole.n.02",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "attribute.n.02",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "event.n.01",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "LEX:noun.communication",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "person.n.01",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "psychological_feature.n.01",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "LEX:noun.cognition",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "LEX:noun.act",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "process.n.06",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "possession.n.02",
+      "direction": "forbid",
+      "tau": 0.01
+    },
+    {
+      "class": "organization.n.01",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "organism.n.01",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "LEX:noun.object",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "matter.n.03",
+      "direction": "forbid",
+      "tau": 0.01
+    },
+    {
+      "class": "fundamental_quantity.n.01",
+      "direction": "forbid",
+      "tau": 0.01
+    },
+    {
+      "class": "group_action.n.01",
+      "direction": "forbid",
+      "tau": 0.01
+    },
+    {
+      "class": "LEX:noun.state",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "LEX:noun.cognition",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "LEX:noun.artifact",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "LEX:noun.body",
+      "direction": "forbid",
+      "tau": 0.01
+    },
+    {
+      "class": "group.n.01",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "LEX:noun.communication",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "group.n.01",
+      "direction": "require",
+      "tau": 0.35
+    }
+  ]
+}

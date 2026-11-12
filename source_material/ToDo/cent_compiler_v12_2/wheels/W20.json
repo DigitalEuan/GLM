@@ -37,7 +37,7 @@
     {
       "id": "W20-N1",
       "equation": "stress = youngs_modulus / strain",
-      "expected_dimensional": false,
+      "expected_dimensional": true,
       "expected_derivable": false,
       "physical_status": "negative_control",
       "expected_dimensional_explicit": null,

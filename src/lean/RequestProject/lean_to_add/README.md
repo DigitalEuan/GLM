@@ -1,0 +1,1 @@
+These folders contain .lean files which are to be absorbed into the 'glm/RequestProject/GLM' folder as the one source of all lean files in this project. Some may already be in the 'glm/RequestProject/GLM' - skip the copy on these instances.
