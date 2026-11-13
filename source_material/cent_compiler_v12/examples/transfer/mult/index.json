@@ -1,0 +1,71 @@
+{
+  "schema": "cent-proposal-index/1",
+  "operation": "mult",
+  "target": "glm-reference",
+  "summary": {
+    "proposals": 3,
+    "ready_for_execution": 1,
+    "needs_target_adapter": 2,
+    "needs_target_vectors": 0,
+    "needs_environment": 0,
+    "review_counts": {
+      "unreviewed": 3
+    },
+    "mechanisms": [
+      "log-domain-arithmetic",
+      "fluid-continuity",
+      "kcl-conservation"
+    ],
+    "domains": [
+      "electronics",
+      "fluidics",
+      "mechanical"
+    ]
+  },
+  "review": {
+    "schema": "cent-proposal-review-summary/1",
+    "events": 0,
+    "states": {},
+    "counts": {
+      "unreviewed": 3,
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    },
+    "decisions": {
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    }
+  },
+  "review_ledger": null,
+  "proposals": [
+    {
+      "id": "proposal-mult-to-glm-reference-via-log-domain-arithmetic",
+      "rank": 1,
+      "mechanism": "log-domain-arithmetic",
+      "readiness": "ready-for-execution",
+      "review_state": "unreviewed",
+      "file": "proposal-mult-to-glm-reference-via-log-domain-arithmetic.json",
+      "handoff": "python3 cent transfer \"mult\" --target \"glm-reference\" --mechanism \"log-domain-arithmetic\" --validate --json"
+    },
+    {
+      "id": "proposal-mult-to-glm-reference-via-fluid-continuity",
+      "rank": 2,
+      "mechanism": "fluid-continuity",
+      "readiness": "needs-target-adapter",
+      "review_state": "unreviewed",
+      "file": "proposal-mult-to-glm-reference-via-fluid-continuity.json",
+      "handoff": null
+    },
+    {
+      "id": "proposal-mult-to-glm-reference-via-kcl-conservation",
+      "rank": 3,
+      "mechanism": "kcl-conservation",
+      "readiness": "needs-target-adapter",
+      "review_state": "unreviewed",
+      "file": "proposal-mult-to-glm-reference-via-kcl-conservation.json",
+      "handoff": null
+    }
+  ]
+}

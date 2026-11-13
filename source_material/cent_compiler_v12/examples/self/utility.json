@@ -1,0 +1,99 @@
+{
+  "certificate_schema": "cent-utility-certificate/1",
+  "ok": true,
+  "records": [
+    {
+      "adoption_state": "adopted",
+      "baseline_command": "python3 cent self --baseline --json",
+      "baseline_value": "32/152",
+      "candidate_command": "python3 cent self --json",
+      "candidate_value": "152/152",
+      "certificate": {
+        "baseline_value": "32/152",
+        "candidate_on_certificate_path": false,
+        "candidate_value": "152/152",
+        "checks": {
+          "candidate_detects_all": true,
+          "faults_confirmed": true,
+          "oracle_mismatches": 120,
+          "oracle_schema": "integer DDA walk, independent of the carry module",
+          "rollback_verified": true
+        },
+        "delta": "120/152",
+        "failures": [],
+        "independent_oracle": "self_oracle.line_walk; docs/evidence/bresenham/check.py",
+        "metric": "Bresenham integer-walk agreement rate",
+        "oracle": "cent-utility-oracle/1",
+        "schema": "cent-utility-certificate/1",
+        "status": "pass"
+      },
+      "delta": "120/152",
+      "detail": "The existing target is a two-tick timing and is not the same operation. The promoted contract is the one-tick floor law the proof establishes.",
+      "id": "bresenham-quantized-carry-floor",
+      "independent_oracle": "self_oracle.line_walk; docs/evidence/bresenham/check.py",
+      "metric": "Bresenham integer-walk agreement rate",
+      "rollback": "cent self --revert bresenham-quantized-carry-floor",
+      "rollback_evidence": {
+        "baseline_command": "python3 cent self --baseline --json",
+        "method": "measure the existing two-tick delta-sigma target in place of the floor contract",
+        "restored_value": "32/152",
+        "verified": true
+      },
+      "schema": "cent-utility/1",
+      "seed": 0,
+      "target_subsystem": "cent_compiler.quantized_carry_floor (declared operation contract)",
+      "title": "Bresenham one-tick proof promoted to quantized_carry_floor",
+      "trials": 152
+    },
+    {
+      "adoption_state": "adopted",
+      "baseline_command": "python3 cent self --baseline --json",
+      "baseline_value": "4/12",
+      "candidate_command": "python3 cent self --json",
+      "candidate_value": "12/12",
+      "certificate": {
+        "baseline_value": "4/12",
+        "candidate_on_certificate_path": false,
+        "candidate_value": "12/12",
+        "checks": {
+          "candidate_detects_all": true,
+          "faults_confirmed": true,
+          "oracle_mismatches": 0,
+          "oracle_schema": "direct Fraction sum/difference over four fixed cases",
+          "rollback_verified": true
+        },
+        "delta": "8/12",
+        "failures": [],
+        "independent_oracle": "self_oracle.expected and confirms_semantic_fault (direct Fraction law)",
+        "metric": "injected-fault detection rate",
+        "oracle": "cent-utility-oracle/1",
+        "schema": "cent-utility-certificate/1",
+        "status": "pass"
+      },
+      "delta": "8/12",
+      "detail": "Structural faults are visible to topology_audit; semantic faults are not. The runtime check evaluates the declared junction law on exact inputs.",
+      "id": "junction-runtime-invariants",
+      "independent_oracle": "self_oracle.expected and confirms_semantic_fault (direct Fraction law)",
+      "metric": "injected-fault detection rate",
+      "rollback": "cent self --revert junction-runtime-invariants",
+      "rollback_evidence": {
+        "baseline_command": "python3 cent self --baseline --json",
+        "method": "disable the runtime check and measure static topology_audit alone",
+        "restored_value": "4/12",
+        "verified": true
+      },
+      "schema": "cent-utility/1",
+      "seed": 0,
+      "target_subsystem": "cent_compiler.runtime_invariants (cent-program/1 exact evaluator)",
+      "title": "Junction conservation as a runtime cent-program/1 invariant",
+      "trials": 12
+    }
+  ],
+  "schema": "cent-utility-ledger/1",
+  "summary": {
+    "adopted": 2,
+    "certified": 2,
+    "records": 2,
+    "reverted": 0
+  }
+}

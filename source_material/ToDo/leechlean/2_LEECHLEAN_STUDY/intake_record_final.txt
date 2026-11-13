@@ -1,0 +1,117 @@
+id: leechlean
+path: ToDo/leechlean
+kind: code
+offers: 'leechlean v4: the recurring parts of a Lean development mapped to Leech-lattice addresses
+  -- an exact Leech engine from the substrate''s Golay parity block, a part->address codebook (39,992
+  parts, injective), a byte-exact address-stream codec, the Lambda/2Lambda coset layer, error correction
+  of corrupted address streams (100% detection, 96-100% correction), the lattice-graph of the library
+  with continuation queries and stitching, and the move algebra d=B-A with the class homomorphism
+  onto Lambda/2Lambda; claims next-MOVE prediction beats next-PART prediction 45.8% vs 40.6% greedy
+  top-1 leave-one-file-out'
+stage: tested
+studies:
+- LEECHLEAN_STUDY
+tests:
+- item:tests/test_leechlean_in_glm.py
+- item:demo/demo_encode_decode.py
+- item:demo/demo_coset_correction.py slip 1.0
+- item:demo/demo_stitching.py
+- item:demo/demo_moves.py
+- staged:src/glm_universal/tests/test_leech_lean.py
+- staged:src/glm_universal/tests/test_leech_lean_tools.py
+- staged:src/glm_universal/tests/test_leech_lean_study.py
+test_results:
+- test: item:tests/test_leechlean_in_glm.py
+  result: pass
+  detail: 'passed (exit 0): the script ran to completion'
+  date: 11 November 2026
+  fingerprint: sha256:c94c209173e1527fa85c0d19dfc6b5c153637dda4ec4b22b2be85e02cbc2ea6b
+- test: item:demo/demo_encode_decode.py
+  result: pass
+  detail: 'passed (exit 0): the script ran to completion'
+  date: 11 November 2026
+  fingerprint: sha256:c94c209173e1527fa85c0d19dfc6b5c153637dda4ec4b22b2be85e02cbc2ea6b
+- test: item:demo/demo_coset_correction.py slip 1.0
+  result: pass
+  detail: 'passed (exit 0): the script ran to completion'
+  date: 11 November 2026
+  fingerprint: sha256:c94c209173e1527fa85c0d19dfc6b5c153637dda4ec4b22b2be85e02cbc2ea6b
+- test: item:demo/demo_stitching.py
+  result: pass
+  detail: 'passed (exit 0): the script ran to completion'
+  date: 11 November 2026
+  fingerprint: sha256:c94c209173e1527fa85c0d19dfc6b5c153637dda4ec4b22b2be85e02cbc2ea6b
+- test: item:demo/demo_moves.py
+  result: pass
+  detail: 'passed (exit 0): the script ran to completion'
+  date: 11 November 2026
+  fingerprint: sha256:c94c209173e1527fa85c0d19dfc6b5c153637dda4ec4b22b2be85e02cbc2ea6b
+lean:
+- IntakeChecks/LeechLeanGolay
+- IntakeChecks/LeechLeanCodec
+lean_obligations:
+- 'IntakeChecks/LeechLeanGolay.lean (GLM.LeechLeanGolay): the parity block B itself -- codeword_injective
+  (the 4096 twelve-bit messages give 4096 distinct words, a hand proof through Nat.testBit), codewords_length,
+  weights_only and weight_histogram (the enumerator {0:1, 8:759, 12:2576, 16:759, 24:1} decided over
+  all 4096 words), octad_count (759, the octads of S(5,8,24)), all_ones_mem'
+- 'IntakeChecks/LeechLeanCodec.lean (GLM.LeechLeanCodec): the addressing on real data -- the Conway-Sloane
+  membership predicate over the generated codeword literal, decided for every address of the codebook
+  slice (slice_in_leech), the slice injective (slice_injective), the sample stream''s every tick in
+  the slice (ticks_in_slice), the round trip (roundtrip: the address stream decodes to the exact file
+  prefix), and the sieve facts on the data (flip_breaks; glue_stays, minvec_stays: on-lattice slips
+  are invisible to the congruence sieve)'
+- both files compile standalone under the pinned toolchain leanprover/lean4:v4.28.0 (core only --
+  no Mathlib in this sandbox; the owner's scripts/rebuild_lean.sh has to confirm them in the full
+  build)
+- the item's own finite claims beyond these (S(5,8,24) on all 42,504 five-subsets, the 196,560 kissing
+  number, the norm-48 shell census, the 2^24-class census) are enumerated by the item's Python battery
+  (item:tests/test_leechlean_in_glm.py) against the substrate's own modules; the package port reuses
+  the substrate's machinery (substrate/leech2.py, substrate/mog.py, reasoning/analogy.py) rather than
+  re-proving it
+measured: 'LEECHLEAN_STUDY §8 (11 November 2026, glm_universal.reasoning.leech_lean_study.leech_lean_report):
+  15 of 15 questions answered right and 0 wrong through the tool leechlean surface, against 0 of 15
+  through the GLM without it; 6 of 6 negative controls refused or left alone; and on the 30-file leave-one-file-out
+  sample the move model 51.6% against the part model 42.5% greedy top-1 (+9.1 points)'
+absorbed_into:
+- reasoning/leech_lean
+- reasoning/leech_lean_tools
+- reasoning/leech_lean_study
+parts:
+- part: 'the leechlean port: the engine adapter, the tool surface and the study module (reasoning/leech_lean.py,
+    leech_lean_tools.py, leech_lean_study.py, the derived library core reasoning/_data/leech_lean_core.json.gz
+    and the three staged test files)'
+  status: staged
+  studies:
+  - LEECHLEAN_STUDY
+  absorbed_into:
+  - reasoning/leech_lean
+  - reasoning/leech_lean_tools
+  - reasoning/leech_lean_study
+  lean:
+  - IntakeChecks/LeechLeanGolay
+  - IntakeChecks/LeechLeanCodec
+  note: pure Python over the substrate's exact machinery (the package has no numpy and the port adds
+    none); the codebook and the recorded experiments are read from the item folder through constants.source_material_item
+- part: the item's own battery (tests/test_leechlean_in_glm.py) and the four demos
+  status: closed
+  note: they test the item against the GLM package and stay in the item folder as its named item tests;
+    the battery's 37 checks are the Q1/Q4-Q8 evidence of LEECHLEAN_STUDY
+- part: the item's bulk-build pipeline (rebuilding the codebook, the PPMI/SVD direction embedding,
+    fingerprints, the eighteen figures and the four docx reports)
+  status: closed
+  note: 'left in the item as supplied (LEECHLEAN_STUDY §1: what this round leaves); the round never
+    edits the supplied files'
+last_action: '11 November 2026: advanced to tested'
+next_step: 'finish the standalone compile of LeechLeanCodec.lean if its log has not yet passed (toolchain
+  at /home/z/my-project/lean-toolchain/lean-4.28.0-linux: build the LeechLeanGolay.olean with lean
+  -o, then LEAN_PATH=<that dir> lean .../LeechLeanCodec.lean), then close the chain with scripts/complete_leechlean_intake.py:
+  retest leechlean --stale, advance leechlean lean_written --no-run, accept (criterion and result
+  are quoted from the study), absorb-ahead with the owner''s decision -- the script runs them in order
+  and logs to /tmp/leechlean_complete.log; then PYTHONPATH=src python3 -m glm_universal.corpus --refresh
+  and the touched package tests'
+
+stage: tested; 3 gap(s):
+  [tested] no recorded result for staged:src/glm_universal/tests/test_leech_lean.py
+  [tested] no recorded result for staged:src/glm_universal/tests/test_leech_lean_tools.py
+  [tested] no recorded result for staged:src/glm_universal/tests/test_leech_lean_study.py
+next gate, Lean written: ready

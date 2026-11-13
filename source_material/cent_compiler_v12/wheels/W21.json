@@ -2,13 +2,13 @@
   "id": "W21",
   "title": "Fracture Mechanics & Plasticity",
   "axioms": [
-    "fracture_toughness = (2 * youngs_modulus * surface_energy / (314159265 * crack_length))^(1/2)",
+    "fracture_toughness^2 = 2 * youngs_modulus * surface_energy",
     "stress_intensity_factor = dimensionless_factor * stress * crack_length^(1/2)"
   ],
   "cases": [
     {
       "id": "W21-01",
-      "equation": "surface_energy = fracture_toughness^2 * crack_length / (2 * youngs_modulus)",
+      "equation": "surface_energy = fracture_toughness^2 / (2 * youngs_modulus)",
       "expected_dimensional": true,
       "expected_derivable": true,
       "physical_status": "physically_supported",
@@ -109,7 +109,7 @@
         "A"
       ],
       "exponents": [
-        -1,
+        "-1/2",
         1,
         -2,
         0,
@@ -153,7 +153,7 @@
         "A"
       ],
       "exponents": [
-        -1,
+        "-1/2",
         1,
         -2,
         0,

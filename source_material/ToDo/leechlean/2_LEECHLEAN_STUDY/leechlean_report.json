@@ -1,0 +1,67 @@
+{
+ "study": "LEECHLEAN_STUDY",
+ "checks": {
+  "twelve_of_fifteen": true,
+  "zero_wrong": true,
+  "baseline_zero": true,
+  "controls_held": true,
+  "move_beats_part": true
+ },
+ "grades": {
+  "q1": "right",
+  "q2": "right",
+  "q3": "right",
+  "q4": "right",
+  "q5": "right",
+  "q6": "right",
+  "q7": "right",
+  "q8": "right",
+  "q9": "right",
+  "q10": "right",
+  "q11": "right",
+  "q12": "right",
+  "q13": "right",
+  "q14": "right",
+  "q15": "right"
+ },
+ "baseline": {
+  "q1": "refused",
+  "q2": "refused",
+  "q3": "refused",
+  "q4": "refused",
+  "q5": "refused",
+  "q6": "refused",
+  "q7": "refused",
+  "q8": "refused",
+  "q9": "refused",
+  "q10": "refused",
+  "q11": "refused",
+  "q12": "refused",
+  "q13": "refused",
+  "q14": "refused",
+  "q15": "refused"
+ },
+ "controls": {
+  "n1_unknown_part": "refused",
+  "n2_unknown_file": "refused",
+  "n3_unseen_continuation": "refused",
+  "n4_prove_overclaim": "refused",
+  "n5_corrupted_as_clean": "flagged",
+  "n6_prove_riemann": "refused"
+ },
+ "right": 15,
+ "wrong": 0,
+ "baseline_right": 0,
+ "loo": {
+  "part_hits": 36442,
+  "part_total": 85603,
+  "move_hits": 42575,
+  "move_total": 82419,
+  "files": 30
+ },
+ "part_top1": "42.5%",
+ "move_top1": "51.6%",
+ "margin_points_pm": 91,
+ "deciding_figure": "15 of 15 questions answered right and 0 wrong through the tool leechlean surface, against 0 of 15 through the GLM without it; 6 of 6 negative controls refused or left alone; and on the 30-file leave-one-file-out sample the move model 51.6% against the part model 42.5% greedy top-1 (+9.1 points)",
+ "all_checks_hold": true
+}

@@ -1,0 +1,3 @@
+# The transfer and exact-core paths are standard-library only. The legacy
+# delta-sigma simulator and its regression tests use numpy.
+numpy>=1.24

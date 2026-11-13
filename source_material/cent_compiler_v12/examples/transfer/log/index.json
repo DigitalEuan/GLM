@@ -1,0 +1,71 @@
+{
+  "schema": "cent-proposal-index/1",
+  "operation": "log",
+  "target": "glm-reference",
+  "summary": {
+    "proposals": 3,
+    "ready_for_execution": 1,
+    "needs_target_adapter": 2,
+    "needs_target_vectors": 0,
+    "needs_environment": 0,
+    "review_counts": {
+      "unreviewed": 3
+    },
+    "mechanisms": [
+      "log-domain-arithmetic",
+      "log-domain-sqrt",
+      "fluid-continuity"
+    ],
+    "domains": [
+      "electronics",
+      "fluidics",
+      "mechanical"
+    ]
+  },
+  "review": {
+    "schema": "cent-proposal-review-summary/1",
+    "events": 0,
+    "states": {},
+    "counts": {
+      "unreviewed": 3,
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    },
+    "decisions": {
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    }
+  },
+  "review_ledger": null,
+  "proposals": [
+    {
+      "id": "proposal-log-to-glm-reference-via-log-domain-arithmetic",
+      "rank": 1,
+      "mechanism": "log-domain-arithmetic",
+      "readiness": "ready-for-execution",
+      "review_state": "unreviewed",
+      "file": "proposal-log-to-glm-reference-via-log-domain-arithmetic.json",
+      "handoff": "python3 cent transfer \"log\" --target \"glm-reference\" --mechanism \"log-domain-arithmetic\" --validate --json"
+    },
+    {
+      "id": "proposal-log-to-glm-reference-via-log-domain-sqrt",
+      "rank": 2,
+      "mechanism": "log-domain-sqrt",
+      "readiness": "needs-target-adapter",
+      "review_state": "unreviewed",
+      "file": "proposal-log-to-glm-reference-via-log-domain-sqrt.json",
+      "handoff": null
+    },
+    {
+      "id": "proposal-log-to-glm-reference-via-fluid-continuity",
+      "rank": 3,
+      "mechanism": "fluid-continuity",
+      "readiness": "needs-target-adapter",
+      "review_state": "unreviewed",
+      "file": "proposal-log-to-glm-reference-via-fluid-continuity.json",
+      "handoff": null
+    }
+  ]
+}

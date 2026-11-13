@@ -1,0 +1,1698 @@
+{
+  "ok": true,
+  "certified": false,
+  "schema": "cent-transfer-evaluation/2",
+  "algorithm": "provenance-labelled-top3/1",
+  "target": {
+    "schema": "cent-target/1",
+    "id": "glm-reference",
+    "kind": "software",
+    "description": "Declared exact-rational software target for quantized-carry, exact KCL and normalized fluid sum, exact-difference, log-domain square-root, arithmetic operations including positive reciprocal, and three-level sign. It is a reference adapter experiment, not a GLM model, a GLM runtime or a performance measurement.",
+    "interface": {
+      "contract": "python callable with exact rational inputs and JSON-safe outputs",
+      "operations": [
+        "quantized_carry",
+        "sum",
+        "difference",
+        "sqrt",
+        "exp",
+        "log",
+        "mult",
+        "div",
+        "reciprocal",
+        "sign"
+      ],
+      "interfaces": {
+        "quantized_carry": {
+          "inputs": {
+            "x": "exact rational in [0, full_scale]",
+            "samples": "positive integer",
+            "quantum": "positive exact rational",
+            "full_scale": "positive integer multiple of quantum",
+            "integrator_limit": "positive exact rational"
+          },
+          "outputs": {
+            "code": "bounded integer code sequence",
+            "mean": "exact rational code mean",
+            "error": "mean - x",
+            "peak_state": "nonnegative exact rational",
+            "bounded": "boolean",
+            "passed": "boolean for bounded state and declared reconstruction"
+          },
+          "state": "one exact rational accumulator plus the declared feedback history",
+          "feedback": "delayed quantized level matching the exact route's effective loop history"
+        },
+        "sum": {
+          "inputs": {
+            "a": "exact rational",
+            "b": "exact rational"
+          },
+          "outputs": {
+            "total": "exact rational"
+          },
+          "state": "none",
+          "feedback": "none"
+        },
+        "difference": {
+          "inputs": {
+            "a": "exact rational",
+            "b": "exact rational"
+          },
+          "outputs": {
+            "total": "exact rational"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "a - b is negation of b followed by exact sum"
+        },
+        "sqrt": {
+          "inputs": {
+            "x": "positive exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "root": "certified rational enclosure",
+            "checker": "independent sqrt_q enclosure",
+            "passed": "boolean for overlap and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "root = exp((1/2) * log(x))"
+        },
+        "exp": {
+          "inputs": {
+            "x": "exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "value": "certified rational enclosure of exp(x)",
+            "checker": "higher-precision exp_q enclosure",
+            "passed": "boolean for overlap and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "value = exp(x)"
+        },
+        "log": {
+          "inputs": {
+            "x": "positive exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "value": "certified rational enclosure of log(x)",
+            "checker": "higher-precision log_q enclosure",
+            "passed": "boolean for overlap and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "value = log(x)"
+        },
+        "mult": {
+          "inputs": {
+            "a": "positive exact rational",
+            "b": "positive exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "value": "certified rational enclosure of a*b",
+            "checker": "exact rational product",
+            "passed": "boolean for containment and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "value = exp(log(a) + log(b))"
+        },
+        "div": {
+          "inputs": {
+            "a": "positive exact rational",
+            "b": "positive exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "value": "certified rational enclosure of a/b",
+            "checker": "exact rational quotient",
+            "passed": "boolean for containment and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "value = exp(log(a) - log(b))"
+        },
+        "reciprocal": {
+          "inputs": {
+            "x": "positive exact rational",
+            "precision": "integer in 1..64",
+            "tolerance": "positive exact rational"
+          },
+          "outputs": {
+            "value": "certified rational enclosure of 1/x",
+            "checker": "exact rational reciprocal",
+            "passed": "boolean for containment and declared width"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "value = exp(-log(x))"
+        },
+        "sign": {
+          "inputs": {
+            "x": "exact rational"
+          },
+          "outputs": {
+            "value": "integer in {-1, 0, 1}"
+          },
+          "state": "none",
+          "feedback": "none",
+          "law": "value = -1 if x < 0; 0 if x = 0; +1 if x > 0"
+        }
+      },
+      "precision": "exact rational",
+      "latency": {
+        "kind": "declared reference-operation step count",
+        "unit": "steps",
+        "quantized_carry": "samples",
+        "sum": 1,
+        "difference": 1,
+        "sqrt": "1 route evaluation",
+        "exp": "1 route evaluation",
+        "log": "1 route evaluation",
+        "mult": "2 log stages + 1 sum + 1 antilog",
+        "div": "2 log stages + 1 negation + 1 sum + 1 antilog",
+        "reciprocal": "1 log stage + 1 negation + 1 antilog",
+        "sign": 1
+      },
+      "bit_budget": {
+        "kind": "declared reference-operation output width",
+        "unit": "bits",
+        "quantized_carry": "ceil(log2(full_scale / quantum + 1)) per code",
+        "sum": "exact rational result; no fixed-width limit",
+        "difference": "exact rational result; no fixed-width limit",
+        "sqrt": "precision bits per enclosure",
+        "exp": "precision bits per enclosure",
+        "log": "precision bits per enclosure",
+        "mult": "precision bits per enclosure",
+        "div": "precision bits per enclosure",
+        "reciprocal": "precision bits per enclosure",
+        "sign": "2 bits for the three-level output {-1, 0, +1}"
+      }
+    },
+    "constraints": {
+      "exact_rational": true,
+      "no_binary_float": true,
+      "reference_only": true,
+      "no_real_glm_interface": true,
+      "no_glm_performance_claim": true,
+      "reference_budgets_declared": true,
+      "fixed_test_vectors": true
+    },
+    "evidence_required": [
+      "executable target adapter",
+      "fixed target vectors",
+      "pass/fail certificate"
+    ],
+    "provenance": [
+      "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+      "cent_compiler/assembly.py",
+      "cent_compiler/targets/glm.py"
+    ],
+    "gaps": [
+      "no real GLM interface, model call or runtime integration",
+      "reference-operation latency and bit budgets are declared; no external GLM, numerical-backend or hardware budget is connected",
+      "no GLM performance improvement or measured target result is claimed"
+    ]
+  },
+  "corpus": {
+    "known_valid": [
+      {
+        "id": "sqrt-declared-mechanisms",
+        "kind": "known-valid",
+        "operation": "sqrt",
+        "expected_mechanisms": [
+          "cam-profile",
+          "log-domain-sqrt",
+          "orifice-pressure-flow"
+        ],
+        "rationale": "Three cards explicitly declare sqrt support; one is source-simulated and two are structural.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "sum-declared-mechanisms",
+        "kind": "known-valid",
+        "operation": "sum",
+        "expected_mechanisms": [
+          "fluid-continuity",
+          "kcl-conservation",
+          "opamp-summing"
+        ],
+        "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-sum support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "difference-declared-mechanisms",
+        "kind": "known-valid",
+        "operation": "difference",
+        "expected_mechanisms": [
+          "fluid-continuity",
+          "kcl-conservation",
+          "opamp-summing"
+        ],
+        "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-difference support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "quantized-carry-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "quantized_carry",
+        "expected_mechanisms": [
+          "delta-sigma-error-feedback"
+        ],
+        "rationale": "The delta-sigma card explicitly declares quantized-carry support.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "exp-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "exp",
+        "expected_mechanisms": [
+          "log-domain-arithmetic"
+        ],
+        "rationale": "The generated log-domain arithmetic card declares exp through the antilog junction; source and target routes are exercised in D3.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/assembly.py",
+          "cent_compiler/targets/glm.py"
+        ]
+      },
+      {
+        "id": "log-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "log",
+        "expected_mechanisms": [
+          "log-domain-arithmetic"
+        ],
+        "rationale": "The generated log-domain arithmetic card declares log through the logging junction; source and target routes are exercised in D3.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/assembly.py",
+          "cent_compiler/targets/glm.py"
+        ]
+      },
+      {
+        "id": "mult-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "mult",
+        "expected_mechanisms": [
+          "log-domain-arithmetic"
+        ],
+        "rationale": "The generated slide-rule card declares mult as log, log, sum, exp; the positive-domain source and target routes are exercised in D3.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/assembly.py",
+          "cent_compiler/targets/glm.py"
+        ]
+      },
+      {
+        "id": "div-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "div",
+        "expected_mechanisms": [
+          "log-domain-arithmetic"
+        ],
+        "rationale": "The generated slide-rule card declares div as log, log, neg, sum, exp; the positive-domain source and target routes are exercised in D3.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/assembly.py",
+          "cent_compiler/targets/glm.py"
+        ]
+      },
+      {
+        "id": "reciprocal-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "reciprocal",
+        "expected_mechanisms": [
+          "log-domain-arithmetic"
+        ],
+        "rationale": "The generated slide-rule card declares reciprocal as log, neg, exp; the positive-domain source and target routes are exercised in D3.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/assembly.py",
+          "cent_compiler/targets/glm.py"
+        ]
+      },
+      {
+        "id": "sign-declared-mechanism",
+        "kind": "known-valid",
+        "operation": "sign",
+        "expected_mechanisms": [
+          "threshold-comparator"
+        ],
+        "rationale": "The threshold-comparator card declares exact three-level sign; the negative, zero and positive branches are exercised by D7.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/targets/glm.py"
+        ]
+      }
+    ],
+    "known_invalid": [
+      {
+        "id": "mult-not-orifice",
+        "kind": "known-invalid",
+        "operation": "mult",
+        "forbidden_mechanisms": [
+          "orifice-pressure-flow"
+        ],
+        "rationale": "The orifice card contains a mult primitive but declares only sqrt support; primitive overlap must not create a transfer.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "log-not-cam-profile",
+        "kind": "known-invalid",
+        "operation": "log",
+        "forbidden_mechanisms": [
+          "cam-profile"
+        ],
+        "rationale": "The cam profile is the sqrt-specific delta; it does not compute a logarithm. The transcendental-identity sibling delta does compute it and is labelled separately. Refusing the wrong delta remains the control: naming a support for log that lacks the log junction is not a transfer.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "docs/OPAMP_MULTIPLIER_SQRT.md"
+        ]
+      },
+      {
+        "id": "exp-not-cam-profile",
+        "kind": "known-invalid",
+        "operation": "exp",
+        "forbidden_mechanisms": [
+          "cam-profile"
+        ],
+        "rationale": "The cam profile is the sqrt-specific delta; it does not compute an exponential. The transcendental-identity sibling delta does compute it and is labelled separately. Refusing the wrong delta remains the control: primitive or domain overlap must not create a transfer.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "docs/OPAMP_MULTIPLIER_SQRT.md"
+        ]
+      },
+      {
+        "id": "mult-not-fluid-continuity",
+        "kind": "known-invalid",
+        "operation": "mult",
+        "forbidden_mechanisms": [
+          "fluid-continuity"
+        ],
+        "rationale": "A fluid junction conserves flow; it does not supply a product law. Primitive or domain overlap must not be accepted as multiplication.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "docs/FLUID_SUM.md"
+        ]
+      },
+      {
+        "id": "sqrt-not-delta-sigma",
+        "kind": "known-invalid",
+        "operation": "sqrt",
+        "forbidden_mechanisms": [
+          "delta-sigma-error-feedback"
+        ],
+        "rationale": "Delta-sigma is a quantized-carry mechanism; it must not appear for sqrt merely because both are nonlinear operations.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      },
+      {
+        "id": "quantized-carry-not-pll",
+        "kind": "known-invalid",
+        "operation": "quantized_carry",
+        "forbidden_mechanisms": [
+          "pll-phase-tracking"
+        ],
+        "rationale": "The PLL card is stateful and feedback-based but supports phase and frequency operations, not quantized carry.",
+        "provenance": [
+          "cent_compiler/mechanisms.py"
+        ]
+      }
+    ],
+    "unadapted": [],
+    "refused": [
+      {
+        "id": "griess-product-refused",
+        "kind": "refused",
+        "operation": "griess_product",
+        "expected_mechanisms": [],
+        "rationale": "The negative-control name from the transfer specification has no production operation contract.",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ]
+      },
+      {
+        "id": "matrix-vector-refused",
+        "kind": "refused",
+        "operation": "matrix_vector_product",
+        "expected_mechanisms": [],
+        "rationale": "A generic multiplier must not be accepted as a matrix-vector transfer; this name has no production contract.",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ]
+      },
+      {
+        "id": "track-phase-refused",
+        "kind": "refused",
+        "operation": "track_phase",
+        "expected_mechanisms": [],
+        "rationale": "The PLL card declares this source operation, but no production operation contract or target adapter exists, so retrieval refuses it.",
+        "provenance": [
+          "cent_compiler/mechanisms.py",
+          "cent_compiler/transfer_engine.py"
+        ]
+      }
+    ]
+  },
+  "known_valid": [
+    {
+      "id": "sqrt-declared-mechanisms",
+      "kind": "known-valid",
+      "operation": "sqrt",
+      "expected": [
+        "cam-profile",
+        "log-domain-sqrt",
+        "orifice-pressure-flow"
+      ],
+      "retrieved": [
+        "cam-profile",
+        "fluid-continuity",
+        "log-domain-sqrt"
+      ],
+      "missing": [
+        "orifice-pressure-flow"
+      ],
+      "unlabelled": [
+        "fluid-continuity"
+      ],
+      "passed": false,
+      "evidence_total": 3,
+      "evidence_complete": 2,
+      "adapter_available": [
+        "log-domain-sqrt"
+      ],
+      "unadapted": [
+        "cam-profile",
+        "orifice-pressure-flow"
+      ],
+      "candidates": [
+        {
+          "mechanism": "cam-profile",
+          "evidence_level": "structural",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no exact cam solver or fabricated profile",
+            "no target adapter or target test"
+          ],
+          "declared_support": true
+        },
+        {
+          "mechanism": "log-domain-sqrt",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target evidence is software-only; no measured junction or physical route",
+            "no measured bit-budget or latency contract"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 17,
+          "declared_support": false
+        }
+      ],
+      "rationale": "Three cards explicitly declare sqrt support; one is source-simulated and two are structural.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "sum-declared-mechanisms",
+      "kind": "known-valid",
+      "operation": "sum",
+      "expected": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "missing": [],
+      "unlabelled": [],
+      "passed": true,
+      "evidence_total": 3,
+      "evidence_complete": 3,
+      "adapter_available": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no pressure/flow scaling, device binding or reference netlist",
+            "target coverage is normalized-flow software only; no measured junction"
+          ],
+          "declared_support": true
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no physical voltage/current mapping or reference netlist",
+            "target coverage is software reference/live KCL only; no physical junction measurement"
+          ],
+          "declared_support": true
+        },
+        {
+          "mechanism": "opamp-summing",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no device values, reference netlist or physical voltage scaling",
+            "target coverage is normalized-voltage software only; no measured amplifier"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [],
+      "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-sum support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "difference-declared-mechanisms",
+      "kind": "known-valid",
+      "operation": "difference",
+      "expected": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "missing": [],
+      "unlabelled": [],
+      "passed": true,
+      "evidence_total": 3,
+      "evidence_complete": 3,
+      "adapter_available": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "opamp-summing"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no pressure/flow scaling, device binding or reference netlist",
+            "target coverage is normalized-flow software only; no measured junction"
+          ],
+          "declared_support": true
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no physical voltage/current mapping or reference netlist",
+            "target coverage is software reference/live KCL only; no physical junction measurement"
+          ],
+          "declared_support": true
+        },
+        {
+          "mechanism": "opamp-summing",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "no device values, reference netlist or physical voltage scaling",
+            "target coverage is normalized-voltage software only; no measured amplifier"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [],
+      "rationale": "The KCL, fluid and op-amp cards explicitly declare exact-difference support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "quantized-carry-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "quantized_carry",
+      "expected": [
+        "delta-sigma-error-feedback"
+      ],
+      "retrieved": [
+        "delta-sigma-error-feedback",
+        "orifice-pressure-flow",
+        "pll-phase-tracking"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "orifice-pressure-flow",
+        "pll-phase-tracking"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "delta-sigma-error-feedback"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "delta-sigma-error-feedback",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is reference-only; no live GLM carry adapter",
+            "no measured bit-budget or latency contract"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "orifice-pressure-flow",
+          "score": 14,
+          "declared_support": false
+        },
+        {
+          "mechanism": "pll-phase-tracking",
+          "score": 20,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The delta-sigma card explicitly declares quantized-carry support.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "exp-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "exp",
+      "expected": [
+        "log-domain-arithmetic"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "log-domain-arithmetic",
+        "log-domain-sqrt"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "log-domain-sqrt"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "log-domain-arithmetic"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "log-domain-arithmetic",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is software reference only; no measured junction",
+            "mult/div/reciprocal are declared only on positive normalized inputs",
+            "no voltage/current scaling or device netlist"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 17,
+          "declared_support": false
+        },
+        {
+          "mechanism": "log-domain-sqrt",
+          "score": 21,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The generated log-domain arithmetic card declares exp through the antilog junction; source and target routes are exercised in D3.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py",
+        "cent_compiler/targets/glm.py"
+      ]
+    },
+    {
+      "id": "log-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "log",
+      "expected": [
+        "log-domain-arithmetic"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "log-domain-arithmetic",
+        "log-domain-sqrt"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "log-domain-sqrt"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "log-domain-arithmetic"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "log-domain-arithmetic",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is software reference only; no measured junction",
+            "mult/div/reciprocal are declared only on positive normalized inputs",
+            "no voltage/current scaling or device netlist"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 17,
+          "declared_support": false
+        },
+        {
+          "mechanism": "log-domain-sqrt",
+          "score": 21,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The generated log-domain arithmetic card declares log through the logging junction; source and target routes are exercised in D3.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py",
+        "cent_compiler/targets/glm.py"
+      ]
+    },
+    {
+      "id": "mult-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "mult",
+      "expected": [
+        "log-domain-arithmetic"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "log-domain-arithmetic"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "kcl-conservation"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "log-domain-arithmetic"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "log-domain-arithmetic",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is software reference only; no measured junction",
+            "mult/div/reciprocal are declared only on positive normalized inputs",
+            "no voltage/current scaling or device netlist"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 18,
+          "declared_support": false
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "score": 18,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The generated slide-rule card declares mult as log, log, sum, exp; the positive-domain source and target routes are exercised in D3.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py",
+        "cent_compiler/targets/glm.py"
+      ]
+    },
+    {
+      "id": "div-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "div",
+      "expected": [
+        "log-domain-arithmetic"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "log-domain-arithmetic"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "kcl-conservation"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "log-domain-arithmetic"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "log-domain-arithmetic",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is software reference only; no measured junction",
+            "mult/div/reciprocal are declared only on positive normalized inputs",
+            "no voltage/current scaling or device netlist"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 18,
+          "declared_support": false
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "score": 18,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The generated slide-rule card declares div as log, log, neg, sum, exp; the positive-domain source and target routes are exercised in D3.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py",
+        "cent_compiler/targets/glm.py"
+      ]
+    },
+    {
+      "id": "reciprocal-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "reciprocal",
+      "expected": [
+        "log-domain-arithmetic"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "log-domain-arithmetic"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "kcl-conservation"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "log-domain-arithmetic"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "log-domain-arithmetic",
+          "evidence_level": "source-simulated",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target coverage is software reference only; no measured junction",
+            "mult/div/reciprocal are declared only on positive normalized inputs",
+            "no voltage/current scaling or device netlist"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 18,
+          "declared_support": false
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "score": 18,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The generated slide-rule card declares reciprocal as log, neg, exp; the positive-domain source and target routes are exercised in D3.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py",
+        "cent_compiler/targets/glm.py"
+      ]
+    },
+    {
+      "id": "sign-declared-mechanism",
+      "kind": "known-valid",
+      "operation": "sign",
+      "expected": [
+        "threshold-comparator"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "threshold-comparator"
+      ],
+      "missing": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "kcl-conservation"
+      ],
+      "passed": true,
+      "evidence_total": 1,
+      "evidence_complete": 1,
+      "adapter_available": [
+        "threshold-comparator"
+      ],
+      "unadapted": [],
+      "candidates": [
+        {
+          "mechanism": "threshold-comparator",
+          "evidence_level": "structural",
+          "tests": [],
+          "artifact": false,
+          "gaps": [
+            "target evidence is a software reference only; no measured comparator",
+            "comparator offset, hysteresis and metastability are not modeled"
+          ],
+          "declared_support": true
+        }
+      ],
+      "unlabelled_candidates": [
+        {
+          "mechanism": "fluid-continuity",
+          "score": 18,
+          "declared_support": false
+        },
+        {
+          "mechanism": "kcl-conservation",
+          "score": 18,
+          "declared_support": false
+        }
+      ],
+      "rationale": "The threshold-comparator card declares exact three-level sign; the negative, zero and positive branches are exercised by D7.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/targets/glm.py"
+      ]
+    }
+  ],
+  "known_invalid": [
+    {
+      "id": "mult-not-orifice",
+      "kind": "known-invalid",
+      "operation": "mult",
+      "forbidden": [
+        "orifice-pressure-flow"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "log-domain-arithmetic"
+      ],
+      "forbidden_hits": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "kcl-conservation"
+      ],
+      "passed": true,
+      "rationale": "The orifice card contains a mult primitive but declares only sqrt support; primitive overlap must not create a transfer.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "log-not-cam-profile",
+      "kind": "known-invalid",
+      "operation": "log",
+      "forbidden": [
+        "cam-profile"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "log-domain-arithmetic",
+        "log-domain-sqrt"
+      ],
+      "forbidden_hits": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "log-domain-sqrt"
+      ],
+      "passed": true,
+      "rationale": "The cam profile is the sqrt-specific delta; it does not compute a logarithm. The transcendental-identity sibling delta does compute it and is labelled separately. Refusing the wrong delta remains the control: naming a support for log that lacks the log junction is not a transfer.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "docs/OPAMP_MULTIPLIER_SQRT.md"
+      ]
+    },
+    {
+      "id": "exp-not-cam-profile",
+      "kind": "known-invalid",
+      "operation": "exp",
+      "forbidden": [
+        "cam-profile"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "log-domain-arithmetic",
+        "log-domain-sqrt"
+      ],
+      "forbidden_hits": [],
+      "unlabelled": [
+        "fluid-continuity",
+        "log-domain-sqrt"
+      ],
+      "passed": true,
+      "rationale": "The cam profile is the sqrt-specific delta; it does not compute an exponential. The transcendental-identity sibling delta does compute it and is labelled separately. Refusing the wrong delta remains the control: primitive or domain overlap must not create a transfer.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "docs/OPAMP_MULTIPLIER_SQRT.md"
+      ]
+    },
+    {
+      "id": "mult-not-fluid-continuity",
+      "kind": "known-invalid",
+      "operation": "mult",
+      "forbidden": [
+        "fluid-continuity"
+      ],
+      "retrieved": [
+        "fluid-continuity",
+        "kcl-conservation",
+        "log-domain-arithmetic"
+      ],
+      "forbidden_hits": [
+        "fluid-continuity"
+      ],
+      "unlabelled": [
+        "fluid-continuity",
+        "kcl-conservation"
+      ],
+      "passed": false,
+      "rationale": "A fluid junction conserves flow; it does not supply a product law. Primitive or domain overlap must not be accepted as multiplication.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "docs/FLUID_SUM.md"
+      ]
+    },
+    {
+      "id": "sqrt-not-delta-sigma",
+      "kind": "known-invalid",
+      "operation": "sqrt",
+      "forbidden": [
+        "delta-sigma-error-feedback"
+      ],
+      "retrieved": [
+        "cam-profile",
+        "fluid-continuity",
+        "log-domain-sqrt"
+      ],
+      "forbidden_hits": [],
+      "unlabelled": [
+        "fluid-continuity"
+      ],
+      "passed": true,
+      "rationale": "Delta-sigma is a quantized-carry mechanism; it must not appear for sqrt merely because both are nonlinear operations.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    },
+    {
+      "id": "quantized-carry-not-pll",
+      "kind": "known-invalid",
+      "operation": "quantized_carry",
+      "forbidden": [
+        "pll-phase-tracking"
+      ],
+      "retrieved": [
+        "delta-sigma-error-feedback",
+        "orifice-pressure-flow",
+        "pll-phase-tracking"
+      ],
+      "forbidden_hits": [
+        "pll-phase-tracking"
+      ],
+      "unlabelled": [
+        "orifice-pressure-flow",
+        "pll-phase-tracking"
+      ],
+      "passed": false,
+      "rationale": "The PLL card is stateful and feedback-based but supports phase and frequency operations, not quantized carry.",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ]
+    }
+  ],
+  "unadapted": [],
+  "refused": [
+    {
+      "id": "griess-product-refused",
+      "kind": "refused",
+      "operation": "griess_product",
+      "passed": true,
+      "detail": "\"unknown operation contract 'griess_product'; known: difference, div, exp, log, mult, quantized_carry, reciprocal, sign, sqrt, sum\"",
+      "rationale": "The negative-control name from the transfer specification has no production operation contract.",
+      "provenance": [
+        "tests/test_transfer_contracts.py"
+      ]
+    },
+    {
+      "id": "matrix-vector-refused",
+      "kind": "refused",
+      "operation": "matrix_vector_product",
+      "passed": true,
+      "detail": "\"unknown operation contract 'matrix_vector_product'; known: difference, div, exp, log, mult, quantized_carry, reciprocal, sign, sqrt, sum\"",
+      "rationale": "A generic multiplier must not be accepted as a matrix-vector transfer; this name has no production contract.",
+      "provenance": [
+        "tests/test_transfer_contracts.py"
+      ]
+    },
+    {
+      "id": "track-phase-refused",
+      "kind": "refused",
+      "operation": "track_phase",
+      "passed": true,
+      "detail": "\"unknown operation contract 'track_phase'; known: difference, div, exp, log, mult, quantized_carry, reciprocal, sign, sqrt, sum\"",
+      "rationale": "The PLL card declares this source operation, but no production operation contract or target adapter exists, so retrieval refuses it.",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/transfer_engine.py"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "operation": "sqrt",
+      "mechanism": "log-domain-sqrt",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "sqrt-two",
+        "sqrt-half",
+        "sqrt-nine"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sum",
+      "mechanism": "fluid-continuity",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "flow-half-plus-third",
+        "flow-negative-plus-half",
+        "flow-zero-plus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sum",
+      "mechanism": "kcl-conservation",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "half-plus-third",
+        "negative-plus-half",
+        "zero-plus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sum",
+      "mechanism": "opamp-summing",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "opamp-half-plus-third",
+        "opamp-negative-plus-half",
+        "opamp-zero-plus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "difference",
+      "mechanism": "fluid-continuity",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "flow-half-minus-third",
+        "flow-negative-minus-half",
+        "flow-zero-minus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "difference",
+      "mechanism": "kcl-conservation",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "half-minus-third",
+        "negative-minus-half",
+        "zero-minus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "difference",
+      "mechanism": "opamp-summing",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "opamp-half-minus-third",
+        "opamp-negative-minus-half",
+        "opamp-zero-minus-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "quantized_carry",
+      "mechanism": "delta-sigma-error-feedback",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "half-12",
+        "third-8",
+        "two-fifths-12"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "exp",
+      "mechanism": "log-domain-arithmetic",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "exp-zero",
+        "exp-half",
+        "exp-negative-half"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "log",
+      "mechanism": "log-domain-arithmetic",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "log-one",
+        "log-two",
+        "log-half"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "mult",
+      "mechanism": "log-domain-arithmetic",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "mult-three-quarters-two-thirds",
+        "mult-half-third",
+        "mult-two-half"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "div",
+      "mechanism": "log-domain-arithmetic",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "div-half-three-quarters",
+        "div-three-quarters-half",
+        "div-third-two-thirds"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "reciprocal",
+      "mechanism": "log-domain-arithmetic",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "reciprocal-three-quarters",
+        "reciprocal-half",
+        "reciprocal-two"
+      ],
+      "artifact": true,
+      "vectors": 3
+    },
+    {
+      "operation": "sign",
+      "mechanism": "threshold-comparator",
+      "status": "pass",
+      "certificate": "pass",
+      "evidence_level": "target-simulated",
+      "tests": [
+        "sign-negative-half",
+        "sign-zero",
+        "sign-positive-third"
+      ],
+      "artifact": true,
+      "vectors": 3
+    }
+  ],
+  "unadapted_candidates": [
+    {
+      "operation": "sqrt",
+      "mechanism": "cam-profile",
+      "gaps": [
+        "no exact cam solver or fabricated profile",
+        "no target adapter or target test"
+      ]
+    },
+    {
+      "operation": "sqrt",
+      "mechanism": "orifice-pressure-flow",
+      "gaps": [
+        "no exact pressure-flow law or calibrated orifice model",
+        "no target adapter or target test"
+      ]
+    }
+  ],
+  "unadapted_refusals": [
+    {
+      "id": "cam-profile-refusal",
+      "kind": "unadapted-refusal",
+      "operation": "sqrt",
+      "mechanism": "cam-profile",
+      "rationale": "No exact cam profile law, fixed profile or displacement range is declared. A target adapter would invent the geometry, so T1 records a refusal instead of fabricating one.",
+      "required_evidence": [
+        "an exact cam profile law and declared displacement range",
+        "fixed input/output vectors derived from that profile",
+        "an independent target implementation with a passing certificate"
+      ],
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "tests/test_transfer_contracts.py"
+      ]
+    },
+    {
+      "id": "orifice-pressure-flow-refusal",
+      "kind": "unadapted-refusal",
+      "operation": "sqrt",
+      "mechanism": "orifice-pressure-flow",
+      "rationale": "No exact pressure-flow restriction law, calibrated geometry or fluid properties are declared. A target adapter would invent the calibration, so T1 records a refusal instead of fabricating one.",
+      "required_evidence": [
+        "an exact pressure-flow restriction law with declared fluid properties",
+        "fixed pressure/flow vectors from that calibration",
+        "an independent target implementation with a passing certificate"
+      ],
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "tests/test_transfer_contracts.py"
+      ]
+    }
+  ],
+  "metrics": {
+    "expected_candidates": 16,
+    "retrieved_expected_candidates": 15,
+    "candidate_recall": "15/16",
+    "case_recall": "9/10",
+    "missing_candidates": [
+      "sqrt/orifice-pressure-flow"
+    ],
+    "unlabelled_candidates": [
+      "sqrt/fluid-continuity",
+      "quantized_carry/orifice-pressure-flow",
+      "quantized_carry/pll-phase-tracking",
+      "exp/fluid-continuity",
+      "exp/log-domain-sqrt",
+      "log/fluid-continuity",
+      "log/log-domain-sqrt",
+      "mult/fluid-continuity",
+      "mult/kcl-conservation",
+      "div/fluid-continuity",
+      "div/kcl-conservation",
+      "reciprocal/fluid-continuity",
+      "reciprocal/kcl-conservation",
+      "sign/fluid-continuity",
+      "sign/kcl-conservation"
+    ],
+    "triage_candidates": [
+      "div/fluid-continuity",
+      "div/kcl-conservation",
+      "exp/fluid-continuity",
+      "exp/log-domain-sqrt",
+      "log/fluid-continuity",
+      "log/log-domain-sqrt",
+      "mult/fluid-continuity",
+      "mult/kcl-conservation",
+      "quantized_carry/orifice-pressure-flow",
+      "quantized_carry/pll-phase-tracking",
+      "reciprocal/fluid-continuity",
+      "reciprocal/kcl-conservation",
+      "sign/fluid-continuity",
+      "sign/kcl-conservation",
+      "sqrt/fluid-continuity"
+    ],
+    "negative_control_failures": 2,
+    "negative_control_pass_rate": "4/6",
+    "false_positive_candidates": [
+      "mult/fluid-continuity",
+      "quantized_carry/pll-phase-tracking"
+    ],
+    "false_positive_rate": "2/6",
+    "unadapted_operations": 0,
+    "unadapted_retrievals": 0,
+    "unadapted_candidates": 2,
+    "unadapted_candidate_triage": 0,
+    "unadapted_refusals": 2,
+    "unadapted_refusal_failures": [],
+    "target_testable": 14,
+    "target_passed": 14,
+    "target_failed": 0,
+    "target_pass_rate": "14/14",
+    "artifact_count": 14,
+    "retrieval_evidence_complete": 15,
+    "retrieval_evidence_total": 16,
+    "retrieval_evidence_completeness": "15/16",
+    "target_evidence_complete": 14,
+    "target_evidence_total": 14,
+    "target_evidence_completeness": "14/14"
+  },
+  "checks": [
+    {
+      "name": "known-valid candidate recall",
+      "status": "gap",
+      "detail": "15/16 expected candidate(s) retrieved"
+    },
+    {
+      "name": "known-valid case recall",
+      "status": "gap",
+      "detail": "9/10 case(s) complete"
+    },
+    {
+      "name": "negative controls",
+      "status": "gap",
+      "detail": "4/6 control(s) passed"
+    },
+    {
+      "name": "unadapted operations",
+      "status": "pass",
+      "detail": "0/0 operation(s) remain unretrieved"
+    },
+    {
+      "name": "refused operations",
+      "status": "pass",
+      "detail": "3/3 unknown operation(s) refused"
+    },
+    {
+      "name": "target pass rate",
+      "status": "pass",
+      "detail": "14/14 executable pair(s) passed"
+    },
+    {
+      "name": "retrieval evidence completeness",
+      "status": "gap",
+      "detail": "15/16 expected candidate(s) carry complete retrieval evidence"
+    },
+    {
+      "name": "target evidence completeness",
+      "status": "pass",
+      "detail": "14/14 target row(s) carry tests and an artifact"
+    },
+    {
+      "name": "unlabelled-candidate triage",
+      "status": "gap",
+      "detail": "15 unlabelled candidate(s) queued for review; they are not false positives"
+    },
+    {
+      "name": "unadapted candidate refusals",
+      "status": "pass",
+      "detail": "2 refusal record(s); missing=0, stale=0"
+    }
+  ],
+  "gaps": [
+    "known-valid labels are written from mechanism laws and provenance, not from `supported_operations`; they are still a small declared corpus, not independent external ground truth",
+    "the remaining unadapted operation (sign) is a valid contract with no executable target adapter; its retrieved candidates enter triage, not a false-positive count",
+    "target pass rate covers only the declared glm-reference adapter pairs; no live GLM, physical or measured target is exercised",
+    "the corpus is fixed and small; it reports regression and false-positive control, not general retrieval quality",
+    "the two remaining supported candidates carry T1 refusal records, not evidence that their mechanisms are impossible; new exact laws reopen them"
+  ],
+  "headline": "15/16 expected candidates retrieved; 4/6 negative controls passed; 15 unlabelled candidate(s) triaged; 14/14 target pairs passed.",
+  "output_certificate": {
+    "schema": "cent-output-certificate/1",
+    "subject_schema": "cent-transfer-evaluation/2",
+    "status": "partial",
+    "checks": [
+      {
+        "name": "known-valid candidate recall",
+        "status": "gap",
+        "detail": "15/16 expected candidate(s) retrieved"
+      },
+      {
+        "name": "known-valid case recall",
+        "status": "gap",
+        "detail": "9/10 case(s) complete"
+      },
+      {
+        "name": "negative controls",
+        "status": "gap",
+        "detail": "4/6 control(s) passed"
+      },
+      {
+        "name": "unadapted operations",
+        "status": "pass",
+        "detail": "0/0 operation(s) remain unretrieved"
+      },
+      {
+        "name": "refused operations",
+        "status": "pass",
+        "detail": "3/3 unknown operation(s) refused"
+      },
+      {
+        "name": "target pass rate",
+        "status": "pass",
+        "detail": "14/14 executable pair(s) passed"
+      },
+      {
+        "name": "retrieval evidence completeness",
+        "status": "gap",
+        "detail": "15/16 expected candidate(s) carry complete retrieval evidence"
+      },
+      {
+        "name": "target evidence completeness",
+        "status": "pass",
+        "detail": "14/14 target row(s) carry tests and an artifact"
+      },
+      {
+        "name": "unlabelled-candidate triage",
+        "status": "gap",
+        "detail": "15 unlabelled candidate(s) queued for review; they are not false positives"
+      },
+      {
+        "name": "unadapted candidate refusals",
+        "status": "pass",
+        "detail": "2 refusal record(s); missing=0, stale=0"
+      }
+    ],
+    "gaps": [
+      "known-valid labels are written from mechanism laws and provenance, not from `supported_operations`; they are still a small declared corpus, not independent external ground truth",
+      "the remaining unadapted operation (sign) is a valid contract with no executable target adapter; its retrieved candidates enter triage, not a false-positive count",
+      "target pass rate covers only the declared glm-reference adapter pairs; no live GLM, physical or measured target is exercised",
+      "the corpus is fixed and small; it reports regression and false-positive control, not general retrieval quality",
+      "the two remaining supported candidates carry T1 refusal records, not evidence that their mechanisms are impossible; new exact laws reopen them"
+    ],
+    "claim": "This certificate covers only the declared exact/structural checks in this payload; it is not measured-device, fabrication, physical-proof or manufacturing evidence."
+  }
+}

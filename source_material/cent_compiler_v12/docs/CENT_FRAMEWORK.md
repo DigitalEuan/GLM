@@ -1,25 +1,35 @@
-# The £ → ¢ → ∆ Physical Compiler — Canonical Documentation
+# The £ → ¢ → ∆ Physical Backend — Canonical Documentation
 
 **Version:** 2.0  
 **Date:** 2026-10-30  
 **Codename:** `cent_compiler_v2`
 
+> **Objective note (2026-11-11):** the primary objective is now cross-domain
+> computational method transfer. This document describes the `£ → ¢ → ∆`
+> **physical backend**; see
+> [`TRANSFER_COMPILER_OBJECTIVE.md`](TRANSFER_COMPILER_OBJECTIVE.md) for the
+> transfer model and action plan. The current exact-route, device-binding,
+> design, reference-netlist and adaptive-dynamics layer is summarized in
+> [`../README.md`](../README.md) and recorded in the completed
+> [`../PHYSICAL_COMPILER_ROADMAP.md`](../PHYSICAL_COMPILER_ROADMAP.md); the
+> directive owns any new work.
+
 ---
 
 ## Overview
 
-The £ → ¢ → ∆ framework is a **cross-domain physical compiler** with a **living knowledge base**. Given any abstract operation £, it:
+The £ → ¢ → ∆ framework is the **physical backend** of the Cent transfer compiler, with a **living knowledge base**. Given an abstract operation £, it:
 
 1. **Decomposes** £ into a directed acyclic graph of atomic ¢ steps.
 2. **Enumerates** all valid physical ∆ implementations across electrical, mechanical, fluidic, thermal, rotational, optical, digital, spintronic, and bio-chemical domains.
 3. **Ranks** them by a 6-axis cost function.
-4. **Escalates** each through 5 fidelity layers (ideal → parasitic → thermal → quantum → fabricated).
+4. **Escalates** each through the 5 declared fidelity slots (ideal → parasitic → thermal → quantum → fabricated). Electrical candidates use the existing reference screening model; other domains report explicit “no declared layer model” gaps rather than borrowing electrical noise checks.
 5. **Re-lifts** (conjecture loop) if a ∆ fails — tries the next-best substrate.
-6. **Certifies** the result in a parametric ledger with exact parameter ranges.
+6. **Certifies** the result in a parametric ledger with declared parameter ranges and the screening-model limitation attached.
 7. **Emits** a SPICE netlist for the chosen ∆.
 8. **Manages** knowledge state via the Cent Wheel (KNOWS / THINKS-TRUE / DOESN'T-KNOW / NEEDS / LANGUAGE).
 
-Delta-sigma modulation is recognized as **one valid ∆ among many** — the canonical carrier for irrational numbers via temporal bitstream relaxation.
+Delta-sigma modulation is **one declared ∆ among many** and a benchmark transfer candidate — a temporal bitstream relaxation, not a canonical carrier.
 
 ---
 
@@ -59,11 +69,11 @@ Delta-sigma modulation is recognized as **one valid ∆ among many** — the can
 
 ### 1.3 Which ¢ primitives appear in which wheels
 
-The 31 wheels encode static monomial axioms. Only `¢_mult`, `¢_scale`, `¢_div`, and `¢_sqrt` appear in wheel spokes. The other primitives (`¢_sum`, `¢_accum`, `¢_rate`, `¢_wrap`, `¢_eq`, `¢_spatial`, `¢_exp`, `¢_log`, `¢_sat`, `¢_hysteresis`, `¢_grad`, `¢_div_spatial`, `¢_curl`, `¢_delay`) appear only in the £ test suite, which extends beyond wheel spokes to span the full vocabulary.
+The 39 wheels encode static monomial axioms. Only `¢_mult`, `¢_scale`, `¢_div`, and `¢_sqrt` appear in wheel spokes. The other primitives (`¢_sum`, `¢_accum`, `¢_rate`, `¢_wrap`, `¢_eq`, `¢_spatial`, `¢_exp`, `¢_log`, `¢_sat`, `¢_hysteresis`, `¢_grad`, `¢_div_spatial`, `¢_curl`, `¢_delay`) appear only in the £ test suite, which extends beyond wheel spokes to span the full vocabulary.
 
 ---
 
-## 2. The Wheel Data Substrate (31 wheels)
+## 2. The Wheel Data Substrate (39 wheels)
 
 All wheel data is loaded from JSON files in `wheels/` — the single source of truth. No hardcoded data in Python.
 
@@ -72,9 +82,14 @@ All wheel data is loaded from JSON files in `wheels/` — the single source of t
 | Original (Phase 66) | W1-W10 | DC circuits, AC impedance, capacitors, rotational, linear dynamics, fluids, acoustics, thermal, waves, photons |
 | Domain (Phase 157) | W11-W15 | Uniform motion, density, oscillator, LC circuit, charge-time |
 | Expanded (v2.0) | W16-W19 | Magnetic flux, gravitation, ideal gas, EM waves |
-| Computational Depth | W20-W35 | Elasticity, fracture, chemical kinetics, electrochemistry, semiconductor, plasma, superconductivity, spintronics, capillarity, heat transfer, hemodynamics, electrophysiology |
+| Computational Depth | W20-W25, W28-W29, W32-W35 | Elasticity, fracture, chemical kinetics, electrochemistry, semiconductor, plasma, superconductivity, spintronics, capillarity, heat transfer, hemodynamics, electrophysiology (W30/W31 reserved) |
+| Astrophysics & cosmology | W26-W27 | Stellar luminosity, Schwarzschild radius, circular orbital speed, Hawking temperature, Hubble expansion, critical density and the Hubble horizon |
+| Extensions (v12_2.1) | W36-W37 | Numerical SAT packing (NumPy), viscoelastic settling (SciPy) |
+| Transducer extensions | W38-W41 | Gears and transmissions, magnetic circuits, piezoelectric transducers, thermoelectric transducers |
 
-**Totals:** 31 wheels, 72 axioms, 119 cases, 108 dimensional vectors, 33 junctions, 5 non-identities.
+**Totals:** 39 wheels, 98 axioms, 153 cases, 230 dimensioned quantity rows, 366 derived two-input spokes, 57 junctions, 9 non-identities. W26's four multi-input laws yield no two-input spoke; W27 contributes 30.
+
+Every public CLI/API compiler payload and saved `cent-material/1` bundle carries a `cent-output-certificate/1` block. It summarizes the payload's declared exact/structural checks and remaining gaps; it is `certified` only when every listed check passes and no gap remains, otherwise `partial` or `gap`. It is not a physical, fabrication or measured-device certificate.
 
 ---
 
@@ -150,11 +165,11 @@ Adopted from the GLM Hypothesis Engine v18:
 
 ### 6.3 The Conjecture Loop
 
-If a ∆ fails at a fidelity layer, the compiler re-lifts with the next-best substrate from the cost-ranked list. The first ∆ that converges (passes all 5 layers) is returned.
+`cent compile` prints the trace for every ranked ∆. Electrical candidates run the existing reference screening cascade; non-electrical candidates keep all five slots but report explicit gaps where no layer model exists. A failed electrical layer is a screening flip, not an automatic re-lift: the next candidate remains visible in the ranked list, and the first converging candidate is not silently substituted. The trace is not a device simulation.
 
 ### 6.4 The Parametric Ledger
 
-Each ∆ is certified with exact parameters (voltage range, bandwidth, temperature, tolerance). This prevents overclaiming.
+Each ∆ is certified with declared parameters (voltage range, bandwidth, temperature, tolerance) and a screening-model label. The values are analytic inputs, not measured device data; this prevents overclaiming.
 
 ---
 
@@ -192,16 +207,19 @@ Each ∆ is certified with exact parameters (voltage range, bandwidth, temperatu
 ## 10. File Layout
 
 ```
-cent_compiler_v1/
-├── README.md
-├── CENT_FRAMEWORK.md            # this document
-├── DELTA_SIGMA_DEMO.md           # standalone flagship demo
-├── VALIDATION_REPORT.md         # honest test results
-├── cent                         # CLI tool (5 subcommands)
-├── cent_compiler/               # Python package (12 modules)
+cent_compiler_v12/
+├── README.md                    # current project entry point
+├── docs/
+│   ├── README.md                # documentation index
+│   ├── GUIDE.md                 # £ input guide
+│   ├── CENT_FRAMEWORK.md        # this document
+│   ├── DELTA_SIGMA_DEMO.md      # standalone flagship demo
+│   └── VALIDATION_REPORT.md     # honest validation record
+├── cent                         # CLI tool
+├── cent_compiler/               # Python package
 │   ├── __init__.py              # v2.0, 49 exports
 │   ├── grammar.py               # 22 ¢ primitives + AST decomposer
-│   ├── wheels.py                # 31 wheels loaded from JSON
+│   ├── wheels.py                # 39 wheels loaded from JSON
 │   ├── substrate_library.py     # ~38 ∆ expansion rules
 │   ├── pattern_matcher.py       # 3-pattern clustering
 │   ├── cost_function.py         # 6-axis ¢_cost + pruning
@@ -211,12 +229,38 @@ cent_compiler_v1/
 │   ├── delta_sigma.py           # ∆Σ engine + flagship demonstration
 │   ├── pound_suite.py           # 8 £ test cases
 │   └── hypothesis_bridge.py     # Cent Wheel + escalation + conjecture loop + ledger
-├── applications/                # 7 application proposals
-├── expansion/                   # roadmap documents + Hypothesis Engine reference
+├── applications/                # 22 legacy show-work proposals
+├── docs/archive/expansion/      # archived expansion blueprints
 ├── tests/                       # validation tests + wheel generators
-├── wheels/                      # 32 JSON files (31 wheels + index) — single source of truth
-└── examples/                    # 5 .cir files + demo output
+├── wheels/                      # 40 JSON files (39 wheels + index) — single source of truth
+└── examples/                    # 22 legacy physical .cir proposals, demo output and current transfer bundles
+    └── transfer/                # current G5b proposal bundles and evaluation.json
 ```
+
+---
+
+## 11. The Exact Core (CentCalculus2)
+
+The sections above describe the compilation pipeline. The exact core is a separate execution layer added alongside it; it does not change the pipeline's results and the pipeline does not call it.
+
+| Module | Responsibility |
+|--------|----------------|
+| `exact.py` | `Fraction` scalars, `CentError` taxonomy, decimal-string parsing, exact JSON encoding |
+| `interval.py` | certified rational enclosures for `sqrt`, `exp`, `log`, `π` |
+| `port.py` | conjugate effort/flow ports, 0/1 junctions, gyrator, transformer, dissipation, stores, transducer |
+| `density.py` | unit-density channel with reject/clamp/widen policy; complement is separate from negation |
+| `geometry.py` | 24-D carrier, scalar/vector fields, exact central stencils, 276-component 2-form, boundary conditions |
+| `state.py` | `MachineState`, transactional `EvalContext`, SplitMix64 stream |
+| `vocabulary.py` | 29 atomic + 12 composite contracts, wire kinds, capability statuses |
+| `program.py` | single-assignment program IR, static checking, feedback/back-edge analysis |
+| `evaluator.py` | exact tick evaluator for every primitive |
+| `resolution.py` | layered fallback (`ideal → … → fabricated`) with a preserved failure trace |
+
+**Exactness policy.** No binary floating point enters the core. A numeric wire is a `Fraction`; transcendental primitives return an `Interval` with exact endpoints; a float argument is a `type_error` unless passed through `from_float_exact`.
+
+**Feedback.** A back edge is well founded only if its producer is stateful. The static checker rejects every other cycle, and on the first tick a back edge reads the producer's documented initial value.
+
+**Verification.** `python3 tests/test_core.py` runs 75 checks (exact, interval, port, density, geometry, state, program, evaluator, coverage, resolution), and `python3 tools/export_capabilities.py` renders the contract registry. The conventions are in [`semantics.md`](semantics.md); the vocabulary reconciliation and honest limitations are in [`extensions.md`](extensions.md). A console UI (`cent ui`, `cent report`, `cent eval`) turns a £ into the ¢ census, the ranked ∆, a SPICE netlist and a `cent-material/1` bundle that the exact core can run.
 
 ---
 

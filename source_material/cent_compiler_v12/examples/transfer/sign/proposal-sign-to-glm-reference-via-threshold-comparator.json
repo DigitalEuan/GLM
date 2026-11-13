@@ -1,0 +1,236 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-sign-to-glm-reference-via-threshold-comparator",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 1,
+  "score": 23,
+  "match_reasons": [
+    "stateful false match",
+    "feedback false match",
+    "encoding overlap",
+    "nonlinearity overlap",
+    "precision overlap",
+    "conserved-quantity overlap",
+    "card declares sign support (mechanism metadata; weak rank signal)"
+  ],
+  "operation": {
+    "id": "sign",
+    "name": "exact sign",
+    "semantics": "value is -1, 0 or 1 according to the sign of x.",
+    "reference": {
+      "kind": "exact-arithmetic",
+      "expression": "sign(x)",
+      "path": "cent_compiler/exact.py"
+    },
+    "source_tests": [
+      {
+        "id": "sign-negative-half",
+        "kind": "exact",
+        "inputs": {
+          "x": "-5/2"
+        },
+        "expected": -1,
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ],
+        "note": ""
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "exact rational"
+      },
+      "outputs": {
+        "value": "integer in {-1, 0, 1}"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "value = -1 if x < 0; 0 if x = 0; +1 if x > 0"
+    },
+    "adapter": {
+      "schema": "cent-glm-adapter/1",
+      "id": "glm-reference-threshold-sign",
+      "operation": "sign",
+      "mechanism": "threshold-comparator",
+      "target": "glm-reference",
+      "kind": "python-callable",
+      "operation_kind": "exact_sign",
+      "path": "cent_compiler/targets/glm.py",
+      "entrypoint": "exact_sign_reference",
+      "invocation": "exact_sign_reference(x)",
+      "precision": "exact rational; no binary floats",
+      "description": "Exact three-level sign reference for the declared threshold comparator: negative, zero and positive branches are tested without binary float or hidden state.",
+      "test_vectors": [
+        "sign-negative-half",
+        "sign-zero",
+        "sign-positive-third"
+      ]
+    }
+  },
+  "mechanism": {
+    "id": "threshold-comparator",
+    "name": "bounded threshold comparator",
+    "principle": "A high-gain differential stage with bounded rails and a declared zero crossing realizes the three-level sign: below zero it saturates low, at zero it holds the null code, and above zero it saturates high.",
+    "source_domains": [
+      "electronics",
+      "information"
+    ],
+    "primitive_chain": [
+      "sat",
+      "sum"
+    ],
+    "carrier": "normalized voltage/current",
+    "principle_id": "",
+    "operators": [],
+    "laws": [
+      "y = -1 if x < 0; y = 0 if x = 0; y = +1 if x > 0",
+      "the comparator is the ideal infinite-gain limit of a bounded saturating differential stage with a zero threshold and no hysteresis"
+    ],
+    "invariants": [
+      "the output is one of -1, 0 or +1",
+      "the declared zero crossing is exact",
+      "negative and positive inputs saturate to opposite bounded rails"
+    ],
+    "failure_modes": [
+      "input offset, finite gain, hysteresis, metastability and noise are not modeled",
+      "no measured comparator, propagation delay or rail recovery is declared"
+    ],
+    "evidence_level": "structural"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "stateful false match",
+      "feedback false match",
+      "encoding overlap",
+      "nonlinearity overlap",
+      "precision overlap",
+      "conserved-quantity overlap",
+      "card declares sign support (mechanism metadata; weak rank signal)"
+    ],
+    "source_law": [
+      "y = -1 if x < 0; y = 0 if x = 0; y = +1 if x > 0",
+      "the comparator is the ideal infinite-gain limit of a bounded saturating differential stage with a zero threshold and no hysteresis"
+    ],
+    "target_semantics": "value is -1, 0 or 1 according to the sign of x.",
+    "preserved": [
+      "the output is one of -1, 0 or +1",
+      "the declared zero crossing is exact",
+      "negative and positive inputs saturate to opposite bounded rails"
+    ],
+    "relaxed": [],
+    "validity": [
+      "x is an exact rational",
+      "zero threshold, zero offset and no hysteresis are declared",
+      "the output rails are exactly -1 and +1"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation sign",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/exact.py",
+        "cent_compiler/material_contracts.py",
+        "docs/DEVICE_BINDING.md",
+        "tests/test_transfer_contracts.py"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "mechanism primitive chain",
+      "target": "target operation decomposition",
+      "law": "sat -> sum",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/exact.py",
+        "cent_compiler/material_contracts.py",
+        "docs/DEVICE_BINDING.md",
+        "tests/test_transfer_contracts.py"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "ready-for-execution",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": "python3 cent transfer \"sign\" --target \"glm-reference\" --mechanism \"threshold-comparator\" --validate --json",
+    "fixed_vectors": [
+      "sign-negative-half",
+      "sign-zero",
+      "sign-positive-third"
+    ],
+    "next_action": "Run the handoff command and attach its certificate."
+  },
+  "evidence": {
+    "candidate_level": "structural",
+    "mechanism_level": "structural",
+    "target_level": "adapter-declared",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "threshold-comparator declares support for sign"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "2 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "pass",
+      "detail": "cent_compiler/targets/glm.py:exact_sign_reference"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "target evidence is a software reference only; no measured comparator",
+    "comparator offset, hysteresis and metastability are not modeled",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/exact.py",
+    "tests/test_transfer_contracts.py",
+    "cent_compiler/material_contracts.py",
+    "docs/DEVICE_BINDING.md",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/assembly.py",
+    "cent_compiler/targets/glm.py"
+  ]
+}

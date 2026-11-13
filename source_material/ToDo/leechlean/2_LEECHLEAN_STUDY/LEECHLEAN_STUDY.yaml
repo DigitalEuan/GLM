@@ -1,0 +1,109 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 11 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 15 of 15 questions answered right and 0 wrong through the tool leechlean surface, against
+  0 of 15 through the GLM without it; 6 of 6 negative controls refused or left alone; and on the 30-file
+  leave-one-file-out sample the move model 51.6% against the part model 42.5% greedy top-1 (+9.1 points)
+directives:
+- D22
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/cases.py
+  - reasoning/analogy.py
+  - reasoning/hypothesis_tools.py
+  - runtime/toolbox.py
+  - substrate/leech2.py
+  - substrate/mog.py
+  lean:
+  - Address
+  - AxiomAuditAll
+  - Golay/Code
+  - IntakeChecks/LeechLeanCodec
+  - IntakeChecks/LeechLeanGolay
+  lean_held: []
+  lean_missing: []
+  missing:
+  - reasoning/leech_lean_study.py
+  - tests/test_leech_lean.py
+  - tests/test_leech_lean_study.py
+  - tests/test_leech_lean_tools.py
+  - tests/test_leechlean_in_glm.py
+  prose: LEECHLEAN_STUDY.md
+  test:
+  - test_connected_two.py
+  - test_figures.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: LEECHLEAN_STUDY
+junctions: []
+last_altered: 11 November 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - I1
+  - I2
+  - I3
+  - I4
+  met:
+  - I1
+  - I3
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Does the supplied item `leechlean` — the recurring parts of the repository's Lean development
+  mapped to exact Leech-lattice addresses, with a byte-exact address-stream codec, the Lambda/2Lambda
+  coset layer, error correction of corrupted address streams, the library lattice-graph and the move algebra
+  d = B − A — hold up when it is tested inside the full GLM environment, and does taking it in let the
+  GLM answer questions about its own Lean development that it currently refuses?
+recomputed_by: '`glm_universal.reasoning.leech_lean_study.leech_lean_report`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-the-item-offers-and-what-this-round-takes
+  heading: 1. What the item offers, and what this round takes
+- anchor: 2-the-questions
+  heading: 2. The questions
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-lean-obligations
+  heading: 5. Lean obligations
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-files
+  heading: 7. Files
+- anchor: 8-the-measurement
+  heading: 8. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: LEECHLEAN_STUDY — the supplied `leechlean` item, taken through the intake
+verdict: 'Yes. Tested inside the full GLM environment the item holds: its engine agrees with the substrate
+  everywhere its 37-check battery cross-checks it, its codec is byte-exact over the repository''s actual
+  Lean tree (442 of 442 files through the 442-file codebook), its correction re-measures at 100% detection
+  with 0 false alarms and 97.3-100% correction, and taking it in lets the GLM answer questions about its
+  own Lean development that it refused before -- with the move model''s advantage reproduced live.'
+wobble_deps: []

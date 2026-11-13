@@ -1,0 +1,169 @@
+{
+ "id": "W36",
+ "title": "Numerical SAT Substrate (NumPy) \u2014 quadratic energy laws",
+ "axioms": [
+  "pair_energy = pair_penetration^2",
+  "wall_energy = container_violation^2"
+ ],
+ "cases": [
+  {
+   "id": "W36-01",
+   "equation": "pair_penetration = pair_energy^(1/2)",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W36-02",
+   "equation": "container_violation = wall_energy^(1/2)",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W36-03",
+   "equation": "pair_energy = pair_penetration",
+   "expected_dimensional": true,
+   "expected_derivable": false,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "linear, not quadratic: the objective is squared penetration"
+  },
+  {
+   "id": "W36-04",
+   "equation": "wall_energy = container_violation",
+   "expected_dimensional": true,
+   "expected_derivable": false,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "linear, not quadratic: walls enter the objective squared"
+  }
+ ],
+ "quantities": [
+  "pair_penetration",
+  "pair_energy",
+  "container_violation",
+  "wall_energy"
+ ],
+ "dimensions": {
+  "pair_penetration": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "pair_energy": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "container_violation": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "wall_energy": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "junctions": [
+  {
+   "other_wheel": "W21",
+   "name_in_this_wheel": "pair_penetration",
+   "name_in_other_wheel": "stress",
+   "reason": "the crack engine's mean stress is the mean positive SAT penetration"
+  },
+  {
+   "other_wheel": "W4",
+   "name_in_this_wheel": "pair_energy",
+   "name_in_other_wheel": "energy",
+   "reason": "cluster elastic energy = sum of squared penetrations"
+  },
+  {
+   "other_wheel": "W37",
+   "name_in_this_wheel": "pair_penetration",
+   "name_in_other_wheel": "stress",
+   "reason": "the settling engine reads the SAT penetration as its elastic stress input"
+  }
+ ],
+ "non_identities": [
+  {
+   "other_wheel": "W5",
+   "name": "energy",
+   "reason": "the substrate's pair_energy is L2-squared penetration, not the flywheel's kinetic energy; only the relaxation channel joins"
+  }
+ ]
+}

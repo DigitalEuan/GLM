@@ -1,0 +1,78 @@
+{
+  "schema": "cent-proposal-index/1",
+  "operation": "sign",
+  "target": "glm-reference",
+  "summary": {
+    "proposals": 3,
+    "ready_for_execution": 1,
+    "needs_target_adapter": 2,
+    "needs_target_vectors": 0,
+    "needs_environment": 0,
+    "review_counts": {
+      "unreviewed": 3
+    },
+    "mechanisms": [
+      "threshold-comparator",
+      "fluid-continuity",
+      "kcl-conservation"
+    ],
+    "domains": [
+      "electronics",
+      "fluidics"
+    ]
+  },
+  "trial_summary": null,
+  "review": {
+    "schema": "cent-proposal-review-summary/1",
+    "events": 0,
+    "states": {},
+    "counts": {
+      "unreviewed": 3,
+      "accepted": 0,
+      "adopted": 0,
+      "rejected": 0,
+      "reverted": 0,
+      "tested": 0
+    },
+    "decisions": {
+      "accepted": 0,
+      "adopted": 0,
+      "rejected": 0,
+      "reverted": 0,
+      "tested": 0
+    }
+  },
+  "review_ledger": null,
+  "proposals": [
+    {
+      "id": "proposal-sign-to-glm-reference-via-threshold-comparator",
+      "rank": 1,
+      "mechanism": "threshold-comparator",
+      "readiness": "ready-for-execution",
+      "trial": null,
+      "review_state": "unreviewed",
+      "file": "proposal-sign-to-glm-reference-via-threshold-comparator.json",
+      "handoff": "python3 cent transfer \"sign\" --target \"glm-reference\" --mechanism \"threshold-comparator\" --validate --json"
+    },
+    {
+      "id": "proposal-sign-to-glm-reference-via-fluid-continuity",
+      "rank": 2,
+      "mechanism": "fluid-continuity",
+      "readiness": "needs-target-adapter",
+      "trial": null,
+      "review_state": "unreviewed",
+      "file": "proposal-sign-to-glm-reference-via-fluid-continuity.json",
+      "handoff": null
+    },
+    {
+      "id": "proposal-sign-to-glm-reference-via-kcl-conservation",
+      "rank": 3,
+      "mechanism": "kcl-conservation",
+      "readiness": "needs-target-adapter",
+      "trial": null,
+      "review_state": "unreviewed",
+      "file": "proposal-sign-to-glm-reference-via-kcl-conservation.json",
+      "handoff": null
+    }
+  ]
+}

@@ -171,7 +171,10 @@ class DeclaredAnalogy:
     convention: str  # "impedance" or "mobility"
     mapping: Dict[str, str]
     transducer_equations: List[str]
-    unit_scale_matrix: Dict[str, float]
+    #: Illustrative declared scale values with units, not calibrated device
+    #: parameters.  Strings keep the units attached and avoid presenting an
+    #: example float as measured evidence.
+    unit_scale_matrix: Dict[str, str]
 
 
 DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
@@ -191,8 +194,8 @@ DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
             "k_V · k_I = 1  (power conservation: V·I = P·v)",
         ],
         unit_scale_matrix={
-            "k_V": 1e-3,  # V/Pa (example: 1mV per Pa)
-            "k_I": 1e3,   # A/(m/s) (example: 1A per m/s)
+            "k_V": "1e-3 V/Pa (illustrative example)",
+            "k_I": "1e3 A/(m/s) (illustrative example)",
         },
     ),
     DeclaredAnalogy(
@@ -213,7 +216,7 @@ DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
             "ω = v / r  (angular velocity = linear velocity / radius)",
         ],
         unit_scale_matrix={
-            "r": 1.0,  # 1 meter lever arm (example)
+            "r": "1 m lever arm (illustrative example)",
         },
     ),
     DeclaredAnalogy(
@@ -248,8 +251,8 @@ DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
             "q = d33 · F  (Piezoelectric charge constant)",
         ],
         unit_scale_matrix={
-            "k_e": 1.0,       # N/A (motor constant)
-            "d33": 300e-12,   # C/N (piezo coefficient)
+            "k_e": "1 N/A motor constant (illustrative example)",
+            "d33": "300e-12 C/N piezo coefficient (illustrative example)",
         },
     ),
     DeclaredAnalogy(
@@ -266,7 +269,7 @@ DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
             "Q_peltier = Π · I = S · T_abs · I  (Peltier heat rate)",
         ],
         unit_scale_matrix={
-            "S": 200e-6,  # V/K (Seebeck coefficient, e.g. Bi2Te3)
+            "S": "200e-6 V/K Seebeck coefficient (illustrative example)",
         },
     ),
     DeclaredAnalogy(
@@ -282,8 +285,8 @@ DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
             "Δφ = π · V / V_pi  (Electro-optic phase modulator)",
         ],
         unit_scale_matrix={
-            "R_lambda": 0.85,  # A/W (photodiode responsivity at 1550nm)
-            "V_pi": 3.5,       # V (EOM half-wave voltage)
+            "R_lambda": "0.85 A/W photodiode responsivity (illustrative example)",
+            "V_pi": "3.5 V EOM half-wave voltage (illustrative example)",
         },
     ),
     DeclaredAnalogy(
@@ -299,8 +302,8 @@ DECLARED_ANALOGIES: List[DeclaredAnalogy] = [
             "I_sense = k_piezo · P  (Piezoresistive pressure sense)",
         ],
         unit_scale_matrix={
-            "k_pump": 1e6,    # Pa/A (pump constant)
-            "k_piezo": 1e-6,  # A/Pa (sense constant)
+            "k_pump": "1e6 Pa/A pump constant (illustrative example)",
+            "k_piezo": "1e-6 A/Pa sense constant (illustrative example)",
         },
     ),
 ]

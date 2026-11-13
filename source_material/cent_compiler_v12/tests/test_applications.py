@@ -93,10 +93,10 @@ def test_02():
 
     expected_suppression = 20 * math.log10(osr) - 5.2  # ~30.9 dB for first-order
 
-    passed = result.suppression_db > 20  # at least 20 dB suppression
+    passed = result.suppression_db > 30  # declared 30 dB floor
     status = "PASS" if passed else "FAIL"
-    results.append(("02 Acoustic Noise Shaper", "> 40 dB suppression",
-                     f"measured={result.suppression_db:.1f}dB, NTF slope={result.ntf_slope_db_per_dec:.1f}dB/dec, OSR={osr}",
+    results.append(("02 Acoustic Noise Shaper", "> 30 dB suppression",
+                     f"measured={result.suppression_db:.1f}dB, expected~{expected_suppression:.1f}dB, NTF slope={result.ntf_slope_db_per_dec:.1f}dB/dec, OSR={osr}",
                      status))
     return passed
 
@@ -273,7 +273,11 @@ def test_05():
 # === Proposal 6: Fluidic Delta-Sigma ===
 # FIX: added stochastic actuator model (valve jitter, compliance)
 def test_06():
-    """Simulate fluidic ∆Σ with stochastic valve jitter, ≥100 dosing events."""
+    """Simulate fluidic ∆Σ with stochastic valve jitter, ≥100 dosing events.
+
+    Reports total metered-delivery error and per-dose CV separately; the pass
+    criterion is the former, because averaging can hide the latter.
+    """
     target = 0.7
     n_samples = 1000
 
@@ -284,6 +288,7 @@ def test_06():
     integrator = 0.0
     prev = 0.0
     delivered = 0.0
+    doses = []
     for n in range(n_samples):
         x = target
         integrator += x - prev
@@ -292,15 +297,24 @@ def test_06():
         actual = valve * (1.0 + valve_jitter * np.random.randn())
         prev = valve  # feedback uses nominal valve state
         delivered += actual
+        doses.append(abs(actual))
 
     expected = target * n_samples
-    error = abs(delivered - expected) / expected
-    cv = error * 100
+    relative_error = abs(delivered - expected) / expected * 100
+    dose_mean = sum(doses) / len(doses)
+    dose_cv = (
+        math.sqrt(sum((dose - dose_mean) ** 2 for dose in doses) / len(doses))
+        / dose_mean
+        * 100
+    )
 
-    passed = cv < 0.1
-    status = "PASS" if cv < 0.1 else ("CONDITIONAL" if cv < 1.0 else "FAIL")
-    results.append(("06 Fluidic ∆Σ", "< 0.1% CV",
-                     f"CV={cv:.4f}%, jitter=±{valve_jitter*100}%, samples={n_samples}",
+    # The criterion is total metered-delivery error, not the per-dose CV.
+    # Per-dose jitter is reported separately so it cannot be mistaken for
+    # averaging accuracy.
+    passed = relative_error < 0.1
+    status = "PASS" if passed else "FAIL"
+    results.append(("06 Fluidic ∆Σ", "delivered error < 0.1%",
+                     f"error={relative_error:.4f}%, per-dose CV={dose_cv:.2f}%, jitter=±{valve_jitter*100}%, samples={n_samples}",
                      status))
     return passed
 
@@ -318,8 +332,8 @@ def test_07():
     error = abs(measured_p - expected_p) / expected_p
 
     # This is a TAUTOLOGY by construction — measuring E/c and comparing to E/c.
-    # The honest classification is DIMENSIONAL CHECK ONLY.
-    passed = error < 0.001  # always true (it's the same computation)
+    # The honest classification is DIMENSIONAL CHECK ONLY; there is no pass
+    # criterion because the two sides are the same computation.
     status = "DIMENSIONAL CHECK"  # not PASS — this is not a real test
     results.append(("07 Quantum-Classical Bridge", "Dimensional check",
                      f"p=E/c={measured_p:.4e}, error={error*100:.6f}% (TAUTOLOGY: same computation both sides; W10↔W1 is shape coincidence, not TIER 2 isomorphism)",

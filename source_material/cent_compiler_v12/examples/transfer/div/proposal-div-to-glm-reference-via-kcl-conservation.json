@@ -1,0 +1,211 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-div-to-glm-reference-via-kcl-conservation",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 3,
+  "score": 18,
+  "match_reasons": [
+    "stateful false match",
+    "feedback false match",
+    "encoding overlap",
+    "precision overlap"
+  ],
+  "operation": {
+    "id": "div",
+    "name": "exact division",
+    "semantics": "quotient = numerator / denominator under exact rational arithmetic; denominator is nonzero.",
+    "reference": {
+      "kind": "exact-arithmetic",
+      "expression": "div(numerator, denominator)",
+      "path": "cent_compiler/exact.py"
+    },
+    "source_tests": [
+      {
+        "id": "div-half-three-quarters",
+        "kind": "exact",
+        "inputs": {
+          "numerator": "1/2",
+          "denominator": "3/4"
+        },
+        "expected": "2/3",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ],
+        "note": ""
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "a": "positive exact rational",
+        "b": "positive exact rational",
+        "precision": "integer in 1..64",
+        "tolerance": "positive exact rational"
+      },
+      "outputs": {
+        "value": "certified rational enclosure of a/b",
+        "checker": "exact rational quotient",
+        "passed": "boolean for containment and declared width"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "value = exp(log(a) - log(b))"
+    },
+    "adapter": null
+  },
+  "mechanism": {
+    "id": "kcl-conservation",
+    "name": "KCL conservation",
+    "principle": "At a declared ideal junction, signed currents sum to zero; the junction therefore realizes exact signed addition, with subtraction supplied by exact negation glue.",
+    "source_domains": [
+      "electronics"
+    ],
+    "primitive_chain": [
+      "sum",
+      "neg"
+    ],
+    "carrier": "normalized current",
+    "principle_id": "",
+    "operators": [],
+    "laws": [
+      "total = a + b at a declared Kirchhoff current-law junction; difference is total = a + (-b) with exact negation glue"
+    ],
+    "invariants": [
+      "the declared junction preserves the signed current sum",
+      "sum and difference remain exact rational operations"
+    ],
+    "failure_modes": [
+      "floating node, source loading and compliance limit are not modeled",
+      "physical units, source/load impedance and a reference netlist are not declared",
+      "no fabrication or measured-device evidence"
+    ],
+    "evidence_level": "source-simulated"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "stateful false match",
+      "feedback false match",
+      "encoding overlap",
+      "precision overlap"
+    ],
+    "source_law": [
+      "total = a + b at a declared Kirchhoff current-law junction; difference is total = a + (-b) with exact negation glue"
+    ],
+    "target_semantics": "quotient = numerator / denominator under exact rational arithmetic; denominator is nonzero.",
+    "preserved": [
+      "the declared junction preserves the signed current sum",
+      "sum and difference remain exact rational operations"
+    ],
+    "relaxed": [],
+    "validity": [
+      "two normalized exact rational inputs",
+      "both inputs are inside the declared linear junction range",
+      "the exact route carries no voltage/current scaling"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation div",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "cent_compiler/device.py",
+        "tests/test_assembly.py",
+        "docs/PHYSICAL_NETLIST.md"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "mechanism primitive chain",
+      "target": "target operation decomposition",
+      "law": "sum -> neg",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "cent_compiler/device.py",
+        "tests/test_assembly.py",
+        "docs/PHYSICAL_NETLIST.md"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "needs-target-adapter",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": null,
+    "fixed_vectors": [],
+    "next_action": "Declare a target adapter and fixed vectors for this operation and mechanism, then run the target certificate."
+  },
+  "evidence": {
+    "candidate_level": "source-simulated",
+    "mechanism_level": "source-simulated",
+    "target_level": "not-executed",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "kcl-conservation declares support for div"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "2 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "gap",
+      "detail": "no executable adapter for this operation/mechanism"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "no physical voltage/current mapping or reference netlist",
+    "target coverage is software reference/live KCL only; no physical junction measurement",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/exact.py",
+    "tests/test_transfer_contracts.py",
+    "cent_compiler/assembly.py",
+    "cent_compiler/device.py",
+    "tests/test_assembly.py",
+    "docs/PHYSICAL_NETLIST.md",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/targets/glm.py"
+  ]
+}

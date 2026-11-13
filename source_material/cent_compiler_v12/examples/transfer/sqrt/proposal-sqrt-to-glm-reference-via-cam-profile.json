@@ -1,0 +1,186 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-sqrt-to-glm-reference-via-cam-profile",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 2,
+  "score": 18,
+  "match_reasons": [
+    "stateful false match",
+    "feedback false match",
+    "card declares sqrt support (mechanism metadata; weak rank signal)"
+  ],
+  "operation": {
+    "id": "sqrt",
+    "name": "square root",
+    "semantics": "root is the nonnegative value whose square is x.",
+    "reference": {
+      "kind": "exact-interval",
+      "expression": "sqrt_q(x)",
+      "path": "cent_compiler/interval.py"
+    },
+    "source_tests": [
+      {
+        "id": "sqrt-four",
+        "kind": "exact",
+        "inputs": {
+          "x": "4"
+        },
+        "expected": "2",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_core.py"
+        ],
+        "note": "perfect square"
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "positive exact rational",
+        "precision": "integer in 1..64",
+        "tolerance": "positive exact rational"
+      },
+      "outputs": {
+        "root": "certified rational enclosure",
+        "checker": "independent sqrt_q enclosure",
+        "passed": "boolean for overlap and declared width"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "root = exp((1/2) * log(x))"
+    },
+    "adapter": null
+  },
+  "mechanism": {
+    "id": "cam-profile",
+    "name": "mechanical cam profile",
+    "principle": "A shaped spatial profile maps input displacement to output displacement according to the declared profile law.",
+    "source_domains": [
+      "mechanical"
+    ],
+    "primitive_chain": [
+      "spatial"
+    ],
+    "carrier": "position",
+    "principle_id": "",
+    "operators": [],
+    "laws": [
+      "a square-root cam profile encodes y = sqrt(x) as a spatial lookup table"
+    ],
+    "invariants": [
+      "the profile fixes the input-to-output displacement relation",
+      "the operation is evaluated geometrically rather than by a sqrt instruction"
+    ],
+    "failure_modes": [
+      "profile manufacturing tolerance and wear are not modeled",
+      "no exact cam solver or fabricated profile is declared"
+    ],
+    "evidence_level": "structural"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "stateful false match",
+      "feedback false match",
+      "card declares sqrt support (mechanism metadata; weak rank signal)"
+    ],
+    "source_law": [
+      "a square-root cam profile encodes y = sqrt(x) as a spatial lookup table"
+    ],
+    "target_semantics": "root is the nonnegative value whose square is x.",
+    "preserved": [
+      "the profile fixes the input-to-output displacement relation",
+      "the operation is evaluated geometrically rather than by a sqrt instruction"
+    ],
+    "relaxed": [],
+    "validity": [
+      "fixed cam profile",
+      "declared displacement range"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation sqrt",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/substrate_library.py",
+        "cent_compiler/pattern_matcher.py"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "needs-target-adapter",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": null,
+    "fixed_vectors": [],
+    "next_action": "Declare a target adapter and fixed vectors for this operation and mechanism, then run the target certificate."
+  },
+  "evidence": {
+    "candidate_level": "structural",
+    "mechanism_level": "structural",
+    "target_level": "not-executed",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "cam-profile declares support for sqrt"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "1 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "gap",
+      "detail": "no executable adapter for this operation/mechanism"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "no exact cam solver or fabricated profile",
+    "no target adapter or target test",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/interval.py",
+    "cent_compiler/assembly.py",
+    "tests/test_assembly.py",
+    "cent_compiler/substrate_library.py",
+    "cent_compiler/pattern_matcher.py",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/targets/glm.py"
+  ]
+}

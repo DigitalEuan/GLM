@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "name": "exact one-tick equivalence",
+      "pairs": 560,
+      "status": "pass"
+    },
+    {
+      "half_target": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "half_walk": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "name": "existing two-tick target mismatch",
+      "status": "pass",
+      "third_mismatch": true,
+      "two_fifths_mismatch": true
+    },
+    {
+      "control_code": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "name": "stateless uniform-quantizer control differs",
+      "status": "pass",
+      "walk_code": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ],
+  "conclusion": "one-tick Bresenham/delta-sigma equivalence is exact; the existing two-tick target is a different timing and is not equivalent",
+  "definition": {
+    "delta_sigma": "one-tick floor feedback: r += dy/dx; q=floor(r); r-=q",
+    "line_walk": "y_n = floor(n*dy/dx), q_n = y_{n+1}-y_n",
+    "scope": "1 <= dx <= 32, 0 <= dy <= dx"
+  },
+  "kind": "bresenham-one-tick-delta-sigma",
+  "passed": true,
+  "schema": "cent-hypothesis-evidence/1"
+}

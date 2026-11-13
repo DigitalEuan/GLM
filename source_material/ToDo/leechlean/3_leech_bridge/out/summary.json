@@ -1,0 +1,11 @@
+{
+  "source_files": 442,
+  "source_tokens": 1487625,
+  "inventory_parts": 39992,
+  "addresses": 39992,
+  "move_files": 442,
+  "distinct_moves": 80361,
+  "total_moves": 1487183,
+  "corpus_bytes": 19911027,
+  "elapsed_seconds": 20.4
+}

@@ -1,9 +1,10 @@
 """
-cent_compiler — the £ → ¢ → ∆ physical compiler.
+cent_compiler — the £ → ¢ → ∆ physical backend of the Cent transfer compiler.
 
-A cross-domain physical compiler that takes any abstract operation £,
-decomposes it into atomic ¢ steps, enumerates all valid physical ∆
-implementations across electrical/mechanical/fluidic/thermal/optical/digital
+The transfer compiler finds mechanisms across domains, maps them to a target
+and validates the result. This package implements the physical backend: it takes
+an abstract operation £, decomposes it into atomic ¢ steps, enumerates physical
+∆ implementations across electrical/mechanical/fluidic/thermal/optical/digital
 domains, ranks them by cost, and emits a SPICE netlist for the chosen ∆.
 
 NOTATION (corrected per audit):
@@ -50,6 +51,12 @@ from .hypothesis_bridge import (
     conjecture_loop, compile_with_knowledge,
     CentLedger, LedgerEntry,
 )
+from .discovery import discover, parse_problem, render_text as render_discovery
+from .operation_contract import OperationContract, OperationTest
+from .mechanisms import (
+    MechanismCard, MECHANISM_CARDS, MECHANISM_BY_ID, get_mechanism,
+)
+from .transfer import MappingStep, RelaxationRecord, TargetProfile, TransferCandidate
 
 __version__ = "2.0.0"
 __all__ = [
@@ -71,4 +78,8 @@ __all__ = [
     "FidelityLayer", "LAYERS", "escalate",
     "conjecture_loop", "compile_with_knowledge",
     "CentLedger", "LedgerEntry",
+    "discover", "parse_problem", "render_discovery",
+    "OperationContract", "OperationTest", "MechanismCard",
+    "MECHANISM_CARDS", "MECHANISM_BY_ID", "get_mechanism",
+    "MappingStep", "RelaxationRecord", "TargetProfile", "TransferCandidate",
 ]

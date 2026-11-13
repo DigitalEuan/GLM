@@ -1,0 +1,505 @@
+{
+  "generator": "tier-d-witness-search",
+  "instances": [
+    {
+      "id": "nematic-q-director-x",
+      "kind": "q-tensor",
+      "observable": {
+        "area": "2/1",
+        "director": "(1,0)"
+      },
+      "provenance": [
+        "docs/evidence/nematic-q-tensor/check.py"
+      ],
+      "signature": [
+        "q-invariant:S=1",
+        "q-invariant:tr(Q^2)=2/1",
+        "q-invariant:det(Q)=-1/1"
+      ]
+    },
+    {
+      "id": "nematic-q-director-3-4",
+      "kind": "q-tensor",
+      "observable": {
+        "area": "66/25",
+        "director": "(3/5,4/5)"
+      },
+      "provenance": [
+        "docs/evidence/nematic-q-tensor/check.py"
+      ],
+      "signature": [
+        "q-invariant:S=1",
+        "q-invariant:tr(Q^2)=2/1",
+        "q-invariant:det(Q)=-1/1"
+      ]
+    },
+    {
+      "id": "kcl-conservation",
+      "kind": "mechanism",
+      "observable": {
+        "carrier": "current",
+        "law": "signed current sum"
+      },
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ],
+      "signature": [
+        "junction:sum-neg",
+        "stateful:false",
+        "feedback:false"
+      ]
+    },
+    {
+      "id": "opamp-summing",
+      "kind": "mechanism",
+      "observable": {
+        "carrier": "voltage",
+        "law": "signed voltage sum"
+      },
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ],
+      "signature": [
+        "junction:sum-neg",
+        "stateful:false",
+        "feedback:false"
+      ]
+    },
+    {
+      "id": "fluid-continuity",
+      "kind": "mechanism",
+      "observable": {
+        "carrier": "flow",
+        "law": "signed flow sum"
+      },
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ],
+      "signature": [
+        "junction:sum-neg",
+        "stateful:false",
+        "feedback:false"
+      ]
+    },
+    {
+      "id": "log-domain-sqrt",
+      "kind": "mechanism",
+      "observable": {
+        "operation": "sqrt",
+        "program": "log -> scale(1/2) -> exp"
+      },
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py"
+      ],
+      "signature": [
+        "nonlinearity:log-exp",
+        "stateful:false",
+        "feedback:false"
+      ]
+    },
+    {
+      "id": "log-domain-arithmetic",
+      "kind": "mechanism",
+      "observable": {
+        "operation": "arithmetic",
+        "program": "log -> sum/neg -> exp"
+      },
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py"
+      ],
+      "signature": [
+        "nonlinearity:log-exp",
+        "stateful:false",
+        "feedback:false"
+      ]
+    },
+    {
+      "id": "two-tick-quantized-carry",
+      "kind": "target",
+      "observable": {
+        "code@1/2": "1,1,1,0,0,0",
+        "timing": "two-tick"
+      },
+      "provenance": [
+        "cent_compiler/targets/glm.py",
+        "docs/evidence/bresenham/check.py"
+      ],
+      "signature": [
+        "carrier:quantized-feedback",
+        "stateful:true",
+        "feedback:true"
+      ]
+    },
+    {
+      "id": "one-tick-floor-carry",
+      "kind": "target",
+      "observable": {
+        "code@1/2": "0,1,0,1,0,1",
+        "timing": "one-tick"
+      },
+      "provenance": [
+        "cent_compiler/quantized_carry_floor.py",
+        "docs/evidence/bresenham/check.py"
+      ],
+      "signature": [
+        "carrier:quantized-feedback",
+        "stateful:true",
+        "feedback:true"
+      ]
+    },
+    {
+      "id": "mult",
+      "kind": "operation",
+      "observable": {
+        "arity": "2",
+        "law": "a*b"
+      },
+      "provenance": [
+        "cent_compiler/transfer_engine.py"
+      ],
+      "signature": [
+        "law-family:multiplicative",
+        "stateful:false",
+        "feedback:false",
+        "exact:rational"
+      ]
+    },
+    {
+      "id": "div",
+      "kind": "operation",
+      "observable": {
+        "arity": "2",
+        "law": "a/b"
+      },
+      "provenance": [
+        "cent_compiler/transfer_engine.py"
+      ],
+      "signature": [
+        "law-family:multiplicative",
+        "stateful:false",
+        "feedback:false",
+        "exact:rational"
+      ]
+    },
+    {
+      "id": "sum",
+      "kind": "operation",
+      "observable": {
+        "arity": "2",
+        "law": "a+b"
+      },
+      "provenance": [
+        "cent_compiler/transfer_engine.py"
+      ],
+      "signature": [
+        "law-family:additive",
+        "stateful:false",
+        "feedback:false",
+        "exact:rational"
+      ]
+    },
+    {
+      "id": "difference",
+      "kind": "operation",
+      "observable": {
+        "arity": "2",
+        "law": "a-b"
+      },
+      "provenance": [
+        "cent_compiler/transfer_engine.py"
+      ],
+      "signature": [
+        "law-family:additive",
+        "stateful:false",
+        "feedback:false",
+        "exact:rational"
+      ]
+    }
+  ],
+  "negatives": [
+    {
+      "conclusion": "the scalar Q-tensor invariants are identical while 'area' differs (2/1 vs 66/25); no invariant-only map through this signature exists",
+      "id": "tier-d-nematic-q-director-x-vs-nematic-q-director-3-4",
+      "kind": "generated-negative",
+      "provenance": [
+        "docs/evidence/nematic-q-tensor/check.py"
+      ],
+      "retire_lead": "nematic-q-tensor-bounding-box",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "q-invariant:S=1",
+        "q-invariant:tr(Q^2)=2/1",
+        "q-invariant:det(Q)=-1/1"
+      ],
+      "witness": {
+        "left": "nematic-q-director-x",
+        "left_value": "2/1",
+        "probe": "area",
+        "right": "nematic-q-director-3-4",
+        "right_value": "66/25"
+      }
+    },
+    {
+      "conclusion": "the shared sum/neg junction signature does not determine whether the conserved observable is current, voltage or flow (carrier differs); no map through that signature alone exists",
+      "id": "tier-d-kcl-conservation-vs-opamp-summing",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "junction:sum-neg",
+        "stateful:false",
+        "feedback:false"
+      ],
+      "witness": {
+        "left": "kcl-conservation",
+        "left_value": "current",
+        "probe": "carrier",
+        "right": "opamp-summing",
+        "right_value": "voltage"
+      }
+    },
+    {
+      "conclusion": "the shared sum/neg junction signature does not determine whether the conserved observable is current, voltage or flow (carrier differs); no map through that signature alone exists",
+      "id": "tier-d-kcl-conservation-vs-fluid-continuity",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "junction:sum-neg",
+        "stateful:false",
+        "feedback:false"
+      ],
+      "witness": {
+        "left": "kcl-conservation",
+        "left_value": "current",
+        "probe": "carrier",
+        "right": "fluid-continuity",
+        "right_value": "flow"
+      }
+    },
+    {
+      "conclusion": "the shared sum/neg junction signature does not determine whether the conserved observable is current, voltage or flow (carrier differs); no map through that signature alone exists",
+      "id": "tier-d-opamp-summing-vs-fluid-continuity",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/mechanisms.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "junction:sum-neg",
+        "stateful:false",
+        "feedback:false"
+      ],
+      "witness": {
+        "left": "opamp-summing",
+        "left_value": "voltage",
+        "probe": "carrier",
+        "right": "fluid-continuity",
+        "right_value": "flow"
+      }
+    },
+    {
+      "conclusion": "a shared log/exp signature does not determine whether the route computes sqrt or arithmetic (operation differs); no map through that signature alone exists",
+      "id": "tier-d-log-domain-sqrt-vs-log-domain-arithmetic",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/mechanisms.py",
+        "cent_compiler/assembly.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "nonlinearity:log-exp",
+        "stateful:false",
+        "feedback:false"
+      ],
+      "witness": {
+        "left": "log-domain-sqrt",
+        "left_value": "sqrt",
+        "probe": "operation",
+        "right": "log-domain-arithmetic",
+        "right_value": "arithmetic"
+      }
+    },
+    {
+      "conclusion": "a shared stateful quantized-feedback signature does not determine the one-tick/two-tick code timing (code@1/2 differs); no map through that signature alone exists",
+      "id": "tier-d-two-tick-quantized-carry-vs-one-tick-floor-carry",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/targets/glm.py",
+        "docs/evidence/bresenham/check.py",
+        "cent_compiler/quantized_carry_floor.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "carrier:quantized-feedback",
+        "stateful:true",
+        "feedback:true"
+      ],
+      "witness": {
+        "left": "two-tick-quantized-carry",
+        "left_value": "1,1,1,0,0,0",
+        "probe": "code@1/2",
+        "right": "one-tick-floor-carry",
+        "right_value": "0,1,0,1,0,1"
+      }
+    },
+    {
+      "conclusion": "the shared declared signature does not determine 'law' (a*b vs a/b); no map through that signature alone exists",
+      "id": "tier-d-mult-vs-div",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/transfer_engine.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "law-family:multiplicative",
+        "stateful:false",
+        "feedback:false",
+        "exact:rational"
+      ],
+      "witness": {
+        "left": "mult",
+        "left_value": "a*b",
+        "probe": "law",
+        "right": "div",
+        "right_value": "a/b"
+      }
+    },
+    {
+      "conclusion": "the shared declared signature does not determine 'law' (a+b vs a-b); no map through that signature alone exists",
+      "id": "tier-d-sum-vs-difference",
+      "kind": "generated-negative",
+      "provenance": [
+        "cent_compiler/transfer_engine.py"
+      ],
+      "retire_lead": "",
+      "schema": "cent-tier-d-witness/1",
+      "signature": [
+        "law-family:additive",
+        "stateful:false",
+        "feedback:false",
+        "exact:rational"
+      ],
+      "witness": {
+        "left": "sum",
+        "left_value": "a+b",
+        "probe": "law",
+        "right": "difference",
+        "right_value": "a-b"
+      }
+    }
+  ],
+  "obligations": [
+    {
+      "assertion": "For every fixed vector, each emitted code is a declared quantizer level and the feedback state remains bounded.",
+      "authored": false,
+      "derived_from": "cent-operation/1 quantized_carry signature.outputs.code = bounded sequence",
+      "id": "quantized_carry-bounded-state",
+      "kind": "bounded-state",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "The fixed-vector code mean reconstructs the declared input within the contract's tolerance.",
+      "authored": false,
+      "derived_from": "cent-operation/1 quantized_carry signature.outputs.mean = scalar estimate",
+      "id": "quantized_carry-mean-reconstruction",
+      "kind": "mean-reconstruction",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['area'] differs between 'nematic-q-director-x' ('2/1') and 'nematic-q-director-3-4' ('66/25').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-nematic-q-director-x-vs-nematic-q-director-3-4",
+      "id": "tier-d-nematic-q-director-x-vs-nematic-q-director-3-4-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['carrier'] differs between 'kcl-conservation' ('current') and 'opamp-summing' ('voltage').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-kcl-conservation-vs-opamp-summing",
+      "id": "tier-d-kcl-conservation-vs-opamp-summing-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['carrier'] differs between 'kcl-conservation' ('current') and 'fluid-continuity' ('flow').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-kcl-conservation-vs-fluid-continuity",
+      "id": "tier-d-kcl-conservation-vs-fluid-continuity-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['carrier'] differs between 'opamp-summing' ('voltage') and 'fluid-continuity' ('flow').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-opamp-summing-vs-fluid-continuity",
+      "id": "tier-d-opamp-summing-vs-fluid-continuity-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['operation'] differs between 'log-domain-sqrt' ('sqrt') and 'log-domain-arithmetic' ('arithmetic').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-log-domain-sqrt-vs-log-domain-arithmetic",
+      "id": "tier-d-log-domain-sqrt-vs-log-domain-arithmetic-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['code@1/2'] differs between 'two-tick-quantized-carry' ('1,1,1,0,0,0') and 'one-tick-floor-carry' ('0,1,0,1,0,1').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-two-tick-quantized-carry-vs-one-tick-floor-carry",
+      "id": "tier-d-two-tick-quantized-carry-vs-one-tick-floor-carry-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['law'] differs between 'mult' ('a*b') and 'div' ('a/b').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-mult-vs-div",
+      "id": "tier-d-mult-vs-div-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    },
+    {
+      "assertion": "Assert observable['law'] differs between 'sum' ('a+b') and 'difference' ('a-b').",
+      "authored": false,
+      "derived_from": "cent-tier-d-witness/1 tier-d-sum-vs-difference",
+      "id": "tier-d-sum-vs-difference-separation",
+      "kind": "observable-separation",
+      "schema": "cent-tier-d-obligation/1"
+    }
+  ],
+  "ok": true,
+  "retired_leads": [
+    {
+      "decision": "retire",
+      "lead_id": "nematic-q-tensor-bounding-box",
+      "reason": "the scalar Q-tensor invariants are identical while 'area' differs (2/1 vs 66/25); no invariant-only map through this signature exists",
+      "witness": "tier-d-nematic-q-director-x-vs-nematic-q-director-3-4"
+    }
+  ],
+  "schema": "cent-tier-d-ledger/1",
+  "summary": {
+    "authored_obligations": 0,
+    "derived_obligations": 10,
+    "exceeds_hand_declared": true,
+    "generated_negatives": 8,
+    "hand_declared_negatives": 6,
+    "instances": 13,
+    "retired_leads": 1
+  }
+}

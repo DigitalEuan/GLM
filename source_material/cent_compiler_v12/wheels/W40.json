@@ -1,0 +1,256 @@
+{
+ "id": "W40",
+ "title": "Piezoelectric Transducers",
+ "axioms": [
+  "charge = piezoelectric_charge_constant * force",
+  "voltage = piezoelectric_voltage_constant * stress * length",
+  "stress = force / area"
+ ],
+ "cases": [
+  {
+   "id": "W40-01",
+   "equation": "force = charge / piezoelectric_charge_constant",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W40-02",
+   "equation": "voltage = piezoelectric_voltage_constant * force * length / area",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "small-signal linear piezoelectricity; hysteresis and depoling are separate"
+  },
+  {
+   "id": "W40-03",
+   "equation": "piezoelectric_voltage_constant = voltage * area / (force * length)",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W40-N1",
+   "equation": "voltage = piezoelectric_voltage_constant * force",
+   "expected_dimensional": false,
+   "expected_derivable": false,
+   "physical_status": "negative_control",
+   "expected_dimensional_explicit": null,
+   "note": "the voltage constant acts on stress times length, not force alone"
+  }
+ ],
+ "quantities": [
+  "area",
+  "charge",
+  "force",
+  "length",
+  "piezoelectric_charge_constant",
+  "piezoelectric_voltage_constant",
+  "stress",
+  "voltage"
+ ],
+ "dimensions": {
+  "area": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "charge": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "force": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "length": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "piezoelectric_charge_constant": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    -1,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "piezoelectric_voltage_constant": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    0,
+    -1,
+    -1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "stress": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "voltage": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    1,
+    -3,
+    -1,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "junctions": [
+  {
+   "other_wheel": "W1",
+   "name_in_this_wheel": "voltage",
+   "name_in_other_wheel": "voltage",
+   "reason": "piezoelectric voltage is a circuit voltage"
+  },
+  {
+   "other_wheel": "W20",
+   "name_in_this_wheel": "stress",
+   "name_in_other_wheel": "stress",
+   "reason": "the piezo stack stress is the continuum stress"
+  },
+  {
+   "other_wheel": "W5",
+   "name_in_this_wheel": "force",
+   "name_in_other_wheel": "force",
+   "reason": "the piezo stack force is the dynamic force"
+  }
+ ],
+ "non_identities": []
+}

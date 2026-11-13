@@ -1,0 +1,257 @@
+{
+  "schema": "cent-question-corpus/1",
+  "description": "Fixed GLM/cent integration questions. Each entry runs one stable cent CLI command with --json and pins exact fields, lengths, exit behavior or refusal diagnostics. This is an evidence/reproducibility corpus, not a benchmark score.",
+  "questions": [
+    {
+      "id": "compile-kcl-sum",
+      "question": "What declared proposal and SPICE template does cent return for y = x + z?",
+      "argv": ["compile", "y = x + z", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-compile/1",
+          "ok": true,
+          "summary.primitives.sum": 1,
+          "spice.template": "kcl_summer",
+          "spice.decision.proposal_effect": "none",
+          "proposals.0.boundary.status": "not-fabricated",
+          "output_certificate.subject_schema": "cent-compile/1",
+          "output_certificate.status": "partial"
+        },
+        "length_gte": {
+          "proposals": 1
+        }
+      }
+    },
+    {
+      "id": "discover-sqrt",
+      "question": "How many declared compute methods does cent find for a square root?",
+      "argv": ["discover", "compute a square root", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-discovery/1",
+          "matched": true,
+          "steps.0.behavior": "compute",
+          "steps.0.method_count": 5,
+          "methods.0.role": "compute",
+          "methods.0.domain": "electrical",
+          "output_certificate.subject_schema": "cent-discovery/1",
+          "output_certificate.status": "partial"
+        },
+        "length_eq": {
+          "methods": 5
+        }
+      }
+    },
+    {
+      "id": "discover-carry",
+      "question": "Which declared method carries an irrational value as a physical signal?",
+      "argv": ["discover", "carry an irrational value as a physical signal", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-discovery/1",
+          "matched": true,
+          "steps.0.behavior": "carry",
+          "steps.0.method_count": 1,
+          "methods.0.role": "carry",
+          "methods.0.delta_sigma": true,
+          "output_certificate.subject_schema": "cent-discovery/1",
+          "output_certificate.status": "partial"
+        },
+        "length_eq": {
+          "methods": 1
+        }
+      }
+    },
+    {
+      "id": "matrix-mult",
+      "question": "What evidence does cent declare for multiplying two signals?",
+      "argv": ["matrix", "--operation", "mult", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-operation-matrix/1",
+          "summary.rows": 7,
+          "summary.validated_transfers": 1,
+          "summary.structural_templates": 1,
+          "summary.inherited_candidates": 5,
+          "summary.exact_routes": 0,
+          "rows.0.role": "compute",
+          "rows.0.evidence": "validated-transfer",
+          "output_certificate.subject_schema": "cent-operation-matrix/1",
+          "output_certificate.status": "partial"
+        },
+        "length_eq": {
+          "rows": 7
+        }
+      }
+    },
+    {
+      "id": "assemble-sum",
+      "question": "What exact result does the KCL route compute for 1/2 + 1/3?",
+      "argv": ["assemble", "sum-kcl", "--input", "1/2", "--input-b", "1/3", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-route/1",
+          "route.id": "sum-kcl",
+          "route.status": "exact route model",
+          "simulation.operation": "sum",
+          "simulation.result.num": "5",
+          "simulation.result.den": "6",
+          "simulation.passed": true,
+          "output_certificate.subject_schema": "cent-route/1",
+          "output_certificate.status": "partial"
+        }
+      }
+    },
+    {
+      "id": "assemble-difference",
+      "question": "What exact result does the KCL route compute for 1/2 - 1/3?",
+      "argv": ["assemble", "sum-kcl", "--input", "1/2", "--input-b", "1/3", "--operation", "difference", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-route/1",
+          "route.id": "sum-kcl",
+          "route.name": "KCL exact difference route",
+          "simulation.operation": "difference",
+          "simulation.result.num": "1",
+          "simulation.result.den": "6",
+          "simulation.passed": true,
+          "output_certificate.status": "partial"
+        }
+      }
+    },
+    {
+      "id": "derive-thermal",
+      "question": "Derive thermal energy from mass, specific heat capacity and temperature.",
+      "argv": ["derive", "W8.energy", "W8.mass", "W8.specific_heat_capacity", "W8.temperature", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-derivation/1",
+          "derivation.status": "derived",
+          "derivation.target": "W8.energy",
+          "derivation.formula": "W8.mass * W8.specific_heat_capacity * W8.temperature",
+          "derivation.coefficient": "1",
+          "derivation.used_axioms.0.id": "axiom:W8:00",
+          "output_certificate.subject_schema": "cent-derivation/1",
+          "output_certificate.status": "certified"
+        }
+      }
+    },
+    {
+      "id": "derive-disjoint-gap",
+      "question": "What does cent report when wavelength is requested from thermal inputs?",
+      "argv": ["derive", "W9.wavelength", "W8.energy", "W8.temperature", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-derivation/1",
+          "derivation.status": "gap",
+          "derivation.formula": null,
+          "derivation.gaps.0": "target and inputs are in disjoint declared-axiom components in this scope",
+          "output_certificate.subject_schema": "cent-derivation/1",
+          "output_certificate.status": "gap"
+        }
+      }
+    },
+    {
+      "id": "axiom-counts",
+      "question": "What are the declared counts in the global axiom graph?",
+      "argv": ["axioms", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-axiom-graph/1",
+          "graph.counts.wheels": 39,
+          "graph.counts.axioms": 98,
+          "graph.counts.quantities": 230,
+          "graph.counts.dimensions": 65,
+          "graph.counts.junction_edges": 54,
+          "graph.counts.junction_declared": 57,
+          "output_certificate.subject_schema": "cent-axiom-graph/1",
+          "output_certificate.status": "partial"
+        }
+      }
+    },
+    {
+      "id": "physical-reference-gap",
+      "question": "Can the log-domain square-root route emit a fabrication-ready netlist?",
+      "argv": ["physical", "sqrt-log", "--range", "1/2:1", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-physical/1",
+          "physical.status": "reference topology; not fabrication-ready",
+          "physical.route": "sqrt-log-domain",
+          "output_certificate.subject_schema": "cent-physical/1",
+          "output_certificate.status": "partial"
+        },
+        "length_gte": {
+          "physical.gaps": 1
+        }
+      }
+    },
+    {
+      "id": "discover-unmatched-gap",
+      "question": "What does cent do with an undeclared quantum-gravity request?",
+      "argv": ["discover", "compute a quantum gravity bridge", "--json"],
+      "expect": {
+        "exit": 0,
+        "json": true,
+        "fields": {
+          "schema": "cent-discovery/1",
+          "matched": false,
+          "steps.0.matched": false,
+          "steps.0.object": "unspecified",
+          "gaps.0": "Name a behaviour and object, for example: compute a square root.",
+          "output_certificate.subject_schema": "cent-discovery/1",
+          "output_certificate.status": "gap"
+        },
+        "length_eq": {
+          "suggestions": 1
+        }
+      }
+    },
+    {
+      "id": "refuse-unknown-function",
+      "question": "Does cent refuse an unsupported function instead of guessing a method?",
+      "argv": ["compile", "y = notafunction(x)", "--json"],
+      "expect": {
+        "exit": 2,
+        "json": false,
+        "stderr_contains": [
+          "unsupported function call: notafunction()",
+          "accepted: sqrt(x), exp(x), log(x), ln(x), tanh(x)"
+        ]
+      }
+    },
+    {
+      "id": "refuse-invalid-operation",
+      "question": "Does cent refuse an operation outside the declared matrix vocabulary?",
+      "argv": ["matrix", "--operation", "not-an-operation", "--json"],
+      "expect": {
+        "exit": 2,
+        "json": false,
+        "stderr_contains": [
+          "invalid choice: 'not-an-operation'",
+          "choose from 'sum', 'difference', 'neg', 'mult', 'div', 'exp', 'log', 'sqrt', 'sat', 'packing', 'bounding_box', 'delta_sigma_modulator'"
+        ]
+      }
+    }
+  ]
+}

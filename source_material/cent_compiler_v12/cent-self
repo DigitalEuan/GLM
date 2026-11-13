@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+"""Compatibility entry point: ``cent-self`` is ``cent self``."""
+from __future__ import annotations
+
+import runpy
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+sys.argv = ["cent", "self", *sys.argv[1:]]
+
+if __name__ == "__main__":
+    runpy.run_path(str(ROOT / "cent"), run_name="__main__")

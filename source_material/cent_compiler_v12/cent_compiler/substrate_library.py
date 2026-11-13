@@ -25,6 +25,7 @@ from typing import Dict, List, Optional, Set, Tuple
 from itertools import product
 
 from .grammar import CGraph, COp, decompose_formula
+from .material_contracts import MaterialContract, material_contract
 from .pattern_matcher import DELTA_SUBSTRATE, DeltaImplementation
 
 
@@ -43,6 +44,22 @@ class Expansion:
     carrier_type: str        # temporal, phase-wrap, spatial, static
     is_delta_sigma: bool     # does this expansion contain ¢_accum+¢_wrap+¢_eq?
     description: str
+
+    @property
+    def contract(self) -> MaterialContract:
+        """Typed ports, parameters, range and failures for this expansion row."""
+        return material_contract(
+            kind="expansion",
+            primitive=self.primitive,
+            component=self.substrate_component,
+            domain=self.substrate_domain,
+            carrier=self.carrier_type,
+            law=self.description,
+            description=self.description,
+            source="EXPANSIONS",
+            expands_to=self.expands_to,
+            delta_sigma=self.is_delta_sigma,
+        )
 
 
 EXPANSIONS: List[Expansion] = [
@@ -288,7 +305,8 @@ def enumerate_delta(cent_dag: CGraph) -> List[DeltaImplementationSpec]:
     """
     ATOMIC = {"sum", "neg", "mult", "scale", "accum", "rate", "wrap", "spatial",
               # v2.0 new atomics:
-              "exp", "log", "sat", "hysteresis", "grad", "div_spatial", "curl", "delay"}
+              "exp", "log", "sat", "hysteresis", "grad", "div_spatial", "curl", "delay",
+              "quantize"}
     COMPOSITE = {"sqrt", "eq", "recip", "div",
                  # v2.0 new composites:
                  "translinear", "state_space"}
@@ -372,7 +390,7 @@ def enumerate_delta(cent_dag: CGraph) -> List[DeltaImplementationSpec]:
 def _infer_domain(components: List[str]) -> str:
     """Infer the dominant substrate domain from the components used."""
     text = " ".join(components).lower()
-    if any(w in text for w in ["op-amp", "capacitor", "inductor", "resistor", "gilbert", "pll", "diode"]):
+    if any(w in text for w in ["op-amp", "capacitor", "inductor", "resistor", "gilbert", "pll", "diode", "comparator", "flash adc"]):
         return "electrical"
     if any(w in text for w in ["mass", "lever", "gear", "cam", "servo motor", "rack", "flywheel", "damper"]):
         return "mechanical"

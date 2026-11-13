@@ -224,9 +224,9 @@ class DeltaSigmaEngine:
 
 
 def flagship_demonstration():
-    """The flagship delta-sigma demonstration.
+    """Benchmark delta-sigma demonstration.
 
-    Proves delta-sigma is the canonical carrier for irrational numbers,
+    Demonstrates one declared delta-sigma carrier for irrational numbers,
     with full spectral analysis:
       - √2 carried as bitstream (10^5 samples)
       - OSR stated (64×)
@@ -237,7 +237,7 @@ def flagship_demonstration():
     """
     print("=" * 70)
     print("DELTA-SIGMA FLAGSHIP DEMONSTRATION")
-    print("The canonical carrier for irrational numbers")
+    print("A declared carrier for irrational numbers (benchmark)")
     print("=" * 70)
     print()
 

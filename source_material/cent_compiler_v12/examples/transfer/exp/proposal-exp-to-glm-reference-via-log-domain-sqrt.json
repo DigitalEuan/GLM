@@ -1,0 +1,218 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-exp-to-glm-reference-via-log-domain-sqrt",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 2,
+  "score": 21,
+  "match_reasons": [
+    "primitive overlap: exp",
+    "stateful false match",
+    "feedback false match",
+    "encoding overlap",
+    "nonlinearity overlap",
+    "precision overlap"
+  ],
+  "operation": {
+    "id": "exp",
+    "name": "exponential",
+    "semantics": "value is a certified rational enclosure of e^x.",
+    "reference": {
+      "kind": "certified-interval",
+      "expression": "exp_q(x)",
+      "path": "cent_compiler/interval.py"
+    },
+    "source_tests": [
+      {
+        "id": "exp-zero",
+        "kind": "exact",
+        "inputs": {
+          "x": "0"
+        },
+        "expected": "1",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_core.py"
+        ],
+        "note": ""
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "exact rational",
+        "precision": "integer in 1..64",
+        "tolerance": "positive exact rational"
+      },
+      "outputs": {
+        "value": "certified rational enclosure of exp(x)",
+        "checker": "higher-precision exp_q enclosure",
+        "passed": "boolean for overlap and declared width"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "value = exp(x)"
+    },
+    "adapter": null
+  },
+  "mechanism": {
+    "id": "log-domain-sqrt",
+    "name": "log-domain exponential/logarithm",
+    "principle": "Use a logarithmic junction, an exact gain and an exponential junction so a half-gain in the log domain realizes a square root.",
+    "source_domains": [
+      "electronics"
+    ],
+    "primitive_chain": [
+      "log",
+      "scale",
+      "exp"
+    ],
+    "carrier": "junction voltage/current (normalized)",
+    "principle_id": "",
+    "operators": [],
+    "laws": [
+      "ln_x = ln(x); half_ln = (1/2) * ln_x; root = exp(half_ln) = exp((1/2) * ln(x))",
+      "log and exp return certified rational enclosures; no hidden binary float is used"
+    ],
+    "invariants": [
+      "the input remains in the declared positive domain x > 0",
+      "the route enclosure overlaps the independent sqrt_q bracket",
+      "the route enclosure width stays within the declared tolerance"
+    ],
+    "failure_modes": [
+      "nonpositive input is rejected",
+      "thermal-voltage drift, junction ideality mismatch and offset are not modeled",
+      "finite bandwidth and measured parasitics are not modeled"
+    ],
+    "evidence_level": "source-simulated"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "primitive overlap: exp",
+      "stateful false match",
+      "feedback false match",
+      "encoding overlap",
+      "nonlinearity overlap",
+      "precision overlap"
+    ],
+    "source_law": [
+      "ln_x = ln(x); half_ln = (1/2) * ln_x; root = exp(half_ln) = exp((1/2) * ln(x))",
+      "log and exp return certified rational enclosures; no hidden binary float is used"
+    ],
+    "target_semantics": "value is a certified rational enclosure of e^x.",
+    "preserved": [
+      "the input remains in the declared positive domain x > 0",
+      "the route enclosure overlaps the independent sqrt_q bracket",
+      "the route enclosure width stays within the declared tolerance"
+    ],
+    "relaxed": [],
+    "validity": [
+      "x > 0",
+      "precision in 1..64 bits",
+      "junction bias remains in the declared logarithmic/exponential region"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation exp",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "cent_compiler/device.py",
+        "tests/test_assembly.py",
+        "docs/LOG_DOMAIN_SQRT.md"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "mechanism primitive chain",
+      "target": "target operation decomposition",
+      "law": "log -> scale -> exp",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "cent_compiler/device.py",
+        "tests/test_assembly.py",
+        "docs/LOG_DOMAIN_SQRT.md"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "needs-target-adapter",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": null,
+    "fixed_vectors": [],
+    "next_action": "Declare a target adapter and fixed vectors for this operation and mechanism, then run the target certificate."
+  },
+  "evidence": {
+    "candidate_level": "source-simulated",
+    "mechanism_level": "source-simulated",
+    "target_level": "not-executed",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "log-domain-sqrt declares support for exp"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "2 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "gap",
+      "detail": "no executable adapter for this operation/mechanism"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "target evidence is software-only; no measured junction or physical route",
+    "no measured bit-budget or latency contract",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/interval.py",
+    "tests/test_core.py",
+    "cent_compiler/assembly.py",
+    "cent_compiler/device.py",
+    "tests/test_assembly.py",
+    "docs/LOG_DOMAIN_SQRT.md",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/targets/glm.py"
+  ]
+}

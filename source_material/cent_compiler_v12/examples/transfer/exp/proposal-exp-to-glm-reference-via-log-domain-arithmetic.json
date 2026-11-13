@@ -1,0 +1,246 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-exp-to-glm-reference-via-log-domain-arithmetic",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 1,
+  "score": 22,
+  "match_reasons": [
+    "primitive overlap: exp",
+    "stateful false match",
+    "feedback false match",
+    "nonlinearity overlap",
+    "precision overlap",
+    "card declares exp support (mechanism metadata; weak rank signal)"
+  ],
+  "operation": {
+    "id": "exp",
+    "name": "exponential",
+    "semantics": "value is a certified rational enclosure of e^x.",
+    "reference": {
+      "kind": "certified-interval",
+      "expression": "exp_q(x)",
+      "path": "cent_compiler/interval.py"
+    },
+    "source_tests": [
+      {
+        "id": "exp-zero",
+        "kind": "exact",
+        "inputs": {
+          "x": "0"
+        },
+        "expected": "1",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_core.py"
+        ],
+        "note": ""
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "exact rational",
+        "precision": "integer in 1..64",
+        "tolerance": "positive exact rational"
+      },
+      "outputs": {
+        "value": "certified rational enclosure of exp(x)",
+        "checker": "higher-precision exp_q enclosure",
+        "passed": "boolean for overlap and declared width"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "value = exp(x)"
+    },
+    "adapter": {
+      "schema": "cent-glm-adapter/1",
+      "id": "glm-reference-log-domain-exp",
+      "operation": "exp",
+      "mechanism": "log-domain-arithmetic",
+      "target": "glm-reference",
+      "kind": "python-callable",
+      "operation_kind": "certified_enclosure",
+      "path": "cent_compiler/targets/glm.py",
+      "entrypoint": "log_domain_exp",
+      "invocation": "log_domain_exp(x, precision=..., tolerance=...)",
+      "precision": "exact rational; no binary floats",
+      "description": "Target-side certified exp(x) from the antilog junction; uses the declared interval exponential and a higher-precision reference enclosure.",
+      "test_vectors": [
+        "exp-zero",
+        "exp-half",
+        "exp-negative-half"
+      ]
+    }
+  },
+  "mechanism": {
+    "id": "log-domain-arithmetic",
+    "name": "log-domain slide-rule arithmetic",
+    "principle": "A logging junction, exact signed addition and an antilog junction compute exp, log, multiplication and division from the shared transcendental identity. Multiplication adds logarithms; division negates one and adds.",
+    "source_domains": [
+      "mechanical"
+    ],
+    "primitive_chain": [
+      "log",
+      "sum",
+      "neg",
+      "exp"
+    ],
+    "carrier": "log-domain signal",
+    "principle_id": "transcendental-identity",
+    "operators": [
+      "composition"
+    ],
+    "laws": [
+      "exp(x) is the antilog junction output",
+      "log(x) is the logging junction output",
+      "exp(log(a) + log(b)) = a * b",
+      "exp(log(a) - log(b)) = a / b"
+    ],
+    "invariants": [
+      "the log/antilog pair preserves the declared value identity",
+      "signed log-domain addition maps to exact multiplication",
+      "signed log-domain subtraction maps to exact division"
+    ],
+    "failure_modes": [
+      "nonpositive log input is rejected",
+      "signed mult/div outside the positive log domain is not declared",
+      "junction temperature, ideality, offset and finite bandwidth are not modeled"
+    ],
+    "evidence_level": "source-simulated"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "primitive overlap: exp",
+      "stateful false match",
+      "feedback false match",
+      "nonlinearity overlap",
+      "precision overlap",
+      "card declares exp support (mechanism metadata; weak rank signal)"
+    ],
+    "source_law": [
+      "exp(x) is the antilog junction output",
+      "log(x) is the logging junction output",
+      "exp(log(a) + log(b)) = a * b",
+      "exp(log(a) - log(b)) = a / b"
+    ],
+    "target_semantics": "value is a certified rational enclosure of e^x.",
+    "preserved": [
+      "the log/antilog pair preserves the declared value identity",
+      "signed log-domain addition maps to exact multiplication",
+      "signed log-domain subtraction maps to exact division"
+    ],
+    "relaxed": [],
+    "validity": [
+      "exp accepts any exact rational; log/mult/div require positive inputs",
+      "precision is a declared finite-resolution parameter",
+      "the result is a certified rational enclosure, not a stored irrational"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation exp",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "cent_compiler/interval.py",
+        "cent_compiler/targets/glm.py",
+        "docs/LOG_DOMAIN_SQRT.md"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "generated log-domain-arithmetic interpretation",
+      "target": "glm-reference composition model",
+      "law": "preserve the declared primitive composition order",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "cent_compiler/interval.py",
+        "cent_compiler/targets/glm.py",
+        "docs/LOG_DOMAIN_SQRT.md"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "ready-for-execution",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": "python3 cent transfer \"exp\" --target \"glm-reference\" --mechanism \"log-domain-arithmetic\" --validate --json",
+    "fixed_vectors": [
+      "exp-zero",
+      "exp-half",
+      "exp-negative-half"
+    ],
+    "next_action": "Run the handoff command and attach its certificate."
+  },
+  "evidence": {
+    "candidate_level": "source-simulated",
+    "mechanism_level": "source-simulated",
+    "target_level": "adapter-declared",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "log-domain-arithmetic declares support for exp"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "2 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "pass",
+      "detail": "cent_compiler/targets/glm.py:log_domain_exp"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "target coverage is software reference only; no measured junction",
+    "mult/div are declared only on positive normalized inputs",
+    "no voltage/current scaling or device netlist",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/interval.py",
+    "tests/test_core.py",
+    "cent_compiler/assembly.py",
+    "cent_compiler/targets/glm.py",
+    "docs/LOG_DOMAIN_SQRT.md",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md"
+  ]
+}

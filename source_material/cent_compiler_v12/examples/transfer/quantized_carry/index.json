@@ -1,0 +1,71 @@
+{
+  "schema": "cent-proposal-index/1",
+  "operation": "quantized_carry",
+  "target": "glm-reference",
+  "summary": {
+    "proposals": 3,
+    "ready_for_execution": 1,
+    "needs_target_adapter": 2,
+    "needs_target_vectors": 0,
+    "needs_environment": 0,
+    "review_counts": {
+      "unreviewed": 3
+    },
+    "mechanisms": [
+      "delta-sigma-error-feedback",
+      "pll-phase-tracking",
+      "orifice-pressure-flow"
+    ],
+    "domains": [
+      "audio",
+      "electronics",
+      "fluidics"
+    ]
+  },
+  "review": {
+    "schema": "cent-proposal-review-summary/1",
+    "events": 0,
+    "states": {},
+    "counts": {
+      "unreviewed": 3,
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    },
+    "decisions": {
+      "accepted": 0,
+      "rejected": 0,
+      "tested": 0
+    }
+  },
+  "review_ledger": null,
+  "proposals": [
+    {
+      "id": "proposal-quantized_carry-to-glm-reference-via-delta-sigma-error-feedback",
+      "rank": 1,
+      "mechanism": "delta-sigma-error-feedback",
+      "readiness": "ready-for-execution",
+      "review_state": "unreviewed",
+      "file": "proposal-quantized_carry-to-glm-reference-via-delta-sigma-error-feedback.json",
+      "handoff": "python3 cent transfer \"quantized_carry\" --target \"glm-reference\" --mechanism \"delta-sigma-error-feedback\" --validate --json"
+    },
+    {
+      "id": "proposal-quantized_carry-to-glm-reference-via-pll-phase-tracking",
+      "rank": 2,
+      "mechanism": "pll-phase-tracking",
+      "readiness": "needs-target-adapter",
+      "review_state": "unreviewed",
+      "file": "proposal-quantized_carry-to-glm-reference-via-pll-phase-tracking.json",
+      "handoff": null
+    },
+    {
+      "id": "proposal-quantized_carry-to-glm-reference-via-orifice-pressure-flow",
+      "rank": 3,
+      "mechanism": "orifice-pressure-flow",
+      "readiness": "needs-target-adapter",
+      "review_state": "unreviewed",
+      "file": "proposal-quantized_carry-to-glm-reference-via-orifice-pressure-flow.json",
+      "handoff": null
+    }
+  ]
+}

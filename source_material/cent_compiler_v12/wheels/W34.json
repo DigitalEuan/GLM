@@ -19,10 +19,10 @@
       "id": "W34-02",
       "equation": "pipe_radius = (viscosity * length / vascular_resistance)^(1/4)",
       "expected_dimensional": true,
-      "expected_derivable": false,
+      "expected_derivable": true,
       "physical_status": "model_convention",
       "expected_dimensional_explicit": null,
-      "note": "4th root; dimensionally consistent but fractional power"
+      "note": "Fourth-root form is an exact algebraic inverse of the declared resistance law."
     },
     {
       "id": "W34-03",
@@ -132,7 +132,7 @@
       "exponents": [
         -4,
         1,
-        1,
+        -1,
         0,
         0,
         0,

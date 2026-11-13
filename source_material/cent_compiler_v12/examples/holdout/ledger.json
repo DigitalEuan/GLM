@@ -1,0 +1,735 @@
+{
+  "cases": [
+    {
+      "citation": "Kirkpatrick, Gelatt & Vecchi, Science 220, 671\u2013680 (1983), doi:10.1126/science.220.4598.671",
+      "expected_mechanism": "metallurgical-annealing",
+      "forbidden_traits": {
+        "precision": "exact rational"
+      },
+      "id": "simulated-annealing",
+      "provenance": "https://www.science.org/doi/10.1126/science.220.4598.671",
+      "required_observable": "a temperature schedule that accepts uphill moves and converges to a low-cost state",
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "combinatorial optimization",
+      "target_operation": "simulated_annealing",
+      "target_signature": {
+        "conserved_quantities": [
+          "thermal equilibrium"
+        ],
+        "encoding": "state",
+        "feedback": false,
+        "nonlinearity": "stochastic thermal relaxation",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sat",
+          "hysteresis",
+          "noise"
+        ],
+        "stateful": true
+      },
+      "target_year": 1983
+    },
+    {
+      "citation": "Doyle & Snell, Random Walks and Electric Networks, MAA Carus Monograph 22 (1984); Kakutani's 1945 connection is acknowledged as earlier",
+      "expected_mechanism": "random-walk",
+      "forbidden_traits": {
+        "precision": "statistical"
+      },
+      "id": "resistor-network-random-walk",
+      "provenance": "https://math.dartmouth.edu/~doyle/docs/walks/walks.pdf",
+      "required_observable": "effective resistance as an exact graph potential with a random-walk interpretation",
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "electrical networks",
+      "target_operation": "effective_resistance",
+      "target_signature": {
+        "conserved_quantities": [
+          "potential"
+        ],
+        "encoding": "graph",
+        "feedback": false,
+        "nonlinearity": "linear",
+        "precision": "exact rational",
+        "primitive_chain": [
+          "sum",
+          "neg"
+        ],
+        "stateful": false
+      },
+      "target_year": 1984
+    },
+    {
+      "citation": "Hopfield, PNAS 79(8), 2554\u20132558 (1982), doi:10.1073/pnas.79.8.2554",
+      "expected_mechanism": "ising-spin",
+      "forbidden_traits": {
+        "encoding": "geometry"
+      },
+      "id": "hopfield-associative-memory",
+      "provenance": "https://www.pnas.org/doi/10.1073/pnas.79.8.2554",
+      "required_observable": "content-addressable recall as a collective energy minimum of binary spins",
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "neural computation",
+      "target_operation": "associative_memory",
+      "target_signature": {
+        "conserved_quantities": [
+          "energy"
+        ],
+        "encoding": "spin lattice",
+        "feedback": true,
+        "nonlinearity": "bistable",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sum",
+          "mult",
+          "sat"
+        ],
+        "stateful": true
+      },
+      "target_year": 1982
+    },
+    {
+      "citation": "McNamara & Zanetti, Phys. Rev. Lett. 61, 2332 (1988), doi:10.1103/PhysRevLett.61.2332",
+      "expected_mechanism": "kinetic-theory",
+      "forbidden_traits": {
+        "nonlinearity": "minimal surface"
+      },
+      "id": "lattice-boltzmann-kinetic",
+      "provenance": "https://link.aps.org/doi/10.1103/PhysRevLett.61.2332",
+      "required_observable": "a discrete distribution function whose collision and streaming recover hydrodynamic moments",
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "computational fluid dynamics",
+      "target_operation": "lattice_boltzmann",
+      "target_signature": {
+        "conserved_quantities": [
+          "mass",
+          "momentum"
+        ],
+        "encoding": "distribution",
+        "feedback": false,
+        "nonlinearity": "collision",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sum",
+          "grad",
+          "spatial"
+        ],
+        "stateful": true
+      },
+      "target_year": 1988
+    },
+    {
+      "citation": "Courant & Robbins, What Is Mathematics?, Oxford University Press (1941), ch. VII",
+      "expected_mechanism": "soap-film",
+      "forbidden_traits": {
+        "encoding": "spin lattice"
+      },
+      "id": "steiner-tree-soap-film",
+      "provenance": "https://mathweb.ucsd.edu/~ronspubs/14_02_Steiner.pdf",
+      "required_observable": "a minimum-length network with 120-degree Steiner junctions",
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "computational geometry",
+      "target_operation": "steiner_tree",
+      "target_signature": {
+        "conserved_quantities": [
+          "length"
+        ],
+        "encoding": "geometry",
+        "feedback": false,
+        "nonlinearity": "minimal network",
+        "precision": "exact rational",
+        "primitive_chain": [
+          "spatial",
+          "grad"
+        ],
+        "stateful": false
+      },
+      "target_year": 1941
+    }
+  ],
+  "cutoff_year": 1940,
+  "direction_policy": "target <- source; the target is the post-cutoff publication. The directive's arrow is conceptual shorthand, not temporal order.",
+  "excluded": [
+    {
+      "citation": "Bresenham, IBM Systems Journal 4(1), 25\u201330 (1965)",
+      "id": "bresenham-delta-sigma",
+      "reason": "Bresenham's algorithm was published in 1965, after the 1940 cutoff, so it cannot be in the frozen library; the D4 one-tick correspondence is internal evidence, not a dated external transfer.",
+      "schema": "cent-holdout-case/1",
+      "status": "excluded"
+    }
+  ],
+  "frozen_library": [
+    {
+      "citation": "traditional metallurgical annealing; no dated publication claimed",
+      "frozen_before": 1940,
+      "id": "metallurgical-annealing",
+      "name": "metallurgical annealing",
+      "schema": "cent-holdout-mechanism/1",
+      "signature": {
+        "conserved_quantities": [
+          "thermal equilibrium"
+        ],
+        "encoding": "state",
+        "feedback": false,
+        "nonlinearity": "stochastic thermal relaxation",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sat",
+          "hysteresis",
+          "noise"
+        ],
+        "stateful": true
+      },
+      "source_date": "antiquity; no single publication date claimed",
+      "source_domain": "metallurgy",
+      "source_year": null
+    },
+    {
+      "citation": "Pearson, 'The problem of the random walk', Nature 72 (1905)",
+      "frozen_before": 1940,
+      "id": "random-walk",
+      "name": "random walk",
+      "schema": "cent-holdout-mechanism/1",
+      "signature": {
+        "conserved_quantities": [
+          "probability"
+        ],
+        "encoding": "graph",
+        "feedback": false,
+        "nonlinearity": "linear",
+        "precision": "exact rational",
+        "primitive_chain": [
+          "accum",
+          "spatial"
+        ],
+        "stateful": false
+      },
+      "source_date": "Pearson, Nature 72 (1905)",
+      "source_domain": "probability",
+      "source_year": 1905
+    },
+    {
+      "citation": "Ising, 'Beitrag zur Theorie des Ferromagnetismus', Z. Phys. 31 (1925)",
+      "frozen_before": 1940,
+      "id": "ising-spin",
+      "name": "Ising spin model",
+      "schema": "cent-holdout-mechanism/1",
+      "signature": {
+        "conserved_quantities": [
+          "energy"
+        ],
+        "encoding": "spin lattice",
+        "feedback": true,
+        "nonlinearity": "bistable",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sum",
+          "sat",
+          "mult"
+        ],
+        "stateful": true
+      },
+      "source_date": "Ising, Zeitschrift f\u00fcr Physik 31 (1925)",
+      "source_domain": "statistical mechanics",
+      "source_year": 1925
+    },
+    {
+      "citation": "Boltzmann, 'Weitere Studien \u00fcber das W\u00e4rmegleichgewicht' (1872)",
+      "frozen_before": 1940,
+      "id": "kinetic-theory",
+      "name": "Boltzmann kinetic theory",
+      "schema": "cent-holdout-mechanism/1",
+      "signature": {
+        "conserved_quantities": [
+          "mass",
+          "momentum"
+        ],
+        "encoding": "distribution",
+        "feedback": false,
+        "nonlinearity": "collision",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sum",
+          "mult",
+          "grad"
+        ],
+        "stateful": true
+      },
+      "source_date": "Boltzmann, further studies on thermal equilibrium (1872)",
+      "source_domain": "kinetic theory",
+      "source_year": 1872
+    },
+    {
+      "citation": "Plateau, Statique exp\u00e9rimentale et th\u00e9orique des liquides (1873)",
+      "frozen_before": 1940,
+      "id": "soap-film",
+      "name": "soap-film minimal surface",
+      "schema": "cent-holdout-mechanism/1",
+      "signature": {
+        "conserved_quantities": [
+          "area"
+        ],
+        "encoding": "geometry",
+        "feedback": false,
+        "nonlinearity": "minimal surface",
+        "precision": "exact rational",
+        "primitive_chain": [
+          "spatial",
+          "boundary"
+        ],
+        "stateful": false
+      },
+      "source_date": "Plateau, Statique exp\u00e9rimentale et th\u00e9orique... (1873)",
+      "source_domain": "surface physics",
+      "source_year": 1873
+    }
+  ],
+  "gaps": [
+    "the frozen library is a separate hand-declared holdout library, not a snapshot of the live mechanism registry",
+    "the frozen library is hand-declared; no external historical corpus is used",
+    "the corpus has five evaluated cases and one excluded candidate; it is a regression test, not general evidence",
+    "the random-walk/electric-network case cites Doyle & Snell 1984; Kakutani's 1945 connection is earlier and is not claimed as first-ever",
+    "two targets (simulated annealing and Hopfield associative memory) share a signature with their source, so those cases test provenance recall more than structural re-description",
+    "false-positive constraints are author-declared from the target observable and were not independently pre-registered",
+    "the negative control is a strict operator control, not a historical recall case; its failure is reported, not counted as positive recall",
+    "target retrieval is structural signature matching, not a proof of the historical analogy"
+  ],
+  "metrics": {
+    "candidate_recall": 1.0,
+    "cases": 5,
+    "excluded_cases": 1,
+    "false_positive_candidates": [
+      "resistor-network-random-walk/kinetic-theory"
+    ],
+    "false_positive_cases": [
+      "resistor-network-random-walk"
+    ],
+    "false_positive_rate": "1/15",
+    "misses": [],
+    "negative_control_false_positive_candidates": [],
+    "negative_control_false_positive_rate": "0/0",
+    "negative_control_misses": [
+      "rsa-modular-exponentiation: required primitive 'mod' is absent from every frozen source"
+    ],
+    "negative_control_no_licensed_source": true,
+    "negative_control_outcome": "no_licensed_source",
+    "negative_controls": 1,
+    "recall": "5/5",
+    "recalled": 5
+  },
+  "negative_controls": [
+    {
+      "citation": "Rivest, Shamir & Adleman, Communications of the ACM 21(2), 120\u2013126 (1978)",
+      "coverage_miss": true,
+      "expected_mechanism": null,
+      "false_positives": [],
+      "forbidden_traits": {
+        "precision": "statistical"
+      },
+      "id": "rsa-modular-exponentiation",
+      "outcome": "no_licensed_source",
+      "provenance": "https://dl.acm.org/doi/10.1145/359340.359342",
+      "rationale": "Strict operator control: RSA's public-key operation needs modular exponentiation. No frozen source contains mod, so the machine must report no licensed source rather than rank structural analogues; the known number-theory source is outside this curated library.",
+      "required_primitive": "mod",
+      "retrieved": [],
+      "schema": "cent-holdout-case/1",
+      "status": "negative-control",
+      "target_domain": "public-key cryptography",
+      "target_operation": "modular_exponentiation",
+      "target_signature": {
+        "conserved_quantities": [
+          "modulus"
+        ],
+        "encoding": "integer",
+        "feedback": false,
+        "nonlinearity": "modular",
+        "precision": "exact",
+        "primitive_chain": [
+          "exp",
+          "mod",
+          "mult"
+        ],
+        "stateful": false
+      },
+      "target_year": 1978
+    }
+  ],
+  "ok": true,
+  "results": [
+    {
+      "citation": "Kirkpatrick, Gelatt & Vecchi, Science 220, 671\u2013680 (1983), doi:10.1126/science.220.4598.671",
+      "expected_mechanism": "metallurgical-annealing",
+      "expected_rank": 1,
+      "expected_score": 17,
+      "false_positives": [],
+      "forbidden_traits": {
+        "precision": "exact rational"
+      },
+      "id": "simulated-annealing",
+      "originated": true,
+      "passed": true,
+      "provenance": "https://www.science.org/doi/10.1126/science.220.4598.671",
+      "required_observable": "a temperature schedule that accepts uphill moves and converges to a low-cost state",
+      "retrieved": [
+        {
+          "false_positive": false,
+          "mechanism": "metallurgical-annealing",
+          "reasons": [
+            "primitive overlap: hysteresis, noise, sat",
+            "stateful true match",
+            "feedback false match",
+            "encoding overlap",
+            "nonlinearity overlap",
+            "precision overlap",
+            "conserved-quantity overlap"
+          ],
+          "score": 17
+        },
+        {
+          "false_positive": false,
+          "mechanism": "kinetic-theory",
+          "reasons": [
+            "stateful true match",
+            "feedback false match",
+            "precision overlap"
+          ],
+          "score": 7
+        },
+        {
+          "false_positive": false,
+          "mechanism": "ising-spin",
+          "reasons": [
+            "primitive overlap: sat",
+            "stateful true match",
+            "precision overlap"
+          ],
+          "score": 6
+        }
+      ],
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "combinatorial optimization",
+      "target_operation": "simulated_annealing",
+      "target_signature": {
+        "conserved_quantities": [
+          "thermal equilibrium"
+        ],
+        "encoding": "state",
+        "feedback": false,
+        "nonlinearity": "stochastic thermal relaxation",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sat",
+          "hysteresis",
+          "noise"
+        ],
+        "stateful": true
+      },
+      "target_year": 1983,
+      "unlabelled": [
+        "kinetic-theory",
+        "ising-spin"
+      ]
+    },
+    {
+      "citation": "Doyle & Snell, Random Walks and Electric Networks, MAA Carus Monograph 22 (1984); Kakutani's 1945 connection is acknowledged as earlier",
+      "expected_mechanism": "random-walk",
+      "expected_rank": 1,
+      "expected_score": 9,
+      "false_positives": [
+        "kinetic-theory"
+      ],
+      "forbidden_traits": {
+        "precision": "statistical"
+      },
+      "id": "resistor-network-random-walk",
+      "originated": true,
+      "passed": true,
+      "provenance": "https://math.dartmouth.edu/~doyle/docs/walks/walks.pdf",
+      "required_observable": "effective resistance as an exact graph potential with a random-walk interpretation",
+      "retrieved": [
+        {
+          "false_positive": false,
+          "mechanism": "random-walk",
+          "reasons": [
+            "stateful false match",
+            "feedback false match",
+            "encoding overlap",
+            "nonlinearity overlap",
+            "precision overlap"
+          ],
+          "score": 9
+        },
+        {
+          "false_positive": false,
+          "mechanism": "soap-film",
+          "reasons": [
+            "stateful false match",
+            "feedback false match",
+            "precision overlap"
+          ],
+          "score": 7
+        },
+        {
+          "false_positive": true,
+          "mechanism": "kinetic-theory",
+          "reasons": [
+            "primitive overlap: sum",
+            "feedback false match"
+          ],
+          "score": 5
+        }
+      ],
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "electrical networks",
+      "target_operation": "effective_resistance",
+      "target_signature": {
+        "conserved_quantities": [
+          "potential"
+        ],
+        "encoding": "graph",
+        "feedback": false,
+        "nonlinearity": "linear",
+        "precision": "exact rational",
+        "primitive_chain": [
+          "sum",
+          "neg"
+        ],
+        "stateful": false
+      },
+      "target_year": 1984,
+      "unlabelled": [
+        "soap-film"
+      ]
+    },
+    {
+      "citation": "Hopfield, PNAS 79(8), 2554\u20132558 (1982), doi:10.1073/pnas.79.8.2554",
+      "expected_mechanism": "ising-spin",
+      "expected_rank": 1,
+      "expected_score": 17,
+      "false_positives": [],
+      "forbidden_traits": {
+        "encoding": "geometry"
+      },
+      "id": "hopfield-associative-memory",
+      "originated": true,
+      "passed": true,
+      "provenance": "https://www.pnas.org/doi/10.1073/pnas.79.8.2554",
+      "required_observable": "content-addressable recall as a collective energy minimum of binary spins",
+      "retrieved": [
+        {
+          "false_positive": false,
+          "mechanism": "ising-spin",
+          "reasons": [
+            "primitive overlap: mult, sat, sum",
+            "stateful true match",
+            "feedback true match",
+            "encoding overlap",
+            "nonlinearity overlap",
+            "precision overlap",
+            "conserved-quantity overlap"
+          ],
+          "score": 17
+        },
+        {
+          "false_positive": false,
+          "mechanism": "kinetic-theory",
+          "reasons": [
+            "primitive overlap: mult, sum",
+            "stateful true match",
+            "precision overlap"
+          ],
+          "score": 8
+        },
+        {
+          "false_positive": false,
+          "mechanism": "metallurgical-annealing",
+          "reasons": [
+            "primitive overlap: sat",
+            "stateful true match",
+            "precision overlap"
+          ],
+          "score": 6
+        }
+      ],
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "neural computation",
+      "target_operation": "associative_memory",
+      "target_signature": {
+        "conserved_quantities": [
+          "energy"
+        ],
+        "encoding": "spin lattice",
+        "feedback": true,
+        "nonlinearity": "bistable",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sum",
+          "mult",
+          "sat"
+        ],
+        "stateful": true
+      },
+      "target_year": 1982,
+      "unlabelled": [
+        "kinetic-theory",
+        "metallurgical-annealing"
+      ]
+    },
+    {
+      "citation": "McNamara & Zanetti, Phys. Rev. Lett. 61, 2332 (1988), doi:10.1103/PhysRevLett.61.2332",
+      "expected_mechanism": "kinetic-theory",
+      "expected_rank": 1,
+      "expected_score": 15,
+      "false_positives": [],
+      "forbidden_traits": {
+        "nonlinearity": "minimal surface"
+      },
+      "id": "lattice-boltzmann-kinetic",
+      "originated": true,
+      "passed": true,
+      "provenance": "https://link.aps.org/doi/10.1103/PhysRevLett.61.2332",
+      "required_observable": "a discrete distribution function whose collision and streaming recover hydrodynamic moments",
+      "retrieved": [
+        {
+          "false_positive": false,
+          "mechanism": "kinetic-theory",
+          "reasons": [
+            "primitive overlap: grad, sum",
+            "stateful true match",
+            "feedback false match",
+            "encoding overlap",
+            "nonlinearity overlap",
+            "precision overlap",
+            "conserved-quantity overlap"
+          ],
+          "score": 15
+        },
+        {
+          "false_positive": false,
+          "mechanism": "metallurgical-annealing",
+          "reasons": [
+            "stateful true match",
+            "feedback false match",
+            "precision overlap"
+          ],
+          "score": 7
+        },
+        {
+          "false_positive": false,
+          "mechanism": "ising-spin",
+          "reasons": [
+            "primitive overlap: sum",
+            "stateful true match",
+            "precision overlap"
+          ],
+          "score": 6
+        }
+      ],
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "computational fluid dynamics",
+      "target_operation": "lattice_boltzmann",
+      "target_signature": {
+        "conserved_quantities": [
+          "mass",
+          "momentum"
+        ],
+        "encoding": "distribution",
+        "feedback": false,
+        "nonlinearity": "collision",
+        "precision": "statistical",
+        "primitive_chain": [
+          "sum",
+          "grad",
+          "spatial"
+        ],
+        "stateful": true
+      },
+      "target_year": 1988,
+      "unlabelled": [
+        "metallurgical-annealing",
+        "ising-spin"
+      ]
+    },
+    {
+      "citation": "Courant & Robbins, What Is Mathematics?, Oxford University Press (1941), ch. VII",
+      "expected_mechanism": "soap-film",
+      "expected_rank": 1,
+      "expected_score": 11,
+      "false_positives": [],
+      "forbidden_traits": {
+        "encoding": "spin lattice"
+      },
+      "id": "steiner-tree-soap-film",
+      "originated": true,
+      "passed": true,
+      "provenance": "https://mathweb.ucsd.edu/~ronspubs/14_02_Steiner.pdf",
+      "required_observable": "a minimum-length network with 120-degree Steiner junctions",
+      "retrieved": [
+        {
+          "false_positive": false,
+          "mechanism": "soap-film",
+          "reasons": [
+            "primitive overlap: spatial",
+            "stateful false match",
+            "feedback false match",
+            "encoding overlap",
+            "nonlinearity overlap",
+            "precision overlap"
+          ],
+          "score": 11
+        },
+        {
+          "false_positive": false,
+          "mechanism": "random-walk",
+          "reasons": [
+            "primitive overlap: spatial",
+            "stateful false match",
+            "feedback false match",
+            "precision overlap"
+          ],
+          "score": 9
+        },
+        {
+          "false_positive": false,
+          "mechanism": "kinetic-theory",
+          "reasons": [
+            "primitive overlap: grad",
+            "feedback false match"
+          ],
+          "score": 5
+        }
+      ],
+      "schema": "cent-holdout-case/1",
+      "status": "post-cutoff",
+      "target_domain": "computational geometry",
+      "target_operation": "steiner_tree",
+      "target_signature": {
+        "conserved_quantities": [
+          "length"
+        ],
+        "encoding": "geometry",
+        "feedback": false,
+        "nonlinearity": "minimal network",
+        "precision": "exact rational",
+        "primitive_chain": [
+          "spatial",
+          "grad"
+        ],
+        "stateful": false
+      },
+      "target_year": 1941,
+      "unlabelled": [
+        "random-walk",
+        "kinetic-theory"
+      ]
+    }
+  ],
+  "schema": "cent-retrodictive-holdout/1"
+}

@@ -1,0 +1,247 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-quantized_carry-to-glm-reference-via-pll-phase-tracking",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 2,
+  "score": 20,
+  "match_reasons": [
+    "primitive overlap: accum, sum",
+    "stateful true match",
+    "feedback true match"
+  ],
+  "operation": {
+    "id": "quantized_carry",
+    "name": "quantized carry",
+    "semantics": "Carry a scalar as a bounded code sequence whose declared mean reconstructs the input within the declared quantizer tolerance.",
+    "reference": {
+      "kind": "exact-route",
+      "description": "first-order error-feedback loop in cent_compiler/assembly.py",
+      "path": "cent_compiler/assembly.py"
+    },
+    "source_tests": [
+      {
+        "id": "quantized-half",
+        "kind": "exact",
+        "inputs": {
+          "x": "1/2",
+          "samples": "12"
+        },
+        "expected": "1/2",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_assembly.py"
+        ],
+        "note": "the declared 12-tick code mean is exactly one half"
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "exact rational in [0, full_scale]",
+        "samples": "positive integer",
+        "quantum": "positive exact rational",
+        "full_scale": "positive integer multiple of quantum",
+        "integrator_limit": "positive exact rational"
+      },
+      "outputs": {
+        "code": "bounded integer code sequence",
+        "mean": "exact rational code mean",
+        "error": "mean - x",
+        "peak_state": "nonnegative exact rational",
+        "bounded": "boolean",
+        "passed": "boolean for bounded state and declared reconstruction"
+      },
+      "state": "one exact rational accumulator plus the declared feedback history",
+      "feedback": "delayed quantized level matching the exact route's effective loop history"
+    },
+    "adapter": null
+  },
+  "mechanism": {
+    "id": "pll-phase-tracking",
+    "name": "phase-locked loop phase tracking",
+    "principle": "A phase detector, PI loop filter and VCO form a feedback loop that drives phase error toward zero and tracks a reference frequency.",
+    "source_domains": [
+      "electronics"
+    ],
+    "primitive_chain": [
+      "accum",
+      "wrap",
+      "sum",
+      "scale"
+    ],
+    "carrier": "phase",
+    "principle_id": "",
+    "operators": [],
+    "laws": [
+      "pd = kpd * sin(phi_ref - phi_vco); integral += ki * pd; control = loop_gain * pd + integral; f_vco = f0 + kvco * control; phi_vco += 2*pi * f_vco / sample_rate"
+    ],
+    "invariants": [
+      "the VCO phase is the accumulated frequency state",
+      "the phase detector compares reference and VCO phase modulo 2*pi",
+      "the declared type-2 loop drives frequency error and phase error toward zero in the test"
+    ],
+    "failure_modes": [
+      "lock outside the declared numerical point is not characterized",
+      "cycle slip and lock-range limits are not modeled",
+      "phase-detector nonlinearity, VCO noise and measured-device behavior are not modeled"
+    ],
+    "evidence_level": "source-simulated"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "primitive overlap: accum, sum",
+      "stateful true match",
+      "feedback true match"
+    ],
+    "source_law": [
+      "pd = kpd * sin(phi_ref - phi_vco); integral += ki * pd; control = loop_gain * pd + integral; f_vco = f0 + kvco * control; phi_vco += 2*pi * f_vco / sample_rate"
+    ],
+    "target_semantics": "Carry a scalar as a bounded code sequence whose declared mean reconstructs the input within the declared quantizer tolerance.",
+    "preserved": [
+      "the VCO phase is the accumulated frequency state",
+      "the phase detector compares reference and VCO phase modulo 2*pi",
+      "the declared type-2 loop drives frequency error and phase error toward zero in the test"
+    ],
+    "relaxed": [],
+    "validity": [
+      "declared numerical test: 5 Hz reference, 1 kHz sample rate, 5000 samples",
+      "declared type-2 parameters kvco=10, kpd=1, loop_gain=0.3 and ki=0.01",
+      "float simulation only; not an exact route or measured device"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation quantized_carry",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/simulator.py",
+        "cent_compiler/evaluator.py",
+        "tests/test_all.py",
+        "cent_compiler/concepts.py"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "mechanism primitive chain",
+      "target": "target operation decomposition",
+      "law": "accum -> wrap -> sum -> scale",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/simulator.py",
+        "cent_compiler/evaluator.py",
+        "tests/test_all.py",
+        "cent_compiler/concepts.py"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    },
+    {
+      "source": "mechanism state",
+      "target": "target state",
+      "law": "carry the mechanism state through an explicit target state transform",
+      "kind": "state",
+      "provenance": [
+        "cent_compiler/simulator.py",
+        "cent_compiler/evaluator.py",
+        "tests/test_all.py",
+        "cent_compiler/concepts.py"
+      ],
+      "gaps": [
+        "target state representation is not declared"
+      ]
+    },
+    {
+      "source": "mechanism feedback path",
+      "target": "target feedback path",
+      "law": "preserve the feedback topology; target loop dynamics remain undeclared",
+      "kind": "feedback",
+      "provenance": [
+        "cent_compiler/simulator.py",
+        "cent_compiler/evaluator.py",
+        "tests/test_all.py",
+        "cent_compiler/concepts.py"
+      ],
+      "gaps": [
+        "target loop dynamics and stability are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "needs-target-adapter",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": null,
+    "fixed_vectors": [],
+    "next_action": "Declare a target adapter and fixed vectors for this operation and mechanism, then run the target certificate."
+  },
+  "evidence": {
+    "candidate_level": "source-simulated",
+    "mechanism_level": "source-simulated",
+    "target_level": "not-executed",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "pll-phase-tracking declares support for quantized_carry"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "4 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "gap",
+      "detail": "no executable adapter for this operation/mechanism"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "no exact or target phase-tracking adapter",
+    "no lock-range, noise or measured-device evidence",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/assembly.py",
+    "cent_compiler/delta_sigma.py",
+    "tests/test_assembly.py",
+    "cent_compiler/simulator.py",
+    "cent_compiler/evaluator.py",
+    "tests/test_all.py",
+    "cent_compiler/concepts.py",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/targets/glm.py"
+  ]
+}

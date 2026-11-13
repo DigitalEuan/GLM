@@ -1,0 +1,62 @@
+ERROR  cent_compiler_v12: staged file src/glm_universal/tests/test_cent_wheels.py differs from the file already at that path; absorption would overwrite it
+ERROR  cent_compiler_v12: staged file src/glm_universal/wheels/cent_wheels.py differs from the file already at that path; absorption would overwrite it
+ERROR  cent_compiler_v12: staged file src/glm_universal/wheels/cent_wheels_study.py differs from the file already at that path; absorption would overwrite it
+ERROR  cent_compiler_v12: staged file src/glm_universal/wheels/lean_cent_data.py differs from the file already at that path; absorption would overwrite it
+ERROR  iter10_lorentzian: cites Lean GolayDeepHole: unaudited (RequestProject.GLM.GolayDeepHole)
+ERROR  leechlean: [tested] no recorded result for staged:src/glm_universal/tests/test_leech_lean.py
+ERROR  leechlean: [tested] no recorded result for staged:src/glm_universal/tests/test_leech_lean_tools.py
+ERROR  leechlean: [tested] no recorded result for staged:src/glm_universal/tests/test_leech_lean_study.py
+ERROR  ToDo/Rule30_GLM_Study is filed but has no intake record (add one to INTAKE.yaml)
+ERROR  ToDo/cent_compiler_v12_2 is filed but has no intake record (add one to INTAKE.yaml)
+ERROR  ToDo/glm_wheels_bundle is filed but has no intake record (add one to INTAKE.yaml)
+ERROR  source_material/DYNAMIC_CARRIER_STUDY.md is loose: register it (`python3 -m glm_universal.intake register source_material/DYNAMIC_CARRIER_STUDY.md`)
+ERROR  source_material/GLM_19OCT26_1.md is loose: register it (`python3 -m glm_universal.intake register source_material/GLM_19OCT26_1.md`)
+ERROR  source_material/GLM_IMPROVEMENT_ROADMAP.md is loose: register it (`python3 -m glm_universal.intake register source_material/GLM_IMPROVEMENT_ROADMAP.md`)
+ERROR  source_material/GLM_Pipeline_Kit is loose: register it (`python3 -m glm_universal.intake register source_material/GLM_Pipeline_Kit`)
+ERROR  source_material/Golay codes and Hadamard matrices.txt is loose: register it (`python3 -m glm_universal.intake register source_material/Golay codes and Hadamard matrices.txt`)
+ERROR  source_material/HISTORY_RECORDED_NOW_STUDY.md is loose: register it (`python3 -m glm_universal.intake register source_material/HISTORY_RECORDED_NOW_STUDY.md`)
+ERROR  source_material/HISTORY_RECORDED_NOW_V2_STUDY.md is loose: register it (`python3 -m glm_universal.intake register source_material/HISTORY_RECORDED_NOW_V2_STUDY.md`)
+ERROR  source_material/HISTORY_RECORDED_NOW_V3_STUDY.md is loose: register it (`python3 -m glm_universal.intake register source_material/HISTORY_RECORDED_NOW_V3_STUDY.md`)
+ERROR  source_material/HISTORY_RECORDED_NOW_V4_STUDY.md is loose: register it (`python3 -m glm_universal.intake register source_material/HISTORY_RECORDED_NOW_V4_STUDY.md`)
+ERROR  source_material/Improved_Question_Set_B_Benchmark_Suite.txt is loose: register it (`python3 -m glm_universal.intake register source_material/Improved_Question_Set_B_Benchmark_Suite.txt`)
+ERROR  source_material/Outside_Question_Set_B_candidate_O1.txt is loose: register it (`python3 -m glm_universal.intake register source_material/Outside_Question_Set_B_candidate_O1.txt`)
+ERROR  source_material/REVERSE_CALL_PLANNER_README.md is loose: register it (`python3 -m glm_universal.intake register source_material/REVERSE_CALL_PLANNER_README.md`)
+ERROR  source_material/R_Calculus is loose: register it (`python3 -m glm_universal.intake register source_material/R_Calculus`)
+ERROR  source_material/Rule30_GLM_Study is loose: register it (`python3 -m glm_universal.intake register source_material/Rule30_GLM_Study`)
+ERROR  source_material/ToDo_01.txt is loose: register it (`python3 -m glm_universal.intake register source_material/ToDo_01.txt`)
+ERROR  source_material/UBP_LAW_GLM_REVIEW.md is loose: register it (`python3 -m glm_universal.intake register source_material/UBP_LAW_GLM_REVIEW.md`)
+ERROR  source_material/arc_agi_17 is loose: register it (`python3 -m glm_universal.intake register source_material/arc_agi_17`)
+ERROR  source_material/attention is loose: register it (`python3 -m glm_universal.intake register source_material/attention`)
+ERROR  source_material/cardinal_geometry_synthesis.md is loose: register it (`python3 -m glm_universal.intake register source_material/cardinal_geometry_synthesis.md`)
+ERROR  source_material/cent_compiler_v12 is loose: register it (`python3 -m glm_universal.intake register source_material/cent_compiler_v12`)
+ERROR  source_material/conversation_experiment is loose: register it (`python3 -m glm_universal.intake register source_material/conversation_experiment`)
+ERROR  source_material/data_condensed.txt is loose: register it (`python3 -m glm_universal.intake register source_material/data_condensed.txt`)
+ERROR  source_material/devops_ladder is loose: register it (`python3 -m glm_universal.intake register source_material/devops_ladder`)
+ERROR  source_material/formula_wheel is loose: register it (`python3 -m glm_universal.intake register source_material/formula_wheel`)
+ERROR  source_material/geometric_substrate_study.py is loose: register it (`python3 -m glm_universal.intake register source_material/geometric_substrate_study.py`)
+ERROR  source_material/glm_kit_condensed.txt is loose: register it (`python3 -m glm_universal.intake register source_material/glm_kit_condensed.txt`)
+ERROR  source_material/glm_reverse_call_planner_v2.py is loose: register it (`python3 -m glm_universal.intake register source_material/glm_reverse_call_planner_v2.py`)
+ERROR  source_material/glm_study_findings_catalog.md is loose: register it (`python3 -m glm_universal.intake register source_material/glm_study_findings_catalog.md`)
+ERROR  source_material/glm_unification_blueprint.md is loose: register it (`python3 -m glm_universal.intake register source_material/glm_unification_blueprint.md`)
+ERROR  source_material/glm_vision_experiments_v14.py is loose: register it (`python3 -m glm_universal.intake register source_material/glm_vision_experiments_v14.py`)
+ERROR  source_material/glm_wheels_bundle is loose: register it (`python3 -m glm_universal.intake register source_material/glm_wheels_bundle`)
+ERROR  source_material/glm_zero_storage_substrate_v3.txt is loose: register it (`python3 -m glm_universal.intake register source_material/glm_zero_storage_substrate_v3.txt`)
+ERROR  source_material/hidden_memory is loose: register it (`python3 -m glm_universal.intake register source_material/hidden_memory`)
+ERROR  source_material/history_recorded_now.py is loose: register it (`python3 -m glm_universal.intake register source_material/history_recorded_now.py`)
+ERROR  source_material/iter10_lorentzian.py is loose: register it (`python3 -m glm_universal.intake register source_material/iter10_lorentzian.py`)
+ERROR  source_material/pcgs_glm_integration.py is loose: register it (`python3 -m glm_universal.intake register source_material/pcgs_glm_integration.py`)
+ERROR  source_material/pcgs_wider_landscape.py is loose: register it (`python3 -m glm_universal.intake register source_material/pcgs_wider_landscape.py`)
+ERROR  source_material/pcgs_wider_landscape_v4.txt is loose: register it (`python3 -m glm_universal.intake register source_material/pcgs_wider_landscape_v4.txt`)
+ERROR  source_material/retained_laws_verified_65.csv is loose: register it (`python3 -m glm_universal.intake register source_material/retained_laws_verified_65.csv`)
+ERROR  source_material/scripts_condensed.txt is loose: register it (`python3 -m glm_universal.intake register source_material/scripts_condensed.txt`)
+ERROR  source_material/substrate_native_cognitive_1.txt is loose: register it (`python3 -m glm_universal.intake register source_material/substrate_native_cognitive_1.txt`)
+ERROR  source_material/substrate_study is loose: register it (`python3 -m glm_universal.intake register source_material/substrate_study`)
+note   attention: 1 test result(s) not taken against the code as it now stands (call:glm_universal.sandbox.attention_simulator.attention_report); the next promotion runs them again
+note   cent_compiler_v12: 5 test result(s) not taken against the code as it now stands (item:cent test, item:tests/show_work.py ...); the next promotion runs them again
+note   GLM_main: local-only file not in this checkout; on the owner's machine move it to source_material/done/GLM-main.zip
+note   Lorentz_boosts: local-only file not in this checkout; on the owner's machine move it to source_material/done/Lorentz boosts.pdf
+note   leechlean: staged file src/glm_universal/reasoning/_data/leech_lean_core.json.gz is already installed (same bytes)
+note   leechlean: 8 test result(s) not taken against the code as it now stands (item:tests/test_leechlean_in_glm.py, item:demo/demo_encode_decode.py ...); the next promotion runs them again
+note   3 item(s) absorbed ahead of the build by the owner's decision, on their measurements and a standalone Lean check; the owner's scripts/rebuild_lean.sh still has to confirm their Lean files (then `confirm-build <id>`): Rule30_GLM_Study, cent_compiler_v12, glm_wheels_bundle
+note   21 record(s) absorbed before acceptance decisions were recorded (legacy_absorption); their measurement is the closed study cited in measured: devops_ladder, GLM_Pipeline_Kit, HISTORY_RECORDED_NOW_STUDY, HISTORY_RECORDED_NOW_V2_STUDY ...
+45 records; 53 error(s), 8 note(s): FAILED

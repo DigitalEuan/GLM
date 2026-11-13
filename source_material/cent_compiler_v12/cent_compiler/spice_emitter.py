@@ -13,8 +13,159 @@ Currently supports emitting netlists for:
 Each netlist is a complete, self-contained .cir file.
 """
 from __future__ import annotations
-from typing import Optional
+from dataclasses import dataclass
+from typing import Iterable, Optional
 from .grammar import CGraph
+
+
+@dataclass(frozen=True)
+class SpiceTemplatePattern:
+    """One declared netlist topology and the ¢ operations it can represent."""
+
+    name: str
+    required: frozenset[str]
+    allowed: frozenset[str]
+    description: str
+
+
+@dataclass(frozen=True)
+class SpiceTemplateMatch:
+    """A structural template decision, including an explicit gap.
+
+    The decision reads only the complete ¢ operation set.  It is independent
+    of substrate domain and ranking, and never filters or demotes proposals.
+    """
+
+    status: str
+    template: str | None
+    present_ops: tuple[str, ...]
+    required_ops: tuple[str, ...]
+    candidates: tuple[str, ...]
+    detail: str
+    structural: bool = True
+    selection_basis: str = "complete ¢ operation set"
+    proposal_effect: str = "none"
+
+
+#: Declared structural envelopes, not a priority list.  A DAG matches only when
+#: every required operation is present and every present operation is allowed by
+#: that topology.  This prevents a later operation from being ignored merely
+#: because an earlier operation appeared first in the DAG.
+SPICE_TEMPLATE_PATTERNS: tuple[SpiceTemplatePattern, ...] = (
+    SpiceTemplatePattern(
+        "opamp_sqrt",
+        frozenset({"sqrt"}),
+        frozenset({"sqrt", "scale", "div"}),
+        "op-amp + multiplier square-root extractor",
+    ),
+    SpiceTemplatePattern(
+        "delta_sigma",
+        frozenset({"accum", "wrap"}),
+        frozenset({"accum", "wrap", "scale", "sum", "neg", "eq", "quantize", "delay"}),
+        "first-order delta-sigma loop",
+    ),
+    SpiceTemplatePattern(
+        "rc_integrator",
+        frozenset({"accum"}),
+        frozenset({"accum", "scale", "sum", "neg"}),
+        "RC integrator",
+    ),
+    SpiceTemplatePattern(
+        "diode_exp",
+        frozenset({"exp"}),
+        frozenset({"exp", "scale", "neg"}),
+        "diode exponential",
+    ),
+    SpiceTemplatePattern(
+        "log_amp",
+        frozenset({"log"}),
+        frozenset({"log", "scale", "neg"}),
+        "log amplifier",
+    ),
+    SpiceTemplatePattern(
+        "clipper",
+        frozenset({"sat"}),
+        frozenset({"sat", "scale", "neg"}),
+        "saturation/clipping stage",
+    ),
+    SpiceTemplatePattern(
+        "divider",
+        frozenset({"div"}),
+        frozenset({"div", "scale", "neg"}),
+        "analog divider",
+    ),
+    SpiceTemplatePattern(
+        "multiplier",
+        frozenset({"mult"}),
+        frozenset({"mult", "scale", "neg"}),
+        "AD633 analog multiplier",
+    ),
+    SpiceTemplatePattern(
+        "kcl_summer",
+        frozenset({"sum"}),
+        frozenset({"sum", "scale", "neg"}),
+        "KCL node summer",
+    ),
+)
+
+
+def select_spice_template(dag: CGraph | Iterable[str]) -> SpiceTemplateMatch:
+    """Match a whole ¢ DAG against the declared template envelopes.
+
+    A template is selected only if its required operations are present and the
+    complete operation set fits its declared envelope.  If more than one
+    envelope fits, no template is guessed; the result is an explicit ambiguous
+    gap.  No operation is selected merely because it appears first.
+    """
+    present = frozenset(op.op for op in dag.ops) if isinstance(dag, CGraph) else frozenset(dag)
+    candidates = tuple(
+        pattern
+        for pattern in SPICE_TEMPLATE_PATTERNS
+        if pattern.required <= present and present <= pattern.allowed
+    )
+    present_ops = tuple(sorted(present))
+    if len(candidates) == 1:
+        pattern = candidates[0]
+        return SpiceTemplateMatch(
+            "match",
+            pattern.name,
+            present_ops,
+            tuple(sorted(pattern.required)),
+            (pattern.name,),
+            f"matched {pattern.name} ({pattern.description}); "
+            f"required {', '.join(sorted(pattern.required)) or '(none)'}, "
+            f"present {', '.join(present_ops) or '(none)'}",
+            structural=True,
+            selection_basis="complete ¢ operation set",
+            proposal_effect="none",
+        )
+    if candidates:
+        names = tuple(pattern.name for pattern in candidates)
+        required = tuple(sorted({op for pattern in candidates for op in pattern.required}))
+        return SpiceTemplateMatch(
+            "ambiguous",
+            None,
+            present_ops,
+            required,
+            names,
+            "ambiguous SPICE template: multiple declared envelopes fit "
+            f"{', '.join(names)}",
+            structural=True,
+            selection_basis="complete ¢ operation set",
+            proposal_effect="none",
+        )
+    return SpiceTemplateMatch(
+        "gap",
+        None,
+        present_ops,
+        (),
+        (),
+        "no declared SPICE template covers the complete ¢ operation set "
+        f"{{{', '.join(present_ops)}}}",
+        structural=True,
+        selection_basis="complete ¢ operation set",
+        proposal_effect="none",
+    )
 
 
 def generate_spice_netlist(impl_name: str = "opamp_sqrt", **params) -> str:
@@ -267,18 +418,11 @@ def _netlist_kcl_summer(inputs: list) -> str:
 
 
 def emit_for_cent_dag(dag: CGraph, target_name: str = "opamp_sqrt") -> str:
-    """Pick the right netlist based on the ¢ DAG's structure."""
-    ops = [op.op for op in dag.ops]
-    if "sqrt" in ops:
-        return generate_spice_netlist("opamp_sqrt")
-    elif "accum" in ops and "wrap" in ops:
-        return generate_spice_netlist("delta_sigma")
-    elif "accum" in ops:
-        return generate_spice_netlist("rc_integrator")
-    elif "sum" in ops:
-        return generate_spice_netlist("kcl_summer")
-    else:
-        return f"* No SPICE template for ¢ ops: {ops}\n"
+    """Emit the structurally matched netlist, or an explicit gap comment."""
+    match = select_spice_template(dag)
+    if match.template:
+        return generate_spice_netlist(match.template)
+    return f"* No SPICE template: {match.detail}\n"
 
 
 def write_spice_netlist(impl_name: str = "opamp_sqrt", filepath: str = None, **params) -> str:

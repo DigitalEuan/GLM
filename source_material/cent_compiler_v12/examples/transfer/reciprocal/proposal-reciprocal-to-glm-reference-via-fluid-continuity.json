@@ -1,0 +1,228 @@
+{
+  "schema": "cent-proposal/1",
+  "id": "proposal-reciprocal-to-glm-reference-via-fluid-continuity",
+  "status": "unvalidated",
+  "review": {
+    "schema": "cent-proposal-review-state/1",
+    "state": "unreviewed",
+    "history": []
+  },
+  "rank": 2,
+  "score": 18,
+  "match_reasons": [
+    "stateful false match",
+    "feedback false match",
+    "encoding overlap",
+    "precision overlap"
+  ],
+  "operation": {
+    "id": "reciprocal",
+    "name": "exact reciprocal",
+    "semantics": "value = 1 / x under exact rational arithmetic; x is nonzero.",
+    "reference": {
+      "kind": "exact-arithmetic",
+      "expression": "reciprocal(x)",
+      "path": "cent_compiler/exact.py"
+    },
+    "source_tests": [
+      {
+        "id": "reciprocal-three-quarters",
+        "kind": "exact",
+        "inputs": {
+          "x": "3/4"
+        },
+        "expected": "4/3",
+        "tolerance": "0",
+        "provenance": [
+          "tests/test_transfer_contracts.py"
+        ],
+        "note": ""
+      }
+    ]
+  },
+  "target": {
+    "id": "glm-reference",
+    "kind": "software",
+    "interface": {
+      "inputs": {
+        "x": "positive exact rational",
+        "precision": "integer in 1..64",
+        "tolerance": "positive exact rational"
+      },
+      "outputs": {
+        "value": "certified rational enclosure of 1/x",
+        "checker": "exact rational reciprocal",
+        "passed": "boolean for containment and declared width"
+      },
+      "state": "none",
+      "feedback": "none",
+      "law": "value = exp(-log(x))"
+    },
+    "adapter": null
+  },
+  "mechanism": {
+    "id": "fluid-continuity",
+    "name": "fluid pipe-junction continuity",
+    "principle": "At a declared ideal pipe junction, normalized volumetric flows conserve; the junction therefore realizes exact addition of two flows without a pressure or mass parameter. A declared reversed port supplies exact negation for difference.",
+    "source_domains": [
+      "fluidics"
+    ],
+    "primitive_chain": [
+      "sum",
+      "neg"
+    ],
+    "carrier": "normalized volumetric flow",
+    "principle_id": "kcl-conservation",
+    "operators": [
+      "effort-flow-duality",
+      "composition"
+    ],
+    "laws": [
+      "q_total = q_a + q_b at a declared flow-conservation junction",
+      "q_total = q_a - q_b via a declared reversed port and the same junction"
+    ],
+    "invariants": [
+      "the declared junction preserves the signed flow sum",
+      "a reversed port changes the sign of one incoming flow",
+      "sum and difference remain exact rational operations"
+    ],
+    "failure_modes": [
+      "leakage, compressibility, junction loss and finite response are not modeled",
+      "no pressure/flow scaling, device binding or reference netlist is declared",
+      "no fabrication or measured-flow evidence"
+    ],
+    "evidence_level": "source-simulated"
+  },
+  "analogy": {
+    "kind": "behavioral-analogy",
+    "isomorphism_claimed": false,
+    "isomorphism_gap": "no exact structure-preserving mapping is declared",
+    "basis": [
+      "stateful false match",
+      "feedback false match",
+      "encoding overlap",
+      "precision overlap"
+    ],
+    "source_law": [
+      "q_total = q_a + q_b at a declared flow-conservation junction",
+      "q_total = q_a - q_b via a declared reversed port and the same junction"
+    ],
+    "target_semantics": "value = 1 / x under exact rational arithmetic; x is nonzero.",
+    "preserved": [
+      "the declared junction preserves the signed flow sum",
+      "a reversed port changes the sign of one incoming flow",
+      "sum and difference remain exact rational operations"
+    ],
+    "relaxed": [],
+    "validity": [
+      "two normalized exact rational flows",
+      "both flows are inside the declared linear junction range",
+      "the exact route carries no pressure/flow scaling",
+      "difference uses an ideal reversed-port sign convention"
+    ]
+  },
+  "relaxation": {
+    "schema": "cent-relaxation/1",
+    "classification": "unclassified",
+    "basis": "no target-level relaxation evidence; candidate-only",
+    "evidence_level": "none",
+    "target": ""
+  },
+  "mapping": [
+    {
+      "source": "operation reciprocal",
+      "target": "target glm-reference operation",
+      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+      "kind": "correspondence",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "tests/test_assembly.py",
+        "docs/FLUID_SUM.md"
+      ],
+      "gaps": [
+        "target execution is not established by retrieval alone"
+      ]
+    },
+    {
+      "source": "generated fluid-continuity interpretation",
+      "target": "glm-reference duality model",
+      "law": "map source effort/flow quantities through the declared dual pair",
+      "kind": "duality",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "tests/test_assembly.py",
+        "docs/FLUID_SUM.md"
+      ],
+      "gaps": [
+        "target effort/flow pair is not declared"
+      ]
+    },
+    {
+      "source": "generated fluid-continuity interpretation",
+      "target": "glm-reference composition model",
+      "law": "preserve the declared primitive composition order",
+      "kind": "composition",
+      "provenance": [
+        "cent_compiler/assembly.py",
+        "tests/test_assembly.py",
+        "docs/FLUID_SUM.md"
+      ],
+      "gaps": [
+        "target composition semantics are not declared"
+      ]
+    }
+  ],
+  "handoff": {
+    "readiness": "needs-target-adapter",
+    "environment": {
+      "kind": "in-process",
+      "available": true
+    },
+    "command": null,
+    "fixed_vectors": [],
+    "next_action": "Declare a target adapter and fixed vectors for this operation and mechanism, then run the target certificate."
+  },
+  "evidence": {
+    "candidate_level": "source-simulated",
+    "mechanism_level": "source-simulated",
+    "target_level": "not-executed",
+    "proposal_level": "unvalidated"
+  },
+  "checks": [
+    {
+      "name": "mechanism support",
+      "status": "pass",
+      "detail": "fluid-continuity declares support for reciprocal"
+    },
+    {
+      "name": "mapping declared",
+      "status": "pass",
+      "detail": "3 mapping step(s)"
+    },
+    {
+      "name": "target adapter",
+      "status": "gap",
+      "detail": "no executable adapter for this operation/mechanism"
+    },
+    {
+      "name": "isomorphism",
+      "status": "gap",
+      "detail": "analogy only; no exact isomorphism is declared"
+    }
+  ],
+  "gaps": [
+    "no pressure/flow scaling, device binding or reference netlist",
+    "target coverage is normalized-flow software only; no measured junction",
+    "proposal is a plan, not a target validation",
+    "no exact structure-preserving isomorphism is claimed"
+  ],
+  "provenance": [
+    "cent_compiler/exact.py",
+    "tests/test_transfer_contracts.py",
+    "cent_compiler/assembly.py",
+    "tests/test_assembly.py",
+    "docs/FLUID_SUM.md",
+    "docs/TRANSFER_COMPILER_OBJECTIVE.md",
+    "cent_compiler/targets/glm.py"
+  ]
+}

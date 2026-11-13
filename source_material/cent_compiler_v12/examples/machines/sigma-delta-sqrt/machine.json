@@ -1,0 +1,1083 @@
+{
+  "ok": true,
+  "schema": "cent-machine/1",
+  "id": "sigma-delta-sqrt",
+  "label": "MACHINE: Y_out(t) ≈ √2",
+  "status": "executable-digital-branch",
+  "target": {
+    "id": "glm-reference",
+    "value": 1.4142135623730951,
+    "label": "sqrt(2)"
+  },
+  "tree": {
+    "schema": "cent-machine-tree/1",
+    "id": "sigma-delta-sqrt",
+    "label": "MACHINE: Y_out(t) ≈ √2",
+    "status": "partial",
+    "permalink": "machine://sigma-delta-sqrt",
+    "root": {
+      "path": "0",
+      "name": "Y_out(t) ≈ √2",
+      "kind": "function",
+      "law": "carry and recover the declared irrational sqrt(2) as a one-bit temporal stream",
+      "status": "partial",
+      "evidence": "executable-digital-branch",
+      "implementation": {
+        "kind": "machine",
+        "digital_branch": "executed",
+        "analog_branch": "declared-gap"
+      },
+      "constraints": [
+        "the declared target is sqrt(2)",
+        "the executed loop is first-order error feedback",
+        "the one-bit stream is reconstructed by block decimation"
+      ],
+      "gaps": [
+        "the analog output branch is not executed",
+        "the timing and supply constraints are not modeled"
+      ],
+      "children": [
+        {
+          "path": "1",
+          "name": "INPUT & REFERENCE CONDITIONING",
+          "kind": "group",
+          "law": "condition a physical signal and bound the loop rails",
+          "inputs": [],
+          "outputs": [],
+          "status": "declared",
+          "evidence": "declared",
+          "implementation": {
+            "kind": "stage-group"
+          },
+          "constraints": [],
+          "gaps": [
+            "the input conditioning chain is declared, not transient-simulated"
+          ],
+          "children": [
+            {
+              "path": "1.1",
+              "name": "Physical input source",
+              "kind": "source",
+              "law": "x_raw(t) = A·√2 + n_env(t), A = 1.0",
+              "inputs": [],
+              "outputs": [
+                "x_raw"
+              ],
+              "status": "declared",
+              "evidence": "declared-input",
+              "implementation": {
+                "kind": "declared-constant",
+                "amplitude": 1.0,
+                "target": 1.4142135623730951,
+                "detail": "√2 is the declared DC target; no environmental noise is injected"
+              },
+              "constraints": [],
+              "gaps": [
+                "n_env(t) is not modeled or measured"
+              ],
+              "children": []
+            },
+            {
+              "path": "1.2",
+              "name": "Anti-aliasing filter",
+              "kind": "filter",
+              "law": "H_aaf(s) = 1 / (1 + s·R·C); x_in = x_raw * h_aaf",
+              "inputs": [
+                "x_raw"
+              ],
+              "outputs": [
+                "x_in"
+              ],
+              "status": "declared",
+              "evidence": "declared-law",
+              "implementation": {
+                "kind": "declared-first-order-rc",
+                "detail": "the DC machine does not run a continuous-time RC transient"
+              },
+              "constraints": [],
+              "gaps": [
+                "no RC value, bandwidth or transient response is declared"
+              ],
+              "children": []
+            },
+            {
+              "path": "1.3",
+              "name": "Reference scaling",
+              "kind": "constraint",
+              "law": "V_ref > 1.4142·A; x_norm = x_raw·input_scale",
+              "inputs": [],
+              "outputs": [
+                "V_ref",
+                "x_norm"
+              ],
+              "status": "declared",
+              "evidence": "declared-constraint",
+              "implementation": {
+                "kind": "declared-rail",
+                "input_scale": 0.700035713374682,
+                "normalized_input": 0.99,
+                "reconstruction_scale": 1.4284985478516115,
+                "detail": "the model uses a normalized ±1 feedback level; sqrt(2)·0.700035713374682 = 0.990000000000000, and the decimated result is multiplied by 1.428498547851611"
+              },
+              "constraints": [],
+              "gaps": [
+                "no actual rail voltage, headroom or overload model"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "path": "2",
+          "name": "CORE SIGMA-DELTA MODULATOR LOOP",
+          "kind": "group",
+          "law": "error feedback with a one-bit quantizer and a delayed DAC",
+          "inputs": [],
+          "outputs": [],
+          "status": "executed",
+          "evidence": "executed",
+          "implementation": {
+            "kind": "stage-group"
+          },
+          "constraints": [
+            "closed loop",
+            "oversampled",
+            "one-bit quantizer"
+          ],
+          "gaps": [],
+          "children": [
+            {
+              "path": "2.1",
+              "name": "Summing junction (error node)",
+              "kind": "summing-junction",
+              "law": "e[n] = x_in[n] - y_dac[n]",
+              "inputs": [
+                "x_in",
+                "y_dac"
+              ],
+              "outputs": [
+                "e"
+              ],
+              "status": "executed",
+              "evidence": "executed-model",
+              "implementation": {
+                "kind": "compiler-selected-part",
+                "operation": "sum",
+                "mechanism": "kcl-conservation",
+                "candidate": "sum-to-glm-reference-via-kcl-conservation",
+                "rank": 2,
+                "source_domain": "electronics",
+                "evidence_level": "source-simulated"
+              },
+              "constraints": [
+                "signed exact sum",
+                "error node inside the loop"
+              ],
+              "gaps": [],
+              "children": [],
+              "selection": {
+                "schema": "cent-machine-selection/1",
+                "operation": "sum",
+                "target": "glm-reference",
+                "preferred_domains": [
+                  "electronics"
+                ],
+                "policy": "highest compiler rank with declared operation support and a source domain compatible with the machine path; otherwise the top-ranked supported candidate",
+                "selected": {
+                  "id": "sum-to-glm-reference-via-kcl-conservation",
+                  "rank": 2,
+                  "mechanism": "kcl-conservation",
+                  "source_domain": "electronics",
+                  "target": "glm-reference",
+                  "evidence_level": "source-simulated",
+                  "status": "candidate",
+                  "declared_support": [
+                    "sum",
+                    "difference"
+                  ],
+                  "preserved": [
+                    "the declared junction preserves the signed current sum",
+                    "sum and difference remain exact rational operations"
+                  ],
+                  "mapping_laws": [
+                    {
+                      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+                      "kind": "correspondence",
+                      "source": "operation sum",
+                      "target": "target glm-reference operation"
+                    },
+                    {
+                      "law": "sum -> neg",
+                      "kind": "composition",
+                      "source": "mechanism primitive chain",
+                      "target": "target operation decomposition"
+                    }
+                  ],
+                  "gaps": [
+                    "no physical voltage/current mapping or reference netlist",
+                    "target coverage is software reference/live KCL only; no physical junction measurement"
+                  ]
+                },
+                "alternatives": [
+                  {
+                    "id": "sum-to-glm-reference-via-fluid-continuity",
+                    "rank": 1,
+                    "mechanism": "fluid-continuity",
+                    "source_domain": "fluidics",
+                    "evidence_level": "source-simulated"
+                  },
+                  {
+                    "id": "sum-to-glm-reference-via-kcl-conservation",
+                    "rank": 2,
+                    "mechanism": "kcl-conservation",
+                    "source_domain": "electronics",
+                    "evidence_level": "source-simulated"
+                  },
+                  {
+                    "id": "sum-to-glm-reference-via-opamp-summing",
+                    "rank": 3,
+                    "mechanism": "opamp-summing",
+                    "source_domain": "electronics",
+                    "evidence_level": "source-simulated"
+                  }
+                ],
+                "declared_support_count": 3,
+                "complete": true,
+                "gap": null
+              }
+            },
+            {
+              "path": "2.2",
+              "name": "Loop filter",
+              "kind": "loop-filter",
+              "law": "u[n] = u[n-1] + e[n-1]; H_loop(z) = 1 / (1 - z^-1)",
+              "inputs": [
+                "e"
+              ],
+              "outputs": [
+                "u"
+              ],
+              "status": "executed",
+              "evidence": "executed-model",
+              "implementation": {
+                "kind": "executed-model",
+                "model": "DeltaSigmaEngine.step",
+                "detail": "first-order error-feedback integrator; the executed baseline"
+              },
+              "constraints": [
+                "one state variable",
+                "unit feedback"
+              ],
+              "gaps": [
+                "the sketched leaky second-order loop is not the executed baseline",
+                "no capacitor mismatch, finite gain or leakage is modeled"
+              ],
+              "children": []
+            },
+            {
+              "path": "2.3",
+              "name": "1-bit quantizer",
+              "kind": "quantizer",
+              "law": "b[n] = sgn(u[n]) in {-1, +1}",
+              "inputs": [
+                "u"
+              ],
+              "outputs": [
+                "b"
+              ],
+              "status": "executed",
+              "evidence": "executed-model",
+              "implementation": {
+                "kind": "compiler-selected-part",
+                "operation": "sign",
+                "mechanism": "threshold-comparator",
+                "candidate": "sign-to-glm-reference-via-threshold-comparator",
+                "rank": 1,
+                "source_domain": "electronics",
+                "evidence_level": "structural"
+              },
+              "constraints": [
+                "hard threshold at zero",
+                "no multi-bit output"
+              ],
+              "gaps": [],
+              "children": [],
+              "selection": {
+                "schema": "cent-machine-selection/1",
+                "operation": "sign",
+                "target": "glm-reference",
+                "preferred_domains": [
+                  "electronics"
+                ],
+                "policy": "highest compiler rank with declared operation support and a source domain compatible with the machine path; otherwise the top-ranked supported candidate",
+                "selected": {
+                  "id": "sign-to-glm-reference-via-threshold-comparator",
+                  "rank": 1,
+                  "mechanism": "threshold-comparator",
+                  "source_domain": "electronics",
+                  "target": "glm-reference",
+                  "evidence_level": "structural",
+                  "status": "candidate",
+                  "declared_support": [
+                    "sign"
+                  ],
+                  "preserved": [
+                    "the output is one of -1, 0 or +1",
+                    "the declared zero crossing is exact",
+                    "negative and positive inputs saturate to opposite bounded rails"
+                  ],
+                  "mapping_laws": [
+                    {
+                      "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+                      "kind": "correspondence",
+                      "source": "operation sign",
+                      "target": "target glm-reference operation"
+                    },
+                    {
+                      "law": "sat -> sum",
+                      "kind": "composition",
+                      "source": "mechanism primitive chain",
+                      "target": "target operation decomposition"
+                    }
+                  ],
+                  "gaps": [
+                    "target evidence is a software reference only; no measured comparator",
+                    "comparator offset, hysteresis and metastability are not modeled"
+                  ]
+                },
+                "alternatives": [
+                  {
+                    "id": "sign-to-glm-reference-via-threshold-comparator",
+                    "rank": 1,
+                    "mechanism": "threshold-comparator",
+                    "source_domain": "electronics",
+                    "evidence_level": "structural"
+                  },
+                  {
+                    "id": "sign-to-glm-reference-via-fluid-continuity",
+                    "rank": 2,
+                    "mechanism": "fluid-continuity",
+                    "source_domain": "fluidics",
+                    "evidence_level": "source-simulated"
+                  },
+                  {
+                    "id": "sign-to-glm-reference-via-kcl-conservation",
+                    "rank": 3,
+                    "mechanism": "kcl-conservation",
+                    "source_domain": "electronics",
+                    "evidence_level": "source-simulated"
+                  }
+                ],
+                "declared_support_count": 1,
+                "complete": true,
+                "gap": null
+              }
+            },
+            {
+              "path": "2.4",
+              "name": "1-bit feedback DAC",
+              "kind": "feedback-dac",
+              "law": "y_dac[n] = V_ref·b[n] (zero-order hold)",
+              "inputs": [
+                "b"
+              ],
+              "outputs": [
+                "y_dac"
+              ],
+              "status": "executed",
+              "evidence": "executed-model",
+              "implementation": {
+                "kind": "executed-model",
+                "model": "unit feedback in DeltaSigmaEngine",
+                "detail": "ideal ±1 feedback with a one-sample delay"
+              },
+              "constraints": [
+                "ideal feedback levels",
+                "zero-order hold"
+              ],
+              "gaps": [
+                "no DAC mismatch, settling, clock feedthrough or output impedance"
+              ],
+              "children": []
+            },
+            {
+              "path": "2.5",
+              "name": "Closed-loop output node",
+              "kind": "output-node",
+              "law": "B(z) = STF(z)·X(z) + NTF(z)·Q(z)",
+              "inputs": [
+                "x_in",
+                "q"
+              ],
+              "outputs": [
+                "B"
+              ],
+              "status": "executed",
+              "evidence": "executed-model",
+              "implementation": {
+                "kind": "executed-model",
+                "model": "DeltaSigmaEngine.modulate",
+                "detail": "the emitted bitstream and its measured spectrum",
+                "note": "The measured slope is a finite-window log-PSD fit, not an asymptotic filter order; the ideal first-order NTF is 20.00 dB/dec."
+              },
+              "constraints": [
+                "superposition is a declared linear model",
+                "one-bit output"
+              ],
+              "gaps": [
+                "STF/NTF are measured from the bitstream, not from a circuit netlist"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "path": "3",
+          "name": "TIMING & ENERGY BACKBONE",
+          "kind": "group",
+          "law": "constraints that set the realizable clock and supply boundary",
+          "inputs": [],
+          "outputs": [],
+          "status": "declared",
+          "evidence": "declared",
+          "implementation": {
+            "kind": "stage-group"
+          },
+          "constraints": [],
+          "gaps": [
+            "timing and supply are declared constraints, not simulated"
+          ],
+          "children": [
+            {
+              "path": "3.1",
+              "name": "Master clock sampling",
+              "kind": "timing",
+              "law": "t_n = n·T_s + Δt_jitter[n]",
+              "inputs": [],
+              "outputs": [
+                "t_n"
+              ],
+              "status": "gap",
+              "evidence": "declared-gap",
+              "implementation": {
+                "kind": "declared-constraint",
+                "detail": "a uniform sample clock is assumed; no jitter process is run"
+              },
+              "constraints": [],
+              "gaps": [
+                "clock jitter variance and its SQNR floor are not modeled"
+              ],
+              "children": []
+            },
+            {
+              "path": "3.2",
+              "name": "Power-supply rejection",
+              "kind": "energy",
+              "law": "V_rail(t) = V_dc + PSRR·δv_digital(t)",
+              "inputs": [],
+              "outputs": [
+                "V_rail"
+              ],
+              "status": "gap",
+              "evidence": "declared-gap",
+              "implementation": {
+                "kind": "declared-constraint",
+                "detail": "the model has no supply node or switching coupling"
+              },
+              "constraints": [],
+              "gaps": [
+                "PSRR, supply impedance and digital coupling are not modeled"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "path": "4",
+          "name": "RECONSTRUCTION / DEMODULATION STAGE",
+          "kind": "group",
+          "law": "extract the target value in digital and physical forms",
+          "inputs": [],
+          "outputs": [],
+          "status": "partial",
+          "evidence": "mixed",
+          "implementation": {
+            "kind": "stage-group"
+          },
+          "constraints": [],
+          "gaps": [],
+          "children": [
+            {
+              "path": "4A",
+              "name": "Digital output branch",
+              "kind": "branch",
+              "law": "decimate the bitstream and reconstruct the target value",
+              "inputs": [],
+              "outputs": [],
+              "status": "executed",
+              "evidence": "executed",
+              "implementation": {
+                "kind": "stage-group"
+              },
+              "constraints": [
+                "digital reconstruction"
+              ],
+              "gaps": [],
+              "children": [
+                {
+                  "path": "4A.1",
+                  "name": "CIC / FIR low-pass filter",
+                  "kind": "decimator",
+                  "law": "H_dec(z) = [(1 - z^-M) / (1 - z^-1)]^K",
+                  "inputs": [
+                    "B"
+                  ],
+                  "outputs": [
+                    "filtered"
+                  ],
+                  "status": "executed",
+                  "evidence": "executed-model",
+                  "implementation": {
+                    "kind": "executed-model",
+                    "model": "block-average decimator",
+                    "detail": "K=1 boxcar over M=OSR samples; the declared CIC first stage"
+                  },
+                  "constraints": [
+                    "M = OSR",
+                    "K = 1"
+                  ],
+                  "gaps": [
+                    "higher-order CIC stages and FIR passband/stopband design are not modeled"
+                  ],
+                  "children": []
+                },
+                {
+                  "path": "4A.2",
+                  "name": "Downsampler",
+                  "kind": "downsampler",
+                  "law": "Y_dig[k] = (b * h_dec)[k·M] ≈ √2",
+                  "inputs": [
+                    "filtered"
+                  ],
+                  "outputs": [
+                    "Y_dig"
+                  ],
+                  "status": "executed",
+                  "evidence": "executed-model",
+                  "implementation": {
+                    "kind": "executed-model",
+                    "model": "block decimation",
+                    "detail": "1562 words"
+                  },
+                  "constraints": [
+                    "M = OSR",
+                    "one output word per full block"
+                  ],
+                  "gaps": [],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "path": "4B",
+              "name": "Analog / physical output branch",
+              "kind": "branch",
+              "law": "reconstruct the one-bit stream into a physical load",
+              "inputs": [],
+              "outputs": [],
+              "status": "gap",
+              "evidence": "declared-gap",
+              "implementation": {
+                "kind": "stage-group"
+              },
+              "constraints": [],
+              "gaps": [
+                "the analog branch is declared but not executed"
+              ],
+              "children": [
+                {
+                  "path": "4B.1",
+                  "name": "Reconstruction filter",
+                  "kind": "analog-filter",
+                  "law": "H_rec(s) = ω0² / (s² + (ω0/Q)·s + ω0²)",
+                  "inputs": [
+                    "y_dac"
+                  ],
+                  "outputs": [
+                    "y_rec"
+                  ],
+                  "status": "gap",
+                  "evidence": "declared-gap",
+                  "implementation": {
+                    "kind": "declared-sallen-key",
+                    "detail": "the Sallen-Key stage is declared, not simulated"
+                  },
+                  "constraints": [],
+                  "gaps": [
+                    "no ω0, Q, component values or analog transient"
+                  ],
+                  "children": []
+                },
+                {
+                  "path": "4B.2",
+                  "name": "Power buffer / actuator",
+                  "kind": "output-buffer",
+                  "law": "Y_phys(t) = G_driver·(y_dac * h_rec)(t) ≈ √2",
+                  "inputs": [
+                    "y_rec"
+                  ],
+                  "outputs": [
+                    "Y_phys"
+                  ],
+                  "status": "gap",
+                  "evidence": "declared-gap",
+                  "implementation": {
+                    "kind": "declared-buffer",
+                    "detail": "the physical load branch is a concept, not a simulated driver"
+                  },
+                  "constraints": [],
+                  "gaps": [
+                    "no load, driver, power stage or measured output"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "selections": {
+    "sum": {
+      "schema": "cent-machine-selection/1",
+      "operation": "sum",
+      "target": "glm-reference",
+      "preferred_domains": [
+        "electronics"
+      ],
+      "policy": "highest compiler rank with declared operation support and a source domain compatible with the machine path; otherwise the top-ranked supported candidate",
+      "selected": {
+        "id": "sum-to-glm-reference-via-kcl-conservation",
+        "rank": 2,
+        "mechanism": "kcl-conservation",
+        "source_domain": "electronics",
+        "target": "glm-reference",
+        "evidence_level": "source-simulated",
+        "status": "candidate",
+        "declared_support": [
+          "sum",
+          "difference"
+        ],
+        "preserved": [
+          "the declared junction preserves the signed current sum",
+          "sum and difference remain exact rational operations"
+        ],
+        "mapping_laws": [
+          {
+            "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+            "kind": "correspondence",
+            "source": "operation sum",
+            "target": "target glm-reference operation"
+          },
+          {
+            "law": "sum -> neg",
+            "kind": "composition",
+            "source": "mechanism primitive chain",
+            "target": "target operation decomposition"
+          }
+        ],
+        "gaps": [
+          "no physical voltage/current mapping or reference netlist",
+          "target coverage is software reference/live KCL only; no physical junction measurement"
+        ]
+      },
+      "alternatives": [
+        {
+          "id": "sum-to-glm-reference-via-fluid-continuity",
+          "rank": 1,
+          "mechanism": "fluid-continuity",
+          "source_domain": "fluidics",
+          "evidence_level": "source-simulated"
+        },
+        {
+          "id": "sum-to-glm-reference-via-kcl-conservation",
+          "rank": 2,
+          "mechanism": "kcl-conservation",
+          "source_domain": "electronics",
+          "evidence_level": "source-simulated"
+        },
+        {
+          "id": "sum-to-glm-reference-via-opamp-summing",
+          "rank": 3,
+          "mechanism": "opamp-summing",
+          "source_domain": "electronics",
+          "evidence_level": "source-simulated"
+        }
+      ],
+      "declared_support_count": 3,
+      "complete": true,
+      "gap": null
+    },
+    "sign": {
+      "schema": "cent-machine-selection/1",
+      "operation": "sign",
+      "target": "glm-reference",
+      "preferred_domains": [
+        "electronics"
+      ],
+      "policy": "highest compiler rank with declared operation support and a source domain compatible with the machine path; otherwise the top-ranked supported candidate",
+      "selected": {
+        "id": "sign-to-glm-reference-via-threshold-comparator",
+        "rank": 1,
+        "mechanism": "threshold-comparator",
+        "source_domain": "electronics",
+        "target": "glm-reference",
+        "evidence_level": "structural",
+        "status": "candidate",
+        "declared_support": [
+          "sign"
+        ],
+        "preserved": [
+          "the output is one of -1, 0 or +1",
+          "the declared zero crossing is exact",
+          "negative and positive inputs saturate to opposite bounded rails"
+        ],
+        "mapping_laws": [
+          {
+            "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+            "kind": "correspondence",
+            "source": "operation sign",
+            "target": "target glm-reference operation"
+          },
+          {
+            "law": "sat -> sum",
+            "kind": "composition",
+            "source": "mechanism primitive chain",
+            "target": "target operation decomposition"
+          }
+        ],
+        "gaps": [
+          "target evidence is a software reference only; no measured comparator",
+          "comparator offset, hysteresis and metastability are not modeled"
+        ]
+      },
+      "alternatives": [
+        {
+          "id": "sign-to-glm-reference-via-threshold-comparator",
+          "rank": 1,
+          "mechanism": "threshold-comparator",
+          "source_domain": "electronics",
+          "evidence_level": "structural"
+        },
+        {
+          "id": "sign-to-glm-reference-via-fluid-continuity",
+          "rank": 2,
+          "mechanism": "fluid-continuity",
+          "source_domain": "fluidics",
+          "evidence_level": "source-simulated"
+        },
+        {
+          "id": "sign-to-glm-reference-via-kcl-conservation",
+          "rank": 3,
+          "mechanism": "kcl-conservation",
+          "source_domain": "electronics",
+          "evidence_level": "source-simulated"
+        }
+      ],
+      "declared_support_count": 1,
+      "complete": true,
+      "gap": null
+    },
+    "quantized_carry": {
+      "schema": "cent-machine-selection/1",
+      "operation": "quantized_carry",
+      "target": "glm-reference",
+      "preferred_domains": [
+        "audio",
+        "electronics"
+      ],
+      "policy": "highest compiler rank with declared operation support and a source domain compatible with the machine path; otherwise the top-ranked supported candidate",
+      "selected": {
+        "id": "quantized_carry-to-glm-reference-via-delta-sigma-error-feedback",
+        "rank": 1,
+        "mechanism": "delta-sigma-error-feedback",
+        "source_domain": "audio",
+        "target": "glm-reference",
+        "evidence_level": "source-simulated",
+        "status": "candidate",
+        "declared_support": [
+          "quantized_carry"
+        ],
+        "preserved": [
+          "the loop state stays inside the declared integrator limit for the declared input range",
+          "the exact code mean reconstructs a constant input within the declared quantum"
+        ],
+        "mapping_laws": [
+          {
+            "law": "preserve the typed operation semantics; execution evidence is recorded separately",
+            "kind": "correspondence",
+            "source": "operation quantized_carry",
+            "target": "target glm-reference operation"
+          },
+          {
+            "law": "neg -> sum -> accum -> quantize -> sat -> delay",
+            "kind": "composition",
+            "source": "mechanism primitive chain",
+            "target": "target operation decomposition"
+          },
+          {
+            "law": "carry the mechanism state through an explicit target state transform",
+            "kind": "state",
+            "source": "mechanism state",
+            "target": "target state"
+          },
+          {
+            "law": "preserve the declared quantization law and code reconstruction",
+            "kind": "quantization",
+            "source": "mechanism quantized output",
+            "target": "target bounded code"
+          },
+          {
+            "law": "preserve the feedback topology; target loop dynamics remain undeclared",
+            "kind": "feedback",
+            "source": "mechanism feedback path",
+            "target": "target feedback path"
+          }
+        ],
+        "gaps": [
+          "target coverage is reference-only; no live GLM carry adapter",
+          "no measured bit-budget or latency contract"
+        ]
+      },
+      "alternatives": [
+        {
+          "id": "quantized_carry-to-glm-reference-via-delta-sigma-error-feedback",
+          "rank": 1,
+          "mechanism": "delta-sigma-error-feedback",
+          "source_domain": "audio",
+          "evidence_level": "source-simulated"
+        },
+        {
+          "id": "quantized_carry-to-glm-reference-via-pll-phase-tracking",
+          "rank": 2,
+          "mechanism": "pll-phase-tracking",
+          "source_domain": "electronics",
+          "evidence_level": "source-simulated"
+        },
+        {
+          "id": "quantized_carry-to-glm-reference-via-orifice-pressure-flow",
+          "rank": 3,
+          "mechanism": "orifice-pressure-flow",
+          "source_domain": "fluidics",
+          "evidence_level": "structural"
+        }
+      ],
+      "declared_support_count": 1,
+      "complete": true,
+      "gap": null
+    }
+  },
+  "load": {
+    "requested": "analog",
+    "domain": "electrical",
+    "status": "declared-gap",
+    "transducer": null,
+    "wheel_pair": [],
+    "equations": [],
+    "unit_scale_matrix": {},
+    "gap": "the electrical reconstruction filter and power buffer are declared, not simulated"
+  },
+  "coverage": {
+    "required_roles": [
+      "source",
+      "anti-alias filter",
+      "reference scaling",
+      "summing junction",
+      "loop filter",
+      "quantizer",
+      "feedback DAC",
+      "master clock",
+      "supply rejection",
+      "decimator",
+      "reconstruction filter",
+      "power buffer"
+    ],
+    "present_roles": [
+      "source",
+      "anti-alias filter",
+      "reference scaling",
+      "summing junction",
+      "loop filter",
+      "quantizer",
+      "feedback DAC",
+      "master clock",
+      "supply rejection",
+      "decimator",
+      "reconstruction filter",
+      "power buffer"
+    ],
+    "missing_roles": [],
+    "modeled_roles": [
+      "CORE SIGMA-DELTA MODULATOR LOOP",
+      "Summing junction (error node)",
+      "Loop filter",
+      "1-bit quantizer",
+      "1-bit feedback DAC",
+      "Closed-loop output node",
+      "Digital output branch",
+      "CIC / FIR low-pass filter",
+      "Downsampler"
+    ],
+    "declared_roles": [
+      "INPUT & REFERENCE CONDITIONING",
+      "Physical input source",
+      "Anti-aliasing filter",
+      "Reference scaling",
+      "TIMING & ENERGY BACKBONE"
+    ],
+    "gap_roles": [
+      "Master clock sampling",
+      "Power-supply rejection",
+      "Analog / physical output branch",
+      "Reconstruction filter",
+      "Power buffer / actuator"
+    ]
+  },
+  "validation": {
+    "schema": "cent-machine-validation/1",
+    "status": "pass",
+    "ok": true,
+    "model": "delta-sigma first-order error-feedback engine",
+    "target_value": 1.4142135623730951,
+    "target_label": "sqrt(2)",
+    "input_scale": 0.700035713374682,
+    "normalized_input": 0.99,
+    "reconstruction_scale": 1.4284985478516115,
+    "samples": 100000,
+    "osr": 64,
+    "sample_rate_hz": 1000000.0,
+    "bitstream_head": "1111111111111111111111111111111111111111111111111111111111111111",
+    "metrics": {
+      "digital_output": 1.4142089897144914,
+      "digital_error": 4.572658603763102e-06,
+      "inband_noise_suppression_db": 36.91721865537119,
+      "ntf_slope_db_per_dec": 28.01810271709968,
+      "decimated_words": 1562,
+      "tail_words": 390
+    },
+    "checks": [
+      {
+        "name": "one-bit bitstream",
+        "status": "pass",
+        "detail": "100000 samples; values are exactly -1 and +1"
+      },
+      {
+        "name": "decimated sqrt(2) output",
+        "status": "pass",
+        "detail": "decimated=1.414208989714491; target=1.414213562373095; error=4.573e-06; tolerance=1e-04"
+      },
+      {
+        "name": "in-band noise suppression",
+        "status": "pass",
+        "detail": "36.92 dB measured against the unshaped reference"
+      },
+      {
+        "name": "noise-transfer slope",
+        "status": "pass",
+        "detail": "28.02 dB/decade measured from the bitstream spectrum"
+      }
+    ],
+    "ntf_fit": {
+      "method": "log-binned PSD linear fit",
+      "bins": 50,
+      "min_frequency_hz": 10.0,
+      "max_frequency_hz": 250000.0,
+      "note": "The 28.02 dB/dec figure is a finite-window fit near the loop corner; the ideal first-order asymptotic NTF slope is 20.00 dB/dec."
+    },
+    "ntf_slope_note": "The measured slope is a finite-window log-PSD fit, not an asymptotic filter order; the ideal first-order NTF is 20.00 dB/dec.",
+    "gaps": [
+      "the analog reconstruction and power-buffer branches are not simulated",
+      "clock jitter, supply rejection, the anti-alias filter and the reference rail are not transient-modeled",
+      "the spectrum is a bitstream model, not a measured SQNR of a physical modulator"
+    ]
+  },
+  "checks": [
+    {
+      "name": "complete machine roles",
+      "status": "pass",
+      "detail": "12/12 required roles are present"
+    },
+    {
+      "name": "compiler-selected core parts",
+      "status": "pass",
+      "detail": "3/3 core stage selections are complete"
+    },
+    {
+      "name": "executable digital branch",
+      "status": "pass",
+      "detail": "output error 4.572658603763102e-06"
+    },
+    {
+      "name": "declared boundary",
+      "status": "pass",
+      "detail": "analog, timing and supply stages remain explicit gaps"
+    }
+  ],
+  "gaps": [
+    "the analog reconstruction and power-buffer branches are declared, not simulated",
+    "clock jitter and supply rejection are declared constraints, not modeled",
+    "the anti-alias filter and reference rail are declared, not transient-simulated",
+    "machine.cir is a behavioral electrical core, not a fabrication netlist",
+    "no measured device or physical prototype is claimed",
+    "the electrical reconstruction filter and power buffer are declared, not simulated"
+  ],
+  "artifacts": {
+    "machine_json": "machine.json",
+    "machine_markdown": "machine.md",
+    "core_cir": {
+      "file": "machine.cir",
+      "kind": "behavioral-electrical-core",
+      "active_transient": false,
+      "fabrication": false
+    }
+  },
+  "headline": "12/12 required roles present; 3/3 core parts selected; digital error 4.573e-06; 5 unmodeled stage(s) remain gaps.",
+  "claim": "A machine composes declared stages into a complete concept and executes only the stages named in its validation. It is not a fabricated device, no measured device is claimed, and it is not a proof that every declared physical stage works.",
+  "output_certificate": {
+    "schema": "cent-output-certificate/1",
+    "subject_schema": "cent-machine/1",
+    "status": "partial",
+    "checks": [
+      {
+        "name": "complete machine roles",
+        "status": "pass",
+        "detail": "12/12 required roles are present"
+      },
+      {
+        "name": "compiler-selected core parts",
+        "status": "pass",
+        "detail": "3/3 core stage selections are complete"
+      },
+      {
+        "name": "executable digital branch",
+        "status": "pass",
+        "detail": "output error 4.572658603763102e-06"
+      },
+      {
+        "name": "declared boundary",
+        "status": "pass",
+        "detail": "analog, timing and supply stages remain explicit gaps"
+      }
+    ],
+    "gaps": [
+      "the analog reconstruction and power-buffer branches are declared, not simulated",
+      "clock jitter and supply rejection are declared constraints, not modeled",
+      "the anti-alias filter and reference rail are declared, not transient-simulated",
+      "machine.cir is a behavioral electrical core, not a fabrication netlist",
+      "no measured device or physical prototype is claimed",
+      "the electrical reconstruction filter and power buffer are declared, not simulated"
+    ],
+    "claim": "This certificate covers only the declared exact/structural checks in this payload; it is not measured-device, fabrication, physical-proof or manufacturing evidence."
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "ok": true,
+  "schema": "cent-hypothesis-resolution/1",
+  "lead": {
+    "id": "nematic-q-tensor-bounding-box",
+    "operation": "bounding_box",
+    "title": "Nematic Q-tensor orientation envelope",
+    "statement": "A nematic director/Q-tensor may provide an orientation-family representation for the finite-direction minimum-area envelope. No Q-tensor-to-projection map or equivalence is declared.",
+    "candidate_chain": [
+      "spatial"
+    ],
+    "source": "user-supplied review lead (2026-11-11)",
+    "status": "doesnt_know",
+    "needs": [
+      "proof:map Q-tensor invariants to the envelope's finite-direction projections",
+      "test:compare exact corners and area over declared point sets",
+      "definition:director/Q-tensor normalization and boundary conditions"
+    ],
+    "gaps": [
+      "no Q-tensor contract, map or exact probe",
+      "no claim that a physical liquid-crystal state exists"
+    ],
+    "admitted": false,
+    "promotion_requires": [
+      "declared mechanism card with an explicit supported operation",
+      "operation semantics and at least one fixed reference test",
+      "exact probe or target adapter evidence",
+      "reviewed promotion; no automatic supported_operations change"
+    ],
+    "supported_operations_changed": false
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "need": "proof:map Q-tensor invariants to the envelope's finite-direction projections",
+      "kind": "proof",
+      "prompt": "Provide the exact proof or derivation, or a path to it, for: map Q-tensor invariants to the envelope's finite-direction projections",
+      "answered": true,
+      "answer": "absent: no Q-tensor-to-projection derivation exists; docs/REFINEMENT_DIVE.md:24 records the gap and the existing cent envelope is finite-direction geometry only"
+    },
+    {
+      "id": "q2",
+      "need": "test:compare exact corners and area over declared point sets",
+      "kind": "test",
+      "prompt": "Provide the test, vector set or result, or a path to it, for: compare exact corners and area over declared point sets",
+      "answered": true,
+      "answer": "absent: no Q-tensor corner/area comparison exists; tests/test_discovery.py checks the envelope over rational point sets, not Q-tensor states"
+    },
+    {
+      "id": "q3",
+      "need": "definition:director/Q-tensor normalization and boundary conditions",
+      "kind": "definition",
+      "prompt": "Provide the declared definition or source for: director/Q-tensor normalization and boundary conditions",
+      "answered": true,
+      "answer": "absent: no director/Q-tensor normalization or boundary conditions are declared; docs/REFINEMENT_DIVE.md:24"
+    }
+  ],
+  "answers": {
+    "q1": "absent: no Q-tensor-to-projection derivation exists; docs/REFINEMENT_DIVE.md:24 records the gap and the existing cent envelope is finite-direction geometry only",
+    "q2": "absent: no Q-tensor corner/area comparison exists; tests/test_discovery.py checks the envelope over rational point sets, not Q-tensor states",
+    "q3": "absent: no director/Q-tensor normalization or boundary conditions are declared; docs/REFINEMENT_DIVE.md:24"
+  },
+  "answered": 3,
+  "total": 3,
+  "status": "retired",
+  "active": false,
+  "next_question": null,
+  "decision": "retire",
+  "decision_note": "Retire after evidence audit: no Q-tensor contract, projection map, normalization/boundary definition, or exact Q-tensor comparison test. The exact envelope and its point-set tests do not exercise a Q-tensor; keeping the lead would preserve an unsupported correspondence.",
+  "knowledge_state": "doesnt_know",
+  "technical_validation": "not performed; answers are retained as supplied evidence",
+  "supported_operations_changed": false,
+  "checks": [
+    {
+      "name": "need coverage",
+      "status": "pass",
+      "detail": "3/3 declared needs answered"
+    },
+    {
+      "name": "admission gate",
+      "status": "pass",
+      "detail": "supported_operations is unchanged; no promotion occurs"
+    },
+    {
+      "name": "retirement note",
+      "status": "pass",
+      "detail": "a retire decision has a recorded reason"
+    }
+  ],
+  "gaps": [
+    "supplied answers are not automatically verified as proofs or tests",
+    "keeping a lead does not promote it to a mechanism card or supported operation",
+    "retirement is recorded, not erased from the pre-admission registry"
+  ],
+  "headline": "nematic-q-tensor-bounding-box: retired (3/3 needs answered)",
+  "output_certificate": {
+    "schema": "cent-output-certificate/1",
+    "subject_schema": "cent-hypothesis-resolution/1",
+    "status": "partial",
+    "checks": [
+      {
+        "name": "need coverage",
+        "status": "pass",
+        "detail": "3/3 declared needs answered"
+      },
+      {
+        "name": "admission gate",
+        "status": "pass",
+        "detail": "supported_operations is unchanged; no promotion occurs"
+      },
+      {
+        "name": "retirement note",
+        "status": "pass",
+        "detail": "a retire decision has a recorded reason"
+      }
+    ],
+    "gaps": [
+      "supplied answers are not automatically verified as proofs or tests",
+      "keeping a lead does not promote it to a mechanism card or supported operation",
+      "retirement is recorded, not erased from the pre-admission registry"
+    ],
+    "claim": "This certificate covers only the declared exact/structural checks in this payload; it is not measured-device, fabrication, physical-proof or manufacturing evidence."
+  }
+}
