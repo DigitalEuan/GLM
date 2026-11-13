@@ -1,8 +1,15 @@
 {
  "U1": {
-  "agree": 237,
+  "agree": 236,
   "census_rows": 237,
-  "disagree": []
+  "disagree": [
+   {
+    "fields": [
+     "answer"
+    ],
+    "id": "corpus-define"
+   }
+  ]
  },
  "U2": {
   "fields_ok": 237,
@@ -45,7 +52,7 @@
  "U6": {
   "bound": 900,
   "jobs": 8,
-  "seconds": 331
+  "seconds": 458
  },
  "cases": 237,
  "lean": {
@@ -61,14 +68,14 @@
  },
  "marks": {
   "L1": true,
-  "U1": true,
+  "U1": false,
   "U2": true,
   "U3": true,
   "U4": true,
   "U5": true,
   "U6": true
  },
- "met": 7,
+ "met": 6,
  "quoted": [
   "corpus/_data/document_addresses.json",
   "corpus/_data/lean_measurements.json",
@@ -159,6 +166,6 @@
   "runtime/_data/respell_table.json",
   "wheels/_data/provisional.json"
  ],
- "source_digest": "8f526c5169b63ce4a4b437b0c56303f31ffa67bc6d5bab06f6550776a2b916cf",
+ "source_digest": "68b1545bf7d140df46883438684ab55bb3743b6e3303959b5c37c017abe21219",
  "taken": 7
 }

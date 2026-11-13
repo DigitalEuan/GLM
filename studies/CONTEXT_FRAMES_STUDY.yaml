@@ -4,7 +4,7 @@
 # prose, this YAML is the face the GLM reads.  Judgement fields (controls,
 # layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
 # are kept as written; a derived field listed in hand_fields is kept too.
-# Last altered 31 October 2026 (study_manifest --sync).
+# Last altered 13 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 8 of 9 marks (X5 missed as written, X5′ met); 10 of 10 theorems, 0 `sorry`; battery 21
@@ -19,10 +19,10 @@ file_refs:
   - engineering/context_frames.py
   - engineering/context_frames_study.py
   - tools.py
-  lean: []
-  lean_held: []
-  lean_missing:
+  lean:
   - ContextFrames
+  lean_held: []
+  lean_missing: []
   missing: []
   prose: CONTEXT_FRAMES_STUDY.md
   test: []

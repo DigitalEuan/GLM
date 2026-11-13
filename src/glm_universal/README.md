@@ -291,8 +291,8 @@ package's surface; it is a thin shell over `runtime/`.
 - **Equation verifier**: 222 scalar + 71 tensor relations, 31-facet attribution
 - **The Lean development, addressed**: `lean_address.py` gives every
   declaration of `RequestProject/GLM/` a deterministic 24-coordinate Leech
-  address computed from its statement, one for each of the <!--figure:lean-declarations-->9,400<!--/figure--> declarations
-  parsed, read back **<!--figure:lean-declarations-->9,400<!--/figure-->/<!--figure:lean-declarations-->9,400<!--/figure-->** with 0
+  address computed from its statement, one for each of the <!--figure:lean-declarations-->9,757<!--/figure--> declarations
+  parsed, read back **<!--figure:lean-declarations-->9,757<!--/figure-->/<!--figure:lean-declarations-->9,757<!--/figure-->** with 0
   coordinate errors, and `retrieval.py` makes the book an index whose
   completeness bound is proved in `RequestProject/GLM/Retrieval.lean`.
   `report lean`, `report retrieval`
@@ -443,7 +443,7 @@ Ported and unified from:
 - `light/aristotle_01/` — Y constant, Lean4 verification
 
 The formal counterpart — the same definitions stated and proved as theorems in
-Lean 4, <!--figure:lean-files-->414 Lean files<!--/figure--> — is in
+Lean 4, <!--figure:lean-files-->437 Lean files<!--/figure--> — is in
 `src/lean/RequestProject/GLM/`, with its own README; there is no second copy. The
 write-ups are in `studies/` at the repository root, indexed by `ENTRY.md`; the
 information-loss one is `studies/INFORMATION_LOSS_STUDY.md`.

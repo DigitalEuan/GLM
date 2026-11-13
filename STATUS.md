@@ -19,6 +19,8 @@
 
 *Last altered 1 November 2026 (Phase 186: the intake items absorbed ahead of the owner's Lean build by the owner's decision -- "Just closed", §2.1 item 0's remainder and §2.3's `confirm-build` steps).*
 
+*Last altered 13 November 2026 (platform round: §2.1 item 0a, the seven-phase plan this repository is worked to, and what its first phase changed).*
+
 > **Positioning.** Before starting a round, read the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md): what is claimed, what is
 > not, and why an absence at one layer is not a refutation. It is stated once,
@@ -197,15 +199,15 @@ earlier; each is recorded in `MASTER_PLAN.md`.
 | end-to-end CLI evaluation | `PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->237<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `PYTHONPATH=src python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `PYTHONPATH=src python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `scripts/rebuild_lean.sh` (`lake build` from the repository root) | <!--figure:lean-files-->414 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `scripts/rebuild_lean.sh` (`lake build` from the repository root) | <!--figure:lean-files-->437 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `PYTHONPATH=src python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
 **<!--figure:query-kinds-->31 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->9,400<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->9,400<!--/figure-->/<!--figure:lean-declarations-->9,400<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->9,757<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->9,757<!--/figure-->/<!--figure:lean-declarations-->9,757<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -262,7 +264,7 @@ to end and repaired. What that left:
   set has <!--figure:evaluation-case-count-->237<!--/figure--> cases. The
   manifests are synchronised with their studies, every relative link in the
   written documents resolves, the Lean address book holds
-  <!--figure:lean-declarations-->9,400<!--/figure--> declarations, and building
+  <!--figure:lean-declarations-->9,757<!--/figure--> declarations, and building
   a session no longer imports the walk of the whole Lean development (the
   sign-off ledger's closure test).
 * **The intake.** `source_material/ToDo/` (not yet taken through) and
@@ -405,6 +407,37 @@ it was pre-registered and measured. `python3 -m glm_universal.tools dates`
 lists every stamp and fails on a bad one.
 
 ### 2.1 The next rounds
+
+**0a. The platform round of 13 November 2026 — the plan this repository is worked to.**
+The owner's instruction: set up a working development, testing and use platform
+here, record the plan in this document, and adapt [`ITERATE.md`](ITERATE.md) to
+the environment. Seven phases, in order; each names the gate that closes it.
+
+| phase | what | gate |
+|---|---|---|
+| **P0 repair** | the committed stash conflicts of `8a7ddca` in six files | done in `cb64b00`; the five modules compile and the CLI answers |
+| **P1 gates green** | filing and duplicate cleanup, the four new intake items registered, `lean_to_add` out of the build tree, manifests synced, the evidence censuses re-taken | `corpus --check`, `intake check`, `lean_check` |
+| **P2 Lean** | elan + Lean 4.28 + Mathlib in this workspace **and** the owner-machine build record as the fallback | `scripts/rebuild_lean.sh` writes `scripts/logs/lean_build_evidence.json`; `intake confirm-build` for the three items absorbed ahead of it |
+| **P3 workflow** | [`ITERATE.md`](ITERATE.md) §0.5 (this environment), the venv, the warm cache, `--jobs 2`, logs outside the tree | a round can be picked up, worked and closed here |
+| **P4 intake** | `leechlean`, `cent_compiler_v12_update`, `cent_compiler_v12_2`, `lean_to_add`, then `attention`, `formula_wheel`, `conversation_experiment`, `hidden_memory`, `GLM_IMPROVEMENT_ROADMAP` and `HISTORY_RECORDED_NOW_V4_STUDY` | each item's stage gate (D22) |
+| **P5 use** | the chat surface: carriers the evaluation's questions name, the doubled query echo, refusal wording | the evaluation cases that cover each |
+| **P6 refine** | every round moves derive, address or refuse under a declared perturbation | D15, and the paper updated in the same round |
+
+*What P1 changed on 13 November 2026.* Twenty-seven files at the root of
+`source_material/` were byte-identical to their `done/` copies and thirteen
+duplicate folders had been unpacked beside them; all were discarded. The root
+`Rule30_GLM_Study` was found to be already in the build tree, byte for byte
+bar one restored file, and the root `cent_compiler_v12` to be a newer, fuller
+delivery than the item of that name, so it was filed as
+`cent_compiler_v12_update`. `leechlean` (45 MB), `cent_compiler_v12_2` and
+`lean_to_add` were registered, and `src/lean/RequestProject/lean_to_add` — 79
+Lean files and 31 documents placed inside the build tree by the 12 November
+upload — was moved to `source_material/ToDo/lean_to_add` for full processing
+(the owner's decision: it is absorbed only if the main Lean folder does not
+already hold it). Lean errors fell from 284 to 36 and intake errors from 51 to
+5 before the caches were re-taken; the tier contract and the study manifests
+are current, and the stray `archive/ARISTOTLE_SUMMARY.md` (a byte copy of the
+renamed Phase 183 note) was removed.
 
 0. **repository check and fix** this repository has been reorganised and needs
 a proper check through everything, some parts may be broken and require fixing.

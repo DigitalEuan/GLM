@@ -68,14 +68,14 @@ and `--check` fails if one of them has drifted.
 | documents | 256 |
 | current-state documents | 251 |
 | archive documents | 5 |
-| lines, whole corpus | 108,118 |
-| lines, current state | 97,809 |
+| lines, whole corpus | 108,192 |
+| lines, current state | 97,883 |
 | lines, archive | 10,309 |
 | addressable sections | 2,760 |
 | documents carrying a tier 0 | 251 |
-| words in all tier-0 blocks together | 35,676 |
+| words in all tier-0 blocks together | 35,661 |
 
-Reading every current-state document costs 1,026,109 words; reading all 251 tier-0 blocks instead costs 35,676 — 3.5 % of it, with a stated bound on what the coarse read may omit.  The archive rule takes 9.5 % of the corpus out of what a session must load, without deleting a line of it.
+Reading every current-state document costs 1,026,967 words; reading all 251 tier-0 blocks instead costs 35,661 — 3.5 % of it, with a stated bound on what the coarse read may omit.  The archive rule takes 9.5 % of the corpus out of what a session must load, without deleting a line of it.
 <!-- end generated -->
 
 The three numbers that matter are the three resolutions a reader can stop at:

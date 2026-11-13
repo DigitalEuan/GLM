@@ -56,7 +56,7 @@
 
 schema: glm-intake-ledger/v1
 created: 31 October 2026
-last_altered: 1 November 2026
+last_altered: 13 November 2026
 items:
 - id: GLM_IMPROVEMENT_ROADMAP
   path: ToDo/GLM_IMPROVEMENT_ROADMAP.md
@@ -3007,3 +3007,27 @@ items:
   - src/glm_universal/reasoning/frame_operators.py
   last_action: '31 October 2026: filed in done/ (moved from source_material/Lorentz boosts.pdf); closed
     with the recorded reason'
+- id: lean_to_add
+  path: ToDo/lean_to_add
+  stage: received
+  last_action: '13 November 2026: moved into ToDo/ and registered'
+  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
+    lean_to_add triaged`'
+- id: leechlean
+  path: ToDo/leechlean
+  stage: received
+  last_action: '13 November 2026: moved into ToDo/ and registered'
+  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
+    leechlean triaged`'
+- id: cent_compiler_v12_2
+  path: ToDo/cent_compiler_v12_2
+  stage: received
+  last_action: '13 November 2026: moved into ToDo/ and registered'
+  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
+    cent_compiler_v12_2 triaged`'
+- id: cent_compiler_v12_update
+  path: ToDo/cent_compiler_v12_update
+  stage: received
+  last_action: '13 November 2026: moved into ToDo/ and registered'
+  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
+    cent_compiler_v12_update triaged`'

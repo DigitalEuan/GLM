@@ -14,6 +14,8 @@
 
 *Last altered 31 October 2026 (repository check: commands from the repository root; §0.2 the constants single source, D21; §0.3 new material through the intake, D22; §0.4 when Lean cannot be run; hazard 9; later the same day §0.3 the Lean written / Lean verified stages and staged code, then the acceptance decision and current test results; then the provisional install by the owner's decision).*
 
+*Last altered 13 November 2026 (platform round: §0.5 this two-core cloud workspace — venv and pytest, the knowledge cache, `--jobs 2`, logs outside the tree; hazard 6 corrected, hazard 7 given the two-core costs).*
+
 ---
 
 This is the operating manual. [`ENTRY.md`](ENTRY.md) says what to *read*;
@@ -133,18 +135,28 @@ learned by losing time or work to it; keep the list, and add to it.*
    --check` (or the `caches.describe()` line above) names every stale cache
    and the command that re-takes it; do that before the evaluation and
    before the close.
-6. **pytest cannot be installed here** (no package index). The test-file
-   sign-off of `signoff --close` therefore stays owed (since Phase 134).
-   Test files that do not import pytest can be run by calling their
-   `test_*` functions; record a hand run as a hand run, never as the
-   sign-off.
+6. **pytest goes in a venv, not in the system interpreter.** The system
+   `python3` here is read-only, so `python3 -m pip install pytest` fails (the
+   owner's machine had no package index either, which is where the owed
+   sign-off of Phase 134 comes from). Create the workspace venv once —
+   `python3 -m venv ~/glm/venv && ~/glm/venv/bin/pip install -q pytest` — and
+   run a test gate with `PATH=~/glm/venv/bin:$PATH`, so
+   `signoff --close`'s `python3 -m pytest` finds it. Test files that do not
+   import pytest can be run by calling their `test_*` functions; record a
+   hand run as a hand run, never as the sign-off.
 7. **Run anything longer than a minute in the background, with a log**
    (`nohup … > /tmp/x.log 2>&1 &`) and write the resume command on
    [`WHITEBOARD.md`](WHITEBOARD.md). Measured costs on eight cores: `corpus
    --refresh` about 5–10 minutes after a code or Lean change; each frozen
    path about 15 minutes; `evaluation --jobs 8` about 10 minutes;
    `evaluation --replay` about 9 minutes more; `lake build` of one new Lean
-   file seconds once Mathlib is built.
+   file seconds once Mathlib is built. **Measured on this workspace's two
+   cores (13 November 2026):** `corpus --refresh` 15–20 minutes, the full test
+   suite over two hours (6,603 tests), and the evaluation hours — one `report`
+   case alone took 2m46s. Do not run either whole: run what moved (the
+   sign-off does this), and scope the evaluation with `--only KIND` or
+   `--case ID`. Write the log outside the tree, `~/glm/<name>.log`, because
+   `/tmp` is cleared when the runner restarts.
 8. **Order of a round's close**: code and Lean first; `corpus --refresh`
    once (so the corpus has the new Lean files); re-take stale measurements
    in the order of hazard 2; run the evaluation; write every document; then
@@ -223,6 +235,39 @@ scratch and runs the axiom audit) and `scripts/check_repository.sh` locally. The
 needs a file the repository no longer has waits in `src/lean/awaiting_recovery/`, out of the
 build, and the missing file is recorded in
 [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md).
+
+### 0.5 This workspace — the two-core cloud environment
+
+*Added 13 November 2026 (platform round), from measurements taken here.*
+
+This workspace runs the repository on **2 vCPU and 3 GB RAM**, with Python 3.12,
+network access and **no Lean toolchain**. It is the development, testing and use
+environment for the Python package, the corpus instruments and the intake; it is
+not a Lean build machine, so §0.4 still governs Lean and `scripts/logs/` is
+where a build record from the owner's machine is read.
+
+* **The venv.** The system `python3` is read-only: `python3 -m venv ~/glm/venv
+  && ~/glm/venv/bin/pip install -q pytest`, then `PATH=~/glm/venv/bin:$PATH`
+  for any gate that runs pytest (hazard 6).
+* **The knowledge cache.** A fresh checkout has none, and every CLI process
+  then reads and counts the whole corpus (106 s, 4,074 documents). Warm it once:
+  `PYTHONPATH=src python3 -c "from glm_universal.knowledge import model;
+  model.load()"` writes `knowledge/_knowledge_cache/knowledge.pickle` (233 MB,
+  git-ignored). `GLM_KNOWLEDGE_CACHE` moves it if the tree must stay clean.
+* **Jobs.** `--jobs 2`, never 8: eight CLI processes on two cores is slower
+  than two, and cases then time out that are not wrong.
+* **Long work.** Anything over a minute runs in the background with a log
+  outside the tree (`nohup … > ~/glm/x.log 2>&1 &`) and is polled; `/tmp` does
+  not survive a runner restart, `~/glm/` does.
+* **Never put supplied material under `src/`.** The corpus gate treats every
+  Markdown file in the tree as a current-state document and `lean_check` every
+  `.lean` under `src/lean` as build material: the 31 documents and 79 Lean files
+  the 12 November upload placed in `src/lean/RequestProject/lean_to_add`
+  produced 62 corpus failures and 261 Lean import errors. New material goes to
+  `source_material/ToDo/` (D22). Fixes are made in the package copy, never in
+  the supplied file.
+* **Pushing.** Work stays on the session branch and is pushed at the end of a
+  session, after the gates pass (the owner's instruction of 13 November 2026).
 
 ## 1. Orient — four short reads, in this order
 

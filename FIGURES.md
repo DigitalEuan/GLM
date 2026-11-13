@@ -14,7 +14,7 @@ Two rows are measured from outside the package and are marked as such: the colle
 
 ## At a glance
 
-**8 registers** holding 1143 carriers, reached through **31 query kinds** of which one dispatches **67 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **237 cases** end to end; **260 test files**; **414 Lean files** carrying 0 sorries.
+**8 registers** holding 1143 carriers, reached through **31 query kinds** of which one dispatches **67 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **237 cases** end to end; **260 test files**; **437 Lean files** carrying 0 sorries.
 
 ## Sentences
 
@@ -24,7 +24,7 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 |---|---|---|---|
 | `directives` | 22 standing rules | `\b\d+ standing rules\b` | how many rules there are |
 | `evaluation_cases` | 237 CLI cases | `\b\d+ CLI cases\b` | the evaluation set |
-| `lean_files` | 414 Lean files | `\b\d+ Lean files\b` | the Lean development |
+| `lean_files` | 437 Lean files | `\b\d+ Lean files\b` | the Lean development |
 | `query_kinds` | 31 query kinds | `\b\d+ query kinds\b` | how many query kinds |
 | `registers` | 8 registers | `\b\d+ registers\b` | how many registers there are |
 | `report_subjects` | 67 report subjects | `\b\d+ report subjects\b` | how many subjects |
@@ -171,10 +171,10 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 | figure | value |
 |---|---|
 | `root` | lean |
-| `files` | 414 |
-| `lines` | 101679 |
+| `files` | 437 |
+| `lines` | 105034 |
 | `sorries` | 0 |
-| `file_names` | RequestProject/GLM/Address.lean, RequestProject/GLM/AddressRead.lean, RequestProject/GLM/Admission.lean, RequestProject/GLM/AffineOutput.lean, RequestProject/GLM/Agree.lean, RequestProject/GLM/AlignmentPoints.lean, RequestProject/GLM/Anonymous.lean, RequestProject/GLM/AnsweringQuestion.lean, RequestProject/GLM/AstIndex.lean, RequestProject/GLM/AxiomAuditAll.lean, RequestProject/GLM/AxiomGuard.lean, RequestProject/GLM/BudgetReading.lean, RequestProject/GLM/Calibration.lean, RequestProject/GLM/CarriedFork.lean, RequestProject/GLM/CarriedRead.lean, RequestProject/GLM/Cascade.lean, RequestProject/GLM/CellGuard.lean, RequestProject/GLM/CelsiusRegister.lean, RequestProject/GLM/CertifiedStreams.lean, RequestProject/GLM/CitationScope.lean, RequestProject/GLM/CognitionRoundTwo.lean, RequestProject/GLM/ColumnExtremum.lean, RequestProject/GLM/Combiner.lean, RequestProject/GLM/Comparative.lean, RequestProject/GLM/Completion.lean, RequestProject/GLM/ComposedRadicals.lean, RequestProject/GLM/Comp... |
+| `file_names` | RequestProject/GLM/Address.lean, RequestProject/GLM/AddressRead.lean, RequestProject/GLM/Admission.lean, RequestProject/GLM/AdversarialDialogue.lean, RequestProject/GLM/AffineOutput.lean, RequestProject/GLM/Agree.lean, RequestProject/GLM/AlignmentPoints.lean, RequestProject/GLM/Anonymous.lean, RequestProject/GLM/AnsweringQuestion.lean, RequestProject/GLM/AstIndex.lean, RequestProject/GLM/AxiomAuditAll.lean, RequestProject/GLM/AxiomGuard.lean, RequestProject/GLM/BudgetReading.lean, RequestProject/GLM/Calibration.lean, RequestProject/GLM/CarriedFork.lean, RequestProject/GLM/CarriedRead.lean, RequestProject/GLM/Cascade.lean, RequestProject/GLM/CellGuard.lean, RequestProject/GLM/CelsiusRegister.lean, RequestProject/GLM/CertifiedStreams.lean, RequestProject/GLM/CitationScope.lean, RequestProject/GLM/CognitionRoundTwo.lean, RequestProject/GLM/ColourInduction.lean, RequestProject/GLM/ColumnExtremum.lean, RequestProject/GLM/Combiner.lean, RequestProject/GLM/Comparative.lean, RequestProject/... |
 
 ## The test suite
 

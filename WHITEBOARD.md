@@ -5,9 +5,12 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 186, the intake items absorbed where they measurably help (1 November 2026), is closed in `MASTER_PLAN.md`, and the next round starts from `STATUS.md` §2.1. Two steps are owed on the owner's machine: the Lean build (`scripts/rebuild_lean.sh`), then `confirm-build` for the three items absorbed ahead of it, and the test-file sign-off (no pytest here).
+**Verdict.** The platform round of 13 November 2026 is in flight: the repair
+and the filing are done, and three gates remain open, each naming its own
+remainder under its section below.
 
-**Deciding figure.** 2 steps outstanding, both the owner's.
+**Deciding figure.** Three gates are still open — `corpus --check`, `intake
+check` and `lean_check` — and each names its own remainder.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -15,9 +18,7 @@ know to carry the round on?
 and the figure above are grounded in the body below, and
 `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 31 October 2026 (repository check: the status below; the two steps owed on the owner's machine and the intake promotions that follow the build).*
-
-*Last altered 1 November 2026 (Phase 186: closed; the build now confirms the three items absorbed ahead of it with `confirm-build`).*
+*Last altered 13 November 2026 (platform round: the round in flight, what is done, and the command that resumes each open step).*
 
 ---
 
@@ -34,60 +35,55 @@ this file goes back to the shape below. That is the same rule the rest of the
 repository keeps: the state document holds what *is*, the plan holds what
 *happened*, and this holds only what is *in flight*.
 
-Two habits earn their keep, and both were learned by losing work to their
-absence:
-
-* **Record the command, not the intention.** "Re-take the escalation cache" is
-  not resumable; `python3 -m glm_universal.tools queryesc --write` is.
-* **Record what a step will invalidate.** A release signs the tree it ran on;
-  editing a document afterwards makes the units that read it stale again, so
-  the order is documents first, refresh, then release.
-
 ## Status
 
-**No round is in flight.** Phase 186 (1 November 2026; the intake items
-absorbed where they measurably help, by the owner's decision of that day,
-[`INTAKE_CAPABILITY_STUDY.md`](studies/INTAKE_CAPABILITY_STUDY.md)) is closed:
-its record is in `MASTER_PLAN.md`. Phase 185 (31 October 2026; the repository
-check after the October 2026 reorganisation, taken from `STATUS.md` §2.1 item
-0) is closed: its record is in `MASTER_PLAN.md`, what it left is `STATUS.md`
-§1b, and the intake items still in `source_material/ToDo/` are listed with
-their next step by `PYTHONPATH=src python3 -m glm_universal.intake status`.
-Phases 184 and earlier are closed as recorded there.
+**Round in flight: the platform round of 13 November 2026** (the plan is
+[`STATUS.md`](STATUS.md) §2.1 item 0a). Working branch
+`freebuff/7d3bfafca6d92bfcfbf83364`, kept local until the session's end by the
+owner's instruction.
 
-**Two steps owed, both on the owner's machine:**
+**Done, and committed or ready to commit:**
 
-* **The Lean build.** No Lean toolchain here. Resume with
-  `scripts/rebuild_lean.sh` from the repository root; it builds, runs the axiom
-  audit, writes `scripts/logs/lean_build_latest.log` and, when everything
-  passes, the build record `scripts/logs/lean_build_evidence.json` (summary
-  line ends `record=0`; the script exits 0 only then, and 1 naming the failed
-  steps otherwise). The files it is the first build of:
-  `Wheels/IntegerWheel.lean`, `Wheels/SporadicOrders.lean`,
-  `Wheels/CentWheels.lean`, the restored `Rule30/SidewaysPeriodTwo.lean`, the
-  renamed Rule 30 files, the four standalone checks
-  `IntakeChecks/RuleThirtyBits.lean`, `SporadicOrderCheck.lean`,
-  `NextTerm.lean` and `Derivability.lean` (built here only on their own, with
-  Lean 4.34 and Mathlib) and the regenerated `AxiomAuditAll.lean`. With the
-  record written, the three items absorbed ahead of it on 1 November 2026 are
-  confirmed by the commands in `STATUS.md` §2.3 (`intake confirm-build
-  Rule30_GLM_Study`, `intake confirm-build cent_compiler_v12`, `intake
-  confirm-build glm_wheels_bundle`); until then they are listed in
-  `wheels/_data/provisional.json` as *absorbed ahead of the build* and every
-  answer from them says so.
-* **The release sign-off** (owed since Phase 134): the test-file sign-off,
-  the gate the evaluation's own runs do not replace. pytest is not installable
-  here (no package index). Resume with `python3 -m pip install pytest`, then
-  `scripts/check_repository.sh` (every Python gate, with a log) and
-  `PYTHONPATH=src python3 -m glm_universal.signoff --close --jobs 8`.
+* **P0, the repair** (`cb64b00`). `main` carried unresolved `git stash pop`
+  conflicts from `8a7ddca` in six files; the five Python modules are restored
+  to their pre-conflict content (byte-identical to `4c8e107`) and compile, and
+  `GLM_REPOSITORY_MAP.md` is the current document rather than half a merge.
+* **P1, the filing.** Twenty-seven root copies byte-identical to `done/` and
+  thirteen duplicate folders discarded; the root `Rule30_GLM_Study` confirmed
+  already in the build tree; the newer root `cent_compiler_v12` filed as
+  `cent_compiler_v12_update`; `leechlean`, `cent_compiler_v12_2` and
+  `lean_to_add` registered in the intake ledger; the 79 Lean files and 31
+  documents of `lean_to_add` moved out of `src/lean` to
+  `source_material/ToDo/lean_to_add`; the stray `archive/ARISTOTLE_SUMMARY.md`
+  (a byte copy of the renamed Phase 183 note) removed.
+* **P1, the caches.** The study manifests are synced (205 of 205, current),
+  the corpus is refreshed (tier contract holds, 251 of 251 state documents,
+  address books fresh, 589 of 589 inline figures), and the coverage claim's one
+  defect is cleared.
+
+**Three gates remain open**, each naming its own remainder under its section
+below: `corpus --check`, `intake check` and `lean_check`.
+
+1. **The two evidence censuses.** `corpus --check` names them stale:
+   `PYTHONPATH=src python3 -m glm_universal.tools evidence-model --write`, then
+   `… evidence-in-use --write` (in that order), then `corpus --refresh` once
+   more and `corpus --check` — the order hazard 4 prescribes.
+2. **Five intake errors.** Four are `cent_compiler_v12`'s stale `staged/`
+   copies ("absorption would overwrite" files already installed), one is
+   `iter10_lorentzian` citing `RequestProject.GLM.GolayDeepHole`, which is a
+   placeholder. Both are cleared by P1's last step and by restoring the
+   thirteen placeholder Lean files (`studies/_lean_files_needed.md`).
+3. **Thirty-six Lean errors.** Thirteen placeholders in `GLM/`, six files held
+   in `awaiting_recovery/`, and the declaration warnings. Resuming them is P2's
+   first task before any `lake build`.
+4. **P2, the Lean toolchain.** Install elan + Lean 4.28 + Mathlib here (about
+   6–8 GB and hours on two cores) and run `scripts/rebuild_lean.sh` in the
+   background; the owner-machine build record stays the fallback.
 
 **Standing hazards — read before running anything:** [`ITERATE.md`](ITERATE.md)
-§0.1, *Run-order hazards*. The two that cost the most:
-
-* **Don't edit documents while `corpus --refresh` is running.** It rewrites
-  them from the copies it read when it started.
-* **Re-take order matters after editing `evaluation/cases.py`.** Some saved
-  results read others: `nearest-address` and `budget-reading` digest the
-  budget-guard frozen path, and `nearest-question` reads the ties-ladder
-  frozen path. Re-take `queryesc`, `budget-guard-frozen` and
-  `ties-ladder-frozen` first, then the rest, then refresh the corpus last.
+§0.1, and §0.5 for this workspace's own rules (venv and pytest, the 233 MB
+knowledge cache, `--jobs 2`, logs outside the tree, no supplied material under
+`src/`). The two that cost the most: don't edit documents while
+`corpus --refresh` runs, and re-take `queryesc`, `budget-guard-frozen` and
+`ties-ladder-frozen` first after editing `evaluation/cases.py`, then the rest,
+then refresh the corpus last.

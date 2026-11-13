@@ -50,7 +50,7 @@ by hand twice: the counts are recomputed into
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
 | end-to-end CLI evaluation | the CLI, driven the way a user drives it | **237 cases: 237 passed** — 187 answered correctly, 50 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored (re-taken 1 Nov 2026, 242 s on six processes; every answer resting on the intake items absorbed ahead of the owner's Lean build says so) |
 | test suite | the package's own regression net | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->414 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->437 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
