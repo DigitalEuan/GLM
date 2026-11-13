@@ -5,12 +5,12 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** The platform round of 13 November 2026 is in flight: the repair
-and the filing are done, and three gates remain open, each naming its own
-remainder under its section below.
+**Verdict.** The platform round of 13 November 2026 is in flight: the repair,
+the filing and the corpus gates are done, and the remainder below is the Lean
+and intake work that is open.
 
-**Deciding figure.** Three gates are still open — `corpus --check`, `intake
-check` and `lean_check` — and each names its own remainder.
+**Deciding figure.** `intake check` reports one error and `lean_check`
+thirty-six, and each names its own remainder.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -61,22 +61,24 @@ owner's instruction.
   address books fresh, 589 of 589 inline figures), and the coverage claim's one
   defect is cleared.
 
-**Three gates remain open**, each naming its own remainder under its section
-below: `corpus --check`, `intake check` and `lean_check`.
+**Green on 13 November 2026:** `corpus --check` (tier contract, coverage
+claim, study manifests, address books, every generated block and figure), the
+seven-phase plan in [`STATUS.md`](STATUS.md) §2.1 item 0a, and the smoke query.
 
-1. **The two evidence censuses.** `corpus --check` names them stale:
-   `PYTHONPATH=src python3 -m glm_universal.tools evidence-model --write`, then
-   `… evidence-in-use --write` (in that order), then `corpus --refresh` once
-   more and `corpus --check` — the order hazard 4 prescribes.
-2. **Five intake errors.** Four are `cent_compiler_v12`'s stale `staged/`
-   copies ("absorption would overwrite" files already installed), one is
-   `iter10_lorentzian` citing `RequestProject.GLM.GolayDeepHole`, which is a
-   placeholder. Both are cleared by P1's last step and by restoring the
-   thirteen placeholder Lean files (`studies/_lean_files_needed.md`).
-3. **Thirty-six Lean errors.** Thirteen placeholders in `GLM/`, six files held
-   in `awaiting_recovery/`, and the declaration warnings. Resuming them is P2's
-   first task before any `lake build`.
-4. **P2, the Lean toolchain.** Install elan + Lean 4.28 + Mathlib here (about
+**Two gates remain open**, each naming its own remainder under its section
+below.
+
+1. **One intake error.** `iter10_lorentzian` cites
+   `RequestProject.GLM.GolayDeepHole`, which is a placeholder: it clears when
+   the thirteen placeholder Lean files are restored
+   (`studies/_lean_files_needed.md`), which is P2's first task. The four stale
+   `cent_compiler_v12` `staged/` copies were removed (they duplicate the
+   installed provisional wheels).
+2. **Thirty-six Lean errors.** Thirteen placeholders in `GLM/`, six files held
+   in `awaiting_recovery/` — `LorentzUnits.lean` waits on `LorentzImproper`,
+   which waits on the `LorentzPlane` placeholder, so the chain returns together
+   — and the declaration warnings.
+3. **P2, the Lean toolchain.** Install elan + Lean 4.28 + Mathlib here (about
    6–8 GB and hours on two cores) and run `scripts/rebuild_lean.sh` in the
    background; the owner-machine build record stays the fallback.
 
