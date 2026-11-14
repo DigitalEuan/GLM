@@ -7,13 +7,15 @@
 
 **Verdict.** The corpus is data: classified by rule, addressed, generated where it can be, and checked.
 
-**Deciding figure.** 7 modules, one command that reports every drift at once and one that repairs it.
+**Deciding figure.** 9 modules, one command that reports every drift at once and one that repairs it.
 
 **Recomputed by.** `glm_universal.corpus.report.corpus_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 *Last altered 31 October 2026 (repository check: run commands rewritten to start from the repository root, `PYTHONPATH=src` and `src/GLM.py`; the text is otherwise unchanged.)*
+
+*Last altered 13 November 2026 (platform round: `navigate.py`, the one command that answers what already bears on a question, added to the table).*
 
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../../README.md)
@@ -31,6 +33,8 @@ digest. This package extends the same discipline to the prose itself, so that
 the corpus is **classified by rule, addressed, generated where it can be, and
 checked** rather than maintained by memory.
 
+The 9 modules below, one command that reports every drift at once and one that repairs it.
+
 | Module | What it holds |
 |---|---|
 | `inventory.py` | Every document, read once: its sections, its links, its tier-0 block, whether it is generated, and whether it is archive. Archive membership is a rule on the path — a name ending `_ARCHIVE.md`, the session working note, or anything under a directory named `archive` — never a judgement. |
@@ -41,6 +45,7 @@ checked** rather than maintained by memory.
 | `checks.py` | The tier contract, the archive partition, the coverage claim of `ENTRY.md`, and the freshness of every derived artefact. |
 | `gate.py` | The verdict of the last passing check, stored beside a digest of everything that check can read, so a check whose inputs have not moved answers from the record instead of re-deriving it. |
 | `report.py` | All of it in one call, including the reading cost at each resolution. |
+| `navigate.py` | One question in, and everything that bears on it out: the studies from their manifests, the certified section shortlist, the code, tests and Lean files those studies name, and whether a study's title already claims the question. A reader: it computes nothing the corpus does not hold and writes nothing. |
 
 ## Running it
 

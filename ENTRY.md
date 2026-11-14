@@ -18,6 +18,8 @@
 
 *Last altered 1 November 2026 (repository check: the two owner-run scripts listed in the order to run them, the Lean build first).*
 
+*Last altered 13 November 2026 (platform round: `glm_universal.corpus.navigate`, the instrument to run before a round starts, added to *Finding the part that bears on a question*).*
+
 ## Picking the work up, in one screen
 
 Every command runs from the repository root (the package is under `src/`).
@@ -130,13 +132,22 @@ Then, as the task requires:
 
 ## Finding the part that bears on a question
 
-Two instruments, and the division of labour between them is measured rather
+Three instruments, and the division of labour between them is measured rather
 than assumed (`studies/CORPUS_ADDRESS_STUDY.md`).
 
 ```bash
 PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
 PYTHONPATH=src python3 -m glm_universal.corpus.study_index "golay"   # the study manifests, as data
+PYTHONPATH=src python3 -m glm_universal.corpus.navigate "Leech shell count"   # all of it, for starting a round
 ```
+
+`navigate` is the one to run **before a round starts**. It asks the manifests
+which studies bear on the question, the address book which sections do, and
+prints for the nearest studies their question, verdict, marks, neighbours and
+the code, test and Lean files each names — then says which studies' *titles*
+already claim the question, so a round that would repeat one is seen before
+any work is done rather than after. It is a reader: it writes nothing and
+computes nothing the corpus does not already hold.
 
 returns a shortlist of sections that is **complete up to a stated radius** —
 every section whose feature vector is within that radius of the question is in

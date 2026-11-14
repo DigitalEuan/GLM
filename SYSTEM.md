@@ -1473,8 +1473,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->20,393<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->116,152<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->20,402<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->116,206<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1670,7 +1670,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->260 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->261 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation`, `replay` and
 `figures`. `replay` (Phase 174) is the evaluation's replay gate of Phase 171,
 column 3 run for every case expected answered, so the close runs it when what

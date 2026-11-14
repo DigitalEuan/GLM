@@ -14,7 +14,7 @@ Two rows are measured from outside the package and are marked as such: the colle
 
 ## At a glance
 
-**8 registers** holding 1143 carriers, reached through **31 query kinds** of which one dispatches **67 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **237 cases** end to end; **260 test files**; **437 Lean files** carrying 0 sorries.
+**8 registers** holding 1143 carriers, reached through **31 query kinds** of which one dispatches **67 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **237 cases** end to end; **261 test files**; **437 Lean files** carrying 0 sorries.
 
 ## Sentences
 
@@ -28,7 +28,7 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 | `query_kinds` | 31 query kinds | `\b\d+ query kinds\b` | how many query kinds |
 | `registers` | 8 registers | `\b\d+ registers\b` | how many registers there are |
 | `report_subjects` | 67 report subjects | `\b\d+ report subjects\b` | how many subjects |
-| `test_files` | 260 test files | `\b\d+ test files\b` | how many test files |
+| `test_files` | 261 test files | `\b\d+ test files\b` | how many test files |
 
 ## Package surface
 
@@ -180,6 +180,6 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 
 | figure | value |
 |---|---|
-| `test_files` | 260 |
+| `test_files` | 261 |
 | `file_names` | test_address_read.py, test_admission.py, test_adversarial_dialogue.py, test_affine_output.py, test_agree_channel.py, test_analogy_models.py, test_anonymous.py, test_answering_question.py, test_apply_reorganisation.py, test_ast_index.py, test_axiom_guard.py, test_benchmarks.py, test_blockers.py, test_blueprint.py, test_budget_reading.py, test_capabilities.py, test_carried_fork.py, test_carried_read.py, test_carrier_read.py, test_catalog.py, test_cell_guard.py, test_celsius_register.py, test_cent_wheels.py, test_citation_scope.py, test_coherence.py, test_colour_induction.py, test_column_extremum.py, test_combiner.py, test_companion.py, test_comparative.py, test_comparison_classes.py, test_composed_radical.py, test_confidence_curve.py, test_confidence_floor.py, test_configuration_classifier.py, test_configuration_reading.py, test_conjugate.py, test_connected_machine.py, test_connected_two.py, test_constant_bound.py, test_constants.py, test_construction_ladder.py, test_containers.py, te... |
 | `collected` | None |

@@ -45,7 +45,7 @@
  "U6": {
   "bound": 900,
   "jobs": 8,
-  "seconds": 448
+  "seconds": 463
  },
  "cases": 237,
  "lean": {
@@ -159,6 +159,6 @@
   "runtime/_data/respell_table.json",
   "wheels/_data/provisional.json"
  ],
- "source_digest": "b2521d46c09554589202feb9626bb196a07898bac761c4ed3ef192e2c3d97d26",
+ "source_digest": "c5efda95237237efbd0d159589f7234428f3a9bcb56138a4cbebe88b1d86aa6d",
  "taken": 7
 }

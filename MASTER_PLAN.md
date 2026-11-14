@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->31 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->260 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->261 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 

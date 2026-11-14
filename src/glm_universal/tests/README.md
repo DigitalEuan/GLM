@@ -275,6 +275,7 @@ if this README drifts from them.
 | `test_study_manifest.py` | 22 | `corpus/study_manifest.py`: every study has a manifest validated against `studies/_schema/study.schema.yaml`; `--sync` derives the generated fields (verdict, figure, marks, file references, dates) from the `.md` and the tree; `--check` fails on drift; a dotted reference to a name a package's `__init__.py` defines (`glm_universal.wheels.provisional_status`) is never listed as a missing module, in a hand-made tree, the real tree and every manifest | 31 Oct 2026 |
 | `test_study_yaml.py` | 9 | The study `.yaml` + `.md` pairs: every study with a tier-0 block has a manifest with the right schema, id, prose link and non-empty tier-0 fields, and none has drifted | 29 Oct 2026 |
 | `test_yaml_schemas.py` | 24 | The YAML schema registry: every `.yaml` in the repository declares a registered schema and validates; the four YAML gate checks of `corpus/checks.py` with the protocol flag on and off | 29 Oct 2026 |
+| `test_navigate.py` | 12 | `corpus/navigate.py`, the one entry point before a round starts: the studies whose titles claim the question, studies ordered covering first, the certified sections with their shared words counted, the files the nearest studies name reused once each, the Lean files they are owed, no float on the path, and a question of stop words answering nothing | 13 Nov 2026 |
 | `test_study_index.py` | 9 | `corpus/study_index.py`, the studies as something the GLM reasons over: the index from the manifests; `answer_study_query` (the `study` kind) answers a study by id, by subject, by its dependencies, the studies with a missing Lean file and the open ones, and says when nothing answers | 31 Oct 2026 |
 | `test_study_links.py` | 21 | `corpus/study_links.py`: every relative link in the documents resolves or points at a file recorded absent; `--fix` repoints a link after a move and drops one to a file never supplied; `--scope all` covers the documents under `src/` | 31 Oct 2026 |
 | `test_wheels.py` | 34 | The one wheels folder `src/glm_universal/wheels/`: all fifteen wheels W01–W15 and their junctions in one place, ids and axioms unchanged from `engineering/wheels.py` and `w11`–`w15`; the Phase 66 and Phase 157 junctions, aliases and non-identities; the W09/W13 oscillator variants; the domain-wheels report | 29 Oct 2026 |
@@ -338,7 +339,7 @@ agrees with `glm_universal/__init__.py`.
 
 The headline row — how many test files, how many tests, how many subtests —
 is measured by running the suite over all
-<!--figure:test-file-count-->260<!--/figure--> files of this directory — <!--figure:test-files-->260 test files<!--/figure--> — and the suite contains `test_figures.py`,
+<!--figure:test-file-count-->261<!--/figure--> files of this directory — <!--figure:test-files-->261 test files<!--/figure--> — and the suite contains `test_figures.py`,
 which checks the documents that quote that row. While the row counted that
 file, the figure counted a test file whose own size depended on what the
 documents said, so two different things got called drift and only one of them
