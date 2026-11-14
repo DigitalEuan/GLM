@@ -6565,6 +6565,82 @@ def _planner(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cent(args: argparse.Namespace) -> int:
+    """The cent transfer compiler (added 14 November 2026).
+
+    The compiler is a supplied system, asked through
+    :mod:`glm_universal.cent_bridge` rather than imported: ``discover`` for the
+    declared methods a problem statement admits, ``propose`` for reviewable
+    proposals with their test handoff, ``originate`` for the D8/D9 search that
+    originates transfers rather than retrieving them.
+    """
+    from . import cent_bridge as cb
+
+    if not cb.available():
+        print(f"cent: not in this checkout (looked in {cb.cent_directory()})")
+        return 2
+    try:
+        if args.originate:
+            payload = cb.originate(search=args.originate)
+        elif args.propose:
+            payload = cb.propose(args.propose, target=args.target, top=args.top)
+        else:
+            payload = cb.discover(args.discover)
+    except (cb.CentUnavailable, cb.CentError) as exc:
+        print(f"cent: {exc}")
+        return 1
+    if args.json:
+        print(json.dumps(payload, indent=1, sort_keys=True))
+        return 0
+    if args.originate:
+        if args.originate == "analogies":
+            reviews = payload.get("reviews") or ()
+            accepted = [r for r in reviews if r.get("accepted")]
+            print(f"cent originate (D8): {len(accepted)} of {len(reviews)} "
+                  f"declared analogies originated")
+            for review in reviews:
+                mark = "accepted" if review.get("accepted") else "refused "
+                line = f"  {mark}  {review.get('analogy')}"
+                if review.get("accepted"):
+                    line += "  -> " + ", ".join(review.get("wheel_pair") or ())
+                print(line)
+                if review.get("reason"):
+                    print(f"            {review['reason']}")
+        else:
+            print(f"cent originate (D9): {len(payload.get('originated') or ())} "
+                  "originated interpretations over the declared wheel corpus")
+            for family in payload.get("families") or ():
+                print(f"  {str(family.get('family')):<14} accepted {family.get('accepted')}"
+                      f"  refused {family.get('refused')}")
+            print(f"  parity ok      {payload.get('parity_ok')}")
+            for gap in payload.get("gaps") or ():
+                print(f"  gap            {gap}")
+        return 0
+    if args.propose:
+        print(f"cent propose {args.propose} on {args.target}: "
+              f"{len(payload.get('proposals') or ())} proposal(s)")
+        for proposal in payload.get("proposals") or ():
+            handoff = proposal.get("handoff") or {}
+            target_block = proposal.get("target") or {}
+            print(f"  rank {proposal.get('rank')} "
+                  f"{(proposal.get('mechanism') or {}).get('id')} "
+                  f"via {(target_block.get('adapter') or {}).get('entrypoint')} "
+                  f"[{handoff.get('readiness')}]")
+        for gap in payload.get("gaps") or ():
+            print(f"  gap  {gap}")
+        return 0
+    print(f"cent discover: matched {bool(payload.get('matched'))}; "
+          f"{len(payload.get('methods') or ())} declared method(s)")
+    goals = (payload.get("problem") or {}).get("goals") or ()
+    if goals:
+        print("  goals     " + ", ".join(goals))
+    for method in (payload.get("methods") or ())[:8]:
+        print(f"  {str(method.get('primitive')):<18} {method.get('name')}")
+    for gap in payload.get("gaps") or ():
+        print(f"  gap       {gap}")
+    return 0
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m glm_universal.tools",
@@ -6589,6 +6665,23 @@ def _parser() -> argparse.ArgumentParser:
     rules = sub.add_parser("directives", help="the project directives")
     rules.add_argument("--json", action="store_true")
     rules.set_defaults(handler=_directives)
+
+    cent = sub.add_parser(
+        "cent", help="the cent transfer compiler: discover, propose, originate")
+    cent_action = cent.add_mutually_exclusive_group(required=True)
+    cent_action.add_argument("--discover", metavar="PROBLEM",
+                             help="the declared methods a problem statement admits")
+    cent_action.add_argument("--propose", metavar="OPERATION",
+                             help="reviewable proposals for an operation, with their handoff")
+    cent_action.add_argument("--originate", metavar="SEARCH",
+                             choices=("analogies", "scale"),
+                             help="the D8 (declared analogies) or D9 (wheel corpus) search")
+    cent.add_argument("--target", default="glm-reference",
+                      help="target profile for --propose (default: glm-reference)")
+    cent.add_argument("--top", type=int, default=3,
+                      help="maximum proposals for --propose (default: 3)")
+    cent.add_argument("--json", action="store_true")
+    cent.set_defaults(handler=_cent)
 
     landscape = sub.add_parser(
         "landscape", help="the pre-registered wobble landscape study")

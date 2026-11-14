@@ -99,5 +99,41 @@ class TestPropose(unittest.TestCase):
         self.assertTrue(environment["available"], environment.get("detail"))
 
 
+
+class TestTheToolsCommand(unittest.TestCase):
+    """``python3 -m glm_universal.tools cent`` -- the developer-facing surface."""
+
+    def test_the_command_parses_each_of_its_three_actions(self):
+        from glm_universal import tools as tools_module
+        parser = tools_module._parser()
+        discover = parser.parse_args(["cent", "--discover", "a square root"])
+        self.assertEqual(discover.handler, tools_module._cent)
+        self.assertEqual(discover.discover, "a square root")
+        propose = parser.parse_args(["cent", "--propose", "sqrt", "--top", "2"])
+        self.assertEqual(propose.top, 2)
+        self.assertEqual(propose.propose, "sqrt")
+        originate = parser.parse_args(["cent", "--originate", "scale"])
+        self.assertEqual(originate.originate, "scale")
+
+    def test_one_action_is_required(self):
+        from glm_universal import tools as tools_module
+        with self.assertRaises(SystemExit):
+            tools_module._parser().parse_args(["cent"])
+
+    def test_the_handler_prints_the_methods_and_its_gaps(self):
+        import contextlib
+        import io
+        from glm_universal import tools as tools_module
+        args = tools_module._parser().parse_args(["cent", "--discover", "a square root"])
+        buffer = io.StringIO()
+        with contextlib.redirect_stdout(buffer):
+            status = tools_module._cent(args)
+        printed = buffer.getvalue()
+        self.assertEqual(status, 0)
+        self.assertIn("cent discover", printed)
+        self.assertIn("declared method", printed)
+        self.assertIn("gap", printed)
+
+
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
