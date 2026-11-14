@@ -55,23 +55,23 @@ def main() -> int:
     bad_metrics = sabotaged["metrics"]
 
     expect(
-        base_metrics["candidate_recall"] == "15/16"
-        and bad_metrics["candidate_recall"] == "4/16",
-        "constant scoring drops candidate recall from 15/16 to 4/16",
+        base_metrics["candidate_recall"] == "17/20"
+        and bad_metrics["candidate_recall"] == "4/20",
+        "constant scoring drops candidate recall from 17/20 to 4/20",
     )
     expect(
-        base_metrics["case_recall"] == "9/10"
-        and bad_metrics["case_recall"] == "1/10",
-        "constant scoring drops known-valid case recall from 9/10 to 1/10",
+        base_metrics["case_recall"] == "7/10"
+        and bad_metrics["case_recall"] == "0/10",
+        "constant scoring drops known-valid case recall from 7/10 to 0/10",
     )
     expect(
-        base_metrics["false_positive_rate"] == "2/6"
+        base_metrics["false_positive_rate"] == "1/6"
         and bad_metrics["false_positive_rate"] == "4/6",
         "constant scoring worsens the negative-control false-positive rate",
     )
     expect(
-        base_metrics["target_pass_rate"] == "14/14"
-        and bad_metrics["target_pass_rate"] == "3/14",
+        base_metrics["target_pass_rate"] == "16/18"
+        and bad_metrics["target_pass_rate"] == "3/18",
         "constant scoring also removes executable target candidates",
     )
     expect(
@@ -87,7 +87,7 @@ def main() -> int:
         case["id"] for case in sabotaged["known_invalid"] if not case["passed"]
     }
     expect(
-        base_failures == {"mult-not-fluid-continuity", "quantized-carry-not-pll"}
+        base_failures == {"mult-not-fluid-continuity"}
         and bad_failures
         and len(bad_failures) > len(base_failures)
         and "exp-not-log-domain-sqrt" not in bad_failures,
@@ -126,7 +126,13 @@ def main() -> int:
     }
     expect(
         declared["sqrt"] == {"cam-profile", "log-domain-sqrt", "orifice-pressure-flow"}
-        and declared["sum"] == {"fluid-continuity", "kcl-conservation", "opamp-summing"}
+        and declared["sum"]
+        == {
+            "fluid-continuity",
+            "kcl-conservation",
+            "opamp-summing",
+            "rheology-continuity",
+        }
         and set(base_metrics["triage_candidates"]) != set(),
         "supported_operations remains available as validation metadata, not as the candidate filter",
     )

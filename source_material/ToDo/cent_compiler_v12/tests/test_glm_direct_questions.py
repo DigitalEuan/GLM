@@ -114,7 +114,7 @@ def main() -> int:
                 and method.get("route") == "declared-analogy"
                 and probe.get("passed") is True
                 and probe.get("optimal") is False
-                and method.get("wheel_scan", {}).get("wheels_scanned") == 39
+                and method.get("wheel_scan", {}).get("wheels_scanned") == 40
                 and method.get("wheel_scan", {}).get("selected") == ["W36", "W37"]
                 and any("optimality" in gap for gap in method.get("gaps", ())),
                 f"{query_id}: packing proposes the pressure-settling candidate without an optimality claim",

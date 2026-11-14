@@ -877,7 +877,7 @@ def _():
     expect(result.returncode == 0, result.stderr)
     expect(
         "MECHANISM REGISTRY" in result.stdout
-        and "10 seeded cent-mechanism/1 cards" in result.stdout,
+        and "13 seeded cent-mechanism/1 cards" in result.stdout,
         result.stdout[:600],
     )
     ids = (
@@ -887,6 +887,9 @@ def _():
         "fluid-continuity",
         "opamp-summing",
         "log-domain-arithmetic",
+        "rotational-w4-noise-shaping",
+        "mechanics-noise-shaping",
+        "rheology-continuity",
         "cam-profile",
         "orifice-pressure-flow",
         "pll-phase-tracking",
@@ -903,8 +906,8 @@ def _():
     payload = json.loads(json_result.stdout)
     expect(
         payload.get("schema") == "cent-mechanism-registry/1"
-        and payload.get("count") == 10
-        and len(payload.get("mechanisms") or ()) == 10,
+        and payload.get("count") == 13
+        and len(payload.get("mechanisms") or ()) == 13,
         payload,
     )
     expect(

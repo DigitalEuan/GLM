@@ -741,6 +741,169 @@ INTERPRETATIONS = (
             "no voltage/current scaling or device netlist",
         ),
     ),
+    # D9 registrations: the first two pairings the declared-data search
+    # originated and the owner promoted into the production registry.  The
+    # interpretation records are quoted from wheels/W4.json and wheels/W5.json
+    # declared axioms; the search re-derives them (see
+    # cent_compiler/origination_scale.py parity_checks).
+    DeltaInterpretation(
+        id="rotational-w4-noise-shaping",
+        base_id="delta-sigma-error-feedback",
+        operators=(
+            "effort-flow-duality",
+            "sampling-quantization",
+            "feedback-equivalence",
+            "composition",
+        ),
+        name="flywheel rotational noise-shaping interpretation",
+        principle=(
+            "Quantize the accumulated torque error, feed the quantized "
+            "angular-velocity code back, and reconstruct the input from the "
+            "code mean: the declared first-order error-feedback loop carried "
+            "into rotational mechanics with 'angular_momentum' as the state "
+            "variable."
+        ),
+        source_domains=("rotational",),
+        carrier="normalized angular_velocity code",
+        invariants=(
+            "the declared wheel law is carried, not replaced",
+            "all arithmetic stays exact rational; no binary float",
+            "the first-order recurrence stays exact on the normalized domain",
+        ),
+        laws=(
+            "u_n = u_(n-1) + (x - y_(n-1)); y_n = quantize(u_n), ties away from zero",
+            "state 'angular_momentum' accumulates the declared torque error",
+            "power pair: power = torque * angular_velocity (wheels/W4.json)",
+        ),
+        validity=(
+            "normalized input in [0, 1] with a declared quantum and full scale",
+            "the accumulator is bounded by the declared integrator limit",
+        ),
+        failure_modes=(
+            "bearing friction, torsional compliance and slew are not modeled",
+            "no device binding, calibration or measured evidence",
+        ),
+        provenance=(
+            "cent_compiler/origination_scale.py",
+            "wheels/W4.json: power = torque * angular_velocity",
+        ),
+        gaps=(
+            "normalized software only; no measured flywheel or escapement",
+            "originated by the D9 declared-data search; promoted to production",
+            "unit-scale binding is illustrative, not calibrated",
+        ),
+        duality=(
+            ("source_effort", "voltage"),
+            ("source_flow", "current"),
+            ("target_effort", "torque"),
+            ("target_flow", "angular_velocity"),
+        ),
+    ),
+    DeltaInterpretation(
+        id="mechanics-noise-shaping",
+        base_id="delta-sigma-error-feedback",
+        operators=(
+            "effort-flow-duality",
+            "sampling-quantization",
+            "feedback-equivalence",
+            "composition",
+        ),
+        name="mechanical escapement noise-shaping interpretation",
+        principle=(
+            "Quantize the accumulated force error, feed the quantized "
+            "velocity code back, and reconstruct the input from the code "
+            "mean: the declared first-order error-feedback loop carried into "
+            "linear mechanics with 'momentum' as the state variable."
+        ),
+        source_domains=("mechanics",),
+        carrier="normalized velocity code",
+        invariants=(
+            "the declared wheel law is carried, not replaced",
+            "all arithmetic stays exact rational; no binary float",
+            "the first-order recurrence stays exact on the normalized domain",
+        ),
+        laws=(
+            "u_n = u_(n-1) + (x - y_(n-1)); y_n = quantize(u_n), ties away from zero",
+            "state 'momentum' accumulates the declared force error",
+            "power pair: power = force * velocity (wheels/W5.json)",
+        ),
+        validity=(
+            "normalized input in [0, 1] with a declared quantum and full scale",
+            "the accumulator is bounded by the declared integrator limit",
+        ),
+        failure_modes=(
+            "friction, compliance and finite response are not modeled",
+            "no device binding, calibration or measured evidence",
+        ),
+        provenance=(
+            "cent_compiler/origination_scale.py",
+            "wheels/W5.json: power = force * velocity",
+        ),
+        gaps=(
+            "normalized software only; no measured escapement or junction",
+            "originated by the D9 declared-data search; promoted to production",
+            "unit-scale binding is illustrative, not calibrated",
+        ),
+        duality=(
+            ("source_effort", "voltage"),
+            ("source_flow", "current"),
+            ("target_effort", "force"),
+            ("target_flow", "velocity"),
+        ),
+    ),
+    # D10 registration: the W37 rheology junction the D9 search discovered by
+    # dimensional scan (no TIER-3 analogy ever declared it).  Promoted to a
+    # production pairing; the search re-derives it (origination_scale parity).
+    DeltaInterpretation(
+        id="rheology-continuity",
+        base_id="kcl-conservation",
+        operators=("effort-flow-duality", "composition"),
+        name="rheological stress/strain-rate junction interpretation",
+        principle=(
+            "At a declared ideal viscoelastic junction, signed strain_rate "
+            "conserves; the junction realizes exact addition of two "
+            "strain_rate quantities without a scale parameter, and a "
+            "declared reversed port supplies exact negation for difference. "
+            "The pairing was discovered by the D9 dimensional scan of "
+            "wheels/W37.json (dissipated_power = stress * strain_rate), not "
+            "by any declared TIER-3 analogy."
+        ),
+        source_domains=("rheology",),
+        carrier="normalized strain_rate",
+        invariants=(
+            "the declared wheel law is carried, not replaced",
+            "all arithmetic stays exact rational; no binary float",
+            "sum and difference remain exact operations",
+        ),
+        laws=(
+            "q_total = q_a + q_b at a declared conservation junction "
+            "(dissipated_power = stress * strain_rate)",
+            "q_total = q_a - q_b via a declared reversed port and the same junction",
+        ),
+        validity=(
+            "two normalized exact rational inputs",
+            "the exact route carries no device calibration",
+        ),
+        failure_modes=(
+            "leakage, loss and finite response are not modeled",
+            "no device binding, calibration or measured evidence",
+        ),
+        provenance=(
+            "cent_compiler/origination_scale.py",
+            "wheels/W37.json: dissipated_power = stress * strain_rate",
+        ),
+        gaps=(
+            "normalized software only; no measured junction or device",
+            "originated by the D9 declared-data search; promoted to production in D10",
+            "unit-scale binding is illustrative, not calibrated",
+        ),
+        duality=(
+            ("source_effort", "voltage"),
+            ("source_flow", "current"),
+            ("target_effort", "stress"),
+            ("target_flow", "strain_rate"),
+        ),
+    ),
 )
 
 _BASE_IDS = {card.id for card in _BASE_MECHANISM_CARDS}
@@ -772,7 +935,7 @@ def generate_mechanism_card(
         "operation": base_card.supported_operations[0],
         "primitive_chain": base_card.primitive_chain,
         "stateful": base_card.stateful,
-        "feedback": False,
+        "feedback": base_card.stateful and "quantize" in base_card.primitive_chain,
         "domain": base_card.source_domains[0],
         "carrier": base_card.carrier,
         "target_domain": interpretation.source_domains[0],
@@ -781,6 +944,14 @@ def generate_mechanism_card(
         "scale": interpretation.scale,
         "offset": interpretation.offset,
     }
+    if base_card.stateful:
+        # The declared state and quantizer levels the base card carries.
+        # The state transform is the identity on the declared carrier; the
+        # level count is the declared two-level (0/1) code of the reference
+        # loop unless the interpretation declares otherwise.
+        model["state"] = base_card.carrier
+        model["state_transform"] = lambda value: value
+        model["levels"] = 2
     if interpretation.duality:
         model["duality"] = dict(interpretation.duality)
     for operator_id in interpretation.operators:

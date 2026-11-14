@@ -80,17 +80,30 @@ def main() -> int:
 
     expect(
         generated_ids
-        == {"opamp-summing", "fluid-continuity", "log-domain-arithmetic"}
+        == {
+            "opamp-summing",
+            "fluid-continuity",
+            "log-domain-arithmetic",
+            "rotational-w4-noise-shaping",
+            "mechanics-noise-shaping",
+            "rheology-continuity",
+        }
         and not generated_ids & set(base_ids)
         and len(base_ids) == 8
-        and len(live_ids) == 10,
-        "the hand-authored registry has eight principles and the live registry adds three generated cards",
+        and len(live_ids) == 13,
+        "the hand-authored registry has eight principles and the live registry adds six generated cards",
     )
     expect(
         live_ids[:3] == ["delta-sigma-error-feedback", "log-domain-sqrt", "kcl-conservation"]
         and live_ids[3:6]
         == ["opamp-summing", "fluid-continuity", "log-domain-arithmetic"]
-        and live_ids[6:]
+        and live_ids[6:9]
+        == [
+            "rotational-w4-noise-shaping",
+            "mechanics-noise-shaping",
+            "rheology-continuity",
+        ]
+        and live_ids[9:]
         == [
             "cam-profile",
             "orifice-pressure-flow",
@@ -104,7 +117,14 @@ def main() -> int:
     expect(
         all(
             MECHANISM_BY_ID[card_id].principle_id
-            == ("transcendental-identity" if card_id == "log-domain-arithmetic" else "kcl-conservation")
+            == (
+                "transcendental-identity"
+                if card_id == "log-domain-arithmetic"
+                else "delta-sigma-error-feedback"
+                if card_id
+                in ("rotational-w4-noise-shaping", "mechanics-noise-shaping")
+                else "kcl-conservation"
+            )
             for card_id in generated_ids
         )
         and MECHANISM_BY_ID["fluid-continuity"].operators

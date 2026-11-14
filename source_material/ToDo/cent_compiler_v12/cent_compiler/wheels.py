@@ -78,6 +78,44 @@ def parse_monomial(text: str) -> Monomial:
             return Monomial.make(1, {dn: Fraction(1)})
         if isinstance(node, ast.Name):
             return Monomial.make(1, {node.id: Fraction(1)})
+        # v12_3.0 (D10): sign_of(x) is a declared dimensionless projection
+        # of a difference (the comparator/threshold law of W42).  Its result
+        # carries no quantity powers: the three-level state is dimensionless
+        # whatever the input dimension is.  Only the name ``sign_of`` is
+        # accepted; every other call remains unsupported syntax.
+        if isinstance(node, ast.Call):
+            fn = node.func
+            if (
+                isinstance(fn, ast.Name)
+                and fn.id == "sign_of"
+                and len(node.args) == 1
+                and not node.keywords
+            ):
+                arg = node.args[0]
+                # sign_of(a - b): a comparator over a difference of two
+                # quantities.  The difference law stays at the wheels layer:
+                # only the projection (dimensionless three-level result) is
+                # a monomial.
+                if isinstance(arg, ast.BinOp) and isinstance(arg.op, ast.Sub):
+                    # structurally: two plain quantity names
+                    plain = (
+                        isinstance(arg.left, ast.Name)
+                        and isinstance(arg.right, ast.Name)
+                    )
+                    if not plain:
+                        raise ValueError(
+                            "sign_of accepts a difference of plain "
+                            f"quantities, not products: {text!r}"
+                        )
+                    return Monomial.make(1, {})
+                inner = visit(arg)
+                if inner.powers:
+                    raise ValueError(
+                        "sign_of accepts a difference of quantities, not a "
+                        f"product: {text!r}"
+                    )
+                return Monomial.make(1, {})
+            raise ValueError(f"unsupported syntax in {text!r}")
         if (
             isinstance(node, ast.Constant)
             and isinstance(node.value, int)

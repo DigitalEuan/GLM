@@ -249,6 +249,70 @@ set the next task.
 
 ## 5. Review history
 
+### 2026-11-13 — D10 implemented
+
+- New wheel W42 (Elastic Buckling and Bistable Snap-Through) declares the
+  three-level law the sign family was missing; `sign_of(a - b)` is now a
+  parsed dimensionless projection at the wheels layer.
+- The sign family is licensed by computed acceptance (one pairing
+  originated, oracle-passed); the speculative ring drains and a
+  certification queue names reachable paths for the still-blocked
+  candidates. W13/W14 still refuse — the license is per-wheel.
+- W37 rheology — discovered by the D9 dimensional scan — is promoted to a
+  production pairing: 13 cards, both sum and difference certify
+  `target-simulated`, and the scoreboard denominator grows to 10.
+- Metric 1 reports 18/10 (D4 1 + D8 3 + D9 13 + D10 1). The origination
+  gate is 56 checks (D8 17 + D9 24 + D10 15).
+
+### 2026-11-13 — D9 implemented
+
+### 2026-11-13 — D9 implemented (earlier)
+
+- Added `cent_compiler/origination_scale.py` and `cent originate --search
+  scale`: a declared-data search over the wheel corpus whose family
+  acceptance is computed from 8-axis dimension vectors, not curated lists.
+- Fourteen new pairings originated across three families (8 junction, 3
+  noise-shaping, 5 sqrt-inversion), every one oracle-passed; W37 rheology
+  was discovered by dimensional scan — no TIER-3 analogy had declared it.
+- Two noise-shapers (W4 flywheel, W5 escapement) were promoted into the
+  production registry with executable adapters and target-simulated
+  certificates; the registry now has 12 cards, 5 of them generated.
+- The sign family is refused at zero: no wheel declares a three-level law.
+  Its physical candidates are speculative proposals with named unblocks,
+  never counted.
+- Metric 1 reports `4/9 -> 18/9` (search-originated total 18 vs corpus 9);
+  the production denominator stays 9 under the D6 reported-separately
+  precedent. The gate adds 24 D9 checks (41 with D8).
+
+### 2026-11-13 — D8 implemented (earlier today)
+
+### 2026-11-13 — D8 implemented
+
+- Added `cent_compiler/origination.py` and `cent originate`: a search over the
+  7 declared TIER-3 analogies that composes each with the `kcl-conservation`
+  principle through the executable `effort-flow-duality` + `composition`
+  operator chain.
+- Three junction-continuity interpretations originate (acoustic via Paynter
+  W1-W7, rotational via rotational-linear W4-W5, electromechanical via
+  piezo/Lorentz W1-W5); each generates a valid card and passes an independent
+  exact oracle on 8 fixed vectors. The capacitor-inductor, thermoelectric and
+  optoelectronic analogies are refused with recorded reasons (no
+  power-conjugate junction flow).
+- The search re-derives the hand-authored `fluid-continuity` record from the
+  W1-W6 analogy (derivation parity), and a sabotage check shows an
+  always-accept predicate would accept 7/7 while the real predicate refuses 3.
+- Scoreboard metric 1 (origination rate) moves from `1/9` to `4/9`; the `≥3`
+  target is met without inventing any non-declared analogy. The gate adds
+  `tests/test_origination.py` (17 checks).
+- Also repaired in passing: `test_question_corpus.py` now tolerates argparse's
+  Python-3.12 unquoted choice list, and the sibling `glm-study` CLI's
+  `evidence.py` shipped with 21 unresolved merge-conflict markers (resolved to
+  the upstream side; the CLI answers exact queries again).
+- The originated interpretations remain normalized-flow software only; no
+  measured junction, device binding or netlist. Origination currently covers
+  junction-conservation pairings only; other principles (noise shaping,
+  transcendental identity) are not yet searched.
+
 ### 2026-11-12 — D7 implemented
 
 - Added the `threshold-comparator` mechanism card with an exact three-level

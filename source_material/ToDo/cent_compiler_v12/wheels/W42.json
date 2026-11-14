@@ -1,0 +1,279 @@
+{
+ "id": "W42",
+ "title": "Elastic Buckling and Bistable Snap-Through",
+ "axioms": [
+  "critical_load = youngs_modulus * moment_of_inertia_of_section / length^2",
+  "snap_through_state = sign_of(applied_load - critical_load)",
+  "hysteresis_band = release_load_fraction * critical_load"
+ ],
+ "cases": [
+  {
+   "id": "W42-01",
+   "equation": "critical_load = youngs_modulus * moment_of_inertia_of_section / length^2",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "Euler buckling of a pin-ended column; end-condition factors are separate conventions"
+  },
+  {
+   "id": "W42-02",
+   "equation": "snap_through_state = sign_of(applied_load - critical_load)",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "the three-level law: below critical the state is -1 (initial well), at critical 0, above critical +1 (snapped-through well)"
+  },
+  {
+   "id": "W42-03",
+   "equation": "hysteresis_band = release_load_fraction * critical_load",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "the snapped state releases at a lower load than it formed; the fraction is the declared hysteresis"
+  },
+  {
+   "id": "W42-N1",
+   "equation": "critical_load = youngs_modulus * area / length^2",
+   "expected_dimensional": false,
+   "expected_derivable": false,
+   "physical_status": "negative_control",
+   "expected_dimensional_explicit": null,
+   "note": "missing the section moment of inertia; Euler critical load is not EA/L^2"
+  }
+ ],
+ "quantities": [
+  "applied_load",
+  "area",
+  "critical_load",
+  "hysteresis_band",
+  "length",
+  "moment_of_inertia_of_section",
+  "release_load_fraction",
+  "snap_through_state",
+  "youngs_modulus"
+ ],
+ "dimensions": {
+  "applied_load": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "area": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "critical_load": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "hysteresis_band": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "length": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "moment_of_inertia_of_section": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "release_load_fraction": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "snap_through_state": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "youngs_modulus": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "junctions": [
+  {
+   "other_wheel": "W21",
+   "name_in_this_wheel": "youngs_modulus",
+   "name_in_other_wheel": "youngs_modulus",
+   "reason": "the same elastic modulus governs fracture and buckling"
+  },
+  {
+   "other_wheel": "W5",
+   "name_in_this_wheel": "applied_load",
+   "name_in_other_wheel": "force",
+   "reason": "a column load is a force on a mechanical junction"
+  }
+ ],
+ "non_identities": [
+  {
+   "other_wheel": "W4",
+   "name": "moment_of_inertia_of_section",
+   "reason": "a section's second moment of area is not a rotor's mass moment of inertia; identifying them would give a column the dynamics of a flywheel"
+  }
+ ]
+}

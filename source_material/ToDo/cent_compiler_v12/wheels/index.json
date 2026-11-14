@@ -1,8 +1,8 @@
 {
  "description": "The 39 built formula wheels spanning W1-W41 (W30 and W31 are reserved, not built).",
- "total_wheels": 39,
- "total_axioms": 98,
- "total_cases": 153,
+ "total_wheels": 40,
+ "total_axioms": 101,
+ "total_cases": 157,
  "axes": [
   "L",
   "M",
@@ -246,14 +246,14 @@
    "file": "W35.json"
   },
   "W36": {
-   "title": "Numerical SAT Substrate (NumPy) — quadratic energy laws",
+   "title": "Numerical SAT Substrate (NumPy) \u2014 quadratic energy laws",
    "n_axioms": 2,
    "n_cases": 4,
    "n_quantities": 4,
    "file": "W36.json"
   },
   "W37": {
-   "title": "Viscoelastic Settling (SciPy) — Maxwell creep and dissipation",
+   "title": "Viscoelastic Settling (SciPy) \u2014 Maxwell creep and dissipation",
    "n_axioms": 3,
    "n_cases": 4,
    "n_quantities": 6,
@@ -286,6 +286,13 @@
    "n_cases": 4,
    "n_quantities": 7,
    "file": "W41.json"
+  },
+  "W42": {
+   "title": "Elastic Buckling and Bistable Snap-Through",
+   "n_axioms": 3,
+   "n_cases": 4,
+   "n_quantities": 9,
+   "file": "W42.json"
   }
  },
  "junctions": [
@@ -687,6 +694,20 @@
    "name_a": "gravitational_constant",
    "name_b": "gravitational_constant",
    "reason": "the same gravitational constant"
+  },
+  {
+   "wheel_a": "W21",
+   "wheel_b": "W42",
+   "name_a": "youngs_modulus",
+   "name_b": "youngs_modulus",
+   "reason": "the same elastic modulus governs fracture and buckling"
+  },
+  {
+   "wheel_a": "W5",
+   "wheel_b": "W42",
+   "name_a": "force",
+   "name_b": "applied_load",
+   "reason": "a column load is a force on a mechanical junction"
   }
  ],
  "non_identities": [
@@ -743,6 +764,12 @@
    "wheel_b": "W8",
    "name": "temperature_difference",
    "reason": "a temperature difference and an absolute temperature share a dimension but not a reference point"
+  },
+  {
+   "wheel_a": "W4",
+   "wheel_b": "W42",
+   "name": "moment_of_inertia_of_section",
+   "reason": "a section's second moment of area is not a rotor's mass moment of inertia; identifying them would give a column the dynamics of a flywheel"
   }
  ]
 }

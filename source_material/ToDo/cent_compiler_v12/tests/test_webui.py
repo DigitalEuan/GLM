@@ -283,11 +283,11 @@ def main() -> int:
             status, body = request(base + "/api/wheels")
             wheel_index = json.loads(body)
             expect(
-                status == 200 and wheel_index["total_wheels"] == 39
-                and len(wheel_index["wheels"]) == 39
-                and wheel_index["total_axioms"] == 98
-                and wheel_index["total_cases"] == 153
-                and wheel_index["total_spokes"] == 366,
+                status == 200 and wheel_index["total_wheels"] == 40
+                and len(wheel_index["wheels"]) == 40
+                and wheel_index["total_axioms"] == 101
+                and wheel_index["total_cases"] == 157
+                and wheel_index["total_spokes"] == 369,
                 "wheel index lists the full substrate with derived spokes",
             )
             expect(

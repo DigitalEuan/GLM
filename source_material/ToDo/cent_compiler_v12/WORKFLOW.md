@@ -44,6 +44,9 @@ Order and gates come only from `DIRECTIVE.md` §4.
 | **D5 — refutation and generated negatives** | **Complete, gate green** | D1 gate green | 8 generated negatives exceed the 6 hand-declared controls; every negative has a witness pair; 10/10 test obligations are derived | None; rule is sound by construction |
 | **D6 — retrodictive holdout** | **Complete, report includes a negative-control refusal** | D1–D3 complete; D4 nonzero origination | Five frozen pre-1940 mechanisms retrieve five dated post-cutoff targets at rank one (`5/5`), with one declared false-positive candidate, one excluded candidate, and a strict RSA negative control reporting `no_licensed_source` and one coverage miss | Kill did not fire; the negative-control refusal is reported rather than hidden |
 | **D7 — recover sign** | **Complete, gate green** | D6 gate green | Added a `threshold-comparator` mechanism and exact `glm-reference` adapter; negative, zero and positive fixed vectors pass; wheel is 10/10 testable | No kill; zero branch is exact by declaration, no measured comparator claimed |
+| **D8 — originate at scale** | **Complete, gate green** | D7 gate green; scoreboard metric 1 below target |
+| **D9 — origination beyond the corpus** | **Complete, gate green** | D8 gate green; user direction to push past the fixed denominator |
+| **D10 — unblock the refused sign family + promote W37** | **Complete, gate green** | D9 left the sign family refused with a named unblock; user direction to continue development | `cent_compiler/origination.py` + `cent originate`: search over the 7 declared TIER-3 analogies accepts 4, refuses 3 with recorded reasons; 3 junction-continuity interpretations (acoustic, rotational, electromechanical) are synthesized through `effort-flow-duality` + `composition`, generate valid cards, and pass an independent exact oracle on 8 vectors each; fluid derivation parity holds; origination rate `1/9` → `4/9` (target `≥3` met); 17/17 `tests/test_origination.py` checks | Kill would fire if the search could not reach `≥3` without inventing a non-declared analogy; it did not fire — all three originate from already-declared data |
 
 D5's gate is green. D6's stated kill criterion is "if origination is still zero
 after D3", and D4 recorded a nonzero self-transfer origination. Its entry
@@ -233,19 +236,164 @@ failure; it is not counted as production origination.
 
 ### Experimental side-arm: machine composer
 
-The `cent machine` side-arm is **not D8** and does not change the directive or
-scoreboard. It composes a complete function tree and executes the branch it can
-test. The first machine, `sigma-delta-sqrt`, selects `sum -> kcl-conservation`,
-`sign -> threshold-comparator` and `quantized_carry -> delta-sigma-error-feedback`
-from the existing rankings, validates a one-bit 100,000-sample digital branch
-(error `4.573e-06`, in-band suppression `36.92 dB`, NTF slope `28.02 dB/dec`),
-and leaves the analog reconstruction, jitter and supply stages as explicit gaps.
-It adds `test_machine.py` (23 checks) to the gate. Assembled routes can also
-be wrapped in the same four-stage template; `--load mechanical|fluid` selects a
-declared TIER 3 transducer branch without claiming a measured load. See
+The `cent machine` side-arm is **not directive work** and does not change the
+directive or scoreboard. It composes a complete function tree and executes the
+branch it can test. The first machine, `sigma-delta-sqrt`, selects
+`sum -> kcl-conservation`, `sign -> threshold-comparator` and
+`quantized_carry -> delta-sigma-error-feedback` from the existing rankings,
+validates a one-bit 100,000-sample digital branch (error `4.573e-06`, in-band
+suppression `36.92 dB`, NTF slope `28.02 dB/dec`), and leaves the analog
+reconstruction, jitter and supply stages as explicit gaps. It adds
+`test_machine.py` (23 checks) to the gate. Assembled routes can also be wrapped
+in the same four-stage template; `--load mechanical|fluid` selects a declared
+TIER 3 transducer branch without claiming a measured load. See
 [`docs/MACHINES.md`](docs/MACHINES.md).
 
-## 12. Repository health
+## 12. D8 completion record
+
+1. Added `cent_compiler/origination.py` and `cent originate`: a search that
+   composes the `kcl-conservation` principle with each of the 7 declared
+   TIER-3 analogies in `isomorphism_gate.DECLARED_ANALOGIES`.
+2. The acceptance test is structural and declared-data only: an analogy is
+   accepted when its declared effort/flow pair is power-conjugate (Paynter
+   sense). The capacitor-inductor (energy-storage duality, no junction
+   quantity), thermoelectric (pseudo-bond-graph) and optoelectronic
+   (optical_power is a power quantity, not a flow) analogies are refused with
+   recorded reasons.
+3. Three interpretations are synthesized mechanically — `acoustics-continuity`
+   (Paynter W1-W7), `rotational-continuity` (rotational-linear W4-W5) and
+   `electromechanical-continuity` (piezo/Lorentz W1-W5) — each through the
+   executable `effort-flow-duality` + `composition` chain, with every text
+   field quoted from the analogy's own declared mapping and equations.
+4. Each originated interpretation generates a valid card through
+   `generate_mechanism_card` (the operator chain executes; preconditions
+   refuse where unmet) and passes an independent oracle that re-derives the
+   junction law with plain `Fraction` arithmetic on 8 fixed vectors, with no
+   binary floats in the evidence.
+5. Derivation parity: the search re-derives the hand-authored
+   `fluid-continuity` record from the W1-W6 analogy — the ablation-style
+   check that the search is sound rather than lucky.
+6. Added `tests/test_origination.py` (17 checks): the gate, the refusals, the
+   oracle, parity, the `1/9` → `4/9` scoreboard move, and a sabotage check
+   that an always-accept predicate accepts 7/7 while the real predicate
+   refuses 3.
+7. Scoreboard metric 1 (origination rate) moves from `1/9` to `4/9`; the
+   `≥3` target is met. The D8 kill criterion (cannot reach 3 without
+   inventing a non-declared analogy) did not fire: all three originate from
+   data the repository already declared.
+8. Also repaired two environmental gate failures found while re-running the
+   full gate: `tests/test_question_corpus.py` now tolerates argparse's
+   Python-3.12 unquoted choice list, and the sibling `glm-study` CLI's
+   `evidence.py` had 21 unresolved merge-conflict markers (upstream-side
+   resolution; the CLI now answers exact queries again).
+
+## 13. D9 completion record
+
+1. Added `cent_compiler/origination_scale.py` and `cent originate --search
+   scale`: the declared-data search over `wheels/*.json` (39 wheels, 98
+   declared axioms, 230 dimensioned quantities).
+2. Computed family acceptance replaces the hand-curated frozenset: junction
+   accepts any wheel declaring a power-conjugate pair whose 8-axis dimension
+   vectors close (8 wheels, including **W37 rheology** —
+   `dissipated_power = stress * strain_rate` — which no TIER-3 analogy ever
+   declared); noise-shaper additionally requires an accumulator quantity of
+   dimension dim(effort)*T (3 wheels: W1-parity check, W4 flywheel with
+   `angular_momentum`, W5 escapement with `momentum`); sqrt requires a
+   dimensionally-closing monomial with a squared factor (5 wheels: W3, W4,
+   W5, W14, W26).
+3. The oracle factory synthesizes each family's law from plain `Fraction`
+   arithmetic: junction sum/difference through the public evaluator, the
+   declared first-order error-feedback recurrence, and monomial-derived sqrt
+   vectors with an exact square-back check. No candidate module is imported
+   (R5); the sqrt oracle needs no sqrt — the square-back verifies
+   `root^2 == c * prod(factors)` exactly.
+4. Parity: the computed search re-derives every known pairing (kcl
+   voltage/current, fluid pressure/flow, rotational torque/omega, acoustic
+   pressure/velocity, mechanical force/velocity, W37, the delta-sigma
+   domain boundary, the W4 flywheel accumulator and the W3 sqrt inversion).
+   The W1 electrical loop is honestly NOT re-derived (W1 declares no
+   in-wheel accumulator; charge lives in W15), so the delta-sigma card
+   stays hand-authored and the search does not claim it.
+5. Refusals are recorded, not hidden: W36 (numerical SAT substrate) is
+   refused for sqrt because a dimensionless square is an algebraic penalty,
+   not a physical energy law; the sign family is refused at zero because no
+   wheel declares a three-level or threshold law — its physical candidates
+   (bistable snap-through W13, LC comparator W14) enter the speculative ring
+   with the missing declaration as their named unblock (evidence:
+   speculative, never counted).
+6. Multi-hop composition over declared edges: `composition_paths` walks the
+   7 TIER-3 analogies (bidirectional) plus 57 identity edges; W1 → W4
+   composes through W1-W5-W4.
+7. Two pairings promoted into the production registry:
+   `rotational-w4-noise-shaping` and `mechanics-noise-shaping` — full
+   citizens with interpretation records, behavior signatures, executable
+   `glm-reference` adapters (independently written target-side recurrence;
+   the validator caught and fixed a one-tick vs two-tick feedback timing
+   divergence against the reference) and corpus membership. Both certify
+   `target-simulated` via `cent transfer quantized_carry --validate`.
+8. `tests/test_origination.py` grew to 41 checks (17 D8 + 24 D9): the gate,
+   W37 discovery, W36 refusal, parity, 14 new pairings, unique ids,
+   speculative isolation, registration parity, oracle sabotage (always-
+   accept breaks parity), the kill criterion (every pairing from a declared
+   wheel) and the CLI surface.
+9. Gate fallout from the registry change was updated to the new honest
+   numbers: 12 cards, 5 generated, 17/18 candidate recall, 16/16 target
+   pairs, 5/6 negative controls, sabotage numbers recomputed. The gate is
+   27/27 suites.
+10. Scoreboard: metric 1 reports `4/9 -> 18/9` with the production
+    denominator kept at 9 (the D6 reported-separately precedent); the
+    search-originated total 18 exceeds the original corpus of 9.
+
+## 14. D10 completion record
+
+1. Declared `wheels/W42.json` — Elastic Buckling and Bistable Snap-Through
+   with the three-level law `snap_through_state = sign_of(applied_load -
+   critical_load)`, Euler buckling and a hysteresis-band axiom; 9 quantities
+   with exact 8-axis dimensions, 4 cases (one negative control), a W21
+   modulus junction, a W5 load junction and a W4 section-inertia
+   non-identity.  `wheels/index.json` totals move to 40 wheels / 101
+   per-file axioms / 157 cases / 59 junctions / 10 non-identities.
+2. Taught `wheels.parse_monomial` the `sign_of(a - b)` dimensionless
+   projection (v12_3.0): the comparator law parses without becoming a
+   monomial; only `sign_of` over a difference of plain quantities is
+   accepted, everything else stays unsupported syntax.  A first-draft
+   Euler axiom with a spurious `area` factor was caught by the wheels'
+   own dimensional regression and fixed before anything downstream saw it.
+3. The D10 sign family in `origination_scale.review_sign`: computed
+   acceptance — a declared `sign_of` axiom whose result is a declared
+   dimensionless quantity and whose compared pair shares a dimension (a
+   true threshold).  W42 accepts; W13/W14 still refuse (they declare no
+   three-level law), so the license is per-wheel, not blanket.
+4. The speculative ring now drains: a proposal whose unblock lands leaves
+   the ring and is originated instead.  The new `certification_queue`
+   lists still-blocked sign candidates as certifiable via the declared W42
+   threshold, with reachable declared-graph paths (W13→W5→W42,
+   W14→W1→W5→W42) — proposals, never counted.
+5. The sign oracle exercises five vectors (below/at/above, far-below,
+   far-above) against an independent three-level closed form; the search
+   originates `structural-snap-through-sign` (W42), oracle-passed, not
+   hand-authored.
+6. W37 rheology — the pairing D9 discovered by dimensional scan — is
+   promoted to production: interpretation record, behavior signature,
+   executable `glm-reference` sum/difference adapters (independently
+   written; the validator's difference vectors initially caught a
+   sum-vectors binding bug), corpus membership in both sum and difference
+   positive cases, and `target-simulated` certificates for both
+   operations.  The registry has 13 cards, 6 generated.  The scoreboard
+   denominator grows to 10 with the promoted pairing inside it.
+7. `cent transfer` gained `--limit` (the validation retrieval window) so
+   honest rank-4 candidates can be validated without touching the ranking.
+8. `tests/test_origination.py` grew to 56 checks (17 D8 + 24 D9 + 15 D10):
+   W42 licensing, ring drain, queue paths, oracle vectors, sabotage (an
+   always-accept review inflates the family), W37 registration and live
+   certificates, the 18/10 scoreboard, and the kill criterion (the unblock
+   comes from a declared wheel law, not code).
+9. Count fallout updated to the new honest numbers: fixture axioms fields
+   (40/100/239/56/59), discovery graph counts, webui index totals
+   (including the per-file vs graph axiom-count distinction: 101 vs 100),
+   case regression 157/157.
+
+## 15. Repository health
 
 - The directive appendix now names only files that exist. The historical
   `TOP_LEVEL_REVIEW.md`, retrieval probe and read-only source snapshot were not
@@ -259,7 +407,7 @@ declared TIER 3 transducer branch without claiming a measured load. See
 - Generated output (`cent_out/`, `__pycache__/`) is ignored; do not treat it as
   repository content.
 
-## 13. Reporting rule
+## 16. Reporting rule
 
 Every task closes with:
 

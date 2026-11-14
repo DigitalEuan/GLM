@@ -100,17 +100,17 @@ def main() -> int:
     )
 
     expect(
-        metrics["candidate_recall"] == "15/16"
-        and metrics["case_recall"] == "9/10"
-        and metrics["false_positive_rate"] == "2/6"
-        and metrics["negative_control_pass_rate"] == "4/6"
-        and metrics["target_pass_rate"] == "14/14"
-        and metrics["artifact_count"] == 14
+        metrics["candidate_recall"] == "17/20"
+        and metrics["case_recall"] == "7/10"
+        and metrics["false_positive_rate"] == "1/6"
+        and metrics["negative_control_pass_rate"] == "5/6"
+        and metrics["target_pass_rate"] == "16/18"
+        and metrics["artifact_count"] == 16
         and metrics["unadapted_candidates"] == 2
         and metrics["unadapted_retrievals"] == 0
         and metrics["unadapted_refusal_failures"] == []
-        and metrics["retrieval_evidence_completeness"] == "15/16"
-        and metrics["target_evidence_completeness"] == "14/14",
+        and metrics["retrieval_evidence_completeness"] == "17/20"
+        and metrics["target_evidence_completeness"] == "16/18",
         "the baseline reports the honest D1 recall, negative-control and evidence numbers",
     )
 
@@ -118,11 +118,17 @@ def main() -> int:
     expect(
         known["sqrt"]["missing"] == ["orifice-pressure-flow"]
         and known["sqrt"]["unlabelled"] == ["fluid-continuity"]
-        and known["sum"]["passed"]
-        and known["difference"]["passed"]
+        and known["sum"]["missing"] == ["rheology-continuity"]
+        and known["difference"]["missing"] == ["rheology-continuity"]
+        and not known["sum"]["passed"]
         and known["quantized_carry"]["passed"]
-        and known["quantized_carry"]["unlabelled"]
-        == ["orifice-pressure-flow", "pll-phase-tracking"]
+        and known["quantized_carry"]["unlabelled"] == []
+        and known["quantized_carry"]["retrieved"]
+        == [
+            "delta-sigma-error-feedback",
+            "mechanics-noise-shaping",
+            "rotational-w4-noise-shaping",
+        ]
         and all(
             known[op]["passed"]
             for op in ("exp", "log", "mult", "div", "reciprocal", "sign")
@@ -134,10 +140,9 @@ def main() -> int:
     expect(
         negative["mult-not-fluid-continuity"]["forbidden_hits"]
         == ["fluid-continuity"]
-        and negative["quantized-carry-not-pll"]["forbidden_hits"]
-        == ["pll-phase-tracking"]
+        and negative["quantized-carry-not-pll"]["forbidden_hits"] == []
         and not negative["mult-not-fluid-continuity"]["passed"]
-        and not negative["quantized-carry-not-pll"]["passed"]
+        and negative["quantized-carry-not-pll"]["passed"]
         and negative["log-not-cam-profile"]["passed"]
         and negative["exp-not-cam-profile"]["passed"]
         and negative["sqrt-not-delta-sigma"]["passed"]
@@ -164,8 +169,17 @@ def main() -> int:
     )
 
     expect(
-        len(payload["targets"]) == 14
-        and all(row["status"] == "pass" for row in payload["targets"])
+        len(payload["targets"]) == 18
+        and all(
+            row["status"] == "pass"
+            for row in payload["targets"]
+            if row["mechanism"] != "rheology-continuity"
+        )
+        and all(
+            row["status"] == "fail"
+            for row in payload["targets"]
+            if row["mechanism"] == "rheology-continuity"
+        )
         and {
             (row["operation"], row["mechanism"]) for row in payload["targets"]
         }
@@ -177,7 +191,11 @@ def main() -> int:
             ("difference", "fluid-continuity"),
             ("difference", "opamp-summing"),
             ("sum", "opamp-summing"),
+            ("sum", "rheology-continuity"),
+            ("difference", "rheology-continuity"),
             ("quantized_carry", "delta-sigma-error-feedback"),
+            ("quantized_carry", "mechanics-noise-shaping"),
+            ("quantized_carry", "rotational-w4-noise-shaping"),
             ("exp", "log-domain-arithmetic"),
             ("log", "log-domain-arithmetic"),
             ("mult", "log-domain-arithmetic"),
@@ -191,8 +209,10 @@ def main() -> int:
             and row["tests"]
             and row["artifact"]
             for row in payload["targets"]
+            if row["mechanism"] != "rheology-continuity"
         ),
-        "the fourteen reference adapter pairs still pass with target-simulated evidence",
+        "sixteen reference adapter pairs pass target-simulated; rheology ranks "
+        "4th behind three equal-scoring junction cards and is a reported miss",
     )
 
     expect(
@@ -230,8 +250,6 @@ def main() -> int:
             "log/log-domain-sqrt",
             "mult/fluid-continuity",
             "mult/kcl-conservation",
-            "quantized_carry/orifice-pressure-flow",
-            "quantized_carry/pll-phase-tracking",
             "reciprocal/fluid-continuity",
             "reciprocal/kcl-conservation",
             "sign/fluid-continuity",
@@ -239,9 +257,13 @@ def main() -> int:
             "sqrt/fluid-continuity",
         ]
         and metrics["false_positive_candidates"]
-        == ["mult/fluid-continuity", "quantized_carry/pll-phase-tracking"]
+        == ["mult/fluid-continuity"]
         and metrics["missing_candidates"]
-        == ["sqrt/orifice-pressure-flow"],
+        == [
+            "sqrt/orifice-pressure-flow",
+            "sum/rheology-continuity",
+            "difference/rheology-continuity",
+        ],
         "unlabelled candidates enter triage while only forbidden hits are false positives",
     )
 
@@ -291,8 +313,8 @@ def main() -> int:
         and "TRANSFER RETRIEVAL EVALUATION" in human.stdout
         and "Known-valid cases" in human.stdout
         and "Negative controls" in human.stdout
-        and "candidate_recall: 15/16" in human.stdout
-        and "false_positive_rate: 2/6" in human.stdout
+        and "candidate_recall: 17/20" in human.stdout
+        and "false_positive_rate: 1/6" in human.stdout
         and "unlabelled (triage)" in human.stdout
         and "Remaining gaps" in human.stdout
         and "Unadapted candidate refusals" in human.stdout,

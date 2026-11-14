@@ -1,0 +1,404 @@
+{
+  "accepted": [
+    "Paynter effort-flow (impedance convention)",
+    "Rotational-linear (textbook)",
+    "Electromechanical (Piezoelectric & Lorentz Force)",
+    "Electro-Hydrodynamic (Piezoresistive & Peristaltic Pump)"
+  ],
+  "fluid_derivation_parity": true,
+  "gaps": [
+    "originated interpretations are normalized-flow software only; no measured junction",
+    "the optical and thermal analogies are refused, not gapped: their declared flow variables are not power-conjugate",
+    "origination covers junction-conservation pairings only; other principles (noise shaping, transcendental identity) are not yet searched"
+  ],
+  "ok": true,
+  "originated": [
+    {
+      "duality": {
+        "target_effort": "acoustic_pressure",
+        "target_flow": "particle_velocity"
+      },
+      "generated_card_valid": true,
+      "hand_authored": false,
+      "id": "acoustics-continuity",
+      "operators": [
+        "effort-flow-duality",
+        "composition"
+      ],
+      "oracle_pass": true,
+      "schema": "cent-originated-interpretation/1",
+      "source_analogy": "Paynter effort-flow (impedance convention)",
+      "vectors": [
+        {
+          "a": "1/2",
+          "b": "1/3",
+          "expected": "5/6",
+          "got": "5/6",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "half-plus-third-sum"
+        },
+        {
+          "a": "-1/4",
+          "b": "1/2",
+          "expected": "1/4",
+          "got": "1/4",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "negative-plus-half-sum"
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "expected": "5/6",
+          "got": "5/6",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "third-and-half-sum"
+        },
+        {
+          "a": "0",
+          "b": "2/3",
+          "expected": "2/3",
+          "got": "2/3",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "zero-and-two-thirds-sum"
+        },
+        {
+          "a": "1/2",
+          "b": "1/3",
+          "expected": "1/6",
+          "got": "1/6",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "half-plus-third-difference"
+        },
+        {
+          "a": "-1/4",
+          "b": "1/2",
+          "expected": "-3/4",
+          "got": "-3/4",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "negative-plus-half-difference"
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "expected": "-1/6",
+          "got": "-1/6",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "third-and-half-difference"
+        },
+        {
+          "a": "0",
+          "b": "2/3",
+          "expected": "-2/3",
+          "got": "-2/3",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "zero-and-two-thirds-difference"
+        }
+      ]
+    },
+    {
+      "duality": {
+        "target_effort": "force",
+        "target_flow": "velocity"
+      },
+      "generated_card_valid": true,
+      "hand_authored": false,
+      "id": "rotational-continuity",
+      "operators": [
+        "effort-flow-duality",
+        "composition"
+      ],
+      "oracle_pass": true,
+      "schema": "cent-originated-interpretation/1",
+      "source_analogy": "Rotational-linear (textbook)",
+      "vectors": [
+        {
+          "a": "1/2",
+          "b": "1/3",
+          "expected": "5/6",
+          "got": "5/6",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "half-plus-third-sum"
+        },
+        {
+          "a": "-1/4",
+          "b": "1/2",
+          "expected": "1/4",
+          "got": "1/4",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "negative-plus-half-sum"
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "expected": "5/6",
+          "got": "5/6",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "third-and-half-sum"
+        },
+        {
+          "a": "0",
+          "b": "2/3",
+          "expected": "2/3",
+          "got": "2/3",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "zero-and-two-thirds-sum"
+        },
+        {
+          "a": "1/2",
+          "b": "1/3",
+          "expected": "1/6",
+          "got": "1/6",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "half-plus-third-difference"
+        },
+        {
+          "a": "-1/4",
+          "b": "1/2",
+          "expected": "-3/4",
+          "got": "-3/4",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "negative-plus-half-difference"
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "expected": "-1/6",
+          "got": "-1/6",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "third-and-half-difference"
+        },
+        {
+          "a": "0",
+          "b": "2/3",
+          "expected": "-2/3",
+          "got": "-2/3",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "zero-and-two-thirds-difference"
+        }
+      ]
+    },
+    {
+      "duality": {
+        "target_effort": "force",
+        "target_flow": "velocity"
+      },
+      "generated_card_valid": true,
+      "hand_authored": false,
+      "id": "electromechanical-continuity",
+      "operators": [
+        "effort-flow-duality",
+        "composition"
+      ],
+      "oracle_pass": true,
+      "schema": "cent-originated-interpretation/1",
+      "source_analogy": "Electromechanical (Piezoelectric & Lorentz Force)",
+      "vectors": [
+        {
+          "a": "1/2",
+          "b": "1/3",
+          "expected": "5/6",
+          "got": "5/6",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "half-plus-third-sum"
+        },
+        {
+          "a": "-1/4",
+          "b": "1/2",
+          "expected": "1/4",
+          "got": "1/4",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "negative-plus-half-sum"
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "expected": "5/6",
+          "got": "5/6",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "third-and-half-sum"
+        },
+        {
+          "a": "0",
+          "b": "2/3",
+          "expected": "2/3",
+          "got": "2/3",
+          "oracle_law": "sum via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "zero-and-two-thirds-sum"
+        },
+        {
+          "a": "1/2",
+          "b": "1/3",
+          "expected": "1/6",
+          "got": "1/6",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "half-plus-third-difference"
+        },
+        {
+          "a": "-1/4",
+          "b": "1/2",
+          "expected": "-3/4",
+          "got": "-3/4",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "negative-plus-half-difference"
+        },
+        {
+          "a": "1/3",
+          "b": "1/2",
+          "expected": "-1/6",
+          "got": "-1/6",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "third-and-half-difference"
+        },
+        {
+          "a": "0",
+          "b": "2/3",
+          "expected": "-2/3",
+          "got": "-2/3",
+          "oracle_law": "difference via plain Fraction arithmetic",
+          "passed": true,
+          "vector": "zero-and-two-thirds-difference"
+        }
+      ]
+    }
+  ],
+  "principle": "kcl-conservation",
+  "refused": [
+    {
+      "analogy": "Capacitor-inductor duality",
+      "reason": "the capacitor-inductor duality maps charge to flux linkage and voltage to current; it is an energy-storage duality between two electrical wheels, not a cross-domain junction flow, and the analogy declares no junction quantity for a conservation transfer"
+    },
+    {
+      "analogy": "Thermoelectric (Seebeck & Peltier)",
+      "reason": "the thermoelectric analogy is a pseudo-bond-graph: heat_flow_rate with temperature_difference as effort does not form a power-conjugate pair of the Paynter kind declared by the conservation principle"
+    },
+    {
+      "analogy": "Optoelectronic (Photodiode & Electro-Optic Modulator)",
+      "reason": "the optoelectronic analogy maps current to optical_power, which is itself a power quantity, not a flow whose product with phase_shift is power; there is no conserved junction variable to sum"
+    }
+  ],
+  "reviews": [
+    {
+      "accepted": true,
+      "analogy": "Paynter effort-flow (impedance convention)",
+      "effort": "acoustic_pressure",
+      "flow": "particle_velocity",
+      "reason": "the declared pair (acoustic_pressure, particle_velocity) is power-conjugate; the KCL conservation law transfers through the declared duality",
+      "target_domain": "acoustics",
+      "wheel_pair": [
+        "W1",
+        "W7"
+      ]
+    },
+    {
+      "accepted": true,
+      "analogy": "Rotational-linear (textbook)",
+      "effort": "force",
+      "flow": "velocity",
+      "reason": "the declared pair (force, velocity) is power-conjugate; the KCL conservation law transfers through the declared duality",
+      "target_domain": "mechanical",
+      "wheel_pair": [
+        "W4",
+        "W5"
+      ]
+    },
+    {
+      "accepted": false,
+      "analogy": "Capacitor-inductor duality",
+      "effort": "current",
+      "flow": "",
+      "reason": "the capacitor-inductor duality maps charge to flux linkage and voltage to current; it is an energy-storage duality between two electrical wheels, not a cross-domain junction flow, and the analogy declares no junction quantity for a conservation transfer",
+      "target_domain": "electrical",
+      "wheel_pair": [
+        "W3",
+        "W14"
+      ]
+    },
+    {
+      "accepted": true,
+      "analogy": "Electromechanical (Piezoelectric & Lorentz Force)",
+      "effort": "force",
+      "flow": "velocity",
+      "reason": "the declared pair (force, velocity) is power-conjugate; the KCL conservation law transfers through the declared duality",
+      "target_domain": "mechanical",
+      "wheel_pair": [
+        "W1",
+        "W5"
+      ]
+    },
+    {
+      "accepted": false,
+      "analogy": "Thermoelectric (Seebeck & Peltier)",
+      "effort": "temperature_difference",
+      "flow": "heat_flow_rate",
+      "reason": "the thermoelectric analogy is a pseudo-bond-graph: heat_flow_rate with temperature_difference as effort does not form a power-conjugate pair of the Paynter kind declared by the conservation principle",
+      "target_domain": "thermal",
+      "wheel_pair": [
+        "W1",
+        "W8"
+      ]
+    },
+    {
+      "accepted": false,
+      "analogy": "Optoelectronic (Photodiode & Electro-Optic Modulator)",
+      "effort": "phase_shift",
+      "flow": "optical_power",
+      "reason": "the optoelectronic analogy maps current to optical_power, which is itself a power quantity, not a flow whose product with phase_shift is power; there is no conserved junction variable to sum",
+      "target_domain": "optical",
+      "wheel_pair": [
+        "W1",
+        "W19"
+      ]
+    },
+    {
+      "accepted": true,
+      "analogy": "Electro-Hydrodynamic (Piezoresistive & Peristaltic Pump)",
+      "effort": "pressure",
+      "flow": "volume_flow_rate",
+      "reason": "the declared pair (pressure, volume_flow_rate) is power-conjugate; the KCL conservation law transfers through the declared duality",
+      "target_domain": "fluidics",
+      "wheel_pair": [
+        "W1",
+        "W6"
+      ]
+    }
+  ],
+  "schema": "cent-origination-ledger/1",
+  "scoreboard": {
+    "after": "4/9",
+    "before": "1/9",
+    "metric": "origination rate (M-D pairings not hand-authored)",
+    "target": ">=3",
+    "target_met": true
+  },
+  "search_space": {
+    "operators": [
+      "effort-flow-duality",
+      "composition"
+    ],
+    "size": 7,
+    "source": "isomorphism_gate.DECLARED_ANALOGIES"
+  }
+}

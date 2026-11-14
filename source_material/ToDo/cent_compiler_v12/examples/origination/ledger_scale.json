@@ -1,0 +1,1313 @@
+{
+  "certification_queue": [
+    {
+      "candidate": "bistable snap-through mass-spring three-level sign",
+      "evidence": "a three-level threshold law is now declared (W42); a W13 sign pairing would carry that declared threshold as its law",
+      "family": "sign",
+      "reachable_through": [
+        "W13-W5(ide) -> W5-W42(ide)"
+      ],
+      "status": "certifiable via the declared threshold",
+      "unblocked_by": [
+        "W42"
+      ],
+      "wheel": "W13",
+      "wheel_title": "Period and the mass-spring oscillator"
+    },
+    {
+      "candidate": "LC-comparator nonlinear threshold three-level sign",
+      "evidence": "a three-level threshold law is now declared (W42); a W14 sign pairing would carry that declared threshold as its law",
+      "family": "sign",
+      "reachable_through": [
+        "W14-W1(ide) -> W1-W5(ana) -> W5-W42(ide)"
+      ],
+      "status": "certifiable via the declared threshold",
+      "unblocked_by": [
+        "W42"
+      ],
+      "wheel": "W14",
+      "wheel_title": "Inductors and the LC circuit"
+    }
+  ],
+  "families": [
+    {
+      "accepted": 8,
+      "family": "junction",
+      "refused": 32
+    },
+    {
+      "accepted": 3,
+      "family": "noise_shaper",
+      "refused": 37
+    },
+    {
+      "accepted": 1,
+      "family": "sign",
+      "refused": 39
+    },
+    {
+      "accepted": 5,
+      "family": "sqrt",
+      "refused": 35
+    }
+  ],
+  "gaps": [
+    "originated interpretations remain normalized software; no measured device",
+    "the sign family is refused: no wheel declares a three-level law (buckling/Schmitt proposals are speculative with named unblocks)",
+    "unit-scale bindings are illustrative declared examples, not calibrations"
+  ],
+  "ok": true,
+  "originated": [
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "electronics-w1-continuity",
+      "law": "power = voltage * current",
+      "oracle_pass": true,
+      "quantities": {
+        "current": "flow",
+        "voltage": "effort"
+      },
+      "reason": "the declared axiom 'power = voltage * current' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W1",
+      "wheel_title": "DC Ohm and power"
+    },
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "w2-w2-continuity",
+      "law": "power = voltage * current",
+      "oracle_pass": true,
+      "quantities": {
+        "current": "flow",
+        "voltage": "effort"
+      },
+      "reason": "the declared axiom 'power = voltage * current' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W2",
+      "wheel_title": "Sinusoidal AC impedance and power"
+    },
+    {
+      "family": "junction",
+      "hand_authored": true,
+      "id": "rheology-continuity",
+      "law": "dissipated_power = stress * strain_rate",
+      "oracle_pass": true,
+      "quantities": {
+        "strain_rate": "flow",
+        "stress": "effort"
+      },
+      "reason": "the declared axiom 'dissipated_power = stress * strain_rate' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W37",
+      "wheel_title": "Viscoelastic Settling (SciPy) \u2014 Maxwell creep and dissipation"
+    },
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "rotational-w38-continuity",
+      "law": "input_power = input_torque * input_angular_velocity",
+      "oracle_pass": true,
+      "quantities": {
+        "input_angular_velocity": "flow",
+        "input_torque": "effort"
+      },
+      "reason": "the declared axiom 'input_power = input_torque * input_angular_velocity' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W38",
+      "wheel_title": "Gears & Mechanical Transmissions"
+    },
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "rotational-w4-continuity",
+      "law": "power = torque * angular_velocity",
+      "oracle_pass": true,
+      "quantities": {
+        "angular_velocity": "flow",
+        "torque": "effort"
+      },
+      "reason": "the declared axiom 'power = torque * angular_velocity' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W4",
+      "wheel_title": "Rotational mechanics (with kinetic energy)"
+    },
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "mechanics-continuity",
+      "law": "power = force * velocity",
+      "oracle_pass": true,
+      "quantities": {
+        "force": "effort",
+        "velocity": "flow"
+      },
+      "reason": "the declared axiom 'power = force * velocity' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W5",
+      "wheel_title": "Linear dynamics and work-energy"
+    },
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "fluidics-continuity",
+      "law": "power = pressure * volume_flow_rate",
+      "oracle_pass": true,
+      "quantities": {
+        "pressure": "effort",
+        "volume_flow_rate": "flow"
+      },
+      "reason": "the declared axiom 'power = pressure * volume_flow_rate' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W6",
+      "wheel_title": "Fluid statics and flow (with hydraulic power)"
+    },
+    {
+      "family": "junction",
+      "hand_authored": false,
+      "id": "acoustics-continuity",
+      "law": "acoustic_intensity = acoustic_pressure * particle_velocity",
+      "oracle_pass": true,
+      "quantities": {
+        "acoustic_pressure": "effort",
+        "particle_velocity": "flow"
+      },
+      "reason": "the declared axiom 'acoustic_intensity = acoustic_pressure * particle_velocity' closes dimensionally (dim(effort) + dim(flow) == dim(power)); the junction conservation law transfers through the declared pair",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-sum"
+        },
+        {
+          "expected": "1/6",
+          "got": "1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "half-third-difference"
+        },
+        {
+          "expected": "1/4",
+          "got": "1/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-sum"
+        },
+        {
+          "expected": "-3/4",
+          "got": "-3/4",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "neg-quarter-half-difference"
+        },
+        {
+          "expected": "5/6",
+          "got": "5/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-sum"
+        },
+        {
+          "expected": "-1/6",
+          "got": "-1/6",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "third-half-difference"
+        },
+        {
+          "expected": "2/3",
+          "got": "2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-sum"
+        },
+        {
+          "expected": "-2/3",
+          "got": "-2/3",
+          "law": "sum/difference via plain Fraction",
+          "passed": true,
+          "vector": "zero-two-thirds-difference"
+        }
+      ],
+      "wheel": "W7",
+      "wheel_title": "Linear plane-wave acoustics"
+    },
+    {
+      "family": "noise_shaper",
+      "hand_authored": false,
+      "id": "rheology-noise-shaping",
+      "law": "dissipated_power = stress * strain_rate",
+      "oracle_pass": true,
+      "quantities": {
+        "strain_rate": "flow",
+        "stress": "effort",
+        "viscosity": "accumulator"
+      },
+      "reason": "the declared pair (stress, strain_rate) closes dimensionally and the declared quantity 'viscosity' has dimension dim(effort)*T, so the first-order error-feedback recurrence carries into this wheel",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "code": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "error": "0",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "1/2",
+          "passed": true,
+          "vector": "half-carry"
+        },
+        {
+          "code": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "error": "0",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "1/3",
+          "passed": true,
+          "vector": "third-carry"
+        },
+        {
+          "code": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "error": "1/60",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "5/12",
+          "passed": true,
+          "vector": "two-fifths-carry"
+        }
+      ],
+      "wheel": "W37",
+      "wheel_title": "Viscoelastic Settling (SciPy) \u2014 Maxwell creep and dissipation"
+    },
+    {
+      "family": "noise_shaper",
+      "hand_authored": true,
+      "id": "rotational-w4-noise-shaping",
+      "law": "power = torque * angular_velocity",
+      "oracle_pass": true,
+      "quantities": {
+        "angular_momentum": "accumulator",
+        "angular_velocity": "flow",
+        "torque": "effort"
+      },
+      "reason": "the declared pair (torque, angular_velocity) closes dimensionally and the declared quantity 'angular_momentum' has dimension dim(effort)*T, so the first-order error-feedback recurrence carries into this wheel",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "code": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "error": "0",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "1/2",
+          "passed": true,
+          "vector": "half-carry"
+        },
+        {
+          "code": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "error": "0",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "1/3",
+          "passed": true,
+          "vector": "third-carry"
+        },
+        {
+          "code": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "error": "1/60",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "5/12",
+          "passed": true,
+          "vector": "two-fifths-carry"
+        }
+      ],
+      "wheel": "W4",
+      "wheel_title": "Rotational mechanics (with kinetic energy)"
+    },
+    {
+      "family": "noise_shaper",
+      "hand_authored": true,
+      "id": "mechanics-noise-shaping",
+      "law": "power = force * velocity",
+      "oracle_pass": true,
+      "quantities": {
+        "force": "effort",
+        "momentum": "accumulator",
+        "velocity": "flow"
+      },
+      "reason": "the declared pair (force, velocity) closes dimensionally and the declared quantity 'momentum' has dimension dim(effort)*T, so the first-order error-feedback recurrence carries into this wheel",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "code": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "error": "0",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "1/2",
+          "passed": true,
+          "vector": "half-carry"
+        },
+        {
+          "code": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "error": "0",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "1/3",
+          "passed": true,
+          "vector": "third-carry"
+        },
+        {
+          "code": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "error": "1/60",
+          "law": "u_n = u_(n-1) + (x - y_(n-1)); ties away from zero",
+          "mean": "5/12",
+          "passed": true,
+          "vector": "two-fifths-carry"
+        }
+      ],
+      "wheel": "W5",
+      "wheel_title": "Linear dynamics and work-energy"
+    },
+    {
+      "family": "sign",
+      "hand_authored": false,
+      "id": "structural-snap-through-sign",
+      "law": "snap_through_state = sign_of(applied_load - critical_load)",
+      "oracle_pass": true,
+      "quantities": {
+        "applied_load": "threshold_high",
+        "critical_load": "threshold_low",
+        "snap_through_state": "state"
+      },
+      "reason": "the declared axiom 'snap_through_state = sign_of(applied_load - critical_load)' projects a difference of same-dimension quantities (applied_load, critical_load) onto the declared dimensionless state 'snap_through_state'; the three-level threshold-comparator law transfers through the declared snap-through threshold",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "difference": "-7/3",
+          "expected": "-1",
+          "got": "-1",
+          "law": "state = sign_of(difference) with levels -1, 0, +1",
+          "passed": true,
+          "vector": "below-threshold-sign"
+        },
+        {
+          "difference": "0",
+          "expected": "0",
+          "got": "0",
+          "law": "state = sign_of(difference) with levels -1, 0, +1",
+          "passed": true,
+          "vector": "at-threshold-sign"
+        },
+        {
+          "difference": "5/2",
+          "expected": "1",
+          "got": "1",
+          "law": "state = sign_of(difference) with levels -1, 0, +1",
+          "passed": true,
+          "vector": "above-threshold-sign"
+        },
+        {
+          "difference": "-100",
+          "expected": "-1",
+          "got": "-1",
+          "law": "state = sign_of(difference) with levels -1, 0, +1",
+          "passed": true,
+          "vector": "far-below-sign"
+        },
+        {
+          "difference": "1/1000",
+          "expected": "1",
+          "got": "1",
+          "law": "state = sign_of(difference) with levels -1, 0, +1",
+          "passed": true,
+          "vector": "far-above-sign"
+        }
+      ],
+      "wheel": "W42",
+      "wheel_title": "Elastic Buckling and Bistable Snap-Through"
+    },
+    {
+      "family": "sqrt",
+      "hand_authored": false,
+      "id": "magnetics-sqrt-inversion",
+      "law": "energy = 1/2 * inductance * current^2",
+      "oracle_pass": true,
+      "quantities": {
+        "current": "root",
+        "energy": "result"
+      },
+      "reason": "the declared axiom 'energy = 1/2 * inductance * current^2' closes dimensionally (dim(energy) == dim(current^2, inductance)) and current enters squared, so current is the exact monomial square root and the log-domain sqrt principle transfers as a monomial inversion",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "factors": {
+            "inductance": "2"
+          },
+          "law": "energy = 1/2 * inductance * current^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "1/2",
+          "root": "1/2",
+          "square_back": "1/4",
+          "vector": "root-1/2",
+          "x": "1/4"
+        },
+        {
+          "factors": {
+            "inductance": "2"
+          },
+          "law": "energy = 1/2 * inductance * current^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "3",
+          "root": "3",
+          "square_back": "9",
+          "vector": "root-3",
+          "x": "9"
+        },
+        {
+          "factors": {
+            "inductance": "2"
+          },
+          "law": "energy = 1/2 * inductance * current^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "5/2",
+          "root": "5/2",
+          "square_back": "25/4",
+          "vector": "root-5/2",
+          "x": "25/4"
+        }
+      ],
+      "wheel": "W14",
+      "wheel_title": "Inductors and the LC circuit"
+    },
+    {
+      "family": "sqrt",
+      "hand_authored": false,
+      "id": "astrophysics-sqrt-inversion",
+      "law": "luminosity = stefan_boltzmann_constant * radius^2 * temperature^4",
+      "oracle_pass": true,
+      "quantities": {
+        "luminosity": "result",
+        "radius": "root"
+      },
+      "reason": "the declared axiom 'luminosity = stefan_boltzmann_constant * radius^2 * temperature^4' closes dimensionally (dim(luminosity) == dim(radius^2, stefan_boltzmann_constant, temperature^4)) and radius enters squared, so radius is the exact monomial square root and the log-domain sqrt principle transfers as a monomial inversion",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "factors": {
+            "stefan_boltzmann_constant": "2",
+            "temperature": "3"
+          },
+          "law": "luminosity = stefan_boltzmann_constant * radius^2 * temperature^4 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "1/2",
+          "root": "1/2",
+          "square_back": "1/4",
+          "vector": "root-1/2",
+          "x": "81/2"
+        },
+        {
+          "factors": {
+            "stefan_boltzmann_constant": "2",
+            "temperature": "3"
+          },
+          "law": "luminosity = stefan_boltzmann_constant * radius^2 * temperature^4 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "3",
+          "root": "3",
+          "square_back": "9",
+          "vector": "root-3",
+          "x": "1458"
+        },
+        {
+          "factors": {
+            "stefan_boltzmann_constant": "2",
+            "temperature": "3"
+          },
+          "law": "luminosity = stefan_boltzmann_constant * radius^2 * temperature^4 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "5/2",
+          "root": "5/2",
+          "square_back": "25/4",
+          "vector": "root-5/2",
+          "x": "2025/2"
+        }
+      ],
+      "wheel": "W26",
+      "wheel_title": "Astrophysics & Stellar Structure"
+    },
+    {
+      "family": "sqrt",
+      "hand_authored": false,
+      "id": "electrostatics-w3-sqrt-inversion",
+      "law": "energy = 1/2 * capacitance * voltage^2",
+      "oracle_pass": true,
+      "quantities": {
+        "energy": "result",
+        "voltage": "root"
+      },
+      "reason": "the declared axiom 'energy = 1/2 * capacitance * voltage^2' closes dimensionally (dim(energy) == dim(capacitance, voltage^2)) and voltage enters squared, so voltage is the exact monomial square root and the log-domain sqrt principle transfers as a monomial inversion",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "factors": {
+            "capacitance": "2"
+          },
+          "law": "energy = 1/2 * capacitance * voltage^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "1/2",
+          "root": "1/2",
+          "square_back": "1/4",
+          "vector": "root-1/2",
+          "x": "1/4"
+        },
+        {
+          "factors": {
+            "capacitance": "2"
+          },
+          "law": "energy = 1/2 * capacitance * voltage^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "3",
+          "root": "3",
+          "square_back": "9",
+          "vector": "root-3",
+          "x": "9"
+        },
+        {
+          "factors": {
+            "capacitance": "2"
+          },
+          "law": "energy = 1/2 * capacitance * voltage^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "5/2",
+          "root": "5/2",
+          "square_back": "25/4",
+          "vector": "root-5/2",
+          "x": "25/4"
+        }
+      ],
+      "wheel": "W3",
+      "wheel_title": "Electrostatics and capacitors"
+    },
+    {
+      "family": "sqrt",
+      "hand_authored": false,
+      "id": "rotational-w4-sqrt-inversion",
+      "law": "energy = 1/2 * moment_of_inertia * angular_velocity^2",
+      "oracle_pass": true,
+      "quantities": {
+        "angular_velocity": "root",
+        "energy": "result"
+      },
+      "reason": "the declared axiom 'energy = 1/2 * moment_of_inertia * angular_velocity^2' closes dimensionally (dim(energy) == dim(angular_velocity^2, moment_of_inertia)) and angular_velocity enters squared, so angular_velocity is the exact monomial square root and the log-domain sqrt principle transfers as a monomial inversion",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "factors": {
+            "moment_of_inertia": "2"
+          },
+          "law": "energy = 1/2 * moment_of_inertia * angular_velocity^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "1/2",
+          "root": "1/2",
+          "square_back": "1/4",
+          "vector": "root-1/2",
+          "x": "1/4"
+        },
+        {
+          "factors": {
+            "moment_of_inertia": "2"
+          },
+          "law": "energy = 1/2 * moment_of_inertia * angular_velocity^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "3",
+          "root": "3",
+          "square_back": "9",
+          "vector": "root-3",
+          "x": "9"
+        },
+        {
+          "factors": {
+            "moment_of_inertia": "2"
+          },
+          "law": "energy = 1/2 * moment_of_inertia * angular_velocity^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "5/2",
+          "root": "5/2",
+          "square_back": "25/4",
+          "vector": "root-5/2",
+          "x": "25/4"
+        }
+      ],
+      "wheel": "W4",
+      "wheel_title": "Rotational mechanics (with kinetic energy)"
+    },
+    {
+      "family": "sqrt",
+      "hand_authored": false,
+      "id": "mechanics-sqrt-inversion",
+      "law": "energy = 1/2 * mass * velocity^2",
+      "oracle_pass": true,
+      "quantities": {
+        "energy": "result",
+        "velocity": "root"
+      },
+      "reason": "the declared axiom 'energy = 1/2 * mass * velocity^2' closes dimensionally (dim(energy) == dim(mass, velocity^2)) and velocity enters squared, so velocity is the exact monomial square root and the log-domain sqrt principle transfers as a monomial inversion",
+      "schema": "cent-originated-interpretation/2",
+      "vectors": [
+        {
+          "factors": {
+            "mass": "2"
+          },
+          "law": "energy = 1/2 * mass * velocity^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "1/2",
+          "root": "1/2",
+          "square_back": "1/4",
+          "vector": "root-1/2",
+          "x": "1/4"
+        },
+        {
+          "factors": {
+            "mass": "2"
+          },
+          "law": "energy = 1/2 * mass * velocity^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "3",
+          "root": "3",
+          "square_back": "9",
+          "vector": "root-3",
+          "x": "9"
+        },
+        {
+          "factors": {
+            "mass": "2"
+          },
+          "law": "energy = 1/2 * mass * velocity^2 inverted over the declared factors",
+          "passed": true,
+          "recovered_root": "5/2",
+          "root": "5/2",
+          "square_back": "25/4",
+          "vector": "root-5/2",
+          "x": "25/4"
+        }
+      ],
+      "wheel": "W5",
+      "wheel_title": "Linear dynamics and work-energy"
+    }
+  ],
+  "parity": {
+    "acoustic-pressure-velocity": true,
+    "delta-sigma-domain-parity": true,
+    "fluid-pressure-flow": true,
+    "flywheel-angular-momentum": true,
+    "kcl-voltage-current": true,
+    "mechanical-force-velocity": true,
+    "rheology-stress-strainrate": true,
+    "rotational-torque-omega": true,
+    "sqrt-electrostatic-voltage": true,
+    "w15-charge-identity-edge": true
+  },
+  "parity_ok": true,
+  "schema": "cent-origination-ledger/2",
+  "scoreboard": {
+    "after": "18/10",
+    "before": "4/10",
+    "d10_unblocked": 1,
+    "d4_self_transfer": 1,
+    "d8_search": 3,
+    "d9_search": 13,
+    "hand_authored_rederived": 3,
+    "metric": "origination rate (M-D pairings not hand-authored)",
+    "search_exceeds_corpus": true,
+    "search_originated_total": 18,
+    "target": ">=3",
+    "target_met": true
+  },
+  "search": {
+    "acceptance": "computed from declared 8-axis dimension vectors",
+    "axioms": 101,
+    "families": [
+      "junction",
+      "noise_shaper",
+      "sign",
+      "sqrt"
+    ],
+    "universe": "declared wheel corpus (wheels/*.json)",
+    "wheels": 40
+  },
+  "speculative": [
+    {
+      "evidence": "speculative",
+      "family": "noise_shaper",
+      "missing": "declare an accumulator quantity of dimension dim(voltage)*T in W1; the wheel declares no state variable the loop can hold",
+      "proposal": "a first-order voltage-error feedback loop over (voltage, current)",
+      "wheel": "W1",
+      "wheel_title": "DC Ohm and power"
+    },
+    {
+      "evidence": "speculative",
+      "family": "noise_shaper",
+      "missing": "declare an accumulator quantity of dimension dim(voltage)*T in W2; the wheel declares no state variable the loop can hold",
+      "proposal": "a first-order voltage-error feedback loop over (voltage, current)",
+      "wheel": "W2",
+      "wheel_title": "Sinusoidal AC impedance and power"
+    },
+    {
+      "evidence": "speculative",
+      "family": "noise_shaper",
+      "missing": "declare an accumulator quantity of dimension dim(input_torque)*T in W38; the wheel declares no state variable the loop can hold",
+      "proposal": "a first-order input_torque-error feedback loop over (input_torque, input_angular_velocity)",
+      "wheel": "W38",
+      "wheel_title": "Gears & Mechanical Transmissions"
+    },
+    {
+      "evidence": "speculative",
+      "family": "noise_shaper",
+      "missing": "declare an accumulator quantity of dimension dim(pressure)*T in W6; the wheel declares no state variable the loop can hold",
+      "proposal": "a first-order pressure-error feedback loop over (pressure, volume_flow_rate)",
+      "wheel": "W6",
+      "wheel_title": "Fluid statics and flow (with hydraulic power)"
+    },
+    {
+      "evidence": "speculative",
+      "family": "noise_shaper",
+      "missing": "declare an accumulator quantity of dimension dim(acoustic_pressure)*T in W7; the wheel declares no state variable the loop can hold",
+      "proposal": "a first-order acoustic_pressure-error feedback loop over (acoustic_pressure, particle_velocity)",
+      "wheel": "W7",
+      "wheel_title": "Linear plane-wave acoustics"
+    },
+    {
+      "evidence": "speculative",
+      "family": "sign",
+      "missing": "declare a three-level or threshold law in this wheel (snap-through/buckling or Schmitt-trigger axiom); W13 declares only linear laws, so its sign pairing has no licensed source",
+      "proposal": "a bistable snap-through mass-spring three-level sign",
+      "wheel": "W13",
+      "wheel_title": "Period and the mass-spring oscillator"
+    },
+    {
+      "evidence": "speculative",
+      "family": "sign",
+      "missing": "declare a three-level or threshold law in this wheel (snap-through/buckling or Schmitt-trigger axiom); W14 declares only linear laws, so its sign pairing has no licensed source",
+      "proposal": "an LC-comparator nonlinear three-level sign",
+      "wheel": "W14",
+      "wheel_title": "Inductors and the LC circuit"
+    }
+  ]
+}

@@ -45,6 +45,41 @@ class TestDiscover(unittest.TestCase):
         self.assertEqual(payload["query"], "sum; echo not executed")
 
 
+class TestOriginate(unittest.TestCase):
+    def test_the_analogy_search_reviews_every_declared_analogy(self):
+        payload = cb.originate()
+        self.assertEqual(payload["schema"], "cent-origination-ledger/1")
+        self.assertTrue(payload["ok"])
+        self.assertEqual(payload["search_space"]["size"], len(payload["reviews"]))
+        self.assertTrue(any(r.get("accepted") for r in payload["reviews"]))
+
+    def test_a_refusal_carries_its_reason_rather_than_silence(self):
+        payload = cb.originate()
+        refused = [r for r in payload["reviews"] if not r.get("accepted")]
+        for review in refused:
+            self.assertTrue(review.get("reason"), review)
+
+    def test_the_scale_search_originates_beyond_the_analogy_search(self):
+        # The two searches carry their own ledger shapes: D8 reviews each
+        # declared analogy, D9 reports families, originated interpretations
+        # and its own scoreboard.
+        analogies = cb.originate()
+        scale = cb.originate(search="scale")
+        self.assertEqual(scale["schema"], "cent-origination-ledger/2")
+        self.assertTrue(scale["parity_ok"])
+        accepted = sum(1 for r in analogies["reviews"] if r.get("accepted"))
+        self.assertGreater(len(scale["originated"]), accepted)
+        self.assertIn("scoreboard", scale)
+
+    def test_the_ledger_states_what_it_did_not_establish(self):
+        scale = cb.originate(search="scale")
+        self.assertTrue(scale["gaps"], "a ledger with no gaps claims too much")
+
+    def test_an_unknown_search_is_refused_before_it_is_run(self):
+        with self.assertRaises(ValueError):
+            cb.originate(search="everything")
+
+
 class TestPropose(unittest.TestCase):
     def test_a_proposal_bundle_carries_a_handoff_per_proposal(self):
         payload = cb.propose("sqrt", target="glm-reference", top=1)

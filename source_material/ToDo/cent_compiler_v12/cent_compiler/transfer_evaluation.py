@@ -254,10 +254,12 @@ POSITIVE_CASES: tuple[PositiveCase, ...] = (
         id="sum-declared-mechanisms",
         operation="sum",
         expected_mechanisms=(
-            "fluid-continuity", "kcl-conservation", "opamp-summing"
+            "fluid-continuity", "kcl-conservation", "opamp-summing",
+            "rheology-continuity",
         ),
         rationale=(
-            "The KCL, fluid and op-amp cards explicitly declare exact-sum support."
+            "The KCL, fluid, op-amp and D10-promoted rheology cards declare "
+            "exact-sum support."
         ),
         provenance=("cent_compiler/mechanisms.py",),
     ),
@@ -265,7 +267,8 @@ POSITIVE_CASES: tuple[PositiveCase, ...] = (
         id="difference-declared-mechanisms",
         operation="difference",
         expected_mechanisms=(
-            "fluid-continuity", "kcl-conservation", "opamp-summing"
+            "fluid-continuity", "kcl-conservation", "opamp-summing",
+            "rheology-continuity",
         ),
         rationale=(
             "The KCL, fluid and op-amp cards explicitly declare exact-difference support."
@@ -275,9 +278,21 @@ POSITIVE_CASES: tuple[PositiveCase, ...] = (
     PositiveCase(
         id="quantized-carry-declared-mechanism",
         operation="quantized_carry",
-        expected_mechanisms=("delta-sigma-error-feedback",),
-        rationale="The delta-sigma card explicitly declares quantized-carry support.",
-        provenance=("cent_compiler/mechanisms.py",),
+        expected_mechanisms=(
+            "delta-sigma-error-feedback",
+            "rotational-w4-noise-shaping",
+            "mechanics-noise-shaping",
+        ),
+        rationale=(
+            "The delta-sigma card and the two D9-originated noise-shaper "
+            "cards (flywheel rotational, mechanical escapement) declare "
+            "quantized-carry support; the originated pairings were found by "
+            "the declared-data search, not hand-authored."
+        ),
+        provenance=(
+            "cent_compiler/mechanisms.py",
+            "cent_compiler/origination_scale.py",
+        ),
     ),
     PositiveCase(
         id="exp-declared-mechanism",

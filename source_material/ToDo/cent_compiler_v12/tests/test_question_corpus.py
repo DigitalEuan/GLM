@@ -116,10 +116,27 @@ def run_question(item: dict) -> list[str]:
                 failures.append(f"len({path})={actual}, expected >= {wanted}")
 
     for text in expected.get("stderr_contains", []):
-        if text not in result.stderr:
-            failures.append(f"stderr is missing {text!r}")
+        if _stderr_matches(result.stderr, text):
+            continue
+        failures.append(f"stderr is missing {text!r}")
 
     return failures
+
+
+def _stderr_matches(stderr: str, expected: str) -> bool:
+    """Substring check that tolerates argparse's Python-version quoting drift.
+
+    Python <= 3.11 rendered invalid-choice errors as ``choose from 'sum', ...``
+    while 3.12+ renders ``choose from sum, ...``.  The refusal itself is what
+    the corpus asserts; strip quote characters from both sides before the
+    substring test so the check does not depend on the interpreter's argparse
+    formatting.
+    """
+    if expected in stderr:
+        return True
+    return expected.replace("'", "").replace('"', "") in stderr.replace(
+        "'", ""
+    ).replace('"', "")
 
 
 def main() -> int:

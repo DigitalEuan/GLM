@@ -127,8 +127,24 @@ def propose(operation: str, *, target: str = "glm-reference", top: int = 3,
     return _run(command, timeout=timeout)
 
 
+def originate(*, search: str = "analogies", timeout: int = 180) -> Dict[str, Any]:
+    """Run the compiler's own origination search and return its ledger.
+
+    ``search="analogies"`` is the D8 search over the seven declared TIER-3
+    analogies; ``search="scale"`` is the D9 search over the declared wheel
+    corpus.  The ledger lists every declared analogy with its verdict --
+    accepted with the reason, or refused with the reason -- and the transfers
+    it originated, each carrying its oracle vectors.  This is the compiler
+    originating rather than retrieving: the answer is not in any corpus entry
+    the GLM could have read.
+    """
+    if search not in {"analogies", "scale"}:
+        raise ValueError(f"search must be 'analogies' or 'scale', not {search!r}")
+    return _run(["originate", "--search", search], timeout=timeout)
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
-    """``python3 -m glm_universal.cent_bridge [--propose OP] [--target T] QUESTION``."""
+    """``python3 -m glm_universal.cent_bridge [--propose OP] [--originate SEARCH] QUESTION``."""
     args = list(sys.argv[1:] if argv is None else argv)
     if not available():
         print(f"cent compiler unavailable: {cent_directory()}")
@@ -137,6 +153,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(__doc__)
         return 0
     propose_operation: Optional[str] = None
+    originate_search: Optional[str] = None
     target = "glm-reference"
     words: List[str] = []
     index = 0
@@ -146,6 +163,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             propose_operation = args[index + 1]
             index += 2
             continue
+        if token == "--originate":
+            search = "analogies"
+            if index + 1 < len(args) and args[index + 1] in {"analogies", "scale"}:
+                search = args[index + 1]
+                index += 1
+            originate_search = search
+            index += 1
+            continue
         if token == "--target" and index + 1 < len(args):
             target = args[index + 1]
             index += 2
@@ -153,7 +178,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         words.append(token)
         index += 1
     try:
-        if propose_operation is not None:
+        if originate_search is not None:
+            payload = originate(search=originate_search)
+            print(f"ORIGINATE  {originate_search}")
+        elif propose_operation is not None:
             payload = propose(propose_operation, target=target)
             print(f"PROPOSALS  {propose_operation} on {target}")
         else:

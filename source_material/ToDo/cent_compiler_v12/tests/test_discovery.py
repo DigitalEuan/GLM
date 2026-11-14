@@ -506,14 +506,14 @@ def main() -> int:
     }
     expect(
         global_graph["schema"] == axiom_graph.SCHEMA
-        and graph_counts["wheels"] == 39
-        and graph_counts["axioms"] == 98
-        and graph_counts["contains"] == 98
-        and graph_counts["mentions"] == 308,
-        "the global axiom graph flattens all 39 wheels and 98 axioms",
+        and graph_counts["wheels"] == 40
+        and graph_counts["axioms"] == 101
+        and graph_counts["contains"] == 101
+        and graph_counts["mentions"] == 316,
+        "the global axiom graph flattens all 40 wheels and 101 axioms",
     )
     expect(
-        len(axiom_nodes) == 98
+        len(axiom_nodes) == 101
         and all(
             any(
                 edge["kind"] == "contains" and edge["target"] == axiom_id
@@ -536,15 +536,15 @@ def main() -> int:
         "every flattened axiom has a containing wheel and resolved quantity mentions",
     )
     expect(
-        graph_counts["quantities"] == 230
-        and graph_counts["typed_as"] == 230
+        graph_counts["quantities"] == 239
+        and graph_counts["typed_as"] == 239
         and graph_counts["dimensions"] == 65
         and all(
             graph_nodes[edge["source"]]["data"].get("dimension") == edge["target"]
             for edge in graph_edges
             if edge["kind"] == "typed_as"
         ),
-        "all 230 declared quantities resolve to 65 exact dimension nodes",
+        "all 239 declared quantities resolve to 65 exact dimension nodes",
     )
     junction_gaps = [
         gap for gap in global_graph["gaps"] if gap["kind"] == "junction-endpoint"
@@ -553,12 +553,12 @@ def main() -> int:
         gap for gap in global_graph["gaps"] if gap["kind"] == "non-identity-endpoint"
     ]
     expect(
-        graph_counts["junction_edges"] == 54
-        and graph_counts["junction_declared"] == 57
+        graph_counts["junction_edges"] == 56
+        and graph_counts["junction_declared"] == 59
         and len(junction_gaps) == 3
         and graph_counts["non_identity_edges"] == 5
-        and graph_counts["non_identity_declared"] == 9
-        and len(non_identity_gaps) == 4
+        and graph_counts["non_identity_declared"] == 10
+        and len(non_identity_gaps) == 5
         and all(
             edge["source"] in graph_nodes and edge["target"] in graph_nodes
             for edge in graph_edges
@@ -731,9 +731,9 @@ def main() -> int:
     expect(
         spoke_regression["schema"] == axiom_graph.SPOKE_REGRESSION_SCHEMA
         and spoke_regression["status"] == "ok"
-        and spoke_regression["total_spokes"] == 366
-        and spoke_regression["derived"] == 366
-        and spoke_regression["formula_matches"] == 366
+        and spoke_regression["total_spokes"] == 369
+        and spoke_regression["derived"] == 369
+        and spoke_regression["formula_matches"] == 369
         and spoke_regression["extra_input_spokes"] == 48
         and spoke_regression["extra_by_wheel"]
         == {"W13": 8, "W24": 6, "W27": 12, "W28": 4, "W36": 8, "W38": 10}
@@ -751,11 +751,11 @@ def main() -> int:
     expect(
         case_regression["schema"] == wheels.CASE_REGRESSION_SCHEMA
         and case_regression["status"] == "ok"
-        and case_regression["cases"] == 153
-        and case_regression["dimensional_known"] == 153
+        and case_regression["cases"] == 157
+        and case_regression["dimensional_known"] == 157
         and case_regression["dimensional_unknown"] == 0
-        and case_regression["dimensional_agreement"] == 153
-        and case_regression["derivability_agreement"] == 153
+        and case_regression["dimensional_agreement"] == 157
+        and case_regression["derivability_agreement"] == 157
         and case_regression["mismatch_count"] == 0
         and not dimensional_ids
         and not derivability_ids,

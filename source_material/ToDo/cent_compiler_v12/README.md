@@ -144,6 +144,8 @@ python3 cent review proposals --list                      # durable review ledge
 python3 cent refute --json                                # D5 Tier-D negatives with witnesses
 python3 cent holdout --json                               # D6 frozen retrodictive holdout
 python3 cent holdout --write examples/holdout/ledger.json
+python3 cent originate --json                              # D8 origination search over declared TIER-3 analogies
+python3 cent originate --search scale --json                # D9/D10 declared-data origination at scale
 python3 cent review proposals proposal-sqrt-to-glm-reference-via-log-domain-sqrt \
   --state accepted --reviewer alice --note "Handoff reviewed"
 python3 cent self --json                          # D4 measured self-transfer ledger
@@ -265,9 +267,9 @@ python3 cent enumerate "y = sqrt(5)"
 | Cross-domain junctions | 57 |
 | Escalation layers | 5 (ideal → parasitic → thermal → quantum → fabricated) |
 | Knowledge states | 5 (KNOWS / THINKS-TRUE / DOESN'T-KNOW / NEEDS / LANGUAGE) |
-| Python modules | 70 |
+| Python modules | 72 |
 | Package exports | 62 |
-| Tests passing | 1005/1005 across the assembly, discovery, hypothesis-promotion, transfer-contract/mechanism/engine/evaluation/sabotage/ablation/log-domain/self-target/refutation/retrodictive-holdout/proposal/proposal-trial/target, move-corpus/class-word, browser, core, console/knowledge-atlas, device-binding, constrained-design, reference-netlist, declared-fabrication, sampled-data-dynamics, machine-composer, proposal-regression, question-corpus, GLM-application-audit, GLM-direct-question and pressure-settling-packing suites |
+| Tests passing | 1061/1061 across the assembly, discovery, hypothesis-promotion, transfer-contract/mechanism/engine/evaluation/sabotage/ablation/log-domain/self-target/refutation/retrodictive-holdout/origination (D8+D9+D10), proposal/proposal-trial/target, move-corpus/class-word, browser, core, console/knowledge-atlas, device-binding, constrained-design, reference-netlist, declared-fabrication, sampled-data-dynamics, machine-composer, proposal-regression, question-corpus, GLM-application-audit, GLM-direct-question and pressure-settling-packing suites |
 
 ---
 
@@ -437,6 +439,8 @@ cent_compiler_v12/
 │   ├── runtime_invariants.py    # exact cent-program/1 junction invariant checks
 │   ├── refutation.py            # D5 Tier-D witness search and derived obligations
 │   ├── holdout.py               # D6 frozen retrodictive holdout and dated corpus
+│   ├── origination.py            # D8 search over declared TIER-3 analogies
+│   ├── origination_scale.py       # D9 declared-data search with computed family acceptance
 │   ├── self_oracle.py           # independent R5 utility oracle and certificate issuer
 │   ├── self_target.py           # D4 cent-utility/1 records, adoption and rollback
 │   └── targets/                 # declared target adapters
@@ -452,7 +456,8 @@ cent_compiler_v12/
     ├── machines/                # whole-machine bundles and the sigma-delta sqrt concept
     ├── self/                    # D4 cent-utility/1 ledger and rollback notes
     ├── refutation/              # D5 Tier-D generated negatives and witness pairs
-    └── holdout/                 # D6 frozen retrodictive holdout ledger
+    ├── holdout/                 # D6 frozen retrodictive holdout ledger
+    └── origination/              # D8 origination-search ledger
 ```
 
 ### Exact-core additions
@@ -515,6 +520,7 @@ tests/
 ├── test_self_target.py       # 21 D4 self-target utility, oracle and rollback checks
 ├── test_refutation.py        # 19 D5 Tier-D witness and derived-obligation checks
 ├── test_holdout.py           # 27 D6 retrodictive-holdout checks
+├── test_origination.py        # 56 D8+D9+D10 origination checks (analogies, declared-data scale, sign-family unblock)
 ├── test_evaluation_sabotage.py # 9 constant-score sabotage checks
 ├── test_moves.py       # 11 move-corpus and class-word checks
 ├── test_proposals.py   # 8 proposal-pipeline regression checks

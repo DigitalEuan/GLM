@@ -45,12 +45,21 @@ D1–D7 are complete and gated. The transfer layer now has:
 - a bounded, dated retrodictive holdout with an explicit negative control;
 - a declared-operation trial wheel: ten operation contracts, all ten
   testable, with `sign` covered by the threshold comparator;
-- a knowledge atlas for addressed documentation parts and stitches.
+- a knowledge atlas for addressed documentation parts and stitches;
+- a D8 origination search over the declared TIER-3 analogies: three
+  junction-continuity pairings (acoustic, rotational, electromechanical)
+  originated, not hand-authored, with an independent oracle and derivation
+  parity against the hand-authored fluid record;
+- a D9 declared-data search over the wheel corpus with computed family
+  acceptance: fourteen more pairings across three families (junction,
+  noise-shaping, sqrt-inversion), W37 rheology discovered by dimensional
+  scan, the sign family honestly refused, and two noise-shapers promoted
+  into the production registry with target-simulated certificates.
 
 There is **no open D-item**. The remaining gaps in
 [`docs/CURRENT_SCOPE.md`](docs/CURRENT_SCOPE.md) are evidence gaps, not
 authorized work. A new item enters this directive only when it is written as a
-D8 with its own gate and kill criterion and the owner accepts the trade.
+D11 with its own gate and kill criterion and the owner accepts the trade.
 
 ---
 
@@ -142,11 +151,14 @@ completion records are in [`WORKFLOW.md`](WORKFLOW.md).
 | **D5 — refutation** | Complete | 8 generated negatives exceed 6 hand-declared; 10 derived obligations |
 | **D6 — retrodictive holdout** | Complete, bounded | 5/5 rank-one positives; one declared false positive; one excluded; strict negative control refuses |
 | **D7 — recover sign** | Complete | Threshold comparator ranks first; exact reference adapter passes negative, zero and positive vectors; wheel 10/10 |
+| **D8 — originate at scale** | Complete | Search over 7 declared TIER-3 analogies: 3 originated pairings (acoustic, rotational, electromechanical) all oracle-passed, 3 refused with reasons; fluid derivation parity holds; origination rate `1/9` → `4/9`, target `≥3` met |
+| **D10 — unblock the refused sign family + promote W37** | Complete | New wheel W42 declares the snap-through three-level law (`sign_of(applied_load - critical_load)`); the sign family is licensed by computed acceptance (dimensionless state over a same-dimension threshold pair), the speculative ring drains, the certification queue names reachable paths, and one pairing originates oracle-passed. W37 rheology is promoted to a production card (sum/difference certify target-simulated). Scoreboard 18/10 |
+| **D9 — origination beyond the corpus** | Complete | Declared-data search over 39 wheels with computed family acceptance (power-conjugacy, accumulator dimension, invertible monomial): 14 new pairings all oracle-passed, `4/9` → `18/9`; W37 rheology discovered by dimensional scan; sign family honestly refused; 2 noise-shapers promoted to production cards with target-simulated certificates |
 
-**Adding work.** A new item must be written here as **D8**, with a concrete
+**Adding work.** A new item must be written here as **D11**, with a concrete
 question, a falsifiable gate, a kill criterion and the evidence it would
 retire. Do not add a card, route or document merely to fill a row. Do not start
-D8 because it is interesting; start it because it closes a named gap in
+D11 because it is interesting; start it because it closes a named gap in
 `CURRENT_SCOPE.md`.
 
 **Closing work.** Every item closes with the gate command and exit status, the
@@ -162,7 +174,7 @@ hygiene metric, not progress on these six.
 
 | # | Metric | Now | Target |
 |---|---|---:|---|
-| 1 | **Origination rate** — transfers whose Μ–∆ pairing was not hand-authored | 1/9 (D4 self-transfer; D7 is hand-authored and does not improve this metric) | ≥3 |
+| 1 | **Origination rate** — transfers whose Μ–∆ pairing was not hand-authored | 18/10 (D4 1 + D8 3 + D9 13 + D10 1; denominator grew to 10 with the promoted W37 rheology pairing) | ≥3 |
 | 2 | **Sabotage sensitivity** — each headline metric degrades when the component it claims to measure is randomized | 4/4 retrieval-side (D1) | all |
 | 3 | **Ablation recall** — deleted cards regenerated and re-certified | 3/3 generated Δ cards; 4/4 KCL certificates identical | ≥2 |
 | 4 | **Generated negatives** — with witness proofs | 8 (against 6 hand-declared) | > hand-declared |

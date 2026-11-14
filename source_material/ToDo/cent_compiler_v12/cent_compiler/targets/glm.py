@@ -488,6 +488,125 @@ def delta_sigma_quantized_carry(
     )
 
 
+def _first_order_carry_run(
+    adapter_id: str,
+    x: Any,
+    *,
+    samples: int,
+    quantum: Any,
+    full_scale: Any,
+    integrator_limit: Any,
+) -> TargetRun:
+    """Execute the declared first-order error-feedback loop, target-side.
+
+    Written independently of ``delta_sigma_quantized_carry`` (separate
+    accumulator bookkeeping, no shared state objects) so the validator
+    compares two implementations of the same declared law rather than one
+    calling the other.  Used by the D9-originated noise-shaper adapters.
+    """
+    samples_i, quantum_q, full_scale_q, limit_q = _settings(
+        samples=samples,
+        quantum=quantum,
+        full_scale=full_scale,
+        integrator_limit=integrator_limit,
+    )
+    x_q = _fraction(x, "x")
+    if not (Fraction(0) <= x_q <= full_scale_q):
+        raise ValueError(f"x must be in [0, {full_scale_q}], got {x_q}")
+
+    u = Fraction(0)
+    # The declared route's feedback edge reads the output two ticks back;
+    # preserve that exact loop history (see delta_sigma_quantized_carry).
+    history = [Fraction(0), Fraction(0)]
+    peak = Fraction(0)
+    code: list[int] = []
+    total = Fraction(0)
+
+    for _tick in range(samples_i):
+        y_prev = history.pop(0)
+        u = u + (x_q - y_prev)
+        if abs(u) > peak:
+            peak = abs(u)
+        steps = (abs(u) / quantum_q + Fraction(1, 2)).__floor__()
+        y = Fraction(steps) * quantum_q * (1 if u >= 0 else -1)
+        if y < Fraction(0):
+            y = Fraction(0)
+        elif y > full_scale_q:
+            y = full_scale_q
+        code.append(int(y / quantum_q))
+        total += y
+        history.append(y)
+
+    mean = total / samples_i
+    error = mean - x_q
+    bounded = peak <= limit_q
+    return TargetRun(
+        adapter=adapter_id,
+        x=x_q,
+        samples=samples_i,
+        quantum=quantum_q,
+        full_scale=full_scale_q,
+        code=tuple(code),
+        mean=mean,
+        error=error,
+        peak_state=peak,
+        bounded=bounded,
+        passed=bounded and abs(error) <= quantum_q,
+        trace=(),
+    )
+
+
+def rotational_w4_noise_shaping_carry(
+    x: Any,
+    *,
+    samples: int = 12,
+    quantum: Any = Fraction(1),
+    full_scale: Any = Fraction(1),
+    integrator_limit: Any = Fraction(8),
+) -> TargetRun:
+    """Flywheel-carried first-order carry (D9 originated, rotational).
+
+    The declared loop is carried into rotational mechanics by the D9
+    declared-data search: the torque error accumulates on
+    ``angular_momentum`` and the quantized ``angular_velocity`` code feeds
+    back.  On the normalized target domain the recurrence is the declared
+    first-order law; the rotational carrier is the interpretation, not a
+    measured device.
+    """
+    return _first_order_carry_run(
+        "rotational-w4-noise-shaping",
+        x,
+        samples=samples,
+        quantum=quantum,
+        full_scale=full_scale,
+        integrator_limit=integrator_limit,
+    )
+
+
+def mechanics_noise_shaping_carry(
+    x: Any,
+    *,
+    samples: int = 12,
+    quantum: Any = Fraction(1),
+    full_scale: Any = Fraction(1),
+    integrator_limit: Any = Fraction(8),
+) -> TargetRun:
+    """Escapement-carried first-order carry (D9 originated, mechanical).
+
+    The declared loop carried into linear mechanics: the force error
+    accumulates on ``momentum`` and the quantized ``velocity`` code feeds
+    back.  Normalized-domain software only; no measured escapement.
+    """
+    return _first_order_carry_run(
+        "mechanics-noise-shaping",
+        x,
+        samples=samples,
+        quantum=quantum,
+        full_scale=full_scale,
+        integrator_limit=integrator_limit,
+    )
+
+
 def uniform_quantizer_carry(
     x: Any,
     *,
@@ -546,6 +665,43 @@ def exact_kcl_sum(a: Any, b: Any) -> SumRun:
         expected=result,
         passed=True,
         operation="sum",
+    )
+
+
+def rheology_continuity_sum(a: Any, b: Any) -> SumRun:
+    """Target-side exact rheology-junction sum (D10 originated, promoted).
+
+    The declared law is ``strain_rate_total = strain_rate_a + strain_rate_b``
+    at a declared viscoelastic conservation junction; written independently
+    of the KCL/fluid adapters so the validator compares implementations.
+    """
+    a_q = _fraction(a, "a")
+    b_q = _fraction(b, "b")
+    result = a_q + b_q
+    return SumRun(
+        adapter="rheology-continuity",
+        a=a_q,
+        b=b_q,
+        result=result,
+        expected=result,
+        passed=True,
+        operation="sum",
+    )
+
+
+def rheology_continuity_difference(a: Any, b: Any) -> SumRun:
+    """Target-side exact rheology-junction difference (reversed port)."""
+    a_q = _fraction(a, "a")
+    b_q = _fraction(b, "b")
+    result = a_q - b_q
+    return SumRun(
+        adapter="rheology-continuity",
+        a=a_q,
+        b=b_q,
+        result=result,
+        expected=result,
+        passed=True,
+        operation="difference",
     )
 
 
@@ -1001,6 +1157,76 @@ FIXED_VECTORS: tuple[GlmVector, ...] = (
     ),
 )
 
+#: Fixed vectors for the D9-originated noise-shaper adapters.  The declared
+#: recurrence is the same first-order loop; the expected codes are the exact
+#: rational solutions of that recurrence (verified against the oracle in
+#: cent_compiler/origination_scale.py, which derives them independently).
+ROTATIONAL_NOISE_SHAPING_VECTORS: tuple[GlmVector, ...] = (
+    GlmVector(
+        id="rotational-half-12",
+        x=Fraction(1, 2),
+        samples=12,
+        quantum=Fraction(1),
+        full_scale=Fraction(1),
+        integrator_limit=Fraction(8),
+        expected_code=(1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0),
+        expected_mean=Fraction(1, 2),
+    ),
+    GlmVector(
+        id="rotational-third-8",
+        x=Fraction(1, 3),
+        samples=8,
+        quantum=Fraction(1),
+        full_scale=Fraction(1),
+        integrator_limit=Fraction(8),
+        expected_code=(0, 1, 1, 0, 0, 0, 0, 1),
+        expected_mean=Fraction(3, 8),
+    ),
+    GlmVector(
+        id="rotational-two-fifths-12",
+        x=Fraction(2, 5),
+        samples=12,
+        quantum=Fraction(1),
+        full_scale=Fraction(1),
+        integrator_limit=Fraction(8),
+        expected_code=(0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0),
+        expected_mean=Fraction(5, 12),
+    ),
+)
+
+MECHANICS_NOISE_SHAPING_VECTORS: tuple[GlmVector, ...] = (
+    GlmVector(
+        id="mechanics-half-12",
+        x=Fraction(1, 2),
+        samples=12,
+        quantum=Fraction(1),
+        full_scale=Fraction(1),
+        integrator_limit=Fraction(8),
+        expected_code=(1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0),
+        expected_mean=Fraction(1, 2),
+    ),
+    GlmVector(
+        id="mechanics-third-8",
+        x=Fraction(1, 3),
+        samples=8,
+        quantum=Fraction(1),
+        full_scale=Fraction(1),
+        integrator_limit=Fraction(8),
+        expected_code=(0, 1, 1, 0, 0, 0, 0, 1),
+        expected_mean=Fraction(3, 8),
+    ),
+    GlmVector(
+        id="mechanics-two-fifths-12",
+        x=Fraction(2, 5),
+        samples=12,
+        quantum=Fraction(1),
+        full_scale=Fraction(1),
+        integrator_limit=Fraction(8),
+        expected_code=(0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0),
+        expected_mean=Fraction(5, 12),
+    ),
+)
+
 KCL_VECTORS: tuple[KclVector, ...] = (
     KclVector(
         id="half-plus-third",
@@ -1246,6 +1472,36 @@ DELTA_SIGMA_ADAPTER = AdapterSpec(
     vectors=FIXED_VECTORS,
 )
 
+ROTATIONAL_W4_NOISE_SHAPING_ADAPTER = AdapterSpec(
+    id="glm-reference-rotational-w4-noise-shaping-carry",
+    operation="quantized_carry",
+    mechanism="rotational-w4-noise-shaping",
+    entrypoint="rotational_w4_noise_shaping_carry",
+    function=rotational_w4_noise_shaping_carry,
+    description=(
+        "Exact first-order error-feedback carry originated into rotational "
+        "mechanics by the D9 declared-data search: the torque error "
+        "accumulates on angular_momentum and the quantized angular-velocity "
+        "code feeds back. Normalized-domain software only."
+    ),
+    vectors=ROTATIONAL_NOISE_SHAPING_VECTORS,
+)
+
+MECHANICS_NOISE_SHAPING_ADAPTER = AdapterSpec(
+    id="glm-reference-mechanics-noise-shaping-carry",
+    operation="quantized_carry",
+    mechanism="mechanics-noise-shaping",
+    entrypoint="mechanics_noise_shaping_carry",
+    function=mechanics_noise_shaping_carry,
+    description=(
+        "Exact first-order error-feedback carry originated into linear "
+        "mechanics by the D9 declared-data search: the force error "
+        "accumulates on momentum and the quantized velocity code feeds "
+        "back. Normalized-domain software only."
+    ),
+    vectors=MECHANICS_NOISE_SHAPING_VECTORS,
+)
+
 KCL_ADAPTER = AdapterSpec(
     id="glm-reference-kcl-exact-sum",
     operation="sum",
@@ -1321,6 +1577,35 @@ FLUID_DIFFERENCE_ADAPTER = AdapterSpec(
     ),
     vectors=FLUID_DIFFERENCE_VECTORS,
     kind="fluid_difference",
+)
+
+RHEOLOGY_ADAPTER = AdapterSpec(
+    id="glm-reference-rheology-exact-sum",
+    operation="sum",
+    mechanism="rheology-continuity",
+    entrypoint="rheology_continuity_sum",
+    function=rheology_continuity_sum,
+    description=(
+        "Exact rational rheology-junction sum carried from the W37 declared "
+        "pair (dissipated_power = stress * strain_rate); originated by the "
+        "D9 dimensional scan and promoted to production in D10."
+    ),
+    vectors=KCL_VECTORS,
+    kind="exact_sum",
+)
+
+RHEOLOGY_DIFFERENCE_ADAPTER = AdapterSpec(
+    id="glm-reference-rheology-exact-difference",
+    operation="difference",
+    mechanism="rheology-continuity",
+    entrypoint="rheology_continuity_difference",
+    function=rheology_continuity_difference,
+    description=(
+        "Exact rational rheology-junction difference via a declared reversed "
+        "port; originated by the D9 search and promoted to production in D10."
+    ),
+    vectors=KCL_DIFFERENCE_VECTORS,
+    kind="exact_difference",
 )
 
 KCL_DIFFERENCE_ADAPTER = AdapterSpec(
@@ -1494,6 +1779,10 @@ ADAPTERS: dict[tuple[str, str], AdapterSpec] = {
     (DIV_ADAPTER.operation, DIV_ADAPTER.mechanism): DIV_ADAPTER,
     (RECIPROCAL_ADAPTER.operation, RECIPROCAL_ADAPTER.mechanism): RECIPROCAL_ADAPTER,
     (SIGN_ADAPTER.operation, SIGN_ADAPTER.mechanism): SIGN_ADAPTER,
+    (RHEOLOGY_ADAPTER.operation, RHEOLOGY_ADAPTER.mechanism): RHEOLOGY_ADAPTER,
+    (RHEOLOGY_DIFFERENCE_ADAPTER.operation, RHEOLOGY_DIFFERENCE_ADAPTER.mechanism): RHEOLOGY_DIFFERENCE_ADAPTER,
+    (ROTATIONAL_W4_NOISE_SHAPING_ADAPTER.operation, ROTATIONAL_W4_NOISE_SHAPING_ADAPTER.mechanism): ROTATIONAL_W4_NOISE_SHAPING_ADAPTER,
+    (MECHANICS_NOISE_SHAPING_ADAPTER.operation, MECHANICS_NOISE_SHAPING_ADAPTER.mechanism): MECHANICS_NOISE_SHAPING_ADAPTER,
 }
 
 
@@ -1748,6 +2037,12 @@ __all__ = [
     "exact_opamp_sum",
     "exact_kcl_difference",
     "exact_kcl_sum",
+    "ROTATIONAL_NOISE_SHAPING_VECTORS",
+    "MECHANICS_NOISE_SHAPING_VECTORS",
+    "ROTATIONAL_W4_NOISE_SHAPING_ADAPTER",
+    "MECHANICS_NOISE_SHAPING_ADAPTER",
+    "RHEOLOGY_ADAPTER",
+    "RHEOLOGY_DIFFERENCE_ADAPTER",
     "get_adapter",
     "log_domain_reciprocal",
     "log_domain_sqrt",

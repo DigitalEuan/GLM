@@ -26,6 +26,7 @@ SUITES = (
     "test_self_target.py",
     "test_refutation.py",
     "test_holdout.py",
+    "test_origination.py",
     "test_moves.py",
     "test_proposals.py",
     "test_machine.py",

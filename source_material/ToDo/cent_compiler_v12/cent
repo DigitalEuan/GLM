@@ -103,6 +103,8 @@ from cent_compiler import knowledge as knowledge_module
 from cent_compiler import self_target as self_target_module
 from cent_compiler import refutation as refutation_module
 from cent_compiler import holdout as holdout_module
+from cent_compiler import origination as origination_module
+from cent_compiler import origination_scale as origination_scale_module
 from cent_compiler import assembly as assembly_module
 from cent_compiler import typed_graph as graph_module
 from cent_compiler import axiom_graph as axiom_graph_module
@@ -844,6 +846,36 @@ def cmd_holdout(
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(holdout_module.render_ledger(payload))
+    return 0 if payload.get("ok") else 1
+
+
+def cmd_originate(
+    search: str = "analogies",
+    write: str | None = None,
+    json_output: bool = False,
+) -> int:
+    """Run the D8 (analogies) or D9 (declared-data scale) origination search."""
+    try:
+        if search == "scale":
+            payload = origination_scale_module.origination_ledger_v2()
+            if write:
+                payload["written_to"] = origination_scale_module.write_ledger_v2(
+                    write, payload
+                )
+        else:
+            payload = origination_module.origination_ledger()
+            if write:
+                payload["written_to"] = origination_module.write_ledger(write, payload)
+    except (KeyError, ValueError, OSError) as exc:
+        print(f"originate: {exc}", file=sys.stderr)
+        return 2
+    if json_output:
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+    else:
+        if search == "scale":
+            print(origination_scale_module.render_ledger_v2(payload))
+        else:
+            print(origination_module.render_ledger(payload))
     return 0 if payload.get("ok") else 1
 
 
@@ -1786,6 +1818,12 @@ def main():
         "--mechanism", default=None,
         help="validate one retrieved mechanism instead of the first executable candidate",
     )
+    p_transfer.add_argument(
+        "--limit",
+        type=int,
+        default=3,
+        help="retrieval window for validation (default 3)",
+    )
     p_transfer.add_argument("--json", action="store_true", help="emit the full JSON payload")
     p_transfer.add_argument(
         "--validate",
@@ -1830,6 +1868,25 @@ def main():
         help=f"retrieved candidates per case (default {holdout_module.DEFAULT_LIMIT})",
     )
     p_holdout.add_argument("--json", action="store_true", help="emit the ledger JSON")
+
+    p_originate = sub.add_parser(
+        "originate",
+        help="run the D8/D9 origination search over declared data",
+    )
+    p_originate.add_argument(
+        "--search",
+        default="analogies",
+        choices=["analogies", "scale"],
+        help="search space: the seven declared TIER-3 analogies (D8) or the "
+        "declared wheel corpus with computed family acceptance (D9)",
+    )
+    p_originate.add_argument(
+        "--write",
+        default=None,
+        metavar="PATH",
+        help="write the origination ledger JSON to PATH",
+    )
+    p_originate.add_argument("--json", action="store_true", help="emit the ledger JSON")
 
     p_self = sub.add_parser(
         "self",
@@ -2326,6 +2383,8 @@ def main():
         return cmd_refute(args.write, args.json)
     elif args.command == "holdout":
         return cmd_holdout(args.write, args.limit, args.json)
+    elif args.command == "originate":
+        return cmd_originate(args.search, args.write, args.json)
     elif args.command == "self":
         return cmd_self(
             args.record, args.adopt, args.revert, args.write, args.baseline, args.json

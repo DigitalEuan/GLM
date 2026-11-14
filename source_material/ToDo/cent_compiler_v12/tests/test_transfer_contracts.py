@@ -526,9 +526,9 @@ def main() -> int:
 
     registry_ids = [card.id for card in MECHANISM_CARDS]
     expect(
-        len(MECHANISM_CARDS) == 10
-        and len(MECHANISM_BY_ID) == 10
-        and len(set(registry_ids)) == 10
+        len(MECHANISM_CARDS) == 13
+        and len(MECHANISM_BY_ID) == 13
+        and len(set(registry_ids)) == 13
         and get_mechanism("fluid-continuity").source_domains == ("fluidics",)
         and get_mechanism("fluid-continuity").supported_operations
         == ("sum", "difference")
@@ -541,7 +541,7 @@ def main() -> int:
         == ("exp", "log", "mult", "div", "reciprocal")
         and get_mechanism("threshold-comparator").supported_operations
         == ("sign",),
-        "the Phase 1 registry seeds ten unique mechanism cards",
+        "the registry seeds thirteen unique mechanism cards (ten authored plus three originated: two D9 noise shapers, one D10 rheology junction)",
     )
     registry_valid = True
     try:
