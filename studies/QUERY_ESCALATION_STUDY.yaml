@@ -4,7 +4,7 @@
 # prose, this YAML is the face the GLM reads.  Judgement fields (controls,
 # layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
 # are kept as written; a derived field listed in hand_fields is kept too.
-# Last altered 1 November 2026 (study_manifest --sync).
+# Last altered 14 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 'Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted;

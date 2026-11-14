@@ -341,7 +341,7 @@ agrees with `glm_universal/__init__.py`.
 
 The headline row — how many test files, how many tests, how many subtests —
 is measured by running the suite over all
-<!--figure:test-file-count-->262<!--/figure--> files of this directory — <!--figure:test-files-->262 test files<!--/figure--> — and the suite contains `test_figures.py`,
+<!--figure:test-file-count-->263<!--/figure--> files of this directory — <!--figure:test-files-->263 test files<!--/figure--> — and the suite contains `test_figures.py`,
 which checks the documents that quote that row. While the row counted that
 file, the figure counted a test file whose own size depended on what the
 documents said, so two different things got called drift and only one of them

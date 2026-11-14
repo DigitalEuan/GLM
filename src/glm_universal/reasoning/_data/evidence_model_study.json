@@ -8294,7 +8294,7 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "context=24,12,binary,extended,lattice,leech,weight,lean,substrate,one,glm,mog",
+    "context=24,12,binary,extended,lattice,leech,weight,lean,substrate,glm,mog,one",
     "documents=265",
     "head=source_material/ToDo/leechlean/3_leech_bridge/leechlean/leech_core.py#p0.s4",
     "mentions=636",
@@ -9330,6 +9330,6 @@
    "witness": []
   }
  ],
- "source_digest": "d07102d8e5ee4e6428fdc5502cb2612847a1682118520f8019f8dd7a14efaffb",
+ "source_digest": "d9f1e20ca54efb7240e88c0703fd4ea2f2c0e58161cca351ae99c2e0e5c530d1",
  "taken": 9
 }

@@ -313,7 +313,7 @@ to end and repaired. What that left:
   `src/glm_universal/tests/README.md`, with no row marked lost; with the
   provisional wheels' three test files and the migration script's test, the suite had
   255 files at the repository check, and Phase 186 added five:
-  <!--figure:test-files-->262 test files<!--/figure-->.
+  <!--figure:test-files-->263 test files<!--/figure-->.
 * **The owner-run checks.** `scripts/rebuild_lean.sh` (the Lean build and
   axiom audit) and `scripts/check_repository.sh` (tests under pytest,
   evaluation, corpus check, Lean tree check), each writing its log to

@@ -217,7 +217,7 @@
    }
   ]
  },
- "source_digest": "259619efa9cb8e99e98cfa816f4bdb410b3292df04b7ec28f344c4922ffc8c73",
+ "source_digest": "cb7e03d4a5cbad6b2ba40ec455c61c5c04b989749dba861a68cdbca8e3d9ee55",
  "switches": "fold_machine.ON and tool_machine.ON off",
  "taken": 12,
  "typed": {

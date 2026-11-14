@@ -195,7 +195,7 @@
   "reason": "ties_ladder_baseline.json: baseline lost in the October 2026 reorganisation; a new baseline needs a frozen-path comparison before the answering path moves again",
   "same_status": 0,
   "same_text": 0,
-  "source_digest": "4946bfbe0bca14ab11982bf1770e976871f6505a1d07cb411b1ef353273f03ac",
+  "source_digest": "802b2b202df441b6e3544daad9cee6226d0ecb202932a645b2a3b6795357feba",
   "undeclared": []
  },
  "lean": {
@@ -257,6 +257,6 @@
   ],
   "refused": 5
  },
- "source_digest": "31210aafc22e686ac9da50a8a9b297b22ad6497a5ecf673ae8954773cf1aeb8e",
+ "source_digest": "6e5ed66253104ae0d18335ac1c82d28b16f5a77af084f3bd9896c9f442956103",
  "taken": 8
 }
