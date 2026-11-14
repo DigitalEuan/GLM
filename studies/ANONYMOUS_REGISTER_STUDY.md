@@ -84,14 +84,14 @@ window it is scored at are all the relay study's.
 <!-- generated: anonymous-faculties -->
 | faculty | hit@5, names kept | hit@5, names replaced |
 |---|---|---|
-| text — exact overlap of the identifiers | 659 (81.0 %) | 40 (4.9 %) |
-| lexical — the identifier address book | 276 (33.9 %) | 19 (2.3 %) |
-| **address — the structural address book** | 111 (13.6 %) | 111 (13.6 %) |
-| name — substring search over the names | 135 (16.6 %) | 7 (0.9 %) |
-| digest — a control that knows nothing | 19 (2.3 %) | 25 (3.1 %) |
+| text — exact overlap of the identifiers | 664 (82.9 %) | 49 (6.1 %) |
+| lexical — the identifier address book | 291 (36.3 %) | 18 (2.2 %) |
+| **address — the structural address book** | 97 (12.1 %) | 95 (11.9 %) |
+| name — substring search over the names | 135 (16.9 %) | 7 (0.9 %) |
+| digest — a control that knows nothing | 15 (1.9 %) | 21 (2.6 %) |
 | random — a seeded permutation | 12 (1.5 %) | 12 (1.5 %) |
 
-814 queries over a corpus of 9757 declarations; chance at k = 5 is 2.1 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+801 queries over a corpus of 9604 declarations; chance at k = 5 is 2.2 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
@@ -139,7 +139,7 @@ query.
 <!-- generated: anonymous-invariance -->
 | reading | queries | what it means |
 |---|---|---|
-| queries whose syntax coordinates are untouched | 814 | 100.0 % of 814 |
+| queries whose syntax coordinates are untouched | 801 | 100.0 % of 801 |
 | queries where a type-word coordinate moves | 0 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
 | queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
 
@@ -169,8 +169,8 @@ told that this register exists.
 <!-- generated: anonymous-relay -->
 | reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
 |---|---|---|---|---|
-| names kept | 814 | 18 | 659 (81.0 %) | **662 (81.3 %)** |
-| names replaced | 814 | 489 | 40 (4.9 %) | **75 (9.2 %)** |
+| names kept | 801 | 19 | 664 (82.9 %) | **668 (83.4 %)** |
+| names replaced | 801 | 493 | 49 (6.1 %) | **85 (10.6 %)** |
 
 The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->

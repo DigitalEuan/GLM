@@ -4,12 +4,12 @@
 # prose, this YAML is the face the GLM reads.  Judgement fields (controls,
 # layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
 # are kept as written; a derived field listed in hand_fields is kept too.
-# Last altered 13 November 2026 (study_manifest --sync).
+# Last altered 14 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: A working paper over the whole system — the substrate studies of the supplied archive
   and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->31
-  query kinds<!--/figure--> and checked by <!--figure:lean-files-->437 Lean files<!--/figure--> — kept
+  query kinds<!--/figure--> and checked by <!--figure:lean-files-->418 Lean files<!--/figure--> — kept
   beside the studies it draws on.
 directives:
 - D3
@@ -39,7 +39,6 @@ file_refs:
   - substrate/leech_construct.py
   lean:
   - AddressRead
-  - AdversarialDialogue
   - AffineOutput
   - AlignmentPoints
   - Anonymous
@@ -52,14 +51,12 @@ file_refs:
   - CelsiusRegister
   - CertifiedStreams
   - CitationScope
-  - ColourInduction
   - ColumnExtremum
   - ConditionalInduction
   - ConfigurationReading
   - ConnectedMachine
   - ConstantBound
   - Constants
-  - ContextFrames
   - Conversation
   - CoordinateJunction
   - CoordinateOrder
@@ -86,7 +83,6 @@ file_refs:
   - Facets
   - Feedback
   - FitCapacity
-  - FoldMachine
   - Foundations
   - Friction
   - FrictionTwo
@@ -113,13 +109,9 @@ file_refs:
   - LatticeCompletion
   - LayerChain
   - Layers
-  - LeechKissing
-  - LeechMachine
   - LeechShellCount
-  - LeechShells
   - Lightspeed
   - LorentzImproper
-  - LorentzPlane
   - LorentzUnits
   - LorentzianEvidence
   - LorentzianLift
@@ -172,7 +164,6 @@ file_refs:
   - ShareSeparation
   - Shortcut/Substrate
   - SignFactor
-  - SourceTiers
   - SpatialArithmetic
   - Stack
   - StackedDialogue
@@ -181,13 +172,10 @@ file_refs:
   - StepwiseFrames
   - StepwisePlanner
   - StrayBlind
-  - StudyLedger
   - SymbolicParameters
   - TaxConservation
-  - ThermoFriction
   - ThirdSort
   - TimedQuestion
-  - ToolMachine
   - ToolValues
   - Totient
   - Tower
@@ -196,9 +184,27 @@ file_refs:
   - VOA
   - Wheels/CentWheels
   - Wheels/SporadicOrders
-  lean_held: []
+  lean_held:
+  - GolayDeepHole
+  - LeechShellCount
+  - LorentzImproper
+  - LorentzUnits
+  - ResumedDialogue
+  - StackedDialogue
   lean_missing:
+  - AdversarialDialogue
+  - ColourInduction
+  - ContextFrames
+  - FoldMachine
+  - LeechKissing
+  - LeechMachine
+  - LeechShells
+  - LorentzPlane
   - LorentzianMajority
+  - SourceTiers
+  - StudyLedger
+  - ThermoFriction
+  - ToolMachine
   missing: []
   prose: GLM_ACADEMIC_PAPER.md
   test:

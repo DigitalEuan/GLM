@@ -14,6 +14,11 @@
 
 ---
 
+*Last altered 14 November 2026 (platform round: the twelve placeholder stubs and the six held
+files' build-tree copies, which had come back with the 12 November upload, removed again, and
+`AxiomAuditAll.lean` regenerated, so `lean_check` reports OK and this registry is what the tree
+actually holds.)*
+
 *Last altered 31 October 2026 (repository check: the twelve placeholder files were removed from
 the build tree and recorded here; `LorentzianMajority.lean` added; six files that import a
 missing file moved to `src/lean/awaiting_recovery/`; `Scratch.lean` moved out of the build to
@@ -86,3 +91,6 @@ reads a theorem statement from it still reads it; its "audited" mark is not met 
 | `LorentzImproper.lean` | owner upload | held (see above) |
 | `Rule30/SidewaysPeriodTwo.lean` | the Rule 30 round's own copy | restored 31 October 2026 |
 | `Scratch.lean` | owner upload | moved out of the build to `src/lean/scratch/` on 31 October 2026: a root-namespace working copy of `GLM.NonShannon.ingleton_violated` (`NonShannon.lean`), which the studies cite |
+| `LorentzUnits.lean`, `StackedDialogue.lean` | build-tree copies | removed 14 November 2026: each had been re-uploaded beside its held copy, so `lean_check` read the build copy and called the file "can return" while the held copy waited for a missing file. The held copy is now the only one |
+| `GolayDeepHole.lean`, `LeechShellCount.lean`, `LorentzImproper.lean`, `ResumedDialogue.lean` | build-tree copies | removed 14 November 2026, same reason: a held file must not also be in the build |
+| the twelve placeholder stubs | 12 November upload | removed again 14 November 2026: each held only a comment saying the original was never uploaded, and one of them let `AxiomAuditAll` appear to audit a file that proves nothing |

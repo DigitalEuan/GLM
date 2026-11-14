@@ -4,7 +4,7 @@
 # prose, this YAML is the face the GLM reads.  Judgement fields (controls,
 # layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
 # are kept as written; a derived field listed in hand_fields is kept too.
-# Last altered 13 November 2026 (study_manifest --sync).
+# Last altered 14 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: '11 of 12 marks; one tied reading: every rule at chance or refusing (the script''s rule
@@ -25,10 +25,11 @@ file_refs:
   lean:
   - AxiomAuditAll
   - GolayDeepHole
-  - LeechShells
   - LorentzianLift
-  lean_held: []
-  lean_missing: []
+  lean_held:
+  - GolayDeepHole
+  lean_missing:
+  - LeechShells
   missing: []
   prose: LORENTZIAN_LIFT_STUDY.md
   test:

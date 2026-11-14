@@ -370,7 +370,7 @@ measurement.
   study manifests synchronised with their studies (204); every relative link
   of the written documents repointed to where its file now lives (2,500
   links, 0 broken); the Lean address book rebuilt
-  (<!--figure:lean-declarations-->9,757<!--/figure--> declarations).
+  (<!--figure:lean-declarations-->9,604<!--/figure--> declarations).
 * **The intake and the wheels.** `source_material/ToDo/` and `done/`, the
   ledger `source_material/INTAKE.yaml` and the gates of `python3 -m
   glm_universal.intake` (`register`, `scaffold`, `advance`, `retest`,

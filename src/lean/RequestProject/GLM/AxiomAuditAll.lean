@@ -47,6 +47,8 @@ import RequestProject.GLM.Cube.Stabiliser
 import RequestProject.GLM.Cube.Surface
 import RequestProject.GLM.Cube.Tax
 import RequestProject.GLM.Cube.Three
+import RequestProject.GLM.CubeStabiliser
+import RequestProject.GLM.CubeSurface
 import RequestProject.GLM.CubicRadicals
 import RequestProject.GLM.CubicTrig
 import RequestProject.GLM.Cumulative
@@ -90,6 +92,8 @@ import RequestProject.GLM.FrictionTwo
 import RequestProject.GLM.FrobeniusRadicals
 import RequestProject.GLM.Gen2
 import RequestProject.GLM.Gen3
+import RequestProject.GLM.Golay.Abstract
+import RequestProject.GLM.Golay.AbstractSteiner
 import RequestProject.GLM.Golay.Census
 import RequestProject.GLM.Golay.Cesaro
 import RequestProject.GLM.Golay.Code

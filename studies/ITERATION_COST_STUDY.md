@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,586<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,300<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -75,7 +75,7 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 9,757 | 17,491 | 0 | 19,514 |
+| Lean declarations | 9,604 | 17,205 | 0 | 19,208 |
 | corpus sections | 2,761 | 5,095 | 0 | 5,522 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
@@ -985,5 +985,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 22,586 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 237 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  589 figures inside sentences, across 32 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 22,300 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 237 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  589 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

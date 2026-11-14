@@ -68,7 +68,7 @@ of carriers reached through <!--figure:query-kinds-->31 query kinds<!--/figure--
 one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
 The formal development is
 [`src/lean/RequestProject/GLM/`](src/lean/RequestProject/GLM/README.md),
-<!--figure:lean-files-->437 Lean files<!--/figure--> with no `sorry`, built
+<!--figure:lean-files-->418 Lean files<!--/figure--> with no `sorry`, built
 from the repository root with `lake build`.
 
 ```bash

@@ -40,7 +40,7 @@
    "GLM.TimedQuestion.contradicted_not_truthful",
    "GLM.TimedQuestion.resolved_eq_truth"
   ],
-  "declarations": 9629,
+  "declarations": 9476,
   "undeclared": []
  },
  "R6": {
@@ -91,8 +91,8 @@
     "answer": "The Leech lattice, the Golay code and the MOG all live in 24 coordinates.",
     "boundary": "corpus:weak",
     "budget": {
-     "documents": 288,
-     "mentions": 803
+     "documents": 286,
+     "mentions": 798
     },
     "candidates": [],
     "evidence": [
@@ -4664,7 +4664,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report lean: 9757 declarations of the Lean development carry a deterministic Leech address, read back exactly 9629/9629 times with 0 coordinate errors; 7862 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 2239 times against 43 for a SHA-256 control and a chance rate of 208165/47594646",
+   "answer": "report lean: 9604 declarations of the Lean development carry a deterministic Leech address, read back exactly 9476/9476 times with 0 coordinate errors; 7729 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 2213 times against 44 for a SHA-256 control and a chance rate of 102922/23056803",
    "boundary": "certified",
    "budget": {
     "steps": 6
@@ -4687,25 +4687,25 @@
    "theorems_declared": [],
    "witness": [
     "cache_verdict=fresh",
-    "collision_classes=815",
-    "control_same_file=43",
+    "collision_classes=803",
+    "control_same_file=44",
     "coordinate_errors=0",
     "covering_radius=4",
-    "declarations=9757",
-    "distinct_addresses=7862",
-    "distinct_features=7862",
+    "declarations=9604",
+    "distinct_addresses=7729",
+    "distinct_features=7729",
     "feature_beats_control=True",
-    "feature_linked=337",
-    "feature_same_file=2239",
-    "files=418",
+    "feature_linked=336",
+    "feature_same_file=2213",
+    "files=411",
     "hash_is_chance_like=True",
     "largest_class=34",
-    "linked_chance=11659/23797323",
-    "moved=9629",
-    "read_back_exact=9629",
-    "same_file_chance=208165/47594646",
+    "linked_chance=11486/23056803",
+    "moved=9476",
+    "read_back_exact=9476",
+    "same_file_chance=102922/23056803",
     "scale=9",
-    "shuffled_same_file=30",
+    "shuffled_same_file=27",
     "worst_residual=3"
    ]
   },
@@ -4990,7 +4990,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report retrieval: the address book used as an index over 9757 Lean declarations, scored on 204 queries against every control.  The address finds a relative in its top 5 for 91 of them -- 2099/100 times the closed-form chance of 21/1000 -- and beats the digest (1/102), the seeded reshuffle (2/51), a random ranking (1/51) and name search (15/68).  It is beaten decisively by a plain lexical search over the statement text (55/68), ranking the raw feature vectors without any lattice scores 23/51, and an address book built from the identifiers rather than the syntax reaches 37/68 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 497554 pairs with 0 violations, so a radius search prunes the corpus to 7079/497607 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
+   "answer": "report retrieval: the address book used as an index over 9604 Lean declarations, scored on 201 queries against every control.  The address finds a relative in its top 5 for 74 of them -- 427/25 times the closed-form chance of 11/500 -- and beats the digest (4/201), the seeded reshuffle (2/67), a random ranking (2/201) and name search (35/201).  It is beaten decisively by a plain lexical search over the statement text (54/67), ranking the raw feature vectors without any lattice scores 74/201, and an address book built from the identifiers rather than the syntax reaches 98/201 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 489751 pairs with 0 violations, so a radius search prunes the corpus to 3265/244902 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
    "boundary": "certified",
    "budget": {
     "steps": 6
@@ -5012,26 +5012,26 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "address_hit_rate=91/204",
-    "chance=3189964143365013793/150093766075100493024",
-    "corpus=9757",
-    "digest_hit_rate=1/102",
-    "features_hit_rate=23/51",
+    "address_hit_rate=74/201",
+    "chance=490851480805241051/22774344505215343920",
+    "corpus=9604",
+    "digest_hit_rate=4/201",
+    "features_hit_rate=74/201",
     "goal_features_reproduced=0",
     "goal_queries=101",
     "hybrid_beats_text=False",
     "k=5",
     "lean_file=RequestProject/GLM/Retrieval.lean",
-    "lexical_hit_rate=37/68",
-    "mean_shortlist=7079/51",
-    "name_hit_rate=15/68",
-    "pairs_checked=497554",
-    "queries=204",
-    "random_hit_rate=1/51",
-    "shuffled_hit_rate=2/51",
-    "text_hit_rate=55/68",
-    "times_chance=66953591729579141496/3189964143365013793",
-    "times_chance_rounded=2099/100",
+    "lexical_hit_rate=98/201",
+    "mean_shortlist=6530/51",
+    "name_hit_rate=35/201",
+    "pairs_checked=489751",
+    "queries=201",
+    "random_hit_rate=2/201",
+    "shuffled_hit_rate=2/67",
+    "text_hit_rate=54/67",
+    "times_chance=8384584544208634080/490851480805241051",
+    "times_chance_rounded=427/25",
     "verdict_address_beats_chance=True",
     "verdict_address_beats_digest=True",
     "verdict_address_beats_name=True",
@@ -5040,7 +5040,7 @@
     "verdict_address_beats_text=False",
     "verdict_guarantee_holds=True",
     "verdict_hybrid_beats_text=False",
-    "verdict_lattice_matches_raw_features=False",
+    "verdict_lattice_matches_raw_features=True",
     "verdict_lexical_beats_structural=True",
     "verdict_lexical_beats_text=False",
     "verdict_text_beats_address=True",
@@ -5049,7 +5049,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 17160334/17180099 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
+   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 16949169/16968934 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
    "boundary": "certified",
    "budget": {
     "steps": 7
@@ -5080,8 +5080,8 @@
     "fix_checked=196656",
     "fix_exact=True",
     "minimal_vectors=196560",
-    "repo_generated_bytes=17160334",
-    "repo_generated_fraction=17160334/17180099",
+    "repo_generated_bytes=16949169",
+    "repo_generated_fraction=16949169/16968934",
     "repo_primary_bytes=19765",
     "sextet_confirmed=200",
     "sextet_distinct_outputs=1",
@@ -5794,7 +5794,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 335 -> 338 of 407 (ahead), a disjoint held-out stride 324 -> 328 of 407 (ahead) and bare goal queries 659 -> 662 of 814 (ahead), carrying 10 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 1, so the gain is the substrate's rather than the list padding's, and the gate fires on only 36 of 1628 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
+   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 332 -> 335 of 401 (ahead), a disjoint held-out stride 332 -> 336 of 400 (ahead) and bare goal queries 664 -> 668 of 801 (ahead), carrying 11 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 2, so the gain is the substrate's rather than the list padding's, and the gate fires on only 38 of 1602 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -5816,23 +5816,23 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "carried=10",
-    "corpus=9757",
+    "carried=11",
+    "corpus=9604",
     "gate=1/10",
-    "goal_fired=18",
-    "goal_leader_hits=659",
-    "goal_queries=814",
-    "goal_relay_hits=662",
-    "holdout_fired=8",
-    "holdout_leader_hits=324",
-    "holdout_queries=407",
-    "holdout_relay_hits=328",
+    "goal_fired=19",
+    "goal_leader_hits=664",
+    "goal_queries=801",
+    "goal_relay_hits=668",
+    "holdout_fired=7",
+    "holdout_leader_hits=332",
+    "holdout_queries=400",
+    "holdout_relay_hits=336",
     "lean_file=RequestProject/GLM/Relay.lean",
     "lost=0",
-    "tuning_fired=10",
-    "tuning_leader_hits=335",
-    "tuning_queries=407",
-    "tuning_relay_hits=338",
+    "tuning_fired=12",
+    "tuning_leader_hits=332",
+    "tuning_queries=401",
+    "tuning_relay_hits=335",
     "verdict_carried_outnumber_lost=True",
     "verdict_gain_holds_across_the_gate=True",
     "verdict_gain_never_below_across_the_gate=True",
@@ -5852,7 +5852,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 814 queries the text search falls 659 -> 40 of 814 and the identifier address book 276 -> 19 of 814, against the 17 hits chance gives, while the structural address holds 111 -> 111 of 814 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (814 of 814 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 489 of 814 and lifts the leader 40 -> 75.  The carry set is a class, not a residue.  Standing, read off the measurement: 1 of its 12 checks fails (text_is_within_twice_chance)",
+   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 801 queries the text search falls 664 -> 49 of 801 and the identifier address book 291 -> 18 of 801, against the 17 hits chance gives, while the structural address holds 97 -> 95 of 801 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (801 of 801 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 493 of 801 and lifts the leader 49 -> 85.  The carry set is a class, not a residue.  Standing, read off the measurement: 1 of its 12 checks fails (text_is_within_twice_chance)",
    "boundary": "certified",
    "budget": {
     "steps": 4
@@ -5874,26 +5874,26 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "anonymous_address_hits=111",
-    "anonymous_digest_hits=25",
-    "anonymous_lexical_hits=19",
+    "anonymous_address_hits=95",
+    "anonymous_digest_hits=21",
+    "anonymous_lexical_hits=18",
     "anonymous_name_hits=7",
     "anonymous_random_hits=12",
-    "anonymous_text_hits=40",
-    "chance_at_5=3191009261695029035/149725889197465442796",
-    "corpus=9757",
-    "fired=489",
-    "invariant_queries=814",
-    "leader_hits=40",
+    "anonymous_text_hits=49",
+    "chance_at_5=409243100968902877/18777406020254750880",
+    "corpus=9604",
+    "fired=493",
+    "invariant_queries=801",
+    "leader_hits=49",
     "lean_file=RequestProject/GLM/Anonymous.lean",
-    "plain_address_hits=111",
-    "plain_digest_hits=19",
-    "plain_lexical_hits=276",
+    "plain_address_hits=97",
+    "plain_digest_hits=15",
+    "plain_lexical_hits=291",
     "plain_name_hits=135",
     "plain_random_hits=12",
-    "plain_text_hits=659",
-    "queries=814",
-    "relay_hits=75",
+    "plain_text_hits=664",
+    "queries=801",
+    "relay_hits=85",
     "verdict_address_holds=True",
     "verdict_address_is_above_twice_chance=True",
     "verdict_address_is_the_clear_leader=True",
@@ -8365,7 +8365,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "'seven' sits at the Leech point (72, 54, 26, 54, 26, 62, 0, 0, 54, 0, 46, 0, 18, 26, 0, 46, 28, 62, 0, 0, 36, 0, 44, 2) (read back exactly: True), from its positional company 'the _' 8, 'a _' 6, '1 _' 3, 'and _' 6, 'is _' 3, 'of _' 7, 'by _' 6, 'in _' 5, '_ the' 2, '_ a' 3, '_ and' 5, '_ is' 3, '_ of' 7, '_ by' 4, '_ in' 5. Its nearest words on the lattice (squared distance): six (2720), four (3216), two (3984), three (4032), nearest (4576), ten (5232), five (6080), wheel (6480), data (7152), domain (7200).",
+   "answer": "'seven' sits at the Leech point (71, 53, 27, 55, 27, 63, -1, -1, 55, -1, 45, 1, 17, 27, -1, 35, 27, 63, 1, -1, 37, -1, 45, 1) (read back exactly: True), from its positional company 'the _' 8, 'a _' 6, '1 _' 3, 'and _' 6, 'is _' 3, 'of _' 7, 'by _' 6, 'in _' 5, '_ the' 2, '_ a' 3, '_ and' 4, '_ is' 3, '_ of' 7, '_ by' 4, '_ in' 5. Its nearest words on the lattice (squared distance): six (3008), four (3504), two (4288), three (4416), nearest (4848), ten (5712), five (6608), wheel (7184), retrieval (7680), one (7824).",
    "boundary": "certified",
    "budget": {
     "steps": 1
@@ -8387,9 +8387,9 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "address=72,54,26,54,26,62,0,0,54,0,46,0,18,26,0,46,28,62,0,0,36,0,44,2",
+    "address=71,53,27,55,27,63,-1,-1,55,-1,45,1,17,27,-1,35,27,63,1,-1,37,-1,45,1",
     "anchors=the,a,1,and,is,of,2,0,by,t,in,it",
-    "coordinates=8,6,3,6,3,7,0,0,6,0,5,0,2,3,0,5,3,7,0,0,4,0,5,0",
+    "coordinates=8,6,3,6,3,7,0,0,6,0,5,0,2,3,0,4,3,7,0,0,4,0,5,0",
     "readback=True",
     "reading=address",
     "word=seven"
@@ -8422,7 +8422,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "LEECH_SHELLS_STUDY (Phase 164) — The Leech shells from the lattice's definition — the shapes proved, every shell counted from the Golay census; phase 164; status closed; faculty unknown; last altered 31 October 2026; Question: Can the GLM define the Leech lattice by Conway's construction from the Golay code, prove the shapes of its minimal vectors from that definition, and count every shell from the Golay census alone — checked against the theta series, which uses no Golay code — instead of reading the shells from a stored table?; Verdict: Yes. The minimal shapes are proved in Lean from Conway's definition, and every shell is counted from the Golay census walked from the generator, agreeing with the theta series on every shell through norm 14; the stored table's norm-12 shell was wrong and is corrected.; Deciding figure: 6 of 6 marks; the weight census `1, 759, 2576, 759, 1` walked from the generator; 8 of 8 shells agreeing with the theta series `E₄³ − 720Δ` through norm 14; the norm-12 shell 34,408,430,950 → 34,417,656,000.; Recomputed by: `glm_universal.reasoning.leech_shells.shell_report`; Marks: 6 declared (L1, S1, S2, S3, T1, F1); met 6; Builds on: LLVQ_TABLE_STUDY, TOOL_MACHINE_STUDY; Built on by: LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY; Also links to: GLM_ACADEMIC_PAPER, LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY, PI_MACHINE_STUDY; Code: reasoning/leech_shells.py, reasoning/llvq.py, substrate/leech2.py; Tests: test_leech_shells.py; Lean: LeechMachine, LeechShells, ToolMachine; Prose: studies/LEECH_SHELLS_STUDY.md",
+   "answer": "LEECH_SHELLS_STUDY (Phase 164) — The Leech shells from the lattice's definition — the shapes proved, every shell counted from the Golay census; phase 164; status closed; faculty unknown; last altered 31 October 2026; Question: Can the GLM define the Leech lattice by Conway's construction from the Golay code, prove the shapes of its minimal vectors from that definition, and count every shell from the Golay census alone — checked against the theta series, which uses no Golay code — instead of reading the shells from a stored table?; Verdict: Yes. The minimal shapes are proved in Lean from Conway's definition, and every shell is counted from the Golay census walked from the generator, agreeing with the theta series on every shell through norm 14; the stored table's norm-12 shell was wrong and is corrected.; Deciding figure: 6 of 6 marks; the weight census `1, 759, 2576, 759, 1` walked from the generator; 8 of 8 shells agreeing with the theta series `E₄³ − 720Δ` through norm 14; the norm-12 shell 34,408,430,950 → 34,417,656,000.; Recomputed by: `glm_universal.reasoning.leech_shells.shell_report`; Marks: 6 declared (L1, S1, S2, S3, T1, F1); met 6; Builds on: LLVQ_TABLE_STUDY, TOOL_MACHINE_STUDY; Built on by: LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY; Also links to: GLM_ACADEMIC_PAPER, LEECH_KISSING_STUDY, LEECH_SHELL_COUNT_STUDY, PI_MACHINE_STUDY; Code: reasoning/leech_shells.py, reasoning/llvq.py, substrate/leech2.py; Tests: test_leech_shells.py; Lean missing: LeechMachine, LeechShells, ToolMachine; Prose: studies/LEECH_SHELLS_STUDY.md",
    "boundary": "certified",
    "budget": {
     "steps": 2
@@ -9330,6 +9330,6 @@
    "witness": []
   }
  ],
- "source_digest": "356135d6e2020c7d965bc28aa36eaa730df71a5760431b75661b2f337b4c5016",
+ "source_digest": "2670efa2a5fbd91ab895c12c0826cbc4d04220cb30efe72c67494144bf59845a",
  "taken": 9
 }

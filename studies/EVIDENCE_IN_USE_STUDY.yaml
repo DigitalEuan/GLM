@@ -4,7 +4,7 @@
 # prose, this YAML is the face the GLM reads.  Judgement fields (controls,
 # layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
 # are kept as written; a derived field listed in hand_fields is kept too.
-# Last altered 13 November 2026 (study_manifest --sync).
+# Last altered 14 November 2026 (study_manifest --sync).
 
 controls: []
 deciding_figure: 7 of 7 marks on the fifth take (4, 6, 6 and 7 of 7 on the first four); `--result` agrees
@@ -21,11 +21,11 @@ file_refs:
   - reasoning/evidence_model_study.py
   - tools.py
   lean:
-  - AdversarialDialogue
-  - ContextFrames
   - EvidenceInUse
   lean_held: []
-  lean_missing: []
+  lean_missing:
+  - AdversarialDialogue
+  - ContextFrames
   missing: []
   prose: EVIDENCE_IN_USE_STUDY.md
   test: []

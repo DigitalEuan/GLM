@@ -199,15 +199,15 @@ earlier; each is recorded in `MASTER_PLAN.md`.
 | end-to-end CLI evaluation | `PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->237<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `PYTHONPATH=src python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `PYTHONPATH=src python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `scripts/rebuild_lean.sh` (`lake build` from the repository root) | <!--figure:lean-files-->437 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `scripts/rebuild_lean.sh` (`lake build` from the repository root) | <!--figure:lean-files-->418 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `PYTHONPATH=src python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
 **<!--figure:query-kinds-->31 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->9,757<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->9,757<!--/figure-->/<!--figure:lean-declarations-->9,757<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->9,604<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->9,604<!--/figure-->/<!--figure:lean-declarations-->9,604<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -264,7 +264,7 @@ to end and repaired. What that left:
   set has <!--figure:evaluation-case-count-->237<!--/figure--> cases. The
   manifests are synchronised with their studies, every relative link in the
   written documents resolves, the Lean address book holds
-  <!--figure:lean-declarations-->9,757<!--/figure--> declarations, and building
+  <!--figure:lean-declarations-->9,604<!--/figure--> declarations, and building
   a session no longer imports the walk of the whole Lean development (the
   sign-off ledger's closure test).
 * **The intake.** `source_material/ToDo/` (not yet taken through) and
@@ -438,6 +438,25 @@ already hold it). Lean errors fell from 284 to 36 and intake errors from 51 to
 5 before the caches were re-taken; the tier contract and the study manifests
 are current, and the stray `archive/ARISTOTLE_SUMMARY.md` (a byte copy of the
 renamed Phase 183 note) was removed.
+
+*What P2 has done so far (14 November 2026).* The 36 Lean errors were one
+defect, not thirty-six: the tree contradicted its own registry
+(`studies/_lean_files_needed.md`). Twelve placeholder stubs — files whose only
+content is a comment saying the real file was never uploaded — were in the
+build, though the registry says they are gone; the six files the registry says
+are held out of the build had byte-identical copies in the build as well; and
+`Scratch.lean`, moved to `src/lean/scratch/` on 31 October, had a copy back in
+the build. The copies were removed, `AxiomAuditAll.lean` regenerated with
+`lean_check --write-audit` (four real modules had never been audited:
+`CubeStabiliser`, `CubeSurface`, `Golay.Abstract`, `Golay.AbstractSteiner`),
+and `lean_check` reports **OK**: 36 errors to 0, no duplicate Lean file in the
+tree. The held registry now names what each held file truly waits for,
+including the two that wait for another held file (`LorentzUnits` for held
+`LorentzImproper`, `StackedDialogue` for held `ResumedDialogue`); before the copies went, the checker called those two
+"can return", which would have put a file that imports a missing file back in
+the build. The thirteen files remain owed, and the round's work order is the
+navigator's Lean-gap section: `LeechShells.lean` first, because two held files
+wait for it alone.
 
 0. **repository check and fix** this repository has been reorganised and needs
 a proper check through everything, some parts may be broken and require fixing.
