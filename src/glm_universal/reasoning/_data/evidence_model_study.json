@@ -62,8 +62,8 @@
     "answer": "The Golay code is generated here from the 12x12 symmetric parity block B of the GLM substrate (``Golay/Code.lean`` / ``substrate/mog.py``), the code being the row space of [I_12 | B] over GF(2).",
     "boundary": "corpus:strong",
     "budget": {
-     "documents": 266,
-     "mentions": 637
+     "documents": 265,
+     "mentions": 636
     },
     "candidates": [],
     "evidence": [
@@ -91,8 +91,8 @@
     "answer": "The Leech lattice, the Golay code and the MOG all live in 24 coordinates.",
     "boundary": "corpus:weak",
     "budget": {
-     "documents": 286,
-     "mentions": 798
+     "documents": 279,
+     "mentions": 784
     },
     "candidates": [],
     "evidence": [
@@ -149,8 +149,8 @@
     "answer": "* the register is *derived* -- every class names a quantity the physics register already holds, and the dimension, unit and EXT10 exponents in a class carrier are read from there rather than typed a second time; * the carrier round trips, s",
     "boundary": "corpus:strong",
     "budget": {
-     "documents": 578,
-     "mentions": 3688
+     "documents": 570,
+     "mentions": 3677
     },
     "candidates": [],
     "evidence": [
@@ -8295,9 +8295,9 @@
    "theorems_declared": [],
    "witness": [
     "context=24,12,binary,extended,lattice,leech,weight,lean,substrate,one,glm,mog",
-    "documents=266",
+    "documents=265",
     "head=source_material/ToDo/leechlean/3_leech_bridge/leechlean/leech_core.py#p0.s4",
-    "mentions=637",
+    "mentions=636",
     "pattern=copula:is",
     "ranking=source_material/ToDo/leechlean/3_leech_bridge/leechlean/leech_core.py#p0.s4 | source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1 | source_material/ToDo/lean_to_add/mog_cube_1/glm_clean/exp7_cube_surface.py#p10.s1",
     "reading=define",
@@ -8365,7 +8365,7 @@
   },
   {
    "ambiguity": [],
-   "answer": "'seven' sits at the Leech point (71, 53, 27, 55, 27, 63, -1, -1, 55, -1, 45, 1, 17, 27, -1, 35, 27, 63, 1, -1, 37, -1, 45, 1) (read back exactly: True), from its positional company 'the _' 8, 'a _' 6, '1 _' 3, 'and _' 6, 'is _' 3, 'of _' 7, 'by _' 6, 'in _' 5, '_ the' 2, '_ a' 3, '_ and' 4, '_ is' 3, '_ of' 7, '_ by' 4, '_ in' 5. Its nearest words on the lattice (squared distance): six (3008), four (3504), two (4288), three (4416), nearest (4848), ten (5712), five (6608), wheel (7184), retrieval (7680), one (7824).",
+   "answer": "'seven' sits at the Leech point (72, 54, 26, 26, 54, 62, 0, 0, 54, 0, 46, 0, 18, 26, 0, 26, 44, 62, 0, 0, 36, 0, 44, -2) (read back exactly: True), from its positional company 'the _' 8, 'a _' 6, '1 _' 3, 'is _' 3, 'and _' 6, 'of _' 7, 'by _' 6, 'in _' 5, '_ the' 2, '_ a' 3, '_ is' 3, '_ and' 5, '_ of' 7, '_ by' 4, '_ in' 5. Its nearest words on the lattice (squared distance): six (2656), four (3424), three (4144), nearest (4656), two (4720), ten (5520), five (6144), wheel (7392), python (7632), data (7680).",
    "boundary": "certified",
    "budget": {
     "steps": 1
@@ -8387,9 +8387,9 @@
    "theorems": [],
    "theorems_declared": [],
    "witness": [
-    "address=71,53,27,55,27,63,-1,-1,55,-1,45,1,17,27,-1,35,27,63,1,-1,37,-1,45,1",
-    "anchors=the,a,1,and,is,of,2,0,by,t,in,it",
-    "coordinates=8,6,3,6,3,7,0,0,6,0,5,0,2,3,0,4,3,7,0,0,4,0,5,0",
+    "address=72,54,26,26,54,62,0,0,54,0,46,0,18,26,0,26,44,62,0,0,36,0,44,-2",
+    "anchors=the,a,1,is,and,of,2,0,by,t,in,it",
+    "coordinates=8,6,3,3,6,7,0,0,6,0,5,0,2,3,0,3,5,7,0,0,4,0,5,0",
     "readback=True",
     "reading=address",
     "word=seven"
@@ -9330,6 +9330,6 @@
    "witness": []
   }
  ],
- "source_digest": "2670efa2a5fbd91ab895c12c0826cbc4d04220cb30efe72c67494144bf59845a",
+ "source_digest": "d07102d8e5ee4e6428fdc5502cb2612847a1682118520f8019f8dd7a14efaffb",
  "taken": 9
 }
