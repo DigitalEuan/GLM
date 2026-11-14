@@ -226,7 +226,11 @@ def navigate(question: str, *, radius: int = 2, study_limit: int = 8,
         "sections": sections,
         "sections_matched": len(units),
         "sections_shared": len(shared),
-        "sections_without_share": len(units) - len(shared),
+        #  The ones not shown that also share no word: the count is of
+        #  *others*, so the unshared sections already listed are not counted
+        #  twice.
+        "sections_without_share": (len(units) - len(shared)
+                                   - sum(1 for u in chosen if u.overlap == 0)),
         "sections_complete": bool(books.get("answered", False)),
         "corpus_units": books.get("corpus_units", 0),
         "radius": radius,
