@@ -233,6 +233,9 @@ def route(session, text: str) -> Routed:
         phrased = _phrased_tool(text)
         if phrased is not None:
             return phrased
+        proposed = _cent_methods(text)
+        if proposed is not None:
+            return proposed
         if stepped is not None:
             return stepped
     if sol is None:
@@ -298,6 +301,83 @@ def _phrased_tool(text: str) -> Optional[Routed]:
         return None
     return Routed("toolbox", True, f"{got.text} [read as `{asked}`]",
                   payload=got, faculty="derive")
+
+
+#:  A question asks for a method when one of these words is in it ...
+_CENT_ASKS = ("method", "methods", "proposal", "proposals", "implement",
+               "implements", "implemented", "implementing", "realise",
+               "realises", "realized", "realize", "substrate", "substrates")
+#:  ... and one of these says the answer is meant to be a mechanism at all.
+_CENT_CONTEXT = ("physical", "physically", "analog", "analogue", "circuit",
+                 "circuits", "device", "devices", "hardware", "compute",
+                 "computes", "computing", "calculate", "realise", "realize")
+
+
+def _cent_methods(text: str) -> Optional[Routed]:
+    """A request for a computational method, answered by the cent compiler.
+
+    Added 14 November 2026.  Consulted only after the planner, the grammar,
+    the stepwise planner and the phrased tools have refused, and kept only if
+    the compiler answers, so it never changes an answer a surface gave and
+    never replaces one refusal with another (the same non-interference rule as
+    :func:`_phrased_tool`).
+
+    The compiler is asked for the declared methods the problem admits; when
+    the problem names exactly one primitive (``primitive:sqrt``), it is also
+    asked for its ranked proposals for that primitive, and the ranked list is
+    printed with each proposal's handoff readiness.  Nothing here writes, and
+    the compiler's own gaps are printed with the answer.
+    """
+    from .. import cent_bridge as cb
+
+    low = text.lower()
+    if not any(word in low for word in _CENT_ASKS):
+        return None
+    if not any(word in low for word in _CENT_CONTEXT):
+        return None
+    if not cb.available():
+        return None
+    try:
+        payload = cb.discover(text)
+    except (cb.CentUnavailable, cb.CentError):
+        return None
+    methods = payload.get("methods") or ()
+    if not payload.get("matched") or not methods:
+        return None
+
+    lines = [f"the cent compiler declares {len(methods)} method(s) for this:"]
+    for method in methods[:8]:
+        lines.append(f"  {method.get('primitive')}: {method.get('name')}")
+    if len(methods) > 8:
+        lines.append(f"  ... and {len(methods) - 8} more")
+
+    goals = (payload.get("problem") or {}).get("goals") or ()
+    primitives = [goal.split(":", 1)[1] for goal in goals
+                  if str(goal).startswith("primitive:")]
+    proposals = None
+    if len(primitives) == 1:
+        try:
+            proposals = cb.propose(primitives[0], target="glm-reference", top=3)
+        except (cb.CentUnavailable, cb.CentError):
+            proposals = None
+    if proposals is not None:
+        ranked = proposals.get("proposals") or ()
+        lines.append(f"ranked proposals for {primitives[0]} on glm-reference:")
+        if not ranked:
+            lines.append("  none: the compiler declined to propose")
+        for proposal in ranked:
+            handoff = proposal.get("handoff") or {}
+            mechanism = (proposal.get("mechanism") or {}).get("id")
+            lines.append(f"  rank {proposal.get('rank')}: {mechanism}"
+                         f"  [{handoff.get('readiness')}]")
+        for gap in (proposals.get("gaps") or ())[:3]:
+            lines.append(f"  gap: {gap}")
+    for gap in (payload.get("gaps") or ())[:2]:
+        lines.append(f"  gap: {gap}")
+
+    return Routed("cent", True, "\n".join(lines),
+                  payload={"discovery": payload, "proposals": proposals},
+                  faculty="propose")
 
 
 def _stepwise(session, text: str) -> Optional[Routed]:

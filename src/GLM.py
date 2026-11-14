@@ -340,6 +340,16 @@ def _batch_query(out: Out, session: GeometricSession, query: str,
         out.line(f"REFUSED {solution.error or ''}")
         return 1, None
 
+    if solution.payload.get("surface") == "cent":
+        #  A refused question that asked for a computational method: the cent
+        #  compiler's methods and ranked proposals (14 November 2026).  It has
+        #  no three-column script of its own, so it prints as a reading.
+        out.line(f"QUERY   {query}")
+        out.line(f"COMPILER cent ({solution.payload.get('faculty', '')})")
+        for line in solution.answer.splitlines():
+            out.line(f"  {line}")
+        return 0, None
+
     trace: Optional[ThreeColumnTrace] = None
     if solution.ok:
         try:

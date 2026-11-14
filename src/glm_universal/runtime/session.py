@@ -538,7 +538,39 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
             If the string is structurally malformed.
         """
         query = parse_query(text, self.index, domain)
-        return self.solve(query, raw=text)
+        solution = self.solve(query, raw=text)
+        if not solution.ok:
+            proposed = self._propose_methods(text, query)
+            if proposed is not None:
+                return proposed
+        return solution
+
+    def _propose_methods(self, text: str, query: Query) -> Optional[Solution]:
+        """A refused question that asks for a computational method.
+
+        Added 14 November 2026.  The cent compiler declares methods for a
+        problem statement and ranks proposals for the primitive the problem
+        names; this is consulted only after the ordinary solve refused, so it
+        never changes an answer and never replaces one refusal with another.
+        The answer carries the compiler's own gaps and its surface, so a
+        reader can see which system spoke.
+        """
+        from . import router as router_module
+        from .solution import Step
+        routed = router_module._cent_methods(text)
+        if routed is None:
+            return None
+        solution = Solution(
+            query=query, kind="routed-cent", answer=routed.text,
+            steps=tuple(Step("compiler", line, line)
+                        for line in routed.text.splitlines()),
+            payload={"surface": "cent", "faculty": routed.faculty},
+            ok=True)
+        self._history.append(InferenceRecord(
+            index=len(self._history), raw_query=text, kind=solution.kind,
+            domain=query.domain, answer=solution.answer, ok=True))
+        self.last_solution = solution
+        return solution
 
     def solve(self, query: Query, raw: Optional[str] = None) -> Solution:
         """Solve one already-parsed :class:`Query`.
