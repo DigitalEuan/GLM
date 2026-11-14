@@ -124,7 +124,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->261 test files<!--/figure--> today
+the suite is <!--figure:test-files-->262 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
