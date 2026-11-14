@@ -1,5 +1,5 @@
 """
-Extension of glm_wheels.py to the 15-wheel system (W1..W15) with
+Extension of wheels.py to the 15-wheel system (W1..W15) with
 declared junctions, non-identities, the licensed union, and the
 wave_speed = speed_of_light bridge.
 
@@ -34,7 +34,7 @@ from .wheels import (
     REFERENCE_AXES, REFERENCE_DIMENSIONS, _d,
     parse_equation, parse_monomial, relation_vector,
     Monomial, _rref, _solve, _null_space,
-    derivation_certificate, is_derivable, consistency, _reference_si,
+    derivation_certificate, derive_from, is_derivable, consistency, _reference_si,
     wheel_quantities,
 )
 
@@ -281,12 +281,11 @@ def prefix_case_equation(equation: str, target_wheel_id: str,
         raise ValueError(f"equation needs one '=': {equation!r}")
     lhs, rhs = (s.strip() for s in equation.split("="))
     def walk_and_prefix(node):
-        from glm_wheels import Monomial as _M, Fraction as _F
         if isinstance(node, ast.Name):
             holder = _wheel_holding(node.id, wheels, prefer=target_wheel_id)
             if holder is None:
                 raise ValueError(f"name {node.id!r} not held by any wheel")
-            return _M.make(1, {f"{holder}.{node.id}": _F(1)})
+            return Monomial.make(1, {f"{holder}.{node.id}": Fraction(1)})
         if isinstance(node, ast.Attribute):
             # Already prefixed; reconstruct dotted name
             parts = []
@@ -295,16 +294,16 @@ def prefix_case_equation(equation: str, target_wheel_id: str,
                 node = node.value
             if isinstance(node, ast.Name):
                 parts.append(node.id)
-                return _M.make(1, {".".join(reversed(parts)): _F(1)})
+                return Monomial.make(1, {".".join(reversed(parts)): Fraction(1)})
             raise ValueError("bad attribute chain")
         if (isinstance(node, ast.Constant) and isinstance(node.value, int)
                 and not isinstance(node.value, bool)):
             if node.value == 0:
                 raise ValueError("zero is not a quantity expression")
-            return _M.make(node.value, {})
+            return Monomial.make(node.value, {})
         if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
             inner = walk_and_prefix(node.operand)
-            return _M(-inner.coefficient, inner.powers)
+            return Monomial(-inner.coefficient, inner.powers)
         if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Mult):
             return walk_and_prefix(node.left).mul(walk_and_prefix(node.right))
         if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div):
@@ -508,11 +507,10 @@ def census_licensed_union(wheels: Tuple[Wheel, ...] = WHEELS_15,
                         # This is the local two-input spoke check.
                         # For census brevity we use the existing derive_from via
                         # the unprefixed wheel axioms:
-                        from glm_wheels import derive_from as _df
                         y_local = y.split(".", 1)[1]
                         z_local = z.split(".", 1)[1]
                         if y_local in wheel_quantities(w) and z_local in wheel_quantities(w):
-                            spoke = _df(target_q, (y_local, z_local), w.axioms, w.id)
+                            spoke = derive_from(target_q, (y_local, z_local), w.axioms, w.id)
                             in_wheel = spoke is not None
                     # licensed union derivation?
                     # Goal: target = y * z  (or any combination; we just test

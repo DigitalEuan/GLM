@@ -19,6 +19,7 @@ from typing import Dict, List, Optional, Set, Tuple, FrozenSet
 from collections import defaultdict
 
 from .grammar import CGraph, COp, decompose_formula, find_cent_isomorphism
+from .material_contracts import MaterialContract, material_contract
 
 
 # ---------------------------------------------------------------------------
@@ -168,6 +169,20 @@ class DeltaImplementation:
     law: str                  # the governing physical law
     carrier_type: str         # "temporal", "spatial", "phase-wrap", "static"
     notes: str = ""
+
+    @property
+    def contract(self) -> MaterialContract:
+        """Typed ports, parameters, range and failures for this material row."""
+        return material_contract(
+            kind="substrate",
+            primitive=self.primitive,
+            component=self.component,
+            domain=self.domain,
+            carrier=self.carrier_type,
+            law=self.law,
+            description=self.notes,
+            source="DELTA_SUBSTRATE",
+        )
 
 
 DELTA_SUBSTRATE: List[DeltaImplementation] = [
@@ -335,6 +350,22 @@ DELTA_SUBSTRATE: List[DeltaImplementation] = [
         "Pressure/flow driven until setpoint is reached",
         "temporal",
         "Hydraulic servos relax to equilibrium."),
+
+    # ¢_quantize (uniform nearest-level quantization)
+    DeltaImplementation("quantize", "electrical", "flash ADC / comparator bank",
+        "q = Δ·round(x/Δ) (uniform nearest-level encoding)",
+        "temporal",
+        "A resistor ladder sets the comparator thresholds and an encoder emits "
+        "the nearest level. At one bit this is the comparator inside a "
+        "delta-sigma loop; the exact core still owns the rounding law."),
+
+    # ¢_delay (temporal feedback memory)
+    DeltaImplementation("delay", "digital", "clocked register / sample-and-hold",
+        "y_t = x_(t-1) (one clock)",
+        "temporal",
+        "A clocked register holds the previous quantizer level. It is the "
+        "feedback memory, not an integrator; aperture jitter and metastability "
+        "remain device-level gaps."),
 ]
 
 

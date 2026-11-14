@@ -231,6 +231,23 @@ class CentWheel:
                 # KNOWS entries don't regress (except to LANGUAGE)
                 return
 
+        # Enforce the evidence each promotion claims.  These checks are
+        # deliberately narrow: a transition may still be recorded as a
+        # demotion, but it cannot silently acquire a stronger evidence label.
+        if new_status == KnowledgeState.KNOWS and entry.status != KnowledgeState.KNOWS:
+            if not backing.strip() or "simulation" not in backing.lower():
+                raise ValueError(
+                    "promotion to KNOWS requires simulation backing, not an "
+                    "asserted status"
+                )
+        if new_status == KnowledgeState.LANGUAGE:
+            if entry.status not in (KnowledgeState.KNOWS, KnowledgeState.LANGUAGE):
+                raise ValueError("promotion to LANGUAGE requires KNOWS first")
+            if not backing.strip() or "safety" not in backing.lower():
+                raise ValueError(
+                    "promotion to LANGUAGE requires a safety-certification backing"
+                )
+
         entry.status = new_status
         entry.backing.append(backing)
         if arrow:
@@ -366,8 +383,9 @@ def escalate(impl_params: Dict, layers_to_test: Tuple[FidelityLayer, ...] = LAYE
 def _test_at_layer(params: Dict, layer: FidelityLayer) -> Dict:
     """Test a ∆ implementation at a specific fidelity layer.
 
-    This is a simplified model — in a full implementation, each layer
-    would run actual simulations (SPICE, FEM, etc.).
+    This is a declared analytic screening model, not SPICE, FEM or measured
+    evidence.  Each layer applies the named closed-form check only; the
+    result is useful for ranking, not for certifying a physical device.
     """
     if layer.name == "ideal":
         # Ideal: always passes (the ∆ is theoretically correct)
@@ -438,7 +456,10 @@ def _test_at_layer(params: Dict, layer: FidelityLayer) -> Dict:
                       + ("" if passed else " (EXCEEDS 5% fabrication spec)"),
         }
 
-    return {"passed": True, "detail": "unknown layer"}
+    raise ValueError(
+        f"unknown fidelity layer {layer.name!r}; declared layers: "
+        + ", ".join(item.name for item in LAYERS)
+    )
 
 
 # ===========================================================================

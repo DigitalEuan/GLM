@@ -472,6 +472,7 @@ items:
     five fidelity layers and emits a SPICE netlist; 31 JSON wheels (72 axioms, 119 cases), 22 application
     proposals, a framework and a validation report.'
   stage: lean_written
+  last_action: '14 November 2026: the three supplied deliveries proved one lineage -- this item''s files, plus cent_compiler_v12_2''s, are all inside cent_compiler_v12_update byte for byte bar caches and regenerated cent_out artifacts. The newest delivery was moved into this item''s path and the two older copies removed, so there is one folder and one system: 332 files, its own gate green (26 of 26 suites, 1005 of 1005 checks), and `cent transfer "sum" --target glm-live --mechanism kcl-conservation --validate` runs the real `src/GLM.py` and passes. The live-target lookup now also finds the enclosing repository''s `src/GLM.py`, not only the sibling `glm-study` checkout, which is what makes that check pass wherever the delivery is unpacked.'
   studies:
   - CENT_WHEELS_STUDY
   - INTAKE_CAPABILITY_STUDY
@@ -3019,15 +3020,3 @@ items:
   last_action: '13 November 2026: moved into ToDo/ and registered'
   next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
     leechlean triaged`'
-- id: cent_compiler_v12_2
-  path: ToDo/cent_compiler_v12_2
-  stage: received
-  last_action: '13 November 2026: moved into ToDo/ and registered'
-  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
-    cent_compiler_v12_2 triaged`'
-- id: cent_compiler_v12_update
-  path: ToDo/cent_compiler_v12_update
-  stage: received
-  last_action: '13 November 2026: moved into ToDo/ and registered'
-  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
-    cent_compiler_v12_update triaged`'

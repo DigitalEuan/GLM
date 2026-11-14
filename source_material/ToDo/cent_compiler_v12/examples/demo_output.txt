@@ -53,17 +53,17 @@ Rg 2 0 1meg
 ## cent spice "y = sqrt(5)"
 
 Traceback (most recent call last):
-  File "/home/z/my-project/download/cent_compiler_v1/cent", line 218, in <module>
+  File "cent_compiler_v12/cent", line 218, in <module>
     main()
-  File "/home/z/my-project/download/cent_compiler_v1/cent", line 214, in main
+  File "cent_compiler_v12/cent", line 214, in main
     cmd_spice(args.formula)
-  File "/home/z/my-project/download/cent_compiler_v1/cent", line 168, in cmd_spice
+  File "cent_compiler_v12/cent", line 168, in cmd_spice
     dag = decompose_formula(expr, target)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/z/my-project/download/cent_compiler_v1/cent_compiler/grammar.py", line 228, in decompose_formula
+  File "cent_compiler_v12/cent_compiler/grammar.py", line 228, in decompose_formula
     result = d.visit(tree.body)
              ^^^^^^^^^^^^^^^^^^
-  File "/home/z/my-project/download/cent_compiler_v1/cent_compiler/grammar.py", line 218, in visit
+  File "cent_compiler_v12/cent_compiler/grammar.py", line 218, in visit
     raise ValueError(f"unsupported AST node: {ast.dump(node)}")
 ValueError: unsupported AST node: Call(func=Name(id='sqrt', ctx=Load()), args=[Constant(value=5)], keywords=[])
 

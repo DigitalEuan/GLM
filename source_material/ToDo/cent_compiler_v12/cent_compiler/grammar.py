@@ -23,6 +23,7 @@ from __future__ import annotations
 import ast
 from dataclasses import dataclass, field
 from fractions import Fraction
+from functools import lru_cache
 from typing import Dict, List, Optional, Set, Tuple, FrozenSet
 
 # ---------------------------------------------------------------------------
@@ -133,6 +134,41 @@ class CGraph:
 # 2. The decomposer: parse a formula AST and build a normalized ¢ DAG
 # ---------------------------------------------------------------------------
 
+@lru_cache(maxsize=1)
+def _declared_wheel_quantities() -> Dict[str, FrozenSet[str]]:
+    """Lazily load the declared quantity names for each wheel."""
+    from .wheels import WHEELS, wheel_quantities
+    return {
+        wheel.id: frozenset(wheel_quantities(wheel))
+        for wheel in WHEELS
+    }
+
+
+def _validate_qualified_name(name: str) -> str:
+    """Validate a wheel-qualified name against the declared wheel registry.
+
+    Plain names remain local to the caller.  Dotted names must use the
+    ``W<id>.<quantity>`` form and must resolve to a declared quantity.
+    """
+    if "." not in name:
+        return name
+    wheel_id, _, quantity = name.partition(".")
+    if not wheel_id.startswith("W") or not wheel_id[1:].isdigit():
+        raise ValueError(
+            f"qualified name {name!r} must use W<id>.<quantity>"
+        )
+    declared = _declared_wheel_quantities()
+    if wheel_id not in declared:
+        raise ValueError(
+            f"unknown wheel prefix {wheel_id!r} in qualified name {name!r}"
+        )
+    if quantity not in declared[wheel_id]:
+        raise ValueError(
+            f"quantity {quantity!r} is not declared on wheel {wheel_id}"
+        )
+    return name
+
+
 class Decomposer:
     """Walks a parsed monomial AST and emits ¢ ops. Each subexpression gets
     a fresh intermediate variable name."""
@@ -153,6 +189,22 @@ class Decomposer:
             # an input variable
             self.inputs.add(node.id)
             return node.id
+
+        if isinstance(node, ast.Attribute):
+            # Preserve wheel-qualified names such as W1.power instead of
+            # collapsing them to their final component.  Cross-wheel formula
+            # isolation depends on the qualification remaining explicit.
+            parts = []
+            current = node
+            while isinstance(current, ast.Attribute):
+                parts.append(current.attr)
+                current = current.value
+            if not isinstance(current, ast.Name):
+                raise ValueError("bad attribute chain")
+            parts.append(current.id)
+            name = _validate_qualified_name(".".join(reversed(parts)))
+            self.inputs.add(name)
+            return name
 
         # v2.0: handle function calls (exp, log, tanh, etc.)
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
@@ -202,6 +254,22 @@ class Decomposer:
             # both variables or both constants — true ¢_mult
             out = self._fresh("mult")
             self.ops.append(COp("mult", (l, r), out))
+            return out
+
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
+            l = self.visit(node.left)
+            r = self.visit(node.right)
+            out = self._fresh("sum")
+            self.ops.append(COp("sum", (l, r), out))
+            return out
+
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Sub):
+            l = self.visit(node.left)
+            r = self.visit(node.right)
+            neg = self._fresh("neg")
+            self.ops.append(COp("neg", (r,), neg))
+            out = self._fresh("sum")
+            self.ops.append(COp("sum", (l, neg), out))
             return out
 
         if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div):
@@ -281,6 +349,7 @@ class Decomposer:
 def decompose_formula(formula: str, output_name: str) -> CGraph:
     """Parse `formula` (a Python expression string) and build a ¢ DAG
     whose output is `output_name`."""
+    _validate_qualified_name(output_name)
     # Replace ^ with ** for Python parsing
     expr = formula.replace("^", "**")
     tree = ast.parse(expr, mode="eval")
@@ -317,7 +386,7 @@ def spoke_formula_from_axiom(axiom: str, target: str) -> Optional[str]:
     Returns None if the target cannot be isolated (e.g. appears linearly in
     a multi-term axiom).
     """
-    from glm_wheels import parse_equation, relation_vector
+    from .wheels import parse_equation, relation_vector
     lhs, rhs = parse_equation(axiom)
     # We want target = (some expression of the other variables).
     # The relation vector tells us the exponents.
@@ -338,73 +407,55 @@ def spoke_formula_from_axiom(axiom: str, target: str) -> Optional[str]:
             continue
         # we want target^target_exp * prod(other^v) = 1
         # => target^target_exp = prod(other^(-v))
-        # => target = prod(other^(-v/target_exp)) ... if target_exp divides
-        new_exp = -v / target_exp
+        # => target = prod(other^(-v/target_exp)).  Keep the exponent as a
+        # Fraction: `/` would silently coerce an exact integer relation to a
+        # binary float and print exponents such as `1.0`.
+        new_exp = Fraction(-v) / Fraction(target_exp)
         other_terms.append((k, new_exp))
 
-    # Check that all new exponents are integers (otherwise we'd need fractional
-    # powers of products, which is fine but messier)
-    # For now, allow fractional exponents.
+    # Exponents are kept as exact Fractions; fractional powers are emitted
+    # with an explicit parenthesized exponent so the parser does not read
+    # ``x^1/2`` as ``(x**1)/2``.
+
+    def power_text(base: str, exponent: Fraction) -> str:
+        """Emit a parenthesized fractional power, not ``base^1/2``."""
+        if exponent.denominator == 1:
+            if exponent.numerator == 1:
+                return base
+            return f"{base}^{exponent.numerator}"
+        return f"{base}^({exponent.numerator}/{exponent.denominator})"
 
     # Build numerator and denominator
     num_terms = []
     den_terms = []
     for k, e in other_terms:
         if e > 0:
-            if e == 1:
-                num_terms.append(k)
-            else:
-                num_terms.append(k + "^" + str(e))
+            num_terms.append(power_text(k, e))
         elif e < 0:
-            if e == -1:
-                den_terms.append(k)
-            else:
-                den_terms.append(k + "^" + str(-e))
+            den_terms.append(power_text(k, -e))
 
-    # Constants (scalar primes)
-    const_terms = []
+    # Constants (scalar primes).  Keep numerator and denominator terms
+    # separate: splitting a rendered fractional power on "/" corrupts
+    # notation such as "2^(1/2)".
     for k, v in rel.items():
         if k.startswith("#"):
-            new_exp = -v / target_exp
-            p = int(k[1:])
+            new_exp = Fraction(-v) / Fraction(target_exp)
+            base = str(int(k[1:]))
             if new_exp > 0:
-                if new_exp == 1:
-                    const_terms.append(str(p))
-                else:
-                    const_terms.append(str(p) + "^" + str(new_exp))
+                num_terms.append(power_text(base, new_exp))
             elif new_exp < 0:
-                if new_exp == -1:
-                    const_terms.append("1/" + str(p))
-                else:
-                    const_terms.append("1/" + str(p) + "^" + str(-new_exp))
+                den_terms.append(power_text(base, -new_exp))
 
     # Assemble formula
-    body_parts = []
-    # Constants into numerator
-    for c in const_terms:
-        if "/" in c:
-            p, d = c.split("/")
-            den_terms.append(d)
-        else:
-            num_terms.append(c)
-
     body = " * ".join(num_terms) if num_terms else "1"
     for d in den_terms:
         body = f"({body}) / {d}"
 
-    # If target_exp != 1, wrap in power
-    if target_exp != 1:
-        # target = body^(1/target_exp)
-        # If 1/target_exp is fractional, write as ^(num/den)
-        inv = Fraction(1) / target_exp
-        if inv.denominator == 1:
-            formula = f"({body})^{inv.numerator}" if inv.numerator != 1 else body
-        else:
-            formula = f"({body})^({inv.numerator}/{inv.denominator})"
-    else:
-        formula = body
-
-    return formula
+    # `body` already has the target's exponent: each other quantity was
+    # raised to `-v / target_exp`, which is exactly the rearrangement of
+    # target^target_exp = prod(other^(-v)).  Do not divide the exponent a
+    # second time.
+    return body
 
 
 # ---------------------------------------------------------------------------

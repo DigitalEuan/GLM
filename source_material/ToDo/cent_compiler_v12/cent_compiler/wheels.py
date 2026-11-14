@@ -6,7 +6,7 @@ This file reproduces the wheel definitions (W1..W10), the relation_vector
 machinery (with #p scalar prime tracking), the exact rational linear algebra
 (_rref, _solve, _null_space), and the case_table measurement.
 
-Run as:  python3 glm_wheels.py
+Run as:  python3 -m cent_compiler.wheels
 """
 from __future__ import annotations
 import ast
@@ -40,10 +40,18 @@ class Monomial:
             p[k] = p.get(k, Fraction(0)) + v
         return Monomial.make(self.coefficient * other.coefficient, p)
 
-    def pow(self, n: int) -> "Monomial":
-        return Monomial.make(
-            self.coefficient ** n, {k: v * n for k, v in self.powers}
-        )
+    def pow(self, n) -> "Monomial":
+        # Fraction-aware (v12_2.1): wheels carry ^(1/2), ^(1/4) literal
+        # powers (W21/W24/W25/W29/W34).  Dimensional/derivation work reads
+        # only the quantity powers, so an irrational coefficient root may
+        # round through float without affecting any check.
+        n = Fraction(n)
+        if n.denominator != 1 and self.coefficient < 0:
+            raise ValueError("negative base with a fractional power")
+        cc = self.coefficient ** n
+        if not isinstance(cc, Fraction):
+            cc = Fraction(cc)      # float from an irrational root
+        return Monomial.make(cc, {k: v * n for k, v in self.powers})
 
 
 def parse_monomial(text: str) -> Monomial:
@@ -87,9 +95,12 @@ def parse_monomial(text: str) -> Monomial:
             return visit(node.left).mul(visit(node.right).pow(-1))
         if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Pow):
             exponent = visit(node.right)
-            if exponent.powers or exponent.coefficient.denominator != 1:
-                raise ValueError("a power must be an integer literal")
-            return visit(node.left).pow(exponent.coefficient.numerator)
+            if exponent.powers or exponent.coefficient == 0:
+                raise ValueError("a power must be a nonzero numeric literal")
+            # v12_2.1: a numeric literal may be rational (1/2, 1/4):
+            # W21/W24/W25/W29/W34 use ^(1/2)-style powers.  Symbolic
+            # exponents (any quantity on the right) stay rejected.
+            return visit(node.left).pow(exponent.coefficient)
         raise ValueError(f"unsupported syntax in {text!r}")
 
     return visit(tree.body)
@@ -665,6 +676,75 @@ if _json_wheels:
 else:
     JUNCTIONS = ()
     NON_IDENTITIES = ()
+
+
+# ===========================================================================
+# Case-corpus regression after the JSON/global-graph migration
+# ===========================================================================
+
+CASE_REGRESSION_SCHEMA = "cent-case-regression/1"
+
+
+def regress_declared_cases() -> Dict[str, object]:
+    """Re-run all declared formula cases and expose expectation mismatches.
+
+    This is deliberately a reconciliation report, not a pass/fail rewrite: a
+    declared case whose expected flag disagrees with the exact dimension or
+    relation algebra stays visible as a gap.  The 366-spoke regression lives in
+    ``axiom_graph.regress_legacy_spokes`` and is separate.
+    """
+    rows = case_table()
+    dimensional_mismatches = []
+    derivability_mismatches = []
+    for row in rows:
+        measured_dim = row["dim_reference_si"]
+        expected_dim = row["expected_dim_si"]
+        if measured_dim != expected_dim:
+            dimensional_mismatches.append(
+                {
+                    "wheel": row["wheel"],
+                    "case": row["case"],
+                    "equation": row["equation"],
+                    "measured": measured_dim,
+                    "expected": expected_dim,
+                    "note": row["note"],
+                }
+            )
+        measured_derivable = bool(row["derivable"])
+        expected_derivable = bool(row["expected_derivable"])
+        if measured_derivable != expected_derivable:
+            derivability_mismatches.append(
+                {
+                    "wheel": row["wheel"],
+                    "case": row["case"],
+                    "equation": row["equation"],
+                    "measured": measured_derivable,
+                    "expected": expected_derivable,
+                    "note": row["note"],
+                }
+            )
+
+    known_dimensions = sum(row["dim_reference_si"] is not None for row in rows)
+    return {
+        "schema": CASE_REGRESSION_SCHEMA,
+        "status": "gap" if dimensional_mismatches or derivability_mismatches else "ok",
+        "wheels": len(WHEELS),
+        "cases": len(rows),
+        "dimensional_checked": len(rows),
+        "dimensional_known": known_dimensions,
+        "dimensional_unknown": len(rows) - known_dimensions,
+        "dimensional_agreement": len(rows) - len(dimensional_mismatches),
+        "dimensional_mismatches": dimensional_mismatches,
+        "derivability_checked": len(rows),
+        "derivability_agreement": len(rows) - len(derivability_mismatches),
+        "derivability_mismatches": derivability_mismatches,
+        "mismatch_count": len(dimensional_mismatches) + len(derivability_mismatches),
+        "claim": (
+            "exact re-run of the declared 153 formula cases after the JSON/global "
+            "graph migration; measured mismatches with the declared expectations "
+            "remain explicit gaps and are not normalized away"
+        ),
+    }
 
 
 # ===========================================================================

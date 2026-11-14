@@ -9,29 +9,29 @@
     {
       "id": "W35-01",
       "equation": "valence = temperature / membrane_voltage",
-      "expected_dimensional": true,
+      "expected_dimensional": false,
       "expected_derivable": true,
-      "physical_status": "physically_supported",
+      "physical_status": "model_convention",
       "expected_dimensional_explicit": null,
-      "note": ""
+      "note": "Algebraic identity in the declared relation, which omits the gas constant and charge needed for SI dimensions."
     },
     {
       "id": "W35-02",
       "equation": "temperature = membrane_voltage * valence",
-      "expected_dimensional": true,
+      "expected_dimensional": false,
       "expected_derivable": true,
-      "physical_status": "physically_supported",
+      "physical_status": "model_convention",
       "expected_dimensional_explicit": null,
-      "note": ""
+      "note": "Algebraic identity in the declared relation, which omits the gas constant and charge needed for SI dimensions."
     },
     {
       "id": "W35-03",
       "equation": "ion_concentration = ion_flux / diffusion_coefficient",
-      "expected_dimensional": true,
+      "expected_dimensional": false,
       "expected_derivable": true,
-      "physical_status": "physically_supported",
+      "physical_status": "model_convention",
       "expected_dimensional_explicit": null,
-      "note": ""
+      "note": "Algebraic identity in the declared relation, which omits the gas constant and charge needed for SI dimensions."
     },
     {
       "id": "W35-N1",

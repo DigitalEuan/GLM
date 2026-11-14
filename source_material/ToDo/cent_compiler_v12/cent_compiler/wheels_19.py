@@ -16,7 +16,7 @@ from typing import Dict, Optional, Tuple
 
 from .wheels import (
     Wheel, FormulaCase, SUPPORTED, UNDERSPECIFIED, CONVENTION, NEGATIVE,
-    REFERENCE_DIMENSIONS, _d, wheel_quantities,
+    REFERENCE_DIMENSIONS, _d, consistency, wheel_quantities,
 )
 from .wheels_extended import (
     WHEELS_15, JUNCTIONS, NON_IDENTITIES, Junction, NonIdentity,
@@ -233,7 +233,6 @@ if __name__ == "__main__":
           f"{sum(len(w.cases) for w in WHEELS_19)} cases")
     print(f"NEW_JUNCTIONS_19: {len(NEW_JUNCTIONS_19)} junctions")
     # Sanity: dimensional consistency of every new axiom
-    from glm_wheels import consistency
     for w in (W16, W17, W18, W19):
         print(f"\n{w.id} {w.title}:")
         for ax in w.axioms:

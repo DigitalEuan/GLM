@@ -14,42 +14,17 @@ charge = current * time
 
 W1↔W6
 
-## Cross-Domain Isomorphism: W1↔W6 (Paynter Effort-Flow Analogy)
+## Cross-Domain Isomorphism: W1↔W6
 
-| Electrical (W1) | Fluidic (W6) | Physical meaning |
-|-----------------|-------------|------------------|
-| Voltage (V) | Pressure (P) | "Effort" — across variable |
-| Current (I) | Volume flow rate (Q) | "Flow" — through variable |
-| Resistance (R) | Hydraulic resistance | Effort/flow ratio |
-| Power (V·I) | Hydraulic power (P·Q) | Effort × flow |
-
-This allows fluid dynamics problems to be solved using electrical circuits.
+See the [declared Paynter effort-flow table](README.md#the-w1w6-paynter-table).
 
 ## Pipeline (8 steps)
 
-Run `python3 tests/show_work.py` to see the full trace. The steps are:
-
-1. **¢ DAG decomposition** — formula parsed into atomic ¢ operations
-2. **∆ enumeration** — all valid physical implementations enumerated
-3. **¢_cost ranking** — top 5 ranked by 6-axis cost function
-4. **5-layer escalation** — ideal → parasitic → thermal → quantum → fabricated
-5. **Conjecture loop** — re-lift with next-best substrate if rank-1 fails
-6. **SPICE netlist emission** — .cir file written to `examples/`
-7. **Parametric certification** — exact parameter ranges certified
-8. **Knowledge state** — assigned to Cent Wheel ring (THINKS-TRUE if converged)
+See the [canonical show-work pipeline](README.md#show-work-pipeline).
 
 ## Parameters
 
-| Parameter | Value | Used in | How |
-|-----------|-------|---------|-----|
-| opamp_gain | 100000.0 | parasitic layer | equilibrium error ≈ 1/(2·gain) |
-| bandwidth_hz | 1000000.0 | thermal layer | Johnson noise V_n = √(4kTR·BW) |
-| temperature | 300 | thermal layer | noise floor V_n ∝ √T |
-| resistance | 1000 | thermal layer | noise magnitude V_n ∝ √R |
-| signal_level | 1.0 | thermal+quantum | SNR = 20·log₁₀(signal/noise) |
-| current | 0.001 | quantum layer | shot noise I_n = √(2qI·BW) |
-| component_tolerance | 0.01 | fabricated layer | worst-case stack-up |
-| n_components | 3 | fabricated layer | scales tolerance |
+See the [declared escalation parameters](README.md#declared-escalation-parameters).
 
 ## SPICE Output
 
@@ -57,7 +32,4 @@ Template: `rc_integrator` → `examples/proposal_06_rc_integrator.cir`
 
 ## How to Run
 
-```bash
-cd cent_compiler_v1
-python3 tests/show_work.py                        # trace all 22 proposals
-python3 cent compile "charge = current * time"                    # compile just this one
+See the [canonical run commands](README.md#how-to-run).
