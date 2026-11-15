@@ -1,0 +1,234 @@
+{
+  "id": "W5",
+  "title": "Linear dynamics and work-energy",
+  "axioms": [
+    "force = mass * acceleration",
+    "momentum = mass * velocity",
+    "power = force * velocity",
+    "energy = 1/2 * mass * velocity^2"
+  ],
+  "cases": [
+    {
+      "id": "W5-01",
+      "equation": "acceleration = force / mass",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W5-02",
+      "equation": "momentum = mass * velocity",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W5-03",
+      "equation": "energy = 1/2 * mass * velocity^2",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W5-N1",
+      "equation": "force = mass * velocity",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "acceleration",
+    "energy",
+    "force",
+    "mass",
+    "momentum",
+    "power",
+    "velocity"
+  ],
+  "dimensions": {
+    "acceleration": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "energy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "force": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "momentum": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "power": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "velocity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W11",
+      "name_in_this_wheel": "velocity",
+      "name_in_other_wheel": "velocity",
+      "reason": "moving body's velocity = uniform-motion velocity"
+    },
+    {
+      "other_wheel": "W12",
+      "name_in_this_wheel": "mass",
+      "name_in_other_wheel": "mass",
+      "reason": "the body whose density is read is the body that moves"
+    },
+    {
+      "other_wheel": "W13",
+      "name_in_this_wheel": "mass",
+      "name_in_other_wheel": "mass",
+      "reason": "the oscillating body = the dynamic body"
+    }
+  ],
+  "non_identities": []
+}

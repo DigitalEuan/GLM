@@ -1,0 +1,18 @@
+--- attack n=12
+  n=12: RIGID_WALL at L=3.9950 (rho=1.000, 12/12 contacts) -> abandon
+    result: {'n': 12, 'verdict': 'RIGID_WALL', 'rho': 1.0, 'L_stop': 3.9950000015000002}
+--- attack n=13
+  n=13: RIGID_WALL at L=3.9950 (rho=1.000, 13/13 contacts) -> abandon
+    result: {'n': 13, 'verdict': 'RIGID_WALL', 'rho': 1.0, 'L_stop': 3.9950000015000002}
+--- attack n=803
+seed-level classification (no cycles committed):
+  n=803: RIGID_WALL rho=1.000 contacts=803/803 (seed at L=28.995)
+  n=748: RIGID_WALL rho=1.000 contacts=748/748 (seed at L=27.995)
+  n=983: RIGID_WALL rho=1.000 contacts=983/983 (seed at L=31.995)
+  n=804: RIGID_WALL rho=1.000 contacts=804/804 (seed at L=28.995)
+  n=862: RIGID_WALL rho=1.000 contacts=862/862 (seed at L=29.995)
+  n=695: RIGID_WALL rho=1.000 contacts=695/695 (seed at L=26.995)
+  n=749: RIGID_WALL rho=1.000 contacts=749/749 (seed at L=27.995)
+  n=984: RIGID_WALL rho=1.000 contacts=984/984 (seed at L=31.995)
+  n=922: RIGID_WALL rho=1.000 contacts=922/922 (seed at L=30.995)
+  n=696: RIGID_WALL rho=1.000 contacts=696/696 (seed at L=26.995)

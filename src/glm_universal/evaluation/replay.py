@@ -23,6 +23,8 @@ failed: the surfaces without a column 3 are named in the study.
     PYTHONPATH=src python3 -m glm_universal.evaluation --replay --jobs 8
 
 *Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
+
+*Last altered 14 November 2026 (Phase 188: the gate takes ``default_jobs()`` when no count is given).*
 """
 
 from __future__ import annotations
@@ -33,10 +35,10 @@ import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
-from typing import Dict, List, Mapping, Sequence
+from typing import Dict, List, Mapping, Optional, Sequence
 
 from .cases import CASES, EvalCase
-from .harness import CLI_PATH, PACKAGE_ROOT
+from .harness import CLI_PATH, PACKAGE_ROOT, default_jobs
 
 #: The per-case time limit of the gate, in seconds.  A case's replay runs
 #: its column 3 after its answer, and the Lean-corpus reports recompute their
@@ -83,9 +85,11 @@ def replay_case(case: EvalCase, timeout: int = REPLAY_TIMEOUT
     return row
 
 
-def replay_gate(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
+def replay_gate(cases: Sequence[EvalCase] = CASES, jobs: Optional[int] = None,
                 timeout: int = REPLAY_TIMEOUT) -> Dict[str, object]:
     """Replay every case the evaluation expects answered; summarise."""
+    if jobs is None:
+        jobs = default_jobs()
     chosen = [c for c in cases if c.expect == "answer"]
     started = time.monotonic_ns()
     if jobs <= 1:

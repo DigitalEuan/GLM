@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Evert Stenlund in early 1980.
+        Source: Private communication between Erich Friedman and Martin Gardner, 1998
+            Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Version 2 (July 17, 2000) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+        Source: Correspondence from Evert Stenlund to Martin Gardner, early 1980
+            Source: Private communication from Evert Stenlund to David Ellsworth, December 18, 2024
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "9.94974746830583267080591053473394"> <!-- 5 + Sqrt[2]*7/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M4,0 V1 H3 V2 H2 V3 H1 V4 H0 V0"/>
+        <path style=  "fill:none" d="M0,1 H4 V0
+                                     M0,2 H3 V0
+                                     M0,3 H2 V0
+                                     M0,4 H1 V0"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#side1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <g transform="translate(2.5 2.5) rotate(45) translate(0 -3.5)">
+        <rect width="7" height="7"/>
+        <path style="fill:none" d="M0,1 H7 M1,0 V7
+                                   M0,2 H7 M2,0 V7
+                                   M0,3 H7 M3,0 V7
+                                   M0,4 H7 M4,0 V7
+                                   M0,5 H7 M5,0 V7
+                                   M0,6 H7 M6,0 V7"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

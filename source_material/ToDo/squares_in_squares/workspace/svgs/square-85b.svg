@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Erich Friedman in 1997.
+        Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Versions 1 (March 6, 1998) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+    This has been modified from the original for bilateral symmetry.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "9.74264068711928514640506617263"> <!-- 11/2 + Sqrt[2]*3 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="top">
+        <g id="side1">
+            <path style="stroke:none" d="M0,0 H4 V1 H3 V2 H2 V3 H1 V4 H0"/>
+            <path style=  "fill:none" d="M0,1 H4 V0
+                                         M0,2 H3 V0
+                                         M0,3 H2 V0
+                                         M0,4 H1 V0"/>
+        </g>
+        <g transform="translate(&s;) translate(-1) scale(-1 1)">
+            <use xlink:href="#side1"/>
+            <rect style="stroke:none" x="-1" y="0" width="1" height="4"/>
+            <path style=  "fill:none" d="M0,0 V4 H-1
+                                         M0,3 H-1
+                                         M0,2 H-1
+                                         M0,1 H-1"/>
+        </g>
+    </g>
+    <g transform="scale(1 .5) translate(&s; &s;) translate(0 -1) scale(1 2) scale(-1 1)">
+        <rect style="stroke:none" width="1" height="1"/>
+        <path style=  "fill:none" d="M0,0 H1 V1 H0"/>
+    </g>
+    <use xlink:href="#top" transform="translate(0 &s;) scale(1 -1)"/>
+    <g transform="translate(2.25 2.75) rotate(45) translate(0 -3)">
+        <rect width="6" height="6"/>
+        <path style="fill:none" d="M0,1 H6 M1,0 V6
+                                   M0,2 H6 M2,0 V6
+                                   M0,3 H6 M3,0 V6
+                                   M0,4 H6 M4,0 V6
+                                   M0,5 H6 M5,0 V6"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

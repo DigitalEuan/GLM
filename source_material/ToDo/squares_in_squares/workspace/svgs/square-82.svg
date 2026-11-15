@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Probably found by Erich Friedman in 1997, by adding an "L" to the s(65) found by Frits Göbel in early 1979.
+        Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Versions 1 (March 6, 1998) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "9.53553390593273762200422181052425"> <!-- 6+5/Sqrt[2]   -->
+    <!ENTITY s1 "8.53553390593273762200422181052425"> <!-- 5+5/Sqrt[2]   -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g id="stairs">
+            <path style="stroke:none" d="M0,0 H4 V1 H3 V2 H2 V3 H1 V4 H0"/>
+            <path style=  "fill:none" d="M0,1 H4 V0
+                                         M0,2 H3 V0
+                                         M0,3 H2 V0
+                                         M0,4 H1 V0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <use xlink:href="#stairs" transform="translate(0 1)"/>
+    <use xlink:href="#stairs" transform="translate(&s1;   1) scale(-1  1)"/>
+    <use xlink:href="#stairs" transform="translate(&s1; &s;) scale(-1 -1)"/>
+    <g id="fillin">
+        <rect style="stroke:none" width="4" height="1"/>
+        <path style=  "fill:none" d="M0,1 L4,1 L4,0
+                                          M3,1 L3,0
+                                          M2,1 L2,0
+                                          M1,1 L1,0"/>
+    </g>
+    <use xlink:href="#fillin" transform="translate(&s; &s;) scale(1 -1) rotate(90)"/>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M5,0 L5,1 L1,1 L1,5 L0,5 L0,0"/>
+        <path style=  "fill:none" d="M5,0 L5,1 L1,1 L1,5 L0,5
+                                     M4,0 L4,1
+                                     M3,0 L3,1
+                                     M2,0 L2,1
+                                     M1,0 L1,1 L0,1
+                                          M1,2 L0,2
+                                          M1,3 L0,3
+                                          M1,4 L0,4"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <use xlink:href="#stairs"/>
+    </g>
+    <g transform="translate(2.5 3.5) rotate(45) translate(0 -2.5)">
+        <rect width="5" height="5"/>
+        <path style="fill:none" d="M0,1 H5 M1,0 V5
+                                   M0,2 H5 M2,0 V5
+                                   M0,3 H5 M3,0 V5
+                                   M0,4 H5 M4,0 V5"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

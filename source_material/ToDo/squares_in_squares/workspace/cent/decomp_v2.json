@@ -1,0 +1,4 @@
+{
+  "comment": "v2 - optimized: scale/accum/sum removed (stitched steps, no witness of their own); witnesses preserved",
+  "primitives": ["state_space", "sat", "hysteresis", "rate", "eq", "mult", "spatial"]
+}

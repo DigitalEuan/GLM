@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Maurizio Morandi in June 2010.
+    Exact polynomial root solution by David Ellsworth on May 28, 2023.
+    Improved by David W. Cantrell in August 2023.
+        Source: Private communication between David Ellsworth and David W. Cantrell, August 3, 2023
+    Exact polynomial root solution by David Ellsworth on November 4, 2024.
+    Improved by hmbelvedere.com on July 29, 2026, using undisclosed iterative approach (probably written by AI).
+        Source: https://www.hmbelvedere.com/
+            Source: E-mail from Ruilin Wang to David Ellsworth on August 16, 2026, with link to ChatGPT chat history in which it provided the URL (mysteriously, since Googling does not reveal any post linking to it)
+    Optimized by David Ellsworth on September 7, 2026, with exact polynomial root solution.
+
+    Unset[{s, a, b, r0, v1, u2, v3, v4, r5, v6, r7, solution}];
+    r0 = (s - 7)*Sin[a];
+    v1 = (({1, 6} + RotationTransform[-a][{2 - r0, 2}])[[1]] - (s - 6))/Sin[a];
+    u2 = (1 - ({1, 6} + RotationTransform[-a][{1 - r0, -v1}])[[1]])/Cos[a];
+    v3 = Cos[a] - Sin[a];
+    v4 = (({1, 6} + RotationTransform[-a][{6 - r0 + u2, 2 - 3*v3}])[[1]] - (s - 3))/Sin[a];
+    r5 = RotationTransform[a][{5, 2} - ({1, 6} + RotationTransform[-a][{6 - r0 + 2*u2, -3*v3 - v4}])][[1]];
+    v6 = Cos[a] - Sin[a];
+    r7 = (({5, 2} + RotationTransform[-a][{2 - r5, -v6}] + RotationTransform[-b][{1, 0}])[[2]])/Cos[b];
+    f1 = RotationTransform[a][{s - 8, s - 7}][[2]] - 2;
+    f2 = RotationTransform[b][{s - 1, s - 7} - ({5, 2} + RotationTransform[-a][{2 - r5, -v6}] + RotationTransform[-b][{0, 2 - r7}])][[2]];
+    f3 = Det[Grad[{s, f1, f2}, {s, a, b}]];
+    solution = Solve[{f1 == 0, f2 == 0, f3 == 0}, {s, a, b}, GeneratedParameters -> C][[16]] /. _C -> 0;
+    N[{s, a*180/Pi, b*180/Pi, r0, v1, u2, v3, v4, r5, v6, r7} /. solution, 50]
+
+    algdep(Tan[a], 60, 1000)  (* verified to 100000 digits *)
+    algdep(Tan[b], 38, 1000)  (* verified to 100000 digits *)
+    algdep(s,      38, 5000)  (* verified to 100000 digits *)
+(*
+    s = Root[300960026822030303197535159473011904723200 - 1792484013885364748863660129313634141949440*# + 5167024257764217164738251979559001338572800*#^2 - 9606162873067568461640260181436144725451264*#^3 + 12949817958432226471818398759855930531156576*#^4 - 13493274359917789164533005128265733469017664*#^5 + 11311614553968265661577013966735125061994832*#^6 - 7841165369938484467586544581577081643396512*#^7 + 4584317608215237678155409786149782768011273*#^8 - 2294308954050269031230179998690216453404126*#^9 + 994216884424276401423335698871285020707985*#^10 - 376414247910270517652017635811678355038352*#^11 + 125403836805698177483260817124143647392140*#^12 - 36974202589471451032943485493066311174020*#^13 + 9692063874895738415420653194734406751544*#^14 - 2266937665352554353042893913025871449260*#^15 + 474457787911865211855977644074062259782*#^16 - 89046296239964031900552502113814618932*#^17 + 15008858814920291691105441001482481624*#^18 - 2274020073251445027912869583624012836*#^19 + 309825113740305715280880132903457548*#^20 - 37952371996362529715956150997532140*#^21 + 4176814076501073678281411498975320*#^22 - 412446197135659965111111115148396*#^23 + 36472471517701260043451354594463*#^24 - 2880683107043356321003091570862*#^25 + 202519768098228233530040391047*#^26 - 12617710317272491257736882500*#^27 + 692847158160404835260800581*#^28 - 33298140362310941134404674*#^29 + 1388387472142272839607339*#^30 - 49662306385311523793708*#^31 + 1501792088159447213787*#^32 - 37649261182139638630*#^33 + 761478949851472121*#^34 - 11939519654019440*#^35 + 136173939449975*#^36 - 1005045994750*#^37 + 3603000625*#^38, 5]
+    a = ArcTan[Root[15346800 + 412005848*# + 4652572319*#^2 + 29879927784*#^3 + 125612867234*#^4 + 365625390276*#^5 + 691530244465*#^6 + 586060969100*#^7 - 618180430706*#^8 - 2700324750456*#^9 - 5806436932583*#^10 - 9761341599008*#^11 - 10071753818760*#^12 - 12425726409312*#^13 - 19860663896250*#^14 - 8793589731596*#^15 - 15889410627838*#^16 - 24622473469588*#^17 + 21536372319411*#^18 - 37438268192540*#^19 + 4381591455348*#^20 + 39173017925764*#^21 - 87312850811251*#^22 + 115528558034540*#^23 - 107624835386888*#^24 + 80699627110624*#^25 - 44236980908687*#^26 + 17850070274860*#^27 - 3337723049422*#^28 - 1081586531280*#^29 + 1104226196271*#^30 - 447043228672*#^31 + 16759896768*#^32 + 25691992832*#^33 - 3599042048*#^34 - 751869952*#^35 + 113606656*#^36 + 23265280*#^37 + 983040*#^38, 7]]
+    b = ArcTan[Root[80006400 - 114551040*# - 119554960*#^2 - 3115176096*#^3 - 33761994480*#^4 - 44926354432*#^5 - 385734826632*#^6 - 505466312808*#^7 - 1544707232176*#^8 - 3536859432048*#^9 - 774395558809*#^10 - 11627389538504*#^11 + 13377600789002*#^12 - 16702026275448*#^13 + 55609927758223*#^14 + 8981757941012*#^15 + 125815011601494*#^16 + 82039985180388*#^17 + 184885901440554*#^18 + 173488046130272*#^19 + 171654812554396*#^20 + 229746364765564*#^21 + 76826397475569*#^22 + 202905526432292*#^23 - 28252498376740*#^24 + 106683733610196*#^25 - 59052397523310*#^26 + 25832220622460*#^27 - 25835039643614*#^28 - 1835093086944*#^29 - 946264012434*#^30 - 2984614495816*#^31 + 1476681168216*#^32 - 408418320880*#^33 + 149011836535*#^34 + 15509231780*#^35 - 2017076898*#^36 + 397689236*#^37 + 6140239*#^38, 8]]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "8.8271946557297389149314693805883219515649921776362">
+    <!ENTITY a  "28.683027359702456842597589933905118624278341523215">
+    <!ENTITY b  "30.994134646930867425641320571830255160094384901784">
+    <!ENTITY r0 ".87698699927393851315274248341829302509467046352176">
+    <!ENTITY v1 ".24572461964275228623550244763484969724863054158290">
+    <!ENTITY u2 ".01142270548198449268066292562327997046430586856323">
+    <!ENTITY v3 ".39732474036015353509517152887407811424623029937960">
+    <!ENTITY v4 ".13544594189737464397124649902262920491815751915622">
+    <!ENTITY r5 ".28314967553582899230477106825027884843472948803965">
+    <!ENTITY v6 ".39732474036015353509517152887407811424623029937960">
+    <!ENTITY r7 ".36449867915833025455109889647978639025105015812932">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+        <g id="two">
+            <rect width="1" height="2"/>
+            <path style="fill:none" d="M0,1 H1"/>
+        </g>
+        <g id="two2">
+            <path style="stroke:none" d="M&u2;,0 h1 V1 H1 V2 H0 V1 H&u2;"/>
+            <path style=  "fill:none" d="M&u2;,0 h1 V1 H1 V2 H0 V1 H&u2; V0
+                                         M&u2;,1 H1"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M0,0 H6 V1 H5 V2 H4 V3 H3 V4 H2 V5 H1 V6 H0"/>
+        <path style=  "fill:none" d="M0,1 H6 V0
+                                     M0,2 H5 V0
+                                     M0,3 H4 V0
+                                     M0,4 H3 V0
+                                     M0,5 H2 V0
+                                     M0,6 H1 V0"/>
+        <g transform="translate(&s; &s;) scale(-1 -1)">
+            <path style="stroke:none" d="M0,0 H7 V1 H6 V2 H5 V3 H4 V4 H3 V5 H2 V6 H1 V7 H0"/>
+            <path style=  "fill:none" d="M0,1 H7 V0
+                                         M0,2 H6 V0
+                                         M0,3 H5 V0
+                                         M0,4 H4 V0
+                                         M0,5 H3 V0
+                                         M0,6 H2 V0
+                                         M0,7 H1 V0"/>
+        </g>
+        <g transform="translate(&s;) scale(-1 1)">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+        <g transform="translate(0 &s;) scale(1 -1)">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M0,1 H1 V0"/>
+        </g>
+        <g transform="translate(1 6) rotate(-&a;) translate(-&r0;)">
+            <use xlink:href="#two"/>
+            <use xlink:href="#two2" transform="translate(1     -&v1;)"/>
+            <g transform="translate(2&u2; -&v3;)">
+                <use xlink:href="#two"/>
+                <g transform="translate(1 -&v3;)">
+                    <use xlink:href="#two"/>
+                    <g transform="translate(1 -&v3;)">
+                        <use xlink:href="#two"/>
+                        <use xlink:href="#two2" transform="translate(1 -&v4;)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <!-- This was at first constructed with 3 different angles, where the "a" used in the following section was
+             different than that used in the preceding section. But using FindMinimum[] on this construction led to
+             the two different angles converging to exactly the same value, thus they have been merged into one. -->
+        <g transform="translate(5 2) rotate(-&a;) translate(-&r5;)">
+            <use xlink:href="#two"/>
+            <g transform="translate(1 -&v6;)">
+                <use xlink:href="#two"/>
+                <use xlink:href="#two" transform="translate(1) rotate(&a;) rotate(-&b;) translate(0 -&r7;)"/>
+            </g>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

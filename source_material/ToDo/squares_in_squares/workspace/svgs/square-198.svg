@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 14, 2025.
+        Made by combining two copies of the s(50) found by Thomas Schadt in December 2025 (using a computer program he wrote, starting from randomness.) and optimized by David Ellsworth.
+            Exact rational solution by David Ellsworth on Decemeber 14, 2025.
+
+    Solve[{RotationTransform[a][{s1 - 2, s1 - 2} - {2, 2}][[2]] == 5,
+           RotationTransform[a][{s1 - 3, 2} - {2, s1 - 4}][[1]] == 3}, {s1, a}]
+(*
+    s1 = 53/7
+    a = ArcTan[3/4]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "14.571428571428571428571428571428571428571"> <!-- s0+1 -->
+    <!ENTITY s0 "13.571428571428571428571428571428571428571"> <!-- s1+6 -->
+    <!ENTITY s1  "7.571428571428571428571428571428571428571">
+    <!ENTITY a   "36.86989764584402129685561255909341065759">
+    <!ENTITY r1  ".5428571428571428571428571428571428571429"> <!-- 19/35 -->  <!-- 1-(s-7)*Cos[a] -->
+    <!ENTITY tr  "translate(0.2  1)">
+    <!ENTITY trh "translate(0.3  1)">
+    <!ENTITY tr1 "translate(-1    )">
+    <!ENTITY tr2 "translate(-1 0.2)">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+        <g id="strip">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="&tr2;"/>
+            <use xlink:href="#one" transform="&tr2;&tr1;"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="first" transform="translate(7 7)">
+        <g id="side1">
+            <path style="stroke:none" d="M3,0 V1 H2 V2 H1 V0"/>
+            <path style=  "fill:none" d="M1,1 H3 V0
+                                         M1,2 H2 V0"/>
+            <g transform="translate(0 &s1;) scale(1 -1)">
+                <path style="stroke:none" d="M4,0 V1 H3 V2 H2 V4 H1 V0"/>
+                <path style=  "fill:none" d="M2,0 V4 H1
+                                             M1,3    H2
+                                             M3,0 V2 H1
+                                             M4,0 V1 H1"/>
+            </g>
+            <g transform="translate(3 1) rotate(-&a;) translate(-&r1;)">
+                <use xlink:href="#strip"/>
+                <use xlink:href="#strip" transform="&tr;"/>
+            </g>
+        </g>
+        <g transform="translate(3 1) rotate(-&a;) translate(-&r1;) &tr;&trh;">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="&tr2;"/>
+            <use xlink:href="#one" transform="&tr2;&tr1;"/>
+            <use xlink:href="#one" transform="&tr2;&tr1;&tr2;"/>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s1; &s1;) scale(-1)"/>
+    </g>
+    <use xlink:href="#first" transform="translate(&s; &s;) rotate(90) scale(-1 1)"/>
+    <g transform="translate(&s;) translate(-7 1)">
+        <path style="stroke:none" d="M0,0 V6 H6 V0"/>
+        <path style=  "fill:none" d="M0,0 V6 H6
+                                     M1,0 V6 M0,1 H6
+                                     M2,0 V6 M0,2 H6
+                                     M3,0 V6 M0,3 H6
+                                     M4,0 V6 M0,4 H6
+                                     M5,0 V6 M0,5 H6"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M0,8 H7 V7 H8 V0 H0"/>
+        <path style=  "fill:none" d="M0,8 H7 V7 H8 V0
+                                     M0,7 H7 V0
+                                     M1,0 V8 M0,1 H8
+                                     M2,0 V8 M0,2 H8
+                                     M3,0 V8 M0,3 H8
+                                     M4,0 V8 M0,4 H8
+                                     M5,0 V8 M0,5 H8
+                                     M6,0 V8 M0,6 H8
+                                     M7,8 H&s1;
+                                     M8,7 V&s1;"/>
+    </g>
+    <g id="corner">
+        <rect style="stroke:none" width="3" height="1"/>
+        <path style=  "fill:none" d="M3,0 V1 H0
+                                     M2,0 V1
+                                     M1,0 V1"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M11, 0 V1 H1 V11 H0 V0"/>
+        <path style=  "fill:none" d="M11, 0 V1 H0
+                                     M 0,11 H1 V0
+                                     M10, 0 V1 M 0,10 H1
+                                     M 9, 0 V1 M 0, 9 H1
+                                     M 8, 0 V1 M 0, 8 H1
+                                     M 7, 0 V1 M 0, 7 H1
+                                     M 6, 0 V1 M 0, 6 H1
+                                     M 5, 0 V1 M 0, 5 H1
+                                     M 4, 0 V1 M 0, 4 H1
+                                     M 3, 0 V1 M 0, 3 H1
+                                     M 2, 0 V1 M 0, 2 H1"/>
+    </g>
+    <use xlink:href="#corner" transform="translate(&s; &s;) rotate(90) scale(-1 1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

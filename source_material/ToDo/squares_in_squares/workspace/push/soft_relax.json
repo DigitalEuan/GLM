@@ -1,0 +1,94 @@
+{
+ "cells": [
+  {
+   "label": "control n=5 tight",
+   "n": 5,
+   "grid": 3,
+   "target": 2.7081067809999997,
+   "attempts": 4,
+   "hard_hops": 4,
+   "best_hard_L": 2.708106748923,
+   "verified": 2.708107406673
+  },
+  {
+   "label": "control n=5 loose",
+   "n": 5,
+   "grid": 3,
+   "target": 2.7571067809999996,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "label": "control n=11 tight",
+   "n": 11,
+   "grid": 4,
+   "target": 3.8780835899999997,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "label": "control n=11 loose",
+   "n": 11,
+   "grid": 4,
+   "target": 3.9270835899999996,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "label": "root n=12 near",
+   "n": 12,
+   "grid": 4,
+   "target": 3.998,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "label": "root n=12 far",
+   "n": 12,
+   "grid": 4,
+   "target": 3.98,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "label": "root n=20 near",
+   "n": 20,
+   "grid": 5,
+   "target": 4.998,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "label": "root n=20 far",
+   "n": 20,
+   "grid": 5,
+   "target": 4.98,
+   "attempts": 4,
+   "hard_hops": 0,
+   "best_hard_L": null,
+   "verified": null
+  }
+ ],
+ "finds": [
+  {
+   "n": 5,
+   "grid": 3,
+   "verified_L": 2.708107406673,
+   "target": 2.7081067809999997
+  }
+ ],
+ "started": "22:18:42",
+ "seconds": 553.3
+}

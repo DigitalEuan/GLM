@@ -1,0 +1,55 @@
+{
+ "run": 26,
+ "date": "2026-11-06",
+ "user_request": "continue the project - see NEXT_STEPS.md (which likely needs updating) for the next steps",
+ "executed": {
+  "P1b_two_block": {
+   "status": "closed by domination",
+   "family": "45deg m x m corner block (lower-left face on x+y=D, integer D) + maximal integer-lattice axis fill; L=(D+(3/2)sqrt2*m)/2, n = m^2 + |cells|, all exact",
+   "measured": [
+    "763 designs enumerated (m<=24, D<=139, L<=34), 284 finalize-verified sample (284): 0 penetration, count, L=formula everywhere",
+    "pointwise domination vs plain grid capacity at the same L: 0 designs beat it (min gap 0 at the tie m=1 D=3)",
+    "acceptance n=44/58/31 FAILS by capacity: ceilings 36/49/25 below their grids - short by 8/9/6"
+   ]
+  },
+  "P1c_census": {
+   "status": "closed as a family (blob regime)",
+   "measured": [
+    "census over all 454 sub-grid rows: 314 strip-45 (= P1(a), closed run 25), 31 Pythagorean-exact, 109 drifted",
+    "n=50 decoded exactly: L=53/7 (dev 1.7e-9), angle arctan(3/4) (dev 1.6e-11 deg), tilted centers on the 1/50 lattice (maxdev 8.1e-8), axis grid at 2/7 mod 1 (offsets 1.3e-8), 105 contacts at zero, packs grid-capacity+1 (49+1) at L=53/7: the K^2+1 architecture",
+    "conclusion: the blob rows are isostatic hand-polished arrangements, not members of a low-dimensional parametric family; decode->closed-form->sweep does not transfer; follow-up named as P1' in NEXT_STEPS.md"
+   ]
+  },
+  "P3_source_watch": {
+   "status": "paid \u2014 the only score gain of runs 14-26",
+   "import_atlas": "idempotent (applied 0, skipped 4, rejected 320)",
+   "register_check": "jlevy/squares #824 (Oct 25-31) + #893 (Nov 3-4): T-248 -> T-258 (Evan Daniel, fault-line DP seeded from Deotte's s(334)) -> T-263 (Doega Oezden rearrangement, -1.54e-8): s(299) <= 17.8012385339790622, superseding the catalogue's 33/2 + sqrt(7)/2 = 17.822875655533",
+   "import": {
+    "source": "retained packet kenaznia-doga/s299-upper-bound, n-299-candidate.yaml (packing.squares:Witness/v2, exact rationals; registry VERIFIED 44,551 pairs + independent checker VALID) -> fetched to workspace/sources/s299_T263.yaml",
+    "verify": "parsed exact rationals; packlib.verify: ok=True, L=side exactly (|L-side|=0), worst_pen=0.0; finalize: ok, L=17.801238535867 (the +2e-9 finalize scale), count=299",
+    "applied": "17.822875657420 -> 17.801238535867, row gain 0.001251307"
+   },
+   "provenance_recorded": "T-263, jlevy/squares #893 (2026-11-03); finder Evan Daniel (T-258, #824, 2026-10-26, fault-line DP seeded from Deotte's s(334)); improved by Doga Oezden (rearrangement, -1.54e-8). Cert: kenaznia-doga/s299-upper-bound n-299-candidate.yaml (packing.squares:Witness/v2, exact rationals); registry VERIFIED 44,551 pairs + independent checker VALID."
+  },
+  "P4_fixpoint": {
+   "status": "confirmed",
+   "measured": "cascade3: 2 chain improvements (n=334: 18.822875659 -> 18.801238538, n=371: 19.822875659 -> 19.801238538; both src=chain3); chain correctly stops where gobel2 designs are deeper (410: 20.778 < 20.801; 453, 498) and the c=10 tail (810, 869, 930, 993) stays at grid; closure_apply: fixpoint after 0 more rounds; final_assembly: round-trip 0 issues",
+   "score": "22.823536149 -> 22.819977568 (-0.003558581)"
+  },
+  "NEXT_STEPS_update": {
+   "status": "rewritten to the Run-26 state",
+   "changes": "new section 0 (execution status of runs 14-26, all closures with numbers); gap recomputed (0.765556); tie structure recomputed (546 rows, 9.02 headroom); section 3 extended with failures 8-10; P1 replaced by P1' (blob-regime insertion campaign, first targets the at-grid c=10 tail 810/869/930/993); P2 marked done; P3 upgraded to weekly-with-register-watch; value ladder updated with the T-263 measured value",
+   "copies": "upload/NEXT_STEPS.md (the upload is treated as input; the update is also at NEXT_STEPS.md top level and download/NEXT_STEPS.md"
+  }
+ },
+ "score": {
+  "before": 22.823536149,
+  "after": 22.819977568,
+  "delta": -0.003558581
+ },
+ "next": [
+  "P1' blob-regime insertion campaign (NEXT_STEPS section 4): seed from record states, insert one square at fixed L, pressure-settle; first targets the at-grid c=10 tail (810, 869, 930, 993)",
+  "P3 weekly watch (the only item that paid in runs 14-26); watch for T-numbers >= 263 and the Deotte fault-DP line (s(334) seeds)",
+  "P5 certification backlog (Lean; T-263 Fraction replay)"
+ ]
+}

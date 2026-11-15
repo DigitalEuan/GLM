@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Proved optimal by Wolfram Bentz in October 2018.
+        Source: {Optimal Packings of 22 and 33 Unit Squares in a Square} - https://doi.org/10.48550/arXiv.1606.03746
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "5">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <path style="stroke:none" d="M2,0 V1 H5 V5 H0 V0"/>
+    <path style=  "fill:none" d="M0,1 H5
+                                 M0,2 H5
+                                 M0,3 H5
+                                 M0,4 H5
+                                 M1,0 V5
+                                 M2,0 V5
+                                 M3,1 V5
+                                 M4,1 V5"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

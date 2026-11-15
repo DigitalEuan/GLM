@@ -1,0 +1,12 @@
+{
+ "found": [],
+ "rows_tried": 1000,
+ "near_hits": 1241,
+ "score_gain": 0,
+ "params": {
+  "ahead": 6,
+  "near": 0.0,
+  "settle_top": 3,
+  "compact": false
+ }
+}

@@ -3020,3 +3020,124 @@ items:
   last_action: '13 November 2026: moved into ToDo/ and registered'
   next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
     leechlean triaged`'
+- id: squares_in_squares
+  path: ToDo/squares_in_squares
+  kind: working project
+  offers: 'The owner''s Squares in Squares project (Kaggle, n = 1..1000 unit squares into the smallest
+    axis-aligned square, score = sum(L/sqrt n - 1)): a 290 MB working tree carrying the exact SAT verifier
+    (packlib, W36), the pressure-settling search layer (W37, measured null on this landscape), the import
+    scripts for the public catalogues, the propagation closure and a 500,500-row submission whose working
+    file scores 22.218057 by its own verifier.'
+  stage: received
+  last_action: '15 November 2026: cloned from github.com/DigitalEuan/squares_in_squares (commit 6d41e27,
+    "Run 38") into ToDo/ with .git excluded (262 MB of working tree, no history); its own gate runs here
+    (packlib self-tests pass), and the delivered submission.csv scores 22.218057 against the documented
+    22.642387 of submission.run36.csv. Two import-side refinements measured null (the public merge at
+    22.218056852 and a tighter contact clearance at 1.8e-8). Then a cent engine concept compiled and run:
+    scripts/pressure_field.py reads W6 pressure/force as the container side under pressure and W5
+    force/energy as the penetration field that resists it, relaxing positions and angles together with a
+    jittered rejection step, every candidate gated by packlib. Controls: from a squeezed grid it reaches
+    2.985 for n=5 (grid 3) and 4.975 for n=19 (grid 5) but stalls short of the known sides (2.707, 4.886),
+    which is the project''s own stall law; the campaign over the 25 largest-excess puzzles with n <= 200
+    found 0 improvements over the table (score gain 0.000000), every row already at the best known packing.
+    Then the multi-motif composer: scripts/motif_mosaic.py generalises the rotated-block family to ANY block
+    angle theta with UNEQUAL staircase depths a != b plus a lattice fill, and proves it dominated -- the
+    support of a theta-rotated p-block along either diagonal normal is p*max(cos t, sin t)/sqrt2, the same
+    for both normals, so the deeper staircase pair binds both contact laws and s is minimised at theta = 45
+    with a = b, which is Gobel exactly. Swept over p <= 30, a, b <= 14 and eleven angles: 0 design survivors
+    above the area bound, 0 verified wins, score gain 0. The gain in this space is not in the block mosaic
+    but in the band mosaic, where the band angle is continuous rather than a symmetry of the block.
+    Then the band mosaic: scripts/band_mosaic.py builds a W x H band at a continuous angle phi between
+    two pairs of corner staircases (depths a and b) with a lattice fill, its side a closed form over
+    six contact laws (both bbox faces, the two staircase diagonals, the two staircase-pair collisions).
+    Swept 38,880 (W, H, a, b) triples, phi refined to 0.02 deg: the family EQUALS the current submission
+    within 1e-6 on 19 puzzles (it reproduces the frontier''s own constructions), sits above it on 547 of
+    the 566 it covers, produced 6 designs below it, and every one of those failed the verifier -- 0
+    verified wins, score gain 0. Two closed-form errors on the way (a missing support equality, then
+    missing staircase-pair collisions) produced 90+ phantom wins that the packlib gate removed, which is
+    the gate doing its job. Then the contact-graph LP: scripts/contact_lp.py freezes every angle, picks
+    each pair''s best-separated SAT axis and its sign, and minimises the container side over the resulting
+    polytope (walls + one linear constraint per near pair) -- any feasible point is a valid packing by
+    construction, so the exact verifier only has to reject rounding. Over the first 400 puzzles it improved
+    none: the frontier''s rows are already tight in their own contact graphs (score gain 0.000000000).
+    Then the mineral framework the owner proposed: scripts/crystal_growth.py nucleates sites, grows them to
+    impingement (Voronoi cells clipped to the box), orients each grain to its cell''s principal axis and
+    ripens the nucleation field by random moves. It is valid by construction and lands exactly on the grid
+    side for every probe (n = 5, 7, 10, 13, 17, 20, 26, 30: L = ceil(sqrt n), 0 wins), which is the
+    framework''s own theorem-shaped limit: equal squares that fill space tile only the lattice, so an
+    impingement tessellation cannot beat the grid -- the score lives in the grain BOUNDARY, where a real
+    polycrystal puts its misfit (tilt walls, dislocations). The next engine is therefore a seam placed on
+    the impingement skeleton rather than on a fixed translation grid.
+    Then the two levers the LP failure named, both built and both measured. scripts/rotation_lp.py lets the
+    angles move too: with delta_i the rotation of square i the pair condition on axis u_i is still linear to
+    first order, because a rotation only bends the OTHER square''s support (sigma[(c_j-c_i).u_i + d.v_i
+    delta_i] - f''(Delta)(delta_j-delta_i)/2 >= 1/2 + f(Delta)/2), and the walls bend the same way, so
+    (dx, dy, delta, dL) is one LP; the exact verifier judges each step and a rejected step retries at half
+    the rotation budget. Over 250 rows it compacted NONE (0 wins): a record row is rotation-tight, not just
+    contact-tight. Contact-topology rewiring (re-specify a few near contacts on another SAT axis or the
+    opposite side, re-solve, verify) on 40 rows: 0 wins. That pair of nulls turns into the useful result:
+    scripts/recovery_probe.py asks instead whether the move set can RECOVER a known optimum from a cold
+    start. From the grid start it recovers 4/8 (n = 6, 7, 13, 20) and misses 4/8 (n = 5, 10, 17, 26) --
+    and the split is exact: it recovers precisely the puzzles whose optimum IS the grid and misses every
+    off-grid optimum. The failure is a basin, not a parameter: local moves cannot cross from the lattice
+    into a tilted family. So the missing move is discrete, and crystal growth supplies it by inverting
+    itself -- heterogeneous nucleation, a new orientation nucleating inside an existing grain.
+    scripts/grain_injection.py rotates a disc of squares rigidly about a seed, repairs the overlaps
+    geometrically (scripts/rotation_lp.separate: push each overlapping pair apart along its binding axis,
+    which the linearised LP cannot do under its per-step position bounds), then lets the LP settle the two
+    orientations against each other. On n = 5, 24 (phi, radius) configurations x 5 seeds: EVERY injection
+    ended worse than doing nothing, best 3.207107 against grid 3.0 and target 2.707107 -- and the best value
+    is exactly target + 0.5, the tilted family''s shape with one square''s worth of slack left in the box.
+    So the obstacle is now located precisely: the 45-degree notch insertion, where a rotated square''s
+    corners interlock with the corner of an axis-aligned block, needs several simultaneous contacts whose
+    feasible region is a single point, and a first-order relaxation slides off it. That is a DISCRETE
+    insertion problem (a jammed cluster to place and lock), not a continuous one, and it is the next engine.
+    Transferable reading for the rest of the corpus: (1) a template family''s optimum is an LP-dual
+    certificate -- when every row is contact-tight, parametrising harder cannot help; (2) the only remaining
+    lever is the contact/constraint GRAPH or a change of level, never a finer grid of the same parameters;
+    (3) recovery from a cold start separates a weak move set from a weak budget, and must be measured before
+    spending budget; (4) every predicted gain needs an exact gate -- two closed forms in this tree once
+    produced 275 phantom wins between them, the same failure mode as a search that scores its own surrogate.
+    Then the notch engine, and the owner''s grouping hypothesis tested. scripts/notch_engine.py inserts one
+    square into the arrangement and lets the repair + rotation LP settle it: --recover rebuilds n = k^2+1
+    from the plain grid for k^2 by inserting a single 45-degree square, and it reconstructs n = 5 EXACTLY
+    (grid 3.0 -> 2.7071067824 against the known 2.7071067812, verified), which is the first engine in this
+    tree to leave the lattice basin at all; k = 3..6 still miss, because their rows are ring + multi-square
+    clusters rather than ring + one diamond. --grow builds each row from the row below the same way over
+    n <= 60: 59 rows, 0 verified wins (the frontier is already at the best known value on every row).
+    Then scripts/group_structure.py tests the owner''s reading that the set comes in groups (trivial, angle,
+    motif) and that a row''s answer is outlined by the rows above it. Measured on the frontier with
+    e(n) = L - floor(sqrt n) and d = n - k^2: the groups are real (31 rows on the exact grid, 30 in the
+    angle group d = 1, 523 motif rows, 416 still on the unit plateau), and e is almost a function of d
+    ALONE -- over 939 one-block-out pairs e(k+1,d) vs e(k,d) has median difference 0.0000, mean 0.0090,
+    max 0.2929. The excess also reuses a small alphabet (e = 0.5355 in 39 rows, 0.7071 in 28, 0.6569 in 16,
+    0.5714 and 0.5914 in 11 each of 317 distinct values), so the frontier is a ladder of motifs indexed by
+    the offset inside the block, exactly as the owner described. Two script paths were also wired to the
+    repo instead of /home/z/my-project (score_submission.py, verify_current.py); the remaining historical
+    run scripts still carry the old root and are left as supplied.'
+  next_step: 'measure what can move the score: the public-packing merge and a clearance re-opening were
+    both measured null (SQUARES_IN_SQUARES_STATE in STATUS.md), so the next step is a source refresh against
+    the live public pool or a search find, not a precision change.'
+  studies: []
+  tests:
+  - 'scripts/packlib.py (the item''s own self-tests: self-tests passed)'
+  - 'scripts/score_submission.py (independent score of submission.csv: 22.218057, no overlap failures)'
+  - 'scripts/pressure_field.py --control (2 of 5 within 0.12 of the known side, 0 of 5 within 2e-3:
+    a local field engine, honest about stalling)'
+  - 'scripts/pressure_field.py --campaign --top 25 --max-n 200 --seeds 2 (0 improvements, gain 0.000000)'
+  - 'scripts/motif_mosaic.py --domination (p <= 30, a, b <= 14, 11 angles: 0 design survivors, 0 wins)'
+  - 'scripts/band_mosaic.py --sweep --a-max 8 (38,880 triples, phi to 0.02 deg: 6 design survivors,
+    0 verified wins, score gain 0)'
+  - 'scripts/contact_lp.py --run --max-n 400 --rounds 5 (contact-graph compaction LP: 400 rows, 0 wins)'
+  - 'scripts/crystal_growth.py --probe (impingement tessellation: 8 puzzles, every one at the grid side;
+    0 wins)'
+  - 'scripts/rotation_lp.py --run --max-n 250 --rounds 6 (positions + per-square rotation: 250 rows, 0
+    compacted, 0 wins); --run --max-n 40 --rewire 10 (contact-topology rewriting: 0 wins)'
+  - 'scripts/recovery_probe.py --n 5 6 7 10 13 17 20 26 (cold-start recovery: 4/8, and exactly the four
+    grid-optimal rows; every off-grid optimum missed)'
+  - 'scripts/grain_injection.py --n 5 10 17 26 (heterogeneous nucleation: 0/4; n=5 best 3.207107 vs target
+    2.707107 and grid 3.0)'
+  - 'scripts/notch_engine.py --recover --ks 2 3 4 5 6 (single 45-degree insertion: n=5 reconstructed
+    exactly at 2.7071067824, the other four miss); --grow --max-n 60 (59 rows, 0 verified wins)'
+  - 'scripts/group_structure.py (groups: 31 grid / 30 angle / 523 motif / 416 plateau; e is a function of
+    d alone, median one-block-out difference 0.0000 over 939 pairs)'

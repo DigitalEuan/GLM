@@ -1,0 +1,47 @@
+{
+ "contact_lp": {
+  "rows": 400,
+  "wins": 0,
+  "gain": 0.0,
+  "note": "frozen angles; frontier rows are tight in their own contact graphs"
+ },
+ "rotation_lp": {
+  "rows": 250,
+  "compacted": 0,
+  "wins": 0,
+  "gain": 0.0,
+  "note": "positions + per-square rotation; no first-order step lowers L on a record row"
+ },
+ "rewire": {
+  "rows": 40,
+  "wins": 0,
+  "gain": 0.0,
+  "note": "contact axis/sign rewriting from a record row; no gain"
+ },
+ "recovery": {
+  "of": 8,
+  "recovered": 4,
+  "hits": [
+   6,
+   7,
+   13,
+   20
+  ],
+  "misses": [
+   5,
+   10,
+   17,
+   26
+  ],
+  "note": "recovers exactly the rows whose optimum is the grid; misses every off-grid optimum"
+ },
+ "grain_injection": {
+  "n": 5,
+  "configs": 24,
+  "seeds": 5,
+  "best": 3.207107,
+  "grid": 3.0,
+  "target": 2.70710678,
+  "note": "heterogeneous nucleation + repair + LP cannot reach the 45-degree notch; best is target + 0.5"
+ }
+}

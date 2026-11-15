@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Trivial.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "3">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <rect width="3" height="3"/>
+    <path style="fill:none" d="M0,1 H3
+                               M0,2 H3
+                               M1,0 V3
+                               M2,0 V3"/>
+</svg>

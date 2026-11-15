@@ -1,0 +1,104 @@
+[
+ {
+  "n": 12,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "L_stop": 3.9950000015000002
+ },
+ {
+  "n": 13,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "L_stop": 3.9950000015000002
+ },
+ {
+  "n": 803,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 803,
+  "total": 803,
+  "L_seed": 28.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 748,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 748,
+  "total": 748,
+  "L_seed": 27.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 983,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 983,
+  "total": 983,
+  "L_seed": 31.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 804,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 804,
+  "total": 804,
+  "L_seed": 28.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 862,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 862,
+  "total": 862,
+  "L_seed": 29.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 695,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 695,
+  "total": 695,
+  "L_seed": 26.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 749,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 749,
+  "total": 749,
+  "L_seed": 27.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 984,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 984,
+  "total": 984,
+  "L_seed": 31.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 922,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 922,
+  "total": 922,
+  "L_seed": 30.995,
+  "mode": "seed-level"
+ },
+ {
+  "n": 696,
+  "verdict": "RIGID_WALL",
+  "rho": 1.0,
+  "contacts": 696,
+  "total": 696,
+  "L_seed": 26.995,
+  "mode": "seed-level"
+ }
+]

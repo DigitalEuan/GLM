@@ -19,6 +19,12 @@
 
 *Last altered 1 November 2026 (Phase 186: the intake items absorbed ahead of the owner's Lean build by the owner's decision -- "Just closed", §2.1 item 0's remainder and §2.3's `confirm-build` steps).*
 
+*Last altered 15 November 2026 (the Squares in Squares probe: the owner's other project filed as an intake item and measured — 22.218057 working against 22.642387 documented, a public merge and a tighter clearance both null, 0.1637 to the leader).*
+
+*Last altered 14 November 2026 (Phase 188: §2.1 item 0a's P3 measured and corrected — the 8-CPU machine, the evaluation's own default worker count, the cheap lane and the close order, the empty sign-off ledger, the units that already fail; and P5's second refusal hint).*
+
+*Last altered 14 November 2026 (Phase 187: §2.1 item 0a's P5 taken in part — the chat surface's one echo, `:kinds`, and the refusal's meaning, with *carriers* left; §1b's P3 workflow measured in this workspace).*
+
 *Last altered 13 November 2026 (platform round: §2.1 item 0a, the seven-phase plan this repository is worked to, and what its first phase changed).*
 
 > **Positioning.** Before starting a round, read the Positioning section of
@@ -418,9 +424,9 @@ the environment. Seven phases, in order; each names the gate that closes it.
 | **P0 repair** | the committed stash conflicts of `8a7ddca` in six files | done in `cb64b00`; the five modules compile and the CLI answers |
 | **P1 gates green** | filing and duplicate cleanup, the four new intake items registered, `lean_to_add` out of the build tree, manifests synced, the evidence censuses re-taken | `corpus --check`, `intake check`, `lean_check` |
 | **P2 Lean** | elan + Lean 4.28 + Mathlib in this workspace **and** the owner-machine build record as the fallback | `scripts/rebuild_lean.sh` writes `scripts/logs/lean_build_evidence.json`; `intake confirm-build` for the three items absorbed ahead of it |
-| **P3 workflow** | [`ITERATE.md`](ITERATE.md) §0.5 (this environment), the venv, the warm cache, `--jobs 2`, logs outside the tree | a round can be picked up, worked and closed here |
+| **P3 workflow** | [`ITERATE.md`](ITERATE.md) §0.5 (this environment), the venv, the warm cache, the machine's own job count, logs outside the tree — *measured and corrected 14 November 2026 (Phase 188): 8 CPUs, `default_jobs()` in the evaluation and the gate, the cheap lane and the close order* | a round can be picked up, worked and closed here |
 | **P4 intake** | `leechlean`, `cent_compiler_v12_update`, `cent_compiler_v12_2`, `lean_to_add`, then `attention`, `formula_wheel`, `conversation_experiment`, `hidden_memory`, `GLM_IMPROVEMENT_ROADMAP` and `HISTORY_RECORDED_NOW_V4_STUDY` | each item's stage gate (D22) |
-| **P5 use** | the chat surface: carriers the evaluation's questions name, the doubled query echo, refusal wording | the evaluation cases that cover each |
+| **P5 use** | the chat surface: carriers the evaluation's questions name, the doubled query echo, refusal wording — *one echo, `:kinds` and the refusal's meaning taken 14 November 2026; carriers left* | the evaluation cases that cover each |
 | **P6 refine** | every round moves derive, address or refuse under a declared perturbation | D15, and the paper updated in the same round |
 
 *What P1 changed on 13 November 2026.* Twenty-seven files at the root of
@@ -457,6 +463,62 @@ including the two that wait for another held file (`LorentzUnits` for held
 the build. The thirteen files remain owed, and the round's work order is the
 navigator's Lean-gap section: `LeechShells.lean` first, because two held files
 wait for it alone.
+
+*What P3 has done (14 November 2026; Phase 188,
+[`ITERATION_LANE_STUDY.md`](studies/ITERATION_LANE_STUDY.md), 4 of 4 marks).*
+The workflow this workspace is worked to was measured and corrected. **The
+machine offers 8 CPUs, not 2** (`nproc` 8, `os.cpu_count()` 8,
+`os.sched_getaffinity(0)` 8), and the evaluation is one CLI process per case,
+so it parallelises nearly linearly: 8 cases take 64.4 s at `--jobs 1` and 8.9 s
+at `--jobs 8`, and the whole evaluation answers 237 of 237 in 248 s at eight.
+`evaluation.harness.default_jobs()` — the affinity count, capped at 8 — is now
+the default of the evaluation and the replay gate, so `--jobs` is only needed
+to lower it. `ITERATE.md` §0.5 carries the measured machine, the round's cheap
+lane (`corpus --check` about 35 s, the touched test files, `--only KIND`,
+`--case`), the order a close must run in and why the two answer censuses come
+last, the empty sign-off ledger here and the one-off (about 67 minutes) that
+would fill it, and the four test units that already fail on the inherited tree
+so a round does not read them as its own. One line of the surface was taken as
+well: a question that resolves to a real kind and then names no carrier now
+says the registers are where to look and points at `:domains` — interactive
+mode only, no answer moved.
+
+*What the Squares in Squares probe measured (15 November 2026).* The owner's
+other project — the Kaggle competition *Squares in Squares*, packing n unit
+squares into the smallest axis-aligned square for n = 1…1000, score
+Σ(L/√n − 1) — was brought in as `source_material/ToDo/squares_in_squares`
+(commit `6d41e27`, "Run 38"; 262 MB of working tree, `.git` left behind) and
+measured with its own instruments. **Its working submission scores 22.218057**
+(no overlap failure, 543 puzzles under the grid ceiling), where its own
+documentation still quotes 22.642387 — that figure belongs to
+`submission.run36.csv`, which reproduces exactly, so the working file is 0.424
+ahead of its own record. Two candidate refinements were measured and both are
+null on this landscape: merging the strongest public file (Minuii's
+`squares_in_squares`, which claims 22.2569857 and verifies here at 22.256986
+with no overlaps) with ours leaves the score at 22.218056852, so the two files
+hold the same public best-knowns; and re-opening the delivered 2e-9 contact
+clearance at the tightest value that still verifies (8e-11 for most puzzles,
+below 2e-11 for 32) moves it by 1.8e-8, so precision is not where the score
+lives. The gap to the leader (22.0544) is 0.1637 and needs packings outside the
+public pool or a search find, not a merge or a rounding change. Recorded as
+intake item `squares_in_squares` (`intake check` 0 errors).
+
+*What P5 has done so far (14 November 2026).* The platform plan's **use**
+phase was taken on the chat surface, with P2 set aside by the owner's
+instruction that day (the Lean build needs a toolchain this workspace does
+not have): the interactive surface no longer echoes every query twice (the
+answer path is the one echo, and it echoes the query as solved); `:kinds`
+lists the parser's own table, 30 declared readings with `unknown` named
+apart; and a question that matched no declared reading now says so and
+points at `:kinds`, in the interactive surface only, so the `UNSOLVED` line
+the evaluation pins is unchanged. 4 of 4 marks
+([`CHAT_SURFACE_STUDY.md`](studies/CHAT_SURFACE_STUDY.md); record in
+`MASTER_PLAN.md` "Phase 187"). The phase's third line, *carriers the
+evaluation's questions name*, is a reading change and waits on a fresh
+held-out set (§2.2). **P3, the workflow,** was measured on the way: a venv
+and pytest under `~/glm/venv`, the knowledge cache warmed once (167 MB,
+git-ignored), `--jobs 8` (the machine's own count — see P3 below), and every
+log outside the tree.
 
 0. **repository check and fix** this repository has been reorganised and needs
 a proper check through everything, some parts may be broken and require fixing.

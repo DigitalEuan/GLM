@@ -1473,8 +1473,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->20,262<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->115,519<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->20,263<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->115,525<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned

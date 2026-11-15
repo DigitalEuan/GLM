@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on November 16, 2024, based on the s(70) found by Joe DeVincentis in April 2014.
+
+    RootReduce[Solve[{RotationTransform[-a][{s - 3, s - 8} - {7, 4}][[1]] == 3,
+                      (s - 7) - ({s - 2, 1} + RotationTransform[a][{3 - r1 - 3*u3, 5 + 2*v2}])[[2]] == 0},
+                     {s, a}][[2]]]
+    s = Root[464677 - 158164*# + 19960*#^2 - 1110*#^3 + 23*#^4 & , 2, 0]
+    a = ArcTan[Root[-9 + 24*# - 8*#^2 + 6*#^3 + #^4 & , 2, 0]]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "12.8816667570090046248235121489096372"> <!-- s1 + 4 -->
+    <!ENTITY a  "22.4424851362270649154270091084692850">
+    <!ENTITY r1 ".814892150230229653036682449656435450"> <!-- (s - 12)*Cos[a] -->
+    <!ENTITY v2 ".025690247611233479437778222558084347"> <!-- (({s - 2, 1} + RotationTransform[a][{3 - r1, 0}])[[1]] - s)/Sin[a]/2 -->
+    <!ENTITY u3 ".542507386178685806304009136960016790"> <!-- Cos[a]-Sin[a] -->
+    <!ENTITY v4 ".172695669523327042984984120884965494"> <!-- (3 - ({s - 2, 1} + RotationTransform[a][{-r1 - 3*u3, 3}])[[2]])/Cos[a] -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+        <g id="two">
+            <rect width="1" height="2"/>
+            <path style="fill:none" d="M0,1 H1"/>
+        </g>
+        <g id="twotwo">
+            <rect width="2" height="2"/>
+            <path style="fill:none" d="M1,0 V2
+                                       M0,1 H2"/>
+        </g>
+        <g id="three0">
+            <rect width="3" height="1"/>
+            <path style="fill:none" d="M1,0 V1
+                                       M2,0 V1"/>
+        </g>
+        <g id="three">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 &v2;)"/>
+            <use xlink:href="#one" transform="translate(1 &v2;) translate(1 &v2;)"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M10,0 V 1 H9 V2 H8 V3 H7 V4 H6 V5 H5 V6 H4 V7 H3 V8 H2 V9 H1 V10 H0 V0"/>
+        <path style=  "fill:none" d="M10,0 V 1 H0
+                                     M 9,0 V 2 H0
+                                     M 8,0 V 3 H0
+                                     M 7,0 V 4 H0
+                                     M 6,0 V 5 H0
+                                     M 5,0 V 6 H0
+                                     M 4,0 V 7 H0
+                                     M 3,0 V 8 H0
+                                     M 2,0 V 9 H0
+                                     M 1,0 V10 H0"/>
+        <g transform="translate(&s;) scale(-1 1)">
+            <rect style="stroke:none" width="2" height="1"/>
+            <path style=  "fill:none" d="M2,0 V1 H0
+                                         M1,0 V1"/>
+        </g>
+        <g transform="translate(&s; 1) translate(-2) rotate(&a;) translate(-&r1;)">
+            <use xlink:href="#three"/>
+            <use xlink:href="#three"  transform="translate(-&u3; 1)"/>
+            <use xlink:href="#three"  transform="translate(-&u3; 1) translate(-&u3; 1)"/>
+            <use xlink:href="#twotwo" transform="translate(-&u3; 1) translate(-&u3; 1) translate(-&u3; 1) translate(    1  &v2;) translate(0 &v2;)"/>
+            <use xlink:href="#two"    transform="translate(-&u3; 1) translate(-&u3; 1) translate(-&u3; 1) translate(    0  &v4;)"/>
+            <use xlink:href="#three0" transform="translate(-&u3; 1) translate(-&u3; 1) translate(-&u3; 1) translate(-&u3; 2&v4;)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#three0" transform="scale(.5) translate(&s; &s;) rotate(&a;) translate(-3 -1) scale(2)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

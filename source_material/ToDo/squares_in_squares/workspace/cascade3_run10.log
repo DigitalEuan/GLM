@@ -1,0 +1,4 @@
+bases: 1024
+[26s] raw candidates: 1000
+chain improvements applied: 2, fails: 0
+SCORE=22.889070 (grid 28.937670, improvement 6.048599) BEATS_GRID=447

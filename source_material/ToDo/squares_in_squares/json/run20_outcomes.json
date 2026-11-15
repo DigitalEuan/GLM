@@ -1,0 +1,64 @@
+{
+ "run": 20,
+ "date": "2026-11-05",
+ "user_asks": [
+  "double-check '0 applicable finds' \u2014 it should at least bring up the existing settling engine",
+  "many more option generations than the current 22 applications; some of the 22 could work for grid solving",
+  "proposal_11 (W20 piezo) for crystal structure; proposal_20 (W33 Fourier) for macro details",
+  "a round of considering how to move forward and crack the remaining puzzles intelligently",
+  "the framework: Golay/Leech information and TAX"
+ ],
+ "double_check_verdict": {
+  "atlas": "holds ONLY grid+finalize-eps for all 23 roots (24 rejects, every one 'no beat after finalize') \u2014 the compiled best-known source itself has nothing below grid",
+  "uncovered": "all 23 roots open since run 3 (uncovered.json)",
+  "campaign_ledger_gap": "run-19 recorded gate outcomes only (None for fails) \u2014 could not distinguish near-miss from far-miss; fixed this run by root_probe/fine_probe recording the raw objective",
+  "near_miss_regime": "root_probe: settles at g-0.002 end at objective ~1e-6 (penetration ~1.5e-3) \u2014 the campaign was NEAR-MISSING, not far-missing; the levels were right, the gate strict, the boundary just is not there"
+ },
+ "the_stall_law": {
+  "statement": "At target L_t = grid - d, the best terminal settle objective gives penetration p ~ 0.45-0.88 * d across every tested delta; p -> 0 only as d -> 0. If a packing existed below grid, some seed would reach objective ~1e-13 (as the pinwheel control does at ITS feasible size); instead every prior stalls at a residual overlap proportional to the deficit.",
+  "evidence": "3 independent priors (RSA diverse-angle, lattice near-grid, lattice+transducer), deltas down to g-0.00005, 700+ gate-tested attempts, 0 verified finds; ratios min 0.448 / median 0.701 / max 0.883",
+  "reading": "signature of an optimum exactly AT the grid"
+ },
+ "the_22_applications": {
+  "what_they_are": "SPICE circuit compilation targets generated from the \u00a3 law list (the generator's fixed input; 22 entries \u2014 hence 'only 22'; the corpus has 41 wheels but the law list did not grow)",
+  "key_insight": "a physical law contributes an ENGINE DYNAMIC (a way to move through configuration space), never a new GEOMETRY (a packing that does not exist). No proposal can create a sub-grid packing for an n whose search space holds none.",
+  "tested": {
+   "proposal_11_W20_piezo": "variant T (transducer): read the stress (SAT margins), emit corrective strain (displace along binding axes). Pinwheel control 1/15 (retains discovery power); on the roots: unchanged (lattice+T = LT cells, 0 finds, same stall law)",
+   "proposal_20_W33_fourier": "variant H (thermal): conduction macro-moves toward inverse-distance centroids between ramps. Pinwheel 0/15 in current form \u2014 the conduction step smooths toward centroids, which FIGHTS the corner-filling tight packings need; documented as needs-work, not hidden",
+   "variant_L_original_settling": "the user's instinct was right \u2014 the original settling engine's lattice prior is the natural prior for near-grid optima: grid control 8/15 (vs RSA's shape-blind seeding), pinwheel 0/15 (the known trade-off: tilted targets need diverse seeds). Both priors now part of the engine family."
+  }
+ },
+ "the_framework_golay_leech_tax": {
+  "level_structure": "leech_map classifies all 1000 rows: level 0 unresolved (114, no certificate), level 1 rational \u039b1\u2013\u039b4 (552, field Q), level 2 quadratic \u039b8 (334: Q(\u221a2) \u00d7323 + Q(\u221a7) \u00d711)",
+  "empirical_law": "improvements below the rational window exist exactly where a QUADRATIC (or higher) field certificate exists. All 454 beating-grid rows are level-2+ certificate rows (theta 45\u00b0 = Q(\u221a2) families, gobel patterns = Q(\u221a7))",
+  "the_23_roots": "ALL 23 are level 1 / tier certificate / field Q / family grid. The level-1 class's improvement potential measures 0.000000000 (\u22121.1e-10 summed over 552 rows). The roots are precisely the n with no quadratic certificate \u2014 which is why no atlas/theta/gobel construction (all quadratic-window) can ever produce a sub-grid packing for them",
+  "tax": "the compiler's score residual ||v\u2212\u03bb||\u00b2/32 on the Leech carrier (geometry.py); it scores states, it does not create them \u2014 consistent with the dynamic-vs-geometry separation",
+  "convergence": "the Leech level structure (algebraic), the stall law (dynamic), and the atlas (best-known) all say the same thing through independent channels"
+ },
+ "score_arithmetic": {
+  "current": 22.823536,
+  "if_all_roots_improved_0.002": "22.816824 (gain 0.0067 = 0.029%)",
+  "if_all_roots_improved_0.005": "22.806755 (gain 0.0168 = 0.074%)",
+  "area_floor_headroom_on_roots": "1.4065 \u2014 an absolute ceiling, NOT achievable (equal squares cannot tile that tightly); the rational-window law says this room is not real"
+ },
+ "how_to_move_forward": {
+  "tier_1_the_real_crack": "INFEASIBILITY PROOF, not more search. The compiler already ships interval.py, resolution.py, isomorphism_gate.py \u2014 the machinery for exactly this. Program: for n=12, L<4: partition configuration space by contact graph (isostatic: 3n\u22123 = 33 constraints for n=12); enumerate graphs up to symmetry; interval arithmetic per cell; prove no cell admits a feasible state. Success = a THEOREM (n=12 optimal at 4.0), stronger than any find. Extend to 20, 21.",
+  "tier_2_polish_frontier": "the 114 level-0 unresolved rows (improvement_sum +1.63): large-n covered rows with non-algebraic L; real reachable gains (SA/LM polish at scale) \u2014 the honest place to spend compute",
+  "tier_3_corpus": "grow wheels only on a NEW LAW (not a restatement); the identified gap is a COMBINATORIAL wheel (contact-graph enumeration for tier 1) \u2014 physical-dynamic proposals cannot fill it; grow the \u00a3 law list beyond 22 only when a new law class enters (the generator's input list, not the wheel count, is the binding constraint)"
+ },
+ "run20_evidence_files": [
+  "workspace/push/root_probe.json (near-miss diagnosis)",
+  "workspace/push/boundary_scan.json (RSA prior, 9 levels, 0 finds)",
+  "workspace/push/lattice_scan.json (lattice/LT prior, 5 cells, 0 finds)",
+  "workspace/push/fine_probe.json (the stall law at fine deltas)",
+  "workspace/push/template_sweep.json (structured template coverage)",
+  "workspace/push/root_analysis.json (score arithmetic + ratios)"
+ ],
+ "template_sweep": {
+  "attempts": 132,
+  "finds": 0,
+  "best_f_by_cell": {
+   "n12_d0.001": 4.5045572477486497e-07
+  }
+ }
+}

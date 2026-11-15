@@ -1,0 +1,53 @@
+=== 01_grid_baseline ===
+OUTPUT:
+PERFECT_SQUARES=31
+GRID_SCORE_INT=28
+GRID_SCORE_TAIL=937669916550583041
+GRID_SCORE_DIGITS=28937669
+CROSSCHECK_OK=1
+FINAL: 'CROSSCHECK_OK=1'
+
+=== 02_known_results ===
+OUTPUT:
+GOEBEL_MATCH=1
+GOEBEL_WINS=7
+PROVEN_TABLE_OK=1
+NAGAMOCHI_NO_WIN=60
+BKB_BEATS_GRID=33
+FINAL: 'BKB_BEATS_GRID=33'
+
+=== 04_verify_packing ===
+OUTPUT:
+CHECKED=31
+CERTIFIED=31
+TOL=1e-09
+FINAL: 'TOL=1e-09'
+
+=== 05_cent_patterns ===
+OUTPUT:
+CASCADE_GENERATED=29
+CASCADE_CHECKED=57
+TWO_PATH_COUNTS_OK=1
+FINAL: 'TWO_PATH_COUNTS_OK=1'
+
+=== 06_scorecard ===
+OUTPUT:
+IMPROVED_PUZZLES=30
+GRID_TOTAL=28.937670
+OURS_TOTAL=28.350038
+IMPROVEMENT=0.587631
+ROWS=500500
+  n=5: grid L=3 -> ours L=2.800000
+  n=10: grid L=4 -> ours L=3.800000
+  n=17: grid L=5 -> ours L=4.800000
+  n=26: grid L=6 -> ours L=5.800000
+  n=37: grid L=7 -> ours L=6.800000
+  n=50: grid L=8 -> ours L=7.800000
+  n=65: grid L=9 -> ours L=8.800000
+  n=82: grid L=10 -> ours L=9.800000
+  n=101: grid L=11 -> ours L=10.800000
+  n=122: grid L=12 -> ours L=11.800000
+  n=145: grid L=13 -> ours L=12.800000
+  n=170: grid L=14 -> ours L=13.800000
+FINAL: 'n=170: grid L=14 -> ours L=13.800000'
+

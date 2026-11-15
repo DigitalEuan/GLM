@@ -1,0 +1,70 @@
+{
+ "rows": [
+  {
+   "n": 5,
+   "start": 3.0,
+   "target": 2.707106782448,
+   "recovered_L": 3.0,
+   "hit": false,
+   "ok": true
+  },
+  {
+   "n": 6,
+   "start": 3.0,
+   "target": 3.000000001334,
+   "recovered_L": 3.0,
+   "hit": true,
+   "ok": true
+  },
+  {
+   "n": 7,
+   "start": 3.0,
+   "target": 3.000000001334,
+   "recovered_L": 3.0,
+   "hit": true,
+   "ok": true
+  },
+  {
+   "n": 10,
+   "start": 4.0,
+   "target": 3.707106782648,
+   "recovered_L": 4.0,
+   "hit": false,
+   "ok": true
+  },
+  {
+   "n": 13,
+   "start": 4.0,
+   "target": 4.0000000015,
+   "recovered_L": 4.0,
+   "hit": true,
+   "ok": true
+  },
+  {
+   "n": 17,
+   "start": 5.0,
+   "target": 4.675530095176001,
+   "recovered_L": 5.0,
+   "hit": false,
+   "ok": true
+  },
+  {
+   "n": 20,
+   "start": 5.0,
+   "target": 5.0000000016,
+   "recovered_L": 5.0,
+   "hit": true,
+   "ok": true
+  },
+  {
+   "n": 26,
+   "start": 6.0,
+   "target": 5.621320345204103,
+   "recovered_L": 6.0,
+   "hit": false,
+   "ok": true
+  }
+ ],
+ "recovered": 4,
+ "of": 8
+}

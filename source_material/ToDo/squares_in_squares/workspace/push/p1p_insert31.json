@@ -1,0 +1,328 @@
+{
+ "cells": [
+  {
+   "arm": "A",
+   "n": 356,
+   "K": 19,
+   "pattern": "center+axialring",
+   "seed_group": "D4",
+   "delta": 0.01,
+   "L_t": 18.99,
+   "seed_measure": {
+    "C": 1300,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.992190126,
+   "secs": 92.0
+  },
+  {
+   "arm": "A",
+   "n": 356,
+   "K": 19,
+   "pattern": "center+axialring",
+   "seed_group": "D4",
+   "delta": 0.08,
+   "L_t": 18.92,
+   "seed_measure": {
+    "C": 1300,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.93858714,
+   "secs": 94.7
+  },
+  {
+   "arm": "A",
+   "n": 356,
+   "K": 19,
+   "pattern": "center+diagring",
+   "seed_group": "D4",
+   "delta": 0.01,
+   "L_t": 18.99,
+   "seed_measure": {
+    "C": 1296,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.992107966,
+   "secs": 82.1
+  },
+  {
+   "arm": "A",
+   "n": 356,
+   "K": 19,
+   "pattern": "center+diagring",
+   "seed_group": "D4",
+   "delta": 0.08,
+   "L_t": 18.92,
+   "seed_measure": {
+    "C": 1296,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.936578543,
+   "secs": 96.5
+  },
+  {
+   "arm": "A",
+   "n": 356,
+   "K": 19,
+   "pattern": "center+corners",
+   "seed_group": "D4",
+   "delta": 0.01,
+   "L_t": 18.99,
+   "seed_measure": {
+    "C": 1312,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.992640618,
+   "secs": 84.9
+  },
+  {
+   "arm": "A",
+   "n": 356,
+   "K": 19,
+   "pattern": "center+corners",
+   "seed_group": "D4",
+   "delta": 0.08,
+   "L_t": 18.92,
+   "seed_measure": {
+    "C": 1312,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.938135486,
+   "secs": 92.9
+  },
+  {
+   "arm": "A",
+   "n": 395,
+   "K": 20,
+   "pattern": "diag1+ring1",
+   "seed_group": "Cs",
+   "delta": 0.01,
+   "L_t": 19.99,
+   "seed_measure": {
+    "C": 1448,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 19.992008499,
+   "secs": 100.5
+  },
+  {
+   "arm": "A",
+   "n": 395,
+   "K": 20,
+   "pattern": "diag1+ring1",
+   "seed_group": "Cs",
+   "delta": 0.08,
+   "L_t": 19.92,
+   "seed_measure": {
+    "C": 1448,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 19.936544849,
+   "secs": 110.8
+  },
+  {
+   "arm": "A",
+   "n": 395,
+   "K": 20,
+   "pattern": "diag2+ring2",
+   "seed_group": "Cs",
+   "delta": 0.01,
+   "L_t": 19.99,
+   "seed_measure": {
+    "C": 1443,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 19.991919773,
+   "secs": 97.8
+  },
+  {
+   "arm": "A",
+   "n": 395,
+   "K": 20,
+   "pattern": "diag2+ring2",
+   "seed_group": "Cs",
+   "delta": 0.08,
+   "L_t": 19.92,
+   "seed_measure": {
+    "C": 1443,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 19.935892968,
+   "secs": 111.3
+  },
+  {
+   "arm": "A",
+   "n": 355,
+   "K": 19,
+   "pattern": "vpair+axialring",
+   "seed_group": "D2",
+   "delta": 0.01,
+   "L_t": 18.99,
+   "seed_measure": {
+    "C": 1288,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.992017177,
+   "secs": 85.6
+  },
+  {
+   "arm": "A",
+   "n": 355,
+   "K": 19,
+   "pattern": "vpair+axialring",
+   "seed_group": "D2",
+   "delta": 0.08,
+   "L_t": 18.92,
+   "seed_measure": {
+    "C": 1288,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.936071311,
+   "secs": 95.4
+  },
+  {
+   "arm": "A",
+   "n": 355,
+   "K": 19,
+   "pattern": "c2pair+diagring",
+   "seed_group": "D2",
+   "delta": 0.01,
+   "L_t": 18.99,
+   "seed_measure": {
+    "C": 1284,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.992020443,
+   "secs": 87.2
+  },
+  {
+   "arm": "A",
+   "n": 355,
+   "K": 19,
+   "pattern": "c2pair+diagring",
+   "seed_group": "D2",
+   "delta": 0.08,
+   "L_t": 18.92,
+   "seed_measure": {
+    "C": 1284,
+    "g": 0,
+    "phi": 0.0,
+    "NRCI": 1.0,
+    "regime": "onBit"
+   },
+   "hard": 0,
+   "best_extent": 18.936008102,
+   "secs": 95.3
+  },
+  {
+   "arm": "B",
+   "n": 356,
+   "K": 19,
+   "seed_n": 344,
+   "seed_L": 18.99272781125,
+   "need": 12,
+   "inserted": 0,
+   "clearance_last": null,
+   "seed_measure": {
+    "C": 800,
+    "g": 151,
+    "phi": 0.18875,
+    "NRCI": 0.145262,
+    "regime": "subcoherent"
+   },
+   "secs": 0.1
+  },
+  {
+   "arm": "B",
+   "n": 395,
+   "K": 20,
+   "seed_n": 382,
+   "seed_L": 19.987621155865,
+   "need": 13,
+   "inserted": 0,
+   "clearance_last": null,
+   "seed_measure": {
+    "C": 1075,
+    "g": 156,
+    "phi": 0.145116,
+    "NRCI": 0.141264,
+    "regime": "subcoherent"
+   },
+   "secs": 0.1
+  },
+  {
+   "arm": "B",
+   "n": 355,
+   "K": 19,
+   "seed_n": 344,
+   "seed_L": 18.99272781125,
+   "need": 11,
+   "inserted": 0,
+   "clearance_last": null,
+   "seed_measure": {
+    "C": 800,
+    "g": 151,
+    "phi": 0.18875,
+    "NRCI": 0.145262,
+    "regime": "subcoherent"
+   },
+   "secs": 0.1
+  }
+ ],
+ "finds": [],
+ "note_B_rerun": "3 arm-B cells dropped: bad seed rule (smallest-L record); fixed to largest sub-K m below aim",
+ "note_B_rerun2": "arm-B cells re-run again: acceptance bug (pen=0 tangency rejected); fixed to pen<=1e-9",
+ "note_B_rerun3": "arm-B container fix: centers at 0.25 put edges outside [0,L] by 0.25; centers now in [0.5, L-0.5]"
+}

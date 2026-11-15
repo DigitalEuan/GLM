@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 23, 2024, by removing an "L" from the s(203) he found, and then enlarging the enclosing square just enough to fit.
+    Improved by David Elllsworth on December 24, 2024, by choosing a different slice and removing the need for the enlargement.
+    It is also perfectly diagonally mirror symmetric now, like s(208).
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "13.77817459305202276840928798315"> <!-- 6 + Sqrt[2]*11/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g transform="translate(&s;) scale(-1 1)">
+        <g id="side1">
+            <path style="stroke:none" d="M5,0 V1 H4 V2 H3 V3 H2 V4 H1 V7 H0 V0"/>
+            <path style=  "fill:none" d="M5,0 V1 H0
+                                         M4,0 V2 H0
+                                         M3,0 V3 H0
+                                         M2,0 V4 H0
+                                         M1,5    H0
+                                         M1,6    H0
+                                         M1,0 V7 H0"/>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s; &s;) rotate(90) scale(-1 1)"/>
+        <g transform="translate(&s;) scale(-1 1)">
+            <path style="stroke:none" d="M4,0 V1 H3 V2 H2 V3 H1 V4 H0 V0"/>
+            <path style=  "fill:none" d="M4,0 V1 H0
+                                         M3,0 V2 H0
+                                         M2,0 V3 H0
+                                         M1,0 V4 H0"/>
+        </g>
+        <g transform="translate(0 &s;) scale(1 -1)">
+            <path style="stroke:none" d="M6,0 V1 H5 V2 H4 V3 H3 V4 H2 V5 H1 V6 H0 V0"/>
+            <path style=  "fill:none" d="M0,1 H6 V0
+                                         M0,2 H5 V0
+                                         M0,3 H4 V0
+                                         M0,4 H3 V0
+                                         M0,5 H2 V0
+                                         M0,6 H1 V0"/>
+        </g>
+        <g transform="scale(.5) translate(&s; &s;) translate(1 -1) scale(2) rotate(45) translate(-5.5 -5.5)">
+            <g transform="translate(1.5 10)">
+                <path d="M0,0 V1 H8 V0"/>
+                <path style="fill:none" d="M1,0 V1
+                                           M2,0 V1
+                                           M3,0 V1
+                                           M4,0 V1
+                                           M5,0 V1
+                                           M6,0 V1
+                                           M7,0 V1"/>
+            </g>
+            <g>
+                <path d="M0,2 H1 V1 H2 V0 H9 V1 H10 V2 H11 V9 H10 V10 H1 V9 H0 Z"/>
+                <path style="fill:none" d="M1,2 H10 V9 H1 Z
+                                           M0,3 H11
+                                           M0,4 H11
+                                           M0,5 H11
+                                           M0,6 H11
+                                           M0,7 H11
+                                           M0,8 H11
+                                           M2,1 H9
+                                           M2,1 V10
+                                           M3,0 V10
+                                           M4,0 V10
+                                           M5,0 V10
+                                           M6,0 V10
+                                           M7,0 V10
+                                           M8,0 V10
+                                           M9,1 V10"/>
+            </g>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

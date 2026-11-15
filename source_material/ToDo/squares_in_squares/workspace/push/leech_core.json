@@ -1,0 +1,100 @@
+{
+ "golay": {
+  "words": 4096,
+  "weight_distribution": {
+   "0": 1,
+   "8": 759,
+   "12": 2576,
+   "16": 759,
+   "24": 1
+  },
+  "octads": 759
+ },
+ "leech": {
+  "kissing": 196560,
+  "shapes": {
+   "1104": 1104,
+   "97152": 97152,
+   "98304": 98304
+  },
+  "determinant": 1.0,
+  "min_norm": 4
+ },
+ "tower": [
+  {
+   "dim": 1,
+   "name": "Lambda1 = 2Z",
+   "kissing": 2,
+   "source": "verified"
+  },
+  {
+   "dim": 2,
+   "name": "Lambda2 = A2 (hex)",
+   "kissing": 6,
+   "source": "verified"
+  },
+  {
+   "dim": 3,
+   "name": "Lambda3 = D3 (fcc)",
+   "kissing": 12,
+   "source": "verified"
+  },
+  {
+   "dim": 4,
+   "name": "Lambda4 = D4",
+   "kissing": 24,
+   "source": "verified"
+  },
+  {
+   "dim": 8,
+   "name": "Lambda8 = E8",
+   "kissing": 240,
+   "source": "verified"
+  },
+  {
+   "dim": 16,
+   "name": "Lambda16 (D16+)",
+   "kissing": 7320,
+   "source": "cited: SPLAG / laminated-lattice literature"
+  },
+  {
+   "dim": 24,
+   "name": "Lambda24 = Leech",
+   "kissing": 196560,
+   "source": "verified (this run)"
+  }
+ ],
+ "projection_law": {
+  "4": {
+   "subsets": 10626,
+   "index_histogram": {
+    "1": 10626
+   }
+  },
+  "5": {
+   "subsets": 42504,
+   "index_histogram": {
+    "1": 42504
+   }
+  },
+  "6": {
+   "subsets": 134596,
+   "index_histogram": {
+    "1": 134596
+   }
+  },
+  "7": {
+   "subsets": 346104,
+   "index_histogram": {
+    "1": 346104
+   }
+  },
+  "8": {
+   "subsets": 735471,
+   "index_histogram": {
+    "1": 734712,
+    "2": 759
+   }
+  }
+ }
+}

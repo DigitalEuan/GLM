@@ -1,0 +1,58 @@
+{
+ "run": 28,
+ "date": "2026-11-06",
+ "user_request": "review the SAT data for any insight there",
+ "executed": {
+  "instrument": {
+   "status": "built + run (scripts/sat_review.py)",
+   "file": "workspace/push/sat_review28.json",
+   "measured": {
+    "packings": 1000,
+    "SAT_clean": "max_overlap <= 1e-9 every row",
+    "total_pair_contacts": 1806403,
+    "total_binding_wall_touches": 75882,
+    "validation": "n=50 decode cross-check: 105 contacts, exact match with the run-26 decode"
+   }
+  },
+  "insight_1_contact_language": {
+   "status": "measured",
+   "finding": "99% of the table's contacts are parallel: 51.5% 2-tight (parallel edge / non-parallel corner), 47.5% 4-tight (parallel corner), 1.0% generic (1-tight), 3-tight structurally empty. run18-frontier \u2014 the record class \u2014 is the outlier at 8% generic, ratio median 1.057 vs 1.2+ everywhere else",
+   "action": "P1' constructions should seek generic (non-parallel) contact structures; the parallel languages of P1(a)/(b) are measured dead ends"
+  },
+  "insight_2_T263_floaters": {
+   "status": "measured",
+   "finding": "n=299/334/371 (the T-263 import + chain) each carry 41 free squares (no pair contact, no wall touch) at Maxwell ratio 0.68 \u2014 the most slack in the table. The 41 are identical across the family (chain children inherit them); quasi-contacts at median gap 0.0035; wall distance up to 6.46. Imported AFTER the P2 polish campaign; never polish-seeded",
+   "action": "P2 renewed for exactly this family (\u00a72a.2): seed the LP/annealer from the register states, floaters free, settle with contact-graph re-breaking"
+  },
+  "insight_3_grid_rigidity": {
+   "status": "measured",
+   "finding": "the 546 grid rows have nearest non-contact gap exactly 1.0 (a full empty cell) \u2014 P2's 0-finds there are now a measured statement, not an anecdote"
+  },
+  "insight_4_T083_bound": {
+   "status": "checked, no new floors",
+   "finding": "Karaku\u015f T-083 rectangle bound s(N) >= 1/2 + sqrt(N - floor(sqrt(N)) + 1/4) (nonsquare 8..324): 0 violations against our sub-grid L; it implies grid-optimality only on the c=1 diagonal (k^2-1, already T-084) \u2014 no new proven floors, but the right certificate shape if it ever extends past 324"
+  },
+  "insight_5_register_still_grid": {
+   "status": "checked",
+   "finding": "the register's best-known is still grid at every top aim (250/251/284/191/190: side '16.0/17.0/14.0', finder '-') \u2014 nobody upstream has beaten the mid-band either"
+  },
+  "retraction": {
+   "status": "corrected in NEXT_STEPS (\u00a72 note, failure 13)",
+   "finding": "the tier-1 verification report's old 'theorem s(6)=3' line is NOT backed by the register: n=6 appears only in restricted-optimality rows (T-261/T-124, local-minima searches, C1/C0). s(6)=3 stays a conjecture by our classification; n=6 remains a legal (low-value) aim"
+  },
+  "NEXT_STEPS_update": {
+   "status": "updated to Run-28 state",
+   "changes": "new \u00a72a (the SAT data reviewed); failure 13 (citations must name a register row); P2 renewed for the T-263 family; P1' updated with the generic-contact guidance; \u00a70 status table + run-28 entry"
+  }
+ },
+ "score": {
+  "before": 22.819977568,
+  "after": 22.819977568,
+  "delta": 0.0
+ },
+ "next": [
+  "P2 re-run aimed at the T-263 family (299/334/371): 41 floaters at ratio 0.68, the one place the record-holder's engine and our finisher could meet",
+  "P1' insertion campaign at 251/250/284/191, seeking generic contact structures (\u00a72a.1); read the 2026-11-03 preprint first",
+  "P3 weekly watch (the only item that has paid)"
+ ]
+}

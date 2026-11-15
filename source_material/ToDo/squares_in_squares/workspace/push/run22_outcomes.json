@@ -1,0 +1,89 @@
+{
+ "run": 22,
+ "date": "2026-11-05",
+ "user_request": "continue the project; try soft relaxation",
+ "method": {
+  "v1_sa_only": "SA hot/cold hops, 20k moves \u2014 uniformly underpowered: 0/16 hard hops on all 8 cells INCLUDING the controls (packings exist); kept as soft_relax_v1_sa.json",
+  "v2_hybrid": "SA hot shuffle (overlaps allowed \u2014 pass-through homotopy, t0 0.30/0.45) + settle_to (L-BFGS-B, ftol 1e-14) re-hardening; a hop is HARD when P.verify worst_pen <= -1e-10; its value is the state's own extent (may exceed L_t)"
+ },
+ "results_v2": {
+  "cells": [
+   {
+    "cell": "control n=5 tight",
+    "target": 2.7081067809999997,
+    "hard_hops": 4,
+    "hard_rate": "4/16",
+    "verified": 2.708107406673
+   },
+   {
+    "cell": "control n=5 loose",
+    "target": 2.7571067809999996,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   },
+   {
+    "cell": "control n=11 tight",
+    "target": 3.8780835899999997,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   },
+   {
+    "cell": "control n=11 loose",
+    "target": 3.9270835899999996,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   },
+   {
+    "cell": "root n=12 near",
+    "target": 3.998,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   },
+   {
+    "cell": "root n=12 far",
+    "target": 3.98,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   },
+   {
+    "cell": "root n=20 near",
+    "target": 4.998,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   },
+   {
+    "cell": "root n=20 far",
+    "target": 4.98,
+    "hard_hops": 0,
+    "hard_rate": "0/16",
+    "verified": null
+   }
+  ],
+  "finds": [
+   {
+    "n": 5,
+    "grid": 3,
+    "verified_L": 2.708107406673,
+    "target": 2.7081067809999997
+   }
+  ]
+ },
+ "readings": [
+  "METHOD VALIDATED: control n=5 tight \u2014 4/16 hard hops, VERIFIED 2.708107407 (the pinwheel arrangement, 0.293 below grid).  The soft pass-through DOES find below-grid packings where they exist.",
+  "The soft channel is gap-throttled: at target+0.001 it worked (4/16); at target+0.05 it returned 0/16 \u2014 a loose container lets overlaps persist through polish instead of forcing hard-feasibility.  Soft relaxation needs a TIGHT target to generate the pressure that re-hardens the state.",
+  "n=11 (gap 0.122 below grid 4): 0/16 both cells \u2014 at this budget the container pressure at 3.878..3.927 is insufficient.  Not a verdict on existence (the packing EXISTS, literature); a verdict on budget: needs more hops/moves or a tighter schedule.",
+  "ROOTS n=12, n=20 (below grid, packings expected NOT to exist): 0/16 in all four cells \u2014 consistent with runs 20/21 (stall law, boundary demo, atlas).  The soft channel joins the unanimous set."
+ ],
+ "score_impact": null,
+ "next": [
+  "n=11 retry with hop budget x8 and interleaved tighter L_t steps (target+0.001 down to target in 5e-4 decrements)",
+  "tier-1 infeasibility proof for n=12 (theorem) \u2014 the real remaining puzzle",
+  "level-0 polish: we already match/beat the atlas on all 114 rows (net -0.77), so the roots ARE the puzzle"
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "run": 31,
+ "date": "2026-11-06",
+ "user_request": "Continue this Squares in Squares project - see NEXT_STEPS.md. My input is that many optimal grids are symmetrical and efficient.",
+ "executed": {
+  "symmetry_review": {
+   "status": "done (user input as measured hypothesis)",
+   "instrument": "scripts/symmetry_audit.py",
+   "ledger": "workspace/push/symmetry_audit31.json",
+   "measured": {
+    "method": "D4 census, 8 elements about the bbox center (rotations leave theta mod pi/2; reflections map theta -> -theta); matched-distance per element at 1e-6; joined with recomputed SAT measures (C, g, phi, NRCI), depth, class, status",
+    "constructions_symmetric": "gobel2/gobelS 100% (D2/D4), chain3 76%, exact 71%, closure 72%",
+    "records_asymmetric": "mishapolk 0% (209/209 C1, distance-to-symmetry >= 0.1), run18-frontier 5%, register (T-263) C1",
+    "tied_vs_sub": "15.3% vs 37.6% - storage artifact (stored tied states are tail-drop grids; canonical symmetric arrangements exist for every tied row)",
+    "correlations": "G~depth +0.31, G~C/n +0.32 (weak, carried by class structure); depth~phi +0.14 on the run-30 table (was -0.61 frontier-only in run 29; the Mishapolk import added asymmetric deep rows) - see failure 15",
+    "grid_C_validated": "edge+corner contacts: n=356 C=1313 = 674 edge + 639 corner; C/n 3.600 class mean"
+   }
+  },
+  "p1p_campaign": {
+   "status": "closed by null (17 cells, 0 finds)",
+   "instrument": "scripts/p1p_insert31.py",
+   "ledger": "workspace/push/p1p_insert31.json",
+   "measured": {
+    "aims": "356 (c=32), 395 (c=34), 355 (c=31) - the refreshed top aims",
+    "upstream_check": "Mishapolk's verified best at every aim = integer square grid; aims open upstream too",
+    "arm_A": "symmetric canonical seeds (D4/D2/Cs hole orbits in the KxK lattice; 7 patterns x 2 deltas = 14 cells), ramp_settle + 3 anneal cycles, finalize gate; 14/14 null (0 hard, soft ~2e-3 above L_t); seed groups confirmed in-ledger by the census",
+    "arm_B": "record-seeded greedy max-clearance axis-aligned insertion at L(seed); 3/3 null after 3 bug fixes, each caught by a synthetic sanity test (grid with known holes): seed rule (smallest-L record -> largest sub-K m below aim), tangency acceptance (pen=0 legal), container bounds (centers in [0.5, L-0.5])",
+    "arm_B_null_is_structural": "best first-candidate overlap +0.257 at n=344; free area 16.7 fragmented across 51 orientations - a thin seam, not +1-voided grids; matches Karimi's +8-per-K jumps (no +1 route at fixed L)",
+    "two_phase_prediction": "stands untested at the aims - no improvement was found to measure phi on"
+   }
+  },
+  "NEXT_STEPS_update": {
+   "status": "updated to the Run-31 state",
+   "changes": "new section 2c (the symmetry review); P1' closed by null; failures 14 (greedy needs a synthetic recovery test) and 15 (correlations carry their row set); section 6 entry 7"
+  }
+ },
+ "score": {
+  "before": 22.645990613,
+  "after": 22.645990613,
+  "delta": -0.0
+ },
+ "beats_grid": 543,
+ "next": [
+  "P3 weekly (atlas + Mishapolk; the only item that has paid)",
+  "watch construction-only rows for certificates (n=261)",
+  "the aims 356/395/355 stay open - only an imported record can claim them now"
+ ]
+}

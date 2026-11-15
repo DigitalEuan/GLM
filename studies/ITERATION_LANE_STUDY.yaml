@@ -1,0 +1,92 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 14 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 8 usable CPUs, the defaults now following them; 8 cases in 8.9 s at `--jobs 8` against
+  64.4 s at `--jobs 1`; the evaluation 237 of 237 in 248 s; the cheap lane about 35 s for `corpus --check`
+  and 20 s for a touched test file.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - corpus/study_manifest.py
+  - evaluation/harness.py
+  - figures.py
+  - lean_check.py
+  lean: []
+  lean_held: []
+  lean_missing: []
+  missing: []
+  prose: ITERATION_LANE_STUDY.md
+  test:
+  - test_corpus.py
+  - test_figures.py
+  - test_repository_hygiene.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: ITERATION_LANE_STUDY
+junctions: []
+last_altered: 14 November 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - L1
+  - L2
+  - L3
+  - L4
+  met: []
+  missed: []
+perturbations: []
+phase: 188
+predecessors:
+- CHAT_SURFACE_STUDY
+question: A development round of this repository on this workspace cost most of a session in gates rather
+  than in work; which of that cost is real, which was the working method, and what can be done before
+  a full sign-off?
+recomputed_by: '`glm_universal.evaluation.harness.default_jobs`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-the-session-actually-cost
+  heading: 1. What the session actually cost
+- anchor: 2-the-lane
+  heading: 2. The lane
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-the-surfaces-other-refusal
+  heading: 4. The surface's other refusal
+- anchor: 5-what-came-out
+  heading: 5. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The iteration lane: what a round costs, which CPUs it may use, and what can be done before a close'
+verdict: 'Two thirds of it was method, not work. The machine offers eight CPUs, the working notes said
+  two and advised `--jobs 2`, and the evaluation''s default was four; measured, eight cases run 7.3× faster
+  at `--jobs 8` than at `--jobs 1`, and the whole evaluation takes 248 seconds at eight with the same
+  237 answers. The round''s cheap lane — `corpus --check`, the touched test files, `--only KIND`, `--case`
+  — costs about a minute and can carry most of a round, and the close has one correct order: every code
+  and document edit, then `figures --write`, then `corpus --refresh`, then the two answer censuses last,
+  then `corpus --check`.'
+wobble_deps: []

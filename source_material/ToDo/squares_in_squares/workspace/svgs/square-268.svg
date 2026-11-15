@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on November 30, 2024, with exact polynomial root solution, based on the s(70) found by Joe DeVincentis in April 2014.
+    Improved by David W. Cantrell on February 9, 2025, with exact polynomial root solution.
+    Exact polynomial root solution reconstructed by David Ellsworth on January 7, 2026.
+    Improved by Grigoriy Dyachkov on September 10, 2026, working with Claude Opus 5 and Claude Fable 5.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "16.87931143465371185398163397447013">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <g id="side1">
+            <path style="stroke:none" d="M14,0 V 1 H13 V2 H12 V3 H11 V4 H10 V5 H9 V6 H8 V7 H7 V8 H6 V9 H5 V10 H4 V11 H3 V12 H2 V13 H1 V14 H0 V0"/>
+            <path style=  "fill:none" d="M14,0 V 1 H0
+                                         M13,0 V 2 H0
+                                         M12,0 V 3 H0
+                                         M11,0 V 4 H0
+                                         M10,0 V 5 H0
+                                         M 9,0 V 6 H0
+                                         M 8,0 V 7 H0
+                                         M 7,0 V 8 H0
+                                         M 6,0 V 9 H0
+                                         M 5,0 V10 H0
+                                         M 4,0 V11 H0
+                                         M 3,0 V12 H0
+                                         M 2,0 V13 H0
+                                         M 1,0 V14 H0"/>
+            <g transform="translate(&s;) scale(-1 1)">
+                <rect style="stroke:none" width="2" height="1"/>
+                <path style=  "fill:none" d="M2,0 V1 H0
+                                             M1,0 V1"/>
+            </g>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    </g>
+    <use xlink:href="#one" transform="translate(14.09467137592676330635571103615221   0.7631625153152079332499039665857259) rotate(  21.788094690450528)"/>
+    <use xlink:href="#one" transform="translate(15.02319441104803830635571103615221   1.134437367785480933249903966585726 ) rotate(  21.788094690450528)"/>
+    <use xlink:href="#one" transform="translate(15.95074846246188313809338863396243   1.508136312508213434255142775560404 ) rotate(  21.788094690450425)"/>
+    <use xlink:href="#one" transform="translate(13.2059265370356804216522047509987    1.484837036744757312651929472411018 ) rotate(  21.78809469045045 )"/>
+    <use xlink:href="#one" transform="translate(14.1344495721569554216522047509987    1.856111889215031312651929472411018 ) rotate(  21.78809469045045 )"/>
+    <use xlink:href="#one" transform="translate(15.0620036235708004216522047509987    2.229810833937765312651929472411018 ) rotate(  21.78809469045045 )"/>
+    <use xlink:href="#one" transform="translate(12.31718169814458910219336343188597   2.206511558174306020804217544852994 ) rotate(  21.78809469045051 )"/>
+    <use xlink:href="#one" transform="translate(13.2457047332658649887698369850714    2.577786410644578069445502866112615 ) rotate(  21.7880946904505  )"/>
+    <use xlink:href="#one" transform="translate(14.17325878467970930822867830418418   2.951485355367314361293214793670757 ) rotate(  21.78809469045044 )"/>
+    <use xlink:href="#one" transform="translate(11.36019108792638508365476366047604   3.092953912373859524739714951159032 ) rotate(  21.658184760936212)"/>
+    <use xlink:href="#one" transform="translate(12.35369550792712458365476366047604   3.300597846382369524739714951159032 ) rotate(  21.658184760936212)"/>
+    <use xlink:href="#one" transform="translate(13.28419413963618762581455235526485   3.673032040510446225097615894143536 ) rotate(  21.788094690450468)"/>
+    <use xlink:href="#one" transform="translate(10.93421268643483272163321051540241   4.000000063245445699094789628967716 ) rotate(  21.68985031469768 )"/>
+    <use xlink:href="#one" transform="translate(11.86341314754826612163321051540241   4.369576219066774099094789628967716 ) rotate(  21.68985031469768 )"/>
+    <use xlink:href="#one" transform="translate(12.85570415052499592163321051540241   4.580531046243285699094789628967716 ) rotate(  21.68985031469768 )"/>
+    <use xlink:href="#one" transform="translate(10.10143801249816914440052843801876   4.744966488070235956792154800171842 ) rotate(  21.689850314697832)"/>
+    <use xlink:href="#one" transform="translate(11.03063608398589645563519705334877   5.114548654156712184444079731030911 ) rotate(  21.689850314697683)"/>
+    <use xlink:href="#one" transform="translate(11.96014767372893178592149582929179   5.484248559889177644019103507466577 ) rotate(  21.690692579240622)"/>
+    <use xlink:href="#one" transform="translate(9.211861835565913327048654083852441   5.467340501524460693532113847581265 ) rotate(  21.689850314697804)"/>
+    <use xlink:href="#one" transform="translate(10.14105990705364163567492781227605   5.836922667610938391429881772295187 ) rotate(  21.689850314697743)"/>
+    <use xlink:href="#one" transform="translate(11.07025797854136871832305345810995   6.206504833697414928169840819705103 ) rotate(  21.689850314697715)"/>
+    <use xlink:href="#one" transform="translate(8.322285658633664795032761780281365   6.189714514978688210737793031075179 ) rotate(  21.68985031469778 )"/>
+    <use xlink:href="#one" transform="translate(9.251483730121390581613345135938892   6.559296681065167045601888608335862 ) rotate(  21.68985031469765 )"/>
+    <use xlink:href="#one" transform="translate(10.18068180160911893567492781227605   6.928878847151641291429881772295187 ) rotate(  21.689850314697743)"/>
+    <use xlink:href="#one" transform="translate(9.291322363909130241593479756475449   7.651339067463429192108987587704187 ) rotate(  21.68985031469762 )"/>
+    <use xlink:href="#one" transform="translate(8.345467716394373395668347106305255   7.3236346357534360369937324685395   ) rotate(  21.69082930747005 )"/>
+    <use xlink:href="#one" transform="translate(7.397993376088078228258214758659322   7.000000110106656939981491912690956 ) rotate(  21.690829307469947)"/>
+    <use xlink:href="#one" transform="translate(2.785688945595156029623635819032034  16.1135249345262214005682641398421   ) rotate(-158.21190530954925 )"/>
+    <use xlink:href="#one" transform="translate(1.857125958893492596741268053105797  15.74235002833585975736183753354618  ) rotate(-158.2119053095493  )"/>
+    <use xlink:href="#one" transform="translate(0.9285629721918275504353738403646556 15.37117512214550106279669624850908  ) rotate(-158.21190530954934 )"/>
+    <use xlink:href="#one" transform="translate(3.674433784486237029623635819032034  15.3918504130966690005682641398421   ) rotate(-158.21190530954925 )"/>
+    <use xlink:href="#one" transform="translate(2.745870797784572029623635819032034  15.0206755069063090005682641398421   ) rotate(-158.21190530954925 )"/>
+    <use xlink:href="#one" transform="translate(1.817307811082907029623635819032034  14.6495006007159510005682641398421   ) rotate(-158.21190530954925 )"/>
+    <use xlink:href="#one" transform="translate(4.563454230631017689353056478587673  14.66948640833920114649212010361942  ) rotate(-158.21190530954922 )"/>
+    <use xlink:href="#one" transform="translate(3.634615636675657689353056478587673  14.29900098547676414649212010361942  ) rotate(-158.21190530954922 )"/>
+    <use xlink:href="#one" transform="translate(2.706052649973994029623635819032034  13.9278260792864030005682641398421   ) rotate(-158.21190530954925 )"/>
+    <use xlink:href="#one" transform="translate(5.518554902953950175596181962467359  13.78585822190368692876592380328605  ) rotate(-158.31604979612618 )"/>
+    <use xlink:href="#one" transform="translate(4.524862575444420010287773376677172  13.57560565991107500540962639832755  ) rotate(-158.25530205605799 )"/>
+    <use xlink:href="#one" transform="translate(3.594797488865070029623635819032034  13.2061515578568540005682641398421   ) rotate(-158.21190530954925 )"/>
+    <use xlink:href="#one" transform="translate(5.945083577850719864927760029958385  12.8793113714220554588242428757411   ) rotate(-158.30917069252988 )"/>
+    <use xlink:href="#one" transform="translate(5.015891821438467564927760029958385  12.5097133285177214588242428757411   ) rotate(-158.30917069252988 )"/>
+    <use xlink:href="#one" transform="translate(4.023585170728271264927760029958385  12.2987899501664429588242428757411   ) rotate(-158.30917069252988 )"/>
+    <use xlink:href="#one" transform="translate(6.777469987779418358201443643436171  12.13419967537790984949434729838045  ) rotate(-158.3091706925298  )"/>
+    <use xlink:href="#one" transform="translate(5.848278231367164318067231773759194  11.76460163247357812850208224931437  ) rotate(-158.30917069252962 )"/>
+    <use xlink:href="#one" transform="translate(4.919086474954911918067231773759194  11.39500358956924212850208224931437  ) rotate(-158.30917069252962 )"/>
+    <use xlink:href="#one" transform="translate(7.667037887009208264927760029958385  11.4118326597873260588242428757411   ) rotate(-158.30917069252988 )"/>
+    <use xlink:href="#one" transform="translate(6.737846130596948398000125838919671  11.04223461688299716800594972477892  ) rotate(-158.30917069252953 )"/>
+    <use xlink:href="#one" transform="translate(5.808654374184698798000125838919671  10.67263657397866116800594972477892  ) rotate(-158.30917069252953 )"/>
+    <use xlink:href="#one" transform="translate(8.556999642634923231631707771534492  10.68962230623753501465542761159086  ) rotate(-158.30917069252993 )"/>
+    <use xlink:href="#one" transform="translate(7.627414029826760424905391385012618  10.31986760129241940532553203423101  ) rotate(-158.30917069252985 )"/>
+    <use xlink:href="#one" transform="translate(6.698222273414501338022494483866255   9.950269558388088421504660566290912 ) rotate(-158.30917069252956 )"/>
+    <use xlink:href="#one" transform="translate(7.587790172644314391721182351316279   9.227902542797509868650270977628275 ) rotate(-158.30917069253005 )"/>
+    <use xlink:href="#one" transform="translate(8.535463377623856921654076416480053   9.551616169725477318154138453100484 ) rotate(-158.30917069252996 )"/>
+    <use xlink:href="#one" transform="translate(9.481340932832574512388154217994681   9.879311324533267061872646386765943 ) rotate(-158.31014968530238 )"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

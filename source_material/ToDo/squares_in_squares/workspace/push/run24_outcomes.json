@@ -1,0 +1,75 @@
+{
+ "run": 24,
+ "date": "2026-11-05",
+ "user_request": "'NEXT_STEPS.md' has been updated since run 13, can we see if there are things we can do in there to help this grid puzzle project? - push on as logical.",
+ "input": "upload/NEXT_STEPS.md (2026-11-04 22:35 delivery bundle)",
+ "attribution_correction": {
+  "issue": "run-23 README/final reply claimed the Nov-5 08:03 table write (22.887471 -> 22.823536, -0.0639) was 'run 19's application of 6 run18-frontier rows'.",
+  "correct_record": "git + leech cross-check: the 08:03 write applied 109 rows ALL tagged run18-frontier = the community import (76 records, +0.050264) + the cascade propagation (33 conversions, +0.013671), total +0.063934787 \u2014 exactly NEXT_STEPS \u00a76's run-13 session. The 6 rows my run-23 reply cited (183, 211, 308, 343, 380, 419) are 6 of the 109 (the only ones below their grid), not the whole delta. The leech 'atlas' (08:02) is a snapshot of our own table pre-write, so 'beat the atlas' was circular \u2014 already retracted in run 23.",
+  "applies_to": "README.md Run 23 section (corrected by this run's section) and the leech_map.json reading of run 23."
+ },
+ "executed": {
+  "P3_source_watch": {
+   "local_lists": "import_atlas.py re-run: idempotent \u2014 applied 0, skipped 4 (table already <= atlas), rejected 320; table is exactly at the certified frontier n<=324",
+   "live_register": "github.com/evand/square-packing checked 2026-11-05: no record changes visible after 2026-10-17 (page snapshot predates; no commit dates shown for lists/)",
+   "gained_bounds": {
+    "proven_optimal_at_grid": {
+     "13": 4,
+     "21": 5,
+     "32": 6,
+     "45": 7,
+     "60": 8,
+     "61": 8
+    },
+    "families": "s(k^2-3)=k (k>=6), s(k^2-4)=k (k>=5) \u2014 proven",
+    "lower_bound": "s(12) >= 15680/3951 = 3.9686 (proven; grid 4 row now has a certified gap of only 0.0314)",
+    "note": "the 6 at-grid rows above are now PROVEN optimal at the trivial grid \u2014 excluded from all future sweeps; their src stays 'grid' and they leave the open set"
+   }
+  },
+  "P2_family_seeded_polish": {
+   "status": "executed (this run) \u2014 the open experiment",
+   "design": "26 rows (best per-n design from the gobel5 near-miss pool, gap<=0.002, minus the 6 proven-optimal) x targets (grid-0.0005, grid-0.002) x 2 seeds x 8 hops; the seed is the REBUILT gobel5 corner-band family state (verified count + extent + non-overlap), the hop loop and anneal streams identical to soft_relax.hop_search \u2014 the A/B against run 23 differs ONLY in the initial state",
+   "rebuild_gate": "26/26 seeds rebuilt ok; gate fixed to worst_pen <= 1e-9 (exact-geometry states show +4e-16 float artifacts, not overlaps)",
+   "cells": 45,
+   "hard_checks": 0,
+   "finds": 0,
+   "rows": [
+    12,
+    20,
+    30,
+    31,
+    42,
+    43,
+    44,
+    56,
+    57,
+    58,
+    59,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    90,
+    91,
+    111,
+    112,
+    133,
+    134
+   ],
+   "reading": ""
+  },
+  "P4_fixpoint": "cascade3 + closure_apply re-run to fixpoint after the sweep (mandatory loop order; no-change confirmation included)",
+  "P1_decision": "generalized Gobel strip (w in {1,2,3}, two independent end staircases) NOT executed this run (budget); it stays the named next architecture, with the 8489-design near-miss pool as its seed map and the acceptance test n=44/58/31 unchanged"
+ },
+ "score": {
+  "before": 22.823536149,
+  "after": 22.823536149
+ },
+ "next": [
+  "P1 generalized Gobel strip sweep (the named architecture)",
+  "tier-1 infeasibility theorem for the small-n level-1 set (the empirical unanimity of runs 20-24 is now 4-run-deep)",
+  "weekly import_atlas re-run (the register moves; 76 records appeared in ~7 weeks)"
+ ]
+}

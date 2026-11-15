@@ -1,0 +1,190 @@
+{
+  "id": "W32",
+  "title": "Capillarity & Surface Phenomena",
+  "axioms": [
+    "pressure = surface_tension / capillary_radius",
+    "capillary_height = surface_tension * wetting_coefficient / (viscosity * capillary_radius)"
+  ],
+  "cases": [
+    {
+      "id": "W32-01",
+      "equation": "surface_tension = pressure * capillary_radius",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W32-02",
+      "equation": "capillary_radius = surface_tension / pressure",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W32-03",
+      "equation": "viscosity = surface_tension * wetting_coefficient / (capillary_height * capillary_radius)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W32-N1",
+      "equation": "pressure = capillary_radius / surface_tension",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "capillary_height",
+    "capillary_radius",
+    "pressure",
+    "surface_tension",
+    "viscosity",
+    "wetting_coefficient"
+  ],
+  "dimensions": {
+    "capillary_height": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "capillary_radius": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "pressure": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "surface_tension": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "viscosity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "wetting_coefficient": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

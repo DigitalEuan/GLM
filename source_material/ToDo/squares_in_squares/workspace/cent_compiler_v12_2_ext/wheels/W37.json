@@ -1,0 +1,210 @@
+{
+ "id": "W37",
+ "title": "Viscoelastic Settling (SciPy) \u2014 Maxwell creep and dissipation",
+ "axioms": [
+  "relaxation_time = viscosity / modulus",
+  "strain_rate = stress / viscosity",
+  "dissipated_power = stress * strain_rate"
+ ],
+ "cases": [
+  {
+   "id": "W37-01",
+   "equation": "viscosity = relaxation_time * modulus",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W37-02",
+   "equation": "stress = strain_rate * viscosity",
+   "expected_dimensional": true,
+   "expected_derivable": true,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": ""
+  },
+  {
+   "id": "W37-03",
+   "equation": "strain_rate = stress / modulus",
+   "expected_dimensional": true,
+   "expected_derivable": false,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "that is the elastic channel; the creep law divides by viscosity"
+  },
+  {
+   "id": "W37-04",
+   "equation": "dissipated_power = stress / strain_rate",
+   "expected_dimensional": true,
+   "expected_derivable": false,
+   "physical_status": "physically_supported",
+   "expected_dimensional_explicit": null,
+   "note": "dissipation is the product, not the quotient"
+  }
+ ],
+ "quantities": [
+  "stress",
+  "viscosity",
+  "modulus",
+  "strain_rate",
+  "relaxation_time",
+  "dissipated_power"
+ ],
+ "dimensions": {
+  "stress": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "viscosity": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "modulus": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "strain_rate": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "relaxation_time": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "dissipated_power": {
+   "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+   ],
+   "exponents": [
+    -1,
+    1,
+    -3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "junctions": [
+  {
+   "other_wheel": "W20",
+   "name_in_this_wheel": "modulus",
+   "name_in_other_wheel": "youngs_modulus",
+   "reason": "the piezo engine's stiffness feeds the settle's relaxation time"
+  },
+  {
+   "other_wheel": "W36",
+   "name_in_this_wheel": "stress",
+   "name_in_other_wheel": "pair_penetration",
+   "reason": "the settle converts SAT penetration into stress"
+  }
+ ],
+ "non_identities": [
+  {
+   "other_wheel": "W4",
+   "name": "relaxation_time",
+   "reason": "the flywheel's timescale is inertial (I/E), not viscous (eta/E); only the damped swing borrows the channel"
+  }
+ ]
+}

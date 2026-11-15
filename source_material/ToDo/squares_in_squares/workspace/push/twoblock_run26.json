@@ -1,0 +1,54 @@
+{
+ "run": 26,
+ "part": "P1(b) two-block / block+slab",
+ "family": "45deg m x m corner block (lower-left face on x+y=D) + maximal integer-lattice axis fill; L=(D+(3/2)sqrt2 m)/2, n=m^2+|cells|",
+ "designs": {
+  "enumerated": 763,
+  "verified_sample": 284
+ },
+ "domination": {
+  "min_gap_gridcap_minus_n": 0,
+  "at": {
+   "m": 1,
+   "D": 3,
+   "L": 2.5606601717798214,
+   "n": 4,
+   "grid_cap": 4,
+   "gap": 0
+  },
+  "designs_beating_grid_at_same_L": 0
+ },
+ "full_range": {
+  "rows": 1000,
+  "beats_grid_at": [],
+  "table_deeper": 1000,
+  "any_find": false
+ },
+ "acceptance": [
+  {
+   "n": 44,
+   "grid": 7,
+   "family_L": 7.060660171779821,
+   "capacity_ceiling_below_grid": 36,
+   "pass": false
+  },
+  {
+   "n": 58,
+   "grid": 8,
+   "family_L": 8.060660171779821,
+   "capacity_ceiling_below_grid": 49,
+   "pass": false
+  },
+  {
+   "n": 31,
+   "grid": 6,
+   "family_L": 6.060660171779821,
+   "capacity_ceiling_below_grid": 25,
+   "pass": false
+  }
+ ],
+ "finds": [],
+ "applied": false,
+ "score_before": 22.823536149138583,
+ "score_after": 22.823536149138583
+}

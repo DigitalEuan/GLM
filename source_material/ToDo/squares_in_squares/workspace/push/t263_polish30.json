@@ -1,0 +1,179 @@
+{
+ "cells": [
+  {
+   "n": 299,
+   "delta": 0.01,
+   "seed": 1,
+   "L_t": 17.791238535867,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 17.793734495,
+   "secs": 88.9
+  },
+  {
+   "n": 334,
+   "delta": 0.002,
+   "seed": 0,
+   "L_t": 18.799238537761003,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 18.799671381,
+   "secs": 95.2
+  },
+  {
+   "n": 334,
+   "delta": 0.005,
+   "seed": 0,
+   "L_t": 18.796238537761003,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 18.797270905,
+   "secs": 88.7
+  },
+  {
+   "n": 334,
+   "delta": 0.01,
+   "seed": 0,
+   "L_t": 18.791238537761,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 18.793528297,
+   "secs": 73.3
+  },
+  {
+   "n": 371,
+   "delta": 0.002,
+   "seed": 0,
+   "L_t": 19.799238537765,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 19.799619855,
+   "secs": 77.7
+  },
+  {
+   "n": 371,
+   "delta": 0.005,
+   "seed": 0,
+   "L_t": 19.796238537765,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 19.797236345,
+   "secs": 85.0
+  },
+  {
+   "n": 371,
+   "delta": 0.01,
+   "seed": 0,
+   "L_t": 19.791238537764997,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 19.793195141,
+   "secs": 80.4
+  },
+  {
+   "n": 299,
+   "delta": 0.002,
+   "seed": 0,
+   "L_t": 17.799238535867,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 17.799688224,
+   "secs": 63.0
+  },
+  {
+   "n": 299,
+   "delta": 0.002,
+   "seed": 1,
+   "L_t": 17.799238535867,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 17.799688224,
+   "secs": 59.8
+  },
+  {
+   "n": 299,
+   "delta": 0.005,
+   "seed": 0,
+   "L_t": 17.796238535867,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 17.797410674,
+   "secs": 61.9
+  },
+  {
+   "n": 299,
+   "delta": 0.005,
+   "seed": 1,
+   "L_t": 17.796238535867,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 17.797410674,
+   "secs": 62.0
+  },
+  {
+   "n": 299,
+   "delta": 0.01,
+   "seed": 0,
+   "L_t": 17.791238535867,
+   "hard_hops": 0,
+   "checks": 3,
+   "soft_best_extent": 17.793734495,
+   "secs": 61.9
+  }
+ ],
+ "baseline": {
+  "299": {
+   "L": 17.801238535867,
+   "C": 562,
+   "g": 57,
+   "phi": 0.10142348754448399,
+   "TAX": 22.211499533058035,
+   "NRCI": 0.31044813637866175,
+   "regime": "transitional",
+   "census": {
+    "tied_w2": 422,
+    "tied_w4": 83,
+    "gen_w1": 56,
+    "gen_w2": 1,
+    "gen_w3": 0,
+    "gen_w4": 0
+   }
+  },
+  "334": {
+   "L": 18.801238537761,
+   "C": 650,
+   "g": 57,
+   "phi": 0.0876923076923077,
+   "TAX": 22.211499533058035,
+   "NRCI": 0.31044813637866175,
+   "regime": "transitional",
+   "census": {
+    "tied_w2": 503,
+    "tied_w4": 90,
+    "gen_w1": 56,
+    "gen_w2": 1,
+    "gen_w3": 0,
+    "gen_w4": 0
+   }
+  },
+  "371": {
+   "L": 19.801238537765002,
+   "C": 787,
+   "g": 57,
+   "phi": 0.0724269377382465,
+   "TAX": 22.211499533058035,
+   "NRCI": 0.31044813637866175,
+   "regime": "transitional",
+   "census": {
+    "tied_w2": 573,
+    "tied_w4": 157,
+    "gen_w1": 56,
+    "gen_w2": 1,
+    "gen_w3": 0,
+    "gen_w4": 0
+   }
+  }
+ },
+ "finds": [],
+ "gate_note": "cells dropped 2026-11-06 and re-run: first 5 n=299 cells came from an orphaned process running the pre-patch strict-separation gate; replaced under the declared finalize gate"
+}

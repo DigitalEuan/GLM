@@ -1,0 +1,17 @@
+fail  n=11 L=3.97 E=2.561e-02 in 8s
+fail  n=12 L=3.97 E=1.530e-01 in 9s
+fail  n=13 L=3.97 E=2.150e-01 in 11s
+fail  n=18 L=4.97 E=4.369e-02 in 15s
+fail  n=19 L=4.97 E=9.109e-02 in 17s
+fail  n=20 L=4.97 E=2.981e-01 in 19s
+fail  n=21 L=4.97 E=4.106e-01 in 21s
+fail  n=22 L=4.97 E=7.058e-01 in 22s
+fail  n=23 L=4.97 E=8.328e-01 in 24s
+fail  n=27 L=5.97 E=1.181e-01 in 26s
+fail  n=28 L=5.97 E=2.658e-01 in 28s
+fail  n=29 L=5.97 E=3.494e-01 in 30s
+fail  n=30 L=5.97 E=5.453e-01 in 33s
+fail  n=31 L=5.97 E=7.444e-01 in 35s
+fail  n=32 L=5.97 E=1.082e+00 in 38s
+fail  n=33 L=5.97 E=1.061e+00 in 39s
+done

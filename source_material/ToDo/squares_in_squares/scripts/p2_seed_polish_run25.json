@@ -1,0 +1,105 @@
+{
+ "rebuilds": [
+  {
+   "n": 134,
+   "ok": true,
+   "count": 134,
+   "verify_L": 12.00130787,
+   "want": 12.001308,
+   "worst_pen": 8.881784197001252e-16
+  },
+  {
+   "n": 135,
+   "ok": true,
+   "count": 135,
+   "verify_L": 12.001838344,
+   "want": 12.001838,
+   "worst_pen": 8.881784197001252e-16
+  },
+  {
+   "n": 157,
+   "ok": true,
+   "count": 157,
+   "verify_L": 13.000000381,
+   "want": 13.0,
+   "worst_pen": 1.7763568394002505e-15
+  },
+  {
+   "n": 158,
+   "ok": true,
+   "count": 158,
+   "verify_L": 13.000000381,
+   "want": 13.0,
+   "worst_pen": 1.7763568394002505e-15
+  }
+ ],
+ "cells": [
+  {
+   "n": 134,
+   "grid": 12,
+   "target": 11.9995,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 134,
+   "grid": 12,
+   "target": 11.998,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 135,
+   "grid": 12,
+   "target": 11.9995,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 135,
+   "grid": 12,
+   "target": 11.998,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 157,
+   "grid": 13,
+   "target": 12.9995,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 157,
+   "grid": 13,
+   "target": 12.998,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 158,
+   "grid": 13,
+   "target": 12.9995,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  },
+  {
+   "n": 158,
+   "grid": 13,
+   "target": 12.998,
+   "hard_checks": 0,
+   "best_hard_L": null,
+   "verified": null
+  }
+ ],
+ "finds": [],
+ "applied": false,
+ "score_after": 22.823536149138583
+}

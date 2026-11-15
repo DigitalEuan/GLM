@@ -29,6 +29,8 @@ outcome is one of
 ``accuracy`` counts the first two as passes.  ``score`` is the weighted total
 divided by the number of cases, so a run that is right about everything scores
 ``1`` and a run that is confidently wrong about everything scores ``-1``.
+
+*Last altered 14 November 2026 (Phase 188: ``default_jobs`` -- the default worker count is the machine's usable CPUs, capped at 8; `studies/ITERATION_LANE_STUDY.md`).*
 """
 
 from __future__ import annotations
@@ -46,8 +48,9 @@ from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 from .cases import CASES, EvalCase, cases_by_kind
 
 __all__ = [
-    "CLI_PATH", "PACKAGE_ROOT", "OUTCOMES", "WEIGHTS",
-    "CaseResult", "run_case", "run_all", "evaluation_report", "format_report",
+    "CLI_PATH", "PACKAGE_ROOT", "OUTCOMES", "WEIGHTS", "MAX_JOBS",
+    "default_jobs", "CaseResult", "run_case", "run_all", "evaluation_report",
+    "format_report",
 ]
 
 #: The directory that holds ``GLM.py`` and the package -- the directory a user
@@ -56,6 +59,26 @@ PACKAGE_ROOT: Path = Path(__file__).resolve().parents[2]
 
 #: The command-line entry point under test.
 CLI_PATH: Path = PACKAGE_ROOT / "GLM.py"
+
+#: The most cases to run at once, whatever the machine offers: past this a
+#: case's own interpreter start-up dominates and the run gets slower.  The
+#: measured table is `ITERATE.md` §0.5 (`studies/ITERATION_LANE_STUDY.md`).
+MAX_JOBS = 8
+
+
+def default_jobs() -> int:
+    """How many cases to run at once: this machine's usable CPUs, at most 8.
+
+    ``os.cpu_count()`` answers for the host; ``os.sched_getaffinity`` answers
+    for the CPUs this process may actually run beside, which is what a
+    container limits.  Falling back rather than raising keeps the evaluation
+    runnable on a platform without it.
+    """
+    try:
+        usable = len(os.sched_getaffinity(0))
+    except (AttributeError, OSError):            # pragma: no cover - platform
+        usable = os.cpu_count() or 1
+    return max(1, min(MAX_JOBS, usable))
 
 #: The outcomes a case can have, worst last.
 OUTCOMES: Tuple[str, ...] = (
@@ -212,19 +235,24 @@ def run_case(case: EvalCase, timeout: int = 300) -> CaseResult:
         stopped_at=stopped, milliseconds=milliseconds)
 
 
-def run_all(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
+def run_all(cases: Sequence[EvalCase] = CASES, jobs: Optional[int] = None,
             timeout: int = 300) -> Tuple[CaseResult, ...]:
     """Run every case, in parallel processes, and return the results in order."""
+    if jobs is None:
+        jobs = default_jobs()
     if jobs <= 1:
         return tuple(run_case(case, timeout) for case in cases)
     with ThreadPoolExecutor(max_workers=jobs) as pool:
         return tuple(pool.map(lambda c: run_case(c, timeout), cases))
 
 
-def evaluation_report(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
+def evaluation_report(cases: Sequence[EvalCase] = CASES,
+                      jobs: Optional[int] = None,
                       timeout: int = 300) -> Dict[str, object]:
     """Run the whole set and summarise it: totals, per kind, every failure."""
     started = time.monotonic_ns()
+    if jobs is None:
+        jobs = default_jobs()
     results = run_all(cases, jobs=jobs, timeout=timeout)
     counts = {outcome: 0 for outcome in OUTCOMES}
     for result in results:

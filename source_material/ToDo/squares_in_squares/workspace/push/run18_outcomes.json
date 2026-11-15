@@ -1,0 +1,44 @@
+{
+ "run": 18,
+ "date": "2026-11-05",
+ "state_in": "frontier 22.823536 / 454 (restored from the GitHub snapshot after another sandbox recycle; snapshot table = run-10 22.887471, replayed import(76)+chains(33) to the frontier)",
+ "asks": [
+  "1. run polish to completion; then a three-band / free-anchor generalization at the 23 gap-0 roots - if needed to complete that investigation",
+  "2. note https://github.com/DigitalEuan/squares_in_squares as the project snapshot (has everything + latest submission.csv); docs not up to date; user keeps local iterations and can add missing files",
+  "3. push/extend cent_compiler (v12_2 on the GLM repo); the Pressure-Settling Engine came from it; extend with more primitives (NumPy/SciPy as wheels/datasets) toward a finer engine for the remaining grids"
+ ],
+ "results": {
+  "polish": {
+   "outcome": "COMPLETED, honest negative",
+   "detail": "32877 candidates tested on the 50 gap-0 near-miss seeds (fine angle +/-1.5deg @0.05, anchor +/-0.75 @0.05, fill phase {0,0.25,0.5}), 0 verify-fails, 0 records \u2014 the corner-band family does not dip below grid on the 23 roots at fine resolution either (run-16's probe, now fully confirmed)",
+   "three_band_conclusion": "not needed for this investigation: with P1 (gobel5/gobel6 two-band) and P2 (polish) both honest negatives at coarse AND fine resolution, the coarse-resolution question at the gap-0 roots is closed; a three-band sweep adds a dimension but no new mechanism \u2014 defer until a new architecture idea (the run-16 decode: records carry 2-3 SUB-ANGLES of ONE band, not 3 bands)"
+  },
+  "three_band": "gobel7 not needed for the polish investigation; the two-band gobel6 honest negative (run 17) + polish result close the coarse-resolution question; next family only warranted with a new architecture idea",
+  "snapshot_note": "documented in README/REPRODUCE; the snapshot is now the system of record (its submission.csv scores 22.823536/454 \u2014 the frontier; the sandbox replays from it after recycles)",
+  "sync_list": [
+   "workspace/sources/atlas/lists/certs/n-XXX.cert.gz (324 files) \u2014 the snapshot lost them (only best.json survived); fetchable via scripts/fetch_atlas.py or copy from a local iteration",
+   "workspace/push/gobel6_results.json (run-17 version: tested 15183, 0 fails, 0 records, 1480 near-misses) \u2014 the snapshot's copy is the run-17 one (kept), fine",
+   "run-16/17 outcome ledgers if not already in the snapshot",
+   "cent_compiler_v12_2 WITH W36/W37 + the wheels.py parser fix \u2014 see download/cent_compiler_v12_2_ext.zip"
+  ],
+  "cent_v12_2": {
+   "location": "fetched from github.com/DigitalEuan/GLM source_material/ToDo/cent_compiler_v12_2",
+   "extension": [
+    "W36 Numerical SAT Substrate (NumPy): pair_energy = pen^2, wall_energy = out^2 \u2014 the packing objective as wheel laws (4 cases, negative controls included)",
+    "W37 Viscoelastic Settling (SciPy): relaxation_time = eta/modulus, strain_rate = stress/viscosity, dissipated_power = stress*strain_rate (4 cases; junctions to W20 piezo and W36)",
+    "junctions/non-identities added to wheels/index.json (the loader only reads them from there \u2014 per-wheel arrays are ignored): 37 junctions, 7 non-identities total",
+    "PARSER FIX (upstream bug): wheels.py rejected rational ^powers ('a power must be an integer literal') so case_table() CRASHED on the native wheel corpus (W21/W24/W25/W29/W34 use ^(1/2)); parse_monomial + Monomial.pow now accept numeric literal rational exponents; case_table() runs all 127 rows"
+   ],
+   "pressure_settle_v2": {
+    "design": "compiled from W36+W37 like run 6 compiled the physics wheels: exact SAT substrate (same math as packlib.verify) + scipy L-BFGS-B with ANALYTIC gradients (chain rule through the SAT stack; binding-axis selection per pair) + pressure ramp (container annealed grid+0.5 -> target) + crystalline PHI seeds + symmetry-breaking kicks",
+    "debugging": [
+     "self-test gate exposed a best-tracking bug (roomy-L states were scored); fixed to terminal-at-L_target evaluation",
+     "analytic gradient was wrong (FD check): angle channel rewritten with exact Gram-entry formulas (du/dth = v, dv/dth = -u); factor-2 pair-counting bug fixed; FD now < 1e-8 on 6 random states (gate added to the self-test)",
+     "wall channel exact: dout/dth = dHW/dth * (#active walls)"
+    ],
+    "outcome": "HONEST NEGATIVE at this resolution: the engine clears the gradient-exactness gate but does NOT clear the two feasible containers (n=5 L=2.75, n=13 L=4.0) \u2014 the creep+ramp+local-relax channel cannot cross the rearrangement gap into the tilted configurations; per the run-6 requirement the campaign ABORTED (nothing it would say about the 23 roots would mean anything)",
+    "reading": "the negative is informative: exact gradients + ramps do not replace global structure \u2014 the frontier's configurations (per the run-16 decode) are banded architectures, and reaching them from lattice seeds needs the constructive channel (gobel families), not finer local dynamics. The engine stands ready with a verified-exact gradient for any future role that is local (e.g. polishing band anchors/angles \u2014 P2-style refinement, its natural use)"
+   }
+  }
+ }
+}

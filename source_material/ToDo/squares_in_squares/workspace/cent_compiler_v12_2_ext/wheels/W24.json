@@ -1,0 +1,167 @@
+{
+  "id": "W24",
+  "title": "Semiconductor Device Physics",
+  "axioms": [
+    "saturation_current = current",
+    "diffusion_constant = mobility * thermal_voltage"
+  ],
+  "cases": [
+    {
+      "id": "W24-01",
+      "equation": "mobility = diffusion_constant / thermal_voltage",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W24-02",
+      "equation": "thermal_voltage = diffusion_constant / mobility",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W24-03",
+      "equation": "debye_length = (permittivity * thermal_voltage / (2 * carrier_concentration))^(1/2)",
+      "expected_dimensional": true,
+      "expected_derivable": false,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "Debye length involves sqrt; full derivation needs the charge term"
+    },
+    {
+      "id": "W24-N1",
+      "equation": "current = saturation_current / voltage",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "current",
+    "diffusion_constant",
+    "mobility",
+    "saturation_current",
+    "thermal_voltage"
+  ],
+  "dimensions": {
+    "current": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "diffusion_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "mobility": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        -1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "saturation_current": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "thermal_voltage": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

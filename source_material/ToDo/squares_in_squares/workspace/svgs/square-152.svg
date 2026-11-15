@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on January 6, 2025 based on seeing that David W. Cantrell had submitted an s(152), but without looking at it or its side length until after having recreated it otherwise independently.
+        Based on the s(69) found by Maurizio Morandi in June 2010, adapting and extending the s(69) improvement found by David W. Cantrell on August 3, 2023.
+            It turned out this version was better than David W. Cantrell's, which had s = 12.837159337688750497430639697700645114..., found by David W. Cantrell on January 6, 2025, based on the s(69) improvement he found on August 3, 2023.
+    Improved by Grigoriy Dyachkov on September 10, 2026, working with Claude Opus 5 and Claude Fable 5.
+        Applies a similar improvement to s(152) as that done to s(69) on July 29, 2026.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "12.83095954472600847197551196593646">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M10,0 V 1 H9 V2 H8 V3 H7 V4 H6 V5 H5 V6 H4 V7 H3 V8 H2 V9 H1 V10 H0 V0"/>
+        <path style=  "fill:none" d="M10,0 V 1 H0
+                                     M 9,0 V 2 H0
+                                     M 8,0 V 3 H0
+                                     M 7,0 V 4 H0
+                                     M 6,0 V 5 H0
+                                     M 5,0 V 6 H0
+                                     M 4,0 V 7 H0
+                                     M 3,0 V 8 H0
+                                     M 2,0 V 9 H0
+                                     M 1,0 V10 H0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M11,0 V 1 H10 V2 H9 V3 H8 V4 H7 V5 H6 V6 H5 V7 H4 V8 H3 V9 H2 V10 H1 V11 H0 V0"/>
+        <path style=  "fill:none" d="M11,0 V 1 H0
+                                     M10,0 V 2 H0
+                                     M 9,0 V 3 H0
+                                     M 8,0 V 4 H0
+                                     M 7,0 V 5 H0
+                                     M 6,0 V 6 H0
+                                     M 5,0 V 7 H0
+                                     M 4,0 V 8 H0
+                                     M 3,0 V 9 H0
+                                     M 2,0 V10 H0
+                                     M 1,0 V11 H0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <rect style="stroke:none" width="1" height="1"/>
+        <path style=  "fill:none" d="M1,0 V1 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <rect style="stroke:none" width="1" height="2"/>
+        <path style=  "fill:none" d="M1,0 V2 H0
+                                     M0,1 H1"/>
+    </g>
+    <use xlink:href="#one" transform="translate( 1.501056215908088822871685640455566  9.706935855500004797393475677223623         ) rotate(59.676890501616114)"/>
+    <use xlink:href="#one" transform="translate( 2.001472061810417016736067476896787 10.57273652830804781008331675914153          ) rotate(59.676890501616214)"/>
+    <use xlink:href="#one" transform="translate( 2.183343076564023488589658726251926  8.892764341637663409840320174286984         ) rotate(59.676890501616086)"/>
+    <use xlink:href="#one" transform="translate( 2.68821893013012530063916671420032   9.755956381421546203465025060222695         ) rotate(59.67689050161602 )"/>
+    <use xlink:href="#one" transform="translate( 2.863192110828986013889986734286198  8.074424848194599547423850250330347         ) rotate(59.67689050161613 )"/>
+    <use xlink:href="#one" transform="translate( 3.368109003174145822871685640455566  8.937687054427190497393475677223623         ) rotate(59.676890501616114)"/>
+    <use xlink:href="#one" transform="translate( 3.72882197700383642593949472223475   7.573716974209220841048555136265454         ) rotate(59.676890501616064)"/>
+    <use xlink:href="#one" transform="translate( 4.233697830569938340945947622378219  8.436909013993098187830533006126953         ) rotate(59.676890501616015)"/>
+    <use xlink:href="#one" transform="translate( 4.411108837659772852662863101574468  6.759545460346878309961818466713828         ) rotate(59.67689050161615 )"/>
+    <use xlink:href="#one" transform="translate( 4.91598469122587370063916671420032   7.622737500130756903465025060222695         ) rotate(59.67689050161602 )"/>
+    <use xlink:href="#one" transform="translate( 5.093395698315706488589658726251926  5.945373946484534309840320174286984         ) rotate(59.676890501616086)"/>
+    <use xlink:href="#one" transform="translate( 5.598271551881808088589658726251926  6.808565986268414209840320174286984         ) rotate(59.676890501616086)"/>
+    <use xlink:href="#one" transform="translate( 5.877400175770501825664036702909812  5.178186536220999032976789536242414         ) rotate(61.330283047468136)"/>
+    <use xlink:href="#one" transform="translate( 6.351199339892060465664036702909812  6.058845720878123832976789536242414         ) rotate(61.330283047468136)"/>
+    <use xlink:href="#one" transform="translate( 6.708909592756827416775945272436271  4.614500665396224685659601602825145         ) rotate(61.33028304746818 )"/>
+    <use xlink:href="#one" transform="translate( 7.189877554525782365108082418146539  5.494110020594392556635383502951198         ) rotate(61.330283047468114)"/>
+    <use xlink:href="#one" transform="translate( 7.394957190042025283644994622220986  3.784789718035628255060879814908336         ) rotate(61.3302830474682  )"/>
+    <use xlink:href="#one" transform="translate( 7.875230131369873443996173848619905  4.663127966367925803952571436369068         ) rotate(61.33028304746807 )"/>
+    <use xlink:href="#one" transform="translate( 8.082082356493802883644994622220986  2.957049436122181055060879814908336         ) rotate(61.3302830474682  )"/>
+    <use xlink:href="#one" transform="translate( 8.561842214759854133491413328447786  3.834449355783417659473594006035251         ) rotate(61.330283047468086)"/>
+    <use xlink:href="#one" transform="translate( 8.877400363270506431121192021359603  2.31301526142830353266599266324193          ) rotate(61.33028304746828 )"/>
+    <use xlink:href="#one" transform="translate( 9.351199527392065431121192021359603  3.19367444608542953266599266324193          ) rotate(61.33028304746828 )"/>
+    <use xlink:href="#one" transform="translate( 9.635429649369771535235592303856232  1.628341431714586517369849066450017         ) rotate(59.67689050161676 )"/>
+    <use xlink:href="#one" transform="translate(10.13631056207298953523559230385623   2.493870089637859017369849066450017         ) rotate(59.67689050161676 )"/>
+    <use xlink:href="#one" transform="translate(10.3177165100257093112474404975408    0.8141699178522397206182457697051657        ) rotate(59.676890501616825)"/>
+    <use xlink:href="#one" transform="translate(10.82259236359180289624098759739516   1.677361957636124873836267899851937         ) rotate(59.676890501616874)"/>
+    <use xlink:href="#one" transform="translate(10.99937627134561916371942441811497   0.000000005346025664270575170691776523630763) rotate(59.590098883478134)"/>
+    <use xlink:href="#one" transform="translate(11.50499917151874666371942441811497   0.8627548770168576642705751706917765        ) rotate(59.590098883478134)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Károly Hajba in November 2024 (resulting in s = 42.49171522113325...)
+        Source: Private communication between David Ellsworth and Károly Hajba, November 15, 2024
+    Improved by David Ellsworth on November 16, 2024.
+
+    x0 = 1 + 11*Tan[a] + (3 + 33)*(Cos[a] + Sin[a]*Tan[a]) - (s - 13 - 14)*Tan[a]
+    RootReduce[Solve[{s == 14 + Sin[a] + 16*Cos[a] + 13,
+                      s == x0 + 12*Tan[a] + 1},
+                     {s, a}][[2]]]
+    s = Root[1362276 - 148140*# + 8129*#^2 - 212*#^3 + 2*#^4, 2]
+    a = ArcTan[Root[-225 + 470*# + 535*#^2 - 40*#^3 + 696*#^4, 2]]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s   "42.487978511860220940053587829982661">
+    <!ENTITY a   "18.534719606457512215425149621112193">
+    <!ENTITY x1  "4.6879619548558625959197222940316048"> <!-- 1+11*Tan[a] -->
+    <!ENTITY v2  ".33526926862326023599270202673014589"> <!-- Tan[a] -->
+    <!ENTITY v3  ".14773352187322466139228761244842092"> <!-- (x0 - 37)*Sin[a] -->
+    <!ENTITY t1 "translate( 1 -&v2;)">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g id="twelve">
+            <rect width="1" height="12  "/>
+            <path style="fill:none" d="M0, 1 H1
+                                       M0, 2 H1
+                                       M0, 3 H1
+                                       M0, 4 H1
+                                       M0, 5 H1
+                                       M0, 6 H1
+                                       M0, 7 H1
+                                       M0, 8 H1
+                                       M0, 9 H1
+                                       M0,10 H1
+                                       M0,11 H1"/>
+        </g>
+        <g id="thirteen">
+            <rect width="1" height="13"/>
+            <path style="fill:none" d="M0, 1 H1
+                                       M0, 2 H1
+                                       M0, 3 H1
+                                       M0, 4 H1
+                                       M0, 5 H1
+                                       M0, 6 H1
+                                       M0, 7 H1
+                                       M0, 8 H1
+                                       M0, 9 H1
+                                       M0,10 H1
+                                       M0,11 H1
+                                       M0,12 H1"/>
+        </g>
+        <g id="fourteen">
+            <rect width="1" height="14"/>
+            <path style="fill:none" d="M0, 1 H1
+                                       M0, 2 H1
+                                       M0, 3 H1
+                                       M0, 4 H1
+                                       M0, 5 H1
+                                       M0, 6 H1
+                                       M0, 7 H1
+                                       M0, 8 H1
+                                       M0, 9 H1
+                                       M0,10 H1
+                                       M0,11 H1
+                                       M0,12 H1
+                                       M0,13 H1"/>
+        </g>
+        <g id="fifteen">
+            <rect width="1" height="15"/>
+            <path style="fill:none" d="M0, 1 H1
+                                       M0, 2 H1
+                                       M0, 3 H1
+                                       M0, 4 H1
+                                       M0, 5 H1
+                                       M0, 6 H1
+                                       M0, 7 H1
+                                       M0, 8 H1
+                                       M0, 9 H1
+                                       M0,10 H1
+                                       M0,11 H1
+                                       M0,12 H1
+                                       M0,13 H1
+                                       M0,14 H1"/>
+        </g>
+        <g id="sixteen">
+            <rect width="1" height="16"/>
+            <path style="fill:none" d="M0, 1 H1
+                                       M0, 2 H1
+                                       M0, 3 H1
+                                       M0, 4 H1
+                                       M0, 5 H1
+                                       M0, 6 H1
+                                       M0, 7 H1
+                                       M0, 8 H1
+                                       M0, 9 H1
+                                       M0,10 H1
+                                       M0,11 H1
+                                       M0,12 H1
+                                       M0,13 H1
+                                       M0,14 H1
+                                       M0,15 H1"/>
+        </g>
+        <g id="seventeen">
+            <rect width="1" height="17"/>
+            <path style="fill:none" d="M0, 1 H1
+                                       M0, 2 H1
+                                       M0, 3 H1
+                                       M0, 4 H1
+                                       M0, 5 H1
+                                       M0, 6 H1
+                                       M0, 7 H1
+                                       M0, 8 H1
+                                       M0, 9 H1
+                                       M0,10 H1
+                                       M0,11 H1
+                                       M0,12 H1
+                                       M0,13 H1
+                                       M0,14 H1
+                                       M0,15 H1
+                                       M0,16 H1"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M4,0 V16 H3 V19 H2 V22 H1 V25 H0 V0"/>
+        <path style=  "fill:none" d="M4,0 V16 H3 V19 H2 V22 H1 V25 H0
+                                     M3, 0 V16 H0
+                                     M2, 0 V19 H0
+                                     M1, 0 V22 H0
+                                     M4, 1 H0
+                                     M4, 2 H0
+                                     M4, 3 H0
+                                     M4, 4 H0
+                                     M4, 5 H0
+                                     M4, 6 H0
+                                     M4, 7 H0
+                                     M4, 8 H0
+                                     M4, 9 H0
+                                     M4,10 H0
+                                     M4,11 H0
+                                     M4,12 H0
+                                     M4,13 H0
+                                     M4,14 H0
+                                     M4,15 H0
+                                     M3,17 H0
+                                     M3,18 H0
+                                     M2,20 H0
+                                     M2,21 H0
+                                     M1,23 H0
+                                     M1,24 H0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1)">
+        <path style="stroke:none" d="M5,0 V13 H4 V16 H3 V19 H2 V22 H1 V25 H0 V0"/>
+        <path style=  "fill:none" d="M5,0 V13 H4 V16 H3 V19 H2 V22 H1 V25 H0
+                                     M4, 0 v13
+                                     M3, 0 V16 H0
+                                     M2, 0 V19 H0
+                                     M1, 0 V22 H0
+                                     M5, 1 H0
+                                     M5, 2 H0
+                                     M5, 3 H0
+                                     M5, 4 H0
+                                     M5, 5 H0
+                                     M5, 6 H0
+                                     M5, 7 H0
+                                     M5, 8 H0
+                                     M5, 9 H0
+                                     M5,10 H0
+                                     M5,11 H0
+                                     M5,12 H0
+                                     M4,13 H0
+                                     M4,14 H0
+                                     M4,15 H0
+                                     M3,17 H0
+                                     M3,18 H0
+                                     M2,20 H0
+                                     M2,21 H0
+                                     M1,23 H0
+                                     M1,24 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M37,0 V13 H2 V16 H1 V17 H0 V0"/>
+        <path style=  "fill:none" d="M37,0 V13 H2 V16 H1 V17 H0
+                                     M37, 1 H0
+                                     M37, 2 H0
+                                     M37, 3 H0
+                                     M37, 4 H0
+                                     M37, 5 H0
+                                     M37, 6 H0
+                                     M37, 7 H0
+                                     M37, 8 H0
+                                     M37, 9 H0
+                                     M37,10 H0
+                                     M37,11 H0
+                                     M37,12 H0
+                                     M 2,13 H0
+                                     M 2,14 H0
+                                     M 2,15 H0
+                                     M 1,16 H0
+                                     M36, 0 V13
+                                     M35, 0 V13
+                                     M34, 0 V13
+                                     M33, 0 V13
+                                     M32, 0 V13
+                                     M31, 0 V13
+                                     M30, 0 V13
+                                     M29, 0 V13
+                                     M28, 0 V13
+                                     M27, 0 V13
+                                     M26, 0 V13
+                                     M25, 0 V13
+                                     M24, 0 V13
+                                     M23, 0 V13
+                                     M22, 0 V13
+                                     M21, 0 V13
+                                     M20, 0 V13
+                                     M19, 0 V13
+                                     M18, 0 V13
+                                     M17, 0 V13
+                                     M16, 0 V13
+                                     M15, 0 V13
+                                     M14, 0 V13
+                                     M13, 0 V13
+                                     M12, 0 V13
+                                     M11, 0 V13
+                                     M10, 0 V13
+                                     M 9, 0 V13
+                                     M 8, 0 V13
+                                     M 7, 0 V13
+                                     M 6, 0 V13
+                                     M 5, 0 V13
+                                     M 4, 0 V13
+                                     M 3, 0 V13
+                                     M 2, 0 V13
+                                     M 1, 0 V16"/>
+    </g>
+    <g transform="translate(&s; 0) scale(-1 1)">
+        <path style="stroke:none" d="M38, 0 V14 H3 V15 H2 V16 H1 V17 H0 V0"/>
+        <path style=  "fill:none" d="M38, 0 V14 H3 V15 H2 V16 H1 V17 H0
+                                     M38, 1 H0
+                                     M38, 2 H0
+                                     M38, 3 H0
+                                     M38, 4 H0
+                                     M38, 5 H0
+                                     M38, 6 H0
+                                     M38, 7 H0
+                                     M38, 8 H0
+                                     M38, 9 H0
+                                     M38,10 H0
+                                     M38,11 H0
+                                     M38,12 H0
+                                     M38,13 H0
+                                     M37, 0 V14
+                                     M36, 0 V14
+                                     M35, 0 V14
+                                     M34, 0 V14
+                                     M33, 0 V14
+                                     M32, 0 V14
+                                     M31, 0 V14
+                                     M30, 0 V14
+                                     M29, 0 V14
+                                     M28, 0 V14
+                                     M27, 0 V14
+                                     M26, 0 V14
+                                     M25, 0 V14
+                                     M24, 0 V14
+                                     M23, 0 V14
+                                     M22, 0 V14
+                                     M21, 0 V14
+                                     M20, 0 V14
+                                     M19, 0 V14
+                                     M18, 0 V14
+                                     M17, 0 V14
+                                     M16, 0 V14
+                                     M15, 0 V14
+                                     M14, 0 V14
+                                     M13, 0 V14
+                                     M12, 0 V14
+                                     M11, 0 V14
+                                     M10, 0 V14
+                                     M 9, 0 V14
+                                     M 8, 0 V14
+                                     M 7, 0 V14
+                                     M 6, 0 V14
+                                     M 5, 0 V14
+                                     M 4, 0 V14
+                                     M 3, 0 V14 H0
+                                     M 2, 0 V15 H0
+                                     M 1, 0 V16 H0"/>
+    </g>
+    <g transform="translate(&x1; 14) rotate(&a;)">
+        <use xlink:href="#twelve"   transform=""/>
+        <use xlink:href="#thirteen" transform="&t1;"/>
+        <use xlink:href="#fifteen"  transform="&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#sixteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;"/>
+        <use xlink:href="#fifteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;          translate(0 1)"/>
+        <use xlink:href="#fourteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;     translate(0 2)"/>
+        <use xlink:href="#thirteen"  transform="&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1;&t1; translate(0 3&v3;)"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

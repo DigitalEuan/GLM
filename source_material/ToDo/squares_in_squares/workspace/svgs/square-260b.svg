@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 21, 2024.
+    Extends the s(148) which continues a pattern found by Frits Göbel in early 1979.
+    Is a primitive packing alternative for the result of adding four "L"s to s(148).
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "16.65685424949238019520675489684"> <!-- 11 + Sqrt[2]*4 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g id="stairs1">
+            <path style="stroke:none" d="M10,0 V 1 H9 V2 H8 V3 H7 V4 H6 V5 H5 V6 H4 V7 H3 V8 H2 V9 H1 V10 H0 V0"/>
+            <path style=  "fill:none" d="M10,0 V 1 H0
+                                         M 9,0 V 2 H0
+                                         M 8,0 V 3 H0
+                                         M 7,0 V 4 H0
+                                         M 6,0 V 5 H0
+                                         M 5,0 V 6 H0
+                                         M 4,0 V 7 H0
+                                         M 3,0 V 8 H0
+                                         M 2,0 V 9 H0
+                                         M 1,0 V10 H0"/>
+        </g>
+        <g id="stairs2">
+            <path style="stroke:none" d="M5,0 V1 H4 V2 H3 V3 H2 V4 H1 V5 H0 V0"/>
+            <path style=  "fill:none" d="M5,0 V1 H0
+                                         M4,0 V2 H0
+                                         M3,0 V3 H0
+                                         M2,0 V4 H0
+                                         M1,0 V5 H0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <use xlink:href="#stairs1"/>
+    <use xlink:href="#stairs2" transform="translate(0   &s;) scale( 1 -1)"/>
+    <use xlink:href="#stairs2" transform="translate(&s; 0  ) scale(-1  1)"/>
+    <use xlink:href="#stairs1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <g transform="translate(5.5 5.5) rotate(45) translate(0 -7.5)">
+        <rect width="8" height="15"/>
+        <path style="fill:none" d="M0, 1 H8 M1,0 V15
+                                   M0, 2 H8 M2,0 V15
+                                   M0, 3 H8 M3,0 V15
+                                   M0, 4 H8 M4,0 V15
+                                   M0, 5 H8 M5,0 V15
+                                   M0, 6 H8 M6,0 V15
+                                   M0, 7 H8 M7,0 V15
+                                   M0, 8 H8
+                                   M0, 9 H8
+                                   M0,10 H8
+                                   M0,11 H8
+                                   M0,12 H8
+                                   M0,13 H8
+                                   M0,14 H8"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

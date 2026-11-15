@@ -1,0 +1,12 @@
+coverage: 889/1000 = 88.9%
+tiers: {'certificate': 886, None: 111, 'strict': 3} | strict-tier noise floor (1000 random): 879/1000
+total score 22.887471 | grid ceiling 28.937670 | improvement 6.050199
+level 0 unresolved: 114 grids, improvement sum 1.6298, waste mean 0.0841, fields {None: 111, 'Q': 3}
+level 1 Λ1–Λ4 window (rational): 552 grids, improvement sum -0.0000, waste mean 0.0342, fields {'Q': 552}
+level 2 Λ8 window (quadratic): 334 grids, improvement sum 4.4204, waste mean 0.0552, fields {'Q(√2)': 323, 'Q(√7)': 11}
+crosscheck cert-vs-fit: 886 agree, 0 differ
+spearman(level, waste) = +0.5317
+spearman(level, improvement) = +0.8394
+src x level: {"aux": {"0": 1, "2": 5}, "chain3": {"2": 98, "0": 31}, "closure": {"2": 54}, "exact": {"2": 67, "0": 82}, "gobel2": {"2": 54}, "gobel3": {"2": 9}, "gobelS": {"2": 18}, "grid": {"1": 552}, "removal": {"2": 29}}
+unresolved (level 0): 114 -> [11, 17, 28, 29, 37, 39, 41, 50, 51, 54, 55, 68, 69, 70, 71, 83, 87, 88, 102, 103, 105, 106, 107, 108, 110]
+wrote /home/z/my-project/download/leech_map.json

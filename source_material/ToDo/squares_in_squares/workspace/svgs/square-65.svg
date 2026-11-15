@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Frits Göbel in early 1979.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "8.53553390593273762200422181052425"> <!-- 5 + Sqrt[2]*5/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M4,0 V1 H3 V2 H2 V3 H1 V4 H0 V0"/>
+        <path style=  "fill:none" d="M0,1 H4 V0
+                                     M0,2 H3 V0
+                                     M0,3 H2 V0
+                                     M0,4 H1 V0"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#side1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <g transform="translate(2.5 2.5) rotate(45) translate(0 -2.5)">
+        <rect width="5" height="5"/>
+        <path style="fill:none" d="M0,1 H5 M1,0 V5
+                                   M0,2 H5 M2,0 V5
+                                   M0,3 H5 M3,0 V5
+                                   M0,4 H5 M4,0 V5"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

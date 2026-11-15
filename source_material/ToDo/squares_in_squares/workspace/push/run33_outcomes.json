@@ -1,0 +1,32 @@
+{
+ "run": 33,
+ "date": "2026-11-07",
+ "user_request": "1) Rewrite STATUS.md - put the readme content into this STATUS document as a straight copy, at the bottom unedited and not mentioned in the STATUS document - the readme NEVER comes through here so I will cut it from STATUS and paste over the current readme - it WILL NOT work any other way. 2) currently the STATUS document makes it sound like this system does nothing but use other people's existing data, no mention of the GLM system or pressure settling engine where this all began - a deep dive into this please. 3) this project is recorded at github.com/DigitalEuan/squares_in_squares the parent project is github.com/DigitalEuan/GLM and the cent compiler is github.com/DigitalEuan/squares_in_squares/tree/main/workspace/cent_compiler_v12_2_ext - I need a good record of system and sources so I can actually see how this works from start to finish.",
+ "executed": {
+  "recovery": {
+   "status": "rollback #4 (the fourth recycle); run-32 artifacts redone bit-identically",
+   "remote_moves": "the user's upload (45e0a63) carried the run-32 NEXT_STEPS.md + STATUS (4).md; renamed (a99d592->b6408ad revision) - that is the new base",
+   "redone": "root_audit.py instrument fix; channel fixpoint re-verified (cascade 0, closure fixpoint, assembly 0 issues, table bit-identical); root_audit32 regenerated (0/305/0.375304/gap 0.591569, matches run 32 exactly); README + RUN_NOTES rebuilt; runs 28-33 ledger sections ported",
+   "transport_lesson": "the front page NEVER comes through the upload path; STATUS and NEXT_STEPS do. From this run: STATUS.md carries a straight unedited copy of the front page at its bottom; the user cuts it from STATUS and pastes it over the stale front page. Recorded as failure 17 in NEXT_STEPS \u00a73."
+  },
+  "lineage_record": {
+   "status": "done (the three-part order)",
+   "parent_glm": "the Geometric Language Machine fetched and read: exact substrate (Golay/Leech, no floats), Lean 414 files, 8 registers / 31 query kinds, TAX/NRCI with Y/Q/B, delta-sigma as the canonical carrier for irrationals; the cent formula wheels bundle in its wheels folder",
+   "cent_compiler": "verified from the delivered tree: 41 wheels / 100 axioms / 159 cases / 8 axes; 22 primitives; 22 proposals; 127-row native corpus (post parser fix); W36 Numerical SAT Substrate and W37 Viscoelastic Settling are this project's engines",
+   "engines_deep_dive": "W36 -> packlib (the honest gate; 12-dp round-trip on the delta-sigma carrier); W37 -> the pressure-settling engine: design (squared hinges, exact gradient, pressure ramp, L-BFGS-B), the full honest campaign record (runs 6/18/19/20/22/30), the stall law (p ~ 0.45-0.88*d), and its current role (refinement + verification gate; the measurement layer's subject); Leech/Golay layer (leech_map by_level 114/552/334, tiers 886/111/3, galois 54, certificates 1169)",
+   "status_restructure": "body = the system + sources record (\u00a71 lineage with the three URLs; \u00a72 the compiler; \u00a73 the engines; \u00a74 the operating loop; \u00a75 the information map ours-vs-gated + census; \u00a76-9 state/frontier/history/guarantee); the front-page copy rides at the bottom after --- unedited; the body never mentions it",
+   "imports_reading_corrected": "the engines are the origin: they produced runs 1-12's 448 below-grid rows and have remained the gate of everything since; the front page now leads with the GLM lineage (its own paragraph + engine item 1 of the score engine)"
+  }
+ },
+ "score": {
+  "before": 22.645990613,
+  "after": 22.645990613,
+  "delta": 0.0
+ },
+ "beats_grid": 543,
+ "next": [
+  "P3 weekly (atlas + Mishapolk; the only item that has paid)",
+  "start of turn: fetch origin, compare eras (failure 16a)",
+  "every run: update all five documents together; STATUS carries the front-page copy for transport (failure 17)"
+ ]
+}

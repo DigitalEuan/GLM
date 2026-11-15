@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Originally found by Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html
+        Extended from the s(88) found by Erich Friedman in 1997, by generalizing the s(41) technique found by Charles F. Cottingham in 1979.
+    Improved by David Ellsworth   on December 31, 2024, by adapting and extending the technique used in the s(37) found by David W. Cantrell in September 2002, including re-adapting the techniques from the s(130) and s(129)/s(206) he improved.
+
+    RootReduce[Solve[{({1, s - 1} + RotationTransform[Pi/4 + a][{r0, -2}])[[1]] == s - 15,
+                      RotationTransform[Pi/4 - a][{s - 15, s - 2} - {2, 14}][[2]] == 2,
+                      v4 == RotationTransform[-Pi/4 - a][({1, s - 1} + RotationTransform[Pi/4 + a][{r0 - 2, -2 + v1}]) - ({1 + (s - 17)/2, s - 1 + (s - 17)/2} + RotationTransform[Pi/4][{-2 + u4, -2 - v3}] + RotationTransform[Pi/4 + a][{0, 1}])][[2]]/Cos[a]},
+                     {s, a, v4}][[1]]]
+    s  = Root[73369 - 17882*# + 1631*#^2 - 66*#^3 + #^4, 2]
+    a  = ArcTan[Root[-1 + 16*# + 10*#^2 + 16*#^3 + 7*#^4, 2]]
+    v4 = Root[-112 + 832*# + 74992*#^2 - 41952*#^3 + 8220*#^4 - 1072*#^5 + 164*#^6 - 16*#^7 + #^8, 2]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "17.886746028605663801961237837775233">
+    <!ENTITY a  "3.4351193750794292201397696742844162">
+    <!ENTITY v4 ".03376765694998219705696173242743090">
+    <!ENTITY r0 ".58832737120344915618821893028247050"> <!-- (s - 17)*Cos[Pi/4 + a] -->
+    <!ENTITY v1 ".06002608177107585416708570777436917"> <!-- Tan[a] -->
+    <!ENTITY u2 ".03884495877884222403575708777037879"> <!-- 2 - RotationTransform[-Pi/4][{s - 16, s - 1} - {1, 15}][[1]] -->
+    <!ENTITY v3 "1.0581215208653912731118688654857996"> <!-- Sin[a] + Cos[a] -->
+    <!ENTITY u4 ".05541272101288350048453863404784567"> <!-- u2 - (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{2, 14} - ({1 + (s - 17)/2, s - 1 + (s - 17)/2} + RotationTransform[Pi/4][{-2 + u2, -2 -   v3 + v4}])]) -->
+    <!ENTITY u5 ".04714081371049697962147035940589512"> <!--      (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{3, 13} - ({1 + (s - 17)/2, s - 1 + (s - 17)/2} + RotationTransform[Pi/4][{-2     , -3 -   v3 + v4}])]) -->
+    <!ENTITY u6 ".04782556561512179455469555406451903"> <!-- u2 - (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{5, 11} - ({1 + (s - 17)/2, s - 1 + (s - 17)/2} + RotationTransform[Pi/4][{-2 + u2, -4 - 3*v3 + v4}])]) -->
+    <!ENTITY u7 ".05472796910825868555131343938922176"> <!--      (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{6, 10} - ({1 + (s - 17)/2, s - 1 + (s - 17)/2} + RotationTransform[Pi/4][{-2     , -5 - 3*v3 + v4}])]) -->
+    <!ENTITY v8 ".00393753747490712763190611065102467"> <!-- (8 - ({1 + (s - 17)/2, s - 1 + (s - 17)/2} + RotationTransform[Pi/4][{-2, -7 - 4*v3 + v4}])[[2]])*Sqrt[2] -->
+    <!ENTITY w8 ".00394462482715495145895422216079818"> <!-- v8/Cos[a] -->
+    <!-- u4-u7 above follow this rule: inside the "RotationTransform[Pi/4]", subtract 1 from the already negative "vertical" translation, leaving it otherwise identical to that used by the domino being
+         corrected (notably, keep the exact number of "-v3" translations intact); CW is the "u2" variant, and CCW is the non-"u2" variant; at the beginning of the inside of the "RotationTransform[-Pi/4]",
+         put the coordinates of the corner the domino is touching on its upper-left side. -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+        <g id="corner">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="stairs">
+        <path style="stroke:none" d="M0, 0 H15 V1 H14 V2 H13 V3 H12 V4 H11 V5 H10 V6 H9 V7 H8 V8 H7 V9 H6 V10 H5 V11 H4 V12 H3 V13 H2 V14 H1 V15 H0"/>
+        <path style=  "fill:none" d="M0, 1 H15 V0
+                                     M0, 2 H14 V0
+                                     M0, 3 H13 V0
+                                     M0, 4 H12 V0
+                                     M0, 5 H11 V0
+                                     M0, 6 H10 V0
+                                     M0, 7 H 9 V0
+                                     M0, 8 H 8 V0
+                                     M0, 9 H 7 V0
+                                     M0,10 H 6 V0
+                                     M0,11 H 5 V0
+                                     M0,12 H 4 V0
+                                     M0,13 H 3 V0
+                                     M0,14 H 2 V0
+                                     M0,15 H 1 V0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M0, 0 H16 V1 H15 V2 H14 V3 H13 V4 H12 V5 H11 V6 H10 V7 H9 V8 H8 V9 H7 V10 H6 V11 H5 V12 H4 V13 H3 V14 H2 V15 H1 V16 H0"/>
+        <path style=  "fill:none" d="M0, 1 H16 V0
+                                     M0, 2 H15 V0
+                                     M0, 3 H14 V0
+                                     M0, 4 H13 V0
+                                     M0, 5 H12 V0
+                                     M0, 6 H11 V0
+                                     M0, 7 H10 V0
+                                     M0, 8 H 9 V0
+                                     M0, 9 H 8 V0
+                                     M0,10 H 7 V0
+                                     M0,11 H 6 V0
+                                     M0,12 H 5 V0
+                                     M0,13 H 4 V0
+                                     M0,14 H 3 V0
+                                     M0,15 H 2 V0
+                                     M0,16 H 1 V0"/>
+    </g>
+    <use xlink:href="#corner" transform="translate(&s; 0) scale(-1  1)"/>
+    <use xlink:href="#corner" transform="translate(0 &s;) scale( 1 -1)"/>
+    <defs>
+        <g id="straight">
+            <use xlink:href="#one" transform="translate(0  &v8;)"/>
+            <use xlink:href="#one" transform="translate(1      )"/>
+        </g>
+        <g id="turn_CCW">
+            <use xlink:href="#one" transform="translate(0  &w8;)"/>
+            <use xlink:href="#one" transform="translate(1  &v1;)"/>
+        </g>
+        <g id="turn_CW">
+            <use xlink:href="#one" transform="translate(0  &w8;)"/>
+            <use xlink:href="#one" transform="translate(1 -&v1;)"/>
+        </g>
+    </defs>
+    <g id="side1">
+        <g transform="translate(1 &s;) translate(0 -1) rotate(45) rotate(&a;) translate(&r0;) translate(-2 -1) translate(0 &v1;)">
+            <use xlink:href="#turn_CW"/>
+            <use xlink:href="#turn_CW" transform="translate(0 -1)"/>
+        </g>
+        <g transform="scale(.5 1) translate(&s; &s;) translate(-15 -1) scale(2 .5) translate(0 &s;) translate(0 -17) scale(1 2) rotate(45) translate(-2 -1) translate(0 &v4;)">
+<!--
+            <use xlink:href="#straight"/>
+            <use xlink:href="#straight" transform="translate(&u2;) translate(0 -1   )"/>
+-->
+            <use xlink:href="#turn_CW"  transform="translate(&u4;) translate(0 -1   ) translate(0 -&v3;) rotate(&a;)"/>
+            <use xlink:href="#straight" transform="                translate(0 -2   ) translate(0 -&v3;)"/>
+            <use xlink:href="#turn_CCW" transform="translate(&u5;) translate(0 -2   ) translate(0 -&v3;) rotate(-&a;) translate(0 -1)"/>
+            <use xlink:href="#straight" transform="translate(&u2;) translate(0 -3   ) translate(0 -&v3;) translate(0 -&v3;)"/>
+            <use xlink:href="#turn_CW"  transform="translate(&u6;) translate(0 -3   ) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;) rotate(&a;)"/>
+            <use xlink:href="#straight" transform="                translate(0 -4   ) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;)"/>
+            <use xlink:href="#turn_CCW" transform="translate(&u7;) translate(0 -4   ) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;) rotate(-&a;) translate(0 -1)"/>
+            <use xlink:href="#straight" transform="translate(&u2;) translate(0 -5   ) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;)"/>
+            <use xlink:href="#straight" transform="                translate(0 -6   ) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;) translate(0 -&v3;)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="rotate(90) scale(1 -1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

@@ -1,0 +1,213 @@
+{
+  "id": "W21",
+  "title": "Fracture Mechanics & Plasticity",
+  "axioms": [
+    "fracture_toughness = (2 * youngs_modulus * surface_energy / (314159265 * crack_length))^(1/2)",
+    "stress_intensity_factor = dimensionless_factor * stress * crack_length^(1/2)"
+  ],
+  "cases": [
+    {
+      "id": "W21-01",
+      "equation": "surface_energy = fracture_toughness^2 * crack_length / (2 * youngs_modulus)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W21-02",
+      "equation": "crack_length = (stress_intensity_factor / (dimensionless_factor * stress))^2",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W21-03",
+      "equation": "stress = stress_intensity_factor / (dimensionless_factor * crack_length^(1/2))",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W21-N1",
+      "equation": "fracture_toughness = stress / crack_length",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "crack_length",
+    "dimensionless_factor",
+    "fracture_toughness",
+    "stress",
+    "stress_intensity_factor",
+    "surface_energy",
+    "youngs_modulus"
+  ],
+  "dimensions": {
+    "crack_length": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dimensionless_factor": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "fracture_toughness": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "stress": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "stress_intensity_factor": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "surface_energy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "youngs_modulus": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

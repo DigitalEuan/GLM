@@ -48,6 +48,8 @@ each answer, or refusal, read into the one result model of Phase 169
 column 3 is replayed and the field ``replayed`` says whether it verified.  The
 reading changes no answer.
 
+*Last altered 14 November 2026 (platform round, P5 the chat surface: the query is echoed once, `:kinds` lists the declared readings, and a refusal says so -- `studies/CHAT_SURFACE_STUDY.md`; Phase 188 adds the second refusal hint, naming `:domains` when a question resolves to a real kind and no register names what it asks about).*
+
 *Last altered 20 October 2026 (Phase 173: `--converse` says when a reply is late -- its question closed by the window; Phase 171: ``--result``).*
 
 Invariants, inherited from :mod:`glm_universal`
@@ -77,10 +79,10 @@ _HERE = Path(__file__).resolve().parent
 if str(_HERE) not in sys.path:
     sys.path.insert(0, str(_HERE))
 
-from glm_universal.runtime import (DOMAINS, GeometricSession, QueryError,
-                                    SolverError, build_trace, package_root,
-                                    script_is_exact, trace_to_markdown,
-                                    verify_trace)
+from glm_universal.runtime import (DOMAINS, KINDS, GeometricSession,
+                                    QueryError, SolverError, build_trace,
+                                    package_root, script_is_exact,
+                                    trace_to_markdown, verify_trace)
 from glm_universal.runtime.tct_engine import TCTError, ThreeColumnTrace
 
 __all__ = ["main", "build_parser"]
@@ -442,6 +444,7 @@ def _meta_help(out: Out) -> None:
     out.line("Meta-commands:")
     out.line("  :help              this list")
     out.line("  :domains           list loaded and available domains")
+    out.line("  :kinds             list the readings a query can have")
     out.line("  :basis NAME        set the dimensional basis (EXT10 or SI7)")
     out.line("  :columns N[,N...]  which columns to show (1=lang,2=math,3=script)")
     out.line("  :verify on|off    run column 3 after each query")
@@ -461,6 +464,22 @@ def _meta_domains(out: Out, session: GeometricSession) -> None:
         except SolverError:
             size = None
         out.line(f"  {mark} {d:<14}  ({size if size is not None else 'lazy'})")
+
+
+def _meta_kinds(out: Out) -> None:
+    """List the declared query kinds, from the parser's one table.
+
+    ``KINDS`` also holds ``"unknown"``, which is where a question with no
+    declared reading lands, so it is listed apart rather than counted."""
+    declared = [k for k in KINDS if k != "unknown"]
+    out.line(f"query kinds ({len(declared)}):")
+    width = max(len(k) for k in declared) + 2
+    per_row = 4
+    for start in range(0, len(declared), per_row):
+        row = declared[start:start + per_row]
+        out.line("  " + "".join(f"{k:<{width}}" for k in row).rstrip())
+    out.line("  (a question with no declared reading is refused 'unrecognised "
+             "query')")
 
 
 def _meta_columns(state: _InteractiveState, args: str) -> None:
@@ -545,6 +564,8 @@ def _handle_meta(state: _InteractiveState, line: str) -> bool:
         _meta_help(state.out)
     elif cmd == "domains":
         _meta_domains(state.out, state.session)
+    elif cmd == "kinds":
+        _meta_kinds(state.out)
     elif cmd == "basis":
         _meta_basis(state, args)
     elif cmd == "columns":
@@ -598,10 +619,14 @@ def _interactive(out: Out, source: TextIO, session: GeometricSession,
                 asked = reply_rewrite(pending[0], pending[1], token)
                 out.line(f"REPLY   {line!r} answers the previous question: "
                          f"{asked}")
-        out.line(f"QUERY   {asked}")
+        #  The query is echoed once, by the answer path itself (``_batch_query``
+        #  prints it on every branch, and ``_render_text`` prints
+        #  ``trace.query``); echoing it here as well printed it twice.
         session.last_solution = None
         code, trace = _batch_query(out, session, asked, None, state.columns,
                                    "text", state.verify, state.exactness_check)
+        if code != 0:
+            _print_refusal_hint(out, getattr(session, "last_solution", None))
         if trace is not None:
             state.last_trace = trace
         record = question_put(getattr(session, "last_solution", None))
@@ -612,6 +637,27 @@ def _interactive(out: Out, source: TextIO, session: GeometricSession,
         if code != 0:
             state.exit_code = 1
     return state.exit_code
+
+
+def _print_refusal_hint(out: Out, solution) -> None:
+    """Say what a refusal means, and where the declared readings are listed.
+
+    A question the parser reads with no declared kind is refused with the bare
+    word ``unrecognised query``; the machine's own reading of that refusal (the
+    sentence matched no classification rule) is in ``solution.answer``, and the
+    list of readings it did not match is ``:kinds``.  Printed in the
+    interactive surface only: the batch line is what the evaluation pins.
+    """
+    if solution is None or getattr(solution, "ok", True):
+        return
+    kind = getattr(solution, "kind", "")
+    error = getattr(solution, "error", "") or ""
+    if kind == "unknown":
+        out.line(f"hint    the sentence matched no declared reading; "
+                 f":kinds lists all {len(KINDS) - 1} of them")
+    elif "names no carrier" in error:
+        out.line("hint    no enabled register names it; :domains lists the "
+                 "registers, and the carriers each one holds")
 
 
 def _print_question(out: Out, record) -> None:

@@ -20,6 +20,11 @@ Five concerns, in order:
 
 Subprocess verification is the slow part; it is confined to the classes named
 ``...Subprocess`` so it is easy to deselect with ``-k``.
+
+*Last altered 14 November 2026 (platform round, P5 the chat surface: the
+interactive surface echoes a query once, lists the declared readings with
+`:kinds`, and says why an unread question was refused --
+`studies/CHAT_SURFACE_STUDY.md`).*
 """
 
 from __future__ import annotations
@@ -846,6 +851,60 @@ class TestCommandLine:
         text = out.getvalue()
         assert "QUERY   describe carbon" in text
         assert "[0] ok  describe" in text
+
+    def test_interactive_echoes_a_query_once(self, glm):
+        """P5: the interactive surface printed the QUERY line twice -- its own
+        echo and the answer path's.  One query, one echo, answered or not."""
+        source = io.StringIO("describe carbon\nzzzz_nope\n:quit\n")
+        out = io.StringIO()
+        assert glm.main(["--interactive", "--no-banner", "-c", "1"],
+                        out=out, source=source) == 1
+        text = out.getvalue()
+        assert text.count("QUERY   describe carbon") == 1
+        assert text.count("QUERY   zzzz_nope") == 1
+
+    def test_interactive_lists_the_declared_readings(self, glm):
+        """P5: `:kinds` prints the parser's own table, not a second copy of
+        it, and every declared kind appears once."""
+        from glm_universal.runtime import KINDS
+
+        source = io.StringIO(":kinds\n:quit\n")
+        out = io.StringIO()
+        assert glm.main(["--interactive", "--no-banner"], out=out,
+                        source=source) == 0
+        text = out.getvalue()
+        declared = [k for k in KINDS if k != "unknown"]
+        assert f"query kinds ({len(declared)}):" in text
+        for kind in declared:
+            assert text.count(kind) == 1
+
+    def test_interactive_names_the_registers_a_refusal_searched(self, glm):
+        """P5: a question that names no carrier says the registers are where to
+        look, in the interactive surface only."""
+        source = io.StringIO("what is the address of iron\n:quit\n")
+        out = io.StringIO()
+        assert glm.main(["--interactive", "--no-banner"], out=out,
+                        source=source) == 1
+        assert ":domains lists the registers" in out.getvalue()
+
+        batch = io.StringIO()
+        assert glm.main(["-q", "what is the address of iron"],
+                        out=batch) == 1
+        assert ":domains lists the registers" not in batch.getvalue()
+
+    def test_interactive_says_why_an_unread_question_was_refused(self, glm):
+        """P5: a refusal in the interactive surface says the sentence matched
+        no declared reading and points at `:kinds`; the batch line, which the
+        evaluation pins, is unchanged."""
+        source = io.StringIO("zzzz_nope\n:quit\n")
+        out = io.StringIO()
+        assert glm.main(["--interactive", "--no-banner"], out=out,
+                        source=source) == 1
+        assert "matched no declared reading" in out.getvalue()
+
+        batch = io.StringIO()
+        assert glm.main(["-q", "zzzz_nope"], out=batch) == 1
+        assert "matched no declared reading" not in batch.getvalue()
 
     def test_interactive_meta_commands_work(self, glm):
         source = io.StringIO(

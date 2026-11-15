@@ -1,0 +1,199 @@
+{
+  "id": "W6",
+  "title": "Fluid statics and flow (with hydraulic power)",
+  "axioms": [
+    "pressure = force / area",
+    "volume_flow_rate = area * velocity",
+    "force = pressure * area",
+    "power = pressure * volume_flow_rate"
+  ],
+  "cases": [
+    {
+      "id": "W6-01",
+      "equation": "force = pressure * area",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W6-02",
+      "equation": "velocity = volume_flow_rate / area",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W6-03",
+      "equation": "power = pressure * volume_flow_rate",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "PREDICTED by W4<->W6 isomorphism; previously the 'union flip'"
+    },
+    {
+      "id": "W6-N1",
+      "equation": "pressure = force * area",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "area",
+    "force",
+    "power",
+    "pressure",
+    "velocity",
+    "volume_flow_rate"
+  ],
+  "dimensions": {
+    "area": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "force": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "power": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "pressure": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "velocity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "volume_flow_rate": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        3,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W12",
+      "name_in_this_wheel": "area",
+      "name_in_other_wheel": "area",
+      "reason": "the flow's cross-section = swept-prism cross-section"
+    }
+  ],
+  "non_identities": []
+}

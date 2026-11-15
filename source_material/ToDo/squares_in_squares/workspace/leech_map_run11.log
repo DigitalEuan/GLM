@@ -1,0 +1,36 @@
+CROSSCHECK DIFF n=5: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=18: cert Q(√7)/2 vs fit None/None
+CROSSCHECK DIFF n=40: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=65: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=89: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=109: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=124: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=127: cert Q(√7)/2 vs fit Q(√2,√3)/4
+CROSSCHECK DIFF n=148: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=151: cert Q(√7)/2 vs fit Q(√2,√3)/4
+CROSSCHECK DIFF n=176: cert Q(√7)/2 vs fit None/None
+CROSSCHECK DIFF n=204: cert Q(√7)/2 vs fit None/None
+CROSSCHECK DIFF n=233: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=234: cert Q(√7)/2 vs fit None/None
+CROSSCHECK DIFF n=265: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=376: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=416: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=445: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=489: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=636: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=688: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=861: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=921: cert Q(√2)/2 vs fit None/None
+CROSSCHECK DIFF n=964: cert Q(√2)/2 vs fit None/None
+coverage: 1000/1000 = 100.0%
+tiers: {'strict': 6, 'legacy': 970, 'certificate': 24} | strict-tier noise floor (1000 random): 2/1000
+total score 22.887471 | grid ceiling 28.937670 | improvement 6.050199
+level 1 Λ1–Λ4 window (rational): 555 grids, improvement sum 0.1238, waste mean 0.0346, fields {'Q': 555}
+level 2 Λ8 window (quadratic): 329 grids, improvement sum 4.4122, waste mean 0.0555, fields {'Q(√2)': 318, 'Q(√7)': 11}
+level 3 Λ16 window (quartic): 116 grids, improvement sum 1.5142, waste mean 0.0816, fields {'Q(√2,√3)': 111, 'Q(√3,√5)': 5}
+crosscheck cert-vs-fit: 0 agree, 24 differ
+spearman(level, waste) = +0.6114
+spearman(level, improvement) = +0.8204
+src x level: {"aux": {"3": 1, "2": 5}, "chain3": {"2": 98, "3": 31}, "closure": {"2": 52, "3": 2}, "exact": {"2": 67, "3": 79, "1": 3}, "gobel2": {"2": 54}, "gobel3": {"2": 6, "3": 3}, "gobelS": {"2": 18}, "grid": {"1": 552}, "removal": {"2": 29}}
+unresolved (level 0): 0 -> []
+wrote /home/z/my-project/download/leech_map.json

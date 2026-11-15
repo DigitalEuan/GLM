@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    First made by adding an "L" to the s(123):
+        - Found    by David Ellsworth on December  1, 2024, by taking the s(123) primitive packing that extends the s(102) found by Károly Hajba in September 2024 (which extended the s(37) found by Evert Stenlund in early 1980), and adapting and extending the technique used in the s(37) found by David W. Cantrell in September 2002, and the s(130) improvement by David W. Cantrell on November 26, 2024.
+        - Improved by David Ellsworth on December 19, 2024.
+        - Improved by David W. Cantrell on/before January 16, 2025, with exact analytic solution. This technique was found independently by both David W. Cantrell and David Ellsworth, but was applied to this s(123) first by David W. Cantrell.
+        - Reconstructed by David Ellsworth on January 19, 2025, with exact polynomial root solution.
+    Then improved by David W. Cantrell on January 30, 2025, by converting to rotational symmetry.
+    Reconstructed by David Ellsworth on January 31, 2025.
+    This is the first best known packing found that is doubly semi-primitive, i.e. has only non-rotated squares on its leftmost and rightmost sides, but has rotated square(s) poking into its top and bottom sides. (Or swap left/right and top/bottom.)
+
+    Unset[{s, s1, a, b, r0, v0, p0, p1, p2, u1, v1, v2a, v2b, v3a, v3b}];
+    r0 = 1 - (s - 12)*Cos[Pi/4 - a];
+    v0 = Cos[Pi/4 - a] - Sin[Pi/4 - a];
+    p0 = {3, s - 1} + RotationTransform[Pi/4 - a][{1 - r0 + v0, -2}];
+    p1 = p0 + RotationTransform[Pi/4 - b][{0, -1}];
+    p2 = p1 + RotationTransform[Pi/4 + a][{-v0, -3}];
+    p3 = p2 + RotationTransform[Pi/4 + a][{-2, 0}];
+    u1 = 3 - RotationTransform[-Pi/4 + b][p0 - {3, 8}][[1]];
+    v1 = RotationTransform[-Pi/4 - a][({s, s} - p3) - p3][[2]];
+    v2a = RotationTransform[-Pi/4 + b][p1 - (p1 + RotationTransform[Pi/4 + a][{-1, v1/2}])][[2]];
+    v2b = RotationTransform[-Pi/4 + b][p1 - (p1 + RotationTransform[Pi/4 + a][{-2, v1}])][[2]];
+    v3a = v3a /. Solve[RotationTransform[-Pi/4 + b][(p0 + RotationTransform[Pi/4 - a][{-1, -v3a}]) - (p0 + RotationTransform[Pi/4 - b][{-1, -v2a}])][[2]] == 0, v3a][[1]];
+    v3b = v3b /. Solve[RotationTransform[-Pi/4 + b][(p0 + RotationTransform[Pi/4 - a][{-2, -v3b}]) - (p0 + RotationTransform[Pi/4 - b][{-2, -v2b}])][[2]] == 0, v3b][[1]];
+    solution = FindRoot[{RotationTransform[Pi/4 - a][{s - 11, s - 10}][[2]] == 3,
+                         RotationTransform[-Pi/4 - a][p1 - {4, 7}][[1]] == 3,
+                         p2[[1]] == s - 5},
+                        {{s, 12.6}, {a, .1}, {b, .1}}, WorkingPrecision -> 100];
+    N[{s, a*180/Pi, b*180/Pi, r0, v0, u1, v1, v2a, v2b, v3a, v3b} /. solution, 38]
+
+    AbsoluteTiming[ToString[RootApproximant[Tan[a] /. solution, 48], InputForm]]  (* took 42.418 seconds with WorkingPrecision -> 5000; verified with WorkingPrecision -> 20000 *)
+    AbsoluteTiming[ToString[RootApproximant[Tan[b] /. solution, 16], InputForm]]  (* took  7.101 seconds with WorkingPrecision -> 5000; verified with WorkingPrecision -> 20000 *)
+    AbsoluteTiming[ToString[RootApproximant[s      /. solution, 16], InputForm]]  (* took  7.150 seconds with WorkingPrecision -> 5000; verified with WorkingPrecision -> 50000 *)
+(*
+    s = Root[82323170428761425 - 119456945705052640*# + 82161582314776868*#^2 - 35571513994776316*#^3 + 10847755732088938*#^4 - 2468567342450368*#^5 + 433020664362230*#^6 - 59622322943944*#^7 + 6500206337793*#^8 - 561971068668*#^9 + 38335080074*#^10 - 2038683388*#^11 + 82758797*#^12 - 2476628*#^13 + 51488*#^14 - 664*#^15 + 4*#^16, 3]
+    a = ArcTan[Root[833 - 16492*# - 39004*#^2 - 90964*#^3 - 130412*#^4 - 156412*#^5 - 146788*#^6 - 115012*#^7 - 76746*#^8 - 46020*#^9 - 21028*#^10 - 6268*#^11 + 3284*#^12 + 5932*#^13 - 28*#^14 - 748*#^15 + 289*#^16, 3]]
+    b = ArcTan[Root[30162097 - 13162122708*# - 239880620*#^2 - 42979677228*#^3 + 17194087908*#^4 - 28938879748*#^5 + 69828723468*#^6 + 44808066564*#^7 + 105698487078*#^8 + 75129407364*#^9 + 74277285612*#^10 + 35451971708*#^11 + 23203224900*#^12 + 3670214996*#^13 + 2290235316*#^14 - 581741140*#^15 + 29353217*#^16, 1]]
+
+    (* There is no Sqrt[2] factorization of the polynomial root for "s". *)
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s    "12.600907778513018240112031047079092473">
+    <!ENTITY a    "2.5849569891337414201060186494149673129">
+    <!ENTITY b    ".13129007413578211718209005019200148491">
+    <!ENTITY r0   ".55636284062085083052477223657963587948">
+    <!ENTITY v0   ".06378203119624548155488848706364251287">
+    <!ENTITY u1   ".03828388953544539575437834153118651247">
+    <!ENTITY v1   ".04934775311628377191739198411937737616">
+    <!ENTITY v2a  ".02274354387532002486105391986654271972">
+    <!ENTITY v2b  ".04548708775064004972210783973308543944">
+    <!ENTITY v3a  ".06561517992166111535169517191347475085">
+    <!ENTITY v3b  ".13123035984332223070339034382694950170">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="sideA">
+        <path style="stroke:none" d="M9,0 V 1 H8 V2 H7 V3 H6 V4 H5 V6 H4 V7 H3 V8 H2 V9 H1 V10 H0 V0"/>
+        <path style=  "fill:none" d="M9,0 V 1 H0
+                                     M8,0 V 2 H0
+                                     M7,0 V 3 H0
+                                     M6,0 V 4 H0
+                                     M5,5     H0
+                                     M5,0 V 6 H0
+                                     M4,0 V 7 H0
+                                     M3,0 V 8 H0
+                                     M2,0 V 9 H0
+                                     M1,0 V10 H0"/>
+    </g>
+    <use xlink:href="#sideA" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <g id="corner" transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M3,0 V1 H2 V2 H0 V0"/>
+        <path style=  "fill:none" d="M3,0 V1 H0
+                                     M2,0 V2 H0
+                                     M1,0 V2"/>
+    </g>
+    <use xlink:href="#corner" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <defs>
+        <g id="straight_CCW_b">
+            <use xlink:href="#one" transform="translate(-2 -&v2b;)"/>
+            <use xlink:href="#one" transform="translate(-1 -&v2a;)"/>
+            <use xlink:href="#one"/>
+        </g>
+        <g id="turn_CCW">
+            <use xlink:href="#one" transform="translate(-2 -&v3b;)"/>
+            <use xlink:href="#one" transform="translate(-1 -&v3a;)"/>
+            <use xlink:href="#one"/>
+        </g>
+        <g id="turn_CW">
+            <use xlink:href="#one" transform="translate(-2 &v1;)"/>
+            <use xlink:href="#one" transform="translate(-1) scale(.5) translate(0 &v1;) scale(2)"/>
+            <use xlink:href="#one"/>
+        </g>
+    </defs>
+    <g id="side1" transform="translate(3 &s;) translate(0 -1) rotate(45) rotate(-&a;) translate(-&r0; -1)">
+        <use xlink:href="#turn_CCW"/>
+        <g transform="translate(&v0; -1)">
+            <use xlink:href="#turn_CCW"/>
+            <g transform="translate(1) rotate(&a;) rotate(-&b;)">
+                <use xlink:href="#straight_CCW_b" transform="translate(&u1;) translate(-1 -1)"/>
+                <g transform="translate(0 -1) rotate(&b;) rotate(&a;) translate(-1 -1)">
+                    <use xlink:href="#turn_CW"/>
+                    <use xlink:href="#turn_CW" transform="translate(-&v0; -1)"/>
+                    <use xlink:href="#turn_CW" transform="translate(-&v0; -2)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

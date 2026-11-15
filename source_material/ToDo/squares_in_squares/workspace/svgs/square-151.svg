@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on November 11, 2024, using Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html (with s = 12.82505625)
+        Similar to the s(86) found by Erich Friedman in 1997, but with a very slightly larger enclosing square and very slightly steeper angle.
+        An exact optimized solution yielded a significantly better side length than that found by the program.
+    Improved by David W. Cantrell on December 28, 2024.
+
+    si = 12;
+    r1 = (s - si)*Cos[b];
+    v2 = RotationTransform[b][({10, 1} + RotationTransform[-b][{r1 - 1, 0}]) - ({1, s - 2} + RotationTransform[a][{-3/4 - 8/2, -12}])][[1]];
+    solution = RootReduce[Solve[{EuclideanDistance[{0, 0}, {s - si, s - (si - 1)}] == 2,
+                                 Tan[a] == (s - (si - 1))/(s - si) && Pi/4 < a < Pi/2,
+                                 ({10, 1} + RotationTransform[-b][{r1 - 1, 2}])[[2]] == s - 10 && 0 < b < Pi/4}, {s, a, b}]];
+    ToString[solution, InputForm]
+    N[{s, a*180/Pi, b*180/Pi, r1, v2} /. solution, 38]
+(*
+    s  = 23/2 + Sqrt[7]/2
+    a  = ArcTan[(4 + Sqrt[7])/3]
+    b  = ArcTan[Root[-9 - 16*# + 26*#^2 - 8*#^3 + 25*#^4 + 16*#^5 + 2*#^6 + 8*#^7 + 3*#^8, 4]]
+    v2 = Root[2785880840313 - 390839548071040*# - 901726833480704*#^2 + 225601670619136*#^3 - 348751604187136*#^4 - 22352773513216*#^5 + 1545970122752*#^6 + 134888816640*#^7 + 2415919104*#^8, 3]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "12.822875655532295295250807876819630213">
+    <!ENTITY a  "65.704811054635429669240251093462860371">
+    <!ENTITY b  "35.223258201494613830410651506275629044">
+    <!ENTITY r1 ".67221604180935814596769964682141532793">
+    <!ENTITY v2 ".00701461399956647562532020606024770926">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M0, 0 H10 V1 H9 V2 H8 V3 H7 V4 H6 V5 H5 V6 H4 V7 H3 V8 H2 V9 H1 V10 H0"/>
+        <path style=  "fill:none" d="M0, 1 H10 V0
+                                     M0, 2 H 9 V0
+                                     M0, 3 H 8 V0
+                                     M0, 4 H 7 V0
+                                     M0, 5 H 6 V0
+                                     M0, 6 H 5 V0
+                                     M0, 7 H 4 V0
+                                     M0, 8 H 3 V0
+                                     M0, 9 H 2 V0
+                                     M0,10 H 1 V0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M0, 0 H11 V1 H10 V2 H9 V3 H8 V4 H7 V5 H6 V6 H5 V7 H4 V8 H3 V9 H2 V10 H1 V11 H0"/>
+        <path style=  "fill:none" d="M0, 1 H11 V0
+                                     M0, 2 H10 V0
+                                     M0, 3 H 9 V0
+                                     M0, 4 H 8 V0
+                                     M0, 5 H 7 V0
+                                     M0, 6 H 6 V0
+                                     M0, 7 H 5 V0
+                                     M0, 8 H 4 V0
+                                     M0, 9 H 3 V0
+                                     M0,10 H 2 V0
+                                     M0,11 H 1 V0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M2,0 V1 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H0
+                                     M1,0 V1 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <rect style="stroke:none" x="0" y="0" width="1" height="2"/>
+        <path style=  "fill:none" d="M0,2 H1 V0
+                                     M0,1 H1"/>
+    </g>
+    <g transform="translate(1 &s;) translate(0 -2) scale(-1) rotate(&a;) translate(-1.25 &v2;)">
+        <g id="two">
+            <rect width="2" height="1"/>
+            <path style="fill:none" d="M1,0 V1"/>
+        </g>
+        <use xlink:href="#two" transform="translate(0.5  1)"/>
+        <use xlink:href="#two" transform="translate(1.0  2)"/>
+        <use xlink:href="#two" transform="translate(1.0  3)"/>
+        <use xlink:href="#two" transform="translate(1.5  4)"/>
+        <use xlink:href="#two" transform="translate(2.0  5)"/>
+        <use xlink:href="#two" transform="translate(2.5  6)"/>
+        <use xlink:href="#two" transform="translate(2.5  7)"/>
+        <use xlink:href="#two" transform="translate(3.0  8)"/>
+        <use xlink:href="#two" transform="translate(3.5  9)"/>
+        <use xlink:href="#two" transform="translate(4.0 10)"/>
+        <use xlink:href="#two" transform="translate(4.0 11)"/>
+    </g>
+    <use xlink:href="#two" transform="translate(10 1) rotate(90) rotate(-&b;) translate(0 -&r1;)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

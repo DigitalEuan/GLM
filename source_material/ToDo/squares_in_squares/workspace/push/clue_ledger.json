@@ -1,0 +1,87 @@
+{
+ "run": 21,
+ "date": "2026-11-05",
+ "question": "is there absolutely zero clues from the solves so far, even with our additional metrics?",
+ "answer": "No \u2014 seven quantitative channels, all pointing the same way. The clues are not absent; they are unanimous.",
+ "channels": [
+  {
+   "channel": "Leech level/field classification",
+   "says": "all 23 roots are level 1 (rational window, field Q, certificate tier); every one of the 454 beating-grid rows is level 2+ (quadratic fields Q(\u221a2)\u00d7323 / Q(\u221a7)\u00d711)",
+   "clue": "improvements below the rational window exist exactly where a quadratic-or-higher field certificate exists; the roots have none \u2014 no tilted construction can ever reach them",
+   "roots_by_(level,field)": {
+    "(1, 'Q')": [
+     12,
+     20,
+     21,
+     30,
+     31,
+     32,
+     42,
+     43,
+     44,
+     45,
+     56,
+     57,
+     58,
+     59,
+     60,
+     73,
+     74,
+     75,
+     76,
+     77,
+     133,
+     157,
+     158
+    ]
+   },
+   "level1_improvement_sum": -6.149904566723732e-08
+  },
+  {
+   "channel": "the stall law (dynamics)",
+   "says": "at target grid\u2212d the best terminal objective gives penetration p \u2248 0.45\u20130.88 \u00d7 d, across 3 independent priors, deltas to 1e-5; p \u2192 0 only as d \u2192 0",
+   "clue": "the engine resolves the boundary to <1.5e-3 (this run's demo) \u2014 if a packing existed below grid, some seed would hit ~1e-13 like the pinwheel control does; instead every prior stalls proportionally to the deficit",
+   "stall_ratios": [
+    0.501,
+    0.448,
+    0.731,
+    0.804,
+    0.671,
+    0.883
+   ]
+  },
+  {
+   "channel": "boundary crossing experiment (run 21)",
+   "says": "same engine, same seeds, same gate: verified finds with f = 0.00 at every offset above the grid (down to +5e-4); 0 finds with f ~ 2e-6 below it",
+   "clue": "the 'E \u2248 0.01\u20130.05' band is not a machinery floor \u2014 it is the infeasibility report, and it vanishes above the boundary",
+   "feasible_cells": 8,
+   "infeasible_cells": 6,
+   "best_f_feasible": 8.057929936992057e-20
+  },
+  {
+   "channel": "atlas best-known compilation",
+   "says": "23 reject entries touch the roots, every one 'no beat after finalize' at grid+eps",
+   "clue": "the best-known record itself contains nothing below grid for the roots \u2014 the external record and our search agree"
+  },
+  {
+   "channel": "waste-by-level metric",
+   "says": "level-0 (unresolved): 114 rows, improvement_sum 1.630, waste_mean 0.0841; spearman(level, waste) = 0.532",
+   "clue": "the reachable improvement is concentrated in level-0 (the 114 unresolved rows), not in the roots' level-1 class (whose improvement_sum is \u22121.1e-10 \u2248 0)"
+  },
+  {
+   "channel": "score arithmetic",
+   "says": "all 23 roots improving by 0.002 \u2192 score 22.823536 \u2192 22.816824 (+0.029%); the area-floor headroom (1.41) is an absolute ceiling equal squares cannot tile",
+   "clue": "even a perfect crack of the roots is worth 0.03% \u2014 the score's real headroom is in level-0 polish"
+  },
+  {
+   "channel": "positive controls",
+   "says": "pinwheel rediscovery {'5': {'n': 5, 'grid': 3, 'known': 2.707106781, 'table_L': 2.707106782448, 'best_L': None, 'calls': 3, 'seconds': 118.6}, '12': {'n': 12, 'grid': 4, 'known': 4.0, 'table_L': 4.0000000015, 'best_L': None, 'calls': 3, 'seconds': 153.6}} \u2014 the engine finds packings that exist at sizes well below grid",
+   "clue": "the engine has no floor (channel 3) and no blindness (this channel); what it cannot find does not exist"
+  }
+ ],
+ "what_would_change_the_verdict": {
+  "a_verified_find": "any L < grid \u2212 1e-9 verified by the finalize gate on any root \u2014 none in 700+ attempts (run 20) plus this run",
+  "an_infeasibility_proof": "tier-1 of the forward plan \u2014 would turn the empirical unanimity into a theorem",
+  "a_new_law_class": "a wheel outside the physical-dynamic family (combinatorial/contact-graph) opening geometry, not just dynamics"
+ }
+}

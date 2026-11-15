@@ -1,0 +1,20 @@
+{
+ "5": {
+  "n": 5,
+  "grid": 3,
+  "known": 2.707106781,
+  "table_L": 2.707106782448,
+  "best_L": null,
+  "calls": 3,
+  "seconds": 60.7
+ },
+ "12": {
+  "n": 12,
+  "grid": 4,
+  "known": 3.877083592,
+  "table_L": 4.0000000015,
+  "best_L": null,
+  "calls": 3,
+  "seconds": 83.3
+ }
+}

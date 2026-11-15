@@ -1,0 +1,108 @@
+{
+ "run": 27,
+ "date": "2026-11-06",
+ "user_request": "continue this project - see NEXT_STEPS P4",
+ "executed": {
+  "P4_standing_channel": {
+   "status": "fixpoint confirmed",
+   "measured": "cascade3: 0 chain improvements, 0 fails; closure_apply: fixpoint after 0 rounds; final_assembly: round-trip 0 issues; score unchanged 22.819977568; beats-grid 454"
+  },
+  "P4_instrument": {
+   "status": "built + run (scripts/root_audit.py)",
+   "file": "workspace/push/root_audit27.json",
+   "fixpoint_audit": {
+    "rows_above_envelope": 0,
+    "note": "0 unexploited conversions -- the cascade is at a true fixpoint; envelope tolerance 1e-7 absorbs the finalize +2e-9 scale"
+   },
+   "proven_floors": {
+    "count": 156,
+    "sources": "area bound (perfect squares); T-084 Karaku\u015f s(k^2-1)=k; T-086 chelokot s(k^2-2)=k; T-064 Daniel s(k^2-3)=k; T-081 Daniel s(k^2-4)=k; individuals T-237 (s(2..5)), T-060 (s(11)), T-006 (s(13)=4), T-052 (s(21)=5), T-051 (s(32)=6), T-252 (s(44)=7), T-053 (s(45)=7), T-008 (s(46)=7), T-066 (s(59)=8), T-062/3 (s(60/61)=8), T-184 (s(76)=9), T-067 (s(77,78)=9), T-191 (s(95,96)=10); machine-checked C1: s(12)=4 [T-245/evand], s(17) [T-153], s(19) [T-194]"
+   },
+   "open_structure": {
+    "open_rows": 394,
+    "fully_open_diagonals": 0,
+    "note": "the four optimality theorems prove every diagonal's head; all open rows live at r >= 5"
+   },
+   "aiming_map": {
+    "diagonals_with_aims": 54,
+    "top_aims": [
+     {
+      "n": 251,
+      "K": 16,
+      "converts": 16,
+      "value_T263": 0.015569
+     },
+     {
+      "n": 250,
+      "K": 16,
+      "converts": 15,
+      "value_T263": 0.014877
+     },
+     {
+      "n": 284,
+      "K": 17,
+      "converts": 16,
+      "value_T263": 0.014863
+     },
+     {
+      "n": 191,
+      "K": 14,
+      "converts": 13,
+      "value_T263": 0.014854
+     },
+     {
+      "n": 282,
+      "K": 17,
+      "converts": 15,
+      "value_T263": 0.014206
+     },
+     {
+      "n": 283,
+      "K": 17,
+      "converts": 15,
+      "value_T263": 0.014191
+     },
+     {
+      "n": 220,
+      "K": 15,
+      "converts": 13,
+      "value_T263": 0.014069
+     },
+     {
+      "n": 190,
+      "K": 14,
+      "converts": 12,
+      "value_T263": 0.014027
+     }
+    ],
+    "aggregate_T263": 0.4334,
+    "aggregate_d01": 0.198927,
+    "d_star": 0.0382,
+    "validation": "cross-validated against an independent reimplementation of the chain-envelope value: totals agree to 1e-6 (0.4334); the first version overcounted by 70% (0.736) because it aimed at proven floors -- the theorems fixed it"
+   },
+   "doc_errors_fixed": {
+    "count": 2,
+    "detail": "run-26 NEXT_STEPS \u00a72 (a) listed 453, 498, 810, 869, 930, 993 as c=10 members: 453/498 are c=12/c=14 (21\u00b2+12, 22\u00b2+14) and 810/869/930/993 belong to the open-head diagonals c=26/28/30/32; (b) claimed T-263 binds the c=10 tail: T-263 binds only 299..539 (chain stops at 410/451, deeper gobel2), and 586..971 is bound by the community record at 586 (\u03c1=1/\u221a2\u22121); the true c=10 staircase has 11 roots (35\u2026586); also the run-26 \u00a71 claim 'the register now moves above n=324' was wrong: register max n = 308, zero bounds > 324"
+   }
+  },
+  "P3_watch": {
+   "status": "checked, nothing new to import",
+   "import_atlas": "idempotent (applied 0, skipped 5, rejected 319)",
+   "register": "frontier RESULTS.md fetched and parsed (273 result rows): no new upper bounds after T-263; the four optimality theorems and 21 individual results were absorbed into the instrument instead"
+  },
+  "NEXT_STEPS_update": {
+   "status": "rewritten to the Run-27 state",
+   "changes": "\u00a72 corrected (membership, binding root, register range) with the instrument's numbers; \u00a71 tie structure split into proven floors (152) vs open rows (394); aiming map + aggregate (0.4334, d*=0.0382) added; \u00a73 extended with failures 11-12 (documentation arithmetic; proven floors gate the aiming); P4 section rewritten as instrumented; value ladder updated"
+  }
+ },
+ "score": {
+  "before": 22.819977568,
+  "after": 22.819977568,
+  "delta": 0.0
+ },
+ "next": [
+  "P1' blob-regime insertion at the measured aims: 251, 250, 284, 191 (r=5/6 roots of the two biggest diagonals); read the 2026-11-03 structure-guided-search preprint first",
+  "P3 weekly watch (the only item that has paid); absorb new optimality results into PROVEN_FLOOR immediately",
+  "P5 certification backlog (Lean; T-263 Fraction replay)"
+ ]
+}

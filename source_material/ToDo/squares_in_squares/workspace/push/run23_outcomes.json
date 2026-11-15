@@ -1,0 +1,46 @@
+{
+ "run": 23,
+ "date": "2026-11-05",
+ "user_message": {
+  "1": "repository updated",
+  "2": "no README.md received",
+  "3": "continue the project - it looks like the Soft relaxation worked but has moved the submission.csv or score?"
+ },
+ "answers": {
+  "Q2_no_readme": {
+   "root_cause": "run 22 delivered README.md only NESTED under download/run22/README.md; earlier runs also refreshed the TOP-LEVEL download/README.md. The file existed (download/run22/README.md, 10796 B) but the visible top-level copy was stale.",
+   "fix": "this run refreshes download/README.md at the top level AND delivers the nested copy; standard from now on."
+  },
+  "Q3_submission_score": {
+   "answer": "NO \u2014 run 22 did not move submission.csv or the score. Evidence: (a) write footprint: table.json content dates to 08:03 and submission.csv download copies to 19:15; run 22 wrote at 22:18+ and touched only workspace/push/soft_relax*.json; (b) sha256: download/table.json == workspace table.json, download/submission.csv == workspace submission.csv (byte-identical); (c) independent recomputation: score from table = 22.823536149 = score recomputed from submission.csv via packlib.verify (1000 rows, every state non-overlapping, max penetration 0.00e+00).",
+   "what_did_move": "the score delta the user saw: leech snapshot 22.887470936 (08:02) -> table 22.823536149 (08:03) is RUN 19's application of 6 run18-frontier rows (n=183, 211, 308, 343, 380, 419), committed a163ab8 09:22 \u2014 hours before run 22 started.",
+   "run22_find_status": "the run-22 verified 2.708107407 (n=5) was ABOVE the table's existing 2.707106782 (src gobelS:a1b1) \u2014 a control, correctly NOT applied; submission untouched."
+  }
+ },
+ "correction": {
+  "circular_atlas": "run 22's claim 'we beat the atlas on all 114 level-0 rows (net -0.77)' is RETRACTED as circular: leech_map.py reads download/table.json \u2014 the 'atlas' was our own table one minute before run 19's application. The -0.77 was run 19's application delta, not a comparison against an external study."
+ },
+ "method": {
+  "sweep": "12 top-waste at-grid rows (waste = grid/sqrt(n)-1): {2,6,7,8,13,14,21,22,23,30,42,56} x ladder (grid-0.0005, grid-0.002, grid-0.01) x 2 seeds x 8 hops = 288 hop-polishes via soft_relax.hop_search (SA pass-through shuffle + settle_to L-BFGS re-hardening); find criterion: finalize_gate-verified L < min(grid, table L) - 1e-9.",
+  "ladder_calibration": "the 6 run18-frontier cracks landed at 0.0004..0.0065 below grid, so the ladder starts at -0.0005 \u2014 tighter than any previous run."
+ },
+ "results": {
+  "cells": 36,
+  "finds": 0,
+  "hard_hops": "0/288",
+  "score_before": 22.823536149,
+  "score_after": 22.823536149,
+  "table_changed": false,
+  "detail": "every cell 0/8: no polished state reached pairwise non-overlap at ANY target, even 0.0005 below grid."
+ },
+ "readings": [
+  "The gap-throttle law (run 22) is confirmed in the negative direction: on the 12 highest-waste small-n level-1 rows, nothing re-hardens even 0.0005 below the trivial grid \u2014 the soft pass-through channel, which DID crack n=5 at +0.001 above its known optimum, cannot open any small-n level-1 row.",
+  "Honest nuance: the level-1 wall is porous at LARGE n. Run 18 cracked 6 level-1 rows (183, 211, 308, 343, 380, 419) by 0.0004..0.0065. The remaining 546 at-grid rows split into a large-n set worth a hair-margin sweep and a small-n set that has now resisted every channel (runs 20-23).",
+  "The verified channel for any future find is unchanged: table best-L-wins -> cascade3 -> closure_apply -> final_assembly (rebuilds submission.csv); sweep23.apply() implements it and reported 'no applicable finds \u2014 table unchanged (honest)'."
+ ],
+ "next": [
+  "large-n hair-margin sweep: the at-grid rows in bands around the 6 cracked ones (n in 184..199 at 14, 212..224 at 15, ...), ladder -0.0005 first",
+  "tier-1 infeasibility theorem for small-n level-1 rows (turn the empirical unanimity of runs 20-23 into a proof)",
+  "keep the top-level download/README.md refresh in every future run"
+ ]
+}

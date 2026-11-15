@@ -1,0 +1,20 @@
+fail  n=5 L=2.72 E=5.392e-02 in 8.0s
+fail  n=5 L=2.75 E=2.983e-02 in 8.0s
+FOUND n=5 L=2.8 in 2.0s
+fail  n=10 L=3.72 E=2.221e-01 in 31.7s
+fail  n=10 L=3.75 E=1.701e-01 in 31.4s
+fail  n=10 L=3.85 E=3.768e-02 in 32.0s
+fail  n=11 L=3.9 E=7.214e-02 in 14.8s
+fail  n=11 L=3.95 E=2.932e-02 in 14.8s
+fail  n=17 L=4.75 E=3.846e-01 in 22.4s
+fail  n=17 L=4.85 E=1.547e-01 in 22.3s
+fail  n=17 L=4.95 E=2.096e-02 in 22.3s
+fail  n=19 L=4.95 E=1.887e-01 in 27.5s
+fail  n=26 L=5.85 E=2.965e-01 in 31.1s
+fail  n=27 L=5.9 E=1.876e-01 in 34.6s
+fail  n=28 L=5.95 E=2.470e-01 in 34.6s
+fail  n=29 L=5.98 E=3.684e-01 in 37.5s
+fail  n=37 L=6.9 E=2.638e-01 in 35.9s
+fail  n=41 L=6.98 E=7.249e-01 in 36.8s
+fail  n=50 L=7.95 E=2.925e-01 in 36.6s
+done

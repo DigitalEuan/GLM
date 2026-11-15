@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Made by extending a pattern found by by Frits Göbel in 1979.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "40.79898987322333068322364213894"> <!-- 21 + Sqrt[2]*14 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M20,0 V1 H19 V2 H18 V3 H17 V4 H16 V5 H15 V6 H14 V7 H13 V8 H12 V9 H11 V10 H10 V11 H9 V12 H8 V13 H7 V14 H6 V15 H5 V16 H4 V17 H3 V18 H2 V19 H1 V20 H0 V0"/>
+        <path style=  "fill:none" d="M0, 1 H20 V0
+                                     M0, 2 H19 V0
+                                     M0, 3 H18 V0
+                                     M0, 4 H17 V0
+                                     M0, 5 H16 V0
+                                     M0, 6 H15 V0
+                                     M0, 7 H14 V0
+                                     M0, 8 H13 V0
+                                     M0, 9 H12 V0
+                                     M0,10 H11 V0
+                                     M0,11 H10 V0
+                                     M0,12 H 9 V0
+                                     M0,13 H 8 V0
+                                     M0,14 H 7 V0
+                                     M0,15 H 6 V0
+                                     M0,16 H 5 V0
+                                     M0,17 H 4 V0
+                                     M0,18 H 3 V0
+                                     M0,19 H 2 V0
+                                     M0,20 H 1 V0"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#side1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <g transform="scale(.5) translate(&s; &s;) scale(2) rotate(45) translate(-14 -14)">
+        <rect width="28" height="28"/>
+        <path style="fill:none" d="M0, 1 H28 M 1,0 V28
+                                   M0, 2 H28 M 2,0 V28
+                                   M0, 3 H28 M 3,0 V28
+                                   M0, 4 H28 M 4,0 V28
+                                   M0, 5 H28 M 5,0 V28
+                                   M0, 6 H28 M 6,0 V28
+                                   M0, 7 H28 M 7,0 V28
+                                   M0, 8 H28 M 8,0 V28
+                                   M0, 9 H28 M 9,0 V28
+                                   M0,10 H28 M10,0 V28
+                                   M0,11 H28 M11,0 V28
+                                   M0,12 H28 M12,0 V28
+                                   M0,13 H28 M13,0 V28
+                                   M0,14 H28 M14,0 V28
+                                   M0,15 H28 M15,0 V28
+                                   M0,16 H28 M16,0 V28
+                                   M0,17 H28 M17,0 V28
+                                   M0,18 H28 M18,0 V28
+                                   M0,19 H28 M19,0 V28
+                                   M0,20 H28 M20,0 V28
+                                   M0,21 H28 M21,0 V28
+                                   M0,22 H28 M22,0 V28
+                                   M0,23 H28 M23,0 V28
+                                   M0,24 H28 M24,0 V28
+                                   M0,25 H28 M25,0 V28
+                                   M0,26 H28 M26,0 V28
+                                   M0,27 H28 M27,0 V28"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

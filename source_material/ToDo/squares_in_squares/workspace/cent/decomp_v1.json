@@ -1,0 +1,4 @@
+{
+  "comment": "v1 - initial cent decomposition of the packing pipeline (with redundant/stitched primitives)",
+  "primitives": ["state_space", "sat", "hysteresis", "rate", "accum", "sum", "eq", "mult", "spatial", "scale"]
+}

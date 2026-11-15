@@ -1,0 +1,66 @@
+{
+ "run": 30,
+ "date": "2026-11-06",
+ "user_request": "Continue this Squares in Squares project - see NEXT_STEPS.md",
+ "executed": {
+  "P2_T263_renewal": {
+   "status": "closed for good (honest null)",
+   "instrument": "scripts/t263_polish.py",
+   "ledger": "workspace/push/t263_polish30.json",
+   "measured": {
+    "cells": "12/12 (299/334/371 x ladder 0.002/0.005/0.01 below row L)",
+    "engine": "settle -> anneal(6k moves) -> re-harden hops; finalize gate",
+    "finds": 0,
+    "hard_hops": 0,
+    "soft_best": "pinned 0.4-2.5e-3 above L_t in every cell",
+    "baselines_NRCI": {
+     "299": "g=57 phi=0.1014 NRCI=0.3104",
+     "334": "g=57 phi=0.0877 NRCI=0.3104",
+     "371": "g=57 phi=0.0724 NRCI=0.3104"
+    },
+    "reading": "the 41 floaters at Maxwell ratio 0.68 do not settle deeper by contact-graph re-breaking; the record's depth is not floaters waiting to close"
+   }
+  },
+  "P3_mishapolk_import": {
+   "status": "the largest import since run 22",
+   "instruments": [
+    "scripts/fetch_mishapolk.py",
+    "scripts/import_mishapolk.py"
+   ],
+   "ledgers": [
+    "workspace/push/fetch_mishapolk30.json",
+    "workspace/push/import_mishapolk30.json"
+   ],
+   "measured": {
+    "source": "Mishapolk/square-packing-records upper_bounds.json: verified bounds at ALL 1000 n; the band 325..1000 was invisible to our atlas (1..324 only)",
+    "rows_applied": 221,
+    "invocations": "1: 25 rows (verify-tolerance fix: exact-tangency float noise +2e-15); 2: 196 rows (dry-run ledger bug fixed \u2014 applied rows from a dry run must never feed the resume ledger)",
+    "cert_format": "header n S; per square x y t (centre, t=tan(theta/2))",
+    "channel": "cascade3 9 applied, closure_apply 3, final_assembly round-trip 0 issues",
+    "root_audit": "fixpoint true (0 above envelope), 305 open rows, aggregate 0.375304, best aim c=32 n=356 (0.011102, 14 conversions)"
+   }
+  },
+  "P3_karimi_read": {
+   "status": "read (via browser; preprints.org blocks plain fetchers)",
+   "measured": {
+    "two_strip": "L-shape with tilted wall strips (Ryu Thm 1.3 lineage); 2824 bounds at n=1184..9944, preprint v2 5308 at n in [1182,9944] - outside our range",
+    "window_theorem": "for every integer K >= 16, s(n) < K whenever n <= K^2 - 8*sqrt(K) - 19; exponent 3/5 -> 1/2 over Bui/McClenagan; the certificate shape for our mid-band rows"
+   }
+  },
+  "NEXT_STEPS_update": {
+   "status": "updated to the Run-30 state",
+   "changes": "P2 closed for good; P3 adds Mishapolk to the weekly loop; aiming map refreshed (top aim 356); value ladder and gap recomputed (0.591569; d* 0.0365; ceiling 5.005)"
+  }
+ },
+ "score": {
+  "before": 22.819977568,
+  "after": 22.645990613,
+  "delta": -0.173986955
+ },
+ "beats_grid": 543,
+ "next": [
+  "P3 weekly now includes fetch_mishapolk.py (idempotent)",
+  "P1' insertion campaign at the refreshed top aims (356, 395, 355)",
+  "watch construction-only rows for certificates (n=261 is the only gain > 1e-5)"
+ ]
+}

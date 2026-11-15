@@ -1,0 +1,7 @@
+fail  n=11 L=3.98 E=1.291e-02 in 12s
+fail  n=18 L=4.98 E=4.942e-02 in 23s
+fail  n=27 L=5.98 E=6.617e-02 in 39s
+fail  n=12 L=3.98 E=8.790e-02 in 13s
+fail  n=29 L=5.98 E=3.553e-01 in 45s
+FOUND n=10 L=3.98 in 1s
+done

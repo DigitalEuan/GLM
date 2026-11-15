@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on November 25, 2024.
+    Made by extending the s(102) found by Károly Hajba in September 2024 and improved by David W. Cantrell in November 2024.
+    Improved by David Ellsworth on November 27, 2024, by generalizing the full technique used in the s(37) found by David W. Cantrell in September 2002.
+    Improved by David Ellsworth on December 19, 2024.
+
+    AbsoluteTiming[
+        RootReduce[Solve[{RotationTransform[-Pi/4 - a][({2 + (s - 15)/2, s - 1 + (s - 15)/2} + RotationTransform[Pi/4][{-3 + u5, -2 - 2*v3 + v4}] + RotationTransform[Pi/4 + a][{-3*v0, -4}]) - ({s - 1, s}/2 + RotationTransform[Pi/4 - a][{-3, 1 - 2*v1}/2])][[2]] == 0,
+                          RotationTransform[Pi/4 + a][{s - 12, s - 2} - {1, 12}][[2]] == 3},
+                         {s, a}][[4]]]]
+    (* RootReduce[] took 183.471 seconds *)
+    s = Root[388340875383845233 - 290971312817869664*# + 99460046477154240*#^2 - 20490408263563724*#^3 + 2830331680270636*#^4 - 275725098032832*#^5 + 19384693200660*#^6 - 988137514952*#^7 + 36096990788*#^8 - 915791264*#^9 + 15160736*#^10 - 144384*#^11 + 576*#^12, 1]
+    a = ArcTan[Root[100 - 3920*# + 3276*#^2 - 10016*#^3 + 8017*#^4 - 9876*#^5 + 7164*#^6 - 5564*#^7 + 2522*#^8 - 2204*#^9 + 224*#^10 - 420*#^11 + 9*#^12, 1]]
+
+    s = Root[-FactorList[s[[1, 1]], Extension -> Sqrt[2]][[2, 1]], 1]
+    s = Root[907787225 + 466763736*Sqrt[2] - (320302448 + 155625644*Sqrt[2])*# + (46342192 + 20798868*Sqrt[2])*#^2 - (3498934 + 1393560*Sqrt[2])*#^3 + (143990 + 46836*Sqrt[2])*#^4 - (3008 + 632*Sqrt[2])*#^5 + 24*#^6, 1]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "15.609022821324957385911291945620198">
+    <!ENTITY a  "1.4912091959420826685269224290743137">
+    <!ENTITY r0 ".44170521990674827125585175844731547"> <!-- (s - 15)*Cos[Pi/4 - a] -->
+    <!ENTITY v0 ".03680288860771204520350836787878314"> <!-- Cos[Pi/4 - a] - Sin[Pi/4 - a] -->
+    <!ENTITY v1 ".02603238850383152936982009629720329"> <!-- Tan[a] -->
+    <!ENTITY u2 ".01739132272787648332607298711087801"> <!-- 3 - RotationTransform[-Pi/4][{s - 13, s - 1} - {1, 12}][[1]] -->
+    <!ENTITY v3 "1.0256849016004441756615031359153169"> <!-- Sin[a] + Cos[a] -->
+    <!ENTITY v4 ".00314289988667174539882445328634119"> <!-- RotationTransform[-Pi/4][({2, s - 1} + RotationTransform[Pi/4 - a][{r0 - 2 + v0, -2 - v0 - v1}]) - ({2 + (s - 15)/2, s - 1 + (s - 15)/2} + RotationTransform[Pi/4][{-3, -1 - v3}])][[2]] -->
+    <!ENTITY u5 ".01952724976039452383433254927482157"> <!-- u2 - (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{ 3, 10} - ({2 + (s - 15)/2, s - 1 + (s - 15)/2} + RotationTransform[Pi/4][{-3 + u2, -2 - 2*v3 + v4}])]) -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M12,0 V 1 H11 V2 H10 V3 H9 V4 H8 V5 H7 V6 H6 V7 H5 V8 H4 V9 H3 V10 H2 V11 H1 V12 H0 V0"/>
+        <path style=  "fill:none" d="M12,0 V 1 H0
+                                     M11,0 V 2 H0
+                                     M10,0 V 3 H0
+                                     M 9,0 V 4 H0
+                                     M 8,0 V 5 H0
+                                     M 7,0 V 6 H0
+                                     M 6,0 V 7 H0
+                                     M 5,0 V 8 H0
+                                     M 4,0 V 9 H0
+                                     M 3,0 V10 H0
+                                     M 2,0 V11 H0
+                                     M 1,0 V12 H0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M3,0 V1 H2 V2 H0 V0"/>
+        <path style=  "fill:none" d="M3,0 V1 H0
+                                     M2,0 V2 H0
+                                     M1,0 V2"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M13,0 V 1 H12 V2 H11 V3 H10 V4 H9 V5 H8 V6 H7 V7 H6 V8 H5 V9 H4 V10 H3 V11 H2 V12 H1 V13 H0 V0"/>
+        <path style=  "fill:none" d="M13,0 V 1 H0
+                                     M12,0 V 2 H0
+                                     M11,0 V 3 H0
+                                     M10,0 V 4 H0
+                                     M 9,0 V 5 H0
+                                     M 8,0 V 6 H0
+                                     M 7,0 V 7 H0
+                                     M 6,0 V 8 H0
+                                     M 5,0 V 9 H0
+                                     M 4,0 V10 H0
+                                     M 3,0 V11 H0
+                                     M 2,0 V12 H0
+                                     M 1,0 V13 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H0
+                                     M1,0 V2 H0"/>
+    </g>
+    <defs>
+        <g id="straight">
+            <rect width="3" height="1"/>
+            <path style="fill:none" d="M1,0 v1
+                                       M2,0 v1
+                                       M3,0 v1"/>
+        </g>
+        <g id="turn_CCW">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 &v1;)"/>
+            <use xlink:href="#one" transform="translate(1 &v1;) translate(1 &v1;)"/>
+        </g>
+        <g id="turn_CW">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 -&v1;)"/>
+            <use xlink:href="#one" transform="translate(1 -&v1;) translate(1 -&v1;)"/>
+        </g>
+    </defs>
+    <g id="side1">
+        <g transform="translate(2 &s;) translate(0 -1) rotate(45) rotate(-&a;) translate(&r0;) translate(-3 -1) translate(0 -&v0;) translate(0 -&v1;)">
+            <use xlink:href="#turn_CCW"/>
+            <use xlink:href="#turn_CCW" transform="translate(&v0; -1)"/>
+        </g>
+        <g transform="scale(.5 1) translate(&s; &s;) translate(-11 -1) scale(2 .5) translate(0 &s;) translate(0 -15) scale(1 2) rotate(45) translate(-3 -1) translate(0 &v4;)">
+            <use xlink:href="#straight" transform="translate(&u2;) translate(0 -1) translate(0 -&v3;)"/>
+            <use xlink:href="#turn_CW"  transform="translate(&u5;) translate(0 -1) translate(0 -&v3;) translate(0 -&v3;) rotate(&a;)"/>
+            <use xlink:href="#turn_CW"  transform="translate(&u5;) translate(0 -1) translate(0 -&v3;) translate(0 -&v3;) rotate(&a;) translate(-&v0; -1)"/>
+            <use xlink:href="#turn_CW"  transform="translate(&u5;) translate(0 -1) translate(0 -&v3;) translate(0 -&v3;) rotate(&a;) translate(-&v0; -2)"/>
+            <use xlink:href="#turn_CW"  transform="translate(&u5;) translate(0 -1) translate(0 -&v3;) translate(0 -&v3;) rotate(&a;) translate(-&v0; -3) translate(-&v0;)"/>
+            <use xlink:href="#turn_CW"  transform="translate(&u5;) translate(0 -1) translate(0 -&v3;) translate(0 -&v3;) rotate(&a;) translate(-&v0; -4) translate(-&v0;) translate(-&v0;)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s; &s;) translate(-1) scale(-1)"/>
+    <use xlink:href="#turn_CCW" transform="scale(.5) translate(&s; &s;) translate(-1) scale(2) rotate(45) rotate(-&a;) scale(.5) translate(-3 -1) translate(0 -&v1;) translate(0 -&v1;) scale(2)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

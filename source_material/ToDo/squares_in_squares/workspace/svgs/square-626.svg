@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on January 27, 2025, using a computer program he wrote.
+    Continues the s(26), s(85) series found by Erich Friedman in 1997.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "25.520815280171307914814354155782433668"> <!-- 27/2 + Sqrt[2]*17/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g id="side2">
+            <path style="stroke:none" d="M13,0 V 1 H12 V2 H11 V3 H10 V4 H9 V5 H8 V6 H7 V7 H6 V8 H5 V9 H4 V10 H3 V11 H2 V12 H0 V0"/>
+            <path style=  "fill:none" d="M13,0 V 1 H0
+                                         M12,0 V 2 H0
+                                         M11,0 V 3 H0
+                                         M10,0 V 4 H0
+                                         M 9,0 V 5 H0
+                                         M 8,0 V 6 H0
+                                         M 7,0 V 7 H0
+                                         M 6,0 V 8 H0
+                                         M 5,0 V 9 H0
+                                         M 4,0 V10 H0
+                                         M 3,0 V11 H0
+                                         M 2,0 V12 H0
+                                         M 1,0 V12"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M12,0 V 1 H11 V2 H10 V3 H9 V4 H8 V5 H7 V6 H6 V7 H5 V8 H4 V9 H3 V10 H2 V11 H1 V12 H0 V0"/>
+        <path style=  "fill:none" d="M12,0 V 1 H0
+                                     M11,0 V 2 H0
+                                     M10,0 V 3 H0
+                                     M 9,0 V 4 H0
+                                     M 8,0 V 5 H0
+                                     M 7,0 V 6 H0
+                                     M 6,0 V 7 H0
+                                     M 5,0 V 8 H0
+                                     M 4,0 V 9 H0
+                                     M 3,0 V10 H0
+                                     M 2,0 V11 H0
+                                     M 1,0 V12 H0"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <use xlink:href="#side2" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#side2" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <g transform="scale(1 .5) translate(&s; &s;) translate(0 -1) scale(1 2) scale(-1 1)">
+        <rect style="stroke:none" width="1" height="1"/>
+        <path style=  "fill:none" d="M0,0 H1 V1 H0"/>
+    </g>
+    <g transform="scale(.5) translate(&s; &s;) translate(-1) scale(2) rotate(45) translate(-8.5 -8.5)">
+        <rect width="17" height="17"/>
+        <path style="fill:none" d="M 1,0 V17 M0, 1 H17
+                                   M 2,0 V17 M0, 2 H17
+                                   M 3,0 V17 M0, 3 H17
+                                   M 4,0 V17 M0, 4 H17
+                                   M 5,0 V17 M0, 5 H17
+                                   M 6,0 V17 M0, 6 H17
+                                   M 7,0 V17 M0, 7 H17
+                                   M 8,0 V17 M0, 8 H17
+                                   M 9,0 V17 M0, 9 H17
+                                   M10,0 V17 M0,10 H17
+                                   M11,0 V17 M0,11 H17
+                                   M12,0 V17 M0,12 H17
+                                   M13,0 V17 M0,13 H17
+                                   M14,0 V17 M0,14 H17
+                                   M15,0 V17 M0,15 H17
+                                   M16,0 V17 M0,16 H17"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

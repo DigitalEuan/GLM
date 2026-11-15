@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Made by adding seven "L"s to the s(65) found by Frits Göbel in early 1979.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "15.53553390593273762200422181052425"> <!-- 12+5/Sqrt[2]   -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g id="stairs">
+            <path style="stroke:none" d="M0,0 H7 V5 H6 V6 H5 V7 H4 V8 H0"/>
+            <path style=  "fill:none" d="M0,1 H7
+                                         M0,2 H7
+                                         M0,3 H7
+                                         M0,4 H7
+                                         M0,5 H7 V0
+                                         M0,6 H6 V0
+                                         M0,7 H5 V0
+                                         M0,8 H4 V0
+                                         M1,8    V0
+                                         M2,8    V0
+                                         M3,8    V0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <use xlink:href="#stairs"/>
+    <use xlink:href="#stairs" transform="translate(&s; &s;) rotate(90) scale(-1 1)"/>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M0,0 H7 V4 H6 V5 H5 V6 H4 V7 H0"/>
+        <path style=  "fill:none" d="M0,1 H7
+                                     M0,2 H7
+                                     M0,3 H7
+                                     M0,4 H7 V0
+                                     M0,5 H6 V0
+                                     M0,6 H5 V0
+                                     M0,7 H4 V0
+                                     M1,7    V0
+                                     M2,7    V0
+                                     M3,7    V0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M0,0 H8 V5 H7 V6 H6 V7 H5 V8 H0"/>
+        <path style=  "fill:none" d="M0,1 H8
+                                     M0,2 H8
+                                     M0,3 H8
+                                     M0,4 H8
+                                     M0,5 H8 V0
+                                     M0,6 H7 V0
+                                     M0,7 H6 V0
+                                     M0,8 H5 V0
+                                     M1,8    V0
+                                     M2,8    V0
+                                     M3,8    V0
+                                     M4,8    V0"/>
+    </g>
+    <g transform="translate(5.5 6.5) rotate(45) translate(0 -2.5)">
+        <rect width="5" height="5"/>
+        <path style="fill:none" d="M0,1 H5 M1,0 V5
+                                   M0,2 H5 M2,0 V5
+                                   M0,3 H5 M3,0 V5
+                                   M0,4 H5 M4,0 V5"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

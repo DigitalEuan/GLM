@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Originally found by Erich Friedman in 1997, by generalizing the s(41) technique found by Charles F. Cottingham in 1979.
+    Improved by David Ellsworth on November 25, 2024, by adapting the s(102) improvement by David W. Cantrell in November 2024, as was applied to the s(102) found by Károly Hajba in September 2024.
+    Improved by David Ellsworth on November 29, 2024, by adapting and extending the full technique used in the s(37) found by David W. Cantrell in September 2002.
+    Improved by David Ellsworth on January  16, 2025.
+
+    Unset[{s, a, b, p0, r1, v1, p1, v2, u2, v3, u4}];
+    p0 = {4, 4} + RotationTransform[Pi/4][{1, 1/2}];
+    r1 = (RotationTransform[-Pi/4 + a][p0 - {3, 5}][[1]] - 1)/Cos[a];
+    v1 = Tan[a];
+    p1 = p0 + RotationTransform[Pi/4][{-r1, 0}] + RotationTransform[Pi/4 - a][{-1, 1}] + RotationTransform[Pi/4 - b][{0, 1}];
+    v2 = r[[2]] /. r -> RotationTransform[-Pi/4 + b][RotationTransform[Pi/4 - a][{1, v1}]];
+    u2 = 2 - RotationTransform[-Pi/4 + b][{s - 6, s - 3} - p1][[1]];
+    v3 = -r[[2]] + (1 - r[[1]])*Tan[a + b] /. r -> RotationTransform[-Pi/4 - a][RotationTransform[Pi/4 - b][{1, v2}]];
+    u4 = Sin[Pi/4 + a] - Cos[Pi/4 + a];
+    solution = Solve[{RotationTransform[Pi/4 + a][{s - 8, s - 9}][[2]] == 2,
+                      RotationTransform[-Pi/4 - a][p1 - {2, 6}][[1]] == 0,
+                      RotationTransform[-Pi/4 - a][{1, s - 1} - (p1 + RotationTransform[Pi/4 + a][{1, 3 - v3}])][[2]] == 0},
+                     {s, a, b}];
+    solution = Map[{s -> (s /. #), a -> (a[[1, 1]] /. #), b -> (b[[1, 1]] /. #)} &, solution][[2]];
+    N[{s, a*180/Pi, b*180/Pi, r1, v1, v2, u2, v3, u4} /. solution, 38]
+
+    AbsoluteTiming[ToString[RootApproximant[N[Tan[a] /. solution, 5000], 80], InputForm]]  (* took 123.50 seconds; verified to be correct with 50000 digits *)
+    AbsoluteTiming[ToString[RootApproximant[N[Tan[b] /. solution, 2000], 20], InputForm]]  (* took   2.70 seconds; verified to be correct with 50000 digits *)
+    AbsoluteTiming[ToString[RootApproximant[N[s      /. solution, 5000], 20], InputForm]]  (* took  11.48 seconds; verified to be correct with 50000 digits *)
+(*
+    s = Root[1959329723251932809573425 - 4199847844458434080013540*# + 4315682289270565775115128*#^2 - 2825402176181244872057384*#^3 + 1321046745485882223459068*#^4 - 468664620024162429231904*#^5 + 130831566348158107359392*#^6 - 29412949608198679086720*#^7 + 5405590814889373243192*#^8 - 819709665351861223904*#^9 + 103070340120029179008*#^10 - 10759858027891736896*#^11 + 930479746642904384*#^12 - 66261902137415296*#^13 + 3846118270819200*#^14 - 179088304328704*#^15 + 6530192527760*#^16 - 179642577984*#^17 + 3506260608*#^18 - 43279488*#^19 + 254016*#^20, 1]
+    a = ArcTan[Root[8930593 - 183182832*# + 511218938*#^2 - 1154003632*#^3 + 1774665869*#^4 - 2598037760*#^5 + 2865642872*#^6 - 3190870144*#^7 + 2718923314*#^8 - 2356731232*#^9 + 1575847836*#^10 - 1052150368*#^11 + 542340338*#^12 - 259674752*#^13 + 89760888*#^14 - 26529536*#^15 + 5020589*#^16 - 770352*#^17 + 74106*#^18 - 9072*#^19 + 3969*#^20, 1]]
+    b = ArcTan[Root[-65618416196207 + 8658638096861256*# + 8300782632067646*#^2 + 67521182399885536*#^3 + 116685590298593211*#^4 + 200644992306914320*#^5 + 668099298968274696*#^6 + 216959572311764920*#^7 + 2128290867195579229*#^8 - 228044262143983072*#^9 + 4209288555473349046*#^10 - 1008211303278904928*#^11 + 5396365357902666429*#^12 - 1381941492914530568*#^13 + 4504066280526664352*#^14 - 996728357784417728*#^15 + 2367193612246547147*#^16 - 380771823724770864*#^17 + 712378533872938086*#^18 - 60995040417223992*#^19 + 93663641776341969*#^20, 2]]
+
+    s = Root[-FactorList[s[[1, 1]], Extension -> Sqrt[2]][[3, 1]], 1]
+    s = Root[11572065260145 + 4353477802040*Sqrt[2] - (12163170266098 + 4347871933856*Sqrt[2])*# + (5849274524474 + 1954912407552*Sqrt[2])*#^2 - (1692962073984 + 518553084040*Sqrt[2])*#^3 + (326223055436 + 89277369408*Sqrt[2])*#^4 - (43682208312 + 10328732976*Sqrt[2])*#^5 + (4111948776 + 801750848*Sqrt[2])*#^6 - (268405824 + 40209136*Sqrt[2])*#^7 + (11614660 + 1180832*Sqrt[2])*#^8 - (300552 + 15456*Sqrt[2])*#^9 + 3528*#^10, 1]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "9.8881530537585723827475586833839531166">
+    <!ENTITY a  "3.2427420757320519726992939849113997881">
+    <!ENTITY b  ".43090143320844946430514856563531866471">
+    <!ENTITY r1 ".05019290416711931895019390016204377449">
+    <!ENTITY v1 ".05665703291136324188526023880534157506">
+    <!ENTITY v2 ".00753263879554815771633956295044480845">
+    <!ENTITY u2 ".04914430300456438150486066246482758461">
+    <!ENTITY v3 ".05665703291136324188526023880534157506">
+    <!ENTITY u4 ".07999685149845390367794707648352200296">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M0,0 H7 V1 H6 V2 H5 V3 H4 V4 H3 V5 H2 V6 H1 V7 H0"/>
+        <path style=  "fill:none" d="M0,1 H7 V0
+                                     M0,2 H6 V0
+                                     M0,3 H5 V0
+                                     M0,4 H4 V0
+                                     M0,5 H3 V0
+                                     M0,6 H2 V0
+                                     M0,7 H1 V0"/>
+    </g>
+    <g id="side1">
+        <g transform="translate(&s;)">
+            <rect style="stroke:none" x="-1" y="0" width="1" height="1"/>
+            <path style=  "fill:none" d="M-1,0 L-1,1 L0,1"/>
+        </g>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1)">
+        <path style="stroke:none" d="M0,0 H8 V1 H7 V2 H6 V3 H5 V4 H4 V5 H3 V6 H2 V7 H1 V8 H0"/>
+        <path style=  "fill:none" d="M0,1 H8 V0
+                                     M0,2 H7 V0
+                                     M0,3 H6 V0
+                                     M0,4 H5 V0
+                                     M0,5 H4 V0
+                                     M0,6 H3 V0
+                                     M0,7 H2 V0
+                                     M0,8 H1 V0"/>
+        <use xlink:href="#side1"/>
+    </g>
+    <defs>
+        <g id="straight">
+            <rect width="2" height="1"/>
+            <path style="fill:none" d="M1,0 v1
+                                       M2,0 v1"/>
+        </g>
+        <g id="straight_CCW_b">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 &v2;)"/>
+        </g>
+        <g id="turn_CCW">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 &v1;)"/>
+        </g>
+        <g id="turn_CW">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 -&v3;)"/>
+        </g>
+    </defs>
+    <use xlink:href="#straight" transform="translate(4 4) rotate(45) translate(0 -.5)"/>
+    <g id="sideA"               transform="translate(4 4) rotate(45) translate(1 .5) translate(-&r1;) rotate(-&a;) translate(-1)">
+        <use xlink:href="#turn_CCW"/>
+        <g transform="translate(0 1) rotate(&a;) rotate(-&b;)">
+            <use xlink:href="#straight_CCW_b" transform="translate(-&u2;)"/>
+            <g transform="translate(0 1) rotate(&b;) rotate(&a;)">
+                <use xlink:href="#turn_CW"/>
+                <use xlink:href="#turn_CW" transform="translate(&u4; 1)"/>
+                <use xlink:href="#turn_CW" transform="translate(&u4; 2)"/>
+            </g>
+        </g>
+    </g>
+    <use xlink:href="#sideA" transform="rotate(90) scale(1 -1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 31, 2024.
+    Improved by David W. Cantrell on January 1, 2025.
+    This is the first 3-width strip of its kind found. Not only does the end-clamping have interlocking teeth,
+        allowing optimization (which is already enough to put it in a new class), but it happens to optimize
+        to a Pythogorean triple angle slope, resulting in a rational optimized side length.
+    This is the first record-setting packing found with a rational side length. This happened 3 days after I
+        (David Ellsworth) speculated about using other Pythagorean triples beyond {3,4,5} (with that one
+        seeming to be a dead end with the near-miss of beating Göbel strips or filling the s(103) hole).
+
+    Unset[{s, a, r1, f1, f2}];
+    r1 = r1 = (s - 17)*Cos[a];
+    u2 = Cos[a] - Sin[a];
+    f1 = RotationTransform[a][{s - 2, 2} - {1, s - 2}][[1]] - 20;
+    f2 = RotationTransform[a][{s - 14, s - 2} - {1, 14}][[2]] - 3;
+    solution = Solve[{f1 == 0, f2 == 0}, {s, a}][[1]]
+    N[{s, a*180/Pi, r1, u2} /. {a -> a[[1, 1]]} /. solution, 38]
+(*
+    s = 723/41
+    a = ArcTan[20/21]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "17.634146341463414634146341463414634146">
+    <!ENTITY a  "43.602818972703623540489732173887329135">
+    <!ENTITY r1 ".45920941968040370058873002523128679563">
+    <!ENTITY u2 ".03448275862068965517241379310344827586">
+    <!ENTITY tr  "translate(&u2; 1)">
+    <!ENTITY tr0 "translate(  0  1)">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M14,0 V 1 H13 V2 H12 V3 H11 V4 H10 V5 H9 V6 H8 V7 H7 V8 H6 V9 H5 V10 H4 V11 H3 V12 H2 V13 H1 V14 H0 V0"/>
+        <path style=  "fill:none" d="M14,0 V 1 H0
+                                     M13,0 V 2 H0
+                                     M12,0 V 3 H0
+                                     M11,0 V 4 H0
+                                     M10,0 V 5 H0
+                                     M 9,0 V 6 H0
+                                     M 8,0 V 7 H0
+                                     M 7,0 V 8 H0
+                                     M 6,0 V 9 H0
+                                     M 5,0 V10 H0
+                                     M 4,0 V11 H0
+                                     M 3,0 V12 H0
+                                     M 2,0 V13 H0
+                                     M 1,0 V14 H0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M3,0 V1 H2 V2 H0 V0"/>
+        <path style=  "fill:none" d="M3,0 V1 H0
+                                     M2,0 V2 H0
+                                     M1,0 V2"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M15,0 V 1 H14 V2 H13 V3 H12 V4 H11 V5 H10 V6 H9 V7 H8 V8 H7 V9 H6 V10 H5 V11 H4 V12 H3 V13 H2 V14 H1 V15 H0 V0"/>
+        <path style=  "fill:none" d="M15,0 V 1 H0
+                                     M14,0 V 2 H0
+                                     M13,0 V 3 H0
+                                     M12,0 V 4 H0
+                                     M11,0 V 5 H0
+                                     M10,0 V 6 H0
+                                     M 9,0 V 7 H0
+                                     M 8,0 V 8 H0
+                                     M 7,0 V 9 H0
+                                     M 6,0 V10 H0
+                                     M 5,0 V11 H0
+                                     M 4,0 V12 H0
+                                     M 3,0 V13 H0
+                                     M 2,0 V14 H0
+                                     M 1,0 V15 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H0
+                                     M1,0 V2 H0"/>
+    </g>
+    <g transform="translate(14 1) rotate(90) rotate(-&a;) translate(0 -&r1;)">
+        <g id="three">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 -&u2;)"/>
+            <use xlink:href="#one" transform="translate(1 -&u2;) translate(1 -&u2;)"/>
+        </g>
+        <use xlink:href="#three" transform="&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr0;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;"/>
+        <use xlink:href="#three" transform="&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr0;&tr;&tr;&tr;"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

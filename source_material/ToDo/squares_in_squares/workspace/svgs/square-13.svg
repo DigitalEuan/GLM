@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Proved optimal by Wolfram Bentz in August 2009.
+        Source: {Optimal Packings of 13 and 46 Unit Squares} - https://doi.org/10.37236/398
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "4">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <path style="stroke:none" d="M1,0 V1 H4 V4 H0 V0"/>
+    <path style=  "fill:none" d="M0,1 H4
+                                 M0,2 H4
+                                 M0,3 H4
+                                 M1,0 V4
+                                 M2,1 V4
+                                 M3,1 V4"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

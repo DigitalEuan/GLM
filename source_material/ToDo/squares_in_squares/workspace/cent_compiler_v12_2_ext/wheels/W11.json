@@ -1,0 +1,121 @@
+{
+  "id": "W11",
+  "title": "Uniform motion",
+  "axioms": [
+    "velocity = length / time"
+  ],
+  "cases": [
+    {
+      "id": "W11-01",
+      "equation": "length = velocity * time",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W11-02",
+      "equation": "time = length / velocity",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "length",
+    "time",
+    "velocity"
+  ],
+  "dimensions": {
+    "length": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "time": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "velocity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W5",
+      "name_in_this_wheel": "velocity",
+      "name_in_other_wheel": "velocity",
+      "reason": "moving body's velocity = uniform-motion velocity"
+    },
+    {
+      "other_wheel": "W12",
+      "name_in_this_wheel": "length",
+      "name_in_other_wheel": "length",
+      "reason": "the length the fluid moves = length of the swept prism"
+    }
+  ],
+  "non_identities": [
+    {
+      "other_wheel": "W15",
+      "name": "time",
+      "reason": "a travel time against a charging time"
+    }
+  ]
+}

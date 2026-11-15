@@ -1,0 +1,66 @@
+{
+ "run": 11,
+ "date": "2026-11-04",
+ "score": 22.887471,
+ "beats_grid": 448,
+ "user_directive": "more precision: Golay/Leech solid, mapping 87%, extend certificates; use uploaded layers_universal (Lean) to drive from the reverse direction",
+ "piece1_map": {
+  "frontier": "run-10 table (22.887471)",
+  "coverage_before": "89.7% (Level-0 = 103)"
+ },
+ "piece2_calibration": {
+  "table_clearance_convention": "L = true + deliberate clearance",
+  "measured_clearance": {
+   "grid": "max 1.94e-9",
+   "gobelS": "1.26-1.94e-9",
+   "exact-SVG": "1.59-1.87e-9",
+   "chain3": "max 3.87e-9"
+  },
+  "cert_residuals": "max 4.97e-13 (12-dp rounded true values)",
+  "negative_control_strict_4e-9": "879/1000 randoms fit \u2014 value-scan certification IMPOSSIBLE at this clearance",
+  "biquadratic_c3_bug": "derivation forced c3=0; all 8 historical Level-3 members entered as borderline fits; retired outright",
+  "verdict": "levels ONLY from the certificate route (formula provenance or verified census)"
+ },
+ "piece3_census": {
+  "before": 280,
+  "new": 889,
+  "total": 1169,
+  "provenance": {
+   "original": 280,
+   "value-scan": 754,
+   "formula": 135
+  },
+  "armA_formula": "135 (gobelS 18, gobel2 54, gobel3 9, closure-of 54)",
+  "armB_value_scan": "754 (discovery only; NOT level claims)",
+  "verification": "0 infeasible emissions; residuals max 3.87e-9"
+ },
+ "piece3_map_final": {
+  "coverage": 0.889,
+  "cert_rows": 886,
+  "unresolved": 114,
+  "level0_composition": "79 exact(SVG-irrational) + 31 chain3(SVG-derived) + 1 aux + 3 strict-only",
+  "crosscheck": "886 agree, 0 differ",
+  "levels": {
+   "0": 114,
+   "1": 552,
+   "2": 334
+  }
+ },
+ "piece4_lean": {
+  "elan_installed": true,
+  "toolchain": "leanprover/lean4:v4.8.0 (matches uploaded cert)",
+  "mathlib": "v4.8.0 pre-built cache fetched + compiling (3432/4324 targets at cutoff)",
+  "layers_module": "TCT/Layers.lean written: uploaded boundary theorems verbatim + new scan_blind_to_clearance (sharp quarter-step form); pending lake-build verification",
+  "cert_repro_script": "scripts/cert_repro.py (uploaded file + Python twin)",
+  "status": "IN PROGRESS at cutoff \u2014 build not finished"
+ },
+ "piece5_constructive": {
+  "decision": "deferred on evidence",
+  "evidence": "8 old Level-3 members = 4 SVG records + 4 chain3 propagations of n=300 (angles 0/26.64/31.566 \u2014 26.64 misses arctan(1/2) by 0.075 deg: non-algebraic window); no constructive arm certified"
+ },
+ "continuation": {
+  "lean_build": "cd workspace/lean/tct_squares && /home/z/.elan/bin/lake build",
+  "then": "python3 scripts/cert_repro.py; fix TCT/Layers.lean errors if any",
+  "mathlib_note": "cache is incremental: the build resumes where it stopped"
+ }
+}

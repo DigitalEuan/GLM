@@ -1,0 +1,224 @@
+{
+  "id": "W12",
+  "title": "Density, volume and amount of substance",
+  "axioms": [
+    "density = mass / volume",
+    "volume = area * length",
+    "amount = mass / molar_mass"
+  ],
+  "cases": [
+    {
+      "id": "W12-01",
+      "equation": "volume = mass / density",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W12-02",
+      "equation": "length = volume / area",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W12-03",
+      "equation": "molar_mass = mass / amount",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "amount",
+    "area",
+    "density",
+    "length",
+    "mass",
+    "molar_mass",
+    "volume"
+  ],
+  "dimensions": {
+    "amount": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "area": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "density": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "length": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "molar_mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0
+      ]
+    },
+    "volume": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W5",
+      "name_in_this_wheel": "mass",
+      "name_in_other_wheel": "mass",
+      "reason": "the body whose density is read is the body that moves"
+    },
+    {
+      "other_wheel": "W6",
+      "name_in_this_wheel": "area",
+      "name_in_other_wheel": "area",
+      "reason": "the flow's cross-section = swept-prism cross-section"
+    },
+    {
+      "other_wheel": "W11",
+      "name_in_this_wheel": "length",
+      "name_in_other_wheel": "length",
+      "reason": "the length the fluid moves = length of the swept prism"
+    }
+  ],
+  "non_identities": []
+}

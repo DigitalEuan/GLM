@@ -1,0 +1,16 @@
+level-0: 103
+stats: {'states_with_nonalg': 103, 'scan_deg4': 53, 'scan_none': 50}
+angle histogram: {'0': 98, '90': 23, '45': 31, 'arctan(3/5)': 1, '72': 9, 'arctan(7/1)': 1, '67.5': 4, 'arctan(3/1)': 8, 'arctan(5/2)': 3, '18': 7, 'arctan(1/2)': 1, 'arctan(2/5)': 6, '22.5': 1, 'arctan(1/3)': 7}
+control pos: 241/280 in-ladder (0 out-of-ladder by design)
+control neg: 173/300 (noise rate 0.5767)
+P(0 fits among 103 | noise) = 3.534e-39
+level-3 re-audit: 8 members
+   n=51 old_resid=1.5408941678174415e-08 -> RECOVERED (92+27√2+-40√3+-6√6)/6
+   n=68 old_resid=1.4813313242711956e-08 -> RECOVERED (-183+24√2+43√3+52√6)/6
+   n=205 old_resid=1.6357672549816016e-08 -> no fit (reclassify)
+   n=239 old_resid=1.4869021569552388e-08 -> no fit (reclassify)
+   n=300 old_resid=4.280050092120291e-09 -> no fit (reclassify)
+   n=335 old_resid=6.1740479395666625e-09 -> no fit (reclassify)
+   n=372 old_resid=6.1800484729701566e-09 -> no fit (reclassify)
+   n=411 old_resid=6.184048828572486e-09 -> no fit (reclassify)
+-> /home/z/my-project/download/level0_precision.json

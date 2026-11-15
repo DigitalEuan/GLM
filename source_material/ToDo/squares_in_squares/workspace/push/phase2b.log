@@ -1,0 +1,19 @@
+k=12 n=140 depth=0.1: pen=1.39e-02 mode=repair s*=0.009090909 law=0.009091 
+k=12 n=140 depth=0.2: pen=2.71e-02 mode=repair s*=0.018181818 law=0.018182 
+k=14 n=193 depth=0.1: pen=1.17e-02 mode=repair s*=0.007692308 law=0.007692 
+k=14 n=193 depth=0.2: pen=2.48e-02 mode=repair s*=0.015384615 law=0.015385 
+k=17 n=281 depth=0.1: pen=1.26e-02 mode=repair s*=0.00625 law=0.006250 
+k=17 n=281 depth=0.2: pen=2.26e-02 mode=repair s*=None law=0.012500 
+k=20 n=380 depth=0.1: pen=1.06e-02 mode=repair s*=0.005263158 law=0.005263 
+k=20 n=380 depth=0.2: pen=1.81e-02 mode=repair s*=0.014264812 law=0.010526 
+k=22 n=481 depth=0.1: pen=8.28e-03 mode=repair s*=0.004761905 law=0.004762 
+k=22 n=481 depth=0.2: pen=1.66e-02 mode=repair s*=0.00952381 law=0.009524 
+k=25 n=595 depth=0.1: pen=7.86e-03 mode=repair s*=0.004166667 law=0.004167 
+k=25 n=595 depth=0.2: pen=1.56e-02 mode=repair s*=0.008333333 law=0.008333 
+k=27 n=726 depth=0.1: pen=7.07e-03 mode=repair s*=0.003846154 law=0.003846 
+k=27 n=726 depth=0.2: pen=1.36e-02 mode=repair s*=0.007692308 law=0.007692 
+k=30 n=880 depth=0.1: pen=7.76e-03 mode=repair s*=0.003448276 law=0.003448 
+k=30 n=880 depth=0.2: pen=3.63e-02 mode=repair s*=None law=0.006897 
+
+total runs: 16; finds: 0; law deviations: 1
+  DEVIATION k=30 n=380 depth=0.2: s*=0.014264812 vs law 0.010526

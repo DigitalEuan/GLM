@@ -1,0 +1,41 @@
+{
+  "module": "TCT",
+  "imports": [],
+  "definitions": [
+    {"name": "grid_penalty_missed", "type": "ℚ", "value": "0"},
+    {"name": "cert_tol", "type": "ℚ", "value": "1/10^9"}
+  ],
+  "axioms": [
+    {"name": "friedman_survey_data", "type": "Prop",
+     "note": "literature premise (Friedman, EJC DS#7 2009): best-known packings and bounds for s(n), n <= 100; Goebel/Cottingham/Stenlund/Cantrell pattern families"},
+    {"name": "nagamochi_theorem", "type": "Prop",
+     "note": "theorem premise (Nagamochi 2005): s(k^2-2) = s(k^2-1) = k for all k - grid optimal for these n, no improvement possible"},
+    {"name": "kearney_shiu_s6", "type": "Prop",
+     "note": "theorem premise (Kearney-Shiu 2002): s(6) = 3 - our engine's REFUSAL to pack 6 squares below 3 is consistent with this theorem"},
+    {"name": "stromquist_s10", "type": "Prop",
+     "note": "theorem premise (Stromquist 2003): s(10) = 3 + 1/sqrt(2)"},
+    {"name": "competition_metric", "type": "Prop",
+     "note": "rules premise: score = sum(L/sqrt(n) - 1); missing puzzle charged the grid ceiling; partial submissions allowed"},
+    {"name": "engine_instrument", "type": "Prop",
+     "note": "instrument premise: the pressure-settling engine is a MEASURED search instrument (float64, deterministic LCG); certification margin 1e-9 declared"},
+    {"name": "optimality_open", "type": "Prop",
+     "note": "conversational premise: for most n the optimal s(n) is unknown; found packings are upper bounds only"}
+  ],
+  "lemmas": [
+    {"name": "sqrt2_witness", "type": "(1414 : ℤ)^2 < 2 * 1000^2 ∧ (1415 : ℤ)^2 > 2 * 1000^2", "proof": "decide"},
+    {"name": "cascade_step1", "type": "(5 : ℕ) + 3 + 2 = 10", "proof": "decide"},
+    {"name": "cascade_step2", "type": "(10 : ℕ) + 4 + 3 = 17", "proof": "decide"},
+    {"name": "cascade_step3", "type": "(17 : ℕ) + 5 + 4 = 26", "proof": "decide"},
+    {"name": "improvement_5", "type": "(3 : ℚ) - 28/10 = 1/5", "proof": "decide"},
+    {"name": "nagamochi_sample", "type": "(5 : ℕ)^2 - 1 = 24", "proof": "decide"},
+    {"name": "cascade_count_symbolic", "type": "∀ (m L : ℕ), m + (L + 1) + L = m + 2*L + 1",
+     "proof": null,
+     "gap": "requires omega/ring (Mathlib) or manual algebra; the closure count is verified concretely at every cascade step in scripts/column3/05 (two-path: recursive vs. closed form)"},
+    {"name": "verification_margin_soundness", "type": "∀ (x : ℚ), x * x < 0 → False",
+     "proof": null,
+     "gap": "stand-in for the soundness certificate: proving that float64 SAT separation with a 1e-9 margin implies true non-overlap requires interval-arithmetic formalization (Mathlib) or exact algebraic predicates (exact predicates on rotated squares); our certificate is MEASURED with declared margin, not machine-checked"},
+    {"name": "s11_optimal_value", "type": "∀ (L : ℚ), L = 38771/10000",
+     "proof": null,
+     "gap": "DELIBERATE TARGET, EXPECTED UNPROVEN: no closed characterization of s(11) (or any non-trivial s(n)) is known; optimality proofs exist only for n in {1..8, 10, 14, 15, 24, 35} and square/adjacent families. This sorry marks the combinatorial-geometry wall of the competition"}
+  ]
+}

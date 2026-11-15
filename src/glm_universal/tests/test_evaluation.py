@@ -7,9 +7,13 @@ runtime advertises (so the assessment cannot quietly fall behind the runtime),
 that the scoring is asymmetric in the way it claims -- a confident wrong
 answer is worse than a refusal -- and that the harness genuinely runs the CLI,
 by running a few cases end to end.
+
+# Last altered 14 November 2026 (Phase 188: the default worker count's test).
 """
 
 from __future__ import annotations
+
+import os
 
 import pytest
 
@@ -126,6 +130,18 @@ class TestScoring:
 
 class TestHarnessEndToEnd:
     """A few cases run for real, one fresh interpreter each."""
+
+    def test_the_default_worker_count_is_the_machine_s_usable_cpus(self):
+        """Phase 188: the default is the CPUs this process may run beside (at
+        most 8), not the host's count the container may not offer."""
+        from glm_universal.evaluation.harness import MAX_JOBS, default_jobs
+
+        try:
+            usable = len(os.sched_getaffinity(0))
+        except (AttributeError, OSError):
+            usable = os.cpu_count() or 1
+        assert default_jobs() == max(1, min(MAX_JOBS, usable))
+        assert 1 <= default_jobs() <= MAX_JOBS
 
     def test_the_cli_is_where_the_harness_looks_for_it(self):
         assert EH.CLI_PATH.is_file()

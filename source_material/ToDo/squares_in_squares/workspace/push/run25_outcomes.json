@@ -1,0 +1,70 @@
+{
+ "run": 25,
+ "date": "2026-11-06",
+ "user_request": "(a) restart the P1 strip scan (as designed, it can be rerun); (b) finish the P2 remainder (run 24's sweep stopped at 45/52 cells).",
+ "input": "upload/NEXT_STEPS.md P1(a)/P2 spec + run-24 ledger state",
+ "executed": {
+  "P1_strip_scan": {
+   "status": "executed (this run) \u2014 closed in the negative",
+   "parametrization": "closed-form decode of the imported member states (scripts/strip_decode.py): (p,q) frame with p=(x+y)/sqrt2; w chains of pi/4 squares (q in [-w/2,w/2], p-spaced 1); 2 tip diamonds at +-(L/sqrt2 - 1/sqrt2); per q-side an independent staircase, levels k=1..a_s at |q|=w/2+k/sqrt2 with diamonds at p=((a_s-k)-2j)/sqrt2.  L(a,w) = a+1+w/sqrt2; every outer vertex touches the container edge simultaneously.  The decode reproduces the stored states of n=5,10,27,38,52,67 to the last digit \u2014 the imported 'exact:square-N.svg' rows ARE this family.",
+   "capacity": "w=1: n_max = floor(sqrt2(a-1)+1) + 2 + a(a+1) \u2014 reproduces the imported members 5,10,17,27,38,52,67,84,...;974 exactly.  w>=2: L = a+1+w/sqrt2 stays ABOVE grid at every capacity the width buys (checked per (w,a)); w=3 outer chains are edge-limited at floor(sqrt2(a+1)), not tip-limited.",
+   "verified": "88/88 designs finalize-verified (0 penetration, count, L=formula)",
+   "member_rows": "30 w=1 member points: 27 rows are the SAME design as the table (differences 1e-9..2e-9 = finalize scale noise, not geometry); n=17 (4.6755 vs 4.7071) and n=84 (9.6979 vs 9.7071) are strictly deeper in the table (community records).",
+   "sweep": "the spec sweep n=K^2-r, r in [5,K+4], K<=32: 506 rows; family beats grid only at [10, 17, 26, 27, 38, 52] \u2014 every one already <= that in the table.",
+   "full_range": "closure check on ALL n<=1000 (beyond the spec window): 998 rows vs family frontier; family beats grid at 196 rows but the table is strictly deeper at 950 and equal (finalize noise) at the rest; any_find = False.  The family is dominated everywhere: its entire value is already realized in the table.",
+   "acceptance_test": {
+    "44": {
+     "grid": 7,
+     "family_L": 7.414213562373095,
+     "capacity_ceiling_below_grid": 38,
+     "pass": false
+    },
+    "58": {
+     "grid": 8,
+     "family_L": 8.414213562373096,
+     "capacity_ceiling_below_grid": 52,
+     "pass": false
+    },
+    "31": {
+     "grid": 6,
+     "family_L": 6.414213562373095,
+     "capacity_ceiling_below_grid": 27,
+     "pass": false
+    },
+    "reading": "to beat grid at 44/58/31 the family needs 44/58/31 squares under L<7/8/6; its capacity ceilings there are 38/52/27 \u2014 short by 6/6/4 squares.  The acceptance test fails by capacity, not by search luck: no (w,a) exists that passes it."
+   },
+   "conclusion": "P1(a) as specified is CLOSED: the generalized strip adds nothing to the current table on any row n<=1000.  The remaining P1 candidates are (b) two-block / block+slab and (c) axis-aligned dominant + tilted seams."
+  },
+  "P2_remainder": {
+   "status": "executed (this run) \u2014 the designed sweep is complete",
+   "design": "P2_ROWS=134,135,157,158 subset re-run (run 24 stopped at 45/52 cells); identical hop loop/anneal streams, family-seeded (the A/B vs run 23's random seeds)",
+   "rebuilds": "4/4 ok (verified_L == want to 9 dp, worst_pen ~1e-15)",
+   "cells": 8,
+   "hard_checks": 0,
+   "finds": 0,
+   "rows": [
+    134,
+    135,
+    157,
+    158
+   ],
+   "combined_with_run24": {
+    "cells": 52,
+    "designed_total": "52 (26 rows x 2 targets)",
+    "hard_checks_total": 0,
+    "reading": "run 24 (45 cells) + run 25 (8) = the full designed sweep: 52/52 cells, 0 hard checks, 0 finds.  The A/B is decided: family-seeded and random-seeded hop polish agree \u2014 at targets grid-0.0005/grid-0.002 these rows are jammed at their family geometry and no seed reaches a hard state.  P2 closed."
+   }
+  },
+  "fixpoint": "cascade3 + closure_apply re-run after both parts (mandatory order): 0 chain improvements, fixpoint after 0 apply-rounds; final_assembly rebuilt submission.csv; score 22.823536149, beats-grid 454; download/table.json + submission.csv byte-identical to workspace copies.",
+  "delivery_fix": "the user reports README.md never arrives at their end: from this run the run documentation also ships as RUN_NOTES.md (repo top level) and download/run25_NOTES.md; the README.md copies are kept as before."
+ },
+ "score": {
+  "before": 22.823536149,
+  "after": 22.823536149
+ },
+ "next": [
+  "P1(b) two-block / block+slab and P1(c) axis-aligned dominant + tilted seams \u2014 the remaining P1 sub-families (a is closed)",
+  "tier-1 infeasibility theorem for the small-n level-1 set (runs 20-25 unanimous: 5-run-deep now)",
+  "weekly import_atlas re-run (the register moves; 76 records in ~7w)"
+ ]
+}

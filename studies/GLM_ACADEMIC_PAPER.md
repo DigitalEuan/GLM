@@ -19,6 +19,12 @@
 
 *Last altered 1 November 2026 (Phase 186: §20.59, the intake items absorbed where they measurably help — the Rule 30 hypothesis engine, the formula wheels' derivability engine and the sequence wheel's next-term reading, measured with and without them on ARC, Rule 30 and five domains.)*
 
+*Last altered 14 November 2026 (Phase 187: §20.60, the chat surface — one echo per query, `:kinds` from the parser's own table, and a refusal that says why; the studies table gains its row.)*
+
+*Last altered 14 November 2026 (Phase 188: §20.61, the iteration lane — the machine's 8 CPUs, the evaluation's own default worker count, the cheap lane and the close order; the studies table gains its row.)*
+
+*Last altered 15 November 2026 (the Squares in Squares probe: §20.62 — the working submission 22.218057 against the documented 22.642387, and two measured nulls, the public merge and the tighter clearance).*
+
 ## A Technical Documentation Paper
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
@@ -1341,7 +1347,7 @@ itself whether it is `table`, `address` or `derive` (§22.3).
 
 | operation | what it does | measured on its declared set | study |
 |---|---|---|---|
-| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->20,262<!--/figure--> rows and <!--figure:fieldsurface-pairs-->115,519<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
+| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->20,263<!--/figure--> rows and <!--figure:fieldsurface-pairs-->115,525<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
 | **ordering** | one coordinate off two rows, ordered exactly, refused across scales | answers <!--figure:ordering-answered-->4<!--/figure--> and refuses <!--figure:ordering-refused-->3<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->, every one as declared | [`ORDERING_STUDY.md`](ORDERING_STUDY.md) |
 | **extremum** | one coordinate over every row of a table, folded or refused | folds <!--figure:extremum-answered-->4<!--/figure--> and refuses <!--figure:extremum-refused-->4<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure--> columns, every one as declared | [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) |
 | **scale conversion** | a declared table of <!--figure:scales-rows-->10<!--/figure--> scales over <!--figure:scales-quantities-->4<!--/figure--> quantities | answers <!--figure:scales-answered-->7<!--/figure--> and refuses <!--figure:scales-refused-->5<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->; relates <!--figure:scales-bridged-->8<!--/figure--> of <!--figure:scales-pairs-->7,875<!--/figure--> scale pairs and refuses the rest | [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) |
@@ -3999,6 +4005,69 @@ archive, with a script that re-decides every member of the bucket. At the
 owner's direction (Phase 106) the remaining retrieval items were parked; every
 operation the round built stays.
 
+### 20.60 The chat surface (Phase 187)
+
+The platform round of 13 November 2026 put the system's use in front of a
+person as its own phase (P5 of seven). Phase 187
+([`CHAT_SURFACE_STUDY.md`](CHAT_SURFACE_STUDY.md)) takes the two lines of it
+that are defects of the surface rather than of the reading. The interactive
+surface echoed every question twice — once itself, once from the answer path
+that prints the query before an answer or a refusal — and now echoes it once,
+from the answer path alone, which is where the Phase 146 reply rewrite is
+known. It had no way to say which readings a question may have; `:kinds`
+prints the parser's own table, 30 declared readings with `unknown` named apart,
+so nothing is typed a second time. And a question matching no declared reading
+was refused with the bare word `unrecognised query` while the machine's own
+reading of that refusal — the sentence matched no classification rule — was
+discarded: the interactive surface now says that much and points at `:kinds`,
+and the batch line the evaluation pins is unchanged. 4 of 4 marks; the
+evaluation answers 237 of 237 with no answer moved. The phase's third line,
+*carriers the evaluation's questions name*, is a reading change and is left
+until a fresh held-out set exists.
+
+### 20.61 The iteration lane (Phase 188)
+
+A round of this repository used to spend most of a session in gates rather than
+in work. Phase 188 ([`ITERATION_LANE_STUDY.md`](ITERATION_LANE_STUDY.md))
+measured why, and the answer was mostly method. The workspace offers eight
+CPUs, the working notes said two and told the session to run `--jobs 2`, and the
+evaluation's own default was four: the evaluation is one CLI process per case,
+so eight cases took 64.4 s at one worker and 8.9 s at eight, and the whole set
+237 of 237 in 248 s. The default is now the machine's usable CPUs, capped at
+eight (`evaluation.harness.default_jobs()`), in the evaluation and in the
+replay gate. What a round can do before any sign-off is written down as a cheap
+lane — `corpus --check`, the touched test files, `--only KIND`, `--case` — and
+the close as one order, with the two answer censuses last because they digest
+`GLM.py`, the document address book and every measurement their answers quote.
+What is left is not method: those censuses still re-run the evaluation by
+design, and the sign-off ledger here holds no signature, so filling it once is
+the one-off (about 67 minutes) that would make every later close pay only what
+moved. 4 of 4 marks; no answer moved.
+
+### 20.62 The Squares in Squares probe (November 2026)
+
+The owner's other project — the Kaggle competition *Squares in Squares*, which
+asks for n unit squares packed into the smallest axis-aligned square for every
+n from 1 to 1,000, scored as Σ(L/√n − 1) — was brought into the intake as
+`source_material/ToDo/squares_in_squares` (its commit `6d41e27`, "Run 38") and
+measured with its own instruments rather than by inspection. Three figures came
+out, and the first two correct the record. Its **working submission scores
+22.218057** with no overlap failure; the 22.642387 its documents quote belongs
+to `submission.run36.csv`, which reproduces exactly, so the working file is
+0.424 ahead of its own documentation. The strongest public file at the time
+(Minuii's merge, claiming 22.2569857) verifies here at 22.256986, and taking
+the better packing of the two per puzzle leaves the score at 22.218056852:
+the two files hold the same public best-knowns, and the merge is null. A second
+candidate — re-opening the delivered 2e-9 contact clearance at the tightest
+value that still verifies, 8e-11 for most puzzles and below 2e-11 for 32 —
+moves the score by 1.8e-8, so clearance is not where this score lives either.
+What remains is 0.1637 to the leader (22.0544), which needs packings outside
+the public pool or a search find; the competition's ceiling is a geometric one,
+and the GLM's exact-rational and interval machinery is the same layer its
+verifier uses (a float SAT pass, then interval arithmetic to 500 digits) but on
+its own has moved nothing. Two nulls, honestly measured, and the state written
+down where the next session will find it.
+
 ## 22. Measured Capability
 
 ### 22.1 The four instruments
@@ -4156,8 +4225,8 @@ carries a tier-0 block (question, verdict, deciding figure, the function that
 recomputes it), is addressed, and is checked — the verdict must be grounded in
 the document's own words, every link must resolve, and every current-state
 document must be reachable from [`ENTRY.md`](../ENTRY.md). The corpus holds
-<!--figure:corpus-documents-->256<!--/figure--> documents, of which
-<!--figure:corpus-state-documents-->251<!--/figure--> describe the system as it
+<!--figure:corpus-documents-->258<!--/figure--> documents, of which
+<!--figure:corpus-state-documents-->253<!--/figure--> describe the system as it
 is and <!--figure:corpus-archive-documents-->5<!--/figure--> are records of a
 round, and [`DIGEST.md`](../DIGEST.md) is their tier-0 reading, generated.
 
@@ -4640,6 +4709,8 @@ says what each is *about* and where this paper uses it.
 | [`INTAKE_PIPELINE_STUDY.md`](INTAKE_PIPELINE_STUDY.md) | the repository check and the intake: every supplied item filed open (`ToDo/`) or finished (`done/`) with one ledger record, and moved towards absorption only when each stage's evidence exists; 0 check errors | §20.58 |
 | [`INTEGER_WHEEL_STUDY.md`](INTEGER_WHEEL_STUDY.md) | the owner's integer and Monster provision wheels: 89 of 102 sequence and sporadic-order questions right, 0 wrong, against 0 without them; 28 of 28 negative controls refused | §20.58 |
 | [`CENT_WHEELS_STUDY.md`](CENT_WHEELS_STUDY.md) | the cent compiler's formula wheels: 15 of 16 new wheels sound; 63 of 64 laws and 0 of 51 not-a-laws licensed, against 1 law with the fifteen wheels alone | §20.58 |
+| [`ITERATION_LANE_STUDY.md`](ITERATION_LANE_STUDY.md) | the iteration lane: the machine's 8 CPUs and the evaluation's default worker count (8 cases 64.4 s → 8.9 s; 237 of 237 in 248 s), the cheap lane and the close in one order with the censuses last; 4 of 4 marks | §20.61 |
+| [`CHAT_SURFACE_STUDY.md`](CHAT_SURFACE_STUDY.md) | the chat surface: one echo per query, `:kinds` printing the parser's own table (30 declared readings), and a refusal that says the sentence matched no declared reading; the batch line unchanged; 4 of 4 marks | §20.60 |
 | [`INTAKE_CAPABILITY_STUDY.md`](INTAKE_CAPABILITY_STUDY.md) | the intake items absorbed where they measurably help: the Rule 30 hypothesis engine, the derivability engine and the next-term reading, with and without them — ARC 9 of 50 tasks (2 before, a development set), 23 of 30 across five domains (4 before), 0 wrong; 12 of 14 marks | §20.59 |
 ---
 

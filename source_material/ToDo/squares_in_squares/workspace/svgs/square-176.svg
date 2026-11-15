@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html
+    Made by extending the s(86) found by Erich Friedman in 1997, by generalizing from s(18) (Mats Gustafsson's version is closest, but Pertti Hämäläinen's has the same rotation angle).
+
+    si = 13;
+    RootReduce[Solve[{EuclideanDistance[{0, 0}, {s - si, s - (si - 1)}] == 2, Tan[a] == (s - (si - 1))/(s - si) && Pi/4 < a < Pi/2}, {s, a}]]
+(*
+    s = 25/2 + Sqrt[7]/2
+    a = ArcTan[(4 + Sqrt[7])/3]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "13.8228756555322952952508078768">
+    <!ENTITY a  "65.7048110546354296692402510934">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M0, 0 H11 V1 H10 V2 H9 V3 H8 V4 H7 V5 H6 V6 H5 V7 H4 V8 H3 V9 H2 V10 H1 V11 H0"/>
+        <path style=  "fill:none" d="M0, 1 H11 V0
+                                     M0, 2 H10 V0
+                                     M0, 3 H 9 V0
+                                     M0, 4 H 8 V0
+                                     M0, 5 H 7 V0
+                                     M0, 6 H 6 V0
+                                     M0, 7 H 5 V0
+                                     M0, 8 H 4 V0
+                                     M0, 9 H 3 V0
+                                     M0,10 H 2 V0
+                                     M0,11 H 1 V0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 1) rotate(-90)">
+        <path style="stroke:none" d="M0, 0 H12 V1 H11 V2 H10 V3 H9 V4 H8 V5 H7 V6 H6 V7 H5 V8 H4 V9 H3 V10 H2 V11 H1 V12 H0"/>
+        <path style=  "fill:none" d="M0, 1 H12 V0
+                                     M0, 2 H11 V0
+                                     M0, 3 H10 V0
+                                     M0, 4 H 9 V0
+                                     M0, 5 H 8 V0
+                                     M0, 6 H 7 V0
+                                     M0, 7 H 6 V0
+                                     M0, 8 H 5 V0
+                                     M0, 9 H 4 V0
+                                     M0,10 H 3 V0
+                                     M0,11 H 2 V0
+                                     M0,12 H 1 V0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M2,0 V1 H0 V0"/>
+        <path style="  fill:none" d="M2,0 V1 H0
+                                     M1,0 V1 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <rect style="stroke:none" x="0" y="0" width="1" height="2"/>
+        <path style=  "fill:none" d="M0,2 H1 V0
+                                     M0,1 H1"/>
+    </g>
+    <g transform="scale(.5) translate(&s; &s;) translate(-1) scale(2) rotate(&a;) translate(-2 -3.048)">
+        <use xlink:href="#two" transform="translate(-1.5 -4)"/>
+        <use xlink:href="#two" transform="translate(-1.0 -3)"/>
+        <use xlink:href="#two" transform="translate(-0.5 -2)"/>
+        <use xlink:href="#two" transform="translate(-0.5 -1)"/>
+        <g id="two">
+            <rect width="2" height="1"/>
+            <path style="fill:none" d="M1,0 L1,1"/>
+        </g>
+        <use xlink:href="#two" transform="translate(0.5 1)"/>
+        <use xlink:href="#two" transform="translate(1.0 2)"/>
+        <use xlink:href="#two" transform="translate(1.0 3)"/>
+        <use xlink:href="#two" transform="translate(1.5 4)"/>
+        <use xlink:href="#two" transform="translate(2.0 5)"/>
+        <use xlink:href="#two" transform="translate(2.5 6)"/>
+        <use xlink:href="#two" transform="translate(2.5 7)"/>
+        <use xlink:href="#two" transform="translate(3.0 8)"/>
+        <use xlink:href="#two" transform="translate(3.5 9)"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

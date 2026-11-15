@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Rigid packing made by combining five copies of the s(40) found by Frits Göbel in early 1979.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "32.82842712474619009760337744842"> <!-- 30 + Sqrt[2]*2 -->
+    <!ENTITY s1  "6.82842712474619009760337744842"> <!--  4 + Sqrt[2]*2 -->
+    <!ENTITY sf   ".82842712474619009760337744842"> <!--      Sqrt[2]*2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="first">
+        <g id="side1">
+            <path style="stroke:none" d="M3,0 V1 H2 V2 H1 V3 H0 V0"/>
+            <path style=  "fill:none" d="M0,1 H3 V0
+                                         M0,2 H2 V0
+                                         M0,3 H1 V0"/>
+        </g>
+        <use xlink:href="#side1" transform="translate(&s1;     ) scale(-1  1)"/>
+        <use xlink:href="#side1" transform="translate(&s1; &s1;) scale(-1 -1)"/>
+        <use xlink:href="#side1" transform="translate(0    &s1;) scale( 1 -1)"/>
+        <g transform="translate(2 2) rotate(45) translate(0 -2)">
+            <rect width="4" height="4"/>
+            <path style="fill:none" d="M0,1 H4 M1,0 V4
+                                       M0,2 H4 M2,0 V4
+                                       M0,3 H4 M3,0 V4"/>
+        </g>
+    </g>
+    <use xlink:href="#first" transform="translate( 7  6)"/>
+    <use xlink:href="#first" transform="translate(13 13)"/>
+    <use xlink:href="#first" transform="translate(20 19)"/>
+    <use xlink:href="#first" transform="translate(26 26)"/>
+    <g transform="translate(&s;  ) scale(-1 1)">
+        <path d="M26,0 V6 H19 V13 H13 V19 H6 V26 H0 V0"/>
+        <path style="fill:none" d="M25,0 V 6 M0,25 H 6
+                                   M24,0 V 6 M0,24 H 6
+                                   M23,0 V 6 M0,23 H 6
+                                   M22,0 V 6 M0,22 H 6
+                                   M21,0 V 6 M0,21 H 6
+                                   M20,0 V 6 M0,20 H 6
+                                   M19,0 V 6 H0
+                                   M18,0 V13 M0,18 H13
+                                   M17,0 V13 M0,17 H13
+                                   M16,0 V13 M0,16 H13
+                                   M15,0 V13 M0,15 H13
+                                   M14,0 V13 M0,14 H13
+                                   M13,0 V13 H0
+                                   M12,0 V19 M0,12 H19
+                                   M11,0 V19 M0,11 H19
+                                   M10,0 V19 M0,10 H19
+                                   M 9,0 V19 M0, 9 H19
+                                   M 8,0 V19 M0, 8 H19
+                                   M 7,0 V19 M0, 7 H19
+                                   M 6,0 V19 H0
+                                   M 5,0 V26 M0, 5 H26
+                                   M 4,0 V26 M0, 4 H26
+                                   M 3,0 V26 M0, 3 H26
+                                   M 2,0 V26 M0, 2 H26
+                                   M 1,0 V26 M0, 1 H26
+                                   M25&sf;,6 V6&sf;
+                                   M26    ,6 V6&sf;
+                                   M12&sf;,19 V19&sf;
+                                   M13    ,19 V19&sf;
+                                   M19,12&sf; H19&sf;
+                                   M19,13     H19&sf;
+                                   M 6,25&sf; H 6&sf;
+                                   M 6,26     H 6&sf;"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path d="M26,0 V7 H20 V13 H13 V20 H7 V26 H0 V0"/>
+        <path style="fill:none" d="M25,0 V 7 M0,25 H 7
+                                   M24,0 V 7 M0,24 H 7
+                                   M23,0 V 7 M0,23 H 7
+                                   M22,0 V 7 M0,22 H 7
+                                   M21,0 V 7 M0,21 H 7
+                                   M20,0 V 7 H0
+                                   M19,0 V13 M0,19 H13
+                                   M18,0 V13 M0,18 H13
+                                   M17,0 V13 M0,17 H13
+                                   M16,0 V13 M0,16 H13
+                                   M15,0 V13 M0,15 H13
+                                   M14,0 V13 M0,14 H13
+                                   M13,0 V13 H0
+                                   M12,0 V20 M0,12 H20
+                                   M11,0 V20 M0,11 H20
+                                   M10,0 V20 M0,10 H20
+                                   M 9,0 V20 M0, 9 H20
+                                   M 8,0 V20 M0, 8 H20
+                                   M 7,0 V20 H0
+                                   M 6,0 V26 M0, 6 H26
+                                   M 5,0 V26 M0, 5 H26
+                                   M 4,0 V26 M0, 4 H26
+                                   M 3,0 V26 M0, 3 H26
+                                   M 2,0 V26 M0, 2 H26
+                                   M 1,0 V26 M0, 1 H26"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

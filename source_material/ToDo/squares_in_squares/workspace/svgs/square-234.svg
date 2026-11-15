@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Originally found by David Ellsworth on December 13, 2024.
+        Loosely based on the s(205) improved by David Ellsworth on December 13, 2024, very loosely based on the s(69) found by Maurizio Morandi in June 2010.
+        Extends the s(151) found by David Ellsworth on November 11, 2024.
+    Improved by David Ellsworth on December 30, 2024, extending the s(128) and s(205) improved by David Ellsworth on December 13, 2024 (based on the s(69) found by Maurizio Morandi in June 2010), and using the technique from the s(53) improved by David W. Cantrell on December 9, 2024.
+    Improved by David Ellsworth on January 25, 2025, adapting the technique from the s(128) improved by David W. Cantrell on January 23, 2025 and David Ellsworth on January 25, 2025.
+
+    Unset[{s, a, c, r1, u2, u3, u4, u5, v6, si}];
+    si = 15;
+    r1 = (s - 14)*Sin[a];
+    u2 = Cos[a] - Sin[a];
+    u3 = (({13, 1} + RotationTransform[a][{2       ,  2 - r1}])[[2]] - (s - 13))/Sin[a];
+    u4 = (({13, 1} + RotationTransform[a][{2 - 3*u2,  6 - r1}])[[2]] - (s - 10))/Sin[a];
+    u5 = (({13, 1} + RotationTransform[a][{2 - 6*u2, 10 - r1}])[[2]] - (s -  7))/Sin[a];
+  (*v6 = ((s - 14) - (Cos[a] + 2*Sin[a]))/Cos[a];*)
+    v6 = -({13, 1} + RotationTransform[a][{-13*u2, 18 - r1}])[[1]]/Sin[a];
+    solution = Solve[{EuclideanDistance[{0, 0}, {s - si, s - (si - 1)}] == 2, Tan[a] == (s - si)/(s - (si - 1)) && 0 < a < Pi/4}, {s, a}];
+    ToString[RootReduce[solution], InputForm]
+    N[{s, a*180/Pi, r1, u2, u3, u4, u5, v6} /. solution, 38]
+
+(*
+    s = 29/2 + Sqrt[7]/2
+    a = ArcTan[(4 - Sqrt[7])/3]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s   "15.822875655532295295250807876819630213">
+    <!ENTITY a   "24.295188945364570330759748906537139629">
+    <!ENTITY r1  ".75000000000000000000000000000000000000">
+    <!ENTITY u2  ".50000000000000000000000000000000000000">
+    <!ENTITY u3  ".33856217223385235237459606159018489357">
+    <!ENTITY u4  ".40806129819079195870685222583067794310">
+    <!ENTITY u5  ".47756042414773156503910839007117099263">
+    <!ENTITY v6  ".05261647808016116173949760134480723288">
+    <!ENTITY tr  "translate(-&u2; 1)">
+    <!ENTITY tr0 "translate(   0  1)">
+    <!ENTITY tr1 "translate(-&u3; 1)">
+    <!ENTITY tr2 "translate(-&u4; 1)">
+    <!ENTITY tr3 "translate(-&u5; 1)">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+        <g id="two">
+            <use xlink:href="#one" transform="translate(0 -&v6;)"/>
+            <use xlink:href="#one" transform="translate(1      )"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g transform="rotate(90) scale(1 -1)">
+        <g>
+            <path style="stroke:none" d="M0, 0 H13 V1 H12 V2 H11 V3 H10 V4 H9 V5 H8 V6 H7 V7 H6 V8 H5 V9 H4 V10 H3 V11 H2 V12 H1 V13 H0"/>
+            <path style=  "fill:none" d="M0, 1 H13 V0
+                                         M0, 2 H12 V0
+                                         M0, 3 H11 V0
+                                         M0, 4 H10 V0
+                                         M0, 5 H 9 V0
+                                         M0, 6 H 8 V0
+                                         M0, 7 H 7 V0
+                                         M0, 8 H 6 V0
+                                         M0, 9 H 5 V0
+                                         M0,10 H 4 V0
+                                         M0,11 H 3 V0
+                                         M0,12 H 2 V0
+                                         M0,13 H 1 V0"/>
+        </g>
+        <g transform="translate(&s; &s;) scale(-1 -1)">
+            <path style="stroke:none" d="M0, 0 H14 V1 H13 V2 H12 V3 H11 V4 H10 V5 H9 V6 H8 V7 H7 V8 H6 V9 H5 V10 H4 V11 H3 V12 H2 V13 H1 V14 H0"/>
+            <path style=  "fill:none" d="M0, 1 H14 V0
+                                         M0, 2 H13 V0
+                                         M0, 3 H12 V0
+                                         M0, 4 H11 V0
+                                         M0, 5 H10 V0
+                                         M0, 6 H 9 V0
+                                         M0, 7 H 8 V0
+                                         M0, 8 H 7 V0
+                                         M0, 9 H 6 V0
+                                         M0,10 H 5 V0
+                                         M0,11 H 4 V0
+                                         M0,12 H 3 V0
+                                         M0,13 H 2 V0
+                                         M0,14 H 1 V0"/>
+        </g>
+        <g transform="translate(&s;) scale(-1 1)">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+        <g transform="translate(0 &s;) scale(1 -1)">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M0,1 H1 L1,0"/>
+        </g>
+        <g transform="translate(13 1) rotate(&a;) translate(0 -&r1;)">
+            <use xlink:href="#two" transform=""/>
+            <use xlink:href="#two" transform="&tr1;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr2;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr3;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;"/>
+            <use xlink:href="#two" transform="&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr0;&tr;&tr;&tr;&tr;"/>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

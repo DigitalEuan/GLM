@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 15, 2024.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "15.91421356237309504880168872421"> <!-- 29/2 + Sqrt[2] -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M13,0 V1 H12 V2 H11 V3 H10 V4 H9 V5 H8 V6 H7 V7 H6 V8 H5 V9 H4 V10 H3 V11 H2 V12 H1 V13 H0 V0"/>
+        <path style=  "fill:none" d="M0, 1 H13 V0
+                                     M0, 2 H12 V0
+                                     M0, 3 H11 V0
+                                     M0, 4 H10 V0
+                                     M0, 5 H 9 V0
+                                     M0, 6 H 8 V0
+                                     M0, 7 H 7 V0
+                                     M0, 8 H 6 V0
+                                     M0, 9 H 5 V0
+                                     M0,10 H 4 V0
+                                     M0,11 H 3 V0
+                                     M0,12 H 2 V0
+                                     M0,13 H 1 V0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M14,0 V1 H13 V2 H12 V3 H11 V4 H10 V5 H9 V6 H8 V7 H7 V8 H6 V9 H5 V10 H4 V11 H3 V12 H2 V13 H1 V14 H0 V0"/>
+        <path style=  "fill:none" d="M0, 1 H14 V0
+                                     M0, 2 H13 V0
+                                     M0, 3 H12 V0
+                                     M0, 4 H11 V0
+                                     M0, 5 H10 V0
+                                     M0, 6 H 9 V0
+                                     M0, 7 H 8 V0
+                                     M0, 8 H 7 V0
+                                     M0, 9 H 6 V0
+                                     M0,10 H 5 V0
+                                     M0,11 H 4 V0
+                                     M0,12 H 3 V0
+                                     M0,13 H 2 V0
+                                     M0,14 H 1 V0"/>
+    </g>
+    <g transform="translate(&s; 0) scale(-1  1)">
+        <path style="stroke:none" d="M2,0 V1 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H0
+                                     M1,0 V1"/>
+    </g>
+    <g transform="translate(0 &s;) scale( 1 -1)">
+        <rect style="stroke:none" width="1" height="1"/>
+        <path style=  "fill:none" d="M1,0 V1 H0"/>
+    </g>
+    <g id="strip" transform="scale(.5) translate(&s; &s;) translate(-13 -17) scale(2) translate(0 &s;) rotate(45) translate(-1 -19)">
+        <rect width="1" height="19"/>
+        <path style="fill:none" d="M0, 1 H1
+                                   M0, 2 H1
+                                   M0, 3 H1
+                                   M0, 4 H1
+                                   M0, 5 H1
+                                   M0, 6 H1
+                                   M0, 7 H1
+                                   M0, 8 H1
+                                   M0, 9 H1
+                                   M0,10 H1
+                                   M0,11 H1
+                                   M0,12 H1
+                                   M0,13 H1
+                                   M0,14 H1
+                                   M0,15 H1
+                                   M0,16 H1
+                                   M0,17 H1
+                                   M0,18 H1"/>
+    </g>
+    <use xlink:href="#strip" transform="translate(&s; &s;) translate(-1) scale(-1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

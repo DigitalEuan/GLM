@@ -1,0 +1,6638 @@
+{
+ "upper_bounds": "kept",
+ "entries_1_1000_verified": 1000,
+ "beat_table": 894,
+ "direct": [
+  {
+   "n": 88,
+   "new": 9.882451030481247,
+   "old": 9.882451032279,
+   "src": "certificates/0000-0999/n88.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from PingYou Ltd"
+  },
+  {
+   "n": 105,
+   "new": 10.789303783742975,
+   "old": 10.789303785562,
+   "src": "certificates/0000-0999/n105.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 126,
+   "new": 11.742640687119286,
+   "old": 11.742640688948999,
+   "src": "certificates/0000-0999/n126.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from PingYou Ltd"
+  },
+  {
+   "n": 129,
+   "new": 11.870013850404463,
+   "old": 11.870013852236,
+   "src": "certificates/best/n129.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 152,
+   "new": 12.83071880097661,
+   "old": 12.830718802821,
+   "src": "certificates/0000-0999/n152.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from PingYou Ltd"
+  },
+  {
+   "n": 154,
+   "new": 12.92110094076168,
+   "old": 12.921206578978,
+   "src": "certificates/0000-0999/n154.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from Evan Daniel"
+  },
+  {
+   "n": 155,
+   "new": 12.952260944650563,
+   "old": 12.952260946496,
+   "src": "certificates/0000-0999/n155.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from Evan Daniel"
+  },
+  {
+   "n": 156,
+   "new": 12.979165853834276,
+   "old": 12.97916585568,
+   "src": "certificates/best/n156.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 175,
+   "new": 13.764174317486596,
+   "old": 13.764174319341,
+   "src": "certificates/best/n175.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 176,
+   "new": 13.795872318436407,
+   "old": 13.795872320292,
+   "src": "certificates/best/n176.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 183,
+   "new": 13.999580178736252,
+   "old": 13.999580180594,
+   "src": "certificates/0000-0999/n183.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from Evan Daniel & Francisco Couzo"
+  },
+  {
+   "n": 204,
+   "new": 14.808642830513088,
+   "old": 14.808642842455999,
+   "src": "certificates/0000-0999/n204.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 211,
+   "new": 14.993549626299421,
+   "old": 14.993549628165999,
+   "src": "certificates/0000-0999/n211.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 227,
+   "new": 15.563625652325149,
+   "old": 15.563625654196999,
+   "src": "certificates/0000-0999/n227.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 232,
+   "new": 15.764174317486596,
+   "old": 15.76417431936,
+   "src": "certificates/best/n232.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 236,
+   "new": 15.86193439060736,
+   "old": 15.861934392481,
+   "src": "certificates/0000-0999/n236.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from Evan Daniel"
+  },
+  {
+   "n": 237,
+   "new": 15.902603638259595,
+   "old": 15.902603640134,
+   "src": "certificates/0000-0999/n237.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 241,
+   "new": 15.98711709515024,
+   "old": 15.987117097025,
+   "src": "certificates/0000-0999/n241.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 260,
+   "new": 16.6457532505365,
+   "old": 16.6457532524,
+   "src": "certificates/0000-0999/n260.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); graft refinement of Couzo topology"
+  },
+  {
+   "n": 264,
+   "new": 16.774735132387832,
+   "old": 16.774735134268,
+   "src": "certificates/best/n264.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 270,
+   "new": 16.92816225219675,
+   "old": 16.928196995211,
+   "src": "certificates/0000-0999/n270.cert",
+   "credit": "Evan Daniel; strict certificate verified by Mishapolk"
+  },
+  {
+   "n": 271,
+   "new": 16.948947733713656,
+   "old": 16.948947735596,
+   "src": "certificates/0000-0999/n271.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from Evan Daniel"
+  },
+  {
+   "n": 302,
+   "new": 17.87001385040446,
+   "old": 17.870013852293,
+   "src": "certificates/best/n302.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 303,
+   "new": 17.909772217256204,
+   "old": 17.909958292958,
+   "src": "certificates/0000-0999/n303.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk); packing refined from Evan Daniel"
+  },
+  {
+   "n": 304,
+   "new": 17.929427758075175,
+   "old": 17.929427759962998,
+   "src": "certificates/best/n304.cert",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 326,
+   "new": 18.53553390593274,
+   "old": 18.53553390971,
+   "src": "certificates/best/n291.cert",
+   "credit": "PingYou Ltd (BuddenPing)"
+  },
+  {
+   "n": 327,
+   "new": 18.591378145497696,
+   "old": 18.591378149268998,
+   "src": "certificates/best/n259.cert",
+   "credit": "PingYou Ltd (BuddenPing)"
+  },
+  {
+   "n": 328,
+   "new": 18.614368938494913,
+   "old": 18.634146345242,
+   "src": "certificates/0000-0999/n328.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 329,
+   "new": 18.65685424949238,
+   "old": 18.656854253272,
+   "src": "certificates/0000-0999/n329.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 330,
+   "new": 18.692672444454068,
+   "old": 18.704232794518,
+   "src": "certificates/0000-0999/n330.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 331,
+   "new": 18.707106781186546,
+   "old": 18.70710678308,
+   "src": "certificates/0000-0999/n331.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 332,
+   "new": 18.740417287543806,
+   "old": 18.740417291325002,
+   "src": "certificates/0000-0999/n332.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 333,
+   "new": 18.77817459305202,
+   "old": 18.778174596826,
+   "src": "certificates/0000-0999/n333.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 335,
+   "new": 18.822875655541953,
+   "old": 18.82412339226,
+   "src": "certificates/0000-0999/n335.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 336,
+   "new": 18.82557149986167,
+   "old": 18.846667196625,
+   "src": "certificates/0000-0999/n336.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 337,
+   "new": 18.85839176763623,
+   "old": 18.870013854187,
+   "src": "certificates/0000-0999/n337.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 338,
+   "new": 18.906332809852092,
+   "old": 18.909958294852,
+   "src": "certificates/0000-0999/n338.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 339,
+   "new": 18.90735147117674,
+   "old": 18.929427761857,
+   "src": "certificates/0000-0999/n339.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 340,
+   "new": 18.93964963289101,
+   "old": 18.95046648592,
+   "src": "certificates/0000-0999/n340.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 341,
+   "new": 18.951882408719946,
+   "old": 18.963433721274,
+   "src": "certificates/0000-0999/n341.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 342,
+   "new": 18.964706723168277,
+   "old": 18.980862787837,
+   "src": "certificates/0000-0999/n342.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 343,
+   "new": 18.977575126249,
+   "old": 18.997149125053,
+   "src": "certificates/0000-0999/n343.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 344,
+   "new": 18.99272780935591,
+   "old": 19.000000001894,
+   "src": "certificates/0000-0999/n344.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 362,
+   "new": 19.535533905932738,
+   "old": 19.535533909596,
+   "src": "certificates/0000-0999/n362.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 363,
+   "new": 19.535533905932738,
+   "old": 19.535533909716,
+   "src": "certificates/0000-0999/n363.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 364,
+   "new": 19.583782190151858,
+   "old": 19.591378149275002,
+   "src": "certificates/0000-0999/n364.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 365,
+   "new": 19.614368938495424,
+   "old": 19.634146345248,
+   "src": "certificates/0000-0999/n365.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 366,
+   "new": 19.65685424949238,
+   "old": 19.656854253278,
+   "src": "certificates/0000-0999/n366.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 367,
+   "new": 19.692388157296357,
+   "old": 19.704232794522,
+   "src": "certificates/0000-0999/n367.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 368,
+   "new": 19.692388157296357,
+   "old": 19.707106783086,
+   "src": "certificates/0000-0999/n368.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 369,
+   "new": 19.70710678118655,
+   "old": 19.707106783086,
+   "src": "certificates/0000-0999/n369.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 370,
+   "new": 19.767428349961705,
+   "old": 19.77817459683,
+   "src": "certificates/0000-0999/n370.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 372,
+   "new": 19.82287565555126,
+   "old": 19.824123392266,
+   "src": "certificates/0000-0999/n372.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 373,
+   "new": 19.823062082837804,
+   "old": 19.828427126646,
+   "src": "certificates/0000-0999/n373.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 374,
+   "new": 19.83235621703276,
+   "old": 19.870013854192997,
+   "src": "certificates/0000-0999/n374.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 375,
+   "new": 19.882451030481246,
+   "old": 19.899494938512,
+   "src": "certificates/0000-0999/n375.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 376,
+   "new": 19.899494936611667,
+   "old": 19.899494938511,
+   "src": "certificates/0000-0999/n376.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 377,
+   "new": 19.92547165396926,
+   "old": 19.949747470206,
+   "src": "certificates/0000-0999/n377.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 378,
+   "new": 19.942018057444855,
+   "old": 19.963433721279998,
+   "src": "certificates/0000-0999/n378.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 379,
+   "new": 19.950889681499188,
+   "old": 19.980862787842998,
+   "src": "certificates/0000-0999/n379.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 380,
+   "new": 19.961350023831127,
+   "old": 19.997149125059,
+   "src": "certificates/0000-0999/n380.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 381,
+   "new": 19.974739840479163,
+   "old": 20.0000000019,
+   "src": "certificates/0000-0999/n381.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 382,
+   "new": 19.98762115396551,
+   "old": 20.0000000019,
+   "src": "certificates/0000-0999/n382.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 401,
+   "new": 20.535533905932738,
+   "old": 20.5355339096,
+   "src": "certificates/0000-0999/n401.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 402,
+   "new": 20.535533905932738,
+   "old": 20.53553390972,
+   "src": "certificates/0000-0999/n402.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 403,
+   "new": 20.583782190151858,
+   "old": 20.591378149279002,
+   "src": "certificates/0000-0999/n403.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 404,
+   "new": 20.61436893849518,
+   "old": 20.634146345254,
+   "src": "certificates/0000-0999/n404.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 405,
+   "new": 20.65685424949238,
+   "old": 20.656854253284,
+   "src": "certificates/0000-0999/n405.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 406,
+   "new": 20.692388157296357,
+   "old": 20.704232794528,
+   "src": "certificates/0000-0999/n406.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 407,
+   "new": 20.692388157296357,
+   "old": 20.70710678309,
+   "src": "certificates/0000-0999/n407.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 408,
+   "new": 20.707106781186546,
+   "old": 20.70710678309,
+   "src": "certificates/0000-0999/n408.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 409,
+   "new": 20.767428349961705,
+   "old": 20.778174594956,
+   "src": "certificates/0000-0999/n409.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 410,
+   "new": 20.778174593056363,
+   "old": 20.778174594956,
+   "src": "certificates/0000-0999/n410.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 411,
+   "new": 20.82287565555126,
+   "old": 20.82412339227,
+   "src": "certificates/0000-0999/n411.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 412,
+   "new": 20.822995415457648,
+   "old": 20.82842712665,
+   "src": "certificates/0000-0999/n412.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 413,
+   "new": 20.83166336535831,
+   "old": 20.870013854196998,
+   "src": "certificates/0000-0999/n413.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 414,
+   "new": 20.882451030481246,
+   "old": 20.899494938516,
+   "src": "certificates/0000-0999/n414.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 415,
+   "new": 20.899494936611664,
+   "old": 20.899494938516,
+   "src": "certificates/0000-0999/n415.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 417,
+   "new": 20.93321077002608,
+   "old": 20.94974747021,
+   "src": "certificates/0000-0999/n417.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 418,
+   "new": 20.93918412824869,
+   "old": 20.980862787847,
+   "src": "certificates/0000-0999/n418.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 419,
+   "new": 20.957804836264582,
+   "old": 20.997149125063,
+   "src": "certificates/0000-0999/n419.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 420,
+   "new": 20.96658819117876,
+   "old": 21.000000001904,
+   "src": "certificates/0000-0999/n420.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 421,
+   "new": 20.97627399796303,
+   "old": 21.000000001904,
+   "src": "certificates/0000-0999/n421.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 422,
+   "new": 20.983575254579982,
+   "old": 21.000000001904,
+   "src": "certificates/0000-0999/n422.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 442,
+   "new": 21.535533905932738,
+   "old": 21.535533909606,
+   "src": "certificates/0000-0999/n442.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 443,
+   "new": 21.535533905932738,
+   "old": 21.535533909726,
+   "src": "certificates/0000-0999/n443.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 444,
+   "new": 21.58378219015186,
+   "old": 21.591378149285,
+   "src": "certificates/0000-0999/n444.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 446,
+   "new": 21.65685424949238,
+   "old": 21.6568542514,
+   "src": "certificates/0000-0999/n446.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 447,
+   "new": 21.690355937314653,
+   "old": 21.704232794532,
+   "src": "certificates/0000-0999/n447.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 448,
+   "new": 21.692388157296357,
+   "old": 21.707106783094,
+   "src": "certificates/0000-0999/n448.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 449,
+   "new": 21.70710678118655,
+   "old": 21.707106783094,
+   "src": "certificates/0000-0999/n449.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 450,
+   "new": 21.767428349961705,
+   "old": 21.77817459496,
+   "src": "certificates/0000-0999/n450.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 451,
+   "new": 21.778174593072876,
+   "old": 21.77817459496,
+   "src": "certificates/0000-0999/n451.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 452,
+   "new": 21.77817459307391,
+   "old": 21.77817459496,
+   "src": "certificates/0000-0999/n452.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 453,
+   "new": 21.822995415457648,
+   "old": 21.828427126654,
+   "src": "certificates/0000-0999/n453.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 454,
+   "new": 21.828427124750746,
+   "old": 21.828427126654,
+   "src": "certificates/0000-0999/n454.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 455,
+   "new": 21.848427413737465,
+   "old": 21.89949494042,
+   "src": "certificates/0000-0999/n455.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 456,
+   "new": 21.88130621809705,
+   "old": 21.89949494042,
+   "src": "certificates/0000-0999/n456.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 457,
+   "new": 21.899494938603613,
+   "old": 21.899494940424,
+   "src": "certificates/0000-0999/n457.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 458,
+   "new": 21.903616795093093,
+   "old": 21.949747472118,
+   "src": "certificates/0000-0999/n458.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 459,
+   "new": 21.937022304129442,
+   "old": 21.970562750386,
+   "src": "certificates/0000-0999/n459.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 460,
+   "new": 21.950987687989155,
+   "old": 21.970562750386,
+   "src": "certificates/0000-0999/n460.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 461,
+   "new": 21.96413453643409,
+   "old": 22.00000000191,
+   "src": "certificates/0000-0999/n461.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 462,
+   "new": 21.96619221118964,
+   "old": 22.00000000191,
+   "src": "certificates/0000-0999/n462.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 463,
+   "new": 21.971212864945663,
+   "old": 22.00000000191,
+   "src": "certificates/0000-0999/n463.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 464,
+   "new": 21.986268532628046,
+   "old": 22.00000000191,
+   "src": "certificates/0000-0999/n464.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 485,
+   "new": 22.535533905932734,
+   "old": 22.53553390961,
+   "src": "certificates/0000-0999/n485.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 486,
+   "new": 22.535533905932734,
+   "old": 22.53553390973,
+   "src": "certificates/0000-0999/n486.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 487,
+   "new": 22.583782190151858,
+   "old": 22.591378149289,
+   "src": "certificates/0000-0999/n487.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 490,
+   "new": 22.656854249497115,
+   "old": 22.656854251404,
+   "src": "certificates/0000-0999/n490.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 491,
+   "new": 22.692388157296353,
+   "old": 22.707106783098,
+   "src": "certificates/0000-0999/n491.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 492,
+   "new": 22.70710678118655,
+   "old": 22.707106783098,
+   "src": "certificates/0000-0999/n492.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 494,
+   "new": 22.778174593072876,
+   "old": 22.778174596868,
+   "src": "certificates/0000-0999/n494.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 495,
+   "new": 22.77817459307391,
+   "old": 22.778174596872,
+   "src": "certificates/0000-0999/n495.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 496,
+   "new": 22.82287565553705,
+   "old": 22.828427126658,
+   "src": "certificates/0000-0999/n496.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 497,
+   "new": 22.8231026562622,
+   "old": 22.828427126658,
+   "src": "certificates/0000-0999/n497.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 498,
+   "new": 22.828427124750966,
+   "old": 22.828427126658,
+   "src": "certificates/0000-0999/n498.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 499,
+   "new": 22.88130621811212,
+   "old": 22.899494940424,
+   "src": "certificates/0000-0999/n499.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 500,
+   "new": 22.887841512250844,
+   "old": 22.899494940428,
+   "src": "certificates/0000-0999/n500.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 501,
+   "new": 22.887841512250812,
+   "old": 22.949747470218,
+   "src": "certificates/0000-0999/n501.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 502,
+   "new": 22.933269925448915,
+   "old": 22.97056275039,
+   "src": "certificates/0000-0999/n502.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 503,
+   "new": 22.94393377153996,
+   "old": 22.97056275039,
+   "src": "certificates/0000-0999/n503.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 504,
+   "new": 22.96182839864749,
+   "old": 22.97056275039,
+   "src": "certificates/0000-0999/n504.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 505,
+   "new": 22.964182800890395,
+   "old": 23.000000001914,
+   "src": "certificates/0000-0999/n505.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 506,
+   "new": 22.97121330885325,
+   "old": 23.000000001914,
+   "src": "certificates/0000-0999/n506.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 507,
+   "new": 22.973697163657484,
+   "old": 23.000000001914,
+   "src": "certificates/0000-0999/n507.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 508,
+   "new": 22.983309378349794,
+   "old": 23.000000001914,
+   "src": "certificates/0000-0999/n508.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 509,
+   "new": 22.993588501399497,
+   "old": 23.000000001914,
+   "src": "certificates/0000-0999/n509.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 530,
+   "new": 23.535533905932738,
+   "old": 23.535533907848,
+   "src": "certificates/0000-0999/n530.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 531,
+   "new": 23.535533905932738,
+   "old": 23.535533909734,
+   "src": "certificates/0000-0999/n531.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 532,
+   "new": 23.583782190151858,
+   "old": 23.591378149293,
+   "src": "certificates/0000-0999/n532.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 533,
+   "new": 23.606601719860873,
+   "old": 23.606601721622,
+   "src": "certificates/0000-0999/n533.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 534,
+   "new": 23.606601719960874,
+   "old": 23.606601721626,
+   "src": "certificates/0000-0999/n534.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 535,
+   "new": 23.65685424949736,
+   "old": 23.65685425332,
+   "src": "certificates/0000-0999/n535.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 536,
+   "new": 23.677669529687456,
+   "old": 23.677669531579,
+   "src": "certificates/0000-0999/n536.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 537,
+   "new": 23.707106781186546,
+   "old": 23.707106783102,
+   "src": "certificates/0000-0999/n537.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 539,
+   "new": 23.778174593064456,
+   "old": 23.778174596872,
+   "src": "certificates/0000-0999/n539.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 540,
+   "new": 23.77817459307391,
+   "old": 23.778174596876,
+   "src": "certificates/0000-0999/n540.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 541,
+   "new": 23.81370850126813,
+   "old": 23.828427126662,
+   "src": "certificates/0000-0999/n541.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 542,
+   "new": 23.81370850126813,
+   "old": 23.828427126662,
+   "src": "certificates/0000-0999/n542.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 543,
+   "new": 23.81370850126813,
+   "old": 23.828427126662,
+   "src": "certificates/0000-0999/n543.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 544,
+   "new": 23.828427124753635,
+   "old": 23.828427126662,
+   "src": "certificates/0000-0999/n544.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 545,
+   "new": 23.883414759604623,
+   "old": 23.899494940432,
+   "src": "certificates/0000-0999/n545.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 546,
+   "new": 23.88784151225103,
+   "old": 23.949747470222,
+   "src": "certificates/0000-0999/n546.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 547,
+   "new": 23.898819144771572,
+   "old": 23.949747470222,
+   "src": "certificates/0000-0999/n547.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 548,
+   "new": 23.94393377153831,
+   "old": 23.970562752302,
+   "src": "certificates/0000-0999/n548.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 549,
+   "new": 23.95550180473136,
+   "old": 23.970562752306,
+   "src": "certificates/0000-0999/n549.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 550,
+   "new": 23.96068144477986,
+   "old": 24.000000001916,
+   "src": "certificates/0000-0999/n550.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 551,
+   "new": 23.96580164196227,
+   "old": 24.000000001916,
+   "src": "certificates/0000-0999/n551.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 552,
+   "new": 23.966628823340184,
+   "old": 24.000000001916,
+   "src": "certificates/0000-0999/n552.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 553,
+   "new": 23.978921076227845,
+   "old": 24.000000001916,
+   "src": "certificates/0000-0999/n553.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 554,
+   "new": 23.986307325877206,
+   "old": 24.000000001916,
+   "src": "certificates/0000-0999/n554.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 555,
+   "new": 23.99358071355643,
+   "old": 24.000000001916,
+   "src": "certificates/0000-0999/n555.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 577,
+   "new": 24.535533905932738,
+   "old": 24.535533907851,
+   "src": "certificates/0000-0999/n577.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 578,
+   "new": 24.535533905932738,
+   "old": 24.535533909736,
+   "src": "certificates/0000-0999/n578.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 579,
+   "new": 24.58378219015186,
+   "old": 24.591378149295,
+   "src": "certificates/0000-0999/n579.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 580,
+   "new": 24.606601719860873,
+   "old": 24.606601721624,
+   "src": "certificates/0000-0999/n580.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 581,
+   "new": 24.606601719960874,
+   "old": 24.606601721628,
+   "src": "certificates/0000-0999/n581.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 582,
+   "new": 24.656854249498103,
+   "old": 24.656854253322,
+   "src": "certificates/0000-0999/n582.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 583,
+   "new": 24.677669529687456,
+   "old": 24.677669531582,
+   "src": "certificates/0000-0999/n583.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 584,
+   "new": 24.677669529668844,
+   "old": 24.677669531582,
+   "src": "certificates/0000-0999/n584.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 587,
+   "new": 24.77817459307391,
+   "old": 24.77817459688,
+   "src": "certificates/0000-0999/n587.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 588,
+   "new": 24.813708501268128,
+   "old": 24.828427126666,
+   "src": "certificates/0000-0999/n588.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 589,
+   "new": 24.813708501268128,
+   "old": 24.828427126666,
+   "src": "certificates/0000-0999/n589.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 590,
+   "new": 24.813708501268128,
+   "old": 24.828427126666,
+   "src": "certificates/0000-0999/n590.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 591,
+   "new": 24.82842712475447,
+   "old": 24.828427128582,
+   "src": "certificates/0000-0999/n591.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 592,
+   "new": 24.88341475960481,
+   "old": 24.899494938532,
+   "src": "certificates/0000-0999/n592.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 593,
+   "new": 24.887841512255683,
+   "old": 24.899494938532,
+   "src": "certificates/0000-0999/n593.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 594,
+   "new": 24.898819144771558,
+   "old": 24.899494938532,
+   "src": "certificates/0000-0999/n594.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 595,
+   "new": 24.94393377153996,
+   "old": 24.949747470226,
+   "src": "certificates/0000-0999/n595.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 596,
+   "new": 24.949747468311088,
+   "old": 24.949747470226,
+   "src": "certificates/0000-0999/n596.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 597,
+   "new": 24.950690418603283,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n597.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 598,
+   "new": 24.954250129234154,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n598.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 599,
+   "new": 24.95961975459548,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n599.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 600,
+   "new": 24.978172747040162,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n600.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 601,
+   "new": 24.985394902831924,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n601.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 602,
+   "new": 24.988237878175006,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n602.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 603,
+   "new": 24.99035556937973,
+   "old": 25.00000000192,
+   "src": "certificates/0000-0999/n603.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 627,
+   "new": 25.535533905932734,
+   "old": 25.535533907855,
+   "src": "certificates/0000-0999/n627.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 628,
+   "new": 25.583782190151858,
+   "old": 25.591378149298997,
+   "src": "certificates/0000-0999/n628.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 629,
+   "new": 25.606601719860873,
+   "old": 25.606601721628,
+   "src": "certificates/0000-0999/n629.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 630,
+   "new": 25.606601719960874,
+   "old": 25.606601721632,
+   "src": "certificates/0000-0999/n630.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 631,
+   "new": 25.656854249497837,
+   "old": 25.656854253326,
+   "src": "certificates/0000-0999/n631.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 632,
+   "new": 25.677669529687453,
+   "old": 25.677669533501,
+   "src": "certificates/0000-0999/n632.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 633,
+   "new": 25.67766952966918,
+   "old": 25.677669533504,
+   "src": "certificates/0000-0999/n633.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 637,
+   "new": 25.77817459305743,
+   "old": 25.778174594974,
+   "src": "certificates/0000-0999/n637.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 638,
+   "new": 25.81370850126813,
+   "old": 25.828427126668,
+   "src": "certificates/0000-0999/n638.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 639,
+   "new": 25.81370850126813,
+   "old": 25.828427126668,
+   "src": "certificates/0000-0999/n639.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 640,
+   "new": 25.82842712475685,
+   "old": 25.828427126668,
+   "src": "certificates/0000-0999/n640.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 641,
+   "new": 25.881306218115984,
+   "old": 25.899494938534,
+   "src": "certificates/0000-0999/n641.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 642,
+   "new": 25.881306218115984,
+   "old": 25.899494938534,
+   "src": "certificates/0000-0999/n642.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 643,
+   "new": 25.898819144772236,
+   "old": 25.899494938534,
+   "src": "certificates/0000-0999/n643.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 644,
+   "new": 25.89949493661706,
+   "old": 25.899494938534,
+   "src": "certificates/0000-0999/n644.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 645,
+   "new": 25.946513932850817,
+   "old": 25.949747470228,
+   "src": "certificates/0000-0999/n645.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 646,
+   "new": 25.9465690594636,
+   "old": 25.949747470228,
+   "src": "certificates/0000-0999/n646.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 647,
+   "new": 25.94693631930791,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n647.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 648,
+   "new": 25.95961975459162,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n648.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 649,
+   "new": 25.974880942002166,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n649.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 650,
+   "new": 25.974880942002166,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n650.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 651,
+   "new": 25.981693875363973,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n651.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 652,
+   "new": 25.988125076085705,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n652.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 653,
+   "new": 25.992652660226494,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n653.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 654,
+   "new": 25.994801642472776,
+   "old": 26.000000001924,
+   "src": "certificates/0000-0999/n654.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 677,
+   "new": 26.52081528262539,
+   "old": 26.520815284016,
+   "src": "certificates/0000-0999/n677.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 678,
+   "new": 26.535533905932738,
+   "old": 26.535533909742,
+   "src": "certificates/0000-0999/n678.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 679,
+   "new": 26.583782190151858,
+   "old": 26.591378149301,
+   "src": "certificates/0000-0999/n679.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 681,
+   "new": 26.60660171996087,
+   "old": 26.606601721634,
+   "src": "certificates/0000-0999/n681.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 683,
+   "new": 26.677669529687453,
+   "old": 26.677669533505,
+   "src": "certificates/0000-0999/n683.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 684,
+   "new": 26.677669529669288,
+   "old": 26.677669533508,
+   "src": "certificates/0000-0999/n684.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 689,
+   "new": 26.778174593057628,
+   "old": 26.778174594978,
+   "src": "certificates/0000-0999/n689.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 690,
+   "new": 26.81370850126813,
+   "old": 26.828427126672,
+   "src": "certificates/0000-0999/n690.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 691,
+   "new": 26.82842712475241,
+   "old": 26.828427126672,
+   "src": "certificates/0000-0999/n691.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 692,
+   "new": 26.828427124751908,
+   "old": 26.828427126672,
+   "src": "certificates/0000-0999/n692.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 693,
+   "new": 26.881306218115984,
+   "old": 26.899494940458,
+   "src": "certificates/0000-0999/n693.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 694,
+   "new": 26.898819144772517,
+   "old": 26.899494940458,
+   "src": "certificates/0000-0999/n694.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 695,
+   "new": 26.899494936617288,
+   "old": 26.89949494046,
+   "src": "certificates/0000-0999/n695.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 696,
+   "new": 26.94654491914725,
+   "old": 26.949747470232,
+   "src": "certificates/0000-0999/n696.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 697,
+   "new": 26.94665318167013,
+   "old": 26.949747470232,
+   "src": "certificates/0000-0999/n697.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 698,
+   "new": 26.946936319308232,
+   "old": 26.949747470232,
+   "src": "certificates/0000-0999/n698.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 699,
+   "new": 26.94974746831153,
+   "old": 26.949747470232,
+   "src": "certificates/0000-0999/n699.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 700,
+   "new": 26.963723854101712,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n700.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 701,
+   "new": 26.97006531121726,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n701.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 702,
+   "new": 26.976006198467392,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n702.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 703,
+   "new": 26.98131192075471,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n703.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 704,
+   "new": 26.987109192674964,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n704.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 705,
+   "new": 26.99037557802579,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n705.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 706,
+   "new": 26.997919093469505,
+   "old": 27.000000001926,
+   "src": "certificates/0000-0999/n706.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 730,
+   "new": 27.52081528262539,
+   "old": 27.52081528402,
+   "src": "certificates/0000-0999/n730.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 731,
+   "new": 27.535533905932738,
+   "old": 27.535533909746,
+   "src": "certificates/0000-0999/n731.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 732,
+   "new": 27.58378219015186,
+   "old": 27.591378149305,
+   "src": "certificates/0000-0999/n732.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 736,
+   "new": 27.656854249498217,
+   "old": 27.65685425142,
+   "src": "certificates/0000-0999/n736.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 737,
+   "new": 27.677669529669476,
+   "old": 27.67766953351,
+   "src": "certificates/0000-0999/n737.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 741,
+   "new": 27.72792206393265,
+   "old": 27.727922065211,
+   "src": "certificates/0000-0999/n741.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 742,
+   "new": 27.778174593057894,
+   "old": 27.778174596906,
+   "src": "certificates/0000-0999/n742.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 743,
+   "new": 27.798989873229274,
+   "old": 27.798989875151,
+   "src": "certificates/0000-0999/n743.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 744,
+   "new": 27.798989873229186,
+   "old": 27.798989875151,
+   "src": "certificates/0000-0999/n744.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 745,
+   "new": 27.828427124752192,
+   "old": 27.828427126674,
+   "src": "certificates/0000-0999/n745.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 746,
+   "new": 27.82842712475205,
+   "old": 27.828427126674,
+   "src": "certificates/0000-0999/n746.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 747,
+   "new": 27.883160154732572,
+   "old": 27.89949494046,
+   "src": "certificates/0000-0999/n747.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 748,
+   "new": 27.884019388633405,
+   "old": 27.899494940462,
+   "src": "certificates/0000-0999/n748.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 749,
+   "new": 27.884019388633387,
+   "old": 27.949747470234,
+   "src": "certificates/0000-0999/n749.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 750,
+   "new": 27.911195491083586,
+   "old": 27.949747470234,
+   "src": "certificates/0000-0999/n750.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 751,
+   "new": 27.914175273216618,
+   "old": 27.949747470234,
+   "src": "certificates/0000-0999/n751.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 752,
+   "new": 27.931658926824095,
+   "old": 27.949747470234,
+   "src": "certificates/0000-0999/n752.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 753,
+   "new": 27.932449886388145,
+   "old": 27.949747470234,
+   "src": "certificates/0000-0999/n753.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 754,
+   "new": 27.93742331399305,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n754.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 755,
+   "new": 27.95146295776058,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n755.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 756,
+   "new": 27.976777716757244,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n756.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 757,
+   "new": 27.976914446450127,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n757.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 758,
+   "new": 27.982235537430658,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n758.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 759,
+   "new": 27.9885691622969,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n759.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 760,
+   "new": 27.992923233306378,
+   "old": 28.000000001928,
+   "src": "certificates/0000-0999/n760.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 785,
+   "new": 28.52081528262539,
+   "old": 28.520815284022,
+   "src": "certificates/0000-0999/n785.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 786,
+   "new": 28.535533905932738,
+   "old": 28.535533909748,
+   "src": "certificates/0000-0999/n786.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 787,
+   "new": 28.58378219015186,
+   "old": 28.591378149306998,
+   "src": "certificates/0000-0999/n787.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 788,
+   "new": 28.606601719860873,
+   "old": 28.606601721636,
+   "src": "certificates/0000-0999/n788.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 789,
+   "new": 28.606601719960874,
+   "old": 28.60660172164,
+   "src": "certificates/0000-0999/n789.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 791,
+   "new": 28.6568542494984,
+   "old": 28.656854251422,
+   "src": "certificates/0000-0999/n791.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 792,
+   "new": 28.656854249498586,
+   "old": 28.656854251422,
+   "src": "certificates/0000-0999/n792.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 796,
+   "new": 28.727922063932645,
+   "old": 28.727922065213,
+   "src": "certificates/0000-0999/n796.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 797,
+   "new": 28.7781745930581,
+   "old": 28.778174596908,
+   "src": "certificates/0000-0999/n797.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 798,
+   "new": 28.798989873229527,
+   "old": 28.798989875154,
+   "src": "certificates/0000-0999/n798.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 799,
+   "new": 28.798989873229413,
+   "old": 28.798989875154,
+   "src": "certificates/0000-0999/n799.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 800,
+   "new": 28.798989873229594,
+   "old": 28.798989875154,
+   "src": "certificates/0000-0999/n800.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 801,
+   "new": 28.82577752612571,
+   "old": 28.828427126677,
+   "src": "certificates/0000-0999/n801.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 802,
+   "new": 28.827439468622632,
+   "old": 28.828427126677,
+   "src": "certificates/0000-0999/n802.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 803,
+   "new": 28.827585222381366,
+   "old": 28.899494940464,
+   "src": "certificates/0000-0999/n803.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 804,
+   "new": 28.884019388631366,
+   "old": 28.949747470236,
+   "src": "certificates/0000-0999/n804.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 805,
+   "new": 28.90267397414942,
+   "old": 28.949747470236,
+   "src": "certificates/0000-0999/n805.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 806,
+   "new": 28.902673974144697,
+   "old": 28.949747470236,
+   "src": "certificates/0000-0999/n806.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 807,
+   "new": 28.92469433867401,
+   "old": 28.949747472162,
+   "src": "certificates/0000-0999/n807.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 808,
+   "new": 28.931498747904566,
+   "old": 28.949747472164,
+   "src": "certificates/0000-0999/n808.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 809,
+   "new": 28.933951500686586,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n809.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 810,
+   "new": 28.95146295776058,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n810.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 811,
+   "new": 28.974352186976553,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n811.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 812,
+   "new": 28.97691432051904,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n812.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 813,
+   "new": 28.979106074254346,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n813.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 814,
+   "new": 28.981388046067657,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n814.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 815,
+   "new": 28.992261716553283,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n815.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 816,
+   "new": 28.99594453868646,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n816.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 817,
+   "new": 28.997492020606607,
+   "old": 29.000000001932,
+   "src": "certificates/0000-0999/n817.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 842,
+   "new": 29.52081528262539,
+   "old": 29.520815284024,
+   "src": "certificates/0000-0999/n842.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 843,
+   "new": 29.535533905932738,
+   "old": 29.53553390975,
+   "src": "certificates/0000-0999/n843.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 844,
+   "new": 29.583782190151858,
+   "old": 29.591378149309,
+   "src": "certificates/0000-0999/n844.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 845,
+   "new": 29.606601719860873,
+   "old": 29.606601721638,
+   "src": "certificates/0000-0999/n845.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 846,
+   "new": 29.606601719960874,
+   "old": 29.606601721642,
+   "src": "certificates/0000-0999/n846.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 848,
+   "new": 29.642135626597163,
+   "old": 29.656854251425,
+   "src": "certificates/0000-0999/n848.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 849,
+   "new": 29.642135626597163,
+   "old": 29.656854251425,
+   "src": "certificates/0000-0999/n849.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 850,
+   "new": 29.656854249498664,
+   "old": 29.656854251425,
+   "src": "certificates/0000-0999/n850.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 854,
+   "new": 29.778174593058285,
+   "old": 29.77817459691,
+   "src": "certificates/0000-0999/n854.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 855,
+   "new": 29.79898987322971,
+   "old": 29.798989877083,
+   "src": "certificates/0000-0999/n855.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 856,
+   "new": 29.798989873229676,
+   "old": 29.798989877083,
+   "src": "certificates/0000-0999/n856.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 857,
+   "new": 29.798989873229637,
+   "old": 29.798989877086,
+   "src": "certificates/0000-0999/n857.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 858,
+   "new": 29.825571499873767,
+   "old": 29.828427126679,
+   "src": "certificates/0000-0999/n858.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 859,
+   "new": 29.82557149986804,
+   "old": 29.828427128609,
+   "src": "certificates/0000-0999/n859.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 860,
+   "new": 29.82758522235379,
+   "old": 29.84924240685,
+   "src": "certificates/0000-0999/n860.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 862,
+   "new": 29.89949493661802,
+   "old": 29.899494938545,
+   "src": "certificates/0000-0999/n862.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 863,
+   "new": 29.902673974144808,
+   "old": 29.949747470239,
+   "src": "certificates/0000-0999/n863.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 864,
+   "new": 29.924694560081665,
+   "old": 29.949747470239,
+   "src": "certificates/0000-0999/n864.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 865,
+   "new": 29.93149874793057,
+   "old": 29.949747470239,
+   "src": "certificates/0000-0999/n865.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 866,
+   "new": 29.93395402498755,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n866.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 867,
+   "new": 29.942070418090186,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n867.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 868,
+   "new": 29.97421660925501,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n868.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 869,
+   "new": 29.974934501501703,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n869.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 870,
+   "new": 29.979118512494335,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n870.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 871,
+   "new": 29.98122217933617,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n871.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 872,
+   "new": 29.992215460566253,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n872.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 873,
+   "new": 29.99226577700982,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n873.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 874,
+   "new": 29.992654196253074,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n874.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 875,
+   "new": 29.996974281851593,
+   "old": 30.000000001934,
+   "src": "certificates/0000-0999/n875.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 901,
+   "new": 30.52081528262539,
+   "old": 30.520815284026,
+   "src": "certificates/0000-0999/n901.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 902,
+   "new": 30.535533905932738,
+   "old": 30.535533907867,
+   "src": "certificates/0000-0999/n902.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 903,
+   "new": 30.58378219015186,
+   "old": 30.591378149310998,
+   "src": "certificates/0000-0999/n903.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 904,
+   "new": 30.606601719860876,
+   "old": 30.60660172164,
+   "src": "certificates/0000-0999/n904.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 905,
+   "new": 30.60660171996087,
+   "old": 30.606601721644,
+   "src": "certificates/0000-0999/n905.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 907,
+   "new": 30.642135626597163,
+   "old": 30.656854253354,
+   "src": "certificates/0000-0999/n907.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 908,
+   "new": 30.642135626597163,
+   "old": 30.656854253356,
+   "src": "certificates/0000-0999/n908.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 909,
+   "new": 30.656854249498856,
+   "old": 30.656854253359,
+   "src": "certificates/0000-0999/n909.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 913,
+   "new": 30.77817459305858,
+   "old": 30.778174594988,
+   "src": "certificates/0000-0999/n913.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 914,
+   "new": 30.778174593058583,
+   "old": 30.778174594988,
+   "src": "certificates/0000-0999/n914.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 915,
+   "new": 30.798989873230067,
+   "old": 30.798989877087,
+   "src": "certificates/0000-0999/n915.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 916,
+   "new": 30.798989873230006,
+   "old": 30.79898987709,
+   "src": "certificates/0000-0999/n916.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 917,
+   "new": 30.825571499868477,
+   "old": 30.828427126682,
+   "src": "certificates/0000-0999/n917.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 918,
+   "new": 30.825571499868197,
+   "old": 30.828427126682,
+   "src": "certificates/0000-0999/n918.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 919,
+   "new": 30.827585222353722,
+   "old": 30.849242406853,
+   "src": "certificates/0000-0999/n919.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 922,
+   "new": 30.89949493669084,
+   "old": 30.899494938547,
+   "src": "certificates/0000-0999/n922.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 923,
+   "new": 30.924694629712448,
+   "old": 30.949747470242,
+   "src": "certificates/0000-0999/n923.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 924,
+   "new": 30.9314987479315,
+   "old": 30.949747470242,
+   "src": "certificates/0000-0999/n924.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 925,
+   "new": 30.93395402498755,
+   "old": 30.949747470242,
+   "src": "certificates/0000-0999/n925.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 926,
+   "new": 30.942070418061633,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n926.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 927,
+   "new": 30.969190310882613,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n927.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 928,
+   "new": 30.974495668124774,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n928.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 929,
+   "new": 30.975393249469022,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n929.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 930,
+   "new": 30.977272627799444,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n930.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 931,
+   "new": 30.989931303329996,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n931.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 932,
+   "new": 30.990639611063145,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n932.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 933,
+   "new": 30.990639611063145,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n933.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 934,
+   "new": 30.994078332769416,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n934.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 935,
+   "new": 30.994174058156148,
+   "old": 31.000000001936,
+   "src": "certificates/0000-0999/n935.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 962,
+   "new": 31.52081528262539,
+   "old": 31.520815284028,
+   "src": "certificates/0000-0999/n962.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 963,
+   "new": 31.535533905932738,
+   "old": 31.535533909754,
+   "src": "certificates/0000-0999/n963.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 966,
+   "new": 31.606601719960874,
+   "old": 31.606601721646,
+   "src": "certificates/0000-0999/n966.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 969,
+   "new": 31.642135626597167,
+   "old": 31.656854253358,
+   "src": "certificates/0000-0999/n969.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 970,
+   "new": 31.65685424949909,
+   "old": 31.656854253361,
+   "src": "certificates/0000-0999/n970.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 975,
+   "new": 31.778174593058754,
+   "old": 31.77817459499,
+   "src": "certificates/0000-0999/n975.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 976,
+   "new": 31.778174593058814,
+   "old": 31.77817459499,
+   "src": "certificates/0000-0999/n976.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 977,
+   "new": 31.79898987323015,
+   "old": 31.798989877092,
+   "src": "certificates/0000-0999/n977.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 978,
+   "new": 31.82509016584762,
+   "old": 31.828427126684,
+   "src": "certificates/0000-0999/n978.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 979,
+   "new": 31.825090165818313,
+   "old": 31.828427126684,
+   "src": "certificates/0000-0999/n979.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 980,
+   "new": 31.82758522235402,
+   "old": 31.828427126684,
+   "src": "certificates/0000-0999/n980.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 983,
+   "new": 31.89949493664901,
+   "old": 31.899494940485,
+   "src": "certificates/0000-0999/n983.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 984,
+   "new": 31.914115712695466,
+   "old": 31.920310218721,
+   "src": "certificates/0000-0999/n984.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 985,
+   "new": 31.920310216789794,
+   "old": 31.920310218721,
+   "src": "certificates/0000-0999/n985.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 986,
+   "new": 31.92031021678983,
+   "old": 31.920310218721,
+   "src": "certificates/0000-0999/n986.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 987,
+   "new": 31.941797078292723,
+   "old": 31.949747470244,
+   "src": "certificates/0000-0999/n987.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 988,
+   "new": 31.94974746831271,
+   "old": 31.949747470244,
+   "src": "certificates/0000-0999/n988.cert",
+   "credit": "Mishapolk (continuous SLP quench refinement of Couzo topology)"
+  },
+  {
+   "n": 989,
+   "new": 31.974117145999717,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n989.cert",
+   "credit": "Mishapolk (major structural quench refinement of Couzo topology)"
+  },
+  {
+   "n": 990,
+   "new": 31.975393249469025,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n990.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 991,
+   "new": 31.975619904789735,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n991.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 992,
+   "new": 31.977647375502723,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n992.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 993,
+   "new": 31.98389558054722,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n993.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 994,
+   "new": 31.99063961106315,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n994.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 995,
+   "new": 31.99344497697522,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n995.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 996,
+   "new": 31.99344497697522,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n996.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 997,
+   "new": 31.996875919157585,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n997.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  },
+  {
+   "n": 998,
+   "new": 31.996875920294038,
+   "old": 32.000000001938,
+   "src": "certificates/0000-0999/n998.cert",
+   "credit": "Mishapolk / Mykhailo Polkovskyi (exact certified macro-layout)"
+  }
+ ],
+ "construction_only": [
+  {
+   "n": 5,
+   "new": 2.7071067811865475,
+   "old": 2.707106782448,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 6,
+   "new": 3.0,
+   "old": 3.000000001334,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 7,
+   "new": 3.0,
+   "old": 3.000000001334,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 8,
+   "new": 3.0,
+   "old": 3.000000001334,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 9,
+   "new": 3.0,
+   "old": 3.000000001334,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 10,
+   "new": 3.7071067811865475,
+   "old": 3.707106782648,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 12,
+   "new": 4.0,
+   "old": 4.0000000015,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 13,
+   "new": 4.0,
+   "old": 4.0000000015,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 14,
+   "new": 4.0,
+   "old": 4.0000000015,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 15,
+   "new": 4.0,
+   "old": 4.0000000015,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 16,
+   "new": 4.0,
+   "old": 4.0000000015,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 18,
+   "new": 4.822875655532295,
+   "old": 4.822875657118,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 19,
+   "new": 4.885618083164127,
+   "old": 4.885618084754,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 20,
+   "new": 5.0,
+   "old": 5.0000000016,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 21,
+   "new": 5.0,
+   "old": 5.0000000016,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 22,
+   "new": 5.0,
+   "old": 5.0000000016,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 23,
+   "new": 5.0,
+   "old": 5.0000000016,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 24,
+   "new": 5.0,
+   "old": 5.0000000016,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 25,
+   "new": 5.0,
+   "old": 5.0000000016,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 26,
+   "new": 5.621320343559643,
+   "old": 5.621320345204,
+   "src": "https://github.com/jlevy/squares/blob/c593e2bfd0a5da50d0d69a93b6897722a54ddb82/packing/cases/gobel_offcentre/packing.py",
+   "credit": "Erich Friedman (off-centre extension of Frits G\u00f6bel\u2019s construction)"
+  },
+  {
+   "n": 27,
+   "new": 5.707106781186548,
+   "old": 5.707106782836,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_strips.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 30,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 31,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 32,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 33,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 34,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 35,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 36,
+   "new": 6.0,
+   "old": 6.000000001666,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 38,
+   "new": 6.707106781186548,
+   "old": 6.707106782888,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_strips.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 40,
+   "new": 6.82842712474619,
+   "old": 6.828427126454,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 42,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 43,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 44,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 45,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 46,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 47,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 48,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 49,
+   "new": 7.0,
+   "old": 7.000000001714,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 50,
+   "new": 7.571428571428571,
+   "old": 7.571428573164,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 52,
+   "new": 7.707106781186548,
+   "old": 7.707106782928,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_strips.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 54,
+   "new": 7.846667192843489,
+   "old": 7.846667194588,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 56,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 57,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 58,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 59,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 60,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 61,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 62,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 63,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 64,
+   "new": 8.0,
+   "old": 8.00000000175,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 65,
+   "new": 8.535533905932738,
+   "old": 8.535533907699,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 66,
+   "new": 8.65685424949238,
+   "old": 8.656854251262,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 67,
+   "new": 8.707106781186548,
+   "old": 8.707106782956,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_strips.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 68,
+   "new": 8.798795237218284,
+   "old": 8.798795238991001,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 72,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 73,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 74,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 75,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 76,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 77,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 78,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 79,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 80,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 81,
+   "new": 9.0,
+   "old": 9.000000001778,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 82,
+   "new": 9.535533905932738,
+   "old": 9.535533907722,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 84,
+   "new": 9.697934799014922,
+   "old": 9.697934800809,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 85,
+   "new": 9.742640687119286,
+   "old": 9.742640688914,
+   "src": "https://github.com/jlevy/squares/blob/c593e2bfd0a5da50d0d69a93b6897722a54ddb82/packing/cases/gobel_offcentre/packing.py",
+   "credit": "Erich Friedman (off-centre extension of Frits G\u00f6bel\u2019s construction)"
+  },
+  {
+   "n": 89,
+   "new": 9.949747468305834,
+   "old": 9.949747470104,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 90,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 91,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 92,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 93,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 94,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 95,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 96,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 97,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 98,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 99,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 100,
+   "new": 10.0,
+   "old": 10.0000000018,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 101,
+   "new": 10.535533905932738,
+   "old": 10.535533907742,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 104,
+   "new": 10.707106781186548,
+   "old": 10.707106783,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 106,
+   "new": 10.822908044132847,
+   "old": 10.822908045948001,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 108,
+   "new": 10.904821012320356,
+   "old": 10.904821014137001,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 109,
+   "new": 10.949747468305834,
+   "old": 10.949747470124,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 111,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 112,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 113,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 114,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 115,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 116,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 117,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 118,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 119,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 120,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 121,
+   "new": 11.0,
+   "old": 11.000000001818,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 122,
+   "new": 11.535533905932738,
+   "old": 11.53553390776,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 124,
+   "new": 11.65685424949238,
+   "old": 11.656854251321,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 125,
+   "new": 11.70710678118655,
+   "old": 11.707106783016,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 133,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 134,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 135,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 136,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 137,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 138,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 139,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 140,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 141,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 142,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 143,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 144,
+   "new": 12.0,
+   "old": 12.000000001834,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 145,
+   "new": 12.535533905932738,
+   "old": 12.535533907774,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 146,
+   "new": 12.58378219015186,
+   "old": 12.583782191993,
+   "src": "https://github.com/jlevy/squares/issues/399",
+   "credit": "Evan Daniel"
+  },
+  {
+   "n": 147,
+   "new": 12.65685424949238,
+   "old": 12.656854251334,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 148,
+   "new": 12.65685424949238,
+   "old": 12.656854251334,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 149,
+   "new": 12.70710678118655,
+   "old": 12.70710678303,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 150,
+   "new": 12.778174593052023,
+   "old": 12.778174594896,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 151,
+   "new": 12.822875655532297,
+   "old": 12.822875657376,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 153,
+   "new": 12.870013850404463,
+   "old": 12.870013852249,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 157,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 158,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 159,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 160,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 161,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 162,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 163,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 164,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 165,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 166,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 167,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 168,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 169,
+   "new": 13.0,
+   "old": 13.000000001846,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 170,
+   "new": 13.53553390593274,
+   "old": 13.535533907784,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 171,
+   "new": 13.571428571428571,
+   "old": 13.571428573282,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 173,
+   "new": 13.65685424949238,
+   "old": 13.656854251346,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 174,
+   "new": 13.70710678118655,
+   "old": 13.70710678304,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 177,
+   "new": 13.822979734169447,
+   "old": 13.822979736025001,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 178,
+   "new": 13.846667192843489,
+   "old": 13.8466671947,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 179,
+   "new": 13.883795490510899,
+   "old": 13.883795492367002,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 180,
+   "new": 13.916993522477831,
+   "old": 13.916993524334,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 184,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 185,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 186,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 187,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 188,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 189,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 190,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 191,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 192,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 193,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 194,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 195,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 196,
+   "new": 14.0,
+   "old": 14.000000001858,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 197,
+   "new": 14.535533905932738,
+   "old": 14.535533907796,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 198,
+   "new": 14.571428571428571,
+   "old": 14.571428573292,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 200,
+   "new": 14.65685424949238,
+   "old": 14.656854251356,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 201,
+   "new": 14.70710678118655,
+   "old": 14.70710678305,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 202,
+   "new": 14.727922061357857,
+   "old": 14.727922063222,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 203,
+   "new": 14.778174593052023,
+   "old": 14.778174594916,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 206,
+   "new": 14.860158663391903,
+   "old": 14.860158665258,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 207,
+   "new": 14.88096037155558,
+   "old": 14.880960373420999,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 212,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 213,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 214,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 215,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 216,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 217,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 218,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 219,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 220,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 221,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 222,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 223,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 224,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 225,
+   "new": 15.0,
+   "old": 15.000000001866,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 226,
+   "new": 15.535533905932738,
+   "old": 15.535533907804,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 229,
+   "new": 15.65016151387643,
+   "old": 15.650161515749,
+   "src": "https://github.com/jlevy/squares/issues/674",
+   "credit": "Evan Daniel (evand)"
+  },
+  {
+   "n": 230,
+   "new": 15.682926829268292,
+   "old": 15.68292683114,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 233,
+   "new": 15.778174593052023,
+   "old": 15.778174594926,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 242,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 243,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 244,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 245,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 246,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 247,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 248,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 249,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 250,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 251,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 252,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 253,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 254,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 255,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 256,
+   "new": 16.0,
+   "old": 16.000000001875,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 257,
+   "new": 16.535533905932738,
+   "old": 16.535533907812,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 258,
+   "new": 16.56344800213379,
+   "old": 16.563448004012997,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 259,
+   "new": 16.591378145497696,
+   "old": 16.591378147377,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 261,
+   "new": 16.67877987534291,
+   "old": 16.682926831148,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 262,
+   "new": 16.70710678118655,
+   "old": 16.707106783066,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 265,
+   "new": 16.77817459305202,
+   "old": 16.778174594932,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 267,
+   "new": 16.838815269948263,
+   "old": 16.83881527183,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 268,
+   "new": 16.878814821006767,
+   "old": 16.878814822889,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 269,
+   "new": 16.901513582189136,
+   "old": 16.901513584071,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 273,
+   "new": 16.983925962650403,
+   "old": 16.983925964533,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 274,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 275,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 276,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 277,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 278,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 279,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 280,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 281,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 282,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 283,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 284,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 285,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 286,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 287,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 288,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 289,
+   "new": 17.0,
+   "old": 17.000000001882,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 290,
+   "new": 17.535533905932738,
+   "old": 17.535533907818,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 291,
+   "new": 17.535533905932738,
+   "old": 17.535533907818,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 292,
+   "new": 17.5913781454977,
+   "old": 17.591378147384,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 293,
+   "new": 17.634146341463413,
+   "old": 17.63414634335,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 294,
+   "new": 17.65685424949238,
+   "old": 17.65685425138,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-algebraic-refinements-2026-10-13-v1",
+   "credit": "PingYou Ltd (exact certificate refinement)"
+  },
+  {
+   "n": 298,
+   "new": 17.77817459305202,
+   "old": 17.77817459494,
+   "src": "https://github.com/Mishapolk/square-packing-records",
+   "credit": "Mykhailo Polkovskyi (Mishapolk)"
+  },
+  {
+   "n": 300,
+   "new": 17.824123388478544,
+   "old": 17.824123390366,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 305,
+   "new": 17.95046648213771,
+   "old": 17.950466484026,
+   "src": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-numerical-refinements-2026-10-13-v2",
+   "credit": "PingYou Ltd (certificate refinement)"
+  },
+  {
+   "n": 308,
+   "new": 17.99714912127091,
+   "old": 17.997149123158998,
+   "src": "https://github.com/jlevy/squares/issues/689",
+   "credit": "Evan Daniel"
+  },
+  {
+   "n": 309,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 310,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 311,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 312,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 313,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 314,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 315,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 316,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 317,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 318,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 319,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 320,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 321,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 322,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 323,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 324,
+   "new": 18.0,
+   "old": 18.000000001888,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 325,
+   "new": 18.535533905932738,
+   "old": 18.535533907825,
+   "src": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+   "credit": "Frits G\u00f6bel; family formulas generalized by David Ellsworth"
+  },
+  {
+   "n": 345,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 346,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 347,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 348,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 349,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 350,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 351,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 352,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 353,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 354,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 355,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 356,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 357,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 358,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 359,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 360,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 361,
+   "new": 19.0,
+   "old": 19.000000001894,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 383,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 384,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 385,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 386,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 387,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 388,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 389,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 390,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 391,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 392,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 393,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 394,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 395,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 396,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 397,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 398,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 399,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 400,
+   "new": 20.0,
+   "old": 20.0000000019,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 423,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 424,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 425,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 426,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 427,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 428,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 429,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 430,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 431,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 432,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 433,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 434,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 435,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 436,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 437,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 438,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 439,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 440,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 441,
+   "new": 21.0,
+   "old": 21.000000001904,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 465,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 466,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 467,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 468,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 469,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 470,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 471,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 472,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 473,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 474,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 475,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 476,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 477,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 478,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 479,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 480,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 481,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 482,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 483,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 484,
+   "new": 22.0,
+   "old": 22.00000000191,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 510,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 511,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 512,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 513,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 514,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 515,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 516,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 517,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 518,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 519,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 520,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 521,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 522,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 523,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 524,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 525,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 526,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 527,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 528,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 529,
+   "new": 23.0,
+   "old": 23.000000001914,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 556,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 557,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 558,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 559,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 560,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 561,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 562,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 563,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 564,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 565,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 566,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 567,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 568,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 569,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 570,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 571,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 572,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 573,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 574,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 575,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 576,
+   "new": 24.0,
+   "old": 24.000000001916,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 604,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 605,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 606,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 607,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 608,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 609,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 610,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 611,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 612,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 613,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 614,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 615,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 616,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 617,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 618,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 619,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 620,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 621,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 622,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 623,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 624,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 625,
+   "new": 25.0,
+   "old": 25.00000000192,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 655,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 656,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 657,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 658,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 659,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 660,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 661,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 662,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 663,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 664,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 665,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 666,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 667,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 668,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 669,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 670,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 671,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 672,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 673,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 674,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 675,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 676,
+   "new": 26.0,
+   "old": 26.000000001924,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 707,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 708,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 709,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 710,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 711,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 712,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 713,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 714,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 715,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 716,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 717,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 718,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 719,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 720,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 721,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 722,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 723,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 724,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 725,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 726,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 727,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 728,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 729,
+   "new": 27.0,
+   "old": 27.000000001926,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 761,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 762,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 763,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 764,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 765,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 766,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 767,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 768,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 769,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 770,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 771,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 772,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 773,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 774,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 775,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 776,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 777,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 778,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 779,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 780,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 781,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 782,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 783,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 784,
+   "new": 28.0,
+   "old": 28.000000001928,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 818,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 819,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 820,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 821,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 822,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 823,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 824,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 825,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 826,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 827,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 828,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 829,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 830,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 831,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 832,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 833,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 834,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 835,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 836,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 837,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 838,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 839,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 840,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 841,
+   "new": 29.0,
+   "old": 29.000000001932,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 876,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 877,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 878,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 879,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 880,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 881,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 882,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 883,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 884,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 885,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 886,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 887,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 888,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 889,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 890,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 891,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 892,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 893,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 894,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 895,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 896,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 897,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 898,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 899,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 900,
+   "new": 30.0,
+   "old": 30.000000001934,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 936,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 937,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 938,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 939,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 940,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 941,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 942,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 943,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 944,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 945,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 946,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 947,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 948,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 949,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 950,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 951,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 952,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 953,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 954,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 955,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 956,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 957,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 958,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 959,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 960,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 961,
+   "new": 31.0,
+   "old": 31.000000001936,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 999,
+   "new": 32.0,
+   "old": 32.000000001938,
+   "src": "integer square grid",
+   "credit": "square grid"
+  },
+  {
+   "n": 1000,
+   "new": 32.0,
+   "old": 32.000000001938,
+   "src": "integer square grid",
+   "credit": "square grid"
+  }
+ ],
+ "cert_paths": [
+  "certificates/0000-0999/n105.cert",
+  "certificates/0000-0999/n126.cert",
+  "certificates/0000-0999/n152.cert",
+  "certificates/0000-0999/n154.cert",
+  "certificates/0000-0999/n155.cert",
+  "certificates/0000-0999/n183.cert",
+  "certificates/0000-0999/n204.cert",
+  "certificates/0000-0999/n211.cert",
+  "certificates/0000-0999/n227.cert",
+  "certificates/0000-0999/n236.cert",
+  "certificates/0000-0999/n237.cert",
+  "certificates/0000-0999/n241.cert",
+  "certificates/0000-0999/n260.cert",
+  "certificates/0000-0999/n270.cert",
+  "certificates/0000-0999/n271.cert",
+  "certificates/0000-0999/n303.cert",
+  "certificates/0000-0999/n328.cert",
+  "certificates/0000-0999/n329.cert",
+  "certificates/0000-0999/n330.cert",
+  "certificates/0000-0999/n331.cert",
+  "certificates/0000-0999/n332.cert",
+  "certificates/0000-0999/n333.cert",
+  "certificates/0000-0999/n335.cert",
+  "certificates/0000-0999/n336.cert",
+  "certificates/0000-0999/n337.cert",
+  "certificates/0000-0999/n338.cert",
+  "certificates/0000-0999/n339.cert",
+  "certificates/0000-0999/n340.cert",
+  "certificates/0000-0999/n341.cert",
+  "certificates/0000-0999/n342.cert",
+  "certificates/0000-0999/n343.cert",
+  "certificates/0000-0999/n344.cert",
+  "certificates/0000-0999/n362.cert",
+  "certificates/0000-0999/n363.cert",
+  "certificates/0000-0999/n364.cert",
+  "certificates/0000-0999/n365.cert",
+  "certificates/0000-0999/n366.cert",
+  "certificates/0000-0999/n367.cert",
+  "certificates/0000-0999/n368.cert",
+  "certificates/0000-0999/n369.cert",
+  "certificates/0000-0999/n370.cert",
+  "certificates/0000-0999/n372.cert",
+  "certificates/0000-0999/n373.cert",
+  "certificates/0000-0999/n374.cert",
+  "certificates/0000-0999/n375.cert",
+  "certificates/0000-0999/n376.cert",
+  "certificates/0000-0999/n377.cert",
+  "certificates/0000-0999/n378.cert",
+  "certificates/0000-0999/n379.cert",
+  "certificates/0000-0999/n380.cert",
+  "certificates/0000-0999/n381.cert",
+  "certificates/0000-0999/n382.cert",
+  "certificates/0000-0999/n401.cert",
+  "certificates/0000-0999/n402.cert",
+  "certificates/0000-0999/n403.cert",
+  "certificates/0000-0999/n404.cert",
+  "certificates/0000-0999/n405.cert",
+  "certificates/0000-0999/n406.cert",
+  "certificates/0000-0999/n407.cert",
+  "certificates/0000-0999/n408.cert",
+  "certificates/0000-0999/n409.cert",
+  "certificates/0000-0999/n410.cert",
+  "certificates/0000-0999/n411.cert",
+  "certificates/0000-0999/n412.cert",
+  "certificates/0000-0999/n413.cert",
+  "certificates/0000-0999/n414.cert",
+  "certificates/0000-0999/n415.cert",
+  "certificates/0000-0999/n417.cert",
+  "certificates/0000-0999/n418.cert",
+  "certificates/0000-0999/n419.cert",
+  "certificates/0000-0999/n420.cert",
+  "certificates/0000-0999/n421.cert",
+  "certificates/0000-0999/n422.cert",
+  "certificates/0000-0999/n442.cert",
+  "certificates/0000-0999/n443.cert",
+  "certificates/0000-0999/n444.cert",
+  "certificates/0000-0999/n446.cert",
+  "certificates/0000-0999/n447.cert",
+  "certificates/0000-0999/n448.cert",
+  "certificates/0000-0999/n449.cert",
+  "certificates/0000-0999/n450.cert",
+  "certificates/0000-0999/n451.cert",
+  "certificates/0000-0999/n452.cert",
+  "certificates/0000-0999/n453.cert",
+  "certificates/0000-0999/n454.cert",
+  "certificates/0000-0999/n455.cert",
+  "certificates/0000-0999/n456.cert",
+  "certificates/0000-0999/n457.cert",
+  "certificates/0000-0999/n458.cert",
+  "certificates/0000-0999/n459.cert",
+  "certificates/0000-0999/n460.cert",
+  "certificates/0000-0999/n461.cert",
+  "certificates/0000-0999/n462.cert",
+  "certificates/0000-0999/n463.cert",
+  "certificates/0000-0999/n464.cert",
+  "certificates/0000-0999/n485.cert",
+  "certificates/0000-0999/n486.cert",
+  "certificates/0000-0999/n487.cert",
+  "certificates/0000-0999/n490.cert",
+  "certificates/0000-0999/n491.cert",
+  "certificates/0000-0999/n492.cert",
+  "certificates/0000-0999/n494.cert",
+  "certificates/0000-0999/n495.cert",
+  "certificates/0000-0999/n496.cert",
+  "certificates/0000-0999/n497.cert",
+  "certificates/0000-0999/n498.cert",
+  "certificates/0000-0999/n499.cert",
+  "certificates/0000-0999/n500.cert",
+  "certificates/0000-0999/n501.cert",
+  "certificates/0000-0999/n502.cert",
+  "certificates/0000-0999/n503.cert",
+  "certificates/0000-0999/n504.cert",
+  "certificates/0000-0999/n505.cert",
+  "certificates/0000-0999/n506.cert",
+  "certificates/0000-0999/n507.cert",
+  "certificates/0000-0999/n508.cert",
+  "certificates/0000-0999/n509.cert",
+  "certificates/0000-0999/n530.cert",
+  "certificates/0000-0999/n531.cert",
+  "certificates/0000-0999/n532.cert",
+  "certificates/0000-0999/n533.cert",
+  "certificates/0000-0999/n534.cert",
+  "certificates/0000-0999/n535.cert",
+  "certificates/0000-0999/n536.cert",
+  "certificates/0000-0999/n537.cert",
+  "certificates/0000-0999/n539.cert",
+  "certificates/0000-0999/n540.cert",
+  "certificates/0000-0999/n541.cert",
+  "certificates/0000-0999/n542.cert",
+  "certificates/0000-0999/n543.cert",
+  "certificates/0000-0999/n544.cert",
+  "certificates/0000-0999/n545.cert",
+  "certificates/0000-0999/n546.cert",
+  "certificates/0000-0999/n547.cert",
+  "certificates/0000-0999/n548.cert",
+  "certificates/0000-0999/n549.cert",
+  "certificates/0000-0999/n550.cert",
+  "certificates/0000-0999/n551.cert",
+  "certificates/0000-0999/n552.cert",
+  "certificates/0000-0999/n553.cert",
+  "certificates/0000-0999/n554.cert",
+  "certificates/0000-0999/n555.cert",
+  "certificates/0000-0999/n577.cert",
+  "certificates/0000-0999/n578.cert",
+  "certificates/0000-0999/n579.cert",
+  "certificates/0000-0999/n580.cert",
+  "certificates/0000-0999/n581.cert",
+  "certificates/0000-0999/n582.cert",
+  "certificates/0000-0999/n583.cert",
+  "certificates/0000-0999/n584.cert",
+  "certificates/0000-0999/n587.cert",
+  "certificates/0000-0999/n588.cert",
+  "certificates/0000-0999/n589.cert",
+  "certificates/0000-0999/n590.cert",
+  "certificates/0000-0999/n591.cert",
+  "certificates/0000-0999/n592.cert",
+  "certificates/0000-0999/n593.cert",
+  "certificates/0000-0999/n594.cert",
+  "certificates/0000-0999/n595.cert",
+  "certificates/0000-0999/n596.cert",
+  "certificates/0000-0999/n597.cert",
+  "certificates/0000-0999/n598.cert",
+  "certificates/0000-0999/n599.cert",
+  "certificates/0000-0999/n600.cert",
+  "certificates/0000-0999/n601.cert",
+  "certificates/0000-0999/n602.cert",
+  "certificates/0000-0999/n603.cert",
+  "certificates/0000-0999/n627.cert",
+  "certificates/0000-0999/n628.cert",
+  "certificates/0000-0999/n629.cert",
+  "certificates/0000-0999/n630.cert",
+  "certificates/0000-0999/n631.cert",
+  "certificates/0000-0999/n632.cert",
+  "certificates/0000-0999/n633.cert",
+  "certificates/0000-0999/n637.cert",
+  "certificates/0000-0999/n638.cert",
+  "certificates/0000-0999/n639.cert",
+  "certificates/0000-0999/n640.cert",
+  "certificates/0000-0999/n641.cert",
+  "certificates/0000-0999/n642.cert",
+  "certificates/0000-0999/n643.cert",
+  "certificates/0000-0999/n644.cert",
+  "certificates/0000-0999/n645.cert",
+  "certificates/0000-0999/n646.cert",
+  "certificates/0000-0999/n647.cert",
+  "certificates/0000-0999/n648.cert",
+  "certificates/0000-0999/n649.cert",
+  "certificates/0000-0999/n650.cert",
+  "certificates/0000-0999/n651.cert",
+  "certificates/0000-0999/n652.cert",
+  "certificates/0000-0999/n653.cert",
+  "certificates/0000-0999/n654.cert",
+  "certificates/0000-0999/n677.cert",
+  "certificates/0000-0999/n678.cert",
+  "certificates/0000-0999/n679.cert",
+  "certificates/0000-0999/n681.cert",
+  "certificates/0000-0999/n683.cert",
+  "certificates/0000-0999/n684.cert",
+  "certificates/0000-0999/n689.cert",
+  "certificates/0000-0999/n690.cert",
+  "certificates/0000-0999/n691.cert",
+  "certificates/0000-0999/n692.cert",
+  "certificates/0000-0999/n693.cert",
+  "certificates/0000-0999/n694.cert",
+  "certificates/0000-0999/n695.cert",
+  "certificates/0000-0999/n696.cert",
+  "certificates/0000-0999/n697.cert",
+  "certificates/0000-0999/n698.cert",
+  "certificates/0000-0999/n699.cert",
+  "certificates/0000-0999/n700.cert",
+  "certificates/0000-0999/n701.cert",
+  "certificates/0000-0999/n702.cert",
+  "certificates/0000-0999/n703.cert",
+  "certificates/0000-0999/n704.cert",
+  "certificates/0000-0999/n705.cert",
+  "certificates/0000-0999/n706.cert",
+  "certificates/0000-0999/n730.cert",
+  "certificates/0000-0999/n731.cert",
+  "certificates/0000-0999/n732.cert",
+  "certificates/0000-0999/n736.cert",
+  "certificates/0000-0999/n737.cert",
+  "certificates/0000-0999/n741.cert",
+  "certificates/0000-0999/n742.cert",
+  "certificates/0000-0999/n743.cert",
+  "certificates/0000-0999/n744.cert",
+  "certificates/0000-0999/n745.cert",
+  "certificates/0000-0999/n746.cert",
+  "certificates/0000-0999/n747.cert",
+  "certificates/0000-0999/n748.cert",
+  "certificates/0000-0999/n749.cert",
+  "certificates/0000-0999/n750.cert",
+  "certificates/0000-0999/n751.cert",
+  "certificates/0000-0999/n752.cert",
+  "certificates/0000-0999/n753.cert",
+  "certificates/0000-0999/n754.cert",
+  "certificates/0000-0999/n755.cert",
+  "certificates/0000-0999/n756.cert",
+  "certificates/0000-0999/n757.cert",
+  "certificates/0000-0999/n758.cert",
+  "certificates/0000-0999/n759.cert",
+  "certificates/0000-0999/n760.cert",
+  "certificates/0000-0999/n785.cert",
+  "certificates/0000-0999/n786.cert",
+  "certificates/0000-0999/n787.cert",
+  "certificates/0000-0999/n788.cert",
+  "certificates/0000-0999/n789.cert",
+  "certificates/0000-0999/n791.cert",
+  "certificates/0000-0999/n792.cert",
+  "certificates/0000-0999/n796.cert",
+  "certificates/0000-0999/n797.cert",
+  "certificates/0000-0999/n798.cert",
+  "certificates/0000-0999/n799.cert",
+  "certificates/0000-0999/n800.cert",
+  "certificates/0000-0999/n801.cert",
+  "certificates/0000-0999/n802.cert",
+  "certificates/0000-0999/n803.cert",
+  "certificates/0000-0999/n804.cert",
+  "certificates/0000-0999/n805.cert",
+  "certificates/0000-0999/n806.cert",
+  "certificates/0000-0999/n807.cert",
+  "certificates/0000-0999/n808.cert",
+  "certificates/0000-0999/n809.cert",
+  "certificates/0000-0999/n810.cert",
+  "certificates/0000-0999/n811.cert",
+  "certificates/0000-0999/n812.cert",
+  "certificates/0000-0999/n813.cert",
+  "certificates/0000-0999/n814.cert",
+  "certificates/0000-0999/n815.cert",
+  "certificates/0000-0999/n816.cert",
+  "certificates/0000-0999/n817.cert",
+  "certificates/0000-0999/n842.cert",
+  "certificates/0000-0999/n843.cert",
+  "certificates/0000-0999/n844.cert",
+  "certificates/0000-0999/n845.cert",
+  "certificates/0000-0999/n846.cert",
+  "certificates/0000-0999/n848.cert",
+  "certificates/0000-0999/n849.cert",
+  "certificates/0000-0999/n850.cert",
+  "certificates/0000-0999/n854.cert",
+  "certificates/0000-0999/n855.cert",
+  "certificates/0000-0999/n856.cert",
+  "certificates/0000-0999/n857.cert",
+  "certificates/0000-0999/n858.cert",
+  "certificates/0000-0999/n859.cert",
+  "certificates/0000-0999/n860.cert",
+  "certificates/0000-0999/n862.cert",
+  "certificates/0000-0999/n863.cert",
+  "certificates/0000-0999/n864.cert",
+  "certificates/0000-0999/n865.cert",
+  "certificates/0000-0999/n866.cert",
+  "certificates/0000-0999/n867.cert",
+  "certificates/0000-0999/n868.cert",
+  "certificates/0000-0999/n869.cert",
+  "certificates/0000-0999/n870.cert",
+  "certificates/0000-0999/n871.cert",
+  "certificates/0000-0999/n872.cert",
+  "certificates/0000-0999/n873.cert",
+  "certificates/0000-0999/n874.cert",
+  "certificates/0000-0999/n875.cert",
+  "certificates/0000-0999/n88.cert",
+  "certificates/0000-0999/n901.cert",
+  "certificates/0000-0999/n902.cert",
+  "certificates/0000-0999/n903.cert",
+  "certificates/0000-0999/n904.cert",
+  "certificates/0000-0999/n905.cert",
+  "certificates/0000-0999/n907.cert",
+  "certificates/0000-0999/n908.cert",
+  "certificates/0000-0999/n909.cert",
+  "certificates/0000-0999/n913.cert",
+  "certificates/0000-0999/n914.cert",
+  "certificates/0000-0999/n915.cert",
+  "certificates/0000-0999/n916.cert",
+  "certificates/0000-0999/n917.cert",
+  "certificates/0000-0999/n918.cert",
+  "certificates/0000-0999/n919.cert",
+  "certificates/0000-0999/n922.cert",
+  "certificates/0000-0999/n923.cert",
+  "certificates/0000-0999/n924.cert",
+  "certificates/0000-0999/n925.cert",
+  "certificates/0000-0999/n926.cert",
+  "certificates/0000-0999/n927.cert",
+  "certificates/0000-0999/n928.cert",
+  "certificates/0000-0999/n929.cert",
+  "certificates/0000-0999/n930.cert",
+  "certificates/0000-0999/n931.cert",
+  "certificates/0000-0999/n932.cert",
+  "certificates/0000-0999/n933.cert",
+  "certificates/0000-0999/n934.cert",
+  "certificates/0000-0999/n935.cert",
+  "certificates/0000-0999/n962.cert",
+  "certificates/0000-0999/n963.cert",
+  "certificates/0000-0999/n966.cert",
+  "certificates/0000-0999/n969.cert",
+  "certificates/0000-0999/n970.cert",
+  "certificates/0000-0999/n975.cert",
+  "certificates/0000-0999/n976.cert",
+  "certificates/0000-0999/n977.cert",
+  "certificates/0000-0999/n978.cert",
+  "certificates/0000-0999/n979.cert",
+  "certificates/0000-0999/n980.cert",
+  "certificates/0000-0999/n983.cert",
+  "certificates/0000-0999/n984.cert",
+  "certificates/0000-0999/n985.cert",
+  "certificates/0000-0999/n986.cert",
+  "certificates/0000-0999/n987.cert",
+  "certificates/0000-0999/n988.cert",
+  "certificates/0000-0999/n989.cert",
+  "certificates/0000-0999/n990.cert",
+  "certificates/0000-0999/n991.cert",
+  "certificates/0000-0999/n992.cert",
+  "certificates/0000-0999/n993.cert",
+  "certificates/0000-0999/n994.cert",
+  "certificates/0000-0999/n995.cert",
+  "certificates/0000-0999/n996.cert",
+  "certificates/0000-0999/n997.cert",
+  "certificates/0000-0999/n998.cert",
+  "certificates/best/n129.cert",
+  "certificates/best/n156.cert",
+  "certificates/best/n175.cert",
+  "certificates/best/n176.cert",
+  "certificates/best/n232.cert",
+  "certificates/best/n259.cert",
+  "certificates/best/n264.cert",
+  "certificates/best/n291.cert",
+  "certificates/best/n302.cert",
+  "certificates/best/n304.cert"
+ ],
+ "certs_fetched": 356,
+ "certs_kept": 0,
+ "certs_failed": 10
+}

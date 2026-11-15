@@ -18,6 +18,8 @@ of ``signoff --close`` and re-runs only when what it read has moved.
 Exit code 0 when every case passes, 1 when any case fails.
 
 *Last altered 31 October 2026 (repository check): usage commands rewritten to start from the repository root (``PYTHONPATH=src``).*
+
+*Last altered 14 November 2026 (Phase 188: ``--jobs`` defaults to the machine's usable CPUs).*
 """
 
 from __future__ import annotations
@@ -37,8 +39,9 @@ def main() -> int:
                         help="restrict to one query kind")
     parser.add_argument("--case", metavar="ID", default=None,
                         help="run a single case by id")
-    parser.add_argument("--jobs", type=int, default=4,
-                        help="how many CLI processes to run at once")
+    parser.add_argument("--jobs", type=int, default=None,
+                        help="how many CLI processes to run at once (default: "
+                             "this machine's usable CPUs, at most 8)")
     parser.add_argument("--timeout", type=int, default=300,
                         help="per-case timeout in seconds")
     parser.add_argument("--json", metavar="PATH", default=None,

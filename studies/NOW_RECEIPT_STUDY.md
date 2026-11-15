@@ -23,7 +23,7 @@ The identity holds and the reading of it does not: the accumulator is exactly th
 The same reading, recomputed rather than written:
 
 <!-- generated: now-tier -->
-**The accumulator is exactly the fractional part of the integral of its input, and that is all it is.**  Over 20 runs of the supplied demonstrations the state recovers the emitted count 20 times out of 20 — and so does the target and the tick count with the state withheld, 20 times out of 20, so the receipt adds nothing to what the program already says.  Enumerated exhaustively, 4,096 histories leave 4 distinct receipts, the largest class holding 1,024 of them.  The same identity is what makes the shipped modulator cheap: at the 512 ticks the `real` query kind runs, the average costs 4 µs read off the target against 2950 µs run as a loop, with identical output.
+**The accumulator is exactly the fractional part of the integral of its input, and that is all it is.**  Over 20 runs of the supplied demonstrations the state recovers the emitted count 20 times out of 20 — and so does the target and the tick count with the state withheld, 20 times out of 20, so the receipt adds nothing to what the program already says.  Enumerated exhaustively, 4,096 histories leave 4 distinct receipts, the largest class holding 1,024 of them.  The same identity is what makes the shipped modulator cheap: at the 512 ticks the `real` query kind runs, the average costs 4 µs read off the target against 3138 µs run as a loop, with identical output.
 <!-- end generated -->
 
 ---
@@ -311,8 +311,8 @@ modulator computes by looping. `exact_real.delta_sigma_average` and
 <!-- generated: now-shortcut -->
 | ticks | average: loop | average: read off | bits: loop | bits: read off |
 |---:|---:|---:|---:|---:|
-| 512 | 2950 µs | 4 µs | 2856 µs | 70 µs |
-| 4,096 | 23019 µs | 4 µs | 22977 µs | 654 µs |
+| 512 | 3138 µs | 4 µs | 3397 µs | 136 µs |
+| 4,096 | 24686 µs | 3 µs | 23183 µs | 708 µs |
 
 Identical output on every case measured: True. The shipped `real` query kind runs 512 ticks per question, which is the first row.  The theorems are `GLM.NowReceipt.const_count_eq_floor`, `GLM.NowReceipt.const_bit_eq_floor_diff`.
 <!-- end generated -->

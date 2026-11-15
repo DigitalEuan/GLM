@@ -1,0 +1,144 @@
+{
+  "id": "W22",
+  "title": "Chemical Kinetics & Transport",
+  "axioms": [
+    "reaction_rate = rate_constant * concentration",
+    "rate_constant = pre_exponential_factor * concentration / rate_constant"
+  ],
+  "cases": [
+    {
+      "id": "W22-01",
+      "equation": "rate_constant = reaction_rate / concentration",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W22-02",
+      "equation": "concentration = reaction_rate / rate_constant",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W22-03",
+      "equation": "diffusion_coefficient = diffusion_flux / concentration_gradient",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W22-N1",
+      "equation": "reaction_rate = rate_constant / concentration",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "concentration",
+    "pre_exponential_factor",
+    "rate_constant",
+    "reaction_rate"
+  ],
+  "dimensions": {
+    "concentration": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -3,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "pre_exponential_factor": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "rate_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reaction_rate": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -3,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

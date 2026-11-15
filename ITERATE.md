@@ -14,6 +14,8 @@
 
 *Last altered 31 October 2026 (repository check: commands from the repository root; §0.2 the constants single source, D21; §0.3 new material through the intake, D22; §0.4 when Lean cannot be run; hazard 9; later the same day §0.3 the Lean written / Lean verified stages and staged code, then the acceptance decision and current test results; then the provisional install by the owner's decision).*
 
+*Last altered 14 November 2026 (Phase 188: §0.5 corrected to the machine measured here — 8 vCPUs, the evaluation's own default worker count, the empty sign-off ledger and the one-off that fills it, the censuses-last reason, and the units that already fail on the inherited tree).*
+
 *Last altered 13 November 2026 (platform round: §0.5 this two-core cloud workspace — venv and pytest, the knowledge cache, `--jobs 2`, logs outside the tree; hazard 6 corrected, hazard 7 given the two-core costs).*
 
 ---
@@ -236,12 +238,16 @@ needs a file the repository no longer has waits in `src/lean/awaiting_recovery/`
 build, and the missing file is recorded in
 [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md).
 
-### 0.5 This workspace — the two-core cloud environment
+### 0.5 This workspace — the cloud environment
 
 *Added 13 November 2026 (platform round), from measurements taken here.*
+*Corrected 14 November 2026 (Phase 188, `studies/ITERATION_LANE_STUDY.md`):
+the CPU count below was wrong, and the job advice that followed from it cost a
+round a factor of four.*
 
-This workspace runs the repository on **2 vCPU and 3 GB RAM**, with Python 3.12,
-network access and **no Lean toolchain**. It is the development, testing and use
+This workspace runs the repository on **8 vCPU and 3 GB RAM** — measured, on
+14 November 2026: `nproc` 8, `os.cpu_count()` 8, `os.sched_getaffinity(0)` 8 —
+with Python 3.12, network access and **no Lean toolchain**. It is the development, testing and use
 environment for the Python package, the corpus instruments and the intake; it is
 not a Lean build machine, so §0.4 still governs Lean and `scripts/logs/` is
 where a build record from the owner's machine is read.
@@ -254,11 +260,38 @@ where a build record from the owner's machine is read.
   `PYTHONPATH=src python3 -c "from glm_universal.knowledge import model;
   model.load()"` writes `knowledge/_knowledge_cache/knowledge.pickle` (233 MB,
   git-ignored). `GLM_KNOWLEDGE_CACHE` moves it if the tree must stay clean.
-* **Jobs.** `--jobs 2`, never 8: eight CLI processes on two cores is slower
-  than two, and cases then time out that are not wrong.
-* **Long work.** Anything over a minute runs in the background with a log
-  outside the tree (`nohup … > ~/glm/x.log 2>&1 &`) and is polled; `/tmp` does
-  not survive a runner restart, `~/glm/` does.
+* **Jobs.** As many as the machine offers, which is 8 here: the evaluation is
+  one CLI process per case, so it parallelises nearly linearly — measured, 8
+  cases took 64.4 s at `--jobs 1` and 8.9 s at `--jobs 8`, and the whole
+  evaluation 248 s with 237 of 237 answered. The evaluation and the replay
+  gate now take `harness.default_jobs()` (the affinity count, capped at 8) when
+  `--jobs` is not given, so the flag is only needed to *lower* it. One thing
+  does want fewer cores: `GLM_PLANNER_JOBS=1` for the planner's reading inside
+  `corpus --refresh` when memory is short.
+* **Where the time actually goes in a close.** Not the tests: the two answer
+  censuses, about 8 and 15 minutes, each running the evaluation, its own 237
+  readings and the replay gate. They are re-taken **last** (§4.2), because
+  they digest `GLM.py`, the document address book and every stored measurement
+  their answers quote — so any document edit, and `corpus --refresh` itself,
+  stales them. `signoff --close` already does this in the right order
+  (`signoff.CENSUS_LAST`); doing it by hand is what cost Phase 187 two extra
+  census cycles.
+* **The ledger in this workspace is empty.** Every unit reports *new*, so
+  `signoff --close` would run all 263 test files and the 7 instruments — about
+  67 minutes, once. Until that one-off is paid, a round here runs the cheap
+  lane (`corpus --check`, the touched test files, `--only KIND`, `--case`) and
+  re-takes the two censuses by hand at the end; after it, a close pays only
+  what moved.
+* **Long work.** A background job started inside a tool call does not survive
+  that call here. Anything over five minutes runs in the right-side terminal
+  panel with its log outside the tree (`PYTHONPATH=src python3 -m
+  glm_universal.evaluation --jobs 8 > ~/glm/x.log 2>&1`) and is polled; `/tmp`
+  does not survive a runner restart, `~/glm/` does.
+* **What not to chase.** Four units already fail on the tree as inherited —
+  the iteration-cost blast-radius rows and `test_the_checks_hold` in
+  `test_corpus.py`, one row of `FIGURES.md` in `test_figures.py`, and the
+  10 MB bound in `test_repository_hygiene.py` — and they were confirmed to
+  fail on a clean worktree at `HEAD` (Phase 188 §1).
 * **Never put supplied material under `src/`.** The corpus gate treats every
   Markdown file in the tree as a current-state document and `lean_check` every
   `.lean` under `src/lean` as build material: the 31 documents and 79 Lean files

@@ -1,0 +1,24 @@
+{
+ "rows": [
+  {
+   "n": 5,
+   "start": 3.0,
+   "target": 2.707106782448,
+   "reached": 3.0,
+   "hit": false,
+   "config": null,
+   "ok": true
+  },
+  {
+   "n": 10,
+   "start": 4.0,
+   "target": 3.707106782648,
+   "reached": 4.0,
+   "hit": false,
+   "config": null,
+   "ok": true
+  }
+ ],
+ "hits": 0,
+ "of": 2
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Proved optimal by Hiroshi Nagamochi in July 2005.
+        Source: "Packing Unit Squares in a Rectangle" - https://doi.org/10.37236/1934
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "10">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <path style="stroke:none" d="M8,0 V1 H10 V10 H0 V0"/>
+    <path style=  "fill:none" d="M0,1 H10
+                                 M0,2 H10
+                                 M0,3 H10
+                                 M0,4 H10
+                                 M0,5 H10
+                                 M0,6 H10
+                                 M0,7 H10
+                                 M0,8 H10
+                                 M0,9 H10
+                                 M1,0 V10
+                                 M2,0 V10
+                                 M3,0 V10
+                                 M4,0 V10
+                                 M5,0 V10
+                                 M6,0 V10
+                                 M7,0 V10
+                                 M8,0 V10
+                                 M9,1 V10"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

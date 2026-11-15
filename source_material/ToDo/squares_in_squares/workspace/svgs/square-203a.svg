@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 22, 2024.
+    Doubly symmetric alternative packing found by David Ellsworth on December 30, 2024.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "14.77817459305202276840928798315"> <!-- 7 + Sqrt[2]*11/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g id="corner1">
+            <path style="stroke:none" d="M8,0 V1 H5 V2 H4 V3 H3 V4 H2 V5 H1 V8 H0 V0"/>
+            <path style=  "fill:none" d="M0,1 H8 V0
+                                         M7,1    V0
+                                         M6,1    V0
+                                         M0,2 H5 V0
+                                         M0,3 H4 V0
+                                         M0,4 H3 V0
+                                         M0,5 H2 V0
+                                         M0,6 H1
+                                         M0,7 H1
+                                         M0,8 H1 V0"/>
+        </g>
+        <g id="corner2">
+            <path style="stroke:none" d="M6,0 V1 H5 V2 H4 V3 H3 V4 H2 V5 H1 V6 H0 V0"/>
+            <path style=  "fill:none" d="M0,1 H6 V0
+                                         M0,2 H5 V0
+                                         M0,3 H4 V0
+                                         M0,4 H3 V0
+                                         M0,5 H2 V0
+                                         M0,6 H1 V0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <use xlink:href="#corner2"/>
+    <use xlink:href="#corner2" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#corner1" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#corner1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <g transform="translate(&s;) translate(-3.5 3.5) rotate(135) translate(0 -4.5)">
+        <path style="stroke:none" d="M0,1 H1 V0 H1.5 V-1 H9.5 V0 H10 V1 H11 V8 H10 V9 H9.5 V10 H1.5 V9 H1 V8 H0 Z"/>
+        <path style="  fill:none" d="M0,1 V 8 H11 V1 Z
+                                     M1,0 V 9 H10 V0 Z
+                                     M2,0 V9 M0,2 H11
+                                     M3,0 V9 M0,3 H11
+                                     M4,0 V9 M0,4 H11
+                                     M5,0 V9 M0,5 H11
+                                     M6,0 V9 M0,6 H11
+                                     M7,0 V9 M0,7 H11
+                                     M8,0 V9
+                                     M9,0 V9
+                                     M1.5,0 V-1 H9.5 V0
+                                     M1.5,9 V10 H9.5 V9
+                                     M2.5,0 V-1 M2.5,9 V10
+                                     M3.5,0 V-1 M3.5,9 V10
+                                     M4.5,0 V-1 M4.5,9 V10
+                                     M5.5,0 V-1 M5.5,9 V10
+                                     M6.5,0 V-1 M6.5,9 V10
+                                     M7.5,0 V-1 M7.5,9 V10
+                                     M8.5,0 V-1 M8.5,9 V10"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

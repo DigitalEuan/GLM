@@ -1,0 +1,437 @@
+{
+ "results": [
+  {
+   "n": 6,
+   "class": "LOW",
+   "cur": 3.000000001334,
+   "find": null
+  },
+  {
+   "n": 12,
+   "class": "LOW",
+   "cur": 4.0000000015,
+   "find": null
+  },
+  {
+   "n": 13,
+   "class": "LOW",
+   "cur": 4.0000000015,
+   "find": null
+  },
+  {
+   "n": 20,
+   "class": "LOW",
+   "cur": 5.0000000016,
+   "find": null
+  },
+  {
+   "n": 21,
+   "class": "LOW",
+   "cur": 5.0000000016,
+   "find": null
+  },
+  {
+   "n": 22,
+   "class": "LOW",
+   "cur": 5.0000000016,
+   "find": null
+  },
+  {
+   "n": 30,
+   "class": "LOW",
+   "cur": 6.000000001666,
+   "find": null
+  },
+  {
+   "n": 31,
+   "class": "LOW",
+   "cur": 6.000000001666,
+   "find": null
+  },
+  {
+   "n": 32,
+   "class": "LOW",
+   "cur": 6.000000001666,
+   "find": null
+  },
+  {
+   "n": 33,
+   "class": "LOW",
+   "cur": 6.000000001666,
+   "find": null
+  },
+  {
+   "n": 42,
+   "class": "LOW",
+   "cur": 7.000000001714,
+   "find": null
+  },
+  {
+   "n": 43,
+   "class": "LOW",
+   "cur": 7.000000001714,
+   "find": null
+  },
+  {
+   "n": 44,
+   "class": "LOW",
+   "cur": 7.000000001714,
+   "find": null
+  },
+  {
+   "n": 45,
+   "class": "LOW",
+   "cur": 7.000000001714,
+   "find": null
+  },
+  {
+   "n": 46,
+   "class": "LOW",
+   "cur": 7.000000001714,
+   "find": null
+  },
+  {
+   "n": 56,
+   "class": "LOW",
+   "cur": 8.00000000175,
+   "find": null
+  },
+  {
+   "n": 57,
+   "class": "LOW",
+   "cur": 8.00000000175,
+   "find": null
+  },
+  {
+   "n": 58,
+   "class": "LOW",
+   "cur": 8.00000000175,
+   "find": null
+  },
+  {
+   "n": 59,
+   "class": "LOW",
+   "cur": 8.00000000175,
+   "find": null
+  },
+  {
+   "n": 60,
+   "class": "LOW",
+   "cur": 8.00000000175,
+   "find": null
+  },
+  {
+   "n": 61,
+   "class": "LOW",
+   "cur": 8.00000000175,
+   "find": null
+  },
+  {
+   "n": 72,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 73,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 74,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 75,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 76,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 77,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 78,
+   "class": "LOW",
+   "cur": 9.000000001778,
+   "find": null
+  },
+  {
+   "n": 90,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 91,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 92,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 93,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 94,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 95,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 96,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 97,
+   "class": "LOW",
+   "cur": 10.0000000018,
+   "find": null
+  },
+  {
+   "n": 111,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 112,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 113,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 114,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 115,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 116,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 117,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 118,
+   "class": "LOW",
+   "cur": 11.000000001818,
+   "find": null
+  },
+  {
+   "n": 133,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 134,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 135,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 136,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 137,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 138,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 139,
+   "class": "LOW",
+   "cur": 12.000000001834,
+   "find": null
+  },
+  {
+   "n": 157,
+   "class": "LOW",
+   "cur": 13.000000001846,
+   "find": null
+  },
+  {
+   "n": 158,
+   "class": "LOW",
+   "cur": 13.000000001846,
+   "find": null
+  },
+  {
+   "n": 159,
+   "class": "LOW",
+   "cur": 13.000000001846,
+   "find": null
+  },
+  {
+   "n": 160,
+   "class": "LOW",
+   "cur": 13.000000001846,
+   "find": null
+  },
+  {
+   "n": 161,
+   "class": "LOW",
+   "cur": 13.000000001846,
+   "find": null
+  },
+  {
+   "n": 162,
+   "class": "LOW",
+   "cur": 13.000000001846,
+   "find": null
+  },
+  {
+   "n": 183,
+   "class": "LOW",
+   "cur": 14.000000001858,
+   "find": null
+  },
+  {
+   "n": 184,
+   "class": "LOW",
+   "cur": 14.000000001858,
+   "find": null
+  },
+  {
+   "n": 185,
+   "class": "LOW",
+   "cur": 14.000000001858,
+   "find": null
+  },
+  {
+   "n": 186,
+   "class": "LOW",
+   "cur": 14.000000001858,
+   "find": null
+  },
+  {
+   "n": 187,
+   "class": "LOW",
+   "cur": 14.000000001858,
+   "find": null
+  },
+  {
+   "n": 211,
+   "class": "LOW",
+   "cur": 15.000000001866,
+   "find": null
+  },
+  {
+   "n": 212,
+   "class": "LOW",
+   "cur": 15.000000001866,
+   "find": null
+  },
+  {
+   "n": 213,
+   "class": "LOW",
+   "cur": 15.000000001866,
+   "find": null
+  },
+  {
+   "n": 214,
+   "class": "LOW",
+   "cur": 15.000000001866,
+   "find": null
+  },
+  {
+   "n": 242,
+   "class": "LOW",
+   "cur": 16.000000001875,
+   "find": null
+  },
+  {
+   "n": 243,
+   "class": "LOW",
+   "cur": 16.000000001875,
+   "find": null
+  },
+  {
+   "n": 274,
+   "class": "LOW",
+   "cur": 17.000000001882,
+   "find": null
+  },
+  {
+   "n": 1000,
+   "class": "MID",
+   "cur": 32.000000001938,
+   "find": null
+  },
+  {
+   "n": 999,
+   "class": "MID",
+   "cur": 32.000000001938,
+   "find": null
+  },
+  {
+   "n": 998,
+   "class": "MID",
+   "cur": 32.000000001938,
+   "find": null
+  }
+ ],
+ "finds": []
+}

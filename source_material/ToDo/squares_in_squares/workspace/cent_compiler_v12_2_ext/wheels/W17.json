@@ -1,0 +1,167 @@
+{
+  "id": "W17",
+  "title": "Gravitation and orbital mechanics",
+  "axioms": [
+    "surface_gravity = gravitational_constant * source_mass / distance^2",
+    "period^2 = distance^3 / (gravitational_constant * source_mass)"
+  ],
+  "cases": [
+    {
+      "id": "W17-01",
+      "equation": "gravitational_constant = surface_gravity * distance^2 / source_mass",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W17-02",
+      "equation": "source_mass = surface_gravity * distance^2 / gravitational_constant",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W17-03",
+      "equation": "period^2 = distance^3 / (gravitational_constant * source_mass)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": false,
+      "note": "Kepler third law; convention drops the 4\u03c0\u00b2 factor (radial convention)"
+    },
+    {
+      "id": "W17-N1",
+      "equation": "surface_gravity = distance^2 / (gravitational_constant * source_mass)",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "distance",
+    "gravitational_constant",
+    "period",
+    "source_mass",
+    "surface_gravity"
+  ],
+  "dimensions": {
+    "distance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "gravitational_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        3,
+        -1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "period": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "source_mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "surface_gravity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

@@ -1,0 +1,92 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 14 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 4 of 4 marks; the interactive surface echoes 2 of 2 queries once, `:kinds` prints 30
+  of 30 declared readings once each from the parser's table, a refusal says why in the interactive surface
+  and not in the batch one, and the evaluation answers 237 of 237 with no answer moved.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/harness.py
+  lean: []
+  lean_held: []
+  lean_missing: []
+  missing: []
+  prose: CHAT_SURFACE_STUDY.md
+  test:
+  - test_evaluation.py
+  - test_runtime.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: CHAT_SURFACE_STUDY
+junctions: []
+last_altered: 14 November 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared:
+  - C1
+  - C2
+  - C3
+  - C4
+  met:
+  - C1
+  - C2
+  - C3
+  - C4
+  missed: []
+perturbations: []
+phase: 187
+predecessors: []
+question: When the GLM is used as a conversation from the command line rather than as a batch of questions,
+  does the surface say what it is doing — the question once, the readings it has, and why a question was
+  not read?
+recomputed_by: '`glm_universal.evaluation.harness.evaluation_report`'
+related:
+- ITERATION_LANE_STUDY
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-mechanism
+  heading: 1. The mechanism
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-what-came-out
+  heading: 4. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors:
+- ITERATION_LANE_STUDY
+superseded_by: ''
+supersedes: []
+title: 'The chat surface: one echo, the declared readings, and what a refusal means'
+verdict: Yes, for the three defects the platform round of 13 November 2026 named under *use*. The interactive
+  surface echoed every query twice, one echo its own and one the answer path's; it now echoes each query
+  once, from the answer path alone. It had no way to say which readings a question may have; `:kinds`
+  now lists the parser's own table — 30 declared readings, with `unknown` named apart — and nothing is
+  typed twice. A question that matched no declared reading was refused with the bare word `unrecognised
+  query`, while the machine's own reading of that refusal (the sentence matched no classification rule)
+  was discarded; the interactive surface now says so and points at `:kinds`, and the batch line the evaluation
+  pins is unchanged.
+wobble_deps: []

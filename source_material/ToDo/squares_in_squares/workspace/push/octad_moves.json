@@ -1,0 +1,56 @@
+{
+ "steiner_ladder": {
+  "lambda": {
+   "1": 253,
+   "2": 77,
+   "3": 21,
+   "4": 5,
+   "5": 1
+  },
+  "verified": {
+   "1": true,
+   "2": true,
+   "3": true,
+   "4": true,
+   "5": true
+  }
+ },
+ "octad_intersections": {
+  "0": 30,
+  "2": 448,
+  "4": 280
+ },
+ "distance8_graph": {
+  "degree": 759,
+  "connected": true,
+  "diameter": 3
+ },
+ "covering_radius": {
+  "value": 4,
+  "syndromes_total": 4096,
+  "covered_by_wt_le_4": 4096,
+  "covered_by_wt_le_3": 2325
+ },
+ "decode_demo": [
+  3,
+  3,
+  4,
+  2,
+  3,
+  3,
+  3,
+  3,
+  4,
+  4,
+  4,
+  4,
+  3,
+  3,
+  4,
+  3,
+  3,
+  3,
+  3,
+  4
+ ]
+}

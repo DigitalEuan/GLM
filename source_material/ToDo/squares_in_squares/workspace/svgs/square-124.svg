@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Made by extending a pattern found by by Frits Göbel in 1979.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "11.65685424949238019520675489684"> <!-- 6 + Sqrt[2]*4 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M5,0 V1 H4 V2 H3 V3 H2 V4 H1 V5 H0 V0"/>
+        <path style=  "fill:none" d="M0,1 H5 V0
+                                     M0,2 H4 V0
+                                     M0,3 H3 V0
+                                     M0,4 H2 V0
+                                     M0,5 H1 V0"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s;    ) scale(-1  1)"/>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#side1" transform="translate(0   &s;) scale( 1 -1)"/>
+    <g transform="scale(.5) translate(&s; &s;) scale(2) rotate(45) translate(-4 -4)">
+        <rect width="8" height="8"/>
+        <path style="fill:none" d="M0,1 H8 M1,0 V8
+                                   M0,2 H8 M2,0 V8
+                                   M0,3 H8 M3,0 V8
+                                   M0,4 H8 M4,0 V8
+                                   M0,5 H8 M5,0 V8
+                                   M0,6 H8 M6,0 V8
+                                   M0,7 H8 M7,0 V8"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

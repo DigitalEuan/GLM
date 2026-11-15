@@ -1,0 +1,2080 @@
+{
+ "applied": [
+  {
+   "n": 51,
+   "old": 7.700799237158,
+   "new": 7.690355939028,
+   "gain": 0.00146235,
+   "finder": "Thomas Schadt",
+   "side_exact": 7.6903559372884915
+  },
+  {
+   "n": 68,
+   "old": 8.798796142032,
+   "new": 8.798795238991,
+   "gain": 1.1e-07,
+   "finder": "Francisco Couzo",
+   "side_exact": 8.798795237218284
+  },
+  {
+   "n": 70,
+   "old": 8.881666758784,
+   "new": 8.88096037333,
+   "gain": 8.443e-05,
+   "finder": "Joe DeVincentis",
+   "side_exact": 8.88096037155558
+  },
+  {
+   "n": 84,
+   "old": 9.70710678298,
+   "new": 9.697934800809,
+   "gain": 0.00100075,
+   "finder": "Evert Stenlund",
+   "side_exact": 9.697934799014922
+  },
+  {
+   "n": 86,
+   "old": 9.822875657328,
+   "new": 9.820535409293,
+   "gain": 0.00025236,
+   "finder": "Erich Friedman",
+   "side_exact": 9.820535407496742
+  },
+  {
+   "n": 88,
+   "old": 9.888153055556,
+   "new": 9.882451032279,
+   "gain": 0.00060784,
+   "finder": "David Ellsworth",
+   "side_exact": 9.882451030481247
+  },
+  {
+   "n": 102,
+   "old": 10.611387942586,
+   "new": 10.605828698243,
+   "gain": 0.00055045,
+   "finder": "Francisco Couzo",
+   "side_exact": 10.605828696431578
+  },
+  {
+   "n": 103,
+   "old": 10.703781957156,
+   "new": 10.679232049174,
+   "gain": 0.00241897,
+   "finder": "Francisco Couzo",
+   "side_exact": 10.679232047361307
+  },
+  {
+   "n": 105,
+   "old": 10.807619335122,
+   "new": 10.789303785562,
+   "gain": 0.00178741,
+   "finder": "Francisco Couzo",
+   "side_exact": 10.789303783748158
+  },
+  {
+   "n": 106,
+   "old": 10.822979735984,
+   "new": 10.822908045948,
+   "gain": 6.96e-06,
+   "finder": "Francisco Couzo",
+   "side_exact": 10.822908044132847
+  },
+  {
+   "n": 108,
+   "old": 10.925919391978,
+   "new": 10.904821014137,
+   "gain": 0.00203019,
+   "finder": "K\u00e1roly Hajba",
+   "side_exact": 10.904821012320356
+  },
+  {
+   "n": 110,
+   "old": 10.996793275838,
+   "new": 10.99678339845,
+   "gain": 9.4e-07,
+   "finder": "Francisco Couzo",
+   "side_exact": 10.996783396631592
+  },
+  {
+   "n": 123,
+   "old": 11.601399795616,
+   "new": 11.591378147325,
+   "gain": 0.00090362,
+   "finder": "Francisco Couzo",
+   "side_exact": 11.591378145497698
+  },
+  {
+   "n": 126,
+   "old": 11.774735134236,
+   "new": 11.742640688949,
+   "gain": 0.0028592,
+   "finder": "Joost de Winter",
+   "side_exact": 11.742640687119286
+  },
+  {
+   "n": 127,
+   "old": 11.822875657364,
+   "new": 11.81087878942,
+   "gain": 0.00106455,
+   "finder": "-",
+   "side_exact": 11.81087878758918
+  },
+  {
+   "n": 129,
+   "old": 11.881306219922,
+   "new": 11.870013852236,
+   "gain": 0.00099424,
+   "finder": "Daniil Ostashev (dostashev)",
+   "side_exact": 11.870013850404465
+  },
+  {
+   "n": 130,
+   "old": 11.911190521992,
+   "new": 11.904483034348,
+   "gain": 0.00058829,
+   "finder": "Francisco Couzo",
+   "side_exact": 11.904483032515786
+  },
+  {
+   "n": 131,
+   "old": 11.956525434642,
+   "new": 11.949659589868,
+   "gain": 0.00059987,
+   "finder": "Francisco Couzo",
+   "side_exact": 11.94965958803586
+  },
+  {
+   "n": 132,
+   "old": 11.99137344607,
+   "new": 11.985680200679,
+   "gain": 0.00049553,
+   "finder": "Francisco Couzo",
+   "side_exact": 11.98568019884581
+  },
+  {
+   "n": 146,
+   "old": 12.600907780354,
+   "new": 12.583782191993,
+   "gain": 0.00141732,
+   "finder": "Ryan Xu",
+   "side_exact": 12.58378219015186
+  },
+  {
+   "n": 152,
+   "old": 12.83095954657,
+   "new": 12.830718802821,
+   "gain": 1.953e-05,
+   "finder": "Francisco Couzo",
+   "side_exact": 12.83071880097661
+  },
+  {
+   "n": 153,
+   "old": 12.881666758854,
+   "new": 12.870013852249,
+   "gain": 0.00094208,
+   "finder": "PingYou Ltd",
+   "side_exact": 12.870013850404465
+  },
+  {
+   "n": 154,
+   "old": 12.931667131472,
+   "new": 12.921206578978,
+   "gain": 0.00084294,
+   "finder": "Francisco Couzo (franciscouzo)",
+   "side_exact": 12.921206577132631
+  },
+  {
+   "n": 155,
+   "old": 12.95844711346,
+   "new": 12.952260946496,
+   "gain": 0.00049688,
+   "finder": "Evan Daniel (evand)",
+   "side_exact": 12.952260944650565
+  },
+  {
+   "n": 156,
+   "old": 12.98208376233,
+   "new": 12.97916585568,
+   "gain": 0.00023362,
+   "finder": "Daniil Ostashev",
+   "side_exact": 12.979165853834276
+  },
+  {
+   "n": 172,
+   "old": 13.618988988454,
+   "new": 13.618988958753,
+   "gain": 0.0,
+   "finder": "Francisco Couzo",
+   "side_exact": 13.618988956899399
+  },
+  {
+   "n": 175,
+   "old": 13.778174594906,
+   "new": 13.764174319341,
+   "gain": 0.00105832,
+   "finder": "Daniil Ostashev (dostashev)",
+   "side_exact": 13.764174317486596
+  },
+  {
+   "n": 176,
+   "old": 13.822875657388,
+   "new": 13.795872320292,
+   "gain": 0.00203545,
+   "finder": "Daniil Ostashev (dostashev)",
+   "side_exact": 13.795872318436407
+  },
+  {
+   "n": 177,
+   "old": 13.823028752612,
+   "new": 13.822979736025,
+   "gain": 3.68e-06,
+   "finder": "Francisco Couzo",
+   "side_exact": 13.822979734169449
+  },
+  {
+   "n": 179,
+   "old": 13.895341071832,
+   "new": 13.883795492367,
+   "gain": 0.00086296,
+   "finder": "David Ellsworth",
+   "side_exact": 13.883795490510899
+  },
+  {
+   "n": 180,
+   "old": 13.935087054768,
+   "new": 13.916993524334,
+   "gain": 0.00134861,
+   "finder": "Francisco Couzo",
+   "side_exact": 13.916993522477833
+  },
+  {
+   "n": 181,
+   "old": 13.956906725274,
+   "new": 13.950819532879,
+   "gain": 0.00045246,
+   "finder": "Nate Chaoweeraprasit (itsnaka, SQUISH)",
+   "side_exact": 13.950819531022924
+  },
+  {
+   "n": 182,
+   "old": 13.974191055182,
+   "new": 13.974090714978,
+   "gain": 7.44e-06,
+   "finder": "Francisco Couzo",
+   "side_exact": 13.97409071312144
+  },
+  {
+   "n": 183,
+   "old": 14.000000001858,
+   "new": 13.999580180594,
+   "gain": 3.103e-05,
+   "finder": "Evan Daniel (evand)",
+   "side_exact": 13.999580178736252
+  },
+  {
+   "n": 199,
+   "old": 14.618988988464,
+   "new": 14.617572175456,
+   "gain": 0.00010044,
+   "finder": "Francisco Couzo",
+   "side_exact": 14.617572173592807
+  },
+  {
+   "n": 204,
+   "old": 14.822875657398,
+   "new": 14.808642842456,
+   "gain": 0.0009965,
+   "finder": "Francisco Couzo (franciscouzo)",
+   "side_exact": 14.808642840591494
+  },
+  {
+   "n": 206,
+   "old": 14.872219027472,
+   "new": 14.860158665258,
+   "gain": 0.00084029,
+   "finder": "Francisco Couzo",
+   "side_exact": 14.860158663391903
+  },
+  {
+   "n": 207,
+   "old": 14.89395494442,
+   "new": 14.880960373421,
+   "gain": 0.00090319,
+   "finder": "PingYou Ltd",
+   "side_exact": 14.88096037155558
+  },
+  {
+   "n": 208,
+   "old": 14.937766564646,
+   "new": 14.924518773895,
+   "gain": 0.00091857,
+   "finder": "Francisco Couzo",
+   "side_exact": 14.924518772029355
+  },
+  {
+   "n": 209,
+   "old": 14.958615002742,
+   "new": 14.946223228313,
+   "gain": 0.00085716,
+   "finder": "Francisco Couzo",
+   "side_exact": 14.94622322644645
+  },
+  {
+   "n": 210,
+   "old": 14.97413342073,
+   "new": 14.973001118454,
+   "gain": 7.814e-05,
+   "finder": "Francisco Couzo",
+   "side_exact": 14.973001116587625
+  },
+  {
+   "n": 211,
+   "old": 15.000000001866,
+   "new": 14.993549628166,
+   "gain": 0.00044406,
+   "finder": "Daniil Ostashev",
+   "side_exact": 14.993549626299421
+  },
+  {
+   "n": 227,
+   "old": 15.571067813738,
+   "new": 15.563625654197,
+   "gain": 0.00049395,
+   "finder": "Francisco Couzo (franciscouzo)",
+   "side_exact": 15.563625652325149
+  },
+  {
+   "n": 228,
+   "old": 15.609022823196,
+   "new": 15.604601477602,
+   "gain": 0.00029281,
+   "finder": "Francisco Couzo",
+   "side_exact": 15.604601475729675
+  },
+  {
+   "n": 229,
+   "old": 15.656854251364,
+   "new": 15.650161515749,
+   "gain": 0.00044227,
+   "finder": "Evan Daniel (evand)",
+   "side_exact": 15.650161513876432
+  },
+  {
+   "n": 232,
+   "old": 15.778174594926,
+   "new": 15.76417431936,
+   "gain": 0.00091916,
+   "finder": "Daniil Ostashev (dostashev)",
+   "side_exact": 15.764174317486596
+  },
+  {
+   "n": 236,
+   "old": 15.876075395026,
+   "new": 15.861934392481,
+   "gain": 0.0009205,
+   "finder": "Evan Daniel (evand)",
+   "side_exact": 15.861934390607358
+  },
+  {
+   "n": 237,
+   "old": 15.914213564248,
+   "new": 15.902603640134,
+   "gain": 0.00075415,
+   "finder": "Nate Chaoweeraprasit (itsnaka)",
+   "side_exact": 15.902603638259597
+  },
+  {
+   "n": 238,
+   "old": 15.939655202188,
+   "new": 15.924106787196,
+   "gain": 0.00100785,
+   "finder": "Nate Chaoweeraprasit (itsnaka, SQUISH)",
+   "side_exact": 15.924106785321495
+  },
+  {
+   "n": 239,
+   "old": 15.956353585938,
+   "new": 15.948443329175,
+   "gain": 0.00051167,
+   "finder": "Nate Chaoweeraprasit (itsnaka, SQUISH)",
+   "side_exact": 15.9484433273005
+  },
+  {
+   "n": 240,
+   "old": 15.975562830206,
+   "new": 15.969685339405,
+   "gain": 0.00037939,
+   "finder": "Francisco Couzo",
+   "side_exact": 15.96968533753078
+  },
+  {
+   "n": 241,
+   "old": 15.99080517998,
+   "new": 15.987117097025,
+   "gain": 0.00023757,
+   "finder": "Mishapolk",
+   "side_exact": 15.98711709515024
+  },
+  {
+   "n": 258,
+   "old": 16.571067813744,
+   "new": 16.563448004013,
+   "gain": 0.00047439,
+   "finder": "-",
+   "side_exact": 16.56344800213379
+  },
+  {
+   "n": 259,
+   "old": 16.602571414224,
+   "new": 16.591378147377,
+   "gain": 0.00069552,
+   "finder": "Francisco Couzo",
+   "side_exact": 16.5913781454977
+  },
+  {
+   "n": 260,
+   "old": 16.656854251372,
+   "new": 16.6457532524,
+   "gain": 0.00068845,
+   "finder": "Francisco Couzo (franciscouzo)",
+   "side_exact": 16.645753250519814
+  },
+  {
+   "n": 263,
+   "old": 16.742640689,
+   "new": 16.73316600978,
+   "gain": 0.00058423,
+   "finder": "Francisco Couzo",
+   "side_exact": 16.733166007899378
+  },
+  {
+   "n": 264,
+   "old": 16.778174594932,
+   "new": 16.774735134268,
+   "gain": 0.00021168,
+   "finder": "Daniil Ostashev (dostashev)",
+   "side_exact": 16.774735132387832
+  },
+  {
+   "n": 266,
+   "old": 16.823062084718,
+   "new": 16.823028752638,
+   "gain": 2.04e-06,
+   "finder": "David Ellsworth",
+   "side_exact": 16.823028750756475
+  },
+  {
+   "n": 267,
+   "old": 16.846667194724,
+   "new": 16.83881527183,
+   "gain": 0.00048053,
+   "finder": "-",
+   "side_exact": 16.838815269948263
+  },
+  {
+   "n": 268,
+   "old": 16.879311436536,
+   "new": 16.878814822889,
+   "gain": 3.034e-05,
+   "finder": "Francisco Couzo",
+   "side_exact": 16.878814821006763
+  },
+  {
+   "n": 269,
+   "old": 16.905967650166,
+   "new": 16.901513584071,
+   "gain": 0.00027157,
+   "finder": "Francisco Couzo",
+   "side_exact": 16.901513582189132
+  },
+  {
+   "n": 270,
+   "old": 16.94062059989,
+   "new": 16.928196995211,
+   "gain": 0.00075608,
+   "finder": "Nate Chaoweeraprasit (itsnaka, SQUISH)",
+   "side_exact": 16.928196993329017
+  },
+  {
+   "n": 271,
+   "old": 16.954999096008,
+   "new": 16.948947735596,
+   "gain": 0.00036759,
+   "finder": "Evan Daniel (evand)",
+   "side_exact": 16.94894773371366
+  },
+  {
+   "n": 272,
+   "old": 16.969716026082,
+   "new": 16.96558647672,
+   "gain": 0.00025039,
+   "finder": "Nate Chaoweeraprasit (itsnaka, SQUISH)",
+   "side_exact": 16.96558647483767
+  },
+  {
+   "n": 273,
+   "old": 16.988207252188,
+   "new": 16.983925964533,
+   "gain": 0.00025912,
+   "finder": "Francisco Couzo",
+   "side_exact": 16.983925962650403
+  },
+  {
+   "n": 292,
+   "old": 17.60257141423,
+   "new": 17.591378147384,
+   "gain": 0.00065504,
+   "finder": "Francisco Couzo",
+   "side_exact": 17.5913781454977
+  },
+  {
+   "n": 295,
+   "old": 17.707106783074,
+   "new": 17.704232792624,
+   "gain": 0.00016733,
+   "finder": "-",
+   "side_exact": 17.70423279073603
+  },
+  {
+   "n": 297,
+   "old": 17.741060747934,
+   "new": 17.740417289431,
+   "gain": 3.734e-05,
+   "finder": "Francisco Couzo",
+   "side_exact": 17.740417287543803
+  },
+  {
+   "n": 301,
+   "old": 17.868891557462,
+   "new": 17.846667194731,
+   "gain": 0.00128099,
+   "finder": "Francisco Couzo",
+   "side_exact": 17.84666719284349
+  },
+  {
+   "n": 302,
+   "old": 17.886746030494,
+   "new": 17.870013852293,
+   "gain": 0.00096283,
+   "finder": "PingYou Ltd",
+   "side_exact": 17.870013850404465
+  },
+  {
+   "n": 303,
+   "old": 17.93125509745,
+   "new": 17.909958292958,
+   "gain": 0.00122347,
+   "finder": "Daniil Ostashev (dostashev)",
+   "side_exact": 17.90995829106991
+  },
+  {
+   "n": 304,
+   "old": 17.949107837536,
+   "new": 17.929427759963,
+   "gain": 0.00112873,
+   "finder": "Daniil Ostashev",
+   "side_exact": 17.929427758075175
+  },
+  {
+   "n": 305,
+   "old": 17.9606620159,
+   "new": 17.950466484026,
+   "gain": 0.00058379,
+   "finder": "Nate Chaoweeraprasit (itsnaka)",
+   "side_exact": 17.950466482137713
+  },
+  {
+   "n": 306,
+   "old": 17.969139608646,
+   "new": 17.96343371938,
+   "gain": 0.00032618,
+   "finder": "Francisco Couzo",
+   "side_exact": 17.963433717491426
+  },
+  {
+   "n": 307,
+   "old": 17.982722017684,
+   "new": 17.980862785943,
+   "gain": 0.00010611,
+   "finder": "Francisco Couzo",
+   "side_exact": 17.98086278405469
+  },
+  {
+   "n": 308,
+   "old": 18.000000001888,
+   "new": 17.997149123159,
+   "gain": 0.00016244,
+   "finder": "Evan Daniel (evand)",
+   "side_exact": 17.99714912127091
+  }
+ ],
+ "rejected": [
+  {
+   "n": 5,
+   "why": "no beat after finalize",
+   "L": 2.707106782448,
+   "cur": 2.707106782448
+  },
+  {
+   "n": 6,
+   "why": "no beat after finalize",
+   "L": 3.000000001334,
+   "cur": 3.000000001334
+  },
+  {
+   "n": 7,
+   "why": "no beat after finalize",
+   "L": 3.000000001334,
+   "cur": 3.000000001334
+  },
+  {
+   "n": 8,
+   "why": "no beat after finalize",
+   "L": 3.000000001334,
+   "cur": 3.000000001334
+  },
+  {
+   "n": 9,
+   "why": "no beat after finalize",
+   "L": 3.000000001334,
+   "cur": 3.000000001334
+  },
+  {
+   "n": 10,
+   "why": "no beat after finalize",
+   "L": 3.707106782647,
+   "cur": 3.707106782648
+  },
+  {
+   "n": 11,
+   "why": "no beat after finalize",
+   "L": 3.877083591507,
+   "cur": 3.877083591506
+  },
+  {
+   "n": 12,
+   "why": "no beat after finalize",
+   "L": 4.0000000015,
+   "cur": 4.0000000015
+  },
+  {
+   "n": 13,
+   "why": "no beat after finalize",
+   "L": 4.0000000015,
+   "cur": 4.0000000015
+  },
+  {
+   "n": 14,
+   "why": "no beat after finalize",
+   "L": 4.0000000015,
+   "cur": 4.0000000015
+  },
+  {
+   "n": 15,
+   "why": "no beat after finalize",
+   "L": 4.0000000015,
+   "cur": 4.0000000015
+  },
+  {
+   "n": 16,
+   "why": "no beat after finalize",
+   "L": 4.0000000015,
+   "cur": 4.0000000015
+  },
+  {
+   "n": 17,
+   "why": "no beat after finalize",
+   "L": 4.675530095177,
+   "cur": 4.675530095176
+  },
+  {
+   "n": 18,
+   "why": "no beat after finalize",
+   "L": 4.822875657118,
+   "cur": 4.822875657118
+  },
+  {
+   "n": 19,
+   "why": "no beat after finalize",
+   "L": 4.885618084754,
+   "cur": 4.885618084754
+  },
+  {
+   "n": 20,
+   "why": "no beat after finalize",
+   "L": 5.0000000016,
+   "cur": 5.0000000016
+  },
+  {
+   "n": 21,
+   "why": "no beat after finalize",
+   "L": 5.0000000016,
+   "cur": 5.0000000016
+  },
+  {
+   "n": 22,
+   "why": "no beat after finalize",
+   "L": 5.0000000016,
+   "cur": 5.0000000016
+  },
+  {
+   "n": 23,
+   "why": "no beat after finalize",
+   "L": 5.0000000016,
+   "cur": 5.0000000016
+  },
+  {
+   "n": 24,
+   "why": "no beat after finalize",
+   "L": 5.0000000016,
+   "cur": 5.0000000016
+  },
+  {
+   "n": 25,
+   "why": "no beat after finalize",
+   "L": 5.0000000016,
+   "cur": 5.0000000016
+  },
+  {
+   "n": 26,
+   "why": "no beat after finalize",
+   "L": 5.621320345204,
+   "cur": 5.621320345204
+  },
+  {
+   "n": 27,
+   "why": "no beat after finalize",
+   "L": 5.707106782836,
+   "cur": 5.707106782836
+  },
+  {
+   "n": 28,
+   "why": "no beat after finalize",
+   "L": 5.824444618329999,
+   "cur": 5.82444461833
+  },
+  {
+   "n": 29,
+   "why": "no beat after finalize",
+   "L": 5.933833464339,
+   "cur": 5.93383346434
+  },
+  {
+   "n": 30,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 31,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 32,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 33,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 34,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 35,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 36,
+   "why": "no beat after finalize",
+   "L": 6.000000001666001,
+   "cur": 6.000000001666
+  },
+  {
+   "n": 37,
+   "why": "no beat after finalize",
+   "L": 6.598619610941,
+   "cur": 6.598619610942
+  },
+  {
+   "n": 38,
+   "why": "no beat after finalize",
+   "L": 6.707106782888,
+   "cur": 6.707106782888
+  },
+  {
+   "n": 39,
+   "why": "no beat after finalize",
+   "L": 6.8107220847750005,
+   "cur": 6.810722084774
+  },
+  {
+   "n": 40,
+   "why": "no beat after finalize",
+   "L": 6.828427126454001,
+   "cur": 6.828427126454
+  },
+  {
+   "n": 41,
+   "why": "no beat after finalize",
+   "L": 6.926693096179999,
+   "cur": 6.92669309618
+  },
+  {
+   "n": 42,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 43,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 44,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 45,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 46,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 47,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 48,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 49,
+   "why": "no beat after finalize",
+   "L": 7.000000001714,
+   "cur": 7.000000001714
+  },
+  {
+   "n": 50,
+   "why": "no beat after finalize",
+   "L": 7.571428573164,
+   "cur": 7.571428573164
+  },
+  {
+   "n": 52,
+   "why": "no beat after finalize",
+   "L": 7.707106782927,
+   "cur": 7.707106782928
+  },
+  {
+   "n": 53,
+   "why": "no beat after finalize",
+   "L": 7.8228756572760005,
+   "cur": 7.822875657276
+  },
+  {
+   "n": 54,
+   "why": "no beat after finalize",
+   "L": 7.846667194589,
+   "cur": 7.846667194588
+  },
+  {
+   "n": 55,
+   "why": "no beat after finalize",
+   "L": 7.945771009252001,
+   "cur": 7.945771009252
+  },
+  {
+   "n": 56,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 57,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 58,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 59,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 60,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 61,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 62,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 63,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 64,
+   "why": "no beat after finalize",
+   "L": 8.00000000175,
+   "cur": 8.00000000175
+  },
+  {
+   "n": 65,
+   "why": "no beat after finalize",
+   "L": 8.535533907699,
+   "cur": 8.535533907699
+  },
+  {
+   "n": 66,
+   "why": "no beat after finalize",
+   "L": 8.656854251261,
+   "cur": 8.656854251262
+  },
+  {
+   "n": 67,
+   "why": "no beat after finalize",
+   "L": 8.707106782957,
+   "cur": 8.707106782956
+  },
+  {
+   "n": 69,
+   "why": "no beat after finalize",
+   "L": 8.827194657503,
+   "cur": 8.827194657504
+  },
+  {
+   "n": 71,
+   "why": "no beat after finalize",
+   "L": 8.944071559347,
+   "cur": 8.944071559346
+  },
+  {
+   "n": 72,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 73,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 74,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 75,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 76,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 77,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 78,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 79,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 80,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 81,
+   "why": "no beat after finalize",
+   "L": 9.000000001778,
+   "cur": 9.000000001778
+  },
+  {
+   "n": 82,
+   "why": "no beat after finalize",
+   "L": 9.535533907723,
+   "cur": 9.535533907722
+  },
+  {
+   "n": 83,
+   "why": "no beat after finalize",
+   "L": 9.634757650423,
+   "cur": 9.634757650424
+  },
+  {
+   "n": 85,
+   "why": "no beat after finalize",
+   "L": 9.742640688914,
+   "cur": 9.742640688914
+  },
+  {
+   "n": 87,
+   "why": "no beat after finalize",
+   "L": 9.838815271745,
+   "cur": 9.838815271744
+  },
+  {
+   "n": 89,
+   "why": "no beat after finalize",
+   "L": 9.949747470104,
+   "cur": 9.949747470104
+  },
+  {
+   "n": 90,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 91,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 92,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 93,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 94,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 95,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 96,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 97,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 98,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 99,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 100,
+   "why": "no beat after finalize",
+   "L": 10.0000000018,
+   "cur": 10.0000000018
+  },
+  {
+   "n": 101,
+   "why": "no beat after finalize",
+   "L": 10.535533907743,
+   "cur": 10.535533907742
+  },
+  {
+   "n": 104,
+   "why": "no beat after finalize",
+   "L": 10.707106783,
+   "cur": 10.707106783
+  },
+  {
+   "n": 107,
+   "why": "no beat after finalize",
+   "L": 10.846667194659,
+   "cur": 10.84666719466
+  },
+  {
+   "n": 109,
+   "why": "no beat after finalize",
+   "L": 10.949747470124,
+   "cur": 10.949747470124
+  },
+  {
+   "n": 111,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 112,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 113,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 114,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 115,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 116,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 117,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 118,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 119,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 120,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 121,
+   "why": "no beat after finalize",
+   "L": 11.000000001818,
+   "cur": 11.000000001818
+  },
+  {
+   "n": 122,
+   "why": "no beat after finalize",
+   "L": 11.535533907759,
+   "cur": 11.53553390776
+  },
+  {
+   "n": 124,
+   "why": "no beat after finalize",
+   "L": 11.656854251320999,
+   "cur": 11.656854251321
+  },
+  {
+   "n": 125,
+   "why": "no beat after finalize",
+   "L": 11.707106783016,
+   "cur": 11.707106783016
+  },
+  {
+   "n": 128,
+   "why": "no beat after finalize",
+   "L": 11.825091970044,
+   "cur": 11.825091970044
+  },
+  {
+   "n": 133,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 134,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 135,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 136,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 137,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 138,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 139,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 140,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 141,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 142,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 143,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 144,
+   "why": "no beat after finalize",
+   "L": 12.000000001834,
+   "cur": 12.000000001834
+  },
+  {
+   "n": 145,
+   "why": "no beat after finalize",
+   "L": 12.535533907773,
+   "cur": 12.535533907774
+  },
+  {
+   "n": 147,
+   "why": "no beat after finalize",
+   "L": 12.656854251334,
+   "cur": 12.656854251334
+  },
+  {
+   "n": 148,
+   "why": "no beat after finalize",
+   "L": 12.656854251334,
+   "cur": 12.656854251334
+  },
+  {
+   "n": 149,
+   "why": "no beat after finalize",
+   "L": 12.707106783029,
+   "cur": 12.70710678303
+  },
+  {
+   "n": 150,
+   "why": "no beat after finalize",
+   "L": 12.778174594896,
+   "cur": 12.778174594896
+  },
+  {
+   "n": 151,
+   "why": "no beat after finalize",
+   "L": 12.822875657376,
+   "cur": 12.822875657376
+  },
+  {
+   "n": 157,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 158,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 159,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 160,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 161,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 162,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 163,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 164,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 165,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 166,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 167,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 168,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 169,
+   "why": "no beat after finalize",
+   "L": 13.000000001846,
+   "cur": 13.000000001846
+  },
+  {
+   "n": 170,
+   "why": "no beat after finalize",
+   "L": 13.535533907785,
+   "cur": 13.535533907784
+  },
+  {
+   "n": 171,
+   "why": "no beat after finalize",
+   "L": 13.571428573281,
+   "cur": 13.571428573282
+  },
+  {
+   "n": 173,
+   "why": "no beat after finalize",
+   "L": 13.656854251346001,
+   "cur": 13.656854251346
+  },
+  {
+   "n": 174,
+   "why": "no beat after finalize",
+   "L": 13.707106783041,
+   "cur": 13.70710678304
+  },
+  {
+   "n": 178,
+   "why": "no beat after finalize",
+   "L": 13.846667194699,
+   "cur": 13.8466671947
+  },
+  {
+   "n": 184,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 185,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 186,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 187,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 188,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 189,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 190,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 191,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 192,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 193,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 194,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 195,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 196,
+   "why": "no beat after finalize",
+   "L": 14.000000001858,
+   "cur": 14.000000001858
+  },
+  {
+   "n": 197,
+   "why": "no beat after finalize",
+   "L": 14.535533907795,
+   "cur": 14.535533907796
+  },
+  {
+   "n": 198,
+   "why": "no beat after finalize",
+   "L": 14.571428573291,
+   "cur": 14.571428573292
+  },
+  {
+   "n": 200,
+   "why": "no beat after finalize",
+   "L": 14.656854251356,
+   "cur": 14.656854251356
+  },
+  {
+   "n": 201,
+   "why": "no beat after finalize",
+   "L": 14.707106783051,
+   "cur": 14.70710678305
+  },
+  {
+   "n": 202,
+   "why": "no beat after finalize",
+   "L": 14.727922063222,
+   "cur": 14.727922063222
+  },
+  {
+   "n": 203,
+   "why": "no beat after finalize",
+   "L": 14.778174594915999,
+   "cur": 14.778174594916
+  },
+  {
+   "n": 205,
+   "why": "no beat after finalize",
+   "L": 14.824451147989999,
+   "cur": 14.82445114799
+  },
+  {
+   "n": 212,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 213,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 214,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 215,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 216,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 217,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 218,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 219,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 220,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 221,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 222,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 223,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 224,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 225,
+   "why": "no beat after finalize",
+   "L": 15.000000001865999,
+   "cur": 15.000000001866
+  },
+  {
+   "n": 226,
+   "why": "no beat after finalize",
+   "L": 15.535533907804,
+   "cur": 15.535533907804
+  },
+  {
+   "n": 230,
+   "why": "no beat after finalize",
+   "L": 15.682926831141,
+   "cur": 15.68292683114
+  },
+  {
+   "n": 231,
+   "why": "no beat after finalize",
+   "L": 15.707106783059,
+   "cur": 15.70710678306
+  },
+  {
+   "n": 233,
+   "why": "no beat after finalize",
+   "L": 15.778174594926,
+   "cur": 15.778174594926
+  },
+  {
+   "n": 234,
+   "why": "no beat after finalize",
+   "L": 15.822875657406,
+   "cur": 15.822875657406
+  },
+  {
+   "n": 235,
+   "why": "no beat after finalize",
+   "L": 15.826605635302,
+   "cur": 15.826605635302
+  },
+  {
+   "n": 242,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 243,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 244,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 245,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 246,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 247,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 248,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 249,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 250,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 251,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 252,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 253,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 254,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 255,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 256,
+   "why": "no beat after finalize",
+   "L": 16.000000001874998,
+   "cur": 16.000000001875
+  },
+  {
+   "n": 257,
+   "why": "no beat after finalize",
+   "L": 16.535533907812002,
+   "cur": 16.535533907812
+  },
+  {
+   "n": 261,
+   "why": "no beat after finalize",
+   "L": 16.682926831148002,
+   "cur": 16.682926831148
+  },
+  {
+   "n": 262,
+   "why": "no beat after finalize",
+   "L": 16.707106783066997,
+   "cur": 16.707106783066
+  },
+  {
+   "n": 265,
+   "why": "no beat after finalize",
+   "L": 16.778174594931997,
+   "cur": 16.778174594932
+  },
+  {
+   "n": 274,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 275,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 276,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 277,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 278,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 279,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 280,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 281,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 282,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 283,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 284,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 285,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 286,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 287,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 288,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 289,
+   "why": "no beat after finalize",
+   "L": 17.000000001882,
+   "cur": 17.000000001882
+  },
+  {
+   "n": 290,
+   "why": "no beat after finalize",
+   "L": 17.535533907819,
+   "cur": 17.535533907818
+  },
+  {
+   "n": 291,
+   "why": "no beat after finalize",
+   "L": 17.535533907819,
+   "cur": 17.535533907818
+  },
+  {
+   "n": 293,
+   "why": "no beat after finalize",
+   "L": 17.63414634335,
+   "cur": 17.63414634335
+  },
+  {
+   "n": 294,
+   "why": "no beat after finalize",
+   "L": 17.656854251379,
+   "cur": 17.65685425138
+  },
+  {
+   "n": 296,
+   "why": "no beat after finalize",
+   "L": 17.707106783074,
+   "cur": 17.707106783074
+  },
+  {
+   "n": 298,
+   "why": "no beat after finalize",
+   "L": 17.778174594939998,
+   "cur": 17.77817459494
+  },
+  {
+   "n": 299,
+   "why": "no beat after finalize",
+   "L": 17.82287565742,
+   "cur": 17.82287565742
+  },
+  {
+   "n": 300,
+   "why": "no beat after finalize",
+   "L": 17.824123390365997,
+   "cur": 17.824123390366
+  },
+  {
+   "n": 309,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 310,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 311,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 312,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 313,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 314,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 315,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 316,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 317,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 318,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 319,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 320,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 321,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 322,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 323,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  },
+  {
+   "n": 324,
+   "why": "no beat after finalize",
+   "L": 18.000000001887997,
+   "cur": 18.000000001888
+  }
+ ],
+ "skipped": 4,
+ "direct_gain": 0.05026424068161284
+}

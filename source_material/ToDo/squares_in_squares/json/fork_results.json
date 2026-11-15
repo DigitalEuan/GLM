@@ -1,0 +1,437 @@
+{
+ "framework": {
+  "C(24,4)": 10626,
+  "C(24,4)/6 (sextet co-leaders per coset)": 1771,
+  "1+24+276+2024 (leader weights 0..3)": 2325,
+  "4096-2325 (weight-4-leader cosets)": 1771,
+  "lambda_4 = C(20,1)/C(4,1) (octads through a tetrad)": 5,
+  "nearest codewords = 1 + lambda_4": 6,
+  "680064 / 1771": 384,
+  "680064 == 1771*384": true,
+  "ALL_ARITHMETIC_OK": true
+ },
+ "results": [
+  {
+   "n": 803,
+   "k": 28,
+   "r": 19,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 29.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "803/803",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    },
+    {
+     "base": "S2",
+     "desc": "member 842 (L=29.5208) rescaled, -39 innermost",
+     "L_seed": 29.0,
+     "seed_overlap": 0.021296,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "803/803",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 29.0,
+     "seed_overlap": 0.242734,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "803/803",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 2.080deg + 19 diamonds",
+     "L_seed": 29.0,
+     "seed_overlap": 0.856629,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "803/803",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    }
+   ]
+  },
+  {
+   "n": 748,
+   "k": 27,
+   "r": 19,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 28.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "748/748",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    },
+    {
+     "base": "S2",
+     "desc": "member 785 (L=28.5208) rescaled, -37 innermost",
+     "L_seed": 28.0,
+     "seed_overlap": 0.022043,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "748/748",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 28.0,
+     "seed_overlap": 0.234008,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "748/748",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 2.160deg + 19 diamonds",
+     "L_seed": 28.0,
+     "seed_overlap": 0.872733,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "748/748",
+     "settle_hot": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     },
+     "settle_cold": {
+      "best_L": null,
+      "calls": 3,
+      "jams": 3
+     }
+    }
+   ]
+  },
+  {
+   "n": 983,
+   "k": 31,
+   "r": 22,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 32.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "983/983"
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 32.0,
+     "seed_overlap": 0.268685,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "983/983"
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 1.879deg + 22 diamonds",
+     "L_seed": 32.0,
+     "seed_overlap": 0.909565,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "983/983"
+    }
+   ]
+  },
+  {
+   "n": 804,
+   "k": 28,
+   "r": 20,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 29.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "804/804"
+    },
+    {
+     "base": "S2",
+     "desc": "member 842 (L=29.5208) rescaled, -38 innermost",
+     "L_seed": 29.0,
+     "seed_overlap": 0.021296,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "804/804"
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 29.0,
+     "seed_overlap": 0.242734,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "804/804"
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 2.080deg + 20 diamonds",
+     "L_seed": 29.0,
+     "seed_overlap": 0.856629,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "804/804"
+    }
+   ]
+  },
+  {
+   "n": 862,
+   "k": 29,
+   "r": 21,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 30.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "862/862"
+    },
+    {
+     "base": "S2",
+     "desc": "member 901 (L=30.5208) rescaled, -39 innermost",
+     "L_seed": 30.0,
+     "seed_overlap": 0.020598,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "862/862"
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 30.0,
+     "seed_overlap": 0.251346,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "862/862"
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 2.011deg + 21 diamonds",
+     "L_seed": 30.0,
+     "seed_overlap": 0.944155,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "862/862"
+    }
+   ]
+  },
+  {
+   "n": 695,
+   "k": 26,
+   "r": 19,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 27.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "695/695"
+    },
+    {
+     "base": "S2",
+     "desc": "member 730 (L=27.5208) rescaled, -35 innermost",
+     "L_seed": 27.0,
+     "seed_overlap": 0.022844,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "695/695"
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 27.0,
+     "seed_overlap": 0.225396,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "695/695"
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 2.246deg + 19 diamonds",
+     "L_seed": 27.0,
+     "seed_overlap": 0.890282,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "695/695"
+    }
+   ]
+  },
+  {
+   "n": 922,
+   "k": 30,
+   "r": 22,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 31.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "922/922"
+    },
+    {
+     "base": "S2",
+     "desc": "member 962 (L=31.5208) rescaled, -40 innermost",
+     "L_seed": 31.0,
+     "seed_overlap": 0.019945,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "922/922"
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 31.0,
+     "seed_overlap": 0.260073,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "922/922"
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 1.942deg + 22 diamonds",
+     "L_seed": 31.0,
+     "seed_overlap": 0.926423,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "922/922"
+    }
+   ]
+  },
+  {
+   "n": 749,
+   "k": 27,
+   "r": 20,
+   "branches": [
+    {
+     "base": "S1",
+     "desc": "table grid state (no jitter)",
+     "L_seed": 28.0,
+     "seed_overlap": 0.0,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "749/749"
+    },
+    {
+     "base": "S2",
+     "desc": "member 785 (L=28.5208) rescaled, -36 innermost",
+     "L_seed": 28.0,
+     "seed_overlap": 0.022043,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "749/749"
+    },
+    {
+     "base": "S3",
+     "desc": "mirror-split +-0.5deg + top strip",
+     "L_seed": 28.0,
+     "seed_overlap": 0.234008,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "749/749"
+    },
+    {
+     "base": "S4",
+     "desc": "rigid tilted grid 2.160deg + 20 diamonds",
+     "L_seed": 28.0,
+     "seed_overlap": 0.872733,
+     "verdict": "RIGID_WALL",
+     "rho": 1.0,
+     "contacts": "749/749"
+    }
+   ]
+  }
+ ],
+ "settles": {
+  "moves": 6000,
+  "targets": [
+   803,
+   748
+  ]
+ }
+}

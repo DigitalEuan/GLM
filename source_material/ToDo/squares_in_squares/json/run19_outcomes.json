@@ -1,0 +1,48 @@
+{
+ "run": 19,
+ "date": "2026-11-05",
+ "user_asks": [
+  "1. GitHub repository updated with new and previously missing files",
+  "2. updated cent_compiler now at squares_in_squares/workspace/cent_compiler_v12_2_ext (two together in the same repository)",
+  "3. push harder on the cent_compiler \u2014 it is built to DISCOVER, not polish; wheels slim/light -> richer, more robust wheels -> better engine options"
+ ],
+ "state_in": "frontier 22.823536 / 454 (repo synced; certs extracted)",
+ "chapter_a_original_session": {
+  "oracle_study": {
+   "E1_basin": "0/10 at ALL noise levels \u2014 the settle-in channel cannot even hold a known solution; explains why v2 failed feasible containers",
+   "E2_cold": "1/40 restarts found the n=5 pinwheel from cold random seeds \u2014 DISCOVERY POWER CONFIRMED; v2's failure was LATTICE SEEDING, not the channel",
+   "E3_torsion": "0/40 strict; but a 1.8e-13 terminal state under the finalize gate \u2014 the collective channel contributes comparable jammed states",
+   "precision_lessons": [
+    "L-BFGS-B stalls at ~1e-8; the TRUE gate is packlib.finalize (scale+round absorbs terminal imprecision up to ~1e-5 \u2014 verified on stalled seeds: both became finds L 2.70711/2.70714 while non-solutions fail)",
+    "LM hinge-form residuals (W41 complementarity): kept as best-effort quality pass; over-constraint avoided"
+   ]
+  },
+  "engine_v3": "RSA diverse seed (W45, W38/W39/W40 angle library) -> pressure ramp with exact analytic gradient (W36/W37) -> best-effort LM exactification -> packlib.finalize IS THE GATE.  Selftest PASS (pinwheel rediscovered from cold seeds without ever being shown it)",
+  "wheel_expansion": "W38-W45; corpus 41 wheels / 100 axioms / 159 cases; case_table 0 mismatches; 2 corpus bugs fixed (W39 dependent axiom forcing cut_ratio=1; W43 dimless temperature vs native H=1)"
+ },
+ "chapter_b_continuation": {
+  "incident": "sandbox recycled mid-campaign (n~73/23 roots, honest 0s so far) to a stale fork-era snapshot; run-19 files lost",
+  "recovery": "GitHub repo (user-maintained) is the source of truth: workspace/scripts/json/docs restored; certs.zip extracted (324); frontier table REBUILT from submission.csv \u2014 891 rows kept at full precision with original src (L matches the repo table), 109 improved rows took the 12-dp csv states (src run18-frontier); final_assembly round-trip: 0 issues, score 22.823536 exact, 454/1000 beat grid",
+  "substrate_reconstruction": "pressure_settle.py was sandbox-only; rebuilt from the packlib SAT contract.  Three real bugs found and fixed by the FD selftest: (1) binding axis selection used argmax (must be argmin \u2014 the binding axis is the SMALLEST margin); (2) angle cross-term signs in the four axis cases (owner-angle piece and v-axis variants); (3) NumPy fancy-index += silently drops contributions for squares in several active pairs \u2014 replaced with np.add.at (a square in multiple overlapping pairs lost most of its gradient at n>=5; n=2 tests cannot catch this \u2014 no duplicate indices).  Final state: uniform total-derivative form; FD-vs-analytic <= 8e-8 at n=5/12/30; the pinwheel is an exact zero (f=2e-31)",
+  "revalidation": "engine selftest PASS again (2/30 cold restarts, best L 2.707106782162); NEW feasibility control: n=12 at the exact grid size 4.0 redisCOVERED 4/12 (the engine finds the known grid packing at the exact size \u2014 validating campaign zeroes in advance; the first campaign lacked this control)",
+  "wheel_expansion": "re-applied on the restored compiler: 41 wheels / 100 axioms / 159 cases, case_table 0 mismatches; ext zip rebuilt (233KB)"
+ },
+ "revalidation_extra": {
+  "n=10 @3.72": "1/24 rediscoveries, best L 3.719999566183 \u2014 the svg-record class (8 aligned + 2 at 45) found from cold seeds",
+  "n=40 @6.84": "0/24 \u2014 the gobel a3b4 family (16 squares at 45) not found at this pressure; honest"
+ },
+ "deliverables": [
+  "download/cent_compiler_v12_2_ext.zip \u2014 the extended compiler (41 wheels); sync to repo workspace/cent_compiler_v12_2_ext",
+  "download/table.json + submission.csv \u2014 the frontier states",
+  "download/run19_outcomes.json \u2014 this ledger",
+  "scripts/: pressure_settle, oracle_basin, lm_exactify, cent_discovery, cent_campaign19, apply_campaign19, wheel_expand, restore_from_repo"
+ ],
+ "campaign19": {
+  "roots": 23,
+  "finds": [],
+  "seconds": 3210.0,
+  "selftest": "PASS",
+  "feasibility_control": "PASS",
+  "verdict": "no applicable finds \u2014 the 23 gap-0 roots remain open; honest zeroes"
+ }
+}

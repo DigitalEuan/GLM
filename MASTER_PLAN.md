@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 186 is closed except the owner's Lean build: the intake items that measurably help, absorbed ahead of that build by the owner's decision on their measurements and a standalone Lean check — the Rule 30 study's hypothesis engine (`tool rule30`, `tool conjecture`, the plan search behind `tool arc`: 9 of the 50 stored ARC tasks right where 2 were, a development set), the formula wheels behind `tool derive` (63 of 64 laws, 0 of 51 not-a-laws) and the sequence wheel's next-term reading (27 right, 0 wrong of 45); thirty questions across five domains 23 right, 0 wrong, where 4 were right without them; 12 of 14 marks. Phase 185 is closed: the repository check after the October 2026 reorganisation. Every command starts from the repository root; the directives are 22, with D21 making `glm_universal.constants` the single source of constants and D22 the intake of new material through `source_material/ToDo/` and `done/`; the modules the reorganisation lost were rebuilt from their studies, their tests and this plan, each marked *Reconstructed 31 October 2026*, and their measurements taken again; thirteen lost Lean files are recorded in `studies/_lean_files_needed.md` and the six files that import one held out of the build; four lookup kinds in the parser; the integer and Monster provision wheels and fifteen formula wheels of `cent_compiler_v12` tested, given Lean files and measured, and installed in the wheels folder provisionally by the owner's decision, every answer from them marked, until the owner's Lean build record verifies those files. No Lean toolchain was available to the session: `scripts/rebuild_lean.sh` is the owner's step, and the intake grants *Lean verified* only against the build record it writes. Phase 184 is closed: the declared majority rule for conflicting evidence. `LorentzianMajority.lean` proves that the target a strict majority of the weight states is unique, that the rule is never wrong while the honest examples hold at least half the weight and right above half, that agreeing decoys below half carry it (the condition is tight), and that a wrong answer needs decoys weighing at least the answer's own group; `tool majority` answers 155 and 161 right, 0 wrong, on the decoy conditions the guard refuses, and refuses where a plurality vote is wrong 150 times; 8 of 8 marks. Before it Phase 183: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 187 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
+**Verdict.** Phase 188 is closed: the iteration lane — the machine's 8 CPUs (not the 2 the working notes said), the evaluation's own default worker count (8 cases 64.4 s → 8.9 s, the whole set 237 of 237 in 248 s), the round's cheap lane and the close in one order with the answer censuses last, and the surface's second refusal hint; 4 of 4 marks. Phase 186 is closed except the owner's Lean build: the intake items that measurably help, absorbed ahead of that build by the owner's decision on their measurements and a standalone Lean check — the Rule 30 study's hypothesis engine (`tool rule30`, `tool conjecture`, the plan search behind `tool arc`: 9 of the 50 stored ARC tasks right where 2 were, a development set), the formula wheels behind `tool derive` (63 of 64 laws, 0 of 51 not-a-laws) and the sequence wheel's next-term reading (27 right, 0 wrong of 45); thirty questions across five domains 23 right, 0 wrong, where 4 were right without them; 12 of 14 marks. Phase 185 is closed: the repository check after the October 2026 reorganisation. Every command starts from the repository root; the directives are 22, with D21 making `glm_universal.constants` the single source of constants and D22 the intake of new material through `source_material/ToDo/` and `done/`; the modules the reorganisation lost were rebuilt from their studies, their tests and this plan, each marked *Reconstructed 31 October 2026*, and their measurements taken again; thirteen lost Lean files are recorded in `studies/_lean_files_needed.md` and the six files that import one held out of the build; four lookup kinds in the parser; the integer and Monster provision wheels and fifteen formula wheels of `cent_compiler_v12` tested, given Lean files and measured, and installed in the wheels folder provisionally by the owner's decision, every answer from them marked, until the owner's Lean build record verifies those files. No Lean toolchain was available to the session: `scripts/rebuild_lean.sh` is the owner's step, and the intake grants *Lean verified* only against the build record it writes. Phase 184 is closed: the declared majority rule for conflicting evidence. `LorentzianMajority.lean` proves that the target a strict majority of the weight states is unique, that the rule is never wrong while the honest examples hold at least half the weight and right above half, that agreeing decoys below half carry it (the condition is tight), and that a wrong answer needs decoys weighing at least the answer's own group; `tool majority` answers 155 and 161 right, 0 wrong, on the decoy conditions the guard refuses, and refuses where a plurality vote is wrong 150 times; 8 of 8 marks. Before it Phase 183: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 187 is taken: the platform round's *use* phase, worked on the chat surface — one echo per query, `:kinds` from the parser's own table, and a refusal that says why, 4 of 4 marks; *carriers the evaluation's questions name* is left. Phase 188 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -182,6 +182,112 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 188 — the iteration lane: the machine's CPUs, the cheap lane, and the close in one order
+
+*Created 14 November 2026.*
+
+**Status: taken and closed in the round that made it.** Taken from the owner's
+question of 14 November 2026 — *can the repository's working method be improved
+so it does not take ages and use heaps of resources each iteration, perhaps by
+doing a fair amount of the work before full sign-offs?* — and from the platform
+plan's **P3, the workflow** ([`STATUS.md`](STATUS.md) §2.1 item 0a). Study:
+[`studies/ITERATION_LANE_STUDY.md`](studies/ITERATION_LANE_STUDY.md), its marks
+written before the last of them was run.
+
+* **The measurement.** This workspace offers **8 CPUs** (`nproc` 8,
+  `os.cpu_count()` 8, `os.sched_getaffinity(0)` 8) where `ITERATE.md` §0.5 said
+  *2 vCPU* and advised `--jobs 2`. The evaluation is one CLI process per case,
+  so it parallelises nearly linearly: 8 cases took 64.4 s at `--jobs 1` and
+  8.9 s at `--jobs 8`, and the whole evaluation answered 237 of 237 in 248 s at
+  eight. Following the note had cost Phase 187 a factor of four and, with two
+  evaluations run at once, most of a session.
+* **The defaults.** `evaluation.harness.default_jobs()` answers with the CPUs
+  the process may run beside, capped at 8, and is the default of both the
+  evaluation and the replay gate; `--jobs` is now only needed to lower it.
+* **The method.** `ITERATE.md` §0.5 was rewritten from the measurements: the
+  machine it actually is, the round's **cheap lane** (`corpus --check` about
+  35 s, the touched test files, `--only KIND`, `--case`) which can carry most
+  of a round before any sign-off, the close in one order with the reason the
+  two answer censuses come last (they digest `GLM.py`, the document address book
+  and every measurement their answers quote, so any document edit — and
+  `corpus --refresh` itself — stales them), the empty sign-off ledger here and
+  the one-off of about 67 minutes that would fill it and make later closes pay
+  only what moved, and the four test units that already fail on the inherited
+  tree so a round does not chase them.
+* **The surface, one line.** A question that resolves to a real kind and then
+  names no carrier now says the registers are where to look and points at
+  `:domains` — in the interactive surface only, so the `UNSOLVED` line the
+  evaluation pins is unchanged
+  ([`studies/CHAT_SURFACE_STUDY.md`](studies/CHAT_SURFACE_STUDY.md) §3, Phase 187's left line
+  taken as far as a surface line can go).
+* **Measurement.** 4 of 4 marks: the default worker count is the machine's
+  usable CPUs; the speedup is 7.3× on a kind with all 237 answers unchanged;
+  the lane and the close order are declared and no longer contradicted; and
+  the round closed inside the lane.
+
+## Phase 187 — the chat surface: one echo per query, the readings a question may have, and what a refusal means
+
+*Created 14 November 2026.*
+
+**Status: taken; one line of the phase is left.** Taken from the owner's
+instruction of 14 November 2026 — carry the system on with the Lean build set
+aside, since P2 of the platform plan needs a toolchain this workspace does not
+have — and from that plan's **P5, *use*** line
+([`STATUS.md`](STATUS.md) §2.1 item 0a): *the chat surface: carriers the
+evaluation's questions name, the doubled query echo, refusal wording*. Study:
+[`studies/CHAT_SURFACE_STUDY.md`](studies/CHAT_SURFACE_STUDY.md), its marks
+written before the last of them was run.
+
+* **The doubled echo.** `_interactive` printed `QUERY   asked` itself and then
+  called `_batch_query`, which prints the query on every one of its branches
+  (`_render_text` prints `trace.query` for an answer; each refusal branch prints
+  it before the refusal). The surface therefore showed every question twice.
+  The echo in `_interactive` is removed: the answer path is the one place a
+  question is echoed, and it echoes the query as solved, the Phase 146 reply
+  rewrite included.
+* **`:kinds`.** The surface had no way to say which readings a question may
+  have. `_meta_kinds` prints them from `glm_universal.runtime.KINDS` — the
+  parser's one table, the table the query-kind figure is counted from — four to
+  a row, 30 declared readings with `unknown` named apart because it is where a
+  question with no declared reading lands rather than a reading of its own. No
+  list is typed a second time.
+* **The refusal's meaning.** `Session._solve` builds, for an unrecognised
+  question, an answer saying it was not recognised as any of the declared kinds
+  and an error of `unrecognised query`; the CLI printed the error alone and
+  discarded the rest. `_print_refusal_hint` now reads the solution the session
+  kept and, for the kind `unknown`, says the sentence matched no declared
+  reading and points at `:kinds`. It is called from `_interactive` only, so the
+  `UNSOLVED` line the evaluation scores is exactly what it was.
+* **What was not taken.** *Carriers the evaluation's questions name* is a
+  reading change — a question naming a carrier no register holds would have to
+  be answered, or refused differently — and the To-Do list settles that class
+  of change in the other direction: a fresh rewordings read now would be a
+  post-hoc fit, so a fresh held-out set comes first
+  ([`STATUS.md`](STATUS.md) §2.2, *the connected machine, the rest*). Left, and
+  named in the study §3.
+* **The workspace.** The platform round's **P3** was measured on the way: a
+  venv with pytest under `~/glm/venv` (the test files had never been run under
+  pytest here), the counted-knowledge cache warmed once (167 MB, git-ignored),
+  `--jobs 2`, and logs outside the tree in `~/glm/`. With the cache warm the
+  evaluation's per-case cost falls from about 106 s of corpus counting to a few
+  seconds.
+* **The cost of touching `GLM.py`.** The two answer censuses
+  (`tools evidence-model`, `tools evidence-in-use`) digest the CLI's own file,
+  because their answers are read from it: a change to the surface staled both,
+  and both were re-taken in the round. They answer as before — the evidence
+  census 9 of 9 and the result census 7 of 7, `--result` over the 237 questions
+  agreeing with the Phase 169 census on 237 and differing on 0, the replay gate
+  174 of 174 verified and 13 cases without a column 3. That is the price of a
+  surface change and is worth recording before the next one.
+* **Measurement.** 4 of 4 marks
+  ([`studies/CHAT_SURFACE_STUDY.md`](studies/CHAT_SURFACE_STUDY.md) §4): one
+  echo per query for an answered and a refused question; `:kinds` prints 30 of
+  30 declared readings once each from the parser's table; an unread question
+  says why in the interactive surface and the batch line is unchanged; and the
+  evaluation answers 237 of 237 as before, 187 answered and 50 refused as
+  expected, 0 confidently wrong. `corpus --check`, `intake check` and
+  `lean_check` pass on the tree it leaves.
+
 ## Phase 186 — the intake items absorbed where they measurably help: the hypothesis engine, the formula wheels behind `tool derive`, and the next-term reading
 
 *Created 1 November 2026.*
@@ -297,7 +403,7 @@ Phase 187 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 ## Phase 185 — the repository check: the reorganisation repaired, lost code reconstructed, the intake and the new wheels
 
-*Created 31 October 2026.  Last altered 31 October 2026: the two wheel items held back from absorption until the owner's Lean build; the build-record gate; the content-checked migration script; the intake's acceptance decisions and current test results; then the two wheel items installed provisionally in the wheels folder by the owner's decision; then the result model's Lean declaration lookup restored and its census re-taken; on 1 November 2026 the final hand run of the test suite recorded and the two planner fallback tests re-counted.*
+*Created 31 October 2026.  Last altered 31 October 2026: the two wheel items held back from absorption until the owner's Lean build; the build-record gate; the content-checked migration script; the intake's acceptance decisions and current test results; then the two wheel items installed provisionally in the wheels folder by the owner's decision; then the result model's Lean declaration lookup restored and its census re-taken; on 1 November 2026 the final hand run of the test suite recorded and the two planner fallback tests re-counted. Last altered 14 November 2026: Phase 187, the chat surface; Phase 188, the iteration lane.*
 
 **Status: closed** in the session that made it, except the steps only the
 owner's machine can run (the Lean build and the pytest sign-off, `STATUS.md`

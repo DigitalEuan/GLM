@@ -1,0 +1,11 @@
+{
+ "n": 299,
+ "old_L": 17.82287565742,
+ "old_src": "exact:square-299.svg",
+ "new_L": 17.801238535867,
+ "side_exact": "3560247706795812422293947620670679551/200000000000000000000000000000000000",
+ "row_gain": 0.0012513070478867832,
+ "provenance": "T-263, jlevy/squares #893 (2026-11-03); finder Evan Daniel (T-258, #824, 2026-10-26, fault-line DP seeded from Deotte's s(334)); improved by Doga Oezden (rearrangement, -1.54e-8). Cert: kenaznia-doga/s299-upper-bound n-299-candidate.yaml (packing.squares:Witness/v2, exact rationals); registry VERIFIED 44,551 pairs + independent checker VALID.",
+ "applied": true,
+ "score_after_row": 22.822284842090696
+}

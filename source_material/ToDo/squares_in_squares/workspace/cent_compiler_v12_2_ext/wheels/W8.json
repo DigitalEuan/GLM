@@ -1,0 +1,237 @@
+{
+  "id": "W8",
+  "title": "Thermal physics and heat transfer",
+  "axioms": [
+    "energy = mass * specific_heat_capacity * temperature",
+    "entropy = energy / temperature",
+    "heat_flux = thermal_conductivity * temperature_gradient"
+  ],
+  "cases": [
+    {
+      "id": "W8-01",
+      "equation": "specific_heat_capacity = energy / (mass * temperature)",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W8-02",
+      "equation": "entropy = energy / temperature",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_underspecified",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W8-03",
+      "equation": "heat_flux = thermal_conductivity * temperature_gradient",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_underspecified",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W8-N1",
+      "equation": "power = stefan_boltzmann_constant * temperature^4",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": "emitting area absent"
+    }
+  ],
+  "quantities": [
+    "energy",
+    "entropy",
+    "heat_flux",
+    "mass",
+    "specific_heat_capacity",
+    "temperature",
+    "temperature_gradient",
+    "thermal_conductivity"
+  ],
+  "dimensions": {
+    "energy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "entropy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    "heat_flux": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "specific_heat_capacity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        0,
+        -2,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    "temperature": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "temperature_gradient": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "thermal_conductivity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        1,
+        -3,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

@@ -1,0 +1,58 @@
+{
+ "run": 38,
+ "date": "2026-11-09",
+ "user_request": "Continue this Squares in Squares project, lets see if we can push that score!",
+ "watch": {
+  "mishapolk": "byte-identical to run-30 copy (forced re-download; 0 changed entries)",
+  "register": "73 certs, 0 new (forced refresh)",
+  "atlas": "324 entries, 0 new (forced refresh)",
+  "imports_dry": "0 rows on all three"
+ },
+ "broader_scan": {
+  "new_sources_probed": [
+   "dostashev/square-packing (12 records: we win 8, 4 echo)",
+   "franciscoucouzo #561 9 SHA-verified certs (we win 8, 1 echo)",
+   "jlevy/squares = squaremath.org (the atlas, flat)",
+   "chelokot (Lean formalizations of known records; no new bounds)",
+   "forloopcodes (finalize-echo ties only)",
+   "kaggle datasets/notebooks"
+  ],
+  "the_find": "busyaprime's public aggregator notebook (LB 22.2180568): 1299 submission CSVs from 136 public notebooks + 33 public datasets, 68,269 distinct packings, merged shortest-first per puzzle, certified by the hosts' metric code as doubles",
+  "mirror": "browser + signed GCS URL from the public output page (scriptVersionId 366947991, read 2026-11-09): submission.csv 500,500 rows + provenance.csv (per-puzzle 45-digit L + sources)"
+ },
+ "import": {
+  "rows": 345,
+  "direct_gain": 0.42433,
+  "gate": "import_candidates.py verbatim: verify 1e-9, finalize +2e-9, MIN_GAIN 1e-7",
+  "verify_failures": 0
+ },
+ "channel": {
+  "chain": 0,
+  "closure": 0,
+  "note": "the new roots' windows are saturated"
+ },
+ "score": 22.218056945,
+ "beats_grid": 553,
+ "gap_to_leader": 0.163635,
+ "gain_from": 22.642386651,
+ "census": {
+  "grid": 447,
+  "exact": 71,
+  "run18-frontier": 64,
+  "busyaprime": 345,
+  "aux": 2,
+  "gobelS": 11,
+  "mishapolk": 13,
+  "register": 7,
+  "removal": 4,
+  "gobel2": 6,
+  "chain3": 23,
+  "closure": 6,
+  "gobel3": 1
+ },
+ "next": [
+  "watch busyaprime weekly (re-fetch newest version; idempotent import)",
+  "register issues scan (the #914 tell: per-puzzle LB sides below public)",
+  "the remaining 0.164 is private packings (the aggregator's own reading)"
+ ]
+}

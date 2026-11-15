@@ -1,0 +1,168 @@
+{
+  "id": "W3",
+  "title": "Electrostatics and capacitors",
+  "axioms": [
+    "charge = capacitance * voltage",
+    "energy = 1/2 * capacitance * voltage^2"
+  ],
+  "cases": [
+    {
+      "id": "W3-01",
+      "equation": "capacitance = charge / voltage",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W3-02",
+      "equation": "energy = 1/2 * charge * voltage",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W3-03",
+      "equation": "energy = 1/2 * charge^2 / capacitance",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W3-N1",
+      "equation": "energy = charge * capacitance",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "capacitance",
+    "charge",
+    "energy",
+    "voltage"
+  ],
+  "dimensions": {
+    "capacitance": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        -2,
+        -1,
+        4,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "charge": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "energy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "voltage": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -3,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W14",
+      "name_in_this_wheel": "capacitance",
+      "name_in_other_wheel": "capacitance",
+      "reason": "the LC circuit's capacitor = the electrostatics capacitor"
+    },
+    {
+      "other_wheel": "W15",
+      "name_in_this_wheel": "charge",
+      "name_in_other_wheel": "charge",
+      "reason": "the charge moved = the charge stored"
+    }
+  ],
+  "non_identities": [
+    {
+      "other_wheel": "W14",
+      "name": "energy",
+      "reason": "the capacitor's stored energy against the inductor's"
+    },
+    {
+      "other_wheel": "W15",
+      "name": "energy",
+      "reason": "energy stored in a capacitor against energy delivered over a time"
+    }
+  ]
+}

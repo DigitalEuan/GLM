@@ -1,0 +1,33 @@
+{
+ "run": 34,
+ "date": "2026-11-07",
+ "user_request": "1) No need for a repository.zip - the GitHub repository does this now (should be noted) 2) I need the information about the cascade we use that improves puzzles once any break through is made - add this information to STATUS.md 3) dive deeper and see if you can make the STATUS document more accurate and full. Note I have not updated the GitHub repository with content f on the previous run.",
+ "executed": {
+  "github_transport": "repository.zip retired (git rm; the GitHub repository carries the whole tree); noted in STATUS \u00a75 (transport rule), NEXT_STEPS 17c amended, REPRODUCE A26",
+  "the_cascade": {
+   "section": "STATUS \u00a74 (new)",
+   "chain_law": "a record at L(m) converts every member n >= m of the same residue diagonal to L(n) <= L(m) + (K(n) - K(m)); live examples: T-263 17.801238535867 -> 334: +1 -> 371: +2 (binding at equality +2e-9); the n=5 pinwheel -> n=10 = L(5)+1 (the survey's record IS the strip extension of the pinwheel)",
+   "closure": "F(n) = min over m >= n of L(m) (prefix-min from above), greedy drops iterated to fixpoint; 18 delivered rows",
+   "table_laws": "re-homed from the phantom gap_analysis.py into root_audit.py table_laws; run 34: monotone 999/999, shell 937/937 @1e-7 (tolerance absorbs the finalize +2e-9/row storage noise)",
+   "measured_ledger": "register import 0.050264 direct + 0.013671 via 33 chain conversions; T-263 0.003559; Mishapolk 0.173983; total 0.241477 since run 13"
+  },
+  "accuracy_dive": {
+   "register_import": "re-attributed to RUN 13 (import_atlas.py 'Run 13 push A'; evand/square-packing best.json + certs); the 'run18-frontier' label born at the run-18 snapshot-restore (restore_from_repo.py); 76 applied -> 75 census: n=154/270/303 later beaten by Mishapolk, n=327/332 via the restore",
+   "mishapolk": "221 applied -> 209 census: the standing channel re-earned 12 deeper (8 chain3 band extensions, 4 closure removals from the neighbouring Mishapolk packing)",
+   "ellsworth": "'164 historical records' (unverifiable) replaced by the code paths: 235 Friedman survey SVGs (Decimal-exact), Ellsworth-hosted; kingbird = the mirror (4 SVGs)",
+   "run12_448": "verified: the frozen run-12-era RUN_NOTES header (448/1000 at 22.887471); header now pinned as such",
+   "phantom_script": "the run-33 STATUS credited the table laws to gap_analysis.py, which never existed; the laws now live in root_audit.py (table_laws block) and the admission is in the record"
+  }
+ },
+ "score": {
+  "before": 22.645990613,
+  "after": 22.645990613,
+  "delta": 0.0
+ },
+ "beats_grid": 543,
+ "next": [
+  "P3 weekly (atlas + Mishapolk; the only item that has paid)",
+  "start of turn: fetch origin, compare eras (failure 16a)",
+  "every run: update all documents together; the GitHub repository is the transport (no zip)"
+ ]
+}

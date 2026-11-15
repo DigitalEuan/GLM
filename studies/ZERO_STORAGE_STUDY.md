@@ -277,7 +277,7 @@ it can recompute, and the substrate tables it does *not* keep would be
 9,449,445 bytes against the 24,648 that regenerate them. The keeping side is
 [`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md), which prices exactly the
 obligations listed above: rebuilding both address books from nothing decodes
-<!--figure:rebuild-decodes-from-nothing-->22,300<!--/figure--> vectors, and
+<!--figure:rebuild-decodes-from-nothing-->22,334<!--/figure--> vectors, and
 against the stored books it decodes
 <!--figure:rebuild-decodes-now-->0<!--/figure-->, because each answer is keyed
 on the feature vector it came from rather than on the whole tree; and the

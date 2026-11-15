@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by David Ellsworth on December 9, 2024.
+        Based on the s(83) found by Károly Hajba in September 2024, which improved upon the s(83) found by Evert Stenlund in early 1980 (which added an "L" to the s(66) he found in early 1980).
+
+    Unset[{s, a, b, r1, v2, y3, v4, x5, y6, r7, f1, f2, f3}];
+    r1 = 1 - (s - 26)*Sin[a];
+    v2 = -RotationTransform[a][{1, -1}][[2]];
+    y3 = s - 2 - Cos[a];
+    v4 = RotationTransform[a][({2, s - 1} + RotationTransform[-a][{1 - v2, -r1 - 1 - v2}]) - {0, y3}][[2]] - 1;
+    x5 = {0, y3} + RotationTransform[-a][{33, v4 - 22*v2}];
+    x5 = FullSimplify[(x5 + RotationTransform[-a][{0, (1 - x5[[2]])/Cos[a]}])[[1]]];
+    y6 = (s - 24) - (({2, s - 1} + RotationTransform[-a][{33, 1 - r1 - 23*v2}])[[1]] - (s - 1))*(Tan[a] + Cot[a]);
+    r7o = ((s - 1) - (x5 + 1))*Cos[b];
+    r7 = 1 - ((y6 - 1) - 1)*Sin[b];
+    f1 = RotationTransform[a][({0, y3} + RotationTransform[-a][{1, v4}]) - {1, 23}][[2]];
+        (*f2 = RotationTransform[-b][{s - 1, y6 - 1} - {x5 + 1, 1}][[1]] - 1;*)
+    f2 = r7o - r7; (* equivalent to the old "f2" expression above, but simpler *)
+    f3 = RotationTransform[a][({2, s - 1} + RotationTransform[-a][{33 - v2, -r1 - 23*v2}]) - ({s - 1, 1} + RotationTransform[b][{-r7, 1}])][[1]];
+    (*solution = Solve[{f1 == 0, f2 == 0, f3 == 0}, {s, a, b}][[3]];*)
+    solution = {s -> 49/2 + Sqrt[2]*3/2, a -> Pi/4, b -> Pi/4};
+    (*ToString[RootReduce[solution], InputForm]*)
+    N[{s, a*180/Pi, b*180/Pi, r1, v2, y3, v4, x5, y6, r7} /. {a -> a[[1, 1]], b -> b[[1, 1]]} /. solution, 40]
+(*
+    (* Arranging it just like s(83), with everything touching, makes it worse: Exact polynomial root solution by David Ellsworth on December 9, 2024 *)
+    s = Root[2445496491672007362387590819595233995725984497664 - 2270773464117678469804146967176240752498593234944*# + 1009960095255167341430501123810586097896892563456*#^2 - 286331930236211164886416646539380167303487676416*#^3 + 58092370719532545315922881924595622903654234112*#^4 - 8976127920823376980193321485921133647254802944*#^5 + 1097526566380127162824990405183025338228164096*#^6 - 108923201447774224589097648257731819239513216*#^7 + 8929161687702772632111765186236949803403840*#^8 - 612086652588115565369990801772504891558528*#^9 + 35384651456498062698248780758691425066688*#^10 - 1734759629840065884199681727073472755328*#^11 + 72353683843684665283214318024727630400*#^12 - 2569919494169768843333805748572005832*#^13 + 77652962489384153571083522237411460*#^14 - 1989684548815210441082527527503976*#^15 + 42989071547174756774825977941748*#^16 - 776558298618435481329347101408*#^17 + 11584769619928387856301337844*#^18 - 140240807351281488894173996*#^19 + 1343053745797077080414172*#^20 - 9792422037866963459548*#^21 + 51075014930922854576*#^22 - 169738435335015360*#^23 + 270068129747775*#^24, 4]
+    a = ArcTan[Root[38875299840 - 363046567936*# + 1452224397312*#^2 - 3253391486976*#^3 + 4198117474304*#^4 - 1397010911744*#^5 - 8066451833600*#^6 + 24816368146688*#^7 - 45067278027712*#^8 + 62036487069184*#^9 - 69525636781728*#^10 + 64633913949952*#^11 - 49322751904304*#^12 + 28921067997072*#^13 - 8976280911980*#^14 - 6409859606784*#^15 + 15382048710048*#^16 - 18145833510384*#^17 + 16252824833604*#^18 - 11919524012964*#^19 + 7209593933796*#^20 - 3534607232568*#^21 + 1346312266128*#^22 - 350450146296*#^23 + 44386483761*#^24, 4]]
+    b = ArcTan[Root[41923215360 + 4306767872*# - 46662396160*#^2 - 468037857280*#^3 + 198717055552*#^4 + 283344543904*#^5 - 1476067527992*#^6 + 6318928617352*#^7 - 9999610663543*#^8 + 15522517220452*#^9 - 19783365991512*#^10 + 19705823032056*#^11 - 20341986980964*#^12 + 15839718502628*#^13 - 12914759499944*#^14 + 8439000746320*#^15 - 4906904164400*#^16 + 2770020940520*#^17 - 687948765628*#^18 + 429094381344*#^19 + 100369591408*#^20 + 4897699616*#^21 - 69743872*#^22 - 3244800*#^23 + 299520*#^24, 5]]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s   "26.62132034355964257320253308631454711785">
+    <!ENTITY a   "45.00000000000000000000000000000000000000">
+    <!ENTITY b   "45.00000000000000000000000000000000000000">
+    <!ENTITY r1  ".5606601717798212866012665431572735589273">
+    <!ENTITY v2  ".0000000000000000000000000000000000000000">
+    <!ENTITY y3  "23.91421356237309504880168872420969807857">
+    <!ENTITY v4  ".0606601717798212866012665431572735589272">
+    <!ENTITY x5  "23.75483399593904156165403917471033851423">
+    <!ENTITY y6  "2.573593128807148535949338273709057642910">
+    <!ENTITY r7  ".5944084089784564507636924294914913107521">
+    <!ENTITY tr0 "translate(1)">
+    <!ENTITY tr1 "translate(1 -&v2;)">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"  />
+        <path d="M0,0 V1 H1 V0"        id="edge" />
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M23,0 V 1 H22 V2 H21 V3 H20 V4 H19 V5 H18 V6 H17 V7 H16 V8 H15 V9 H14 V10 H13 V11 H12 V12 H11 V13 H10 V14 H9 V15 H8 V16 H7 V17 H6 V18 H5 V19 H4 V20 H3 V21 H2 V22 H1 V23 H0 V0"/>
+        <path style=  "fill:none" d="M23,0 V 1 H0
+                                     M22,0 V 2 H0
+                                     M21,0 V 3 H0
+                                     M20,0 V 4 H0
+                                     M19,0 V 5 H0
+                                     M18,0 V 6 H0
+                                     M17,0 V 7 H0
+                                     M16,0 V 8 H0
+                                     M15,0 V 9 H0
+                                     M14,0 V10 H0
+                                     M13,0 V11 H0
+                                     M12,0 V12 H0
+                                     M11,0 V13 H0
+                                     M10,0 V14 H0
+                                     M 9,0 V15 H0
+                                     M 8,0 V16 H0
+                                     M 7,0 V17 H0
+                                     M 6,0 V18 H0
+                                     M 5,0 V19 H0
+                                     M 4,0 V20 H0
+                                     M 3,0 V21 H0
+                                     M 2,0 V22 H0
+                                     M 1,0 V23 H0"/>
+    </g>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H1 V2 H0
+                                     M1,0 V1 H0"/>
+    </g>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M24,0 V 1 H23 V2 H22 V3 H21 V4 H20 V5 H19 V6 H18 V7 H17 V8 H16 V9 H15 V10 H14 V11 H13 V12 H12 V13 H11 V14 H10 V15 H9 V16 H8 V17 H7 V18 H6 V19 H5 V20 H4 V21 H3 V22 H2 V23 H1 V24 H0 V0"/>
+        <path style=  "fill:none" d="M24,0 V 1 H0
+                                     M23,0 V 2 H0
+                                     M22,0 V 3 H0
+                                     M21,0 V 4 H0
+                                     M20,0 V 5 H0
+                                     M19,0 V 6 H0
+                                     M18,0 V 7 H0
+                                     M17,0 V 8 H0
+                                     M16,0 V 9 H0
+                                     M15,0 V10 H0
+                                     M14,0 V11 H0
+                                     M13,0 V12 H0
+                                     M12,0 V13 H0
+                                     M11,0 V14 H0
+                                     M10,0 V15 H0
+                                     M 9,0 V16 H0
+                                     M 8,0 V17 H0
+                                     M 7,0 V18 H0
+                                     M 6,0 V19 H0
+                                     M 5,0 V20 H0
+                                     M 4,0 V21 H0
+                                     M 3,0 V22 H0
+                                     M 2,0 V23 H0
+                                     M 1,0 V24 H0"/>
+    </g>
+    <g transform="translate(&s;) scale(-1 1)">
+        <path style="stroke:none" d="M1,0 V1 H0 V0"/>
+        <path style=  "fill:none" d="M1,0 V1 H0"/>
+    </g>
+    <g transform="translate(2 &s;) translate(0 -1) rotate(-&a;) translate(0 -&r1;)">
+        <defs>
+            <g id="strip">
+                <use xlink:href="#one" transform=""/>
+                <use xlink:href="#one" transform="&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;"/>
+                <use xlink:href="#one" transform="&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;&tr1;&tr0;&tr1;&tr1;&tr1;&tr0;&tr1;"/>
+            </g>
+        </defs>
+        <use xlink:href="#one"/>
+        <use xlink:href="#strip" transform="&tr1;"/>
+        <g transform="translate(-&v2; -1)">
+            <use xlink:href="#one"/>
+            <use xlink:href="#strip" transform="&tr1;"/>
+        </g>
+    </g>
+    <g transform="translate(0 &y3;) rotate(-&a;)">
+        <use xlink:href="#one"/>
+        <use xlink:href="#strip" transform="translate(1 &v4;)"/>
+    </g>
+    <use xlink:href="#edge" transform="translate(&x5;)"/>
+    <use xlink:href="#edge" transform="translate(&s; &y6;) rotate(90) scale(-1 1)"/>
+    <use xlink:href="#one"  transform="translate(&s; 1) translate(-1) rotate(&b;) translate(-&r7;)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Joe DeVincentis in April 2014.
+    Exact polynomial root solution by David Ellsworth on June 5, 2023.
+
+    RootReduce[Solve[{RotationTransform[-a][{s - 1, s - 6} - {5, 2}][[1]] == 3,
+                      (s - 3) - ({s - 2, 1} + RotationTransform[a][{3 - r1 - 3*u3, 5 + 2*v2}])[[2]] == 0},
+                     {s, a}][[2]]]
+    s = Root[86229 - 45876*# + 8848*#^2 - 742*#^3 + 23*#^4, 2]
+    a = ArcTan[Root[-9 + 24*# - 8*#^2 + 6*#^3 + #^4, 2]]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "8.88166675700900462482351214891">
+    <!ENTITY a  "22.4424851362270649154270091085">
+    <!ENTITY r1 ".814892150230229653036682449656"> <!-- (s-8)*Cos[a]                                                         -->
+    <!ENTITY v2 ".025690247611233479437778222558"> <!-- ((s-4)*Sec[a]+Sin[a]*(s-5-3*Tan[a])-3*Tan[a]-5)/2                    --> <!-- (({s - 2, 1} + RotationTransform[a][{3 - r1, 0}])[[1]] - s)/Sin[a]/2 -->
+    <!ENTITY u3 ".542507386178685806304009136960"> <!-- Cos[a]-Sin[a]                                                        -->
+    <!ENTITY v4 ".172695669523327042984984120885"> <!-- (3-(1-(s-8)*Cos[a]*Sin[a]+3*(Cos[a]-Sin[a]*(Cos[a]-Sin[a]))))/Cos[a] --> <!-- (3 - ({s - 2, 1} + RotationTransform[a][{-r1 - 3*u3, 3}])[[2]])/Cos[a] -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+        <g id="two">
+            <rect width="2" height="1"/>
+            <path style="fill:none" d="M1,0 V1"/>
+        </g>
+        <g id="three">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(1 &v2;)"/>
+            <use xlink:href="#one" transform="translate(1 &v2;) translate(1 &v2;)"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M6,0 V1 H5 V2 H4 V3 H3 V4 H2 V5 H1 V6 H0 V0"/>
+        <path style=  "fill:none" d="M6,0 V1 H0
+                                     M5,0 V2 H0
+                                     M4,0 V3 H0
+                                     M3,0 V4 H0
+                                     M2,0 V5 H0
+                                     M1,0 V6 H0"/>
+        <g transform="translate(&s;) scale(-1 1)">
+            <rect style="stroke:none" width="2" height="1"/>
+            <path style=  "fill:none" d="M2,0 V1 H0
+                                         M1,0 V1"/>
+        </g>
+        <g transform="translate(&s; 1) translate(-2) rotate(&a;) translate(-&r1;)">
+            <use xlink:href="#three"/>
+            <use xlink:href="#three" transform="                                  translate(-&u3; 1)"/>
+            <use xlink:href="#three" transform="                 translate(-&u3;) translate(-&u3; 2)"/>
+            <use xlink:href="#two"   transform="translate(-&u3;) translate(-&u3;) translate(-&u3; 3) translate(1 &v2;) translate(0  &v2;)"/>
+            <use xlink:href="#one"   transform="translate(-&u3;) translate(-&u3;) translate(-&u3; 3) translate(0 &v4;)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1 -1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

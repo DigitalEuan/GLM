@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Originally found by Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html
+        Extended from the s(88) found by Erich Friedman in 1997, by generalizing the s(41) technique found by Charles F. Cottingham in 1979.
+    Improved by David Ellsworth   on November 25, 2024, by adapting the s(102) improvement by David W. Cantrell in November 2024, as was applied to the s(102) found by Károly Hajba in September 2024.
+    Improved by David W. Cantrell on November 26, 2024, by taking advantage of the smaller staircase having an odd number of steps (9) and the strip also having an even number of rows (14).
+    Improved by David Ellsworth   on November 28, 2024, by adapting and extending the full technique used in the s(37) found by David W. Cantrell in September 2002.
+
+    RootReduce[Solve[{s*Sqrt[2] == 4*(Sin[a] + Cos[a]) (* stagger-tilted dominoes *)
+                                   - 2*v4              (* space saved by straight 45° dominoes at both corners being "virtual", i.e. replaced with stagger-tilted dominoes *)
+                                   + 10                (* straight 45° dominoes *)
+                                   + (1 + 1)*Sqrt[2]   (* unrotated corners *),
+                      RotationTransform[Pi/4 - a][{s - 9, s - 2} - {2, 8}][[2]] == 2,
+                      v4 == RotationTransform[-Pi/4 - a][({1, s - 1} + RotationTransform[Pi/4 + a][{r0 - 2, -2 + v1 + w6}]) - ({1 + (s - 11)/2, s - 1 + (s - 11)/2} + RotationTransform[Pi/4][{-2 + u4, -2 - v3}] + RotationTransform[Pi/4 + a][{0, 1 + w6}])][[2]]/Cos[a]},
+                     {s, a, v4}][[1]]]
+    s = Root[1701575795025 - 1189915431840*#1 + 363767813964*#1^2 - 63487737120*#1^3 + 6917560482*#1^4 - 481754784*#1^5 + 20936788*#1^6 - 519008*#1^7 + 5617*#1^8, 1]
+    a = ArcTan[Root[289 - 47464*#1 + 13324*#1^2 - 121976*#1^3 + 29174*#1^4 - 106520*#1^5 + 21868*#1^6 - 31624*#1^7 + 5617*#1^8, 1]]
+    v4 = Root[-10905808327 + 2801873209376*#1 + 446445637288*#1^2 - 263577074048*#1^3 + 12313957384*#1^4 - 1650682240*#1^5 + 890280800*#1^6 - 79782400*#1^7 + 2246800*#1^8, 2]
+
+    s = Root[FactorList[s[[1, 1]], Extension -> Sqrt[2]][[3, 1]], 1]
+    s = Root[100926915 + 17726970*Sqrt[2] - (34773984 + 4731588*Sqrt[2])*# + (4502202 + 422478*Sqrt[2])*#^2 - (259504 + 12612*Sqrt[2])*#^3 + 5617*#^4, 1]
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "11.911190520158988130866151318786277">
+    <!ENTITY a  ".34942452882384510349583899981380099">
+    <!ENTITY v4 ".00388992207519358194705476885774703">
+    <!ENTITY r0 ".64036764992354233388092982367650447"> <!-- (s - 11)*Cos[Pi/4 + a] -->
+    <!ENTITY v1 ".00609868412489878204645175142343195"> <!-- Tan[a] -->
+    <!ENTITY u2 ".00427522729881639314485982618824503"> <!-- 2 - RotationTransform[-Pi/4][{s - 10, s - 1} - {1, 9}][[1]] -->
+    <!ENTITY v3 "1.0060799742557196713909009668274207"> <!-- Sin[a] + Cos[a] -->
+    <!ENTITY u4 ".00571793636293215900698083473923328"> <!-- u2 - (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{2, 8} - ({1 + (s - 11)/2, s - 1 + (s - 11)/2} + RotationTransform[Pi/4][{-2 + u2, -2 - v3 + v4}])]) -->
+    <!ENTITY u5 ".00535867591186319353486644243370560"> <!--      (u[[1]] - u[[2]]*Tan[a] /. u -> RotationTransform[-Pi/4][{3, 7} - ({1 + (s - 11)/2, s - 1 + (s - 11)/2} + RotationTransform[Pi/4][{-2     , -3 - v3 + v4}])]) -->
+    <!ENTITY v6 ".00427522729881639314485982618824503"> <!-- 2 - (s - 11/2 - 5)*Sqrt[2] -->
+    <!ENTITY w6 ".00427530680436815705085855708168409"> <!-- v6/Cos[a] -->
+    <!-- u4-u5 above follow this rule: inside the "RotationTransform[Pi/4]", subtract 1 from the already negative "vertical" translation, leaving it otherwise identical to that used by the domino being
+         corrected (notably, keep the exact number of "-v3" translations intact); CW is the "u2" variant, and CCW is the non-"u2" variant; at the beginning of the inside of the "RotationTransform[-Pi/4]",
+         put the coordinates of the corner the domino is touching on its upper-left side. -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+        <g id="corner">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <path style="stroke:none" d="M0,0 H9 V1 H8 V2 H7 V3 H6 V4 H5 V5 H4 V6 H3 V7 H2 V8 H1 V9 H0"/>
+    <path style=  "fill:none" d="M0,1 H9 V0
+                                 M0,2 H8 V0
+                                 M0,3 H7 V0
+                                 M0,4 H6 V0
+                                 M0,5 H5 V0
+                                 M0,6 H4 V0
+                                 M0,7 H3 V0
+                                 M0,8 H2 V0
+                                 M0,9 H1 V0"/>
+    <g transform="translate(&s; &s;) scale(-1 -1)">
+        <path style="stroke:none" d="M0,0 H10 V1 H9 V2 H8 V3 H7 V4 H6 V5 H5 V6 H4 V7 H3 V8 H2 V9 H1 V10 H0"/>
+        <path style=  "fill:none" d="M10,0 V 1 H0
+                                     M 9,0 V 2 H0
+                                     M 8,0 V 3 H0
+                                     M 7,0 V 4 H0
+                                     M 6,0 V 5 H0
+                                     M 5,0 V 6 H0
+                                     M 4,0 V 7 H0
+                                     M 3,0 V 8 H0
+                                     M 2,0 V 9 H0
+                                     M 1,0 V10 H0"/>
+    </g>
+    <use xlink:href="#corner" transform="translate(&s; 0) scale(-1  1)"/>
+    <use xlink:href="#corner" transform="translate(0 &s;) scale( 1 -1)"/>
+    <defs>
+        <g id="straight">
+            <use xlink:href="#one" transform="translate(0  &v6;)"/>
+            <use xlink:href="#one" transform="translate(1      )"/>
+        </g>
+        <g id="turn_CCW">
+            <use xlink:href="#one" transform="translate(0  &w6;)"/>
+            <use xlink:href="#one" transform="translate(1  &v1;)"/>
+        </g>
+        <g id="turn_CW">
+            <use xlink:href="#one" transform="translate(0  &w6;)"/>
+            <use xlink:href="#one" transform="translate(1 -&v1;)"/>
+        </g>
+    </defs>
+    <g id="side1">
+        <g transform="translate(1 &s;) translate(0 -1) rotate(45) rotate(&a;) translate(&r0;) translate(-2 -1) translate(0 &v1;)">
+            <use xlink:href="#turn_CW"/>
+            <use xlink:href="#turn_CW" transform="translate(0 -1)"/>
+        </g>
+        <g transform="scale(.5 1) translate(&s; &s;) translate(-9 -1) scale(2 .5) translate(0 &s;) translate(0 -11) scale(1 2) rotate(45) translate(-2 -1) translate(0 &v4;)">
+<!--
+            <use xlink:href="#straight"/>
+            <use xlink:href="#straight" transform="translate(&u2;) translate(0 -1   )"/>
+-->
+            <use xlink:href="#turn_CW"  transform="translate(&u4;) translate(0 -1   ) translate(0 -&v3;) rotate(&a;)"/>
+
+            <use xlink:href="#straight" transform="                translate(0 -2   ) translate(0 -&v3;)"/>
+            <use xlink:href="#turn_CCW" transform="translate(&u5;) translate(0 -2   ) translate(0 -&v3;) rotate(-&a;) translate(0 -1)"/>
+            <use xlink:href="#straight" transform="translate(&u2;) translate(0 -3   ) translate(0 -&v3;) translate(0 -&v3;)"/>
+            <use xlink:href="#straight" transform="                translate(0 -4   ) translate(0 -&v3;) translate(0 -&v3;)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="rotate(90) scale(1 -1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>
