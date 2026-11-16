@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 188 is closed: the iteration lane — the machine's 8 CPUs (not the 2 the working notes said), the evaluation's own default worker count (8 cases 64.4 s → 8.9 s, the whole set 237 of 237 in 248 s), the round's cheap lane and the close in one order with the answer censuses last, and the surface's second refusal hint; 4 of 4 marks. Phase 186 is closed except the owner's Lean build: the intake items that measurably help, absorbed ahead of that build by the owner's decision on their measurements and a standalone Lean check — the Rule 30 study's hypothesis engine (`tool rule30`, `tool conjecture`, the plan search behind `tool arc`: 9 of the 50 stored ARC tasks right where 2 were, a development set), the formula wheels behind `tool derive` (63 of 64 laws, 0 of 51 not-a-laws) and the sequence wheel's next-term reading (27 right, 0 wrong of 45); thirty questions across five domains 23 right, 0 wrong, where 4 were right without them; 12 of 14 marks. Phase 185 is closed: the repository check after the October 2026 reorganisation. Every command starts from the repository root; the directives are 22, with D21 making `glm_universal.constants` the single source of constants and D22 the intake of new material through `source_material/ToDo/` and `done/`; the modules the reorganisation lost were rebuilt from their studies, their tests and this plan, each marked *Reconstructed 31 October 2026*, and their measurements taken again; thirteen lost Lean files are recorded in `studies/_lean_files_needed.md` and the six files that import one held out of the build; four lookup kinds in the parser; the integer and Monster provision wheels and fifteen formula wheels of `cent_compiler_v12` tested, given Lean files and measured, and installed in the wheels folder provisionally by the owner's decision, every answer from them marked, until the owner's Lean build record verifies those files. No Lean toolchain was available to the session: `scripts/rebuild_lean.sh` is the owner's step, and the intake grants *Lean verified* only against the build record it writes. Phase 184 is closed: the declared majority rule for conflicting evidence. `LorentzianMajority.lean` proves that the target a strict majority of the weight states is unique, that the rule is never wrong while the honest examples hold at least half the weight and right above half, that agreeing decoys below half carry it (the condition is tight), and that a wrong answer needs decoys weighing at least the answer's own group; `tool majority` answers 155 and 161 right, 0 wrong, on the decoy conditions the guard refuses, and refuses where a plurality vote is wrong 150 times; 8 of 8 marks. Before it Phase 183: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 187 is taken: the platform round's *use* phase, worked on the chat surface — one echo per query, `:kinds` from the parser's own table, and a refusal that says why, 4 of 4 marks; *carriers the evaluation's questions name* is left. Phase 188 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
+**Verdict.** Phase 189 is closed: the two received Lean deliveries censused — six of 87 files already held, 0 of 163 item-local imports resolving, both left at triaged with the port owed to the owner's build. Phase 188 is closed: the iteration lane — the machine's 8 CPUs (not the 2 the working notes said), the evaluation's own default worker count (8 cases 64.4 s → 8.9 s, the whole set 237 of 237 in 248 s), the round's cheap lane and the close in one order with the answer censuses last, and the surface's second refusal hint; 4 of 4 marks. Phase 186 is closed except the owner's Lean build: the intake items that measurably help, absorbed ahead of that build by the owner's decision on their measurements and a standalone Lean check — the Rule 30 study's hypothesis engine (`tool rule30`, `tool conjecture`, the plan search behind `tool arc`: 9 of the 50 stored ARC tasks right where 2 were, a development set), the formula wheels behind `tool derive` (63 of 64 laws, 0 of 51 not-a-laws) and the sequence wheel's next-term reading (27 right, 0 wrong of 45); thirty questions across five domains 23 right, 0 wrong, where 4 were right without them; 12 of 14 marks. Phase 185 is closed: the repository check after the October 2026 reorganisation. Every command starts from the repository root; the directives are 22, with D21 making `glm_universal.constants` the single source of constants and D22 the intake of new material through `source_material/ToDo/` and `done/`; the modules the reorganisation lost were rebuilt from their studies, their tests and this plan, each marked *Reconstructed 31 October 2026*, and their measurements taken again; thirteen lost Lean files are recorded in `studies/_lean_files_needed.md` and the six files that import one held out of the build; four lookup kinds in the parser; the integer and Monster provision wheels and fifteen formula wheels of `cent_compiler_v12` tested, given Lean files and measured, and installed in the wheels folder provisionally by the owner's decision, every answer from them marked, until the owner's Lean build record verifies those files. No Lean toolchain was available to the session: `scripts/rebuild_lean.sh` is the owner's step, and the intake grants *Lean verified* only against the build record it writes. Phase 184 is closed: the declared majority rule for conflicting evidence. `LorentzianMajority.lean` proves that the target a strict majority of the weight states is unique, that the rule is never wrong while the honest examples hold at least half the weight and right above half, that agreeing decoys below half carry it (the condition is tight), and that a wrong answer needs decoys weighing at least the answer's own group; `tool majority` answers 155 and 161 right, 0 wrong, on the decoy conditions the guard refuses, and refuses where a plurality vote is wrong 150 times; 8 of 8 marks. Before it Phase 183: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 187 is taken: the platform round's *use* phase, worked on the chat surface — one echo per query, `:kinds` from the parser's own table, and a refusal that says why, 4 of 4 marks; *carriers the evaluation's questions name* is left. Phase 188 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->31 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->263 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->264 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -181,6 +181,69 @@ written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
 
 ---
+
+## Phase 189 — the two received Lean deliveries: what the tree already holds, and what absorbing them would take
+
+*Taken 15 November 2026 (platform round, P4 intake), on the two items filed on
+13 November at `received` with no kind, offers or next step. The measurement is
+[`studies/LEAN_DELIVERIES_CENSUS_STUDY.md`](studies/LEAN_DELIVERIES_CENSUS_STUDY.md)
+and the instrument is [`studies/scripts/lean_to_add_census.py`](studies/scripts/lean_to_add_census.py).*
+
+Phase 189 is closed: the two received Lean deliveries censused — six of 87 files
+already held, 0 of 163 item-local imports resolving, both left at triaged with
+the port owed to the owner's build.
+
+**What was asked.** `lean_to_add` (79 supplied files) and `leechlean` (a Python
+package with six Lean files) were moved out of `src/lean` on 13 November and
+registered, with the owner's rule attached to the first of them: it is absorbed
+only if the main Lean folder does not already hold it. File names cannot answer
+that, because the 12 November upload placed byte-identical files beside their
+own copies and different files under the same names.
+
+**What was measured**, by the census script, which parses with
+`glm_universal.lean_check.parse_file` so that it and the tree checker cannot
+disagree about what a file declares:
+
+* 6 of the 87 supplied files are byte-identical to a tree file: `mog_cube_1`'s
+  `Main.lean`, four of `leechlean`'s study files (the tree's own
+  `GLM/IntakeChecks/` copies), and `leechlean`'s demo sample (the tree's
+  `GLM/Golay/Code.lean`);
+* 8 supplied files are byte-identical to each other: `leech_lattice`'s nine
+  files are `aristotle_01`'s twelve minus four, and the eight shared ones match
+  byte for byte;
+* 0 of the 163 item-local imports resolves against the tree's module names,
+  because the five `lean_to_add` developments are rooted at flat
+  `RequestProject.*`, `FirstPrinciples.*` and `Projection.*` while every tree
+  module lives under `RequestProject.GLM.*`;
+* 28 supplied files share a name with a *different* tree file, and five of them
+  name modules the tree already holds (`GLM/Distinction`, `FitCapacity`,
+  `Packing`, `Triad`, `Layers`), so a port must read the pair before it moves
+  anything;
+* the tree already carries flat copies of two `mog_cube_1` files
+  (`GLM/CubeStabiliser.lean`, `GLM/CubeSurface.lean`) beside their re-homed
+  versions, which is where `lean_check`'s duplicate-declaration warnings come
+  from: a copy-in has been tried once already;
+* `leechlean`'s `LeechLeanCodec.lean` imports
+  `RequestProject.GLM.IntakeChecks.LechLeanGolay`, a misspelled module that
+  exists nowhere, so that file cannot build as supplied;
+* every one of the 87 files parses, none contains `sorry` or a hand-written
+  `axiom`, and none is empty;
+* `leechlean`'s codec demo runs on this workspace with numpy alone and
+  reproduces its README (1,686 of 1,686 ticks on the lattice, byte-exact round
+  trip `True`).
+
+Nothing was moved into `src/lean`, nothing supplied was edited, and no answer
+the GLM gives changed. Both items advanced `received -> triaged` with their kind,
+offers and next step written (`intake check`: 0 errors, 7 notes).
+
+**What was owed, and is still owed.** None of the thirteen missing Lean files is
+in either delivery — searched by name across both items and both demo copies —
+so `studies/_lean_files_needed.md` stays at 13 missing and 6 held, and the
+navigator's order is unchanged: `LeechShells.lean` first (two held files wait on
+it alone), then `LorentzPlane.lean` (`LorentzImproper`, `LorentzUnits`), then
+`AdversarialDialogue.lean` (`ResumedDialogue`, `StackedDialogue`). The port of
+the two deliveries needs `lake build` for every step, so it waits on the same
+toolchain as P2, and `scripts/rebuild_lean.sh` is the script that decides it.
 
 ## Phase 188 — the iteration lane: the machine's CPUs, the cheap lane, and the close in one order
 

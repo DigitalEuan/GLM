@@ -45,7 +45,7 @@ a `*_report` function rather than quoted.
 | 6 | `benchmarks/` — 5 suites, 2,390 scored tasks, published baselines and findings | 67 | ✓ complete |
 | 7 | `capabilities/` — 33 capability probes: what the machine can do, and the exact place each thing it cannot do stops | 56 | ✓ complete |
 | 8 | `evaluation/` — **<!--figure:evaluation-case-count-->237<!--/figure-->** end-to-end CLI cases over all <!--figure:query-kinds-->31 query kinds<!--/figure--> and every report subject, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
-| 9 | `signoff/` — the sign-off ledger over <!--figure:test-files-->263 test files<!--/figure--> and 7 instruments, split into the **rule** (`rules.py`: what a closure is, what a digest covers, how a unit is run — in every closure) and the **record** (`ledger.py`: the plan, the signatures, the runner, the reporting — in none but the units that import it), with `--why` naming the kind of file that moved and `--impact` pricing an edit before it is made, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 144 | ✓ complete |
+| 9 | `signoff/` — the sign-off ledger over <!--figure:test-files-->264 test files<!--/figure--> and 7 instruments, split into the **rule** (`rules.py`: what a closure is, what a digest covers, how a unit is run — in every closure) and the **record** (`ledger.py`: the plan, the signatures, the runner, the reporting — in none but the units that import it), with `--why` naming the kind of file that moved and `--impact` pricing an edit before it is made, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 144 | ✓ complete |
 | 10 | `corpus/` — the documents held the way the substrate holds data: an inventory that classifies every document by rule, the generated `DIGEST.md`, the in-document generated blocks and the inline figures that emit a number inside a sentence, a Leech address for every section of the corpus with a certified-absence shortlist, the measurement cache the address study's tables are emitted from, the cost of one rebuild in exact counts (`cost.py`), the ordered `--refresh` that rebuilds all of it, the checks that fail when any of it drifts, and the record (`gate.py`) that lets a check whose inputs have not moved answer from its last passing verdict | 55 | ✓ complete |
 | — | `examples/` — TCT demo, reasoning showcase, encoding POC, integrated NRCI, scaled carriers, semantic replacement | — | ✓ working |
 
@@ -213,7 +213,7 @@ glm_universal/
 │   ├── cases.py               the <!--figure:evaluation-cases-->237 CLI cases<!--/figure-->, every query kind and report subject
 │   ├── harness.py             run_case, run_all, evaluation_report, the scoring
 │   └── __main__.py            CLI, with --only, --case, --jobs, --json, --list
-├── tests/                     ← <!--figure:test-files-->263 test files<!--/figure-->
+├── tests/                     ← <!--figure:test-files-->264 test files<!--/figure-->
 └── examples/                  ← demonstrations
     ├── demo_tct.py            Three Column Thinking demo (7 queries)
     ├── reasoning_showcase.py  29 probes, refusals included; writes the transcript

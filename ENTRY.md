@@ -18,6 +18,8 @@
 
 *Last altered 1 November 2026 (repository check: the two owner-run scripts listed in the order to run them, the Lean build first).*
 
+*Last altered 15 November 2026 (Phase 189: the census of the two received Lean deliveries, `LEAN_DELIVERIES_CENSUS_STUDY.md`, added to the studies below).*
+
 *Last altered 13 November 2026 (platform round: `glm_universal.corpus.navigate`, the instrument to run before a round starts, added to *Finding the part that bears on a question*).*
 
 ## Picking the work up, in one screen
@@ -284,6 +286,7 @@ first and descend into the few that bear on the task.
 [`GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](studies/GLM_UNIFICATION_BLUEPRINT_AUDIT.md) ·
 [`GLM_COMPANION_STUDIES_AUDIT.md`](studies/GLM_COMPANION_STUDIES_AUDIT.md) ·
 [`RETRIEVED_LEAN_STUDY.md`](studies/RETRIEVED_LEAN_STUDY.md) ·
+[`LEAN_DELIVERIES_CENSUS_STUDY.md`](studies/LEAN_DELIVERIES_CENSUS_STUDY.md) ·
 [`SOURCE_SALVAGE_AUDIT.md`](studies/SOURCE_SALVAGE_AUDIT.md) ·
 [`SOURCE_SALVAGE_SECOND_PASS.md`](studies/SOURCE_SALVAGE_SECOND_PASS.md) ·
 [`ARCHIVE_DEEP_DIVE_STUDY.md`](studies/ARCHIVE_DEEP_DIVE_STUDY.md) ·

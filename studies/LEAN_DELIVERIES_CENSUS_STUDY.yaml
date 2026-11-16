@@ -1,0 +1,99 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Derived from the paired .md and the tree by
+# `python3 -m glm_universal.corpus.study_manifest --sync`; the .md is the
+# prose, this YAML is the face the GLM reads.  Judgement fields (controls,
+# layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
+# are kept as written; a derived field listed in hand_fields is kept too.
+# Last altered 15 November 2026 (study_manifest --sync).
+
+controls: []
+deciding_figure: 0 of 163 item-local imports resolve as written; 6 of 87 files byte-identical to the tree;
+  8 supplied files byte-identical to each other; 0 `sorry` in all 87.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - corpus/lean_deliveries.py
+  - lean_check.py
+  lean:
+  - AxiomAuditAll
+  - Cube/Stabiliser
+  - Cube/Surface
+  - CubeStabiliser
+  - CubeSurface
+  - Golay/Code
+  - IntakeChecks/Derivability
+  - IntakeChecks/NextTerm
+  - IntakeChecks/RuleThirtyBits
+  - IntakeChecks/SporadicOrderCheck
+  - Shortcut/Shortcut
+  lean_held: []
+  lean_missing:
+  - AdversarialDialogue
+  - LeechShells
+  - LorentzPlane
+  missing: []
+  prose: LEAN_DELIVERIES_CENSUS_STUDY.md
+  test:
+  - test_lean_deliveries.py
+  wheel: []
+follow_ups: []
+hand_fields: []
+id: LEAN_DELIVERIES_CENSUS_STUDY
+junctions: []
+last_altered: 15 November 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Of the two Lean deliveries registered on 13 November 2026 (`lean_to_add`, `leechlean`), which
+  part does the build tree already hold, which part is new, and what would absorbing the rest take on
+  a workspace with no Lean toolchain?
+recomputed_by: '`glm_universal.corpus.lean_deliveries.census_report`'
+related: []
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-census
+  heading: 1. The census
+- anchor: 2-what-the-tree-already-holds
+  heading: 2. What the tree already holds
+- anchor: 3-what-is-not-held-and-why-it-cannot-be-copied-in
+  heading: 3. What is not held, and why it cannot be copied in
+- anchor: 4-leechleans-python-half-does-run-here
+  heading: 4. `leechlean`'s Python half does run here
+- anchor: 5-what-is-owed-in-the-order-it-can-be-paid
+  heading: 5. What is owed, in the order it can be paid
+- anchor: 6-not-claimed
+  heading: 6. Not claimed
+- anchor: 7-how-to-take-the-measurement-again
+  heading: 7. How to take the measurement again
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The two received Lean deliveries: what the tree already holds, and what absorbing them would take'
+verdict: 'Six of the 87 supplied files are byte-identical to files the tree already has, and none of the
+  rest can be copied in: 0 of the delivery''s 163 item-local imports resolves in the tree, because the
+  five `lean_to_add` developments are rooted at flat `RequestProject.*`, `FirstPrinciples.*` and `Projection.*`
+  while every tree module lives under `RequestProject.GLM.*`. Absorbing them is a re-rooting port whose
+  only check is `lake build`, so both items stay at *triaged* here and the port is owed to the owner''s
+  machine, with the thirteen missing Lean files still missing: neither delivery contains one of them.'
+wobble_deps: []

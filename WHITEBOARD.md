@@ -20,6 +20,8 @@ and the chat surface's study reports 4 of 4 marks.
 and the figure above are grounded in the body below, and
 `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
+*Last altered 15 November 2026 (Phase 189: the two received Lean deliveries censused and triaged — `lean_to_add` and `leechlean` are at *triaged*, 0 of 163 item-local imports resolving, the port and the build owed to the owner's machine).*
+
 *Last altered 15 November 2026 (the Squares in Squares probe: filed and measured — 22.218057 working against 22.642387 documented, the public merge and the tighter clearance both null; and `--jobs 8` in the hazards line, which still said 2).*
 
 *Last altered 14 November 2026 (Phase 188: the iteration lane — the machine's
@@ -107,6 +109,22 @@ strongest public file and a re-opening of the 2e-9 contact clearance were both
 measured null (22.218056852 and a 1.8e-8 move), so what is left to the leader
 (22.0544) is 0.1637 of packings, not of precision. It is not a GLM claim and
 touches no answer; the item's record carries the numbers.
+
+* **P4, the Lean intake triage (15 November 2026; Phase 189,
+  [`studies/LEAN_DELIVERIES_CENSUS_STUDY.md`](studies/LEAN_DELIVERIES_CENSUS_STUDY.md)).**
+  The two items filed on 13 November at `received` are now *triaged*, on a
+  measured census: `lean_to_add` (79 supplied files, 1,999 declarations) and
+  `leechlean` (8 files of Lean beside a Python package). 6 of the 87 supplied
+  files are byte-identical to tree files, 8 are byte-identical to each other,
+  and 0 of the 163 item-local imports resolves — the deliveries are rooted at
+  flat `RequestProject.*`/`FirstPrinciples.*`/`Projection.*` while the tree's
+  modules are all `RequestProject.GLM.*`.  So absorption is a re-rooting port
+  and its only check is `lake build`: no file was moved into `src/lean`.
+  `intake check` 0 errors; `leechlean`'s codec demo runs here (1,686 of 1,686
+  ticks on the lattice, byte-exact round trip `True`); `LeechLeanCodec.lean`
+  imports the misspelled `LechLeanGolay` and cannot build as supplied.
+  **Owed:** the port (per item `next_step`), and none of the thirteen missing
+  Lean files is in either delivery.
 
 **Two gates remain open**, each naming its own remainder under its section
 below.

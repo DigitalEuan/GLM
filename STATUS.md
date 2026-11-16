@@ -19,6 +19,10 @@
 
 *Last altered 1 November 2026 (Phase 186: the intake items absorbed ahead of the owner's Lean build by the owner's decision -- "Just closed", §2.1 item 0's remainder and §2.3's `confirm-build` steps).*
 
+*Last altered 15 November 2026 (Phase 189: the two received Lean deliveries censused and triaged — six of 87 files
+already held, 0 of 163 item-local imports resolving, both left at *triaged* with the port owed to the Lean build;
+§2.1 P4 records what it measured and what the owner's machine still has to decide).*
+
 *Last altered 15 November 2026 (the Squares in Squares probe: the owner's other project filed as an intake item and measured — 22.218057 working against 22.642387 documented, a public merge and a tighter clearance both null, 0.1637 to the leader).*
 
 *Last altered 14 November 2026 (Phase 188: §2.1 item 0a's P3 measured and corrected — the 8-CPU machine, the evaluation's own default worker count, the cheap lane and the close order, the empty sign-off ledger, the units that already fail; and P5's second refusal hint).*
@@ -319,7 +323,7 @@ to end and repaired. What that left:
   `src/glm_universal/tests/README.md`, with no row marked lost; with the
   provisional wheels' three test files and the migration script's test, the suite had
   255 files at the repository check, and Phase 186 added five:
-  <!--figure:test-files-->263 test files<!--/figure-->.
+  <!--figure:test-files-->264 test files<!--/figure-->.
 * **The owner-run checks.** `scripts/rebuild_lean.sh` (the Lean build and
   axiom audit) and `scripts/check_repository.sh` (tests under pytest,
   evaluation, corpus check, Lean tree check), each writing its log to
@@ -519,6 +523,21 @@ held-out set (§2.2). **P3, the workflow,** was measured on the way: a venv
 and pytest under `~/glm/venv`, the knowledge cache warmed once (167 MB,
 git-ignored), `--jobs 8` (the machine's own count — see P3 below), and every
 log outside the tree.
+
+*What P4 has done so far (15 November 2026).* The two Lean deliveries filed on 13 November
+— `lean_to_add` (79 supplied files in five developments) and `leechlean` (a Python package with six
+Lean files) — were `received` with no kind, offers or next step. They are now *triaged*, on a
+measured census ([`studies/LEAN_DELIVERIES_CENSUS_STUDY.md`](studies/LEAN_DELIVERIES_CENSUS_STUDY.md),
+instrument `studies/scripts/lean_to_add_census.py`): 6 of the 87 supplied files are byte-identical
+to tree files, 8 are byte-identical to each other (`leech_lattice` is `aristotle_01`'s subset), and
+**0 of the 163 item-local imports resolves** — the deliveries are rooted at flat `RequestProject.*`,
+`FirstPrinciples.*` and `Projection.*` while every tree module lives under `RequestProject.GLM.*`.
+Absorbing either is therefore a re-rooting port whose only check is `lake build`, so neither moves
+past *triaged* here; the port order is in the item's `next_step`. None of the thirteen missing Lean
+files is in either delivery, so [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md)
+stays 13 missing and 6 held. `leechlean`'s codec demo does run here (1,686 of 1,686 ticks on the
+lattice, byte-exact round trip `True`), and one supplied file cannot build as supplied
+(`LeechLeanCodec.lean` imports the misspelled `LechLeanGolay`).
 
 0. **repository check and fix** this repository has been reorganised and needs
 a proper check through everything, some parts may be broken and require fixing.

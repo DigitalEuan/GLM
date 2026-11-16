@@ -7,7 +7,7 @@
 
 **Verdict.** The corpus is data: classified by rule, addressed, generated where it can be, and checked.
 
-**Deciding figure.** 9 modules, one command that reports every drift at once and one that repairs it.
+**Deciding figure.** 10 modules, one command that reports every drift at once and one that repairs it.
 
 **Recomputed by.** `glm_universal.corpus.report.corpus_report`
 
@@ -17,10 +17,12 @@
 
 *Last altered 13 November 2026 (platform round: `navigate.py`, the one command that answers what already bears on a question, added to the table).*
 
+*Last altered 15 November 2026 (Phase 189: `lean_deliveries.py` added — what a supplied Lean delivery would add to the build tree, and whether any of it can be copied in at all).*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../../README.md)
 
-**Status: implemented, current.** 7 modules, one derived data directory, no
+**Status: implemented, current.** 10 modules, one derived data directory, no
 third-party dependency, and no float anywhere: every rate is a `Fraction` and
 every distance an `int`.
 
@@ -33,7 +35,7 @@ digest. This package extends the same discipline to the prose itself, so that
 the corpus is **classified by rule, addressed, generated where it can be, and
 checked** rather than maintained by memory.
 
-The 9 modules below, one command that reports every drift at once and one that repairs it.
+The 10 modules below, one command that reports every drift at once and one that repairs it.
 
 | Module | What it holds |
 |---|---|
@@ -46,6 +48,7 @@ The 9 modules below, one command that reports every drift at once and one that r
 | `gate.py` | The verdict of the last passing check, stored beside a digest of everything that check can read, so a check whose inputs have not moved answers from the record instead of re-deriving it. |
 | `report.py` | All of it in one call, including the reading cost at each resolution. |
 | `navigate.py` | One question in, and everything that bears on it out: the studies from their manifests, the certified section shortlist, the code, tests and Lean files those studies name, and whether a study's title already claims the question. A reader: it computes nothing the corpus does not hold and writes nothing. |
+| `lean_deliveries.py` | What a supplied Lean delivery would add to the build tree, measured from the text: byte identity against every built file, name collisions that must be read before a port, how many of its declaration names the tree already holds, and whether its own module imports resolve at all. It is how "absorbed only if the main Lean folder does not already hold it" is answered with a number. |
 
 ## Running it
 
