@@ -25,6 +25,10 @@ already held, 0 of 163 item-local imports resolving, both left at *triaged* with
 
 *Last altered 15 November 2026 (the Squares in Squares probe: the owner's other project filed as an intake item and measured — 22.218057 working against 22.642387 documented, a public merge and a tighter clearance both null, 0.1637 to the leader).*
 
+*Last altered 16 November 2026 (Phase 190: 2.1 item 0's Lean debt -- `LeechShells`, `LorentzPlane` and
+`AdversarialDialogue` rebuilt as proposed files in `source_material/ToDo/lean_recovery/` and registered
+as `lean_recovery`; a third of the thirteen owed files, the rest of that item's remainder unchanged).*
+
 *Last altered 14 November 2026 (Phase 188: §2.1 item 0a's P3 measured and corrected — the 8-CPU machine, the evaluation's own default worker count, the cheap lane and the close order, the empty sign-off ledger, the units that already fail; and P5's second refusal hint).*
 
 *Last altered 14 November 2026 (Phase 187: §2.1 item 0a's P5 taken in part — the chat surface's one echo, `:kinds`, and the refusal's meaning, with *carriers* left; §1b's P3 workflow measured in this workspace).*

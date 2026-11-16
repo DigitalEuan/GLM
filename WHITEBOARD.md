@@ -134,7 +134,10 @@ below.
   `scripts/rebuild_lean.sh`, or take the owner-machine build record as the
   fallback. Every item absorbed ahead of it then clears with
   `python3 -m glm_universal.intake confirm-build <id>`; the 13 files of
-  [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md) stay owed.
+  [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md) stay owed;
+  three of them (`LeechShells`, `LorentzPlane`, `AdversarialDialogue`) now have
+  proposed rebuilds in `source_material/ToDo/lean_recovery/`, so the build has
+  something to compile before the rest is written.
 2. **P5's third line, *carriers the evaluation's questions name*.** A question
    naming a carrier no register holds (`what is the address of iron`) is
    refused; reading it is a change to an answer, and [`STATUS.md`](STATUS.md)

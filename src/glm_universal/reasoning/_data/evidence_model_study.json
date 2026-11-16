@@ -62,8 +62,8 @@
     "answer": "The Golay code is generated here from the 12x12 symmetric parity block B of the GLM substrate (``Golay/Code.lean`` / ``substrate/mog.py``), the code being the row space of [I_12 | B] over GF(2).",
     "boundary": "corpus:strong",
     "budget": {
-     "documents": 276,
-     "mentions": 657
+     "documents": 277,
+     "mentions": 658
     },
     "candidates": [],
     "evidence": [
@@ -91,8 +91,8 @@
     "answer": "The Leech lattice, the Golay code and the MOG all live in 24 coordinates.",
     "boundary": "corpus:weak",
     "budget": {
-     "documents": 289,
-     "mentions": 802
+     "documents": 290,
+     "mentions": 803
     },
     "candidates": [],
     "evidence": [
@@ -8295,9 +8295,9 @@
    "theorems_declared": [],
    "witness": [
     "context=24,12,binary,extended,lattice,leech,weight,lean,substrate,glm,mog,one",
-    "documents=276",
+    "documents=277",
     "head=source_material/ToDo/leechlean/3_leech_bridge/leechlean/leech_core.py#p0.s4",
-    "mentions=657",
+    "mentions=658",
     "pattern=copula:is",
     "ranking=source_material/ToDo/leechlean/3_leech_bridge/leechlean/leech_core.py#p0.s4 | source_material/done/Rule30_GLM_Study/scripts/r30_lorentzian_lift.py#p12.s1 | source_material/ToDo/lean_to_add/mog_cube_1/glm_clean/exp7_cube_surface.py#p10.s1",
     "reading=define",
@@ -9330,6 +9330,6 @@
    "witness": []
   }
  ],
- "source_digest": "45e5c44064c56911149fb37511740d5718741b023afe9af4ae453bdb049e81da",
+ "source_digest": "394d183dda5ee03e2afc44775137aaa6c43ff6f86ed19f75f19b631a93f56448",
  "taken": 9
 }

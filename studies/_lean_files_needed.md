@@ -19,6 +19,12 @@ files' build-tree copies, which had come back with the 12 November upload, remov
 `AxiomAuditAll.lean` regenerated, so `lean_check` reports OK and this registry is what the tree
 actually holds.)*
 
+*Last altered 16 November 2026 (Phase 190: three of the thirteen rebuilt as proposed files in
+`source_material/ToDo/lean_recovery/` -- `LeechShells.lean`, `LorentzPlane.lean`,
+`AdversarialDialogue.lean` -- from the API the six held files call and the theorem names the three
+studies declare, `LeechShells` partial by design; copying them into `src/lean/RequestProject/GLM/`
+and the owner's build are what move the count above from 13.)*
+
 *Last altered 31 October 2026 (repository check: the twelve placeholder files were removed from
 the build tree and recorded here; `LorentzianMajority.lean` added; six files that import a
 missing file moved to `src/lean/awaiting_recovery/`; `Scratch.lean` moved out of the build to

@@ -4,10 +4,10 @@
 # prose, this YAML is the face the GLM reads.  Judgement fields (controls,
 # layer, junctions, wobble_deps, reversibility, evidence, follow_ups, ...)
 # are kept as written; a derived field listed in hand_fields is kept too.
-# Last altered 15 November 2026 (study_manifest --sync).
+# Last altered 16 November 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,356<!--/figure-->
+deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,358<!--/figure-->
   vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's
   report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times
   per check.

@@ -56,7 +56,7 @@
 
 schema: glm-intake-ledger/v1
 created: 31 October 2026
-last_altered: 15 November 2026
+last_altered: 16 November 2026
 items:
 - id: GLM_IMPROVEMENT_ROADMAP
   path: ToDo/GLM_IMPROVEMENT_ROADMAP.md
@@ -3173,3 +3173,18 @@ items:
   next_step: 'measure what can move the score: the public-packing merge and a clearance re-opening
     were both measured null (SQUARES_IN_SQUARES_STATE in STATUS.md), so the next step is a source
     refresh against the live public pool or a search find, not a precision change.'
+- id: lean_recovery
+  path: ToDo/lean_recovery
+  kind: Lean
+  offers: Proposed reconstructions of three Lean files the build needs and the tree does not have
+    (LeechShells.lean, LorentzPlane.lean, AdversarialDialogue.lean), rebuilt from their consumers'
+    API, the studies' semantics and the studies' declared theorem names; LeechShells is partial by
+    design and names what it owes.
+  stage: triaged
+  last_action: '16 November 2026: triaged - the three files are rebuilt from the API their six consumer
+    files call, the semantics in reasoning/leech_shells.py, frame_plane.py and adversarial_dialogue_study.py,
+    and the theorem names those modules declare; LeechShells is partial by design and names what it owes'
+  next_step: 'owner: copy the three .lean files into src/lean/RequestProject/GLM/, run `PYTHONPATH=src python3
+    -m glm_universal.lean_check --write-audit` and scripts/rebuild_lean.sh, and report
+    scripts/logs/lean_build_latest.log; when the build record passes, move the six held files back out of
+    awaiting_recovery/ in dependency order and re-take studies/_lean_files_needed.md'
