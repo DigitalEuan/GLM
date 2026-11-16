@@ -473,6 +473,60 @@ class TestTheBuildRecordGate(Scratch):
         self.assertTrue(any("Base" in p for p in report["problems"]), report["problems"])
 
 
+class TestLeanCarriedAsOwed(Scratch):
+    """Where no toolchain is available the owner may carry an item's written and
+    statically checked Lean files past Lean verified: the record keeps
+    ``lean_owed`` -- the decision, its date and why the build is owed -- the
+    stages above it are reachable, and every reading of the intake says the
+    build is still to come.  ``confirm-build`` records the build that ends it."""
+
+    def owed_item(self) -> None:
+        TestTheBuildRecordGate.item_at_lean_written(self)
+
+    def test_the_flag_carries_the_item_past_the_build_record(self):
+        self.owed_item()
+        self.assertFalse(actions.advance("note", "lean_verified", self.lay, run=False)["ok"])
+        rec = actions.defer_lean("note", "run it when I can", "no toolchain in this session",
+                                 self.lay)
+        self.assertEqual(rec["lean_owed"]["why"], "no toolchain in this session")
+        report = actions.advance("note", "lean_verified", self.lay, run=False)
+        self.assertTrue(report["ok"], report["problems"])
+        result = gates.check(ledger.load(self.lay), self.lay)
+        self.assertEqual(result["errors"], [])
+        self.assertTrue(any("not built" in w and "note" in w for w in result["warnings"]),
+                        result["warnings"])
+        row = [r for r in actions.status_rows(layout=self.lay) if r["id"] == "note"][0]
+        self.assertTrue(row["lean_owed"])
+        self.assertIn("(Lean owed)", actions.status_table(layout=self.lay))
+
+    def test_the_flag_needs_written_and_audited_lean_files(self):
+        self.new_item()
+        self.edit("note", kind="concept note", offers="an idea", next_step="build it",
+                  stage="lean_written", studies=["DEMO_STUDY"], tests=["tests/test_demo_mod.py"],
+                  lean=["Held"])
+        with self.assertRaises(LedgerError):        # held is not written
+            actions.defer_lean("note", "run it later", "no toolchain", self.lay)
+        self.edit("note", lean=["Missing"])
+        with self.assertRaises(LedgerError):        # recorded missing, not written
+            actions.defer_lean("note", "run it later", "no toolchain", self.lay)
+        self.edit("note", lean=["Demo"])
+        with self.assertRaises(LedgerError):        # no reason recorded
+            actions.defer_lean("note", "run it later", "   ", self.lay)
+        self.assertNotIn("lean_owed", self.record("note"))
+
+    def test_the_build_record_ends_the_flag(self):
+        self.owed_item()
+        actions.defer_lean("note", "run it when I can", "no toolchain here", self.lay)
+        self.assertFalse(actions.confirm_build("note", self.lay)["ok"])   # nothing built yet
+        self.assertIn("lean_owed", self.record("note"))
+        self.write_evidence()
+        self.assertTrue(actions.confirm_build("note", self.lay)["ok"])
+        rec = self.record("note")
+        self.assertNotIn("lean_owed", rec)
+        self.assertIn("confirms the Lean carried as owed", rec["lean_build"])
+        self.assertEqual(self.errors(), [])
+
+
 class TestStagedCode(Scratch):
     """Code waits in <item>/staged/ until absorption installs it."""
 

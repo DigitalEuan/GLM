@@ -42,7 +42,9 @@ import sys
 from typing import List, Optional
 
 from . import actions, gates
-from .ledger import KINDS, STAGE_NAMES, STAGES, Layout, LedgerError, load, record_by_id
+from .ledger import (
+    KINDS, LEAN_OWED_FIELD, STAGE_NAMES, STAGES, Layout, LedgerError, load, record_by_id,
+)
 
 
 def _cmd_status(args: argparse.Namespace) -> int:
@@ -167,6 +169,15 @@ def _cmd_absorb_ahead(args: argparse.Namespace) -> int:
     return 1
 
 
+def _cmd_defer_lean(args: argparse.Namespace) -> int:
+    rec = actions.defer_lean(args.id, args.decision, args.why)
+    owed = rec[LEAN_OWED_FIELD]
+    print(f"{rec['id']}: Lean carried as owed since {owed['date']} -- written and statically "
+          f"checked, not built; run scripts/rebuild_lean.sh when the toolchain is available, "
+          f"then `confirm-build {rec['id']}`")
+    return 0
+
+
 def _cmd_confirm_build(args: argparse.Namespace) -> int:
     report = actions.confirm_build(args.id)
     if report["ok"]:
@@ -288,8 +299,18 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--timeout", type=int, default=1800, help="seconds per test")
     p.set_defaults(fn=_cmd_absorb_ahead)
 
+    p = sub.add_parser("defer-lean",
+                       help="carry an item's written, statically checked Lean files past "
+                            "lean_verified while no toolchain is available (marked Lean owed)")
+    p.add_argument("id")
+    p.add_argument("--decision", required=True, help="the owner's decision, in the owner's words")
+    p.add_argument("--why", required=True,
+                   help="why the build is owed (which session, which toolchain)")
+    p.set_defaults(fn=_cmd_defer_lean)
+
     p = sub.add_parser("confirm-build",
-                       help="the build record confirms an item absorbed ahead of the build")
+                       help="the build record confirms an item absorbed ahead of the build, or "
+                            "the Lean it carried as owed")
     p.add_argument("id")
     p.set_defaults(fn=_cmd_confirm_build)
 

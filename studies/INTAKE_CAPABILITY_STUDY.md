@@ -82,6 +82,11 @@ with a function the GLM did not have):
   provisional parts, ahead of the build record, by the owner's decision, on
   its measurements and a standalone Lean check) and `confirm-build` (the
   owner's build record confirms it).
+* **`defer-lean`** (Phase 191): an item's Lean files, written and statically
+  checked, carried past *Lean verified* as `lean_owed` while no toolchain is
+  available, so the stages above it are reachable; `confirm-build` records the
+  build that ends the flag, and every reading of the intake says the build is
+  still owed until it does.
 
 ## 2. The switch: the GLM without Phase 186
 

@@ -14,7 +14,13 @@ parts and the register of provisional families
 ``lean_verified`` is met, for a record that carries ``ahead_of_build``, by the
 owner's decision and a standalone Lean check (:func:`ahead_problems`) until
 the build record confirms it; the register's entries in the state
-``absorbed ahead of the build`` are held to their records.*
+``absorbed ahead of the build`` are held to their records.
+*Last altered 16 November 2026 (Phase 191): ``lean_verified`` is also met, for a
+record that carries ``lean_owed``, by the owner's decision and the static
+evidence alone (:func:`lean_owed_problems`) -- the Lean files written, in the
+build tree and imported by the audit -- so that the stages after it are not
+blocked where no toolchain is available; :func:`check` notes every such record
+until ``confirm-build`` replaces the field with ``lean_build``.**
 
 A stage is reached only with its evidence, and the evidence accumulates: an
 item at ``tested`` must also satisfy ``triaged`` and ``study_drafted``.  The
@@ -58,7 +64,12 @@ stage              evidence that must exist
                    carries ``ahead_of_build`` instead (:func:`ahead_problems`:
                    the decision, its date, how the Lean was checked, and the
                    Lean files checked on their own, each one of the record's
-                   own and audited) until ``confirm-build``
+                   own and audited) until ``confirm-build``; or, where the build
+                   cannot be run for a while, ``lean_owed``
+                   (:func:`lean_owed_problems`: the owner's decision, its date,
+                   why the build is owed, and each named file written, in the
+                   build tree and imported by the audit) until the same
+                   ``confirm-build`` records the build
 ``measured``       ``measured`` names a study that passes the study gate and
                    is finished: no draft text left (``TO WRITE``, the
                    scaffold's draft verdict or figure, outside code
@@ -133,9 +144,9 @@ from typing import Any, Dict, List, Mapping, Optional, Tuple
 from .. import lean_check
 from ..integrity import file_digest, sha256_hex
 from .ledger import (
-    AHEAD_FIELD, AHEAD_STATE, KINDS, PART_STATUSES, STAGES, UNFINISHED_PART_STATUSES, Layout,
-    LedgerError, as_list, folder_items, item_location, load_provisional, loose_items,
-    stage_index,
+    AHEAD_FIELD, AHEAD_STATE, KINDS, LEAN_OWED_FIELD, PART_STATUSES, STAGES,
+    UNFINISHED_PART_STATUSES, Layout, LedgerError, as_list, folder_items, item_location,
+    load_provisional, loose_items, stage_index,
 )
 
 __all__ = [
@@ -145,6 +156,7 @@ __all__ = [
     "staged_module_path", "study_problems", "measurement_problems", "test_fingerprint",
     "stale_results", "DRAFT_MARKERS", "LEGACY_FIELD", "is_legacy_absorption",
     "provisional_modules", "provisional_problems", "ahead_problems", "absorbed_modules",
+    "lean_owed_problems",
 ]
 
 _GLM_PREFIX = "RequestProject.GLM."
@@ -680,6 +692,8 @@ def stage_problems(rec: Mapping[str, Any], stage: str, layout: Layout,
         lean = [str(n) for n in as_list(rec.get("lean"))]
         if not lean:
             out.append("no Lean file named")
+        elif rec.get(LEAN_OWED_FIELD):
+            out += lean_owed_problems(rec, layout)
         elif fresh:
             out += build_problems(lean, layout)
         elif rec.get(AHEAD_FIELD):
@@ -786,6 +800,34 @@ def ahead_problems(rec: Mapping[str, Any], layout: Optional[Layout] = None) -> L
         if state != "audited":
             out.append(f"{AHEAD_FIELD}: the standalone Lean {n} is {state} ({module}), not "
                        f"audited in the build")
+    return out
+
+
+def lean_owed_problems(rec: Mapping[str, Any], layout: Optional[Layout] = None) -> List[str]:
+    """What is missing from ``rec``'s ``lean_owed`` record: the owner's
+    decision to carry the item's Lean files past ``lean_verified`` without a
+    build, its date, why the build is owed, and every named Lean file in the
+    build tree and imported by the axiom audit.  The static evidence is all a
+    session without a toolchain can take, so nothing here pretends to verify a
+    proof: the item is marked wherever the intake is read, and
+    ``confirm-build`` records the build when it comes."""
+    lay = layout or Layout.default()
+    entry = rec.get(LEAN_OWED_FIELD)
+    if not isinstance(entry, Mapping):
+        return [f"{LEAN_OWED_FIELD} is not a mapping (decision, date, why)"]
+    out: List[str] = []
+    for key, what in (("decision", "the owner's decision"), ("date", "its date"),
+                      ("why", "why the build is owed (which session, which toolchain)")):
+        if not str(entry.get(key) or "").strip():
+            out.append(f"{LEAN_OWED_FIELD} has no {key} ({what})")
+    lean = [str(n) for n in as_list(rec.get("lean"))]
+    if not lean:
+        out.append(f"{LEAN_OWED_FIELD} on a record that names no Lean file")
+    for n in lean:
+        state, module = lean_state(n, lay)
+        if state != "audited":
+            out.append(f"{LEAN_OWED_FIELD}: the Lean file {n} is {state} ({module}); it is "
+                       f"carried as owed only when it is written and audited")
     return out
 
 
@@ -988,6 +1030,13 @@ def check(data: Mapping[str, Any], layout: Optional[Layout] = None) -> Dict[str,
                               "acceptance decision anywhere else)")
             else:
                 legacy.append(rid)
+        if isinstance(rec.get(LEAN_OWED_FIELD), Mapping):
+            owed = rec[LEAN_OWED_FIELD]
+            warnings.append(f"{rid}: its Lean files are written and statically checked but not "
+                            f"built ({LEAN_OWED_FIELD} since {owed.get('date') or 'an unrecorded date'}: "
+                            f"{owed.get('why') or 'why not recorded'}); the owner's "
+                            f"scripts/rebuild_lean.sh has to confirm them -- `confirm-build {rid}` "
+                            f"replaces the flag with the build that did")
         for rel in staged_files(rec, lay):
             target = lay.root / rel
             if not rel.startswith(str(lay.package.relative_to(lay.root)) + "/"):

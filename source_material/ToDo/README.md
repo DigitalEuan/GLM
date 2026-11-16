@@ -22,7 +22,11 @@ code can instead be installed ahead of the build, marked *provisional*
 here, at its stage, until absorption confirms it.  The owner may also decide to absorb an
 item ahead of the build (`intake absorb-ahead <id>`): it is then filed in
 `done/` unless a part is still open, and `intake confirm-build <id>` records
-the build's confirmation later.
+the build's confirmation later. Where the build cannot be run for a while, the
+owner may instead carry an item's written and statically checked Lean files as
+owed (`intake defer-lean <id> --decision ... --why ...`): the record keeps
+`lean_owed`, the stages above *Lean verified* become reachable, and
+`confirm-build` ends the flag when the build passes.
 
 Snapshot of 1 November 2026 (8 items):
 

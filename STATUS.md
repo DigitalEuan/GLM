@@ -25,6 +25,10 @@ already held, 0 of 163 item-local imports resolving, both left at *triaged* with
 
 *Last altered 15 November 2026 (the Squares in Squares probe: the owner's other project filed as an intake item and measured — 22.218057 working against 22.642387 documented, a public merge and a tighter clearance both null, 0.1637 to the leader).*
 
+*Last altered 16 November 2026 (Phase 191: the intake's `defer-lean` -- a written and statically
+checked Lean file carried past *Lean verified* as `lean_owed` until `confirm-build`, so an item is not
+stuck behind a toolchain the session does not have; 2.1 item 0's Lean debt is unchanged).*
+
 *Last altered 16 November 2026 (Phase 190: 2.1 item 0's Lean debt -- `LeechShells`, `LorentzPlane` and
 `AdversarialDialogue` rebuilt as proposed files in `source_material/ToDo/lean_recovery/` and registered
 as `lean_recovery`; a third of the thirteen owed files, the rest of that item's remainder unchanged).*

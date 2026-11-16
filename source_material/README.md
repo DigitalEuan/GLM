@@ -1,6 +1,8 @@
 # source_material — the GLM's intake
 
 *Created 31 October 2026 (repository check; directive D22).*
+*Last altered 16 November 2026: `defer-lean` -- an item's written and statically checked Lean files may be carried past *Lean verified* while no toolchain is available, marked `lean_owed` until `confirm-build` records the build.*
+
 *Last altered 1 November 2026: absorption ahead of the build (`absorb-ahead`, `confirm-build`) by the owner's decision, and where things stand after three items were absorbed that way. Before that, 31 October 2026: the Lean written / Lean verified stages, the build-record gate, staged code and `absorb-staged`; the study gate's synchronised manifest, current test results (fingerprints, `retest`), the finished measurement and its acceptance decision (`accept`), the test runner where pytest is absent; the snapshot re-taken; then the provisional install by the owner's decision (`provisional`, the register of provisional wheels), and the fallback runner's setup and teardown hooks; test-result details written in the intake's own words.*
 
 New material for the GLM — a full study, a rough concept note, code, data, a
@@ -150,10 +152,34 @@ PYTHONPATH=src python3 -m glm_universal.intake absorb-ahead <id> \
 runs every named test again, installs the staged code, turns the item's
 staged and provisional parts `absorbed`, records the decision and the
 standalone check, and files the item in `done/` when no part is left open
-(an item with open parts is absorbed partially and stays in `ToDo/`). The
-register keeps the item, now as *absorbed ahead of the build*, so every
+(an item with open parts is absorbed partially and stays in `ToDo/`).
+
+The register keeps the item, now as *absorbed ahead of the build*, so every
 answer that rests on it still says that the owner's build has to confirm its
-Lean files. When the owner's `scripts/rebuild_lean.sh` writes a build record
+Lean files.
+
+### When the build cannot be run for a while (`defer-lean`)
+
+The stages after *Lean verified* used to need the build record, so an item
+whose Lean cannot be built -- no toolchain in the session, the owner away from
+the machine that has one -- stopped there and the work behind it waited. It
+need not: the item's Lean files are written, in the build tree and imported by
+the axiom audit, and that is what the static check reads. The owner's decision
+carries them as owed:
+
+```
+PYTHONPATH=src python3 -m glm_universal.intake defer-lean <id> \
+    --decision "<the owner's words>" --why "<why the build is owed>"
+```
+
+records `lean_owed` on the record: the decision, its date and why the build is
+owed. From then on the gate for *Lean verified* is the static evidence alone
+(`gates.lean_owed_problems`), so `measured` and `absorbed` are reachable, and
+the flag says everywhere the intake is read -- `intake status` prints the
+stage as *measured (Lean owed)*, and `intake check` notes every such record --
+that no build has verified those proofs. `confirm-build <id>` replaces the flag
+with `lean_build` when `scripts/rebuild_lean.sh` passes; that is the only thing
+that ends it, and nothing here says a proof is checked when it is not. When the owner's `scripts/rebuild_lean.sh` writes a build record
 that verifies them, `PYTHONPATH=src python3 -m glm_universal.intake
 confirm-build <id>` records the confirmation and removes the register entry,
 and the note goes. `check` holds the ahead record and the register together.

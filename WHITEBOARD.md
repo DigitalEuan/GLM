@@ -137,7 +137,11 @@ below.
   [`studies/_lean_files_needed.md`](studies/_lean_files_needed.md) stay owed;
   three of them (`LeechShells`, `LorentzPlane`, `AdversarialDialogue`) now have
   proposed rebuilds in `source_material/ToDo/lean_recovery/`, so the build has
-  something to compile before the rest is written.
+  something to compile before the rest is written, and since Phase 191 an item
+  whose Lean is written and statically checked is not stopped by the missing
+  toolchain: `intake defer-lean` carries it past *Lean verified* as
+  `lean_owed` for `measured` and `absorbed`, and `confirm-build` ends the flag
+  when `scripts/rebuild_lean.sh` passes.
 2. **P5's third line, *carriers the evaluation's questions name*.** A question
    naming a carrier no register holds (`what is the address of iron`) is
    refused; reading it is a change to an answer, and [`STATUS.md`](STATUS.md)

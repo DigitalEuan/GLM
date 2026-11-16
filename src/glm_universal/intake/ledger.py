@@ -16,6 +16,11 @@ field ``ahead_of_build`` (:data:`AHEAD_FIELD`) and the register state
 :data:`AHEAD_STATE` -- for the owner's decision of that day: "Absorb the ones
 that measurably help now, based on your measurements and standalone Lean
 check; record that my own rebuild_lean.sh run still has to confirm them".*
+*Last altered 16 November 2026 (Phase 191): the field ``lean_owed``
+(:data:`LEAN_OWED_FIELD`) -- the owner's decision to carry an item past
+``lean_verified`` on its written and statically checked Lean files when the
+build cannot be run for a while, so that the stages after it are not blocked
+by a toolchain the session does not have; ``confirm-build`` ends it.**
 
 Everything the owner supplies arrives in ``source_material/``.  An item -- a
 folder or a loose file -- is filed under ``source_material/ToDo/`` while its
@@ -66,6 +71,18 @@ takes the state :data:`AHEAD_STATE`, so the answers that rest on it still say
 that the owner's build has to confirm it.  ``confirm-build`` ends the state
 when the build record verifies the item's Lean files.
 
+**Lean carried as owed.**  Where the owner cannot run the build for a while
+(the Lean toolchain and Mathlib are not in every session), an item whose Lean
+files are written, in the build tree and imported by the axiom audit may be
+carried past ``lean_verified`` on the owner's decision alone: the record keeps
+``lean_owed`` (:data:`LEAN_OWED_FIELD`) -- the decision, its date and why the
+build is owed -- in place of ``lean_build``.  The static check is then all the
+evidence there is, so the item is marked wherever the intake is read and every
+answer resting on its Lean says the build is owed; ``confirm-build`` replaces
+``lean_owed`` with ``lean_build`` when ``scripts/rebuild_lean.sh`` passes.
+This is a flag on the record, not a different stage: the item stands at
+exactly the stage its other evidence reaches.
+
 Nothing here constructs a float or imports a digest.
 """
 from __future__ import annotations
@@ -83,7 +100,7 @@ __all__ = [
     "FIELD_ORDER", "Layout", "today", "stage_key", "stage_index",
     "load", "save", "record_by_id", "item_location", "folder_items",
     "LedgerError", "UNFINISHED_PART_STATUSES", "PROVISIONAL_SCHEMA", "load_provisional",
-    "save_provisional", "AHEAD_FIELD", "AHEAD_STATE",
+    "save_provisional", "AHEAD_FIELD", "AHEAD_STATE", "LEAN_OWED_FIELD",
 ]
 
 #: The ledger's schema tag.
@@ -136,10 +153,19 @@ AHEAD_FIELD = "ahead_of_build"
 #: (an entry without ``state`` is ``provisional``).
 AHEAD_STATE = "absorbed ahead of the build"
 
+#: The record field of an item whose Lean files are written, in the build tree
+#: and imported by the axiom audit, but not built: ``{decision, date, why}``,
+#: the owner's decision and why the build is owed.  It stands in for
+#: ``lean_build`` -- so the stages above ``lean_verified`` are reachable where
+#: no toolchain is available -- and says in every check that the build is
+#: still to come; ``confirm-build`` replaces it with ``lean_build``.
+LEAN_OWED_FIELD = "lean_owed"
+
 #: The fields of a record, in the order they are written.
 FIELD_ORDER: Tuple[str, ...] = (
     "id", "path", "local_only", "kind", "offers", "stage", "studies", "tests",
-    "test_results", "lean", "lean_check", "lean_build", "ahead_of_build", "lean_obligations",
+    "test_results", "lean", "lean_check", "lean_build", "lean_owed", "ahead_of_build",
+    "lean_obligations",
     "measured",
     "acceptance", "legacy_absorption", "absorbed_into", "installed", "parts", "wheels", "closed_reason", "evidence",
     "last_action", "next_step",

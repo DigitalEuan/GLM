@@ -7,7 +7,7 @@
 # Last altered 16 November 2026 (study_manifest --sync).
 
 controls: []
-deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,358<!--/figure-->
+deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,360<!--/figure-->
   vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's
   report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times
   per check.

@@ -5,7 +5,9 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 190 is closed: three of the thirteen missing Lean files rebuilt as proposed files
+**Verdict.** Phase 191 is closed: an item's written and statically checked Lean files can be carried
+past *Lean verified* as `lean_owed`, so the stages above the build record are reachable while the build
+is still owed, and `confirm-build` records the build that ends the flag. Phase 190 is closed: three of the thirteen missing Lean files rebuilt as proposed files
 (`lean_recovery` in the intake) from the API their six held consumers call and the theorem names their
 studies declare -- `LorentzPlane` and `AdversarialDialogue` complete, `LeechShells` partial and naming
 what it owes; none of the three has been compiled and the owner's build record is the gate. Phase 189 is closed: the two received Lean deliveries censused — six of 87 files already held, 0 of 163 item-local imports resolving, both left at triaged with the port owed to the owner's build. Phase 188 is closed: the iteration lane — the machine's 8 CPUs (not the 2 the working notes said), the evaluation's own default worker count (8 cases 64.4 s → 8.9 s, the whole set 237 of 237 in 248 s), the round's cheap lane and the close in one order with the answer censuses last, and the surface's second refusal hint; 4 of 4 marks. Phase 186 is closed except the owner's Lean build: the intake items that measurably help, absorbed ahead of that build by the owner's decision on their measurements and a standalone Lean check — the Rule 30 study's hypothesis engine (`tool rule30`, `tool conjecture`, the plan search behind `tool arc`: 9 of the 50 stored ARC tasks right where 2 were, a development set), the formula wheels behind `tool derive` (63 of 64 laws, 0 of 51 not-a-laws) and the sequence wheel's next-term reading (27 right, 0 wrong of 45); thirty questions across five domains 23 right, 0 wrong, where 4 were right without them; 12 of 14 marks. Phase 185 is closed: the repository check after the October 2026 reorganisation. Every command starts from the repository root; the directives are 22, with D21 making `glm_universal.constants` the single source of constants and D22 the intake of new material through `source_material/ToDo/` and `done/`; the modules the reorganisation lost were rebuilt from their studies, their tests and this plan, each marked *Reconstructed 31 October 2026*, and their measurements taken again; thirteen lost Lean files are recorded in `studies/_lean_files_needed.md` and the six files that import one held out of the build; four lookup kinds in the parser; the integer and Monster provision wheels and fifteen formula wheels of `cent_compiler_v12` tested, given Lean files and measured, and installed in the wheels folder provisionally by the owner's decision, every answer from them marked, until the owner's Lean build record verifies those files. No Lean toolchain was available to the session: `scripts/rebuild_lean.sh` is the owner's step, and the intake grants *Lean verified* only against the build record it writes. Phase 184 is closed: the declared majority rule for conflicting evidence. `LorentzianMajority.lean` proves that the target a strict majority of the weight states is unique, that the rule is never wrong while the honest examples hold at least half the weight and right above half, that agreeing decoys below half carry it (the condition is tight), and that a wrong answer needs decoys weighing at least the answer's own group; `tool majority` answers 155 and 161 right, 0 wrong, on the decoy conditions the guard refuses, and refuses where a plurality vote is wrong 150 times; 8 of 8 marks. Before it Phase 183: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 187 is taken: the platform round's *use* phase, worked on the chat surface — one echo per query, `:kinds` from the parser's own table, and a refusal that says why, 4 of 4 marks; *carriers the evaluation's questions name* is left. Phase 188 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
@@ -184,6 +186,26 @@ written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
 
 ---
+
+## Phase 191 — Lean carried as owed: the stages above the build record, without a toolchain
+
+Phase 191 is closed: an item's Lean files, written, in the build tree and
+imported by the axiom audit, can now be carried past *Lean verified* by the
+owner's decision, recorded as `lean_owed` -- the decision, its date and why the
+build is owed. The gate for `lean_verified` is then the static evidence alone
+(`gates.lean_owed_problems`), so `measured` and `absorbed` are reachable in a
+session that has no Lean toolchain, which is what the three rebuilt files and
+the thirteen owed ones need. The flag is not a stage: the item stands where its
+other evidence reaches, and it says so everywhere the intake is read -- the
+status table prints *Lean owed* beside the stage, `intake check` notes every
+such record with the date and the reason, and `confirm-build` replaces the flag
+with `lean_build` when `scripts/rebuild_lean.sh` passes. Nothing in the flag
+claims a proof is checked: it claims the files are written and the build is
+owed, which is exactly the state the owner is in. Three tests pin it: the flag
+carries an item past the build record and appears in the status and the notes;
+it is refused for a Lean file that is held or recorded missing, and for a
+decision without a reason; and `confirm-build` refuses until a build record
+verifies the files, then ends the flag.
 
 ## Phase 190 — three of the thirteen rebuilt: the files their consumers are written against
 

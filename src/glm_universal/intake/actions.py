@@ -18,6 +18,11 @@ package test) and never copies what the test printed.*
 ahead of the build record, on its measurements and a standalone Lean check,
 by the owner's decision of that day) and ``confirm_build`` (the build record
 confirms such an absorption).*
+*Last altered 16 November 2026 (Phase 191): ``defer_lean`` -- the owner's
+decision to carry an item's written and statically checked Lean files past
+``lean_verified`` while no toolchain is available, recorded as ``lean_owed``
+so the stages above it are not blocked and every reading of the intake says
+the build is still to come; ``confirm_build`` records the build that ends it.*
 
 Each action reads the ledger, acts, and writes the ledger back with the day's
 date in ``last_action``.  An action that would break a rule is refused with a
@@ -108,16 +113,16 @@ from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 from .. import constants as C
 from . import gates
 from .ledger import (
-    AHEAD_FIELD, AHEAD_STATE, KINDS, STAGE_NAMES, STAGES, TERMINAL, Layout, LedgerError, as_list,
-    folder_items, item_location, load, load_provisional, loose_items, record_by_id, save,
-    save_provisional, stage_index, stage_key, today,
+    AHEAD_FIELD, AHEAD_STATE, KINDS, LEAN_OWED_FIELD, STAGE_NAMES, STAGES, TERMINAL, Layout,
+    LedgerError, as_list, folder_items, item_location, load, load_provisional, loose_items,
+    record_by_id, save, save_provisional, stage_index, stage_key, today,
 )
 
 __all__ = [
     "item_id_for", "study_id_for", "status_rows", "status_table",
     "intake_report", "register", "scaffold", "advance", "retest", "accept", "close",
     "run_test", "run_lean_check", "next_gate", "staged_overlay", "install_staged",
-    "absorb_staged", "provisional", "absorb_ahead", "confirm_build",
+    "absorb_staged", "provisional", "absorb_ahead", "confirm_build", "defer_lean",
 ]
 
 #: A test runner: ``(ref, command, cwd, env, timeout) -> (result, detail)``
@@ -172,6 +177,7 @@ def status_rows(data: Optional[Mapping[str, Any]] = None,
             "problems": len(gates.evidence_problems(rec, lay)),
             "next_step": str(rec.get("next_step") or "").strip(),
             "local_only": bool(rec.get("local_only")),
+            "lean_owed": bool(rec.get(LEAN_OWED_FIELD)),
         })
     order = {"ToDo": 0, "done": 1}
     rows.sort(key=lambda r: (order.get(r["folder"], 2), stage_index(r["stage"])
@@ -187,7 +193,8 @@ def status_table(data: Optional[Mapping[str, Any]] = None,
     head = ("id", "folder", "kind", "stage", "gaps", "next step")
     table = [head] + [(
         r["id"] + (" (local)" if r["local_only"] else ""), r["folder"], r["kind"],
-        STAGE_NAMES.get(r["stage"], r["stage"]), str(r["problems"]),
+        STAGE_NAMES.get(r["stage"], r["stage"])
+        + (" (Lean owed)" if r.get("lean_owed") else ""), str(r["problems"]),
         (r["next_step"][: width - 1] + "…") if len(r["next_step"]) > width else r["next_step"],
     ) for r in rows]
     widths = [max(len(row[i]) for row in table) for i in range(len(head) - 1)]
@@ -1339,23 +1346,75 @@ def absorb_ahead(item_id: str, decision: str, standalone: Sequence[str], check: 
     return report
 
 
+# ---------------------------------------------------------------------------
+# defer-lean
+# ---------------------------------------------------------------------------
+
+def defer_lean(item_id: str, decision: str, why: str, layout: Optional[Layout] = None, *,
+               day: Optional[datetime.date] = None) -> Dict[str, Any]:
+    """Carry an item's Lean files past ``lean_verified`` without a build, by the
+    owner's decision: they are written, in the build tree and imported by the
+    axiom audit (what ``advance <id> lean_written`` checks), and no toolchain
+    is available to build them.
+
+    The record keeps ``lean_owed`` -- the decision, its date and why the build
+    is owed -- and :func:`gates.lean_owed_problems` is the gate from then on, so
+    the stages above (``measured``, ``absorbed``) are reachable while the flag
+    says, wherever the intake is read, that no build has verified the proofs.
+    ``confirm-build`` replaces the flag with ``lean_build`` when the owner's
+    ``scripts/rebuild_lean.sh`` passes.  Returns the record; nothing changes
+    when the flag would not hold."""
+    lay = layout or Layout.default()
+    data = load(lay)
+    rec = record_by_id(data, item_id)
+    if rec.get("stage") in TERMINAL:
+        raise LedgerError(f"{item_id} is {rec.get('stage')}; its intake is finished")
+    if not [str(n) for n in as_list(rec.get("lean"))]:
+        raise LedgerError(f"{item_id} names no Lean file to carry as owed")
+    entry = {"decision": decision.strip(), "date": today(day), "why": why.strip()}
+    problems = gates.lean_owed_problems({**rec, LEAN_OWED_FIELD: entry}, lay)
+    if problems:
+        raise LedgerError("; ".join(problems))
+    rec[LEAN_OWED_FIELD] = entry
+    rec["next_step"] = ("the Lean files are written and statically checked but not built: run "
+                       "scripts/rebuild_lean.sh when the toolchain is available, then "
+                       f"`confirm-build {item_id}` to record the build")
+    _stamp(rec, "Lean carried as owed: written and statically checked, the build still to "
+                "come", day)
+    save(data, lay, day)
+    return rec
+
+
 def confirm_build(item_id: str, layout: Optional[Layout] = None, *,
                   day: Optional[datetime.date] = None) -> Dict[str, Any]:
     """The build record confirms an item absorbed ahead of the build: when
     ``scripts/logs/lean_build_evidence.json`` verifies the record's Lean files
     and every file they import (:func:`gates.build_problems`),
     ``ahead_of_build`` gives way to ``lean_build`` and the item leaves the
-    register.  Returns ``{"ok", "problems"}``; nothing changes unless ``ok``."""
+    register.  The same call ends ``lean_owed``: an item carried past
+    ``lean_verified`` on its static evidence gets ``lean_build`` in place of
+    the flag.  Returns ``{"ok", "problems"}``; nothing changes unless ``ok``."""
     lay = layout or Layout.default()
     data = load(lay)
     rec = record_by_id(data, item_id)
     ahead = rec.get(AHEAD_FIELD)
-    if not ahead:
-        raise LedgerError(f"{item_id} was not absorbed ahead of the build")
+    owed = rec.get(LEAN_OWED_FIELD)
+    if not ahead and not owed:
+        raise LedgerError(f"{item_id} is not absorbed ahead of the build and carries no "
+                          f"{LEAN_OWED_FIELD} flag")
     lean = [str(n) for n in as_list(rec.get("lean"))]
     problems = gates.build_problems(lean, lay)
     if problems:
         return {"id": item_id, "ok": False, "problems": problems}
+    if owed and not ahead:
+        rec["lean_build"] = _build_entry(rec, lay) + "; confirms the Lean carried as owed"
+        del rec[LEAN_OWED_FIELD]
+        rec["next_step"] = str(rec.get("next_step") or "").replace(
+            "the Lean files are written and statically checked but not built: run ",
+            "the build record now confirms the Lean files; ")
+        _stamp(rec, "the build record confirms the Lean files carried as owed", day)
+        save(data, lay, day)
+        return {"id": item_id, "ok": True, "problems": []}
     since = ahead.get("date", "an unrecorded date") if isinstance(ahead, Mapping) else "?"
     rec["lean_build"] = (_build_entry(rec, lay) + f"; confirms the absorption ahead of the "
                          f"build of {since}")
