@@ -1,0 +1,1086 @@
+# GLM Lean rebuild, 20261116_174000, in /Users/macoshdd/Documents/GitHub/GLM
+== 1. static check (glm_universal.lean_check)
+Lean tree /Users/macoshdd/Documents/GitHub/GLM/src/lean: 428 files (179 `module` files), 9771 declarations
+  warning declaration GLM.CubeStab.Cell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.Corner in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cellOfCorner in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cornerOfCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cornerOfCell_cellOfCorner in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cellOfCorner_cornerOfCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axPerm in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axPermInv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axPerm_inv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axEven in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.CubeSym in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.epsPar in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.IsRot in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.rotation_count in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cubeSym_card in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.csinv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actCell_csinv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.csinv_actCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid_spec in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.PreservesMog in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.PreservesMogB in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid_selL in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid_selG in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.preserves_iff in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.stabiliser_card in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.preserves_iff_tetrahedral in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.preserving_is_rotation in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.quarterTurn in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.quarterTurn_isRot in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.quarterTurn_not_preserving in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oBasis in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oSpan in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oInfo in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oDecode in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oDecode_oSpan in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.IsOCode in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.isOCode_iff in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oSpan_injective in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_card in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_min_weight in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_weight_enumerator in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_zero in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_gxor in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_rotations_free in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_improper_priced in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_invariant in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeMOG.Col in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.Grid in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.zero_apply in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.gxor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.wtG in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.rowLabel in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symb in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.par in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.topPar in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symbols in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.bit0 in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.bit1 in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_symb in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_par in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_top in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_roundtrip in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.xor6 in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.Params in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.buildP in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_symbols in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_top in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_topPar in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.isMog_build in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogCode in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mem_mogCode in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogCode_eq_filter in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.isHex_iff_info in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMogB in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.isMogB_iff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.fibre_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symbols_fibre_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexpass_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.combo_injective in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.buildP_injective in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.parity_layer_factor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_subset_hexpass in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_weight_enumerator in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.wtG_eq_zero_iff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_min_weight in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symb_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.combo_add in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.par_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.topPar_gxor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMog_gxor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.xor6_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_add in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMog_zero in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selL in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selL_closed in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_closed in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selL_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogBasis in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogBasis_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogCoeff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_mogCoeff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_spanned in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.wtG_le_four_of_face in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.face_erasure_correctable in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces_ne_zero in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces_weight in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.two_face_ambiguous in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexDist in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexDist_comm in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexDist_triangle in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexacode_min_dist in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexacode_unique_decode in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexacode_ambiguous_at_two in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+OK
+== 2. toolchain
+lean-toolchain: leanprover/lean4:v4.28.0
+elan 4.2.4 (227caca13 2026-08-25)
+Lake version 5.0.0-src+7e01a1b (Lean version 4.28.0)
+Lean (version 4.28.0, x86_64-apple-darwin24.6.0, commit 7e01a1bf5c70fc6167d49c345d3bf80596e9a79b, Release)
+== 3. lake exe cache get
+Current branch: HEAD
+Using cache (Azure) from origin: leanprover-community/mathlib4
+No files to download
+Already decompressed 8010 file(s)
+== 4. lake build
+✔ [8096/8454] Built RequestProject.GLM.FieldSurface (89s)
+✔ [8097/8454] Built RequestProject.GLM.Feedback (90s)
+✔ [8098/8454] Built RequestProject.GLM.Gen2 (98s)
+✔ [8099/8454] Built RequestProject.GLM.Gen3 (101s)
+✖ [8100/8454] Building RequestProject.GLM.DimensionCarrier (58s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/DimensionCarrier.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/DimensionCarrier.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/DimensionCarrier.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/DimensionCarrier.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/DimensionCarrier.setup.json --json
+error: Lean exited with code 139
+✔ [8105/8454] Built RequestProject.GLM.Facets (70s)
+✔ [8106/8454] Built RequestProject.GLM.GolayBoundary (61s)
+✔ [8107/8454] Built RequestProject.GLM.Escalation.Niemeier (230s)
+✔ [8112/8454] Built RequestProject.GLM.DeepHoleEscalation (243s)
+✔ [8113/8454] Built RequestProject.GLM.Conversation (59s)
+✖ [8114/8454] Building RequestProject.GLM.CubeSurface (505s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/CubeSurface.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/CubeSurface.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/CubeSurface.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/CubeSurface.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/CubeSurface.setup.json --json
+error: Lean exited with code 139
+✔ [8124/8454] Built RequestProject.GLM.ConfigurationReading (356s)
+✔ [8125/8454] Built RequestProject.GLM.Controller (355s)
+✔ [8126/8454] Built RequestProject.GLM.Computable (83s)
+✔ [8127/8454] Built RequestProject.GLM.Relay (63s)
+✔ [8128/8454] Built RequestProject.GLM.Distinction (63s)
+✔ [8129/8454] Built RequestProject.GLM.Niemeier (84s)
+✔ [8130/8454] Built RequestProject.GLM.EscalationLoop (34s)
+✔ [8131/8454] Built RequestProject.GLM.FitCapacity (45s)
+✔ [8132/8454] Built RequestProject.GLM.SemanticPlan (41s)
+✔ [8133/8454] Built RequestProject.GLM.Triad (38s)
+✔ [8141/8454] Built RequestProject.GLM.HigherLattices (40s)
+✔ [8142/8454] Built RequestProject.GLM.LogBucket (37s)
+✔ [8145/8454] Built RequestProject.GLM.ColumnExtremum (37s)
+✔ [8146/8454] Built RequestProject.GLM.Foundations (36s)
+✔ [8151/8454] Built RequestProject.GLM.CoordinateOrder (33s)
+✔ [8152/8454] Built RequestProject.GLM.Layers (32s)
+✔ [8153/8454] Built RequestProject.GLM.ThirdSort (32s)
+✔ [8154/8454] Built RequestProject.GLM.Shortcut.GrayCode (35s)
+✔ [8155/8454] Built RequestProject.GLM.Constants (35s)
+✔ [8158/8454] Built RequestProject.GLM.Golay.Code (32s)
+✔ [8160/8454] Built RequestProject.GLM.ConditionalInduction (57s)
+✔ [8161/8454] Built RequestProject.GLM.LorentzianLift (32s)
+✔ [8164/8454] Built RequestProject.GLM.ShellSigma (46s)
+✖ [8166/8454] Building RequestProject.GLM.LorentzPlane (66s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/LorentzPlane.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/LorentzPlane.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/LorentzPlane.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/LorentzPlane.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/LorentzPlane.setup.json --json
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:124:46: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  B * (?M * ?N)
+in the target expression
+  Bᵀ * Aᵀ * (eta * (A * B)) = eta
+
+A B : Matrix (Fin 3) (Fin 3) ℚ
+hA : Aᵀ * eta * A = eta
+hB : Bᵀ * eta * B = eta
+⊢ Bᵀ * Aᵀ * (eta * (A * B)) = eta
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:132:54: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?v ᵥ* ?A ⬝ᵥ ?w
+in the target expression
+  A *ᵥ v ⬝ᵥ eta *ᵥ A *ᵥ v = v ⬝ᵥ Aᵀ *ᵥ eta *ᵥ A *ᵥ v
+
+A : Matrix (Fin 3) (Fin 3) ℚ
+hA : IsLorentz A
+v : Fin 3 → ℚ
+⊢ A *ᵥ v ⬝ᵥ eta *ᵥ A *ᵥ v = v ⬝ᵥ Aᵀ *ᵥ eta *ᵥ A *ᵥ v
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«0».«0».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨0, ⋯⟩ *
+          (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) +
+        !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨0, ⋯⟩ *
+          (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) +
+      !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨0, ⋯⟩ *
+        (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨0, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨0, ⋯⟩ ⟨0, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«0».«1».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨1, ⋯⟩ +
+        (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨1, ⋯⟩ +
+      (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨0, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) *
+        !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨1, ⋯⟩ <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨0, ⋯⟩ ⟨1, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«0».«2».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨2, ⋯⟩ +
+        (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨0, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨2, ⋯⟩ +
+      (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨0, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨0, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) *
+        !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨2, ⋯⟩ <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨0, ⋯⟩ ⟨2, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«1».«0».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨0, ⋯⟩ +
+        (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨0, ⋯⟩ +
+      (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨1, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) *
+        !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨0, ⋯⟩ <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨1, ⋯⟩ ⟨0, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«1».«1».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨1, ⋯⟩ *
+          (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) +
+        !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨1, ⋯⟩ *
+          (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) +
+      !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨1, ⋯⟩ *
+        (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨1, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨1, ⋯⟩ ⟨1, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«1».«2».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨2, ⋯⟩ +
+        (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨1, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨2, ⋯⟩ +
+      (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨1, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨1, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) *
+        !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨2, ⋯⟩ <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨1, ⋯⟩ ⟨2, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«2».«0».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨0, ⋯⟩ +
+        (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨0, ⋯⟩ +
+      (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨2, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) *
+        !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨0, ⋯⟩ <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨2, ⋯⟩ ⟨0, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«2».«1».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨1, ⋯⟩ +
+        (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) *
+          !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨1, ⋯⟩ +
+      (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨2, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) *
+        !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨1, ⋯⟩ <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨2, ⋯⟩ ⟨1, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:165:19: linarith failed to find a contradiction
+case a.«_@»._internal._hyg.0.«2».«2».h1.h
+g : Fin 3 → ℚ
+hm : minkowski g = 1
+hd : 1 + g 0 ≠ 0
+hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1
+a✝ :
+  !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            0 ⟨2, ⋯⟩ *
+          (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 0 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 0 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 0) +
+        !![g 0, g 1, g 2;
+              g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+              g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+            1 ⟨2, ⋯⟩ *
+          (!![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  0 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 1 +
+              !![g 0, g 1, g 2;
+                    g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                    g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                  1 ⟨2, ⋯⟩ *
+                !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 1 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                2 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 1) +
+      !![g 0, g 1, g 2;
+            g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+            g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+          2 ⟨2, ⋯⟩ *
+        (!![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                0 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 0 2 +
+            !![g 0, g 1, g 2;
+                  g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                  g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+                1 ⟨2, ⋯⟩ *
+              !![1, 0, 0; 0, -1, 0; 0, 0, -1] 1 2 +
+          !![g 0, g 1, g 2;
+                g 1, (1 + g 0 + g 1 ^ 2) / (1 + g 0), g 1 * g 2 / (1 + g 0);
+                g 2, g 1 * g 2 / (1 + g 0), (1 + g 0 + g 2 ^ 2) / (1 + g 0)]
+              2 ⟨2, ⋯⟩ *
+            !![1, 0, 0; 0, -1, 0; 0, 0, -1] 2 2) <
+    !![1, 0, 0; 0, -1, 0; 0, 0, -1] ⟨2, ⋯⟩ ⟨2, ⋯⟩
+⊢ False
+failed
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:193:17: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?M *ᵥ ?N *ᵥ ?v
+in the target expression
+  (boostTo thomasBoost * rot thomasCos thomasSin) *ᵥ rest = thomasBoost
+
+⊢ (boostTo thomasBoost * rot thomasCos thomasSin) *ᵥ rest = thomasBoost
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:216:2: No goals to be solved
+error: src/lean/RequestProject/GLM/LorentzPlane.lean:225:2: No goals to be solved
+error: Lean exited with code 1
+✔ [8170/8454] Built RequestProject.GLM.Extraspecial (45s)
+✔ [8172/8454] Built RequestProject.Main (31s)
+✔ [8174/8454] Built RequestProject.GLM.Cube.HexTiles (944s)
+✔ [8175/8454] Built RequestProject.GLM.QuestionNested (37s)
+✔ [8176/8454] Built RequestProject.GLM.VOA (48s)
+✔ [8180/8454] Built RequestProject.GLM.PipelineKit.Leech (42s)
+✔ [8183/8454] Built RequestProject.GLM.GrayJump (39s)
+✔ [8184/8454] Built RequestProject.GLM.Permutation (36s)
+✔ [8185/8454] Built RequestProject.GLM.Golay.AbstractSteiner (49s)
+✔ [8186/8454] Built RequestProject.GLM.HypothesisEngine.BenchmarksData (76s)
+✔ [8192/8454] Built RequestProject.GLM.ShareSeparation (38s)
+✔ [8195/8454] Built RequestProject.GLM.StrayBlind (33s)
+✔ [8197/8454] Built RequestProject.GLM.DeepHoleFailure (34s)
+✔ [8204/8454] Built RequestProject.GLM.DiscourseState (37s)
+✔ [8206/8454] Built RequestProject.GLM.Anonymous (34s)
+✔ [8209/8454] Built RequestProject.GLM.SeedLayers (45s)
+✔ [8210/8454] Built RequestProject.GLM.ScaleConversion (45s)
+✔ [8211/8454] Built RequestProject.GLM.Semantics.Grounding (67s)
+✔ [8212/8454] Built RequestProject.GLM.Stack (69s)
+✔ [8213/8454] Built RequestProject.GLM.DeltaSigma (67s)
+✔ [8214/8454] Built RequestProject.GLM.Cumulative (61s)
+✖ [8215/8454] Building RequestProject.GLM.Wheels.CentWheels (165s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/Wheels/CentWheels.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Wheels/CentWheels.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Wheels/CentWheels.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Wheels/CentWheels.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Wheels/CentWheels.setup.json --json
+error: src/lean/RequestProject/GLM/Wheels/CentWheels.lean:1421:75: unsolved goals
+case h.«1»
+⊢ Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => -1) i) 2 +
+      Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => 1) i) 2 =
+    0
+
+case h.«2»
+⊢ -Matrix.vecCons 0 (fun i => Matrix.vecCons 1 (fun i => -2) i) 2 +
+      (-Matrix.vecCons 1 (fun i => Matrix.vecCons (-1) (fun i => 0) i) 2 +
+        (Matrix.vecCons 1 (fun i => Matrix.vecCons 0 (fun i => 0) i) 2 +
+          -(Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => 1) i) 2 * 2))) =
+    0
+
+case h.«7»
+⊢ Matrix.vecCons 0 (fun i => Matrix.vecCons (-1) (fun i => 0) i) 2 +
+      Matrix.vecCons 0 (fun i => Matrix.vecCons 1 (fun i => -2) i) 2 =
+    -2
+error: src/lean/RequestProject/GLM/Wheels/CentWheels.lean:1478:74: unsolved goals
+case h.«0»
+⊢ -(Matrix.vecCons 0 (fun i => Matrix.vecCons 1 (fun i => 0) i) 2 * 2) +
+      (Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => 1) i) 2 * 2 +
+        (Matrix.vecCons (-1) (fun i => Matrix.vecCons 1 (fun i => -1) i) 2 * 2 +
+          Matrix.vecCons 1 (fun i => Matrix.vecCons 0 (fun i => 0) i) 2 * 2)) =
+    0
+
+case h.«1»
+⊢ -Matrix.vecCons 0 (fun i => Matrix.vecCons 1 (fun i => 0) i) 2 +
+      (Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => 1) i) 2 +
+        (Matrix.vecCons (-1) (fun i => Matrix.vecCons 1 (fun i => -1) i) 2 +
+          Matrix.vecCons 1 (fun i => Matrix.vecCons 0 (fun i => 0) i) 2)) =
+    0
+
+case h.«2»
+⊢ -Matrix.vecCons (-1) (fun i => Matrix.vecCons 2 (fun i => 0) i) 2 +
+      (Matrix.vecCons 0 (fun i => Matrix.vecCons 1 (fun i => 0) i) 2 * 4 +
+        (-(Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => 1) i) 2 * 2) +
+          (-(Matrix.vecCons (-1) (fun i => Matrix.vecCons 1 (fun i => -1) i) 2 * 2) +
+            -(Matrix.vecCons 1 (fun i => Matrix.vecCons 0 (fun i => 0) i) 2 * 3)))) =
+    0
+
+case h.«3»
+⊢ Matrix.vecCons 0 (fun i => Matrix.vecCons 1 (fun i => 0) i) 2 * 2 +
+      (Matrix.vecCons 0 (fun i => Matrix.vecCons 0 (fun i => -2) i) 2 +
+        (-(Matrix.vecCons (-1) (fun i => Matrix.vecCons 1 (fun i => -1) i) 2 * 2) +
+          -(Matrix.vecCons 1 (fun i => Matrix.vecCons 0 (fun i => 0) i) 2 * 2))) =
+    0
+
+case h.«7»
+⊢ Matrix.vecCons (-1) (fun i => Matrix.vecCons 2 (fun i => 0) i) 2 = 0
+error: src/lean/RequestProject/GLM/Wheels/CentWheels.lean:1590:73: unsolved goals
+h : ![0, 0, 1, 1, 0, 0, 0, 0] = 0
+this : ![0, 0, 1, 1, 0, 0, 0, 0] 2 = 0
+⊢ False
+error: src/lean/RequestProject/GLM/Wheels/CentWheels.lean:1649:73: unsolved goals
+h : ![0, 0, 2, 0, 0, 0, 0, 0] = 0
+this : ![0, 0, 2, 0, 0, 0, 0, 0] 2 = 0
+⊢ False
+error: src/lean/RequestProject/GLM/Wheels/CentWheels.lean:1663:73: unsolved goals
+h : ![0, 0, 2, 0, 0, 0, 0, 0] = 0
+this : ![0, 0, 2, 0, 0, 0, 0, 0] 2 = 0
+⊢ False
+error: Lean exited with code 1
+✔ [8216/8454] Built RequestProject.GLM.Shortcut.Golay (74s)
+✔ [8217/8454] Built RequestProject.GLM.ImperativeGrammar (85s)
+✔ [8219/8454] Built RequestProject.GLM.Lightspeed (78s)
+✔ [8222/8454] Built RequestProject.GLM.Address (68s)
+✔ [8223/8454] Built RequestProject.GLM.TaxConservation (74s)
+✔ [8226/8454] Built RequestProject.GLM.LorentzianEvidence (72s)
+✖ [8227/8454] Building RequestProject.GLM.Cube.Surface (331s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/Cube/Surface.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Cube/Surface.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Cube/Surface.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Cube/Surface.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Cube/Surface.setup.json --json
+error: Lean exited with code 139
+✔ [8228/8454] Built RequestProject.GLM.PipelineKit.Lattices (330s)
+✔ [8230/8454] Built RequestProject.GLM.PipelineKit.Analogy (100s)
+✔ [8233/8454] Built RequestProject.GLM.PipelineKit.Permutation (82s)
+✔ [8236/8454] Built RequestProject.GLM.Endianness (73s)
+✔ [8239/8454] Built RequestProject.GLM.HoleReportsL5 (77s)
+✔ [8242/8454] Built RequestProject.GLM.Golay.Sextet (654s)
+✔ [8244/8454] Built RequestProject.GLM.LatticeCompletion (109s)
+✔ [8245/8454] Built RequestProject.GLM.CelsiusRegister (78s)
+✔ [8246/8454] Built RequestProject.GLM.Tower (76s)
+✔ [8247/8454] Built RequestProject.GLM.SeedRoles (137s)
+✔ [8248/8454] Built RequestProject.GLM.Reachable (85s)
+✔ [8249/8454] Built RequestProject.GLM.Irrational (88s)
+✔ [8250/8454] Built RequestProject.GLM.Sturmian (70s)
+✔ [8251/8454] Built RequestProject.GLM.Recipe (69s)
+✔ [8252/8454] Built RequestProject.GLM.Cascade (82s)
+✔ [8253/8454] Built RequestProject.GLM.CumulativityRule (65s)
+✔ [8254/8454] Built RequestProject.GLM.MeasureView (63s)
+✔ [8255/8454] Built RequestProject.GLM.LayerChain (57s)
+✔ [8258/8454] Built RequestProject.GLM.Retrieval (61s)
+✔ [8264/8454] Built RequestProject.GLM.TieBreak (55s)
+✖ [8265/8454] Building RequestProject.GLM.Shortcut.GolayWeights (195s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/Shortcut/GolayWeights.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Shortcut/GolayWeights.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Shortcut/GolayWeights.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Shortcut/GolayWeights.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Shortcut/GolayWeights.setup.json --json
+error: Lean exited with code 139
+✔ [8271/8454] Built RequestProject.GLM.PipelineInduction (152s)
+✔ [8272/8454] Built RequestProject.GLM.Calibration (37s)
+✔ [8273/8454] Built RequestProject.GLM.Rule30.Compute (194s)
+✔ [8274/8454] Built RequestProject.GLM.Superposition (29s)
+✔ [8275/8454] Built RequestProject.GLM.Golay.Census (29s)
+✔ [8276/8454] Built RequestProject.GLM.Rule30.ANFData (136s)
+✔ [8277/8454] Built RequestProject.GLM.ProbeBudget (34s)
+✖ [8278/8454] Building RequestProject.GLM.EllipticCertificate (137s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/EllipticCertificate.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/EllipticCertificate.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/EllipticCertificate.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/EllipticCertificate.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/EllipticCertificate.setup.json --json
+error: Lean exited with code 139
+✔ [8279/8454] Built RequestProject.GLM.HullExpansion (134s)
+✔ [8280/8454] Built RequestProject.GLM.Comparative (43s)
+✔ [8289/8454] Built RequestProject.GLM.EngineeringWheels (147s)
+✔ [8293/8454] Built RequestProject.GLM.Escalation (34s)
+✔ [8301/8454] Built RequestProject.GLM.Corpus (31s)
+✔ [8302/8454] Built RequestProject.GLM.PipelineAsk (32s)
+ℹ [8303/8454] Built RequestProject.GLM.PipelineKit.AxiomAudit (46s)
+info: src/lean/RequestProject/GLM/PipelineKit/AxiomAudit.lean:24:0: axiom guard: 25 declarations, standard axioms only
+info: src/lean/RequestProject/GLM/PipelineKit/AxiomAudit.lean:33:0: axiom guard: 17 declarations, standard axioms only
+info: src/lean/RequestProject/GLM/PipelineKit/AxiomAudit.lean:39:0: axiom guard: 130 theorems under GLMKit, standard axioms only
+✔ [8304/8454] Built RequestProject.GLM.ReadQuantum (39s)
+✔ [8305/8454] Built RequestProject.GLM.KappaAnchor (35s)
+✔ [8306/8454] Built RequestProject.GLM.AlignmentPoints (37s)
+✔ [8307/8454] Built RequestProject.GLM.Rule30.RightDiagonalBalance (34s)
+✔ [8308/8454] Built RequestProject.GLM.GolayWeightEnum (117s)
+✔ [8309/8454] Built RequestProject.GLM.HypothesisEngine.GateLoopData (85s)
+✔ [8310/8454] Built RequestProject.GLM.Rule30.ShortcutNetworkData (95s)
+✔ [8311/8454] Built RequestProject.GLM.Rule30.DegreeData (546s)
+✔ [8312/8454] Built RequestProject.GLM.Rule30.MathieuOrbitsData (2368s)
+✔ [8316/8454] Built RequestProject.GLM.Rule30.WobbleCertificate (396s)
+✔ [8325/8454] Built RequestProject.GLM.Golay.Dynamics (77s)
+✔ [8329/8454] Built RequestProject.GLM.Wobble (72s)
+✔ [8331/8454] Built RequestProject.GLM.NameCoordinate (65s)
+✔ [8332/8454] Built RequestProject.GLM.Rule30.MachineModelData (62s)
+✔ [8333/8454] Built RequestProject.GLM.DesignedSubstrate (73s)
+✔ [8334/8454] Built RequestProject.GLM.LDP (109s)
+✔ [8335/8454] Built RequestProject.GLM.Combiner (84s)
+✔ [8336/8454] Built RequestProject.GLM.TriadCensus (62s)
+✖ [8337/8454] Building RequestProject.GLM.LeechShells (33s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/LeechShells.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/LeechShells.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/LeechShells.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/LeechShells.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/LeechShells.setup.json --json
+error: src/lean/RequestProject/GLM/LeechShells.lean:93:26: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a • ?b
+in the target expression
+  ∑ i, x i ^ 2 = #(support x) • 4
+
+case inl
+x : Fin 24 → ℤ
+hn : normSq x = 32
+hb : ∀ (i : Fin 24), x i = -2 ∨ x i = 0 ∨ x i = 2
+hc : IsCodeword {i | x i % 4 = 2}
+hsupp : support x = {i | x i % 4 = 2}
+hsum : ∑ i, x i ^ 2 = #(support x) • 4
+⊢ #(support x) = 8
+error: src/lean/RequestProject/GLM/LeechShells.lean:126:72: Invalid argument name `a` for function `sum_eq_add_sum_diff_singleton`
+
+Hint: Perhaps you meant one of the following parameter names:
+  • `ι`: a̵ι̲
+  • `M`: a̵M̲
+  • `i`: a̵i̲
+  • `h`: a̵h̲
+error: src/lean/RequestProject/GLM/LeechShells.lean:151:72: Invalid argument name `a` for function `sum_eq_add_sum_diff_singleton`
+
+Hint: Perhaps you meant one of the following parameter names:
+  • `ι`: a̵ι̲
+  • `M`: a̵M̲
+  • `i`: a̵i̲
+  • `h`: a̵h̲
+error: src/lean/RequestProject/GLM/LeechShells.lean:176:63: unsolved goals
+x : Fin 24 → ℤ
+hx : IsLeech x
+hn : normSq x = 32
+hodd : ∀ (i : Fin 24), x i % 2 = 1
+hle : ∀ (i : Fin 24), x i ^ 2 ≤ 32
+hbnd : ∀ (i : Fin 24), -5 ≤ x i ∧ x i ≤ 5
+hsmall : ∀ (i : Fin 24), x i = 1 ∨ x i = -1 ∨ x i = 3 ∨ x i = -3
+hsq : ∀ (i : Fin 24), x i ^ 2 = if x i = 3 ∨ x i = -3 then 9 else 1
+⊢ ∑ x_1, ((if ¬x x_1 = 3 ∧ ¬x x_1 = -3 then 1 else 0) + if x x_1 = 3 ∨ x x_1 = -3 then 1 else 0) = 24
+error: src/lean/RequestProject/GLM/LeechShells.lean:189:10: No goals to be solved
+error: src/lean/RequestProject/GLM/LeechShells.lean:193:50: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(#{i | ¬(x i = 3 ∨ x i = -3)})
+in the target expression
+  #{i | x i = 3 ∨ x i = -3} • 9 + #{i | ¬(x i = 3 ∨ x i = -3)} • 1 =
+    9 * ↑(#{i | x i = 3 ∨ x i = -3}) + (24 - ↑(#{i | x i = 3 ∨ x i = -3}))
+
+x : Fin 24 → ℤ
+hx : IsLeech x
+hn : normSq x = 32
+hodd : ∀ (i : Fin 24), x i % 2 = 1
+hle : ∀ (i : Fin 24), x i ^ 2 ≤ 32
+hbnd : ∀ (i : Fin 24), -5 ≤ x i ∧ x i ≤ 5
+hsmall : ∀ (i : Fin 24), x i = 1 ∨ x i = -1 ∨ x i = 3 ∨ x i = -3
+hsq : ∀ (i : Fin 24), x i ^ 2 = if x i = 3 ∨ x i = -3 then 9 else 1
+hcompl : #{i | ¬(x i = 3 ∨ x i = -3)} + #{i | x i = 3 ∨ x i = -3} = 24
+hcompl' : ↑(#{i | ¬(x i = 3 ∨ x i = -3)}) = 24 - ↑(#{i | x i = 3 ∨ x i = -3})
+⊢ #{i | x i = 3 ∨ x i = -3} • 9 + #{i | ¬(x i = 3 ∨ x i = -3)} • 1 =
+    9 * ↑(#{i | x i = 3 ∨ x i = -3}) + (24 - ↑(#{i | x i = 3 ∨ x i = -3}))
+error: src/lean/RequestProject/GLM/LeechShells.lean:202:4: Type mismatch
+  hsmall i
+has type
+  x i = 1 ∨ x i = -1 ∨ x i = 3 ∨ x i = -3
+but is expected to have type
+  x i = 3 ∨ x i = -3 ∨ x i = 1 ∨ x i = -1
+error: Lean exited with code 1
+✔ [8338/8454] Built RequestProject.GLM.WobbleLandscape (31s)
+✔ [8339/8454] Built RequestProject.GLM.Steiner (29s)
+✔ [8340/8454] Built RequestProject.GLM.Escalation.LeechResidue (31s)
+✔ [8341/8454] Built RequestProject.GLM.Rule30.ChemistryLab (1040s)
+✔ [8342/8454] Built RequestProject.GLM.Rule30.MathieuRule30Data (216s)
+✔ [8343/8454] Built RequestProject.GLM.Rule30.ParityReductionData (553s)
+✔ [8344/8454] Built RequestProject.GLM.Rule30.MathieuMOG (102s)
+✔ [8353/8454] Built RequestProject.GLM.Golay.Cesaro (69s)
+✔ [8356/8454] Built RequestProject.GLM.Rule30.PhaseSpace32 (62s)
+✖ [8357/8454] Building RequestProject.GLM.Rule30.Observer (61s)
+trace: .> LEAN_PATH=/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Cli/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/batteries/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/Qq/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/aesop/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/importGraph/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/plausible/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/packages/mathlib/.lake/build/lib/lean:/Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean /Users/macoshdd/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean /Users/macoshdd/Documents/GitHub/GLM/src/lean/RequestProject/GLM/Rule30/Observer.lean -o /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Rule30/Observer.olean -i /Users/macoshdd/Documents/GitHub/GLM/.lake/build/lib/lean/RequestProject/GLM/Rule30/Observer.ilean -c /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Rule30/Observer.c --setup /Users/macoshdd/Documents/GitHub/GLM/.lake/build/ir/RequestProject/GLM/Rule30/Observer.setup.json --json
+error: Lean exited with code 139
+✔ [8359/8454] Built RequestProject.GLM.Rule30.AdicTowerData (68s)
+✔ [8361/8454] Built RequestProject.GLM.Rule30.PowerSeriesLadderData (1197s)
+✔ [8362/8454] Built RequestProject.GLM.ProtectedTag (52s)
+✔ [8363/8454] Built RequestProject.GLM.Rule30.MathieuCensus (1089s)
+✔ [8364/8454] Built RequestProject.GLM.LawRegister (95s)
+✔ [8367/8454] Built RequestProject.GLM.Relaxation (648s)
+✔ [8370/8454] Built RequestProject.GLM.Rule30.RunBoundData (49s)
+✔ [8374/8454] Built RequestProject.GLM.SecondView (185s)
+✔ [8375/8454] Built RequestProject.GLM.TriadChance (751s)
+✔ [8376/8454] Built RequestProject.GLM.HypothesisEngine.WheelChecksData (30s)
+✔ [8377/8454] Built RequestProject.GLM.Rule30.TuningByEarData (46s)
+✔ [8378/8454] Built RequestProject.GLM.ShortestTag (41s)
+✔ [8379/8454] Built RequestProject.GLM.Rule30.MathieuCensusOrbits (58s)
+✔ [8381/8454] Built RequestProject.GLM.LawAbsorption (28s)
+✔ [8383/8454] Built RequestProject.GLM.Rule30.InjectorData (495s)
+✔ [8384/8454] Built RequestProject.GLM.Rule30.XorAlternativesData (96s)
+✔ [8393/8454] Built RequestProject.GLM.OnDemandView (63s)
+✔ [8398/8454] Built RequestProject.GLM.Rule30.RunBoundSearch (478s)
+✔ [8402/8454] Built RequestProject.GLM.Rule30.WobbleLensesData (491s)
+✔ [8403/8454] Built RequestProject.GLM.Rule30.LeftDiagonalPeriodsData (94s)
+✔ [8404/8454] Built RequestProject.GLM.Escalation.GolayTies (2551s)
+✔ [8405/8454] Built RequestProject.GLM.Rule30.PipelineData (349s)
+✔ [8407/8454] Built RequestProject.GLM.Rule30.PeriodTwoHalfLineData (581s)
+✔ [8408/8454] Built RequestProject.GLM.Rule30.ArrowIndependence (37s)
+✔ [8409/8454] Built RequestProject.GLM.HypothesisEngine.TaxChecksData (38s)
+✔ [8410/8454] Built RequestProject.GLM.Rule30.TransientsData (27s)
+✔ [8411/8454] Built RequestProject.GLM.Rule30.TrianglesData (30s)
+✔ [8412/8454] Built RequestProject.GLM.Rule30.ConjectureLoopData (180s)
+✔ [8414/8454] Built RequestProject.GLM.Rule30.InnerSurvivorData (26s)
+✔ [8416/8454] Built RequestProject.GLM.HypothesisEngine (25s)
+✔ [8418/8454] Built RequestProject.GLM.Rule30.ProofRoutesData (119s)
+✔ [8420/8454] Built RequestProject.GLM.Rule30.HalfLineMachineData (330s)
+✔ [8422/8454] Built RequestProject.GLM.Rule30.BarrierDiagonalsData (71s)
+✔ [8426/8454] Built RequestProject.GLM.Rule30.RunBoundPeriods (1100s)
+✔ [8427/8454] Built RequestProject.GLM.Rule30.TestCountLawData (311s)
+✔ [8428/8454] Built RequestProject.GLM.Rule30.DiagCert (56s)
+✔ [8429/8454] Built RequestProject.GLM.Rule30.SlackCert (51s)
+✔ [8430/8454] Built RequestProject.GLM.Rule30.RunBoundEighteen (1548s)
+✔ [8431/8454] Built RequestProject.GLM.Rule30.DiagCertFourRest (84s)
+✔ [8432/8454] Built RequestProject.GLM.Rule30.TestHalvingData (467s)
+✔ [8433/8454] Built RequestProject.GLM.Rule30.TurnCostData (1028s)
+✔ [8434/8454] Built RequestProject.GLM.Rule30.PrefixSearchData (1893s)
+✔ [8435/8454] Built RequestProject.GLM.Rule30.DiagCertThree (1600s)

@@ -1419,7 +1419,7 @@ theorem axiom_1_residual : dimL dim (ax 1) = ![0, 0, 0, 0, 0, 0, 0, 0] := by
 
 /-- Axiom 2 balances at SI7; its residual on the angle axis A is -2. -/
 theorem axiom_2_residual : dimL dim (ax 2) = ![0, 0, 0, 0, 0, 0, 0, -2] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ]
+  funext a; fin_cases a <;> simp [dimL_apply, ax, dim, Fin.sum_univ_succ]
 
 /-- `W13-01`: period = 1 / frequency -/
 theorem q_W13_01 : Derivable (Set.range ax) ![0, 0, 1, 0, 1, 0] :=
@@ -1476,7 +1476,7 @@ theorem axiom_1_residual : dimL dim (ax 1) = ![0, 0, 0, 0, 0, 0, 0, 2] := by
 
 /-- Axiom 2 balances on all eight axes. -/
 theorem axiom_2_residual : dimL dim (ax 2) = ![0, 0, 0, 0, 0, 0, 0, 0] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ]
+  funext a; fin_cases a <;> simp [dimL_apply, ax, dim, Fin.sum_univ_succ]
 
 /-- `W14-01`: angular_frequency = 1 / (inductance * capacitance * angular_frequency) -/
 theorem q_W14_01 : Derivable (Set.range ax) ![2, 1, 0, 0, 1, 0, 0] :=
@@ -1588,7 +1588,7 @@ def W25_axiom_1_dim : Fin 3 → Fin 8 → ℚ :=
 theorem W25_axiom_1_residual : dimL W25_axiom_1_dim W25_axiom_1 = ![0, 0, 1, 1, 0, 0, 0, 0] := by
   funext a; fin_cases a <;> norm_num [dimL_apply, W25_axiom_1, W25_axiom_1_dim, Fin.sum_univ_succ]
 theorem W25_axiom_1_unbalanced : dimL W25_axiom_1_dim W25_axiom_1 ≠ 0 := by
-  rw [W25_axiom_1_residual]; intro h; have := congrFun h 2; norm_num at this
+  rw [W25_axiom_1_residual]; intro h; have := congrFun h 2; simp at this
 
 /-- W25 axiom 2 as supplied: alfven_velocity = magnetic_field / mass_density^(1/2) -/
 def W25_axiom_2_coords : List String :=
@@ -1647,7 +1647,7 @@ def W34_axiom_1_dim : Fin 4 → Fin 8 → ℚ :=
 theorem W34_axiom_1_residual : dimL W34_axiom_1_dim W34_axiom_1 = ![0, 0, 2, 0, 0, 0, 0, 0] := by
   funext a; fin_cases a <;> norm_num [dimL_apply, W34_axiom_1, W34_axiom_1_dim, Fin.sum_univ_succ]
 theorem W34_axiom_1_unbalanced : dimL W34_axiom_1_dim W34_axiom_1 ≠ 0 := by
-  rw [W34_axiom_1_residual]; intro h; have := congrFun h 2; norm_num at this
+  rw [W34_axiom_1_residual]; intro h; have := congrFun h 2; simp at this
 
 /-- W34 axiom 2 as supplied: volume_flow_rate = pressure / vascular_resistance -/
 def W34_axiom_2_coords : List String :=
@@ -1661,7 +1661,7 @@ def W34_axiom_2_dim : Fin 3 → Fin 8 → ℚ :=
 theorem W34_axiom_2_residual : dimL W34_axiom_2_dim W34_axiom_2 = ![0, 0, 2, 0, 0, 0, 0, 0] := by
   funext a; fin_cases a <;> norm_num [dimL_apply, W34_axiom_2, W34_axiom_2_dim, Fin.sum_univ_succ]
 theorem W34_axiom_2_unbalanced : dimL W34_axiom_2_dim W34_axiom_2 ≠ 0 := by
-  rw [W34_axiom_2_residual]; intro h; have := congrFun h 2; norm_num at this
+  rw [W34_axiom_2_residual]; intro h; have := congrFun h 2; simp at this
 
 /-- W35 axiom 1 as supplied: membrane_voltage = temperature / valence -/
 def W35_axiom_1_coords : List String :=
