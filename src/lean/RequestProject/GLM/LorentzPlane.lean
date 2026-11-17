@@ -1,4 +1,6 @@
-import Mathlib
+module
+
+public import Mathlib
 
 /-!
 # The Lorentz plane: boosts, rotations and the Thomas–Wigner split (Phase 178, part B)
@@ -121,26 +123,18 @@ theorem rot_lorentz (c s : ℚ) (h : c ^ 2 + s ^ 2 = 1) : IsLorentz (rot c s) :=
 theorem lorentz_mul {A B : Matrix (Fin 3) (Fin 3) ℚ} (hA : IsLorentz A) (hB : IsLorentz B) :
     IsLorentz (A * B) := by
   unfold IsLorentz at *
-  rw [Matrix.transpose_mul]
-  calc Bᵀ * Aᵀ * eta * (A * B)
-      = Bᵀ * (Aᵀ * eta * A) * B := by simp only [Matrix.mul_assoc]
-    _ = Bᵀ * eta * B := by rw [hA]
-    _ = eta := hB
+  rw [Matrix.transpose_mul, Matrix.mul_assoc, ← Matrix.mul_assoc B, hB, ← Matrix.mul_assoc,
+    hA]
 
 /-- **A Lorentz map preserves the squared Minkowski norm of every state.** -/
 theorem minkowski_preserved {A : Matrix (Fin 3) (Fin 3) ℚ} (hA : IsLorentz A)
     (v : Fin 3 → ℚ) : minkowski (A *ᵥ v) = minkowski v := by
-  have h00 := congrFun (congrFun hA 0) 0
-  have h01 := congrFun (congrFun hA 0) 1
-  have h02 := congrFun (congrFun hA 0) 2
-  have h11 := congrFun (congrFun hA 1) 1
-  have h12 := congrFun (congrFun hA 1) 2
-  have h22 := congrFun (congrFun hA 2) 2
-  simp [eta, Matrix.mul_apply, Matrix.transpose_apply, Fin.sum_univ_three] at h00 h01 h02 h11 h12 h22
-  simp only [minkowski, Matrix.mulVec, dotProduct, Fin.sum_univ_three]
-  linear_combination
-    v 0 ^ 2 * h00 + 2 * v 0 * v 1 * h01 + 2 * v 0 * v 2 * h02 +
-    v 1 ^ 2 * h11 + 2 * v 1 * v 2 * h12 + v 2 ^ 2 * h22
+  rw [minkowski_eta, minkowski_eta]
+  conv_rhs => rw [← hA]
+  rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec, ← Matrix.dotProduct_mulVec]
+  congr 1
+  rw [Matrix.transpose_mul, Matrix.mul_assoc]
+  rfl
 
 /-! ## 2. The pure boost to a state on the hyperboloid -/
 
@@ -165,17 +159,12 @@ theorem boostTo_rest (g : Fin 3 → ℚ) : boostTo g *ᵥ rest = g := by
 /-- **The pure boost to a state on the hyperboloid is a Lorentz map.** -/
 theorem boostTo_lorentz {g : Fin 3 → ℚ} (hm : minkowski g = 1) (hd : 1 + g 0 ≠ 0) :
     IsLorentz (boostTo g) := by
-  have hg0 : g 0 ^ 2 = 1 + g 1 ^ 2 + g 2 ^ 2 := by
-    have : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1 := hm
-    linarith
+  have hm' : g 0 ^ 2 - g 1 ^ 2 - g 2 ^ 2 = 1 := hm
   unfold IsLorentz boostTo eta
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [Matrix.mul_apply, Fin.sum_univ_three, Matrix.transpose_apply] <;>
-    field_simp <;>
-    ring_nf <;>
-    simp only [hg0] <;>
-    ring
+    simp only [Matrix.mul_apply, Fin.sum_univ_three, Matrix.transpose_apply] <;>
+    field_simp <;> nlinarith [hm']
 
 /-! ## 3. The Thomas–Wigner example -/
 
@@ -203,11 +192,7 @@ theorem thomas_eq : thomas = boostTo thomasBoost * rot thomasCos thomasSin := by
 
 /-- The target of the pure boost is the Thomas map applied to rest. -/
 theorem thomas_apply_rest : thomas *ᵥ rest = thomasBoost := by
-  rw [thomas_eq]
-  ext i
-  fin_cases i <;>
-    simp [Matrix.mulVec, Matrix.mul_apply, dotProduct, Fin.sum_univ_three,
-      rest, boostTo, rot, thomasBoost, thomasCos, thomasSin]
+  rw [thomas_eq, Matrix.mulVec_mulVec, boostTo_rest]
 
 /-- **A product of two boosts is a Lorentz map.** -/
 theorem thomas_lorentz : IsLorentz thomas :=
@@ -230,7 +215,7 @@ theorem thomas_not_symm : thomasᵀ ≠ thomas := by
   have h10 := congrFun (congrFun h 1) 0
   unfold thomas boostX boostY boostXOf boostYOf ca sb at h01 h10
   simp [Matrix.transpose_apply, Matrix.mul_apply, Fin.sum_univ_three] at h01 h10
-  norm_num at h01
+  norm_num at h01 h10
 
 /-- **The Wigner rotation of the two boosts is not the identity.** -/
 theorem thomas_rotation_ne_one :
@@ -239,5 +224,6 @@ theorem thomas_rotation_ne_one :
   have h12 := congrFun (congrFun h 1) 2
   unfold thomasCos thomasSin rot at h12
   simp at h12
+  norm_num at h12
 
 end GLM.LorentzPlane
