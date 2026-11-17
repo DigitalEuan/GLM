@@ -56,7 +56,7 @@ def lean_available() -> bool:
     return lean_root() is not None
 
 
-def lean_file_for(name: str) -> tuple:
+def lean_file_for(name: str, create: bool = False) -> tuple:
     """The Lean file a declaration named ``name`` lives in (or would live
     in), and whether it is present.
 
@@ -64,8 +64,12 @@ def lean_file_for(name: str) -> tuple:
     declaration is found in the stored book or the development; when neither
     is available it is the candidate path the development would use
     (``<root>/<Name>.lean`` with dots as separators) so a caller can create
-    it.  ``present`` is ``True`` only when the file exists on disk.  Never
-    raises and never invokes the toolchain.
+    it.  ``present`` is ``True`` only when the file exists on disk.
+
+    With ``create=True`` a missing file (and its parent directories) is
+    created as an empty Lean file and ``present`` becomes ``True``.  This is
+    the "land on a Lean file if it exists or can be created" path: it never
+    runs ``lake`` and never overwrites an existing file.
     """
     root = lean_root()
     candidate = None
@@ -91,6 +95,13 @@ def lean_file_for(name: str) -> tuple:
         rel = name.replace(".", "/") + ".lean"
         candidate = root / rel
     present = candidate.exists()
+    if create and not present:
+        try:
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+            candidate.write_text("", encoding="utf-8")
+            present = True
+        except OSError:
+            present = candidate.exists()
     return (candidate, present)
 
 
