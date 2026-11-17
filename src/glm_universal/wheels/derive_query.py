@@ -308,7 +308,9 @@ def derive_text(arg: str) -> Tuple[bool, str, Dict[str, object]]:
     except (ValueError, KeyError) as exc:
         return False, f"derive: the engine could not read it ({exc})", {"equation": equation}
     verdict = out.get("verdict")
-    figures: Dict[str, object] = {"equation": equation, "verdict": str(verdict)}
+    from ..reasoning import lean_address as _la
+    figures: Dict[str, object] = {"equation": equation, "verdict": str(verdict),
+                                 "source": "lean" if _la.lean_available() else "python"}
     if verdict == "unreadable":
         return False, (f"derive: cannot read {equation!r} as an equation between "
                        f"monomials; {usage}"), figures

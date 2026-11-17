@@ -56,7 +56,7 @@
 
 schema: glm-intake-ledger/v1
 created: 31 October 2026
-last_altered: 16 November 2026
+last_altered: 17 November 2026
 items:
 - id: GLM_IMPROVEMENT_ROADMAP
   path: ToDo/GLM_IMPROVEMENT_ROADMAP.md
@@ -806,6 +806,34 @@ items:
       0 skipped of 9 collected'
     date: 1 November 2026
     fingerprint: sha256:2f0cba8afa0a349d90b119ab9e6031576f68973f88c317687e41340777b050b2
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 17 November 2026
+    fingerprint: sha256:35478d375db8e561f224b9ae866af5033f831376169107e66da8d80ab9b991ac
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 17 November 2026
+    fingerprint: sha256:35478d375db8e561f224b9ae866af5033f831376169107e66da8d80ab9b991ac
+  - test: tests/test_cent_wheels.py
+    result: fail
+    detail: 'failed (exit 1): a test or a setup/teardown hook failed (without pytest); 32 passed,
+      4 failed, 0 skipped of 36 collected'
+    date: 17 November 2026
+    fingerprint: sha256:35478d375db8e561f224b9ae866af5033f831376169107e66da8d80ab9b991ac
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 17 November 2026
+    fingerprint: sha256:35478d375db8e561f224b9ae866af5033f831376169107e66da8d80ab9b991ac
+  - test: tests/test_derive_query.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 9 passed, 0 failed,
+      0 skipped of 9 collected'
+    date: 17 November 2026
+    fingerprint: sha256:35478d375db8e561f224b9ae866af5033f831376169107e66da8d80ab9b991ac
   lean:
   - Wheels/CentWheels
   - IntakeChecks/Derivability
@@ -1013,8 +1041,7 @@ items:
       so the span statement is over Q for exponents as well
     - 'W22-03 (diffusion_coefficient = diffusion_flux / concentration_gradient): settle whether it
       is derivable; the engine says no, the wheel says yes'
-  last_action: '1 November 2026: staged and provisional parts absorbed ahead of the build by the owner''s
-    decision (0 file(s) installed); 4 part(s) still open'
+  last_action: '17 November 2026: tests run again: 4 of 5 passed'
   next_step: 'owner: run scripts/rebuild_lean.sh; when its build record verifies the Lean files, `python3
     -m glm_universal.intake confirm-build cent_compiler_v12`; the open part(s) (cent, cent_compiler/*.py
     (the compiler: grammar, pattern matcher, substrate library, cost function, isomorphism gate, hypothesis
@@ -3183,8 +3210,9 @@ items:
   stage: triaged
   last_action: '16 November 2026: triaged - the three files are rebuilt from the API their six consumer
     files call, the semantics in reasoning/leech_shells.py, frame_plane.py and adversarial_dialogue_study.py,
-    and the theorem names those modules declare; LeechShells is partial by design and names what it owes'
-  next_step: 'owner: copy the three .lean files into src/lean/RequestProject/GLM/, run `PYTHONPATH=src python3
-    -m glm_universal.lean_check --write-audit` and scripts/rebuild_lean.sh, and report
-    scripts/logs/lean_build_latest.log; when the build record passes, move the six held files back out of
-    awaiting_recovery/ in dependency order and re-take studies/_lean_files_needed.md'
+    and the theorem names those modules declare; LeechShells is partial by design and names what it
+    owes'
+  next_step: 'owner: copy the three .lean files into src/lean/RequestProject/GLM/, run `PYTHONPATH=src
+    python3 -m glm_universal.lean_check --write-audit` and scripts/rebuild_lean.sh, and report scripts/logs/lean_build_latest.log;
+    when the build record passes, move the six held files back out of awaiting_recovery/ in dependency
+    order and re-take studies/_lean_files_needed.md'
