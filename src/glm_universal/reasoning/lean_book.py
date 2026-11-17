@@ -38,7 +38,7 @@ from pathlib import Path
 from typing import Dict, Mapping, Optional, Tuple
 
 __all__ = ["BOOK_PATH", "book", "declaration_rows", "stored_digest",
-           "schema"]
+           "schema", "features", "declaration_names"]
 
 _HERE = Path(__file__).resolve()
 
@@ -118,3 +118,40 @@ def declaration_rows() -> Mapping[str, Mapping[str, object]]:
             "statement": row.get("statement", ""),
         }
     return out
+
+
+def features() -> Mapping[str, Tuple[int, ...]]:
+    """Every declaration's stored feature vector, citation counts included.
+
+    Read from the book; never the development.  The vectors were computed
+    when the book was written, so a reader that only needs them depends on
+    the book and not on the tree it came from.  An absent or older book
+    (one written before features were stored) yields an empty mapping rather
+    than a guess.
+    """
+    stored = book()
+    if stored is None:
+        return {}
+    meta = stored.get("features")
+    if not isinstance(meta, dict):
+        return {}
+    out: Dict[str, Tuple[int, ...]] = {}
+    for name, value in meta.items():
+        if isinstance(value, (list, tuple)):
+            out[str(name)] = tuple(int(x) for x in value)
+    return out
+
+
+def declaration_names() -> frozenset:
+    """Every full name recorded in the book, as a set.
+
+    Read from the book; never the development.  Falls back to the empty set
+    when no book is present.
+    """
+    stored = book()
+    if stored is None:
+        return frozenset()
+    meta = stored.get("declarations")
+    if not isinstance(meta, dict):
+        return frozenset()
+    return frozenset(str(name) for name in meta)
