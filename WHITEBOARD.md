@@ -317,3 +317,10 @@ non-unique); the six energy wheels alone derive 7; the licensed union answers
 delivered `C V^2` factor-1/2 conflict** (`charge`/`voltage`,
 `capacitance`/`voltage`, `power`/`time`, `energy`/`time`). The refusal names
 both formulas rather than choosing one.
+
+The two records the table cannot use are now **classified rather than left as
+generic unknowns**: the `W36 pair_energy -> W4 energy` junction is dropped
+(W4 holds no energy), and the `W37 relaxation_time` guard is vacuous (W4
+holds no timescale, and the record gives no other name). A cross-name answer
+now renders the name the question asked: `pair_energy` from `stress` prints
+`stress^2`, not `pair_penetration^2`.

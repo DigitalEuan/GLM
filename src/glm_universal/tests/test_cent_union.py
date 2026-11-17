@@ -39,6 +39,15 @@ def test_a_single_wheel_question_is_answered():
     assert "W14" in got.wheels
 
 
+def test_a_cross_name_answer_uses_the_asked_name():
+    # `stress` is the class that joins W21/W36/W37; the canonical name is
+    # `pair_penetration`, but the question asked `stress`.
+    got = cu.derive_across("pair_energy", ("stress",))
+    assert got.answered
+    assert got.formula == "stress^2"
+    assert "pair_penetration" not in got.formula
+
+
 def test_the_capacitor_against_delivered_conflict_is_refused():
     # W3's 1/2 C V^2 against the delivered C V^2 that W1+W15 license; the
     # union refuses rather than choosing one.

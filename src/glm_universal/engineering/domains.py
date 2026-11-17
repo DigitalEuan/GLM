@@ -264,7 +264,9 @@ def _wheels_of(label: str) -> Tuple[str, ...]:
 
 
 def derive_relations(target: str, inputs: Sequence[str],
-                     system: un.SplitSystem) -> Optional[un.Found]:
+                     system: un.SplitSystem,
+                     display: Optional[Mapping[str, str]] = None
+                     ) -> Optional[un.Found]:
     """``target`` as ``c * prod(Y ** a)`` over ``inputs`` (split labels),
     solved from the system's relations: Phase 66's rule
     (:func:`glm_universal.engineering.union.derive_relations`, which orders
@@ -300,7 +302,11 @@ def derive_relations(target: str, inputs: Sequence[str],
         return None
     coef = {int(k[1:]): -v for k, v in combo.items()
             if k.startswith("#") and v}
-    kept = [(un.base_name(y), e) for y, e in powers if e]
+    #  A class label's canonical name is not necessarily the name the question
+    #  asked (`pair_penetration@3` for `stress`); the caller's display map
+    #  restores the asked name in the rendered formula.
+    display = display or {}
+    kept = [(display.get(y, un.base_name(y)), e) for y, e in powers if e]
     formula = wh.render_monomial(coef, kept)
     used = tuple(sorted({system.owners[i] for i in range(n) if x[i]},
                         key=lambda w: _ORDER.get(w, len(_ORDER))))
@@ -414,9 +420,10 @@ def derive_domains(target: str, inputs: Sequence[str],
             if name in copies:
                 copies[name] = tuple(c for c in copies[name]
                                      if wheel in _wheels_of(c))
+    display = {label: name for name, labels in copies.items() for label in labels}
     found: Dict[str, List[un.Found]] = {}
     for combo in itertools.product(copies[t], *(copies[y] for y in ins)):
-        f = derive_relations(combo[0], tuple(combo[1:]), system)
+        f = derive_relations(combo[0], tuple(combo[1:]), system, display)
         if f is not None:
             found.setdefault(f.formula, []).append(f)
     summary = tuple((k, tuple(dict.fromkeys(w for g in v for w in g.wheels)))
