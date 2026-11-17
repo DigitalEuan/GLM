@@ -596,8 +596,8 @@ CORRECTIONS: Tuple[Correction, ...] = (
     Correction("W21", "axiom", "axiom 1",
                "fracture_toughness^2 = 2 * youngs_modulus * surface_energy",
                "fracture_toughness = (2 * youngs_modulus * surface_energy / crack_length)^(1/2)",
-               "a", "the supplied form dropped the crack_length (and the root); Griffith's law keeps "
-                    "crack_length, so the absorbed form restores it"),
+               "a", "the supplied form is the squared relation without crack_length; the absorbed "
+                    "form restores crack_length (and the square root)"),
     Correction("W21", "case", "W21-01",
                "surface_energy = fracture_toughness^2 / (2 * youngs_modulus)",
                "surface_energy = fracture_toughness^2 * crack_length / (2 * youngs_modulus)",
@@ -669,16 +669,25 @@ DROPPED: Tuple[Dropped, ...] = (
 
 #: Supplied new wheels that are not absorbed, and why.
 NOT_ABSORBED: Dict[str, str] = {
-    "W26": "supplied but not absorbed: out of scope of this round",
-    "W27": "supplied but not absorbed: out of scope of this round",
+    "W26": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W27": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
     "W35": "both axioms dropped under rule R; with no axiom the wheel derives nothing",
-    "W36": "out of scope of this round: a numerical SAT substrate, not a formula wheel",
-    "W37": "out of scope of this round: viscoelastic settling, not a formula wheel",
-    "W38": "out of scope of this round: gears and transmissions, not a formula wheel",
-    "W39": "out of scope of this round: magnetic circuits, not a formula wheel",
-    "W40": "out of scope of this round: piezoelectric transducers, not a formula wheel",
-    "W41": "out of scope of this round: thermoelectric transducers, not a formula wheel",
-    "W42": "out of scope of this round: elastic buckling, not a formula wheel",
+    "W36": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W37": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W38": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W39": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W40": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W41": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
+    "W42": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
+            "absorption in this round",
 }
 
 
