@@ -28,6 +28,10 @@ and the figure above are grounded in the body below, and
 eight CPUs, the evaluation's own default worker count, the cheap lane and the
 close in one order; and the surface's second refusal hint).*
 
+*Last altered 17 November 2026 (the item's own tables checked: the stale
+43-entry per-wheel junction copy replaced by the operative 59-pair
+`index.json` table, 50 sound edges, and the four declared analogies refused).*
+
 ---
 
 ## How to use this file
@@ -293,22 +297,32 @@ below is started except #2, which is in flight.
 16. **[new] Second independent engine** for differential testing of span
     membership where the integer engine cannot read.
 
-**#2 in flight (17 November 2026).** `wheels/quantity_graph.py` holds the
-absorbed item's 43 junctions and 15 non-identities, audits them (one bad
-junction, `W36 pair_energy -> W4 energy`, and one vacuous guard, `W37
-relaxation_time`), and contracts the sound edges into identity classes; four
-vacuous guards are repaired with the other-wheel name read out of their
-reason (`W39 magnetomotive_force` against `W1 current`, `W41
-temperature_difference` against `W8 temperature`, `W42
+**#2 in flight (17 November 2026; the item's own tables checked).**
+`wheels/quantity_graph.py` now follows the absorbed item's **operative**
+junction table, `wheels/index.json`: **59 distinct pairs**. The item carries a
+second, stale copy in the per-wheel `W*.json` `junctions` blocks — 43
+directional entries, 29 distinct pairs — and that is the copy transcribed
+first; it omits all thirty W20–W35 registry edges. `test_the_per_wheel_junction_copy_is_stale`
+pins the 29 < 59 relation. The graph audits the table (seven junctions name a
+quantity the wheel lacks, `W36 pair_energy -> W4 energy` among them; one
+vacuous guard, `W37 relaxation_time`) and contracts the sound edges into
+identity classes; four vacuous guards are repaired with the other-wheel name
+read out of their reason (`W39 magnetomotive_force` against `W1 current`,
+`W41 temperature_difference` against `W8 temperature`, `W42
 moment_of_inertia_of_section` against `W4 moment_of_inertia`, `W36
-pair_energy` against `W5 energy`).
+pair_energy` against `W5 energy`). A declared junction is not a licence to
+identify: four pairs have unequal SI7 vectors and are refused as declared
+analogies (`W1 voltage`/`W20 stress`, `W12 area`/`W34 pipe_radius`, and the
+two W36 `pair_penetration`/`stress` edges), leaving **50 sound edges**.
 
 `wheels/cent_union.py` feeds those classes to `domains.split_system` over all
 39 wheels. The third junction table **duplicates most of Phase 66's and the
 domain table's** entries; the merge keeps each pair once (15 pairs), and the
-graph's 28 sound edges pass as explicit pairings, so differently named
-quantities join (`pair_penetration`/`stress`, `magnetic_flux`/`flux`). The
-rational engine reads the cent wheels' fractional powers.
+graph's 50 sound edges pass as explicit pairings, so differently named
+quantities join (`magnetic_flux`/`flux`, `heat_rate`/`power`). The rational
+engine reads the cent wheels' fractional powers. Completing the table did not
+move the measured family numbers below: it widened the licensing without
+altering what the five families answer.
 
 **Energy family measured (8 pre-registered questions):** the 39-wheel naive
 union is ill-posed on all 8 (merging six `energy` copies makes the exponents
@@ -346,8 +360,27 @@ just energy.
 only through W36's **dimensionless** `pair_penetration`, a dimension gap, and
 that left W40's stress disconnected from W37's, so the W37+W40 dissipation
 question could never connect. `dimension_gaps()` reports exactly the two W36
-edges; two same-name `BRIDGES` (W20/W21 and W20/W37) join the four
-dimensioned copies directly. Now `dissipated_power` from `force, area,
+edges (and, with the full table, `W1 voltage`/`W20 stress` and `W12
+area`/`W34 pipe_radius`, which are analogies rather than stress); two
+same-name `BRIDGES` (W20/W21 and W20/W37) join the four dimensioned copies
+directly. Now `dissipated_power` from `force, area,
 strain_rate` derives `force * strain_rate / area`, and `pair_energy` from
 `stress` is refused at the gap instead of printing a dimensionally false
 `stress^2`.
+
+**What the item already has (checked 17 November 2026).** The absorbed
+pipeline is not a blank slate; several of its modules overlap this round.
+
+| module | what it is | relation to this round |
+|---|---|---|
+| `axiom_graph.py` | 40 wheels, 101 axioms, 59 junctions; wheel/axiom/quantity/dimension nodes; union-find identities, non-identity barriers, exact `derive_from` with **direct and bounded substitution** and proof steps | the upstream ancestor of `quantity_graph.py` + `cent_union.py`; ours adds the SI7 dimension filter it lacks and now reads its 59-pair table |
+| `leech_class.py` | class word `c mod 2` from a declared row-HNF basis, XOR composition, F2 rank; tested on 80,361 moves (63,257 classes, rank 24) | the existing **Leech addressing**: a class index, not a lattice, metric or Griess product; the quotient verdict stands |
+| `typed_graph.py` | route/component graph: primitive nodes, wire bindings, component lowerings | unrelated to the quantity graph (ports and wires, not measurands); no reuse |
+| `wheel_mapping.py` | declared typed bridge with an SI residual (W24 log-domain sqrt) | the pattern for an **analogy** edge; the dimension filter is the same test |
+| `isomorphism_gate.py` | 3-tier gate and 7 transducer analogies (W1↔W7, W4↔W5, W3↔W14, ...) | method-level analogies, not quantity identities; keep them out of the identity graph |
+| `port_contracts.py` | 0/1-junction **circuit** port contracts | a different sense of "junction"; no reuse |
+
+The capability still to port is the substitution search: the item's
+`derive_from` chains declared axioms through intermediate quantities, while
+`derive_across` enumerates direct linear combinations only. That is the one
+existing capability the licensed union does not yet have.

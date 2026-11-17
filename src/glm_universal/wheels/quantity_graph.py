@@ -44,12 +44,25 @@ energy``, ``W39 magnetomotive_force`` against ``W1 current``, ``W41
 temperature_difference`` against ``W8 temperature`` and ``W42
 moment_of_inertia_of_section`` against ``W4 moment_of_inertia``.  The fifth,
 ``W37 relaxation_time`` against ``W4``, has no other-wheel name to read and
-stays vacuous; :func:`audit` reports it.  One junction (``W36 pair_energy ->
-W4 energy``) still names a quantity ``W4`` does not hold, and fifteen
-junctions are declared in one direction only.  :func:`edges` takes the
-symmetric closure of the sound edges, so a one-way declaration still joins
-its two vertices; an unknown endpoint is dropped from the graph but stays in
-the audit.
+stays vacuous; :func:`audit` reports it.
+
+Two copies of the junction table exist in the item.  The per-wheel
+``junctions`` blocks hold 43 directional entries -- 29 distinct pairs -- and
+that stale copy was transcribed first.  ``wheels/index.json``, which the
+item's own loader and ``axiom_graph`` use, declares **59** distinct pairs; the
+thirty extra are the W20-W35 registry edges (``W1 voltage`` against ``W20
+stress``, ``W6 pressure`` against ``W32``/``W34``, ``W8 temperature`` against
+``W22``/``W26``/``W35``, the W11-W27 cosmology edges, ...).  This module now
+follows ``index.json``.
+
+A declared junction is not automatically an identity.  The full table also
+joins pairs whose SI7 vectors differ -- ``W1 voltage`` against ``W20 stress``,
+``W12 area`` against ``W34 pipe_radius`` -- which are declared cross-domain
+analogies, not one measurand.  :func:`edges` keeps only the dimensionally
+equal pairs; :func:`dimension_gaps` reports the rest, and
+:func:`may_identify` refuses them.  Seven junctions still name a quantity
+that wheel does not hold (``W4 energy``, ``W32 viscosity``, ...); an unknown
+endpoint is dropped from the graph but stays in the audit.
 """
 
 from __future__ import annotations
@@ -88,33 +101,46 @@ class NonIdentity:
     reason: str
 
 
-#: The absorbed item's ``junctions``, verbatim:
+#: The absorbed item's ``wheels/index.json`` ``junctions``, verbatim:
 #: ``(wheel, name, other_wheel, name_in_other_wheel, reason)``.
 _JUNCTIONS = (
+    ('W5', 'velocity', 'W11', 'velocity', "moving body's velocity = uniform-motion velocity"),
+    ('W5', 'mass', 'W12', 'mass', 'the body whose density is read is the body that moves'),
+    ('W6', 'area', 'W12', 'area', "the flow's cross-section = swept-prism cross-section"),
+    ('W11', 'length', 'W12', 'length', 'the length the fluid moves = length of the swept prism'),
+    ('W9', 'frequency', 'W13', 'frequency', "the oscillator's frequency = the wave's frequency"),
+    ('W5', 'mass', 'W13', 'mass', 'the oscillating body = the dynamic body'),
+    ('W3', 'capacitance', 'W14', 'capacitance', "the LC circuit's capacitor = the electrostatics capacitor"),
     ('W1', 'current', 'W14', 'current', "the inductor's current = the circuit's current"),
     ('W1', 'current', 'W15', 'current', "the charge and energy are carried by the circuit's current"),
     ('W1', 'power', 'W15', 'power', "the energy is delivered by the circuit's power"),
-    ('W10', 'speed_of_light', 'W9', 'wave_speed', "a photon's wave_speed = speed_of_light (light is the wave)"),
-    ('W10', 'frequency', 'W9', 'frequency', "a photon's frequency = the wave's frequency (a photon is a wave)"),
-    ('W11', 'velocity', 'W5', 'velocity', "moving body's velocity = uniform-motion velocity"),
-    ('W11', 'length', 'W12', 'length', 'the length the fluid moves = length of the swept prism'),
-    ('W12', 'mass', 'W5', 'mass', 'the body whose density is read is the body that moves'),
-    ('W12', 'area', 'W6', 'area', "the flow's cross-section = swept-prism cross-section"),
-    ('W12', 'length', 'W11', 'length', 'the length the fluid moves = length of the swept prism'),
-    ('W13', 'frequency', 'W9', 'frequency', "the oscillator's frequency = the wave's frequency"),
-    ('W13', 'mass', 'W5', 'mass', 'the oscillating body = the dynamic body'),
-    ('W14', 'capacitance', 'W3', 'capacitance', "the LC circuit's capacitor = the electrostatics capacitor"),
-    ('W14', 'current', 'W1', 'current', "the inductor's current = the circuit's current"),
-    ('W15', 'current', 'W1', 'current', "the charge and energy are carried by the circuit's current"),
-    ('W15', 'power', 'W1', 'power', "the energy is delivered by the circuit's power"),
-    ('W15', 'charge', 'W3', 'charge', 'the charge moved = the charge stored'),
-    ('W3', 'capacitance', 'W14', 'capacitance', "the LC circuit's capacitor = the electrostatics capacitor"),
     ('W3', 'charge', 'W15', 'charge', 'the charge moved = the charge stored'),
+    ('W9', 'wave_speed', 'W10', 'speed_of_light', "a photon's wave_speed = speed_of_light (light is the wave)"),
+    ('W9', 'frequency', 'W10', 'frequency', "a photon's frequency = the wave's frequency (a photon is a wave)"),
+    ('W20', 'stress', 'W1', 'voltage', 'piezoelectric stress-voltage coupling'),
+    ('W20', 'strain', 'W1', 'charge', 'piezoelectric strain-charge coupling'),
+    ('W22', 'temperature', 'W8', 'temperature', 'reaction temperature is thermodynamic temperature'),
+    ('W23', 'charge', 'W1', 'charge', 'electrochemical charge is electrical charge'),
+    ('W23', 'charge', 'W15', 'charge', 'Faraday charge = circuit charge'),
+    ('W23', 'time', 'W15', 'time', 'electrolysis time = charging time'),
+    ('W24', 'current', 'W1', 'current', 'diode current is circuit current'),
+    ('W24', 'thermal_voltage', 'W1', 'voltage', 'thermal voltage is a voltage'),
+    ('W25', 'magnetic_field', 'W16', 'magnetic_field', 'plasma B-field is the same B-field'),
+    ('W28', 'magnetic_flux', 'W16', 'flux', 'Josephson flux is magnetic flux'),
+    ('W28', 'time', 'W15', 'time', 'Josephson time is circuit time'),
+    ('W29', 'magnetic_field', 'W25', 'magnetic_field', 'spin B-field is plasma B-field'),
+    ('W32', 'pressure', 'W6', 'pressure', 'capillary pressure is fluid pressure'),
+    ('W32', 'viscosity', 'W6', 'velocity', 'capillary viscosity relates to flow velocity'),
+    ('W33', 'thermal_conductivity', 'W8', 'thermal_conductivity', 'heat transfer conductivity is thermal conductivity'),
+    ('W34', 'volume_flow_rate', 'W6', 'volume_flow_rate', 'blood flow is volume flow'),
+    ('W34', 'pressure', 'W6', 'pressure', 'blood pressure is fluid pressure'),
+    ('W34', 'pipe_radius', 'W12', 'area', 'vessel radius relates to cross-sectional area'),
+    ('W35', 'temperature', 'W8', 'temperature', 'Nernst temperature is thermodynamic temperature'),
+    ('W35', 'ion_concentration', 'W12', 'amount', 'ion concentration relates to amount of substance'),
     ('W36', 'pair_penetration', 'W21', 'stress', "the crack engine's mean stress is the mean positive SAT penetration"),
     ('W36', 'pair_energy', 'W4', 'energy', 'cluster elastic energy = sum of squared penetrations'),
     ('W36', 'pair_penetration', 'W37', 'stress', 'the settling engine reads the SAT penetration as its elastic stress input'),
     ('W37', 'modulus', 'W20', 'youngs_modulus', "the piezo engine's stiffness feeds the settle's relaxation time"),
-    ('W37', 'stress', 'W36', 'pair_penetration', 'the settle converts SAT penetration into stress'),
     ('W38', 'input_torque', 'W4', 'torque', 'gearbox input torque is the shaft torque'),
     ('W38', 'input_angular_velocity', 'W4', 'angular_velocity', 'gearbox input speed is the shaft speed'),
     ('W38', 'input_power', 'W5', 'power', 'mechanical power is the translated body power'),
@@ -125,15 +151,18 @@ _JUNCTIONS = (
     ('W41', 'voltage', 'W1', 'voltage', 'thermoelectric voltage is a circuit voltage'),
     ('W41', 'temperature', 'W8', 'temperature', 'the thermoelectric junction temperature is thermodynamic temperature'),
     ('W41', 'heat_rate', 'W15', 'power', 'Peltier heat rate is the power channel'),
-    ('W42', 'youngs_modulus', 'W21', 'youngs_modulus', 'the same elastic modulus governs fracture and buckling'),
-    ('W42', 'applied_load', 'W5', 'force', 'a column load is a force on a mechanical junction'),
-    ('W5', 'velocity', 'W11', 'velocity', "moving body's velocity = uniform-motion velocity"),
-    ('W5', 'mass', 'W12', 'mass', 'the body whose density is read is the body that moves'),
-    ('W5', 'mass', 'W13', 'mass', 'the oscillating body = the dynamic body'),
-    ('W6', 'area', 'W12', 'area', "the flow's cross-section = swept-prism cross-section"),
-    ('W9', 'frequency', 'W13', 'frequency', "the oscillator's frequency = the wave's frequency"),
-    ('W9', 'wave_speed', 'W10', 'speed_of_light', "a photon's wave_speed = speed_of_light (light is the wave)"),
-    ('W9', 'frequency', 'W10', 'frequency', "a photon's frequency = the wave's frequency (a photon is a wave)"),
+    ('W26', 'mass', 'W17', 'source_mass', 'stellar mass is the gravitational source mass'),
+    ('W26', 'gravitational_constant', 'W17', 'gravitational_constant', 'the same gravitational constant'),
+    ('W26', 'temperature', 'W8', 'temperature', 'photospheric temperature is thermodynamic temperature'),
+    ('W26', 'luminosity', 'W15', 'power', 'bolometric luminosity is radiant power in the power channel'),
+    ('W27', 'distance', 'W11', 'length', 'cosmological distance is a length in the uniform-motion channel'),
+    ('W27', 'recession_velocity', 'W11', 'velocity', 'cosmological recession speed is a velocity'),
+    ('W27', 'hubble_time', 'W11', 'time', 'the Hubble time is a time interval'),
+    ('W27', 'critical_density', 'W12', 'density', 'critical density is a mass density'),
+    ('W27', 'speed_of_light', 'W19', 'speed_of_light', 'the same speed of light'),
+    ('W27', 'gravitational_constant', 'W17', 'gravitational_constant', 'the same gravitational constant'),
+    ('W21', 'youngs_modulus', 'W42', 'youngs_modulus', 'the same elastic modulus governs fracture and buckling'),
+    ('W5', 'force', 'W42', 'applied_load', 'a column load is a force on a mechanical junction'),
 )
 
 #: The absorbed item's ``non_identities``, with the other-wheel name made
@@ -400,10 +429,11 @@ def dimension_gaps() -> Tuple[Tuple[Endpoint, Endpoint, tuple, tuple], ...]:
     """Junction edges whose two endpoints have different SI7 dimensions.
 
     Such an identification is algebraically possible and physically
-    impossible: the chem item joins W36's dimensionless ``pair_penetration``
-    to W21's and W37's ``stress``, which is a pressure.  This is measured, not
-    enforced: :func:`edges` still returns the edge, so the audit says what the
-    item declares and the licensing can be judged against it.
+    impossible: the item joins W36's dimensionless ``pair_penetration`` to
+    W21's and W37's ``stress`` (a pressure), W1's ``voltage`` to W20's
+    ``stress``, and W12's ``area`` to W34's ``pipe_radius``.  This is
+    enforced: :func:`edges` excludes these edges and :func:`may_identify`
+    reports the gap, so a declared analogy never becomes an identity.
     """
     from .cent_wheels import SI7_AXES
 
