@@ -4,9 +4,9 @@
 
 **Question.** Which Lean files were lost in the reorganisation, which complete files wait for them, and what does recovering one take?
 
-**Verdict.** 13 files are missing and recorded here rather than imitated by a placeholder; 6 complete files that import a missing file are held in `src/lean/awaiting_recovery/`, out of `lake build`, until it returns.
+**Verdict.** 10 files are missing and recorded here rather than imitated by a placeholder; 0 complete files are held in `src/lean/awaiting_recovery/` (the six that were held have been moved back beside the recovered files).
 
-**Deciding figure.** 13 missing, 6 held, 1 restored (`Rule30/SidewaysPeriodTwo.lean`).
+**Deciding figure.** 10 missing, 0 held, 4 restored (`Rule30/SidewaysPeriodTwo.lean` plus `LeechShells.lean`, `LorentzPlane.lean`, `AdversarialDialogue.lean`).
 
 **Recomputed by.** `glm_universal.lean_check.check_tree`
 
@@ -47,23 +47,20 @@ tests of the held files' own studies (for example `test_leech_shell_count.py`).
 
 | status | count | where |
 | --- | --- | --- |
-| **missing** | 13 | not in the repository; the original is needed, or a new proof written by a later round |
-| **held** | 6 | `src/lean/awaiting_recovery/RequestProject/GLM/` — complete files that import a missing file, kept out of `lake build` until it returns |
-| **restored** | 1 | `Rule30/SidewaysPeriodTwo.lean` (Round 33 of the Rule 30 study, claim C318), back in the build |
+| **missing** | 10 | not in the repository; the original is needed, or a new proof written by a later round |
+| **held** | 0 | `src/lean/awaiting_recovery/RequestProject/GLM/` — empty after the 17 November 2026 recovery |
+| **restored** | 4 | `Rule30/SidewaysPeriodTwo.lean` (Round 33), plus `LeechShells.lean`, `LorentzPlane.lean`, `AdversarialDialogue.lean` (17 November 2026 recovery) |
 
 ## Missing files
 
 | file | Python pair | study | what it proved | needed by |
 | --- | --- | --- | --- | --- |
-| `AdversarialDialogue.lean` | `reasoning/adversarial_dialogue_study.py` | `ADVERSARIAL_DIALOGUE_STUDY.md` (Phase 167) | the 9 theorems of the adversarial dialogue | `ResumedDialogue.lean` (held) |
 | `ColourInduction.lean` | `reasoning/colour_induction.py` | `COLOUR_INDUCTION_STUDY.md` part A (Phase 178) | colour induction (12 theorems: `count_perm`, `fit_iff_functional`, `gate_sound`, `untested_never_answers`, `unread_fitted_refuses`) | — |
 | `ContextFrames.lean` | `engineering/context_frames_study.py` | `CONTEXT_FRAMES_STUDY.md` (Phase 170) | context-frame theorems | — |
 | `FoldMachine.lean` | `reasoning/fold_machine_study.py` | `FOLD_MACHINE_STUDY.md` (Phase 160) | the counting rule for a position in a sorted column | — |
 | `LeechKissing.lean` | `reasoning/leech_shells.py` | `LEECH_KISSING_STUDY.md` (Phase 165) | the minimal shell both ways; 196,560 | — |
 | `LeechMachine.lean` | `reasoning/leech_shells.py` | — | Leech machine theorems | — |
-| `LeechShells.lean` | `reasoning/leech_shells.py` | `LEECH_SHELLS_STUDY.md` (Phase 164) | the Leech shapes | `LeechShellCount.lean`, `GolayDeepHole.lean` (held) |
 | `LorentzianMajority.lean` | `reasoning/lorentzian_majority.py` | `LORENTZIAN_MAJORITY_STUDY.md` (Phase 184) | the declared majority rule: uniqueness, soundness, tightness | — |
-| `LorentzPlane.lean` | `reasoning/frame_plane.py` | `COLOUR_INDUCTION_STUDY.md` part B (Phase 178) | the Lorentz plane (13 theorems: boosts and rotations are Lorentz, `thomas_wigner`) | `LorentzImproper.lean` (held) |
 | `SourceTiers.lean` | `knowledge/source_tiers.py` | `SOURCE_TIERS_STUDY.md` (Phase 162) | source tier theorems | — |
 | `StudyLedger.lean` | `corpus/study_ledger.py` | `STUDY_LEDGER_STUDY.md` (Phase 161) | study ledger acyclicity | — |
 | `ThermoFriction.lean` | `knowledge/thermo_friction_study.py` | `THERMO_FRICTION_STUDY.md` (Phase 159) | thermomechanical friction theorems | — |
@@ -76,14 +73,8 @@ held file that waited for it back beside it, run
 
 ## Held files
 
-| file | waits for |
-| --- | --- |
-| `GolayDeepHole.lean` | `LeechShells.lean` |
-| `LeechShellCount.lean` | `LeechShells.lean` |
-| `LorentzImproper.lean` | `LorentzPlane.lean` |
-| `LorentzUnits.lean` | `LorentzImproper.lean` (held) |
-| `ResumedDialogue.lean` | `AdversarialDialogue.lean` |
-| `StackedDialogue.lean` | `ResumedDialogue.lean` (held) |
+(none — all six held files moved back beside their recovered dependencies on
+17 November 2026.)
 
 The Python readers find a held file through `glm_universal.constants.lean_file`, so a study that
 reads a theorem statement from it still reads it; its "audited" mark is not met while it is held.
@@ -92,6 +83,7 @@ reads a theorem statement from it still reads it; its "audited" mark is not met 
 
 | file | source | status |
 | --- | --- | --- |
+| `LeechShells.lean`, `LorentzPlane.lean`, `AdversarialDialogue.lean` | `source_material/ToDo/lean_recovery/` (Phase 190 rebuilds) | installed 17 November 2026; `lean_check --write-audit` OK; `LeechShells` partial (`minimal_shape`, `shellCount_eq`, `shells_from_census` owed); build record pending |
 | `AxiomAuditAll.lean` | owner upload | in the build tree; its import list is regenerated with `lean_check --write-audit` |
 | `LeechShellCount.lean` | owner upload | held (see above) |
 | `LorentzImproper.lean` | owner upload | held (see above) |
