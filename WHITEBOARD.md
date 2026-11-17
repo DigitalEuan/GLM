@@ -249,3 +249,56 @@ with 11 failures, all tracing to `parse_monomial_q` in
   only genuine combinations (two dimensionless laws on a shared quantity),
   not a disjoint conjunction of independent laws. The owner's Lean build is
   still the open item (follow-ups in `studies/_cent_wheels_follow_ups.md`).
+
+## Ranked next steps — cent wheels (17 November 2026)
+
+Value order, newest ideas marked **[new]** and earlier ones **[raised]**. Nothing
+below is started except #2, which is in flight.
+
+1. **[raised] Owner Lean build** — the only unverified claim: 220 theorems,
+   the `sign_of` path and the nine new wheels have never been type-checked.
+2. **[new] Junction-aware cross-wheel licensing** — *in flight.* The engine
+   ignores the supplied `junctions`/`non_identities`; naive union already
+   licenses 4 measured wrong answers through the `energy` conflation. Build
+   the typed quantity graph, then join only along declared edges.
+3. **[new] Dimensionless-function layer** (`log`, `exp`, `sign`, `abs`, plus a
+   gradient) — recovers W35 (Nernst, Fick), makes W42's `sign_of` honest, and
+   reaches past monomials.
+4. **[new] Battery for the new domains** — `MEASURE_BATTERY` stops at W35; W26,
+   W27 and W36–W42 have no independent questions. Cheapest way to show the new
+   absorption buys something.
+5. **[new] Coefficient-level correctness mark** — the relation vector already
+   carries the coefficient's prime exponents; test the wrong-coefficient
+   not-a-laws (e.g. `1/2 C V^2` against `C V^2`).
+6. **[new] Automated rule-R correction search** — propose the minimal table or
+   exponent edit that balances a failing axiom; humans approve.
+7. **[new] Negative-control generation and perturbation fuzzing** — perturb an
+   exponent or coefficient per case and assert refusal; finds over-licensing.
+8. **[new] Derivation distance / near-miss metric** — use the separating
+   functional to quantify how far a refused formula is from the span.
+9. **[new] Per-wheel health table** — D1/S2/S5, absorption, cases and Lean
+   status, one row per wheel, for triage and regressions.
+10. **[new] Evaluate the item's 22 application proposals** against the absorbed
+    wheels — which are now sound, which rest on corrected axioms.
+11. **[new] Redundant-axiom, duplicate-law and consistency marks** — is an
+    axiom in the span of the others; does a wheel imply `2 = 1`.
+12. **[new] Table inference** for wheels that ship no `dimensions` (W21 arrived
+    without one and was hand-corrected).
+13. **[raised] Port the compiler pipeline** (pound → cent → delta, five
+    fidelity layers, SPICE output) — the item's purpose beyond the wheels.
+14. **[new] General soundness theorem in Lean** — one structural result
+    replacing 220 per-case theorems.
+15. **[new] Sum / term homogeneity support** — the other half of the
+    non-monomial gap after #3.
+16. **[new] Second independent engine** for differential testing of span
+    membership where the integer engine cannot read.
+
+**#2 in flight (17 November 2026).** `wheels/quantity_graph.py` now holds the
+supplied 31 junctions and 12 non-identities verbatim, audits them (two known
+defects: `W36 pair_energy -> W4 energy`, a quantity W4 does not hold, and
+three one-way declarations), and contracts the sound edges into identity
+classes. It is the data layer only; the licensing still runs through
+`engineering.union` / `engineering.domains`, which already split a shared name
+per wheel and join only across a declared edge. Next: feed the graph's classes
+to `domains.split_system` over the 24 cent wheels and measure the naive-union
+conflations it refuses.
