@@ -496,85 +496,115 @@ def relay_report() -> Dict[str, object]:
     substrate.  ``name_partner`` relays to the name search instead, which is
     the strongest non-geometric second opinion available.
     """
-    tune = records(tuning_queries())
-    hold = records(holdout_queries())
-    goal = records(goal_queries(), goal_mode=True)
-    sets = {
-        "tuning": set_report(tune),
-        "holdout": set_report(hold),
-        "goal": set_report(goal),
-    }
-    controls = {
-        "digest_random": {
-            "tuning": set_report(tune, quotas=CONTROL_QUOTAS),
-            "holdout": set_report(hold, quotas=CONTROL_QUOTAS),
-            "goal": set_report(goal, quotas=CONTROL_QUOTAS),
-        },
-        "name": {
-            "tuning": set_report(tune, quotas=NAME_QUOTAS),
-            "holdout": set_report(hold, quotas=NAME_QUOTAS),
-            "goal": set_report(goal, quotas=NAME_QUOTAS),
-        },
-    }
-    keys = ("tuning", "holdout", "goal")
-    carried = sum(len(sets[key]["carried"]) for key in keys)
-    lost = sum(len(sets[key]["lost"]) for key in keys)
-    verdict = {
-        "relay_beats_text_on_every_set": all(
-            sets[key]["relay"]["hit_rate"][5] > sets[key]["leader"]["hit_rate"][5]
-            for key in keys),
-        "carried_outnumber_lost": carried > lost,
-        "relay_never_below_leader": all(
-            sets[key]["relay"]["hit_rate"][k] >= sets[key]["leader"]["hit_rate"][k]
-            for key in keys for k in K_LADDER),
-        "geometry_carries_more_than_control":
-            carried > sum(len(controls["digest_random"][key]["carried"])
-                          for key in keys),
-        "geometry_never_carries_fewer_than_control": all(
-            len(sets[key]["carried"])
-            >= len(controls["digest_random"][key]["carried"])
-            for key in keys),
-        "geometry_carries_more_than_name":
-            carried > sum(len(controls["name"][key]["carried"])
-                          for key in keys),
-        "gain_holds_across_the_gate": all(
-            row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]
-            for row in sweep_report(tune)
-            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)),
-        #  Where the gain stops being strict is a measurement, not an
-        #  assumption: these two record the band rather than asserting one.
-        #  The claim the study rests on is that the improvement is not a
-        #  knife-edge at one threshold -- it holds over a *range* of gates --
-        #  and that within the declared band the relay is never behind.
-        "gain_strict_to_gate": str(max(
-            (row["gate"] for row in sweep_report(tune)
-             if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)
-             and row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]),
-            default=Fraction(0))),
-        "gain_strict_gates": sum(
-            1 for row in sweep_report(tune)
-            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)
-            and row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]),
-        "gain_never_below_across_the_gate": all(
-            row["hit_at_5"] >= sets["tuning"]["leader"]["hit_rate"][5]
-            for row in sweep_report(tune)
-            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)),
-        "gate_fires_rarely": all(
-            Fraction(sets[key]["fired"], sets[key]["queries"])
-            <= Fraction(1, 10) for key in keys),
-    }
-    return {
-        "cache": la.cache_state(),
-        "gate": GATE,
-        "quotas": QUOTAS,
-        "depth": DEPTH,
-        "k_ladder": K_LADDER,
-        "corpus": len(rt.corpus()),
-        "sets": sets,
-        "sweep": sweep_report(tune),
-        "sweep_holdout": sweep_report(hold),
-        "controls": controls,
-        "verdict": verdict,
-        "lean_file": "RequestProject/GLM/Relay.lean",
-        "study": "studies/STACK_RELAY_STUDY.md",
-    }
+    from ..corpus.measurements import _freeze, _thaw
+    from ..derived import DerivedStore
+
+    store = DerivedStore("stack_relay_report", _relay_report_inputs, schema=1)
+
+    def compute() -> object:
+        tune = records(tuning_queries())
+        hold = records(holdout_queries())
+        goal = records(goal_queries(), goal_mode=True)
+        sets = {
+            "tuning": set_report(tune),
+            "holdout": set_report(hold),
+            "goal": set_report(goal),
+        }
+        controls = {
+            "digest_random": {
+                "tuning": set_report(tune, quotas=CONTROL_QUOTAS),
+                "holdout": set_report(hold, quotas=CONTROL_QUOTAS),
+                "goal": set_report(goal, quotas=CONTROL_QUOTAS),
+            },
+            "name": {
+                "tuning": set_report(tune, quotas=NAME_QUOTAS),
+                "holdout": set_report(hold, quotas=NAME_QUOTAS),
+                "goal": set_report(goal, quotas=NAME_QUOTAS),
+            },
+        }
+        keys = ("tuning", "holdout", "goal")
+        carried = sum(len(sets[key]["carried"]) for key in keys)
+        lost = sum(len(sets[key]["lost"]) for key in keys)
+        verdict = {
+            "relay_beats_text_on_every_set": all(
+                sets[key]["relay"]["hit_rate"][5] > sets[key]["leader"]["hit_rate"][5]
+                for key in keys),
+            "carried_outnumber_lost": carried > lost,
+            "relay_never_below_leader": all(
+                sets[key]["relay"]["hit_rate"][k] >= sets[key]["leader"]["hit_rate"][k]
+                for key in keys for k in K_LADDER),
+            "geometry_carries_more_than_control":
+                carried > sum(len(controls["digest_random"][key]["carried"])
+                              for key in keys),
+            "geometry_never_carries_fewer_than_control": all(
+                len(sets[key]["carried"])
+                >= len(controls["digest_random"][key]["carried"])
+                for key in keys),
+            "geometry_carries_more_than_name":
+                carried > sum(len(controls["name"][key]["carried"])
+                              for key in keys),
+            "gain_holds_across_the_gate": all(
+                row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]
+                for row in sweep_report(tune)
+                if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)),
+            "gain_strict_to_gate": str(max(
+                (row["gate"] for row in sweep_report(tune)
+                 if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)
+                 and row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]),
+                default=Fraction(0))),
+            "gain_strict_gates": sum(
+                1 for row in sweep_report(tune)
+                if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)
+                and row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]),
+            "gain_never_below_across_the_gate": all(
+                row["hit_at_5"] >= sets["tuning"]["leader"]["hit_rate"][5]
+                for row in sweep_report(tune)
+                if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)),
+            "gate_fires_rarely": all(
+                Fraction(sets[key]["fired"], sets[key]["queries"])
+                <= Fraction(1, 10) for key in keys),
+        }
+        return _freeze({
+            "cache": la.cache_state(),
+            "gate": GATE,
+            "quotas": QUOTAS,
+            "depth": DEPTH,
+            "k_ladder": K_LADDER,
+            "corpus": len(rt.corpus()),
+            "sets": sets,
+            "sweep": sweep_report(tune),
+            "sweep_holdout": sweep_report(hold),
+            "controls": controls,
+            "verdict": verdict,
+            "lean_file": "RequestProject/GLM/Relay.lean",
+            "study": "studies/STACK_RELAY_STUDY.md",
+        })
+
+    payload = store.cached(compute)
+    result = _thaw(payload)  # type: ignore[assignment]
+    # JSON object keys are strings; restore the integer keys the report
+    # carries in its hit tables so callers see the original types.
+    for section in ("sets",):
+        for _name, entry in result[section].items():  # type: ignore[union-attr]
+            for who in ("leader", "relay"):
+                for key in ("hits", "hit_rate"):
+                    entry[who][key] = {int(k): v
+                                       for k, v in entry[who][key].items()}
+    for partner in ("digest_random", "name"):
+        for _name, entry in result["controls"][partner].items():  # type: ignore[union-attr]
+            for who in ("leader", "relay"):
+                for key in ("hits", "hit_rate"):
+                    entry[who][key] = {int(k): v
+                                       for k, v in entry[who][key].items()}
+    return result  # type: ignore[return-value]
+
+
+def _relay_report_inputs() -> Tuple[object, ...]:
+    from pathlib import Path
+    from ..corpus import inventory as inv
+
+    paths: List[object] = [Path(__file__).resolve()]
+    paths.extend(la.lean_files())
+    for doc in inv.source_documents():
+        paths.append(inv.REPOSITORY_ROOT / doc.path)
+    return tuple(paths)

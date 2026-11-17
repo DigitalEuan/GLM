@@ -1638,10 +1638,10 @@ import re as _re
 
 _rows = le.sample_carriers()
 # Phase 146: the place is what precedes 'given'; the replies follow it
-_bits = _re.split(r"\s+given\s+", {request!r}.strip(), maxsplit=1,
+_bits = _re.split(r"\\s+given\\s+", {request!r}.strip(), maxsplit=1,
                   flags=_re.I)
 _place = _bits[0].strip()
-_replies = [tuple(_x.strip() for _x in _re.split(r"\s+is\s+", _c.strip(), 1))
+_replies = [tuple(_x.strip() for _x in _re.split(r"\\s+is\\s+", _c.strip(), 1))
             for _c in (_bits[1].split(";") if len(_bits) > 1 else [])
             if _c.strip()]
 _parts = adr.parse_request(_place, _rows)

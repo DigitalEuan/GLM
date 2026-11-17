@@ -127,10 +127,6 @@ _HERE = Path(__file__).resolve()
 
 #: Where the Lean sources live, relative to this file: the single copy,
 #: ``glm_lean/RequestProject/GLM``, which ``lake build`` compiles.
-_LEAN_CANDIDATES = (
-    _HERE.parent.parent.parent / "lean" / "RequestProject" / "GLM",
-)
-
 DATA_PATH = _HERE.parent / "_data" / "lean_addresses.json"
 
 #: Schema 2 adds the namespace and the head of the statement to each row of
@@ -147,34 +143,23 @@ STATEMENT_CHARS = 200
 
 def lean_root() -> Optional[Path]:
     """The directory holding the Lean development, or ``None``."""
-    for candidate in _LEAN_CANDIDATES:
-        if candidate.is_dir():
-            return candidate
-    return None
+    import importlib
+    _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
+    return _lt.lean_root()
 
 
 def lean_files() -> Tuple[Path, ...]:
     """Every ``.lean`` file of the development, in a stable order."""
-    root = lean_root()
-    if root is None:
-        return ()
-    return tuple(sorted(root.rglob("*.lean")))
+    import importlib
+    _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
+    return _lt.lean_files()
 
 
 def tree_digest() -> str:
-    """SHA-256 over the Lean sources: name and content of every file.
-
-    The same canonical form :mod:`glm_universal.signoff.ledger` uses -- sorted
-    relative paths, each followed by the SHA-256 of its bytes -- so a change
-    anywhere in the tree changes this string.  The digest itself is computed
-    by :mod:`glm_universal.integrity`, one module above the core: directive
-    D3 says a digest addresses integrity and never meaning, and the core
-    therefore does not hash at all.
-    """
-    root = lean_root()
-    if root is None:
-        return "absent"
-    return integrity.tree_digest(lean_files(), root)
+    """SHA-256 over the Lean sources: name and content of every file."""
+    import importlib
+    _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
+    return _lt.tree_digest()
 
 
 # ===========================================================================
