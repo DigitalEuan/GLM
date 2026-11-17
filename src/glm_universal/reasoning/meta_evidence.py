@@ -1108,6 +1108,7 @@ class Answer:
     code: Optional[str] = None
     disputes: Tuple[str, ...] = ()
     backing: str = BACKING
+    source: str = "mixed"          # documents | lean | python | mixed
 
 
 def read_topic(tp: Topic, text: str,
@@ -1154,19 +1155,31 @@ def read_topic(tp: Topic, text: str,
             "the documents no longer say what this answer rests on: "
             + "; ".join(moved),
             column1, "evidence moved: " + "; ".join(moved),
-            "print('VERIFIED True')", code="CITATION_MOVED")
+            "print('VERIFIED True')", code="CITATION_MOVED",
+            source="mixed")
     parts = ["quoted: " + " | ".join(shown)]
     if cited:
         parts.append("theorems: " + ", ".join(cited))
     if tp.facts:
         parts.append("code: " + "; ".join(w for _, _, w in tp.facts))
     script = _script(tp, quotes, lean_rows, fact_rows)
+    # Explicit source label: which half of the system the answer rests on.
+    _sources: List[str] = []
+    if quotes:
+        _sources.append("documents")
+    if cited or lean_rows:
+        _sources.append("lean")
+    if tp.facts or fact_rows:
+        _sources.append("python")
+    _source_label = ("mixed" if len(_sources) > 1
+                     else (_sources[0] if _sources else "documents"))
     return Answer(
         tp.key, True, tp.value, column1, "; ".join(parts), script,
         disputes=tuple(f"{d.key}: {d.statement}"
                        + (f" ({d.evidence[0]}: \"{quote(*d.evidence)[1]}\")"
                           if d.evidence else "")
-                       for d in disputes))
+                       for d in disputes),
+        source=_source_label)
 
 
 def mutated(tp: Topic, text: str, kind: str) -> Answer:
