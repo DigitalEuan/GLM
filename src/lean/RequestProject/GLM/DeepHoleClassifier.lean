@@ -57,7 +57,13 @@ Under a separation hypothesis on the reference table — distinct labels more th
 Faithfulness is an empirical hypothesis and appears as a hypothesis, never as an
 assumption made silently.
 -/
-import Mathlib
+import Mathlib.Data.Rat.Lemmas
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Data.Multiset.Sort
+import Mathlib.Data.Fintype.Perm
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Ring
 
 namespace GLM.DeepHole
 

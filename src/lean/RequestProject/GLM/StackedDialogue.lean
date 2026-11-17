@@ -38,7 +38,7 @@ says whether the text `b` is one of the options of the question `q`
 
 namespace GLM.StackedDialogue
 
-open Finset GLM.TimedQuestion GLM.NearestQuestion
+open Finset GLM.AdversarialDialogue
 open GLM.ResumedDialogue (Turn)
 
 variable {ι β : Type*}
@@ -218,8 +218,9 @@ theorem window_closes (os : List ((ι → β) × ℕ)) : (age W)^[W + 1] os = []
 whatever the turns and the replies, and whichever question each reply was read
 against, every live member is at the scan's least distance. -/
 theorem stacked_least {α : Type*} [MetricSpace α] [DecidableEq β] {c : ι → α}
-    {q : α} {S : Finset ι} (hS : HeadSet c q S) (ts : List (Turn ι β)) {i : ι}
-    (hi : i ∈ after S (run fits W ts).replies) (j : ι) :
+    {q : α} {S : Finset ι} (hS : HeadSet c q S) (decode : (ι → β) × β → ι)
+    (ts : List (Turn ι β)) {i : ι}
+    (hi : i ∈ after S ((run fits W ts).replies.map (fun r => (decode r, r.2)))) (j : ι) :
     dist q (c i) ≤ dist q (c j) :=
   GLM.AdversarialDialogue.adversary_least hS _ hi j
 

@@ -1,0 +1,151 @@
+# GLM Lean rebuild, 20261117_092034, in /Users/macoshdd/Documents/GitHub/GLM
+== 1. static check (glm_universal.lean_check)
+Lean tree /Users/macoshdd/Documents/GitHub/GLM/src/lean: 428 files (179 `module` files), 9771 declarations
+  warning declaration GLM.CubeStab.Cell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.Corner in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cellOfCorner in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cornerOfCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cornerOfCell_cellOfCorner in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cellOfCorner_cornerOfCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axPerm in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axPermInv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axPerm_inv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.axEven in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.CubeSym in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.epsPar in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.IsRot in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.rotation_count in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.cubeSym_card in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.csinv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actCell_csinv in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.csinv_actCell in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid_spec in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.PreservesMog in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.PreservesMogB in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid_selL in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.actGrid_selG in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.preserves_iff in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.stabiliser_card in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.preserves_iff_tetrahedral in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.preserving_is_rotation in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.quarterTurn in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.quarterTurn_isRot in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.quarterTurn_not_preserving in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oBasis in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oSpan in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oInfo in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oDecode in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oDecode_oSpan in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.IsOCode in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.isOCode_iff in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oSpan_injective in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_card in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_min_weight in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_weight_enumerator in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_zero in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_gxor in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_rotations_free in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_improper_priced in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeStab.oCode_invariant in both RequestProject.GLM.Cube.Stabiliser and RequestProject.GLM.CubeStabiliser
+  warning declaration GLM.CubeMOG.Col in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.Grid in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.zero_apply in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.gxor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.wtG in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.rowLabel in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symb in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.par in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.topPar in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symbols in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.bit0 in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.bit1 in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_symb in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_par in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_top in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_roundtrip in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.xor6 in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.Params in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.buildP in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_symbols in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_top in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_topPar in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.isMog_build in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogCode in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mem_mogCode in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogCode_eq_filter in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.isHex_iff_info in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMogB in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.isMogB_iff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.fibre_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symbols_fibre_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexpass_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.combo_injective in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.buildP_injective in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_card in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.parity_layer_factor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_subset_hexpass in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_weight_enumerator in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.wtG_eq_zero_iff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_min_weight in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.symb_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.combo_add in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.par_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.topPar_gxor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMog_gxor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.colOf_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.xor6_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.build_add in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.IsMog_zero in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selL in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selL_closed in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_closed in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selL_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_xor in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogBasis in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogBasis_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mogCoeff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.selG_mogCoeff in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.mog_spanned in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.wtG_le_four_of_face in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.face_erasure_correctable in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces_isMog in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces_ne_zero in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.twoFaces_weight in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.two_face_ambiguous in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexDist in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexDist_comm in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexDist_triangle in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexacode_min_dist in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexacode_unique_decode in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+  warning declaration GLM.CubeMOG.hexacode_ambiguous_at_two in both RequestProject.GLM.Cube.Surface and RequestProject.GLM.CubeSurface
+OK
+== 2. toolchain
+lean-toolchain: leanprover/lean4:v4.28.0
+elan 4.2.4 (227caca13 2026-08-25)
+Lake version 5.0.0-src+7e01a1b (Lean version 4.28.0)
+Lean (version 4.28.0, x86_64-apple-darwin24.6.0, commit 7e01a1bf5c70fc6167d49c345d3bf80596e9a79b, Release)
+== 3. lake exe cache get
+Current branch: HEAD
+Using cache (Azure) from origin: leanprover-community/mathlib4
+No files to download
+Already decompressed 8010 file(s)
+== 4. lake build
+error: unknown long option '--jobs'
+lake build exit 1 after 1 s
+== 5. sorry / admit scan (comments ignored)
+none
+== 6. citation reference (tools citation-scope --reference --write)
+skipped: the build did not pass
+== 7. build record (scripts/logs/lean_build_evidence.json)
+build record lean_build_evidence.json: not written: build exit 1
+== summary: static=0 cache=0 build=1 sorry=0 citation=skipped record=1 (0 = ok)
+== result: FAILED: build record

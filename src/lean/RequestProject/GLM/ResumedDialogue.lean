@@ -35,7 +35,7 @@ what it cannot do.
 
 namespace GLM.ResumedDialogue
 
-open Finset GLM.TimedQuestion GLM.NearestQuestion
+open Finset GLM.AdversarialDialogue
 
 variable {ι β : Type*}
 
@@ -117,16 +117,20 @@ theorem run_strip (ts : List (Turn ι β)) : run ts = run (strip ts) :=
 /-- **A resumed dialogue ends where the uninterrupted one ends**: the live set
 left by the replies is that of the same conversation without its unrelated
 turns. -/
-theorem resumed_live_eq [DecidableEq β] (S : Finset ι) (ts : List (Turn ι β)) :
-    after S (run ts).replies = after S (run (strip ts)).replies := by
+theorem resumed_live_eq [DecidableEq β] (S : Finset ι)
+    (decode : (ι → β) × β → ι) (ts : List (Turn ι β)) :
+    after S ((run ts).replies.map (fun r => (decode r, r.2))) =
+    after S ((run (strip ts)).replies.map (fun r => (decode r, r.2))) := by
   rw [← run_strip]
 
 /-- **Resumption never promotes a carrier the measurement excluded**: whatever
 the turns, unrelated or not, and whatever the replies, every live member is at
 the scan's least distance. -/
 theorem resumed_least {α : Type*} [MetricSpace α] [DecidableEq β] {c : ι → α}
-    {q : α} {S : Finset ι} (hS : HeadSet c q S) (ts : List (Turn ι β)) {i : ι}
-    (hi : i ∈ after S (run ts).replies) (j : ι) : dist q (c i) ≤ dist q (c j) :=
+    {q : α} {S : Finset ι} (hS : HeadSet c q S) (decode : (ι → β) × β → ι)
+    (ts : List (Turn ι β)) {i : ι}
+    (hi : i ∈ after S ((run ts).replies.map (fun r => (decode r, r.2)))) (j : ι) :
+    dist q (c i) ≤ dist q (c j) :=
   GLM.AdversarialDialogue.adversary_least hS _ hi j
 
 /-- **What the older reading did**: a question, an unrelated turn, then the
