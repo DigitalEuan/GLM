@@ -1,0 +1,943 @@
+{
+ "input_digest": "0806e0077f8b568a05b9210c3dc897676fbf9bd7d197158356849415b52f4599",
+ "name": "stack_relay_report",
+ "payload": {
+  "cache": {
+   "fresh": true,
+   "live_digest": "51da0a4e3e291171846a08236082b686e92383acfc1cc1fd8ff943242901bd52",
+   "present": true,
+   "stored_digest": "51da0a4e3e291171846a08236082b686e92383acfc1cc1fd8ff943242901bd52",
+   "verdict": "fresh"
+  },
+  "controls": {
+   "digest_random": {
+    "goal": {
+     "carried": [
+      "GLM.ThreeCube.Cube"
+     ],
+     "fired": 19,
+     "fired_names": [
+      "GLM.Golay24.three_pow_bounds",
+      "GLM.ThreeCube.Cube",
+      "GLM.CubeStab.Cell",
+      "GLM.CubeMOG.F4",
+      "GLM.Gen3.eigenspace_dimensions",
+      "GLM.HexRung.hex_counts",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+      "GLM.Packing.radius_of_eight",
+      "GLM.Question.Preamble",
+      "GLM.Rule30.BinGate",
+      "GLM.SporadicOrders.order_J3",
+      "GLM.Landscape.golay_ball_fraction",
+      "GLM.Admission.ledger_vocabulary",
+      "GLM.Completion.ledger_coverage",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+      "GLM.Question.Token",
+      "GLM.RegisterWorld.nested_ledger",
+      "GLM.SpatialArithmetic.baseNodes",
+      "GLM.SporadicOrders.order_Fi23"
+     ],
+     "leader": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "59/89"
+       },
+       "10": {
+        "__fraction__": "703/801"
+       },
+       "3": {
+        "__fraction__": "634/801"
+       },
+       "5": {
+        "__fraction__": "664/801"
+       }
+      },
+      "hits": {
+       "1": 531,
+       "10": 703,
+       "3": 634,
+       "5": 664
+      },
+      "precision_at_5": {
+       "__fraction__": "2114/4005"
+      },
+      "queries": 801
+     },
+     "lost": [],
+     "queries": 801,
+     "relay": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "59/89"
+       },
+       "10": {
+        "__fraction__": "704/801"
+       },
+       "3": {
+        "__fraction__": "634/801"
+       },
+       "5": {
+        "__fraction__": "665/801"
+       }
+      },
+      "hits": {
+       "1": 531,
+       "10": 704,
+       "3": 634,
+       "5": 665
+      },
+      "precision_at_5": {
+       "__fraction__": "47/89"
+      },
+      "queries": 801
+     },
+     "relay_beats_leader": true
+    },
+    "holdout": {
+     "carried": [],
+     "fired": 7,
+     "fired_names": [
+      "GLM.Admission.ledger_vocabulary",
+      "GLM.Completion.ledger_coverage",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+      "GLM.Question.Token",
+      "GLM.RegisterWorld.nested_ledger",
+      "GLM.SpatialArithmetic.baseNodes",
+      "GLM.SporadicOrders.order_Fi23"
+     ],
+     "leader": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "67/100"
+       },
+       "10": {
+        "__fraction__": "22/25"
+       },
+       "3": {
+        "__fraction__": "79/100"
+       },
+       "5": {
+        "__fraction__": "83/100"
+       }
+      },
+      "hits": {
+       "1": 268,
+       "10": 352,
+       "3": 316,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "66/125"
+      },
+      "queries": 400
+     },
+     "lost": [],
+     "queries": 400,
+     "relay": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "67/100"
+       },
+       "10": {
+        "__fraction__": "22/25"
+       },
+       "3": {
+        "__fraction__": "79/100"
+       },
+       "5": {
+        "__fraction__": "83/100"
+       }
+      },
+      "hits": {
+       "1": 268,
+       "10": 352,
+       "3": 316,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "66/125"
+      },
+      "queries": 400
+     },
+     "relay_beats_leader": false
+    },
+    "tuning": {
+     "carried": [
+      "GLM.ThreeCube.Cube"
+     ],
+     "fired": 12,
+     "fired_names": [
+      "GLM.Golay24.three_pow_bounds",
+      "GLM.ThreeCube.Cube",
+      "GLM.CubeStab.Cell",
+      "GLM.CubeMOG.F4",
+      "GLM.Gen3.eigenspace_dimensions",
+      "GLM.HexRung.hex_counts",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+      "GLM.Packing.radius_of_eight",
+      "GLM.Question.Preamble",
+      "GLM.Rule30.BinGate",
+      "GLM.SporadicOrders.order_J3",
+      "GLM.Landscape.golay_ball_fraction"
+     ],
+     "leader": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "263/401"
+       },
+       "10": {
+        "__fraction__": "351/401"
+       },
+       "3": {
+        "__fraction__": "318/401"
+       },
+       "5": {
+        "__fraction__": "332/401"
+       }
+      },
+      "hits": {
+       "1": 263,
+       "10": 351,
+       "3": 318,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "1058/2005"
+      },
+      "queries": 401
+     },
+     "lost": [],
+     "queries": 401,
+     "relay": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "263/401"
+       },
+       "10": {
+        "__fraction__": "352/401"
+       },
+       "3": {
+        "__fraction__": "318/401"
+       },
+       "5": {
+        "__fraction__": "333/401"
+       }
+      },
+      "hits": {
+       "1": 263,
+       "10": 352,
+       "3": 318,
+       "5": 333
+      },
+      "precision_at_5": {
+       "__fraction__": "1059/2005"
+      },
+      "queries": 401
+     },
+     "relay_beats_leader": true
+    }
+   },
+   "name": {
+    "goal": {
+     "carried": [],
+     "fired": 19,
+     "fired_names": [
+      "GLM.Golay24.three_pow_bounds",
+      "GLM.ThreeCube.Cube",
+      "GLM.CubeStab.Cell",
+      "GLM.CubeMOG.F4",
+      "GLM.Gen3.eigenspace_dimensions",
+      "GLM.HexRung.hex_counts",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+      "GLM.Packing.radius_of_eight",
+      "GLM.Question.Preamble",
+      "GLM.Rule30.BinGate",
+      "GLM.SporadicOrders.order_J3",
+      "GLM.Landscape.golay_ball_fraction",
+      "GLM.Admission.ledger_vocabulary",
+      "GLM.Completion.ledger_coverage",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+      "GLM.Question.Token",
+      "GLM.RegisterWorld.nested_ledger",
+      "GLM.SpatialArithmetic.baseNodes",
+      "GLM.SporadicOrders.order_Fi23"
+     ],
+     "leader": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "59/89"
+       },
+       "10": {
+        "__fraction__": "703/801"
+       },
+       "3": {
+        "__fraction__": "634/801"
+       },
+       "5": {
+        "__fraction__": "664/801"
+       }
+      },
+      "hits": {
+       "1": 531,
+       "10": 703,
+       "3": 634,
+       "5": 664
+      },
+      "precision_at_5": {
+       "__fraction__": "2114/4005"
+      },
+      "queries": 801
+     },
+     "lost": [],
+     "queries": 801,
+     "relay": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "59/89"
+       },
+       "10": {
+        "__fraction__": "703/801"
+       },
+       "3": {
+        "__fraction__": "634/801"
+       },
+       "5": {
+        "__fraction__": "664/801"
+       }
+      },
+      "hits": {
+       "1": 531,
+       "10": 703,
+       "3": 634,
+       "5": 664
+      },
+      "precision_at_5": {
+       "__fraction__": "2114/4005"
+      },
+      "queries": 801
+     },
+     "relay_beats_leader": false
+    },
+    "holdout": {
+     "carried": [],
+     "fired": 7,
+     "fired_names": [
+      "GLM.Admission.ledger_vocabulary",
+      "GLM.Completion.ledger_coverage",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+      "GLM.Question.Token",
+      "GLM.RegisterWorld.nested_ledger",
+      "GLM.SpatialArithmetic.baseNodes",
+      "GLM.SporadicOrders.order_Fi23"
+     ],
+     "leader": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "67/100"
+       },
+       "10": {
+        "__fraction__": "22/25"
+       },
+       "3": {
+        "__fraction__": "79/100"
+       },
+       "5": {
+        "__fraction__": "83/100"
+       }
+      },
+      "hits": {
+       "1": 268,
+       "10": 352,
+       "3": 316,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "66/125"
+      },
+      "queries": 400
+     },
+     "lost": [],
+     "queries": 400,
+     "relay": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "67/100"
+       },
+       "10": {
+        "__fraction__": "22/25"
+       },
+       "3": {
+        "__fraction__": "79/100"
+       },
+       "5": {
+        "__fraction__": "83/100"
+       }
+      },
+      "hits": {
+       "1": 268,
+       "10": 352,
+       "3": 316,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "66/125"
+      },
+      "queries": 400
+     },
+     "relay_beats_leader": false
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 12,
+     "fired_names": [
+      "GLM.Golay24.three_pow_bounds",
+      "GLM.ThreeCube.Cube",
+      "GLM.CubeStab.Cell",
+      "GLM.CubeMOG.F4",
+      "GLM.Gen3.eigenspace_dimensions",
+      "GLM.HexRung.hex_counts",
+      "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+      "GLM.Packing.radius_of_eight",
+      "GLM.Question.Preamble",
+      "GLM.Rule30.BinGate",
+      "GLM.SporadicOrders.order_J3",
+      "GLM.Landscape.golay_ball_fraction"
+     ],
+     "leader": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "263/401"
+       },
+       "10": {
+        "__fraction__": "351/401"
+       },
+       "3": {
+        "__fraction__": "318/401"
+       },
+       "5": {
+        "__fraction__": "332/401"
+       }
+      },
+      "hits": {
+       "1": 263,
+       "10": 351,
+       "3": 318,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "1058/2005"
+      },
+      "queries": 401
+     },
+     "lost": [],
+     "queries": 401,
+     "relay": {
+      "hit_rate": {
+       "1": {
+        "__fraction__": "263/401"
+       },
+       "10": {
+        "__fraction__": "351/401"
+       },
+       "3": {
+        "__fraction__": "318/401"
+       },
+       "5": {
+        "__fraction__": "332/401"
+       }
+      },
+      "hits": {
+       "1": 263,
+       "10": 351,
+       "3": 318,
+       "5": 332
+      },
+      "precision_at_5": {
+       "__fraction__": "1058/2005"
+      },
+      "queries": 401
+     },
+     "relay_beats_leader": false
+    }
+   }
+  },
+  "corpus": 9604,
+  "depth": 10,
+  "gate": {
+   "__fraction__": "1/10"
+  },
+  "k_ladder": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "lean_file": "RequestProject/GLM/Relay.lean",
+  "quotas": [
+   [
+    "text",
+    2
+   ],
+   [
+    "lexical",
+    2
+   ],
+   [
+    "address",
+    1
+   ]
+  ],
+  "sets": {
+   "goal": {
+    "carried": [
+     "GLM.Gen3.eigenspace_dimensions",
+     "GLM.SporadicOrders.order_J3",
+     "GLM.Admission.ledger_vocabulary",
+     "GLM.SporadicOrders.order_Fi23"
+    ],
+    "fired": 19,
+    "fired_names": [
+     "GLM.Golay24.three_pow_bounds",
+     "GLM.ThreeCube.Cube",
+     "GLM.CubeStab.Cell",
+     "GLM.CubeMOG.F4",
+     "GLM.Gen3.eigenspace_dimensions",
+     "GLM.HexRung.hex_counts",
+     "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+     "GLM.Packing.radius_of_eight",
+     "GLM.Question.Preamble",
+     "GLM.Rule30.BinGate",
+     "GLM.SporadicOrders.order_J3",
+     "GLM.Landscape.golay_ball_fraction",
+     "GLM.Admission.ledger_vocabulary",
+     "GLM.Completion.ledger_coverage",
+     "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+     "GLM.Question.Token",
+     "GLM.RegisterWorld.nested_ledger",
+     "GLM.SpatialArithmetic.baseNodes",
+     "GLM.SporadicOrders.order_Fi23"
+    ],
+    "leader": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "59/89"
+      },
+      "10": {
+       "__fraction__": "703/801"
+      },
+      "3": {
+       "__fraction__": "634/801"
+      },
+      "5": {
+       "__fraction__": "664/801"
+      }
+     },
+     "hits": {
+      "1": 531,
+      "10": 703,
+      "3": 634,
+      "5": 664
+     },
+     "precision_at_5": {
+      "__fraction__": "2114/4005"
+     },
+     "queries": 801
+    },
+    "lost": [],
+    "queries": 801,
+    "relay": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "59/89"
+      },
+      "10": {
+       "__fraction__": "707/801"
+      },
+      "3": {
+       "__fraction__": "635/801"
+      },
+      "5": {
+       "__fraction__": "668/801"
+      }
+     },
+     "hits": {
+      "1": 531,
+      "10": 707,
+      "3": 635,
+      "5": 668
+     },
+     "precision_at_5": {
+      "__fraction__": "2119/4005"
+     },
+     "queries": 801
+    },
+    "relay_beats_leader": true
+   },
+   "holdout": {
+    "carried": [
+     "GLM.Admission.ledger_vocabulary",
+     "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+     "GLM.RegisterWorld.nested_ledger",
+     "GLM.SporadicOrders.order_Fi23"
+    ],
+    "fired": 7,
+    "fired_names": [
+     "GLM.Admission.ledger_vocabulary",
+     "GLM.Completion.ledger_coverage",
+     "GLM.IntakeChecks.SporadicOrderCheck.order_J1",
+     "GLM.Question.Token",
+     "GLM.RegisterWorld.nested_ledger",
+     "GLM.SpatialArithmetic.baseNodes",
+     "GLM.SporadicOrders.order_Fi23"
+    ],
+    "leader": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "67/100"
+      },
+      "10": {
+       "__fraction__": "22/25"
+      },
+      "3": {
+       "__fraction__": "79/100"
+      },
+      "5": {
+       "__fraction__": "83/100"
+      }
+     },
+     "hits": {
+      "1": 268,
+      "10": 352,
+      "3": 316,
+      "5": 332
+     },
+     "precision_at_5": {
+      "__fraction__": "66/125"
+     },
+     "queries": 400
+    },
+    "lost": [],
+    "queries": 400,
+    "relay": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "67/100"
+      },
+      "10": {
+       "__fraction__": "89/100"
+      },
+      "3": {
+       "__fraction__": "159/200"
+      },
+      "5": {
+       "__fraction__": "21/25"
+      }
+     },
+     "hits": {
+      "1": 268,
+      "10": 356,
+      "3": 318,
+      "5": 336
+     },
+     "precision_at_5": {
+      "__fraction__": "1061/2000"
+     },
+     "queries": 400
+    },
+    "relay_beats_leader": true
+   },
+   "tuning": {
+    "carried": [
+     "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+     "GLM.Packing.radius_of_eight",
+     "GLM.SporadicOrders.order_J3"
+    ],
+    "fired": 12,
+    "fired_names": [
+     "GLM.Golay24.three_pow_bounds",
+     "GLM.ThreeCube.Cube",
+     "GLM.CubeStab.Cell",
+     "GLM.CubeMOG.F4",
+     "GLM.Gen3.eigenspace_dimensions",
+     "GLM.HexRung.hex_counts",
+     "GLM.IntakeChecks.SporadicOrderCheck.order_Co3",
+     "GLM.Packing.radius_of_eight",
+     "GLM.Question.Preamble",
+     "GLM.Rule30.BinGate",
+     "GLM.SporadicOrders.order_J3",
+     "GLM.Landscape.golay_ball_fraction"
+    ],
+    "leader": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "263/401"
+      },
+      "10": {
+       "__fraction__": "351/401"
+      },
+      "3": {
+       "__fraction__": "318/401"
+      },
+      "5": {
+       "__fraction__": "332/401"
+      }
+     },
+     "hits": {
+      "1": 263,
+      "10": 351,
+      "3": 318,
+      "5": 332
+     },
+     "precision_at_5": {
+      "__fraction__": "1058/2005"
+     },
+     "queries": 401
+    },
+    "lost": [],
+    "queries": 401,
+    "relay": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "263/401"
+      },
+      "10": {
+       "__fraction__": "354/401"
+      },
+      "3": {
+       "__fraction__": "318/401"
+      },
+      "5": {
+       "__fraction__": "335/401"
+      }
+     },
+     "hits": {
+      "1": 263,
+      "10": 354,
+      "3": 318,
+      "5": 335
+     },
+     "precision_at_5": {
+      "__fraction__": "1061/2005"
+     },
+     "queries": 401
+    },
+    "relay_beats_leader": true
+   }
+  },
+  "study": "studies/STACK_RELAY_STUDY.md",
+  "sweep": [
+   {
+    "carried": 0,
+    "fired": 0,
+    "gate": {
+     "__fraction__": "0/1"
+    },
+    "hit_at_5": {
+     "__fraction__": "332/401"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1058/2005"
+    }
+   },
+   {
+    "carried": 3,
+    "fired": 12,
+    "gate": {
+     "__fraction__": "1/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "335/401"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1061/2005"
+    }
+   },
+   {
+    "carried": 3,
+    "fired": 12,
+    "gate": {
+     "__fraction__": "1/10"
+    },
+    "hit_at_5": {
+     "__fraction__": "335/401"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1061/2005"
+    }
+   },
+   {
+    "carried": 3,
+    "fired": 13,
+    "gate": {
+     "__fraction__": "3/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "334/401"
+    },
+    "lost": 1,
+    "precision_at_5": {
+     "__fraction__": "212/401"
+    }
+   },
+   {
+    "carried": 3,
+    "fired": 15,
+    "gate": {
+     "__fraction__": "1/5"
+    },
+    "hit_at_5": {
+     "__fraction__": "334/401"
+    },
+    "lost": 1,
+    "precision_at_5": {
+     "__fraction__": "1058/2005"
+    }
+   },
+   {
+    "carried": 3,
+    "fired": 23,
+    "gate": {
+     "__fraction__": "1/4"
+    },
+    "hit_at_5": {
+     "__fraction__": "334/401"
+    },
+    "lost": 1,
+    "precision_at_5": {
+     "__fraction__": "210/401"
+    }
+   },
+   {
+    "carried": 10,
+    "fired": 162,
+    "gate": {
+     "__fraction__": "1/2"
+    },
+    "hit_at_5": {
+     "__fraction__": "329/401"
+    },
+    "lost": 13,
+    "precision_at_5": {
+     "__fraction__": "939/2005"
+    }
+   }
+  ],
+  "sweep_holdout": [
+   {
+    "carried": 0,
+    "fired": 0,
+    "gate": {
+     "__fraction__": "0/1"
+    },
+    "hit_at_5": {
+     "__fraction__": "83/100"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "66/125"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 7,
+    "gate": {
+     "__fraction__": "1/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "21/25"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1061/2000"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 7,
+    "gate": {
+     "__fraction__": "1/10"
+    },
+    "hit_at_5": {
+     "__fraction__": "21/25"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1061/2000"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 7,
+    "gate": {
+     "__fraction__": "3/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "21/25"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1061/2000"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 8,
+    "gate": {
+     "__fraction__": "1/5"
+    },
+    "hit_at_5": {
+     "__fraction__": "67/80"
+    },
+    "lost": 1,
+    "precision_at_5": {
+     "__fraction__": "529/1000"
+    }
+   },
+   {
+    "carried": 5,
+    "fired": 18,
+    "gate": {
+     "__fraction__": "1/4"
+    },
+    "hit_at_5": {
+     "__fraction__": "67/80"
+    },
+    "lost": 2,
+    "precision_at_5": {
+     "__fraction__": "523/1000"
+    }
+   },
+   {
+    "carried": 10,
+    "fired": 144,
+    "gate": {
+     "__fraction__": "1/2"
+    },
+    "hit_at_5": {
+     "__fraction__": "331/400"
+    },
+    "lost": 11,
+    "precision_at_5": {
+     "__fraction__": "983/2000"
+    }
+   }
+  ],
+  "verdict": {
+   "carried_outnumber_lost": true,
+   "gain_holds_across_the_gate": true,
+   "gain_never_below_across_the_gate": true,
+   "gain_strict_gates": 5,
+   "gain_strict_to_gate": "1/4",
+   "gate_fires_rarely": true,
+   "geometry_carries_more_than_control": true,
+   "geometry_carries_more_than_name": true,
+   "geometry_never_carries_fewer_than_control": true,
+   "relay_beats_text_on_every_set": true,
+   "relay_never_below_leader": true
+  }
+ },
+ "schema": 1
+}
