@@ -1,0 +1,173 @@
+{
+ "input_digest": "51da0a4e3e291171846a08236082b686e92383acfc1cc1fd8ff943242901bd52",
+ "name": "stack_tiebreak_report",
+ "payload": {
+  "sets": {
+   "holdout": {
+    "address": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "279/400"
+      },
+      "10": {
+       "__fraction__": "359/400"
+      },
+      "3": {
+       "__fraction__": "327/400"
+      },
+      "5": {
+       "__fraction__": "171/200"
+      }
+     },
+     "hits": {
+      "1": 279,
+      "10": 359,
+      "3": 327,
+      "5": 342
+     },
+     "precision_at_5": {
+      "__fraction__": "67/125"
+     },
+     "queries": 400
+    },
+    "lexical": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "17/25"
+      },
+      "10": {
+       "__fraction__": "71/80"
+      },
+      "3": {
+       "__fraction__": "319/400"
+      },
+      "5": {
+       "__fraction__": "21/25"
+      }
+     },
+     "hits": {
+      "1": 272,
+      "10": 355,
+      "3": 319,
+      "5": 336
+     },
+     "precision_at_5": {
+      "__fraction__": "267/500"
+     },
+     "queries": 400
+    },
+    "name": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "67/100"
+      },
+      "10": {
+       "__fraction__": "22/25"
+      },
+      "3": {
+       "__fraction__": "79/100"
+      },
+      "5": {
+       "__fraction__": "83/100"
+      }
+     },
+     "hits": {
+      "1": 268,
+      "10": 352,
+      "3": 316,
+      "5": 332
+     },
+     "precision_at_5": {
+      "__fraction__": "66/125"
+     },
+     "queries": 400
+    }
+   },
+   "tuning": {
+    "address": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "260/401"
+      },
+      "10": {
+       "__fraction__": "352/401"
+      },
+      "3": {
+       "__fraction__": "323/401"
+      },
+      "5": {
+       "__fraction__": "340/401"
+      }
+     },
+     "hits": {
+      "1": 260,
+      "10": 352,
+      "3": 323,
+      "5": 340
+     },
+     "precision_at_5": {
+      "__fraction__": "1071/2005"
+     },
+     "queries": 401
+    },
+    "lexical": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "267/401"
+      },
+      "10": {
+       "__fraction__": "354/401"
+      },
+      "3": {
+       "__fraction__": "323/401"
+      },
+      "5": {
+       "__fraction__": "336/401"
+      }
+     },
+     "hits": {
+      "1": 267,
+      "10": 354,
+      "3": 323,
+      "5": 336
+     },
+     "precision_at_5": {
+      "__fraction__": "1071/2005"
+     },
+     "queries": 401
+    },
+    "name": {
+     "hit_rate": {
+      "1": {
+       "__fraction__": "263/401"
+      },
+      "10": {
+       "__fraction__": "351/401"
+      },
+      "3": {
+       "__fraction__": "318/401"
+      },
+      "5": {
+       "__fraction__": "332/401"
+      }
+     },
+     "hits": {
+      "1": 263,
+      "10": 351,
+      "3": 318,
+      "5": 332
+     },
+     "precision_at_5": {
+      "__fraction__": "1058/2005"
+     },
+     "queries": 401
+    }
+   }
+  },
+  "verdict": {
+   "beats_name_tiebreak_on_hits": true,
+   "beats_name_tiebreak_on_precision": true
+  }
+ },
+ "schema": 1
+}

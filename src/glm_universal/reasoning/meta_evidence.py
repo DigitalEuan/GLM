@@ -154,14 +154,8 @@ _SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z*`(\[_])")
 _ITEM = re.compile(r"^\s*(?:[-*+]|\d+\.)\s+")
 
 
-def quote(rel: str, fragment: str) -> Optional[Tuple[str, str]]:
-    """``(section heading, quoted sentence)`` for ``fragment`` in the
-    document ``rel`` as it now stands, or ``None`` if it is not there.
-
-    The document is cut into paragraphs at blank lines; the paragraph that
-    holds the fragment (whitespace collapsed) is cut into sentences, and the
-    sentences the fragment overlaps are quoted.  In a table the row is
-    quoted.  The section is the last heading above the paragraph."""
+def _quote_compute(rel: str, fragment: str) -> Optional[Tuple[str, str]]:
+    """The uncached computation behind :func:`quote` (see that function)."""
     text = _read(rel)
     if text is None:
         return None
@@ -200,6 +194,81 @@ def quote(rel: str, fragment: str) -> Optional[Tuple[str, str]]:
             sentence = sentence[:600] + " ..."
         return heading, sentence
     return None
+
+
+# ===========================================================================
+# 1b.  STORED, DIGEST-CHECKED COPY OF THE QUOTED SENTENCES
+# ===========================================================================
+#
+# ``quote`` reads a study and extracts the sentence a fragment overlaps.  Doing
+# that on every read makes editing a study (or the integer-decision /
+# symbolic-parameters study it rests on) move 48 units, because each unit's
+# closure names the study.  A stored copy, keyed on the study's digest, takes
+# that cost out: a fresh study is re-read once and the copy is rewritten.
+import hashlib as _hashlib
+import json as _json
+
+_META_QUOTES_PATH = PACKAGE / "reasoning" / "_data" / "meta_quotes.json"
+_META_QUOTES: Dict[str, dict] = {}
+_META_QUOTES_LOADED = False
+
+
+def _meta_quotes_load() -> None:
+    global _META_QUOTES_LOADED
+    if _META_QUOTES_LOADED:
+        return
+    _META_QUOTES_LOADED = True
+    try:
+        _META_QUOTES.update(_json.loads(_META_QUOTES_PATH.read_text(
+            encoding="utf-8")))
+    except (OSError, ValueError):
+        pass
+
+
+def _study_digest(rel: str) -> Optional[str]:
+    p = _path(rel)
+    try:
+        return _hashlib.sha256(p.read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def quote(rel: str, fragment: str) -> Optional[Tuple[str, str]]:
+    """``(section heading, quoted sentence)`` for ``fragment`` in the
+    document ``rel`` as it now stands, or ``None`` if it is not there.
+
+    A stored, digest-checked copy is used when the study is unchanged, so an
+    unchanged study is not re-read; an edited (or missing) study is re-read
+    and the copy is rewritten.  See :func:`_quote_compute`.
+    """
+    _meta_quotes_load()
+    digest = _study_digest(rel)
+    entry = _META_QUOTES.get(rel) if isinstance(_META_QUOTES.get(rel), dict) \
+        else None
+    if (entry is not None and digest is not None
+            and entry.get("digest") == digest
+            and isinstance(entry.get("quotes"), dict)
+            and fragment in entry["quotes"]):
+        cached = entry["quotes"][fragment]
+        if cached is None:
+            return None
+        return (str(cached[0]), str(cached[1]))
+    result = _quote_compute(rel, fragment)
+    if digest is not None:
+        if (rel not in _META_QUOTES
+                or not isinstance(_META_QUOTES.get(rel), dict)
+                or _META_QUOTES[rel].get("digest") != digest):
+            _META_QUOTES[rel] = {"digest": digest, "quotes": {}}
+        _META_QUOTES[rel]["quotes"][fragment] = (
+            list(result) if result is not None else None)
+        try:
+            _META_QUOTES_PATH.parent.mkdir(parents=True, exist_ok=True)
+            _META_QUOTES_PATH.write_text(
+                _json.dumps(_META_QUOTES, indent=1, sort_keys=True),
+                encoding="utf-8")
+        except OSError:
+            pass
+    return result
 
 
 _BOOK: Dict[str, dict] = {}

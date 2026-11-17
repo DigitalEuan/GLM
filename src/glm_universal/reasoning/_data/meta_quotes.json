@@ -1,0 +1,191 @@
+{
+ "studies/CARRIED_FORK_STUDY.md": {
+  "digest": "81b4bb0eec11911dcaa68a064d47754bc19fd0292f249c32ee2d3b5c196ed1a2",
+  "quotes": {
+   "So the Golay tie is not an artefact of the code": [
+    "3.4 K4 \u2014 escalation to the Leech lattice",
+    "So the Golay tie is not an artefact of the code: escalated to the Leech lattice without new information, it *is* a deep hole \u2014 of the one Niemeier type whose glue code is the Golay code itself \u2014 and the lattice carries 48 points where the code carried 6."
+   ],
+   "escalated to the Leech lattice without new information, it *is* a deep hole": [
+    "3.4 K4 \u2014 escalation to the Leech lattice",
+    "So the Golay tie is not an artefact of the code: escalated to the Leech lattice without new information, it *is* a deep hole \u2014 of the one Niemeier type whose glue code is the Golay code itself \u2014 and the lattice carries 48 points where the code carried 6."
+   ],
+   "escalated to the Leech lattice without new information, it *is* a deep hole \u2014 of the one Niemeier type whose glue code is the Golay code itself": [
+    "3.4 K4 \u2014 escalation to the Leech lattice",
+    "So the Golay tie is not an artefact of the code: escalated to the Leech lattice without new information, it *is* a deep hole \u2014 of the one Niemeier type whose glue code is the Golay code itself \u2014 and the lattice carries 48 points where the code carried 6."
+   ],
+   "escalated to the Leech lattice without new information, it *is* a deep hole \u2014 of the one Niemeier type whose glue code is the Golay code itself (altered)": null
+  }
+ },
+ "studies/GLM_ACADEMIC_PAPER.md": {
+  "digest": "5a7772a396b5cdf2ba3cd8b0880075e21828a46ae2664743d07c1899a2852d68",
+  "quotes": {
+   "**Column 2 (Mathematics):** The identical logical steps as exact equations over \u211a, \u2124, or \ud835\udd3d\u2082": [
+    "2.3 Three Column Thinking (TCT)",
+    "**Column 2 (Mathematics):** The identical logical steps as exact equations over \u211a, \u2124, or \ud835\udd3d\u2082"
+   ],
+   "**Column 2 (Mathematics):** The identical logical steps as exact equations over \u211a, \u2124, or \ud835\udd3d\u2082 (altered)": null,
+   "**Column 3 (Re-Derivation Script):** A dynamically generated Python script that re-executes Column 2 in an isolated subprocess with no shared state": [
+    "2.3 Three Column Thinking (TCT)",
+    "**Column 3 (Re-Derivation Script):** A dynamically generated Python script that re-executes Column 2 in an isolated subprocess with no shared state"
+   ],
+   "At the deep-hole boundary (d = 4):** Exactly six equidistant nearest codewords": [
+    "3.4 Complete Syndrome Decoding",
+    "**At the deep-hole boundary (d = 4):** Exactly six equidistant nearest codewords (the six tetrads of a MOG sextet)."
+   ],
+   "At the deep-hole boundary (d = 4):** Exactly six equidistant nearest codewords (the six tetrads of a MOG sextet)": [
+    "3.4 Complete Syndrome Decoding",
+    "**At the deep-hole boundary (d = 4):** Exactly six equidistant nearest codewords (the six tetrads of a MOG sextet)."
+   ],
+   "At the deep-hole boundary (d = 4):** Exactly six equidistant nearest codewords (the six tetrads of a MOG sextet) (altered)": null,
+   "Beyond the covering radius (d \u2265 5):": [
+    "3.4 Complete Syndrome Decoding",
+    "**Beyond the covering radius (d \u2265 5):** By the Steiner system S(5,8,24), a weight-5 error lies at distance 3 from the *wrong* codeword."
+   ],
+   "By the Steiner system S(5,8,24), a weight-5 error lies at distance 3 from the *wrong* codeword": [
+    "3.4 Complete Syndrome Decoding",
+    "**Beyond the covering radius (d \u2265 5):** By the Steiner system S(5,8,24), a weight-5 error lies at distance 3 from the *wrong* codeword."
+   ],
+   "By the Steiner system S(5,8,24), a weight-5 error lies at distance 3 from the *wrong* codeword (altered)": null,
+   "The GLM replaces legacy brute-force \"snapping\" with complete syndrome/coset decoding over the 4,096 Golay codewords": [
+    "3.4 Complete Syndrome Decoding",
+    "The GLM replaces legacy brute-force \"snapping\" with complete syndrome/coset decoding over the 4,096 Golay codewords:"
+   ],
+   "The boundary is a single integer: at weight 3 the substrate's repair is truth": [
+    "3.4 Complete Syndrome Decoding",
+    "The boundary is a single integer: at weight 3 the substrate's repair is truth; at weight 4 it returns incompatible answers and the question must be escalated."
+   ],
+   "The evaluation scores this asymmetrically \u2014 an honest refusal `+1`, a confidently wrong answer `\u22121`": [
+    "17.5 Refusal is an answer",
+    "The evaluation scores this asymmetrically \u2014 an honest refusal `+1`, a confidently wrong answer `\u22121` \u2014 so the machine is built to prefer the first."
+   ],
+   "The evaluation scores this asymmetrically \u2014 an honest refusal `+1`, a confidently wrong answer `\u22121` (altered)": null,
+   "When the machine cannot answer it says so, and it says *why*: a named reason from a declared set": [
+    "17.5 Refusal is an answer",
+    "When the machine cannot answer it says so, and it says *why*: a named reason from a declared set (an unknown row, a field the register records as missing, two readings on different scales, a column with a hole in it, two licensed readings that disagree)."
+   ],
+   "When the machine cannot answer it says so, and it says *why*: a named reason from a declared set (altered)": null,
+   "Where Lean and Python disagree, Lean is the specification": [
+    "14.2 The Verification Discipline",
+    "**Where Lean and Python disagree, Lean is the specification** (directive D8)."
+   ],
+   "Where Lean and Python disagree, Lean is the specification (altered)": null,
+   "Within the packing radius (d \u2264 3):** Unique nearest-codeword recovery with absolute certainty.": [
+    "3.4 Complete Syndrome Decoding",
+    "**Within the packing radius (d \u2264 3):** Unique nearest-codeword recovery with absolute certainty."
+   ],
+   "Within the packing radius (d \u2264 3):** Unique nearest-codeword recovery with absolute certainty. (altered)": null,
+   "a sentence nobody wrote here": null,
+   "a surface in front of another changes a verdict only for text it reads": [
+    "19.1 One path to every surface (Phase 66)",
+    "First, a surface in front of another changes a verdict only for text it reads (`route_prefix_none` in `RequestProject/GLM/ConnectedMachine.lean`), so \"the router leaves the planner's answers alone\" is a count, and the count is 0 of the 177 contract cases diverted."
+   ],
+   "a surface in front of another changes a verdict only for text it reads (altered)": null,
+   "a weight-5 error lies at distance 3": [
+    "3.4 Complete Syndrome Decoding",
+    "**Beyond the covering radius (d \u2265 5):** By the Steiner system S(5,8,24), a weight-5 error lies at distance 3 from the *wrong* codeword."
+   ],
+   "any 5 coordinates are contained in exactly one codeword of weight 8 (an *octad*)": [
+    "3.1 The Extended Binary Golay Code",
+    "It has 4,096 codewords, minimum Hamming distance 8, and forms a Steiner system S(5, 8, 24) \u2014 meaning any 5 coordinates are contained in exactly one codeword of weight 8 (an *octad*)."
+   ],
+   "any 5 coordinates are contained in exactly one codeword of weight 8 (an *octad*) (altered)": null,
+   "evaluation scores": [
+    "17.5 Refusal is an answer",
+    "The evaluation scores this asymmetrically \u2014 an honest refusal `+1`, a confidently wrong answer `\u22121` \u2014 so the machine is built to prefer the first."
+   ],
+   "no such sentence here": null,
+   "tries the surfaces of a declared catalogue (`runtime/toolbox.py`) in order": [
+    "19.1 One path to every surface (Phase 66)",
+    "The **router** (`runtime/router.py`) tries the surfaces of a declared catalogue (`runtime/toolbox.py`) in order \u2014 the toolbox, the Python dialect, the engineering surface, the typed planner \u2014 and gives the text to the first that *reads* it; that surface's answer or refusal is the verdict, and `GLM.py --ask` prints its name beside it."
+   ]
+  }
+ },
+ "studies/INTEGER_DECISION_STUDY.md": {
+  "digest": "f0aefddb558dbc0ddd706344951d43537f781935a9e0aa2fa496faa8b12379be",
+  "quotes": {
+   "The Omega test is exponential in the worst case; the declared limit is what bounds it": [
+    "4. What it is not",
+    "The Omega test is exponential in the worst case; the declared limit is what bounds it, and the systems measured have at most three variables."
+   ],
+   "The one refusal left is a resource limit, declared and never reached here.": [
+    "3. What this is, under D15",
+    "The one refusal left is a resource limit, declared and never reached here."
+   ],
+   "The refusal is kept for exactly one reason: a case spends more than `NODE_LIMIT` (5000) steps.": [
+    "1. Declarations \u2014 written before any code of this round",
+    "`INTEGER_UNDECIDED` narrowed to a declared limit.** The refusal is kept for exactly one reason: a case spends more than `NODE_LIMIT` (5000) steps."
+   ],
+   "The refusal is kept for exactly one reason: a case spends more than `NODE_LIMIT` (5000) steps. (altered)": null,
+   "exact elimination where a variable's coefficients allow it, equalities solved by the least-remainder substitution, and otherwise the real shadow (refuted: done), the dark shadow (satisfied: an integer point exists and is built), or the splinters": [
+    "1. Declarations \u2014 written before any code of this round",
+    "The Omega test is what *finds* the tree: exact elimination where a variable's coefficients allow it, equalities solved by the least-remainder substitution, and otherwise the real shadow (refuted: done), the dark shadow (satisfied: an integer point exists and is built), or the splinters \u2014 the split above at each lower bound of the variable with `K = \u230a(m\u00b7b \u2212 m \u2212 b)/m\u230b`, `m` the largest upper coefficient and `b` the lower bound's own, the last child then eliminated exactly."
+   ],
+   "exact elimination where a variable's coefficients allow it, equalities solved by the least-remainder substitution, and otherwise the real shadow (refuted: done), the dark shadow (satisfied: an integer point exists and is built), or the splinters (altered)": null
+  }
+ },
+ "studies/LEAN_ADDRESS_STUDY.md": {
+  "digest": "d2b96738cf725b6b4ea6b58fe65a731f0d232e5fd7cc8ffbd7d108d679e3e6f0",
+  "quotes": {
+   "Coordinates are integers, distances are integers (squared Euclidean), and every rate is an exact `Fraction`.": [
+    "1. The question",
+    "Coordinates are integers, distances are integers (squared Euclidean), and every rate is an exact `Fraction`."
+   ],
+   "Coordinates are integers, distances are integers (squared Euclidean), and every rate is an exact `Fraction`. (altered)": null
+  }
+ },
+ "studies/META_QUESTIONS_STUDY.md": {
+  "digest": "5a9712bb0fd7d3d286604c105e0606c42b778a526c8bbe0b9741667cbeb85ec6",
+  "quotes": {
+   "meta question": null
+  }
+ },
+ "studies/QUESTION_SET_B_STUDY.md": {
+  "digest": "3a1f92b3ad19569418fe9d9234c15a3a4ca5213511a7df1b7b7e2977ce44c7a4",
+  "quotes": {
+   "Every decimal printed is a truncation of an exact process (`real_expr`), never a float.": [
+    "2. What was built",
+    "Every decimal printed is a truncation of an exact process (`real_expr`), never a float."
+   ],
+   "Every decimal printed is a truncation of an exact process (`real_expr`), never a float. (altered)": null,
+   "The script runs under `python3 -I` with a 5-second budget **before** the reading is output": [
+    "2. What was built",
+    "The script runs under `python3 -I` with a 5-second budget **before** the reading is output; a script that fails turns the reading into the refusal `SCRIPT_GATE_FAILED` (the test `test_a_reading_the_gate_rejects_is_refused` builds one)."
+   ],
+   "The script runs under `python3 -I` with a 5-second budget **before** the reading is output (altered)": null,
+   "`error_weight` | REFUSED UNCORRECTABLE": [
+    "3. Set B \u2014 14 of 14 by audit",
+    "| O1-003 | `error_weight` | REFUSED UNCORRECTABLE | UNCORRECTABLE | +1 | +1 |"
+   ],
+   "no such sentence here": null
+  }
+ },
+ "studies/SYMBOLIC_PARAMETERS_STUDY.md": {
+  "digest": "3e533b0d0cb5fb39db54a56b6308368d9a9af590208622c32af0ae1414cdd62a",
+  "quotes": {
+   "So are `sin`, `cos`, `tan`, `exp` and `ln` of an expression": [
+    "1. The objects",
+    "So are `sin`, `cos`, `tan`, `exp` and `ln` of an expression, with `sin\u00b2 + cos\u00b2 = 1` as a declared relation."
+   ],
+   "So are `sin`, `cos`, `tan`, `exp` and `ln` of an expression, with `sin\u00b2 + cos\u00b2 = 1` as a declared relation.": [
+    "1. The objects",
+    "So are `sin`, `cos`, `tan`, `exp` and `ln` of an expression, with `sin\u00b2 + cos\u00b2 = 1` as a declared relation."
+   ],
+   "So are `sin`, `cos`, `tan`, `exp` and `ln` of an expression, with `sin\u00b2 + cos\u00b2 = 1` as a declared relation. (altered)": null,
+   "The 4\u00d74 case went from more than five minutes to about 0.02 s.": [
+    "4.1 The post-hoc battery (evidence, not a mark)",
+    "The 4\u00d74 case went from more than five minutes to about 0.02 s."
+   ],
+   "dividing each substituted equation exactly by the earlier pivots, which are already declared nonzero (the Bareiss step)": [
+    "4.1 The post-hoc battery (evidence, not a mark)",
+    "dividing each substituted equation exactly by the earlier pivots, which are already declared nonzero (the Bareiss step);"
+   ],
+   "dividing each substituted equation exactly by the earlier pivots, which are already declared nonzero (the Bareiss step) (altered)": null,
+   "fraction-free Bareiss determinants": [
+    "4.1 The post-hoc battery (evidence, not a mark)",
+    "for square linear systems of four or more unknowns, Cramer's rule with fraction-free Bareiss determinants."
+   ],
+   "no such sentence here": null
+  }
+ }
+}

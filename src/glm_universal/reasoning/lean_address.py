@@ -473,9 +473,26 @@ def legacy_citation_graph() -> Dict[str, frozenset]:
     ``GLM.PCGS.Cost.zero``, a word in a comment to whatever declaration
     happens to carry it.  :func:`citation_graph` is the repaired reader;
     ``studies/CITATION_SCOPE_STUDY.md`` measures both against the elaborator.
+
+    Cached on disk by the digest of the Lean development, so a cold process
+    does not re-derive it.
     """
-    index = citation_index()
-    return {d.name: _cited_names(d, index) for d in declarations()}
+    from ..derived import DerivedStore
+
+    def _inputs() -> object:
+        from . import lean_tree as _lt
+        return _lt.lean_files()
+
+    store = DerivedStore("lean_legacy_citation_graph", _inputs, schema=1)  # type: ignore[arg-type]
+
+    def compute() -> object:
+        index = citation_index()
+        return {d.name: sorted(_cited_names(d, index))
+                for d in declarations()}
+
+    payload = store.cached(compute)
+    return {str(name): frozenset(targets)
+            for name, targets in dict(payload).items()}
 
 
 # ===========================================================================

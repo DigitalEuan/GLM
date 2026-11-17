@@ -153,8 +153,10 @@ GLM-systems focus:
    *taken this round (partial).* `citation_graph` and `separation_report` are
    now `DerivedStore`-backed (`lean_citation_graph`, `lean_separation_report`),
    with sorted-list / `_freeze`+`_thaw` round-trips; verified equal to the
-   recomputed versions. `feature_table` is book-served; `legacy_citation_graph`
-   and `tiebreak_report` left as `@memo`-only.
+   recomputed versions. `feature_table` is book-served. `legacy_citation_graph`
+   (now `lean_legacy_citation_graph`) and `tiebreak_report` (now
+   `stack_tiebreak_report`) are now `DerivedStore`-backed too, both fresh on
+   the current tree; closes the caching follow-up.
 4. **Investigate the pre-existing `lean_address` duplicate-name failures** —
    *investigated this round.* Root cause is not the parser: 128 duplicate
    full names arise because multiple Lean files share a namespace (e.g.
