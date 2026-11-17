@@ -525,7 +525,10 @@ def hidden_relations(axioms: Sequence[str], table: Mapping[str, Sequence[Fractio
             for k, v in r.items():
                 combo[k] = combo.get(k, Fraction(0)) + xi * v
         combo = {k: v for k, v in combo.items() if v}
-        if combo:
+        # A combo equal to an axiom is the axiom itself, not a hidden relation;
+        # for an all-dimensionless wheel every axiom is dimensionless and would
+        # otherwise be reported as hidden.
+        if combo and combo not in rels:
             out.append(combo)
     return out
 

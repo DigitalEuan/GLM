@@ -170,7 +170,7 @@ class TestAbsorbedWheels(unittest.TestCase):
                 if c.physical_status == CW.NEGATIVE:
                     n += 1
                     self.assertFalse(CW.is_derivable_q(c.equation, w.axioms), c.id)
-        self.assertEqual(n, 15)
+        self.assertEqual(n, 22)
 
     def test_no_hidden_relations(self):
         for w in CW.CENT_WHEELS:
@@ -314,8 +314,8 @@ class TestLeanAgreement(unittest.TestCase):
     def test_agreement(self):
         a = L.agreement(self.text)
         self.assertTrue(a["ok"], a["problems"])
-        self.assertEqual(a["wheels"], 22)
-        self.assertEqual(a["axioms"], 48)
+        self.assertEqual(a["wheels"], 31)
+        self.assertEqual(a["axioms"], 77)
         self.assertEqual(a["derivable"] + a["refused"],
                          sum(len(L.parse_block(b)["questions"]) for n, b in L.blocks(self.text).items()
                              if n != "Supplied") + 1)

@@ -812,6 +812,140 @@ theorem q_H25_F : ¬ Derivable (Set.range ax) ![0, -1, 1, -1, -1, 0, 0] :=
 
 end W25
 
+/-! ### W26 — Astrophysics & Stellar Structure -/
+
+namespace W26
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["boltzmann_constant", "gravitational_constant", "hawking_temperature", "hbar", "luminosity", "mass", "orbital_radius", "orbital_velocity", "radius", "schwarzschild_radius", "speed_of_light", "stefan_boltzmann_constant", "temperature", "#2"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: luminosity = stefan_boltzmann_constant * radius^2 * temperature^4
+-- 1: schwarzschild_radius = 2 * gravitational_constant * mass / speed_of_light^2
+-- 2: orbital_velocity^2 = gravitational_constant * mass / orbital_radius
+-- 3: hawking_temperature = hbar * speed_of_light^3 / (gravitational_constant * mass * boltzmann_constant)
+def ax : Fin 4 → Fin 14 → ℚ :=
+  ![![0, 0, 0, 0, 1, 0, 0, 0, -2, 0, 0, -1, -4, 0],
+   ![0, -1, 0, 0, 0, -1, 0, 0, 0, 1, 2, 0, 0, -1],
+   ![0, -1, 0, 0, 0, -1, 1, 2, 0, 0, 0, 0, 0, 0],
+   ![1, 1, 1, -1, 0, 1, 0, 0, 0, 0, -3, 0, 0, 0]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 14 → Fin 8 → ℚ :=
+  ![![2, 1, -2, 0, -1, 0, 0, 0],
+   ![3, -1, -2, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 1, 0, 0, 0],
+   ![2, 1, -1, 0, 0, 0, 0, 0],
+   ![2, 1, -3, 0, 0, 0, 0, 0],
+   ![0, 1, 0, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![1, 0, -1, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![1, 0, -1, 0, 0, 0, 0, 0],
+   ![0, 1, -3, 0, -4, 0, 0, 0],
+   ![0, 0, 0, 0, 1, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W26-01`: stefan_boltzmann_constant = luminosity / (radius^2 * temperature^4) -/
+theorem q_W26_01 : Derivable (Set.range ax) ![0, 0, 0, 0, -1, 0, 0, 0, 2, 0, 0, 1, 4, 0] :=
+  derivable_of_combo ax ![-1, 0, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W26-02`: mass = schwarzschild_radius * speed_of_light^2 / (2 * gravitational_constant) -/
+theorem q_W26_02 : Derivable (Set.range ax) ![0, 1, 0, 0, 0, 1, 0, 0, 0, -1, -2, 0, 0, 1] :=
+  derivable_of_combo ax ![0, -1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W26-03`: orbital_radius = gravitational_constant * mass / orbital_velocity^2 -/
+theorem q_W26_03 : Derivable (Set.range ax) ![0, -1, 0, 0, 0, -1, 1, 2, 0, 0, 0, 0, 0, 0] :=
+  derivable_of_combo ax ![0, 0, 1, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W26-04`: mass = hbar * speed_of_light^3 / (gravitational_constant * boltzmann_constant * hawking_temperature) -/
+theorem q_W26_04 : Derivable (Set.range ax) ![1, 1, 1, -1, 0, 1, 0, 0, 0, 0, -3, 0, 0, 0] :=
+  derivable_of_combo ax ![0, 0, 0, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W26-N1`: luminosity = stefan_boltzmann_constant * radius^2 / temperature^4 -/
+theorem q_W26_N1 : ¬ Derivable (Set.range ax) ![0, 0, 0, 0, 1, 0, 0, 0, -2, 0, 0, -1, 4, 0] :=
+  not_derivable_of_dot ax ![0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W26
+
+/-! ### W27 — Cosmology & Cosmic Expansion -/
+
+namespace W27
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["critical_density", "distance", "gravitational_constant", "horizon_distance", "hubble_constant", "hubble_time", "recession_velocity", "speed_of_light"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: recession_velocity = hubble_constant * distance
+-- 1: critical_density = hubble_constant^2 / gravitational_constant
+-- 2: hubble_time = 1 / hubble_constant
+-- 3: horizon_distance = speed_of_light / hubble_constant
+def ax : Fin 4 → Fin 8 → ℚ :=
+  ![![0, -1, 0, 0, -1, 0, 1, 0],
+   ![1, 0, 1, 0, -2, 0, 0, 0],
+   ![0, 0, 0, 0, 1, 1, 0, 0],
+   ![0, 0, 0, 1, 1, 0, 0, -1]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 8 → Fin 8 → ℚ :=
+  ![![-3, 1, 0, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![3, -1, -2, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, -1, 0, 0, 0, 0, 0],
+   ![0, 0, 1, 0, 0, 0, 0, 0],
+   ![1, 0, -1, 0, 0, 0, 0, 0],
+   ![1, 0, -1, 0, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W27-01`: hubble_constant = recession_velocity / distance -/
+theorem q_W27_01 : Derivable (Set.range ax) ![0, 1, 0, 0, 1, 0, -1, 0] :=
+  derivable_of_combo ax ![-1, 0, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W27-02`: critical_density = hubble_constant^2 / gravitational_constant -/
+theorem q_W27_02 : Derivable (Set.range ax) ![1, 0, 1, 0, -2, 0, 0, 0] :=
+  derivable_of_combo ax ![0, 1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W27-03`: hubble_time = 1 / hubble_constant -/
+theorem q_W27_03 : Derivable (Set.range ax) ![0, 0, 0, 0, 1, 1, 0, 0] :=
+  derivable_of_combo ax ![0, 0, 1, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W27-04`: horizon_distance = speed_of_light / hubble_constant -/
+theorem q_W27_04 : Derivable (Set.range ax) ![0, 0, 0, 1, 1, 0, 0, -1] :=
+  derivable_of_combo ax ![0, 0, 0, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W27-N1`: recession_velocity = hubble_constant / distance -/
+theorem q_W27_N1 : ¬ Derivable (Set.range ax) ![0, 1, 0, 0, -1, 0, 1, 0] :=
+  not_derivable_of_dot ax ![0, 1, 0, 0, 0, 0, 1, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W27
+
 /-! ### W28 — Superconductivity & Josephson Effects -/
 
 namespace W28
@@ -1155,6 +1289,398 @@ theorem q_H34_F : ¬ Derivable (Set.range ax) ![-1, 3, 0, 1, -1, 0] :=
     (by norm_num [Fin.sum_univ_succ])
 
 end W34
+
+/-! ### W36 — Numerical SAT Substrate (NumPy) — quadratic energy laws -/
+
+namespace W36
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["container_violation", "pair_energy", "pair_penetration", "wall_energy"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: pair_energy = pair_penetration^2
+-- 1: wall_energy = container_violation^2
+def ax : Fin 2 → Fin 4 → ℚ :=
+  ![![0, 1, -2, 0],
+   ![-2, 0, 0, 1]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 4 → Fin 8 → ℚ :=
+  ![![0, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W36-01`: pair_penetration = pair_energy^(1/2) -/
+theorem q_W36_01 : Derivable (Set.range ax) ![0, -1/2, 1, 0] :=
+  derivable_of_combo ax ![-1/2, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W36-02`: container_violation = wall_energy^(1/2) -/
+theorem q_W36_02 : Derivable (Set.range ax) ![1, 0, 0, -1/2] :=
+  derivable_of_combo ax ![0, -1/2] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W36-03`: pair_energy = pair_penetration -/
+theorem q_W36_03 : ¬ Derivable (Set.range ax) ![0, 1, -1, 0] :=
+  not_derivable_of_dot ax ![0, 2, 1, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+/-- `W36-04`: wall_energy = container_violation -/
+theorem q_W36_04 : ¬ Derivable (Set.range ax) ![-1, 0, 0, 1] :=
+  not_derivable_of_dot ax ![1, 0, 0, 2] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W36
+
+/-! ### W37 — Viscoelastic Settling (SciPy) — Maxwell creep and dissipation -/
+
+namespace W37
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["dissipated_power", "modulus", "relaxation_time", "strain_rate", "stress", "viscosity"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: relaxation_time = viscosity / modulus
+-- 1: strain_rate = stress / viscosity
+-- 2: dissipated_power = stress * strain_rate
+def ax : Fin 3 → Fin 6 → ℚ :=
+  ![![0, 1, 1, 0, 0, -1],
+   ![0, 0, 0, 1, -1, 1],
+   ![1, 0, 0, -1, -1, 0]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 6 → Fin 8 → ℚ :=
+  ![![-1, 1, -3, 0, 0, 0, 0, 0],
+   ![-1, 1, -2, 0, 0, 0, 0, 0],
+   ![0, 0, 1, 0, 0, 0, 0, 0],
+   ![0, 0, -1, 0, 0, 0, 0, 0],
+   ![-1, 1, -2, 0, 0, 0, 0, 0],
+   ![-1, 1, -1, 0, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W37-01`: viscosity = relaxation_time * modulus -/
+theorem q_W37_01 : Derivable (Set.range ax) ![0, -1, -1, 0, 0, 1] :=
+  derivable_of_combo ax ![-1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W37-02`: stress = strain_rate * viscosity -/
+theorem q_W37_02 : Derivable (Set.range ax) ![0, 0, 0, -1, 1, -1] :=
+  derivable_of_combo ax ![0, -1, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W37-03`: strain_rate = stress / viscosity -/
+theorem q_W37_03 : Derivable (Set.range ax) ![0, 0, 0, 1, -1, 1] :=
+  derivable_of_combo ax ![0, 1, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W37-04`: dissipated_power = stress * strain_rate -/
+theorem q_W37_04 : Derivable (Set.range ax) ![1, 0, 0, -1, -1, 0] :=
+  derivable_of_combo ax ![0, 0, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+end W37
+
+/-! ### W38 — Gears & Mechanical Transmissions -/
+
+namespace W38
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["gear_ratio", "input_angular_velocity", "input_power", "input_torque", "output_angular_velocity", "output_power", "output_torque"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: output_torque = gear_ratio * input_torque
+-- 1: output_angular_velocity = input_angular_velocity / gear_ratio
+-- 2: input_power = input_torque * input_angular_velocity
+-- 3: output_power = output_torque * output_angular_velocity
+def ax : Fin 4 → Fin 7 → ℚ :=
+  ![![-1, 0, 0, -1, 0, 0, 1],
+   ![1, -1, 0, 0, 1, 0, 0],
+   ![0, -1, 1, -1, 0, 0, 0],
+   ![0, 0, 0, 0, -1, 1, -1]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 7 → Fin 8 → ℚ :=
+  ![![0, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, -1, 0, 0, 0, 0, 1],
+   ![2, 1, -3, 0, 0, 0, 0, 0],
+   ![2, 1, -2, 0, 0, 0, 0, -1],
+   ![0, 0, -1, 0, 0, 0, 0, 1],
+   ![2, 1, -3, 0, 0, 0, 0, 0],
+   ![2, 1, -2, 0, 0, 0, 0, -1]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W38-01`: gear_ratio = output_torque / input_torque -/
+theorem q_W38_01 : Derivable (Set.range ax) ![1, 0, 0, 1, 0, 0, -1] :=
+  derivable_of_combo ax ![-1, 0, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W38-02`: input_angular_velocity = output_angular_velocity * gear_ratio -/
+theorem q_W38_02 : Derivable (Set.range ax) ![-1, 1, 0, 0, -1, 0, 0] :=
+  derivable_of_combo ax ![0, -1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W38-03`: output_power = input_power -/
+theorem q_W38_03 : Derivable (Set.range ax) ![0, 0, -1, 0, 0, 1, 0] :=
+  derivable_of_combo ax ![1, 1, -1, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W38-N1`: output_torque = input_torque / gear_ratio -/
+theorem q_W38_N1 : ¬ Derivable (Set.range ax) ![1, 0, 0, -1, 0, 0, 1] :=
+  not_derivable_of_dot ax ![1, 1, 0, -1, 0, 0, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W38
+
+/-! ### W39 — Magnetic Circuits & Reluctance -/
+
+namespace W39
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["area", "current", "length", "magnetic_flux", "magnetomotive_force", "permeability", "permeance", "turns"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: magnetomotive_force = turns * current
+-- 1: magnetic_flux = magnetomotive_force * permeance
+-- 2: permeance = permeability * area / length
+def ax : Fin 3 → Fin 8 → ℚ :=
+  ![![0, -1, 0, 0, 1, 0, 0, -1],
+   ![0, 0, 0, 1, -1, 0, -1, 0],
+   ![-1, 0, 1, 0, 0, -1, 1, 0]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 8 → Fin 8 → ℚ :=
+  ![![2, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 1, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![2, 1, -2, -1, 0, 0, 0, 0],
+   ![0, 0, 0, 1, 0, 0, 0, 0],
+   ![1, 1, -2, -2, 0, 0, 0, 0],
+   ![2, 1, -2, -2, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W39-01`: current = magnetomotive_force / turns -/
+theorem q_W39_01 : Derivable (Set.range ax) ![0, 1, 0, 0, -1, 0, 0, 1] :=
+  derivable_of_combo ax ![-1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W39-02`: magnetic_flux = magnetomotive_force * permeability * area / length -/
+theorem q_W39_02 : Derivable (Set.range ax) ![-1, 0, 1, 1, -1, -1, 0, 0] :=
+  derivable_of_combo ax ![0, 1, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W39-03`: permeability = magnetic_flux * length / (magnetomotive_force * area) -/
+theorem q_W39_03 : Derivable (Set.range ax) ![1, 0, -1, -1, 1, 1, 0, 0] :=
+  derivable_of_combo ax ![0, -1, -1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W39-N1`: magnetic_flux = magnetomotive_force * permeability -/
+theorem q_W39_N1 : ¬ Derivable (Set.range ax) ![0, 0, 0, 1, -1, -1, 0, 0] :=
+  not_derivable_of_dot ax ![1, 0, 0, 0, 0, -1, 0, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W39
+
+/-! ### W40 — Piezoelectric Transducers -/
+
+namespace W40
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["area", "charge", "force", "length", "piezoelectric_charge_constant", "piezoelectric_voltage_constant", "stress", "voltage"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: charge = piezoelectric_charge_constant * force
+-- 1: voltage = piezoelectric_voltage_constant * stress * length
+-- 2: stress = force / area
+def ax : Fin 3 → Fin 8 → ℚ :=
+  ![![0, 1, -1, 0, -1, 0, 0, 0],
+   ![0, 0, 0, -1, 0, -1, -1, 1],
+   ![1, 0, -1, 0, 0, 0, 1, 0]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 8 → Fin 8 → ℚ :=
+  ![![2, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 1, 1, 0, 0, 0, 0],
+   ![1, 1, -2, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![-1, -1, 3, 1, 0, 0, 0, 0],
+   ![2, 0, -1, -1, 0, 0, 0, 0],
+   ![-1, 1, -2, 0, 0, 0, 0, 0],
+   ![2, 1, -3, -1, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W40-01`: force = charge / piezoelectric_charge_constant -/
+theorem q_W40_01 : Derivable (Set.range ax) ![0, -1, 1, 0, 1, 0, 0, 0] :=
+  derivable_of_combo ax ![-1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W40-02`: voltage = piezoelectric_voltage_constant * force * length / area -/
+theorem q_W40_02 : Derivable (Set.range ax) ![1, 0, -1, -1, 0, -1, 0, 1] :=
+  derivable_of_combo ax ![0, 1, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W40-03`: piezoelectric_voltage_constant = voltage * area / (force * length) -/
+theorem q_W40_03 : Derivable (Set.range ax) ![-1, 0, 1, 1, 0, 1, 0, -1] :=
+  derivable_of_combo ax ![0, -1, -1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W40-N1`: voltage = piezoelectric_voltage_constant * force -/
+theorem q_W40_N1 : ¬ Derivable (Set.range ax) ![0, 0, -1, 0, 0, -1, 0, 1] :=
+  not_derivable_of_dot ax ![0, 0, 0, 1, 0, -1, 0, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W40
+
+/-! ### W41 — Thermoelectric Transducers -/
+
+namespace W41
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["current", "heat_rate", "peltier_coefficient", "seebeck_coefficient", "temperature", "temperature_difference", "voltage"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: voltage = seebeck_coefficient * temperature_difference
+-- 1: heat_rate = peltier_coefficient * current
+-- 2: peltier_coefficient = seebeck_coefficient * temperature
+def ax : Fin 3 → Fin 7 → ℚ :=
+  ![![0, 0, 0, -1, 0, -1, 1],
+   ![-1, 1, -1, 0, 0, 0, 0],
+   ![0, 0, 1, -1, -1, 0, 0]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 7 → Fin 8 → ℚ :=
+  ![![0, 0, 0, 1, 0, 0, 0, 0],
+   ![2, 1, -3, 0, 0, 0, 0, 0],
+   ![2, 1, -3, -1, 0, 0, 0, 0],
+   ![2, 1, -3, -1, -1, 0, 0, 0],
+   ![0, 0, 0, 0, 1, 0, 0, 0],
+   ![0, 0, 0, 0, 1, 0, 0, 0],
+   ![2, 1, -3, -1, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W41-01`: seebeck_coefficient = voltage / temperature_difference -/
+theorem q_W41_01 : Derivable (Set.range ax) ![0, 0, 0, 1, 0, 1, -1] :=
+  derivable_of_combo ax ![-1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W41-02`: current = heat_rate / peltier_coefficient -/
+theorem q_W41_02 : Derivable (Set.range ax) ![1, -1, 1, 0, 0, 0, 0] :=
+  derivable_of_combo ax ![0, -1, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W41-03`: temperature = peltier_coefficient / seebeck_coefficient -/
+theorem q_W41_03 : Derivable (Set.range ax) ![0, 0, -1, 1, 1, 0, 0] :=
+  derivable_of_combo ax ![0, 0, -1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W41-N1`: voltage = seebeck_coefficient / temperature_difference -/
+theorem q_W41_N1 : ¬ Derivable (Set.range ax) ![0, 0, 0, -1, 0, 1, 1] :=
+  not_derivable_of_dot ax ![1, 0, -1, -1, 0, 1, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W41
+
+/-! ### W42 — Elastic Buckling and Bistable Snap-Through -/
+
+namespace W42
+
+/-- The coordinates: quantities, then the primes of the coefficients. -/
+def coords : List String :=
+  ["area", "critical_load", "hysteresis_band", "length", "moment_of_inertia_of_section", "release_load_fraction", "sign_of(applied_load - critical_load)", "snap_through_state", "youngs_modulus"]
+
+/-- The axioms' relation vectors, in the order of the wheel: -/
+-- 0: critical_load = youngs_modulus * moment_of_inertia_of_section / length^2
+-- 1: snap_through_state = sign_of(applied_load - critical_load)
+-- 2: hysteresis_band = release_load_fraction * critical_load
+def ax : Fin 3 → Fin 9 → ℚ :=
+  ![![0, 1, 0, 2, -1, 0, 0, 0, -1],
+   ![0, 0, 0, 0, 0, 0, -1, 1, 0],
+   ![0, -1, 1, 0, 0, -1, 0, 0, 0]]
+
+/-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
+(the zero row for a prime or a name no axiom uses). -/
+def dim : Fin 9 → Fin 8 → ℚ :=
+  ![![2, 0, 0, 0, 0, 0, 0, 0],
+   ![1, 1, -2, 0, 0, 0, 0, 0],
+   ![1, 1, -2, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
+   ![4, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![-1, 1, -2, 0, 0, 0, 0, 0]]
+
+/-- Every axiom balances on all eight axes. -/
+theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
+  intro i
+  fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
+
+/-- `W42-01`: critical_load = youngs_modulus * moment_of_inertia_of_section / length^2 -/
+theorem q_W42_01 : Derivable (Set.range ax) ![0, 1, 0, 2, -1, 0, 0, 0, -1] :=
+  derivable_of_combo ax ![1, 0, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W42-02`: snap_through_state = sign_of(applied_load - critical_load) -/
+theorem q_W42_02 : Derivable (Set.range ax) ![0, 0, 0, 0, 0, 0, -1, 1, 0] :=
+  derivable_of_combo ax ![0, 1, 0] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W42-03`: hysteresis_band = release_load_fraction * critical_load -/
+theorem q_W42_03 : Derivable (Set.range ax) ![0, -1, 1, 0, 0, -1, 0, 0, 0] :=
+  derivable_of_combo ax ![0, 0, 1] _
+    (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
+
+/-- `W42-N1`: critical_load = youngs_modulus * area / length^2 -/
+theorem q_W42_N1 : ¬ Derivable (Set.range ax) ![-1, 1, 0, 2, 0, 0, 0, 0, -1] :=
+  not_derivable_of_dot ax ![1, 0, 0, 0, 0, 0, 0, 0, 0] _
+    (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
+    (by norm_num [Fin.sum_univ_succ])
+
+end W42
 
 /-! ## The W4 and W6 additions (W4 and W6 of `engineering/wheels.py` are unchanged) -/
 
