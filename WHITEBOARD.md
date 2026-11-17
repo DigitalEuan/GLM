@@ -229,6 +229,9 @@ with 11 failures, all tracing to `parse_monomial_q` in
    (`confirm-build cent_compiler_v12` after `rebuild_lean.sh`).
 
 **Step 1 done:** extended parse_monomial_q for sign_of (commit aa80585).
+**Step 3 done:** retest cent_compiler_v12 recorded (4 of 5 pass;
+  test_cent_wheels still 4 pre-existing failures).
+**Step 4 done:** source label wired into derive_text figures.
 **Step 2 done:** re-ran test_cent_wheels (32/36) and regenerated
   cent_wheels_report(lean=True) — e1 met, 0 disagreements; d1 has 5 failing_si7
   and 1 unknown (pre-existing data-drift in absorbed transcription, not parser).
