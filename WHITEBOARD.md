@@ -207,3 +207,25 @@ knowledge cache, `--jobs 8` (the machine's own count), logs outside the tree, no
 most: don't edit documents while `corpus --refresh` runs, and re-take
 `queryesc`, `budget-guard-frozen` and `ties-ladder-frozen` first after editing
 `evaluation/cases.py`, then the rest, then refresh the corpus last.
+
+## Plan — cent wheels Python-only work (this environment)
+
+**Context.** `cent_compiler_v12` is absorbed ahead of the build (provisional);
+`test_cent_bridge` and `test_cent_router` pass; `test_cent_wheels` is 25/36
+with 11 failures, all tracing to `parse_monomial_q` in
+`wheels/cent_wheels.py` not handling function-call syntax such as
+`sign_of(applied_load - critical_load)` in supplied axioms.
+
+**Steps (Python only, no `lake`):**
+
+1. **Extend `parse_monomial_q`** to accept `sign_of(...)` (and comparable
+   sign-bearing factors) as a ±1 factor contributing no prime exponents.
+   Unblocks all 11 failing marks.
+2. Re-run `test_cent_wheels.py`; regenerate `cent_wheels_report(lean=True)`.
+3. Re-run the intake's staged tests (`item:cent test`) so the provisional
+   pass is current.
+4. Wire source labels into `derive_query.py` for cent-wheel answers.
+5. Leave Lean build confirmation to the owner
+   (`confirm-build cent_compiler_v12` after `rebuild_lean.sh`).
+
+**First step taken this run:** item 1 — extend the parser (see commit).
