@@ -463,27 +463,49 @@ def tiebreak_report() -> Dict[str, object]:
     lifts precision@5 on every set by a fraction of a point and moves hit@k
     around by a handful of queries in both directions, so it is a wash where
     the relay is a gain.
+
+    Cached on disk by the digest of the Lean development, so a cold process
+    does not re-derive it.
     """
-    out: Dict[str, object] = {}
-    for label, names, goal_mode in (("tuning", tuning_queries(), False),
-                                    ("holdout", holdout_queries(), False)):
-        rows = {}
+    from ..corpus.measurements import _freeze, _thaw
+    from ..derived import DerivedStore
+
+    def _inputs() -> object:
+        from . import lean_tree as _lt
+        return _lt.lean_files()
+
+    store = DerivedStore("stack_tiebreak_report", _inputs, schema=1)  # type: ignore[arg-type]
+
+    def compute() -> object:
+        out: Dict[str, object] = {}
+        for label, names, goal_mode in (("tuning", tuning_queries(), False),
+                                        ("holdout", holdout_queries(), False)):
+            rows = {}
+            for scheme in TIEBREAK:
+                ranked = [(tiebreak_rank(name, goal_mode=goal_mode, scheme=scheme),
+                           rt.relatives(name)) for name in names]
+                rows[scheme] = score(ranked)
+            out[label] = rows
+        verdict = {
+            "beats_name_tiebreak_on_hits": all(
+                out[label]["address"]["hit_rate"][5]
+                > out[label]["name"]["hit_rate"][5]
+                for label in ("tuning", "holdout")),
+            "beats_name_tiebreak_on_precision": all(
+                out[label]["address"]["precision_at_5"]
+                > out[label]["name"]["precision_at_5"]
+                for label in ("tuning", "holdout")),
+        }
+        return _freeze({"sets": out, "verdict": verdict})
+
+    payload = store.cached(compute)
+    result = _thaw(payload)  # type: ignore[assignment]
+    for _label, entry in result["sets"].items():  # type: ignore[union-attr]
         for scheme in TIEBREAK:
-            ranked = [(tiebreak_rank(name, goal_mode=goal_mode, scheme=scheme),
-                       rt.relatives(name)) for name in names]
-            rows[scheme] = score(ranked)
-        out[label] = rows
-    verdict = {
-        "beats_name_tiebreak_on_hits": all(
-            out[label]["address"]["hit_rate"][5]
-            > out[label]["name"]["hit_rate"][5]
-            for label in ("tuning", "holdout")),
-        "beats_name_tiebreak_on_precision": all(
-            out[label]["address"]["precision_at_5"]
-            > out[label]["name"]["precision_at_5"]
-            for label in ("tuning", "holdout")),
-    }
-    return {"sets": out, "verdict": verdict}
+            for key in ("hits", "hit_rate"):
+                entry[scheme][key] = {int(k): v
+                                       for k, v in entry[scheme][key].items()}
+    return result  # type: ignore[return-value]
 
 
 @memo
