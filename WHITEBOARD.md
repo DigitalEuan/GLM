@@ -228,4 +228,9 @@ with 11 failures, all tracing to `parse_monomial_q` in
 5. Leave Lean build confirmation to the owner
    (`confirm-build cent_compiler_v12` after `rebuild_lean.sh`).
 
-**First step taken this run:** item 1 — extend the parser (see commit).
+**Step 1 done:** extended parse_monomial_q for sign_of (commit aa80585).
+**Step 2 done:** re-ran test_cent_wheels (32/36) and regenerated
+  cent_wheels_report(lean=True) — e1 met, 0 disagreements; d1 has 5 failing_si7
+  and 1 unknown (pre-existing data-drift in absorbed transcription, not parser).
+  The 4 remaining test failures are data-fidelity checks (transcription vs.
+  supplied item / Lean file), not parser issues.
