@@ -265,10 +265,10 @@ class TestAgainstTheSuppliedItem(unittest.TestCase):
         rep = report()
         for k in ("d1", "d2", "s1", "s2", "s3", "s5", "absorption"):
             self.assertTrue(rep[k]["met"], (k, rep[k]))
-        self.assertEqual(rep["d1"]["axioms"], 72)
+        self.assertEqual(rep["d1"]["axioms"], 101)
         self.assertEqual(rep["d1"]["unknown"], 0)
-        self.assertEqual(len(rep["d1"]["failing_si7"]), 10)
-        self.assertEqual(rep["s2"]["supplied_controls"], 26)
+        self.assertEqual(len(rep["d1"]["failing_si7"]), 5)
+        self.assertEqual(rep["s2"]["supplied_controls"], 33)
         self.assertEqual(rep["s2"]["licensed"], [])
 
     def test_mark_e2_finds_the_w4_case_the_item_omits(self):
@@ -329,7 +329,7 @@ class TestLeanAgreement(unittest.TestCase):
             for c in CW.DOMAIN_CASES[base.id]:
                 self.assertIn(S.lean_name(c.id), names, c.id)
         for n in ("derivable_of_combo", "not_derivable_of_dot", "q_W6_03_without_addition",
-                  "q_W4_04", "q_W22_03", "W34_axiom_1_unbalanced"):
+                  "q_W4_04", "q_W22_03", "W35_axiom_1_unbalanced"):
             self.assertIn(n, names)
 
     def test_a_tampered_certificate_is_caught(self):

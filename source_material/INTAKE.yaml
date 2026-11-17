@@ -834,6 +834,34 @@ items:
       0 skipped of 9 collected'
     date: 17 November 2026
     fingerprint: sha256:35478d375db8e561f224b9ae866af5033f831376169107e66da8d80ab9b991ac
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 17 November 2026
+    fingerprint: sha256:b91e9dc9460e6c76e90571e4d6e89a0cb95327f4b9fec0e98666cc48e707698c
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 17 November 2026
+    fingerprint: sha256:b91e9dc9460e6c76e90571e4d6e89a0cb95327f4b9fec0e98666cc48e707698c
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 17 November 2026
+    fingerprint: sha256:b91e9dc9460e6c76e90571e4d6e89a0cb95327f4b9fec0e98666cc48e707698c
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 17 November 2026
+    fingerprint: sha256:b91e9dc9460e6c76e90571e4d6e89a0cb95327f4b9fec0e98666cc48e707698c
+  - test: tests/test_derive_query.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 9 passed, 0 failed,
+      0 skipped of 9 collected'
+    date: 17 November 2026
+    fingerprint: sha256:b91e9dc9460e6c76e90571e4d6e89a0cb95327f4b9fec0e98666cc48e707698c
   lean:
   - Wheels/CentWheels
   - IntakeChecks/Derivability
@@ -1041,7 +1069,7 @@ items:
       so the span statement is over Q for exponents as well
     - 'W22-03 (diffusion_coefficient = diffusion_flux / concentration_gradient): settle whether it
       is derivable; the engine says no, the wheel says yes'
-  last_action: '17 November 2026: tests run again: 4 of 5 passed'
+  last_action: '17 November 2026: tests run again: 5 of 5 passed'
   next_step: 'owner: run scripts/rebuild_lean.sh; when its build record verifies the Lean files, `python3
     -m glm_universal.intake confirm-build cent_compiler_v12`; the open part(s) (cent, cent_compiler/*.py
     (the compiler: grammar, pattern matcher, substrate library, cost function, isomorphism gate, hypothesis
@@ -3213,5 +3241,6 @@ items:
   - LorentzPlane
   - AdversarialDialogue
   lean_check: '17 November 2026: OK'
-  last_action: '17 November 2026: copied the three recovered files into src/lean/RequestProject/GLM/, moved the six held dependents back, ran lean_check --write-audit (OK)'
+  last_action: '17 November 2026: copied the three recovered files into src/lean/RequestProject/GLM/,
+    moved the six held dependents back, ran lean_check --write-audit (OK)'
   next_step: 'owner: run scripts/rebuild_lean.sh; when it passes, advance lean_recovery lean_verified'
