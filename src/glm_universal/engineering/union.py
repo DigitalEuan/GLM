@@ -122,12 +122,19 @@ def base_name(label: str) -> str:
 
 @dataclass(frozen=True)
 class SplitSystem:
-    """Every axiom of every wheel as a relation over split names."""
+    """Every axiom of every wheel as a relation over split names.
+
+    ``members`` maps a class label to the plain quantity names it carries,
+    when a system joins different names (``pair_penetration`` with
+    ``stress``); empty for the fifteen-wheel systems, whose labels already
+    name their quantity.
+    """
 
     relations: Tuple[Dict[str, Fraction], ...]
     owners: Tuple[str, ...]
     axioms: Tuple[str, ...]
     labels: Tuple[str, ...]
+    members: Tuple[Tuple[str, Tuple[str, ...]], ...] = ()
 
 
 _SPLIT: Dict[bool, SplitSystem] = {}

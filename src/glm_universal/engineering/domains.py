@@ -144,10 +144,14 @@ def _key(junctions: Mapping[Tuple[str, str], Sequence[str]]) -> Tuple[Any, ...]:
     return tuple(sorted((a, b, tuple(sorted(v))) for (a, b), v in junctions.items()))
 
 
-def _classes(junctions: Mapping[Tuple[str, str], Sequence[str]],
-             wheels: Sequence[wh.Wheel]) -> Dict[Tuple[str, str], Tuple[str, ...]]:
-    """``(wheel, name) -> the wheels whose copy of name it is one variable
-    with``, by union-find over the junction table."""
+def _class_members(junctions: Mapping[Tuple[str, str], Sequence[str]],
+                   wheels: Sequence[wh.Wheel],
+                   pairings: Sequence[Tuple[Tuple[str, str], Tuple[str, str]]] = ()
+                   ) -> Dict[Tuple[str, str], Tuple[Tuple[str, str], ...]]:
+    """``(wheel, name) -> the full class of typed quantities it is one
+    variable with``, by union-find over the junction table and the explicit
+    ``pairings`` (which may join different names, ``pair_penetration`` with
+    ``stress``)."""
     nodes = [(w.id, q) for w in wheels for q in wh.wheel_quantities(w)]
     parent = {n: n for n in nodes}
 
@@ -157,51 +161,101 @@ def _classes(junctions: Mapping[Tuple[str, str], Sequence[str]],
             x = parent[x]
         return x
 
+    def join(a, b):
+        if a in parent and b in parent:
+            ra, rb = find(a), find(b)
+            if ra != rb:
+                parent[ra] = rb
+
     for (a, b), names in junctions.items():
         for q in names:
-            if (a, q) in parent and (b, q) in parent:
-                ra, rb = find((a, q)), find((b, q))
-                if ra != rb:
-                    parent[ra] = rb
-    groups: Dict[Tuple[str, str], List[str]] = {}
+            join((a, q), (b, q))
+    for a, b in pairings:
+        join(tuple(a), tuple(b))
+    groups: Dict[Tuple[str, str], List[Tuple[str, str]]] = {}
     for n in nodes:
-        groups.setdefault(find(n), []).append(n[0])
-    return {n: tuple(sorted(groups[find(n)], key=_ORDER.get)) for n in nodes}
+        groups.setdefault(find(n), []).append(n)
+    order = lambda x: (_ORDER.get(x[0], len(_ORDER)), x[0], x[1])
+    return {n: tuple(sorted(groups[find(n)], key=order)) for n in nodes}
+
+
+def _classes(junctions: Mapping[Tuple[str, str], Sequence[str]],
+             wheels: Sequence[wh.Wheel]) -> Dict[Tuple[str, str], Tuple[str, ...]]:
+    """``(wheel, name) -> the wheels whose copy of name it is one variable
+    with`` (the fifteen-wheel label's shape)."""
+    return {n: tuple(sorted({w for w, _ in m},
+                            key=lambda w: _ORDER.get(w, len(_ORDER))))
+            for n, m in _class_members(junctions, wheels).items()}
 
 
 def split_system(junctions: Optional[Mapping[Tuple[str, str], Sequence[str]]] = None,
                  split: bool = True,
-                 wheels: Sequence[wh.Wheel] = ALL_WHEELS) -> un.SplitSystem:
+                 wheels: Sequence[wh.Wheel] = ALL_WHEELS,
+                 pairings: Sequence[Tuple[Tuple[str, str], Tuple[str, str]]] = (),
+                 relation=None
+                 ) -> un.SplitSystem:
     """The union of ``wheels`` (default: all fifteen) with every shared name
     split except across a junction of ``junctions`` (default: the shipped
-    table); ``split=False`` is the naive union."""
+    table) or an explicit ``pairings`` edge; ``split=False`` is the naive
+    union.
+
+    With ``pairings`` the system labels a whole class by one canonical name
+    (``pair_penetration@0``) and records its member names in
+    ``SplitSystem.members``, so two different names declared one measurand
+    cancel.  Without them the labels keep the fifteen-wheel shape
+    (``energy@W5``).
+    """
     junctions = union_junctions() if junctions is None else junctions
-    key = (_key(junctions) if split else "naive", tuple(w.id for w in wheels))
+    relation = wh.relation_vector if relation is None else relation
+    key = (_key(junctions) if split else "naive", tuple(w.id for w in wheels),
+           tuple(sorted((tuple(a), tuple(b)) for a, b in pairings)) if split else (),
+           getattr(relation, "__name__", "relation"))
     if key in _SPLITS:
         return _SPLITS[key]
-    classes = _classes(junctions, wheels) if split else {}
+    members = _class_members(junctions, wheels, pairings) if split else {}
+    classes = _classes(junctions, wheels) if split and not pairings else {}
+    index: Dict[Tuple[Tuple[str, str], ...], int] = {}
+    member_names: Dict[str, Tuple[str, ...]] = {}
     rels: List[Dict[str, Fraction]] = []
     owners: List[str] = []
     axioms: List[str] = []
     for w in wheels:
         for a in w.axioms:
-            r = wh.relation_vector(a)
+            r = relation(a)
             if split:
-                r = {(k if k.startswith("#") else
-                      f"{k}@{'+'.join(classes[(w.id, k)])}"): v
-                     for k, v in r.items()}
+                labelled: Dict[str, Fraction] = {}
+                for k, v in r.items():
+                    if k.startswith("#"):
+                        labelled[k] = v
+                        continue
+                    if pairings:
+                        # A relation key the wheel's quantity list does not
+                        # carry (``sign_of(applied_load - critical_load)``)
+                        # is its own singleton class.
+                        group = members.get((w.id, k), ((w.id, k),))
+                        if group not in index:
+                            index[group] = len(index)
+                        label = f"{group[0][1]}@{index[group]}"
+                        member_names[label] = tuple(
+                            sorted({name for _, name in group}))
+                    else:
+                        label = f"{k}@{'+'.join(classes[(w.id, k)])}"
+                    labelled[label] = v
+                r = labelled
             rels.append(r)
             owners.append(w.id)
             axioms.append(a)
     labels = sorted({k for r in rels for k in r if not k.startswith("#")})
     system = un.SplitSystem(tuple(rels), tuple(owners), tuple(axioms),
-                            tuple(labels))
+                            tuple(labels), tuple(sorted(member_names.items())))
     _SPLITS[key] = system
     return system
 
 
 def copies_of(name: str, system: un.SplitSystem) -> Tuple[str, ...]:
     """The split variables a plain name can mean in ``system``."""
+    if system.members:
+        return tuple(label for label, names in system.members if name in names)
     return tuple(l for l in system.labels if un.base_name(l) == name)
 
 
@@ -320,7 +374,9 @@ def derive_domains(target: str, inputs: Sequence[str],
                    junctions: Optional[Mapping[Tuple[str, str], Sequence[str]]] = None,
                    pins: Optional[Mapping[str, str]] = None,
                    wheels: Sequence[wh.Wheel] = ALL_WHEELS,
-                   non_identities: Optional[Mapping[Tuple[str, str], str]] = None
+                   non_identities: Optional[Mapping[Tuple[str, str], str]] = None,
+                   pairings: Sequence[Tuple[Tuple[str, str], Tuple[str, str]]] = (),
+                   relation=None
                    ) -> DomainAnswer:
     """Answer *derive target from inputs across domains*, or refuse.
 
@@ -342,7 +398,7 @@ def derive_domains(target: str, inputs: Sequence[str],
         if note:
             notes.append(note)
         ins.append(y2)
-    system = split_system(junctions, True, wheels)
+    system = split_system(junctions, True, wheels, pairings, relation)
     copies = {n: copies_of(n, system) for n in [t] + ins}
     missing = [n for n, c in copies.items() if not c]
     base = dict(target=t, inputs=tuple(ins), aliases=tuple(notes))
@@ -374,13 +430,13 @@ def derive_domains(target: str, inputs: Sequence[str],
     if found:
         formula, fs = next(iter(found.items()))
         used = tuple(sorted(dict.fromkeys(w for g in fs for w in g.wheels),
-                            key=_ORDER.get))
+                            key=lambda w: _ORDER.get(w, len(_ORDER))))
         return DomainAnswer(True, formula=formula, wheels=used,
                             junctions=_junctions_crossed(used, junctions),
                             reason="", certificate=fs[0].weights,
                             found=summary, **base)
     naive = derive_relations(t, tuple(ins), split_system(junctions, False,
-                                                         wheels))
+                                                         wheels, (), relation))
     if naive is None:
         return DomainAnswer(False, formula=None, wheels=(), junctions=(),
                             reason=f"no union of the declared wheels derives "

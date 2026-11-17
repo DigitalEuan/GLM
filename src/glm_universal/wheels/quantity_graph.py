@@ -36,17 +36,20 @@ lattice.
 
 Audit
 -----
-The supplied table is kept **verbatim**; :func:`audit` reports what it cannot
-use rather than silently repairing it.  Six endpoints name a quantity their
-wheel does not hold: one junction (``W4 energy``) and five non-identities.
-Three of the five are **vacuous as transcribed** -- the record names the
-quantity in one wheel only, so ``W39 magnetomotive_force`` is guarded against
-``W1 magnetomotive_force``, which ``W1`` does not hold (the intended pair is
-``W1 current``); the same holds for ``W41 temperature_difference`` and ``W42
-moment_of_inertia_of_section``.  Fifteen junctions are declared in one
-direction only.  :func:`edges` takes the symmetric closure of the sound
-edges, so a one-way declaration still joins its two vertices; an unknown
-endpoint is dropped from the graph but stays in the audit.
+The supplied table is kept as supplied, with one documented repair: a
+non-identity record names the quantity in **one** wheel only, so five guards
+were vacuous as transcribed.  Four are repaired by reading the other-wheel
+name out of the reason (:data:`REPAIRS`): ``W36 pair_energy`` against ``W5
+energy``, ``W39 magnetomotive_force`` against ``W1 current``, ``W41
+temperature_difference`` against ``W8 temperature`` and ``W42
+moment_of_inertia_of_section`` against ``W4 moment_of_inertia``.  The fifth,
+``W37 relaxation_time`` against ``W4``, has no other-wheel name to read and
+stays vacuous; :func:`audit` reports it.  One junction (``W36 pair_energy ->
+W4 energy``) still names a quantity ``W4`` does not hold, and fifteen
+junctions are declared in one direction only.  :func:`edges` takes the
+symmetric closure of the sound edges, so a one-way declaration still joins
+its two vertices; an unknown endpoint is dropped from the graph but stays in
+the audit.
 """
 
 from __future__ import annotations
@@ -132,31 +135,42 @@ _JUNCTIONS = (
     ('W9', 'frequency', 'W10', 'frequency', "a photon's frequency = the wave's frequency (a photon is a wave)"),
 )
 
-#: The absorbed item's ``non_identities``, verbatim:
-#: ``(wheel, name, other_wheel, reason)``; the other endpoint is the same
-#: name in ``other_wheel``.
+#: The absorbed item's ``non_identities``, with the other-wheel name made
+#: explicit: ``(wheel, name, other_wheel, name_in_other_wheel, reason)``.
+#: The four repairs are in :data:`REPAIRS`.
 _NON_IDENTITIES = (
-    ('W11', 'time', 'W15', 'a travel time against a charging time'),
-    ('W13', 'angular_frequency', 'W14', 'a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)'),
-    ('W13', 'angle', 'W9', "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"),
-    ('W14', 'angular_frequency', 'W13', 'a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)'),
-    ('W14', 'energy', 'W3', "the capacitor's stored energy against the inductor's"),
-    ('W15', 'energy', 'W3', 'energy stored in a capacitor against energy delivered over a time'),
-    ('W15', 'time', 'W11', 'a travel time against a charging time'),
-    ('W3', 'energy', 'W14', "the capacitor's stored energy against the inductor's"),
-    ('W3', 'energy', 'W15', 'energy stored in a capacitor against energy delivered over a time'),
-    ('W36', 'energy', 'W5', "the substrate's pair_energy is L2-squared penetration, not the flywheel's kinetic energy; only the relaxation channel joins"),
-    ('W37', 'relaxation_time', 'W4', "the flywheel's timescale is inertial (I/E), not viscous (eta/E); only the damped swing borrows the channel"),
-    ('W39', 'magnetomotive_force', 'W1', 'ampere-turns has the dimension of current but is not current; identifying them would erase the turns count'),
-    ('W41', 'temperature_difference', 'W8', 'a temperature difference and an absolute temperature share a dimension but not a reference point'),
-    ('W42', 'moment_of_inertia_of_section', 'W4', "a section's second moment of area is not a rotor's mass moment of inertia; identifying them would give a column the dynamics of a flywheel"),
-    ('W9', 'angle', 'W13', "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"),
+    ('W11', 'time', 'W15', 'time', 'a travel time against a charging time'),
+    ('W13', 'angular_frequency', 'W14', 'angular_frequency', 'a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)'),
+    ('W13', 'angle', 'W9', 'angle', "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"),
+    ('W14', 'angular_frequency', 'W13', 'angular_frequency', 'a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)'),
+    ('W14', 'energy', 'W3', 'energy', "the capacitor's stored energy against the inductor's"),
+    ('W15', 'energy', 'W3', 'energy', 'energy stored in a capacitor against energy delivered over a time'),
+    ('W15', 'time', 'W11', 'time', 'a travel time against a charging time'),
+    ('W3', 'energy', 'W14', 'energy', "the capacitor's stored energy against the inductor's"),
+    ('W3', 'energy', 'W15', 'energy', 'energy stored in a capacitor against energy delivered over a time'),
+    ('W36', 'pair_energy', 'W5', 'energy', "the substrate's pair_energy is L2-squared penetration, not the flywheel's kinetic energy; only the relaxation channel joins"),
+    ('W37', 'relaxation_time', 'W4', 'relaxation_time', "the flywheel's timescale is inertial (I/E), not viscous (eta/E); only the damped swing borrows the channel"),
+    ('W39', 'magnetomotive_force', 'W1', 'current', 'ampere-turns has the dimension of current but is not current; identifying them would erase the turns count'),
+    ('W41', 'temperature_difference', 'W8', 'temperature', 'a temperature difference and an absolute temperature share a dimension but not a reference point'),
+    ('W42', 'moment_of_inertia_of_section', 'W4', 'moment_of_inertia', "a section's second moment of area is not a rotor's mass moment of inertia; identifying them would give a column the dynamics of a flywheel"),
+    ('W9', 'angle', 'W13', 'angle', "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"),
+)
+
+#: The four non-identities repaired from the supplied one-name form, with the
+#: names read out of the reason: ``(wheel, supplied_name, repaired_name,
+#: supplied_other_wheel, repaired_other_name)``.  Only the first changes its
+#: own wheel's name (``W36`` holds ``pair_energy``, not ``energy``).
+REPAIRS: Tuple[Tuple[str, str, str, str, str], ...] = (
+    ('W36', 'energy', 'pair_energy', 'W5', 'energy'),
+    ('W39', 'magnetomotive_force', 'magnetomotive_force', 'W1', 'current'),
+    ('W41', 'temperature_difference', 'temperature_difference', 'W8', 'temperature'),
+    ('W42', 'moment_of_inertia_of_section', 'moment_of_inertia_of_section', 'W4', 'moment_of_inertia'),
 )
 
 JUNCTIONS: Tuple[Junction, ...] = tuple(
     Junction((a, na), (b, nb), reason) for a, na, b, nb, reason in _JUNCTIONS)
 NON_IDENTITIES: Tuple[NonIdentity, ...] = tuple(
-    NonIdentity((a, name), (b, name), reason) for a, name, b, reason in _NON_IDENTITIES)
+    NonIdentity((a, na), (b, nb), reason) for a, na, b, nb, reason in _NON_IDENTITIES)
 
 
 # ===========================================================================
