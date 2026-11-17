@@ -1862,6 +1862,16 @@ def run_tool(text: str) -> ToolResult:
     low = rest.lower()
     for tool in sorted(TOOLS, key=lambda x: -len(x.name)):
         if low == tool.name or low.startswith(tool.name + " "):
-            return tool.run(rest[len(tool.name):].strip())
+            result = tool.run(rest[len(tool.name):].strip())
+            # Explicit source label: lean when any of the tool's Lean files is
+            # present on disk, python otherwise.  Never blocks the answer.
+            from pathlib import Path
+            _lean_dir = Path(__file__).resolve().parents[2] / "lean"
+            lean_present = any((_lean_dir / p).exists() for p in tool.lean)
+            _source = "lean" if (tool.lean and lean_present) else "python"
+            _figures = dict(result.figures)
+            _figures.setdefault("source", _source)
+            _figures.setdefault("lean_files", list(tool.lean))
+            return ToolResult(result.ok, result.text, _figures)
     return ToolResult(False, f"refused: no tool named {rest!r}; the tools "
                       f"are {', '.join(x.name for x in TOOLS)}")

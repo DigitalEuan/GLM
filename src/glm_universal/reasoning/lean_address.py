@@ -156,11 +156,11 @@ def lean_available() -> bool:
     return _lt.lean_available()
 
 
-def lean_file_for(name: str):
+def lean_file_for(name: str, create: bool = False):
     """The Lean file a declaration lives in (or would), plus present flag."""
     import importlib
     _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
-    return _lt.lean_file_for(name)
+    return _lt.lean_file_for(name, create=create)
 
 
 def source_label() -> str:
