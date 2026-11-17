@@ -22,13 +22,17 @@ def _supplied() -> Path:
 
 
 def _supplied_tables():
-    junctions, non_identities = [], []
-    for path in _supplied().glob("W*.json"):
+    """The operative tables: ``index.json`` for junctions, the per-wheel
+    blocks for the one-name non-identities that :data:`REPAIRS` completes."""
+    root = _supplied()
+    index = json.loads((root / "index.json").read_text(encoding="utf-8"))
+    junctions = [(j["wheel_a"], j["name_a"], j["wheel_b"],
+                  j.get("name_b") or j["name_a"], j.get("reason", ""))
+                 for j in index["junctions"]]
+    non_identities = []
+    for path in root.glob("W*.json"):
         d = json.loads(path.read_text(encoding="utf-8"))
         wid = d["id"]
-        for j in d.get("junctions") or []:
-            junctions.append((wid, j["name_in_this_wheel"], j["other_wheel"],
-                              j["name_in_other_wheel"], j.get("reason", "")))
         for n in d.get("non_identities") or []:
             non_identities.append((wid, n["name"], n["other_wheel"],
                                    n.get("reason", "")))
@@ -51,14 +55,16 @@ def test_the_tables_are_the_supplied_ones():
 
 def test_a_junction_joins_and_is_transitive():
     # W1 current = W14 current = W15 current (the inductor, the capacitor's
-    # circuit, the charge carrier): one class of three.
+    # circuit, the charge carrier) and W24 current (the diode): one class.
     assert qg.may_identify(("W1", "current"), ("W14", "current")) is None
     assert qg.may_identify(("W14", "current"), ("W15", "current")) is None
-    assert qg.may_identify(("W1", "current"), ("W15", "current")) is None
+    assert qg.may_identify(("W1", "current"), ("W24", "current")) is None
     table = qg.classes()
     assert set(table[("W1", "current")]) == {
-        ("W1", "current"), ("W14", "current"), ("W15", "current")}
-    assert qg.wheels_of(("W1", "current"), table) == ("W1", "W14", "W15")
+        ("W1", "current"), ("W14", "current"), ("W15", "current"),
+        ("W24", "current")}
+    assert qg.wheels_of(("W1", "current"), table) == (
+        "W1", "W14", "W15", "W24")
 
 
 def test_a_declared_non_identity_blocks_the_pair():
@@ -86,6 +92,30 @@ def test_an_undeclared_pair_is_not_licenced():
         is not None
 
 
+def test_the_per_wheel_junction_copy_is_stale():
+    """The item's per-wheel blocks hold 29 pairs; its index.json holds 59."""
+    root = _supplied()
+
+    def pair(a, b):
+        return frozenset((a, b))
+
+    per_wheel = set()
+    for path in root.glob("W*.json"):
+        d = json.loads(path.read_text(encoding="utf-8"))
+        for j in d.get("junctions") or []:
+            per_wheel.add(pair((d["id"], j["name_in_this_wheel"]),
+                               (j["other_wheel"], j["name_in_other_wheel"])))
+    index = json.loads((root / "index.json").read_text(encoding="utf-8"))
+    declared = {
+        pair((j["wheel_a"], j["name_a"]),
+             (j["wheel_b"], j.get("name_b") or j["name_a"]))
+        for j in index["junctions"]
+    }
+    assert len(per_wheel) == 29
+    assert len(declared) == 59
+    assert per_wheel < declared
+
+
 def test_the_audit_keeps_the_verbatim_defects_visible():
     a = qg.audit()
     unknown = {endpoint for _, endpoint in a["unknown_endpoints"]}
@@ -95,9 +125,9 @@ def test_the_audit_keeps_the_verbatim_defects_visible():
     assert ("W4", "relaxation_time") in unknown
     # W36 `energy` was repaired to `pair_energy`, so it is no longer unknown.
     assert ("W36", "energy") not in unknown
-    # Fifteen junctions are declared in one direction only.
+    # ``index.json`` declares each pair once; the graph symmetrises all 59.
     one_way = {frozenset((j.a, j.b)) for j in a["one_way"]}
-    assert len(one_way) == 15
+    assert len(one_way) == 59
     for pair in ((("W36", "pair_penetration"), ("W21", "stress")),
                  (("W38", "input_torque"), ("W4", "torque")),
                  (("W39", "magnetic_flux"), ("W16", "flux")),
@@ -110,8 +140,15 @@ def test_the_audit_keeps_the_verbatim_defects_visible():
 
 def test_the_audit_classifies_what_it_cannot_use():
     a = qg.audit()
-    assert [[list(j.a), list(j.b)] for j in a["dropped_junctions"]] == [
-        [["W36", "pair_energy"], ["W4", "energy"]]]
+    assert {frozenset((j.a, j.b)) for j in a["dropped_junctions"]} == {
+        frozenset({("W20", "strain"), ("W1", "charge")}),
+        frozenset({("W22", "temperature"), ("W8", "temperature")}),
+        frozenset({("W23", "charge"), ("W1", "charge")}),
+        frozenset({("W32", "viscosity"), ("W6", "velocity")}),
+        frozenset({("W35", "temperature"), ("W8", "temperature")}),
+        frozenset({("W35", "ion_concentration"), ("W12", "amount")}),
+        frozenset({("W36", "pair_energy"), ("W4", "energy")}),
+    }
     assert [[list(n.a), list(n.b)] for n in a["vacuous_non_identities"]] == [
         [["W37", "relaxation_time"], ["W4", "relaxation_time"]]]
     why = qg.may_identify(("W37", "relaxation_time"), ("W4", "relaxation_time"))
@@ -130,11 +167,13 @@ def test_an_unknown_endpoint_is_dropped_from_the_graph_not_silently_used():
     assert qg.may_identify(("W39", "magnetic_flux"), ("W16", "flux")) is None
 
 
-def test_the_only_dimension_gaps_are_the_w36_stress_joins():
+def test_dimension_gaps_are_the_declared_analogies():
     gaps = {frozenset((a, b)) for a, b, _, _ in qg.dimension_gaps()}
     assert gaps == {
         frozenset({("W21", "stress"), ("W36", "pair_penetration")}),
         frozenset({("W37", "stress"), ("W36", "pair_penetration")}),
+        frozenset({("W1", "voltage"), ("W20", "stress")}),
+        frozenset({("W12", "area"), ("W34", "pipe_radius")}),
     }
 
 
@@ -150,12 +189,12 @@ def test_the_stress_class_is_repaired_across_the_dimensioned_wheels():
 
 def test_the_report_is_self_consistent():
     report = qg.graph_report()
-    assert report["junctions"] == 43
+    assert report["junctions"] == 59
     assert report["non_identities"] == 15
     assert report["bridges"] == 2
-    # 43 declarations, 15 of them one-way: 14 mirror pairs plus 15 one-way
-    # edges make 29 undirected edges; one names a quantity W4 lacks, leaving 28.
-    assert report["sound_edges"] == 28
+    # 59 declared pairs: 7 name a quantity the wheel lacks and 4 are dimension
+    # gaps, leaving 48; the two stress bridges make 50 sound edges.
+    assert report["sound_edges"] == 50
     joined = report["joined_quantities"]
     assert "W5:mass" in joined and "W13:mass" in joined
     assert "W3:energy" not in joined
