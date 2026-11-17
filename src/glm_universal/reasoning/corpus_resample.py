@@ -42,6 +42,7 @@ from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 from ..derived import memo
 from .. import integrity
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development
 from . import native_words as nw
 from . import retrieval as rt
 from .sign_test import sign_test  # noqa: F401  (Phase 114: its own module)
@@ -651,7 +652,7 @@ def corpus_digest() -> str:
     books = integrity.tree_digest([root / name for name in _SOURCES
                                    if not name.endswith(".py")
                                    and (root / name).exists()], root)
-    return integrity.sha256_hex("|".join((books, la.tree_digest()))
+    return integrity.sha256_hex("|".join((books, lean_tree.tree_digest()))
                                 .encode("utf-8"))
 
 

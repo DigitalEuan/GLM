@@ -46,6 +46,7 @@ from ..derived import memo
 from .. import integrity
 from . import controller as ctl
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development
 from . import retrieval as rt
 # The ledger, the read-back check and the toolbox's view live in
 # :mod:`native_ledger` since Phase 114, so that the toolbox does not reach the
@@ -371,7 +372,7 @@ def corpus_digest() -> str:
     books = integrity.tree_digest([root / name for name in _SOURCES
                                    if not name.endswith(".py")
                                    and (root / name).exists()], root)
-    joined = "|".join((books, la.tree_digest(), inv.corpus_digest()))
+    joined = "|".join((books, lean_tree.tree_digest(), inv.corpus_digest()))
     return integrity.sha256_hex(joined.encode("utf-8"))
 
 

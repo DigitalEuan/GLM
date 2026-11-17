@@ -141,11 +141,14 @@ GLM-systems focus:
    and `lean_address.declaration_names()` now read from `lean_book` (features +
    declaration rows) instead of walking the development; both fall back to the
    tree when no book is present. Recomputed values match byte-for-byte.
-2. **Fix the lean-tree split's dependency tracking.** Builders (`corpus/measurements`,
-   `citation_reference`, `retrieval`, `native_parity`, `native_words`,
-   `corpus_resample`, `stack`) should import `lean_tree` directly so the
-   sign-off ledger still flags them; answering paths keep the `lean_address`
-   importlib shim.
+2. **Fix the lean-tree split's dependency tracking.** — *taken this round.*
+   Builders (`corpus/measurements`, `citation_reference`, `retrieval`,
+   `native_parity`, `native_words`, `corpus_resample`, `stack`, `tie_break`,
+   `citation_scope`, `operation_escalation`, `corpus/render`) now import
+   `lean_tree` directly, so the sign-off ledger flags their tree dependency;
+   answering paths keep the `lean_address` importlib shim. lean_blast_radius:
+   264 units, 228 taking the whole development (up from 224 — builders now
+   correctly attributed).
 3. **Extend disk caching to the other expensive memoized derivations** —
    `citation_graph`, `feature_table` (now book-served), `separation_report`,
    `legacy_citation_graph`, `tiebreak_report` via `DerivedStore` + freeze/thaw.

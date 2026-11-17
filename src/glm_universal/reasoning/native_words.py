@@ -42,6 +42,7 @@ from typing import (Dict, FrozenSet, List, Mapping,
 from ..derived import memo
 from .. import integrity
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development; keeps the tree in this unit's closure
 from . import retrieval as rt
 # The objects, the rankings, the Lean corpus and the toolbox view live in
 # :mod:`golay_words` since Phase 114, so that a caller needing only a token's
@@ -357,7 +358,7 @@ def corpus_digest() -> str:
     books = integrity.tree_digest([root / name for name in _SOURCES
                                    if not name.endswith(".py")
                                    and (root / name).exists()], root)
-    joined = "|".join((books, la.tree_digest(), inv.corpus_digest()))
+    joined = "|".join((books, lean_tree.tree_digest(), inv.corpus_digest()))
     return integrity.sha256_hex(joined.encode("utf-8"))
 
 
