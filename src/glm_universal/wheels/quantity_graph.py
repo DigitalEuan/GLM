@@ -55,12 +55,13 @@ the audit.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Dict, FrozenSet, List, Mapping, Optional, Sequence, Tuple
 
 __all__ = [
     "Endpoint", "Junction", "NonIdentity", "JUNCTIONS", "NON_IDENTITIES",
     "quantities_by_wheel", "audit", "edges", "classes", "wheels_of",
-    "may_identify", "graph_report",
+    "may_identify", "dimension_gaps", "BRIDGES", "ALL_JUNCTIONS", "graph_report",
 ]
 
 #: A typed quantity: ``(wheel id, quantity name)``.
@@ -169,6 +170,21 @@ REPAIRS: Tuple[Tuple[str, str, str, str, str], ...] = (
 
 JUNCTIONS: Tuple[Junction, ...] = tuple(
     Junction((a, na), (b, nb), reason) for a, na, b, nb, reason in _JUNCTIONS)
+
+#: The stress class repaired.  W20, W21, W37 and W40 all hold ``stress`` with
+#: the same SI7 dimensions (M L^-1 T^-2), but the supplied table joins them
+#: only through W36's dimensionless ``pair_penetration`` -- a dimension gap.
+#: Two same-name bridges make the dimensioned class one variable directly.
+BRIDGES: Tuple[Junction, ...] = (
+    Junction(("W20", "stress"), ("W21", "stress"),
+             "continuum and crack stress are one measurand"),
+    Junction(("W20", "stress"), ("W37", "stress"),
+             "continuum and viscous stress are one measurand"),
+)
+
+#: The supplied junctions and the repaired bridges.
+ALL_JUNCTIONS: Tuple[Junction, ...] = JUNCTIONS + BRIDGES
+
 NON_IDENTITIES: Tuple[NonIdentity, ...] = tuple(
     NonIdentity((a, na), (b, nb), reason) for a, na, b, nb, reason in _NON_IDENTITIES)
 
@@ -243,18 +259,17 @@ def audit(junctions: Sequence[Junction] = JUNCTIONS,
     return {"unknown_endpoints": unknown, "one_way": one_way,
             "contradictions": contradictions, "duplicates": duplicates,
             "dropped_junctions": dropped,
-            "vacuous_non_identities": vacuous}
+            "vacuous_non_identities": vacuous, "bridges": BRIDGES}
 
 
 # ===========================================================================
 # 2.  THE EDGES AND THE IDENTITY CLASSES
 # ===========================================================================
 
-def edges(junctions: Sequence[Junction] = JUNCTIONS,
-          non_identities: Sequence[NonIdentity] = NON_IDENTITIES) -> Tuple[Edge, ...]:
-    """The sound junction edges: both endpoints exist and no non-identity
-    blocks the pair.  Undirected, so a one-way declaration joins its two
-    vertices like any other."""
+def _edge_set(junctions: Sequence[Junction],
+              non_identities: Sequence[NonIdentity]) -> Tuple[Edge, ...]:
+    """The declared edges whose endpoints exist and which no non-identity
+    blocks, before the dimension check."""
     quantities = quantities_by_wheel()
     blocked = {_edge(n.a, n.b) for n in non_identities}
     out: List[Edge] = []
@@ -269,7 +284,17 @@ def edges(junctions: Sequence[Junction] = JUNCTIONS,
     return tuple(out)
 
 
-def classes(junctions: Sequence[Junction] = JUNCTIONS,
+def edges(junctions: Sequence[Junction] = ALL_JUNCTIONS,
+          non_identities: Sequence[NonIdentity] = NON_IDENTITIES) -> Tuple[Edge, ...]:
+    """The sound junction edges: both endpoints exist, no non-identity blocks
+    the pair, and the two endpoints have the same SI7 dimension.  Undirected,
+    so a one-way declaration joins its two vertices like any other."""
+    gaps = {_edge(a, b) for a, b, _, _ in dimension_gaps()}
+    return tuple(e for e in _edge_set(junctions, non_identities)
+                 if e not in gaps)
+
+
+def classes(junctions: Sequence[Junction] = ALL_JUNCTIONS,
             non_identities: Sequence[NonIdentity] = NON_IDENTITIES
             ) -> Dict[Endpoint, Tuple[Endpoint, ...]]:
     """``(wheel, name) -> the typed quantities it is one variable with``,
@@ -336,6 +361,10 @@ def may_identify(a: Endpoint, b: Endpoint) -> Optional[str]:
             return f"{x[0]} holds no {x[1]!r}"
     if a == b or a[0] == b[0]:
         return None
+    gap = next((g for g in dimension_gaps() if _edge(g[0], g[1]) == e), None)
+    if gap is not None:
+        return (f"declared junction, dimension gap: {gap[0][0]} {gap[0][1]!r} "
+                f"is not {gap[1][0]} {gap[1][1]!r}")
     table = classes()
     group = table.get(a)
     if group is not None and group == table.get(b) and len({w for w, _ in group}) > 1:
@@ -346,6 +375,50 @@ def may_identify(a: Endpoint, b: Endpoint) -> Optional[str]:
 # ===========================================================================
 # 3.  THE REPORT
 # ===========================================================================
+
+def _dimension_tables() -> Dict[str, Dict[str, tuple]]:
+    """Every absorbed wheel's table over the eight axes: the cent item's own
+    (W16-W42), the five domain tables (W11-W15) and the reference registry
+    (W1-W10, keyed by quantity name)."""
+    from ..engineering.wheels import REFERENCE_DIMENSIONS, wheel_quantities
+    from . import ALL_WHEELS
+    from .cent_wheels import CENT_TABLES, DOMAIN_TABLES
+
+    tables: Dict[str, Dict[str, tuple]] = {}
+    tables.update(CENT_TABLES)
+    tables.update(DOMAIN_TABLES)
+    for w in ALL_WHEELS:
+        if w.id not in tables:
+            tables[w.id] = {q: REFERENCE_DIMENSIONS[q]
+                            for q in wheel_quantities(w)
+                            if q in REFERENCE_DIMENSIONS}
+    return tables
+
+
+@lru_cache(maxsize=1)
+def dimension_gaps() -> Tuple[Tuple[Endpoint, Endpoint, tuple, tuple], ...]:
+    """Junction edges whose two endpoints have different SI7 dimensions.
+
+    Such an identification is algebraically possible and physically
+    impossible: the chem item joins W36's dimensionless ``pair_penetration``
+    to W21's and W37's ``stress``, which is a pressure.  This is measured, not
+    enforced: :func:`edges` still returns the edge, so the audit says what the
+    item declares and the licensing can be judged against it.
+    """
+    from .cent_wheels import SI7_AXES
+
+    tables = _dimension_tables()
+    out = []
+    for e in _edge_set(ALL_JUNCTIONS, NON_IDENTITIES):
+        a, b = tuple(e)
+        da = tables.get(a[0], {}).get(a[1])
+        db = tables.get(b[0], {}).get(b[1])
+        if da is None or db is None:
+            continue
+        if tuple(da[:SI7_AXES]) != tuple(db[:SI7_AXES]):
+            out.append((a, b, da, db))
+    return tuple(out)
+
 
 def graph_report() -> Dict[str, object]:
     """The graph's size, what the audit could not use, and every quantity
@@ -361,6 +434,7 @@ def graph_report() -> Dict[str, object]:
         "junctions": len(JUNCTIONS),
         "non_identities": len(NON_IDENTITIES),
         "sound_edges": len(edges()),
+        "bridges": len(BRIDGES),
         "unknown_endpoints": a["unknown_endpoints"],
         "one_way": [[list(j.a), list(j.b)] for j in a["one_way"]],
         "contradictions": a["contradictions"],
@@ -368,5 +442,7 @@ def graph_report() -> Dict[str, object]:
         "dropped_junctions": [[list(j.a), list(j.b)] for j in a["dropped_junctions"]],
         "vacuous_non_identities": [[list(n.a), list(n.b)]
                                    for n in a["vacuous_non_identities"]],
+        "dimension_gaps": [[list(x), list(y)]
+                           for x, y, _, _ in dimension_gaps()],
         "joined_quantities": joined,
     }

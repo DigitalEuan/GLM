@@ -51,7 +51,8 @@ from .junctions import phase66 as _p66
 
 __all__ = [
     "WHEELS", "JUNCTIONS", "PAIRINGS", "NON_IDENTITIES", "ENERGY_WHEELS",
-    "ENERGY_QUESTIONS", "split_system", "derive_across", "energy_family_report",
+    "ENERGY_QUESTIONS", "FAMILIES", "split_system", "derive_across",
+    "family_report", "families_report", "energy_family_report",
 ]
 
 #: All 39 absorbed wheels: the fifteen registry wheels and the 24 cent wheels.
@@ -114,41 +115,72 @@ def derive_across(target: str, inputs: Sequence[str]):
                               pairings=PAIRINGS, relation=relation_vector_q)
 
 
-def energy_family_report() -> Dict[str, object]:
-    """The pre-registered energy-family questions, naive against licensed.
+#: The families and their pre-registered questions.  A family is the wheels
+#: its non-identity names, and the naive union over *those* wheels is the
+#: contrast the licensed union is measured against.  ``stress`` is a
+#: junction family, not a non-identity: the item joins W21/W37/W40 stress to
+#: W36's dimensionless pair_penetration, and the question pair shows both the
+#: join working and the dimension gap it crosses.
+FAMILIES: Dict[str, Tuple[Tuple[str, ...], Tuple[Tuple[str, Tuple[str, ...]], ...]]] = {
+    "energy": (ENERGY_WHEELS, ENERGY_QUESTIONS),
+    "mass": (("W5", "W8", "W10"), (
+        ("energy", ("mass", "speed_of_light")),
+        ("mass", ("energy", "speed_of_light")),
+    )),
+    "time": (("W11", "W15"), (
+        ("velocity", ("length", "power", "energy")),
+        ("time", ("length", "velocity")),
+        ("time", ("energy", "power")),
+    )),
+    "angle": (("W9", "W13"), (
+        ("angular_velocity", ("angular_frequency",)),
+        ("angular_frequency", ("angular_velocity",)),
+    )),
+    "stress": (("W21", "W36", "W37", "W40"), (
+        ("pair_energy", ("stress",)),
+        ("dissipated_power", ("force", "area", "strain_rate")),
+    )),
+}
 
-    The naive union merges every ``energy`` into one variable, so it either
-    gives a formula no single wheel gives or, more often, no unique formula
-    at all.  The licensed union splits the copies at the declared
-    non-identities and either answers from one wheel or reports the exact
-    ambiguity.
-    """
+
+def family_report(name: str) -> Dict[str, object]:
+    """One family's questions, the naive union over its own wheels against
+    the full licensed union."""
+    wheels, questions = FAMILIES[name]
+    family = tuple(w for w in WHEELS if w.id in wheels)
+    family_naive = dmn.split_system(JUNCTIONS, False, family, (),
+                                    relation_vector_q)
     naive = split_system(False)
-    six = dmn.split_system(JUNCTIONS, False,
-                           tuple(w for w in WHEELS if w.id in ENERGY_WHEELS),
-                           (), relation_vector_q)
     rows = []
-    for t, (y, z) in ENERGY_QUESTIONS:
-        f = dmn.derive_relations(t, (y, z), naive)
-        f6 = dmn.derive_relations(t, (y, z), six)
-        got = derive_across(t, (y, z))
-        rows.append({"target": t, "inputs": (y, z),
+    for t, ins in questions:
+        ff = dmn.derive_relations(t, tuple(ins), family_naive)
+        f = dmn.derive_relations(t, tuple(ins), naive)
+        got = derive_across(t, tuple(ins))
+        rows.append({"target": t, "inputs": tuple(ins),
+                     "family_naive": None if ff is None else ff.formula,
                      "naive": None if f is None else f.formula,
-                     "naive_wheels": () if f is None else tuple(f.wheels),
-                     "naive_six": None if f6 is None else f6.formula,
                      "licensed": got.formula, "answered": got.answered,
                      "reason": got.reason})
-    # A conflation is a formula the six energy wheels derive between them
-    # which the full licensed union will not endorse (it refuses, or answers
-    # a different formula) once the cross-family junctions are in the table.
     conflations = [r for r in rows
-                   if r["naive_six"] is not None
-                   and (not r["answered"] or r["licensed"] != r["naive_six"])]
-    return {"questions": len(rows),
+                   if r["family_naive"] is not None
+                   and (not r["answered"] or r["licensed"] != r["family_naive"])]
+    return {"family": name, "questions": len(rows),
+            "family_naive_answered": sum(1 for r in rows
+                                         if r["family_naive"] is not None),
             "naive_answered": sum(1 for r in rows if r["naive"] is not None),
             "naive_ill_posed": sum(1 for r in rows if r["naive"] is None),
-            "naive_six_answered": sum(1 for r in rows if r["naive_six"] is not None),
             "licensed_answered": sum(1 for r in rows if r["answered"]),
             "licensed_refused": sum(1 for r in rows if not r["answered"]),
-            "conflations": conflations,
-            "rows": rows}
+            "conflations": conflations, "rows": rows}
+
+
+def families_report() -> Dict[str, object]:
+    """Every family's report, plus the graph's dimension gaps."""
+    return {"families": {name: family_report(name) for name in FAMILIES},
+            "dimension_gaps": [[list(a), list(b)]
+                               for a, b, _, _ in qg.dimension_gaps()]}
+
+
+def energy_family_report() -> Dict[str, object]:
+    """The energy family's report (kept as the original entry point)."""
+    return family_report("energy")
