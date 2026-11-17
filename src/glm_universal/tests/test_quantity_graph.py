@@ -108,6 +108,16 @@ def test_the_audit_keeps_the_verbatim_defects_visible():
     assert a["duplicates"] == []
 
 
+def test_the_audit_classifies_what_it_cannot_use():
+    a = qg.audit()
+    assert [[list(j.a), list(j.b)] for j in a["dropped_junctions"]] == [
+        [["W36", "pair_energy"], ["W4", "energy"]]]
+    assert [[list(n.a), list(n.b)] for n in a["vacuous_non_identities"]] == [
+        [["W37", "relaxation_time"], ["W4", "relaxation_time"]]]
+    why = qg.may_identify(("W37", "relaxation_time"), ("W4", "relaxation_time"))
+    assert why.startswith("declared non-identity, vacuous")
+
+
 def test_an_unknown_endpoint_is_dropped_from_the_graph_not_silently_used():
     graph = {frozenset(e) for e in qg.edges()}
     assert frozenset({("W36", "pair_energy"), ("W4", "energy")}) not in graph

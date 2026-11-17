@@ -234,8 +234,16 @@ def audit(junctions: Sequence[Junction] = JUNCTIONS,
     for j in junctions:
         seen[(j.a, j.b)] = seen.get((j.a, j.b), 0) + 1
     duplicates = [[list(a), list(b)] for (a, b), n in seen.items() if n > 1]
+
+    def known(e: Endpoint) -> bool:
+        return e[0] in quantities and e[1] in quantities[e[0]]
+
+    dropped = [j for j in junctions if not (known(j.a) and known(j.b))]
+    vacuous = [n for n in non_identities if not (known(n.a) and known(n.b))]
     return {"unknown_endpoints": unknown, "one_way": one_way,
-            "contradictions": contradictions, "duplicates": duplicates}
+            "contradictions": contradictions, "duplicates": duplicates,
+            "dropped_junctions": dropped,
+            "vacuous_non_identities": vacuous}
 
 
 # ===========================================================================
@@ -309,17 +317,25 @@ def may_identify(a: Endpoint, b: Endpoint) -> Optional[str]:
     variable even when no single junction names the pair.
     """
     quantities = quantities_by_wheel()
-    for e in (a, b):
-        if e[0] not in quantities:
-            return f"{e[0]} is not an absorbed wheel"
-        if e[1] not in quantities[e[0]]:
-            return f"{e[0]} holds no {e[1]!r}"
-    if a == b or a[0] == b[0]:
-        return None
     e = _edge(a, b)
+    #  A declared non-identity outranks a missing endpoint: a guard whose
+    #  other wheel does not carry the name is vacuous, and says so.
     for n in NON_IDENTITIES:
         if _edge(n.a, n.b) == e:
+            missing = next((x for x in (n.a, n.b)
+                            if x[0] not in quantities
+                            or x[1] not in quantities[x[0]]), None)
+            if missing is not None:
+                return (f"declared non-identity, vacuous as transcribed: "
+                        f"{missing[0]} holds no {missing[1]!r}")
             return f"declared non-identity: {n.reason}"
+    for x in (a, b):
+        if x[0] not in quantities:
+            return f"{x[0]} is not an absorbed wheel"
+        if x[1] not in quantities[x[0]]:
+            return f"{x[0]} holds no {x[1]!r}"
+    if a == b or a[0] == b[0]:
+        return None
     table = classes()
     group = table.get(a)
     if group is not None and group == table.get(b) and len({w for w, _ in group}) > 1:
@@ -349,5 +365,8 @@ def graph_report() -> Dict[str, object]:
         "one_way": [[list(j.a), list(j.b)] for j in a["one_way"]],
         "contradictions": a["contradictions"],
         "duplicates": a["duplicates"],
+        "dropped_junctions": [[list(j.a), list(j.b)] for j in a["dropped_junctions"]],
+        "vacuous_non_identities": [[list(n.a), list(n.b)]
+                                   for n in a["vacuous_non_identities"]],
         "joined_quantities": joined,
     }
