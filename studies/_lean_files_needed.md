@@ -4,7 +4,7 @@
 
 **Question.** Which Lean files were lost in the reorganisation, which complete files wait for them, and what does recovering one take?
 
-**Verdict.** 10 files are missing and recorded here rather than imitated by a placeholder; 0 complete files are held in `src/lean/awaiting_recovery/` (the six that were held have been moved back beside the recovered files).
+**Verdict.** 10 files are missing and recorded here rather than imitated by a placeholder; 0 files are held in `src/lean/awaiting_recovery/` (the six that were held have been moved back beside the recovered files).
 
 **Deciding figure.** 10 missing, 0 held, 4 restored (`Rule30/SidewaysPeriodTwo.lean` plus `LeechShells.lean`, `LorentzPlane.lean`, `AdversarialDialogue.lean`).
 

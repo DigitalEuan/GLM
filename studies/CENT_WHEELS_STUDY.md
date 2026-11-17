@@ -1,12 +1,12 @@
-# The cent compiler's wheels — which of the 31 supplied wheels are sound, and do the sound ones let the GLM answer derivability questions in new domains, with nothing wrong?
+# The cent compiler's wheels — which of the supplied wheels are sound, and do the sound ones let the GLM answer derivability questions in new domains, with nothing wrong?
 
 ## Tier 0 — the coarse read
 
-**Question.** Of the 31 formula wheels supplied with `cent_compiler_v12`, which are sound — every axiom dimensionally balanced on its own table, every case's stated derivability equal to exact span membership, every negative control refused — and do the sound ones, absorbed, let the GLM's exact engine answer derivability questions in the new domains that it refuses without them, with no answer wrong?
+**Question.** Of the formula wheels supplied with `cent_compiler_v12`, which are sound — every axiom dimensionally balanced on its own table, every case's stated derivability equal to exact span membership, every negative control refused — and do the sound ones, absorbed, let the GLM's exact engine answer derivability questions in the new domains that it refuses without them, with no answer wrong?
 
-**Verdict.** Yes, with one pre-registered mark not met. After rule R, 15 of the 16 new wheels are sound and pass the absorption rule (W35 loses both axioms and does not), and with them the GLM's exact engine licenses 63 of the 64 law questions of the pre-registered battery and 0 of its 51 not-a-law questions, where the fifteen wheels alone license 1 law; every negative control is refused and every verdict on the 15 has a Lean proof written, whose build is the owner's to confirm; until it is, the 15 wheels are in the package provisionally, and say so. Mark E2 is not met: besides its two additions, the supplied W4 omits the repository's case W4-M1.
+**Verdict.** Yes, with one pre-registered mark not met. After rule R, 24 of the 25 new wheels are sound and pass the absorption rule (W35 loses both axioms and does not), and with them the GLM's exact engine licenses 63 of the 64 law questions of the pre-registered battery and 0 of its 51 not-a-law questions, where the fifteen wheels alone license 1 law; every negative control is refused and every verdict on the 24 has a Lean proof written, whose build is the owner's to confirm; until it is, the 24 wheels are in the package provisionally, and say so. Mark E2 is not met: besides its two additions, the supplied W4 omits the repository's case W4-M1.
 
-**Deciding figure.** 63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at least 56, at most 0), against 1 of 64 laws with the fifteen wheels alone (bar: at most 4); 26 of 26 supplied negative controls refused; 10 supplied axioms failing at SI7, 0 absorbed.
+**Deciding figure.** 63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at least 56, at most 0), against 1 of 64 laws with the fifteen wheels alone (bar: at most 4); 33 of 33 supplied negative controls refused; 5 supplied axioms failing at SI7, 0 absorbed.
 
 **Recomputed by.** `glm_universal.wheels.cent_wheels_study.cent_wheels_report`
 
@@ -14,7 +14,7 @@
 
 ---
 
-*Created 31 October 2026 by `python3 -m glm_universal.intake scaffold cent_compiler_v12 --study CENT_WHEELS_STUDY` (directive D22) and written the same day. §§0–7 were written on 31 October 2026 before any module of the round existed and before any question of §4 was put to an engine; §8 is what came out.  Last altered 31 October 2026: the wheels installed provisionally by the owner's decision, awaiting the owner's Lean build (§7, §8.2); the verdict says so.*
+*Created 31 October 2026 by `python3 -m glm_universal.intake scaffold cent_compiler_v12 --study CENT_WHEELS_STUDY` (directive D22) and written the same day. §§0–7 were written on 31 October 2026 before any module of the round existed and before any question of §4 was put to an engine; §8 is what came out.  Last altered 31 October 2026: the wheels installed provisionally by the owner's decision, awaiting the owner's Lean build (§7, §8.2); the verdict says so. Last altered 17 November 2026: the family grew to 24 of the 25 supplied new wheels (W26, W27 and W36–W42 absorbed; W35 still not), and the counts above are the 24-wheel ones: 101 supplied axioms, 33 supplied controls, 22 absorbed controls, 5 supplied SI7 failures, 220 Lean theorems.*
 
 ## 0. What this document is
 
@@ -137,7 +137,7 @@ records it.
 | Mark | What is measured | Met when |
 |---|---|---|
 | I1 | the item's named tests | `cent test` and the item's `show_work.py` pass in place, on scratch copies (`intake advance cent_compiler_v12 tested`); the one failure of the item's `cent_compiler_v12/tests/test_all.py` (14 of 15 at triage) is explained |
-| D1 | a dimension verdict for every axiom | all 72 supplied axioms get an SI7 verdict and an A residual from their own wheel's table, fractional powers included: 0 unknown |
+| D1 | a dimension verdict for every axiom | all 101 supplied axioms get an SI7 verdict and an A residual from their own wheel's table, fractional powers included: 0 unknown |
 | D2 | the tables against the repository registry | every quantity of a cent table that `engineering.wheels.REFERENCE_DIMENSIONS` also holds has the same eight exponents there; every disagreement listed |
 | E1 | the exact engine | on every axiom and case of the 31 wheels that the integer engine of `engineering/wheels.py` can read, the rational-power engine gives the same relation vector and, case by case in its wheel, the same derivability verdict: 0 disagreements |
 | E2 | what is new in W1–W15 | W1–W3, W5, W7–W10 identical to `engineering/wheels.py` (axioms, cases, flags); W4 and W6 differ exactly by the two additions of §1; W11–W15 axioms identical to `wheels/w11.py`–`w15.py` |
@@ -202,7 +202,7 @@ refutes each line):
 So W35, with no axiom left, would not be absorbed, and the cases W25-01,
 W25-02, W25-03 and W29-03 would be corrected with their axioms.
 
-**The absorption rule.** A wheel of W16–W35 is absorbed when, after rule R,
+**The absorption rule.** A supplied formula wheel (W16–W42) is absorbed when, after rule R,
 it has at least one axiom; every axiom balances at SI7 on its (corrected)
 table; S2 and S5 hold for it; and every one of its cases has a settled flag
 equal to span membership — each proved in Lean (L1).
@@ -319,7 +319,7 @@ From the triage record, for the wheels this round takes:
 `glm_universal.wheels.cent_wheels_study.cent_wheels_report`; every figure below
 is that function's, and `tests/test_cent_wheels.py` pins them.*
 
-**In one sentence.** Yes, with one pre-registered mark not met. After rule R, 15 of the 16 new wheels are sound and pass the absorption rule (W35 loses both axioms and does not), and with them the GLM's exact engine licenses 63 of the 64 law questions of the pre-registered battery and 0 of its 51 not-a-law questions, where the fifteen wheels alone license 1 law; every negative control is refused and every verdict on the 15 has a Lean proof written, whose build is the owner's to confirm; until it is, the 15 wheels are in the package provisionally, and say so. Mark E2 is not met: besides its two additions, the supplied W4 omits the repository's case W4-M1.
+**In one sentence.** Yes, with one pre-registered mark not met. After rule R, 24 of the 25 new wheels are sound and pass the absorption rule (W35 loses both axioms and does not), and with them the GLM's exact engine licenses 63 of the 64 law questions of the pre-registered battery and 0 of its 51 not-a-law questions, where the fifteen wheels alone license 1 law; every negative control is refused and every verdict on the 24 has a Lean proof written, whose build is the owner's to confirm; until it is, the 24 wheels are in the package provisionally, and say so. Mark E2 is not met: besides its two additions, the supplied W4 omits the repository's case W4-M1.
 
 ### 8.1 The marks, pre-registered against measured
 
@@ -331,12 +331,12 @@ is that function's, and `tests/test_cent_wheels.py` pins them.*
 | E1 | 0 disagreements | 184 axioms and cases read by both engines, 0 disagreements in vector or verdict; 7 more read only by the rational-power engine (fractional powers) | met |
 | E2 | W1–W3, W5, W7–W10 identical; W4 and W6 differ exactly by the two additions; W11–W15 axioms identical | W1–W3, W5, W7–W10 identical; W6 differs exactly by its addition; W11–W15 axioms identical as relations (three written as products: `mass * angular_frequency * angular_frequency` for `mass * angular_frequency^2`, and two like it in W14). **W4 differs by one more thing: the supplied W4 omits the repository's case W4-M1** (`angular_velocity = frequency`, a model-convention case, not derivable). The absorbed W4 data keeps W4-M1 (`extended_wheel("W4")` takes the repository's cases) and the Lean file proves it still refused (`W4Ext.q_W4_M1`) | **not met** |
 | S1 | every flag compared and settled | 119 cases, 116 agree with span membership over their supplied axioms. W21-01 (flag derivable, span no: the supplied axiom carries the literal `314159265`, the case drops it) is settled by correcting the axiom, (d); W22-03 (flag derivable, span no) is settled not derivable (S4); W34-02 (flag not derivable, span yes over rational exponents: one quarter of the resistance axiom) is settled derivable. After rule R three more flags are settled by the span: W32-03 (it rearranges the dropped W32 axiom; also fails at SI7), W33-01 and W33-02 (true only at Nusselt number 1). Over the absorbed wheels: 60 cases, 0 disagreements. The supplied *dimension* flags disagree with the tables on 20 cases (W2-02, W8-N1, W10-03, W22-03, W24-03, W24-N1 name a quantity their table lacks; the rest fail on the uncorrected tables); after rule R two dimension flags of absorbed wheels are corrected (W17-03 explicit, W20-N1), both recorded in `CORRECTIONS` | met |
-| S2 | every control refused | 26 of 26 supplied controls refused over the supplied axioms; 15 of 15 controls of the absorbed wheels refused over the corrected ones | met |
+| S2 | every control refused | 33 of 33 supplied controls refused over the supplied axioms; 22 of 22 controls of the absorbed wheels refused over the corrected ones | met |
 | S3 | the failing axioms corrected or dropped; 0 absorbed axiom failing | the ten, as §3's table expected: W21 axiom 2 by a table correction (c); W25 axioms 1 and 2 corrected (a); W29 axiom 2 corrected (b); both W34 axioms by a table correction (c); W22 axiom 2, W32 axiom 2 and both W35 axioms dropped. 0 absorbed axioms fail at SI7, and none carries an angle residual | met |
 | S4 | W22-03 settled, with a Lean certificate | not derivable, over the supplied and over the absorbed W22 axioms: no W22 axiom names `diffusion_flux`, `diffusion_coefficient` or `concentration_gradient`; the separating functional is the `concentration_gradient` coordinate (`W22.q_W22_03`). The flag is corrected from derivable to not derivable; Fick's law is not added (§6) | met |
 | S5 | no hidden number in an absorbed span; aliases listed | the supplied W33 span holds `nusselt_number = 1`, so W33 axiom 1 is dropped (as §3 expected); no absorbed span holds a dimensionless relation. Two axioms equate two names: W24 `saturation_current = current` and W28 `flux_quantum = magnetic_flux`, both kept (they balance and hide no number; W28's is the declared one-flux-quantum convention, W24's makes every current law a saturation-current law — listed here as a caveat on W24) | met |
 | A1 | listed and stated in Lean | 3: W13 axiom 3 (A residual −2), W14 axiom 1 (−1), W14 axiom 2 (+2); in Lean `W13Dom.axiom_2_residual`, `W14Dom.axiom_0_residual`, `W14Dom.axiom_1_residual` (numbered from 0) | reported (no bar) |
-| L1 | the Lean file proves every absorbed verdict and every SI7 failure, and is audited | `Wheels/CentWheels.lean`: 183 theorems over 22 sections (the 15 absorbed wheels, W4 and W6 with their additions, W11–W15) — 48 axioms balanced or with their stated residual, 84 derivations by explicit rational combination, 50 refusals by separating functional (W6-03 without the addition among them), and the 10 supplied SI7 failures with their exact residuals. `lean_cent_data.agreement` finds 0 problems against the Python; the file is imported by `AxiomAuditAll.lean`; `python3 -m glm_universal.lean_check` passes. The round type-checked every theorem of the file, in sections, under Lean 4 with Mathlib, against a stand-in for `ConnectedMachine.Derivable` and `not_derivable_of_functional` identical to them; the build in the repository's own toolchain is the owner's rebuild | met (the build pending the owner's rebuild log) |
+| L1 | the Lean file proves every absorbed verdict and every SI7 failure, and is audited | `Wheels/CentWheels.lean`: 220 theorems over 31 sections (the 24 absorbed wheels, W4 and W6 with their additions, W11–W15) — 29 axioms_balanced blocks and 6 stated angle residuals, 172 case and question verdicts (113 derivations by explicit rational combination, 59 refusals by separating functional, W6-03 without the addition among them), and the 5 supplied SI7 failures with their exact residuals. `lean_cent_data.agreement` finds 0 problems against the Python; the file is imported by `AxiomAuditAll.lean`; `python3 -m glm_universal.lean_check` passes. The round type-checked every theorem of the file, in sections, under Lean 4 with Mathlib, against a stand-in for `ConnectedMachine.Derivable` and `not_derivable_of_functional` identical to them; the build in the repository's own toolchain is the owner's rebuild | met (the build pending the owner's rebuild log) |
 | M1 | at most 0 of 51 not-a-laws licensed | 0 | met |
 | M2 | at least 56 of 64 laws licensed | 63; the one miss is W22-03 (Fick's law, which no absorbed W22 axiom supports) | met |
 | M3 | the fifteen wheels license at most 4 laws | 1 (W23-03, `current = charge / time`, by W15); 0 wrong; so 62 laws are new | met |
@@ -362,12 +362,15 @@ glm_universal.intake advance cent_compiler_v12 measured` and `python3 -m
 glm_universal.intake absorb-staged cent_compiler_v12` confirm them (the parts
 become absorbed and the register entry goes); the compiler parts stay open.
 
-* **Absorbed** (15 wheels, `src/glm_universal/wheels/cent_wheels.py`, the
+* **Absorbed** (24 of the 25 supplied new wheels, `src/glm_universal/wheels/cent_wheels.py`, the
   family `CENT_WHEEL_IDS` of `wheels/__init__.py`; provisional, as above): W16 induction, W17
   gravitation, W18 the ideal gas, W19 EM waves, W20 beams, W21 fracture, W22
-  kinetics, W23 electrochemistry, W24 semiconductors, W25 plasma, W28
-  Josephson, W29 spin diffusion, W32 capillarity, W33 heat transfer, W34
-  haemodynamics — 25 axioms, 60 cases.
+  kinetics, W23 electrochemistry, W24 semiconductors, W25 plasma, W26
+  astrophysics, W27 cosmology, W28 Josephson, W29 spin diffusion, W32
+  capillarity, W33 heat transfer, W34 haemodynamics, W36 numerical SAT
+  substrate, W37 viscoelastic settling, W38 gears, W39 magnetic circuits, W40
+  piezoelectric transducers, W41 thermoelectric transducers, W42 elastic
+  buckling — 57 axioms, 98 cases.
 * **Corrected** under rule R, each recorded in `CORRECTIONS` with the supplied
   text and the reason: W21 axiom 1 (d, the literal `314159265` for π dropped);
   the W21 table entry of `stress_intensity_factor` (c, `L^-1/2 M T^-2`); W25
@@ -528,5 +531,5 @@ functional.
   axiom: adding Fick's or Jurin's law is a decision for a later round, not a
   correction.
 * The Lean build of `Wheels/CentWheels.lean` is confirmed only by the owner's
-  rebuild log (`scripts/rebuild_lean.sh`); until it is, the 15 wheels are
+  rebuild log (`scripts/rebuild_lean.sh`); until it is, the 24 wheels are
   installed provisionally and say so (§8.2).

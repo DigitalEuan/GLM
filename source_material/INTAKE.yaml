@@ -928,7 +928,7 @@ items:
     omits the repository case W4-M1)'
   acceptance:
     study: CENT_WHEELS_STUDY
-    criterion: A wheel of W16–W35 is absorbed when, after rule R, it has at least one axiom; every
+    criterion: A supplied formula wheel (W16–W42) is absorbed when, after rule R, it has at least one axiom; every
       axiom balances at SI7 on its (corrected) table; S2 and S5 hold for it; and every one of its
       cases has a settled flag equal to span membership — each proved in Lean (L1).
     result: '63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at

@@ -502,34 +502,70 @@ def hidden_relations(axioms: Sequence[str], table: Mapping[str, Sequence[Fractio
                      ) -> List[Dict[str, Fraction]]:
     """A basis of the relations in the span of ``axioms`` that involve only
     SI7-dimensionless quantities and numbers (a hidden ``nusselt_number = 1``
-    or ``2 = 1``).  An untabled name counts as dimensioned."""
+    or ``2 = 1``).  An untabled name counts as dimensioned.
+
+    A relation counts only when it is a *genuine combination*: it mixes at
+    least two axioms whose quantities overlap, so the dimensioned parts cancel
+    (or two dimensionless laws constrain a shared quantity).  A single axiom
+    that is itself dimensionless is declared, not hidden; and a union of
+    axioms with disjoint quantities is a conjunction, not a new relation.
+    """
     rels = [CW.relation_vector_q(a) for a in axioms]
+    n = len(rels)
+    if not n:
+        return []
     cols = CW.columns(*rels)
 
     def dimless(c: str) -> bool:
         return c.startswith("#") or (c in table and not any(Fraction(x) for x in
                                                              list(table[c])[:CW.SI7_AXES]))
-
     outside = [c for c in cols if not dimless(c)]
-    n = len(rels)
     mat = [[rels[i].get(c, Fraction(0)) for i in range(n)] for c in outside]
     red, pivots = CW._rref(mat, n) if mat else ([], [])
-    out = []
+    basis: List[List[Fraction]] = []
     for f in (j for j in range(n) if j not in pivots):
         x = [Fraction(0)] * n
         x[f] = Fraction(1)
         for i, c in enumerate(pivots):
             x[c] = -red[i][f]
+        basis.append(x)
+    supports = [{k for k in r if not k.startswith("#")} for r in rels]
+
+    def shares(idxs: Sequence[int]) -> bool:
+        return any(supports[idxs[a]] & supports[idxs[b]]
+                   for a in range(len(idxs)) for b in range(a + 1, len(idxs)))
+
+    out: List[Dict[str, Fraction]] = []
+    seen = set()
+
+    def consider(x: Sequence[Fraction]) -> None:
+        idxs = [i for i, v in enumerate(x) if v]
+        if len(idxs) < 2 or not shares(idxs):
+            return
         combo: Dict[str, Fraction] = {}
         for xi, r in zip(x, rels):
+            if not xi:
+                continue
             for k, v in r.items():
                 combo[k] = combo.get(k, Fraction(0)) + xi * v
         combo = {k: v for k, v in combo.items() if v}
-        # A combo equal to an axiom is the axiom itself, not a hidden relation;
-        # for an all-dimensionless wheel every axiom is dimensionless and would
-        # otherwise be reported as hidden.
-        if combo and combo not in rels:
-            out.append(combo)
+        if not combo:
+            return
+        first = combo[min(combo)]
+        key = tuple(sorted((k, v / first) for k, v in combo.items()))
+        if key in seen:
+            return
+        seen.add(key)
+        out.append(combo)
+
+    # Every combination of the kernel basis with coefficients in {-1, 0, 1}:
+    # enough to expose a cancellation among small integer laws, and cheap
+    # because the kernel is at most the number of axioms.
+    from itertools import product
+    for coeffs in product((-1, 0, 1), repeat=len(basis)):
+        if any(coeffs):
+            consider([sum(coeffs[j] * basis[j][i] for j in range(len(basis)))
+                      for i in range(n)])
     return out
 
 
