@@ -322,5 +322,32 @@ The two records the table cannot use are now **classified rather than left as
 generic unknowns**: the `W36 pair_energy -> W4 energy` junction is dropped
 (W4 holds no energy), and the `W37 relaxation_time` guard is vacuous (W4
 holds no timescale, and the record gives no other name). A cross-name answer
-now renders the name the question asked: `pair_energy` from `stress` prints
-`stress^2`, not `pair_penetration^2`.
+now renders the name the question asked.
+
+**The other non-identity families measured (17 November 2026).** Same
+method: the naive union over the family's own wheels against the licensed
+39-wheel union.
+
+| family | questions | family-naive | licensed answered | refused | conflations |
+|---|---|---|---|---|---|
+| energy | 8 | 7 | 3 | 5 | 4 (the factor-½ capacitor/delivered pair) |
+| mass | 2 | 2 | 0 | 2 | 2: `E = 2 m c²`, `m = E/(2c²)` |
+| time | 3 | 3 | 1 | 2 | 2: `v = L P / E`, `t = E / P` |
+| angle | 2 | 2 | 0 | 2 | 2: `angular_velocity = angular_frequency` (both ways) |
+| stress | 2 | 1 | 1 | 1 | 0; the gap and the repair below |
+
+The 39-wheel naive union is ill-posed on **all** of the mass, time and angle
+questions (merging the shared name makes the exponents non-unique); the
+family-size naive derives them. The licensed union refuses every conflation,
+so the non-identity table is doing its job across all four families, not
+just energy.
+
+**Stress repair.** The supplied table joins `stress` across W20/W21/W37/W40
+only through W36's **dimensionless** `pair_penetration`, a dimension gap, and
+that left W40's stress disconnected from W37's, so the W37+W40 dissipation
+question could never connect. `dimension_gaps()` reports exactly the two W36
+edges; two same-name `BRIDGES` (W20/W21 and W20/W37) join the four
+dimensioned copies directly. Now `dissipated_power` from `force, area,
+strain_rate` derives `force * strain_rate / area`, and `pair_energy` from
+`stress` is refused at the gap instead of printing a dimensionally false
+`stress^2`.

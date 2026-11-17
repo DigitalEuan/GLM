@@ -121,16 +121,38 @@ def test_the_audit_classifies_what_it_cannot_use():
 def test_an_unknown_endpoint_is_dropped_from_the_graph_not_silently_used():
     graph = {frozenset(e) for e in qg.edges()}
     assert frozenset({("W36", "pair_energy"), ("W4", "energy")}) not in graph
+    # The W36 stress edge is a dimension gap and is excluded from the graph.
+    assert frozenset({("W36", "pair_penetration"), ("W21", "stress")}) not in graph
+    assert qg.may_identify(("W36", "pair_penetration"), ("W21", "stress")) \
+        .startswith("declared junction, dimension gap")
     # The sound cent edges remain, and a one-way declaration still joins.
-    assert frozenset({("W36", "pair_penetration"), ("W21", "stress")}) in graph
-    assert qg.may_identify(("W21", "stress"), ("W36", "pair_penetration")) is None
+    assert frozenset({("W39", "magnetic_flux"), ("W16", "flux")}) in graph
     assert qg.may_identify(("W39", "magnetic_flux"), ("W16", "flux")) is None
+
+
+def test_the_only_dimension_gaps_are_the_w36_stress_joins():
+    gaps = {frozenset((a, b)) for a, b, _, _ in qg.dimension_gaps()}
+    assert gaps == {
+        frozenset({("W21", "stress"), ("W36", "pair_penetration")}),
+        frozenset({("W37", "stress"), ("W36", "pair_penetration")}),
+    }
+
+
+def test_the_stress_class_is_repaired_across_the_dimensioned_wheels():
+    for a, b in ((("W20", "stress"), ("W21", "stress")),
+                 (("W20", "stress"), ("W37", "stress")),
+                 (("W21", "stress"), ("W40", "stress")),
+                 (("W37", "stress"), ("W40", "stress"))):
+        assert qg.may_identify(a, b) is None
+    group = qg.classes()[("W21", "stress")]
+    assert {w for w, _ in group} == {"W20", "W21", "W37", "W40"}
 
 
 def test_the_report_is_self_consistent():
     report = qg.graph_report()
     assert report["junctions"] == 43
     assert report["non_identities"] == 15
+    assert report["bridges"] == 2
     # 43 declarations, 15 of them one-way: 14 mirror pairs plus 15 one-way
     # edges make 29 undirected edges; one names a quantity W4 lacks, leaving 28.
     assert report["sound_edges"] == 28
