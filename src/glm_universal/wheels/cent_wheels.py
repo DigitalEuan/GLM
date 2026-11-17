@@ -109,6 +109,14 @@ def parse_monomial_q(text: str) -> Tuple[int, Vector]:
     def visit(node: ast.AST) -> Tuple[int, Vector]:
         if isinstance(node, ast.Name):
             return 1, {node.id: Fraction(1)}
+        # ``sign_of(...)`` is a sign-bearing factor (±1): it contributes no
+        # prime exponents and no quantity magnitude, but it is still a readable
+        # factor, so the whole call is kept as an opaque quantity key (which a
+        # table without it simply does not hold).  Other calls stay unreadable.
+        if (isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id == "sign_of"):
+            return 1, {ast.unparse(node): Fraction(1)}
         if (isinstance(node, ast.Constant) and isinstance(node.value, int)
                 and not isinstance(node.value, bool)):
             if node.value == 0:
