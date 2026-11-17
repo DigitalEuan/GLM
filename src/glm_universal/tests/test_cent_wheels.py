@@ -176,6 +176,16 @@ class TestAbsorbedWheels(unittest.TestCase):
         for w in CW.CENT_WHEELS:
             self.assertEqual(S.hidden_relations(w.axioms, CW.CENT_TABLES[w.id]), [], w.id)
 
+    def test_hidden_relations_are_genuine_combinations(self):
+        # Two disjoint dimensionless laws are a conjunction, not a hidden relation.
+        table = {"a": CW._d(), "b": CW._d(), "c": CW._d(), "d": CW._d()}
+        self.assertEqual(S.hidden_relations(["a = b^2", "c = d^2"], table), [])
+        # Two dimensionless laws on a shared quantity imply a new relation.
+        table2 = {"a": CW._d(), "b": CW._d(), "c": CW._d()}
+        found = S.hidden_relations(["a = b", "b = c"], table2)
+        self.assertTrue(found)
+        self.assertTrue(any(set(r) == {"a", "c"} for r in found), found)
+
     def test_corrections_and_drops_are_applied(self):
         for corr in CW.CORRECTIONS:
             if corr.what == "axiom":

@@ -237,3 +237,15 @@ with 11 failures, all tracing to `parse_monomial_q` in
   and 1 unknown (pre-existing data-drift in absorbed transcription, not parser).
   The 4 remaining test failures are data-fidelity checks (transcription vs.
   supplied item / Lean file), not parser issues.
+
+**Current state (17 November 2026):** the drift is fixed and the family is
+  **24 wheels** — W16–W29, W32–W34 and W36–W42 absorbed; W35 remains in
+  `NOT_ABSORBED`. `CENT_WHEEL_IDS` and `provisional.json` carry the 24; the
+  supplied item has 101 axioms (5 failing at SI7) and 33 controls;
+  `test_cent_wheels` is **37/37**, `cent_wheels_report(lean=True)` has d1
+  axioms=101 / failing=5, s2 controls=33 supplied and 22 absorbed, absorption
+  met; the Lean file is regenerated (220 theorems, agreement OK);
+  `lean_check` OK and `intake check` 0 errors. `hidden_relations` now reports
+  only genuine combinations (two dimensionless laws on a shared quantity),
+  not a disjoint conjunction of independent laws. The owner's Lean build is
+  still the open item (follow-ups in `studies/_cent_wheels_follow_ups.md`).

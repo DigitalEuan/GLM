@@ -3,6 +3,22 @@
 *Written 17 November 2026, after the transcription-drift fix and the absorption
 of W26, W27 and W36–W42. Ordered by value; item 1 is the owner's to run.*
 
+## Tier 0 — the coarse read
+
+**Question.** What is the most valuable next step on the cent wheels, and what remains behind it?
+
+**Verdict.** The Lean build is the highest-value gap; the rest are recorded below.
+
+**Deciding figure.** 220 Lean theorems, 24 absorbed wheels.
+
+**Recomputed by.** `glm_universal.wheels.cent_wheels_study.cent_wheels_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+---
+
+The Lean build is the highest-value gap; the rest are recorded below.
+
 ## 1. Confirm the Lean build (owner's machine) — the highest-value gap
 
 Everything so far is a static text check (`python3 -m glm_universal.lean_check`).
@@ -87,8 +103,7 @@ keep the check honest without blocking a round.
 
 ## 6. Keep the study and the whiteboard current
 
-`studies/CENT_WHEELS_STUDY.md` and `WHITEBOARD.md` still describe the
-15-wheel family in their prose. The numbers in
-`source_material/INTAKE.yaml` were corrected this round (24 wheels, 220
-theorems, 33 supplied controls, 5 supplied axioms failing at SI7); the two
-documents should follow.
+`studies/CENT_WHEELS_STUDY.md` and `WHITEBOARD.md` now describe the 24-wheel
+family and the current counts (101 supplied axioms, 33 supplied controls, 22
+absorbed controls, 5 supplied SI7 failures, 220 Lean theorems). Keep them in
+step when the family changes again.
