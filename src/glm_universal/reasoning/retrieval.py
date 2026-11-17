@@ -125,6 +125,7 @@ from typing import Dict, FrozenSet, List, Mapping, Optional, Sequence, Tuple
 from ..derived import memo
 from .. import integrity
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development
 
 # ===========================================================================
 #  Corpus, relatives and chance
@@ -323,7 +324,7 @@ def compute_lexical_book() -> Dict[str, object]:
         "scale": la.SCALE,
         "cap": LEXICAL_CAP,
         "buckets": LEXICAL_BUCKETS,
-        "tree_digest": la.tree_digest(),
+        "tree_digest": lean_tree.tree_digest(),
         "order": order,
         "vectors": {name: list(table[name]) for name in order},
         "addresses": {name: list(la.quantise(table[name])) for name in order},
@@ -357,7 +358,7 @@ def lexical_book(refresh: bool = False) -> Optional[Dict[str, object]]:
 def lexical_cache_state() -> Dict[str, object]:
     """Fresh, stale or absent -- the same guard the address book carries."""
     book = lexical_book()
-    live = la.tree_digest()
+    live = lean_tree.tree_digest()
     if book is None:
         return {"present": False, "fresh": False, "live_digest": live,
                 "stored_digest": None, "verdict": "absent"}

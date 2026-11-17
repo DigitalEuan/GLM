@@ -36,6 +36,7 @@ from pathlib import Path
 from typing import Dict, Mapping, Optional
 
 from ..reasoning import lean_address as la
+from ..reasoning import lean_tree  # builder: walks the development
 
 __all__ = [
     "DATA_PATH",
@@ -283,7 +284,7 @@ def measure() -> Dict[str, object]:
     """
     book = la.address_book(refresh=True)
     if book is None:
-        return {"available": False, "lean_digest": la.tree_digest()}
+        return {"available": False, "lean_digest": lean_tree.tree_digest()}
     files: Dict[str, int] = {}
     kinds: Dict[str, int] = {}
     for name in book["order"]:
@@ -293,7 +294,7 @@ def measure() -> Dict[str, object]:
     separation = la.separation_report()
     return {
         "available": True,
-        "lean_digest": la.tree_digest(),
+        "lean_digest": lean_tree.tree_digest(),
         "corpus": {
             "files": len(files),
             "declarations": len(book["order"]),
@@ -378,7 +379,7 @@ def measurements(refresh: bool = False) -> Optional[Dict[str, object]]:
 def state() -> Dict[str, object]:
     """Present, and taken from the Lean tree as it stands?"""
     stored = measurements()
-    live = la.tree_digest()
+    live = lean_tree.tree_digest()
     if stored is None:
         return {"present": False, "fresh": False, "live_digest": live,
                 "stored_digest": None, "verdict": "absent"}
@@ -395,6 +396,6 @@ def state() -> Dict[str, object]:
 def current() -> Optional[Dict[str, object]]:
     """The measurements if they still describe the tree, else ``None``."""
     stored = measurements()
-    if stored is None or stored.get("lean_digest") != la.tree_digest():
+    if stored is None or stored.get("lean_digest") != lean_tree.tree_digest():
         return None
     return stored

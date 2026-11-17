@@ -45,6 +45,7 @@ from typing import Dict, Mapping, Optional, Tuple
 from .. import integrity
 from . import citation_reference as cr
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development
 from . import retrieval as rt
 
 __all__ = [
@@ -124,7 +125,7 @@ def headline() -> Dict[str, object]:
     injectivity = sep["feature"]["injectivity"]
     return {
         "declarations": len(la.declarations()),
-        "tree": la.tree_digest(),
+        "tree": lean_tree.tree_digest(),
         "edges": sum(len(v) for v in graph.values()),
         "mean_relatives": dq["mean_relatives"],
         "decl": {

@@ -44,6 +44,7 @@ from typing import Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from ..derived import memo
 from . import inventory as inv
+from ..reasoning import lean_tree  # builder: walks the development
 
 __all__ = [
     "GENERATED",

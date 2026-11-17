@@ -61,6 +61,7 @@ from typing import Dict, FrozenSet, List, Mapping, Optional, Tuple
 
 from ..derived import memo
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development
 
 __all__ = [
     "DATA_PATH", "LEAN_TOOL", "run_reference", "write_reference", "reference",
@@ -82,12 +83,12 @@ SCHEMA = 1
 # ===========================================================================
 
 def _module_names() -> List[str]:
-    root = la.lean_root()
+    root = lean_tree.lean_root()
     if root is None:
         return []
     base = root.parent.parent          # .../glm_lean
     return [".".join(path.relative_to(base).with_suffix("").parts)
-            for path in la.lean_files()]
+            for path in lean_tree.lean_files()]
 
 
 def run_reference(timeout: int = 3600) -> Dict[str, Tuple[str, Tuple[str, ...]]]:
@@ -152,7 +153,7 @@ def write_reference(path: Optional[Path] = None) -> Path:
     graph = map_reference(raw)
     record = {
         "schema": SCHEMA,
-        "tree_digest": la.tree_digest(),
+        "tree_digest": lean_tree.tree_digest(),
         "constants": len(raw),
         "graph": graph,
     }
@@ -179,7 +180,7 @@ def reference() -> Optional[Dict[str, object]]:
 def state() -> Dict[str, object]:
     """Fresh, stale or absent: is the stored reference of the current tree?"""
     stored = reference()
-    live = la.tree_digest()
+    live = lean_tree.tree_digest()
     if stored is None:
         return {"present": False, "fresh": False, "verdict": "absent",
                 "live_digest": live, "stored_digest": None}

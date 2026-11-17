@@ -40,6 +40,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 from ..substrate import mog
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development
 from . import llvq_table
 
 __all__ = [

@@ -141,16 +141,27 @@ GLM-systems focus:
    and `lean_address.declaration_names()` now read from `lean_book` (features +
    declaration rows) instead of walking the development; both fall back to the
    tree when no book is present. Recomputed values match byte-for-byte.
-2. **Fix the lean-tree split's dependency tracking.** Builders (`corpus/measurements`,
-   `citation_reference`, `retrieval`, `native_parity`, `native_words`,
-   `corpus_resample`, `stack`) should import `lean_tree` directly so the
-   sign-off ledger still flags them; answering paths keep the `lean_address`
-   importlib shim.
+2. **Fix the lean-tree split's dependency tracking.** — *taken this round.*
+   Builders (`corpus/measurements`, `citation_reference`, `retrieval`,
+   `native_parity`, `native_words`, `corpus_resample`, `stack`, `tie_break`,
+   `citation_scope`, `operation_escalation`, `corpus/render`) now import
+   `lean_tree` directly, so the sign-off ledger flags their tree dependency;
+   answering paths keep the `lean_address` importlib shim. lean_blast_radius:
+   264 units, 228 taking the whole development (up from 224 — builders now
+   correctly attributed).
 3. **Extend disk caching to the other expensive memoized derivations** —
-   `citation_graph`, `feature_table` (now book-served), `separation_report`,
-   `legacy_citation_graph`, `tiebreak_report` via `DerivedStore` + freeze/thaw.
-4. **Investigate the pre-existing `lean_address` duplicate-name failures**
-   (9604 order entries vs 9476 declarations) — likely a parser edge case.
+   *taken this round (partial).* `citation_graph` and `separation_report` are
+   now `DerivedStore`-backed (`lean_citation_graph`, `lean_separation_report`),
+   with sorted-list / `_freeze`+`_thaw` round-trips; verified equal to the
+   recomputed versions. `feature_table` is book-served; `legacy_citation_graph`
+   and `tiebreak_report` left as `@memo`-only.
+4. **Investigate the pre-existing `lean_address` duplicate-name failures** —
+   *investigated this round.* Root cause is not the parser: 128 duplicate
+   full names arise because multiple Lean files share a namespace (e.g.
+   `Cube/Stabiliser.lean` and `CubeStabiliser.lean` both `namespace GLM.CubeStab`),
+   so `declarations()` yields 9604 entries for 9476 unique names. Consolidating
+   these held copies would change the tree digest and require a rebuild (owner's
+   Lean toolchain), so left untouched; recorded rather than hidden.
 5. **Refresh the iteration-cost study's blast-radius table** to the current
    tree (264 units) so `test_corpus` stops failing on a stale baseline.
 6. **Tighten the relay cache key** to the two digest strings rather than all

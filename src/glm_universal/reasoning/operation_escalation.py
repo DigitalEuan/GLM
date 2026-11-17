@@ -91,6 +91,7 @@ from .. import integrity
 from ..substrate import construction_ladder as CL
 from . import ladder_escalation as LE
 from . import norm_escalation as NE
+from . import lean_tree  # builder: walks the development (via lean_address)
 
 __all__ = [
     "Operation", "OPERATIONS", "REFUSAL_CONTRACT", "LADDER",

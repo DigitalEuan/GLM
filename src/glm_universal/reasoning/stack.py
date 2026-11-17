@@ -79,6 +79,7 @@ from typing import Dict, FrozenSet, List, Mapping, Optional, Sequence, Tuple
 
 from ..derived import memo
 from . import lean_address as la
+from . import lean_tree  # builder: walks the development (digest inputs)
 from . import retrieval as rt
 
 # ===========================================================================
@@ -604,7 +605,7 @@ def _relay_report_inputs() -> Tuple[object, ...]:
     from ..corpus import inventory as inv
 
     paths: List[object] = [Path(__file__).resolve()]
-    paths.extend(la.lean_files())
+    paths.extend(lean_tree.lean_files())
     for doc in inv.source_documents():
         paths.append(inv.REPOSITORY_ROOT / doc.path)
     return tuple(paths)
