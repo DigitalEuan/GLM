@@ -150,8 +150,11 @@ GLM-systems focus:
    264 units, 228 taking the whole development (up from 224 — builders now
    correctly attributed).
 3. **Extend disk caching to the other expensive memoized derivations** —
-   `citation_graph`, `feature_table` (now book-served), `separation_report`,
-   `legacy_citation_graph`, `tiebreak_report` via `DerivedStore` + freeze/thaw.
+   *taken this round (partial).* `citation_graph` and `separation_report` are
+   now `DerivedStore`-backed (`lean_citation_graph`, `lean_separation_report`),
+   with sorted-list / `_freeze`+`_thaw` round-trips; verified equal to the
+   recomputed versions. `feature_table` is book-served; `legacy_citation_graph`
+   and `tiebreak_report` left as `@memo`-only.
 4. **Investigate the pre-existing `lean_address` duplicate-name failures**
    (9604 order entries vs 9476 declarations) — likely a parser edge case.
 5. **Refresh the iteration-cost study's blast-radius table** to the current

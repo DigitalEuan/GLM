@@ -791,11 +791,28 @@ def citation_graph() -> Dict[str, frozenset]:
 
     Read in Lean's scope since Phase 101 (:func:`scoped_cited_names`); the
     reading before it is :func:`legacy_citation_graph`, kept as the record.
+
+    Cached on disk by the digest of the Lean development, so a cold process
+    does not re-derive it.
     """
-    full = declaration_names()
-    scopes = file_scopes()
-    return {d.name: scoped_cited_names(d, full, scopes.get((d.file, d.line)))
-            for d in declarations()}
+    from ..derived import DerivedStore
+
+    def _inputs() -> object:
+        from . import lean_tree as _lt
+        return _lt.lean_files()
+
+    store = DerivedStore("lean_citation_graph", _inputs, schema=1)  # type: ignore[arg-type]
+
+    def compute() -> object:
+        full = declaration_names()
+        scopes = file_scopes()
+        return {d.name: sorted(scoped_cited_names(
+            d, full, scopes.get((d.file, d.line))))
+                for d in declarations()}
+
+    payload = store.cached(compute)
+    return {str(name): frozenset(targets)
+            for name, targets in dict(payload).items()}
 
 
 def _clamp(value: int) -> int:
@@ -1607,26 +1624,39 @@ def _neighbour_statistics(scheme: str) -> Dict[str, object]:
 @memo
 def separation_report() -> Dict[str, object]:
     """The three schemes, scored side by side on the same declarations."""
-    out: Dict[str, object] = {}
-    for scheme in SCHEMES:
-        out[scheme] = {
-            "pairs": _pair_statistics(scheme),
-            "neighbours": _neighbour_statistics(scheme),
-            "injectivity": injectivity(scheme),
+    from ..corpus.measurements import _freeze, _thaw
+    from ..derived import DerivedStore
+
+    def _inputs() -> object:
+        from . import lean_tree as _lt
+        return _lt.lean_files()
+
+    store = DerivedStore("lean_separation_report", _inputs, schema=1)  # type: ignore[arg-type]
+
+    def compute() -> object:
+        out: Dict[str, object] = {}
+        for scheme in SCHEMES:
+            out[scheme] = {
+                "pairs": _pair_statistics(scheme),
+                "neighbours": _neighbour_statistics(scheme),
+                "injectivity": injectivity(scheme),
+            }
+        feature = out["feature"]["neighbours"]
+        control = out["hash_control"]["neighbours"]
+        null = out["shuffled"]["neighbours"]
+        out["verdict"] = {
+            "feature_beats_hash_control": feature["same_file_rate"] > control["same_file_rate"],
+            "feature_beats_shuffle": feature["same_file_rate"] > null["same_file_rate"],
+            "feature_beats_chance": feature["same_file_rate"] > feature["same_file_chance"],
+            "hash_is_chance_like":
+                abs(control["same_file_rate"] - control["same_file_chance"])
+                <= Fraction(1, 20),
+            "linked_beats_chance": feature["linked_rate"] > feature["linked_chance"],
         }
-    feature = out["feature"]["neighbours"]
-    control = out["hash_control"]["neighbours"]
-    null = out["shuffled"]["neighbours"]
-    out["verdict"] = {
-        "feature_beats_hash_control": feature["same_file_rate"] > control["same_file_rate"],
-        "feature_beats_shuffle": feature["same_file_rate"] > null["same_file_rate"],
-        "feature_beats_chance": feature["same_file_rate"] > feature["same_file_chance"],
-        "hash_is_chance_like":
-            abs(control["same_file_rate"] - control["same_file_chance"])
-            <= Fraction(1, 20),
-        "linked_beats_chance": feature["linked_rate"] > feature["linked_chance"],
-    }
-    return out
+        return _freeze(out)
+
+    payload = store.cached(compute)
+    return _thaw(payload)  # type: ignore[return-value]
 
 
 #: The covering radius of the Leech lattice in this integer model.  The
