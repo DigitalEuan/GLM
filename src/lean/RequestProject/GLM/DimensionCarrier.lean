@@ -44,7 +44,13 @@ can be recoded as a (label, fibre index) pair without loss:
 * `fibre_card`, `fibres_partition` — and it is a 4-to-1 fibration of the
   sixteen column states onto the four labels.
 -/
-import Mathlib
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Algebra.CharP.Two
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.Data.Fintype.Pi
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.IntervalCases
 
 namespace GLM.DimensionCarrier
 
@@ -179,9 +185,9 @@ theorem carrier_fits_24_bits : Fintype.card (Fin 7 → Fin 9) < 2 ^ 24 := by
   rw [carrier_card]; norm_num
 
 /-- Explicitly: the carrier embeds in the 24-bit words. -/
-theorem carrier_embeds : Nonempty ((Fin 7 → Fin 9) ↪ Fin (2 ^ 24)) := by
-  refine ⟨(finFunctionFinEquiv.toEmbedding).trans (Fin.castLEEmb ?_)⟩
-  norm_num
+theorem carrier_embeds : Nonempty ((Fin 7 → Fin 9) ↪ Fin (2 ^ 24)) :=
+  ⟨(Fintype.equivFin (Fin 7 → Fin 9)).toEmbedding.trans
+    (Fin.castLEEmb (by rw [carrier_card]; norm_num))⟩
 
 /-- The slack: `11 994 247` of the sixteen-odd million words are unused. -/
 theorem carrier_slack : 2 ^ 24 - Fintype.card (Fin 7 → Fin 9) = 11994247 := by
