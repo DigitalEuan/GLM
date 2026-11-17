@@ -3,7 +3,7 @@ The Geometric Language Machine (GLM)
 ```
 Authored-by: E R A Craig (DigitalEuan), New Zealand <info@digitaleuan.com>
 https://github.com/DigitalEuan/GLM
-30.10.26
+16.11.26
 ```
 
 # The Geometric Language Machine (GLM)
@@ -21,16 +21,6 @@ https://github.com/DigitalEuan/GLM
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 ---
-
-*Last altered 31 October 2026 (repository check: directives D17–D22 — date stamps restored as D17, Wobble/Reversibility/Generate-don't-store renumbered D18–D20, constants single source D21, the intake of new material D22; `source_material/` filed into `ToDo/` and `done/`; lost modules reconstructed and marked; study manifests read as data; later the same day absorption tied to the owner's Lean build record, and the two wheel items installed in the wheels folder marked provisional until it confirms them). Earlier: 29 October 2026 reorganisation: the repository restructured under src/, studies as YAML+MD pairs, wheels centralized, Rule30 Lean absorbed.*
-
-This repository holds the Geometric Language Machine system and many studies that came out of developing it so far.
-
-*Rewritten in Phase 133.* The supplied files of the owner's substrate study
-had been unpacked over the repository root and had replaced this front door;
-they now live with the rest of the supplied material in
-[`source_material/`](source_material/README.md), and this file was written again
-from the current state documents.
 
 ## Where to start
 
@@ -68,7 +58,7 @@ of carriers reached through <!--figure:query-kinds-->31 query kinds<!--/figure--
 one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
 The formal development is
 [`src/lean/RequestProject/GLM/`](src/lean/RequestProject/GLM/README.md),
-<!--figure:lean-files-->418 Lean files<!--/figure--> with no `sorry`, built
+<!--figure:lean-files-->Lean files<!--/figure--> with no `sorry`, built
 from the repository root with `lake build`.
 
 ```bash
@@ -76,7 +66,7 @@ python3 src/GLM.py -q "address of golay"                    # one query
 PYTHONPATH=src python3 -m glm_universal.tools --help      # the study instruments
 ```
 
-## 1b. What this round closed
+## 1b. Previous rounds closed
 
 The repository check of 31 October 2026 put the repository back together after the October
 reorganisation and the arrival of new supplied material (the full record is in
