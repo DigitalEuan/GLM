@@ -137,7 +137,7 @@ def test_one_wheel_can_be_named():
     ok, text, figures = derive_text(eq + " in W1")
     assert ok and figures["verdict"] == "not derivable" and figures["wheel"] == "W1"
     assert "provisional" not in figures and "functional" in figures
-    for wid in ("W35", "W26", "W99"):
+    for wid in ("W35", "W30", "W99"):
         ok, text, figures = derive_text(eq + " in " + wid)
         assert not ok and f"no wheel {wid}" in text, wid
 

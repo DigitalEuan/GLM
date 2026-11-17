@@ -862,6 +862,34 @@ items:
       0 skipped of 9 collected'
     date: 17 November 2026
     fingerprint: sha256:b91e9dc9460e6c76e90571e4d6e89a0cb95327f4b9fec0e98666cc48e707698c
+  - test: item:cent test
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 17 November 2026
+    fingerprint: sha256:8a59d3eb3614db3e182678b3539aee9ed7c9c1ae7dbdaf6e772d652f5fc35e35
+  - test: item:tests/show_work.py
+    result: pass
+    detail: 'passed (exit 0): the script ran to completion'
+    date: 17 November 2026
+    fingerprint: sha256:8a59d3eb3614db3e182678b3539aee9ed7c9c1ae7dbdaf6e772d652f5fc35e35
+  - test: tests/test_cent_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 36 passed, 0 failed,
+      0 skipped of 36 collected'
+    date: 17 November 2026
+    fingerprint: sha256:8a59d3eb3614db3e182678b3539aee9ed7c9c1ae7dbdaf6e772d652f5fc35e35
+  - test: tests/test_wheels.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 34 passed, 0 failed,
+      0 skipped of 34 collected'
+    date: 17 November 2026
+    fingerprint: sha256:8a59d3eb3614db3e182678b3539aee9ed7c9c1ae7dbdaf6e772d652f5fc35e35
+  - test: tests/test_derive_query.py
+    result: pass
+    detail: 'passed (exit 0): every collected test ran and passed (without pytest); 9 passed, 0 failed,
+      0 skipped of 9 collected'
+    date: 17 November 2026
+    fingerprint: sha256:8a59d3eb3614db3e182678b3539aee9ed7c9c1ae7dbdaf6e772d652f5fc35e35
   lean:
   - Wheels/CentWheels
   - IntakeChecks/Derivability
@@ -879,25 +907,25 @@ items:
   lean_obligations:
   - 'Wheels/CentWheels (GLM.CentWheels), written 31 October 2026 from the numbers of the absorbed
     data: dimL (a table''s dimension map), derivable_of_combo, not_derivable_of_dot (via ConnectedMachine.not_derivable_of_functional);
-    per absorbed wheel W16-W25, W28, W29, W32-W34 axioms_balanced (each axiom''s two sides have equal
+    per absorbed wheel W16-W29, W32-W34, W36-W42 axioms_balanced (each axiom''s two sides have equal
     exponent vectors over L M T I H N J A) and q_<case> for every case, control and CENT_WHEELS_STUDY
     section-4 question (Derivable by an explicit rational combination, or not, by a separating functional);
     W4Ext / W6Ext (the additions balance, q_W4_04, q_W6_03 derivable, q_W6_03_without_addition refused);
     W11Dom-W15Dom (axioms balanced at SI7, the three A residuals stated, the 14 supplied cases derivable);
     Supplied.<W>_axiom_<i>_residual and _unbalanced for the 10 supplied axioms that fail at SI7 on
-    their own tables; 183 theorems'
+    their own tables; 220 theorems'
   - the Lean build is confirmed only by the owner rebuild log (scripts/rebuild_lean.sh); here the
     static check (python3 -m glm_universal.lean_check) passed, every theorem was type-checked in sections
     by the round under Lean 4 + Mathlib against a stand-in identical to ConnectedMachine.Derivable,
     and tests/test_cent_wheels.py reads the file and re-checks every vector, table, certificate and
     verdict against the Python in exact arithmetic (wheels/lean_cent_data.agreement)
   measured: 'CENT_WHEELS_STUDY §8 (31 October 2026, glm_universal.wheels.cent_wheels_study.cent_wheels_report):
-    with the 15 absorbed cent wheels the GLM''s exact engine licenses 63 of the 64 pre-registered
+    with the 24 absorbed cent wheels the GLM''s exact engine licenses 63 of the 64 pre-registered
     law questions and 0 of the 51 not-a-law questions (bars: at least 56, at most 0), against 1 of
-    64 laws with the fifteen wheels W01-W15 alone (bar: at most 4); 26 of 26 supplied negative controls
-    refused; 10 supplied axioms fail at SI7 (the record''s seven plus W21, W25 and W29 axiom 2), 0
-    absorbed; W22-03 settled not derivable; 16 of 17 marks met or reported, E2 not met (the supplied
-    W4 also omits the repository case W4-M1)'
+    64 laws with the fifteen wheels W01-W15 alone (bar: at most 4); 33 of 33 supplied negative controls
+    refused; 5 supplied axioms fail at SI7 (W22 axiom 2, W25 axioms 1-2 and W35 axioms 1-2), 0 absorbed;
+    W22-03 settled not derivable; 16 of 17 marks met or reported, E2 not met (the supplied W4 also
+    omits the repository case W4-M1)'
   acceptance:
     study: CENT_WHEELS_STUDY
     criterion: A wheel of W16–W35 is absorbed when, after rule R, it has at least one axiom; every
@@ -905,7 +933,7 @@ items:
       cases has a settled flag equal to span membership — each proved in Lean (L1).
     result: '63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at
       least 56, at most 0), against 1 of 64 laws with the fifteen wheels alone (bar: at most 4); 26
-      of 26 supplied negative controls refused; 10 supplied axioms failing at SI7, 0 absorbed.'
+      of 33 supplied negative controls refused; 5 supplied axioms failing at SI7, 0 absorbed.'
     marks:
     - I1
     - D1
@@ -924,8 +952,8 @@ items:
     decision: accept
     date: 31 October 2026
   parts:
-  - part: wheels/W16.json ... W34.json, wheels/index.json (the new formula wheels W16-W25, W28, W29,
-      W32-W34)
+  - part: wheels/W16.json ... W42.json, wheels/index.json (the new formula wheels W16-W29, W32-W34,
+      W36-W42)
     status: absorbed
     studies:
     - CENT_WHEELS_STUDY
@@ -941,7 +969,7 @@ items:
     note: 'installed provisionally in src/glm_universal/wheels/ by the owner''s decision of 31 October
       2026 ("keep them in the wheels folder now, clearly marked provisional until my Lean build log
       confirms them"), recorded in src/glm_universal/wheels/_data/provisional.json; Lean written,
-      the owner''s build pending: 15 wheels as Python literals (the package never reads source_material/),
+      the owner''s build pending: 24 wheels as Python literals (the package never reads source_material/),
       with the corrections of rule R recorded in CORRECTIONS (W21 axiom 1 and table, W25 axioms 1-2
       and cases, W29 axiom 2 and case, W34 table, seven flags) and the drops in DROPPED (W22 axiom
       2, W32 axiom 2, W33 axiom 1); registered as the cent family CENT_WHEEL_IDS / cent_family / answer_derivability

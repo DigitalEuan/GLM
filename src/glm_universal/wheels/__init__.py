@@ -268,11 +268,12 @@ def provision_wheel(wheel_id: str) -> ProvisionWheel:
 # The cent family (added 31 October 2026, intake of cent_compiler_v12)
 # ---------------------------------------------------------------------------
 
-#: The ids of the absorbed cent wheels, in order (W26, W27, W30 and W31 were
-#: never supplied; W35 lost both axioms under the study's rule R).
+#: The ids of the absorbed cent wheels, in order (W30 and W31 were never
+#: supplied; W35 lost both axioms under the study's rule R and is not absorbed).
 CENT_WHEEL_IDS: Tuple[str, ...] = (
     "W16", "W17", "W18", "W19", "W20", "W21", "W22", "W23", "W24", "W25",
-    "W28", "W29", "W32", "W33", "W34",
+    "W26", "W27", "W28", "W29", "W32", "W33", "W34",
+    "W36", "W37", "W38", "W39", "W40", "W41", "W42",
 )
 
 #: The study and the Lean file of the cent family.

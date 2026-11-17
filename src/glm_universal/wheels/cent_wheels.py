@@ -354,7 +354,7 @@ class Dropped:
     reason: str
 
 
-#: The absorbed wheels: W16-W25, W28, W29, W32-W34 (W26, W27, W30, W31 were
+#: The absorbed wheels: W16-W29, W32-W34, W36-W42 (W30 and W31 were
 #: never supplied; W35 lost both axioms to rule R and is not absorbed).
 CENT_WHEELS: Tuple[Wheel, ...] = (
     Wheel("W16", "Magnetic flux and induction", (
@@ -476,6 +476,30 @@ CENT_WHEELS: Tuple[Wheel, ...] = (
                 "(the permeability of v_A = B / (mu0 rho)^(1/2) added, with the axiom)"),
         _c("W25-N1", "cyclotron_frequency = mass / magnetic_field", False, False, NEGATIVE),
     )),
+    Wheel("W26", "Astrophysics & Stellar Structure", (
+        "luminosity = stefan_boltzmann_constant * radius^2 * temperature^4",
+        "schwarzschild_radius = 2 * gravitational_constant * mass / speed_of_light^2",
+        "orbital_velocity^2 = gravitational_constant * mass / orbital_radius",
+        "hawking_temperature = hbar * speed_of_light^3 / (gravitational_constant * mass * boltzmann_constant)",
+    ), (
+        _c("W26-01", "stefan_boltzmann_constant = luminosity / (radius^2 * temperature^4)", True, True, CONVENTION, note="Inverse of the blackbody luminosity law L = 4*pi*R^2*sigma*T^4; the monomial convention omits 4*pi and is checked on its displayed dimensions."),
+        _c("W26-02", "mass = schwarzschild_radius * speed_of_light^2 / (2 * gravitational_constant)", True, True, SUPPORTED, note="Exact algebraic inverse of r_s = 2GM/c^2."),
+        _c("W26-03", "orbital_radius = gravitational_constant * mass / orbital_velocity^2", True, True, SUPPORTED, note="Exact algebraic inverse of the circular-orbit relation v^2 = GM/r."),
+        _c("W26-04", "mass = hbar * speed_of_light^3 / (gravitational_constant * boltzmann_constant * hawking_temperature)", True, True, CONVENTION, note="Inverse of the Hawking temperature T_H = hbar*c^3/(8*pi*G*M*k_B); the monomial convention omits 8*pi."),
+        _c("W26-N1", "luminosity = stefan_boltzmann_constant * radius^2 / temperature^4", False, False, NEGATIVE, note="Negative control: inverting the temperature power breaks the exact Stefan-Boltzmann dimensions."),
+    )),
+    Wheel("W27", "Cosmology & Cosmic Expansion", (
+        "recession_velocity = hubble_constant * distance",
+        "critical_density = hubble_constant^2 / gravitational_constant",
+        "hubble_time = 1 / hubble_constant",
+        "horizon_distance = speed_of_light / hubble_constant",
+    ), (
+        _c("W27-01", "hubble_constant = recession_velocity / distance", True, True, CONVENTION, note="Inverse of the local Hubble law v = H0*d; no relativistic correction or peculiar velocity is declared."),
+        _c("W27-02", "critical_density = hubble_constant^2 / gravitational_constant", True, True, CONVENTION, note="Critical density rho_c = 3*H0^2/(8*pi*G); the monomial convention omits the dimensionless 3/(8*pi) factor."),
+        _c("W27-03", "hubble_time = 1 / hubble_constant", True, True, SUPPORTED, note="Definition of the Hubble time."),
+        _c("W27-04", "horizon_distance = speed_of_light / hubble_constant", True, True, SUPPORTED, note="Definition of the Hubble horizon distance c/H0."),
+        _c("W27-N1", "recession_velocity = hubble_constant / distance", False, False, NEGATIVE, note="Negative control: dividing by distance instead of multiplying breaks the Hubble-law dimensions."),
+    )),
     Wheel("W28", "Superconductivity & Josephson Effects", (
         "josephson_voltage = magnetic_flux / time",
         "flux_quantum = magnetic_flux",
@@ -539,6 +563,76 @@ CENT_WHEELS: Tuple[Wheel, ...] = (
         _c("W34-N1", "vascular_resistance = pipe_radius^4 / (viscosity * length)",
            False, False, NEGATIVE),
     )),
+    Wheel("W36", "Numerical SAT Substrate (NumPy) \u2014 quadratic energy laws", (
+        "pair_energy = pair_penetration^2",
+        "wall_energy = container_violation^2",
+    ), (
+        _c("W36-01", "pair_penetration = pair_energy^(1/2)", True, True, SUPPORTED),
+        _c("W36-02", "container_violation = wall_energy^(1/2)", True, True, SUPPORTED),
+        _c("W36-03", "pair_energy = pair_penetration", True, False, SUPPORTED, note="linear, not quadratic: the objective is squared penetration"),
+        _c("W36-04", "wall_energy = container_violation", True, False, SUPPORTED, note="linear, not quadratic: walls enter the objective squared"),
+    )),
+    Wheel("W37", "Viscoelastic Settling (SciPy) \u2014 Maxwell creep and dissipation", (
+        "relaxation_time = viscosity / modulus",
+        "strain_rate = stress / viscosity",
+        "dissipated_power = stress * strain_rate",
+    ), (
+        _c("W37-01", "viscosity = relaxation_time * modulus", True, True, SUPPORTED),
+        _c("W37-02", "stress = strain_rate * viscosity", True, True, SUPPORTED),
+        _c("W37-03", "strain_rate = stress / viscosity", True, True, SUPPORTED),
+        _c("W37-04", "dissipated_power = stress * strain_rate", True, True, SUPPORTED),
+    )),
+    Wheel("W38", "Gears & Mechanical Transmissions", (
+        "output_torque = gear_ratio * input_torque",
+        "output_angular_velocity = input_angular_velocity / gear_ratio",
+        "input_power = input_torque * input_angular_velocity",
+        "output_power = output_torque * output_angular_velocity",
+    ), (
+        _c("W38-01", "gear_ratio = output_torque / input_torque", True, True, SUPPORTED),
+        _c("W38-02", "input_angular_velocity = output_angular_velocity * gear_ratio", True, True, SUPPORTED),
+        _c("W38-03", "output_power = input_power", True, True, CONVENTION, note="ideal lossless gearbox; efficiency is a separate dissipation channel"),
+        _c("W38-N1", "output_torque = input_torque / gear_ratio", True, False, NEGATIVE, note="dimensionally plausible but the ratio divides speed, not input torque"),
+    )),
+    Wheel("W39", "Magnetic Circuits & Reluctance", (
+        "magnetomotive_force = turns * current",
+        "magnetic_flux = magnetomotive_force * permeance",
+        "permeance = permeability * area / length",
+    ), (
+        _c("W39-01", "current = magnetomotive_force / turns", True, True, SUPPORTED),
+        _c("W39-02", "magnetic_flux = magnetomotive_force * permeability * area / length", True, True, SUPPORTED, note="linear magnetic circuit; saturation and hysteresis are separate"),
+        _c("W39-03", "permeability = magnetic_flux * length / (magnetomotive_force * area)", True, True, SUPPORTED),
+        _c("W39-N1", "magnetic_flux = magnetomotive_force * permeability", False, False, NEGATIVE, note="permeance is missing length and area; flux is not mmf times permeability"),
+    )),
+    Wheel("W40", "Piezoelectric Transducers", (
+        "charge = piezoelectric_charge_constant * force",
+        "voltage = piezoelectric_voltage_constant * stress * length",
+        "stress = force / area",
+    ), (
+        _c("W40-01", "force = charge / piezoelectric_charge_constant", True, True, SUPPORTED),
+        _c("W40-02", "voltage = piezoelectric_voltage_constant * force * length / area", True, True, SUPPORTED, note="small-signal linear piezoelectricity; hysteresis and depoling are separate"),
+        _c("W40-03", "piezoelectric_voltage_constant = voltage * area / (force * length)", True, True, SUPPORTED),
+        _c("W40-N1", "voltage = piezoelectric_voltage_constant * force", False, False, NEGATIVE, note="the voltage constant acts on stress times length, not force alone"),
+    )),
+    Wheel("W41", "Thermoelectric Transducers", (
+        "voltage = seebeck_coefficient * temperature_difference",
+        "heat_rate = peltier_coefficient * current",
+        "peltier_coefficient = seebeck_coefficient * temperature",
+    ), (
+        _c("W41-01", "seebeck_coefficient = voltage / temperature_difference", True, True, SUPPORTED, note="linear Seebeck regime; temperature-dependent coefficients are separate"),
+        _c("W41-02", "current = heat_rate / peltier_coefficient", True, True, SUPPORTED),
+        _c("W41-03", "temperature = peltier_coefficient / seebeck_coefficient", True, True, SUPPORTED),
+        _c("W41-N1", "voltage = seebeck_coefficient / temperature_difference", False, False, NEGATIVE, note="the Seebeck coefficient multiplies the temperature difference"),
+    )),
+    Wheel("W42", "Elastic Buckling and Bistable Snap-Through", (
+        "critical_load = youngs_modulus * moment_of_inertia_of_section / length^2",
+        "snap_through_state = sign_of(applied_load - critical_load)",
+        "hysteresis_band = release_load_fraction * critical_load",
+    ), (
+        _c("W42-01", "critical_load = youngs_modulus * moment_of_inertia_of_section / length^2", True, True, SUPPORTED, note="Euler buckling of a pin-ended column; end-condition factors are separate conventions"),
+        _c("W42-02", "snap_through_state = sign_of(applied_load - critical_load)", True, True, SUPPORTED, note="the three-level law: below critical the state is -1 (initial well), at critical 0, above critical +1 (snapped-through well)"),
+        _c("W42-03", "hysteresis_band = release_load_fraction * critical_load", True, True, SUPPORTED, note="the snapped state releases at a lower load than it formed; the fraction is the declared hysteresis"),
+        _c("W42-N1", "critical_load = youngs_modulus * area / length^2", False, False, NEGATIVE, note="missing the section moment of inertia; Euler critical load is not EA/L^2"),
+    )),
 )
 
 #: Each absorbed wheel's dimension table (eight axes, rational exponents):
@@ -576,6 +670,14 @@ CENT_TABLES: Dict[str, Dict[str, Tuple[Fraction, ...]]] = {
             "cyclotron_frequency": _d(T=-1), "magnetic_field": _d(M=1, T=-2, I=-1),
             "mass": _d(M=1), "mass_density": _d(L=-3, M=1),
             "permeability": _d(L=1, M=1, T=-2, I=-2)},
+    "W26": {"luminosity": _d(L=2, M=1, T=-3), "stefan_boltzmann_constant": _d(M=1, T=-3, H=-4), "radius": _d(L=1),
+            "temperature": _d(H=1), "schwarzschild_radius": _d(L=1), "gravitational_constant": _d(L=3, M=-1, T=-2),
+            "mass": _d(M=1), "speed_of_light": _d(L=1, T=-1), "orbital_velocity": _d(L=1, T=-1),
+            "orbital_radius": _d(L=1), "hawking_temperature": _d(H=1), "hbar": _d(L=2, M=1, T=-1),
+            "boltzmann_constant": _d(L=2, M=1, T=-2, H=-1)},
+    "W27": {"recession_velocity": _d(L=1, T=-1), "hubble_constant": _d(T=-1), "distance": _d(L=1),
+            "critical_density": _d(L=-3, M=1), "gravitational_constant": _d(L=3, M=-1, T=-2), "hubble_time": _d(T=1),
+            "horizon_distance": _d(L=1), "speed_of_light": _d(L=1, T=-1)},
     "W28": {"flux_quantum": _d(L=2, M=1, T=-2, I=-1), "josephson_voltage": _d(L=2, M=1, T=-3, I=-1),
             "magnetic_flux": _d(L=2, M=1, T=-2, I=-1), "time": _d(T=1)},
     "W29": {"diffusion_coefficient": _d(L=2, T=-1), "gyromagnetic_ratio": _d(M=-1, T=1, I=1),
@@ -589,6 +691,25 @@ CENT_TABLES: Dict[str, Dict[str, Tuple[Fraction, ...]]] = {
     "W34": {"length": _d(L=1), "pipe_radius": _d(L=1), "pressure": _d(L=-1, M=1, T=-2),
             "vascular_resistance": _d(L=-4, M=1, T=-1), "viscosity": _d(L=-1, M=1, T=-1),
             "volume_flow_rate": _d(L=3, T=-1)},
+    "W36": {"pair_penetration": _d(), "pair_energy": _d(), "container_violation": _d(),
+            "wall_energy": _d()},
+    "W37": {"stress": _d(L=-1, M=1, T=-2), "viscosity": _d(L=-1, M=1, T=-1), "modulus": _d(L=-1, M=1, T=-2),
+            "strain_rate": _d(T=-1), "relaxation_time": _d(T=1), "dissipated_power": _d(L=-1, M=1, T=-3)},
+    "W38": {"gear_ratio": _d(), "input_angular_velocity": _d(T=-1, A=1), "input_power": _d(L=2, M=1, T=-3),
+            "input_torque": _d(L=2, M=1, T=-2, A=-1), "output_angular_velocity": _d(T=-1, A=1), "output_power": _d(L=2, M=1, T=-3),
+            "output_torque": _d(L=2, M=1, T=-2, A=-1)},
+    "W39": {"area": _d(L=2), "current": _d(I=1), "length": _d(L=1),
+            "magnetic_flux": _d(L=2, M=1, T=-2, I=-1), "magnetomotive_force": _d(I=1), "permeability": _d(L=1, M=1, T=-2, I=-2),
+            "permeance": _d(L=2, M=1, T=-2, I=-2), "turns": _d()},
+    "W40": {"area": _d(L=2), "charge": _d(T=1, I=1), "force": _d(L=1, M=1, T=-2),
+            "length": _d(L=1), "piezoelectric_charge_constant": _d(L=-1, M=-1, T=3, I=1), "piezoelectric_voltage_constant": _d(L=2, T=-1, I=-1),
+            "stress": _d(L=-1, M=1, T=-2), "voltage": _d(L=2, M=1, T=-3, I=-1)},
+    "W41": {"current": _d(I=1), "heat_rate": _d(L=2, M=1, T=-3), "peltier_coefficient": _d(L=2, M=1, T=-3, I=-1),
+            "seebeck_coefficient": _d(L=2, M=1, T=-3, I=-1, H=-1), "temperature": _d(H=1), "temperature_difference": _d(H=1),
+            "voltage": _d(L=2, M=1, T=-3, I=-1)},
+    "W42": {"applied_load": _d(L=1, M=1, T=-2), "area": _d(L=2), "critical_load": _d(L=1, M=1, T=-2),
+            "hysteresis_band": _d(L=1, M=1, T=-2), "length": _d(L=1), "moment_of_inertia_of_section": _d(L=4),
+            "release_load_fraction": _d(), "snap_through_state": _d(), "youngs_modulus": _d(L=-1, M=1, T=-2)},
 }
 
 #: Every change from the supplied wheels, with its reason.
@@ -669,25 +790,7 @@ DROPPED: Tuple[Dropped, ...] = (
 
 #: Supplied new wheels that are not absorbed, and why.
 NOT_ABSORBED: Dict[str, str] = {
-    "W26": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W27": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
     "W35": "both axioms dropped under rule R; with no axiom the wheel derives nothing",
-    "W36": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W37": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W38": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W39": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W40": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W41": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
-    "W42": "supplied wheel, not in the absorbed cent family (W16-W35); not evaluated for "
-            "absorption in this round",
 }
 
 
@@ -770,9 +873,9 @@ DOMAIN_TABLES: Dict[str, Dict[str, Tuple[Fraction, ...]]] = {
 # ===========================================================================
 
 def cent_wheel(wheel_id: str) -> Wheel:
-    """The absorbed cent wheel with this ``id`` (``"W16"`` ... ``"W34"``).
+    """The absorbed cent wheel with this ``id`` (``"W16"`` ... ``"W42"``).
 
-    Raises ``KeyError`` if there is none (W26, W27, W30, W31 were never
+    Raises ``KeyError`` if there is none (W30 and W31 were never
     supplied; W35 is not absorbed)."""
     for w in CENT_WHEELS:
         if w.id == wheel_id:
