@@ -529,9 +529,9 @@ def ax : Fin 1 → Fin 7 → ℚ :=
 (the zero row for a prime or a name no axiom uses). -/
 def dim : Fin 7 → Fin 8 → ℚ :=
   ![![-3, 0, 0, 0, 0, 1, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![-4, 0, 0, 0, 0, 1, 0, 0],
+   ![2, 0, -1, 0, 0, 0, 0, 0],
+   ![-2, 0, -1, 0, 0, 1, 0, 0],
    ![0, 0, -1, 0, 0, 0, 0, 0],
    ![0, 0, -1, 0, 0, 0, 0, 0],
    ![-3, 0, -1, 0, 0, 1, 0, 0]]
@@ -653,24 +653,25 @@ namespace W24
 
 /-- The coordinates: quantities, then the primes of the coefficients. -/
 def coords : List String :=
-  ["carrier_concentration", "current", "debye_length", "diffusion_constant", "mobility", "permittivity", "saturation_current", "thermal_voltage", "voltage", "#2"]
+  ["carrier_concentration", "charge", "current", "debye_length", "diffusion_constant", "mobility", "permittivity", "saturation_current", "thermal_voltage", "voltage", "#2"]
 
 /-- The axioms' relation vectors, in the order of the wheel: -/
 -- 0: saturation_current = current
 -- 1: diffusion_constant = mobility * thermal_voltage
-def ax : Fin 2 → Fin 10 → ℚ :=
-  ![![0, -1, 0, 0, 0, 0, 1, 0, 0, 0],
-   ![0, 0, 0, 1, -1, 0, 0, -1, 0, 0]]
+def ax : Fin 2 → Fin 11 → ℚ :=
+  ![![0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0],
+   ![0, 0, 0, 0, 1, -1, 0, 0, -1, 0, 0]]
 
 /-- The wheel's dimension table, one row per coordinate over `L M T I H N J A`
 (the zero row for a prime or a name no axiom uses). -/
-def dim : Fin 10 → Fin 8 → ℚ :=
-  ![![0, 0, 0, 0, 0, 0, 0, 0],
+def dim : Fin 11 → Fin 8 → ℚ :=
+  ![![-3, 0, 0, 0, 0, 0, 0, 0],
+   ![0, 0, 1, 1, 0, 0, 0, 0],
    ![0, 0, 0, 1, 0, 0, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![1, 0, 0, 0, 0, 0, 0, 0],
    ![2, 0, -1, 0, 0, 0, 0, 0],
    ![0, -1, 2, 1, 0, 0, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0],
+   ![-3, -1, 4, 2, 0, 0, 0, 0],
    ![0, 0, 0, 1, 0, 0, 0, 0],
    ![2, 1, -3, -1, 0, 0, 0, 0],
    ![0, 0, 0, 0, 0, 0, 0, 0],
@@ -682,30 +683,30 @@ theorem axioms_balanced : ∀ i, dimL dim (ax i) = 0 := by
   fin_cases i <;> (funext a; fin_cases a <;> norm_num [dimL_apply, ax, dim, Fin.sum_univ_succ])
 
 /-- `W24-01`: mobility = diffusion_constant / thermal_voltage -/
-theorem q_W24_01 : Derivable (Set.range ax) ![0, 0, 0, -1, 1, 0, 0, 1, 0, 0] :=
+theorem q_W24_01 : Derivable (Set.range ax) ![0, 0, 0, 0, -1, 1, 0, 0, 1, 0, 0] :=
   derivable_of_combo ax ![0, -1] _
     (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
 
 /-- `W24-02`: thermal_voltage = diffusion_constant / mobility -/
-theorem q_W24_02 : Derivable (Set.range ax) ![0, 0, 0, -1, 1, 0, 0, 1, 0, 0] :=
+theorem q_W24_02 : Derivable (Set.range ax) ![0, 0, 0, 0, -1, 1, 0, 0, 1, 0, 0] :=
   derivable_of_combo ax ![0, -1] _
     (by funext j; fin_cases j <;> norm_num [ax, Fin.sum_univ_succ])
 
-/-- `W24-03`: debye_length = (permittivity * thermal_voltage / (2 * carrier_concentration))^(1/2) -/
-theorem q_W24_03 : ¬ Derivable (Set.range ax) ![1/2, 0, 1, 0, 0, -1/2, 0, -1/2, 0, 1/2] :=
-  not_derivable_of_dot ax ![1, 0, 0, 0, 0, 0, 0, 0, 0, 0] _
+/-- `W24-03`: debye_length = (permittivity * thermal_voltage / (2 * charge * carrier_concentration))^(1/2) -/
+theorem q_W24_03 : ¬ Derivable (Set.range ax) ![1/2, 1/2, 0, 1, 0, 0, -1/2, 0, -1/2, 0, 1/2] :=
+  not_derivable_of_dot ax ![1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] _
     (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
     (by norm_num [Fin.sum_univ_succ])
 
 /-- `W24-N1`: current = saturation_current / voltage -/
-theorem q_W24_N1 : ¬ Derivable (Set.range ax) ![0, 1, 0, 0, 0, 0, -1, 0, 1, 0] :=
-  not_derivable_of_dot ax ![0, 0, 0, 0, 0, 0, 0, 0, 1, 0] _
+theorem q_W24_N1 : ¬ Derivable (Set.range ax) ![0, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0] :=
+  not_derivable_of_dot ax ![0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0] _
     (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
     (by norm_num [Fin.sum_univ_succ])
 
 /-- `H24-F`: diffusion_constant = mobility / thermal_voltage -/
-theorem q_H24_F : ¬ Derivable (Set.range ax) ![0, 0, 0, 1, -1, 0, 0, 1, 0, 0] :=
-  not_derivable_of_dot ax ![0, 0, 0, 1, 0, 0, 0, 1, 0, 0] _
+theorem q_H24_F : ¬ Derivable (Set.range ax) ![0, 0, 0, 0, 1, -1, 0, 0, 1, 0, 0] :=
+  not_derivable_of_dot ax ![0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0] _
     (by intro i; fin_cases i <;> norm_num [ax, Fin.sum_univ_succ])
     (by norm_num [Fin.sum_univ_succ])
 
@@ -1547,21 +1548,6 @@ end W15Dom
 
 namespace Supplied
 
-/-- W21 axiom 2 as supplied: stress_intensity_factor = dimensionless_factor * stress * crack_length^(1/2) -/
-def W21_axiom_2_coords : List String :=
-  ["crack_length", "dimensionless_factor", "stress", "stress_intensity_factor"]
-def W21_axiom_2 : Fin 4 → ℚ := ![-1/2, -1, -1, 1]
-def W21_axiom_2_dim : Fin 4 → Fin 8 → ℚ :=
-  ![![1, 0, 0, 0, 0, 0, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0],
-   ![-1, 1, -2, 0, 0, 0, 0, 0],
-   ![-1, 1, -2, 0, 0, 0, 0, 0]]
-/-- Its residual on the supplied table: not zero at SI7 (axis L). -/
-theorem W21_axiom_2_residual : dimL W21_axiom_2_dim W21_axiom_2 = ![-1/2, 0, 0, 0, 0, 0, 0, 0] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, W21_axiom_2, W21_axiom_2_dim, Fin.sum_univ_succ]
-theorem W21_axiom_2_unbalanced : dimL W21_axiom_2_dim W21_axiom_2 ≠ 0 := by
-  rw [W21_axiom_2_residual]; intro h; have := congrFun h 0; norm_num at this
-
 /-- W22 axiom 2 as supplied: rate_constant = pre_exponential_factor * concentration / rate_constant -/
 def W22_axiom_2_coords : List String :=
   ["concentration", "pre_exponential_factor", "rate_constant"]
@@ -1603,65 +1589,6 @@ theorem W25_axiom_2_residual : dimL W25_axiom_2_dim W25_axiom_2 = ![-1/2, -1/2, 
   funext a; fin_cases a <;> norm_num [dimL_apply, W25_axiom_2, W25_axiom_2_dim, Fin.sum_univ_succ]
 theorem W25_axiom_2_unbalanced : dimL W25_axiom_2_dim W25_axiom_2 ≠ 0 := by
   rw [W25_axiom_2_residual]; intro h; have := congrFun h 0; norm_num at this
-
-/-- W29 axiom 2 as supplied: spin_diffusion_length = diffusion_coefficient * time^(1/2) -/
-def W29_axiom_2_coords : List String :=
-  ["diffusion_coefficient", "spin_diffusion_length", "time"]
-def W29_axiom_2 : Fin 3 → ℚ := ![-1, 1, -1/2]
-def W29_axiom_2_dim : Fin 3 → Fin 8 → ℚ :=
-  ![![2, 0, -1, 0, 0, 0, 0, 0],
-   ![1, 0, 0, 0, 0, 0, 0, 0],
-   ![0, 0, 1, 0, 0, 0, 0, 0]]
-/-- Its residual on the supplied table: not zero at SI7 (axis L). -/
-theorem W29_axiom_2_residual : dimL W29_axiom_2_dim W29_axiom_2 = ![-1, 0, 1/2, 0, 0, 0, 0, 0] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, W29_axiom_2, W29_axiom_2_dim, Fin.sum_univ_succ]
-theorem W29_axiom_2_unbalanced : dimL W29_axiom_2_dim W29_axiom_2 ≠ 0 := by
-  rw [W29_axiom_2_residual]; intro h; have := congrFun h 0; norm_num at this
-
-/-- W32 axiom 2 as supplied: capillary_height = surface_tension * wetting_coefficient / (viscosity * capillary_radius) -/
-def W32_axiom_2_coords : List String :=
-  ["capillary_height", "capillary_radius", "surface_tension", "viscosity", "wetting_coefficient"]
-def W32_axiom_2 : Fin 5 → ℚ := ![1, 1, -1, 1, -1]
-def W32_axiom_2_dim : Fin 5 → Fin 8 → ℚ :=
-  ![![1, 0, 0, 0, 0, 0, 0, 0],
-   ![1, 0, 0, 0, 0, 0, 0, 0],
-   ![0, 1, -2, 0, 0, 0, 0, 0],
-   ![-1, 1, -1, 0, 0, 0, 0, 0],
-   ![0, 0, 0, 0, 0, 0, 0, 0]]
-/-- Its residual on the supplied table: not zero at SI7 (axis L). -/
-theorem W32_axiom_2_residual : dimL W32_axiom_2_dim W32_axiom_2 = ![1, 0, 1, 0, 0, 0, 0, 0] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, W32_axiom_2, W32_axiom_2_dim, Fin.sum_univ_succ]
-theorem W32_axiom_2_unbalanced : dimL W32_axiom_2_dim W32_axiom_2 ≠ 0 := by
-  rw [W32_axiom_2_residual]; intro h; have := congrFun h 0; norm_num at this
-
-/-- W34 axiom 1 as supplied: vascular_resistance = viscosity * length / pipe_radius^4 -/
-def W34_axiom_1_coords : List String :=
-  ["length", "pipe_radius", "vascular_resistance", "viscosity"]
-def W34_axiom_1 : Fin 4 → ℚ := ![-1, 4, 1, -1]
-def W34_axiom_1_dim : Fin 4 → Fin 8 → ℚ :=
-  ![![1, 0, 0, 0, 0, 0, 0, 0],
-   ![1, 0, 0, 0, 0, 0, 0, 0],
-   ![-4, 1, 1, 0, 0, 0, 0, 0],
-   ![-1, 1, -1, 0, 0, 0, 0, 0]]
-/-- Its residual on the supplied table: not zero at SI7 (axis T). -/
-theorem W34_axiom_1_residual : dimL W34_axiom_1_dim W34_axiom_1 = ![0, 0, 2, 0, 0, 0, 0, 0] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, W34_axiom_1, W34_axiom_1_dim, Fin.sum_univ_succ]
-theorem W34_axiom_1_unbalanced : dimL W34_axiom_1_dim W34_axiom_1 ≠ 0 := by
-  rw [W34_axiom_1_residual]; intro h; have := congrFun h 2; norm_num at this
-
-/-- W34 axiom 2 as supplied: volume_flow_rate = pressure / vascular_resistance -/
-def W34_axiom_2_coords : List String :=
-  ["pressure", "vascular_resistance", "volume_flow_rate"]
-def W34_axiom_2 : Fin 3 → ℚ := ![-1, 1, 1]
-def W34_axiom_2_dim : Fin 3 → Fin 8 → ℚ :=
-  ![![-1, 1, -2, 0, 0, 0, 0, 0],
-   ![-4, 1, 1, 0, 0, 0, 0, 0],
-   ![3, 0, -1, 0, 0, 0, 0, 0]]
-/-- Its residual on the supplied table: not zero at SI7 (axis T). -/
-theorem W34_axiom_2_residual : dimL W34_axiom_2_dim W34_axiom_2 = ![0, 0, 2, 0, 0, 0, 0, 0] := by
-  funext a; fin_cases a <;> norm_num [dimL_apply, W34_axiom_2, W34_axiom_2_dim, Fin.sum_univ_succ]
-theorem W34_axiom_2_unbalanced : dimL W34_axiom_2_dim W34_axiom_2 ≠ 0 := by
-  rw [W34_axiom_2_residual]; intro h; have := congrFun h 2; norm_num at this
 
 /-- W35 axiom 1 as supplied: membrane_voltage = temperature / valence -/
 def W35_axiom_1_coords : List String :=

@@ -121,7 +121,7 @@ MEASURE_BATTERY: Tuple[Question, ...] = (
     # W24 Semiconductor device physics
     _q("W24-01", "W24", "mobility = diffusion_constant / thermal_voltage", LAW, CASE, "Einstein relation D = mu V_T"),
     _q("W24-02", "W24", "thermal_voltage = diffusion_constant / mobility", LAW, CASE, "Einstein relation"),
-    _q("W24-03", "W24", "debye_length = (permittivity * thermal_voltage / (2 * carrier_concentration))^(1/2)", NOT_A_LAW, CASE, "the elementary charge is missing: dimensionally wrong"),
+    _q("W24-03", "W24", "debye_length = (permittivity * thermal_voltage / (2 * charge * carrier_concentration))^(1/2)", NOT_A_LAW, CASE, "the elementary charge is missing: dimensionally wrong"),
     _q("W24-N1", "W24", "current = saturation_current / voltage", NOT_A_LAW, CONTROL, "dimensionally wrong"),
     _q("H24-F", "W24", "diffusion_constant = mobility / thermal_voltage", NOT_A_LAW, HELD_OUT, "inverts the Einstein relation"),
     # W25 Plasma physics (cyclotron and Alfven corrected under rule R)

@@ -279,6 +279,10 @@ def residual(text: str, table: Mapping[str, Sequence[Fraction]]
     for k, e in relation_vector_q(text).items():
         if k.startswith("#"):
             continue
+        # sign_of(...) is a dimensionless +/-1 factor: contributes no axes and
+        # needs no table entry.
+        if k.startswith("sign_of"):
+            continue
         if k not in table:
             return None
         for i, x in enumerate(table[k]):
@@ -449,7 +453,7 @@ CENT_WHEELS: Tuple[Wheel, ...] = (
     ), (
         _c("W24-01", "mobility = diffusion_constant / thermal_voltage", True, True, SUPPORTED),
         _c("W24-02", "thermal_voltage = diffusion_constant / mobility", True, True, SUPPORTED),
-        _c("W24-03", "debye_length = (permittivity * thermal_voltage / (2 * carrier_concentration))^(1/2)",
+        _c("W24-03", "debye_length = (permittivity * thermal_voltage / (2 * charge * carrier_concentration))^(1/2)",
            True, False, CONVENTION, None,
            note="Debye length involves sqrt; full derivation needs the charge term. Its "
                 "quantities are not in the W24 table (the supplied dimension flag is kept; "
@@ -558,12 +562,16 @@ CENT_TABLES: Dict[str, Dict[str, Tuple[Fraction, ...]]] = {
             "stress_intensity_factor": _d(L=Fraction(-1, 2), M=1, T=-2),
             "surface_energy": _d(M=1, T=-2), "youngs_modulus": _d(L=-1, M=1, T=-2)},
     "W22": {"concentration": _d(L=-3, N=1), "pre_exponential_factor": _d(T=-1),
-            "rate_constant": _d(T=-1), "reaction_rate": _d(L=-3, T=-1, N=1)},
+            "rate_constant": _d(T=-1), "reaction_rate": _d(L=-3, T=-1, N=1),
+            "concentration_gradient": _d(L=-4, N=1), "diffusion_flux": _d(L=-2, T=-1, N=1),
+            "diffusion_coefficient": _d(L=2, T=-1)},
     "W23": {"charge": _d(T=1, I=1), "current": _d(I=1), "faraday_constant": _d(T=1, I=1, N=-1),
             "mass": _d(M=1), "molar_mass": _d(M=1, N=-1), "time": _d(T=1)},
     "W24": {"current": _d(I=1), "diffusion_constant": _d(L=2, T=-1),
             "mobility": _d(M=-1, T=2, I=1), "saturation_current": _d(I=1),
-            "thermal_voltage": _d(L=2, M=1, T=-3, I=-1)},
+            "thermal_voltage": _d(L=2, M=1, T=-3, I=-1),
+            "charge": _d(T=1, I=1), "permittivity": _d(L=-3, M=-1, T=4, I=2),
+            "carrier_concentration": _d(L=-3), "debye_length": _d(L=1)},
     "W25": {"alfven_velocity": _d(L=1, T=-1), "charge": _d(T=1, I=1),
             "cyclotron_frequency": _d(T=-1), "magnetic_field": _d(M=1, T=-2, I=-1),
             "mass": _d(M=1), "mass_density": _d(L=-3, M=1),
@@ -586,10 +594,17 @@ CENT_TABLES: Dict[str, Dict[str, Tuple[Fraction, ...]]] = {
 #: Every change from the supplied wheels, with its reason.
 CORRECTIONS: Tuple[Correction, ...] = (
     Correction("W21", "axiom", "axiom 1",
-               "fracture_toughness = (2 * youngs_modulus * surface_energy / (314159265 * crack_length))^(1/2)",
+               "fracture_toughness^2 = 2 * youngs_modulus * surface_energy",
                "fracture_toughness = (2 * youngs_modulus * surface_energy / crack_length)^(1/2)",
-               "d", "314159265 stands for pi (it is pi times 10^8, and pi is irrational): dropped as "
-                    "W17-03 drops 4 pi^2; the item's own case W21-01 already drops it"),
+               "a", "the supplied form dropped the crack_length (and the root); Griffith's law keeps "
+                    "crack_length, so the absorbed form restores it"),
+    Correction("W21", "case", "W21-01",
+               "surface_energy = fracture_toughness^2 / (2 * youngs_modulus)",
+               "surface_energy = fracture_toughness^2 * crack_length / (2 * youngs_modulus)",
+               "a", "with axiom 1 (restores crack_length)"),
+    Correction("W21", "table", "fracture_toughness", "L^-1/2 M T^-2", "L^-1 M T^-2", "c",
+               "the supplied entry followed the squared axiom; the absorbed entry follows the " \
+               "root form kept in axiom 1"),
     Correction("W21", "table", "stress_intensity_factor", "L^-1 M T^-2", "L^-1/2 M T^-2", "c",
                "K = Y sigma a^(1/2) is in Pa m^(1/2); the supplied entry made axiom 2 fail at SI7"),
     Correction("W25", "axiom", "axiom 1", "cyclotron_frequency = magnetic_field / mass",
@@ -614,6 +629,9 @@ CORRECTIONS: Tuple[Correction, ...] = (
     Correction("W34", "table", "vascular_resistance", "L^-4 M T^1", "L^-4 M T^-1", "c",
                "hydraulic resistance is Pa s / m^3; the supplied entry made both W34 axioms fail "
                "at SI7 (8 / pi of Poiseuille dropped, as declared)"),
+    Correction("W32", "table", "wetting_coefficient", "L T", "1", "c",
+               "the wetting coefficient is a contact angle, dimensionless; the supplied entry " \
+               "made it a length-time quantity"),
     Correction("W17", "flag", "W17-03 expected_dimensional_explicit", "False", "True", "table",
                "no W17 quantity carries the angle axis"),
     Correction("W20", "flag", "W20-N1 expected_dimensional", "False", "True", "table",
@@ -651,7 +669,16 @@ DROPPED: Tuple[Dropped, ...] = (
 
 #: Supplied new wheels that are not absorbed, and why.
 NOT_ABSORBED: Dict[str, str] = {
+    "W26": "supplied but not absorbed: out of scope of this round",
+    "W27": "supplied but not absorbed: out of scope of this round",
     "W35": "both axioms dropped under rule R; with no axiom the wheel derives nothing",
+    "W36": "out of scope of this round: a numerical SAT substrate, not a formula wheel",
+    "W37": "out of scope of this round: viscoelastic settling, not a formula wheel",
+    "W38": "out of scope of this round: gears and transmissions, not a formula wheel",
+    "W39": "out of scope of this round: magnetic circuits, not a formula wheel",
+    "W40": "out of scope of this round: piezoelectric transducers, not a formula wheel",
+    "W41": "out of scope of this round: thermoelectric transducers, not a formula wheel",
+    "W42": "out of scope of this round: elastic buckling, not a formula wheel",
 }
 
 
