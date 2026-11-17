@@ -149,6 +149,27 @@ def lean_root() -> Optional[Path]:
     return _lt.lean_root()
 
 
+def lean_available() -> bool:
+    """Whether the Lean development is present (optional check)."""
+    import importlib
+    _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
+    return _lt.lean_available()
+
+
+def lean_file_for(name: str):
+    """The Lean file a declaration lives in (or would), plus present flag."""
+    import importlib
+    _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
+    return _lt.lean_file_for(name)
+
+
+def source_label() -> str:
+    """``lean`` when the development is present, else ``python``."""
+    import importlib
+    _lt = importlib.import_module("glm_universal.reasoning.lean_tree")
+    return _lt.source_label()
+
+
 def lean_files() -> Tuple[Path, ...]:
     """Every ``.lean`` file of the development, in a stable order."""
     import importlib
