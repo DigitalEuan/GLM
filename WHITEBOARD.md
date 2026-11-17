@@ -155,8 +155,13 @@ GLM-systems focus:
    with sorted-list / `_freeze`+`_thaw` round-trips; verified equal to the
    recomputed versions. `feature_table` is book-served; `legacy_citation_graph`
    and `tiebreak_report` left as `@memo`-only.
-4. **Investigate the pre-existing `lean_address` duplicate-name failures**
-   (9604 order entries vs 9476 declarations) — likely a parser edge case.
+4. **Investigate the pre-existing `lean_address` duplicate-name failures** —
+   *investigated this round.* Root cause is not the parser: 128 duplicate
+   full names arise because multiple Lean files share a namespace (e.g.
+   `Cube/Stabiliser.lean` and `CubeStabiliser.lean` both `namespace GLM.CubeStab`),
+   so `declarations()` yields 9604 entries for 9476 unique names. Consolidating
+   these held copies would change the tree digest and require a rebuild (owner's
+   Lean toolchain), so left untouched; recorded rather than hidden.
 5. **Refresh the iteration-cost study's blast-radius table** to the current
    tree (264 units) so `test_corpus` stops failing on a stale baseline.
 6. **Tighten the relay cache key** to the two digest strings rather than all
