@@ -118,6 +118,7 @@ from ..derived import memo
 from .. import integrity
 from . import analogy
 from . import llvq_table
+from . import lean_book as _lb
 
 # ===========================================================================
 #  Locating the Lean development
@@ -747,7 +748,15 @@ def scoped_cited_names(decl: Declaration, full: "frozenset | set",
 
 @memo
 def declaration_names() -> frozenset:
-    """Every full name of the development, as a set."""
+    """Every full name of the development, as a set.
+
+    Served from the stored book when it is present, so an answering path
+    that only needs the names does not walk the development.  Falls back to
+    the tree when no book is available.
+    """
+    stored = _lb.declaration_names()
+    if stored:
+        return stored
     return frozenset(d.name for d in declarations())
 
 
@@ -835,7 +844,16 @@ def features_of(decl: Declaration, cites: int = 0, cited_by: int = 0
 
 @memo
 def feature_table() -> Dict[str, Tuple[int, ...]]:
-    """Every declaration's feature vector, citation counts included."""
+    """Every declaration's feature vector, citation counts included.
+
+    Served from the stored book when it carries features, so an answering
+    path that only needs the vectors does not walk the development.  Falls
+    back to recomputing from the tree when no book (or no stored features)
+    is available.
+    """
+    stored = _lb.features()
+    if stored:
+        return {name: tuple(vec) for name, vec in stored.items()}
     graph = citation_graph()
     fan_out: Dict[str, int] = {name: 0 for name in graph}
     for source, targets in graph.items():

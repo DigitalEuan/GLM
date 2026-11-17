@@ -129,6 +129,35 @@ touches no answer; the item's record carries the numbers.
 **Two gates remain open**, each naming its own remainder under its section
 below.
 
+---
+
+## Follow-ups (brainstorm, 17 Nov 2026)
+
+Most valuable next items, ranked by leverage, for the optional-static-Lean /
+GLM-systems focus:
+
+1. **Serve the router's two Lean lookups (`feature_table`, `declaration_names`)
+   from the stored book** — *taken this round.* `lean_address.feature_table()`
+   and `lean_address.declaration_names()` now read from `lean_book` (features +
+   declaration rows) instead of walking the development; both fall back to the
+   tree when no book is present. Recomputed values match byte-for-byte.
+2. **Fix the lean-tree split's dependency tracking.** Builders (`corpus/measurements`,
+   `citation_reference`, `retrieval`, `native_parity`, `native_words`,
+   `corpus_resample`, `stack`) should import `lean_tree` directly so the
+   sign-off ledger still flags them; answering paths keep the `lean_address`
+   importlib shim.
+3. **Extend disk caching to the other expensive memoized derivations** —
+   `citation_graph`, `feature_table` (now book-served), `separation_report`,
+   `legacy_citation_graph`, `tiebreak_report` via `DerivedStore` + freeze/thaw.
+4. **Investigate the pre-existing `lean_address` duplicate-name failures**
+   (9604 order entries vs 9476 declarations) — likely a parser edge case.
+5. **Refresh the iteration-cost study's blast-radius table** to the current
+   tree (264 units) so `test_corpus` stops failing on a stale baseline.
+6. **Tighten the relay cache key** to the two digest strings rather than all
+   source files.
+7. **Chat-surface *carriers* reading change** — blocked on a fresh held-out set.
+8. **Lean-optional verification** — assert no Python path shells out to `lake`.
+
 1. **P2, the Lean toolchain and the owner's build record.** Install elan +
   Lean 4.28 + Mathlib here (about 6–8 GB and hours on two cores) and run
   `scripts/rebuild_lean.sh`, or take the owner-machine build record as the
