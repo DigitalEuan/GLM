@@ -1,0 +1,339 @@
+"""``glm_universal.wheels.quantity_graph`` -- the typed quantity graph of the
+formula wheels.
+
+*Created 17 November 2026 (the cent-wheels round; ``WHITEBOARD.md`` item 2).*
+
+What this module is
+-------------------
+A vertex is a **typed quantity**: a pair ``(wheel, name)`` -- ``("W5",
+"mass")``, ``("W36", "pair_energy")``.  The same *name* in two wheels is two
+vertices until an edge declares them one measurand: a **junction** (``W5 mass
+= W12 mass``).  A **non-identity** forbids the identification even where the
+names coincide (``W3 energy`` against ``W14 energy``: stored charge against
+stored current).  The edges are the absorbed item's own
+(``source_material/ToDo/cent_compiler_v12/wheels/W*.json``, ``junctions`` and
+``non_identities``), transcribed here because the package never reads
+``source_material/`` at run time (D20).
+
+Contracting the edges gives the **identity classes**: the sets of typed
+quantities a cross-wheel derivation may eliminate against one another.  This
+is the graph the licensing needs, and nothing more: the algebra stays in
+:mod:`glm_universal.engineering.union` and
+:mod:`glm_universal.engineering.domains`, which already split every shared
+name per wheel (``energy@W5``) and join only across a declared edge.
+
+What it is not
+--------------
+The contraction is a quotient of the free abelian group on the typed
+quantities by the subgroup the edges generate -- a **graph contraction**, or a
+pushout of free abelian groups.  It is not an embedding into the Leech lattice
+``Lambda_24``: nearest-neighbour edges on 24 vertices generate the root
+lattice ``A_23``, whereas ``Lambda_24`` needs a Golay-shaped incidence (the
+Miracle Octad Generator is one presentation of that code), which the supplied
+junctions do not have.  The 24 absorbed wheels do index 24 coordinates, so the
+resonance is real, but the faithful object here is the quotient, not the
+lattice.
+
+Audit
+-----
+The supplied table is kept **verbatim**; :func:`audit` reports what it cannot
+use rather than silently repairing it.  Six endpoints name a quantity their
+wheel does not hold: one junction (``W4 energy``) and five non-identities.
+Three of the five are **vacuous as transcribed** -- the record names the
+quantity in one wheel only, so ``W39 magnetomotive_force`` is guarded against
+``W1 magnetomotive_force``, which ``W1`` does not hold (the intended pair is
+``W1 current``); the same holds for ``W41 temperature_difference`` and ``W42
+moment_of_inertia_of_section``.  Fifteen junctions are declared in one
+direction only.  :func:`edges` takes the symmetric closure of the sound
+edges, so a one-way declaration still joins its two vertices; an unknown
+endpoint is dropped from the graph but stays in the audit.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Dict, FrozenSet, List, Mapping, Optional, Sequence, Tuple
+
+__all__ = [
+    "Endpoint", "Junction", "NonIdentity", "JUNCTIONS", "NON_IDENTITIES",
+    "quantities_by_wheel", "audit", "edges", "classes", "wheels_of",
+    "may_identify", "graph_report",
+]
+
+#: A typed quantity: ``(wheel id, quantity name)``.
+Endpoint = Tuple[str, str]
+#: An undirected edge between two typed quantities.
+Edge = FrozenSet[Endpoint]
+
+
+@dataclass(frozen=True)
+class Junction:
+    """Two typed quantities declared one measurand, and why."""
+
+    a: Endpoint
+    b: Endpoint
+    reason: str
+
+
+@dataclass(frozen=True)
+class NonIdentity:
+    """Two typed quantities whose names coincide but which must stay apart."""
+
+    a: Endpoint
+    b: Endpoint
+    reason: str
+
+
+#: The absorbed item's ``junctions``, verbatim:
+#: ``(wheel, name, other_wheel, name_in_other_wheel, reason)``.
+_JUNCTIONS = (
+    ('W1', 'current', 'W14', 'current', "the inductor's current = the circuit's current"),
+    ('W1', 'current', 'W15', 'current', "the charge and energy are carried by the circuit's current"),
+    ('W1', 'power', 'W15', 'power', "the energy is delivered by the circuit's power"),
+    ('W10', 'speed_of_light', 'W9', 'wave_speed', "a photon's wave_speed = speed_of_light (light is the wave)"),
+    ('W10', 'frequency', 'W9', 'frequency', "a photon's frequency = the wave's frequency (a photon is a wave)"),
+    ('W11', 'velocity', 'W5', 'velocity', "moving body's velocity = uniform-motion velocity"),
+    ('W11', 'length', 'W12', 'length', 'the length the fluid moves = length of the swept prism'),
+    ('W12', 'mass', 'W5', 'mass', 'the body whose density is read is the body that moves'),
+    ('W12', 'area', 'W6', 'area', "the flow's cross-section = swept-prism cross-section"),
+    ('W12', 'length', 'W11', 'length', 'the length the fluid moves = length of the swept prism'),
+    ('W13', 'frequency', 'W9', 'frequency', "the oscillator's frequency = the wave's frequency"),
+    ('W13', 'mass', 'W5', 'mass', 'the oscillating body = the dynamic body'),
+    ('W14', 'capacitance', 'W3', 'capacitance', "the LC circuit's capacitor = the electrostatics capacitor"),
+    ('W14', 'current', 'W1', 'current', "the inductor's current = the circuit's current"),
+    ('W15', 'current', 'W1', 'current', "the charge and energy are carried by the circuit's current"),
+    ('W15', 'power', 'W1', 'power', "the energy is delivered by the circuit's power"),
+    ('W15', 'charge', 'W3', 'charge', 'the charge moved = the charge stored'),
+    ('W3', 'capacitance', 'W14', 'capacitance', "the LC circuit's capacitor = the electrostatics capacitor"),
+    ('W3', 'charge', 'W15', 'charge', 'the charge moved = the charge stored'),
+    ('W36', 'pair_penetration', 'W21', 'stress', "the crack engine's mean stress is the mean positive SAT penetration"),
+    ('W36', 'pair_energy', 'W4', 'energy', 'cluster elastic energy = sum of squared penetrations'),
+    ('W36', 'pair_penetration', 'W37', 'stress', 'the settling engine reads the SAT penetration as its elastic stress input'),
+    ('W37', 'modulus', 'W20', 'youngs_modulus', "the piezo engine's stiffness feeds the settle's relaxation time"),
+    ('W37', 'stress', 'W36', 'pair_penetration', 'the settle converts SAT penetration into stress'),
+    ('W38', 'input_torque', 'W4', 'torque', 'gearbox input torque is the shaft torque'),
+    ('W38', 'input_angular_velocity', 'W4', 'angular_velocity', 'gearbox input speed is the shaft speed'),
+    ('W38', 'input_power', 'W5', 'power', 'mechanical power is the translated body power'),
+    ('W39', 'magnetic_flux', 'W16', 'flux', 'magnetic-circuit flux is induction flux'),
+    ('W40', 'voltage', 'W1', 'voltage', 'piezoelectric voltage is a circuit voltage'),
+    ('W40', 'stress', 'W20', 'stress', 'the piezo stack stress is the continuum stress'),
+    ('W40', 'force', 'W5', 'force', 'the piezo stack force is the dynamic force'),
+    ('W41', 'voltage', 'W1', 'voltage', 'thermoelectric voltage is a circuit voltage'),
+    ('W41', 'temperature', 'W8', 'temperature', 'the thermoelectric junction temperature is thermodynamic temperature'),
+    ('W41', 'heat_rate', 'W15', 'power', 'Peltier heat rate is the power channel'),
+    ('W42', 'youngs_modulus', 'W21', 'youngs_modulus', 'the same elastic modulus governs fracture and buckling'),
+    ('W42', 'applied_load', 'W5', 'force', 'a column load is a force on a mechanical junction'),
+    ('W5', 'velocity', 'W11', 'velocity', "moving body's velocity = uniform-motion velocity"),
+    ('W5', 'mass', 'W12', 'mass', 'the body whose density is read is the body that moves'),
+    ('W5', 'mass', 'W13', 'mass', 'the oscillating body = the dynamic body'),
+    ('W6', 'area', 'W12', 'area', "the flow's cross-section = swept-prism cross-section"),
+    ('W9', 'frequency', 'W13', 'frequency', "the oscillator's frequency = the wave's frequency"),
+    ('W9', 'wave_speed', 'W10', 'speed_of_light', "a photon's wave_speed = speed_of_light (light is the wave)"),
+    ('W9', 'frequency', 'W10', 'frequency', "a photon's frequency = the wave's frequency (a photon is a wave)"),
+)
+
+#: The absorbed item's ``non_identities``, verbatim:
+#: ``(wheel, name, other_wheel, reason)``; the other endpoint is the same
+#: name in ``other_wheel``.
+_NON_IDENTITIES = (
+    ('W11', 'time', 'W15', 'a travel time against a charging time'),
+    ('W13', 'angular_frequency', 'W14', 'a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)'),
+    ('W13', 'angle', 'W9', "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"),
+    ('W14', 'angular_frequency', 'W13', 'a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)'),
+    ('W14', 'energy', 'W3', "the capacitor's stored energy against the inductor's"),
+    ('W15', 'energy', 'W3', 'energy stored in a capacitor against energy delivered over a time'),
+    ('W15', 'time', 'W11', 'a travel time against a charging time'),
+    ('W3', 'energy', 'W14', "the capacitor's stored energy against the inductor's"),
+    ('W3', 'energy', 'W15', 'energy stored in a capacitor against energy delivered over a time'),
+    ('W36', 'energy', 'W5', "the substrate's pair_energy is L2-squared penetration, not the flywheel's kinetic energy; only the relaxation channel joins"),
+    ('W37', 'relaxation_time', 'W4', "the flywheel's timescale is inertial (I/E), not viscous (eta/E); only the damped swing borrows the channel"),
+    ('W39', 'magnetomotive_force', 'W1', 'ampere-turns has the dimension of current but is not current; identifying them would erase the turns count'),
+    ('W41', 'temperature_difference', 'W8', 'a temperature difference and an absolute temperature share a dimension but not a reference point'),
+    ('W42', 'moment_of_inertia_of_section', 'W4', "a section's second moment of area is not a rotor's mass moment of inertia; identifying them would give a column the dynamics of a flywheel"),
+    ('W9', 'angle', 'W13', "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"),
+)
+
+JUNCTIONS: Tuple[Junction, ...] = tuple(
+    Junction((a, na), (b, nb), reason) for a, na, b, nb, reason in _JUNCTIONS)
+NON_IDENTITIES: Tuple[NonIdentity, ...] = tuple(
+    NonIdentity((a, name), (b, name), reason) for a, name, b, reason in _NON_IDENTITIES)
+
+
+# ===========================================================================
+# 1.  THE VERTICES
+# ===========================================================================
+
+def quantities_by_wheel() -> Dict[str, FrozenSet[str]]:
+    """Every absorbed wheel's quantity names, the fifteen and the twenty-four
+    cent wheels together.  Imported here, never at package import, so the
+    graph cannot close an import cycle."""
+    from ..engineering.wheels import wheel_quantities
+    from . import ALL_WHEELS
+    from .cent_wheels import CENT_WHEELS
+
+    out: Dict[str, FrozenSet[str]] = {}
+    for w in tuple(ALL_WHEELS) + tuple(CENT_WHEELS):
+        out[w.id] = frozenset(wheel_quantities(w))
+    return out
+
+
+def _edge(a: Endpoint, b: Endpoint) -> Edge:
+    return frozenset((a, b))
+
+
+def _unknown_endpoints(junctions: Sequence[Junction],
+                       non_identities: Sequence[NonIdentity],
+                       quantities: Mapping[str, FrozenSet[str]]
+                       ) -> List[Tuple[str, Endpoint]]:
+    out: List[Tuple[str, Endpoint]] = []
+    for pair in [(j.a, j.b) for j in junctions] + \
+                [(n.a, n.b) for n in non_identities]:
+        for e in pair:
+            if e[0] not in quantities:
+                out.append((f"no absorbed wheel {e[0]}", e))
+            elif e[1] not in quantities[e[0]]:
+                out.append((f"no quantity {e[1]!r} in {e[0]}", e))
+    return out
+
+
+def audit(junctions: Sequence[Junction] = JUNCTIONS,
+          non_identities: Sequence[NonIdentity] = NON_IDENTITIES) -> Dict[str, object]:
+    """What the supplied table cannot be used for, measured.
+
+    ``unknown_endpoints`` -- an edge naming a wheel or a quantity that wheel
+    does not hold; ``one_way`` -- a junction whose reverse is not declared
+    (the graph symmetrises it, but the declaration is asymmetric);
+    ``contradictions`` -- the same edge declared both a junction and a
+    non-identity; ``duplicates`` -- the same direction declared twice (a
+    mirror pair, declared both ways, is not a duplicate).
+    """
+    quantities = quantities_by_wheel()
+    unknown = _unknown_endpoints(junctions, non_identities, quantities)
+    directed = {(j.a, j.b) for j in junctions}
+    one_way = [j for j in junctions if (j.b, j.a) not in directed]
+    junction_edges = [_edge(j.a, j.b) for j in junctions]
+    blocked = {_edge(n.a, n.b) for n in non_identities}
+    contradictions = [(sorted(e), next(n.reason for n in non_identities
+                                       if _edge(n.a, n.b) == e))
+                      for e in junction_edges if e in blocked]
+    seen: Dict[Tuple[Endpoint, Endpoint], int] = {}
+    for j in junctions:
+        seen[(j.a, j.b)] = seen.get((j.a, j.b), 0) + 1
+    duplicates = [[list(a), list(b)] for (a, b), n in seen.items() if n > 1]
+    return {"unknown_endpoints": unknown, "one_way": one_way,
+            "contradictions": contradictions, "duplicates": duplicates}
+
+
+# ===========================================================================
+# 2.  THE EDGES AND THE IDENTITY CLASSES
+# ===========================================================================
+
+def edges(junctions: Sequence[Junction] = JUNCTIONS,
+          non_identities: Sequence[NonIdentity] = NON_IDENTITIES) -> Tuple[Edge, ...]:
+    """The sound junction edges: both endpoints exist and no non-identity
+    blocks the pair.  Undirected, so a one-way declaration joins its two
+    vertices like any other."""
+    quantities = quantities_by_wheel()
+    blocked = {_edge(n.a, n.b) for n in non_identities}
+    out: List[Edge] = []
+    for j in junctions:
+        if any(e[0] not in quantities or e[1] not in quantities[e[0]]
+               for e in (j.a, j.b)):
+            continue
+        e = _edge(j.a, j.b)
+        if e in blocked or e in out:
+            continue
+        out.append(e)
+    return tuple(out)
+
+
+def classes(junctions: Sequence[Junction] = JUNCTIONS,
+            non_identities: Sequence[NonIdentity] = NON_IDENTITIES
+            ) -> Dict[Endpoint, Tuple[Endpoint, ...]]:
+    """``(wheel, name) -> the typed quantities it is one variable with``,
+    by union-find over :func:`edges` (a singleton when nothing joins it)."""
+    quantities = quantities_by_wheel()
+    nodes = [(w, q) for w, names in quantities.items() for q in names]
+    parent: Dict[Endpoint, Endpoint] = {n: n for n in nodes}
+
+    def find(x: Endpoint) -> Endpoint:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for e in edges(junctions, non_identities):
+        a, b = tuple(e)
+        if a not in parent or b not in parent:
+            continue
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[ra] = rb
+    groups: Dict[Endpoint, List[Endpoint]] = {}
+    for n in nodes:
+        groups.setdefault(find(n), []).append(n)
+    order = {w: i for i, w in enumerate(quantities)}
+    return {n: tuple(sorted(groups[find(n)], key=lambda x: (order.get(x[0], 99), x[0], x[1])))
+            for n in nodes}
+
+
+def wheels_of(endpoint: Endpoint,
+              table: Optional[Mapping[Endpoint, Tuple[Endpoint, ...]]] = None
+              ) -> Tuple[str, ...]:
+    """The wheels whose copy of a quantity is one variable with ``endpoint``'s."""
+    table = classes() if table is None else table
+    return tuple(dict.fromkeys(w for w, _ in table.get(endpoint, (endpoint,))))
+
+
+def may_identify(a: Endpoint, b: Endpoint) -> Optional[str]:
+    """``None`` when ``a`` and ``b`` may be one variable in a derivation, else
+    the reason they may not.
+
+    The same wheel may always identify its own name; across wheels a declared
+    junction is required, and a declared non-identity outranks it.  The
+    relation is transitive: two quantities in one identity class are one
+    variable even when no single junction names the pair.
+    """
+    quantities = quantities_by_wheel()
+    for e in (a, b):
+        if e[0] not in quantities:
+            return f"{e[0]} is not an absorbed wheel"
+        if e[1] not in quantities[e[0]]:
+            return f"{e[0]} holds no {e[1]!r}"
+    if a == b or a[0] == b[0]:
+        return None
+    e = _edge(a, b)
+    for n in NON_IDENTITIES:
+        if _edge(n.a, n.b) == e:
+            return f"declared non-identity: {n.reason}"
+    table = classes()
+    group = table.get(a)
+    if group is not None and group == table.get(b) and len({w for w, _ in group}) > 1:
+        return None
+    return "no declared junction"
+
+
+# ===========================================================================
+# 3.  THE REPORT
+# ===========================================================================
+
+def graph_report() -> Dict[str, object]:
+    """The graph's size, what the audit could not use, and every quantity
+    joined across more than one wheel."""
+    a = audit()
+    table = classes()
+    joined: Dict[str, List[str]] = {}
+    for (wheel, name), group in table.items():
+        if len({w for w, _ in group}) > 1:
+            joined[f"{wheel}:{name}"] = [f"{w}:{q}" for w, q in group]
+    return {
+        "wheels": len(quantities_by_wheel()),
+        "junctions": len(JUNCTIONS),
+        "non_identities": len(NON_IDENTITIES),
+        "sound_edges": len(edges()),
+        "unknown_endpoints": a["unknown_endpoints"],
+        "one_way": [[list(j.a), list(j.b)] for j in a["one_way"]],
+        "contradictions": a["contradictions"],
+        "duplicates": a["duplicates"],
+        "joined_quantities": joined,
+    }
