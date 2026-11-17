@@ -162,12 +162,22 @@ GLM-systems focus:
    so `declarations()` yields 9604 entries for 9476 unique names. Consolidating
    these held copies would change the tree digest and require a rebuild (owner's
    Lean toolchain), so left untouched; recorded rather than hidden.
-5. **Refresh the iteration-cost study's blast-radius table** to the current
-   tree (264 units) so `test_corpus` stops failing on a stale baseline.
-6. **Tighten the relay cache key** to the two digest strings rather than all
-   source files.
+5. **Refresh the iteration-cost study's blast-radius table** — *blocked.*
+   The table rows can be updated to the current 264-unit tree, but
+   `test_the_ledger_is_selective` still fails: median_single_file (231) is far
+   above `units_naming_lean // 2 + RECORDED_MEDIAN_EXCESS` (149). The excess
+   is structural (signoff/rules.py's glob is in every unit's closure), not a
+   stale-baseline issue; bumping the recorded excess would hide it. Needs a
+   deeper cut than doc refresh.
+6. **Tighten the relay cache key** — *deferred.* The current key (lean files
+   plus every source document) is the tightest file-based key DerivedStore
+   supports; keying on digest strings would need a synthetic input file or a
+   non-file store. Left as-is (correct, if chatty).
 7. **Chat-surface *carriers* reading change** — blocked on a fresh held-out set.
-8. **Lean-optional verification** — assert no Python path shells out to `lake`.
+8. **Lean-optional verification** — *verified this round.* Grep of
+   `src/glm_universal` finds no `lake` invocation in Python; only docstring
+   mentions. `lean_check` is a static text check and intake's Lean-verified
+   stage requires the owner's build record. Stance holds.
 
 1. **P2, the Lean toolchain and the owner's build record.** Install elan +
   Lean 4.28 + Mathlib here (about 6–8 GB and hours on two cores) and run
