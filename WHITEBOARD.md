@@ -293,12 +293,27 @@ below is started except #2, which is in flight.
 16. **[new] Second independent engine** for differential testing of span
     membership where the integer engine cannot read.
 
-**#2 in flight (17 November 2026).** `wheels/quantity_graph.py` now holds the
-supplied 31 junctions and 12 non-identities verbatim, audits them (two known
-defects: `W36 pair_energy -> W4 energy`, a quantity W4 does not hold, and
-three one-way declarations), and contracts the sound edges into identity
-classes. It is the data layer only; the licensing still runs through
-`engineering.union` / `engineering.domains`, which already split a shared name
-per wheel and join only across a declared edge. Next: feed the graph's classes
-to `domains.split_system` over the 24 cent wheels and measure the naive-union
-conflations it refuses.
+**#2 in flight (17 November 2026).** `wheels/quantity_graph.py` holds the
+absorbed item's 43 junctions and 15 non-identities, audits them (one bad
+junction, `W36 pair_energy -> W4 energy`, and one vacuous guard, `W37
+relaxation_time`), and contracts the sound edges into identity classes; four
+vacuous guards are repaired with the other-wheel name read out of their
+reason (`W39 magnetomotive_force` against `W1 current`, `W41
+temperature_difference` against `W8 temperature`, `W42
+moment_of_inertia_of_section` against `W4 moment_of_inertia`, `W36
+pair_energy` against `W5 energy`).
+
+`wheels/cent_union.py` feeds those classes to `domains.split_system` over all
+39 wheels. The third junction table **duplicates most of Phase 66's and the
+domain table's** entries; the merge keeps each pair once (15 pairs), and the
+graph's 28 sound edges pass as explicit pairings, so differently named
+quantities join (`pair_penetration`/`stress`, `magnetic_flux`/`flux`). The
+rational engine reads the cent wheels' fractional powers.
+
+**Energy family measured (8 pre-registered questions):** the 39-wheel naive
+union is ill-posed on all 8 (merging six `energy` copies makes the exponents
+non-unique); the six energy wheels alone derive 7; the licensed union answers
+3 and refuses 5, of which **4 are the capacitor `1/2 C V^2` against the
+delivered `C V^2` factor-1/2 conflict** (`charge`/`voltage`,
+`capacitance`/`voltage`, `power`/`time`, `energy`/`time`). The refusal names
+both formulas rather than choosing one.

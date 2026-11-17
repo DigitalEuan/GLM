@@ -38,7 +38,15 @@ def _supplied_tables():
 def test_the_tables_are_the_supplied_ones():
     junctions, non_identities = _supplied_tables()
     assert sorted(qg._JUNCTIONS) == junctions
-    assert sorted(qg._NON_IDENTITIES) == non_identities
+    # The supplied non-identities carry one name only; REPAIRS supplies the
+    # own-wheel and other-wheel names, read out of the reason.
+    repaired = {(wheel, name): (own, other)
+                for wheel, name, own, _, other in qg.REPAIRS}
+    expected = []
+    for wheel, name, other, why in non_identities:
+        own, other_name = repaired.get((wheel, name), (name, name))
+        expected.append((wheel, own, other, other_name, why))
+    assert sorted(qg._NON_IDENTITIES) == sorted(expected)
 
 
 def test_a_junction_joins_and_is_transitive():
@@ -81,11 +89,12 @@ def test_an_undeclared_pair_is_not_licenced():
 def test_the_audit_keeps_the_verbatim_defects_visible():
     a = qg.audit()
     unknown = {endpoint for _, endpoint in a["unknown_endpoints"]}
-    # W4 holds no `energy` and no `relaxation_time`; W36 holds no `energy`
-    # (only pair_energy and wall_energy).
+    # W4 holds no `energy` (the one bad junction) and no `relaxation_time`
+    # (the one guard left vacuous -- no other-wheel name to read).
     assert ("W4", "energy") in unknown
     assert ("W4", "relaxation_time") in unknown
-    assert ("W36", "energy") in unknown
+    # W36 `energy` was repaired to `pair_energy`, so it is no longer unknown.
+    assert ("W36", "energy") not in unknown
     # Fifteen junctions are declared in one direction only.
     one_way = {frozenset((j.a, j.b)) for j in a["one_way"]}
     assert len(one_way) == 15
