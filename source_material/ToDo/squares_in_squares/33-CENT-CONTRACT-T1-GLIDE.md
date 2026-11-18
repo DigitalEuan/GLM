@@ -97,6 +97,16 @@ version of this control asked for 1.99 and failed; two unit squares need exactly
 
 ## 7. Limits, stated plainly
 
+**The one action of the card not yet run.** A branch flip *combined with free-set
+expansion* on a **slack-positive** seed. Every cell above holds the free set fixed
+at the delivered tight pairs and only re-words an endpoint; the card's positive test wants a
+seed whose LP is not already rigid at `L0`, one contact branch flipped by name,
+and the free set grown past the delivered tight pairs — judged by the exact gate
+(`packlib.verify` at `tol=0` plus `sqscore.row_gain`). None of the three rows run
+here can seed it: all are jammed at `L0 − 1e−2` (rigidity 3.1e−8 at n = 18), so
+there is no slack to expand into. It stays queued until a slack-positive row is in
+hand, and it is the only declared action of the card that has not been tried.
+
 A branch belongs to a pair and a pair is named by index, so a flip that would
 need a *new* contact (a non-contact pair becoming the separating one) is outside
 this cell space; refusals are conservative in the branch declaration. The flip
