@@ -1,0 +1,44 @@
+{
+ "rows": [
+  {
+   "n": 4,
+   "tmax": 2.0,
+   "status": 0,
+   "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+   "t": 2.0,
+   "gate_tol0": {
+    "ok": true,
+    "L": 2.0,
+    "worst_pen": "0"
+   },
+   "gate_1e6": {
+    "ok": true,
+    "L": 2.0,
+    "worst_pen": "0"
+   },
+   "grid_L": 2.0,
+   "below": false,
+   "verdict": "L(n) >= 1.999 and <= 2.0 (grid optimal up to 1e-3)"
+  },
+  {
+   "n": 5,
+   "tmax": 2.0,
+   "status": 0,
+   "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+   "t": 2.0,
+   "gate_tol0": {
+    "ok": true,
+    "L": 2.0,
+    "worst_pen": "0"
+   },
+   "gate_1e6": {
+    "ok": true,
+    "L": 2.0,
+    "worst_pen": "0"
+   },
+   "grid_L": 2.0,
+   "below": false,
+   "verdict": "L(n) >= 1.999 and <= 2.0 (grid optimal up to 1e-3)"
+  }
+ ]
+}
