@@ -488,6 +488,7 @@ these laws to a `gap_analysis.py` that did not exist; they now live in
 | 68 | algebraic-word framing, audited (`31`) | 22.218056945 | three closures confirmed (run 5: 280 certificates / 0 conversions; run 52: same `{axis, π/4}` alphabet across 0.520815; run 55: 436 cells / 80 certified / 0 gains); four figures corrected — 45° carries 43.2 % of gain and 23.2 % of beats (not 70 %), no `0.67k + 4` law, the three "thinnest margin" rows are at the grid (gain 0, `r = 12/20/22`), `s(k²−5) = k` external and reported (T-298) with 25/25 contact rows at grid |
 | 69 | wall margin, and one row's branch-rotation search (`32`) | 22.218056945 | `mu = L − sqrt(n)` defined, priced `rho = mu/sqrt(n)`, computed on all 1000 rows: 184/656/819 are mid-table (mu ranks 517/604/610, rho ranks 159/637/702; median 0.441761/0.017494) and the thinnest margins are the proved perfect squares; fixed rule selects n = 18 (rho 0.136763, rank 8), where 3,940 declared + 1,620 re-slot + 1,171 settled cells give **0 feasible, 0 gate-accepted, 0 gains**; controls: rigidity 3.1e−8, loose 4-square shrinks and gates, n = 12 refused; s(11) proved/open contradiction recorded, not resolved |
 | 70 | cent-compiler contract audited; T1 SAT-branch flip implemented (`33`) | 22.218056945 | branch flip (`u_i`/`v_i`/`u_j`/`v_j` per tight pair, then LP contraction) run exhaustively: n = 18/20/30 give 1,071 + 4,572 + 2,160 = **7,803 cells, 0 feasible, 0 gated, 0 gains**; base cell refused at 1e−2 (rigidity 3.1e−8); controls pass (loose 4 → 2.19 gated; forced branch feasible at 2.001, refused at 1.5); card figures corrected — 0.76 % only at n = 1000 (16.99/28.95/20.46 % at 18/20/30), `s(5) = 2+√2/2` proved so the n = 5 test is ill-posed, "0/8" is run 41, "run 50" absent |
+| 71 | the queued card action: one branch flip plus free-set expansion, seeded by the wall-margin ranking (`34`) | 22.218056945 | all 42 open rows at n = 4–60 searched in wall-margin order: 2,228 contact edges, **6,684 single flips**, base depth 0 at every row, **0 seeds** so the free-set ladder was never entered — 0 cells, 0 gated, 0 gains; exhaustive over the declared ladder by two monotonicities (feasibility rises with the free set, falls with `eps`), so expansion cannot rescue a flip that all-free refuses; probes: 1e−7 gives 0 seeds, 1e−8 gives 20 seeds / 400 cells / **0 gated** (the LP's own scale, and the gate refuses); census: every row 4–120 has more binding constraints than `2n` variables (least over-determined is n = 5, +2; n = 18, +4); controls fire both ways (loose 2×2 at 2.2: depth 1e−2, one flipped branch seeds and gates; two squares at their optimum 2.0: base and every flip refused) |
 
 ### 9.1 The theory closure (runs 62–67) — what it decided
 
@@ -553,7 +554,7 @@ produces is a wheel certificate (W36); every search it runs is a wheel
 settle (W37). The record from start to finish — lineage, engines, sources,
 operating loop — is the system record in `STATUS.md`. More operatiors and more/denser wheels should produce more concepts, I suspect the Python libraries would make excellent wheels - reduce to cent_compiler '¢' primitives and exact Arithmetic then confirm with Lean4.
 
-## Current results (Run 70, 2026-11-18; last score move run 47)
+## Current results (Run 72, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -565,7 +566,7 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
 | Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
-| Latest session | **Runs 69–70, margin + two discrete searches** — wall margin on 1000 rows; 5,560 word cells at n = 18 and 7,803 SAT-branch-flip cells at n = 18/20/30, **0 gains, no row changed**; records `31`–`33` |
+| Latest session | **Runs 69–72, margin + three discrete searches + the 3D ladder** — wall margin on 1000 rows; 5,560 word cells at n = 18; 7,803 SAT-branch-flip cells at n = 18/20/30; 6,684 flips over the 42 open rows at n = 4–60 (0 seeds, 0 gains); cubes-in-a-cube declared-axis LP with an exact rational gate on 12 rows — **no row changed**; records `31`–`35` |
 
 ## Where the score stands, said plainly
 

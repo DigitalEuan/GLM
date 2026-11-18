@@ -1,0 +1,397 @@
+{
+ "lemma": "in each axis two unit intervals inside [0,L] with L < 2 must overlap, so two cubes in a box of side L < 2 intersect in all three axes; hence L(n) >= 2 for n >= 2, and the 2x2x2 grid gives L = 2 for n <= 8",
+ "rows": [
+  {
+   "n": 2,
+   "row2d_aligned": true,
+   "L2": 2.000000001,
+   "extrude_ok": true,
+   "extrude_L": 2.000000001,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 2.000000001,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "tie: extrusion is optimal here"
+  },
+  {
+   "n": 3,
+   "row2d_aligned": true,
+   "L2": 2.000000001,
+   "extrude_ok": true,
+   "extrude_L": 2.000000001,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 2.000000001,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "tie: extrusion is optimal here"
+  },
+  {
+   "n": 4,
+   "row2d_aligned": true,
+   "L2": 2.000000001,
+   "extrude_ok": true,
+   "extrude_L": 2.000000001,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 2.000000001,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "tie: extrusion is optimal here"
+  },
+  {
+   "n": 5,
+   "row2d_aligned": false,
+   "L2": 2.707106782448,
+   "extrude_ok": false,
+   "extrude_L": 2.707106782448,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 2.707106782448,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 6,
+   "row2d_aligned": true,
+   "L2": 3.000000001334,
+   "extrude_ok": true,
+   "extrude_L": 3.000000001334,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 3.0,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 7,
+   "row2d_aligned": true,
+   "L2": 3.000000001334,
+   "extrude_ok": true,
+   "extrude_L": 3.000000001334,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 3.0,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 8,
+   "row2d_aligned": true,
+   "L2": 3.000000001334,
+   "extrude_ok": true,
+   "extrude_L": 3.000000001334,
+   "grid_L": 2.0,
+   "grid_ok": true,
+   "descend_extrude_L": 3.0,
+   "descend_grid_L": 2.0,
+   "descend_extrude": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 2.0,
+     "gate_ok": true,
+     "L": 2.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 9,
+   "row2d_aligned": true,
+   "L2": 3.000000001334,
+   "extrude_ok": true,
+   "extrude_L": 3.000000001334,
+   "grid_L": 3.0,
+   "grid_ok": true,
+   "descend_extrude_L": 3.0,
+   "descend_grid_L": 3.0,
+   "descend_extrude": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "tie: extrusion is optimal here"
+  },
+  {
+   "n": 10,
+   "row2d_aligned": false,
+   "L2": 3.707106782648,
+   "extrude_ok": false,
+   "extrude_L": 3.707106782648,
+   "grid_L": 3.0,
+   "grid_ok": true,
+   "descend_extrude_L": 3.707106782648,
+   "descend_grid_L": 3.0,
+   "descend_extrude": [
+    {
+     "t": 4.0,
+     "gate_ok": true,
+     "L": 4.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 12,
+   "row2d_aligned": true,
+   "L2": 4.0000000015,
+   "extrude_ok": true,
+   "extrude_L": 4.0000000015,
+   "grid_L": 3.0,
+   "grid_ok": true,
+   "descend_extrude_L": 4.0,
+   "descend_grid_L": 3.0,
+   "descend_extrude": [
+    {
+     "t": 4.0,
+     "gate_ok": true,
+     "L": 4.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 4.0,
+     "gate_ok": true,
+     "L": 4.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 16,
+   "row2d_aligned": true,
+   "L2": 4.0000000015,
+   "extrude_ok": true,
+   "extrude_L": 4.0000000015,
+   "grid_L": 3.0,
+   "grid_ok": true,
+   "descend_extrude_L": 4.0,
+   "descend_grid_L": 3.0,
+   "descend_extrude": [
+    {
+     "t": 4.0,
+     "gate_ok": true,
+     "L": 4.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 4.0,
+     "gate_ok": true,
+     "L": 4.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  },
+  {
+   "n": 20,
+   "row2d_aligned": true,
+   "L2": 5.0000000016,
+   "extrude_ok": true,
+   "extrude_L": 5.0000000016,
+   "grid_L": 3.0,
+   "grid_ok": true,
+   "descend_extrude_L": 5.0,
+   "descend_grid_L": 3.0,
+   "descend_extrude": [
+    {
+     "t": 5.0,
+     "gate_ok": true,
+     "L": 5.0,
+     "worst_pen": 0.0
+    },
+    {
+     "t": 5.0,
+     "gate_ok": true,
+     "L": 5.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "descend_grid": [
+    {
+     "t": 3.0,
+     "gate_ok": true,
+     "L": 3.0,
+     "worst_pen": 0.0
+    }
+   ],
+   "verdict": "3D strictly better"
+  }
+ ],
+ "exhaustive": {
+  "2": {
+   "lb": 2.0,
+   "branches": 6
+  },
+  "3": {
+   "lb": 2.0,
+   "branches": 216
+  },
+  "4": {
+   "lb": 2.0,
+   "branches": 46656
+  }
+ }
+}
