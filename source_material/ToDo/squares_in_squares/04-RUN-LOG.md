@@ -490,3 +490,30 @@ direction (appended as <= when the condition is >=); (iii) required separation
 used h_i+h_j instead of 0.5 + Eu[owner, other]. The invariant is now permanent:
 sat_probe.py --selftest, 6/6. Entries 30-EARNED-FREE-SET.md, script
 extreme_probe.py, ledger extreme_probe.json schema extremeprobe/1.
+
+## Run 68 — the algebraic-word framing, audited
+
+A framing was proposed for the front page: packings as sentences over an exact
+relation alphabet, score moving with the alphabet and not with search length, the
+pile-of-angle-words route already closed, discrete non-block multi-angle rotation
+the one live object. Every figure in it was checked against the delivered table
+before it directs a run.
+
+Confirmed by our instruments: run 5's 280 certificates over 7 angles (n <= 1050,
+then 1001..5000) converted 0 rows; run 52's 0.520815 step uses the same
+{axis, pi/4} alphabet in both bands (17x17 diamond, 145/289 -> 289/289); run 55's
+436 cells at n = 10 certify 80 and gain 0, Karakus floor 3.192582.
+
+Corrected: the 45-degree rung carries 43.2% of the total gain and 23.2% of the 553
+beats, not 70%; the "0.67k + 4" density wall exists in no ledger; and the three
+"thinnest wall margin" rows (n = 656, 184, 819) are at the grid in the delivered
+table -- L = k to 2e-9, gain 0.000000, r = 20/12/22 -- while 447 rows share that
+position and none of the quoted margins (0.00029 / 0.00040 / 0.00130) is
+reproducible from any sqscore quantity, so the nomination is recorded and not
+acted on.
+
+One external claim is current and load-bearing: Khalili and Gharabaghi report
+s(k^2-5) = k for every k >= 7 (Squares Project T-298, 2026-11-13, at V0/C1) --
+real and reported, but not verified in our record. Contact check: the 25 rows
+k = 7..31 all sit at the grid, 0 beats, so our table contradicts nothing.
+Entry 31-GLM-ALGEBRAIC-WORDS.md.

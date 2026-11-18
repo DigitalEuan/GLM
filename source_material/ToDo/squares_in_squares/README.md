@@ -19,7 +19,9 @@ produces is a wheel certificate (W36); every search it runs is a wheel
 settle (W37). The record from start to finish — lineage, engines, sources,
 operating loop — is the system record in `STATUS.md`. More operatiors and more/denser wheels should produce more concepts, I suspect the Python libraries would make excellent wheels - reduce to cent_compiler '¢' primitives and exact Arithmetic then confirm with Lean4.
 
-## Current results (Run 67, 2026-11-18; last score move run 47)
+**The framing, and its audit.** Read as a *Geometric Language Machine* sentence, a packing is a word over an exact relation alphabet, and score moves when the alphabet moves rather than when a search runs longer. That reading was proposed for the front page and is now checked claim by claim against the delivered table in `31-GLM-ALGEBRAIC-WORDS.md`: the three closed pile-of-words runs hold as recorded, four of the framing's figures do not, and one external result — Khalili and Gharabaghi's reported `s(k²−5) = k` — is entered as reported, with a 25-row contact check that contradicts nothing.
+
+## Current results (Run 68, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|

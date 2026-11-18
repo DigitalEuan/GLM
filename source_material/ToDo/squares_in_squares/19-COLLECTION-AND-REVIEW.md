@@ -536,6 +536,10 @@ history rather than presented as current.
   `29-SAT-PROBE-AND-RESOLUTION.md`, `30-EARNED-FREE-SET.md`, with instruments
   `bui_wheel.py`, `ladder.py`, `disj_census.py`, `sat_probe.py`,
   `resolution_probe.py`, `extreme_probe.py` and ledgers of the same names
+* run 68 — the algebraic-word framing, audited claim by claim against the
+  delivered table: `31-GLM-ALGEBRAIC-WORDS.md` (three closures confirmed, four
+  figures corrected, one external result entered as reported, one nomination
+  recorded unpriced)
 * continued in §10: `22-DIAMOND-MASK.md`, `23-SEED-WHEELS.md`,
   `24-N10-OPTIMAL.md`, `25-OPEN-ROW-CROSSWALK.md`, `26-FRONTIER-CROSSWALK.md`,
   and their instruments `diamond_mask.py`, `seed_wheels.py`, `optima.py`,
@@ -867,6 +871,7 @@ a boundary the material has actually reached. No row of the table changed.
 | **65** | `sat_probe.py` | the §11.5 bounded experiment: feasibility at `L₀−ε`, θ frozen, delivered axis assignment frozen, six slack-heaviest rows × k ∈ {8,12,20} | **18 cells, 0 feasible, 0 gains** — but the free set was chosen by wall contact, so the refusal was **built in**, and the LP carried three defects. Withdrawn and superseded by run 67; the `rigid core spans` filter is outside the LP, so those refusals stand as facts, not as findings (`29` Part A + erratum) |
 | **66** | `resolution_probe.py` | the resolution-reduction / dithering question, tested against the *answers*: snap ten delivered rows to a `1/m` lattice | **invalid at every m, including m = 128** — at an optimum every load-bearing contact has penetration exactly 0, so any displacement opens a violation elsewhere. Side loss −0.0050 at m = 128 (irrelevant: the gate is binary); at m ≤ 4 it exceeds the gap (−0.1643 at m = 2 with θ snapped). Dithering has no admissible residual here (`29` Part B) |
 | **67** | `extreme_probe.py` | the §11.5 probe with an **earned** free set: seed with the four extreme achievers, grow by tight-pair rings, price every ring where the core stops spanning | core stops spanning only at **k = 161 / 184 / 267 / 298** of n = 294 / 295 / 299 / 298 (55–100 %); the LP **refuses at every such k and every larger ring up to k = n**. At k = n that is a **certificate**: the delivered side is the exact optimum of the declared-axis, fixed-orientation LP (`30`) |
+| **68** | — | the proposed algebraic-word framing, audited against the delivered table | **three closures confirmed** (run 5: 280 certificates, 0 conversions; run 52: same `{axis, π/4}` alphabet across the 0.520815 step; run 55: 436 cells, 80 certified, 0 gains). **Four figures corrected**: the 45° rung carries 43.2 % of the total gain and 23.2 % of the 553 beats, not 70 %; no ledger holds a `0.67k + 4` density wall; `n = 184/656/819` are **at the grid** (`L = k`, gain 0, `r = 12/20/22`) so the quoted margins are not reproducible and the nomination is unearned; and T-298 (`s(k²−5) = k`) is **external and reported**, its 25-row contact check (`n = 44…956`) showing 25/25 at grid (`31`) |
 
 ### 12.2 What these runs established
 
