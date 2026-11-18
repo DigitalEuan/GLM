@@ -125,6 +125,12 @@ slice you take is the whole question — the (001) slice of FCC is the *square* 
 the hexagonal packing beats by 2/√3. The full statement is in
 [`BRIDGE.md`](BRIDGE.md).
 
+**Does that reach squares-in-squares?** Not as an engine: that problem has a wall, a fixed
+orientation and a density ceiling that is *attained* on 31 rows, so the bridge's objects are absent
+and nothing in it can bound an `L`. As a diagnosis it is sharp — the squares table is the
+axis-aligned section of the same lattice family, and the 2/√3 it gives up is exactly the price of
+fixing orientation. The argument, with the table's own numbers, is in [`SQUARES.md`](SQUARES.md).
+
 ---
 
 ## 4. Where the chain breaks

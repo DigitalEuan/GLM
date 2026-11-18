@@ -89,6 +89,9 @@ every point of an enumerated box (171, 1,201 and 8,403 points respectively).
   §1 and §4).
 * It does not upgrade the 2D result: A₂ optimality is 2D optimality, and the
   bridge is a change of coordinates, not a proof transfer.
+* It says nothing usable *as machinery* about squares-in-squares, which has a wall,
+  a fixed orientation and no bulk density to maximise — see [`SQUARES.md`](SQUARES.md)
+  for what it does say about that table (a diagnosis, not a bound).
 
 ## To 24 dimensions
 
