@@ -211,12 +211,6 @@ PROVED_LATTICE = (1, 2, 3, 4, 5, 6, 7, 8, 24)
 # Derived quantities
 # --------------------------------------------------------------------------
 
-def centre_density(n):
-    """The exact centre density delta, as a positive number whose square is a
-    Fraction (returned as that Fraction, since delta itself may be a surd)."""
-    return BY_N[n]["delta2"]
-
-
 def gain_squared(n):
     """``(delta * 2**n)**2``: the gain over the cubic grid, squared, exact."""
     return BY_N[n]["delta2"] * F(4) ** n

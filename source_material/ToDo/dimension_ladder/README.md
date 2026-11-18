@@ -116,6 +116,15 @@ For n ≤ 8 the laminated lattice is unique and is the proved densest lattice: L
 (n = 6, 7, 8). So on 2 → 3 → 4 → 5 → 6 → 7 → 8 the chain is not a metaphor; it is a theorem at
 every step, for lattices. The packing problem on the same rungs is solved only at 2, 3 and 8.
 
+**The 2D rung is a slice of the 3D rung, exactly.** The hexagonal lattice is the (111) plane
+of FCC, and every FCC point is a hexagonal point plus one integer — the layer index. That map
+is a bijection, reversible, and loses nothing; `bridge.py` builds it in integer arithmetic and
+checks both round trips on an enumerated box. What it does *not* do is carry the density: the
+3D gain comes from the stacking offset, which is not a symmetry of the 2D lattice. And which
+slice you take is the whole question — the (001) slice of FCC is the *square* lattice, the one
+the hexagonal packing beats by 2/√3. The full statement is in
+[`BRIDGE.md`](BRIDGE.md).
+
 ---
 
 ## 4. Where the chain breaks
@@ -245,6 +254,8 @@ well-posed one: prove that no packing of unit balls in R⁴ has density above π
   lattice's own published invariants, so the check is real.
 * The published-density check uses floats. It is a transcription check on 24 decimal strings,
   not a proof, and it is labelled as such in the code.
+* `bridge.py` verifies the A₂-in-D₃ slice and the `D₂ … D₅` layer bijections exactly. The
+  `Λ₂₄ ≅ A₂ × Z²²` composition is quoted from the laminated construction, not verified.
 
 ---
 
@@ -286,4 +297,5 @@ Read for this note; the densities in §2 are Cohn's table.
 cd source_material/ToDo/dimension_ladder   # or done/, if the item has been filed
 python3 rungs.py              # the table, with exact centre densities and gains
 python3 rungs.py --selftest   # 18 determinant identities, 24 gains, 24 published densities
+python3 bridge.py             # the 2D layer of the 3D lattice, exact, both ways
 ```
