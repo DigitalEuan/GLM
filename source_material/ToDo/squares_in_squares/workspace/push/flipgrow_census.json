@@ -1,0 +1,1059 @@
+{
+"run": 71,
+"schema": "flipgrow-census/1",
+"rows": [
+{
+"n": 4,
+"vars": 8,
+"contacts": 6,
+"walls": 8,
+"binding": 14,
+"slack_by_count": 6,
+"mu": 1.000000082740371e-09
+},
+{
+"n": 5,
+"vars": 10,
+"contacts": 4,
+"walls": 8,
+"binding": 12,
+"slack_by_count": 2,
+"mu": 0.4710388049482104
+},
+{
+"n": 6,
+"vars": 12,
+"contacts": 11,
+"walls": 10,
+"binding": 21,
+"slack_by_count": 9,
+"mu": 0.5505102585508221
+},
+{
+"n": 7,
+"vars": 14,
+"contacts": 13,
+"walls": 9,
+"binding": 22,
+"slack_by_count": 8,
+"mu": 0.3542486902694093
+},
+{
+"n": 8,
+"vars": 16,
+"contacts": 17,
+"walls": 10,
+"binding": 27,
+"slack_by_count": 11,
+"mu": 0.17157287658780973
+},
+{
+"n": 9,
+"vars": 18,
+"contacts": 20,
+"walls": 12,
+"binding": 32,
+"slack_by_count": 14,
+"mu": 1.334000021557813e-09
+},
+{
+"n": 10,
+"vars": 20,
+"contacts": 11,
+"walls": 12,
+"binding": 23,
+"slack_by_count": 3,
+"mu": 0.5448291224796207
+},
+{
+"n": 11,
+"vars": 22,
+"contacts": 14,
+"walls": 11,
+"binding": 25,
+"slack_by_count": 3,
+"mu": 0.5604588011506002
+},
+{
+"n": 12,
+"vars": 24,
+"contacts": 29,
+"walls": 14,
+"binding": 43,
+"slack_by_count": 19,
+"mu": 0.5358983863622457
+},
+{
+"n": 13,
+"vars": 26,
+"contacts": 31,
+"walls": 12,
+"binding": 43,
+"slack_by_count": 17,
+"mu": 0.394448726036011
+},
+{
+"n": 14,
+"vars": 28,
+"contacts": 35,
+"walls": 13,
+"binding": 48,
+"slack_by_count": 20,
+"mu": 0.2583426147260588
+},
+{
+"n": 15,
+"vars": 30,
+"contacts": 39,
+"walls": 14,
+"binding": 53,
+"slack_by_count": 23,
+"mu": 0.1270166552925831
+},
+{
+"n": 16,
+"vars": 32,
+"contacts": 42,
+"walls": 16,
+"binding": 58,
+"slack_by_count": 26,
+"mu": 1.5000001241105565e-09
+},
+{
+"n": 17,
+"vars": 34,
+"contacts": 24,
+"walls": 15,
+"binding": 39,
+"slack_by_count": 5,
+"mu": 0.55242446955834
+},
+{
+"n": 18,
+"vars": 36,
+"contacts": 26,
+"walls": 14,
+"binding": 40,
+"slack_by_count": 4,
+"mu": 0.580234969998819
+},
+{
+"n": 19,
+"vars": 38,
+"contacts": 31,
+"walls": 14,
+"binding": 45,
+"slack_by_count": 7,
+"mu": 0.5267191412134293
+},
+{
+"n": 20,
+"vars": 40,
+"contacts": 55,
+"walls": 18,
+"binding": 73,
+"slack_by_count": 33,
+"mu": 0.5278640466004205
+},
+{
+"n": 21,
+"vars": 42,
+"contacts": 57,
+"walls": 15,
+"binding": 72,
+"slack_by_count": 30,
+"mu": 0.4174243066441603
+},
+{
+"n": 22,
+"vars": 44,
+"contacts": 61,
+"walls": 16,
+"binding": 77,
+"slack_by_count": 33,
+"mu": 0.3095842417765704
+},
+{
+"n": 23,
+"vars": 46,
+"contacts": 65,
+"walls": 17,
+"binding": 82,
+"slack_by_count": 36,
+"mu": 0.20416847828728102
+},
+{
+"n": 24,
+"vars": 48,
+"contacts": 69,
+"walls": 18,
+"binding": 87,
+"slack_by_count": 39,
+"mu": 0.10102051603364437
+},
+{
+"n": 25,
+"vars": 50,
+"contacts": 72,
+"walls": 20,
+"binding": 92,
+"slack_by_count": 42,
+"mu": 1.6000001323845936e-09
+},
+{
+"n": 26,
+"vars": 52,
+"contacts": 52,
+"walls": 19,
+"binding": 71,
+"slack_by_count": 19,
+"mu": 0.5223008316113189
+},
+{
+"n": 27,
+"vars": 54,
+"contacts": 54,
+"walls": 20,
+"binding": 74,
+"slack_by_count": 20,
+"mu": 0.510954360129368
+},
+{
+"n": 28,
+"vars": 56,
+"contacts": 52,
+"walls": 20,
+"binding": 72,
+"slack_by_count": 16,
+"mu": 0.5329419962009219
+},
+{
+"n": 29,
+"vars": 58,
+"contacts": 52,
+"walls": 19,
+"binding": 71,
+"slack_by_count": 13,
+"mu": 0.5486686572054964
+},
+{
+"n": 30,
+"vars": 60,
+"contacts": 89,
+"walls": 22,
+"binding": 111,
+"slack_by_count": 51,
+"mu": 0.5227744266143395
+},
+{
+"n": 31,
+"vars": 62,
+"contacts": 91,
+"walls": 18,
+"binding": 109,
+"slack_by_count": 47,
+"mu": 0.43223563883597915
+},
+{
+"n": 32,
+"vars": 64,
+"contacts": 95,
+"walls": 19,
+"binding": 114,
+"slack_by_count": 50,
+"mu": 0.3431457521736201
+},
+{
+"n": 33,
+"vars": 66,
+"contacts": 99,
+"walls": 20,
+"binding": 119,
+"slack_by_count": 53,
+"mu": 0.25543735512797205
+},
+{
+"n": 34,
+"vars": 68,
+"contacts": 103,
+"walls": 21,
+"binding": 124,
+"slack_by_count": 56,
+"mu": 0.16904810682069993
+},
+{
+"n": 35,
+"vars": 70,
+"contacts": 107,
+"walls": 22,
+"binding": 129,
+"slack_by_count": 59,
+"mu": 0.08392021856638454
+},
+{
+"n": 36,
+"vars": 72,
+"contacts": 110,
+"walls": 24,
+"binding": 134,
+"slack_by_count": 62,
+"mu": 1.66600067075251e-09
+},
+{
+"n": 37,
+"vars": 74,
+"contacts": 69,
+"walls": 22,
+"binding": 91,
+"slack_by_count": 17,
+"mu": 0.515857080643884
+},
+{
+"n": 38,
+"vars": 76,
+"contacts": 89,
+"walls": 24,
+"binding": 113,
+"slack_by_count": 37,
+"mu": 0.5426927799190242
+},
+{
+"n": 39,
+"vars": 78,
+"contacts": 68,
+"walls": 24,
+"binding": 92,
+"slack_by_count": 14,
+"mu": 0.5657240863756012
+},
+{
+"n": 40,
+"vars": 80,
+"contacts": 98,
+"walls": 24,
+"binding": 122,
+"slack_by_count": 42,
+"mu": 0.5038718061172416
+},
+{
+"n": 41,
+"vars": 82,
+"contacts": 84,
+"walls": 24,
+"binding": 108,
+"slack_by_count": 26,
+"mu": 0.5235688587471516
+},
+{
+"n": 42,
+"vars": 84,
+"contacts": 131,
+"walls": 26,
+"binding": 157,
+"slack_by_count": 73,
+"mu": 0.5192593033061392
+},
+{
+"n": 43,
+"vars": 86,
+"contacts": 133,
+"walls": 21,
+"binding": 154,
+"slack_by_count": 68,
+"mu": 0.44256147741199925
+},
+{
+"n": 44,
+"vars": 88,
+"contacts": 137,
+"walls": 22,
+"binding": 159,
+"slack_by_count": 71,
+"mu": 0.3667504210032
+},
+{
+"n": 45,
+"vars": 90,
+"contacts": 141,
+"walls": 23,
+"binding": 164,
+"slack_by_count": 74,
+"mu": 0.2917960692146302
+},
+{
+"n": 46,
+"vars": 92,
+"contacts": 145,
+"walls": 24,
+"binding": 169,
+"slack_by_count": 77,
+"mu": 0.21767001858873147
+},
+{
+"n": 47,
+"vars": 94,
+"contacts": 149,
+"walls": 25,
+"binding": 174,
+"slack_by_count": 80,
+"mu": 0.1443454013129557
+},
+{
+"n": 48,
+"vars": 96,
+"contacts": 153,
+"walls": 26,
+"binding": 179,
+"slack_by_count": 83,
+"mu": 0.07179677143849084
+},
+{
+"n": 49,
+"vars": 98,
+"contacts": 156,
+"walls": 28,
+"binding": 184,
+"slack_by_count": 86,
+"mu": 1.713999608909944e-09
+},
+{
+"n": 50,
+"vars": 100,
+"contacts": 105,
+"walls": 28,
+"binding": 133,
+"slack_by_count": 33,
+"mu": 0.5003607612985244
+},
+{
+"n": 51,
+"vars": 102,
+"contacts": 119,
+"walls": 26,
+"binding": 145,
+"slack_by_count": 43,
+"mu": 0.5489275104851492
+},
+{
+"n": 52,
+"vars": 104,
+"contacts": 129,
+"walls": 28,
+"binding": 157,
+"slack_by_count": 53,
+"mu": 0.49600423200002197
+},
+{
+"n": 53,
+"vars": 106,
+"contacts": 123,
+"walls": 28,
+"binding": 151,
+"slack_by_count": 45,
+"mu": 0.5427657679954825
+},
+{
+"n": 54,
+"vars": 108,
+"contacts": 126,
+"walls": 28,
+"binding": 154,
+"slack_by_count": 46,
+"mu": 0.4981979662385694
+},
+{
+"n": 55,
+"vars": 110,
+"contacts": 125,
+"walls": 27,
+"binding": 152,
+"slack_by_count": 42,
+"mu": 0.5295725221563368
+},
+{
+"n": 56,
+"vars": 112,
+"contacts": 181,
+"walls": 30,
+"binding": 211,
+"slack_by_count": 99,
+"mu": 0.5166852282021166
+},
+{
+"n": 57,
+"vars": 114,
+"contacts": 183,
+"walls": 24,
+"binding": 207,
+"slack_by_count": 93,
+"mu": 0.45016556647924943
+},
+{
+"n": 58,
+"vars": 116,
+"contacts": 187,
+"walls": 25,
+"binding": 212,
+"slack_by_count": 96,
+"mu": 0.3842268958860906
+},
+{
+"n": 59,
+"vars": 118,
+"contacts": 191,
+"walls": 26,
+"binding": 217,
+"slack_by_count": 99,
+"mu": 0.31885425388139144
+},
+{
+"n": 60,
+"vars": 120,
+"contacts": 195,
+"walls": 27,
+"binding": 222,
+"slack_by_count": 102,
+"mu": 0.2540333093351652
+},
+{
+"n": 61,
+"vars": 122,
+"contacts": 199,
+"walls": 28,
+"binding": 227,
+"slack_by_count": 105,
+"mu": 0.18975032584334528
+},
+{
+"n": 62,
+"vars": 124,
+"contacts": 203,
+"walls": 29,
+"binding": 232,
+"slack_by_count": 108,
+"mu": 0.12599212773818813
+},
+{
+"n": 63,
+"vars": 126,
+"contacts": 207,
+"walls": 30,
+"binding": 237,
+"slack_by_count": 111,
+"mu": 0.06274606855622711
+},
+{
+"n": 64,
+"vars": 128,
+"contacts": 210,
+"walls": 32,
+"binding": 242,
+"slack_by_count": 114,
+"mu": 1.7499992566172295e-09
+},
+{
+"n": 65,
+"vars": 130,
+"contacts": 172,
+"walls": 32,
+"binding": 204,
+"slack_by_count": 74,
+"mu": 0.4732761594004504
+},
+{
+"n": 66,
+"vars": 132,
+"contacts": 166,
+"walls": 30,
+"binding": 196,
+"slack_by_count": 64,
+"mu": 0.5328158466261428
+},
+{
+"n": 67,
+"vars": 134,
+"contacts": 178,
+"walls": 32,
+"binding": 210,
+"slack_by_count": 76,
+"mu": 0.5217540110835497
+},
+{
+"n": 68,
+"vars": 136,
+"contacts": 142,
+"walls": 32,
+"binding": 174,
+"slack_by_count": 38,
+"mu": 0.5525839877556802
+},
+{
+"n": 69,
+"vars": 138,
+"contacts": 178,
+"walls": 31,
+"binding": 209,
+"slack_by_count": 71,
+"mu": 0.5205707945859253
+},
+{
+"n": 70,
+"vars": 140,
+"contacts": 181,
+"walls": 30,
+"binding": 211,
+"slack_by_count": 71,
+"mu": 0.5143601079892441
+},
+{
+"n": 71,
+"vars": 142,
+"contacts": 173,
+"walls": 32,
+"binding": 205,
+"slack_by_count": 63,
+"mu": 0.5179217861696408
+},
+{
+"n": 72,
+"vars": 144,
+"contacts": 239,
+"walls": 34,
+"binding": 273,
+"slack_by_count": 129,
+"mu": 0.5147186275394304
+},
+{
+"n": 73,
+"vars": 146,
+"contacts": 241,
+"walls": 27,
+"binding": 268,
+"slack_by_count": 122,
+"mu": 0.4559962564604696
+},
+{
+"n": 74,
+"vars": 148,
+"contacts": 245,
+"walls": 28,
+"binding": 273,
+"slack_by_count": 125,
+"mu": 0.3976747347353733
+},
+{
+"n": 75,
+"vars": 150,
+"contacts": 249,
+"walls": 29,
+"binding": 278,
+"slack_by_count": 128,
+"mu": 0.33974596393361267
+},
+{
+"n": 76,
+"vars": 152,
+"contacts": 253,
+"walls": 30,
+"binding": 283,
+"slack_by_count": 131,
+"mu": 0.282202114696652
+},
+{
+"n": 77,
+"vars": 154,
+"contacts": 257,
+"walls": 31,
+"binding": 288,
+"slack_by_count": 134,
+"mu": 0.22503561438587738
+},
+{
+"n": 78,
+"vars": 156,
+"contacts": 261,
+"walls": 32,
+"binding": 293,
+"slack_by_count": 137,
+"mu": 0.16823913545015223
+},
+{
+"n": 79,
+"vars": 158,
+"contacts": 265,
+"walls": 33,
+"binding": 298,
+"slack_by_count": 140,
+"mu": 0.11180558446241129
+},
+{
+"n": 80,
+"vars": 160,
+"contacts": 269,
+"walls": 34,
+"binding": 303,
+"slack_by_count": 143,
+"mu": 0.05572809177884075
+},
+{
+"n": 81,
+"vars": 162,
+"contacts": 272,
+"walls": 36,
+"binding": 308,
+"slack_by_count": 146,
+"mu": 1.7779999694766957e-09
+},
+{
+"n": 82,
+"vars": 164,
+"contacts": 228,
+"walls": 36,
+"binding": 264,
+"slack_by_count": 100,
+"mu": 0.4801487695845825
+},
+{
+"n": 83,
+"vars": 166,
+"contacts": 194,
+"walls": 35,
+"binding": 229,
+"slack_by_count": 63,
+"mu": 0.5243240712797004
+},
+{
+"n": 84,
+"vars": 168,
+"contacts": 200,
+"walls": 33,
+"binding": 233,
+"slack_by_count": 65,
+"mu": 0.53278341089732
+},
+{
+"n": 85,
+"vars": 170,
+"contacts": 238,
+"walls": 35,
+"binding": 273,
+"slack_by_count": 103,
+"mu": 0.5230962316212153
+},
+{
+"n": 86,
+"vars": 172,
+"contacts": 215,
+"walls": 36,
+"binding": 251,
+"slack_by_count": 79,
+"mu": 0.5469169137972951
+},
+{
+"n": 87,
+"vars": 174,
+"contacts": 230,
+"walls": 36,
+"binding": 266,
+"slack_by_count": 92,
+"mu": 0.5114362186551844
+},
+{
+"n": 88,
+"vars": 176,
+"contacts": 233,
+"walls": 34,
+"binding": 267,
+"slack_by_count": 91,
+"mu": 0.501619512632141
+},
+{
+"n": 89,
+"vars": 178,
+"contacts": 256,
+"walls": 32,
+"binding": 288,
+"slack_by_count": 110,
+"mu": 0.5157663380473974
+},
+{
+"n": 90,
+"vars": 180,
+"contacts": 305,
+"walls": 38,
+"binding": 343,
+"slack_by_count": 163,
+"mu": 0.513167021294862
+},
+{
+"n": 91,
+"vars": 182,
+"contacts": 307,
+"walls": 30,
+"binding": 337,
+"slack_by_count": 155,
+"mu": 0.460607987630544
+},
+{
+"n": 92,
+"vars": 184,
+"contacts": 311,
+"walls": 31,
+"binding": 342,
+"slack_by_count": 158,
+"mu": 0.4083369551745619
+},
+{
+"n": 93,
+"vars": 186,
+"contacts": 315,
+"walls": 32,
+"binding": 347,
+"slack_by_count": 161,
+"mu": 0.3563492408070452
+},
+{
+"n": 94,
+"vars": 188,
+"contacts": 319,
+"walls": 33,
+"binding": 352,
+"slack_by_count": 164,
+"mu": 0.30464028696734147
+},
+{
+"n": 95,
+"vars": 190,
+"contacts": 323,
+"walls": 34,
+"binding": 357,
+"slack_by_count": 167,
+"mu": 0.25320565699103703
+},
+{
+"n": 96,
+"vars": 192,
+"contacts": 327,
+"walls": 35,
+"binding": 362,
+"slack_by_count": 170,
+"mu": 0.20204103066728862
+},
+{
+"n": 97,
+"vars": 194,
+"contacts": 331,
+"walls": 36,
+"binding": 367,
+"slack_by_count": 173,
+"mu": 0.15114220000389622
+},
+{
+"n": 98,
+"vars": 196,
+"contacts": 335,
+"walls": 37,
+"binding": 372,
+"slack_by_count": 176,
+"mu": 0.1005050651883348
+},
+{
+"n": 99,
+"vars": 198,
+"contacts": 339,
+"walls": 38,
+"binding": 377,
+"slack_by_count": 179,
+"mu": 0.05012563073380072
+},
+{
+"n": 100,
+"vars": 200,
+"contacts": 342,
+"walls": 40,
+"binding": 382,
+"slack_by_count": 182,
+"mu": 1.8000001489326678e-09
+},
+{
+"n": 101,
+"vars": 202,
+"contacts": 292,
+"walls": 40,
+"binding": 332,
+"slack_by_count": 130,
+"mu": 0.4856582866211099
+},
+{
+"n": 102,
+"vars": 204,
+"contacts": 264,
+"walls": 38,
+"binding": 302,
+"slack_by_count": 98,
+"mu": 0.5063237598809227
+},
+{
+"n": 103,
+"vars": 206,
+"contacts": 257,
+"walls": 40,
+"binding": 297,
+"slack_by_count": 91,
+"mu": 0.5303404840817816
+},
+{
+"n": 104,
+"vars": 208,
+"contacts": 303,
+"walls": 40,
+"binding": 343,
+"slack_by_count": 135,
+"mu": 0.5090677558145345
+},
+{
+"n": 105,
+"vars": 210,
+"contacts": 249,
+"walls": 39,
+"binding": 288,
+"slack_by_count": 78,
+"mu": 0.5423530196024018
+},
+{
+"n": 106,
+"vars": 212,
+"contacts": 297,
+"walls": 39,
+"binding": 336,
+"slack_by_count": 124,
+"mu": 0.5272779049610001
+},
+{
+"n": 107,
+"vars": 214,
+"contacts": 298,
+"walls": 40,
+"binding": 338,
+"slack_by_count": 124,
+"mu": 0.5025867618713988
+},
+{
+"n": 108,
+"vars": 216,
+"contacts": 282,
+"walls": 39,
+"binding": 321,
+"slack_by_count": 105,
+"mu": 0.512516168723737
+},
+{
+"n": 109,
+"vars": 218,
+"contacts": 200,
+"walls": 32,
+"binding": 232,
+"slack_by_count": 14,
+"mu": 0.508983073850553
+},
+{
+"n": 110,
+"vars": 220,
+"contacts": 285,
+"walls": 37,
+"binding": 322,
+"slack_by_count": 102,
+"mu": 0.5086949167484853
+},
+{
+"n": 111,
+"vars": 222,
+"contacts": 381,
+"walls": 33,
+"binding": 414,
+"slack_by_count": 192,
+"mu": 0.46434624896526167
+},
+{
+"n": 112,
+"vars": 224,
+"contacts": 385,
+"walls": 34,
+"binding": 419,
+"slack_by_count": 195,
+"mu": 0.4169947575596371
+},
+{
+"n": 113,
+"vars": 226,
+"contacts": 389,
+"walls": 35,
+"binding": 424,
+"slack_by_count": 198,
+"mu": 0.36985418908335
+},
+{
+"n": 114,
+"vars": 228,
+"contacts": 393,
+"walls": 36,
+"binding": 429,
+"slack_by_count": 201,
+"mu": 0.32292174978668875
+},
+{
+"n": 115,
+"vars": 230,
+"contacts": 397,
+"walls": 37,
+"binding": 434,
+"slack_by_count": 204,
+"mu": 0.2761947070543922
+},
+{
+"n": 116,
+"vars": 232,
+"contacts": 401,
+"walls": 38,
+"binding": 439,
+"slack_by_count": 207,
+"mu": 0.2296703875489925
+},
+{
+"n": 117,
+"vars": 234,
+"contacts": 405,
+"walls": 39,
+"binding": 444,
+"slack_by_count": 210,
+"mu": 0.18334617542603127
+},
+{
+"n": 118,
+"vars": 236,
+"contacts": 409,
+"walls": 40,
+"binding": 449,
+"slack_by_count": 213,
+"mu": 0.13721951061778448
+},
+{
+"n": 119,
+"vars": 238,
+"contacts": 413,
+"walls": 41,
+"binding": 454,
+"slack_by_count": 216,
+"mu": 0.0912878871822862
+},
+{
+"n": 120,
+"vars": 240,
+"contacts": 417,
+"walls": 42,
+"binding": 459,
+"slack_by_count": 219,
+"mu": 0.045548851714677596
+}
+]
+}

@@ -597,3 +597,39 @@ gated at side 2.001 and refused at 1.5, so the branch machinery is not vacuous.
 The contract is implementable and bounded but earns nothing: no unblock, its
 positive test row is proved optimal, and mid-size rows may be among the 152 proved
 grid floors. No row of the table changed. Entry 33-CENT-CONTRACT-T1-GLIDE.md.
+
+## Run 71 — the queued action (flip + free-set expansion), and the seed it needs
+
+`33` §7 queued one cell of the T1 card that run 70 never entered: a branch flip
+combined with free-set expansion, on a seed whose LP is not already rigid at L0.
+It was implemented (scripts/flipgrow.py) rather than argued.
+
+Slack was measured, not assumed. The wall margin `mu` is not slack, so three
+quantities were taken: the base depth (largest `eps` with the delivered branches
+feasible at `L0 - eps`), the flip depth (the same after one declared flip) and
+the pad slack (interior room at `L0`). All 42 open rows at n = 4-60 were searched
+in wall-margin order -- the rows with the most nominal room first -- over every
+contact edge at an extreme achiever and its three alternative branches.
+
+Result: 2,228 edges, 6,684 flips, base depth 0 at every row, 0 seeds at
+`L0 - 1e-6`, so the free-set ladder was never entered: 0 cells, 0 gated, 0 gains.
+Two monotonicities make the refusal exhaustive rather than a sample: feasibility
+is monotone in the free set (so "all free" is the strongest test, and expansion
+can only find a smaller repair, never more room) and monotone in `eps` (a refusal
+at 1e-6 refuses every larger shrink). The window below 1e-6 was probed: 1e-7
+gives 0 seeds on the top five rows; 1e-8 gives 20 seeds out of 78 flips on
+n = 18/11, the ladder enters 400 cells and the gate refuses every one -- the LP's
+own tolerance scale, and the clearest case yet for the gate as the only judge.
+
+The count explains the measurement: at every row 4-120 the number of binding
+constraints (contacts on their argmin axis plus active walls) exceeds `2n`, the
+least over-determined row being n = 5 at +2, with n = 18 at +4. A flip relaxes
+one pair and adds none, so it cannot open room in a frame that is over-determined
+before the flip. Controls fire both ways: a loose 2x2 grid at 2.2 reports base
+depth 1e-2 and one flipped branch seeds and gates; two unit squares at their
+exact optimum (2.0) refuse the base and every flip.
+
+What this closes: single-flip cells with free-set expansion at any open row
+n <= 60. What it leaves: two-flip cells, a new contact (outside the cell space),
+rows above 60, and the 675 rows above n = 324 that have no source. No row of the
+table changed. Entry 34-FLIP-AND-FREE-SET.md.

@@ -550,6 +550,12 @@ history rather than presented as current.
   `t1_glide.json`. 7,803 cells at n = 18/20/30 (base + 1/2-edge branch flips +
   re-worded flips), 0 feasible, 0 gated, 0 gains; four card figures corrected,
   one test case rejected as ill-posed (n = 5 is proved)
+* run 71 — the queued card action, answered in the negative:
+  `34-FLIP-AND-FREE-SET.md` with `flipgrow.py`, ledgers `flipgrow.json` and
+  `flipgrow_census.json`. 6,684 single flips over all 42 open rows at n = 4–60 in
+  wall-margin order, 0 seeds at `L0 − 1e−6`, 0 gated; every row 4–120 is
+  over-determined by count (least: n = 5, +2), and two monotonicities make the
+  refusal exhaustive over the declared ladder rather than a sample
 * continued in §10: `22-DIAMOND-MASK.md`, `23-SEED-WHEELS.md`,
   `24-N10-OPTIMAL.md`, `25-OPEN-ROW-CROSSWALK.md`, `26-FRONTIER-CROSSWALK.md`,
   and their instruments `diamond_mask.py`, `seed_wheels.py`, `optima.py`,
