@@ -668,3 +668,32 @@ looks like a certificate.
 
 No row of the table changed; the 2D score is untouched. Entry
 35-CUBES-IN-A-CUBE.md.
+
+## Run 73 — n = 9, and then every n: the cube grid is optimal, the score is rotation
+
+Run 72 left n = 9 open in (2, 3]. The route chosen was a big-M disjunctive MILP
+over all 6^C(n,2) declared structures at once (declp3.py --milp). It closes n = 4
+and n = 5 in ~9 s each, both grid-optimal to 1e-3, and at n = 9 (216 binaries,
+36 tight equalities) it did not close: 60 s budget expired, and the 300 s command
+cap killed the run. A solver's silence is not a theorem.
+
+The theorem is nine lines. Cubes occupy [c-1/2, c+1/2] inside [0,L], so all
+centres lie in a box of side L-1; two cubes are disjoint iff their centres differ
+by >= 1 in some coordinate; and if L-1 < m for an integer m, splitting the centre
+box into m^d sub-boxes of side (L-1)/m < 1 gives at most one centre per sub-box.
+With m = floor(L-1)+1: n > k^d implies L >= k+1, which the k-grid attains. Hence
+L_d(n) = ceil(n^(1/d)) for every n in every dimension -- L(9) = 3 exactly, and
+there is no 3D ladder at all.
+
+The same argument in 2D says axis-parallel squares can never beat ceil(sqrt n).
+Checked against the delivered table, exactly: 447 rows are axis-aligned and all
+447 sit at the grid (0 exceptions); 553 rows beat it and none is axis-aligned;
+447 + 553 = 1000, so on this table containing a rotated square is *equivalent* to
+beating the grid. The angles agree (pi/2 dominates with 66,445 squares, then
+pi/4 with 11,731). Runs 65-71 spent four runs closing branch-flip cells; this is
+why they had to fail -- on an aligned row no rearrangement of positions can ever
+gain, by proof. The lever is the angle word, which is what 31 and 28 already say.
+
+Housekeeping: the 46,656-branch n = 4 enumeration is now behind --exhaustive
+(default run is seconds), and --selftest is an alias for --control. No row of the
+table changed. Entry 36-CUBE-GRID-IS-OPTIMAL.md.

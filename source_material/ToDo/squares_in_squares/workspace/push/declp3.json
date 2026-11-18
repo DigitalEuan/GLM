@@ -379,19 +379,5 @@
    ],
    "verdict": "3D strictly better"
   }
- ],
- "exhaustive": {
-  "2": {
-   "lb": 2.0,
-   "branches": 6
-  },
-  "3": {
-   "lb": 2.0,
-   "branches": 216
-  },
-  "4": {
-   "lb": 2.0,
-   "branches": 46656
-  }
- }
+ ]
 }

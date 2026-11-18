@@ -1,5 +1,10 @@
 # 35 — Cubes in a cube: is the 3D optimum the extrusion of the 2D row? (Run 72)
 
+> **Superseded in part by `36`.** Run 73 proves `L(n) = ⌈n^{1/3}⌉` for *every* n, by a sub-box
+> counting argument on the centres. So the values below are exact optima, not constructions: the
+> "n >= 5 are constructions, not optima" caveat in §3, §5 and §7 is withdrawn, and `L(9)`, left open
+> in `(2, 3]` here, is exactly 3. The instrument and its controls stand.
+
 `SQUARES.md` in `dimension_ladder` left one concrete question open: the dimension ladder cannot
 touch this project through the plane — it can only touch it one dimension up. So the 3D analogue of
 `declp` was built (`scripts/declp3.py`), judged by its own exact gate, and asked the question

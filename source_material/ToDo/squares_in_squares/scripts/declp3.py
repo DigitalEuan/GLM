@@ -180,6 +180,99 @@ def min_side(state, branch=None, **kw):
     return solve(state, branch or full_branch(state), **kw)
 
 
+# ------------------------------------------------------- MILP (all branches)
+def _disjunction(n, tmax, eps=0.0, objective=False):
+    """The whole problem as one MILP: variables 3n positions, t, 6*C(n,2) binaries.
+
+    For each pair exactly one of the six separations is *enforced*; the others are
+    disabled by a big-M that is larger than any attainable gap (positions are
+    contained in [-2, 2] because t <= 4).  Minimising t over this disjunction is
+    the same optimisation the declared-axis LP performs one branch at a time, but
+    over every branch at once -- so its optimum is not a relaxation of the
+    declared-axis family, it is that family's global optimum.
+    """
+    from scipy.optimize import milp, LinearConstraint, Bounds
+    pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
+    M = 6.0
+    nv = 3 * n + 1 + 6 * len(pairs)
+    ti = 3 * n
+    c = np.zeros(nv)
+    if objective:
+        c[ti] = 1.0
+    rows, lo, hi = [], [], []
+    for i in range(n):
+        for q in range(3):
+            r = np.zeros(nv)
+            r[3 * i + q] = 1.0
+            r[ti] = -0.5
+            rows.append(r)
+            lo.append(-np.inf)
+            hi.append(-0.5)
+            r = np.zeros(nv)
+            r[3 * i + q] = -1.0
+            r[ti] = -0.5
+            rows.append(r)
+            lo.append(-np.inf)
+            hi.append(-0.5)
+    for k, (i, j) in enumerate(pairs):
+        eq = np.zeros(nv)
+        for a, (q, s) in enumerate(AXES):
+            b = 3 * n + 1 + 6 * k + a
+            eq[b] = 1.0
+            r = np.zeros(nv)
+            r[3 * j + q] += -s
+            r[3 * i + q] += s
+            r[b] = M
+            rows.append(r)
+            lo.append(-np.inf)
+            hi.append(M - 1.0)
+        rows.append(eq)
+        lo.append(1.0)
+        hi.append(1.0)
+    integrality = np.zeros(nv)
+    integrality[3 * n + 1:] = 1
+    lb = np.empty(nv)
+    ub = np.empty(nv)
+    lb[:3 * n] = -2.0
+    ub[:3 * n] = 2.0
+    lb[ti] = 1.0
+    ub[ti] = tmax - eps
+    lb[3 * n + 1:] = 0.0
+    ub[3 * n + 1:] = 1.0
+    return milp(c, constraints=LinearConstraint(np.array(rows), lo, hi),
+                integrality=integrality, bounds=Bounds(lb, ub),
+                options={"time_limit": 60.0, "mip_rel_gap": 0.0,
+                         "disp": False}), (pairs, ti, nv)
+
+
+def milp_min_side(n: int, tmax: float):
+    """Global optimum over every declared structure, plus the gate on its state."""
+    res, (pairs, ti, nv) = _disjunction(n, tmax, objective=True)
+    out = {"n": n, "tmax": tmax, "status": int(res.status),
+           "message": str(res.message), "t": None, "gate_tol0": None,
+           "gate_1e6": None}
+    if res.x is not None and res.status in (0, 1):
+        st = np.asarray(res.x[:3 * n], dtype=float).reshape(n, 3)
+        out["t"] = float(res.x[ti])
+        g0 = gate(n, st, tmax)
+        g6 = gate(n, st, tmax, tol=Fraction(1, 10 ** 6))
+        out["gate_tol0"] = {"ok": g0["ok"], "L": g0["L"],
+                           "worst_pen": g0["worst_pen_exact"]}
+        out["gate_1e6"] = {"ok": g6["ok"], "L": g6["L"],
+                          "worst_pen": g6["worst_pen_exact"]}
+    return out
+
+
+def feasible_below(n: int, tmax: float, eps: float):
+    """Is there ANY arrangement with side <= tmax - eps?  None = solver gave up."""
+    res, _ = _disjunction(n, tmax, eps=eps, objective=False)
+    if res.status == 2:                     # infeasible: a genuine lower bound
+        return False
+    if res.status == 0:
+        return True
+    return None
+
+
 # ---------------------------------------------------------------- descent
 def descend(state, L0, rounds=6, tol=1e-9, **kw):
     """Declared-axis descent: LP proposes, the exact gate decides, repeat.
@@ -332,7 +425,7 @@ def exhaustive(n: int, limit=None):
 
 
 # ---------------------------------------------------------------------- run
-def run(ns, ledger=None, do_exh=True):
+def run(ns, ledger=None, do_exh=False):
     out = {"lemma": lemma_two(2), "rows": []}
     print(f"{'n':>3} {'algn':>4} {'L2 2D':>7} {'extr':>7} {'grid3':>6} "
           f"{'desc(extr)':>10} {'desc(grid)':>10}  verdict")
@@ -376,19 +469,55 @@ def run(ns, ledger=None, do_exh=True):
     return 0
 
 
+def milp_report(ns, ledger=None):
+    """Settle each row's side exactly over all structures, or say it is open."""
+    out = {"rows": []}
+    print(f"{'n':>3} {'grid':>6} {'milp t':>8} {'gate@0':>7} {'no t<=':>8} {'':>4} verdict")
+    for n in ns:
+        Lg = extent3(grid3(n))
+        rec = milp_min_side(n, Lg)
+        below = feasible_below(n, Lg, 1e-3)
+        if below is False:
+            verdict = f"L(n) >= {Lg - 1e-3:.3f} and <= {Lg} (grid optimal up to 1e-3)"
+        elif below is True:
+            verdict = "something fits below the grid: IMPROVEMENT"
+        else:
+            verdict = "solver gave up: open"
+        g = rec["gate_tol0"] or {}
+        print(f"{n:3d} {Lg:6.3f} {str(rec['t'])[:8]:>8} {str(g.get('ok')):>7} "
+              f"{str(below):>8}   {verdict}")
+        rec["grid_L"] = Lg
+        rec["below"] = below
+        rec["verdict"] = verdict
+        out["rows"].append(rec)
+    if ledger:
+        with open(ledger, "w") as f:
+            json.dump(out, f, indent=1)
+        print(f"\nledger -> {os.path.relpath(ledger, os.path.dirname(os.path.dirname(HERE)))}")
+    return 0
+
+
 def main() -> int:
-    if "--control" in sys.argv:
+    argv = sys.argv[1:]
+    if "--control" in argv or "--selftest" in argv:
         return control()
-    if "--exhaustive" in sys.argv:
-        n = int(sys.argv[sys.argv.index("--exhaustive") + 1])
-        lo, cnt, br = exhaustive(n, limit=int(sys.argv[sys.argv.index("--exhaustive") + 2])
-                                 if len(sys.argv) > sys.argv.index("--exhaustive") + 2 else None)
-        print(f"n={n}: {cnt} branches, best LP side {lo}")
-        return 0
+    if "--milp" in argv:
+        i = argv.index("--milp")
+        ns = [int(v) for v in argv[i + 1:] if v.isdigit()]
+        ledger = os.path.join(os.path.dirname(HERE), "workspace/push/declp3_milp.json")
+        return milp_report(ns or [9], ledger=ledger)
+    if "--exhaustive" in argv:
+        i = argv.index("--exhaustive")
+        rest = [v for v in argv[i + 1:] if v.isdigit()]
+        if rest:                            # --exhaustive N [LIMIT]: one n
+            lim = int(rest[1]) if len(rest) > 1 else None
+            lo, cnt, br = exhaustive(int(rest[0]), limit=lim)
+            print(f"n={rest[0]}: {cnt} branches, best LP side {lo}")
+            return 0
     ledger = os.path.join(os.path.dirname(HERE), "workspace/push/declp3.json")
-    ns = [int(v) for v in sys.argv[1:]] if len(sys.argv) > 1 else \
+    ns = [int(v) for v in argv if v.isdigit() and not v.startswith("0")] or \
         [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20]
-    return run(ns, ledger=ledger)
+    return run(ns, ledger=ledger, do_exh="--exhaustive" in argv)
 
 
 if __name__ == "__main__":

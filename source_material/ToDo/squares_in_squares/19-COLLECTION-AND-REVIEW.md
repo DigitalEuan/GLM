@@ -565,6 +565,15 @@ history rather than presented as current.
   n = 5 (2.7071 → 2, 3 → 2) and again at n = 10, 12, 16, 20; n = 9 ties at 3 with
   `L(9)` open in (2, 3]; exhaustive 6/216/46,656 branch bounds agree with the
   lemma. The degradation control caught three LP defects before any result
+* run 73 — n = 9 settled, and then every n by proof:
+  `36-CUBE-GRID-IS-OPTIMAL.md` with the new `--milp` / `--exhaustive` / `--selftest`
+  modes of `declp3.py`. The disjunctive MILP closes n = 4, 5 (~9 s each) and not
+  n = 9 (216 binaries, budget expired); the sub-box counting argument gives
+  `L_d(n) = ⌈n^{1/d}⌉` in every dimension, so `L(9) = 3` and nothing beats the cube
+  grid anywhere. In 2D the same argument closes the axis-parallel class, which
+  makes every beat a rotation: **447 axis-aligned rows, all at `⌈√n⌉`; 553 beats,
+  none axis-aligned; 447 + 553 = 1000** — the score is exactly rotation, which also
+  explains why the branch-flip searches of runs 65–71 could not have found anything
 * continued in §10: `22-DIAMOND-MASK.md`, `23-SEED-WHEELS.md`,
   `24-N10-OPTIMAL.md`, `25-OPEN-ROW-CROSSWALK.md`, `26-FRONTIER-CROSSWALK.md`,
   and their instruments `diamond_mask.py`, `seed_wheels.py`, `optima.py`,
