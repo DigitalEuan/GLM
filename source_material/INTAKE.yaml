@@ -56,7 +56,7 @@
 
 schema: glm-intake-ledger/v1
 created: 31 October 2026
-last_altered: 17 November 2026
+last_altered: 18 November 2026
 items:
 - id: GLM_IMPROVEMENT_ROADMAP
   path: ToDo/GLM_IMPROVEMENT_ROADMAP.md
@@ -928,9 +928,9 @@ items:
     omits the repository case W4-M1)'
   acceptance:
     study: CENT_WHEELS_STUDY
-    criterion: A supplied formula wheel (W16–W42) is absorbed when, after rule R, it has at least one axiom; every
-      axiom balances at SI7 on its (corrected) table; S2 and S5 hold for it; and every one of its
-      cases has a settled flag equal to span membership — each proved in Lean (L1).
+    criterion: A supplied formula wheel (W16–W42) is absorbed when, after rule R, it has at least
+      one axiom; every axiom balances at SI7 on its (corrected) table; S2 and S5 hold for it; and
+      every one of its cases has a settled flag equal to span membership — each proved in Lean (L1).
     result: '63 of 64 laws licensed and 0 of 51 not-a-laws licensed with the cent wheels (bars: at
       least 56, at most 0), against 1 of 64 laws with the fifteen wheels alone (bar: at most 4); 26
       of 33 supplied negative controls refused; 5 supplied axioms failing at SI7, 0 absorbed.'
@@ -3272,3 +3272,12 @@ items:
   last_action: '17 November 2026: copied the three recovered files into src/lean/RequestProject/GLM/,
     moved the six held dependents back, ran lean_check --write-audit (OK)'
   next_step: 'owner: run scripts/rebuild_lean.sh; when it passes, advance lean_recovery lean_verified'
+- id: dimension_ladder
+  path: ToDo/dimension_ladder
+  kind: concept note
+  offers: a map of the proved and best-known sphere packings in dimensions 1-24, with exact centre
+    densities and gains over the grid, and where the laminated chain of optimal lattices breaks
+  stage: received
+  last_action: '18 November 2026: moved into ToDo/ and registered'
+  next_step: 'triage: write kind, offers (what it claims or offers) and the next step, then `advance
+    dimension_ladder triaged`'
