@@ -1,0 +1,17 @@
+{
+ "grid_rows": 447,
+ "grid_gap_zero": 0.9843400447427293,
+ "beating_gap_zero": 15,
+ "rot_beating": 1.0,
+ "rot_grid": 0.0,
+ "auc_gap_all": 0.9861281357330971,
+ "auc_gap_rotated": NaN,
+ "auc_rot": 1.0,
+ "spearman_gap_delta_rotated_beating": 0.36006132841426863,
+ "mi_rot_beats": 0.9918796925533511,
+ "mi_gap_beats": 0.7480139007831001,
+ "mi_gap_beats_given_rot": 0.0,
+ "mi_rot_beats_given_gap": 0.24386579177025092,
+ "null_gap_mean": 0.001431659686353368,
+ "null_gap_sd": 0.0013704373326413445
+}

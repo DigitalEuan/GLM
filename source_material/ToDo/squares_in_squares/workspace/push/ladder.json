@@ -1,0 +1,61 @@
+{
+ "run": 63,
+ "schema": "ladder/1",
+ "rungs": [
+  {
+   "rung": 1,
+   "representation": "float / scan layer",
+   "claim": "blind below 2.5e-13; a scan comparison cannot separate two packings whose sides differ by less than that",
+   "witness": "|dE| <= 1 after correction (scan_blind_to_clearance, 01)",
+   "status": "quoted",
+   "source": "01-LAYERS.md; ledger leech_lab",
+   "checked": false
+  },
+  {
+   "rung": 2,
+   "representation": "24-pocket address (6 sectors x 4 shells)",
+   "claim": "sees rotation and nothing else: conditioning the score on rotation destroys the address's information",
+   "witness": "AUC(rot->beats)=1.0, AUC(gap->beats)=0.9861281357330971, MI(gap; beats | rot)=0.0",
+   "status": "recomputed",
+   "source": "workspace/push/leech_audit_fix.json",
+   "checked": true
+  },
+  {
+   "rung": 3,
+   "representation": "Lambda_24 integrality predicate",
+   "claim": "incompatible with the field: every tilted row is illegal at every tested scale, every untilted row is legal somewhere",
+   "witness": "tilt vs legal = {'tilted=True,legal=True': 0, 'tilted=True,legal=False': 87, 'tilted=False,legal=True': 168, 'tilted=False,legal=False': 0}",
+   "status": "recomputed",
+   "source": "workspace/push/leech_map.json",
+   "checked": true
+  },
+  {
+   "rung": 4,
+   "representation": "contact graph + Laman/Maxwell count",
+   "claim": "adds nothing to |E|: square contact graphs cannot reach the Laman threshold except K3, and no delivered row is redundant",
+   "witness": "R^2 == |E| (0.391 both); 0/220 rows with a redundant contact; cluster headroom 0,-1,-1,-2 for |S| = 3,4,5,6",
+   "status": "quoted",
+   "source": "18-RIGIDITY.md; 17-COMB-ADDRESS.md",
+   "checked": false
+  },
+  {
+   "rung": 5,
+   "representation": "WL signature of the tilt-coloured contact graph",
+   "claim": "complete for the combinatorial part, silent on geometry: beats its null only on a contact-bearing ensemble",
+   "witness": "explain = {'rows': 109, 'n_values': [5, 6, 7, 8, 9, 10], 'seconds': 32.07, 'r2_address': 0.8420434440452462, 'null_address': {'mean': 0.6201367323483941, 'max': 0.8324152",
+   "status": "recomputed",
+   "source": "workspace/push/leech_comb.json",
+   "checked": true
+  },
+  {
+   "rung": 6,
+   "representation": "the published catalogue itself",
+   "claim": "determines n <= 324 and nothing above it; the trivial grid is provably not its best known above 324",
+   "witness": "determined=325, undetermined=675, witness family s(k^2+1) = k + 0.5355339",
+   "status": "recomputed",
+   "source": "workspace/push/frontier.json",
+   "checked": true
+  }
+ ],
+ "checked": 4
+}

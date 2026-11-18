@@ -1,0 +1,1956 @@
+{
+ "instrument": "motif_wheels.py",
+ "schema": "motif-spin/1",
+ "written": "2026-11-18 06:29:46",
+ "seconds": 2.27,
+ "wheels": [
+  {
+   "wheel_id": "M-diamond",
+   "name": "rebuild a delivered 45 deg seam atom from integers",
+   "params": [
+    5,
+    17
+   ],
+   "angle_family": "{0, pi/4}",
+   "rigidity": "reconstruction (tested, not scored)",
+   "note": "p x p diamond + wall-anchored upright columns, exact in Q(sqrt 2)"
+  },
+  {
+   "wheel_id": "M-grid",
+   "name": "k x k upright grid",
+   "params": [
+    1,
+    32
+   ],
+   "angle_family": "{0, pi/2}",
+   "rigidity": "rigid (jammed, no slack)",
+   "note": "the area-exact baseline every row is measured against"
+  },
+  {
+   "wheel_id": "M-cross-grid",
+   "name": "gap a grid, fill the crosses at 45 deg",
+   "params": [
+    2,
+    3
+   ],
+   "angle_family": "{0, pi/4}",
+   "rigidity": "rigid (exact contact at g = sqrt(2)/2)",
+   "note": "k=2 is Goebel's s(5); k>=3 is the declared negative"
+  },
+  {
+   "wheel_id": "M-cascade",
+   "name": "exact band step up the r = 1 column",
+   "params": [
+    8,
+    25
+   ],
+   "angle_family": "{0, pi/2}",
+   "rigidity": "inherits the base's rigidity",
+   "note": "carries one gated base to every row of its column"
+  },
+  {
+   "wheel_id": "M-l-extension",
+   "name": "Friedman L-extension closure",
+   "params": [
+    5,
+    10
+   ],
+   "angle_family": "{0, pi/2}",
+   "rigidity": "rigid (band contacts)",
+   "note": "m' = m + floor(L+1) + floor(L), L' = L + 1"
+  }
+ ],
+ "counts": {
+  "cells": 111,
+  "survivors": 0,
+  "reconstructs": 19,
+  "refused": 92
+ },
+ "survivors": [],
+ "reconstructions": [
+  {
+   "wheel": "M-diamond",
+   "params": [
+    1,
+    2,
+    2
+   ],
+   "n": 5,
+   "declared_L": 2.707106782448,
+   "law": "p = 1; columns (2, 2); walls {'left': [2, 0], 'right': [2, 0], 'bottom': [2, 0], 'top': [2, 0]}",
+   "note": "delta = 0.707106782",
+   "karakus_bound": null,
+   "gate_L": 2.70710678371,
+   "status": "reconstructs",
+   "expect_L": 2.707106782448,
+   "rebuilt_L": 2.70710678371,
+   "err": 1.2619998379648223e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    3,
+    5,
+    5
+   ],
+   "n": 26,
+   "declared_L": 5.621320345204,
+   "law": "p = 3; columns (5, 5); walls {'left': [4, 0], 'right': [5, 0], 'bottom': [5, 0], 'top': [5, 0]}",
+   "note": "delta = 0.621320345",
+   "karakus_bound": 5.109772228646,
+   "gate_L": 5.621320346848,
+   "status": "reconstructs",
+   "expect_L": 5.621320345204,
+   "rebuilt_L": 5.621320346848,
+   "err": 1.6438965744214329e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    8,
+    8
+   ],
+   "n": 65,
+   "declared_L": 8.535533907699,
+   "law": "p = 5; columns (8, 8); walls {'left': [8, 0], 'right': [8, 0], 'bottom': [8, 0], 'top': [8, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 8.066372975211,
+   "gate_L": 8.535533909465,
+   "status": "reconstructs",
+   "expect_L": 8.535533907699,
+   "rebuilt_L": 8.535533909465,
+   "err": 1.766000679026547e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    9,
+    9
+   ],
+   "n": 82,
+   "declared_L": 9.535533907722,
+   "law": "p = 5; columns (9, 9); walls {'left': [9, 0], 'right': [9, 0], 'bottom': [9, 0], 'top': [9, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 9.058621384312,
+   "gate_L": 9.535533909512,
+   "status": "reconstructs",
+   "expect_L": 9.535533907722,
+   "rebuilt_L": 9.535533909512,
+   "err": 1.7899992599268444e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    10,
+    10
+   ],
+   "n": 101,
+   "declared_L": 10.535533907742,
+   "law": "p = 5; columns (10, 10); walls {'left': [10, 0], 'right': [10, 0], 'bottom': [10, 0], 'top': [10, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 10.052486587271,
+   "gate_L": 10.535533909552,
+   "status": "reconstructs",
+   "expect_L": 10.535533907742,
+   "rebuilt_L": 10.535533909552,
+   "err": 1.8100010379384912e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    11,
+    11
+   ],
+   "n": 122,
+   "declared_L": 11.53553390776,
+   "law": "p = 5; columns (11, 11); walls {'left': [11, 0], 'right': [11, 0], 'bottom': [11, 0], 'top': [11, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 11.047511554864,
+   "gate_L": 11.535533909586,
+   "status": "reconstructs",
+   "expect_L": 11.53553390776,
+   "rebuilt_L": 11.535533909586,
+   "err": 1.8259989076341299e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    12,
+    12
+   ],
+   "n": 145,
+   "declared_L": 12.535533907774,
+   "law": "p = 5; columns (12, 12); walls {'left': [12, 0], 'right': [12, 0], 'bottom': [12, 0], 'top': [12, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 12.043396380615,
+   "gate_L": 12.535533909614,
+   "status": "reconstructs",
+   "expect_L": 12.535533907774,
+   "rebuilt_L": 12.535533909614,
+   "err": 1.8400001522422826e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    13,
+    13
+   ],
+   "n": 170,
+   "declared_L": 13.535533907784,
+   "law": "p = 5; columns (13, 13); walls {'left': [13, 0], 'right': [13, 0], 'bottom': [13, 0], 'top': [13, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 13.039936203984,
+   "gate_L": 13.535533909636,
+   "status": "reconstructs",
+   "expect_L": 13.535533907784,
+   "rebuilt_L": 13.535533909636,
+   "err": 1.8520012190492707e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    14,
+    14
+   ],
+   "n": 197,
+   "declared_L": 14.535533907796,
+   "law": "p = 5; columns (14, 14); walls {'left': [14, 0], 'right': [14, 0], 'bottom': [14, 0], 'top': [14, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 14.036986370681,
+   "gate_L": 14.535533909658,
+   "status": "reconstructs",
+   "expect_L": 14.535533907796,
+   "rebuilt_L": 14.535533909658,
+   "err": 1.8620003316982547e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    15,
+    15
+   ],
+   "n": 226,
+   "declared_L": 15.535533907804,
+   "law": "p = 5; columns (15, 15); walls {'left': [15, 0], 'right': [15, 0], 'bottom': [15, 0], 'top': [15, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 15.034441853749,
+   "gate_L": 15.535533909676,
+   "status": "reconstructs",
+   "expect_L": 15.535533907804,
+   "rebuilt_L": 15.535533909676,
+   "err": 1.8719994443472388e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    16,
+    16
+   ],
+   "n": 257,
+   "declared_L": 16.535533907812,
+   "law": "p = 5; columns (16, 16); walls {'left': [16, 0], 'right': [16, 0], 'bottom': [16, 0], 'top': [16, 0]}",
+   "note": "delta = 0.535533908",
+   "karakus_bound": 16.032224567009,
+   "gate_L": 16.535533909692,
+   "status": "reconstructs",
+   "expect_L": 16.535533907812,
+   "rebuilt_L": 16.535533909692,
+   "err": 1.8799966028382187e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    33,
+    33
+   ],
+   "n": 362,
+   "declared_L": 19.535533909596,
+   "law": "p = 5; columns (33, 33); walls {'left': [19, 0], 'right': [19, 0], 'bottom': [19, 0], 'top': [19, 0]}",
+   "note": "delta = 0.535533910",
+   "karakus_bound": 19.027007313649,
+   "gate_L": 19.535533911494,
+   "status": "reconstructs",
+   "expect_L": 19.535533909596,
+   "rebuilt_L": 19.535533911494,
+   "err": 1.897998203048701e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    35,
+    35
+   ],
+   "n": 401,
+   "declared_L": 20.5355339096,
+   "law": "p = 5; columns (35, 35); walls {'left': [20, 0], 'right': [20, 0], 'bottom': [20, 0], 'top': [20, 0]}",
+   "note": "delta = 0.535533910",
+   "karakus_bound": 20.025624189767,
+   "gate_L": 20.535533911502,
+   "status": "reconstructs",
+   "expect_L": 20.5355339096,
+   "rebuilt_L": 20.535533911502,
+   "err": 1.90199855865103e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    37,
+    37
+   ],
+   "n": 442,
+   "declared_L": 21.535533909606,
+   "law": "p = 5; columns (37, 37); walls {'left': [21, 0], 'right': [21, 0], 'bottom': [21, 0], 'top': [21, 0]}",
+   "note": "delta = 0.535533910",
+   "karakus_bound": 21.024375751774,
+   "gate_L": 21.535533911514,
+   "status": "reconstructs",
+   "expect_L": 21.535533909606,
+   "rebuilt_L": 21.535533911514,
+   "err": 1.908002644768203e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    5,
+    39,
+    39
+   ],
+   "n": 485,
+   "declared_L": 22.53553390961,
+   "law": "p = 5; columns (39, 39); walls {'left': [22, 0], 'right': [22, 0], 'bottom': [22, 0], 'top': [22, 0]}",
+   "note": "delta = 0.535533910",
+   "karakus_bound": 22.023243250031,
+   "gate_L": 22.535533911522,
+   "status": "reconstructs",
+   "expect_L": 22.53553390961,
+   "rebuilt_L": 22.535533911522,
+   "err": 1.9119994476568536e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    17,
+    25,
+    24
+   ],
+   "n": 626,
+   "declared_L": 25.520815282092,
+   "law": "p = 17; columns (25, 24); walls {'left': [24, 0], 'right': [25, 0], 'bottom': [25, 0], 'top': [25, 0]}",
+   "note": "delta = 0.520815282",
+   "karakus_bound": 25.020399670478,
+   "gate_L": 25.520815284014,
+   "status": "reconstructs",
+   "expect_L": 25.520815282092,
+   "rebuilt_L": 25.520815284014,
+   "err": 1.922000336662677e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    17,
+    41,
+    40
+   ],
+   "n": 730,
+   "declared_L": 27.52081528402,
+   "law": "p = 17; columns (41, 40); walls {'left': [26, 0], 'right': [27, 0], 'bottom': [27, 0], 'top': [27, 0]}",
+   "note": "delta = 0.520815284",
+   "karakus_bound": 27.018861212352,
+   "gate_L": 27.520815285948,
+   "status": "reconstructs",
+   "expect_L": 27.52081528402,
+   "rebuilt_L": 27.520815285948,
+   "err": 1.928000870066171e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    17,
+    45,
+    44
+   ],
+   "n": 842,
+   "declared_L": 29.520815284024,
+   "law": "p = 17; columns (45, 44); walls {'left': [28, 0], 'right': [29, 0], 'bottom': [29, 0], 'top': [29, 0]}",
+   "note": "delta = 0.520815284",
+   "karakus_bound": 29.017538463198,
+   "gate_L": 29.520815285956,
+   "status": "reconstructs",
+   "expect_L": 29.520815284024,
+   "rebuilt_L": 29.520815285956,
+   "err": 1.9320012256685004e-09
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    17,
+    49,
+    48
+   ],
+   "n": 962,
+   "declared_L": 31.520815284028,
+   "law": "p = 17; columns (49, 48); walls {'left': [30, 0], 'right': [31, 0], 'bottom': [31, 0], 'top': [31, 0]}",
+   "note": "delta = 0.520815284",
+   "karakus_bound": 31.016389039334,
+   "gate_L": 31.520815285964,
+   "status": "reconstructs",
+   "expect_L": 31.520815284028,
+   "rebuilt_L": 31.520815285964,
+   "err": 1.9360015812708298e-09
+  }
+ ],
+ "refused": [
+  {
+   "wheel": "M-diamond",
+   "params": [
+    3
+   ],
+   "n": 10,
+   "declared_L": 3.707106782648,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=10: 2 tilted squares is not a square p^2",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=10: 2 tilted squares is not a square p^2"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    4
+   ],
+   "n": 17,
+   "declared_L": 4.675530095176,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=17: 2 upright squares are not on a wall/centre anchor",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=17: 2 upright squares are not on a wall/centre anchor"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    6
+   ],
+   "n": 37,
+   "declared_L": 6.598619610942,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=37: 15 tilted squares is not a square p^2",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=37: 15 tilted squares is not a square p^2"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    7
+   ],
+   "n": 50,
+   "declared_L": 7.571428573164,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=50: tilted block is not the 45 deg lattice (max error 5.86e-01)",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=50: tilted block is not the 45 deg lattice (max error 5.86e-01)"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    17
+   ],
+   "n": 290,
+   "declared_L": 17.535533907818,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=290: 50 tilted squares is not a square p^2",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=290: 50 tilted squares is not a square p^2"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    18
+   ],
+   "n": 325,
+   "declared_L": 18.535533907825,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=325: 95 tilted squares is not a square p^2",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=325: 95 tilted squares is not a square p^2"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    23
+   ],
+   "n": 530,
+   "declared_L": 23.535533907848,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=530: 130 tilted squares is not a square p^2",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=530: 130 tilted squares is not a square p^2"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    24
+   ],
+   "n": 577,
+   "declared_L": 24.535533907851,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=577: 145 tilted squares is not a square p^2",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=577: 145 tilted squares is not a square p^2"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    26
+   ],
+   "n": 677,
+   "declared_L": 26.520815284016,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=677: 1 upright squares are not on a wall/centre anchor",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=677: 1 upright squares are not on a wall/centre anchor"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    28
+   ],
+   "n": 785,
+   "declared_L": 28.520815284022,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=785: 1 upright squares are not on a wall/centre anchor",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=785: 1 upright squares are not on a wall/centre anchor"
+  },
+  {
+   "wheel": "M-diamond",
+   "params": [
+    30
+   ],
+   "n": 901,
+   "declared_L": 30.520815284026,
+   "law": "p = ? (describe_mismatch)",
+   "note": "n=901: 1 upright squares are not on a wall/centre anchor",
+   "status": "refused",
+   "reason": "layout_not_enumerated",
+   "detail": "n=901: 1 upright squares are not on a wall/centre anchor"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    1
+   ],
+   "n": 1,
+   "declared_L": 1.0,
+   "law": "n = k^2 = 1; L = k = 1",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 1.0,
+   "worst_pen": null,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=1.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    2
+   ],
+   "n": 4,
+   "declared_L": 2.0,
+   "law": "n = k^2 = 4; L = k = 2",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 2.000000001,
+   "worst_pen": -9.99999860695766e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=2.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    3
+   ],
+   "n": 9,
+   "declared_L": 3.0,
+   "law": "n = k^2 = 9; L = k = 3",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 3.000000001334,
+   "worst_pen": -6.669997887343015e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=3.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    4
+   ],
+   "n": 16,
+   "declared_L": 4.0,
+   "law": "n = k^2 = 16; L = k = 4",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 4.0000000015,
+   "worst_pen": -5.000000413701855e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=4.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    5
+   ],
+   "n": 25,
+   "declared_L": 5.0,
+   "law": "n = k^2 = 25; L = k = 5",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 5.0000000016,
+   "worst_pen": -4.000000330961484e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=5.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    6
+   ],
+   "n": 36,
+   "declared_L": 6.0,
+   "law": "n = k^2 = 36; L = k = 6",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 6.000000001666,
+   "worst_pen": -3.329998499168596e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=6.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    7
+   ],
+   "n": 49,
+   "declared_L": 7.0,
+   "law": "n = k^2 = 49; L = k = 7",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 7.000000001714,
+   "worst_pen": -2.8500002358100573e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=7.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    8
+   ],
+   "n": 64,
+   "declared_L": 8.0,
+   "law": "n = k^2 = 64; L = k = 8",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 8.00000000175,
+   "worst_pen": -2.499995765958829e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=8.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    9
+   ],
+   "n": 81,
+   "declared_L": 9.0,
+   "law": "n = k^2 = 81; L = k = 9",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 9.000000001778,
+   "worst_pen": -2.219993078256266e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=9.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    10
+   ],
+   "n": 100,
+   "declared_L": 10.0,
+   "law": "n = k^2 = 100; L = k = 10",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 10.0000000018,
+   "worst_pen": -2.000000165480742e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=10.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    11
+   ],
+   "n": 121,
+   "declared_L": 11.0,
+   "law": "n = k^2 = 121; L = k = 11",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 11.000000001818,
+   "worst_pen": -1.8100010379384912e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=11.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    12
+   ],
+   "n": 144,
+   "declared_L": 12.0,
+   "law": "n = k^2 = 144; L = k = 12",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 12.000000001834,
+   "worst_pen": -1.659996584635337e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=12.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    13
+   ],
+   "n": 169,
+   "declared_L": 13.0,
+   "law": "n = k^2 = 169; L = k = 13",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 13.000000001846,
+   "worst_pen": -1.5299939093438297e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=13.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    14
+   ],
+   "n": 196,
+   "declared_L": 14.0,
+   "law": "n = k^2 = 196; L = k = 14",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 14.000000001858,
+   "worst_pen": -1.4200018938481662e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=14.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    15
+   ],
+   "n": 225,
+   "declared_L": 15.0,
+   "law": "n = k^2 = 225; L = k = 15",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 15.000000001866,
+   "worst_pen": -1.3299938927957555e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=15.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    16
+   ],
+   "n": 256,
+   "declared_L": 16.0,
+   "law": "n = k^2 = 256; L = k = 16",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 16.000000001875,
+   "worst_pen": -1.2399947735275418e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=16.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    17
+   ],
+   "n": 289,
+   "declared_L": 17.0,
+   "law": "n = k^2 = 289; L = k = 17",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 17.000000001882,
+   "worst_pen": -1.169997432270975e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=17.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    18
+   ],
+   "n": 324,
+   "declared_L": 18.0,
+   "law": "n = k^2 = 324; L = k = 18",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 18.000000001888,
+   "worst_pen": -1.1099743346676405e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=18.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    19
+   ],
+   "n": 361,
+   "declared_L": 19.0,
+   "law": "n = k^2 = 361; L = k = 19",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 19.000000001894,
+   "worst_pen": -1.049995645985291e-10,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=19.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    20
+   ],
+   "n": 400,
+   "declared_L": 20.0,
+   "law": "n = k^2 = 400; L = k = 20",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 20.0000000019,
+   "worst_pen": -9.99982319171977e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=20.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    21
+   ],
+   "n": 441,
+   "declared_L": 21.0,
+   "law": "n = k^2 = 441; L = k = 21",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 21.000000001904,
+   "worst_pen": -9.49995637711254e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=21.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    22
+   ],
+   "n": 484,
+   "declared_L": 22.0,
+   "law": "n = k^2 = 484; L = k = 22",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 22.00000000191,
+   "worst_pen": -9.000089562505309e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=22.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    23
+   ],
+   "n": 529,
+   "declared_L": 23.0,
+   "law": "n = k^2 = 529; L = k = 23",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 23.000000001914,
+   "worst_pen": -8.699885256646667e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=23.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    24
+   ],
+   "n": 576,
+   "declared_L": 24.0,
+   "law": "n = k^2 = 576; L = k = 24",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 24.000000001916,
+   "worst_pen": -8.29984969641373e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=24.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    25
+   ],
+   "n": 625,
+   "declared_L": 25.0,
+   "law": "n = k^2 = 625; L = k = 25",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 25.00000000192,
+   "worst_pen": -8.000000661922968e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=25.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    26
+   ],
+   "n": 676,
+   "declared_L": 26.0,
+   "law": "n = k^2 = 676; L = k = 26",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 26.000000001924,
+   "worst_pen": -7.599965101690032e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=26.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    27
+   ],
+   "n": 729,
+   "declared_L": 27.0,
+   "law": "n = k^2 = 729; L = k = 27",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 27.000000001926,
+   "worst_pen": -7.399769685889623e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=27.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    28
+   ],
+   "n": 784,
+   "declared_L": 28.0,
+   "law": "n = k^2 = 784; L = k = 28",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 28.000000001928,
+   "worst_pen": -7.099743015714921e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=28.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    29
+   ],
+   "n": 841,
+   "declared_L": 29.0,
+   "law": "n = k^2 = 841; L = k = 29",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 29.000000001932,
+   "worst_pen": -6.899725235598453e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=29.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    30
+   ],
+   "n": 900,
+   "declared_L": 30.0,
+   "law": "n = k^2 = 900; L = k = 30",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 30.000000001934,
+   "worst_pen": -6.59987620110769e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=30.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    31
+   ],
+   "n": 961,
+   "declared_L": 31.0,
+   "law": "n = k^2 = 961; L = k = 31",
+   "note": "baseline; area-exact",
+   "karakus_bound": null,
+   "gate_L": 31.000000001936,
+   "worst_pen": -6.399858420991222e-11,
+   "status": "refused",
+   "reason": "area_exact",
+   "detail": "declared L=31.000000000 = sqrt(n): no slack to win"
+  },
+  {
+   "wheel": "M-grid",
+   "params": [
+    32
+   ],
+   "n": 1024,
+   "declared_L": 32.0,
+   "law": "n = k^2 = 1024; L = k = 32",
+   "note": "baseline; area-exact",
+   "status": "refused",
+   "reason": "n_cap",
+   "detail": "n=1024 > 1000"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    2,
+    0.697107
+   ],
+   "n": 5,
+   "declared_L": 2.697106781187,
+   "law": "n = k^2 + (k-1)^2 = 5; L = 1 + (k-1)(1+g) = 2.697106781",
+   "note": "k=2 is s(5) = 2 + sqrt(2)/2 (Goebel 1979)",
+   "karakus_bound": null,
+   "gate_L": 2.69713427238,
+   "worst_pen": 0.007051628602552595,
+   "status": "refused",
+   "reason": "packlib_rejected",
+   "detail": "ok=False worst_pen=+7.052e-03"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    2,
+    0.708107
+   ],
+   "n": 5,
+   "declared_L": 2.708106781187,
+   "law": "n = k^2 + (k-1)^2 = 5; L = 1 + (k-1)(1+g) = 2.708106781",
+   "note": "k=2 is s(5) = 2 + sqrt(2)/2 (Goebel 1979)",
+   "karakus_bound": null,
+   "gate_L": 2.708106782448,
+   "worst_pen": -0.0007071076731679504,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=2.708106782 >= delivered 2.707106782"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    2,
+    0.75
+   ],
+   "n": 5,
+   "declared_L": 2.75,
+   "law": "n = k^2 + (k-1)^2 = 5; L = 1 + (k-1)(1+g) = 2.750000000",
+   "note": "k=2 is s(5) = 2 + sqrt(2)/2 (Goebel 1979)",
+   "karakus_bound": null,
+   "gate_L": 2.750000001272,
+   "worst_pen": -0.03033008678935012,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=2.750000001 >= delivered 2.707106782"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    2,
+    0.8
+   ],
+   "n": 5,
+   "declared_L": 2.8,
+   "law": "n = k^2 + (k-1)^2 = 5; L = 1 + (k-1)(1+g) = 2.800000000",
+   "note": "k=2 is s(5) = 2 + sqrt(2)/2 (Goebel 1979)",
+   "karakus_bound": null,
+   "gate_L": 2.800000001286,
+   "worst_pen": -0.06568542585857684,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=2.800000001 >= delivered 2.707106782"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    3,
+    0.697107
+   ],
+   "n": 13,
+   "declared_L": 4.394213562373,
+   "law": "n = k^2 + (k-1)^2 = 13; L = 1 + (k-1)(1+g) = 4.394213562",
+   "note": "k>=3 needs a wider cross, so it loses to the grid",
+   "karakus_bound": 3.701562118716,
+   "gate_L": 4.394247309767,
+   "worst_pen": 0.007059136307387082,
+   "status": "refused",
+   "reason": "packlib_rejected",
+   "detail": "ok=False worst_pen=+7.059e-03"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    3,
+    0.708107
+   ],
+   "n": 13,
+   "declared_L": 4.416213562373,
+   "law": "n = k^2 + (k-1)^2 = 13; L = 1 + (k-1)(1+g) = 4.416213562",
+   "note": "k>=3 needs a wider cross, so it loses to the grid",
+   "karakus_bound": 3.701562118716,
+   "gate_L": 4.416213563921,
+   "worst_pen": -0.0007071073280995321,
+   "status": "refused",
+   "reason": "worse_than_grid",
+   "detail": "L=4.416213564 > grid 4"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    3,
+    0.75
+   ],
+   "n": 13,
+   "declared_L": 4.5,
+   "law": "n = k^2 + (k-1)^2 = 13; L = 1 + (k-1)(1+g) = 4.500000000",
+   "note": "k>=3 needs a wider cross, so it loses to the grid",
+   "karakus_bound": 3.701562118716,
+   "gate_L": 4.500000001556,
+   "worst_pen": -0.030330086440039317,
+   "status": "refused",
+   "reason": "worse_than_grid",
+   "detail": "L=4.500000002 > grid 4"
+  },
+  {
+   "wheel": "M-cross-grid",
+   "params": [
+    3,
+    0.8
+   ],
+   "n": 13,
+   "declared_L": 4.6,
+   "law": "n = k^2 + (k-1)^2 = 13; L = 1 + (k-1)(1+g) = 4.600000000",
+   "note": "k>=3 needs a wider cross, so it loses to the grid",
+   "karakus_bound": 3.701562118716,
+   "gate_L": 4.600000001566,
+   "worst_pen": -0.06568542550219547,
+   "status": "refused",
+   "reason": "worse_than_grid",
+   "detail": "L=4.600000002 > grid 4"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 65,
+   "declared_L": 8.535533907699,
+   "law": "base n0 = k0^2 + r = 65; L = k0 + delta = 8.535533908",
+   "note": "the delivered base itself (R = 1 column)",
+   "karakus_bound": 8.066372975211,
+   "gate_L": 8.535533909465,
+   "worst_pen": -4.673299525137509e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=8.535533909 >= delivered 8.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 82,
+   "declared_L": 9.535533907699,
+   "law": "n_1 = n0 + j(2k0+1) + j(j-1) = 82; L = k + delta = 9.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 9.058621384312,
+   "gate_L": 9.535533910489,
+   "worst_pen": -2.0899992847489557e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=9.535533910 >= delivered 9.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 101,
+   "declared_L": 10.535533907699,
+   "law": "n_2 = n0 + j(2k0+1) + j(j-1) = 101; L = k + delta = 10.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 10.052486587271,
+   "gate_L": 10.535533911509,
+   "worst_pen": -1.8899992682008815e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=10.535533912 >= delivered 10.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 122,
+   "declared_L": 11.535533907699,
+   "law": "n_3 = n0 + j(2k0+1) + j(j-1) = 122; L = k + delta = 11.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 11.047511554864,
+   "gate_L": 11.535533912525,
+   "worst_pen": -1.729993925891904e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=11.535533913 >= delivered 11.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 145,
+   "declared_L": 12.535533907699,
+   "law": "n_4 = n0 + j(2k0+1) + j(j-1) = 145; L = k + delta = 12.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 12.043396380615,
+   "gate_L": 12.535533913539,
+   "worst_pen": -1.5899992433787702e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=12.535533914 >= delivered 12.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 170,
+   "declared_L": 13.535533907699,
+   "law": "n_5 = n0 + j(2k0+1) + j(j-1) = 170; L = k + delta = 13.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 13.039936203984,
+   "gate_L": 13.535533914551,
+   "worst_pen": -1.4699885753088893e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=13.535533915 >= delivered 13.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 197,
+   "declared_L": 14.535533907699,
+   "law": "n_6 = n0 + j(2k0+1) + j(j-1) = 197; L = k + delta = 14.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 14.036986370681,
+   "gate_L": 14.535533915561,
+   "worst_pen": -1.3699974488190492e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=14.535533916 >= delivered 14.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 226,
+   "declared_L": 15.535533907699,
+   "law": "n_7 = n0 + j(2k0+1) + j(j-1) = 226; L = k + delta = 15.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 15.034441853749,
+   "gate_L": 15.535533916571,
+   "worst_pen": -1.2799983295508355e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=15.535533917 >= delivered 15.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 257,
+   "declared_L": 16.535533907699,
+   "law": "n_8 = n0 + j(2k0+1) + j(j-1) = 257; L = k + delta = 16.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 16.032224567009,
+   "gate_L": 16.535533917579,
+   "worst_pen": -1.2099832247258746e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=16.535533918 >= delivered 16.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 290,
+   "declared_L": 17.535533907699,
+   "law": "n_9 = n0 + j(2k0+1) + j(j-1) = 290; L = k + delta = 17.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 17.030275254817,
+   "gate_L": 17.535533918585,
+   "worst_pen": -1.1399947652535047e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=17.535533919 >= delivered 17.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 325,
+   "declared_L": 18.535533907699,
+   "law": "n_10 = n0 + j(2k0+1) + j(j-1) = 325; L = k + delta = 18.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 18.028548142958,
+   "gate_L": 18.535533919591,
+   "worst_pen": -1.0699885422127409e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=18.535533920 >= delivered 18.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 362,
+   "declared_L": 19.535533907699,
+   "law": "n_11 = n0 + j(2k0+1) + j(j-1) = 362; L = k + delta = 19.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 19.027007313649,
+   "gate_L": 19.535533920597,
+   "worst_pen": -1.0199840971836238e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=19.535533921 >= delivered 19.535533910"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 401,
+   "declared_L": 20.535533907699,
+   "law": "n_12 = n0 + j(2k0+1) + j(j-1) = 401; L = k + delta = 20.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 20.025624189767,
+   "gate_L": 20.535533921601,
+   "worst_pen": -9.699974157229008e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=20.535533922 >= delivered 20.535533910"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 442,
+   "declared_L": 21.535533907699,
+   "law": "n_13 = n0 + j(2k0+1) + j(j-1) = 442; L = k + delta = 21.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 21.024375751774,
+   "gate_L": 21.535533922607,
+   "worst_pen": -9.199929706937837e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=21.535533923 >= delivered 21.535533910"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 485,
+   "declared_L": 22.535533907699,
+   "law": "n_14 = n0 + j(2k0+1) + j(j-1) = 485; L = k + delta = 22.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 22.023243250031,
+   "gate_L": 22.535533923611,
+   "worst_pen": -8.799894146704901e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=22.535533924 >= delivered 22.535533910"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 530,
+   "declared_L": 23.535533907699,
+   "law": "n_15 = n0 + j(2k0+1) + j(j-1) = 530; L = k + delta = 23.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 23.02221125911,
+   "gate_L": 23.535533924615,
+   "worst_pen": -8.499867476530198e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=23.535533925 >= delivered 23.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 577,
+   "declared_L": 24.535533907699,
+   "law": "n_16 = n0 + j(2k0+1) + j(j-1) = 577; L = k + delta = 24.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 24.021266972678,
+   "gate_L": 24.535533925617,
+   "worst_pen": -8.099831916297262e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=24.535533926 >= delivered 24.535533908"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 626,
+   "declared_L": 25.535533907699,
+   "law": "n_17 = n0 + j(2k0+1) + j(j-1) = 626; L = k + delta = 25.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 25.020399670478,
+   "gate_L": 25.535533926621,
+   "worst_pen": -7.7999828818065e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=25.535533927 >= delivered 25.520815282"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 677,
+   "declared_L": 26.535533907699,
+   "law": "n_18 = n0 + j(2k0+1) + j(j-1) = 677; L = k + delta = 26.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 26.01960031035,
+   "gate_L": 26.535533927623,
+   "worst_pen": -7.499778575947857e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=26.535533928 >= delivered 26.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 730,
+   "declared_L": 27.535533907699,
+   "law": "n_19 = n0 + j(2k0+1) + j(j-1) = 730; L = k + delta = 27.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 27.018861212352,
+   "gate_L": 27.535533928627,
+   "worst_pen": -7.199929541457095e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=27.535533929 >= delivered 27.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 785,
+   "declared_L": 28.535533907699,
+   "law": "n_20 = n0 + j(2k0+1) + j(j-1) = 785; L = k + delta = 28.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 28.018175811634,
+   "gate_L": 28.535533929629,
+   "worst_pen": -6.999911761340627e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=28.535533930 >= delivered 28.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 842,
+   "declared_L": 29.535533907699,
+   "law": "n_21 = n0 + j(2k0+1) + j(j-1) = 842; L = k + delta = 29.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 29.017538463198,
+   "gate_L": 29.535533930631,
+   "worst_pen": -6.699996113468387e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=29.535533931 >= delivered 29.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 901,
+   "declared_L": 30.535533907699,
+   "law": "n_22 = n0 + j(2k0+1) + j(j-1) = 901; L = k + delta = 30.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 30.016944286291,
+   "gate_L": 30.535533931633,
+   "worst_pen": -6.499689675365516e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=30.535533932 >= delivered 30.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 962,
+   "declared_L": 31.535533907699,
+   "law": "n_23 = n0 + j(2k0+1) + j(j-1) = 962; L = k + delta = 31.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 31.016389039334,
+   "gate_L": 31.535533932635,
+   "worst_pen": -6.299671895249048e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=31.535533933 >= delivered 31.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    8,
+    1,
+    0.535533908
+   ],
+   "n": 1025,
+   "declared_L": 32.535533907699,
+   "law": "n_24 = n0 + j(2k0+1) + j(j-1) = 1025; L = k + delta = 32.535533908",
+   "note": "band step (2k+1 squares in the two strips)",
+   "status": "refused",
+   "reason": "n_cap",
+   "detail": "n=1025 > 1000"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 626,
+   "declared_L": 25.520815282092,
+   "law": "base n0 = k0^2 + r = 626; L = k0 + delta = 25.520815282",
+   "note": "the delivered base itself (R = 1 column)",
+   "karakus_bound": 25.020399670478,
+   "gate_L": 25.520815284014,
+   "worst_pen": -1.5549606047216002e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=25.520815284 >= delivered 25.520815282"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 677,
+   "declared_L": 26.520815282092,
+   "law": "n_1 = n0 + j(2k0+1) + j(j-1) = 677; L = k + delta = 26.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 26.01960031035,
+   "gate_L": 26.520815285016,
+   "worst_pen": -7.499778575947857e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=26.520815285 >= delivered 26.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 730,
+   "declared_L": 27.520815282092,
+   "law": "n_2 = n0 + j(2k0+1) + j(j-1) = 730; L = k + delta = 27.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 27.018861212352,
+   "gate_L": 27.52081528602,
+   "worst_pen": -7.199929541457095e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=27.520815286 >= delivered 27.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 785,
+   "declared_L": 28.520815282092,
+   "law": "n_3 = n0 + j(2k0+1) + j(j-1) = 785; L = k + delta = 28.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 28.018175811634,
+   "gate_L": 28.520815287022,
+   "worst_pen": -6.999911761340627e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=28.520815287 >= delivered 28.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 842,
+   "declared_L": 29.520815282092,
+   "law": "n_4 = n0 + j(2k0+1) + j(j-1) = 842; L = k + delta = 29.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 29.017538463198,
+   "gate_L": 29.520815288024,
+   "worst_pen": -6.699885091165925e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=29.520815288 >= delivered 29.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 901,
+   "declared_L": 30.520815282092,
+   "law": "n_5 = n0 + j(2k0+1) + j(j-1) = 901; L = k + delta = 30.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 30.016944286291,
+   "gate_L": 30.520815289026,
+   "worst_pen": -6.499867311049456e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=30.520815289 >= delivered 30.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 962,
+   "declared_L": 31.520815282092,
+   "law": "n_6 = n0 + j(2k0+1) + j(j-1) = 962; L = k + delta = 31.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "karakus_bound": 31.016389039334,
+   "gate_L": 31.520815290028,
+   "worst_pen": -6.299671895249048e-11,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=31.520815290 >= delivered 31.520815284"
+  },
+  {
+   "wheel": "M-cascade",
+   "params": [
+    25,
+    1,
+    0.520815282
+   ],
+   "n": 1025,
+   "declared_L": 32.520815282092,
+   "law": "n_7 = n0 + j(2k0+1) + j(j-1) = 1025; L = k + delta = 32.520815282",
+   "note": "band step (2k+1 squares in the two strips)",
+   "status": "refused",
+   "reason": "n_cap",
+   "detail": "n=1025 > 1000"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    5,
+    2.707106782
+   ],
+   "n": 5,
+   "declared_L": 2.707106782448,
+   "law": "base m0 = 5; L0 = 2.707106782",
+   "note": "the delivered base itself",
+   "karakus_bound": null,
+   "gate_L": 2.70710678371,
+   "worst_pen": -1.7843504451775516e-09,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=2.707106784 >= delivered 2.707106782"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    5,
+    3.707106782
+   ],
+   "n": 10,
+   "declared_L": 3.707106782448,
+   "law": "m' = m + floor(L+1) + floor(L); L' = L + 1 = 3.707106782",
+   "note": "L-extension step 1",
+   "karakus_bound": 3.192582403567,
+   "gate_L": 3.707106783908,
+   "worst_pen": -5.38999955779218e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=3.707106784 >= delivered 3.707106783"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    5,
+    4.707106782
+   ],
+   "n": 17,
+   "declared_L": 4.707106782448,
+   "law": "m' = m + floor(L+1) + floor(L); L' = L + 1 = 4.707106782",
+   "note": "L-extension step 2",
+   "karakus_bound": 4.14005494464,
+   "gate_L": 4.707106784024,
+   "worst_pen": -4.2499981312005275e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=4.707106784 >= delivered 4.675530095"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    5,
+    5.707106782
+   ],
+   "n": 26,
+   "declared_L": 5.707106782448,
+   "law": "m' = m + floor(L+1) + floor(L); L' = L + 1 = 5.707106782",
+   "note": "L-extension step 3",
+   "karakus_bound": 5.109772228646,
+   "gate_L": 5.707106784098,
+   "worst_pen": -3.5000002895912985e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=5.707106784 >= delivered 5.621320345"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    10,
+    3.707106783
+   ],
+   "n": 10,
+   "declared_L": 3.707106782648,
+   "law": "base m0 = 10; L0 = 3.707106783",
+   "note": "the delivered base itself",
+   "karakus_bound": 3.192582403567,
+   "gate_L": 3.707106784108,
+   "worst_pen": -1.0790000004590183e-09,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=3.707106784 >= delivered 3.707106783"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    10,
+    4.707106783
+   ],
+   "n": 17,
+   "declared_L": 4.707106782648,
+   "law": "m' = m + floor(L+1) + floor(L); L' = L + 1 = 4.707106783",
+   "note": "L-extension step 1",
+   "karakus_bound": 4.14005494464,
+   "gate_L": 4.707106784224,
+   "worst_pen": -4.2499981312005275e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=4.707106784 >= delivered 4.675530095"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    10,
+    5.707106783
+   ],
+   "n": 26,
+   "declared_L": 5.707106782648,
+   "law": "m' = m + floor(L+1) + floor(L); L' = L + 1 = 5.707106783",
+   "note": "L-extension step 2",
+   "karakus_bound": 5.109772228646,
+   "gate_L": 5.707106784298,
+   "worst_pen": -3.5000002895912985e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=5.707106784 >= delivered 5.621320345"
+  },
+  {
+   "wheel": "M-l-extension",
+   "params": [
+    10,
+    6.707106783
+   ],
+   "n": 37,
+   "declared_L": 6.707106782648,
+   "law": "m' = m + floor(L+1) + floor(L); L' = L + 1 = 6.707106783",
+   "note": "L-extension step 3",
+   "karakus_bound": 6.090169943749,
+   "gate_L": 6.70710678435,
+   "worst_pen": -2.979998470209466e-10,
+   "status": "refused",
+   "reason": "no_gain",
+   "detail": "L=6.707106784 >= delivered 6.598619611"
+  }
+ ],
+ "per_wheel": {
+  "M-diamond": {
+   "cells": 30,
+   "reconstructs": 19,
+   "layout_not_enumerated": 11
+  },
+  "M-grid": {
+   "cells": 32,
+   "area_exact": 31,
+   "n_cap": 1
+  },
+  "M-cross-grid": {
+   "cells": 8,
+   "packlib_rejected": 2,
+   "no_gain": 3,
+   "worse_than_grid": 3
+  },
+  "M-cascade": {
+   "cells": 33,
+   "no_gain": 31,
+   "n_cap": 2
+  },
+  "M-l-extension": {
+   "cells": 8,
+   "no_gain": 8
+  }
+ },
+ "total_dscore": 0
+}

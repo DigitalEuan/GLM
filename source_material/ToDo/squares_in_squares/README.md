@@ -19,18 +19,30 @@ produces is a wheel certificate (W36); every search it runs is a wheel
 settle (W37). The record from start to finish — lineage, engines, sources,
 operating loop — is the system record in `STATUS.md`. More operatiors and more/denser wheels should produce more concepts, I suspect the Python libraries would make excellent wheels - reduce to cent_compiler '¢' primitives and exact Arithmetic then confirm with Lean4.
 
-## Current results (Run 36, 2026-11-07; last score move run 35)
+## Current results (Run 67, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
-| Submission score | **22.642386651** (rounded **22.642387**; grid ceiling 28.937670, improvement −6.295283) |
-| Puzzles beating the plain grid | **543 / 1000** |
-| Leaderboard best (reported) | 22.0544214515 → gap **0.587965** |
+| Submission score | **22.218056945** (rounded **22.218057**; grid ceiling 28.937670, improvement −6.719613) |
+| Puzzles beating the plain grid | **553 / 1000** |
+| Leaderboard best (reported) | 22.0544214515 → gap **0.163635** |
 | Certification | 1000/1000 packings SAT-verified + 500,500-row CSV round-trip (0 issues; Run 36 record) |
 | Golay/Leech verification | 28/28 + 14/14 assertions, integer-exact |
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
-| Latest score move | **Nine Evan Daniel register records (Run 35) + n=338 chain conversion**: 22.645991 → **22.642386651** (−0.003604) |
+| Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
+| Latest session | **Runs 62–67, theory closure** — six instruments, **no row changed, no score claimed**; records `27`–`30`, one page in `19` §12 |
+
+## Where the score stands, said plainly
+
+Runs 62–67 changed **no row of the table**. They priced the routes that were
+nominated and closed them on measurement: the catalogue the frontier is read
+against stops at n = 324 (675 rows open for want of a *source*, not a method);
+Bui's construction was implemented exactly and refused (density 0.23–0.82 against
+≈0.95); and the remaining search shapes — k-square neighbourhoods, reduced
+resolution, global disjunctive SAT — were each refused with a certificate or a
+counted reason rather than an opinion. Every instrument points at the same object:
+the **branch assignment** (which pair is tight on which axis) and rotation.
 
 ## The score engine (what actually produces improvements)
 
@@ -70,6 +82,18 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
    monotone envelope and the shell law every run (999/999 and 937/937
    clean at run 34). Every campaign is aimed by these instruments,
    never by eyeball.
+7. **The theory layer (runs 62–67)** — the part that decides rather than searches,
+   and the only part that can say *why* a route is dead: `bui_wheel.py` (a
+   published nomination implemented to the letter over ℚ and refused on density,
+   132/132 verified, 0 gains), `ladder.py` (six expressiveness rungs, 4 recomputed,
+   2 honestly quoted — the Λ₂₄ sweep kills coarsening at all eight scales),
+   `disj_census.py` (0.76 % of pairs tight at n = 1000, 1e300729 leaves: the model
+   is decisive *with the disjunction fixed*), `sat_probe.py` + `extreme_probe.py`
+   (the declared-axis LP as a certificate: with every translation free, the
+   delivered side is the exact optimum at ε = 1e−6), and `resolution_probe.py`
+   (snapping the *answers* to a lattice invalidates them at every resolution,
+   m = 128 included — contacts are equalities with no neighbourhood). Records
+   `27`–`30`; `sat_probe.py --selftest` (6/6) is the invariant that guards the LP.
 
 ## Reproducing
 

@@ -1,0 +1,192 @@
+{
+ "instrument": "leech24_design.py",
+ "run": 44,
+ "schema": "leech24-design/1",
+ "written": "2026-11-18 02:48:37",
+ "seconds": 0.25,
+ "golay": {
+  "words": 4096,
+  "min_weight": 8,
+  "weight_distribution": {
+   "0": 1,
+   "8": 759,
+   "12": 2576,
+   "16": 759,
+   "24": 1
+  },
+  "two_factors": 2,
+  "two_factor_enumerators_agree": true,
+  "variants_overlap": 2,
+  "self_dual_sample": true
+ },
+ "witt": {
+  "octads": 759,
+  "lambda": {
+   "2": {
+    "subsets_seen": 276,
+    "values": [
+     77
+    ]
+   },
+   "3": {
+    "subsets_seen": 2024,
+    "values": [
+     21
+    ]
+   },
+   "4": {
+    "subsets_seen": 10626,
+    "values": [
+     5
+    ]
+   },
+   "5": {
+    "subsets_seen": 42504,
+    "values": [
+     1
+    ]
+   }
+  }
+ },
+ "a2": {
+  "A2 (Gram 1, 1/2, 1)": {
+   "optimal": true,
+   "centre_density": 0.2886751345948129
+  },
+  "A2 scaled (4, 2, 4)": {
+   "optimal": true,
+   "centre_density": 0.2886751345948129
+  },
+  "Z2 (Gram 1, 0, 1)": {
+   "optimal": false,
+   "centre_density": 0.25
+  },
+  "Z2 sheared (1, 1/3, 1)": {
+   "optimal": false,
+   "centre_density": 0.2651650429449553
+  },
+  "A2 roots inside E8": {
+   "gram": [
+    "2",
+    "1",
+    "2"
+   ],
+   "optimal": true,
+   "centre_density": 0.2886751345948129
+  },
+  "_reference": {
+   "one_over_sqrt12": 0.288675135,
+   "square_density_quarter": 0.25,
+   "packing_density_A2": 0.906899682,
+   "packing_density_square": 0.785398163
+  }
+ },
+ "maps": {
+  "Z3 -> (e1,e2) plane": {
+   "det_L_sq": "1",
+   "ker_det_sq": "1",
+   "cov_image_sq": "1",
+   "identity": "1 * 1 = 1",
+   "injective": true,
+   "verdict": "lossless and reversible: pi is a lattice isomorphism"
+  },
+  "Z3 -> ((1,1,0),(0,0,1)) plane": {
+   "det_L_sq": "1",
+   "ker_det_sq": "2",
+   "cov_image_sq": "1/2",
+   "identity": "1/2 * 2 = 1",
+   "injective": false,
+   "verdict": "two-to-one quotient: (1,-1,0) -> 0.  The 2D image loses the coset, so it is NOT reversible without a residue label"
+  },
+  "Lambda24 (det 1)": {
+   "det_L_sq": "1",
+   "identity": "cov(pi L)^2 = 1 / det(L cap V-perp)^2",
+   "cov_image_sq": "1 / det(L cap V-perp)^2",
+   "injective": "iff L cap V-perp = 0",
+   "verdict": "a 22-dimensional section has a large determinant, so the projected 2D lattice has a tiny covolume: it is a fine quantiser, not a good packing.  Projection cannot carry 24D packing quality into 2D; only a SECTION can, and the section inherits at most the 2D optimum A2"
+  }
+ },
+ "class_index": {
+  "classes": 16777216,
+  "side": 4096,
+  "bijection_exact": true,
+  "roundtrip_sample_ok": true,
+  "note": "lossless and reversible as an INDEX, and carries no geometry: the repository's F2^24 class map is this object"
+ },
+ "e8_projection": {
+  "section_gram": [
+   "2",
+   "1",
+   "2"
+  ],
+  "section_area_sq": "3",
+  "section_min_norm_sq": "2",
+  "section_is_A2": true,
+  "projection_residual_max": "0",
+  "image_det_in_V_coords": "1/3",
+  "index_image_over_section": "3",
+  "kernel_rank": 6,
+  "roots": 240,
+  "all_roots_have_norm_2": true,
+  "kernel_roots": 72,
+  "image_min_norm_sq": "2/3",
+  "image_shortest_vectors": 6,
+  "image_shortest_pairwise": [
+   "-2/3",
+   "-1/3",
+   "1/3",
+   "2/3"
+  ],
+  "image_similar_to_A2": true,
+  "note": "index 1 means the projection of E8 onto this A2 plane is exactly the A2 lattice; every 2D address then has a rank-6 fibre"
+ },
+ "checks": {
+  "golay_4096_words": true,
+  "golay_min_weight_8": true,
+  "golay_enumerator": true,
+  "golay_self_dual_sample": true,
+  "golay_two_factors_agree": true,
+  "witt_759_octads": true,
+  "witt_S(5,8,24)": true,
+  "a2_detects_A2": true,
+  "a2_rejects_square": true,
+  "a2_rejects_shear": true,
+  "a2_inside_E8": true,
+  "density_is_one_over_sqrt12": true,
+  "square_density_is_a_quarter": true,
+  "projection_identity": true,
+  "quotient_not_reversible": true,
+  "class_2d_bijection": true,
+  "e8_all_240_roots_norm_2": true,
+  "e8_projection_lands_in_plane": true,
+  "e8_section_is_A2": true,
+  "e8_section_area_sq_3": true,
+  "e8_has_240_roots": true,
+  "e8_kernel_has_72_roots": true,
+  "e8_image_is_A2_shaped": true
+ },
+ "passed": 23,
+ "total": 23,
+ "declared": [
+  "Lambda24: det 1, min norm 4, min distance 2, kissing 196560, covering radius sqrt(2)",
+  "densest packing in 24D among all packings (CKMRV, Annals 185 (2017))",
+  "deep holes: 23 classes <-> the 23 non-Leech Niemeier lattices",
+  "Lambda24 contains E8^3; A2 subset E8 is re-derived here",
+  "integer form: the repository's LeechResidue.lean"
+ ],
+ "measured_elsewhere": {
+  "leech_address.py": {
+   "distinct_addresses": 50,
+   "rows": 1000,
+   "mi_address_beats": 0.193,
+   "permutation_null_max": 0.0644,
+   "mi_address_residue": 0.9198,
+   "mi_gap_beats_given_rotation": 0.0
+  },
+  "cent_compiler/leech_class.py": {
+   "classes_observed": 63257,
+   "f2_rank": 24,
+   "xor_pairs": "5000/5000"
+  }
+ }
+}

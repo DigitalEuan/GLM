@@ -2,17 +2,13 @@
 
 ## Canonical state
 
-The latest state represented by the surviving run records is **Run 36**,
-dated 2026-11-07. Run 36 re-established the successful Run 35 score move
-after a sandbox rollback and reproduced it from the surviving records.
-The canonical reported values are:
+The latest state represented by the surviving run records is **Run 52**,
+dated 2026-11-18, which re-scores and guards the run-47 table. The canonical
+reported values are:
 
-- score: **22.642386651** (rounded: **22.642387**);
-- rows beating the grid: **543/1000**;
-- reported leaderboard gap: **0.587965**;
-- direct gain from nine register records: **0.003359**;
-- additional n=338 chain gain: **0.000245**;
-- total Run 35/36 improvement: **0.003604**.
+- score: **22.218056945** (rounded: **22.218057**);
+- rows beating the grid: **553/1000**;
+- reported leaderboard gap: **0.163635**.
 
 ## Historical milestones
 
@@ -21,12 +17,13 @@ The canonical reported values are:
 | Run 15 | 22.823536 | Earlier frontier after the atlas import and chain conversions; 454 rows beat grid. |
 | Run 32 | 22.645991 | Recovery/documentation state after the Mishapolk import; 543 rows beat grid. |
 | Run 34 | 22.645991 | Accuracy-dive/system-map milestone preserved in the GitHub lineage. |
-| Run 35 | 22.642386651 | Latest score move: nine register records plus the n=338 chain conversion. |
-| Run 36 | 22.642386651 | Re-establishment of Run 35 from surviving records; canonical latest state. |
+| Run 35 | 22.642386651 | Run 35 score move: nine register records plus the n=338 chain conversion. |
+| Run 36 | 22.642386651 | Re-establishment of Run 35 from surviving records. |
+| Run 47 | 22.218056945 | Audit re-score of the same table; supersedes Run 36 and is the current state. |
 
-Run 15, Run 32, and Run 34 values remain in the detailed history because
-they document real intermediate states. They should not be presented as the
-current score in README or STATUS front matter.
+Run 15, Run 32, Run 34, Run 35 and Run 36 values remain in the detailed history
+because they document real intermediate states. They are not the current score
+and must not be presented as such; `scripts/record_guard.py` enforces this.
 
 ## Reconciliation policy
 

@@ -15,9 +15,9 @@ competition of the same name (1000 puzzles, *n* = 1..1000; score
 Σ(L/√n − 1), lower is better), as an application of the Geometric
 Language Machine (GLM) methodology: exact arithmetic only, every claim
 machine-verified, every negative result recorded as a finding. The
-delivered system stands at score **22.642387** (grid ceiling 28.937670;
-543/1000 puzzles below the grid ceiling; gap to the reported
-leaderboard best 22.0544214515 is 0.587965), with every one of the 1000
+delivered system stands at score **22.218057** (grid ceiling 28.937670;
+553/1000 puzzles below the grid ceiling; gap to the reported
+leaderboard best 22.0544214515 is 0.163635), with every one of the 1000
 packings SAT-verified and round-tripped through a 500,500-row CSV at
 12 decimals. The study contributes: (1) an exact, contact-identity
 derivation of the generalized Göbel family G(a₁,a₂,b,c) and its clipped

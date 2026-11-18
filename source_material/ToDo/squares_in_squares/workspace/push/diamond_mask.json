@@ -1,0 +1,392 @@
+{
+ "run": 54,
+ "schema": "diamond-mask/1",
+ "written": "2026-11-18 06:07:36",
+ "seconds": 282.4,
+ "rows": [
+  {
+   "label": "delivered",
+   "n": 226,
+   "p": 5,
+   "sites": 25,
+   "upright": 201,
+   "L_del": 15.535533907804,
+   "L_nom": 15.535533905932619,
+   "t": [
+    0.0,
+    0.0
+   ],
+   "L_exact": "7767766953/500000000",
+   "L_exact_float": 15.535533906,
+   "pen": "0",
+   "reconstructs": true,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 15.535533906; delivered 15.535533908 (difference +1.8e-09)"
+  },
+  {
+   "label": "trim outer u-row",
+   "n": 226,
+   "p": 5,
+   "sites": 20,
+   "upright": 206,
+   "L_del": 15.535533907804,
+   "L_nom": 20.035533905934372,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "1252220871/62500000",
+   "L_exact_float": 20.035533936,
+   "pen": "2220871/125000000+1/2*sqrt2",
+   "reconstructs": false,
+   "outcome": "candidate_rejected_exact",
+   "detail": "nominated side did not pass the exact gate"
+  },
+  {
+   "label": "boundary run +1",
+   "n": 226,
+   "p": 6,
+   "sites": 26,
+   "upright": 200,
+   "L_del": 15.535533907804,
+   "L_nom": 16.44974746830666,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "8224873739/500000000",
+   "L_exact_float": 16.449747478,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 16.449747478; delivered 15.535533908 (difference -9.1e-01)"
+  },
+  {
+   "label": "boundary run +2",
+   "n": 226,
+   "p": 6,
+   "sites": 27,
+   "upright": 199,
+   "L_del": 15.535533907804,
+   "L_nom": 16.44974746830666,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "8224873739/500000000",
+   "L_exact_float": 16.449747478,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 16.449747478; delivered 15.535533908 (difference -9.1e-01)"
+  },
+  {
+   "label": "move row end",
+   "n": 226,
+   "p": 6,
+   "sites": 25,
+   "upright": 201,
+   "L_del": 15.535533907804,
+   "L_nom": 16.44974746830666,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "8224873739/500000000",
+   "L_exact_float": 16.449747478,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 16.449747478; delivered 15.535533908 (difference -9.1e-01)"
+  },
+  {
+   "label": "delivered",
+   "n": 325,
+   "p": 19,
+   "sites": 95,
+   "upright": 230,
+   "L_del": 18.535533907825,
+   "L_nom": 18.53553390593197,
+   "t": [
+    0.0,
+    0.0
+   ],
+   "L_exact": "9267766953/500000000",
+   "L_exact_float": 18.535533906,
+   "pen": "0",
+   "reconstructs": true,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 18.535533906; delivered 18.535533908 (difference +1.8e-09)"
+  },
+  {
+   "label": "trim outer u-row",
+   "n": 325,
+   "p": 18,
+   "sites": 90,
+   "upright": 235,
+   "L_del": 18.535533907825,
+   "L_nom": 23.136038969319927,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "23136038999/1000000000",
+   "L_exact_float": 23.136038999,
+   "pen": "-7/2+6363961001/2000000000*sqrt2",
+   "reconstructs": false,
+   "outcome": "candidate_rejected_exact",
+   "detail": "nominated side did not pass the exact gate"
+  },
+  {
+   "label": "boundary run +1",
+   "n": 325,
+   "p": 20,
+   "sites": 96,
+   "upright": 229,
+   "L_del": 18.535533907825,
+   "L_nom": 19.349242404917838,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "3869848481/200000000",
+   "L_exact_float": 19.349242405,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 19.349242405; delivered 18.535533908 (difference -8.1e-01)"
+  },
+  {
+   "label": "boundary run +2",
+   "n": 325,
+   "p": 20,
+   "sites": 97,
+   "upright": 228,
+   "L_del": 18.535533907825,
+   "L_nom": 19.349242404917838,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "3869848481/200000000",
+   "L_exact_float": 19.349242405,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 19.349242405; delivered 18.535533908 (difference -8.1e-01)"
+  },
+  {
+   "label": "move row end",
+   "n": 325,
+   "p": 19,
+   "sites": 95,
+   "upright": 230,
+   "L_del": 18.535533907825,
+   "L_nom": 19.38477631084904,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "19384776311/1000000000",
+   "L_exact_float": 19.384776311,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 19.384776311; delivered 18.535533908 (difference -8.5e-01)"
+  },
+  {
+   "label": "delivered",
+   "n": 530,
+   "p": 26,
+   "sites": 130,
+   "upright": 400,
+   "L_del": 23.535533907848,
+   "L_nom": 23.53553390593329,
+   "t": [
+    0.0,
+    0.0
+   ],
+   "L_exact": "11767766953/500000000",
+   "L_exact_float": 23.535533906,
+   "pen": "0",
+   "reconstructs": true,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 23.535533906; delivered 23.535533908 (difference +1.8e-09)"
+  },
+  {
+   "label": "trim outer u-row",
+   "n": 530,
+   "p": 25,
+   "sites": 125,
+   "upright": 405,
+   "L_del": 23.535533907848,
+   "L_nom": 27.77207793864227,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "27772077969/1000000000",
+   "L_exact_float": 27.772077969,
+   "pen": "-11227922031/2000000000+19/4*sqrt2",
+   "reconstructs": false,
+   "outcome": "candidate_rejected_exact",
+   "detail": "nominated side did not pass the exact gate"
+  },
+  {
+   "label": "boundary run +1",
+   "n": 530,
+   "p": 27,
+   "sites": 131,
+   "upright": 399,
+   "L_del": 23.535533907848,
+   "L_nom": 24.29898987322451,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "24298989883/1000000000",
+   "L_exact_float": 24.298989883,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 24.298989883; delivered 23.535533908 (difference -7.6e-01)"
+  },
+  {
+   "label": "boundary run +2",
+   "n": 530,
+   "p": 27,
+   "sites": 132,
+   "upright": 398,
+   "L_del": 23.535533907848,
+   "L_nom": 24.29898987322451,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "24298989883/1000000000",
+   "L_exact_float": 24.298989883,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 24.298989883; delivered 23.535533908 (difference -7.6e-01)"
+  },
+  {
+   "label": "move row end",
+   "n": 530,
+   "p": 26,
+   "sites": 130,
+   "upright": 400,
+   "L_del": 23.535533907848,
+   "L_nom": 24.33452377915707,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "24334523789/1000000000",
+   "L_exact_float": 24.334523789,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 24.334523789; delivered 23.535533908 (difference -8.0e-01)"
+  },
+  {
+   "label": "delivered",
+   "n": 577,
+   "p": 29,
+   "sites": 145,
+   "upright": 432,
+   "L_del": 24.535533907851,
+   "L_nom": 24.53553390593381,
+   "t": [
+    0.0,
+    0.0
+   ],
+   "L_exact": "12267766953/500000000",
+   "L_exact_float": 24.535533906,
+   "pen": "0",
+   "reconstructs": true,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 24.535533906; delivered 24.535533908 (difference +1.9e-09)"
+  },
+  {
+   "label": "trim outer u-row",
+   "n": 577,
+   "p": 28,
+   "sites": 140,
+   "upright": 437,
+   "L_del": 24.535533907851,
+   "L_nom": 29.064971157457002,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "29064971187/1000000000",
+   "L_exact_float": 29.064971187,
+   "pen": "-11935028813/2000000000+5*sqrt2",
+   "reconstructs": false,
+   "outcome": "candidate_rejected_exact",
+   "detail": "nominated side did not pass the exact gate"
+  },
+  {
+   "label": "boundary run +1",
+   "n": 577,
+   "p": 30,
+   "sites": 146,
+   "upright": 431,
+   "L_del": 24.535533907851,
+   "L_nom": 25.42031021678271,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "25420310217/1000000000",
+   "L_exact_float": 25.420310217,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 25.420310217; delivered 24.535533908 (difference -8.8e-01)"
+  },
+  {
+   "label": "boundary run +2",
+   "n": 577,
+   "p": 30,
+   "sites": 147,
+   "upright": 430,
+   "L_del": 24.535533907851,
+   "L_nom": 25.42031021678271,
+   "t": [
+    -0.5,
+    0.0
+   ],
+   "L_exact": "25420310217/1000000000",
+   "L_exact_float": 25.420310217,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 25.420310217; delivered 24.535533908 (difference -8.8e-01)"
+  },
+  {
+   "label": "move row end",
+   "n": 577,
+   "p": 29,
+   "sites": 145,
+   "upright": 432,
+   "L_del": 24.535533907851,
+   "L_nom": 25.449747468305176,
+   "t": [
+    0.5,
+    0.0
+   ],
+   "L_exact": "12724873739/500000000",
+   "L_exact_float": 25.449747478,
+   "pen": "0",
+   "reconstructs": false,
+   "outcome": "feasible_no_gain",
+   "detail": "certified at 25.449747478; delivered 24.535533908 (difference -9.1e-01)"
+  }
+ ],
+ "outcomes": {
+  "candidate_rejected_exact": 4,
+  "feasible_no_gain": 16
+ }
+}

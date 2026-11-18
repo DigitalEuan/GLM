@@ -1,0 +1,8 @@
+target 2.7081
+  r=0 ok=False L=2.786960 wp=+1.34e-01 [0s]
+  r=20 ok=False L=2.770870 wp=+1.27e-01 [10s]
+  r=40 ok=False L=2.780713 wp=+1.46e-01 [19s]
+  r=60 ok=False L=2.770510 wp=+8.46e-02 [28s]
+  r=80 ok=False L=2.767814 wp=+1.46e-01 [37s]
+  r=100 ok=False L=2.794940 wp=+1.46e-01 [47s]
+hits 0 best L 1000000000.0 secs 55.1

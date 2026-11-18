@@ -1,7 +1,8 @@
 # 05-MECHANICS.md — the clear picture (Run 37, 2026-11-08)
 
 *What is actually happening inside this system, measured on the
-delivered frontier (Run 36/37: score 22.642386651, 543/1000 beat grid).
+delivered frontier (Run 52: score 22.218056945, 553/1000 beat grid; the
+measurements below were taken at runs 36–37, when the frontier was 22.642386651 — historical).
 Companion measurements live in `workspace/push/layer_settle37.json`,
 `exact_replay37.json`, `leech_map.json` (run 37 refresh) and the
 regenerated exact chain (`leech_core` 28/28, `octad_moves` 14/14,
@@ -162,7 +163,7 @@ the current frontier forces:
 
 ## 6. What this buys (the score as sanity check)
 
-- Score unchanged this run: **22.642386651** (543/1000; gap 0.587965).
+- Score unchanged this run (run 37, historical): **22.642386651** (543/1000; gap 0.587965).
   The mechanics run made no table change — by design: its products are
   the census, the replays, and the corrected instruments.
 - The exact-replay result (133/133) is now the strongest certification
