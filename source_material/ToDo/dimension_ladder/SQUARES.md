@@ -81,16 +81,22 @@ coordinates as `Fraction`s. The question was whether the 3D optimum is the *extr
 delivered 2D row. Answer: **yes at n = 2, 3, 4 and no from n = 5 on.** Two cubes in a box of side
 `L < 2` must intersect, so `L(n) ≥ 2` for `n ≥ 2`, and the 2×2×2 grid gives 2 for `n ≤ 8` — the 3D
 optimum is exactly 2 there, against 2.7071 (n = 5) and 3 (n = 6, 7, 8) for the row. The cube grid
-also beats the row at n = 10, 12, 16, 20; n = 9 ties at 3 with `L(9)` open in `(2, 3]`. The score is
-untouched (22.218056945).
+also beats the row at n = 10, 12, 16, 20. The score is untouched (22.218056945).
 
-**What that means for this note.** It is the counter-case to §3, and it sharpens the whole
-side-quest: in the lattice world the 2D optimum *is* the slice of the 3D one, exactly, and the
-bijection carries no packing information; in the box world extending the same `(x, y)` and leaving
-`z` free is feasible but not optimal, so the dimension step buys something real. The difference is
-what the boundary is: a lattice has none (its cell is a determinant, fixed by the lattice), a box
-has walls that change with the dimension. **The ladder this project could climb is a wall ladder,
-not a lattice one — and that is exactly why the bridge in `BRIDGE.md` cannot describe it.**
+**And then the question closed completely.** Run 73 (`36-CUBE-GRID-IS-OPTIMAL.md`) proves
+`L(n) = ⌈n^{1/3}⌉` for *every* n, in every dimension, by counting centres in `m^d` sub-boxes: all
+centres sit in a box of side `L − 1`, a sub-box of side `< 1` holds at most one, so `n > k^d ⇒ L ≥ k + 1`,
+which the `k`-grid attains. So `L(9) = 3`, nothing beats the cube grid at any `n`, and the 3D
+question has no ladder at all.
+
+**What that means for this note — and it is the real finding.** The same argument in two dimensions
+says *axis-parallel* squares can never beat `⌈√n⌉`. So every beat in the 1000-row table must contain
+a rotated square — and it does: **447 rows are axis-aligned and all sit exactly at `⌈√n⌉`; 553 rows
+beat, and none of them is axis-aligned; 447 + 553 = 1000.** Rotation is not a feature of the score,
+it *is* the score. Contrast that with `BRIDGE.md`, where the lattice carries the plane optimum as a
+section and the dimension step is free of information: here the dimension step is free of information
+too, but the rotation step is everything. The bridge and the table are two different ladders — section
+class versus orientation — and only the second one has rungs this project can climb.
 
 **(b) A per-row section-class label.** Cost: small — `split_lattices` and `lattice_coords` already
 exist. Payoff: small, because `22` and `23` already do most of it and the label does not move the
