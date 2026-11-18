@@ -556,6 +556,15 @@ history rather than presented as current.
   wall-margin order, 0 seeds at `L0 − 1e−6`, 0 gated; every row 4–120 is
   over-determined by count (least: n = 5, +2), and two monotonicities make the
   refusal exhaustive over the declared ladder rather than a sample
+* run 72 — the dimension question asked where it can be asked:
+  `35-CUBES-IN-A-CUBE.md` with `declp3.py` and ledger `declp3.json`. The
+  declared-axis LP one dimension up, judged by an exact gate (`Fraction`
+  arithmetic on 12-dp coordinates, no tolerance in the verdict). `L(n) = 2`
+  proved for 2 ≤ n ≤ 8 by the two-cube bound plus the 2×2×2 grid, so extruding
+  the delivered row is optimal only at n = 2, 3, 4 and strictly beaten from
+  n = 5 (2.7071 → 2, 3 → 2) and again at n = 10, 12, 16, 20; n = 9 ties at 3 with
+  `L(9)` open in (2, 3]; exhaustive 6/216/46,656 branch bounds agree with the
+  lemma. The degradation control caught three LP defects before any result
 * continued in §10: `22-DIAMOND-MASK.md`, `23-SEED-WHEELS.md`,
   `24-N10-OPTIMAL.md`, `25-OPEN-ROW-CROSSWALK.md`, `26-FRONTIER-CROSSWALK.md`,
   and their instruments `diamond_mask.py`, `seed_wheels.py`, `optima.py`,

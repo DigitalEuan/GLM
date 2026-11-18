@@ -633,3 +633,38 @@ What this closes: single-flip cells with free-set expansion at any open row
 n <= 60. What it leaves: two-flip cells, a new contact (outside the cell space),
 rows above 60, and the 675 rows above n = 324 that have no source. No row of the
 table changed. Entry 34-FLIP-AND-FREE-SET.md.
+
+## Run 72 — cubes in a cube: the extrusion question, answered by the LP and the gate
+
+`declp`'s 3D analogue was built rather than argued (scripts/declp3.py): n
+axis-parallel unit cubes in a cube, one declared separating axis per pair,
+translations and the side L as variables, L minimised. The gate is exact and
+stronger than the 2D one -- coordinates are rounded to 12 dp and read as
+`Fraction`s, so penetration and side are rational arithmetic on the recorded
+numbers and the verdict carries no tolerance constant.
+
+The question: is the 3D optimum the extrusion of the delivered 2D row, or
+strictly better? Two cubes in a box of side L < 2 must intersect in every axis,
+so L(n) >= 2 for n >= 2, and the 2x2x2 grid gives 2 for n <= 8 -- the 3D optimum
+for 2 <= n <= 8 is exactly 2. Against that: the 2D row needs 2.7071 at n = 5 and
+3 at n = 6, 7, 8. So the extrusion is optimal at n = 2, 3, 4 only, and strictly
+beaten from n = 5, by 2.7071 -> 2 and 3 -> 2. At n = 10, 12, 16, 20 the cube grid
+(3) also beats the row (3.7071, 4, 4, 5). At n = 9 the two tie at 3 and L(9)
+stays open in (2, 3].
+
+The decisive detail is `desc(extr) = L2` on every row: the extrusion is rigid
+under its own declared axes, so the improvement at n = 5-8 is a different
+structure, not a polished copy. Exhaustive enumeration of all 6^C(n,2) declared
+structures gives the best LP side 2.000000 for n = 2 (6 branches), 3 (216) and
+4 (46,656), agreeing with the lemma; above n = 4 the enumeration is 6.0e7 at
+n = 5, so no LP lower bound is claimed there and the larger rows are
+constructions, not optima.
+
+The degradation control (z pinned, x/y declared, must reproduce `declp`) caught
+three defects before any result existed: the two containment constants, the
+missing centring of states, and a saturated 2D reference window. Run 67's lesson
+in a new place -- a copied constraint system drifts by a constant and still
+looks like a certificate.
+
+No row of the table changed; the 2D score is untouched. Entry
+35-CUBES-IN-A-CUBE.md.

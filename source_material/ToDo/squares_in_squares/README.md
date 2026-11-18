@@ -38,7 +38,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 (0.76 % holds only at n = 1000, s(5) is 2.707107 and proved, "0/8" is run 41's,
 "run 50" does not exist), and their n = 5 test case is ill-posed.
 
-## Current results (Run 71, 2026-11-18; last score move run 47)
+## Current results (Run 72, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -50,7 +50,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
 | Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
-| Latest session | **Runs 69–71, margin + three discrete searches** — wall margin on 1000 rows; 5,560 word cells at n = 18; 7,803 SAT-branch-flip cells at n = 18/20/30; 6,684 flips over the 42 open rows at n = 4–60, **0 seeds, 0 gains, no row changed**; records `31`–`34` |
+| Latest session | **Runs 69–72, margin + three discrete searches + the 3D ladder** — wall margin on 1000 rows; 5,560 word cells at n = 18; 7,803 SAT-branch-flip cells at n = 18/20/30; 6,684 flips over the 42 open rows at n = 4–60 (0 seeds, 0 gains); cubes-in-a-cube declared-axis LP with an exact rational gate on 12 rows — **no row changed**; records `31`–`35` |
 
 ## Where the score stands, said plainly
 
