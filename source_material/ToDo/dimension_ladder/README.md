@@ -127,9 +127,11 @@ the hexagonal packing beats by 2/√3. The full statement is in
 
 **Does that reach squares-in-squares?** Not as an engine: that problem has a wall, a fixed
 orientation and a density ceiling that is *attained* on 31 rows, so the bridge's objects are absent
-and nothing in it can bound an `L`. As a diagnosis it is sharp — the squares table is the
-axis-aligned section of the same lattice family, and the 2/√3 it gives up is exactly the price of
-fixing orientation. The argument, with the table's own numbers, is in [`SQUARES.md`](SQUARES.md).
+and nothing in it can bound an `L`. In particular the `2/√3` between the (001) and (111) sections is
+a ratio between two **sphere** relaxations — squares tile at density 1 in either section, so it is
+not a cost the table pays and not a gap it could close. What does transfer is the section
+vocabulary, and the reason the plane result reaches the table's *addressing* rather than its `L`.
+The argument, with the table's own numbers, is in [`SQUARES.md`](SQUARES.md).
 
 ---
 

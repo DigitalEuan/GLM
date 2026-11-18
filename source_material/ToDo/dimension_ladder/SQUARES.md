@@ -48,44 +48,58 @@ inequalities at n = 18 and 40 of 400 at n = 100, while the contacts alone over-d
 at n ≥ 20. So the over-determination that run 71 measured is a **contact** phenomenon, not a
 container-lattice one, and the determinant/Gram bookkeeping of `bridge.py` has nothing to attach to.
 
-## 3. The one restriction it does explain — and it is the whole answer
+## 3. What the bridge does say — and what the 2/√3 is *not*
 
-The squares problem is the axis-aligned section **by construction**: fixing orientation kills the
-offset `m·(1,1,0)` that produces the hexagonal gain, and that offset is precisely what is not in
-`L`. So the gap between this table's geometry and the plane optimum is exactly **2/√3 in linear
-scale**, and it is not recoverable by better search — it is the price of the orientation
-restriction. That is the sentence worth keeping from the whole side-quest:
+The squares problem is the axis-aligned section of this lattice family, by construction. Two
+statements follow, and they must be kept apart:
 
-> The squares-in-squares table lives on the (001) slice; the plane optimum is the (111) slice; the
-> ratio between them is 4/3 in the square, and it is created by a stacking offset the problem
-> forbids.
+**(i) A ratio between two sphere relaxations, which is not a cost to squares.** The (001) section
+induces the square lattice, `δ² = 1/16`; the (111) section induces A₂, `δ² = 1/12`. The linear ratio
+is `2/√3 ≈ 1.155`, and it is **a comparison between two disc packings**. Squares are not discs: the
+square lattice tiles the plane at density **1**, and so does the hexagonal one, in every section. So
+`2/√3` is not a gap this table has to close, not a penalty it pays for fixing orientation, and not a
+bound on any `L`. Rotating gains nothing, because nothing is being lost — a tiling of the plane is
+already full. An earlier draft of this note called it "the price of the orientation restriction";
+that was wrong, and the number constrains only a problem whose objects are discs.
 
-The project has already *measured* the shadow of this without naming it: `16-LEECH-MAP.md` reports
-the integral-section test separating tilted rows **87/87 illegal** from untilted **168/168 legal**,
-and `29-SAT-PROBE-AND-RESOLUTION.md` §B.2 reports that √2 is not a lattice point at any resolution.
-The bridge supplies the mechanism: a section is integral iff its plane's coordinates stay in a ring —
-ℚ for the axis-aligned lattice, ℚ(√2) for 45°. That makes the existing `leech_map.py` mapping
-(number field → laminated-tower level, 87 % exact) the **section-class** ladder, and the bridge is
-its geometry, not a replacement for it.
+**(ii) The section and its ring, which is the transferable part.** What the bridge genuinely supplies
+is vocabulary: a table row is a *section*, and a section is addressable in integers only if its
+plane's coordinates stay in a ring — ℚ for the axis-aligned lattice, ℚ(√2) at 45°. The project has
+already measured the shadow of this: `16-LEECH-MAP.md` reports the integral-section test separating
+tilted rows **87/87 illegal** from untilted **168/168 legal**, and
+`29-SAT-PROBE-AND-RESOLUTION.md` §B.2 reports that √2 is not a lattice point at any resolution. That
+makes the existing `leech_map.py` mapping (number field → laminated-tower level, 87 % exact) the
+**section-class** ladder, and the bridge is its geometry, not a replacement for it. The restriction
+this exposes is real, but it is a restriction on *addressability*, not on density — and it says
+nothing about whether a given `L` can be beaten.
 
 ## 4. If effort is to be spent, the two real options
 
-**(a) Cubes in cubes — the only place the dimension ladder touches this project.** The bridge's
-exact statement becomes a question: is the 3D optimum the *extrusion* of the 2D one? Extrusion is
-always feasible (extend every square's `(x,y)` to a cube and leave `z` free), so `s₃(n) ≥ s₂(n)`
-for free; equality is lamination, and the first row where extrusion fails is where a genuine density
-ladder starts. Cost: a 3D analogue of `declp` (box in box, `6n` walls, `3n+1` variables) plus a gate
-and a `verify` — one instrument, one run. Payoff: a fact about *packing*, not about this table's
-score, which stays 22.218056945 either way.
+**(a) Cubes in cubes — built and run.** `squares_in_squares/35-CUBES-IN-A-CUBE.md` with
+`declp3.py`: the declared-axis LP one dimension up, judged by an exact gate that reads the recorded
+coordinates as `Fraction`s. The question was whether the 3D optimum is the *extrusion* of the
+delivered 2D row. Answer: **yes at n = 2, 3, 4 and no from n = 5 on.** Two cubes in a box of side
+`L < 2` must intersect, so `L(n) ≥ 2` for `n ≥ 2`, and the 2×2×2 grid gives 2 for `n ≤ 8` — the 3D
+optimum is exactly 2 there, against 2.7071 (n = 5) and 3 (n = 6, 7, 8) for the row. The cube grid
+also beats the row at n = 10, 12, 16, 20; n = 9 ties at 3 with `L(9)` open in `(2, 3]`. The score is
+untouched (22.218056945).
+
+**What that means for this note.** It is the counter-case to §3, and it sharpens the whole
+side-quest: in the lattice world the 2D optimum *is* the slice of the 3D one, exactly, and the
+bijection carries no packing information; in the box world extending the same `(x, y)` and leaving
+`z` free is feasible but not optimal, so the dimension step buys something real. The difference is
+what the boundary is: a lattice has none (its cell is a determinant, fixed by the lattice), a box
+has walls that change with the dimension. **The ladder this project could climb is a wall ladder,
+not a lattice one — and that is exactly why the bridge in `BRIDGE.md` cannot describe it.**
 
 **(b) A per-row section-class label.** Cost: small — `split_lattices` and `lattice_coords` already
 exist. Payoff: small, because `22` and `23` already do most of it and the label does not move the
 score.
 
-Recommendation: **(a) only if the ladder itself is the goal**, and nothing at all if the goal is the
-score. Neither improves the delivered table, and the bridge should not be imported into
-`squares_in_squares` as machinery — the honest use is §3's sentence, which is a *diagnosis* of why
-"grid" is the right family and hex cannot be.
+Recommendation: (a) is done and answered; (b) is score-neutral. Nothing in this note improves the
+delivered table, and the bridge should not be imported into `squares_in_squares` as machinery — its
+honest use is §3: the section vocabulary, and the reason the plane result transfers to the table's
+*addressing* and not to its `L`.
 
 ## 5. Re-running the numbers in this note
 
