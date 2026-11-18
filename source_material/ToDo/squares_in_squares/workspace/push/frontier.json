@@ -1,0 +1,17 @@
+{
+ "run": 59,
+ "schema": "frontier/2",
+ "tally": {
+  "at": 246,
+  "beats": 79,
+  "unresolved": 675
+ },
+ "basis": {
+  "catalogue_2026": 146,
+  "triangular_table": 74,
+  "trivial_rule": 105,
+  "no_source_above_324": 675
+ },
+ "targets": [],
+ "weak_at": []
+}

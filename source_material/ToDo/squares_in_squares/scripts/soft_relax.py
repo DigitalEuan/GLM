@@ -58,9 +58,11 @@ def unpack(q):
 
 
 def hop_search(n, L_t, seed):
-    """One seed: gradient cold-settle, then alternating SA hot shuffles
+    """One seed: parallel-safe cold settle, then alternating SA hot shuffles
     (soft space, overlaps allowed — basin escape by pass-through) and
-    gradient re-hardening polishes (settle_to, L-BFGS-B, ftol 1e-14).
+    gradient re-hardening polishes (`settle_to`, which adds the rotation-aware
+    collective kick: most strained bodies swapped/turned 45 deg/re-slotted,
+    then re-settled).  The n=5 control passes only because of that kick.
     A hop is HARD when the polished state is pairwise non-overlapping
     (P.verify worst_pen <= -1e-10); its score is the state's own
     extent (P.verify L), which may exceed L_t.
@@ -72,7 +74,9 @@ def hop_search(n, L_t, seed):
     checked = 0
     for h in range(HOPS):
         if h == 0:
-            q, f = settle_to(q, L_t, iters=250)          # cold settle
+            # cold settle (with the rotation-aware collective kick; the seed
+            # keeps the kicks deterministic per hop, the project's discipline)
+            q, f = settle_to(q, L_t, iters=250, seed=seed * 1009 + h)
         elif h % 2 == 1:                                 # hot shuffle
             X, Y, TH = unpack(q)
             anneal(X, Y, TH, L_t, MOVES, seed * 1009 + h,
@@ -81,7 +85,7 @@ def hop_search(n, L_t, seed):
             q = np.concatenate([X, Y, TH])
             continue
         else:
-            q, f = settle_to(q, L_t, iters=250)          # re-harden
+            q, f = settle_to(q, L_t, iters=250, seed=seed * 1009 + h)  # re-harden
         checked += 1
         THn = q[2 * n:] % PHI
         st = [(float(q[i]), float(q[n + i]), float(THn[i]))

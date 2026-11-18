@@ -1,12 +1,11 @@
 # REPRODUCE.md — exact reproduction guide
 
-> **Snapshot note (2026-11-08):** The first verification block below is the
+> **Snapshot note (2026-11-18):** The first verification block below is the
 > historical Run 15 chain. The canonical state represented by the latest run
-> records is Run 36: score **22.642386651** (rounded **22.642387**), with
-> 543/1000 rows beating grid. The complete operational repository is present
-> in this GitHub checkout; the Run 36 record is preserved in
-> `RECONCILIATION.md` until the corresponding run-36 execution artifacts are
-> restored.
+> records is Run 52: score **22.218056945** (rounded **22.218057**), with
+> 553/1000 rows beating grid — recompute it with `python3 scripts/sqscore.py`,
+> which asserts those numbers. The Run 15/35/36 records remain in
+> `RECONCILIATION.md`.
 
 Everything runs from the repository root. Python 3.12 with numpy (sympy
 only for the certificate scripts); node (or bun) with the `docx` package

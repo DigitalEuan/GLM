@@ -1,4 +1,4 @@
-# Exact Verification of the Table — 875/1000 Rows
+# Exact Verification of the Table — 929/1000 Rows
 
 `download/exact_snap.json` records, for every row of the table, an
 attempt to verify its geometry **exactly**: the container fit and the

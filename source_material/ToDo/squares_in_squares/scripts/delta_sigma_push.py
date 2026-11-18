@@ -24,6 +24,7 @@ published catalogue (genuine record).
 Findings -> workspace/push/finds_DS.json; every find re-verified by packlib
 before it is reported. Budget-guarded.
 """
+import argparse
 import json
 import os
 import sys
@@ -38,8 +39,12 @@ import packlib as P
 from sa_push import (anneal, final_max_overlap, grid_seed, hw_vals,
                      moves_for, state_from_table)
 
-TAB = "/home/z/my-project/workspace/submission/table.json"
-PUSH = "/home/z/my-project/workspace/push"
+_TAB_ABS = "/home/z/my-project/workspace/submission/table.json"
+TAB = _TAB_ABS if os.path.exists(_TAB_ABS) else os.path.join(
+    os.path.dirname(HERE), "workspace/submission/table.json")
+_PUSH_ABS = "/home/z/my-project/workspace/push"
+PUSH = _PUSH_ABS if os.path.isdir(os.path.dirname(_PUSH_ABS)) else os.path.join(
+    os.path.dirname(HERE), "workspace/push")
 os.makedirs(PUSH, exist_ok=True)
 
 KAPPA = 0.25          # modulator gain
@@ -115,14 +120,28 @@ def lag1_autocorr(bits):
 
 
 def classify(X, Y, TH):
+    """(verdict, rho, contacts, total).
+
+    A degenerate stream — one lag slice constant, e.g. 19 of 20 squares
+    touching so that (b[:-1], b[1:]) has zero variance — makes rho undefined.
+    It used to fall through `rho > 0.5` as False and be reported as a liquid
+    jam without comment, which is exactly the silent-wrong-answer failure this
+    project keeps auditing.  Now the verdict falls back to the contact
+    fraction (>= 0.9 is the crystalline case), rho stays nan so the caller can
+    label it, and nothing is quietly reclassified.
+    """
     bits = contact_stream(X, Y, TH)
     rho = lag1_autocorr(bits)
     ones = int(bits.sum())
-    if rho > 0.5:
+    tot = len(bits)
+    frac = ones / max(tot, 1)
+    if not np.isfinite(rho):
+        verdict = "RIGID_WALL" if frac >= 0.9 else "ONE_PARAM_JAM"
+    elif rho > 0.5:
         verdict = "RIGID_WALL"
     else:
         verdict = "ONE_PARAM_JAM"
-    return verdict, rho, ones, len(bits)
+    return verdict, rho, ones, tot
 
 
 # ------------------------------------------------------------------ driver
@@ -196,7 +215,55 @@ def best_L_record(n, L):
     return True
 
 
+def classify_states(path):
+    """Run the jam classifier over states captured elsewhere (PL-18).
+
+    This is the same `classify` the shrink-loop controller uses on its own
+    jams; feeding it externally generated states is what makes it usable on
+    the eight push cells, whose jams were produced by a different engine.
+    """
+    blob = json.load(open(path))
+    rows = blob["states"] if isinstance(blob, dict) else blob
+    out = []
+    for r in rows:
+        st = r["state"]
+        X = np.array([p[0] for p in st], dtype=float)
+        Y = np.array([p[1] for p in st], dtype=float)
+        TH = np.array([p[2] for p in st], dtype=float)
+        verdict, rho, ones, tot = classify(X, Y, TH)
+        rec = {k: r.get(k) for k in ("n", "depth", "seed", "lam", "e", "L_target")}
+        deg = not np.isfinite(rho)
+        rec.update(verdict=verdict,
+                   rho=None if deg else round(float(rho), 4),
+                   contact_frac=round(ones / max(tot, 1), 4),
+                   degenerate=bool(deg), contacts=ones, pairs=tot)
+        out.append(rec)
+        rt = "nan" if deg else f"{rec['rho']:+.3f}"
+        print(f"  n={rec['n']:<4} d={rec['depth']:.2f} seed={rec['seed']} "
+              f"rho={rt} {rec['contacts']}/{rec['pairs']} -> {verdict}"
+              + ("  [degenerate: verdict from contact fraction]" if deg else ""),
+              flush=True)
+    rigid = sum(1 for r in out if r["verdict"] == "RIGID_WALL")
+    deg = sum(1 for r in out if r["degenerate"])
+    print(f"summary: {rigid}/{len(out)} RIGID_WALL, "
+          f"{len(out) - rigid}/{len(out)} ONE_PARAM_JAM, {deg} degenerate",
+          flush=True)
+    return out
+
+
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--from-states", default=os.path.join(PUSH, "jam_states.json"),
+                    help="classify these captured states instead of attacking")
+    ap.add_argument("--targets", action="store_true",
+                    help="run the original shrink-loop campaign instead")
+    a = ap.parse_args()
+    if not a.targets:
+        out = classify_states(a.from_states)
+        path = os.path.join(PUSH, "jam_class.json")
+        json.dump(out, open(path, "w"), indent=1)
+        print("wrote", path)
+        return
     targets = [12, 13, 803, 748, 983, 804, 862, 695]
     per_target = 100.0
     t0 = time.time()

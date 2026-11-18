@@ -1,0 +1,29 @@
+{
+ "schema": "cent-writeoff-register/1",
+ "written": "2026-11-18 02:26:02",
+ "entries": [
+  {
+   "id": "W-01",
+   "route": "compiled physics-analogy search moves (P-04 flywheel, P-05 PLL, P-11 piezo, P-12 Griffith) as packing attacks",
+   "source": "scripts/cent_engines.py (Run 6)",
+   "evidence": "236 campaign cells, 0 finds",
+   "cells": 236,
+   "per_engine": {
+    "p04_flywheel": 60,
+    "p05_pll": 60,
+    "p11_piezo": 58,
+    "p12_griffith": 58
+   },
+   "finds": 0,
+   "verdict": "written off",
+   "reason": "a move cannot add an arrangement the geometry does not have; score here is set by base geometry, and the two measured escapes (re-slot into the widest gap; the n=5 4-around-1 cross) are geometric, not analogous to a physical law",
+   "do_not_retry_unless": "a new engine is shown, on a gated control, to reach a side no local settle reaches",
+   "pointers": [
+    "workspace/push/cent_campaign.json",
+    "workspace/push/cent_findings.json",
+    "14-WRITE-OFFS.md",
+    "scripts/motif_wheels.py"
+   ]
+  }
+ ]
+}

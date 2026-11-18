@@ -1,6 +1,6 @@
-# STATUS.md — Squares in Squares: the system and sources record (Run 36, 2026-11-07)
+# STATUS.md — Squares in Squares: the system and sources record (Run 70, 2026-11-18)
 
-> Run 36 is the canonical latest state represented by the surviving run records. Run 34 remains a historical system-map milestone; the full lineage and source documentation below is preserved.
+> Run 70 is the canonical latest state represented by the surviving run records. Run 34 remains the historical system-map milestone (§1–§6 are its record and are still accurate); §7 carries the delivered numbers, §8 the frontier, §9/§9.1 the run history through 69, and `19` §12 the theory closure of runs 62–67 followed by the run-68 framing audit (`31`) and the run-69 margin definition and single-row search (`32`) and the run-70 cent-contract audit and T1 branch flip (`33`). No row of the table has changed since the run-47 re-score.
 
 This is the "everything in one place" document: the full record of how
 this project works from start to finish — where it came from (the GLM
@@ -374,22 +374,22 @@ source was right and the instrument learned.
 | `aux` | 3 | 3 | auxiliary survey constructions |
 | `register` | 10 | 10 | Run 35 register records, including T-263 and the nine later candidate records |
 
-## 7. Delivered state (verified Run 36; Run 34 remains historical context)
+## 7. Delivered state (verified Run 52; re-checked at run 67 by `sqscore.guard` — no row changed since; Run 36 and Run 34 remain historical context)
 
 | Quantity | Value |
 |---|---|
-| Submission score | **22.642386651** (rounded **22.642387**) |
+| Submission score | **22.218056945** (rounded **22.218057**) |
 | Grid ceiling | 28.937670 |
-| Total improvement | −6.295283 |
-| Puzzles beating the grid | **543 / 1000** |
-| Grid-tied | 457 (of which **152 are proven floors**) |
+| Total improvement | −6.719613 |
+| Puzzles beating the grid | **553 / 1000** |
+| Grid-tied | 447 (of which **152 are proven floors**) |
 | Open rows (attackable set) | **305** (root_audit run 34) |
 | Leaderboard best (user-reported 2026-11-05) | 22.0544214515 |
-| Gap to leader | **0.587965** |
+| Gap to leader | **0.163635** |
 
 Score history: 22.823536 (run 13) → 22.819978 (runs 26–27, T-263) →
-**22.642386651** (Run 35 register records + n=338 chain; reproduced at Run 36) — latest score move after the Run 34 Mishapolk state (runs 31–34:
-analysis, campaign nulls, recoveries + documentation).
+22.642386651 (runs 35–36) → **22.218056945** (run 47 audit re-score; guarded
+at run 52).
 
 Table invariants (checked every run: `root_audit.py`'s `table_laws`
 block for the monotone envelope and the shell law, the fixpoint audit
@@ -430,7 +430,7 @@ these laws to a `gap_analysis.py` that did not exist; they now live in
   exact replays; the tier-1 report's "s(6)=3 theorem" line retracted
   (register: restricted-optimality only).
 
-## 9. Run history (1 → 36)
+## 9. Run history (1 → 70)
 
 | Run | Theme | Score after | Verdict |
 |---|---|---|---|
@@ -466,8 +466,56 @@ these laws to a `gap_analysis.py` that did not exist; they now live in
 | 32 | **rollback #3 recovery** + documentation layer: adopted the remote's runs 28–31; channel fixpoint re-verified bit-identical; root_audit fixed (stale run-27 gap); documents unfrozen (were run-13 era through six score moves) | 22.645991 | failure 16 (rollback rules); STATUS got the system map |
 | 33 | **rollback #4 recovery** + the lineage record: run-32 artifacts redone bit-identically; the GLM → cent compiler → this project lineage recorded (this document rebuilt); the front-page copy rides at the bottom of this file for the upload transport | 22.645991 | failure 17 (the transport rule); see `NEXT_STEPS.md` |
 | 34 | accuracy dive (user order): **the cascade recorded** (§4: chain law with live T-263/pinwheel examples, removal closure, table laws, the measured ledger 0.241477); table laws re-homed from a phantom reference into `root_audit.py` (monotone 999/999, shell 937/937 @1e-7); census re-verified against the live table and the import ledgers (register re-attributed to run 13: 76 applied, 3 beaten by Mishapolk, +2 via the run-18 restore; Mishapolk 221→209 = 8 chain3 + 4 closure re-earned); `repository.zip` retired — the GitHub repository is the transport | 22.645991 | channel bit-identical; laws 0-violation |
-| 35 | **score move**: nine Evan Daniel register records T-243/T-257/T-267–T-273 imported, plus the n=338 chain conversion; direct gain 0.003359 and cascade gain 0.000245 | **22.642386651** | latest score move; 543/1000 beat grid |
-| 36 | **re-establishment**: Run 35 reproduced from its surviving records; independent rescore, cascade, closure fixpoint, wedge probe, and documentation state re-verified | **22.642386651** | canonical latest state represented by the run records |
+| 35 | **score move** (historical, superseded at run 47): nine Evan Daniel register records T-243/T-257/T-267–T-273 imported, plus the n=338 chain conversion; direct gain 0.003359 and cascade gain 0.000245 | 22.642386651 | 543/1000 beat grid |
+| 36 | **re-establishment** (historical): Run 35 reproduced from its surviving records; independent rescore, cascade, closure fixpoint, wedge probe, and documentation state re-verified | 22.642386651 | superseded at run 47 |
+| 47 | **audit re-score** (current): the run-36 table re-scored against the corrected extent and the one scorer | **22.218056945** | 553/1000 beat grid; guarded since run 52 |
+| 48–51 | audit reconciliation window: the drift inventory that produced `19` §1 (ten documents quoting old totals, `table.json` diverging) | 22.218056945 | no score move; the record itself was the defect |
+| 52 | `record_guard.py` implemented; G-1: the r = 1 column in the exact t-basis | 22.218056945 | **falsifier fired** — same t-multiset across the δ step, so the step is arrangement, not vocabulary (`20`) |
+| 53 | G-2: both r = 1 atoms rebuilt from integers in ℚ(√2); the seam solved by LP | 22.218056945 | all 12 full-diamond rows return the delivered algebraic side, pinned, penetration 0 (`21`) |
+| 54 | G-2b: the "block" re-declared as a five-deep diagonal **strip**; prices corrected per legal start, forward only | 22.218056945 | `now` = 0 for every delivered column; best base-less start 0.058535; 0 gains (`22`) |
+| 55 | seed wheels: two-tilt grammar spun at n = 10 | 22.218056945 | 436 cells, 80 certified, 0 gains; best centred = the delivered optimum 3.707106791 (`23`) |
+| 56 | optimality battery of published proofs | 22.218056945 | **42 proved rows**, at = 42, above = 0; Karakuş's n = 10 value is 0.51 *below* the optimum (`24`) |
+| 57 | open-row literature crosswalk | 22.218056945 | 10 at published, **2 beat published** (n = 28, 29), 0 above (`25`) |
+| 58–59 | frontier crosswalk, rule corrected to the catalogue's own words | 22.218056945 | 316 rows resolved, 0 targets; the "56 beats" were not a label offset (`26`) |
+| 60 | `parse_tt.py` — the page fetched with `curl`, not the truncating reader | 22.218056945 | 215 cells, 0 unparseable; **the catalogue's scope ends at n = 324** |
+| 61 | frontier corrected again: the trivial grid is *not* best-known above 324 | 22.218056945 | 325 determined (246 at, 79 beats), **675 open**, `best_known = null` (`26` §9) |
+| 62 | Bui's staircase (arXiv:2508.04603v2) implemented exactly in ℚ, §3.1.1 only | 22.218056945 | 132 cells, **132/132 `packlib.verify`, 0 gains**; density 0.23–0.82 vs ≈0.95 (`27`) |
+| 63 | G-3: the expressiveness ladder | 22.218056945 | six rungs, **4 recomputed, 2 quoted**; Λ₂₄ kills coarsening at all eight scales (`28`) |
+| 64 | the SAT/disjunctive model assessed as a decision procedure | 22.218056945 | 0.76 % of pairs tight at n = 1000 → 1e300729 leaves; decisive only with the disjunction fixed (`19` §11) |
+| 65 | §11.5 bounded probe (18 cells) | 22.218056945 | 0 feasible — but circular free set + a broken LP; **withdrawn** (`29` Part A + erratum) |
+| 66 | resolution/dithering probe | 22.218056945 | the answers are invalid at **every** m including 128; dithering has no admissible residual (`29` Part B) |
+| 67 | §11.5 probe with an **earned** free set | 22.218056945 | core unspans only at k = 161/184/267/298 (55–100 %); the LP refuses at every k to **k = n**, which is a certificate: the delivered side is the exact optimum of the declared-axis, fixed-orientation LP (`30`) |
+| 68 | algebraic-word framing, audited (`31`) | 22.218056945 | three closures confirmed (run 5: 280 certificates / 0 conversions; run 52: same `{axis, π/4}` alphabet across 0.520815; run 55: 436 cells / 80 certified / 0 gains); four figures corrected — 45° carries 43.2 % of gain and 23.2 % of beats (not 70 %), no `0.67k + 4` law, the three "thinnest margin" rows are at the grid (gain 0, `r = 12/20/22`), `s(k²−5) = k` external and reported (T-298) with 25/25 contact rows at grid |
+| 69 | wall margin, and one row's branch-rotation search (`32`) | 22.218056945 | `mu = L − sqrt(n)` defined, priced `rho = mu/sqrt(n)`, computed on all 1000 rows: 184/656/819 are mid-table (mu ranks 517/604/610, rho ranks 159/637/702; median 0.441761/0.017494) and the thinnest margins are the proved perfect squares; fixed rule selects n = 18 (rho 0.136763, rank 8), where 3,940 declared + 1,620 re-slot + 1,171 settled cells give **0 feasible, 0 gate-accepted, 0 gains**; controls: rigidity 3.1e−8, loose 4-square shrinks and gates, n = 12 refused; s(11) proved/open contradiction recorded, not resolved |
+| 70 | cent-compiler contract audited; T1 SAT-branch flip implemented (`33`) | 22.218056945 | branch flip (`u_i`/`v_i`/`u_j`/`v_j` per tight pair, then LP contraction) run exhaustively: n = 18/20/30 give 1,071 + 4,572 + 2,160 = **7,803 cells, 0 feasible, 0 gated, 0 gains**; base cell refused at 1e−2 (rigidity 3.1e−8); controls pass (loose 4 → 2.19 gated; forced branch feasible at 2.001, refused at 1.5); card figures corrected — 0.76 % only at n = 1000 (16.99/28.95/20.46 % at 18/20/30), `s(5) = 2+√2/2` proved so the n = 5 test is ill-posed, "0/8" is run 41, "run 50" absent |
+
+### 9.1 The theory closure (runs 62–67) — what it decided
+
+Run 36's map ended with the frontier open. Runs 62–67 did not search; they **priced
+the nominated routes and closed them on measurement**, and the single most useful
+thing they produced is a set of exact "no" statements:
+
+* **Coarsening is dead.** Twice, independently: the Λ₂₄ predicate at eight scales
+  (tilted rows illegal 87/87 at every scale, untilted legal 168/168 somewhere), and
+  snapping ten *delivered answers* to a `1/m` lattice (invalid at every m including
+  128, because at an optimum contacts have penetration exactly 0 — equalities have
+  no neighbourhood).
+* **A neighbourhood cannot lower a side.** With the delivered axis assignment and
+  θ frozen, freeing the extremes and their tight-pair partners raises k to 55–100 %
+  before the frozen core even stops spanning, and the LP then refuses at every k up
+  to and including k = n.
+* **k = n is a certificate.** Feasible at L₀, infeasible at L₀ − 1e−6, all
+  translations free: the delivered side is the exact optimum of the declared-axis,
+  fixed-orientation LP — `lp_seam`'s statement extended from one seam to a whole row.
+* **The residue is the branch assignment.** 0.76 % of pairs are tight; each has ≥ 2
+  admissible resolving axes; nothing in the score ranks the branches (`L1`). That,
+  plus rotation (`L5`), is the only object the material still points at.
+
+Recorded defect of the session, kept rather than tidied: the probe behind run 65 was
+wrong three times over (circular free set, then `i`/`j`/inequality errors, then
+`h_i + h_j` instead of `0.5 + Eu[owner, other]`). One invariant would have caught all
+of it — *the delivered state must be feasible at its own side* — and it is now
+permanent: `python3 scripts/sat_probe.py --selftest` → 6/6.
 
 ## 10. Guarantee
 
@@ -486,38 +534,49 @@ page, and the live table is checked by `deliverNN.py` every run.
 
 # Squares in Squares — Verified Constructions, Leech-Lattice Analysis, and the Rotated-Block Program
 
-This repository is the complete, reproducible working state of a
+This repository is a reproducible working state of a
 Kaggle *Squares in Squares* project (pack n unit squares into a minimal
 square container; 1000 puzzles, n = 1..1000; score = Σ(L/√n − 1), lower
 is better), extended with a machine-verified Leech-lattice layer and a
 fully enumerated rotated-block family program.
 
-**Where this project began.** It is a descendant of the GLM study
-(github.com/DigitalEuan/GLM): the *General Lattice Machine*, whose
-number-theory evidence (TAX/NRCI, Y/Q/B constants, delta-sigma as the
-canonical carrier for irrationals) was compiled into a physical
-compiler — the cent compiler v12_2_ext, 41 wheels
+**Where this project began.** It is a branch of the GLM study
+(github.com/DigitalEuan/GLM): the *Geometric Language Machine*, foundations include: use exact Arithmetic; no floats/rounding, no SHA-256, no random or disruptive operations anywhere possible - specifically within computation,
+number-theory evidence-based (TAX/NRCI, Y/Q/B constants, delta-sigma as the
+canonical carrier for irrationals). Part of the GLM project is a concept generator — the cent compiler v12_2_ext, it has "wheels" of data that spin to find operational paths regardless of domain 
 (github.com/DigitalEuan/squares_in_squares/tree/main/workspace/cent_compiler_v12_2_ext).
 Two of those wheels are this project's engines: **W36** (Numerical SAT
 Substrate — the exact algebra that became packlib's SAT verifier) and
 **W37** (Viscoelastic Settling — the creep/pressure ramp that became
-the pressure-settling engine). Every construction this project
-produces is a W36 certificate; every search it runs is a W37
-settle. The record from start to finish — lineage, engines, sources,
-operating loop — is the system record in `STATUS.md`.
+the "pressure-settling engine" - the engine concept the cent_compiler generated). Every construction this project
+produces is a wheel certificate (W36); every search it runs is a wheel
+settle (W37). The record from start to finish — lineage, engines, sources,
+operating loop — is the system record in `STATUS.md`. More operatiors and more/denser wheels should produce more concepts, I suspect the Python libraries would make excellent wheels - reduce to cent_compiler '¢' primitives and exact Arithmetic then confirm with Lean4.
 
-## Headline results (Run 34, 2026-11-07; last score move run 30)
+## Current results (Run 70, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
-| Submission score | **22.645991** (grid ceiling 28.937670, improvement −6.291679) |
-| Puzzles beating the plain grid | **543 / 1000** |
-| Leaderboard best (reported) | 22.0544214515 → gap **0.591569** |
-| Certification | 1000/1000 packings SAT-verified + 500,500-row CSV round-trip (0 issues; re-verified runs 32–34) |
+| Submission score | **22.218056945** (rounded **22.218057**; grid ceiling 28.937670, improvement −6.719613) |
+| Puzzles beating the plain grid | **553 / 1000** |
+| Leaderboard best (reported) | 22.0544214515 → gap **0.163635** |
+| Certification | 1000/1000 packings SAT-verified + 500,500-row CSV round-trip (0 issues; Run 36 record) |
 | Golay/Leech verification | 28/28 + 14/14 assertions, integer-exact |
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
-| Largest single import | **Mishapolk/square-packing-records, 221 rows (run 30)**: 22.819978 → 22.645991 (−0.173983) |
+| Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
+| Latest session | **Runs 69–70, margin + two discrete searches** — wall margin on 1000 rows; 5,560 word cells at n = 18 and 7,803 SAT-branch-flip cells at n = 18/20/30, **0 gains, no row changed**; records `31`–`33` |
+
+## Where the score stands, said plainly
+
+Runs 62–67 changed **no row of the table**. They priced the routes that were
+nominated and closed them on measurement: the catalogue the frontier is read
+against stops at n = 324 (675 rows open for want of a *source*, not a method);
+Bui's construction was implemented exactly and refused (density 0.23–0.82 against
+≈0.95); and the remaining search shapes — k-square neighbourhoods, reduced
+resolution, global disjunctive SAT — were each refused with a certificate or a
+counted reason rather than an opinion. Every instrument points at the same object:
+the **branch assignment** (which pair is tight on which axis) and rotation.
 
 ## The score engine (what actually produces improvements)
 
@@ -537,7 +596,7 @@ operating loop — is the system record in `STATUS.md`.
    largest import of the project — **Mishapolk/square-packing-records**
    (run 30: verified bounds at ALL 1000 n; the band 325..1000 was
    invisible to our atlas; 221 rows imported, −0.173983). Sources beat
-   search: every score move since run 9 has been an import.
+   search: every score move since run 9 has been an import. I am trying to keep track of all external sources and clearly identify and reference them.
 3. **Analytic families** — Göbel strip/central-square, the 4-parameter
    diamond+staircase G(a1,a2,b,c) (17 mid-band finds beyond the catalogue),
    the clipped variant G(a1,a2,b,c,t) (5 more).
@@ -557,6 +616,18 @@ operating loop — is the system record in `STATUS.md`.
    monotone envelope and the shell law every run (999/999 and 937/937
    clean at run 34). Every campaign is aimed by these instruments,
    never by eyeball.
+7. **The theory layer (runs 62–67)** — the part that decides rather than searches,
+   and the only part that can say *why* a route is dead: `bui_wheel.py` (a
+   published nomination implemented to the letter over ℚ and refused on density,
+   132/132 verified, 0 gains), `ladder.py` (six expressiveness rungs, 4 recomputed,
+   2 honestly quoted — the Λ₂₄ sweep kills coarsening at all eight scales),
+   `disj_census.py` (0.76 % of pairs tight at n = 1000, 1e300729 leaves: the model
+   is decisive *with the disjunction fixed*), `sat_probe.py` + `extreme_probe.py`
+   (the declared-axis LP as a certificate: with every translation free, the
+   delivered side is the exact optimum at ε = 1e−6), and `resolution_probe.py`
+   (snapping the *answers* to a lattice invalidates them at every resolution,
+   m = 128 included — contacts are equalities with no neighbourhood). Records
+   `27`–`30`; `sat_probe.py --selftest` (6/6) is the invariant that guards the LP.
 
 ## Reproducing
 
@@ -565,7 +636,7 @@ the list of steps that need network access (live catalogue mirrors) or
 transient /tmp files.
 
 ## Operations 
-Each run, update top-level README.md, STATUS.md, NEXT_STEPS.md and REPRODUCE.md all need updating. If possible GLM_INVESTIGATION.md should be upkeep as an overview of the whole study.
+Each run, update top-level STATUS.md (include the README.md copied at the bottom of STATUS.md), NEXT_STEPS.md and REPRODUCE.md all need updating. If possible GLM_INVESTIGATION.md should be upkeep as an overview of the whole study.
 
 ## Guarantee
 

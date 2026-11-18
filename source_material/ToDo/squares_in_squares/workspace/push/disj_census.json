@@ -1,0 +1,127 @@
+{
+ "run": 64,
+ "schema": "disj/1",
+ "tight_tol": 1e-09,
+ "rows": [
+  {
+   "n": 10,
+   "pairs": 45,
+   "tight": 11,
+   "tight_frac": 0.24444444444444444,
+   "axis_counts": [
+    5,
+    2,
+    0,
+    4
+   ],
+   "slack_pairs": 34,
+   "log10_branches": 27.1,
+   "worst_pen": -5.394553692639192e-10
+  },
+  {
+   "n": 11,
+   "pairs": 55,
+   "tight": 14,
+   "tight_frac": 0.2545454545454545,
+   "axis_counts": [
+    5,
+    3,
+    2,
+    4
+   ],
+   "slack_pairs": 41,
+   "log10_branches": 33.1,
+   "worst_pen": -5.150000426112911e-10
+  },
+  {
+   "n": 25,
+   "pairs": 300,
+   "tight": 72,
+   "tight_frac": 0.24,
+   "axis_counts": [
+    52,
+    20,
+    0,
+    0
+   ],
+   "slack_pairs": 228,
+   "log10_branches": 180.6,
+   "worst_pen": -4.000000330961484e-10
+  },
+  {
+   "n": 50,
+   "pairs": 1225,
+   "tight": 105,
+   "tight_frac": 0.08571428571428572,
+   "axis_counts": [
+    58,
+    39,
+    4,
+    4
+   ],
+   "slack_pairs": 1120,
+   "log10_branches": 737.5,
+   "worst_pen": -2.6314284085060535e-10
+  },
+  {
+   "n": 100,
+   "pairs": 4950,
+   "tight": 342,
+   "tight_frac": 0.06909090909090909,
+   "axis_counts": [
+    252,
+    90,
+    0,
+    0
+   ],
+   "slack_pairs": 4608,
+   "log10_branches": 2980.2,
+   "worst_pen": -2.000000165480742e-10
+  },
+  {
+   "n": 200,
+   "pairs": 19900,
+   "tight": 638,
+   "tight_frac": 0.03206030150753769,
+   "axis_counts": [
+    321,
+    293,
+    12,
+    12
+   ],
+   "slack_pairs": 19262,
+   "log10_branches": 11981.0,
+   "worst_pen": -1.3599965598132258e-10
+  },
+  {
+   "n": 500,
+   "pairs": 124750,
+   "tight": 1019,
+   "tight_frac": 0.008168336673346693,
+   "axis_counts": [
+    445,
+    452,
+    55,
+    67
+   ],
+   "slack_pairs": 123401,
+   "log10_branches": 75107.0,
+   "worst_pen": -8.644285287573439e-11
+  },
+  {
+   "n": 1000,
+   "pairs": 499500,
+   "tight": 3811,
+   "tight_frac": 0.0076296296296296294,
+   "axis_counts": [
+    2146,
+    1665,
+    0,
+    0
+   ],
+   "slack_pairs": 495689,
+   "log10_branches": 300729.0,
+   "worst_pen": -6.199840640874754e-11
+  }
+ ]
+}

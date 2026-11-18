@@ -1,0 +1,2827 @@
+{
+ "run": 55,
+ "schema": "seed-wheels/1",
+ "written": "2026-11-18 06:28:31",
+ "scope": {
+  "field": "Q(sqrt2)",
+  "frames": [
+   1,
+   2
+  ],
+  "masks": [
+   "full",
+   "strip",
+   "two-tilt seed",
+   "union of two frames"
+  ],
+  "placement": [
+   "wall-anchored on the sqrt2/2 grid",
+   "centred with Q(sqrt2) offset"
+  ],
+  "angles": [
+   "0",
+   "pi/4"
+  ],
+  "translations": "declared finite set only; continuous translation NOT searched",
+  "excluded": [
+   "angles outside {0, pi/4} (rational-t fields are certifiable but not here)",
+   "three or more lattices",
+   "non-wall-anchored fills"
+  ]
+ },
+ "seeds": {
+  "n": 10,
+  "cells": [
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(0+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(1+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(2+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(3+1/2,4+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,4+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+0/2,4+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,3+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,4+0/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/edge/frame(4+1/2,4+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(0+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(1+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(2+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(3+1/2,4+1/2)",
+    "L_exact": "1/2+7/2*sqrt2",
+    "L_exact_float": 5.449747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.7426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,4+0/2)",
+    "L_exact": "7/2*sqrt2",
+    "L_exact_float": 4.949747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.2426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+0/2,4+1/2)",
+    "L_exact": "1/2+7/2*sqrt2",
+    "L_exact_float": 5.449747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.7426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,3+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,4+0/2)",
+    "L_exact": "7/2*sqrt2",
+    "L_exact_float": 4.949747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.2426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "3x3-corner/corner/frame(4+1/2,4+1/2)",
+    "L_exact": "1/2+7/2*sqrt2",
+    "L_exact_float": 5.449747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.7426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(0+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(1+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(2+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(3+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,1+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,1+1/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,2+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,2+1/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,3+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,3+1/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,4+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+0/2,4+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,1+0/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,1+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,2+0/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,2+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,3+0/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,3+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,4+0/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/edge/frame(4+1/2,4+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(0+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(1+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(2+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+0/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,1+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,1+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,2+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,2+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,3+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,3+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,4+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(3+1/2,4+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,1+0/2)",
+    "L_exact": "4",
+    "L_exact_float": 4.0,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.2928932173519998,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,1+1/2)",
+    "L_exact": "4",
+    "L_exact_float": 4.0,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.2928932173519998,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,2+0/2)",
+    "L_exact": "4",
+    "L_exact_float": 4.0,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.2928932173519998,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,2+1/2)",
+    "L_exact": "1/2+5/2*sqrt2",
+    "L_exact_float": 4.035533905932738,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.32842712328473755,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,3+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,3+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,4+0/2)",
+    "L_exact": "7/2*sqrt2",
+    "L_exact_float": 4.949747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.2426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+0/2,4+1/2)",
+    "L_exact": "1/2+7/2*sqrt2",
+    "L_exact_float": 5.449747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.7426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,0+0/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,0+1/2)",
+    "outcome": "no_side_packs",
+    "excluded_by": "declared frame grid"
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,1+0/2)",
+    "L_exact": "1/2+5/2*sqrt2",
+    "L_exact_float": 4.035533905932738,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.32842712328473755,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,1+1/2)",
+    "L_exact": "1/2+5/2*sqrt2",
+    "L_exact_float": 4.035533905932738,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.32842712328473755,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,2+0/2)",
+    "L_exact": "1/2+5/2*sqrt2",
+    "L_exact_float": 4.035533905932738,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.32842712328473755,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,2+1/2)",
+    "L_exact": "1/2+5/2*sqrt2",
+    "L_exact_float": 4.035533905932738,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.32842712328473755,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,3+0/2)",
+    "L_exact": "3*sqrt2",
+    "L_exact_float": 4.242640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -0.5355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,3+1/2)",
+    "L_exact": "1/2+3*sqrt2",
+    "L_exact_float": 4.742640687119286,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.0355339044712855,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,4+0/2)",
+    "L_exact": "7/2*sqrt2",
+    "L_exact_float": 4.949747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.2426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "bar2x4/corner/frame(4+1/2,4+1/2)",
+    "L_exact": "1/2+7/2*sqrt2",
+    "L_exact_float": 5.449747468305833,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": false,
+    "outcome": "feasible_no_gain",
+    "gain": -1.7426406856578325,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(-1+0/2,-1+0/2)",
+    "L_exact": "515165043/125000000",
+    "L_exact_float": 4.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(-1+1/2,-1+1/2)",
+    "L_exact": "3707106791/1000000000",
+    "L_exact_float": 3.707106791,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -8.351999980504843e-09,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(-1+0/2,0+0/2)",
+    "L_exact": "1103553393/250000000",
+    "L_exact_float": 4.414213572,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.7071067893520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(-1+1/2,0+1/2)",
+    "L_exact": "1103553393/250000000",
+    "L_exact_float": 4.414213572,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.7071067893520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(-1+0/2,1+0/2)",
+    "L_exact": "640165043/125000000",
+    "L_exact_float": 5.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(-1+1/2,1+1/2)",
+    "L_exact": "765165043/250000000+3/2*sqrt2",
+    "L_exact_float": 5.181980515559642,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4748737329116421,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(0+0/2,-1+0/2)",
+    "L_exact": "1103553393/250000000",
+    "L_exact_float": 4.414213572,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.7071067893520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(0+1/2,-1+1/2)",
+    "L_exact": "1103553393/250000000",
+    "L_exact_float": 4.414213572,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.7071067893520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(0+0/2,0+0/2)",
+    "L_exact": "515165043/125000000",
+    "L_exact_float": 4.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(0+1/2,0+1/2)",
+    "L_exact": "640165043/125000000",
+    "L_exact_float": 5.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(0+0/2,1+0/2)",
+    "L_exact": "38627417/8000000",
+    "L_exact_float": 4.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(0+1/2,1+1/2)",
+    "L_exact": "46627417/8000000",
+    "L_exact_float": 5.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(1+0/2,-1+0/2)",
+    "L_exact": "640165043/125000000",
+    "L_exact_float": 5.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(1+1/2,-1+1/2)",
+    "L_exact": "765165043/250000000+3/2*sqrt2",
+    "L_exact_float": 5.181980515559642,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4748737329116421,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(1+0/2,0+0/2)",
+    "L_exact": "38627417/8000000",
+    "L_exact_float": 4.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(1+1/2,0+1/2)",
+    "L_exact": "46627417/8000000",
+    "L_exact_float": 5.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(1+0/2,1+0/2)",
+    "L_exact": "2767766953/500000000",
+    "L_exact_float": 5.535533906,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.8284271233520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/edge/offset(1+1/2,1+1/2)",
+    "L_exact": "3267766953/500000000",
+    "L_exact_float": 6.535533906,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.828427123352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(-1+0/2,-1+0/2)",
+    "L_exact": "38627417/8000000",
+    "L_exact_float": 4.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(-1+1/2,-1+1/2)",
+    "L_exact": "640165043/125000000",
+    "L_exact_float": 5.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(-1+0/2,0+0/2)",
+    "L_exact": "46627417/8000000",
+    "L_exact_float": 5.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(-1+1/2,0+1/2)",
+    "L_exact": "46627417/8000000",
+    "L_exact_float": 5.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(-1+0/2,1+0/2)",
+    "L_exact": "3267766953/500000000",
+    "L_exact_float": 6.535533906,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.828427123352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(-1+1/2,1+1/2)",
+    "L_exact": "54627417/16000000+2*sqrt2",
+    "L_exact_float": 6.24264068724619,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.53553390459819,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(0+0/2,-1+0/2)",
+    "L_exact": "1103553393/250000000",
+    "L_exact_float": 4.414213572,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.7071067893520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(0+1/2,-1+1/2)",
+    "L_exact": "1103553393/250000000",
+    "L_exact_float": 4.414213572,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -0.7071067893520002,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(0+0/2,0+0/2)",
+    "L_exact": "640165043/125000000",
+    "L_exact_float": 5.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(0+1/2,0+1/2)",
+    "L_exact": "1353553393/500000000+3/2*sqrt2",
+    "L_exact_float": 4.828427129559643,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.1213203469116424,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(0+0/2,1+0/2)",
+    "L_exact": "1353553393/500000000+2*sqrt2",
+    "L_exact_float": 5.5355339107461905,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.8284271280981903,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(0+1/2,1+1/2)",
+    "L_exact": "1353553393/500000000+2*sqrt2",
+    "L_exact_float": 5.5355339107461905,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.8284271280981903,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(1+0/2,-1+0/2)",
+    "L_exact": "38627417/8000000",
+    "L_exact_float": 4.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(1+1/2,-1+1/2)",
+    "L_exact": "640165043/125000000",
+    "L_exact_float": 5.121320344,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.4142135613519997,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(1+0/2,0+0/2)",
+    "L_exact": "38627417/8000000",
+    "L_exact_float": 4.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(1+1/2,0+1/2)",
+    "L_exact": "46627417/8000000",
+    "L_exact_float": 5.828427125,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.121320342352,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(1+0/2,1+0/2)",
+    "L_exact": "38627417/16000000+2*sqrt2",
+    "L_exact_float": 5.24264068724619,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -1.5355339045981902,
+    "beats_bound": true
+   },
+   {
+    "rule": "centred/corner/offset(1+1/2,1+1/2)",
+    "L_exact": "54627417/16000000+2*sqrt2",
+    "L_exact_float": 6.24264068724619,
+    "pen": "0",
+    "n": 10,
+    "count": 10,
+    "centred": true,
+    "outcome": "feasible_no_gain",
+    "gain": -2.53553390459819,
+    "beats_bound": true
+   }
+  ],
+  "wall_cells": 400,
+  "centred_cells": 36,
+  "certified": 80,
+  "gains": 0
+ },
+ "two_frame": [
+  {
+   "n": 290,
+   "L_del": 17.535533907818,
+   "frames": 2,
+   "upright": 240,
+   "sites": 50,
+   "mask_shapes": [
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "frame_offsets": [
+    0.0,
+    12.727922
+   ],
+   "gate_ok": true,
+   "worst_pen": "0",
+   "max_rebuild_err": 1.7099996085793148e-09
+  },
+  {
+   "n": 226,
+   "L_del": 15.535533907804,
+   "frames": 1,
+   "upright": 201,
+   "sites": 25,
+   "mask_shapes": [
+    [
+     5,
+     5
+    ]
+   ],
+   "frame_offsets": [
+    0.0
+   ],
+   "gate_ok": true,
+   "worst_pen": "0",
+   "max_rebuild_err": 1.0377985743221632e-09
+  }
+ ],
+ "seconds": 5.5
+}

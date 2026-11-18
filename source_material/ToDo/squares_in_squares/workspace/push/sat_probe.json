@@ -1,0 +1,218 @@
+{
+ "run": 65,
+ "schema": "satprobe/1",
+ "targets": [
+  295,
+  298,
+  299,
+  294,
+  297,
+  300
+ ],
+ "eps_list": [
+  1e-06,
+  0.0001,
+  0.01
+ ],
+ "probes": [
+  {
+   "n": 295,
+   "L_delivered": 17.704232792623998,
+   "rows": [
+    {
+     "n": 295,
+     "k": 8,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.704232792623998,
+     "rigid_span_y": 17.704232792623998,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 295,
+     "k": 12,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.704232792623998,
+     "rigid_span_y": 17.704232792623998,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 295,
+     "k": 20,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 16.704232792511,
+     "rigid_span_y": 17.704232792623998,
+     "rigid_core_blocks": true
+    }
+   ]
+  },
+  {
+   "n": 298,
+   "L_delivered": 17.77817459494,
+   "rows": [
+    {
+     "n": 298,
+     "k": 8,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.77817459494,
+     "rigid_span_y": 17.77817459494,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 298,
+     "k": 12,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.77817459494,
+     "rigid_span_y": 17.77817459494,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 298,
+     "k": 20,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 16.778174594827,
+     "rigid_span_y": 17.77817459494,
+     "rigid_core_blocks": true
+    }
+   ]
+  },
+  {
+   "n": 299,
+   "L_delivered": 17.801004436140104,
+   "rows": [
+    {
+     "n": 299,
+     "k": 8,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.80100443614005,
+     "rigid_span_y": 17.801004436140104,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 299,
+     "k": 12,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.80100443614005,
+     "rigid_span_y": 17.801004436140104,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 299,
+     "k": 20,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 16.80100443602805,
+     "rigid_span_y": 17.80100443614005,
+     "rigid_core_blocks": true
+    }
+   ]
+  },
+  {
+   "n": 294,
+   "L_delivered": 17.65685425138,
+   "rows": [
+    {
+     "n": 294,
+     "k": 8,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.65685425138,
+     "rigid_span_y": 17.65685425138,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 294,
+     "k": 12,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.65685425138,
+     "rigid_span_y": 17.65685425138,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 294,
+     "k": 20,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 16.960155110176547,
+     "rigid_span_y": 17.65685425138,
+     "rigid_core_blocks": true
+    }
+   ]
+  },
+  {
+   "n": 297,
+   "L_delivered": 17.740417289430997,
+   "rows": [
+    {
+     "n": 297,
+     "k": 8,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.740417289430997,
+     "rigid_span_y": 17.740417289430997,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 297,
+     "k": 12,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.740417289430997,
+     "rigid_span_y": 17.740417289430997,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 297,
+     "k": 20,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 16.740417289318998,
+     "rigid_span_y": 17.740417289430997,
+     "rigid_core_blocks": true
+    }
+   ]
+  },
+  {
+   "n": 300,
+   "L_delivered": 17.824123390366,
+   "rows": [
+    {
+     "n": 300,
+     "k": 8,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.824123390366,
+     "rigid_span_y": 17.824123390366,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 300,
+     "k": 12,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.824123390366,
+     "rigid_span_y": 17.824123390366,
+     "rigid_core_blocks": true
+    },
+    {
+     "n": 300,
+     "k": 20,
+     "eps": null,
+     "ok": false,
+     "rigid_span_x": 17.01952361193274,
+     "rigid_span_y": 17.824123390366,
+     "rigid_core_blocks": true
+    }
+   ]
+  }
+ ],
+ "gains": []
+}

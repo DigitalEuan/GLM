@@ -1,0 +1,93 @@
+{
+ "settings": {
+  "HOPS": 2,
+  "MOVES": 6000
+ },
+ "results": [
+  {
+   "k": 8,
+   "n": 65,
+   "target_slack": 0.5158,
+   "hard": 0,
+   "checked": 1,
+   "find": null,
+   "secs": 78.0
+  },
+  {
+   "k": 9,
+   "n": 82,
+   "target_slack": 0.5158,
+   "hard": 0,
+   "checked": 1,
+   "find": null,
+   "secs": 97.2
+  },
+  {
+   "k": 10,
+   "skipped": "time budget"
+  },
+  {
+   "k": 11,
+   "skipped": "time budget"
+  },
+  {
+   "k": 12,
+   "skipped": "time budget"
+  },
+  {
+   "k": 13,
+   "skipped": "time budget"
+  },
+  {
+   "k": 14,
+   "skipped": "time budget"
+  },
+  {
+   "k": 15,
+   "skipped": "time budget"
+  },
+  {
+   "k": 16,
+   "skipped": "time budget"
+  },
+  {
+   "k": 17,
+   "skipped": "time budget"
+  },
+  {
+   "k": 18,
+   "skipped": "time budget"
+  },
+  {
+   "k": 19,
+   "skipped": "time budget"
+  },
+  {
+   "k": 20,
+   "skipped": "time budget"
+  },
+  {
+   "k": 21,
+   "skipped": "time budget"
+  },
+  {
+   "k": 22,
+   "skipped": "time budget"
+  },
+  {
+   "k": 23,
+   "skipped": "time budget"
+  },
+  {
+   "k": 24,
+   "skipped": "time budget"
+  },
+  {
+   "k": 25,
+   "skipped": "time budget"
+  }
+ ],
+ "covered": 2,
+ "finds": 0,
+ "answer": "none"
+}

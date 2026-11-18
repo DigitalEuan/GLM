@@ -1,16 +1,17 @@
 # TCT Square-Packing Table — Project Overview
 
-> Restored from the supplied attachment and aligned with the canonical Run 36 repository state. Historical Run 15/32 values remain in the run ledger.
+> Restored from the supplied attachment and aligned with the canonical Run 52 repository state. Historical Run 15/32/36 values remain in the run ledger.
 
 This is the working repository for the **TCT competition table**: a
 1,000-row table of container side lengths `L(n)` for packing `n` unit
 squares into the smallest square container, scored as
 `Σ (L(n)/√n − 1)` over `n = 1..1000`.
 
-**Current canonical score: 22.642386651** (rounded **22.642387**; Run 36
-re-establishment of the Run 35 state: nine Evan Daniel register records and
-the n=338 chain conversion; 543/1000 rows beat grid). Run 15's 22.823536
-and Run 32's 22.645991 remain historical milestones.
+**Current canonical score: 22.218056945** (rounded **22.218057**; the run-47
+re-score, 553/1000 rows beat grid, gap to the reported leader 0.163635).
+Enforced by `scripts/sqscore.py`'s `guard()` and checked against every document
+by `scripts/record_guard.py` since Run 52. Run 15's 22.823536, Run 32's
+22.645991 and Run 36's 22.642386651 remain historical milestones.
 
 ## What exists
 
