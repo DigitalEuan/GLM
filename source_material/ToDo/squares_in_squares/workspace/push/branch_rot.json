@@ -1,0 +1,50 @@
+{
+ "run": 69,
+ "schema": "branchrot/1",
+ "target": 18,
+ "L0": 4.822875657118104,
+ "rho": 0.1367626939892459,
+ "words": [
+  [
+   "axis",
+   0.0
+  ],
+  [
+   "p8",
+   0.7853981633974485
+  ],
+  [
+   "atan2",
+   0.9272952180016122
+  ],
+  [
+   "atan3",
+   0.6435011087932844
+  ],
+  [
+   "atan4",
+   0.4899573262537283
+  ]
+ ],
+ "cells": 3940,
+ "feasible": 0,
+ "gated": 0,
+ "gains": 0,
+ "by_kind": {},
+ "controls": {
+  "identity_at_L0": true,
+  "identity_max_shrink": 3.089811753691774e-08,
+  "synthetic_loose_4_at_2.05": {
+   "lp": true,
+   "gate_ok": true,
+   "L": 2.05,
+   "pen": -0.050000000000000044
+  },
+  "n12_at_3.99_lp": false
+ },
+ "reslot_cells": 1620,
+ "reslot_feasible": 0,
+ "reslot_gains": 0,
+ "feasible_rows": [],
+ "gated_rows": []
+}

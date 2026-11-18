@@ -540,6 +540,16 @@ history rather than presented as current.
   delivered table: `31-GLM-ALGEBRAIC-WORDS.md` (three closures confirmed, four
   figures corrected, one external result entered as reported, one nomination
   recorded unpriced)
+* run 69 — the wall margin defined and computed on all 1000 rows, then spent on
+  one row: `32-WALL-MARGIN-AND-BRANCH-ROT.md` with `wall_margin.py` and
+  `branch_rot.py`, ledgers `wall_margin.json` and `branch_rot.json`. 184/656/819
+  are mid-table, not special; n = 18 searched over 5,560 cells, 0 gains; the
+  s(11) proved/open contradiction recorded, not resolved
+* run 70 — the cent-compiler contract audited and its T1/SAT-axis-branch flip
+  implemented: `33-CENT-CONTRACT-T1-GLIDE.md` with `t1_glide.py` and ledger
+  `t1_glide.json`. 7,803 cells at n = 18/20/30 (base + 1/2-edge branch flips +
+  re-worded flips), 0 feasible, 0 gated, 0 gains; four card figures corrected,
+  one test case rejected as ill-posed (n = 5 is proved)
 * continued in §10: `22-DIAMOND-MASK.md`, `23-SEED-WHEELS.md`,
   `24-N10-OPTIMAL.md`, `25-OPEN-ROW-CROSSWALK.md`, `26-FRONTIER-CROSSWALK.md`,
   and their instruments `diamond_mask.py`, `seed_wheels.py`, `optima.py`,
@@ -902,6 +912,24 @@ by one invariant that should have existed from the start: **the delivered state 
 be feasible at its own side.** It is now `sat_probe.py --selftest` (6/6) and runs
 with the check batch.
 
+**Consolidation after run 70.** That defect survived because the same constraint
+system had three copies — `sat_probe.solve_lp` (65/67), `branch_rot.lp_feasible`
+(69) and `t1_glide.lp` (70) — and copies drift by one term. There is now one:
+`scripts/declp.py` holds `solve` (the declared-axis LP), `gate` (12-dp state,
+`packlib.verify`, canonical gain), `price` (the ε ladder), `max_shrink`, the
+geometry tables and the exact word alphabet. Each caller keeps only its own
+declared profile — `branch_rot`/`t1_glide`: every translation free, 5e−10 pad, free
+offsets within ±2L; `sat_probe`: a free *subset*, no pad, ±L — so a difference that
+was an accident of copying is now a named argument. `sat_probe.solve_lp` remains as
+a signature-only shim for `extreme_probe` and the run-65/67 record; a dead
+`optima.PROVED` import that never read a live attribute is gone. The old copies and
+the new builder were compared on 235 sampled cells (feasibility, centres, flags,
+contact lists, the `max_shrink` bisection, the cell enumeration): identical. The
+three ledgers were regenerated and diff to zero — 18 cells at n = 294…300, 5,560 +
+1,171 cells at n = 18, 7,803 cells at n = 18/20/30 — and `declp.py --selftest`
+states the invariant on 46,672 declared branches, 22,705 of which the old
+own-extent form would have understated.
+
 ### 12.4 What is still owed
 
 Unchanged from §10.8, with one addition:
@@ -920,6 +948,7 @@ Unchanged from §10.8, with one addition:
     python3 scripts/ladder.py                      # 6 rungs: 4 checked, 2 quoted
     python3 scripts/disj_census.py                 # 3811/499500 tight at n=1000
     python3 scripts/sat_probe.py --selftest        # 6/6  (the invariant)
+    python3 scripts/declp.py --selftest            # same invariant, the one builder
     python3 scripts/sat_probe.py                   # 18 cells, 0 feasible
     python3 scripts/resolution_probe.py            # 7 resolutions, validity table
     python3 scripts/extreme_probe.py               # rings -> k(unspan) -> LP

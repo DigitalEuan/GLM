@@ -154,7 +154,8 @@ lattice — is the part that B.2 kills.
 
 # Files
 
-* `scripts/sat_probe.py` — declared-axis feasibility LP at fixed side, `satprobe/1`.
+* `scripts/sat_probe.py` — declared-axis feasibility LP at fixed side, `satprobe/1`;
+  the builder is now `declp.solve` and `sat_probe.solve_lp` is its shim (`19` §12.3).
 * `workspace/push/sat_probe.json` — 18 cells, 0 feasible, with the rigid-core span.
 * `scripts/resolution_probe.py` — lattice snapping at 7 resolutions, `resolution/1`.
 * `workspace/push/resolution_probe.json` — the table above, per row.

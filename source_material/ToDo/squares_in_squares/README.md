@@ -21,7 +21,24 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
 
 **The framing, and its audit.** Read as a *Geometric Language Machine* sentence, a packing is a word over an exact relation alphabet, and score moves when the alphabet moves rather than when a search runs longer. That reading was proposed for the front page and is now checked claim by claim against the delivered table in `31-GLM-ALGEBRAIC-WORDS.md`: the three closed pile-of-words runs hold as recorded, four of the framing's figures do not, and one external result — Khalili and Gharabaghi's reported `s(k²−5) = k` — is entered as reported, with a 25-row contact check that contradicts nothing.
 
-## Current results (Run 68, 2026-11-18; last score move run 47)
+**Room, measured.** Run 69 replaces the phrase "wall margin" with a definition —
+the side between a delivered row and the area wall, `mu = L − √n`, priced as
+`rho = mu/√n` — and computes it for all 1000 rows (`32-WALL-MARGIN-AND-BRANCH-ROT.md`).
+n = 184, 656 and 819 are ordinary mid-table rows at the grid (side-margin ranks
+517/604/610, score ranks 159/637/702); the largest margins, and the four largest
+score values in the table, belong to rows the record calls proved optimal. The row
+the fixed rule does select, n = 18, was then searched over 5,560 branch-assignment
+× rotation cells; every one refused, with the exact gate as the only judge.
+
+**The cent contract, implemented.** Run 70 took the cent-compiler's
+`jamming_branch_escape` contract and its T1-dislocation card (`33-CENT-CONTRACT-T1-GLIDE.md`)
+and implemented the one thing they add — flipping *which SAT axis and which owner*
+separates a contact, not just its angle — then ran it at n = 18, 20 and 30: 7,803
+cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
+(0.76 % holds only at n = 1000, s(5) is 2.707107 and proved, "0/8" is run 41's,
+"run 50" does not exist), and their n = 5 test case is ill-posed.
+
+## Current results (Run 70, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -33,7 +50,7 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
 | Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
-| Latest session | **Runs 62–67, theory closure** — six instruments, **no row changed, no score claimed**; records `27`–`30`, one page in `19` §12 |
+| Latest session | **Runs 69–70, margin + two discrete searches** — wall margin on 1000 rows; 5,560 word cells at n = 18 and 7,803 SAT-branch-flip cells at n = 18/20/30, **0 gains, no row changed**; records `31`–`33` |
 
 ## Where the score stands, said plainly
 

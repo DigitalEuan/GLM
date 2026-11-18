@@ -517,3 +517,83 @@ s(k^2-5) = k for every k >= 7 (Squares Project T-298, 2026-11-13, at V0/C1) --
 real and reported, but not verified in our record. Contact check: the 25 rows
 k = 7..31 all sit at the grid, 0 beats, so our table contradicts nothing.
 Entry 31-GLM-ALGEBRAIC-WORDS.md.
+
+## Run 69 — the wall margin, and one row's branch-rotation search
+
+The phrase "wall margin" from the run-68 framing was replaced by a definition and
+then computed, rather than argued. The area wall sqrt(n) is the only wall that is
+a theorem; the grid k = ceil(sqrt(n)) is a convention 553 rows already beat. So
+mu(n) = L(n) - sqrt(n) (side above the area wall), rho(n) = mu/sqrt(n) = score,
+held(n) = k - L, value(n) = 1/sqrt(n). Exact for the table as delivered: the 50-
+digit Decimal re-derivation of L agrees to 6.2e-16 at n = 18 and exactly at
+184/656/819.
+
+All 1000 rows: 999 have mu > 0 (n = 1 is exactly 0), range 0 .. 0.585786, median
+mu 0.441761, median rho 0.017494, 251 rows above mu = 0.5, 7 above 0.55. The 15
+thinnest positive margins are exactly the 15 smallest perfect squares (1.0e-9 ..
+1.9e-9, the finalize pad) -- the zero-room band is proved, not merely thin. The
+four largest rho in the table are n = 2, 6, 10, 11, all named proved optimal.
+
+Verdict on the three rows named in the framing: NOT special. n = 184 / 656 / 819
+sit at the grid (held = -1.9e-9 = 0 to table precision), rank 517 / 604 / 610 of
+1000 by mu and 159 / 637 / 702 by rho, against median 0.441761 / 0.017494. All
+three are below mu = 0.5; n = 18 alone carries 3.2x the normalised margin of 184.
+The "thinnest margin" reading was inverted.
+
+Target rule, fixed before searching: not proved by the record, n <= 20, largest
+rho. It selects n = 18 (L0 = 4.822875657118104, rho = 0.136763, rank 8/1000;
+mu = 0.580235, rank 2). Excluding n = 11 was a correction: the naive rule picks
+it, but README/04 quote s(11) proved while 01-LAYERS and workspace/docs call it
+open -- an inconsistency recorded in 32 section 5, not resolved here.
+
+Search at n = 18: words are exact rational t = tan(theta/2) (0, sqrt2-1, 1/2,
+1/3, 1/4); 3,940 declared cells (branch assignment by delivered angle class, 90
+single re-wordings, 3,825 pair re-wordings), 1,620 re-slot cells (a tilted square
+moved to another slot with a new word), all priced by the run-67 corrected
+declared-axis LP at L0 - eps, eps = 1e-2 .. 1e-6, then 1,171 cells settled by
+cram_relax at L0 - 1e-3 and reported by packlib.finalize + verify.
+
+Outcome: 0 LP-feasible, 0 gate-accepted, 0 gains, in every pass. Controls: the
+identity is feasible at L0 and rigid only to 3.0898e-8; a loose 2x2 grid at side
+2.2 shrinks to 2.05 and gates (pen -0.05); proved row n = 12 at 3.99 is refused.
+Refusal, not impossibility: the declared axes are conservative and a different
+contact graph is outside the cell space. No row of the table changed.
+Entry 32-WALL-MARGIN-AND-BRANCH-ROT.md.
+
+## Run 70 — the cent-compiler contract, audited; the T1 branch flip, implemented
+
+Two cards (cent-operation/1 jamming_branch_escape; cent-mechanism/1
+t1-dislocation-glide) asked for a discrete change to the contact topology: flip
+which SAT axis, and which owner, separates a tight pair, couple it to an
+algebraic angle step, then contract with the LP. That is a degree of freedom run
+69 did not touch -- there the axis per pair was re-derived from the trial
+geometry -- so it was implemented rather than argued.
+
+Figures checked first. "0.76% tight pairs" is true only at n = 1000 (3811/499500,
+disj_census.json); at the rows the mechanism targets it is 16.99% (18), 28.95%
+(20), 20.46% (30), 9.18% (39), so the M-card's "<=1% of pairs" invariant is false
+for every mid-size row. "n = 5 rotational lock L = 2.7081" is wrong twice: s(5) =
+2 + sqrt2/2 = 2.707107 and it is PROVED, so the test escape_n5_rotational_trap can
+only refuse. "0/8 gated" is run 41's pressure-push result over four weightings,
+not a run-64/65 measurement. "run 50: 0/300 vs 25/150" is unverifiable: there is
+no Run 50 entry in this log, no notes/run50_NOTES.md, and neither ratio appears in
+the tree. "exact_authority Fraction, floats_allowed false" is not achievable in
+this pipeline: the contraction is a float HiGHS LP and the certificate is
+packlib.verify at 12 dp with ~2e-9 clearance. And packlib.verify takes a state,
+not (poses, L).
+
+Implementation (scripts/t1_glide.py): branch a in {u_i, v_i, u_j, v_j}, delivered
+= argmin penetration; cells = base (control) + one flipped contact edge at an
+extreme achiever (3 alternatives) + that flip with one endpoint re-worded from
+{0, sqrt2-1, 1/2, 1/3, 1/4} + two flipped edges (capped); side ladder L0 - eps,
+eps = 1e-2 .. 1e-6, 5e-10 pad, all translations free; the gate is the only judge.
+
+Results: n = 18 (1,071 cells), n = 20 (4,572), n = 30 (2,160) -- 7,803 cells, 0
+LP-feasible, 0 gate-accepted, 0 gains; the base cell is refused at 1e-2 on all
+three (the run-69 rigidity, 3.1e-8). Controls: a loose 2x2 grid shrinks 2.2 ->
+2.19 and gates; a forced u_i branch on two stacked unit squares is feasible and
+gated at side 2.001 and refused at 1.5, so the branch machinery is not vacuous.
+
+The contract is implementable and bounded but earns nothing: no unblock, its
+positive test row is proved optimal, and mid-size rows may be among the 152 proved
+grid floors. No row of the table changed. Entry 33-CENT-CONTRACT-T1-GLIDE.md.

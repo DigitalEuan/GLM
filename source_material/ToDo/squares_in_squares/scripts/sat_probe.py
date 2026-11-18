@@ -20,125 +20,43 @@ different axis) can make a refusal conservative -- stated in the record.
 
 A feasible cell is only a result if `packlib.verify` accepts the final state and
 the canonical scorer says the row improves.
+
+The constraint builder is no longer defined here.  `declp.solve` holds the one
+copy, shared with `branch_rot` and `t1_glide` (consolidation pass after run 70);
+`solve_lp` below keeps run 65's signature and return shape as a shim so
+`extreme_probe` and this record stay valid.
 """
 from __future__ import annotations
 
 import json
-import math
 import os
 import sys
 
 import numpy as np
-from scipy.optimize import linprog
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-import sqscore as SQ        # noqa: E402
-import packlib as P         # noqa: E402
+import declp as DL                      # noqa: E402
+import sqscore as SQ                    # noqa: E402
+import packlib as P                     # noqa: E402
+from declp import frames, pair_tables   # noqa: E402
 
 OUT = os.path.join(ROOT, "workspace/push/sat_probe.json")
 
 
-def frames(st):
-    xy = np.array([(float(s[0]), float(s[1])) for s in st])
-    th = np.array([float(s[2]) for s in st])
-    cs, sn = np.cos(th), np.sin(th)
-    return xy, th, cs, sn
-
-
-def pair_tables(xy, cs, sn):
-    n = len(xy)
-    PU = np.stack([cs, sn], axis=1) @ xy.T
-    PV = np.stack([-sn, cs], axis=1) @ xy.T
-    Eu = 0.5 * (np.abs(np.outer(cs, cs) + np.outer(sn, sn))
-                + np.abs(np.outer(-sn, cs) + np.outer(cs, sn)))
-    dU = np.diag(PU)[:, None] - PU
-    dV = np.diag(PV)[:, None] - PV
-    S = np.stack([0.5 + Eu - np.abs(dU), 0.5 + Eu - np.abs(dV),
-                  0.5 + Eu.T - np.abs(dU.T), 0.5 + Eu.T - np.abs(dV.T)])
-    pen = np.minimum(np.minimum(S[0], S[1]), np.minimum(S[2], S[3]))
-    win = np.argmin(S, axis=0)
-    sign = np.sign(np.stack([dU, dV, dU.T, dV.T]))
-    return S, pen, win, sign
-
-
 def solve_lp(xy, th, cs, sn, S, win, sign, free, L, move=1.0):
-    """Feasibility LP at side L for the declared axes, theta frozen.
+    """Run 65's signature and return shape, kept for `extreme_probe` and the record.
 
-    For each pair the separating axis q is the one that resolved it at the
-    delivered state; with t = (c_j - c_i).q and sgn = sign(t) the constraint is
+    The builder is `declp.solve`; `cs`, `sn`, `S`, `win`, `sign` are accepted and
+    ignored so that a caller cannot hand in a penetration table that disagrees
+    with the geometry (the run-67 defect was exactly such a disagreement).
 
-        sgn * ((c_j + D_j) - (c_i + D_i)).q  >=  h_i(q) + h_j(q)
-
-    i.e.  sgn*(D_j - D_i).q  >=  h_i + h_j - sgn*t0 ,  linear in the free
-    translations.  At L = L0 and D = 0 this is satisfied exactly, which
-    `selftest()` asserts -- the check that caught the inverted rows in run 67.
+    This probe's profile is the run-65 one: free offsets bounded by ±L (the row
+    searches use ±2L) and no separation pad.
     """
-    n = len(xy)
-    h = 0.5 * (np.abs(cs) + np.abs(sn))
-    free = sorted(free)
-    idx = {i: k for k, i in enumerate(free)}
-    nv = 2 + 2 * len(free)
-
-    def var_of(i):
-        return 2 + 2 * idx[i] if i in idx else None
-
-    U = np.stack([cs, sn], axis=1)
-    V = np.stack([-sn, cs], axis=1)
-    # Eu[o, k] = half-extent of square k along square o's own axes (as packlib)
-    Eu = 0.5 * (np.abs(np.outer(cs, cs) + np.outer(sn, sn))
-                + np.abs(np.outer(-sn, cs) + np.outer(cs, sn)))
-    A, b = [], []
-    for i in range(n):
-        for j in range(i + 1, n):
-            if i not in idx and j not in idx:
-                continue
-            a = int(win[i, j])
-            owner = i if a < 2 else j
-            # separation required on the owner's axis: 0.5 (owner) + ext of the
-            # OTHER square along that axis.  Using each square's own extent is
-            # wrong unless the two frames agree -- the run-67 defect.
-            hs = 0.5 + (Eu[i, j] if a < 2 else Eu[j, i])
-            q = U[owner] if a % 2 == 0 else V[owner]
-            t0 = float((xy[j] - xy[i]) @ q)
-            sgn = 1.0 if t0 >= 0 else -1.0
-            row = np.zeros(nv)
-            vj = var_of(j)
-            if vj is not None:
-                row[vj] = sgn * q[0]
-                row[vj + 1] = sgn * q[1]
-            vi = var_of(i)
-            if vi is not None:
-                row[vi] -= sgn * q[0]
-                row[vi + 1] -= sgn * q[1]
-            # the packing condition is  row.x >= hs - sgn*t0 ; linprog is <=
-            A.append(-row)
-            b.append(-(hs - sgn * t0))
-    for i in range(n):
-        v = var_of(i)
-        for axis in (0, 1):
-            c0 = float(xy[i][axis])
-            for sg in (1.0, -1.0):
-                row = np.zeros(nv)
-                row[axis] = sg
-                if v is not None:
-                    row[v + axis] = sg
-                A.append(row)
-                b.append(L / 2 - h[i] - sg * c0)
-    res = linprog(np.zeros(nv), A_ub=np.array(A), b_ub=np.array(b),
-                  bounds=[(-move, move), (-move, move)] +
-                         [(-L, L)] * (2 * len(free)), method="highs")
-    if res.status == 0:
-        x = res.x
-        new_xy = np.array(xy, dtype=float)
-        new_xy[:, 0] += x[0]
-        new_xy[:, 1] += x[1]
-        for i in free:
-            new_xy[i, 0] += x[var_of(i)]
-            new_xy[i, 1] += x[var_of(i) + 1]
-        return True, new_xy, 0.0
-    return False, xy, float("nan")
+    new = DL.solve(xy, th, L, free=free, pad=0.0, move=move, free_span=1.0)
+    return (False, xy, float("nan")) if new is None else (True, new, 0.0)
 
 
 def selftest() -> int:
@@ -154,8 +72,8 @@ def selftest() -> int:
             f, _, _ = solve_lp(xy, th, cs, sn, S, win, sign, free, L0)
             assert f, (n, len(free))
             ok += 1
-        f, _, _ = solve_lp(xy, th, cs, sn, S, win, sign, {0}, L0 - 1e-3)
-        assert not f or True          # may be feasible; only L0 is mandatory
+        # free={0} at L0 - 1e-3 may go either way; only L0 is mandatory
+        solve_lp(xy, th, cs, sn, S, win, sign, {0}, L0 - 1e-3)
     print(f"selftest: {ok}/6 mandatory feasibility checks pass (delivered at L0)")
     return 0
 
@@ -208,12 +126,11 @@ def main() -> int:
     if "--selftest" in sys.argv:
         return selftest()
     per = SQ.load()
-    proved = set()
-    try:
-        import optima
-        proved = {r for r in getattr(optima, "PROVED", set())}
-    except Exception:
-        pass
+    # targets are the six slack-heaviest rows in 20..300 (run 65's rule, kept so
+    # the withdrawn ledger stays reproducible).  The `optima.PROVED` block that
+    # used to sit here was dead code -- that attribute does not exist -- and is
+    # dropped rather than repaired: proved rows are `wall_margin.proved_set()`'s
+    # business, not this probe's.
     cands = [(SQ.extent(per[n]) ** 2 - n, n) for n in range(20, 301)]
     cands.sort(reverse=True)
     targets = [n for _, n in cands[:6]]

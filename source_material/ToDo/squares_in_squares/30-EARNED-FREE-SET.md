@@ -119,7 +119,9 @@ refusal is withdrawn and superseded by this record.
 # Files
 
 * `scripts/extreme_probe.py` — earned free set: extremes → tight rings → gate → LP → verify.
-* `scripts/sat_probe.py` — `solve_lp` rebuilt (three defects fixed), `--selftest` added.
+* `scripts/sat_probe.py` — `solve_lp` rebuilt (three defects fixed), `--selftest` added;
+  the builder is now `declp.solve` (consolidation after run 70), so `solve_lp` is its
+  signature-only shim.
 * `workspace/push/extreme_probe.json` — every ring, with core spans and priced cells.
 * `workspace/push/sat_probe.json` — run 65's cells, now annotated by the fixed LP's scope.
 * supersedes the LP reasoning of `29` Part A; `19` §11.5 points here.

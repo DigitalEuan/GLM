@@ -1,6 +1,6 @@
-# STATUS.md — Squares in Squares: the system and sources record (Run 68, 2026-11-18)
+# STATUS.md — Squares in Squares: the system and sources record (Run 70, 2026-11-18)
 
-> Run 68 is the canonical latest state represented by the surviving run records. Run 34 remains the historical system-map milestone (§1–§6 are its record and are still accurate); §7 carries the delivered numbers, §8 the frontier, §9/§9.1 the run history through 68, and `19` §12 the theory closure of runs 62–67 followed by the run-68 framing audit (`31`). No row of the table has changed since the run-47 re-score.
+> Run 70 is the canonical latest state represented by the surviving run records. Run 34 remains the historical system-map milestone (§1–§6 are its record and are still accurate); §7 carries the delivered numbers, §8 the frontier, §9/§9.1 the run history through 69, and `19` §12 the theory closure of runs 62–67 followed by the run-68 framing audit (`31`) and the run-69 margin definition and single-row search (`32`) and the run-70 cent-contract audit and T1 branch flip (`33`). No row of the table has changed since the run-47 re-score.
 
 This is the "everything in one place" document: the full record of how
 this project works from start to finish — where it came from (the GLM
@@ -430,7 +430,7 @@ these laws to a `gap_analysis.py` that did not exist; they now live in
   exact replays; the tier-1 report's "s(6)=3 theorem" line retracted
   (register: restricted-optimality only).
 
-## 9. Run history (1 → 68)
+## 9. Run history (1 → 70)
 
 | Run | Theme | Score after | Verdict |
 |---|---|---|---|
@@ -486,6 +486,8 @@ these laws to a `gap_analysis.py` that did not exist; they now live in
 | 66 | resolution/dithering probe | 22.218056945 | the answers are invalid at **every** m including 128; dithering has no admissible residual (`29` Part B) |
 | 67 | §11.5 probe with an **earned** free set | 22.218056945 | core unspans only at k = 161/184/267/298 (55–100 %); the LP refuses at every k to **k = n**, which is a certificate: the delivered side is the exact optimum of the declared-axis, fixed-orientation LP (`30`) |
 | 68 | algebraic-word framing, audited (`31`) | 22.218056945 | three closures confirmed (run 5: 280 certificates / 0 conversions; run 52: same `{axis, π/4}` alphabet across 0.520815; run 55: 436 cells / 80 certified / 0 gains); four figures corrected — 45° carries 43.2 % of gain and 23.2 % of beats (not 70 %), no `0.67k + 4` law, the three "thinnest margin" rows are at the grid (gain 0, `r = 12/20/22`), `s(k²−5) = k` external and reported (T-298) with 25/25 contact rows at grid |
+| 69 | wall margin, and one row's branch-rotation search (`32`) | 22.218056945 | `mu = L − sqrt(n)` defined, priced `rho = mu/sqrt(n)`, computed on all 1000 rows: 184/656/819 are mid-table (mu ranks 517/604/610, rho ranks 159/637/702; median 0.441761/0.017494) and the thinnest margins are the proved perfect squares; fixed rule selects n = 18 (rho 0.136763, rank 8), where 3,940 declared + 1,620 re-slot + 1,171 settled cells give **0 feasible, 0 gate-accepted, 0 gains**; controls: rigidity 3.1e−8, loose 4-square shrinks and gates, n = 12 refused; s(11) proved/open contradiction recorded, not resolved |
+| 70 | cent-compiler contract audited; T1 SAT-branch flip implemented (`33`) | 22.218056945 | branch flip (`u_i`/`v_i`/`u_j`/`v_j` per tight pair, then LP contraction) run exhaustively: n = 18/20/30 give 1,071 + 4,572 + 2,160 = **7,803 cells, 0 feasible, 0 gated, 0 gains**; base cell refused at 1e−2 (rigidity 3.1e−8); controls pass (loose 4 → 2.19 gated; forced branch feasible at 2.001, refused at 1.5); card figures corrected — 0.76 % only at n = 1000 (16.99/28.95/20.46 % at 18/20/30), `s(5) = 2+√2/2` proved so the n = 5 test is ill-posed, "0/8" is run 41, "run 50" absent |
 
 ### 9.1 The theory closure (runs 62–67) — what it decided
 
@@ -551,7 +553,7 @@ produces is a wheel certificate (W36); every search it runs is a wheel
 settle (W37). The record from start to finish — lineage, engines, sources,
 operating loop — is the system record in `STATUS.md`. More operatiors and more/denser wheels should produce more concepts, I suspect the Python libraries would make excellent wheels - reduce to cent_compiler '¢' primitives and exact Arithmetic then confirm with Lean4.
 
-## Current results (Run 68, 2026-11-18; last score move run 47)
+## Current results (Run 70, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -563,7 +565,7 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
 | Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
-| Latest session | **Runs 62–67, theory closure** — six instruments, **no row changed, no score claimed**; records `27`–`30`, one page in `19` §12 |
+| Latest session | **Runs 69–70, margin + two discrete searches** — wall margin on 1000 rows; 5,560 word cells at n = 18 and 7,803 SAT-branch-flip cells at n = 18/20/30, **0 gains, no row changed**; records `31`–`33` |
 
 ## Where the score stands, said plainly
 
