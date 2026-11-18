@@ -697,3 +697,60 @@ gain, by proof. The lever is the angle word, which is what 31 and 28 already say
 Housekeeping: the 46,656-branch n = 4 enumeration is now behind --exhaustive
 (default run is seconds), and --selftest is an alias for --control. No row of the
 table changed. Entry 36-CUBE-GRID-IS-OPTIMAL.md.
+
+## Run 74 — the branch space at frozen angles: an exact leaf, an empty bound
+
+Run 73 nominated a 2D branch-space MILP at frozen angles, "which would certify a
+row optimal for its angle multiset instead of failing to improve it". It is
+built (`bb2d.py`) and the nomination is closed negatively, with a measured
+cause.
+
+The model is exact, and that is the point: for two convex unit squares the
+separating-axis theorem says non-overlap iff one of {u_i, v_i, u_j, v_j}
+separates them, so "one (axis, sign) per pair plus a translation" is an
+equivalence, not a relaxation -- unlike `declp`, whose verdict is only about the
+declaration it was given. The B&B is ours: node LP with continuous branch
+weights w (sum_a w_a = 1), tight big-M computed from the containment box, branch
+on the least-integral pair, exact gate at every leaf.
+
+The bound is empty. With w continuous a pair can put 1/8 on each of its four
+axes and both signs, and the two signs cancel, so Delta c = 0 is feasible while
+every branch is "paid for" by its own big-M. Measured: the root relaxation is
+max_i 2h_i -- the largest square's own extent -- on every row (1.0 at n = 6, 9,
+13; 1.414214 at n = 5, 10; 1.409216 at n = 11; 1.322876 at n = 18) against sides
+of 2.7-4.8. The cheap alternative, dropping the undecided pairs, gives sqrt(2)
+at every node. So B&B is enumeration: n = 2 and n = 3 close (7 and 111 nodes,
+agreeing with all 4 and 64 structures enumerated exhaustively); n = 5, 6, 9, 10
+do not close at 6,000 nodes, and the families are 8^4*4^6 = 16.8M and 8^9*4^36
+~ 6.3e29. No row of the table is certified by it.
+
+The leaf does work. `structure_lp` solves one complete structure with 2n+1
+columns in ~1.5 ms, reproduces `declp`'s own optimum on the delivered structure
+(differences +6.9e-8, +4.7e-8, +2.7e-8 at n = 5, 10, 18) and agrees with the
+full leaf LP on the delivered structure and on a flip. `--flips k` therefore
+closes a finite family exactly: every structure within k declared-branch changes
+of the delivered one, each solved to its own minimum side. At k = 2 that is
+87,767 structures over n = 5, 10, 11, 13, of which 9,179 have a different
+optimum and 74,028 are not feasible inside L0+0.5; 0 improve, 0 are gated. The
+nearest competitor is +2.36e-1 at n = 5, +4.04e-2 at n = 10, +4.48e-3 at n = 11
+(the tightest neighbourhood in the table), +1.04e-2 at n = 18; n = 13 is
+completely rigid (0 of 234 single and 0 of 27,261 double flips move). Of the
+1,543 single flips only 322 change anything, so counting "tested" structures
+without the moved denominator overstates this kind of search fivefold.
+
+Two defects were caught by the degradation control and by nothing else: the w
+columns were first placed at offs[p]+a instead of 2n+1+offs[p]+a, so the branch
+weights overlapped the translation columns, and the translation box was derived
+for [0, L] while the model's container is [-L/2, L/2]. Both made every leaf
+infeasible.
+
+Also this run: the dimension theorem is scoped to the axis-parallel class
+everywhere it is stated (in 2D the n = 5 row beats ceil(sqrt n) by rotation,
+2.707107 < 3, so the restriction is not pedantic); run 72's n = 5 and n = 10
+"3D strictly better" verdicts are corrected -- a rotated row is not a cube
+packing, `extrude_ok` is False there, and `desc(extr) = L2` was the descent
+refusing an illegal start, not rigidity; and `declp3.py --milp` is retired (126
+lines) because the counting argument subsumes it, it never closed n = 9, and its
+relaxation is the same construction measured empty here.
+
+No row of the table changed. Entry 37-ANGLE-FROZEN-BRANCH-SPACE.md.
