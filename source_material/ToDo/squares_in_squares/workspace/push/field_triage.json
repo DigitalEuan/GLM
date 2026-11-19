@@ -1,0 +1,7492 @@
+{
+ "run": 86,
+ "rows": 1000,
+ "tally": {
+  "Q(sqrt2) pose": 99,
+  "Q(sqrt2) side": 18,
+  "Q(sqrt5) side": 3,
+  "Q(sqrt7) side": 5,
+  "Q-grid": 447,
+  "continuous": 424,
+  "rational-t": 4
+ },
+ "lifted_rows": 99,
+ "rows_detail": [
+  {
+   "squares": 1,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 1
+  },
+  {
+   "squares": 2,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 2
+  },
+  {
+   "squares": 3,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 3
+  },
+  {
+   "squares": 4,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 4
+  },
+  {
+   "squares": 5,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 5
+  },
+  {
+   "squares": 6,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 6
+  },
+  {
+   "squares": 7,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 7
+  },
+  {
+   "squares": 8,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 8
+  },
+  {
+   "squares": 9,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 9
+  },
+  {
+   "squares": 10,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 10
+  },
+  {
+   "squares": 11,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "3.877083591506",
+   "class": "continuous",
+   "n": 11
+  },
+  {
+   "squares": 12,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 12
+  },
+  {
+   "squares": 13,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 13
+  },
+  {
+   "squares": 14,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 14
+  },
+  {
+   "squares": 15,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 15
+  },
+  {
+   "squares": 16,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 16
+  },
+  {
+   "squares": 17,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "4.675530095176",
+   "class": "continuous",
+   "n": 17
+  },
+  {
+   "squares": 18,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "4.8228756571181033807686",
+   "class": "Q(sqrt7) side",
+   "side_exact": "7/2 + 1/2\u221a7",
+   "n": 18
+  },
+  {
+   "squares": 19,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 19
+  },
+  {
+   "squares": 20,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 20
+  },
+  {
+   "squares": 21,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 21
+  },
+  {
+   "squares": 22,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 22
+  },
+  {
+   "squares": 23,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 23
+  },
+  {
+   "squares": 24,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 24
+  },
+  {
+   "squares": 25,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 25
+  },
+  {
+   "squares": 26,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 26
+  },
+  {
+   "squares": 27,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 27
+  },
+  {
+   "squares": 28,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "5.8244446183301033807686",
+   "class": "continuous",
+   "n": 28
+  },
+  {
+   "squares": 29,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "5.93383346434",
+   "class": "continuous",
+   "n": 29
+  },
+  {
+   "squares": 30,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 30
+  },
+  {
+   "squares": 31,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 31
+  },
+  {
+   "squares": 32,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 32
+  },
+  {
+   "squares": 33,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 33
+  },
+  {
+   "squares": 34,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 34
+  },
+  {
+   "squares": 35,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 35
+  },
+  {
+   "squares": 36,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 36
+  },
+  {
+   "squares": 37,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "6.5986196109421033807686",
+   "class": "continuous",
+   "n": 37
+  },
+  {
+   "squares": 38,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 38
+  },
+  {
+   "squares": 39,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "6.810722084774",
+   "class": "continuous",
+   "n": 39
+  },
+  {
+   "squares": 40,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 40
+  },
+  {
+   "squares": 41,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "6.92669309618",
+   "class": "continuous",
+   "n": 41
+  },
+  {
+   "squares": 42,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 42
+  },
+  {
+   "squares": 43,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 43
+  },
+  {
+   "squares": 44,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 44
+  },
+  {
+   "squares": 45,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 45
+  },
+  {
+   "squares": 46,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 46
+  },
+  {
+   "squares": 47,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 47
+  },
+  {
+   "squares": 48,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 48
+  },
+  {
+   "squares": 49,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 49
+  },
+  {
+   "squares": 50,
+   "distinct_angles": 2,
+   "pyth_qmax": 3,
+   "class": "rational-t",
+   "n": 50
+  },
+  {
+   "squares": 51,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 51
+  },
+  {
+   "squares": 52,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 52
+  },
+  {
+   "squares": 53,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "7.822875657276",
+   "class": "Q(sqrt7) side",
+   "side_exact": "13/2 + 1/2\u221a7",
+   "n": 53
+  },
+  {
+   "squares": 54,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "7.8466671945881033807686",
+   "class": "continuous",
+   "n": 54
+  },
+  {
+   "squares": 55,
+   "distinct_angles": 7,
+   "pyth_qmax": null,
+   "side": "7.945771009252",
+   "class": "continuous",
+   "n": 55
+  },
+  {
+   "squares": 56,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 56
+  },
+  {
+   "squares": 57,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 57
+  },
+  {
+   "squares": 58,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 58
+  },
+  {
+   "squares": 59,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 59
+  },
+  {
+   "squares": 60,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 60
+  },
+  {
+   "squares": 61,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 61
+  },
+  {
+   "squares": 62,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 62
+  },
+  {
+   "squares": 63,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 63
+  },
+  {
+   "squares": 64,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 64
+  },
+  {
+   "squares": 65,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 65
+  },
+  {
+   "squares": 66,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 66
+  },
+  {
+   "squares": 67,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 67
+  },
+  {
+   "squares": 68,
+   "distinct_angles": 9,
+   "pyth_qmax": null,
+   "side": "8.798795238991",
+   "class": "continuous",
+   "n": 68
+  },
+  {
+   "squares": 69,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "8.827194657504",
+   "class": "continuous",
+   "n": 69
+  },
+  {
+   "squares": 70,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "8.880960373330",
+   "class": "continuous",
+   "n": 70
+  },
+  {
+   "squares": 71,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "8.944071559346",
+   "class": "continuous",
+   "n": 71
+  },
+  {
+   "squares": 72,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 72
+  },
+  {
+   "squares": 73,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 73
+  },
+  {
+   "squares": 74,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 74
+  },
+  {
+   "squares": 75,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 75
+  },
+  {
+   "squares": 76,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 76
+  },
+  {
+   "squares": 77,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 77
+  },
+  {
+   "squares": 78,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 78
+  },
+  {
+   "squares": 79,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 79
+  },
+  {
+   "squares": 80,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 80
+  },
+  {
+   "squares": 81,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 81
+  },
+  {
+   "squares": 82,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 82
+  },
+  {
+   "squares": 83,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "9.634757650424",
+   "class": "continuous",
+   "n": 83
+  },
+  {
+   "squares": 84,
+   "distinct_angles": 5,
+   "pyth_qmax": null,
+   "side": "9.697934800809",
+   "class": "continuous",
+   "n": 84
+  },
+  {
+   "squares": 85,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 85
+  },
+  {
+   "squares": 86,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "9.820535409293",
+   "class": "continuous",
+   "n": 86
+  },
+  {
+   "squares": 87,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "9.838815271744",
+   "class": "continuous",
+   "n": 87
+  },
+  {
+   "squares": 88,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "9.882451032279",
+   "class": "continuous",
+   "n": 88
+  },
+  {
+   "squares": 89,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 89
+  },
+  {
+   "squares": 90,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 90
+  },
+  {
+   "squares": 91,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 91
+  },
+  {
+   "squares": 92,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 92
+  },
+  {
+   "squares": 93,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 93
+  },
+  {
+   "squares": 94,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 94
+  },
+  {
+   "squares": 95,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 95
+  },
+  {
+   "squares": 96,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 96
+  },
+  {
+   "squares": 97,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 97
+  },
+  {
+   "squares": 98,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 98
+  },
+  {
+   "squares": 99,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 99
+  },
+  {
+   "squares": 100,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 100
+  },
+  {
+   "squares": 101,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 101
+  },
+  {
+   "squares": 102,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "10.605828698243",
+   "class": "continuous",
+   "n": 102
+  },
+  {
+   "squares": 103,
+   "distinct_angles": 8,
+   "pyth_qmax": null,
+   "side": "10.679232049174",
+   "class": "continuous",
+   "n": 103
+  },
+  {
+   "squares": 104,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 104
+  },
+  {
+   "squares": 105,
+   "distinct_angles": 9,
+   "pyth_qmax": null,
+   "side": "10.789303785562",
+   "class": "continuous",
+   "n": 105
+  },
+  {
+   "squares": 106,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "10.822908045948",
+   "class": "continuous",
+   "n": 106
+  },
+  {
+   "squares": 107,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "10.84666719466",
+   "class": "continuous",
+   "n": 107
+  },
+  {
+   "squares": 108,
+   "distinct_angles": 9,
+   "pyth_qmax": null,
+   "side": "10.904821014137",
+   "class": "continuous",
+   "n": 108
+  },
+  {
+   "squares": 109,
+   "distinct_angles": 12,
+   "pyth_qmax": null,
+   "side": "10.949289582761103380768",
+   "class": "continuous",
+   "n": 109
+  },
+  {
+   "squares": 110,
+   "distinct_angles": 16,
+   "pyth_qmax": null,
+   "side": "10.996783398450",
+   "class": "continuous",
+   "n": 110
+  },
+  {
+   "squares": 111,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 111
+  },
+  {
+   "squares": 112,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 112
+  },
+  {
+   "squares": 113,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 113
+  },
+  {
+   "squares": 114,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 114
+  },
+  {
+   "squares": 115,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 115
+  },
+  {
+   "squares": 116,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 116
+  },
+  {
+   "squares": 117,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 117
+  },
+  {
+   "squares": 118,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 118
+  },
+  {
+   "squares": 119,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 119
+  },
+  {
+   "squares": 120,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 120
+  },
+  {
+   "squares": 121,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 121
+  },
+  {
+   "squares": 122,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 122
+  },
+  {
+   "squares": 123,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "11.591378147325",
+   "class": "continuous",
+   "n": 123
+  },
+  {
+   "squares": 124,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 124
+  },
+  {
+   "squares": 125,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 125
+  },
+  {
+   "squares": 126,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "11.742640688949",
+   "class": "Q(sqrt2) side",
+   "side_exact": "15/2 + 3\u221a2",
+   "n": 126
+  },
+  {
+   "squares": 127,
+   "distinct_angles": 9,
+   "pyth_qmax": null,
+   "side": "11.810878789420",
+   "class": "continuous",
+   "n": 127
+  },
+  {
+   "squares": 128,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "11.825091970044",
+   "class": "continuous",
+   "n": 128
+  },
+  {
+   "squares": 129,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "11.870013852236",
+   "class": "continuous",
+   "n": 129
+  },
+  {
+   "squares": 130,
+   "distinct_angles": 18,
+   "pyth_qmax": null,
+   "side": "11.902430647814",
+   "class": "continuous",
+   "n": 130
+  },
+  {
+   "squares": 131,
+   "distinct_angles": 13,
+   "pyth_qmax": null,
+   "side": "11.949659589868",
+   "class": "continuous",
+   "n": 131
+  },
+  {
+   "squares": 132,
+   "distinct_angles": 12,
+   "pyth_qmax": null,
+   "side": "11.985680200679",
+   "class": "continuous",
+   "n": 132
+  },
+  {
+   "squares": 133,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 133
+  },
+  {
+   "squares": 134,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 134
+  },
+  {
+   "squares": 135,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 135
+  },
+  {
+   "squares": 136,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 136
+  },
+  {
+   "squares": 137,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 137
+  },
+  {
+   "squares": 138,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 138
+  },
+  {
+   "squares": 139,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 139
+  },
+  {
+   "squares": 140,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 140
+  },
+  {
+   "squares": 141,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 141
+  },
+  {
+   "squares": 142,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 142
+  },
+  {
+   "squares": 143,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 143
+  },
+  {
+   "squares": 144,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 144
+  },
+  {
+   "squares": 145,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 145
+  },
+  {
+   "squares": 146,
+   "distinct_angles": 5,
+   "pyth_qmax": null,
+   "side": "12.583782191993",
+   "class": "continuous",
+   "n": 146
+  },
+  {
+   "squares": 147,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 147
+  },
+  {
+   "squares": 148,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 148
+  },
+  {
+   "squares": 149,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 149
+  },
+  {
+   "squares": 150,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 150
+  },
+  {
+   "squares": 151,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "12.822875657376",
+   "class": "Q(sqrt7) side",
+   "side_exact": "23/2 + 1/2\u221a7",
+   "n": 151
+  },
+  {
+   "squares": 152,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "12.830718802821",
+   "class": "continuous",
+   "n": 152
+  },
+  {
+   "squares": 153,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "12.870013852249",
+   "class": "continuous",
+   "n": 153
+  },
+  {
+   "squares": 154,
+   "distinct_angles": 14,
+   "pyth_qmax": null,
+   "side": "12.921100942607",
+   "class": "continuous",
+   "n": 154
+  },
+  {
+   "squares": 155,
+   "distinct_angles": 17,
+   "pyth_qmax": null,
+   "side": "12.952260946496",
+   "class": "continuous",
+   "n": 155
+  },
+  {
+   "squares": 156,
+   "distinct_angles": 15,
+   "pyth_qmax": null,
+   "side": "12.979165855680",
+   "class": "continuous",
+   "n": 156
+  },
+  {
+   "squares": 157,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 157
+  },
+  {
+   "squares": 158,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 158
+  },
+  {
+   "squares": 159,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 159
+  },
+  {
+   "squares": 160,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 160
+  },
+  {
+   "squares": 161,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 161
+  },
+  {
+   "squares": 162,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 162
+  },
+  {
+   "squares": 163,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 163
+  },
+  {
+   "squares": 164,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 164
+  },
+  {
+   "squares": 165,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 165
+  },
+  {
+   "squares": 166,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 166
+  },
+  {
+   "squares": 167,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 167
+  },
+  {
+   "squares": 168,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 168
+  },
+  {
+   "squares": 169,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 169
+  },
+  {
+   "squares": 170,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 170
+  },
+  {
+   "squares": 171,
+   "distinct_angles": 3,
+   "pyth_qmax": 3,
+   "class": "rational-t",
+   "n": 171
+  },
+  {
+   "squares": 172,
+   "distinct_angles": 29,
+   "pyth_qmax": null,
+   "side": "13.617935700235",
+   "class": "continuous",
+   "n": 172
+  },
+  {
+   "squares": 173,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 173
+  },
+  {
+   "squares": 174,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 174
+  },
+  {
+   "squares": 175,
+   "distinct_angles": 51,
+   "pyth_qmax": null,
+   "side": "13.764050053398",
+   "class": "continuous",
+   "n": 175
+  },
+  {
+   "squares": 176,
+   "distinct_angles": 11,
+   "pyth_qmax": null,
+   "side": "13.795872320292",
+   "class": "continuous",
+   "n": 176
+  },
+  {
+   "squares": 177,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "13.822979736025",
+   "class": "continuous",
+   "n": 177
+  },
+  {
+   "squares": 178,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "13.84666719470",
+   "class": "continuous",
+   "n": 178
+  },
+  {
+   "squares": 179,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "13.883795492367",
+   "class": "continuous",
+   "n": 179
+  },
+  {
+   "squares": 180,
+   "distinct_angles": 16,
+   "pyth_qmax": null,
+   "side": "13.916993524334",
+   "class": "continuous",
+   "n": 180
+  },
+  {
+   "squares": 181,
+   "distinct_angles": 18,
+   "pyth_qmax": null,
+   "side": "13.950819532879",
+   "class": "continuous",
+   "n": 181
+  },
+  {
+   "squares": 182,
+   "distinct_angles": 20,
+   "pyth_qmax": null,
+   "side": "13.970916438071",
+   "class": "continuous",
+   "n": 182
+  },
+  {
+   "squares": 183,
+   "distinct_angles": 18,
+   "pyth_qmax": null,
+   "side": "13.999580180594",
+   "class": "continuous",
+   "n": 183
+  },
+  {
+   "squares": 184,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 184
+  },
+  {
+   "squares": 185,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 185
+  },
+  {
+   "squares": 186,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 186
+  },
+  {
+   "squares": 187,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 187
+  },
+  {
+   "squares": 188,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 188
+  },
+  {
+   "squares": 189,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 189
+  },
+  {
+   "squares": 190,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 190
+  },
+  {
+   "squares": 191,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 191
+  },
+  {
+   "squares": 192,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 192
+  },
+  {
+   "squares": 193,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 193
+  },
+  {
+   "squares": 194,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 194
+  },
+  {
+   "squares": 195,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 195
+  },
+  {
+   "squares": 196,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 196
+  },
+  {
+   "squares": 197,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 197
+  },
+  {
+   "squares": 198,
+   "distinct_angles": 3,
+   "pyth_qmax": 3,
+   "class": "rational-t",
+   "n": 198
+  },
+  {
+   "squares": 199,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "14.617572175456",
+   "class": "continuous",
+   "n": 199
+  },
+  {
+   "squares": 200,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 200
+  },
+  {
+   "squares": 201,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 201
+  },
+  {
+   "squares": 202,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 202
+  },
+  {
+   "squares": 203,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 203
+  },
+  {
+   "squares": 204,
+   "distinct_angles": 27,
+   "pyth_qmax": null,
+   "side": "14.804361385516",
+   "class": "continuous",
+   "n": 204
+  },
+  {
+   "squares": 205,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "14.824451147990",
+   "class": "continuous",
+   "n": 205
+  },
+  {
+   "squares": 206,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "14.860158665258",
+   "class": "continuous",
+   "n": 206
+  },
+  {
+   "squares": 207,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "14.880960373421",
+   "class": "continuous",
+   "n": 207
+  },
+  {
+   "squares": 208,
+   "distinct_angles": 19,
+   "pyth_qmax": null,
+   "side": "14.924518773895",
+   "class": "continuous",
+   "n": 208
+  },
+  {
+   "squares": 209,
+   "distinct_angles": 22,
+   "pyth_qmax": null,
+   "side": "14.946223228313",
+   "class": "continuous",
+   "n": 209
+  },
+  {
+   "squares": 210,
+   "distinct_angles": 27,
+   "pyth_qmax": null,
+   "side": "14.973001118454",
+   "class": "continuous",
+   "n": 210
+  },
+  {
+   "squares": 211,
+   "distinct_angles": 17,
+   "pyth_qmax": null,
+   "side": "14.993549628166",
+   "class": "continuous",
+   "n": 211
+  },
+  {
+   "squares": 212,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 212
+  },
+  {
+   "squares": 213,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 213
+  },
+  {
+   "squares": 214,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 214
+  },
+  {
+   "squares": 215,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 215
+  },
+  {
+   "squares": 216,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 216
+  },
+  {
+   "squares": 217,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 217
+  },
+  {
+   "squares": 218,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 218
+  },
+  {
+   "squares": 219,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 219
+  },
+  {
+   "squares": 220,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 220
+  },
+  {
+   "squares": 221,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 221
+  },
+  {
+   "squares": 222,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 222
+  },
+  {
+   "squares": 223,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 223
+  },
+  {
+   "squares": 224,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 224
+  },
+  {
+   "squares": 225,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 225
+  },
+  {
+   "squares": 226,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 226
+  },
+  {
+   "squares": 227,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "15.563625654197",
+   "class": "continuous",
+   "n": 227
+  },
+  {
+   "squares": 228,
+   "distinct_angles": 8,
+   "pyth_qmax": null,
+   "side": "15.604601477602",
+   "class": "continuous",
+   "n": 228
+  },
+  {
+   "squares": 229,
+   "distinct_angles": 12,
+   "pyth_qmax": null,
+   "side": "15.650161515749",
+   "class": "continuous",
+   "n": 229
+  },
+  {
+   "squares": 230,
+   "distinct_angles": 2,
+   "pyth_qmax": 7,
+   "class": "rational-t",
+   "n": 230
+  },
+  {
+   "squares": 231,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 231
+  },
+  {
+   "squares": 232,
+   "distinct_angles": 39,
+   "pyth_qmax": null,
+   "side": "15.761409646751103380768",
+   "class": "continuous",
+   "n": 232
+  },
+  {
+   "squares": 233,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 233
+  },
+  {
+   "squares": 234,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "side": "15.822875657406",
+   "class": "Q(sqrt7) side",
+   "side_exact": "29/2 + 1/2\u221a7",
+   "n": 234
+  },
+  {
+   "squares": 235,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "15.826605635302",
+   "class": "continuous",
+   "n": 235
+  },
+  {
+   "squares": 236,
+   "distinct_angles": 5,
+   "pyth_qmax": null,
+   "side": "15.861934392481",
+   "class": "continuous",
+   "n": 236
+  },
+  {
+   "squares": 237,
+   "distinct_angles": 18,
+   "pyth_qmax": null,
+   "side": "15.902603640134",
+   "class": "continuous",
+   "n": 237
+  },
+  {
+   "squares": 238,
+   "distinct_angles": 13,
+   "pyth_qmax": null,
+   "side": "15.924106787196",
+   "class": "continuous",
+   "n": 238
+  },
+  {
+   "squares": 239,
+   "distinct_angles": 15,
+   "pyth_qmax": null,
+   "side": "15.948443329175",
+   "class": "continuous",
+   "n": 239
+  },
+  {
+   "squares": 240,
+   "distinct_angles": 19,
+   "pyth_qmax": null,
+   "side": "15.969685339405",
+   "class": "continuous",
+   "n": 240
+  },
+  {
+   "squares": 241,
+   "distinct_angles": 27,
+   "pyth_qmax": null,
+   "side": "15.987117097025",
+   "class": "continuous",
+   "n": 241
+  },
+  {
+   "squares": 242,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 242
+  },
+  {
+   "squares": 243,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 243
+  },
+  {
+   "squares": 244,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 244
+  },
+  {
+   "squares": 245,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 245
+  },
+  {
+   "squares": 246,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 246
+  },
+  {
+   "squares": 247,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 247
+  },
+  {
+   "squares": 248,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 248
+  },
+  {
+   "squares": 249,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 249
+  },
+  {
+   "squares": 250,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 250
+  },
+  {
+   "squares": 251,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 251
+  },
+  {
+   "squares": 252,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 252
+  },
+  {
+   "squares": 253,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 253
+  },
+  {
+   "squares": 254,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 254
+  },
+  {
+   "squares": 255,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 255
+  },
+  {
+   "squares": 256,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 256
+  },
+  {
+   "squares": 257,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 257
+  },
+  {
+   "squares": 258,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "16.563448004013",
+   "class": "continuous",
+   "n": 258
+  },
+  {
+   "squares": 259,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "16.591378147377",
+   "class": "continuous",
+   "n": 259
+  },
+  {
+   "squares": 260,
+   "distinct_angles": 40,
+   "pyth_qmax": null,
+   "side": "16.633520952767103380768",
+   "class": "continuous",
+   "n": 260
+  },
+  {
+   "squares": 261,
+   "distinct_angles": 162,
+   "pyth_qmax": null,
+   "side": "16.678779877223103380768",
+   "class": "continuous",
+   "n": 261
+  },
+  {
+   "squares": 262,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 262
+  },
+  {
+   "squares": 263,
+   "distinct_angles": 5,
+   "pyth_qmax": null,
+   "side": "16.73316600978",
+   "class": "continuous",
+   "n": 263
+  },
+  {
+   "squares": 264,
+   "distinct_angles": 7,
+   "pyth_qmax": null,
+   "side": "16.774735134268",
+   "class": "continuous",
+   "n": 264
+  },
+  {
+   "squares": 265,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 265
+  },
+  {
+   "squares": 266,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "16.823028752638",
+   "class": "continuous",
+   "n": 266
+  },
+  {
+   "squares": 267,
+   "distinct_angles": 11,
+   "pyth_qmax": null,
+   "side": "16.838815271830",
+   "class": "continuous",
+   "n": 267
+  },
+  {
+   "squares": 268,
+   "distinct_angles": 48,
+   "pyth_qmax": null,
+   "side": "16.872470716493103380768",
+   "class": "continuous",
+   "n": 268
+  },
+  {
+   "squares": 269,
+   "distinct_angles": 12,
+   "pyth_qmax": null,
+   "side": "16.901513584071",
+   "class": "continuous",
+   "n": 269
+  },
+  {
+   "squares": 270,
+   "distinct_angles": 22,
+   "pyth_qmax": null,
+   "side": "16.928162254079",
+   "class": "continuous",
+   "n": 270
+  },
+  {
+   "squares": 271,
+   "distinct_angles": 21,
+   "pyth_qmax": null,
+   "side": "16.948947735596",
+   "class": "continuous",
+   "n": 271
+  },
+  {
+   "squares": 272,
+   "distinct_angles": 26,
+   "pyth_qmax": null,
+   "side": "16.965586476720",
+   "class": "continuous",
+   "n": 272
+  },
+  {
+   "squares": 273,
+   "distinct_angles": 22,
+   "pyth_qmax": null,
+   "side": "16.983925964533",
+   "class": "continuous",
+   "n": 273
+  },
+  {
+   "squares": 274,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 274
+  },
+  {
+   "squares": 275,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 275
+  },
+  {
+   "squares": 276,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 276
+  },
+  {
+   "squares": 277,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 277
+  },
+  {
+   "squares": 278,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 278
+  },
+  {
+   "squares": 279,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 279
+  },
+  {
+   "squares": 280,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 280
+  },
+  {
+   "squares": 281,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 281
+  },
+  {
+   "squares": 282,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 282
+  },
+  {
+   "squares": 283,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 283
+  },
+  {
+   "squares": 284,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 284
+  },
+  {
+   "squares": 285,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 285
+  },
+  {
+   "squares": 286,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 286
+  },
+  {
+   "squares": 287,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 287
+  },
+  {
+   "squares": 288,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 288
+  },
+  {
+   "squares": 289,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 289
+  },
+  {
+   "squares": 290,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 290
+  },
+  {
+   "squares": 291,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 291
+  },
+  {
+   "squares": 292,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "17.591378147384",
+   "class": "continuous",
+   "n": 292
+  },
+  {
+   "squares": 293,
+   "distinct_angles": 13,
+   "pyth_qmax": null,
+   "side": "17.623065213947",
+   "class": "continuous",
+   "n": 293
+  },
+  {
+   "squares": 294,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 294
+  },
+  {
+   "squares": 295,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 295
+  },
+  {
+   "squares": 296,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 296
+  },
+  {
+   "squares": 297,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "17.740417289431",
+   "class": "continuous",
+   "n": 297
+  },
+  {
+   "squares": 298,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 298
+  },
+  {
+   "squares": 299,
+   "distinct_angles": 51,
+   "pyth_qmax": null,
+   "side": "17.801004436140103380768",
+   "class": "continuous",
+   "n": 299
+  },
+  {
+   "squares": 300,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "17.824123390366",
+   "class": "continuous",
+   "n": 300
+  },
+  {
+   "squares": 301,
+   "distinct_angles": 3,
+   "pyth_qmax": null,
+   "side": "17.846667194731",
+   "class": "continuous",
+   "n": 301
+  },
+  {
+   "squares": 302,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "17.870013852293",
+   "class": "continuous",
+   "n": 302
+  },
+  {
+   "squares": 303,
+   "distinct_angles": 90,
+   "pyth_qmax": null,
+   "side": "17.901811278969103380768",
+   "class": "continuous",
+   "n": 303
+  },
+  {
+   "squares": 304,
+   "distinct_angles": 18,
+   "pyth_qmax": null,
+   "side": "17.920944095228",
+   "class": "continuous",
+   "n": 304
+  },
+  {
+   "squares": 305,
+   "distinct_angles": 25,
+   "pyth_qmax": null,
+   "side": "17.950466484026",
+   "class": "continuous",
+   "n": 305
+  },
+  {
+   "squares": 306,
+   "distinct_angles": 30,
+   "pyth_qmax": null,
+   "side": "17.963433719380",
+   "class": "continuous",
+   "n": 306
+  },
+  {
+   "squares": 307,
+   "distinct_angles": 28,
+   "pyth_qmax": null,
+   "side": "17.979230962273",
+   "class": "continuous",
+   "n": 307
+  },
+  {
+   "squares": 308,
+   "distinct_angles": 29,
+   "pyth_qmax": null,
+   "side": "17.997149123159",
+   "class": "continuous",
+   "n": 308
+  },
+  {
+   "squares": 309,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 309
+  },
+  {
+   "squares": 310,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 310
+  },
+  {
+   "squares": 311,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 311
+  },
+  {
+   "squares": 312,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 312
+  },
+  {
+   "squares": 313,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 313
+  },
+  {
+   "squares": 314,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 314
+  },
+  {
+   "squares": 315,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 315
+  },
+  {
+   "squares": 316,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 316
+  },
+  {
+   "squares": 317,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 317
+  },
+  {
+   "squares": 318,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 318
+  },
+  {
+   "squares": 319,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 319
+  },
+  {
+   "squares": 320,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 320
+  },
+  {
+   "squares": 321,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 321
+  },
+  {
+   "squares": 322,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 322
+  },
+  {
+   "squares": 323,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 323
+  },
+  {
+   "squares": 324,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 324
+  },
+  {
+   "squares": 325,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 325
+  },
+  {
+   "squares": 326,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 326
+  },
+  {
+   "squares": 327,
+   "distinct_angles": 35,
+   "pyth_qmax": null,
+   "side": "18.583782192045051690384",
+   "class": "continuous",
+   "n": 327
+  },
+  {
+   "squares": 328,
+   "distinct_angles": 44,
+   "pyth_qmax": null,
+   "side": "18.614368940387103380768",
+   "class": "continuous",
+   "n": 328
+  },
+  {
+   "squares": 329,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 329
+  },
+  {
+   "squares": 330,
+   "distinct_angles": 39,
+   "pyth_qmax": null,
+   "side": "18.692388157318103380768",
+   "class": "continuous",
+   "n": 330
+  },
+  {
+   "squares": 331,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 331
+  },
+  {
+   "squares": 332,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "18.740417291325",
+   "class": "continuous",
+   "n": 332
+  },
+  {
+   "squares": 333,
+   "distinct_angles": 111,
+   "pyth_qmax": null,
+   "side": "18.773753412888103380768",
+   "class": "continuous",
+   "n": 333
+  },
+  {
+   "squares": 334,
+   "distinct_angles": 25,
+   "pyth_qmax": null,
+   "side": "18.786944253777103380768",
+   "class": "continuous",
+   "n": 334
+  },
+  {
+   "squares": 335,
+   "distinct_angles": 180,
+   "pyth_qmax": null,
+   "side": "18.803695437206103380768",
+   "class": "Q(sqrt5) side",
+   "side_exact": "99/8 + 23/8\u221a5",
+   "n": 335
+  },
+  {
+   "squares": 336,
+   "distinct_angles": 8,
+   "pyth_qmax": null,
+   "side": "18.825571501756",
+   "class": "continuous",
+   "n": 336
+  },
+  {
+   "squares": 337,
+   "distinct_angles": 9,
+   "pyth_qmax": null,
+   "side": "18.858391769530",
+   "class": "continuous",
+   "n": 337
+  },
+  {
+   "squares": 338,
+   "distinct_angles": 165,
+   "pyth_qmax": null,
+   "side": "18.877615342340499999999",
+   "class": "continuous",
+   "n": 338
+  },
+  {
+   "squares": 339,
+   "distinct_angles": 42,
+   "pyth_qmax": null,
+   "side": "18.906198209584103380768",
+   "class": "continuous",
+   "n": 339
+  },
+  {
+   "squares": 340,
+   "distinct_angles": 25,
+   "pyth_qmax": null,
+   "side": "18.926898902251103380768",
+   "class": "continuous",
+   "n": 340
+  },
+  {
+   "squares": 341,
+   "distinct_angles": 87,
+   "pyth_qmax": null,
+   "side": "18.942682819150103380768",
+   "class": "continuous",
+   "n": 341
+  },
+  {
+   "squares": 342,
+   "distinct_angles": 44,
+   "pyth_qmax": null,
+   "side": "18.964448096860103380768",
+   "class": "continuous",
+   "n": 342
+  },
+  {
+   "squares": 343,
+   "distinct_angles": 45,
+   "pyth_qmax": null,
+   "side": "18.976290438979051690384",
+   "class": "continuous",
+   "n": 343
+  },
+  {
+   "squares": 344,
+   "distinct_angles": 32,
+   "pyth_qmax": null,
+   "side": "18.992567546716103380768",
+   "class": "continuous",
+   "n": 344
+  },
+  {
+   "squares": 345,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 345
+  },
+  {
+   "squares": 346,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 346
+  },
+  {
+   "squares": 347,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 347
+  },
+  {
+   "squares": 348,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 348
+  },
+  {
+   "squares": 349,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 349
+  },
+  {
+   "squares": 350,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 350
+  },
+  {
+   "squares": 351,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 351
+  },
+  {
+   "squares": 352,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 352
+  },
+  {
+   "squares": 353,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 353
+  },
+  {
+   "squares": 354,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 354
+  },
+  {
+   "squares": 355,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 355
+  },
+  {
+   "squares": 356,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 356
+  },
+  {
+   "squares": 357,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 357
+  },
+  {
+   "squares": 358,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 358
+  },
+  {
+   "squares": 359,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 359
+  },
+  {
+   "squares": 360,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 360
+  },
+  {
+   "squares": 361,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 361
+  },
+  {
+   "squares": 362,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 362
+  },
+  {
+   "squares": 363,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 363
+  },
+  {
+   "squares": 364,
+   "distinct_angles": 37,
+   "pyth_qmax": null,
+   "side": "19.571428573327103380768",
+   "class": "continuous",
+   "n": 364
+  },
+  {
+   "squares": 365,
+   "distinct_angles": 170,
+   "pyth_qmax": null,
+   "side": "19.612856389570103380768",
+   "class": "continuous",
+   "n": 365
+  },
+  {
+   "squares": 366,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 366
+  },
+  {
+   "squares": 367,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 367
+  },
+  {
+   "squares": 368,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 368
+  },
+  {
+   "squares": 369,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 369
+  },
+  {
+   "squares": 370,
+   "distinct_angles": 55,
+   "pyth_qmax": null,
+   "side": "19.757499204947103380768",
+   "class": "continuous",
+   "n": 370
+  },
+  {
+   "squares": 371,
+   "distinct_angles": 49,
+   "pyth_qmax": null,
+   "side": "19.776303384502103380768",
+   "class": "continuous",
+   "n": 371
+  },
+  {
+   "squares": 372,
+   "distinct_angles": 128,
+   "pyth_qmax": null,
+   "side": "19.796094789670103380768",
+   "class": "continuous",
+   "n": 372
+  },
+  {
+   "squares": 373,
+   "distinct_angles": 49,
+   "pyth_qmax": null,
+   "side": "19.803695437212103380768",
+   "class": "Q(sqrt5) side",
+   "side_exact": "107/8 + 23/8\u221a5",
+   "n": 373
+  },
+  {
+   "squares": 374,
+   "distinct_angles": 19,
+   "pyth_qmax": null,
+   "side": "19.832356218932",
+   "class": "continuous",
+   "n": 374
+  },
+  {
+   "squares": 375,
+   "distinct_angles": 215,
+   "pyth_qmax": null,
+   "side": "19.860175822129797466810",
+   "class": "continuous",
+   "n": 375
+  },
+  {
+   "squares": 376,
+   "distinct_angles": 88,
+   "pyth_qmax": null,
+   "side": "19.876005953932103380768",
+   "class": "continuous",
+   "n": 376
+  },
+  {
+   "squares": 377,
+   "distinct_angles": 227,
+   "pyth_qmax": null,
+   "side": "19.900890399317499999999",
+   "class": "continuous",
+   "n": 377
+  },
+  {
+   "squares": 378,
+   "distinct_angles": 126,
+   "pyth_qmax": null,
+   "side": "19.926898902258103380768",
+   "class": "continuous",
+   "n": 378
+  },
+  {
+   "squares": 379,
+   "distinct_angles": 50,
+   "pyth_qmax": null,
+   "side": "19.942682819155103380768",
+   "class": "continuous",
+   "n": 379
+  },
+  {
+   "squares": 380,
+   "distinct_angles": 43,
+   "pyth_qmax": null,
+   "side": "19.961350025730",
+   "class": "continuous",
+   "n": 380
+  },
+  {
+   "squares": 381,
+   "distinct_angles": 43,
+   "pyth_qmax": null,
+   "side": "19.974739842378",
+   "class": "continuous",
+   "n": 381
+  },
+  {
+   "squares": 382,
+   "distinct_angles": 106,
+   "pyth_qmax": null,
+   "side": "19.986581715289103380768",
+   "class": "continuous",
+   "n": 382
+  },
+  {
+   "squares": 383,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 383
+  },
+  {
+   "squares": 384,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 384
+  },
+  {
+   "squares": 385,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 385
+  },
+  {
+   "squares": 386,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 386
+  },
+  {
+   "squares": 387,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 387
+  },
+  {
+   "squares": 388,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 388
+  },
+  {
+   "squares": 389,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 389
+  },
+  {
+   "squares": 390,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 390
+  },
+  {
+   "squares": 391,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 391
+  },
+  {
+   "squares": 392,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 392
+  },
+  {
+   "squares": 393,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 393
+  },
+  {
+   "squares": 394,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 394
+  },
+  {
+   "squares": 395,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 395
+  },
+  {
+   "squares": 396,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 396
+  },
+  {
+   "squares": 397,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 397
+  },
+  {
+   "squares": 398,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 398
+  },
+  {
+   "squares": 399,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 399
+  },
+  {
+   "squares": 400,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 400
+  },
+  {
+   "squares": 401,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 401
+  },
+  {
+   "squares": 402,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 402
+  },
+  {
+   "squares": 403,
+   "distinct_angles": 42,
+   "pyth_qmax": null,
+   "side": "20.571428573334103380768",
+   "class": "continuous",
+   "n": 403
+  },
+  {
+   "squares": 404,
+   "distinct_angles": 21,
+   "pyth_qmax": null,
+   "side": "20.591378147402103380768",
+   "class": "continuous",
+   "n": 404
+  },
+  {
+   "squares": 405,
+   "distinct_angles": 52,
+   "pyth_qmax": null,
+   "side": "20.633982504005",
+   "class": "continuous",
+   "n": 405
+  },
+  {
+   "squares": 406,
+   "distinct_angles": 90,
+   "pyth_qmax": null,
+   "side": "20.656854251396103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "15 + 4\u221a2",
+   "n": 406
+  },
+  {
+   "squares": 407,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 407
+  },
+  {
+   "squares": 408,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 408
+  },
+  {
+   "squares": 409,
+   "distinct_angles": 83,
+   "pyth_qmax": null,
+   "side": "20.740417289448103380768",
+   "class": "continuous",
+   "n": 409
+  },
+  {
+   "squares": 410,
+   "distinct_angles": 42,
+   "pyth_qmax": null,
+   "side": "20.773753412898103380768",
+   "class": "continuous",
+   "n": 410
+  },
+  {
+   "squares": 411,
+   "distinct_angles": 33,
+   "pyth_qmax": null,
+   "side": "20.786944253787103380768",
+   "class": "continuous",
+   "n": 411
+  },
+  {
+   "squares": 412,
+   "distinct_angles": 64,
+   "pyth_qmax": null,
+   "side": "20.797091386950103380768",
+   "class": "continuous",
+   "n": 412
+  },
+  {
+   "squares": 413,
+   "distinct_angles": 8,
+   "pyth_qmax": null,
+   "side": "20.823928437597103380768",
+   "class": "continuous",
+   "n": 413
+  },
+  {
+   "squares": 414,
+   "distinct_angles": 85,
+   "pyth_qmax": null,
+   "side": "20.840664050010103380768",
+   "class": "continuous",
+   "n": 414
+  },
+  {
+   "squares": 415,
+   "distinct_angles": 102,
+   "pyth_qmax": null,
+   "side": "20.860906017310102372639",
+   "class": "continuous",
+   "n": 415
+  },
+  {
+   "squares": 416,
+   "distinct_angles": 160,
+   "pyth_qmax": null,
+   "side": "20.877799458759103380768",
+   "class": "continuous",
+   "n": 416
+  },
+  {
+   "squares": 417,
+   "distinct_angles": 228,
+   "pyth_qmax": null,
+   "side": "20.897143045731103380768",
+   "class": "continuous",
+   "n": 417
+  },
+  {
+   "squares": 418,
+   "distinct_angles": 131,
+   "pyth_qmax": null,
+   "side": "20.920100250676103380768",
+   "class": "continuous",
+   "n": 418
+  },
+  {
+   "squares": 419,
+   "distinct_angles": 159,
+   "pyth_qmax": null,
+   "side": "20.942682819164103380768",
+   "class": "continuous",
+   "n": 419
+  },
+  {
+   "squares": 420,
+   "distinct_angles": 40,
+   "pyth_qmax": null,
+   "side": "20.961293021876103380768",
+   "class": "continuous",
+   "n": 420
+  },
+  {
+   "squares": 421,
+   "distinct_angles": 48,
+   "pyth_qmax": null,
+   "side": "20.974576117743198430938",
+   "class": "continuous",
+   "n": 421
+  },
+  {
+   "squares": 422,
+   "distinct_angles": 53,
+   "pyth_qmax": null,
+   "side": "20.983570195483",
+   "class": "continuous",
+   "n": 422
+  },
+  {
+   "squares": 423,
+   "distinct_angles": 44,
+   "pyth_qmax": null,
+   "side": "20.993728477748103380768",
+   "class": "continuous",
+   "n": 423
+  },
+  {
+   "squares": 424,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 424
+  },
+  {
+   "squares": 425,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 425
+  },
+  {
+   "squares": 426,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 426
+  },
+  {
+   "squares": 427,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 427
+  },
+  {
+   "squares": 428,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 428
+  },
+  {
+   "squares": 429,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 429
+  },
+  {
+   "squares": 430,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 430
+  },
+  {
+   "squares": 431,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 431
+  },
+  {
+   "squares": 432,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 432
+  },
+  {
+   "squares": 433,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 433
+  },
+  {
+   "squares": 434,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 434
+  },
+  {
+   "squares": 435,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 435
+  },
+  {
+   "squares": 436,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 436
+  },
+  {
+   "squares": 437,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 437
+  },
+  {
+   "squares": 438,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 438
+  },
+  {
+   "squares": 439,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 439
+  },
+  {
+   "squares": 440,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 440
+  },
+  {
+   "squares": 441,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 441
+  },
+  {
+   "squares": 442,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 442
+  },
+  {
+   "squares": 443,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 443
+  },
+  {
+   "squares": 444,
+   "distinct_angles": 44,
+   "pyth_qmax": null,
+   "side": "21.571428573338103380768",
+   "class": "continuous",
+   "n": 444
+  },
+  {
+   "squares": 445,
+   "distinct_angles": 156,
+   "pyth_qmax": null,
+   "side": "21.591378147408103380768",
+   "class": "continuous",
+   "n": 445
+  },
+  {
+   "squares": 446,
+   "distinct_angles": 145,
+   "pyth_qmax": null,
+   "side": "21.623065216281",
+   "class": "continuous",
+   "n": 446
+  },
+  {
+   "squares": 447,
+   "distinct_angles": 96,
+   "pyth_qmax": null,
+   "side": "21.656854251400103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "16 + 4\u221a2",
+   "n": 447
+  },
+  {
+   "squares": 448,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 448
+  },
+  {
+   "squares": 449,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 449
+  },
+  {
+   "squares": 450,
+   "distinct_angles": 95,
+   "pyth_qmax": null,
+   "side": "21.733166009808103380768",
+   "class": "continuous",
+   "n": 450
+  },
+  {
+   "squares": 451,
+   "distinct_angles": 127,
+   "pyth_qmax": null,
+   "side": "21.756097562884103380768",
+   "class": "continuous",
+   "n": 451
+  },
+  {
+   "squares": 452,
+   "distinct_angles": 178,
+   "pyth_qmax": null,
+   "side": "21.776303384511103380768",
+   "class": "continuous",
+   "n": 452
+  },
+  {
+   "squares": 453,
+   "distinct_angles": 182,
+   "pyth_qmax": null,
+   "side": "21.796094789680103380768",
+   "class": "continuous",
+   "n": 453
+  },
+  {
+   "squares": 454,
+   "distinct_angles": 75,
+   "pyth_qmax": null,
+   "side": "21.803695437220499999999",
+   "class": "Q(sqrt5) side",
+   "side_exact": "123/8 + 23/8\u221a5",
+   "n": 454
+  },
+  {
+   "squares": 455,
+   "distinct_angles": 12,
+   "pyth_qmax": null,
+   "side": "21.825061498230103380768",
+   "class": "continuous",
+   "n": 455
+  },
+  {
+   "squares": 456,
+   "distinct_angles": 100,
+   "pyth_qmax": null,
+   "side": "21.847042267440103380768",
+   "class": "continuous",
+   "n": 456
+  },
+  {
+   "squares": 457,
+   "distinct_angles": 96,
+   "pyth_qmax": null,
+   "side": "21.859831338203103380768",
+   "class": "continuous",
+   "n": 457
+  },
+  {
+   "squares": 458,
+   "distinct_angles": 168,
+   "pyth_qmax": null,
+   "side": "21.877799458764103380768",
+   "class": "continuous",
+   "n": 458
+  },
+  {
+   "squares": 459,
+   "distinct_angles": 76,
+   "pyth_qmax": null,
+   "side": "21.903921985343103380768",
+   "class": "continuous",
+   "n": 459
+  },
+  {
+   "squares": 460,
+   "distinct_angles": 158,
+   "pyth_qmax": null,
+   "side": "21.917181480146051690384",
+   "class": "continuous",
+   "n": 460
+  },
+  {
+   "squares": 461,
+   "distinct_angles": 32,
+   "pyth_qmax": null,
+   "side": "21.932001960446103380768",
+   "class": "continuous",
+   "n": 461
+  },
+  {
+   "squares": 462,
+   "distinct_angles": 53,
+   "pyth_qmax": null,
+   "side": "21.961424944596103380768",
+   "class": "continuous",
+   "n": 462
+  },
+  {
+   "squares": 463,
+   "distinct_angles": 49,
+   "pyth_qmax": null,
+   "side": "21.968554708636103380768",
+   "class": "continuous",
+   "n": 463
+  },
+  {
+   "squares": 464,
+   "distinct_angles": 130,
+   "pyth_qmax": null,
+   "side": "21.983448879610551690384",
+   "class": "continuous",
+   "n": 464
+  },
+  {
+   "squares": 465,
+   "distinct_angles": 45,
+   "pyth_qmax": null,
+   "side": "21.990849852904103380768",
+   "class": "continuous",
+   "n": 465
+  },
+  {
+   "squares": 466,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 466
+  },
+  {
+   "squares": 467,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 467
+  },
+  {
+   "squares": 468,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 468
+  },
+  {
+   "squares": 469,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 469
+  },
+  {
+   "squares": 470,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 470
+  },
+  {
+   "squares": 471,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 471
+  },
+  {
+   "squares": 472,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 472
+  },
+  {
+   "squares": 473,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 473
+  },
+  {
+   "squares": 474,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 474
+  },
+  {
+   "squares": 475,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 475
+  },
+  {
+   "squares": 476,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 476
+  },
+  {
+   "squares": 477,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 477
+  },
+  {
+   "squares": 478,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 478
+  },
+  {
+   "squares": 479,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 479
+  },
+  {
+   "squares": 480,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 480
+  },
+  {
+   "squares": 481,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 481
+  },
+  {
+   "squares": 482,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 482
+  },
+  {
+   "squares": 483,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 483
+  },
+  {
+   "squares": 484,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 484
+  },
+  {
+   "squares": 485,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 485
+  },
+  {
+   "squares": 486,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 486
+  },
+  {
+   "squares": 487,
+   "distinct_angles": 59,
+   "pyth_qmax": null,
+   "side": "22.571428573340103380768",
+   "class": "continuous",
+   "n": 487
+  },
+  {
+   "squares": 488,
+   "distinct_angles": 199,
+   "pyth_qmax": null,
+   "side": "22.591378147410103380768",
+   "class": "continuous",
+   "n": 488
+  },
+  {
+   "squares": 489,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 489
+  },
+  {
+   "squares": 490,
+   "distinct_angles": 53,
+   "pyth_qmax": null,
+   "side": "22.637029560780",
+   "class": "continuous",
+   "n": 490
+  },
+  {
+   "squares": 491,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 491
+  },
+  {
+   "squares": 492,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 492
+  },
+  {
+   "squares": 493,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 493
+  },
+  {
+   "squares": 494,
+   "distinct_angles": 70,
+   "pyth_qmax": null,
+   "side": "22.736096176421103380768",
+   "class": "continuous",
+   "n": 494
+  },
+  {
+   "squares": 495,
+   "distinct_angles": 69,
+   "pyth_qmax": null,
+   "side": "22.765477673558103380768",
+   "class": "continuous",
+   "n": 495
+  },
+  {
+   "squares": 496,
+   "distinct_angles": 57,
+   "pyth_qmax": null,
+   "side": "22.781136523278103380768",
+   "class": "continuous",
+   "n": 496
+  },
+  {
+   "squares": 497,
+   "distinct_angles": 88,
+   "pyth_qmax": null,
+   "side": "22.797091386959103380768",
+   "class": "continuous",
+   "n": 497
+  },
+  {
+   "squares": 498,
+   "distinct_angles": 21,
+   "pyth_qmax": null,
+   "side": "22.823086519484103380768",
+   "class": "continuous",
+   "n": 498
+  },
+  {
+   "squares": 499,
+   "distinct_angles": 86,
+   "pyth_qmax": null,
+   "side": "22.829295069179103380768",
+   "class": "continuous",
+   "n": 499
+  },
+  {
+   "squares": 500,
+   "distinct_angles": 56,
+   "pyth_qmax": null,
+   "side": "22.850604951804103380768",
+   "class": "continuous",
+   "n": 500
+  },
+  {
+   "squares": 501,
+   "distinct_angles": 63,
+   "pyth_qmax": null,
+   "side": "22.861237201906103380768",
+   "class": "continuous",
+   "n": 501
+  },
+  {
+   "squares": 502,
+   "distinct_angles": 274,
+   "pyth_qmax": null,
+   "side": "22.877698820288103380768",
+   "class": "continuous",
+   "n": 502
+  },
+  {
+   "squares": 503,
+   "distinct_angles": 57,
+   "pyth_qmax": null,
+   "side": "22.898243641279103380768",
+   "class": "continuous",
+   "n": 503
+  },
+  {
+   "squares": 504,
+   "distinct_angles": 58,
+   "pyth_qmax": null,
+   "side": "22.915135764293103380768",
+   "class": "continuous",
+   "n": 504
+  },
+  {
+   "squares": 505,
+   "distinct_angles": 36,
+   "pyth_qmax": null,
+   "side": "22.931815799950103380768",
+   "class": "continuous",
+   "n": 505
+  },
+  {
+   "squares": 506,
+   "distinct_angles": 111,
+   "pyth_qmax": null,
+   "side": "22.952113159387103380768",
+   "class": "continuous",
+   "n": 506
+  },
+  {
+   "squares": 507,
+   "distinct_angles": 46,
+   "pyth_qmax": null,
+   "side": "22.970140740694103380768",
+   "class": "continuous",
+   "n": 507
+  },
+  {
+   "squares": 508,
+   "distinct_angles": 59,
+   "pyth_qmax": null,
+   "side": "22.979243247365103380768",
+   "class": "continuous",
+   "n": 508
+  },
+  {
+   "squares": 509,
+   "distinct_angles": 49,
+   "pyth_qmax": null,
+   "side": "22.989777094983103380768",
+   "class": "continuous",
+   "n": 509
+  },
+  {
+   "squares": 510,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 510
+  },
+  {
+   "squares": 511,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 511
+  },
+  {
+   "squares": 512,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 512
+  },
+  {
+   "squares": 513,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 513
+  },
+  {
+   "squares": 514,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 514
+  },
+  {
+   "squares": 515,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 515
+  },
+  {
+   "squares": 516,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 516
+  },
+  {
+   "squares": 517,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 517
+  },
+  {
+   "squares": 518,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 518
+  },
+  {
+   "squares": 519,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 519
+  },
+  {
+   "squares": 520,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 520
+  },
+  {
+   "squares": 521,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 521
+  },
+  {
+   "squares": 522,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 522
+  },
+  {
+   "squares": 523,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 523
+  },
+  {
+   "squares": 524,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 524
+  },
+  {
+   "squares": 525,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 525
+  },
+  {
+   "squares": 526,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 526
+  },
+  {
+   "squares": 527,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 527
+  },
+  {
+   "squares": 528,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 528
+  },
+  {
+   "squares": 529,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 529
+  },
+  {
+   "squares": 530,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 530
+  },
+  {
+   "squares": 531,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 531
+  },
+  {
+   "squares": 532,
+   "distinct_angles": 43,
+   "pyth_qmax": null,
+   "side": "23.564001768352",
+   "class": "continuous",
+   "n": 532
+  },
+  {
+   "squares": 533,
+   "distinct_angles": 5,
+   "pyth_qmax": null,
+   "side": "23.583782192067",
+   "class": "continuous",
+   "n": 533
+  },
+  {
+   "squares": 534,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 534
+  },
+  {
+   "squares": 535,
+   "distinct_angles": 135,
+   "pyth_qmax": null,
+   "side": "23.637029421461103380768",
+   "class": "continuous",
+   "n": 535
+  },
+  {
+   "squares": 536,
+   "distinct_angles": 18,
+   "pyth_qmax": null,
+   "side": "23.656854251408103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "18 + 4\u221a2",
+   "n": 536
+  },
+  {
+   "squares": 537,
+   "distinct_angles": 52,
+   "pyth_qmax": null,
+   "side": "23.692388157341103380768",
+   "class": "continuous",
+   "n": 537
+  },
+  {
+   "squares": 538,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 538
+  },
+  {
+   "squares": 539,
+   "distinct_angles": 227,
+   "pyth_qmax": null,
+   "side": "23.732037584048499994634",
+   "class": "continuous",
+   "n": 539
+  },
+  {
+   "squares": 540,
+   "distinct_angles": 136,
+   "pyth_qmax": null,
+   "side": "23.756097562892103380768",
+   "class": "continuous",
+   "n": 540
+  },
+  {
+   "squares": 541,
+   "distinct_angles": 190,
+   "pyth_qmax": null,
+   "side": "23.773753412911",
+   "class": "continuous",
+   "n": 541
+  },
+  {
+   "squares": 542,
+   "distinct_angles": 58,
+   "pyth_qmax": null,
+   "side": "23.787664248549103380768",
+   "class": "continuous",
+   "n": 542
+  },
+  {
+   "squares": 543,
+   "distinct_angles": 66,
+   "pyth_qmax": null,
+   "side": "23.802428718849103380768",
+   "class": "continuous",
+   "n": 543
+  },
+  {
+   "squares": 544,
+   "distinct_angles": 7,
+   "pyth_qmax": null,
+   "side": "23.823800569932103380768",
+   "class": "continuous",
+   "n": 544
+  },
+  {
+   "squares": 545,
+   "distinct_angles": 282,
+   "pyth_qmax": null,
+   "side": "23.838456509872103380768",
+   "class": "continuous",
+   "n": 545
+  },
+  {
+   "squares": 546,
+   "distinct_angles": 163,
+   "pyth_qmax": null,
+   "side": "23.850548605194103380768",
+   "class": "continuous",
+   "n": 546
+  },
+  {
+   "squares": 547,
+   "distinct_angles": 263,
+   "pyth_qmax": null,
+   "side": "23.860873027577103380768",
+   "class": "continuous",
+   "n": 547
+  },
+  {
+   "squares": 548,
+   "distinct_angles": 92,
+   "pyth_qmax": null,
+   "side": "23.872704135940168298577",
+   "class": "continuous",
+   "n": 548
+  },
+  {
+   "squares": 549,
+   "distinct_angles": 65,
+   "pyth_qmax": null,
+   "side": "23.898119030172103380768",
+   "class": "continuous",
+   "n": 549
+  },
+  {
+   "squares": 550,
+   "distinct_angles": 57,
+   "pyth_qmax": null,
+   "side": "23.911181037879103380768",
+   "class": "continuous",
+   "n": 550
+  },
+  {
+   "squares": 551,
+   "distinct_angles": 71,
+   "pyth_qmax": null,
+   "side": "23.926436941722103380768",
+   "class": "continuous",
+   "n": 551
+  },
+  {
+   "squares": 552,
+   "distinct_angles": 65,
+   "pyth_qmax": null,
+   "side": "23.946434631617103380768",
+   "class": "continuous",
+   "n": 552
+  },
+  {
+   "squares": 553,
+   "distinct_angles": 40,
+   "pyth_qmax": null,
+   "side": "23.962804852563103380768",
+   "class": "continuous",
+   "n": 553
+  },
+  {
+   "squares": 554,
+   "distinct_angles": 53,
+   "pyth_qmax": null,
+   "side": "23.976186618421103380768",
+   "class": "continuous",
+   "n": 554
+  },
+  {
+   "squares": 555,
+   "distinct_angles": 62,
+   "pyth_qmax": null,
+   "side": "23.985275683784103380768",
+   "class": "continuous",
+   "n": 555
+  },
+  {
+   "squares": 556,
+   "distinct_angles": 82,
+   "pyth_qmax": null,
+   "side": "23.995962392195103380768",
+   "class": "continuous",
+   "n": 556
+  },
+  {
+   "squares": 557,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 557
+  },
+  {
+   "squares": 558,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 558
+  },
+  {
+   "squares": 559,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 559
+  },
+  {
+   "squares": 560,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 560
+  },
+  {
+   "squares": 561,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 561
+  },
+  {
+   "squares": 562,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 562
+  },
+  {
+   "squares": 563,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 563
+  },
+  {
+   "squares": 564,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 564
+  },
+  {
+   "squares": 565,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 565
+  },
+  {
+   "squares": 566,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 566
+  },
+  {
+   "squares": 567,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 567
+  },
+  {
+   "squares": 568,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 568
+  },
+  {
+   "squares": 569,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 569
+  },
+  {
+   "squares": 570,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 570
+  },
+  {
+   "squares": 571,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 571
+  },
+  {
+   "squares": 572,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 572
+  },
+  {
+   "squares": 573,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 573
+  },
+  {
+   "squares": 574,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 574
+  },
+  {
+   "squares": 575,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 575
+  },
+  {
+   "squares": 576,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 576
+  },
+  {
+   "squares": 577,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 577
+  },
+  {
+   "squares": 578,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 578
+  },
+  {
+   "squares": 579,
+   "distinct_angles": 112,
+   "pyth_qmax": null,
+   "side": "24.563448004054103380768",
+   "class": "continuous",
+   "n": 579
+  },
+  {
+   "squares": 580,
+   "distinct_angles": 16,
+   "pyth_qmax": null,
+   "side": "24.583782192071",
+   "class": "continuous",
+   "n": 580
+  },
+  {
+   "squares": 581,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 581
+  },
+  {
+   "squares": 582,
+   "distinct_angles": 96,
+   "pyth_qmax": null,
+   "side": "24.633982504021",
+   "class": "continuous",
+   "n": 582
+  },
+  {
+   "squares": 583,
+   "distinct_angles": 21,
+   "pyth_qmax": null,
+   "side": "24.656854251412103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "19 + 4\u221a2",
+   "n": 583
+  },
+  {
+   "squares": 584,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 584
+  },
+  {
+   "squares": 585,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 585
+  },
+  {
+   "squares": 586,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 586
+  },
+  {
+   "squares": 587,
+   "distinct_angles": 45,
+   "pyth_qmax": null,
+   "side": "24.750233328902103380768",
+   "class": "continuous",
+   "n": 587
+  },
+  {
+   "squares": 588,
+   "distinct_angles": 321,
+   "pyth_qmax": null,
+   "side": "24.757483418157103380768",
+   "class": "continuous",
+   "n": 588
+  },
+  {
+   "squares": 589,
+   "distinct_angles": 159,
+   "pyth_qmax": null,
+   "side": "24.778174594972103380768",
+   "class": "continuous",
+   "n": 589
+  },
+  {
+   "squares": 590,
+   "distinct_angles": 216,
+   "pyth_qmax": null,
+   "side": "24.796057416368103380768",
+   "class": "continuous",
+   "n": 590
+  },
+  {
+   "squares": 591,
+   "distinct_angles": 51,
+   "pyth_qmax": null,
+   "side": "24.816933514467103380768",
+   "class": "continuous",
+   "n": 591
+  },
+  {
+   "squares": 592,
+   "distinct_angles": 17,
+   "pyth_qmax": null,
+   "side": "24.824721481566103380768",
+   "class": "continuous",
+   "n": 592
+  },
+  {
+   "squares": 593,
+   "distinct_angles": 360,
+   "pyth_qmax": null,
+   "side": "24.846667194763103380768",
+   "class": "continuous",
+   "n": 593
+  },
+  {
+   "squares": 594,
+   "distinct_angles": 149,
+   "pyth_qmax": null,
+   "side": "24.857172499184103380768",
+   "class": "continuous",
+   "n": 594
+  },
+  {
+   "squares": 595,
+   "distinct_angles": 71,
+   "pyth_qmax": null,
+   "side": "24.862204736844",
+   "class": "continuous",
+   "n": 595
+  },
+  {
+   "squares": 596,
+   "distinct_angles": 268,
+   "pyth_qmax": null,
+   "side": "24.877799458775103380768",
+   "class": "continuous",
+   "n": 596
+  },
+  {
+   "squares": 597,
+   "distinct_angles": 270,
+   "pyth_qmax": null,
+   "side": "24.896925855443103380768",
+   "class": "continuous",
+   "n": 597
+  },
+  {
+   "squares": 598,
+   "distinct_angles": 83,
+   "pyth_qmax": null,
+   "side": "24.908091665486103380768",
+   "class": "continuous",
+   "n": 598
+  },
+  {
+   "squares": 599,
+   "distinct_angles": 59,
+   "pyth_qmax": null,
+   "side": "24.924592940118103380768",
+   "class": "continuous",
+   "n": 599
+  },
+  {
+   "squares": 600,
+   "distinct_angles": 90,
+   "pyth_qmax": null,
+   "side": "24.938951481419103380768",
+   "class": "continuous",
+   "n": 600
+  },
+  {
+   "squares": 601,
+   "distinct_angles": 68,
+   "pyth_qmax": null,
+   "side": "24.956987029483103380768",
+   "class": "continuous",
+   "n": 601
+  },
+  {
+   "squares": 602,
+   "distinct_angles": 59,
+   "pyth_qmax": null,
+   "side": "24.975795431963103380768",
+   "class": "continuous",
+   "n": 602
+  },
+  {
+   "squares": 603,
+   "distinct_angles": 59,
+   "pyth_qmax": null,
+   "side": "24.983697770947103380768",
+   "class": "continuous",
+   "n": 603
+  },
+  {
+   "squares": 604,
+   "distinct_angles": 83,
+   "pyth_qmax": null,
+   "side": "24.993298934809734725571",
+   "class": "continuous",
+   "n": 604
+  },
+  {
+   "squares": 605,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 605
+  },
+  {
+   "squares": 606,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 606
+  },
+  {
+   "squares": 607,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 607
+  },
+  {
+   "squares": 608,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 608
+  },
+  {
+   "squares": 609,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 609
+  },
+  {
+   "squares": 610,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 610
+  },
+  {
+   "squares": 611,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 611
+  },
+  {
+   "squares": 612,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 612
+  },
+  {
+   "squares": 613,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 613
+  },
+  {
+   "squares": 614,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 614
+  },
+  {
+   "squares": 615,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 615
+  },
+  {
+   "squares": 616,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 616
+  },
+  {
+   "squares": 617,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 617
+  },
+  {
+   "squares": 618,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 618
+  },
+  {
+   "squares": 619,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 619
+  },
+  {
+   "squares": 620,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 620
+  },
+  {
+   "squares": 621,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 621
+  },
+  {
+   "squares": 622,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 622
+  },
+  {
+   "squares": 623,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 623
+  },
+  {
+   "squares": 624,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 624
+  },
+  {
+   "squares": 625,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 625
+  },
+  {
+   "squares": 626,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 626
+  },
+  {
+   "squares": 627,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 627
+  },
+  {
+   "squares": 628,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "25.535533907858103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "22 + 5/2\u221a2",
+   "n": 628
+  },
+  {
+   "squares": 629,
+   "distinct_angles": 13,
+   "pyth_qmax": null,
+   "side": "25.583782192074",
+   "class": "continuous",
+   "n": 629
+  },
+  {
+   "squares": 630,
+   "distinct_angles": 144,
+   "pyth_qmax": null,
+   "side": "25.604601477654103380768",
+   "class": "continuous",
+   "n": 630
+  },
+  {
+   "squares": 631,
+   "distinct_angles": 275,
+   "pyth_qmax": null,
+   "side": "25.612884694306",
+   "class": "continuous",
+   "n": 631
+  },
+  {
+   "squares": 632,
+   "distinct_angles": 244,
+   "pyth_qmax": null,
+   "side": "25.642882251196103380768",
+   "class": "continuous",
+   "n": 632
+  },
+  {
+   "squares": 633,
+   "distinct_angles": 5,
+   "pyth_qmax": null,
+   "side": "25.656854251418103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "20 + 4\u221a2",
+   "n": 633
+  },
+  {
+   "squares": 634,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 634
+  },
+  {
+   "squares": 635,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 635
+  },
+  {
+   "squares": 636,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 636
+  },
+  {
+   "squares": 637,
+   "distinct_angles": 134,
+   "pyth_qmax": null,
+   "side": "25.744735814584103380768",
+   "class": "continuous",
+   "n": 637
+  },
+  {
+   "squares": 638,
+   "distinct_angles": 85,
+   "pyth_qmax": null,
+   "side": "25.763561933938103380768",
+   "class": "continuous",
+   "n": 638
+  },
+  {
+   "squares": 639,
+   "distinct_angles": 355,
+   "pyth_qmax": null,
+   "side": "25.781136523286103380768",
+   "class": "continuous",
+   "n": 639
+  },
+  {
+   "squares": 640,
+   "distinct_angles": 173,
+   "pyth_qmax": null,
+   "side": "25.792137350190103380768",
+   "class": "continuous",
+   "n": 640
+  },
+  {
+   "squares": 641,
+   "distinct_angles": 273,
+   "pyth_qmax": null,
+   "side": "25.812391011175103380768",
+   "class": "continuous",
+   "n": 641
+  },
+  {
+   "squares": 642,
+   "distinct_angles": 279,
+   "pyth_qmax": null,
+   "side": "25.833072974308629546964",
+   "class": "continuous",
+   "n": 642
+  },
+  {
+   "squares": 643,
+   "distinct_angles": 200,
+   "pyth_qmax": null,
+   "side": "25.847039293606051690384",
+   "class": "continuous",
+   "n": 643
+  },
+  {
+   "squares": 644,
+   "distinct_angles": 216,
+   "pyth_qmax": null,
+   "side": "25.856196629065103380768",
+   "class": "continuous",
+   "n": 644
+  },
+  {
+   "squares": 645,
+   "distinct_angles": 165,
+   "pyth_qmax": null,
+   "side": "25.870318098930103380768",
+   "class": "continuous",
+   "n": 645
+  },
+  {
+   "squares": 646,
+   "distinct_angles": 338,
+   "pyth_qmax": null,
+   "side": "25.884323099008051690384",
+   "class": "continuous",
+   "n": 646
+  },
+  {
+   "squares": 647,
+   "distinct_angles": 175,
+   "pyth_qmax": null,
+   "side": "25.889968238256499999998",
+   "class": "continuous",
+   "n": 647
+  },
+  {
+   "squares": 648,
+   "distinct_angles": 133,
+   "pyth_qmax": null,
+   "side": "25.907486022519499999999",
+   "class": "continuous",
+   "n": 648
+  },
+  {
+   "squares": 649,
+   "distinct_angles": 143,
+   "pyth_qmax": null,
+   "side": "25.917161567954103380768",
+   "class": "continuous",
+   "n": 649
+  },
+  {
+   "squares": 650,
+   "distinct_angles": 44,
+   "pyth_qmax": null,
+   "side": "25.932813790806103380768",
+   "class": "continuous",
+   "n": 650
+  },
+  {
+   "squares": 651,
+   "distinct_angles": 54,
+   "pyth_qmax": null,
+   "side": "25.955091278962103380768",
+   "class": "continuous",
+   "n": 651
+  },
+  {
+   "squares": 652,
+   "distinct_angles": 52,
+   "pyth_qmax": null,
+   "side": "25.966394228556103380768",
+   "class": "continuous",
+   "n": 652
+  },
+  {
+   "squares": 653,
+   "distinct_angles": 51,
+   "pyth_qmax": null,
+   "side": "25.980637743150103380768",
+   "class": "continuous",
+   "n": 653
+  },
+  {
+   "squares": 654,
+   "distinct_angles": 171,
+   "pyth_qmax": null,
+   "side": "25.991620503398551690384",
+   "class": "continuous",
+   "n": 654
+  },
+  {
+   "squares": 655,
+   "distinct_angles": 331,
+   "pyth_qmax": null,
+   "side": "25.999711088243103380768",
+   "class": "continuous",
+   "n": 655
+  },
+  {
+   "squares": 656,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 656
+  },
+  {
+   "squares": 657,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 657
+  },
+  {
+   "squares": 658,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 658
+  },
+  {
+   "squares": 659,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 659
+  },
+  {
+   "squares": 660,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 660
+  },
+  {
+   "squares": 661,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 661
+  },
+  {
+   "squares": 662,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 662
+  },
+  {
+   "squares": 663,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 663
+  },
+  {
+   "squares": 664,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 664
+  },
+  {
+   "squares": 665,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 665
+  },
+  {
+   "squares": 666,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 666
+  },
+  {
+   "squares": 667,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 667
+  },
+  {
+   "squares": 668,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 668
+  },
+  {
+   "squares": 669,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 669
+  },
+  {
+   "squares": 670,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 670
+  },
+  {
+   "squares": 671,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 671
+  },
+  {
+   "squares": 672,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 672
+  },
+  {
+   "squares": 673,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 673
+  },
+  {
+   "squares": 674,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 674
+  },
+  {
+   "squares": 675,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 675
+  },
+  {
+   "squares": 676,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 676
+  },
+  {
+   "squares": 677,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 677
+  },
+  {
+   "squares": 678,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "26.535533907860103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "23 + 5/2\u221a2",
+   "n": 678
+  },
+  {
+   "squares": 679,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "26.535533907860103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "23 + 5/2\u221a2",
+   "n": 679
+  },
+  {
+   "squares": 680,
+   "distinct_angles": 54,
+   "pyth_qmax": null,
+   "side": "26.571428573356103380768",
+   "class": "continuous",
+   "n": 680
+  },
+  {
+   "squares": 681,
+   "distinct_angles": 72,
+   "pyth_qmax": null,
+   "side": "26.591378147422103380768",
+   "class": "continuous",
+   "n": 681
+  },
+  {
+   "squares": 682,
+   "distinct_angles": 275,
+   "pyth_qmax": null,
+   "side": "26.612884694358",
+   "class": "continuous",
+   "n": 682
+  },
+  {
+   "squares": 683,
+   "distinct_angles": 163,
+   "pyth_qmax": null,
+   "side": "26.637029563656",
+   "class": "continuous",
+   "n": 683
+  },
+  {
+   "squares": 684,
+   "distinct_angles": 81,
+   "pyth_qmax": null,
+   "side": "26.642882255222",
+   "class": "continuous",
+   "n": 684
+  },
+  {
+   "squares": 685,
+   "distinct_angles": 138,
+   "pyth_qmax": null,
+   "side": "26.686999175494551690384",
+   "class": "continuous",
+   "n": 685
+  },
+  {
+   "squares": 686,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 686
+  },
+  {
+   "squares": 687,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 687
+  },
+  {
+   "squares": 688,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 688
+  },
+  {
+   "squares": 689,
+   "distinct_angles": 307,
+   "pyth_qmax": null,
+   "side": "26.745625050059103380768",
+   "class": "continuous",
+   "n": 689
+  },
+  {
+   "squares": 690,
+   "distinct_angles": 107,
+   "pyth_qmax": null,
+   "side": "26.772964040726103380768",
+   "class": "continuous",
+   "n": 690
+  },
+  {
+   "squares": 691,
+   "distinct_angles": 228,
+   "pyth_qmax": null,
+   "side": "26.786711852196103380768",
+   "class": "continuous",
+   "n": 691
+  },
+  {
+   "squares": 692,
+   "distinct_angles": 330,
+   "pyth_qmax": null,
+   "side": "26.802428718859051690384",
+   "class": "continuous",
+   "n": 692
+  },
+  {
+   "squares": 693,
+   "distinct_angles": 202,
+   "pyth_qmax": null,
+   "side": "26.812015738276051690384",
+   "class": "continuous",
+   "n": 693
+  },
+  {
+   "squares": 694,
+   "distinct_angles": 415,
+   "pyth_qmax": null,
+   "side": "26.828046738372051690384",
+   "class": "continuous",
+   "n": 694
+  },
+  {
+   "squares": 695,
+   "distinct_angles": 205,
+   "pyth_qmax": null,
+   "side": "26.845498370305499999999",
+   "class": "continuous",
+   "n": 695
+  },
+  {
+   "squares": 696,
+   "distinct_angles": 696,
+   "pyth_qmax": null,
+   "side": "26.856289410151490542794",
+   "class": "continuous",
+   "n": 696
+  },
+  {
+   "squares": 697,
+   "distinct_angles": 252,
+   "pyth_qmax": null,
+   "side": "26.869769562531103380768",
+   "class": "continuous",
+   "n": 697
+  },
+  {
+   "squares": 698,
+   "distinct_angles": 144,
+   "pyth_qmax": null,
+   "side": "26.881105359074051690384",
+   "class": "continuous",
+   "n": 698
+  },
+  {
+   "squares": 699,
+   "distinct_angles": 494,
+   "pyth_qmax": null,
+   "side": "26.889968238259103380768",
+   "class": "continuous",
+   "n": 699
+  },
+  {
+   "squares": 700,
+   "distinct_angles": 98,
+   "pyth_qmax": null,
+   "side": "26.903216362727103380768",
+   "class": "continuous",
+   "n": 700
+  },
+  {
+   "squares": 701,
+   "distinct_angles": 89,
+   "pyth_qmax": null,
+   "side": "26.916097117139103380768",
+   "class": "continuous",
+   "n": 701
+  },
+  {
+   "squares": 702,
+   "distinct_angles": 197,
+   "pyth_qmax": null,
+   "side": "26.928764949143103380768",
+   "class": "continuous",
+   "n": 702
+  },
+  {
+   "squares": 703,
+   "distinct_angles": 115,
+   "pyth_qmax": null,
+   "side": "26.947327875262103380768",
+   "class": "continuous",
+   "n": 703
+  },
+  {
+   "squares": 704,
+   "distinct_angles": 60,
+   "pyth_qmax": null,
+   "side": "26.963301183670103380768",
+   "class": "continuous",
+   "n": 704
+  },
+  {
+   "squares": 705,
+   "distinct_angles": 64,
+   "pyth_qmax": null,
+   "side": "26.983939909698103380768",
+   "class": "continuous",
+   "n": 705
+  },
+  {
+   "squares": 706,
+   "distinct_angles": 81,
+   "pyth_qmax": null,
+   "side": "26.988208111129103380768",
+   "class": "continuous",
+   "n": 706
+  },
+  {
+   "squares": 707,
+   "distinct_angles": 63,
+   "pyth_qmax": null,
+   "side": "26.997433261580123405511",
+   "class": "continuous",
+   "n": 707
+  },
+  {
+   "squares": 708,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 708
+  },
+  {
+   "squares": 709,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 709
+  },
+  {
+   "squares": 710,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 710
+  },
+  {
+   "squares": 711,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 711
+  },
+  {
+   "squares": 712,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 712
+  },
+  {
+   "squares": 713,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 713
+  },
+  {
+   "squares": 714,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 714
+  },
+  {
+   "squares": 715,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 715
+  },
+  {
+   "squares": 716,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 716
+  },
+  {
+   "squares": 717,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 717
+  },
+  {
+   "squares": 718,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 718
+  },
+  {
+   "squares": 719,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 719
+  },
+  {
+   "squares": 720,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 720
+  },
+  {
+   "squares": 721,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 721
+  },
+  {
+   "squares": 722,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 722
+  },
+  {
+   "squares": 723,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 723
+  },
+  {
+   "squares": 724,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 724
+  },
+  {
+   "squares": 725,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 725
+  },
+  {
+   "squares": 726,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 726
+  },
+  {
+   "squares": 727,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 727
+  },
+  {
+   "squares": 728,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 728
+  },
+  {
+   "squares": 729,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 729
+  },
+  {
+   "squares": 730,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 730
+  },
+  {
+   "squares": 731,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "27.535533907860103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "24 + 5/2\u221a2",
+   "n": 731
+  },
+  {
+   "squares": 732,
+   "distinct_angles": 4,
+   "pyth_qmax": null,
+   "side": "27.535533907860103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "24 + 5/2\u221a2",
+   "n": 732
+  },
+  {
+   "squares": 733,
+   "distinct_angles": 60,
+   "pyth_qmax": null,
+   "side": "27.571428573356103380768",
+   "class": "continuous",
+   "n": 733
+  },
+  {
+   "squares": 734,
+   "distinct_angles": 72,
+   "pyth_qmax": null,
+   "side": "27.591378147428103380768",
+   "class": "continuous",
+   "n": 734
+  },
+  {
+   "squares": 735,
+   "distinct_angles": 275,
+   "pyth_qmax": null,
+   "side": "27.612884694412",
+   "class": "continuous",
+   "n": 735
+  },
+  {
+   "squares": 736,
+   "distinct_angles": 105,
+   "pyth_qmax": null,
+   "side": "27.637029560796499999997",
+   "class": "continuous",
+   "n": 736
+  },
+  {
+   "squares": 737,
+   "distinct_angles": 59,
+   "pyth_qmax": null,
+   "side": "27.638891817270103380768",
+   "class": "continuous",
+   "n": 737
+  },
+  {
+   "squares": 738,
+   "distinct_angles": 97,
+   "pyth_qmax": null,
+   "side": "27.684026240436103380768",
+   "class": "continuous",
+   "n": 738
+  },
+  {
+   "squares": 739,
+   "distinct_angles": 124,
+   "pyth_qmax": null,
+   "side": "27.690960115171",
+   "class": "continuous",
+   "n": 739
+  },
+  {
+   "squares": 740,
+   "distinct_angles": 78,
+   "pyth_qmax": null,
+   "side": "27.706993808656103380768",
+   "class": "continuous",
+   "n": 740
+  },
+  {
+   "squares": 741,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 741
+  },
+  {
+   "squares": 742,
+   "distinct_angles": 224,
+   "pyth_qmax": null,
+   "side": "27.741951400166551690384",
+   "class": "continuous",
+   "n": 742
+  },
+  {
+   "squares": 743,
+   "distinct_angles": 298,
+   "pyth_qmax": null,
+   "side": "27.757483418166",
+   "class": "continuous",
+   "n": 743
+  },
+  {
+   "squares": 744,
+   "distinct_angles": 217,
+   "pyth_qmax": null,
+   "side": "27.760006236615103380768",
+   "class": "continuous",
+   "n": 744
+  },
+  {
+   "squares": 745,
+   "distinct_angles": 276,
+   "pyth_qmax": null,
+   "side": "27.788343934250103380768",
+   "class": "continuous",
+   "n": 745
+  },
+  {
+   "squares": 746,
+   "distinct_angles": 452,
+   "pyth_qmax": null,
+   "side": "27.799033591413103380768",
+   "class": "continuous",
+   "n": 746
+  },
+  {
+   "squares": 747,
+   "distinct_angles": 665,
+   "pyth_qmax": null,
+   "side": "27.822875657461103380768",
+   "class": "Q(sqrt7) side",
+   "side_exact": "53/2 + 1/2\u221a7",
+   "n": 747
+  },
+  {
+   "squares": 748,
+   "distinct_angles": 365,
+   "pyth_qmax": null,
+   "side": "27.828046738374415238969",
+   "class": "continuous",
+   "n": 748
+  },
+  {
+   "squares": 749,
+   "distinct_angles": 361,
+   "pyth_qmax": null,
+   "side": "27.846045892486103380768",
+   "class": "continuous",
+   "n": 749
+  },
+  {
+   "squares": 750,
+   "distinct_angles": 82,
+   "pyth_qmax": null,
+   "side": "27.857636890982103380768",
+   "class": "continuous",
+   "n": 750
+  },
+  {
+   "squares": 751,
+   "distinct_angles": 87,
+   "pyth_qmax": null,
+   "side": "27.864140675753103380768",
+   "class": "continuous",
+   "n": 751
+  },
+  {
+   "squares": 752,
+   "distinct_angles": 256,
+   "pyth_qmax": null,
+   "side": "27.882267463233103380768",
+   "class": "continuous",
+   "n": 752
+  },
+  {
+   "squares": 753,
+   "distinct_angles": 207,
+   "pyth_qmax": null,
+   "side": "27.889968238261103380768",
+   "class": "continuous",
+   "n": 753
+  },
+  {
+   "squares": 754,
+   "distinct_angles": 99,
+   "pyth_qmax": null,
+   "side": "27.907531517510103380768",
+   "class": "continuous",
+   "n": 754
+  },
+  {
+   "squares": 755,
+   "distinct_angles": 42,
+   "pyth_qmax": null,
+   "side": "27.916538902061",
+   "class": "continuous",
+   "n": 755
+  },
+  {
+   "squares": 756,
+   "distinct_angles": 171,
+   "pyth_qmax": null,
+   "side": "27.924569789499499999999",
+   "class": "continuous",
+   "n": 756
+  },
+  {
+   "squares": 757,
+   "distinct_angles": 162,
+   "pyth_qmax": null,
+   "side": "27.938225275480103380768",
+   "class": "continuous",
+   "n": 757
+  },
+  {
+   "squares": 758,
+   "distinct_angles": 78,
+   "pyth_qmax": null,
+   "side": "27.958641418248499999999",
+   "class": "continuous",
+   "n": 758
+  },
+  {
+   "squares": 759,
+   "distinct_angles": 71,
+   "pyth_qmax": null,
+   "side": "27.970868660442103380768",
+   "class": "continuous",
+   "n": 759
+  },
+  {
+   "squares": 760,
+   "distinct_angles": 66,
+   "pyth_qmax": null,
+   "side": "27.990588085315103380768",
+   "class": "continuous",
+   "n": 760
+  },
+  {
+   "squares": 761,
+   "distinct_angles": 86,
+   "pyth_qmax": null,
+   "side": "27.993283305590103380768",
+   "class": "continuous",
+   "n": 761
+  },
+  {
+   "squares": 762,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 762
+  },
+  {
+   "squares": 763,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 763
+  },
+  {
+   "squares": 764,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 764
+  },
+  {
+   "squares": 765,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 765
+  },
+  {
+   "squares": 766,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 766
+  },
+  {
+   "squares": 767,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 767
+  },
+  {
+   "squares": 768,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 768
+  },
+  {
+   "squares": 769,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 769
+  },
+  {
+   "squares": 770,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 770
+  },
+  {
+   "squares": 771,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 771
+  },
+  {
+   "squares": 772,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 772
+  },
+  {
+   "squares": 773,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 773
+  },
+  {
+   "squares": 774,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 774
+  },
+  {
+   "squares": 775,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 775
+  },
+  {
+   "squares": 776,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 776
+  },
+  {
+   "squares": 777,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 777
+  },
+  {
+   "squares": 778,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 778
+  },
+  {
+   "squares": 779,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 779
+  },
+  {
+   "squares": 780,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 780
+  },
+  {
+   "squares": 781,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 781
+  },
+  {
+   "squares": 782,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 782
+  },
+  {
+   "squares": 783,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 783
+  },
+  {
+   "squares": 784,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 784
+  },
+  {
+   "squares": 785,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 785
+  },
+  {
+   "squares": 786,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "28.535533907862103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "25 + 5/2\u221a2",
+   "n": 786
+  },
+  {
+   "squares": 787,
+   "distinct_angles": 6,
+   "pyth_qmax": null,
+   "side": "28.535533907862103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "25 + 5/2\u221a2",
+   "n": 787
+  },
+  {
+   "squares": 788,
+   "distinct_angles": 63,
+   "pyth_qmax": null,
+   "side": "28.571428573359103380768",
+   "class": "continuous",
+   "n": 788
+  },
+  {
+   "squares": 789,
+   "distinct_angles": 112,
+   "pyth_qmax": null,
+   "side": "28.591378147428103380768",
+   "class": "continuous",
+   "n": 789
+  },
+  {
+   "squares": 790,
+   "distinct_angles": 439,
+   "pyth_qmax": null,
+   "side": "28.612856389603103380768",
+   "class": "continuous",
+   "n": 790
+  },
+  {
+   "squares": 791,
+   "distinct_angles": 120,
+   "pyth_qmax": null,
+   "side": "28.637029560799",
+   "class": "continuous",
+   "n": 791
+  },
+  {
+   "squares": 792,
+   "distinct_angles": 57,
+   "pyth_qmax": null,
+   "side": "28.637029560798499999999",
+   "class": "continuous",
+   "n": 792
+  },
+  {
+   "squares": 793,
+   "distinct_angles": 547,
+   "pyth_qmax": null,
+   "side": "28.678779877276103380768",
+   "class": "continuous",
+   "n": 793
+  },
+  {
+   "squares": 794,
+   "distinct_angles": 255,
+   "pyth_qmax": null,
+   "side": "28.684143608290103380768",
+   "class": "continuous",
+   "n": 794
+  },
+  {
+   "squares": 795,
+   "distinct_angles": 119,
+   "pyth_qmax": null,
+   "side": "28.703996492959103380768",
+   "class": "continuous",
+   "n": 795
+  },
+  {
+   "squares": 796,
+   "distinct_angles": 375,
+   "pyth_qmax": null,
+   "side": "28.721540004190051690384",
+   "class": "continuous",
+   "n": 796
+  },
+  {
+   "squares": 797,
+   "distinct_angles": 445,
+   "pyth_qmax": null,
+   "side": "28.733979870362103380768",
+   "class": "continuous",
+   "n": 797
+  },
+  {
+   "squares": 798,
+   "distinct_angles": 430,
+   "pyth_qmax": null,
+   "side": "28.745602739699103380768",
+   "class": "continuous",
+   "n": 798
+  },
+  {
+   "squares": 799,
+   "distinct_angles": 159,
+   "pyth_qmax": null,
+   "side": "28.759857950805499999997",
+   "class": "continuous",
+   "n": 799
+  },
+  {
+   "squares": 800,
+   "distinct_angles": 262,
+   "pyth_qmax": null,
+   "side": "28.779288343760499999999",
+   "class": "continuous",
+   "n": 800
+  },
+  {
+   "squares": 801,
+   "distinct_angles": 430,
+   "pyth_qmax": null,
+   "side": "28.781136523294471339386",
+   "class": "continuous",
+   "n": 801
+  },
+  {
+   "squares": 802,
+   "distinct_angles": 246,
+   "pyth_qmax": null,
+   "side": "28.802093310543499999999",
+   "class": "continuous",
+   "n": 802
+  },
+  {
+   "squares": 803,
+   "distinct_angles": 36,
+   "pyth_qmax": null,
+   "side": "28.820376052643309122522",
+   "class": "continuous",
+   "n": 803
+  },
+  {
+   "squares": 804,
+   "distinct_angles": 52,
+   "pyth_qmax": null,
+   "side": "28.829715540518103380768",
+   "class": "continuous",
+   "n": 804
+  },
+  {
+   "squares": 805,
+   "distinct_angles": 121,
+   "pyth_qmax": null,
+   "side": "28.845014547061499999999",
+   "class": "continuous",
+   "n": 805
+  },
+  {
+   "squares": 806,
+   "distinct_angles": 94,
+   "pyth_qmax": null,
+   "side": "28.858400724637103380768",
+   "class": "continuous",
+   "n": 806
+  },
+  {
+   "squares": 807,
+   "distinct_angles": 105,
+   "pyth_qmax": null,
+   "side": "28.870124903579103380768",
+   "class": "continuous",
+   "n": 807
+  },
+  {
+   "squares": 808,
+   "distinct_angles": 98,
+   "pyth_qmax": null,
+   "side": "28.873683284851561755117",
+   "class": "continuous",
+   "n": 808
+  },
+  {
+   "squares": 809,
+   "distinct_angles": 193,
+   "pyth_qmax": null,
+   "side": "28.889968238263",
+   "class": "continuous",
+   "n": 809
+  },
+  {
+   "squares": 810,
+   "distinct_angles": 67,
+   "pyth_qmax": null,
+   "side": "28.906878311435103380768",
+   "class": "continuous",
+   "n": 810
+  },
+  {
+   "squares": 811,
+   "distinct_angles": 128,
+   "pyth_qmax": null,
+   "side": "28.916538902063",
+   "class": "continuous",
+   "n": 811
+  },
+  {
+   "squares": 812,
+   "distinct_angles": 413,
+   "pyth_qmax": null,
+   "side": "28.924791453834103380768",
+   "class": "continuous",
+   "n": 812
+  },
+  {
+   "squares": 813,
+   "distinct_angles": 121,
+   "pyth_qmax": null,
+   "side": "28.931306398359551690384",
+   "class": "continuous",
+   "n": 813
+  },
+  {
+   "squares": 814,
+   "distinct_angles": 92,
+   "pyth_qmax": null,
+   "side": "28.954616107412103380768",
+   "class": "continuous",
+   "n": 814
+  },
+  {
+   "squares": 815,
+   "distinct_angles": 147,
+   "pyth_qmax": null,
+   "side": "28.965984369615528808347",
+   "class": "continuous",
+   "n": 815
+  },
+  {
+   "squares": 816,
+   "distinct_angles": 167,
+   "pyth_qmax": null,
+   "side": "28.978617989537499999999",
+   "class": "continuous",
+   "n": 816
+  },
+  {
+   "squares": 817,
+   "distinct_angles": 68,
+   "pyth_qmax": null,
+   "side": "28.993201312252103380768",
+   "class": "continuous",
+   "n": 817
+  },
+  {
+   "squares": 818,
+   "distinct_angles": 108,
+   "pyth_qmax": null,
+   "side": "28.998652868464103380768",
+   "class": "continuous",
+   "n": 818
+  },
+  {
+   "squares": 819,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 819
+  },
+  {
+   "squares": 820,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 820
+  },
+  {
+   "squares": 821,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 821
+  },
+  {
+   "squares": 822,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 822
+  },
+  {
+   "squares": 823,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 823
+  },
+  {
+   "squares": 824,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 824
+  },
+  {
+   "squares": 825,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 825
+  },
+  {
+   "squares": 826,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 826
+  },
+  {
+   "squares": 827,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 827
+  },
+  {
+   "squares": 828,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 828
+  },
+  {
+   "squares": 829,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 829
+  },
+  {
+   "squares": 830,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 830
+  },
+  {
+   "squares": 831,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 831
+  },
+  {
+   "squares": 832,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 832
+  },
+  {
+   "squares": 833,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 833
+  },
+  {
+   "squares": 834,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 834
+  },
+  {
+   "squares": 835,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 835
+  },
+  {
+   "squares": 836,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 836
+  },
+  {
+   "squares": 837,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 837
+  },
+  {
+   "squares": 838,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 838
+  },
+  {
+   "squares": 839,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 839
+  },
+  {
+   "squares": 840,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 840
+  },
+  {
+   "squares": 841,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 841
+  },
+  {
+   "squares": 842,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 842
+  },
+  {
+   "squares": 843,
+   "distinct_angles": 11,
+   "pyth_qmax": null,
+   "side": "29.535533907866103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "26 + 5/2\u221a2",
+   "n": 843
+  },
+  {
+   "squares": 844,
+   "distinct_angles": 11,
+   "pyth_qmax": null,
+   "side": "29.535533907866103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "26 + 5/2\u221a2",
+   "n": 844
+  },
+  {
+   "squares": 845,
+   "distinct_angles": 74,
+   "pyth_qmax": null,
+   "side": "29.571428573361103380768",
+   "class": "continuous",
+   "n": 845
+  },
+  {
+   "squares": 846,
+   "distinct_angles": 23,
+   "pyth_qmax": null,
+   "side": "29.583782192085",
+   "class": "continuous",
+   "n": 846
+  },
+  {
+   "squares": 847,
+   "distinct_angles": 47,
+   "pyth_qmax": null,
+   "side": "29.606601719731103380768",
+   "class": "continuous",
+   "n": 847
+  },
+  {
+   "squares": 848,
+   "distinct_angles": 145,
+   "pyth_qmax": null,
+   "side": "29.623065216905",
+   "class": "continuous",
+   "n": 848
+  },
+  {
+   "squares": 849,
+   "distinct_angles": 54,
+   "pyth_qmax": null,
+   "side": "29.637029560801",
+   "class": "continuous",
+   "n": 849
+  },
+  {
+   "squares": 850,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 850
+  },
+  {
+   "squares": 851,
+   "distinct_angles": 309,
+   "pyth_qmax": null,
+   "side": "29.684143608297103380768",
+   "class": "continuous",
+   "n": 851
+  },
+  {
+   "squares": 852,
+   "distinct_angles": 414,
+   "pyth_qmax": null,
+   "side": "29.699596305063103380768",
+   "class": "continuous",
+   "n": 852
+  },
+  {
+   "squares": 853,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 853
+  },
+  {
+   "squares": 854,
+   "distinct_angles": 11,
+   "pyth_qmax": null,
+   "side": "29.727922063291103380768",
+   "class": "continuous",
+   "n": 854
+  },
+  {
+   "squares": 855,
+   "distinct_angles": 439,
+   "pyth_qmax": null,
+   "side": "29.733979870364051690384",
+   "class": "continuous",
+   "n": 855
+  },
+  {
+   "squares": 856,
+   "distinct_angles": 481,
+   "pyth_qmax": null,
+   "side": "29.745619612603551690384",
+   "class": "continuous",
+   "n": 856
+  },
+  {
+   "squares": 857,
+   "distinct_angles": 275,
+   "pyth_qmax": null,
+   "side": "29.769230771164758029093",
+   "class": "continuous",
+   "n": 857
+  },
+  {
+   "squares": 858,
+   "distinct_angles": 529,
+   "pyth_qmax": null,
+   "side": "29.781136523296103380768",
+   "class": "continuous",
+   "n": 858
+  },
+  {
+   "squares": 859,
+   "distinct_angles": 157,
+   "pyth_qmax": null,
+   "side": "29.792137353893",
+   "class": "continuous",
+   "n": 859
+  },
+  {
+   "squares": 860,
+   "distinct_angles": 513,
+   "pyth_qmax": null,
+   "side": "29.802428718866578990069",
+   "class": "continuous",
+   "n": 860
+  },
+  {
+   "squares": 861,
+   "distinct_angles": 48,
+   "pyth_qmax": null,
+   "side": "29.823848743123103380768",
+   "class": "continuous",
+   "n": 861
+  },
+  {
+   "squares": 862,
+   "distinct_angles": 68,
+   "pyth_qmax": null,
+   "side": "29.836564972557103380768",
+   "class": "continuous",
+   "n": 862
+  },
+  {
+   "squares": 863,
+   "distinct_angles": 36,
+   "pyth_qmax": null,
+   "side": "29.844288409109285466117",
+   "class": "continuous",
+   "n": 863
+  },
+  {
+   "squares": 864,
+   "distinct_angles": 121,
+   "pyth_qmax": null,
+   "side": "29.853031382156103380768",
+   "class": "continuous",
+   "n": 864
+  },
+  {
+   "squares": 865,
+   "distinct_angles": 140,
+   "pyth_qmax": null,
+   "side": "29.869309170453103380768",
+   "class": "continuous",
+   "n": 865
+  },
+  {
+   "squares": 866,
+   "distinct_angles": 103,
+   "pyth_qmax": null,
+   "side": "29.879065193160103380768",
+   "class": "continuous",
+   "n": 866
+  },
+  {
+   "squares": 867,
+   "distinct_angles": 135,
+   "pyth_qmax": null,
+   "side": "29.884868653844103380768",
+   "class": "continuous",
+   "n": 867
+  },
+  {
+   "squares": 868,
+   "distinct_angles": 139,
+   "pyth_qmax": null,
+   "side": "29.899211092592103380768",
+   "class": "continuous",
+   "n": 868
+  },
+  {
+   "squares": 869,
+   "distinct_angles": 191,
+   "pyth_qmax": null,
+   "side": "29.912210133078103380768",
+   "class": "continuous",
+   "n": 869
+  },
+  {
+   "squares": 870,
+   "distinct_angles": 401,
+   "pyth_qmax": null,
+   "side": "29.924791453902103380768",
+   "class": "continuous",
+   "n": 870
+  },
+  {
+   "squares": 871,
+   "distinct_angles": 115,
+   "pyth_qmax": null,
+   "side": "29.932818098424103380768",
+   "class": "continuous",
+   "n": 871
+  },
+  {
+   "squares": 872,
+   "distinct_angles": 398,
+   "pyth_qmax": null,
+   "side": "29.940885411508103380768",
+   "class": "continuous",
+   "n": 872
+  },
+  {
+   "squares": 873,
+   "distinct_angles": 79,
+   "pyth_qmax": null,
+   "side": "29.965376618339103380768",
+   "class": "continuous",
+   "n": 873
+  },
+  {
+   "squares": 874,
+   "distinct_angles": 54,
+   "pyth_qmax": null,
+   "side": "29.972917404974103380768",
+   "class": "continuous",
+   "n": 874
+  },
+  {
+   "squares": 875,
+   "distinct_angles": 103,
+   "pyth_qmax": null,
+   "side": "29.988927001586103380768",
+   "class": "continuous",
+   "n": 875
+  },
+  {
+   "squares": 876,
+   "distinct_angles": 92,
+   "pyth_qmax": null,
+   "side": "29.997571907989103380768",
+   "class": "continuous",
+   "n": 876
+  },
+  {
+   "squares": 877,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 877
+  },
+  {
+   "squares": 878,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 878
+  },
+  {
+   "squares": 879,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 879
+  },
+  {
+   "squares": 880,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 880
+  },
+  {
+   "squares": 881,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 881
+  },
+  {
+   "squares": 882,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 882
+  },
+  {
+   "squares": 883,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 883
+  },
+  {
+   "squares": 884,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 884
+  },
+  {
+   "squares": 885,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 885
+  },
+  {
+   "squares": 886,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 886
+  },
+  {
+   "squares": 887,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 887
+  },
+  {
+   "squares": 888,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 888
+  },
+  {
+   "squares": 889,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 889
+  },
+  {
+   "squares": 890,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 890
+  },
+  {
+   "squares": 891,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 891
+  },
+  {
+   "squares": 892,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 892
+  },
+  {
+   "squares": 893,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 893
+  },
+  {
+   "squares": 894,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 894
+  },
+  {
+   "squares": 895,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 895
+  },
+  {
+   "squares": 896,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 896
+  },
+  {
+   "squares": 897,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 897
+  },
+  {
+   "squares": 898,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 898
+  },
+  {
+   "squares": 899,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 899
+  },
+  {
+   "squares": 900,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 900
+  },
+  {
+   "squares": 901,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 901
+  },
+  {
+   "squares": 902,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 902
+  },
+  {
+   "squares": 903,
+   "distinct_angles": 25,
+   "pyth_qmax": null,
+   "side": "30.535533907870103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "27 + 5/2\u221a2",
+   "n": 903
+  },
+  {
+   "squares": 904,
+   "distinct_angles": 10,
+   "pyth_qmax": null,
+   "side": "30.563625742366103380768",
+   "class": "continuous",
+   "n": 904
+  },
+  {
+   "squares": 905,
+   "distinct_angles": 48,
+   "pyth_qmax": null,
+   "side": "30.583782192087",
+   "class": "continuous",
+   "n": 905
+  },
+  {
+   "squares": 906,
+   "distinct_angles": 31,
+   "pyth_qmax": null,
+   "side": "30.591378147436103380768",
+   "class": "continuous",
+   "n": 906
+  },
+  {
+   "squares": 907,
+   "distinct_angles": 60,
+   "pyth_qmax": null,
+   "side": "30.618367920197103380768",
+   "class": "continuous",
+   "n": 907
+  },
+  {
+   "squares": 908,
+   "distinct_angles": 56,
+   "pyth_qmax": null,
+   "side": "30.637029560803",
+   "class": "continuous",
+   "n": 908
+  },
+  {
+   "squares": 909,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 909
+  },
+  {
+   "squares": 910,
+   "distinct_angles": 157,
+   "pyth_qmax": null,
+   "side": "30.679381250716051690384",
+   "class": "continuous",
+   "n": 910
+  },
+  {
+   "squares": 911,
+   "distinct_angles": 213,
+   "pyth_qmax": null,
+   "side": "30.695622172883103380768",
+   "class": "continuous",
+   "n": 911
+  },
+  {
+   "squares": 912,
+   "distinct_angles": 97,
+   "pyth_qmax": null,
+   "side": "30.703260298903103380768",
+   "class": "continuous",
+   "n": 912
+  },
+  {
+   "squares": 913,
+   "distinct_angles": 240,
+   "pyth_qmax": null,
+   "side": "30.721540004195103380768",
+   "class": "continuous",
+   "n": 913
+  },
+  {
+   "squares": 914,
+   "distinct_angles": 543,
+   "pyth_qmax": null,
+   "side": "30.733979870365499999999",
+   "class": "continuous",
+   "n": 914
+  },
+  {
+   "squares": 915,
+   "distinct_angles": 396,
+   "pyth_qmax": null,
+   "side": "30.745602739704103380768",
+   "class": "continuous",
+   "n": 915
+  },
+  {
+   "squares": 916,
+   "distinct_angles": 247,
+   "pyth_qmax": null,
+   "side": "30.752189774164051690384",
+   "class": "continuous",
+   "n": 916
+  },
+  {
+   "squares": 917,
+   "distinct_angles": 227,
+   "pyth_qmax": null,
+   "side": "30.766025441036103380768",
+   "class": "continuous",
+   "n": 917
+  },
+  {
+   "squares": 918,
+   "distinct_angles": 272,
+   "pyth_qmax": null,
+   "side": "30.786744709070",
+   "class": "continuous",
+   "n": 918
+  },
+  {
+   "squares": 919,
+   "distinct_angles": 240,
+   "pyth_qmax": null,
+   "side": "30.796505607770103380768",
+   "class": "continuous",
+   "n": 919
+  },
+  {
+   "squares": 920,
+   "distinct_angles": 102,
+   "pyth_qmax": null,
+   "side": "30.805420033408103380768",
+   "class": "continuous",
+   "n": 920
+  },
+  {
+   "squares": 921,
+   "distinct_angles": 240,
+   "pyth_qmax": null,
+   "side": "30.825846290174103380768",
+   "class": "continuous",
+   "n": 921
+  },
+  {
+   "squares": 922,
+   "distinct_angles": 266,
+   "pyth_qmax": null,
+   "side": "30.834719600915179860538",
+   "class": "continuous",
+   "n": 922
+  },
+  {
+   "squares": 923,
+   "distinct_angles": 49,
+   "pyth_qmax": null,
+   "side": "30.847246929078103380768",
+   "class": "continuous",
+   "n": 923
+  },
+  {
+   "squares": 924,
+   "distinct_angles": 46,
+   "pyth_qmax": null,
+   "side": "30.855385742619",
+   "class": "continuous",
+   "n": 924
+  },
+  {
+   "squares": 925,
+   "distinct_angles": 105,
+   "pyth_qmax": null,
+   "side": "30.864763224078103380768",
+   "class": "continuous",
+   "n": 925
+  },
+  {
+   "squares": 926,
+   "distinct_angles": 133,
+   "pyth_qmax": null,
+   "side": "30.880866025273168153848",
+   "class": "continuous",
+   "n": 926
+  },
+  {
+   "squares": 927,
+   "distinct_angles": 135,
+   "pyth_qmax": null,
+   "side": "30.887119126552103380768",
+   "class": "continuous",
+   "n": 927
+  },
+  {
+   "squares": 928,
+   "distinct_angles": 149,
+   "pyth_qmax": null,
+   "side": "30.892820410863103380768",
+   "class": "continuous",
+   "n": 928
+  },
+  {
+   "squares": 929,
+   "distinct_angles": 117,
+   "pyth_qmax": null,
+   "side": "30.908562777715103380768",
+   "class": "continuous",
+   "n": 929
+  },
+  {
+   "squares": 930,
+   "distinct_angles": 218,
+   "pyth_qmax": null,
+   "side": "30.917469095734103380768",
+   "class": "continuous",
+   "n": 930
+  },
+  {
+   "squares": 931,
+   "distinct_angles": 443,
+   "pyth_qmax": null,
+   "side": "30.932818098426103380768",
+   "class": "continuous",
+   "n": 931
+  },
+  {
+   "squares": 932,
+   "distinct_angles": 119,
+   "pyth_qmax": null,
+   "side": "30.940885411510103380768",
+   "class": "continuous",
+   "n": 932
+  },
+  {
+   "squares": 933,
+   "distinct_angles": 136,
+   "pyth_qmax": null,
+   "side": "30.953073868025103380768",
+   "class": "continuous",
+   "n": 933
+  },
+  {
+   "squares": 934,
+   "distinct_angles": 75,
+   "pyth_qmax": null,
+   "side": "30.972852553058103380768",
+   "class": "continuous",
+   "n": 934
+  },
+  {
+   "squares": 935,
+   "distinct_angles": 140,
+   "pyth_qmax": null,
+   "side": "30.980057459508295118705",
+   "class": "continuous",
+   "n": 935
+  },
+  {
+   "squares": 936,
+   "distinct_angles": 108,
+   "pyth_qmax": null,
+   "side": "30.997707704106103380768",
+   "class": "continuous",
+   "n": 936
+  },
+  {
+   "squares": 937,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 937
+  },
+  {
+   "squares": 938,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 938
+  },
+  {
+   "squares": 939,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 939
+  },
+  {
+   "squares": 940,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 940
+  },
+  {
+   "squares": 941,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 941
+  },
+  {
+   "squares": 942,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 942
+  },
+  {
+   "squares": 943,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 943
+  },
+  {
+   "squares": 944,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 944
+  },
+  {
+   "squares": 945,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 945
+  },
+  {
+   "squares": 946,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 946
+  },
+  {
+   "squares": 947,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 947
+  },
+  {
+   "squares": 948,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 948
+  },
+  {
+   "squares": 949,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 949
+  },
+  {
+   "squares": 950,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 950
+  },
+  {
+   "squares": 951,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 951
+  },
+  {
+   "squares": 952,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 952
+  },
+  {
+   "squares": 953,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 953
+  },
+  {
+   "squares": 954,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 954
+  },
+  {
+   "squares": 955,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 955
+  },
+  {
+   "squares": 956,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 956
+  },
+  {
+   "squares": 957,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 957
+  },
+  {
+   "squares": 958,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 958
+  },
+  {
+   "squares": 959,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 959
+  },
+  {
+   "squares": 960,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 960
+  },
+  {
+   "squares": 961,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 961
+  },
+  {
+   "squares": 962,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 962
+  },
+  {
+   "squares": 963,
+   "distinct_angles": 24,
+   "pyth_qmax": null,
+   "side": "31.535533907870103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "28 + 5/2\u221a2",
+   "n": 963
+  },
+  {
+   "squares": 964,
+   "distinct_angles": 24,
+   "pyth_qmax": null,
+   "side": "31.535533907870103380768",
+   "class": "Q(sqrt2) side",
+   "side_exact": "28 + 5/2\u221a2",
+   "n": 964
+  },
+  {
+   "squares": 965,
+   "distinct_angles": 19,
+   "pyth_qmax": null,
+   "side": "31.563625654262103380768",
+   "class": "continuous",
+   "n": 965
+  },
+  {
+   "squares": 966,
+   "distinct_angles": 42,
+   "pyth_qmax": null,
+   "side": "31.583782192089497503353",
+   "class": "continuous",
+   "n": 966
+  },
+  {
+   "squares": 967,
+   "distinct_angles": 41,
+   "pyth_qmax": null,
+   "side": "31.591378147435103380768",
+   "class": "continuous",
+   "n": 967
+  },
+  {
+   "squares": 968,
+   "distinct_angles": 276,
+   "pyth_qmax": null,
+   "side": "31.612884694820",
+   "class": "continuous",
+   "n": 968
+  },
+  {
+   "squares": 969,
+   "distinct_angles": 69,
+   "pyth_qmax": null,
+   "side": "31.633982504039155071153",
+   "class": "continuous",
+   "n": 969
+  },
+  {
+   "squares": 970,
+   "distinct_angles": 404,
+   "pyth_qmax": null,
+   "side": "31.639058840167055315326",
+   "class": "continuous",
+   "n": 970
+  },
+  {
+   "squares": 971,
+   "distinct_angles": 431,
+   "pyth_qmax": null,
+   "side": "31.678779877281103380768",
+   "class": "continuous",
+   "n": 971
+  },
+  {
+   "squares": 972,
+   "distinct_angles": 96,
+   "pyth_qmax": null,
+   "side": "31.687291894188103380768",
+   "class": "continuous",
+   "n": 972
+  },
+  {
+   "squares": 973,
+   "distinct_angles": 76,
+   "pyth_qmax": null,
+   "side": "31.697126125435103380768",
+   "class": "continuous",
+   "n": 973
+  },
+  {
+   "squares": 974,
+   "distinct_angles": 2,
+   "pyth_qmax": null,
+   "class": "Q(sqrt2) pose",
+   "n": 974
+  },
+  {
+   "squares": 975,
+   "distinct_angles": 199,
+   "pyth_qmax": null,
+   "side": "31.721540004196103380768",
+   "class": "continuous",
+   "n": 975
+  },
+  {
+   "squares": 976,
+   "distinct_angles": 528,
+   "pyth_qmax": null,
+   "side": "31.733979870368103380768",
+   "class": "continuous",
+   "n": 976
+  },
+  {
+   "squares": 977,
+   "distinct_angles": 323,
+   "pyth_qmax": null,
+   "side": "31.745640234697306332433",
+   "class": "continuous",
+   "n": 977
+  },
+  {
+   "squares": 978,
+   "distinct_angles": 208,
+   "pyth_qmax": null,
+   "side": "31.759857951166568877403",
+   "class": "continuous",
+   "n": 978
+  },
+  {
+   "squares": 979,
+   "distinct_angles": 330,
+   "pyth_qmax": null,
+   "side": "31.774254526195145759872",
+   "class": "continuous",
+   "n": 979
+  },
+  {
+   "squares": 980,
+   "distinct_angles": 289,
+   "pyth_qmax": null,
+   "side": "31.790179519545999809119",
+   "class": "continuous",
+   "n": 980
+  },
+  {
+   "squares": 981,
+   "distinct_angles": 178,
+   "pyth_qmax": null,
+   "side": "31.796405646535374243261",
+   "class": "continuous",
+   "n": 981
+  },
+  {
+   "squares": 982,
+   "distinct_angles": 251,
+   "pyth_qmax": null,
+   "side": "31.810539459535469152189",
+   "class": "continuous",
+   "n": 982
+  },
+  {
+   "squares": 983,
+   "distinct_angles": 94,
+   "pyth_qmax": null,
+   "side": "31.816856500370252117312",
+   "class": "continuous",
+   "n": 983
+  },
+  {
+   "squares": 984,
+   "distinct_angles": 336,
+   "pyth_qmax": null,
+   "side": "31.836608835168792636682",
+   "class": "continuous",
+   "n": 984
+  },
+  {
+   "squares": 985,
+   "distinct_angles": 249,
+   "pyth_qmax": null,
+   "side": "31.844831970117158131499",
+   "class": "continuous",
+   "n": 985
+  },
+  {
+   "squares": 986,
+   "distinct_angles": 62,
+   "pyth_qmax": null,
+   "side": "31.859293998710051690384",
+   "class": "continuous",
+   "n": 986
+  },
+  {
+   "squares": 987,
+   "distinct_angles": 105,
+   "pyth_qmax": null,
+   "side": "31.866034809951103380768",
+   "class": "continuous",
+   "n": 987
+  },
+  {
+   "squares": 988,
+   "distinct_angles": 188,
+   "pyth_qmax": null,
+   "side": "31.875586633556051690384",
+   "class": "continuous",
+   "n": 988
+  },
+  {
+   "squares": 989,
+   "distinct_angles": 293,
+   "pyth_qmax": null,
+   "side": "31.889013674749520246381",
+   "class": "continuous",
+   "n": 989
+  },
+  {
+   "squares": 990,
+   "distinct_angles": 155,
+   "pyth_qmax": null,
+   "side": "31.895233803031103380768",
+   "class": "continuous",
+   "n": 990
+  },
+  {
+   "squares": 991,
+   "distinct_angles": 161,
+   "pyth_qmax": null,
+   "side": "31.901969565910103380768",
+   "class": "continuous",
+   "n": 991
+  },
+  {
+   "squares": 992,
+   "distinct_angles": 228,
+   "pyth_qmax": null,
+   "side": "31.919957429565103380768",
+   "class": "continuous",
+   "n": 992
+  },
+  {
+   "squares": 993,
+   "distinct_angles": 319,
+   "pyth_qmax": null,
+   "side": "31.924791464626033611697",
+   "class": "continuous",
+   "n": 993
+  },
+  {
+   "squares": 994,
+   "distinct_angles": 467,
+   "pyth_qmax": null,
+   "side": "31.940885411512103380768",
+   "class": "continuous",
+   "n": 994
+  },
+  {
+   "squares": 995,
+   "distinct_angles": 69,
+   "pyth_qmax": null,
+   "side": "31.954417741939103380768",
+   "class": "continuous",
+   "n": 995
+  },
+  {
+   "squares": 996,
+   "distinct_angles": 273,
+   "pyth_qmax": null,
+   "side": "31.959462634583094408599",
+   "class": "continuous",
+   "n": 996
+  },
+  {
+   "squares": 997,
+   "distinct_angles": 101,
+   "pyth_qmax": null,
+   "side": "31.979831683008103380768",
+   "class": "continuous",
+   "n": 997
+  },
+  {
+   "squares": 998,
+   "distinct_angles": 998,
+   "pyth_qmax": null,
+   "side": "31.986238620411556971693",
+   "class": "continuous",
+   "n": 998
+  },
+  {
+   "squares": 999,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 999
+  },
+  {
+   "squares": 1000,
+   "distinct_angles": 1,
+   "pyth_qmax": 1,
+   "class": "Q-grid",
+   "n": 1000
+  }
+ ]
+}

@@ -1252,3 +1252,87 @@ to test "domain-agnostic" harder than two domains can.
 
 Entries `48-FIELD-TOWER-AND-WHEELS.md`; `47` §1.4 carries the correction note;
 records `31`–`48`.
+
+## Run 86 — a third domain, an induction that failed, a complete field census
+
+**What this run is.** Three of run 85's open items, taken in order: register a third,
+structurally distinct domain on the same wheel engine; try to promote the lifted atoms
+(n = 5, 10, 40) from atoms into closed-form families; and close n = 126 plus classify
+every remaining row. One of the three produced a negative, and the negative is the
+result. **No row changed, no score claimed, `submission.csv` untouched.**
+
+**Third domain: lattice shells.** `scripts/lattice_shells.py` registers `Z^d`, `D4` and
+`E8` on the same engine with no arithmetic in common with the packing domain: vectors
+are held *doubled* (a point of (1/2)Z^d is a tuple of ints `y` meaning y/2), so norms
+are `sum(y*y)/4`, inner products integer sums, and theta coefficients exact counts.
+The five slots get new meanings — `Tile` = a shell, `Frame` = the minimal shell and its
+kissing graph, `Strip` = the ball as annuli, `Glue` = a direct sum, `SymmetryFold` =
+`v -> -v` — and the witnesses are exact-norm, kissing-topology, theta-conservation and
+an independent 70-digit Decimal recomputation. Theta series are computed, not looked
+up: Z^2 1,4,4,0,4,8,0; Z^3 1,6,12,8,6,24,24; Z^4 1,8,24,32,24,48,96; D4
+1,0,24,0,24,0,96; E8 1,0,240,0,2160, with kissing numbers 4/24/240 and root degrees
+8/56 (Z^2 has no root graph). The wheel spins **24 of 28 cells certified**, and the
+four refusals are laws: `empty_shell` for D4 at m = 3 and E8 at m = 1 (even lattices,
+odd norm), `rank_budget` for Z^2 (+) E8 (rank 10) and Z^4 (+) E8 (rank 12).
+`theta(A (+) B) = theta(A)*theta(B)` is checked cell by cell: Z^2 (+) D4 enumerates
+(1,4,28,96,124), equal to the convolution of the summands' theta series at every m.
+
+**Friction, recorded rather than smoothed.** Four places where the engine was only
+*conventionally* domain-agnostic: (1) a real bug — running `glm_wheels.py` as a script
+makes it `__main__`, so a domain module importing it gets a second module object with
+different `Claim`/`Refusal` classes and `except Refusal` silently fails; fixed with one
+`sys.modules.setdefault` line; (2) `Wheel.spin`'s row schema is packing-shaped (it
+reads `n`, `laws["extent"]`, `meta["beats"]/["gain"]`); (3) `DecimalWitness` assumes a
+`Quad` scalar, so the lattice domain needed its own Decimal witness even though the
+witness *protocol* generalized; (4) "four witnesses" is per family — the kissing
+witness applies only to `Frame`/`Atom`, so a `Glue` cell has three kinds of evidence,
+and control 16 asserts three rather than pretending otherwise.
+
+**The induction, and why it failed.** `scripts/grammar_induction.py` asks one exact
+question: is a lifted atom a composition of the declared vocabulary? A template occurs
+iff one of the five isometries of the unit square — identity, the two axis
+reflections, the diagonal reflection, a quarter turn — carries its centres *and its
+words* into the state under a single translation; a cover is a set of disjoint
+occurrences; only an exact cover counts. Over 45 states (the three atoms plus every
+related lifted row that lifts inside the budget) and 13 templates, the answer is
+**1 exact decomposition in 45** — n = 5 via `Pocket1`, which is the closed form we
+already had and is the same sentence as the atom. `Strip2,1` and `Glue1/2` occur in
+zero states; `Pocket1`/`Fold1` occur only in n = 5 itself. What the search does show is
+precise: the best cover is always `Tile1` and it covers *exactly the axis squares* —
+n = 10 8/10 (2 diamonds), n = 40 24/40 (16 diamonds), n = 19 11/19, n = 26 17/26,
+n = 27 22/27, mean 0.7324 — and n = 40 additionally contains four exact 2x2 `Tile2`
+blocks (16 squares). So the atoms are irreducible over the *families* while being
+trivially decomposable over the *alphabet* (Tile (+) diamond, N = a + d). The missing
+piece is named: a diamond-placement primitive, because `Pocket` and `Strip` embed
+diamonds only in their own fixed patterns and these rows tile irregular diamond sets.
+
+**n = 126 closes on a distinction.** The lift places 124 squares and *recovers square 98
+exactly* as `(5 - 2 sqrt2, 19/2)` — height 2, missed before because its neighbour
+needed a third-denominator component — leaving square 120. That square touches exactly
+two squares and both contacts constrain the *same* SAT axis, so the two equations are
+identical: `y - x = 11/2 + (5/2) sqrt2`, rank 1. The stored pose satisfies it to
+1.5e-9, and the exact feasible set on that line is a segment
+`x in [1.3357864376269049, 1.3713203435596426]` of width 0.0355339059, with the left
+end bound by partner 109 and the right end by 98. The cage at tolerance 1e-7 and 1e-4 is
+**empty** (the stored coordinate is not a small-height field element), but the cage at
+large tolerance contains **173** Q(sqrt2) placements at clearance 0 (denominators
+<= 32, heights <= 8), the nearest at `x = 43/32`, L1 distance 8.2e-3. The honest ledger
+is therefore two numbers: **99/100 poses lifted exactly**, and **100/100 rows whose
+contact topology has a Q(sqrt2) realisation**. They are different claims and must not
+be merged.
+
+**The 1,000-row field census.** `scripts/field_triage.py` gives every row one exact
+class, with 70-digit Decimal trigonometry (Taylor series, exact-precision range
+reduction, no float), a continued-fraction test for rational `t = tan(theta/2)` with a
+declared 1e-12 residual, and the exact `recover_scalar` side test on a deliberately
+small lattice (denominators <= 8, height <= 4). Result: **447** grid, **99** Q(sqrt2)
+pose, **18** Q(sqrt2) side (including n = 126 at `15/2 + 3 sqrt2`), **5** Q(sqrt7) side
+(n = 18 at `7/2 + sqrt7/2`, then 53, 151, 234, 747), **3** Q(sqrt5) side (n = 335, 373,
+454 at `99/8 + 23/8 sqrt5` and neighbours), **4** rational-t (n = 50, 171, 198 with t
+denominators <= 3; n = 230 with <= 7) and **424** continuous. The 26 side-field rows are
+the new residue: exact boxes, no rotation argument, no wheel cell.
+
+**Deferred, and named.** A diamond-placement primitive with the induction search as its
+acceptance test; a Q(sqrt7) wheel for the side-field rows (a one-parameter change to
+the same engine); a fourth domain as the next stress test. Entries
+`49-THIRD-DOMAIN-AND-FIELD-CENSUS.md`; records `31`–`49`.

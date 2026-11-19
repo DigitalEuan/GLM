@@ -1,7 +1,8 @@
 {
- "run": 85,
- "instrument": "glm_wheels.py + exact_field.py + qsqrt2.py",
+ "run": 86,
+ "instrument": "glm_wheels.py + lattice_shells.py + exact_field.py",
  "domains": [
+  "lattice_shells",
   "spatial_geometry",
   "sturmian_sequences"
  ],
@@ -1243,10 +1244,873 @@
      "gain": null
     }
    ]
+  },
+  "lattice": {
+   "summary": {
+    "cells": 28,
+    "certified": 24,
+    "refused": 4,
+    "refusal_laws": {
+     "empty_shell": 2,
+     "rank_budget": 2
+    }
+   },
+   "rows": [
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z1",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "2 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 2 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "2 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "2",
+      "norm": "1",
+      "rank": "1"
+     },
+     "n": 2,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z2",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 4 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "norm": "1",
+      "rank": "2"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z2",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 4 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "norm": "2",
+      "rank": "2"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z3",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "6 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 6 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "6 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "6",
+      "norm": "1",
+      "rank": "3"
+     },
+     "n": 6,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z4",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "norm": "2",
+      "rank": "4"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "norm": "2",
+      "rank": "4"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(4) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 16 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "norm": "4",
+      "rank": "4"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "6"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "96 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(6) = 96 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "96 vectors, all |y|^2 == 24 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "96",
+      "norm": "6",
+      "rank": "4"
+     },
+     "n": 96,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "E8",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 240 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "240",
+      "norm": "2",
+      "rank": "8"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "E8",
+      "m": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "2160 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(4) = 2160 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "2160 vectors, all |y|^2 == 16 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "2160",
+      "norm": "4",
+      "rank": "8"
+     },
+     "n": 2160,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Frame",
+     "params": {
+      "key": "Z2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 4 (claimed 4), degree set None, neighbours of one root n/a (not a root lattice)"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 4 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "kissing": "4",
+      "min_norm": "1",
+      "root_degree": "n/a (not a root lattice)"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Frame",
+     "params": {
+      "key": "D4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 24 (claimed 24), degree set 8, neighbours of one root 8"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 24 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "kissing": "24",
+      "min_norm": "2",
+      "root_degree": "8"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Frame",
+     "params": {
+      "key": "E8"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 240 (claimed 240), degree set 56, neighbours of one root 56"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 240 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "kissing": "240",
+      "min_norm": "2",
+      "root_degree": "56"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Strip",
+     "params": {
+      "key": "Z2",
+      "M": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "ball: 9 vectors over 4 shells, 0 off-norm or off-lattice"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "ball 9 == sum of 4 shells"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "shell counts_dec (1, 4, 4, 0)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "ball": "9",
+      "shells": "4",
+      "theta": "(1, 4, 4, 0)"
+     },
+     "n": 9,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Strip",
+     "params": {
+      "key": "D4",
+      "M": "6"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "ball: 145 vectors over 7 shells, 0 off-norm or off-lattice"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "ball 145 == sum of 7 shells"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "shell counts_dec (1, 0, 24, 0, 24, 0, 96)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "ball": "145",
+      "shells": "7",
+      "theta": "(1, 0, 24, 0, 24, 0, 96)"
+     },
+     "n": 145,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Strip",
+     "params": {
+      "key": "E8",
+      "M": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "ball: 241 vectors over 3 shells, 0 off-norm or off-lattice"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "ball 241 == sum of 3 shells"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "shell counts_dec (1, 0, 240)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "ball": "241",
+      "shells": "3",
+      "theta": "(1, 0, 240)"
+     },
+     "n": 241,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z2",
+      "key_b": "D4",
+      "M": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "253 pairs, every pair at norm 4m"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "enumerated (1, 4, 28, 96, 124) == convolution (1, 4, 28, 96, 124)"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "theta_dec (1, 4, 28, 96, 124)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "6",
+      "theta": "(1, 4, 28, 96, 124)",
+      "shell0": "1"
+     },
+     "n": 253,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z4",
+      "key_b": "D4",
+      "M": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "281 pairs, every pair at norm 4m"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "enumerated (1, 8, 48, 224) == convolution (1, 8, 48, 224)"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "theta_dec (1, 8, 48, 224)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "8",
+      "theta": "(1, 8, 48, 224)",
+      "shell0": "1"
+     },
+     "n": 281,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z2",
+      "key_b": "E8",
+      "M": "2"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "rank_budget",
+      "detail": "Z2(+)E8 has rank 10 > 8: the shell walk is not a cell"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "lattice",
+     "family": "SymmetryFold",
+     "params": {
+      "key": "Z2",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 4 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "pairs": "2",
+      "even": "0"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "SymmetryFold",
+     "params": {
+      "key": "D4",
+      "m": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(4) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 16 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "pairs": "12",
+      "even": "0"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "SymmetryFold",
+     "params": {
+      "key": "E8",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 240 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "240",
+      "pairs": "120",
+      "even": "0"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Atom",
+     "params": {
+      "key": "Z2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 4 (claimed 4), degree set None, neighbours of one root n/a (not a root lattice)"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 4 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "2",
+      "min_norm": "1",
+      "kissing": "4"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Atom",
+     "params": {
+      "key": "D4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 24 (claimed 24), degree set 8, neighbours of one root 8"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 24 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "4",
+      "min_norm": "2",
+      "kissing": "24"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Atom",
+     "params": {
+      "key": "E8"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 240 (claimed 240), degree set 56, neighbours of one root 56"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 240 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "8",
+      "min_norm": "2",
+      "kissing": "240"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "3"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "empty_shell",
+      "detail": "D4 has no vectors of norm^2 3 (even lattice, odd norm)"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "E8",
+      "m": "1"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "empty_shell",
+      "detail": "E8 has no vectors of norm^2 1 (even lattice, odd norm)"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z4",
+      "key_b": "E8",
+      "M": "2"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "rank_budget",
+      "detail": "Z4(+)E8 has rank 12 > 8: the shell walk is not a cell"
+     },
+     "laws": {}
+    }
+   ]
   }
  },
  "audit": {
-  "checked": 73,
+  "checked": 76,
   "offenders": [],
   "exempt": [
    "selftest"

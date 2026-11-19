@@ -82,6 +82,11 @@ import exact_field as EF          # noqa: E402
 import qsqrt2 as Q                # noqa: E402
 import sqscore as SQ              # noqa: E402
 
+# Running this file directly makes it __main__ while a domain module would import
+# a *second* copy under the name "glm_wheels" -- with different Claim/Refusal
+# classes, so `except Refusal` would not catch.  One canonical module object fixes it.
+sys.modules.setdefault("glm_wheels", sys.modules[__name__])
+
 getcontext().prec = 70
 Q2 = Q.Q2
 ZERO, HALF = Q2(0), Q.HALF
@@ -726,6 +731,12 @@ def build_engine():
         Cell("Glue", {"t": str(alpha_irr), "r": "1/2", "n": 21}),
         Cell("SymmetryFold", {"t": str(alpha_irr), "r": "0", "n": 21}),
     ]))
+
+    # third domain: lattice shells.  It brings its own alphabet, its own four
+    # witnesses and its own refusal laws; the engine needs no branch for it.
+    import lattice_shells as LAT        # deferred: lattice_shells imports this module
+    eng.register(LAT.domain())
+    eng.add_wheel(LAT.wheel())
     return eng
 
 
@@ -1148,7 +1159,66 @@ def selftest() -> int:
     print(f"control 12 — the 2D cage recovers the freed square exactly ({pt}) and "
           f"returns nothing when the cage is empty")
 
-    print("selftest: OK (12 controls)")
+    # 13. a third, structurally distinct domain registers the same slots
+    import lattice_shells as LAT
+    lat = eng.domains["lattice_shells"]
+    shared3 = (set(pk.combinators) & set(sq.combinators)) & set(lat.combinators)
+    assert shared3 >= {"Tile", "Strip", "Glue", "SymmetryFold"}, shared3
+    assert shared3 == {"Tile", "Strip", "Glue", "SymmetryFold"}, shared3
+    print(f"control 13 — three domains share the engine slots {sorted(shared3)}; "
+          f"lattice adds {sorted(set(lat.combinators) - shared3)}")
+
+    # 14. the theta series are the classical ones, by enumeration (no tables)
+    TH = LAT.theta(LAT.LATTICES["D4"], 6), LAT.theta(LAT.LATTICES["E8"], 4), \
+        LAT.theta(LAT.LATTICES["Z4"], 6)
+    assert TH[0] == [1, 0, 24, 0, 24, 0, 96], TH[0]
+    assert TH[1] == [1, 0, 240, 0, 2160], TH[1]
+    assert TH[2] == [1, 8, 24, 32, 24, 48, 96], TH[2]
+    print(f"control 14 — theta by exact enumeration: D4 {TH[0]}, E8 {TH[1]}, Z4 {TH[2]}")
+
+    # 15. kissing topology: shell sizes and inner-product-1 degrees, computed
+    k = {key: len(LAT.shell(LAT.LATTICES[key], LAT.LATTICES[key].minimal_norm))
+         for key in ("Z2", "D4", "E8")}
+    deg = {key: LAT.root_degree(LAT.LATTICES[key]) for key in ("Z2", "D4", "E8")}
+    assert k == {"Z2": 4, "D4": 24, "E8": 240}, k
+    assert deg == {"Z2": None, "D4": 8, "E8": 56}, deg
+    print(f"control 15 — kissing numbers {k} and root degrees {deg}")
+
+    # 16. the conservation law is theta multiplicativity, and it is exact
+    g = LAT.l_sum("Z2", "D4", 4)
+    enumerated = [len(x) for x in g.payload["pairs"]]
+    assert tuple(enumerated) == tuple(g.payload["conv"]) == g.laws["theta"][1], g.laws
+    ran = 0
+    for w in lat.witnesses:
+        if not w.applies(g):
+            continue
+        ok, detail = w.check(g)
+        assert ok, (w.name, detail)
+        ran += 1
+    assert ran == 3, ran      # the kissing witness scopes itself to Frame/Atom
+    print(f"control 16 — Z2 (+) D4: enumerated {tuple(enumerated)} == convolution, "
+          f"{ran} applicable witnesses pass (kissing is a Frame/Atom law only)")
+
+    # 17. a wrong lattice claim is refused, by witness or by declared law
+    liar = LAT.l_atom("Z4")
+    liar.laws["kissing"] = ("|L_min|", 24)
+    ok, detail = LAT.KissingWitness().check(liar)
+    assert not ok, "the kissing witness must catch a claimed 24 for Z4 (true 8)"
+    refusals = []
+    for key, m in (("D4", 3), ("E8", 1)):
+        try:
+            LAT.l_shell(key, m)
+        except Refusal as r:
+            refusals.append(r.law)
+    try:
+        LAT.l_sum("Z4", "E8", 2)
+    except Refusal as r:
+        refusals.append(r.law)
+    assert refusals == ["empty_shell", "empty_shell", "rank_budget"], refusals
+    print(f"control 17 — a wrong kissing number is refused ({detail[:40]}...), and "
+          f"the declared laws fire: {refusals}")
+
+    print("selftest: OK (17 controls)")
     return checks
 
 
@@ -1176,6 +1246,14 @@ def report(eng, ledger):
         law = r["refusal"]["law"] if r["refusal"] else ""
         print(f"    {r['family']:13s} {p:28s} {r.get('n', 0):5d} "
               f"{r['laws'].get('ones', ''):>8s} {r['verdict']:>10s}  {law}")
+    print("\n  lattice_shells")
+    print(f"    {'family':13s} {'params':26s} {'cells':>6s} {'rank':>5s} "
+          f"{'verdict':>10s}  law")
+    for r in spins["lattice"]:
+        p = ",".join(f"{k}={v}" for k, v in r["params"].items())
+        law = r["refusal"]["law"] if r["refusal"] else ""
+        print(f"    {r['family']:13s} {p:26s} {r.get('n', 0):6d} "
+              f"{r['laws'].get('rank', ''):>5s} {r['verdict']:>10s}  {law}")
     ledger["spins"] = {name: {"summary": Engine.summarise(rows), "rows": rows}
                        for name, rows in spins.items()}
     return spins
@@ -1186,7 +1264,8 @@ def main(argv=None) -> int:
     if "--selftest" in argv:
         return selftest()
     if "--audit" in argv:
-        mods = [EF, Q, sys.modules[__name__]]
+        import lattice_shells as LAT
+        mods = [EF, Q, sys.modules[__name__], LAT]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)
@@ -1206,10 +1285,10 @@ def main(argv=None) -> int:
         return 0
 
     SQ.guard(quiet=True)
-    print("run 85 — glm_wheels.py: the domain-agnostic wheel, over two domains")
+    print("run 86 — glm_wheels.py: three domains, one wheel engine")
     print(f"scorer guard: {SQ.summarise(SQ.load())['score']:.9f}, no row changes\n")
     eng = build_engine()
-    ledger = {"run": 85, "instrument": "glm_wheels.py + exact_field.py + qsqrt2.py",
+    ledger = {"run": 86, "instrument": "glm_wheels.py + lattice_shells.py + exact_field.py",
               "domains": sorted(eng.domains)}
     report(eng, ledger)
     checked, offenders, skipped = EF.audit_module(
