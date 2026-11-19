@@ -754,3 +754,171 @@ lines) because the counting argument subsumes it, it never closed n = 9, and its
 relaxation is the same construction measured empty here.
 
 No row of the table changed. Entry 37-ANGLE-FROZEN-BRANCH-SPACE.md.
+
+## Run 75 — the n = 11 near-miss spent, and W1 started
+
+Run 74 left a list. This run spends its cheapest item and starts its first, and
+finds one instrument defect on the way.
+
+**W4, the n = 11 near-miss, is one flip and a dead end.** The competitor that
+`--flips 2` priced at 3.8815589 is reached by a *single* declared-branch change —
+pair (7, 8), branch 3 (`i.v`, sign −1) to branch 0 (`i.u`, sign +1) — and the
+k = 1 sweep had already reported the same number, so no pair of flips cooperates.
+Certified through `finalize` and the gate the structure needs 3.881558957, i.e.
++4.475366e−3 over the record; its side, like the record's, is set by containment
+rather than by a contact, so the flip is paid in spread. Nothing in the two-change
+family gates below `L0 − 4e-8`, and the LP optimum cannot be beaten by a gate at
+the same structure, so the margin cannot be spent. The row can only move by
+changing its angle multiset. Recorded in `37` §9.
+
+**The gate call was dead.** `--flips` and the B&B gated raw LP states; those carry
+the LP's own 1e-9 shortfall in every pair, so the 12-dp gate reads it as
+penetration and refuses at every side — the delivered row's own LP state included
+(`pen 1.46e-9`). A genuine improvement would have been recorded as `False` and
+dropped silently. Certification now goes `packlib.finalize` → `declp.gate`, with
+`GAIN_MIN = 4e-8`, and control 5 pins the refusal and the certificate on both the
+delivered structure and the near miss. All three ledgers regenerate identically
+apart from their timing fields.
+
+**W1 started: the seam offset is a parameter, and it is determined.**
+`seam_offset.py` reads the n = 290 row — the table's only two-lattice atom, 2 × 25
+tilted plus 240 upright — groups its tilted centres into frames by the 45°
+residue, and then slides one frame along the seam by a declared set of 17 surd
+shifts, bracketing the side and certifying in `Q(√2)`. The measured offset is
+`Δ(x−y) = 18 − (25/2)√2 = 0.322330`, `Δ(x+y) = 0` exactly — not the `0.384808`
+of `22` §3, which is twice one frame's `(x−y)` grid residue (correction in `38`
+§2). Every shift costs exactly its own size (+1.767767e−1 at `√2/8`, +3.535534e−1
+at `2√2/8`) and past `2√2/8` the atom does not pack inside `L0 + 4` at all: the
+seam is tight, 0 certified gains. Controls: n = 226 groups to one frame and
+reproduces its side; n = 290 at `s = 0` rebuilds the row with error 0.0; a
+0.25-moved copy is refused. No row changed. Entries `37` §9 and
+`38-SEAM-OFFSET.md`.
+
+## Run 76 — what next, ranked: the row census and the frozen-angle certificate
+
+Two runs of negatives left no ordered target list, so this run writes one (eight
+entries, `39` §1) and starts the two cheapest. It also records where my own
+proposal was wrong.
+
+**The 675-row block is not one block.** `row_census.py` puts every row against the
+strongest published floor (`max(area, Karakus)`) with no search. Of the 447 grid
+rows, **60 cannot beat the grid at all** by arithmetic alone — `n = k²` by area,
+`n = k²−1` by Karakus, which is exact there — and **26 of those 60 are above
+n = 324**, where the record currently says nothing can be proved. The remaining
+387 open grid rows split cleanly: above 324 every row with residue `m ≤ 20`
+beats, and all **247** failures have `m ≥ 21`. So the block is 26 proved rows,
+305+ rows that already beat, and 247 unattempted rows in one residue band — a
+construction target, not a source problem. Control: no delivered row violates its
+floor, all 553 beats included.
+
+**Head does not rank candidates.** I proposed choosing rows by remaining head; it
+sums to 6.295 over the open grid rows, forty times the 0.163635 gap, and all 553
+beats have head ≥ 0.01 because the area/Karakus floors are weak. The ranking is
+uninformative exactly where it was meant to be used. The usable output is the
+residue split and the closed rows; recorded in `39` §2 rather than dropped.
+
+**The delivered side is the frozen-angle optimum, 87 rows in.** `frozen_opt.py`
+asks run 67's `k = n` question per row: with every square free and the delivered
+declaration, does anything fit `L0 − 1e−6`? All **87 of 87** beating rows with
+n ≤ 200 are refused, i.e. certified, in 27 s; run 67's n = 294 refusal reproduces
+as a control. This is a statement about the declared axis, not about every branch
+structure. No row changed. Entries `39-RANKED-NEXT.md`.
+
+## Run 77 — the catalogue block certified, the band above it too, and one ledger
+
+`39` priced item 2 as a five-minute slice; it turned out to be the whole block,
+because only 150 of the 553 beats sit at n ≤ 324.
+
+**150 of 150 — the entire catalogue block.** `frozen_opt.py` refused a demand of
+`L0 − 1e−6` at every beating row with n ≤ 324: 0 candidates, 147 s. So at each of
+those rows no translation of the delivered angles, at the delivered axis
+declaration, fits below the delivered side. The cost is ~n² (63 rows above n = 200
+cost 122.7 s, the 87 below cost 24.3 s; slowest row 4.75 s at n = 303).
+
+**The first rows past the frontier refused too.** I expected slack in
+325 ≤ n ≤ 400, where the residue band m ≥ 21 puts the delivered sides within
+0.02–0.05 of the zero-waste ceiling: **41 of 41** certified in 228 s, union
+**191 of 191**. The certificate is not a small-n artefact. `frozen_opt.json` now
+accumulates slices, so a band probe cannot erase the block below it.
+
+**One ledger, stamped.** `row_census.py` ingests the certificate and gives every
+row one status: **60** closed by a published bound, **191** `opt@declared`, **362**
+beat-open, **387** grid-open. Stamping exposed a definitional defect: at a closed
+row the old `head` formula returned `(L − grid)/√n`, a positive "opportunity" where
+a published bound forbids any gain. It was tiny (max 5.0e−10, at n = 4) but wrong;
+`head` is now exactly 0 there, asserted for all 60 by control 4.
+
+**Attribution of the 0.163635 measured to be impossible.** The most generous
+conceivable total — zero-waste ceilings over the 387 open grid rows (7.005752) plus
+the headroom on the 553 beats (15.022691) — is **22.028443, 135× the gap**;
+restricted to `head` it is 21.005091, 128×. No bound this project holds localises
+the gap, and control 5 asserts that inequality so the negative stays visible. Item
+3's accounting half is dead; its bookkeeping half is now the census. No row changed.
+Entries `40-BLOCK-AND-ONE-LEDGER.md`.
+
+## Run 78 — a construction aimed at the band (no beats), and the exact side of every row
+
+The band turned out to be a catalogue edge, not a geometric wall, which is what
+made it attackable at all.
+
+**What the 247 are.** Above n = 324 the open rows are contiguous in the residue m,
+one block per k, and each block starts exactly one past that k's last record
+(k=18: beats m ≤ 20, open 21..35 … k=31: beats m ≤ 37, open 38..39). Since packing
+n squares at L packs n−1 at L, the band's first row per k is the easiest, so 14
+attempts speak for 247 rows. At the mean gain of the 403 beats above 324
+(0.008808), the band is worth 2.176 — and 19 rows at that quality would cover the
+whole 0.163635 gap.
+
+**The construction: extend the record by one square.** Each anchor's box already
+beats the grid, so one free unit square inside `L = k+1 − 1e−6` would beat the
+band's first row outright. Scanned at 1/16 over six orientations (0, 45°, and four
+small Pythagorean tilts): **0 of 14** free, the best placement overlapping by
+0.094–0.142 (mean 0.1196), the *same* margin at every orientation — the free space
+is box-shaped, not a hole a tilt could enter — and **70 local LPs** (new square plus
+30 neighbours free) all infeasible. **0 gate passes.** The largest empty square in
+each record is 0.86–0.91 across: the records are jammed. The family is nested, so
+this closes it for every band row of every k. It does not prove the rows optimal:
+a tilted boundary layer *built* rather than extended is untouched, and that is now
+the only item on the list with score in it.
+
+**The exact side of every row.** `exact_sides.py` computes `L = A + B·√2/2` with
+`Fraction` arithmetic, decides maxima by squaring (never a float), and searches the
+ideal over denominators ≤ 24 and |B'| ≤ 12: **447 rows in ℚ** (every one exactly
+`⌈√n⌉`), **100 in ℚ(√2)**, **4 Pythagorean**, and **449 not expressible** because
+their angles are polished rather than constructed. n = 50 comes out `53/7`, the
+value doc `19` decoded independently; n = 326 is `15 + 5√2/2` even though its
+stored side is rational, which is why B has to be searched rather than read off the
+walls. Exact arithmetic and `sqscore.extent` disagree on 0 of 551 rows (worst
+1.03e−13); 25 rows have no ideal inside the declared box (residual up to 2.4e−4)
+and are recorded as such. No row changed. Entries `41-BAND-ATTEMPT-AND-EXACT-SIDES.md`.
+
+## Run 79 — the tilted boundary layer built from scratch: capacity `m ≤ 0`
+
+Run 78 closed one cheap route into the band (no row is one square from the
+records); this run builds the other and closes it too.
+
+**What the layer is.** n = 326's cell map, read exactly: a (k+1)-grid with two
+opposite corners cut away in a 45° diamond (85 cells) and two 5×5 blocks of 45°
+squares on the rotated unit lattice laid in the cuts (50), net −35 squares for
+−0.4645 of side, at `15 + (5/2)√2`. Two structural facts: a 45° block's bounding
+box is `√2 j` for `j²` squares, and a unit square's width is ≥ 1 in every
+direction, so a seam of fractional width holds nothing — the tilt must be a whole
+block traded against grid cells.
+
+**Built and gated.** `layer_construct.py` generates that layer from `(j, delta,
+sx, sy)` — trimmed axis grid plus two `j×j` rotated blocks at opposite corners —
+and certifies through `packlib.finalize` then `declp.gate` at tol 0. Swept over
+`j ≤ 8`, twelve deltas and a 5×5 offset grid, 24 gate calls per row: **0 of 14**.
+The best gated build is the plain k×k grid at side k (`m_cap = 0`); with one
+diamond or more it is `k² − 2`. **Capacity `m ≤ 0` at every k, against a band
+requirement of m ≥ 21–38.**
+
+**Why it loses, with the number.** At the n=326 record's own side the clean build
+carries 290 where the plain grid carries 324 and the polished record 326: a j=5
+diamond displaces ≈ 84 cells and returns 50, net −34. On an integer grid the
+diamond trade is negative by area at every j. The table's 54 clean records at
+m ≤ 13 are *polished* — fractional shifts, which is why their sides are
+`A + B√2/2` with non-integer A (`15 + 5√2/2`, `13 + 4√2`, `k + √2/2`,
+`467/17 − 11√2/2`) — and the menu of those families tops out at **m = 13 at any
+k**, while the band starts at 21. No row changed. Entries
+`42-LAYER-FROM-SCRATCH.md`.

@@ -217,7 +217,7 @@ run in a row that this control has earned its place.
 
 ```bash
 cd source_material/ToDo/squares_in_squares
-python3 scripts/bb2d.py --selftest                       # 4 controls (~2 s)
+python3 scripts/bb2d.py --selftest                       # 5 controls (~2 s)
 python3 scripts/bb2d.py 2 3 5 6 9 10                     # B&B: 2,3 close; 5-10 open
 python3 scripts/bb2d.py --flips 1 5 10 11 13 18          # depth 1, exact (~4 s)
 python3 scripts/bb2d.py --flips 2 5 10 11 13             # depth 2, exact (~135 s)
@@ -225,3 +225,63 @@ python3 scripts/declp3.py --selftest                     # the 3D instrument, un
 ```
 
 Ledgers: `workspace/push/bb2d.json` (B&B), `bb2d_flips1.json`, `bb2d_flips2.json` (the families).
+
+## 9. W4 spent — the n = 11 near-miss, and a defect the gate was hiding (Run 75)
+
+§7 called the n = 11 depth-2 family "the cheapest remaining near-miss to understand" and left it
+unspent. This section spends it.
+
+**The competitor is one flip, not two.** `--flips 2` reported `min_other = 3.881558949801`. Rerunning
+the family with the argmin kept shows the structure that attains it is `((49, 0),)` — a *single*
+declared-branch change — and that the k = 1 sweep already reported the identical number
+(`3.881558949801343` in both ledgers). No second flip cooperates with the best one: every
+two-change structure is at least as bad as the best one-change structure. Pair 49 is (7, 8), the
+two tilted squares, both at θ = 0.869489221.
+
+| | axis q | sign | needed | at the delivered centres |
+| --- | --- | ---: | ---: | ---: |
+| delivered branch 3 | `i.v` = (−0.763999474, +0.645216866) | −1 | −0.118782609 | slack 0.118783 |
+| near-miss branch 0 | `i.u` = (+0.645216866, +0.763999474) | +1 | +0.024874534 | demand 0.024875 |
+
+**What it costs, certified.** The LP side of that structure is `3.881558949801`; finalized and
+gated (`packlib.finalize`, then `declp.gate`) it is **`3.881558957226`**, i.e. **+4.475366e−3** over
+the record's `3.877083591506`. Both the delivered structure and the near miss have their side set by
+**containment, not by a contact**: `t = 2·max_i(|c_i| + h_i)` to machine precision in both (gap
+−4.4e−16 for the near miss). What changes is which pairs are tangent — each arrangement has 14
+binding pairs, 12 shared, with pairs 49 and 53 joining the binding set and 46 and 52 leaving it. So
+the flip turns a pair that was 0.118783 **over**-separated along its own `v` axis into one that must
+be exactly separated along `u`, and the arrangement pays in extent: 4.48e−3, spread across the
+container rather than charged to one contact.
+
+**Nothing there gates at a smaller side, and that is an argument, not just a measurement.**
+`structure_lp` minimises the side over translations for a *fixed* branch structure and demands every
+separation `PAD = 1e-9` short, so its optimum understates that structure's true minimum side by at
+most the pad and never overstates it; a gate pass below it for the same structure would contradict
+the LP. And the family is complete at k ≤ 2: 40,050 structures solved at n = 11, 5,107 with a
+different optimum, 34,052 not feasible inside `L0 + 0.5`, and 0 at or below `L0 − 4e−8`. The nearest
+certified structure in the whole two-change neighbourhood is this one, at +4.475e−3.
+
+**Verdict: dead end as a construction.** A branch change moves the *declaration*, and at these
+frozen angles every declaration but the delivered one is wider. The row's remaining slack is not a
+structure waiting to be rearranged; it is the slack that lets the five-square tilted strip close at
+`3.877083591506`. What a construction must change is the angle multiset — the word — which is W2,
+not W4. The whiteboard's W4 figure (`3.881566`) is also 7e−6 high: the measured values are
+`3.881558950` (LP) and `3.881558957` (certified).
+
+**A defect the gate call was hiding.** Asking "does anything gate smaller" first returned a
+uniform no — including for the delivered row's own LP state. That was not the near miss being bad;
+it was the instrument being wrong. `--flips` gated **raw** LP states, and a raw state carries `PAD`
+of shortfall in every pair by construction, so `declp.gate` (12 dp, tolerance 0.0) reads that
+shortfall as penetration — `1.46e-9` on the delivered n = 11 structure — and refuses at *every*
+side, since raising the side cannot open a penetration between two squares. `gated` was therefore
+structurally 0: a real 4e−3 improvement would have been certified `False` and silently dropped as
+"no structure beats L0". Certification now runs the way the table was made — `packlib.finalize`,
+then `declp.gate` — with the improvement bar at `GAIN_MIN = 4e-8`; the finalizer opens contacts by
+~2e−9, so the delivered structure's own LP state certifies at `L0 + 3.35e-9`, not at `L0`.
+**Control 5** pins both halves — the raw refusal and the finalized certificate — on the delivered
+structure and on the near miss.
+
+No published number moved. All three ledgers were regenerated under the fixed code and differ only
+in their `seconds` fields. The prune is unchanged and still safe: a node is pruned at
+`t ≥ best − 1e-9` while the LP understates the true side by ≤ 4e-9, so nothing that could certify at
+`best − 4e-8` is ever pruned.
