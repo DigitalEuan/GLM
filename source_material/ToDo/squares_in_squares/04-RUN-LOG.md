@@ -1030,3 +1030,60 @@ boundary is split.
 Left open and named: the certificate brackets the global maximum but does not
 prove it is at 0° (the disk bound has no orientation in it); a tight value needs
 an orientation-aware bound. No row changed. Entries `45-CERTIFIED-SPACE.md`.
+
+## Run 83 — the mixed-field grammar: 0° and 45° as sentences, and the seam's exact price
+
+**The question this run is built around.** The lattice perspective works up to a
+point and then stops, and the reason is one sentence: `√2` is irrational, so no
+scale and no symmetry label can make a 45° pose satisfy an integer lattice
+predicate. That is a theorem about the predicate, and this run treats it as the
+object of study: the alphabet is lifted one step to ℚ(√2), where the 0° and 45°
+words are both legal and their seam is measurable in the same exact arithmetic.
+Doc `19` §5 is corrected accordingly — the ladder's third rung is recorded there as
+an interface measurement and its constructive lift, not as an anti-pattern.
+
+**The arithmetic.** `scripts/qsqrt2.py` is `a + b√2` over `Fraction`, with the sign
+decided by `a²` versus `2b²` in the mixed cases (no tie exists), so a contact is
+exactly 0. The gate is the SAT predicate over the field: separated iff some axis
+`q` of either square has `|d·q| >= 1/2 + ext_other(q)`, and the container side is a
+field element, so "beats the grid" is a field comparison. Controls: 14,640 signs
+against 70-digit `Decimal`; a 3×3 grid with 20 exact contacts (12 edge + 8 corner)
+at `L = 3`; **274** states where the exact gate and `packlib.verify` agree, each at
+least 1e-3 from contact; two overlaps refused with exactly `-1` and `-1/2`.
+
+**Seven sentences, certified** (`scripts/mixed_field.py`, 6 controls):
+the 45° pair at `1 + 3/4√2`; the `t = 1/2` pair at `72/35`; the `t = 1/5` pair at
+`450/221`; the **corner glue** — four 0° squares in the corners, one tilted square
+between them — at `2 + 1/2√2 = 2.707107` with **four exact contacts**, five squares
+against the grid's 3 (gain 0.292893, exact density `(90 - 40√2)/49 = 0.682275`),
+and at `19/7` for `t = 1/2` and `t = 1/3`; the `t = 1/5` glue at `47/17`; and the
+ring nine at `2 + √2 = 3.414214`. Every side is the tight side of its family:
+1e-3 less is refused, all seven.
+
+**The seam law.** For the corner glue `L(θ) = 2 + 1/(cos+sin)`, and
+`(cos+sin)² = 1 + sin 2θ <= 2` with equality only at 45°, so the 45° word is the
+unique cheapest bridge in the family and every rational tilt pays an exact tax:
+`5/7 - 1/2√2` for `t = 1/2` and `1/3`, `13/17 - 1/2√2` for `1/5`,
+`25/31 - 1/2√2` for `1/7`. **The minimal glue word is one tilted square and it
+couples four 0° squares at once** — four diagonal seams, each exactly tight. The
+honest negative sits next to it: a diamond bridges a seam but cannot replace a
+square, because the 3×3 ring around one needs `2 + √2` against the grid's 3.
+
+**The modulator.** A first-order ΔΣ carrier with rational step `1/1000` on the
+exact coordinates: the running average converges like `1/(M N)` (4.5e-4 → 1.9e-8
+over `N = 1..10^4`) and the sentence does not. One rung of five is legal, and only
+at a side larger by 1.9e-8; every refused rung is an overlap at the exact side or
+below it. The irrational object exists in the discrete machine as the pair
+`(a, b)`; the stream is its bounded shadow, and the bound is measured.
+
+**The escalation, exactly.** At `N = 2` the shallowest tilt tested wins among the
+words (`t = 1/7`, `1568/775`) and all words lose to the axis pair at 2; at `N = 5`
+the 45° glue wins, with `t = 1/2` behind by `5/7 - 1/2√2`. The rational words have
+a finite integral model (scale 70, 442, 1550); the 45° word has none, for the field
+reason — which is why the second coordinate `b` is the label no scale can supply.
+
+**The census.** 447 of 1000 delivered rows are exactly the 0° word (the 447 sides
+in ℚ), 100 are the 45° word up to a 4.5e-13 rad decimal, 2 mix words, and **451 use
+no word at all**. A lifted grammar cannot retrofit a decimal table; it has to
+build — and 447 rows are already sentences of it. No row changed. Entries
+`46-MIXED-FIELD.md`.
