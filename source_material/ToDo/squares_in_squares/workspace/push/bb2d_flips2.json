@@ -1,0 +1,69 @@
+{
+ "note": "every structure within 2 declared-branch change(s) of the delivered one, each solved to its own minimum side",
+ "rows": [
+  {
+   "n": 5,
+   "k": 2,
+   "L0": 2.707106782448,
+   "L": 2.707106782448,
+   "count": 979,
+   "total": 979,
+   "gated": 0,
+   "truncated": false,
+   "moved": 280,
+   "infeasible": 696,
+   "min_other": 2.9428090399725875,
+   "where": null,
+   "seconds": 1.14,
+   "verdict": "no structure within 2 change(s) beats L0"
+  },
+  {
+   "n": 10,
+   "k": 2,
+   "L0": 3.707106782648,
+   "L": 3.707106782648,
+   "count": 19477,
+   "total": 19477,
+   "gated": 0,
+   "truncated": false,
+   "moved": 3792,
+   "infeasible": 15161,
+   "min_other": 3.7475468932920033,
+   "where": null,
+   "seconds": 26.42,
+   "verdict": "no structure within 2 change(s) beats L0"
+  },
+  {
+   "n": 11,
+   "k": 2,
+   "L0": 3.877083591506,
+   "L": 3.877083591506,
+   "count": 40050,
+   "total": 40050,
+   "gated": 0,
+   "truncated": false,
+   "moved": 5107,
+   "infeasible": 34052,
+   "min_other": 3.881558949801343,
+   "where": null,
+   "seconds": 57.07,
+   "verdict": "no structure within 2 change(s) beats L0"
+  },
+  {
+   "n": 13,
+   "k": 2,
+   "L0": 4.0000000015,
+   "L": 4.0000000015,
+   "count": 27261,
+   "total": 27261,
+   "gated": 0,
+   "truncated": false,
+   "moved": 0,
+   "infeasible": 24119,
+   "min_other": null,
+   "where": null,
+   "seconds": 44.42,
+   "verdict": "no structure within 2 change(s) beats L0"
+  }
+ ]
+}

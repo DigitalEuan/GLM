@@ -78,22 +78,40 @@ nothing about whether a given `L` can be beaten.
 **(a) Cubes in cubes — built and run.** `squares_in_squares/35-CUBES-IN-A-CUBE.md` with
 `declp3.py`: the declared-axis LP one dimension up, judged by an exact gate that reads the recorded
 coordinates as `Fraction`s. The question was whether the 3D optimum is the *extrusion* of the
-delivered 2D row. Answer: **yes at n = 2, 3, 4 and no from n = 5 on.** Two cubes in a box of side
-`L < 2` must intersect, so `L(n) ≥ 2` for `n ≥ 2`, and the 2×2×2 grid gives 2 for `n ≤ 8` — the 3D
-optimum is exactly 2 there, against 2.7071 (n = 5) and 3 (n = 6, 7, 8) for the row. The cube grid
-also beats the row at n = 10, 12, 16, 20. The score is untouched (22.218056945).
+delivered 2D row. Answer: **yes at n = 2, 3, 4 and 9, and no at 6, 7, 8, 12, 16, 20.** Two cubes in a
+box of side `L < 2` must intersect, so `L(n) ≥ 2` for `n ≥ 2`, and the 2×2×2 grid gives 2 for
+`n ≤ 8` — the 3D optimum is exactly 2 there, against 2.7071 (n = 5) and 3 (n = 6, 7, 8) for the row.
+The cube grid also beats the row at n = 10, 12, 16, 20. The score is untouched (22.218056945).
 
-**And then the question closed completely.** Run 73 (`36-CUBE-GRID-IS-OPTIMAL.md`) proves
-`L(n) = ⌈n^{1/3}⌉` for *every* n, in every dimension, by counting centres in `m^d` sub-boxes: all
-centres sit in a box of side `L − 1`, a sub-box of side `< 1` holds at most one, so `n > k^d ⇒ L ≥ k + 1`,
-which the `k`-grid attains. So `L(9) = 3`, nothing beats the cube grid at any `n`, and the 3D
-question has no ladder at all.
+**One correction to that answer (run 74).** At n = 5 and n = 10 there is no extrusion to compare:
+a square at π/4 is not a unit cube, so the "extruded" state is a set of overlapping cubes and
+`declp3.json`'s own `extrude_ok` is `False`. The comparison there is between the 3D grid and the 2D
+*problem*, not between two packings, and the "extrusion is rigid" reading of `desc(extr) = L2`
+fails at exactly those two rows (the LP proposes a larger side and the descent refuses an illegal
+start). The conclusion is unchanged — 3D needs 2 where 2D needs 2.7071 — but the object is the
+problem, not the extruded state.
+
+**And then the question closed completely — for axis-parallel cubes.** Run 73
+(`36-CUBE-GRID-IS-OPTIMAL.md`) proves `L(n) = ⌈n^{1/3}⌉` for *every* n, in every dimension, by
+counting centres in `m^d` sub-boxes: all centres sit in a box of side `L − 1`, a sub-box of side
+`< 1` holds at most one, so `n > k^d ⇒ L ≥ k + 1`, which the `k`-grid attains. So `L(9) = 3`,
+nothing beats the cube grid at any `n`, and the 3D question has no ladder at all.
+
+**The scope matters, and run 74 wrote it down where it belongs.** The proof never rotates anything:
+it is a theorem about axis-parallel cubes, and in 2D about axis-parallel squares. That restriction
+is not pedantic — it is exactly the restriction this project lives inside. The delivered table's
+n = 5 row is `2.707107 < 3 = ⌈√5⌉` because one square sits at π/4, so in 2D the axis-parallel
+bound is *true and immediately beaten outside its class*. So `L_d(n) = ⌈n^{1/d}⌉` is the optimum of
+the axis-parallel class, nothing more; a rotated cube is outside it and is an open problem this
+project has no instrument for. Read `BRIDGE.md`'s "the dimension step is free of information" in
+that light: it is free because rotation was removed, and rotation is the whole score down here.
 
 **What that means for this note — and it is the real finding.** The same argument in two dimensions
-says *axis-parallel* squares can never beat `⌈√n⌉`. So every beat in the 1000-row table must contain
-a rotated square — and it does: **447 rows are axis-aligned and all sit exactly at `⌈√n⌉`; 553 rows
-beat, and none of them is axis-aligned; 447 + 553 = 1000.** Rotation is not a feature of the score,
-it *is* the score. Contrast that with `BRIDGE.md`, where the lattice carries the plane optimum as a
+says *axis-parallel* squares can never beat `⌈√n⌉` — and since it applies only to that class, the
+n = 5 row (`2+1/√2 ≈ 2.7071` against 3) shows the class boundary is the whole game. So every beat in
+the 1000-row table must contain a rotated square — and it does: **447 rows are axis-aligned and all
+sit exactly at `⌈√n⌉`; 553 rows beat, and none of them is axis-aligned; 447 + 553 = 1000.** Rotation
+is not a feature of the score, it *is* the score. Contrast that with `BRIDGE.md`, where the lattice carries the plane optimum as a
 section and the dimension step is free of information: here the dimension step is free of information
 too, but the rotation step is everything. The bridge and the table are two different ladders — section
 class versus orientation — and only the second one has rungs this project can climb.

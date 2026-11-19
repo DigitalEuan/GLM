@@ -1,5 +1,7 @@
 # 36 — The cube grid is optimal for every n, and the score is exactly rotation (Run 73)
 
+*(Title read precisely: optimal for every n **in the axis-parallel class** — see §2.1, added run 74.)*
+
 Run 72 left n = 9 open in `(2, 3]`: the declared-axis LP gave constructions, and the only bound it
 could certify stopped at n = 4. This run was meant to settle that one row. It settles **every** row,
 by an argument, and the argument turns out to explain the whole 1000-row score.
@@ -29,8 +31,23 @@ contrapositively `n > k^d ⇒ L ≥ k + 1`. The grid `k × … × k` gives `L �
 
 In 3D: **L(n) = ⌈n^{1/3}⌉ for every n**, so `L(9) = 3` (not 2.08–3), `L(28) = 4`, and so on. The
 declared-axis LP, the descent, the extrusion question, and any future search over cube arrangements
-are all answered at once: the grid is not merely good, it is optimal, always, and there is nothing
-above it to find.
+are all answered at once: the grid is not merely good, it is optimal in this class, always, and
+there is nothing above it to find.
+
+### 2.1 The scope, stated once (added run 74)
+
+Every word above is about **axis-parallel** cubes. It is not a theorem about rotated solids, and
+the restriction is not vacuous. The same argument in two dimensions says *axis-parallel unit
+squares* satisfy `L(n) = ⌈√n⌉`, and the delivered table's own n = 5 row is `2.707107 < 3 = ⌈√5⌉`
+because one square is at π/4. So read the theorem as
+
+    L_d(n) = ⌈n^{1/d}⌉  is the optimum IN THE AXIS-PARALLEL CLASS, for every n and every d.
+
+That is exactly what §3's corollary turns on: it bounds the 447 aligned rows (they are all at
+`⌈√n⌉`, so they are optimal within their class) and it says nothing at all about the 553 rows that
+contain a rotated square. It also says nothing about rotated cubes — a question this project has
+not asked and has no instrument for. The dimension step is free of information here; the rotation
+step is not.
 
 Consequences worth having on the record:
 
@@ -68,7 +85,18 @@ members of rotated rows*, never as a row.
 Precisely what this does and does not prove: the 447 aligned rows are optimal **within the
 axis-parallel class** (a different and weaker statement than the 152 rows proved optimal outright,
 which remain the stronger claim). Nothing here says a rotated row is optimal, or that any particular
-`L` cannot be improved — it says the only lever that has ever moved this score is an angle.
+`L` cannot be improved — it says the only lever that has ever moved this score is an angle. The n =
+5 row is the witness that the class restriction is real rather than pedantic: `2.707107` against
+`⌈√5⌉ = 3`, one square at π/4.
+
+**One correction to run 72's headline (added run 74).** "The extrusion of the delivered row" is a
+cube state only when the row is axis-aligned; a square at π/4 is not a unit cube, and
+`declp3.json` records `extrude_ok = False` at n = 5 and n = 10. At those two rows the `extr` column
+(`2.7071`, `3.7071`) is the extent of a set of **overlapping** cubes, and `desc(extr) = L2` is not
+rigidity — the trace shows the LP proposing `3.0` and `4.0` and the descent refusing, because the
+starting state is not legal. So "3D strictly better" at n = 5 and n = 10 is true but vacuous (there
+is no extruded packing to beat), and `35` §3's "the extrusion is rigid on every row" holds at the
+other ten rows only. The values themselves are untouched: `L(5..8) = 2`, `L(9) = 3`.
 
 ## 4. The instrument that could not do it, and why that is worth recording
 
@@ -84,6 +112,13 @@ recorded so that nobody spends the afternoon on it. The lesson is the project's 
 silence is not a theorem, and a two-line counting argument beat both the LP and the MILP.
 
 ## 5. Code housekeeping (as asked)
+
+> **Run 74: `--milp` is retired.** The disjunctive MILP described in §4 is redundant against §2's
+> counting argument, never closed the row it was built for, and its relaxation is the same big-M
+> construction that run 74 measured to be *empty* in two dimensions (root bound = the largest
+> square's own extent; `37` §2). `_disjunction`, `milp_min_side`, `feasible_below`, `milp_report`
+> and the `--milp` flag are removed from `declp3.py` (kept in `git show fd22941`). `--exhaustive`
+> and `--selftest` are unchanged. The paragraph below is the run-73 record.
 
 * **`--exhaustive` is now opt-in.** A default `python3 scripts/declp3.py` runs the 12-row table in
   seconds; the 46,656-branch `n = 4` enumeration (65 s of run 72's 71 s) only runs with
@@ -126,7 +161,7 @@ cd source_material/ToDo/squares_in_squares
 python3 scripts/declp3.py                 # 12 rows, seconds (no enumeration)
 python3 scripts/declp3.py --selftest      # the same three controls as --control
 python3 scripts/declp3.py --exhaustive    # the 46,656-branch n = 4 bound (65 s)
-python3 scripts/declp3.py --milp 4 5      # the disjunctive MILP where it still closes (~9 s each)
+# --milp was retired in run 74 (see §5); its code is at git show fd22941
 ```
 
 The table checks in §3:

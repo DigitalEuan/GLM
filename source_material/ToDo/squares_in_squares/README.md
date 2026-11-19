@@ -38,7 +38,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 (0.76 % holds only at n = 1000, s(5) is 2.707107 and proved, "0/8" is run 41's,
 "run 50" does not exist), and their n = 5 test case is ill-posed.
 
-## Current results (Run 73, 2026-11-18; last score move run 47)
+## Current results (Run 74, 2026-11-18; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -50,7 +50,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |
 | Latest score move | **Run 47 audit re-score**: 22.642386651 → **22.218056945** (−0.424330); guarded by `sqscore.guard` |
-| Latest session | **Runs 69–73, margin + three discrete searches + the dimension closed by proof** — wall margin on 1000 rows; 5,560 word cells at n = 18; 7,803 branch-flip cells; 6,684 flips over the 42 open rows (0 seeds); cubes-in-a-cube LP with an exact rational gate, then `L(n) = ⌈n^{1/3}⌉` for every n by a sub-box count — **no row changed**; the 553 beats are exactly the rows containing a rotated square (447 axis-aligned rows, all at `⌈√n⌉`); records `31`–`36` |
+| Latest session | **Runs 69–74, margin + three discrete searches + the dimension by proof + the branch space at frozen angles** — wall margin on 1000 rows; 5,560 word cells at n = 18; 7,803 branch-flip cells; 6,684 flips over the 42 open rows (0 seeds); cubes-in-a-cube LP with an exact rational gate, then `L_d(n) = ⌈n^{1/d}⌉` **in the axis-parallel class** by a sub-box count (2D n = 5 already beats it by rotation: 2.707107 < 3); a 2D branch-space MILP with our own LP-guided B&B — its relaxation is empty at the root (the bound is the largest square's own extent), so it closes only n ≤ 3, while the same exact leaf closed **87,767 structures within two branch changes for 0 improvements** (nearest competitor +4.48e−3 at n = 11); `--milp` retired; **no row changed**; the 553 beats are exactly the rows containing a rotated square (447 axis-aligned rows, all at `⌈√n⌉`); records `31`–`37` |
 
 ## Where the score stands, said plainly
 

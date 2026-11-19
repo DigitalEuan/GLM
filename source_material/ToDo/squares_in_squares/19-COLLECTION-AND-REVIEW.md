@@ -574,6 +574,26 @@ history rather than presented as current.
   makes every beat a rotation: **447 axis-aligned rows, all at `⌈√n⌉`; 553 beats,
   none axis-aligned; 447 + 553 = 1000** — the score is exactly rotation, which also
   explains why the branch-flip searches of runs 65–71 could not have found anything
+* run 74 — the branch space at frozen angles, built and bounded honestly:
+  `37-ANGLE-FROZEN-BRANCH-SPACE.md` with `bb2d.py`, ledgers `bb2d.json`,
+  `bb2d_flips1.json`, `bb2d_flips2.json`. The 2D branch-space MILP — choose one
+  separating (axis, sign) per pair *by disjunction* rather than by declaration,
+  which makes the model exact — solved by our own LP-guided branch and bound,
+  judged by `declp.gate`. **The relaxation is empty**: at the root it equals
+  `max_i 2h_i`, the largest square's own extent (1.0 for aligned rows, 1.414214
+  with a rotated square), because fractional branch weights put mass on both
+  signs of an axis and cancel; so B&B closes only n = 2, 3 (and agrees with
+  exhaustive enumeration of 4 and 64 structures) and n = 5–10 stay open at a
+  6,000-node budget, the families being `8^4·4^6 = 16.8M` and `8^9·4^36 ≈ 6.3e29`.
+  The exact leaf does work: every structure within one and within two
+  declared-branch changes of the delivered one, each solved to its own minimum
+  side — **87,767 structures, 9,179 of them actually different, 0 improvements,
+  0 gated** (nearest competitor +4.48e−3 at n = 11, +4.04e−2 at n = 10; n = 13
+  is completely rigid: 0 of 27,261 double flips move). Also: the dimension
+  theorem is scoped to the axis-parallel class everywhere it is stated (n = 5
+  beats `⌈√n⌉` by rotation), run 72's n = 5 / n = 10 "extrusion" verdicts are
+  corrected (a rotated row is not a cube packing, `extrude_ok` False), and
+  `declp3.py --milp` is retired (126 lines) as subsumed by the counting argument
 * continued in §10: `22-DIAMOND-MASK.md`, `23-SEED-WHEELS.md`,
   `24-N10-OPTIMAL.md`, `25-OPEN-ROW-CROSSWALK.md`, `26-FRONTIER-CROSSWALK.md`,
   and their instruments `diamond_mask.py`, `seed_wheels.py`, `optima.py`,

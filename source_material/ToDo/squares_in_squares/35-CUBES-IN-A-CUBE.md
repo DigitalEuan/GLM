@@ -1,9 +1,20 @@
 # 35 — Cubes in a cube: is the 3D optimum the extrusion of the 2D row? (Run 72)
 
-> **Superseded in part by `36`.** Run 73 proves `L(n) = ⌈n^{1/3}⌉` for *every* n, by a sub-box
-> counting argument on the centres. So the values below are exact optima, not constructions: the
-> "n >= 5 are constructions, not optima" caveat in §3, §5 and §7 is withdrawn, and `L(9)`, left open
-> in `(2, 3]` here, is exactly 3. The instrument and its controls stand.
+> **Superseded in part by `36`.** Run 73 proves `L(n) = ⌈n^{1/3}⌉` for *every* n in the
+> axis-parallel class, by a sub-box counting argument on the centres. So the values below are exact
+> optima, not constructions: the "n >= 5 are constructions, not optima" caveat in §3, §5 and §7 is
+> withdrawn, and `L(9)`, left open in `(2, 3]` here, is exactly 3. The instrument and its controls
+> stand.
+>
+> **Correction (run 74), and it is the headline's.** "The extrusion of the 2D row" is a cube state
+> only when the row is axis-aligned. At **n = 5 and n = 10** the row contains a square at π/4, so
+> the state is a set of overlapping cubes: the ledger's own `extrude_ok` is `False` there, and the
+> `extr` column (`2.7071`, `3.7071`) is that state's extent, not a packing side. `desc(extr) = L2`
+> is then not rigidity — the trace shows the LP proposing `3.0` / `4.0` and `descend` refusing,
+> because its input is not legal — so the "rigid on every row" reading in §3 below holds at the
+> other ten rows only. "3D strictly better" at n = 5 and n = 10 is therefore true but **vacuous**:
+> there is no extruded packing to beat. Nothing else moves: `L(5..8) = 2` and `L(9) = 3` are exact,
+> and 3D beats the 2D *problem* at those rows either way.
 
 `SQUARES.md` in `dimension_ladder` left one concrete question open: the dimension ladder cannot
 touch this project through the plane — it can only touch it one dimension up. So the 3D analogue of
@@ -55,22 +66,24 @@ non-aligned rows the "extrusion" is only *the cubes at those centres*.
 | 2 | yes | 2.0000 | 2.0000 | 2.0000 | 2.0000 | 2.0000 | tie — extrusion optimal (= 2, proved) |
 | 3 | yes | 2.0000 | 2.0000 | 2.0000 | 2.0000 | 2.0000 | tie — extrusion optimal (= 2, proved) |
 | 4 | yes | 2.0000 | 2.0000 | 2.0000 | 2.0000 | 2.0000 | tie — extrusion optimal (= 2, proved) |
-| 5 | no | 2.7071 | 2.7071 | 2.0000 | 2.7071 | 2.0000 | **3D strictly better** (2, proved) |
+| 5 | no | 2.7071 | 2.7071 | 2.0000 | 2.7071 | 2.0000 | ~~3D strictly better~~ **no extrusion exists** (`extrude_ok` False); grid 2 proved |
 | 6 | yes | 3.0000 | 3.0000 | 2.0000 | 3.0000 | 2.0000 | **3D strictly better** (2, proved) |
 | 7 | yes | 3.0000 | 3.0000 | 2.0000 | 3.0000 | 2.0000 | **3D strictly better** (2, proved) |
 | 8 | yes | 3.0000 | 3.0000 | 2.0000 | 3.0000 | 2.0000 | **3D strictly better** (2, proved) |
 | 9 | yes | 3.0000 | 3.0000 | 3.0000 | 3.0000 | 3.0000 | tie at 3; L(9) in (2, 3] open |
-| 10 | no | 3.7071 | 3.7071 | 3.0000 | 3.7071 | 3.0000 | **3D strictly better** |
+| 10 | no | 3.7071 | 3.7071 | 3.0000 | 3.7071 | 3.0000 | ~~3D strictly better~~ **no extrusion exists** (`extrude_ok` False); grid 3 proved |
 | 12 | yes | 4.0000 | 4.0000 | 3.0000 | 4.0000 | 3.0000 | **3D strictly better** |
 | 16 | yes | 4.0000 | 4.0000 | 3.0000 | 4.0000 | 3.0000 | **3D strictly better** |
 | 20 | yes | 5.0000 | 5.0000 | 3.0000 | 5.0000 | 3.0000 | **3D strictly better** |
 
 Two things in that table matter more than the verdict column.
 
-* **`desc(extr) = L2` on every row.** The extrusion is not merely *a* packing — it is rigid under its
-  own declared axes. The LP cannot shrink it at all, in 3D, for any of the twelve rows. So the
-  improvement at n = 5–8 is not "the same structure, polished"; it is a **different structure**.
-  Extrusion is a local optimum of the declared-axis system and not the global one.
+* **`desc(extr) = L2` on the ten rows where the extrusion is legal** (run 74 correction: at n = 5
+  and n = 10 it is not — see the header). There the LP cannot shrink it, so the improvement at
+  n = 6–8 is not "the same structure, polished"; it is a **different structure**. Extrusion is a
+  local optimum of the declared-axis system and not the global one. At n = 5 and 10 there is no
+  comparison to make: the LP's own minimum for that state's declaration is `3.0` and `4.0`, i.e.
+  the state is not a cube packing at all.
 * **The 2D row's whole interest does not survive the increase in dimension, in this sample.** For
   n <= 8 the cube grid meets the two-cube bound exactly, so no improvement is possible; the first row
   with any room at all is n = 9 (volume `9 > 8`). In the same range the 2D table beats its own grid
@@ -133,7 +146,10 @@ python3 scripts/declp3.py --control
 * It does not say the cube grid is never beaten in 3D. It says two descent paths from twelve rows
   did not beat it, and that for n <= 8 it cannot be beaten.
 * It does not transfer to rotated solids. A rotated square is not a cube, which is why `algn` is a
-  column and not an assumption.
+  column and not an assumption — and the correction in the header is that column biting: at the two
+  `no` rows the extrusion is not a state, so those two verdicts carry no content. The 2D theorem
+  has the same boundary: `⌈√n⌉` is the optimum for *axis-parallel* squares, and n = 5 beats it by
+  rotation (`36` §2.1).
 
 ## 8. Re-running
 
