@@ -334,13 +334,15 @@ next run from paying again. `writeoffs.json` is rebuilt from campaign ledgers,
 not typed by hand. This is the discipline that makes a long campaign cumulative
 instead of circular.
 
-And the corresponding anti-pattern, which the project has now paid for twice:
-**"map the object to a famous structure and hope the structure knows the
-answer."** The Λ₂₄ map is exact, validated, beautiful, and provably blind to the
-only geometry that scores — because the question "is this a lattice point" is an
-integrality question and the score lives in ℚ(√2). The lesson is not that
-lattices are useless; it is that **a representation must be chosen for what it
-can express, and the expressible thing here is an algebraic word, not a point.**
+The ladder's third rung is the sharp one, and it reads as a measurement of an
+interface. The Λ₂₄ map is exact and validated on 196,560/196,560 minimal vectors,
+and the predicate it implements is an integrality question; the tilted rows'
+geometry lives in ℚ(√2). Over the window, 87 tilted rows are illegal at all eight
+scales and 168 untilted rows are legal somewhere. Both statements are about the
+same object seen from two sides, and the second one is constructive: the map is
+not abandoned, the alphabet is lifted one step. Represent every coordinate as an
+exact `a + b√2` pair and the 0° and 45° words become first-class sentences in the
+same grammar, with their seam measurable in the same arithmetic (`46`).
 
 So the GLM-consistent reading of this whole project is:
 

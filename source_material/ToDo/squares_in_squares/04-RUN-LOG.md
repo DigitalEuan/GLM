@@ -1030,3 +1030,142 @@ boundary is split.
 Left open and named: the certificate brackets the global maximum but does not
 prove it is at 0° (the disk bound has no orientation in it); a tight value needs
 an orientation-aware bound. No row changed. Entries `45-CERTIFIED-SPACE.md`.
+
+## Run 83 — the mixed-field grammar: 0° and 45° as sentences, and the seam's exact price
+
+**The question this run is built around.** The lattice perspective works up to a
+point and then stops, and the reason is one sentence: `√2` is irrational, so no
+scale and no symmetry label can make a 45° pose satisfy an integer lattice
+predicate. That is a theorem about the predicate, and this run treats it as the
+object of study: the alphabet is lifted one step to ℚ(√2), where the 0° and 45°
+words are both legal and their seam is measurable in the same exact arithmetic.
+Doc `19` §5 is corrected accordingly — the ladder's third rung is recorded there as
+an interface measurement and its constructive lift, not as an anti-pattern.
+
+**The arithmetic.** `scripts/qsqrt2.py` is `a + b√2` over `Fraction`, with the sign
+decided by `a²` versus `2b²` in the mixed cases (no tie exists), so a contact is
+exactly 0. The gate is the SAT predicate over the field: separated iff some axis
+`q` of either square has `|d·q| >= 1/2 + ext_other(q)`, and the container side is a
+field element, so "beats the grid" is a field comparison. Controls: 14,640 signs
+against 70-digit `Decimal`; a 3×3 grid with 20 exact contacts (12 edge + 8 corner)
+at `L = 3`; **274** states where the exact gate and `packlib.verify` agree, each at
+least 1e-3 from contact; two overlaps refused with exactly `-1` and `-1/2`.
+
+**Seven sentences, certified** (`scripts/mixed_field.py`, 6 controls):
+the 45° pair at `1 + 3/4√2`; the `t = 1/2` pair at `72/35`; the `t = 1/5` pair at
+`450/221`; the **corner glue** — four 0° squares in the corners, one tilted square
+between them — at `2 + 1/2√2 = 2.707107` with **four exact contacts**, five squares
+against the grid's 3 (gain 0.292893, exact density `(90 - 40√2)/49 = 0.682275`),
+and at `19/7` for `t = 1/2` and `t = 1/3`; the `t = 1/5` glue at `47/17`; and the
+ring nine at `2 + √2 = 3.414214`. Every side is the tight side of its family:
+1e-3 less is refused, all seven.
+
+**The seam law.** For the corner glue `L(θ) = 2 + 1/(cos+sin)`, and
+`(cos+sin)² = 1 + sin 2θ <= 2` with equality only at 45°, so the 45° word is the
+unique cheapest bridge in the family and every rational tilt pays an exact tax:
+`5/7 - 1/2√2` for `t = 1/2` and `1/3`, `13/17 - 1/2√2` for `1/5`,
+`25/31 - 1/2√2` for `1/7`. **The minimal glue word is one tilted square and it
+couples four 0° squares at once** — four diagonal seams, each exactly tight. The
+honest negative sits next to it: a diamond bridges a seam but cannot replace a
+square, because the 3×3 ring around one needs `2 + √2` against the grid's 3.
+
+**The modulator.** A first-order ΔΣ carrier with rational step `1/1000` on the
+exact coordinates: the running average converges like `1/(M N)` (4.5e-4 → 1.9e-8
+over `N = 1..10^4`) and the sentence does not. One rung of five is legal, and only
+at a side larger by 1.9e-8; every refused rung is an overlap at the exact side or
+below it. The irrational object exists in the discrete machine as the pair
+`(a, b)`; the stream is its bounded shadow, and the bound is measured.
+
+**The escalation, exactly.** At `N = 2` the shallowest tilt tested wins among the
+words (`t = 1/7`, `1568/775`) and all words lose to the axis pair at 2; at `N = 5`
+the 45° glue wins, with `t = 1/2` behind by `5/7 - 1/2√2`. The rational words have
+a finite integral model (scale 70, 442, 1550); the 45° word has none, for the field
+reason — which is why the second coordinate `b` is the label no scale can supply.
+
+**The census.** 447 of 1000 delivered rows are exactly the 0° word (the 447 sides
+in ℚ), 100 are the 45° word up to a 4.5e-13 rad decimal, 2 mix words, and **451 use
+no word at all**. A lifted grammar cannot retrofit a decimal table; it has to
+build — and 447 rows are already sentences of it. No row changed. Entries
+`46-MIXED-FIELD.md`.
+
+## Run 84 — the lift, the exact carrier, and the seam production rules
+
+**What changed in the instruments, not in the table.** Run 83 measured the mixed
+field; this run makes its three open pieces exact. `scripts/qsqrt2.py` gains a
+symbolic reconstructor (`recover_side`, `recover_point`, `lift_sentence`, 10
+controls) and `scripts/mixed_field.py` is rewritten around an exact carrier, the
+seam production rules and a budgeted lift (14 controls). Ledgers
+`workspace/push/uplift.json` (new; one record per mixed row) and
+`workspace/push/mixed_field.json`. **No row changed, no score claimed,
+`submission.csv` untouched.**
+
+**Upgrade 1 — the symbolic perception lifter.** Given a decimal sentence and its
+words, the lifter recovers the exact ℚ(√2) state: the box side by height-bounded
+rational basis recovery (`a + b√2`, `b = num/den` for `den <= 8`, three stages so
+that a row with side `3 + 4/3√2` is visible), the boundary layer by wall anchoring,
+the rest by contact peeling — two independent equations at a time, 2×2 Cramer over
+the field — and the squares the contact graph does not pin by coordinate-height
+recovery on the row's own lattice denominator. The decimals only choose the
+topology; every returned number is exact and `gate` decides. One fix is now a
+control: the link list is directed (`i -> j` with `-sgn`, `j -> i` with `+sgn`);
+reading both ends with one sign mirrors every placement built from it.
+
+Measured on the 100 mixed rows (n = 5..974): **97 lifted, gate clearance exactly 0
+on all 97, 0 violations, 127,837 certified contacts over 37,260 squares (9,003 of
+them 45°), 26,024 centres by peel and 5,618 by recovery, and all 97 sides in
+ℚ(√2) \ ℚ.** The three that do not lift are named: n = 51 and n = 295 have sides
+that no small-height `a + b√2` fits — the residual falls as the coefficient bound
+widens (2.74e-5 → 1.81e-5 → 1.13e-6 for n = 51) or stays flat at 1.33e-5 (n = 295),
+and 1e-7 is far outside both — and n = 126 is one coordinate short (124/126
+placed). **The 100 decimal shadows are 97 exact
+sentences and 3 float artefacts** — the census line of `46` §6 is now a measured
+split, and every one of the 97 sides being irrational is that section's obstruction
+restated on the rows themselves.
+
+**Upgrade 2 — the pure-algebraic ΔΣ carrier.** The accumulator is a field element,
+the quantizer is the exact floor (`grid_round(z, M) = floor_q2(zM + 1/2)/M`), and
+no `float()` exists in the carrier, the state, the Pell substitution, the seam
+builder or the quantizer — control 4 walks the *bytecode*, because a source grep
+trips over the docstrings. Two ladders against the gate: ΔΣ at `M = 1000` over
+`N = 1..2000` is legal at **2 of 11** rungs (only at sides above the exact one, in
+a stroboscopic pattern: the verdict is the sign of the bbox-defining coordinate's
+quantization error); the Pell substitution `√2 -> p/q` is legal at **6 of 12**
+convergents, and that ladder now has a closed form — the corners map to `1/2` and
+`3/2 + r/2`, so the side is exactly `2 + r/2` and
+
+    side excess = (r − √2)/2,        gate ⟺ r >= √2,
+
+which proves the alternation for every rational `r` instead of tabulating twelve
+residuals. **A rational carrier converges to the sentence and never returns it**;
+legality is a half-line and the exact sentence is its endpoint, reached only by the
+pair `(a, b)`.
+
+**Upgrade 3 — the seam production rules.** `S(k, m)`: four `k × k` axis blocks in
+the corners and an `m`-diamond 45° strip on the anti-diagonal (`k = 1, m = 1` is
+the run-83 corner glue). Closed forms, exact:
+
+    side        L(k, m) = 2k + m√2/2
+    count       N(k, m) = 4k² + m
+    void        V(k, m) = L² − N = 2km√2 + m²/2 − m
+    side cost   L(k, m) − 2k = m√2/2
+    gain        ⌈√N⌉ − L = 1 − m√2/2
+
+The seam has no slack parameter: consecutive diamonds are `1/√2` apart, which is
+exactly a 45° square's axis extent `√2/2`, so every consecutive pair is a contact
+and the strip's band width is `√2` with zigzag amplitude `√2/2`. **54/54 certified**
+for `k = 2..10`, `m = 1..6`: gate yes at the closed-form side, no at `L − 1e-9`.
+`gain = 1 − m√2/2` changes sign at `m = √2`, so a single diamond is a strict
+improvement over the plain `(2k+1)²` grid at `4k²+1` squares for **every** block
+size, while `m >= 2` loses (the strip's void grows in `m` twice over). It is a
+proved grammar for a family the delivered table already dominates (by 0.03–0.17 of
+side at n = 17, 37, 65, 101, 325, 401), so it changes no row — which is what it was
+asked to be: the general form of the corner glue with the price written in `(k, m)`,
+instead of a patch aimed at one doomed `n`.
+
+**Honest negatives, stated.** A rational carrier cannot certify the irrational
+sentence, and the gap is now a closed form rather than a residual table. Three of
+the 100 rows are not ℚ(√2) sentences at all. `S(k, m)` is proved minimal only
+within its own contact structure, and it is dominated on the table. No row changed.
+
+Entries `47-LIFT-CARRIER-SEAM.md`; `46` §4 carries a supersession note and §6 the
+lift's measured split; records `31`–`47`.
