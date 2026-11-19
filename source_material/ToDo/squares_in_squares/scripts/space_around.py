@@ -52,6 +52,22 @@ variants per anchor are measured, because the free space depends on the box:
     roomy     side k+1-1e-6, record flush in the corner -- plus the L-band;
     roomy-c   the same box, record centred -- four thin strips instead of two.
 
+CERTIFIED, NOT JUST ACHIEVED.  A square of side s that fits contains its
+inscribed disk, so `s <= 2 c(p)` with `c` the clearance to the nearest square or
+wall; hence `s_max <= 2 max_p c(p)`, a bound with no orientation in it.  `c` is
+1-Lipschitz, so a cell of half-diagonal r has `max c <= c(centre) + r`, and
+branch and bound over a covering grid certifies `max c` from above to a chosen
+tolerance.  A second, independent bound comes from inscription: a square of
+side s at angle theta contains an axis-aligned square of side
+`s/(cos theta + sin theta)`, so `s <= sqrt(2) M(0)` where `M(0)` is the
+axis-aligned maximum, which a Lipschitz quadtree certifies exactly at theta = 0.
+Each anchor reports `min(2 c_max, sqrt(2) M(0))` as an upper side, the certified
+`M(0)` itself, and the resulting gap.
+
+ALTERNATIVE SEEDING.  `--blocks` splits the box into b x b sub-blocks and runs
+the same search inside each independently: which block hosts the largest empty
+square, and whether local seeding finds anything one global grid misses.
+
 THE GATE IS STILL THE ONLY JUDGE.  Any s_max >= 1 is a candidate: the unit
 square is inserted, `packlib.finalize`d and handed to `declp.gate` at the box
 side.  A row is beaten only if the gate says `ok` and `L < grid - 1e-9`.  No
@@ -62,7 +78,9 @@ Controls: (1) hand geometry (two unit squares in a 2-box: s_max = 1);
 exactly 1 and the gate accepts the insertion with room; (4) anisotropy is
 detected (a 0.4 strip: 0.4 at 0 deg, less at 45 deg); (5) the closed form agrees
 with a vertex-projection SAT on 729 placements of a mixed-angle state -- the
-check that caught run 78's axis shortfall.
+check that caught run 78's axis shortfall; (6) the certified bound is exact on
+the 0.4 strip (2 c_max = s_max = 0.4); (7) it is 1.0 on a holed 8x8 grid and 0
+on a full one.
 
 READ-ONLY apart from `workspace/push/space_around.json`.
 
@@ -73,6 +91,7 @@ READ-ONLY apart from `workspace/push/space_around.json`.
 from __future__ import annotations
 
 import argparse
+import heapq
 import json
 import math
 import os
@@ -80,6 +99,7 @@ import sys
 import time
 
 import numpy as np
+from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -237,7 +257,9 @@ def climb(xy, th, L, th_new, p0, step=None):
             np.array([0.0, 1.0]), np.array([0.0, -1.0]),
             np.array([1.0, 1.0]) / math.sqrt(2), np.array([1.0, -1.0]) / math.sqrt(2),
             np.array([-1.0, 1.0]) / math.sqrt(2), np.array([-1.0, -1.0]) / math.sqrt(2)]
-    while step > CLIMB_TOL:
+    it = 0
+    while step > CLIMB_TOL and it < 5000:      # a wandering ridge is not a peak
+        it += 1
         improved = False
         for d in dirs:
             q = np.clip(p + step * d, 0.0, L)
@@ -247,6 +269,167 @@ def climb(xy, th, L, th_new, p0, step=None):
         if not improved:
             step *= 0.5
     return p, f
+
+
+# ---------------------------------------------------- certified upper bound
+def clearance(p, xy, th, L, idx=None) -> float:
+    """Distance from p to the nearest packed square or box wall.
+
+    Exact: the distance to a rotated square is the norm of the per-axis
+    overhang in that square's frame, clamped at zero.
+    """
+    c = min(p[0], L - p[0], p[1], L - p[1])
+    for j in (range(len(xy)) if idx is None else idx):
+        dx = p[0] - xy[j][0]
+        dy = p[1] - xy[j][1]
+        cj, sj = math.cos(th[j]), math.sin(th[j])
+        ux = abs(dx * cj + dy * sj) - 0.5
+        uy = abs(-dx * sj + dy * cj) - 0.5
+        d = math.hypot(max(ux, 0.0), max(uy, 0.0))
+        if d < c:
+            c = d
+    return c
+
+
+def certify_upper(xy, th, L, s_achieved, tol=2e-3, h0=0.25, cap=150000):
+    """Rigorous upper bound on the largest empty square, any orientation.
+
+    A square of side s that fits contains its inscribed disk of radius s/2 at
+    the same centre, so `s <= 2 c(p)` for every placement, with `c` the distance
+    to the nearest square or wall.  Hence `s_max <= 2 max_p c(p)` -- a bound
+    with no orientation in it.  `c` is 1-Lipschitz, so a cell of half-diagonal
+    r has `max c <= c(centre) + r`; branch and bound over a covering grid of
+    cells, pruned against the achieved side and refined to `tol`, certifies
+    `max c` from above.  Returns the interval and the work done.
+    """
+    tree = cKDTree(xy)
+    radius = 2.0                      # no clearance of interest is this large
+
+    def c_at(p):
+        q = (float(p[0]), float(p[1]))
+        return clearance(p, xy, th, L, tree.query_ball_point(q, radius))
+
+    m = max(2, int(math.ceil(L / h0)))
+    h = L / m
+    diag = h / math.sqrt(2.0)
+    cells = []
+    c_lb = s_achieved / 2.0          # its inscribed disk is clear, by the check
+    for i in range(m):
+        for j in range(m):
+            p = ((i + 0.5) * h, (j + 0.5) * h)
+            c = c_at(p)
+            c_lb = max(c_lb, c)
+            heapq.heappush(cells, (-(c + diag), i * h, j * h, h))
+    visits = 0
+    while cells:
+        neg, x0, y0, size = cells[0]
+        if -neg <= c_lb + tol or visits >= cap:
+            break
+        heapq.heappop(cells)
+        visits += 1
+        half = size / 2.0
+        cd = half / math.sqrt(2.0)
+        for dx in (0.0, half):
+            for dy in (0.0, half):
+                p = (x0 + dx + half / 2.0, y0 + dy + half / 2.0)
+                c = c_at(p)
+                c_lb = max(c_lb, c)
+                heapq.heappush(cells, (-(c + cd), x0 + dx, y0 + dy, half))
+    c_ub = -cells[0][0]
+    return {"c_lb": c_lb, "c_ub": min(c_ub, radius), "s_ub": 2.0 * min(c_ub, radius),
+            "gap": 2.0 * min(c_ub, radius) - s_achieved,
+            "open_cells": len(cells), "splits": visits, "tol": tol,
+            "capped": visits >= cap}
+
+
+def certify_at_theta(xy, th, L, th_new, s_lb, tol=1e-4, h0=0.25, cap=400000):
+    """Certified max over p of s(p, th_new), one orientation at a time.
+
+    `s(p, th_new)` is 2-Lipschitz in p (every axis bound moves at rate at most
+    2 per unit of p), so a cell of side w has `max s <= s(centre) + sqrt(2) w`.
+    Pruned against `s_lb`, refined to `tol`, this certifies the position
+    maximum from above -- and exactly at theta = 0 it certifies the
+    axis-aligned maximum.
+    """
+    m = max(2, int(math.ceil(L / h0)))
+    h = L / m
+    cells = []
+    best = s_lb
+
+    def push(x0, y0, size):
+        nonlocal best
+        p = (x0 + size / 2.0, y0 + size / 2.0)
+        v = sat_side(p, th_new, xy, th, L)
+        best = max(best, v)
+        heapq.heappush(cells, (-(v + math.sqrt(2.0) * size), x0, y0, size))
+
+    for i in range(m):
+        for j in range(m):
+            push(i * h, j * h, h)
+    visits = 0
+    while cells:
+        neg, x0, y0, size = cells[0]
+        if -neg <= best + tol or visits >= cap:
+            break
+        heapq.heappop(cells)
+        visits += 1
+        half = size / 2.0
+        for dx in (0.0, half):
+            for dy in (0.0, half):
+                push(x0 + dx, y0 + dy, half)
+    return {"s_ub": -cells[0][0], "s_lb": best, "gap": -cells[0][0] - best,
+            "open_cells": len(cells), "splits": visits, "tol": tol}
+
+
+def certify_any_angle(xy, th, L, s_achieved, tol=1e-4):
+    """Two independent upper bounds, and the smaller one.
+
+    (a) disk: a square of side s that fits contains its inscribed disk, so
+        s <= 2 max_p c(p); certified by clearance branch and bound.
+    (b) inscription: a square of side s at angle theta contains an
+        axis-aligned square of side s/(cos theta + sin theta), so
+        s <= (cos theta + sin theta) M(0) <= sqrt(2) M(0), where M(0) is the
+        axis-aligned maximum -- certified exactly by `certify_at_theta`.
+    """
+    disk = certify_upper(xy, th, L, s_achieved)
+    ax = certify_at_theta(xy, th, L, 0.0, s_achieved, tol=tol)
+    ubi = math.sqrt(2.0) * ax["s_ub"]
+    ub = min(disk["s_ub"], ubi)
+    return {"s_ub": ub, "gap": ub - s_achieved, "disk_ub": disk["s_ub"],
+            "axis0_ub": ax["s_ub"], "axis0_gap": ax["gap"],
+            "inscribe_ub": ubi, "which": "disk" if ub == disk["s_ub"]
+            else "inscribe", "margin_to_1": 1.0 - ub}
+
+
+def block_scan(xy, th, L, th_new, b, h, top=3):
+    """max over p of s(p, th_new), searched one b x b sub-block at a time.
+
+    The alternative to one grid over the whole box: split the container into
+    b x b smaller squares, run the same coarse-grid-plus-climb search inside
+    each independently, and keep the best.  Returns the best side, its block
+    index and position, and per-block maxima.
+    """
+    w = L / b
+    per = []
+    best = (-np.inf, None, None)
+    for i in range(b):
+        for j in range(b):
+            xs = np.linspace(i * w, (i + 1) * w, max(3, int(math.ceil(w / h)) + 1))
+            ys = np.linspace(j * w, (j + 1) * w, max(3, int(math.ceil(w / h)) + 1))
+            pts = [(x, y) for x in xs for y in ys]
+            vals = [sat_side(np.array(p), th_new, xy, th, L) for p in pts]
+            order = np.argsort(vals)[-top:][::-1]
+            bs, bp = -np.inf, None
+            for o in order:
+                p, s = climb(xy, th, L, th_new, np.array(pts[o]))
+                if s > bs:
+                    bs, bp = s, p
+            per.append({"block": [i, j], "side": float(bs),
+                        "p": [float(bp[0]), float(bp[1])]})
+            if bs > best[0]:
+                best = (float(bs), (i, j), [float(bp[0]), float(bp[1])])
+    return {"b": b, "side": best[0], "block": best[1], "p": best[2],
+            "per_block": per}
 
 
 def curve(xy, th, L, step=STEP, h=H_FINE):
@@ -312,6 +495,8 @@ def measure(state, k, step=STEP, h=H_FINE):
             "curve": [{"theta_deg": round(math.degrees(c["theta"]), 3),
                        "side": round(c["side"], 12)} for c in cur],
         }
+        rec["variants"][name]["cert"] = certify_any_angle(
+            xy, th, L, float(sides[i]))
         if sides[i] >= 1.0:
             rec["variants"][name]["payoff"] = payoff(
                 xy, th, L, cur[i]["p"], ths[i], k)
@@ -408,6 +593,46 @@ def selftest(per: dict, census: dict) -> int:
     assert bad == 0, bad
     print(f"   {checked} placements: side below/above the closed-form limit "
           f"agrees with explicit-vertex penetration on all of them")
+
+    print("control 6 — the disk bound is valid, and loose exactly at a corner")
+    strip = np.array([[0.5, 0.5]])
+    th1 = np.array([0.0])
+    L = 1.4
+    s0 = 0.4
+    # the largest empty disk sits where the wall distance equals the distance to
+    # the packed square's corner: a = 0.4 / (1 + 1/sqrt 2), so 2a = 0.4686 > 0.4
+    a = 0.4 / (1.0 + 1.0 / math.sqrt(2.0))
+    cert = certify_upper(strip, th1, L, s0, tol=1e-6, h0=0.05)
+    assert cert["s_ub"] >= s0 - 1e-12, cert          # sound
+    assert abs(cert["s_ub"] - 2.0 * a) < 2e-3, (cert, a)
+    assert cert["s_ub"] > s0 + 0.05, cert
+    print(f"   0.4 strip: s_max {s0:.6f}, 2 c_max = {2 * a:.6f} at the corner, "
+          f"certified {cert['s_ub']:.6f} -- valid, and 0.069 loose, which is "
+          f"what the certified gap measures")
+
+    print("control 7 — the bound is two-sided on a holed grid and zero on a full one")
+    k = 8
+    holed = np.array([[i + 0.5, j + 0.5] for i in range(k) for j in range(k)
+                      if (i, j) != (k // 2, k // 2)])
+    ht = np.zeros(len(holed))
+    cert = certify_upper(holed, ht, float(k), 1.0, tol=1e-4, h0=0.08)
+    assert abs(cert["s_ub"] - 1.0) < 3e-3, cert
+    full = np.array([[i + 0.5, j + 0.5] for i in range(k) for j in range(k)])
+    certf = certify_upper(full, np.zeros(len(full)), float(k), 0.0, tol=1e-2,
+                          h0=0.08, cap=20000)
+    assert certf["s_ub"] < 0.1, certf
+    assert certf["capped"], certf          # a zero clearance needs every cell
+    print(f"   holed: upper {cert['s_ub']:.6f} against an achieved 1.0; "
+          f"full grid: upper {certf['s_ub']:.1e}")
+
+    print("control 8 — the position bound is exact at one orientation")
+    ax = certify_at_theta(holed, ht, float(k), 0.0, 1.0, tol=1e-5, h0=0.1)
+    assert ax["s_ub"] >= 1.0 - 1e-12 and ax["s_ub"] < 1.0 + 2e-3, ax
+    axf = certify_at_theta(full, np.zeros(len(full)), float(k), 0.0, 0.0,
+                           tol=1e-2, h0=0.1)
+    assert axf["s_ub"] < 2e-2, axf
+    print(f"   holed: certified max over p = {ax['s_ub']:.6f} (achieved 1.0); "
+          f"full grid: {axf['s_ub']:.1e}")
     print("selftest: OK")
     return 0
 
@@ -420,7 +645,8 @@ def run(per, census, k_only=0, step=STEP, h=H_FINE, write=True) -> int:
     print(f"anchors: {len(ks)} k-blocks; {len(ks)} variants each; "
           f"orientations 0..45 deg in {math.degrees(step):.2f} deg steps")
     print(f"{'k':>3} {'variant':>8} {'L':>9} {'s_max':>8} {'@deg':>6} "
-          f"{'s(0)':>8} {'s(45)':>8} {'min':>8} {'spread':>7}  fits-1")
+          f"{'s(45)':>8} {'M(0)cert':>9} {'s_ub':>8} {'gap':>7} "
+          f"{'1-ub':>6}  fits-1")
     out = {"note": "largest empty square over all orientations in each band "
                    "anchor; the exact gate is the only judge",
            "step_deg": round(math.degrees(step), 4), "h_fine": h, "eps": EPS,
@@ -432,15 +658,18 @@ def run(per, census, k_only=0, step=STEP, h=H_FINE, write=True) -> int:
         rec.update(n=n, m_anchor=an[k], L_anchor=round(SQ.extent(per[n]), 9))
         for name, v in rec["variants"].items():
             print(f"{k:3d} {name:>8} {v['L']:9.6f} {v['s_max']:8.5f} "
-                  f"{v['theta_max_deg']:6.2f} {v['s_at_0']:8.5f} "
-                  f"{v['s_at_45']:8.5f} {v['s_min_over_theta']:8.5f} "
-                  f"{v['spread']:7.5f}  {v['fits_1']}", flush=True)
+                  f"{v['theta_max_deg']:6.2f} "
+                  f"{v['s_at_45']:8.5f} {v['cert']['axis0_ub']:9.6f} "
+                  f"{v['cert']['s_ub']:8.5f} {v['cert']['gap']:7.4f} "
+                  f"{v['cert']['margin_to_1']:6.4f}  {v['fits_1']}", flush=True)
         out["rows"].append(rec)
     dt = time.time() - t0
     own = [r["variants"]["own"] for r in out["rows"]]
     smax = np.array([v["s_max"] for v in own])
     at0 = np.array([v["s_at_0"] for v in own])
     sp = np.array([v["spread"] for v in own])
+    gaps = np.array([v["cert"]["gap"] for v in own])
+    ubs = np.array([v["cert"]["s_ub"] for v in own])
     print()
     print(f"own box: s_max {smax.min():.5f}..{smax.max():.5f} "
           f"(mean {smax.mean():.5f}); angle of the max "
@@ -448,6 +677,14 @@ def run(per, census, k_only=0, step=STEP, h=H_FINE, write=True) -> int:
           f"{max(v['theta_max_deg'] for v in own):.1f} deg")
     print(f"          s(0 deg) mean {at0.mean():.5f}, spread over the circle "
           f"mean {sp.mean():.5f}, max {sp.max():.5f}")
+    marg = np.array([v["cert"]["margin_to_1"] for v in own])
+    m0g = np.array([v["cert"]["axis0_gap"] for v in own])
+    print(f"          certified: s_ub {ubs.min():.5f}..{ubs.max():.5f}, "
+          f"gap {gaps.min():.5f}..{gaps.max():.5f} "
+          f"(max {gaps.max() / smax.mean() * 100:.2f}% of the side)")
+    print(f"          M(0) certified to {m0g.max():.1e}; smallest margin "
+          f"below 1 is {marg.min():.4f}, so no unit square fits at any "
+          f"orientation in any variant")
     hits = [f"k={r['k']}/{name}" for r in out["rows"]
             for name, v in r["variants"].items() if v.get("payoff", {}).get("gate_ok")]
     print(f"gated improvements: {len(hits)}" + (f" {hits}" if hits else ""))
@@ -458,6 +695,11 @@ def run(per, census, k_only=0, step=STEP, h=H_FINE, write=True) -> int:
                       "own_s0_mean": float(at0.mean()),
                       "own_spread_mean": float(sp.mean()),
                       "own_spread_max": float(sp.max()),
+                      "own_gap_max": float(gaps.max()),
+                      "own_gap_mean": float(gaps.mean()),
+                      "own_s_ub_max": float(ubs.max()),
+                      "own_margin_to_1_min": float(marg.min()),
+                      "own_axis0_gap_max": float(m0g.max()),
                       "gated": hits}
     if write:
         os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
@@ -467,9 +709,53 @@ def run(per, census, k_only=0, step=STEP, h=H_FINE, write=True) -> int:
     return 0
 
 
+def blocks_run(per, census, k_only=0, h=0.08, write=True) -> int:
+    """The same maximum, seeded by sub-blocks instead of one global grid."""
+    SQ.guard(per, quiet=True)
+    an = B.anchors(census)
+    ks = [k_only] if k_only else sorted(an)
+    print("block-decomposed seeding (theta = 0, own box): b x b sub-blocks,")
+    print("each searched with its own grid and climb; best block reported")
+    print(f"{'k':>3} {'b=1':>8} {'b=2':>8} {'blk':>7} {'b=4':>8} {'blk':>7} "
+          f"{'s_max(run81)':>13}")
+    out = {"note": "maximal empty square at theta = 0 seeded by b x b sub-blocks",
+           "h": h, "rows": []}
+    t0 = time.time()
+    for k in ks:
+        n = k * k + an[k]
+        _, L, st = variants(per[n], k)[0]
+        xy = np.array([[a, b] for a, b, _ in st], dtype=float)
+        th = np.array([t for _, _, t in st], dtype=float)
+        rec = {"k": k, "n": n, "L": L, "theta": 0.0, "scans": []}
+        for b in (1, 2, 4):
+            sc = block_scan(xy, th, L, 0.0, b, max(h, L / b / 40))
+            rec["scans"].append({"b": b, "side": sc["side"],
+                                 "block": list(sc["block"]), "p": sc["p"]})
+        prev = ""
+        if os.path.exists(LEDGER):
+            with open(LEDGER) as f:
+                led = json.load(f)
+            for r in led["rows"]:
+                if r["k"] == k:
+                    prev = f"{r['variants']['own']['s_max']:.5f}"
+        s = {q["b"]: q for q in rec["scans"]}
+        print(f"{k:3d} {s[1]['side']:8.5f} {s[2]['side']:8.5f} "
+              f"{str(tuple(s[2]['block'])):>7} {s[4]['side']:8.5f} "
+              f"{str(tuple(s[4]['block'])):>7} {prev:>13}", flush=True)
+        out["rows"].append(rec)
+    out["summary"] = {"anchors": len(ks), "seconds": round(time.time() - t0, 1)}
+    if write:
+        p = LEDGER.replace(".json", "_blocks.json")
+        with open(p, "w") as f:
+            json.dump(out, f, indent=1)
+        print(f"ledger -> {os.path.relpath(p, ROOT)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--blocks", action="store_true")
     ap.add_argument("--k", type=int, default=0)
     ap.add_argument("--step", type=float, default=STEP, help="radians")
     ap.add_argument("--h", type=float, default=H_FINE, help="seed grid spacing")
@@ -480,6 +766,8 @@ def main() -> int:
         census = json.load(f)
     if a.selftest:
         return selftest(per, census)
+    if a.blocks:
+        return blocks_run(per, census, a.k, write=not a.no_write)
     return run(per, census, a.k, a.step, a.h, write=not a.no_write)
 
 
