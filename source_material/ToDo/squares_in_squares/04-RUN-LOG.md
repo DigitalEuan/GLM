@@ -922,3 +922,36 @@ m ≤ 13 are *polished* — fractional shifts, which is why their sides are
 `467/17 − 11√2/2`) — and the menu of those families tops out at **m = 13 at any
 k**, while the band starts at 21. No row changed. Entries
 `42-LAYER-FROM-SCRATCH.md`.
+
+## Run 80 — every solve we hold: no slack in a row, and the table is sixty slacks
+
+Asked whether any solve we hold can be refined slightly further (not the ones
+proven optimal), and whether a cascade family planner would propagate it.
+
+**Refinement: 0 of 553.** Only 191 beating rows had ever been shrink-tested (run
+77, a refusal at eps = 1e-6, which says nothing below a micro-unit); the 362
+above n = 400 were untested because the global LP is dense and O(n²).
+`refine_cascade.py` runs `declp.solve`'s formulation restricted to a radius where
+pairs can still bind, frees the whole **wall ring** (every extreme-edge square
+plus its 1.3-neighbourhood, cap 200, never hit), and walks a demand ladder from
+1e-2 down to 1e-7, finalizing and gating every accepted round. All 553 refuse —
+every beating row is locally wall-pinned at frozen angles. Controls: the local LP
+agrees with `declp.solve` on feasibility; a rigid 5×5 grid refuses; a wall
+loosened by +0.02 is put back in two rounds; the raw LP state is refused by the
+gate and the finalized one accepted; the cascade arithmetic matches a hand sum.
+
+**Cascade: the channel is already applied.** Against the *causal* class leader
+(a larger row cannot serve a smaller one), **969 of 969** non-square rows sit
+exactly at their residue class's chain value; 0 are open at 1e-8. The 25 rows
+that look open at 1e-9 are `finalize`'s own 2e-9 scale, margin and not slack —
+the same 25 run 42 saw from the stale table, now exact.
+
+**So the table is a 60-parameter object**, `total = Σ_r Σ_k (k + δ*(r))/√n − 1000`
+with `d(total)/dδ*(r) = W(r)`, `W(1) = 3.6453` over 31 rows. A class leader's
+refinement propagates by the chain translation to its whole class, worth Δ·W(r)
+— the leverage the user's hypothesis predicted, and exactly why the null result
+matters: there is nothing to propagate. Only the 60 leaders can matter, and the
+23 classes still at δ = 1 are the band's residues from runs 78–79. Left open and
+named: rotation-enabled refinement (the LP freezes angles) and margin mining
+(~1e-7 total, spends the 2e-9 rounding margin; not taken). No row changed. Entries
+`43-NO-SLACK-SIXTY-SLACKS.md`.

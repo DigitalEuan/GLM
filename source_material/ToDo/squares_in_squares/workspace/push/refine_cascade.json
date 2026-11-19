@@ -1,0 +1,27 @@
+{
+ "n_min": 1,
+ "candidates": 553,
+ "scanned": 553,
+ "cap_hits": 0,
+ "fmax": 200,
+ "seconds": 197.5,
+ "ladder": [
+  0.01,
+  0.003,
+  0.001,
+  0.0001,
+  3e-05,
+  1e-05,
+  3e-06,
+  1e-06,
+  3e-07,
+  1e-07
+ ],
+ "cutoff": 2.6,
+ "span": 0.05,
+ "move": 0.5,
+ "refined": [],
+ "states": {},
+ "row_gain": 0,
+ "cascade_bound": 0
+}
