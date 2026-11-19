@@ -197,6 +197,8 @@ def l_shell(key, m):
         "norm": ("m", m),
         "rank": ("rank", lat.dim),
     }, {"lat": lat, "m": m, "shell": vecs})
+    claim.measure = ("r_L(m)", len(vecs))
+    claim.invariant = ("rank", lat.dim)
     claim.meta["gain"] = None
     return claim
 
@@ -213,6 +215,8 @@ def l_frame(key):
         "min_norm": ("m_min", lat.minimal_norm),
         "root_degree": ("deg_1", deg if deg is not None else "n/a (not a root lattice)"),
     }, {"lat": lat, "roots": roots, "kissing": len(roots), "degree": deg})
+    claim.measure = ("|L_min|", len(roots))
+    claim.invariant = ("m_min", lat.minimal_norm)
     claim.meta["gain"] = None
     return claim
 
@@ -228,6 +232,8 @@ def l_ball(key, M):
                         "shells": ("M+1", M + 1),
                         "theta": ("r(0..M)", tuple(counts)),
                     }, {"lat": lat, "M": M, "shells": shells, "theta": counts})
+    claim.measure = ("N(0..M)", sum(counts))
+    claim.invariant = ("M+1", M + 1)
     claim.meta["gain"] = None
     return claim
 
@@ -254,6 +260,8 @@ def l_sum(key_a, key_b, M):
                         "shell0": ("r(0)", len(pairs[0])),
                     }, {"a": a, "b": b, "M": M, "pairs": pairs, "conv": conv,
                         "ta": ta, "tb": tb})
+    claim.measure = ("theta(A*B)", conv[-1])
+    claim.invariant = ("rank A+B", a.dim + b.dim)
     claim.meta["gain"] = None
     return claim
 
@@ -275,6 +283,8 @@ def l_fold(key, m):
                         "pairs": ("r/2", len(vecs) // 2),
                         "even": ("r mod 2", len(vecs) % 2),
                     }, {"lat": lat, "m": m, "shell": vecs})
+    claim.measure = ("r/2", len(vecs) // 2)
+    claim.invariant = ("r mod 2", len(vecs) % 2)
     claim.meta["gain"] = None
     return claim
 
@@ -290,6 +300,8 @@ def l_atom(key):
         "min_norm": ("m_min", lat.minimal_norm),
         "kissing": ("|L_min|", len(roots)),
     }, {"lat": lat, "roots": roots})
+    claim.measure = ("|L_min|", len(roots))
+    claim.invariant = ("rank", lat.dim)
     claim.meta["gain"] = None
     return claim
 
@@ -301,10 +313,7 @@ class ShellWitness(W.Witness):
     name = "exact_norm"
     law = "shell_refused"
 
-    def applies(self, claim):
-        return claim.domain == "lattice_shells"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         p = claim.payload
         if "shell" in p:
             lat, m, vecs = p["lat"], p["m"], p["shell"]
@@ -347,16 +356,18 @@ class ShellWitness(W.Witness):
 
 
 class KissingWitness(W.Witness):
-    """Topology: the minimal shell's size and the inner-product-1 graph degree."""
+    """Topology: the minimal shell's size and the inner-product-1 graph degree.
+
+    The only witness in the engine that scopes itself by family: kissing is a law of
+    `Frame` and `Atom`, not of a direct sum, so the wheel runs three witnesses there
+    and records that number instead of pretending every cell has four.
+    """
 
     name = "kissing_topology"
     law = "kissing_mismatch"
+    families = frozenset({"Frame", "Atom"})
 
-    def applies(self, claim):
-        return claim.domain == "lattice_shells" and (
-            claim.family in ("Frame", "Atom"))
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         lat = claim.payload["lat"]
         roots = shell(lat, lat.minimal_norm)
         deg = root_degree(lat)
@@ -378,10 +389,7 @@ class ThetaWitness(W.Witness):
     name = "theta_conservation"
     law = "theta_mismatch"
 
-    def applies(self, claim):
-        return claim.domain == "lattice_shells"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         p = claim.payload
         if "pairs" in p:
             enumerated = [len(x) for x in p["pairs"]]
@@ -405,16 +413,14 @@ class ThetaWitness(W.Witness):
         return False, "no theta payload"
 
 
-class DecimalLatticeWitness(W.Witness):
-    """Independent 70-digit Decimal recomputation of the integer-only claims."""
+def lattice_decimal(claim):
+    """The lattice model for the shared `DecimalWitness`: counts and norms in Decimal.
 
-    name = "decimal_cross"
-    law = "decimal_mismatch"
-
-    def applies(self, claim):
-        return claim.domain == "lattice_shells"
-
-    def check(self, claim):
+    This is the third domain's half of the one Decimal contract: the witness class and
+    the arithmetic are shared with packings and sequences, and only this model lives
+    here -- next to the exact witnesses that have to agree with it.
+    """
+    if True:
         p = claim.payload
         if "pairs" in p:
             a, b, M = p["a"], p["b"], p["M"]
@@ -449,7 +455,8 @@ def alphabet():
 def domain():
     d = W.Domain("lattice_shells", alphabet(),
                  [ShellWitness(), KissingWitness(), ThetaWitness(),
-                  DecimalLatticeWitness()])
+                  W.DecimalWitness()])
+    d.decimal_model = lattice_decimal
     for name, fn in (("Tile", l_shell), ("Frame", l_frame), ("Strip", l_ball),
                      ("Glue", l_sum), ("SymmetryFold", l_fold), ("Atom", l_atom)):
         d.register(name, fn)

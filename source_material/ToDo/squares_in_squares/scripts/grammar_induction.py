@@ -165,6 +165,50 @@ def lifted_states(limit=300, cap=60):
     return out
 
 
+def diamond1():
+    """The single 45-degree square: the second alphabet primitive of a composition."""
+    return ([(W.S2H, W.S2H)], [W.Q.word_45()])
+
+
+def acceptance():
+    """The DiamondField acceptance test, one atom at a time.
+
+    Three claims are checked per atom, all exact:
+      1. the combinator's assembled sentence *is* the delivered lifted state -- same
+         centres, same words, as sets (so a mistyped slot or step fails here);
+      2. the alphabet {Tile, diamond} covers it completely: 100% decomposition, with
+         the counts |axis cells| and |diamonds| the combinator derived;
+      3. the side and the void are the lifted atom's, exactly.
+    """
+    out = []
+    for name, n in (("n10", 10), ("n19", 19), ("n40", 40)):
+        claim = W.p_diamond_field(name)
+        st, ws, L = W._lift_row(n)
+        gen = {(p, _word_key(w)) for p, w in zip(claim.payload["state"],
+                                               claim.payload["words"])}
+        ref = {(p, _word_key(w)) for p, w in zip(st, ws)}
+        same = gen == ref
+        grid = W.p_grid(1)
+        c_t, tot_t, _ = cover(claim.payload["state"], claim.payload["words"],
+                              grid.payload["state"], grid.payload["words"])
+        dt, dw = diamond1()
+        c_d, _, _ = cover(claim.payload["state"], claim.payload["words"], dt, dw)
+        rec = {"field": name, "n": n, "squares": len(claim.payload["state"]),
+               "axis": len(claim.payload["cells"]),
+               "diamonds": len(claim.payload["slots"]),
+               "dropped": len(claim.payload["dropped"]),
+               "identical_to_atom": same,
+               "tile_copies": c_t, "diamond_copies": c_d,
+               "covered": c_t + c_d, "total": len(claim.payload["state"]),
+               "exact": same and c_t + c_d == len(claim.payload["state"]),
+               "L": str(claim.laws["extent"][1]),
+               "L_matches_atom": claim.laws["extent"][1] == L,
+               "void": str(claim.laws["void"][1]),
+               "gain": str(claim.invariant[1]) if claim.invariant else None}
+        out.append(rec)
+    return out
+
+
 def run():
     T = templates()
     states = lifted_states()
@@ -227,6 +271,16 @@ def selftest():
     print(f"control 2 — a unit Tile covers the pocket's 4 axis squares and not its "
           f"diamond ({c2}/{tot2}, {len(used2)} copies): words are matched, not just centres")
     checks += 1
+    # the DiamondField acceptance test: 100% exact decomposition of the three atoms
+    acc = acceptance()
+    for a in acc:
+        assert a["exact"], a
+        assert a["identical_to_atom"] and a["L_matches_atom"], a
+        assert a["covered"] == a["total"] == a["squares"], a
+    print("control 3 — DiamondField reproduces and fully decomposes the atoms: "
+          + ", ".join(f"n={a['n']} {a['axis']}+{a['diamonds']}={a['squares']}"
+                      for a in acc))
+    checks += 1
     print(f"grammar_induction: OK ({checks} controls)")
     return checks
 
@@ -235,8 +289,17 @@ def main(argv=None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     if "--selftest" in argv:
         return 0 if selftest() else 1
+    acc = acceptance()
+    print("DiamondField acceptance — declared slots, derived geometry")
+    for a in acc:
+        print(f"  {a['field']:4s} n={a['n']:3d} {a['axis']:2d} axis + {a['diamonds']:2d} "
+              f"diamonds, dropped {a['dropped']}, L = {a['L']:>14s}, "
+              f"covered {a['covered']}/{a['total']} exact={a['exact']} "
+              f"identical={a['identical_to_atom']}")
+    with open(os.path.join(ROOT, "workspace/push/diamond_fields.json"), "w") as f:
+        json.dump({"run": 87, "acceptance": acc}, f, indent=1)
     out = run()
-    print(f"states: {out['states']}, exact decompositions: "
+    print(f"\nstates: {out['states']}, exact decompositions: "
           f"{out['exact_decompositions']}, best partial cover: "
           f"{out['best_partial']:.3f}")
     for r in out["rows"][:6]:

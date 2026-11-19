@@ -112,15 +112,31 @@ class Refusal(Exception):
 # ----------------------------------------------------------- laws and claims
 @dataclass
 class Claim:
-    """One certified-or-refused cell: the sentence, its laws, and its evidence."""
+    """One certified-or-refused cell: the sentence, its laws, and its evidence.
+
+    The three *neutral* fields are what the engine reports, for every domain:
+
+      size       how many objects the sentence is made of (squares, letters, vectors)
+      measure    the exact quantity the family is judged by (a side, a weight, a count)
+      invariant  the exact quantity the family claims to preserve or improve on
+
+    `n` remains a read-only alias for `size`, because structure builders are written
+    with `n` and there is no reason to churn them for a rename.
+    """
 
     domain: str
     family: str
     params: dict
-    n: int
+    size: int
     laws: dict                    # name -> (formula, exact value)
     payload: object               # domain object (state/words, or the word)
     meta: dict = field(default_factory=dict)
+    measure: tuple | None = None      # (label, exact value)
+    invariant: tuple | None = None    # (label, exact value)
+
+    @property
+    def n(self):
+        return self.size
 
     def law_str(self, name):
         formula, value = self.laws[name]
@@ -132,16 +148,23 @@ class Claim:
 
 # ---------------------------------------------------------------- witnesses
 class Witness:
-    """A kind of evidence.  Subclasses implement `check(claim) -> (ok, detail)`."""
+    """A kind of evidence.  Subclasses implement `check(claim, domain) -> (ok, detail)`.
+
+    Suites are variable-length by declaration, not by `if domain == ...` inside the
+    engine: a witness names the families it covers (`None` = every family of the domain
+    it is registered on), and `Domain.suite` returns the applicable ones.  So a Glue
+    cell can run three witnesses and an Atom four, and the wheel records how many ran.
+    """
 
     name = "witness"
     law = "witness_failed"
+    families = None
 
-    def check(self, claim: Claim):            # pragma: no cover - interface
+    def check(self, claim: Claim, domain=None):       # pragma: no cover - interface
         raise NotImplementedError
 
     def applies(self, claim: Claim) -> bool:
-        return True
+        return self.families is None or claim.family in self.families
 
 
 class PackingGateWitness(Witness):
@@ -150,10 +173,7 @@ class PackingGateWitness(Witness):
     name = "exact_gate"
     law = "gate_refused"
 
-    def applies(self, claim):
-        return claim.domain == "spatial_geometry"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         g = Q.gate(claim.payload["state"], claim.payload["words"])
         # a one-square sentence has no pairs at all: clearance is None, not 0
         ok = g["ok"] and (g["clearance"] is None or g["clearance"] == 0)
@@ -168,10 +188,7 @@ class ContactGraphWitness(Witness):
     name = "contact_graph"
     law = "contact_graph_thin"
 
-    def applies(self, claim):
-        return claim.domain == "spatial_geometry"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         state, words = claim.payload["state"], claim.payload["words"]
         n = len(state)
         if n == 1:
@@ -208,11 +225,8 @@ class ConservationWitness(Witness):
     name = "conservation"
     law = "conservation_failed"
 
-    def applies(self, claim):
-        return claim.domain == "spatial_geometry"
-
-    def check(self, claim):
-        n = claim.n
+    def check(self, claim, domain=None):
+        n = claim.size
         L = claim.laws["extent"][1]
         V = claim.laws["void"][1]
         ok = (Q2(n) + V) == L * L and (L * L - Q2(n)).sign() >= 0 and n >= 1
@@ -220,58 +234,79 @@ class ConservationWitness(Witness):
 
 
 class DecimalWitness(Witness):
-    """Independent 70-digit Decimal recomputation; signs and values must agree."""
+    """Independent 70-digit Decimal recomputation, for *every* domain.
+
+    One class, one protocol.  What is shared is the arithmetic: `scalar` turns any
+    supported element -- a `Quad` of any discriminant, a `Fraction`, an int -- into a
+    70-digit Decimal using Decimal's own square root, never a float.  What is
+    per-domain is the *model*, declared by the domain as
+    `decimal_model(claim) -> (ok, detail)` and kept next to the code that has to pass
+    the exact witnesses too.  A model that disagrees with the exact gate is a bug the
+    suite catches, not a second opinion the engine averages.
+    """
 
     name = "decimal_cross"
     law = "decimal_mismatch"
 
-    def applies(self, claim):
-        return claim.domain in ("spatial_geometry", "sturmian_sequences")
+    @staticmethod
+    def scalar(z):
+        """Any supported scalar as a Decimal (sqrt by Decimal, never by float)."""
+        if isinstance(z, Decimal):
+            return z
+        if hasattr(z, "a") and hasattr(z, "b"):
+            return (Decimal(z.a.numerator) / Decimal(z.a.denominator)
+                    + Decimal(z.b.numerator) / Decimal(z.b.denominator)
+                    * Decimal(getattr(z, "d", 2)).sqrt())
+        if hasattr(z, "numerator") and hasattr(z, "denominator"):
+            return Decimal(z.numerator) / Decimal(z.denominator)
+        return Decimal(z)
 
-    def _dec(self, z):
-        """The exact value as a Decimal (sqrt taken by Decimal, never by float)."""
-        return (Decimal(z.a.numerator) / Decimal(z.a.denominator)
-                + Decimal(z.b.numerator) / Decimal(z.b.denominator)
-                * Decimal(z.d).sqrt())
+    def check(self, claim, domain=None):
+        if domain is None or domain.decimal_model is None:
+            return False, "no decimal model declared for this domain"
+        return domain.decimal_model(claim)
 
-    def check(self, claim):
-        if claim.domain == "spatial_geometry":
-            state, words = claim.payload["state"], claim.payload["words"]
-            L = claim.laws["extent"][1]
-            # recompute the bbox in Decimal and compare with the field's side
-            xs, ys = [], []
-            for (x, y), w in zip(state, words):
-                ex = (abs(w[0]) + abs(w[1])) * HALF
-                xs += [self._dec(x - ex), self._dec(x + ex)]
-                ys += [self._dec(y - ex), self._dec(y + ex)]
-            Ld = max(max(xs) - min(xs), max(ys) - min(ys))
-            gap = abs(Ld - self._dec(L))
-            # A pair is separated iff its BEST axis slack is >= 0, and the sentence iff
-            # every pair is: recompute both in Decimal and compare with the exact gate.
-            worst = None
-            dec_ok = True
-            for i in range(len(state)):
-                for j in range(i + 1, len(state)):
-                    best = None
-                    for _q, slack, _need, _o in Q.pair_axes(state, words, i, j):
-                        sd = self._dec(slack)
-                        best = sd if best is None else max(best, sd)
-                        worst = sd if worst is None else min(worst, sd)
-                    if best is not None and best < 0:
-                        dec_ok = False
-            exact_ok = Q.gate(state, words)["ok"]
-            ok = gap <= Decimal("1e-40") and dec_ok == exact_ok
-            w = "no pairs" if worst is None else f"{worst:.3e}"
-            return ok, (f"|L_dec - L| = {gap:.3e}, worst slack_dec {w}, pair verdict "
-                        f"{dec_ok} == exact {exact_ok}")
-        # sequence domain: the weight sum, recomputed in Decimal
-        word, alpha = claim.payload["word"], claim.payload["alpha"]
-        n1 = sum(word)
-        total = (Decimal(len(word) - n1) * (1 - self._dec(alpha))
-                 + Decimal(n1) * self._dec(alpha))
-        exact = claim.laws["measure"][1]
-        gap = abs(total - self._dec(exact))
-        return gap <= Decimal("1e-40"), f"|measure_dec - measure| = {gap:.3e}"
+
+def spatial_decimal(claim):
+    """Packing model: the bbox side and every per-pair verdict, in Decimal."""
+    dec = DecimalWitness.scalar
+    state, words = claim.payload["state"], claim.payload["words"]
+    L = claim.laws["extent"][1]
+    xs, ys = [], []
+    for (x, y), w in zip(state, words):
+        ex = (abs(w[0]) + abs(w[1])) * HALF
+        xs += [dec(x - ex), dec(x + ex)]
+        ys += [dec(y - ex), dec(y + ex)]
+    Ld = max(max(xs) - min(xs), max(ys) - min(ys))
+    gap = abs(Ld - dec(L))
+    # A pair is separated iff its BEST axis slack is >= 0, and the sentence iff every
+    # pair is: recompute both in Decimal and compare with the exact gate.
+    worst = None
+    dec_ok = True
+    for i in range(len(state)):
+        for j in range(i + 1, len(state)):
+            best = None
+            for _q, slack, _need, _o in Q.pair_axes(state, words, i, j):
+                sd = dec(slack)
+                best = sd if best is None else max(best, sd)
+                worst = sd if worst is None else min(worst, sd)
+            if best is not None and best < 0:
+                dec_ok = False
+    exact_ok = Q.gate(state, words)["ok"]
+    ok = gap <= Decimal("1e-40") and dec_ok == exact_ok
+    w = "no pairs" if worst is None else f"{worst:.3e}"
+    return ok, (f"|L_dec - L| = {gap:.3e}, worst slack_dec {w}, pair verdict "
+                f"{dec_ok} == exact {exact_ok}")
+
+
+def sequence_decimal(claim):
+    """Sequence model: the weight sum recomputed in Decimal."""
+    dec = DecimalWitness.scalar
+    word, alpha = claim.payload["word"], claim.payload["alpha"]
+    n1 = sum(word)
+    total = Decimal(len(word) - n1) * (1 - dec(alpha)) + Decimal(n1) * dec(alpha)
+    gap = abs(total - dec(claim.laws["measure"][1]))
+    return gap <= Decimal("1e-40"), f"|measure_dec - measure| = {gap:.3e}"
 
 
 class MechanicalWitness(Witness):
@@ -280,10 +315,7 @@ class MechanicalWitness(Witness):
     name = "exact_gate"
     law = "not_mechanical"
 
-    def applies(self, claim):
-        return claim.domain == "sturmian_sequences"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         word, alpha = claim.payload["word"], claim.payload["alpha"]
         rho = claim.payload["rho"]
         if claim.meta.get("fold"):
@@ -309,10 +341,7 @@ class ComplexityWitness(Witness):
     name = "complexity"
     law = "not_sturmian"
 
-    def applies(self, claim):
-        return claim.domain == "sturmian_sequences"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         word = claim.payload["word"]
         worst = None
         for m in range(2, min(7, len(word) - 1)):
@@ -331,10 +360,7 @@ class SequenceConservationWitness(Witness):
     name = "conservation"
     law = "conservation_failed"
 
-    def applies(self, claim):
-        return claim.domain == "sturmian_sequences"
-
-    def check(self, claim):
+    def check(self, claim, domain=None):
         word, alpha = claim.payload["word"], claim.payload["alpha"]
         n1 = sum(word)
         total = Q2(len(word) - n1) * (Q2(1) - alpha) + Q2(n1) * alpha
@@ -373,16 +399,22 @@ class Alphabet:
 
 
 class Domain:
-    """An alphabet, a combinator registry, and the witnesses its claims must pass."""
+    """An alphabet, a combinator registry, the witnesses, and a Decimal model."""
 
     def __init__(self, name, alphabet, witnesses):
         self.name, self.alphabet = name, alphabet
         self.witnesses = witnesses
         self.combinators: dict[str, Callable[..., Claim]] = {}
+        #: claim -> (ok, detail): what this domain recomputes in 70-digit Decimal
+        self.decimal_model: Callable[[Claim], tuple] | None = None
 
     def register(self, name, fn):
         self.combinators[name] = fn
         return fn
+
+    def suite(self, claim: Claim):
+        """The applicable witnesses for this claim; suites may differ in length."""
+        return [w for w in self.witnesses if w.applies(claim)]
 
     def build(self, family, **params) -> Claim:
         if family not in self.combinators:
@@ -405,9 +437,12 @@ class Wheel:
     def spin(self):
         rows = []
         for cell in self.cells:
-            row = {"wheel": self.name, "family": cell.family,
+            row = {"wheel": self.name, "domain": self.domain.name,
+                   "family": cell.family,
                    "params": {k: str(v) for k, v in cell.params.items()},
-                   "verdict": None, "witnesses": {}, "refusal": None, "laws": {}}
+                   "size": None, "measure": None, "invariant": None,
+                   "verdict": None, "witnesses": {}, "witness_count": 0,
+                   "refusal": None, "laws": {}}
             try:
                 claim = self.domain.build(cell.family, **cell.params)
             except Refusal as r:
@@ -420,21 +455,22 @@ class Wheel:
                 rows.append(row)
                 continue
             failed = None
-            for w in self.domain.witnesses:
-                if not w.applies(claim):
-                    continue
+            suite = self.domain.suite(claim)
+            for w in suite:
                 try:
-                    ok, detail = w.check(claim)
+                    ok, detail = w.check(claim, self.domain)
                 except Exception as e:
                     ok, detail = False, f"{type(e).__name__}: {e}"
                 row["witnesses"][w.name] = {"ok": bool(ok), "detail": detail}
                 if not ok and failed is None:
                     failed = w
+            row["witness_count"] = len(suite)
             row["laws"] = {k: str(v[1]) for k, v in claim.laws.items()}
-            row["n"] = claim.n
-            row["beats"] = claim.meta.get("beats")
-            gain = claim.meta.get("gain")
-            row["gain"] = None if gain is None else str(gain)
+            row["size"] = claim.size
+            row["measure"] = (None if claim.measure is None
+                              else f"{claim.measure[0]} = {claim.measure[1]}")
+            row["invariant"] = (None if claim.invariant is None
+                                else f"{claim.invariant[0]} = {claim.invariant[1]}")
             if failed is None:
                 row["verdict"] = "certified"
             else:
@@ -491,6 +527,8 @@ def _tag(claim, L, n):
     claim.meta["beats"] = L < k
     claim.meta["gain"] = k - L
     claim.laws["gain"] = ("ceil(sqrt N) - L", k - L)
+    claim.measure = ("L", L)
+    claim.invariant = ("ceil(sqrt N) - L", k - L)
     return claim
 
 
@@ -571,6 +609,174 @@ def p_fold(k):
                 L, n)
 
 
+# --------------------------------------------------- diamond insertion (run 87)
+def _pt(pq):
+    """Exact point from the doubled representation (p, q) meaning (p + q sqrt2)/2."""
+    return (Q2(F(pq[0], 2), F(pq[1], 2)), Q2(F(pq[2], 2), F(pq[3], 2)))
+
+
+def _bent_cells(origin, steps_x, steps_y):
+    """The product grid of two partial-sum sequences -- a *bent* grid, exactly."""
+    xs, ys = [origin[0]], [origin[1]]
+    for s in steps_x:
+        xs.append(xs[-1] + s)
+    for s in steps_y:
+        ys.append(ys[-1] + s)
+    return [(x, y) for x in xs for y in ys]
+
+
+def _collides(cell, slot):
+    """Does the unit axis square at `cell` overlap the unit 45-degree square at `slot`?
+
+    Exact: the L1 distance from the slot centre to the nearest point of the axis square
+    must be at least sqrt2/2 for the two to be disjoint.  Touching is not overlapping,
+    and the comparison is a sign test in Q(sqrt2) -- no tolerance.
+    """
+    dx = abs(cell[0] - slot[0]) - HALF
+    dy = abs(cell[1] - slot[1]) - HALF
+    dx = dx if dx.sign() > 0 else ZERO
+    dy = dy if dy.sign() > 0 else ZERO
+    return (dx + dy) < S2H
+
+
+#: Declared diamond insertions: the axis carrier (a bent grid, or explicit cells) and
+#: the slots.  Everything else -- the side, the void, every contact -- is derived.
+DIAMOND_FIELDS: dict = {}
+
+#: The three declared insertions.  n10's carrier is a bent grid, so *all* of its axis
+#: cells are derived by the insertion rule; n19 and n40 declare their carriers because
+#: their axis sets are not product grids (declared data, derived geometry).
+DIAMOND_FIELDS.update({
+    "n10": {
+        "grid": ((Q2(F(1, 2)), Q2(F(1, 2))), (Q2(1), S2H, Q2(1)), (Q2(1), S2H, Q2(1))),
+        "slots": [(3, 0, 3, 0), (3, 1, 3, 1)],
+        "drop_colliding": True,
+    },
+    "n19": {
+        "cells": [
+            (1, 0, 1, 0),
+            (1, 0, 3, F(8, 3)),
+            (1, 0, 5, F(8, 3)),
+            (1, F(8, 3), 1, 0),
+            (3, 0, 5, F(8, 3)),
+            (3, F(8, 3), 1, 0),
+            (3, F(8, 3), 3, 0),
+            (5, F(8, 3), 1, 0),
+            (5, F(8, 3), 3, 0),
+            (5, F(8, 3), 5, 0),
+            (5, F(8, 3), 5, F(8, 3)),
+        ],
+        "slots": [
+            (1, F(1, 3), 3, F(2, 3)),
+            (1, F(4, 3), 3, F(-1, 3)),
+            (2, F(2, 3), 2, F(7, 3)),
+            (2, F(5, 3), 2, F(4, 3)),
+            (3, 2, 5, F(7, 3)),
+            (3, 3, 5, F(4, 3)),
+            (4, F(1, 3), 4, 2),
+            (4, F(4, 3), 4, 1),
+        ],
+        "drop_colliding": True,
+    },
+    "n40": {
+        "cells": [
+            (1, 0, 1, 0),
+            (1, 0, 3, 0),
+            (1, 0, 3, 4),
+            (1, 0, 5, 0),
+            (1, 0, 5, 4),
+            (1, 0, 7, 4),
+            (3, 0, 1, 0),
+            (3, 0, 3, 0),
+            (3, 0, 5, 4),
+            (3, 0, 7, 4),
+            (3, 4, 1, 0),
+            (3, 4, 7, 4),
+            (5, 0, 1, 0),
+            (5, 0, 7, 4),
+            (5, 4, 1, 0),
+            (5, 4, 3, 0),
+            (5, 4, 5, 4),
+            (5, 4, 7, 4),
+            (7, 4, 1, 0),
+            (7, 4, 3, 0),
+            (7, 4, 3, 4),
+            (7, 4, 5, 0),
+            (7, 4, 5, 4),
+            (7, 4, 7, 4),
+        ],
+        "slots": [
+            (4, -1, 4, 2),
+            (4, 0, 4, 1),
+            (4, 0, 4, 3),
+            (4, 1, 4, 0),
+            (4, 1, 4, 2),
+            (4, 1, 4, 4),
+            (4, 2, 4, -1),
+            (4, 2, 4, 1),
+            (4, 2, 4, 3),
+            (4, 2, 4, 5),
+            (4, 3, 4, 0),
+            (4, 3, 4, 2),
+            (4, 3, 4, 4),
+            (4, 4, 4, 1),
+            (4, 4, 4, 3),
+            (4, 5, 4, 2),
+        ],
+        "drop_colliding": True,
+    },
+})
+
+
+def p_diamond_field(name):
+    """Diamond insertion: declared axis cells plus 45-degree slots, all else derived.
+
+    The combinator is algebraic and parametric.  It expands the carrier (a bent grid or
+    an explicit exact cell set), applies the *insertion rule* -- an axis cell that would
+    overlap a slot is removed, because that is what inserting a diamond means -- and
+    then derives, rather than declares:
+
+      * the container side `L`, as the exact bbox of the assembled squares;
+      * the void `V = L^2 - N`, and the gain against `ceil(sqrt N)`;
+      * every contact, by running the exact SAT gate on the assembled sentence;
+      * an *overlap refusal*: a declaration whose assembly violates the gate is refused
+        by `declaration_overlaps`, so a mis-declared slot cannot certify silently.
+    """
+    if name not in DIAMOND_FIELDS:
+        raise Refusal("unknown_field", f"{name} is not a declared diamond field")
+    spec = DIAMOND_FIELDS[name]
+    cells = (list(_bent_cells(*spec["grid"])) if "grid" in spec
+             else [_pt(c) for c in spec["cells"]])
+    slots = [_pt(c) for c in spec["slots"]]
+    if not slots:
+        raise Refusal("no_diamond",
+                      f"{name} declares no slot, so it is a Tile, not an insertion")
+    colliding = [c for c in cells if any(_collides(c, s) for s in slots)]
+    if spec.get("drop_colliding", True):
+        cells = [c for c in cells if not any(_collides(c, s) for s in slots)]
+    elif colliding:
+        raise Refusal("declaration_overlaps",
+                      f"{name}: {len(colliding)} axis cells collide with a slot "
+                      f"and drop_colliding is off")
+    if not cells:
+        raise Refusal("empty_carrier", f"{name}: every axis cell was dropped")
+    state = list(cells) + list(slots)
+    words = [Q.AXIS] * len(cells) + [Q.word_45()] * len(slots)
+    g = Q.gate(state, words)
+    if not g["ok"]:
+        raise Refusal("declaration_overlaps",
+                      f"{name}: the assembled sentence has {g['violations']} violations")
+    n = len(state)
+    L = g["L"]
+    claim = Claim("spatial_geometry", "DiamondField", {"name": name}, n,
+                  _laws_packing(n, L, L * L - Q2(n), g["contacts"]),
+                  {"state": state, "words": words, "cells": cells, "slots": slots,
+                   "dropped": colliding})
+    claim.laws["diamonds"] = ("diamonds", len(slots))
+    claim.laws["cells"] = ("axis cells", len(cells))
+    return _tag(claim, L, n)
+
+
 def p_atom(n):
     """A delivered sentence, lifted exactly (n = 5, 10, 40 are the declared atoms)."""
     rows = _delivered_rows()
@@ -617,6 +823,8 @@ def _seq_claim(family, params, word, alpha, rho, parts=None, cob=False):
             "ones": ("n1", n1)}
     claim = Claim("sturmian_sequences", family, params, n, laws,
                   {"word": word, "alpha": alpha, "rho": rho, "parts": parts})
+    claim.measure = ("weight", measure)
+    claim.invariant = ("ones", n1)
     if cob:
         claim.meta["coboundary"] = True
     return claim
@@ -696,8 +904,10 @@ def build_engine():
                 [PackingGateWitness(), ContactGraphWitness(), ConservationWitness(),
                  DecimalWitness()])
     for name, fn in (("Tile", p_grid), ("Strip", p_strip), ("Pocket", p_pocket),
-                     ("Glue", p_glue), ("SymmetryFold", p_fold), ("Atom", p_atom)):
+                     ("Glue", p_glue), ("SymmetryFold", p_fold), ("Atom", p_atom),
+                     ("DiamondField", p_diamond_field)):
         pk.register(name, fn)
+    pk.decimal_model = spatial_decimal
     eng.register(pk)
 
     sq = Domain("sturmian_sequences", SEQ_ALPHABET,
@@ -706,6 +916,7 @@ def build_engine():
     for name, fn in (("Tile", s_tile), ("Frame", s_frame), ("Strip", s_strip),
                      ("Glue", s_glue), ("SymmetryFold", s_fold)):
         sq.register(name, fn)
+    sq.decimal_model = sequence_decimal
     eng.register(sq)
 
     alpha_irr = Q2(-1, 1)                     # sqrt2 - 1, irrational: genuinely Sturmian
@@ -719,8 +930,10 @@ def build_engine():
         Cell("Glue", {"t": t}) for t in ("1/2", "1/3", "1/5")
     ] + [
         Cell("SymmetryFold", {"k": k}) for k in (1, 2)
-    ] + [
+    ]     + [
         Cell("Atom", {"n": n}) for n in (5, 10, 40)
+    ] + [
+        Cell("DiamondField", {"name": name}) for name in sorted(DIAMOND_FIELDS)
     ]))
     eng.add_wheel(Wheel("sequences", sq, [
         Cell("Tile", {"t": str(alpha_irr), "n": 21}),
@@ -1083,15 +1296,18 @@ def selftest() -> int:
     for r in cert:
         assert len(r["witnesses"]) == 4, r
         assert all(w["ok"] for w in r["witnesses"].values()), r
+    assert all(r["witness_count"] >= 3 for r in cert), cert[0]
+    assert all(r["measure"] and r["size"] for r in cert), cert[0]
     print("control 3 — every certified spatial cell passes all four witnesses "
-          "(gate, contact graph, conservation, Decimal)")
+          "(gate, contact graph, conservation, Decimal), and the row carries the "
+          "neutral size/measure/invariant columns")
 
     # 4. the strip's closed forms hold for the wheel's own cells
     for r in cert:
         if r["family"] != "Strip":
             continue
         k, m = int(r["params"]["k"]), int(r["params"]["m"])
-        assert r["n"] == 4 * k * k + m
+        assert r["size"] == 4 * k * k + m
     print("control 4 — the Strip cells satisfy N = 4k^2 + m and L = 2k + m sqrt2/2")
 
     # 5. a non-viable cell refuses with a named law (never a silent skip)
@@ -1129,11 +1345,11 @@ def selftest() -> int:
 
     # 10. Decimal cross-check: the signs agree, and a perturbed claim is caught
     claim = p_pocket(2)
-    ok, detail = DecimalWitness().check(claim)
+    ok, detail = DecimalWitness().check(claim, pk)
     assert ok, detail
     claim2 = p_pocket(2)
     claim2.laws["extent"] = ("L", claim2.laws["extent"][1] + Q2(F(1, 10 ** 9)))
-    ok2, _ = DecimalWitness().check(claim2)
+    ok2, _ = DecimalWitness().check(claim2, pk)
     assert not ok2, "the Decimal witness must catch a 1e-9 lie"
     print("control 10 — the Decimal witness accepts the exact side and catches a 1e-9 lie")
 
@@ -1189,10 +1405,8 @@ def selftest() -> int:
     enumerated = [len(x) for x in g.payload["pairs"]]
     assert tuple(enumerated) == tuple(g.payload["conv"]) == g.laws["theta"][1], g.laws
     ran = 0
-    for w in lat.witnesses:
-        if not w.applies(g):
-            continue
-        ok, detail = w.check(g)
+    for w in lat.suite(g):
+        ok, detail = w.check(g, lat)
         assert ok, (w.name, detail)
         ran += 1
     assert ran == 3, ran      # the kissing witness scopes itself to Frame/Atom
@@ -1202,7 +1416,7 @@ def selftest() -> int:
     # 17. a wrong lattice claim is refused, by witness or by declared law
     liar = LAT.l_atom("Z4")
     liar.laws["kissing"] = ("|L_min|", 24)
-    ok, detail = LAT.KissingWitness().check(liar)
+    ok, detail = LAT.KissingWitness().check(liar, lat)
     assert not ok, "the kissing witness must catch a claimed 24 for Z4 (true 8)"
     refusals = []
     for key, m in (("D4", 3), ("E8", 1)):
@@ -1224,36 +1438,26 @@ def selftest() -> int:
 
 # --------------------------------------------------------------------- report
 def report(eng, ledger):
+    """One table form for every domain: size, measure, invariant, verdict, law."""
     spins = eng.spin_all()
     print("\nWHEEL SPIN — declared cells, exact laws, multi-witness verdicts\n")
     for name, rows in spins.items():
         s = Engine.summarise(rows)
         print(f"  {name}: {s['certified']}/{s['cells']} certified, "
               f"{s['refused']} refused {s['refusal_laws']}")
-    print("\n  spatial_geometry")
-    print(f"    {'family':13s} {'params':16s} {'N':>5s} {'L exact':>16s} "
-          f"{'gain':>11s} {'verdict':>10s}  law")
-    for r in spins["spatial"]:
-        p = ",".join(f"{k}={v}" for k, v in r["params"].items())
-        law = r["refusal"]["law"] if r["refusal"] else ""
-        gain = r.get("gain", "")
-        print(f"    {r['family']:13s} {p:16s} {r.get('n', 0):5d} "
-              f"{r['laws'].get('extent', ''):>16s} {str(gain):>11s} "
-              f"{r['verdict']:>10s}  {law}")
-    print("\n  sturmian_sequences")
-    for r in spins["sequences"]:
-        p = ",".join(f"{k}={v}" for k, v in r["params"].items())
-        law = r["refusal"]["law"] if r["refusal"] else ""
-        print(f"    {r['family']:13s} {p:28s} {r.get('n', 0):5d} "
-              f"{r['laws'].get('ones', ''):>8s} {r['verdict']:>10s}  {law}")
-    print("\n  lattice_shells")
-    print(f"    {'family':13s} {'params':26s} {'cells':>6s} {'rank':>5s} "
-          f"{'verdict':>10s}  law")
-    for r in spins["lattice"]:
-        p = ",".join(f"{k}={v}" for k, v in r["params"].items())
-        law = r["refusal"]["law"] if r["refusal"] else ""
-        print(f"    {r['family']:13s} {p:26s} {r.get('n', 0):6d} "
-              f"{r['laws'].get('rank', ''):>5s} {r['verdict']:>10s}  {law}")
+    for wheel in eng.wheels:
+        rows = spins[wheel.name]
+        print(f"\n  {wheel.name} [{wheel.domain.name}]")
+        print(f"    {'family':14s} {'params':24s} {'size':>6s} {'measure':>26s} "
+              f"{'invariant':>22s} {'w':>2s} {'verdict':>10s}  law")
+        for r in rows:
+            p = ",".join(f"{k}={v}" for k, v in r["params"].items())
+            law = r["refusal"]["law"] if r["refusal"] else ""
+            size = "" if r["size"] is None else r["size"]
+            print(f"    {r['family']:14s} {p:24s} {str(size):>6s} "
+                  f"{str(r['measure'] or ''):>26s} "
+                  f"{str(r['invariant'] or ''):>22s} {r['witness_count']:>2d} "
+                  f"{r['verdict']:>10s}  {law}")
     ledger["spins"] = {name: {"summary": Engine.summarise(rows), "rows": rows}
                        for name, rows in spins.items()}
     return spins

@@ -9,8 +9,8 @@
  "spins": {
   "spatial": {
    "summary": {
-    "cells": 28,
-    "certified": 25,
+    "cells": 31,
+    "certified": 28,
     "refused": 3,
     "refusal_laws": {
      "strip_needs_diamond": 3
@@ -19,10 +19,14 @@
    "rows": [
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Tile",
      "params": {
       "k": "1"
      },
+     "size": 1,
+     "measure": "L = 1",
+     "invariant": "ceil(sqrt N) - L = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -42,23 +46,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec no pairs, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "1",
       "extent": "1",
       "void": "0",
       "gain": "0"
-     },
-     "n": 1,
-     "beats": false,
-     "gain": "0"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Tile",
      "params": {
       "k": "2"
      },
+     "size": 4,
+     "measure": "L = 2",
+     "invariant": "ceil(sqrt N) - L = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -78,23 +84,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "4",
       "extent": "2",
       "void": "0",
       "gain": "0"
-     },
-     "n": 4,
-     "beats": false,
-     "gain": "0"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Tile",
      "params": {
       "k": "3"
      },
+     "size": 9,
+     "measure": "L = 3",
+     "invariant": "ceil(sqrt N) - L = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -114,23 +122,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "9",
       "extent": "3",
       "void": "0",
       "gain": "0"
-     },
-     "n": 9,
-     "beats": false,
-     "gain": "0"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Tile",
      "params": {
       "k": "4"
      },
+     "size": 16,
+     "measure": "L = 4",
+     "invariant": "ceil(sqrt N) - L = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -150,23 +160,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "16",
       "extent": "4",
       "void": "0",
       "gain": "0"
-     },
-     "n": 16,
-     "beats": false,
-     "gain": "0"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Tile",
      "params": {
       "k": "5"
      },
+     "size": 25,
+     "measure": "L = 5",
+     "invariant": "ceil(sqrt N) - L = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -186,23 +198,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "25",
       "extent": "5",
       "void": "0",
       "gain": "0"
-     },
-     "n": 25,
-     "beats": false,
-     "gain": "0"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Pocket",
      "params": {
       "k": "1"
      },
+     "size": 5,
+     "measure": "L = 2 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -222,23 +236,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
       "extent": "2 + 1/2\u221a2",
       "void": "-1/2 + 2\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 5,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Pocket",
      "params": {
       "k": "2"
      },
+     "size": 17,
+     "measure": "L = 4 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -258,23 +274,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "17",
       "extent": "4 + 1/2\u221a2",
       "void": "-1/2 + 4\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 17,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Pocket",
      "params": {
       "k": "3"
      },
+     "size": 37,
+     "measure": "L = 6 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -294,26 +312,29 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "37",
       "extent": "6 + 1/2\u221a2",
       "void": "-1/2 + 6\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 37,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "2",
       "m": "0"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "strip_needs_diamond",
       "detail": "S(2, 0) has no diamond, so it is the plain 2k grid: no seam"
@@ -322,11 +343,15 @@
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "2",
       "m": "1"
      },
+     "size": 17,
+     "measure": "L = 4 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -346,24 +371,26 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "17",
       "extent": "4 + 1/2\u221a2",
       "void": "-1/2 + 4\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 17,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "2",
       "m": "2"
      },
+     "size": 18,
+     "measure": "L = 4 + \u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -383,24 +410,26 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "18",
       "extent": "4 + \u221a2",
       "void": "8\u221a2",
       "gain": "1 - 1\u221a2"
-     },
-     "n": 18,
-     "beats": false,
-     "gain": "1 - 1\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "2",
       "m": "3"
      },
+     "size": 19,
+     "measure": "L = 4 + 3/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 3/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -420,26 +449,29 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "19",
       "extent": "4 + 3/2\u221a2",
       "void": "3/2 + 12\u221a2",
       "gain": "1 - 3/2\u221a2"
-     },
-     "n": 19,
-     "beats": false,
-     "gain": "1 - 3/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "3",
       "m": "0"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "strip_needs_diamond",
       "detail": "S(3, 0) has no diamond, so it is the plain 2k grid: no seam"
@@ -448,11 +480,15 @@
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "3",
       "m": "1"
      },
+     "size": 37,
+     "measure": "L = 6 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -472,24 +508,26 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "37",
       "extent": "6 + 1/2\u221a2",
       "void": "-1/2 + 6\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 37,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "3",
       "m": "2"
      },
+     "size": 38,
+     "measure": "L = 6 + \u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -509,24 +547,26 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "38",
       "extent": "6 + \u221a2",
       "void": "12\u221a2",
       "gain": "1 - 1\u221a2"
-     },
-     "n": 38,
-     "beats": false,
-     "gain": "1 - 1\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "3",
       "m": "3"
      },
+     "size": 39,
+     "measure": "L = 6 + 3/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 3/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -546,26 +586,29 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "39",
       "extent": "6 + 3/2\u221a2",
       "void": "3/2 + 18\u221a2",
       "gain": "1 - 3/2\u221a2"
-     },
-     "n": 39,
-     "beats": false,
-     "gain": "1 - 3/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "4",
       "m": "0"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "strip_needs_diamond",
       "detail": "S(4, 0) has no diamond, so it is the plain 2k grid: no seam"
@@ -574,11 +617,15 @@
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "4",
       "m": "1"
      },
+     "size": 65,
+     "measure": "L = 8 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -598,24 +645,26 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "65",
       "extent": "8 + 1/2\u221a2",
       "void": "-1/2 + 8\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 65,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "4",
       "m": "2"
      },
+     "size": 66,
+     "measure": "L = 8 + \u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -635,24 +684,26 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "66",
       "extent": "8 + \u221a2",
       "void": "16\u221a2",
       "gain": "1 - 1\u221a2"
-     },
-     "n": 66,
-     "beats": false,
-     "gain": "1 - 1\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Strip",
      "params": {
       "k": "4",
       "m": "3"
      },
+     "size": 67,
+     "measure": "L = 8 + 3/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 3/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -672,23 +723,25 @@
        "detail": "|L_dec - L| = 0.000e-65, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "67",
       "extent": "8 + 3/2\u221a2",
       "void": "3/2 + 24\u221a2",
       "gain": "1 - 3/2\u221a2"
-     },
-     "n": 67,
-     "beats": false,
-     "gain": "1 - 3/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Glue",
      "params": {
       "t": "1/2"
      },
+     "size": 5,
+     "measure": "L = 19/7",
+     "invariant": "ceil(sqrt N) - L = 2/7",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -708,23 +761,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.029e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
       "extent": "19/7",
       "void": "116/49",
       "gain": "2/7"
-     },
-     "n": 5,
-     "beats": true,
-     "gain": "2/7"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Glue",
      "params": {
       "t": "1/3"
      },
+     "size": 5,
+     "measure": "L = 19/7",
+     "invariant": "ceil(sqrt N) - L = 2/7",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -744,23 +799,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.029e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
       "extent": "19/7",
       "void": "116/49",
       "gain": "2/7"
-     },
-     "n": 5,
-     "beats": true,
-     "gain": "2/7"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Glue",
      "params": {
       "t": "1/5"
      },
+     "size": 5,
+     "measure": "L = 47/17",
+     "invariant": "ceil(sqrt N) - L = 4/17",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -780,23 +837,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
       "extent": "47/17",
       "void": "764/289",
       "gain": "4/17"
-     },
-     "n": 5,
-     "beats": true,
-     "gain": "4/17"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "SymmetryFold",
      "params": {
       "k": "1"
      },
+     "size": 5,
+     "measure": "L = 2 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -816,23 +875,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
       "extent": "2 + 1/2\u221a2",
       "void": "-1/2 + 2\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 5,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "SymmetryFold",
      "params": {
       "k": "2"
      },
+     "size": 17,
+     "measure": "L = 4 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -852,23 +913,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "17",
       "extent": "4 + 1/2\u221a2",
       "void": "-1/2 + 4\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 17,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Atom",
      "params": {
       "n": "5"
      },
+     "size": 5,
+     "measure": "L = 2 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -888,23 +951,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
       "extent": "2 + 1/2\u221a2",
       "void": "-1/2 + 2\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 5,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Atom",
      "params": {
       "n": "10"
      },
+     "size": 10,
+     "measure": "L = 3 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -924,23 +989,25 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "10",
       "extent": "3 + 1/2\u221a2",
       "void": "-1/2 + 3\u221a2",
       "gain": "1 - 1/2\u221a2"
-     },
-     "n": 10,
-     "beats": true,
-     "gain": "1 - 1/2\u221a2"
+     }
     },
     {
      "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Atom",
      "params": {
       "n": "40"
      },
+     "size": 40,
+     "measure": "L = 4 + 2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 3 - 2\u221a2",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -960,16 +1027,137 @@
        "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.121e+0, pair verdict True == exact True"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "40",
       "extent": "4 + 2\u221a2",
       "void": "-16 + 16\u221a2",
       "gain": "3 - 2\u221a2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "DiamondField",
+     "params": {
+      "name": "n10"
      },
-     "n": 40,
-     "beats": true,
-     "gain": "3 - 2\u221a2"
+     "size": 10,
+     "measure": "L = 3 + 1/2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 1 - 1/2\u221a2",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 11, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 10/10 with 19 contacts >= n-1, min degree 2, Laman bound 17 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 10 + (-1/2 + 3\u221a2) = 19/2 + 3\u221a2 and L^2 = 19/2 + 3\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "10",
+      "extent": "3 + 1/2\u221a2",
+      "void": "-1/2 + 3\u221a2",
+      "contacts": "11",
+      "diamonds": "2",
+      "cells": "8",
+      "gain": "1 - 1/2\u221a2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "DiamondField",
+     "params": {
+      "name": "n19"
+     },
+     "size": 19,
+     "measure": "L = 3 + 4/3\u221a2",
+     "invariant": "ceil(sqrt N) - L = 2 - 4/3\u221a2",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 31, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 19/19 with 55 contacts >= n-1, min degree 2, Laman bound 35 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 19 + (-58/9 + 8\u221a2) = 113/9 + 8\u221a2 and L^2 = 113/9 + 8\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.179e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "19",
+      "extent": "3 + 4/3\u221a2",
+      "void": "-58/9 + 8\u221a2",
+      "contacts": "31",
+      "diamonds": "8",
+      "cells": "11",
+      "gain": "2 - 4/3\u221a2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "DiamondField",
+     "params": {
+      "name": "n40"
+     },
+     "size": 40,
+     "measure": "L = 4 + 2\u221a2",
+     "invariant": "ceil(sqrt N) - L = 3 - 2\u221a2",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 98, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 40/40 with 302 contacts >= n-1, min degree 7, Laman bound 77 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 40 + (-16 + 16\u221a2) = 24 + 16\u221a2 and L^2 = 24 + 16\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.121e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "40",
+      "extent": "4 + 2\u221a2",
+      "void": "-16 + 16\u221a2",
+      "contacts": "98",
+      "diamonds": "16",
+      "cells": "24",
+      "gain": "3 - 2\u221a2"
+     }
     }
    ]
   },
@@ -985,11 +1173,15 @@
    "rows": [
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "Tile",
      "params": {
       "t": "-1 + \u221a2",
       "n": "21"
      },
+     "size": 21,
+     "measure": "weight = 18 - 5\u221a2",
+     "invariant": "ones = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1009,23 +1201,25 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "21",
       "measure": "18 - 5\u221a2",
       "ones": "8"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "Tile",
      "params": {
       "t": "1/2",
       "n": "21"
      },
+     "size": 21,
+     "measure": "weight = 21/2",
+     "invariant": "ones = 10",
      "verdict": "refused",
      "witnesses": {
       "exact_gate": {
@@ -1045,6 +1239,7 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": {
       "law": "not_sturmian",
       "detail": "p(2) = 2 != 3 (periodic, not Sturmian)"
@@ -1053,19 +1248,20 @@
       "count": "21",
       "measure": "21/2",
       "ones": "10"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "Frame",
      "params": {
       "t": "-1 + \u221a2",
       "r": "1/2",
       "n": "21"
      },
+     "size": 21,
+     "measure": "weight = 15 - 3\u221a2",
+     "invariant": "ones = 9",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1085,24 +1281,26 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "21",
       "measure": "15 - 3\u221a2",
       "ones": "9"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "Frame",
      "params": {
       "t": "-1 + \u221a2",
       "r": "1/3",
       "n": "21"
      },
+     "size": 21,
+     "measure": "weight = 15 - 3\u221a2",
+     "invariant": "ones = 9",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1122,24 +1320,26 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "21",
       "measure": "15 - 3\u221a2",
       "ones": "9"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "Strip",
      "params": {
       "t": "-1 + \u221a2",
       "n": "21",
       "shift": "3"
      },
+     "size": 21,
+     "measure": "weight = 18 - 5\u221a2",
+     "invariant": "ones = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1159,24 +1359,26 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "21",
       "measure": "18 - 5\u221a2",
       "ones": "8"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "Glue",
      "params": {
       "t": "-1 + \u221a2",
       "r": "1/2",
       "n": "21"
      },
+     "size": 21,
+     "measure": "weight = 15 - 3\u221a2",
+     "invariant": "ones = 9",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1196,24 +1398,26 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "21",
       "measure": "15 - 3\u221a2",
       "ones": "9"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "sequences",
+     "domain": "sturmian_sequences",
      "family": "SymmetryFold",
      "params": {
       "t": "-1 + \u221a2",
       "r": "0",
       "n": "21"
      },
+     "size": 21,
+     "measure": "weight = 18 - 5\u221a2",
+     "invariant": "ones = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1233,15 +1437,13 @@
        "detail": "|measure_dec - measure| = 0.000e-65"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "21",
       "measure": "18 - 5\u221a2",
       "ones": "8"
-     },
-     "n": 21,
-     "beats": null,
-     "gain": null
+     }
     }
    ]
   },
@@ -1258,11 +1460,15 @@
    "rows": [
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "Z1",
       "m": "1"
      },
+     "size": 2,
+     "measure": "r_L(m) = 2",
+     "invariant": "rank = 1",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1278,23 +1484,25 @@
        "detail": "2 vectors, all |y|^2 == 4 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "2",
       "norm": "1",
       "rank": "1"
-     },
-     "n": 2,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "Z2",
       "m": "1"
      },
+     "size": 4,
+     "measure": "r_L(m) = 4",
+     "invariant": "rank = 2",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1310,23 +1518,25 @@
        "detail": "4 vectors, all |y|^2 == 4 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "4",
       "norm": "1",
       "rank": "2"
-     },
-     "n": 4,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "Z2",
       "m": "2"
      },
+     "size": 4,
+     "measure": "r_L(m) = 4",
+     "invariant": "rank = 2",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1342,23 +1552,25 @@
        "detail": "4 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "4",
       "norm": "2",
       "rank": "2"
-     },
-     "n": 4,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "Z3",
       "m": "1"
      },
+     "size": 6,
+     "measure": "r_L(m) = 6",
+     "invariant": "rank = 3",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1374,23 +1586,25 @@
        "detail": "6 vectors, all |y|^2 == 4 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "6",
       "norm": "1",
       "rank": "3"
-     },
-     "n": 6,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "Z4",
       "m": "2"
      },
+     "size": 24,
+     "measure": "r_L(m) = 24",
+     "invariant": "rank = 4",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1406,23 +1620,25 @@
        "detail": "24 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "24",
       "norm": "2",
       "rank": "4"
-     },
-     "n": 24,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "D4",
       "m": "2"
      },
+     "size": 24,
+     "measure": "r_L(m) = 24",
+     "invariant": "rank = 4",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1438,23 +1654,25 @@
        "detail": "24 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "24",
       "norm": "2",
       "rank": "4"
-     },
-     "n": 24,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "D4",
       "m": "4"
      },
+     "size": 24,
+     "measure": "r_L(m) = 24",
+     "invariant": "rank = 4",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1470,23 +1688,25 @@
        "detail": "24 vectors, all |y|^2 == 16 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "24",
       "norm": "4",
       "rank": "4"
-     },
-     "n": 24,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "D4",
       "m": "6"
      },
+     "size": 96,
+     "measure": "r_L(m) = 96",
+     "invariant": "rank = 4",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1502,23 +1722,25 @@
        "detail": "96 vectors, all |y|^2 == 24 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "96",
       "norm": "6",
       "rank": "4"
-     },
-     "n": 96,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "E8",
       "m": "2"
      },
+     "size": 240,
+     "measure": "r_L(m) = 240",
+     "invariant": "rank = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1534,23 +1756,25 @@
        "detail": "240 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "240",
       "norm": "2",
       "rank": "8"
-     },
-     "n": 240,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "E8",
       "m": "4"
      },
+     "size": 2160,
+     "measure": "r_L(m) = 2160",
+     "invariant": "rank = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1566,22 +1790,24 @@
        "detail": "2160 vectors, all |y|^2 == 16 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "2160",
       "norm": "4",
       "rank": "8"
-     },
-     "n": 2160,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Frame",
      "params": {
       "key": "Z2"
      },
+     "size": 4,
+     "measure": "|L_min| = 4",
+     "invariant": "m_min = 1",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1601,22 +1827,24 @@
        "detail": "4 vectors, all |y|^2 == 4 in Decimal"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "kissing": "4",
       "min_norm": "1",
       "root_degree": "n/a (not a root lattice)"
-     },
-     "n": 4,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Frame",
      "params": {
       "key": "D4"
      },
+     "size": 24,
+     "measure": "|L_min| = 24",
+     "invariant": "m_min = 2",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1636,22 +1864,24 @@
        "detail": "24 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "kissing": "24",
       "min_norm": "2",
       "root_degree": "8"
-     },
-     "n": 24,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Frame",
      "params": {
       "key": "E8"
      },
+     "size": 240,
+     "measure": "|L_min| = 240",
+     "invariant": "m_min = 2",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1671,23 +1901,25 @@
        "detail": "240 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "kissing": "240",
       "min_norm": "2",
       "root_degree": "56"
-     },
-     "n": 240,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Strip",
      "params": {
       "key": "Z2",
       "M": "3"
      },
+     "size": 9,
+     "measure": "N(0..M) = 9",
+     "invariant": "M+1 = 4",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1703,23 +1935,25 @@
        "detail": "shell counts_dec (1, 4, 4, 0)"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "ball": "9",
       "shells": "4",
       "theta": "(1, 4, 4, 0)"
-     },
-     "n": 9,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Strip",
      "params": {
       "key": "D4",
       "M": "6"
      },
+     "size": 145,
+     "measure": "N(0..M) = 145",
+     "invariant": "M+1 = 7",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1735,23 +1969,25 @@
        "detail": "shell counts_dec (1, 0, 24, 0, 24, 0, 96)"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "ball": "145",
       "shells": "7",
       "theta": "(1, 0, 24, 0, 24, 0, 96)"
-     },
-     "n": 145,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Strip",
      "params": {
       "key": "E8",
       "M": "2"
      },
+     "size": 241,
+     "measure": "N(0..M) = 241",
+     "invariant": "M+1 = 3",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1767,24 +2003,26 @@
        "detail": "shell counts_dec (1, 0, 240)"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "ball": "241",
       "shells": "3",
       "theta": "(1, 0, 240)"
-     },
-     "n": 241,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Glue",
      "params": {
       "key_a": "Z2",
       "key_b": "D4",
       "M": "4"
      },
+     "size": 253,
+     "measure": "theta(A*B) = 124",
+     "invariant": "rank A+B = 6",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1800,24 +2038,26 @@
        "detail": "theta_dec (1, 4, 28, 96, 124)"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "rank": "6",
       "theta": "(1, 4, 28, 96, 124)",
       "shell0": "1"
-     },
-     "n": 253,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Glue",
      "params": {
       "key_a": "Z4",
       "key_b": "D4",
       "M": "3"
      },
+     "size": 281,
+     "measure": "theta(A*B) = 224",
+     "invariant": "rank A+B = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1833,26 +2073,29 @@
        "detail": "theta_dec (1, 8, 48, 224)"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "rank": "8",
       "theta": "(1, 8, 48, 224)",
       "shell0": "1"
-     },
-     "n": 281,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Glue",
      "params": {
       "key_a": "Z2",
       "key_b": "E8",
       "M": "2"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "rank_budget",
       "detail": "Z2(+)E8 has rank 10 > 8: the shell walk is not a cell"
@@ -1861,11 +2104,15 @@
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "SymmetryFold",
      "params": {
       "key": "Z2",
       "m": "1"
      },
+     "size": 4,
+     "measure": "r/2 = 2",
+     "invariant": "r mod 2 = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1881,23 +2128,25 @@
        "detail": "4 vectors, all |y|^2 == 4 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "4",
       "pairs": "2",
       "even": "0"
-     },
-     "n": 4,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "SymmetryFold",
      "params": {
       "key": "D4",
       "m": "4"
      },
+     "size": 24,
+     "measure": "r/2 = 12",
+     "invariant": "r mod 2 = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1913,23 +2162,25 @@
        "detail": "24 vectors, all |y|^2 == 16 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "24",
       "pairs": "12",
       "even": "0"
-     },
-     "n": 24,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "SymmetryFold",
      "params": {
       "key": "E8",
       "m": "2"
      },
+     "size": 240,
+     "measure": "r/2 = 120",
+     "invariant": "r mod 2 = 0",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1945,22 +2196,24 @@
        "detail": "240 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 3,
      "refusal": null,
      "laws": {
       "count": "240",
       "pairs": "120",
       "even": "0"
-     },
-     "n": 240,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Atom",
      "params": {
       "key": "Z2"
      },
+     "size": 4,
+     "measure": "|L_min| = 4",
+     "invariant": "rank = 2",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -1980,22 +2233,24 @@
        "detail": "4 vectors, all |y|^2 == 4 in Decimal"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "rank": "2",
       "min_norm": "1",
       "kissing": "4"
-     },
-     "n": 4,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Atom",
      "params": {
       "key": "D4"
      },
+     "size": 24,
+     "measure": "|L_min| = 24",
+     "invariant": "rank = 4",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -2015,22 +2270,24 @@
        "detail": "24 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "rank": "4",
       "min_norm": "2",
       "kissing": "24"
-     },
-     "n": 24,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Atom",
      "params": {
       "key": "E8"
      },
+     "size": 240,
+     "measure": "|L_min| = 240",
+     "invariant": "rank = 8",
      "verdict": "certified",
      "witnesses": {
       "exact_norm": {
@@ -2050,25 +2307,28 @@
        "detail": "240 vectors, all |y|^2 == 8 in Decimal"
       }
      },
+     "witness_count": 4,
      "refusal": null,
      "laws": {
       "rank": "8",
       "min_norm": "2",
       "kissing": "240"
-     },
-     "n": 240,
-     "beats": null,
-     "gain": null
+     }
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "D4",
       "m": "3"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "empty_shell",
       "detail": "D4 has no vectors of norm^2 3 (even lattice, odd norm)"
@@ -2077,13 +2337,18 @@
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Tile",
      "params": {
       "key": "E8",
       "m": "1"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "empty_shell",
       "detail": "E8 has no vectors of norm^2 1 (even lattice, odd norm)"
@@ -2092,14 +2357,19 @@
     },
     {
      "wheel": "lattice",
+     "domain": "lattice_shells",
      "family": "Glue",
      "params": {
       "key_a": "Z4",
       "key_b": "E8",
       "M": "2"
      },
+     "size": null,
+     "measure": null,
+     "invariant": null,
      "verdict": "refused",
      "witnesses": {},
+     "witness_count": 0,
      "refusal": {
       "law": "rank_budget",
       "detail": "Z4(+)E8 has rank 12 > 8: the shell walk is not a cell"
@@ -2110,7 +2380,7 @@
   }
  },
  "audit": {
-  "checked": 76,
+  "checked": 75,
   "offenders": [],
   "exempt": [
    "selftest"
