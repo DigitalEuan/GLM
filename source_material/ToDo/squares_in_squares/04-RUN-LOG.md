@@ -1336,3 +1336,58 @@ the new residue: exact boxes, no rotation argument, no wheel cell.
 acceptance test; a Q(sqrt7) wheel for the side-field rows (a one-parameter change to
 the same engine); a fourth domain as the next stress test. Entries
 `49-THIRD-DOMAIN-AND-FIELD-CENSUS.md`; records `31`–`49`.
+
+---
+
+## Run 87 — one contract, a cage without monkeypatching, and the diamond primitive
+
+**What was asked.** Three items left open by doc 49, with the table, `submission.csv`
+and the root whiteboard untouched: generalise the engine's schema and witness
+contracts; fold run 86's n = 126 probe into `qsqrt2.py` as a mode with a permanent
+control; build the diamond-placement primitive and pass the induction acceptance test.
+
+**The contract.** `Wheel.spin` no longer writes `n`, `extent`, `gain`. It writes
+**size**, **measure**, **invariant** and a witness count; `Claim.n` is a read-only
+alias so no builder changed. Witness suites are declared per family
+(`Witness.families`) and filtered by one `Domain.suite(claim)`; only `KissingWitness`
+scopes itself, and now it says so itself instead of relying on the wheel's ordering.
+One `DecimalWitness` with a per-domain `scalar` (a `Quad` of any `d`, a `Fraction`, an
+`int`, a `Decimal`) replaces the packing-only 70-digit witness. The result is one
+table for three domains — 28/31 spatial, 6/7 sequence, 24/28 lattice certified — with
+`w` = 4 or 3 per row, and 17 controls passing. The friction is gone at the level it
+was described: nothing inside the wheel, the suite or the Decimal witness knows what
+a square is.
+
+**The cage.** `qsqrt2.cage_segment(state, words, pos, L, j)` derives the rank, the
+contact law, the feasible segment and the `Q(sqrt2)` enumeration from the state
+alone — no typed bounds, no spy, no monkeypatch. `lift_sentence` returns `pos` and
+`lo` so the state can be read. For n = 126 it reports rank 1, law
+`y - x = 11/2 + 5/2 sqrt2`, the segment `x in [1.3357864, 1.3713203]` (width
+0.0355339) and the nearest placement `x = 43/32` at L1 8.2e-3, which passes the exact
+gate at clearance 0.
+
+**And a correction.** The permanent control asserts the cage holds **4** `Q(sqrt2)`
+placements, not 173, and asserts the 173 separately under `legacy=True`. Run 86's
+number counted candidates whose *rational part* fell in the band — a `Q(sqrt2)` value
+was filtered by `x.a` — and its box test checked `y` containment but not `x`, so
+squares parked outside the container were admitted and the exact gate, which only
+asks for pairwise separation, passed them. The legacy switch keeps that number
+reproducible so the correction cannot be buried. The scientific conclusion is
+unchanged: n = 126 is an off-lattice pose with on-lattice topology.
+
+**The diamond.** `DiamondField` declares `cells` (a bent grid, or explicit axis
+centres) and `slots`; the insertion rule drops colliding axis cells and derives L, the
+void, the gain and the contact graph. The acceptance test is exact in all three cases:
+n = 10 (8 axis + 2 diamonds, 8 of 16 axis cells dropped, `L = 3 + 1/2 sqrt2`), n = 19
+(11 + 8, `L = 3 + 4/3 sqrt2`) and n = 40 (24 + 16, `L = 4 + 2 sqrt2`) — 10/10, 19/19,
+40/40 covered, every field identical to its Atom cell with L reproduced. Three
+`DiamondField` cells are certified on the spatial wheel. Honest limits: n = 19 and
+n = 40 list their axis cells explicitly because those sets are not product grids, and
+`strip_needs_diamond` still fires for `S(k, 0)` because the Strip builder does not yet
+consume a field.
+
+**Verification.** `glm_wheels --selftest` 17/17; `qsqrt2 --selftest` 11/11;
+`grammar_induction --selftest` 3/3; `lattice_shells` via the wheel; float audit
+**174 functions, 0 offenders**; `record_guard.py` OK. No row changed.
+
+Entries `50-ENGINE-CONTRACT-AND-DIAMOND.md`; records `31`-`50`.

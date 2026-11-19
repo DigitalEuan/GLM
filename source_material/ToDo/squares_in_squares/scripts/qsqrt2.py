@@ -430,13 +430,223 @@ def lift_sentence(state, words, tol=None):
                     "L": W if W > H else H, "clearance": None, "contacts": 0,
                     "violations": 0, "used": used, "placed": placed,
                     "recovered": recovered, "unrecovered": miss,
+                    "pos": pos, "lo": lo,
                     "side_residual": residW if residW > residH else residH}
     g = gate(pos, words)
     return {"status": "lifted" if g["ok"] else "overlap", "state": pos,
             "L": g["L"], "clearance": g["clearance"],
             "contacts": g["contacts"], "violations": g["violations"],
             "used": used, "placed": placed, "recovered": recovered,
+            "pos": pos, "lo": lo,
             "side_residual": residW if residW > residH else residH}
+
+
+# -------------------------------------------------- cage segment (run 87)
+class Refusal(Exception):
+    """A cage that cannot be swept, with the law that says why."""
+
+    def __init__(self, law, detail):
+        super().__init__(f"{law}: {detail}")
+        self.law, self.detail = law, detail
+
+
+
+def _dec(z):
+    """A field element as a 70-digit Decimal (sqrt by Decimal, never a float)."""
+    return (Decimal(z.a.numerator) / Decimal(z.a.denominator)
+            + Decimal(z.b.numerator) / Decimal(z.b.denominator)
+            * Decimal(z.d).sqrt())
+
+
+def _affine_project(trial, i, j, q):
+    """(a, b, c) with (c_j - c_i).q = a*x_j + b*y_j + c, exactly.
+
+    The projection is affine in square j's position, so three evaluations pin it --
+    no algebra on the frame, and no assumption about which word j carries.
+    """
+    def proj(p):
+        return (p[0] - trial[i][0]) * q[0] + (p[1] - trial[i][1]) * q[1]
+    v0 = proj((Q2(0), Q2(0)))
+    v1 = proj((Q2(1), Q2(0)))
+    v2 = proj((Q2(0), Q2(1)))
+    return (v1 - v0, v2 - v0, v0)
+
+
+def cage_segment(state, words, pos, L, j, dens=(8, 16, 32), bmax=8, tol=None,
+                 legacy=False):
+    """The exact feasible segment for a square the contact graph leaves free.
+
+    This is run 86's probe promoted to an instrument: no monkeypatching, no hand-typed
+    bounds, and no tolerance in any decision.  `state` holds the *stored* decimals in
+    the lift's frame, `pos` the exactly placed squares with None at `j`.
+
+    The contact equations of `j` are collected from the stored pose (the stored decimals
+    choose which SAT axis is in contact and on which side; the coefficients are exact)
+    and reduced to their rank:
+
+      * rank 2 -- the topology pins the square; returned as `point`;
+      * rank 1 -- one linear law, so a free parameter sweeps a segment.  The segment is
+        found by bisection on the 70-digit Decimal slack against every placed square,
+        then every Q(sqrt2) value on it at the declared denominators and heights is
+        tested with the exact per-pair predicate.  Only placements that clear every
+        pair with `j` and the container are returned, sorted by distance to the stored
+        pose so the first is canonical;
+      * rank 0 -- refused (`cage_unconstrained`): there is no law to sweep.
+    """
+    tol = Q2(F(1, 10 ** 7)) if tol is None else tol
+    trial = list(pos)
+    trial[j] = state[j]
+    ex = frame_extent(*words[j])
+    rows = []
+    for i in range(len(pos)):
+        if i == j or pos[i] is None:
+            continue
+        axes = pair_axes(trial, words, i, j)
+        best = min(axes, key=lambda t: abs(t[1]) if t[1].sign() >= 0 else -t[1])
+        if abs(best[1]) > tol:
+            continue
+        q, _slack, need, _owner = best
+        a, b, c = _affine_project(trial, i, j, q)
+        v = a * trial[j][0] + b * trial[j][1] + c
+        rhs = (need - c) if v.sign() >= 0 else (Q2(0) - need - c)
+        rows.append((a, b, rhs, i))
+
+    def parallel(r, s):
+        det = r[0] * s[1] - s[0] * r[1]
+        return det.sign() == 0
+
+    dirs = []
+    for row in rows:
+        if not any(parallel(row, d) for d in dirs):
+            dirs.append(row)
+    if not dirs:
+        raise Refusal("cage_unconstrained",
+                      f"square {j} touches nothing in the stored pose")
+    out = {"j": j, "rank": len(dirs), "equations": len(rows),
+           "partners": [row[3] for row in rows], "dens": list(dens), "bmax": bmax}
+    if len(dirs) >= 2:
+        (a1, b1, c1, _), (a2, b2, c2, _) = dirs[0], dirs[1]
+        det = a1 * b2 - a2 * b1
+        if det.sign() == 0:
+            raise Refusal("cage_degenerate", f"square {j}: singular 2x2")
+        out["point"] = ((c1 * b2 - c2 * b1) / det, (a1 * c2 - b1 * c1) / det)
+        out["law"] = None
+        out["placements"] = [out["point"]]
+        return out
+
+    a, b, c, _partner = dirs[0]
+    # normalise so that the free coordinate's partner coefficient is 1: y = c - a*x
+    if b.sign() == 0:
+        law_a, law_b, law_c = Q2(1), Q2(0), c / a          # x is pinned, y sweeps
+    else:
+        law_a, law_b, law_c = a / b, Q2(1), c / b          # y = law_c - law_a * x
+    out["law"] = {"a": str(law_a), "b": str(law_b), "c": str(law_c)}
+    out["law_str"] = (f"{law_b}*y - ({law_a})*x = {law_c}" if b.sign() != 0
+                      else f"x = {law_c}")
+
+    # Decimal slack of square j at a trial point, against every placed square
+    wd = [(_dec(w[0]), _dec(w[1])) for w in words]
+    half_dec = Decimal(1) / 2
+
+    def extent_dec(k, qx, qy):
+        cx, sx = wd[k]
+        return (abs(cx * qx + sx * qy) + abs(cx * qy - sx * qx)) * half_dec
+
+    def feasible(p):
+        if p[0] - ex < Q2(0) or p[0] + ex > L or p[1] - ex < Q2(0) or p[1] + ex > L:
+            return False
+        px, py = _dec(p[0]), _dec(p[1])
+        for i in range(len(pos)):
+            if i == j or pos[i] is None:
+                continue
+            dx = px - _dec(pos[i][0])
+            dy = py - _dec(pos[i][1])
+            best = None
+            for owner, other in ((i, j), (j, i)):
+                cx, sx = wd[owner]
+                for qx, qy in ((cx, sx), (-sx, cx)):
+                    s = abs(dx * qx + dy * qy) - (half_dec + extent_dec(other, qx, qy))
+                    best = s if best is None else max(best, s)
+            if best is None or best < 0:
+                return False
+        return True
+
+    def line_point(t):
+        return (t, law_c - law_a * t) if b.sign() != 0 else (law_c, t)
+
+    seed = _dec(state[j][0] if b.sign() != 0 else state[j][1])
+
+    def boundary(direction, step=Decimal("1e-12")):
+        good, bad, s = seed, None, step
+        for _ in range(60):
+            t = seed + direction * s
+            if not feasible(line_point(Q2(t))):
+                bad = t
+                break
+            good, s = t, s * 2
+        if bad is None:
+            return good
+        for _ in range(200):
+            mid = (good + bad) / 2
+            if mid == good or mid == bad:
+                break
+            if feasible(line_point(Q2(mid))):
+                good = mid
+            else:
+                bad = mid
+        return good
+
+    lo_dec = boundary(-1)
+    hi_dec = boundary(1)
+    out["segment"] = (str(lo_dec), str(hi_dec))
+    out["width"] = str(hi_dec - lo_dec)
+
+    found = []
+    band = []
+    guard = 0
+    for D in dens:
+        for pn in range(int(lo_dec * D) - 1, int(hi_dec * D) + 2):
+            for rn in range(-bmax * D, bmax * D + 1):
+                t = Q2(F(pn, D), F(rn, D))
+                # two different readings, both recorded: `t` the field value, which is
+                # what the cage is; and run 86's `t.a` the rational part only, which is
+                # what the 173 figure counted.  Keeping both is how a control can
+                # reproduce the old number *and* say why it was too generous.
+                in_band = Q2(lo_dec) <= Q2(F(t.a, 1)) <= Q2(hi_dec)
+                in_segment = Q2(lo_dec) <= t <= Q2(hi_dec)
+                if not (in_band or in_segment):
+                    continue
+                cand = line_point(t)
+                guard += 1
+                if not legacy and (cand[0] - ex < Q2(0) or cand[0] + ex > L):
+                    continue
+                if cand[1] - ex < Q2(0) or cand[1] + ex > L:
+                    continue
+                trial[j] = cand
+                ok = True
+                for i in range(len(pos)):
+                    if i == j or pos[i] is None:
+                        continue
+                    if not any(s.sign() >= 0 for _q, s, _n, _o
+                               in pair_axes(trial, words, i, j)):
+                        ok = False
+                        break
+                if ok:
+                    d = abs(cand[0] - state[j][0]) + abs(cand[1] - state[j][1])
+                    band.append((d, cand))
+                    if (legacy and in_band) or (not legacy and in_segment):
+                        found.append((d, cand))
+    for seq in (found, band):
+        seq.sort(key=lambda t: (t[0], t[1][0], t[1][1]))
+    out["tested"] = guard
+    out["placements"] = [p for _d, p in found]        # inside the cage segment
+    out["count"] = len(found)
+    out["placements_band"] = [p for _d, p in band]    # the rational-part reading
+    out["count_band"] = len(band)
+    out["legacy"] = legacy
+    out["nearest"] = band[0][1] if band else None
+    out["nearest_distance"] = band[0][0] if band else None
+    return out
 
 
 def float_state(state, words):
@@ -583,6 +793,35 @@ def selftest() -> int:
         got["status"]
     print(f"control 10 — a 3e-3 perturbation of the tilted square is "
           f"'{got['status']}', not 'lifted'")
+    n_checks += 1
+
+    # 11. the cage segment solver: n = 126's last square, exactly (no monkeypatching)
+    import glm_wheels as GW
+    rows = GW._delivered_rows()
+    st126 = rows[126]
+    ws126 = [GW._word_of(t) for _, _, t in st126]
+    got = lift_sentence([(Q2(x), Q2(y)) for x, y, _ in st126], ws126)
+    assert got["status"] == "not-on-lattice", got["status"]
+    j = [i for i, p in enumerate(got["pos"]) if p is None][0]
+    lo = got["lo"]
+    frame = [(Q2(x) - lo[0], Q2(y) - lo[1]) for x, y, _ in st126]
+    seg = cage_segment(frame, ws126, got["pos"], got["L"], j)
+    assert seg["rank"] == 1, seg["rank"]
+    assert seg["law"]["a"] == str(Q2(-1)) and seg["law"]["b"] == "1", seg["law"]
+    assert seg["law"]["c"] == str(Q2(F(11, 2)) + Q2(0, F(5, 2))), seg["law"]
+    assert seg["count"] == 4, seg["count"]               # inside the cage, in the box
+    old = cage_segment(frame, ws126, got["pos"], got["L"], j, legacy=True)
+    assert old["count"] == 173, old["count"]             # run 86's two flaws, replayed
+    assert seg["nearest"][0] == Q2(F(43, 32)), seg["nearest"]
+    trial = list(got["pos"])
+    trial[j] = seg["nearest"]
+    g = gate(trial, ws126)
+    assert g["ok"] and g["clearance"] == 0, g
+    print(f"control 11 — square {j} touches on one axis only (rank 1, "
+          f"{seg['law_str']}); the segment is {seg['width'][:12]}... wide and holds "
+          f"{seg['count']} placements at clearance 0 in the cage (run 86's rules give "
+          f"{old['count']}), nearest "
+          f"{seg['nearest']}")
     n_checks += 1
 
     print(f"selftest: OK ({n_checks} controls)")
