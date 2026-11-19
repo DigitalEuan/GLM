@@ -23,7 +23,7 @@
    "leaves": 4,
    "closed": true,
    "lower": 2.000000001,
-   "seconds": 0.01,
+   "seconds": 0.02,
    "worst_pen": -9.99999860695766e-10,
    "verdict": "optimal for its angle multiset",
    "angle_words": [
@@ -57,7 +57,7 @@
    "leaves": 24,
    "closed": true,
    "lower": 2.000000001,
-   "seconds": 0.15,
+   "seconds": 0.16,
    "worst_pen": -9.99999860695766e-10,
    "verdict": "optimal for its angle multiset",
    "angle_words": [
@@ -101,7 +101,7 @@
    "leaves": 6,
    "closed": false,
    "lower": 1.999999999,
-   "seconds": 10.18,
+   "seconds": 10.87,
    "worst_pen": -8.919815996932812e-10,
    "verdict": "open: no structure beats 2.000000",
    "angle_words": [
@@ -151,7 +151,7 @@
    "leaves": 1235,
    "closed": false,
    "lower": 1.999999999,
-   "seconds": 10.33,
+   "seconds": 10.52,
    "worst_pen": -6.669997887343015e-10,
    "verdict": "open: no structure beats 2.000000",
    "angle_words": [
@@ -215,7 +215,7 @@
    "leaves": 0,
    "closed": false,
    "lower": 1.999999999,
-   "seconds": 15.14,
+   "seconds": 15.11,
    "worst_pen": -6.669997887343015e-10,
    "verdict": "open: no structure beats 2.000000",
    "angle_words": [
@@ -284,7 +284,7 @@
    "leaves": 0,
    "closed": false,
    "lower": 1.999999999,
-   "seconds": 20.25,
+   "seconds": 20.09,
    "worst_pen": -5.394553692639192e-10,
    "verdict": "open: no structure beats 2.000000",
    "angle_words": [

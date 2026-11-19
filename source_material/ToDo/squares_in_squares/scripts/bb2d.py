@@ -70,6 +70,14 @@ each solved to its own minimum side.  At k = 2 that is 19,477 structures at
 n = 10 and 40,050 at n = 11, each solved exactly and each improvement still
 judged by the gate, and it closes in under a minute.
 
+An improvement is judged the way the table was made: `packlib.finalize` then
+`declp.gate`.  A raw LP state is never gateable -- this file demands every
+separation `PAD` short, so the 12-dp gate reads that shortfall as penetration at
+every side, and the delivered row's own LP state is refused at pen 1.46e-9.
+Gating raw, as the first version of `--flips` did, is a dead branch: a real
+4e-3 improvement would have been certified as `False` and silently dropped.
+`control 5` pins both the refusal and the certificate.
+
 WHAT A RESULT MEANS
 -------------------
 Per row: `L` (gated side of the best structure), `closed` (stack exhausted),
@@ -98,6 +106,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import declp as D          # noqa: E402
+import packlib as P        # noqa: E402
 import sqscore as SQ       # noqa: E402
 
 ROOT = os.path.dirname(HERE)
@@ -113,6 +122,11 @@ PAD = 1e-9
 #: default work limits per row -- a node cap and a wall-clock cap
 NODES = 20000
 SECONDS = 100.0
+#: a certified improvement must survive `packlib.finalize`, which opens every
+#: contact by ~2e-9 and so raises the side by ~3.4e-9.  The bar is therefore the
+#: finalizer's own pad, not the LP's 1e-9: `seam_wheels.GAIN_MIN` makes the same
+#: choice, for the same reason (a 2e-9 "gain" is the pad, not a gain).
+GAIN_MIN = 4e-8
 #: the rows this instrument is asked about by default: small n, and every one of
 #: them a row whose delivered angle multiset is what would be certified
 DEFAULT_ROWS = (5, 6, 9, 10, 11, 13)
@@ -123,6 +137,25 @@ def h_along(th: float, q) -> float:
     """Half-extent of a unit square rotated `th` along the unit direction q."""
     return 0.5 * (abs(math.cos(th) * q[0] + math.sin(th) * q[1])
                   + abs(-math.sin(th) * q[0] + math.cos(th) * q[1]))
+
+
+def gate_state(n, st, th, L0):
+    """Certify an LP state the way every delivered row was certified.
+
+    A raw state from this file's LP is **not gateable**.  Every separation was
+    demanded `PAD` short, so `declp.gate` -- 12 dp, tolerance 0.0 -- sees that
+    shortfall as penetration and refuses, at every side; the delivered row's own
+    LP state is refused at pen 1.46e-9.  Raising the side does not help, because
+    the penetration is between squares and is independent of L.
+
+    `packlib.finalize` scales the state up by ~2e-9 and rounds it, which is how
+    the table itself was made.  Only the finalized state is a candidate, and its
+    side (`SQ.extent`) is the number to compare with L0.  `control 5` pins both
+    halves of this: the raw refusal and the finalized certificate.
+    """
+    stf, _ = P.finalize([(float(c[0]), float(c[1]), float(t))
+                         for c, t in zip(st, th)])
+    return D.gate(n, stf, th, L0)
 
 
 def delivered_branch(tab, p):
@@ -398,11 +431,11 @@ def flip_family(n, xy, th, L0, k=1, seconds=SECONDS):
         if t > L0 + 1e-6:
             moved += 1
             min_other = min(min_other, t)
-        if t < best - 1e-9:
-            g = D.gate(n, st, th, L0)
+        if t < best - GAIN_MIN:
+            g = gate_state(n, st, th, L0)
             if g["ok"]:
                 gated += 1
-                if g["L"] < best - 1e-12:
+                if g["L"] < best - GAIN_MIN:
                     best, where = g["L"], ch
     return {"n": n, "k": k, "L0": L0, "L": best, "count": count,
             "total": len(changers), "gated": gated, "truncated": stop,
@@ -447,7 +480,7 @@ def branch_and_bound(n, xy, th, L0, node_cap=NODES, seconds=SECONDS, log=False):
                if len(allowed(p, len(tab[p]), fixed, forbidden)) > 1]
         if not und:
             leaves += 1
-            g = D.gate(n, st, th, L0)
+            g = gate_state(n, st, th, L0)
             if g["ok"] and g["L"] < best["L"] - 1e-12:
                 best = {"L": g["L"], "state": g["state"], "branch": dict(fixed),
                         "gated": True, "worst_pen": g["worst_pen"]}
@@ -569,6 +602,26 @@ def control() -> int:
     assert not gb["ok"] and gb["worst_pen"] > 0, gb
     print(f"  delivered n=5 gates at {g['L']:.9f}; a 25%-moved copy is refused "
           f"(pen {gb['worst_pen']:.6f})")
+
+    print("control 5 — an LP state is certified through packlib.finalize, not raw")
+    for label, flip in (("delivered", None), ("near miss (49,0)", (49, 0))):
+        st = per[11]
+        xy, th, _, _ = D.frames(st)
+        L0 = SQ.extent(st)
+        h = half_extent(th)
+        tab = cand_table(xy, th)
+        pairs = [(i, j) for i in range(11) for j in range(i + 1, 11)]
+        fixed = {p: delivered_branch(tab, p) for p in range(len(pairs))}
+        if flip is not None:
+            fixed[flip[0]] = flip[1]
+        t, s = structure_lp(xy, tab, fixed, h, 11, L0 + 0.5)
+        raw = D.gate(11, s, th, t)
+        fin = gate_state(11, s, th, L0)
+        assert not raw["ok"] and raw["worst_pen"] > 0, raw
+        assert fin["ok"], (label, fin)
+        print(f"  n=11 {label:16s}: LP {t:.12f}  raw gate refuses (pen "
+              f"{raw['worst_pen']:.2e}); finalized -> {fin['L']:.12f} "
+              f"({fin['L'] - L0:+.3e} vs L0)")
     print("control: OK")
     return 0
 

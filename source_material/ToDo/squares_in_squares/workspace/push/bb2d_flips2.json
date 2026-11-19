@@ -14,7 +14,7 @@
    "infeasible": 696,
    "min_other": 2.9428090399725875,
    "where": null,
-   "seconds": 1.14,
+   "seconds": 1.11,
    "verdict": "no structure within 2 change(s) beats L0"
   },
   {
@@ -30,7 +30,7 @@
    "infeasible": 15161,
    "min_other": 3.7475468932920033,
    "where": null,
-   "seconds": 26.42,
+   "seconds": 26.74,
    "verdict": "no structure within 2 change(s) beats L0"
   },
   {
@@ -46,7 +46,7 @@
    "infeasible": 34052,
    "min_other": 3.881558949801343,
    "where": null,
-   "seconds": 57.07,
+   "seconds": 57.29,
    "verdict": "no structure within 2 change(s) beats L0"
   },
   {
@@ -62,7 +62,7 @@
    "infeasible": 24119,
    "min_other": null,
    "where": null,
-   "seconds": 44.42,
+   "seconds": 44.06,
    "verdict": "no structure within 2 change(s) beats L0"
   }
  ]

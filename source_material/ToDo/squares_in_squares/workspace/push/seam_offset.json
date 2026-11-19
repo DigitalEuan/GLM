@@ -1,0 +1,150 @@
+{
+ "note": "W1 start: the multi-lattice seam offset is a free declared parameter, solved and certified in Q(sqrt2)",
+ "n": 290,
+ "L0": 17.535533907818,
+ "sizes": [
+  25,
+  25
+ ],
+ "offset": {
+  "d_res_2x": 0.0,
+  "d_res_2y": 0.45584412561767884,
+  "d_x_plus_y": 0.0,
+  "d_x_minus_y": 0.32233047238831314
+ },
+ "rows": [
+  {
+   "shift": 0.0,
+   "shift_q": "0/1*sqrt2",
+   "L": 17.535533905932738,
+   "nudge": 0,
+   "certified": true,
+   "delta": -1.885261724510201e-09,
+   "lo": 17.535533906329498,
+   "hi": 17.5355339063295
+  },
+  {
+   "shift": -1.4142135623730951,
+   "shift_q": "-8/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": -1.2374368670764582,
+   "shift_q": "-7/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": -1.0606601717798214,
+   "shift_q": "-6/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": -0.8838834764831844,
+   "shift_q": "-5/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": -0.7071067811865476,
+   "shift_q": "-4/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": -0.5303300858899107,
+   "shift_q": "-3/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": -0.3535533905932738,
+   "shift_q": "-2/8*sqrt2",
+   "L": 17.88908729652601,
+   "nudge": 0,
+   "certified": true,
+   "delta": 0.35355338870801134,
+   "lo": 17.8890872944095,
+   "hi": 17.889087294409503
+  },
+  {
+   "shift": -0.1767766952966369,
+   "shift_q": "-1/8*sqrt2",
+   "L": 17.712310601229376,
+   "nudge": 0,
+   "certified": true,
+   "delta": 0.17677669341137658,
+   "lo": 17.712310599111497,
+   "hi": 17.7123105991115
+  },
+  {
+   "shift": 0.1767766952966369,
+   "shift_q": "1/8*sqrt2",
+   "L": 17.712310601229376,
+   "nudge": 0,
+   "certified": true,
+   "delta": 0.17677669341137658,
+   "lo": 17.712310601163498,
+   "hi": 17.7123106011635
+  },
+  {
+   "shift": 0.3535533905932738,
+   "shift_q": "2/8*sqrt2",
+   "L": 17.88908729652601,
+   "nudge": 0,
+   "certified": true,
+   "delta": 0.35355338870801134,
+   "lo": 17.8890872964625,
+   "hi": 17.889087296462503
+  },
+  {
+   "shift": 0.5303300858899107,
+   "shift_q": "3/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": 0.7071067811865476,
+   "shift_q": "4/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": 0.8838834764831844,
+   "shift_q": "5/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": 1.0606601717798214,
+   "shift_q": "6/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": 1.2374368670764582,
+   "shift_q": "7/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  },
+  {
+   "shift": 1.4142135623730951,
+   "shift_q": "8/8*sqrt2",
+   "L": null,
+   "verdict": "lp_infeasible"
+  }
+ ],
+ "best": {
+  "shift": 0.0,
+  "shift_q": "0/1*sqrt2",
+  "L": 17.535533905932738,
+  "nudge": 0,
+  "certified": true,
+  "delta": -1.885261724510201e-09,
+  "lo": 17.535533906329498,
+  "hi": 17.5355339063295
+ },
+ "gains": 0
+}

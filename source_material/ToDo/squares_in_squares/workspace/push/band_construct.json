@@ -1,0 +1,1050 @@
+{
+ "note": "extend-the-record construction aimed at the band's first row per k; the exact gate (declp.gate, tol 0) is the only judge",
+ "eps": 1e-06,
+ "frontier": 324,
+ "raster": 0.0625,
+ "rows": [
+  {
+   "n": 345,
+   "grid": 19,
+   "n_anchor": 344,
+   "L_anchor": 18.992567547,
+   "L_box": 18.999999,
+   "best_margin": 0.125,
+   "margin_axis": 0.125,
+   "best_placement": [
+    3.375,
+    5.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.125
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 18,
+   "m_target": 21,
+   "m_anchor": 20,
+   "band_rows_decided": 15,
+   "seconds": 4.4
+  },
+  {
+   "n": 383,
+   "grid": 20,
+   "n_anchor": 382,
+   "L_anchor": 19.986581715,
+   "L_box": 19.999999,
+   "best_margin": 0.125,
+   "margin_axis": 0.125,
+   "best_placement": [
+    4.5,
+    5.375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.125
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 19,
+   "m_target": 22,
+   "m_anchor": 21,
+   "band_rows_decided": 16,
+   "seconds": 3.6
+  },
+  {
+   "n": 424,
+   "grid": 21,
+   "n_anchor": 423,
+   "L_anchor": 20.993728478,
+   "L_box": 20.999999,
+   "best_margin": 0.119962847,
+   "margin_axis": 0.119962847,
+   "best_placement": [
+    4.5625,
+    5.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.119962847
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.119962847
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.119962847
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.119962847
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.119962847
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.119962847
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 20,
+   "m_target": 24,
+   "m_anchor": 23,
+   "band_rows_decided": 16,
+   "seconds": 4.2
+  },
+  {
+   "n": 466,
+   "grid": 22,
+   "n_anchor": 465,
+   "L_anchor": 21.990849853,
+   "L_box": 21.999999,
+   "best_margin": 0.131707338,
+   "margin_axis": 0.131707338,
+   "best_placement": [
+    3.4375,
+    8.375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.131707338
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.131707338
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.131707338
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.131707338
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.131707338
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.131707338
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 21,
+   "m_target": 25,
+   "m_anchor": 24,
+   "band_rows_decided": 17,
+   "seconds": 5.0
+  },
+  {
+   "n": 510,
+   "grid": 23,
+   "n_anchor": 509,
+   "L_anchor": 22.989777095,
+   "L_box": 22.999999,
+   "best_margin": 0.097806875,
+   "margin_axis": 0.097806875,
+   "best_placement": [
+    4.5625,
+    7.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.097806875
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.097806875
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.097806875
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.097806875
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.097806875
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.097806875
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 22,
+   "m_target": 26,
+   "m_anchor": 25,
+   "band_rows_decided": 18,
+   "seconds": 6.0
+  },
+  {
+   "n": 557,
+   "grid": 24,
+   "n_anchor": 556,
+   "L_anchor": 23.995962392,
+   "L_box": 23.999999,
+   "best_margin": 0.141867546,
+   "margin_axis": 0.141867546,
+   "best_placement": [
+    2.375,
+    0.5,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.141867546
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.169502022
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.169502022
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.169502022
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.169502022
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.169502022
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 23,
+   "m_target": 28,
+   "m_anchor": 27,
+   "band_rows_decided": 18,
+   "seconds": 7.1
+  },
+  {
+   "n": 605,
+   "grid": 25,
+   "n_anchor": 604,
+   "L_anchor": 24.993298935,
+   "L_box": 24.999999,
+   "best_margin": 0.094338276,
+   "margin_axis": 0.094338276,
+   "best_placement": [
+    2.4375,
+    8.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.094338276
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.094338276
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.094338276
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.094338276
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.094338276
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.094338276
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 24,
+   "m_target": 29,
+   "m_anchor": 28,
+   "band_rows_decided": 19,
+   "seconds": 9.6
+  },
+  {
+   "n": 656,
+   "grid": 26,
+   "n_anchor": 655,
+   "L_anchor": 25.999711088,
+   "L_box": 25.999999,
+   "best_margin": 0.093515924,
+   "margin_axis": 0.093515924,
+   "best_placement": [
+    2.4375,
+    8.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.093515924
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.093515924
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.093515924
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.093515924
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.093515924
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.093515924
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 25,
+   "m_target": 31,
+   "m_anchor": 30,
+   "band_rows_decided": 19,
+   "seconds": 9.7
+  },
+  {
+   "n": 708,
+   "grid": 27,
+   "n_anchor": 707,
+   "L_anchor": 26.997433262,
+   "L_box": 26.999999,
+   "best_margin": 0.125000001,
+   "margin_axis": 0.125000001,
+   "best_placement": [
+    5.5,
+    8.375,
+    0.283794109
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.125000001
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.125000001
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.125000001
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.125000001
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.125000001
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.125000001
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    },
+    {
+     "theta": 0.785398163,
+     "lp": false
+    }
+   ],
+   "k": 26,
+   "m_target": 32,
+   "m_anchor": 31,
+   "band_rows_decided": 20,
+   "seconds": 11.6
+  },
+  {
+   "n": 762,
+   "grid": 28,
+   "n_anchor": 761,
+   "L_anchor": 27.993283306,
+   "L_box": 27.999999,
+   "best_margin": 0.133819635,
+   "margin_axis": 0.133819635,
+   "best_placement": [
+    0.5,
+    25.625,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.133819635
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.173122365
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.173122365
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.173122365
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.173122365
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.173122365
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 27,
+   "m_target": 33,
+   "m_anchor": 32,
+   "band_rows_decided": 21,
+   "seconds": 13.7
+  },
+  {
+   "n": 819,
+   "grid": 29,
+   "n_anchor": 818,
+   "L_anchor": 28.998652868,
+   "L_box": 28.999999,
+   "best_margin": 0.126347132,
+   "margin_axis": 0.126347132,
+   "best_placement": [
+    21.625,
+    23.625,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.126347132
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.126347132
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.126347132
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.126347132
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.126347132
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.126347132
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 28,
+   "m_target": 35,
+   "m_anchor": 34,
+   "band_rows_decided": 21,
+   "seconds": 16.7
+  },
+  {
+   "n": 877,
+   "grid": 30,
+   "n_anchor": 876,
+   "L_anchor": 29.997571908,
+   "L_box": 29.999999,
+   "best_margin": 0.125,
+   "margin_axis": 0.125,
+   "best_placement": [
+    7.375,
+    23.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.125
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.125
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 29,
+   "m_target": 36,
+   "m_anchor": 35,
+   "band_rows_decided": 22,
+   "seconds": 19.1
+  },
+  {
+   "n": 937,
+   "grid": 31,
+   "n_anchor": 936,
+   "L_anchor": 30.997707704,
+   "L_box": 30.999999,
+   "best_margin": 0.096501187,
+   "margin_axis": 0.096501187,
+   "best_placement": [
+    6.4375,
+    3.4375,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.096501187
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.096501187
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.096501187
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.096501187
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.096501187
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.096501187
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 30,
+   "m_target": 37,
+   "m_anchor": 36,
+   "band_rows_decided": 23,
+   "seconds": 21.4
+  },
+  {
+   "n": 999,
+   "grid": 32,
+   "n_anchor": 998,
+   "L_anchor": 31.98623862,
+   "L_box": 31.999999,
+   "best_margin": 0.138795717,
+   "margin_axis": 0.138795717,
+   "best_placement": [
+    0.5,
+    27.625,
+    0.0
+   ],
+   "beats": false,
+   "t1": [
+    {
+     "theta": 0.0,
+     "free": false,
+     "best_margin": 0.138795717
+    },
+    {
+     "theta": 0.785398163,
+     "free": false,
+     "best_margin": 0.147197332
+    },
+    {
+     "theta": 0.643501109,
+     "free": false,
+     "best_margin": 0.147197332
+    },
+    {
+     "theta": 0.39479112,
+     "free": false,
+     "best_margin": 0.147197332
+    },
+    {
+     "theta": 0.283794109,
+     "free": false,
+     "best_margin": 0.147197332
+    },
+    {
+     "theta": 0.489957326,
+     "free": false,
+     "best_margin": 0.147197332
+    }
+   ],
+   "t2": [
+    {
+     "theta": 0.0,
+     "lp": false
+    },
+    {
+     "theta": 0.283794109,
+     "lp": false
+    },
+    {
+     "theta": 0.39479112,
+     "lp": false
+    },
+    {
+     "theta": 0.489957326,
+     "lp": false
+    },
+    {
+     "theta": 0.643501109,
+     "lp": false
+    }
+   ],
+   "k": 31,
+   "m_target": 38,
+   "m_anchor": 37,
+   "band_rows_decided": 2,
+   "seconds": 23.8
+  }
+ ],
+ "summary": {
+  "blocks": 14,
+  "beaten": 0,
+  "band_rows": 247,
+  "seconds": 155.9
+ }
+}

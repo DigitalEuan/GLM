@@ -1,0 +1,1938 @@
+{
+ "note": "delivered side tested against the declared-axis frozen-angle optimum; a refusal at L0 - 1e-6 is the certificate.  Slices accumulate; summary is the union.",
+ "eps": 1e-06,
+ "slices": [
+  {
+   "min_n": 1,
+   "max_n": 324,
+   "top": 300,
+   "tried": 150,
+   "certified": 150
+  },
+  {
+   "min_n": 325,
+   "max_n": 400,
+   "top": 300,
+   "tried": 41,
+   "certified": 41,
+   "seconds_total": 228.2
+  }
+ ],
+ "summary": {
+  "rows": 191,
+  "certified": 191,
+  "candidates": 0
+ },
+ "rows": [
+  {
+   "n": 5,
+   "L0": 2.707106782448,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.2106549575808925,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 10,
+   "L0": 3.707106782648,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.0,
+   "head": 0.16270689495790566,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 11,
+   "L0": 3.877083591506,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.0,
+   "head": 0.15220361064203847,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 17,
+   "L0": 4.675530095176001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.12987180032661066,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 18,
+   "L0": 4.822875657118104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.12915504278887865,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 19,
+   "L0": 4.885618084754103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.11023271083464904,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 26,
+   "L0": 5.621320345204103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.10032283955650555,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 27,
+   "L0": 5.707106782836,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.09432290990270856,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 28,
+   "L0": 5.824444618330103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.0949861076760429,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 29,
+   "L0": 5.93383346434,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.01,
+   "head": 0.09459405267728604,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 37,
+   "L0": 6.598619610942103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.02,
+   "head": 0.08358861038221413,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 38,
+   "L0": 6.707106782888,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.02,
+   "head": 0.08568510110341869,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 39,
+   "L0": 6.8107220847739995,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.03,
+   "head": 0.08718029814873109,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 40,
+   "L0": 6.828427126454001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.02,
+   "head": 0.07527441013336547,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 41,
+   "L0": 6.92669309618,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.03,
+   "head": 0.07645050049150721,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 50,
+   "L0": 7.571428573164,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.04,
+   "head": 0.06999725746520155,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 51,
+   "L0": 7.690355939028,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.04,
+   "head": 0.0753754793721006,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 52,
+   "L0": 7.707106782928,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.04,
+   "head": 0.0666048993200544,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 53,
+   "L0": 7.8228756572760005,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.04,
+   "head": 0.07172150020387685,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 54,
+   "L0": 7.846667194588104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.04,
+   "head": 0.06434042757236058,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 55,
+   "L0": 7.945771009252,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.05,
+   "head": 0.06735917537756349,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 65,
+   "L0": 8.535533907699,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.07,
+   "head": 0.058192251740801976,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 66,
+   "L0": 8.656854251262104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.06,
+   "head": 0.06458431926242748,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 67,
+   "L0": 8.707106782956,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.06,
+   "head": 0.06227033067373527,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 68,
+   "L0": 8.798795238991001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.09,
+   "head": 0.0650853918859509,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 69,
+   "L0": 8.827194657504,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.07,
+   "head": 0.06030810405308905,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 70,
+   "L0": 8.88096037333,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.07,
+   "head": 0.058696894643651146,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 71,
+   "L0": 8.944071559346,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.08,
+   "head": 0.05828103134552357,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 82,
+   "L0": 9.535533907722,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.1,
+   "head": 0.052666177764389366,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 83,
+   "L0": 9.634757650424,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.1,
+   "head": 0.056848411891457076,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 84,
+   "L0": 9.697934800809,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.11,
+   "head": 0.05709223908033078,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 85,
+   "L0": 9.742640688914102,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.11,
+   "head": 0.05537324463181932,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 86,
+   "L0": 9.820535409292999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.13,
+   "head": 0.05729559544934933,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 87,
+   "L0": 9.838815271744,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.12,
+   "head": 0.05284574181679723,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 88,
+   "L0": 9.882451032279,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.12,
+   "head": 0.05118993171243407,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 89,
+   "L0": 9.949747470104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.14,
+   "head": 0.05210006567104432,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 101,
+   "L0": 10.535533907742,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.15,
+   "head": 0.04806500484995302,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 102,
+   "L0": 10.605828698243,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.16,
+   "head": 0.04962048587056801,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 103,
+   "L0": 10.679232049174,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.18,
+   "head": 0.05149607599096153,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 104,
+   "L0": 10.707106783000103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.15,
+   "head": 0.04891752837937302,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 105,
+   "L0": 10.789303785562,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.21,
+   "head": 0.05169275716148394,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 106,
+   "L0": 10.822908045948001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.17,
+   "head": 0.04974922406493976,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 107,
+   "L0": 10.84666719466,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.17,
+   "head": 0.04689887478680476,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 108,
+   "L0": 10.904821014137001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.21,
+   "head": 0.04741077370867898,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 109,
+   "L0": 10.949289582761104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.22,
+   "head": 0.04663274586430412,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 110,
+   "L0": 10.99678339845,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.21,
+   "head": 0.046175354264463536,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 122,
+   "L0": 11.53553390776,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.24,
+   "head": 0.044183467804819854,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 123,
+   "L0": 11.591378147324999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.25,
+   "head": 0.04477403747144945,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 124,
+   "L0": 11.656854251320999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.27,
+   "head": 0.046244407168380235,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 125,
+   "L0": 11.707106783016103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.24,
+   "head": 0.046360631699550146,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 126,
+   "L0": 11.742640688948999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.27,
+   "head": 0.04518366771098643,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 127,
+   "L0": 11.81087878942,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.33,
+   "head": 0.046936674914173686,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 128,
+   "L0": 11.825091970044,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.27,
+   "head": 0.04391911425283151,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 129,
+   "L0": 11.870013852236,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.28,
+   "head": 0.04364679235727012,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 130,
+   "L0": 11.902430647814,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.3,
+   "head": 0.042297509951268256,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 131,
+   "L0": 11.949659589868,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.31,
+   "head": 0.04227010719597674,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 132,
+   "L0": 11.985680200678999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.3,
+   "head": 0.04128446820857902,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 145,
+   "L0": 12.535533907774,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.33,
+   "head": 0.040869797096935806,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 146,
+   "L0": 12.583782191993,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.36,
+   "head": 0.04114458943737974,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 147,
+   "L0": 12.656854251334,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.45,
+   "head": 0.04347867357316695,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 148,
+   "L0": 12.656854251334,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.4,
+   "head": 0.03980401330754457,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 149,
+   "L0": 12.707106783030103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.36,
+   "head": 0.04028427712534245,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 150,
+   "L0": 12.778174594896,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.41,
+   "head": 0.042474036082314044,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 151,
+   "L0": 12.822875657376,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.4,
+   "head": 0.042516535591783616,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 152,
+   "L0": 12.830718802821,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.43,
+   "head": 0.03958198786283283,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 153,
+   "L0": 12.870013852249,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.42,
+   "head": 0.03922201468960343,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 154,
+   "L0": 12.921100942607,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.51,
+   "head": 0.03982703452399882,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 155,
+   "L0": 12.952260946496,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.47,
+   "head": 0.03883981064299455,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 156,
+   "L0": 12.97916585568,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.48,
+   "head": 0.03753033278280502,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 170,
+   "L0": 13.535533907784,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.48,
+   "head": 0.03801060873674017,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 171,
+   "L0": 13.571428573282,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.58,
+   "head": 0.037599934772632355,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 172,
+   "L0": 13.617935700235,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.7,
+   "head": 0.038010744154410525,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 173,
+   "L0": 13.656854251346001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.57,
+   "head": 0.03785200164251806,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 174,
+   "L0": 13.707106783040103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.52,
+   "head": 0.03856305893233814,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 175,
+   "L0": 13.764050053398,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.88,
+   "head": 0.039785360652753704,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 176,
+   "L0": 13.795872320292,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.84,
+   "head": 0.03911657286501154,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 177,
+   "L0": 13.822979736025001,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.57,
+   "head": 0.038106508213154616,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 178,
+   "L0": 13.8466671947,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.71,
+   "head": 0.036855002505997964,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 179,
+   "L0": 13.883795492367002,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.6,
+   "head": 0.0366242099812776,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 180,
+   "L0": 13.916993524334,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.68,
+   "head": 0.03611073640809318,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 181,
+   "L0": 13.950819532879,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.67,
+   "head": 0.03565565383183818,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 182,
+   "L0": 13.970916438071,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.66,
+   "head": 0.03419417245729859,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 183,
+   "L0": 13.999580180594,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.81,
+   "head": 0.03338262864470262,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 197,
+   "L0": 14.535533907796,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.73,
+   "head": 0.03552004129818986,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 198,
+   "L0": 14.571428573292,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.74,
+   "head": 0.03535980875836779,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 199,
+   "L0": 14.617572175455999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.79,
+   "head": 0.035934222301352375,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 200,
+   "L0": 14.656854251356,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.94,
+   "head": 0.036027810859404055,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 201,
+   "L0": 14.707106783050103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.83,
+   "head": 0.03690189101889495,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 202,
+   "L0": 14.727922063222103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.71,
+   "head": 0.03570752819843266,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 203,
+   "L0": 14.778174594915999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.01,
+   "head": 0.03659216525406646,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 204,
+   "L0": 14.804361385516,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.14,
+   "head": 0.03579446090497283,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 205,
+   "L0": 14.82445114799,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.0,
+   "head": 0.03458169087757604,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 206,
+   "L0": 14.860158665258,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.78,
+   "head": 0.0344697539934476,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 207,
+   "L0": 14.880960373420999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.11,
+   "head": 0.0333290550785046,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 208,
+   "L0": 14.924518773894999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.91,
+   "head": 0.033778392810816016,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 209,
+   "L0": 14.946223228312999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 0.94,
+   "head": 0.032720488567955036,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 210,
+   "L0": 14.973001118453999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.26,
+   "head": 0.03202424451866721,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 211,
+   "L0": 14.993549628165999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.11,
+   "head": 0.030908901134435576,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 226,
+   "L0": 15.535533907804,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.09,
+   "head": 0.0333321476170884,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 227,
+   "L0": 15.563625654196999,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.38,
+   "head": 0.03284258057028824,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 228,
+   "L0": 15.604601477602,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.23,
+   "head": 0.03321394762968602,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 229,
+   "L0": 15.650161515749,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.28,
+   "head": 0.03389208733992292,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 230,
+   "L0": 15.68292683114,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.32,
+   "head": 0.03372903087970808,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 231,
+   "L0": 15.707106783060103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.02,
+   "head": 0.03300717405128153,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 232,
+   "L0": 15.761409646751103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.85,
+   "head": 0.03427141713068487,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 233,
+   "L0": 15.778174594926,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.44,
+   "head": 0.03307630557097507,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 234,
+   "L0": 15.822875657406,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.1,
+   "head": 0.033717773980546435,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 235,
+   "L0": 15.826605635302,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.1,
+   "head": 0.0316890250775716,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 236,
+   "L0": 15.861934392481,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.34,
+   "head": 0.03173091800612853,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 237,
+   "L0": 15.902603640134,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.35,
+   "head": 0.032124612566152594,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 238,
+   "L0": 15.924106787196,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.35,
+   "head": 0.03127932929463131,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 239,
+   "L0": 15.948443329175,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.39,
+   "head": 0.0306258529812274,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 240,
+   "L0": 15.969685339405,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.48,
+   "head": 0.029780293275282397,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 241,
+   "L0": 15.987117097025,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.84,
+   "head": 0.02869770208402797,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 257,
+   "L0": 16.535533907812002,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.75,
+   "head": 0.031395574085180816,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 258,
+   "L0": 16.563448004012997,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.72,
+   "head": 0.031070466351909576,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 259,
+   "L0": 16.591378147377,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.85,
+   "head": 0.030751849880382286,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 260,
+   "L0": 16.633520952767107,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.42,
+   "head": 0.031320094224592365,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 261,
+   "L0": 16.678779877223107,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.93,
+   "head": 0.03208320960889867,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 262,
+   "L0": 16.707106783066102,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.47,
+   "head": 0.03180148208259179,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 263,
+   "L0": 16.73316600978,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.82,
+   "head": 0.03138510165342938,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 264,
+   "L0": 16.774735134268,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.9,
+   "head": 0.03192894049979048,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 265,
+   "L0": 16.778174594931997,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.12,
+   "head": 0.030132477238712034,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 266,
+   "L0": 16.823028752638,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.99,
+   "head": 0.030886080779598132,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 267,
+   "L0": 16.83881527183,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.64,
+   "head": 0.029861919652540377,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 268,
+   "L0": 16.87247071649311,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.47,
+   "head": 0.029937044613924855,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 269,
+   "L0": 16.901513584071,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.9,
+   "head": 0.029734564689958137,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 270,
+   "L0": 16.928162254079,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.2,
+   "head": 0.029391007567578193,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 271,
+   "L0": 16.948947735596,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.1,
+   "head": 0.02869640378648992,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 272,
+   "L0": 16.96558647672,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.92,
+   "head": 0.027756739985851098,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 273,
+   "L0": 16.983925964533,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.2,
+   "head": 0.02692724062680063,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 290,
+   "L0": 17.535533907818,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.54,
+   "head": 0.029669809712721994,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 291,
+   "L0": 17.535533907818,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 1.96,
+   "head": 0.027847264472508078,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 292,
+   "L0": 17.591378147384,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.21,
+   "head": 0.029302311847730456,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 293,
+   "L0": 17.623065213947,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.72,
+   "head": 0.029344391625563574,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 294,
+   "L0": 17.65685425138,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.45,
+   "head": 0.02951217828845353,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 295,
+   "L0": 17.704232792623998,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.04,
+   "head": 0.030473844927276228,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 296,
+   "L0": 17.707106783074103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.59,
+   "head": 0.028848700822047196,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 297,
+   "L0": 17.740417289430997,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.51,
+   "head": 0.028998334448139103,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 298,
+   "L0": 17.77817459494,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.49,
+   "head": 0.029408230157332967,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 299,
+   "L0": 17.801004436140104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.46,
+   "head": 0.028956623038641417,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 300,
+   "L0": 17.824123390366,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.45,
+   "head": 0.02852634048031625,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 301,
+   "L0": 17.846667194730998,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.05,
+   "head": 0.028067440595551142,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 302,
+   "L0": 17.870013852293,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.45,
+   "head": 0.027659340940668225,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 303,
+   "L0": 17.901811278969106,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.75,
+   "head": 0.027741131208850543,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 304,
+   "L0": 17.920944095228,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.21,
+   "head": 0.027099322826116365,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 305,
+   "L0": 17.950466484026,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 2.9,
+   "head": 0.027057540943075796,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 306,
+   "L0": 17.96343371938,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.12,
+   "head": 0.026072493588810464,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 307,
+   "L0": 17.979230962273,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.25,
+   "head": 0.025255147090255343,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 308,
+   "L0": 17.997149123158998,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.81,
+   "head": 0.02456425680213542,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 325,
+   "L0": 18.535533907825,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.11,
+   "head": 0.028122510325506375,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 326,
+   "L0": 18.535533909709997,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.04,
+   "head": 0.026500780171931037,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 327,
+   "L0": 18.58378219204505,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.06,
+   "head": 0.02755476983549796,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 328,
+   "L0": 18.614368940387106,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.46,
+   "head": 0.02763294873405614,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 329,
+   "L0": 18.656854253271998,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.17,
+   "head": 0.028369465035790027,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 330,
+   "L0": 18.692388157318103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.63,
+   "head": 0.028723655267284605,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 331,
+   "L0": 18.707106783080103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.68,
+   "head": 0.02793521891672197,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 332,
+   "L0": 18.740417291325002,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.78,
+   "head": 0.02817206149574822,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 333,
+   "L0": 18.7737534128881,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.13,
+   "head": 0.028412118438011717,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 334,
+   "L0": 18.7869442537771,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.56,
+   "head": 0.02755166272376073,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 335,
+   "L0": 18.803695437206102,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.05,
+   "head": 0.02689079201991582,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 336,
+   "L0": 18.825571501756002,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.72,
+   "head": 0.02651394975208444,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 337,
+   "L0": 18.85839176953,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.2,
+   "head": 0.026736853426612344,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 338,
+   "L0": 18.877615342340498,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.98,
+   "head": 0.026221976597164395,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 339,
+   "L0": 18.906198209584105,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.55,
+   "head": 0.026219374452057985,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 340,
+   "L0": 18.926898902251104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.85,
+   "head": 0.025791720699316713,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 341,
+   "L0": 18.942682819150107,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.31,
+   "head": 0.02510146058526448,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 342,
+   "L0": 18.964448096860103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.35,
+   "head": 0.02473903663136227,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 343,
+   "L0": 18.976290438979053,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.37,
+   "head": 0.023844247419888033,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 344,
+   "L0": 18.992567546716106,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.92,
+   "head": 0.023193518190154437,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 362,
+   "L0": 19.535533909596,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 3.92,
+   "head": 0.026727564494870484,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 363,
+   "L0": 19.535533909716,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.08,
+   "head": 0.025275271284409758,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 364,
+   "L0": 19.571428573327104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.52,
+   "head": 0.025710464384755983,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 365,
+   "L0": 19.612856389570105,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.82,
+   "head": 0.026436170259307168,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 366,
+   "L0": 19.656854253278002,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.42,
+   "head": 0.02729630691222555,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 367,
+   "L0": 19.692388159192998,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.36,
+   "head": 0.02771434925556619,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 368,
+   "L0": 19.692388159192998,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.89,
+   "head": 0.026280977850843833,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 369,
+   "L0": 19.707106783086104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 4.71,
+   "head": 0.02561975959569547,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 370,
+   "L0": 19.757499204947106,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.52,
+   "head": 0.026816953033116184,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 371,
+   "L0": 19.776303384502103,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.25,
+   "head": 0.026372955901447993,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 372,
+   "L0": 19.796094789670104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 7.9,
+   "head": 0.02598334763866965,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 373,
+   "L0": 19.803695437212102,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.29,
+   "head": 0.024965568361030158,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 374,
+   "L0": 19.832356218932,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.67,
+   "head": 0.025041491313560246,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 375,
+   "L0": 19.860175822129797,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 9.84,
+   "head": 0.02507574603585288,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 376,
+   "L0": 19.876005953932104,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 8.23,
+   "head": 0.024493561686509433,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 377,
+   "L0": 19.9008903993175,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 8.2,
+   "head": 0.024381194606174408,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 378,
+   "L0": 19.926898902258102,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 8.24,
+   "head": 0.02432887963713985,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 379,
+   "L0": 19.942682819155106,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 5.77,
+   "head": 0.023753429622369232,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 380,
+   "L0": 19.961350025730002,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.59,
+   "head": 0.0233293224876545,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 381,
+   "L0": 19.974739842378,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 7.14,
+   "head": 0.022637866798280476,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  },
+  {
+   "n": 382,
+   "L0": 19.986581715289105,
+   "eps": 1e-06,
+   "self_feasible": true,
+   "certified": true,
+   "seconds": 6.91,
+   "head": 0.0218709180486103,
+   "verdict": "optimal (declared-axis, frozen angles)"
+  }
+ ]
+}

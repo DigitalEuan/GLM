@@ -1,0 +1,382 @@
+{
+ "note": "tilted boundary layer built from scratch (trimmed axis grid plus two 45-degree lattice blocks); the exact gate decides",
+ "deltas": [
+  0.01,
+  0.05,
+  0.1,
+  0.3,
+  0.5,
+  0.9
+ ],
+ "offsets": [
+  0.0,
+  0.25,
+  0.5,
+  0.75,
+  1.0
+ ],
+ "jmax": 8,
+ "rows": [
+  {
+   "k": 18,
+   "target": 345,
+   "count": 324,
+   "m_cap": 0,
+   "L": 18.000000001887997,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 322,
+   "m_cap_layer": -2,
+   "L_layer": 18.500000001869545,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 19,
+   "target": 383,
+   "count": 361,
+   "m_cap": 0,
+   "L": 19.000000001894,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 359,
+   "m_cap_layer": -2,
+   "L_layer": 19.500000001876547,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 20,
+   "target": 424,
+   "count": 400,
+   "m_cap": 0,
+   "L": 20.0000000019,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 398,
+   "m_cap_layer": -2,
+   "L_layer": 20.500000001881546,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 21,
+   "target": 466,
+   "count": 441,
+   "m_cap": 0,
+   "L": 21.000000001904,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 439,
+   "m_cap_layer": -2,
+   "L_layer": 21.500000001887546,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 22,
+   "target": 510,
+   "count": 484,
+   "m_cap": 0,
+   "L": 22.000000001910003,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 482,
+   "m_cap_layer": -2,
+   "L_layer": 22.500000001893547,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 23,
+   "target": 557,
+   "count": 529,
+   "m_cap": 0,
+   "L": 23.000000001914003,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 527,
+   "m_cap_layer": -2,
+   "L_layer": 23.50000000189655,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 24,
+   "target": 605,
+   "count": 576,
+   "m_cap": 0,
+   "L": 24.000000001916,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 574,
+   "m_cap_layer": -2,
+   "L_layer": 24.500000001901547,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 25,
+   "target": 656,
+   "count": 625,
+   "m_cap": 0,
+   "L": 25.00000000192,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 623,
+   "m_cap_layer": -2,
+   "L_layer": 25.500000001905544,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 26,
+   "target": 708,
+   "count": 676,
+   "m_cap": 0,
+   "L": 26.000000001924,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 674,
+   "m_cap_layer": -2,
+   "L_layer": 26.500000001908546,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 27,
+   "target": 762,
+   "count": 729,
+   "m_cap": 0,
+   "L": 27.000000001925997,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 727,
+   "m_cap_layer": -2,
+   "L_layer": 27.500000001912547,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 28,
+   "target": 819,
+   "count": 784,
+   "m_cap": 0,
+   "L": 28.000000001928,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 782,
+   "m_cap_layer": -2,
+   "L_layer": 28.500000001915545,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 29,
+   "target": 877,
+   "count": 841,
+   "m_cap": 0,
+   "L": 29.000000001932,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 839,
+   "m_cap_layer": -2,
+   "L_layer": 29.500000001918547,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 30,
+   "target": 937,
+   "count": 900,
+   "m_cap": 0,
+   "L": 30.000000001933998,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 898,
+   "m_cap_layer": -2,
+   "L_layer": 30.500000001920544,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  },
+  {
+   "k": 31,
+   "target": 999,
+   "count": 961,
+   "m_cap": 0,
+   "L": 31.000000001936,
+   "params": {
+    "j": 0,
+    "delta": 0.9,
+    "sx": 1.0,
+    "sy": 1.0
+   },
+   "tried": 151,
+   "passed": 151,
+   "count_layer": 959,
+   "m_cap_layer": -2,
+   "L_layer": 31.500000001923546,
+   "params_layer": {
+    "j": 1,
+    "delta": 0.5,
+    "sx": 0.0,
+    "sy": 0.0
+   },
+   "beats": false
+  }
+ ],
+ "summary": {
+  "blocks": 14,
+  "beaten": 0,
+  "m_cap_min": 0,
+  "m_cap_max": 0,
+  "m_cap_layer_min": -2,
+  "m_cap_layer_max": -2,
+  "need_m_min": 21,
+  "need_m_max": 38,
+  "seconds": 131.8
+ }
+}
