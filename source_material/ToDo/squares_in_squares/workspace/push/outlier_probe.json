@@ -1,0 +1,232 @@
+{
+ "rows": {
+  "51": {
+   "n": 51,
+   "decimal_side": "1922588984757/250000000000",
+   "fields": {
+    "Q": {
+     "value": "23/3",
+     "lifts": false,
+     "stable": true
+    },
+    "2": {
+     "value": "16/3 + 5/3\u221a2",
+     "stable": true,
+     "lifts": true
+    },
+    "3": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "5": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "6": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "7": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "10": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "11": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "13": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "14": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "15": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "17": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "19": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "21": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    }
+   }
+  },
+  "126": {
+   "n": 126,
+   "decimal_side": "11742640688949/1000000000000",
+   "fields": {
+    "Q": {
+     "value": "47/4",
+     "lifts": false,
+     "stable": true
+    },
+    "2": {
+     "value": "15/2 + 3\u221a2",
+     "stable": true,
+     "lifts": true
+    },
+    "3": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "5": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "6": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "7": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "10": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "11": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "13": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "14": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "15": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "17": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "19": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "21": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    }
+   }
+  },
+  "295": {
+   "n": 295,
+   "decimal_side": "1106514549539/62500000000",
+   "fields": {
+    "Q": {
+     "value": "124/7",
+     "lifts": false,
+     "stable": true
+    },
+    "2": {
+     "value": "22/3 + 22/3\u221a2",
+     "stable": true,
+     "lifts": true
+    },
+    "3": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "5": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "6": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "7": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "10": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "11": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "13": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "14": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "15": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "17": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "19": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    },
+    "21": {
+     "value": null,
+     "stable": false,
+     "lifts": false
+    }
+   }
+  }
+ }
+}

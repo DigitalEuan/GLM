@@ -30,128 +30,35 @@ import sys
 from decimal import Decimal, getcontext
 from fractions import Fraction as F
 
+from exact_field import REFUSED, Quad, audit_module, no_float_calls
+
 getcontext().prec = 70
 
 ONE = None       # assigned at the end of the class body
 HALF = None
 
 
-class Q2:
-    """a + b*sqrt(2) with a, b in Q.  Exact; floats are refused at construction."""
+class Q2(Quad):
+    """a + b*sqrt(2) with a, b in Q — the ℚ(√2) instance of the scalar tower.
 
-    __slots__ = ("a", "b")
+    The ring logic (sign, ordering, floor, arithmetic, the float refusal) lives
+    in `exact_field.Quad`; this subclass fixes `d = 2` and keeps the display the
+    project's documents use, so `str` still reads `2 + 1/2√2`.
+    """
 
-    def __init__(self, a=0, b=0):
-        for v in (a, b):
-            if isinstance(v, float):
-                raise TypeError("Q2 takes int or Fraction, not float — the point "
-                                "of this module is that no float is involved")
-        self.a = a if isinstance(a, F) else F(a)
-        self.b = b if isinstance(b, F) else F(b)
-
-    # ------------------------------------------------------------- algebra
-    def __add__(self, o):
-        o = _q2(o)
-        return Q2(self.a + o.a, self.b + o.b)
-
-    __radd__ = __add__
-
-    def __neg__(self):
-        return Q2(-self.a, -self.b)
-
-    def __sub__(self, o):
-        return self + (-_q2(o))
-
-    def __rsub__(self, o):
-        return _q2(o) + (-self)
-
-    def __mul__(self, o):
-        o = _q2(o)
-        # (a + b r)(c + d r) = (ac + 2bd) + (ad + bc) r
-        return Q2(self.a * o.a + 2 * self.b * o.b,
-                  self.a * o.b + self.b * o.a)
-
-    __rmul__ = __mul__
-
-    def __truediv__(self, o):
-        o = _q2(o)
-        n = o.a * o.a - 2 * o.b * o.b          # the field norm, rational
-        if n == 0:
-            raise ZeroDivisionError("Q2 division by zero")
-        return Q2((self.a * o.a - 2 * self.b * o.b) / n,
-                  (self.b * o.a - self.a * o.b) / n)
-
-    def __rtruediv__(self, o):
-        return _q2(o) / self
-
-    def __abs__(self):
-        return self if self.sign() >= 0 else -self
-
-    def sign(self) -> int:
-        """Exact sign.  sqrt 2 is irrational, so a^2 == 2b^2 only at (0, 0)."""
-        a, b = self.a, self.b
-        if a == 0:
-            return 0 if b == 0 else (1 if b > 0 else -1)
-        if b == 0:
-            return 1 if a > 0 else -1
-        if a > 0 and b > 0:
-            return 1
-        if a < 0 and b < 0:
-            return -1
-        if a > 0:                               # b < 0: compare a with b sqrt 2
-            return 1 if a * a > 2 * b * b else -1
-        return 1 if 2 * b * b > a * a else -1   # a < 0 < b
-
-    # --------------------------------------------------------- comparison
-    def __eq__(self, o):
-        try:
-            o = _q2(o)
-        except TypeError:
-            return NotImplemented
-        return self.a == o.a and self.b == o.b
-
-    def __hash__(self):
-        return hash((self.a, self.b))
-
-    def __lt__(self, o):
-        return (self - _q2(o)).sign() < 0
-
-    def __le__(self, o):
-        return (self - _q2(o)).sign() <= 0
-
-    def __gt__(self, o):
-        return (self - _q2(o)).sign() > 0
-
-    def __ge__(self, o):
-        return (self - _q2(o)).sign() >= 0
-
-    def __bool__(self):
-        return not (self.a == 0 and self.b == 0)
-
-    # ------------------------------------------------------------- display
-    def __float__(self):
-        return float(self.a) + float(self.b) * math.sqrt(2.0)
-
-    def __repr__(self):
-        return f"Q2({self.a}, {self.b})"
-
-    def __str__(self):
-        if self.b == 0:
-            return str(self.a)
-        r = "√2" if self.b == 1 else f"{self.b}√2"
-        if self.a == 0:
-            return r
-        return f"{self.a} + {r}" if self.b > 0 else f"{self.a} - {-self.b}√2"
+    d = 2
+    __slots__ = ()
 
     def decimal(self, places=12) -> str:
-        s = f"{float(self):+.{places}f}"
-        return s
+        """A 12-dp shadow of the exact value (display only, via Decimal)."""
+        return Quad.decimal(self, places)
 
 
 def _q2(x) -> Q2:
+    """Coerce to Q2.  A float is refused: nothing in this module is approximate."""
     if isinstance(x, Q2):
         return x
-    if isinstance(x, float):
+    if isinstance(x, REFUSED):
         raise TypeError("no floats: pass int, Fraction or Q2")
     return Q2(x)
 
@@ -280,18 +187,7 @@ def gate(state, words):
 def floor_q2(z: Q2) -> int:
     """floor(a + b*sqrt 2), exactly.  Bracket from a and |b|, then bisect on
     exact sign tests; sqrt 2 < 2 gives a - 2|b| - 1 <= z <= a + 2|b| + 1."""
-    a, b = z.a, z.b
-    if b == 0:
-        return math.floor(a)
-    lo = math.floor(a) - 2 * math.ceil(abs(b)) - 1
-    hi = math.floor(a) + 2 * math.ceil(abs(b)) + 1
-    while lo < hi:
-        mid = (lo + hi + 1) // 2
-        if (z - Q2(mid)).sign() >= 0:
-            lo = mid
-        else:
-            hi = mid - 1
-    return lo
+    return z.floor()
 
 
 def grid_round(z: Q2, M: int) -> F:
@@ -317,16 +213,22 @@ def recover_side(Ldec: Q2, tol=None, bdens=(1, 2, 4, 8, 16),
     # grid; then rational b with a small denominator (a real row in the table has
     # side 3 + 4/3 sqrt2, so the dyadic grid alone cannot see it); then the wide
     # dyadic search of the first run-83 experiment.
+    #
+    # The third stage is the one run 85 had to add: when `b` has denominator d,
+    # `a` must be allowed denominator d as well.  Two delivered rows have sides
+    # `16/3 + 5/3 sqrt2` and `22/3 + 22/3 sqrt2`, and a grid of 1/8 or 1/64 can
+    # never see them — the refusal they produced was a gap in the search, not a
+    # theorem about the table (corrected in run 85, doc 48 §4).
     tries = (((1, 2), 8, (4, 2)),
-             ((1, 2, 3, 4, 5, 6, 7, 8), 6, (8, 64)),
+             ("match", 8, None),
              (bdens, bmax, adens))
     best = (None, None, None)
     for bds, bm, ads in tries:
-        for bd in bds:
+        for bd in ((1, 2, 3, 4, 5, 6, 7, 8) if bds == "match" else bds):
             for num in range(-bm * bd, bm * bd + 1):
                 b = F(num, bd)
                 rest = Ldec - Q2(0, b)
-                for ad in ads:
+                for ad in (ads if ads is not None else (4 * bd,)):
                     a = F(floor_q2(rest * Q2(ad) + HALF), ad)
                     cand = Q2(a) + Q2(0, b)
                     err = abs(Ldec - cand)

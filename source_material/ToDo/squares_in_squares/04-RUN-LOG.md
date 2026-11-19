@@ -1169,3 +1169,86 @@ within its own contact structure, and it is dominated on the table. No row chang
 
 Entries `47-LIFT-CARRIER-SEAM.md`; `46` §4 carries a supersession note and §6 the
 lift's measured split; records `31`–`47`.
+
+## Run 85 — the field tower, the wheel engine, and a second domain
+
+**What this run is.** Run 84 left three things domain-specific: the ring logic
+lived inside ℚ(√2), the declared-law wheel pattern lived inside packing, and the
+reconstruction's fallback was a per-coordinate height search. This run extracts the
+first two, replaces the third, and uses them to close the census.
+`scripts/exact_field.py` (7 controls) and `scripts/glm_wheels.py` (12 controls) are
+new; `qsqrt2` and `mixed_field` keep their 10 + 14 controls unchanged. Ledgers
+`workspace/push/glm_wheels.json`, `q_census.json`, `outlier_probe.json`.
+**No row changed, no score claimed, `submission.csv` untouched.**
+
+**The tower.** `exact_field` is Z, Q, Q(√d) for any square-free d, and rational
+t-basis points, with every decision derived from one `sign()`: comparisons are the
+sign of a difference, `floor` is a bisection on sign tests inside an exact bracket,
+`ceil = −floor(−z)`, and the mixed sign cases reduce to `a²` vs `d b²` (no nonzero
+rational solution, since d is square-free). 1,400 signs across d = 2,3,5,6,7,10,13
+agree with 70-digit `Decimal`; 600 floors satisfy `k ≤ z < k+1`. `qsqrt2.Q2` is now
+`Quad` with d = 2; the API is unchanged and every sampled lift verdict is identical.
+
+**The audit, as a deliverable.** `no_float_calls`/`audit_module` walk **code
+objects** — source text cannot fake a pass — and the audit is itself tested against
+a planted `float(z) > 0`. It exempts exactly three declared things: display
+(`__float__`, `decimal`), the self-test (which plants the offender), and
+`float_state` (which feeds `packlib` as an independent float-side witness). Run-85
+audit: **145 decision functions across the three instruments, 0 naming float.**
+
+**The engine.** A domain registers an alphabet (atomic words with exact measure and
+extent), five syntax slots — `Tile`, `Frame`, `Strip`, `Glue`, `SymmetryFold` — with
+closed-form laws and exact builders, and a witness suite. `Wheel.spin` only
+enumerates declared cells, takes a `Refusal` with a named law, runs every witness,
+and records the verdict; `Engine` holds domains and contains no geometry. Every
+claim must pass **four** witnesses of different kinds: the exact gate, a topological
+witness (contact graph / factor complexity), a conservation identity, and an
+independent 70-digit `Decimal` recomputation whose signs must equal the exact ones
+(control 10 shows it rejecting a claim off by 1e-9).
+
+**Spatial geometry.** 28 cells, **25 certified**, 3 refused by
+`strip_needs_diamond` (S(k,0) is the plain 2k grid: no seam). The closed-form
+families: grids `k²` at k; pockets `4k²+1` at `2k + 1/2√2` (n = 5 at k = 1);
+strips `4k²+m` at `2k + m√2/2`; rational-t glues at `19/7`, `47/17`; and the
+diagonal fold, whose law is that N and L are invariant. Gain is `1 − m√2/2`, so only
+m = 1 wins. **n = 10 and n = 40 are registered as atoms, not as closed-form cells** —
+their lifted sentences are certified with all four witnesses but neither is
+`4k² + m`, and a ladder covering them is deferred rather than fitted.
+
+**Sturmian sequences — the second domain.** The same engine, the same slots, nothing
+geometric: mechanical words over an exact slope, rotation frames, orbit windows,
+consecutive-window glues and reversals. **6 of 7 cells certified**; the refusal is
+the point — slope 1/2 is refused by `not_sturmian` with `p(2) = 2 ≠ 3`, because a
+rational slope is periodic and periodicity is exactly the failure of `p(m) = m+1`.
+The certified cells carry `√2` in their weight laws (`18 − 5√2`, `15 − 3√2`). The
+coboundary law had to be corrected during the run: `∂(uv) = ∂u ⊕ ∂v` is **false**;
+the seam-aware identity is `∂(uv) = ∂u ⊕ (u₋₁ ⊕ v₀) ⊕ ∂v`.
+
+**The census, and a correction to run 84.** All **447** pure-Q rows are certified at
+clearance exactly 0 with side exactly `⌈√n⌉` — 419,281 exact contacts over 205,282
+squares, 136 rows certified by the exact gate and 311 by an exact lattice lemma
+(distinct half-integer centres in an integer box ⟹ separated by ≥ 1 on some axis,
+which is the SAT condition for this word), the two paths agreeing wherever both run.
+And run 84's "3 float artefacts" was wrong for two of the three: `recover_side`
+allowed `b` denominator 3 while forcing `a` onto 1/8 and 1/64 grids, and both n = 51
+and n = 295 have sides with third-denominators — `16/3 + 5/3√2` and
+`22/3 + 22/3√2`. With the search fixed the mixed lift is **99/100** (128,895
+contacts over 37,606 squares, 9,180 tilted, 26,016 peeled + 5,795 recovered, all at
+clearance 0), and the only failure is n = 126, where 125 of 126 centres lie in the
+field and one 45° square's coordinate is off every small-height lattice tested. The
+probe across square-free d ≤ 21 finds ℚ(√2) for all three rows and no other field.
+
+**The exact 2D cage.** The per-coordinate height fallback is replaced by a joint
+object: lattice candidates within 1e-7 of each stored coordinate, filtered by the
+box and by the exact SAT predicate against every placed square, returned canonically
+(nearest, ties lexicographic), with an empty cage returning nothing. It recovers the
+freed square of S(2,1) exactly and is what refuses n = 126's square 120 rather than
+proposing a value that would fail the gate.
+
+**Deferred, and named.** A closed-form ladder covering n = 10 and n = 40 from their
+lifted states; a resolution of n = 126's single square; and a third domain (lattice
+shells in ℚ(√d), or the parity-coboundary complex as a domain rather than a witness)
+to test "domain-agnostic" harder than two domains can.
+
+Entries `48-FIELD-TOWER-AND-WHEELS.md`; `47` §1.4 carries the correction note;
+records `31`–`48`.
