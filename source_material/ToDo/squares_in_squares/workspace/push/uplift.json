@@ -119,23 +119,6 @@
    "unrecovered": 0,
    "side_residual": 1.707809893503054e-09
   },
-  "51": {
-   "n": 51,
-   "squares": 51,
-   "tilted": 17,
-   "status": "side-not-recovered",
-   "placed": 0,
-   "used": 0,
-   "side_exact": null,
-   "side": null,
-   "decimal_side": 7.690355939028,
-   "clearance": null,
-   "contacts": 0,
-   "violations": 0,
-   "recovered": 0,
-   "unrecovered": 0,
-   "side_residual": 2.7361175047424524e-05
-  },
   "52": {
    "n": 52,
    "squares": 52,
@@ -339,23 +322,6 @@
    "recovered": 13,
    "unrecovered": 0,
    "side_residual": 1.8294524783968313e-09
-  },
-  "126": {
-   "n": 126,
-   "squares": 126,
-   "tilted": 37,
-   "status": "not-on-lattice",
-   "placed": 124,
-   "used": 248,
-   "side_exact": "15/2 + 3\u221a2",
-   "side": 11.742640687119286,
-   "decimal_side": 11.742640688949,
-   "clearance": null,
-   "contacts": 0,
-   "violations": 0,
-   "recovered": 1,
-   "unrecovered": 1,
-   "side_residual": 1.8297141579637355e-09
   },
   "145": {
    "n": 145,
@@ -730,23 +696,6 @@
    "recovered": 120,
    "unrecovered": 0,
    "side_residual": 1.887619838214505e-09
-  },
-  "295": {
-   "n": 295,
-   "squares": 295,
-   "tilted": 160,
-   "status": "side-not-recovered",
-   "placed": 0,
-   "used": 0,
-   "side_exact": null,
-   "side": null,
-   "decimal_side": 17.704232792624,
-   "clearance": null,
-   "contacts": 0,
-   "violations": 0,
-   "recovered": 0,
-   "unrecovered": 0,
-   "side_residual": 1.3301534442150542e-05
   },
   "296": {
    "n": 296,
@@ -1699,18 +1648,68 @@
    "recovered": 42,
    "unrecovered": 0,
    "side_residual": 1.93745242071941e-09
+  },
+  "51": {
+   "n": 51,
+   "squares": 51,
+   "tilted": 17,
+   "status": "lifted",
+   "placed": 34,
+   "used": 68,
+   "side_exact": "16/3 + 5/3\u221a2",
+   "side": 7.6903559372884915,
+   "decimal_side": 7.690355939028,
+   "clearance": 0.0,
+   "contacts": 119,
+   "violations": 0,
+   "recovered": 17,
+   "unrecovered": 0,
+   "side_residual": 1.7395080931237317e-09
+  },
+  "126": {
+   "n": 126,
+   "squares": 126,
+   "tilted": 37,
+   "status": "not-on-lattice",
+   "placed": 124,
+   "used": 248,
+   "side_exact": "15/2 + 3\u221a2",
+   "side": 11.742640687119286,
+   "decimal_side": 11.742640688949,
+   "clearance": null,
+   "contacts": 0,
+   "violations": 0,
+   "recovered": 1,
+   "unrecovered": 1,
+   "side_residual": 1.8297141579637355e-09
+  },
+  "295": {
+   "n": 295,
+   "squares": 295,
+   "tilted": 160,
+   "status": "lifted",
+   "placed": 135,
+   "used": 270,
+   "side_exact": "22/3 + 22/3\u221a2",
+   "side": 17.70423279073603,
+   "decimal_side": 17.704232792624,
+   "clearance": 0.0,
+   "contacts": 939,
+   "violations": 0,
+   "recovered": 160,
+   "unrecovered": 0,
+   "side_residual": 1.8879706686902864e-09
   }
  },
  "summary": {
   "targets": 100,
   "statuses": {
-   "lifted": 97,
-   "side-not-recovered": 2,
+   "lifted": 99,
    "not-on-lattice": 1
   },
-  "lifted": 97,
+  "lifted": 99,
   "in_q": 0,
-  "recovered_coords": 5618,
-  "peeled_centres": 26024
+  "recovered_coords": 5795,
+  "peeled_centres": 26016
  }
 }

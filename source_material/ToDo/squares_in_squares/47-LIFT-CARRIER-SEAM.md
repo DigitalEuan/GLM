@@ -112,7 +112,16 @@ For 51 the residual keeps falling as the coefficient bound grows — 2.74e-05 at
 `bmax = 8`, 1.81e-05 at 24, 1.13e-06 at 48 — the signature of an *approximation*
 rather than of a value. For 295 it is flat at 1.33e-05 across the same three bounds,
 so widening the search does not close that one either. In both cases no `a + b√2`
-of small height sits at that side, and 1e-7 is far outside. Those two rows are float artefacts — decimal states whose contact topology
+of small height sits at that side, and 1e-7 is far outside.
+
+> **Corrected in run 85 (doc `48` §4.2).** Two of these three were a gap in this
+> instrument, not a property of the table. `recover_side` allowed `b` denominator 3
+> while forcing `a` onto 1/8 and 1/64 grids, and both rows have sides whose integer
+> part shares denominator 3: n = 51 is exactly `16/3 + 5/3√2` and n = 295 is
+> `22/3 + 22/3√2`. With `a` on the matching `4d` grid both lift at clearance 0, so
+> the lift is **99/100** and the only remaining failure is n = 126, one 45° square
+> whose coordinate is off every small-height lattice tested. The numbers above are
+> kept as what run 84 measured; they are not what is true. Those two rows are float artefacts — decimal states whose contact topology
 is not a ℚ(√2) sentence at all — and n = 126 is one coordinate away from being
 one. This is the honest half of the census: the lift does not "succeed on
 everything", it succeeds on 97 and *names* the 3 that are not sentences.

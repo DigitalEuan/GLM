@@ -1,0 +1,3124 @@
+{
+ "run": 86,
+ "question": "is a lifted atom a translation/reflection composition of the declared vocabulary?",
+ "isometries": [
+  "id",
+  "diag",
+  "x",
+  "y",
+  "rot90"
+ ],
+ "templates": [
+  "Atom10",
+  "Atom5",
+  "Fold1",
+  "Fold2",
+  "Glue1/2",
+  "Pocket1",
+  "Pocket2",
+  "Strip2,1",
+  "Strip2,2",
+  "Tile1",
+  "Tile2"
+ ],
+ "states": 45,
+ "exact_decompositions": 1,
+ "best_partial": 1.0,
+ "rows": [
+  {
+   "n": 5,
+   "L": "2 + 1/2\u221a2",
+   "squares": 5,
+   "tilted": 1,
+   "templates": {
+    "Tile1": {
+     "covered": 4,
+     "total": 5,
+     "copies": 4
+    },
+    "Tile2": {
+     "covered": 0,
+     "total": 5,
+     "copies": 0
+    },
+    "Pocket1": {
+     "covered": 5,
+     "total": 5,
+     "copies": 1
+    },
+    "Fold1": {
+     "covered": 5,
+     "total": 5,
+     "copies": 1
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 5,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Pocket1",
+    "covered": 5,
+    "total": 5,
+    "exact": true,
+    "copies": 1
+   }
+  },
+  {
+   "n": 10,
+   "L": "3 + 1/2\u221a2",
+   "squares": 10,
+   "tilted": 2,
+   "templates": {
+    "Tile1": {
+     "covered": 8,
+     "total": 10,
+     "copies": 8
+    },
+    "Tile2": {
+     "covered": 0,
+     "total": 10,
+     "copies": 0
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 10,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 10,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 10,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 10,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 8,
+    "total": 10,
+    "exact": false,
+    "copies": 8
+   }
+  },
+  {
+   "n": 40,
+   "L": "4 + 2\u221a2",
+   "squares": 40,
+   "tilted": 16,
+   "templates": {
+    "Tile1": {
+     "covered": 24,
+     "total": 40,
+     "copies": 24
+    },
+    "Tile2": {
+     "covered": 16,
+     "total": 40,
+     "copies": 4
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 40,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 24,
+    "total": 40,
+    "exact": false,
+    "copies": 24
+   }
+  },
+  {
+   "n": 19,
+   "L": "3 + 4/3\u221a2",
+   "squares": 19,
+   "tilted": 8,
+   "templates": {
+    "Tile1": {
+     "covered": 11,
+     "total": 19,
+     "copies": 11
+    },
+    "Tile2": {
+     "covered": 4,
+     "total": 19,
+     "copies": 1
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 19,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 11,
+    "total": 19,
+    "exact": false,
+    "copies": 11
+   }
+  },
+  {
+   "n": 26,
+   "L": "7/2 + 3/2\u221a2",
+   "squares": 26,
+   "tilted": 9,
+   "templates": {
+    "Tile1": {
+     "covered": 17,
+     "total": 26,
+     "copies": 17
+    },
+    "Tile2": {
+     "covered": 8,
+     "total": 26,
+     "copies": 2
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 26,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 17,
+    "total": 26,
+    "exact": false,
+    "copies": 17
+   }
+  },
+  {
+   "n": 27,
+   "L": "5 + 1/2\u221a2",
+   "squares": 27,
+   "tilted": 5,
+   "templates": {
+    "Tile1": {
+     "covered": 22,
+     "total": 27,
+     "copies": 22
+    },
+    "Tile2": {
+     "covered": 8,
+     "total": 27,
+     "copies": 2
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 27,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 22,
+    "total": 27,
+    "exact": false,
+    "copies": 22
+   }
+  },
+  {
+   "n": 38,
+   "L": "6 + 1/2\u221a2",
+   "squares": 38,
+   "tilted": 6,
+   "templates": {
+    "Tile1": {
+     "covered": 32,
+     "total": 38,
+     "copies": 32
+    },
+    "Tile2": {
+     "covered": 24,
+     "total": 38,
+     "copies": 6
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 38,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 32,
+    "total": 38,
+    "exact": false,
+    "copies": 32
+   }
+  },
+  {
+   "n": 51,
+   "L": "16/3 + 5/3\u221a2",
+   "squares": 51,
+   "tilted": 17,
+   "templates": {
+    "Tile1": {
+     "covered": 34,
+     "total": 51,
+     "copies": 34
+    },
+    "Tile2": {
+     "covered": 20,
+     "total": 51,
+     "copies": 5
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 51,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 34,
+    "total": 51,
+    "exact": false,
+    "copies": 34
+   }
+  },
+  {
+   "n": 52,
+   "L": "7 + 1/2\u221a2",
+   "squares": 52,
+   "tilted": 8,
+   "templates": {
+    "Tile1": {
+     "covered": 44,
+     "total": 52,
+     "copies": 44
+    },
+    "Tile2": {
+     "covered": 24,
+     "total": 52,
+     "copies": 6
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 52,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 44,
+    "total": 52,
+    "exact": false,
+    "copies": 44
+   }
+  },
+  {
+   "n": 65,
+   "L": "5 + 5/2\u221a2",
+   "squares": 65,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 40,
+     "total": 65,
+     "copies": 40
+    },
+    "Tile2": {
+     "covered": 16,
+     "total": 65,
+     "copies": 4
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 65,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 40,
+    "total": 65,
+    "exact": false,
+    "copies": 40
+   }
+  },
+  {
+   "n": 66,
+   "L": "3 + 4\u221a2",
+   "squares": 66,
+   "tilted": 24,
+   "templates": {
+    "Tile1": {
+     "covered": 42,
+     "total": 66,
+     "copies": 42
+    },
+    "Tile2": {
+     "covered": 24,
+     "total": 66,
+     "copies": 6
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 66,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 42,
+    "total": 66,
+    "exact": false,
+    "copies": 42
+   }
+  },
+  {
+   "n": 67,
+   "L": "8 + 1/2\u221a2",
+   "squares": 67,
+   "tilted": 9,
+   "templates": {
+    "Tile1": {
+     "covered": 58,
+     "total": 67,
+     "copies": 58
+    },
+    "Tile2": {
+     "covered": 48,
+     "total": 67,
+     "copies": 12
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 67,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 58,
+    "total": 67,
+    "exact": false,
+    "copies": 58
+   }
+  },
+  {
+   "n": 82,
+   "L": "6 + 5/2\u221a2",
+   "squares": 82,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 57,
+     "total": 82,
+     "copies": 57
+    },
+    "Tile2": {
+     "covered": 40,
+     "total": 82,
+     "copies": 10
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 82,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 57,
+    "total": 82,
+    "exact": false,
+    "copies": 57
+   }
+  },
+  {
+   "n": 85,
+   "L": "11/2 + 3\u221a2",
+   "squares": 85,
+   "tilted": 36,
+   "templates": {
+    "Tile1": {
+     "covered": 49,
+     "total": 85,
+     "copies": 49
+    },
+    "Tile2": {
+     "covered": 32,
+     "total": 85,
+     "copies": 8
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 85,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 49,
+    "total": 85,
+    "exact": false,
+    "copies": 49
+   }
+  },
+  {
+   "n": 89,
+   "L": "5 + 7/2\u221a2",
+   "squares": 89,
+   "tilted": 49,
+   "templates": {
+    "Tile1": {
+     "covered": 40,
+     "total": 89,
+     "copies": 40
+    },
+    "Tile2": {
+     "covered": 16,
+     "total": 89,
+     "copies": 4
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 89,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 40,
+    "total": 89,
+    "exact": false,
+    "copies": 40
+   }
+  },
+  {
+   "n": 101,
+   "L": "7 + 5/2\u221a2",
+   "squares": 101,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 76,
+     "total": 101,
+     "copies": 76
+    },
+    "Tile2": {
+     "covered": 48,
+     "total": 101,
+     "copies": 12
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 101,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 76,
+    "total": 101,
+    "exact": false,
+    "copies": 76
+   }
+  },
+  {
+   "n": 104,
+   "L": "10 + 1/2\u221a2",
+   "squares": 104,
+   "tilted": 12,
+   "templates": {
+    "Tile1": {
+     "covered": 92,
+     "total": 104,
+     "copies": 92
+    },
+    "Tile2": {
+     "covered": 80,
+     "total": 104,
+     "copies": 20
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 104,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 92,
+    "total": 104,
+    "exact": false,
+    "copies": 92
+   }
+  },
+  {
+   "n": 122,
+   "L": "8 + 5/2\u221a2",
+   "squares": 122,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 97,
+     "total": 122,
+     "copies": 97
+    },
+    "Tile2": {
+     "covered": 76,
+     "total": 122,
+     "copies": 19
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 122,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 97,
+    "total": 122,
+    "exact": false,
+    "copies": 97
+   }
+  },
+  {
+   "n": 124,
+   "L": "6 + 4\u221a2",
+   "squares": 124,
+   "tilted": 64,
+   "templates": {
+    "Tile1": {
+     "covered": 60,
+     "total": 124,
+     "copies": 60
+    },
+    "Tile2": {
+     "covered": 48,
+     "total": 124,
+     "copies": 12
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 124,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 60,
+    "total": 124,
+    "exact": false,
+    "copies": 60
+   }
+  },
+  {
+   "n": 125,
+   "L": "11 + 1/2\u221a2",
+   "squares": 125,
+   "tilted": 13,
+   "templates": {
+    "Tile1": {
+     "covered": 112,
+     "total": 125,
+     "copies": 112
+    },
+    "Tile2": {
+     "covered": 80,
+     "total": 125,
+     "copies": 20
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 125,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 112,
+    "total": 125,
+    "exact": false,
+    "copies": 112
+   }
+  },
+  {
+   "n": 145,
+   "L": "9 + 5/2\u221a2",
+   "squares": 145,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 120,
+     "total": 145,
+     "copies": 120
+    },
+    "Tile2": {
+     "covered": 96,
+     "total": 145,
+     "copies": 24
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 145,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 120,
+    "total": 145,
+    "exact": false,
+    "copies": 120
+   }
+  },
+  {
+   "n": 147,
+   "L": "7 + 4\u221a2",
+   "squares": 147,
+   "tilted": 64,
+   "templates": {
+    "Tile1": {
+     "covered": 83,
+     "total": 147,
+     "copies": 83
+    },
+    "Tile2": {
+     "covered": 48,
+     "total": 147,
+     "copies": 12
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 147,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 83,
+    "total": 147,
+    "exact": false,
+    "copies": 83
+   }
+  },
+  {
+   "n": 148,
+   "L": "7 + 4\u221a2",
+   "squares": 148,
+   "tilted": 64,
+   "templates": {
+    "Tile1": {
+     "covered": 84,
+     "total": 148,
+     "copies": 84
+    },
+    "Tile2": {
+     "covered": 48,
+     "total": 148,
+     "copies": 12
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 148,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 84,
+    "total": 148,
+    "exact": false,
+    "copies": 84
+   }
+  },
+  {
+   "n": 149,
+   "L": "12 + 1/2\u221a2",
+   "squares": 149,
+   "tilted": 15,
+   "templates": {
+    "Tile1": {
+     "covered": 134,
+     "total": 149,
+     "copies": 134
+    },
+    "Tile2": {
+     "covered": 120,
+     "total": 149,
+     "copies": 30
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 149,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 134,
+    "total": 149,
+    "exact": false,
+    "copies": 134
+   }
+  },
+  {
+   "n": 150,
+   "L": "5 + 11/2\u221a2",
+   "squares": 150,
+   "tilted": 66,
+   "templates": {
+    "Tile1": {
+     "covered": 84,
+     "total": 150,
+     "copies": 84
+    },
+    "Tile2": {
+     "covered": 56,
+     "total": 150,
+     "copies": 14
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 150,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 84,
+    "total": 150,
+    "exact": false,
+    "copies": 84
+   }
+  },
+  {
+   "n": 170,
+   "L": "10 + 5/2\u221a2",
+   "squares": 170,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 145,
+     "total": 170,
+     "copies": 145
+    },
+    "Tile2": {
+     "covered": 120,
+     "total": 170,
+     "copies": 30
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 170,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 145,
+    "total": 170,
+    "exact": false,
+    "copies": 145
+   }
+  },
+  {
+   "n": 173,
+   "L": "8 + 4\u221a2",
+   "squares": 173,
+   "tilted": 64,
+   "templates": {
+    "Tile1": {
+     "covered": 109,
+     "total": 173,
+     "copies": 109
+    },
+    "Tile2": {
+     "covered": 84,
+     "total": 173,
+     "copies": 21
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 173,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 109,
+    "total": 173,
+    "exact": false,
+    "copies": 109
+   }
+  },
+  {
+   "n": 174,
+   "L": "13 + 1/2\u221a2",
+   "squares": 174,
+   "tilted": 16,
+   "templates": {
+    "Tile1": {
+     "covered": 158,
+     "total": 174,
+     "copies": 158
+    },
+    "Tile2": {
+     "covered": 120,
+     "total": 174,
+     "copies": 30
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 174,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 158,
+    "total": 174,
+    "exact": false,
+    "copies": 158
+   }
+  },
+  {
+   "n": 197,
+   "L": "11 + 5/2\u221a2",
+   "squares": 197,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 172,
+     "total": 197,
+     "copies": 172
+    },
+    "Tile2": {
+     "covered": 128,
+     "total": 197,
+     "copies": 32
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 197,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 172,
+    "total": 197,
+    "exact": false,
+    "copies": 172
+   }
+  },
+  {
+   "n": 200,
+   "L": "9 + 4\u221a2",
+   "squares": 200,
+   "tilted": 64,
+   "templates": {
+    "Tile1": {
+     "covered": 136,
+     "total": 200,
+     "copies": 136
+    },
+    "Tile2": {
+     "covered": 96,
+     "total": 200,
+     "copies": 24
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 200,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 136,
+    "total": 200,
+    "exact": false,
+    "copies": 136
+   }
+  },
+  {
+   "n": 201,
+   "L": "14 + 1/2\u221a2",
+   "squares": 201,
+   "tilted": 17,
+   "templates": {
+    "Tile1": {
+     "covered": 184,
+     "total": 201,
+     "copies": 184
+    },
+    "Tile2": {
+     "covered": 168,
+     "total": 201,
+     "copies": 42
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 201,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 184,
+    "total": 201,
+    "exact": false,
+    "copies": 184
+   }
+  },
+  {
+   "n": 202,
+   "L": "2 + 9\u221a2",
+   "squares": 202,
+   "tilted": 18,
+   "templates": {
+    "Tile1": {
+     "covered": 184,
+     "total": 202,
+     "copies": 184
+    },
+    "Tile2": {
+     "covered": 168,
+     "total": 202,
+     "copies": 42
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 202,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 184,
+    "total": 202,
+    "exact": false,
+    "copies": 184
+   }
+  },
+  {
+   "n": 203,
+   "L": "7 + 11/2\u221a2",
+   "squares": 203,
+   "tilted": 115,
+   "templates": {
+    "Tile1": {
+     "covered": 88,
+     "total": 203,
+     "copies": 88
+    },
+    "Tile2": {
+     "covered": 60,
+     "total": 203,
+     "copies": 15
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 203,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 88,
+    "total": 203,
+    "exact": false,
+    "copies": 88
+   }
+  },
+  {
+   "n": 226,
+   "L": "12 + 5/2\u221a2",
+   "squares": 226,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 201,
+     "total": 226,
+     "copies": 201
+    },
+    "Tile2": {
+     "covered": 172,
+     "total": 226,
+     "copies": 43
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 226,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 201,
+    "total": 226,
+    "exact": false,
+    "copies": 201
+   }
+  },
+  {
+   "n": 231,
+   "L": "15 + 1/2\u221a2",
+   "squares": 231,
+   "tilted": 19,
+   "templates": {
+    "Tile1": {
+     "covered": 212,
+     "total": 231,
+     "copies": 212
+    },
+    "Tile2": {
+     "covered": 168,
+     "total": 231,
+     "copies": 42
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 231,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 212,
+    "total": 231,
+    "exact": false,
+    "copies": 212
+   }
+  },
+  {
+   "n": 233,
+   "L": "8 + 11/2\u221a2",
+   "squares": 233,
+   "tilted": 121,
+   "templates": {
+    "Tile1": {
+     "covered": 112,
+     "total": 233,
+     "copies": 112
+    },
+    "Tile2": {
+     "covered": 96,
+     "total": 233,
+     "copies": 24
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 233,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 112,
+    "total": 233,
+    "exact": false,
+    "copies": 112
+   }
+  },
+  {
+   "n": 257,
+   "L": "13 + 5/2\u221a2",
+   "squares": 257,
+   "tilted": 25,
+   "templates": {
+    "Tile1": {
+     "covered": 232,
+     "total": 257,
+     "copies": 232
+    },
+    "Tile2": {
+     "covered": 208,
+     "total": 257,
+     "copies": 52
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 257,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 232,
+    "total": 257,
+    "exact": false,
+    "copies": 232
+   }
+  },
+  {
+   "n": 262,
+   "L": "16 + 1/2\u221a2",
+   "squares": 262,
+   "tilted": 20,
+   "templates": {
+    "Tile1": {
+     "covered": 242,
+     "total": 262,
+     "copies": 242
+    },
+    "Tile2": {
+     "covered": 224,
+     "total": 262,
+     "copies": 56
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 262,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 242,
+    "total": 262,
+    "exact": false,
+    "copies": 242
+   }
+  },
+  {
+   "n": 265,
+   "L": "9 + 11/2\u221a2",
+   "squares": 265,
+   "tilted": 121,
+   "templates": {
+    "Tile1": {
+     "covered": 144,
+     "total": 265,
+     "copies": 144
+    },
+    "Tile2": {
+     "covered": 96,
+     "total": 265,
+     "copies": 24
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 265,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 144,
+    "total": 265,
+    "exact": false,
+    "copies": 144
+   }
+  },
+  {
+   "n": 290,
+   "L": "14 + 5/2\u221a2",
+   "squares": 290,
+   "tilted": 50,
+   "templates": {
+    "Tile1": {
+     "covered": 240,
+     "total": 290,
+     "copies": 240
+    },
+    "Tile2": {
+     "covered": 184,
+     "total": 290,
+     "copies": 46
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 290,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 240,
+    "total": 290,
+    "exact": false,
+    "copies": 240
+   }
+  },
+  {
+   "n": 291,
+   "L": "14 + 5/2\u221a2",
+   "squares": 291,
+   "tilted": 50,
+   "templates": {
+    "Tile1": {
+     "covered": 241,
+     "total": 291,
+     "copies": 241
+    },
+    "Tile2": {
+     "covered": 184,
+     "total": 291,
+     "copies": 46
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 291,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 241,
+    "total": 291,
+    "exact": false,
+    "copies": 241
+   }
+  },
+  {
+   "n": 294,
+   "L": "12 + 4\u221a2",
+   "squares": 294,
+   "tilted": 120,
+   "templates": {
+    "Tile1": {
+     "covered": 174,
+     "total": 294,
+     "copies": 174
+    },
+    "Tile2": {
+     "covered": 144,
+     "total": 294,
+     "copies": 36
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 294,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 174,
+    "total": 294,
+    "exact": false,
+    "copies": 174
+   }
+  },
+  {
+   "n": 295,
+   "L": "22/3 + 22/3\u221a2",
+   "squares": 295,
+   "tilted": 160,
+   "templates": {
+    "Tile1": {
+     "covered": 135,
+     "total": 295,
+     "copies": 135
+    },
+    "Tile2": {
+     "covered": 104,
+     "total": 295,
+     "copies": 26
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 295,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 135,
+    "total": 295,
+    "exact": false,
+    "copies": 135
+   }
+  },
+  {
+   "n": 296,
+   "L": "17 + 1/2\u221a2",
+   "squares": 296,
+   "tilted": 22,
+   "templates": {
+    "Tile1": {
+     "covered": 274,
+     "total": 296,
+     "copies": 274
+    },
+    "Tile2": {
+     "covered": 224,
+     "total": 296,
+     "copies": 56
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 296,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 274,
+    "total": 296,
+    "exact": false,
+    "copies": 274
+   }
+  },
+  {
+   "n": 298,
+   "L": "10 + 11/2\u221a2",
+   "squares": 298,
+   "tilted": 121,
+   "templates": {
+    "Tile1": {
+     "covered": 177,
+     "total": 298,
+     "copies": 177
+    },
+    "Tile2": {
+     "covered": 144,
+     "total": 298,
+     "copies": 36
+    },
+    "Pocket1": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Pocket2": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Strip2,1": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Strip2,2": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Fold1": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Fold2": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Glue1/2": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Atom5": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    },
+    "Atom10": {
+     "covered": 0,
+     "total": 298,
+     "copies": 0
+    }
+   },
+   "best": {
+    "template": "Tile1",
+    "covered": 177,
+    "total": 298,
+    "exact": false,
+    "copies": 177
+   }
+  }
+ ]
+}

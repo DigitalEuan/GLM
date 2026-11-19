@@ -1,0 +1,2119 @@
+{
+ "run": 86,
+ "instrument": "glm_wheels.py + lattice_shells.py + exact_field.py",
+ "domains": [
+  "lattice_shells",
+  "spatial_geometry",
+  "sturmian_sequences"
+ ],
+ "spins": {
+  "spatial": {
+   "summary": {
+    "cells": 28,
+    "certified": 25,
+    "refused": 3,
+    "refusal_laws": {
+     "strip_needs_diamond": 3
+    }
+   },
+   "rows": [
+    {
+     "wheel": "spatial",
+     "family": "Tile",
+     "params": {
+      "k": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance None, contacts 0, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "single square: no pairs, no contacts needed"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 1 + (0) = 1 and L^2 = 1"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec no pairs, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "1",
+      "extent": "1",
+      "void": "0",
+      "gain": "0"
+     },
+     "n": 1,
+     "beats": false,
+     "gain": "0"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Tile",
+     "params": {
+      "k": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 6, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 4/4 with 6 contacts >= n-1, min degree 3, Laman bound 5 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 4 + (0) = 4 and L^2 = 4"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "extent": "2",
+      "void": "0",
+      "gain": "0"
+     },
+     "n": 4,
+     "beats": false,
+     "gain": "0"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Tile",
+     "params": {
+      "k": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 20, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 9/9 with 28 contacts >= n-1, min degree 5, Laman bound 15 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 9 + (0) = 9 and L^2 = 9"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "9",
+      "extent": "3",
+      "void": "0",
+      "gain": "0"
+     },
+     "n": 9,
+     "beats": false,
+     "gain": "0"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Tile",
+     "params": {
+      "k": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 42, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 16/16 with 78 contacts >= n-1, min degree 7, Laman bound 29 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 16 + (0) = 16 and L^2 = 16"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "16",
+      "extent": "4",
+      "void": "0",
+      "gain": "0"
+     },
+     "n": 16,
+     "beats": false,
+     "gain": "0"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Tile",
+     "params": {
+      "k": "5"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 72, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 25/25 with 168 contacts >= n-1, min degree 9, Laman bound 47 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 25 + (0) = 25 and L^2 = 25"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "25",
+      "extent": "5",
+      "void": "0",
+      "gain": "0"
+     },
+     "n": 25,
+     "beats": false,
+     "gain": "0"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Pocket",
+     "params": {
+      "k": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 4, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 5/5 with 4 contacts >= n-1, min degree 1, Laman bound 7 (floppy)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 5 + (-1/2 + 2\u221a2) = 9/2 + 2\u221a2 and L^2 = 9/2 + 2\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "5",
+      "extent": "2 + 1/2\u221a2",
+      "void": "-1/2 + 2\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 5,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Pocket",
+     "params": {
+      "k": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 28, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 17/17 with 60 contacts >= n-1, min degree 4, Laman bound 31 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 17 + (-1/2 + 4\u221a2) = 33/2 + 4\u221a2 and L^2 = 33/2 + 4\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "17",
+      "extent": "4 + 1/2\u221a2",
+      "void": "-1/2 + 4\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 17,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Pocket",
+     "params": {
+      "k": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 84, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 37/37 with 260 contacts >= n-1, min degree 4, Laman bound 71 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 37 + (-1/2 + 6\u221a2) = 73/2 + 6\u221a2 and L^2 = 73/2 + 6\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "37",
+      "extent": "6 + 1/2\u221a2",
+      "void": "-1/2 + 6\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 37,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "2",
+      "m": "0"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "strip_needs_diamond",
+      "detail": "S(2, 0) has no diamond, so it is the plain 2k grid: no seam"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "2",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 28, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 17/17 with 60 contacts >= n-1, min degree 4, Laman bound 31 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 17 + (-1/2 + 4\u221a2) = 33/2 + 4\u221a2 and L^2 = 33/2 + 4\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "17",
+      "extent": "4 + 1/2\u221a2",
+      "void": "-1/2 + 4\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 17,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "2",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 27, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 18/18 with 63 contacts >= n-1, min degree 4, Laman bound 33 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 18 + (8\u221a2) = 18 + 8\u221a2 and L^2 = 18 + 8\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "18",
+      "extent": "4 + \u221a2",
+      "void": "8\u221a2",
+      "gain": "1 - 1\u221a2"
+     },
+     "n": 18,
+     "beats": false,
+     "gain": "1 - 1\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "2",
+      "m": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 28, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 19/19 with 60 contacts >= n-1, min degree 2, Laman bound 35 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 19 + (3/2 + 12\u221a2) = 41/2 + 12\u221a2 and L^2 = 41/2 + 12\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "19",
+      "extent": "4 + 3/2\u221a2",
+      "void": "3/2 + 12\u221a2",
+      "gain": "1 - 3/2\u221a2"
+     },
+     "n": 19,
+     "beats": false,
+     "gain": "1 - 3/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "3",
+      "m": "0"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "strip_needs_diamond",
+      "detail": "S(3, 0) has no diamond, so it is the plain 2k grid: no seam"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "3",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 84, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 37/37 with 260 contacts >= n-1, min degree 4, Laman bound 71 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 37 + (-1/2 + 6\u221a2) = 73/2 + 6\u221a2 and L^2 = 73/2 + 6\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "37",
+      "extent": "6 + 1/2\u221a2",
+      "void": "-1/2 + 6\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 37,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "3",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 83, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 38/38 with 267 contacts >= n-1, min degree 6, Laman bound 73 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 38 + (12\u221a2) = 38 + 12\u221a2 and L^2 = 38 + 12\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "38",
+      "extent": "6 + \u221a2",
+      "void": "12\u221a2",
+      "gain": "1 - 1\u221a2"
+     },
+     "n": 38,
+     "beats": false,
+     "gain": "1 - 1\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "3",
+      "m": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 84, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 39/39 with 260 contacts >= n-1, min degree 2, Laman bound 75 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 39 + (3/2 + 18\u221a2) = 81/2 + 18\u221a2 and L^2 = 81/2 + 18\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "39",
+      "extent": "6 + 3/2\u221a2",
+      "void": "3/2 + 18\u221a2",
+      "gain": "1 - 3/2\u221a2"
+     },
+     "n": 39,
+     "beats": false,
+     "gain": "1 - 3/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "4",
+      "m": "0"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "strip_needs_diamond",
+      "detail": "S(4, 0) has no diamond, so it is the plain 2k grid: no seam"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "4",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 172, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 65/65 with 700 contacts >= n-1, min degree 4, Laman bound 127 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 65 + (-1/2 + 8\u221a2) = 129/2 + 8\u221a2 and L^2 = 129/2 + 8\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "65",
+      "extent": "8 + 1/2\u221a2",
+      "void": "-1/2 + 8\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 65,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "4",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 171, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 66/66 with 711 contacts >= n-1, min degree 8, Laman bound 129 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 66 + (16\u221a2) = 66 + 16\u221a2 and L^2 = 66 + 16\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "66",
+      "extent": "8 + \u221a2",
+      "void": "16\u221a2",
+      "gain": "1 - 1\u221a2"
+     },
+     "n": 66,
+     "beats": false,
+     "gain": "1 - 1\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Strip",
+     "params": {
+      "k": "4",
+      "m": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 172, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 67/67 with 700 contacts >= n-1, min degree 2, Laman bound 131 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 67 + (3/2 + 24\u221a2) = 137/2 + 24\u221a2 and L^2 = 137/2 + 24\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-65, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "67",
+      "extent": "8 + 3/2\u221a2",
+      "void": "3/2 + 24\u221a2",
+      "gain": "1 - 3/2\u221a2"
+     },
+     "n": 67,
+     "beats": false,
+     "gain": "1 - 3/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Glue",
+     "params": {
+      "t": "1/2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 4, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 5/5 with 4 contacts >= n-1, min degree 1, Laman bound 7 (floppy)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 5 + (116/49) = 361/49 and L^2 = 361/49"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.029e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "5",
+      "extent": "19/7",
+      "void": "116/49",
+      "gain": "2/7"
+     },
+     "n": 5,
+     "beats": true,
+     "gain": "2/7"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Glue",
+     "params": {
+      "t": "1/3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 4, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 5/5 with 4 contacts >= n-1, min degree 1, Laman bound 7 (floppy)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 5 + (116/49) = 361/49 and L^2 = 361/49"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.029e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "5",
+      "extent": "19/7",
+      "void": "116/49",
+      "gain": "2/7"
+     },
+     "n": 5,
+     "beats": true,
+     "gain": "2/7"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Glue",
+     "params": {
+      "t": "1/5"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 4, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 5/5 with 4 contacts >= n-1, min degree 1, Laman bound 7 (floppy)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 5 + (764/289) = 2209/289 and L^2 = 2209/289"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "5",
+      "extent": "47/17",
+      "void": "764/289",
+      "gain": "4/17"
+     },
+     "n": 5,
+     "beats": true,
+     "gain": "4/17"
+    },
+    {
+     "wheel": "spatial",
+     "family": "SymmetryFold",
+     "params": {
+      "k": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 4, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 5/5 with 4 contacts >= n-1, min degree 1, Laman bound 7 (floppy)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 5 + (-1/2 + 2\u221a2) = 9/2 + 2\u221a2 and L^2 = 9/2 + 2\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "5",
+      "extent": "2 + 1/2\u221a2",
+      "void": "-1/2 + 2\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 5,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "SymmetryFold",
+     "params": {
+      "k": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 28, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 17/17 with 60 contacts >= n-1, min degree 4, Laman bound 31 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 17 + (-1/2 + 4\u221a2) = 33/2 + 4\u221a2 and L^2 = 33/2 + 4\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "17",
+      "extent": "4 + 1/2\u221a2",
+      "void": "-1/2 + 4\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 17,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Atom",
+     "params": {
+      "n": "5"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 4, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 5/5 with 4 contacts >= n-1, min degree 1, Laman bound 7 (floppy)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 5 + (-1/2 + 2\u221a2) = 9/2 + 2\u221a2 and L^2 = 9/2 + 2\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "5",
+      "extent": "2 + 1/2\u221a2",
+      "void": "-1/2 + 2\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 5,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Atom",
+     "params": {
+      "n": "10"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 11, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 10/10 with 19 contacts >= n-1, min degree 2, Laman bound 17 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 10 + (-1/2 + 3\u221a2) = 19/2 + 3\u221a2 and L^2 = 19/2 + 3\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.207e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "10",
+      "extent": "3 + 1/2\u221a2",
+      "void": "-1/2 + 3\u221a2",
+      "gain": "1 - 1/2\u221a2"
+     },
+     "n": 10,
+     "beats": true,
+     "gain": "1 - 1/2\u221a2"
+    },
+    {
+     "wheel": "spatial",
+     "family": "Atom",
+     "params": {
+      "n": "40"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 98, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 40/40 with 302 contacts >= n-1, min degree 7, Laman bound 77 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 40 + (-16 + 16\u221a2) = 24 + 16\u221a2 and L^2 = 24 + 16\u221a2"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.121e+0, pair verdict True == exact True"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "40",
+      "extent": "4 + 2\u221a2",
+      "void": "-16 + 16\u221a2",
+      "gain": "3 - 2\u221a2"
+     },
+     "n": 40,
+     "beats": true,
+     "gain": "3 - 2\u221a2"
+    }
+   ]
+  },
+  "sequences": {
+   "summary": {
+    "cells": 7,
+    "certified": 6,
+    "refused": 1,
+    "refusal_laws": {
+     "not_sturmian": 1
+    }
+   },
+   "rows": [
+    {
+     "wheel": "sequences",
+     "family": "Tile",
+     "params": {
+      "t": "-1 + \u221a2",
+      "n": "21"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters agree with floor((k+1)a+r) - floor(ka+r)"
+      },
+      "complexity": {
+       "ok": true,
+       "detail": "p(m) = m + 1 for m <= 6 (worst p(2) = 3)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 18 - 5\u221a2 == declared, 21 letters, 8 ones"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "21",
+      "measure": "18 - 5\u221a2",
+      "ones": "8"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "sequences",
+     "family": "Tile",
+     "params": {
+      "t": "1/2",
+      "n": "21"
+     },
+     "verdict": "refused",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters agree with floor((k+1)a+r) - floor(ka+r)"
+      },
+      "complexity": {
+       "ok": false,
+       "detail": "p(2) = 2 != 3 (periodic, not Sturmian)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 21/2 == declared, 21 letters, 10 ones"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": {
+      "law": "not_sturmian",
+      "detail": "p(2) = 2 != 3 (periodic, not Sturmian)"
+     },
+     "laws": {
+      "count": "21",
+      "measure": "21/2",
+      "ones": "10"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "sequences",
+     "family": "Frame",
+     "params": {
+      "t": "-1 + \u221a2",
+      "r": "1/2",
+      "n": "21"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters agree with floor((k+1)a+r) - floor(ka+r)"
+      },
+      "complexity": {
+       "ok": true,
+       "detail": "p(m) = m + 1 for m <= 6 (worst p(2) = 3)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 15 - 3\u221a2 == declared, 21 letters, 9 ones"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "21",
+      "measure": "15 - 3\u221a2",
+      "ones": "9"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "sequences",
+     "family": "Frame",
+     "params": {
+      "t": "-1 + \u221a2",
+      "r": "1/3",
+      "n": "21"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters agree with floor((k+1)a+r) - floor(ka+r)"
+      },
+      "complexity": {
+       "ok": true,
+       "detail": "p(m) = m + 1 for m <= 6 (worst p(2) = 3)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 15 - 3\u221a2 == declared, 21 letters, 9 ones"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "21",
+      "measure": "15 - 3\u221a2",
+      "ones": "9"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "sequences",
+     "family": "Strip",
+     "params": {
+      "t": "-1 + \u221a2",
+      "n": "21",
+      "shift": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters agree with floor((k+1)a+r) - floor(ka+r)"
+      },
+      "complexity": {
+       "ok": true,
+       "detail": "p(m) = m + 1 for m <= 6 (worst p(2) = 3)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 18 - 5\u221a2 == declared, 21 letters, 8 ones"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "21",
+      "measure": "18 - 5\u221a2",
+      "ones": "8"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "sequences",
+     "family": "Glue",
+     "params": {
+      "t": "-1 + \u221a2",
+      "r": "1/2",
+      "n": "21"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters agree with floor((k+1)a+r) - floor(ka+r)"
+      },
+      "complexity": {
+       "ok": true,
+       "detail": "p(m) = m + 1 for m <= 6 (worst p(2) = 3)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 15 - 3\u221a2 == declared, 21 letters, 9 ones, coboundary 0^1^0 = 1 (seam term 1)"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "21",
+      "measure": "15 - 3\u221a2",
+      "ones": "9"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "sequences",
+     "family": "SymmetryFold",
+     "params": {
+      "t": "-1 + \u221a2",
+      "r": "0",
+      "n": "21"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "21 letters are the exact reversal of the parent window (8 ones, weight preserved)"
+      },
+      "complexity": {
+       "ok": true,
+       "detail": "p(m) = m + 1 for m <= 6 (worst p(2) = 3)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "weight 18 - 5\u221a2 == declared, 21 letters, 8 ones"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|measure_dec - measure| = 0.000e-65"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "21",
+      "measure": "18 - 5\u221a2",
+      "ones": "8"
+     },
+     "n": 21,
+     "beats": null,
+     "gain": null
+    }
+   ]
+  },
+  "lattice": {
+   "summary": {
+    "cells": 28,
+    "certified": 24,
+    "refused": 4,
+    "refusal_laws": {
+     "empty_shell": 2,
+     "rank_budget": 2
+    }
+   },
+   "rows": [
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z1",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "2 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 2 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "2 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "2",
+      "norm": "1",
+      "rank": "1"
+     },
+     "n": 2,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z2",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 4 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "norm": "1",
+      "rank": "2"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z2",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 4 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "norm": "2",
+      "rank": "2"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z3",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "6 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 6 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "6 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "6",
+      "norm": "1",
+      "rank": "3"
+     },
+     "n": 6,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "Z4",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "norm": "2",
+      "rank": "4"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "norm": "2",
+      "rank": "4"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(4) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 16 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "norm": "4",
+      "rank": "4"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "6"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "96 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(6) = 96 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "96 vectors, all |y|^2 == 24 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "96",
+      "norm": "6",
+      "rank": "4"
+     },
+     "n": 96,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "E8",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 240 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "240",
+      "norm": "2",
+      "rank": "8"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "E8",
+      "m": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "2160 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(4) = 2160 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "2160 vectors, all |y|^2 == 16 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "2160",
+      "norm": "4",
+      "rank": "8"
+     },
+     "n": 2160,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Frame",
+     "params": {
+      "key": "Z2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 4 (claimed 4), degree set None, neighbours of one root n/a (not a root lattice)"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 4 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "kissing": "4",
+      "min_norm": "1",
+      "root_degree": "n/a (not a root lattice)"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Frame",
+     "params": {
+      "key": "D4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 24 (claimed 24), degree set 8, neighbours of one root 8"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 24 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "kissing": "24",
+      "min_norm": "2",
+      "root_degree": "8"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Frame",
+     "params": {
+      "key": "E8"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 240 (claimed 240), degree set 56, neighbours of one root 56"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 240 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "kissing": "240",
+      "min_norm": "2",
+      "root_degree": "56"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Strip",
+     "params": {
+      "key": "Z2",
+      "M": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "ball: 9 vectors over 4 shells, 0 off-norm or off-lattice"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "ball 9 == sum of 4 shells"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "shell counts_dec (1, 4, 4, 0)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "ball": "9",
+      "shells": "4",
+      "theta": "(1, 4, 4, 0)"
+     },
+     "n": 9,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Strip",
+     "params": {
+      "key": "D4",
+      "M": "6"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "ball: 145 vectors over 7 shells, 0 off-norm or off-lattice"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "ball 145 == sum of 7 shells"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "shell counts_dec (1, 0, 24, 0, 24, 0, 96)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "ball": "145",
+      "shells": "7",
+      "theta": "(1, 0, 24, 0, 24, 0, 96)"
+     },
+     "n": 145,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Strip",
+     "params": {
+      "key": "E8",
+      "M": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "ball: 241 vectors over 3 shells, 0 off-norm or off-lattice"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "ball 241 == sum of 3 shells"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "shell counts_dec (1, 0, 240)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "ball": "241",
+      "shells": "3",
+      "theta": "(1, 0, 240)"
+     },
+     "n": 241,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z2",
+      "key_b": "D4",
+      "M": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "253 pairs, every pair at norm 4m"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "enumerated (1, 4, 28, 96, 124) == convolution (1, 4, 28, 96, 124)"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "theta_dec (1, 4, 28, 96, 124)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "6",
+      "theta": "(1, 4, 28, 96, 124)",
+      "shell0": "1"
+     },
+     "n": 253,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z4",
+      "key_b": "D4",
+      "M": "3"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "281 pairs, every pair at norm 4m"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "enumerated (1, 8, 48, 224) == convolution (1, 8, 48, 224)"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "theta_dec (1, 8, 48, 224)"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "8",
+      "theta": "(1, 8, 48, 224)",
+      "shell0": "1"
+     },
+     "n": 281,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z2",
+      "key_b": "E8",
+      "M": "2"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "rank_budget",
+      "detail": "Z2(+)E8 has rank 10 > 8: the shell walk is not a cell"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "lattice",
+     "family": "SymmetryFold",
+     "params": {
+      "key": "Z2",
+      "m": "1"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(1) = 4 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "4",
+      "pairs": "2",
+      "even": "0"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "SymmetryFold",
+     "params": {
+      "key": "D4",
+      "m": "4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(4) = 24 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 16 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "24",
+      "pairs": "12",
+      "even": "0"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "SymmetryFold",
+     "params": {
+      "key": "E8",
+      "m": "2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 vectors, 0 off-norm, 0 off-lattice, duplicates False"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "r(2) = 240 recomputed from the lattice"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "count": "240",
+      "pairs": "120",
+      "even": "0"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Atom",
+     "params": {
+      "key": "Z2"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "4 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 4 (claimed 4), degree set None, neighbours of one root n/a (not a root lattice)"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 4 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "4 vectors, all |y|^2 == 4 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "2",
+      "min_norm": "1",
+      "kissing": "4"
+     },
+     "n": 4,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Atom",
+     "params": {
+      "key": "D4"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "24 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 24 (claimed 24), degree set 8, neighbours of one root 8"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 24 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "24 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "4",
+      "min_norm": "2",
+      "kissing": "24"
+     },
+     "n": 24,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Atom",
+     "params": {
+      "key": "E8"
+     },
+     "verdict": "certified",
+     "witnesses": {
+      "exact_norm": {
+       "ok": true,
+       "detail": "240 minimal vectors, 0 off-norm, 0 off-lattice"
+      },
+      "kissing_topology": {
+       "ok": true,
+       "detail": "|L_min| = 240 (claimed 240), degree set 56, neighbours of one root 56"
+      },
+      "theta_conservation": {
+       "ok": true,
+       "detail": "minimal shell 240 == recomputed"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "240 vectors, all |y|^2 == 8 in Decimal"
+      }
+     },
+     "refusal": null,
+     "laws": {
+      "rank": "8",
+      "min_norm": "2",
+      "kissing": "240"
+     },
+     "n": 240,
+     "beats": null,
+     "gain": null
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "D4",
+      "m": "3"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "empty_shell",
+      "detail": "D4 has no vectors of norm^2 3 (even lattice, odd norm)"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "lattice",
+     "family": "Tile",
+     "params": {
+      "key": "E8",
+      "m": "1"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "empty_shell",
+      "detail": "E8 has no vectors of norm^2 1 (even lattice, odd norm)"
+     },
+     "laws": {}
+    },
+    {
+     "wheel": "lattice",
+     "family": "Glue",
+     "params": {
+      "key_a": "Z4",
+      "key_b": "E8",
+      "M": "2"
+     },
+     "verdict": "refused",
+     "witnesses": {},
+     "refusal": {
+      "law": "rank_budget",
+      "detail": "Z4(+)E8 has rank 12 > 8: the shell walk is not a cell"
+     },
+     "laws": {}
+    }
+   ]
+  }
+ },
+ "audit": {
+  "checked": 76,
+  "offenders": [],
+  "exempt": [
+   "selftest"
+  ]
+ }
+}
