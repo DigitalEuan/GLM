@@ -207,6 +207,25 @@ def side(state, words) -> Q2:
     return max(max(xs) - min(xn), max(ys) - min(yn))
 
 
+def pair_axes(state, words, i, j):
+    """The four SAT (axis, slack, need) triples of a pair, exactly.
+
+    `slack = |d.q| - (1/2 + ext_other(q))`; the pair is separated iff some slack
+    is >= 0, and the pair's distance from contact is the LARGEST of the four.
+    """
+    dx = state[j][0] - state[i][0]
+    dy = state[j][1] - state[i][1]
+    out = []
+    for owner, other in ((i, j), (j, i)):
+        c, s = words[owner]
+        oc, os_ = words[other]
+        for qx, qy in ((c, s), (-s, c)):
+            proj = abs(dx * qx + dy * qy)
+            need = HALF + axis_extent(oc, os_, qx, qy)
+            out.append(((qx, qy), proj - need, need, owner))
+    return out
+
+
 def gate(state, words):
     """The exact SAT sentence gate.
 
@@ -216,42 +235,284 @@ def gate(state, words):
 
     Returns:
         dict with
-          ok         True iff every pair is separated on some axis (exact)
-          L          the container side, exactly
-          clearance  the worst pair's best axis slack, exactly: >= 0 iff ok,
-                     and 0 means at least one pair is in exact contact
-          contacts   the number of pairs whose tightest axis is exactly touching
+          ok          True iff every pair is separated on some axis (exact)
+          L           the container side, exactly
+          clearance   the worst pair's best axis slack, exactly: >= 0 iff ok,
+                      and 0 means at least one pair is in exact contact
+          contacts    the number of pairs whose tightest axis is exactly touching
+          violations  the number of overlapping pairs
+
+    Pairs whose centres differ by 2 or more on either axis are skipped: every
+    half-extent is at most sqrt(2)/2, so such a pair is separated on that axis by
+    a margin of at least 2 - sqrt(2) > 0.5 and cannot be the worst pair.  The
+    prune is exact (it is decided by a field comparison), not a tolerance.
     """
     n = len(state)
     if n != len(words):
         raise ValueError("state and words disagree on the number of squares")
     if n == 0:
-        return {"ok": True, "L": Q2(0), "clearance": None, "contacts": 0}
+        return {"ok": True, "L": Q2(0), "clearance": None, "contacts": 0,
+                "violations": 0}
     L = side(state, words)
+    two = Q2(2)
     worst = None
-    contacts = 0
+    contacts = violations = 0
     for i in range(n):
+        xi, yi = state[i]
         for j in range(i + 1, n):
-            dx = state[j][0] - state[i][0]
-            dy = state[j][1] - state[i][1]
+            if abs(state[j][0] - xi) >= two or abs(state[j][1] - yi) >= two:
+                continue
             best = None
-            for owner, other in ((i, j), (j, i)):
-                c, s = words[owner]
-                for qx, qy in ((c, s), (-s, c)):
-                    proj = abs(dx * qx + dy * qy)
-                    oc, os_ = words[other]
-                    need = HALF + axis_extent(oc, os_, qx, qy)
-                    slack = proj - need
-                    if best is None or slack > best:
-                        best = slack
+            for _q, slack, _need, _owner in pair_axes(state, words, i, j):
+                if best is None or slack > best:
+                    best = slack
             if best == 0:
                 contacts += 1
+            if best.sign() < 0:
+                violations += 1
             if worst is None or best < worst:
                 worst = best
-            if best.sign() < 0:
-                return {"ok": False, "L": L, "clearance": best,
-                        "contacts": contacts, "first_bad": (i, j)}
-    return {"ok": True, "L": L, "clearance": worst, "contacts": contacts}
+    return {"ok": violations == 0, "L": L, "clearance": worst,
+            "contacts": contacts, "violations": violations}
+
+
+# ----------------------------------------------------- exact rounding (no float)
+def floor_q2(z: Q2) -> int:
+    """floor(a + b*sqrt 2), exactly.  Bracket from a and |b|, then bisect on
+    exact sign tests; sqrt 2 < 2 gives a - 2|b| - 1 <= z <= a + 2|b| + 1."""
+    a, b = z.a, z.b
+    if b == 0:
+        return math.floor(a)
+    lo = math.floor(a) - 2 * math.ceil(abs(b)) - 1
+    hi = math.floor(a) + 2 * math.ceil(abs(b)) + 1
+    while lo < hi:
+        mid = (lo + hi + 1) // 2
+        if (z - Q2(mid)).sign() >= 0:
+            lo = mid
+        else:
+            hi = mid - 1
+    return lo
+
+
+def grid_round(z: Q2, M: int) -> F:
+    """The nearest multiple of 1/M to z, decided by exact comparison."""
+    return F(floor_q2(z * Q2(M) + HALF), M)
+
+
+# ------------------------------------------------- the symbolic perception lift
+def recover_side(Ldec: Q2, tol=None, bdens=(1, 2, 4, 8, 16),
+                 adens=(16, 8, 4, 2, 1), bmax=16):
+    """Recover the exact side of a decimal sentence by height-bounded search.
+
+    Every candidate is `a + b*sqrt2` with a and b on small dyadic grids; the
+    nearest such element to the decimal side is found by exact comparison.  The
+    search is a PSLQ-shaped recovery: the decimal plays the role of the value and
+    the height bound is what makes the answer unique (the grids are 1/8 apart, so
+    at most one candidate lies within 1e-9 of the decimal).
+
+    Returns (L, residual, b) or (None, residual, None) when nothing is close.
+    """
+    tol = Q2(F(1, 10 ** 7)) if tol is None else tol
+    # three stages, cheapest first: the common sides are 2k + sqrt2/2 on a half
+    # grid; then rational b with a small denominator (a real row in the table has
+    # side 3 + 4/3 sqrt2, so the dyadic grid alone cannot see it); then the wide
+    # dyadic search of the first run-83 experiment.
+    tries = (((1, 2), 8, (4, 2)),
+             ((1, 2, 3, 4, 5, 6, 7, 8), 6, (8, 64)),
+             (bdens, bmax, adens))
+    best = (None, None, None)
+    for bds, bm, ads in tries:
+        for bd in bds:
+            for num in range(-bm * bd, bm * bd + 1):
+                b = F(num, bd)
+                rest = Ldec - Q2(0, b)
+                for ad in ads:
+                    a = F(floor_q2(rest * Q2(ad) + HALF), ad)
+                    cand = Q2(a) + Q2(0, b)
+                    err = abs(Ldec - cand)
+                    if best[0] is None or err < best[1]:
+                        best = (cand, err, b)
+        if best[0] is not None and best[1] <= tol:
+            return best
+    return (None, best[1], None)
+
+
+def recover_point(x: Q2, tol=None, dens=None, bmax=8):
+    """Recover a small-height `a + b*sqrt2` nearest to x, or None.
+
+    The same PSLQ-shaped search as `recover_side`, for one coordinate: b runs over
+    multiples of 1/D for a small common denominator D, a is the nearest multiple
+    of 1/(4D) to the remainder, and every comparison is exact.  Uniqueness comes
+    from the height bound: candidates on a 1/(4D) grid are far apart compared to
+    the 1e-7 acceptance tolerance, so at most one can be accepted.
+    """
+    tol = Q2(F(1, 10 ** 7)) if tol is None else tol
+    dens = dens or (1, 2, 3, 4, 6, 8, 12, 16)
+    for D in dens:
+        best = (None, None)
+        for num in range(-bmax * D, bmax * D + 1):
+            b = F(num, D)
+            rest = x - Q2(0, b)
+            a = F(floor_q2(rest * Q2(4 * D) + HALF), 4 * D)
+            cand = Q2(a) + Q2(0, b)
+            err = abs(x - cand)
+            if best[0] is None or err < best[1]:
+                best = (cand, err)
+        if best[0] is not None and best[1] <= tol:
+            return best[0]
+    return None
+
+
+def lift_sentence(state, words, tol=None):
+    """Exact algebraic reconstruction of a decimal sentence.
+
+    Three exact steps, and the decimals are used only to choose the topology:
+
+      1. **side.**  The container side is recovered by height-bounded search
+         (`recover_side`), so the box is [0, L] with L in the field.
+      2. **anchors.**  Every square that rests on a face of that box is placed
+         exactly: `x = ex` on the left, `x = L - ex` on the right, and likewise
+         in y.  This is what pins the boundary layer; a gauge alone does not.
+      3. **peeling.**  every other square from two independent equations to
+         already placed squares (contact on a SAT axis, sign as the decimals have
+         it) by 2x2 Cramer over Q2.
+
+    Then the gate judges the whole sentence, including the contacts that were not
+    used to build it.  Nothing is rounded to a grid and no tolerance is used for
+    any final decision.
+
+    Returns {"status": "lifted" | "overlap" | "underdetermined" |
+             "side-not-recovered" | "empty", "state", "L", "clearance",
+             "contacts", "violations", "used", "placed", "side_residual"}.
+    """
+    n = len(state)
+    if tol is None:
+        tol = Q2(F(1, 10 ** 7))
+    if n == 0:
+        return {"status": "empty", "state": [], "L": Q2(0), "clearance": None,
+                "contacts": 0, "violations": 0, "used": 0, "placed": 0,
+                "side_residual": Q2(0)}
+
+    ex = [frame_extent(*w) for w in words]
+    lo = [min(state[i][ax] - ex[i] for i in range(n)) for ax in (0, 1)]
+    hi = [max(state[i][ax] + ex[i] for i in range(n)) for ax in (0, 1)]
+    # the box is the bbox of the state, and it need not start at the origin: work
+    # in the translated frame [0, W] x [0, H] and recover W and H separately
+    W, residW, _b = recover_side(hi[0] - lo[0], tol=tol)
+    H, residH, _b2 = recover_side(hi[1] - lo[1], tol=tol)
+    if W is None or H is None:
+        return {"status": "side-not-recovered", "state": None, "L": None,
+                "clearance": None, "contacts": 0, "violations": 0, "used": 0,
+                "placed": 0, "side_residual": residW if W is None else residH,
+                "side_decimal": side(state, words)}
+    shift = [(state[i][0] - lo[0], state[i][1] - lo[1]) for i in range(n)]
+
+    pos = [None] * n
+    wall_eq = [[] for _ in range(n)]
+    for i in range(n):
+        fixed = {}
+        for ax in (0, 1):
+            e = (Q2(1), Q2(0)) if ax == 0 else (Q2(0), Q2(1))
+            span = W if ax == 0 else H
+            if abs(shift[i][ax] - ex[i]) <= tol:
+                wall_eq[i].append((e, ex[i]))
+                fixed[ax] = ex[i]
+            if abs(shift[i][ax] - (span - ex[i])) <= tol:
+                wall_eq[i].append((e, span - ex[i]))
+                fixed.setdefault(ax, span - ex[i])
+        if len(fixed) == 2:
+            pos[i] = (fixed[0], fixed[1])
+
+    # pair contacts: (q, sign, need) for every touching pair, from the decimals
+    links = [[] for _ in range(n)]
+    for i in range(n):
+        xi, yi = shift[i]
+        for j in range(i + 1, n):
+            if abs(shift[j][0] - xi) >= Q2(2) or abs(shift[j][1] - yi) >= Q2(2):
+                continue
+            axes = pair_axes(shift, words, i, j)
+            q, slack, need, _owner = max(axes, key=lambda t: t[1])
+            if abs(slack) <= tol:
+                dx = shift[j][0] - xi
+                dy = shift[j][1] - yi
+                sg = Q2(1) if (dx * q[0] + dy * q[1]).sign() >= 0 else Q2(-1)
+                # directed: the equation for the TARGET square from the equation
+                # (c_j - c_i).q = sg * need is c_target.q = c_ref.q - sg * need
+                links[i].append((j, q, -sg, need))
+                links[j].append((i, q, sg, need))
+
+    used = 2 * sum(1 for p in pos if p is not None)
+    progress = True
+    while progress:
+        progress = False
+        for j in range(n):
+            if pos[j] is not None:
+                continue
+            eqs = list(wall_eq[j])
+            for (i, q, sg, need) in links[j]:
+                if pos[i] is not None:
+                    eqs.append((q, pos[i][0] * q[0] + pos[i][1] * q[1] + sg * need))
+            done = False
+            for a in range(len(eqs)):
+                q1, r1 = eqs[a]
+                for b in range(a + 1, len(eqs)):
+                    q2, r2 = eqs[b]
+                    det = q1[0] * q2[1] - q1[1] * q2[0]
+                    if det.sign() == 0:
+                        continue
+                    x = (r1 * q2[1] - r2 * q1[1]) / det
+                    y = (q1[0] * r2 - q2[0] * r1) / det
+                    pos[j] = (x, y)
+                    used += 2
+                    done = progress = True
+                    break
+                if done:
+                    break
+    placed = sum(1 for p in pos if p is not None)
+    recovered = 0
+    if placed < n:
+        # the leftover squares are those the contact graph does not pin; recover
+        # each coordinate by its own height-bounded search, and let the gate judge.
+        # The row's own lattice denominator comes from the recovered side (a row
+        # built from steps of L and unit moves has coordinates in (1/D)Z +(1/D)Z r).
+        D0 = 2
+        for v in (W.a, W.b, H.a, H.b):
+            D0 = D0 * v.denominator // math.gcd(D0, v.denominator)
+        # the height bound grows with the row: a long diagonal strip moves a
+        # square by many (1 + sqrt2)/2 steps, so |b| can reach ~L (a big row has
+        # coordinates like 31/2 + 21/2 sqrt2).  This is an exact bound, not a float.
+        HB = 8
+        for v in (W, H):
+            HB = max(HB, int(abs(v.a) + 2 * abs(v.b)) + 4)
+        miss = 0
+        for round_dens in ((D0, 2 * D0, 4 * D0), (1, 2, 3, 4, 6, 8, 12, 16)):
+            if not miss and round_dens[0] != D0:
+                break
+            miss = 0
+            for j in range(n):
+                if pos[j] is not None:
+                    continue
+                x = recover_point(shift[j][0], tol=tol, dens=round_dens, bmax=HB)
+                y = recover_point(shift[j][1], tol=tol, dens=round_dens, bmax=HB)
+                if x is None or y is None:
+                    miss += 1
+                    continue
+                pos[j] = (x, y)
+                recovered += 1
+            if miss == 0:
+                break
+        if miss:
+            return {"status": "not-on-lattice", "state": None,
+                    "L": W if W > H else H, "clearance": None, "contacts": 0,
+                    "violations": 0, "used": used, "placed": placed,
+                    "recovered": recovered, "unrecovered": miss,
+                    "side_residual": residW if residW > residH else residH}
+    g = gate(pos, words)
+    return {"status": "lifted" if g["ok"] else "overlap", "state": pos,
+            "L": g["L"], "clearance": g["clearance"],
+            "contacts": g["contacts"], "violations": g["violations"],
+            "used": used, "placed": placed, "recovered": recovered,
+            "side_residual": residW if residW > residH else residH}
 
 
 def float_state(state, words):
@@ -364,6 +625,40 @@ def selftest() -> int:
     assert std < 1e-12, (float(L), f["L"])
     print(f"control 7 — the exact side {str(L)} = {float(L):.6f} matches "
           f"packlib's float side to {std:.1e}")
+    n_checks += 1
+
+    # 8. the exact floor and the grid rounding, against their own definitions
+    import mixed_field as M
+    st, w, L = M.corner_glue(word_45())
+    for z in (Q2(F(7, 3)), Q2(F(-5, 4), F(3, 7)), L, L - Q2(10), Q2(0)):
+        k = floor_q2(z)
+        assert (z - Q2(k)).sign() >= 0 and (z - Q2(k + 1)).sign() < 0, z
+    for Mstep in (2, 10, 1000):
+        g = grid_round(L, Mstep)
+        assert abs(L - Q2(g)) <= HALF * Q2(1) / Q2(Mstep)
+    print("control 8 — floor(a+b√2) and the 1/M rounding are decided by exact "
+          "comparisons (bracket k <= z < k+1 verified for each)")
+    n_checks += 1
+
+    # 9. the lifter: an exact sentence, written as 12-dp decimals, is recovered
+    dec = [(Q2(F(f"{float(x):.12f}")), Q2(F(f"{float(y):.12f}")))
+           for x, y in st]
+    got = lift_sentence(dec, w)
+    assert got["status"] == "lifted", got["status"]
+    assert got["L"] == L, (got["L"], L)
+    assert abs(float(got["clearance"])) < 1e-9
+    print(f"control 9 — a 12-dp decimal copy of the 45° corner glue lifts back to "
+          f"L = {str(L)} exactly ({got['used']} equations)")
+    n_checks += 1
+
+    # 10. and a state whose decimals do not come from a sentence does not lift
+    bad = [(x, y) for x, y in dec]
+    bad[4] = (dec[4][0] + Q2(F(3, 1000)), dec[4][1])
+    got = lift_sentence(bad, w)
+    assert got["status"] in ("overlap", "underdetermined", "not-on-lattice"), \
+        got["status"]
+    print(f"control 10 — a 3e-3 perturbation of the tilted square is "
+          f"'{got['status']}', not 'lifted'")
     n_checks += 1
 
     print(f"selftest: OK ({n_checks} controls)")

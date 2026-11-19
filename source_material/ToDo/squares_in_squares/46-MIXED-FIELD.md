@@ -155,6 +155,15 @@ packing at a worse one. What makes the irrational object exist exactly in a
 discrete machine is not the stream but the pair `(a, b)`; the stream is its shadow,
 with a bound that is now measured.
 
+> **Superseded in part by `47` §3 (run 84).** The stream above is generated against
+the double image and is only *judged* exactly — a double shortcut. Run 84 replaces
+it with a carrier whose accumulator is a field element and whose quantizer is the
+exact floor, with no `float()` call in the carrier, the state or the substitution
+(checked in the bytecode). The qualitative conclusion survives and sharpens: for
+the whole-sentence Pell map the side excess is exactly `(r − √2)/2`, so legality is
+the sign of `r − √2` — proved for every rational `r`, not tabulated. The rungs
+quoted here are historical; `47` §3.3 carries the exact ones.
+
 ## 5. Algebraic extension vs rational escalation
 
 Both families computed exactly, at `N = 2` and `N = 5`:
@@ -200,6 +209,15 @@ as written. The 451 remaining rows use no word at all. **A lifted grammar cannot
 retrofit a decimal table; it has to build.** That is the honest reason the mixed
 work is construction work, and also the reason it is well-posed: 447 rows are
 already sentences of it.
+
+> **Extended by `47` §1–§2 (run 84).** It turns out the 100 *can* be retrofitted:
+the symbolic lifter recovers each row's exact ℚ(√2) state from its decimals and
+certifies it with the gate at clearance exactly 0 — **97 of 100**, with 127,837
+exact contacts over 37,260 squares. The other 3 (n = 51, 126, 295) are not
+small-height ℚ(√2) sentences at all, so the census line above is now a measured
+split: 97 decimal shadows of exact sentences, 3 float artefacts. Every one of the
+97 sides is irrational, which is this section's obstruction stated on the rows
+themselves.
 
 ## 7. What is proved, and what is not
 
