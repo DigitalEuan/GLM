@@ -993,3 +993,40 @@ now carries the correction. Left open: `s_max` is a verified achievable side, no
 a proven maximum (dense 0.05-grid re-checks agree to ≤ 2e-5), and everything here
 freezes the record; the measured deficit is the target a rearranged layer would
 have to buy, not a route. Entries `44-SPACE-AROUND.md`.
+
+## Run 82 — the same space, certified; and the initial placing varied
+
+Two follow-ups to run 81: turn "achieved" into "proved with a gap", and see what
+a different initial placing does to the numbers.
+
+**Two independent upper bounds, both proved.** (a) A fitting square contains its
+inscribed disk, so `s <= 2 c(p)` for the clearance `c`, hence
+`s_max <= 2 max_p c(p)`; `c` is 1-Lipschitz, so a covering-grid branch and bound
+prunes against the achieved side and certifies the maximum clearance from above.
+(b) A square at angle θ contains an axis-aligned square of side
+`s/(cos θ + sin θ)`, so `s <= √2 M(0)`; `s(p, 0)` is 2-Lipschitz, so a quadtree
+certifies the axis-aligned maximum `M(0)` — at every anchor to **1e-4**. The
+reported upper side is the smaller of the two; the disk bound won in all 42
+states.
+
+**The intervals.** Achieved 0.695–0.807, certified upper 0.788–0.886, gap
+**0.071–0.098** per anchor (mean 0.088); `M(0)` equals the achieved global value
+at all 14. The largest upper side over all 42 states is **0.8869 < 1**, so **no
+unit square fits at any orientation** — proved, with at least 0.113 of side to
+spare. The gap is bound looseness, not search error: the disk bound is exact only
+in a strip and overstates the side by up to 69% at a corner, which control 6
+pins exactly (0.4686 certified against a true 0.4 on a 0.4 strip).
+
+**The initial placing, varied.** `--blocks b` splits the box into `b × b`
+sub-blocks searched independently. With the same budget this is a resolution
+lever: one global grid at 0.6 spacing loses 0.13 at k = 27 and k = 31 and 0.055
+at k = 24; `b = 2` and `b = 4` recover all of them, and the winning block is
+always in the upper half (the pocket sits on the boundary layer). It also
+**corrected an anchor**: k = 29 is 0.736113, not 0.71218, verified exactly and
+certified afresh (gap 0.0714; deficit 0.264 instead of 0.288). One honest cost:
+at k = 23, `b = 4` gives 0.75268 against 0.75290, because a pocket on a block
+boundary is split.
+
+Left open and named: the certificate brackets the global maximum but does not
+prove it is at 0° (the disk bound has no orientation in it); a tight value needs
+an orientation-aware bound. No row changed. Entries `45-CERTIFIED-SPACE.md`.

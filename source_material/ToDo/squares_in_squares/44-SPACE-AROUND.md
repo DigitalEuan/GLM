@@ -94,6 +94,12 @@ mean 0.75023 and the centred placement 0.74976, all within 0.003 of the own-box
 reading, and the argmax is at 0° in all 42 states. So the bottleneck is the
 interior of the layer, not where the record sits in the container.
 
+*Corrected and certified in run 82 (doc 45): the k = 29 row was
+under-searched -- its largest empty square is **0.736113**, not 0.71218
+(deficit 0.264, not 0.288); the other thirteen rows stand. Every value in
+this table now carries a certified upper side, and the strongest statement
+here -- that no unit square fits at any orientation -- is proved there.*
+
 The curve is not perfectly monotone — 13 of 14 have interior wiggles at the
 1e-3 scale, as the tracked pocket changes — but its maximum is at 0° in every
 case and its minimum is at or near 45°.
