@@ -363,6 +363,54 @@ def recover_point(x: Q2, tol=None, dens=None, bmax=8):
     return None
 
 
+def lattice_den(*sides):
+    """Common denominator for the coordinates of a row with these side(s).
+
+    A sentence built from steps of the side and unit moves has coordinates in
+    `(1/D) Z + (1/D) Z sqrt2`; the `2` covers the 45-degree word's
+    `(1 + sqrt2)/2` steps.
+    """
+    D = 2
+    for s in sides:
+        for v in (s.a, s.b):
+            D = D * v.denominator // math.gcd(D, v.denominator)
+    return D
+
+
+def height_bound(*sides):
+    """How large `|b|` can be in a row of this size, exactly.
+
+    A long diagonal strip moves a square by many `(1 + sqrt2)/2` steps, so `|b|`
+    reaches about `L` (a big row has coordinates like `31/2 + 21/2 sqrt2`).
+    """
+    hb = 8
+    for s in sides:
+        hb = max(hb, int(abs(s.a) + 2 * abs(s.b)) + 4)
+    return hb
+
+
+def recover_leftovers(pos, shift, tol, dens, bmax):
+    """Place every still-unplaced square by height recovery in place.
+
+    Tries the row's own lattice first and the generic small denominators second,
+    and returns the number of squares still unrecovered (0 on success).
+    """
+    for round_dens in ((dens, 2 * dens, 4 * dens), (1, 2, 3, 4, 6, 8, 12, 16)):
+        miss = 0
+        for j in range(len(pos)):
+            if pos[j] is not None:
+                continue
+            x = recover_point(shift[j][0], tol=tol, dens=round_dens, bmax=bmax)
+            y = recover_point(shift[j][1], tol=tol, dens=round_dens, bmax=bmax)
+            if x is None or y is None:
+                miss += 1
+            else:
+                pos[j] = (x, y)
+        if miss == 0:
+            return 0
+    return miss
+
+
 def lift_sentence(state, words, tol=None):
     """Exact algebraic reconstruction of a decimal sentence.
 
@@ -471,36 +519,10 @@ def lift_sentence(state, words, tol=None):
     placed = sum(1 for p in pos if p is not None)
     recovered = 0
     if placed < n:
-        # the leftover squares are those the contact graph does not pin; recover
-        # each coordinate by its own height-bounded search, and let the gate judge.
-        # The row's own lattice denominator comes from the recovered side (a row
-        # built from steps of L and unit moves has coordinates in (1/D)Z +(1/D)Z r).
-        D0 = 2
-        for v in (W.a, W.b, H.a, H.b):
-            D0 = D0 * v.denominator // math.gcd(D0, v.denominator)
-        # the height bound grows with the row: a long diagonal strip moves a
-        # square by many (1 + sqrt2)/2 steps, so |b| can reach ~L (a big row has
-        # coordinates like 31/2 + 21/2 sqrt2).  This is an exact bound, not a float.
-        HB = 8
-        for v in (W, H):
-            HB = max(HB, int(abs(v.a) + 2 * abs(v.b)) + 4)
-        miss = 0
-        for round_dens in ((D0, 2 * D0, 4 * D0), (1, 2, 3, 4, 6, 8, 12, 16)):
-            if not miss and round_dens[0] != D0:
-                break
-            miss = 0
-            for j in range(n):
-                if pos[j] is not None:
-                    continue
-                x = recover_point(shift[j][0], tol=tol, dens=round_dens, bmax=HB)
-                y = recover_point(shift[j][1], tol=tol, dens=round_dens, bmax=HB)
-                if x is None or y is None:
-                    miss += 1
-                    continue
-                pos[j] = (x, y)
-                recovered += 1
-            if miss == 0:
-                break
+        # the leftover squares are the ones the contact graph does not pin; recover
+        # each coordinate by its own height-bounded search, and let the gate judge
+        miss = recover_leftovers(pos, shift, tol, lattice_den(W, H), height_bound(W, H))
+        recovered = sum(1 for p in pos if p is not None) - placed
         if miss:
             return {"status": "not-on-lattice", "state": None,
                     "L": W if W > H else H, "clearance": None, "contacts": 0,

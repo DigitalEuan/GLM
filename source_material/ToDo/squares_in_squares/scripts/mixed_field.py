@@ -578,8 +578,9 @@ def main() -> int:
     phase3(ledger)
     phase_seam(ledger)
     census(ledger)
-    ledger.update(json.loads(json.dumps({"uplift": json.load(open(LIFT_LEDGER))}))
-                  if os.path.exists(LIFT_LEDGER) else {})
+    if os.path.exists(LIFT_LEDGER):
+        with open(LIFT_LEDGER) as f:
+            ledger["uplift"] = json.load(f)
     os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
     with open(LEDGER, "w") as f:
         json.dump(ledger, f, indent=1)
