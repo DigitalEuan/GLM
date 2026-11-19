@@ -955,3 +955,41 @@ matters: there is nothing to propagate. Only the 60 leaders can matter, and the
 named: rotation-enabled refinement (the LP freezes angles) and margin mining
 (~1e-7 total, spends the 2e-9 rounding margin; not taken). No row changed. Entries
 `43-NO-SLACK-SIXTY-SLACKS.md`.
+
+## Run 81 — the space around each band anchor, over all orientations
+
+Asked for the reverse of run 78's placement question: what is the largest empty
+square in each block's last record, at any orientation, and is the deficit to
+fitting another unit square uniform in orientation or only a right-angle artefact.
+
+**The instrument.** `space_around.py` writes the largest square centred at a
+point p and rotated by θ in closed form — containment, then four SAT axes per
+packed square, each an affine bound on the side — so `s(p, θ)` is exact and
+cheap; only the maximum over p is searched (covering grid, local subgrid on the
+sharp peaks, pattern search to 1e-10), and every reported value is re-checked by
+the same closed form and by an independent vertex-projection SAT. Five controls:
+two unit squares in a 2-box give exactly 1; a rigid 10×10 grid gives 0; a holed
+grid gives exactly 1 and gates at L = 8 + 1e-6; a 0.4 strip gives 0.4 at 0° and
+0.4/√2 at 45°; and 729 placements of a mixed-angle state agree with the
+vertex SAT.
+
+**The answer.** Fourteen anchors (n = k² + M(k)), three boxes each, 17
+orientations over 0..45°: the largest empty square is **0.695 to 0.807** of a
+unit (mean 0.748), and the maximum is at **0° in all 42 states**. At 45° it
+falls to 0.569–0.632, so tilt costs 0.115–0.176 of side (mean 0.144). The
+deficit to one more unit square is therefore **0.193–0.305**, not ~0.1, and it
+is not a right-angle artefact: the free space is rectangular and rotating the
+candidate only makes it harder to fit. Moving the record in the larger beating
+box (corner or centred) changes the answer by ≤ 0.003, so the bottleneck is the
+interior of the layer. **0 of 42 states reaches 1, so nothing gates and no row
+changed.**
+
+**A correction, found on the way.** Run 78's scan required a separation of `1.0`
+on the *packed* square's axes; a candidate tilted by θ needs `0.5k + 0.5` there
+(k = |cos θ| + |sin θ| ≤ √2), so at a tilt its recorded overlap was too small and
+"largest empty square = 1 − margin" (0.86–0.91) was an over-estimate. The verdict
+is untouched — that scan was optimistic and still found no placement — but doc 41
+now carries the correction. Left open: `s_max` is a verified achievable side, not
+a proven maximum (dense 0.05-grid re-checks agree to ≤ 2e-5), and everything here
+freezes the record; the measured deficit is the target a rearranged layer would
+have to buy, not a route. Entries `44-SPACE-AROUND.md`.
