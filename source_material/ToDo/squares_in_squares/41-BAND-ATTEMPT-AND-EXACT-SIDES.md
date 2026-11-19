@@ -65,7 +65,12 @@ diamond-shaped**: all six orientations give the same margin to three decimals, s
 a tilt gains nothing — the gap is a rectangle ~0.88 across, not a hole a rotated
 square could slip into. Second, the margin is the *distance from fitting*: the
 largest empty square in each record is `1 - margin`, i.e. **0.86 to 0.91 of a
-unit**. The records are jammed: they carry their tilted boundary layer at
+unit**. *(Corrected by run 81, doc 44: `1 - margin` is not a gap. A candidate
+tilted by θ needs `0.5k + 0.5` on the packed square's axes, `k = |cos θ| +
+|sin θ|`, not `1.0`; measured exactly over all orientations the largest empty
+square is **0.695 to 0.807**, always at 0°. The scan here was optimistic and
+still found no placement, so the verdict stands; the number does not.)*
+The records are jammed: they carry their tilted boundary layer at
 essentially full occupancy, and our family asks that layer for one square more.
 
 **Verdict, stated with its scope.** No row of the 247 beats the grid by this

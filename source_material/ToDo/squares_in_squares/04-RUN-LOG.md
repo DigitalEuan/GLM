@@ -922,3 +922,74 @@ m ≤ 13 are *polished* — fractional shifts, which is why their sides are
 `467/17 − 11√2/2`) — and the menu of those families tops out at **m = 13 at any
 k**, while the band starts at 21. No row changed. Entries
 `42-LAYER-FROM-SCRATCH.md`.
+
+## Run 80 — every solve we hold: no slack in a row, and the table is sixty slacks
+
+Asked whether any solve we hold can be refined slightly further (not the ones
+proven optimal), and whether a cascade family planner would propagate it.
+
+**Refinement: 0 of 553.** Only 191 beating rows had ever been shrink-tested (run
+77, a refusal at eps = 1e-6, which says nothing below a micro-unit); the 362
+above n = 400 were untested because the global LP is dense and O(n²).
+`refine_cascade.py` runs `declp.solve`'s formulation restricted to a radius where
+pairs can still bind, frees the whole **wall ring** (every extreme-edge square
+plus its 1.3-neighbourhood, cap 200, never hit), and walks a demand ladder from
+1e-2 down to 1e-7, finalizing and gating every accepted round. All 553 refuse —
+every beating row is locally wall-pinned at frozen angles. Controls: the local LP
+agrees with `declp.solve` on feasibility; a rigid 5×5 grid refuses; a wall
+loosened by +0.02 is put back in two rounds; the raw LP state is refused by the
+gate and the finalized one accepted; the cascade arithmetic matches a hand sum.
+
+**Cascade: the channel is already applied.** Against the *causal* class leader
+(a larger row cannot serve a smaller one), **969 of 969** non-square rows sit
+exactly at their residue class's chain value; 0 are open at 1e-8. The 25 rows
+that look open at 1e-9 are `finalize`'s own 2e-9 scale, margin and not slack —
+the same 25 run 42 saw from the stale table, now exact.
+
+**So the table is a 60-parameter object**, `total = Σ_r Σ_k (k + δ*(r))/√n − 1000`
+with `d(total)/dδ*(r) = W(r)`, `W(1) = 3.6453` over 31 rows. A class leader's
+refinement propagates by the chain translation to its whole class, worth Δ·W(r)
+— the leverage the user's hypothesis predicted, and exactly why the null result
+matters: there is nothing to propagate. Only the 60 leaders can matter, and the
+23 classes still at δ = 1 are the band's residues from runs 78–79. Left open and
+named: rotation-enabled refinement (the LP freezes angles) and margin mining
+(~1e-7 total, spends the 2e-9 rounding margin; not taken). No row changed. Entries
+`43-NO-SLACK-SIXTY-SLACKS.md`.
+
+## Run 81 — the space around each band anchor, over all orientations
+
+Asked for the reverse of run 78's placement question: what is the largest empty
+square in each block's last record, at any orientation, and is the deficit to
+fitting another unit square uniform in orientation or only a right-angle artefact.
+
+**The instrument.** `space_around.py` writes the largest square centred at a
+point p and rotated by θ in closed form — containment, then four SAT axes per
+packed square, each an affine bound on the side — so `s(p, θ)` is exact and
+cheap; only the maximum over p is searched (covering grid, local subgrid on the
+sharp peaks, pattern search to 1e-10), and every reported value is re-checked by
+the same closed form and by an independent vertex-projection SAT. Five controls:
+two unit squares in a 2-box give exactly 1; a rigid 10×10 grid gives 0; a holed
+grid gives exactly 1 and gates at L = 8 + 1e-6; a 0.4 strip gives 0.4 at 0° and
+0.4/√2 at 45°; and 729 placements of a mixed-angle state agree with the
+vertex SAT.
+
+**The answer.** Fourteen anchors (n = k² + M(k)), three boxes each, 17
+orientations over 0..45°: the largest empty square is **0.695 to 0.807** of a
+unit (mean 0.748), and the maximum is at **0° in all 42 states**. At 45° it
+falls to 0.569–0.632, so tilt costs 0.115–0.176 of side (mean 0.144). The
+deficit to one more unit square is therefore **0.193–0.305**, not ~0.1, and it
+is not a right-angle artefact: the free space is rectangular and rotating the
+candidate only makes it harder to fit. Moving the record in the larger beating
+box (corner or centred) changes the answer by ≤ 0.003, so the bottleneck is the
+interior of the layer. **0 of 42 states reaches 1, so nothing gates and no row
+changed.**
+
+**A correction, found on the way.** Run 78's scan required a separation of `1.0`
+on the *packed* square's axes; a candidate tilted by θ needs `0.5k + 0.5` there
+(k = |cos θ| + |sin θ| ≤ √2), so at a tilt its recorded overlap was too small and
+"largest empty square = 1 − margin" (0.86–0.91) was an over-estimate. The verdict
+is untouched — that scan was optimistic and still found no placement — but doc 41
+now carries the correction. Left open: `s_max` is a verified achievable side, not
+a proven maximum (dense 0.05-grid re-checks agree to ≤ 2e-5), and everything here
+freezes the record; the measured deficit is the target a rearranged layer would
+have to buy, not a route. Entries `44-SPACE-AROUND.md`.
