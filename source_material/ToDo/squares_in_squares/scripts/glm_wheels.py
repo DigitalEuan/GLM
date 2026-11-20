@@ -1491,14 +1491,11 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
             truncated = True
             break
     witness = None
-    witnesses = []
     for (u0, u1, v0, v1) in cover:
         uc, vc = (u0 + u1) * half, (v0 + v1) * half
         if clear_point(uc, vc):
-            if witness is None:
-                witness = (uc, vc)
-            if len(witnesses) < 16:
-                witnesses.append((uc, vc))
+            witness = (uc, vc)
+            break
     if cover:
         ulo = min(b[0] for b in cover)
         uhi = max(b[1] for b in cover)
@@ -1513,7 +1510,6 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
     return {"cover": cover, "empty": not cover, "capacity": capacity,
             "extent_u": extent_u, "extent_v": extent_v,
             "window": (ulo, uhi, vlo, vhi), "witness": witness,
-            "witnesses": witnesses,
             "examined": examined, "truncated": truncated, "fine": fine,
             "cells": len(cells)}
 
@@ -1696,25 +1692,6 @@ def odd_word_upward(places=25):
     cu = (Decimal(oc) * scale).to_integral_value(rounding=ROUND_CEILING) / scale
     su = (Decimal(os_) * scale).to_integral_value(rounding=ROUND_CEILING) / scale
     return F(cu), F(su)
-
-
-def staircase_point_ok(cls, c, s, cells, words, u, v, slab=None):
-    """Exact point test: does a `(c, s)` square at `u U + v V` clear `cells`?
-
-    The same four-axis arithmetic the cage prunes with, evaluated at one centre --
-    so a sentence can be assembled from cage witnesses and then gated outright.
-    """
-    if slab is not None:
-        px, py = u * c - v * s, u * s + v * c
-        if abs(px) > slab or abs(py) > slab:
-            return False
-    for row in _cage_rows(cls, c, s, cells, words):
-        for qa, need, ua, va in row:
-            if abs(qa - (u * ua + v * va)) >= need:
-                break
-        else:
-            return False
-    return True
 
 
 def staircase_odd_cage(cls, cells, words, L, places=25):
@@ -3431,13 +3408,15 @@ def selftest() -> int:
         "still finds a placement against the 149, and the exact gate certifies "
         "N = 150 at L = " + str(target151) + f" clearance 0 with {g150['contacts']} "
         "contacts -- the table's own rotation does close its 150th square at the "
-        "census side.  It does not close the 151st: two such squares side by side "
-        "are one rectangle of sides (1, 2) in the word's frame, and that cage's cover "
-        "collapses to a single box of width 1e-3 with no witness anywhere in it, so "
-        "no placement of the pair exists (an exact 17 x 17 point scan inside the "
-        "box finds none either).  With the cap brick in place the cage is empty for "
-        "the rotation too, so the pocket admits one extra square and no more.  With "
-        "the census word the pair cage is *empty* -- an exact proof, capacity 1.  "
+        "census side.  No placement of the 151st was found: two such squares side "
+        "by side are one rectangle of sides (1, 2) in the word's frame, and that "
+        "cage does not close -- its cover **degenerates** to a single box of width "
+        "1e-3 with no witness in it, which reports a failure to find a placement, "
+        "not a proof that none exists (an exact 17 x 17 point scan inside the box "
+        "finds none either).  With the cap brick in place the cage is empty for the "
+        "rotation, so neither route found a second extra square.  With the census "
+        "word the pair cage is *empty* -- that one is an exact proof, and it is the "
+        "same fact as capacity 1 read another way.  "
         "The honest reading of the delivered row: replaying its own two rotation "
         "squares against the exact 149 gives worst pair slack " + f"{mixed_worst:.3e}" +
         " (odd square vs grammar square), i.e. an overlap, so the table's 151 is a "

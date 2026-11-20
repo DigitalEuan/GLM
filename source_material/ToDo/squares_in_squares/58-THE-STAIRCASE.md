@@ -135,7 +135,7 @@ exactly tangent along `u` to its twin (`Δu = 1`, `Δv = 0`).
 
 ```
 N = 150 = 149 + 1 cap brick      L = 23/2 + ½√7
-clearance = 0     contacts = 449     violations = 0
+clearance = 0     contacts = 451     violations = 0
 ```
 
 And with that brick in place the cage is **empty for the census word itself** — the pocket is
@@ -199,18 +199,21 @@ as measured here.
   square grown by `1e−25`), the rotation still finds a placement against the exact 149, and the
   exact gate certifies **N = 150 at `23/2 + ½√7`, clearance 0, 449 contacts**. The table's own
   rotation *does* close a 150th square at the census side.
-* It does not close the 151st. Two such squares side by side along the word's own `v` are one
-  rectangle of sides `(1, 2)` in that frame; the cage for the rectangle against the 149
-  **collapses to a single box of width `1e−3` with no witness in it** — a degenerate tangency —
-  and an exact `17 × 17` point scan inside that box finds no feasible pair either. With the cap
-  brick in place the cage is *empty* for the rotation too, so the pocket admits one extra square
-  and no more.
+* **No placement of the 151st was found.** Two such squares side by side along the word's own `v`
+  are one rectangle of sides `(1, 2)` in that frame, and that cage **degenerates**: its cover
+  shrinks to a single box of width `1e−3` with no witness in it instead of closing. That is a
+  failure to *find* a placement, not a proof that none exists — an exact `17 × 17` point scan
+  inside the box finds no feasible pair either, but the honest reading is "not found". With the
+  cap brick in place the cage is *empty* for the rotation, so neither route found a second extra
+  square.
 * With the **census** word the same rectangle cage is **empty**: an exact proof, and the same
   fact as capacity 1 read another way.
 
-So the honest answer to "does 151 close at the census side" is **no, not as a sentence**: at most
-one extra square fits, and that is the certified 150. The delivered row reaches 151 the other way
-— by tolerance. Replaying its own two rotation squares against our exact 149 gives worst pair
+So the honest answer to "does 151 close at the census side" is: **no 151-square sentence was
+found** — what *is* certified is the 150 with the table's own rotation as its last square. For the
+census word the refusal at 151 is a proof: the pocket holds exactly one word-aligned square and
+the `(1, 2)` rectangle cage is empty. For the table's rotation it is a search that ends in a
+degenerate cage, not a proof. The delivered row reaches 151 the other way — by tolerance. Replaying its own two rotation squares against our exact 149 gives worst pair
 slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the table's n = 151 is a
 12-decimal pose held at ~`1e−9`, not a packing at the exact side. No row changes.
 
@@ -226,9 +229,9 @@ slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the
   `2c(c+s) − (1+s) − 1 = s(2(c−s) − 1)`) and the second-word test (78 field-compatible words,
   66 rotation-class cages, all empty). Control 27 is the mixed word: the table's own
   `19211307153/31250000000` rad rounded up at `1e−25` into Q(√7) closes a certified **150**
-  (clearance 0), refuses the 151st (the `(1, 2)` rectangle cage degenerates, no witness, and an
-  exact `17 × 17` point scan finds no pair), and the census word's `(1, 2)` rectangle cage is
-  empty; the control also replays the delivered rotation pair against the exact 149 and reports
+  (clearance 0), finds no placement of the 151st (the `(1, 2)` rectangle cage degenerates with no
+  witness, and an exact `17 × 17` point scan finds no pair — a failure to find, not a proof), and
+  the census word's `(1, 2)` rectangle cage is empty; the control also replays the delivered rotation pair against the exact 149 and reports
   the measured overlap `−2.365e−9`. Control 5 exercises `staircase_layer_gap` on the 45° word;
   control 24 records the k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
 * `glm_wheels.py` — spin: spatial **48/48 certified**, 0 refused (`Ring k=1`, `Staircase k=5`);

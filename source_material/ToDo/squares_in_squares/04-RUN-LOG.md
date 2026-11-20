@@ -1749,7 +1749,7 @@ the 149 squares the cover is 24 boxes at side 1/8 spanning `5/8` in `u` and `3/4
 witness centre `(97/16, 31/16)`; both extents below 1 mean at most one centre fits, so the
 pocket's word-aligned capacity is exactly **1**. The square it holds is the cap brick -- the last
 column's `A` brick repeated one column out, `u + 12`, `v = (17 + Sqrt7)/8`, exactly tangent along
-`u` to its twin -- and the exact gate certifies **N = 150 at the same side, clearance 0, 449
+`u` to its twin -- and the exact gate certifies **N = 150 at the same side, clearance 0, 451
 contacts**. With that brick in place the cage is empty even for the census word: the pocket is
 closed.
 
@@ -1778,13 +1778,15 @@ a **rotation of 0.614761828896 rad**, exactly `19211307153/31250000000`. The ang
 its cosine is not a field element, so this is *measured* where it cannot be caged. Rounded **up**
 at `1e-25` into Q(sqrt 7) (`cos^2 + sin^2 >= 1`, the caged square is the table's square grown by
 `1e-25`), the rotation finds a placement against the exact 149 and the exact gate certifies
-**N = 150 at `23/2 + 1/2 Sqrt7`, clearance 0, 449 contacts**. It does not close the 151st: two
-such squares side by side along the word's own `v` are one `(1, 2)` rectangle in that frame, and
-that cage against the 149 **collapses to a single box of width `1e-3` with no witness** (an exact
-`17 x 17` point scan inside it finds no feasible pair), while with the cap brick in place the cage
-is empty for the rotation too; with the **census** word the same rectangle cage is *empty* -- an
-exact proof, the same fact as capacity 1 read another way. So **151 does not close at the census
-side as a sentence**: at most one extra square fits, which is the certified 150. The delivered row
+**N = 150 at `23/2 + 1/2 Sqrt7`, clearance 0, 449 contacts** (449 is the mixed sentence's own
+gate; the census cap-brick 150 is 451). **No placement of the 151st was found**: two such squares
+side by side along the word's own `v` are one `(1, 2)` rectangle in that frame, and that cage
+against the 149 **degenerates** -- its cover shrinks to a single box of width `1e-3` with no
+witness instead of closing, which is a failure to find a placement and not a proof that none
+exists (an exact `17 x 17` point scan inside it finds no feasible pair either); with the cap brick
+in place the cage is empty for the rotation too, and with the **census** word the same rectangle
+cage is *empty* -- that one is an exact proof, the same fact as capacity 1 read another way. So
+**no 151-square sentence was found at the census side**; what is certified is the 150. The delivered row
 reaches 151 by tolerance instead -- replaying its own two rotation squares against the exact 149
 gives worst pair slack `-2.365e-9` (an odd square against a wall brick), an overlap, so the
 table's n = 151 is a 12-decimal pose held at ~`1e-9` and not a packing at the exact side.
@@ -1807,7 +1809,7 @@ non-membership in the field, the exact cage with capacity 1, the certified 150, 
 `19211307153/31250000000` rad closing a certified 150, refusing the 151st (degenerate rectangle
 cage plus an exact 17 x 17 point scan), the census word's rectangle cage empty, and the delivered
 pair's measured `-2.365e-9` overlap); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
-green (240 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 --selftest`
+green (239 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 --selftest`
 11/11; `field_triage --selftest` 4/4; `record_guard.py` OK.
 
 Entries `58-THE-STAIRCASE.md`; records `31`-`58`.
