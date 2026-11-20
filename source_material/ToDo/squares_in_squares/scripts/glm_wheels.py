@@ -1031,6 +1031,249 @@ def p_ring(k):
     return ring_claim(7, c, s, k)
 
 
+# --------------------------------------------------- the staircase (run 95)
+#: The census's n = 151 row is not the ring.  It is a **multi-layer staircase**:
+#: an odd integer grid, every cell of which is realised on one of two lattices
+#: offset by `2c` on both axes (an upper-left staircase `A` and a lower-right one
+#: `B`), four corner caps, and a two-layer brick wall of word-aligned squares
+#: wedged into the diagonal seam between the blocks.  The seam is a gap by
+#: construction: a block-A square and a block-B square would have to differ by
+#: `1 +- 2c` on an axis to touch, and no integer is `1 +- 2c` for irrational `c`.
+#:
+#: The brick wall is the part the ring never had.  Its bricks are placed by
+#: *declared* tangency: every one of them is tangent along its own `v` axis to a
+#: named seam square of the frame, walking `B(a, a)` then `A(a, a + 1)` for
+#: `a = -k .. k - 2`, with the column repeated whenever `a % 3 == 0`.
+
+def staircase_side(cls, c, s, k):
+    """The side law again: the caps are flush, so `L = 2k + 1 + 2c`.
+
+    With `c - s = 1/2` this is `2k + 3/2 + (c + s)`, the Q(sqrt 7) family's one
+    law; at `k = 5` it is the census n = 151 side `23/2 + 1/2 sqrt 7`.
+    """
+    return cls(2 * k + 1) + cls(2) * c
+
+
+def staircase_columns(k):
+    """The brick wall's column labels, in `u` order.
+
+    Column `a` carries the pair of bricks tangent to `B(a, a)` and `A(a, a + 1)`.
+    The columns run `a = -k .. k - 2`, and every column with `a % 3 == 0` occurs
+    twice: the repeats are the bricks that jam the wall's two ends.  At `k = 5`
+    the twelve columns are `[-5, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3]`.
+    """
+    cols = []
+    for a in range(-k, k - 1):
+        cols.append(a)
+        if a % 3 == 0:
+            cols.append(a)
+    return cols
+
+
+def _staircase_labels(k):
+    """The frame's construction order, so a walk square can be named by index."""
+    out = []
+    for b in range(-k, k + 1):
+        for a in range(-k, b):
+            out.append(("A", a, b))
+    for b in range(-k, k + 1):
+        for a in range(b, k + 1):
+            out.append(("B", a, b))
+    out += [("C", -k, -k), ("C", -k, -k + 1), ("C", k - 1, k), ("C", k, k)]
+    return out
+
+
+def staircase_frame(cls, c, s, k):
+    """The multi-layer axis frame: `4k^2 + 4k + 5` axis squares.
+
+      * `A = {(a - c, b + c) : -k <= a < b <= k}`  -- the upper-left staircase
+      * `B = {(a + c, b - c) : -k <= b <= a <= k}` -- the lower-right staircase
+      * four corner caps `(-k - c, -k - c)`, `(-k - c, -k + 1 - c)`,
+        `(k - 1 + c, k + c)`, `(k + c, k + c)`.
+
+    The blocks are disjoint for every word: block `A` sits at `x - y <= -1 - 2c`
+    on its seam edge and block `B` at `x - y >= 2c`, and they are separated on
+    some axis whenever `2c >= 1`.  At `k = 5` the count is 125 = 55 + 66 + 4.
+    """
+    cells = []
+    for tag, a, b in _staircase_labels(k):
+        if tag == "A":
+            cells.append((cls(a) - c, cls(b) + c))
+        elif tag == "B":
+            cells.append((cls(a) + c, cls(b) - c))
+        elif (a, b) == (-k, -k):
+            cells.append((-cls(k) - c, -cls(k) - c))
+        elif (a, b) == (-k, -k + 1):
+            cells.append((-cls(k) - c, -cls(k) + cls(1) - c))
+        elif (a, b) == (k - 1, k):
+            cells.append((cls(k) - cls(1) + c, cls(k) + c))
+        else:
+            cells.append((cls(k) + c, cls(k) + c))
+    return cells
+
+
+def _staircase_need(cls, c, s):
+    """A tilted square's face `1/2` plus an axis square's reach `(|c|+|s|)/2`."""
+    return cls(F(1, 2)) + (abs(c) + abs(s)) * cls(F(1, 2))
+
+
+def _staircase_walk_v(cls, c, s, k, a):
+    """The two brick `v`-coordinates of column `a`, from tangency along `v`.
+
+    Below `B(a, a)` (whose own `v` is `a(c - s) - c(c + s)`) and above
+    `A(a, a + 1)` (whose `v` is `a(c - s) + c(1 + c + s)`), each by `need`.
+    """
+    need = _staircase_need(cls, c, s)
+    base = cls(a) * (c - s)
+    return (base - c * (c + s) + need,
+            base + c * (cls(1) + c + s) - need)
+
+
+def _staircase_brick(cls, c, s, u, v):
+    """The brick centre `p = u (c, s) + v (-s, c)`."""
+    return (u * c - v * s, u * s + v * c)
+
+
+def staircase_seam(cls, c, s, k, u):
+    """The two-layer brick wall in the seam: two bricks per column.
+
+    A brick in column `j` sits at `p = (u + j)(c, s) + v(-s, c)`; its `v` comes
+    from `_staircase_walk_v`.  The two bricks of a column are `v_A - v_B` apart,
+    so they are edge-to-edge along `v` -- a contact, not an overlap -- iff
+    `v_A - v_B = 1`, i.e. `2c(c + s) - (1 + s) = 0`: the Q(sqrt 7) identity
+    `c - s = 1/2`.  For any other word the two layers do not close (refusal
+    `staircase_layer_gap`).
+
+    `u` is the wall's one free transverse parameter.  Every declared tangency is
+    along `v`, and `u` and `v` are orthogonal, so sliding the wall along `u`
+    preserves all of them; only the wall's non-overlap against the frame fixes
+    the feasible `u` window, and the census row fixes the value inside it.
+    """
+    bricks = []
+    for j, a in enumerate(staircase_columns(k)):
+        for v in _staircase_walk_v(cls, c, s, k, a):
+            bricks.append(_staircase_brick(cls, c, s, u + cls(j), v))
+    return bricks
+
+
+def staircase_tangencies(k):
+    """The declared brick-frame tangencies, as `(brick, frame)` index pairs."""
+    labels = _staircase_labels(k)
+    where = {lab: i for i, lab in enumerate(labels)}
+    pairs = []
+    for j, a in enumerate(staircase_columns(k)):
+        pairs.append((2 * j, where[("B", a, a)]))
+        pairs.append((2 * j + 1, where[("A", a, a + 1)]))
+    return pairs
+
+
+def staircase_field(cls, c, s, k, u):
+    """The staircase, verified: every declared tangency an exact contact, and the
+    exact gate at `staircase_side`.
+
+    Refusals are declared laws:
+      * `degenerate_cell`      -- `k < 1` has no staircase;
+      * `staircase_layer_gap`  -- the two brick layers are not edge-to-edge along
+                                  `v`; this is exactly `c - s != 1/2`, so the
+                                  closed wall is the Q(sqrt 7) word's own;
+      * `staircase_chain_adrift` -- a declared brick-frame tangency is not along
+                                  its named `v` axis by exactly `need`;
+      * `staircase_side_mismatch`, `staircase_collides` -- the gate's verdict.
+
+    The declaration is a *named-axis* tangency (brick against seam square, on the
+    brick's own `v`), so it is checked on that axis exactly; it is stronger than
+    "the gate found no overlap" and weaker than the gate's four-axis "wedged"
+    contact, which a brick resting against one seam square need not be.
+    """
+    if k < 1:
+        raise Refusal("degenerate_cell", f"k = {k} has no staircase")
+    gap = cls(2) * c * (c + s) - (cls(1) + s) - cls(1)
+    if gap != cls(0):
+        raise Refusal("staircase_layer_gap",
+                      f"the brick layers are {gap} apart along v, not 1: "
+                      f"the closed wall needs c - s = 1/2")
+    L = staircase_side(cls, c, s, k)
+    frame = staircase_frame(cls, c, s, k)
+    seam = staircase_seam(cls, c, s, k, u)
+    cells = frame + seam
+    half = cls(F(1, 2))
+    words = [(cls(1), cls(0))] * len(frame) + [(c, s)] * len(seam)
+    need = _staircase_need(cls, c, s)
+    for i, j in staircase_tangencies(k):
+        p, q = seam[i], frame[j]
+        dv = (p[0] - q[0]) * (-s) + (p[1] - q[1]) * c
+        if abs(dv) != need:
+            raise Refusal("staircase_chain_adrift",
+                          f"the declared tangency (brick {i}, frame {j}) is "
+                          f"{abs(dv)} along v, not {need}")
+    g = Q.gate(cells, words, cls)
+    if g["L"] != L:
+        raise Refusal("staircase_side_mismatch",
+                      f"the gate reads {g['L']}, not {L}")
+    if not g["ok"]:
+        raise Refusal("staircase_collides",
+                      f"{g['violations']} pairs overlap at the derived side")
+    return {"cells": cells, "words": words, "frame": len(frame),
+            "seam": len(seam), "gate": g, "u": u}
+
+
+def staircase_claim(d, c, s, k, u, family="Staircase", params=None):
+    """Gate-verify a staircase over `Q(sqrt d)` and return it as a claim.
+
+    `N = 4k^2 + 4k + 5 + 2|staircase_columns(k)|` -- 149 at `k = 5` (125 axis +
+    24 bricks) -- at `L = 2k + 1 + 2c`.  The count is **not** the n = 151 row's
+    151: the wall's thirteenth column (`a = k - 1`) pinches against the cap, so
+    this grammar constructs 149 of the 151 (control 25 measures the pinch).
+    """
+    cls = qfield(d)
+    if (c * c + s * s) != cls(1):
+        raise Refusal("word_off_circle",
+                      f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
+    decl = staircase_field(cls, c, s, k, u)
+    state, words = decl["cells"], decl["words"]
+    g = decl["gate"]
+    n = len(state)
+    L = g["L"]
+    claim = Claim("spatial_geometry", family, params or {"k": k}, n,
+                  {"count": ("N", n), "extent": ("L", L),
+                   "void": ("L^2 - N", L * L - cls(n)),
+                   "contacts": ("contacts", g["contacts"])},
+                  {"state": state, "words": words, "field": f"Q(sqrt {d})",
+                   "frame": decl["frame"], "seam": decl["seam"],
+                   "gauge": decl["u"]})
+    claim.meta["field_d"] = d
+    claim.meta["frame"] = decl["frame"]
+    claim.meta["seam"] = decl["seam"]
+    claim.meta["declared"] = 2 * len(staircase_columns(k))
+    _tag(claim, L, n)
+    claim.laws["side"] = ("L", L)
+    claim.laws["axis"] = ("axis squares", decl["frame"])
+    claim.laws["brick"] = ("seam bricks", decl["seam"])
+    side = _table_side(n)
+    if side is None:
+        claim.meta["table_side"] = None
+        claim.meta["beats_table"] = None
+    else:
+        Ld = DecimalWitness.scalar(L)
+        Td = DecimalWitness.scalar(side)
+        claim.meta["table_side"] = str(side)
+        claim.meta["beats_table"] = Ld < Td
+        claim.meta["table_gap"] = str(Td - Ld)
+    return claim
+
+
+def p_staircase(k):
+    """The staircase rung at the census's own Q(sqrt 7) word.
+
+    `u` is the wall's free transverse gauge; the census row fixes it to
+    `-1357/128 + 211/128 sqrt 7`.  Everything else -- 125 axis centres and all 24
+    brick centres -- is computed from `k`, the word and that one scalar.
+    """
+    cls = qfield(7)
+    c, s = _sqrt7_word()
+    return staircase_claim(7, c, s, k, cls(F(-1357, 128), F(211, 128)))
+
+
 def p_slope(p, q, k, m=1):
     """The p:q slope ridge: the word `(p, q)/sqrt(p^2+q^2)` lives in Q(sqrt(p^2+q^2))."""
     dd, _kf = squarefree_split(p * p + q * q)
@@ -1441,7 +1684,8 @@ def build_engine():
     for name, fn in (("Tile", p_grid), ("Strip", p_strip), ("Pocket", p_pocket),
                      ("Glue", p_glue), ("SymmetryFold", p_fold), ("Atom", p_atom),
                      ("DiamondField", p_diamond_field), ("Slope", p_slope),
-                     ("Seventh", p_seventh), ("Tilt", p_tilt), ("Ring", p_ring)):
+                     ("Seventh", p_seventh), ("Tilt", p_tilt), ("Ring", p_ring),
+                     ("Staircase", p_staircase)):
         pk.register(name, fn)
     pk.decimal_model = spatial_decimal
     eng.register(pk)
@@ -1484,6 +1728,8 @@ def build_engine():
         Cell("Tilt", {"t": "1/2", "k": k, "m": 2}) for k in (2, 3)
     ] + [
         Cell("Ring", {"k": 1})
+    ] + [
+        Cell("Staircase", {"k": 5})
     ]))
     eng.add_wheel(Wheel("sequences", sq, [
         Cell("Tile", {"t": str(alpha_irr), "n": 21}),
@@ -1906,6 +2152,8 @@ def selftest() -> int:
         "no_diamond": lambda: _assemble_field("empty", empty),
         "declaration_overlaps": lambda: _assemble_field("bad", bad),
         "ring_chain_adrift": lambda: p_ring(2),
+        "staircase_layer_gap": lambda: staircase_field(Q2, Q2(0, F(1, 2)),
+                                                       Q2(0, F(1, 2)), 1, Q2(0)),
     }
     for law, fn in cases.items():
         assert _law(fn) == law, (law, _law(fn))
@@ -2343,7 +2591,7 @@ def selftest() -> int:
         worst = max(worst, abs(dec(near[0]) - px), abs(dec(near[1]) - py))
     assert worst < Decimal("1e-4"), worst
     split = []
-    for kk in (2, 3, 5):
+    for kk in (2, 3, 4, 5):
         try:
             ring_claim(7, cw7, sw7, kk)
             raise AssertionError(f"the ring must not certify at k = {kk}")
@@ -2354,7 +2602,21 @@ def selftest() -> int:
             idx = _ring_indices(kk)
             slack = max(sl for _q, sl, _n, _o in
                         Q.pair_axes(c5, w5, idx["p8"], idx["m5"], cls7))
-            split.append(f"k={kk}: N would be {4 * kk + 14}, closure slack {slack}")
+            g5 = Q.gate(c5, w5, cls7)
+            # The drift is a *declared* law, not a collision -- but only from k = 3.
+            # At k = 3, 4, 5 the drifted sentence still separates with clearance
+            # exactly 0; at k = 2 the drift is large enough to collide as well.
+            if kk >= 3:
+                assert g5["ok"] and g5["clearance"] == 0 and g5["violations"] == 0, (kk, g5)
+            else:
+                assert not g5["ok"] and g5["violations"] > 0, (kk, g5)
+            adrift = [(grp, i, j) for grp, prs in ring_tangencies(kk).items()
+                      for i, j in prs if not _ring_contact(cls7, c5, w5, i, j)]
+            assert len(adrift) == 8, (kk, adrift)
+            assert sum(1 for grp, _i, _j in adrift if grp == "pin") == 4, adrift
+            split.append(f"k={kk}: N would be {4 * kk + 14}, closure slack {slack}, "
+                         f"gate {'clear at 0' if g5['ok'] else 'colliding'}, "
+                         f"{len(adrift)} of 22 declarations adrift")
     rows151 = _delivered_rows()[151]
     probe = ring_side(cls7, cw7, sw7, 5)
     axis151 = sum(1 for _x, _y, t in rows151 if _word_of(t) is not None)
@@ -2377,11 +2639,100 @@ def selftest() -> int:
         "grammar wrongly. The grammar does not generalise: the pinwheel's closure contact "
         "is a k = 1 identity (" + "; ".join(split) + "), because the chain end's u-distance "
         "stays 1 at every k while its v-offset is 2p5.v + 2, which grows by sqrt7 per k. "
-        "So k >= 2 is a declared refusal, not a collision. And the census's own k = 5 row "
+        "So k >= 2 is a declared refusal; from k = 3 up the drifted sentence still passes "
+        "the geometric gate at clearance 0 and fails only its declared tangencies "
+        "(8 of the 22, 4 of them the pinwheel closure), while at k = 2 the drift is large "
+        "enough that the sentence also collides. The census's own k = 5 row "
         "is not this family's member even in count: the ring would have N = 4k + 14 = 34 "
         "squares at L = " + str(probe) + ", while n = 151 is a 151-square staircase ("
         f"{axis151} axis squares in {cols151} staggered columns plus "
         f"{len(rows151) - axis151} tilted). The side law generalises; the sentence splits.")
+
+    # --------------------- control 25: the staircase and its corner pinch (run 95)
+    stair = p_staircase(5)
+    target151 = (cls7(23) + cls7(0, 1)) / cls7(2)
+    assert stair.n == 149, stair.n
+    assert stair.laws["extent"][1] == target151, stair.laws["extent"][1]
+    assert (stair.meta["frame"], stair.meta["seam"]) == (125, 24), stair.meta["frame"]
+    assert stair.meta["declared"] == 24, stair.meta["declared"]
+    assert len(staircase_columns(5)) == 12, staircase_columns(5)
+    c25 = stair.payload["state"]
+    w25 = stair.payload["words"]
+    g25 = Q.gate(c25, w25, cls7)
+    assert g25["ok"] and g25["clearance"] == 0 and g25["L"] == target151, g25
+    need25 = _staircase_need(cls7, cw7, sw7)
+    for i, j in staircase_tangencies(5):
+        p, q = c25[125 + i], c25[j]
+        dv = (p[0] - q[0]) * (-sw7) + (p[1] - q[1]) * cw7
+        assert abs(dv) == need25, (i, j)
+    # the wall's thirteenth column pinches: the closed 151-square sentence is refused
+    gauge = cls7(F(-1357, 128), F(211, 128))
+    closed = list(c25)
+    for v in _staircase_walk_v(cls7, cw7, sw7, 5, 4):
+        closed.append(_staircase_brick(cls7, cw7, sw7, gauge + cls7(12), v))
+    gc = Q.gate(closed, list(w25) + [(cw7, sw7)] * 2, cls7)
+    pinch = cls7(F(-163, 128), F(61, 128))
+    assert len(closed) == 151 and not gc["ok"] and gc["violations"] == 1, gc
+    assert gc["clearance"] == pinch, gc["clearance"]
+    # the census row: 149 of its 151 centres are this sentence's, to the pose's noise
+    dec = DecimalWitness.scalar
+    cens = _delivered_rows()[151]
+    worst = Decimal(0)
+    for x, y in c25:
+        px, py = dec(x), dec(y)
+        near = min(cens, key=lambda r: abs(dec(r[0]) - px) + abs(dec(r[1]) - py))
+        worst = max(worst, abs(dec(near[0]) - px), abs(dec(near[1]) - py))
+    assert worst < Decimal("1e-4"), worst
+    # the two squares the table adds are rotated out of the field
+    odd = F(19211307153, 31250000000)
+    ca, sa = T.cos_sin(odd)
+    dens = (64, 128, 256, 512, 1024, 2048, 4096)
+    oc = EF.recover_scalar(cls7(F(ca)), cls7, dens=dens, bmax=8)
+    os_ = EF.recover_scalar(cls7(F(sa)), cls7, dens=dens, bmax=8)
+    assert oc is not None and os_ is not None, "the odd word must be found near Q(sqrt 7)"
+    assert oc * oc + os_ * os_ != cls7(1), "the odd word would be a unit word after all"
+    assert T.pyth_angle(odd, qmax=1024) is None, "the odd word would be Pythagorean"
+    # honesty: at k = 5 the family does not beat the table at its own count
+    assert stair.meta["table_side"] is not None, stair.meta
+    assert stair.meta["beats_table"] is False, stair.meta
+    # the spin over (k, word): the family's count is the frame plus the brick wall
+    # (`4k^2 + 4k + 5 + 2|columns(k)|`), and no member beats its delivered row
+    spin = []
+    for kk in range(1, 10):
+        nn = 4 * kk * kk + 4 * kk + 5 + 2 * len(staircase_columns(kk))
+        Lk = staircase_side(cls7, cw7, sw7, kk)
+        sidek = _table_side(nn)
+        if sidek is None:
+            spin.append(f"k={kk}: N={nn} uncalibrated")
+            continue
+        behind = DecimalWitness.scalar(Lk) - DecimalWitness.scalar(sidek)
+        assert behind > 0, (kk, nn, Lk, sidek)
+        spin.append(f"k={kk}: N={nn} behind by {behind:.4f}")
+    assert 4 * 25 + 20 + 5 + 2 * len(staircase_columns(5)) == 149
+    say("control 25 -- the n = 151 row is a *multi-layer staircase*, and its axis layer is "
+        "grammar: an odd integer grid on two lattices offset by 2c (an upper-left block of "
+        "55 and a lower-right block of 66 at k = 5), four corner caps, and a two-layer brick "
+        "wall in the diagonal seam.  At k = 5 that is 125 axis squares plus 24 bricks -- "
+        "each brick tangent along its own v to B(a, a) or A(a, a + 1), walking "
+        "a = -k..k-2 with the column repeated when a % 3 == 0 -- and the exact gate "
+        "certifies N = 149 at L = " + str(target151) + " with clearance 0 and "
+        f"{g25['contacts']} contacts, all 24 declarations exact.  The grammar is "
+        "*closed* only at the Q(sqrt 7) word: the two bricks of a column are "
+        "v_A - v_B = 2c(c + s) - (1 + s) apart, which is 1 exactly when c - s = 1/2 "
+        "(control 5 refuses the 45-degree word by staircase_layer_gap).  It constructs "
+        "149 of the census's 151, and the reason is exact: the wall's thirteenth column "
+        "(a = k - 1) overlaps the top-right cap by " + str(pinch) + " (= " +
+        f"{dec(pinch):.6f}), one violation; sliding the wall trades that pinch for another "
+        "rather than opening the corner.  That is why the table rotates those two squares: "
+        "their word is 0.6147618 rad, whose cos and sin are not a unit word of Q(sqrt 7) at "
+        f"height <= 4096 (cos^2 + sin^2 = {oc * oc + os_ * os_}) and not Pythagorean (no "
+        "t with denominator <= 1024), so a field-general Q(sqrt 7) staircase cannot reach "
+        f"n = 151.  The 149 centres reproduce the delivered row to {worst:.1e}, and the "
+        "family does not beat the table at n = 149 (its table side is " +
+        str(stair.meta["table_side"]) + "); no row is claimed.  A spin over k = 1..9 at "
+        "the same word (the count is the frame plus the wall, "
+        "4k^2 + 4k + 5 + 2|columns(k)|) never beats a delivered row: " +
+        "; ".join(spin) + ".")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

@@ -116,18 +116,23 @@ unit. It does not:
 2·p5·v + 2 = 5/4 − (4k − 1)/4·√7
 ```
 
-| k | `2p5·v + 2` | closure pair | verdict |
-|---|---|---|---|
-| 1 | −0.734313 | `|·| = 0.734 < 1` | **contact** — the pinwheel closes |
-| 2 | −3.380065 | adrift by 1.380065 | refuses `ring_chain_adrift` |
-| 3 | −6.025816 | adrift by 4.025816 | refuses `ring_chain_adrift` |
-| 5 | −11.317319 | adrift by 9.317319 | refuses `ring_chain_adrift` |
+| k | `2p5·v + 2` | closure pair | gate on the drifted sentence | verdict |
+|---|---|---|---|---|
+| 1 | −0.734313 | `\|·\| = 0.734 < 1` | ok, clearance 0 | **certifies** — the pinwheel closes |
+| 2 | −3.380065 | adrift by 1.380065 | **fails**: 3 violations, clearance `−21/4 + 7/4√7` = −0.619935 | refuses `ring_chain_adrift` *and* collides |
+| 3 | −6.025816 | adrift by 4.025816 | ok, clearance 0, 0 violations | refuses `ring_chain_adrift` — structural |
+| 4 | −8.671567 | adrift by 7.671567 | ok, clearance 0, 0 violations | refuses `ring_chain_adrift` — structural |
+| 5 | −11.317319 | adrift by 9.317319 | ok, clearance 0, 0 violations | refuses `ring_chain_adrift` — structural |
 
-The exact closure slack is `−13/4 + (4k − 1)/4·√7` at `k = 2, 3, 5`, positive and growing by
-√7 per `k`. So `k ≥ 2` is a **declared law, not a collision**: the sentence is built, its
-declared tangency is measured, and the family refuses because the tangency is not one. (At
-`k = 2` the drifted chain also happens to overlap the perimeter; the declared law fires
-first, and the collision is recorded as a consequence rather than as the reason.)
+The exact closure slack is `−13/4 + (4k − 1)/4√7` at `k = 2, 3, 4, 5`, positive and growing by
+√7 per `k`. The distinction the table makes is the point: **at `k = 3, 4, 5` the drifted
+sentence still passes the exact geometric gate at clearance exactly 0 with 0 violations**, so
+the refusal is *structural* — the declared tangency law fails, and 8 of the 22 declared
+contacts (4 of them the pinwheel closure) are measured not to be contacts. Only at `k = 2`
+does the drift grow far enough that the sentence also **collides** (3 violations, clearance
+`−21/4 + 7/4√7` ≈ −0.620); there the refusal law fires before the gate is consulted, so the
+collision is a consequence, not the reason. Refusal and collision are different events, and
+this run separates them by measurement rather than by argument.
 
 **And the census's own k = 5 row is not this family's member even in count.** The ring at
 `k = 5` would have `N = 4k + 14 = 34` squares at `L = 23/2 + ½√7` — the *same side* the

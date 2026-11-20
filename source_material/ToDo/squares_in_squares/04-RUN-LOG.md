@@ -1698,3 +1698,60 @@ refusals with their exact slack; control 23 now points at it); spin spatial **47
 changed.
 
 Entries `57-THE-RING-SOLVED.md`; records `31`-`57`.
+
+
+## Run 95 — the staircase, and the line between a refusal and a collision
+
+**Two questions from run 94, both answered by measurement.** (1) The Ring's `k >= 2` refusal is
+*structural*: at `k = 3, 4, 5` the drifted sentence still passes the exact gate at clearance 0
+with 0 violations and fails only its declared tangencies — 8 of the 22, four of them the
+pinwheel closure, with exact slack `-13/4 + (4k - 1)/4 Sqrt7` — while only at `k = 2` is the
+drift large enough to *collide* as well (3 violations, clearance `-21/4 + 7/4 Sqrt7` ~= -0.620).
+Control 24 now records the gate verdict alongside the closure slack for `k = 2, 3, 4, 5`; doc 57
+section 5 carries the table. Refusal and collision are different events and are no longer
+reported as one.
+
+**(2) n = 151 is a multi-layer staircase, and its axis layer is grammar.** Every axis coordinate
+is `m +- c`, so the 125 axis squares sit on two lattices offset by `2c`: block `A`
+`(a - c, b + c)` for `a < b` (55 squares), block `B` `(a + c, b - c)` for `a >= b` (66), plus
+four corner caps — `125 = 55 + 66 + 4 = 4k^2 + 4k + 5` at `k = 5`, at `L = 2k + 1 + 2c`, the
+family's one side law. The blocks never touch (a block-A/block-B pair would need an integer
+shift of `1 +- 2c`), so the diagonal seam is real, and the 24 tilted squares fill it as a
+two-layer brick wall: in the word frame `u = (c, s)`, `v = (-s, c)` the bricks have consecutive
+integer `u = u_0 + j` in twelve columns, and each is tangent **along its own `v`** to
+`B(a, a)` or `A(a, a + 1)`, walking `a = -k .. k - 2` with the column repeated when
+`a % 3 == 0` — the labels at `k = 5` are `[-5, -4, -3, -3, -2, -1, 0, 0, 1, 2, 3, 3]`. The two
+bricks of a column are `2c(c + s) - (1 + s)` apart, so they close edge-to-edge iff `c - s = 1/2`:
+the wall is the Q(sqrt 7) word's own, and control 5 refuses the 45-degree word by
+`staircase_layer_gap`.
+
+**The certificate.** `staircase_field` -> `p_staircase(5)` gates **N = 149 at
+`L = 23/2 + 1/2 Sqrt7` with clearance exactly 0, 449 contacts, 0 violations**, all 24
+declarations exact; the `Staircase k=5` cell is registered and the spatial wheel is **48/48
+certified**. The 149 centres reproduce the delivered n = 151 row to **9.0e-8**.
+
+**Where 151 stops, exactly.** The wall's thirteenth column (`a = k - 1`) pinches the top-right
+cap by `-163/128 + 61/128 Sqrt7 = -0.012572`, one violation; the slide that removes that pinch
+by construction immediately produces another at `-0.005557`, so the wall is jammed and no gauge
+admits 26 bricks. That is why the table rotates the last two squares: their word is
+0.6147618 rad, whose `cos`/`sin` recovered in Q(sqrt 7) at heights <= 4096 has norm
+`868927/1024 - 656073/2048 Sqrt7 != 1` and is not Pythagorean (no `t` with denominator
+<= 1024). A field-general Q(sqrt 7) staircase therefore constructs **149 of the 151**, with the
+family law `N(k) = 4k^2 + 4k + 5 + 2|columns(k)|` (149 at `k = 5`; 15, 37, 67, 103, 149, 203
+at `k = 1..6`); the 151st pair is an exact refusal, not a failure. Two measured negatives: a
+120x120 scan of the corner pocket in the wall frame shows its feasible set is a single strip
+0.53 wide in `u` and 0.63 in `v`, so at most one more word-aligned square fits (the word-aligned
+ceiling is 150, and a lone dilated brick carries no grammar, so the family stays at 149); and a
+spin over `k = 1..9` at the same word never beats a delivered row -- `k = 1` behind by 0.8229,
+`k = 3` and `k = 5` by 0.1158, `k = 6` by 0.0447, `k = 2, 4, 7, 8, 9` uncalibrated, every
+comparison exact in `Decimal`. At n = 149 the family's table side is `12 + 1/2 Sqrt2`, so it does
+not beat the table. No row changed.
+
+**Verification.** `glm_wheels --selftest` **25 controls**, exit 0 (control 25 is the staircase:
+the 55 + 66 + 4 split, the twelve-column walk and its repeats, all 24 tangencies exact, the
+149-square certificate, the 9.0e-8 census agreement, the exact pinch and the odd word's
+non-membership in the field); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
+green; `grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage --selftest`
+4/4; `record_guard.py` OK.
+
+Entries `58-THE-STAIRCASE.md`; records `31`-`58`.

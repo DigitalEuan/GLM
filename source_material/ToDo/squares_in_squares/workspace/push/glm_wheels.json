@@ -9,8 +9,8 @@
  "spins": {
   "spatial": {
    "summary": {
-    "cells": 47,
-    "certified": 47,
+    "cells": 48,
+    "certified": 48,
     "refused": 0,
     "refusal_laws": {}
    },
@@ -1952,6 +1952,48 @@
       "gap": "4",
       "pinwheel": "4"
      }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "Staircase",
+     "params": {
+      "k": "5"
+     },
+     "size": 149,
+     "measure": "L = 23/2 + 1/2\u221a7",
+     "invariant": "ceil(sqrt N) - L = 3/2 - 1/2\u221a7",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 449, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 149/149 with 1591 contacts >= n-1, min degree 6, Laman bound 295 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 149 + (-15 + 23/2\u221a7) = 134 + 23/2\u221a7 and L^2 = 134 + 23/2\u221a7"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-65, worst slack_dec -1.161e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "149",
+      "extent": "23/2 + 1/2\u221a7",
+      "void": "-15 + 23/2\u221a7",
+      "contacts": "449",
+      "gain": "3/2 - 1/2\u221a7",
+      "side": "23/2 + 1/2\u221a7",
+      "axis": "125",
+      "brick": "24"
+     }
     }
    ]
   },
@@ -3174,7 +3216,7 @@
   }
  },
  "audit": {
-  "checked": 107,
+  "checked": 119,
   "offenders": [],
   "exempt": [
    "selftest"
