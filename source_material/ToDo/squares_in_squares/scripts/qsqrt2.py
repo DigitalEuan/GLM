@@ -92,21 +92,39 @@ def is_rational_word(word) -> bool:
 
 
 # -------------------------------------------------------------------- gate
-def frame_extent(c: Q2, s: Q2) -> Q2:
+def field_of(state, cls=None):
+    """The field class of a sentence: declared, or read off its first coordinate.
+
+    The gate is one procedure over any `exact_field.Quad(d)`; `Q2` is only its default.
+    Reading the class off the state means `gate(state, words)` keeps working unchanged for
+    every existing caller, while a Q(sqrt 5) or Q(sqrt 7) sentence passes `cls` explicitly.
+    """
+    if cls is not None:
+        return cls
+    for p in state:
+        if p is not None:
+            return type(p[0])
+    return Q2
+
+
+def frame_extent(c, s, cls=None):
     """Half-extent of the unit square with frame (c, s) along the x axis."""
-    return (abs(c) + abs(s)) * HALF
+    cls = cls or field_of([(c,)])
+    return (abs(c) + abs(s)) * cls(F(1, 2))
 
 
-def axis_extent(c: Q2, s: Q2, qx: Q2, qy: Q2) -> Q2:
+def axis_extent(c, s, qx, qy, cls=None):
     """Half-extent of the unit square with frame (c, s) along the unit axis q."""
     # edges u = (c, s), v = (-s, c); extent = (|u.q| + |v.q|) / 2
-    return (abs(c * qx + s * qy) + abs(c * qy - s * qx)) * HALF
+    cls = cls or field_of([(c,)])
+    return (abs(c * qx + s * qy) + abs(c * qy - s * qx)) * cls(F(1, 2))
 
 
-def side(state, words) -> Q2:
+def side(state, words, cls=None):
     """The container side: max over the two axes of the state's extent."""
+    cls = field_of(state, cls)
     n = len(state)
-    ex = [frame_extent(*w) for w in words]
+    ex = [frame_extent(w[0], w[1], cls) for w in words]
     xs = [state[i][0] + ex[i] for i in range(n)]
     xn = [state[i][0] - ex[i] for i in range(n)]
     ys = [state[i][1] + ex[i] for i in range(n)]
@@ -114,12 +132,14 @@ def side(state, words) -> Q2:
     return max(max(xs) - min(xn), max(ys) - min(yn))
 
 
-def pair_axes(state, words, i, j):
-    """The four SAT (axis, slack, need) triples of a pair, exactly.
+def pair_axes(state, words, i, j, cls=None):
+    """The four SAT (axis, slack, need, owner) quadruples of a pair, exactly.
 
     `slack = |d.q| - (1/2 + ext_other(q))`; the pair is separated iff some slack
     is >= 0, and the pair's distance from contact is the LARGEST of the four.
     """
+    cls = field_of(state, cls)
+    half = cls(F(1, 2))
     dx = state[j][0] - state[i][0]
     dy = state[j][1] - state[i][1]
     out = []
@@ -128,17 +148,19 @@ def pair_axes(state, words, i, j):
         oc, os_ = words[other]
         for qx, qy in ((c, s), (-s, c)):
             proj = abs(dx * qx + dy * qy)
-            need = HALF + axis_extent(oc, os_, qx, qy)
+            need = half + axis_extent(oc, os_, qx, qy, cls)
             out.append(((qx, qy), proj - need, need, owner))
     return out
 
 
-def gate(state, words):
+def gate(state, words, cls=None):
     """The exact SAT sentence gate.
 
     Args:
-        state: list of (x, y) pairs of Q2 — square centres.
-        words: list of (cos, sin) pairs of Q2 — one word per square.
+        state: list of (x, y) pairs of `cls` — square centres.
+        words: list of (cos, sin) pairs of `cls` — one word per square.
+        cls:   the field class (`Q2`, or any `exact_field.Quad(d)`); default read off
+               the state, so every existing caller is unchanged.
 
     Returns:
         dict with
@@ -154,14 +176,15 @@ def gate(state, words):
     a margin of at least 2 - sqrt(2) > 0.5 and cannot be the worst pair.  The
     prune is exact (it is decided by a field comparison), not a tolerance.
     """
+    cls = field_of(state, cls)
     n = len(state)
     if n != len(words):
         raise ValueError("state and words disagree on the number of squares")
     if n == 0:
-        return {"ok": True, "L": Q2(0), "clearance": None, "contacts": 0,
+        return {"ok": True, "L": cls(0), "clearance": None, "contacts": 0,
                 "violations": 0}
-    L = side(state, words)
-    two = Q2(2)
+    L = side(state, words, cls)
+    two = cls(2)
     worst = None
     contacts = violations = 0
     for i in range(n):
@@ -170,7 +193,7 @@ def gate(state, words):
             if abs(state[j][0] - xi) >= two or abs(state[j][1] - yi) >= two:
                 continue
             best = None
-            for _q, slack, _need, _owner in pair_axes(state, words, i, j):
+            for _q, slack, _need, _owner in pair_axes(state, words, i, j, cls):
                 if best is None or slack > best:
                     best = slack
             if best == 0:
