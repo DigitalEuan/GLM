@@ -38,7 +38,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 (0.76 % holds only at n = 1000, s(5) is 2.707107 and proved, "0/8" is run 41's,
 "run 50" does not exist), and their n = 5 test case is ill-posed.
 
-## Current results (Run 92, 2026-11-20; last score move run 47)
+## Current results (Run 93, 2026-11-20; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -67,7 +67,23 @@ needed `(√7 − 1)/2` seam, and the row itself is 10 axis squares on `±(5/4 +
 tilted, i.e. `L = 3 + 2cos`: an odd rational part with a cosine term where the ridge is an
 even `2k` plus a seam, so it is a ring sentence rather than a near miss; **22 controls**,
 spatial **46/46** certified, float audit **195 functions, 0 offenders**, no row changed;
-records `31`–`55` |
+records `31`–`55`; run 93 reads the whole Q(√7) slice of the census — five rows (n = 18, 53, 151,
+234, 747), each re-derived from its own pose at 70 digits — and finds one shared word,
+`((1+√7)/4, (√7−1)/4)`, unit-checked exactly in every one, with the single side law
+`L = 2k + 3/2 + (c + s)` (`ring_side`), which at `k = 1` is exactly `7/2 + √7/2` and so
+contains run 92's `3 + 2cos` as a special case; solving it per row splits the family by the
+**parity of k** — integer for two rows (18: k = 1, 151: k = 5), half-integer for three
+(53: 5/2, 234: 13/2, 747: 25/2) — while the alphabets differ widely (1, 3, 2, 1 and 663
+distinct tilt angles, with 8, 6, 24, 36 and 2 squares at the word); and it builds the Ring
+family in `glm_wheels` — `ring_side`, `ring_frame`, `ring_candidates`, `ring_field`,
+`p_ring`, field-general, with the exact gate as arbiter — which **refuses** at every tried
+`(k, word)` (Q(√7) and 45°, k = 1, 2) under the declared law `ring_unresolved`, because the
+census's own ring is 10 boundary axis squares plus 4 tilted in the edge gaps plus a central
+pinwheel rather than four corner modules, and its recorded pose carries 0.03–0.07 of slack
+between module and frame — a polished decimal packing, not an exact contact sentence — so
+no Ring cell is registered and **n = 18 is not yet constructed from grammar**, the coupled
+gap/pinwheel tangency being named as the next job; **23 controls**, spatial **46/46**,
+float audit **200 functions, 0 offenders**, no row changed; records `31`–`56` |
 
 ## Where the score stands, said plainly
 

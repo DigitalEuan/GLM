@@ -778,6 +778,143 @@ def p_ridge(d, c, s, k, family, params, m=1):
     return claim
 
 
+# ------------------------------------------------------------------ the ring
+def ring_side(cls, c, s, k):
+    """The ring's side, derived: its four corner squares sit flush in the box.
+
+    A corner square's centre is `(k + c, k + c)`, so with its half-extent of `1/2` its
+    outer face is at `k + c + 1/2` and
+
+        L = 2(k + c) + 1 = 2k + 3/2 + (c + s),
+
+    which reproduces the census's Q(sqrt 7) family exactly: every row of it has side
+    `(2m+1)/2 + sqrt7/2`, and `c - s = 1/2` makes `1/2 + c + s/... ` collapse to `1/2 + c`.
+    """
+    return cls(2 * k + 1) + cls(2) * c
+
+
+def ring_frame(cls, c, s, k):
+    """The ring's axis frame: four corner squares plus integer runs on the four edges.
+
+    Horizontal edges carry `2k - 1` run squares and vertical edges `2k`, anchored one
+    square in from the low corner -- the counts the corner modules' own bites leave.  For
+    `k = 1` that is ten axis squares: the census's n = 18 count exactly.
+    """
+    A = cls(k) + c
+    cells = [(A, A), (-A, A), (-A, -A), (A, -A)]
+    for i in range(1, 2 * k):
+        for y in (A, -A):
+            cells.append((c + cls(i - k), y))
+    for i in range(1, 2 * k + 1):
+        for x in (A, -A):
+            cells.append((x, c + cls(i - k)))
+    return cells
+
+
+def ring_candidates(cls, c, s, k):
+    """Every point where a module square is tangent to a horizontal and a vertical frame
+    square along an axis: `|d . e| = 1/2 + (|c| + |s|)/2`, solved for the point."""
+    A = cls(k) + c
+    half = cls(F(1, 2))
+    need = half + (abs(c) + abs(s)) * half
+    cells = ring_frame(cls, c, s, k)
+    hs = sorted({p[0] for p in cells if p[1] == -A})
+    vs = sorted({p[1] for p in cells if p[0] == A})
+    out = []
+    for fx in hs:
+        for gy in vs:
+            for sx in (cls(1), cls(-1)):
+                for sy in (cls(1), cls(-1)):
+                    out.append((fx + sx * need, gy + sy * need))
+    return cells, out
+
+
+def ring_field(cls, c, s, k):
+    """The ring declaration: the frame plus four 2-square corner modules.
+
+    A module is two unit squares edge to edge along the word's edge direction, placed at
+    one of the finitely many points where its first square is tangent to a horizontal and
+    a vertical frame square (`ring_candidates`).  The exact gate is the arbiter: a
+    declaration is the ring only if it packs at clearance 0 with the side `ring_side`
+    derives.
+
+    **It does not, and this run says so instead of pretending.**  Run 93 read the census's
+    own n = 18 pose: its tilted squares are not corner modules at all -- four sit in the
+    four edge gaps and four form a pinwheel around the box centre -- so the corner-module
+    grammar is the wrong sentence shape, and the tangency set is empty at every `(k, word)`
+    tried (Q(sqrt 7) and 45 deg, k = 1, 2).  The refusal is a declared law so the failure
+    is a result rather than a silence.
+    """
+    if k < 1:
+        raise Refusal("degenerate_cell", f"k = {k} has no ring")
+    cells, cands = ring_candidates(cls, c, s, k)
+    L = ring_side(cls, c, s, k)
+    half = cls(F(1, 2))
+    ext = (abs(c) + abs(s)) * half
+    for q in cands:
+        if abs(q[0]) + ext > L * half or abs(q[1]) + ext > L * half:
+            continue
+        slots = []
+        for cx in (cls(1), cls(-1)):
+            for cy in (cls(1), cls(-1)):
+                base = (cx * q[0], cy * q[1])
+                slots.append(base)
+                slots.append((base[0] + cx * s, base[1] - cy * c))
+        state = list(cells) + slots
+        words = [(cls(1), cls(0)) for _ in cells] + [(c, s) for _ in slots]
+        g = Q.gate(state, words, cls)
+        if g["ok"] and g["L"] == L:
+            return {"cells": cells, "slots": slots, "corner": q, "seam": c + s}
+    raise Refusal("ring_unresolved",
+                  "no corner-module placement in the tangent set packs the ring at its "
+                  "derived side: the census's ring is a gap/pinwheel sentence, not this one")
+
+
+def p_ring(d, c, s, k, family="Ring", params=None):
+    """Gate-verify a ring over `Q(sqrt d)` and return it as a claim.
+
+    `L = 2k + 3/2 + (c + s)` and `N = 4k^2 + 2`.  At the census's Q(sqrt 7) word with
+    `k = 1` that is `N = 18`, `L = 7/2 + sqrt7/2` -- the n = 18 row's own side, built from
+    the word and the tangency rule instead of being read off the table.
+    """
+    cls = qfield(d)
+    if (c * c + s * s) != cls(1):
+        raise Refusal("word_off_circle",
+                      f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
+    decl = ring_field(cls, c, s, k)
+    state = list(decl["cells"]) + list(decl["slots"])
+    words = ([(cls(1), cls(0)) for _ in decl["cells"]]
+             + [(c, s) for _ in decl["slots"]])
+    g = Q.gate(state, words, cls)
+    if not g["ok"]:
+        raise Refusal("ring_collides",
+                      f"{family}: {g['violations']} pairs overlap at the derived side")
+    n = len(state)
+    L = g["L"]
+    claim = Claim("spatial_geometry", family, params or {"k": k}, n,
+                  {"count": ("N", n), "extent": ("L", L),
+                   "void": ("L^2 - N", L * L - cls(n)),
+                   "contacts": ("contacts", g["contacts"])},
+                  {"state": state, "words": words, "field": f"Q(sqrt {d})",
+                   "corner": decl["corner"]})
+    claim.meta["field_d"] = d
+    claim.meta["seam"] = str(c + s)
+    claim.meta["corner"] = str(decl["corner"])
+    _tag(claim, L, n)
+    claim.laws["side"] = ("L", L)
+    side = _table_side(n)
+    if side is None:
+        claim.meta["table_side"] = None
+        claim.meta["beats_table"] = None
+    else:
+        Ld = DecimalWitness.scalar(L)
+        Td = DecimalWitness.scalar(side)
+        claim.meta["table_side"] = str(side)
+        claim.meta["beats_table"] = Ld < Td
+        claim.meta["table_gap"] = str(Td - Ld)
+    return claim
+
+
 def p_slope(p, q, k, m=1):
     """The p:q slope ridge: the word `(p, q)/sqrt(p^2+q^2)` lives in Q(sqrt(p^2+q^2))."""
     dd, _kf = squarefree_split(p * p + q * q)
@@ -1989,6 +2126,92 @@ def selftest() -> int:
         f"its pose is 10 axis squares plus 8 tilted ones, and its side is 3 + 2cos = "
         f"(7 + sqrt7)/2 — an odd rational part with a cosine term, where the ridge's side "
         f"is 2k plus a seam width.")
+
+    # ------------------------------- control 23: the Q(sqrt 7) family and its ring law
+    import field_triage as T
+    cls7 = qfield(7)
+    cw7, sw7 = _sqrt7_word()
+    ledger = os.path.join(ROOT, "workspace", "push", "field_triage.json")
+    with open(ledger) as f:
+        triage = json.load(f)
+    rows7 = sorted(r["n"] for r in triage["rows_detail"] if r["class"] == "Q(sqrt7) side")
+    assert rows7 == [18, 53, 151, 234, 747], rows7
+    target = (cls7(7) + cls7(0, 1)) / cls7(2)
+    reporting = []
+    integers, halves = [], []
+    for n in rows7:
+        row = _delivered_rows()[n]
+        tilts = {}
+        for _x, _y, t in row:
+            if _word_of(t) is None:
+                tilts[t] = tilts.get(t, 0) + 1
+        # the census word occurs in every one of the five rows, and is a unit word there
+        cw = sw = None
+        for t in sorted(tilts, key=lambda z: -tilts[z]):
+            ca, sa = T.cos_sin(t)
+            g1 = EF.recover_scalar(cls7(F(ca)), cls7, dens=(1, 2, 4, 8), bmax=8)
+            g2 = EF.recover_scalar(cls7(F(sa)), cls7, dens=(1, 2, 4, 8), bmax=8)
+            if g1 is not None and g2 is not None and (g1.a, g1.b) == (cw7.a, cw7.b) \
+                    and (g2.a, g2.b) == (sw7.a, sw7.b):
+                cw, sw = g1, g2
+                word_n = tilts[t]
+                break
+        assert cw is not None and cw * cw + sw * sw == cls7(1), (n, len(tilts))
+        X = [F(x) for x, _y, _t in row]
+        Y = [F(y) for _x, y, _t in row]
+        far = EF.recover_scalar(cls7(max(X)), cls7, dens=(1, 2, 4, 8, 16), bmax=8)
+        near = EF.recover_scalar(cls7(min(X)), cls7, dens=(1, 2, 4, 8, 16), bmax=8)
+        assert far is not None and near is not None, n
+        # the side, read exactly: the span of the centres plus one axis half-extent
+        side = far - near + cls7(1)
+        fy = EF.recover_scalar(cls7(max(Y)), cls7, dens=(1, 2, 4, 8, 16), bmax=8)
+        ny = EF.recover_scalar(cls7(min(Y)), cls7, dens=(1, 2, 4, 8, 16), bmax=8)
+        assert side == fy - ny + cls7(1), n
+        axis_n = sum(1 for _x, _y, t in row if _word_of(t) is not None)
+        # the law: side = 2k + 3/2 + (c + s), with k = (side - 3/2 - (c+s)) / 2
+        kk = (side - cls7(F(3, 2)) - (cw + sw)) / cls7(2)
+        assert kk.b == 0, (n, kk)
+        kv = kk.a
+        if kv.denominator == 1:
+            assert ring_side(cls7, cw, sw, int(kv)) == side, (n, kv)
+            integers.append((n, int(kv)))
+        else:
+            assert kv.denominator == 2, (n, kv)
+            assert (kv * cls7(2)).a.denominator == 1, (n, kv)     # an odd integer
+            assert cls7(2 * int(kv * 2)) + cls7(3) + cls7(2) * (cw + sw) == side * cls7(2), (n, kv)
+            halves.append((n, str(kv)))
+        reporting.append(f"n={n}: {axis_n} axis + {len(row) - axis_n} tilted "
+                         f"({word_n} at the census word, {len(tilts)} distinct tilt angles), "
+                         f"L={side}, k={kv}")
+    assert (n18 := dict(integers).get(18)) == 1, integers
+    assert dict(integers)[151] == 5, integers
+    assert [n for n, _k in halves] == [53, 234, 747], halves
+    assert ring_side(cls7, cw7, sw7, 1) == target, "the ring law must give the n = 18 side"
+    refusals = []
+    for dd, word in ((7, (cw7, sw7)), (2, Q.word_45())):
+        cls = qfield(dd)
+        for kk in (1, 2):
+            try:
+                p_ring(dd, word[0], word[1], kk)
+                raise AssertionError(f"the corner-module ring must not certify (d={dd}, k={kk})")
+            except Refusal as e:
+                assert e.law in ("ring_unresolved", "ring_collides"), e.law
+                refusals.append(f"d={dd} k={kk} {e.law}")
+    say("control 23 — the Q(sqrt 7) family is one word and one side law, split by parity: "
+        "every row of it (n = 18, 53, 151, 234, 747, run 86's field sweep) carries the same "
+        "unit word ((1+sqrt7)/4, (-1+sqrt7)/4), recovered here from each row's own tilt at "
+        "70 digits, and its side is (2m+1)/2 + sqrt7/2 = 2k + 3/2 + (c + s), so the run-92 "
+        "'odd rational part plus 2cos' is the k = 1 case of a single law: "
+        + "; ".join(reporting) +
+        ". Two rows sit at integer k (18: k = 1, 151: k = 5) and three at half-integer k "
+        "(53: k = 5/2, 234: k = 13/2, 747: k = 25/2), and their pose alphabets differ "
+        "widely (2, 4, 3, 2 and 665 distinct angles); the ring law's k = 1 member is "
+        "exactly 7/2 + sqrt7/2. The Ring family's derived side is that law's, but its "
+        "corner-module sentence does not pack at any tried (k, word) -- the census's own "
+        "ring is 10 boundary axis squares plus 4 tilted squares in the edge gaps plus 4 in "
+        "a central pinwheel, a different sentence shape -- so the ring is registered as a "
+        "declared refusal (" + "; ".join(refusals) + ") and n = 18 is *not* yet "
+        "constructed from grammar.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

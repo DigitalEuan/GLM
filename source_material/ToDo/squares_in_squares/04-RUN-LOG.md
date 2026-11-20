@@ -1597,3 +1597,48 @@ sequences 6/7, lattice 24/28; float audit **195 functions, 0 offenders**;
 4/4; `record_guard.py` OK. No row changed.
 
 Entries `55-THE-BAR-AND-THE-WORD.md`; records `31`-`55`.
+
+## Run 93 — the Q(√7) family, its one word, and a ring that refuses
+
+**What was asked.** Recover the exact word, pose counts and side for every census row whose
+side lies in Q(√7); decide honestly whether they follow n = 18's ring law or split into
+sub-families; then build and gate-verify a field-general Ring family, registering the Q(√7)
+word so n = 18 at `7/2 + √7/2` is constructed rather than read.
+
+**Recovered.** Run 86's sweep names five rows — n = 18, 53, 151, 234, 747 — and control 23
+re-derives each from its own pose: extremes recovered in Q(√7) at 70 digits
+(denominators ≤ 16), side = `far − near + 1` equal from x and from y. Every one carries the
+*census word* `((1+√7)/4, (√7−1)/4)` (unit-checked exactly), though the alphabets differ:
+1, 3, 2, 1 and 663 distinct tilt angles, with 8, 6, 24, 36 and 2 squares at the word.
+
+| n | axis | tilted | side | k |
+|---|---|---|---|---|
+| 18 | 10 | 8 | `7/2 + ½√7` | 1 |
+| 53 | 39 | 14 | `13/2 + ½√7` | 5/2 |
+| 151 | 125 | 26 | `23/2 + ½√7` | 5 |
+| 234 | 198 | 36 | `29/2 + ½√7` | 13/2 |
+| 747 | 83 | 664 | `53/2 + ½√7` | 25/2 |
+
+**The law.** A ring's corner squares sit flush at `±(k + c)`, so
+`L = 2k + 3/2 + (c + s)` — `ring_side` — which is `7/2 + ½√7` at `k = 1` and so contains run
+92's `3 + 2cos` as its `k = 1` case (`2cos = 1/2 + ½√7`). Solving it per row: **integer k for
+two rows (18, 151) and half-integer k for three (53, 234, 747)** — the family splits by the
+parity of `k`, not by the side law.
+
+**The ring sentence refuses.** `ring_frame`, `ring_candidates`, `ring_field` and `p_ring`
+are in `glm_wheels`, field-general, with the exact gate as arbiter; every candidate at
+Q(√7) and 45°, `k = 1, 2` collides or misses the derived side, so the family refuses with
+the declared law `ring_unresolved` and **no Ring cell is registered**. Reading the census
+pose says why: its 18 squares are 10 boundary axis squares + 4 tilted in the edge gaps + 4
+in a central pinwheel — a different sentence shape from four corner modules — and its
+sibling tilted pairs are exactly unit-apart while its module-to-frame distances carry
+0.03–0.07 of slack, so the recorded pose is a polished decimal packing, not an exact contact
+sentence. The exact ring needs the module tangent to the frame and to its gap/pinwheel
+neighbours at once: a coupled solve the run did not finish, recorded as the next job.
+
+**Verification.** `glm_wheels --selftest` **23 controls**, exit 0; spin spatial **46/46**,
+sequences 6/7, lattice 24/28; float audit **200 functions, 0 offenders**;
+`grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage --selftest`
+4/4; `record_guard.py` OK. No row changed.
+
+Entries `56-THE-SQRT7-FAMILY-AND-THE-RING.md`; records `31`-`56`.
