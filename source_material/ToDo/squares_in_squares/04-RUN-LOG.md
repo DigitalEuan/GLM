@@ -1467,3 +1467,51 @@ passing selftest exits 0 and a failing one raises.
 4/4; `record_guard.py` OK. No row changed; nothing new was discovered.
 
 Entries `52-ONE-BUILD-PATH.md`; records `31`-`52`.
+
+---
+
+## Run 90 — one seam law, a malformed declaration, and the ridge rungs
+
+**What was asked.** Unify the Strip/Pocket laws, add a control proving a genuinely
+malformed field declaration is refused by `declaration_overlaps` rather than certifying,
+and extend the spatial wheel to the census's remaining algebraic rungs (Q(sqrt5),
+Q(sqrt7), rational-t) with exact sides calibrated against the delivered table and exact
+refusal laws where constraints fail.
+
+**One seam law.** `_assemble_field` already sets `diamonds`, so `p_strip`'s second
+assignment was dead; `p_pocket` now carries the same `seam` law. Strip and Pocket claims
+differ only in family and parameters — the pocket *is* S(k,1), now stated in the claim.
+
+**Malformed declarations.** Control 20 refuses three ways, all by `declaration_overlaps`:
+two coincident slots and two slots 1/10 apart (caught by the gate, because the insertion
+rule cannot see slot-slot overlap at all), and a slot over an axis cell with the rule
+switched off (caught by the rule). The second case is the one that made the gate load-bearing.
+
+**The ridge.** The strip's seam width is not a special case: with the tilted square
+centred in the seam, the two binding contact conditions are `(1+w)(c+s)/2 = (1+c+s)/2`
+and `(1+w)/2 = (1+c+s)/2`, so `w* = min(1/(c+s), c+s)` and **L = 2k + w***, exactly, at
+clearance 0. At 45 degrees that is `sqrt2/2` — the Strip, cell for cell. The other members:
+`Slope` 2:1 in Q(sqrt5) at `L = 2k + 1/3 sqrt5`; `Seventh` with the word `(sqrt7/4, 3/4)`
+in Q(sqrt7) at `L = 2k + 6 - 2 sqrt7`; `Tilt` t = 1/2 at `L = 2k + 5/7`. Nine new cells
+(k = 1, 2, 3), all four witnesses, **spatial 40/40 certified, 0 refused**. The circle
+identity is checked in the field, so no word is normalised numerically.
+
+**One gate, any field.** `qgate(cls, ...)` is a port of `qsqrt2.gate` over any
+`exact_field.Quad(d)`; the gate, contact-graph, conservation and Decimal witnesses read
+the claim's field instead of assuming sqrt2, and `_tag` rebuilds the grid side in that
+field (the first failure of the run was literally "cannot mix Q(sqrt 2) with Q(sqrt 5)").
+Control 21 proves the port agrees with the original exactly on the three atoms and that
+the 45-degree ridge reproduces the Strip.
+
+**Calibration.** At n = 5 the delivered side is `2 + 1/2 sqrt2 = 2.707107`; the rungs lose
+by `1.39e-3` (Seventh), `7.18e-3` (Tilt) and `3.83e-2` (Slope) — 45 degrees remains the
+best angle of the family. n = 17 and n = 37 cannot be calibrated: those delivered rows
+carry an orientation outside the axis/45-degree alphabet, so they do not lift and have no
+exact side; the cells are recorded as **uncalibrated, not as wins**.
+
+**Verification.** `glm_wheels --selftest` **21 controls** (derived count), exit 0; spin
+spatial **40/40**, sequences 6/7, lattice 24/28; float audit **197 functions, 0
+offenders**; induction acceptance 10/10, 19/19, 40/40 exact; `qsqrt2 --selftest` 11/11;
+`field_triage --selftest` 4/4; `record_guard.py` OK. No row changed.
+
+Entries `53-RIDGE-AND-RUNGS.md`; records `31`-`53`.
