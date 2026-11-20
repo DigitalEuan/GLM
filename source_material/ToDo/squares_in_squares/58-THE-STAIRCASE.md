@@ -99,28 +99,99 @@ rather than left unexplained. The family's own law is `N(k) = 4k² + 4k + 5 + 2|
 the `4k² + 4k + 5` axis layer plus two bricks per wall column — at `L = 2k + 3/2 + (c + s)`,
 which gives 15, 37, 67, 103, 149, 203 at `k = 1..6`.
 
-Two further measurements, both honest negatives. **(i)** A scan of the corner pocket in the
-wall's own frame (120×120 in `(u, v)`, every point gated against the 149) finds the feasible set
-is one diagonal strip spanning `0.53` in `u` and `0.63` in `v`, and any two word-aligned squares
-need one coordinate at least `1` apart — so at most **one** more word-aligned square fits there
-(for instance `(u + 12, m = 17)`, exactly tangent along `u` to its twin), and the word-aligned
-ceiling at this side is 150, not 151. This is a measurement, not a certificate, and a single
-dilated brick carries no grammar, so the family stays at 149. **(ii)** The spin over `k = 1..9`
-at the same word never beats a delivered row: `k = 1` behind by 0.8229, `k = 3` by 0.1158,
-`k = 5` by 0.1158, `k = 6` by 0.0447, while `k = 2, 4, 7, 8, 9` have no delivered row at those
-counts and are recorded as uncalibrated — every comparison exact in `Decimal` through
-`DecimalWitness.scalar`. The staircase is a *reading* of the census's row, not a better packing.
+The spin over `k = 1..9` at the same word never beats a delivered row: `k = 1` behind by 0.8229,
+`k = 3` by 0.1158, `k = 5` by 0.1158, `k = 6` by 0.0447, while `k = 2, 4, 7, 8, 9` have no
+delivered row at those counts and are recorded as uncalibrated — every comparison exact in
+`Decimal` through `DecimalWitness.scalar`. The staircase is a *reading* of the census's row, not
+a better packing.
 
-## 5. Verification
+## 5. The pocket, decided exactly
 
-* `glm_wheels.py --selftest` — **25 controls**, exit 0. Control 25 is the staircase: the
+The corner pocket is decided by an exact cage (`staircase_cage`) — no scan, no tolerance, no
+float anywhere in the decision.
+
+A centre `p` of a unit square of word `w` is feasible iff it clears every sentence square on one
+of the four declared axes — i.e. iff it lies outside every square's **no-fit octagon**, the
+intersection of four exact slabs. The cage covers the whole `L`-box with exact `Quad` boxes in
+the candidate word's own frame and prunes a box only when that is **provable**: the box lies
+wholly inside one square's octagon, or wholly outside the `L`-box. Every surviving box is
+therefore a superset of feasible centres, and every quantity below is exact `Quad`/`Fraction`
+arithmetic — the slab itself is `23/4`, a rational, because `L/2 = 23/4 + √7/4` and the word's
+half-extent is `√7/4`.
+
+For the census word against the 149 squares:
+
+```
+capacity = 1          cover = 24 exact boxes at side 1/8
+cover extent          u: 5/8 = 0.625        v: 3/4 = 0.75
+witness centre        (u, v) = (97/16, 31/16)
+```
+
+Two word-aligned unit squares that do not overlap have centres at least `1` apart along one of
+that word's axes, so a cover narrower than `1` in **both** axes holds at most one centre: the
+pocket's word-aligned capacity is exactly **1**, not `≥ 2`. The square it holds is the **cap
+brick** — the last column's `A` brick repeated one column out (`u + 12`, `v = (17 + √7)/8`),
+exactly tangent along `u` to its twin (`Δu = 1`, `Δv = 0`).
+
+```
+N = 150 = 149 + 1 cap brick      L = 23/2 + ½√7
+clearance = 0     contacts = 451     violations = 0
+```
+
+And with that brick in place the cage is **empty for the census word itself** — the pocket is
+closed, so 150 is the word-aligned ceiling at this side, not merely a bound.
+
+## 6. The word spin: the closure law is one line
+
+The two brick layers are `v_A − v_B = 2c(c + s) − (1 + s)` apart, so the residual is
+
+```
+v_A − v_B − 1 = 2c(c + s) − (1 + s) − 1 = s·(2(c − s) − 1)
+```
+
+which vanishes iff `s = 0` (the degenerate axis word) or `c − s = 1/2` — and `c − s = 1/2` on
+the unit circle pins `(c, s) = ((1 + √7)/4, (−1 + √7)/4)` up to signs. The staircase is
+**field-rigid**: it closes at one word and refuses every other by `staircase_layer_gap`.
+
+Spun over **62 declared unit words** (the wheel's 45° word in Q(√2), the Slope 2:1 word in
+Q(√5), the Seventh and every other unit word of Q(√7) at height ≤ 8, and every Pythagorean word
+with denominator ≤ 13), the constructor is actually run, and it closes at exactly one:
+
+| word | field | residual `v_A − v_B − 1` | verdict |
+|---|---|---|---|
+| 45° | Q(√2) | `−½√2` | `staircase_layer_gap` |
+| Slope 2:1 | Q(√5) | `2/5 − 1/5√5` | `staircase_layer_gap` |
+| Seventh `(√7/4, 3/4)` | Q(√7) | `−15/8 + 3/8√7` | `staircase_layer_gap` |
+| `t = 1/2` | Q | `−28/25` | `staircase_layer_gap` |
+| `t = 1/3` | Q | `−9/25` | `staircase_layer_gap` |
+| `t = 1/5` | Q | `5/169` | `staircase_layer_gap` |
+| **census** | Q(√7) | **0** | **closed** |
+
+## 7. The second word: no field-compatible word places the 151st square
+
+The 150-square sentence has a closed pocket for the census word. Could a *second* exact word
+place the 151st square at `L = 23/2 + ½√7`? The same exact cage answers it against the 150
+squares, for **78 field-compatible words**: all 22 unit words of Q(√7) at height ≤ 8 (the
+census word and its mirrors, the Seventh, the Pell-type words such as `(5 + √7)/8`, the rational
+words) and every Pythagorean word with denominator ≤ 13, which embeds in Q(√7) as a rational
+pair — so the whole test stays in one field and every comparison in it is exact.
+
+**Every cage is empty: 78 of 78.** No second word places the 151st square inside the `L`-box,
+so the obstruction is not this one word's arithmetic — the pocket is closed for
+`Q(√7) ∪ Q_Pyth`, and the table's escape is precisely a rotation that lies in neither.
+
+## 8. Verification
+
+* `glm_wheels.py --selftest` — **26 controls**, exit 0. Control 25 is the staircase: the
   125 = 55 + 66 + 4 split, the twelve-column walk with its three repeats, all 24 named-axis
   tangencies exact, the gate at `N = 149`, `L = 23/2 + ½√7`, clearance 0, the 9.0e-8 census
-  agreement, the thirteenth column's exact pinch, and the odd word's non-membership in Q(√7),
-  plus the `k = 1..9` spin: the count law `4k² + 4k + 5 + 2|columns(k)|` and the assertion that
-  no member beats its delivered row (exact `Decimal` differences).
-  Control 5 exercises `staircase_layer_gap` on the 45° word; control 24 now records the
-  k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
+  agreement, the thirteenth column's exact pinch, the odd word's non-membership in Q(√7), the
+  exact cage (capacity 1, cover `5/8` × `3/4`, witness centre), the certified **150**, the cap
+  brick's `Δu = 1` tangency, the empty cage against the 150, and the `k = 1..9` calibration
+  spin. Control 26 is the word spin (62 words, one closed, the residual identity
+  `2c(c+s) − (1+s) − 1 = s(2(c−s) − 1)`) and the second-word test (78 field-compatible words,
+  78 empty cages). Control 5 exercises `staircase_layer_gap` on the 45° word; control 24
+  records the k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
 * `glm_wheels.py` — spin: spatial **48/48 certified**, 0 refused (`Ring k=1`, `Staircase k=5`);
   sequences 6/7; lattice 24/28.
 * `glm_wheels.py --audit` — bytecode float audit of every decision function.

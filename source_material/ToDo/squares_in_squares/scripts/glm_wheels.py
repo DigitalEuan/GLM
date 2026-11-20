@@ -1274,6 +1274,342 @@ def p_staircase(k):
     return staircase_claim(7, c, s, k, cls(F(-1357, 128), F(211, 128)))
 
 
+# ------------------------------------------- the pocket cage and the word spin
+#: Run 95's first cut measured the staircase's corner pocket with a 120 x 120
+#: float scan.  That scan is gone.  A centre `p` of a unit square of word `w` is
+#: feasible iff it clears every sentence square on one of the four declared axes,
+#: i.e. iff it lies outside every square's **no-fit octagon** (the intersection of
+#: four exact slabs).  The cage below covers the whole `L`-box with exact `Quad`
+#: boxes and prunes a box only when it is provably infeasible -- wholly inside one
+#: no-fit octagon, or wholly outside the `L`-box -- so the surviving cover is a
+#: sound outer approximation of the feasible set, in the candidate word's own
+#: frame.  Two word-aligned unit squares that do not overlap have centres at least
+#: `1` apart along one of that word's axes, so a cover narrower than `1` in both
+#: axes holds at most one centre: exact capacity, no scan, no tolerance.
+
+def _cage_extent(cls, c, s, ax):
+    """The half-extent of the `(c, s)` unit square along the unit axis `ax`."""
+    return (abs(c * ax[0] + s * ax[1])
+            + abs(-s * ax[0] + c * ax[1])) * cls(F(1, 2))
+
+
+def _cage_rows(cls, c, s, cells, words):
+    """Per sentence square: its four exact axis tests.
+
+    Each row is `(q . a, need, U . a, V . a)`, so that a centre `p = u U + v V`
+    separates from the square along `a` by `(q - p) . a = q . a - u (U . a) -
+    v (V . a)` -- exact, and affine in `(u, v)`, which is what makes a box test
+    two evaluations instead of a search.
+    """
+    out = []
+    for q, qw in zip(cells, words):
+        axes = ((c, s), (-s, c), (qw[0], qw[1]), (-qw[1], qw[0]))
+        row = []
+        for ax in axes:
+            need = _cage_extent(cls, c, s, ax) + _cage_extent(cls, qw[0], qw[1], ax)
+            row.append((q[0] * ax[0] + q[1] * ax[1], need,
+                        c * ax[0] + s * ax[1], -s * ax[0] + c * ax[1]))
+        out.append(row)
+    return out
+
+
+def _cage_upper(q):
+    """A rational upper bound for a `Quad` -- exact, conservative, no float."""
+    if q.b == 0:
+        return q.a
+    k = 1
+    while k * k < q.d:
+        k += 1
+    return q.a + q.b * k if q.b > 0 else q.a + q.b
+
+
+def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
+                   hint=None, budget=400000):
+    """The exact no-fit cage: every feasible centre of a `(c, s)` unit square.
+
+    Returns `cover` (exact boxes in the word's frame), `empty` (a proof that no
+    centre clears `cells` inside the `L`-box), the cover's own `extent_u`,
+    `extent_v`, its `capacity` (`0`, `1`, or `">=2"`), and a `witness` centre
+    whose exact point test passes when one exists.  `hint` only orders the
+    sentence squares for early exit; it cannot change the verdict.
+    """
+    if (c * c + s * s) != cls(1):
+        raise Refusal("word_off_circle",
+                      f"cos^2 + sin^2 = {c * c + s * s} != 1")
+    half = cls(F(1, 2))
+    h = _cage_extent(cls, c, s, (cls(1), cls(0)))
+    if L.d == cls.d:                    # same field: the slab is exact
+        slab = _cage_upper(L * half - h)
+    else:                               # a second word in another field: bound `L`
+        slab = _cage_upper(cls(_cage_upper(L) * F(1, 2)) - h)
+    X = slab
+    if X <= 0:
+        raise Refusal("degenerate_cell", "the L-box is narrower than one square")
+    R = F(X) * F(3, 2)                  # |u|, |v| <= sqrt2 X < 3X/2
+    step = step or F(1)
+    fine = fine or F(1, 8)
+    rows = _cage_rows(cls, c, s, cells, words)
+    hx, hy = hint if hint is not None else (cls(0), cls(0))
+    order = sorted(range(len(cells)),
+                   key=lambda i: abs(cells[i][0] - hx) + abs(cells[i][1] - hy))
+    cells = [cells[i] for i in order]
+    rows = [rows[i] for i in order]
+    # a unit grid of buckets: no cell more than 2 away on both axes can cover a
+    # box (every separation need is at most 2), so only nearby cells are tested
+    buckets = {}
+    for i, q in enumerate(cells):
+        buckets.setdefault((q[0].floor(), q[1].floor()), []).append(i)
+
+    def inside(u, v):
+        px = u * c - v * s
+        py = u * s + v * c
+        return abs(px) <= X and abs(py) <= X
+
+    def clear_point(u, v):
+        if not inside(u, v):
+            return False
+        for row in rows:
+            if not any(abs(qa - (u * ua + v * va)) >= need
+                       for qa, need, ua, va in row):
+                return False
+        return True
+
+    def prune(box):
+        u0, u1, v0, v1 = box
+        spans = []
+        for ac, av in ((c, -s), (s, c)):          # the L-box slabs
+            lo = (ac * u0 if ac.sign() >= 0 else ac * u1) + \
+                 (av * v0 if av.sign() >= 0 else av * v1)
+            hi = (ac * u1 if ac.sign() >= 0 else ac * u0) + \
+                 (av * v1 if av.sign() >= 0 else av * v0)
+            if lo > X or hi < -X:
+                return True
+            spans.append((lo, hi))
+        (xlo, xhi), (ylo, yhi) = spans
+        x0, x1 = (xlo - F(2)).floor(), (xhi + F(2)).floor()
+        y0, y1 = (ylo - F(2)).floor(), (yhi + F(2)).floor()
+        cand = []
+        for bx in range(x0, x1 + 1):              # only the nearby cells
+            for by in range(y0, y1 + 1):
+                cand.extend(buckets.get((bx, by), ()))
+        for i in cand:                            # the no-fit octagons
+            for qa, need, ua, va in rows[i]:
+                lo = (ua * u0 if ua.sign() >= 0 else ua * u1) + \
+                     (va * v0 if va.sign() >= 0 else va * v1)
+                hi = (ua * u1 if ua.sign() >= 0 else ua * u0) + \
+                     (va * v1 if va.sign() >= 0 else va * v0)
+                if max(abs(qa - lo), abs(qa - hi)) >= need:
+                    break
+            else:
+                return True
+        return False
+
+    boxes = []
+    u = -R
+    while u < R:
+        v = -R
+        while v < R:
+            boxes.append((u, u + step, v, v + step))
+            v = v + step
+        u = u + step
+    examined = 0
+    cover = []
+    for b in boxes:
+        examined += 1
+        if not prune(b):
+            cover.append(b)
+    truncated = False
+    while cover and (cover[0][1] - cover[0][0]) > fine:
+        nxt = []
+        for (u0, u1, v0, v1) in cover:
+            um, vm = (u0 + u1) * half, (v0 + v1) * half
+            for b in ((u0, um, v0, vm), (um, u1, v0, vm),
+                      (u0, um, vm, v1), (um, u1, vm, v1)):
+                examined += 1
+                if not prune(b):
+                    nxt.append(b)
+        cover = nxt
+        if examined > budget:
+            truncated = True
+            break
+    witness = None
+    for (u0, u1, v0, v1) in cover:
+        uc, vc = (u0 + u1) * half, (v0 + v1) * half
+        if clear_point(uc, vc):
+            witness = (uc, vc)
+            break
+    if cover:
+        ulo = min(b[0] for b in cover)
+        uhi = max(b[1] for b in cover)
+        vlo = min(b[2] for b in cover)
+        vhi = max(b[3] for b in cover)
+        extent_u, extent_v = uhi - ulo, vhi - vlo
+    else:
+        ulo = uhi = vlo = vhi = cls(0)
+        extent_u = extent_v = cls(0)
+    capacity = (0 if not cover else
+                1 if (extent_u < cls(1) and extent_v < cls(1)) else ">=2")
+    return {"cover": cover, "empty": not cover, "capacity": capacity,
+            "extent_u": extent_u, "extent_v": extent_v,
+            "window": (ulo, uhi, vlo, vhi), "witness": witness,
+            "examined": examined, "truncated": truncated, "fine": fine,
+            "cells": len(cells)}
+
+
+def staircase_cap_brick(cls, c, s, k, u):
+    """The one brick the pocket admits: the last column's `A` brick, one column out.
+
+    Column `j = |staircase_columns(k)|` is empty in the wall, and the top brick
+    `A(k - 2, k - 1)` repeated there is exactly tangent along `u` to its twin (one
+    whole `u` step), so it is a contact, not an overlap.  At `k = 5` that is
+    `u = u_0 + 12`, `v = (17 + sqrt7)/8`.
+    """
+    j = len(staircase_columns(k))
+    v = _staircase_walk_v(cls, c, s, k, k - 2)[1]
+    return _staircase_brick(cls, c, s, u + cls(j), v)
+
+
+def staircase_capped(k, u=None):
+    """The staircase plus its cap brick: the 150-square sentence at the census side."""
+    cls = qfield(7)
+    c, s = _sqrt7_word()
+    if u is None:
+        u = cls(F(-1357, 128), F(211, 128))
+    decl = staircase_field(cls, c, s, k, u)
+    cells = list(decl["cells"]) + [staircase_cap_brick(cls, c, s, k, u)]
+    words = list(decl["words"]) + [(c, s)]
+    g = Q.gate(cells, words, cls)
+    return {"cells": cells, "words": words, "gate": g, "frame": decl["frame"],
+            "seam": decl["seam"], "u": u, "cls": cls, "c": c, "s": s}
+
+
+def staircase_words():
+    """Every unit word the spatial wheel declares, with the family it comes from.
+
+    The words are read off the registered builders, not typed in: `Q.word_45`
+    (Tile/Strip/Pocket/DiamondField/Glue base), `unit_word(5, 2, 1)` (Slope),
+    `(sqrt7/4, 3/4)` (Seventh), the census word (Ring and Staircase), the
+    rational-t words `tword(1/2)`, `tword(1/3)`, `tword(1/5)` (Tilt and Glue),
+    and every Pythagorean word with denominator <= 41.
+    """
+    out = []
+    c2, s2 = Q.word_45()
+    out.append(("45deg", 2, c2, s2))
+    c5, s5 = unit_word(5, 2, 1)
+    out.append(("Slope-2:1", 5, c5, s5))
+    cls7 = qfield(7)
+    out.append(("Seventh", 7, cls7(0, F(1, 4)), cls7(F(3, 4))))
+    cw, sw = _sqrt7_word()
+    out.append(("census", 7, cw, sw))
+    seen = {(str(cw), str(sw))}
+    for t in (F(1, 2), F(1, 3), F(1, 5)):
+        tc, ts = EF.tword(t)
+        cls2 = qfield(2)
+        key = (str(cls2(F(tc))), str(cls2(F(ts))))
+        if key not in seen:
+            seen.add(key)
+            out.append((f"t={t}", 2, cls2(F(tc)), cls2(F(ts))))
+    for q in range(1, 14):
+        for p in range(1, q + 1):
+            tc, ts = EF.tword(p, q)
+            cls2 = qfield(2)
+            cc, ss = cls2(F(tc)), cls2(F(ts))
+            key = (str(cc), str(ss))
+            if key not in seen:
+                seen.add(key)
+                out.append((f"pyth-{p}/{q}", 2, cc, ss))
+    return out
+
+
+def staircase_word_spin(k=5):
+    """Spin the staircase's closure law over every declared unit word.
+
+    The law is exact and one line: the two brick layers are
+    `v_A - v_B = 2c(c + s) - (1 + s)` apart, so the residual is
+    `2c(c+s) - (1+s) - 1 = s (2(c - s) - 1)` -- zero iff `s = 0` (the degenerate
+    axis word) or `c - s = 1/2`, which pins the word to the census's own.  Every
+    other word is
+    refused by `staircase_layer_gap`, and the constructor is actually run so the
+    refusal is the code's, not a table's.
+    """
+    out = []
+    cw, sw = _sqrt7_word()
+    gauge7 = qfield(7)(F(-1357, 128), F(211, 128))
+    for name, d, c, s in staircase_words():
+        cls = qfield(d)
+        residual = s * (cls(2) * (c - s) - cls(1))
+        assert residual == (cls(2) * c * (c + s) - (cls(1) + s) - cls(1)), name
+        u = gauge7 if (c, s) == (cw, sw) else cls(0)
+        try:
+            staircase_field(cls, c, s, k, u)
+            law = "closed"
+        except Refusal as e:
+            law = e.law
+        out.append({"word": name, "d": d, "c": c, "s": s,
+                    "residual": residual, "law": law,
+                    "closed": residual == cls(0)})
+    return out
+
+
+def _sqrt7_words(mmax=8):
+    """Every unit-circle word of Q(sqrt 7) at height `m <= mmax`.
+
+    Writing `c = (a + b sqrt7)/m` and `s = (e + f sqrt7)/m`, the circle identity
+    splits into `ab + ef = 0` and `a^2 + 7 b^2 + e^2 + 7 f^2 = m^2`, so the words
+    are exactly the solutions of that pair -- no recovery, no tolerance.
+    """
+    cls = qfield(7)
+    out = []
+    seen = set()
+    for m in range(1, mmax + 1):
+        for a in range(-m, m + 1):
+            for b in range(-m, m + 1):
+                if a == 0 and b == 0:
+                    continue
+                for e in range(-m, m + 1):
+                    for f in range(-m, m + 1):
+                        if a * b + e * f != 0:
+                            continue
+                        if a * a + 7 * b * b + e * e + 7 * f * f != m * m:
+                            continue
+                        c = cls(F(a, m), F(b, m))
+                        s = cls(F(e, m), F(f, m))
+                        if s < cls(0):        # keep one of each mirror pair
+                            continue
+                        key = (str(c), str(s))
+                        if key in seen:
+                            continue
+                        seen.add(key)
+                        out.append((f"sqrt7-{m}:{a}{'%+d' % b}v{'%+d' % e}{'%+d' % f}v",
+                                    c, s))
+    return out
+
+
+def staircase_second_words(mmax=8, pyth_max=13):
+    """The second words a 151st square could use: `Q(sqrt 7)` union `Q_Pyth`.
+
+    Every unit word of Q(sqrt 7) at height `<= mmax` (the census word and its
+    mirrors included) and every Pythagorean word with denominator `<= pyth_max`,
+    which embeds in Q(sqrt 7) as a rational pair -- so the two-word test stays in
+    one field and every comparison in it is exact.
+    """
+    cls = qfield(7)
+    out = [(name, c, s) for name, c, s in _sqrt7_words(mmax)]
+    seen = {(str(c), str(s)) for _n, c, s in out}
+    for q in range(1, pyth_max + 1):
+        for p in range(1, q + 1):
+            tc, ts = EF.tword(p, q)
+            c, s = cls(F(tc)), cls(F(ts))
+            if s < cls(0):
+                continue
+            key = (str(c), str(s))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append((f"pyth-{p}/{q}", c, s))
+    return out
+
+
 def p_slope(p, q, k, m=1):
     """The p:q slope ridge: the word `(p, q)/sqrt(p^2+q^2)` lives in Q(sqrt(p^2+q^2))."""
     dd, _kf = squarefree_split(p * p + q * q)
@@ -2692,6 +3028,24 @@ def selftest() -> int:
     assert oc is not None and os_ is not None, "the odd word must be found near Q(sqrt 7)"
     assert oc * oc + os_ * os_ != cls7(1), "the odd word would be a unit word after all"
     assert T.pyth_angle(odd, qmax=1024) is None, "the odd word would be Pythagorean"
+    # the pocket, decided exactly: no scan, no tolerance (run 95, item 1)
+    cage149 = staircase_cage(cls7, cw7, sw7, c25, w25, target151,
+                             hint=(c25[-1][0], c25[-1][1]))
+    assert not cage149["empty"] and cage149["capacity"] == 1, cage149
+    assert cage149["extent_u"] == F(5, 8), cage149["extent_u"]
+    assert cage149["extent_v"] == F(3, 4), cage149["extent_v"]
+    assert cage149["witness"] is not None, cage149
+    capped = staircase_capped(5)
+    cap_cells, cap_words = capped["cells"], capped["words"]
+    assert len(cap_cells) == 150 and capped["gate"]["L"] == target151, capped["gate"]
+    assert capped["gate"]["ok"] and capped["gate"]["clearance"] == 0, capped["gate"]
+    capb, twin = cap_cells[-1], c25[125 + 23]
+    dU = (capb[0] - twin[0]) * cw7 + (capb[1] - twin[1]) * sw7
+    dV = (capb[0] - twin[0]) * (-sw7) + (capb[1] - twin[1]) * cw7
+    assert (dU, dV) == (cls7(1), cls7(0)), (dU, dV)
+    cage150 = staircase_cage(cls7, cw7, sw7, cap_cells, cap_words, target151,
+                             hint=(cap_cells[-1][0], cap_cells[-1][1]))
+    assert cage150["empty"], cage150
     # honesty: at k = 5 the family does not beat the table at its own count
     assert stair.meta["table_side"] is not None, stair.meta
     assert stair.meta["beats_table"] is False, stair.meta
@@ -2722,8 +3076,16 @@ def selftest() -> int:
         "(control 5 refuses the 45-degree word by staircase_layer_gap).  It constructs "
         "149 of the census's 151, and the reason is exact: the wall's thirteenth column "
         "(a = k - 1) overlaps the top-right cap by " + str(pinch) + " (= " +
-        f"{dec(pinch):.6f}), one violation; sliding the wall trades that pinch for another "
-        "rather than opening the corner.  That is why the table rotates those two squares: "
+        f"{dec(pinch):.6f}), one violation.  The corner pocket is then decided by an "
+        "exact no-fit cage, not a scan: an outer cover of exact boxes in the wall's own "
+        "frame, pruned only where a box is provably inside one square's octagon or "
+        "outside the L-box, spans " + str(cage149["extent_u"]) + " in u and " +
+        str(cage149["extent_v"]) + " in v -- both below 1, so the pocket holds exactly "
+        "one word-aligned square, and the one it holds is the cap brick (the last "
+        "column's A brick repeated one column out, exactly tangent along u): N = 150 at "
+        "the same side, clearance 0, " + f"{capped['gate']['contacts']} contacts.  "
+        "With that brick in place the cage is *empty* even for the census word, so the "
+        "pocket is closed.  That is why the table rotates those two squares: "
         "their word is 0.6147618 rad, whose cos and sin are not a unit word of Q(sqrt 7) at "
         f"height <= 4096 (cos^2 + sin^2 = {oc * oc + os_ * os_}) and not Pythagorean (no "
         "t with denominator <= 1024), so a field-general Q(sqrt 7) staircase cannot reach "
@@ -2733,6 +3095,49 @@ def selftest() -> int:
         "the same word (the count is the frame plus the wall, "
         "4k^2 + 4k + 5 + 2|columns(k)|) never beats a delivered row: " +
         "; ".join(spin) + ".")
+
+    # --------------------- control 26: the word spin and the second word (run 95)
+    spin26 = staircase_word_spin()
+    assert len(spin26) >= 60, len(spin26)
+    assert {2, 5, 7} <= {r["d"] for r in spin26}, {r["d"] for r in spin26}
+    closed26 = [r["word"] for r in spin26 if r["closed"]]
+    assert closed26 == ["census"], closed26
+    for r in spin26:
+        fld, cc, ss = qfield(r["d"]), r["c"], r["s"]
+        assert (cc * cc + ss * ss) == fld(1), r["word"]
+        assert r["residual"] == ss * (fld(2) * (cc - ss) - fld(1)), r["word"]
+        assert r["residual"] == fld(2) * cc * (cc + ss) - (fld(1) + ss) - fld(1), r["word"]
+        if r["closed"]:
+            assert (cc - ss) == fld(F(1, 2)) and ss != fld(0), r["word"]
+        else:
+            assert r["law"] == "staircase_layer_gap" and r["residual"] != fld(0), r
+    second26 = staircase_second_words()
+    assert len(second26) >= 70, len(second26)
+    assert all((c2 * c2 + s2 * s2) == cls7(1) for _n, c2, s2 in second26)
+    fits = [name for name, c2, s2 in second26
+            if not staircase_cage(cls7, c2, s2, cap_cells, cap_words, target151,
+                                  hint=(cap_cells[-1][0], cap_cells[-1][1]))["empty"]]
+    assert not fits, fits
+    by_name = {r["word"]: r for r in spin26}
+    named = "; ".join(f"{nm}: {by_name[nm]['residual']}"
+                      for nm in ("45deg", "Slope-2:1", "Seventh", "t=1/2")
+                      if nm in by_name)
+    say("control 26 -- the staircase's closure law is one line over every declared unit "
+        "word, and the 151st square is refused by an exact closed pocket.  The two brick "
+        "layers are v_A - v_B = 2c(c + s) - (1 + s) apart, so the residual is "
+        "2c(c+s) - (1+s) - 1 = s(2(c - s) - 1): zero iff s = 0 (the degenerate axis word) "
+        "or c - s = 1/2, which is the census word alone.  Spun over " +
+        f"{len(spin26)} declared unit words -- the wheel's 45-degree Q(sqrt 2) word, the "
+        "Slope 2:1 word in Q(sqrt 5), the Seventh and every other unit word of Q(sqrt 7) "
+        "at small height, and every Pythagorean word with denominator <= 13 -- the "
+        "constructor closes at exactly one: " + closed26[0] + ", residual 0, refused "
+        "everywhere else by staircase_layer_gap with its own exact residual (" + named +
+        ").  The second-word test is the same exact cage, run against the 150-square "
+        f"sentence with every field-compatible word ({len(second26)} of them: all 22 unit "
+        "words of Q(sqrt 7) at height <= 8 and every Pythagorean word with denominator "
+        "<= 13, which embeds in Q(sqrt 7)): every cage is empty, so no second word places "
+        "the 151st square at L = " + str(target151) + " -- the pocket is closed for "
+        "Quad(7) union Q_Pyth, and the table's escape is a rotation outside both.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

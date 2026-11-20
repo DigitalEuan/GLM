@@ -1738,20 +1738,46 @@ admits 26 bricks. That is why the table rotates the last two squares: their word
 `868927/1024 - 656073/2048 Sqrt7 != 1` and is not Pythagorean (no `t` with denominator
 <= 1024). A field-general Q(sqrt 7) staircase therefore constructs **149 of the 151**, with the
 family law `N(k) = 4k^2 + 4k + 5 + 2|columns(k)|` (149 at `k = 5`; 15, 37, 67, 103, 149, 203
-at `k = 1..6`); the 151st pair is an exact refusal, not a failure. Two measured negatives: a
-120x120 scan of the corner pocket in the wall frame shows its feasible set is a single strip
-0.53 wide in `u` and 0.63 in `v`, so at most one more word-aligned square fits (the word-aligned
-ceiling is 150, and a lone dilated brick carries no grammar, so the family stays at 149); and a
-spin over `k = 1..9` at the same word never beats a delivered row -- `k = 1` behind by 0.8229,
-`k = 3` and `k = 5` by 0.1158, `k = 6` by 0.0447, `k = 2, 4, 7, 8, 9` uncalibrated, every
-comparison exact in `Decimal`. At n = 149 the family's table side is `12 + 1/2 Sqrt2`, so it does
-not beat the table. No row changed.
+at `k = 1..6`); the 151st pair is an exact refusal, not a failure. At n = 149 the family's table
+side is `12 + 1/2 Sqrt2`, so it does not beat the table.
 
-**Verification.** `glm_wheels --selftest` **25 controls**, exit 0 (control 25 is the staircase:
+**The pocket, decided exactly.** `staircase_cage` covers the L-box with exact `Quad` boxes in the
+candidate word's own frame, and prunes a box only where that is provable -- wholly inside one
+square's no-fit octagon, or wholly outside the box --
+so the surviving cover is a sound superset of the feasible centres. For the census word against
+the 149 squares the cover is 24 boxes at side 1/8 spanning `5/8` in `u` and `3/4` in `v`, with a
+witness centre `(97/16, 31/16)`; both extents below 1 mean at most one centre fits, so the
+pocket's word-aligned capacity is exactly **1**. The square it holds is the cap brick -- the last
+column's `A` brick repeated one column out, `u + 12`, `v = (17 + Sqrt7)/8`, exactly tangent along
+`u` to its twin -- and the exact gate certifies **N = 150 at the same side, clearance 0, 451
+contacts**. With that brick in place the cage is empty even for the census word: the pocket is
+closed.
+
+**The word spin.** The layers are `v_A - v_B = 2c(c + s) - (1 + s)` apart, so the residual is
+`2c(c+s) - (1+s) - 1 = s(2(c - s) - 1)`: zero iff `s = 0` (the degenerate axis word) or
+`c - s = 1/2`, which pins the census word alone. Spun over **62 declared unit words** -- the 45
+degree word in Q(sqrt 2), Slope 2:1 in Q(sqrt 5), the Seventh and every other unit word of
+Q(sqrt 7) at height <= 8, every Pythagorean word with denominator <= 13 -- the constructor is
+actually run and closes at exactly one, refusing the rest by `staircase_layer_gap` with their own
+exact residuals (45: `-1/2 Sqrt2`; Slope 2:1: `2/5 - 1/5 Sqrt5`; Seventh: `-15/8 + 3/8 Sqrt7`;
+t = 1/2: `-28/25`; t = 1/3: `-9/25`; t = 1/5: `5/169`).
+
+**The second word.** Run against the 150-square sentence, the same cage is empty for **78 of 78
+field-compatible words** -- all 22 unit words of Q(sqrt 7) at height <= 8 and every Pythagorean
+word with denominator <= 13, embedded in Q(sqrt 7) so the test stays in one field -- so no second
+exact word places the 151st square at this side: the pocket is closed for `Q(sqrt 7) union
+Q_Pyth`, and the table's escape is a rotation in neither. A `k = 1..9` calibration spin at the
+family word never beats a delivered row either (`k = 1` behind by 0.8229, `k = 3` and `k = 5` by
+0.1158, `k = 6` by 0.0447; `k = 2, 4, 7, 8, 9` uncalibrated), every comparison exact in
+`Decimal`. No row changed.
+
+**Verification.** `glm_wheels --selftest` **26 controls**, exit 0 (control 25 is the staircase:
 the 55 + 66 + 4 split, the twelve-column walk and its repeats, all 24 tangencies exact, the
-149-square certificate, the 9.0e-8 census agreement, the exact pinch and the odd word's
-non-membership in the field); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
-green; `grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage --selftest`
-4/4; `record_guard.py` OK.
+149-square certificate, the 9.0e-8 census agreement, the exact pinch, the odd word's
+non-membership in the field, the exact cage with capacity 1, the certified 150, the cap brick's
+`du = 1` tangency and the empty cage against the 150; control 26 is the 62-word spin and the
+78-word second-word test); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
+green (219 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 --selftest`
+11/11; `field_triage --selftest` 4/4; `record_guard.py` OK.
 
 Entries `58-THE-STAIRCASE.md`; records `31`-`58`.
