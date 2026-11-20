@@ -1779,23 +1779,33 @@ its cosine is not a field element, so this is *measured* where it cannot be cage
 at `1e-25` into Q(sqrt 7) (`cos^2 + sin^2 >= 1`, the caged square is the table's square grown by
 `1e-25`), the rotation finds a placement against the exact 149 and the exact gate certifies
 **N = 150 at `23/2 + 1/2 Sqrt7`, clearance 0, 449 contacts** (449 is the mixed sentence's own
-gate; the census cap-brick 150 is 451). **No placement of the 151st was found**: two such squares
-side by side along the word's own `v` are one `(1, 2)` rectangle in that frame, and that cage
-against the 149 **degenerates** -- its cover shrinks to a single box of width `1e-3` with no
-witness instead of closing, which is a failure to find a placement and not a proof that none
-exists (an exact `17 x 17` point scan inside it finds no feasible pair either); with the cap brick
-in place the cage is empty for the rotation too, and with the **census** word the same rectangle
-cage is *empty* -- that one is an exact proof, the same fact as capacity 1 read another way. So
-**no 151-square sentence was found at the census side**; what is certified is the 150. The delivered row
+gate; the census cap-brick 150 is 451). **The 151st is excluded exactly.** Two unit
+squares of one word overlap unless their centres differ by at least 1 along one of that word's
+axes, so the pair is settled axis by axis. Along `u` the `(2, 1)` rectangle's cage is **empty**.
+Along `v` the new `staircase_chords` proof closes it: at a fixed `u` the sentence forbids a union
+of exact `Quad` intervals (a square covers `(u, v)` iff all four of its axis tests fail, so its
+forbidden set is the intersection of four linear intervals), the free set is the exact complement,
+and each block of `u` shrinks every forbidden interval to the part common to the whole block --
+under-approximating the forbidden set, so the free set is over-approximated and the bound is
+sound. Over 16 blocks of the cage's own window all 16 close, largest free chord `0.558490 < 1`:
+no two squares of the table's rotation are 1 apart along either axis, in exact `Q(sqrt 7)`
+arithmetic, no scan, no tolerance. With the cap brick in place the cage is empty for the rotation
+too, and with the **census** word the `(1, 2)` rectangle cage is empty -- the same fact as
+capacity 1 read another way. So **151 is refused at the census side by proof**; what is certified
+is the 150.  The box cage alone cannot settle this pair (its per-axis test is weaker than
+pointwise coverage, so the `(1, 2)` cover degenerates), and the instrument had two honest repairs
+on the way: the candidate-cell bucket radius is now read off the rows (`ceil` of the largest
+separation need) instead of being hard-coded to 2 -- which is only sound for a unit square -- and
+the rational pre-filter run 95 added was *skipping* the cells that kill a box, so it is gone (the
+cage is tight again; the 66-class sweep costs 21.6 s). The delivered row
 reaches 151 by tolerance instead -- replaying its own two rotation squares against the exact 149
 gives worst pair slack `-2.365e-9` (an odd square against a wall brick), an overlap, so the
 table's n = 151 is a 12-decimal pose held at ~`1e-9` and not a packing at the exact side.
 
 **The suite's cost.** The cage work run 95 added is paid back where it was spent: the 78-word
-second-word sweep now runs **66 rotation classes** (a quarter turn cannot change a cage's answer)
-and prunes with a **rational pre-filter** that skips any cell whose own coordinate is further from
-the whole box than that cell's largest separation need -- a cell that skips cannot cover the box,
-so no proof is weakened. The sweep goes from **40.0 s to 19.5 s** with every verdict unchanged
+second-word sweep now runs **66 rotation classes** (a quarter turn cannot change a cage's answer),
+and the bucket radius is read off the rows instead of assumed. The sweep goes from **40.0 s to
+21.6 s** with every verdict unchanged
 (149 cage capacity 1, cover `5/8` x `3/4`; 66 of 66 empty; cap brick still `du = 1` tangent), and
 the whole suite is **27 controls, exit 0** in about two minutes. The remaining time is not the
 cage: the single largest item is `p_staircase(5)`'s independent 70-digit witness (7.7 s).
@@ -1806,10 +1816,10 @@ the 55 + 66 + 4 split, the twelve-column walk and its repeats, all 24 tangencies
 non-membership in the field, the exact cage with capacity 1, the certified 150, the cap brick's
 `du = 1` tangency and the empty cage against the 150; control 26 is the 62-word spin, the
 78-word second-word test in 66 rotation-class cages, and control 27 the mixed word: the table's
-`19211307153/31250000000` rad closing a certified 150, refusing the 151st (degenerate rectangle
-cage plus an exact 17 x 17 point scan), the census word's rectangle cage empty, and the delivered
-pair's measured `-2.365e-9` overlap); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
-green (239 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 --selftest`
+`19211307153/31250000000` rad closing a certified 150, excluding the 151st exactly (the `(2, 1)`
+rectangle cage empty, and the chord proof capping every free `v`-chord below 1 over 16 blocks),
+the census word's rectangle cage empty, and the delivered pair's measured `-2.365e-9` overlap); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
+green (241 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 --selftest`
 11/11; `field_triage --selftest` 4/4; `record_guard.py` OK.
 
 Entries `58-THE-STAIRCASE.md`; records `31`-`58`.

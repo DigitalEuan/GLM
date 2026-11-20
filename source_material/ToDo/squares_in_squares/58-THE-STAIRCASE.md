@@ -199,21 +199,30 @@ as measured here.
   square grown by `1e−25`), the rotation still finds a placement against the exact 149, and the
   exact gate certifies **N = 150 at `23/2 + ½√7`, clearance 0, 449 contacts**. The table's own
   rotation *does* close a 150th square at the census side.
-* **No placement of the 151st was found.** Two such squares side by side along the word's own `v`
-  are one rectangle of sides `(1, 2)` in that frame, and that cage **degenerates**: its cover
-  shrinks to a single box of width `1e−3` with no witness in it instead of closing. That is a
-  failure to *find* a placement, not a proof that none exists — an exact `17 × 17` point scan
-  inside the box finds no feasible pair either, but the honest reading is "not found". With the
-  cap brick in place the cage is *empty* for the rotation, so neither route found a second extra
-  square.
+* **The 151st is excluded exactly.** Two unit squares of one word overlap unless their centres
+  differ by at least `1` along one of that word's axes, so the pair is settled axis by axis. Along
+  `u` the `(2, 1)` rectangle's cage is **empty** — a closed proof. Along `v` the free chords never
+  reach `1`: at a fixed `u` the sentence forbids a union of exact `Quad` intervals (a square
+  covers `(u, v)` iff all four of its axis tests fail, so its forbidden set is the intersection of
+  four linear intervals), the free set is the exact complement, and a block of `u` shrinks each
+  forbidden interval to the part common to the whole block — which under-approximates the
+  forbidden set, so the free set is over-approximated and the chord bound is sound. Over `16`
+  blocks of the cage's own window every block closes, with the largest free chord
+  `0.558490 < 1`: **no two squares of the table's rotation are `1` apart along either axis**, in
+  exact `Q(√7)` arithmetic, with no scan and no tolerance. (The box cage cannot settle this pair —
+  its per-axis test is weaker than pointwise coverage, so the `(1, 2)` rectangle's cover degenerates
+  instead of closing; the chord proof is what closes it.) With the cap brick in place the single
+  square's cage is empty for the rotation as well.
 * With the **census** word the same rectangle cage is **empty**: an exact proof, and the same
   fact as capacity 1 read another way.
 
-So the honest answer to "does 151 close at the census side" is: **no 151-square sentence was
-found** — what *is* certified is the 150 with the table's own rotation as its last square. For the
-census word the refusal at 151 is a proof: the pocket holds exactly one word-aligned square and
-the `(1, 2)` rectangle cage is empty. For the table's rotation it is a search that ends in a
-degenerate cage, not a proof. The delivered row reaches 151 the other way — by tolerance. Replaying its own two rotation squares against our exact 149 gives worst pair
+So the answer to "does 151 close at the census side" is **no, and now by proof**: for the census
+word the pocket holds exactly one word-aligned square and the `(1, 2)` rectangle cage is empty;
+for the table's rotation the `(2, 1)` cage is empty and the free chords stay below `1`. What *is*
+certified is the 150 with the table's own rotation as its last square. The delivered row reaches
+151 the other way — by tolerance. (The certificate is for the rational word rounded up at
+`1e−25`, i.e. the table's square grown and turned by at most that much; the table's own
+transcendentals are only ever measured.) Replaying its own two rotation squares against our exact 149 gives worst pair
 slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the table's n = 151 is a
 12-decimal pose held at ~`1e−9`, not a packing at the exact side. No row changes.
 
@@ -229,9 +238,10 @@ slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the
   `2c(c+s) − (1+s) − 1 = s(2(c−s) − 1)`) and the second-word test (78 field-compatible words,
   66 rotation-class cages, all empty). Control 27 is the mixed word: the table's own
   `19211307153/31250000000` rad rounded up at `1e−25` into Q(√7) closes a certified **150**
-  (clearance 0), finds no placement of the 151st (the `(1, 2)` rectangle cage degenerates with no
-  witness, and an exact `17 × 17` point scan finds no pair — a failure to find, not a proof), and
-  the census word's `(1, 2)` rectangle cage is empty; the control also replays the delivered rotation pair against the exact 149 and reports
+  (clearance 0), excludes the 151st exactly (`staircase_chords`: the `(2, 1)` rectangle cage is
+  empty and the free `v`-chords over 16 blocks of the cage's window peak at `0.558490 < 1`, a
+  finite exact proof in Q(√7) with no scan), and the census word's `(1, 2)` rectangle cage is
+  empty; the control also replays the delivered rotation pair against the exact 149 and reports
   the measured overlap `−2.365e−9`. Control 5 exercises `staircase_layer_gap` on the 45° word;
   control 24 records the k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
 * `glm_wheels.py` — spin: spatial **48/48 certified**, 0 refused (`Ring k=1`, `Staircase k=5`);

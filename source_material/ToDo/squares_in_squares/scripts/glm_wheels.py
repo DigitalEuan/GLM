@@ -1330,21 +1330,6 @@ def _cage_upper(q):
     return q.a + q.b * k if q.b > 0 else q.a + q.b
 
 
-def _cage_lower(q):
-    """A rational lower bound for a `Quad` (the negative of an upper bound)."""
-    return -_cage_upper(-q)
-
-
-def _quad_iv(q, prec=14):
-    """Tight rational `[lo, hi]` for a `Quad`: `sqrt d` to `prec` digits, exactly."""
-    scale = 10 ** prec
-    k = math.isqrt(q.d * scale * scale)
-    lo_d, hi_d = F(k, scale), F(k + 1, scale)
-    if q.b >= 0:
-        return q.a + q.b * lo_d, q.a + q.b * hi_d
-    return q.a + q.b * hi_d, q.a + q.b * lo_d
-
-
 def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
                    hint=None, budget=400000, exact_word=True, sides=None):
     """The exact no-fit cage: every feasible centre of a `(c, s)` unit square.
@@ -1376,19 +1361,18 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
                    key=lambda i: abs(cells[i][0] - hx) + abs(cells[i][1] - hy))
     cells = [cells[i] for i in order]
     rows = [rows[i] for i in order]
-    # a unit grid of buckets: no cell more than 2 away on both axes can cover a
-    # box (every separation need is at most 2), so only nearby cells are tested
+    # a unit grid of buckets: a cell further than `rad` on both axes cannot cover a
+    # box, because every separation need is at most `rad`.  For a unit square
+    # `rad = 2`; a rectangle `(sa, sb)` needs `(sa + sb + sqrt 2)/2`, so the radius
+    # is read off the rows rather than assumed -- a radius too small would only
+    # fail to prune (never prune wrongly), but it would make the cage permissive.
     buckets = {}
     for i, q in enumerate(cells):
         buckets.setdefault((q[0].floor(), q[1].floor()), []).append(i)
-    # a rational pre-filter, so the exact four-axis test runs only on the cells
-    # that could possibly reach the box: tight `[lo, hi]` for each coordinate,
-    # and the cell's largest separation need as a rational upper bound
-    near = []
-    for i, q in enumerate(cells):
-        (xlo_s, xhi_s), (ylo_s, yhi_s) = _quad_iv(q[0]), _quad_iv(q[1])
-        need_max = max(need for _qa, need, _ua, _va in rows[i])
-        near.append((xlo_s, xhi_s, ylo_s, yhi_s, _cage_upper(need_max)))
+    # the largest separation need over the sentence, as an integer bucket radius
+    need_max = max(need for row in rows for _qa, need, _ua, _va in row)
+    rad = _cage_upper(need_max)
+    rad = F(rad.numerator // rad.denominator + 1) if rad.denominator != 1 else rad
 
     def inside(u, v):
         px = u * c - v * s
@@ -1416,8 +1400,8 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
                 return True
             spans.append((lo, hi))
         (xlo, xhi), (ylo, yhi) = spans
-        x0, x1 = (xlo - F(2)).floor(), (xhi + F(2)).floor()
-        y0, y1 = (ylo - F(2)).floor(), (yhi + F(2)).floor()
+        x0, x1 = (xlo - rad).floor(), (xhi + rad).floor()
+        y0, y1 = (ylo - rad).floor(), (yhi + rad).floor()
         keys = []
         for bx in range(x0, x1 + 1):              # only the nearby cells
             for by in range(y0, y1 + 1):
@@ -1432,25 +1416,7 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
         cand = []
         for k in keys:
             cand.extend(buckets[k])
-        # the pre-filter: a cell whose own coordinate is further than its need
-        # from the whole box already satisfies the x (or y) axis, so it cannot
-        # cover the box and is skipped without the exact axis arithmetic
-        xf_lo, xf_hi = _cage_lower(spans[0][0]), _cage_upper(spans[0][1])
-        yf_lo, yf_hi = _cage_lower(spans[1][0]), _cage_upper(spans[1][1])
         for i in cand:                            # the no-fit octagons
-            qxl, qxh, qyl, qyh, nmax = near[i]
-            if qxl >= xf_hi:
-                if qxl - xf_hi >= nmax:
-                    continue
-            elif qxh <= xf_lo:
-                if xf_lo - qxh >= nmax:
-                    continue
-            if qyl >= yf_hi:
-                if qyl - yf_hi >= nmax:
-                    continue
-            elif qyh <= yf_lo:
-                if yf_lo - qyh >= nmax:
-                    continue
             for qa, need, ua, va in rows[i]:
                 lo = (ua * u0 if ua.sign() >= 0 else ua * u1) + \
                      (va * v0 if va.sign() >= 0 else va * v1)
@@ -1692,6 +1658,128 @@ def odd_word_upward(places=25):
     cu = (Decimal(oc) * scale).to_integral_value(rounding=ROUND_CEILING) / scale
     su = (Decimal(os_) * scale).to_integral_value(rounding=ROUND_CEILING) / scale
     return F(cu), F(su)
+
+
+def _quad_inv(q):
+    """The exact inverse of a nonzero `Quad` in Q(sqrt d): `(a - b sqrt d)/(a^2 - d b^2)`."""
+    d = q.a * q.a - q.d * q.b * q.b
+    if d == 0:
+        raise Refusal("degenerate_cell", "inverse of a zero divisor")
+    return type(q)(q.a / d, -q.b / d)
+
+
+def _aff_max(p, q, u0, u1):
+    """`max` of the affine `p + q u` over `[u0, u1]`, exactly."""
+    return p + q * (u1 if q.sign() >= 0 else u0)
+
+
+def _aff_min(p, q, u0, u1):
+    """`min` of the affine `p + q u` over `[u0, u1]`, exactly."""
+    return p + q * (u0 if q.sign() >= 0 else u1)
+
+
+def staircase_chords(cls, c, s, cells, words, blocks=48, window=None, depth=22):
+    """Exact proof that no two `(c, s)` squares are `1` apart along `V` -- in closed form.
+
+    At a fixed `u` one sentence square forbids a closed interval of `v` (it covers the
+    candidate iff *all four* of its axis tests fail, so its forbidden set is the
+    intersection of four linear intervals, itself one interval).  The free set at that
+    `u` is the complement of the union, and two squares `1` apart along `V` exist iff
+    some free interval is at least `1` long -- so bounding every free chord by `1`
+    settles the pair without any scan of the plane.
+
+    `u` is covered by finitely many blocks.  Inside a block each forbidden interval is
+    *shrunk* to the part common to the whole block, which under-approximates the
+    forbidden set and therefore over-approximates the free set; if no two points of that
+    over-approximation are `1` apart, no pair exists in the block.  A block that fails
+    is split in half, so the verdict is a finite exact proof in Q(sqrt d): every quantity
+    is a `Quad`, no `Decimal`, no float, no tolerance.
+    """
+    rows = _cage_rows(cls, c, s, cells, words)
+    prep = []
+    for row in rows:
+        qa0, need0, ua0, _v0 = row[0]            # the candidate's own U axis: no v
+        rest = []
+        for qa, need, ua, va in row[1:]:         # V, then the cell's own two axes
+            rest.append((qa, need, ua, va, None if va == cls(0) else _quad_inv(va)))
+        prep.append((qa0, need0, ua0, rest))
+    zero, one = cls(0), cls(1)
+    ulo, uhi, vlo, vhi = [x if hasattr(x, "d") else cls(F(x)) for x in window]
+
+    def separates(qa, ua, need, u0, u1):
+        """Does `|qa - ua u| >= need` hold at every `u` of `[u0, u1]`?"""
+        a, b = qa - ua * u0, qa - ua * u1
+        near = zero if (a.sign() >= 0) != (b.sign() >= 0) else min(abs(a), abs(b))
+        return near >= need
+
+    def free_at(u0, u1):
+        """Free `v`-intervals that contain the free set of *every* `u` in `[u0, u1]`."""
+        forb = []
+        for qa0, need0, ua0, rest in prep:
+            if separates(qa0, ua0, need0, u0, u1):
+                continue                         # the U axis always separates: no cover
+            a = b = None
+            skip = False
+            for qa, need, ua, va, iv in rest:
+                if iv is None:
+                    if separates(qa, ua, need, u0, u1):
+                        skip = True
+                        break
+                    continue
+                lo_c = (qa - need) * iv if va.sign() > 0 else (qa + need) * iv
+                hi_c = (qa + need) * iv if va.sign() > 0 else (qa - need) * iv
+                sl = (-ua) * iv
+                lo_b = _aff_max(lo_c, sl, u0, u1)
+                hi_b = _aff_min(hi_c, sl, u0, u1)
+                a = lo_b if a is None else max(a, lo_b)
+                b = hi_b if b is None else min(b, hi_b)
+            if skip or a is None or not (a < b):
+                continue
+            forb.append((a, b))
+        forb.sort()
+        out = []
+        cur = vlo
+        for a, b in forb:
+            if b <= cur:
+                continue
+            if a > cur:
+                out.append((cur, min(a, vhi)))
+            cur = max(cur, b)
+            if cur >= vhi:
+                break
+        if cur < vhi:
+            out.append((cur, vhi))
+        return [(a, b) for a, b in out if b > a]
+
+    def has_pair(iv):
+        """Could two points of the over-approximation be exactly `1` apart?"""
+        for i, (a, b) in enumerate(iv):
+            for a2, b2 in iv[i:]:
+                if max(a, a2 - one) < min(b, b2 - one):
+                    return True
+        return False
+
+    todo = [(ulo + (uhi - ulo) * cls(F(k, blocks)),
+             ulo + (uhi - ulo) * cls(F(k + 1, blocks))) for k in range(blocks)]
+    worst = None
+    closed = 0
+    while todo:
+        u0, u1 = todo.pop()
+        iv = free_at(u0, u1)
+        if not has_pair(iv):
+            closed += 1
+            for a, b in iv:
+                if worst is None or b - a > worst:
+                    worst = b - a
+            continue
+        if depth <= 0:
+            raise Refusal("pair_not_excluded", f"a free chord reaches 1 near u = {u0}")
+        depth -= 1
+        um = (u0 + u1) * cls(F(1, 2))
+        todo.append((u0, um))
+        todo.append((um, u1))
+    return {"ok": True, "max_chord": worst, "closed": closed, "blocks": blocks,
+            "window": (ulo, uhi, vlo, vhi)}
 
 
 def staircase_odd_cage(cls, cells, words, L, places=25):
@@ -3360,35 +3448,17 @@ def selftest() -> int:
     # with the cap brick in place the pocket is shut even to the table's rotation
     cage_odd150 = staircase_odd_cage(cls7, cap_cells, cap_words, target151)
     assert cage_odd150["empty"], cage_odd150
-    # two rotation squares side by side along V are the rectangle (1, 2): its cover
-    # collapses to one box with no witness -- no placement of the pair, so no 151
-    cage_pair = staircase_cage(cls7, codd, sodD, c25, w25, target151,
-                               sides=(1, 2), exact_word=False, fine=F(1, 1024),
-                               budget=2000000,
-                               hint=(c25[-1][0], c25[-1][1]))
-    assert not cage_pair["empty"] and cage_pair["witness"] is None, cage_pair
-    assert len(cage_pair["cover"]) <= 4, cage_pair["cover"]
-    rows27 = _cage_rows(cls7, codd, sodD, c25, w25)
-    half27 = cls7(F(1, 2))
-
-    def ok27(u, v):
-        for row in rows27:
-            for qa, need, ua, va in row:
-                if abs(qa - (u * ua + v * va)) >= need:
-                    break
-            else:
-                return False
-        return True
-
-    pair_hit = None
-    for b27 in cage_pair["cover"]:
-        for i in range(17):
-            uu = b27[0] + (b27[1] - b27[0]) * F(i, 16)
-            for j in range(17):
-                vv = b27[2] + (b27[3] - b27[2]) * F(j, 16)
-                if ok27(uu, vv - half27) and ok27(uu, vv + half27):
-                    pair_hit = (uu, vv)
-    assert pair_hit is None, pair_hit
+    # no second rotation square, by exact arithmetic in Q(sqrt 7):
+    # (a) along U the pair is the (2, 1) rectangle, whose cage closes *empty*;
+    # (b) along V the free v-chords never reach 1 -- the chord proof below, which is
+    #     closed form (finite blocks, exact Quad intervals), not a scan.
+    cage_pair_u = staircase_cage(cls7, codd, sodD, c25, w25, target151, sides=(2, 1),
+                                 exact_word=False, hint=(c25[-1][0], c25[-1][1]))
+    assert cage_pair_u["empty"], cage_pair_u
+    chords27 = staircase_chords(cls7, codd, sodD, c25, w25, blocks=16,
+                                window=cage_odd["window"])
+    assert chords27["ok"] and chords27["closed"] == chords27["blocks"], chords27
+    assert chords27["max_chord"] < 1 and chords27["max_chord"] > 0, chords27
     # the census word cannot reach 151 either: its pair cage closes exactly
     cage_pair_census = staircase_cage(cls7, cw7, sw7, c25, w25, target151,
                                       sides=(1, 2),
@@ -3408,14 +3478,20 @@ def selftest() -> int:
         "still finds a placement against the 149, and the exact gate certifies "
         "N = 150 at L = " + str(target151) + f" clearance 0 with {g150['contacts']} "
         "contacts -- the table's own rotation does close its 150th square at the "
-        "census side.  No placement of the 151st was found: two such squares side "
-        "by side are one rectangle of sides (1, 2) in the word's frame, and that "
-        "cage does not close -- its cover **degenerates** to a single box of width "
-        "1e-3 with no witness in it, which reports a failure to find a placement, "
-        "not a proof that none exists (an exact 17 x 17 point scan inside the box "
-        "finds none either).  With the cap brick in place the cage is empty for the "
-        "rotation, so neither route found a second extra square.  With the census "
-        "word the pair cage is *empty* -- that one is an exact proof, and it is the "
+        "census side.  The 151st is *excluded* by exact arithmetic: two unit squares "
+        "of one word overlap unless their centres differ by at least 1 along one of "
+        "that word's axes, so the pair is settled axis by axis.  Along U the (2, 1) "
+        "rectangle's cage is **empty** -- a closed proof.  Along V the free v-chords "
+        "never reach 1: at a fixed u the whole sentence forbids a union of exact "
+        "Quad intervals and the free complement is bounded block by block over the "
+        "cage's own window, with the largest free chord " + f"{dec(chords27['max_chord']):.6f}" +
+        " over 16 blocks, all closed (every block shrinks its forbidden intervals, so "
+        "the free set is over-approximated and the bound is sound) -- a finite exact "
+        "proof in Q(sqrt 7), not a scan.  (The box cage cannot settle this pair: its "
+        "per-axis test is weaker than pointwise coverage, so the (1, 2) rectangle's "
+        "cover degenerates instead of closing; the chord proof is what closes it.)  "
+        "With the cap brick in place the single square's cage is empty for the "
+        "rotation as well, and with the census word the pair cage is *empty* -- the "
         "same fact as capacity 1 read another way.  "
         "The honest reading of the delivered row: replaying its own two rotation "
         "squares against the exact 149 gives worst pair slack " + f"{mixed_worst:.3e}" +
