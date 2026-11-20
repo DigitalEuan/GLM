@@ -617,62 +617,136 @@ def p_pocket(k):
 #: the declared word in the seam between them.  `L = 2k + min(1/(c+s), c+s)`, derived
 #: from the contact condition (below), so the 45-degree member is exactly the Strip's
 #: `S(k, 1)` and every other member is its own exact algebraic rung.
-def ridge_width(cls, c, s):
-    """The seam width at which the ridge just touches, exactly.
+def ridge_width(cls, c, s, k=None, m=1):
+    """The seam width at which the m-diamond bar just touches, exactly.
 
-    Two constraints can bind, and the smaller wins.  With the tilted square centred in
-    the seam (so its centre is `(k + w/2, k + w/2)`) and the nearest block cell centred
-    at `(k - 1/2, k - 1/2)`, the centre difference is `d = -(1+w)/2 (1, 1)`.  Along the
-    tilted square's own axis `u = (c, s)` the slack is
+    The bar is the m tilted unit squares set edge to edge along `-v` (the square's own
+    edge direction), centred in the seam.  Every block-slot pair's slack is *linear* in
+    the seam width `w`, because the bar moves with the seam centre and the blocks move
+    with the box, so each pair-axis equation `|d(w) . q| = need` has closed-form roots in
+    the field.  The width is the smallest of those roots at which the exact gate passes:
+    a contact width by construction, no scan and no tolerance.
 
-        (1+w)(c+s)/2 - (1 + c + s)/2 = 0   <=>   w = 1/(c+s),
-
-    and along the block's axis `x` it is
-
-        (1+w)/2 - (1 + c + s)/2 = 0        <=>   w = c + s.
-
-    Both are exact field elements, so the width is derived, never scanned: no ladder, no
-    tolerance, and the sentence meets at clearance exactly 0.  At 45 degrees `1/(c+s)`
-    wins and gives `sqrt2/2` -- the Strip's seam.
+    For `k = None` and `m = 1` this reduces to the closed form of run 90,
+    `min(1/(c+s), c+s)`; at 45 degrees and any m it gives `m*sqrt2/2`, the Strip's seam.
     """
-    one = cls(1)
-    return min(one / (c + s), c + s)
+    if m == 0:
+        return cls(0)
+    if k is None:
+        one = cls(1)
+        return min(one / (c + s), c + s)
+    for w in sorted(ridge_widths(cls, c, s, k, m)):
+        state, words = _ridge_sentence(cls, c, s, k, m, w)
+        if Q.gate(state, words, cls)["ok"]:
+            return w
+    raise Refusal("no_contact_width",
+                  f"no seam width in the closed-form set gates the {m}-diamond bar")
 
 
-def _ridge_sentence(cls, c, s, k, w):
-    """The ridge state and words at seam width `w` (the box side is `2k + w`)."""
+def _ridge_blocks(cls, k, w):
+    """The four k-blocks of the box `[0, 2k+w]^2`, as (centre) pairs."""
     half = cls(F(1, 2))
     L = cls(2 * k) + w
-    state, words = [], []
+    cells = []
     for bx in (0, 1):
         for by in (0, 1):
             x0 = cls(0) if bx == 0 else L - cls(k)
             y0 = cls(0) if by == 0 else L - cls(k)
             for i in range(k):
                 for j in range(k):
-                    state.append((x0 + cls(i) + half, y0 + cls(j) + half))
-                    words.append((cls(1), cls(0)))
-    state.append((cls(k) + w * half, cls(k) + w * half))
-    words.append((c, s))
+                    cells.append((x0 + cls(i) + half, y0 + cls(j) + half))
+    return cells
+
+
+def _bar_offsets(cls, c, s, m):
+    """The m slot centres relative to the seam centre: edge to edge along `-v`."""
+    return [(cls(F(2 * i - (m - 1), 2)) * s, -cls(F(2 * i - (m - 1), 2)) * c)
+            for i in range(m)]
+
+
+def _ridge_sentence(cls, c, s, k, m, w):
+    """The ridge state and words at seam width `w` (box side `2k + w`)."""
+    half = cls(F(1, 2))
+    state = _ridge_blocks(cls, k, w)
+    words = [(cls(1), cls(0)) for _ in state]
+    ctr = (cls(k) + w * half, cls(k) + w * half)
+    for dx, dy in _bar_offsets(cls, c, s, m):
+        state.append((ctr[0] + dx, ctr[1] + dy))
+        words.append((c, s))
     return state, words
 
 
-def p_ridge(d, c, s, k, family, params):
-    """Gate-verify a ridge sentence over `Q(sqrt d)` and return it as a claim.
+def _ridge_affine(cls, c, s, k, m):
+    """Blocks and slots as `A + B w` per coordinate, so every slack equation is linear."""
+    half = cls(F(1, 2))
+    zero, one = cls(0), cls(1)
+    blocks = []
+    for bx in (0, 1):
+        for by in (0, 1):
+            for i in range(k):
+                for j in range(k):
+                    Ax = cls(i) + half + (cls(k) if bx else zero)
+                    Ay = cls(j) + half + (cls(k) if by else zero)
+                    blocks.append(((Ax, one if bx else zero), (Ay, one if by else zero)))
+    slots = []
+    for dx, dy in _bar_offsets(cls, c, s, m):
+        slots.append(((cls(k) + dx, half), (cls(k) + dy, half)))
+    return blocks, slots
 
-    Refusals are declared, not incidental:
+
+def ridge_widths(cls, c, s, k, m):
+    """Every positive `w` at which some block-slot pair touches, exactly.
+
+    A pair's four axis slacks are `|P + Q w| - need`, so the roots of `|P + Q w| = need`
+    are `(need - P)/Q` and `(-need - P)/Q`; feasibility can only change at one of them.
+    """
+    if m == 0:
+        return []
+    blocks, slots = _ridge_affine(cls, c, s, k, m)
+    half = cls(F(1, 2))
+    # `need = 1/2 + extent(other)` on every axis: the block's extent along u or v is
+    # (|c|+|s|)/2 and the slot's extent along x or y is the same expression.
+    need_slot = half + (abs(c) + abs(s)) * half
+    need_block = need_slot
+    roots = []
+    for (bx_, by_), (sx_, sy_) in ((b, s) for b in blocks for s in slots):
+        # each coordinate is `A + B w`:  x = bx_[0] + bx_[1] w,  y = by_[0] + by_[1] w
+        dAx, dBx = bx_[0] - sx_[0], bx_[1] - sx_[1]
+        dAy, dBy = by_[0] - sy_[0], by_[1] - sy_[1]
+        for (qA, qB), need in (((c, s), need_slot), ((-s, c), need_slot),
+                               ((cls(1), cls(0)), need_block),
+                               ((cls(0), cls(1)), need_block)):
+            # d = block - slot, so d.q = (dA.q) + (dB.q) w
+            P = dAx * qA + dAy * qB
+            Qc = dBx * qA + dBy * qB
+            if Qc == 0:
+                continue
+            for sign in (cls(1), cls(-1)):
+                w = (sign * need - P) / Qc
+                if w.sign() > 0 and w not in roots:
+                    roots.append(w)
+    roots.sort()
+    return roots
+
+
+def p_ridge(d, c, s, k, family, params, m=1):
+    """Gate-verify an m-diamond ridge over `Q(sqrt d)` and return it as a claim.
+
+    N = 4k^2 + m.  Refusals are declared, not incidental:
       * `word_off_circle`  -- the declared (cos, sin) is not a unit word;
-      * `ridge_cuts_corner` -- at the derived width the gate still finds an overlap,
-        reported with the exact number of violating pairs.
+      * `no_contact_width` -- no closed-form width gates the bar;
+      * `ridge_cuts_corner` -- the derived width still leaves an overlap.
     """
     if k < 1:
         raise Refusal("degenerate_cell", f"k = {k} has no blocks")
+    if m < 0:
+        raise Refusal("negative_seam", f"m = {m} is not a seam count")
     cls = qfield(d)
     if (c * c + s * s) != cls(1):
         raise Refusal("word_off_circle",
                       f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
-    w = ridge_width(cls, c, s)
-    state, words = _ridge_sentence(cls, c, s, k, w)
+    w = ridge_width(cls, c, s, k, m)
+    state, words = _ridge_sentence(cls, c, s, k, m, w)
     g = Q.gate(state, words, cls)
     if not g["ok"]:
         raise Refusal("ridge_cuts_corner",
@@ -684,13 +758,13 @@ def p_ridge(d, c, s, k, family, params):
                    "void": ("L^2 - N", L * L - cls(n)),
                    "contacts": ("contacts", g["contacts"])},
                   {"state": state, "words": words, "field": f"Q(sqrt {d})",
-                   "seam": w})
+                   "seam": w, "bar": m})
     claim.meta["field_d"] = d
     claim.meta["seam"] = str(w)
+    claim.meta["bar"] = m
     _tag(claim, L, n)
     claim.laws["seam"] = ("w", w)
-    claim.laws["tilted"] = ("tilted", 1)
-    # calibration: the same n in the delivered table, exactly
+    claim.laws["tilted"] = ("tilted", m)
     side = _table_side(n)
     if side is None:
         claim.meta["table_side"] = None
@@ -704,33 +778,39 @@ def p_ridge(d, c, s, k, family, params):
     return claim
 
 
-def p_slope(p, q, k):
+def p_slope(p, q, k, m=1):
     """The p:q slope ridge: the word `(p, q)/sqrt(p^2+q^2)` lives in Q(sqrt(p^2+q^2))."""
     dd, _kf = squarefree_split(p * p + q * q)
     c, s = unit_word(dd, p, q)
-    return p_ridge(dd, c, s, k, "Slope", {"p": p, "q": q, "k": k})
+    return p_ridge(dd, c, s, k, "Slope", {"p": p, "q": q, "k": k, "m": m}, m)
 
 
 def _sqrt7_word():
-    """`(sqrt7/4, 3/4)`: the smallest-height unit word whose field is Q(sqrt 7)."""
+    """`((1+sqrt7)/4, (sqrt7-1)/4)`: the word the census's n = 18 row actually uses.
+
+    Recovered from the delivered pose's 0.424031039491-radian tilt with
+    `exact_field.recover_scalar` at 70-digit precision: cos = 1/4 + 1/4 sqrt7,
+    sin = -1/4 + 1/4 sqrt7, and `cos^2 + sin^2 = 1` exactly.  Run 90 used an ad-hoc
+    Q(sqrt 7) word `(sqrt7/4, 3/4)`; this one is the table's own.
+    """
     cls = qfield(7)
-    return cls(0, F(1, 4)), cls(F(3, 4))
+    return cls(F(1, 4), F(1, 4)), cls(F(-1, 4), F(1, 4))
 
 
-def p_seventh(k):
-    """The Q(sqrt 7) rung: a ridge at `(sqrt7/4, 3/4)`, side `2k + 2(3 - sqrt7)`."""
+def p_seventh(k, m=1):
+    """The Q(sqrt 7) rung: a ridge at the census's own sqrt7 word."""
     c, s = _sqrt7_word()
-    return p_ridge(7, c, s, k, "Seventh", {"k": k})
+    return p_ridge(7, c, s, k, "Seventh", {"k": k, "m": m}, m)
 
 
-def p_tilt(t, k):
+def p_tilt(t, k, m=1):
     """A rational-t Pythagorean ridge: `tword(t)` is a rational unit word, exact in Q."""
     t = F(t)
     if not (0 < t < 1):
         raise Refusal("t_out_of_range",
                       f"t = {t} is not in (0, 1): the t-basis word is not a quarter turn")
     c, s = EF.tword(t)
-    return p_ridge(2, Q2(c), Q2(s), k, "Tilt", {"t": str(t), "k": k})
+    return p_ridge(2, Q2(c), Q2(s), k, "Tilt", {"t": str(t), "k": k, "m": m}, m)
 
 
 def p_glue(t):
@@ -1140,9 +1220,15 @@ def build_engine():
     ] + [
         Cell("Slope", {"p": 2, "q": 1, "k": k}) for k in (1, 2, 3)
     ] + [
+        Cell("Slope", {"p": 2, "q": 1, "k": k, "m": 2}) for k in (2, 3)
+    ] + [
         Cell("Seventh", {"k": k}) for k in (1, 2, 3)
     ] + [
+        Cell("Seventh", {"k": k, "m": 2}) for k in (2, 3)
+    ] + [
         Cell("Tilt", {"t": "1/2", "k": k}) for k in (1, 2, 3)
+    ] + [
+        Cell("Tilt", {"t": "1/2", "k": k, "m": 2}) for k in (2, 3)
     ]))
     eng.add_wheel(Wheel("sequences", sq, [
         Cell("Tile", {"t": str(alpha_irr), "n": 21}),
@@ -1830,6 +1916,79 @@ def selftest() -> int:
         "and the field declared give identical verdicts and identical pair slacks on "
         "every cell; the 45-degree ridge reproduces S(k,1) exactly and every rung gates "
         "at clearance 0 with its exact algebraic side: " + "; ".join(rungs))
+
+    # ------------------------------------------------ control 22: the m-diamond bar
+    doubles = 0
+    for kk in (1, 2, 3):
+        for mm in (1, 2, 3):
+            ridge = p_ridge(2, *Q.word_45(), kk, "Ridge45", {"k": kk, "m": mm}, mm)
+            strip = strip_field(kk, mm)
+            cells = sorted(map(tuple, _product_cells(strip["x"], strip["y"])))
+            slots = sorted(map(tuple, strip["slots"]))
+            st, ws = ridge.payload["state"], ridge.payload["words"]
+            axis = sorted(map(tuple, [st[i] for i in range(len(st))
+                                      if ws[i] == (Q2(1), Q2(0))]))
+            tilt = sorted(map(tuple, [st[i] for i in range(len(st))
+                                      if ws[i] != (Q2(1), Q2(0))]))
+            assert axis == cells and tilt == slots, (kk, mm)
+            assert ridge.size == 4 * kk * kk + mm, (kk, mm, ridge.size)
+            assert ridge.laws["extent"][1] == Q2(2 * kk) + S2H * Q2(mm), (kk, mm)
+            doubles += 1
+    rungs = []
+    for fam, d, cw, sw in (("45", 2, *Q.word_45()), ("Slope-2:1", 5, *unit_word(5, 2, 1)),
+                           ("Seventh", 7, *_sqrt7_word()),
+                           ("Tilt-1/2", 2, Q2(EF.tword(F(1, 2))[0]), Q2(EF.tword(F(1, 2))[1]))):
+        cls = qfield(d)
+        cw, sw = (cw if isinstance(cw, cls) else cls(cw)), (sw if isinstance(sw, cls) else cls(sw))
+        w1 = ridge_width(cls, cw, sw, 2, 1)
+        n18 = ridge_width(cls, cw, sw, 2, 2)
+        assert n18 == w1 * cls(2), (fam, w1, n18)
+        wider = [ridge_width(cls, cw, sw, 2, m) for m in (3, 4)]
+        assert all(w > n18 for w in wider), (fam, wider)
+        rungs.append(f"{fam}: w*(1)={w1}, w*(2)={n18}=2 w*(1), w*(3)={wider[0]}, "
+                     f"w*(4)={wider[1]}, L(2,2)={cls(4) + n18}")
+        # the census row's side, honestly: no member of this family reaches it
+        target = None
+        if d == 7:
+            target = (cls(7) + cls(0, 1)) / cls(2)
+            assert cls(4) + n18 != target, "unexpected: the ridge captures n = 18"
+            assert cls(4) + ridge_width(cls, cw, sw, 2, 1) != target
+    # the row itself, read exactly: its tilted word and its side
+    import field_triage as T
+    row = _delivered_rows()[18]
+    tilt_words = {t for _x, _y, t in row if _word_of(t) is None}
+    assert len(tilt_words) == 1, tilt_words
+    ca, sa = T.cos_sin(tilt_words.pop())
+    cls7 = qfield(7)
+    cw = EF.recover_scalar(cls7(F(ca)), cls7, dens=(1, 2, 4, 8), bmax=8)
+    sw = EF.recover_scalar(cls7(F(sa)), cls7, dens=(1, 2, 4, 8), bmax=8)
+    assert (cw.a, cw.b) == (F(1, 4), F(1, 4)), (cw.a, cw.b)
+    assert (sw.a, sw.b) == (F(-1, 4), F(1, 4)), (sw.a, sw.b)
+    assert cw * cw + sw * sw == cls7(1), "the recovered word must be a unit word"
+    axis_n = sum(1 for _x, _y, t in row if _word_of(t) is not None)
+    assert (axis_n, len(row) - axis_n) == (10, 8), (axis_n, len(row))
+    for _x, _y, _t in row:                       # every coordinate of the pose, exactly
+        for _v in (_x, _y):
+            assert EF.recover_scalar(cls7(F(_v)), cls7,
+                                     dens=(1, 2, 4, 8, 16), bmax=8) is not None, _v
+    X = [F(x) for x, _y, _t in row]
+    far = EF.recover_scalar(cls7(max(X)), cls7, dens=(1, 2, 4, 8), bmax=8)
+    near = EF.recover_scalar(cls7(min(X)), cls7, dens=(1, 2, 4, 8), bmax=8)
+    assert (far.a, far.b) == (F(5, 4), F(1, 4)) and (near.a, near.b) == (F(-5, 4), F(-1, 4))
+    side = far + far + cls7(1)                      # span of the centres plus one
+    assert side == (cls7(7) + cls7(0, 1)) / cls7(2), side
+    assert side == cls7(3) + cls7(2) * cw, side     # L = 3 + 2 cos(word)
+    say(f"control 22 — the ridge holds m tilted squares: at 45 degrees it reproduces "
+        f"strip_field(k, m) cell for cell, slot for slot and side for side on all "
+        f"{doubles} (k, m) cells with k, m in 1..3; N = 4k^2 + m; the exact seam law "
+        f"w*(2) = 2 w*(1) holds on every rung, and beyond m = 2 the binding pair can "
+        f"re-bind -- the 45-degree rung stays linear through m = 4, the oblique rungs "
+        f"do not (" + "; ".join(rungs) + "). The census's "
+        f"n = 18 row is *not* a member: its tilted word is (1+sqrt7)/4, (-1+sqrt7)/4 "
+        f"(recovered from the 12-dp pose at 70 digits and verified on the unit circle), "
+        f"its pose is 10 axis squares plus 8 tilted ones, and its side is 3 + 2cos = "
+        f"(7 + sqrt7)/2 — an odd rational part with a cosine term, where the ridge's side "
+        f"is 2k plus a seam width.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
