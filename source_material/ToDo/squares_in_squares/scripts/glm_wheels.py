@@ -174,7 +174,7 @@ class PackingGateWitness(Witness):
     law = "gate_refused"
 
     def check(self, claim, domain=None):
-        g = Q.gate(claim.payload["state"], claim.payload["words"])
+        g = gate_of(claim)
         # a one-square sentence has no pairs at all: clearance is None, not 0
         ok = g["ok"] and (g["clearance"] is None or g["clearance"] == 0)
         return ok, f"gate {'ok' if g['ok'] else 'REFUSED'}, clearance " \
@@ -196,7 +196,7 @@ class ContactGraphWitness(Witness):
         adj = [[] for _ in range(n)]
         for i in range(n):
             for j in range(i + 1, n):
-                axes = Q.pair_axes(state, words, i, j)
+                axes = pairs_of(claim, i, j)
                 if any(s.sign() == 0 for _q, s, _need, _o in axes):
                     adj[i].append(j)
                     adj[j].append(i)
@@ -229,8 +229,9 @@ class ConservationWitness(Witness):
         n = claim.size
         L = claim.laws["extent"][1]
         V = claim.laws["void"][1]
-        ok = (Q2(n) + V) == L * L and (L * L - Q2(n)).sign() >= 0 and n >= 1
-        return ok, f"N + V = {n} + ({V}) = {Q2(n) + V} and L^2 = {L * L}"
+        one = type(L)(n) if not isinstance(L, int) else Q2(n)
+        ok = (one + V) == L * L and (L * L - one).sign() >= 0 and n >= 1
+        return ok, f"N + V = {n} + ({V}) = {one + V} and L^2 = {L * L}"
 
 
 class DecimalWitness(Witness):
@@ -272,9 +273,10 @@ def spatial_decimal(claim):
     dec = DecimalWitness.scalar
     state, words = claim.payload["state"], claim.payload["words"]
     L = claim.laws["extent"][1]
+    half = type(L)(F(1, 2))
     xs, ys = [], []
     for (x, y), w in zip(state, words):
-        ex = (abs(w[0]) + abs(w[1])) * HALF
+        ex = (abs(w[0]) + abs(w[1])) * half
         xs += [dec(x - ex), dec(x + ex)]
         ys += [dec(y - ex), dec(y + ex)]
     Ld = max(max(xs) - min(xs), max(ys) - min(ys))
@@ -286,13 +288,13 @@ def spatial_decimal(claim):
     for i in range(len(state)):
         for j in range(i + 1, len(state)):
             best = None
-            for _q, slack, _need, _o in Q.pair_axes(state, words, i, j):
+            for _q, slack, _need, _o in pairs_of(claim, i, j):
                 sd = dec(slack)
                 best = sd if best is None else max(best, sd)
                 worst = sd if worst is None else min(worst, sd)
             if best is not None and best < 0:
                 dec_ok = False
-    exact_ok = Q.gate(state, words)["ok"]
+    exact_ok = gate_of(claim)["ok"]
     ok = gap <= Decimal("1e-40") and dec_ok == exact_ok
     w = "no pairs" if worst is None else f"{worst:.3e}"
     return ok, (f"|L_dec - L| = {gap:.3e}, worst slack_dec {w}, pair verdict "
@@ -522,13 +524,20 @@ def _laws_packing(n, L, V, contacts=None):
 
 
 def _tag(claim, L, n):
-    """Attach the exact gain-vs-grid law (grid(n) = ceil(sqrt n), exactly)."""
-    k = Q.grid_side(n)
-    claim.meta["beats"] = L < k
-    claim.meta["gain"] = k - L
-    claim.laws["gain"] = ("ceil(sqrt N) - L", k - L)
+    """Attach the exact gain-vs-grid law (grid(n) = ceil(sqrt n), exactly).
+
+    The grid side is an integer, so it is rebuilt *in the claim's own field* -- a
+    Q(sqrt 5) side and a Q(sqrt 2) grid cannot be compared without that, and the
+    refusal would be a type error rather than a statement.
+    """
+    g = Q.grid_side(n)
+    kk = g.a if hasattr(g, "a") else F(g)
+    grid = type(L)(kk) if hasattr(L, "d") else L.__class__(kk)
+    claim.meta["beats"] = L < grid
+    claim.meta["gain"] = grid - L
+    claim.laws["gain"] = ("ceil(sqrt N) - L", grid - L)
     claim.measure = ("L", L)
-    claim.invariant = ("ceil(sqrt N) - L", k - L)
+    claim.invariant = ("ceil(sqrt N) - L", grid - L)
     return claim
 
 
@@ -563,8 +572,7 @@ def p_strip(k, m):
         raise Refusal("negative_seam", f"m = {m} is not a seam width")
     claim = _assemble_field(f"S({k},{m})", strip_field(k, m), family="Strip",
                             params={"k": k, "m": m}, allow_empty=True)
-    claim.laws["seam"] = ("m", m)
-    claim.laws["diamonds"] = ("diamonds", m)
+    claim.laws["seam"] = ("m", m)          # `diamonds` is set once, by the assembler
     return claim
 
 
@@ -589,14 +597,140 @@ def Q_mixed_strip(k, m):
 
 
 def p_pocket(k):
-    """The corner pocket: four k-blocks and one diamond, i.e. S(k, 1)."""
+    """The corner pocket: four k-blocks and one diamond -- the strip S(k, 1).
+
+    Run 88 built the Strip from `strip_field(k, m)`; run 89 puts the Pocket on the same
+    build path rather than on run 84's sentence builder, so a strip and a pocket differ
+    only in the `m` they pass.  The cell stays a `Pocket` (its own family and parameters)
+    because that is the claimed object; only the assembly is shared.
+    """
     if k < 1:
         raise Refusal("degenerate_cell", f"k = {k}")
-    st, ws, L = Q_mixed_strip(k, 1)
-    n = 4 * k * k + 1
-    return _tag(Claim("spatial_geometry", "Pocket", {"k": k}, n,
-                      _laws_packing(n, L, L * L - Q2(n)),
-                      {"state": st, "words": ws}), L, n)
+    claim = _assemble_field(f"Pocket({k})", strip_field(k, 1), family="Pocket",
+                            params={"k": k})
+    claim.laws["seam"] = ("m", 1)          # the same seam law the Strip carries
+    return claim
+
+
+# ------------------------------------------------- the ridge family (run 90)
+#: A ridge sentence: four k-blocks in the corners of an L x L box, one unit square of
+#: the declared word in the seam between them.  `L = 2k + min(1/(c+s), c+s)`, derived
+#: from the contact condition (below), so the 45-degree member is exactly the Strip's
+#: `S(k, 1)` and every other member is its own exact algebraic rung.
+def ridge_width(cls, c, s):
+    """The seam width at which the ridge just touches, exactly.
+
+    Two constraints can bind, and the smaller wins.  With the tilted square centred in
+    the seam (so its centre is `(k + w/2, k + w/2)`) and the nearest block cell centred
+    at `(k - 1/2, k - 1/2)`, the centre difference is `d = -(1+w)/2 (1, 1)`.  Along the
+    tilted square's own axis `u = (c, s)` the slack is
+
+        (1+w)(c+s)/2 - (1 + c + s)/2 = 0   <=>   w = 1/(c+s),
+
+    and along the block's axis `x` it is
+
+        (1+w)/2 - (1 + c + s)/2 = 0        <=>   w = c + s.
+
+    Both are exact field elements, so the width is derived, never scanned: no ladder, no
+    tolerance, and the sentence meets at clearance exactly 0.  At 45 degrees `1/(c+s)`
+    wins and gives `sqrt2/2` -- the Strip's seam.
+    """
+    one = cls(1)
+    return min(one / (c + s), c + s)
+
+
+def _ridge_sentence(cls, c, s, k, w):
+    """The ridge state and words at seam width `w` (the box side is `2k + w`)."""
+    half = cls(F(1, 2))
+    L = cls(2 * k) + w
+    state, words = [], []
+    for bx in (0, 1):
+        for by in (0, 1):
+            x0 = cls(0) if bx == 0 else L - cls(k)
+            y0 = cls(0) if by == 0 else L - cls(k)
+            for i in range(k):
+                for j in range(k):
+                    state.append((x0 + cls(i) + half, y0 + cls(j) + half))
+                    words.append((cls(1), cls(0)))
+    state.append((cls(k) + w * half, cls(k) + w * half))
+    words.append((c, s))
+    return state, words
+
+
+def p_ridge(d, c, s, k, family, params):
+    """Gate-verify a ridge sentence over `Q(sqrt d)` and return it as a claim.
+
+    Refusals are declared, not incidental:
+      * `word_off_circle`  -- the declared (cos, sin) is not a unit word;
+      * `ridge_cuts_corner` -- at the derived width the gate still finds an overlap,
+        reported with the exact number of violating pairs.
+    """
+    if k < 1:
+        raise Refusal("degenerate_cell", f"k = {k} has no blocks")
+    cls = qfield(d)
+    if (c * c + s * s) != cls(1):
+        raise Refusal("word_off_circle",
+                      f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
+    w = ridge_width(cls, c, s)
+    state, words = _ridge_sentence(cls, c, s, k, w)
+    g = qgate(cls, state, words)
+    if not g["ok"]:
+        raise Refusal("ridge_cuts_corner",
+                      f"{family}: {g['violations']} pairs overlap at width {w}")
+    n = len(state)
+    L = g["L"]
+    claim = Claim("spatial_geometry", family, params, n,
+                  {"count": ("N", n), "extent": ("L", L),
+                   "void": ("L^2 - N", L * L - cls(n)),
+                   "contacts": ("contacts", g["contacts"])},
+                  {"state": state, "words": words, "field": f"Q(sqrt {d})",
+                   "seam": w})
+    claim.meta["field_d"] = d
+    claim.meta["seam"] = str(w)
+    _tag(claim, L, n)
+    claim.laws["seam"] = ("w", w)
+    claim.laws["tilted"] = ("tilted", 1)
+    # calibration: the same n in the delivered table, exactly
+    side = _table_side(n)
+    if side is None:
+        claim.meta["table_side"] = None
+        claim.meta["beats_table"] = None
+    else:
+        Ld = DecimalWitness.scalar(L)
+        Td = DecimalWitness.scalar(side)
+        claim.meta["table_side"] = str(side)
+        claim.meta["beats_table"] = Ld < Td
+        claim.meta["table_gap"] = str(Td - Ld)
+    return claim
+
+
+def p_slope(p, q, k):
+    """The p:q slope ridge: the word `(p, q)/sqrt(p^2+q^2)` lives in Q(sqrt(p^2+q^2))."""
+    dd, _kf = squarefree_split(p * p + q * q)
+    c, s = unit_word(dd, p, q)
+    return p_ridge(dd, c, s, k, "Slope", {"p": p, "q": q, "k": k})
+
+
+def _sqrt7_word():
+    """`(sqrt7/4, 3/4)`: the smallest-height unit word whose field is Q(sqrt 7)."""
+    cls = qfield(7)
+    return cls(0, F(1, 4)), cls(F(3, 4))
+
+
+def p_seventh(k):
+    """The Q(sqrt 7) rung: a ridge at `(sqrt7/4, 3/4)`, side `2k + 2(3 - sqrt7)`."""
+    c, s = _sqrt7_word()
+    return p_ridge(7, c, s, k, "Seventh", {"k": k})
+
+
+def p_tilt(t, k):
+    """A rational-t Pythagorean ridge: `tword(t)` is a rational unit word, exact in Q."""
+    t = F(t)
+    if not (0 < t < 1):
+        raise Refusal("t_out_of_range",
+                      f"t = {t} is not in (0, 1): the t-basis word is not a quarter turn")
+    c, s = EF.tword(t)
+    return p_ridge(2, Q2(c), Q2(s), k, "Tilt", {"t": str(t), "k": k})
 
 
 def p_glue(t):
@@ -629,6 +763,152 @@ def p_fold(k):
                       _laws_packing(n, L, L * L - Q2(n)),
                       {"state": folded, "words": ws, "folded_from": base.brief()}),
                 L, n)
+
+
+# ---------------------------------------- higher rungs: a field-generic gate (run 90)
+#: The `Quad` subclasses for Q(sqrt d), made once per d.  `exact_field.Quad` already
+#: carries exact sign, floor, abs and order for any square-free d, so a second gate
+#: implementation over any of them is a *port*, not a new theory -- and control 20
+#: proves it agrees with `qsqrt2.gate` on every certified cell.
+_QFIELDS: dict = {}
+
+
+def qfield(d):
+    """The `Quad` subclass for `Q(sqrt d)` (d square-free, d >= 2)."""
+    if d == 2:
+        return Q2
+    if d not in _QFIELDS:
+        _QFIELDS[d] = type(f"Q{d}", (EF.Quad,), {"d": d, "__slots__": (),
+                                                "__module__": __name__})
+    return _QFIELDS[d]
+
+
+def field_class(claim):
+    """The field a claim's sentence lives in, from its declared discriminant."""
+    return qfield(int(claim.meta.get("field_d", 2)))
+
+
+def squarefree_split(n):
+    """`n = k^2 * d` with d square-free: so sqrt(n) = k sqrt(d) lives in Q(sqrt d)."""
+    if n < 1:
+        raise Refusal("degenerate_field", f"{n} is not a positive integer")
+    d, k, m = n, 1, 2
+    while m * m <= d:
+        while d % (m * m) == 0:
+            d //= m * m
+            k *= m
+        m += 1
+    return d, k
+
+
+def sqrt_in(d, n):
+    """`sqrt(n)` as an element of `Q(sqrt d)`, where `n = k^2 d` (exact)."""
+    cls = qfield(d)
+    dd, k = squarefree_split(n)
+    if dd != d:
+        raise Refusal("wrong_field", f"sqrt({n}) is not in Q(sqrt {d})")
+    return cls(0, F(1, k)) if k != 1 else cls(0, 1)
+
+
+def unit_word(d, p, q):
+    """The unit word `(p, q)/sqrt(p^2+q^2)` in `Q(sqrt d)`, with `p^2+q^2 = k^2 d`.
+
+    The circle identity `cos^2 + sin^2 = 1` is then exact in the field, which is what
+    makes the whole family float-free: nothing here is normalised numerically.
+    """
+    cls = qfield(d)
+    n = p * p + q * q
+    dd, k = squarefree_split(n)
+    if dd != d:
+        raise Refusal("wrong_field", f"{p}:{q} has sqrt({n}) outside Q(sqrt {d})")
+    # p/sqrt(n) = p/(k sqrt d) = (p/(k d)) * sqrt d
+    return cls(0, F(p, k * d)), cls(0, F(q, k * d))
+
+
+def qframe_extent(cls, c, s):
+    return (abs(c) + abs(s)) * cls(F(1, 2))
+
+
+def qaxis_extent(cls, c, s, qx, qy):
+    return (abs(c * qx + s * qy) + abs(c * qy - s * qx)) * cls(F(1, 2))
+
+
+def qside(cls, state, words):
+    n = len(state)
+    ex = [qframe_extent(cls, *w) for w in words]
+    xs = [state[i][0] + ex[i] for i in range(n)]
+    xn = [state[i][0] - ex[i] for i in range(n)]
+    ys = [state[i][1] + ex[i] for i in range(n)]
+    yn = [state[i][1] - ex[i] for i in range(n)]
+    return max(max(xs) - min(xn), max(ys) - min(yn))
+
+
+def qpairs(cls, state, words, i, j):
+    """The four SAT (axis, slack, need, owner) triples of a pair, in any `Quad` field."""
+    half = cls(F(1, 2))
+    dx = state[j][0] - state[i][0]
+    dy = state[j][1] - state[i][1]
+    out = []
+    for owner, other in ((i, j), (j, i)):
+        c, s = words[owner]
+        oc, os_ = words[other]
+        for qx, qy in ((c, s), (-s, c)):
+            slack = abs(dx * qx + dy * qy) - (half + qaxis_extent(cls, oc, os_, qx, qy))
+            out.append(((qx, qy), slack, half + qaxis_extent(cls, oc, os_, qx, qy), owner))
+    return out
+
+
+def qgate(cls, state, words):
+    """The exact SAT sentence gate over any `Quad` field (the algebra of `q.sqrt2.gate`).
+
+    Same contract, same prune (`|dx| >= 2` or `|dy| >= 2` cannot be the worst pair),
+    same return keys.  Written once for every discriminant so a Q(sqrt 5) or Q(sqrt 7)
+    sentence is verified by the same decision procedure as a Q(sqrt 2) one.
+    """
+    n = len(state)
+    if n != len(words):
+        raise ValueError("state and words disagree on the number of squares")
+    if n == 0:
+        return {"ok": True, "L": cls(0), "clearance": None, "contacts": 0,
+                "violations": 0}
+    L = qside(cls, state, words)
+    two = cls(2)
+    worst, contacts, violations = None, 0, 0
+    for i in range(n):
+        xi, yi = state[i]
+        for j in range(i + 1, n):
+            if abs(state[j][0] - xi) >= two or abs(state[j][1] - yi) >= two:
+                continue
+            best = None
+            for _q, slack, _need, _owner in qpairs(cls, state, words, i, j):
+                if best is None or slack > best:
+                    best = slack
+            if best == 0:
+                contacts += 1
+            if best.sign() < 0:
+                violations += 1
+            if worst is None or best < worst:
+                worst = best
+    return {"ok": violations == 0, "L": L, "clearance": worst,
+            "contacts": contacts, "violations": violations}
+
+
+def gate_of(claim):
+    """The gate verdict for a claim, in the claim's own field.
+
+    `Q(sqrt 2)` keeps `qsqrt2.gate` -- the decision procedure every certified cell
+    already passes -- and any other field uses the generic port above.
+    """
+    d = int(claim.meta.get("field_d", 2))
+    state, words = claim.payload["state"], claim.payload["words"]
+    return Q.gate(state, words) if d == 2 else qgate(qfield(d), state, words)
+
+
+def pairs_of(claim, i, j):
+    d = int(claim.meta.get("field_d", 2))
+    state, words = claim.payload["state"], claim.payload["words"]
+    return (Q.pair_axes(state, words, i, j) if d == 2
+            else qpairs(qfield(d), state, words, i, j))
 
 
 # --------------------------------------------------- diamond insertion (run 87)
@@ -910,7 +1190,8 @@ def build_engine():
                  DecimalWitness()])
     for name, fn in (("Tile", p_grid), ("Strip", p_strip), ("Pocket", p_pocket),
                      ("Glue", p_glue), ("SymmetryFold", p_fold), ("Atom", p_atom),
-                     ("DiamondField", p_diamond_field)):
+                     ("DiamondField", p_diamond_field), ("Slope", p_slope),
+                     ("Seventh", p_seventh), ("Tilt", p_tilt)):
         pk.register(name, fn)
     pk.decimal_model = spatial_decimal
     eng.register(pk)
@@ -939,6 +1220,12 @@ def build_engine():
         Cell("Atom", {"n": n}) for n in (5, 10, 40)
     ] + [
         Cell("DiamondField", {"name": name}) for name in sorted(DIAMOND_FIELDS)
+    ] + [
+        Cell("Slope", {"p": 2, "q": 1, "k": k}) for k in (1, 2, 3)
+    ] + [
+        Cell("Seventh", {"k": k}) for k in (1, 2, 3)
+    ] + [
+        Cell("Tilt", {"t": "1/2", "k": k}) for k in (1, 2, 3)
     ]))
     eng.add_wheel(Wheel("sequences", sq, [
         Cell("Tile", {"t": str(alpha_irr), "n": 21}),
@@ -996,6 +1283,24 @@ def _delivered_rows():
                 (F(r["x"]), F(r["y"]), F(r["angle"])))
     _ROWS_CACHE["rows"] = rows
     return rows
+
+
+_TABLE_SIDE: dict = {}
+
+
+def _table_side(n):
+    """The delivered side for row `n`, exactly (Q(sqrt 2) lift), or None.
+
+    Runs 84-85 lift every deliverable row into an exact sentence; the side the gate
+    reads off that lift *is* the delivered side, so a new family can be calibrated
+    against it without a decimal anywhere.
+    """
+    if n in _TABLE_SIDE:
+        return _TABLE_SIDE[n]
+    st, ws, _L = _lift_row(n)
+    side = None if st is None else Q.gate(st, ws)["L"]
+    _TABLE_SIDE[n] = side
+    return side
 
 
 def _lift_row(n, rows=None):
@@ -1283,19 +1588,25 @@ def cage_point(state, words, j, L, target, tol=None):
 # ------------------------------------------------------------------ selftest
 def selftest() -> int:
     eng = build_engine()
-    checks = 0
+    announced = []
+
+    def say(msg):
+        """Announce one control.  The count at the end is the number of announcements,
+        so adding or removing a control cannot leave a stale number behind."""
+        announced.append(msg)
+        print(msg)
 
     # 1. the same five combinator names are registered on both domains
     pk, sq = eng.domains["spatial_geometry"], eng.domains["sturmian_sequences"]
     shared = set(pk.combinators) & set(sq.combinators)
     assert shared >= {"Tile", "Strip", "Glue", "SymmetryFold"}, shared
-    print(f"control 1 — both domains register the same engine slots {sorted(shared)}")
+    say(f"control 1 — both domains register the same engine slots {sorted(shared)}")
 
     # 2. the packing wheel certifies its closed-form families
     rows = eng.wheels[0].spin()
     cert = [r for r in rows if r["verdict"] == "certified"]
     assert len(cert) >= 15, len(cert)
-    print(f"control 2 — spatial wheel: {len(cert)}/{len(rows)} cells certified")
+    say(f"control 2 — spatial wheel: {len(cert)}/{len(rows)} cells certified")
 
     # 3. every certified packing cell has all four witnesses, not one metric
     for r in cert:
@@ -1303,7 +1614,7 @@ def selftest() -> int:
         assert all(w["ok"] for w in r["witnesses"].values()), r
     assert all(r["witness_count"] >= 3 for r in cert), cert[0]
     assert all(r["measure"] and r["size"] for r in cert), cert[0]
-    print("control 3 — every certified spatial cell passes all four witnesses "
+    say("control 3 — every certified spatial cell passes all four witnesses "
           "(gate, contact graph, conservation, Decimal), and the row carries the "
           "neutral size/measure/invariant columns")
 
@@ -1313,7 +1624,7 @@ def selftest() -> int:
             continue
         k, m = int(r["params"]["k"]), int(r["params"]["m"])
         assert r["size"] == 4 * k * k + m
-    print("control 4 — the Strip cells satisfy N = 4k^2 + m and L = 2k + m sqrt2/2")
+    say("control 4 — the Strip cells satisfy N = 4k^2 + m and L = 2k + m sqrt2/2")
 
     # 5. the refusal laws still fire -- on constructed cells, because run 88 closed the
     #    last three non-viable cells of the wheel (the S(k,0) refusals), so a spatial
@@ -1342,14 +1653,14 @@ def selftest() -> int:
     elsewhere = {r["refusal"]["law"] for w in eng.wheels[1:] for r in w.spin()
                  if r["verdict"] == "refused"}
     assert elsewhere, "the other wheels must still refuse by law"
-    print(f"control 5 — the spatial wheel has no refused cell (S(k,0) now certifies), "
+    say(f"control 5 — the spatial wheel has no refused cell (S(k,0) now certifies), "
           f"and every refusal law still fires on a constructed cell: "
           f"{sorted(cases)}; other wheels refuse by {sorted(elsewhere)}")
 
     # 6. the fold is an exact symmetry: same N, same L, witnesses still pass
     a, b = p_pocket(2), p_fold(2)
     assert a.n == b.n and a.laws["extent"][1] == b.laws["extent"][1]
-    print("control 6 — the diagonal fold preserves N and L exactly")
+    say("control 6 — the diagonal fold preserves N and L exactly")
 
     # 7. sequences: an irrational slope gives a Sturmian word, a rational one does not
     rows = eng.wheels[1].spin()
@@ -1359,18 +1670,18 @@ def selftest() -> int:
     assert any(r["params"]["t"] == str(Q2(-1, 1)) and r["verdict"] == "certified"
                for r in rows), rows
     assert any(r["params"]["t"] == "1/2" and r["verdict"] == "refused" for r in rows)
-    print("control 7 — slope sqrt2-1 certifies, slope 1/2 is refused (not Sturmian)")
+    say("control 7 — slope sqrt2-1 certifies, slope 1/2 is refused (not Sturmian)")
 
     # 8. the refusal for a rational slope is the complexity law, with its numbers
     bad = [r for r in rows if r["params"]["t"] == "1/2"][0]
     assert bad["refusal"]["law"] == "not_sturmian", bad["refusal"]
-    print(f"control 8 — rational slope refused by the exact law: {bad['refusal']}")
+    say(f"control 8 — rational slope refused by the exact law: {bad['refusal']}")
 
     # 9. the coboundary law d(uv) = du xor dv holds on the glue cell
     glue = [r for r in rows if r["family"] == "Glue"][0]
     assert glue["verdict"] == "certified"
     assert "coboundary" in glue["witnesses"]["conservation"]["detail"]
-    print("control 9 — the glue cell passes the coboundary witness on its join")
+    say("control 9 — the glue cell passes the coboundary witness on its join")
 
     # 10. Decimal cross-check: the signs agree, and a perturbed claim is caught
     claim = p_pocket(2)
@@ -1380,13 +1691,13 @@ def selftest() -> int:
     claim2.laws["extent"] = ("L", claim2.laws["extent"][1] + Q2(F(1, 10 ** 9)))
     ok2, _ = DecimalWitness().check(claim2, pk)
     assert not ok2, "the Decimal witness must catch a 1e-9 lie"
-    print("control 10 — the Decimal witness accepts the exact side and catches a 1e-9 lie")
+    say("control 10 — the Decimal witness accepts the exact side and catches a 1e-9 lie")
 
     # 11. the tower audit covers this module too
     checked, offenders, skipped = EF.audit_module(sys.modules[__name__],
                                                   exempt=EF.AUDIT_EXEMPT)
     assert offenders == [], offenders
-    print(f"control 11 — this module's {checked} decision functions name no float "
+    say(f"control 11 — this module's {checked} decision functions name no float "
           f"({len(skipped)} display/test exemptions declared)")
 
     # 12. cage recovery places a square the contact graph leaves free, exactly
@@ -1401,7 +1712,7 @@ def selftest() -> int:
     assert Q.gate(trial, ws)["ok"]
     # and it refuses to place the square anywhere when the cage is empty
     assert cage_point(broken, ws, 0, L, (Q2(-99), Q2(-99))) is None
-    print(f"control 12 — the 2D cage recovers the freed square exactly ({pt}) and "
+    say(f"control 12 — the 2D cage recovers the freed square exactly ({pt}) and "
           f"returns nothing when the cage is empty")
 
     # 13. a third, structurally distinct domain registers the same slots
@@ -1410,7 +1721,7 @@ def selftest() -> int:
     shared3 = (set(pk.combinators) & set(sq.combinators)) & set(lat.combinators)
     assert shared3 >= {"Tile", "Strip", "Glue", "SymmetryFold"}, shared3
     assert shared3 == {"Tile", "Strip", "Glue", "SymmetryFold"}, shared3
-    print(f"control 13 — three domains share the engine slots {sorted(shared3)}; "
+    say(f"control 13 — three domains share the engine slots {sorted(shared3)}; "
           f"lattice adds {sorted(set(lat.combinators) - shared3)}")
 
     # 14. the theta series are the classical ones, by enumeration (no tables)
@@ -1419,7 +1730,7 @@ def selftest() -> int:
     assert TH[0] == [1, 0, 24, 0, 24, 0, 96], TH[0]
     assert TH[1] == [1, 0, 240, 0, 2160], TH[1]
     assert TH[2] == [1, 8, 24, 32, 24, 48, 96], TH[2]
-    print(f"control 14 — theta by exact enumeration: D4 {TH[0]}, E8 {TH[1]}, Z4 {TH[2]}")
+    say(f"control 14 — theta by exact enumeration: D4 {TH[0]}, E8 {TH[1]}, Z4 {TH[2]}")
 
     # 15. kissing topology: shell sizes and inner-product-1 degrees, computed
     k = {key: len(LAT.shell(LAT.LATTICES[key], LAT.LATTICES[key].minimal_norm))
@@ -1427,7 +1738,7 @@ def selftest() -> int:
     deg = {key: LAT.root_degree(LAT.LATTICES[key]) for key in ("Z2", "D4", "E8")}
     assert k == {"Z2": 4, "D4": 24, "E8": 240}, k
     assert deg == {"Z2": None, "D4": 8, "E8": 56}, deg
-    print(f"control 15 — kissing numbers {k} and root degrees {deg}")
+    say(f"control 15 — kissing numbers {k} and root degrees {deg}")
 
     # 16. the conservation law is theta multiplicativity, and it is exact
     g = LAT.l_sum("Z2", "D4", 4)
@@ -1439,7 +1750,7 @@ def selftest() -> int:
         assert ok, (w.name, detail)
         ran += 1
     assert ran == 3, ran      # the kissing witness scopes itself to Frame/Atom
-    print(f"control 16 — Z2 (+) D4: enumerated {tuple(enumerated)} == convolution, "
+    say(f"control 16 — Z2 (+) D4: enumerated {tuple(enumerated)} == convolution, "
           f"{ran} applicable witnesses pass (kissing is a Frame/Atom law only)")
 
     # 17. a wrong lattice claim is refused, by witness or by declared law
@@ -1458,7 +1769,7 @@ def selftest() -> int:
     except Refusal as r:
         refusals.append(r.law)
     assert refusals == ["empty_shell", "empty_shell", "rank_budget"], refusals
-    print(f"control 17 — a wrong kissing number is refused ({detail[:40]}...), and "
+    say(f"control 17 — a wrong kissing number is refused ({detail[:40]}...), and "
           f"the declared laws fire: {refusals}")
 
     # 18. the cell algebra: run parameters, not cell lists, generate the run-87 census
@@ -1486,7 +1797,7 @@ def selftest() -> int:
         assert c.meta["carrier"] == carrier and c.meta["dropped"] == dropped, c.meta
         assert len(spec["x"]) <= 2 and len(spec["y"]) <= 2, spec
         tables.append(f"{name} {carrier}->{len(got)} (-{dropped})")
-    print("control 18 — two axis runs per side generate the run-87 census exactly: "
+    say("control 18 — two axis runs per side generate the run-87 census exactly: "
           + ", ".join(tables))
 
     # 19. the Strip builder is a field of (k, m): S(k,0) certifies and IS the plain grid
@@ -1507,12 +1818,92 @@ def selftest() -> int:
         assert field.n == 4 * kk * kk + mm, (kk, mm, field.n)
     one = p_strip(2, 1)
     assert one.laws["gain"][1] == Q2(1) - S2H, one.laws["gain"]
-    print("control 19 — S(k,0) is no longer refused: it certifies as the plain 2k grid "
-          "(gain 0) for k = 1..4, and S(k,m) reproduces the run-84 sentence for m >= 1 "
-          "(L = 2k + m sqrt2/2, N = 4k^2 + m)")
+    # the Pocket is the strip at m = 1, on the same build path (run 89): same cells, same
+    # words, same side, same N -- but it keeps its own family, that being what it claims
+    for kk in (1, 2, 3):
+        pocket, strip = p_pocket(kk), p_strip(kk, 1)
+        assert pocket.family == "Pocket" and strip.family == "Strip"
+        assert pocket.payload["state"] == strip.payload["state"], kk
+        assert pocket.payload["words"] == strip.payload["words"], kk
+        assert pocket.laws["extent"][1] == strip.laws["extent"][1], kk
+        assert pocket.n == strip.n == 4 * kk * kk + 1, (kk, pocket.n, strip.n)
+    say("control 19 — S(k,0) is no longer refused: it certifies as the plain 2k grid "
+        "(gain 0) for k = 1..4, S(k,m) reproduces the run-84 sentence for m >= 1 "
+        "(L = 2k + m sqrt2/2, N = 4k^2 + m), and the Pocket is the same field at "
+        "m = 1: one build path, two families")
 
-    print("selftest: OK (19 controls)")
-    return checks
+    # 20. a genuinely malformed declaration is refused by the gate, not by a flag:
+    #     two slots that overlap *each other* cannot be caught by the carrier rule
+    dbl = dict(DIAMOND_FIELDS["n10"])
+    dbl["slots"] = [_pt((3, 0, 3, 0)), _pt((3, 0, 3, 0))]
+    try:
+        _assemble_field("double_slot", dbl)
+        raise AssertionError("an overlapping pair of slots must not certify")
+    except Refusal as e:
+        assert e.law == "declaration_overlaps", e.law
+        assert "violations" in e.detail, e.detail
+    near = dict(DIAMOND_FIELDS["n10"])
+    near["slots"] = [_pt((3, 0, 3, 0)), _pt((3, F(1, 10), 3, 0))]
+    try:
+        _assemble_field("near_slots", near)
+        raise AssertionError("two slots 1/10 apart must not certify")
+    except Refusal as e:
+        assert e.law == "declaration_overlaps", e.law
+    loose = dict(DIAMOND_FIELDS["n10"], drop_colliding=False)
+    try:
+        _assemble_field("no_rule", loose)
+        raise AssertionError("a slot over an axis cell with the rule off must refuse")
+    except Refusal as e:
+        assert e.law == "declaration_overlaps", e.law
+    say("control 20 — a malformed declaration is refused by `declaration_overlaps`, "
+        "three ways: two coincident slots and two slots 1/10 apart (both caught by the "
+        "gate, since the carrier rule cannot see slot-slot overlap), and a slot over an "
+        "axis cell with the insertion rule switched off (caught by the rule)")
+
+    # 21. the algebraic rungs: one ridge family, three fields, and the 45-degree member
+    #     IS the Strip -- so the census's Q(sqrt5), Q(sqrt7) and rational-t rungs are
+    #     gate-verified by the same procedure as every Q(sqrt2) cell
+    rows = []
+    for name in ("n10", "n19", "n40"):
+        c = p_diamond_field(name)
+        g1, g2 = Q.gate(c.payload["state"], c.payload["words"]), \
+            qgate(Q2, c.payload["state"], c.payload["words"])
+        assert (g1["ok"], g1["L"], g1["clearance"], g1["contacts"],
+                g1["violations"]) == (g2["ok"], g2["L"], g2["clearance"],
+                                      g2["contacts"], g2["violations"]), name
+    for kk in (1, 2):
+        ridge = p_ridge(2, *Q.word_45(), kk, "Ridge45", {"k": kk})
+        strip = p_strip(kk, 1)
+        assert ridge.laws["extent"][1] == strip.laws["extent"][1] == \
+            Q2(2 * kk) + S2H, (kk, ridge.laws["extent"][1])
+        assert ({(str(x), str(y)) for x, y in ridge.payload["state"]}
+                == {(str(x), str(y)) for x, y in strip.payload["state"]}), kk
+    rungs = []
+    for fam, cell in (("Slope", p_slope(2, 1, 1)), ("Seventh", p_seventh(1)),
+                      ("Tilt", p_tilt(F(1, 2), 1)), ("Slope", p_slope(2, 1, 2)),
+                      ("Seventh", p_seventh(2)), ("Tilt", p_tilt(F(1, 2), 2))):
+        g = gate_of(cell)
+        assert g["ok"] and g["clearance"] == 0 and g["contacts"] >= 1, (fam, g)
+        tbl = cell.meta["table_side"]
+        tag = ("uncalibrated: the delivered row is outside the axis/45-deg alphabet"
+               if tbl is None else
+               ("beats the table" if cell.meta["beats_table"] else "dominated"))
+        rungs.append(f"{fam} n={cell.size} L={cell.laws['extent'][1]} vs table {tbl} "
+                     f"({tag})")
+    assert all(not p_ridge(2, *Q.word_45(), kk, "R", {"k": kk}).meta["beats_table"]
+               for kk in (1, 2)), "the 45-degree member is the best of the family"
+    try:
+        p_ridge(5, qfield(5)(0), qfield(5)(0), 1, "Bad", {})
+        raise AssertionError("a word off the unit circle must refuse")
+    except Refusal as e:
+        assert e.law in ("word_off_circle", "wrong_field"), e.law
+    say("control 21 — the ridge family is one sentence over three fields: the "
+        "45-degree member reproduces S(k,1) exactly, `qgate` agrees with `qsqrt2.gate` "
+        "cell for cell, and every rung gates at clearance 0 with its exact algebraic "
+        "side: " + "; ".join(rungs))
+
+    print(f"selftest: OK ({len(announced)} controls)")
+    return len(announced)
 
 
 # --------------------------------------------------------------------- report
@@ -1545,7 +1936,8 @@ def report(eng, ledger):
 def main(argv=None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     if "--selftest" in argv:
-        return selftest()
+        selftest()
+        return 0
     if "--audit" in argv:
         import lattice_shells as LAT
         mods = [EF, Q, sys.modules[__name__], LAT]
