@@ -779,116 +779,220 @@ def p_ridge(d, c, s, k, family, params, m=1):
 
 
 # ------------------------------------------------------------------ the ring
+#: Run 94 replaces run 93's four-corner-module ansatz with the sentence the census's
+#: own n = 18 row is.  The row is a C2-symmetric **perimeter** of axis squares with
+#: exactly one gap in each wall, one tilted square **wedged across each vertical
+#: gap** (a contact on each of its own axes), and a **four-square pinwheel** that
+#: carries each chain end around to the opposite gap square:
+#:
+#:     10 axis = 4 corner squares + a 2k-square run up the left wall + a 2k-square
+#:               run down the right wall + one square inward on the bottom wall and
+#:               one inward on the top wall                         (4k + 6 in general)
+#:      4 gaps = the wedged squares p5, -p5 and the two chain ends p8, -p8
+#:      4 pin  = the chain p5 -> p6 -> p7 -> p8 and its C2 image
+#:
+#: Each of the eight tilted squares is the unique solution of two declared tangencies,
+#: so the sentence is *solved* in Q(sqrt 7) rather than read off the table; the exact
+#: gate is the arbiter (control 24).
 def ring_side(cls, c, s, k):
-    """The ring's side, derived: its four corner squares sit flush in the box.
+    """The ring's side, derived: the four corner squares sit flush in the box.
 
-    A corner square's centre is `(k + c, k + c)`, so with its half-extent of `1/2` its
-    outer face is at `k + c + 1/2` and
+    A corner square's centre is `(a, a)` with `a = k + c`, so its outer face is at
+    `a + 1/2` and
 
-        L = 2(k + c) + 1 = 2k + 3/2 + (c + s),
+        L = 2a + 1 = 2k + 1 + 2c = 2k + 3/2 + (c + s),          (c - s = 1/2)
 
-    which reproduces the census's Q(sqrt 7) family exactly: every row of it has side
-    `(2m+1)/2 + sqrt7/2`, and `c - s = 1/2` makes `1/2 + c + s/... ` collapse to `1/2 + c`.
+    the one side law of the whole Q(sqrt 7) family, `(2m+1)/2 + sqrt7/2`.  At `k = 1`
+    it is the census's n = 18 side, `7/2 + sqrt7/2`.
     """
     return cls(2 * k + 1) + cls(2) * c
 
 
 def ring_frame(cls, c, s, k):
-    """The ring's axis frame: four corner squares plus integer runs on the four edges.
+    """The perimeter: 4 corner squares, a 2k-square run on each vertical wall, and one
+    square on each horizontal wall -- `4k + 6` axis squares, C2-symmetric.
 
-    Horizontal edges carry `2k - 1` run squares and vertical edges `2k`, anchored one
-    square in from the low corner -- the counts the corner modules' own bites leave.  For
-    `k = 1` that is ten axis squares: the census's n = 18 count exactly.
+    The gaps are derived, not chosen: a vertical wall covers `2k + 2` of the `L` it
+    has to span, so its single gap is `L - (2k + 2) = 2c - 1`; a horizontal wall
+    covers 3 (corner, one square, corner), so its gap is `L - 3 = 2c + 2k - 2`.  At
+    `k = 1` the ten centres are the census row's ten axis squares, exactly.
     """
-    A = cls(k) + c
-    cells = [(A, A), (-A, A), (-A, -A), (A, -A)]
-    for i in range(1, 2 * k):
-        for y in (A, -A):
-            cells.append((c + cls(i - k), y))
-    for i in range(1, 2 * k + 1):
-        for x in (A, -A):
-            cells.append((x, c + cls(i - k)))
+    a = cls(k) + c
+    cells = [(-a, -a), (-a, a), (a, a), (a, -a)]
+    for j in range(1, 2 * k + 1):
+        cells.append((-a, -a + cls(j)))          # left wall, up from the bottom corner
+    for j in range(1, 2 * k + 1):
+        cells.append((a, a - cls(j)))            # right wall, down from the top corner
+    cells.append((-a + cls(1), -a))              # bottom wall, one in from the left
+    cells.append((a - cls(1), a))                # top wall, one in from the right
     return cells
 
 
-def ring_candidates(cls, c, s, k):
-    """Every point where a module square is tangent to a horizontal and a vertical frame
-    square along an axis: `|d . e| = 1/2 + (|c| + |s|)/2`, solved for the point."""
-    A = cls(k) + c
-    half = cls(F(1, 2))
-    need = half + (abs(c) + abs(s)) * half
-    cells = ring_frame(cls, c, s, k)
-    hs = sorted({p[0] for p in cells if p[1] == -A})
-    vs = sorted({p[1] for p in cells if p[0] == A})
-    out = []
-    for fx in hs:
-        for gy in vs:
-            for sx in (cls(1), cls(-1)):
-                for sy in (cls(1), cls(-1)):
-                    out.append((fx + sx * need, gy + sy * need))
-    return cells, out
+def _ring_dot(p, q):
+    """The exact dot product of two field points."""
+    return p[0] * q[0] + p[1] * q[1]
+
+
+def _ring_at(cls, A, B, u, v):
+    """The point `p` with `p . u = A` and `p . v = B`, for an orthonormal pair u, v."""
+    return (A * u[0] + B * v[0], A * u[1] + B * v[1])
+
+
+def _ring_neg(p):
+    """The C2 image of a centre: the sentence is symmetric under `p -> -p`."""
+    return (-p[0], -p[1])
+
+
+def _ring_indices(k):
+    """Named positions inside `ring_declaration`'s cell list."""
+    f = 4 * k + 6
+    return {"bl": 0, "tl": 1, "tr": 2, "br": 3, "l1": 4, "l2": 5,
+            "r1": 4 + 2 * k, "r2": 5 + 2 * k, "b": 4 + 4 * k, "t": 5 + 4 * k,
+            "p5": f, "m5": f + 1, "p6": f + 2, "m6": f + 3,
+            "p7": f + 4, "m7": f + 5, "p8": f + 6, "m8": f + 7}
+
+
+def ring_declaration(cls, c, s, k):
+    """The 10 + 4 + 4 sentence, solved from its declared tangencies.
+
+    A tilted unit square at centre `p` has its own edges along `u = (c, s)` and
+    `v = (-s, c)`; its face in direction `u` sits at `p.u + 1/2`, and an axis square's
+    reach along `u` is `(|c| + |s|)/2`.  So a tilted-axis tangency on `u` is exactly
+
+        |(q - p) . u| = 1/2 + (|c| + |s|)/2 =: need,               q the axis square,
+
+    and a tilted-tilted tangency on `u` or `v` is exactly `|(q - p) . u| = 1`.  One
+    such equation per independent axis fixes a point, so every module below is a 2x2
+    solve in the field -- no scan, no tolerance:
+
+      * `p5` (right gap) -- `(run_end - p5).u = need` and `(p5 - corner).v = need`,
+        with `run_end = (a, a - 2k)` the last square of the right wall's run and
+        `corner = (a, -a)` the bottom-right corner: the square is wedged across the
+        gap.  `-p5` is the same wedge in the left gap, by C2.
+      * `p6 = p5 + v` -- an edge-to-edge step along the word's `v` axis.
+      * `p7`, `p8` -- each fixed by one `v`-contact with its predecessor in the chain
+        and one `u`-contact with the opposite gap square `-p5`; that second contact is
+        the pinwheel, and it is what closes the chain on the far side.
+      * `p -> -p` gives the other four tilted squares.
+    """
+    one = cls(1)
+    a = cls(k) + c
+    u, v = (c, s), (-s, c)
+    need = cls(F(1, 2)) + (abs(c) + abs(s)) * cls(F(1, 2))
+    frame = ring_frame(cls, c, s, k)
+    run_end = (a, a - cls(2 * k))
+    corner = (a, -a)
+    p5 = _ring_at(cls, _ring_dot(run_end, u) - need, _ring_dot(corner, v) + need, u, v)
+    p6 = (p5[0] + v[0], p5[1] + v[1])
+    p7 = _ring_at(cls, -_ring_dot(p5, u) + one, _ring_dot(p6, v) + one, u, v)
+    p8 = _ring_at(cls, -_ring_dot(p5, u) + one, _ring_dot(p7, v) + one, u, v)
+    tilted = [p5, _ring_neg(p5), p6, _ring_neg(p6),
+              p7, _ring_neg(p7), p8, _ring_neg(p8)]
+    return {"cells": frame + tilted,
+            "words": [(one, cls(0))] * len(frame) + [u] * len(tilted),
+            "frame": len(frame), "gap": [p5, _ring_neg(p5), p8, _ring_neg(p8)],
+            "chain": [p5, p6, p7, p8]}
+
+
+def ring_tangencies(k):
+    """Every tangency the 10 + 4 + 4 layout declares, as `(i, j)` pairs of the sentence.
+
+    `frame` -- the eight perimeter contacts: the two runs' edge-to-edge steps, the two
+               horizontal-wall squares (each flush on one edge, corner-touching the
+               run square beside it), and the two corner-point contacts.
+    `wedge` -- the four frame contacts that pin the vertical-gap squares: `p5` is
+               wedged across the right gap between the run end `r2` and the corner
+               `br`; `-p5` across the left gap between `l2` and `tl`.
+    `chain` -- the six edge-to-edge steps `p5 -> p6 -> p7 -> p8` and their C2 images.
+    `pin`   -- the four `u`-contacts that close the chain onto the opposite gap square
+               (`p7`, `p8` against `-p5`, and `-p7`, `-p8` against `p5`).
+    """
+    x = _ring_indices(k)
+    return {
+        "frame": [(x["bl"], x["l1"]), (x["l1"], x["l2"]),
+                  (x["tr"], x["r1"]), (x["r1"], x["r2"]),
+                  (x["bl"], x["b"]), (x["l1"], x["b"]),
+                  (x["tr"], x["t"]), (x["r1"], x["t"])],
+        "wedge": [(x["p5"], x["r2"]), (x["p5"], x["br"]),
+                  (x["m5"], x["l2"]), (x["m5"], x["tl"])],
+        "chain": [(x["p5"], x["p6"]), (x["p6"], x["p7"]), (x["p7"], x["p8"]),
+                  (x["m5"], x["m6"]), (x["m6"], x["m7"]), (x["m7"], x["m8"])],
+        "pin": [(x["p7"], x["m5"]), (x["p8"], x["m5"]),
+                (x["m7"], x["p5"]), (x["m8"], x["p5"])],
+    }
+
+
+def _ring_contact(cls, cells, words, i, j):
+    """True iff the pair's tightest axis is exactly touching: an exact contact.
+
+    The gate's own test, not a weaker one: every axis slack is `>= 0` (the sentence is
+    separated) and the largest of them is exactly `0` (nothing separates the pair by
+    more).  A pair can share a zero slack on one axis and still be held apart on
+    another -- the ring has 38 such coincidences and only 26 contacts -- so the
+    declaration is checked against the strict reading.
+    """
+    return max(sl for _q, sl, _n, _o in Q.pair_axes(cells, words, i, j, cls)) == 0
 
 
 def ring_field(cls, c, s, k):
-    """The ring declaration: the frame plus four 2-square corner modules.
+    """The ring, verified: walls flush, every declared tangency an exact contact, and
+    the exact gate at the side `ring_side` derives.
 
-    A module is two unit squares edge to edge along the word's edge direction, placed at
-    one of the finitely many points where its first square is tangent to a horizontal and
-    a vertical frame square (`ring_candidates`).  The exact gate is the arbiter: a
-    declaration is the ring only if it packs at clearance 0 with the side `ring_side`
-    derives.
-
-    **It does not, and this run says so instead of pretending.**  Run 93 read the census's
-    own n = 18 pose: its tilted squares are not corner modules at all -- four sit in the
-    four edge gaps and four form a pinwheel around the box centre -- so the corner-module
-    grammar is the wrong sentence shape, and the tangency set is empty at every `(k, word)`
-    tried (Q(sqrt 7) and 45 deg, k = 1, 2).  The refusal is a declared law so the failure
-    is a result rather than a silence.
+    Refusals are declared laws, not accidents:
+      * `degenerate_cell`    -- `k < 1` has no ring;
+      * `ring_wall_open`     -- a perimeter square is not flush with the container;
+      * `ring_chain_adrift`  -- a declared tangency is not a contact.  This is the
+                                family's real limit: the pinwheel's `u`-contacts close
+                                on the opposite gap square only at `k = 1` (control 24
+                                measures the exact slack at `k = 2, 3, 5`);
+      * `ring_side_mismatch` -- the gate's side is not `ring_side`;
+      * `ring_collides`      -- the sentence overlaps at its derived side.
     """
     if k < 1:
         raise Refusal("degenerate_cell", f"k = {k} has no ring")
-    cells, cands = ring_candidates(cls, c, s, k)
     L = ring_side(cls, c, s, k)
     half = cls(F(1, 2))
-    ext = (abs(c) + abs(s)) * half
-    for q in cands:
-        if abs(q[0]) + ext > L * half or abs(q[1]) + ext > L * half:
-            continue
-        slots = []
-        for cx in (cls(1), cls(-1)):
-            for cy in (cls(1), cls(-1)):
-                base = (cx * q[0], cy * q[1])
-                slots.append(base)
-                slots.append((base[0] + cx * s, base[1] - cy * c))
-        state = list(cells) + slots
-        words = [(cls(1), cls(0)) for _ in cells] + [(c, s) for _ in slots]
-        g = Q.gate(state, words, cls)
-        if g["ok"] and g["L"] == L:
-            return {"cells": cells, "slots": slots, "corner": q, "seam": c + s}
-    raise Refusal("ring_unresolved",
-                  "no corner-module placement in the tangent set packs the ring at its "
-                  "derived side: the census's ring is a gap/pinwheel sentence, not this one")
+    decl = ring_declaration(cls, c, s, k)
+    cells, words = decl["cells"], decl["words"]
+    wall = 0
+    for p in cells[:decl["frame"]]:
+        for z in (p[0], p[1]):
+            if abs(z) + half == L * half:
+                wall += 1
+    if wall != 4 * k + 10:
+        raise Refusal("ring_wall_open",
+                      f"k = {k}: {wall} flush wall faces, not {4 * k + 10}")
+    tang = ring_tangencies(k)
+    for i, j in [pair for group in tang.values() for pair in group]:
+        if not _ring_contact(cls, cells, words, i, j):
+            raise Refusal("ring_chain_adrift",
+                          f"k = {k}: the declared tangency ({i}, {j}) is not a "
+                          f"contact -- the pinwheel closes only at k = 1")
+    g = Q.gate(cells, words, cls)
+    if g["L"] != L:
+        raise Refusal("ring_side_mismatch", f"k = {k}: the gate reads {g['L']}, not {L}")
+    if not g["ok"]:
+        raise Refusal("ring_collides",
+                      f"k = {k}: {g['violations']} pairs overlap at the derived side")
+    decl.update({"gate": g, "wall": wall, "tangencies": tang})
+    return decl
 
 
-def p_ring(d, c, s, k, family="Ring", params=None):
+def ring_claim(d, c, s, k, family="Ring", params=None):
     """Gate-verify a ring over `Q(sqrt d)` and return it as a claim.
 
-    `L = 2k + 3/2 + (c + s)` and `N = 4k^2 + 2`.  At the census's Q(sqrt 7) word with
-    `k = 1` that is `N = 18`, `L = 7/2 + sqrt7/2` -- the n = 18 row's own side, built from
-    the word and the tangency rule instead of being read off the table.
+    `N = 4k + 14` (4k + 6 axis squares plus eight tilted) and
+    `L = 2k + 3/2 + (c + s)`.  At the census's Q(sqrt 7) word with `k = 1` that is
+    `N = 18`, `L = 7/2 + sqrt7/2` -- the n = 18 row's own side, built here from the
+    word and 22 declared tangencies instead of read off the table.
     """
     cls = qfield(d)
     if (c * c + s * s) != cls(1):
         raise Refusal("word_off_circle",
                       f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
     decl = ring_field(cls, c, s, k)
-    state = list(decl["cells"]) + list(decl["slots"])
-    words = ([(cls(1), cls(0)) for _ in decl["cells"]]
-             + [(c, s) for _ in decl["slots"]])
-    g = Q.gate(state, words, cls)
-    if not g["ok"]:
-        raise Refusal("ring_collides",
-                      f"{family}: {g['violations']} pairs overlap at the derived side")
+    state, words = decl["cells"], decl["words"]
+    g = decl["gate"]
     n = len(state)
     L = g["L"]
     claim = Claim("spatial_geometry", family, params or {"k": k}, n,
@@ -896,12 +1000,18 @@ def p_ring(d, c, s, k, family="Ring", params=None):
                    "void": ("L^2 - N", L * L - cls(n)),
                    "contacts": ("contacts", g["contacts"])},
                   {"state": state, "words": words, "field": f"Q(sqrt {d})",
-                   "corner": decl["corner"]})
+                   "frame": decl["frame"], "wall": decl["wall"],
+                   "tangencies": decl["tangencies"], "gap": decl["gap"]})
     claim.meta["field_d"] = d
     claim.meta["seam"] = str(c + s)
-    claim.meta["corner"] = str(decl["corner"])
+    claim.meta["frame"] = decl["frame"]
+    claim.meta["wall"] = decl["wall"]
+    claim.meta["declared"] = sum(len(v) for v in decl["tangencies"].values())
     _tag(claim, L, n)
     claim.laws["side"] = ("L", L)
+    claim.laws["axis"] = ("axis squares", decl["frame"])
+    claim.laws["gap"] = ("gap squares", 4)
+    claim.laws["pinwheel"] = ("pinwheel squares", 4)
     side = _table_side(n)
     if side is None:
         claim.meta["table_side"] = None
@@ -913,6 +1023,12 @@ def p_ring(d, c, s, k, family="Ring", params=None):
         claim.meta["beats_table"] = Ld < Td
         claim.meta["table_gap"] = str(Td - Ld)
     return claim
+
+
+def p_ring(k):
+    """The ring rung: a ring at the census's own Q(sqrt 7) word."""
+    c, s = _sqrt7_word()
+    return ring_claim(7, c, s, k)
 
 
 def p_slope(p, q, k, m=1):
@@ -1325,7 +1441,7 @@ def build_engine():
     for name, fn in (("Tile", p_grid), ("Strip", p_strip), ("Pocket", p_pocket),
                      ("Glue", p_glue), ("SymmetryFold", p_fold), ("Atom", p_atom),
                      ("DiamondField", p_diamond_field), ("Slope", p_slope),
-                     ("Seventh", p_seventh), ("Tilt", p_tilt)):
+                     ("Seventh", p_seventh), ("Tilt", p_tilt), ("Ring", p_ring)):
         pk.register(name, fn)
     pk.decimal_model = spatial_decimal
     eng.register(pk)
@@ -1366,6 +1482,8 @@ def build_engine():
         Cell("Tilt", {"t": "1/2", "k": k}) for k in (1, 2, 3)
     ] + [
         Cell("Tilt", {"t": "1/2", "k": k, "m": 2}) for k in (2, 3)
+    ] + [
+        Cell("Ring", {"k": 1})
     ]))
     eng.add_wheel(Wheel("sequences", sq, [
         Cell("Tile", {"t": str(alpha_irr), "n": 21}),
@@ -1787,6 +1905,7 @@ def selftest() -> int:
         "unknown_field": lambda: p_diamond_field("not_a_field"),
         "no_diamond": lambda: _assemble_field("empty", empty),
         "declaration_overlaps": lambda: _assemble_field("bad", bad),
+        "ring_chain_adrift": lambda: p_ring(2),
     }
     for law, fn in cases.items():
         assert _law(fn) == law, (law, _law(fn))
@@ -2187,16 +2306,6 @@ def selftest() -> int:
     assert dict(integers)[151] == 5, integers
     assert [n for n, _k in halves] == [53, 234, 747], halves
     assert ring_side(cls7, cw7, sw7, 1) == target, "the ring law must give the n = 18 side"
-    refusals = []
-    for dd, word in ((7, (cw7, sw7)), (2, Q.word_45())):
-        cls = qfield(dd)
-        for kk in (1, 2):
-            try:
-                p_ring(dd, word[0], word[1], kk)
-                raise AssertionError(f"the corner-module ring must not certify (d={dd}, k={kk})")
-            except Refusal as e:
-                assert e.law in ("ring_unresolved", "ring_collides"), e.law
-                refusals.append(f"d={dd} k={kk} {e.law}")
     say("control 23 — the Q(sqrt 7) family is one word and one side law, split by parity: "
         "every row of it (n = 18, 53, 151, 234, 747, run 86's field sweep) carries the same "
         "unit word ((1+sqrt7)/4, (-1+sqrt7)/4), recovered here from each row's own tilt at "
@@ -2206,12 +2315,73 @@ def selftest() -> int:
         ". Two rows sit at integer k (18: k = 1, 151: k = 5) and three at half-integer k "
         "(53: k = 5/2, 234: k = 13/2, 747: k = 25/2), and their pose alphabets differ "
         "widely (2, 4, 3, 2 and 665 distinct angles); the ring law's k = 1 member is "
-        "exactly 7/2 + sqrt7/2. The Ring family's derived side is that law's, but its "
-        "corner-module sentence does not pack at any tried (k, word) -- the census's own "
-        "ring is 10 boundary axis squares plus 4 tilted squares in the edge gaps plus 4 in "
-        "a central pinwheel, a different sentence shape -- so the ring is registered as a "
-        "declared refusal (" + "; ".join(refusals) + ") and n = 18 is *not* yet "
-        "constructed from grammar.")
+        "exactly 7/2 + sqrt7/2. Run 94 builds that member as a sentence (control 24) and "
+        "tests the same grammar at k = 5, where it splits.")
+
+    # --------------------------- control 24: the ring, solved from its own tangencies
+    ring = ring_claim(7, cw7, sw7, 1)
+    assert ring.n == 18, ring.n
+    assert ring.laws["extent"][1] == target, ring.laws["extent"][1]
+    assert (ring.meta["frame"], ring.meta["wall"]) == (10, 14), ring.meta["frame"]
+    assert ring.meta["declared"] == 22, ring.meta["declared"]
+    assert p_ring(1).n == 18 and p_ring(1).laws["extent"][1] == target
+    cells = ring.payload["state"]
+    words = ring.payload["words"]
+    g = Q.gate(cells, words, cls7)
+    assert g["ok"] and g["clearance"] == 0 and g["L"] == target, g
+    assert g["contacts"] == 26, g["contacts"]            # 22 declared + 4 incidental
+    for group, pairs in ring.payload["tangencies"].items():
+        for i, j in pairs:
+            axes = Q.pair_axes(cells, words, i, j, cls7)
+            assert any(sl == 0 for _q, sl, _n, _o in axes), (group, i, j)
+    dec = DecimalWitness.scalar
+    cens = _delivered_rows()[18]
+    worst = Decimal(0)
+    for x, y in cells:
+        px, py = dec(x), dec(y)
+        near = min(cens, key=lambda r: abs(dec(r[0]) - px) + abs(dec(r[1]) - py))
+        worst = max(worst, abs(dec(near[0]) - px), abs(dec(near[1]) - py))
+    assert worst < Decimal("1e-4"), worst
+    split = []
+    for kk in (2, 3, 5):
+        try:
+            ring_claim(7, cw7, sw7, kk)
+            raise AssertionError(f"the ring must not certify at k = {kk}")
+        except Refusal as e:
+            assert e.law == "ring_chain_adrift", (kk, e.law)
+            decl = ring_declaration(cls7, cw7, sw7, kk)
+            c5, w5 = decl["cells"], decl["words"]
+            idx = _ring_indices(kk)
+            slack = max(sl for _q, sl, _n, _o in
+                        Q.pair_axes(c5, w5, idx["p8"], idx["m5"], cls7))
+            split.append(f"k={kk}: N would be {4 * kk + 14}, closure slack {slack}")
+    rows151 = _delivered_rows()[151]
+    probe = ring_side(cls7, cw7, sw7, 5)
+    axis151 = sum(1 for _x, _y, t in rows151 if _word_of(t) is not None)
+    cols151 = len({x for x, _y, t in rows151 if _word_of(t) is not None})
+    assert (len(rows151), axis151, cols151) == (151, 125, 21), (axis151, cols151)
+    assert probe == (cls7(23) + cls7(0, 1)) / cls7(2), probe
+    say("control 24 — the ring is the census's own 10 + 4 + 4 sentence, solved: a C2 "
+        "perimeter of 10 axis squares (4 corners, a 3-square run up the left wall, a "
+        "3-square run down the right wall, one square inward on the bottom wall and one "
+        "on the top), four gap squares wedged across the four wall gaps by two declared "
+        "tangencies each, and a four-square pinwheel that closes each chain end onto the "
+        "opposite gap square. Each of the eight tilted squares is a 2x2 solve in Q(sqrt 7) "
+        "from those tangencies -- 22 declared, every one an exact contact -- and the exact "
+        "gate certifies N = 18 at L = " + str(target) + " with clearance 0 and "
+        f"{g['contacts']} contacts -- the 22 declared, plus 4 that follow by consequence "
+        "(the bottom and top wall squares against the opposite chain end, and the two "
+        "inner diagonals `p6/-p7`, `-p6/p7`). The census "
+        f"row itself agrees to {worst:.1e} in every centre, so the n = 18 pose *is* this "
+        "sentence: run 93 read the 10 + 4 + 4 counts correctly but the corner-module "
+        "grammar wrongly. The grammar does not generalise: the pinwheel's closure contact "
+        "is a k = 1 identity (" + "; ".join(split) + "), because the chain end's u-distance "
+        "stays 1 at every k while its v-offset is 2p5.v + 2, which grows by sqrt7 per k. "
+        "So k >= 2 is a declared refusal, not a collision. And the census's own k = 5 row "
+        "is not this family's member even in count: the ring would have N = 4k + 14 = 34 "
+        "squares at L = " + str(probe) + ", while n = 151 is a 151-square staircase ("
+        f"{axis151} axis squares in {cols151} staggered columns plus "
+        f"{len(rows151) - axis151} tilted). The side law generalises; the sentence splits.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

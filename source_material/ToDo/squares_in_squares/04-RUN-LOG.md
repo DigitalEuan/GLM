@@ -1642,3 +1642,59 @@ sequences 6/7, lattice 24/28; float audit **200 functions, 0 offenders**;
 4/4; `record_guard.py` OK. No row changed.
 
 Entries `56-THE-SQRT7-FAMILY-AND-THE-RING.md`; records `31`-`56`.
+
+## Run 94 — the ring, solved from its own tangencies
+
+**What was asked.** Replace run 93's four-corner-module ansatz with the true 10 + 4 + 4
+grammar revealed by n = 18: a C2 perimeter of 10 axis squares, 4 edge-gap tilted squares and
+a 4-square pinwheel at the Q(√7) word; extract the tight contact topology from the census row
+so every wall and pair tangency is declared; solve the coupled tangencies exactly in Q(√7),
+verify the 18-square sentence at `L = 7/2 + ½√7` with clearance 0 through the exact gate, and
+register the certified Ring cell; then test the same grammar at the next integer-k Q(√7) row
+(n = 151, k = 5) or record the exact obstruction.
+
+**The topology, extracted.** The row is 4 corner squares at `(±a, ±a)` (`a = k + c`), a
+3-square run up the left wall, a run down the right wall, one square inward on each horizontal
+wall — 10 axis squares, **14 flush wall faces** (`4k + 10` in general) — plus **4 gap squares**
+each wedged across a wall gap by two contacts, plus **4 pinwheel squares** (two `v`-steps from
+each gap square, closing on the *opposite* gap square). The gaps are derived: vertical
+`2c − 1` = 0.8229, horizontal `2c + 2k − 2` = 1.8229 at k = 1.
+
+**The solve.** A tilted square's own axes are `u = (c, s)`, `v = (−s, c)`, so a tilted–axis
+tangency on `u` is `|(q − p)·u| = 1/2 + (|c| + |s|)/2` and a tilted–tilted one is
+`|(q − p)·v| = 1`. Two equations on the orthogonal pair fix a point: `p5` from the right wall's
+run end and the bottom-right corner, `p6 = p5 + v`, `p7` and `p8` each from one chain step and
+one pinwheel contact on `−p5`; the other four are the C2 images. Exact, denominators 16:
+`p5 = (9/16 + 3/16√7, −19/16 + 1/16√7)`, `p6 = (13/16 − 1/16√7, −15/16 + 5/16√7)`,
+`p7 = (21/16 − 7/16√7, −1/16 + 5/16√7)`, `p8 = (25/16 − 11/16√7, 3/16 + 9/16√7)`.
+
+**The certificate.** 22 declared tangencies, every one an exact contact under the gate's own
+strict reading (`max_axis slack == 0`); the gate then certifies **N = 18, `L = 7/2 + ½√7`,
+clearance 0, 26 contacts, 0 violations** — the 22 declared plus 4 that follow (the bottom and
+top wall squares against the opposite chain end, and the two inner diagonals `p6/−p7`,
+`−p6/p7`). The `Ring k=1` cell is registered: spatial **47/47 certified, 0 refused**, four
+witnesses. The constructed sentence reproduces the delivered n = 18 pose to **1.8e-9** — the
+scale of the CSV's own 1e-9 shims — so **n = 18 is now constructed from grammar**, and run 93's
+"0.03–0.07 of slack, a polished decimal packing" was an artifact of reading the corner-module
+sentence's distances instead of this one's.
+
+**The generalisation, and the split.** The pinwheel's closure contact has `u`-separation
+exactly 1 at every `k`, so the question is its `v`-offset: `2·p5·v + 2 = 5/4 − (4k − 1)/4·√7`,
+equal to −0.734313 at `k = 1` (inside the unit — the contact exists) but −3.380065, −6.025816
+and −11.317319 at `k = 2, 3, 5`, so the exact closure slack is `−13/4 + (4k − 1)/4·√7`, positive
+and growing by √7 per `k`. The family therefore refuses `k ≥ 2` under the declared law
+`ring_chain_adrift` — a measured tangency that is not a tangency, not a collision (at `k = 2`
+the drifted chain also overlaps the perimeter, and the law fires first). And the census's own
+`k = 5` row is not the ring's member even in count: the ring would have `N = 4k + 14 = 34` at
+`L = 23/2 + ½√7` — the census's own side — while n = 151 is a 151-square staircase (125 axis
+squares in 21 staggered columns at `±(j + c)` and `±(j + 1/2 − s)`, plus 26 tilted, 24 at the
+word). The side law generalises across all five Q(√7) rows; the sentence splits at `k = 1`.
+
+**Verification.** `glm_wheels --selftest` **24 controls**, exit 0 (control 24 is the ring:
+declared tangencies, contacts, wall faces, the 1.8e-9 census agreement, the `k = 2, 3, 5`
+refusals with their exact slack; control 23 now points at it); spin spatial **47/47**, sequences
+6/7, lattice 24/28; float audit **207 functions, 0 offenders**; `grammar_induction --selftest`
+3/3; `qsqrt2 --selftest` 11/11; `field_triage --selftest` 4/4; `record_guard.py` OK. No row
+changed.
+
+Entries `57-THE-RING-SOLVED.md`; records `31`-`57`.
