@@ -480,8 +480,141 @@ def gate_column(ks=(15,), mset=(1, 2, 3)):
     return rows
 
 
+def motif_scan(verbose=True):
+    """What the delivered rows below `2k + 1/sqrt 2` actually do with their rotations.
+
+    Two questions, both answered from the 12-dp pose and nothing else:
+
+      (a) at the ridge's own counts `N = 4k^2 + 1`, where the table's side sits *below*
+          the single-word floor: how many rotation classes does the row use, and how
+          many squares sit at each?  (A one-word *block* is a different object from a
+          two-word coupling, and the counts say which it is.)
+      (b) among all rows, which carry two or more *tilted* classes -- the only rows in
+          which a mixed tangency can exist -- and how tight is their tightest mixed
+          pair, measured exactly as `|d . u1| - (1/2 + (|cos D| + |sin D|)/2)`?
+
+    READ-ONLY: `submission.csv` is parsed, never written; the ledger is
+    `workspace/push/row_motifs.json`.
+    """
+    rows = G._delivered_rows()
+    sides = table_sides()
+    half_sqrt2 = Decimal(2).sqrt() / 2
+    cache = {}
+
+    def hcs(ang):
+        if ang not in cache:
+            cache[ang] = T.cos_sin(ang)
+        return cache[ang]
+
+    def deg(ang):
+        return float(Decimal(F(ang).numerator) / Decimal(F(ang).denominator)) * 180.0 / 3.141592653589793
+
+    def tilted(ang):
+        d = abs(deg(ang)) % 90.0
+        return 1e-6 < d < 90.0 - 1e-6
+
+    def mixed_slack(cells, i, j):
+        """The pair's own best-axis slack, exactly as the gate defines it."""
+        (xi, yi, ai), (xj, yj, aj) = cells[i], cells[j]
+        dx = Decimal(F(xj).numerator) / Decimal(F(xj).denominator) - \
+            Decimal(F(xi).numerator) / Decimal(F(xi).denominator)
+        dy = Decimal(F(yj).numerator) / Decimal(F(yj).denominator) - \
+            Decimal(F(yi).numerator) / Decimal(F(yi).denominator)
+        best = None
+        for ang, other in ((ai, aj), (aj, ai)):
+            c, s = hcs(ang)
+            oc, os_ = hcs(other)
+            for qx, qy in ((c, s), (-s, c)):
+                proj = abs(dx * qx + dy * qy)
+                need = Decimal(1) / 2 + (abs(oc * qx + os_ * qy) + abs(oc * qy - os_ * qx)) / 2
+                v = proj - need
+                if best is None or v > best:
+                    best = v
+        return best
+
+    ridge_rows = []
+    for k in range(1, 16):
+        n = 4 * k * k + 1
+        if n not in rows:
+            continue
+        cells = rows[n]
+        L = sides[n]
+        counts = {}
+        for r in cells:
+            counts[r[2]] = counts.get(r[2], 0) + 1
+        ridge_rows.append({"n": n, "k": k, "L_dec": str(L),
+                           "slack_dec": str(L - 2 * k),
+                           "below_floor": bool(L - 2 * k < half_sqrt2),
+                           "classes": [[str(a), deg(a), c] for a, c in
+                                       sorted(counts.items(), key=lambda t: deg(t[0]))]})
+
+    two_word = []
+    for n in sorted(rows):
+        cells = rows[n]
+        classes = sorted({r[2] for r in cells if tilted(r[2])})
+        if len(classes) < 2:
+            continue
+        k = 1
+        while 4 * (k + 1) * (k + 1) + 1 <= n:
+            k += 1
+        tight, where = None, None
+        idx = {a: [i for i, r in enumerate(cells) if r[2] == a] for a in classes}
+        # a row whose pose gives every square its own angle is the relaxed rung, not a
+        # motif: its classes are not words, and pairing them says nothing.  The sample
+        # is therefore the rows whose pose shares angles between squares, and the first
+        # few members of each class stand for it.
+        if len(classes) <= 12:
+            for a in range(len(classes)):
+                for b in range(a + 1, len(classes)):
+                    for i in idx[classes[a]][:6]:
+                        for j in idx[classes[b]][:6]:
+                            v = mixed_slack(cells, i, j)
+                            if tight is None or v < tight:
+                                tight, where = v, (classes[a], classes[b])
+        L = sides[n]
+        keep = len(classes) <= 12
+        rec = {"n": n, "k": k, "L_dec": str(L), "slack_dec": str(L - 2 * k),
+               "class_count": len(classes),
+               "classes": ([[str(a), deg(a), len(idx[a])] for a in classes]
+                           if keep else None),
+               "mixed_slack_dec": None if tight is None else str(tight),
+               "mixed_pair": None if where is None else [str(where[0]), str(where[1])],
+               "below_floor": bool(L - 2 * k < half_sqrt2)}
+        two_word.append(rec)
+
+    out = {"ridge_counts": ridge_rows, "two_word_rows": two_word,
+           "ridge_below_floor": sum(1 for r in ridge_rows if r["below_floor"]),
+           "two_word_rows_below_floor": sum(1 for r in two_word if r["below_floor"])}
+    path = os.path.join(ROOT, "workspace/push/row_motifs.json")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(out, f, indent=1)
+    if verbose:
+        print("motif scan — read-only over submission.csv")
+        print("\n (a) the ridge's own counts N = 4k^2 + 1 (slack = L - 2k):")
+        for r in ridge_rows:
+            cls_ = ", ".join(f"{d:.3f}deg x{c}" for _a, d, c in r["classes"])
+            mark = "BELOW" if r["below_floor"] else "above"
+            print(f"  n={r['n']:4d} k={r['k']:2d} L={float(r['L_dec']):8.5f} "
+                  f"slack={float(r['slack_dec']):+.6f} {mark}  {cls_}")
+        print(f"\n (b) rows with two or more tilted classes: {len(two_word)} "
+              f"({out['two_word_rows_below_floor']} below the floor)")
+        for r in two_word[:24]:
+            cls_ = (", ".join(f"{d:.3f}deg x{c}" for _a, d, c in r["classes"][:4])
+                    if r["classes"] is not None else "relaxed (per-square angles)")
+            ms = r["mixed_slack_dec"]
+            mtxt = "      n/a" if ms is None else f"{float(ms):+.3e}"
+            print(f"  n={r['n']:4d} k={r['k']:2d} slack={float(r['slack_dec']):+.6f} "
+                  f"mixed={mtxt} {cls_}")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
+    return out
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
+    if "--motifs" in argv:
+        motif_scan()
+        return 0
     if "--gate-ks" in argv:
         ks = [int(x) for x in argv[argv.index("--gate-ks") + 1].split(",")]
         gate_column(ks)

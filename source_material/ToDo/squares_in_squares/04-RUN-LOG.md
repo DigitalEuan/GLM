@@ -1926,3 +1926,66 @@ at. Selftest still 27 controls; audit still 0 offenders.
 
 Entries `58-THE-STAIRCASE.md` (section 7.2), `59-ESCALATION-LADDER-BRIDGE.md`; records `31`-`59`.
 
+## Run 97 — the two-word seam: one word in a block, and why a mixed pair cannot break the floor
+
+**Two questions, no row moved.** (1) What do the delivered rows that sit below `2k + ½√2` actually
+do with their rotations? (2) Can a field-exact **two-word coupled tangency** be built, and does any
+such sentence break that floor or beat the table at the same count? Root `WHITEBOARD.md` and
+`submission.csv` are untouched.
+
+**The rows below the floor, measured.** A new `family_spin.py --motifs` (read-only over
+`submission.csv`, ledger `workspace/push/row_motifs.json`) walks the 15 rows at the ridge's own
+counts `N = 4k² + 1`: fourteen sit strictly below `2k + ½√2` (`N = 5` sits exactly on it), and from
+`k = 4` every one of them uses exactly two rotation classes, axis and 45°. The tilted count at
+`N = 677, 785, 901` is `289 = 17²`, and projecting those 289 centres onto the 45° word's own axes
+gives **17 distinct `u` levels and 17 distinct `v` levels with every gap exactly `1.000000`** — a
+17×17 lattice of *one* word, at the *same* `u` and `v` ranges in all three rows. That is a
+homometric **block**, not a coupling: it is the object that carries those rows below the floor.
+
+**The rows that really carry two words are mirror pairs.** 443 rows carry two or more tilted
+classes; 363 of them give every square its own angle (the relaxed rung) and are excluded from the
+pairing. Of the rest, 26 rows have exactly two classes, 9 of those are **mirror pairs**
+`(θ, 90° − θ)`, and 56 have a mixed tangency tight to `|residual| < 1e-6` — a real tangency at the
+table's `1e-9` polish. 52 are below the floor. `n = 198` is the cleanest: `36.870° / 53.130°` are
+the 3-4-5 words `(4/5, 3/5)` and `(3/5, 4/5)`, and their exact mixed tangency is **`28/25`**, not
+`1`. `n = 37` does the same with three words, `45° ± 2.913°`.
+
+**The two facts that decide the builder's reach.** (i) The floor is a *per-square* price: a unit
+square at word `θ` in the ridge's cross is tangent to the blocks at `φ(θ) = min(x, 1/x)`,
+`x = |c| + |s|`, and for a unit word `x ∈ [1, √2]`, so `φ ≥ ½√2` with equality exactly at 45° —
+every square in a mixed bar pays it separately (`seam_floor`, control 28 asserts `φ·x = 1` and the
+equality). (ii) A mixed tangency is never cheaper than a same-word one: two different words need
+`(1 + |cos Δ| + |sin Δ|)/2 > 1` along the first's own axis, exactly `1` only for the same word
+(`two_word_need`; the 3-4-5 pair pays `28/25`). So two words cannot cancel a seam, only add one.
+
+**The builder and the spin.** `glm_wheels.py` now carries a field-exact two-word seam: word 1 at
+the seam centre (the ridge's own slot), word 2 at the mixed need from it along word 1's `-v` (a
+vertex-to-edge tangency across two words, which no single-word sentence can express), and the width
+from `two_word_gauge` — a **closed form**, because the blocks ride outward with `w` while the bar
+rides outward with `w/2`, so every block-slot separation is monotone in `w` and the minimal width is
+a maximum of exact linear roots (no scan, no tolerance). `two_word_pair` gates it and records `L`,
+`N`, void, contacts, seam and both floors; control 28 asserts the gauge equals the gate's own
+`L − 2k`. `--two-word-spin`: 36 distinct word pairs inside their own field (`Q(√2)`: 45°, `t =
+1/2, 1/3, 1/5`, `pyth-3/4`, `pyth-5/12`; `Q(√7)`: Seventh, census, five rationals) × `k = 1..8` =
+**288 sentences, all gated at clearance 0**, seam **constant in `k`** per pair over
+`2.019084…2.533523`, margin over the floor `1.311977…1.826416`, every mixed need
+`1.002088…1.204980`: **0 below `2k + ½√2`, 0 beating the delivered row** at the same
+`N = 4k² + 2`. At the same count the single-word `m = 2` ridge sits at `2k + √2 = 2k + 1.414214`,
+so the coupled sentences are `0.605…1.119` *wider*: coupling is not a route to the floor.
+
+**Verdict, and the production that would move.** In the cross topology the refusal is structural
+and now has its mechanism: per-square floor plus a mixed need above `1`. The table's actual escape
+is the block (§ above), which is not a seam at all; that is the next production, with a falsifier —
+build a 45° block of `s²` squares with axis fill in the four corner triangles and ask whether the
+exact gate reproduces `L = 2k + 0.520815` at `N = 4k² + 1` for `k = 13, 14, 15` (and
+`2k + 0.535534` for `k ≤ 12`). Not claimed: that no two-word sentence of *any* topology can beat
+the floor — the table's own two-word rows are corner wedges at small `N`, where the seam is not a
+cross, and the run says so.
+
+**Verification.** `glm_wheels.py --selftest` **28 controls, exit 0, 1 m 50.7 s** (control 28 is the
+new one, ~2 s); `--audit` **253 functions, 0 offenders**; `--two-word-spin` 288/288 gated, 1 m 43 s;
+`family_spin.py --motifs` 15 ridge-count rows + 443 two-word rows, 32 s; `--calibrate`, `--gate-ks
+1,2,3,15`, `--beyond strip|words|stair`, `grammar_induction.py`, `qsqrt2.py`, `field_triage.py` and
+`record_guard.py` all unchanged and green. No row changed, no score claimed.
+
+Entries `60-TWO-WORD.md`; records `31`–`60`.

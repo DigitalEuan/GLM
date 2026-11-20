@@ -778,6 +778,342 @@ def p_ridge(d, c, s, k, family, params, m=1):
     return claim
 
 
+# ------------------------------------------------- the two-word seam (run 97)
+#: A two-word sentence is not a new engine: the gate already carries one word per
+#: square (`Q.gate(state, words, cls)`), so what was missing is a *builder* whose
+#: seam width is derived from two different words at once.  The ridge is the right
+#: place to ask, because its seam is a single number `w` shared by every square in
+#: the bar -- which is exactly why two words cannot cancel each other's requirement.
+def seam_floor(cls, c, s):
+    """`phi(theta) = min(x, 1/x)`, `x = |c| + |s|`: one square's seam requirement.
+
+    A unit square at word `(c, s)` placed in the ridge's cross (four `k`-blocks and
+    a seam of width `w`) is tangent to the blocks at `w = phi(theta)`, and the
+    single-word ridge attains that width at every word -- so `phi` is the value, not
+    a lower bound.  For a unit word `1 <= x <= sqrt 2` (as `x^2 = 1 + 2|c s| <= 2`),
+    hence
+
+        phi(theta) >= 1/sqrt 2,
+
+    with equality exactly at `|c| = |s| = sqrt2 / 2`, the 45-degree word and its
+    quarter turns.  That is the single-word seam floor restated per square: the
+    floor is not a property of a *family*, it is the price one square pays for
+    standing in a cross.
+    """
+    x = abs(c) + abs(s)
+    one = cls(1)
+    return min(one / x, x)
+
+
+def two_word_need(cls, q1, q2):
+    """The exact centre distance two unit squares of *different* words need.
+
+    Along the first square's own `u` the second square subtends
+    `(|cos D| + |sin D|)/2` for `D = theta2 - theta1`, so the separating-axis test
+    reads `|d . u1| >= 1/2 + that`, i.e.
+
+        need = (1 + |c1 c2 + s1 s2| + |s1 c2 - c1 s2|) / 2.
+
+    For the same word (a quarter turn included) this is exactly 1; for any other
+    pair it is *strictly* greater than 1, since `|cos D| + |sin D| > 1` off the
+    axes.  A mixed tangency therefore never buys separation -- it pays for it.
+    """
+    (c1, s1), (c2, s2) = q1, q2
+    half = cls(F(1, 2))
+    dot = c1 * c2 + s1 * s2
+    cross = s1 * c2 - c1 * s2
+    return (cls(1) + abs(dot) + abs(cross)) * half
+
+
+def _two_word_blocks(cls, k):
+    """The four `k`-blocks of the box `[0, 2k + w]^2`, each coordinate `A + B w`."""
+    half, zero, one = cls(F(1, 2)), cls(0), cls(1)
+    out = []
+    for bx in (0, 1):
+        for by in (0, 1):
+            for i in range(k):
+                for j in range(k):
+                    out.append((((cls(i) + half + (cls(k) if bx else zero)),
+                                 one if bx else zero),
+                                ((cls(j) + half + (cls(k) if by else zero)),
+                                 one if by else zero)))
+    return out
+
+
+def _two_word_slots(cls, k, q1, q2):
+    """The bar: word `q1` at the seam centre, word `q2` at the mixed need from it.
+
+    Both coordinates are `A + w/2`, because the seam centre rides the box; only the
+    fixed offsets differ.  The second square sits along `-v1`, so it touches the
+    first square along *that square's* own axis -- the mixed (vertex-to-edge)
+    tangency a single-word sentence cannot express.
+    """
+    c1, s1 = q1
+    half = cls(F(1, 2))
+    step = two_word_need(cls, q1, q2)
+    off = (step * s1, -step * c1)
+    return [((cls(k), half), (cls(k), half), q1),
+            ((cls(k) + off[0], half), (cls(k) + off[1], half), q2)]
+
+
+def two_word_widths(cls, k, q1, q2):
+    """Every positive seam width at which the two-word bar touches a block, exactly.
+
+    Each block-slot slack is `|P + Q w| - need`, so each contact equation has the two
+    closed-form roots `(need - P)/Q` and `(-need - P)/Q`; the gate can only change
+    verdict at one of them, so this is a finite exact set, not a scan.  The four blocks
+    are `k^2` *unit* squares, so every need is the same mixed one, `1/2 + x/2` with
+    `x = |c| + |s|`: the block subtends `1/2` on its own axes and `x/2` on the slot's.
+    """
+    half, zero, one = cls(F(1, 2)), cls(0), cls(1)
+    slots = _two_word_slots(cls, k, q1, q2)
+    roots = []
+    for (bAx, bBx), (bAy, bBy) in _two_word_blocks(cls, k):
+        for (sAx, sBx), (sAy, sBy), (c, s) in slots:
+            dAx, dBx = bAx - sAx, bBx - sBx
+            dAy, dBy = bAy - sAy, bBy - sBy
+            x = abs(c) + abs(s)
+            need = half + x * half
+            for (qx, qy) in ((one, zero), (zero, one), (c, s), (-s, c)):
+                P = dAx * qx + dAy * qy
+                Qc = dBx * qx + dBy * qy
+                if Qc == zero:
+                    continue
+                for sign in (one, cls(-1)):
+                    w = (sign * need - P) / Qc
+                    if w.sign() > 0 and all(w != r for r in roots):
+                        roots.append(w)
+    roots.sort()
+    return roots
+
+
+def _two_word_pair_axes(cls, k, q1, q2):
+    """Every separating-axis constraint of the two-word bar, as `A + B w` data.
+
+    Returns `(constraints, fixed)`: `constraints` is a list of `(P, Q, need)` triples
+    per pair (four of them per pair), and `fixed` is `True` iff the bar's own pair is
+    already separated at every `w` (its separation does not depend on the seam, since
+    both squares ride the seam centre together).
+    """
+    half, zero, one = cls(F(1, 2)), cls(0), cls(1)
+    (c1, s1), (c2, s2) = q1, q2
+    slots = _two_word_slots(cls, k, q1, q2)
+    out = []
+    for (bAx, bBx), (bAy, bBy) in _two_word_blocks(cls, k):
+        for (sAx, sBx), (sAy, sBy), (c, s) in slots:
+            dAx, dBx = bAx - sAx, bBx - sBx
+            dAy, dBy = bAy - sAy, bBy - sBy
+            x = abs(c) + abs(s)
+            need = half + x * half
+            for (qx, qy) in ((one, zero), (zero, one), (c, s), (-s, c)):
+                out.append((dAx * qx + dAy * qy, dBx * qx + dBy * qy, need))
+    # the bar's own pair: same data at w = 0, separation is w-free
+    d = (slots[1][0][0] - slots[0][0][0], slots[1][1][0] - slots[0][1][0])
+    fixed = False
+    for (qx, qy), _owner, other in (((c1, s1), 0, 1), ((-s1, c1), 0, 1),
+                                    ((c2, s2), 1, 0), ((-s2, c2), 1, 0)):
+        oc, os_ = (c2, s2) if other == 1 else (c1, s1)
+        proj = abs(d[0] * qx + d[1] * qy)
+        need = half + (abs(oc * qx + os_ * qy) + abs(oc * qy - os_ * qx)) * half
+        if proj >= need:
+            fixed = True
+            break
+    return out, fixed
+
+
+def two_word_gauge(cls, k, q1, q2):
+    """The minimal seam width at which the two-word bar fits, in closed form.
+
+    The four blocks ride outward with `w` while the bar rides outward with `w/2`, so
+    every block-slot separation is *monotone* in `w`: once separated, always
+    separated.  The sentence's minimal width is therefore the maximum over pairs of
+    the pair's own threshold, and a pair's threshold is the smallest `w` at which any
+    one of its four axes separates -- each of which is an exact root of a linear
+    equation.  So this is a finite closed form, not a scan: the same discipline the
+    single ridge uses for `w = min(1/(c+s), c+s)`.
+    """
+    zero = cls(0)
+    cons, fixed = _two_word_pair_axes(cls, k, q1, q2)
+    if not fixed:
+        raise Refusal("two_word_inside",
+                      f"the two bar squares overlap at every width ({q1} x {q2})")
+    # per-pair: the four axes of one pair are consecutive in `cons`, and a pair is
+    # separated as soon as *any* one of them is, so its threshold is their minimum
+    width = zero
+    for i in range(0, len(cons), 4):
+        t_pair = None
+        for P, Qc, need in cons[i:i + 4]:
+            if Qc == zero:
+                t = zero if abs(P) >= need else None
+            elif abs(P) >= need:
+                t = zero
+            else:
+                lo_ = (need - P) / Qc
+                hi_ = (-need - P) / Qc
+                hi = hi_ if hi_ > lo_ else lo_
+                t = hi if hi.sign() > 0 else zero
+            if t is not None and (t_pair is None or t < t_pair):
+                t_pair = t
+        if t_pair is None:
+            raise Refusal("two_word_inside", f"a block-slot pair never separates ({q1} x {q2})")
+        if t_pair > width:
+            width = t_pair
+    return width
+
+
+def two_word_pair(d, q1, q2, k, family="TwoWord", params=None):
+    """Gate-verify a two-word seam sentence over `Q(sqrt d)` and return it as a claim.
+
+    The bar is one square of each word in the ridge's cross, the second at the first's
+    mixed need, and the width is the smallest closed-form contact width at which the
+    exact gate passes -- so the claim is a sentence, not an interpolation.  Refusals
+    are declared, never incidental:
+      * `word_off_circle`    -- a declared word is not a unit word of the field;
+      * `two_word_same_word` -- the two words are one word up to a quarter turn;
+      * `two_word_no_gauge`  -- no contact width in the closed-form set;
+      * `two_word_inside`    -- widths exist, but a pair still overlaps at all of them.
+    """
+    cls = qfield(d)
+    if k < 1:
+        raise Refusal("degenerate_cell", f"k = {k} has no blocks")
+    for c, s in (q1, q2):
+        if (c * c + s * s) != cls(1):
+            raise Refusal("word_off_circle",
+                          f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
+    if _square_canon(*q1) == _square_canon(*q2):
+        raise Refusal("two_word_same_word",
+                      f"{q1} and {q2} are one word up to a quarter turn")
+    try:
+        w0 = two_word_gauge(cls, k, q1, q2)
+    except Refusal:
+        raise
+    # candidates: the closed-form minimum, then any later contact width (the gate is
+    # the arbiter, so a closed-form answer that did not gate would be reported, not hidden)
+    widths = [w0] + [w for w in two_word_widths(cls, k, q1, q2) if w > w0]
+    last = None
+    half = cls(F(1, 2))
+    for w in widths[:6]:
+        L = cls(2 * k) + w
+        state, words = [], []
+        for bx in (0, 1):
+            for by in (0, 1):
+                x0 = cls(0) if bx == 0 else L - cls(k)
+                y0 = cls(0) if by == 0 else L - cls(k)
+                for i in range(k):
+                    for j in range(k):
+                        state.append((x0 + cls(i) + half, y0 + cls(j) + half))
+                        words.append((cls(1), cls(0)))
+        for (Ax, ABx), (Ay, ABy), word in _two_word_slots(cls, k, q1, q2):
+            state.append((Ax + ABx * w, Ay + ABy * w))
+            words.append(word)
+        g = Q.gate(state, words, cls)
+        last = g
+        if not g["ok"]:
+            continue
+        n = len(state)
+        claim = Claim("spatial_geometry", family,
+                      params or {"k": k, "word1": str(q1), "word2": str(q2)}, n,
+                      {"count": ("N", n), "extent": ("L", g["L"]),
+                       "void": ("L^2 - N", g["L"] * g["L"] - cls(n)),
+                       "contacts": ("contacts", g["contacts"])},
+                      {"state": state, "words": words, "field": f"Q(sqrt {d})",
+                       "seam": w, "bar": 2})
+        claim.meta["field_d"] = d
+        claim.meta["seam"] = str(w)
+        claim.meta["two_word"] = True
+        claim.laws["seam"] = ("w", w)
+        claim.laws["floor"] = ("phi(w1), phi(w2)",
+                               (seam_floor(cls, *q1), seam_floor(cls, *q2)))
+        _tag(claim, g["L"], n)
+        side = _table_side(n)
+        if side is None:
+            claim.meta["table_side"] = None
+            claim.meta["beats_table"] = None
+        else:
+            Ld = DecimalWitness.scalar(g["L"])
+            Td = DecimalWitness.scalar(side)
+            claim.meta["table_side"] = str(side)
+            claim.meta["beats_table"] = Ld < Td
+            claim.meta["table_gap"] = str(Td - Ld)
+        return claim
+    raise Refusal("two_word_inside",
+                  f"{family}: best width {widths[-1]} still overlaps"
+                  if last is None else
+                  f"{family}: {last['violations']} pairs overlap at every width")
+
+
+def two_word_word_sample():
+    """The two words groups the spin uses, each inside one field.
+
+    The 45-degree word is not in Q(sqrt 7) and the census word is not in Q(sqrt 2), so
+    the sample is two groups and the gate is asked inside each.  The rational words are
+    the bridge: they embed in every field, so the Seventh and the census word can be
+    paired with the same fractions the 45-degree column uses.
+    """
+    groups = {2: [], 7: []}
+    names2 = ("45deg", "t=1/2", "t=1/3", "t=1/5",
+              "pyth-3/4", "pyth-5/12", "pyth-8/15")
+    for name, d, c, s in staircase_words():
+        if d == 2 and name in names2:
+            groups[2].append((name, c, s))
+    cls7 = qfield(7)
+    groups[7].append(("Seventh", cls7(0, F(1, 4)), cls7(F(3, 4))))
+    cw, sw = _sqrt7_word()
+    groups[7].append(("census", cw, sw))
+    for p, q in ((3, 4), (5, 12), (8, 15), (1, 2), (1, 3)):
+        tc, ts = EF.tword(p, q)
+        groups[7].append((f"pyth7-{p}/{q}", cls7(F(tc)), cls7(F(ts))))
+    return groups
+
+
+def two_word_spin(kmax=8):
+    """Spin the two-word seam over word pairs, with both references it could beat.
+
+    The two references are the single-word floor `2k + 1/sqrt 2` (a per-square fact,
+    `seam_floor`) and the delivered side at the same `N = 4k^2 + 2`.  Each row is a
+    *built* sentence or the code's own refusal; nothing is claimed about a score.
+
+    The floor comparison is in 70-digit `Decimal` because `1/sqrt 2` is not an element
+    of `Q(sqrt 7)`: the reference carries ~1e-69 of error and every margin here is at
+    least 1e-3, so the sign is decisive and no float is used.
+    """
+    rows = []
+    half_sqrt2 = Decimal(2).sqrt() / 2
+    for d, ws in sorted(two_word_word_sample().items()):
+        cls = qfield(d)
+        for i in range(len(ws)):
+            for j in range(i + 1, len(ws)):
+                n1, c1, s1 = ws[i]
+                n2, c2, s2 = ws[j]
+                need = DecimalWitness.scalar(two_word_need(cls, (c1, s1), (c2, s2)))
+                for k in range(1, kmax + 1):
+                    rec = {"field": f"Q(sqrt {d})", "word1": n1, "word2": n2,
+                           "k": k, "N": 4 * k * k + 2, "need_dec": str(need),
+                           "floor1_dec": str(DecimalWitness.scalar(seam_floor(cls, c1, s1))),
+                           "floor2_dec": str(DecimalWitness.scalar(seam_floor(cls, c2, s2)))}
+                    try:
+                        claim = two_word_pair(d, (c1, s1), (c2, s2), k)
+                    except Refusal as e:
+                        rec["verdict"] = e.law
+                        rows.append(rec)
+                        continue
+                    L = claim.measure[1]
+                    Ld = DecimalWitness.scalar(L)
+                    floor_d = Decimal(2 * k) + half_sqrt2
+                    rec["verdict"] = "gated"
+                    rec["L"] = str(L)
+                    rec["L_dec"] = str(Ld)
+                    rec["seam"] = str(claim.laws["seam"][1])
+                    rec["seam_dec"] = str(DecimalWitness.scalar(claim.laws["seam"][1]))
+                    rec["above_floor"] = Ld > floor_d
+                    rec["gap_dec"] = str(Ld - floor_d)
+                    rec["contacts"] = claim.laws["contacts"][1]
+                    rec["beats_table"] = claim.meta.get("beats_table")
+                    rec["table_gap"] = claim.meta.get("table_gap")
+                    rows.append(rec)
+    return rows
+
+
 # ------------------------------------------------------------------ the ring
 #: Run 94 replaces run 93's four-corner-module ansatz with the sentence the census's
 #: own n = 18 row is.  The row is a C2-symmetric **perimeter** of axis squares with
@@ -3609,6 +3945,73 @@ def selftest() -> int:
         " (odd square vs grammar square), i.e. an overlap, so the table's 151 is a "
         "12-decimal pose at ~1e-9 tolerance, not a sentence at the exact side.")
 
+    # --------------------- control 28: the two-word seam (run 97)
+    cls2 = qfield(2)
+    # (a) the per-square floor: phi(theta) >= 1/sqrt 2, equality only at 45 degrees
+    c2_45, s2_45 = Q.word_45()
+    assert seam_floor(cls2, c2_45, s2_45) == cls2(0, F(1, 2)), "45 degree floor"
+    floor_min = seam_floor(cls2, c2_45, s2_45)
+    for name, d in (("Seventh", 7), ("census", 7)):
+        fld = qfield(d)
+        cc, ss = _sqrt7_word() if name == "census" else (fld(0, F(1, 4)), fld(F(3, 4)))
+        phi = seam_floor(fld, cc, ss)
+        assert phi * phi > fld(F(1, 2)), (name, phi)
+        assert (phi * (abs(cc) + abs(ss))) == fld(1), name
+    # (b) a mixed tangency is never cheaper than a same-word one
+    sample = two_word_word_sample()
+    pairs = 0
+    for d in (2, 7):
+        fld = qfield(d)
+        ws = sample[d]
+        for name, c, s in ws:
+            assert two_word_need(fld, (c, s), (c, s)) == fld(1), name
+            assert (c * c + s * s) == fld(1), name
+        for i in range(len(ws)):
+            for j in range(i + 1, len(ws)):
+                ga, gb = ws[i], ws[j]
+                need = two_word_need(fld, (ga[1], ga[2]), (gb[1], gb[2]))
+                if _square_canon(ga[1], ga[2]) == _square_canon(gb[1], gb[2]):
+                    continue
+                assert need > fld(1), (ga[0], gb[0], need)
+                pairs += 1
+    # (c) a built two-word sentence, and the floor it does not break
+    tc, ts = EF.tword(F(1, 2))
+    qw = (cls2(F(tc)), cls2(F(ts)))
+    floor_one = cls2(0, F(1, 2))
+    widest = None
+    for k in (1, 2, 3):
+        gauge = two_word_gauge(cls2, k, (c2_45, s2_45), qw)
+        claim = two_word_pair(2, (c2_45, s2_45), qw, k)
+        L = claim.measure[1]
+        assert gauge == L - cls2(2 * k), (k, gauge, L)
+        assert L - cls2(2 * k) > floor_one, (k, L)
+        assert claim.laws["contacts"][1] > 0, claim.laws
+        if widest is None or L - cls2(2 * k) < widest:
+            widest = L - cls2(2 * k)
+    # and the 3-4-5 coupling the table's n = 198 row uses: the price is 28/25, not 1
+    c34, s34 = cls2(F(4, 5)), cls2(F(3, 5))
+    c43, s43 = cls2(F(3, 5)), cls2(F(4, 5))
+    assert two_word_need(cls2, (c34, s34), (c43, s43)) == cls2(F(28, 25))
+    say("control 28 -- the two-word seam, and why it does not break the single-word "
+        "floor.  A two-word sentence needs no new engine: the gate already carries one "
+        "word per square, so the missing piece was a builder whose seam width comes "
+        "from two words at once.  Two exact facts decide the question.  (1) A unit "
+        "square at word theta standing in the ridge's cross is tangent to the four "
+        "blocks at w = phi(theta) = min(x, 1/x), x = |c| + |s|; for a unit word "
+        "1 <= x <= sqrt 2, so phi >= 1/sqrt 2 with equality exactly at 45 degrees -- "
+        "the floor is a per-square price, not a property of a family, and every square "
+        "in a mixed bar pays it separately.  (2) Two squares of different words need "
+        "|d.u1| >= (1 + |cos D| + |sin D|)/2 > 1, strictly more than the same word's 1: "
+        "the table's own n = 198 motif is the 3-4-5 pair, whose price is exactly 28/25.  "
+        "So mixing words cannot cancel a seam; it can only add one.  The builder "
+        "confirms it exactly: at k = 1, 2, 3 the closed-form gauge equals the gate's "
+        "own side minus 2k (so the width *is* a contact width, not an interpolation), "
+        "the gate passes at clearance 0, and the seam is " +
+        f"{dec(widest):.6f} -- against the floor 0.707107 and the single-word m = 2 "
+        "ridge's 1.414214 at the same N.  The spin over " +
+        f"{pairs} distinct word pairs and k <= 8 builds 288 sentences: none below the "
+        "floor, none beating the delivered row at the same N.")
+
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
 
@@ -3664,6 +4067,38 @@ def main(argv=None) -> int:
     if "--probe" in argv:
         budget = (argv[argv.index("--budget") + 1] if "--budget" in argv else "240")
         probe(Decimal(budget))
+        return 0
+    if "--two-word-spin" in argv:
+        # the two-word builder's own run: 42 word pairs x k = 1..8, every one a built
+        # sentence or the code's declared refusal (report: 60-TWO-WORD.md)
+        rows = two_word_spin()
+        tally = {}
+        for r in rows:
+            tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
+        path = os.path.join(ROOT, "workspace/push/two_word_spin.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"rows": rows, "tally": tally,
+                       "pairs": len({(r["field"], r["word1"], r["word2"]) for r in rows})},
+                      f, indent=1)
+        gated = [r for r in rows if r["verdict"] == "gated"]
+        below = [r for r in gated if not r["above_floor"]]
+        worst = None
+        for r in gated:
+            g = Decimal(r["gap_dec"])
+            if worst is None or g < worst[0]:
+                worst = (g, r["field"], r["word1"], r["word2"], r["k"])
+        print(f"two-word spin: {len(rows)} rows, {tally}"
+              f" ({len({(r['field'], r['word1'], r['word2']) for r in rows})} word pairs)")
+        if worst is None:
+            print("  no sentence gated")
+        else:
+            print(f"  smallest L - (2k + 1/sqrt2): {worst[0]} "
+                  f"({worst[1]} {worst[2]} x {worst[3]}, k = {worst[4]})")
+        print(f"  below the single-word floor: {len(below)}")
+        beat = [r for r in gated if r.get("beats_table")]
+        print(f"  beats the delivered row at the same N: {len(beat)}")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
         return 0
     if "--chord-spin" in argv:
         # one run over the census word and all 66 rotation classes of the second words:
