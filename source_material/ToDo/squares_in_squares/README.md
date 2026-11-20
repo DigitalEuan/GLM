@@ -38,7 +38,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 (0.76 % holds only at n = 1000, s(5) is 2.707107 and proved, "0/8" is run 41's,
 "run 50" does not exist), and their n = 5 test case is ill-posed.
 
-## Current results (Run 92, 2026-11-20; last score move run 47)
+## Current results (Run 94, 2026-11-20; last score move run 47)
 
 | Quantity | Value |
 |---|---|
@@ -67,7 +67,23 @@ needed `(√7 − 1)/2` seam, and the row itself is 10 axis squares on `±(5/4 +
 tilted, i.e. `L = 3 + 2cos`: an odd rational part with a cosine term where the ridge is an
 even `2k` plus a seam, so it is a ring sentence rather than a near miss; **22 controls**,
 spatial **46/46** certified, float audit **195 functions, 0 offenders**, no row changed;
-records `31`–`55` |
+records `31`–`55`; run 93 reads the whole Q(√7) slice of the census — five rows (n = 18, 53, 151,
+234, 747), each re-derived from its own pose at 70 digits — and finds one shared word,
+`((1+√7)/4, (√7−1)/4)`, unit-checked exactly in every one, with the single side law
+`L = 2k + 3/2 + (c + s)` (`ring_side`), which at `k = 1` is exactly `7/2 + √7/2` and so
+contains run 92's `3 + 2cos` as a special case; solving it per row splits the family by the
+**parity of k** — integer for two rows (18: k = 1, 151: k = 5), half-integer for three
+(53: 5/2, 234: 13/2, 747: 25/2) — while the alphabets differ widely (1, 3, 2, 1 and 663
+distinct tilt angles, with 8, 6, 24, 36 and 2 squares at the word); and it builds the Ring
+family in `glm_wheels` — `ring_side`, `ring_frame`, `ring_candidates`, `ring_field`,
+`p_ring`, field-general, with the exact gate as arbiter — which **refuses** at every tried
+`(k, word)` (Q(√7) and 45°, k = 1, 2) under the declared law `ring_unresolved`, because the
+census's own ring is 10 boundary axis squares plus 4 tilted in the edge gaps plus a central
+pinwheel rather than four corner modules, and its recorded pose carries 0.03–0.07 of slack
+between module and frame — a polished decimal packing, not an exact contact sentence — so
+no Ring cell is registered and **n = 18 is not yet constructed from grammar**, the coupled
+gap/pinwheel tangency being named as the next job; **23 controls**, spatial **46/46**,
+float audit **200 functions, 0 offenders**, no row changed; run 94 rebuilds the Ring from the census's own sentence and certifies it — the n = 18 pose is not a corner-module ansatz and is not slack: it is a C2 perimeter of 10 axis squares (4 corners at `±(k + c)`, a 3-square run up the left wall, a run down the right wall, one square inward on each horizontal wall), **4 gap squares** each wedged across a wall gap, and **4 pinwheel squares** — every one of the eight tilted a 2×2 exact solve in Q(√7) from two declared tangencies (`|(q − p)·u| = 1/2 + (|c| + |s|)/2` against an axis square, `= 1` against a tilted one on `v`), so with **22 declared tangencies, all exact contacts, and 14 flush wall faces** the exact gate certifies **N = 18 at `L = 7/2 + ½√7` with clearance 0, 26 contacts and 0 violations**, the `Ring k=1` cell is registered and the spatial wheel is **47/47 certified**, and the constructed sentence reproduces the delivered n = 18 row to **1.8e-9** (the CSV's own shim scale) — so n = 18 *is* now constructed from grammar, and run 93's "0.03–0.07 of slack" was read off the wrong sentence; and the grammar is shown not to generalise: the pinwheel's closure contact has `u`-separation exactly 1 at every `k` while its `v`-offset is `2·p5·v + 2 = 5/4 − (4k − 1)/4·√7` = −0.734313 at `k = 1` (the contact exists) and −3.380065, −6.025816, −11.317319 at `k = 2, 3, 5` (exact closure slack `−13/4 + (4k − 1)/4·√7`, growing by √7 per `k`), so `k ≥ 2` refuses under the declared law `ring_chain_adrift` — a tangency that is measured and is not one — and the census's own `k = 5` row is not this family's member even in count: the ring would have `N = 4k + 14 = 34` at the census's own side `23/2 + ½√7`, while n = 151 is a 151-square staircase (125 axis squares in 21 staggered columns at `±(j + c)` and `±(j + 1/2 − s)` plus 26 tilted, 24 at the word) — the side law generalises across all five Q(√7) rows, the sentence splits at `k = 1`; **24 controls**, spatial **47/47**, float audit **207 functions, 0 offenders**, no row changed; records `31`–`57` |
 
 ## Where the score stands, said plainly
 
