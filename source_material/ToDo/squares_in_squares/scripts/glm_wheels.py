@@ -673,7 +673,7 @@ def p_ridge(d, c, s, k, family, params):
                       f"cos^2 + sin^2 = {c * c + s * s} != 1 in Q(sqrt {d})")
     w = ridge_width(cls, c, s)
     state, words = _ridge_sentence(cls, c, s, k, w)
-    g = qgate(cls, state, words)
+    g = Q.gate(state, words, cls)
     if not g["ok"]:
         raise Refusal("ridge_cuts_corner",
                       f"{family}: {g['violations']} pairs overlap at width {w}")
@@ -766,10 +766,10 @@ def p_fold(k):
 
 
 # ---------------------------------------- higher rungs: a field-generic gate (run 90)
-#: The `Quad` subclasses for Q(sqrt d), made once per d.  `exact_field.Quad` already
-#: carries exact sign, floor, abs and order for any square-free d, so a second gate
-#: implementation over any of them is a *port*, not a new theory -- and control 20
-#: proves it agrees with `qsqrt2.gate` on every certified cell.
+#: The `Quad` subclasses for Q(sqrt d), made once per d.  `exact_field.Quad` carries
+#: exact sign, floor, abs and order for any square-free d, and `qsqrt2.gate` takes the
+#: class as an argument -- so a higher rung is verified by the *same* procedure, not by
+#: a copy of it (control 21 checks the two call forms on every spatial cell).
 _QFIELDS: dict = {}
 
 
@@ -783,11 +783,6 @@ def qfield(d):
     return _QFIELDS[d]
 
 
-def field_class(claim):
-    """The field a claim's sentence lives in, from its declared discriminant."""
-    return qfield(int(claim.meta.get("field_d", 2)))
-
-
 def squarefree_split(n):
     """`n = k^2 * d` with d square-free: so sqrt(n) = k sqrt(d) lives in Q(sqrt d)."""
     if n < 1:
@@ -799,15 +794,6 @@ def squarefree_split(n):
             k *= m
         m += 1
     return d, k
-
-
-def sqrt_in(d, n):
-    """`sqrt(n)` as an element of `Q(sqrt d)`, where `n = k^2 d` (exact)."""
-    cls = qfield(d)
-    dd, k = squarefree_split(n)
-    if dd != d:
-        raise Refusal("wrong_field", f"sqrt({n}) is not in Q(sqrt {d})")
-    return cls(0, F(1, k)) if k != 1 else cls(0, 1)
 
 
 def unit_word(d, p, q):
@@ -825,90 +811,21 @@ def unit_word(d, p, q):
     return cls(0, F(p, k * d)), cls(0, F(q, k * d))
 
 
-def qframe_extent(cls, c, s):
-    return (abs(c) + abs(s)) * cls(F(1, 2))
-
-
-def qaxis_extent(cls, c, s, qx, qy):
-    return (abs(c * qx + s * qy) + abs(c * qy - s * qx)) * cls(F(1, 2))
-
-
-def qside(cls, state, words):
-    n = len(state)
-    ex = [qframe_extent(cls, *w) for w in words]
-    xs = [state[i][0] + ex[i] for i in range(n)]
-    xn = [state[i][0] - ex[i] for i in range(n)]
-    ys = [state[i][1] + ex[i] for i in range(n)]
-    yn = [state[i][1] - ex[i] for i in range(n)]
-    return max(max(xs) - min(xn), max(ys) - min(yn))
-
-
-def qpairs(cls, state, words, i, j):
-    """The four SAT (axis, slack, need, owner) triples of a pair, in any `Quad` field."""
-    half = cls(F(1, 2))
-    dx = state[j][0] - state[i][0]
-    dy = state[j][1] - state[i][1]
-    out = []
-    for owner, other in ((i, j), (j, i)):
-        c, s = words[owner]
-        oc, os_ = words[other]
-        for qx, qy in ((c, s), (-s, c)):
-            slack = abs(dx * qx + dy * qy) - (half + qaxis_extent(cls, oc, os_, qx, qy))
-            out.append(((qx, qy), slack, half + qaxis_extent(cls, oc, os_, qx, qy), owner))
-    return out
-
-
-def qgate(cls, state, words):
-    """The exact SAT sentence gate over any `Quad` field (the algebra of `q.sqrt2.gate`).
-
-    Same contract, same prune (`|dx| >= 2` or `|dy| >= 2` cannot be the worst pair),
-    same return keys.  Written once for every discriminant so a Q(sqrt 5) or Q(sqrt 7)
-    sentence is verified by the same decision procedure as a Q(sqrt 2) one.
-    """
-    n = len(state)
-    if n != len(words):
-        raise ValueError("state and words disagree on the number of squares")
-    if n == 0:
-        return {"ok": True, "L": cls(0), "clearance": None, "contacts": 0,
-                "violations": 0}
-    L = qside(cls, state, words)
-    two = cls(2)
-    worst, contacts, violations = None, 0, 0
-    for i in range(n):
-        xi, yi = state[i]
-        for j in range(i + 1, n):
-            if abs(state[j][0] - xi) >= two or abs(state[j][1] - yi) >= two:
-                continue
-            best = None
-            for _q, slack, _need, _owner in qpairs(cls, state, words, i, j):
-                if best is None or slack > best:
-                    best = slack
-            if best == 0:
-                contacts += 1
-            if best.sign() < 0:
-                violations += 1
-            if worst is None or best < worst:
-                worst = best
-    return {"ok": violations == 0, "L": L, "clearance": worst,
-            "contacts": contacts, "violations": violations}
-
-
 def gate_of(claim):
     """The gate verdict for a claim, in the claim's own field.
 
-    `Q(sqrt 2)` keeps `qsqrt2.gate` -- the decision procedure every certified cell
-    already passes -- and any other field uses the generic port above.
+    There is one gate (`qsqrt2.gate`), now parametrised by the field class; a claim only
+    declares which field its sentence lives in.
     """
     d = int(claim.meta.get("field_d", 2))
     state, words = claim.payload["state"], claim.payload["words"]
-    return Q.gate(state, words) if d == 2 else qgate(qfield(d), state, words)
+    return Q.gate(state, words, qfield(d))
 
 
 def pairs_of(claim, i, j):
     d = int(claim.meta.get("field_d", 2))
     state, words = claim.payload["state"], claim.payload["words"]
-    return (Q.pair_axes(state, words, i, j) if d == 2
-            else qpairs(qfield(d), state, words, i, j))
+    return Q.pair_axes(state, words, i, j, qfield(d))
 
 
 # --------------------------------------------------- diamond insertion (run 87)
@@ -1863,14 +1780,26 @@ def selftest() -> int:
     # 21. the algebraic rungs: one ridge family, three fields, and the 45-degree member
     #     IS the Strip -- so the census's Q(sqrt5), Q(sqrt7) and rational-t rungs are
     #     gate-verified by the same procedure as every Q(sqrt2) cell
-    rows = []
-    for name in ("n10", "n19", "n40"):
-        c = p_diamond_field(name)
-        g1, g2 = Q.gate(c.payload["state"], c.payload["words"]), \
-            qgate(Q2, c.payload["state"], c.payload["words"])
-        assert (g1["ok"], g1["L"], g1["clearance"], g1["contacts"],
-                g1["violations"]) == (g2["ok"], g2["L"], g2["clearance"],
-                                      g2["contacts"], g2["violations"]), name
+    pk = eng.domains["spatial_geometry"]
+    compared = 0
+    for cell in eng.wheels[0].cells:
+        claim = pk.build(cell.family, **cell.params)
+        st, ws = claim.payload["state"], claim.payload["words"]
+        cls = type(st[0][0])
+        g_infer = Q.gate(st, ws)              # the field read off the state
+        g_decl = Q.gate(st, ws, cls)          # the field declared
+        for key in ("ok", "L", "clearance", "contacts", "violations"):
+            assert g_infer[key] == g_decl[key], (cell.family, cell.params, key)
+        assert gate_of(claim) == g_infer, (cell.family, cell.params)
+        for i in range(len(st)):
+            for j in range(i + 1, len(st)):
+                a = [(str(q[0]), str(q[1]), sl.sign())
+                     for q, sl, _n, _o in Q.pair_axes(st, ws, i, j)]
+                b = [(str(q[0]), str(q[1]), sl.sign())
+                     for q, sl, _n, _o in pairs_of(claim, i, j)]
+                assert a == b, (cell.family, cell.params, i, j)
+        compared += 1
+    assert compared == len(eng.wheels[0].cells) >= 40, compared
     for kk in (1, 2):
         ridge = p_ridge(2, *Q.word_45(), kk, "Ridge45", {"k": kk})
         strip = p_strip(kk, 1)
@@ -1897,10 +1826,10 @@ def selftest() -> int:
         raise AssertionError("a word off the unit circle must refuse")
     except Refusal as e:
         assert e.law in ("word_off_circle", "wrong_field"), e.law
-    say("control 21 — the ridge family is one sentence over three fields: the "
-        "45-degree member reproduces S(k,1) exactly, `qgate` agrees with `qsqrt2.gate` "
-        "cell for cell, and every rung gates at clearance 0 with its exact algebraic "
-        "side: " + "; ".join(rungs))
+    say(f"control 21 — one gate, {compared} spatial cells: the field read off the state "
+        "and the field declared give identical verdicts and identical pair slacks on "
+        "every cell; the 45-degree ridge reproduces S(k,1) exactly and every rung gates "
+        "at clearance 0 with its exact algebraic side: " + "; ".join(rungs))
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

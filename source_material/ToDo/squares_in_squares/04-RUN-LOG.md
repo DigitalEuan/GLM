@@ -1515,3 +1515,36 @@ offenders**; induction acceptance 10/10, 19/19, 40/40 exact; `qsqrt2 --selftest`
 `field_triage --selftest` 4/4; `record_guard.py` OK. No row changed.
 
 Entries `53-RIDGE-AND-RUNGS.md`; records `31`-`53`.
+
+---
+
+## Run 91 — one gate, parametrised by its field
+
+**What was asked.** Parametrise `qsqrt2`'s gate over the field class instead of keeping a
+second copy in `glm_wheels`, make control 21 compare the two on every spatial cell, and cut
+any helpers the run-90 additions left unused.
+
+**One procedure.** `frame_extent`, `axis_extent`, `side`, `pair_axes` and `gate` in
+`qsqrt2` now take `cls` -- an `exact_field.Quad` subclass -- defaulting to the class read
+off the first coordinate (`field_of`). Every constant is built from it (`cls(F(1,2))`,
+`cls(2)`, `cls(0)`), so a Q(sqrt5) or Q(sqrt7) sentence is decided by the same code, and
+every existing caller of `Q.gate(state, words)` is unchanged and returns the same numbers.
+`glm_wheels` loses `qgate`, `qpairs`, `qside`, `qframe_extent` and `qaxis_extent` (~60
+lines of duplicated algebra); `gate_of`/`pairs_of` pass the claim's field class through.
+Two run-90 helpers nothing called are gone as well: `field_class` and `sqrt_in`. The float
+audit drops from 197 to 191 decision functions -- seven removed, one added (`field_of`).
+
+**Control 21, widened.** It now builds all 40 spatial cells through the domain and checks,
+for each, that the inferred-class and declared-class verdicts agree on ok/L/clearance/
+contacts/violations, that `gate_of(claim)` equals both, and that for **every pair** the
+axis vectors and slack signs from `Q.pair_axes` and `pairs_of` are identical. The ridge
+assertions stay: the 45-degree member is `S(k,1)` cell for cell, and every rung gates at
+clearance 0 with its exact side and calibration.
+
+**Verification.** `glm_wheels --selftest` 21 controls, exit 0; spin spatial **40/40**,
+sequences 6/7, lattice 24/28; float audit **191 functions, 0 offenders**;
+`qsqrt2 --selftest` 11/11 (the parametrised gate still passes the cage controls);
+`grammar_induction --selftest` 3/3; `field_triage --selftest` 4/4; `record_guard.py` OK.
+No number moved; no row changed.
+
+Entries `54-ONE-GATE.md`; records `31`-`54`.
