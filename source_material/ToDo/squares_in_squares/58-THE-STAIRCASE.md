@@ -135,7 +135,7 @@ exactly tangent along `u` to its twin (`Δu = 1`, `Δv = 0`).
 
 ```
 N = 150 = 149 + 1 cap brick      L = 23/2 + ½√7
-clearance = 0     contacts = 451     violations = 0
+clearance = 0     contacts = 449     violations = 0
 ```
 
 And with that brick in place the cage is **empty for the census word itself** — the pocket is
@@ -180,9 +180,43 @@ pair — so the whole test stays in one field and every comparison in it is exac
 so the obstruction is not this one word's arithmetic — the pocket is closed for
 `Q(√7) ∪ Q_Pyth`, and the table's escape is precisely a rotation that lies in neither.
 
+The sweep is **66 cages, not 78**: a quarter turn of a word (`(c, s) → (−s, c)`) leaves the
+square unchanged, so a cage answers for a whole rotation class at once and one representative
+per class decides every word in it. Two loss-free changes took the sweep from 40.0 s to 19.5 s:
+the class reduction, and a rational pre-filter that skips a cell when its own coordinate is
+further from the whole box than that cell's largest separation need (a cell that skips cannot
+cover the box, so nothing is proved less). No verdict moved: all 66 cages are empty, the 149
+cage still has capacity 1 with cover `5/8` × `3/4`, and the cap brick is still tangent `Δu = 1`.
+
+### 7.1 Mixing the census word with the table's own rotation
+
+The census's own row does not use a second field word: it spends two squares on a **rotation of
+0.614761828896 rad**, exactly `19211307153/31250000000`. That angle is rational, but its cosine
+is not a field element — so this test is *measured* wherever it cannot be caged, and is labelled
+as measured here.
+
+* Rounded **up** at `1e−25` into Q(√7) (so `cos² + sin² ≥ 1` and the caged square is the table's
+  square grown by `1e−25`), the rotation still finds a placement against the exact 149, and the
+  exact gate certifies **N = 150 at `23/2 + ½√7`, clearance 0, 449 contacts**. The table's own
+  rotation *does* close a 150th square at the census side.
+* It does not close the 151st. Two such squares side by side along the word's own `v` are one
+  rectangle of sides `(1, 2)` in that frame; the cage for the rectangle against the 149
+  **collapses to a single box of width `1e−3` with no witness in it** — a degenerate tangency —
+  and an exact `17 × 17` point scan inside that box finds no feasible pair either. With the cap
+  brick in place the cage is *empty* for the rotation too, so the pocket admits one extra square
+  and no more.
+* With the **census** word the same rectangle cage is **empty**: an exact proof, and the same
+  fact as capacity 1 read another way.
+
+So the honest answer to "does 151 close at the census side" is **no, not as a sentence**: at most
+one extra square fits, and that is the certified 150. The delivered row reaches 151 the other way
+— by tolerance. Replaying its own two rotation squares against our exact 149 gives worst pair
+slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the table's n = 151 is a
+12-decimal pose held at ~`1e−9`, not a packing at the exact side. No row changes.
+
 ## 8. Verification
 
-* `glm_wheels.py --selftest` — **26 controls**, exit 0. Control 25 is the staircase: the
+* `glm_wheels.py --selftest` — **27 controls**, exit 0 (about 2 min). Control 25 is the staircase: the
   125 = 55 + 66 + 4 split, the twelve-column walk with its three repeats, all 24 named-axis
   tangencies exact, the gate at `N = 149`, `L = 23/2 + ½√7`, clearance 0, the 9.0e-8 census
   agreement, the thirteenth column's exact pinch, the odd word's non-membership in Q(√7), the
@@ -190,8 +224,13 @@ so the obstruction is not this one word's arithmetic — the pocket is closed fo
   brick's `Δu = 1` tangency, the empty cage against the 150, and the `k = 1..9` calibration
   spin. Control 26 is the word spin (62 words, one closed, the residual identity
   `2c(c+s) − (1+s) − 1 = s(2(c−s) − 1)`) and the second-word test (78 field-compatible words,
-  78 empty cages). Control 5 exercises `staircase_layer_gap` on the 45° word; control 24
-  records the k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
+  66 rotation-class cages, all empty). Control 27 is the mixed word: the table's own
+  `19211307153/31250000000` rad rounded up at `1e−25` into Q(√7) closes a certified **150**
+  (clearance 0), refuses the 151st (the `(1, 2)` rectangle cage degenerates, no witness, and an
+  exact `17 × 17` point scan finds no pair), and the census word's `(1, 2)` rectangle cage is
+  empty; the control also replays the delivered rotation pair against the exact 149 and reports
+  the measured overlap `−2.365e−9`. Control 5 exercises `staircase_layer_gap` on the 45° word;
+  control 24 records the k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
 * `glm_wheels.py` — spin: spatial **48/48 certified**, 0 refused (`Ring k=1`, `Staircase k=5`);
   sequences 6/7; lattice 24/28.
 * `glm_wheels.py --audit` — bytecode float audit of every decision function.

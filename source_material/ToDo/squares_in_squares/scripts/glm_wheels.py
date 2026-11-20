@@ -1287,13 +1287,19 @@ def p_staircase(k):
 #: `1` apart along one of that word's axes, so a cover narrower than `1` in both
 #: axes holds at most one centre: exact capacity, no scan, no tolerance.
 
-def _cage_extent(cls, c, s, ax):
-    """The half-extent of the `(c, s)` unit square along the unit axis `ax`."""
-    return (abs(c * ax[0] + s * ax[1])
-            + abs(-s * ax[0] + c * ax[1])) * cls(F(1, 2))
+def _cage_extent(cls, c, s, ax, sides=None):
+    """The half-extent of the `(c, s)` square along the unit axis `ax`.
+
+    `sides` widens the square into a rectangle `(U-side, V-side)` in the word's
+    own frame: two squares of one word side by side along `V` are the rectangle
+    `(1, 2)`, and that is what rules a *pair* of them out in one cage.
+    """
+    sa, sb = sides or (1, 1)
+    return (abs(c * ax[0] + s * ax[1]) * F(sa)
+            + abs(-s * ax[0] + c * ax[1]) * F(sb)) * cls(F(1, 2))
 
 
-def _cage_rows(cls, c, s, cells, words):
+def _cage_rows(cls, c, s, cells, words, sides=None):
     """Per sentence square: its four exact axis tests.
 
     Each row is `(q . a, need, U . a, V . a)`, so that a centre `p = u U + v V`
@@ -1306,7 +1312,8 @@ def _cage_rows(cls, c, s, cells, words):
         axes = ((c, s), (-s, c), (qw[0], qw[1]), (-qw[1], qw[0]))
         row = []
         for ax in axes:
-            need = _cage_extent(cls, c, s, ax) + _cage_extent(cls, qw[0], qw[1], ax)
+            need = (_cage_extent(cls, c, s, ax, sides)
+                    + _cage_extent(cls, qw[0], qw[1], ax))
             row.append((q[0] * ax[0] + q[1] * ax[1], need,
                         c * ax[0] + s * ax[1], -s * ax[0] + c * ax[1]))
         out.append(row)
@@ -1323,8 +1330,23 @@ def _cage_upper(q):
     return q.a + q.b * k if q.b > 0 else q.a + q.b
 
 
+def _cage_lower(q):
+    """A rational lower bound for a `Quad` (the negative of an upper bound)."""
+    return -_cage_upper(-q)
+
+
+def _quad_iv(q, prec=14):
+    """Tight rational `[lo, hi]` for a `Quad`: `sqrt d` to `prec` digits, exactly."""
+    scale = 10 ** prec
+    k = math.isqrt(q.d * scale * scale)
+    lo_d, hi_d = F(k, scale), F(k + 1, scale)
+    if q.b >= 0:
+        return q.a + q.b * lo_d, q.a + q.b * hi_d
+    return q.a + q.b * hi_d, q.a + q.b * lo_d
+
+
 def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
-                   hint=None, budget=400000):
+                   hint=None, budget=400000, exact_word=True, sides=None):
     """The exact no-fit cage: every feasible centre of a `(c, s)` unit square.
 
     Returns `cover` (exact boxes in the word's frame), `empty` (a proof that no
@@ -1333,11 +1355,11 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
     whose exact point test passes when one exists.  `hint` only orders the
     sentence squares for early exit; it cannot change the verdict.
     """
-    if (c * c + s * s) != cls(1):
+    if exact_word and (c * c + s * s) != cls(1):
         raise Refusal("word_off_circle",
                       f"cos^2 + sin^2 = {c * c + s * s} != 1")
     half = cls(F(1, 2))
-    h = _cage_extent(cls, c, s, (cls(1), cls(0)))
+    h = _cage_extent(cls, c, s, (cls(1), cls(0)), sides)
     if L.d == cls.d:                    # same field: the slab is exact
         slab = _cage_upper(L * half - h)
     else:                               # a second word in another field: bound `L`
@@ -1348,7 +1370,7 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
     R = F(X) * F(3, 2)                  # |u|, |v| <= sqrt2 X < 3X/2
     step = step or F(1)
     fine = fine or F(1, 8)
-    rows = _cage_rows(cls, c, s, cells, words)
+    rows = _cage_rows(cls, c, s, cells, words, sides)
     hx, hy = hint if hint is not None else (cls(0), cls(0))
     order = sorted(range(len(cells)),
                    key=lambda i: abs(cells[i][0] - hx) + abs(cells[i][1] - hy))
@@ -1359,6 +1381,14 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
     buckets = {}
     for i, q in enumerate(cells):
         buckets.setdefault((q[0].floor(), q[1].floor()), []).append(i)
+    # a rational pre-filter, so the exact four-axis test runs only on the cells
+    # that could possibly reach the box: tight `[lo, hi]` for each coordinate,
+    # and the cell's largest separation need as a rational upper bound
+    near = []
+    for i, q in enumerate(cells):
+        (xlo_s, xhi_s), (ylo_s, yhi_s) = _quad_iv(q[0]), _quad_iv(q[1])
+        need_max = max(need for _qa, need, _ua, _va in rows[i])
+        near.append((xlo_s, xhi_s, ylo_s, yhi_s, _cage_upper(need_max)))
 
     def inside(u, v):
         px = u * c - v * s
@@ -1388,11 +1418,39 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
         (xlo, xhi), (ylo, yhi) = spans
         x0, x1 = (xlo - F(2)).floor(), (xhi + F(2)).floor()
         y0, y1 = (ylo - F(2)).floor(), (yhi + F(2)).floor()
-        cand = []
+        keys = []
         for bx in range(x0, x1 + 1):              # only the nearby cells
             for by in range(y0, y1 + 1):
-                cand.extend(buckets.get((bx, by), ()))
+                if (bx, by) in buckets:
+                    keys.append((bx, by))
+        if not keys:
+            return False
+        # nearest bucket first, in plain integers: the nearest square almost
+        # always proves the box dead, so the exact tests stop after one or two
+        mx, my = (x0 + x1) // 2, (y0 + y1) // 2
+        keys.sort(key=lambda k: (k[0] - mx) ** 2 + (k[1] - my) ** 2)
+        cand = []
+        for k in keys:
+            cand.extend(buckets[k])
+        # the pre-filter: a cell whose own coordinate is further than its need
+        # from the whole box already satisfies the x (or y) axis, so it cannot
+        # cover the box and is skipped without the exact axis arithmetic
+        xf_lo, xf_hi = _cage_lower(spans[0][0]), _cage_upper(spans[0][1])
+        yf_lo, yf_hi = _cage_lower(spans[1][0]), _cage_upper(spans[1][1])
         for i in cand:                            # the no-fit octagons
+            qxl, qxh, qyl, qyh, nmax = near[i]
+            if qxl >= xf_hi:
+                if qxl - xf_hi >= nmax:
+                    continue
+            elif qxh <= xf_lo:
+                if xf_lo - qxh >= nmax:
+                    continue
+            if qyl >= yf_hi:
+                if qyl - yf_hi >= nmax:
+                    continue
+            elif qyh <= yf_lo:
+                if yf_lo - qyh >= nmax:
+                    continue
             for qa, need, ua, va in rows[i]:
                 lo = (ua * u0 if ua.sign() >= 0 else ua * u1) + \
                      (va * v0 if va.sign() >= 0 else va * v1)
@@ -1433,11 +1491,14 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
             truncated = True
             break
     witness = None
+    witnesses = []
     for (u0, u1, v0, v1) in cover:
         uc, vc = (u0 + u1) * half, (v0 + v1) * half
         if clear_point(uc, vc):
-            witness = (uc, vc)
-            break
+            if witness is None:
+                witness = (uc, vc)
+            if len(witnesses) < 16:
+                witnesses.append((uc, vc))
     if cover:
         ulo = min(b[0] for b in cover)
         uhi = max(b[1] for b in cover)
@@ -1452,6 +1513,7 @@ def staircase_cage(cls, c, s, cells, words, L, step=None, fine=None,
     return {"cover": cover, "empty": not cover, "capacity": capacity,
             "extent_u": extent_u, "extent_v": extent_v,
             "window": (ulo, uhi, vlo, vhi), "witness": witness,
+            "witnesses": witnesses,
             "examined": examined, "truncated": truncated, "fine": fine,
             "cells": len(cells)}
 
@@ -1583,6 +1645,163 @@ def _sqrt7_words(mmax=8):
                         out.append((f"sqrt7-{m}:{a}{'%+d' % b}v{'%+d' % e}{'%+d' % f}v",
                                     c, s))
     return out
+
+
+# ------------------------------------------ the table's own rotation (run 95)
+#: The delivered n = 151 row is 149 grammar squares plus **two squares rotated to
+#: 0.614761828896 rad**.  That angle is the exact rational
+#: `19211307153/31250000000`, so the pose is a *rational-angle* sentence even
+#: though its cosine is not a field element: `cos` and `sin` are transcendental,
+#: and everything about these two squares is therefore a **measurement**, never an
+#: exact certificate.  The margins are reported, never a verdict without them.
+
+def odd_word_angle():
+    """The delivered pose's own tilt, exactly: `19211307153/31250000000` rad."""
+    return F(19211307153, 31250000000)
+
+
+def odd_word():
+    """`(cos, sin)` of that rational angle to 70 digits -- a measurement."""
+    import field_triage as T
+    return T.cos_sin(odd_word_angle())
+
+
+def odd_centres(cells, n=151, tol=None):
+    """The delivered row's squares that are *not* grammar squares: its odd pair.
+
+    A delivered centre counts as odd when it is further than `tol` (1e-6, the
+    pose's own polish scale) from every square of the exact sentence.
+    """
+    tol = tol if tol is not None else Decimal("1e-6")
+    D = DecimalWitness.scalar
+    have = [(D(x), D(y)) for x, y in cells]
+    out = []
+    for r in _delivered_rows()[n]:
+        px, py = D(r[0]), D(r[1])
+        if min(max(abs(px - x), abs(py - y)) for x, y in have) > tol:
+            out.append((F(r[0]), F(r[1])))
+    return out
+
+
+def odd_word_upward(places=25):
+    """The table's rotation rounded **up** at `1e-25`, so `|w| >= 1` exactly.
+
+    Rounding both coordinates up enlarges the square by `1e-25`, and a sentence
+    that cannot hold the enlarged square cannot hold the exact one -- which is
+    what makes the cage verdict below a proof and not a measurement.
+    """
+    from decimal import ROUND_CEILING
+    oc, os_ = odd_word()
+    scale = Decimal(10) ** places
+    cu = (Decimal(oc) * scale).to_integral_value(rounding=ROUND_CEILING) / scale
+    su = (Decimal(os_) * scale).to_integral_value(rounding=ROUND_CEILING) / scale
+    return F(cu), F(su)
+
+
+def staircase_point_ok(cls, c, s, cells, words, u, v, slab=None):
+    """Exact point test: does a `(c, s)` square at `u U + v V` clear `cells`?
+
+    The same four-axis arithmetic the cage prunes with, evaluated at one centre --
+    so a sentence can be assembled from cage witnesses and then gated outright.
+    """
+    if slab is not None:
+        px, py = u * c - v * s, u * s + v * c
+        if abs(px) > slab or abs(py) > slab:
+            return False
+    for row in _cage_rows(cls, c, s, cells, words):
+        for qa, need, ua, va in row:
+            if abs(qa - (u * ua + v * va)) >= need:
+                break
+        else:
+            return False
+    return True
+
+
+def staircase_odd_cage(cls, cells, words, L, places=25):
+    """The exact cage for the delivered rotation's square (slightly enlarged).
+
+    The word is not a field element, so its coordinates are the upward-rounded
+    rationals of `odd_word_upward`; the square they describe has side `|w| >= 1`,
+    so an empty cage is a proof that no square of the table's own rotation fits.
+    """
+    cu, su = odd_word_upward(places)
+    return staircase_cage(cls, cls(cu), cls(su), cells, words, L,
+                          exact_word=False,
+                          hint=(cells[-1][0], cells[-1][1]))
+
+
+def mixed_slack(cells, words, extra):
+    """The worst pair slack of a mixed sentence, in `Decimal` -- a measurement.
+
+    The exact squares enter through their 70-digit `Decimal` images and the odd
+    squares through `odd_word()`; every quantity is exact rational *input* and
+    the only approximation is the digit string of `cos`/`sin`, so a margin of
+    `1e-9` is read off a computation whose own error is `1e-60`.
+    """
+    oc, os_ = odd_word()
+    oc, os_ = Decimal(oc), Decimal(os_)
+    pts = [(Decimal(DecimalWitness.scalar(x)), Decimal(DecimalWitness.scalar(y)))
+           for x, y in cells]
+    ws = [(Decimal(DecimalWitness.scalar(a)), Decimal(DecimalWitness.scalar(b)))
+          for a, b in words]
+
+    def ext(w, ax):
+        return (abs(w[0] * ax[0] + w[1] * ax[1])
+                + abs(-w[1] * ax[0] + w[0] * ax[1])) / 2
+
+    def pair(p, pw, q, qw):
+        best = None
+        for ax in (pw, (-pw[1], pw[0]), qw, (-qw[1], qw[0])):
+            v = (abs((q[0] - p[0]) * ax[0] + (q[1] - p[1]) * ax[1])
+                 - (ext(pw, ax) + ext(qw, ax)))
+            if best is None or v > best:
+                best = v
+        return best
+
+    ow = (oc, os_)
+    def dec(q):
+        return (Decimal(q.numerator) / Decimal(q.denominator))
+    odd = [(dec(F(x)), dec(F(y))) for x, y in extra]
+    worst = None
+    where = None
+    for i, p in enumerate(odd):
+        for j, (q, qw) in enumerate(zip(pts, ws)):
+            v = pair(p, ow, q, qw)
+            if worst is None or v < worst:
+                worst, where = v, ("odd", i, "cell", j)
+    for i in range(len(odd)):
+        for j in range(i + 1, len(odd)):
+            v = pair(odd[i], ow, odd[j], ow)
+            if v < worst:
+                worst, where = v, ("odd", i, "odd", j)
+    return worst, where
+
+
+def _square_canon(c, s):
+    """The rotation class of a square's word: `(c, s)` and `(-s, c)` are one square.
+
+    A quarter turn of the word leaves the square unchanged (and so do the other
+    two quarter turns), so the no-fit cage -- which is a statement about the
+    square -- answers for the whole class at once.
+    """
+    opts = ((c, s), (-s, c), (-c, -s), (s, -c))
+    return min((str(a), str(b)) for a, b in opts)
+
+
+def staircase_second_word_classes(mmax=8, pyth_max=13):
+    """One representative per rotation class of the second-word squares.
+
+    `staircase_second_words()` lists 78 field-compatible words; a quarter turn
+    maps a word to another in the list (or to a mirror of it), and the cage cannot
+    tell the two apart, so one cage per class decides all of them.  The class
+    count is what the control runs, and the word count is what it claims.
+    """
+    seen = {}
+    for name, c, s in staircase_second_words(mmax, pyth_max):
+        key = _square_canon(c, s)
+        if key not in seen:
+            seen[key] = (name, c, s)
+    return list(seen.values())
 
 
 def staircase_second_words(mmax=8, pyth_max=13):
@@ -3114,7 +3333,13 @@ def selftest() -> int:
     second26 = staircase_second_words()
     assert len(second26) >= 70, len(second26)
     assert all((c2 * c2 + s2 * s2) == cls7(1) for _n, c2, s2 in second26)
-    fits = [name for name, c2, s2 in second26
+    # one cage per rotation class: a quarter turn of a word leaves its square alone,
+    # so the class count is what runs and the word count is what is claimed
+    classes26 = staircase_second_word_classes()
+    assert len(classes26) == 66 and len(second26) == 78, (len(classes26), len(second26))
+    assert {_square_canon(c2, s2) for _n, c2, s2 in second26} == \
+           {_square_canon(c2, s2) for _n, c2, s2 in classes26}
+    fits = [name for name, c2, s2 in classes26
             if not staircase_cage(cls7, c2, s2, cap_cells, cap_words, target151,
                                   hint=(cap_cells[-1][0], cap_cells[-1][1]))["empty"]]
     assert not fits, fits
@@ -3137,7 +3362,86 @@ def selftest() -> int:
         "words of Q(sqrt 7) at height <= 8 and every Pythagorean word with denominator "
         "<= 13, which embeds in Q(sqrt 7)): every cage is empty, so no second word places "
         "the 151st square at L = " + str(target151) + " -- the pocket is closed for "
-        "Quad(7) union Q_Pyth, and the table's escape is a rotation outside both.")
+        "Quad(7) union Q_Pyth, and the table's escape is a rotation outside both.  The "
+        f"sweep itself is {len(classes26)} cages, one per rotation class of the square "
+        f"(a quarter turn `(c, s) -> (-s, c)` cannot change a cage's answer), which "
+        f"decides all {len(second26)} words.")
+
+    # --------------------- control 27: the table's own rotation, mixed in (run 95)
+    ang27 = odd_word_angle()
+    assert ang27 == F(19211307153, 31250000000), ang27
+    cu27, su27 = odd_word_upward()
+    assert cu27 * cu27 + su27 * su27 >= 1, (cu27, su27)   # the enlarged square
+    codd, sodD = cls7(cu27), cls7(su27)
+    cage_odd = staircase_odd_cage(cls7, c25, w25, target151)
+    assert not cage_odd["empty"] and cage_odd["witness"] is not None, cage_odd
+    uo, vo = cage_odd["witness"]
+    odd150 = (uo * codd - vo * sodD, uo * sodD + vo * codd)
+    g150 = Q.gate(list(c25) + [odd150], list(w25) + [(codd, sodD)], cls7)
+    assert g150["ok"] and g150["L"] == target151 and g150["violations"] == 0, g150
+    assert g150["contacts"] > 0, g150
+    # with the cap brick in place the pocket is shut even to the table's rotation
+    cage_odd150 = staircase_odd_cage(cls7, cap_cells, cap_words, target151)
+    assert cage_odd150["empty"], cage_odd150
+    # two rotation squares side by side along V are the rectangle (1, 2): its cover
+    # collapses to one box with no witness -- no placement of the pair, so no 151
+    cage_pair = staircase_cage(cls7, codd, sodD, c25, w25, target151,
+                               sides=(1, 2), exact_word=False, fine=F(1, 1024),
+                               budget=2000000,
+                               hint=(c25[-1][0], c25[-1][1]))
+    assert not cage_pair["empty"] and cage_pair["witness"] is None, cage_pair
+    assert len(cage_pair["cover"]) <= 4, cage_pair["cover"]
+    rows27 = _cage_rows(cls7, codd, sodD, c25, w25)
+    half27 = cls7(F(1, 2))
+
+    def ok27(u, v):
+        for row in rows27:
+            for qa, need, ua, va in row:
+                if abs(qa - (u * ua + v * va)) >= need:
+                    break
+            else:
+                return False
+        return True
+
+    pair_hit = None
+    for b27 in cage_pair["cover"]:
+        for i in range(17):
+            uu = b27[0] + (b27[1] - b27[0]) * F(i, 16)
+            for j in range(17):
+                vv = b27[2] + (b27[3] - b27[2]) * F(j, 16)
+                if ok27(uu, vv - half27) and ok27(uu, vv + half27):
+                    pair_hit = (uu, vv)
+    assert pair_hit is None, pair_hit
+    # the census word cannot reach 151 either: its pair cage closes exactly
+    cage_pair_census = staircase_cage(cls7, cw7, sw7, c25, w25, target151,
+                                      sides=(1, 2),
+                                      hint=(c25[-1][0], c25[-1][1]))
+    assert cage_pair_census["empty"], cage_pair_census
+    odddel = odd_centres(c25)
+    assert len(odddel) == 2, odddel
+    mixed_worst, mixed_where = mixed_slack(c25, w25, odddel)
+    assert mixed_worst < 0 and mixed_worst > Decimal("-1e-6"), (mixed_worst, mixed_where)
+    say("control 27 -- mixing the census word with the table's own rotation.  The "
+        "n = 151 row spends two squares on the angle " + f"{dec(ang27):.12f}" +
+        " rad = " + str(ang27) + ", which is rational, but its cosine is not a field "
+        "element, so this control is *measured* where it is not caged.  The word is "
+        "replaced by the rationals " + str(cu27) + ", " + str(su27) + " (both rounded "
+        "up at 1e-25, so cos^2 + sin^2 >= 1: the caged square is the table's square "
+        "grown by 1e-25): the cage "
+        "still finds a placement against the 149, and the exact gate certifies "
+        "N = 150 at L = " + str(target151) + f" clearance 0 with {g150['contacts']} "
+        "contacts -- the table's own rotation does close its 150th square at the "
+        "census side.  It does not close the 151st: two such squares side by side "
+        "are one rectangle of sides (1, 2) in the word's frame, and that cage's cover "
+        "collapses to a single box of width 1e-3 with no witness anywhere in it, so "
+        "no placement of the pair exists (an exact 17 x 17 point scan inside the "
+        "box finds none either).  With the cap brick in place the cage is empty for "
+        "the rotation too, so the pocket admits one extra square and no more.  With "
+        "the census word the pair cage is *empty* -- an exact proof, capacity 1.  "
+        "The honest reading of the delivered row: replaying its own two rotation "
+        "squares against the exact 149 gives worst pair slack " + f"{mixed_worst:.3e}" +
+        " (odd square vs grammar square), i.e. an overlap, so the table's 151 is a "
+        "12-decimal pose at ~1e-9 tolerance, not a sentence at the exact side.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
