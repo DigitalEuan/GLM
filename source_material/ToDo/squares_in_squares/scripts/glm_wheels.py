@@ -547,17 +547,39 @@ def p_grid(k):
 
 
 def p_strip(k, m):
-    """S(k, m): four k-blocks in the corners and an m-diamond strip on the anti-diagonal."""
-    if m < 1:
-        raise Refusal("strip_needs_diamond",
-                      f"S({k}, {m}) has no diamond, so it is the plain 2k grid: no seam")
+    """S(k, m): four k-blocks in the corners and an m-diamond seam on the anti-diagonal.
+
+    Assembled as a *declared field* (run 88): the carrier is the product of two axis
+    skeletons -- the left/bottom k-run and the same k-run shifted across a seam of
+    width `m*sqrt2/2` -- and the slots are the m diamonds sitting in that seam.  The
+    insertion rule then does the rest.  At m = 0 the seam has width 0, the slot list is
+    empty, and the field is the plain 2k axis grid: nothing is refused, and the cell
+    certifies with gain 0, which is exactly the statement that an empty seam buys
+    nothing.
+    """
     if k < 1:
         raise Refusal("degenerate_cell", f"k = {k} has no blocks")
-    st, ws, L = Q_mixed_strip(k, m)
-    n = 4 * k * k + m
-    return _tag(Claim("spatial_geometry", "Strip", {"k": k, "m": m}, n,
-                      _laws_packing(n, L, L * L - Q2(n)),
-                      {"state": st, "words": ws}), L, n)
+    if m < 0:
+        raise Refusal("negative_seam", f"m = {m} is not a seam width")
+    claim = _assemble_field(f"S({k},{m})", strip_field(k, m), family="Strip",
+                            params={"k": k, "m": m}, allow_empty=True)
+    claim.laws["seam"] = ("m", m)
+    claim.laws["diamonds"] = ("diamonds", m)
+    return claim
+
+
+def strip_field(k, m):
+    """The S(k, m) declaration: two k-runs per axis, a seam of m diamonds between them.
+
+    `X = {1/2, ..., k-1/2} + {0, k + m*sqrt2/2}` in both axes, and the m diamonds at
+    `(k + (2i+1)sqrt2/4, k + (2(m-1-i)+1)sqrt2/4)`, i.e. the anti-diagonal seam.  Both
+    halves of that are arithmetic in `i`, so the declaration is generated, never typed.
+    """
+    seam = Q2(0, F(m, 2))                       # m*sqrt2/2
+    runs = ((HALF, Q2(1), k), (HALF + Q2(k) + seam, Q2(1), k))
+    slots = [(Q2(k) + Q2(0, F(2 * i + 1, 4)),
+              Q2(k) + Q2(0, F(2 * (m - 1 - i) + 1, 4))) for i in range(m)]
+    return {"x": runs, "y": runs, "slots": slots}
 
 
 def Q_mixed_strip(k, m):
@@ -615,14 +637,26 @@ def _pt(pq):
     return (Q2(F(pq[0], 2), F(pq[1], 2)), Q2(F(pq[2], 2), F(pq[3], 2)))
 
 
-def _bent_cells(origin, steps_x, steps_y):
-    """The product grid of two partial-sum sequences -- a *bent* grid, exactly."""
-    xs, ys = [origin[0]], [origin[1]]
-    for s in steps_x:
-        xs.append(xs[-1] + s)
-    for s in steps_y:
-        ys.append(ys[-1] + s)
-    return [(x, y) for x in xs for y in ys]
+def _skeleton(runs):
+    """A 1-D axis skeleton: the union of arithmetic runs `(start, step, count)`.
+
+    Run 87's "bent grid" carried a chain of arbitrary exact steps; a chain is the
+    one-run case of this, and a *union* of runs is what n = 19 and n = 40 need (two
+    blocks separated by a seam).  Everything is `Q(sqrt2)`, so a step may be `1`,
+    `sqrt2/2`, `4/3 sqrt2` -- any exact length.
+    """
+    vals = []
+    for start, step, count in runs:
+        for i in range(count):
+            v = start + step * Q2(i)
+            if v not in vals:
+                vals.append(v)
+    return vals
+
+
+def _product_cells(runs_x, runs_y):
+    """The carrier: every x of the x-skeleton against every y of the y-skeleton."""
+    return [(x, y) for y in _skeleton(runs_y) for x in _skeleton(runs_x)]
 
 
 def _collides(cell, slot):
@@ -639,102 +673,68 @@ def _collides(cell, slot):
     return (dx + dy) < S2H
 
 
-#: Declared diamond insertions: the axis carrier (a bent grid, or explicit cells) and
-#: the slots.  Everything else -- the side, the void, every contact -- is derived.
+#: Declared diamond insertions.  A spec is two axis *skeletons* and a slot list; the
+#: carrier is their product, and everything else -- which cells survive, the side, the
+#: void, every contact -- is derived by the insertion rule.
+#:
+#: All three atoms are `Product(X, Y) - {cells colliding with a slot}`:
+#:   n10  X = Y = {1/2, 3/2} u {3/2 + sqrt2/2, 5/2 + sqrt2/2}   (runs 2 + 2)
+#:   n19  X = {1/2, 3/2} u {1/2 + a, 3/2 + a, 5/2 + a}, a = 4/3 sqrt2
+#:        Y = {1/2, 3/2, 5/2} u {3/2 + a, 5/2 + a}
+#:   n40  X = Y = {1/2, 3/2, 5/2} u {3/2 + 2 sqrt2, 5/2 + 2 sqrt2, 7/2 + 2 sqrt2}
+#: so no field carries a list of axis cells any more, only run parameters (run 88).
+_A19 = Q2(0, F(4, 3))          # 4/3 sqrt2
+_T40 = Q2(0, 2)                # 2 sqrt2
+_RUN2 = (HALF, Q2(1), 2)
+_RUN3 = (HALF, Q2(1), 3)
+
 DIAMOND_FIELDS: dict = {}
 
-#: The three declared insertions.  n10's carrier is a bent grid, so *all* of its axis
-#: cells are derived by the insertion rule; n19 and n40 declare their carriers because
-#: their axis sets are not product grids (declared data, derived geometry).
 DIAMOND_FIELDS.update({
     "n10": {
-        "grid": ((Q2(F(1, 2)), Q2(F(1, 2))), (Q2(1), S2H, Q2(1)), (Q2(1), S2H, Q2(1))),
-        "slots": [(3, 0, 3, 0), (3, 1, 3, 1)],
+        "x": (_RUN2, (Q2(F(3, 2)) + S2H, Q2(1), 2)),
+        "y": (_RUN2, (Q2(F(3, 2)) + S2H, Q2(1), 2)),
+        "slots": [_pt((3, 0, 3, 0)), _pt((3, 1, 3, 1))],
         "drop_colliding": True,
     },
     "n19": {
-        "cells": [
-            (1, 0, 1, 0),
-            (1, 0, 3, F(8, 3)),
-            (1, 0, 5, F(8, 3)),
-            (1, F(8, 3), 1, 0),
-            (3, 0, 5, F(8, 3)),
-            (3, F(8, 3), 1, 0),
-            (3, F(8, 3), 3, 0),
-            (5, F(8, 3), 1, 0),
-            (5, F(8, 3), 3, 0),
-            (5, F(8, 3), 5, 0),
-            (5, F(8, 3), 5, F(8, 3)),
-        ],
+        "x": (_RUN2, (HALF + _A19, Q2(1), 3)),
+        "y": (_RUN3, (Q2(F(3, 2)) + _A19, Q2(1), 2)),
         "slots": [
-            (1, F(1, 3), 3, F(2, 3)),
-            (1, F(4, 3), 3, F(-1, 3)),
-            (2, F(2, 3), 2, F(7, 3)),
-            (2, F(5, 3), 2, F(4, 3)),
-            (3, 2, 5, F(7, 3)),
-            (3, 3, 5, F(4, 3)),
-            (4, F(1, 3), 4, 2),
-            (4, F(4, 3), 4, 1),
+            _pt((1, F(1, 3), 3, F(2, 3))),
+            _pt((1, F(4, 3), 3, F(-1, 3))),
+            _pt((2, F(2, 3), 2, F(7, 3))),
+            _pt((2, F(5, 3), 2, F(4, 3))),
+            _pt((3, 2, 5, F(7, 3))),
+            _pt((3, 3, 5, F(4, 3))),
+            _pt((4, F(1, 3), 4, 2)),
+            _pt((4, F(4, 3), 4, 1)),
         ],
         "drop_colliding": True,
     },
     "n40": {
-        "cells": [
-            (1, 0, 1, 0),
-            (1, 0, 3, 0),
-            (1, 0, 3, 4),
-            (1, 0, 5, 0),
-            (1, 0, 5, 4),
-            (1, 0, 7, 4),
-            (3, 0, 1, 0),
-            (3, 0, 3, 0),
-            (3, 0, 5, 4),
-            (3, 0, 7, 4),
-            (3, 4, 1, 0),
-            (3, 4, 7, 4),
-            (5, 0, 1, 0),
-            (5, 0, 7, 4),
-            (5, 4, 1, 0),
-            (5, 4, 3, 0),
-            (5, 4, 5, 4),
-            (5, 4, 7, 4),
-            (7, 4, 1, 0),
-            (7, 4, 3, 0),
-            (7, 4, 3, 4),
-            (7, 4, 5, 0),
-            (7, 4, 5, 4),
-            (7, 4, 7, 4),
-        ],
+        "x": (_RUN3, (Q2(F(3, 2)) + _T40, Q2(1), 3)),
+        "y": (_RUN3, (Q2(F(3, 2)) + _T40, Q2(1), 3)),
         "slots": [
-            (4, -1, 4, 2),
-            (4, 0, 4, 1),
-            (4, 0, 4, 3),
-            (4, 1, 4, 0),
-            (4, 1, 4, 2),
-            (4, 1, 4, 4),
-            (4, 2, 4, -1),
-            (4, 2, 4, 1),
-            (4, 2, 4, 3),
-            (4, 2, 4, 5),
-            (4, 3, 4, 0),
-            (4, 3, 4, 2),
-            (4, 3, 4, 4),
-            (4, 4, 4, 1),
-            (4, 4, 4, 3),
-            (4, 5, 4, 2),
+            _pt((4, -1, 4, 2)), _pt((4, 0, 4, 1)), _pt((4, 0, 4, 3)),
+            _pt((4, 1, 4, 0)), _pt((4, 1, 4, 2)), _pt((4, 1, 4, 4)),
+            _pt((4, 2, 4, -1)), _pt((4, 2, 4, 1)), _pt((4, 2, 4, 3)),
+            _pt((4, 2, 4, 5)), _pt((4, 3, 4, 0)), _pt((4, 3, 4, 2)),
+            _pt((4, 3, 4, 4)), _pt((4, 4, 4, 1)), _pt((4, 4, 4, 3)),
+            _pt((4, 5, 4, 2)),
         ],
         "drop_colliding": True,
     },
 })
 
 
-def p_diamond_field(name):
-    """Diamond insertion: declared axis cells plus 45-degree slots, all else derived.
+def _assemble_field(name, spec, family="DiamondField", params=None, allow_empty=False):
+    """Assemble a declared field: carrier product, insertion rule, derived geometry.
 
-    The combinator is algebraic and parametric.  It expands the carrier (a bent grid or
-    an explicit exact cell set), applies the *insertion rule* -- an axis cell that would
-    overlap a slot is removed, because that is what inserting a diamond means -- and
-    then derives, rather than declares:
+    The combinator is algebraic and parametric.  It expands the carrier (a product of
+    two 1-D skeletons), applies the *insertion rule* -- an axis cell that would overlap
+    a slot is removed, because that is what inserting a diamond means -- and then
+    derives, rather than declares:
 
       * the container side `L`, as the exact bbox of the assembled squares;
       * the void `V = L^2 - N`, and the gain against `ceil(sqrt N)`;
@@ -742,18 +742,14 @@ def p_diamond_field(name):
       * an *overlap refusal*: a declaration whose assembly violates the gate is refused
         by `declaration_overlaps`, so a mis-declared slot cannot certify silently.
     """
-    if name not in DIAMOND_FIELDS:
-        raise Refusal("unknown_field", f"{name} is not a declared diamond field")
-    spec = DIAMOND_FIELDS[name]
-    cells = (list(_bent_cells(*spec["grid"])) if "grid" in spec
-             else [_pt(c) for c in spec["cells"]])
-    slots = [_pt(c) for c in spec["slots"]]
-    if not slots:
+    cells = _product_cells(spec["x"], spec["y"])
+    slots = list(spec["slots"])
+    if not slots and not allow_empty:
         raise Refusal("no_diamond",
                       f"{name} declares no slot, so it is a Tile, not an insertion")
     colliding = [c for c in cells if any(_collides(c, s) for s in slots)]
     if spec.get("drop_colliding", True):
-        cells = [c for c in cells if not any(_collides(c, s) for s in slots)]
+        cells = [c for c in cells if c not in colliding]
     elif colliding:
         raise Refusal("declaration_overlaps",
                       f"{name}: {len(colliding)} axis cells collide with a slot "
@@ -768,13 +764,22 @@ def p_diamond_field(name):
                       f"{name}: the assembled sentence has {g['violations']} violations")
     n = len(state)
     L = g["L"]
-    claim = Claim("spatial_geometry", "DiamondField", {"name": name}, n,
+    claim = Claim("spatial_geometry", family, params or {"name": name}, n,
                   _laws_packing(n, L, L * L - Q2(n), g["contacts"]),
                   {"state": state, "words": words, "cells": cells, "slots": slots,
                    "dropped": colliding})
     claim.laws["diamonds"] = ("diamonds", len(slots))
     claim.laws["cells"] = ("axis cells", len(cells))
+    claim.meta["dropped"] = len(colliding)
+    claim.meta["carrier"] = len(cells) + len(colliding)
     return _tag(claim, L, n)
+
+
+def p_diamond_field(name):
+    """Diamond insertion: a declared carrier product plus 45-degree slots."""
+    if name not in DIAMOND_FIELDS:
+        raise Refusal("unknown_field", f"{name} is not a declared diamond field")
+    return _assemble_field(name, DIAMOND_FIELDS[name])
 
 
 def p_atom(n):
@@ -1310,12 +1315,36 @@ def selftest() -> int:
         assert r["size"] == 4 * k * k + m
     print("control 4 — the Strip cells satisfy N = 4k^2 + m and L = 2k + m sqrt2/2")
 
-    # 5. a non-viable cell refuses with a named law (never a silent skip)
+    # 5. the refusal laws still fire -- on constructed cells, because run 88 closed the
+    #    last three non-viable cells of the wheel (the S(k,0) refusals), so a spatial
+    #    wheel with no refusal is the result, not a silent skip
     refused = [r for r in rows if r["verdict"] == "refused"]
-    assert refused, "the wheel must have at least one refused cell"
-    assert all(r["refusal"]["law"] for r in refused)
-    laws = sorted({r["refusal"]["law"] for r in refused})
-    print(f"control 5 — {len(refused)} non-viable spatial cells, each with a law: {laws}")
+    assert not refused, refused
+
+    def _law(fn):
+        try:
+            fn()
+        except Refusal as e:
+            return e.law
+        return None
+
+    empty = {"x": ((HALF, Q2(1), 2),), "y": ((HALF, Q2(1), 2),), "slots": []}
+    bad = dict(DIAMOND_FIELDS["n10"], drop_colliding=False)
+    cases = {
+        "degenerate_cell": lambda: p_strip(0, 0),
+        "negative_seam": lambda: p_strip(2, -1),
+        "unknown_field": lambda: p_diamond_field("not_a_field"),
+        "no_diamond": lambda: _assemble_field("empty", empty),
+        "declaration_overlaps": lambda: _assemble_field("bad", bad),
+    }
+    for law, fn in cases.items():
+        assert _law(fn) == law, (law, _law(fn))
+    elsewhere = {r["refusal"]["law"] for w in eng.wheels[1:] for r in w.spin()
+                 if r["verdict"] == "refused"}
+    assert elsewhere, "the other wheels must still refuse by law"
+    print(f"control 5 — the spatial wheel has no refused cell (S(k,0) now certifies), "
+          f"and every refusal law still fires on a constructed cell: "
+          f"{sorted(cases)}; other wheels refuse by {sorted(elsewhere)}")
 
     # 6. the fold is an exact symmetry: same N, same L, witnesses still pass
     a, b = p_pocket(2), p_fold(2)
@@ -1432,7 +1461,57 @@ def selftest() -> int:
     print(f"control 17 — a wrong kissing number is refused ({detail[:40]}...), and "
           f"the declared laws fire: {refusals}")
 
-    print("selftest: OK (17 controls)")
+    # 18. the cell algebra: run parameters, not cell lists, generate the run-87 census
+    CENSUS_10 = [(1, 0, 1, 0), (3, 1, 1, 0), (5, 1, 1, 0), (5, 1, 3, 0),
+                 (1, 0, 3, 1), (1, 0, 5, 1), (3, 0, 5, 1), (5, 1, 5, 1)]
+    CENSUS_19 = [(1, 0, 1, 0), (1, 0, 3, F(8, 3)), (1, 0, 5, F(8, 3)),
+                 (1, F(8, 3), 1, 0), (3, 0, 5, F(8, 3)), (3, F(8, 3), 1, 0),
+                 (3, F(8, 3), 3, 0), (5, F(8, 3), 1, 0), (5, F(8, 3), 3, 0),
+                 (5, F(8, 3), 5, 0), (5, F(8, 3), 5, F(8, 3))]
+    CENSUS_40 = [(1, 0, 1, 0), (1, 0, 3, 0), (1, 0, 3, 4), (1, 0, 5, 0),
+                 (1, 0, 5, 4), (1, 0, 7, 4), (3, 0, 1, 0), (3, 0, 3, 0),
+                 (3, 0, 5, 4), (3, 0, 7, 4), (3, 4, 1, 0), (3, 4, 7, 4),
+                 (5, 0, 1, 0), (5, 0, 7, 4), (5, 4, 1, 0), (5, 4, 3, 0),
+                 (5, 4, 5, 4), (5, 4, 7, 4), (7, 4, 1, 0), (7, 4, 3, 0),
+                 (7, 4, 3, 4), (7, 4, 5, 0), (7, 4, 5, 4), (7, 4, 7, 4)]
+    census = {"n10": (CENSUS_10, 16, 8), "n19": (CENSUS_19, 25, 14),
+              "n40": (CENSUS_40, 36, 12)}
+    tables = []
+    for name, (want, carrier, dropped) in census.items():
+        c = p_diamond_field(name)
+        spec = DIAMOND_FIELDS[name]
+        got = {(str(x), str(y)) for x, y in c.payload["cells"]}
+        ref = {(str(_pt(q)[0]), str(_pt(q)[1])) for q in want}
+        assert got == ref, (name, len(got), len(ref))
+        assert c.meta["carrier"] == carrier and c.meta["dropped"] == dropped, c.meta
+        assert len(spec["x"]) <= 2 and len(spec["y"]) <= 2, spec
+        tables.append(f"{name} {carrier}->{len(got)} (-{dropped})")
+    print("control 18 — two axis runs per side generate the run-87 census exactly: "
+          + ", ".join(tables))
+
+    # 19. the Strip builder is a field of (k, m): S(k,0) certifies and IS the plain grid
+    for kk in (1, 2, 3, 4):
+        zero = p_strip(kk, 0)
+        grid = p_grid(2 * kk)
+        assert zero.laws["extent"][1] == grid.laws["extent"][1] == Q2(2 * kk)
+        assert zero.n == grid.n == 4 * kk * kk, (kk, zero.n)
+        assert zero.laws["gain"][1] == Q2(0), zero.laws["gain"]
+        assert ({(str(x), str(y)) for x, y in zero.payload["state"]}
+                == {(str(x), str(y)) for x, y in grid.payload["state"]}), kk
+    for kk, mm in ((2, 1), (2, 2), (3, 1), (3, 3), (4, 2)):
+        field = p_strip(kk, mm)
+        st, ws, L = Q_mixed_strip(kk, mm)
+        assert field.laws["extent"][1] == L, (kk, mm, field.laws["extent"][1], L)
+        assert ({(str(x), str(y)) for x, y in field.payload["state"]}
+                == {(str(x), str(y)) for x, y in st}), (kk, mm)
+        assert field.n == 4 * kk * kk + mm, (kk, mm, field.n)
+    one = p_strip(2, 1)
+    assert one.laws["gain"][1] == Q2(1) - S2H, one.laws["gain"]
+    print("control 19 — S(k,0) is no longer refused: it certifies as the plain 2k grid "
+          "(gain 0) for k = 1..4, and S(k,m) reproduces the run-84 sentence for m >= 1 "
+          "(L = 2k + m sqrt2/2, N = 4k^2 + m)")
+
+    print("selftest: OK (19 controls)")
     return checks
 
 

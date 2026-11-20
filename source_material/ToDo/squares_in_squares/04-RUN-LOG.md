@@ -1391,3 +1391,47 @@ consume a field.
 **174 functions, 0 offenders**; `record_guard.py` OK. No row changed.
 
 Entries `50-ENGINE-CONTRACT-AND-DIAMOND.md`; records `31`-`50`.
+
+---
+
+## Run 88 — the strip as a field, and cells from run parameters
+
+**What was asked.** Close doc 50's first two limits: wire the Strip builder to consume a
+DiamondField so `S(k,0)` is no longer refused as `strip_needs_diamond`, and generate
+n = 19 / n = 40's axis cell sets from a declared cell algebra instead of explicit lists,
+with every control and the float audit green.
+
+**The strip.** `p_strip(k, m)` no longer refuses at m = 0. It assembles from
+`strip_field(k, m)`: two k-runs per axis separated by a seam of width `m*sqrt2/2`, plus m
+slots on the anti-diagonal at `(k + (2i+1)sqrt2/4, k + (2(m-1-i)+1)sqrt2/4)`. At m = 0
+the seam width is 0, the slot list is empty and the carrier is the plain 2k grid, so the
+cell certifies with N = 4k^2, L = 2k and **gain 0** — the honest statement that an empty
+seam buys nothing. The spatial wheel is therefore **31/31 certified, 0 refused**: the
+packing domain's last three refusals are gone because the thing they said was missing now
+exists. Control 19 pins `S(k,0)` to `p_grid(2k)` (same cells, same L, gain 0, k = 1..4)
+and checks `S(k,m)` against the run-84 sentence for m >= 1; control 5 was rewritten,
+since "the wheel must have at least one refused cell" is no longer true — it now asserts
+that no spatial cell refuses and exercises every refusal law on a constructed cell
+(`degenerate_cell`, `negative_seam`, `unknown_field`, `no_diamond`,
+`declaration_overlaps`), with the other two wheels still refusing by `not_sturmian`,
+`empty_shell` and `rank_budget`. The mechanism is tested harder than before.
+
+**The algebra.** Run 87's claim that n19 and n40 "are not product grids" was wrong. Tested
+against their slot lists, both carriers are exactly a product minus collisions: n19 with
+X = {1/2,3/2} u {1/2+a,3/2+a,5/2+a}, Y = {1/2,3/2,5/2} u {3/2+a,5/2+a} (a = 4/3 sqrt2),
+carrier 25 -> 11 cells; n40 with X = Y = {1/2,3/2,5/2} u {3/2+2sqrt2,5/2+2sqrt2,
+7/2+2sqrt2}, carrier 36 -> 24. A field is now two short run lists plus its slots, where a
+run is `(start, step, count)` in Q(sqrt2) and the carrier is the product of the two
+skeletons; run 87's "bent grid" is the two-run case. Control 18 compares the generated
+cells against the run-87 census cell by cell (8/11/24, all equal), and refuses to pass if
+a field needs more than two runs per axis. The drop counts move in the honest direction —
+n19 0 -> 14, n40 0 -> 12 — because the carriers are now full products and the insertion
+rule does the trimming; N, L, void and contacts are identical to run 87 and the induction
+acceptance test is still 10/10, 19/19, 40/40 exact.
+
+**Verification.** `glm_wheels --selftest` **19/19** (was 17); spin spatial **31/31**,
+sequences 6/7, lattice 24/28; float audit **177 functions, 0 offenders**;
+`grammar_induction --selftest` 3/3 with the acceptance exact; `qsqrt2 --selftest` 11/11;
+`field_triage --selftest` 4/4; `record_guard.py` OK. No row changed.
+
+Entries `51-STRIP-AS-FIELD.md`; records `31`-`51`.

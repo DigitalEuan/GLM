@@ -10,11 +10,9 @@
   "spatial": {
    "summary": {
     "cells": 31,
-    "certified": 28,
-    "refused": 3,
-    "refusal_laws": {
-     "strip_needs_diamond": 3
-    }
+    "certified": 31,
+    "refused": 0,
+    "refusal_laws": {}
    },
    "rows": [
     {
@@ -329,17 +327,40 @@
       "k": "2",
       "m": "0"
      },
-     "size": null,
-     "measure": null,
-     "invariant": null,
-     "verdict": "refused",
-     "witnesses": {},
-     "witness_count": 0,
-     "refusal": {
-      "law": "strip_needs_diamond",
-      "detail": "S(2, 0) has no diamond, so it is the plain 2k grid: no seam"
+     "size": 16,
+     "measure": "L = 4",
+     "invariant": "ceil(sqrt N) - L = 0",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 42, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 16/16 with 78 contacts >= n-1, min degree 7, Laman bound 29 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 16 + (0) = 16 and L^2 = 16"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
      },
-     "laws": {}
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "16",
+      "extent": "4",
+      "void": "0",
+      "contacts": "42",
+      "diamonds": "0",
+      "cells": "16",
+      "gain": "0",
+      "seam": "0"
+     }
     },
     {
      "wheel": "spatial",
@@ -377,7 +398,11 @@
       "count": "17",
       "extent": "4 + 1/2\u221a2",
       "void": "-1/2 + 4\u221a2",
-      "gain": "1 - 1/2\u221a2"
+      "contacts": "28",
+      "diamonds": "1",
+      "cells": "16",
+      "gain": "1 - 1/2\u221a2",
+      "seam": "1"
      }
     },
     {
@@ -416,7 +441,11 @@
       "count": "18",
       "extent": "4 + \u221a2",
       "void": "8\u221a2",
-      "gain": "1 - 1\u221a2"
+      "contacts": "27",
+      "diamonds": "2",
+      "cells": "16",
+      "gain": "1 - 1\u221a2",
+      "seam": "2"
      }
     },
     {
@@ -455,7 +484,11 @@
       "count": "19",
       "extent": "4 + 3/2\u221a2",
       "void": "3/2 + 12\u221a2",
-      "gain": "1 - 3/2\u221a2"
+      "contacts": "28",
+      "diamonds": "3",
+      "cells": "16",
+      "gain": "1 - 3/2\u221a2",
+      "seam": "3"
      }
     },
     {
@@ -466,17 +499,40 @@
       "k": "3",
       "m": "0"
      },
-     "size": null,
-     "measure": null,
-     "invariant": null,
-     "verdict": "refused",
-     "witnesses": {},
-     "witness_count": 0,
-     "refusal": {
-      "law": "strip_needs_diamond",
-      "detail": "S(3, 0) has no diamond, so it is the plain 2k grid: no seam"
+     "size": 36,
+     "measure": "L = 6",
+     "invariant": "ceil(sqrt N) - L = 0",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 110, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 36/36 with 310 contacts >= n-1, min degree 11, Laman bound 69 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 36 + (0) = 36 and L^2 = 36"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
      },
-     "laws": {}
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "36",
+      "extent": "6",
+      "void": "0",
+      "contacts": "110",
+      "diamonds": "0",
+      "cells": "36",
+      "gain": "0",
+      "seam": "0"
+     }
     },
     {
      "wheel": "spatial",
@@ -514,7 +570,11 @@
       "count": "37",
       "extent": "6 + 1/2\u221a2",
       "void": "-1/2 + 6\u221a2",
-      "gain": "1 - 1/2\u221a2"
+      "contacts": "84",
+      "diamonds": "1",
+      "cells": "36",
+      "gain": "1 - 1/2\u221a2",
+      "seam": "1"
      }
     },
     {
@@ -553,7 +613,11 @@
       "count": "38",
       "extent": "6 + \u221a2",
       "void": "12\u221a2",
-      "gain": "1 - 1\u221a2"
+      "contacts": "83",
+      "diamonds": "2",
+      "cells": "36",
+      "gain": "1 - 1\u221a2",
+      "seam": "2"
      }
     },
     {
@@ -592,7 +656,11 @@
       "count": "39",
       "extent": "6 + 3/2\u221a2",
       "void": "3/2 + 18\u221a2",
-      "gain": "1 - 3/2\u221a2"
+      "contacts": "84",
+      "diamonds": "3",
+      "cells": "36",
+      "gain": "1 - 3/2\u221a2",
+      "seam": "3"
      }
     },
     {
@@ -603,17 +671,40 @@
       "k": "4",
       "m": "0"
      },
-     "size": null,
-     "measure": null,
-     "invariant": null,
-     "verdict": "refused",
-     "witnesses": {},
-     "witness_count": 0,
-     "refusal": {
-      "law": "strip_needs_diamond",
-      "detail": "S(4, 0) has no diamond, so it is the plain 2k grid: no seam"
+     "size": 64,
+     "measure": "L = 8",
+     "invariant": "ceil(sqrt N) - L = 0",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 210, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 64/64 with 798 contacts >= n-1, min degree 15, Laman bound 125 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 64 + (0) = 64 and L^2 = 64"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
+      }
      },
-     "laws": {}
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "64",
+      "extent": "8",
+      "void": "0",
+      "contacts": "210",
+      "diamonds": "0",
+      "cells": "64",
+      "gain": "0",
+      "seam": "0"
+     }
     },
     {
      "wheel": "spatial",
@@ -651,7 +742,11 @@
       "count": "65",
       "extent": "8 + 1/2\u221a2",
       "void": "-1/2 + 8\u221a2",
-      "gain": "1 - 1/2\u221a2"
+      "contacts": "172",
+      "diamonds": "1",
+      "cells": "64",
+      "gain": "1 - 1/2\u221a2",
+      "seam": "1"
      }
     },
     {
@@ -690,7 +785,11 @@
       "count": "66",
       "extent": "8 + \u221a2",
       "void": "16\u221a2",
-      "gain": "1 - 1\u221a2"
+      "contacts": "171",
+      "diamonds": "2",
+      "cells": "64",
+      "gain": "1 - 1\u221a2",
+      "seam": "2"
      }
     },
     {
@@ -729,7 +828,11 @@
       "count": "67",
       "extent": "8 + 3/2\u221a2",
       "void": "3/2 + 24\u221a2",
-      "gain": "1 - 3/2\u221a2"
+      "contacts": "172",
+      "diamonds": "3",
+      "cells": "64",
+      "gain": "1 - 3/2\u221a2",
+      "seam": "3"
      }
     },
     {
@@ -2380,7 +2483,7 @@
   }
  },
  "audit": {
-  "checked": 75,
+  "checked": 78,
   "offenders": [],
   "exempt": [
    "selftest"
