@@ -207,14 +207,51 @@ as measured here.
   four linear intervals), the free set is the exact complement, and a block of `u` shrinks each
   forbidden interval to the part common to the whole block — which under-approximates the
   forbidden set, so the free set is over-approximated and the chord bound is sound. Over `16`
-  blocks of the cage's own window every block closes, with the largest free chord
-  `0.558490 < 1`: **no two squares of the table's rotation are `1` apart along either axis**, in
-  exact `Q(√7)` arithmetic, with no scan and no tolerance. (The box cage cannot settle this pair —
-  its per-axis test is weaker than pointwise coverage, so the `(1, 2)` rectangle's cover degenerates
-  instead of closing; the chord proof is what closes it.) With the cap brick in place the single
-  square's cage is empty for the rotation as well.
+  blocks of the cage's own window every block closes; the largest single block's chord is
+  `0.558490`, and **the union of the blocks' free sets spans `0.624681 < 1`**. Read the union and
+  not the per-block number: a per-block chord only rules out pairs whose two `u` values fall in the
+  *same* block, while a `V`-separation is `Δv >= 1` whatever `Δu` is — and the window's own `v`
+  extent is `5/4`, so the cross-block case is real and has to be covered. The union is the
+  over-approximation that does it, and it closes: **no two squares of the table's rotation are `1`
+  apart along either axis**, in exact `Q(√7)` arithmetic, with no scan and no tolerance. (The box
+  cage cannot settle this pair — its per-axis test is weaker than pointwise coverage, so the
+  `(1, 2)` rectangle's cover degenerates instead of closing; the chord proof is what closes it.)
+  With the cap brick in place the single square's cage is empty for the rotation as well.
 * With the **census** word the same rectangle cage is **empty**: an exact proof, and the same
   fact as capacity 1 read another way.
+
+### 7.2 The chord symmetry check: the same verdict for all 66 classes
+
+Run 95 closed the pair question for the one word the table actually uses. Run 96 asks it
+uniformly: for each of the 66 rotation classes (all 78 field-compatible words), can **two**
+squares of that word both fit against the exact 149? `glm_wheels.py --chord-spin` runs the two
+exact instruments class by class — the single-square cage, and `staircase_pair_span`, which runs
+the chord proof in the word's own frame **and** in its quarter turn (so both axes are answered) —
+and writes `workspace/push/chord_spin.json`. The answer is the same everywhere:
+
+| quantity | result |
+|---|---|
+| rotation classes, covering all 78 words | **66** |
+| cages over the exact 149 that are non-empty (one square places) | **66 of 66** |
+| capacity exactly 1 (the cover's bbox is below 1 in both axes) | 36 |
+| capacity `>= 2` (bbox wide; the span is what decides) | 30 |
+| pair **excluded** | **66 of 66** |
+| free span along the word's `u` | `0.428760` … `0.780198` |
+| free span along the word's `v` | `0.440099` … `0.822876` |
+
+**No word has a free chord that reaches 1.** The largest axis span anywhere is `0.822876` — on
+`v` of the axis word's own mirror (`c = -1`, `s = 0`) — and the census word's class
+`((1 + √7)/4, (√7 - 1)/4)` comes in at `0.689651` (`u`) and `0.530920` (`v`). For the table's own
+rotation, rounded up at `1e−25`, the spans are `0.447289` (`u`, where the `(2, 1)` cage is empty
+anyway) and `0.624681` (`v`). So the 151st square is refused for **every** field-compatible word
+by the same two instruments, with no scan and no tolerance.
+
+The 30 `>= 2` classes are the reason the chord instrument exists: for those, the cover's own
+bounding box is wider than `1` in an axis, so the cage alone cannot separate a pair, and the span
+is what decides. The check is **not** in the selftest: it costs 2 m 02 s on its own, which would
+double the suite's runtime for a statement whose per-class form is already pinned by controls 25–27
+(the empty `(1, 2)` cage for the census word, the empty `(2, 1)` cage and the chord span for the
+table's rotation). `--chord-spin` is the reproducible record, and `0` classes reach `1`.
 
 So the answer to "does 151 close at the census side" is **no, and now by proof**: for the census
 word the pocket holds exactly one word-aligned square and the `(1, 2)` rectangle cage is empty;
@@ -239,11 +276,14 @@ slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the
   66 rotation-class cages, all empty). Control 27 is the mixed word: the table's own
   `19211307153/31250000000` rad rounded up at `1e−25` into Q(√7) closes a certified **150**
   (clearance 0), excludes the 151st exactly (`staircase_chords`: the `(2, 1)` rectangle cage is
-  empty and the free `v`-chords over 16 blocks of the cage's window peak at `0.558490 < 1`, a
-  finite exact proof in Q(√7) with no scan), and the census word's `(1, 2)` rectangle cage is
-  empty; the control also replays the delivered rotation pair against the exact 149 and reports
-  the measured overlap `−2.365e−9`. Control 5 exercises `staircase_layer_gap` on the 45° word;
-  control 24 records the k = 2, 3, 4, 5 ring verdicts (see doc 57 §5).
+  empty and the union of the 16 blocks' free sets spans `0.624681 < 1` — the largest single block's
+  chord being `0.558490`, and the control asserts the union is the larger of the two, since that is
+  the quantity the verdict rests on — a finite exact proof in Q(√7) with no scan), and the census
+  word's `(1, 2)` rectangle cage is empty; the control also replays the delivered rotation pair
+  against the exact 149 and reports the measured overlap `−2.365e−9`. Control 5 exercises
+  `staircase_layer_gap` on the 45° word; control 24 records the k = 2, 3, 4, 5 ring verdicts (see
+  doc 57 §5). The 66-class chord symmetry check of §7.2 is `--chord-spin`, deliberately outside the
+  suite (2 m 02 s on its own), and it reports the same `no-pair` verdict for all 66 classes.
 * `glm_wheels.py` — spin: spatial **48/48 certified**, 0 refused (`Ring k=1`, `Staircase k=5`);
   sequences 6/7; lattice 24/28.
 * `glm_wheels.py --audit` — bytecode float audit of every decision function.

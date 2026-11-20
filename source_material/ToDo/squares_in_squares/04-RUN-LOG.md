@@ -1787,7 +1787,10 @@ of exact `Quad` intervals (a square covers `(u, v)` iff all four of its axis tes
 forbidden set is the intersection of four linear intervals), the free set is the exact complement,
 and each block of `u` shrinks every forbidden interval to the part common to the whole block --
 under-approximating the forbidden set, so the free set is over-approximated and the bound is
-sound. Over 16 blocks of the cage's own window all 16 close, largest free chord `0.558490 < 1`:
+sound. Over 16 blocks of the cage's own window all 16 close, largest single free chord
+`0.558490` (run 96 corrects the *read*: the quantity that proves the pair is the **union** of the
+blocks' free sets, `0.624681 < 1` -- a per-block chord alone would miss a pair whose two `u` values
+fall in different blocks) < 1:
 no two squares of the table's rotation are 1 apart along either axis, in exact `Q(sqrt 7)`
 arithmetic, no scan, no tolerance. With the cap brick in place the cage is empty for the rotation
 too, and with the **census** word the `(1, 2)` rectangle cage is empty -- the same fact as
@@ -1823,3 +1826,85 @@ green (241 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 
 11/11; `field_triage --selftest` 4/4; `record_guard.py` OK.
 
 Entries `58-THE-STAIRCASE.md`; records `31`-`58`.
+
+## Run 96 — the honest score, the window above 1000, and the 7-rung bridge
+
+**Three questions, no row moved.** (1) Does any exact sentence on `glm_wheels.py` beat the
+delivered row at the same `N`? (2) What do the same families emit above `n = 1000`, where the
+table and the float tables stop? (3) Where does that put us on the seven-rung ladder, and what is
+the next grammatical move? A fourth item came first and is a repair.
+
+**The chord check, made sound and made uniform.** Run 95's `staircase_chords` reported the largest
+*single block's* free chord (`0.558490`), but a `V`-separation is `dv >= 1` whatever `du` is, and
+the table's rotation has a `5/4`-wide `v`-window — so a pair whose two `u` values fall in
+different blocks was not covered. The instrument now accumulates every closed block's free
+intervals and decides on their **union**: the span is `0.624681 < 1`, the sound quantity, and
+control 27 asserts the union exceeds the largest block's chord. `--chord-spin` then runs the same
+two instruments (`staircase_cage` and the new `staircase_pair_span`, which answers both axes by a
+quarter turn) over the **census word and all 66 rotation classes** — the 78 field-compatible words:
+**66 of 66 non-empty cages** (every class places one square against the exact 149), 36 with
+capacity exactly 1 and 30 decided by the chord span, and **66 of 66 `no-pair`** — free spans
+`0.428760 … 0.780198` (`u`) and `0.440099 … 0.822876` (`v`), none reaching 1. It is 2 m 02 s on
+its own and is deliberately **not** in the selftest; the suite is unchanged in cost at
+**1 m 48.7 s**. Doc 58 section 7.2 carries the table.
+
+**The honest score: 0 of 364.** `scripts/family_spin.py --calibrate` spins Ridge, Strip, Diamond,
+Ring and Staircase over Q(sqrt 2), Q(sqrt 5), Q(sqrt 7) and three rational-t words. Each member's
+side is exact `Quad`; the delivered side is recomputed from the 12-dp pose as exact rational input
+at 70 digits, so every gap is decisive, and a gap under `1e-6` is called *parity* because the
+table's own pose tolerance is ~2e-9. Result: **364 members share a count with a delivered row,
+0 beat it, 6 are at parity, 358 are behind.** The six parity rows are the atoms the grammar was
+built from — `n = 5` (45-degree ridge = Strip `S(1,1)`), the diamonds `n = 10, 19, 40`, the ring
+`n = 18` — each `+1.26e-9 … +1.71e-9`, i.e. agreeing with the table to the table's own polish and
+not beating it. Every other member is behind and the shortfall **grows**: closest is the Seventh at
+`n = 5` by `0.001391`; at `N = 901` the 45-degree rung is `30.70711` against `30.52082`, row
+scores `+0.023002` against `+0.016796`, so splicing it in would **raise** the total by `0.0062`
+(`N = 903`: `+0.0528`). The algebra says why: every family is single-word, `L = 2k + w` with
+`w = m min(1/(c+s), c+s)` — minimised at `x = c + s = 1`, the 45-degree word, `w = 1/2 Sqrt2` —
+while the delivered rows at `N = 4k^2 + 1` sit at `2k + O(1/k)`. **The table is not reproducible by
+this alphabet**: it explains the *sides* of 576 of 1000 rows (447 grid, 99 Q(sqrt 2) pose, 18
+Q(sqrt 2) side, 5 Q(sqrt 7) side, 3 Q(sqrt 5) side, 4 rational-t) and constructs 6 of them as
+sentences; the other **424 rows have no field class at all**.
+
+**The window above 1000, exact and zero-drift.** `--beyond` gates the rungs whose counts the table
+does not have. Strip / 45-degree ridge at `N = 4k^2 + m`, `L = 2k + m Sqrt2/2`: `N = 1025`
+`L = 32 + 1/2 Sqrt2` (void `-1/2 + 32 Sqrt2` = 44.754834, **3724 contacts**), `N = 1026`, `1027`;
+and at `k = 22`, `N = 1937` `L = 44 + 1/2 Sqrt2` (void `-1/2 + 44 Sqrt2`, **7228 contacts**),
+`1938`, `1939` — `gate_L == L` on every rung, depth `L/sqrt N - 1` = 0.015808 … 0.064733, and at
+`N = 1025` the side is **0.292893 inside the grid's 33**. The same rung over all seven words
+(`k = 16`, `N = 1025`, 3724 contacts each) orders them exactly as the field predicts — `32 + 1/2
+Sqrt2` (45), `38 - 2 Sqrt7` (Seventh), `229/7` (t = 1/2 and 1/3, the same mirror square), `32 +
+1/3 Sqrt5` (Slope), `32 + 2/7 Sqrt7` (census), `557/17` (t = 1/5) — because `w = min(x, 1/x)` is
+minimised at `x = 1`. **The staircase does not scale**: its wall's column count grows at ~`8k/3`
+while the box's `u`-window grows at `2k`, so from `k = 6` the bricks cut into the frame — 38
+violations at `k = 6` (worst clearance `-0.812193`), 56 at `k = 7`, 297 at `k = 21` (`N = 1963`,
+bbox `62.71` against the law's `44.82`), and **no gauge** among 25 slides `u0 + i/4` at `k = 6`
+gates. The staircase is a reading of the census's one row, not a family; its side law is `k = 5`
+only. Ring `k = 2, 3` refuse by `ring_chain_adrift` and the diamond atoms stay at `n <= 40`, so
+above 1000 the honest rungs are the ridge's. No row claimed.
+
+**The bridge.** Doc 59 maps the instruments onto the seven rungs: rung 1 (Golay substrate) holds the
+leech 24-pocket address and its retraction — after the run-33 audit its only signal *is* the
+rotation flag; rung 2 (integer) holds the 447 axis rows at `ceil sqrt n` and cannot even see the 553
+beating rows; rung 3 (rational/algebraic) is home — Q(sqrt 2), Q(sqrt 5), Q(sqrt 7), rational-t,
+the gate, the cage, the chord union, and the lossless ceiling; rung 4 (scan) is the delivered table
+itself, whose `2e-9` pose is why the mixed 151 overlaps by `-2.365e-9`; rung 5 (topology) classifies
+our contact graphs but cannot propose one; rung 6 (Griess/Conway) is **empty** — a Golay shadow is
+not a `Co_0` label on an exact carrier; rung 7 (certificate) is our strongest, and its refusals
+carry the discipline of `climb_principled`. The blindnesses are named with numbers: the 0.614761828896
+rad word is in no field at height <= 4096 and is not Pythagorean (so "151 is impossible" is a
+statement about `Q(sqrt 7) union Q_Pyth`, plus a measured `-2.365e-9` overlap — not about squares);
+one word per family is why `w >= 1/2 Sqrt2` and why the table's `2k + O(1/k)` is unreachable; and
+424 of 1000 rows are outside any field. The next move is one production, not a search: **a second
+word in the same sentence**, declared by a *mixed* tangency, so the closure is a polynomial
+identity in both words — the ring's `2 p5.v + 2 = 5/4 - (4k - 1)/4 Sqrt7` is the template, and the
+falsifier is whether any word pair closes below `2k + w` at `k <= 8` (decidable with the cage and
+the chord union already here).
+
+**Verification.** `glm_wheels.py --selftest` **27 controls, exit 0, 1 m 48.7 s** (no inflation);
+`--audit` green; `--chord-spin` 66/66 `no-pair`; `family_spin.py --calibrate` 364/0/6/358 and
+`--beyond strip|words|stair` all gated with zero drift; spin spatial **48/48**, sequences 6/7,
+lattice 24/28; `grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage
+--selftest` 4/4; `record_guard.py` OK. No row changed and no score is claimed.
+
+Entries `58-THE-STAIRCASE.md` (section 7.2), `59-ESCALATION-LADDER-BRIDGE.md`; records `31`-`59`.

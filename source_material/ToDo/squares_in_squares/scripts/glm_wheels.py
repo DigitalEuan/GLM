@@ -1690,10 +1690,17 @@ def staircase_chords(cls, c, s, cells, words, blocks=48, window=None, depth=22):
 
     `u` is covered by finitely many blocks.  Inside a block each forbidden interval is
     *shrunk* to the part common to the whole block, which under-approximates the
-    forbidden set and therefore over-approximates the free set; if no two points of that
-    over-approximation are `1` apart, no pair exists in the block.  A block that fails
-    is split in half, so the verdict is a finite exact proof in Q(sqrt d): every quantity
-    is a `Quad`, no `Decimal`, no float, no tolerance.
+    forbidden set and therefore over-approximates the free set; a block whose own
+    over-approximation holds two points `1` apart is split in half, so every surviving
+    block's free set is short.  The verdict is then read off the **union** of those
+    per-block free intervals: that union over-approximates every `v` any feasible centre
+    can have, at any `u` of the window, so a union extent below `1` rules out a `V`-pair
+    outright -- including pairs whose `u` values sit in different blocks, which a
+    per-block chord alone would not see.  `max_chord` is that global extent and
+    `max_block` the largest single chord, kept for the record.
+
+    The verdict is a finite exact proof in Q(sqrt d): every quantity is a `Quad`, no
+    `Decimal`, no float, no tolerance.
     """
     rows = _cage_rows(cls, c, s, cells, words)
     prep = []
@@ -1761,16 +1768,18 @@ def staircase_chords(cls, c, s, cells, words, blocks=48, window=None, depth=22):
 
     todo = [(ulo + (uhi - ulo) * cls(F(k, blocks)),
              ulo + (uhi - ulo) * cls(F(k + 1, blocks))) for k in range(blocks)]
-    worst = None
+    worst_block = None
+    free_all = []
     closed = 0
     while todo:
         u0, u1 = todo.pop()
         iv = free_at(u0, u1)
         if not has_pair(iv):
             closed += 1
+            free_all.extend(iv)
             for a, b in iv:
-                if worst is None or b - a > worst:
-                    worst = b - a
+                if worst_block is None or b - a > worst_block:
+                    worst_block = b - a
             continue
         if depth <= 0:
             raise Refusal("pair_not_excluded", f"a free chord reaches 1 near u = {u0}")
@@ -1778,8 +1787,87 @@ def staircase_chords(cls, c, s, cells, words, blocks=48, window=None, depth=22):
         um = (u0 + u1) * cls(F(1, 2))
         todo.append((u0, um))
         todo.append((um, u1))
-    return {"ok": True, "max_chord": worst, "closed": closed, "blocks": blocks,
+    if not free_all:
+        return {"ok": True, "max_chord": cls(0), "max_block": cls(0),
+                "closed": closed, "blocks": blocks,
+                "window": (ulo, uhi, vlo, vhi)}
+    lo = min(a for a, _b in free_all)
+    hi = max(b for _a, b in free_all)
+    span = hi - lo
+    if span >= cls(1):
+        raise Refusal("pair_not_excluded",
+                      f"the free set spans {span} along V, so a pair of centres "
+                      f"1 apart cannot be ruled out")
+    return {"ok": True, "max_chord": span, "max_block": worst_block,
+            "closed": closed, "blocks": blocks,
             "window": (ulo, uhi, vlo, vhi)}
+
+
+def staircase_pair_span(cls, c, s, cells, words, L, blocks=16, exact_word=True):
+    """The exact free span of a word's feasible centres along **both** of its axes.
+
+    The pair test is `|du| >= 1 or |dv| >= 1`, so both axes must be short.  The chord
+    instrument works in one frame; a quarter turn `(c, s) -> (-s, c)` leaves the square
+    alone, so calling it on the turned word answers for the other axis.  Returns the
+    two spans and the two cages, so a caller can report which axis (if either) is
+    decided by an empty cage rather than by the span.
+    """
+    out = {}
+    for tag, (ct, st) in (("v", (c, s)), ("u", (-s, c))):
+        cage = staircase_cage(cls, ct, st, cells, words, L, exact_word=exact_word,
+                              hint=(cells[-1][0], cells[-1][1]))
+        if cage["empty"]:
+            out[tag] = {"cage_empty": True, "span": None, "cage": cage}
+            continue
+        ch = staircase_chords(cls, ct, st, cells, words, blocks=blocks,
+                              window=cage["window"])
+        out[tag] = {"cage_empty": False, "span": ch["max_chord"],
+                    "max_block": ch["max_block"], "cage": cage}
+    return out
+
+
+def staircase_chord_spin(cells=None, words=None, L=None, blocks=16):
+    """Run the chord instrument over the census word and every second-word class.
+
+    The question is uniform: for a word `w` and the exact 149-square staircase, can two
+    unit squares of `w` both fit in the pocket?  For each of the 66 rotation classes the
+    answer is decided by the same two exact instruments -- a single-square cage (empty
+    means not even one fits) and `staircase_pair_span` (both axis spans below `1` means
+    no pair fits) -- with no scan and no tolerance.
+
+    A class whose span reaches `1` is returned with `verdict == "pair"`: the instrument
+    does not exclude it, and the caller must report that honestly rather than round it.
+    """
+    cls = qfield(7)
+    if cells is None or words is None:
+        capped = staircase_capped(5)
+        cells, words = capped["cells"][:149], capped["words"][:149]
+    if L is None:
+        L = (cls(23) + cls(0, 1)) / cls(2)
+    out = []
+    for name, c, s in staircase_second_word_classes():
+        rec = {"word": name, "c": c, "s": s}
+        cage = staircase_cage(cls, c, s, cells, words, L,
+                              hint=(cells[-1][0], cells[-1][1]))
+        rec["capacity"] = cage["capacity"]
+        rec["extent_u"] = cage["extent_u"]
+        rec["extent_v"] = cage["extent_v"]
+        if cage["empty"]:
+            rec["verdict"] = "no-placement"
+            rec["span_u"] = rec["span_v"] = None
+            out.append(rec)
+            continue
+        span = staircase_pair_span(cls, c, s, cells, words, L, blocks=blocks)
+        rec["span_u"] = span["u"]["span"]
+        rec["span_v"] = span["v"]["span"]
+        if span["u"]["cage_empty"] or span["v"]["cage_empty"]:
+            rec["verdict"] = "no-pair"
+        elif all(x is not None and x < cls(1) for x in (rec["span_u"], rec["span_v"])):
+            rec["verdict"] = "no-pair"
+        else:
+            rec["verdict"] = "pair"
+        out.append(rec)
+    return out
 
 
 def staircase_odd_cage(cls, cells, words, L, places=25):
@@ -3459,6 +3547,9 @@ def selftest() -> int:
                                 window=cage_odd["window"])
     assert chords27["ok"] and chords27["closed"] == chords27["blocks"], chords27
     assert chords27["max_chord"] < 1 and chords27["max_chord"] > 0, chords27
+    # the verdict is the *union* of the blocks' free sets: a per-block chord bound
+    # alone would not see a pair whose two u values sit in different blocks
+    assert chords27["max_block"] < chords27["max_chord"], chords27
     # the census word cannot reach 151 either: its pair cage closes exactly
     cage_pair_census = staircase_cage(cls7, cw7, sw7, c25, w25, target151,
                                       sides=(1, 2),
@@ -3483,11 +3574,15 @@ def selftest() -> int:
         "that word's axes, so the pair is settled axis by axis.  Along U the (2, 1) "
         "rectangle's cage is **empty** -- a closed proof.  Along V the free v-chords "
         "never reach 1: at a fixed u the whole sentence forbids a union of exact "
-        "Quad intervals and the free complement is bounded block by block over the "
-        "cage's own window, with the largest free chord " + f"{dec(chords27['max_chord']):.6f}" +
-        " over 16 blocks, all closed (every block shrinks its forbidden intervals, so "
-        "the free set is over-approximated and the bound is sound) -- a finite exact "
-        "proof in Q(sqrt 7), not a scan.  (The box cage cannot settle this pair: its "
+        "Quad intervals, and over 16 blocks of the cage's own window (all closed, each "
+        "shrinking its forbidden intervals so the free set is over-approximated) the "
+        "union of the blocks' free sets spans " + f"{dec(chords27['max_chord']):.6f}" +
+        " -- below 1, so no two feasible centres anywhere in the window are 1 apart "
+        "along V (the largest single block's chord is " +
+        f"{dec(chords27['max_block']):.6f}" + ", but the verdict is the union: a "
+        "per-block bound alone would miss a pair whose two u values fall in different "
+        "blocks) -- a finite exact proof in Q(sqrt 7), not a scan.  (The box cage "
+        "cannot settle this pair: its "
         "per-axis test is weaker than pointwise coverage, so the (1, 2) rectangle's "
         "cover degenerates instead of closing; the chord proof is what closes it.)  "
         "With the cap brick in place the single square's cage is empty for the "
@@ -3553,6 +3648,47 @@ def main(argv=None) -> int:
     if "--probe" in argv:
         budget = (argv[argv.index("--budget") + 1] if "--budget" in argv else "240")
         probe(Decimal(budget))
+        return 0
+    if "--chord-spin" in argv:
+        # one run over the census word and all 66 rotation classes of the second words:
+        # a statement about where the pair test closes, kept out of the selftest so the
+        # suite's runtime does not move (the sweep is reported in 58-THE-STAIRCASE.md)
+        rows = staircase_chord_spin()
+        out = []
+        for r in rows:
+            out.append({
+                "word": r["word"], "c": str(r["c"]), "s": str(r["s"]),
+                "capacity": r["capacity"], "verdict": r["verdict"],
+                "extent_u": str(r["extent_u"]), "extent_v": str(r["extent_v"]),
+                "span_u": None if r["span_u"] is None else str(r["span_u"]),
+                "span_v": None if r["span_v"] is None else str(r["span_v"]),
+                "span_u_dec": None if r["span_u"] is None else
+                              str(DecimalWitness.scalar(r["span_u"])),
+                "span_v_dec": None if r["span_v"] is None else
+                              str(DecimalWitness.scalar(r["span_v"])),
+            })
+        tally = {}
+        for r in rows:
+            tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
+        path = os.path.join(ROOT, "workspace/push/chord_spin.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"classes": len(rows), "tally": tally, "rows": out}, f, indent=1)
+        one = qfield(7)(1)
+        live = [r for r in rows if r["verdict"] != "no-placement"]
+        print(f"chord spin: {len(rows)} rotation classes, {tally}")
+        worst = None
+        for r in live:
+            for tag in ("span_u", "span_v"):
+                x = r[tag]
+                if x is not None and x < one and (worst is None or x > worst[0]):
+                    worst = (x, r["word"], tag)
+        if worst is None:
+            print("  no class survived to a span: every cage is empty")
+        else:
+            print(f"  largest axis span among placeable classes: "
+                  f"{DecimalWitness.scalar(worst[0])} ({worst[1]}, {worst[2]})")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
         return 0
 
     SQ.guard(quiet=True)
