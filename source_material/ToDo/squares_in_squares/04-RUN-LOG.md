@@ -1548,3 +1548,52 @@ sequences 6/7, lattice 24/28; float audit **191 functions, 0 offenders**;
 No number moved; no row changed.
 
 Entries `54-ONE-GATE.md`; records `31`-`54`.
+
+## Run 92 — the bar, and the word the table actually uses
+
+**What was asked.** Generalize the ridge and the strip builders so the ridge family holds
+m tilted squares over Q(√2), Q(√5), Q(√7) and rational-t rungs, deriving the exact seam
+width w*(m) and the slot placement algebraically; reproduce `strip_field(k, m)` at 45° and
+the single-seed ridge at m = 1; then decide honestly whether any (k, m) captures the
+census's n = 18 row at `7/2 + √7/2`, and if not, read that row's pose to name the
+grammatical word behind its side.
+
+**One procedure.** The bar is m tilted unit squares edge to edge along `−v = (s, −c)`, slot
+`i` at `centre + (i − (m−1)/2)(s, −c)`, so consecutive slots share an edge for every m.
+Because the bar's centre moves by `+w/2` and the far blocks by `+w`, every block-slot
+slack is **linear** in the seam width: with `d(w)·q = P + Q w` and
+`need = 1/2 + (|c|+|s|)/2` on every axis, `|d(w)·q| = need` has the closed-form roots
+`(±need − P)/Q`. `ridge_widths` collects them in the field, `ridge_width` returns the
+smallest root at which the exact gate passes — a contact width by construction, with no
+scan and no tolerance. `p_ridge(d, c, s, k, family, params, m=1)` gates the sentence and
+`p_slope`/`p_seventh`/`p_tilt` take m; refusals stay declared (`word_off_circle`,
+`no_contact_width`, `ridge_cuts_corner`, `degenerate_cell`, `negative_seam`).
+
+**Control 22.** At 45° the ridge equals `strip_field(k, m)` cell for cell, slot for slot
+and side for side on all nine `(k, m)` with `k, m = 1..3` (`L = 2k + m√2/2`, `N = 4k² + m`),
+and `m = 1, k = None` still gives run 90's `min(1/(c+s), c+s)`. The exact law
+`w*(2) = 2w*(1)` holds on all four rungs; past m = 2 the binding pair re-binds — the 45°
+rung stays linear through m = 4 while the Q(√7) rung's m = 3 is **smaller** than
+`3·w*(1)` (`−1/2 + √7`), which the control reports rather than asserting away. The wheel
+gains `m = 2` at `k = 2, 3` on the three non-45 rungs (m = 2, k = 1 is refused
+`contact_graph_thin`, the same floppiness that keeps `S(1, 2)` out), so the spatial wheel
+is **46/46** certified.
+
+**The n = 18 answer, once.** `N = 18` forces `(k, m) = (2, 2)`; the four rungs give
+`4 + √2`, `4 + 2/3√5`, `4 + 4/7√7` and `38/7` against the row's `7/2 + √7/2`, and the seam
+width it would need, `(√7 − 1)/2`, is not any rung's `w*(1)` or `w*(2)`. So **no member
+captures the row**, asserted per rung. Reading the row instead: its 12-dp tilt recovers at
+70 digits to `cos = 1/4 + 1/4√7`, `sin = −1/4 + 1/4√7` (on the unit circle exactly), so
+run 90's Q(√7) word was an invention and `_sqrt7_word` is now the table's own — and all 36
+coordinates of the 18 centres recover in Q(√7) with denominators ≤ 16. The pose is 10 axis
+squares on `±(5/4 + √7/4)²` plus 8 tilted ones, giving
+`L = 2(5/4 + √7/4) + 1 = 7/2 + √7/2 = 3 + 2cos`. An **odd** rational part and a cosine
+term, where the ridge's side is an even `2k` plus a seam width with flush blocks: the row
+is a ring sentence, and the mismatch is grammatical, not a near miss in the width.
+
+**Verification.** `glm_wheels --selftest` **22 controls**, exit 0; spin spatial **46/46**,
+sequences 6/7, lattice 24/28; float audit **195 functions, 0 offenders**;
+`grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage --selftest`
+4/4; `record_guard.py` OK. No row changed.
+
+Entries `55-THE-BAR-AND-THE-WORD.md`; records `31`-`55`.

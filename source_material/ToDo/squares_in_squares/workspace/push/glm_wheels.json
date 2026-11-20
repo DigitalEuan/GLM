@@ -9,8 +9,8 @@
  "spins": {
   "spatial": {
    "summary": {
-    "cells": 40,
-    "certified": 40,
+    "cells": 46,
+    "certified": 46,
     "refused": 0,
     "refusal_laws": {}
    },
@@ -1406,13 +1406,101 @@
     {
      "wheel": "spatial",
      "domain": "spatial_geometry",
+     "family": "Slope",
+     "params": {
+      "p": "2",
+      "q": "1",
+      "k": "2",
+      "m": "2"
+     },
+     "size": 18,
+     "measure": "L = 4 + 2/3\u221a5",
+     "invariant": "ceil(sqrt N) - L = 1 - 2/3\u221a5",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 27, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 18/18 with 59 contacts >= n-1, min degree 2, Laman bound 33 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 18 + (2/9 + 16/3\u221a5) = 164/9 + 16/3\u221a5 and L^2 = 164/9 + 16/3\u221a5"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.114e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "18",
+      "extent": "4 + 2/3\u221a5",
+      "void": "2/9 + 16/3\u221a5",
+      "contacts": "27",
+      "gain": "1 - 2/3\u221a5",
+      "seam": "2/3\u221a5",
+      "tilted": "2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "Slope",
+     "params": {
+      "p": "2",
+      "q": "1",
+      "k": "3",
+      "m": "2"
+     },
+     "size": 38,
+     "measure": "L = 6 + 2/3\u221a5",
+     "invariant": "ceil(sqrt N) - L = 1 - 2/3\u221a5",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 83, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 38/38 with 259 contacts >= n-1, min degree 2, Laman bound 73 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 38 + (2/9 + 8\u221a5) = 344/9 + 8\u221a5 and L^2 = 344/9 + 8\u221a5"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.114e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "38",
+      "extent": "6 + 2/3\u221a5",
+      "void": "2/9 + 8\u221a5",
+      "contacts": "83",
+      "gain": "1 - 2/3\u221a5",
+      "seam": "2/3\u221a5",
+      "tilted": "2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
      "family": "Seventh",
      "params": {
       "k": "1"
      },
      "size": 5,
-     "measure": "L = 8 - 2\u221a7",
-     "invariant": "ceil(sqrt N) - L = -5 + 2\u221a7",
+     "measure": "L = 2 + 2/7\u221a7",
+     "invariant": "ceil(sqrt N) - L = 1 - 2/7\u221a7",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1425,22 +1513,22 @@
       },
       "conservation": {
        "ok": true,
-       "detail": "N + V = 5 + (87 - 32\u221a7) = 92 - 32\u221a7 and L^2 = 92 - 32\u221a7"
+       "detail": "N + V = 5 + (-3/7 + 8/7\u221a7) = 32/7 + 8/7\u221a7 and L^2 = 32/7 + 8/7\u221a7"
       },
       "decimal_cross": {
        "ok": true,
-       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.130e+0, pair verdict True == exact True"
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.000e+0, pair verdict True == exact True"
       }
      },
      "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "5",
-      "extent": "8 - 2\u221a7",
-      "void": "87 - 32\u221a7",
+      "extent": "2 + 2/7\u221a7",
+      "void": "-3/7 + 8/7\u221a7",
       "contacts": "4",
-      "gain": "-5 + 2\u221a7",
-      "seam": "6 - 2\u221a7",
+      "gain": "1 - 2/7\u221a7",
+      "seam": "2/7\u221a7",
       "tilted": "1"
      }
     },
@@ -1452,8 +1540,8 @@
       "k": "2"
      },
      "size": 17,
-     "measure": "L = 10 - 2\u221a7",
-     "invariant": "ceil(sqrt N) - L = -5 + 2\u221a7",
+     "measure": "L = 4 + 2/7\u221a7",
+     "invariant": "ceil(sqrt N) - L = 1 - 2/7\u221a7",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1466,22 +1554,22 @@
       },
       "conservation": {
        "ok": true,
-       "detail": "N + V = 17 + (111 - 40\u221a7) = 128 - 40\u221a7 and L^2 = 128 - 40\u221a7"
+       "detail": "N + V = 17 + (-3/7 + 16/7\u221a7) = 116/7 + 16/7\u221a7 and L^2 = 116/7 + 16/7\u221a7"
       },
       "decimal_cross": {
        "ok": true,
-       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.130e+0, pair verdict True == exact True"
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.134e+0, pair verdict True == exact True"
       }
      },
      "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "17",
-      "extent": "10 - 2\u221a7",
-      "void": "111 - 40\u221a7",
+      "extent": "4 + 2/7\u221a7",
+      "void": "-3/7 + 16/7\u221a7",
       "contacts": "28",
-      "gain": "-5 + 2\u221a7",
-      "seam": "6 - 2\u221a7",
+      "gain": "1 - 2/7\u221a7",
+      "seam": "2/7\u221a7",
       "tilted": "1"
      }
     },
@@ -1493,8 +1581,8 @@
       "k": "3"
      },
      "size": 37,
-     "measure": "L = 12 - 2\u221a7",
-     "invariant": "ceil(sqrt N) - L = -5 + 2\u221a7",
+     "measure": "L = 6 + 2/7\u221a7",
+     "invariant": "ceil(sqrt N) - L = 1 - 2/7\u221a7",
      "verdict": "certified",
      "witnesses": {
       "exact_gate": {
@@ -1507,23 +1595,107 @@
       },
       "conservation": {
        "ok": true,
-       "detail": "N + V = 37 + (135 - 48\u221a7) = 172 - 48\u221a7 and L^2 = 172 - 48\u221a7"
+       "detail": "N + V = 37 + (-3/7 + 24/7\u221a7) = 256/7 + 24/7\u221a7 and L^2 = 256/7 + 24/7\u221a7"
       },
       "decimal_cross": {
        "ok": true,
-       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.130e+0, pair verdict True == exact True"
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.134e+0, pair verdict True == exact True"
       }
      },
      "witness_count": 4,
      "refusal": null,
      "laws": {
       "count": "37",
-      "extent": "12 - 2\u221a7",
-      "void": "135 - 48\u221a7",
+      "extent": "6 + 2/7\u221a7",
+      "void": "-3/7 + 24/7\u221a7",
       "contacts": "84",
-      "gain": "-5 + 2\u221a7",
-      "seam": "6 - 2\u221a7",
+      "gain": "1 - 2/7\u221a7",
+      "seam": "2/7\u221a7",
       "tilted": "1"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "Seventh",
+     "params": {
+      "k": "2",
+      "m": "2"
+     },
+     "size": 18,
+     "measure": "L = 4 + 4/7\u221a7",
+     "invariant": "ceil(sqrt N) - L = 1 - 4/7\u221a7",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 27, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 18/18 with 59 contacts >= n-1, min degree 2, Laman bound 33 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 18 + (2/7 + 32/7\u221a7) = 128/7 + 32/7\u221a7 and L^2 = 128/7 + 32/7\u221a7"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.033e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "18",
+      "extent": "4 + 4/7\u221a7",
+      "void": "2/7 + 32/7\u221a7",
+      "contacts": "27",
+      "gain": "1 - 4/7\u221a7",
+      "seam": "4/7\u221a7",
+      "tilted": "2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "Seventh",
+     "params": {
+      "k": "3",
+      "m": "2"
+     },
+     "size": 38,
+     "measure": "L = 6 + 4/7\u221a7",
+     "invariant": "ceil(sqrt N) - L = 1 - 4/7\u221a7",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 83, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 38/38 with 259 contacts >= n-1, min degree 2, Laman bound 73 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 38 + (2/7 + 48/7\u221a7) = 268/7 + 48/7\u221a7 and L^2 = 268/7 + 48/7\u221a7"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.033e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "38",
+      "extent": "6 + 4/7\u221a7",
+      "void": "2/7 + 48/7\u221a7",
+      "contacts": "83",
+      "gain": "1 - 4/7\u221a7",
+      "seam": "4/7\u221a7",
+      "tilted": "2"
      }
     },
     {
@@ -1650,6 +1822,92 @@
       "gain": "2/7",
       "seam": "5/7",
       "tilted": "1"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "Tilt",
+     "params": {
+      "t": "1/2",
+      "k": "2",
+      "m": "2"
+     },
+     "size": 18,
+     "measure": "L = 38/7",
+     "invariant": "ceil(sqrt N) - L = -3/7",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 27, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 18/18 with 59 contacts >= n-1, min degree 2, Laman bound 33 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 18 + (562/49) = 1444/49 and L^2 = 1444/49"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.143e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "18",
+      "extent": "38/7",
+      "void": "562/49",
+      "contacts": "27",
+      "gain": "-3/7",
+      "seam": "10/7",
+      "tilted": "2"
+     }
+    },
+    {
+     "wheel": "spatial",
+     "domain": "spatial_geometry",
+     "family": "Tilt",
+     "params": {
+      "t": "1/2",
+      "k": "3",
+      "m": "2"
+     },
+     "size": 38,
+     "measure": "L = 52/7",
+     "invariant": "ceil(sqrt N) - L = -3/7",
+     "verdict": "certified",
+     "witnesses": {
+      "exact_gate": {
+       "ok": true,
+       "detail": "gate ok, clearance 0, contacts 83, violations 0"
+      },
+      "contact_graph": {
+       "ok": true,
+       "detail": "spanning True on 38/38 with 259 contacts >= n-1, min degree 2, Laman bound 73 (rigid)"
+      },
+      "conservation": {
+       "ok": true,
+       "detail": "N + V = 38 + (842/49) = 2704/49 and L^2 = 2704/49"
+      },
+      "decimal_cross": {
+       "ok": true,
+       "detail": "|L_dec - L| = 0.000e-66, worst slack_dec -1.143e+0, pair verdict True == exact True"
+      }
+     },
+     "witness_count": 4,
+     "refusal": null,
+     "laws": {
+      "count": "38",
+      "extent": "52/7",
+      "void": "842/49",
+      "contacts": "83",
+      "gain": "-3/7",
+      "seam": "10/7",
+      "tilted": "2"
      }
     }
    ]
@@ -2873,7 +3131,7 @@
   }
  },
  "audit": {
-  "checked": 91,
+  "checked": 95,
   "offenders": [],
   "exempt": [
    "selftest"
