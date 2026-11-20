@@ -201,7 +201,13 @@ as measured here.
   rotation *does* close a 150th square at the census side.
 * **The 151st is excluded exactly.** Two unit squares of one word overlap unless their centres
   differ by at least `1` along one of that word's axes, so the pair is settled axis by axis. Along
-  `u` the `(2, 1)` rectangle's cage is **empty** — a closed proof. Along `v` the free chords never
+  `u` it is the **cover** that settles it: the single square's cage against the 149 spans
+  `extent_u = 3/4`, so any two feasible centres differ by less than `1` along `u` — and the free
+  span, read in the turned frame, tightens that to `0.447289`. (The `(2, 1)` rectangle's cage is
+  *not* the instrument here: it asks only whether the **tangent** pair, centres exactly `1` apart,
+  fits, and a pair further apart is a legal pair the cage cannot see — the same reason the
+  `(1, 2)` cover degenerates. Run 95 credited it with more than it proves; run 96 rests the `u`
+  half on the extent and the span.) Along `v` the free chords never
   reach `1`: at a fixed `u` the sentence forbids a union of exact `Quad` intervals (a square
   covers `(u, v)` iff all four of its axis tests fail, so its forbidden set is the intersection of
   four linear intervals), the free set is the exact complement, and a block of `u` shrinks each
@@ -217,8 +223,9 @@ as measured here.
   cage cannot settle this pair — its per-axis test is weaker than pointwise coverage, so the
   `(1, 2)` rectangle's cover degenerates instead of closing; the chord proof is what closes it.)
   With the cap brick in place the single square's cage is empty for the rotation as well.
-* With the **census** word the same rectangle cage is **empty**: an exact proof, and the same
-  fact as capacity 1 read another way.
+* With the **census** word the `(1, 2)` rectangle cage is **empty** too — though there the
+  exclusion is capacity 1 itself (the cover is `5/8` × `3/4`, §5), of which the empty rectangle is a
+  consequence.
 
 ### 7.2 The chord symmetry check: the same verdict for all 66 classes
 
@@ -242,20 +249,22 @@ and writes `workspace/push/chord_spin.json`. The answer is the same everywhere:
 **No word has a free chord that reaches 1.** The largest axis span anywhere is `0.822876` — on
 `v` of the axis word's own mirror (`c = -1`, `s = 0`) — and the census word's class
 `((1 + √7)/4, (√7 - 1)/4)` comes in at `0.689651` (`u`) and `0.530920` (`v`). For the table's own
-rotation, rounded up at `1e−25`, the spans are `0.447289` (`u`, where the `(2, 1)` cage is empty
-anyway) and `0.624681` (`v`). So the 151st square is refused for **every** field-compatible word
+rotation, rounded up at `1e−25`, the spans are `0.447289` (`u`) and `0.624681` (`v`) — and for this
+word the single cage's `u` extent is already `3/4`, so the `u` half needs no span at all. So the
+151st square is refused for **every** field-compatible word
 by the same two instruments, with no scan and no tolerance.
 
 The 30 `>= 2` classes are the reason the chord instrument exists: for those, the cover's own
 bounding box is wider than `1` in an axis, so the cage alone cannot separate a pair, and the span
 is what decides. The check is **not** in the selftest: it costs 2 m 02 s on its own, which would
 double the suite's runtime for a statement whose per-class form is already pinned by controls 25–27
-(the empty `(1, 2)` cage for the census word, the empty `(2, 1)` cage and the chord span for the
+(the empty `(1, 2)` cage for the census word, and the `u` cover extent with the `v` span for the
 table's rotation). `--chord-spin` is the reproducible record, and `0` classes reach `1`.
 
 So the answer to "does 151 close at the census side" is **no, and now by proof**: for the census
 word the pocket holds exactly one word-aligned square and the `(1, 2)` rectangle cage is empty;
-for the table's rotation the `(2, 1)` cage is empty and the free chords stay below `1`. What *is*
+for the table's rotation the `u` extent is `3/4` (`u` span `0.447289`) and the free `v` span is
+`0.624681`, both below `1`. What *is*
 certified is the 150 with the table's own rotation as its last square. The delivered row reaches
 151 the other way — by tolerance. (The certificate is for the rational word rounded up at
 `1e−25`, i.e. the table's square grown and turned by at most that much; the table's own
@@ -275,8 +284,9 @@ slack `−2.365e−9` (an odd square against a wall brick), i.e. an overlap: the
   `2c(c+s) − (1+s) − 1 = s(2(c−s) − 1)`) and the second-word test (78 field-compatible words,
   66 rotation-class cages, all empty). Control 27 is the mixed word: the table's own
   `19211307153/31250000000` rad rounded up at `1e−25` into Q(√7) closes a certified **150**
-  (clearance 0), excludes the 151st exactly (`staircase_chords`: the `(2, 1)` rectangle cage is
-  empty and the union of the 16 blocks' free sets spans `0.624681 < 1` — the largest single block's
+  (clearance 0), excludes the 151st exactly (the `u` cover extent is `3/4` and the free `u` span
+  `0.447289`; along `v`, `staircase_chords`: the union of the 16 blocks' free sets spans
+  `0.624681 < 1` — the largest single block's
   chord being `0.558490`, and the control asserts the union is the larger of the two, since that is
   the quantity the verdict rests on — a finite exact proof in Q(√7) with no scan), and the census
   word's `(1, 2)` rectangle cage is empty; the control also replays the delivered rotation pair

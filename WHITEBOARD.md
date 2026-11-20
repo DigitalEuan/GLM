@@ -663,7 +663,10 @@ and, for the chord check, `58-THE-STAIRCASE.md` §7.2. **No row moved; `submissi
 
 **The honest score: 0 of 364.** `family_spin.py --calibrate` spins Ridge, Strip, Diamond,
 Ring and Staircase over Q(√2), Q(√5), Q(√7) and three rational-t words — 364 members that share a
-count with a delivered row. **0 beat the table; 6 are at parity** (the atoms `n = 5, 10, 18, 19, 40`,
+count with a delivered row. Those sides are the family *law*; the gate was run on **88 of them**
+(`--gate-ks 1,2,3,15`, i.e. `k = 1, 2, 3` and the whole `k = 15` column, plus the four atoms), every
+one `ok` at clearance 0 with `gate_L == L`, so the `N = 901` row quoted below is a certified
+sentence and not just a formula (`3252` contacts at `m = 1`). **0 beat the table; 6 are at parity** (the atoms `n = 5, 10, 18, 19, 40`,
 agreeing with the delivered pose to 1.3–1.7e−9 — the table's own polish, not a win); **358 are
 behind**, and the shortfall grows with `N` (closest: the Seventh at `n = 5`, by `0.001391`; the 45°
 rung at `N = 901` is `30.70711` against the table's `30.52082`, and splicing it in would *raise* the
@@ -685,7 +688,10 @@ reading of one row, not a family. The ring refuses at `k = 2, 3` (`ring_chain_ad
 
 **The chord check, repaired and then made uniform.** Run 95 read the largest *single block's* free
 `v`-chord (`0.558490`), which does not cover a pair whose two `u` values fall in different blocks —
-and the table's rotation has a `5/4`-wide `v`-window, so that case is real. The instrument now
+and the table's rotation has a `5/4`-wide `v`-window, so that case is real. The `u` half was also
+credited to the wrong instrument: the `(2, 1)` rectangle cage rules out only the **tangent** pair
+(centres exactly 1 apart), so the `u` exclusion now rests on the single cage's cover extent
+`3/4 < 1` and the free `u` span `0.447289` — asserted exactly in control 27. The instrument now
 decides on the **union** of the closed blocks' free sets: `0.624681 < 1`, the sound quantity, and
 control 27 asserts the union exceeds the largest block's chord. `--chord-spin` then runs the same two
 instruments over the census word and **all 66 rotation classes** (the 78 field-compatible words):
@@ -725,7 +731,8 @@ cd source_material/ToDo/squares_in_squares
 python3 scripts/glm_wheels.py --selftest        # 27 controls, ~1 m 49 s
 python3 scripts/glm_wheels.py --audit           # 243 functions, 0 offenders
 python3 scripts/glm_wheels.py --chord-spin      # 66/66 no-pair, 2 m 02 s
-python3 scripts/family_spin.py --calibrate      # 364 members: 0 beat, 6 parity, 358 behind
+python3 scripts/family_spin.py --gate-ks 1,2,3,15  # 84 gated, clearance 0, zero drift
+python3 scripts/family_spin.py --calibrate      # 364 members: 0 beat, 6 parity, 358 behind, 88 gated
 python3 scripts/family_spin.py --beyond strip   # N = 1025..1027, 1937..1939, zero drift
 python3 scripts/record_guard.py                 # OK
 ```

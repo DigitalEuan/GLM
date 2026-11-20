@@ -36,6 +36,17 @@ words, and compares each member with the delivered row at the *same* `N`:
 | parity (the delivered row *is* this sentence, to ≤ 1.7e-9) | **6** |
 | behind | **358** |
 
+**Which sides were gated.** The 364 sides above are the family *law* — exact `Quad` arithmetic,
+but a law is not a sentence. `family_spin.py --gate-ks 1,2,3,15` runs the exact gate on the columns
+the argument leans on: every word × `m = 1, 2, 3` at `k = 1, 2, 3` and the whole **`k = 15` column**
+(`N = 901, 902, 903`) — 84 members in 119 s. With the ring at `k = 1` and the three diamond atoms,
+**88 of the 364 carry a gate verdict**, and every one is `ok`, at clearance exactly **0**, with
+`gate_L == L` (zero drift): the calibration is *feasible* as well as exact wherever it is quoted.
+At `k = 15`, `m = 1` all seven words read **3252 contacts** (`N = 901`); at `k = 1` they read 4. So
+the `N = 901` row whose score arithmetic appears below is a certified sentence, not a formula. The
+other 276 sides are the same closed form at counts the gate was not run on, and are labelled here
+as law-only.
+
 The six parity rows are the ones the grammar was built from: `n = 5` (the 45° ridge, which is also
 Strip `S(1,1)`), the three diamond atoms `n = 10, 19, 40`, and the ring at `n = 18`. They do not
 *beat* the table — they agree with it to the table's own pose tolerance (`+1.26e-9` at `n = 5`,
@@ -256,16 +267,19 @@ settle whether grammar can ever reach the table's frontier.
 
 ## 7. Verification
 
-* `glm_wheels.py --selftest` — **27 controls, exit 0** in **1 m 48.7 s** (run 95: 1 m 50 s), i.e.
-  the chord change and the 66-class check cost the suite nothing; control 27 now also asserts that
-  the union span exceeds the largest single-block chord, which is the quantity the verdict rests
-  on; controls 25 and 26 are unchanged.
+* `glm_wheels.py --selftest` — **27 controls, exit 0** in **1 m 51.9 s** (run 95: 1 m 50 s), i.e.
+  the chord change, the `u`-axis repair and the 66-class check cost the suite about a second;
+  control 27 now asserts the `u` cover extent is exactly `3/4`, the free `u` span is below `1`, and
+  the union span exceeds the largest single-block chord — the three quantities the verdict rests
+  on — and it no longer uses the `(2, 1)` rectangle cage, which rules out only the tangent pair;
+  controls 25 and 26 are unchanged.
 * `glm_wheels.py --audit` — the bytecode float audit of every decision function.
 * `glm_wheels.py --chord-spin` — **66 classes, 66 `no-pair`**, 2 m 02 s as its own run, ledger
   `workspace/push/chord_spin.json`; deliberately outside the selftest.
-* `family_spin.py --calibrate` — 364 members, 0 beats, 6 parity, 358 behind, ledger
-  `workspace/push/family_spin.json`; `--beyond strip|words|stair` — the six rungs above 1000 and
-  the staircase's refusal, all gated.
+* `family_spin.py --calibrate` — 364 members, 0 beats, 6 parity, 358 behind, **88 of them gated**
+  (ledger `workspace/push/family_spin.json`); `--gate-ks 1,2,3,15` — 84 ridge members, every one
+  `ok` at clearance 0 with `gate_L == L`; `--beyond strip|words|stair` — the six rungs above 1000
+  and the staircase's refusal, all gated.
 * `glm_wheels.py` — spin: spatial **48/48 certified** (`Ring k=1`, `Staircase k=5`).
 * `grammar_induction.py --selftest`, `qsqrt2.py --selftest`, `field_triage.py --selftest`,
   `scripts/record_guard.py` — all OK.

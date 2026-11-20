@@ -3536,13 +3536,21 @@ def selftest() -> int:
     # with the cap brick in place the pocket is shut even to the table's rotation
     cage_odd150 = staircase_odd_cage(cls7, cap_cells, cap_words, target151)
     assert cage_odd150["empty"], cage_odd150
-    # no second rotation square, by exact arithmetic in Q(sqrt 7):
-    # (a) along U the pair is the (2, 1) rectangle, whose cage closes *empty*;
-    # (b) along V the free v-chords never reach 1 -- the chord proof below, which is
-    #     closed form (finite blocks, exact Quad intervals), not a scan.
-    cage_pair_u = staircase_cage(cls7, codd, sodD, c25, w25, target151, sides=(2, 1),
-                                 exact_word=False, hint=(c25[-1][0], c25[-1][1]))
-    assert cage_pair_u["empty"], cage_pair_u
+    # No second rotation square, by exact arithmetic in Q(sqrt 7), axis by axis.
+    #
+    # (a) Along U it is the *cover* that settles it, not a rectangle cage: the single
+    #     square's cage against the 149 spans extent_u = 3/4, so any two feasible
+    #     centres differ by less than 1 there -- and the free-set span, read in the
+    #     turned frame, tightens that to 0.447289.  The (2, 1) rectangle's cage is the
+    #     wrong instrument and is not used: it asks only whether the *tangent* pair
+    #     (centres exactly 1 apart) fits, and a pair further apart is a legal pair the
+    #     cage cannot see.
+    # (b) Along V the free set's own span -- the union over the 16 blocks -- is what
+    #     the chord proof bounds, in closed form, exactly.
+    span27 = staircase_pair_span(cls7, codd, sodD, c25, w25, target151,
+                                 exact_word=False)
+    assert cage_odd["extent_u"] == F(3, 4), cage_odd["extent_u"]
+    assert span27["u"]["span"] is not None and span27["u"]["span"] < 1, span27["u"]
     chords27 = staircase_chords(cls7, codd, sodD, c25, w25, blocks=16,
                                 window=cage_odd["window"])
     assert chords27["ok"] and chords27["closed"] == chords27["blocks"], chords27
@@ -3550,6 +3558,7 @@ def selftest() -> int:
     # the verdict is the *union* of the blocks' free sets: a per-block chord bound
     # alone would not see a pair whose two u values sit in different blocks
     assert chords27["max_block"] < chords27["max_chord"], chords27
+    assert span27["v"]["span"] == chords27["max_chord"], (span27["v"], chords27)
     # the census word cannot reach 151 either: its pair cage closes exactly
     cage_pair_census = staircase_cage(cls7, cw7, sw7, c25, w25, target151,
                                       sides=(1, 2),
@@ -3571,8 +3580,14 @@ def selftest() -> int:
         "contacts -- the table's own rotation does close its 150th square at the "
         "census side.  The 151st is *excluded* by exact arithmetic: two unit squares "
         "of one word overlap unless their centres differ by at least 1 along one of "
-        "that word's axes, so the pair is settled axis by axis.  Along U the (2, 1) "
-        "rectangle's cage is **empty** -- a closed proof.  Along V the free v-chords "
+        "that word's axes, so the pair is settled axis by axis.  Along U it is the "
+        "cover itself: the single square's cage against the 149 spans " +
+        str(cage_odd["extent_u"]) + " in u, so two feasible centres differ by less "
+        "than 1 there -- and the free-set span, read in the turned frame, tightens "
+        "that to " + f"{dec(span27['u']['span']):.6f}" + ".  (The (2, 1) rectangle's "
+        "cage is *not* the instrument for this, and is not used: it asks only whether "
+        "the tangent pair -- centres exactly 1 apart -- fits, and leaves a pair "
+        "further apart untouched.)  Along V the free v-chords "
         "never reach 1: at a fixed u the whole sentence forbids a union of exact "
         "Quad intervals, and over 16 blocks of the cage's own window (all closed, each "
         "shrinking its forbidden intervals so the free set is over-approximated) the "
@@ -3586,8 +3601,9 @@ def selftest() -> int:
         "per-axis test is weaker than pointwise coverage, so the (1, 2) rectangle's "
         "cover degenerates instead of closing; the chord proof is what closes it.)  "
         "With the cap brick in place the single square's cage is empty for the "
-        "rotation as well, and with the census word the pair cage is *empty* -- the "
-        "same fact as capacity 1 read another way.  "
+        "rotation as well, and with the census word the (1, 2) rectangle cage is "
+        "*empty* too -- though there the exclusion is capacity 1 itself (the cover is "
+        "5/8 by 3/4, control 25), of which the empty rectangle is a consequence.  "
         "The honest reading of the delivered row: replaying its own two rotation "
         "squares against the exact 149 gives worst pair slack " + f"{mixed_worst:.3e}" +
         " (odd square vs grammar square), i.e. an overlap, so the table's 151 is a "

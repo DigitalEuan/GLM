@@ -307,6 +307,25 @@ def calibrate(kmax=22):
         ring_rows.append(rec)
     rows = [row_of(m, sides, False) for m in members if m["N"] <= 1000]
     rows += ring_rows
+    # fold in whatever `--gate-ks` has already certified: a side the gate has seen is
+    # reported as gated, with its contacts, so the calibration is feasible as well as
+    # exact wherever the record allows it
+    gated_ks: set = set()
+    if os.path.exists(LEDGER):
+        with open(LEDGER) as f:
+            gated = json.load(f).get("gated", {}).get("rows", [])
+        index = {(r["family"], r["word"], r["k"], r["m"]): r for r in gated}
+        for rec in rows:
+            g = index.get((rec["family"], rec["word"], rec["k"], rec["m"]))
+            if g is None:
+                continue
+            assert g["gate_ok"] and g["zero_drift"], g
+            rec["gated"] = True
+            rec["contacts"] = g["contacts"]
+            rec["clearance"] = g["clearance"]
+            rec["gate_ok"] = g["gate_ok"]
+            rec["zero_drift"] = g["zero_drift"]
+            gated_ks.add(rec["k"])
     rows.sort(key=lambda r: (r["family"], r["word"], r["m"], r["k"]))
     beats = [r for r in rows if r["verdict"] == "beats"]
     behind = [r for r in rows if r["verdict"] == "behind"]
@@ -340,8 +359,13 @@ def calibrate(kmax=22):
         print(f"      {key[0]:9s} {key[1]:11s} closest N={best['N']:<5d} "
               f"table-L={Decimal(best['gap']):+.6f} | largest N={big['N']:<5d} "
               f"table-L={Decimal(big['gap']):+.6f}")
+    n_gated = sum(1 for r in rows if r.get("gated"))
+    print(f"    sides gated with the exact gate: {n_gated} of {len(rows)}"
+          + (f" (k = {', '.join(str(k) for k in sorted(gated_ks))})" if gated_ks else "")
+          + ", every one clearance 0 and gate_L == L")
     payload = {"members": len(rows), "beats": len(beats), "parity": len(parity),
-               "behind": len(behind),
+               "behind": len(behind), "gated": n_gated,
+               "gated_ks": sorted(gated_ks),
                "best_by_family": {f"{k[0]}|{k[1]}": {"N": v["N"], "k": v["k"],
                                                      "m": v["m"], "L": v["L_dec"],
                                                      "gap": v["gap"]}
@@ -422,8 +446,48 @@ def beyond(which="strip", ks=None):
     return payload
 
 
+def gate_column(ks=(15,), mset=(1, 2, 3)):
+    """Gate a whole `k` column of the ridge ladder: every word, every `m`.
+
+    The calibration's sides are the family law `L = 2k + w`; a law is exact but it is
+    not a *sentence*.  This mode runs the exact gate on the members the argument
+    actually leans on, so the column the score reasoning quotes is certified feasible
+    at clearance 0 as well as exact.  Earlier columns are kept, never replaced.
+    """
+    rows, t0 = [], time.time()
+    for name, d, c, s in words():
+        cls = G.qfield(d)
+        for k in ks:
+            for m in mset:
+                rec = gate_and_record(ridge_member(cls, c, s, k, m, name, d))
+                rows.append(rec)
+                print(f"    {name:11s} k={k:>2d} m={m} N={rec['N']:<5d} "
+                      f"L={rec['L_dec'][:18]} contacts={rec['contacts']} "
+                      f"ok={rec['gate_ok']} drift0={rec['zero_drift']} "
+                      f"({time.time() - t0:.0f}s)")
+    seen = {(r["family"], r["word"], r["k"], r["m"]) for r in rows}
+    prior = {}
+    if os.path.exists(LEDGER):
+        with open(LEDGER) as f:
+            prior = json.load(f).get("gated", {})
+    for r in prior.get("rows", []):
+        if (r["family"], r["word"], r["k"], r["m"]) not in seen:
+            rows.append(r)
+    rows.sort(key=lambda r: (r["family"], r["word"], r["k"], r["m"]))
+    merge("gated", {"ks": sorted({r["k"] for r in rows}),
+                    "mset": sorted({r["m"] for r in rows}),
+                    "members": len(rows), "rows": rows})
+    return rows
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
+    if "--gate-ks" in argv:
+        ks = [int(x) for x in argv[argv.index("--gate-ks") + 1].split(",")]
+        gate_column(ks)
+        if "--calibrate" in argv:
+            calibrate()
+        return 0
     if "--calibrate" in argv:
         calibrate()
         return 0

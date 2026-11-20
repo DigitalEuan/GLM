@@ -1781,7 +1781,9 @@ at `1e-25` into Q(sqrt 7) (`cos^2 + sin^2 >= 1`, the caged square is the table's
 **N = 150 at `23/2 + 1/2 Sqrt7`, clearance 0, 449 contacts** (449 is the mixed sentence's own
 gate; the census cap-brick 150 is 451). **The 151st is excluded exactly.** Two unit
 squares of one word overlap unless their centres differ by at least 1 along one of that word's
-axes, so the pair is settled axis by axis. Along `u` the `(2, 1)` rectangle's cage is **empty**.
+axes, so the pair is settled axis by axis. Along `u` the `(2, 1)` rectangle's cage is **empty**
+(run 96 corrects this: that cage rules out only the *tangent* pair, exactly 1 apart, so the `u`
+half rests instead on the single cage's cover extent `3/4 < 1` and the free `u` span `0.447289`).
 Along `v` the new `staircase_chords` proof closes it: at a fixed `u` the sentence forbids a union
 of exact `Quad` intervals (a square covers `(u, v)` iff all four of its axis tests fail, so its
 forbidden set is the intersection of four linear intervals), the free set is the exact complement,
@@ -1819,8 +1821,9 @@ the 55 + 66 + 4 split, the twelve-column walk and its repeats, all 24 tangencies
 non-membership in the field, the exact cage with capacity 1, the certified 150, the cap brick's
 `du = 1` tangency and the empty cage against the 150; control 26 is the 62-word spin, the
 78-word second-word test in 66 rotation-class cages, and control 27 the mixed word: the table's
-`19211307153/31250000000` rad closing a certified 150, excluding the 151st exactly (the `(2, 1)`
-rectangle cage empty, and the chord proof capping every free `v`-chord below 1 over 16 blocks),
+`19211307153/31250000000` rad closing a certified 150, excluding the 151st exactly (the `u` cover extent `3/4`
+and free `u` span `0.447289`, and the chord proof capping every free `v`-chord below 1 over 16
+blocks),
 the census word's rectangle cage empty, and the delivered pair's measured `-2.365e-9` overlap); spin spatial **48/48**, sequences 6/7, lattice 24/28; float audit
 green (241 functions, 0 offenders); `grammar_induction --selftest` 3/3; `qsqrt2 --selftest`
 11/11; `field_triage --selftest` 4/4; `record_guard.py` OK.
@@ -1846,7 +1849,8 @@ quarter turn) over the **census word and all 66 rotation classes** — the 78 fi
 capacity exactly 1 and 30 decided by the chord span, and **66 of 66 `no-pair`** — free spans
 `0.428760 … 0.780198` (`u`) and `0.440099 … 0.822876` (`v`), none reaching 1. It is 2 m 02 s on
 its own and is deliberately **not** in the selftest; the suite is unchanged in cost at
-**1 m 48.7 s**. Doc 58 section 7.2 carries the table.
+**1 m 51.9 s** after the `u`-axis repair (control 27 now builds the pair span, +2 s). Doc 58 section 7.2
+carries the table.
 
 **The honest score: 0 of 364.** `scripts/family_spin.py --calibrate` spins Ridge, Strip, Diamond,
 Ring and Staircase over Q(sqrt 2), Q(sqrt 5), Q(sqrt 7) and three rational-t words. Each member's
@@ -1901,10 +1905,24 @@ identity in both words — the ring's `2 p5.v + 2 = 5/4 - (4k - 1)/4 Sqrt7` is t
 falsifier is whether any word pair closes below `2k + w` at `k <= 8` (decidable with the cage and
 the chord union already here).
 
-**Verification.** `glm_wheels.py --selftest` **27 controls, exit 0, 1 m 48.7 s** (no inflation);
+**Verification.** `glm_wheels.py --selftest` **27 controls, exit 0, 1 m 51.9 s** (the `u`-axis repair added ~2 s, no inflation);
 `--audit` green; `--chord-spin` 66/66 `no-pair`; `family_spin.py --calibrate` 364/0/6/358 and
 `--beyond strip|words|stair` all gated with zero drift; spin spatial **48/48**, sequences 6/7,
 lattice 24/28; `grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage
 --selftest` 4/4; `record_guard.py` OK. No row changed and no score is claimed.
 
+**Two repairs after the fact, both recorded here rather than quietly edited in.** (i) The `u` half of
+the 151 exclusion does not rest on the `(2, 1)` rectangle cage — that cage asks only whether the
+*tangent* pair (centres exactly 1 apart) fits, and a pair further apart is legal and invisible to it.
+Control 27 now uses the single cage's **cover extent** `3/4 < 1` (asserted exactly) and the free `u`
+span `0.447289` from `staircase_pair_span`, with the `v` half unchanged (the 16-block union,
+`0.624681`); doc 58 §7.1 says the same. (ii) The calibration's sides are the family law, so
+`family_spin.py --gate-ks 1,2,3,15` now runs the exact gate on 84 ridge members — every word ×
+`m = 1,2,3` at `k = 1,2,3` and the whole `k = 15` column (`N = 901..903`) — all `ok` at clearance
+exactly 0 with `gate_L == L`; with the ring `k = 1` and the three diamond atoms that is **88 of the
+364** sides, so the column the score argument quotes is certified feasible as well as exact. At
+`k = 15, m = 1` every word reads **3252 contacts**. Doc 59 §1 records which `k` the sides were gated
+at. Selftest still 27 controls; audit still 0 offenders.
+
 Entries `58-THE-STAIRCASE.md` (section 7.2), `59-ESCALATION-LADDER-BRIDGE.md`; records `31`-`59`.
+
