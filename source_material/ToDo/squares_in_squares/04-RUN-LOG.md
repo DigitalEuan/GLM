@@ -1435,3 +1435,35 @@ sequences 6/7, lattice 24/28; float audit **177 functions, 0 offenders**;
 `field_triage --selftest` 4/4; `record_guard.py` OK. No row changed.
 
 Entries `51-STRIP-AS-FIELD.md`; records `31`-`51`.
+
+---
+
+## Run 89 — one build path, and a count that cannot go stale
+
+**What was asked.** Rewire `p_pocket` through `strip_field(k, 1)` so strips and pockets
+share one build path, and remove the dead `checks` counter from `glm_wheels`' selftest so
+the control count is derived rather than hardcoded, with all 19 controls and the float
+audit green.
+
+**One path.** `p_pocket(k)` now assembles from `strip_field(k, 1)` through the same
+`_assemble_field`, keeping its own family and parameters — the pocket *is* S(k,1), so two
+builders were two spellings of one object, and run 84's `Q_mixed_strip` is now only the
+witness (control 12's cage recovery, control 19's cross-check) rather than the source.
+Control 19 carries the equality for k = 1, 2, 3: same state, same words, same L, same
+N = 4k^2 + 1, families distinct. The wheel's Pocket rows are unchanged (5 at
+`2 + 1/2 sqrt2`, 17 at `4 + 1/2 sqrt2`, 37 at `6 + 1/2 sqrt2`), all certified, spatial
+31/31.
+
+**One count.** `checks = 0` was incremented nowhere and the summary line was a hardcoded
+number that run 88 had already broken. The counter is gone: each control announces itself
+through `say(...)`, and the summary is `len(announced)` — so the number is the number of
+controls that ran. The `--selftest` branch of `main` also stopped returning the count as
+its exit status (it used to `return selftest()`); it runs the controls and returns 0, so a
+passing selftest exits 0 and a failing one raises.
+
+**Verification.** `glm_wheels --selftest` 19 controls (counted), exit 0; spin spatial
+**31/31**, sequences 6/7, lattice 24/28; float audit **177 functions, 0 offenders**;
+`grammar_induction --selftest` 3/3; `qsqrt2 --selftest` 11/11; `field_triage --selftest`
+4/4; `record_guard.py` OK. No row changed; nothing new was discovered.
+
+Entries `52-ONE-BUILD-PATH.md`; records `31`-`52`.

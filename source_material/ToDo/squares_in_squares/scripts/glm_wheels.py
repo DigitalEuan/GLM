@@ -589,14 +589,17 @@ def Q_mixed_strip(k, m):
 
 
 def p_pocket(k):
-    """The corner pocket: four k-blocks and one diamond, i.e. S(k, 1)."""
+    """The corner pocket: four k-blocks and one diamond -- the strip S(k, 1).
+
+    Run 88 built the Strip from `strip_field(k, m)`; run 89 puts the Pocket on the same
+    build path rather than on run 84's sentence builder, so a strip and a pocket differ
+    only in the `m` they pass.  The cell stays a `Pocket` (its own family and parameters)
+    because that is the claimed object; only the assembly is shared.
+    """
     if k < 1:
         raise Refusal("degenerate_cell", f"k = {k}")
-    st, ws, L = Q_mixed_strip(k, 1)
-    n = 4 * k * k + 1
-    return _tag(Claim("spatial_geometry", "Pocket", {"k": k}, n,
-                      _laws_packing(n, L, L * L - Q2(n)),
-                      {"state": st, "words": ws}), L, n)
+    return _assemble_field(f"Pocket({k})", strip_field(k, 1), family="Pocket",
+                           params={"k": k})
 
 
 def p_glue(t):
@@ -1283,19 +1286,25 @@ def cage_point(state, words, j, L, target, tol=None):
 # ------------------------------------------------------------------ selftest
 def selftest() -> int:
     eng = build_engine()
-    checks = 0
+    announced = []
+
+    def say(msg):
+        """Announce one control.  The count at the end is the number of announcements,
+        so adding or removing a control cannot leave a stale number behind."""
+        announced.append(msg)
+        print(msg)
 
     # 1. the same five combinator names are registered on both domains
     pk, sq = eng.domains["spatial_geometry"], eng.domains["sturmian_sequences"]
     shared = set(pk.combinators) & set(sq.combinators)
     assert shared >= {"Tile", "Strip", "Glue", "SymmetryFold"}, shared
-    print(f"control 1 — both domains register the same engine slots {sorted(shared)}")
+    say(f"control 1 — both domains register the same engine slots {sorted(shared)}")
 
     # 2. the packing wheel certifies its closed-form families
     rows = eng.wheels[0].spin()
     cert = [r for r in rows if r["verdict"] == "certified"]
     assert len(cert) >= 15, len(cert)
-    print(f"control 2 — spatial wheel: {len(cert)}/{len(rows)} cells certified")
+    say(f"control 2 — spatial wheel: {len(cert)}/{len(rows)} cells certified")
 
     # 3. every certified packing cell has all four witnesses, not one metric
     for r in cert:
@@ -1303,7 +1312,7 @@ def selftest() -> int:
         assert all(w["ok"] for w in r["witnesses"].values()), r
     assert all(r["witness_count"] >= 3 for r in cert), cert[0]
     assert all(r["measure"] and r["size"] for r in cert), cert[0]
-    print("control 3 — every certified spatial cell passes all four witnesses "
+    say("control 3 — every certified spatial cell passes all four witnesses "
           "(gate, contact graph, conservation, Decimal), and the row carries the "
           "neutral size/measure/invariant columns")
 
@@ -1313,7 +1322,7 @@ def selftest() -> int:
             continue
         k, m = int(r["params"]["k"]), int(r["params"]["m"])
         assert r["size"] == 4 * k * k + m
-    print("control 4 — the Strip cells satisfy N = 4k^2 + m and L = 2k + m sqrt2/2")
+    say("control 4 — the Strip cells satisfy N = 4k^2 + m and L = 2k + m sqrt2/2")
 
     # 5. the refusal laws still fire -- on constructed cells, because run 88 closed the
     #    last three non-viable cells of the wheel (the S(k,0) refusals), so a spatial
@@ -1342,14 +1351,14 @@ def selftest() -> int:
     elsewhere = {r["refusal"]["law"] for w in eng.wheels[1:] for r in w.spin()
                  if r["verdict"] == "refused"}
     assert elsewhere, "the other wheels must still refuse by law"
-    print(f"control 5 — the spatial wheel has no refused cell (S(k,0) now certifies), "
+    say(f"control 5 — the spatial wheel has no refused cell (S(k,0) now certifies), "
           f"and every refusal law still fires on a constructed cell: "
           f"{sorted(cases)}; other wheels refuse by {sorted(elsewhere)}")
 
     # 6. the fold is an exact symmetry: same N, same L, witnesses still pass
     a, b = p_pocket(2), p_fold(2)
     assert a.n == b.n and a.laws["extent"][1] == b.laws["extent"][1]
-    print("control 6 — the diagonal fold preserves N and L exactly")
+    say("control 6 — the diagonal fold preserves N and L exactly")
 
     # 7. sequences: an irrational slope gives a Sturmian word, a rational one does not
     rows = eng.wheels[1].spin()
@@ -1359,18 +1368,18 @@ def selftest() -> int:
     assert any(r["params"]["t"] == str(Q2(-1, 1)) and r["verdict"] == "certified"
                for r in rows), rows
     assert any(r["params"]["t"] == "1/2" and r["verdict"] == "refused" for r in rows)
-    print("control 7 — slope sqrt2-1 certifies, slope 1/2 is refused (not Sturmian)")
+    say("control 7 — slope sqrt2-1 certifies, slope 1/2 is refused (not Sturmian)")
 
     # 8. the refusal for a rational slope is the complexity law, with its numbers
     bad = [r for r in rows if r["params"]["t"] == "1/2"][0]
     assert bad["refusal"]["law"] == "not_sturmian", bad["refusal"]
-    print(f"control 8 — rational slope refused by the exact law: {bad['refusal']}")
+    say(f"control 8 — rational slope refused by the exact law: {bad['refusal']}")
 
     # 9. the coboundary law d(uv) = du xor dv holds on the glue cell
     glue = [r for r in rows if r["family"] == "Glue"][0]
     assert glue["verdict"] == "certified"
     assert "coboundary" in glue["witnesses"]["conservation"]["detail"]
-    print("control 9 — the glue cell passes the coboundary witness on its join")
+    say("control 9 — the glue cell passes the coboundary witness on its join")
 
     # 10. Decimal cross-check: the signs agree, and a perturbed claim is caught
     claim = p_pocket(2)
@@ -1380,13 +1389,13 @@ def selftest() -> int:
     claim2.laws["extent"] = ("L", claim2.laws["extent"][1] + Q2(F(1, 10 ** 9)))
     ok2, _ = DecimalWitness().check(claim2, pk)
     assert not ok2, "the Decimal witness must catch a 1e-9 lie"
-    print("control 10 — the Decimal witness accepts the exact side and catches a 1e-9 lie")
+    say("control 10 — the Decimal witness accepts the exact side and catches a 1e-9 lie")
 
     # 11. the tower audit covers this module too
     checked, offenders, skipped = EF.audit_module(sys.modules[__name__],
                                                   exempt=EF.AUDIT_EXEMPT)
     assert offenders == [], offenders
-    print(f"control 11 — this module's {checked} decision functions name no float "
+    say(f"control 11 — this module's {checked} decision functions name no float "
           f"({len(skipped)} display/test exemptions declared)")
 
     # 12. cage recovery places a square the contact graph leaves free, exactly
@@ -1401,7 +1410,7 @@ def selftest() -> int:
     assert Q.gate(trial, ws)["ok"]
     # and it refuses to place the square anywhere when the cage is empty
     assert cage_point(broken, ws, 0, L, (Q2(-99), Q2(-99))) is None
-    print(f"control 12 — the 2D cage recovers the freed square exactly ({pt}) and "
+    say(f"control 12 — the 2D cage recovers the freed square exactly ({pt}) and "
           f"returns nothing when the cage is empty")
 
     # 13. a third, structurally distinct domain registers the same slots
@@ -1410,7 +1419,7 @@ def selftest() -> int:
     shared3 = (set(pk.combinators) & set(sq.combinators)) & set(lat.combinators)
     assert shared3 >= {"Tile", "Strip", "Glue", "SymmetryFold"}, shared3
     assert shared3 == {"Tile", "Strip", "Glue", "SymmetryFold"}, shared3
-    print(f"control 13 — three domains share the engine slots {sorted(shared3)}; "
+    say(f"control 13 — three domains share the engine slots {sorted(shared3)}; "
           f"lattice adds {sorted(set(lat.combinators) - shared3)}")
 
     # 14. the theta series are the classical ones, by enumeration (no tables)
@@ -1419,7 +1428,7 @@ def selftest() -> int:
     assert TH[0] == [1, 0, 24, 0, 24, 0, 96], TH[0]
     assert TH[1] == [1, 0, 240, 0, 2160], TH[1]
     assert TH[2] == [1, 8, 24, 32, 24, 48, 96], TH[2]
-    print(f"control 14 — theta by exact enumeration: D4 {TH[0]}, E8 {TH[1]}, Z4 {TH[2]}")
+    say(f"control 14 — theta by exact enumeration: D4 {TH[0]}, E8 {TH[1]}, Z4 {TH[2]}")
 
     # 15. kissing topology: shell sizes and inner-product-1 degrees, computed
     k = {key: len(LAT.shell(LAT.LATTICES[key], LAT.LATTICES[key].minimal_norm))
@@ -1427,7 +1436,7 @@ def selftest() -> int:
     deg = {key: LAT.root_degree(LAT.LATTICES[key]) for key in ("Z2", "D4", "E8")}
     assert k == {"Z2": 4, "D4": 24, "E8": 240}, k
     assert deg == {"Z2": None, "D4": 8, "E8": 56}, deg
-    print(f"control 15 — kissing numbers {k} and root degrees {deg}")
+    say(f"control 15 — kissing numbers {k} and root degrees {deg}")
 
     # 16. the conservation law is theta multiplicativity, and it is exact
     g = LAT.l_sum("Z2", "D4", 4)
@@ -1439,7 +1448,7 @@ def selftest() -> int:
         assert ok, (w.name, detail)
         ran += 1
     assert ran == 3, ran      # the kissing witness scopes itself to Frame/Atom
-    print(f"control 16 — Z2 (+) D4: enumerated {tuple(enumerated)} == convolution, "
+    say(f"control 16 — Z2 (+) D4: enumerated {tuple(enumerated)} == convolution, "
           f"{ran} applicable witnesses pass (kissing is a Frame/Atom law only)")
 
     # 17. a wrong lattice claim is refused, by witness or by declared law
@@ -1458,7 +1467,7 @@ def selftest() -> int:
     except Refusal as r:
         refusals.append(r.law)
     assert refusals == ["empty_shell", "empty_shell", "rank_budget"], refusals
-    print(f"control 17 — a wrong kissing number is refused ({detail[:40]}...), and "
+    say(f"control 17 — a wrong kissing number is refused ({detail[:40]}...), and "
           f"the declared laws fire: {refusals}")
 
     # 18. the cell algebra: run parameters, not cell lists, generate the run-87 census
@@ -1486,7 +1495,7 @@ def selftest() -> int:
         assert c.meta["carrier"] == carrier and c.meta["dropped"] == dropped, c.meta
         assert len(spec["x"]) <= 2 and len(spec["y"]) <= 2, spec
         tables.append(f"{name} {carrier}->{len(got)} (-{dropped})")
-    print("control 18 — two axis runs per side generate the run-87 census exactly: "
+    say("control 18 — two axis runs per side generate the run-87 census exactly: "
           + ", ".join(tables))
 
     # 19. the Strip builder is a field of (k, m): S(k,0) certifies and IS the plain grid
@@ -1507,12 +1516,22 @@ def selftest() -> int:
         assert field.n == 4 * kk * kk + mm, (kk, mm, field.n)
     one = p_strip(2, 1)
     assert one.laws["gain"][1] == Q2(1) - S2H, one.laws["gain"]
-    print("control 19 — S(k,0) is no longer refused: it certifies as the plain 2k grid "
-          "(gain 0) for k = 1..4, and S(k,m) reproduces the run-84 sentence for m >= 1 "
-          "(L = 2k + m sqrt2/2, N = 4k^2 + m)")
+    # the Pocket is the strip at m = 1, on the same build path (run 89): same cells, same
+    # words, same side, same N -- but it keeps its own family, that being what it claims
+    for kk in (1, 2, 3):
+        pocket, strip = p_pocket(kk), p_strip(kk, 1)
+        assert pocket.family == "Pocket" and strip.family == "Strip"
+        assert pocket.payload["state"] == strip.payload["state"], kk
+        assert pocket.payload["words"] == strip.payload["words"], kk
+        assert pocket.laws["extent"][1] == strip.laws["extent"][1], kk
+        assert pocket.n == strip.n == 4 * kk * kk + 1, (kk, pocket.n, strip.n)
+    say("control 19 — S(k,0) is no longer refused: it certifies as the plain 2k grid "
+        "(gain 0) for k = 1..4, S(k,m) reproduces the run-84 sentence for m >= 1 "
+        "(L = 2k + m sqrt2/2, N = 4k^2 + m), and the Pocket is the same field at "
+        "m = 1: one build path, two families")
 
-    print("selftest: OK (19 controls)")
-    return checks
+    print(f"selftest: OK ({len(announced)} controls)")
+    return len(announced)
 
 
 # --------------------------------------------------------------------- report
@@ -1545,7 +1564,8 @@ def report(eng, ledger):
 def main(argv=None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     if "--selftest" in argv:
-        return selftest()
+        selftest()
+        return 0
     if "--audit" in argv:
         import lattice_shells as LAT
         mods = [EF, Q, sys.modules[__name__], LAT]
