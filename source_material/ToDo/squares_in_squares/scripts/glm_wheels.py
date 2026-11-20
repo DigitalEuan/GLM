@@ -778,6 +778,180 @@ def p_ridge(d, c, s, k, family, params, m=1):
     return claim
 
 
+# --------------------------------------------------- the 45-degree block (run 98)
+#: A block of `s^2` unit squares at the 45-degree word, edge to edge in its own frame,
+#: centred in an `L x L` box, with axis-aligned unit squares filling the four corner
+#: triangles.  The block's faces are the four lines `x + y = L -+ s/sqrt2` and
+#: `y - x = -+ s/sqrt2`, so each corner triangle has legs `t = L - s/sqrt2` and a unit
+#: square `[i, i+1] x [j, j+1]` fits iff `i + j + 2 <= t`.  The exact choice
+#: `t = k + 1` (integer legs) makes the staircase square at `(k-1, 0)` touch the block's
+#: face exactly at its corner, so the side is a contact side, not an approximation:
+#:
+#:     T(k, s) = k (k + 1) / 2      per corner  (the staircase sum `sum_{i=0}^{k-1} (k - i)`)
+#:     N(k, s) = s^2 + 4 T(k, s)  =  s^2 + 2 k (k + 1)
+#:     L(k, s) = s / sqrt 2 + k + 1
+#:
+#: nothing here is scanned: the count is a triangular number and the side is the exact
+#: root of the tangency `i + j + 2 = t` together with the block face `x + y = L - s/sqrt2`.
+def block45_count(s, k):
+    """`(T, N)` of the 45-degree block family, exactly: `T = k(k+1)/2`, `N = s^2 + 4T`."""
+    if s < 1 or k < 1:
+        raise Refusal("degenerate_cell", f"s = {s}, k = {k}")
+    T = k * (k + 1) // 2
+    return T, s * s + 4 * T
+
+
+def block45_side(cls, s, k):
+    """The contact side, exactly: `L = max(s/sqrt2 + k + 1, 2 s/sqrt2)`, in `cls`.
+
+    With `t = k + 1` the corner staircase reaches the block's face at `x + y = t`, so
+    the sentence's bounding box is `s/sqrt2 + t` -- unless the block's own diagonal
+    `2 s/sqrt2` is longer, which happens when `t < s/sqrt2`; then the block, not the
+    fill, sets the side.  The gate caught exactly this in the first sweep (84 rows
+    came back `block45_side_mismatch`), which is why the law is written as a maximum.
+    """
+    h = cls(0, F(s, 2))                       # s / sqrt 2, exactly
+    t = cls(k + 1)
+    diag = cls(0, F(s))                       # 2 h = s sqrt 2
+    return t + h if t + h > diag else diag
+
+
+def _block45_sentence(cls, s, k):
+    """The block, its four staircase corner fills, and the exact words."""
+    if s < 1 or k < 1:
+        raise Refusal("degenerate_cell", f"s = {s}, k = {k}")
+    h = cls(0, F(s, 2))
+    half = cls(F(1, 2))
+    c45, s45 = Q.word_45()
+    ctr = ((h + cls(k + 1)) * half, (h + cls(k + 1)) * half)   # the block, on the face t
+    cells, words = [], []
+    for i in range(s):
+        for j in range(s):
+            du = cls(F(2 * i - (s - 1), 2))
+            dv = cls(F(2 * j - (s - 1), 2))
+            cells.append((ctr[0] + du * c45 - dv * s45,
+                          ctr[1] + du * s45 + dv * c45))
+            words.append((c45, s45))
+    box = h + cls(k + 1)            # the corner fills are anchored at this box's corners
+    m = k - 1                       # staircase rows: (i, j) with i + j <= m
+    for corner in range(4):
+        for i in range(m + 1):
+            for j in range(m + 1 - i):
+                if corner == 0:
+                    x, y = cls(i) + half, cls(j) + half
+                elif corner == 1:
+                    x, y = box - cls(i) - half, cls(j) + half
+                elif corner == 2:
+                    x, y = cls(i) + half, box - cls(j) - half
+                else:
+                    x, y = box - cls(i) - half, box - cls(j) - half
+                cells.append((x, y))
+                words.append((cls(1), cls(0)))
+    return cells, words, block45_side(cls, s, k)
+
+
+def p_block45(s, k, family="Block45", params=None):
+    """Gate-verify the 45-degree block family over Q(sqrt 2) and return it as a claim.
+
+    `N = s^2 + 2k(k+1)`, `L = s/sqrt2 + k + 1`, and the exact gate is the arbiter: the
+    staircase squares touch the block's faces at single points (clearance 0), and when
+    the two staircases that share a wall reach each other the sentence is refused as
+    `block45_corner_collision` -- a declared law, not an incidental overlap.
+    """
+    cls = qfield(2)
+    T, N = block45_count(s, k)
+    cells, words, L = _block45_sentence(cls, s, k)
+    if len(cells) != N:
+        raise Refusal("block45_count", f"built {len(cells)} != {N}")
+    g = Q.gate(cells, words, cls)
+    if not g["ok"]:
+        raise Refusal("block45_corner_collision",
+                      f"{family}(s={s}, k={k}): {g['violations']} pairs overlap "
+                      f"(the corner staircases meet on a wall)")
+    if g["L"] != L:
+        raise Refusal("block45_side_mismatch", f"gate side {g['L']} != law {L}")
+    claim = Claim("spatial_geometry", family, params or {"s": s, "k": k}, N,
+                  {"count": ("N", N), "extent": ("L", L),
+                   "void": ("L^2 - N", L * L - cls(N)),
+                   "contacts": ("contacts", g["contacts"])},
+                  {"state": cells, "words": words, "field": "Q(sqrt 2)",
+                   "block": s * s, "corner": T})
+    claim.meta["block"] = s * s
+    claim.meta["corner"] = T
+    _tag(claim, L, N)
+    claim.laws["block"] = ("s^2", s * s)
+    claim.laws["corner"] = ("k(k+1)/2", T)
+    claim.laws["floor_gap"] = ("L - (2k + 1/sqrt2)",
+                               L - (cls(2 * k) + cls(0, F(1, 2))))
+    try:
+        side = _table_side(N)
+    except KeyError:            # not a delivered count: nothing to compare against
+        side = None
+    if side is None:
+        claim.meta["table_side"] = None
+        claim.meta["beats_table"] = None
+    else:
+        Ld = DecimalWitness.scalar(L)
+        Td = DecimalWitness.scalar(side)
+        claim.meta["table_side"] = str(side)
+        claim.meta["beats_table"] = Ld < Td
+        claim.meta["table_gap"] = str(Td - Ld)
+    return claim
+
+
+def block45_spin(ncap=250, extras=((17, 13), (17, 16), (17, 17)), smax=24, kmax=20):
+    """Spin the 45-degree block family: `(s, k)` with `N <= ncap`, plus `extras`, gated.
+
+    Two references per row, neither of them a score claim:
+
+      * the single-word seam floor, as the exact gap `L - (2k + 1/sqrt 2)` -- with the
+        family's own `k` in the ridge's role, so the comparison is like for like;
+      * the delivered side at the same `N`, measured from its 12-dp pose.
+
+    `ncap` keeps the sweep inside the cheap gates; the named `extras` are the rows the
+    question is actually about (a delivered count, and the two `s = 17` boundary cases).
+    """
+    rows = []
+    cls = qfield(2)
+    half_sqrt2 = Decimal(2).sqrt() / 2
+    todo = []
+    for s in range(1, smax + 1):
+        for k in range(1, kmax + 1):
+            _, N = block45_count(s, k)
+            if N > ncap:
+                break
+            todo.append((s, k))
+    for s, k in extras:
+        if (s, k) not in todo:
+            todo.append((s, k))
+    for s, k in sorted(todo):
+        if True:
+            _, N = block45_count(s, k)
+            rec = {"s": s, "k": k, "N": N, "block": s * s,
+                   "corner": k * (k + 1) // 2}
+            try:
+                claim = p_block45(s, k)
+            except Refusal as e:
+                rec["verdict"] = e.law
+                rows.append(rec)
+                continue
+            L = claim.measure[1]
+            Ld = DecimalWitness.scalar(L)
+            rec["verdict"] = "gated"
+            rec["L"] = str(L)
+            rec["L_dec"] = str(Ld)
+            rec["excess_dec"] = str(Ld - Decimal(2 * k))
+            rec["below_half_sqrt2"] = bool(Ld - Decimal(2 * k) < half_sqrt2)
+            rec["below_floor"] = bool(Ld < Decimal(2 * k) + half_sqrt2)
+            rec["contacts"] = claim.laws["contacts"][1]
+            rec["beats_grid"] = claim.meta.get("beats")
+            rec["beats_table"] = claim.meta.get("beats_table")
+            rec["table_side"] = claim.meta.get("table_side")
+            rec["table_gap"] = claim.meta.get("table_gap")
+            rows.append(rec)
+    return rows
+
+
 # ------------------------------------------------- the two-word seam (run 97)
 #: A two-word sentence is not a new engine: the gate already carries one word per
 #: square (`Q.gate(state, words, cls)`), so what was missing is a *builder* whose
@@ -4012,6 +4186,65 @@ def selftest() -> int:
         f"{pairs} distinct word pairs and k <= 8 builds 288 sentences: none below the "
         "floor, none beating the delivered row at the same N.")
 
+    # --------------------- control 29: the 45-degree block (run 98)
+    # (a) the count law: T = k(k+1)/2 per corner, N = s^2 + 4T, integers only
+    assert block45_count(5, 4) == (10, 65), block45_count(5, 4)
+    assert block45_count(17, 13) == (91, 653), block45_count(17, 13)
+    assert block45_count(17, 17) == (153, 901), block45_count(17, 17)
+    for s in range(1, 9):
+        for k in range(1, 9):
+            T, N = block45_count(s, k)
+            assert N == s * s + 4 * T == s * s + 2 * k * (k + 1), (s, k)
+    # (b) the side law, both branches: L = max(s/sqrt2 + k + 1, 2 s/sqrt2)
+    assert block45_side(cls2, 5, 4) == cls2(5) + cls2(0, F(5, 2))
+    assert block45_side(cls2, 5, 1) == cls2(0, F(5))          # t = 2 < h: the block sets it
+    # (c) the two showcase sentences, gated, and the floor they do / do not break
+    c65 = p_block45(5, 4)
+    assert c65.n == 65 and c65.meta["beats"] is True
+    L65 = c65.measure[1]
+    assert L65 == cls2(5) + cls2(0, F(5, 2))
+    # the delivered row at N = 65 has exactly this side: the measured gap is 0 at the
+    # table's own 1e-9 pose precision (its stored side is 5 + 5/2 sqrt 2, our exact law)
+    assert abs(Decimal(c65.meta["table_gap"])) <= Decimal("1e-9"), c65.meta
+    assert c65.meta["table_side"] == "5 + 5/2\u221a2", c65.meta["table_side"]
+    c653 = p_block45(17, 13)
+    assert c653.n == 653 and c653.meta["beats"] is False
+    L653 = c653.measure[1]
+    assert L653 == cls2(14) + cls2(0, F(17, 2))
+    excess = L653 - cls2(26)
+    assert excess == cls2(0, F(17, 2)) - cls2(12), excess
+    assert excess < cls2(0, F(1, 2)), "excess below half sqrt 2"
+    # and the k = 14 neighbour is refused by the corner staircases meeting on a wall
+    try:
+        p_block45(17, 14)
+    except Refusal as e:
+        assert e.law == "block45_corner_collision", e.law
+    else:
+        raise AssertionError("s=17, k=14 should collide")
+    # (d) N = 677 is not in the family at all: no (s, k) emits it
+    assert not [(s, k) for s in range(1, 31) for k in range(1, 26)
+                if block45_count(s, k)[1] == 677]
+    say("control 29 -- the 45-degree block: an exact production that breaks the seam "
+        "floor and still is not a record.  The block is s^2 unit squares at the 45-degree "
+        "word, edge to edge; its faces are the four lines x + y = L -+ s/sqrt2 and "
+        "y - x = -+ s/sqrt2, so each corner triangle has integer legs t = k + 1 and the "
+        "staircase square at (k-1, 0) meets the face at its corner -- tangency, not "
+        "tolerance.  The count is the triangular number T(k, s) = k(k+1)/2 per corner, "
+        "N = s^2 + 2k(k+1), and the side is the exact contact L = max(s/sqrt2 + k + 1, "
+        "2s/sqrt2) (the second branch is the block's own diagonal, and the gate caught the "
+        "first sweep's missing branch as block45_side_mismatch).  Two sentences are "
+        "certified here: (k = 4, s = 5) is N = 65 at L = " +
+        f"{DecimalWitness.scalar(L65):.6f}, which is the delivered row's own side to its "
+        "1e-9 polish -- "
+        "parity, and the row's slack 0.535534 is exactly s/sqrt2 - 3; and (k = 13, "
+        "s = 17) is N = 653 at L = " + f"{DecimalWitness.scalar(L653):.6f}" +
+        ", whose excess over 2k is " + f"{DecimalWitness.scalar(excess):.6f}" + " -- **below 1/sqrt2 by a wide margin**, so the seam floor "
+        "is the ridge's floor, not a law of squares.  But it is not a record: that side "
+        "is above ceil(sqrt 653) = 26, the family emits no row at N = 677 at all "
+        "(s = 17 gives 653 or, at k = 14, a declared collision of the two corner "
+        "staircases that share a wall), and asymptotically L/sqrt(N) -> 1: the block is "
+        "a grid in disguise, which is why no row moves.")
+
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
 
@@ -4067,6 +4300,37 @@ def main(argv=None) -> int:
     if "--probe" in argv:
         budget = (argv[argv.index("--budget") + 1] if "--budget" in argv else "240")
         probe(Decimal(budget))
+        return 0
+    if "--block-spin" in argv:
+        # the 45-degree block's own run: every (s, k) with N <= 250, plus the named
+        # showcase points (report: 61-BLOCK45.md)
+        rows = block45_spin()
+        gated = [r for r in rows if r["verdict"] == "gated"]
+        below = [r for r in gated if r.get("below_half_sqrt2")]
+        beat = [r for r in gated if r.get("beats_table")]
+        path = os.path.join(ROOT, "workspace/push/block45_spin.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"rows": rows, "ncap": 250,
+                       "gated": len(gated), "below_floor": len(below),
+                       "beats_table": len(beat)}, f, indent=1)
+        tally = {}
+        for r in rows:
+            tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
+        print(f"block spin: {len(rows)} rows, {tally}")
+        print(f"  below L = 2k + 1/sqrt2: {len(below)} of {len(gated)} gated")
+        if gated:
+            best = min(gated, key=lambda r: Decimal(r["excess_dec"]))
+            print(f"  smallest excess: {best['excess_dec']} "
+                  f"(s = {best['s']}, k = {best['k']}, N = {best['N']})")
+        print(f"  beats the delivered row: {len(beat)}")
+        for s, k in ((5, 4), (17, 13)):
+            hit = [r for r in gated if (r["s"], r["k"]) == (s, k)]
+            if hit:
+                r = hit[0]
+                print(f"  (s={s}, k={k}): N = {r['N']}, L = {r['L_dec'][:18]}, "
+                      f"excess = {r['excess_dec'][:12]}, table_gap = {r['table_gap']}")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
         return 0
     if "--two-word-spin" in argv:
         # the two-word builder's own run: 42 word pairs x k = 1..8, every one a built

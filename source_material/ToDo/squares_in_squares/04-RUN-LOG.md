@@ -1989,3 +1989,83 @@ new one, ~2 s); `--audit` **253 functions, 0 offenders**; `--two-word-spin` 288/
 `record_guard.py` all unchanged and green. No row changed, no score claimed.
 
 Entries `60-TWO-WORD.md`; records `31`–`60`.
+
+## Run 98 in detail — the 45° block: a certified floor-breaker that is not a record
+
+User request: build the production doc 60 named — `s²` squares at the 45° word with axis fill in
+the four corner triangles, `T(k, s)` and `N(k, s) = s² + 4T` and the closed-form contact side
+`L(k, s)` from exact `Q(√2)` roots — gate it over small `(k, s)`, at `(k = 4, s = 5, N = 65)` and at
+`(k = 13, s = 17, N = 677)`, and test honestly whether `L − 2k` breaks the single-word floor `½√2`
+and matches or beats the delivered slacks `0.535534` / `0.520815`; leave `submission.csv` and root
+`WHITEBOARD.md` alone unless the score can actually move.
+
+**The production.** `block45_count(s, k)` is integer arithmetic: `T = k(k+1)/2` per corner (the
+staircase sum), `N = s² + 2k(k+1)`. The block's faces are `x + y = L ∓ s/√2`, `y − x = ±s/√2`, so
+each corner triangle has legs `t = L − s/√2`, and `t = k + 1` makes the staircase square at
+`(k−1, 0)` meet the face at its corner — tangency. `block45_side` is then the exact contact
+`L = max(s/√2 + k + 1, 2s/√2)`, in `Quad(2)`, no root-finding: the separation roots *are* the law.
+`_block45_sentence` builds `s²` tilted squares plus four staircases; `p_block45` gates it and
+records `L`, `N`, void, contacts, block/corner counts and the gap to the floor; `block45_spin`
+sweeps and writes `workspace/push/block45_spin.json`.
+
+**Two corrections the gate forced on the algebra.** (1) The first sweep wrote `L = s/√2 + k + 1`
+only, and 84 of 198 rows came back `block45_side_mismatch` — precisely the rows with `t < s/√2`,
+where the block's own diagonal `2s/√2` sets the box. The law is now the maximum, and the refusal
+that caught it is kept. (2) `p_block45` raised `KeyError` on a count the table does not carry
+(1237); it now records `table_side = None` instead. Neither is a silent patch: both are refusals
+that fired.
+
+**Feasibility is one inequality, derived and then checked against the gate.** The staircases at
+the two ends of a wall interpenetrate exactly when `L < 2k`, i.e. `k > s/√2 + 1`, so
+`feasible ⟺ k ≤ ⌊s/√2⌋ + 1`. The sweep agrees on **all 121 rows** (70 gated, 51 refused by
+`block45_corner_collision`), and the refusal counts grow with the overshoot: at `s = 17`, `k = 14`
+collides on 4 pairs, `k = 16` on 24, `k = 17` on 40.
+
+**The floor, broken.** In the contact branch `L − 2k = s/√2 + 1 − k`, minimised over the feasible
+window at exactly `frac(s/√2)`. Eight certified rows sit below `2k + ½√2`, the smallest excess
+**0.020815** at `(k = 13, s = 17)`: `N = 653`, `L = 26.020815280171307…`, 2308 exact contacts,
+clearance 0, 439 tilted + 214 axis. Then 0.071068 at `(10, 8)`, 0.121320 at `(3, 3)`, 0.242641 at
+`(6, 5)`, 0.363961 at `(9, 7)`, 0.414214 at `(2, 2)`, 0.535534 at `(5, 4)`, 0.656854 at `(8, 6)`.
+The single-word floor is the ridge's floor, not a law of squares — that much is settled, exactly.
+
+**The asked points.** `(k = 4, s = 5)`: `T = 10`, `N = 65`, `L = 5/√2 + 5 = 8.5355339059…`, 172
+contacts, and the delivered side at `n = 65` minus this one is **`0E−69`** — the table's own
+`5 + 5/2√2`. Its slack `0.535534` *is* `5/√2 − 3`. Parity, and the strongest confirmation
+available: the production reproduces a delivered row's side from a count law and a contact root.
+`(k = 13, s = 17, N = 677)`: **count refusal**. `N(13, 17) = 653`; `677` would need `T = 97` per
+corner, and `T` is triangular (91 at `k = 13`, 105 at `k = 14`). `677` is not in the family for
+*any* `(s, k)` with `s ≤ 30, k ≤ 25` (control 29 asserts the search). The delivered row at 677 is
+also not this production in its own anatomy: `388 = 4 × 97` axis squares, and its corners have
+`t = 14.5` — half a unit of slack, which is how six extra squares per corner fit. Same story at
+`n = 901`: its count **is** the family's `(17, 17)` (`153 = T(17,17)` per corner), but `k = 17`
+is infeasible at `s = 17` (40 collisions; the wall-anchored fill needs `L ≥ 34`, the family has
+30.020815) and the delivered row sits half a unit wider at `30.520815`, `t = 18.5`.
+
+**Scale, and why no row moves.** Above 1000 the family gates exactly: `(25, 17)` is `N = 1237` at
+`L = 35.677670…` with 4532 contacts, `(35, 24)` is `N = 2425` at `49.748737…` with 9112, `(50, 35)`
+is `N = 5020` at `71.355339…` with 19230 — all clearance 0. They beat `⌈√N⌉` (1237 and 2425 sit
+just above a perfect square), but `L/√N → 1` along the minimal-excess ladder: 1.018273 at 653,
+1.013752 at 1309, 1.006879 at 5164, 1.003490 at 20025, 1.001765 at 79248, 1.000888 at 315300.
+`N ≈ 2s²`, `L ≈ s√2 = √N`: the block **is** the grid in the limit, one `O(1)` above it, and the
+`frac(s/√2)` excess is bought by matching the grid's diagonal rather than beating it. So the
+session's headline question answers itself: the grammar certifies `L < 2k + ½√2` at every scale,
+and those inequalities are not records — **0 of 70 gated rows beats a delivered row**, at any
+count. Seven counts are exact parity (`N = 5, 40, 65, 89, 124, 148, 233`), i.e. the table's rows
+there *are* this production; nothing is improved.
+
+**Next.** The block's gap is its corner fill's integrality: a contact staircase needs integer legs
+and the table's low-slack rows use half-integer ones. That is the next production, with its
+falsifier named in doc 61 §8: the `t ∈ ℤ + ½` corner fill, asked whether any `(s, k)` reaches
+`L = 2k + 0.520815` at `N = 677, 785, 901` with clearance 0.
+
+**Verification.** `glm_wheels.py --selftest` **29 controls, exit 0, 2 m 0 s** (control 29 is new: the count
+law over `s, k ≤ 8`, both side branches, the two showcase sentences with their delivered-row
+parities, the `k = 14` collision, and the absence of `N = 677` in the family); `--audit` **258
+functions, 0 offenders**; `--block-spin` 121 rows (70 gated / 51 refused), 8 below the floor, 0
+beating the table, `2 m 16 s`, ledger `workspace/push/block45_spin.json`; the feasibility and
+minimal-excess laws re-checked against the ledger (121/121, 8/8); bare run exit 0;
+`record_guard.py` OK; `family_spin.py --calibrate/--gate-ks/--beyond`, `grammar_induction.py`,
+`qsqrt2.py`, `field_triage.py` unchanged and green; README/STATUS footers byte-identical.
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `61-BLOCK45.md`; records `31`–`61`.
