@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-r"""verify_certificates.py — the serialized certificate verifier (run 101).
+r"""verify_certificates.py — the serialized certificate verifier (runs 101 and 102).
 
 A standalone, zero-float reader for `workspace/push/galois_certificates.json`.  It
 reconstructs every sentence **from the file alone** and decides it exactly:
@@ -8,9 +8,17 @@ reconstructs every sentence **from the file alone** and decides it exactly:
     spelling is refused by the parser — a decimal is a display projection, not a value;
   * every cell's rotation matrix is checked (`R^T R = I` and `det R = 1`);
   * every wall inequality is checked in the certificate's own container box;
-  * every pairwise 4-axis SAT inequality is checked, recording the witness axis and the
-    exact gap, with `>= 0` accepted at clearance 0;
+  * every pairwise 4-axis SAT inequality is decided **on integer-scaled components**,
+    recording the witness axis and the exact gap, with `>= 0` accepted at clearance 0;
   * the declared summary (N, L, contacts, clearance) is recomputed and compared.
+
+The SAT pass is deliberately *not* the producer's formulation.  The producer
+(`qsqrt2.pair_axes`) multiplies `Quad` values; this verifier scales every centre and
+rotation by one common denominator `D` and works in `Z[sqrt d]` with Python integers:
+`slack` is represented by the integer residual `2 D^2 slack`, `abs` is an integer sign
+test, `max` is an integer comparison, and only the *printed* gap is turned back into a
+field element.  The `Quad` formulation is retained as `sat_pass_reference` and used by
+`cross_check`/`--selftest` as an independent witness — it never decides anything.
 
 The first exact failed inequality is reported, distinguishing the two questions a
 certificate can fail to answer:
@@ -18,13 +26,13 @@ certificate can fail to answer:
   kind = "infeasible"             the object is representable and an inequality is false
   kind = "outside_representation" the file does not represent an exact sentence at all
                                   (decimal string, wrong scalar shape, unknown field tag,
-                                   duplicate id, a declared L that is not the paragraph's
+                                   duplicate id, a declared L that is not the sentence's
                                    own side, a declared summary the object does not have)
 
 Usage:
     python3 scripts/verify_certificates.py                 # default document
     python3 scripts/verify_certificates.py path/to.json --quiet
-    python3 scripts/verify_certificates.py --selftest      # mutation tests (needs the doc)
+    python3 scripts/verify_certificates.py --selftest      # mutations + cross-check
 """
 from __future__ import annotations
 
@@ -33,6 +41,7 @@ import os
 import re
 import sys
 from fractions import Fraction as F
+from math import gcd
 
 import exact_field as EF
 
@@ -81,11 +90,6 @@ def parse_field(tag):
     return d, _CLASS_CACHE[tag]
 
 
-def _sign(z):
-    """Exact sign of a Fraction or a field element."""
-    return (z > 0) - (z < 0)
-
-
 def parse_scalar(raw, tag, where):
     """One exact scalar: a canonical fraction string, or `[a, b]` for a `Quad(d)`."""
     if tag == "Q":
@@ -113,9 +117,214 @@ def _q(z):
     return str(z)
 
 
+def _sign(z):
+    """Exact sign of a Fraction or a field element."""
+    return (z > 0) - (z < 0)
+
+
+# ------------------------------------------------ the SAT pass, on integers
+#: Every arithmetic step below is Python integer arithmetic in `Z[sqrt d]`; the only
+#: scalar helper it borrows from the tower is the sign rule (`integral_sign`), which is
+#: the same rule the residue mask uses and is not the gate's formulation.
+def _common_den(scalars):
+    """An even common denominator for a list of exact scalars (field or rational)."""
+    den = 2
+    for z in scalars:
+        a, b = (z.a, z.b) if isinstance(z, EF.Quad) else (z, F(0))
+        for v in (a, b):
+            den = den * v.denominator // gcd(den, v.denominator)
+    return den
+
+
+def _to_int(z, D):
+    """`D` times an exact scalar, as an integer `(a, b)` pair of `Z[sqrt d]`."""
+    a, b = (z.a, z.b) if isinstance(z, EF.Quad) else (z, F(0))
+    a, b = a * D, b * D
+    if a.denominator != 1 or b.denominator != 1:      # impossible: D is their common multiple
+        _fail(OUTSIDE, "scale", value=_q(z), denominator=D)
+    return (a.numerator, b.numerator)
+
+
+def _imul(u, v, d):
+    """`(a + b r)(c + e r)` in `Z[r]`."""
+    a, b = u
+    c, e = v
+    return (a * c + d * b * e, a * e + b * c)
+
+
+def _iadd(u, v):
+    return (u[0] + v[0], u[1] + v[1])
+
+
+def _isub(u, v):
+    return (u[0] - v[0], u[1] - v[1])
+
+
+def _iabs(u, d):
+    return u if EF.integral_sign(u[0], u[1], d) >= 0 else (-u[0], -u[1])
+
+
+def _icmp(u, v, d):
+    """`sign(u - v)` on integer components."""
+    return EF.integral_sign(u[0] - v[0], u[1] - v[1], d)
+
+
+def _abs_ge(z, s, d):
+    """`|z| >= s` for integer components and a positive integer `s`."""
+    return (EF.integral_sign(z[0] - s, z[1], d) >= 0
+            or EF.integral_sign(z[0] + s, z[1], d) <= 0)
+
+
+def _scaled_str(z, cls, scale):
+    """The exact value `z / scale` as the project prints it — display only.
+
+    This is the single place the deciding pass touches a field element, and it happens
+    *after* the verdict, to write the gap into the report.  No comparison is made here.
+    """
+    if cls is None:
+        return str(F(z[0], scale))
+    return str(cls(F(z[0], scale), F(z[1], scale)))
+
+
+def _dot(u, v, d):
+    """`u . v` for vectors of two field elements held as integer pairs."""
+    return _iadd(_imul(u[0], v[0], d), _imul(u[1], v[1], d))
+
+
+def sat_pass_scaled(d, centres, frames, scale, cls=None):
+    """Every pair's four SAT slacks as integer residuals, `2 scale^2`-scaled.
+
+    With `D = scale`, every coordinate and every frame component is an integer of
+    `Z[sqrt d]`, so a centre is a pair of field elements and a frame row `u` is a vector
+    `(ux, uy)` of them.  The four slacks of a pair are then
+
+        slack_s  =  2 (delta . q) - (D^2 + |u_o . q| + |v_o . q|),     S = 2 D^2,
+
+    each an exact integer pair whose sign is the sign of the real slack (`S > 0`), with
+
+        delta = (x_j - x_i, y_j - y_i),  q in {u_i, v_i, u_j, v_j}.
+
+    Everything is integers: `_imul`/`_iadd` are `Z[sqrt d]` arithmetic, `_iabs` is the
+    sign rule, `_icmp` is the maximum.  Nothing here is the producer's `Quad` path.
+
+    Returns `{"contacts", "violations", "verdicts", "pair_worst", "witnesses",
+    "worst", "clearance"}`: `verdicts` maps `(i, j)` to the sign of that pair's largest
+    slack, `pair_worst` maps it to the exact residual, and `clearance` is the printed
+    value of the worst pair's largest slack (`None` when there is no candidate pair).
+    """
+    n = len(centres)
+    lim = 2 * scale
+    d2 = (scale * scale, 0)
+    contacts = violations = 0
+    worst = None
+    verdicts, pair_worst = {}, {}
+    witnesses = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            delta = (_isub(centres[j][0], centres[i][0]),
+                     _isub(centres[j][1], centres[i][1]))
+            if (_abs_ge(delta[0], lim, d) or _abs_ge(delta[1], lim, d)):
+                continue                    # exact prune: every half-extent < 1
+            best, best_axis = None, None
+            for owner, other in ((i, j), (j, i)):
+                Uo, Vo = frames[other][0], frames[other][1]
+                for kk, q in enumerate(frames[owner]):
+                    proj = _iabs(_dot(delta, q, d), d)      # slack uses |projection|
+                    w1 = _iabs(_dot(Uo, q, d), d)
+                    w2 = _iabs(_dot(Vo, q, d), d)
+                    need_s = _iadd(_iadd(d2, w1), w2)
+                    slack_s = _isub((2 * proj[0], 2 * proj[1]), need_s)
+                    if best is None or _icmp(slack_s, best, d) > 0:
+                        best, best_axis = slack_s, (owner, kk, q)
+            if best is None:
+                continue
+            sgn = EF.integral_sign(best[0], best[1], d)
+            verdicts[(i, j)] = sgn
+            pair_worst[(i, j)] = best
+            if sgn < 0:
+                violations += 1
+            elif best == (0, 0):
+                contacts += 1
+                witnesses.append({"pair": [i, j], "owner": best_axis[0],
+                                  "axis": best_axis[1],
+                                  "axis_vector": [_scaled_str(best_axis[2][0], cls, scale),
+                                                  _scaled_str(best_axis[2][1], cls, scale)],
+                                  "gap": "0"})
+            if worst is None or _icmp(best, worst, d) < 0:
+                worst = best
+    return {"contacts": contacts, "violations": violations, "verdicts": verdicts,
+            "pair_worst": pair_worst, "worst": worst, "witnesses": witnesses,
+            "clearance": None if worst is None else _scaled_str(worst, cls, scale)}
+
+
+def sat_pass_reference(centres, frames, cls):
+    """The `Quad` formulation of the same pass — a **witness**, never a verdict.
+
+    This is the producer's shape (`qsqrt2.pair_axes`): multiply field elements, subtract,
+    compare.  It exists so the integer pass can be checked against an independently
+    written one; `cross_check` compares the two pair for pair, down to the exact value
+    of each pair's largest slack, and the verifier never uses this result to decide a
+    certificate.
+    """
+    one = F(1) if cls is None else cls(1)
+    half = one * F(1, 2) if cls is None else cls(F(1, 2))
+    two = F(2) if cls is None else cls(2)
+    n = len(centres)
+    contacts = violations = 0
+    worst = None
+    verdicts, pair_worst = {}, {}
+    for i in range(n):
+        for j in range(i + 1, n):
+            if abs(centres[j][0] - centres[i][0]) >= two \
+                    or abs(centres[j][1] - centres[i][1]) >= two:
+                continue
+            dx = centres[j][0] - centres[i][0]
+            dy = centres[j][1] - centres[i][1]
+            best = None
+            for owner, other in ((i, j), (j, i)):
+                Uo, Vo = frames[other][0], frames[other][1]
+                for q in frames[owner]:
+                    proj = abs(dx * q[0] + dy * q[1])
+                    need = half + (abs(Uo[0] * q[0] + Uo[1] * q[1])
+                                   + abs(Vo[0] * q[0] + Vo[1] * q[1])) * half
+                    slack = proj - need
+                    if best is None or slack > best:
+                        best = slack
+            if best is None:
+                continue
+            sgn = _sign(best)
+            verdicts[(i, j)] = sgn
+            pair_worst[(i, j)] = best
+            if sgn < 0:
+                violations += 1
+            if best == 0:
+                contacts += 1
+            if worst is None or best < worst:
+                worst = best
+    return {"contacts": contacts, "violations": violations, "verdicts": verdicts,
+            "pair_worst": pair_worst,
+            "clearance": None if worst is None else _q(worst)}
+
+
 # --------------------------------------------------------------- verification
-def verify_certificate(cert):
-    """Verify one certificate, returning its exact summary (or raising `Failure`)."""
+def _scaled_sentence(centres, frames):
+    """The sentence as integer components: `(scale, centres, frames)`.
+
+    One common denominator for every coordinate and every frame component, so all the
+    arithmetic downstream is in `Z[sqrt d]`.  A centre becomes a pair of field elements
+    and a frame row a vector of two, which is the only structural fact the SAT pass uses.
+    """
+    scale = _common_den([c for p in centres for c in p]
+                        + [c for rows in frames for row in rows for c in row])
+    icentres = [(_to_int(x, scale), _to_int(y, scale)) for x, y in centres]
+    iframes = [((_to_int(frames[k][0][0], scale), _to_int(frames[k][0][1], scale)),
+                (_to_int(frames[k][1][0], scale), _to_int(frames[k][1][1], scale)))
+               for k in range(len(frames))]
+    return scale, icentres, iframes
+
+
+def _read_sentence(cert):
+    """Parse one certificate into exact values.  No inequality is decided here."""
     if not isinstance(cert, dict):
         _fail(OUTSIDE, "schema", id=None, why="a certificate must be an object")
     cid = cert.get("id")
@@ -135,10 +344,6 @@ def verify_certificate(cert):
         _fail(OUTSIDE, "schema", id=cid, why="origin must be [x0, y0]")
     ox = parse_scalar(origin[0], tag, f"{cid}.origin[0]")
     oy = parse_scalar(origin[1], tag, f"{cid}.origin[1]")
-    one = F(1) if cls is None else cls(1)
-    zero = F(0) if cls is None else cls(0)
-    half = F(1, 2) if cls is None else cls(F(1, 2))
-
     centres, frames = [], []
     for k, cell in enumerate(cells):
         if not isinstance(cell, dict) or not isinstance(cell.get("r"), list) \
@@ -148,10 +353,26 @@ def verify_certificate(cert):
         y = parse_scalar(cell.get("y"), tag, f"{cid}.cells[{k}].y")
         R = [parse_scalar(v, tag, f"{cid}.cells[{k}].r") for v in cell["r"]]
         centres.append((x, y))
-        frames.append(R)
+        frames.append(((R[0], R[2]), (R[1], R[3])))     # (u, v) rows as vectors
+    return {"cid": cid, "tag": tag, "d": d, "cls": cls, "n": n, "L": L,
+            "ox": ox, "oy": oy, "centres": centres, "frames": frames,
+            "expected": cert.get("expected"), "family": cert.get("family")}
+
+
+def verify_certificate(cert):
+    """Verify one certificate, returning its exact summary (or raising `Failure`)."""
+    s = _read_sentence(cert)
+    cid, tag, d, cls, n = s["cid"], s["tag"], s["d"], s["cls"], s["n"]
+    L, ox, oy = s["L"], s["ox"], s["oy"]
+    centres, frames = s["centres"], s["frames"]
+    one = F(1) if cls is None else cls(1)
+    zero = F(0) if cls is None else cls(0)
+    half = F(1, 2) if cls is None else cls(F(1, 2))
 
     # 1. every frame is a rotation: R^T R = I and det R = 1
-    for k, (ux, vx, uy, vy) in enumerate(frames):
+    for k, (u, v) in enumerate(frames):
+        ux, uy = u
+        vx, vy = v
         if ux * ux + uy * uy != one:
             _fail(INFEASIBLE, "orthonormal", id=cid, cell=k, row="u",
                   value=_q(ux * ux + uy * uy))
@@ -167,8 +388,8 @@ def verify_certificate(cert):
                   why="the frame is orthogonal but not a rotation (det = -1)")
 
     # 2. every wall inequality, in the certificate's own box
-    for k, ((x, y), R) in enumerate(zip(centres, frames)):
-        ex = (abs(R[0]) + abs(R[2])) * half
+    for k, ((x, y), (u, _v)) in enumerate(zip(centres, frames)):
+        ex = (abs(u[0]) + abs(u[1])) * half
         if not (ox <= x - ex):
             _fail(INFEASIBLE, "wall", id=cid, cell=k, side="left",
                   gap=_q(x - ex - ox))
@@ -183,59 +404,38 @@ def verify_certificate(cert):
                   gap=_q(oy + L - (y + ex)))
 
     # 3. the declared side is the sentence's own side
-    span_x = max(x + (abs(R[0]) + abs(R[2])) * half for (x, _y), R in zip(centres, frames)) \
-        - min(x - (abs(R[0]) + abs(R[2])) * half for (x, _y), R in zip(centres, frames))
-    span_y = max(y + (abs(R[0]) + abs(R[2])) * half for (_x, y), R in zip(centres, frames)) \
-        - min(y - (abs(R[0]) + abs(R[2])) * half for (_x, y), R in zip(centres, frames))
+    span_x = max(x + (abs(u[0]) + abs(u[1])) * half
+                 for (x, _y), (u, _v) in zip(centres, frames)) \
+        - min(x - (abs(u[0]) + abs(u[1])) * half
+              for (x, _y), (u, _v) in zip(centres, frames))
+    span_y = max(y + (abs(u[0]) + abs(u[1])) * half
+                 for (_x, y), (u, _v) in zip(centres, frames)) \
+        - min(y - (abs(u[0]) + abs(u[1])) * half
+              for (_x, y), (u, _v) in zip(centres, frames))
     span = span_x if span_x > span_y else span_y
     if span != L:
         _fail(OUTSIDE, "declared_side", id=cid, declared=_q(L), actual=_q(span),
               why="L must be the exact side of the sentence in this box")
 
-    # 4. every pairwise 4-axis SAT inequality, with its witness
-    two = F(2) if cls is None else cls(2)
-    contacts, violations, worst = 0, 0, None
-    witnesses = []
-    for i in range(n):
-        xi, yi = centres[i]
-        for j in range(i + 1, n):
-            if abs(centres[j][0] - xi) >= two or abs(centres[j][1] - yi) >= two:
-                continue                    # exact prune: extent <= sqrt2/2 < 1
-            dx = centres[j][0] - xi
-            dy = centres[j][1] - yi
-            best, axis = None, None
-            for owner, other in ((i, j), (j, i)):
-                R = frames[owner]
-                Ro = frames[other]
-                for kk, (qx, qy) in enumerate(((R[0], R[2]), (R[1], R[3]))):
-                    proj = abs(dx * qx + dy * qy)
-                    need = half + (abs(Ro[0] * qx + Ro[2] * qy)
-                                   + abs(Ro[1] * qx + Ro[3] * qy)) * half
-                    slack = proj - need
-                    if best is None or slack > best:
-                        best, axis = slack, (owner, kk, (qx, qy))
-            if best is None:
-                continue
-            if _sign(best) < 0:
+    # 4. every pairwise 4-axis SAT inequality, decided on INTEGER components
+    scale, icentres, iframes = _scaled_sentence(centres, frames)
+    sat = sat_pass_scaled(d, icentres, iframes, scale, cls)
+    if sat["violations"]:
+        # the first overlap, with its own witness axis and exact gap
+        for (i, j), sgn in sorted(sat["verdicts"].items()):
+            if sgn < 0:
                 _fail(INFEASIBLE, "sat", id=cid, pair=[i, j],
-                      axis=_q(axis[2][0]) + ", " + _q(axis[2][1]),
-                      gap=_q(best), owner=axis[0],
-                      why="the pair overlaps on every axis")
-            if best == 0:
-                contacts += 1
-                witnesses.append({"pair": [i, j], "owner": axis[0], "axis": axis[1],
-                                  "axis_vector": [_q(axis[2][0]), _q(axis[2][1])],
-                                  "gap": "0"})
-            if worst is None or best < worst:
-                worst = best
-    summary = {"id": cid, "family": cert.get("family"), "field": tag, "N": n,
-               "L": _q(L), "origin": [_q(ox), _q(oy)], "contacts": contacts,
-               "violations": violations, "ok": violations == 0,
-               "clearance": None if worst is None else _q(worst),
+                      gap=_scaled_str(sat["pair_worst"][(i, j)], cls, scale),
+                      scale=scale, why="the pair overlaps on every axis")
+    summary = {"id": cid, "family": s["family"], "field": tag, "N": n,
+               "L": _q(L), "origin": [_q(ox), _q(oy)],
+               "contacts": sat["contacts"], "violations": sat["violations"],
+               "ok": sat["violations"] == 0,
+               "clearance": sat["clearance"],
                "void": _q(L * L - (F(n) if cls is None else cls(n))),
-               "witnesses": witnesses,
+               "witnesses": sat["witnesses"], "scale": scale,
                "status": "verified"}
-    expected = cert.get("expected")
+    expected = s["expected"]
     if isinstance(expected, dict):
         for key in ("ok", "contacts", "violations"):
             if key in expected and expected[key] != summary[key]:
@@ -243,10 +443,42 @@ def verify_certificate(cert):
                       declared=expected[key], actual=summary[key])
         if "clearance" in expected and expected["clearance"] is not None:
             want = parse_scalar(expected["clearance"], tag, f"{cid}.expected.clearance")
-            if worst is None or want != worst:
+            want_scaled = _to_int(want, scale)
+            if sat["worst"] is None or want_scaled != sat["worst"]:
                 _fail(OUTSIDE, "declared_summary", id=cid, key="clearance",
-                      declared=_q(want), actual=None if worst is None else _q(worst))
+                      declared=_q(want),
+                      actual=None if sat["worst"] is None else sat["clearance"])
     return summary
+
+
+def cross_check(doc):
+    """Pair-for-pair agreement of the integer pass and the `Quad` witness.
+
+    The two implementations are written independently (`sat_pass_scaled` on integers,
+    `sat_pass_reference` on field elements) and this is where that independence is
+    *tested* rather than claimed: same candidate pairs, same sign for each pair's largest
+    slack, same contact and violation counts, same clearance.
+    """
+    out = []
+    for cert in doc.get("certificates", []):
+        s = _read_sentence(cert)
+        centres, frames, cls = s["centres"], s["frames"], s["cls"]
+        scale, icentres, iframes = _scaled_sentence(centres, frames)
+        sat = sat_pass_scaled(s["d"], icentres, iframes, scale, cls)
+        ref = sat_pass_reference(centres, frames, cls)
+        assert sat["verdicts"] == ref["verdicts"], (s["cid"], "verdicts differ")
+        assert sat["contacts"] == ref["contacts"], (s["cid"], "contacts")
+        assert sat["violations"] == ref["violations"], (s["cid"], "violations")
+        assert sat["clearance"] == ref["clearance"], (s["cid"], "clearance")
+        # the stronger statement: both paths compute the SAME exact largest slack, not
+        # just the same sign, for every candidate pair (the integer residual is S slack
+        # with S = 2 D^2, so the reference value is scaled by S to compare)
+        big_s = 2 * scale * scale
+        for key, val in ref["pair_worst"].items():
+            assert _to_int(val, big_s) == sat["pair_worst"][key], (s["cid"], key)
+        out.append({"id": s["cid"], "pairs": len(sat["verdicts"]),
+                    "contacts": sat["contacts"], "clearance": sat["clearance"]})
+    return out
 
 
 def verify_document(doc):
@@ -291,12 +523,15 @@ def _bump(raw, tag, delta):
 
 
 def selftest(path):
-    """Round-trip the document, then try to break it eight ways."""
+    """Round-trip the document, cross-check the two SAT passes, try to break it nine ways."""
     with open(path) as f:
         doc = json.load(f)
     clean = verify_document(doc)
     assert clean["ok"], clean
     print(f"  the document verifies: {clean['verified']} certificate(s), 0 failures")
+    agree = cross_check(doc)
+    print("  the integer SAT pass and the Quad witness agree pair for pair: "
+          + ", ".join(f"{a['id']} {a['pairs']}p/{a['contacts']}c" for a in agree))
     checks = []
 
     def expect(mut, kind, check, label):

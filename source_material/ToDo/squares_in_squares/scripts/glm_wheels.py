@@ -5454,6 +5454,20 @@ def selftest() -> int:
     bad = VC.verify_document(mut)
     assert not bad["ok"] and bad["results"][2]["kind"] == "outside_representation"
     assert bad["results"][2]["check"] == "number_format"
+    # (g) the SAT pass decides on integer components and shares no code with the
+    # producer's Quad gate; the Quad formulation survives only as a witness, and the
+    # cross-check compares the two pair for pair on the *exact* largest slack
+    agree = VC.cross_check(mini)
+    assert [a["id"] for a in agree] == ["tile2", "ring18", "block45", "stair150"], agree
+    assert [a["contacts"] for a in agree] == [6, 26, 172, 451], agree
+    assert [a["pairs"] for a in agree[:3]] == [6, 62, 266], agree
+    assert agree[3]["pairs"] >= agree[3]["contacts"]
+    assert all(a["clearance"] == "0" for a in agree), agree
+    called = set(VC.sat_pass_scaled.__code__.co_names)
+    assert not called & {"gate", "pair_axes", "pair_tangency_residuals", "Q"}, called
+    # Z[sqrt d] integer primitives, not Quad arithmetic (whose multiplication is `*`)
+    assert {"_dot", "_iabs", "_iadd", "_isub", "_icmp"} <= called, called
+    assert "_imul" in set(VC._dot.__code__.co_names)
     say("control 32 -- the max-slack bound, the chained pipeline, and the serialized "
         "certificate.  (1) The bound.  A pair is a contact iff its max slack is 0 and "
         "a violation iff it is negative, so a pair with a *strictly positive* max "
@@ -5479,7 +5493,19 @@ def selftest() -> int:
         "object does not have.  Four representatives round-trip through JSON text "
         "here -- tile2 (Q, 6 contacts), ring18 (Quad(7), 26), block45 (Quad(2), 172) "
         "and staircase150 (Quad(7), 451) -- and a decimal component is refused as "
-        "`outside_representation`: a decimal readout is a projection, not a value.")
+        "`outside_representation`: a decimal readout is a projection, not a value.  "
+        "(4) The verifier's SAT pass is now independent of the gate's formulation.  "
+        "The producer multiplies Quad values in `pair_axes`; the verifier scales every "
+        "coordinate and frame component by one common denominator D and decides each "
+        "pair on integers of Z[sqrt d], with the residual 2 D^2 (slack) -- abs is an "
+        "integer sign test, max an integer comparison, and only the printed gap is "
+        "turned back into a field element, after the verdict.  The bytes of that pass "
+        "name no producer function (the check above is on its own co_names), and the "
+        "Quad formulation is kept as a witness the selftest cross-checks against: "
+        "every candidate pair of all four certificates here (and all 4,532 pairs of "
+        "the shipped document) agrees on the sign *and* on the exact largest slack, "
+        "so the two paths are two implementations of one statement rather than one "
+        "implementation read twice.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

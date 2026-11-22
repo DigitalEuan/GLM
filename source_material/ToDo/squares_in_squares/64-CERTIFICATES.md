@@ -14,7 +14,7 @@ it, and the verifier never reads a view.
 | | |
 |---|---|
 | certificate file | `workspace/push/galois_certificates.json` (302 KB of exact strings, 7 certificates) |
-| verifier | `scripts/verify_certificates.py` — standalone, imports the tower only, 12 decision functions, 0 naming `float` |
+| verifier | `scripts/verify_certificates.py` — standalone, imports the tower only, 27 decision functions, 0 naming `float` |
 | new stage | `pair_max_slack_bound` (driver) on `integral_sign` / `abs_lower_bound` (tower) |
 | chain modes | `--chain` (ledger `workspace/push/plugin_chain.json`), `--certificates` (+ the verifier's 9 mutation tests) |
 | controls | **32** (control 32 is new), 2 m 37 s |
@@ -78,8 +78,28 @@ The checks, in the order that makes the first failure meaningful:
 6. **declared side** — `L` equals the sentence's own span (a looser `L` is a different container,
    and the certificate does not get to claim one);
 7. **SAT** — for every pair, all four axes (`|Δ·q| − (½ + ext_other(q))`), the witness axis and
-   the exact gap recorded, `≥ 0` accepted at clearance 0;
+   the exact gap recorded, `≥ 0` accepted at clearance 0 — decided on **integer components**, see
+   below;
 8. **declared summary** — contacts, violations, clearance recomputed and compared.
+
+**The SAT pass does not reuse the gate's formulation.** The producer multiplies `Quad` values
+(`qsqrt2.pair_axes`, `Q.gate`). The verifier instead takes one even common denominator `D` over
+every coordinate and every frame component, so each is an integer pair of `Z[√d]`, and carries
+each slack as the exact integer residual
+
+```
+2 D² · slack  =  2 |Δ · q|  −  ( D² + |u_other · q| + |v_other · q| )
+```
+
+with `Δ` and `q` the `D`-scaled centre difference and axis. Since `2D² > 0`, the sign of that
+integer pair *is* the sign of the real slack; `abs` is the tower's exact sign rule on integer
+components, `max` is an integer comparison, and nothing here is `Quad` arithmetic. The only place
+a field element is rebuilt is `_scaled_str`, which prints the gap into the report **after** the
+verdict. `sat_pass_reference` keeps the `Quad` formulation alive as a *witness* — it never decides
+a certificate; `cross_check` (run by `--selftest`) compares the two implementations pair for pair,
+and on the shipped document all **4,532 candidate pairs** agree on the sign *and* on the exact
+largest slack of the pair (the reference value scaled by `2D²` equals the integer residual
+exactly). That is independence of implementation, and it is measured rather than asserted.
 
 The failure is always *the first exact inequality that is wrong*, and it carries one of two kinds:
 
@@ -224,15 +244,23 @@ doc 63 §3's "every stage is sound, so the composition is safe" needed this qual
   not a security audit: a determined forger can write a different valid sentence, and the
   verifier will accept it — correctly, because a certificate is a claim about a sentence, not a
   signature on one.
-* `expected` is checked, but it is derived from the same gate the verifier re-implements; the
-  independence of that check is the code's, not a second author's.
+* `expected` is checked against the verifier's own recomputation, and that recomputation no longer
+  copies the producer's arithmetic: the deciding SAT pass is integer-scaled and is cross-checked
+  against the `Quad` witness pair for pair (4,532 pairs, exact value and sign). What this buys is
+  **independence of implementation**; both formulations were still written by the same author, so
+  a shared misreading of the SAT statement itself would survive the cross-check. What rules that
+  out is external: the certificates agree with `Q.gate` on contacts, clearance and void, and the
+  nine mutations are each refused at their own check.
 
 ## 7. State
 
-32 controls (control 32 new: the bound's soundness and reach, the chain's equivalence and its one
-counter-example, the integer/Quad mask agreement, the four-certificate round-trip and the refused
-decimal), `--audit` **324 functions, 0 naming `float`** (including the verifier), `--certificates`
-7/7 verified plus 9 mutations refused, `--chain` with its ledger, bare run exit 0, `record_guard.py`
-OK, README/STATUS footers byte-identical. Doc 63 §6 is updated with what actually landed.
+32 controls (control 32: the bound's soundness and reach, the chain's equivalence and its one
+counter-example, the integer/Quad mask agreement, the four-certificate round-trip, the refused
+decimal, and the SAT pass's independence — its own `co_names` name no producer function, and
+`cross_check` matches it against the `Quad` witness pair for pair), 2 m 38 s, `--audit` **339
+functions, 0 naming `float`** (the verifier's 27 included), `--certificates` 7/7 verified plus 9
+mutations refused with the same seven summaries and the same contact counts as before the change,
+`--chain` with its ledger, the verifier's own `--selftest` (7 verified, 9 mutations, 4,532 pairs
+cross-checked), bare run exit 0, `record_guard.py` OK, README/STATUS footers byte-identical. Doc 63 §6 is updated with what actually landed.
 
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**

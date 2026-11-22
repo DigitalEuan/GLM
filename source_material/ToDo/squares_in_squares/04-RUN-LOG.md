@@ -2344,3 +2344,52 @@ ledger `workspace/push/plugin_chain.json`; `python3 scripts/verify_certificates.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `64-CERTIFICATES.md`; records `31`–`64`.
+
+### Run 101 addendum — the verifier's SAT pass, on integers
+
+Same run, same artifacts, same records: the certificate file is byte-identical, and this addendum
+records a change to the *verifier* only.
+
+The SAT pass used to be the producer's formulation read twice: `qsqrt2.pair_axes` multiplies `Quad`
+values, and `verify_certificates.py` multiplied `Quad` values. Two copies of one formula disagree
+only by typo; they do not check each other. The deciding pass is now integer-scaled:
+
+```
+one even common denominator D over every coordinate and frame component
+2 D^2 * slack  =  2 |delta . q|  -  ( D^2 + |u_other . q| + |v_other . q| )     in Z[sqrt d]
+```
+
+`delta` and `q` are the `D`-scaled centre difference and axis, `abs` and `max` are the tower's
+integer sign rule on integer components, and the only rebuilt field element is the gap in the
+report, produced *after* the verdict. Nothing in that pass is `Quad` arithmetic, and its own
+`co_names` name no producer function (control 32 asserts this, and asserts the integer primitives
+are the ones present).
+
+The `Quad` formulation is not deleted — it becomes `sat_pass_reference`, a witness. The verifier's
+`--selftest` runs `cross_check`, which compares the two implementations pair for pair: on the
+shipped document all **4,532** candidate pairs agree on the verdict sign *and* on the exact largest
+slack (the reference value scaled by `2D^2` equals the integer residual, integer pair for integer
+pair). The seven certificates produce exactly the same summaries as before the change — contacts
+6, 26, 449, 451, 172, 2256, 4; clearance 0 everywhere — so nothing about what is certified moved,
+only how it is decided.
+
+Two measured side effects. The document pass is **5 s → 0.55 s** (the `Quad` pass on 653 cells was
+the cost; `sat_pass_reference` is still available for the cross-check and the selftest spends 9.7 s
+on it, against 50 s before). And a bug the integer rewrite exposed in my own first attempt: I
+carried `delta . q` without its absolute value, which turned negative projections into large
+negative slacks and made ring18 report an overlap at pair (1, 5) with gap −32 at scale 16. The
+shipped document refused it immediately — six certificates failed at `sat` — which is the
+behaviour a verifier should have; the fix is one `_iabs`, and the contact counts then matched the
+producer's exactly.
+
+Checks: `--selftest` **32 controls**, exit 0, 2 m 38 s; `--audit` **339 functions, 0 naming
+`float`** (verifier 27, was 12); `--certificates` 7/7 and the 9 mutations each refused at its own
+check; `verify_certificates.py --selftest` 7 verified, 9 mutations, 4,532 pairs cross-checked;
+bare run exit 0; `record_guard.py` OK; README/STATUS footers byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+The honest limit: this is independence of *implementation*, measured, and both implementations were
+written by the same author, so a shared misreading of the SAT statement would survive the
+cross-check. What rules that out is external — agreement with `Q.gate` on contacts, clearance and
+void, and the nine mutations each failing at its own check.
