@@ -1421,18 +1421,13 @@ def _zabs(u, d):
     return u if _zsign(u[0], u[1], d) >= 0 else (-u[0], -u[1])
 
 
-def pair_tangency_residuals(cls, PX, PY, WX, WY, i, j, D):
-    """The eight primitive tangency residuals of a pair, as integral `Quad`s.
+def _axis_residual_ints(cls, PX, PY, WX, WY, i, j, D):
+    """The eight raw `2 D^2`-scaled tangency residuals, as integer `Z[sqrt d]` pairs.
 
-    A tangency on `axis` means `|delta . axis| = need` with `need = 1/2 +
-    extent(other, axis)`, so one of the two signed residuals is exactly zero.  Scaling
-    by `2 D^2` makes every component an integer, which is what makes the modular
-    reduction legal.  That scaling alone would make the mask vacuous -- every residual
-    would be divisible by a power of `D` -- so each residual is divided by its own
-    integer content `gcd(|A|, |B|)`.  That is a scaling by a nonzero rational, and a
-    scaling cannot change the zero set, so the mask stays sound while the residues
-    become informative.  All of it is integer arithmetic in `Z[sqrt d]`; no `Quad`
-    multiplication is involved, which is where the speed comes from.
+    Pure integer arithmetic in `Z[sqrt d]` -- no `Quad` is built and no `Fraction`
+    grows.  The order is owner `i`'s two axes then owner `j`'s, each giving the two
+    signed residuals in the order `(+, -)`, exactly as `pair_tangency_residuals`
+    returns them; `pair_max_slack_bound` strides the same list with early exit.
     """
     d = cls.d
     dx = (PX[j][0] - PX[i][0], PX[j][1] - PX[i][1])
@@ -1450,10 +1445,177 @@ def pair_tangency_residuals(cls, PX, PY, WX, WY, i, j, D):
             two = (2 * proj[0], 2 * proj[1])
             raw.append(_zsub(two, need_s))
             raw.append((-(two[0]) - need_s[0], -(two[1]) - need_s[1]))
+    return raw
+
+
+def pair_tangency_residuals(cls, PX, PY, WX, WY, i, j, D):
+    """The eight primitive tangency residuals of a pair, as integral `Quad`s.
+
+    A tangency on `axis` means `|delta . axis| = need` with `need = 1/2 +
+    extent(other, axis)`, so one of the two signed residuals is exactly zero.  Scaling
+    by `2 D^2` makes every component an integer, which is what makes the modular
+    reduction legal.  That scaling alone would make the mask vacuous -- every residual
+    would be divisible by a power of `D` -- so each residual is divided by its own
+    integer content `gcd(|A|, |B|)`.  That is a scaling by a nonzero rational, and a
+    scaling cannot change the zero set, so the mask stays sound while the residues
+    become informative.  All of it is integer arithmetic in `Z[sqrt d]`; no `Quad`
+    multiplication is involved, which is where the speed comes from.
+    """
     out = []
-    for A, B in raw:
+    for A, B in _axis_residual_ints(cls, PX, PY, WX, WY, i, j, D):
         g = math.gcd(abs(A), abs(B))
         out.append(cls(A // g, B // g) if g else cls(0, 0))
+    return out
+
+
+def pair_max_slack_bound(cls, PX, PY, WX, WY, i, j, D, S=None):
+    """A certified **positive** lower bound on a pair's max SAT slack, or `None`.
+
+    The gate's two pair verdicts are 'contact' (max slack == 0) and 'violation' (max
+    slack < 0).  A pair with a *strictly positive* max slack is therefore neither, so it
+    can be dropped before the exact test -- and that is the correct object to bound:
+    the max slack, not the tightest axis.  (A diagonal neighbour has one exactly tight
+    axis and one loose one, so a bound on the *minimum* would never reject it.  Doc 64
+    records the correction: the request's phrasing named the tightest axis, and the
+    tightest axis is precisely what keeps the survivors.)
+
+    The bound is elementary and exact.  A residual `z = A + B sqrt d` with `A, B` in
+    `Z` has `|N(z)|` a positive integer when it is nonzero, so
+
+        |z| = |N(z)| / |zbar| >= 1 / (|A| + |B| S)      for any rational `S >= sqrt d`,
+
+    and `z > 0` is decided by an integer comparison of `A^2` with `d B^2`.  The whole
+    test is integer arithmetic plus one rational bound; it never divides by a field
+    element and never builds a `Quad`.  The scan stops at the first axis it can prove
+    positive, which is where the cheapness comes from.
+
+    Returns `{"axis": k, "lo": Fraction}` with `lo > 0` a lower bound on the pair's
+    max slack, or `None` ("no opinion" -- the pair must go to the exact gate).
+    """
+    scale = 2 * D * D
+    d = cls.d
+    S = EF.sqrt_upper(d) if S is None else S
+    for k, (A, B) in enumerate(_axis_residual_ints(cls, PX, PY, WX, WY, i, j, D)):
+        if EF.integral_sign(A, B, d) > 0:
+            return {"axis": k, "lo": EF.abs_lower_bound(A, B, d, S) / F(scale)}
+    return None
+
+
+def _zabs_ge(z, s, d):
+    """Exact `|z| >= s` for an integer `z = (a, b)` and an integer `s`.
+
+    `|z| >= s` iff `z >= s` or `z <= -s`, and each of those is one integer sign
+    comparison (`integral_sign`).  No `Quad`, no `Fraction`: this is the cheap exact
+    prune, and it decides the same skip the gate's own `abs(dx) >= 2` decides.
+    """
+    a, b = z
+    return (EF.integral_sign(a - s, b, d) >= 0
+            or EF.integral_sign(a + s, b, d) <= 0)
+
+
+def chained_screen(state, words, cls=None, mods=(8,), use_mask=True, use_bound=True):
+    """The four-stage chain: prune -> residue mask -> max-slack bound -> exact gate.
+
+    * **prune** -- the same exact `|dx| >= 2 or |dy| >= 2` skip as the gate's, but
+      decided on integer components (`_zabs_ge`) instead of `Quad` values -- the same
+      pairs, a fraction of the cost, and it is timed as its own stage;
+    * **mask** -- drop a pair with no exactly tight axis (the run-100 plugin);
+    * **bound** -- drop a pair whose max slack has a certified positive lower bound;
+    * **gate** -- the exact four-axis test on everything that survives.
+
+    The three stages are not interchangeable, and the difference is measured here, not
+    asserted.  The **bound is verdict-preserving**: a positive max slack means the pair
+    is neither a contact nor an overlap, so dropping it cannot change either count.  The
+    **mask is only contact-safe**: an overlapping pair has no tight axis either, so the
+    mask hides violations unless the sentence is already known feasible.  The chain
+    therefore re-checks every mask-dropped pair against the exact verdict (outside the
+    timed region) and reports how many violations the mask would have hidden.
+
+    Timings are integer nanoseconds, so the benchmark is float-free; the reference is
+    `Q.gate` on the whole sentence.
+    """
+    cls = cls or Q.field_of(state)
+    d = cls.d
+    D = residue_common_den(state, words)
+    PX = [_scale_cell(cls, p[0], D) for p in state]
+    PY = [_scale_cell(cls, p[1], D) for p in state]
+    WX = [_scale_cell(cls, w[0], D) for w in words]
+    WY = [_scale_cell(cls, w[1], D) for w in words]
+    t0 = time.perf_counter_ns()
+    lim = 2 * D
+    pairs = []
+    for i in range(len(state)):
+        for j in range(i + 1, len(state)):
+            dx = (PX[j][0] - PX[i][0], PX[j][1] - PX[i][1])
+            if _zabs_ge(dx, lim, d):
+                continue
+            dy = (PY[j][0] - PY[i][0], PY[j][1] - PY[i][1])
+            if _zabs_ge(dy, lim, d):
+                continue
+            pairs.append((i, j))
+    t_prune = time.perf_counter_ns() - t0
+    survivors, masked, bounded = [], [], []
+    t0 = time.perf_counter_ns()
+    for i, j in pairs:
+        raws = _axis_residual_ints(cls, PX, PY, WX, WY, i, j, D)
+        if use_mask and EF.residue_norm_filter_ints(d, raws, mods)[mods[0]]["all_nonzero"]:
+            masked.append((i, j))
+            continue
+        if use_bound:
+            hit = pair_max_slack_bound(cls, PX, PY, WX, WY, i, j, D)
+            if hit is not None:
+                bounded.append((i, j, hit))
+                continue
+        survivors.append((i, j))
+    t_front = time.perf_counter_ns() - t0
+    t0 = time.perf_counter_ns()
+    contacts = violations = 0
+    worst = None
+    for i, j in survivors:
+        best = max(sl for _q, sl, _n, _o in Q.pair_axes(state, words, i, j, cls))
+        if best == 0:
+            contacts += 1
+        if best.sign() < 0:
+            violations += 1
+        if worst is None or best < worst:
+            worst = best
+    t_gate = time.perf_counter_ns() - t0
+    t0 = time.perf_counter_ns()
+    gate = Q.gate(state, words, cls)
+    t_ref = time.perf_counter_ns() - t0
+    # outside the timed region: what the mask dropped that the exact verdict counts
+    hidden = 0
+    for i, j in masked:
+        best = max(sl for _q, sl, _n, _o in Q.pair_axes(state, words, i, j, cls))
+        if best.sign() < 0:
+            hidden += 1
+    pipeline_ns = t_prune + t_front + t_gate
+    # the filters' own contribution, with the prune held fixed: the exact pair test
+    # over every candidate, measured after the pipeline so it cannot disturb it
+    t_gate_all = None
+    if use_mask and use_bound:
+        t0 = time.perf_counter_ns()
+        for i, j in pairs:
+            Q.pair_axes(state, words, i, j, cls)
+        t_gate_all = time.perf_counter_ns() - t0
+    out = {"pairs": len(pairs), "contacts": gate["contacts"],
+           "violations": gate["violations"], "den": D,
+           "masked": len(masked), "bounded": len(bounded),
+           "gate_calls": len(survivors), "pipeline_contacts": contacts,
+           "pipeline_violations": violations,
+           "mask_hidden_violations": hidden,
+           "t_prune_ns": t_prune, "t_front_ns": t_front, "t_gate_ns": t_gate,
+           "t_gate_all_ns": t_gate_all,
+           "t_pipeline_ns": pipeline_ns, "t_reference_ns": t_ref,
+           "speedup": (F(t_ref, pipeline_ns) if pipeline_ns else F(0)),
+           "filter_gain": (F(t_gate_all, t_front + t_gate)
+                           if t_gate_all and t_front + t_gate else None),
+           "use_mask": use_mask, "use_bound": use_bound}
+    if violations == 0 and gate["violations"] == 0:
+        out["equivalent"] = (contacts == gate["contacts"] and worst == gate["clearance"])
+    else:
+        out["equivalent"] = (contacts == gate["contacts"]
+                             and violations == gate["violations"])
     return out
 
 
@@ -1519,6 +1681,150 @@ def residue_pair_screen(state, words, cls=None, mods=(8, 12, 24)):
     return out
 
 
+# ------------------------------------- serialized certificates (run 101)
+#: The wire format is deliberately dumb: exact strings, one rotation per cell, one
+#: container box per certificate.  A reader that needs nothing but `Fraction` can
+#: verify the whole thing, which is the point -- the certificate is the object, and
+#: every decimal in this project (CSV cells, table columns, printed shadows) is a
+#: projection of it, flagged as such in the document's `display_only` block.
+def field_tag(cls):
+    """The schema's field tag for a scalar class: `Q` or `Quad(d)`."""
+    d = getattr(cls, "d", 0) or 0
+    return "Q" if d == 0 else f"Quad({d})"
+
+
+def certificate_scalar(z, tag):
+    """One exact scalar as the schema writes it: a string, or an `[a, b]` pair."""
+    a, b = _ab(z)
+    if tag == "Q":
+        return str(F(a))
+    return [str(a), str(b)]
+
+
+def certificate_of(cid, family, state, words, cls, note=""):
+    """Serialize one sentence: exact field, exact side, exact rotations and centres.
+
+    `origin` is the sentence's own bounding box's lower corner, and `L` its exact side,
+    so the certificate carries a *tight* container rather than a family convention.  The
+    `expected` block is the gate's own summary; the verifier recomputes it and refuses a
+    document whose declaration does not match the object.
+    """
+    tag = field_tag(cls)
+    ex = [Q.frame_extent(c, s, cls) for c, s in words]
+    ox = min(p[0] - e for p, e in zip(state, ex))
+    oy = min(p[1] - e for p, e in zip(state, ex))
+    L = Q.side(state, words, cls)
+    g = Q.gate(state, words, cls)
+    cells = [{"x": certificate_scalar(p[0], tag),
+              "y": certificate_scalar(p[1], tag),
+              "r": [certificate_scalar(c, tag), certificate_scalar(-s, tag),
+                    certificate_scalar(s, tag), certificate_scalar(c, tag)]}
+             for p, (c, s) in zip(state, words)]
+    return {"id": cid, "family": family, "field": tag, "N": len(state),
+            "L": certificate_scalar(L, tag),
+            "origin": [certificate_scalar(ox, tag), certificate_scalar(oy, tag)],
+            "cells": cells,
+            "expected": {"ok": g["ok"], "contacts": g["contacts"],
+                         "violations": g["violations"],
+                         "clearance": (certificate_scalar(g["clearance"], tag)
+                                       if g["clearance"] is not None else None)},
+            "note": note}
+
+
+def certificate_families():
+    """The representatives: one per field tag, and the four named certified families."""
+    out = []
+    half = F(1, 2)
+    tile = [(F(i) + half, F(j) + half) for j in range(2) for i in range(2)]
+    out.append(certificate_of(
+        "tile2", "Tile 2k (k = 1, axis grid, rational)", tile,
+        [(F(1), F(0))] * 4, None,
+        "the smallest certificate in the file; it is the one that exercises the Q tag"))
+    ring = p_ring(1)
+    out.append(certificate_of("ring18", "Ring (n = 18)", ring.payload["state"],
+                              ring.payload["words"],
+                              Q.field_of(ring.payload["state"]),
+                              "the ring sentence: 10 + 4 + 4 squares, 26 contacts"))
+    stair = p_staircase(5)
+    out.append(certificate_of("staircase149", "Staircase (n = 149)",
+                              stair.payload["state"], stair.payload["words"],
+                              Q.field_of(stair.payload["state"]),
+                              "the multi-layer staircase at k = 5, 449 contacts"))
+    capped = staircase_capped(5)
+    out.append(certificate_of("staircase150", "Staircase + cap brick (n = 150)",
+                              capped["cells"], capped["words"], capped["cls"],
+                              "the 149 plus the cap brick placed by the pocket cage"))
+    b45 = p_block45(5, 4)
+    out.append(certificate_of("block45_5_4", "Block45 (s = 5, k = 4)",
+                              b45.payload["state"], b45.payload["words"],
+                              Q.field_of(b45.payload["state"]),
+                              "N = 65 at L = 5 + 5/2 sqrt 2, 172 contacts"))
+    b45h = p_block45half(17, 14)
+    out.append(certificate_of("block45half_17_14", "Block45Half (s = 17, k = 14)",
+                              b45h.payload["state"], b45h.payload["words"],
+                              Q.field_of(b45h.payload["state"]),
+                              "N = 653 at L = 29/2 + 17/2 sqrt 2, 2256 contacts"))
+    try:
+        slope = p_slope(2, 1, 1, 1)
+    except Exception as exc:                      # pragma: no cover - schema demo only
+        out.append({"id": "slope21_note", "family": "Slope 2:1 (unavailable)",
+                    "field": "Quad(5)", "N": 0, "L": "0", "origin": ["0", "0"],
+                    "cells": [], "expected": {"ok": False},
+                    "note": f"Quad(5) representative could not be built: {exc}"})
+    else:
+        out.append(certificate_of("slope21", "Slope 2:1 ridge (k = 1, m = 1)",
+                                  slope.payload["state"], slope.payload["words"],
+                                  Q.field_of(slope.payload["state"]),
+                                  "the Q(sqrt 5) representative"))
+    return out
+
+
+def certificate_document():
+    """The whole serialized document: conventions, the display-only ledger, the cells."""
+    return {
+        "format": "galois-certificate/1",
+        "run": 101,
+        "date": "2026-11-22",
+        "conventions": {
+            "numbers": ("exact strings only: 'a' under tag Q, or [a, b] meaning "
+                        "a + b*sqrt(d) under tag Quad(d); reduced fractions, never decimals"),
+            "field_tags": ["Q", "Quad(2)", "Quad(5)", "Quad(7)"],
+            "rotation": ("each cell stores R row-major as [ux, vx, uy, vy]; the verifier "
+                         "checks R^T R = I and det R = 1"),
+            "container": ("a square of side L with lower corner `origin`; a cell is "
+                          "inside iff origin <= centre - e and centre + e <= origin + L "
+                          "with e = (|ux| + |uy|)/2"),
+            "sat": ("a pair is separated iff some axis q of either frame has "
+                    "|d.q| - (1/2 + ext_other(q)) >= 0; the witness is the axis with "
+                    "the largest slack, and >= 0 is accepted at clearance 0"),
+            "first_failure": ("the verifier stops at the first exact failed inequality "
+                              "and names it, distinguishing `infeasible` from "
+                              "`outside_representation`"),
+        },
+        "display_only": [
+            {"surface": "submission.csv", "exact": False,
+             "note": ("12-dp decimal strings: a projection of the pose, never an input "
+                      "to an exact check")},
+            {"surface": "README.md / STATUS.md tables", "exact": False,
+             "note": "rounded for reading; every number there has an exact source"},
+            {"surface": "CLI and event prints", "exact": False,
+             "note": ("decimal shadows via Decimal at 12 dp; where a decision is "
+                      "reported the exact string is printed beside it")},
+        ],
+        "certificates": certificate_families(),
+    }
+
+
+def write_certificates(path):
+    """Write `galois_certificates.json` and return the document written."""
+    doc = certificate_document()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(doc, f, indent=1)
+        f.write("\n")
+    return doc
+
+
 def _ratio_str(fr):
     """A rational to two decimal places, exactly -- the print path stays float-free."""
     h = fr * 100                      # in units of 0.01
@@ -1543,20 +1849,44 @@ def _lattice_sentence(nx=10, ny=10):
     return cells, words
 
 
-def residue_benchmark(mods=(8, 12, 24)):
-    """The residue stage over the certified cells: contacts, rejections, speedups."""
-    rows = []
-    builders = [("Block45(5,4)", lambda: p_block45(5, 4)),
-                ("Block45(10,8)", lambda: p_block45(10, 8)),
-                ("Block45Half(5,4)", lambda: p_block45half(5, 4)),
-                ("Block45Half(17,14)", lambda: p_block45half(17, 14))]
+def _benchmark_cells():
+    """The five rows doc 63 §2 benchmarks on: four certified cells, one synthetic."""
     todo = []
-    for name, build in builders:
+    for name, build in (("Block45(5,4)", lambda: p_block45(5, 4)),
+                        ("Block45(10,8)", lambda: p_block45(10, 8)),
+                        ("Block45Half(5,4)", lambda: p_block45half(5, 4)),
+                        ("Block45Half(17,14)", lambda: p_block45half(17, 14))):
         claim = build()
         todo.append((name, claim.payload["state"], claim.payload["words"]))
     st, wo = _lattice_sentence()
     todo.append(("Lattice(3/2,1) [synthetic sparse]", st, wo))
-    for name, state, words in todo:
+    return todo
+
+
+def chain_benchmark(mods=(8,)):
+    """The chained pipeline over the five rows, in three configurations.
+
+    `mask` is the run-100 stage alone, `bound` is the run-101 stage alone, `mask+bound`
+    is the chain the request names.  Reporting all three is what makes the comparison
+    honest: the bound is a superset of the mask on a certified sentence (it also
+    rejects the diagonal survivors), so `mask+bound` and `bound` do the same gate work
+    while `mask` does more -- and on a sentence with overlaps only the bound is safe.
+    """
+    rows = []
+    for name, state, words in _benchmark_cells():
+        cls = Q.field_of(state)
+        for label, mk, bd in (("mask", True, False), ("bound", False, True),
+                              ("mask+bound", True, True)):
+            scr = chained_screen(state, words, cls, mods=mods, use_mask=mk, use_bound=bd)
+            scr.update({"cell": name, "stage": label})
+            rows.append(scr)
+    return rows
+
+
+def residue_benchmark(mods=(8, 12, 24)):
+    """The residue stage over the certified cells: contacts, rejections, speedups."""
+    rows = []
+    for name, state, words in _benchmark_cells():
         cls = Q.field_of(state)
         scr = residue_pair_screen(state, words, cls, mods=mods)
         gate = Q.gate(state, words, cls)
@@ -5042,6 +5372,115 @@ def selftest() -> int:
         "plugin decides a packing: the exact gate "
         "still does, and the chain only removes work it can prove is wasted.")
 
+    # ---------------- control 32: the max-slack bound and the serialized certificate
+    import verify_certificates as VC
+    c65c = p_block45(5, 4)
+    stc, woc = c65c.payload["state"], c65c.payload["words"]
+    Dc = residue_common_den(stc, woc)
+    PXc = [_scale_cell(cls2, p[0], Dc) for p in stc]
+    PYc = [_scale_cell(cls2, p[1], Dc) for p in stc]
+    WXc = [_scale_cell(cls2, w[0], Dc) for w in woc]
+    WYc = [_scale_cell(cls2, w[1], Dc) for w in woc]
+    # (a) the bound is sound and non-vacuous: 0 < lo <= the exact max slack
+    dropped = 0
+    for i in range(len(stc)):
+        for j in range(i + 1, len(stc)):
+            if abs(stc[j][0] - stc[i][0]) >= cls2(2) or abs(stc[j][1] - stc[i][1]) >= cls2(2):
+                continue                     # the gate's own prune, exactly
+            hit = pair_max_slack_bound(cls2, PXc, PYc, WXc, WYc, i, j, Dc)
+            if hit is None:
+                continue
+            best = max(sl for _q, sl, _n, _o in Q.pair_axes(stc, woc, i, j, cls2))
+            assert 0 < hit["lo"] <= best, (i, j, hit, best)
+            dropped += 1
+    assert dropped == 94, dropped            # 266 candidate pairs minus 172 contacts
+    # the Quad wrapper and the integer path agree on a residual
+    z0 = pair_tangency_residuals(cls2, PXc, PYc, WXc, WYc, 0, 1, Dc)[2]
+    assert z0.is_zero()
+    assert EF.positive_lower_bound(cls2(1, 0), 1) == F(1)     # 1 -> >= 1/1
+    assert EF.positive_lower_bound(cls2(0, 1), 2) == F(1, 4)  # sqrt2/2 >= 1/(2*2)
+    # (b) the chain: the bound leaves exactly the contacts for the exact gate
+    ch_mask = chained_screen(stc, woc, cls2, use_mask=True, use_bound=False)
+    ch_bound = chained_screen(stc, woc, cls2, use_mask=False, use_bound=True)
+    ch_both = chained_screen(stc, woc, cls2, use_mask=True, use_bound=True)
+    assert ch_mask["gate_calls"] == 196 and ch_mask["equivalent"] is True
+    assert ch_bound["gate_calls"] == ch_both["gate_calls"] == 172
+    for ch in (ch_bound, ch_both):
+        assert ch["equivalent"] is True and ch["mask_hidden_violations"] == 0
+        assert ch["pipeline_contacts"] == ch["contacts"] == 172
+    # (c) the bound eliminates the lattice's diagonal survivors
+    lst, lwo = _lattice_sentence()
+    lcl = Q.field_of(lst)
+    chm = chained_screen(lst, lwo, lcl, use_mask=True, use_bound=False)
+    chl = chained_screen(lst, lwo, lcl, use_mask=False, use_bound=True)
+    assert chm["gate_calls"] == 252 and chl["gate_calls"] == chl["contacts"] == 90, (chm["gate_calls"], chl["gate_calls"])
+    assert chl["equivalent"] is True
+    # (d) the mask cannot see overlaps and the bound can -- the honest difference
+    ov = [(cls2(F(1, 2)), cls2(F(1, 2))), (cls2(F(7, 5)), cls2(F(1, 2)))]
+    owo = [(cls2(1), cls2(0))] * 2
+    chov = chained_screen(ov, owo, cls2, use_mask=True, use_bound=True)
+    assert chov["violations"] == 1 and chov["mask_hidden_violations"] == 1
+    assert chov["pipeline_violations"] == 0 and chov["equivalent"] is False
+    chov2 = chained_screen(ov, owo, cls2, use_mask=False, use_bound=True)
+    assert chov2["pipeline_violations"] == 1 and chov2["equivalent"] is True
+    # (e) the integer mask path equals the Quad plugin path, pair for pair
+    for i, j in ((0, 1), (0, 34), (5, 9)):
+        q = EF.residue_norm_filter(cls2, pair_tangency_residuals(cls2, PXc, PYc, WXc, WYc, i, j, Dc))
+        n = EF.residue_norm_filter_ints(cls2.d, _axis_residual_ints(cls2, PXc, PYc, WXc, WYc, i, j, Dc))
+        assert q[8]["residues"] == n[8]["residues"], (i, j)
+        assert q[8]["all_nonzero"] == n[8]["all_nonzero"]
+    # (f) the serialized certificate: write, read back from text, verify
+    ringc = p_ring(1)
+    capped = staircase_capped(5)
+    mini = {"format": "galois-certificate/1", "certificates": [
+        certificate_of("tile2", "Tile", [(F(1, 2), F(1, 2)), (F(3, 2), F(1, 2)),
+                                          (F(1, 2), F(3, 2)), (F(3, 2), F(3, 2))],
+                       [(F(1), F(0))] * 4, None),
+        certificate_of("ring18", "Ring", ringc.payload["state"],
+                       ringc.payload["words"], cls7),
+        certificate_of("block45", "Block45", stc, woc, cls2),
+        certificate_of("stair150", "Staircase + cap", capped["cells"],
+                       capped["words"], capped["cls"])]}
+    res = VC.verify_document(json.loads(json.dumps(mini)))
+    assert res["ok"] and res["verified"] == 4, res
+    by = {r["summary"]["id"]: r["summary"] for r in res["results"]}
+    assert by["ring18"]["N"] == 18 and by["ring18"]["contacts"] == 26
+    assert by["stair150"]["N"] == 150 and by["stair150"]["contacts"] == 451
+    assert by["block45"]["N"] == 65 and by["block45"]["contacts"] == 172
+    assert by["tile2"]["contacts"] == 6 and by["tile2"]["L"] == "2"
+    # and a decimal spelling is refused as a projection, not accepted as a value
+    mut = json.loads(json.dumps(mini))
+    mut["certificates"][2]["cells"][0]["x"] = ["1/2", "0.5"]
+    bad = VC.verify_document(mut)
+    assert not bad["ok"] and bad["results"][2]["kind"] == "outside_representation"
+    assert bad["results"][2]["check"] == "number_format"
+    say("control 32 -- the max-slack bound, the chained pipeline, and the serialized "
+        "certificate.  (1) The bound.  A pair is a contact iff its max slack is 0 and "
+        "a violation iff it is negative, so a pair with a *strictly positive* max "
+        "slack is neither and can be dropped: the object to bound is the max slack, "
+        "not the tightest axis -- a diagonal neighbour has one tight axis and one "
+        "loose one, so the document's 'tightest axis' phrasing is exactly what keeps "
+        "the survivors, and doc 64 records the correction.  The bound is "
+        "|A + B sqrt d| >= 1/(|A| + |B| S) for S >= sqrt d, because a nonzero norm is "
+        "a positive integer; on Block45(5, 4) it speaks for " + f"{dropped}" + " of the "
+        "94 non-contacts, always with 0 < lo <= the exact slack, and leaves exactly "
+        "the 172 contacts for the gate.  (2) The chain.  Mask alone leaves 196 "
+        "survivors (its 24 diagonal extras), the bound leaves 172, and both agree "
+        "with the gate; on the synthetic lattice the bound turns the mask's 252 "
+        "survivors into the 90 contacts.  The two stages are not equivalent: a mask "
+        "drop is only 'not exactly tight', which an overlap also satisfies, so on a "
+        "sentence with one 1/10 overlap the mask hides the violation and the bound "
+        "keeps it -- the mask is contact-safe, the bound is verdict-safe, and the "
+        "pipeline is used accordingly.  (3) The certificate.  A sentence is written as "
+        "exact field tags, exact rotations R, exact centres and an exact side; the "
+        "standalone verifier rebuilds it from the file alone, checks R^T R = I and "
+        "det R = 1, every wall and all four axes of every pair (recording the witness "
+        "axis and exact gap), and refuses a document whose declared summary the "
+        "object does not have.  Four representatives round-trip through JSON text "
+        "here -- tile2 (Q, 6 contacts), ring18 (Quad(7), 26), block45 (Quad(2), 172) "
+        "and staircase150 (Quad(7), 451) -- and a decimal component is refused as "
+        "`outside_representation`: a decimal readout is a projection, not a value.")
+
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
 
@@ -5080,7 +5519,8 @@ def main(argv=None) -> int:
         return 0
     if "--audit" in argv:
         import lattice_shells as LAT
-        mods = [EF, Q, sys.modules[__name__], LAT]
+        import verify_certificates as VC
+        mods = [EF, Q, sys.modules[__name__], LAT, VC]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)
@@ -5195,6 +5635,49 @@ def main(argv=None) -> int:
                       f"contacts {d['contacts_masked']}, "
                       f"speedup {_ratio_str(d['speedup'])}x")
         path = os.path.join(ROOT, "workspace/push/plugin_residue.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"rows": [{k: v for k, v in r.items() if k != "mods"}
+                                for r in rows]}, f, indent=1, default=str)
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
+        return 0
+    if "--certificates" in argv:
+        # the serialized certificate file and its standalone verifier (report: 64-CERTIFICATES.md)
+        import verify_certificates as VC
+        path = os.path.join(ROOT, "workspace/push/galois_certificates.json")
+        write_certificates(path)
+        with open(path) as f:
+            back = json.load(f)
+        res = VC.verify_document(back)
+        for r in res["results"]:
+            if r["status"] == "verified":
+                s = r["summary"]
+                print(f"  verified {s['id']:<18} {s['field']:<8} N = {s['N']:<4} "
+                      f"L = {s['L']:<18} contacts = {s['contacts']:<5} "
+                      f"void = {s['void']:<18} clearance = {s['clearance']}")
+            else:
+                print(f"  FAILED {r['detail'].get('id')}: {r['kind']} / {r['check']}: "
+                      f"{r['detail']}")
+        print(f"  document: {res['verified']} verified, {res['failed']} failed "
+              f"({os.path.relpath(path, ROOT)})")
+        print("  display-only surfaces (never read by the verifier): "
+              + ", ".join(d["surface"] for d in back["display_only"]))
+        ok = res["ok"] and VC.main([path, "--selftest"]) == 0
+        return 0 if ok else 1
+    if "--chain" in argv:
+        # the chained pipeline, three configurations, five rows (report: 64-CERTIFICATES.md)
+        rows = chain_benchmark()
+        for r in rows:
+            extra = (f", filters alone {_ratio_str(r['filter_gain'])}x"
+                     if r.get("filter_gain") else "")
+            print(f"  {r['cell']:<34} {r['stage']:<10} pairs {r['pairs']:<5} "
+                  f"contacts {r['contacts']:<5} mask {r['masked']:<4} "
+                  f"bound {r['bounded']:<4} gate {r['gate_calls']:<5} "
+                  f"hidden {r['mask_hidden_violations']} eq {r['equivalent']} "
+                  f"{r['t_pipeline_ns'] // 1000000} ms vs "
+                  f"{r['t_reference_ns'] // 1000000} ms = "
+                  f"{_ratio_str(r['speedup'])}x{extra}")
+        path = os.path.join(ROOT, "workspace/push/plugin_chain.json")
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "w") as f:
             json.dump({"rows": [{k: v for k, v in r.items() if k != "mods"}

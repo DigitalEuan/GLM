@@ -2255,3 +2255,92 @@ sweeps unchanged; README/STATUS footers byte-identical from `## Current results`
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `63-PLUGINS.md`; records `31`–`63`.
+
+## Run 101 in detail — the certificate boundary, and the max-slack stage doc 63 §6 named
+
+User request: establish the formal boundary between exact algebraic ground truth (rungs 3 and 7)
+and display/scan projections (rung 4) by building the serialized certificate verifier first,
+alongside doc 63 §6's next plugin stage — (1) a float-free JSON schema holding exact field tags,
+exact container side, exact unit-circle words and exact centres, with a standalone zero-float
+verifier that checks `R^T R = I`, `det R = 1`, all `4N` wall inequalities and all pairwise 4-axis
+SAT separations (recording the witness axis and exact gap, accepting `≥ 0` at clearance 0) and
+returns either a verified summary or the exact first failed inequality, distinguishing
+`infeasible` from `outside this representation`; serializing and round-tripping Ring n = 18,
+Staircase 149/150, Block45(5,4) and Block45Half(17,14) into
+`workspace/push/galois_certificates.json` with CSV/print decimals flagged display-only; (2) a
+sound cheap exact max-slack bound that rejects pairs before the full gate, eliminating the
+diagonal survivors the mod-8 mask passed, benchmarked on doc 63 §2's five rows; (3) doc 64 with
+the schema, the exact-vs-display ledger (eight areas) and an honest doc 63 §6 update, keeping
+32+ controls, `record_guard.py` and the zero-float audit green.
+
+**The format.** `galois-certificate/1` carries a `conventions` block, a `display_only` ledger and
+a list of certificates; each certificate is `{id, family, field, N, L, origin, cells, expected}`.
+A scalar is a canonical fraction string under `Q` and an `[a, b]` pair under `Quad(d)`; the parser
+refuses a decimal spelling rather than rounding it. Each cell stores its rotation **row-major**
+(`[ux, vx, uy, vy]`), so `R^T R = I` and `det R = 1` are checked rather than assumed; `L` and
+`origin` are the sentence's own tight box, which is why the ring's origin is `-7/4 - 1/4√7` and
+the block's is `0`. The path previously held an older export -- a flat list of sides with
+`s_exact`, `s_float` and a float `verified_worst_pen`, no frame and no container -- which is
+replaced here and kept in git history (commit `3668c31`) as the example of a summary that
+mentions exactness without being a certificate.
+
+**The verifier.** `scripts/verify_certificates.py` rebuilds each sentence from the file alone
+(imports the tower only, never `glm_wheels`) and checks schema, number format, `R^T R = I`,
+`det R = 1`, every wall, the declared side, every pair's four axes with its witness axis and exact
+gap, and the declared summary — stopping at the first exact failed inequality with kind
+`infeasible` (the object is representable and an inequality is false) or `outside_representation`
+(a decimal, a wrong scalar shape, an unknown tag, a duplicate id, a loose declared `L`, a declared
+summary the object does not have). Its `--selftest` mutates the shipped document nine ways —
+decimal string, reflection frame, non-unit frame, centre pushed through a wall, loose declared
+side, wrong format tag, duplicate id, declared count, declared summary — and asserts each is
+refused at its own check while the untouched document still verifies.
+
+**What is serialized.** Seven certificates, 302 KB of exact strings: `tile2` (Q, N = 4,
+L = 2, 6 contacts), `ring18` (Quad(7), 18, `7/2 + 1/2√7`, 26), `staircase149` (149,
+`23/2 + 1/2√7`, 449), `staircase150` (150, same side, 451), `block45_5_4` (Quad(2), 65,
+`5 + 5/2√2`, 172), `block45half_17_14` (653, `29/2 + 17/2√2`, 2256) and `slope21` (Quad(5), 5,
+`2 + 1/3√5`, 4). Every number in that table is the verifier's recomputation; the builder's claim
+lives in `expected` and a mismatch is a failure. Voids are exact field elements
+(`-16 + 23/2√7` for the 150-square staircase).
+
+**The stage, and the correction it needed.** `pair_max_slack_bound` bounds a pair's **max** slack
+by `|A + B√d| ≥ 1/(|A| + |B|S)` — a nonzero norm is a positive integer, and `z > 0` is an integer
+comparison of `A²` with `dB²` — so a pair with `max slack > 0` is neither a contact nor a
+violation and may be dropped. The request's "tightest axis" phrasing names the *minimum* slack,
+which is exactly what keeps a diagonal neighbour (one axis exactly tight, one loose); doc 64 §5
+records the correction. Measured: on `Block45(5,4)` the bound speaks for all 94 non-contacts and
+leaves exactly the 172 contacts; on the synthetic lattice it removes the 162 diagonal survivors
+the mask passed (252 → 90).
+
+**The chain, and two numbers that moved.** `--chain` runs five rows × three configurations
+(`mask`, `bound`, `mask+bound`) with the prune timed as its own stage:
+
+| cell | pairs | contacts | gate calls (mask+bound) | pipeline vs gate | filters alone |
+|---|---:|---:|---:|---:|---:|
+| Block45(5,4) | 266 | 172 | 172 | 2.08× | 1.26× |
+| Block45(10,8) | 1102 | 794 | 794 | 2.92× | 1.14× |
+| Block45Half(5,4) | 182 | 112 | 112 | 2.19× | 1.33× |
+| Block45Half(17,14) | 2978 | 2256 | 2256 | 4.96× | 1.08× |
+| Lattice(3/2,1) synthetic | 342 | 90 | 90 | 4.65× | 2.55× |
+
+First correction: an earlier version of this benchmark reported 4–6× for the filters alone
+because it timed only the post-prune work while `Q.gate` was timing its own `Quad` prune over all
+212,878 pairs at N = 653. Timing the prune and deciding it on integer components
+(`_zabs_ge`, one integer sign test per axis) fixed it: the end-to-end gain is 1.9–5.1× and the
+filters' own contribution is the 1.08–2.55× column — a cheaper exact prune was worth more than
+either filter on contact-dense cells. Second correction: the mod-8 mask is **contact-safe but not
+verdict-safe** (an overlap has no tight axis either, so the mask hides it), while the bound is
+verdict-safe; control 32 puts a 1/10 overlap in front of both and asserts that the mask hides the
+violation and the bound keeps it. `hidden = 0` on all five benchmark rows.
+
+**Verification.** `glm_wheels.py --selftest` **32 controls, exit 0, 2 m 37 s** (control 32 new:
+the bound's soundness `0 < lo <= exact max slack` on all 94, the box `0 != positive_lower_bound`
+identities, mask/bound/both gate calls `196/172/172` with equivalence, the lattice `252 → 90`, the
+overlap counter-example, the integer/Quad mask agreement, the four-certificate JSON round-trip
+and the refused decimal); `--audit` **324 functions, 0 offenders** (the verifier module included:
+12 decision functions); `--certificates` 7/7 verified plus 9 mutations refused; `--chain` with
+ledger `workspace/push/plugin_chain.json`; `python3 scripts/verify_certificates.py` 7 verified,
+0 failed; bare run exit 0; `record_guard.py` OK; README/STATUS footers byte-identical.
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `64-CERTIFICATES.md`; records `31`–`64`.

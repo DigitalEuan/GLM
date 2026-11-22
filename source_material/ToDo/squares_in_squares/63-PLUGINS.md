@@ -257,3 +257,14 @@ predicate that also reads the loose side**, i.e. a cheap exact bound on `max sla
 reject the diagonal survivors the residue mask must keep. It is a different instrument from both
 plugins here — a bound, not a residue and not a basis change — which is exactly the kind of stage
 this pipeline is built to accept.
+
+**Update (run 101).** The stage above now exists: `pair_max_slack_bound` bounds a pair's **max**
+slack — not its tightest axis — by `|A + B√d| ≥ 1/(|A| + |B|S)`, which is exact integer
+arithmetic on the `2D²`-scaled residuals. On `Block45(5,4)` it rejects all 94 non-contacts and
+leaves exactly the 172 contacts for the gate; on the synthetic lattice it removes the 162 diagonal
+survivors the mod-8 mask had to pass (252 → 90). Two findings moved numbers rather than prose:
+the gate's own `Quad` prune, not the pair test, was the benchmark's bottleneck (the chain now
+prunes on integer components, which is where most of the end-to-end 1.9–5.1× comes from), and the
+mask turns out to be **contact-safe but not verdict-safe** — an overlap has no tight axis either,
+so the mask hides violations unless feasibility is already assumed, while the bound never does.
+Doc 64 §5 records the chain, the correction and the counter-example.

@@ -46,8 +46,10 @@ getcontext().prec = 70
 __all__ = [
     "Scal", "Z", "Q", "Quad", "tword", "tpoint", "is_squarefree",
     "sqrt_decimal", "recover_scalar", "no_float_calls", "audit", "DISPLAY_ONLY",
-    "bernstein_coeffs", "bernstein_enclosure", "bernstein_quadratic",
-    "bernstein_nodes", "norm_residue", "residue_norm_filter",
+    "bernstein_coeffs",     "bernstein_enclosure", "bernstein_quadratic", "bernstein_nodes",
+    "norm_residue", "residue_norm_filter",
+    "sqrt_upper", "integral_sign", "abs_lower_bound", "positive_lower_bound",
+    "norm_residue_int", "residue_norm_filter_ints",
 ]
 
 
@@ -613,6 +615,110 @@ def residue_norm_filter(cls, elements, mods=(8, 12, 24)):
                     "all_nonzero": bool(residues) and not abstain and not zeros,
                     "abstain": abstain, "checked": len(residues)}
     return out
+
+
+def norm_residue_int(a, b, d, mod):
+    """The content-primitive norm residue of integer `a + b sqrt d`, modulo `mod`.
+
+    The integer twin of `norm_residue`: the content `gcd(|a|, |b|)` is removed exactly as
+    the `Quad` version's caller does, so the residue is a statement about the primitive
+    element.  Nothing is allocated -- this is the fast path the chained pipeline uses.
+    """
+    a, b, d, mod = int(a), int(b), int(d), int(mod)
+    g = math.gcd(abs(a), abs(b))
+    if g > 1:
+        a, b = a // g, b // g
+    return (a * a - d * b * b) % mod
+
+
+def residue_norm_filter_ints(d, elements, mods=(8, 12, 24)):
+    """The fast path of `residue_norm_filter`, on raw `(a, b)` integer pairs.
+
+    Same filter and the same answer as the `Quad` version, element for element; control
+    32 checks the two paths agree on every benchmark cell rather than assuming it.
+    """
+    out = {}
+    for mod in mods:
+        residues, zeros = [], []
+        for k, (a, b) in enumerate(elements):
+            r = norm_residue_int(a, b, d, mod)
+            residues.append(r)
+            if r == 0:
+                zeros.append(k)
+        out[mod] = {"residues": residues, "zeros": zeros,
+                    "all_nonzero": bool(residues) and not zeros,
+                    "abstain": False, "checked": len(residues)}
+    return out
+
+
+# ------------------------------------------------------- scalar bounds (run 101)
+#: These are the only places the tower needs a *bound* rather than a value.  A bound
+#: is a rational that is provably on one side of an exact element, and it is the
+#: cheap direction: signs are exact integer comparisons, magnitudes only need a
+#: rational `S >= sqrt d`.
+
+
+def sqrt_upper(d):
+    """A rational `S` with `S*S >= d` (the integer ceiling of the square root)."""
+    n = math.isqrt(int(d))
+    if n * n == int(d):
+        return F(n)
+    return F(n + 1)
+
+
+def integral_sign(a, b, d):
+    """`sign(a + b sqrt d)` for integers `a, b` — the `Quad` rule without building one."""
+    a, b = int(a), int(b)
+    if a == 0:
+        return (b > 0) - (b < 0)
+    if b == 0:
+        return (a > 0) - (a < 0)
+    if a > 0 and b > 0:
+        return 1
+    if a < 0 and b < 0:
+        return -1
+    if a > 0:
+        return 1 if a * a > d * b * b else -1
+    return 1 if d * b * b > a * a else -1
+
+
+def abs_lower_bound(a, b, d, S=None):
+    """A rational `0 <= l <= |a + b sqrt d|` for integers `a, b`, exactly.
+
+    `|z| = |N(z)| / |zbar|` and `|N(z)|` is a nonzero integer whenever `z != 0`, while
+    `|zbar| <= |a| + |b| S` for any rational `S >= sqrt d`.  So `|z| >= 1/(|a| + |b|S)`.
+    The bound is *sound* (never larger than the truth) and it is the reason a sign test
+    can be turned into a positive separation: a positive element is at least this far
+    from zero.  Returns 0 for the zero element and for a nonsquare-free `d` where a
+    nonzero integer solution of `A^2 = d B^2` may exist.
+    """
+    S = sqrt_upper(d) if S is None else S
+    a, b = int(a), int(b)
+    if a == 0 and b == 0:
+        return F(0)
+    norm = a * a - int(d) * b * b
+    if norm == 0:
+        return F(0)                      # only for a non-square-free d; conservative
+    return F(1, abs(a) + abs(b) * S)
+
+
+def positive_lower_bound(x, scale, S=None):
+    """A positive rational `l` with `x/scale >= l > 0`, or None if not provable.
+
+    `x` must be an integral `Quad` (the sort a caller produces by multiplying a
+    residual by a common denominator) and `scale` a positive integer.  Returns None
+    when `x` is not integral, not positive, or not a `Quad` — the caller treats None as
+    "no opinion", never as a refutation.
+    """
+    if not isinstance(x, Quad):
+        return None
+    a, b = x.a, x.b
+    if a.denominator != 1 or b.denominator != 1:
+        return None
+    A, B = a.numerator, b.numerator
+    if integral_sign(A, B, x.d) <= 0:
+        return None
+    return abs_lower_bound(A, B, x.d, S) / F(scale)
 
 
 # --------------------------------------------------------------- float audit

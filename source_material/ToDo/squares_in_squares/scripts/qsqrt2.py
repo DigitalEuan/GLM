@@ -198,7 +198,7 @@ def gate(state, words, cls=None):
                     best = slack
             if best == 0:
                 contacts += 1
-            if best.sign() < 0:
+            if best < cls(0):          # a comparison, so a plain `Fraction` also gates
                 violations += 1
             if worst is None or best < worst:
                 worst = best

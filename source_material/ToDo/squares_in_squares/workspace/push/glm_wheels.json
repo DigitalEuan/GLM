@@ -3216,7 +3216,7 @@
   }
  },
  "audit": {
-  "checked": 185,
+  "checked": 197,
   "offenders": [],
   "exempt": [
    "selftest"
