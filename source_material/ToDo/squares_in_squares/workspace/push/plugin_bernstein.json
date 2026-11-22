@@ -1,0 +1,47 @@
+{
+ "slide": {
+  "pair": [
+   0,
+   1
+  ],
+  "axis": [
+   "-1/2\u221a2",
+   "1/2\u221a2"
+  ],
+  "d0": "1",
+  "d1": "1",
+  "need": "1",
+  "certified": true,
+  "splits": 1,
+  "lo": "5/4",
+  "nodes_min": "5/4",
+  "refused": {
+   "certified": false,
+   "sign": 0
+  },
+  "endpoints": [
+   [
+    "1/2",
+    "1/2"
+   ],
+   [
+    "1",
+    "1"
+   ]
+  ],
+  "endpoints_ok": true
+ },
+ "cage": {
+  "cells": 149,
+  "capacity": 1,
+  "empty": false,
+  "extent_u": "5/8",
+  "extent_v": "3/4",
+  "chord_span": "1/12 + 11/48\u221a7",
+  "bernstein_u_short": true,
+  "bernstein_v_short": true,
+  "bernstein_chord_short": true,
+  "agree": true,
+  "L": "23/2 + 1/2\u221a7"
+ }
+}

@@ -46,6 +46,8 @@ getcontext().prec = 70
 __all__ = [
     "Scal", "Z", "Q", "Quad", "tword", "tpoint", "is_squarefree",
     "sqrt_decimal", "recover_scalar", "no_float_calls", "audit", "DISPLAY_ONLY",
+    "bernstein_coeffs", "bernstein_enclosure", "bernstein_quadratic",
+    "bernstein_nodes", "norm_residue", "residue_norm_filter",
 ]
 
 
@@ -134,6 +136,19 @@ class Q(Scal, F):
         if isinstance(x, int):
             return Q(x)
         return NotImplemented
+
+    def _diff(self, o):
+        """Comparison difference, re-wrapped in `Q`.
+
+        `Fraction.__sub__` returns a plain `Fraction`, which has no `sign()`, so the
+        mixin's `self - o` would break every `Q` comparison.  Re-wrapping keeps the
+        tower's promise -- `sign()` decides ordering for every scalar -- true for the
+        rational rung as well, not just for `Quad`.
+        """
+        o = self._coerce(o)
+        if o is NotImplemented:
+            raise TypeError(f"cannot compare Q with {type(o)!r}")
+        return Q(F.__sub__(self, o))
 
     def __eq__(self, o):
         if isinstance(o, REFUSED):
@@ -395,6 +410,209 @@ def recover_scalar(x, cls, dens=None, bmax=8, tol=None):
         if best is not None and (best[1] - tol).sign() <= 0:
             return best[0]
     return None
+
+
+# ------------------------------------------------- exact plugin 1: Bernstein (run 100)
+#: A polynomial given in the power basis is enclosed by its **Bernstein
+#: coefficients** on an interval: on `[a, b]` every point is `x = a + t(b-a)` with
+#: `t in [0, 1]`, the Bernstein basis `B_k^n(t) = C(n,k) t^k (1-t)^(n-k)` is a
+#: partition of unity with nonnegative weights, so
+#:
+#:     p(x) = sum_k c_k B_k^n(t)   =>   min_k c_k  <=  p(x)  <=  max_k c_k .
+#:
+#: The coefficients are an exact basis change (`+`, `*`, and division by integers),
+#: so a sign question about a whole interval becomes one finite comparison: this is
+#: a *sound* enclosure, not a sample.  It is deliberately incomplete: a polynomial
+#: can be positive on the interval while its Bernstein enclosure straddles zero
+#: (`1 - 3t(1-t)` is the standard example), and then the plugin says "not
+#: certified" rather than guessing.  Subdividing is the exact refinement -- each
+#: half is another one-pass enclosure -- and the enclosure converges to the range.
+#: Nothing here names a float; the audit checks that like every other decision.
+def _wrap_like(proto, v):
+    """Re-wrap an arithmetic result in `proto`'s scalar class (`Q` absorbs to `Q`)."""
+    if isinstance(proto, Quad):
+        return type(proto)(v.a, v.b)
+    return Q(v)
+
+
+def _zero_like(proto):
+    return type(proto)(0) if isinstance(proto, Quad) else Q(0)
+
+
+def bernstein_coeffs(poly, a, b):
+    """Power-basis `poly` -> Bernstein coefficients on `[a, b]`, exactly.
+
+    `poly = [p0, p1, ..., pn]` means `p(x) = sum p_k x^k`, with `p_k`, `a`, `b` in the
+    same exact scalar class (`Q` or a `Quad(d)` subclass).  The two steps are
+
+      1. the affine substitution `x = a + h t` (`h = b - a`), by Horner in `t`;
+      2. the power -> Bernstein change of basis `c_k = sum_{j<=k} C(k,j)/C(n,j) b_j`.
+
+    Both are exact field operations plus integer binomials.  Returns the list of
+    `n + 1` Bernstein coefficients, in the same class as `a`.
+    """
+    if not poly:
+        raise ValueError("bernstein_coeffs needs at least one coefficient")
+    a = a if isinstance(a, Quad) else Q(a)
+    b = b if isinstance(b, Quad) else Q(b)
+    if isinstance(b, Quad) and not isinstance(a, Quad):
+        a = type(b)(a)                                 # promote Q into b's field
+    if isinstance(a, Quad) and isinstance(b, Quad) and a.d != b.d:
+        raise TypeError("a and b must lie in the same field")
+    poly = [p if isinstance(p, Quad) else Q(p) for p in poly]
+    n = len(poly) - 1
+    if n == 0:
+        return [poly[0]]
+    h = _wrap_like(a, b - a)
+    acc = [poly[n]]                                   # shifted coefficients b_j
+    for k in range(n - 1, -1, -1):
+        nxt = [_zero_like(a) for _ in range(len(acc) + 1)]
+        for j, c in enumerate(acc):
+            nxt[j] = _wrap_like(a, nxt[j] + _wrap_like(a, c * a))
+            nxt[j + 1] = _wrap_like(a, nxt[j + 1] + _wrap_like(a, c * h))
+        nxt[0] = _wrap_like(a, nxt[0] + poly[k])
+        acc = nxt
+    shifted = acc                                      # p(a + h t) = sum b_j t^j
+    out = []
+    for k in range(n + 1):
+        term = _zero_like(a)
+        for j in range(k + 1):
+            f = F(math.comb(k, j), math.comb(n, j))
+            if isinstance(shifted[j], Quad):
+                piece = type(shifted[j])(shifted[j].a * f, shifted[j].b * f)
+            else:
+                piece = Q(shifted[j] * f)
+            term = _wrap_like(a, term + piece)
+        out.append(term)
+    return out
+
+
+def bernstein_enclosure(poly, a, b, splits=1):
+    """The exact Bernstein enclosure of `poly` on `[a, b]` (optionally subdivided).
+
+    Returns a dict with the Bernstein `coeffs`, the bounds `lo <= p <= hi`, the
+    `sign` of the enclosure (`+1` iff `lo > 0`, `-1` iff `hi < 0`, `0` otherwise),
+    and `positive` / `negative` booleans.  `splits > 1` cuts `[a, b]` into `splits`
+    equal parts and takes the union of the per-part enclosures: still exact, still
+    one Bernstein pass per part, and strictly tighter.
+    """
+    a = a if isinstance(a, Quad) else Q(a)
+    b = b if isinstance(b, Quad) else Q(b)
+    if splits < 1:
+        raise ValueError("splits must be at least 1")
+    lo = hi = None
+    coeffs = []
+    for s in range(splits):
+        u = _wrap_like(a, a + _wrap_like(a, (b - a)) * Q(F(s, splits)))
+        v = _wrap_like(a, a + _wrap_like(a, (b - a)) * Q(F(s + 1, splits)))
+        c = bernstein_coeffs(poly, u, v)
+        coeffs.append(c)
+        for x in c:
+            if lo is None or x < lo:
+                lo = x
+            if hi is None or x > hi:
+                hi = x
+    sign = 0
+    if lo.sign() > 0:
+        sign = 1
+    elif hi.sign() < 0:
+        sign = -1
+    return {"coeffs": coeffs, "lo": lo, "hi": hi, "sign": sign,
+            "positive": sign > 0, "negative": sign < 0,
+            "degree": len(poly) - 1, "splits": splits}
+
+
+def bernstein_quadratic(c0, c1, need, a, b, splits=1):
+    """Enclose `q(t) = (c0 + c1 t)^2 - need^2` on `[a, b]` -- the separation form.
+
+    `q > 0` on the interval means `|c0 + c1 t| > need` for *every* `t`, i.e. the pair
+    is strictly separated along that axis throughout the slide -- one algebraic pass,
+    no sampling.  `q = 0` at an endpoint is the tangency boundary and the enclosure
+    correctly refuses to certify strict positivity there.
+    """
+    poly = [_wrap_like(c0, c0 * c0 - need * need),
+            _wrap_like(c0, c0 * c1 + c0 * c1),
+            _wrap_like(c0, c1 * c1)]
+    return bernstein_enclosure(poly, a, b, splits=splits)
+
+
+def bernstein_nodes(poly, a, b, steps=8):
+    """The exact *staircase* witness: `p` at `steps + 1` equally spaced nodes.
+
+    Every node lies inside the enclosure (`lo <= p(node) <= hi`) because the enclosure
+    is sound; a sign that all nodes share is a second, independent finite witness.  The
+    two are not the same instrument: the enclosure bounds the continuum, the staircase
+    checks it, and disagreement in either direction is a bug in one of them.
+    """
+    if steps < 1:
+        raise ValueError("steps must be at least 1")
+    a = a if isinstance(a, Quad) else Q(a)
+    b = b if isinstance(b, Quad) else Q(b)
+    h = _wrap_like(a, b - a)
+    vals = []
+    for k in range(steps + 1):
+        x = _wrap_like(a, a + _wrap_like(a, h * Q(F(k, steps))))
+        acc = _zero_like(a)                            # Horner, exact
+        for c in reversed(poly):
+            acc = _wrap_like(a, _wrap_like(a, acc * x) + (c if isinstance(c, Quad) else Q(c)))
+        vals.append(acc)
+    lo = hi = vals[0]
+    for v in vals[1:]:
+        if v < lo:
+            lo = v
+        if v > hi:
+            hi = v
+    return {"values": vals, "min": lo, "max": hi, "steps": steps}
+
+
+# ------------------------------------------- exact plugin 2: residue mask (run 100)
+#: For an exact `Quad` element `x = A + B sqrt(d)` the **field norm** is the rational
+#: `N(x) = A^2 - d B^2`, and `x = 0` implies `N(x) = 0`.  Reducing modulo `m` therefore
+#: gives a *one-sided* test: a nonzero norm residue proves `x != 0`, while a zero one
+#: proves nothing (the norm can vanish mod `m` for a nonzero element).  That asymmetry
+#: is the whole design -- the mask can only ever reject, never accept -- so a pipeline
+#: that puts it in front of the exact test is sound by construction and its speed is
+#: bought with abstentions, not with tolerance.
+def norm_residue(x, mod):
+    """`(A^2 - d B^2) mod m` of an *integral* `Quad` element, or `None` if not integral."""
+    if not isinstance(x, Quad):
+        x = Q(x)
+        if x.denominator != 1:
+            return None
+        return (x.numerator * x.numerator) % mod
+    if x.a.denominator != 1 or x.b.denominator != 1:
+        return None
+    A, B = x.a.numerator, x.b.numerator
+    return (A * A - x.d * B * B) % mod
+
+
+def residue_norm_filter(cls, elements, mods=(8, 12, 24)):
+    """The quadratic-norm residue mask for a list of exact `Quad(d)` residuals.
+
+    Each element is meant to be an integer-scaled residual (`A + B sqrt d` with
+    `A, B` in `Z`), the sort a caller produces by multiplying a tangency residual by a
+    common denominator.  For every modulus the result records the residues, which
+    indices are zero, whether the whole list is `all_nonzero` (so every residual is
+    provably nonzero), and whether the reduction had to `abstain` because some
+    component was not an integer.  `all_nonzero` is the *only* field a caller may act
+    on; it is a proof, whereas `zeros` is merely the absence of one.
+    """
+    out = {}
+    for mod in mods:
+        residues, zeros = [], []
+        abstain = False
+        for i, x in enumerate(elements):
+            r = norm_residue(x, mod)
+            if r is None:
+                abstain = True
+                break
+            residues.append(r)
+            if r == 0:
+                zeros.append(i)
+        out[mod] = {"residues": residues, "zeros": zeros,
+                    "all_nonzero": bool(residues) and not abstain and not zeros,
+                    "abstain": abstain, "checked": len(residues)}
+    return out
 
 
 # --------------------------------------------------------------- float audit

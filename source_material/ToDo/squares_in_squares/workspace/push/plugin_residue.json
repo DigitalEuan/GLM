@@ -1,0 +1,209 @@
+{
+ "rows": [
+  {
+   "pairs": 266,
+   "contacts": 172,
+   "den": 4,
+   "t_mask_ns": 8941462,
+   "t_exact_ns": 78685005,
+   "8": {
+    "rejected": 70,
+    "survivors": 196,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 172,
+    "t_mixed_ns": 54194560,
+    "t_pipeline_ns": 63136022,
+    "speedup": "78685005/63136022"
+   },
+   "12": {
+    "rejected": 70,
+    "survivors": 196,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 172,
+    "t_mixed_ns": 54160675,
+    "t_pipeline_ns": 63102137,
+    "speedup": "11240715/9014591"
+   },
+   "24": {
+    "rejected": 70,
+    "survivors": 196,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 172,
+    "t_mixed_ns": 53744104,
+    "t_pipeline_ns": 62685566,
+    "speedup": "78685005/62685566"
+   },
+   "cell": "Block45(5,4)",
+   "gate_contacts": 172,
+   "gate_ok": true,
+   "contacts_match": true
+  },
+  {
+   "pairs": 1102,
+   "contacts": 794,
+   "den": 2,
+   "t_mask_ns": 38136268,
+   "t_exact_ns": 311225294,
+   "8": {
+    "rejected": 252,
+    "survivors": 850,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 794,
+    "t_mixed_ns": 236158009,
+    "t_pipeline_ns": 274294277,
+    "speedup": "311225294/274294277"
+   },
+   "12": {
+    "rejected": 252,
+    "survivors": 850,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 794,
+    "t_mixed_ns": 233113204,
+    "t_pipeline_ns": 271249472,
+    "speedup": "155612647/135624736"
+   },
+   "24": {
+    "rejected": 252,
+    "survivors": 850,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 794,
+    "t_mixed_ns": 232081568,
+    "t_pipeline_ns": 270217836,
+    "speedup": "155612647/135108918"
+   },
+   "cell": "Block45(10,8)",
+   "gate_contacts": 794,
+   "gate_ok": true,
+   "contacts_match": true
+  },
+  {
+   "pairs": 182,
+   "contacts": 112,
+   "den": 4,
+   "t_mask_ns": 6076455,
+   "t_exact_ns": 49325901,
+   "8": {
+    "rejected": 70,
+    "survivors": 112,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 112,
+    "t_mixed_ns": 29968609,
+    "t_pipeline_ns": 36045064,
+    "speedup": "49325901/36045064"
+   },
+   "12": {
+    "rejected": 70,
+    "survivors": 112,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 112,
+    "t_mixed_ns": 29792479,
+    "t_pipeline_ns": 35868934,
+    "speedup": "49325901/35868934"
+   },
+   "24": {
+    "rejected": 70,
+    "survivors": 112,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 112,
+    "t_mixed_ns": 30614391,
+    "t_pipeline_ns": 36690846,
+    "speedup": "16441967/12230282"
+   },
+   "cell": "Block45Half(5,4)",
+   "gate_contacts": 112,
+   "gate_ok": true,
+   "contacts_match": true
+  },
+  {
+   "pairs": 2978,
+   "contacts": 2256,
+   "den": 4,
+   "t_mask_ns": 104441098,
+   "t_exact_ns": 813835511,
+   "8": {
+    "rejected": 722,
+    "survivors": 2256,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 2256,
+    "t_mixed_ns": 607247903,
+    "t_pipeline_ns": 711689001,
+    "speedup": "813835511/711689001"
+   },
+   "12": {
+    "rejected": 722,
+    "survivors": 2256,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 2256,
+    "t_mixed_ns": 618443727,
+    "t_pipeline_ns": 722884825,
+    "speedup": "813835511/722884825"
+   },
+   "24": {
+    "rejected": 722,
+    "survivors": 2256,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 2256,
+    "t_mixed_ns": 610643508,
+    "t_pipeline_ns": 715084606,
+    "speedup": "813835511/715084606"
+   },
+   "cell": "Block45Half(17,14)",
+   "gate_contacts": 2256,
+   "gate_ok": true,
+   "contacts_match": true
+  },
+  {
+   "pairs": 342,
+   "contacts": 90,
+   "den": 2,
+   "t_mask_ns": 11090716,
+   "t_exact_ns": 89459619,
+   "8": {
+    "rejected": 90,
+    "survivors": 252,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 90,
+    "t_mixed_ns": 66512738,
+    "t_pipeline_ns": 77603454,
+    "speedup": "29819873/25867818"
+   },
+   "12": {
+    "rejected": 90,
+    "survivors": 252,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 90,
+    "t_mixed_ns": 66462775,
+    "t_pipeline_ns": 77553491,
+    "speedup": "89459619/77553491"
+   },
+   "24": {
+    "rejected": 90,
+    "survivors": 252,
+    "false_rejects": 0,
+    "abstained": 0,
+    "contacts_masked": 90,
+    "t_mixed_ns": 66562302,
+    "t_pipeline_ns": 77653018,
+    "speedup": "89459619/77653018"
+   },
+   "cell": "Lattice(3/2,1) [synthetic sparse]",
+   "gate_contacts": 90,
+   "gate_ok": true,
+   "contacts_match": true
+  }
+ ]
+}

@@ -1190,6 +1190,383 @@ def block45half_calibrate(s=17, rows=(677, 785, 901)):
     return out
 
 
+# ------------------------------------------------------- exact plugins (run 100)
+#: Two composable stages in front of the gate, both **sound and deliberately
+#: incomplete**.  The Bernstein stage certifies a sign it can prove on a whole
+#: interval; the residue stage rejects a tangency it can disprove modulo a small
+#: integer.  Neither decides a packing -- the exact gate keeps that job -- and each
+#: one's blindness is documented rather than assumed (doc 63).
+
+def _separation_poly(cls, d0, d1, need):
+    """`q(t) = (d0 + d1 t)^2 - need^2` in the power basis."""
+    return [d0 * d0 - need * need, d0 * d1 + d0 * d1, d1 * d1]
+
+
+def bernstein_axis_certificate(cls, d0, d1, need, a, b, steps=8, refine=4):
+    """Certify `|d0 + t d1| > need` for every `t` in `[a, b]`, exactly.
+
+    One Bernstein pass on `q(t) = (d0 + d1 t)^2 - need^2` bounds the whole interval; if
+    the bound straddles zero the pass is repeated on `2, 4, ...` subintervals up to
+    `refine` -- exact refinement, not sampling.  The `steps + 1` exact node values are
+    the independent staircase witness: every node must lie inside the winning
+    enclosure, and the node sign must agree with the certificate.
+    """
+    poly = _separation_poly(cls, d0, d1, need)
+    sp = 1
+    while True:
+        enc = EF.bernstein_enclosure(poly, a, b, splits=sp)
+        if enc["positive"] or sp >= refine:
+            break
+        sp *= 2
+    nodes = EF.bernstein_nodes(poly, a, b, steps)
+    inside = all(enc["lo"] <= v and v <= enc["hi"] for v in nodes["values"])
+    return {"enclosure": enc, "nodes": nodes, "splits": sp,
+            "certified": enc["positive"], "inside": inside,
+            "agree": bool(inside and (nodes["min"].sign() > 0) == enc["positive"])}
+
+
+def bernstein_pair_slide(cls, state, words, i, j, axis, vel, a, b,
+                         steps=8, refine=4):
+    """One SAT axis of a pair that slides with velocity `vel`, over `a <= t <= b`."""
+    dx = state[j][0] - state[i][0]
+    dy = state[j][1] - state[i][1]
+    d0 = dx * axis[0] + dy * axis[1]
+    d1 = vel[0] * axis[0] + vel[1] * axis[1]
+    need = cls(F(1, 2)) + Q.axis_extent(words[j][0], words[j][1],
+                                        axis[0], axis[1], cls)
+    out = bernstein_axis_certificate(cls, d0, d1, need, a, b, steps=steps, refine=refine)
+    out.update({"d0": d0, "d1": d1, "need": need})
+    return out
+
+
+def bernstein_interval_certificate(cls, extent, need=None, steps=8):
+    """Certify `d^2 - need^2 < 0` on `[-extent, extent]`: the interval is too short.
+
+    This is the exact statement a cage or a chord makes -- `extent < need` -- written
+    as a polynomial enclosure, so the two instruments can be compared as witnesses
+    rather than taken on trust.  For a quadratic the enclosure is exact, which is why
+    `same_verdict` is a theorem here and not a hope.
+    """
+    need = cls(1) if need is None else need
+    e = abs(extent)
+    poly = [-(need * need), cls(0), cls(1)]
+    enc = EF.bernstein_enclosure(poly, -e, e)
+    nodes = EF.bernstein_nodes(poly, -e, e, steps)
+    return {"extent": e, "need": need, "enclosure": enc, "nodes": nodes,
+            "short": enc["sign"] < 0,
+            "same_verdict": (enc["sign"] < 0) == (e < need)}
+
+
+def bernstein_cage_crosscheck(cls, c, s, cells, words, L, blocks=16):
+    """Bernstein against the cage's and the chord's interval witnesses, same sentence."""
+    cage = staircase_cage(cls, c, s, cells, words, L,
+                          hint=(cells[-1][0], cells[-1][1]))
+    out = {"cells": len(cells), "capacity": cage["capacity"], "empty": cage["empty"]}
+    if cage["empty"]:
+        return out
+    bu = bernstein_interval_certificate(cls, cage["extent_u"])
+    bv = bernstein_interval_certificate(cls, cage["extent_v"])
+    one = cls(1)
+    ext_short = (cage["extent_u"] < one) and (cage["extent_v"] < one)
+    try:
+        ch = staircase_chords(cls, c, s, cells, words, blocks=blocks,
+                              window=cage["window"])
+    except Refusal as e:
+        # the chord's own refusal IS its verdict: the free span reaches 1
+        if e.law != "pair_not_excluded":
+            raise
+        chord_short, chord_verdict, span = False, True, None
+        out["chord_reaches_one"] = True
+    else:
+        bc = bernstein_interval_certificate(cls, ch["max_chord"])
+        chord_short, chord_verdict, span = bc["short"], bc["same_verdict"], str(ch["max_chord"])
+    out.update({"extent_u": str(cage["extent_u"]),
+                "extent_v": str(cage["extent_v"]),
+                "chord_span": span,
+                "bernstein_u_short": bu["short"],
+                "bernstein_v_short": bv["short"],
+                "bernstein_chord_short": chord_short,
+                "agree": bool(bu["same_verdict"] and bv["same_verdict"]
+                              and chord_verdict
+                              and chord_short == ext_short
+                              and (cage["capacity"] == 1) == ext_short)})
+    return out
+
+
+def plugin_bernstein_demo(s=5, k=4, steps=8):
+    """The plugin's whole use on one certified sentence: a contact pair, slid apart.
+
+    The pair is picked by the exact gate (best slack exactly 0), the slide direction is
+    the tight axis with its sign, and the certificate is asked on `[1/2, 1]` (where the
+    quadratic is positive throughout) and on `[-1, 1]` (where it is not).  The gate's
+    own pair test is then run at both endpoints of the first interval: the certificate
+    says "separated for all t", the gate says "separated at t = 1/2 and t = 1", and
+    the two must agree.
+    """
+    cls = qfield(2)
+    claim = p_block45(s, k)
+    cells = claim.payload["state"]
+    words = claim.payload["words"]
+    half = cls(F(1, 2))
+    found = None
+    for i in range(len(cells)):
+        for j in range(i + 1, len(cells)):
+            for axis, slack, _need, _owner in Q.pair_axes(cells, words, i, j, cls):
+                if slack == 0:
+                    found = (i, j, axis)
+                    break
+            if found:
+                break
+        if found:
+            break
+    if found is None:
+        raise Refusal("no_contact_pair", f"Block45({s}, {k}) has no tight pair")
+    i, j, axis = found
+    dx = cells[j][0] - cells[i][0]
+    dy = cells[j][1] - cells[i][1]
+    sgn = 1 if (dx * axis[0] + dy * axis[1]).sign() > 0 else -1
+    vel = (axis[0] * sgn, axis[1] * sgn)
+    good = bernstein_pair_slide(cls, cells, words, i, j, axis, vel, half, cls(1),
+                                steps=steps)
+    bad = bernstein_pair_slide(cls, cells, words, i, j, axis, vel, cls(-1), cls(1),
+                               steps=steps)
+    ends = []
+    for t in (half, cls(1)):
+        moved = list(cells)
+        moved[j] = (cells[j][0] + vel[0] * t, cells[j][1] + vel[1] * t)
+        best = max(sl for _q, sl, _n, _o in Q.pair_axes(moved, words, i, j, cls))
+        ends.append((t, best))
+    return {"pair": (i, j), "axis": tuple(str(z) for z in axis),
+            "d0": str(good["d0"]), "d1": str(good["d1"]),
+            "need": str(good["need"]), "certified": good["certified"],
+            "splits": good["splits"], "lo": str(good["enclosure"]["lo"]),
+            "nodes_min": str(good["nodes"]["min"]),
+            "refused": {"certified": bad["certified"],
+                        "sign": bad["enclosure"]["sign"]},
+            "endpoints": [(str(t), str(b)) for t, b in ends],
+            "endpoints_ok": all(b.sign() > 0 for _t, b in ends)}
+
+
+def plugin_bernstein_cage(k=5, blocks=16):
+    """The run-95/96 witness, re-read by the plugin: census word, 149-square staircase."""
+    cls = qfield(7)
+    c, s = _sqrt7_word()
+    u = cls(F(-1357, 128), F(211, 128))
+    decl = staircase_field(cls, c, s, k, u)
+    cells, words = decl["cells"], decl["words"]
+    L = Q.gate(cells, words, cls)["L"]
+    out = bernstein_cage_crosscheck(cls, c, s, cells, words, L, blocks=blocks)
+    out["L"] = str(L)
+    return out
+
+
+def _ab(z):
+    """The rational pair of an exact scalar (`a + b sqrt d`, or `a` for a rational)."""
+    return (z.a, z.b) if isinstance(z, EF.Quad) else (F(z), F(0))
+
+
+def residue_common_den(state, words):
+    """An even common denominator for every coordinate and word component."""
+    den = 2
+    for p in state:
+        for z in p:
+            a, b = _ab(z)
+            den = den * a.denominator // math.gcd(den, a.denominator)
+            den = den * b.denominator // math.gcd(den, b.denominator)
+    for w in words:
+        for z in w:
+            a, b = _ab(z)
+            den = den * a.denominator // math.gcd(den, a.denominator)
+            den = den * b.denominator // math.gcd(den, b.denominator)
+    return den
+
+
+def _scale_cell(cls, z, D):
+    """`D` times an exact coordinate, as an integer component pair of Z[√d]."""
+    a, b = _ab(z)
+    return (int(a * D), int(b * D))
+
+
+def _zsign(a, b, d):
+    """The exact sign of `a + b sqrt d` on integer components (same rule as `Quad`)."""
+    if a == 0:
+        return (b > 0) - (b < 0)
+    if b == 0:
+        return (a > 0) - (a < 0)
+    if a > 0 and b > 0:
+        return 1
+    if a < 0 and b < 0:
+        return -1
+    if a > 0:
+        return 1 if a * a > d * b * b else -1
+    return 1 if d * b * b > a * a else -1
+
+
+def _zmul(u, v, d):
+    """(a + b r)(c + e r) in Z[r], integer components."""
+    a, b = u
+    c, e = v
+    return (a * c + d * b * e, a * e + b * c)
+
+
+def _zadd(u, v):
+    return (u[0] + v[0], u[1] + v[1])
+
+
+def _zsub(u, v):
+    return (u[0] - v[0], u[1] - v[1])
+
+
+def _zabs(u, d):
+    return u if _zsign(u[0], u[1], d) >= 0 else (-u[0], -u[1])
+
+
+def pair_tangency_residuals(cls, PX, PY, WX, WY, i, j, D):
+    """The eight primitive tangency residuals of a pair, as integral `Quad`s.
+
+    A tangency on `axis` means `|delta . axis| = need` with `need = 1/2 +
+    extent(other, axis)`, so one of the two signed residuals is exactly zero.  Scaling
+    by `2 D^2` makes every component an integer, which is what makes the modular
+    reduction legal.  That scaling alone would make the mask vacuous -- every residual
+    would be divisible by a power of `D` -- so each residual is divided by its own
+    integer content `gcd(|A|, |B|)`.  That is a scaling by a nonzero rational, and a
+    scaling cannot change the zero set, so the mask stays sound while the residues
+    become informative.  All of it is integer arithmetic in `Z[sqrt d]`; no `Quad`
+    multiplication is involved, which is where the speed comes from.
+    """
+    d = cls.d
+    dx = (PX[j][0] - PX[i][0], PX[j][1] - PX[i][1])
+    dy = (PY[j][0] - PY[i][0], PY[j][1] - PY[i][1])
+    d2 = (D * D, 0)
+    raw = []
+    for owner, other in ((i, j), (j, i)):
+        c, s = WX[owner], WY[owner]
+        oc, os_ = WX[other], WY[other]
+        for qx, qy in ((c, s), ((-s[0], -s[1]), c)):
+            proj = _zadd(_zmul(dx, qx, d), _zmul(dy, qy, d))
+            u1 = _zabs(_zadd(_zmul(oc, qx, d), _zmul(os_, qy, d)), d)
+            u2 = _zabs(_zsub(_zmul(oc, qy, d), _zmul(os_, qx, d)), d)
+            need_s = _zadd(_zadd(d2, u1), u2)
+            two = (2 * proj[0], 2 * proj[1])
+            raw.append(_zsub(two, need_s))
+            raw.append((-(two[0]) - need_s[0], -(two[1]) - need_s[1]))
+    out = []
+    for A, B in raw:
+        g = math.gcd(abs(A), abs(B))
+        out.append(cls(A // g, B // g) if g else cls(0, 0))
+    return out
+
+
+def residue_pair_screen(state, words, cls=None, mods=(8, 12, 24)):
+    """The norm mask over every candidate pair, against the exact four-axis test.
+
+    Three timed passes -- the mask alone, the exact test alone, and the pipeline (mask,
+    then the exact test only on the survivors) -- each modulus's own pipeline being
+    timed separately.  A rejected pair is **not** skipped for overlap: the mask only
+    proves "not exactly tangent", which is exactly what a contact/declaration stage
+    needs, and claiming more would be unsound.  Timings are `perf_counter_ns`
+    integers, so even the benchmark is float-free.
+    """
+    cls = cls or Q.field_of(state)
+    D = residue_common_den(state, words)
+    PX = [_scale_cell(cls, p[0], D) for p in state]
+    PY = [_scale_cell(cls, p[1], D) for p in state]
+    WX = [_scale_cell(cls, w[0], D) for w in words]
+    WY = [_scale_cell(cls, w[1], D) for w in words]
+    two = cls(2)
+    pairs = []
+    for i in range(len(state)):
+        xi, yi = state[i]
+        for j in range(i + 1, len(state)):
+            if abs(state[j][0] - xi) >= two or abs(state[j][1] - yi) >= two:
+                continue
+            pairs.append((i, j))
+    t0 = time.perf_counter_ns()
+    masks = [EF.residue_norm_filter(
+        cls, pair_tangency_residuals(cls, PX, PY, WX, WY, i, j, D), mods)
+        for i, j in pairs]
+    t_mask = time.perf_counter_ns() - t0
+    t0 = time.perf_counter_ns()
+    exact = []
+    for i, j in pairs:
+        exact.append(max(sl for _q, sl, _n, _o in Q.pair_axes(state, words, i, j, cls)))
+    t_exact = time.perf_counter_ns() - t0
+    contacts = sum(1 for b in exact if b == 0)
+    out = {"pairs": len(pairs), "contacts": contacts, "den": D,
+           "t_mask_ns": t_mask, "t_exact_ns": t_exact, "mods": list(mods)}
+    for mod in mods:
+        rej = [k for k, m in enumerate(masks) if m[mod]["all_nonzero"]]
+        rej_set = set(rej)
+        t0 = time.perf_counter_ns()
+        kept = 0
+        for k, (i, j) in enumerate(pairs):
+            if k in rej_set:
+                continue
+            best = max(sl for _q, sl, _n, _o in Q.pair_axes(state, words, i, j, cls))
+            if best == 0:
+                kept += 1
+        t_mixed = time.perf_counter_ns() - t0
+        out[mod] = {"rejected": len(rej),
+                    "survivors": len(pairs) - len(rej),
+                    "false_rejects": sum(1 for k in rej if exact[k] == 0),
+                    "abstained": sum(1 for m in masks if m[mod]["abstain"]),
+                    "contacts_masked": kept,
+                    "t_mixed_ns": t_mixed,
+                    "t_pipeline_ns": t_mask + t_mixed,
+                    # the mask is part of the pipeline, so its cost is in the denominator
+                    "speedup": (F(t_exact, t_mask + t_mixed)
+                                if t_mask + t_mixed else F(0))}
+    return out
+
+
+def _ratio_str(fr):
+    """A rational to two decimal places, exactly -- the print path stays float-free."""
+    h = fr * 100                      # in units of 0.01
+    q = h.numerator // h.denominator  # truncate, exactly
+    return f"{q // 100}.{q % 100:02d}"
+
+
+def _lattice_sentence(nx=10, ny=10):
+    """A synthetic sparse sentence: a 3/2 x 1 lattice of axis squares, gate-certified.
+
+    Columns touch (`|dy| = 1`) and rows are half a unit apart (`|dx| = 3/2`), so the
+    candidate set is large and the contact set is only the vertical chains.  This is
+    the mask's *best* case and is labelled synthetic wherever it is reported: the four
+    certified wheel cells above are contact-dense and are the mask's worst case.
+    """
+    cls = qfield(2)
+    cells, words = [], []
+    for i in range(nx):
+        for j in range(ny):
+            cells.append((cls(F(3 * i, 2) + F(1, 2)), cls(j + F(1, 2))))
+            words.append((cls(1), cls(0)))
+    return cells, words
+
+
+def residue_benchmark(mods=(8, 12, 24)):
+    """The residue stage over the certified cells: contacts, rejections, speedups."""
+    rows = []
+    builders = [("Block45(5,4)", lambda: p_block45(5, 4)),
+                ("Block45(10,8)", lambda: p_block45(10, 8)),
+                ("Block45Half(5,4)", lambda: p_block45half(5, 4)),
+                ("Block45Half(17,14)", lambda: p_block45half(17, 14))]
+    todo = []
+    for name, build in builders:
+        claim = build()
+        todo.append((name, claim.payload["state"], claim.payload["words"]))
+    st, wo = _lattice_sentence()
+    todo.append(("Lattice(3/2,1) [synthetic sparse]", st, wo))
+    for name, state, words in todo:
+        cls = Q.field_of(state)
+        scr = residue_pair_screen(state, words, cls, mods=mods)
+        gate = Q.gate(state, words, cls)
+        scr.update({"cell": name, "gate_contacts": gate["contacts"],
+                    "gate_ok": gate["ok"],
+                    "contacts_match": gate["contacts"] == scr["contacts"]})
+        rows.append(scr)
+    return rows
+
+
 # ------------------------------------------------- the two-word seam (run 97)
 #: A two-word sentence is not a new engine: the gate already carries one word per
 #: square (`Q.gate(state, words, cls)`), so what was missing is a *builder* whose
@@ -4562,6 +4939,109 @@ def selftest() -> int:
         "is not met by any certified half-integer sentence: the side matches exactly at "
         "all three, the count is short twice and infeasible the third time.  No row moves.")
 
+    # ------------------------ control 31: the two composable exact plugins (run 100)
+    # (a) the rational rung can now compare (Fraction arithmetic used to drop the
+    #     subclass and the mixin's sign test went with it)
+    assert EF.Q(1) < EF.Q(2) and EF.Q(3) >= EF.Q(3) and not (EF.Q(2) < EF.Q(1))
+    # (b) Bernstein is an exact basis change and a *sound* enclosure
+    assert EF.bernstein_coeffs([0, 0, 1], EF.Q(0), EF.Q(1)) == [EF.Q(0), EF.Q(0), EF.Q(1)]
+    assert EF.bernstein_coeffs([0, 0, 1], EF.Q(0), EF.Q(2)) == [EF.Q(0), EF.Q(0), EF.Q(4)]
+    enc = EF.bernstein_enclosure([1, 0, 1], EF.Q(-1), EF.Q(1))
+    assert enc["lo"] == 0 and enc["hi"] == 2 and enc["sign"] == 0   # sound, not tight
+    enc2 = EF.bernstein_enclosure([1, 0, 1], EF.Q(-1), EF.Q(1), splits=2)
+    assert enc2["sign"] == 1 and enc2["lo"] == 1
+    # a positive convex quadratic the coarse pass cannot certify, and refinement can
+    poly = [EF.Q(F(1, 4)) + EF.Q(F(1, 100)), EF.Q(-1), EF.Q(1)]
+    assert EF.bernstein_enclosure(poly, EF.Q(0), EF.Q(1))["sign"] == 0
+    assert EF.bernstein_enclosure(poly, EF.Q(0), EF.Q(1), splits=2)["sign"] == 1
+    for sp in (1, 2, 4):
+        e = EF.bernstein_enclosure(poly, EF.Q(0), EF.Q(1), splits=sp)
+        nd = EF.bernstein_nodes(poly, EF.Q(0), EF.Q(1), 8)
+        assert all(e["lo"] <= v and v <= e["hi"] for v in nd["values"]), sp
+    # (c) the separation certificate on a real sentence, with the gate at the endpoints
+    demo = plugin_bernstein_demo(5, 4)
+    assert demo["certified"] is True and demo["endpoints_ok"] is True, demo
+    assert demo["refused"]["certified"] is False, demo
+    # (d) the cage/chord interval witness and the Bernstein certificate agree
+    c65p = p_block45(5, 4)
+    chk = bernstein_cage_crosscheck(cls2, Q.word_45()[0], Q.word_45()[1],
+                                    c65p.payload["state"], c65p.payload["words"],
+                                    c65p.measure[1])
+    assert chk["agree"] is True, chk
+    # (e) the residue mask: sound, non-vacuous, and honest about what it cannot see
+    scr = residue_pair_screen(c65p.payload["state"], c65p.payload["words"], cls2)
+    assert scr["contacts"] > 0
+    for mod in (8, 12, 24):
+        assert scr[mod]["contacts_masked"] == scr["contacts"], (mod, "a contact was masked")
+        assert scr[mod]["false_rejects"] == 0, (mod, scr[mod])
+        assert scr[mod]["survivors"] + scr[mod]["rejected"] == scr["pairs"]
+        assert scr[mod]["rejected"] > 0, (mod, "the mask must reject something")
+        assert scr[mod]["survivors"] >= scr["contacts"]
+    # the mask tests a necessary condition: a loose pair with one tight axis survives
+    assert scr[8]["survivors"] - scr["contacts"] == 24, scr[8]
+    # and on the half cells there are no such pairs, so the survivors are the contacts
+    ch = p_block45half(5, 4)
+    scrh = residue_pair_screen(ch.payload["state"], ch.payload["words"], cls2)
+    for mod in (8, 12, 24):
+        assert scrh[mod]["survivors"] == scrh["contacts"] == scrh[mod]["contacts_masked"]
+        assert scrh[mod]["false_rejects"] == 0
+    # and a true tangency is never rejected by the plugin itself: its residual is zero,
+    # so its norm residue is zero at every modulus; a rejected pair has none
+    D = residue_common_den(c65p.payload["state"], c65p.payload["words"])
+    PX = [_scale_cell(cls2, p[0], D) for p in c65p.payload["state"]]
+    PY = [_scale_cell(cls2, p[1], D) for p in c65p.payload["state"]]
+    WX = [_scale_cell(cls2, w[0], D) for w in c65p.payload["words"]]
+    WY = [_scale_cell(cls2, w[1], D) for w in c65p.payload["words"]]
+    tight = []
+    for i in range(len(PX)):
+        for j in range(i + 1, len(PX)):
+            sl = max(s for _q, s, _n, _o in Q.pair_axes(c65p.payload["state"],
+                                                        c65p.payload["words"], i, j, cls2))
+            if sl == 0:
+                tight.append((i, j))
+    assert len(tight) == scr["contacts"] == 172, (len(tight), scr["contacts"])
+    for i, j in tight[:3]:
+        mask = EF.residue_norm_filter(cls2, pair_tangency_residuals(cls2, PX, PY, WX, WY, i, j, D))
+        for mod in (8, 12, 24):
+            assert mask[mod]["all_nonzero"] is False and mask[mod]["zeros"], mod
+    assert scr[8]["rejected"] == 70 and scr[8]["survivors"] == 196, scr[8]
+    say("control 31 -- two composable exact plugins, each sound and each incomplete in a "
+        "way that is stated, not assumed.  (1) Bernstein: on [a, b] every point is "
+        "a + t(b-a), the Bernstein basis is a partition of unity, so p lies between "
+        "min and max Bernstein coefficient -- an exact basis change turns a sign "
+        "question about a continuum into one finite comparison.  It is sound but not "
+        "complete: x^2 + 1 on [-1, 1] encloses as [0, 2] and only subdivision (splits "
+        "2) certifies its min 1, and (t - 1/2)^2 + 1/100 needs the same refinement; "
+        "every staircase node lies inside its enclosure, which is the cross-check.  "
+        "On the certified Block45(5, 4) sentence a contact pair is slid apart: the "
+        "quadratic (d0 + t d1)^2 - need^2 is certified positive on [1/2, 1] with lo "
+        + f"{demo['lo']}" + f" and refused on [-1, 1], while the gate's own pair test at "
+        "both endpoints returns slacks " + " and ".join(b for _t, b in demo["endpoints"]) +
+        " -- one algebraic pass, no sampling.  (2) Residue mask: for an integral residual "
+        "A + B sqrt d, N = A^2 - d B^2 is zero whenever the residual is, so a nonzero "
+        "norm residue *proves* the pair cannot be tight on that axis.  Scaling residuals "
+        "by the common denominator is what makes the reduction legal, and dividing by "
+        "the content is what keeps it informative (without it every residue was 0 at "
+        "mod 8 -- a vacuous mask, caught by the benchmark before it was reported).  On "
+        "Block45(5, 4): " + f"{scr['pairs']}" + " candidate pairs, " + f"{scr['contacts']}" +
+        " exact contacts, the mask rejects " + f"{scr[8]['rejected']}" + " and keeps "
+        "every contact, 0 false rejections at mod 8, 12 and 24, leaving " +
+        f"{scr[8]['survivors']}" + " survivors -- the extra " +
+        f"{scr[8]['survivors'] - scr['contacts']}" + " are loose pairs with one tight "
+        "axis, because the mask tests a *necessary* condition and cannot see the loose "
+        "side.  On Block45Half(5,4) there are no such pairs (survivors == contacts == "
+        "112), the primitive-vector fact that N = A^2 - 2 B^2 is never 0 mod 8 for "
+        "coprime (A, B) making the mask exact there.  Across the four certified cells it "
+        "buys 1.1-1.4x "
+        "end-to-end: tight packings are contact-dense (112 of 182 pairs, 2256 of 2978), "
+        "so most pairs must survive, and Amdahl -- not the mask -- sets that ceiling.  "
+        "A synthetic 3/2 x 1 lattice shows the blind spot: its diagonal neighbours have "
+        "one tight axis and a loose one, so the mask cannot reject them (252 survivors, "
+        "90 contacts).  The mask tests a *necessary* condition, and exactness on the "
+        "certified cells is a property of those cells, not of the mask.  Neither "
+        "plugin decides a packing: the exact gate "
+        "still does, and the chain only removes work it can prove is wasted.")
+
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
 
@@ -4684,6 +5164,41 @@ def main(argv=None) -> int:
                 extra = (f"L = {r['L_dec'][:18]}, excess = {r['excess_dec'][:12]}"
                          if r["verdict"] == "gated" else r["verdict"])
                 print(f"  (s={s}, k={k}): N = {r['N']}, {extra}")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
+        return 0
+    if "--plugin-bernstein" in argv:
+        # the Bernstein stage's own run: a slide certificate on a certified sentence, and
+        # the run-95/96 cage/chord interval witness re-read by the plugin (report: 63-PLUGINS.md)
+        demo = plugin_bernstein_demo()
+        cage = plugin_bernstein_cage()
+        print("bernstein slide:", demo)
+        print("bernstein vs cage/chord:", cage)
+        path = os.path.join(ROOT, "workspace/push/plugin_bernstein.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"slide": demo, "cage": cage}, f, indent=1)
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
+        return 0
+    if "--plugin-residue" in argv:
+        # the residue stage's own run: four certified cells and one synthetic sparse one
+        # (report: 63-PLUGINS.md)
+        rows = residue_benchmark()
+        for r in rows:
+            print(f"  {r['cell']}: pairs = {r['pairs']}, contacts = {r['contacts']} "
+                  f"(gate {r['gate_contacts']}, match {r['contacts_match']}), D = {r['den']}")
+            print(f"    mask {r['t_mask_ns'] // 1000} us, exact {r['t_exact_ns'] // 1000} us")
+            for mod in (8, 12, 24):
+                d = r[mod]
+                print(f"    mod {mod:2d}: rejected {d['rejected']} "
+                      f"({100 * d['rejected'] // r['pairs']}%), survivors {d['survivors']}, "
+                      f"false {d['false_rejects']}, abstain {d['abstained']}, "
+                      f"contacts {d['contacts_masked']}, "
+                      f"speedup {_ratio_str(d['speedup'])}x")
+        path = os.path.join(ROOT, "workspace/push/plugin_residue.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"rows": [{k: v for k, v in r.items() if k != "mods"}
+                                for r in rows]}, f, indent=1, default=str)
         print(f"  ledger: {os.path.relpath(path, ROOT)}")
         return 0
     if "--block-half-beyond" in argv:

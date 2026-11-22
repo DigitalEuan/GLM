@@ -2173,3 +2173,85 @@ byte-identical. **No row changed, no score claimed, `submission.csv` and root `W
 untouched.**
 
 Entries `62-BLOCK45-HALF.md`; records `31`–`62`.
+
+## Run 100 in detail — two composable exact plugins, and the chain between them
+
+User request: prototype and gate-verify two composable, float-free mathematical "GLM Plugins" as
+clean, domain-agnostic modules wired into `exact_field.py` / `glm_wheels.py` — (1) an exact
+rational Bernstein enclosure that certifies an interval polynomial bound (quadratic separation or
+chord clearance) in one algebraic pass without float sampling and cross-checks against a
+`staircase_chords` / `staircase_cage` witness, and (2) a quadratic-norm residue mask (mod 8 / 12 /
+24) over exact `Quad(d)` elements that rejects impossible unit-tangency pairs before the full
+4-axis SAT gate, benchmarked for speedup and exact equivalence across the certified wheel cells;
+document the chain as doc 63; keep every selftest control, `record_guard.py` and the zero-float
+bytecode audit green; leave `submission.csv` and root `WHITEBOARD.md` untouched.
+
+**The build.** `exact_field.py` gains the generic stages: `bernstein_coeffs` (Horner in `t` for
+`x = a + h t`, then `c_k = Σ_{j≤k} C(k,j)/C(n,j) b_j`), `bernstein_enclosure(poly, a, b, splits)`
+(`lo`, `hi`, `sign`, and subdivision that unions per-part enclosures), `bernstein_quadratic(c0, c1,
+need, a, b)` for the separation form `(c0 + t c1)² − need²`, `bernstein_nodes(poly, a, b, steps)`
+as the independent staircase witness, `norm_residue(x, mod)` and
+`residue_norm_filter(cls, elements, mods)`. `glm_wheels.py` gains the domain drivers:
+`bernstein_axis_certificate`, `bernstein_pair_slide` (a contact pair slid along its tight axis,
+certified, with the gate consulted at both endpoints), `bernstein_interval_certificate`,
+`bernstein_cage_crosscheck`, `plugin_bernstein_demo`, `plugin_bernstein_cage`,
+`pair_tangency_residuals` (eight signed residuals in pure integer `Z[√d]` arithmetic after the
+`2D²` scaling), `residue_pair_screen`, `residue_benchmark`, and two run modes with ledgers.
+
+**The Bernstein stage is sound and incomplete, and that is asserted, not hoped.** `x² + 1` on
+`[−1, 1]` has Bernstein coefficients `[2, 0, 2]`, so the coarse enclosure is `[0, 2]` and the sign
+is 0 — true, and useless; one subdivision gives `lo = 1`. The same holds for the convex quadratic
+`(t − ½)² + 1/100`. On `Block45(5, 4)` the first contact pair `(0, 1)`, tight on `(−½√2, ½√2)`
+with `d0 = d1 = 1` and `need = 1`, is certified positive with `lo = 5/4` on `[½, 1]` and correctly
+refused on `[−1, 1]` (the chord `1 + t` crosses zero), while the gate's own endpoint slacks are
+`½` and `1`. The run-95/96 cage replay agrees in both directions: at the 149-cell staircase both
+extents (`5/8`, `3/4`) and the chord (`1/12 + 11/48√7`) are short and the cage is capacity 1; on
+`Block45(5, 4)` the extents are `33/4` and `23/2`, the chord instrument refuses
+(`pair_not_excluded`), and every Bernstein verdict is "not short" — `agree` either way.
+
+**The residue mask is a projection, and two details decide whether it is worth anything.** The
+scaling by `2D²` is what makes the modular reduction legal (it acts on an exact integer, not a
+rounded value); but the scaling *alone* makes the mask vacuous, because every residual is then
+divisible by a power of `D`, and at `D = 4` every residue was 0 mod 8 — a 0 % rejection rate, caught
+by the first benchmark before anything was reported. Dividing each residual by its content
+`gcd(|A|, |B|)` is a scaling by a nonzero rational, so the zero set is untouched and the residues
+become informative. With that, the mask is *exact* at mod 8 for `d ∈ {2, 5, 7}`: a primitive
+`A + B√d` is never `0 mod 8`, because `N ≡ 0 (mod 8)` with `B` odd would need `A² ≡ d` for
+`d ≡ 2, 3, 5, 6, 7` (impossible) and with `B` even forces `A` even (not primitive).
+
+**The benchmark, exactly as measured** (`perf_counter_ns` integers, so the benchmark is float-free;
+`--plugin-residue`, ledger `workspace/push/plugin_residue.json`):
+
+| cell | pairs | contacts | rejected | survivors | extra | speedup |
+|---|---:|---:|---:|---:|---:|---:|
+| Block45(5,4) | 266 | 172 | 70 | 196 | 24 | 1.15× |
+| Block45(10,8) | 1102 | 794 | 252 | 850 | 56 | 1.11× |
+| Block45Half(5,4) | 182 | 112 | 70 | 112 | 0 | 1.36× |
+| Block45Half(17,14) | 2978 | 2256 | 722 | 2256 | 0 | 1.12× |
+| Lattice(3/2,1) synthetic | 342 | 90 | 90 | 252 | 162 | 1.14× |
+
+Zero false rejections at mod 8, 12 and 24 on every row; every contact survived; mod 8, 12 and 24
+select the same pairs everywhere (mod 8 is already complete there). The mask costs about an eighth
+of the exact pass (9.4 ms vs 72.5 ms; 103 ms vs 801 ms), and the end-to-end gain is capped by
+contact density — 65–76 % of candidate pairs are contacts, so Amdahl, not the mask, sets the
+1.1–1.4×. The synthetic lattice is the honest counter-example: 162 of its 252 survivors are
+diagonal neighbours with one tight axis and one loose one, which a necessary-condition mask cannot
+reject. So the claim is exactness on the Block45Half cells, soundness everywhere, and a measured
+(not hoped-for) bound on the gain.
+
+**A latent rung bug, found and fixed.** `Q`'s comparisons dropped to plain `Fraction` and lost the
+mixin's `.sign()`, so an enclosure sign test could have raised instead of comparing; `Q._diff` now
+returns `Q(F.__sub__(self, o))` and control 31 pins `Q(1) < Q(2)`.
+
+**Verification.** `glm_wheels.py --selftest` **31 controls, exit 0, 2 m 37 s** (control 31 is new:
+the rational comparison, the exact basis change on two intervals, the sound-but-loose enclosure and
+its refinement, node containment at `splits = 1, 2, 4`, the slide certificate with the gate's
+endpoint agreement, the cage/chord cross-check, the residue screen's invariants and zero false
+rejections at three moduli, exactness on `Block45Half(5,4)`, and the plugin's own residues on three
+contact pairs); `--audit` **294 functions, 0 offenders**; `--plugin-bernstein` (slide + cage
+replay, ledger `workspace/push/plugin_bernstein.json`) and `--plugin-residue` both exit 0; bare run
+exit 0; `record_guard.py` OK; control 21's 40/40 spatial cells, controls 1–30 and the run-99
+sweeps unchanged; README/STATUS footers byte-identical from `## Current results`.
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `63-PLUGINS.md`; records `31`–`63`.
