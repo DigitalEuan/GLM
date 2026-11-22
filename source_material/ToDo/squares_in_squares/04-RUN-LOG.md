@@ -2437,3 +2437,58 @@ README/STATUS footers byte-identical.
 What the fuzz does not establish: the sentences are random in their centres and frames, not in their
 *structure*, so it samples the pass rather than proving it; and both passes are still mine, so a
 shared misreading of the SAT statement would survive both the cross-check and the fuzz.
+
+## Run 102 — the relaxed rung: coverage, and what exact lifting reaches
+
+Doc 65. The instrument from run 101 is turned on the 424 rows that have never had an exact sentence.
+
+**Coverage, 1,000 rows.** 546 carry a certified exact sentence (447 pure-Q grid rows from run 84's
+census + 99 Q(sqrt 2) pose lifts from runs 84-85), 30 are `side-only` (the container side is
+algebraic but the pose was never lifted; n = 126 is the one where even that failed), and 424 are
+`relaxed` (the run-86 class `continuous`). New in this run: a **carrier census** — a carrier is a
+square whose stored angle has no exact word at the declared heights. 453 rows carry at least one,
+and the split is `1-10`: 14 rows, `11-100`: 123, `>100`: 316. **Every one of the 424 relaxed rows
+carries at least one carrier**, and in 361 of them a carrier sits on the bounding box.
+
+**Targets (chosen before lifting).** The three notches 677/785/901 (already `Q(sqrt2) pose` — kept as
+the reference), the continuous rows that bracket them (680, 689, 733, 788, 845, 904), and the
+relaxed rows with the most slack `L - sqrt N` (11, 17, 39, 68, 86).
+
+**Lifting (`qsqrt2.lift_sentence`, carriers dropped, every survivor written as a
+`galois-certificate/1` and checked by `verify_certificates`).** **3 of 14 lift at clearance 0**: the
+three notches, at `29/2 + 17/2 sqrt2`, `33/2 + 17/2 sqrt2`, `37/2 + 17/2 sqrt2`, with 2375, 2785 and
+3227 contacts and certificates the verifier accepts. **0 rows beat their delivered side materially**:
+the exact sides are 3.8447e-9, 3.8507e-9 and 3.8547e-9 *below* the published ones — the table's
+polish overshoot, not a gain. **11 refuse, in two groups.** `not-on-lattice` (680, 733, 788, 845 —
+exactly the four rows whose sides are the rationals 186/7, 193/7, 200/7, 207/7, i.e. the `2k + 4/7`
+rung of run 90's rational-t family): the side is recovered and the geometry is not, because
+dropping 90-110 carriers leaves squares the surviving contact equations do not pin. `side-not-
+recovered` (689, 904, 11, 17, 39, 68, 86): the core's own span is not within 1e-7 of the declared
+Q(sqrt2) lattice, so there is no `L` to place cells in at all.
+
+**Completion.** The probe (contacts from the delivered pose, exact 2x2 solves over the certified
+families' words, every candidate accepted only by the full gate) has a positive control: remove one
+cell from the certified 677 sentence and the axis word puts it back at the same side with clearance
+0 and 2375 contacts. No relaxed row could be probed — the probe needs a lifted core, and none of the
+11 has one — so the honest count is 0 carriers replaced out of 0 attempted, and the obstruction is
+upstream of completion.
+
+Two bugs in the probe were found and fixed by that control, both the same family as run 101's: the
+pair predicate had been read as the *minimum* slack over the four axes (a pair's clearance is its
+maximum), and contacts were emitted per axis without requiring the pair's largest slack to be zero,
+which made two cells at the same height but far apart look like a tangency.
+
+**Next geometric hypothesis.** The four `2k + 4/7` rows have cheap sides and expensive angles, so
+the next production is a construction, not a lift: a rational-t sentence at side `2k + 4/7` (the
+missing rung of run 90's `2k + 5/7` family) at the counts 680/733/788/845, with the gate as the
+arbiter — either it certifies the relaxed rung for the first time at the published side, or it gates
+strictly below and becomes a real score candidate.
+
+Checks: `landscape65.py --selftest` 6 controls (32 s); `--audit` **366 functions, 0 naming
+`float`** (`landscape65` added, its 24 included); `--selftest` 32 controls; `verify_certificates
+--selftest` 11 mutations + fuzz; bare run exit 0; `record_guard.py` OK; README/STATUS footers
+byte-identical. Ledger `workspace/push/landscape65.json`.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `65-LANDSCAPE.md`; records `31`-`65`.

@@ -5567,7 +5567,8 @@ def main(argv=None) -> int:
     if "--audit" in argv:
         import lattice_shells as LAT
         import verify_certificates as VC
-        mods = [EF, Q, sys.modules[__name__], LAT, VC]
+        import landscape65 as L65
+        mods = [EF, Q, sys.modules[__name__], LAT, VC, L65]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)
