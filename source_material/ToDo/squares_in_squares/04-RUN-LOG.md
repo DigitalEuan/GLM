@@ -2393,3 +2393,47 @@ The honest limit: this is independence of *implementation*, measured, and both i
 written by the same author, so a shared misreading of the SAT statement would survive the
 cross-check. What rules that out is external — agreement with `Q.gate` on contacts, clearance and
 void, and the nine mutations each failing at its own check.
+
+#### The tenth mutation and the fuzz
+
+Every one of the nine mutations died before the SAT pass — at the number format, the frame, a wall,
+the declared side or the summary — so the integer pass's own failure path was never exercised by a
+mutation. It is now, twice. A three-square sentence (`N = 3`, `L = 2`, origin 0) has cells at
+`(1/2, 1/2)`, `(7/5, 1/2)` and `(3/2, 3/2)`: the first covers `[0,1]²`, the second `[9/10, 19/10] x
+[0,1]` (an overlap of `1/10` in `x`, and of `1` in `y`), the third `[1,2]²` (an exact contact with
+each of them), and the span is exactly `[0,2]²`, so `L = 2` is the sentence's own side and every
+wall holds. Nothing before the SAT pass can refuse it; the integer pass must, and it does:
+`infeasible / sat`, pair `[0, 1]`, gap `-1/10`. Written a second time in `Quad(2)` it reports the
+same gap, so the number is not an artefact of one tag or one scale. Both mutations are appended to
+the shipped document (7 verified + 1 refused), which is the shape of a forgery that gets furthest:
+a well-formed sentence that simply fails.
+
+The fuzz exists because one document only exercises the pairs it happens to contain. `fuzz`
+generates random exact sentences — a field tag, 2–7 centres from mixed denominators with random
+`√d` parts, unit frames from that field's own words, which are enumerated by one integer search
+(`ab + ce = 0`, `a² + d b² + c² + d e² = m²`) rather than hard-coded — and a third of the centres
+are coincidences or `1/10`, `9/10`, `1/2`, `3/5` displacements, so strict overlaps, near-overlaps,
+exact contacts and separated pairs all appear. Four seeds of 400 sentences give **9,729 candidate
+pairs: 64 contacts, 5,314 overlaps, 4,351 separated, denominators up to 120, 0 mismatches** between
+the integer pass and the `Quad` witness, compared on the exact largest slack of every pair and not
+merely on its sign.
+
+The fuzz caught a real defect on its first run, which is the reason to write one. `sat_pass_scaled`
+returned the clearance and the gap by dividing the integer residual by `D` instead of `2D²`: at
+`D = 10` a violation of `1/10` printed as `1`. Every clearance in the shipped document is exactly
+`0`, where the divisor cannot show, and the printed-side comparison in the fuzz was the only thing
+that could see it. Verdicts, contact counts and orderings never moved — the decision was right and
+the number was wrong — and the gap is now scaled consistently, with the fuzz and the tenth
+mutation (`-1/10`, which would have printed as `-1`) both pinning it down.
+
+Checks after the change: `--selftest` 32 controls; `--audit` **342 functions, 0 naming `float`**
+(verifier 30); `--certificates` 7/7 with the same seven summaries and **11 mutations** refused;
+`verify_certificates.py --selftest` (7 verified, 11 mutations, 4,532 pairs cross-checked, 145 fuzz
+pairs); `--fuzz 400` on four seeds, 0 mismatches; bare run exit 0; `record_guard.py` OK;
+README/STATUS footers byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+What the fuzz does not establish: the sentences are random in their centres and frames, not in their
+*structure*, so it samples the pass rather than proving it; and both passes are still mine, so a
+shared misreading of the SAT statement would survive both the cross-check and the fuzz.

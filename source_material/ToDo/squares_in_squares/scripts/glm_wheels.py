@@ -5468,6 +5468,12 @@ def selftest() -> int:
     # Z[sqrt d] integer primitives, not Quad arithmetic (whose multiplication is `*`)
     assert {"_dot", "_iabs", "_iadd", "_isub", "_icmp"} <= called, called
     assert "_imul" in set(VC._dot.__code__.co_names)
+    # (h) fuzz the two formulations against each other on random exact sentences: mixed
+    # denominations, coincident centres (a strict overlap) and near-overlaps included,
+    # because one document only exercises the pairs it happens to contain
+    fz = VC.fuzz(60, seed=101)
+    assert fz["mismatches"] == 0, fz["failures"][:3]
+    assert fz["overlaps"] > 0 and fz["pairs"] > 100 and fz["max_den"] > 4, fz
     say("control 32 -- the max-slack bound, the chained pipeline, and the serialized "
         "certificate.  (1) The bound.  A pair is a contact iff its max slack is 0 and "
         "a violation iff it is negative, so a pair with a *strictly positive* max "
@@ -5505,7 +5511,22 @@ def selftest() -> int:
         "every candidate pair of all four certificates here (and all 4,532 pairs of "
         "the shipped document) agrees on the sign *and* on the exact largest slack, "
         "so the two paths are two implementations of one statement rather than one "
-        "implementation read twice.")
+        "implementation read twice.  (5) Fuzzed, not just cross-checked on one "
+        "document: " + f"{fz['sentences']}" + " random exact sentences here "
+        "(" + f"{fz['pairs']}" + " candidate pairs, " + f"{fz['overlaps']}" +
+        " of them overlapping, denominators up to " + f"{fz['max_den']}" + ") and "
+        "9,729 pairs over four seeds outside the suite agree on every pair, so the "
+        "equality is a property of the passes and not of these seven sentences.  The "
+        "fuzz earned its place immediately: it found that the printed clearance and "
+        "the printed gap divided the integer residual by D instead of 2 D^2, an "
+        "error that the shipped document's zero clearance had hidden -- contact and "
+        "verdict were unaffected, the number was wrong by 2D, and the selftest now "
+        "compares that printed value too.  A tenth and eleventh mutation cover the "
+        "failure path the first nine never reached: a three-square sentence inside its "
+        "box with the span exactly its declared L, whose cells at (1/2, 1/2) and "
+        "(7/5, 1/2) overlap by 1/10, is refused at `sat` with pair [0, 1] and gap "
+        "-1/10 -- in Q and again in Quad(2), so the gap is not an artefact of one "
+        "tag or one scale.")
 
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)

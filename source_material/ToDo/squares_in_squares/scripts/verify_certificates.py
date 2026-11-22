@@ -18,7 +18,9 @@ rotation by one common denominator `D` and works in `Z[sqrt d]` with Python inte
 `slack` is represented by the integer residual `2 D^2 slack`, `abs` is an integer sign
 test, `max` is an integer comparison, and only the *printed* gap is turned back into a
 field element.  The `Quad` formulation is retained as `sat_pass_reference` and used by
-`cross_check`/`--selftest` as an independent witness — it never decides anything.
+`cross_check`/`--selftest` as an independent witness — it never decides anything — and
+`fuzz` compares the two on random exact sentences (coincident centres, near-overlaps, exact
+contacts, mixed denominators), because a single document only exercises the pairs it has.
 
 The first exact failed inequality is reported, distinguishing the two questions a
 certificate can fail to answer:
@@ -32,12 +34,14 @@ certificate can fail to answer:
 Usage:
     python3 scripts/verify_certificates.py                 # default document
     python3 scripts/verify_certificates.py path/to.json --quiet
-    python3 scripts/verify_certificates.py --selftest      # mutations + cross-check
+    python3 scripts/verify_certificates.py --selftest      # mutations + cross-check + fuzz
+    python3 scripts/verify_certificates.py --fuzz [N] [SEED]   # random-sentence fuzz
 """
 from __future__ import annotations
 
 import json
 import os
+import random
 import re
 import sys
 from fractions import Fraction as F
@@ -180,6 +184,8 @@ def _scaled_str(z, cls, scale):
 
     This is the single place the deciding pass touches a field element, and it happens
     *after* the verdict, to write the gap into the report.  No comparison is made here.
+    Slacks are printed with `scale = 2 D^2` (the residual's own scale); a `D`-scaled
+    vector component is printed with `scale = D`.
     """
     if cls is None:
         return str(F(z[0], scale))
@@ -252,9 +258,10 @@ def sat_pass_scaled(d, centres, frames, scale, cls=None):
                                   "gap": "0"})
             if worst is None or _icmp(best, worst, d) < 0:
                 worst = best
+    big = 2 * scale * scale
     return {"contacts": contacts, "violations": violations, "verdicts": verdicts,
             "pair_worst": pair_worst, "worst": worst, "witnesses": witnesses,
-            "clearance": None if worst is None else _scaled_str(worst, cls, scale)}
+            "clearance": None if worst is None else _scaled_str(worst, cls, big)}
 
 
 def sat_pass_reference(centres, frames, cls):
@@ -425,7 +432,7 @@ def verify_certificate(cert):
         for (i, j), sgn in sorted(sat["verdicts"].items()):
             if sgn < 0:
                 _fail(INFEASIBLE, "sat", id=cid, pair=[i, j],
-                      gap=_scaled_str(sat["pair_worst"][(i, j)], cls, scale),
+                      gap=_scaled_str(sat["pair_worst"][(i, j)], cls, 2 * scale * scale),
                       scale=scale, why="the pair overlaps on every axis")
     summary = {"id": cid, "family": s["family"], "field": tag, "N": n,
                "L": _q(L), "origin": [_q(ox), _q(oy)],
@@ -443,7 +450,7 @@ def verify_certificate(cert):
                       declared=expected[key], actual=summary[key])
         if "clearance" in expected and expected["clearance"] is not None:
             want = parse_scalar(expected["clearance"], tag, f"{cid}.expected.clearance")
-            want_scaled = _to_int(want, scale)
+            want_scaled = _to_int(want, 2 * scale * scale)
             if sat["worst"] is None or want_scaled != sat["worst"]:
                 _fail(OUTSIDE, "declared_summary", id=cid, key="clearance",
                       declared=_q(want),
@@ -479,6 +486,138 @@ def cross_check(doc):
         out.append({"id": s["cid"], "pairs": len(sat["verdicts"]),
                     "contacts": sat["contacts"], "clearance": sat["clearance"]})
     return out
+
+
+# --------------------------------------------------------------- fuzzing the passes
+_POOL = {}
+
+
+def _unit_pool(d):
+    """Exact unit vectors of `Q(sqrt d)`, found by one small integer search.
+
+    With `ux = (a + b r)/m`, `uy = (c + e r)/m` and `r = sqrt d`, `ux^2 + uy^2 = 1` is the
+    pair of integer equations `a b + c e = 0` (the `r` part) and
+    `a^2 + d b^2 + c^2 + d e^2 = m^2` (the rational part), so the unit words of a field
+    can be enumerated exactly instead of hard-coded.  Only the fuzz uses this; the
+    verifier's own checks never trust a generated word.
+    """
+    if d in _POOL:
+        return _POOL[d]
+    seen, out = set(), []
+    for m in (1, 2, 3, 4, 5, 6, 8):
+        for a in range(-4, 5):
+            for b in range(-4, 5):
+                if d == 0 and b:
+                    continue
+                for c in range(-4, 5):
+                    for e in range(-4, 5):
+                        if d == 0 and e:
+                            continue
+                        if a * b + c * e != 0:
+                            continue
+                        if a * a + d * b * b + c * c + d * e * e != m * m:
+                            continue
+                        g = gcd(gcd(gcd(abs(a), abs(b)), gcd(abs(c), abs(e))), m)
+                        key = (a // g, b // g, c // g, e // g, m // g)
+                        if key in seen or (a, b, c, e) == (0, 0, 0, 0):
+                            continue
+                        seen.add(key)
+                        out.append((key[0], key[1], key[2], key[3], key[4]))
+    _POOL[d] = [((F(a, m), F(b, m)), (F(c, m), F(e, m)))
+                for a, b, c, e, m in out]
+    return _POOL[d]
+
+
+def _random_sentence(rng):
+    """A random exact sentence: a field, `n` centres, and unit frames in that field.
+
+    Centres are drawn from mixed denominators (halves, thirds, quarters, fifths) with
+    random `sqrt d` parts, and a third of them are copies of an earlier centre (a
+    coincidence, which is a strict overlap) or a copy pushed by a small exact offset —
+    so overlapping pairs, exact contacts and separated pairs all occur, and the common
+    denominator `D` is usually larger than the coordinates' own denominators.
+    """
+    d = rng.choice([0, 2, 5, 7])
+    _, cls = parse_field("Q" if d == 0 else f"Quad({d})")
+    pool = _unit_pool(d)
+    if not pool:                              # cannot happen: every rung has words
+        raise AssertionError(f"no unit words found in Q(sqrt {d})")
+    n = rng.randint(2, 7)
+    dens = rng.choice([(2,), (2, 3), (2, 3, 4), (2, 3, 4, 5), (3, 4), (4, 5)])
+    grid = [F(k, m) for m in dens for k in range(0, 3 * m + 1)]
+    parts = [F(0)] + [F(s, m) for m in (2, 3, 4) for s in (1, -1)]
+
+    def scalar():
+        a = rng.choice(grid)
+        b = rng.choice(parts) if d else F(0)
+        return cls(a, b) if cls is not None else a
+
+    centres = []
+    for _ in range(n):
+        if centres and rng.random() < 1 / 3:
+            x, y = centres[rng.randrange(len(centres))]
+            if rng.random() < 1 / 2:
+                step = F(rng.choice([F(1, 10), F(9, 10), F(1, 2), F(3, 5)]))
+                if rng.random() < 1 / 2:
+                    x = x + cls(step) if cls is not None else x + step
+                else:
+                    y = y + cls(step) if cls is not None else y + step
+            centres.append((x, y))
+        else:
+            centres.append((scalar(), scalar()))
+    frames = []
+    for _ in range(n):
+        (uxa, uxb), (uya, uyb) = pool[rng.randrange(len(pool))]
+        if cls is None:
+            u, v = (uxa, uya), (-uya, uxa)
+        else:
+            u = (cls(uxa, uxb), cls(uya, uyb))
+            v = (cls(-uya, -uyb), cls(uxa, uxb))     # the exact quarter turn
+        frames.append((u, v))
+    return d, cls, centres, frames
+
+
+def fuzz(count=200, seed=101):
+    """Compare the integer SAT pass with the `Quad` witness on random exact sentences.
+
+    The two passes are exercised directly rather than through `verify_certificate`, since
+    a random sentence rarely has the tight `L` a certificate has to declare.  Every pair's
+    exact largest slack is compared (`2 D^2` times the reference value against the integer
+    residual), as are the verdict signs, the contact and violation counts and the printed
+    clearance — on sentences built to include coincident centres, near-overlaps, exact
+    contacts and mixed denominators.
+    """
+    rng = random.Random(seed)
+    stats = {"sentences": 0, "pairs": 0, "contacts": 0, "overlaps": 0, "separated": 0,
+             "max_den": 0, "mixed_den": 0, "mismatches": 0, "failures": []}
+    for _ in range(count):
+        d, cls, centres, frames = _random_sentence(rng)
+        scale, icentres, iframes = _scaled_sentence(centres, frames)
+        sat = sat_pass_scaled(d, icentres, iframes, scale, cls)
+        ref = sat_pass_reference(centres, frames, cls)
+        big = 2 * scale * scale
+        stats["sentences"] += 1
+        stats["pairs"] += len(sat["verdicts"])
+        stats["contacts"] += sat["contacts"]
+        stats["overlaps"] += sat["violations"]
+        stats["separated"] += len(sat["verdicts"]) - sat["contacts"] - sat["violations"]
+        stats["max_den"] = max(stats["max_den"], scale)
+        if scale > 2:
+            stats["mixed_den"] += 1
+        if sat["verdicts"] != ref["verdicts"]:
+            stats["failures"].append({"why": "verdicts", "d": d, "scale": scale})
+        if sat["contacts"] != ref["contacts"] or sat["violations"] != ref["violations"]:
+            stats["failures"].append({"why": "counts", "d": d, "scale": scale})
+        if sat["clearance"] != ref["clearance"]:
+            stats["failures"].append({"why": "clearance", "d": d, "scale": scale,
+                                      "integer": sat["clearance"],
+                                      "witness": ref["clearance"]})
+        for key, val in ref["pair_worst"].items():
+            if _to_int(val, big) != sat["pair_worst"][key]:
+                stats["failures"].append({"why": "pair_value", "d": d, "scale": scale,
+                                          "pair": list(key)})
+    stats["mismatches"] = len(stats["failures"])
+    return stats
 
 
 def verify_document(doc):
@@ -523,7 +662,7 @@ def _bump(raw, tag, delta):
 
 
 def selftest(path):
-    """Round-trip the document, cross-check the two SAT passes, try to break it nine ways."""
+    """Round-trip the document, cross-check and fuzz the SAT passes, break it ten ways."""
     with open(path) as f:
         doc = json.load(f)
     clean = verify_document(doc)
@@ -532,6 +671,13 @@ def selftest(path):
     agree = cross_check(doc)
     print("  the integer SAT pass and the Quad witness agree pair for pair: "
           + ", ".join(f"{a['id']} {a['pairs']}p/{a['contacts']}c" for a in agree))
+    fz = fuzz(30, seed=7)
+    assert fz["mismatches"] == 0, fz["failures"][:3]
+    assert fz["overlaps"] > 0 and fz["max_den"] > 4, fz
+    print(f"  fuzz: {fz['sentences']} random exact sentences, {fz['pairs']} candidate "
+          f"pairs ({fz['contacts']} contacts, {fz['overlaps']} overlaps, "
+          f"{fz['separated']} separated), denominators up to {fz['max_den']}: "
+          "integer pass == Quad witness on every pair")
     checks = []
 
     def expect(mut, kind, check, label):
@@ -592,6 +738,37 @@ def selftest(path):
     mut = _clone(doc)
     mut["certificates"][0]["expected"]["contacts"] += 1
     expect(mut, OUTSIDE, "declared_summary", "declared summary")
+    # 10. a genuine SAT overlap, in an otherwise well-formed sentence: inside its box,
+    # with a tight declared side, so it survives every check before the SAT pass and the
+    # integer pass has to report the violation with its own exact gap.  c0 covers
+    # [0,1]^2, c1 covers [9/10, 19/10] x [0,1] (overlap 1/10 in x), c2 covers
+    # [1,2] x [1,2] (a contact with both), the span is exactly [0,2]^2, and L = 2.
+    mut = _clone(doc)
+    mut["certificates"].append({
+        "id": "overlap_1_10", "family": "Overlap", "field": "Q", "N": 3,
+        "L": "2", "origin": ["0", "0"],
+        "cells": [{"x": "1/2", "y": "1/2", "r": ["1", "0", "0", "1"]},
+                  {"x": "7/5", "y": "1/2", "r": ["1", "0", "0", "1"]},
+                  {"x": "3/2", "y": "3/2", "r": ["1", "0", "0", "1"]}],
+        "expected": {"ok": True, "contacts": 2, "violations": 0, "clearance": "0"}})
+    first = expect(mut, INFEASIBLE, "sat", "genuine SAT overlap")
+    assert first["detail"]["pair"] == [0, 1], first
+    assert first["detail"]["gap"] == "-1/10", first
+    # the same sentence at a different rung reports the same overlap in that field's
+    # own coordinates, so the gap is not an artefact of one scale or one tag
+    mut = _clone(doc)
+    mut["certificates"].append({
+        "id": "overlap_1_10_quad2", "family": "Overlap", "field": "Quad(2)", "N": 3,
+        "L": ["2", "0"], "origin": [["0", "0"], ["0", "0"]],
+        "cells": [{"x": ["1/2", "0"], "y": ["1/2", "0"],
+                   "r": [["1", "0"], ["0", "0"], ["0", "0"], ["1", "0"]]},
+                  {"x": ["7/5", "0"], "y": ["1/2", "0"],
+                   "r": [["1", "0"], ["0", "0"], ["0", "0"], ["1", "0"]]},
+                  {"x": ["3/2", "0"], "y": ["3/2", "0"],
+                   "r": [["1", "0"], ["0", "0"], ["0", "0"], ["1", "0"]]}],
+        "expected": {"ok": True, "contacts": 2, "violations": 0, "clearance": "0"}})
+    first = expect(mut, INFEASIBLE, "sat", "genuine SAT overlap (Quad(2))")
+    assert first["detail"]["gap"] == "-1/10", first
     print(f"  {len(checks)} mutations refused, each at its own check: "
           + ", ".join(checks))
     print(f"  (certificate under test: {cid}; the untouched document still verifies)")
@@ -603,8 +780,23 @@ def main(argv=None):
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     default = os.path.join(here, "workspace/push/galois_certificates.json")
     want_selftest = "--selftest" in argv
+    want_fuzz = any(a.startswith("--fuzz") for a in argv)
     quiet = "--quiet" in argv
     argv = [a for a in argv if not a.startswith("--")]
+    if want_fuzz:
+        count = int(argv[0]) if argv and argv[0].isdigit() else 200
+        seed = int(argv[1]) if len(argv) > 1 and argv[1].lstrip("-").isdigit() else 101
+        fz = fuzz(count, seed)
+        print(f"fuzz: {fz['sentences']} random exact sentences (seed {seed}), "
+              f"{fz['pairs']} candidate pairs, {fz['contacts']} contacts, "
+              f"{fz['overlaps']} overlaps, {fz['separated']} separated")
+        print(f"      mixed denominators: {fz['mixed_den']} sentences above 2 "
+              f"(max {fz['max_den']})")
+        print(f"      mismatches between the integer pass and the Quad witness: "
+              f"{fz['mismatches']}")
+        for bad in fz["failures"][:5]:
+            print(f"      MISMATCH {bad}")
+        return 0 if fz["mismatches"] == 0 else 1
     path = argv[0] if argv else default
     if want_selftest:
         print(f"verifier selftest on {os.path.relpath(path, here)}")

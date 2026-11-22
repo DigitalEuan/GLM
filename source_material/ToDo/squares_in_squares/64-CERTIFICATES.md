@@ -101,6 +101,25 @@ and on the shipped document all **4,532 candidate pairs** agree on the sign *and
 largest slack of the pair (the reference value scaled by `2D²` equals the integer residual
 exactly). That is independence of implementation, and it is measured rather than asserted.
 
+One document only exercises the pairs it happens to contain, so the two passes are also
+**fuzzed against each other** (`fuzz`, `--fuzz [N] [SEED]`, and 30 sentences inside `--selftest`).
+A random sentence is a field tag, 2–7 centres drawn from mixed denominators (halves, thirds,
+quarters, fifths) with random `√d` parts, and frames from that field's exact unit words — found
+by one small integer search, `ab + ce = 0` and `a² + d b² + c² + d e² = m²`, so no word is
+hard-coded. A third of the centres are copies of an earlier one, or a copy pushed by `1/10`,
+`9/10`, `1/2` or `3/5`, so coincidences (strict overlaps), near-overlaps, exact contacts and
+separated pairs all occur, and the common denominator reaches the lcm of the denominators (120 in
+practice). Every pair's exact largest slack is compared (`2D²` times the witness value against the
+integer residual), along with verdict signs, contact and violation counts and the printed
+clearance: **9,729 pairs over four seeds of 400 sentences, 0 mismatches** (64 contacts, 5,314
+overlaps, 4,351 separated).
+
+The fuzz paid for itself on its first run. The printed clearance and the printed gap divided the
+integer residual by `D` instead of `2D²`, so a violation of `1/10` was reported as `1` when `D =
+10`; the shipped document's clearances are all exactly `0`, where the divisor is invisible, and
+only the fuzz saw it. Verdicts, contacts and orderings were unaffected — the bug was in the number
+printed, not the decision — and the scaled comparison is now part of what the fuzz checks.
+
 The failure is always *the first exact inequality that is wrong*, and it carries one of two kinds:
 
 | kind | meaning | examples |
@@ -240,10 +259,13 @@ doc 63 §3's "every stage is sound, so the composition is safe" needed this qual
   sentence. It says nothing about optimality, and nothing about rows it does not contain.
 * A tight `L` means the box is the sentence's own span — not that the sentence is better than any
   delivered row. No comparison with `submission.csv` happens in the verifier.
-* The nine mutation tests prove the verifier *fails closed* on those nine manipulations. They are
-  not a security audit: a determined forger can write a different valid sentence, and the
-  verifier will accept it — correctly, because a certificate is a claim about a sentence, not a
-  signature on one.
+* The eleven mutation tests (ten distinct manipulations — the SAT overlap is written at two rungs)
+  prove the verifier *fails closed* on those manipulations, including the one that reaches the
+  integer pass: a three-square sentence inside its box, with the span exactly its declared `L`,
+  whose cells at `(1/2, 1/2)` and `(7/5, 1/2)` overlap by `1/10`, is refused at `sat` with pair
+  `[0, 1]` and gap `-1/10` (in `Q`, and again in `Quad(2)`). They are not a security audit: a
+  determined forger can write a different valid sentence, and the verifier will accept it —
+  correctly, because a certificate is a claim about a sentence, not a signature on one.
 * `expected` is checked against the verifier's own recomputation, and that recomputation no longer
   copies the producer's arithmetic: the deciding SAT pass is integer-scaled and is cross-checked
   against the `Quad` witness pair for pair (4,532 pairs, exact value and sign). What this buys is
@@ -257,10 +279,12 @@ doc 63 §3's "every stage is sound, so the composition is safe" needed this qual
 32 controls (control 32: the bound's soundness and reach, the chain's equivalence and its one
 counter-example, the integer/Quad mask agreement, the four-certificate round-trip, the refused
 decimal, and the SAT pass's independence — its own `co_names` name no producer function, and
-`cross_check` matches it against the `Quad` witness pair for pair), 2 m 38 s, `--audit` **339
-functions, 0 naming `float`** (the verifier's 27 included), `--certificates` 7/7 verified plus 9
-mutations refused with the same seven summaries and the same contact counts as before the change,
-`--chain` with its ledger, the verifier's own `--selftest` (7 verified, 9 mutations, 4,532 pairs
-cross-checked), bare run exit 0, `record_guard.py` OK, README/STATUS footers byte-identical. Doc 63 §6 is updated with what actually landed.
+`cross_check` matches it against the `Quad` witness pair for pair, and the fuzz compares them on
+random exact sentences with overlaps and mixed denominators), `--audit` **342 functions, 0 naming
+`float`** (the verifier's 30 included), `--certificates` 7/7 verified plus **11 mutations**
+refused — two of them genuine SAT overlaps, refused at `sat` with the exact gap `-1/10` — with the
+same seven summaries and contact counts as before the change, `--chain` with its ledger, the
+verifier's own `--selftest` (7 verified, 11 mutations, 4,532 pairs cross-checked, 145 fuzz pairs),
+bare run exit 0, `record_guard.py` OK, README/STATUS footers byte-identical. Doc 63 §6 is updated with what actually landed.
 
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
