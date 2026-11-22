@@ -2069,3 +2069,107 @@ minimal-excess laws re-checked against the ledger (121/121, 8/8); bare run exit 
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `61-BLOCK45.md`; records `31`–`61`.
+
+## Run 99 in detail — the half-integer corner fill: the side is exact, the fill is not
+
+User request: build the `t ∈ ℤ + ½` corner fill doc 61 §8 named — half-integer-shifted axis
+corner triangles on the 45° block, with the exact count `T(s, k)`, the total `N = s² + 4T` and
+the closed-form contact side `L(s, k)` from `Q(√2)` separation roots — gate it over small
+`(s, k)` and at `N = 677, 785, 901` (`k = 13, 14, 15`, `s = 17`); report honestly whether any
+certified sentence breaks `L < 2k + ½√2` and reaches `L − 2k ≈ 0.520815` at those counts; emit
+`N > 1000` rows only if it certifies; tag the result with rung-3/rung-7 provenance; and leave
+`submission.csv` and root `WHITEBOARD.md` alone unless the score can move.
+
+**The production.** `block45half_count(s, k)` is integer arithmetic: a unit axis square
+`[i, i+1] × [j, j+1]` sits in the corner triangle `x, y ≥ 0`, `x + y ≤ t` iff its far corner
+does, `i + j + 2 ≤ t`, so `t = k + ½` gives `i + j ≤ k − 2` and `T = k(k−1)/2` per corner,
+`N = s² + 2k(k−1)`. `block45half_side` is the exact `L = max(s/√2 + k + ½, s√2)` in `Q(√2)`;
+`_block45half_sentence` builds `s²` tilted squares plus four `m = k−2` staircases;
+`p_block45half` gates it and records `L`, `N`, void, contacts, the floor gap and the dominance
+law; `block45half_spin` sweeps and `block45half_calibrate` reads the three delivered sides.
+
+**The arithmetic corrected doc 61 §8.** A triangle's unit-square count is a function of `⌊t⌋`
+only: `T(k + ½) = T(k) = k(k−1)/2`, and every staircase square is `1/(2√2) = 0.353553` clear of
+the block's face. So the half unit admits **no extra triangle square** — doc 61's reading of
+`t = 14.5` and "six extra squares per corner" as half-unit staircase squares is wrong, and the
+delivered 677 row's `388 = 4 × 97` axis squares are not four corner staircases. What the half
+unit buys is slack, and the exact consequence is a dominance law.
+
+**Dominance.** The half member at `k` and run 98's integer contact member at `k − 1` have the
+same count (`s² + 2k(k−1) = s² + 2(k−1)k`) and sides `max(h + k + ½, 2h)` against `max(h + k, 2h)`,
+`h = s/√2`, so `L_int ≤ L_half ≤ L_int + ½`: exactly `½` in the fill branch, `0` when the block's
+own diagonal sets both (`(5, 2)`: both `5√2`), and `k + ½ − h` in between (`(3, 2)`:
+`5/2 − 3/2√2 = 0.378680`). All three are asserted in control 30. The law is measurable against
+the table: at the seven counts run 98 reproduces exactly (`N = 5, 40, 65, 89, 124, 148, 233`)
+the half member's side is exactly `½` behind the delivered side — `−0.500000` at six of them and
+`−0.4999999999999` at `N = 89`, which is the delivered pose's own `1e-9`. So `t ∈ ℤ + ½` can
+never be the better sentence.
+
+**Feasibility is one inequality, derived and then checked.** Corner 0's staircase reaches
+`x = k − 1`, corner 1's starts at `L − (k−1)`, in the same row band, so they meet exactly when
+`L < 2k − 2`. The sweep agrees on **all 124 rows** (76 gated, 48 refused by
+`block45half_corner_collision`, 0 law mismatches); at `s = 17` the window is `k ≤ 14` and the
+colliding pairs grow `4, 12, 24, 40` at `k = 15, 16, 17, 18` — the same counts run 98 measured,
+because the two families' staircases are the same objects.
+
+**The floor, honestly.** The family's excess `L − 2k = s/√2 + ½ − k` crosses zero inside the
+window: the closest certified value above is **`+0.035534`** at `(5, 4)` (`N = 49`) and the
+closest below **`−0.085786`** at `(2, 2)` (`N = 8`), so **29 of 76 gated rows sit below
+`2k + ½√2`** — the inequality is met, at essentially every scale. It is still not a record, and
+for a different reason than run 98's: here `k` is the corner parameter, not the ridge's, so a
+negative `L − 2k` says the block's half-diagonal is shorter than the staircase index, not that a
+packing is tight. The like-for-like comparison is at the same `N`, and there the family is behind
+every delivered row it shares a count with: **0 beats, 0 parity, 53 gated rows with a delivered
+count**, closest `−0.207107` at `N = 13`, `−0.292893` at `N = 85`, `−0.328427` at `N = 56`,
+`−0.449747` at `N = 133`, exactly `−0.5` at the seven parity counts.
+
+**The falsifier, sharper than doc 61 could state it.** The delivered rows' exact lifted sides are
+`29/2 + 17/2√2`, `33/2 + 17/2√2`, `37/2 + 17/2√2` — i.e. **exactly** `s/√2 + k + ½` at
+`k = 14, 16, 18`. The half-integer *side* law is the delivered side with no tolerance. The count
+is the other half of the question, and it does not follow: the corner fill at those sides holds
+`N = 653, 769, 901` against the rows' `677, 785, 901`, **short by 24, 16, 0**; only `k = 14` is a
+sentence (clearance 0, **2256 contacts**); at `k = 16` (12 pairs) and `k = 18` (40 pairs) the two
+staircases on each wall meet. So the delivered 901 row is the half-integer corner fill's count
+*and* its side in an arrangement the centred corner fill cannot take — a sharper statement than
+doc 61's "the family's count but infeasible". `677` is no count of the family at all; `785` is a
+count only at `(5, 20)` (`L = 24.036 < 2k − 2 = 38`) and is refused. The requested `k = 16, 17,
+18` rows (`N = 769, 833, 901`) are therefore all refused, not emitted as certificates. Two exact
+readings next door: at `N = 709, 769, 833` the delivered rows are grids at `L = 27, 28, 29` and
+the half side law sits exactly `0.520815 = 17/√2 − 23/2` above them; at `N = 901` it coincides.
+
+**Above 1000.** The fill gates exactly: `(25, 20)` is `N = 1385` at `L = 41/2 + 25/2√2`
+(38.177670), void `−2609/4 + 1025/2√2` (72.534451), **5016 contacts**, `0.177670` outside the
+grid's 38. The law rows `(35, 27)` (`N = 2629`, `L = 55/2 + 35/2√2`) and `(50, 37)` (`N = 5164`,
+`L = 75/2 + 25√2`) are recorded as law only — `L/√N` 1.025852, 1.019015, 1.013837 — because above
+1000 the half family is its integer sibling plus `½` and adds nothing to run 98's ladder.
+
+**The rungs.** Rung 2 is blind to the half: the corner count is a function of `⌊t⌋`, so
+`T(k + ½) = T(k)` exactly (`integer_indist_zero_half`). Rung 3 sees it and sees it **as slack**:
+in `Q(√2)` the legs differ, `L` moves by `½` while `N` does not, and the delivered sides are
+exactly the half-integer legs (`rational_distinguishes_zero_half`, in its packing form). Rung 7
+decides: the exact gate at clearance 0 accepts `k = 14` and refuses `k = 16, 18`, so seeing the
+half is not certifying it. The Lean anchors are conceptual references only; no Lean build is
+attempted.
+
+**Next.** The gap is a count, not a side: `24, 16, 0` squares at the same three sides, which
+cannot sit in the corner triangles (legs `14.5` hold at most 91). They are notch/band squares,
+and the delivered 677 pose is an off-centre block with two wide bands. The next production is the
+**band fill** — the free-region row count under the exact `L1` law `d(a) + d(b) ≥ s/√2` — with
+the falsifier `B(17, 14) = 97` per corner (388 total), `B(17, 16) = 124`, `B(17, 18) = 153`, gated
+at `k = 16` and `k = 18`.
+
+**Verification.** `glm_wheels.py --selftest` **30 controls, exit 0, 2 m 30 s** (control 30 is new:
+the count law over `s, k ≤ 8` including `T_half(s,k) = T_int(s,k−1)`, both side branches, the
+three dominance cases, the gated `(17, 14)` with its `½`, the `k = 15`/`k = 18` collisions, the
+exact 677 side identity, the 24/16/0 deltas, the feasibility flags, and both count facts);
+`--audit` **265 functions, 0 offenders**; `--block-half-spin` 124 rows (76 gated / 48 refused),
+29 below the floor, 0 beating, 0 parity, `3 m 18 s`, ledger `workspace/push/block45half_spin.json`
+with the three-row calibration (653 gated / 769 and 901 refused, short by 24/16/0);
+`--block-half-beyond` gated `N = 1385` plus two law rows, `22 s`, ledger
+`workspace/push/block45half_beyond.json`; feasibility and dominance re-checked against the ledger
+(124/124, 53/53); bare run exit 0; `record_guard.py` OK; `family_spin.py`,
+`grammar_induction.py`, `qsqrt2.py`, `field_triage.py` unchanged and green; README/STATUS footers
+byte-identical. **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md`
+untouched.**
+
+Entries `62-BLOCK45-HALF.md`; records `31`–`62`.

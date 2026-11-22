@@ -952,6 +952,244 @@ def block45_spin(ncap=250, extras=((17, 13), (17, 16), (17, 17)), smax=24, kmax=
     return rows
 
 
+# ------------------------------------------ the half-integer corner fill (run 99)
+#: Run 98's contact staircase needs integer legs: `t = k + 1` puts the square at
+#: `(k-1, 0)` on the block's face.  The table's own low-slack rows sit half a unit
+#: further out (`t = 14.5, 16.5, 18.5` at `N = 677, 785, 901`), so the production
+#: doc 61 section 8 named is the half unit.  A unit axis square `[i, i+1] x [j, j+1]`
+#: fits the corner triangle `x, y >= 0`, `x + y <= t` iff `i + j + 2 <= t`, and that
+#: inequality is the whole story: `t` enters only through `floor(t)`.  Hence
+#:
+#:     T_half(k) = #{(i, j) >= 0 : i + j <= k - 2} = k (k - 1) / 2
+#:     N(s, k)   = s^2 + 2 k (k - 1)
+#:     L(s, k)   = max(s/sqrt 2 + k + 1/2, s sqrt 2)
+#:
+#: and the half unit buys **no square** in the triangle -- it buys slack.  The exact
+#: consequence is a dominance law, checked on every claim: the half-integer member at
+#: `k` is run 98's integer contact member at `k - 1`, with the *same* count and a side
+#: that is never smaller and at most half a unit larger (it is exactly `1/2` larger in
+#: the fill branch, `0` when the block's own diagonal sets both sides, and `k + 1/2 - h`
+#: in between).  So `t in Z + 1/2` can never be the better sentence.
+def block45half_count(s, k):
+    """`(T, N)` of the half-integer corner fill: `T = k(k-1)/2`, `N = s^2 + 2k(k-1)`."""
+    if s < 1 or k < 2:
+        raise Refusal("degenerate_cell", f"s = {s}, k = {k} (the half fill needs k >= 2)")
+    T = k * (k - 1) // 2
+    return T, s * s + 4 * T
+
+
+def block45half_side(cls, s, k):
+    """The half-integer side, exactly: `L = max(s/sqrt2 + k + 1/2, 2 s/sqrt2)`."""
+    h = cls(0, F(s, 2))                       # s / sqrt 2, exactly
+    t = cls(k) + cls(F(1, 2))                 # k + 1/2
+    diag = cls(0, F(s))                       # 2 h = s sqrt 2
+    return t + h if t + h > diag else diag
+
+
+def block45half_feasible(cls, s, k):
+    """The derived feasibility inequality: the wall staircases need `L >= 2k - 2`.
+
+    Corner 0's staircase reaches `x = k - 1` (its `i = k - 2` square spans
+    `[k-2, k-1]`), corner 1's starts at `L - (k-1)`; they share the row band
+    `y in [0, k-1]`, so they interpenetrate exactly when `L < 2k - 2`.  With
+    `L = s/sqrt2 + k + 1/2` that is `k > s/sqrt2 + 5/2`, i.e. `k <= floor(s/sqrt2) + 2`
+    or `+ 3` according to `frac(s/sqrt2)`; the code states the inequality itself and
+    the sweep checks it against the gate on every row (`0` mismatches).
+    """
+    return block45half_side(cls, s, k) >= cls(2 * k - 2)
+
+
+def _block45half_sentence(cls, s, k):
+    """The block, its four half-integer staircases, and the exact words."""
+    if s < 1 or k < 2:
+        raise Refusal("degenerate_cell", f"s = {s}, k = {k}")
+    h = cls(0, F(s, 2))
+    half = cls(F(1, 2))
+    c45, s45 = Q.word_45()
+    t = cls(k) + half
+    ctr = ((h + t) * half, (h + t) * half)
+    cells, words = [], []
+    for i in range(s):
+        for j in range(s):
+            du = cls(F(2 * i - (s - 1), 2))
+            dv = cls(F(2 * j - (s - 1), 2))
+            cells.append((ctr[0] + du * c45 - dv * s45,
+                          ctr[1] + du * s45 + dv * c45))
+            words.append((c45, s45))
+    box = h + t                    # `L`; the corner fills are anchored at its corners
+    m = k - 2                      # staircase rows: (i, j) >= 0 with i + j <= m
+    for corner in range(4):
+        for i in range(m + 1):
+            for j in range(m + 1 - i):
+                if corner == 0:
+                    x, y = cls(i) + half, cls(j) + half
+                elif corner == 1:
+                    x, y = box - cls(i) - half, cls(j) + half
+                elif corner == 2:
+                    x, y = cls(i) + half, box - cls(j) - half
+                else:
+                    x, y = box - cls(i) - half, box - cls(j) - half
+                cells.append((x, y))
+                words.append((cls(1), cls(0)))
+    return cells, words, block45half_side(cls, s, k)
+
+
+def p_block45half(s, k, family="Block45Half", params=None):
+    """Gate-verify the half-integer corner fill over Q(sqrt 2) and return it as a claim.
+
+    `N = s^2 + 2k(k-1)`, `L = s/sqrt2 + k + 1/2`.  The gate is the arbiter: every
+    staircase square sits `1/(2 sqrt2)` clear of the block's face (no contact), and
+    when the two staircases on a wall meet the sentence is refused as
+    `block45half_corner_collision`.  The claim also records the dominance law --
+    the same count as run 98's integer member `k - 1`, with `L_int <= L <= L_int + 1/2`
+    (`1/2` in the fill branch, `0` when the block's diagonal sets both sides).
+    """
+    cls = qfield(2)
+    T, N = block45half_count(s, k)
+    cells, words, L = _block45half_sentence(cls, s, k)
+    if len(cells) != N:
+        raise Refusal("block45half_count", f"built {len(cells)} != {N}")
+    g = Q.gate(cells, words, cls)
+    if not g["ok"]:
+        raise Refusal("block45half_corner_collision",
+                      f"{family}(s={s}, k={k}): {g['violations']} pairs overlap "
+                      f"(the half staircases meet on a wall; the law needs L >= 2k - 2)")
+    if g["L"] != L:
+        raise Refusal("block45half_side_mismatch", f"gate side {g['L']} != law {L}")
+    claim = Claim("spatial_geometry", family, params or {"s": s, "k": k}, N,
+                  {"count": ("N", N), "extent": ("L", L),
+                   "void": ("L^2 - N", L * L - cls(N)),
+                   "contacts": ("contacts", g["contacts"])},
+                  {"state": cells, "words": words, "field": "Q(sqrt 2)",
+                   "block": s * s, "corner": T})
+    claim.meta["block"] = s * s
+    claim.meta["corner"] = T
+    _tag(claim, L, N)
+    claim.laws["block"] = ("s^2", s * s)
+    claim.laws["corner"] = ("k(k-1)/2", T)
+    claim.laws["floor_gap"] = ("L - (2k + 1/sqrt2)",
+                               L - (cls(2 * k) + cls(0, F(1, 2))))
+    # the dominance law, exact on every claim: count of the integer member k-1, side + 1/2
+    T_int, N_int = block45_count(s, k - 1)
+    if N_int != N:
+        raise Refusal("block45half_count", f"integer member count {N_int} != {N}")
+    L_int = block45_side(cls, s, k - 1)
+    claim.meta["dominated_by"] = f"block45(s={s}, k={k - 1})"
+    claim.laws["half_over_integer"] = ("L - L_int", L - L_int)
+    claim.meta["half_slack"] = str(L - L_int)
+    try:
+        side = _table_side(N)
+    except KeyError:
+        side = None
+    if side is None:
+        claim.meta["table_side"] = None
+        claim.meta["beats_table"] = None
+    else:
+        Ld = DecimalWitness.scalar(L)
+        Td = DecimalWitness.scalar(side)
+        claim.meta["table_side"] = str(side)
+        claim.meta["beats_table"] = Ld < Td
+        claim.meta["table_gap"] = str(Td - Ld)
+    return claim
+
+
+def block45half_spin(ncap=250,
+                     extras=((17, 13), (17, 14), (17, 15),
+                             (17, 16), (17, 17), (17, 18)),
+                     smax=24, kmax=20):
+    """Spin the half-integer corner fill: `(s, k)` with `N <= ncap`, plus `extras`.
+
+    Each row carries two exact references and one measured one: the family's own
+    excess `L - 2k`, the single-word floor `1/sqrt2`, and the delivered side at the
+    same `N` (the exact lift of its 12-dp pose), which is not a score claim.
+    """
+    rows = []
+    cls = qfield(2)
+    half_sqrt2 = Decimal(2).sqrt() / 2
+    todo = []
+    for s in range(1, smax + 1):
+        for k in range(2, kmax + 1):
+            _, N = block45half_count(s, k)
+            if N > ncap:
+                break
+            todo.append((s, k))
+    for s, k in extras:
+        if (s, k) not in todo:
+            todo.append((s, k))
+    for s, k in sorted(todo):
+        _, N = block45half_count(s, k)
+        rec = {"s": s, "k": k, "N": N, "block": s * s,
+               "corner": k * (k - 1) // 2}
+        try:
+            claim = p_block45half(s, k)
+        except Refusal as e:
+            rec["verdict"] = e.law
+            rows.append(rec)
+            continue
+        L = claim.measure[1]
+        Ld = DecimalWitness.scalar(L)
+        rec["verdict"] = "gated"
+        rec["L"] = str(L)
+        rec["L_dec"] = str(Ld)
+        rec["excess_dec"] = str(Ld - Decimal(2 * k))
+        rec["below_half_sqrt2"] = bool(Ld - Decimal(2 * k) < half_sqrt2)
+        rec["half_slack"] = claim.meta["half_slack"]
+        rec["dominated_by"] = claim.meta["dominated_by"]
+        rec["contacts"] = claim.laws["contacts"][1]
+        rec["beats_grid"] = claim.meta.get("beats")
+        rec["beats_table"] = claim.meta.get("beats_table")
+        rec["table_side"] = claim.meta.get("table_side")
+        rec["table_gap"] = claim.meta.get("table_gap")
+        rows.append(rec)
+    return rows
+
+
+def block45half_calibrate(s=17, rows=(677, 785, 901)):
+    """At each delivered row's own side, which half-integer member sits there, and how short.
+
+    The three sides `29/2 + 17/2 sqrt2`, `33/2 + 17/2 sqrt2`, `37/2 + 17/2 sqrt2` are
+    exactly `s/sqrt2 + k + 1/2` for `k = 14, 16, 18`, so the *side* law is the delivered
+    side to the exact lift, not to a tolerance.  This asks the other half of the
+    question: the fill at that side holds `N(s, k)` squares, and the delivered row
+    holds `n` -- the difference is what the corner triangles cannot see.
+    """
+    cls = qfield(2)
+    out = []
+    for n in rows:
+        side = _table_side(n)
+        rec = {"n": n, "table_side": None if side is None else str(side)}
+        if side is None:
+            rec["verdict"] = "no_exact_lift"
+            out.append(rec)
+            continue
+        k = None
+        for kk in range(2, 80):
+            if block45half_side(cls, s, kk) == side:
+                k = kk
+                break
+        rec["k"] = k
+        if k is None:
+            rec["verdict"] = "no_half_integer_leg"
+            out.append(rec)
+            continue
+        T, N = block45half_count(s, k)
+        rec["corner"] = T
+        rec["N"] = N
+        rec["delta"] = n - N
+        rec["feasible"] = block45half_feasible(cls, s, k)
+        try:
+            claim = p_block45half(s, k)
+        except Refusal as e:
+            rec["verdict"] = e.law
+            out.append(rec)
+            continue
+        rec["verdict"] = "gated"
+        rec["L"] = str(claim.measure[1])
+        rec["contacts"] = claim.laws["contacts"][1]
+        out.append(rec)
+    return out
+
+
 # ------------------------------------------------- the two-word seam (run 97)
 #: A two-word sentence is not a new engine: the gate already carries one word per
 #: square (`Q.gate(state, words, cls)`), so what was missing is a *builder* whose
@@ -4245,6 +4483,85 @@ def selftest() -> int:
         "staircases that share a wall), and asymptotically L/sqrt(N) -> 1: the block is "
         "a grid in disguise, which is why no row moves.")
 
+    # ---------------- control 30: the half-integer corner fill (run 99)
+    # (a) the count law: T = k(k-1)/2 per corner, N = s^2 + 4T, and the count dominance
+    assert block45half_count(17, 14) == (91, 653), block45half_count(17, 14)
+    assert block45half_count(17, 16) == (120, 769), block45half_count(17, 16)
+    assert block45half_count(17, 18) == (153, 901), block45half_count(17, 18)
+    for s in range(1, 9):
+        for k in range(2, 9):
+            T, N = block45half_count(s, k)
+            assert N == s * s + 4 * T == s * s + 2 * k * (k - 1), (s, k)
+            assert T == block45_count(s, k - 1)[0], (s, k)      # the same staircase
+    # (b) the side law, both branches, and the dominance of the side
+    assert block45half_side(cls2, 17, 14) == cls2(F(29, 2)) + cls2(0, F(17, 2))
+    assert block45half_side(cls2, 5, 2) == cls2(0, F(5))      # t = 2.5 < h: the block sets it
+    for s in range(1, 9):
+        for k in range(2, 9):
+            Lh = block45half_side(cls2, s, k)
+            Li = block45_side(cls2, s, k - 1)
+            assert Li <= Lh <= Li + cls2(F(1, 2)), (s, k)
+            if Lh == Li:                       # only when the block sets both sides
+                assert Li == cls2(0, F(s)), (s, k)
+            elif Lh == Li + cls2(F(1, 2)):     # the fill branch: exactly the half unit
+                assert Lh == cls2(k) + cls2(F(1, 2)) + cls2(0, F(s, 2)), (s, k)
+    # (c) a gated sentence, its half unit of dominance, and the wall collision
+    ch653 = p_block45half(17, 14)
+    assert ch653.n == 653 and ch653.meta["half_slack"] == str(cls2(F(1, 2)))
+    assert ch653.meta["table_side"] is None
+    assert ch653.meta["dominated_by"] == "block45(s=17, k=13)"
+    assert ch653.measure[1] - cls2(28) < cls2(0, F(1, 2))
+    for k in (15, 18):
+        try:
+            p_block45half(17, k)
+        except Refusal as e:
+            assert e.law == "block45half_corner_collision", e.law
+        else:
+            raise AssertionError(f"s=17, k={k} should collide")
+    # (d) the delivered 677 row's own side is the half law at k = 14, *exactly* (one
+    #     lift; the other two are checked by --block-half-spin's calibration and the
+    #     ledger), and the corner fill at that side is 24 squares short of the row
+    assert _table_side(677) == block45half_side(cls2, 17, 14)
+    for n, k, T, N in ((677, 14, 91, 653), (785, 16, 120, 769), (901, 18, 153, 901)):
+        assert block45half_count(17, k) == (T, N), (n, k)
+    assert [n - N for n, N in ((677, 653), (785, 769), (901, 901))] == [24, 16, 0]
+    # (e) the feasibility law, exactly: k = 14 is inside the window, 16 and 18 outside
+    assert block45half_feasible(cls2, 17, 14)
+    assert not block45half_feasible(cls2, 17, 16)
+    assert not block45half_feasible(cls2, 17, 18)
+    # 677 is no count of the family; 785 is one -- at s = 5, k = 20 -- and it collides
+    assert not [(s, k) for s in range(1, 31) for k in range(2, 26)
+                if block45half_count(s, k)[1] == 677]
+    assert block45half_count(5, 20)[1] == 785 and not block45half_feasible(cls2, 5, 20)
+    say("control 30 -- the half-integer corner fill: the half unit is slack, not capacity.  "
+        "A unit axis square [i, i+1] x [j, j+1] fits the corner triangle x, y >= 0, "
+        "x + y <= t iff i + j + 2 <= t, so the count depends on t only through floor(t): "
+        "t = k and t = k + 1/2 admit the same staircase, and the half unit buys no square.  "
+        "The count is therefore T = k(k-1)/2 per corner, N = s^2 + 2k(k-1), with the side "
+        "L = max(s/sqrt2 + k + 1/2, 2s/sqrt2), and the exact dominance law falls out: the "
+        "half member at k is run 98's integer contact member at k-1, same N, and its side "
+        "is never smaller and at most 1/2 larger (exactly 1/2 in the fill branch, 0 when "
+        "the block's own diagonal sets both sides, and k + 1/2 - s/sqrt2 in between; all "
+        "three cases are asserted here).  The gate confirms it: (s = 17, k = 14) is N = 653 at "
+        "L = " + f"{DecimalWitness.scalar(ch653.measure[1]):.6f}" + " with clearance 0, and its "
+        "excess L - 2k is negative -- below 1/sqrt2 trivially, which is *not* a record, "
+        "because the family's k is the corner parameter, not the ridge's.  The sharp part "
+        "is at the delivered rows: their exact lifted sides are 29/2 + 17/2 sqrt2, "
+        "33/2 + 17/2 sqrt2, 37/2 + 17/2 sqrt2, i.e. s/sqrt2 + k + 1/2 for k = 14, 16, 18 -- "
+        "so the half-integer *side* law is the delivered side exactly, not to a tolerance.  "
+        "But the corner fill at those sides holds 653, 769, 901 against the rows' 677, 785, "
+        "901: short by 24, 16, 0.  And only the first is a sentence: at k = 16 and k = 18 "
+        "the two staircases on each wall meet (L < 2k - 2) and the gate refuses them, so "
+        "the delivered 901 is the fill's count and the fill's side in an arrangement the "
+        "centred corner fill cannot take.  Rung 2 (integer) is blind to the half: it "
+        "charges the same T for t = k and t = k + 1/2.  Rung 3 (rational/algebraic) sees "
+        "it, and sees it as slack: L moves by 1/2 while N does not ("
+        "rational_distinguishes_zero_half, in its packing form).  Rung 7 (certificate) is "
+        "what decides which reading is a sentence: clearance 0 at k = 14, a declared "
+        "collision at k = 16 and 18.  So the falsifier L = 2k + 0.520815 at 677, 785, 901 "
+        "is not met by any certified half-integer sentence: the side matches exactly at "
+        "all three, the count is short twice and infeasible the third time.  No row moves.")
+
     print(f"selftest: OK ({len(announced)} controls)")
     return len(announced)
 
@@ -4330,6 +4647,69 @@ def main(argv=None) -> int:
                 r = hit[0]
                 print(f"  (s={s}, k={k}): N = {r['N']}, L = {r['L_dec'][:18]}, "
                       f"excess = {r['excess_dec'][:12]}, table_gap = {r['table_gap']}")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
+        return 0
+    if "--block-half-spin" in argv:
+        # the half-integer corner fill's own run: small (s, k), the six s = 17 boundary
+        # points, and the three delivered sides it is calibrated against (report: 62-BLOCK45-HALF.md)
+        rows = block45half_spin()
+        gated = [r for r in rows if r["verdict"] == "gated"]
+        below = [r for r in gated if r.get("below_half_sqrt2")]
+        beat = [r for r in gated if r.get("beats_table")]
+        cal = block45half_calibrate()
+        path = os.path.join(ROOT, "workspace/push/block45half_spin.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"rows": rows, "calibration": cal, "ncap": 250,
+                       "gated": len(gated), "below_floor": len(below),
+                       "beats_table": len(beat)}, f, indent=1)
+        tally = {}
+        for r in rows:
+            tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
+        print(f"block-half spin: {len(rows)} rows, {tally}")
+        print(f"  below L = 2k + 1/sqrt2: {len(below)} of {len(gated)} gated")
+        if gated:
+            best = min(gated, key=lambda r: Decimal(r["excess_dec"]))
+            print(f"  smallest excess: {best['excess_dec']} "
+                  f"(s = {best['s']}, k = {best['k']}, N = {best['N']})")
+        print(f"  beats the delivered row: {len(beat)}")
+        print("  the delivered low-slack sides, exactly, and what the corner fill holds there:")
+        for r in cal:
+            print(f"    n = {r['n']}: side = {r['table_side']}, k = {r['k']}, "
+                  f"N = {r['N']}, short by {r['delta']}, {r['verdict']}")
+        for s, k in ((17, 13), (17, 14), (17, 15), (17, 16), (17, 17), (17, 18)):
+            hit = [r for r in rows if (r["s"], r["k"]) == (s, k)]
+            if hit:
+                r = hit[0]
+                extra = (f"L = {r['L_dec'][:18]}, excess = {r['excess_dec'][:12]}"
+                         if r["verdict"] == "gated" else r["verdict"])
+                print(f"  (s={s}, k={k}): N = {r['N']}, {extra}")
+        print(f"  ledger: {os.path.relpath(path, ROOT)}")
+        return 0
+    if "--block-half-beyond" in argv:
+        # the half fill's window above n = 1000: one gated row, two law-only rows (the
+        # 5164-cell gate is minutes; the law is the integer ladder shifted by 1/2)
+        cls = qfield(2)
+        out = []
+        for s, k in ((25, 20), (35, 27), (50, 37)):
+            T, N = block45half_count(s, k)
+            L = block45half_side(cls, s, k)
+            rec = {"s": s, "k": k, "N": N, "corner": T, "L": str(L),
+                   "void": str(L * L - cls(N))}
+            if N <= 1500:
+                claim = p_block45half(s, k)
+                rec["verdict"] = "gated"
+                rec["contacts"] = claim.laws["contacts"][1]
+            else:
+                rec["verdict"] = "law_only"
+            out.append(rec)
+            print(f"  (s={s}, k={k}): N = {N}, L = {rec['L']}, void = {rec['void']}, "
+                  f"{rec['verdict']}" +
+                  (f", {rec['contacts']} contacts" if rec["verdict"] == "gated" else ""))
+        path = os.path.join(ROOT, "workspace/push/block45half_beyond.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"rows": out}, f, indent=1)
         print(f"  ledger: {os.path.relpath(path, ROOT)}")
         return 0
     if "--two-word-spin" in argv:
