@@ -2849,3 +2849,51 @@ README/STATUS run-history line byte-identical.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `69-FACE-AND-SCORE.md`; records `31`–`68`.
+
+## Run 109 — the relational layer: pin chains, no free void, and a verified "win" that the truth rejects
+
+Run 106–108 moved cells one or two at a time. This run asks the semantic question instead: what holds
+a packing together, and can a *coupled* move — a group, a re-orientation, a void trade — break it?
+`scripts/semantic_pack.py` (3 controls, 28 decision functions, float-free, in `--audit`) builds four
+exact relational objects and attacks five rows (11, 17, 18, 29, 330).
+
+**The structure.** Contacts (slack-0 pairs), pins (wall cells whose contact narrows under the inward
+direction), depth-2 bottleneck chains (wall → pin → pin), and void pockets (connected components of
+wall cells with room). Every analysable row is **relationally closed**: n = 11 has 5 contacts, 2 pins,
+2 chains and one free wall cell with `3.53e−4` of room; n = 17 has 9 contacts, 3 pins, 4 chains, no
+pockets; n = 29 has 23 contacts, 1 pin, 1 chain, no pockets; n = 330 has 30 contacts, 2 pins, 2 chains,
+no pockets. n = 18 stalls at 16 overlaps after snapping. At n = 330 the 28 free wall cells are all on
+`hi_x`/`hi_y` while both binding cells (`lo_x`, `lo_y`) are pinned: free space sits on the sides that do
+not set the side, which is the relational restatement of runs 106–108.
+
+**The attacks.** 234 coupled moves judged by the gate at clearance 0: rigid translations of 2–5-cell
+connected clusters along the eight directions (95), 45°/90° re-orientations of those clusters about
+their own centres (134), and pin-into-void trades (1). 92 legal, **one model win**, zero true wins.
+
+**The model win, and its rejection.** At n = 330 a rigid move of cells {14, 32} by
+`−13 + (928542037565257/10^14)√2` along `(√2/2, √2/2)` gates at clearance 0 and its certificate
+**verifies** (N = 330, 25 contacts) at `L_model = 9500099491707/10^12 + (13/2)√2 = 18.692488`, beating
+the table's `18.692672` by `1.85e−4`. Written into `submission.csv` and scored by the repo's own
+`sqscore`, the same coordinates have true side `18.692916` against the delivered row's `18.692388` —
+`2.43e−4` **worse**, and the table score moves `22.218056945 → 22.218085993`. The patch was reverted
+immediately; `sqscore` and `record_guard` are green on the delivered table.
+
+**Why.** The certificate is exact for the *snapped* pose — at n = 330, 236 of 330 angles are not words
+(gaps to `6.9e−3` rad). The table's L is a model value too: it overstates that row's true side by
+`2.84e−4`, so "candidate beats table L" is not a sound test there. And the representation question has
+a sharper answer than "higher degree": the gate's separations involve `cos`/`sin` of non-word angles,
+which are transcendental for rational non-zero angles (Lindemann–Weierstrass), so **no algebraic field
+can certify such a row at all**. The sound routes are a snapping error budget (`true side ≥ model − ε`),
+certified interval arithmetic, or a genuine extension only for algebraic angles (e.g. `Q(√2,√3)` for
+30°/60° words). The 553 word-exact rows need none of it, and remain the whole of the repository's
+verified frontier.
+
+Checks: `semantic_pack.py --selftest` 3 controls; `face_slide` 4; `observer_chain` 6; `cand106` 5;
+`cand105` 5; `verify_certificates --selftest` 11 mutations; `--certificates` 7 shipped; `glm_wheels
+--selftest` 32; `--audit` **575 functions, 0 naming `float`** (semantic_pack 28, face_slide 27,
+observer_chain 35, cand106 25); `sqscore` guard OK 22.218056945 / 553 beats; `record_guard.py` OK;
+README/STATUS run-history line byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `70-RELATIONAL.md`; records `31`–`69`.
