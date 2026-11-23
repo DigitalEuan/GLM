@@ -2546,3 +2546,49 @@ fuzz; bare run exit 0; `record_guard.py` OK; README/STATUS footers byte-identica
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `65-LANDSCAPE.md`; records `31`-`65`.
+
+## Run 104 — the rung's last pair closes above the rung, and the 28 + 28 band's law
+
+**The positional repair (`rat47pos.py`).** Run 103 left the rung one or two pairs short and showed that
+angles cannot close them. Run 104 moves one cell of each offending pair along a SAT axis of the pair,
+orientations fixed: the feasible set is an exact interval union in Q (two rational rays per axis,
+intersected over the pairs and with the box, so the side cannot grow), the witness is the first feasible
+move — the pair's own constraint turning non-negative, i.e. exact contact and clearance 0 — and a
+two-pair row is repaired one pair at a time by accepting the move that strictly lowers the gate's
+overlap count. **All four rows close with clearance exactly 0 and a verified certificate**: 680 (cell
+244 by 3.0743e−5), 733 (cell 280 by 6.9151e−4, then cell 471 by 3.6617e−4, 2 contacts), 788 (cell 195
+by **2e−11**), 845 (cell 254 by 1.5524e−4, then cell 763 by 6.4547e−4, 2 contacts) — and **all four
+sit above the rung**, exactly: 1.9274e−9 (680, 733), 1.9304e−9 (788), 1.9324e−9 (845) as Fractions
+(`3373/1750000000000`, `13513/7·10^12`, `13527/7·10^12`). The excess is a wall problem: the wide wall's
+tightest cell has 6.8–7.5e−11 of inward room, 26–28× short, and 7 ∤ 10^12 while every coordinate of the
+pose is a multiple of 1/10^12. So "does it close at 200/7" has the answer no — it closes one lattice
+step above, as an exact zero-clearance sentence.
+
+**The band's law (`rat47law.py`).** The census is exact: `m² − 52` axis cells (624/677/732/789) plus
+28 + 28. The module is a **7.48-thick strip**: across four independently polished rows its thickness
+agrees to **5.8e−11** (each ~5.4e−10 above the rational `187/25`), it is pinned to the wall it touches
+to 8e−12, and its free length wanders **3.6e−3** — because 28 cells carry only 28–29 intra-band
+contacts, so the band is a chain, not a rigid body. The intra-band contact types are **five, four
+identical in all four rows, one count flipping 8↔9** (`t=1/2`–`t=1/2` on `v`, and `t=1/3`–`t=1/3` on
+`v`), the classification safe for any threshold in `[1e−10, 1.4e−4]`. The band-to-axis interface is
+**not** fixed (28–32 contacts in 11–13 types). And the rung's `4/7` is a **lattice shift**: two
+interpenetrating lattices `Z²` and `(Z + 4/7)²` give **18 column gaps of exactly 3/7 in every row**
+(closest 2.9e−10 … 3.2e−6), which is what the strip lemma predicted — not a seam, a shift.
+
+**Above 1000.** The arithmetic is exact (`N = m² + 4 = (m² − 52) + 56`, sides 228/7, 284/7, 319/7 at
+m = 32, 40, 45) and the growth is translation only: copying the outer 3-wide band outward takes 845 to
+965 cells at side 32.571428573361 with the excess **unchanged digit for digit**
+(`13527/7000000000000`), so the side extends past 1000 without drift — but the count does not (965
+against 1028), because the outer band is not periodic (58 cells in the last 3 units against 87). The
+rows share a count law, not a shape; an exact `N > 1000` row needs a fresh construction, which is the
+next production.
+
+Checks: `rat47pos.py --selftest` 5 controls; `rat47law.py --selftest` 5; `rat47.py --selftest` 4;
+`landscape65.py --selftest` 6; `qsqrt2.py --selftest` 11; `glm_wheels.py --selftest` 32;
+`verify_certificates --selftest` 11 mutations; `--audit` **427 functions, 0 naming `float`**
+(`rat47pos` 26, `rat47law` 19, both in the audit list); bare runs exit 0; `record_guard.py` OK;
+README/STATUS footers byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `65-LANDSCAPE.md` §9; records `31`–`65`.

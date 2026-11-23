@@ -280,3 +280,136 @@ Two candidates, in order of cheapness:
 Neither is claimed here. What run 103 establishes is the arithmetic (`2k + 4/7`, `m² + 4`), the
 invariant (`28 + 28` tilted squares), the lemma (no `4/7` seam), and the measurement (the pose is one
 or two pairs away) — plus a 14-row run that costs 306 s instead of 45 minutes with identical verdicts.
+
+## 9. Run 104 — the rung's last pair closes (above it), and what the 28 + 28 band is
+
+### 9.1 The positional repair (`scripts/rat47pos.py`)
+
+Run 103 showed that re-choosing words cannot close the rung's one or two offending pairs, so run 104
+moves *positions*: one cell of each offending pair is translated along a SAT axis of that pair, every
+orientation untouched. The method is small and exact:
+
+* for a move `t·d` of a cell, each pair's constraint is `|s0 + t·(d·q)| >= need` on **some one** of its
+  eight axes — a union of two rational rays per axis, intersected over the pairs and with the container
+  box (so the side can never grow). The feasible set is an exact interval union in `Q`; no tolerance
+  decides anything and no float appears in any decision.
+* the witness is the **first** feasible move away from the delivered pose: the boundary at which the
+  offending pair's own constraint turns non-negative, so that pair is in exact contact and the
+  sentence's clearance is exactly 0.
+* a row with two pairs is repaired one pair at a time; a move is accepted when the exact gate's overlap
+  count strictly drops, and the gate — not the interval arithmetic — is the arbiter.
+
+| n | offending pair(s) | delivered slack | move | gate | certificate | side | excess over `m + 4/7` |
+|---|---|---|---|---|---|---|---|
+| 680 | 244–268 (`t=1`, `t=1`) | −3.0743e−5 | cell 244, −x, `6148681/200000000000` | ok, clearance 0, 1 contact | **verified** | 26.571428573356 | 1.92742857e−9 |
+| 733 | 255–280, 471–496 | −6.9151e−4, −3.6617e−4 | cell 280, +x, `691512899/10^12` (2 → 1), then cell 471, −x, `183083837/5·10^11` | ok, clearance 0, 2 contacts | **verified** | 27.571428573356 | 1.92742857e−9 |
+| 788 | 195–217 (`t=0`, `t=0`) | **−2e−11** | cell 195, −x, `1/5·10^10` | ok, clearance 0, 1 contact | **verified** | 28.571428573359 | 1.93042857e−9 |
+| 845 | 254–278, 763–790 | −1.5524e−4, −1.9999e−4 | cell 254, −x, `77620519/5·10^11` (2 → 1), then cell 763, −y, `129093267/2·10^11` | ok, clearance 0, 2 contacts | **verified** | 29.571428573361 | 1.93242857e−9 |
+
+**The pair closes, and the answer to "at `200/7`?" is no.** Each repaired sentence is an exact
+zero-clearance sentence — a contact, not a tolerance — and `verify_certificates` accepts a
+`galois-certificate/1` for all four. But the side they close at is the delivered side, and that side is
+**above** the rung by 1.93e−9:
+
+* exact, not measured: `28571428573359/10^12 − 200/7 = 13513/(7·10^12)` for 788, and the same
+  arithmetic gives `3373/1750000000000` (680, 733) and `13527/7000000000000` (845).
+* the excess is a **wall** problem, not a pair problem: the cell realising the wide direction has
+  7.0e−11 (788), 7.3e−11 (733), 7.5e−11 (680) and 6.8e−11 (845) of inward room before it touches its
+  neighbour — 26–28× **less** than the excess — so no single-cell move, and no whole-wall move, reaches
+  the rung.
+* the pose lives on a `1/10^12` coordinate grid while the rung's side is `m + 4/7`, denominator 7, and 7
+  does not divide `10^12`. A sentence at the rung needs coordinates off that grid, so rounding the
+  delivered pose can only make it tight *at its own side*.
+
+Tally: `closed-above-rung` ×4. **The rung is closable as an exact zero-clearance sentence one lattice
+step above itself, and not at itself.** The 2e−11 gap run 103 measured was the visible part of a
+1.93e−9 wall offset; closing the pair was never going to move the wall.
+
+### 9.2 The 28 + 28 band's law (`scripts/rat47law.py`)
+
+**The census (exact).** Every row carries `m² − 52` axis cells — 624, 677, 732, 789 — with exactly 28
+at the 3-4-5 word and 28 at `t = 1/3`, so `N = (m² − 52) + 56 = m² + 4` is a decomposition, not a
+coincidence.
+
+**The module (measured, exact where it can be).** Each band is a strip anchored to the bbox corner, and
+the other band is its transpose:
+
+| key | 680 | 733 | 788 | 845 | spread |
+|---|---|---|---|---|---|
+| `t=1/2` `x0` | 1.545714285793 | 1.545714285790 | 1.545714285788 | 1.545714285785 | **8e−12** |
+| `t=1/2` width | 7.480000000564 | 7.480000000542 | 7.480000000523 | 7.480000000506 | **5.8e−11** |
+| `t=1/2` `y0` | 12.434689648 | 12.433414229 | 12.434640726 | 12.436319694 | 2.9e−3 |
+| `t=1/2` height | 12.701318869 | 12.704928117 | 12.704280179 | 12.703017386 | 3.6e−3 |
+
+The `t = 1/3` band has the same four numbers transposed (`y0 = 1.5457142858` to 8e−12, height 7.48 to
+5.8e−11, width and `x0` free). So the band is a **7.48-thick strip whose thickness is the same in four
+independently polished rows to 5.8e−11** (each row sits 5.1–5.6e−10 above the rational `187/25` — the
+shim scale run 102 found), **pinned to the wall it touches to 8e−12, and free along its own length,
+which wanders by 3.6e−3**.
+
+**The contact graph (the law).** Inside each band the contact types are the same in all four rows:
+
+| type (words, frame axis, sign) | 680 | 733 | 788 | 845 |
+|---|---|---|---|---|
+| `t=1/2`–`t=1/2`, `u`, + | 16 | 16 | 16 | 16 |
+| `t=1/2`–`t=1/2`, `u`, − | 4 | 4 | 4 | 4 |
+| `t=1/2`–`t=1/2`, `v`, − | 8 | 8 | 8 | **9** |
+| `t=1/3`–`t=1/3`, `u`, + | 20 | 20 | 20 | 20 |
+| `t=1/3`–`t=1/3`, `v`, − | **9** | 8 | 8 | 8 |
+
+Five types, four identical in every row, exactly one contact flipping between rows. The classification
+is safe over a wide threshold band: the smallest non-contact slack among the band's close pairs is
+1.4e−4 … 1.9e−4, so any threshold in `[1e−10, 1.4e−4]` returns the same graph.
+
+**And the graph is why the length moves.** 28 cells carry only 28–29 exact intra-band contacts: an
+assembly that under-constrained is not rigid (rigidity wants ~81), and its free direction is exactly the
+one that varies. What fixes the *thickness* to 5.8e−11 is not the band but its two interfaces.
+
+**The interface is not a law.** The contacts from the band to the axis mosaic are 32, 31, 28, 31 in 11,
+12, 12, 13 types — no fixed graph. That is the honest split: the band is *internally* lawful and
+*externally* loose, which is what a strip wedged between two mosaics with 1e−3 fillers should look like.
+
+**The `4/7` is a lattice shift, not a seam.** Classifying every cell's bbox corner by the nearer of `Z²`
+and `(Z + 4/7)²`, the axis cells' column gaps include **18 gaps of exactly 3/7 in every row** (closest
+measured 2.9e−10 … 3.2e−6) — the `4/7` / `3/7` alternation of two interpenetrating lattices. The
+per-lattice cell *counts* flip with the corner's own gauge (680: 560 shifted / 120 unit; 733: 121 / 612),
+so they are reported as gauged, while the 18 is not gauged at all. This is what the strip lemma
+predicted: a `4/7` margin holds no square, so the rung's extra `4/7` has to be a *relative shift* of the
+mosaic, and it is.
+
+### 9.3 Above 1000
+
+**Arithmetic (exact).** With `axis = m² − 52` and `band = 56` measured in all four rows, the law extends
+to every `m >= 26` as arithmetic:
+
+| m | N = m² + 4 | axis | band | side = m + 4/7 |
+|---|---|---|---|---|
+| 32 | 1028 | 972 | 56 | 228/7 |
+| 40 | 1604 | 1548 | 56 | 284/7 |
+| 45 | 2029 | 1973 | 56 | 319/7 |
+
+**Growth (translation only, so no drift is possible).** Copying the outer 3-wide band outward — every
+added cell an *exact translate* of a cell already in the row, no coordinate re-derived — takes 845 to 965
+cells at side 32.571428573361. The excess over the new rung is `13527/7000000000000` = 1.93242857e−9,
+**digit for digit the source row's excess**: the rung's offset is carried, not compounded. So the *side*
+extends past 1000 without drift.
+
+**The count does not extend this way**, and that is the finding: the growth adds 120 cells where
+`N = m² + 4` asks for 183, because the outer band is not periodic — 58 cells in the last 3 units against
+87 in the one before it. Two consequences, stated rather than smoothed over: the four rows are **not
+translations of one another** (they share a count law, not a shape), and an exact `N > 1000` row needs a
+fresh construction, not a copy. The grown sentence also inherits the source row's two violating pairs,
+which §9.1's repair closes the same way.
+
+### 9.4 What is and is not claimed
+
+Established: four exact zero-clearance sentences with verified certificates at the delivered sides (0 of
+4 at the rung itself); the wall is 1.93e−9 wide and 27× tighter than the excess needs; the 28 + 28
+module's thickness `187/25` to 5.8e−11, its five intra-band contact types, and its loose interface; the
+rung's `4/7` as a two-lattice shift with 18 exact `3/7` gaps; and drift-free side extension past 1000
+with a named count failure.
+
+Not claimed: an exact sentence at `2k + 4/7`; a rigid module (the band is a chain, not a body); a fixed
+band-to-axis interface; an `N > 1000` row. The next production is a construction at the rung side itself
+— the wall offset says the pair repair was the wrong scale, and the lattice law says where the `4/7`
+enters — with the count law's constructive form as its second target.

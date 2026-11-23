@@ -5569,7 +5569,9 @@ def main(argv=None) -> int:
         import verify_certificates as VC
         import landscape65 as L65
         import rat47 as R47
-        mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47]
+        import rat47pos as R47P
+        import rat47law as R47L
+        mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47, R47P, R47L]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)
