@@ -2635,3 +2635,68 @@ OK; README/STATUS footers byte-identical.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `66-CANDIDATES.md`; records `31`–`65`.
+
+## Run 106 — the census certified (552 rows), the 45 degree repair, and a jammed two-cell trade
+
+**The instrument (`cand106.py`).** Run 105 certified five rows by hand; this run asks whether the
+slide is a property of five rows or of the table. One screen (snap every angle to a unit word,
+`<= 1e-9`) puts **553** of the 1,000 rows in the census (the worst row, n = 743, is 1.27 away);
+one `survey` pass per row returns the overlapping pairs *and* the tightest separated pair's
+slack; one `slide_best` closes that pair on **every** positive axis at once; the exact gate and a
+`galois-certificate/1` decide. The ledger is compact (`cand106.json`: per row a verdict, the
+slide, the side, the contacts), so the selftest stays at 5 controls.
+
+**Part 1 — 552 of 553 certified, 547 for the first time.** The batch (2441 s) certifies **552**
+rows at clearance exactly 0 with verified certificates; 550 by a slide (549 single-axis, one
+all-axis) and 2 (n = 678, 679) by the repair of part 2. The all-axis case is **n = 634**: its
+tightest pair has both separations at `1 + 77/10^12`, so closing one axis leaves the pair
+separated (its SAT slack is the max over axes) — closing both needs `t = 77/10^12*sqrt2` along
+`(1,1)/sqrt2`, and that certifies at `L = 6426776695777/250000000000` with 2 contacts. The single
+exception is n = 1, one square with no pair to contact: **already tight, nothing to certify**.
+Run 105's five rows (325, 329, 331, 66, 67) are inside the 552 at identical sides, so **547 rows
+are newly certified** — the shipped document had seven cells, none of these rows. Three
+representative certificates (first, middle, last row of the census) are written to
+`workspace/push/cand106_samples.json` and re-verified by the standalone verifier alone: n = 2 at
+`L = 2`, n = 427 at `1312500000119/62500000000`, n = 1000 at `16000000000969/500000000000`,
+**3 verified, 0 failed**. 551 of the 552 sides are identical to the delivered ones and one moves
+— n = 2 certifies at exactly `L = 2`, `1e-9` below the delivered `2 + 1/10^9`, because its slide
+moved the bbox-defining cell; that is the shim and the row's own floor (a 2 x 1 grid's side is 2),
+not a gain, and the guard's 553/1000 count is untouched. So 547 rows stop being a pose with a
+tolerance and become a sentence with a witness.
+
+**Part 2 — the 45 degree repair, generalised.** Run 104's move is rational; the 45 degree axes
+are `Q2(0, +-1/2)`, so the step becomes `t = (sign(proj)*need - proj)/k` with `k = +-d.q` and `d`
+one of the eight signed unit directions, smallest `|t|` first, the exact gate as arbiter, no
+`Decimal` anywhere. On the asked rows it is honest and half-successful: **n = 330 goes 6 -> 3
+overlaps in four exact moves** (three `-x`, one diagonal `-1 + 1414025346279/2*10^12*sqrt2` —
+the 45 degree case working), then refuses because the fifth move does not lower the count, the
+three survivors (216, 233), (224, 247) and their common clearance
+`-1/2 + 352353905641/10^12*sqrt2` being mutually coupled; **n = 332 does not start** — its 159
+overlaps are dense enough that the first move leaves 159, so the loop stops after one step.
+Neither closes into a certificate. What the repair *does* close is the census's two near-misses:
+n = 678 and n = 679 each have one overlap at their exact words (slack
+`-1 + 1414213561901/2*10^12*sqrt2`), one diagonal step of that size fixes it, and both certify at
+`L = 1326776695393/50000000000` with 1 contact.
+
+**Part 3 — the two-cell trade has no depth-one instance.** Doc 66 §7's trade (free slack inside,
+spend it by pulling the wall cell in) is enumerated exhaustively on two certified rows rather
+than searched: every bbox wall cell, every bbox-adjacent partner, all eight signed directions.
+**n = 66: 1216 combinations, n = 325: 2880, every one with `tau = 0`** — not small, exactly zero,
+and none turned down by a gate, so the moves do not exist. Both sentences are *jammed at depth
+one*: every neighbour of every wall cell is in contact along a narrowing axis in every one of the
+eight directions, so there is no interior slack to spend. The mechanism is proven live by control
+5, which shrinks a 4 x 3 sentence's box from 4 to **3**; the refusal is a property of the rows,
+not of the instrument. A first four-direction run reported the same verdict and was wrong to
+trust (a widening axis can free room in that blind spot) — the eight-direction count is the
+recorded one.
+
+Checks: `cand106.py --selftest` 5 controls; `cand105.py --selftest` 5; `rat47.py` 4;
+`rat47pos.py` 5; `rat47law.py` 5; `landscape65.py` 6; `qsqrt2.py` 11; `glm_wheels.py --selftest`
+32; `verify_certificates --selftest` 11 mutations; `--certificates` 7 shipped; `--audit` **485
+functions, 0 naming `float`** (cand106 25, in the audit list); every mode run to completion, exit 0
+(`--batch` 2441 s, `--repair`, `--couple`, `--retry`); `record_guard.py` OK; README/STATUS
+footers byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `67-CENSUS-CERTIFIED.md`; records `31`–`66`.

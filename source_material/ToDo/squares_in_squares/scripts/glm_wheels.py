@@ -5572,7 +5572,8 @@ def main(argv=None) -> int:
         import rat47pos as R47P
         import rat47law as R47L
         import cand105 as C105
-        mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47, R47P, R47L, C105]
+        import cand106 as C106
+        mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47, R47P, R47L, C105, C106]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)
