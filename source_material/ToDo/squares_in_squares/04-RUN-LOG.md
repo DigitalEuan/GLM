@@ -2792,3 +2792,60 @@ byte-identical.
 verified certificate achieved a strictly smaller side anywhere in either search.
 
 Entries `68-OBSERVER-CHAIN.md`; records `31`–`67`.
+
+## Run 108 — the face slide spends the 1e-9 polish, the high-slack rows refuse, and the metric gains 7.9e-9
+
+Doc 68 §4 left one move untested: translate every cell that realises one side of a certified row's
+bounding box inward by a common exact `t`. This run settles it with `scripts/face_slide.py` (4
+controls, 25 decision functions, float-free, in the audit list), and the answer has two halves.
+
+**Part 1 — the slide.** For a face and an inward direction the feasible set is the interval `[0, T]`
+with `T` the smallest pair cap (each pair survives while *some* axis is separated; axes not separated
+at `t = 0` are skipped, the error run 106's `wall_room` made). Every one of the eight faces has
+strictly positive room: `231/10^12` on all four faces of n = 66 — bound by pairs (0,1), (15,16),
+(15,21), (0,5) — and `27/250000000000` on all four of n = 325 — (97,3), (107,90), (102,0),
+(112,93). A *single* face slide still changes `L` by exactly zero, and that is the second half:
+the container is a square, `L` is the larger of the two extents, and both rows are square to the
+delivered precision, so the other axis binds. Sliding **both faces of an axis** shortens it by their
+two rooms at once and the squeeze follows: n = 66 goes from `4328427125631/500000000000` to
+`21642135627/2500000000` (`dL = -231/500000000000` = −4.62e−10) and n = 325 from
+`741421356313/40000000000` to `18535533907609/1000000000000` (`dL = -27/125000000000` = −2.16e−10),
+each at **clearance 0 with a verified certificate** (`verify_certificates.py`). The same squeeze on
+the 33 exact-worded rows with n ≤ 40 shrinks **31** of them with verified certificates
+(`Σ dL = -26881/10^12` = −2.6881e−8); the slides are exactly the `1e-9` polish coming off (n = 2:
+`2000000001/1000000000` → `2`), not a smaller packing.
+
+**Part 2 — the 448 uncertified rows.** Ranked by their own metric term `L/√n − 1` (exact, rigorous
+intervals) with `L²−n` beside it: the top 15 are n = 11 (1.168985), 18, 17, 29, 28, 39, 37, 41, 53,
+55, 54, 68, 69, 70, 71 — all small or medium rows far above the area bound, all with transcendental
+carriers. Each was attacked constructively: snap the stored angles to the exact words (worst gap
+3.4e−3 rad), repair every overlap by the smallest exact slide, slide to contact, squeeze, certify.
+**Three certify and all three are worse** — n = 11 by `+6011784170943/2644100000000000` = +2.27e−3,
+n = 17 by `+458356142729/675500000000000` = +6.79e−4, n = 41 by `+11725495717/1750000000000` =
++6.70e−3 — and none of the three admits a face slide afterwards. **Twelve stall** with overlaps left
+(18: 16→14, 28: 16→15, 29: 20→1, 37: 20→13, 39: 21→7, 53: 24→13, 54: 26→16, 55: 17→16, 68: 52→50,
+69: 24→15, 70: 32→29, 71: 31→30). **No row improves**, so the 448 stay uncertified and their
+delivered sides stand.
+
+**Part 3 — the exact metric.** `score = Σ L/√n − 1` over the 1,000 rows, bounded rigorously with
+integer square roots (no float, no Decimal, no tolerance): the delivered table scores
+`22.645990612927686` (the repo's own formula; the leaderboard number 22.218056945 differs by 0.428
+and the *delta* is independent of it). With the 33 verified improvements the bounds give
+`Δ = -0.000000007885757`, i.e. **−7.885757e−9**, strictly better. The candidate is
+`workspace/push/submission_candidate.csv`: the **1,026 changed square rows only**, coordinates
+rounded to 12 places, every one re-gated exactly and still clearing at `clearance ≥ 0`
+(`rounded_regate` in `workspace/push/face_slide.json`). **`submission.csv` is not updated** — the
+gain is the deliberate safety polish, no packing improved, and the patch is left for the user to
+apply. The full 553-row sweep is **not** complete (≈2 s a row, the large 45°-heavy rows dominate);
+this run measured n ≤ 40 plus the two named rows and leaves the other 518 to the next run.
+
+Checks: `face_slide.py --selftest` 4 controls; `observer_chain.py --selftest` 6; `cand106.py
+--selftest` 5; `cand105.py --selftest` 5; `rat47.py` 4; `rat47pos.py` 5; `rat47law.py` 5;
+`landscape65.py` 6; `qsqrt2.py` 11; `glm_wheels.py --selftest` 32; `verify_certificates --selftest`
+11 mutations; `--certificates` 7 shipped; `--audit` **547 functions, 0 naming `float`**
+(face_slide 27, observer_chain 35, cand106 25, in the audit list); `record_guard.py` OK;
+README/STATUS run-history line byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `69-FACE-AND-SCORE.md`; records `31`–`68`.
