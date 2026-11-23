@@ -164,6 +164,13 @@ blind spot. The eight-direction enumeration doubles the combination count, and e
 direction is also exactly zero, so the verdict survives the correction; the correction is
 recorded here because the first number was not the honest one.
 
+**Erratum (run 107, doc 68 §1).** The `tau = 0` above is `cand106.wall_room`'s, and that rule
+is conservative: it caps a pair on its narrowing axes and blocks as soon as one of them is
+negative, but a pair is legal while *some* axis is separated. With the corrected rule every one of
+these 1216 and 2880 combinations has positive room, so the sentence is **not** jammed at depth one;
+what is true — and now measured — is that no single-cell or two-cell move lowers L, because the
+bounding-box face is multiply defined (doc 68 §2).
+
 ## 4. What is and is not claimed
 
 **Established.** 553 census rows (exact screen, `1e-9`); **552 certified** at clearance exactly 0

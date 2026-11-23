@@ -2697,6 +2697,98 @@ functions, 0 naming `float`** (cand106 25, in the audit list); every mode run to
 (`--batch` 2441 s, `--repair`, `--couple`, `--retry`); `record_guard.py` OK; README/STATUS
 footers byte-identical.
 
+**Correction (run 107, doc 68 §1).** The `tau = 0` of part 3 is `cand106.wall_room`'s pair rule,
+which caps a pair on its narrowing axes and blocks as soon as one is negative. A pair is legal
+while *some* axis is separated, so that rule over-reports blocks (on the exact knight pair
+`dx = 1`, `dy = 2` it reads 0 where the truth is unbounded); with the corrected rule all 1216 and
+2880 combinations have positive room. "Jammed at depth one" is therefore wrong; what run 106
+measured, correctly and for a different reason, is that no two-cell trade lowers L — the face is
+multiply defined. The substitution of this paragraph is the only change to this entry.
+
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `67-CENSUS-CERTIFIED.md`; records `31`–`66`.
+
+## Run 107 — depth two is open, the side does not move, and n = 330's three-overlap cycle stays blocked
+
+Run 106 asked two questions — is a certified sentence *jammed at depth one* (doc 66 §7's two-cell
+trade), and can n = 330's three coupled overlaps be cleared by moving several cells at once
+(doc 67 §§2–3) — and this run answers both with one instrument, `scripts/observer_chain.py`
+(6 controls, float-free, in the bytecode audit), built on the two Lean contracts: `readCost`
+(`ObserverY.lean`) and the MOG syndrome diagnosis at weight ≤ 3 (`GolaySemantics.lean`). The
+contracts are re-computed exactly from the Lean data, not quoted.
+
+**Part 0 — the instrument that answered the first question was wrong, and the run says so first.**
+`cand106.wall_room` caps a pair by the maximum over *narrowing* axes and returns `0` as soon as a
+narrowing axis is negative; but a pair is legal while **some** axis is separated, so an axis that is
+constant, widening, or already negative constrains nothing. Control 1 pins the difference on an
+exact knight pair (`dx = 1`, `dy = 2`, moving `+x`): `wall_room` reads `0`, `room_set` reads
+unbounded (the `y` axis is slack `+1` and never entered). Consequence: **run 106's "jammed at depth
+one" is an artifact** — with the corrected rule **all 90 of n = 66's and all 216 of n = 325's
+inward probes have positive room**. Doc 67 §3 and the run-106 entry carry the correction.
+
+**Part 1 — the directed depth-two tracer.** Both certified rows are reproduced and checked first:
+n = 66 at `L = 4328427125631/500000000000`, n = 325 at `L = 741421356313/40000000000`, both
+`verified`. The tight graph (SAT slack exactly 0) has **3** pairs at n = 66 and **1** at n = 325.
+From every bbox wall cell and every inward direction the tracer spends the cell's *corridor* (the
+sum of successive rooms, each closing the next contact) and then walks wall → tight blocker 1 →
+tight blocker 2 → pocket, pruning whenever a required receding direction is itself a tight contact
+of an outside cell and keeping a chain only if its interior cells can hold it and every tight
+contact inside survives the shear.
+
+| | n = 66 | n = 325 |
+|---|---|---|
+| wall cells (faces `lo_x, hi_x, lo_y, hi_y`) | 30 (7, 8, 8, 7) | 72 (18, 18, 18, 18) |
+| inward probes / with positive corridor | 90 / **90** | 216 / **216** |
+| corridor range | `231/10^12` … `742640687523/10^12 − √2/2` = 0.035533 | `27/250000000000` … `80761184477/10^11 − √2/2` = 0.100500 |
+| two-cell chains with room > 0 | 68 | 144 |
+| three-cell chains | 12 | 0 |
+| pruned at blocker 2 / by the shear test | 4 / 558 | 0 / 1224 |
+| **probes that shrink L** | **0** | **0** |
+| runtime | 23.87 s | 200 s |
+
+So the sentences are *open*, not jammed, and still **no chain moves the side**: 0 of 90, 0 of 68
+and 0 of 12 at n = 66, and 0 of 216, 0 of 144 and 0 of 0 at n = 325, with `dL >= 0` for every
+survivor (the ten probes that were gated certify at clearance 0 — six at `dL = 0`, four at
+`dL > 0` by at most `231/10^12 + 231/2·10^12·√2`: legal moves that leave the side or grow it). The
+reason is exact and in the second column: the bounding-box face is **multiply defined** — 7–8 cells
+per face at n = 66 and 18 at n = 325 — so moving one face cell inward leaves the side where it is
+until *every* face cell moves. That is a face slide, not a two-cell chain.
+
+**Part 2 — the coupled repair.** From run 106's four moves, n = 330 has `L =
+118003255389229/6312500000000` and **three violated pairs, all disjoint**: `(184, 195)` with
+`−2 + 2828238908803/2·10^12·√2`, `(216, 233)` with `−1/2 + 353548007689/10^12·√2`, `(224, 247)`
+with `−1/2 + 352353905641/10^12·√2` (the first is the pair cell 195's own diagonal step created,
+which is why the cluster is `{184, 195, 216, 224, 233, 247}`). Three is inside the MOG's exact
+diagnosis range (control 4: weights 1–3 injective, weight 4 colliding), so the fault set is named
+and the search is exhaustive over it: the three pairs are disjoint, so **0** subsets of two cells
+hit all three and **8** of three do; 8 × 8³ = **4096** joint motions, each at its exact clearing
+time, **all 4096 clear the three named pairs and not one leaves zero violations**. The debt
+histogram is 2:3, 3:13, 4:90, 5:222, 6:404, 7:537, 8:531, 9:436, 10:491, 11:525, 12:481, 13:273,
+14:59, 15:30, 16:1, so the minimum is **2**: cells `{184, 216, 224}` (directions `−diag`, `anti`,
+`anti`) at `t = 1 − 40644125503/10^11·√2` break `(170, 184)` by `−2 + 278387009073/25·10^10·√2`
+and `(201, 216)` by `−2 + 1115740420767/10^12·√2`, with `dL = 0`. **n = 330 stays blocked**, by an
+exact inequality rather than a generic failure: clearing the three overlaps needs `t` in
+`0.42…1.46`, and at that travel a cell reaches a *new* 45 degree neighbour two cells away. The
+`taxMOG` ordering is honest but not decisive (a 2-cell repair leaving one pair costs `2 + 1 = 3`,
+tied with a 3-cell repair clearing all three, so only the gate may break the tie), and with the
+2-cell branch empty every candidate scores `3 + debt >= 5`.
+
+**Controls (6).** 1 the corrected pair rule (knight pair: 0 versus unbounded); 2 `room_set` on a
+stock sentence (positive room, gate-certified move); 3 a 2-cell joint move with `taxMOG` 3; 4 the
+MOG census (weights 1–3 injective, 1771 colliding classes at 4); 5 a depth-one-jammed row that
+opens at depth two and shrinks L from 4 to **3**; 6 three disjoint coupled overlaps — 0 hitting
+sets of size 2, resolved by one 3-cell step at `taxMOG` 3, gated at clearance 0 with 3 contacts and
+certified.
+
+Checks: `observer_chain.py --selftest` 6 controls; `cand106.py --selftest` 5; `cand105.py
+--selftest` 5; `rat47.py` 4; `rat47pos.py` 5; `rat47law.py` 5; `landscape65.py` 6; `qsqrt2.py` 11;
+`glm_wheels.py --selftest` 32; `verify_certificates --selftest` 11 mutations; `--certificates` 7
+shipped; `--audit` **520 functions, 0 naming `float`** (observer_chain 35, cand106 25, in the audit
+list); every mode run to completion, exit 0; `record_guard.py` OK; README/STATUS run-history line
+byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched** — no
+verified certificate achieved a strictly smaller side anywhere in either search.
+
+Entries `68-OBSERVER-CHAIN.md`; records `31`–`67`.
