@@ -314,17 +314,27 @@ def height_bound(*sides):
     return hb
 
 
-def recover_leftovers(pos, shift, tol, dens, bmax):
+def recover_leftovers(pos, shift, tol, dens, bmax, budget=None):
     """Place every still-unplaced square by height recovery in place.
 
     Tries the row's own lattice first and the generic small denominators second,
-    and returns the number of squares still unrecovered (0 on success).
+    and returns `(miss, exhausted)` — how many squares are still unrecovered (0 on
+    success) and whether a declared work `budget` stopped the search.
+
+    `budget` counts `recover_point` calls (two per square per density round), so it
+    is a *deterministic* bound on the search: the same sentence always stops in the
+    same place, and no clock or tolerance is involved.  `None` is the unbounded
+    search every earlier caller had.
     """
+    calls = 0
     for round_dens in ((dens, 2 * dens, 4 * dens), (1, 2, 3, 4, 6, 8, 12, 16)):
         miss = 0
         for j in range(len(pos)):
             if pos[j] is not None:
                 continue
+            if budget is not None and calls + 2 > budget:
+                return sum(1 for p in pos if p is None), True
+            calls += 2
             x = recover_point(shift[j][0], tol=tol, dens=round_dens, bmax=bmax)
             y = recover_point(shift[j][1], tol=tol, dens=round_dens, bmax=bmax)
             if x is None or y is None:
@@ -332,11 +342,11 @@ def recover_leftovers(pos, shift, tol, dens, bmax):
             else:
                 pos[j] = (x, y)
         if miss == 0:
-            return 0
-    return miss
+            return 0, False
+    return miss, False
 
 
-def lift_sentence(state, words, tol=None):
+def lift_sentence(state, words, tol=None, budget=None):
     """Exact algebraic reconstruction of a decimal sentence.
 
     Three exact steps, and the decimals are used only to choose the topology:
@@ -357,6 +367,11 @@ def lift_sentence(state, words, tol=None):
     Returns {"status": "lifted" | "overlap" | "underdetermined" |
              "side-not-recovered" | "empty", "state", "L", "clearance",
              "contacts", "violations", "used", "placed", "side_residual"}.
+
+    `budget` bounds the *leftover recovery* in work units (see
+    `recover_leftovers`); it never changes a placed square, only how far the
+    search for the unpinned ones runs.  A refusal that a budget cut short says so
+    in `budget_exhausted`.
     """
     n = len(state)
     if tol is None:
@@ -446,13 +461,15 @@ def lift_sentence(state, words, tol=None):
     if placed < n:
         # the leftover squares are the ones the contact graph does not pin; recover
         # each coordinate by its own height-bounded search, and let the gate judge
-        miss = recover_leftovers(pos, shift, tol, lattice_den(W, H), height_bound(W, H))
+        miss, exhausted = recover_leftovers(pos, shift, tol, lattice_den(W, H),
+                                            height_bound(W, H), budget)
         recovered = sum(1 for p in pos if p is not None) - placed
         if miss:
             return {"status": "not-on-lattice", "state": None,
                     "L": W if W > H else H, "clearance": None, "contacts": 0,
                     "violations": 0, "used": used, "placed": placed,
                     "recovered": recovered, "unrecovered": miss,
+                    "budget_exhausted": exhausted,
                     "pos": pos, "lo": lo,
                     "side_residual": residW if residW > residH else residH}
     g = gate(pos, words)

@@ -1,0 +1,266 @@
+{
+ "run": 103,
+ "targets": [
+  680,
+  733,
+  788,
+  845
+ ],
+ "strip_lemma": {
+  "min_width": "1",
+  "attained_by": [
+   "t=0",
+   "t=1"
+  ],
+  "margin": "4/7",
+  "margin_is_narrower": true
+ },
+ "runs": [
+  {
+   "n": 680,
+   "N": 680,
+   "m": 26,
+   "k": 13,
+   "delivered_side": "26.57142857335610338076867830301645689164227969851470636572921888034066",
+   "predicted_side": "186/7",
+   "side_matches_2k_plus_4_7": true,
+   "skeleton": {
+    "snaps": {
+     "t=1": 452,
+     "t=0": 172,
+     "t=1/2": 28,
+     "t=1/3": 28
+    },
+    "worst_snap": "0.001572175473228853322168111892694858089043603313147193836866877250154893",
+    "axis_cells": 172,
+    "axis_lattice_residual": "0.24997693975",
+    "snapped_gate": {
+     "ok": false,
+     "contacts": 0,
+     "violations": 1,
+     "clearance": "-6148681/200000000000"
+    }
+   },
+   "repair": {
+    "violations_before": 1,
+    "violations_after": 1,
+    "rounds": 6,
+    "gate_ok": false,
+    "contacts": 0,
+    "clearance": "-6148681/200000000000",
+    "L": "6642857143339/250000000000",
+    "bad_pairs": [
+     [
+      244,
+      268,
+      "-6148681/200000000000"
+     ]
+    ],
+    "swapped": []
+   },
+   "certificate": null,
+   "attempt": {
+    "status": "not-on-lattice",
+    "N": 680,
+    "contacts": 0,
+    "violations": 0,
+    "clearance": null,
+    "placed": 142,
+    "recovered": 42,
+    "unrecovered": 496,
+    "budget_exhausted": true,
+    "side": null,
+    "certificate": null
+   },
+   "seconds": 66.1
+  },
+  {
+   "n": 733,
+   "N": 733,
+   "m": 27,
+   "k": 13,
+   "delivered_side": "27.57142857335610338076867830301645689164227969851470636572921888034066",
+   "predicted_side": "193/7",
+   "side_matches_2k_plus_4_7": true,
+   "skeleton": {
+    "snaps": {
+     "t=0": 192,
+     "t=1": 485,
+     "t=1/2": 28,
+     "t=1/3": 28
+    },
+    "worst_snap": "0.002852728445603437988063750411484147049233615000660624374324771350841301",
+    "axis_cells": 192,
+    "axis_lattice_residual": "0.240413359967",
+    "snapped_gate": {
+     "ok": false,
+     "contacts": 0,
+     "violations": 2,
+     "clearance": "-691512899/1000000000000"
+    }
+   },
+   "repair": {
+    "violations_before": 2,
+    "violations_after": 2,
+    "rounds": 6,
+    "gate_ok": false,
+    "contacts": 0,
+    "clearance": "-691512899/1000000000000",
+    "L": "6892857143339/250000000000",
+    "bad_pairs": [
+     [
+      255,
+      280,
+      "-691512899/1000000000000"
+     ],
+     [
+      471,
+      496,
+      "-183083837/500000000000"
+     ]
+    ],
+    "swapped": []
+   },
+   "certificate": null,
+   "attempt": {
+    "status": "not-on-lattice",
+    "N": 733,
+    "contacts": 0,
+    "violations": 0,
+    "clearance": null,
+    "placed": 19,
+    "recovered": 12,
+    "unrecovered": 702,
+    "budget_exhausted": true,
+    "side": null,
+    "certificate": null
+   },
+   "seconds": 112.4
+  },
+  {
+   "n": 788,
+   "N": 788,
+   "m": 28,
+   "k": 14,
+   "delivered_side": "28.57142857335910338076867830301645689164227969851470636572921888034066",
+   "predicted_side": "200/7",
+   "side_matches_2k_plus_4_7": true,
+   "skeleton": {
+    "snaps": {
+     "t=1": 570,
+     "t=0": 162,
+     "t=1/2": 28,
+     "t=1/3": 28
+    },
+    "worst_snap": "0.003570412293009982458890320737630236016957087836600805352040886226996672",
+    "axis_cells": 162,
+    "axis_lattice_residual": "0.245964226496",
+    "snapped_gate": {
+     "ok": false,
+     "contacts": 0,
+     "violations": 1,
+     "clearance": "-1/50000000000"
+    }
+   },
+   "repair": {
+    "violations_before": 1,
+    "violations_after": 1,
+    "rounds": 6,
+    "gate_ok": false,
+    "contacts": 0,
+    "clearance": "-1/50000000000",
+    "L": "28571428573359/1000000000000",
+    "bad_pairs": [
+     [
+      195,
+      217,
+      "-1/50000000000"
+     ]
+    ],
+    "swapped": []
+   },
+   "certificate": null,
+   "attempt": {
+    "status": "not-on-lattice",
+    "N": 788,
+    "contacts": 0,
+    "violations": 0,
+    "clearance": null,
+    "placed": 302,
+    "recovered": 17,
+    "unrecovered": 469,
+    "budget_exhausted": true,
+    "side": null,
+    "certificate": null
+   },
+   "seconds": 117.2
+  },
+  {
+   "n": 845,
+   "N": 845,
+   "m": 29,
+   "k": 14,
+   "delivered_side": "29.57142857336110338076867830301645689164227969851470636572921888034066",
+   "predicted_side": "207/7",
+   "side_matches_2k_plus_4_7": true,
+   "skeleton": {
+    "snaps": {
+     "t=1": 313,
+     "t=0": 476,
+     "t=1/2": 28,
+     "t=1/3": 28
+    },
+    "worst_snap": "0.001563533838850195303201903832042115664325595060393636620702893921249545",
+    "axis_cells": 476,
+    "axis_lattice_residual": "0.247380423085",
+    "snapped_gate": {
+     "ok": false,
+     "contacts": 0,
+     "violations": 2,
+     "clearance": "-202174889/1000000000000"
+    }
+   },
+   "repair": {
+    "violations_before": 2,
+    "violations_after": 2,
+    "rounds": 6,
+    "gate_ok": false,
+    "contacts": 0,
+    "clearance": "-202174889/1000000000000",
+    "L": "29571428573361/1000000000000",
+    "bad_pairs": [
+     [
+      254,
+      278,
+      "-77620519/500000000000"
+     ],
+     [
+      763,
+      790,
+      "-202174889/1000000000000"
+     ]
+    ],
+    "swapped": []
+   },
+   "certificate": null,
+   "attempt": {
+    "status": "not-on-lattice",
+    "N": 845,
+    "contacts": 0,
+    "violations": 0,
+    "clearance": null,
+    "placed": 19,
+    "recovered": 13,
+    "unrecovered": 813,
+    "budget_exhausted": true,
+    "side": null,
+    "certificate": null
+   },
+   "seconds": 117.8
+  }
+ ],
+ "tally": {
+  "not-on-lattice": 4
+ },
+ "identity": "rat47: side = 2k + 4/7 with N = (2k)^2 + 4; the strip lemma is exact over the rational-t alphabet; the skeleton reads the delivered pose at 70 digits and snaps angles to the nearest rational-t word; the attempt lifts the snapped pose in Q(sqrt2) and the exact gate is the only arbiter"
+}

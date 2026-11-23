@@ -40,9 +40,9 @@ import collections
 import json
 import os
 import sys
+import time
 from decimal import Decimal, getcontext
 from fractions import Fraction as F
-from math import gcd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -59,6 +59,14 @@ OUT = os.path.join(ROOT, "workspace/push/landscape65.json")
 TRIAGE = os.path.join(ROOT, "workspace/push/field_triage.json")
 UPLIFT = os.path.join(ROOT, "workspace/push/uplift.json")
 LIFT_TOL = F(1, 10 ** 7)          # a lift's acceptance tolerance (declared)
+#: Work bound on the core lift, in `recover_point` calls (two per unpinned square
+#: per density round, one round per density tuple).  It is deterministic, not a
+#: clock: the same core always stops at the same square.  Without it a 14-row run
+#: spent ~45 minutes in the leftover search of five refuse-every-round cores (680's
+#: recovery alone scanned ~6000 exact candidates per coordinate); with it the whole
+#: run is a few minutes, and the rows that refused refused the same way in run 102,
+#: which ran the unbounded search.
+RECOVER_BUDGET = 120
 PYTH_TOL = Decimal("1e-12")       # a continued fraction's residual (declared)
 CAND_TOL = Decimal("1e-11")       # an exact word against the stored decimal cos/sin
 
@@ -146,8 +154,6 @@ def word_kind(word):
     half = Q.Q2(F(1, 2))
     if c == s and c * c == half:
         return "45"
-    if c.b == 0 and s.b == 0:
-        return "pyth"
     return "pyth"          # a Q(sqrt2) word with a rational t is still Pythagorean
 
 
@@ -192,17 +198,48 @@ def certificate_of_lift(n, r, words):
                          "clearance": ["0", "0"]}}
 
 
-def lift_core(row, keep, words, tol=LIFT_TOL):
-    """Lift the kept cells exactly in Q(sqrt 2); returns `(lift, record)`."""
+def drop_carriers(words):
+    """The carrier-drop policy, in one place: `(keep, dropped)` index lists.
+
+    A **carrier** is a cell whose stored angle has no exact word at the declared
+    heights (`exact_word` returns None).  The policy is deliberately narrow:
+
+    * a carrier is *removed*, never snapped and never re-read as the axis word —
+      a sentence that only gates because an angle was rounded is not a sentence
+      of this alphabet;
+    * the kept cells keep their delivered order and their own exact words, so the
+      lift sees the core in the row's own frame;
+    * the dropped indices are returned as well, because the completion step
+      addresses carriers by their **delivered** index: slot `i` is where cell `i`
+      of the original row has to go back, and no index is reused or compacted.
+
+    Returns `(keep, dropped)`; `len(keep) + len(dropped) == len(words)`.
+    """
+    keep, dropped = [], []
+    for i, w in enumerate(words):
+        (keep if w is not None else dropped).append(i)
+    return keep, dropped
+
+
+def lift_core(row, keep, words, tol=LIFT_TOL, budget=RECOVER_BUDGET):
+    """Lift the kept cells exactly in Q(sqrt 2); returns `(lift, record)`.
+
+    `keep` comes from `drop_carriers` — the carriers are gone by the time the
+    lift runs, and their slots are not part of the state.  `budget` bounds the
+    leftover recovery in work units (deterministic, see `RECOVER_BUDGET`).
+    """
     state = [(Q.Q2(row[i][0]), Q.Q2(row[i][1])) for i in keep]
     ws = [words[i] for i in keep]
-    r = Q.lift_sentence(state, ws, tol=Q.Q2(tol))
+    r = Q.lift_sentence(state, ws, tol=Q.Q2(tol), budget=budget)
     rec = {"status": r["status"], "N": len(keep),
            "contacts": r.get("contacts"), "violations": r.get("violations"),
            "clearance": None if r.get("clearance") is None else str(r["clearance"]),
            "side": None, "side_dec": None,
            "used": r.get("used"), "placed": r.get("placed"),
-           "recovered": r.get("recovered")}
+           "recovered": r.get("recovered"),
+           "unrecovered": r.get("unrecovered"),
+           "budget_exhausted": r.get("budget_exhausted"),
+           "budget": budget}
     if r["status"] == "lifted":
         rec["side"] = str(r["L"])
         rec["side_dec"] = str(_lift_side_dec(r["L"]))
@@ -317,9 +354,8 @@ def probe_carrier(pos, words, angle, x0, y0, L, tol=Decimal("1e-6")):
         p = _place_from_two(w, eqs)
         if p is None:
             continue
-        exw = extent(w, (Q.Q2(1), Q.Q2(0)))
-        if not (p[0] - exw >= Q.Q2(0) and p[1] - exw >= Q.Q2(0)
-                and p[0] + exw <= L and p[1] + exw <= L):
+        if not (p[0] - e >= Q.Q2(0) and p[1] - e >= Q.Q2(0)
+                and p[0] + e <= L and p[1] + e <= L):
             continue
         trial_pos = list(pos) + [p]
         trial_words = list(words) + [w]
@@ -387,7 +423,7 @@ def lift_target(n, row, probed=2, tol=LIFT_TOL):
     """The lifting test for one row: the whole pose if algebraic, else its core."""
     words, carriers_at, kinds = cell_words(row)
     side = delivered_side(row)
-    keep = [i for i, w in enumerate(words) if w is not None]
+    keep, _dropped = drop_carriers(words)
     rec = {"n": n, "N": len(row), "angles": kinds, "carriers": len(carriers_at),
            "delivered_side": str(side), "core_N": len(keep)}
     r, core = lift_core(row, keep, words, tol)
@@ -405,7 +441,7 @@ def lift_target(n, row, probed=2, tol=LIFT_TOL):
         rec["core_gap"] = str(_lift_side_dec(r["L"]) - side)
         rec["beat"] = Decimal(rec["core_gap"]) < 0
         if carriers_at:
-            slots = [i for i in range(len(row)) if words[i] is None]
+            slots = _dropped          # carriers by their delivered index
             placements = []
             for slot in slots[:probed]:
                 x0, y0 = row[slot][0], row[slot][1]
@@ -427,7 +463,10 @@ def run():
     recs = []
     for n in targets:
         print(f"  lifting n = {n} …", flush=True)
-        recs.append(lift_target(n, rows[n]))
+        start = time.time()
+        rec = lift_target(n, rows[n])
+        rec["seconds"] = round(time.time() - start, 1)
+        recs.append(rec)
     res = {"run": 102, "landscape": land, "targets": targets, "lifted": recs,
            "lift_tally": dict(collections.Counter(r["core"]["status"] for r in recs)),
            "note": ("landscape: field classes from the run-86 census and the run-85 "
@@ -442,7 +481,7 @@ def run():
 
 
 def selftest():
-    """Five controls: the angle census, the words, and one lifted certificate."""
+    """Six controls: the angle census, the words, a lifted certificate, a refusal, and completion."""
     print("landscape65 selftest")
     assert exact_word(F(0)) == Q.AXIS
     assert exact_word(W.PI / 4) == Q.word_45()
@@ -489,7 +528,7 @@ def completion_control(n, row, tol=LIFT_TOL):
     find its neighbours by.
     """
     words, _carriers, _kinds = cell_words(row)
-    keep = [i for i in range(len(row)) if words[i] is not None]
+    keep, _dropped = drop_carriers(words)
     if len(keep) < 4:
         return None
     out = keep.pop()                      # the cell to remove (a 45-degree one here)

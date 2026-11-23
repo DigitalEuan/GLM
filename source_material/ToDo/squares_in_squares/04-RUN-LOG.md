@@ -2492,3 +2492,57 @@ byte-identical. Ledger `workspace/push/landscape65.json`.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `65-LANDSCAPE.md`; records `31`-`65`.
+
+## Run 103 — a bounded core lift, and the `2k + 4/7` rung started
+
+Doc 65 §8. Two jobs: make the run-102 stage cheap and clean, then start the construction doc 65
+named.
+
+**Cleanup.** `landscape65.py` lost the debug-round debris — the unused `gcd` import, a dead branch in
+`word_kind`, a recomputed extent in `probe_carrier`, a stale docstring — and the carrier-drop
+semantics are now one function, `drop_carriers(words) -> (keep, dropped)`, documented where it lives:
+carriers are *removed*, never snapped to the axis word; kept cells keep their delivered order; the
+dropped indices come back so completion addresses a carrier by its **delivered** index.
+
+**The cost bound.** `qsqrt2.recover_leftovers` takes an optional `budget` in work units
+(`recover_point` calls) and returns `(miss, exhausted)`; `lift_sentence` threads it and reports
+`budget_exhausted` on a refusal. `None` is the old unbounded search, so every earlier caller — the
+verifier's own lift path included — is unchanged. `landscape65` declares `RECOVER_BUDGET = 120`.
+Measured on the same fourteen rows: the whole run is **306 s** (269.6 s of it lifting) instead of
+~45 minutes, with notch lifts at 10.6/13.2/16.2 s (was ~40 s each) and the four `not-on-lattice`
+refusals at 33.9/60.4/58.0/67.7 s (was 3–9 min each). **Every verdict is unchanged row by row** — 3
+lifted with the same sides and contacts and verified certificates, 4 `not-on-lattice`, 7
+`side-not-recovered`, same 546/30/424 tally and same carrier bands — and the refusals now record
+`unrecovered` and `budget_exhausted: true`.
+
+**The `2k + 4/7` rung (`scripts/rat47.py`, new).** Three parts, gate as arbiter.
+
+*Strip lemma, exact over the alphabet:* over all 82 rational-t words with `q <= 16` plus the 45° word,
+the bbox width `|cos| + |sin|` is at least **1**, attained only by `t = 0` and `t = 1`. Since
+`4/7 < 1`, no unit square fits a `4/7` margin — the rung is **not** a block-plus-seam packing.
+
+*Skeleton, measured:* all four rows are `N = m² + 4` (`m = 26..29`) at side exactly `2k + 4/7`, and
+their angles snap to the same two-word structure — `m² − 52` axis squares, exactly **28** at the
+3-4-5 word (`t = 1/2`) and exactly **28** at `t = 1/3`, with worst deviations 1.6e−3 to 3.6e−3. The
+snapped pose gates **1 to 2 violations**: 680 at −3.07e−5, 733 at −6.9e−4 and −3.7e−4, 788 at
+**−2e−11**, 845 at −1.6e−3 and −2e−4. So the delivered pose is one or two pairs away from a
+rational-t sentence, and 788's is at rounding scale.
+
+*Repair, exact:* re-choosing words cannot close them. Top-4 per cell, then pairwise 6×6, scored by the
+exact per-pair clearance, swaps **nothing** in all four rows — the defect is positional, not angular.
+And lifting the snapped pose from scratch pins only 142/19/302/19 squares and refuses
+(`not-on-lattice`, budget exhausted), so re-labelling the delivered pose cannot reach the rung either.
+
+**Certificates: 0 of 4.** The next experiment is named: 788's 2e−11 pair is the cheapest positional
+repair (a certificate carries any Q(√2) coordinate, so that scale is arithmetic, not a tolerance), and
+the constant 28 + 28 band is a fixed module worth deriving from its contact law, as doc 53 derived the
+ridge's width.
+
+Checks: `rat47.py --selftest` 4 controls; `landscape65.py --selftest` 6 controls (32 s); `qsqrt2.py
+--selftest` 11 controls; `--audit` **382 functions, 0 naming `float`** (`landscape65` 25, `rat47` 15,
+both in the audit list); `--selftest` 32 controls; `verify_certificates --selftest` 11 mutations +
+fuzz; bare run exit 0; `record_guard.py` OK; README/STATUS footers byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `65-LANDSCAPE.md`; records `31`-`65`.
