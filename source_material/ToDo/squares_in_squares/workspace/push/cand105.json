@@ -1,0 +1,3516 @@
+{
+ "run": 105,
+ "delivered": "22.218056945",
+ "rows": 1000,
+ "picked": {
+  "band": [
+   {
+    "n": 330,
+    "delivered_side": "18.69238815731810338076867830301645689164227969851470636572921888034067",
+    "void_rel": "0.05880416673892751631474362877742974269122917343404642814625847635596121"
+   },
+   {
+    "n": 333,
+    "delivered_side": "18.77375341288810338076867830301645689164227969851470636572921888034067",
+    "void_rel": "0.05841987149527840689074518487358531808382687988771610977167394824233634"
+   },
+   {
+    "n": 329,
+    "delivered_side": "18.656854253272",
+    "void_rel": "0.05798848215146965569211545288753799392097264437689969604863221884498480"
+   },
+   {
+    "n": 332,
+    "delivered_side": "18.740417291325",
+    "void_rel": "0.05784108509937665638631212349397590361445783132530120481927710843373494"
+   },
+   {
+    "n": 331,
+    "delivered_side": "18.70710678308010338076867830301645689164227969851470636572921888034067",
+    "void_rel": "0.05726841146091122079892557046591767981128762608505515887844795210671873"
+   },
+   {
+    "n": 325,
+    "delivered_side": "18.535533907825",
+    "void_rel": "0.05712620691732404798840192307692307692307692307692307692307692307692308"
+   }
+  ],
+  "small": [
+   {
+    "n": 68,
+    "delivered_side": "8.798795238991",
+    "void_rel": "0.1385117302601571883337953088235294117647058823529411764705882352941176"
+   },
+   {
+    "n": 66,
+    "delivered_side": "8.656854251262103380768678303016456891642279698514706365729218880340668",
+    "void_rel": "0.1354715989029507959558531365522626165763765482759363457001882592029883"
+   },
+   {
+    "n": 67,
+    "delivered_side": "8.707106782956",
+    "void_rel": "0.1315478885044534879417602388059701492537313432835820895522388059701493"
+   },
+   {
+    "n": 69,
+    "delivered_side": "8.827194657504",
+    "void_rel": "0.1292661669777849255581161739130434782608695652173913043478260869565217"
+   }
+  ]
+ },
+ "targets": [
+  {
+   "n": 330,
+   "N": 330,
+   "delivered_side": "18.69238815731810338076867830301645689164227969851470636572921888034067",
+   "worst_snap": "0.0069110704903619594311709984001062760688226146140094991679450886262245",
+   "baseline": {
+    "ok": false,
+    "L": "9346194078659/500000000000",
+    "violations": 6,
+    "contacts": 0,
+    "blocks": [
+     [
+      14,
+      32,
+      "-212180669517/101000000000000"
+     ],
+     [
+      28,
+      32,
+      "-1422316677/789062500000"
+     ],
+     [
+      80,
+      101,
+      "-58927632333/84500000000000"
+     ],
+     [
+      195,
+      216,
+      "-1 + 1414025346279/2000000000000\u221a2"
+     ],
+     [
+      216,
+      233,
+      "-1/2 + 353548007689/1000000000000\u221a2"
+     ],
+     [
+      224,
+      247,
+      "-1/2 + 352353905641/1000000000000\u221a2"
+     ]
+    ]
+   },
+   "swaps": [
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 6,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "8846194078659/500000000000 + \u221a2",
+     "gap": "-1 + \u221a2",
+     "gap_decimal": "0.414213562373095048801688724209698078569671875376948073176679737990732",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "9546194078659/500000000000",
+     "gap": "2/5",
+     "gap_decimal": "0.400000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "9546194078659/500000000000",
+     "gap": "2/5",
+     "gap_decimal": "0.400000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "161885299337203/8500000000000",
+     "gap": "6/17",
+     "gap_decimal": "0.3529411764705882352941176470588235294117647058823529411764705882352941",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "123500523022567/6500000000000",
+     "gap": "4/13",
+     "gap_decimal": "0.3076923076923076923076923076923076923076923076923076923076923076923077",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "277039628281111/14500000000000",
+     "gap": "12/29",
+     "gap_decimal": "0.4137931034482758620689655172413793103448275862068965517241379310344828",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "277039628281111/14500000000000",
+     "gap": "12/29",
+     "gap_decimal": "0.4137931034482758620689655172413793103448275862068965517241379310344828",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "9466194078659/500000000000",
+     "gap": "6/25",
+     "gap_decimal": "0.240000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 321,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 300,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 294,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 319,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 324,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 218,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 213,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 326,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 5,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 7,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 6,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 7,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 7,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 7,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 7,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 7,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 6,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 6,
+     "contacts": 0,
+     "L": "9346194078659/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "word->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 6,
+    "contacts": 0,
+    "L": "9346194078659/500000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "no-beat (baseline itself is not a sentence)",
+   "first_sentence": {
+    "n": 330,
+    "N": 330,
+    "worst_snap": "0.0069110704903619594311709984001062760688226146140094991679450886262245",
+    "rational_words": false,
+    "base": {
+     "ok": false,
+     "violations": 6,
+     "contacts": 0,
+     "L": "9346194078659/500000000000"
+    },
+    "steps": 0,
+    "certificate": null,
+    "verdict": "not-attempted",
+    "why": "the row carries a 45 deg word (b != 0); rat47pos's positional repair is rational-only, so no repair is attempted"
+   },
+   "seconds": "40.46",
+   "axis_bound": {
+    "L": "9346194078659/500000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "band"
+  },
+  {
+   "n": 333,
+   "N": 333,
+   "delivered_side": "18.77375341288810338076867830301645689164227969851470636572921888034067",
+   "worst_snap": "0.0132342312943448444629094752599635114997810629788267467735162488945912",
+   "baseline": {
+    "ok": false,
+    "L": "244070862918303/13000000000000",
+    "violations": 115,
+    "contacts": 0,
+    "blocks": [
+     [
+      8,
+      33,
+      "-16394372563/8500000000000"
+     ],
+     [
+      9,
+      34,
+      "-2799111813/3400000000000"
+     ],
+     [
+      16,
+      17,
+      "-390151358651/231400000000000"
+     ],
+     [
+      16,
+      28,
+      "-806702647/44500000000000"
+     ],
+     [
+      16,
+      29,
+      "-206590679943/89000000000000"
+     ],
+     [
+      17,
+      28,
+      "-1736542358359/1157000000000000"
+     ]
+    ]
+   },
+   "swaps": [
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 115,
+     "contacts": 0,
+     "L": "244070862918303/13000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "2221719176611/125000000000 + \u221a2",
+     "gap": "-13012068550759/13000000000000 + \u221a2",
+     "gap_decimal": "0.413285212314710433417073339594313463185056490761563457792064353375347",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "2396719176611/125000000000",
+     "gap": "5187931449241/13000000000000",
+     "gap_decimal": "0.3990716499416153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "2396719176611/125000000000",
+     "gap": "5187931449241/13000000000000",
+     "gap_decimal": "0.3990716499416153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "40644226002387/2125000000000",
+     "gap": "77794834637097/221000000000000",
+     "gap_decimal": "0.3520128264122036199095022624434389140271493212669683257918552036199095",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "31007349295943/1625000000000",
+     "gap": "3987931449241/13000000000000",
+     "gap_decimal": "0.3067639576339230769230769230769230769230769230769230769230769230769231",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "69554856121719/3625000000000",
+     "gap": "155650012027989/377000000000000",
+     "gap_decimal": "0.4128647533898912466843501326259946949602122015915119363395225464190981",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "69554856121719/3625000000000",
+     "gap": "155650012027989/377000000000000",
+     "gap_decimal": "0.4128647533898912466843501326259946949602122015915119363395225464190981",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "2376719176611/125000000000",
+     "gap": "3107931449241/13000000000000",
+     "gap_decimal": "0.2390716499416153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 129,
+     "contacts": 0,
+     "L": "244070862918303/13000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4526062514011/250000000000 + 1/2\u221a2",
+     "gap": "-8715612189731/13000000000000 + 1/2\u221a2",
+     "gap_decimal": "0.0366750742841629090162289774894644239002205530730894212037244843799814",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4701062514011/250000000000",
+     "gap": "384387810269/13000000000000",
+     "gap_decimal": "0.02956829309761538461538461538461538461538461538461538461538461538461538",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4701062514011/250000000000",
+     "gap": "384387810269/13000000000000",
+     "gap_decimal": "0.02956829309761538461538461538461538461538461538461538461538461538461538",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "79818062738187/4250000000000",
+     "gap": "1334592774573/221000000000000",
+     "gap_decimal": "0.006038881332909502262443438914027149321266968325791855203619909502262443",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 124,
+     "contacts": 0,
+     "L": "244070862918303/13000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "136380812906319/7250000000000",
+     "gap": "13747246497801/377000000000000",
+     "gap_decimal": "0.03646484482175331564986737400530503978779840848806366047745358090185676",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "136380812906319/7250000000000",
+     "gap": "13747246497801/377000000000000",
+     "gap_decimal": "0.03646484482175331564986737400530503978779840848806366047745358090185676",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 125,
+     "contacts": 0,
+     "L": "244070862918303/13000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 116,
+     "contacts": 0,
+     "L": "2346719176611/125000000000",
+     "gap": "-12068550759/13000000000000",
+     "gap_decimal": "-0.0009283500583846153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "18090066378331/1000000000000 + 1/2\u221a2",
+     "gap": "-89/130 + 1/2\u221a2",
+     "gap_decimal": "0.0224913965711629090162289774894644239002205530730894212037244843799814",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "18790066378331/1000000000000",
+     "gap": "1/65",
+     "gap_decimal": "0.01538461538461538461538461538461538461538461538461538461538461538461538",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "18790066378331/1000000000000",
+     "gap": "1/65",
+     "gap_decimal": "0.01538461538461538461538461538461538461538461538461538461538461538461538",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 114,
+     "contacts": 0,
+     "L": "2346719176611/125000000000",
+     "gap": "-12068550759/13000000000000",
+     "gap_decimal": "-0.0009283500583846153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 115,
+     "contacts": 0,
+     "L": "2346719176611/125000000000",
+     "gap": "-12068550759/13000000000000",
+     "gap_decimal": "-0.0009283500583846153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "545111924971599/29000000000000",
+     "gap": "42/1885",
+     "gap_decimal": "0.02228116710875331564986737400530503978779840848806366047745358090185676",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "545111924971599/29000000000000",
+     "gap": "42/1885",
+     "gap_decimal": "0.02228116710875331564986737400530503978779840848806366047745358090185676",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 115,
+     "contacts": 0,
+     "L": "2346719176611/125000000000",
+     "gap": "-12068550759/13000000000000",
+     "gap_decimal": "-0.0009283500583846153846153846153846153846153846153846153846153846153846154",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 116,
+     "contacts": 0,
+     "L": "244070862918303/13000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "word->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 116,
+    "contacts": 0,
+    "L": "2346719176611/125000000000",
+    "gap": "-12068550759/13000000000000",
+    "gap_decimal": "-0.0009283500583846153846153846153846153846153846153846153846153846153846154",
+    "beats": false,
+    "size_changed": true
+   },
+   "beat": null,
+   "verdict": "no-beat (baseline itself is not a sentence)",
+   "first_sentence": {
+    "n": 333,
+    "N": 333,
+    "worst_snap": "0.0132342312943448444629094752599635114997810629788267467735162488945912",
+    "rational_words": true,
+    "base": {
+     "ok": false,
+     "violations": 115,
+     "contacts": 0,
+     "L": "244070862918303/13000000000000"
+    },
+    "steps": 3,
+    "certificate": null,
+    "verdict": "refused",
+    "L": "244070862918303/13000000000000",
+    "contacts": 2,
+    "clearance": "-5598321959723/792200000000000",
+    "why": {
+     "violations": 113,
+     "clearance": "-5598321959723/792200000000000"
+    }
+   },
+   "seconds": "157.14",
+   "axis_bound": {
+    "L": "2346719176611/125000000000",
+    "gap": "-12068550759/13000000000000",
+    "equals_base": false,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "band"
+  },
+  {
+   "n": 329,
+   "N": 329,
+   "delivered_side": "18.656854253272",
+   "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+   "baseline": {
+    "ok": true,
+    "L": "2332106781659/125000000000",
+    "violations": 0,
+    "contacts": 0,
+    "blocks": []
+   },
+   "swaps": [
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 231,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 231,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 231,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 235,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 237,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 229,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 229,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 235,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->axis",
+     "gated": true,
+     "ok": false,
+     "violations": 4,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=1/2",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=1/3",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=1/4",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=1/5",
+     "gated": true,
+     "ok": false,
+     "violations": 4,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=2/5",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=3/7",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell293:45->t=1/7",
+     "gated": true,
+     "ok": false,
+     "violations": 4,
+     "contacts": 0,
+     "L": "2332106781659/125000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "45->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 231,
+    "contacts": 0,
+    "L": "2332106781659/125000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "first-exact-sentence",
+   "first_sentence": {
+    "n": 329,
+    "N": 329,
+    "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+    "rational_words": false,
+    "base": {
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "2332106781659/125000000000"
+    },
+    "steps": 0,
+    "certificate": {
+     "status": "verified",
+     "N": 329,
+     "contacts": 1,
+     "L": "2332106781659/125000000000",
+     "clearance": "0",
+     "void": "298097041059898698792281/15625000000000000000000"
+    },
+    "verdict": "first-exact-sentence",
+    "L": "2332106781659/125000000000",
+    "contacts": 1,
+    "clearance": "0",
+    "tighten": {
+     "ok": true,
+     "L": "2332106781659/125000000000",
+     "contacts": 1,
+     "clearance": "0",
+     "certificate": {
+      "status": "verified",
+      "N": 329,
+      "contacts": 1,
+      "L": "2332106781659/125000000000",
+      "clearance": "0",
+      "void": "298097041059898698792281/15625000000000000000000"
+     },
+     "move": {
+      "slack": "107/1000000000000",
+      "pair": [
+       0,
+       311
+      ],
+      "cell": 311,
+      "axis": [
+       "0",
+       "1"
+      ],
+      "shift": [
+       "0",
+       "-107/1000000000000"
+      ]
+     },
+     "why": null
+    },
+    "how": "snapped pose + one exact slide to the nearest contact"
+   },
+   "seconds": "28.16",
+   "axis_bound": {
+    "L": "2332106781659/125000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "band"
+  },
+  {
+   "n": 332,
+   "N": 332,
+   "delivered_side": "18.740417291325",
+   "worst_snap": "0.7069080001360546587743971235333166319570472043835358586609327606845894",
+   "baseline": {
+    "ok": false,
+    "L": "749616691653/40000000000",
+    "violations": 159,
+    "contacts": 0,
+    "blocks": [
+     [
+      22,
+      191,
+      "-41204100433/1000000000000"
+     ],
+     [
+      41,
+      194,
+      "-7635722027/62500000000"
+     ],
+     [
+      49,
+      195,
+      "-1/2 + 88086935269/250000000000\u221a2"
+     ],
+     [
+      62,
+      198,
+      "-1/2 + 176448948499/500000000000\u221a2"
+     ],
+     [
+      74,
+      202,
+      "-1/2 + 70429814071/200000000000\u221a2"
+     ],
+     [
+      77,
+      205,
+      "-1/2 + 176349613139/500000000000\u221a2"
+     ]
+    ]
+   },
+   "swaps": [
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 205,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 208,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 206,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 207,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 206,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 198,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 201,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 206,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->45",
+     "gated": true,
+     "ok": false,
+     "violations": 157,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=1/2",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=1/3",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=1/4",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=1/5",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=2/5",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=3/7",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell273:axis->t=1/7",
+     "gated": true,
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "45->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 205,
+    "contacts": 0,
+    "L": "749616691653/40000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "no-beat (baseline itself is not a sentence)",
+   "first_sentence": {
+    "n": 332,
+    "N": 332,
+    "worst_snap": "0.7069080001360546587743971235333166319570472043835358586609327606845894",
+    "rational_words": false,
+    "base": {
+     "ok": false,
+     "violations": 159,
+     "contacts": 0,
+     "L": "749616691653/40000000000"
+    },
+    "steps": 0,
+    "certificate": null,
+    "verdict": "not-attempted",
+    "why": "the row carries a 45 deg word (b != 0); rat47pos's positional repair is rational-only, so no repair is attempted"
+   },
+   "seconds": "24.95",
+   "axis_bound": {
+    "L": "749616691653/40000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "band"
+  },
+  {
+   "n": 331,
+   "N": 331,
+   "delivered_side": "18.70710678308010338076867830301645689164227969851470636572921888034067",
+   "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+   "baseline": {
+    "ok": true,
+    "L": "467677669577/25000000000",
+    "violations": 0,
+    "contacts": 0,
+    "blocks": []
+   },
+   "swaps": [
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "442677669577/25000000000 + \u221a2",
+     "gap": "-1 + \u221a2",
+     "gap_decimal": "0.414213562373095048801688724209698078569671875376948073176679737990732",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "477677669577/25000000000",
+     "gap": "2/5",
+     "gap_decimal": "0.400000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "477677669577/25000000000",
+     "gap": "2/5",
+     "gap_decimal": "0.400000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "8100520382809/425000000000",
+     "gap": "6/17",
+     "gap_decimal": "0.3529411764705882352941176470588235294117647058823529411764705882352941",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "6179809704501/325000000000",
+     "gap": "4/13",
+     "gap_decimal": "0.3076923076923076923076923076923076923076923076923076923076923076923077",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "13862652417733/725000000000",
+     "gap": "12/29",
+     "gap_decimal": "0.4137931034482758620689655172413793103448275862068965517241379310344828",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "13862652417733/725000000000",
+     "gap": "12/29",
+     "gap_decimal": "0.4137931034482758620689655172413793103448275862068965517241379310344828",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "473677669577/25000000000",
+     "gap": "6/25",
+     "gap_decimal": "0.240000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 36,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 40,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell307:word->axis",
+     "gated": true,
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "467677669577/25000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell307:word->45",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "455177669577/25000000000 + 1/2\u221a2",
+     "gap": "-1/2 + 1/2\u221a2",
+     "gap_decimal": "0.2071067811865475244008443621048490392848359376884740365883398689953660",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=1/2",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "472677669577/25000000000",
+     "gap": "1/5",
+     "gap_decimal": "0.200000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=1/3",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "472677669577/25000000000",
+     "gap": "1/5",
+     "gap_decimal": "0.200000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=1/4",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "8025520382809/425000000000",
+     "gap": "3/17",
+     "gap_decimal": "0.1764705882352941176470588235294117647058823529411764705882352941176471",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=1/5",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "6129809704501/325000000000",
+     "gap": "2/13",
+     "gap_decimal": "0.1538461538461538461538461538461538461538461538461538461538461538461538",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=2/5",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "13712652417733/725000000000",
+     "gap": "6/29",
+     "gap_decimal": "0.2068965517241379310344827586206896551724137931034482758620689655172414",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=3/7",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "13712652417733/725000000000",
+     "gap": "6/29",
+     "gap_decimal": "0.2068965517241379310344827586206896551724137931034482758620689655172414",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell307:word->t=1/7",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "470677669577/25000000000",
+     "gap": "3/25",
+     "gap_decimal": "0.120000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    }
+   ],
+   "closest": {
+    "swap": "word->axis (all)",
+    "gated": true,
+    "ok": true,
+    "violations": 0,
+    "contacts": 0,
+    "L": "467677669577/25000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "first-exact-sentence",
+   "first_sentence": {
+    "n": 331,
+    "N": 331,
+    "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+    "rational_words": false,
+    "base": {
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "467677669577/25000000000"
+    },
+    "steps": 0,
+    "certificate": {
+     "status": "verified",
+     "N": 331,
+     "contacts": 1,
+     "L": "467677669577/25000000000",
+     "clearance": "0",
+     "void": "11847402620973591358929/625000000000000000000"
+    },
+    "verdict": "first-exact-sentence",
+    "L": "467677669577/25000000000",
+    "contacts": 1,
+    "clearance": "0",
+    "tighten": {
+     "ok": true,
+     "L": "467677669577/25000000000",
+     "contacts": 1,
+     "clearance": "0",
+     "certificate": {
+      "status": "verified",
+      "N": 331,
+      "contacts": 1,
+      "L": "467677669577/25000000000",
+      "clearance": "0",
+      "void": "11847402620973591358929/625000000000000000000"
+     },
+     "move": {
+      "slack": "53/500000000000",
+      "pair": [
+       7,
+       8
+      ],
+      "cell": 8,
+      "axis": [
+       "-1",
+       "0"
+      ],
+      "shift": [
+       "-53/500000000000",
+       "0"
+      ]
+     },
+     "why": null
+    },
+    "how": "snapped pose + one exact slide to the nearest contact"
+   },
+   "seconds": "20.43",
+   "axis_bound": {
+    "L": "467677669577/25000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "band"
+  },
+  {
+   "n": 325,
+   "N": 325,
+   "delivered_side": "18.535533907825",
+   "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+   "baseline": {
+    "ok": true,
+    "L": "741421356313/40000000000",
+    "violations": 0,
+    "contacts": 0,
+    "blocks": []
+   },
+   "swaps": [
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 182,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 180,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 180,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 182,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 184,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 180,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 180,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 186,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->axis",
+     "gated": true,
+     "ok": false,
+     "violations": 4,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=1/2",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=1/3",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=1/4",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=1/5",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=2/5",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=3/7",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell94:45->t=1/7",
+     "gated": true,
+     "ok": false,
+     "violations": 3,
+     "contacts": 0,
+     "L": "741421356313/40000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "45->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 182,
+    "contacts": 0,
+    "L": "741421356313/40000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "first-exact-sentence",
+   "first_sentence": {
+    "n": 325,
+    "N": 325,
+    "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+    "rational_words": false,
+    "base": {
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "741421356313/40000000000"
+    },
+    "steps": 0,
+    "certificate": {
+     "status": "verified",
+     "N": 325,
+     "contacts": 1,
+     "L": "741421356313/40000000000",
+     "clearance": "0",
+     "void": "29705627597008504953969/1600000000000000000000"
+    },
+    "verdict": "first-exact-sentence",
+    "L": "741421356313/40000000000",
+    "contacts": 1,
+    "clearance": "0",
+    "tighten": {
+     "ok": true,
+     "L": "741421356313/40000000000",
+     "contacts": 1,
+     "clearance": "0",
+     "certificate": {
+      "status": "verified",
+      "N": 325,
+      "contacts": 1,
+      "L": "741421356313/40000000000",
+      "clearance": "0",
+      "void": "29705627597008504953969/1600000000000000000000"
+     },
+     "move": {
+      "slack": "-1 + 353553390631/500000000000\u221a2",
+      "pair": [
+       7,
+       12
+      ],
+      "cell": 12,
+      "axis": [
+       "1/2\u221a2",
+       "1/2\u221a2"
+      ],
+      "shift": [
+       "-353553390631/500000000000 + 1/2\u221a2",
+       "-353553390631/500000000000 + 1/2\u221a2"
+      ]
+     },
+     "why": null
+    },
+    "how": "snapped pose + one exact slide to the nearest contact"
+   },
+   "seconds": "27.48",
+   "axis_bound": {
+    "L": "741421356313/40000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "band"
+  },
+  {
+   "n": 68,
+   "N": 68,
+   "delivered_side": "8.798795238991",
+   "worst_snap": "0.4503286328428342530629006409492968485181913248470695808003247091562891",
+   "baseline": {
+    "ok": false,
+    "L": "8798795238991/1000000000000",
+    "violations": 52,
+    "contacts": 0,
+    "blocks": [
+     [
+      3,
+      55,
+      "-42232133631/500000000000"
+     ],
+     [
+      10,
+      50,
+      "-15256085781/125000000000"
+     ],
+     [
+      21,
+      55,
+      "-116740495111/1000000000000"
+     ],
+     [
+      25,
+      42,
+      "-4830916551/500000000000"
+     ],
+     [
+      29,
+      50,
+      "-15256085781/125000000000"
+     ],
+     [
+      30,
+      35,
+      "-48747695119/500000000000"
+     ]
+    ]
+   },
+   "swaps": [
+    {
+     "swap": "cell64:axis->45",
+     "gated": true,
+     "ok": false,
+     "violations": 56,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=1/2",
+     "gated": true,
+     "ok": false,
+     "violations": 56,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=1/3",
+     "gated": true,
+     "ok": false,
+     "violations": 56,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=1/4",
+     "gated": true,
+     "ok": false,
+     "violations": 55,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=1/5",
+     "gated": true,
+     "ok": false,
+     "violations": 54,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=2/5",
+     "gated": true,
+     "ok": false,
+     "violations": 56,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=3/7",
+     "gated": true,
+     "ok": false,
+     "violations": 56,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell64:axis->t=1/7",
+     "gated": true,
+     "ok": false,
+     "violations": 54,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "cell64:axis->45",
+    "gated": true,
+    "ok": false,
+    "violations": 56,
+    "contacts": 0,
+    "L": "8798795238991/1000000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "no-beat (baseline itself is not a sentence)",
+   "first_sentence": {
+    "n": 68,
+    "N": 68,
+    "worst_snap": "0.4503286328428342530629006409492968485181913248470695808003247091562891",
+    "rational_words": true,
+    "base": {
+     "ok": false,
+     "violations": 52,
+     "contacts": 0,
+     "L": "8798795238991/1000000000000"
+    },
+    "steps": 1,
+    "certificate": null,
+    "verdict": "refused",
+    "L": "8798795238991/1000000000000",
+    "contacts": 0,
+    "clearance": "-20041055441/125000000000",
+    "why": {
+     "violations": 52,
+     "clearance": "-20041055441/125000000000"
+    }
+   },
+   "seconds": "2.14",
+   "axis_bound": {
+    "L": "8798795238991/1000000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "small"
+  },
+  {
+   "n": 66,
+   "N": 66,
+   "delivered_side": "8.656854251262103380768678303016456891642279698514706365729218880340668",
+   "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+   "baseline": {
+    "ok": true,
+    "L": "4328427125631/500000000000",
+    "violations": 0,
+    "contacts": 0,
+    "blocks": []
+   },
+   "swaps": [
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "3828427125631/500000000000 + \u221a2",
+     "gap": "-1 + \u221a2",
+     "gap_decimal": "0.414213562373095048801688724209698078569671875376948073176679737990732",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4528427125631/500000000000",
+     "gap": "2/5",
+     "gap_decimal": "0.400000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4528427125631/500000000000",
+     "gap": "2/5",
+     "gap_decimal": "0.400000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "76583261135727/8500000000000",
+     "gap": "6/17",
+     "gap_decimal": "0.3529411764705882352941176470588235294117647058823529411764705882352941",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "58269552633203/6500000000000",
+     "gap": "4/13",
+     "gap_decimal": "0.3076923076923076923076923076923076923076923076923076923076923076923077",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "131524386643299/14500000000000",
+     "gap": "12/29",
+     "gap_decimal": "0.4137931034482758620689655172413793103448275862068965517241379310344828",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "131524386643299/14500000000000",
+     "gap": "12/29",
+     "gap_decimal": "0.4137931034482758620689655172413793103448275862068965517241379310344828",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4448427125631/500000000000",
+     "gap": "6/25",
+     "gap_decimal": "0.240000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 43,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 42,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 42,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 45,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 46,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 39,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 39,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 45,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell41:word->axis",
+     "gated": true,
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "4328427125631/500000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell41:word->45",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4078427125631/500000000000 + 1/2\u221a2",
+     "gap": "-1/2 + 1/2\u221a2",
+     "gap_decimal": "0.2071067811865475244008443621048490392848359376884740365883398689953660",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=1/2",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4428427125631/500000000000",
+     "gap": "1/5",
+     "gap_decimal": "0.200000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=1/3",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4428427125631/500000000000",
+     "gap": "1/5",
+     "gap_decimal": "0.200000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=1/4",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "75083261135727/8500000000000",
+     "gap": "3/17",
+     "gap_decimal": "0.1764705882352941176470588235294117647058823529411764705882352941176471",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=1/5",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "57269552633203/6500000000000",
+     "gap": "2/13",
+     "gap_decimal": "0.1538461538461538461538461538461538461538461538461538461538461538461538",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=2/5",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "128524386643299/14500000000000",
+     "gap": "6/29",
+     "gap_decimal": "0.2068965517241379310344827586206896551724137931034482758620689655172414",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=3/7",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "128524386643299/14500000000000",
+     "gap": "6/29",
+     "gap_decimal": "0.2068965517241379310344827586206896551724137931034482758620689655172414",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "cell41:word->t=1/7",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "4388427125631/500000000000",
+     "gap": "3/25",
+     "gap_decimal": "0.120000000000000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    }
+   ],
+   "closest": {
+    "swap": "word->axis (all)",
+    "gated": true,
+    "ok": true,
+    "violations": 0,
+    "contacts": 0,
+    "L": "4328427125631/500000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "first-exact-sentence",
+   "first_sentence": {
+    "n": 66,
+    "N": 66,
+    "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+    "rational_words": false,
+    "base": {
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "4328427125631/500000000000"
+    },
+    "steps": 0,
+    "certificate": {
+     "status": "verified",
+     "N": 66,
+     "contacts": 1,
+     "L": "4328427125631/500000000000",
+     "clearance": "0",
+     "void": "2235281381898240657148161/250000000000000000000000"
+    },
+    "verdict": "first-exact-sentence",
+    "L": "4328427125631/500000000000",
+    "contacts": 1,
+    "clearance": "0",
+    "tighten": {
+     "ok": true,
+     "L": "4328427125631/500000000000",
+     "contacts": 1,
+     "clearance": "0",
+     "certificate": {
+      "status": "verified",
+      "N": 66,
+      "contacts": 1,
+      "L": "4328427125631/500000000000",
+      "clearance": "0",
+      "void": "2235281381898240657148161/250000000000000000000000"
+     },
+     "move": {
+      "slack": "-1 + 1414213562699/2000000000000\u221a2",
+      "pair": [
+       42,
+       51
+      ],
+      "cell": 51,
+      "axis": [
+       "1/2\u221a2",
+       "1/2\u221a2"
+      ],
+      "shift": [
+       "1414213562699/2000000000000 - 1/2\u221a2",
+       "1414213562699/2000000000000 - 1/2\u221a2"
+      ]
+     },
+     "why": null
+    },
+    "how": "snapped pose + one exact slide to the nearest contact"
+   },
+   "seconds": "2.44",
+   "axis_bound": {
+    "L": "4328427125631/500000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "small"
+  },
+  {
+   "n": 67,
+   "N": 67,
+   "delivered_side": "8.707106782956",
+   "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+   "baseline": {
+    "ok": true,
+    "L": "2176776695739/250000000000",
+    "violations": 0,
+    "contacts": 0,
+    "blocks": []
+   },
+   "swaps": [
+    {
+     "swap": "45->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 14,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 16,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "45->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 14,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->axis",
+     "gated": true,
+     "ok": false,
+     "violations": 1,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=1/2",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=1/3",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=1/4",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=1/5",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=2/5",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=3/7",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell66:45->t=1/7",
+     "gated": true,
+     "ok": false,
+     "violations": 2,
+     "contacts": 0,
+     "L": "2176776695739/250000000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "45->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 14,
+    "contacts": 0,
+    "L": "2176776695739/250000000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "first-exact-sentence",
+   "first_sentence": {
+    "n": 67,
+    "N": 67,
+    "worst_snap": "3.170027693049899820910869699468406456520726127892450644245E-13",
+    "rational_words": false,
+    "base": {
+     "ok": true,
+     "violations": 0,
+     "contacts": 0,
+     "L": "2176776695739/250000000000"
+    },
+    "steps": 0,
+    "certificate": {
+     "status": "verified",
+     "N": 67,
+     "contacts": 1,
+     "L": "2176776695739/250000000000",
+     "clearance": "0",
+     "void": "550856783112398980756121/62500000000000000000000"
+    },
+    "verdict": "first-exact-sentence",
+    "L": "2176776695739/250000000000",
+    "contacts": 1,
+    "clearance": "0",
+    "tighten": {
+     "ok": true,
+     "L": "2176776695739/250000000000",
+     "contacts": 1,
+     "clearance": "0",
+     "certificate": {
+      "status": "verified",
+      "N": 67,
+      "contacts": 1,
+      "L": "2176776695739/250000000000",
+      "clearance": "0",
+      "void": "550856783112398980756121/62500000000000000000000"
+     },
+     "move": {
+      "slack": "229/1000000000000",
+      "pair": [
+       0,
+       1
+      ],
+      "cell": 1,
+      "axis": [
+       "1",
+       "0"
+      ],
+      "shift": [
+       "-229/1000000000000",
+       "0"
+      ]
+     },
+     "why": null
+    },
+    "how": "snapped pose + one exact slide to the nearest contact"
+   },
+   "seconds": "3.04",
+   "axis_bound": {
+    "L": "2176776695739/250000000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "small"
+  },
+  {
+   "n": 69,
+   "N": 69,
+   "delivered_side": "8.827194657504",
+   "worst_snap": "0.0093754054286662320338723472983849337139460152473182363886761218788733",
+   "baseline": {
+    "ok": false,
+    "L": "275849833047/31250000000",
+    "violations": 24,
+    "contacts": 0,
+    "blocks": [
+     [
+      10,
+      63,
+      "-39764482093/17000000000000"
+     ],
+     [
+      19,
+      55,
+      "-50693723177/17000000000000"
+     ],
+     [
+      27,
+      52,
+      "-330923621/136000000000"
+     ],
+     [
+      42,
+      60,
+      "-52294693709/17000000000000"
+     ],
+     [
+      48,
+      68,
+      "-15543690471/6500000000000"
+     ],
+     [
+      50,
+      52,
+      "-4784135501/4250000000000"
+     ]
+    ]
+   },
+   "swaps": [
+    {
+     "swap": "t=1/4->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 34,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->45 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 28,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->t=1/2 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 31,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->t=1/3 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 31,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 32,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->t=2/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 28,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->t=3/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 28,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "t=1/4->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 32,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->axis (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->45 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "8141109485087/1000000000000 + 1/2\u221a2",
+     "gap": "-686085172417/1000000000000 + 1/2\u221a2",
+     "gap_decimal": "0.0210216087695475244008443621048490392848359376884740365883398689953660",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/2 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "8841109485087/1000000000000",
+     "gap": "13914827583/1000000000000",
+     "gap_decimal": "0.013914827583000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/3 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "8841109485087/1000000000000",
+     "gap": "13914827583/1000000000000",
+     "gap_decimal": "0.013914827583000000000000000000000000000000000000000000000000000000000",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/4 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 23,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=1/5 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "word->t=2/5 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "256592175067523/29000000000000",
+     "gap": "603529999907/29000000000000",
+     "gap_decimal": "0.02081137930713793103448275862068965517241379310344827586206896551724138",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=3/7 (all)",
+     "gated": false,
+     "ok": null,
+     "violations": null,
+     "contacts": null,
+     "L": "256592175067523/29000000000000",
+     "gap": "603529999907/29000000000000",
+     "gap_decimal": "0.02081137930713793103448275862068965517241379310344827586206896551724138",
+     "beats": false,
+     "size_changed": true
+    },
+    {
+     "swap": "word->t=1/7 (all)",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->axis",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->45",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=1/2",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=1/3",
+     "gated": true,
+     "ok": false,
+     "violations": 24,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=1/4",
+     "gated": true,
+     "ok": false,
+     "violations": 24,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=1/5",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=2/5",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=3/7",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    },
+    {
+     "swap": "cell68:word->t=1/7",
+     "gated": true,
+     "ok": false,
+     "violations": 25,
+     "contacts": 0,
+     "L": "275849833047/31250000000",
+     "gap": "0",
+     "gap_decimal": "0E-69",
+     "beats": false,
+     "size_changed": false
+    }
+   ],
+   "closest": {
+    "swap": "t=1/4->axis (all)",
+    "gated": true,
+    "ok": false,
+    "violations": 34,
+    "contacts": 0,
+    "L": "275849833047/31250000000",
+    "gap": "0",
+    "gap_decimal": "0E-69",
+    "beats": false,
+    "size_changed": false
+   },
+   "beat": null,
+   "verdict": "no-beat (baseline itself is not a sentence)",
+   "first_sentence": {
+    "n": 69,
+    "N": 69,
+    "worst_snap": "0.0093754054286662320338723472983849337139460152473182363886761218788733",
+    "rational_words": true,
+    "base": {
+     "ok": false,
+     "violations": 24,
+     "contacts": 0,
+     "L": "275849833047/31250000000"
+    },
+    "steps": 1,
+    "certificate": null,
+    "verdict": "refused",
+    "L": "275849833047/31250000000",
+    "contacts": 0,
+    "clearance": "-291758249/68000000000",
+    "why": {
+     "violations": 24,
+     "clearance": "-291758249/68000000000"
+    }
+   },
+   "seconds": "3.76",
+   "axis_bound": {
+    "L": "275849833047/31250000000",
+    "gap": "0",
+    "equals_base": true,
+    "why": "the all-axis relabelling minimises the bbox over every word relabelling, so equality means no relabelling can lower this row"
+   },
+   "range": "small"
+  }
+ ],
+ "fields": {
+  "strip_penalty": {
+   "axis": "0",
+   "45": "sqrt2 - 1 = 0.4142135623730950",
+   "60": "(sqrt3 - 1)/2 = 0.3660254037844386",
+   "72": "cos72 + sin72 - 1 = 0.2600735106701010",
+   "why": "a lone tilted square adds |c| + |s| - 1 to a wall, and |c| + |s| >= 1 with equality only at the axis words; a tilt can only pay by interlocking, which is why 45 deg (the diamond) recurs and 60 deg does not"
+  },
+  "hex60_not_in_quad2": {
+   "sqrt(3)/2 in Q(sqrt2)": false,
+   "sqrt(3)/2 in Q(sqrt5)": false,
+   "sqrt(3)/2 in Q(sqrt7)": false,
+   "sqrt(3)/2 in Q(sqrt3)": true
+  },
+  "golden72": {
+   "sin72_in_q5": {
+    "discriminant": 20480,
+    "is_square": false,
+    "cos_in_field": true,
+    "sin_in_field": false
+   },
+   "cos72_in_q5": "(sqrt5 - 1)/4, so the angle is half-expressible",
+   "verdict": "degree-4 word: no Q(sqrt5) rung can carry it"
+  },
+  "positive_controls": {
+   "sqrt(1/2) in Q(sqrt2)": true,
+   "sqrt(9/4) in Q(sqrt5)": true
+  }
+ },
+ "theta": {
+  "60": {
+   "field": "Q(sqrt 3)",
+   "N": 2,
+   "ok": true,
+   "contacts": 1,
+   "violations": 0,
+   "L": "3/2 + 1/2\u221a3",
+   "L_decimal": "2.366025403784438646763723170752936183471402626905190314027903489725966",
+   "penalty": "-1/2 + 1/2\u221a3",
+   "certificate": {
+    "status": "verified",
+    "N": 2,
+    "contacts": 1,
+    "L": "3/2 + 1/2\u221a3",
+    "clearance": "0",
+    "void": "1 + 3/2\u221a3"
+   }
+  },
+  "45": {
+   "field": "Q(sqrt 2)",
+   "N": 2,
+   "ok": true,
+   "contacts": 1,
+   "violations": 0,
+   "L": "1 + \u221a2",
+   "L_decimal": "2.414213562373095048801688724209698078569671875376948073176679737990732",
+   "penalty": "-1 + \u221a2",
+   "certificate": {
+    "status": "verified",
+    "N": 2,
+    "contacts": 1,
+    "L": "1 + \u221a2",
+    "clearance": "0",
+    "void": "1 + 2\u221a2"
+   }
+  }
+ },
+ "seconds": "325.21",
+ "tally": {
+  "beat": 0,
+  "first_sentence": 5,
+  "no_beat": 5
+ }
+}

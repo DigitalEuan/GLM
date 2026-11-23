@@ -2592,3 +2592,46 @@ README/STATUS footers byte-identical.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `65-LANDSCAPE.md` §9; records `31`–`65`.
+
+## Run 105 — the candidate search: 0 of 10 beats, five first certified sentences, and a new field
+
+**The instrument (`cand105.py`).** Two levers were tested and one was killed on the way in: a
+homothety of a delivered row's positions cannot lower its side, because the container *is* the bbox
+(`lambda* = 1` with a wall binding — selftest control 5). The lever that can is the square's
+*extent*, `(|c| + |s|)/2`, minimal (1/2) exactly at the axis words. Its floor is the **axis bound** —
+the bbox with every word axis — which is `<=` the bbox of *every* word assignment, so equality with
+the delivered bbox is a proof that no relabelling of any subset can lower that row.
+
+**Part 1 — the candidates.** Ten rows by one rule (largest relative void `(L^2-n)/n` in each range):
+six above 324 (330, 333, 329, 332, 331, 325) and four below (68, 66, 67, 69), each tested with
+whole-motif swaps and single-cell swaps in Q(sqrt 2) and gated exactly at clearance 0. **0 of 10
+beat.** Nine rows have the axis bound *equal* to the delivered bbox (gap exactly 0), so they are
+provably closed to relabelling; the one exception, n = 333, lowers its bbox by exactly `9.2835e-4`
+and the gate refuses it with 116 overlaps against the delivered 115 — contact-blocking, not spacing.
+For n = 331 and n = 66 the all-axis relabelling is itself a clean packing at the same side: a second
+exact pose for the row, not a smaller one.
+
+**Part 2 — first exact sentences.** Five rows (325, 329, 331, 66, 67) carried exactly-worded angles
+(worst snap `<= 3.2e-13`) but only the table's `1e-9` shim, so the clearance was positive and no
+certificate existed. One exact slide to the nearest contact — along that pair's own unit axis, by
+exactly its slack — makes each tight: all five now verify with clearance 0 and one contact, at sides
+equal to the delivered ones digit for digit, `741421356313/40000000000`, `2332106781659/125000000000`,
+`467677669577/25000000000`, `4328427125631/500000000000` and `2176776695739/250000000000`. These are
+firsts: the shipped document's seven cells include none of these rows.
+
+**Part 3 — the off-axis motifs, as algebra.** The strip penalty is `|c| + |s| - 1`: 0 at the axis,
+0.414214 at 45 degrees, 0.366025 at 60, 0.260074 at 72. `sin60 = sqrt3/2` is refused by Q(sqrt2),
+Q(sqrt5) and Q(sqrt7), so hexagonal needed a new field: this run builds the first certified
+**Q(sqrt 3)** sentence (N = 2, one corner contact, side `3/2 + (1/2)sqrt3 = 2.366025`, verified).
+At N = 2 it beats the 45 degree corner (`1 + sqrt2 = 2.414214`) by 0.0482 and loses to the axis pair
+(2) by exactly the penalty. Golden is worse than that: `cos72` is in Q(sqrt5) but `sin72` is not —
+its square's discriminant `20480 = 64^2 * 5` is not a square — so a 72 degree square is a degree-4
+object no Q(sqrt5) rung can carry.
+
+Checks: `cand105.py --selftest` 5 controls; bare run exit 0 (10 rows, 325 s); `--audit` **460
+functions, 0 naming `float`** (cand105 33); every earlier selftest still green; `record_guard.py`
+OK; README/STATUS footers byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `66-CANDIDATES.md`; records `31`–`65`.
