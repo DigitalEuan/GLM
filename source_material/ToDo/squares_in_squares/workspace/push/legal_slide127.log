@@ -1,0 +1,9 @@
+  n=  33 L0=6.0000000016660000 slides  0 swaps 1 dL=0.00e-27 seats 1 clearance xlo:3.33e-10 xhi:3.33e-10 ylo:3.33e-10 yhi:3.33e-10  1.73s
+  n= 159 L0=13.000000001846000 slides  0 swaps 1 dL=0.00e-26 seats 1 clearance xlo:1.54e-10 xhi:1.54e-10 ylo:1.54e-10 yhi:1.54e-10  6.42s
+  n= 439 L0=21.000000001904000 slides  0 swaps 1 dL=0.00e-26 seats 1 clearance xlo:9.50e-11 xhi:9.50e-11 ylo:9.50e-11 yhi:9.50e-11  20.02s
+  n= 662 L0=26.000000001924000 slides  0 swaps 1 dL=0.00e-26 seats 1 clearance xlo:7.70e-11 xhi:7.70e-11 ylo:7.70e-11 yhi:7.70e-11  20.01s
+  n= 883 L0=30.000000001934000 slides  0 swaps 1 dL=0.00e-26 seats 1 clearance xlo:6.70e-11 xhi:6.70e-11 ylo:6.70e-11 yhi:6.70e-11  20.02s
+  n= 942 L0=31.000000001936000 slides  0 swaps 1 dL=0.00e-26 seats 1 clearance xlo:6.50e-11 xhi:6.50e-11 ylo:6.50e-11 yhi:6.50e-11  20.03s
+
+dL over 6 rows: min 0E-29  max 0E-28  rows beating: 0  slides accepted: 0  void swaps: 6
+wrote /workspace/chats/4f844fe855227d42b936412b/source_material/ToDo/squares_in_squares/workspace/push/legal_slide127.json

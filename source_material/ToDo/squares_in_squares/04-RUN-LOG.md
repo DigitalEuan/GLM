@@ -3543,3 +3543,61 @@ throughput, the gradient, the two driver findings).
 **Checks.** structure --control green (A 100.0 %, B 4.0030); --check-solver green; sqscore **22.218056945**, 553
 beats, 447 grid; record_guard OK; perturb, anchor_chain, void_insert, true_geom selftests green; glm_wheels
 --audit **657 functions, 0 offenders**; py_compile OK; `submission.csv` and `WHITEBOARD.md` untouched.
+
+## Run 127 — the legal rearrangement move: it fires on every row and shrinks none
+
+**The move.** `scripts/legal_slide.py`: band slides (a row or column translated along the wall it is parallel
+to), single-cell slides, and a block swap into a void. Every candidate is accepted only if the exact 40-digit
+separating-axis slack **at the destination** is `>= 0`, so the pose is legal at every accepted step and nothing
+is ever compressed into overlap to be repaired later. Only moved-vs-unmoved pairs are tested, which is
+*complete* rather than a sample: a common translation preserves the moved group's internal offsets exactly in
+`Decimal`, so those pairs cannot change, and unmoved pairs cannot either.
+
+**Five controls, all green.** P (positive, tighten): a 4x4 grid with one row displaced by 0.25 in `u` goes from
+side **4.25 to 4.00** with one legal move, and the resulting pose is re-checked pair by pair — the accepted move
+is certified, not assumed. N (negative, refusals): three single-cell moves into overlap are refused with exact
+slacks **-1** at pair (5, 6), **-1/2** at (5, 6) and **-1** at (5, 1). N3 (negative, regression): a cell moved
+4 units onto a *distant* occupied cell is refused at exact **-1**. N2 (non-vacuity): a free cell slides 1/2 into
+empty space and *is* accepted, so the refusals above are about overlap and not about the move never firing.
+V (positive, block swap): a 3x3 grid with its centre removed yields **7 exact seats**, the outside cell swaps
+into the hole at slack exactly **0**, and the side falls **5.00 to 3.00**.
+
+The three refusals are single-cell on purpose: in a grid a band slide along its own wall is legal by
+construction, so an earlier negative control built on a band was testing nothing.
+
+**The bug the sample found.** The first `check_move` tested the mover's **old** neighbour list, which is sound
+for a short step and wrong for a long one — a cell slid 9.5 units passed *over* its old neighbours and landed on
+a cell that had never been in its list, and the move was accepted. The first sample run gave it away by
+reporting wall clearances of **3.3, 9.5, 7.7, 6.7, 6.5 units** on poses that are jammed at 1e-10, identical on
+all four walls. The fix looks the pairs up at the destination (`near_at`), and N3 is its regression test. This
+is the failure mode the whole line of work exists to avoid — except the *checker* was the one hoping, which is
+worse, because a locally-sound legality test makes every downstream number look better, never worse.
+
+**The sample.** Six unbeaten rows (33, 159, 439, 662, 883, 942), 20 s each, budget respected. **Slides accepted:
+0 on 6/6. Void swaps: 1 on every row. dL: 0 on 6/6 — no row beats its delivered side.** Wall clearance is
+**3.33e-10, 1.54e-10, 9.50e-11, 7.70e-11, 6.70e-11, 6.50e-11**: every wall cell has under 1e-9 of legal room
+before it touches its neighbour, while the move ladder's smallest step is 1/512, so no slide can fire — and
+that is a measurement, not a budget effect (rows 33 and 159 finished the whole analysis in 1.7 s and 6.4 s and
+still accepted nothing). The swap is legal and **side-neutral**: the vacated cell is one of a full column on
+that wall, so the wall is redefined rather than moved. On n = 33 and n = 159 — the two rows where the
+independent whole-pose 40-digit pass fits in the budget — the swapped pose is the delivered side with **0
+violations**.
+
+**Verdict.** The move set is live, exact, and legal on real rows; it does not shrink a delivered row. That is
+the third instrument to say the blocker is structural (polish ceiling 0.00000 at 12/12 rows; legalising a
+squeeze costs 4.6e-2 to 3.0; perturbation dL 0 on 20/20). The named next step is to run this move set on the
+**relaxed** poses the projection stage produces, where clearance is 1.1e-4 to 1.6e-2 and a legal slide has room
+to fire.
+
+**Doc 85, audited.** Every sweep-time figure now carries its provenance: per-patch rates are **measured**
+(2.1-2.4 ms warm, 374-410 ms pre-change), every "sweep time" is **estimated** by multiplying that rate by the
+patch count (run 125's 5.3 / 72.6 / 163.3 s and run 126's 0.4 / 1.0 / 3.2 s — no sweep ever completed in run
+125), and completion is **counted**, with a per-row appendix over all 20 rows of the re-run (**20/20 rows with
+at least one completed sweep**, 18/20 also aborted one). One number is corrected: the n = 33 pre-change column
+read 264 ms and is **517 ms** on the first (importing) call, 264 ms being the warm batched figure.
+
+**Checks.** structure --control green (A 100.0 %, B 4.0030, absorbed at 4.0030358954); --check-solver green
+(batched vs scipy-FD f 2.400972e-17 vs 2.400934e-17, 65.5x); perturb, anchor_chain, void_insert, true_geom
+selftests green; sqscore **22.218056945**, 553 beats, 447 grid; record_guard OK; glm_wheels --audit **678
+functions, 0 offenders** (657 + `legal_slide`'s 21); py_compile OK; `submission.csv` and root `WHITEBOARD.md`
+untouched. Docs: 86 (new), 85 (audited); record `workspace/push/legal_slide127.json` and `.log`.
