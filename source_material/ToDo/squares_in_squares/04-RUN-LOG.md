@@ -3439,3 +3439,31 @@ family), scored by measured dL per row before being scaled.
 **Checks.** perturb --selftest and --control green; 20-row run and the 1e-10 ladder as above; tightness measured
 at 40 digits; sqscore, record_guard, void_insert --selftest, anchor_chain --selftest, glm_wheels --audit green;
 history identical; no row changed, no score claimed. Entry doc 82 (new).
+
+## Run 124 — the structure-changing route: no tail, and a bug in the instrument
+
+**Request.** Run the resqueeze/block-swap family on ~20 of the 447 unbeaten rows with a per-row budget, measure
+dL, report the distribution, and prove the mechanism can fire before trusting any null.
+
+**Mechanism.** Penalty relaxation (squeeze with the container hinged at L0 - 4e-3, project overlaps out under a
+weak wall term, legalise by the smallest 40-digit-legal expansion), with three attempts per row: plain, one cell
+teleported into a void (or displaced), and a 2x2 block rotated 90 degrees. dL counts only on a legal pose.
+
+**Controls.** A: inflate n=16 by 3.75e-3 and hinge back -> 100.0 % recovered, legal. B: displace a cell of n=12
+by 0.3 -> absorbed and legalised. The mechanism fires at the scale the score needs.
+
+**Bugs the controls exposed.** resqueeze's patch solver penalises only patch-vs-outside pairs (intra-patch
+overlaps invisible) and its patch enumeration returns an empty list for a pose flat in one direction and can skip
+the last row/column; the first version of this driver also counted illegal poses as gains. Run 116's null came
+from an instrument with the first two, so that conclusion is on notice for a re-run.
+
+**Result.** 14 of 20 rows measured inside budget: dL min -1.6e-1, median 0, max 0, **0 rows positive**, 0
+violations in every reported pose. The only legal outcomes are the delivered side or an expansion of
+5e-2..1.6e-1: legalisation pays the compression back, so this route cannot hold a shrink on a packed grid.
+
+**Verdict.** No tail; the remaining honest attempt is combinatorial (choose a different tiling, then relax),
+with this relaxer as the second half of the pipeline.
+
+**Checks.** structure --control green; 20-row run as above; perturb and anchor_chain selftests green; sqscore,
+record_guard, void_insert --selftest, glm_wheels --audit green; history identical; no row changed, no score
+claimed. Entry doc 83 (new).
