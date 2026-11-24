@@ -3384,3 +3384,30 @@ by running it.
 **Checks.** anchor_chain --selftest green; sq_cli verify 10 (side 3 + 1/2 sqrt2, 10 anchors, 0 overlaps);
 sq_cli audit 106 functions 0 offenders; glm_wheels --audit re-run; sqscore, record_guard, void_insert
 --selftest green; history byte-identical; no row changed, no score claimed. Entries doc 80 (new), doc 79 §2.
+
+## Run 122 — time-budgeted rows, and the honest scaling answer
+
+**Request.** Stop `sq_cli.py row` burning a budget and reporting nothing: give it best-effort partial progress
+within a wall clock, then say whether the anchor line can realistically reach the ~990-cell unbeaten rows.
+
+**Time budget.** `settle(..., progress=PATH)` checkpoints the deepest placement whenever it improves, each cell
+as exact `[x_a,x_b,y_a,y_b,c_a,c_b,s_a,s_b,dir,i]` text; `row --seconds N` runs it in a child, kills at the
+deadline and reloads the checkpoint into a gated partial pose. Round trip verified (n=5: 5 cells, span
+2+1/2 sqrt2, 0 overlaps, 69 nodes / 87 states).
+
+**Measured with the budget.** n = 12 in 45 s -> 8/12, span exactly 4, 0 overlaps, **73** anchors available.
+n = 23 in 150 s -> 11/23, span exactly 5, 0 overlaps, **129** anchors available. Both are budget/order limits,
+not exhaustion and not a missing command — the distinction is now observable, where the 900 s silence destroyed
+it.
+
+**Scaling answer: no.** candidates scale with placed count squared: pairs/node 9 (d=4), 175 (5), 270 (6), 381
+(7), i.e. ~7d^2 at ~388 pairs/s -> d=990 is ~17 700 s per node, and a single non-backtracking 990-cell chain is
+a 4 866 h (203-day) floor, before refusals (measured 3-18 nodes per cell, so 3-18x worse). And speed is not the
+binding problem: every settlement lands exactly on its target, the unbeaten rows are 1.5e-9 above the grid, and
+reproducing the grid is worth 1e-9 per row against the 4e-3-1e-2 the score needs. The line is a certifier, not
+a scoring instrument; it is kept as `sq_cli verify` and not scaled. Next cheapest test named: a per-row
+non-closure perturbation over 20 rows at ~10 s each.
+
+**Checks.** round trip exact; both row probes reported with verdicts; verify 10 and audit clean; anchor_chain
+--selftest, sqscore, record_guard, void_insert --selftest, glm_wheels --audit green; history identical; no row
+changed, no score claimed. Entries doc 81 (new).

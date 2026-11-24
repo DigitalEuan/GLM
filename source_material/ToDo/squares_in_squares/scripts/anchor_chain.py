@@ -685,7 +685,39 @@ def _key(cell):
     return (cell["x"].a, cell["x"].b, cell["y"].a, cell["y"].b, cell["dir"])
 
 
-def settle(n_target, L, field, node_cap=None, top=None, mode="closure", order=True):
+def write_progress(path, cells, nodes, states):
+    """Checkpoint the deepest placement reached — best effort, exact text.
+
+    Coordinates are written as ``[a, b]`` meaning ``a + b sqrt d``, so a killed
+    run leaves a placement the caller can reload and re-gate exactly.
+    """
+    rec = {"cells": [[str(c["x"].a), str(c["x"].b), str(c["y"].a),
+                      str(c["y"].b), str(c["c"].a), str(c["c"].b),
+                      str(c["s"].a), str(c["s"].b), c.get("dir", "axis"),
+                      c.get("i", -1)]
+                     for c in cells],
+           "nodes": nodes, "states": states}
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(rec, f)
+    os.replace(tmp, path)
+
+
+def read_progress(path, field):
+    """Reload a checkpoint as cells (exact from the text, no floats)."""
+    with open(path) as f:
+        rec = json.load(f)
+    out = []
+    for xa, xb, ya, yb, ca, cb, sa, sb, dname, idx in rec["cells"]:
+        out.append({"x": field.q(F(xa), F(xb)), "y": field.q(F(ya), F(yb)),
+                    "c": field.q(F(ca), F(cb)), "s": field.q(F(sa), F(sb)),
+                    "dir": dname, "one": field.one, "zero": field.zero,
+                    "i": -1 if idx < 0 else idx})
+    return out, rec["nodes"], rec["states"]
+
+
+def settle(n_target, L, field, node_cap=None, top=None, mode="closure", order=True,
+           progress=None):
     """Goal-directed settlement at a target side L — exhaustive by default.
 
     Every admitted anchor passes the exact placement gate at clearance >= 0, and
@@ -695,6 +727,9 @@ def settle(n_target, L, field, node_cap=None, top=None, mode="closure", order=Tr
 
     With ``node_cap``/``top`` unset the search runs until the state space is
     closed, so a failure is a statement about the grammar rather than a budget.
+    ``progress`` is a path: the deepest placement reached so far is checkpointed
+    there whenever it improves, so a caller that kills the run still gets the
+    best effort rather than nothing.
     """
     lo = field.zero
     gen = {"frontier": determined_candidates, "sweep": sweep_candidates}.get(
@@ -708,10 +743,14 @@ def settle(n_target, L, field, node_cap=None, top=None, mode="closure", order=Tr
         nodes += 1
         if len(cells) > len(deepest):
             deepest = cells
+            if progress:
+                write_progress(progress, deepest, nodes, len(seen))
         if node_cap is not None and nodes > node_cap:
             why = f"node cap {node_cap} reached after {len(deepest)} cells"
             break
         if len(cells) >= n_target:
+            if progress:
+                write_progress(progress, cells, nodes, len(seen))
             return {"placed": list(cells), "why": "target reached",
                     "refusals": refusals, "nodes": nodes,
                     "states": len(seen), "exhausted": False}

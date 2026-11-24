@@ -1,0 +1,11 @@
+{
+ "n": 12,
+ "k": 4,
+ "beaten": false,
+ "seconds": 45,
+ "timed_out": true,
+ "settled": 8,
+ "nodes": 10,
+ "states": 50,
+ "verdict": "time budget reached: 73 determined anchors still available at the deepest state"
+}

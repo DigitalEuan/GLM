@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 import sys
 from fractions import Fraction as F
 
@@ -70,7 +71,9 @@ def cmd_settle(argv):
     L = parse_side(side, field)
     A.STATS.update({k: 0 for k in A.STATS})
     A._OVERLAP.clear()
-    got = A.settle(n, L, field, mode=mode, top=width, node_cap=cap)
+    prog = opts.get("--progress")
+    got = A.settle(n, L, field, mode=mode, top=width, node_cap=cap,
+                   progress=prog)
     span = A.bbox(got["placed"])[1] if got["placed"] else None
     print(f"settle n={n} L={L} mode={mode} width={width}: "
           f"{len(got['placed'])}/{n} ({got['why']})")
@@ -85,38 +88,68 @@ def cmd_row(argv):
     n = int(argv[0])
     opts = dict(zip(argv[1::2], argv[2::2]))
     width = int(opts.get("--width", 8)) if "--width" in opts else 8
-    cap = int(opts["--cap"]) if "--cap" in opts else 120
+    cap = int(opts["--cap"]) if "--cap" in opts else 200
+    seconds = int(opts.get("--seconds", 120)) if "--seconds" in opts else 120
     per = SQ.load()
     k = SQ.grid(n)
     beaten = SQ.extent(per[n]) < k - F(1, 10 ** 12)
     field = A.FIELDS[2]
     L = field.q(k)
     print(f"row n={n}: grid side k={k}, delivered {SQ.extent(per[n])}, "
-          f"{'BEATEN' if beaten else 'unbeaten'}")
-    A.STATS.update({k2: 0 for k2 in A.STATS})
-    A._OVERLAP.clear()
-    got = A.settle(n, L, field, top=width, node_cap=cap)
-    print(f"  settled {len(got['placed'])}/{n} ({got['why']}) nodes "
-          f"{got['nodes']} states {got['states']}")
-    # classify the stall: is there still a determined anchor at the deepest state?
-    deepest = got["placed"]
-    cands = A.lattice_candidates(field, deepest, L, field.zero) if len(deepest) < n else []
-    if len(deepest) == n:
-        verdict = "settled"
-    elif not cands:
-        verdict = ("no determined anchor exists at the deepest state — the "
-                   "grammar lacks a command for this position")
+          f"{'BEATEN' if beaten else 'unbeaten'}", flush=True)
+    print(f"  budget {seconds}s (width {width}, cap {cap}); partial progress "
+          f"is checkpointed, so a timeout still reports the deepest placement",
+          flush=True)
+
+    prog = os.path.join(ROOT, "workspace/push", f"row{n}_progress.json")
+    if os.path.exists(prog):
+        os.remove(prog)
+    cmd = [sys.executable, os.path.abspath(__file__), "settle", str(n), side_text(L),
+           "--width", str(width), "--cap", str(cap), "--progress", prog]
+    timed_out = False
+    try:
+        subprocess.run(cmd, timeout=seconds, check=False,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+    if os.path.exists(prog):
+        cells, nodes, states = A.read_progress(prog, field)
     else:
-        verdict = (f"budget/order limit: {len(cands)} determined anchors still "
-                   f"available at the deepest state")
+        cells, nodes, states = [], 0, 0
+    print(f"  best effort: {len(cells)}/{n} cells placed; nodes {nodes} states {states}",
+          flush=True)
+    if cells:
+        print(f"  exact span of the partial pose: {A.bbox(cells)[1]} "
+              f"(target {L}); overlaps {len(A.overlaps(cells))}", flush=True)
+    if len(cells) >= n:
+        verdict = "settled within budget"
+    else:
+        avail = A.lattice_candidates(field, cells, L, field.zero)
+        if not avail:
+            verdict = ("no determined anchor exists at the deepest state — the "
+                       "grammar lacks a command for this position")
+        else:
+            verdict = (f"{'time budget' if timed_out else 'node cap'} reached: "
+                       f"{len(avail)} determined anchors still available at the "
+                       f"deepest state")
     print(f"  verdict: {verdict}")
-    rec = {"n": n, "k": k, "beaten": beaten, "settled": len(deepest),
-           "why": got["why"], "nodes": got["nodes"], "states": got["states"],
-           "candidates_at_stall": len(cands), "verdict": verdict}
-    out = os.path.join(ROOT, "workspace/push/gridrow120.json")
+    rec = {"n": n, "k": k, "beaten": beaten, "seconds": seconds,
+           "timed_out": timed_out, "settled": len(cells), "nodes": nodes,
+           "states": states, "verdict": verdict}
+    out = os.path.join(ROOT, f"workspace/push/gridrow{n}.json")
     json.dump(rec, open(out, "w"), indent=1)
     print(f"  wrote {out}")
     return 0
+
+
+def side_text(L):
+    """An exact field element back to the CLI's own side syntax."""
+    a, b = L.a, L.b
+    if not b:
+        return str(a)
+    if not a:
+        return f"{b}r{b.denominator and L.d}"
+    return f"{a}{'+' if b > 0 else '-'}{abs(b)}r{L.d}"
 
 
 def cmd_verify(argv):
