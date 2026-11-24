@@ -619,7 +619,38 @@ def two_contact_candidates(field, placed, L, lo):
     return out
 
 
-def lattice_candidates(field, placed, L, lo, lattice=None, need=2):
+def sweep_candidates(field, placed, L, lo, need=2):
+    """The run-119 closure generator, kept **only** as a measurement control.
+
+    It took the *same* corner and two-contact candidates as the current one, but
+    obtained the wall+contact slides by sweeping a rational lattice (span 6) and
+    testing each guess, instead of solving the linear equation.  Same width and
+    same ordering as `lattice_candidates`, so the speedup is attributable.
+    """
+    raw = corner_anchors(field, placed, L, lo)
+    raw += determined_candidates(field, placed, L, lo)
+    raw += two_contact_candidates(field, placed, L, lo)
+    STATS["raw_candidates"] += len(raw)
+    out, seen = [], set()
+    for cand in raw:
+        k = _key(cand)
+        if k in seen:
+            continue
+        seen.add(k)
+        if not _inside(cand, lo, L):
+            continue
+        if not clear_of(cand, placed, field):
+            continue
+        contacts = sum(1 for o in placed if slack(o, cand) == 0)
+        wells = len(wall_contacts(cand, lo, L))
+        if contacts + wells < need:
+            continue
+        out.append(cand)
+    STATS["kept_candidates"] += len(out)
+    return out
+
+
+def lattice_candidates(field, placed, L, lo, need=2):
     """Every anchor the three commands can *determine*, by constraint intersection.
 
     Corners (wall+wall), slides (wall+contact) and stacks (contact+contact) are
@@ -666,7 +697,8 @@ def settle(n_target, L, field, node_cap=None, top=None, mode="closure", order=Tr
     closed, so a failure is a statement about the grammar rather than a budget.
     """
     lo = field.zero
-    gen = determined_candidates if mode == "frontier" else lattice_candidates
+    gen = {"frontier": determined_candidates, "sweep": sweep_candidates}.get(
+        mode, lattice_candidates)
     seen, stack = set(), [()]
     nodes = refusals = 0
     deepest = ()

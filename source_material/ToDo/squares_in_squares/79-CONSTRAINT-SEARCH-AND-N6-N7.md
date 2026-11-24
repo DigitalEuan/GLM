@@ -43,13 +43,28 @@ not re-tested in the next:
 | n = 6 | 19 | 9 | 67.9 % |
 | n = 7 | 256 | 35 | **88.0 %** |
 
-**Effect on the one run that is comparable before and after** (n = 5 at the proved optimum, both with a
-contact-first order): **248 nodes / 140.8 s -> 69 nodes / 30.6 s**, i.e. **3.6x fewer nodes and 4.6x less
-time**. On n = 4 the same node count (5) drops from 1.0 s to 0.31 s.
+**The speedup claim, corrected.** The first version of this section compared the run-119 measurement
+(248 nodes / 140.8 s, sweep generator, *no width limit and no ordering*) with the new run (69 nodes / 30.6 s,
+intersection generator, *width 8 and contact-first ordering*) and credited the difference to the generator.
+That comparison was confounded: three things changed at once. Re-measured with **the old sweep generator kept
+as `mode="sweep"`**, at the same width and the same ordering:
 
-**Caveat kept honest.** The 5/6/7 runs use a contact-first order with a width of 8 candidates per node. That
-is a *heuristic*, so a **success** under it is a real settlement, while a **failure** under it would only
-have been a search-order limit. Every failure reported below is labelled with which of the three it is.
+| generator | width | order | settled | nodes | time |
+|---|---|---|---|---|---|
+| sweep (run 119) | none | none | 5/5 | 248 | 140.8 s |
+| **sweep** (control) | **8** | **contact-first** | 5/5 | **60** | **25.8 s** |
+| intersection (run 120) | 8 | contact-first | 5/5 | 69 | 31.2 s |
+
+**So the speedup belongs to the width limit and the ordering, not to the generator.** For the same generator,
+going from uncapped/unordered to width 8 with contact-first order takes 248 -> 60 nodes and 140.8 -> 25.8 s
+(**4.1x fewer nodes, 5.5x less time**). At identical settings the intersection generator is in fact **slightly
+slower** than the sweep it replaced (69 vs 60 nodes, 31.2 vs 25.8 s), because it builds more raw candidates
+(75 353 vs 53 364) even though each is produced by a solve. The prefilter and memo hit rates above are real
+measurements, but their **isolated** contribution is not isolated here and is not claimed.
+
+**What the intersection generator does buy** is not speed: it is that every candidate is *derived* rather than
+*guessed*, so the candidate set is closed under the two-constraint closure (no lattice step can miss a
+determined anchor) and the code carries no sweep parameters. That is the honest trade.
 
 ## 3. n = 6 and n = 7 at their best known sides
 

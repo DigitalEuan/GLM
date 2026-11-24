@@ -1,0 +1,11 @@
+{
+ "n": 12,
+ "k": 4,
+ "beaten": false,
+ "settled": 8,
+ "why": "node cap 20 reached after 8 cells",
+ "nodes": 21,
+ "states": 58,
+ "candidates_at_stall": 73,
+ "verdict": "budget/order limit: 73 determined anchors still available at the deepest state"
+}

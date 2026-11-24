@@ -3356,3 +3356,31 @@ and the unbeaten rows (no attempt yet).
 **Checks.** anchor_chain --selftest green (both fields, refusal at -1/4); --forward wrote its JSON;
 glm_wheels --audit re-run; sqscore, record_guard, void_insert --selftest green; history byte-identical;
 no row changed, no score claimed. Entries doc 79 (new); records 325-326.
+
+## Run 121 — attributable speedup, dead code out, an unbeaten row, and a CLI
+
+**Request.** Fix the confounded doc 79 §2 comparison by re-measuring the old generator at the same width and
+ordering; trim dead code; point the settler at an unbeaten grid row with an honest settle/exhaust/missing
+verdict; give the project a CLI. Governed by DIRECTORS-NOTE.
+
+**Speedup, corrected.** The old sweep generator is back as `mode="sweep"`. At width 8 with contact-first
+ordering: sweep 60 nodes / 25.8 s, intersection 69 nodes / 31.2 s. So the 248 -> 69 nodes gain was the **width
+and the ordering**, not the generator: for the same generator, uncapped/unordered 248 / 140.8 s vs capped at 8
+with ordering 60 / 25.8 s (4.1x fewer nodes, 5.5x faster). The intersection generator is marginally slower
+(more raw candidates: 75 353 vs 53 364) and buys derivation instead of guessing. Doc 79 §2 rewritten; the
+prefilter/memo rates stand as measurements, their isolated share is not claimed.
+
+**Dead code.** `_offset_cache`/`_OFFSETS` and the unused `lattice=` argument removed; `determined_candidates`
+kept only as `mode="frontier"` because its closure is evidence.
+
+**Unbeaten row.** `sq_cli.py row 12 --cap 20`: n = 12, k = 4, delivered 4.0000000015, unbeaten -> settled 8/12
+in 21 nodes, with **73 determined anchors still available** at the deepest state. Verdict: **budget/order
+limit**, not exhaustion, not a missing command. n = 23 (k = 5) produced no result in 900 s: **throughput-
+limited**, state space nowhere near closed, candidates still being produced — cost per node, not grammar.
+
+**CLI.** `scripts/sq_cli.py` with `settle`, `row`, `verify`, `audit`; exact sides typed as `2+1/2r2`. Verified
+by running it.
+
+**Checks.** anchor_chain --selftest green; sq_cli verify 10 (side 3 + 1/2 sqrt2, 10 anchors, 0 overlaps);
+sq_cli audit 106 functions 0 offenders; glm_wheels --audit re-run; sqscore, record_guard, void_insert
+--selftest green; history byte-identical; no row changed, no score claimed. Entries doc 80 (new), doc 79 §2.
