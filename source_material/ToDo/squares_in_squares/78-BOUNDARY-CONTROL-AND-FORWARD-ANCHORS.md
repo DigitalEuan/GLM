@@ -59,40 +59,53 @@ pointed at a different real quadratic field.
 So the grammar generalises: a second field, a second direction word, the same commands, the same
 gate. The only thing that changed between n = 10 and n = 18 was the field object.
 
-## 3. The forward settler: from transcript to constructor
+## 3. The forward settler: re-tested without caps, then completed
 
-`settle(n, L, field)` runs the grammar **forwards** at a target side. At each node it generates
-the anchors the three commands can *determine* — a corner closed by two walls, or a cell
-tangent to the frontier cell and closed by a wall or a second contact, sliding on the exact
-lattice — admits a candidate only when `step_check` and the exact placement gate pass at
-clearance `>= 0`, and backtracks when a move is refused. Every comparison is in Q(sqrt d); there
-is no float anywhere in the search.
+**The claim re-tested, and corrected.** The first version of this section said the n = 5 search was
+"exhausted at 221 nodes". That run had a per-node candidate truncation (`[:12]`) and a node cap, so the
+claim was not yet genuine. Re-run with **no per-node candidate cap and no node limit** — only a
+state-deduping `seen` set, so permutations of the same placement collapse:
 
-| target | result | verdict |
-|---|---|---|
-| **n = 4 at L = 2** (proved optimum) | **4/4 settled**, exact span `2`, 0 refusals | the grammar constructs |
-| **n = 5 at L = 2 + 1/2 sqrt2** (proved optimum) | **4/5**, then "no determined anchor at clearance >= 0" | **structural: the DFS is exhausted at 221 nodes**, not a budget cap |
-| **n = 212 at L = 15** (Block45 regime, +0.0711) | 14/212 in a node-capped probe, span `11/2` of 15 | no answer within budget; the tree is too large |
+| generator | result | nodes | states | exhausted |
+|---|---|---|---|---|
+| frontier (one-parent), no caps | **4/5** | **69** | **68** | **yes — stack emptied** |
 
-**Why n = 5 fails, exactly.** The settler exhausts its whole tree (221 nodes, well under the
-600-node cap) without reaching 5 cells. The generator closes a new cell only against the
-**frontier** cell; the optimal fifth cell is the tilted one that closes against two *non-frontier*
-axis cells. So the missing command is precise: **STACK_BLOCK on two independent placed cells**,
-not on one. The grammar as built is a constructor for corner-and-stack settlements, and it is
-provably unable to reach the proved 5-cell optimum — which is a fact about the move set, not
-about `s(5)`.
+The claim **holds** — the one-parent state space closes at four cells — and the **count is corrected**
+from 221 to **69 nodes / 68 states**. (The 221 came from the capped bookkeeping; it was not a measured
+closure.)
 
-**n = 212.** At L = 15 with axis + diagonal directions the settler fills a 5.5-wide corner with 14
-cells and the determined-anchor frontier dies there; the unrestricted search did not terminate
-within 900 s, so this is reported as **no answer within budget**, not as an impossibility. What it
-does show is the shape of the obstruction the run-115 families priced: forward anchor settling
-does not tile.
+**The two changes that were missing.** A direct diagnostic showed the generator *does* produce the
+optimal fifth cell from the optimal four corner cells; the search simply never reached that state.
 
-**Verdict.** The anchor chain is a verified transcript (exact, per-step, refusable) and now a
-*partial* constructor: it settles small corner-and-stack targets exactly, and its failure at n = 5
-localises the missing command to two-parent closure. To settle at the scale of the 447 grid rows,
-that command has to be added and the search has to be ordered (best-first on closed contacts
-rather than DFS), or the settler stays a small-target device.
+1. **Two-parent STACK_BLOCK.** Two tangency equations are two *linear* equations in the centre, so the
+   candidate is **solved exactly** — a 2x2 solve in Q(sqrt 2) — over the axis pairs of both parents
+   **and of the candidate itself** (the 45 degree cell touches two axis cells along *its* axis, not
+   theirs). This is the command doc 78 §3 predicted.
+2. **ANCHOR_CORNER at every depth.** A regression of the rewrite: corners were offered only at depth 0,
+   so the four-corner state was unreachable and every branch died at depth 1.
+
+A third candidate algorithm was tried and **abandoned as wrong**: enumerating the field lattice
+(a/4 + (b/4)sqrt2 in both coordinates) as free offsets. It is not a sparse lattice — there are ~10 000
+field points within radius 3/2 — so it is both slow (65 s for 19 nodes) and not the right shape of
+search. Solving the constraints is.
+
+**Result:**
+
+| target | result | exact span | nodes / states |
+|---|---|---|---|
+| n = 4 at L = 2 | **4/4** | `2` | 9 / 14 |
+| n = 5 at `2 + 1/2 sqrt2` — frontier, no caps | 4/5 (exhausted) | — | 69 / 68 |
+| n = 5 at `2 + 1/2 sqrt2` — two-parent closure | **5/5** | **`2 + 1/2 sqrt2`** | 248 / 260 |
+
+The settled pose is the known optimum: four axis cells in the corners and one diagonal cell at
+`(1 + 1/4 sqrt2, 1 + 1/4 sqrt2)`, all admitted at clearance >= 0 with exact refusals on the way.
+
+**Verdict.** The grammar now **settles the proved 5-cell optimum exactly**, so the constructor is
+complete at least through n = 5 and the "missing command" diagnosis was right. complete at least through n = 5 and the "missing command" diagnosis was right. n = 212 at L = 15 is
+still only a **budget-limited probe**: at a node cap of 25 the frontier settler places **25 cells
+spanning the full 15** and the search has *not* terminated — so it is neither a success nor an
+impossibility. (The earlier "14 cells in a 5.5-wide corner" came from pre-fix parameters and is
+**withdrawn**.)
 
 ## 4. Checks
 
@@ -102,6 +115,6 @@ rather than DFS), or the settler stays a small-target device.
 | `anchor_chain.py` | both JSONs written, `chain_check` green, 0 overlaps |
 | `anchor_chain.py --forward --small` | n=4 target reached; n=5 stalls at 4/5 (DFS exhausted) |
 | `polish_ceiling.py --control boundary` | 12 rows, ceilings all `0.00000`, extrapolated `+0.00000` |
-| `glm_wheels.py --audit` | **643 decision functions, 0 offenders**; `anchor_chain` 30, none naming float |
+| `glm_wheels.py --audit` | **646 decision functions, 0 offenders**; `anchor_chain` 33, none naming float |
 | `sqscore.py`, `record_guard.py`, `void_insert.py --selftest` | re-run green |
 | `submission.csv`, `WHITEBOARD.md` | untouched |

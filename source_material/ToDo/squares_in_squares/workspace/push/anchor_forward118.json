@@ -1,20 +1,41 @@
 [
  {
-  "test": "n=4 at L=2 (proved optimum)",
+  "test": "n=4 at L=2 (proved optimum, closure)",
   "target": "2",
   "n_target": 4,
+  "mode": "lattice",
   "settled": 4,
   "why": "target reached",
+  "nodes": 9,
+  "states": 14,
+  "exhausted": false,
   "refusals": 0,
   "span": "2"
  },
  {
-  "test": "n=5 at L=2+sqrt2/2 (proved optimum)",
+  "test": "n=5 at 2+1/2sqrt2 (frontier, no caps)",
   "target": "2 + 1/2\u221a2",
   "n_target": 5,
+  "mode": "frontier",
   "settled": 4,
-  "why": "no determined anchor at clearance >= 0 after 4 cells",
+  "why": "tree exhausted",
+  "nodes": 69,
+  "states": 68,
+  "exhausted": true,
   "refusals": 0,
-  "span": "2 + 1/2\u221a2"
+  "span": "2"
+ },
+ {
+  "test": "n=212 at L=15 (Block45 regime, frontier, node cap 25)",
+  "target": "15",
+  "n_target": 212,
+  "mode": "frontier",
+  "settled": 25,
+  "why": "node cap 25 reached after 25 cells",
+  "nodes": 26,
+  "states": 71,
+  "exhausted": false,
+  "refusals": 0,
+  "span": "15"
  }
 ]

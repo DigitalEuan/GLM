@@ -476,57 +476,134 @@ def _snap_to_wall(cell, lo, L, lattice):
     return cell
 
 
-def settle(n_target, L, field, node_cap=600, step_cap=400):
-    """Greedy, backtracking goal-directed settlement at a target side L.
+def lattice_candidates(field, placed, L, lo, lattice=F(1, 4), need=2):
+    """The anchors *determined* by two exact constraints, on the exact lattice.
 
-    Every accepted anchor passes ``step_check`` on the growing Step chain and the
-    exact placement gate; a candidate that would overlap is refused *exactly* and
-    is not retried.  Returns the deepest state reached and why it stopped.
+    This is the two-parent closure the one-parent generator was missing: a cell
+    is admissible when its centre sits on the field's lattice and it is closed by
+    at least `need` of {a wall, a placed cell} — which covers wall+wall
+    (ANCHOR_CORNER), wall+contact (PROPAGATE_SLIDE), and **contact+contact**
+    (STACK_BLOCK against two *independent* placed cells).  Every test is exact in
+    Q(sqrt d); the lattice is exact rational steps of the field.
+    """
+    out = []
+    # one-parent and wall closures (cheap: the frontier slide of run 118)
+    out.extend(determined_candidates(field, placed, L, lo))
+    # ANCHOR_CORNER at any depth: a cell closed by two walls and nothing else
+    for dname in field.dirs:
+        probe = place(field, field.zero, field.zero, dname)
+        h = half_w(probe)
+        for cx in (lo + h, lo + L - h):
+            for cy in (lo + h, lo + L - h):
+                cand = place(field, cx, cy, dname)
+                if not _inside(cand, lo, L):
+                    continue
+                if any(slack(o, cand) < 0 for o in placed):
+                    continue
+                if any(_key(o) == _key(cand) for o in placed):
+                    continue
+                out.append(cand)
+    # **two-parent closure**: STACK_BLOCK against two independent placed cells.
+    # Two tangency equations are two *linear* equations in the centre, so the
+    # candidate is solved exactly in the field rather than searched for.
+    for i in range(len(placed)):
+        for j in range(i + 1, len(placed)):
+            p, q = placed[i], placed[j]
+            for dname in field.dirs:
+                probe = place(field, field.zero, field.zero, dname)
+                # a tangency may be witnessed on an axis of either parent **or of
+                # the candidate itself** — the 45 degree cell touches two axis
+                # cells along its own diagonal, not along theirs
+                trial = axes(p) + axes(q) + axes(probe)
+                for ap in trial:
+                    for aq in trial:
+                        det = ap[0] * aq[1] - ap[1] * aq[0]
+                        if det == field.zero:
+                            continue                # parallel: no unique solve
+                        for s1 in (1, -1):
+                            for s2 in (1, -1):
+                                r1 = s1 * (half_along(p, ap) + half_along(probe, ap))
+                                r2 = s2 * (half_along(q, aq) + half_along(probe, aq))
+                                b1 = p["x"] * ap[0] + p["y"] * ap[1] + r1
+                                b2 = q["x"] * aq[0] + q["y"] * aq[1] + r2
+                                cx = (b1 * aq[1] - ap[1] * b2) / det
+                                cy = (ap[0] * b2 - b1 * aq[0]) / det
+                                cand = place(field, cx, cy, dname)
+                                if not _inside(cand, lo, L):
+                                    continue
+                                if slack(p, cand) != 0 or slack(q, cand) != 0:
+                                    continue
+                                if any(slack(o, cand) < 0 for o in placed):
+                                    continue
+                                if any(_key(o) == _key(cand) for o in placed):
+                                    continue
+                                out.append(cand)
+    return out
+
+
+_OFFSETS = {}
+
+
+def _offset_cache(field, lattice=F(1, 4), reach=F(3, 2)):
+    """Unused after the 2x2 solve replaced the search; kept for the record."""
+    key = (field.d, lattice, reach)
+    if key in _OFFSETS:
+        return _OFFSETS[key]
+    _OFFSETS[key] = []
+    return _OFFSETS[key]
+
+
+def _key(cell):
+    return (cell["x"].a, cell["x"].b, cell["y"].a, cell["y"].b, cell["dir"])
+
+
+def settle(n_target, L, field, node_cap=None, top=None, mode="lattice"):
+    """Goal-directed settlement at a target side L — exhaustive by default.
+
+    Every admitted anchor passes the exact placement gate at clearance >= 0, and
+    an overlapping candidate is refused exactly (counted, not retried).  ``mode``
+    chooses the generator: ``"lattice"`` (two-constraint closure, the default) or
+    ``"frontier"`` (the one-parent slide generator of run 117/118).
+
+    With ``node_cap``/``top`` unset the search runs until the state space is
+    closed, so a failure is a statement about the grammar rather than a budget.
     """
     lo = field.zero
-    best = {"placed": [], "steps": [], "why": "budget exhausted",
-            "refusals": 0, "nodes": 0}
-    stack = [([], [], 0)]                     # (placed, moves, depth)
+    gen = lattice_candidates if mode == "lattice" else determined_candidates
+    seen, stack = set(), [()]
+    nodes = refusals = 0
+    deepest = ()
+    why = "tree exhausted"
     while stack:
-        placed, moves, depth = stack.pop()
-        if len(placed) > len(best["placed"]):
-            best = {"placed": list(placed), "steps": list(moves),
-                    "why": "still searching", "refusals": best["refusals"],
-                    "nodes": best["nodes"]}
-        if len(placed) >= n_target:
-            return {"placed": placed, "steps": moves, "why": "target reached",
-                    "refusals": best["refusals"], "nodes": best["nodes"]}
-        if depth >= step_cap or len(placed) >= n_target:
-            continue
-        cands = determined_candidates(field, placed, L, lo)
-        if not cands:
-            best["why"] = (f"no determined anchor at clearance >= 0 after "
-                           f"{len(placed)} cells")
-            continue
-        # score: most contacts+walls first, then lowest x+y
-        scored = []
+        cells = stack.pop()
+        nodes += 1
+        if len(cells) > len(deepest):
+            deepest = cells
+        if node_cap is not None and nodes > node_cap:
+            why = f"node cap {node_cap} reached after {len(deepest)} cells"
+            break
+        if len(cells) >= n_target:
+            return {"placed": list(cells), "why": "target reached",
+                    "refusals": refusals, "nodes": nodes,
+                    "states": len(seen), "exhausted": False}
+        placed = list(cells)
+        cands = gen(field, placed, L, lo)
+        if top is not None:
+            cands = cands[:top]
         for c in cands:
-            contacts = sum(1 for o in placed if slack(o, c) == 0)
-            wells = len(wall_contacts(c, lo, L))
-            key = (-(contacts + wells), c["x"] + c["y"], c["x"], c["y"])
-            scored.append((key, c))
-        scored.sort(key=lambda t: t[0])
-        budget = node_cap
-        for _, c in scored[:12]:
-            budget -= 1
-            if budget < 0:
-                break
             cell = dict(c)
             cell["i"] = len(placed)
             if any(slack(o, cell) < 0 for o in placed) or not _inside(cell, lo, L):
-                best["refusals"] += 1
+                refusals += 1
                 continue
-            stack.append((placed + [cell], moves + [cell], depth + 1))
-        best["nodes"] += 1
-        if best["nodes"] > node_cap:
-            best["why"] = f"node cap {node_cap} reached after {len(best['placed'])} cells"
-            break
-    return best
+            key = frozenset(_key(o) for o in placed) | {_key(cell)}
+            if key in seen:
+                continue
+            seen.add(key)
+            stack.append(tuple(placed + [cell]))
+    return {"placed": list(deepest), "why": why, "refusals": refusals,
+            "nodes": nodes, "states": len(seen),
+            "exhausted": why == "tree exhausted"}
 
 
 # ---------------------------------------------------------------------------
@@ -605,29 +682,32 @@ def main(argv=None):
 
 def forward(argv):
     """The goal-directed tests: small exact targets, then the Block45 regime."""
-    f2, f7 = FIELDS[2], FIELDS[7]
+    f2 = FIELDS[2]
+    L5 = f2.q(2) + f2.q(0, F(1, 2))
     tests = [
-        ("n=4 at L=2 (proved optimum)", 4, f2.q(2), ("axis",)),
-        ("n=5 at L=2+sqrt2/2 (proved optimum)", 5,
-         f2.q(2) + f2.q(0, F(1, 2)), ("axis", "diag")),
-        ("n=212 at L=15 (Block45 near-miss regime, +0.0711)", 212, f2.q(15),
-         ("axis", "diag")),
+        ("n=4 at L=2 (proved optimum, closure)", 4, f2.q(2), "lattice", None),
+        ("n=5 at 2+1/2sqrt2 (frontier, no caps)", 5, L5, "frontier", None),
+        ("n=212 at L=15 (Block45 regime, frontier, node cap 25)", 212,
+         f2.q(15), "frontier", 25),
     ]
+    if "--closure5" in argv:
+        tests = [("n=5 at 2+1/2sqrt2 (two-parent closure)", 5, L5, "lattice", None)]
     if "--small" in argv:
         tests = tests[:2]
     recs = []
-    for name, n, L, dirs in tests:
-        field = FIELDS[2] if dirs else f7
+    for name, n, L, mode, cap in tests:
         print(f"\n  {name}", flush=True)
-        got = settle(n, L, field)
-        print(f"    settled {len(got['placed'])}/{n} cells; {got['why']}; "
-              f"refusals {got['refusals']}", flush=True)
+        got = settle(n, L, f2, mode=mode, node_cap=cap)
+        print(f"    settled {len(got['placed'])}/{n}; {got['why']}; nodes "
+              f"{got['nodes']} states {got['states']} refusals {got['refusals']}"
+              f" exhausted {got['exhausted']}", flush=True)
         if got["placed"]:
             lo, side = bbox(got["placed"])
-            print(f"    exact span of what settled: {side} "
-                  f"(target {L})", flush=True)
+            print(f"    exact span {side} (target {L}): {side == L}", flush=True)
         recs.append({"test": name, "target": str(L), "n_target": n,
-                     "settled": len(got["placed"]), "why": got["why"],
+                     "mode": mode, "settled": len(got["placed"]),
+                     "why": got["why"], "nodes": got["nodes"],
+                     "states": got["states"], "exhausted": got["exhausted"],
                      "refusals": got["refusals"],
                      "span": str(bbox(got["placed"])[1]) if got["placed"] else None})
     json.dump(recs, open(OUTFWD, "w"), indent=1)

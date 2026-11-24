@@ -3302,3 +3302,30 @@ at grid scale the missing command and a best-first order are required.
 chain_check green on both rows; glm_wheels --audit re-run after the refactor; sqscore, record_guard,
 void_insert --selftest green; README/STATUS history byte-identical; no row changed, no score
 claimed. Entries doc 78 (new), doc 77 §3; records 321-322.
+
+## Run 119 — the n = 5 claim made genuine, and the two-parent command added
+
+**Request.** Re-run the n = 5 exhaustion with no per-node candidate cap and no node limit, confirm or
+correct doc 78 §3, then add the two-parent STACK_BLOCK and retest. Governed by DIRECTORS-NOTE.
+
+**Re-test.** With caps and the `[:12]` truncation removed (state-deduped DFS): **4/5, tree exhausted,
+69 nodes / 68 states**. The claim holds; the count is corrected from 221 (an artefact of the capped
+bookkeeping). Doc 78 §3 rewritten.
+
+**Diagnosis.** The closure generator *does* produce the optimal fifth cell from the optimal four corner
+cells; the search never reached that state. Two causes: (a) no two-parent command; (b) ANCHOR_CORNER was
+offered only at depth 0 after the rewrite, so the four-corner state was unreachable and every branch died
+at depth 1.
+
+**The command.** Two tangency equations are linear in the centre, so the candidate is solved exactly (2x2
+in Q(sqrt 2)) over the axis pairs of both parents *and the candidate* — the 45 degree cell touches two axis
+cells along its own axis. Also tried and abandoned: free enumeration of the 2-D field lattice (~10 000
+points within radius 3/2; 65 s for 19 nodes) — solving the constraints is the right algorithm.
+
+**Retest.** n = 4 at L = 2: 4/4, span exactly 2. n = 5 at 2 + 1/2√2: **5/5**, span exactly the target,
+248 nodes / 260 states, settling the known optimum (four corner cells + (1 + 1/4√2, 1 + 1/4√2) at 45).
+n = 212 at L = 15 is only a budget-limited probe (node cap 25: 25 cells, full 15 span, not
+terminated); the earlier "14 cells in a 5.5-wide corner" was pre-fix and is withdrawn.
+
+**Verdict.** The constructor now settles the proved 5-cell optimum exactly; the missing-command diagnosis
+was right. Guards green (re-audited), no row changed, no score claimed. Entries doc 78 §3; records 323-324.
