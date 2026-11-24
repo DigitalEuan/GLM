@@ -5579,8 +5579,9 @@ def main(argv=None) -> int:
         import true_geom as TG
         import reconcile_table as RT
         import interval_verifier as IV
+        import anchor_chain as ACH
         mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47, R47P, R47L, C105, C106, OCH,
-                FSL, SPL, TG, RT, IV]
+                FSL, SPL, TG, RT, IV, ACH]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)

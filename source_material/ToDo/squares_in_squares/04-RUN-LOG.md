@@ -3231,3 +3231,40 @@ polish is about +0.01 — one sixteenth of the 0.163635 gap. Cheapest rows are t
 
 Checks: `sqscore`, `record_guard`, `void_insert --selftest` re-run green; README/STATUS history line
 byte-identical; no row changed, no score claimed. Entries doc 75 §11-§12; records 317-318.
+
+## Run 117 (second pass) — the counts reconciled, the ceiling measured, and anchors as commands
+
+**Request.** Reconcile doc 75 §11's 3-vs-6 and scope the k = 32 "no"; measure the polish ceiling with the
+hard-projection repair on real rows; build `scripts/anchor_chain.py` on the GLM's stepwise contract with a
+certified exact row and a refusal control; add it to `--audit`; log in doc 77. Governed by DIRECTORS-NOTE.
+
+**Reconciled.** Not two answers: the repair's screen counts pairs with penetration > 1e-9 (3, deepest
+9.389e-2); `true_geom.check` counts every exact slack < 0 (6). The extra three are near-tangent, between 0
+and -1e-9. Same gap at scale in the polish sample (n=507: 68 by the screen, 119 at 40 digits). The "no" is
+now scoped in doc 75 §11 and doc 77 §2 to one insertion point (0.8394 free square, 140x33 + refine), one
+move set (exact single-cell slides + 4.5-wide patch descent), container exactly 32.
+
+**Measured.** `polish_ceiling.py` shrinks a row's own container by delta, clamps (hard projection), repairs,
+judges at 40 digits. 12 stratified rows, k = 17..32: **every ceiling 0.00000** — no row closes even at
+delta = 3e-5, each stalling in one or two passes. Mechanism: zero-clearance poses overlap everywhere at
+once under a clamp and have no slack to trade. So the polish ceiling is 0, not the +0.00999 the band
+comparison allowed and not the 0.15-0.22 a 1 % capture is worth. Caveat recorded: whole-box clamp is the
+worst case for a tight pose, so the claim is about this instrument.
+
+**Anchors.** `anchor_chain.py` bridges `glm_universal.reasoning.stepwise_script`: a Step carries the command
+in both columns plus the count as its exact value, and is admitted only when `step_check` AND an exact
+Q(sqrt 2) placement gate pass (no overlap, contacts exactly 0, walls exactly on the container, requirements
+earlier). n = 10 reconstructs exactly: 10/10 admitted (4 ANCHOR_CORNER, 4 PROPAGATE_SLIDE, 2 STACK_BLOCK),
+side exactly 3 + 1/2 sqrt2, zero overlap, contact graph 11 edges, cells 3 and 7 wall-only (the pinwheel).
+Refusal control: cell 1 moved 1/4 into cell 0 is refused for the geometry, exact slack -1/4. Two bugs were
+caught by the controls (a doubled requirement index, and a first control refused by an index mismatch rather
+than geometry) and are recorded in doc 77 §4.
+
+**Verdict on the project's question.** As a certificate language, exactly yes: a legal packing is a chain of
+anchor commands with exact per-step admission and exact refusals. As a generator, no: every command is read
+off a finished pose, and the chain refuses where a search is (a cell touching no wall and no placed cell).
+It is a verified transcript, not yet a solver.
+
+**Checks.** `anchor_chain --selftest` green; `chain_check` green; `glm_wheels --audit` 632 functions, 0
+offenders (anchor_chain 19); `sqscore`, `record_guard`, `void_insert --selftest` green; README/STATUS history
+byte-identical; no row changed, no score claimed. Entries doc 77 (new), doc 75 §11; records 319-320.

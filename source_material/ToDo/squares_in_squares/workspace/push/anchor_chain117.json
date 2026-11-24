@@ -1,0 +1,128 @@
+{
+ "n": 10,
+ "side": "3 + 1/2\u221a2",
+ "side_text": "3 + 1/2*sqrt2",
+ "worst_read": "88388348081/250000000000 - 1/4\u221a2",
+ "violations": [],
+ "steps": [
+  {
+   "step": 1,
+   "command": "ANCHOR_CORNER",
+   "cell": 0,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 2,
+   "command": "ANCHOR_CORNER",
+   "cell": 3,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 3,
+   "command": "ANCHOR_CORNER",
+   "cell": 4,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 4,
+   "command": "ANCHOR_CORNER",
+   "cell": 7,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 5,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 1,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 6,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 2,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 7,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 5,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 8,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 6,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 9,
+   "command": "STACK_BLOCK",
+   "cell": 8,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 10,
+   "command": "STACK_BLOCK",
+   "cell": 9,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  }
+ ],
+ "control": {
+  "admitted": false,
+  "why": "overlap with cell 0: exact slack -1/4",
+  "exact_slack": "-1/4",
+  "expected_slack": "-1/4",
+  "matches": true
+ },
+ "columns": [
+  [
+   "Step 1: ANCHOR_CORNER places cell 0 (axis) is given as 1.",
+   "s1 = ANCHOR_CORNER#0 = 1 (given)"
+  ],
+  [
+   "Step 2: ANCHOR_CORNER places cell 3 (axis) is given as 2.",
+   "s2 = ANCHOR_CORNER#3 = 2 (given)"
+  ],
+  [
+   "Step 3: ANCHOR_CORNER places cell 4 (axis) is given as 3.",
+   "s3 = ANCHOR_CORNER#4 = 3 (given)"
+  ],
+  [
+   "Step 4: ANCHOR_CORNER places cell 7 (axis) is given as 4.",
+   "s4 = ANCHOR_CORNER#7 = 4 (given)"
+  ],
+  [
+   "Step 5: PROPAGATE_SLIDE places cell 1 (axis) is given as 5.",
+   "s5 = PROPAGATE_SLIDE#1 = 5 (given)"
+  ],
+  [
+   "Step 6: PROPAGATE_SLIDE places cell 2 (axis) is given as 6.",
+   "s6 = PROPAGATE_SLIDE#2 = 6 (given)"
+  ],
+  [
+   "Step 7: PROPAGATE_SLIDE places cell 5 (axis) is given as 7.",
+   "s7 = PROPAGATE_SLIDE#5 = 7 (given)"
+  ],
+  [
+   "Step 8: PROPAGATE_SLIDE places cell 6 (axis) is given as 8.",
+   "s8 = PROPAGATE_SLIDE#6 = 8 (given)"
+  ],
+  [
+   "Step 9: STACK_BLOCK places cell 8 (diag) is given as 9.",
+   "s9 = STACK_BLOCK#8 = 9 (given)"
+  ],
+  [
+   "Step 10: STACK_BLOCK places cell 9 (diag) is given as 10.",
+   "s10 = STACK_BLOCK#9 = 10 (given)"
+  ]
+ ]
+}

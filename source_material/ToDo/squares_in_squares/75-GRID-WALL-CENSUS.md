@@ -326,6 +326,16 @@ graph:** for the deepest violating pair, the exact separating slide
   `9.9e-5` — but with **6 violations**. So **no: n = 999 does not go below 32 with zero overlap.** The three
   SAT pairs are mutually blocking (closing one by an exact slide opens another), and the pose has `1.4e-2` of
   side slack against a `9.4e-2` bite.
+* **Reconciliation (doc 77 §1).** "3 pairs" and "6 violations at 40 digits" count different things and
+  agree about the geometry: the repair's screen counts pairs with penetration **> 1e-9** (3, deepest
+  9.389e-2), the 40-digit judge counts every pair with exact slack **< 0** (6). The three extra are
+  near-tangent pairs between 0 and -1e-9. The headline is the deep count; the 40-digit one is what a
+  certificate would have to clear.
+* **Scope (doc 77 §2).** The "no" is for: the insertion = the centre of the largest free square from
+  `hmax_scan(140, 33)` + six refine rounds (side 0.8394); the move set = exact single-cell separating-axis
+  slides plus a 4.5-wide patch descent with monotone acceptance; the container = exactly `k = 32`, by
+  clamping. It says nothing about other insertions, rotated free squares, or replacing the notch's
+  three-cell neighbourhood as a block — the one move the space excludes, priced in run 115.
 * No candidate passes C1/C2; nothing is written to `submission.csv`, no score is claimed.
 
 **What this settles.** The notch is real room but not a cell: 0.8394 of the 1.0 needed. The re-squeeze
