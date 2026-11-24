@@ -2978,3 +2978,43 @@ Checks: `relax_angles --selftest` 2 controls; `true_geom` 3; `reconcile_table` 2
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `72-SYNTHESIS-AND-NEXT.md`; records `31`–`71`.
+
+## Run 112 — constructive pattern seeds: macro-block topologies lose, and the deficit says why
+
+The repair route is exhausted (run 111), so this run stopped perturbing the delivered pose and built
+packings from scratch: `pattern_seeds.py` reads only `n` and `L_delivered`, synthesises seeds from
+macro-blocks — arrays of unit squares at a fixed angle — places them with a shelf packer over bounding
+boxes (so overlap-freedom is structural), and judges every seed with `true_geom` at 40 digits.
+
+Four topologies: **A** two 45° blocks with a bent transition strip and an upright residue, **B** an upright
+core with four 45° perimeter bands (the L-cut frame), **C** Pythagorean lattices at arctan(3/4), (5/12),
+(8/15), (2/1), and **D** an upright near-square reference with no tilt at all. Nine rows: the open
+residue rows above 324 (680, 733, 845, 904, 971 — all non-word, so no exact sentence exists for them) and
+the four highest-slack mid-range rows (29, 41, 53, 55).
+
+**No family beats the delivered side on any row.** D loses least (`0.68–2.26%`), then B (`3.6–12.2%`),
+then A (`6.8–31.9%`), then C (`42–48%`); all 36 seeds with a result have zero `true_geom` violations at 40
+digits. Criterion C2 fails everywhere, so nothing is lifted and `submission.csv` stays untouched.
+
+The interesting part is the exact decomposition `void = (Σ bbox areas − n) + (L² − Σ bbox areas)`, i.e.
+tilt waste plus packing waste, recorded per family and row. A `k×k` block at 45° has a bounding box
+`k√2` on a side — **it doubles its area** — and a `b×b` block at a Pythagorean angle costs
+`b²(c + s)²` (1.96 at 3-4-5, 1.83 at 8-15-17, 1.710 at 5-12-13). A tilted *body* therefore pays its area
+twice, which caps family C at nothing better than `0.71 n` of box waste before any placement, and which
+is why the optimiser's best A and B seeds on every large row use almost no tilt (`k = 2`, `band = 1`,
+tilt waste exactly `8` and `4`) and then lose to D by packing waste from the extra boxes. The delivered
+table tilts only a *one-cell boundary staircase*, where the surplus triangle is perimeter-order: body
+tilt costs its area again, edge tilt costs a strip. Family D's remaining `1.0–2.3%` is pure shelf
+non-nesting (49–57 void units at n ≥ 680 against a delivered void of 26–33), not tilt.
+
+`73-PATTERN-SEEDS.md` records the tables, the decomposition and the three next steps worth trying: a
+boundary-staircase family E (the only topology whose tilt is perimeter-order, and the shape the delivered
+table actually uses), a nesting packer, and — before any of it can promote — an interval-arithmetic
+verifier, because the open rows are non-word and C1 blocks any float placement.
+
+Checks: `pattern_seeds --selftest` 5 controls; every other selftest green; `glm_wheels --audit` **596
+functions, 0 naming `float`** (`pattern_seeds` is discovery-side and deliberately outside the audit, like
+`relax_angles`); `sqscore` guard OK 22.218056945 / 553 beats; `record_guard.py` OK; README/STATUS
+run-history line byte-identical. **No row changed, no score claimed.**
+
+Entries `73-PATTERN-SEEDS.md`; records `31`–`72`.
