@@ -1,0 +1,196 @@
+[
+ {
+  "k": 21,
+  "frontier_n": 423,
+  "side_max": 0.9995940564718424,
+  "offenders": [
+   402,
+   403
+  ],
+  "pen_before": [
+   0.00020297176407879647,
+   0.00020297176407879647
+  ],
+  "pen_after": 16.25006447595823,
+  "freed": 3,
+  "candidate_n": 424,
+  "candidate_side": "21.00000000190400000000000000000000000000",
+  "candidate_violations": 5,
+  "grid_k": 21,
+  "beat": false
+ },
+ {
+  "k": 22,
+  "frontier_n": 465,
+  "side_max": 0.9997732844005256,
+  "offenders": [],
+  "pen_before": [],
+  "pen_after": 17.00006558344238,
+  "freed": 1,
+  "candidate_n": 466,
+  "candidate_side": "22.00000000191000000000000000000000000000",
+  "candidate_violations": 2,
+  "grid_k": 22,
+  "beat": false
+ },
+ {
+  "k": 23,
+  "frontier_n": 509,
+  "side_max": 0.6934905025840441,
+  "offenders": [
+   139,
+   142
+  ],
+  "pen_before": [
+   0.20206394617215429,
+   0.15325474870797806
+  ],
+  "pen_after": 0.4030991632544712,
+  "freed": 3,
+  "candidate_n": 510,
+  "candidate_side": "22.99628180589027324853832331642029794042",
+  "candidate_violations": 6,
+  "grid_k": 23,
+  "beat": false
+ },
+ {
+  "k": 24,
+  "frontier_n": 556,
+  "side_max": 0.9997753268772058,
+  "offenders": [
+   555
+  ],
+  "pen_before": [
+   4.37664145103156e-06
+  ],
+  "pen_after": 18.500071430132426,
+  "freed": 2,
+  "candidate_n": 557,
+  "candidate_side": "24.00000000191600000000000000000000000000",
+  "candidate_violations": 5,
+  "grid_k": 24,
+  "beat": false
+ },
+ {
+  "k": 25,
+  "frontier_n": 604,
+  "side_max": 0.9997234137478017,
+  "offenders": [],
+  "pen_before": [],
+  "pen_after": 19.500075502659875,
+  "freed": 1,
+  "candidate_n": 605,
+  "candidate_side": "25.00000000192000000000000000000000000000",
+  "candidate_violations": 2,
+  "grid_k": 25,
+  "beat": false
+ },
+ {
+  "k": 26,
+  "frontier_n": 655,
+  "side_max": 0.9995153478797576,
+  "offenders": [
+   654
+  ],
+  "pen_before": [
+   1.1306506976893616e-05
+  ],
+  "pen_after": 20.250078716520132,
+  "freed": 2,
+  "candidate_n": 656,
+  "candidate_side": "26.00000000192400000000000000000000000000",
+  "candidate_violations": 6,
+  "grid_k": 26,
+  "beat": false
+ },
+ {
+  "k": 27,
+  "frontier_n": 707,
+  "side_max": 0.9998686975556481,
+  "offenders": [
+   681,
+   680
+  ],
+  "pen_before": [
+   6.565122217594421e-05,
+   6.565122217594421e-05
+  ],
+  "pen_after": 21.25008200162317,
+  "freed": 3,
+  "candidate_n": 708,
+  "candidate_side": "27.00000000192600000000000000000000000000",
+  "candidate_violations": 7,
+  "grid_k": 27,
+  "beat": false
+ },
+ {
+  "k": 28,
+  "frontier_n": 761,
+  "side_max": 0.9997283497420426,
+  "offenders": [],
+  "pen_before": [],
+  "pen_after": 22.000085587546316,
+  "freed": 1,
+  "candidate_n": 762,
+  "candidate_side": "28.00000000192800000000000000000000000000",
+  "candidate_violations": 2,
+  "grid_k": 28,
+  "beat": false
+ },
+ {
+  "k": 29,
+  "frontier_n": 818,
+  "side_max": 0.9998154470787455,
+  "offenders": [],
+  "pen_before": [],
+  "pen_after": 23.000089446284107,
+  "freed": 1,
+  "candidate_n": 819,
+  "candidate_side": "29.00000000193200000000000000000000000000",
+  "candidate_violations": 2,
+  "grid_k": 29,
+  "beat": false
+ },
+ {
+  "k": 30,
+  "frontier_n": 876,
+  "side_max": 0.9994419643552206,
+  "offenders": [
+   846,
+   845,
+   875
+  ],
+  "pen_before": [
+   0.0002790178223897044,
+   6.565117547463473e-05,
+   6.565117547463473e-05
+  ],
+  "pen_after": 23.500123007161587,
+  "freed": 4,
+  "candidate_n": 877,
+  "candidate_side": "30.00000000193400000000000000000000000000",
+  "candidate_violations": 11,
+  "grid_k": 30,
+  "beat": false
+ },
+ {
+  "k": 31,
+  "frontier_n": 936,
+  "side_max": 0.9997271826072094,
+  "offenders": [
+   905,
+   906
+  ],
+  "pen_before": [
+   0.00013640869639530706,
+   0.00013640869639530706
+  ],
+  "pen_after": 24.50009539866622,
+  "freed": 3,
+  "candidate_n": 937,
+  "candidate_side": "31.00000000193600000000000000000000000000",
+  "candidate_violations": 7,
+  "grid_k": 31,
+  "beat": false
+ }
+]

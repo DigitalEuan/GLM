@@ -3075,3 +3075,50 @@ refused); `pattern_seeds --selftest` 10 controls; `true_geom` 3; `reconcile_tabl
 **No row changed, no score claimed.**
 
 Entries `74-BOUNDARY-STAIRCASE.md`; records `31`–`73`.
+
+## Run 114 — the grid wall is priced, not argued with: 0 rows behind the record, 0.03 % of a cell short
+
+Asked to stop polishing the rows that are already beaten and attack the 447 un-optimised grid rows, this run
+measured the wall first and searched second.
+
+**Benchmark.** `published_census.py` carries the Squares Project best-known list of 2026-10-20 (all 324
+cases, 5 dp, tolerance `2e-5`) and compares it with the delivered rows: **303 equal, 21 better, 0 behind**
+(the 21 are worth `0.006414` over the record). The catalogue therefore holds no score: `s(12) = 4` is
+conjectured with floor 3.9715, `s(k^2 - 3) = k` is proved for `k >= 6`, and the 2026 improvements are already
+in the table (n = 29 `5.93384`, n = 86 `9.82054`, n = 183 `13.99959`, n = 232 `15.76418`).
+
+**What an unbeaten row costs.** With `n = k^2 - j`, a packing beats iff its void `V = L^2 - n < j`. The
+frontier rows of the 30 bands spend **87–99.9 %** of that budget (`n = 183` at `0.999`, `n = 655` at
+`0.999`), so the next row up must give up a median **0.72 unit^2** of empty area, 0.45–0.99 at the large
+bands. This retires the "effort-limited frontier" reading: it is a geometric wall, and the published record
+agrees with it wherever it reaches.
+
+**Where the last 0.03 % is.** `void_insert.py` finds the largest square that fits in each frontier pose's free
+space exactly (separating axis over four edge normals; controls: an emptied `3 x 3` corner reads 1.0000, a
+full one 0.0000). The answer is bimodal — **0.45–0.83** of a cell for `k <= 20` (a genuine void, so a
+rearrangement) and **0.9994–0.9999** for `k >= 21`, where it also equals `1 - (k - L)/k` to within `6e-4` in
+ten of eleven bands. These large-`k` frontier poses are **uniformly compressed `k x k` lattices**: every gap
+shrinks by `(k - L)/k`, so no hole is a cell (`k = 23`, `delta = 0.010223`, is the exception: a real 0.7534
+notch).
+
+**The attempt.** `--seat` inserts a cell at the best free-space point, frees the 1–6 cells it penetrates,
+hinges the container at `k - 1e-3` (so any legal seating is automatically a beat), asks for `1e-9` clearance
+and runs L-BFGS-B on `3(freed + 1)` variables, judged by `true_geom` at 40 digits. Eleven bands (k = 21…31):
+**no beat**. With the hinge the state lands at `k + 2e-9` with 2–11 violations and the container short by
+~`4e-3`; without it the cell seats perfectly (`2e-16`) but the side grows to `k + 1.1e-4…2.4e-4`. Local
+freedom cannot create 0.03 % because the compression is uniform: room taken from one hole is given back to
+the next. That is also why no world record crosses these rows.
+
+**What each campaign is worth.** Beating the next row in every band by *inheriting* the frontier's own side
+(no new construction) is worth **+0.23207** — more than the 0.163635 gap to the reported leader, so the grid
+campaign can pay for it at 100 % success. The **553 beaten rows** leave **15.02** score unclaimed below them;
+a 1 % capture is **+0.15023** and 5 % is **+0.75113**, so 1.1 % of that room is the entire gap. The
+recommendation is recorded in doc 75: the compressed-lattice rows need a *global* move that redistributes the
+compression (block substitution on the `k x k` pose), not a local push; the beaten-row polish is the
+guaranteed payer.
+
+Checks: `void_insert --selftest` 2 controls (1.0000 / 0.0000); `published_census` reproduces the delivered
+score `22.218056945` / 553 beats / 447 grid rows; `sqscore` guard OK; `record_guard.py` OK; README/STATUS
+run-history line byte-identical. **No row changed, no score claimed, `submission.csv` untouched.**
+
+Entries `75-GRID-WALL-CENSUS.md`; records `31`–`74`.
