@@ -1,0 +1,177 @@
+[
+ {
+  "n": 33,
+  "kind": 0,
+  "family": "plain (control)",
+  "moved": "none",
+  "seed": 7,
+  "seconds_squeeze": 9.18,
+  "L0": "6.00000000166600000000000000000",
+  "squeeze_side": "5.99603236928721783858349576225",
+  "gain": "0.00396763237878216141650423775",
+  "p": "0.00170706331817647799516912729445",
+  "violations": 72,
+  "worst_pair": [
+   18,
+   19
+  ],
+  "bar": "0.000661272062946747026605826200612",
+  "ratio": "2.58148410288119142788789188673",
+  "passes_bar": false,
+  "sweeps_completed": 20,
+  "sweeps_aborted": 0,
+  "patches_solved": 260,
+  "budget_limited": false,
+  "seconds": 9.18,
+  "exact": {
+   "f_star": "1.00170972760679433122277259826",
+   "legal_side": "6.00457422345319326149467332325",
+   "payback": "0.00854185416597542291117756100",
+   "side_final": "6.00457258314461690669904079292",
+   "dL": "-0.00457258147861690669904079292",
+   "convertible": false,
+   "moves_ladder": 0,
+   "moves_exact": 3,
+   "swaps": 0,
+   "seat": null,
+   "certified": {
+    "side": "6.00457258314461690669904079292",
+    "violations": 0
+   },
+   "seconds_exact": 0.63
+  },
+  "screened": false
+ },
+ {
+  "n": 33,
+  "kind": 1,
+  "family": "displace one cell",
+  "moved": "displace cell 13 by (0.0, -0.4)",
+  "seed": 3,
+  "seconds_squeeze": 10.31,
+  "L0": "6.00000000166600000000000000000",
+  "squeeze_side": "5.99603242270864888609152452349",
+  "gain": "0.00396757895735111390847547651",
+  "p": "0.00166173877265872065912816461891",
+  "violations": 69,
+  "worst_pair": [
+   21,
+   22
+  ],
+  "bar": "0.000661263159374908247492813228279",
+  "ratio": "2.51297648916289474941921147424",
+  "passes_bar": false,
+  "sweeps_completed": 20,
+  "sweeps_aborted": 0,
+  "patches_solved": 259,
+  "budget_limited": false,
+  "seconds": 10.32,
+  "exact": {
+   "f_star": "1.00166450474443990970030426978",
+   "legal_side": "6.00434834230502155856758874232",
+   "payback": "0.00831591959637267247606421883",
+   "side_final": "6.00434759387195822494577485270",
+   "dL": "-0.00434759220595822494577485270",
+   "convertible": false,
+   "moves_ladder": 0,
+   "moves_exact": 3,
+   "swaps": 0,
+   "seat": null,
+   "certified": {
+    "side": "6.00434759387195822494577485270",
+    "violations": 0
+   },
+   "seconds_exact": 0.47
+  },
+  "screened": false
+ },
+ {
+  "n": 33,
+  "kind": 2,
+  "family": "rotate a 2x2 block",
+  "moved": "rotate 2x2 block",
+  "seed": 5,
+  "seconds_squeeze": 9.59,
+  "L0": "6.00000000166600000000000000000",
+  "squeeze_side": "5.99603313449580844445618423950",
+  "gain": "0.00396686717019155554381576050",
+  "p": "0.00189391669107487964860138652275",
+  "violations": 70,
+  "worst_pair": [
+   10,
+   11
+  ],
+  "bar": "0.000661144528181681459977513197946",
+  "ratio": "2.86460313947336242336062739118",
+  "passes_bar": false,
+  "sweeps_completed": 20,
+  "sweeps_aborted": 0,
+  "patches_solved": 260,
+  "budget_limited": false,
+  "seconds": 9.6,
+  "exact": {
+   "f_star": "1.00189740170662844320759177208",
+   "legal_side": "6.00551071487205772146898725149",
+   "payback": "0.00947758037624927701280301199",
+   "side_final": "6.00550733524467612459260299694",
+   "dL": "-0.00550733357867612459260299694",
+   "convertible": false,
+   "moves_ladder": 0,
+   "moves_exact": 3,
+   "swaps": 0,
+   "seat": null,
+   "certified": {
+    "side": "6.00550733524467612459260299694",
+    "violations": 0
+   },
+   "seconds_exact": 0.37
+  },
+  "screened": false
+ },
+ {
+  "n": 33,
+  "kind": 3,
+  "family": "void swap",
+  "seed": 7,
+  "moved": "cell 6 on xlo to a void seat",
+  "cells_tried": 3,
+  "L0": "6.00000000166600000000000000000",
+  "squeeze_side": "5.99603945737749861095517436961",
+  "gain": "0.00396054428850138904482563039",
+  "p": "0.00184433245118498444740610392698",
+  "violations": 69,
+  "worst_pair": [
+   7,
+   8
+  ],
+  "bar": "0.000660090714566946319059516303741",
+  "ratio": "2.79405907473635955398319224625",
+  "passes_bar": false,
+  "seat": [
+   "0.500000000167000000000000000000",
+   "1.50000000016700000000000000000"
+  ],
+  "sweeps_completed": 20,
+  "sweeps_aborted": 0,
+  "patches_solved": 260,
+  "seconds": 9.95,
+  "exact": {
+   "f_star": "1.00184756703220045892521739006",
+   "legal_side": "6.00526997513268851953407349246",
+   "payback": "0.00923051775518990857889912285",
+   "side_final": "6.00526691798120945976558267422",
+   "dL": "-0.00526691631520945976558267422",
+   "convertible": false,
+   "moves_ladder": 0,
+   "moves_exact": 3,
+   "swaps": 0,
+   "seat": null,
+   "certified": {
+    "side": "6.00526691798120945976558267422",
+    "violations": 0
+   },
+   "seconds_exact": 0.4
+  },
+  "screened": false
+ }
+]

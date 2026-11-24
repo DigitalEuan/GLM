@@ -3650,3 +3650,49 @@ implied. The old `4.6e-2 … 3.0` paybacks stand as the ladder's cost; the minim
 `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders** (678 + `legal_slide`'s 6 new); `py_compile`
 OK; `submission.csv` and `WHITEBOARD.md` untouched. Doc 87 (new); record `workspace/push/legal_relaxed128.json`
 and the two `.log` files.
+
+## Run 129 — screening the combinatorial moves by the `p < gain / L` bar: none passes
+
+**Request.** Test arrangements from combinatorial moves (teleport, 2x2 block rotation, void swap) at
+`L0 - 4e-3` on ~10 unbeaten rows across 3-5 seeds each, report median `p` and spread rather than one draw,
+stop early where a row/seed is clearly above the convertibility bar `p < gain / L`, attribute by move family,
+write doc 88 and keep every guard green without touching doc 87's numbers.
+
+**The screen.** `p_screen.py` runs `structure.attempt`'s squeeze-and-project (8 s per draw, unchanged from run
+126), measures the exact depth `p` with `legal_slide.check_pose`, and compares it with the draw's **own** bar
+`gain / L0`. A candidate under the bar is converted; one inside a 10x margin is priced on request and earns the
+row two more seeds; one further out is recorded and stopped. Ten rows (33, 75, 160, 250, 350, 439, 560, 662,
+770, 883) x 3 seeds x 4 families = **128 candidates**.
+
+**Result: 0 of 128 under the bar.** 99 over it, 29 with no candidate at all. Closest is **2.58x**, and it is the
+*control* (plain squeeze) at n = 33; the best combinatorial draw is 2.61x (void swap) and 2.62x (displace). The
+best family by median `p` changes with the row (plain at 5 rows, displace at 3, rotate at 2), so the depth is
+set by the row's scale, not by which cell moved. Rotation is the worst family by median ratio (293x against
+141-142x) and is systematically worst on the large rows (658x at n = 439); it disturbs the pose more than the
+projection can repair.
+
+**The void-swap family had to be implemented to be tested.** `structure.attempt`'s kind 1 samples a free-space
+point with 1.02 clearance and **found one in 0 of 32 draws** -- every kind-1 candidate was its displacement
+fallback, so the teleport family was never instantiated. The available void move is run 127's legal one (a wall
+cell to an exact unit-lattice seat, then squeeze); it found a seat in **3 of 32 draws**, all at n = 33, and none
+above that row. A narrower first version (one seeded cell per wall) found 1 in 31 -- the widening is what makes
+availability a measurement. Where available it lands at 2.61x, i.e. no better.
+
+**Confirmations at 20 s.** The best draw of each family (all at n = 33) was re-run at 2.5x the budget with the
+full exact conversion, so the screen is checked against a dL instead of assumed: ratios **2.58x / 2.51x /
+2.86x / 2.79x**, and every one lost side -- **dL -4.573e-3 / -4.348e-3 / -5.507e-3 / -5.267e-3**, all certified
+at 40 digits with 0 violations. `p` moved by under 9 % against the 8 s values, so the screen is not a budget
+artefact. The crossing is `p* = gain/(0.83 L) ~ 7.8e-4` at n = 33, and the best draw is 2.1-2.6x above it; at
+n = 770 and 883 the requirement is 700x and 580x away.
+
+**Verdict.** A random single-cell combinatorial move changes *where* the overlap is, not *how deep*: it cannot
+supply the factor doc 87's bar asks for. The order-of-magnitude gaps are all on the large rows, and the only row
+within reach needs a 2.1-2.6x reduction in depth -- which is an arrangement-level, not a move-level, change.
+Doc 87's numbers are unchanged (its record is read by control 1, not rewritten).
+
+**Checks.** `p_screen --selftest` **4 controls** green (bar arithmetic reproducing doc 87's n = 33 row exactly,
+the decision function's five cases, non-vacuity, and a real 407x rejection); `legal_slide --selftest` **8
+controls**; `structure --control` and `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`
+selftests; `sqscore` **22.218056945**, 553 beats, 447 grid; `record_guard` OK; `glm_wheels --audit` **684
+functions, 0 offenders**; `py_compile` OK; `submission.csv` and `WHITEBOARD.md` untouched. Doc 88 (new); records
+`workspace/push/p_screen129.json` and `p_screen129_confirm.json`.
