@@ -2943,3 +2943,38 @@ mutations; `--certificates` 7 shipped; `glm_wheels --selftest` 32; `--audit` **5
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `71-RECONCILE-AND-RELAX.md`; records `31`–`70`.
+
+## Run 111 — n = 29 gets its definitive push, the ten loose-gap rows are screened, and doc 72 collates the phase
+
+The only row with a loose legal gap left over from run 110 was n = 29 (`2e−3` against `1e−7` elsewhere),
+so it got the constrained treatment: a hinge that punishes the side for exceeding a target instead of
+rewarding smallness, six targets from `1e−4` to `4e−3`, up to four restarts each, projection to
+feasibility after every attempt, and `true_geom` at 40 digits as the only judge. **No legal state beats
+`5.933833464`** — the best is `5.933929467`, `9.6e−5` worse, and the ladder is monotone in its target,
+which is the classic signature of a local minimum approached from above.
+
+The screen put the same ladder on doc 69's ten highest-slack rows. Every one has a positive legal gap in
+one band (`6.2e−5 … 3.3e−4`), with n = 29 in the middle: there is no uniquely loose row left to chase.
+And the band is schedule loss, not structure — n = 11, 17, 18 collapse to `+9.3e−8`, `+3.7e−7`, `+2.8e−7`
+under run 110's stronger schedule, and the ladder beats the general schedule on the six bigger rows
+(`+1.95e−3 … +3.19e−3`). A ladder gap is an upper bound on the local room, never a measurement of it.
+
+`72-SYNTHESIS-AND-NEXT.md` then collates runs 60–111: the 552 certified rows, the exact carriers
+(`Q(√2)` eight words, `Q(√7)` family, one `Q(√5)` instance), the integer-scaled SAT verifier with its
+mutation controls, the face-squeeze bounds (`−4.62e−10`, `−2.16e−10`, 31 of 33 worded rows), the ε(gap)
+containment guard and the reconciled table (357 rows, `22.645990612927686` vs `22.218056944873789`), plus
+the six architectural invariants (untrusted discovery, float-free certification with 596 audited
+functions, one scorer, two independent witnesses, bounded claims, guarded prose) and four falsifiable
+promotion criteria (C1 certifiable pose, C2 strictly smaller true side with zero overlap, C3 gain above
+`ε` and the rendering noise, C4 the metric moves) with three row-selection rules (R1 word-exact, R2 a
+loose legal gap on a certifiable row, R3 a named new mechanism).
+
+Checks: `relax_angles --selftest` 2 controls; `true_geom` 3; `reconcile_table` 2; `semantic_pack` 4;
+`face_slide` 4; `observer_chain` 6; `cand106` 5; `cand105` 5; `rat47` 4; `rat47pos` 5; `rat47law` 5;
+`landscape65` 6; `qsqrt2` 11; `verify_certificates --selftest` 11 mutations; `--certificates` 7 shipped;
+`glm_wheels --selftest` 32; `--audit` **596 functions, 0 naming `float`**; `sqscore` guard OK
+22.218056945 / 553 beats; `record_guard.py` OK; README/STATUS run-history line byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `72-SYNTHESIS-AND-NEXT.md`; records `31`–`71`.

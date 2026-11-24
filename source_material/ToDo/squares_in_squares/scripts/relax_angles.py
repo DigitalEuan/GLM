@@ -30,6 +30,8 @@ import os
 import sys
 import time
 
+from decimal import Decimal as D
+
 import numpy as np
 from scipy.optimize import minimize
 
@@ -212,6 +214,71 @@ def relax_row(n, rows=None, restarts=RESTARTS):
     return rec
 
 
+# ------------------------------------------------------------------ the constrained ladder
+def hinge_objective(z, n, near, target):
+    """Overlap plus a hinge on the side: `sum pen^2 + 100 max(0, side - target)^2`.
+
+    A constrained shrink rather than a penalty trade-off: the side is not *rewarded* for being
+    small, it is only *punished* for exceeding `target`, so the optimiser spends its freedom on
+    removing overlaps first and on the side second. That is the gentle ladder the projection gap
+    asks for.
+    """
+    x, y, t = pack(z, n)
+    s = side_of(x, y, t)
+    over = max(0.0, s - target)
+    return overlap_penalty(x, y, t, near) + 100.0 * over * over
+
+
+def project(z, n, reach=2.6, maxiter=MAXITER):
+    """Minimise overlap alone from `z`; returns the projected state and its 40-digit check."""
+    x, y, t = pack(z, n)
+    nr = near_pairs(x, y, t, reach=reach)
+    def obj(zz, nn, near):
+        xa, ya, ta = pack(zz, nn)
+        return overlap_penalty(xa, ya, ta, near)
+    res = minimize(obj, z, args=(n, nr), method="L-BFGS-B",
+                   bounds=([(-1e6, 1e6)] * (3 * n)),
+                   options={"maxiter": maxiter, "ftol": 1e-16, "gtol": 1e-12})
+    x2, y2, t2 = pack(res.x, n)
+    return res.x, TG.check(true_state(x2, y2, t2))
+
+
+def ladder(n, rows, start_state, deltas, lam_hinge=100.0, tries=4, seed=20261124):
+    """Shrink by each `delta` in turn; after every attempt project and report the legal side."""
+    x0, y0, t0 = start_state
+    rng = np.random.RandomState(seed)
+    L0 = TG.check(true_state(x0, y0, t0))["side"]
+    best = None
+    out = []
+    for delta in deltas:
+        target = L0 - D(str(delta))
+        got = None
+        for k in range(tries):
+            z0 = np.concatenate([x0, y0, t0])
+            if k:
+                z0 = z0 + rng.normal(scale=2e-3, size=z0.shape)
+            near = near_pairs(*pack(z0, n), reach=2.6)
+            res = minimize(hinge_objective, z0, args=(n, near, float(target)), method="L-BFGS-B",
+                           bounds=([(-1e6, 1e6)] * (3 * n)),
+                           options={"maxiter": MAXITER, "ftol": 1e-16, "gtol": 1e-12})
+            z2, chk = project(res.x, n)
+            rec = {"delta": delta, "try": k, "side40": str(+chk["side"]),
+                   "violations": len(chk["violations"]),
+                   "legal": not chk["violations"]}
+            out.append(rec)
+            print(f"      delta {delta:.1e} try {k}: side {float(chk['side']):.12f}"
+                  f" viol {len(chk['violations'])}", flush=True)
+            if not chk["violations"] and (got is None or chk["side"] < got[0]):
+                got = (chk["side"], z2)
+            if not chk["violations"] and chk["side"] <= L0 - D(str(delta)):
+                break
+        if got is not None and (best is None or got[0] < best[0]):
+            best = got
+    return {"L_start": str(+L0), "attempts": out,
+            "best_legal": None if best is None else str(+best[0]),
+            "gain_vs_start": None if best is None else str(+(L0 - best[0]))}
+
+
 def certifiable(theta):
     """Could this state carry an exact `Q(sqrt 2)` certificate? Only if every angle is a word."""
     off = 0
@@ -223,6 +290,94 @@ def certifiable(theta):
             "note": ("angles are word-exact, an exact certificate is possible"
                      if off < 1e-12 else
                      "angles are not word-exact, so no exact Q(sqrt 2) certificate exists")}
+
+
+def push_row(n, rows=None, deltas=(1e-4, 2e-4, 5e-4, 1e-3, 2e-3, 4e-3), tries=4):
+    """The definitive push: a constrained shrink ladder from the delivered pose."""
+    rows = rows or C.load_rows()
+    st, note, viol = start(n, rows)
+    tab = json.load(open(TAB))
+    Ldel = TG.side([(str(float(r[0])), str(float(r[1])), str(float(r[2])))
+                    for r in tab[str(n)]["state"]])
+    rec = {"n": n, "N": len(rows[n]), "L_true_delivered": str(+Ldel), "start": note,
+           "start_violations": viol}
+    if st is None:
+        rec["verdict"] = "no-start"
+        return rec
+    lad = ladder(n, rows, st, deltas, tries=tries)
+    rec["ladder"] = lad
+    best = lad["best_legal"]
+    rec["best_legal"] = best
+    LdelF = TF(str(+Ldel))
+    rec["gain_vs_delivered"] = None if best is None else str(+(LdelF - TF(best)))
+    rec["beats_delivered"] = bool(best is not None and TF(best) < LdelF)
+    rec["verdict"] = ("improves" if rec["beats_delivered"] else
+                      ("legal-not-better" if best is not None else "no-legal-state"))
+    return rec
+
+
+def TF(s):
+    """A decimal string as an exact Fraction (no float in the decision)."""
+    from fractions import Fraction as Fr
+    return Fr(str(s))
+
+
+def screen_row(n, rows=None, deltas=(1e-4, 5e-4), tries=3):
+    """One quick shrink-and-project attempt, to measure the row's projection gap."""
+    rows = rows or C.load_rows()
+    st, note, viol = start(n, rows)
+    tab = json.load(open(TAB))
+    Ldel = TG.side([(str(float(r[0])), str(float(r[1])), str(float(r[2])))
+                    for r in tab[str(n)]["state"]])
+    rec = {"n": n, "N": len(rows[n]), "L_true_delivered": str(+Ldel),
+           "start_violations": viol, "best_legal": None, "gap": None,
+           "deltas": [str(x) for x in deltas], "tries": tries}
+    if st is None:
+        rec["verdict"] = "no-start"
+        return rec
+    lad = ladder(n, rows, st, deltas, tries=tries, seed=20261125 + n)
+    best = lad["best_legal"]
+    rec["best_legal"] = best
+    LdelF = TF(str(+Ldel))
+    rec["gap"] = None if best is None else str(+(TF(best) - LdelF))
+    rec["loose"] = bool(best is None or (TF(best) - LdelF) > TF("1e-4"))
+    rec["verdict"] = "legal-not-better" if best is not None else "no-legal-state"
+    return rec
+
+
+def run_screen(targets):
+    rows = C.load_rows()
+    out = {"rows": {}, "loose": [], "seconds": None}
+    t0 = time.time()
+    for n in targets:
+        print(f"  screening n={n} ...", flush=True)
+        rec = screen_row(n, rows)
+        out["rows"][str(n)] = rec
+        if rec.get("loose"):
+            out["loose"].append(n)
+        print(f"  n={n}: {rec['verdict']} best_legal {rec.get('best_legal')} gap {rec.get('gap')}"
+              f" loose {rec.get('loose')}", flush=True)
+    out["seconds"] = str(TF(str(time.time())).limit_denominator(100))
+    with open(os.path.join(ROOT, "workspace/push/relax_screen.json"), "w") as f:
+        json.dump(out, f, indent=1)
+    print(f"relax_angles: screen -> workspace/push/relax_screen.json; loose rows {out['loose']}")
+    return out
+
+
+def run_push(ns, deltas=(1e-4, 2e-4, 5e-4, 1e-3, 2e-3, 4e-3), tries=4):
+    rows = C.load_rows()
+    out = {"rows": {}, "seconds": None}
+    t0 = time.time()
+    for n in ns:
+        print(f"  pushing n={n} ...", flush=True)
+        rec = push_row(n, rows, deltas=deltas, tries=tries)
+        out["rows"][str(n)] = rec
+        print(f"  n={n}: {rec['verdict']} best_legal {rec.get('best_legal')}"
+              f" gain {rec.get('gain_vs_delivered')}", flush=True)
+    with open(os.path.join(ROOT, "workspace/push/relax_push.json"), "w") as f:
+        json.dump(out, f, indent=1)
+    print("relax_angles: push -> workspace/push/relax_push.json")
+    return out
 
 
 def run(targets=TARGETS):
@@ -273,5 +428,11 @@ def selftest():
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
         selftest()
+    elif "--push" in sys.argv:
+        ns = [int(a) for a in sys.argv[1:] if a.isdigit()] or [29]
+        run_push(ns)
+    elif "--screen" in sys.argv:
+        ns = [int(a) for a in sys.argv[1:] if a.isdigit()] or [11, 18, 17, 29, 28, 39, 37, 41, 53, 55]
+        run_screen(ns)
     else:
         run()
