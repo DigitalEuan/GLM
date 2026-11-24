@@ -5578,8 +5578,9 @@ def main(argv=None) -> int:
         import semantic_pack as SPL
         import true_geom as TG
         import reconcile_table as RT
+        import interval_verifier as IV
         mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47, R47P, R47L, C105, C106, OCH,
-                FSL, SPL, TG, RT]
+                FSL, SPL, TG, RT, IV]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)

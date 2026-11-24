@@ -3018,3 +3018,60 @@ functions, 0 naming `float`** (`pattern_seeds` is discovery-side and deliberatel
 run-history line byte-identical. **No row changed, no score claimed.**
 
 Entries `73-PATTERN-SEEDS.md`; records `31`–`72`.
+
+## Run 113 — the boundary staircase gets its verifier and its packer, and two laws close the fringe route
+
+Doc 73 §5 named three next steps — a rational-interval verifier, a corner-nesting packer, a boundary
+family E — and this run executes all three on the same nine rows (29, 41, 53, 55, 680, 733, 845, 904,
+971). **No row changed; `submission.csv` and the root `WHITEBOARD.md` are untouched**, because nothing
+beats `L_delivered` and C2 fails everywhere.
+
+`scripts/interval_verifier.py` is the second judge doc 72 §5 C1 asks for: a strictly float-free
+(`fractions.Fraction`, roots by `isqrt` on scaled integers) interval verifier that brackets every
+direction — axis word exact, quarter word `sqrt 2` to 80 bits, rational slope `(q, p)/sqrt(p^2 + q^2)`
+exact when the norm is a square — checks all **4N wall bounds** against a declared rational side and, for
+every pair, a separating axis with a **strictly positive rational lower bound** on the slack (the two
+axis-aligned directions first, since SAT holds on any axis, then the four cell axes). It refuses an exact
+contact as `inconclusive` — an enclosure straddles zero — which is why every construction carries a `1e-9`
+hairline, and it certifies an overlap when the best axis' upper bound is negative. **7 controls**,
+including both refusals; and it is now **inside the float audit** (`glm_wheels --audit` 613 functions, 0
+naming `float`, 596 before).
+
+The shelf is replaced by `nest_pack`, corner insertion over bounding boxes: every free corner of every
+placed box is a candidate and the lowest-leftmost fit wins, so a residue strip sits beside the block
+instead of under it. **A gains `1.0` of side on eight of nine rows, B gains `0.24–0.88`**, B now ties the
+upright reference D on six rows — and the run corrects doc 73 §4 in the same breath: for upright blocks
+the boxes *tile*, so `sum bbox = n` and `L^2 - sum bbox` is the container's own leftover (49, 51, 55, 57,
+53 units on 680…971), unchanged by any packer. The residual was never shelf loss; it is `ceil(sqrt n)`.
+
+Family E is an upright core plus one-cell tilted cells seated along one or two walls, and its seats are
+**derived**: two cells of the same direction at the same outward coordinate need `Delta >=
+1/max(|c|, |s|)` along the wall (the binding term is the cell's own `u`/`v` axis), and the first outward
+position that clears a solid axis wall column puts the fringe's outer edge `|c| + |s|` past the wall.
+Both numbers are `>= 1`, with equality only at the axis limit, so a tilted fringe cell is never denser
+than the axis column it replaces (control 10 asserts it over all sixteen slopes). Consequence, measured
+at the delivered side on every row: **not one fringe cell fits** — the smallest protrusion is `1`, and
+`L_delivered - floor(L)` is 0.56–0.95 — so E's fill is exactly `floor(L)^2` and the shortfall is
+`n - floor(L)^2` = **4, 5, 4, 6, 4, 4, 4, 4, 10 cells**. All nine fills are certified by the interval
+verifier strictly **below** `L_delivered` (3,844 wall bounds and 461,280 pairs at n = 971, 0 violations, 0
+inconclusive, tightest certified slack `1e-9`), so the losses are proved rather than measured.
+
+The `t = 1/q` sweep at n = 971 (core `30 x 31`, one column of room) is the requested denominator test:
+**952 cells at `q = 1` → 958 → 959 → 960 → 961 at `q >= 7`**, void 51.5 → 42.5, monotone and saturating
+exactly where the tilt vanishes — at `q = 7` the fringe *is* the 31st axis column, and all 9 cells the
+45-degree staircase could contribute are recovered by removing it. With that, two statements close the
+route: **T1**, an all-lattice pose of `n` cells needs side `>= ceil(sqrt n)` and all nine target rows beat
+the grid, so no integer-lattice construction can pass C2 on them; and **T2**, the one-cell wall fringe is
+dominated by the axis column it replaces. The remaining route is **interior** tilt — the delivered rows
+carry 56 tilted cells in a *band* at `3-4-5` and `1/3`, not at a wall — which is what run 114 would have
+to name.
+
+Checks: `interval_verifier --selftest` 7 controls and `--check` on the 9 stored recipes (`certified`, 0
+refused); `pattern_seeds --selftest` 10 controls; `true_geom` 3; `reconcile_table` 2; `semantic_pack` 4;
+`face_slide` 4; `observer_chain` 6; `cand106` 5; `cand105` 5; `rat47` 4; `rat47pos` 5; `rat47law` 5;
+`landscape65` 6; `qsqrt2` 11; `verify_certificates --selftest` 11 mutations; `--certificates` 7 shipped;
+`glm_wheels --selftest` 32; `--audit` **613 functions, 0 naming `float`**; `sqscore` guard OK
+22.218056945 / 553 beats; `record_guard.py` OK; README/STATUS run-history line byte-identical.
+**No row changed, no score claimed.**
+
+Entries `74-BOUNDARY-STAIRCASE.md`; records `31`–`73`.
