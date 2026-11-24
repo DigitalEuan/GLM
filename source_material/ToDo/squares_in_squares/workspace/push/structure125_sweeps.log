@@ -1,0 +1,30 @@
+unbeaten 447; testing 20 evenly spaced
+  n=   1 k= 1 L0=1.000000000000000000 side40=1.000000000000000000 dL=+0.000e+00 viol None sweeps 20/0 patches 20/1 pen@proj 0.0e+00 [pose at or above the bar] (none) 1.26s
+  n=  33 k= 6 L0=6.000000001666000000 side40=6.046034179657079812 dL=+0.000e+00 viol None sweeps 20/0 patches 258/87 pen@proj 1.1e-04 [expansion reached the bar at f=0.01] (none) 9.78s
+  n=  74 k= 9 L0=9.000000001778000000 side40=9.076000318564239360 dL=+0.000e+00 viol None sweeps 10/0 patches 308/228 pen@proj 1.9e-04 [expansion reached the bar at f=0.01] (none) 13.29s
+  n= 114 k=11 L0=11.00000000181800000 side40=11.09601255479339959 dL=+0.000e+00 viol None sweeps 8/1 patches 399/372 pen@proj 1.6e-04 [expansion reached the bar at f=0.01] (none) 18.7s
+  n= 159 k=13 L0=13.00000000184600000 side40=13.11601077431008250 dL=+0.000e+00 viol None sweeps 5/0 patches 328/534 pen@proj 7.8e-04 [expansion reached the bar at f=0.01] (none) 14.1s
+  n= 196 k=14 L0=14.00000000185800000 side40=14.12603329683389883 dL=+0.000e+00 viol None sweeps 5/0 patches 401/676 pen@proj 1.1e-03 [expansion reached the bar at f=0.01] (none) 19.44s
+  n= 249 k=16 L0=16.00000000187500000 side40=16.14602713582190927 dL=+0.000e+00 viol None sweeps 4/1 patches 458/870 pen@proj 1.6e-03 [expansion reached the bar at f=0.01] (none) 20.06s
+  n= 288 k=17 L0=17.00000000188200000 side40=17.15597599152589425 dL=+0.000e+00 viol None sweeps 3/1 patches 473/1020 pen@proj 1.6e-03 [expansion reached the bar at f=0.01] (none) 20.12s
+  n= 350 k=19 L0=19.00000000189400000 side40=19.17602027276009989 dL=+0.000e+00 viol None sweeps 3/1 patches 518/1251 pen@proj 1.4e-03 [expansion reached the bar at f=0.01] (none) 20.09s
+  n= 393 k=20 L0=20.00000000190000000 side40=20.18595056685253011 dL=+0.000e+00 viol None sweeps 3/1 patches 554/1416 pen@proj 3.0e-03 [expansion reached the bar at f=0.01] (none) 20.17s
+  n= 439 k=21 L0=21.00000000190400000 side40=22.99560086729973267 dL=+0.000e+00 viol None sweeps 3/0 patches 582/1591 pen@proj 4.2e-03 [expansion reached the bar at f=0.1] (none) 20.16s
+  n= 510 k=23 L0=23.00000000191400000 side40=25.19557493464735624 dL=+0.000e+00 viol None sweeps 2/1 patches 610/1860 pen@proj 3.8e-03 [expansion reached the bar at f=0.1] (none) 20.12s
+  n= 559 k=24 L0=24.00000000191600000 side40=26.29561615917789176 dL=+0.000e+00 viol None sweeps 2/1 patches 639/2047 pen@proj 3.6e-03 [expansion reached the bar at f=0.1] (none) 20.15s
+  n= 610 k=25 L0=25.00000000192000000 side40=27.39563148134330866 dL=+0.000e+00 viol None sweeps 2/1 patches 679/2242 pen@proj 3.2e-03 [expansion reached the bar at f=0.1] (none) 20.12s
+  n= 662 k=26 L0=26.00000000192400000 side40=28.49560835365125354 dL=+0.000e+00 viol None sweeps 1/2 patches 607/2444 pen@proj 8.0e-03 [expansion reached the bar at f=0.1] (none) 20.17s
+  n= 715 k=27 L0=27.00000000192600000 side40=29.59564867839773325 dL=+0.000e+00 viol None sweeps 1/2 patches 651/2647 pen@proj 5.0e-03 [expansion reached the bar at f=0.1] (none) 20.16s
+  n= 770 k=28 L0=28.00000000192800000 side40=30.69562681608833617 dL=+0.000e+00 viol None sweeps 1/2 patches 707/2859 pen@proj 4.5e-03 [expansion reached the bar at f=0.1] (none) 20.19s
+  n= 826 k=29 L0=29.00000000193200000 side40=31.79557285035018503 dL=+0.000e+00 viol None sweeps 1/2 patches 734/3076 pen@proj 5.5e-03 [expansion reached the bar at f=0.1] (none) 20.17s
+  n= 883 k=30 L0=30.00000000193400000 side40=32.89554196007615280 dL=+0.000e+00 viol None sweeps 1/2 patches 743/3295 pen@proj 1.3e-02 [expansion reached the bar at f=0.1] (none) 20.23s
+  n= 942 k=31 L0=31.00000000193600000 side40=33.99554371558107171 dL=+0.000e+00 viol None sweeps 1/2 patches 746/3522 pen@proj 1.6e-02 [expansion reached the bar at f=0.1] (none) 20.23s
+
+dL over 20 rows: min 0.000e+00 median 0.000e+00 max 0.000e+00
+  rows with any gain: 0/20
+  rows legal and improving: 0
+  rows reaching the 4e-3 target: 0
+  rows with at least one COMPLETED sweep: 20/20   (budget-limited: 18)
+  rows whose squeeze got BELOW L0: 19/20   min gain in the illegal pose +4.012e-03
+  after legalising the below-L0 poses: dL min -2.996e+00 max -4.603e-02  (negative = legalisation paid back more)
+wrote workspace/push/structure125_sweeps.json

@@ -3497,3 +3497,49 @@ of the unpenalised intra-patch pairs and the empty patch list. Both runs are swe
 beats, 447 grid; record_guard OK; perturb, anchor_chain, void_insert, true_geom selftests green; glm_wheels
 --audit 657 functions, 0 offenders; submission.csv and WHITEBOARD.md untouched. Entries docs 83 (rewritten),
 84 (new).
+
+## Run 126 — the patch solve is 57-67x cheaper, and the structure route's null survives completed sweeps
+
+**Request.** Accelerate the patch-solve throughput so relaxation sweeps fit inside a budget; re-run the 20-row
+structure table with a budget where sweeps actually complete, writing `workspace/push/structure125_sweeps.json`
+and updating doc 83 / this log; keep every guard green.
+
+**Where the time went.** Profiling (`probe126_profile.py`) put essentially all of it inside L-BFGS-B: a median
+9-cell patch is 27 variables, scipy's 2-point finite differences spend 3c+1 = 28 objective calls per gradient,
+and one objective call copied three n-element arrays and ran `pen_vec` over ~150 pairs at **43 us** — 28 x 120
+iterations x 43 us = the measured 145-153 ms per patch (264 ms when all 33 cells of n = 33 fall in one patch).
+
+**The acceleration.** Two steps, neither touching the function being minimised: the pose is compacted to the
+patch plus its neighbourhood, and the gradient is first batched into one stacked call (2.2 ms) and then made
+**analytic** — the derivative of the max-separation over the four edge normals, including the rotating axis and
+the `hx(theta)` cusp at theta = 0 (0.27 ms). `--check-solver` verifies it against scipy's own finite differences
+at three **generic perturbed points** (6.6e-6, 8.7e-6, 1.25e-5 relative, same final objective to 1e-22) and
+measures 57-67x. That control earned its keep immediately: the first batched gradient agreed with scipy at the
+start pose to 1.7e-17 and was **2.7e7 wrong one step away**, because it perturbed the pose captured when the
+problem was built instead of the `z` it was handed.
+
+**Sweeps now fit.** 5.3 s / 72.6 s / 163.3 s per sweep at n = 33 / 439 / 942 become **0.4 s / 1.0 s / 3.2 s** at a
+relaxed pose, and ~9 s at n = 942 at a stressed pose with `--iters 10`. `--control` stays green
+(A: **100.0 %** recovery of 3.75e-3; B: 0.3 displacement absorbed at 4.0030).
+
+**Two more findings.** (a) At a fixed wall clock, fewer L-BFGS iterations per patch visit and more *completed
+sweeps* leave a lower residual penalty (n = 662, 25 s: 2 sweeps and 6.60e-3 at `--iters 20`, 1 sweep and 1.12e-2
+at 120), so the cap is a throughput choice with the objective unchanged. (b) Run 125's driver handed the whole
+per-attempt budget to `relax`, which sweeps until its deadline, so the projection stage always ran with zero time
+left: every row was judged on a pose nobody had tried to legalise. The budget is now split **60/40**.
+
+**The re-run (doc 83 section 3).** 20 rows, 20 s per attempt, `--iters 10 --proj-iters 40`: **a completed sweep on
+20/20 rows**, **19/20 squeezes reach `L0 - 4e-3`** (all but n = 1, which has nothing to move), and **dL is 0 on
+20/20**. The residual penetration after projection grows from 1.1e-4 (n = 33) to 1.6e-2 (n = 942), so the
+expansion ladder needs f = 1 % up to n = 393 and f = 10 % beyond: **payback 4.6e-2 at n = 33 and 3.0 at n = 942,
+i.e. 10x to 750x the gain being banked.** 10,415 patch solves in 359 s of compute.
+
+**Verdict.** Run 124's null is **reinstated on evidence rather than inference**: with sweeps completing, the
+squeeze is found every time and legality is what refuses it, so the route has **no tail**. The move that would
+matter is a legal rearrangement — a row slide or a block swap into a void — not a penalty walk that compresses
+first and asks for forgiveness later. Docs 83 (rewritten around the completed-sweep table) and 85 (new:
+throughput, the gradient, the two driver findings).
+
+**Checks.** structure --control green (A 100.0 %, B 4.0030); --check-solver green; sqscore **22.218056945**, 553
+beats, 447 grid; record_guard OK; perturb, anchor_chain, void_insert, true_geom selftests green; glm_wheels
+--audit **657 functions, 0 offenders**; py_compile OK; `submission.csv` and `WHITEBOARD.md` untouched.

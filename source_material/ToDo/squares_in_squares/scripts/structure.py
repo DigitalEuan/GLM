@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-r"""structure.py — run 124: the structure-changing route on the unbeaten rows.
+r"""structure.py — runs 124/126: the structure-changing route on the unbeaten rows.
 
 Doc 82 closed the local routes (closure settler, polish clamps, free-position
 perturbation) and pointed at the family that changes *which cells sit where*:
@@ -27,11 +27,21 @@ Controls (run with --control), because a null is worthless without them:
      void and relax at the delivered side; the pose must legalise again.  Proves
      a *changed arrangement* is absorbed, not just a scaled copy of the old one.
 
+Run 126 (doc 85) made the patch solve affordable, so a sweep now finishes on
+every tested row: the pose is compacted to the patch plus its neighbourhood and
+the gradient is analytic (`patch_problem`), 374-410 ms -> ~2 ms per patch, and a
+sweep at n=942 costs 3.2 s instead of 163.3 s.  Each attempt records
+`sweeps_completed` / `sweeps_aborted` / `patches_solved`, so a zero can no longer
+be produced by a sweep that was cut off, and the per-attempt budget is split
+60/40 between the squeeze and the projection (`relax` used to consume all of it,
+leaving the projection untested).
+
 Discovery arithmetic is float (like resqueeze/relax_angles); every number that
 decides anything is `true_geom` at 40 digits.
 
     python3 scripts/structure.py --control
-    python3 scripts/structure.py --rows 20 --seconds 10
+    python3 scripts/structure.py --check-solver      # gradient vs scipy FD
+    python3 scripts/structure.py --rows 20 --seconds 20 --iters 10 --proj-iters 40
 """
 from __future__ import annotations
 
@@ -140,7 +150,186 @@ def patches(X, Y, size=3.0, step=1.5):
     return out
 
 
-def solve_patch_w(X, Y, T, idx, lo, hi, wall_w, iters=120, eps=1e-9):
+def near_cells(X, Y, idx, reach=2.6):
+    """Outside cells within `reach` (L1 centre distance) of any patch cell.
+
+    Vectorised replacement for the python loop that used to do one numpy call
+    per cell of the pose; the *set* returned is identical (same reach, same
+    L1 measure), which is what the penalty's pair list depends on.
+    """
+    n = len(X)
+    inside = np.zeros(n, dtype=bool)
+    inside[idx] = True
+    dx = np.abs(X[:, None] - X[idx][None, :])
+    dy = np.abs(Y[:, None] - Y[idx][None, :])
+    return np.nonzero((~inside) & ((dx + dy).min(axis=1) <= reach))[0]
+
+
+def patch_problem(X, Y, T, idx, lo, hi, wall_w, eps=1e-9, calls=None):
+    """The patch objective and its batched forward-difference gradient.
+
+    Compacted to the patch plus its neighbours (`near_cells`), so one objective
+    call touches only the cells the patch can actually press on.  The pair list
+    is the same one the original solver used -- intra-patch pairs *and*
+    patch-vs-neighbour pairs -- with the same `eps`, and the wall term carries
+    the same `wall_w`, so the function being minimised is unchanged.
+
+    The gradient is the 2-point forward difference scipy would compute anyway
+    (`h = sqrt(eps) * max(1, |z|)`), but for all 3c variables at once: the
+    perturbations are stacked into one (3c, m) batch.  This is the same
+    arithmetic per variable, evaluated in a single pass.
+    """
+    from void_insert import pen_vec
+    idx = np.asarray(idx)
+    c = len(idx)
+    near = near_cells(X, Y, idx)
+    comp = np.concatenate([idx, near])
+    m = len(comp)
+    cx, cy, ct = X[comp], Y[comp], T[comp]
+    pi, pj = [], []
+    for a_i in range(c):
+        for b_i in range(a_i + 1, c):
+            pi.append(a_i)
+            pj.append(b_i)
+        for o in range(c, m):
+            pi.append(a_i)
+            pj.append(o)
+    pi = np.array(pi, dtype=int)
+    pj = np.array(pj, dtype=int)
+
+    def wall(ax, ay, at):
+        hx = 0.5 * (np.abs(np.cos(at)) + np.abs(np.sin(at)))
+        return (np.clip(ax + hx - hi, 0, None) ** 2
+                + np.clip(lo - ax + hx, 0, None) ** 2
+                + np.clip(ay + hx - hi, 0, None) ** 2
+                + np.clip(lo - ay + hx, 0, None) ** 2)
+
+    def unpack(z):
+        ax, ay, at = cx.copy(), cy.copy(), ct.copy()
+        ax[:c], ay[:c], at[:c] = z[:c], z[c:2 * c], z[2 * c:]
+        return ax, ay, at
+
+    def obj(z):
+        if calls is not None:
+            calls["objective"] = calls.get("objective", 0) + 1
+        ax, ay, at = unpack(z)
+        if len(pi):
+            pen = pen_vec(ax[pi], ay[pi], at[pi], ax[pj], ay[pj], at[pj], eps=eps)
+            pv = float((pen ** 2).sum())
+        else:
+            pv = 0.0
+        return pv + wall_w * float(wall(ax[:c], ay[:c], at[:c]).sum())
+
+    def jac(z):
+        """Analytic gradient of `obj`, one pass over the four separating axes.
+
+        `pen_vec` takes the penetration p = clip(eps - best, 0), where `best` is
+        the maximum separation over the four edge normals of the pair.  Where
+        the maximum is attained by axis q, best = |d.q| - hA(q) - hB(q), so
+
+            d(p^2)/dv = -2 p * d(best)/dv        (0 where p = 0)
+
+        and d(best)/dv is the derivative of that axis's separation alone.  The
+        angle derivatives include the *rotating axis* itself (for an axis owned
+        by cell A, dq/dat is the other unit vector of A), which is what makes
+        the shape derivative come out right rather than only the translation
+        part.  hA and hB are each exactly 1/2 on their owner's own axes and
+        carry d/dat = (sign(u) v - sign(v) u)/2 on the other cell's axes.
+
+        This is the same gradient the finite-difference batch approximates,
+        without the 4-per-pair trig: run 126 measured the FD batch at 2.2 ms
+        and this at a fraction of it.  `--check-solver` compares it with
+        scipy's own finite differences at the start pose and at perturbed ones.
+        """
+        out = np.zeros(3 * c)
+        if len(pi):
+            bx, by, bt = unpack(z)
+            XA, YA, TA = bx[pi], by[pi], bt[pi]
+            XB, YB, TB = bx[pj], by[pj], bt[pj]
+            cA, sA = np.cos(TA), np.sin(TA)
+            cB, sB = np.cos(TB), np.sin(TB)
+            d1, d2 = XA - XB, YA - YB
+            nP = len(pi)
+            axes = ((cA, sA), (-sA, cA), (cB, sB), (-sB, cB))
+            sep = np.empty((4, nP))
+            dax = np.empty((4, nP))
+            day = np.empty((4, nP))
+            dat = np.empty((4, nP))
+            dbx = np.empty((4, nP))
+            dby = np.empty((4, nP))
+            dbt = np.empty((4, nP))
+            for k, (qx, qy) in enumerate(axes):
+                signed = d1 * qx + d2 * qy
+                proj = np.abs(signed)
+                uA, vA = cA * qx + sA * qy, -sA * qx + cA * qy
+                uB, vB = cB * qx + sB * qy, -sB * qx + cB * qy
+                sep[k] = proj - 0.5 * (np.abs(uA) + np.abs(vA)) \
+                    - 0.5 * (np.abs(uB) + np.abs(vB))
+                sgn = np.sign(signed)
+                dax[k], day[k] = sgn * qx, sgn * qy
+                dbx[k], dby[k] = -dax[k], -day[k]
+                if k == 0:                       # A's own first axis rotates
+                    dproj_at = sgn * (-d1 * sA + d2 * cA)
+                elif k == 1:                     # A's second axis rotates
+                    dproj_at = sgn * (-(d1 * cA + d2 * sA))
+                else:
+                    dproj_at = 0.0
+                if k == 2:                       # B's own first axis rotates
+                    dproj_bt = sgn * (-d1 * sB + d2 * cB)
+                elif k == 3:                     # B's second axis rotates
+                    dproj_bt = sgn * (-(d1 * cB + d2 * sB))
+                else:
+                    dproj_bt = 0.0
+                dhA = 0.5 * (np.sign(uA) * vA - np.sign(vA) * uA)
+                dhB = 0.5 * (np.sign(uB) * vB - np.sign(vB) * uB)
+                dat[k] = dproj_at - dhA
+                dbt[k] = dproj_bt - dhB
+            pick = np.argmax(sep, axis=0)
+            col = np.arange(nP)
+            best = sep[pick, col]
+            p = np.clip(eps - best, 0.0, None)
+            coef = np.where(p > 0, -2.0 * p, 0.0)
+            gx = np.bincount(pi, weights=coef * dax[pick, col], minlength=c)
+            gy = np.bincount(pi, weights=coef * day[pick, col], minlength=c)
+            gt = np.bincount(pi, weights=coef * dat[pick, col], minlength=c)
+            far = pj < c                       # b-side moves only for neighbours
+            if far.any():
+                jb = pj[far]
+                gx += np.bincount(jb, weights=(coef * dbx[pick, col])[far],
+                                  minlength=c)
+                gy += np.bincount(jb, weights=(coef * dby[pick, col])[far],
+                                  minlength=c)
+                gt += np.bincount(jb, weights=(coef * dbt[pick, col])[far],
+                                  minlength=c)
+            out[:c], out[c:2 * c], out[2 * c:] = gx, gy, gt
+
+        # container term: over(X, Y, T) per patch cell, same expression as `obj`
+        bx, by, bt = unpack(z)
+        px, py, pt = bx[:c], by[:c], bt[:c]
+        hx = 0.5 * (np.abs(np.cos(pt)) + np.abs(np.sin(pt)))
+        # hx has a cusp at theta = 0 (it is a minimum), so take the right-hand
+        # slope there: sign(0) is 0 and would silently report no torque.
+        sgn0 = lambda v: np.where(v >= 0, 1.0, -1.0)      # noqa: E731
+        dhx = 0.5 * (-np.sin(pt) * sgn0(np.cos(pt))
+                     + np.cos(pt) * sgn0(np.sin(pt)))
+        ox1 = np.clip(px + hx - hi, 0, None)
+        ox0 = np.clip(lo - px + hx, 0, None)
+        oy1 = np.clip(py + hx - hi, 0, None)
+        oy0 = np.clip(lo - py + hx, 0, None)
+        out[:c] += wall_w * (2.0 * ox1 - 2.0 * ox0)
+        out[c:2 * c] += wall_w * (2.0 * oy1 - 2.0 * oy0)
+        out[2 * c:] += wall_w * (2.0 * (ox1 + ox0 + oy1 + oy0) * dhx)
+        if calls is not None:
+            calls["objective"] = calls.get("objective", 0) + 1
+            calls["batches"] = calls.get("batches", 0) + 1
+        return out
+
+    z0 = np.concatenate([X[idx], Y[idx], T[idx]])
+    return obj, jac, z0, comp, c
+
+
+def solve_patch_w(X, Y, T, idx, lo, hi, wall_w, iters=120, eps=1e-9,
+                  calls=None, jac_mode="batched"):
     """Relax one patch against every cell it touches, with wall weight `wall_w`.
 
     `wall_w = 0` is the **projection** stage: remove overlaps only, ignore the
@@ -148,65 +337,58 @@ def solve_patch_w(X, Y, T, idx, lo, hi, wall_w, iters=120, eps=1e-9):
     accept overlap as the price.  Alternating the two is the squeeze-and-project
     scheme of run 111, and it is what lets the pose move through illegal states
     instead of being blocked by a contact.
+
+    Run 126: the objective is unchanged; only its *evaluation* is.  `jac_mode=
+    "scipy"` restores the pre-126 behaviour (scipy's own finite differences) and
+    exists so `--check-solver` can compare the two on the same patch.
     """
     from scipy.optimize import minimize
-    from void_insert import pen_vec
-    n = len(X)
-    others = np.setdiff1d(np.arange(n), idx)
-    near = [o for o in others
-            if np.min(np.abs(X[idx] - X[o]) + np.abs(Y[idx] - Y[o])) <= 2.6]
-    # pairs INSIDE the patch matter as much as patch-vs-outside pairs; the
-    # original solver tested only the latter, which is why a patch could sit
-    # on top of itself and report zero penalty.
-    pi, pj = [], []
-    idxl = list(idx)
-    for a_i in range(len(idxl)):
-        for b_i in range(a_i + 1, len(idxl)):
-            pi.append(idxl[a_i])
-            pj.append(idxl[b_i])
-        for o in near:
-            pi.append(idxl[a_i])
-            pj.append(o)
-    pi = np.array(pi, dtype=int)
-    pj = np.array(pj, dtype=int)
+    idx = np.asarray(idx)
     c = len(idx)
-
-    def obj(z):
-        Xa, Ya, Ta = X.copy(), Y.copy(), T.copy()
-        Xa[idx], Ya[idx], Ta[idx] = z[:c], z[c:2 * c], z[2 * c:]
-        if len(pi):
-            pen = pen_vec(Xa[pi], Ya[pi], Ta[pi], Xa[pj], Ya[pj], Ta[pj], eps=eps)
-            pv = float((pen ** 2).sum())
-        else:
-            pv = 0.0
-        hx = 0.5 * (np.abs(np.cos(Ta[idx])) + np.abs(np.sin(Ta[idx])))
-        over = (np.clip(Xa[idx] + hx - hi, 0, None) ** 2
-                + np.clip(lo - Xa[idx] + hx, 0, None) ** 2
-                + np.clip(Ya[idx] + hx - hi, 0, None) ** 2
-                + np.clip(lo - Ya[idx] + hx, 0, None) ** 2)
-        return pv + wall_w * float(over.sum())
-
-    z0 = np.concatenate([X[idx], Y[idx], T[idx]])
+    if c == 0:
+        return X, Y, T
+    obj, jac, z0, comp, c = patch_problem(X, Y, T, idx, lo, hi, wall_w, eps, calls)
+    kw = {"jac": jac} if jac_mode == "batched" else {}
     res = minimize(obj, z0, method="L-BFGS-B",
-                   options={"maxiter": iters, "ftol": 1e-17, "gtol": 1e-13})
+                   options={"maxiter": iters, "ftol": 1e-17, "gtol": 1e-13}, **kw)
+    if calls is not None:
+        calls["nfev"] = calls.get("nfev", 0) + int(res.nfev)
+        calls["nit"] = calls.get("nit", 0) + int(res.nit)
+    ax, ay, at = X[comp].copy(), Y[comp].copy(), T[comp].copy()
+    ax[:c], ay[:c], at[:c] = res.x[:c], res.x[c:2 * c], res.x[2 * c:]
     Xa, Ya, Ta = X.copy(), Y.copy(), T.copy()
-    Xa[idx], Ya[idx], Ta[idx] = res.x[:c], res.x[c:2 * c], res.x[2 * c:]
+    Xa[comp], Ya[comp], Ta[comp] = ax, ay, at
     return Xa, Ya, Ta
 
 
 def relax(X, Y, T, L, sweeps=6, deadline=None, rng=None, size=3.0, step=1.5,
-          verbose=False, wall_w=1e5, iters=120):
-    """Patch-coordinate relaxation inside a box of side L.  Returns the best pose."""
+          verbose=False, wall_w=1e5, iters=120, stats=None):
+    """Patch-coordinate relaxation inside a box of side L.  Returns the best pose.
+
+    `stats`, when a dict is passed, is updated with **sweep-completion** counts
+    (`sweeps_completed`, `sweeps_aborted`, `patches_solved`) so a run records
+    whether its null came from a finished sweep or from a budget that cut one
+    off -- the distinction run 125 could only infer from wall clock.
+    """
     lo_x, hi_x, lo_y, hi_y = box_for(L, X, Y, T)
     best = None
     for s in range(sweeps):
         order = patches(X, Y, size=size, step=step)
         if rng is not None:
             rng.shuffle(order)
+        cut = False
         for idx in order:
             if deadline is not None and time.monotonic() > deadline:
+                cut = True
                 break
             X, Y, T = solve_patch_w(X, Y, T, idx, lo_x, hi_x, wall_w, iters=iters)
+            if stats is not None:
+                stats["patches_solved"] = stats.get("patches_solved", 0) + 1
+        if stats is not None:
+            if cut:
+                stats["sweeps_aborted"] = stats.get("sweeps_aborted", 0) + 1
+            else:
+                stats["sweeps_completed"] = stats.get("sweeps_completed", 0) + 1
         pen, pmax = total_pen(X, Y, T)
         # wall term is included in the patch objective; measure it here too
         h = 0.5 * (np.abs(np.cos(T)) + np.abs(np.sin(T)))
@@ -227,7 +409,8 @@ def relax(X, Y, T, L, sweeps=6, deadline=None, rng=None, size=3.0, step=1.5,
     return best[1], best[2], best[3]
 
 
-def project(X, Y, T, L, deadline, rng, rounds=3, screen=False):
+def project(X, Y, T, L, deadline, rng, rounds=3, screen=False, stats=None,
+            iters=400):
     """Remove overlaps at 40 digits: repeat the projection until it is legal.
 
     `screen=True` (the driver's mode) pays one projection round and then an
@@ -237,7 +420,7 @@ def project(X, Y, T, L, deadline, rng, rounds=3, screen=False):
     """
     if screen:
         X, Y, T = relax(X, Y, T, L, sweeps=3, deadline=deadline, rng=rng,
-                        wall_w=1e2, iters=400)
+                        wall_w=1e2, iters=iters, stats=stats)
         # No pair pass here: `legalise` takes the verdict on this same pose, and
         # doing it twice was the whole cost (85 s each on a 999-cell pose).
         return float(exact_side(X, Y, T)), None, X, Y, T
@@ -246,7 +429,7 @@ def project(X, Y, T, L, deadline, rng, rounds=3, screen=False):
         if time.monotonic() > deadline:
             break
         X, Y, T = relax(X, Y, T, L, sweeps=3, deadline=deadline, rng=rng,
-                        wall_w=1e2, iters=400)
+                        wall_w=1e2, iters=iters, stats=stats)
         s40, viol, _ = side40(X, Y, T)
         if best is None or viol < best[0]:
             best = (viol, float(s40), X.copy(), Y.copy(), T.copy())
@@ -328,10 +511,22 @@ def free_point(X, Y, T, rng, tries=400):
     return None
 
 
-def attempt(n, kind, seconds, seed):
-    """One structure-changing attempt at row n; returns a record."""
+def attempt(n, kind, seconds, seed, iters=10, proj_iters=40, split=0.6):
+    """One structure-changing attempt at row n; returns a record.
+
+    The budget is **split** between the squeeze and the projection
+    (`split` x seconds for the squeeze, the rest for the projection).  Run 125
+    handed the whole budget to `relax`, which keeps sweeping until its deadline,
+    so the projection always ran with zero time left and every attempt was
+    judged on a pose nobody had tried to legalise.  `iters`/`proj_iters` cap
+    the L-BFGS iterations per patch visit: run 126 measured that at a fixed
+    wall clock, fewer iterations per visit and more completed sweeps leave a
+    *lower* residual penalty (n=662: 6.6e-3 at 2 sweeps vs 1.1e-2 at 1), so
+    the cap is a throughput choice, not a relaxation of the objective.
+    """
     t0 = time.monotonic()
     deadline = t0 + seconds
+    squeeze_deadline = t0 + split * seconds
     X, Y, T, L0 = load_pose(n)
     rng = random.Random(seed * 7919 + n + kind)
     nprng = np.random.RandomState(seed * 31 + n * 7 + kind)
@@ -359,20 +554,28 @@ def attempt(n, kind, seconds, seed):
     want = float(L0) - TARGET
     squeeze_side = float(L0)
     post_side = float(L0)
+    stats = {}
+    outer_cut = False
     for _outer in range(4):
-        if time.monotonic() > deadline:
+        if time.monotonic() > squeeze_deadline:
+            outer_cut = True
             break
-        Xa, Ya, Ta = relax(Xa, Ya, Ta, want, sweeps=2, deadline=deadline,
-                           rng=nprng, wall_w=1e5)        # squeeze
+        Xa, Ya, Ta = relax(Xa, Ya, Ta, want, sweeps=2, deadline=squeeze_deadline,
+                           rng=nprng, wall_w=1e5, iters=iters,
+                           stats=stats)                        # squeeze
         squeeze_side = float(exact_side(Xa, Ya, Ta))
         # `project` in screen mode returns no verdict: `legalise` takes the one
         # that matters on this same pose, so it is not paid for twice.
         _, _, Xa, Ya, Ta = project(Xa, Ya, Ta, want, deadline, nprng,
-                                   screen=True)
+                                   screen=True, stats=stats, iters=proj_iters)
         post_side = float(exact_side(Xa, Ya, Ta))
+        if time.monotonic() > deadline:
+            outer_cut = True
+            break
 
     # The ceiling is the delivered side: once an expansion reaches it, no rung
     # can be a gain (the ladder is monotone), so this is an exact early exit.
+    post_pen = float(total_pen(Xa, Ya, Ta)[0])
     s40, viol, Xb, Yb, Tb, spill, why = legalise(Xa, Ya, Ta, ceiling=float(L0))
     dL = float(L0) - float(s40) if viol == 0 else 0.0
     crossed = spill is not None and spill < 0
@@ -385,6 +588,13 @@ def attempt(n, kind, seconds, seed):
             "squeeze_side": str(squeeze_side),
             "post_project_side": str(post_side),
             "squeeze_below_L0": squeeze_side < float(L0) - 1e-12,
+            "sweeps_completed": stats.get("sweeps_completed", 0),
+            "sweeps_aborted": stats.get("sweeps_aborted", 0),
+            "patches_solved": stats.get("patches_solved", 0),
+            "patches_total": sum(len(p) for p in patches(X, Y)),
+            "post_project_pen": post_pen,
+            "iters": iters, "proj_iters": proj_iters, "split": split,
+            "budget_limited": bool(stats.get("sweeps_aborted", 0) > 0 or outer_cut),
             "seconds": round(time.monotonic() - t0, 2),
             "beat": bool(viol == 0 and dL > 1e-12)}
 
@@ -428,11 +638,89 @@ def control(seconds=12.0):
     print("control: OK")
 
 
+def check_solver(n=33, reps=3):
+    """Positive control for run 126's acceleration.
+
+    The change is *only* in how the objective's gradient is evaluated (one
+    stacked forward-difference batch instead of 3c+1 separate calls), so the
+    control is that the accelerated solve lands where the plain scipy
+    finite-difference solve lands -- the pre-126 behaviour -- on the same real
+    patches, with the same pair list and `eps`.  It also requires the run to be
+    measurably faster, otherwise there is no reason to adopt it.
+    """
+    X, Y, T, L0 = load_pose(n)
+    lo_x, hi_x, lo_y, hi_y = box_for(float(L0), X, Y, T)
+    order = sorted(patches(X, Y), key=len, reverse=True)[:reps]
+
+    def f(ax, ay, at):
+        pen, _ = total_pen(ax, ay, at)
+        hx = 0.5 * (np.abs(np.cos(at)) + np.abs(np.sin(at)))
+        over = (np.clip(ax + hx - hi_x, 0, None) ** 2
+                + np.clip(lo_x - ax + hx, 0, None) ** 2
+                + np.clip(ay + hx - hi_y, 0, None) ** 2
+                + np.clip(lo_y - ay + hx, 0, None) ** 2)
+        return pen + 1e5 * float(over.sum())
+
+    print(f"check-solver -- n={n}, {len(order)} largest patches")
+    # Gradient first, and NOT only at the start pose: run 126's first batched
+    # jacobian agreed with scipy at z0 to 1e-17 and was 1e7 wrong one step
+    # away, because it perturbed the pose captured at build time instead of
+    # the z it was handed.  A control that only samples z0 cannot see that.
+    #
+    # The delivered pose itself is excluded from the assertion on purpose: the
+    # objective there is ~1e-17, i.e. roundoff, so a finite difference of it is
+    # noise and cannot referee anything.  The generic points below are where a
+    # gradient error would actually change the search.
+    from scipy.optimize._numdiff import approx_derivative
+    idx0 = order[0]
+    _o, _j, z0g, _comp, _c = patch_problem(X, Y, T, idx0, lo_x, hi_x, 1e5)
+    g_at0 = _j(z0g)
+    print(f"  at the delivered pose f={_o(z0g):.2e} (degenerate): |g| "
+          f"{np.max(np.abs(g_at0)):.2e} -- not asserted", flush=True)
+    rng = np.random.RandomState(11)
+    for trial, d in enumerate((1e-3, 1e-2, 5e-2)):
+        z = z0g + rng.uniform(-d, d, len(z0g))
+        gm, gr = _j(z), approx_derivative(_o, z, method="2-point")
+        sc = max(1e-12, float(np.max(np.abs(gr))))
+        err = float(np.max(np.abs(gm - gr))) / sc
+        print(f"  gradient at f={_o(z):.3e} (|g|inf {sc:.3e}): max rel err "
+              f"{err:.2e}", flush=True)
+        assert err < 5e-5, "check-solver: analytic gradient disagrees with scipy"
+    for idx in order:
+        ca, cb = {}, {}
+        t0 = time.monotonic()
+        Xa, Ya, Ta = solve_patch_w(X, Y, T, idx, lo_x, hi_x, 1e5, calls=ca)
+        t_new = time.monotonic() - t0
+        t0 = time.monotonic()
+        Xb, Yb, Tb = solve_patch_w(X, Y, T, idx, lo_x, hi_x, 1e5, calls=cb,
+                                   jac_mode="scipy")
+        t_ref = time.monotonic() - t0
+        fa, fb = f(Xa, Ya, Ta), f(Xb, Yb, Tb)
+        dpose = max(float(np.abs(Xa - Xb).max()), float(np.abs(Ya - Yb).max()),
+                    float(np.abs(Ta - Tb).max()))
+        print(f"  patch {len(idx):3d} cells  f_batched {fa:.6e}  f_scipy-FD "
+              f"{fb:.6e}  |df| {abs(fa - fb):.2e}  dpose {dpose:.2e}  "
+              f"batched {t_new * 1e3:.1f} ms vs {t_ref * 1e3:.1f} ms "
+              f"({t_ref / t_new:.1f}x), objective calls {ca.get('objective', 0)} "
+              f"in {ca.get('batches', 0)} batches vs nfev {cb.get('nfev', 0)}",
+              flush=True)
+        assert fa <= fb + 1e-12 * max(1.0, abs(fb)), \
+            "check-solver: batched solve ended worse than the scipy-FD solve"
+        assert abs(fa - fb) <= 1e-6 * max(1.0, abs(fb)), \
+            "check-solver: the two solves did not reach the same objective"
+        assert t_new < t_ref, "check-solver: the batched gradient was not faster"
+    print("check-solver: OK -- same objective, faster evaluation")
+
+
 def main(argv):
     opts = dict(zip(argv[0::2], argv[1::2]))
     rows = int(opts.get("--rows", 20))
     seconds = float(opts.get("--seconds", 10))
     seed = int(opts.get("--seed", 3))
+    iters = int(opts.get("--iters", 10))
+    proj_iters = int(opts.get("--proj-iters", 40))
+    split = float(opts.get("--split", 0.6))
+    out = opts.get("--out", OUT)
     per = SQ.load()
     unbeaten = [n for n in range(1, 1001)
                 if SQ.extent(per[n]) >= SQ.grid(n) - 1e-12]
@@ -444,7 +732,8 @@ def main(argv):
     for n in pick:
         best = None
         for kind in (0, 1, 2):
-            r = attempt(n, kind, seconds, seed)
+            r = attempt(n, kind, seconds, seed, iters=iters,
+                        proj_iters=proj_iters, split=split)
             better = (best is None
                       or (r["legal"] and not best["legal"])
                       or (r["legal"] == best["legal"] and r["dL"] > best["dL"]))
@@ -453,8 +742,10 @@ def main(argv):
         recs.append(best)
         print(f"  n={n:4d} k={best['k']:2d} L0={best['L0'][:20]:20s} "
               f"side40={best['side40'][:20]:20s} dL={best['dL']:+.3e} "
-              f"viol {best['violations']} [{best['why']}] "
-              f"({best['moved']}) {best['seconds']}s",
+              f"viol {best['violations']} sweeps {best['sweeps_completed']}"
+              f"/{best['sweeps_aborted']} patches {best['patches_solved']}"
+              f"/{best['patches_total']} pen@proj {best['post_project_pen']:.1e}"
+              f" [{best['why']}] ({best['moved']}) {best['seconds']}s",
               flush=True)
     ds = sorted(r["dL"] for r in recs)
     pos = [d for d in ds if d > 1e-12]
@@ -463,12 +754,26 @@ def main(argv):
     print(f"  rows with any gain: {len(pos)}/{len(ds)}")
     print(f"  rows legal and improving: {len([r for r in recs if r['beat']])}")
     print(f"  rows reaching the 4e-3 target: {len([r for r in ds if r >= TARGET])}")
-    json.dump(recs, open(OUT, "w"), indent=1)
-    print(f"wrote {OUT}")
+    done = [r for r in recs if r["sweeps_completed"] > 0]
+    print(f"  rows with at least one COMPLETED sweep: {len(done)}/{len(recs)}"
+          f"   (budget-limited: {len([r for r in recs if r['budget_limited']])})")
+    below = [r for r in recs if r["squeeze_below_L0"]]
+    print(f"  rows whose squeeze got BELOW L0: {len(below)}/{len(recs)}"
+          + (f"   min gain in the illegal pose "
+             f"{max(float(r['L0']) - float(r['squeeze_side']) for r in below):+.3e}"
+             if below else ""))
+    if below:
+        paid = sorted(float(r["L0"]) - float(r["side40"]) for r in below)
+        print(f"  after legalising the below-L0 poses: dL min {paid[0]:+.3e} "
+              f"max {paid[-1]:+.3e}  (negative = legalisation paid back more)")
+    json.dump(recs, open(out, "w"), indent=1)
+    print(f"wrote {out}")
 
 
 if __name__ == "__main__":
     if "--control" in sys.argv:
         control()
+    elif "--check-solver" in sys.argv:
+        check_solver()
     else:
         main(sys.argv[1:])
