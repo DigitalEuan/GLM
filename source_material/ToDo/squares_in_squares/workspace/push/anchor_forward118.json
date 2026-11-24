@@ -1,15 +1,25 @@
 [
  {
-  "test": "n=4 at L=2 (proved optimum, closure)",
+  "test": "n=4 at L=2 (closure, width 8)",
   "target": "2",
   "n_target": 4,
-  "mode": "lattice",
+  "mode": "closure",
+  "top": 8,
+  "seconds": 0.31,
+  "stats": {
+   "raw_candidates": 970,
+   "kept_candidates": 31,
+   "pairs_tested": 47,
+   "prefilter_skips": 47,
+   "memo_hits": 0,
+   "memo_misses": 0
+  },
   "settled": 4,
   "why": "target reached",
-  "nodes": 9,
+  "nodes": 5,
   "states": 14,
   "exhausted": false,
-  "refusals": 0,
+  "refusals": 17,
   "span": "2"
  },
  {
@@ -17,25 +27,91 @@
   "target": "2 + 1/2\u221a2",
   "n_target": 5,
   "mode": "frontier",
+  "top": null,
+  "seconds": 6.84,
+  "stats": {
+   "raw_candidates": 0,
+   "kept_candidates": 0,
+   "pairs_tested": 0,
+   "prefilter_skips": 0,
+   "memo_hits": 0,
+   "memo_misses": 0
+  },
   "settled": 4,
   "why": "tree exhausted",
   "nodes": 69,
   "states": 68,
   "exhausted": true,
   "refusals": 0,
-  "span": "2"
+  "span": "2 + 1/2\u221a2"
  },
  {
-  "test": "n=212 at L=15 (Block45 regime, frontier, node cap 25)",
-  "target": "15",
-  "n_target": 212,
-  "mode": "frontier",
-  "settled": 25,
-  "why": "node cap 25 reached after 25 cells",
-  "nodes": 26,
-  "states": 71,
+  "test": "n=5 at 2+1/2sqrt2 (closure, width 8)",
+  "target": "2 + 1/2\u221a2",
+  "n_target": 5,
+  "mode": "closure",
+  "top": 8,
+  "seconds": 30.64,
+  "stats": {
+   "raw_candidates": 75353,
+   "kept_candidates": 1981,
+   "pairs_tested": 12096,
+   "prefilter_skips": 11894,
+   "memo_hits": 174,
+   "memo_misses": 28
+  },
+  "settled": 5,
+  "why": "target reached",
+  "nodes": 69,
+  "states": 87,
   "exhausted": false,
-  "refusals": 0,
-  "span": "15"
+  "refusals": 454,
+  "span": "2 + 1/2\u221a2"
+ },
+ {
+  "test": "n=6 at L=3 (closure, width 8)",
+  "target": "3",
+  "n_target": 6,
+  "mode": "closure",
+  "top": 8,
+  "seconds": 8.75,
+  "stats": {
+   "raw_candidates": 19298,
+   "kept_candidates": 485,
+   "pairs_tested": 4584,
+   "prefilter_skips": 4556,
+   "memo_hits": 19,
+   "memo_misses": 9
+  },
+  "settled": 6,
+  "why": "target reached",
+  "nodes": 17,
+  "states": 43,
+  "exhausted": false,
+  "refusals": 85,
+  "span": "3"
+ },
+ {
+  "test": "n=7 at L=3 (closure, width 8)",
+  "target": "3",
+  "n_target": 7,
+  "mode": "closure",
+  "top": 8,
+  "seconds": 102.56,
+  "stats": {
+   "raw_candidates": 234481,
+   "kept_candidates": 4793,
+   "pairs_tested": 48768,
+   "prefilter_skips": 48477,
+   "memo_hits": 256,
+   "memo_misses": 35
+  },
+  "settled": 7,
+  "why": "target reached",
+  "nodes": 128,
+  "states": 159,
+  "exhausted": false,
+  "refusals": 821,
+  "span": "3"
  }
 ]

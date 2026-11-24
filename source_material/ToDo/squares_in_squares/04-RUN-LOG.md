@@ -3329,3 +3329,30 @@ terminated); the earlier "14 cells in a 5.5-wide corner" was pre-fix and is with
 
 **Verdict.** The constructor now settles the proved 5-cell optimum exactly; the missing-command diagnosis
 was right. Guards green (re-audited), no row changed, no score claimed. Entries doc 78 §3; records 323-324.
+
+## Run 120 — constraint intersection, two audited speedups, and n = 6, 7
+
+**Request.** Replace the two-parent sweep with direct exact-constraint intersection; add a cheap bounds
+pre-filter and a failure-pair memo; run the settler on n = 6 and n = 7 at best known sides with honest stall
+diagnosis; log in doc 79. Governed by DIRECTORS-NOTE.
+
+**Generator.** Corners need no solve; wall+contact is one division (the wall pins a coordinate and the
+tangency is linear in the other); two-parent STACK_BLOCK is a 2x2 exact solve over both parents' axes and the
+candidate's. The lattice sweep is gone from the closure path.
+
+**Speedups, measured.** (a) Integer-only sqrt(d) bounds prefilter: skipped 98.3% of pairs at n=5, 99.4% at
+n=6 and n=7. (b) Failure-pair memo: 86.1% hits at n=5, 88.0% at n=7. Combined effect on the comparable run:
+n=5 settlement 248 nodes / 140.8 s -> 69 nodes / 30.6 s (3.6x fewer nodes, 4.6x faster).
+
+**n = 6 and n = 7.** Both settle completely at their best known sides: n=6 at L=3 -> 6/6 (17 nodes, 43
+states, 8.75 s), n=7 at L=3 -> 7/7 (128 nodes, 159 states, 102.6 s), spans exactly 3 = the proved optima.
+**No stalls**, so no exhaustion/missing-command/budget diagnosis applies to either. The only stall in the
+table is frontier-mode n=5, which remains genuine exhaustion (69 nodes expand to 68 states, stack empties).
+
+**Stated limit.** Settling 6 and 7 at L=3 exercises the 3x3 grid regime, where every cell is corner- or
+contact-closed; it does not test the grammar where the grid fails. That remains n=212 (budget-limited probe)
+and the unbeaten rows (no attempt yet).
+
+**Checks.** anchor_chain --selftest green (both fields, refusal at -1/4); --forward wrote its JSON;
+glm_wheels --audit re-run; sqscore, record_guard, void_insert --selftest green; history byte-identical;
+no row changed, no score claimed. Entries doc 79 (new); records 325-326.

@@ -476,88 +476,185 @@ def _snap_to_wall(cell, lo, L, lattice):
     return cell
 
 
-def lattice_candidates(field, placed, L, lo, lattice=F(1, 4), need=2):
-    """The anchors *determined* by two exact constraints, on the exact lattice.
+#: rational bracket of sqrt(d), shared by the bounds prefilter
+_ROOT_LO, _ROOT_HI = {}, {}
+#: memo of tested pairs, and counters for the ledger
+_OVERLAP = {}
+STATS = {"raw_candidates": 0, "kept_candidates": 0, "pairs_tested": 0,
+         "prefilter_skips": 0, "memo_hits": 0, "memo_misses": 0}
 
-    This is the two-parent closure the one-parent generator was missing: a cell
-    is admissible when its centre sits on the field's lattice and it is closed by
-    at least `need` of {a wall, a placed cell} — which covers wall+wall
-    (ANCHOR_CORNER), wall+contact (PROPAGATE_SLIDE), and **contact+contact**
-    (STACK_BLOCK against two *independent* placed cells).  Every test is exact in
-    Q(sqrt d); the lattice is exact rational steps of the field.
-    """
+
+def _root_bounds(d):
+    """Exact rational bracket of sqrt(d): integer sqrt only, no float anywhere."""
+    if d not in _ROOT_LO:
+        n = _isqrt(d * 10 ** 24)
+        _ROOT_LO[d], _ROOT_HI[d] = F(n, 10 ** 12), F(n + 1, 10 ** 12)
+    return _ROOT_LO[d], _ROOT_HI[d]
+
+
+def _isqrt(n):
+    """Integer square root by Newton on ints (exact, no floating point)."""
+    if n < 2:
+        return n
+    x = 1 << ((n.bit_length() + 1) // 2)
+    while True:
+        y = (x + n // x) // 2
+        if y >= x:
+            return x
+        x = y
+
+
+def bounds(cell, d):
+    """A conservative rational bounding box, cheap to compare (no field maths)."""
+    lo, hi = _root_bounds(d)
+
+    def span(q):
+        a, b = q.a, q.b
+        return (a + b * lo, a + b * hi) if b >= 0 else (a + b * hi, a + b * lo)
+
+    hlo, hhi = span(cell_h(cell))
+    xlo, xhi = span(cell["x"])
+    ylo, yhi = span(cell["y"])
+    return (xlo - hhi, xhi - hlo, ylo - hhi, yhi - hlo)
+
+
+def _boxes_touch(cb, ob):
+    """Could two bounding boxes overlap at all?  Cheap, exact-conservative."""
+    return not (cb[1] <= ob[0] or ob[1] <= cb[0] or cb[3] <= ob[2] or ob[3] <= cb[2])
+
+
+def overlaps_memo(a, b, field):
+    """Does the pair overlap?  Memoised — the same pairs recur across branches."""
+    ka, kb = _key(a), _key(b)
+    key = (field.d, ka, kb) if ka <= kb else (field.d, kb, ka)
+    got = _OVERLAP.get(key)
+    if got is None:
+        got = slack(a, b) < 0
+        _OVERLAP[key] = got
+        STATS["memo_misses"] += 1
+    else:
+        STATS["memo_hits"] += 1
+    return got
+
+
+def clear_of(cand, placed, field):
+    """Legality against every placed cell, with the bounds prefilter and the memo."""
+    cb = bounds(cand, field.d)
+    for o in placed:
+        ob = bounds(o, field.d)
+        STATS["pairs_tested"] += 1
+        if not _boxes_touch(cb, ob):
+            STATS["prefilter_skips"] += 1
+            continue
+        if overlaps_memo(o, cand, field):
+            return False
+    return True
+
+
+def corner_anchors(field, placed, L, lo):
+    """ANCHOR_CORNER: two walls fix the cell exactly — no search."""
     out = []
-    # one-parent and wall closures (cheap: the frontier slide of run 118)
-    out.extend(determined_candidates(field, placed, L, lo))
-    # ANCHOR_CORNER at any depth: a cell closed by two walls and nothing else
     for dname in field.dirs:
         probe = place(field, field.zero, field.zero, dname)
         h = half_w(probe)
         for cx in (lo + h, lo + L - h):
             for cy in (lo + h, lo + L - h):
-                cand = place(field, cx, cy, dname)
-                if not _inside(cand, lo, L):
+                if any(_key(o) == _key(place(field, cx, cy, dname)) for o in placed):
                     continue
-                if any(slack(o, cand) < 0 for o in placed):
-                    continue
-                if any(_key(o) == _key(cand) for o in placed):
-                    continue
-                out.append(cand)
-    # **two-parent closure**: STACK_BLOCK against two independent placed cells.
-    # Two tangency equations are two *linear* equations in the centre, so the
-    # candidate is solved exactly in the field rather than searched for.
+                out.append(place(field, cx, cy, dname))
+    return out
+
+
+def wall_contact_candidates(field, placed, L, lo):
+    """PROPAGATE_SLIDE solved, not swept: a wall fixes one coordinate, and the
+    tangency equation is linear in the other, so the candidate is one division."""
+    out = []
+    for p in placed:
+        for dname in field.dirs:
+            probe = place(field, field.zero, field.zero, dname)
+            h = half_w(probe)
+            px, py = p["x"], p["y"]
+            for q in axes(p) + axes(probe):
+                R = half_along(p, q) + half_along(probe, q)
+                for s in (1, -1):
+                    if q[1] != field.zero:          # x pinned by the wall
+                        for cx in (lo + h, lo + L - h):
+                            cy = py + (s * R - q[0] * (cx - px)) / q[1]
+                            out.append(place(field, cx, cy, dname))
+                    if q[0] != field.zero:          # y pinned by the wall
+                        for cy in (lo + h, lo + L - h):
+                            cx = px + (s * R - q[1] * (cy - py)) / q[0]
+                            out.append(place(field, cx, cy, dname))
+    return out
+
+
+def two_contact_candidates(field, placed, L, lo):
+    """STACK_BLOCK against two independent cells, solved as a 2x2 exact system.
+
+    Two tangency equations are linear in the centre, so the intersection of the
+    two loci is a division, not a scan.  The axis may belong to either parent or
+    to the candidate itself (the 45 degree cell touches two axis cells along its
+    own axis)."""
+    out = []
     for i in range(len(placed)):
         for j in range(i + 1, len(placed)):
-            p, q = placed[i], placed[j]
+            p, q2 = placed[i], placed[j]
             for dname in field.dirs:
                 probe = place(field, field.zero, field.zero, dname)
-                # a tangency may be witnessed on an axis of either parent **or of
-                # the candidate itself** — the 45 degree cell touches two axis
-                # cells along its own diagonal, not along theirs
-                trial = axes(p) + axes(q) + axes(probe)
+                trial = axes(p) + axes(q2) + axes(probe)
                 for ap in trial:
                     for aq in trial:
                         det = ap[0] * aq[1] - ap[1] * aq[0]
                         if det == field.zero:
-                            continue                # parallel: no unique solve
+                            continue
                         for s1 in (1, -1):
                             for s2 in (1, -1):
                                 r1 = s1 * (half_along(p, ap) + half_along(probe, ap))
-                                r2 = s2 * (half_along(q, aq) + half_along(probe, aq))
+                                r2 = s2 * (half_along(q2, aq) + half_along(probe, aq))
                                 b1 = p["x"] * ap[0] + p["y"] * ap[1] + r1
-                                b2 = q["x"] * aq[0] + q["y"] * aq[1] + r2
+                                b2 = q2["x"] * aq[0] + q2["y"] * aq[1] + r2
                                 cx = (b1 * aq[1] - ap[1] * b2) / det
                                 cy = (ap[0] * b2 - b1 * aq[0]) / det
-                                cand = place(field, cx, cy, dname)
-                                if not _inside(cand, lo, L):
-                                    continue
-                                if slack(p, cand) != 0 or slack(q, cand) != 0:
-                                    continue
-                                if any(slack(o, cand) < 0 for o in placed):
-                                    continue
-                                if any(_key(o) == _key(cand) for o in placed):
-                                    continue
-                                out.append(cand)
+                                out.append(place(field, cx, cy, dname))
     return out
 
 
-_OFFSETS = {}
+def lattice_candidates(field, placed, L, lo, lattice=None, need=2):
+    """Every anchor the three commands can *determine*, by constraint intersection.
 
-
-def _offset_cache(field, lattice=F(1, 4), reach=F(3, 2)):
-    """Unused after the 2x2 solve replaced the search; kept for the record."""
-    key = (field.d, lattice, reach)
-    if key in _OFFSETS:
-        return _OFFSETS[key]
-    _OFFSETS[key] = []
-    return _OFFSETS[key]
+    Corners (wall+wall), slides (wall+contact) and stacks (contact+contact) are
+    each solved directly; nothing is swept.  A candidate survives only if it is
+    inside, clear of every placed cell (bounds prefilter + memo) and closed by at
+    least `need` constraints.
+    """
+    raw = corner_anchors(field, placed, L, lo)
+    raw += wall_contact_candidates(field, placed, L, lo)
+    raw += two_contact_candidates(field, placed, L, lo)
+    STATS["raw_candidates"] += len(raw)
+    out, seen = [], set()
+    for cand in raw:
+        k = _key(cand)
+        if k in seen:
+            continue
+        seen.add(k)
+        if not _inside(cand, lo, L):
+            continue
+        if not clear_of(cand, placed, field):
+            continue
+        contacts = sum(1 for o in placed if slack(o, cand) == 0)
+        wells = len(wall_contacts(cand, lo, L))
+        if contacts + wells < need:
+            continue
+        out.append(cand)
+    STATS["kept_candidates"] += len(out)
+    return out
 
 
 def _key(cell):
     return (cell["x"].a, cell["x"].b, cell["y"].a, cell["y"].b, cell["dir"])
 
 
-def settle(n_target, L, field, node_cap=None, top=None, mode="lattice"):
+def settle(n_target, L, field, node_cap=None, top=None, mode="closure", order=True):
     """Goal-directed settlement at a target side L — exhaustive by default.
 
     Every admitted anchor passes the exact placement gate at clearance >= 0, and
@@ -569,7 +666,7 @@ def settle(n_target, L, field, node_cap=None, top=None, mode="lattice"):
     closed, so a failure is a statement about the grammar rather than a budget.
     """
     lo = field.zero
-    gen = lattice_candidates if mode == "lattice" else determined_candidates
+    gen = determined_candidates if mode == "frontier" else lattice_candidates
     seen, stack = set(), [()]
     nodes = refusals = 0
     deepest = ()
@@ -588,6 +685,11 @@ def settle(n_target, L, field, node_cap=None, top=None, mode="lattice"):
                     "states": len(seen), "exhausted": False}
         placed = list(cells)
         cands = gen(field, placed, L, lo)
+        # contact-first order: fill closed positions before opening new ones
+        if order:
+            cands = sorted(cands, key=lambda c: (
+                -(sum(1 for o in placed if slack(o, c) == 0) +
+                  len(wall_contacts(c, lo, L))), c["x"] + c["y"], c["x"], c["y"]))
         if top is not None:
             cands = cands[:top]
         for c in cands:
@@ -685,27 +787,35 @@ def forward(argv):
     f2 = FIELDS[2]
     L5 = f2.q(2) + f2.q(0, F(1, 2))
     tests = [
-        ("n=4 at L=2 (proved optimum, closure)", 4, f2.q(2), "lattice", None),
-        ("n=5 at 2+1/2sqrt2 (frontier, no caps)", 5, L5, "frontier", None),
-        ("n=212 at L=15 (Block45 regime, frontier, node cap 25)", 212,
-         f2.q(15), "frontier", 25),
+        ("n=4 at L=2 (closure, width 8)", 4, f2.q(2), "closure", 8, None),
+        ("n=5 at 2+1/2sqrt2 (frontier, no caps)", 5, L5, "frontier", None, None),
+        ("n=5 at 2+1/2sqrt2 (closure, width 8)", 5, L5, "closure", 8, None),
+        ("n=6 at L=3 (closure, width 8)", 6, f2.q(3), "closure", 8, None),
+        ("n=7 at L=3 (closure, width 8)", 7, f2.q(3), "closure", 8, None),
     ]
     if "--closure5" in argv:
-        tests = [("n=5 at 2+1/2sqrt2 (two-parent closure)", 5, L5, "lattice", None)]
+        tests = [t for t in tests if t[0].startswith("n=5")]
     if "--small" in argv:
-        tests = tests[:2]
+        tests = tests[:3]
     recs = []
-    for name, n, L, mode, cap in tests:
+    for name, n, L, mode, top, cap in tests:
         print(f"\n  {name}", flush=True)
-        got = settle(n, L, f2, mode=mode, node_cap=cap)
+        STATS.update({k: 0 for k in STATS})
+        _OVERLAP.clear()
+        t0 = __import__("time").time()
+        got = settle(n, L, f2, mode=mode, node_cap=cap, top=top)
+        dt = __import__("time").time() - t0
         print(f"    settled {len(got['placed'])}/{n}; {got['why']}; nodes "
               f"{got['nodes']} states {got['states']} refusals {got['refusals']}"
               f" exhausted {got['exhausted']}", flush=True)
         if got["placed"]:
             lo, side = bbox(got["placed"])
             print(f"    exact span {side} (target {L}): {side == L}", flush=True)
+        print(f"    stats {STATS}  {dt:.1f}s", flush=True)
         recs.append({"test": name, "target": str(L), "n_target": n,
-                     "mode": mode, "settled": len(got["placed"]),
+                     "mode": mode, "top": top, "seconds": round(dt, 2),
+                     "stats": dict(STATS),
+                     "settled": len(got["placed"]),
                      "why": got["why"], "nodes": got["nodes"],
                      "states": got["states"], "exhausted": got["exhausted"],
                      "refusals": got["refusals"],
