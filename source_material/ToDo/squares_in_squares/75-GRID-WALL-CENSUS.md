@@ -270,6 +270,39 @@ So the logical answer to the request is uncomfortable but clean:
 * Delivered state unchanged: `sqscore` guard OK `22.218056945` / 553 beats; `record_guard.py` OK;
   README/STATUS run-history line byte-identical. `submission.csv` untouched.
 
+## 10. Run 116 — the standing card is placed, and the re-squeeze lead is opened and controlled
+
+**The card.** `DIRECTORS-NOTE.md` now sits at the project top level and is pointed to from `README.md`,
+`STATUS.md` and `00-OVERVIEW.md` ("Start here every run"). It carries the orientation, the "no floats"
+operating definition (discovery vs proof), the proved leverage, the open leads and the C1–C4 promotion gate,
+plus a review table recording that every number in it was checked against the repository. **One factual error
+was corrected:** the compressed-lattice statement is about the band's *frontier pose* (`m* = k² − j*`,
+`j* = 18…26` at `k >= 21`), not about `n = k² − 1`, which is a frontier row nowhere in the table.
+
+**The lead: dynamic re-squeeze block substitution.** `resqueeze.py` inserts one cell at the exact free-space
+point (`void_insert`'s scan), then runs patch-coordinate relaxation — overlapping 4.5-wide patches, each solved
+on its own `3c` variables against every contact, sweeps in random order, and a **monotone acceptance test** (a
+patch move is kept only if the whole-pose penalty falls). The container is placed at `k` itself.
+
+* **Control first** (the pose alone, no insertion, k = 26) — and it earned its keep twice. A first version
+  hinged the container at `k − 1e-3` and **destroyed a legal pose** (pen `0.59`, 234 violations): the wall
+  penalty outweighed the overlaps, which is why the target is `k`, not `k − 1e-3`. With that fixed the control
+  reads pen `2.4e-14` (max contact `7e-8`), side `26.0000000013`, 76 violations: the instrument is stable, its
+  floor is ~`1e-8`, and — the substantive point — **penalty descent inflates the pose to `k`**, i.e. it spends
+  the frontier's own `delta` instead of gaining room.
+* **k = 26 (sliver):** n = 656, side `26.00000000132585758710…`, 79 violations, max penetration `4.6e-6`.
+  Not a beat: the re-squeeze reaches `k` to `1.3e-9`, which is the sliver statement again.
+* **k = 32 (notch):** n = 999, side **`31.99687596003605622186…`** — `3.1e-3` *inside* `k`, which would be
+  worth `9.9e-5` — but 17 violations with max penetration `9.4e-2`, and only `1/168` then `0/168` patch moves
+  accepted before it jammed. So the notch is **real room** (the side genuinely goes below `k`) and the failure
+  is combinatorial, 17 pairs deep, not a lack of space.
+
+**Verdict of the development step.** No beat, and the lead is now an instrument with a control rather than a
+paragraph. Two things are established: a soft-wall penalty descent cannot gain a cell (it spends `delta`), and
+the k = 32 notch can be entered — the pose reaches side below `k` — but not resolved by this descent. The named
+next fix is **hard side projection** (exact container, no penalty) plus contact-graph repair on the 17 jamming
+pairs rather than more descent.
+
 ## 9. Corrections to earlier documents and to run 114
 
 * **The band count is 30, not 29 or 31.** Run 114's table looped `k = 2..31` and so silently dropped band

@@ -1,6 +1,8 @@
 # TCT Square-Packing Table — Project Overview
 
-> Restored from the supplied attachment and aligned with the canonical Run 52 repository state. Historical Run 15/32/36 values remain in the run ledger.
+> Restored from the supplied attachment and aligned with the canonical Run 52 repository state.
+
+> **Start here every run: [`DIRECTORS-NOTE.md`](DIRECTORS-NOTE.md)** — the standing perspective: what we are doing, what “no floats” means here, what is already proved (as leverage), the open leads, and the C1–C4 promotion gate. Read it before proposing a route; update it in the same commit if a number changes. Historical Run 15/32/36 values remain in the run ledger.
 
 This is the working repository for the **TCT competition table**: a
 1,000-row table of container side lengths `L(n)` for packing `n` unit
@@ -47,6 +49,7 @@ by `scripts/record_guard.py` since Run 52. Run 15's 22.823536, Run 32's
 
 ## Where to read next
 
+- `DIRECTORS-NOTE.md` — **the standing card: orientation, no-float definition, proved leverage, open leads, C1–C4 gate** (added run 116)
 - `01-LAYERS.md` — the layer lattice and its Lean formalisation
 - `02-EXACT-VERIFICATION.md` — exact verification, what broke, what was fixed, what remains
 - `03-REPRODUCE.md` — every command, in order

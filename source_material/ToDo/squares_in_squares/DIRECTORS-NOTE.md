@@ -1,0 +1,108 @@
+# DIRECTORS-NOTE — the standing perspective for every run
+
+> **Read this first, every iteration.** It states what we are doing, what "no floats" means here, what is
+> already proved (so it is leverage, not blinders), where the open leads are, and the gate any result must
+> pass before it is promoted. The run ledger (`04-RUN-LOG.md`) is the history; this card is the *standing
+> intent*.
+>
+> **Provenance.** Added 2026-11-24 (run 116) from the CEO executive memory card, reviewed line by line against
+> the repository. The review found **one factual error**, corrected below and marked **[corrected]**; every
+> other number was confirmed and is cited to its source. A run that changes one of these numbers must update
+> this card in the same commit.
+
+## Review of the card (run 116)
+
+| claim | verdict | source |
+| --- | --- | --- |
+| score `22.218056945`, 553 rows below `ceil(√n)` | confirmed | `sqscore.py` `guard()` |
+| 447 rows tied to `L = k` (the standard grid), 30 bands `k = 3..32` | confirmed (447 includes n = 1; 446 at n >= 2; 30 frontier bands, band 32 clamped at n = 1000) | doc 75 §2, run 115 |
+| 303 tied / 21 ahead / 0 behind the Squares Project catalogue | confirmed (303 equal, 21 ahead by `0.006414`, 0 behind) | doc 75 §1 |
+| 552 rows hold standalone zero-clearance `galois-certificate/1` proofs | confirmed (552 of 553 certified; 547 of them for the first time in run 106) | `verify_certificates.py`, run 106 |
+| 613 core decision functions, 0 float offenders | confirmed | `glm_wheels.py --audit` |
+| **"Grid-frontier rows (`n = k² − 1`) are uniformly compressed"** | **WRONG** — the frontier row of band k is `m* = k² − j*` with `j* = 18…26` at `k >= 21` (e.g. band 23: `m* = 509`, `j* = 20`; band 32: `m* = 998`, `j* = 26`). `n = k² − 1` is not a frontier row anywhere in the table | doc 75 §2 |
+| free cell `0.9994–0.9999` at the compressed frontier | confirmed (and equal to `1 − (k−L)/k` within `6e-4` in ten of eleven bands) | doc 75 §3, `void_insert.py` |
+| real corner notches `k = 23` (`0.7534`) and `k = 32` (`0.7171`); `n = 999` costs `+0.120` | confirmed (`+0.1195` for the k = 32 next row) | doc 75 §2–§3 |
+| Block45 / Block45Half / ridge beat the grid on 369 already-beaten counts, and come within `+0.0711` on n = 212, 242, 243, 244 | confirmed (0 of 444 unbeaten rows beaten; median deficit `+0.6066`) | doc 75 §6, `grid_families.py` |
+| `1e-9` face-squeeze saved `−7.89e-9`, `submission_candidate.csv` only | confirmed | run 108 |
+| fixed-box `3×3` (`6 → 7`) block swaps blocked by `s(7) = 3` | confirmed (short by `2.2e-5…8.9e-5`, proved impossible) | doc 75 §5, `block_swap.py` |
+
+**[corrected] in §2 below.** The compression statement is about the *frontier pose* of each band, not about
+`n = k² − 1`, and its operative content is: the largest square that fits that pose's free space is
+`0.9994–0.9999` of a cell, i.e. every void in it is a squashed unit cell.
+
+---
+
+# CEO EXECUTIVE MEMORY CARD — SQUARES IN SQUARES (GLM)
+
+**First-Time Orientation — What We Are Doing:**
+We are developing the **Geometric Language Machine (GLM)** and testing it on the 1,000-row *Squares in
+Squares* packing problem (`n = 1..1000` unit squares in a minimal square of side `L`). The Kaggle leaderboard
+score is a **public, falsifiable proof of progress — not a ceiling**: better packings exist, and our goal is to
+discover genuine geometric/algebraic structures that beat our current `22.218056945` baseline (`553` rows
+below `ceil(√n)`, `447` rows currently tied to the `L = k` standard grid; `30` bands `k = 3..32`; `303` tied
+and `21` ahead of the Squares Project catalogue, `0` behind).
+
+## 1. CORE OPERATING DEFINITION: "NO FLOATS" (GLM NATIVE WORK)
+- **What "No Floats" Means Here:** Any operation that introduces rounding drift **or** hides its reasoning
+  behind an external black-box dependency. Every core calculation must **"show its work"** explicitly and
+  immediately using native exact structures (`fractions.Fraction`, integer arithmetic, `math.isqrt`, exact
+  algebraic fields `Q`, `Q(√2)`, `Q(√5)`, `Q(√7)`).
+- **Discovery vs. Proof:** Untrusted float heuristics may explore freely to propose leads, **never** to claim a
+  result — every candidate must translate into exact/interval proof before promotion. Discovery instruments
+  live outside the audit by design (`relax_angles.py`, `pattern_seeds.py`, `void_insert.py`, `block_swap.py`,
+  `grid_families.py`, `resqueeze.py`); the certification side (`true_geom`, `verify_certificates`,
+  `interval_verifier`, `semantic_pack`, `sqscore`) stays float-free and byte-audited.
+
+## 2. WHAT IS PROVED SO FAR (USE AS LEVERAGE, NOT BLINDERS)
+- **Certified Ground Truth:** `552` rows hold standalone zero-clearance `galois-certificate/1` proofs
+  (`verify_certificates.py`); `613` core decision functions pass `glm_wheels --audit` (`0` float offenders).
+- **Structural Measurements (`docs 72–75`):**
+  - *All-lattice ceiling (`T1`):* any pure integer-lattice pose needs `L ≥ ceil(√n)`; beating a grid row
+    requires tilted cells or non-lattice seams.
+  - *Solid-wall fringe cap (`T2`):* a one-cell tilted fringe glued onto a solid upright wall holds at most
+    `floor(L)²`.
+  - *Compression wall (`k >= 21`):* **[corrected]** the *frontier pose* of a band (`m* = k² − j*`,
+    `j* = 18…26`) is a uniformly compressed lattice — the largest square fitting its free space is
+    `0.9994–0.9999` of a cell, equal to `1 − (k−L)/k` within `6e-4` in ten of eleven bands — so every void in
+    it is a squashed unit cell, not a hole. **Two bands are real corner notches:** `k = 23` (`0.7534` hole)
+    and `k = 32` (`0.7171` hole; its next row `n = 999` costs only `+0.120` to crack, the cheapest large-band
+    price in the table).
+  - *Existing family baseline:* `Block45`, `Block45Half` and `ridge` beat the grid on `369` already-beaten
+    counts and come within **`+0.0711`** of beating it on four near-miss rows (`n = 212, 242, 243, 244`);
+    on the `444` unbeaten rows they cover, they beat the base **zero** times (median deficit `+0.6066`, max
+    `+0.7071 = ½√2`).
+  - *Prior low-yield paths (deprioritize unless a new structural angle opens them):* `1e-9` face-squeeze
+    micro-polishing (`−7.89e-9` saved in `submission_candidate.csv`), local L-BFGS-B nudging on
+    `submission.csv` poses, fixed-box `3×3` (`6 → 7`) block swaps (`s(7) = 3`, short by `2.2e-5…8.9e-5`),
+    and unguarded angle snapping (`ε(gap)` catches model artifacts).
+
+## 3. WHERE TO AIM NEXT (OPEN LEADS FOR REAL MOVEMENT)
+1. **Dynamic Re-Squeeze Block Substitution (`run 116`):** replace `pq` cells with `pq + 1` at larger pitch
+   *while allowing the surrounding pose to expand and re-squeeze*, so compression redistributes globally
+   rather than locally. Instrument: `resqueeze.py` (patch-coordinate relaxation with a container hinge).
+2. **Notch-Band Rearrangements (`k = 23`, `k = 32`):** exploit the real `0.7534` and `0.7171` corner holes
+   (`n = 999`, the k = 32 next row, is the lowest-cost large-band breakthrough at `+0.120`).
+3. **Near-Misses & Interior Seams:** push the four `+0.0711` `Block45` near-misses (`n = 212, 242, 243, 244`)
+   and **interior tilted seams** (`(Z + 4/7)²` / rational-sheared interfaces where tilted cells interlock
+   inside a seam rather than on a solid wall), and unify `verify_certificates.py` (exact contact) with
+   `interval_verifier.py` (rational enclosure).
+4. **The guaranteed payer:** the `553` beaten rows leave `15.02` score unclaimed below them; a uniform `1 %`
+   capture is `+0.15023` and `5 %` is `+0.75113` — the whole `0.163635` gap to the reported leader is `1.1 %`
+   of that room, and it needs no new construction, only a tighter polish than the one that produced the
+   record. Grid-row beats (all 30 band tops by inheritance) are worth `+0.23251` in total.
+
+## 4. PROMOTION GATE (C1–C4)
+Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
+- **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational
+  interval proof (`interval_verifier.py`).
+- **C2 (Margin):** strictly smaller `40-digit` true side (`true_geom.py`: `L_true < L_delivered`, `0`
+  overlap), and above the ε/rendering noise floor so the metric actually moves.
+- **C3 (Integrity):** `sqscore` + `record_guard.py` + `glm_wheels --audit` (`0` floats) all green.
+- **C4 (Honest Ledger):** log exact numbers, wins **and refusals**, cleanly — a refused candidate is a
+  result and is recorded as one.
+
+## 5. HOW TO USE THIS CARD IN A RUN
+1. Open with the orientation above; re-read §2 before proposing a route (most routes are already priced).
+2. Pick from §3, or bring a new structural angle and say which priced route it changes.
+3. Every run ends with: exact numbers, what improved, what was refused and why, and a fresh §3 if the
+   landscape moved. If a number in §1–§3 changed, update this card in the same commit.

@@ -3166,3 +3166,35 @@ Checks: `void_insert --selftest` 2 controls; `published_census` reproduces `22.2
 
 Entries `75-GRID-WALL-CENSUS.md` (rewritten with the 30-band table, §5 block substitution, §6 families);
 records `31`–`75`.
+
+## Run 116 — the standing card is placed (reviewed), and the re-squeeze lead is opened and controlled
+
+**Deliverable of the request.** `DIRECTORS-NOTE.md` sits at the project top level and is the first pointer in
+`README.md`, `STATUS.md` and `00-OVERVIEW.md`. It states the orientation, the "no floats" operating definition
+(discovery proposes, proof promotes), the proved leverage, the open leads and the C1–C4 gate, and it carries a
+review table: every number was checked against the repository. **One factual error was corrected** — the
+compression statement concerns the band's frontier pose (`m* = k^2 - j*`, `j* = 18…26` at k >= 21), not
+`n = k^2 - 1`, which is a frontier row nowhere in the table. Everything else (552/553 certified, 613 audited
+functions, 447 grid rows, 30 bands, 303 equal / 21 ahead, free cell 0.9994–0.9999, notches 0.7534 and 0.7171,
+369 family counts, `+0.0711` near-misses, `-7.89e-9` face squeeze) was confirmed with its source.
+
+**Development step: `resqueeze.py`.** Insert a cell at the exact free-space point, then patch-coordinate
+relaxation with overlapping 4.5-wide patches, sweeps in random order and a **monotone acceptance test**, the
+container at `k`. The control (pose alone, no insertion) was run first and paid twice: a first version hinged
+the box at `k - 1e-3` and **destroyed a legal pose** (pen 0.59, 234 violations) — the target is `k`, and the
+margin was an invented impossibility; with that fixed the control reads pen `2.4e-14` (max contact `7e-8`),
+side `26.0000000013`, 76 violations, establishing the floor (~`1e-8`) and the substantive finding that
+**penalty descent inflates the pose to `k`**, spending the frontier's own `delta` instead of gaining room.
+
+Runs with the insertion: k = 26 (sliver) ends at side `26.0000000013`, 79 violations, max penetration `4.6e-6`
+— the sliver restated to `1e-9`; k = 32 (notch) ends at side **`31.996876`**, `3.1e-3` *inside* `k` and worth
+`9.9e-5`, but with 17 violations at max penetration `9.4e-2`, having accepted `1/168` then `0/168` patch moves
+before jamming. So the notch is **real room** — the side genuinely goes below `k` — and the obstruction is
+combinatorial (17 pairs), not spatial. No beat, no row changed. The named next step is a hard side projection
+(exact container, no penalty) plus contact-graph repair on the jamming pairs.
+
+Checks: control run recorded above; `published_census`, `block_swap`, `grid_families`, `void_insert --selftest`,
+`sqscore` guard and `record_guard.py` all re-run green; README/STATUS history line byte-identical. No row
+changed, no score claimed, `submission.csv` untouched.
+
+Entries `DIRECTORS-NOTE.md` (new, top level), `75-GRID-WALL-CENSUS.md` §10; records `31`–`76`.

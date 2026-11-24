@@ -1,0 +1,46 @@
+[
+ {
+  "k": 26,
+  "frontier_n": 655,
+  "n": 655,
+  "insert_side": 0.0,
+  "L_frontier": 25.999711088243103,
+  "pen_final": 2.4143876419645648e-14,
+  "side_float": 26.00000000132586,
+  "side40": "26.00000000132585821722780372142460596278",
+  "violations": 76,
+  "grid_k": 26,
+  "beat": false,
+  "kind": "control"
+ },
+ {
+  "k": 26,
+  "frontier_n": 655,
+  "n": 656,
+  "insert_side": 0.9997974006856012,
+  "L_frontier": 25.999711088243103,
+  "pen_final": 2.3235299964227262e-11,
+  "side_float": 26.00000000132586,
+  "side40": "26.00000000132585758710197519778940807573",
+  "violations": 79,
+  "grid_k": 26,
+  "beat": false,
+  "seconds": 181.1,
+  "kind": "insert"
+ },
+ {
+  "k": 32,
+  "frontier_n": 998,
+  "n": 999,
+  "insert_side": 0.8390025880760795,
+  "L_frontier": 31.986238620411555,
+  "pen_final": 0.026511034257161094,
+  "side_float": 31.996875960036057,
+  "side40": "31.99687596003605622186409680131440612314",
+  "violations": 17,
+  "grid_k": 32,
+  "beat": false,
+  "seconds": 265.4,
+  "kind": "insert"
+ }
+]
