@@ -3411,3 +3411,31 @@ non-closure perturbation over 20 rows at ~10 s each.
 **Checks.** round trip exact; both row probes reported with verdicts; verify 10 and audit clean; anchor_chain
 --selftest, sqscore, record_guard, void_insert --selftest, glm_wheels --audit green; history identical; no row
 changed, no score claimed. Entries doc 81 (new).
+
+## Run 123 — the non-closure perturbation test: no tail
+
+**Request.** Run the cheap test doc 81 named: a non-closure perturbation (free positions at ~1e-6 slack) across
+20 of the 447 unbeaten rows at ~10 s each, and report the measured dL distribution with an honest verdict.
+
+**Instrument.** `scripts/perturb.py` (new): Decimal-40 geometry from true_geom, three move families (jitter,
+inward pull of a container-extreme cell, two-cell slide), deltas 1e-6..1e-3, plateau moves kept with a 0.02 drift
+cap, neighbour-window pair tests. Only `float(dL)` is floating, for reporting.
+
+**Controls first, because a null needs them.** Inflating an n=16 grid by 0.2 % (6.0e-3 of slack) is closed to
+5.0e-3; 0.001 % (3.0e-5) to 8e-6; 0.00001 % (3e-7) to 0. The route is live and its sensitivity floor is ~1e-5.
+
+**Result.** 20 rows evenly spaced across the 447, 10 s each: **dL = 0 on 20/20**, 0 violations, 339-3771 moves
+per row. Distribution min = median = max = 0; rows at or above the legal-gap floor: 0/20; score value 0. Pushing
+deltas down to 1e-10 on three rows still gives 0.
+
+**Why, measured.** The delivered poses have **no touching contacts** and a **minimum pair gap of 1.17e-10 to
+1.53e-10**: they are grids inflated by rounding noise, so the entire internal headroom is ~1e-10 (worth 1e-11 of
+score) and any real improvement needs the contact topology to change — a global combinatorial search, which
+neither this move set, nor the run-117 clamps, nor the closure grammar can express.
+
+**Verdict.** No tail; do not scale. The 447 rows need a different packing structure (the resqueeze/block-swap
+family), scored by measured dL per row before being scaled.
+
+**Checks.** perturb --selftest and --control green; 20-row run and the 1e-10 ladder as above; tightness measured
+at 40 digits; sqscore, record_guard, void_insert --selftest, anchor_chain --selftest, glm_wheels --audit green;
+history identical; no row changed, no score claimed. Entry doc 82 (new).
