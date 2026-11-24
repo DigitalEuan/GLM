@@ -43,6 +43,7 @@ import json
 import os
 import sys
 import time
+from decimal import Decimal, localcontext
 from fractions import Fraction as F
 from math import isqrt
 
@@ -56,6 +57,7 @@ import rat47 as R                   # noqa: E402
 import qsqrt2 as Q                  # noqa: E402
 import face_slide as FSL            # noqa: E402
 import verify_certificates as VC    # noqa: E402
+import true_geom as TG              # noqa: E402
 
 Q2 = C.Q2
 HALF = F(1, 2)
@@ -343,6 +345,105 @@ def run_analyse(targets=TARGETS):
     return out
 
 
+# ------------------------------------------------------------------ the containment guard
+def gaps_of(n, rows=None):
+    """The row's snapping error: `(count of non-word angles, largest gap in radians)`."""
+    rows = rows or C.load_rows()
+    gaps = [R.snap(t)[3] for _x, _y, t in rows[n]]
+    return sum(1 for g in gaps if g != 0), max(gaps)
+
+
+def eps_of(n, rows=None):
+    """`epsilon(gap) = 2 max gap`: a rigorous bound on `| true side - model side |`.
+
+    Every square's half-extent is `(|cos t| + |sin t|)/2`, whose derivative in `t` is at most 1
+    in absolute value, so moving `t` to its word changes that cell's half-extent by at most the
+    gap. The side is `max(x + ex) - min(x - ex)`, so each term moves by at most the largest gap
+    and the side by at most twice it. Coarse on purpose: it must never under-estimate.
+    """
+    _cnt, gap = gaps_of(n, rows)
+    return 2 * F(gap)
+
+
+def q_dec(x, digits=30):
+    """A `Q(sqrt 2)` value as a decimal string at `digits` places, by integer arithmetic."""
+    v = F(x.a) + F(x.b) * sqrt2_frac()
+    q = v * 10 ** digits
+    if q >= 0:
+        scaled = (q.numerator + q.denominator // 2) // q.denominator
+    else:
+        scaled = -((-q.numerator + q.denominator // 2) // q.denominator)
+    sign = "-" if scaled < 0 else ""
+    whole, frac = divmod(abs(scaled), 10 ** digits)
+    return f"{sign}{whole}.{frac:0{digits}d}"
+
+
+def word_angle(w):
+    """The exact angle of a word, as `k pi / 4` at the working precision (no float)."""
+    from decimal import Decimal as D
+    pairs = [(Q2(F(1)), Q2(F(0))), (H, H), (Q2(F(0)), Q2(F(1))), (-H, H),
+             (Q2(F(-1)), Q2(F(0))), (-H, -H), (Q2(F(0)), Q2(F(-1))), (H, -H)]
+    for k, p in enumerate(pairs):
+        if w[0] == p[0] and w[1] == p[1]:
+            return D(k) * TG.PI / D(4)
+    raise AssertionError(("not a word", str(w[0]), str(w[1])))
+
+
+def dec_of_fraction(f):
+    """A rational as a decimal string at the working precision (no float anywhere)."""
+    with localcontext() as ctx:
+        ctx.prec = TG.DPS
+        return str(+Decimal(f.numerator) / Decimal(f.denominator))
+
+
+def true_check(state, words, angles=None):
+    """The true geometry of a `Q(sqrt 2)` pose at 40 digits (no float).
+
+    `angles` are the row's *stored* angles: a translation keeps every angle, so the true side of
+    the moved row is measured there. When `angles` is `None` the pose is a re-orientation and is
+    measured at its exact word directions `(c, s)` instead.
+    """
+    if angles is not None:
+        st = [(q_dec(x), q_dec(y), dec_of_fraction(F(t)))
+              for (x, y), t in zip(state, angles)]
+        return TG.check(st)
+    st = [(q_dec(x), q_dec(y), q_dec(w[0], 30), q_dec(w[1], 30))
+          for (x, y), w in zip(state, words)]
+    return TG.check_cs(st)
+
+
+def containment(n, model_L, state, words, Ldel, rows=None, angles=None):
+    """Bound a snapped-model candidate against the true geometry before any promotion.
+
+    The model side is the gate's exact side for the pose whose angles are the eight words; the
+    true side is the same pose measured at its word angles at 40 digits. `epsilon(gap)` bounds
+    the difference, so a candidate is promoted only when
+
+      * the two agree within `epsilon` (the snap is not hiding a larger effect),
+      * the pose is overlap-free at 40 digits,
+      * and the *true* side is strictly below the delivered true side.
+
+    That last condition is what run 109 lacked: it compared the model side with the delivered
+    side and promoted a win the real geometry did not have.
+    """
+    eps = F(eps_of(n, rows))
+    epsd = Decimal(eps.numerator) / Decimal(eps.denominator)
+    if angles is None and rows is not None:
+        angles = [t for (_x, _y, t) in rows[n]]
+    chk = true_check(state, words, angles)
+    Ltrue = chk["side"]
+    model = Decimal(q_dec(model_L, 20))
+    Ld = Decimal(q_dec(Ldel, 20)) if hasattr(Ldel, "a") else Decimal(str(F(Ldel)))
+    out = {"model": q_dec(model_L, 12), "true": str(+Ltrue), "eps": str(eps),
+           "gap_ok": abs(Ltrue - model) <= epsd,
+           "overlap_free": not chk["violations"],
+           "delivered_true": str(+Ld),
+           "true_gain": str(+(Ld - Ltrue))}
+    out["beats_true"] = bool(Ltrue < Ld)
+    out["promotable"] = bool(out["gap_ok"] and out["overlap_free"] and out["beats_true"])
+    return out
+
+
 # ------------------------------------------------------------------ part 2: coupled moves
 def sub_clusters(pf, wf, con, maxk=MAXK, cap=SET_CAP):
     """Connected sub-clusters (contact graph) of 2..maxk cells that include a wall cell."""
@@ -396,7 +497,7 @@ def rotate_set(pf, wf, cells, k):
     return out, words
 
 
-def candidate(pf, wf, st, words, tag, Ldel=None):
+def candidate(pf, wf, st, words, tag, Ldel=None, angles=None):
     """Gate a candidate at its own box, squeeze it, and certify it only if it beats `Ldel`.
 
     Certificates are the expensive part, so screening runs without one (`keep_cert=False`); a
@@ -419,6 +520,8 @@ def candidate(pf, wf, st, words, tag, Ldel=None):
     rec["L_final_obj"] = g2["L"]
     rec["beats"] = False if Ldel is None else bool(g2["L"] < Ldel)
     if rec["beats"]:
+        rec["containment"] = containment(len(pf), g2["L"], st2, words, Ldel, angles=angles)
+        rec["promotable"] = rec["containment"]["promotable"]
         g3 = FSL.gate_state(len(st2), st2, words, keep_cert=True)
         cert = g3["certificate"] or {}
         rec["certificate"] = cert.get("status")
@@ -447,6 +550,7 @@ def search_row(n, rows=None, maxk=MAXK, cap=SET_CAP):
     rec["clean"] = True
     rec["L_clean"] = str(side_of(pf, wf))
     con = contacts(pf, wf)
+    angle_row = [t for (_x, _y, t) in rows[n]]
     sets = sub_clusters(pf, wf, con, maxk=maxk, cap=cap)
     rec["clusters"] = len(sets)
     for cells in sets:
@@ -456,19 +560,21 @@ def search_row(n, rows=None, maxk=MAXK, cap=SET_CAP):
             if note is not None or T is None or T.sign() <= 0:
                 continue
             c = candidate(pf, wf, move(pf, wf, cells, d, T), wf,
-                          {"kind": "rigid", "cells": cells, "dir": kind, "t": str(T)}, Ldel)
+                          {"kind": "rigid", "cells": cells, "dir": kind, "t": str(T)}, Ldel,
+                          angles=angle_row)
             rec["attacks"].append(c)
             rec["kinds"]["rigid"] = rec["kinds"].get("rigid", 0) + 1
-            if c.get("beats"):
+            if c.get("promotable"):
                 rec["wins"].append(c)
     for cells in sets:
         for k in (1, 2):
             st, words = rotate_set(pf, wf, cells, k)
             c = candidate(pf, wf, st, words,
-                          {"kind": "reorient", "cells": cells, "turn": k * 45}, Ldel)
+                          {"kind": "reorient", "cells": cells, "turn": k * 45}, Ldel,
+                          angles=None)
             rec["attacks"].append(c)
             rec["kinds"]["reorient"] = rec["kinds"].get("reorient", 0) + 1
-            if c.get("beats"):
+            if c.get("promotable"):
                 rec["wins"].append(c)
     for side in SIDES:
         pin_map = pins(pf, wf, side, con)
@@ -487,7 +593,7 @@ def search_row(n, rows=None, maxk=MAXK, cap=SET_CAP):
                       for i, p in enumerate(pf)]
                 c = candidate(pf, wf, st, wf,
                               {"kind": "trade", "wall": wc, "pin": b["cell"],
-                               "side": side, "t": str(T)}, Ldel)
+                               "side": side, "t": str(T)}, Ldel, angles=angle_row)
                 rec["attacks"].append(c)
                 rec["kinds"]["trade"] = rec["kinds"].get("trade", 0) + 1
                 if c.get("L_final") and F(c["L_final"]) < Ldel:
@@ -496,6 +602,8 @@ def search_row(n, rows=None, maxk=MAXK, cap=SET_CAP):
     bestv = min((a["L_final_obj"] for a in ok if a.get("L_final_obj")), default=None)
     rec["best"] = None if bestv is None else q_st(bestv)
     cert = [a for a in rec["attacks"] if a.get("certificate") == "verified"]
+    rec["model_wins"] = sum(1 for a in rec["attacks"] if a.get("beats"))
+    rec["rejected"] = sum(1 for a in rec["attacks"] if a.get("beats") and not a.get("promotable"))
     rec["tally"] = {"attacks": len(rec["attacks"]), "legal": len(ok),
                     "verified": len(cert), "wins": len(rec["wins"])}
     rec["verdict"] = "improves" if rec["wins"] else "no-improvement"
@@ -516,6 +624,7 @@ def trades_row(n, rows=None):
             rec["verdict"] = "repair-stalled"
             return rec
     con = contacts(pf, wf)
+    angle_row = [t for (_x, _y, t) in rows[n]]
     for side in SIDES:
         d = K.inward(side)
         for wc, blocked in pins(pf, wf, side, con).items():
@@ -547,6 +656,43 @@ def run_trades(targets=TARGETS):
         out["rows"][str(n)] = rec
         print(f"  n={n}: {rec['verdict']} tally={rec.get('tally')} best={rec.get('best')}")
     out["seconds"] = str(F(time.time() - t0).limit_denominator(100))
+    return out
+
+
+def run_guard(targets=TARGETS):
+    """Part 2's audit: bound every recorded model win against the true geometry, and the bars."""
+    rows = C.load_rows()
+    led = json.load(open(OUT)) if os.path.exists(OUT) else {}
+    out = {"rows": {}, "recorded": [], "seconds": None}
+    t0 = time.time()
+    for n in targets:
+        cnt, gap = gaps_of(n, rows)
+        eps = eps_of(n, rows)
+        Ldel = Q2(F(str(json.load(open(TAB), parse_float=str)[str(n)]["L"])))
+        bar = Ldel - Q2(eps)             # the model side must be below this to be promotable
+        rec = {"n": n, "non_word": cnt, "gap": str(gap), "eps": str(eps),
+               "delivered_true": str(Ldel), "model_bar": str(bar)}
+        out["rows"][str(n)] = rec
+        print(f"  n={n:4d}: {cnt:3d} non-word, gap {gap}, eps {q_dec(Q2(eps), 18)}, "
+              f"L_true {q_dec(Ldel, 12)}, model bar {q_dec(bar, 12)}")
+    for n, r in (led.get("search", {}).get("rows", {}) or {}).items():
+        for w in r.get("wins", []):
+            if not w.get("state"):
+                continue
+            st = [(q_parse(a), q_parse(b)) for a, b in w["state"]]
+            _pf, wf, _g = state_of(int(n), rows)
+            Ldel = Q2(F(str(json.load(open(TAB), parse_float=str)[n]["L"])))
+            con = containment(int(n), q_parse(w["L_final"]), st, wf, Ldel, rows,
+                              angles=None if w.get("move", {}).get("kind") == "reorient"
+                              else [t for (_x, _y, t) in rows[int(n)]])
+            out["recorded"].append({"n": int(n), "move": w.get("move"), **con})
+            print(f"  recorded n={n}: model {con['model']} true {con['true']} eps {con['eps']}"
+                  f" -> gap_ok {con['gap_ok']} overlap_free {con['overlap_free']}"
+                  f" beats_true {con['beats_true']} PROMOTABLE {con['promotable']}")
+    out["seconds"] = str(F(time.time() - t0).limit_denominator(100))
+    out["verdict"] = ("no recorded model win is promotable"
+                      if not any(r["promotable"] for r in out["recorded"]) else "a win survives")
+    print("  guard:", out["verdict"])
     return out
 
 
@@ -599,7 +745,26 @@ def selftest():
           "every pair legal, and the gate certifies it at clearance 0.")
     print("control 3 -- re-orientation: 45 + 45 = 90, 0 + 90 = 90 and 0 + 180 = 180 exactly in "
           "Q(sqrt 2), and a quarter turn about the origin maps (2, 0) to (0, 2).")
-    print("semantic_pack: OK (3 controls)")
+    # control 4 -- the containment guard: eps is twice the gap, and a model win inside that
+    # budget is refused even when the gate certifies it.
+    fake = {7: [(F(0), F(0), F(0)), (F(1), F(0), F(0)),
+                (F(2), F(0), F(3141592653589793, 4000000000000000) + F(1, 100))]}
+    cnt, gap = gaps_of(7, fake)
+    assert cnt == 1 and F(gap) > 0, (cnt, gap)          # one angle is off its word
+    eps = eps_of(7, fake)
+    assert eps == 2 * F(gap), (eps, gap)                # epsilon is exactly twice the gap
+    st = [(Q2(F(1, 2)), Q2(F(1, 2))), (Q2(F(3, 2)), Q2(F(1, 2)))]
+    words = [(Q2(F(1)), Q2(F(0))), (H, H)]
+    con = containment(7, Q2(F(2) - 2 * eps), st, words, Q2(F(2)), fake)
+    assert con["gap_ok"] is False, con          # a gain of 2 eps is outside the budget
+    assert con["promotable"] is False, con
+    con2 = containment(7, Q2(F(2) - eps / 2), st, words, Q2(F(2)), fake)
+    assert con2["gap_ok"] is True, con2         # inside the budget ...
+    assert con2["beats_true"] is False and con2["promotable"] is False, con2   # ... but no gain
+    print("control 4 -- the containment guard: epsilon is exactly twice the row's largest angle "
+          "gap; a gain twice epsilon fails the budget, and a gain of eps/2 passes it yet is still "
+          "refused because the true geometry at 40 digits is not below the delivered side.")
+    print("semantic_pack: OK (4 controls)")
 
 
 # ------------------------------------------------------------------ the run
@@ -630,6 +795,9 @@ def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if "--selftest" in argv:
         selftest()
+        return
+    if "--guard" in argv:
+        merge("guard", run_guard())
         return
     if "--trades" in argv:
         merge("trades", run_trades())

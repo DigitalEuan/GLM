@@ -2897,3 +2897,49 @@ README/STATUS run-history line byte-identical.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
 Entries `70-RELATIONAL.md`; records `31`–`69`.
+
+## Run 110 — the table is reconciled, the ε guard is in place, and free angles buy nothing legal
+
+Run 109 left two loose ends: the table's per-row sides did not agree with the submission, and no angle
+had ever been allowed to move. Both are closed, with three new float-free instruments
+(`true_geom.py` 7, `reconcile_table.py` 6, `semantic_pack.py` 36 decision functions) and one
+discovery-only one (`relax_angles.py`, deliberately outside the audit).
+
+**1. `table.json` reconciled.** `reconcile_table.py` compares every row's `L` with the true side of
+`submission.csv` at 40 decimal digits (`Decimal` `cos`/`sin` from Taylor series, exact reduction — no
+float). **357 of 1000 rows were stale** by more than `1e−9`, 343 by more than `1e−3`, the largest by
+`9.0e−2` (n = 696). The two totals explain each other exactly: `Σ L_table/√n − 1 = 22.645990612927686`
+(run 108's number) and `Σ L_true/√n − 1 = 22.218056944873789` (`sqscore`'s delivered score), differing
+by `0.427933668053897 = Σ (L_table − L_true)/√n`. There was never a scoring discrepancy — the first
+number was the score of the *model* table. `--write` set `L` to the true side, kept `L_model`, moved the
+provenance to `table.meta.json` (a `_meta` key would break `face_slide.score_of`), and the re-audit
+reports 0 stale rows and a gap of 0 with `sqscore` and `record_guard` green.
+
+**2. The ε(gap) containment guard.** `ε = 2·max|θ − word(θ)|` bounds `|true side − model side|`
+(the half-extent is 1-Lipschitz in the angle and the side is a difference of extrema). A candidate is
+promotable only if it agrees with the true side within ε, is overlap-free at 40 digits, and its true
+side is strictly below the row's true delivered side. The bars are now n = 11 `3.871321392`, 17
+`4.668646323`, 18 `4.819512197`, 29 `5.926803177`, 330 `18.678566016`. Run 109's artifact is refused
+automatically (model `18.692487647`, true `18.692915843`, ε `1.38e−2`: inside the budget, but it has
+overlaps at true angles and does not beat the delivered true side); the rigid/re-orientation searches on
+11/17/29 re-run with the guard give 0 model wins and 0 promotions.
+
+**3. Coupled position-and-angle relaxation.** `relax_angles.py` frees every `(Δx, Δy, Δθ)`, relaxes the
+whole row by L-BFGS-B on `side + 1e6·Σ penetration²` (3 restarts from the delivered pose), projects back
+to feasibility by minimising overlap alone, and measures survivors at 40 digits. Result: every shrunk
+state has 11–41 overlaps, and the best **legal** state is worse than delivered on all four rows —
+n = 11 `+9.3e−8`, 17 `+3.7e−7`, 18 `+2.8e−7`, 29 `+2.0e−3`. The delivered packings sit on the
+feasibility boundary; the three small rows are locally optimal to `~1e−7` under coupled moves, n = 29
+only to `2e−3`. None of the four is near word-exact (offsets 0.084–0.364 rad), so nothing here could be
+certified even if it had improved — discovery and certification stayed separate.
+
+Checks: `true_geom --selftest` 3 controls; `reconcile_table --selftest` 2; `relax_angles --selftest` 2;
+`semantic_pack --selftest` 4; `face_slide` 4; `observer_chain` 6; `cand106` 5; `cand105` 5; `rat47` 4;
+`rat47pos` 5; `rat47law` 5; `landscape65` 6; `qsqrt2` 11; `verify_certificates --selftest` 11
+mutations; `--certificates` 7 shipped; `glm_wheels --selftest` 32; `--audit` **596 functions, 0 naming
+`float`** (semantic_pack 36, face_slide 27, true_geom 7, reconcile_table 6); `sqscore` guard OK
+22.218056945 / 553 beats; `record_guard.py` OK; README/STATUS run-history line byte-identical.
+
+**No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
+
+Entries `71-RECONCILE-AND-RELAX.md`; records `31`–`70`.
