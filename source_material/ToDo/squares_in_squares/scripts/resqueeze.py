@@ -23,6 +23,7 @@ import json
 import math
 import os
 import sys
+import time
 
 import numpy as np
 
@@ -35,6 +36,7 @@ from void_insert import load_pose, pen_vec, hmax_scan, refine, frontier_rows  # 
 
 TAB = os.path.join(ROOT, "workspace/submission/table.json")
 OUT = os.path.join(ROOT, "workspace/push/resqueeze116.json")
+OUT_CORRECTED = os.path.join(ROOT, "workspace/push/resqueeze116_corrected.json")
 
 
 def total_pen(X, Y, T, eps=1e-9, reach=1.9):
@@ -180,7 +182,108 @@ def run_band(k, m, sweeps=4, restarts=2, seed=116, size=3.0, step=1.5, margin=0.
     return rec
 
 
+def run_band_corrected(k, m, seconds=300.0, insert=True, seed=116, label=""):
+    """Run 116's band test on the CORRECTED driver (`structure.py`).
+
+    Run 116's own `patches` / `solve_patch` carry the two defects doc 83 §2
+    records: only patch-vs-*outside* pairs are penalised (so a patch can sit on
+    itself and report zero), and `while x < hi_x` returns an **empty** patch
+    list for a flat pose, which relaxes nothing.  The protocol here is run
+    116's -- insert one cell at the best free point, hinge the container at
+    `k`, judge at 40 digits -- with three corrections:
+
+      * `structure.patches` (inclusive bounds, never empty),
+      * `structure.solve_patch_w` (intra-patch pairs included),
+      * `structure.legalise`, the step run 116 lacked, so a pose left illegal
+        by the relaxer's 1e-9 tolerance is expanded to a legal one instead of
+        being reported as a jam of the instrument's own making.
+
+    The verdict is run 116's: legal at 40 digits with side strictly below `k`.
+    A pose reported legal has passed `true_geom.check`; one reported screened is
+    illegal by more than 1e-6, five orders above rounding, and is not counted as
+    a candidate.  `legalise_note` names which path a null took.
+
+    A band counts as a **beat** only if the pose is legal at 40 digits and its
+    side is strictly below `k`.  `budget_limited` records whether the wall
+    clock stopped the protocol before it had run its course.
+    """
+    import structure as ST                      # lazy: structure imports this module
+    per = SQ.load()
+    x, y, t = load_pose(m)
+    Lf = SQ.extent(per[m])
+    if insert:
+        st, box = hmax_scan(x, y, t, grid=110, angles=21)
+        h, cx, cy, th = refine(x, y, t, st, box)
+        X, Y, T = np.append(x, cx), np.append(y, cy), np.append(t, th)
+    else:
+        X, Y, T, h = x.copy(), y.copy(), t.copy(), 0.0
+    kk = SQ.grid(m + 1)
+    t0 = time.monotonic()
+    deadline = t0 + seconds
+    rng = np.random.RandomState(seed)
+    stage = "budget expired before a squeeze"
+    for outer in range(3):
+        if time.monotonic() > deadline:
+            stage = f"budget expired after {outer} squeeze/project cycles"
+            break
+        X, Y, T = ST.relax(X, Y, T, kk, sweeps=3, deadline=deadline, rng=rng,
+                           wall_w=1e5)
+        s40, viol, X, Y, T = ST.project(X, Y, T, kk, deadline, rng, screen=True)
+        if viol == 0:
+            stage = f"legal after {outer + 1} squeeze/project cycles"
+            break
+    else:
+        stage = "3 squeeze/project cycles without a legal pose"
+    # The same instrument the 20-row run uses: an exact O(n) side, the O(n^2)
+    # pair pass only where it can change a verdict, and an exact early exit once
+    # an expansion reaches k (the ladder is monotone, so no later rung can beat).
+    s40, viol, Xb, Yb, Tb, spill, note = ST.legalise(X, Y, T, ceiling=kk)
+    crossed = spill is not None and spill < 0
+    if crossed:
+        stage = f"{stage}; {note}"
+    pen, pmax = total_pen(Xb, Yb, Tb)
+    side = float(s40)
+    return {"k": k, "frontier_n": m, "n": len(Xb), "insert_side": 2 * h,
+            "L_frontier": Lf, "pen_final": pen, "pen_max": pmax,
+            "side40": str(+s40), "side_float": side, "violations": viol,
+            "grid_k": kk, "dl_below_k": (kk - side) if viol == 0 else None,
+            "dl_vs_frontier": (Lf - side) if viol == 0 else None,
+            # The no-insert control already has `m` cells, so a side below `k`
+            # is not a beat; only an inserted pose is scored.
+            "beat": bool(insert and viol == 0 and side < kk - 1e-12),
+            "legalise_spill": spill, "legalise_crossed_k": crossed,
+            "legalise_note": note, "stage": stage,
+            "budget_limited": stage.startswith("budget expired"),
+            "seconds": round(time.monotonic() - t0, 1), "label": label,
+            "driver": "corrected (structure.py)"}
+
+
+def main_corrected(argv):
+    opts = dict(zip(argv[0::2], argv[1::2]))
+    seconds = float(opts.get("--seconds", 300))
+    per = SQ.load()
+    fr = dict(frontier_rows(per))
+    bands = [(26, False, "control: pose alone, no insert"),
+             (26, True, "insert one cell"),
+             (32, True, "insert one cell")]
+    out = []
+    for k, ins, label in bands:
+        print(f"  corrected band k={k} (frontier {fr[k]}, {label}, "
+              f"{seconds:.0f}s) ...", flush=True)
+        rec = run_band_corrected(k, fr[k], seconds=seconds, insert=ins,
+                                 label=label)
+        print(f"  -> n={rec['n']} side40 {rec['side40']} viol {rec['violations']} "
+              f"pen {rec['pen_final']:.3e}  dL(k) {rec['dl_below_k']}  "
+              f"{'BEAT' if rec['beat'] else 'no beat'}  [{rec['stage']}, "
+              f"{rec['seconds']}s]", flush=True)
+        out.append(rec)
+    json.dump(out, open(OUT_CORRECTED, "w"), indent=1)
+    print(f"\nwrote {OUT_CORRECTED}")
+
+
 def main():
+    if "--corrected" in sys.argv[1:]:
+        return main_corrected([a for a in sys.argv[1:] if a != "--corrected"])
     per = SQ.load()
     fr = dict(frontier_rows(per))
     ks = [int(a) for a in sys.argv[1:]] or [23, 32, 26]

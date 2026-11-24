@@ -1,0 +1,27 @@
+unbeaten 447; testing 20 evenly spaced
+  n=   1 k= 1 L0=1.000000000000000000 side40=1.000000000000000000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 1.4s
+  n=  33 k= 6 L0=6.000000001666000000 side40=6.000000001666000000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.54s
+  n=  74 k= 9 L0=9.000000001778000000 side40=9.000000001778000000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 6.34s
+  n= 114 k=11 L0=11.00000000181800000 side40=11.00000000181800000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 5.05s
+  n= 159 k=13 L0=13.00000000184600000 side40=13.00000000184600000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 4.49s
+  n= 196 k=14 L0=14.00000000185800000 side40=14.00000000185800000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 4.65s
+  n= 249 k=16 L0=16.00000000187500000 side40=16.00000000187500000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 5.49s
+  n= 288 k=17 L0=17.00000000188200000 side40=17.00000000188200000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.14s
+  n= 350 k=19 L0=19.00000000189400000 side40=19.00000000189400000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 5.12s
+  n= 393 k=20 L0=20.00000000190000000 side40=20.00000000190000000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.26s
+  n= 439 k=21 L0=21.00000000190400000 side40=21.00000000190400000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.77s
+  n= 510 k=23 L0=23.00000000191400000 side40=23.00000000191400000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 4.73s
+  n= 559 k=24 L0=24.00000000191600000 side40=24.00000000191600000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.92s
+  n= 610 k=25 L0=25.00000000192000000 side40=25.00000000192000000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 4.82s
+  n= 662 k=26 L0=26.00000000192400000 side40=26.00000000192400000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.04s
+  n= 715 k=27 L0=27.00000000192600000 side40=27.00000000192600000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.08s
+  n= 770 k=28 L0=28.00000000192800000 side40=28.00000000192800000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 5.49s
+  n= 826 k=29 L0=29.00000000193200000 side40=29.00000000193200000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 6.09s
+  n= 883 k=30 L0=30.00000000193400000 side40=30.00000000193400000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.78s
+  n= 942 k=31 L0=31.00000000193600000 side40=31.00000000193600000 dL=+0.000e+00 viol None [pose at or above the bar] (none) 3.1s
+
+dL over 20 rows: min 0.000e+00 median 0.000e+00 max 0.000e+00
+  rows with any gain: 0/20
+  rows legal and improving: 0
+  rows reaching the 4e-3 target: 0
+wrote /workspace/chats/4f844fe855227d42b936412b/source_material/ToDo/squares_in_squares/workspace/push/structure124.json

@@ -68,14 +68,41 @@ def load_pose(n):
     X = np.array([s[0] for s in state])
     Y = np.array([s[1] for s in state])
     T = np.array([s[2] for s in state])
-    chk = TG.check([(str(a), str(b), str(c)) for a, b, c in state])
-    return X, Y, T, chk["side"]
+    # The delivered side is the O(n) exact side (`true_geom.side`), not the
+    # O(n^2) pair pass: on a 999-cell row the pair pass costs 85 s and returns
+    # the same number.
+    return X, Y, T, exact_side(X, Y, T)
 
 
 def side40(X, Y, T):
     chk = TG.check([(repr(float(a)), repr(float(b)), repr(float(c)))
                     for a, b, c in zip(X, Y, T)])
     return chk["side"], len(chk["violations"]), chk
+
+
+SCREEN = 1e-6          # penetration far above rounding: illegal at 40 digits
+
+
+def exact_side(X, Y, T):
+    """The 40-digit container side in O(n).
+
+    `side40` runs the full separating-axis pass, which is O(n^2): 85 s on a
+    999-cell pose.  The *side* only needs the extreme walls (`true_geom.side`),
+    so a side can be compared exactly at any size for the cost of n cosines.
+    Legality still needs the pair pass, and is only paid where it can change a
+    verdict (see `legalise`).
+    """
+    return +TG.side([(float(a), float(b), float(c)) for a, b, c in zip(X, Y, T)])
+
+
+def clearly_illegal(X, Y, T):
+    """True when a pair overlaps far beyond what float rounding can explain.
+
+    Sound as a *rejection* only: at coordinates of order 32 the float error in a
+    penetration is ~1e-14, so a measured 1e-6 overlap cannot be legal at 40
+    digits.  It never certifies legality -- that is `side40`'s job.
+    """
+    return total_pen(X, Y, T)[1] > SCREEN
 
 
 def box_for(L, X, Y, T):
@@ -200,8 +227,20 @@ def relax(X, Y, T, L, sweeps=6, deadline=None, rng=None, size=3.0, step=1.5,
     return best[1], best[2], best[3]
 
 
-def project(X, Y, T, L, deadline, rng, rounds=3):
-    """Remove overlaps at 40 digits: repeat the projection until it is legal."""
+def project(X, Y, T, L, deadline, rng, rounds=3, screen=False):
+    """Remove overlaps at 40 digits: repeat the projection until it is legal.
+
+    `screen=True` (the driver's mode) pays one projection round and then an
+    exact O(n) side, with the O(n^2) pair pass only if the pose is not clearly
+    illegal.  The verdict that matters is taken in `legalise`; this stage only
+    produces the pose it starts from.
+    """
+    if screen:
+        X, Y, T = relax(X, Y, T, L, sweeps=3, deadline=deadline, rng=rng,
+                        wall_w=1e2, iters=400)
+        # No pair pass here: `legalise` takes the verdict on this same pose, and
+        # doing it twice was the whole cost (85 s each on a 999-cell pose).
+        return float(exact_side(X, Y, T)), None, X, Y, T
     best = None
     for _ in range(rounds):
         if time.monotonic() > deadline:
@@ -219,27 +258,56 @@ def project(X, Y, T, L, deadline, rng, rounds=3):
     return best[1], best[0], best[2], best[3], best[4]
 
 
-def legalise(X, Y, T, tries=14):
+def legalise(X, Y, T, tries=14, ceiling=None):
     """Expand about the centroid by the smallest factor that is legal at 40 digits.
 
     The relaxer works at 1e-9 penetration tolerance, so its output can be illegal
     by a hair.  Scaling the whole shape up by `1 + f` increases every separation
     monotonically, so a geometric ladder finds the smallest legal f.  This is a
     legalisation step, not a gain: the dL reported is always measured after it.
+
+    Two bounds keep it affordable on ~1000-cell poses without weakening it:
+
+      * `ceiling`: stop as soon as the exact side reaches it.  Monotone, so no
+        later rung can be below it -- an exact early exit, not a truncation;
+      * a rung whose penetration exceeds `SCREEN` is illegal by five orders more
+        than rounding and is skipped without the O(n^2) pair pass.
+
+    Returns (side, viol, X, Y, T, f, why) where `viol is None` means the pose was
+    not certified legal (no pair count was computed), `f > 0` the factor that
+    certified legality, `f < 0` the negative of the rung at which the exact side
+    reached `ceiling` (the side at that rung is returned in the first slot), and
+    `why` names the path so a null is never ambiguous.
     """
     h = 0.5 * (np.abs(np.cos(T)) + np.abs(np.sin(T)))
     cx = 0.5 * (float((X - h).min()) + float((X + h).max()))
     cy = 0.5 * (float((Y - h).min()) + float((Y + h).max()))
-    s40, viol, chk = side40(X, Y, T)
-    if viol == 0:
-        return s40, 0, X, Y, T, 0.0
+    s40 = exact_side(X, Y, T)
+    if ceiling is not None and float(s40) >= ceiling:
+        # Expansion only grows the side, so a pose already at or above the bar
+        # cannot be a gain; no 40-digit pair pass is needed to say so.
+        return s40, None, X, Y, T, None, "pose at or above the bar"
+    if clearly_illegal(X, Y, T):
+        viol = None
+        why = "screened illegal (> 1e-6 penetration)"
+    else:
+        s40, viol, _chk = side40(X, Y, T)
+        why = f"exact: {viol} violations"
+        if viol == 0:
+            return s40, 0, X, Y, T, 0.0, "legal where projected"
     for e in range(1, tries + 1):
         f = 10.0 ** (-13 + e) if e <= 9 else 10.0 ** (e - 12)
         Xa, Ya = cx + (X - cx) * (1 + f), cy + (Y - cy) * (1 + f)
+        if clearly_illegal(Xa, Ya, T):
+            continue
+        s2 = exact_side(Xa, Ya, T)
+        if ceiling is not None and float(s2) >= ceiling:
+            return s2, viol, X, Y, T, -f, f"expansion reached the bar at f={f:g}"
         s2, v2, _ = side40(Xa, Ya, T)
         if v2 == 0:
-            return s2, 0, Xa, Ya, T, f
-    return s40, viol, X, Y, T, None
+            return s2, 0, Xa, Ya, T, f, f"legal at f={f:g}"
+        why = f"exact: {v2} violations at f={f:g}"
+    return s40, viol, X, Y, T, None, f"ladder exhausted ({why})"
 
 
 def free_point(X, Y, T, rng, tries=400):
@@ -289,23 +357,35 @@ def attempt(n, kind, seconds, seed):
         Ta[near] = Ta[near] + math.pi / 2
         moved = "rotate 2x2 block"
     want = float(L0) - TARGET
-    best = None
+    squeeze_side = float(L0)
+    post_side = float(L0)
     for _outer in range(4):
         if time.monotonic() > deadline:
             break
         Xa, Ya, Ta = relax(Xa, Ya, Ta, want, sweeps=2, deadline=deadline,
                            rng=nprng, wall_w=1e5)        # squeeze
-        s40, viol, Xa, Ya, Ta = project(Xa, Ya, Ta, want, deadline, nprng)
-        if viol == 0 and (best is None or float(s40) < best[0]):
-            best = (float(s40), Xa.copy(), Ya.copy(), Ta.copy())
-            break
-    if best is not None:
-        Xa, Ya, Ta = best[1], best[2], best[3]
-    s40, viol, Xb, Yb, Tb, spill = legalise(Xa, Ya, Ta)
+        squeeze_side = float(exact_side(Xa, Ya, Ta))
+        # `project` in screen mode returns no verdict: `legalise` takes the one
+        # that matters on this same pose, so it is not paid for twice.
+        _, _, Xa, Ya, Ta = project(Xa, Ya, Ta, want, deadline, nprng,
+                                   screen=True)
+        post_side = float(exact_side(Xa, Ya, Ta))
+
+    # The ceiling is the delivered side: once an expansion reaches it, no rung
+    # can be a gain (the ladder is monotone), so this is an exact early exit.
+    s40, viol, Xb, Yb, Tb, spill, why = legalise(Xa, Ya, Ta, ceiling=float(L0))
     dL = float(L0) - float(s40) if viol == 0 else 0.0
+    crossed = spill is not None and spill < 0
     return {"n": n, "k": SQ.grid(n), "kind": kind, "moved": moved,
-            "L0": str(L0), "side40": str(s40), "violations": viol,
-            "dL": dL, "legal": viol == 0, "legalise": spill, "seconds": round(time.monotonic() - t0, 2),
+            "L0": str(L0), "side40": str(s40),
+            "violations": viol, "certified_legal": viol == 0,
+            "why": why,
+            "dL": dL, "legal": viol == 0, "legalise": spill,
+            "expansion_crossed": crossed,
+            "squeeze_side": str(squeeze_side),
+            "post_project_side": str(post_side),
+            "squeeze_below_L0": squeeze_side < float(L0) - 1e-12,
+            "seconds": round(time.monotonic() - t0, 2),
             "beat": bool(viol == 0 and dL > 1e-12)}
 
 
@@ -323,7 +403,7 @@ def control(seconds=12.0):
                        deadline=time.monotonic() + seconds)
     s40, viol, Xb, Yb, Tb = project(Xb, Yb, Tb, float(L0),
                                     time.monotonic() + seconds, random.Random(4))
-    s40, viol, Xb, Yb, Tb, _f = legalise(Xb, Yb, Tb)
+    s40, viol, Xb, Yb, Tb, _f, _why = legalise(Xb, Yb, Tb)
     print(f"  delivered {L0}  inflated {si}  relaxed to {s40}  violations {viol}")
     assert viol == 0, "control A: relaxer did not produce a legal pose"
     assert float(s40) < float(si), "control A: relaxer did not shrink the inflated pose"
@@ -339,7 +419,7 @@ def control(seconds=12.0):
     s_pre, v_pre, _ = side40(Xa, Ya, T)
     s40, viol, Xb, Yb, Tb = project(Xa, Ya, T, float(L0) + 0.35,
                                     time.monotonic() + seconds, random.Random(5))
-    s40, viol, Xb, Yb, Tb, _f = legalise(Xb, Yb, Tb)
+    s40, viol, Xb, Yb, Tb, _f, _why = legalise(Xb, Yb, Tb)
     print(f"  after displacement {s_pre} (viol {v_pre})  absorbed at {s40} "
           f"(viol {viol})")
     assert viol == 0, "control B: relaxer did not legalise a displaced arrangement"
@@ -373,7 +453,8 @@ def main(argv):
         recs.append(best)
         print(f"  n={n:4d} k={best['k']:2d} L0={best['L0'][:20]:20s} "
               f"side40={best['side40'][:20]:20s} dL={best['dL']:+.3e} "
-              f"viol {best['violations']} ({best['moved']}) {best['seconds']}s",
+              f"viol {best['violations']} [{best['why']}] "
+              f"({best['moved']}) {best['seconds']}s",
               flush=True)
     ds = sorted(r["dL"] for r in recs)
     pos = [d for d in ds if d > 1e-12]

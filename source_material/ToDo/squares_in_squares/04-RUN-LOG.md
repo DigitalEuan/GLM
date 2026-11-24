@@ -3467,3 +3467,33 @@ with this relaxer as the second half of the pipeline.
 **Checks.** structure --control green; 20-row run as above; perturb and anchor_chain selftests green; sqscore,
 record_guard, void_insert --selftest, glm_wheels --audit green; history identical; no row changed, no score
 claimed. Entry doc 83 (new).
+
+## Run 125 — the 20-row table completed, and the null's cause measured
+
+**Request.** Let the run-124 table finish, put the full distribution in doc 83, and re-run run 116's band test
+on the corrected driver so its null is either confirmed or retracted.
+
+**Result (20 rows).** 20 evenly spaced unbeaten rows, three attempts each at 3 s: dL min 0, median 0, max 0,
+**0/20 positive**; and the squeeze's exact 40-digit side equals the delivered side on every row, so no attempt
+was ever in a position where legality could matter.
+
+**Why every row is zero.** One relaxation sweep costs 5.3 s (n = 33, 13 patches), 72.6 s (n = 439, 194 patches)
+and 163.3 s (n = 942, 426 patches) at 374-410 ms per patch solve — 1.8x to 54x the per-attempt budget. The
+deadline check sits between patches, so the sweep is cut early and the pose never leaves the delivered side.
+Where a sweep does complete (n = 33 with a 10 s deadline) the squeeze reaches 5.998000642275 (-2.0e-3) and
+legalisation pays it back to 6.497795892793: a **net loss of 4.98e-1**.
+
+**Verdict, corrected.** Run 124's "cannot hold a shrink" is narrowed: no gain where the mechanism ran,
+**untested at scale**, with throughput of the patch solve (not geometry) as the named bottleneck. Doc 83
+sections 3-4 rewritten; the earlier partial-sweep magnitudes are kept with their regime named.
+
+**Band re-run (doc 84).** `resqueeze.py --corrected`, 60 s per band, on k = 26 (control and insert) and k = 32:
+**no beat on any band**. k = 26 settles at 26.0000000016 (control) and 26.0000000037 (insert); k = 32 drives the
+999-cell pose to 31.906664808 with 4.13e-3 penetration and the first near-legal rung (f = 0.1) lands at
+35.097331289, 3.1 above the grid side. **Null confirmed, violation counts (76, 79, 17) retracted** as artifacts
+of the unpenalised intra-patch pairs and the empty patch list. Both runs are sweep-limited and say so.
+
+**Checks.** structure --control green (100 % recovery of 3.75e-3, absorb of 0.3); sqscore 22.218056945, 553
+beats, 447 grid; record_guard OK; perturb, anchor_chain, void_insert, true_geom selftests green; glm_wheels
+--audit 657 functions, 0 offenders; submission.csv and WHITEBOARD.md untouched. Entries docs 83 (rewritten),
+84 (new).
