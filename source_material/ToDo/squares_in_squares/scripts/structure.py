@@ -511,7 +511,8 @@ def free_point(X, Y, T, rng, tries=400):
     return None
 
 
-def attempt(n, kind, seconds, seed, iters=10, proj_iters=40, split=0.6):
+def attempt(n, kind, seconds, seed, iters=10, proj_iters=40, split=0.6,
+            pose_out=None):
     """One structure-changing attempt at row n; returns a record.
 
     The budget is **split** between the squeeze and the projection
@@ -523,6 +524,12 @@ def attempt(n, kind, seconds, seed, iters=10, proj_iters=40, split=0.6):
     wall clock, fewer iterations per visit and more completed sweeps leave a
     *lower* residual penalty (n=662: 6.6e-3 at 2 sweeps vs 1.1e-2 at 1), so
     the cap is a throughput choice, not a relaxation of the objective.
+
+    `pose_out`, when a list is passed, receives the relaxed pose the record
+    judges -- the squeeze-and-project output before `legalise`, as decimal
+    strings via `repr(float)`, which is the exact shortest form of the float64
+    the relaxer produced.  Run 128 uses it to hand the projection stage's own
+    output to the exact legal move set; the record itself is unchanged.
     """
     t0 = time.monotonic()
     deadline = t0 + seconds
@@ -572,6 +579,10 @@ def attempt(n, kind, seconds, seed, iters=10, proj_iters=40, split=0.6):
         if time.monotonic() > deadline:
             outer_cut = True
             break
+
+    if pose_out is not None:
+        pose_out.append([(repr(float(a)), repr(float(b)), repr(float(c)))
+                         for a, b, c in zip(Xa, Ya, Ta)])
 
     # The ceiling is the delivered side: once an expansion reaches it, no rung
     # can be a gain (the ladder is monotone), so this is an exact early exit.

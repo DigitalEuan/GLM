@@ -110,6 +110,11 @@ one. So the blocker is structural, and it is now stated as a measurement rather 
 the only place in the current pipeline where a legal slide has room to fire and could decide whether a squeeze is
 convertible. On the delivered poses there is nothing to convert.
 
+**Done in doc 87 (run 128).** The moves do fire there — clearance `2.8e-3 … 6.1e-2` after legalising, **7 accepted
+moves per row** — and **no squeeze becomes convertible on 6/6 rows**: the minimum uniform legalisation pays
+`p · L` (`1.80e-2 … 1.59` against the `3.9e-3` banked, **4.6× to 401×** the gain), and the legal moves recover under 0.1 % of that payback. Doc 87 also corrects this document's `1.1e-4 … 1.6e-2` figures: they are
+`post_project_pen`, a sum of squared penetrations, and the depth itself is `3.59e-3 … 5.21e-2`.
+
 ## 7. Files and checks
 
 * `scripts/legal_slide.py` — new, 21 functions, **inside** the float audit (`glm_wheels.py --audit`):

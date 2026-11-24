@@ -1,0 +1,20 @@
+  n=  33 L0=6.0000000016660000 squeeze -3.927e-3 pen 3.589e-3 on 66 pair(s)  sweeps 20/0  10.16s
+   minimal legal scale f* = 1.00359810446116171078756451606: payback +1.798e-2 against a banked +3.927e-3 (4.578x) -> dL -1.405e-2  not convertible
+   clearance {'xlo': '0.00017368793487548828125', 'xhi': '0.0000209808349609375', 'ylo': '0.00232732295989990234375', 'yhi': '0.00282895565032958984375'}  slides 0(ladder)+3(exact)  swaps 0  dL -1.404e-2  10.69s
+  n= 159 L0=13.000000001846000 squeeze -3.949e-3 pen 5.280e-3 on 327 pair(s)  sweeps 5/0  14.54s
+   minimal legal scale f* = 1.00530693156997585901990532876: payback +6.366e-2 against a banked +3.949e-3 (16.120x) -> dL -5.971e-2  not convertible
+   clearance {'xlo': '0.00429379940032958984375', 'xhi': '0.00136959552764892578125', 'ylo': '0.005713939666748046875', 'yhi': '0.00264656543731689453125'}  slides 4(ladder)+3(exact)  swaps 0  dL -5.968e-2  19.57s
+  n= 439 L0=21.000000001904000 squeeze -3.934e-3 pen 1.379e-2 on 1189 pair(s)  sweeps 2/1  20.21s
+   minimal legal scale f* = 1.01397909772731509292498230934: payback +2.795e-1 against a banked +3.934e-3 (71.052x) -> dL -2.756e-1  not convertible
+   clearance {'xlo': '0.01223504543304443359375', 'xhi': '0.00921404361724853515625', 'ylo': '0.01447904109954833984375', 'yhi': '0.01316916942596435546875'}  slides 4(ladder)+3(exact)  swaps 0  dL -2.754e-1  24.63s
+
+3/3 rows legalised
+  squeezes convertible by the minimal legal scale: 0/3
+  n=  33 pen 3.59e-3  f* 1.0035981044  payback +1.80e-2  slides 0+3  dL -1.40e-2  no bite
+  n= 159 pen 5.28e-3  f* 1.0053069315  payback +6.37e-2  slides 4+3  dL -5.97e-2  no bite
+  n= 439 pen 1.38e-2  f* 1.0139790977  payback +2.80e-1  slides 4+3  dL -2.75e-1  no bite
+  n=  33 clearance after legalisation 2.829e-3  final side 6.0140366040879202
+  n= 159 clearance after legalisation 5.714e-3  final side 13.059681612008866
+  n= 439 clearance after legalisation 1.448e-2  final side 21.275422200352530
+  rows that beat their delivered side: 0/3
+wrote workspace/push/legal_relaxed128a.json

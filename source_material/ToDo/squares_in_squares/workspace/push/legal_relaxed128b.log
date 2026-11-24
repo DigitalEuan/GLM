@@ -1,0 +1,20 @@
+  n= 662 L0=26.000000001924000 squeeze -3.970e-3 pen 1.631e-2 on 1687 pair(s)  sweeps 1/2  20.19s
+   minimal legal scale f* = 1.01656695423025666968896985054: payback +4.141e-1 against a banked +3.970e-3 (104.302x) -> dL -4.101e-1  not convertible
+   clearance {'xlo': '0.01591074466705322265625', 'xhi': '0.014883518218994140625', 'ylo': '0.015371799468994140625', 'yhi': '0.0149228572845458984375'}  slides 4(ladder)+3(exact)  swaps 0  dL -4.100e-1  27.95s
+  n= 883 L0=30.000000001934000 squeeze -3.973e-3 pen 3.713e-2 on 2318 pair(s)  sweeps 1/2  20.24s
+   minimal legal scale f* = 1.03839792828148347325623035431: payback +1.113e+0 against a banked +3.973e-3 (280.236x) -> dL -1.109e+0  not convertible
+   clearance {'xlo': '0.03835201263427734375', 'xhi': '0.0376923084259033203125', 'ylo': '0.03765428066253662109375', 'yhi': '0.0378859043121337890625'}  slides 4(ladder)+3(exact)  swaps 0  dL -1.109e+0  30.62s
+  n= 942 L0=31.000000001936000 squeeze -3.972e-3 pen 5.215e-2 on 2422 pair(s)  sweeps 1/2  20.28s
+   minimal legal scale f* = 1.05311215846904815407469868660: payback +1.593e+0 against a banked +3.972e-3 (401.068x) -> dL -1.589e+0  not convertible
+   clearance {'xlo': '0.06074655055999755859375', 'xhi': '0.05269038677215576171875', 'ylo': '0.0492494106292724609375', 'yhi': '0.05227947235107421875'}  slides 4(ladder)+3(exact)  swaps 0  dL -1.589e+0  29.83s
+
+3/3 rows legalised
+  squeezes convertible by the minimal legal scale: 0/3
+  n= 662 pen 1.63e-2  f* 1.0165669542  payback +4.14e-1  slides 4+3  dL -4.10e-1  no bite
+  n= 883 pen 3.71e-2  f* 1.0383979282  payback +1.11e+0  slides 4+3  dL -1.11e+0  no bite
+  n= 942 pen 5.21e-2  f* 1.0531121584  payback +1.59e+0  slides 4+3  dL -1.59e+0  no bite
+  n= 662 clearance after legalisation 1.591e-2  final side 26.410045592742047
+  n= 883 clearance after legalisation 3.835e-2  final side 31.109295749703824
+  n= 942 clearance after legalisation 6.075e-2  final side 32.588848821647838
+  rows that beat their delivered side: 0/3
+wrote workspace/push/legal_relaxed128b.json

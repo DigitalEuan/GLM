@@ -3601,3 +3601,52 @@ read 264 ms and is **517 ms** on the first (importing) call, 264 ms being the wa
 selftests green; sqscore **22.218056945**, 553 beats, 447 grid; record_guard OK; glm_wheels --audit **678
 functions, 0 offenders** (657 + `legal_slide`'s 21); py_compile OK; `submission.csv` and root `WHITEBOARD.md`
 untouched. Docs: 86 (new), 85 (audited); record `workspace/push/legal_slide127.json` and `.log`.
+
+## Run 128 — the move set on the relaxed poses: no squeeze is convertible, and the cost is `p · L`
+
+**Request.** Run the legal move set on the relaxed poses the projection stage produces, where clearance is
+`1e-4` to `1.6e-2` rather than `1e-10`; report per-row dL, moves accepted and whether any squeeze becomes
+convertible; keep the five controls and every guard green.
+
+**The pipeline.** `legal_relaxed.py` drives run 126's squeeze + projection unchanged (20 s, `--split 0.6`,
+`--iters 10`, `--proj-iters 40`), hands the pose over as `repr(float)` strings (exact for the float64), and from
+there everything is `legal_slide`'s `Decimal` at 40 digits: an exact whole-pose scan, the **minimum uniform scale**
+that makes the pose legal (bisected; a pair's slack is monotone in the scale), then the legal moves. The relaxed
+pose is *not* legal, so it has to be legalised before a move can be legal at all, and the cheapest legalisation
+the pipeline's own family admits is that minimum scale — not a `10^k` ladder rung.
+
+**The result, 6 rows (33, 159, 439, 662, 883, 942).** Squeeze reproduced on 6/6 (`−3.93e-3` against the `4e-3`
+target). Residual depth **3.59e-3 … 5.21e-2**, `f*` **1.0036 … 1.0531**, payback **1.80e-2 … 1.59** against the
+`3.9e-3` banked: **4.6× to 401× the gain**, dL **−1.40e-2 … −1.59**, **0/6 convertible**. After legalisation the
+clearance is **2.8e-3 … 6.1e-2** — five to seven orders above a delivered pose's `1e-10` — and the moves do fire:
+**7 accepted per row** (4 ladder + 3 at the side-minimising bisected step). They recover **1.3e-5 … 2.6e-4**, i.e.
+**0.005 % … 0.07 %** of the payback. No void swap fires: no unit seat is free in a pose already `4e-3` inside the
+delivered side.
+
+**The law.** Payback `= p · L` — the depth times the side — reproducing the measured payback to **1 % for
+n ≥ 439** (0.83 at n = 33, where the binding spread is under `L`). Convertibility needs
+`p < gain / L`: **6.5e-4** at n = 33 down to **1.3e-4** at n = 942; the projection leaves `p` over that bar by
+**5.5× to 407×**. So the local continuous stage cannot be the one that pays for legality, and the combinatorial
+stage now has a number to hit.
+
+**Three new controls, and two bugs they caught.** E (the largest legal step is not the useful step: 2 units of
+legal room, 1e-3 of useful step; the side is convex in the step, so a ternary search finds it), F (`f*` equals
+`1/(1−1e-3)` to twelve digits and the payback is exactly `3d`, the spread, not `d × side`), S (the `REACH` sweep
+agrees with the O(n²) pass on **99** violations and their worst slack, on a **compressed** pose — vacuous
+without the compression). Bug 1: `wall_cells`' exact edge equality breaks after a scale, so the first smoke test's
+"clearance 0 / 0 moves" was its own empty wall set, not the geometry — fixed with `WALL_TOL = 1e-18`. Bug 2: the
+written claim that the ladder cannot take a 1e-3 gap was **wrong** — it fires by overshooting, and it is the side
+gate, not the step size, that decides; run 127's zeros were `1e-10` of room, where no positive step is legal.
+
+**One figure corrected.** Docs 85/86 quote `1.1e-4 … 1.6e-2` as the residual penetration; that is
+`post_project_pen`, the **sum of squared penetrations** (`total_pen(...)[0]`), not a depth. The depth measured
+here is `3.59e-3 … 5.21e-2`, so the clearance promise was real and the pose is more penetrated than the number
+implied. The old `4.6e-2 … 3.0` paybacks stand as the ladder's cost; the minimum scale is `1.80e-2 … 1.59`, a
+2.5× reduction that still loses on every row.
+
+**Checks.** `legal_slide --selftest` **8 controls** green (P, N, N3, N2, V, E, F, S); `structure --control` green
+(A 100.0 %, B absorbed at 4.0030358954); `--check-solver` green (86.0× / 57.9×, |df| 3.78e-22); `perturb`,
+`anchor_chain`, `void_insert`, `true_geom` selftests green; `sqscore` **22.218056945**, 553 beats, 447 grid;
+`record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders** (678 + `legal_slide`'s 6 new); `py_compile`
+OK; `submission.csv` and `WHITEBOARD.md` untouched. Doc 87 (new); record `workspace/push/legal_relaxed128.json`
+and the two `.log` files.
