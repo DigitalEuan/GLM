@@ -138,8 +138,8 @@ def refine(x, y, t, state, box, rounds=5, grid=61):
 
 def frontier_rows(per):
     rows = []
-    for k in range(2, 32):
-        lo, hi = (k - 1) ** 2 + 1, k * k
+    for k in range(2, 33):
+        lo, hi = (k - 1) ** 2 + 1, min(k * k, 1000)
         beaten = [n for n in range(lo, hi + 1) if SQ.extent(per[n]) < k - 1e-12]
         if beaten:
             rows.append((k, max(beaten)))

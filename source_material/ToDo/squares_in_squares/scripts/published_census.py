@@ -119,8 +119,10 @@ def compare(per):
 def band_frontiers(per):
     """B. per band: the frontier row, its void, and the next row's price."""
     out = []
-    for k in range(2, 32):
-        lo, hi = (k - 1) ** 2 + 1, k * k
+    # bands k = 1..32 cover n = 1..1000 (32 = ceil(sqrt 1000)); band k = 32's top
+    # is clamped to 1000.  Every band with a beaten row gets a frontier entry.
+    for k in range(2, 33):
+        lo, hi = (k - 1) ** 2 + 1, min(k * k, 1000)
         beaten = [n for n in range(lo, hi + 1) if SQ.extent(per[n]) < k - 1e-12]
         if not beaten:
             continue
@@ -187,7 +189,8 @@ def main():
           f"+5% {0.05 * room:.5f}")
     inherit = sum((r['k'] - r['L']) / math.sqrt(r['nxt']) for r in bf)
     print(f"   every band's next grid row beaten by INHERITING the frontier side "
-          f"(no new construction): {inherit:.5f} score, all 31 rows")
+          f"(no new construction): {inherit:.5f} score, all {len(bf)} rows")
+    print(f"   bands carrying a frontier row: {len(bf)} (k = {bf[0]['k']}..{bf[-1]['k']})")
     print(f"   the leader gap is {score - LEADER:.5f}: the grid campaign CAN pay for "
           f"it (0.232 > 0.164) but only by seating one cell in every band's "
           f"frontier pose at its existing side - a 0.03% hole at k>=21.")

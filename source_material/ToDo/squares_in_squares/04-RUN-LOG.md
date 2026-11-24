@@ -3110,7 +3110,7 @@ freedom cannot create 0.03 % because the compression is uniform: room taken from
 the next. That is also why no world record crosses these rows.
 
 **What each campaign is worth.** Beating the next row in every band by *inheriting* the frontier's own side
-(no new construction) is worth **+0.23207** — more than the 0.163635 gap to the reported leader, so the grid
+(no new construction) is worth **+0.23251** — more than the 0.163635 gap to the reported leader, so the grid
 campaign can pay for it at 100 % success. The **553 beaten rows** leave **15.02** score unclaimed below them;
 a 1 % capture is **+0.15023** and 5 % is **+0.75113**, so 1.1 % of that room is the entire gap. The
 recommendation is recorded in doc 75: the compressed-lattice rows need a *global* move that redistributes the
@@ -3122,3 +3122,47 @@ score `22.218056945` / 553 beats / 447 grid rows; `sqscore` guard OK; `record_gu
 run-history line byte-identical. **No row changed, no score claimed, `submission.csv` untouched.**
 
 Entries `75-GRID-WALL-CENSUS.md`; records `31`–`74`.
+
+## Run 115 — block substitution is refuted by a theorem, and the 45° families give nothing on the unsolved rows
+
+Two follow-ups to run 114, plus a correction.
+
+**Correction.** The band census is **30 bands, not 29 or 31**. Run 114's loop ran `k = 2..31` and silently
+dropped band k = 32 — whose frontier is n = 998 and whose next row is 999, a real target. With it in, the
+inheritance bound is **+0.23251** (was 0.23207), and band k = 32 measures a free square of **0.7171**, a
+genuine notch rather than a sliver, with the cheapest large-band price in the table (+0.120).
+
+**The campaign: swap a p x q block for one holding pq - h + 1 cells at a larger pitch.** `block_swap.py`
+enumerates every near-full block (1–3 holes, at least 4 cells, p <= q <= 7) of all twelve `k >= 21` frontier
+poses and tests the substitute against the block's own compressed box, using the record side for the count as
+the fast filter. **No block fits in any band**, and the same block is best everywhere: a **3 x 3 holding six
+cells (three holes), needing seven cells in 2.9991–3.0000**. The shortfall is `2.2e-5…8.9e-5`, which is the
+compression itself (`3·delta/k` predicts 3.3e-5 at k = 26 against 2.2e-5 measured), and the optimiser cannot
+close it — packing seven into those boxes stalls at penetration `1.8e-8`, `2.3e-8`, `7.2e-8` (k = 26, 29, 31)
+after 2500 iterations and four restarts. It is **impossible rather than hard**: `s(7) = 3` is proved, so
+seven unit squares never fit below 3. Block substitution is closed on the compressed-lattice rows by a
+published theorem, not by a search budget. (An unrestricted first run "won" by repacking a 7 x 7 block that
+held one lonely cell — which is why the filter is stated.)
+
+**The family question.** Do Block45, Block45Half or the ridge give even a slightly-better-than-base packing on
+the 447 unsolved rows? `grid_families.py` writes the three exact count/side laws (660 members at N <= 1000,
+369 of them at counts the table already beats) and uses the deletion fact — a packing of N cells covers every
+`n <= N` — to take the best covering member per unbeaten row: **0 beaten, 0 at parity, 444 behind**, closest
+`+0.0711` (n = 212, 242, 243, 244), 17 rows within 0.15, 43 within 0.25, median `+0.6066`, max `+0.7071` =
+½√2, the ridge's own floor. So the 45° families beat the base grid **only** at counts where the table already
+beats it; on the unsolved set they are 0.07–0.71 behind, and the seam cost `w >= ½√2` is the reason. One
+artifact is recorded rather than hidden: the ridge at m = 1 read N = 2 at L = 1.7071 and produced a single
+bogus "beat" at n = 2 until the validity floor `m >= 2` was imposed (`s(2) = 2`).
+
+**Where that leaves the campaign.** The sliver bands are refuted (§5), the families give nothing (§6), and the
+only openings left are the two notch rows (k = 23, 32; price 0.530 and 0.120, real 0.72–0.75 holes) and four
+Block45 near-misses at `+0.0711` — all of which need a rearrangement, not a substitution or a local move.
+The beaten-row polish remains the guaranteed payer (1 % of its 15.02 unclaimed room is 0.15023).
+
+Checks: `void_insert --selftest` 2 controls; `published_census` reproduces `22.218056945` / 553 beats /
+447 grid rows / 30 frontier bands; `block_swap` and `grid_families` rerun clean; `sqscore` guard OK;
+`record_guard.py` OK; README/STATUS run-history line byte-identical. **No row changed, no score claimed,
+`submission.csv` untouched.**
+
+Entries `75-GRID-WALL-CENSUS.md` (rewritten with the 30-band table, §5 block substitution, §6 families);
+records `31`–`75`.

@@ -1,24 +1,32 @@
 # 75 — The grid wall, priced
 
-**Run 114.** Request: *"The Kaggle score can be moved ... I want to stop looking at the rows already good and
-focus on the more difficult but actually likely to have some movement possible — can we just focus on the
-un-optimised grids for a good run? ... see what is logical and what you can achieve."*
+**Runs 114–115.** Request: *"The Kaggle score can be moved ... I want to stop looking at the rows already
+good and focus on the more difficult but actually likely to have some movement possible — can we just focus
+on the un-optimised grids for a good run? ... see what is logical and what you can achieve."*
 
-Short answer: **the grid rows are not un-optimised, they are the wall** — and this run measured the wall
-instead of arguing about it. Three results, in order of how much they change the picture:
+Short answer: **the grid rows are not un-optimised, they are the wall** — and these runs measured the wall
+instead of arguing about it. Five results:
 
 1. The delivered table is **not behind the published record anywhere** in `n <= 324`: 0 rows behind,
    21 ahead. There is no score sitting in the catalogue.
-2. The grid campaign **can** pay for the whole 0.163635 gap — beating each band's next row by inheriting
-   that band's own frontier side is worth **+0.23207** — so the instinct is right, and the money is at the
-   band tops.
-3. What actually blocks it is **0.03 %**: at `k >= 21` the largest square that fits in a frontier pose's free
-   space is **0.9994–0.9999** of a cell, not 1. It is `1 - (k - L)/k` to within `6e-4` in ten of eleven
-   bands — these poses are *uniformly compressed lattices*, and every "hole" is a squashed unit cell.
+2. **30 bands** carry a frontier row (k = 3…32, the k = 32 band clamped at n = 1000, frontier 998 → next row
+   999). Beating each band's next row by *inheriting* that band's own frontier side is worth **+0.23251** —
+   more than the whole 0.163635 gap — so the instinct is right, and the money is at the band tops.
+3. What blocks it is **0.03 %**: at `k >= 21` the largest square that fits a frontier pose's free space is
+   **0.9994–0.9999** of a cell, not 1, and it is `1 - (k - L)/k` to within `6e-4` in ten of eleven bands —
+   these poses are *uniformly compressed lattices*, and every hole is a squashed unit cell.
+4. **Block substitution is refuted**, not merely tried: in all twelve `k >= 21` bands the best near-full block
+   is the same **3 x 3 holding 6 cells (3 holes), needing 7 cells in 2.9994–3.0000** — short by
+   `2.2e-5…8.9e-5`, which is exactly the compression, and impossible because **`s(7) = 3` is proved**.
+5. **No family gives even a "slightly better than base" on an unsolved row.** Block45, Block45Half and the
+   ridge cover 444 of the 446 unbeaten rows (n >= 2) and beat the base grid on **none**: closest `+0.0711`
+   (n = 212, 242, 243, 244), median `+0.6066`. They beat the base only at the 369 counts where the table
+   already beats it.
 
-Instrument: `scripts/published_census.py` (benchmark + void budget), `scripts/void_insert.py`
-(free-space measurement and seating attempt, 2 controls). Neither is in the float audit — they are
-discovery instruments, like `relax_angles.py` and `pattern_seeds.py`. **No row changed, no score claimed.**
+Instruments: `scripts/published_census.py` (benchmark + void budget), `scripts/void_insert.py` (free-space
+measurement and seating, 2 controls), `scripts/block_swap.py` (block substitution), `scripts/grid_families.py`
+(family coverage). None is in the float audit — they are discovery instruments, like `relax_angles.py` and
+`pattern_seeds.py`. **No row changed, no score claimed.**
 
 ---
 
@@ -34,13 +42,12 @@ exact where the source writes `=`, upper bound where it writes `<=`), transcribe
 | **delivered is better** | **21** | worth `0.006414` over the record |
 | behind the record | **0** | |
 
-So for `n <= 324` the table *is* the record. `s(12) = 4` is conjectured (floor 3.9715, so nothing to be
-had there), `s(k^2 - 3) = k` is proved for `k >= 6`, and the recent 2026 improvements (Hosono, Xu, Ostashev,
-Chaoweeraprasit, Daniel, Couzo — cited in the source) are already in our rows: `n = 29` at `5.93384`,
-`n = 86` at `9.82054`, `n = 232` at `15.76418`, `n = 261` at `16.67878`, `n = 183` at `13.99959`.
+So for `n <= 324` the table *is* the record. `s(12) = 4` is conjectured (floor 3.9715), `s(k^2 - 3) = k` is
+proved for `k >= 6`, and the recent 2026 improvements (Hosono, Xu, Ostashev, Chaoweeraprasit, Daniel, Couzo)
+are already in our rows: n = 29 `5.93384`, n = 86 `9.82054`, n = 183 `13.99959`, n = 232 `15.76418`.
 
-**Consequence.** A better score cannot come from importing the literature. Every remaining point is either
-a new packing or a re-polish, and the two campaigns are priced in §4.
+**Consequence.** A better score cannot come from importing the literature. Every remaining point is either a
+new packing or a re-polish, and both campaigns are priced in §5.
 
 ## 2. What an unbeaten row actually costs
 
@@ -49,6 +56,9 @@ any packing has void `V = L^2 - n`. It beats the grid exactly when `L < k`, i.e.
 frontier row `m*` already spends most of its budget, and the next row up must fit inside `V < j* - 1`:
 
     price of the next row  d(k) = V(m*) - (j* - 1)      [unit^2 of void still to save]
+
+All **30** bands that carry a frontier row are listed (k = 3…32; band k = 32 is clamped at n = 1000, so its
+frontier is 998 and its next row 999).
 
 | k | frontier m* | j* | L(m*) | V | V/j* | next | price d |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -81,9 +91,11 @@ frontier row `m*` already spends most of its budget, and the next row up must fi
 | 29 | 818 | 23 | 28.998652868 | 22.922 | 0.997 | 819 | +0.922 |
 | 30 | 876 | 24 | 29.997571908 | 23.854 | 0.994 | 877 | +0.854 |
 | 31 | 936 | 25 | 30.997707704 | 24.858 | 0.994 | 937 | +0.858 |
+| 32 | 998 | 26 | 31.986238620 | 25.120 | 0.966 | 999 | **+0.120** |
 
 The frontier rows spend **87–99.9 % of their void budget**; the median next row has to give up **0.72 unit^2**
-of empty area. A beat is not "more search" — it is one cell's worth of void.
+of empty area. A beat is not "more search" — it is one cell's worth of void. (Band k = 32 is the cheapest
+large-band price in the table at `+0.120`, and it is also *not* a compressed lattice: see §3.)
 
 ## 3. Where the last 0.03 % lives
 
@@ -111,18 +123,21 @@ Largest square that fits in each band's frontier pose:
 | 9 | 71 | 0.5621 | 19 | 344 | 0.7592 | 29 | 818 | 0.9994 |
 | 10 | 89 | 0.4502 | 20 | 382 | 0.7578 | 30 | 876 | 0.9996 |
 | 11 | 110 | 0.6711 | 21 | 423 | 0.9997 | 31 | 936 | 0.9999 |
-| 12 | 132 | 0.6726 | 22 | 465 | 0.9997 | | | |
+| 12 | 132 | 0.6726 | 22 | 465 | 0.9997 | 32 | 998 | **0.7171** |
 
-Two modes, and they mean different things.
+Three modes, and they mean different things.
 
-* **`k >= 21` (and 22): a compressed-lattice sliver.** The measured free square is `1 - (k - L)/k` to within
-  `6e-4` in ten of eleven bands (`k = 21` 0.999726 vs 0.999701; `k = 25` 0.999665 vs 0.999732; `k = 31`
-  0.999883 vs 0.999926). That is the signature of a `k x k` lattice compressed uniformly by `delta = k - L`:
-  every gap shrinks to `1 - delta/k`, so *every* hole in the pose is a squashed unit cell and none of them
-  is a cell. **`k = 23` is the exception** (`delta = 0.010223`, largest of the group, free square 0.7534):
-  there the void is a genuine three-quarter notch, not a sliver.
-* **`k <= 20`: real voids, 0.45–0.76.** These are the hand-polished mixed lattices of runs 62–113; no cell
-  fits, and the shortfall (0.24–0.55) is large enough that seating one is a rearrangement, not a nudge.
+* **The compressed-lattice sliver: k = 21, 22, 24, 25, 26, 27, 28, 29, 30, 31 (ten bands).** The measured free
+  square equals `1 - (k - L)/k` to within `6e-4` (`k = 21` 0.999726 vs 0.999701; `k = 25` 0.999665 vs
+  0.999732; `k = 31` 0.999883 vs 0.999926). That is the signature of a `k x k` lattice compressed uniformly
+  by `delta = k - L`: every gap shrinks to `1 - delta/k`, so *every* hole is a squashed unit cell and none of
+  them is a cell.
+* **Notches: k = 23 (0.7534) and k = 32 (0.7171).** These two are *not* slivers — k = 23 has the largest
+  compression of the group (`delta = 0.010223`) and k = 32 sits at the top of the table; both leave a genuine
+  three-quarter notch. They are the cheapest prices in the large bands (+0.530 and +0.120) and the only two
+  large-band rows where a cell-sized hole is even conceivable.
+* **`k <= 20`: real voids, 0.45–0.83.** These are the hand-polished mixed lattices of runs 62–113; no cell
+  fits, and the shortfall (0.17–0.55) is large enough that seating one is a rearrangement, not a nudge.
 
 ## 4. Can it be done? The seating attempt
 
@@ -134,19 +149,97 @@ L-BFGS-B on `3 (freed + 1)` variables. Verdict by `true_geom` at 40 digits.
 **Eleven bands attempted (k = 21…31), zero beats.** Every run lands at side `k + 2e-9` with 2–11 violations
 left and the container penalty unsatisfied by ~`4e-3`: the optimiser has to *push cells out* of the box to
 make room for the cell, and it always loses. Without the container hinge the cell seats perfectly (penalty
-`2e-16`) but the side grows to `k + 1.1e-4 … 2.4e-4` — i.e. the pose's own tight cells sit on the wall and
-there is nowhere for the extra cell to go *inward*.
+`2e-16`) but the side grows to `k + 1.1e-4 … 2.4e-4` — the pose's own tight cells sit on the wall and there
+is nowhere for the extra cell to go *inward*.
 
 Read with §3, that is the whole story of the wall: the hole is 0.9997 of a cell, the deficit is 0.03 %, and
 freeing six cells does not create 0.03 % because the compression is uniform — taking room from one hole
-gives it back to the next. Beating these rows needs a pose that is *not* a compressed lattice, which is
-exactly what the world record table also fails to have.
+gives it back to the next.
 
-## 5. What each campaign is worth
+## 5. Block substitution — the campaign, and why it is refuted
+
+The move: pick a `p x q` block of the compressed lattice, count the `c` cells it holds (`h = pq - c` holes),
+and try to place `c + 1` cells in the same block box. If that works the whole pose gains a cell at (nearly)
+unchanged side and row `m* + 1` is beaten.
+
+`block_swap.py` runs it on all twelve `k >= 21` band tops (the eleven sliver/notch bands k = 21…31 plus
+k = 32), enumerating every block with `3 <= p <= q <= 7`, **1–3 holes and at least 4 cells** — a full block
+can never gain a cell by area, and a nearly empty block proves nothing (an earlier unrestricted run "won"
+trivially by repacking a 7 x 7 block holding one lonely cell; that is why the filter exists). For each block
+`W = (q-1)·pitch + 1`, `T = min(W, H)`, and the fast test is
+`shortfall = L_best(c + 1) - T`, with `L_best` our own table's side (at or ahead of the record, §1).
+
+| k | blocks | fit now | best block | c → c+1 | box T | record | shortfall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 21 | 247 | 0 | 3 x 3 | 6 → 7 | 2.999403 | 3 | +0.000597 |
+| 22 | 259 | 0 | 3 x 3 | 6 → 7 | 2.999168 | 3 | +0.000832 |
+| 23 | 2579 | 0 | 3 x 3 | 6 → 7 | 2.999111 | 3 | +0.000889 |
+| 24 | 289 | 0 | 3 x 3 | 6 → 7 | 2.999664 | 3 | +0.000336 |
+| 25 | 301 | 0 | 3 x 3 | 6 → 7 | 2.999464 | 3 | +0.000536 |
+| 26 | 316 | 0 | 3 x 3 | 6 → 7 | 2.999978 | 3 | **+0.000022** |
+| 27 | 328 | 0 | 3 x 3 | 6 → 7 | 2.999810 | 3 | +0.000190 |
+| 28 | 340 | 0 | 3 x 3 | 6 → 7 | 2.999520 | 3 | +0.000480 |
+| 29 | 353 | 0 | 3 x 3 | 6 → 7 | 2.999907 | 3 | +0.000093 |
+| 30 | 365 | 0 | 3 x 3 | 6 → 7 | 2.999838 | 3 | +0.000162 |
+| 31 | 377 | 0 | 3 x 3 | 6 → 7 | 2.999852 | 3 | +0.000148 |
+| 32 | 4193 | 0 | 3 x 3 | 6 → 7 | 2.999140 | 3 | +0.000860 |
+
+**Not one block in any band fits, and the same block is best everywhere**: a `3 x 3` holding six cells, asked
+to take a seventh in a box of 2.9991–3.0000. Three consequences, in increasing strength:
+
+* The shortfall is the compression itself: `3·delta/k` predicts 3.3e-5 at k = 26 against the measured 2.2e-5,
+  1.4e-4 at k = 29 against 9.3e-5.
+* The optimiser cannot close it: packing 7 cells into those boxes stalls at penetration `1.8e-8`, `2.3e-8`,
+  `7.2e-8` (k = 26, 29, 31) after 2500 iterations and four restarts — no legal state.
+* It is **impossible, not hard**: `s(7) = 3` is proved (Göbel/Stromquist lineage), so seven unit squares never
+  fit a box below 3. The block substitution the eleven sliver bands invite is refuted by a published
+  theorem — the residual `2.2e-5…8.9e-5` is not a search target, it is a wall.
+
+Block substitution is therefore closed as a route on the compressed-lattice rows. What survives is the
+*notch* rows (§3: k = 23, 32) where the free square is a real 0.72–0.75 and the price is the smallest in the
+large bands — and those need a rearrangement, not a substitution.
+
+## 6. Do the 45° families give even "slightly better than base" on the unsolved rows?
+
+The premise worth testing: Block45, Block45Half and the Staircase beat the plain grid at most of their own
+counts, so might they give the 447 unsolved rows a hair below base? A packing of `N` cells at side `L` also
+packs every `n <= N` at side `<= L` (delete cells), so a member covers a row whenever `N >= n`.
+
+`grid_families.py` writes the three exact laws of docs 61/62/96 and evaluates them over all `N <= 1000`
+(660 members), then takes, for each unbeaten row, the best member that covers it:
+
+| family | count law | side law |
+| --- | --- | --- |
+| Block45 | `N = s^2 + 2k(k+1)` | `L = max(s/√2 + k + 1, s√2)`, feasible `k <= floor(s/√2) + 1` |
+| Block45Half | `N = s^2 + 2k(k-1)` | `L = max(s/√2 + k + ½, s√2)`, feasible `L >= 2k - 2` |
+| ridge | `N = m^2 + 1`, `m >= 2` | `L = m + ½√2` |
+
+Result over the 444 uncovered-or-covered unbeaten rows (`n >= 2`, `n <= 999`):
+
+* **0 beaten, 0 at parity, 444 behind.**
+* Deficit `L_family - ceil(√n)`: min **+0.0711**, median **+0.6066**, max **+0.7071** (= ½√2, the ridge's
+  own floor). 17 rows are within 0.15 and 43 within 0.25.
+* The closest calls are all Block45: `+0.0711` at n = 212, 242, 243, 244; `+0.1213` at n = 20, 21, 30, 31,
+  32, 33; `+0.1421` at n = 184, 819, 820, 877, 878 and 15 other counts.
+* The families do beat the base grid — at **369** counts, and every one of them is a row the table already
+  beats by other means (n = 5, 10, 17, 26, 28, 37, ...). Not one of those counts is an unsolved row, and
+  that is structural: an unbeaten row is by definition a row where no member beats the grid.
+
+So the honest answer to "do we have at least a slightly better than base for the unsolved grids?" is **no,
+not one**, and the families are not merely silent there — they are 0.07–0.71 *behind*. The premise that a
+45° arrangement almost always beats the standard base is true only over the counts where the grid is not
+already beaten; on the unsolved set the 45° cost (`w >= ½√2` at the seam) is exactly what keeps every member
+above the grid.
+
+The "beginnings of the way" that the data does support are the two notch rows (§3, k = 23 and 32, price 0.530
+and 0.120 with a real 0.72–0.75 hole) and the four Block45 near-misses at `+0.0711` (n = 212, 242, 243, 244):
+those are the only places where any construction is within 5 % of a beat.
+
+## 7. What each campaign is worth
 
 | campaign | size | value | price |
 | --- | --- | --- | --- |
-| beat the next grid row in every band, **inheriting** the frontier's own side (no new construction) | 31 rows | **+0.23207** | seat one cell in a 0.9997 hole |
+| beat the next grid row in every band, **inheriting** the frontier's own side (no new construction) | 30 rows | **+0.23251** | seat one cell in a 0.9997 hole (slivers) or a 0.72 notch |
 | the same, but a genuinely better construction | up to 447 rows | up to `2.9` | a world record per row |
 | shave the **553 beaten rows** by 1 % of their unclaimed room | 553 rows | **+0.15023** | 0.005 of a cell per row on average |
 | the same by 5 % | 553 rows | **+0.75113** | |
@@ -157,36 +250,35 @@ bound of the whole grid campaign.
 
 So the logical answer to the request is uncomfortable but clean:
 
-* The **grid rows are the right target in principle** — `+0.232` is more than the gap, and it is the only
+* The **grid rows are the right target in principle** — `+0.23251` is more than the gap, and it is the only
   large gain that does not require improving a row that is already at the record.
-* But **each one is a 0.03 % density record at `k >= 21`**, and a rearrangement at `k <= 20`; the search
-  instruments here (single insertion + local freed cells) are the wrong shape for it, since the compression
-  is uniform and local freedom does not redistribute it.
+* But the sliver bands are refuted (§5, `s(7) = 3`), the families give nothing (§6), and the only openings
+  left are the two notch rows and four Block45 near-misses — all of which need a **rearrangement**, not a
+  local move or a substitution.
 * The **beaten rows are where the arithmetic is easy**: 1 % of what they leave is 0.150, and it needs no new
   construction — just a tighter polish than the one that produced the record.
 
-The honest recommendation: if the score is the measure, the next run should attack the **11 compressed-lattice
-rows** with a *global* instrument that can redistribute compression (a lattice-doubling / block-substitution
-move on the `k x k` compressed pose: replace a `p x q` block of the lattice by a rotated block of `p q + 1`
-cells at a slightly larger pitch, then re-run the squeeze) — and keep the beaten-row polish as the fallback
-that is guaranteed to pay. The 0.9997 measurement is the target: seat one cell in a hole that is 3e-4 short.
-
-## 6. Instruments and checks
+## 8. Instruments and checks
 
 * `scripts/published_census.py` — §1 benchmark (324 published values, tolerance `2e-5`), §2 void budget,
-  §5 pricing. Writes `workspace/published_census114.json`.
+  §7 pricing. Writes `workspace/published_census114.json`.
 * `scripts/void_insert.py` — §3 free-space scan (`hfield`, exact separating axis), `--selftest` (2 controls
-  with known answers), `--seat k...` (§4). Writes `workspace/push/void_insert114.json` and
-  `workspace/push/seat114.json`.
+  with known answers), `--seat k...` (§4). Writes `workspace/push/void_insert114.json`, `seat114.json`.
+* `scripts/block_swap.py` — §5. Writes `workspace/push/block_swap115.json` (census) and
+  `block_swap115_attempt.json` (the three box-packing attempts).
+* `scripts/grid_families.py` — §6. Writes `workspace/push/grid_families115.json`.
 * Delivered state unchanged: `sqscore` guard OK `22.218056945` / 553 beats; `record_guard.py` OK;
   README/STATUS run-history line byte-identical. `submission.csv` untouched.
 
-## 7. Two corrections to earlier documents
+## 9. Corrections to earlier documents and to run 114
 
-* **Doc 73 §4 / run 113's "packing waste"** was already corrected; §2 here supersedes the earlier
-  *density* framing of the grid rows (density is useless as an invariant because `n = k^2` has density 1 —
-  a first version of this census reported a wall of 100 % because of exactly that). The void budget is the
-  right currency: `V < j`.
-* The earlier impression that the frontier is "effort-limited" (gains decaying to `0.0004`) is now
-  **retired**: the frontier is a geometric wall in void terms, and the published record agrees with it on
-  every row it covers.
+* **The band count is 30, not 29 or 31.** Run 114's table looped `k = 2..31` and so silently dropped band
+  k = 32, whose frontier is n = 998 and whose next row is 999 — a real target. The table above adds it, and
+  the inheritance bound moves from 0.23207 to **0.23251**. The run-114 prose's "31 rows" was the same
+  off-by-one.
+* **Density is the wrong invariant for these rows** (perfect squares have density 1) — the void budget
+  `V < j` in §2 is the right currency. A first version of the census reported a 100 % wall for that reason.
+* **The "effort-limited frontier" reading is retired**: the frontier is a geometric wall in void terms, and
+  the published record agrees with it on every row it covers.
+* **The ridge law's validity floor is `m >= 2`**: `m = 1` reads N = 2 at L = 1.7071, which `s(2) = 2` refutes.
+  The first family run reported one "beat" (n = 2) from exactly that artifact.
