@@ -3198,3 +3198,36 @@ Checks: control run recorded above; `published_census`, `block_swap`, `grid_fami
 changed, no score claimed, `submission.csv` untouched.
 
 Entries `DIRECTORS-NOTE.md` (new, top level), `75-GRID-WALL-CENSUS.md` §10; records `31`–`76`.
+
+## Run 117 — the k = 32 notch answered under a hard constraint, and the polish campaign priced
+
+**Request.** Take the k = 32 notch further: hard side projection instead of a penalty, repair the jamming
+pairs from the contact graph, and say whether n = 999 gets below 32 with zero overlap at 40 digits. If it
+stalls, price a 1 % capture on the 553 beaten rows. Everything governed by `DIRECTORS-NOTE.md`.
+
+**`notch32.py`.** Walls are a projection, never a penalty: after every move each cell is clamped into the
+box, so any reported state satisfies the side exactly. The repair is a descent on the contact graph — the
+exact separating slide for the deepest pair along its best axis, kept only if `(pairs, sumsq, deepest)`
+strictly improves, deepest 12 pairs per pass. A first draft dropped the monotone acceptance test and the
+sweeps exploded the pose (3 → 559 violations, max 0.58); restoring acceptance and fixing degenerate slide
+algebra made the instrument trustworthy. Recorded, because that is the second time in two runs a control
+saved the result.
+
+**Answer: no.** Start = frontier 998 at 31.986238620 plus an inserted cell; the finer scan (140 x 33, six
+refine rounds) finds a **0.8394** free square, not the 0.7171 of run 114, so the cell is 0.1606 short. It
+bites 3 pairs at 0.0939. 23 passes of exact slides move the deepest bite only `9.392e-2 -> 9.389e-2`; then
+no single slide helps, and a constrained sweep accepts **0/168** patches. Final at 40 digits:
+side `31.99687592223010338076867830301645689164` (`3.124e-3` inside k, worth 9.9e-5) with **6 violations**.
+The three pairs are mutually blocking; 1.4e-2 of side slack cannot absorb a 9.4e-2 bite. No candidate, no
+C1/C2, `submission.csv` untouched.
+
+**Polish pricing (`polish_pricing.py`).** A 1 % capture needs `dL = 0.01(k - sqrt(n))` per row:
+**0.00399 - 0.00984, median 0.00708** — against run 111's measured legal-gap band `6.2e-5 - 3.3e-4`.
+**0 of 553 rows** need less than 3e-3; every row needs more than the entire band. Best-case polish ceiling
+(every row moves by 3.3e-4): **+0.00999**; band floor: +0.00188; face-squeeze: 2.7e-8. So 1 % (0.21742 for
+one pp of `e`, 0.15023 for 1 % of the room) costs **21.8x the whole campaign**, and the honest ceiling of any
+polish is about +0.01 — one sixteenth of the 0.163635 gap. Cheapest rows are the low-capture ones
+(e < 0.1: 80 rows, 0.0202 worth, dL median 0.0047), still 14x the band.
+
+Checks: `sqscore`, `record_guard`, `void_insert --selftest` re-run green; README/STATUS history line
+byte-identical; no row changed, no score claimed. Entries doc 75 §11-§12; records 317-318.

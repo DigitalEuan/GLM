@@ -303,6 +303,64 @@ the k = 32 notch can be entered — the pose reaches side below `k` — but not 
 next fix is **hard side projection** (exact container, no penalty) plus contact-graph repair on the 17 jamming
 pairs rather than more descent.
 
+## 11. Run 117 — the k = 32 notch under a hard side constraint, and the contact-graph repair
+
+The card's first fix, implemented exactly as written. **The container is never a penalty:** after every move
+each cell is clamped into the box (`x in [lo + h_x, hi - h_x]`), so every state reported here satisfies the
+side constraint *exactly*, and penetration is the only objective. **The repair is a descent on the contact
+graph:** for the deepest violating pair, the exact separating slide
+`sign(proj) * (h_a(q) + h_b(q) + eps - |proj|)` along that pair's best axis, kept only if the whole pose's
+`(pairs, sum of squared depth, deepest)` strictly improves, deepest 12 pairs per pass.
+
+* **The notch is bigger than run 114 said.** The finer scan (140 x 33, six refine rounds) finds a free square
+  of side **0.8394** at the k = 32 frontier pose, not 0.7171 — the earlier figure was a coarse-grid
+  underestimate. The cell is therefore **0.1606** short of fitting, and it is placed at the hole's centre.
+* **Start:** frontier 998 at side 31.986238620 plus the inserted cell → **3 violating pairs, deepest
+  0.0939**.
+* **Repair:** 23 passes of exact slides move the deepest bite from `9.392e-2` to `9.389e-2` — `2.0e-6` of
+  total progress — and then **no single slide helps**. The fallback constrained sweep accepts **0/168**
+  patches: the monotone test refuses every one, so this is a genuine local minimum of the move set, not a
+  stalled loop.
+* **Verdict at 40 digits (`true_geom`):** n = 999 reaches side
+  **`31.99687592223010338076867830301645689164`** — `3.124e-3` inside `k = 32`, which would be worth
+  `9.9e-5` — but with **6 violations**. So **no: n = 999 does not go below 32 with zero overlap.** The three
+  SAT pairs are mutually blocking (closing one by an exact slide opens another), and the pose has `1.4e-2` of
+  side slack against a `9.4e-2` bite.
+* No candidate passes C1/C2; nothing is written to `submission.csv`, no score is claimed.
+
+**What this settles.** The notch is real room but not a cell: 0.8394 of the 1.0 needed. The re-squeeze
+recovers `3.1e-3` of side and `1.9e-4` of the bite. Closing the remaining `9.4e-2` on three mutually
+blocking pairs is not a projection problem — it needs a different packing of the notch's neighbourhood.
+
+## 12. What a 1 % capture on the 553 beaten rows really costs
+
+The card's arithmetic is right: 1 % of the 15.02 unclaimed room is **0.15023**, and one percentage point of
+capture (`e -> e + 0.01`, `e = (k - L)/(k - sqrt(n))`) is **0.21742** — both the order of the 0.163635 gap.
+What the score arithmetic hides is the **price**: per row the side must fall by `dL = 0.01 (k - sqrt(n))`.
+
+| quantity | value |
+|---|---|
+| beaten rows | 553 |
+| `dL` needed per row for +1 pp of capture | **0.00399 – 0.00984**, median **0.00708** |
+| capture `e` already taken | 0.001 – 0.495, median 0.287 |
+| measured legal-gap band (run 111, doc 72 §6) | **6.2e-5 – 3.3e-4** |
+| rows needing `dL <= 3.3e-4` (the whole band) | **0 / 553** |
+| rows needing `dL <= 3e-3` | **0 / 553** |
+| best-case polish: every row moves by the band top `3.3e-4` | **+0.00999** |
+| conservative polish: band floor `6.2e-5` | +0.00188 |
+| face-squeeze campaign (run 108) | 2.7e-8 |
+
+The required move is **12x to 30x the largest local slide this project has ever measured as available**, and
+**no row at all** is below `3e-3`. A 1 % capture therefore costs **21.8x the entire best-case polish
+ceiling**. It is not a polish: it is **553 new constructions**, each of which must beat a certified-tight or
+near-tight pose rather than nudge one. The honest value of the whole polish campaign is about **+0.01** —
+one sixteenth of the gap — and the face-squeeze is `2.7e-8`.
+
+Where the money sits, if any polish is worth doing at all: the low-capture rows are cheapest per row
+(`e in [0, 0.1)`: 80 rows, 0.0202 worth, `dL` median 0.0047), the high-capture rows carry most of the value
+(`e in [0.4, 0.5)`: 132 rows, 0.0622 worth, `dL` median 0.0092) — but even the cheapest row needs `0.0047`,
+**fourteen times** the band's top.
+
 ## 9. Corrections to earlier documents and to run 114
 
 * **The band count is 30, not 29 or 31.** Run 114's table looped `k = 2..31` and so silently dropped band
