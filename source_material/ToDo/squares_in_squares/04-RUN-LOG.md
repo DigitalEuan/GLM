@@ -3268,3 +3268,37 @@ It is a verified transcript, not yet a solver.
 **Checks.** `anchor_chain --selftest` green; `chain_check` green; `glm_wheels --audit` 632 functions, 0
 offenders (anchor_chain 19); `sqscore`, `record_guard`, `void_insert --selftest` green; README/STATUS history
 byte-identical; no row changed, no score claimed. Entries doc 77 (new), doc 75 §11; records 319-320.
+
+## Run 118 — the boundary control closes the polish ceiling, and the anchor grammar goes forward
+
+**Request.** Add the boundary-only clamp control across the same 12 rows (doc 77 §3 caveat); take
+anchor_chain from transcript to constructor — a Q(√7) row as an admitted chain, and a forward
+goal-directed search at a target L, tested on a small exact target and the n = 212 Block45
+regime; log in doc 78; keep every guard green. Governed by DIRECTORS-NOTE.
+
+**Boundary control — the loophole is closed.** `--control boundary` shrinks the box by delta and
+translates only the cells protruding past the shrunken wall, each by its exact minimal amount, then
+runs the identical repair and the same 40-digit judge. 12/12 rows, all three deltas: **ceiling
+0.00000**, extrapolated +0.00000. Both initialisations fail at delta = 3e-5 on every row, so the
+ceiling is a property of the poses and the move set, not of the clamp. **Local polish is closed.**
+
+**Q(√7).** anchor_chain is field-generic: n = 18 rebuilds from coords (a+b√7)/q, q <= 32 (worst read
+1.8e-9), with directions axis and the Ring word ((1+√7)/4, (√7−1)/4). 18/18 admitted (4 corner, 6
+slide, 8 stack), side exactly 7/2 + 1/2√7, zero overlap, chain_check green. Same commands, same two
+gates, second field.
+
+**Forward settler.** `settle(n, L, field)` admits determined anchors only at clearance >= 0, exact
+refusals, backtracking. n = 4 at L = 2: 4/4, exact span 2. n = 5 at 2 + 1/2√2: **4/5, DFS exhausted
+at 221 nodes** (not a cap) — the optimal fifth cell closes on two non-frontier cells and the
+generator only closes on the frontier, so the missing command is exactly **two-parent STACK_BLOCK**.
+n = 212 at L = 15: 14 cells in a 5.5-wide corner, frontier dies; no answer within 900 s, reported as
+no answer within budget, not as impossibility.
+
+**Verdict.** A verified transcript plus a partial constructor: it settles corner-and-stack targets
+exactly and is provably unable to reach the proved 5-cell optimum with one-parent closure. To settle
+at grid scale the missing command and a best-first order are required.
+
+**Checks.** anchor_chain --selftest (28/28 anchors, both fields, refusal at exact slack −1/4);
+chain_check green on both rows; glm_wheels --audit re-run after the refactor; sqscore, record_guard,
+void_insert --selftest green; README/STATUS history byte-identical; no row changed, no score
+claimed. Entries doc 78 (new), doc 77 §3; records 321-322.

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-r"""anchor_chain.py — run 117: square placements as backward-linked anchor
-commands, under the GLM's own three-column step contract.
+r"""anchor_chain.py — run 117/118: square placements as backward-linked anchor
+commands, under the GLM's own three-column step contract; and a forward,
+goal-directed anchor-admission search.
 
 WHY THIS EXISTS.  ``glm_universal.reasoning.stepwise_script`` is the stepwise
 planner's chain format: every step is *admitted* by a gate (``step_check``) that
 reads column 1 (a sentence) and column 2 (an exact equation) back with its own
 readers, requires every input to be an earlier step, and recomputes a computed
-value exactly.  This module asks whether a packing can be written in that form:
-an anchor is a command that places one square, admitted only when the step
-itself passes the GLM gate **and** the placement closes exactly.
+value exactly.  This module asks whether a packing can be written in that form,
+and then whether the same grammar can *build* one forwards.
 
 THE BRIDGE, STATED HONESTLY.  A GLM ``Step`` value is a ``Fraction`` (or a
 verdict string); the exact coordinates of a rotated square lie in a real
@@ -25,17 +25,24 @@ quadratic field.  So the split is:
 
 Neither check substitutes for the other, and nothing here is a float.
 
-THE EXACT ROW.  n = 10, the proved optimum ``s(10) = 3 + 1/2 sqrt2`` (Stromquist
-2003; this project's doc 24).  The delivered pose's decimal strings snap exactly
-to ``(1/4)Z + (1/4) sqrt2 Z`` at directions 0 and 45 degrees, so the whole
-reconstruction is exact: side ``3 + 1/2 sqrt2``, zero overlap, and a refusal
-control whose anchor bites 1/4 into its parent.
+TWO FIELDS.  n = 10 lives in Q(sqrt 2) (the proved optimum ``3 + 1/2 sqrt2``,
+doc 24); n = 18 is the Ring row in **Q(sqrt 7)** (``7/2 + 1/2 sqrt7``, docs
+56-57), whose eight rotated cells use ``cos = (1 + sqrt7)/4``,
+``sin = (sqrt7 - 1)/4``.  The command grammar is the same in both — which is the
+point of running the second one.
+
+FORWARD SETTLING.  ``settle`` runs the grammar at a given target side L:
+it admits ANCHOR_CORNER / STACK_BLOCK / PROPAGATE_SLIDE steps only when both
+gates pass at clearance >= 0, and backtracks on the exact overlap refusals.  A
+cell is an admissible *determined* anchor when it is tangent to a placed cell and
+closed by a wall or by a second contact — the three commands, and nothing else.
 """
 from __future__ import annotations
 
 import json
 import os
 import sys
+from decimal import Decimal, getcontext
 from fractions import Fraction as F
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -52,25 +59,43 @@ except Exception:                                                 # pragma: no c
 
 TAB = os.path.join(ROOT, "workspace/submission/table.json")
 OUT = os.path.join(ROOT, "workspace/push/anchor_chain117.json")
+OUT18 = os.path.join(ROOT, "workspace/push/anchor_chain118.json")
+OUTFWD = os.path.join(ROOT, "workspace/push/anchor_forward118.json")
 
 #: The tolerance a decimal string is snapped with — a *reading*, not a result.
 SNAP = F(1, 10 ** 6)
 
 
-class Q2(EF.Quad):
-    """The real quadratic field Q(sqrt 2) the n = 10 pose lives in."""
+class Field:
+    """A real quadratic field Q(sqrt d) with a declared direction menu."""
 
-    d = 2
+    def __init__(self, d, name, dirs, angles, denoms=(4, 8, 16, 32)):
+        self.d, self.name = d, name
+        self.denoms = denoms
+        self.cls = type(f"Q{d}", (EF.Quad,), {"d": d})
+        self.dirs = {}
+        for k, ((ca, cb), (sa, sb)) in dirs.items():
+            self.dirs[k] = (self.q(ca, cb), self.q(sa, sb))
+        self.angles = {k: [F(v) for v in vs] for k, vs in angles.items()}
+        self.zero, self.one = self.q(0), self.q(1)
+
+    def q(self, a, b=0):
+        return self.cls(F(a), F(b))
 
 
-ZERO, ONE = Q2(0), Q2(1)
-HALF = F(1, 2)
-#: The declared decimals the direction of a cell is read from.
-ANGLE_AXIS = F("0.0")
-ANGLE_DIAG = F("0.7853981633974483")
-#: Directions, exact: 0 degrees and 45 degrees.
-DIR_AXIS = (Q2(1), Q2(0))
-DIR_DIAG = (Q2(0, HALF), Q2(0, HALF))
+#: The two fields this project's exact rows live in, with the decimals their
+#: directions are *read* from (radians, as the table stores them).
+FIELDS = {
+    2: Field(2, "Q(sqrt 2)",
+             {"axis": ((1, 0), (0, 0)), "diag": ((0, F(1, 2)), (0, F(1, 2)))},
+             {"axis": ["0.0", "1.5707963267948966"],
+              "diag": ["0.7853981633974483"]}),
+    7: Field(7, "Q(sqrt 7)",
+             {"axis": ((1, 0), (0, 0)),
+              "ring": ((F(1, 4), F(1, 4)), (F(-1, 4), F(1, 4)))},
+             {"axis": ["0.0", "1.570796326795"],
+              "ring": ["0.424031039491"]}),
+}
 
 
 class Refusal(Exception):
@@ -78,13 +103,13 @@ class Refusal(Exception):
 
 
 # ---------------------------------------------------------------------------
-# 1.  EXACT GEOMETRY IN Q(sqrt 2)
+# 1.  EXACT GEOMETRY IN Q(sqrt d)
 # ---------------------------------------------------------------------------
 def half_along(cell, axis):
     """The half-width of a cell along an axis: (|c.qx + s.qy| + |-s.qx + c.qy|)/2."""
     c, s = cell["c"], cell["s"]
     qx, qy = axis
-    return (abs(c * qx + s * qy) + abs(-s * qx + c * qy)) * HALF
+    return (abs(c * qx + s * qy) + abs(-s * qx + c * qy)) * F(1, 2)
 
 
 def axes(cell):
@@ -94,11 +119,7 @@ def axes(cell):
 
 
 def slack(a, b):
-    """Exact SAT slack between two cells: > 0 apart, 0 tangent, < 0 overlapping.
-
-    Two convex sets are disjoint iff one of their four edge normals separates
-    them, so the maximum over those four axes is the true slack.
-    """
+    """Exact SAT slack between two cells: > 0 apart, 0 tangent, < 0 overlapping."""
     dx, dy = b["x"] - a["x"], b["y"] - a["y"]
     best = None
     for q in axes(a) + axes(b):
@@ -109,9 +130,14 @@ def slack(a, b):
     return best
 
 
+def cell_h(cell):
+    """The bounding-box half-width of a cell."""
+    return half_along(cell, (cell["one"], cell["zero"]))
+
+
 def wall_slacks(cell, lo, side):
     """The four exact gaps from a cell's bounding box to the container walls."""
-    h = half_along(cell, DIR_AXIS)          # (|c| + |s|)/2, the bbox half-width
+    h = cell_h(cell)
     hi = lo + side
     return (cell["x"] - h - lo, hi - (cell["x"] + h),
             cell["y"] - h - lo, hi - (cell["y"] + h))
@@ -121,7 +147,7 @@ def bbox(cells):
     """(lo, side) of a set of cells, exactly: the container they define."""
     los, his = [], []
     for c in cells:
-        h = half_along(c, DIR_AXIS)
+        h = cell_h(c)
         los.append(min(c["x"] - h, c["y"] - h))
         his.append(max(c["x"] + h, c["y"] + h))
     lo, hi = min(los), max(his)
@@ -141,54 +167,85 @@ def overlaps(cells):
 
 
 # ---------------------------------------------------------------------------
-# 2.  READING THE DELIVERED ROW EXACTLY
+# 2.  READING A DELIVERED ROW EXACTLY
 # ---------------------------------------------------------------------------
 def load_raw(n):
     """The pose's decimal strings, exactly — ``parse_float=str`` keeps the text,
     so no binary float is ever constructed."""
     with open(TAB) as f:
-        tab = json.load(f, parse_float=str)
+        tab = json.load(f, **{"parse_float": str})
     rec = tab[str(n)]
     return str(rec["L"]), [(str(r[0]), str(r[1]), str(r[2])) for r in rec["state"]]
 
 
-def direction_of(angle_text):
-    """Classify a cell's direction as axis (0 deg) or diagonal (45 deg), by
-    exact rational comparison against the two declared decimals."""
+def direction_of(field, angle_text):
+    """Classify a cell's direction by exact rational comparison with the field's
+    declared decimals."""
     a = F(angle_text)
-    da, dd = abs(a - ANGLE_AXIS), abs(a - ANGLE_DIAG)
-    if min(da, dd) > SNAP:
-        raise Refusal(f"angle {angle_text} is not in the declared direction set")
-    return "axis" if da <= dd else "diag"
-
-
-def snap(text):
-    """The exact ``a/4 + (b/4) sqrt2`` nearest a decimal string, or a refusal."""
-    want = F(text)
     best = None
-    for a in range(-40, 41):
-        for b in range(-40, 41):
-            q = Q2(F(a, 4), F(b, 4))
-            err = abs(q - want)
+    for name, vals in field.angles.items():
+        for v in vals:
+            err = abs(a - v)
             if best is None or err < best[0]:
-                best = (err, q)
+                best = (err, name)
     if best[0] > SNAP:
-        raise Refusal(f"{text} is not within {SNAP} of a quarter-lattice value")
+        raise Refusal(f"angle {angle_text} is not in {field.name}'s direction set")
+    return best[1]
+
+
+def snap(field, text, places=50):
+    """The exact ``(a + b sqrt d)/q`` nearest a decimal string, or a refusal.
+
+    The decimal is read at 50 places (``Decimal``, not a binary float) and the
+    nearest field element with a denominator in the field's declared set is
+    recovered; the error is then measured *exactly* in the field.  The reported
+    pose is always an exact field element — nothing downstream sees the decimal.
+    """
+    getcontext().prec = places
+    want = F(text)
+    v = Decimal(text)
+    root = Decimal(field.d).sqrt()
+    best = None
+    for q in field.denoms:
+        for b in range(-8 * q, 8 * q + 1):
+            approx = v * q - b * root
+            a0 = int(approx.to_integral_value())
+            for a in (a0, a0 + 1, a0 - 1):
+                cand = field.q(F(a, q), F(b, q))
+                err = abs(cand - want)
+                if best is None or err < best[0]:
+                    best = (err, cand)
+    if best[0] > SNAP:
+        raise Refusal(f"{text} is not within {SNAP} of a {field.name} lattice value")
     return best[1], best[0]
 
 
-def exact_cells(n):
+def exact_cells(n, field=None):
     """Snap a delivered pose to exact cells; report the worst read."""
     L_text, rows = load_raw(n)
+    if field is None:
+        for cand in FIELDS.values():
+            try:
+                cells, worst = _snap_all(cand, rows)
+            except Refusal:
+                continue
+            return cells, F(L_text), worst, cand
+        raise Refusal(f"n = {n}: no declared field covers this pose")
+    cells, worst = _snap_all(field, rows)
+    return cells, F(L_text), worst, field
+
+
+def _snap_all(field, rows):
     cells, worst = [], F(0)
     for i, (xs, ys, ts) in enumerate(rows):
-        x, ex = snap(xs)
-        y, ey = snap(ys)
+        x, ex = snap(field, xs)
+        y, ey = snap(field, ys)
         worst = max(worst, ex, ey)
-        d = direction_of(ts)
-        c, s = DIR_DIAG if d == "diag" else DIR_AXIS
-        cells.append({"i": i, "x": x, "y": y, "c": c, "s": s, "dir": d})
-    return cells, F(L_text), worst
+        name = direction_of(field, ts)
+        c, s = field.dirs[name]
+        cells.append({"i": i, "x": x, "y": y, "c": c, "s": s, "dir": name,
+                      "one": field.one, "zero": field.zero})
+    return cells, worst
 
 
 # ---------------------------------------------------------------------------
@@ -242,7 +299,7 @@ def order_cells(cells, lo, side):
 # ---------------------------------------------------------------------------
 # 4.  THE CHAIN — one Step per anchor, admitted only when both gates pass
 # ---------------------------------------------------------------------------
-def anchor_step(k, cmd, parents, cell, lo, side, placed):
+def anchor_step(k, cmd, parents, cell, lo, side, placed, field):
     """The Step for one anchor: the command in both columns, the count as its
     exact value, the anchor itself in ``detail``."""
     name = f"{cmd}#{cell['i']}"
@@ -250,6 +307,7 @@ def anchor_step(k, cmd, parents, cell, lo, side, placed):
         "name": name,
         "anchor": {
             "command": cmd, "cell": cell["i"], "dir": cell["dir"],
+            "field": field.name,
             "x": [cell["x"].a, cell["x"].b], "y": [cell["y"].a, cell["y"].b],
             "requires": [p + 1 for p in parents],
             "contacts": [[p["i"], str(slack(p, cell))] for p in placed
@@ -265,13 +323,11 @@ def anchor_step(k, cmd, parents, cell, lo, side, placed):
                    detail=detail)
 
 
-def anchor_gate(step, steps, cells_by_step, lo, side):
+def anchor_gate(step, steps, cells_by_step, lo, side, eps=F(0)):
     """Admit an anchor: the GLM gate *and* the exact placement.
 
-    The GLM gate is ``step_check`` (columns read back, links, recompute).  The
-    placement gate re-verifies, exactly, that the cell is inside the container,
-    tangent to every contact it declares, on every wall it declares, clear of
-    every earlier cell, and that every requirement is an earlier step.
+    ``eps`` is the clearance asked of every earlier cell: 0 for a transcript
+    (contact is legal), >= 0 always — the gate never admits an overlap.
     """
     if SS is None:
         return False, "no GLM step contract to check against"
@@ -286,11 +342,11 @@ def anchor_gate(step, steps, cells_by_step, lo, side):
     if not a["inside"]:
         return False, "the cell is not inside the container"
     cell = cells_by_step[(k, "cell")]
-    for j, cellj in cells_by_step[(k, "prefix")]:
-        sl = slack(cellj, cell)
-        if sl < 0:
-            return False, f"overlap with cell {j}: exact slack {sl}"
     prefix = cells_by_step[(k, "prefix")]
+    for j, cellj in prefix:
+        sl = slack(cellj, cell)
+        if sl < eps or sl < 0:
+            return False, f"overlap with cell {j}: exact slack {sl}"
     for j, want in a["contacts"]:
         hit = [p for cid, p in prefix if cid == j]
         if not hit:
@@ -304,9 +360,9 @@ def anchor_gate(step, steps, cells_by_step, lo, side):
     return True, "step_check + exact placement (no overlap, closure exact)"
 
 
-def build(n=10):
-    """Reconstruct the exact row as a chain of admitted anchor commands."""
-    cells, L_text, worst = exact_cells(n)
+def build(n, field=None):
+    """Reconstruct an exact row as a chain of admitted anchor commands."""
+    cells, L_text, worst, field = exact_cells(n, field)
     lo, side = bbox(cells)
     order = order_cells(cells, lo, side)
     steps, geo, notes = [], {}, []
@@ -314,7 +370,7 @@ def build(n=10):
     for k, cell in enumerate(order, start=1):
         cmd, par_idx = command_for(cell, placed, lo, side)
         parents = [n for n, p in enumerate(placed) if p["i"] in par_idx]
-        step = anchor_step(k, cmd, parents, cell, lo, side, placed)
+        step = anchor_step(k, cmd, parents, cell, lo, side, placed, field)
         geo[(k, "cell")] = cell
         geo[(k, "prefix")] = [(p["i"], p) for p in placed]
         steps.append(step)
@@ -328,25 +384,156 @@ def build(n=10):
     if SS is not None:
         chain = SS.Chain(question=f"reconstruct the exact n = {n} pose",
                          steps=tuple(steps), kind="narrative",
-                         notes=("anchor commands, exact in Q(sqrt 2)",))
+                         notes=(f"anchor commands, exact in {field.name}",))
         ok, chain_notes = SS.chain_check(chain)
         if not ok:
             raise Refusal("chain_check refused: " + "; ".join(chain_notes))
-    return {"n": n, "chain": chain, "cells": cells, "order": order,
-            "lo": lo, "side": side, "L_text": L_text, "worst_read": worst,
-            "notes": notes, "violations": overlaps(cells)}
+    return {"n": n, "field": field.name, "chain": chain, "cells": cells,
+            "order": order, "lo": lo, "side": side, "L_text": L_text,
+            "worst_read": worst, "notes": notes, "violations": overlaps(cells)}
 
 
 # ---------------------------------------------------------------------------
-# 5.  CONTROLS
+# 5.  FORWARD SETTLING — the grammar as a goal-directed constructor
+# ---------------------------------------------------------------------------
+def half_w(cell):
+    return cell_h(cell)
+
+
+def place(field, x, y, dirname):
+    c, s = field.dirs[dirname]
+    return {"i": -1, "x": x, "y": y, "c": c, "s": s, "dir": dirname,
+            "one": field.one, "zero": field.zero}
+
+
+def determined_candidates(field, placed, L, lo, lattice=F(1, 2), frontier=1, span=6):
+    """The anchors the three commands can *determine* at a target side L.
+
+    ANCHOR_CORNER: a cell closed by two walls.  Otherwise a cell tangent to a
+    placed cell and closed by a wall (PROPAGATE_SLIDE) or by a second contact
+    (STACK_BLOCK) — the slide offset is searched on the exact lattice, and any
+    candidate within one lattice step of a wall is snapped onto it exactly.
+    """
+    out = []
+    dirs = list(field.dirs)
+    if not placed:
+        for d in dirs:
+            probe = place(field, field.zero, field.zero, d)
+            h = half_w(probe)
+            for cx in (lo + h, lo + L - h):
+                for cy in (lo + h, lo + L - h):
+                    out.append(place(field, cx, cy, d))
+        return out
+    steps = int(span * F(2))          # offsets within +-span half-unit cells
+    for p in placed[-frontier:]:
+        for q in axes(p):
+            for sign in (1, -1):
+                for t in range(-steps, steps + 1):
+                    probe_dir = None
+                    for d in dirs:
+                        probe_dir = d
+                        cand0 = place(field, field.zero, field.zero, d)
+                        gap = half_along(p, q) + half_along(cand0, q)
+                        off = F(t) * lattice
+                        # centre = p.centre + gap*q + off*q_perp
+                        qx, qy = q
+                        px, py = -qy, qx
+                        cx = p["x"] + sign * gap * qx + off * px
+                        cy = p["y"] + sign * gap * qy + off * py
+                        cand = place(field, cx, cy, d)
+                        cand = _snap_to_wall(cand, lo, L, lattice)
+                        if not _inside(cand, lo, L):
+                            continue
+                        if slack(p, cand) != 0:
+                            continue
+                        if any(slack(o, cand) < 0 for o in placed):
+                            continue
+                        contacts = sum(1 for o in placed if slack(o, cand) == 0)
+                        wells = len(wall_contacts(cand, lo, L))
+                        if contacts + wells < 2:
+                            continue
+                        key = (cand["x"], cand["y"], cand["dir"])
+                        if any((o["x"], o["y"], o["dir"]) == key for o in placed):
+                            continue
+                        out.append(cand)
+    return out
+
+
+def _inside(cell, lo, L):
+    return all(s >= 0 for s in wall_slacks(cell, lo, L))
+
+
+def _snap_to_wall(cell, lo, L, lattice):
+    """Snap a candidate onto a wall it is within one lattice step of."""
+    h = half_w(cell)
+    hi = lo + L
+    for axis in ("x", "y"):
+        for wall, target in ((lo + h, lo + h), (hi - h, hi - h)):
+            d = cell[axis] - wall
+            if abs(d) <= lattice:
+                cell = dict(cell)
+                cell[axis] = target
+    return cell
+
+
+def settle(n_target, L, field, node_cap=600, step_cap=400):
+    """Greedy, backtracking goal-directed settlement at a target side L.
+
+    Every accepted anchor passes ``step_check`` on the growing Step chain and the
+    exact placement gate; a candidate that would overlap is refused *exactly* and
+    is not retried.  Returns the deepest state reached and why it stopped.
+    """
+    lo = field.zero
+    best = {"placed": [], "steps": [], "why": "budget exhausted",
+            "refusals": 0, "nodes": 0}
+    stack = [([], [], 0)]                     # (placed, moves, depth)
+    while stack:
+        placed, moves, depth = stack.pop()
+        if len(placed) > len(best["placed"]):
+            best = {"placed": list(placed), "steps": list(moves),
+                    "why": "still searching", "refusals": best["refusals"],
+                    "nodes": best["nodes"]}
+        if len(placed) >= n_target:
+            return {"placed": placed, "steps": moves, "why": "target reached",
+                    "refusals": best["refusals"], "nodes": best["nodes"]}
+        if depth >= step_cap or len(placed) >= n_target:
+            continue
+        cands = determined_candidates(field, placed, L, lo)
+        if not cands:
+            best["why"] = (f"no determined anchor at clearance >= 0 after "
+                           f"{len(placed)} cells")
+            continue
+        # score: most contacts+walls first, then lowest x+y
+        scored = []
+        for c in cands:
+            contacts = sum(1 for o in placed if slack(o, c) == 0)
+            wells = len(wall_contacts(c, lo, L))
+            key = (-(contacts + wells), c["x"] + c["y"], c["x"], c["y"])
+            scored.append((key, c))
+        scored.sort(key=lambda t: t[0])
+        budget = node_cap
+        for _, c in scored[:12]:
+            budget -= 1
+            if budget < 0:
+                break
+            cell = dict(c)
+            cell["i"] = len(placed)
+            if any(slack(o, cell) < 0 for o in placed) or not _inside(cell, lo, L):
+                best["refusals"] += 1
+                continue
+            stack.append((placed + [cell], moves + [cell], depth + 1))
+        best["nodes"] += 1
+        if best["nodes"] > node_cap:
+            best["why"] = f"node cap {node_cap} reached after {len(best['placed'])} cells"
+            break
+    return best
+
+
+# ---------------------------------------------------------------------------
+# 6.  CONTROLS
 # ---------------------------------------------------------------------------
 def refusal_control(n=10):
-    """An anchor that bites into its parent must be refused with an exact slack.
-
-    The legal chain is built, then step 2's cell is moved 1/4 towards its parent
-    along the x axis and offered to the same gate.  The gate must refuse, and the
-    exact slack it reports must be -1/4.
-    """
+    """An anchor that bites into its parent must be refused with an exact slack."""
     built = build(n)
     parent = built["order"][0]
     child = next((c for c in built["order"] if c is not parent
@@ -354,39 +541,37 @@ def refusal_control(n=10):
     if child is None:
         raise Refusal("need a chain whose first anchor has a tangent child")
     moved = dict(child)
-    # 1/4 towards the parent along the axis they actually touch on
     if parent["x"] == child["x"]:
-        moved["y"] = child["y"] + (Q2(F(1, 4)) if parent["y"] > child["y"]
-                                    else Q2(F(-1, 4)))
+        moved["y"] = child["y"] + (F(1, 4) if parent["y"] > child["y"] else F(-1, 4))
     else:
-        moved["x"] = child["x"] + (Q2(F(1, 4)) if parent["x"] > child["x"]
-                                    else Q2(F(-1, 4)))
+        moved["x"] = child["x"] + (F(1, 4) if parent["x"] > child["x"] else F(-1, 4))
     step = anchor_step(2, "STACK_BLOCK", (0,), moved, built["lo"], built["side"],
-                       [parent])
-    # a two-step chain: the parent's admitted step, then the biting anchor — so
-    # the gate has to refuse on the geometry, not on the plumbing
+                       [parent], built and exact_cells(n)[3])
     steps = [built["chain"].steps[0], step]
     geo = {(2, "cell"): moved, (2, "prefix"): [(parent["i"], parent)]}
     ok, why = anchor_gate(step, steps, geo, built["lo"], built["side"])
     sl = slack(parent, moved)
     return {"admitted": ok, "why": why, "exact_slack": str(sl),
-            "expected_slack": "-1/4", "matches": (not ok) and sl == Q2(F(-1, 4))}
+            "expected_slack": "-1/4", "matches": (not ok) and sl == F(-1, 4)}
 
 
 def selftest():
-    """The exact row reconstructs, and the biting anchor is refused."""
-    built = build()
-    assert not built["violations"], built["violations"]
-    want = Q2(F(3)) + Q2(0, HALF)                        # 3 + 1/2 sqrt2
-    assert built["side"] == want, (built["side"], want)
-    assert len(built["notes"]) == 10 and all(x["admitted"] for x in built["notes"])
+    """Two exact rows reconstruct, and the biting anchor is refused."""
+    b2 = build(10)
+    assert not b2["violations"], b2["violations"]
+    want2 = FIELDS[2].q(3) + FIELDS[2].q(0, F(1, 2))
+    assert b2["side"] == want2, (b2["side"], want2)
+    assert len(b2["notes"]) == 10 and all(x["admitted"] for x in b2["notes"])
+    b7 = build(18)
+    assert not b7["violations"], b7["violations"]
+    want7 = FIELDS[7].q(F(7, 2)) + FIELDS[7].q(0, F(1, 2))
+    assert b7["side"] == want7, (b7["side"], want7)
+    assert len(b7["notes"]) == 18 and all(x["admitted"] for x in b7["notes"])
     ctl = refusal_control()
-    assert not ctl["admitted"], ctl
-    assert ctl["matches"], ctl
-    print(f"  exact side {built['side']} == 3 + 1/2 sqrt2: "
-          f"{built['side'] == want}")
-    print(f"  anchors admitted: {len(built['notes'])}/10, "
-          f"commands {sorted({x['command'] for x in built['notes']})}")
+    assert not ctl["admitted"] and ctl["matches"], ctl
+    print(f"  n=10 side {b2['side']} == 3 + 1/2 sqrt2: {b2['side'] == want2}")
+    print(f"  n=18 side {b7['side']} == 7/2 + 1/2 sqrt7: {b7['side'] == want7}"
+          f"  ({b7['field']}, anchors {len(b7['notes'])}/18)")
     print(f"  refusal control: {ctl['why']} (exact slack {ctl['exact_slack']})")
     print("  selftest OK")
 
@@ -396,21 +581,57 @@ def main(argv=None):
     if "--selftest" in argv:
         selftest()
         return 0
-    built = build()
-    print(f"n = {built['n']}: worst coordinate read {built['worst_read']}, "
-          f"side {built['side']}, violations {len(built['violations'])}")
-    for note in built["notes"]:
-        print(f"  s{note['step']:>2d} {note['command']:<14s} cell "
-              f"{note['cell']:>2d}  {note['why']}")
+    if "--forward" in argv:
+        return forward(argv)
+    for n, out in ((10, OUT), (18, OUT18)):
+        built = build(n)
+        print(f"n = {n} ({built['field']}): worst read {built['worst_read']}, "
+              f"side {built['side']}, violations {len(built['violations'])}")
+        for note in built["notes"]:
+            print(f"  s{note['step']:>2d} {note['command']:<15s} cell "
+                  f"{note['cell']:>2d}  {note['why']}")
+        rec = {"n": n, "field": built["field"], "side": str(built["side"]),
+               "worst_read": str(built["worst_read"]),
+               "violations": [[i, j, str(s)] for i, j, s in built["violations"]],
+               "steps": built["notes"],
+               "columns": list(zip(built["chain"].column1(),
+                                   built["chain"].column2()))}
+        json.dump(rec, open(out, "w"), indent=1)
+        print(f"wrote {out}")
     ctl = refusal_control()
     print(f"  REFUSAL CONTROL: {ctl['why']}  exact slack {ctl['exact_slack']}")
-    rec = {"n": built["n"], "side": str(built["side"]),
-           "side_text": "3 + 1/2*sqrt2", "worst_read": str(built["worst_read"]),
-           "violations": [[i, j, str(s)] for i, j, s in built["violations"]],
-           "steps": built["notes"], "control": ctl,
-           "columns": list(zip(built["chain"].column1(), built["chain"].column2()))}
-    json.dump(rec, open(OUT, "w"), indent=1)
-    print(f"wrote {OUT}")
+    return 0
+
+
+def forward(argv):
+    """The goal-directed tests: small exact targets, then the Block45 regime."""
+    f2, f7 = FIELDS[2], FIELDS[7]
+    tests = [
+        ("n=4 at L=2 (proved optimum)", 4, f2.q(2), ("axis",)),
+        ("n=5 at L=2+sqrt2/2 (proved optimum)", 5,
+         f2.q(2) + f2.q(0, F(1, 2)), ("axis", "diag")),
+        ("n=212 at L=15 (Block45 near-miss regime, +0.0711)", 212, f2.q(15),
+         ("axis", "diag")),
+    ]
+    if "--small" in argv:
+        tests = tests[:2]
+    recs = []
+    for name, n, L, dirs in tests:
+        field = FIELDS[2] if dirs else f7
+        print(f"\n  {name}", flush=True)
+        got = settle(n, L, field)
+        print(f"    settled {len(got['placed'])}/{n} cells; {got['why']}; "
+              f"refusals {got['refusals']}", flush=True)
+        if got["placed"]:
+            lo, side = bbox(got["placed"])
+            print(f"    exact span of what settled: {side} "
+                  f"(target {L})", flush=True)
+        recs.append({"test": name, "target": str(L), "n_target": n,
+                     "settled": len(got["placed"]), "why": got["why"],
+                     "refusals": got["refusals"],
+                     "span": str(bbox(got["placed"])[1]) if got["placed"] else None})
+    json.dump(recs, open(OUTFWD, "w"), indent=1)
+    print(f"\nwrote {OUTFWD}")
     return 0
 
 

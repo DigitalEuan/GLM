@@ -1,7 +1,7 @@
 {
  "n": 10,
+ "field": "Q(sqrt 2)",
  "side": "3 + 1/2\u221a2",
- "side_text": "3 + 1/2*sqrt2",
  "worst_read": "88388348081/250000000000 - 1/4\u221a2",
  "violations": [],
  "steps": [
@@ -76,13 +76,6 @@
    "why": "step_check + exact placement (no overlap, closure exact)"
   }
  ],
- "control": {
-  "admitted": false,
-  "why": "overlap with cell 0: exact slack -1/4",
-  "exact_slack": "-1/4",
-  "expected_slack": "-1/4",
-  "matches": true
- },
  "columns": [
   [
    "Step 1: ANCHOR_CORNER places cell 0 (axis) is given as 1.",

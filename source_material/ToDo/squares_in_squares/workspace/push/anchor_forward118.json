@@ -1,0 +1,20 @@
+[
+ {
+  "test": "n=4 at L=2 (proved optimum)",
+  "target": "2",
+  "n_target": 4,
+  "settled": 4,
+  "why": "target reached",
+  "refusals": 0,
+  "span": "2"
+ },
+ {
+  "test": "n=5 at L=2+sqrt2/2 (proved optimum)",
+  "target": "2 + 1/2\u221a2",
+  "n_target": 5,
+  "settled": 4,
+  "why": "no determined anchor at clearance >= 0 after 4 cells",
+  "refusals": 0,
+  "span": "2 + 1/2\u221a2"
+ }
+]

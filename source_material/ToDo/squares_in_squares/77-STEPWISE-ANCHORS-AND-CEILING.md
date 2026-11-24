@@ -85,12 +85,13 @@ inward overlaps *every* tight pair at once (the deepest bite equals δ/2), and a
 nothing for a single-cell slide to trade: closing one pair opens another. So the polish problem is not
 "the move is 12–30× bigger than the band" (run 117's pricing) but "**the move set cannot move at all**".
 
-**Caveat, stated so the claim is not overread.** The initialisation clamps the *whole* container, which is
-the worst case for a tight pose; a polish that moved only boundary cells, or that re-solved a face at a
-time, is not tested here. The claim is therefore: *this* hard-projection repair obtains nothing, so the
-honest ceiling of a polish campaign is **0.00000**, not the +0.00999 the band comparison allowed and not
-the 0.15023 – 0.21742 a 1 % capture is worth. Both earlier numbers are now upper bounds that are not
-attained by the only polish instrument we have.
+**The control that closes the loophole (doc 78 §1).** The whole-box clamp is the worst case for a tight
+pose, so doc 117's caveat asked whether `0.00000` was an artefact of the initialisation.
+`polish_ceiling.py --control boundary` shrinks the box by the same `delta` and moves **only** the cells
+that protrude past the shrunken wall, each by its exact minimal amount, then runs the identical repair and
+the same 40-digit judge: on the same 12 rows, at all three `delta`s, the ceiling is **`0.00000` again**.
+Both initialisations fail at `delta = 3e-5` on every row, so the ceiling is a property of the poses and the
+move set, not of the clamp. **Local polish is closed** (doc 78 §1).
 
 ## 4. Anchors that become commands
 

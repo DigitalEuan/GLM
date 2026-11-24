@@ -1,0 +1,209 @@
+{
+ "n": 18,
+ "field": "Q(sqrt 7)",
+ "side": "7/2 + 1/2\u221a7",
+ "worst_read": "661437829559/1000000000000 - 1/4\u221a7",
+ "violations": [],
+ "steps": [
+  {
+   "step": 1,
+   "command": "ANCHOR_CORNER",
+   "cell": 0,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 2,
+   "command": "ANCHOR_CORNER",
+   "cell": 4,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 3,
+   "command": "ANCHOR_CORNER",
+   "cell": 9,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 4,
+   "command": "ANCHOR_CORNER",
+   "cell": 13,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 5,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 1,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 6,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 2,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 7,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 3,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 8,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 10,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 9,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 11,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 10,
+   "command": "PROPAGATE_SLIDE",
+   "cell": 12,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 11,
+   "command": "STACK_BLOCK",
+   "cell": 5,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 12,
+   "command": "STACK_BLOCK",
+   "cell": 14,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 13,
+   "command": "STACK_BLOCK",
+   "cell": 7,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 14,
+   "command": "STACK_BLOCK",
+   "cell": 6,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 15,
+   "command": "STACK_BLOCK",
+   "cell": 8,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 16,
+   "command": "STACK_BLOCK",
+   "cell": 15,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 17,
+   "command": "STACK_BLOCK",
+   "cell": 16,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  },
+  {
+   "step": 18,
+   "command": "STACK_BLOCK",
+   "cell": 17,
+   "admitted": true,
+   "why": "step_check + exact placement (no overlap, closure exact)"
+  }
+ ],
+ "columns": [
+  [
+   "Step 1: ANCHOR_CORNER places cell 0 (axis) is given as 1.",
+   "s1 = ANCHOR_CORNER#0 = 1 (given)"
+  ],
+  [
+   "Step 2: ANCHOR_CORNER places cell 4 (axis) is given as 2.",
+   "s2 = ANCHOR_CORNER#4 = 2 (given)"
+  ],
+  [
+   "Step 3: ANCHOR_CORNER places cell 9 (axis) is given as 3.",
+   "s3 = ANCHOR_CORNER#9 = 3 (given)"
+  ],
+  [
+   "Step 4: ANCHOR_CORNER places cell 13 (axis) is given as 4.",
+   "s4 = ANCHOR_CORNER#13 = 4 (given)"
+  ],
+  [
+   "Step 5: PROPAGATE_SLIDE places cell 1 (axis) is given as 5.",
+   "s5 = PROPAGATE_SLIDE#1 = 5 (given)"
+  ],
+  [
+   "Step 6: PROPAGATE_SLIDE places cell 2 (axis) is given as 6.",
+   "s6 = PROPAGATE_SLIDE#2 = 6 (given)"
+  ],
+  [
+   "Step 7: PROPAGATE_SLIDE places cell 3 (axis) is given as 7.",
+   "s7 = PROPAGATE_SLIDE#3 = 7 (given)"
+  ],
+  [
+   "Step 8: PROPAGATE_SLIDE places cell 10 (axis) is given as 8.",
+   "s8 = PROPAGATE_SLIDE#10 = 8 (given)"
+  ],
+  [
+   "Step 9: PROPAGATE_SLIDE places cell 11 (axis) is given as 9.",
+   "s9 = PROPAGATE_SLIDE#11 = 9 (given)"
+  ],
+  [
+   "Step 10: PROPAGATE_SLIDE places cell 12 (axis) is given as 10.",
+   "s10 = PROPAGATE_SLIDE#12 = 10 (given)"
+  ],
+  [
+   "Step 11: STACK_BLOCK places cell 5 (ring) is given as 11.",
+   "s11 = STACK_BLOCK#5 = 11 (given)"
+  ],
+  [
+   "Step 12: STACK_BLOCK places cell 14 (ring) is given as 12.",
+   "s12 = STACK_BLOCK#14 = 12 (given)"
+  ],
+  [
+   "Step 13: STACK_BLOCK places cell 7 (ring) is given as 13.",
+   "s13 = STACK_BLOCK#7 = 13 (given)"
+  ],
+  [
+   "Step 14: STACK_BLOCK places cell 6 (ring) is given as 14.",
+   "s14 = STACK_BLOCK#6 = 14 (given)"
+  ],
+  [
+   "Step 15: STACK_BLOCK places cell 8 (ring) is given as 15.",
+   "s15 = STACK_BLOCK#8 = 15 (given)"
+  ],
+  [
+   "Step 16: STACK_BLOCK places cell 15 (ring) is given as 16.",
+   "s16 = STACK_BLOCK#15 = 16 (given)"
+  ],
+  [
+   "Step 17: STACK_BLOCK places cell 16 (ring) is given as 17.",
+   "s17 = STACK_BLOCK#16 = 17 (given)"
+  ],
+  [
+   "Step 18: STACK_BLOCK places cell 17 (ring) is given as 18.",
+   "s18 = STACK_BLOCK#17 = 18 (given)"
+  ]
+ ]
+}
