@@ -90,7 +90,15 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    `n = a1a2 + b1b2 <= max(a1, b1)(a2 + b2)`, so the family is floored at `ceil(sqrt n)` and can only tie
    the grid; 935,520 spinor/gap/split candidates confirm it (`twin_boundary.py`, doc 97 §3). What remains
    open is the *interleaved* interface — cells of both lattices owning area on both sides of the seam —
-   which no butted family can express.
+   which no butted family can express. **Run 141 has now measured it** (`interleaved_boundary.py`,
+   doc 98): the interleaved constructor beats the butted bound (7.2000 against 8.2000 on its positive
+   control) but loses to the grid on all three small high-room targets — 270,000 placements, 250,221
+   exact-count assemblies, best sides `5.000000 / 5.000000 / 8.000000` against delivered
+   `4.822876 / 4.885618 / 7.690356`, every winner at the degenerate spinor `1/1`. The reason is exact:
+   a `b1 x b2` grain at spinor angle `theta` has `W H >= b1b2(1 + sin 2theta)`, so it can only pay for
+   itself under `sqrt(m(1+sin 2theta)) - sqrt(m) < 1` — at most 6-17 cells for `q <= 4`, where a 49-cell
+   grain is priced out. **Two grains cannot do it; the lever is many short grain contacts** (2-9
+   orientation classes, doc 97 §5), not a better interface.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

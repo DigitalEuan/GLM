@@ -691,3 +691,22 @@ round-trip stability with ~2e-9 clearance). Every mathematical claim in
 the Leech layer is machine-verified with exact integer computation; no
 floats anywhere in the lattice math. Λ16's kissing number 7320 is cited
 (SPLAG), not verified — marked as such everywhere it appears.
+
+**Run 141 (2026-11-25) — the interleaved boundary, and its price.** Doc 97's
+butted twin family was capped at `L >= ceil(sqrt n)` because a straight interface
+adds two extents. `scripts/interleaved_boundary.py` builds the family that
+interpenetrates: an axis substrate (rectangle, stepped top, or corner notch) with
+one or two rational-spinor grains placed inside its bounding box, collisions
+resolved from one side (`give="block"` sacrifices tilted cells, `give="sub"` digs
+a notch in the substrate), all coordinates on the exact integer grid `Z/22100` and
+every survivor re-decided by the independent exact SAT. Its positive control does
+break doc 97's cap (4x4 + 3x3 twin: **7.2000** against **8.2000**); the search then
+sweeps **270,000 placements** (250,221 assemblies carrying exactly `n` cells) on
+`n = 18, 19, 51` and finds **0 promotable** — best sides **5.000000, 5.000000,
+8.000000**, i.e. the grid, every winner at the degenerate spinor `1/1`. The
+reason is an exact inequality: a grain of `m` cells at spinor angle `theta` needs
+`sqrt(m(1+x)) - sqrt(m) < 1`, `x = sin 2theta`, to pay for its own bbox, which caps
+it at **6-17 cells** for `q <= 4`; the `n = 51` grain has 49. So `submission.csv`
+and root `WHITEBOARD.md` are untouched, the total stands at **22.217428576**
+(554 beats, 446 ties), and the next instrument must build *many* short grain
+contacts (the delivered rows carry 2-9 orientation classes), not a better line.

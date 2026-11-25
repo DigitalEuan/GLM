@@ -4178,3 +4178,64 @@ green; `sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels --au
 functions, 0 offenders**; `py_compile` OK.
 
 no row changed |
+
+## Run 141 — 2026-11-25 — the interleaved interface: built, gated, and priced out
+
+**Brief.** Doc 97 §3 capped the butted twin family at `L >= ceil(sqrt n)` and
+§4 named the next instrument: an interface that interpenetrates instead of
+butting. Build it, sweep `n = 18, 19, 51`, gate every candidate exactly, promote
+only on a strictly positive verified gain. New `scripts/interleaved_boundary.py`,
+ledger `workspace/push/interleaved_boundary.json`, doc 98.
+
+**Constructor.** Axis substrate (rectangle / stepped top / corner notch) plus one
+or two rational-spinor grains placed *inside* the substrate's bbox, with the
+collision resolved from one side only: `give="block"` deletes tilted cells, the
+substrate keeps every cell; `give="sub"` deletes substrate cells so the whole grain
+survives and the axis grain grows a notch under it. Lost cells are made up by
+enlarging the substrate and thinning back to exactly `n`. Every coordinate lies on
+`Z/22100`, so the hot loop is integer (`pair_slack2` = twice the exact slack,
+denominators cleared, sign unchanged), the winning pose is converted back to
+`Fraction` and re-decided by `import_n090`'s independent SAT. The `Fraction`
+version cost 15 ms per placement; the integer rewrite 110 us, which made the full
+space affordable: 270,000 placements in 30 s.
+
+**Controls (9).** The one that matters is the positive control: `4x4 + 3x3` at the
+3-4-5 spinor, moved to `(1,3)`, gives interleaved side **7.2000** against doc 97's
+butted bound **8.2000** for the very same blocks — interleaving *does* break the
+cap. Also: the stepped top edge deletes 2 cells where the solid rectangle deletes 3;
+`give="sub"` trades 2 substrate cells for all 9 tilted ones; a buried grain is
+annihilated; the three-domain bookkeeping identity holds exactly; the fast bbox
+equals the corner bbox.
+
+**Search.** 6 spinors x 5x5 corner offsets x both yield rules x every near-square
+block x every substrate family: **n = 18: 53,700 placements / 47,786 exact-count
+assemblies**; **n = 19: 50,400 / 44,711**; **n = 51: 165,900 / 157,724**. Best
+interleaved sides **5.000000, 5.000000, 8.000000** against delivered **4.822876,
+4.885618, 7.690356** — i.e. exactly the grid, on all three. Every winner uses
+spinor **`1/1`** (90 degrees, the identity rotation) with `give="block"`, 2/1/2
+cells deleted at the seam and exact SAT 0 overlaps at minimum slack 0.
+
+**Why it collapses (new, exact).** A `b1 x b2` grain at spinor angle `theta` has
+`W H = b1b2 + (b1^2+b2^2) c s >= b1b2 (1 + sin 2theta)`, so its own side is at
+least `sqrt(b1b2) sqrt(1 + sin 2theta)` while an axis grain of the same count needs
+`sqrt(b1b2)`; the seam can return at most one cell row. A grain of `m` cells can
+only profit if `sqrt(m(1+x)) - sqrt(m) < 1`, `x = sin 2theta` — the exact test
+`(m x - 1)^2 < 4m`. For `q <= 4` the thresholds are **6, 6, 10, 8, 17 cells**
+(spinors `1/2, 1/3, 2/3, 1/4, 3/4`). The `n = 51` winner's grain has 49 cells, so
+every non-degenerate spinor is priced out there and 90 degrees is forced; at
+`n = 18, 19` the one admissible band is fully swept and still loses to the grid.
+
+**Verdict.** 0 promotable, nothing promoted, `submission.csv` and root
+`WHITEBOARD.md` untouched. The gain recorded this run is **0.000000000**: the
+delivered total stands at **22.217428576** (554 beats, 446 grid ties). The value is
+structural — two grains cannot do it, at any interface, for counts where the seam
+is worth less than the tilt — which points the next instrument at *many* short
+grain contacts (the delivered rows carry 2-9 orientation classes), not at a better
+line.
+Checks: `interleaved_boundary --selftest` 9; `twin_boundary` 5; `glm_plan` 5;
+`import_n090` 5; `pub_bounds_check` 4; `witt_octad` 5; `crystal_domains` 4;
+`motif_wheels` 13/13; `structure --control`/`--check-solver`; the full guard set
+green; `sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels
+--audit` 0 offenders; `py_compile` OK. No row changed.
+
+no row changed |
