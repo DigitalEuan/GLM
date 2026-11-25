@@ -59,6 +59,7 @@ import glm_wheels as GW                 # noqa: E402
 import sqscore as SQ                    # noqa: E402
 
 CSV = os.path.join(ROOT, "workspace/submission/submission.csv")
+CHECKED = os.path.join(ROOT, "workspace/push/pub_bounds_check.json")
 OUT = os.path.join(ROOT, "workspace/push/glm_plan.json")
 TOL = 1e-6
 
@@ -96,6 +97,14 @@ PUB = {
     94: (10, 9.95), 95: (10, 9.965), 96: (10, 9.97), 97: (10, 10),
     98: (10, 10), 99: (10, 10), 100: (10, 10),
 }
+
+#: proved-optimal rows among 1..100, from the source's `data-status="proved"`.
+#: `pub_bounds_check.py` re-derives this set from the saved frontier table; the
+#: literal is the fallback when the ledger is absent.
+PROVED_OPTIMAL_FALLBACK = frozenset(
+    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 21, 22, 23, 24, 25,
+     32, 33, 34, 35, 36, 44, 45, 46, 47, 48, 49, 59, 60, 61, 62, 63, 64, 76,
+     77, 78, 79, 80, 81, 95, 96, 97, 98, 99, 100})
 
 MAX_CLASSES = 4       # R1: a structured pose, not a continuum
 MAX_POSE = 64         # R2: the obligation lives in the small-pose regime
@@ -144,8 +153,37 @@ def bands(rows):
     return dict(sorted(out.items()))
 
 
-def decide(b):
-    """The four rules.  Returns (ok, [reasons])."""
+def pub_table():
+    """The published frontier: `(ub, lb, proved)`.  Machine-checked if available.
+
+    `pub_bounds_check.py` diffs the hand transcription against the source's own
+    table; when its ledger exists the *verified* numbers are used, and the
+    proved-optimal set is the source's 45 `data-status="proved"` rows.
+    """
+    if os.path.exists(CHECKED):
+        with open(CHECKED) as f:
+            c = json.load(f)
+        proved = frozenset(int(n) for n in c.get("proved_rows", []))
+        src = c.get("verified_table") or {}
+        tab = {}
+        for n, (ub, lb) in PUB.items():
+            v = src.get(str(n))
+            tab[n] = (float(v["ub"]), float(v["lb"])) if v else (ub, lb)
+        return tab, (proved or PROVED_OPTIMAL_FALLBACK)
+    return dict(PUB), PROVED_OPTIMAL_FALLBACK
+
+
+def decide(b, pub=None, proved=None):
+    """The rules.  Returns (ok, [reasons]).
+
+    R1 structured pose, R2 small-pose regime, R3 void under a cell, R4 not at
+    the band's void limit, and **R5 proved-optimal target**: if the claim's row
+    `n + 1` has a *proved optimal* side, then no search is needed — either the
+    proved optimum is at or above the frontier side (the claim is impossible) or
+    a packing attaining it already exists (the claim is already solved).  Row 6
+    (`s(6) = 3`, Kearney-Shiu) is the case that matters for band `k = 3`.
+    """
+    pub, proved = pub or PUB, proved or PROVED_OPTIMAL_FALLBACK
     why = []
     if b["classes"] > MAX_CLASSES:
         why.append(f"R1 continuum pose ({b['classes']} angle classes)")
@@ -155,12 +193,26 @@ def decide(b):
         why.append(f"R3 must save {b['price']:.3f} unit^2 of void")
     if b["fill"] > MAX_FILL:
         why.append(f"R4 pose at the band void limit (V/j = {b['fill']:.3f})")
+    target = b["n"] + 1
+    if target in proved:
+        opt = pub.get(target, (None, None))[0]
+        why.append(f"R5 target row {target} is proved optimal (s = {opt})")
     return (not why), why
 
 
-def claim(b) -> "GW.Claim":
+def needs_world_record(b, pub=None, proved=None) -> bool:
+    """True when the claim needs a side better than the published best known."""
+    pub, proved = pub or PUB, proved or PROVED_OPTIMAL_FALLBACK
+    target = b["n"] + 1
+    if target in proved:
+        return True
+    ub = pub.get(target, (None, None))[0]
+    return ub is not None and b["L"] < ub - 1e-9
+
+
+def claim(b, pub=None, proved=None) -> "GW.Claim":
     """The band's claim in the audited six-slot form."""
-    ok, why = decide(b)
+    ok, why = decide(b, pub, proved)
     return GW.Claim(
         domain="packing", family="next_row", params={"k": b["k"], "n": b["n"]},
         size=b["n"] + 1,
@@ -180,11 +232,15 @@ def claim(b) -> "GW.Claim":
 def plan(rows=None) -> dict:
     rows = rows or load_rows()
     bs = bands(rows)
-    out = {"bands": {}, "scheduled": [], "refused": []}
+    pub, proved = pub_table()
+    out = {"bands": {}, "scheduled": [], "refused": [],
+           "pub_source": ("machine-checked (pub_bounds_check.json)"
+                          if os.path.exists(CHECKED) else "hand transcription")}
     for k, b in bs.items():
-        ok, why = decide(b)
-        c = claim(b)
-        rec = dict(b, decidable=ok, refusals=why, claim=c.brief())
+        ok, why = decide(b, pub, proved)
+        c = claim(b, pub, proved)
+        rec = dict(b, decidable=ok, refusals=why, claim=c.brief(),
+                   requires_world_record=needs_world_record(b, pub, proved))
         out["bands"][k] = rec
         (out["scheduled"] if ok else out["refused"]).append(rec)
     key = lambda r: -r["prize"]                                   # noqa: E731
@@ -210,21 +266,23 @@ def frontier(rows=None) -> dict:
     is the only room that cannot be taken away by someone else's construction).
     """
     rows = rows or load_rows()
+    tab, proved = pub_table()
     behind, gaps = [], []
-    room = 0.0
-    for n in sorted(PUB):
+    room = Decimal(0)
+    for n in sorted(tab):
         L = SQ.extent(rows[n])
-        ub, lb = PUB[n]
+        ub, lb = tab[n]
         if L > ub + 1e-6:
             behind.append({"n": n, "L": L, "pub": ub,
                            "gain": (L - ub) / math.sqrt(n)})
         if L > lb + 1e-6:
             gaps.append({"n": n, "L": L, "lb": lb,
                          "gain": (L - lb) / math.sqrt(n)})
-            room += gaps[-1]["gain"]
+            room += (Decimal(repr(L)) - Decimal(repr(lb))) / Decimal(n).sqrt()
     gaps.sort(key=lambda r: -r["gain"])
     return {"behind": behind, "behind_total": sum(r["gain"] for r in behind),
-            "room": room, "room_rows": len(gaps), "top": gaps[:12]}
+            "room": str(room), "room_rows": len(gaps), "top": gaps[:12],
+            "proved_rows_in_100": len([n for n in proved if n <= 100])}
 
 
 def selftest() -> int:
@@ -245,27 +303,40 @@ def selftest() -> int:
     assert 0.15 < tot < 0.35, tot
 
     # control 3: the rules reproduce on a hand-built band
-    fake = {"k": 5, "n": 21, "L": 4.85, "j": 4, "V": 2.5,
-            "classes": 3, "price": -0.5, "fill": 0.625, "prize": 1e-3}
+    fake = {"k": 4, "n": 11, "L": 3.85, "j": 5, "V": 2.5,
+            "classes": 3, "price": -0.5, "fill": 0.5, "prize": 1e-3}
     ok, why = decide(fake)
     assert ok, why
     fake.update({"n": 2000, "j": 20})
     ok, why = decide(fake)
     assert not ok and "R2" in why[0], why
-    fake.update({"n": 21, "j": 4, "classes": 40})
+    fake.update({"n": 11, "j": 5, "classes": 40})
     ok, why = decide(fake)
     assert not ok and "R1" in why[0], why
     print("  3. rules: a structured small obligation schedules, a 40-class "
           "pose is refused (R1)")
 
-    # control 4: the delivered table is at or above the published frontier for
-    # every n <= 100, and its certified room is 1.14087
+    # control 4: the machine-checked frontier says exactly one row is behind
+    # (n = 90: the source has 9.99403876 against our 10.0) and the certified
+    # room is 1.09647, not the hand-transcribed 1.14087
     f = frontier(rows)
-    assert not f["behind"], f["behind"][:3]
-    assert abs(f["room"] - 1.14087) < 1e-4, f["room"]
-    print(f"  4. n<=100 vs the published frontier: {len(f['behind'])} rows behind, "
-          f"certified room {f['room']:.5f} over {f['room_rows']} rows")
-    print("  selftest OK (4 controls)")
+    assert [r["n"] for r in f["behind"]] == [90], f["behind"]
+    assert abs(float(f["room"]) - 1.09647) < 1e-4, f["room"]
+    print(f"  4. n<=100 vs the machine-checked frontier: {len(f['behind'])} row "
+          f"behind (n = 90), certified room {float(f['room']):.5f} over "
+          f"{f['room_rows']} rows")
+
+    # control 5: R5 refuses the proved-optimal target row 6 of band k = 3, and
+    # the three surviving bands are all world-record claims
+    p = plan(rows)
+    b3 = p["bands"][3]
+    assert not b3["decidable"] and any(r.startswith("R5") for r in b3["refusals"]), b3
+    assert b3["requires_world_record"] and p["bands"][3] not in p["scheduled"], b3
+    assert [r["k"] for r in p["scheduled"]] == [4, 5, 7], [r["k"] for r in p["scheduled"]]
+    assert all(r["requires_world_record"] for r in p["scheduled"])
+    print(f"  5. R5: band k=3 refused — {b3['refusals'][0]}; scheduled "
+          f"{[r['k'] for r in p['scheduled']]}, all world-record claims")
+    print("  selftest OK (5 controls)")
     return 0
 
 
@@ -292,9 +363,9 @@ def main(argv=None) -> int:
           f"bands; prize scheduled {t['prize_scheduled']:.3e}, "
           f"refused {t['prize_refused']:.3e}, total {t['prize_all']:.5f}")
     f = p["frontier"]
-    print(f"\npublished frontier, n<=100: {len(f['behind'])} rows behind (nothing "
-          f"to import); certified room to the proved bounds {f['room']:.5f} "
-          f"over {f['room_rows']} rows")
+    print(f"\npublished frontier, n<=100 (machine-checked): "
+          f"{len(f['behind'])} row behind; certified room "
+          f"{float(f['room']):.5f} over {f['room_rows']} rows")
     for r in f["top"][:8]:
         print(f"   n={r['n']:>3}  L={r['L']:.6f}  LB={r['lb']:.6f}  "
               f"room={r['gain']:.5f}")

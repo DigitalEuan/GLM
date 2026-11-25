@@ -4039,4 +4039,52 @@ address survive, with one finite test specified (Witt octads on the contact-clas
 frontier ranking says to attack per row. Checks: `glm_plan --selftest` **4**; `sqscore`
 **22.218056945** (553/447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**.
 
+## Run 138 — 2026-11-25 — proved-optimal refusal, the verified bounds table, and the octad test
+
+**Brief.** Doc 94 left three things as prose or hand-work: the proved-optimal ceiling (noted in
+text), the published bounds table (hand-transcribed), and the Witt-octad test (specified, not run).
+This run makes all three instruments. New `scripts/pub_bounds_check.py`, `scripts/witt_octad.py`;
+`glm_plan` extended with rule **R5**; ledgers `pub_bounds_check.json`, `witt_octad.json`,
+`glm_plan.json`; the source of record saved as `workspace/push/pub_frontier_20261020.html`.
+
+**R5 — proved-optimal refusal.** If the claim's target row `n+1` is marked proved optimal in the
+frontier, the claim is refused outright: either the proved optimum is at or above the frontier side
+(impossible) or a packing attaining it already exists (already solved). The set is read from the
+source's `aria-label="optimal"` badges — **49 rows in `1..100`** — not from a literal. Band `k = 3`
+is now **refused by the instrument**: "R5 target row 6 is proved optimal (s = 3.0)". **3 scheduled
+(k = 4, 5, 7; `0.07237`) / 27 refused**, and all three carry `requires_world_record: true`
+(`s(12) <= 4`, `s(20) <= 5`, `s(42) <= 7` are all above the frontier sides `3.8771 / 4.8856 /
+6.9267`). Selftest **control 5** asserts the R5 refusal, the scheduled set `[4, 5, 7]`, and the
+world-record flags.
+
+**Bounds, machine-checked: 17 diffs, room `1.14087` -> `1.09647`.** `pub_bounds_check` re-reads the
+same project's live frontier table (`frontier.html`, saved), parses all 324 rows from `data-value`
+attributes, and diffs `PUB` in `Decimal` (tolerance `5e-5`); its selftest plants a false lower bound
+at n = 12 and requires the diff to be caught. Result: 16 lower bounds were transcribed from the
+PDF's rounded rendering and are **too low** (n=37 `6.44` vs `6.4975`, n=31 `5.9525` vs `5.9775`, …),
+and **one upper bound moved**: the live table has `s(90) <= 9.9940387665828706` (jazivxt 2026) where
+the PDF said `10`, so **our row 90 at `10.0000000019` is behind by `5.96e-3` of side, worth
+`6.28e-4`** — the only row in `1..100` where a published packing beats the delivered table. Verified
+room: **`1.09647` over 51 rows** (transcribed: `1.14087` over 55); the top-eight ranking is
+unchanged (`n = 86` still `0.03424`), so doc 94's conclusion survives the correction of its number.
+The proved set also grew 45 -> 49 (rows 44, 76, 95, 96 proved since the PDF).
+
+**Octad test — FAIL, structurally.** Tester validated on the design first: the 759 weight-8 Golay
+words give every 5-subset of 24 in exactly one octad, deleting one octad loses exactly `C(8,5)=56`
+5-subsets, and an injected `K8` is found as one 8-clique. On the data (79-class vocabulary of the
+596 structured rows, canonical top-24 point set, window 256): exact contact graph `|V|=64, |E|=0,
+omega=1` — **zero exact contacts between different direction classes**; near contact (`tau=0.02`)
+`|V|=64, |E|=13, omega=3`; co-occurrence `|V|=79, |E|=138, omega=4`; all-rows coverage 15/42504
+5-subsets with multiplicity 1..12. No `S(5,8,24)` acts: a block of 8 does not exist, so the axiom is
+not false but untestable. The finding to keep is that exact tangency in this table never crosses a
+direction class (doc 75's sliver picture, measured graph-theoretically), asserted as control 4 —
+row 5 is looser still, all five cells `>= 0.207` apart at a proved-optimal side.
+
+**Verdict.** Nothing promoted. Doc 94 corrected by doc 95 §4: room `1.09647`/51 rows, one row behind
+(`n = 90`, `6.28e-4`), `k = 3` refused by R5, octad test closed. Next: fetch and certify the n = 90
+packing through C1–C4 (the only import on the table, seven times both notches).
+Checks: `pub_bounds_check --selftest` 3; `witt_octad --selftest` 5; `glm_plan --selftest` 5;
+`sqscore` **22.218056945** (553/447); `record_guard` OK; `glm_wheels --audit` **684 functions,
+0 offenders**; full guard set green; `py_compile` OK.
+
 no row changed |

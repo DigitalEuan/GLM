@@ -5,6 +5,16 @@
 covers them. **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md`
 untouched.**
 
+> **Run 138 correction (doc 95).** The published bounds quoted below were hand-transcribed;
+> `pub_bounds_check.py` machine-checked them against the source's own table and found **17 diffs**.
+> The verified room is **`1.09647` over 51 rows** (not `1.14087`/55), exactly **one row is behind
+> the published frontier (`n = 90`, worth `6.28e-4`)**, band `k = 3` is now **refused by the
+> instrument (rule R5)** leaving `k = 4, 5, 7` (`0.07237`, all world-record claims), and the octad
+> test specified in §6 has been **run and failed structurally** — with the finding that exact
+> contacts never cross a direction class. The ranking and the recommendation below survive; the
+> numbers are corrected in doc 95.
+
+
 This run asked a different question from the last 136: not *what can we build*, but **which
 remaining claims are decidable at all, and where is the room actually measured to be.** Two
 answers, both new:
@@ -28,10 +38,10 @@ answers, both new:
 
 | quantity | value |
 | --- | --- |
-| rows where a published packing beats ours | **0 of 100** |
+| rows where a published packing beats ours | **0 of 100** (verified: 1, `n = 90`) |
 | total gain available by importing published packings | **0** |
 | rows where our side is above the published **lower bound** | **55** |
-| certified room to those bounds, `Σ (L_table - LB)/√n` | **`1.14087`** |
+| certified room to those bounds, `Σ (L_table - LB)/√n` | **`1.14087`** (verified `1.09647`) |
 | band-inheritance programme (doc 75 §2, recomputed exactly) | `0.23251` |
 | the two doc-93 notches | `0.00089` |
 

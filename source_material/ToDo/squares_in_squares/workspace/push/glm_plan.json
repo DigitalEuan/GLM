@@ -10,9 +10,12 @@
    "price": -0.6715728684240361,
    "fill": 0.582106782893991,
    "prize": 0.11957315535406424,
-   "decidable": true,
-   "refusals": [],
-   "claim": "packing/next_row(3, 5)"
+   "decidable": false,
+   "refusals": [
+    "R5 target row 6 is proved optimal (s = 3.0)"
+   ],
+   "claim": "packing/next_row(3, 5)",
+   "requires_world_record": true
   },
   "4": {
    "k": 4,
@@ -26,7 +29,8 @@
    "prize": 0.03548291076591645,
    "decidable": true,
    "refusals": [],
-   "claim": "packing/next_row(4, 11)"
+   "claim": "packing/next_row(4, 11)",
+   "requires_world_record": true
   },
   "5": {
    "k": 5,
@@ -40,7 +44,8 @@
    "prize": 0.025576573788644457,
    "decidable": true,
    "refusals": [],
-   "claim": "packing/next_row(5, 19)"
+   "claim": "packing/next_row(5, 19)",
+   "requires_world_record": true
   },
   "6": {
    "k": 6,
@@ -56,7 +61,8 @@
    "refusals": [
     "R1 continuum pose (6 angle classes)"
    ],
-   "claim": "packing/next_row(6, 29)"
+   "claim": "packing/next_row(6, 29)",
+   "requires_world_record": true
   },
   "7": {
    "k": 7,
@@ -70,7 +76,8 @@
    "prize": 0.011311500834774845,
    "decidable": true,
    "refusals": [],
-   "claim": "packing/next_row(7, 41)"
+   "claim": "packing/next_row(7, 41)",
+   "requires_world_record": true
   },
   "8": {
    "k": 8,
@@ -86,7 +93,8 @@
    "refusals": [
     "R1 continuum pose (7 angle classes)"
    ],
-   "claim": "packing/next_row(8, 55)"
+   "claim": "packing/next_row(8, 55)",
+   "requires_world_record": true
   },
   "9": {
    "k": 9,
@@ -103,7 +111,8 @@
     "R1 continuum pose (6 angle classes)",
     "R2 large-pose obligation (n+j = 81 > 64)"
    ],
-   "claim": "packing/next_row(9, 71)"
+   "claim": "packing/next_row(9, 71)",
+   "requires_world_record": true
   },
   "10": {
    "k": 10,
@@ -119,7 +128,8 @@
    "refusals": [
     "R2 large-pose obligation (n+j = 100 > 64)"
    ],
-   "claim": "packing/next_row(10, 89)"
+   "claim": "packing/next_row(10, 89)",
+   "requires_world_record": true
   },
   "11": {
    "k": 11,
@@ -137,7 +147,8 @@
     "R2 large-pose obligation (n+j = 121 > 64)",
     "R3 must save 0.929 unit^2 of void"
    ],
-   "claim": "packing/next_row(11, 110)"
+   "claim": "packing/next_row(11, 110)",
+   "requires_world_record": false
   },
   "12": {
    "k": 12,
@@ -155,7 +166,8 @@
     "R2 large-pose obligation (n+j = 144 > 64)",
     "R3 must save 0.657 unit^2 of void"
    ],
-   "claim": "packing/next_row(12, 132)"
+   "claim": "packing/next_row(12, 132)",
+   "requires_world_record": false
   },
   "13": {
    "k": 13,
@@ -173,7 +185,8 @@
     "R2 large-pose obligation (n+j = 169 > 64)",
     "R3 must save 0.459 unit^2 of void"
    ],
-   "claim": "packing/next_row(13, 156)"
+   "claim": "packing/next_row(13, 156)",
+   "requires_world_record": false
   },
   "14": {
    "k": 14,
@@ -192,7 +205,8 @@
     "R3 must save 0.988 unit^2 of void",
     "R4 pose at the band void limit (V/j = 0.999)"
    ],
-   "claim": "packing/next_row(14, 183)"
+   "claim": "packing/next_row(14, 183)",
+   "requires_world_record": false
   },
   "15": {
    "k": 15,
@@ -210,7 +224,8 @@
     "R2 large-pose obligation (n+j = 225 > 64)",
     "R3 must save 0.807 unit^2 of void"
    ],
-   "claim": "packing/next_row(15, 211)"
+   "claim": "packing/next_row(15, 211)",
+   "requires_world_record": false
   },
   "16": {
    "k": 16,
@@ -228,7 +243,8 @@
     "R2 large-pose obligation (n+j = 256 > 64)",
     "R3 must save 0.588 unit^2 of void"
    ],
-   "claim": "packing/next_row(16, 241)"
+   "claim": "packing/next_row(16, 241)",
+   "requires_world_record": false
   },
   "17": {
    "k": 17,
@@ -246,7 +262,8 @@
     "R2 large-pose obligation (n+j = 289 > 64)",
     "R3 must save 0.454 unit^2 of void"
    ],
-   "claim": "packing/next_row(17, 273)"
+   "claim": "packing/next_row(17, 273)",
+   "requires_world_record": false
   },
   "18": {
    "k": 18,
@@ -264,7 +281,8 @@
     "R2 large-pose obligation (n+j = 324 > 64)",
     "R3 must save 0.897 unit^2 of void"
    ],
-   "claim": "packing/next_row(18, 308)"
+   "claim": "packing/next_row(18, 308)",
+   "requires_world_record": false
   },
   "19": {
    "k": 19,
@@ -282,7 +300,8 @@
     "R2 large-pose obligation (n+j = 361 > 64)",
     "R3 must save 0.718 unit^2 of void"
    ],
-   "claim": "packing/next_row(19, 344)"
+   "claim": "packing/next_row(19, 344)",
+   "requires_world_record": false
   },
   "20": {
    "k": 20,
@@ -300,7 +319,8 @@
     "R2 large-pose obligation (n+j = 400 > 64)",
     "R3 must save 0.463 unit^2 of void"
    ],
-   "claim": "packing/next_row(20, 382)"
+   "claim": "packing/next_row(20, 382)",
+   "requires_world_record": false
   },
   "21": {
    "k": 21,
@@ -318,7 +338,8 @@
     "R2 large-pose obligation (n+j = 441 > 64)",
     "R3 must save 0.737 unit^2 of void"
    ],
-   "claim": "packing/next_row(21, 423)"
+   "claim": "packing/next_row(21, 423)",
+   "requires_world_record": false
   },
   "22": {
    "k": 22,
@@ -336,7 +357,8 @@
     "R2 large-pose obligation (n+j = 484 > 64)",
     "R3 must save 0.597 unit^2 of void"
    ],
-   "claim": "packing/next_row(22, 465)"
+   "claim": "packing/next_row(22, 465)",
+   "requires_world_record": false
   },
   "23": {
    "k": 23,
@@ -354,7 +376,8 @@
     "R2 large-pose obligation (n+j = 529 > 64)",
     "R3 must save 0.530 unit^2 of void"
    ],
-   "claim": "packing/next_row(23, 509)"
+   "claim": "packing/next_row(23, 509)",
+   "requires_world_record": false
   },
   "24": {
    "k": 24,
@@ -372,7 +395,8 @@
     "R2 large-pose obligation (n+j = 576 > 64)",
     "R3 must save 0.806 unit^2 of void"
    ],
-   "claim": "packing/next_row(24, 556)"
+   "claim": "packing/next_row(24, 556)",
+   "requires_world_record": false
   },
   "25": {
    "k": 25,
@@ -390,7 +414,8 @@
     "R2 large-pose obligation (n+j = 625 > 64)",
     "R3 must save 0.665 unit^2 of void"
    ],
-   "claim": "packing/next_row(25, 604)"
+   "claim": "packing/next_row(25, 604)",
+   "requires_world_record": false
   },
   "26": {
    "k": 26,
@@ -409,7 +434,8 @@
     "R3 must save 0.985 unit^2 of void",
     "R4 pose at the band void limit (V/j = 0.999)"
    ],
-   "claim": "packing/next_row(26, 655)"
+   "claim": "packing/next_row(26, 655)",
+   "requires_world_record": false
   },
   "27": {
    "k": 27,
@@ -427,7 +453,8 @@
     "R2 large-pose obligation (n+j = 729 > 64)",
     "R3 must save 0.861 unit^2 of void"
    ],
-   "claim": "packing/next_row(27, 707)"
+   "claim": "packing/next_row(27, 707)",
+   "requires_world_record": false
   },
   "28": {
    "k": 28,
@@ -445,7 +472,8 @@
     "R2 large-pose obligation (n+j = 784 > 64)",
     "R3 must save 0.624 unit^2 of void"
    ],
-   "claim": "packing/next_row(28, 761)"
+   "claim": "packing/next_row(28, 761)",
+   "requires_world_record": false
   },
   "29": {
    "k": 29,
@@ -463,7 +491,8 @@
     "R2 large-pose obligation (n+j = 841 > 64)",
     "R3 must save 0.922 unit^2 of void"
    ],
-   "claim": "packing/next_row(29, 818)"
+   "claim": "packing/next_row(29, 818)",
+   "requires_world_record": false
   },
   "30": {
    "k": 30,
@@ -481,7 +510,8 @@
     "R2 large-pose obligation (n+j = 900 > 64)",
     "R3 must save 0.854 unit^2 of void"
    ],
-   "claim": "packing/next_row(30, 876)"
+   "claim": "packing/next_row(30, 876)",
+   "requires_world_record": false
   },
   "31": {
    "k": 31,
@@ -499,7 +529,8 @@
     "R2 large-pose obligation (n+j = 961 > 64)",
     "R3 must save 0.858 unit^2 of void"
    ],
-   "claim": "packing/next_row(31, 936)"
+   "claim": "packing/next_row(31, 936)",
+   "requires_world_record": false
   },
   "32": {
    "k": 32,
@@ -516,24 +547,11 @@
     "R1 continuum pose (147 angle classes)",
     "R2 large-pose obligation (n+j = 1024 > 64)"
    ],
-   "claim": "packing/next_row(32, 998)"
+   "claim": "packing/next_row(32, 998)",
+   "requires_world_record": false
   }
  },
  "scheduled": [
-  {
-   "k": 3,
-   "n": 5,
-   "L": 2.707106782448,
-   "j": 4,
-   "V": 2.328427131575964,
-   "classes": 2,
-   "price": -0.6715728684240361,
-   "fill": 0.582106782893991,
-   "prize": 0.11957315535406424,
-   "decidable": true,
-   "refusals": [],
-   "claim": "packing/next_row(3, 5)"
-  },
   {
    "k": 4,
    "n": 11,
@@ -546,7 +564,8 @@
    "prize": 0.03548291076591645,
    "decidable": true,
    "refusals": [],
-   "claim": "packing/next_row(4, 11)"
+   "claim": "packing/next_row(4, 11)",
+   "requires_world_record": true
   },
   {
    "k": 5,
@@ -560,7 +579,8 @@
    "prize": 0.025576573788644457,
    "decidable": true,
    "refusals": [],
-   "claim": "packing/next_row(5, 19)"
+   "claim": "packing/next_row(5, 19)",
+   "requires_world_record": true
   },
   {
    "k": 7,
@@ -574,10 +594,28 @@
    "prize": 0.011311500834774845,
    "decidable": true,
    "refusals": [],
-   "claim": "packing/next_row(7, 41)"
+   "claim": "packing/next_row(7, 41)",
+   "requires_world_record": true
   }
  ],
  "refused": [
+  {
+   "k": 3,
+   "n": 5,
+   "L": 2.707106782448,
+   "j": 4,
+   "V": 2.328427131575964,
+   "classes": 2,
+   "price": -0.6715728684240361,
+   "fill": 0.582106782893991,
+   "prize": 0.11957315535406424,
+   "decidable": false,
+   "refusals": [
+    "R5 target row 6 is proved optimal (s = 3.0)"
+   ],
+   "claim": "packing/next_row(3, 5)",
+   "requires_world_record": true
+  },
   {
    "k": 6,
    "n": 29,
@@ -592,7 +630,8 @@
    "refusals": [
     "R1 continuum pose (6 angle classes)"
    ],
-   "claim": "packing/next_row(6, 29)"
+   "claim": "packing/next_row(6, 29)",
+   "requires_world_record": true
   },
   {
    "k": 8,
@@ -608,7 +647,8 @@
    "refusals": [
     "R1 continuum pose (7 angle classes)"
    ],
-   "claim": "packing/next_row(8, 55)"
+   "claim": "packing/next_row(8, 55)",
+   "requires_world_record": true
   },
   {
    "k": 9,
@@ -625,7 +665,8 @@
     "R1 continuum pose (6 angle classes)",
     "R2 large-pose obligation (n+j = 81 > 64)"
    ],
-   "claim": "packing/next_row(9, 71)"
+   "claim": "packing/next_row(9, 71)",
+   "requires_world_record": true
   },
   {
    "k": 10,
@@ -641,7 +682,8 @@
    "refusals": [
     "R2 large-pose obligation (n+j = 100 > 64)"
    ],
-   "claim": "packing/next_row(10, 89)"
+   "claim": "packing/next_row(10, 89)",
+   "requires_world_record": true
   },
   {
    "k": 13,
@@ -659,7 +701,8 @@
     "R2 large-pose obligation (n+j = 169 > 64)",
     "R3 must save 0.459 unit^2 of void"
    ],
-   "claim": "packing/next_row(13, 156)"
+   "claim": "packing/next_row(13, 156)",
+   "requires_world_record": false
   },
   {
    "k": 12,
@@ -677,7 +720,8 @@
     "R2 large-pose obligation (n+j = 144 > 64)",
     "R3 must save 0.657 unit^2 of void"
    ],
-   "claim": "packing/next_row(12, 132)"
+   "claim": "packing/next_row(12, 132)",
+   "requires_world_record": false
   },
   {
    "k": 17,
@@ -695,7 +739,8 @@
     "R2 large-pose obligation (n+j = 289 > 64)",
     "R3 must save 0.454 unit^2 of void"
    ],
-   "claim": "packing/next_row(17, 273)"
+   "claim": "packing/next_row(17, 273)",
+   "requires_world_record": false
   },
   {
    "k": 16,
@@ -713,7 +758,8 @@
     "R2 large-pose obligation (n+j = 256 > 64)",
     "R3 must save 0.588 unit^2 of void"
    ],
-   "claim": "packing/next_row(16, 241)"
+   "claim": "packing/next_row(16, 241)",
+   "requires_world_record": false
   },
   {
    "k": 20,
@@ -731,7 +777,8 @@
     "R2 large-pose obligation (n+j = 400 > 64)",
     "R3 must save 0.463 unit^2 of void"
    ],
-   "claim": "packing/next_row(20, 382)"
+   "claim": "packing/next_row(20, 382)",
+   "requires_world_record": false
   },
   {
    "k": 23,
@@ -749,7 +796,8 @@
     "R2 large-pose obligation (n+j = 529 > 64)",
     "R3 must save 0.530 unit^2 of void"
    ],
-   "claim": "packing/next_row(23, 509)"
+   "claim": "packing/next_row(23, 509)",
+   "requires_world_record": false
   },
   {
    "k": 15,
@@ -767,7 +815,8 @@
     "R2 large-pose obligation (n+j = 225 > 64)",
     "R3 must save 0.807 unit^2 of void"
    ],
-   "claim": "packing/next_row(15, 211)"
+   "claim": "packing/next_row(15, 211)",
+   "requires_world_record": false
   },
   {
    "k": 32,
@@ -784,7 +833,8 @@
     "R1 continuum pose (147 angle classes)",
     "R2 large-pose obligation (n+j = 1024 > 64)"
    ],
-   "claim": "packing/next_row(32, 998)"
+   "claim": "packing/next_row(32, 998)",
+   "requires_world_record": false
   },
   {
    "k": 22,
@@ -802,7 +852,8 @@
     "R2 large-pose obligation (n+j = 484 > 64)",
     "R3 must save 0.597 unit^2 of void"
    ],
-   "claim": "packing/next_row(22, 465)"
+   "claim": "packing/next_row(22, 465)",
+   "requires_world_record": false
   },
   {
    "k": 19,
@@ -820,7 +871,8 @@
     "R2 large-pose obligation (n+j = 361 > 64)",
     "R3 must save 0.718 unit^2 of void"
    ],
-   "claim": "packing/next_row(19, 344)"
+   "claim": "packing/next_row(19, 344)",
+   "requires_world_record": false
   },
   {
    "k": 11,
@@ -838,7 +890,8 @@
     "R2 large-pose obligation (n+j = 121 > 64)",
     "R3 must save 0.929 unit^2 of void"
    ],
-   "claim": "packing/next_row(11, 110)"
+   "claim": "packing/next_row(11, 110)",
+   "requires_world_record": false
   },
   {
    "k": 21,
@@ -856,7 +909,8 @@
     "R2 large-pose obligation (n+j = 441 > 64)",
     "R3 must save 0.737 unit^2 of void"
    ],
-   "claim": "packing/next_row(21, 423)"
+   "claim": "packing/next_row(21, 423)",
+   "requires_world_record": false
   },
   {
    "k": 25,
@@ -874,7 +928,8 @@
     "R2 large-pose obligation (n+j = 625 > 64)",
     "R3 must save 0.665 unit^2 of void"
    ],
-   "claim": "packing/next_row(25, 604)"
+   "claim": "packing/next_row(25, 604)",
+   "requires_world_record": false
   },
   {
    "k": 28,
@@ -892,7 +947,8 @@
     "R2 large-pose obligation (n+j = 784 > 64)",
     "R3 must save 0.624 unit^2 of void"
    ],
-   "claim": "packing/next_row(28, 761)"
+   "claim": "packing/next_row(28, 761)",
+   "requires_world_record": false
   },
   {
    "k": 24,
@@ -910,7 +966,8 @@
     "R2 large-pose obligation (n+j = 576 > 64)",
     "R3 must save 0.806 unit^2 of void"
    ],
-   "claim": "packing/next_row(24, 556)"
+   "claim": "packing/next_row(24, 556)",
+   "requires_world_record": false
   },
   {
    "k": 18,
@@ -928,7 +985,8 @@
     "R2 large-pose obligation (n+j = 324 > 64)",
     "R3 must save 0.897 unit^2 of void"
    ],
-   "claim": "packing/next_row(18, 308)"
+   "claim": "packing/next_row(18, 308)",
+   "requires_world_record": false
   },
   {
    "k": 27,
@@ -946,7 +1004,8 @@
     "R2 large-pose obligation (n+j = 729 > 64)",
     "R3 must save 0.861 unit^2 of void"
    ],
-   "claim": "packing/next_row(27, 707)"
+   "claim": "packing/next_row(27, 707)",
+   "requires_world_record": false
   },
   {
    "k": 30,
@@ -964,7 +1023,8 @@
     "R2 large-pose obligation (n+j = 900 > 64)",
     "R3 must save 0.854 unit^2 of void"
    ],
-   "claim": "packing/next_row(30, 876)"
+   "claim": "packing/next_row(30, 876)",
+   "requires_world_record": false
   },
   {
    "k": 31,
@@ -982,7 +1042,8 @@
     "R2 large-pose obligation (n+j = 961 > 64)",
     "R3 must save 0.858 unit^2 of void"
    ],
-   "claim": "packing/next_row(31, 936)"
+   "claim": "packing/next_row(31, 936)",
+   "requires_world_record": false
   },
   {
    "k": 29,
@@ -1000,7 +1061,8 @@
     "R2 large-pose obligation (n+j = 841 > 64)",
     "R3 must save 0.922 unit^2 of void"
    ],
-   "claim": "packing/next_row(29, 818)"
+   "claim": "packing/next_row(29, 818)",
+   "requires_world_record": false
   },
   {
    "k": 14,
@@ -1019,7 +1081,8 @@
     "R3 must save 0.988 unit^2 of void",
     "R4 pose at the band void limit (V/j = 0.999)"
    ],
-   "claim": "packing/next_row(14, 183)"
+   "claim": "packing/next_row(14, 183)",
+   "requires_world_record": false
   },
   {
    "k": 26,
@@ -1038,22 +1101,31 @@
     "R3 must save 0.985 unit^2 of void",
     "R4 pose at the band void limit (V/j = 0.999)"
    ],
-   "claim": "packing/next_row(26, 655)"
+   "claim": "packing/next_row(26, 655)",
+   "requires_world_record": false
   }
  ],
+ "pub_source": "machine-checked (pub_bounds_check.json)",
  "totals": {
   "bands": 30,
-  "scheduled": 4,
-  "refused": 26,
-  "prize_scheduled": 0.1919441407434,
-  "prize_refused": 0.04056119369141476,
+  "scheduled": 3,
+  "refused": 27,
+  "prize_scheduled": 0.07237098538933576,
+  "prize_refused": 0.160134349045479,
   "prize_all": 0.23250533443481475
  },
  "frontier": {
-  "behind": [],
-  "behind_total": 0,
-  "room": 1.140868957450662,
-  "room_rows": 55,
+  "behind": [
+   {
+    "n": 90,
+    "L": 10.0000000018,
+    "pub": 9.99403876658287,
+    "gain": 0.0006283693651380072
+   }
+  ],
+  "behind_total": 0.0006283693651380072,
+  "room": "1.096470345949086985989005834091427377109739550447637679850674168040233",
+  "room_rows": 51,
   "top": [
    {
     "n": 86,
@@ -1127,7 +1199,8 @@
     "lb": 8.43,
     "gain": 0.02792382802285254
    }
-  ]
+  ],
+  "proved_rows_in_100": 49
  },
  "schema": "glm_plan/1",
  "rules": {
