@@ -8,6 +8,10 @@ certificate in exact arithmetic); ledgers `workspace/push/pub_bounds_check.json`
 (live table), `workspace/push/n090_candidate-reading-copy.json` (the certificate).
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
+> **Run 140 promotion.** Row 90 was written to `submission.csv` in run 140 (doc 97 §1): the
+> delivered total is now `22.217428576` with 554 beats, and the room is `1.09584`. The figures
+> below are this run's, at that time.
+
 Run 138 attributed 17 bound deltas to my transcription. That was a claim about my own reading, and it
 was worth checking before it hardened into the record: if the deltas were the survey moving, the
 lesson is different (my `PUB` was a faithful month-old snapshot) from if they were typos (my reading

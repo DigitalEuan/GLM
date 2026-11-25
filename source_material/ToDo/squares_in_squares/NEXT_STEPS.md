@@ -2,7 +2,7 @@
 
 Companion to `STATUS.md` (which now duplicates the README and carries
 the system map — see its §2). Everything below is measured on the
-delivered table (**Run 52, score 22.218056945**, 553/1000 beat grid; the
+delivered table (**Run 140, score 22.217428576**, 554/1000 beat grid; the
 Run 35 register import and n=338 chain landed after the Mishapolk import; run 31 reviewed the table — §2c — and
 closed P1' by null; run 32 recovered the tree from the GitHub remote
 after a sandbox rollback and re-verified the fixpoint) with

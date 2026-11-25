@@ -783,7 +783,7 @@ def merge(section, data):
         with open(OUT) as f:
             led = json.load(f)
     led.setdefault("run", 109)
-    led.setdefault("delivered", "22.218056945")
+    led.setdefault("delivered", "22.217428576")
     led["sections"] = sorted(set(led.get("sections", [])) | {section})
     led[section] = _clean(data)
     with open(OUT, "w") as f:

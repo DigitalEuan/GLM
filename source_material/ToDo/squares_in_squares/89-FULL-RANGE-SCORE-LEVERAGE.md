@@ -230,7 +230,7 @@ exact, which is why the repo's own forward tests are all `n <= 7`.
 ## 9. Verdict, and what it would take
 
 **No candidate. Nothing promoted.** `submission.csv` and root `WHITEBOARD.md` are untouched, and no row's side
-changed: the score is `22.218056945` with 553 beats and 447 unbeaten rows, exactly as delivered.
+changed: the score is `22.218056945` with 553 beats and 447 unbeaten rows, exactly as delivered. *(Historical: at that time.)*
 
 * **The scoring range is `n = 1..1000` and nothing above it is scored** (§1). The measured range is 1..5000,
   designs exist to 9900. Half the unbeaten rows on earth (3,195 of 5,000) are above the metric's last row.

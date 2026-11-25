@@ -1,7 +1,7 @@
 # 05-MECHANICS.md — the clear picture (Run 37, 2026-11-08)
 
 *What is actually happening inside this system, measured on the
-delivered frontier (Run 52: score 22.218056945, 553/1000 beat grid; the
+delivered frontier (Run 140: score 22.217428576, 554/1000 beat grid; the
 measurements below were taken at runs 36–37, when the frontier was 22.642386651 — historical).
 Companion measurements live in `workspace/push/layer_settle37.json`,
 `exact_replay37.json`, `leech_map.json` (run 37 refresh) and the

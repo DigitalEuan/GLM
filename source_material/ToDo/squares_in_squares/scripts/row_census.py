@@ -51,9 +51,9 @@ but does not prove it.  That scope question is worth confirming against the
 paper before any `closed` row is quoted as settled.
 
 CONTROLS.
-  1  the delivered table reproduces: 22.218056945, 553 beats, 447 grid rows;
+  1  the delivered table reproduces: 22.217428576, 554 beats, 446 grid rows;
   2  no delivered row violates the floor (a violation would mean the bound, not
-     the row, is wrong) -- including every one of the 553 beats;
+     the row, is wrong) -- including every one of the 554 beats;
   3  the two endpoints are exercised: n = 15 (= 16-1) is closed by Karakus at
      exactly 4, n = 11 is open with head > 0;
   4  a closed row carries head exactly 0 and is never stamped certified (the
@@ -187,7 +187,7 @@ def load_certificates() -> dict[int, dict]:
 def selftest(per: dict) -> int:
     print("control 1 — the delivered table reproduces")
     s = SQ.guard(per)
-    assert s["beats"] == 553 and s["grid"] == 447, s
+    assert s["beats"] == 554 and s["grid"] == 446, s
     print(f"  score {s['score']:.9f}, {s['beats']} beats, {s['grid']} grid rows")
 
     print("control 2 — no delivered row violates its floor")
@@ -328,7 +328,7 @@ def census(per: dict, write: bool = True) -> int:
               f"{sum(1 for v in cert.values() if v['certified'])} certified)")
     print(f"\ngap accounting, gap = {GAP}:")
     print(f"  zero-waste ceiling over open grid rows   {acc['grid_rows']:.6f}")
-    print(f"  same over the 553 beats                  {acc['beats']:.6f}")
+    print(f"  same over the 554 beats                  {acc['beats']:.6f}")
     print(f"  conceivable total                        "
           f"{acc['conceivable']:.6f}  ({acc['conceivable'] / GAP:.0f}x the gap)")
     print(f"  same total restricted to head            "

@@ -36,7 +36,7 @@ WHAT THIS FILE DOES
      = (ceil(sqrt(n)) - sqrt(n))/sqrt(n), marginal value of slack = 1/sqrt(n) per
      row, summed per column.
 
-Read-only.  Fails loudly if the corrected beat count is not the delivered 553.
+Read-only.  Fails loudly if the corrected beat count is not the delivered 554.
 """
 from __future__ import annotations
 
@@ -62,8 +62,8 @@ from leech_address import golay_codewords, pockets  # noqa: E402
 from leech_measure import soft_profile  # noqa: E402
 from leech_prior import auc  # noqa: E402
 
-SCORE = 22.218056945     # delivered, from the CSV states
-BEATS = 553
+SCORE = 22.217428576     # delivered, from the CSV states (run 140: n = 90 promoted)
+BEATS = 554
 
 
 def extent(st: np.ndarray) -> float:

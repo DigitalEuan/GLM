@@ -7,7 +7,7 @@ LP is not already rigid at `L0`**. This is that run, and its answer is that the
 seed does not exist in the delivered table: the action cannot be run as written,
 and the refusal is exhaustive over the declared ladder rather than a sample.
 
-No row of the table changed. The delivered total is still `22.218056945`, 553
+No row of the table changed. The delivered total is still `22.218056945` *(historical: at that time)*, 553
 beats, and `sqscore.guard()` holds.
 
 ## 1. The action, restated

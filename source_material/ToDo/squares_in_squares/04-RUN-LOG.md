@@ -1,7 +1,7 @@
 # Run Log — Condensed Ledger
 
 Full JSON ledgers: `download/run<N>_outcomes.json`. Current score:
-**22.218056945** (553/1000 rows beat grid; guarded by `sqscore.guard`, run 52).
+**22.217428576** (554/1000 rows beat grid; guarded by `sqscore.guard`, run 140).
 The table below is the run history: the 22.887471 figure it opens with is historical,
 superseded at run 47 by the audit re-score.
 
@@ -4129,5 +4129,52 @@ attribution stated (doc 96 §3). Next: that promotion, then re-derive the room.
 Checks: `import_n090 --selftest` 5; `pub_bounds_check --selftest` 4; `glm_plan --selftest` 5;
 `witt_octad --selftest` 5; full guard set green; `sqscore` **22.218056945** (553/447);
 `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
+
+## Run 140 — 2026-11-25 — row 90 promoted; the top-room rows are polycrystals; the twin family is dominated
+
+**Brief.** Three jobs: promote the n = 90 certificate that passed C1–C4 in run 139, diagnose the
+crystal structure of the highest-room rows, and prototype a commensurate grain-boundary constructor.
+New `scripts/promote_n090.py`, `scripts/crystal_domains.py`, `scripts/twin_boundary.py`; ledgers
+`crystal_domains.json`, `twin_boundary.json`. **One row changed: n = 90.**
+
+**Promotion.** The exact certificate (jazivxt, improved by de Winter) is inflated by `1e-9`,
+re-boxed, and written at the table's own precision (10 decimals for centres, 12 for radians). The
+render carries a proof rather than a tolerance: centres move ≤ `9.89e-11`, angles ≤ `4.35e-13`, so
+no corner moves more than `d = 9.92e-11`, pairwise slack changes by ≤ `4d`, and the written row is
+legal with **min slack `6.03e-10`** and side `≤ 9.9940387757752980`, measured at `9.9940387756`.
+Delivered score **`22.218056945 → 22.217428576`** (−`6.283680e-4`), beats **553 → 554**, grid ties
+**447 → 446**, room **`1.09647` → `1.09584` over 51 rows**, beaten-row headroom **`15.022691` →
+`15.076155`**. Every quoted total moved with it (`sqscore`, `record_guard.CANON = 22.21742`,
+`DIRECTORS-NOTE` §1, `README`, `STATUS`, `REPRODUCE`, `RECONCILIATION`, `00-OVERVIEW`,
+`05-MECHANICS`, `19-…`, `NEXT_STEPS`, `GLM_INVESTIGATION`), and six older run docs' title-block
+claims are tagged *historical: at that time* instead of rewritten. Attribution: the packing is
+jazivxt's and de Winter's; this run adds the independent exact verification and the render.
+
+**Diagnosis.** `crystal_domains` decides, in `Decimal` at 50 digits, classes (mod pi/2), contacts
+(clearance ≤ `1e-9`, edge vs corner by tight-axis count), grain boundaries, domains, same-class
+sub-domains and the `3m - 3` rigidity count. The top-room rows are **polycrystals**: 2–9 orientation
+classes, 6–35 grain contacts, one connected network (n = 86 and 88 have two domains). n = 72 is the
+control — one class, 239 contacts, zero grain contacts, the `8 x 9` grid, which only ties the grid.
+Edge contacts are **0.43–0.62** of `3m - 3`, so no row is rigid by counting. `L²/n = 1.11–1.37`, and
+the 51 room rows hold `3.72277` of geometric slack against `1.09584` of booked room: **the room is
+29 % of the distance to a zero-waste pose**.
+
+**Twin constructor.** Two rigid blocks of unit cells, B rotated by a rational spinor
+`tan(θ/2) = p/q` (so `cos, sin` are rational) and placed `a2 + g` above A: zero overlap by
+construction, exact SAT as an independent gate. **935{,}520 candidates** (12 spinors × 5 gaps ×
+every integer split × 14 rows). Result: the best side is always an integer equal to `ceil(√n)`, and
+the optimiser always picks `p/q = 1/1` — the degenerate 90° "twin", i.e. two plain grids. **Theorem:**
+for two blocks glued along a straight line, `n ≤ max(a1,b1)(a2+b2)` forces `L ≥ ceil(√n)`, so the
+family can at best tie the grid and is provably dominated on all 554 beating rows. One strict
+improvement at n = 72 (`1.78e-9`, score `2.47e-11`) is our own frame padding and sits below the C2
+noise floor: **refused, 0 promotions.**
+
+**Verdict.** +`6.2837e-4` delivered, 0 from the constructor, and a structural statement worth more
+than the search: butted blocks cannot help; the next instrument must build an *interleaved*
+commensurate interface (doc 97 §4).
+Checks: `crystal_domains --selftest` 4; `twin_boundary --selftest` 5; `import_n090 --selftest` 5;
+`pub_bounds_check --selftest` 4; `glm_plan --selftest` 5; `witt_octad --selftest` 5; full guard set
+green; `sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels --audit` **684
+functions, 0 offenders**; `py_compile` OK.
 
 no row changed |

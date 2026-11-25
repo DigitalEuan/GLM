@@ -170,7 +170,7 @@ the grammar's node count grows with the pose and 12 nodes is 4 % of one row.
 
 ## 4. Verdict
 
-**Nothing promoted.** `submission.csv` and root `WHITEBOARD.md` are untouched; the score is `22.218056945` with
+**Nothing promoted.** `submission.csv` and root `WHITEBOARD.md` are untouched; the score is `22.218056945` with *(historical: at that time.)*
 553 beats and 447 unbeaten rows, exactly as delivered. No C1–C4 case was assembled because no candidate existed
 to assemble one around: Family I caps at 17 cells below 5 for **every** exact word, Family II produced 16 legal
 poses all strictly above 5, and Family III shows the "axis-free" rows have `1.6e-10` of freedom.

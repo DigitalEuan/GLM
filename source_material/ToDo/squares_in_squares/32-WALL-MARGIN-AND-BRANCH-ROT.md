@@ -4,7 +4,7 @@ Run 68 audited a framing and recorded that its "thinnest wall margin" numbers
 were not reproducible from any `sqscore` quantity. This record replaces the
 phrase with a definition, computes it on all 1000 delivered rows, and then
 spends one row on the search the framing nominated. No row of the table changed;
-the delivered total is still `22.218056945` and `sqscore.guard()` still holds.
+the delivered total is still `22.218056945` and `sqscore.guard()` still holds. *(Historical: at that time.)*
 
 ## 1. The definition
 

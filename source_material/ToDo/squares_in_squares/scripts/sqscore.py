@@ -10,7 +10,7 @@ Two mistakes in the instruments made this file necessary (see
 
 Both were silent. This module makes them loud: `guard()` recomputes the delivered
 table from `workspace/submission/submission.csv` and **asserts** the result is
-exactly the recorded 22.218056945 with 553 beats. Any script that imports this
+exactly the recorded 22.217428576 with 554 beats. Any script that imports this
 file and calls `guard()` cannot print a score on a wrong scale or against a
 mis-classified target — it raises instead.
 
@@ -24,7 +24,7 @@ Definitions (all exact where they can be):
     total          = sum over rows of row_score
 
 The floor of `total` is 0 (L >= sqrt(n) by area) and the delivered table is
-22.218056945 over n = 1..1000 with 553 rows beating grid.
+22.217428576 over n = 1..1000 with 554 rows beating grid (row 90 promoted in run 140).
 """
 from __future__ import annotations
 
@@ -39,9 +39,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SUBMISSION = os.path.join(ROOT, "workspace/submission/submission.csv")
 
-#: delivered table, recomputed to 1.3e-10 by `leech_audit_fix.py`
-DELIVERED_SCORE = Decimal("22.218056945")
-DELIVERED_BEATS = 553
+#: delivered table, recomputed after the run-140 n = 90 promotion (was 22.218056945,
+#: 553 beats; the promoted row-90 certificate is `import_n090.py` + `promote_n090.py`)
+DELIVERED_SCORE = Decimal("22.217428576")
+DELIVERED_BEATS = 554
 DELIVERED_ROWS = 1000
 TOL = Decimal("1e-6")
 
@@ -117,7 +118,7 @@ def summarise(per: dict) -> dict:
 
 
 def guard(per: dict | None = None, quiet: bool = False) -> dict:
-    """Assert the delivered table scores 22.218056945 with 553 beats.
+    """Assert the delivered table scores 22.217428576 with 554 beats.
 
     Raises AssertionError (never returns a wrong number) if it does not.
     """

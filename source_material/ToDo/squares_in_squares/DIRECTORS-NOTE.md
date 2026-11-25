@@ -14,10 +14,10 @@
 
 | claim | verdict | source |
 | --- | --- | --- |
-| score `22.218056945`, 553 rows below `ceil(√n)` | confirmed | `sqscore.py` `guard()` |
-| 447 rows tied to `L = k` (the standard grid), 30 bands `k = 3..32` | confirmed (447 includes n = 1; 446 at n >= 2; 30 frontier bands, band 32 clamped at n = 1000) | doc 75 §2, run 115 |
+| score `22.217428576`, 554 rows below `ceil(√n)` | confirmed (re-checked after the run-140 n = 90 promotion; was `22.218056945`, 553) | `sqscore.py` `guard()` |
+| 446 rows tied to `L = k` (the standard grid), 30 bands `k = 3..32` | confirmed (446 includes n = 1; 445 at n >= 2; row 90 left the grid ties when it was promoted in run 140; 30 frontier bands, band 32 clamped at n = 1000) | doc 75 §2, run 115 |
 | 303 tied / 21 ahead / 0 behind the Squares Project catalogue | confirmed (303 equal, 21 ahead by `0.006414`, 0 behind) | doc 75 §1 |
-| 552 rows hold standalone zero-clearance `galois-certificate/1` proofs | confirmed (552 of 553 certified; 547 of them for the first time in run 106) | `verify_certificates.py`, run 106 |
+| 552 rows hold standalone zero-clearance `galois-certificate/1` proofs | confirmed (552 of 554 beaten rows certified; the promoted row 90 carries the project's exact rational certificate instead, re-verified by `import_n090.py`) | `verify_certificates.py`, run 106 |
 | 613 core decision functions, 0 float offenders | confirmed | `glm_wheels.py --audit` |
 | **"Grid-frontier rows (`n = k² − 1`) are uniformly compressed"** | **WRONG** — the frontier row of band k is `m* = k² − j*` with `j* = 18…26` at `k >= 21` (e.g. band 23: `m* = 509`, `j* = 20`; band 32: `m* = 998`, `j* = 26`). `n = k² − 1` is not a frontier row anywhere in the table | doc 75 §2 |
 | free cell `0.9994–0.9999` at the compressed frontier | confirmed (and equal to `1 − (k−L)/k` within `6e-4` in ten of eleven bands) | doc 75 §3, `void_insert.py` |
@@ -38,7 +38,7 @@
 We are developing the **Geometric Language Machine (GLM)** and testing it on the 1,000-row *Squares in
 Squares* packing problem (`n = 1..1000` unit squares in a minimal square of side `L`). The Kaggle leaderboard
 score is a **public, falsifiable proof of progress — not a ceiling**: better packings exist, and our goal is to
-discover genuine geometric/algebraic structures that beat our current `22.218056945` baseline (`553` rows
+discover genuine geometric/algebraic structures that beat our current `22.217428576` baseline (`554` rows
 below `ceil(√n)`, `447` rows currently tied to the `L = k` standard grid; `30` bands `k = 3..32`; `303` tied
 and `21` ahead of the Squares Project catalogue, `0` behind).
 
@@ -85,9 +85,14 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
 3. **Near-Misses & Interior Seams:** push the four `+0.0711` `Block45` near-misses (`n = 212, 242, 243, 244`)
    and **interior tilted seams** (`(Z + 4/7)²` / rational-sheared interfaces where tilted cells interlock
    inside a seam rather than on a solid wall), and unify `verify_certificates.py` (exact contact) with
-   `interval_verifier.py` (rational enclosure).
-4. **The guaranteed payer:** the `553` beaten rows leave `15.02` score unclaimed below them; a uniform `1 %`
-   capture is `+0.15023` and `5 %` is `+0.75113` — the whole `0.163635` gap to the reported leader is `1.1 %`
+   `interval_verifier.py` (rational enclosure). **Run 140 closes the butted variant of this lead:** two
+   rigid blocks joined along a straight interface have an integer side `max(a1, b1, a2 + b2)` and
+   `n = a1a2 + b1b2 <= max(a1, b1)(a2 + b2)`, so the family is floored at `ceil(sqrt n)` and can only tie
+   the grid; 935,520 spinor/gap/split candidates confirm it (`twin_boundary.py`, doc 97 §3). What remains
+   open is the *interleaved* interface — cells of both lattices owning area on both sides of the seam —
+   which no butted family can express.
+4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
+   promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the
    record. Grid-row beats (all 30 band tops by inheritance) are worth `+0.23251` in total.
 

@@ -51,7 +51,7 @@ Record as it stands at run 67:
 
 | item | state |
 | --- | --- |
-| delivered table | **22.218056945, 553 beats, 447 grid, 1000 rows**, asserted by `sqscore.guard` |
+| delivered table | **22.217428576, 554 beats, 446 grid, 1000 rows**, asserted by `sqscore.guard` |
 | `record_guard.py` | **OK** — 34 documents, 153 totals scanned; 93 historical totals quoted below title blocks are inventoried, not claimed |
 | documents quoting an old total | all carry an explicit historical/stale tag; none presented as current |
 | `04-RUN-LOG.md` | entries through **run 67** (52–61 in §10 here, 62–67 in §12) |
@@ -494,7 +494,7 @@ than one more search campaign.
 
 **Implemented at run 52** — `scripts/record_guard.py`, exit 1 on a violation.
 Two fatal rules: R1, a line that claims currency (current/canonical/submission
-score/delivered table/latest score/stands at) must quote 22.218056945; R2, the
+score/delivered table/latest score/stands at) must quote 22.217428576; R2, the
 first total in a document's title block must be the current one. A line opts out
 by carrying an explicit tag (historical / stale / superseded / withdrawn), which
 is the convention the prose already uses; a line that quotes the current score

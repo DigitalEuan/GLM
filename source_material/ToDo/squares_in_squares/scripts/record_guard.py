@@ -9,8 +9,8 @@ Two fatal rules:
 
   R1 currency   a line that asserts currency (current / canonical / delivered /
                 latest / "the score is" / "scores") and quotes a total must
-                quote the delivered one. The test is the prefix 22.21805, so
-                every rounding of 22.218056945 passes and 22.642386651 does not.
+                quote the delivered one. The test is the prefix 22.21742, so
+                every rounding of 22.217428576 passes and 22.218056945 does not.
   R2 headline   a total quoted in a document's title block (first 10 lines)
                 must be the current one, unless the document is declared
                 historical in HISTORICAL.
@@ -42,7 +42,7 @@ sys.path.insert(0, HERE)
 
 import sqscore                  # noqa: E402
 
-CANON = "22.21805"              # prefix of 22.218056945 and every rounding of it
+CANON = "22.21742"              # prefix of 22.217428576 and every rounding of it
 SCORE_RE = re.compile(r"(?<![\d.])2[0-9]\.\d{5,9}(?![\d])")
 #: a line is a *claim about the current state* only if it uses this vocabulary.
 #: "Score history: A -> B -> C" and run-log notes are history, not claims; they

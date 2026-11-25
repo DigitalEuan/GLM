@@ -316,14 +316,14 @@ def selftest() -> int:
     print("  3. rules: a structured small obligation schedules, a 40-class "
           "pose is refused (R1)")
 
-    # control 4: the machine-checked frontier says exactly one row is behind
-    # (n = 90: the source has 9.99403876 against our 10.0) and the certified
-    # room is 1.09647, not the hand-transcribed 1.14087
+    # control 4: the machine-checked frontier now shows no row behind -- n = 90
+    # was the only one and it was promoted in run 140 -- and the certified room
+    # is 1.09584, not the hand-transcribed 1.14087
     f = frontier(rows)
-    assert [r["n"] for r in f["behind"]] == [90], f["behind"]
-    assert abs(float(f["room"]) - 1.09647) < 1e-4, f["room"]
-    print(f"  4. n<=100 vs the machine-checked frontier: {len(f['behind'])} row "
-          f"behind (n = 90), certified room {float(f['room']):.5f} over "
+    assert f["behind"] == [], f["behind"]
+    assert abs(float(f["room"]) - 1.09584) < 1e-4, f["room"]
+    print(f"  4. n<=100 vs the machine-checked frontier: none behind (n = 90 was, "
+          f"promoted in run 140), certified room {float(f['room']):.5f} over "
           f"{f['room_rows']} rows")
 
     # control 5: R5 refuses the proved-optimal target row 6 of band k = 3, and
