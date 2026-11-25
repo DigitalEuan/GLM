@@ -1,5 +1,6 @@
 {
- "source": "jlevy.github.io/squares/frontier.html (2026-10-20)",
+ "source": "jlevy.github.io/squares/frontier.html (fetched 2026-11-25)",
+ "pdf_edition": "v0.7.0, 23 October 2026",
  "source_file": "workspace/push/pub_frontier_20261020.html",
  "rows_parsed": 324,
  "missing_1_100": [],
@@ -8,123 +9,178 @@
    "n": 12,
    "field": "lb",
    "transcribed": "3.9715",
+   "pdf": "3.971500",
    "source": "3.9716",
-   "delta": "-0.0001"
+   "delta": "-0.0001",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 19,
    "field": "lb",
    "transcribed": "4.825",
+   "pdf": "4.825000",
    "source": "4.8275",
-   "delta": "-0.0025"
+   "delta": "-0.0025",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 20,
    "field": "lb",
    "transcribed": "4.905",
+   "pdf": "4.905000",
    "source": "4.9125",
-   "delta": "-0.0075"
+   "delta": "-0.0075",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 26,
    "field": "lb",
    "transcribed": "5.545",
+   "pdf": "5.545000",
    "source": "5.555",
-   "delta": "-0.010"
+   "delta": "-0.010",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 27,
    "field": "lb",
    "transcribed": "5.6435",
+   "pdf": "5.643500",
    "source": "5.655",
-   "delta": "-0.0115"
+   "delta": "-0.0115",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 28,
    "field": "lb",
    "transcribed": "5.735",
+   "pdf": "5.735000",
    "source": "5.7425",
-   "delta": "-0.0075"
+   "delta": "-0.0075",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 29,
    "field": "lb",
    "transcribed": "5.81",
+   "pdf": "5.810000",
    "source": "5.82",
-   "delta": "-0.01"
+   "delta": "-0.01",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 30,
    "field": "lb",
    "transcribed": "5.8835",
+   "pdf": "5.883500",
    "source": "5.8925",
-   "delta": "-0.0090"
+   "delta": "-0.0090",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 31,
    "field": "lb",
    "transcribed": "5.9525",
+   "pdf": "5.952500",
    "source": "5.9775",
-   "delta": "-0.0250"
+   "delta": "-0.0250",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 37,
    "field": "lb",
    "transcribed": "6.44",
+   "pdf": "6.440000",
    "source": "6.4975",
-   "delta": "-0.0575"
+   "delta": "-0.0575",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 39,
    "field": "lb",
    "transcribed": "6.65",
+   "pdf": "6.650000",
    "source": "6.6625",
-   "delta": "-0.0125"
+   "delta": "-0.0125",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 44,
    "field": "lb",
    "transcribed": "6.9725",
+   "pdf": "6.972500",
    "source": "7",
-   "delta": "-0.0275"
+   "delta": "-0.0275",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 76,
    "field": "lb",
    "transcribed": "8.965",
+   "pdf": "8.965000",
    "source": "9",
-   "delta": "-0.035"
+   "delta": "-0.035",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 90,
    "field": "ub",
    "transcribed": "10",
+   "pdf": "10",
    "source": "9.9940387665828706",
-   "delta": "0.0059612334171294"
+   "delta": "0.0059612334171294",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 94,
    "field": "lb",
    "transcribed": "9.95",
+   "pdf": "9.950000",
    "source": "9.972",
-   "delta": "-0.022"
+   "delta": "-0.022",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 95,
    "field": "lb",
    "transcribed": "9.965",
+   "pdf": "9.965000",
    "source": "10",
-   "delta": "-0.035"
+   "delta": "-0.035",
+   "kind": "drift",
+   "recent": true
   },
   {
    "n": 96,
    "field": "lb",
    "transcribed": "9.97",
+   "pdf": "9.970000",
    "source": "10",
-   "delta": "-0.03"
+   "delta": "-0.03",
+   "kind": "drift",
+   "recent": true
   }
  ],
  "n_diffs": 17,
+ "n_drift": 17,
+ "n_transcription": 0,
+ "n_drift_recent": 17,
+ "transcription_diffs": [],
  "room_source": "1.096470345949086985989005834091427377109739550447637679850674168040233",
  "room_rows": 51,
  "room_transcribed": "1.14087",

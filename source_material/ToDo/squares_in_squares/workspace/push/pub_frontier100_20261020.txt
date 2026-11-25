@@ -1,0 +1,279 @@
+The square packing problem asks for the side s(n) of the smallest square that can
+hold n unit squares, where the squares are free to rotate but cannot overlap
+O proved optimal (45 of 100)
+= exact value known (98 of 100)
+≈ only known numerically (2 of 100)
+R rigid (14 of 100)
+90° 45° colors indicate distinct tilt angles
+4 3 2 1 0 shade indicates number of full-side contacts
+deg is the algebraic degree of that side length
+recent result (since August, 2026)
+Best packings due to Göbel, Trump, Wainwright, Hämäläinen, Stenlund, Friedman, Bidwell,
+Cantrell, Morandi, Ellsworth, Hajba, Schadt, Chaoweeraprasit, Couzo, Daniel, de Winter, Gupta,
+Ostashev, PingYou Ltd, Xu, Barnett, Chang, DeVincentis, hmbelvedere, Mishapolk, Rehwaldt
+Lower bounds due to Göbel, Stromquist, Kearney, Shiu, Bentz,
+Daniel, Vlasenko, Guzhou0806, Hosono, Ahmed, Karakuş, Ryu
+Optimality proofs due to Göbel, Stromquist, Friedman, El Moumni,
+Kearney, Shiu, Bentz, Vlasenko, Levy, Daniel, Hosono, Ahmed, Karakuş;
+formalization by EvolvingPrograms, Gurevitch, Guzhou0806, Julian-JJ, Lewis
+Drawn packings are regularized for cleaner display using Squares Project rules,
+based on Daniel’s regularizer
+Diagram by Joshua Levy
+October 23, 2026 · v0.7.0-79926e
+100 BEST KNOWN SQUARE PACKINGS
+The Squares Project · github.com/jlevy/squares
+1 R=O
+s(1) = 1
+2 =O
+s(2) = 2
+3 =O
+s(3) = 2
+4 R=O
+s(4) = 2
+5 R=O
+s(5) = 2.707107 deg 2
+6 =O
+s(6) = 3
+7 =O
+s(7) = 3
+8 =O
+s(8) = 3
+9 R=O
+s(9) = 3
+10 =O
+s(10) = 3.707107 deg 2
+11 R=O
+s(11) = 3.877084 deg 8
+12 =
+s(12) ≤ 4
+s(12) ≥ 3.971500
+13 =O
+s(13) = 4
+14 =O
+s(14) = 4
+15 =O
+s(15) = 4
+16 R=O
+s(16) = 4
+17 =
+s(17) ≤ 4.675531 deg 18
+s(17) ≥ 4.660442
+18 =
+s(18) ≤ 4.822876 deg 2
+s(18) ≥ 4.705000
+19 =
+s(19) ≤ 4.885619 deg 2
+s(19) ≥ 4.825000
+20 =
+s(20) ≤ 5
+s(20) ≥ 4.905000
+21 =O
+s(21) = 5
+22 =O
+s(22) = 5
+23 =O
+s(23) = 5
+24 =O
+s(24) = 5
+25 R=O
+s(25) = 5
+26 =
+s(26) ≤ 5.621321 deg 2
+s(26) ≥ 5.545000
+27 =
+s(27) ≤ 5.707107 deg 2
+s(27) ≥ 5.643500
+28 R=
+s(28) ≤ 5.824445 deg 6
+s(28) ≥ 5.735000
+29 =
+s(29) ≤ 5.933834
+s(29) ≥ 5.810000
+30 =
+s(30) ≤ 6
+s(30) ≥ 5.883500
+31 =
+s(31) ≤ 6
+s(31) ≥ 5.952500
+32 =O
+s(32) = 6
+33 =O
+s(33) = 6
+34 =O
+s(34) = 6
+35 =O
+s(35) = 6
+36 R=O
+s(36) = 6
+37 =
+s(37) ≤ 6.598620 deg 8
+s(37) ≥ 6.440000
+38 =
+s(38) ≤ 6.707107 deg 2
+s(38) ≥ 6.545000
+39 =
+s(39) ≤ 6.810723 deg 5
+s(39) ≥ 6.650000
+40 R=
+s(40) ≤ 6.828428 deg 2
+s(40) ≥ 6.718000
+41 =
+s(41) ≤ 6.926694 deg 42
+s(41) ≥ 6.775000
+42 =
+s(42) ≤ 7
+s(42) ≥ 6.847500
+43 =
+s(43) ≤ 7
+s(43) ≥ 6.907500
+44 =
+s(44) ≤ 7
+s(44) ≥ 6.972500
+45 =O
+s(45) = 7
+46 =O
+s(46) = 7
+47 =O
+s(47) = 7
+48 =O
+s(48) = 7
+49 R=O
+s(49) = 7
+50 =
+s(50) ≤ 7.571429
+s(50) ≥ 7.400000
+51 =
+s(51) ≤ 7.690356 deg 2
+s(51) ≥ 7.470000
+52 =
+s(52) ≤ 7.707107 deg 2
+s(52) ≥ 7.550000
+53 =
+s(53) ≤ 7.822876 deg 2
+s(53) ≥ 7.627500
+54 =
+s(54) ≤ 7.846668 deg 4
+s(54) ≥ 7.685000
+55 ≈
+s(55) ≤ 7.945772
+s(55) ≥ 7.728000
+56 =
+s(56) ≤ 8
+s(56) ≥ 7.802500
+57 =
+s(57) ≤ 8
+s(57) ≥ 7.872500
+58 =
+s(58) ≤ 8
+s(58) ≥ 7.935000
+59 =O
+s(59) = 8
+60 =O
+s(60) = 8
+61 =O
+s(61) = 8
+62 =O
+s(62) = 8
+63 =O
+s(63) = 8
+64 R=O
+s(64) = 8
+65 =
+s(65) ≤ 8.535534 deg 2
+s(65) ≥ 8.350000
+66 =
+s(66) ≤ 8.656855 deg 2
+s(66) ≥ 8.430000
+67 =
+s(67) ≤ 8.707107 deg 2
+s(67) ≥ 8.480000
+68 =
+s(68) ≤ 8.798796
+s(68) ≥ 8.530000
+69 =
+s(69) ≤ 8.827195 deg 38
+s(69) ≥ 8.620000
+70 =
+s(70) ≤ 8.880961
+s(70) ≥ 8.657500
+71 ≈
+s(71) ≤ 8.944072
+s(71) ≥ 8.721000
+72 =
+s(72) ≤ 9
+s(72) ≥ 8.760000
+73 =
+s(73) ≤ 9
+s(73) ≥ 8.813000
+74 =
+s(74) ≤ 9
+s(74) ≥ 8.867500
+75 =
+s(75) ≤ 9
+s(75) ≥ 8.940000
+76 =
+s(76) ≤ 9
+s(76) ≥ 8.965000
+77 =O
+s(77) = 9
+78 =O
+s(78) = 9
+79 =O
+s(79) = 9
+80 =O
+s(80) = 9
+81 R=O
+s(81) = 9
+82 =
+s(82) ≤ 9.535534 deg 2
+s(82) ≥ 9.320000
+83 =
+s(83) ≤ 9.634758deg 672
+s(83) ≥ 9.370000
+84 =
+s(84) ≤ 9.697935
+s(84) ≥ 9.422500
+85 =
+s(85) ≤ 9.742641 deg 2
+s(85) ≥ 9.475000
+86 =
+s(86) ≤ 9.820536
+s(86) ≥ 9.503000
+87 =
+s(87) ≤ 9.838816 deg 41
+s(87) ≥ 9.580000
+88 =
+s(88) ≤ 9.882452
+s(88) ≥ 9.620000
+89 =
+s(89) ≤ 9.949748 deg 2
+s(89) ≥ 9.650000
+90 =
+s(90) ≤ 10
+s(90) ≥ 9.730000
+91 =
+s(91) ≤ 10
+s(91) ≥ 9.762500
+92 =
+s(92) ≤ 10
+s(92) ≥ 9.770000
+93 =
+s(93) ≤ 10
+s(93) ≥ 9.880000
+94 =
+s(94) ≤ 10
+s(94) ≥ 9.950000
+95 =
+s(95) ≤ 10
+s(95) ≥ 9.965000
+96 =
+s(96) ≤ 10
+s(96) ≥ 9.970000
+97 =O
+s(97) = 10
+98 =O
+s(98) = 10
+99 =O
+s(99) = 10
+100 R=O
+s(100) = 10

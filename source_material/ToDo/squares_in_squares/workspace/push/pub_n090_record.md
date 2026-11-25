@@ -1,0 +1,495 @@
+---
+title: s(90) — square packing case
+softschema:
+  contract: packing.squares:SquarePackingCase/v2
+  schema: square-packing-case.schema.yaml
+  envelope: packing
+  status: enforced
+packing:
+  n: 90
+  reported_status: open
+  status: open
+  source_reviewed: '2026-11-21'
+  reported_upper_bound:
+    value: '9.9940387665828706'
+    exact_form: 283097290828433062400431254317097234439248852683102663418830216278332305959948738073773183281942509413305771080804753939783330863242170157550095973633087579198725959676783372420698609802953140657026017770845629744797804232145558959033371397710077808634454134575706283302518427812327221303833665806574374705101515921453620227217593400189656345684165330864292579767547387692201466190355530349739303723417126974888/28326615239379221810789364416434129669968904915114686353407118880620204374076650817760256940140475028161650688247701507442230362442862468879030277447161537073203535093323841480528455941097931502809848111311591800870227400461072285543158038901167057151654964432810489360950928816799550744689987469637659738662545878209056999259353234520372047980341155930915414876001901644295646775136930961803283801563962353985
+    evidence:
+    - E-de-winter-997-followup-certificate-report
+    algebraic_degree: 1
+    minimal_polynomial: null
+    analytically_optimized: null
+    catalogue_rigid: not-stated
+    construction_method: unknown
+    tilt_angles_deg: null
+    found_by:
+    - jazivxt
+    found_year: 2026
+    improved_by:
+    - Joost de Winter
+    catalogue_pictured: false
+    source_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    source_date: '2026-11-21'
+    retrieved_date: '2026-11-21'
+    witnesses:
+    - W-known-best-n090
+  verified_upper_bound:
+    value: '9.9940387665828706'
+    exact_form: 283097290828433062400431254317097234439248852683102663418830216278332305959948738073773183281942509413305771080804753939783330863242170157550095973633087579198725959676783372420698609802953140657026017770845629744797804232145558959033371397710077808634454134575706283302518427812327221303833665806574374705101515921453620227217593400189656345684165330864292579767547387692201466190355530349739303723417126974888/28326615239379221810789364416434129669968904915114686353407118880620204374076650817760256940140475028161650688247701507442230362442862468879030277447161537073203535093323841480528455941097931502809848111311591800870227400461072285543158038901167057151654964432810489360950928816799550744689987469637659738662545878209056999259353234520372047980341155930915414876001901644295646775136930961803283801563962353985
+    evidence:
+    - E-de-winter-997-followup-exact-feasibility
+    - E-de-winter-997-followup-review-exact-feasibility
+  reported_lower_bound:
+    value: '9.73'
+    exact_form: 973/100
+    kind: counting
+    proved_by:
+    - Hosono
+    proved_year: 2026
+    source_key: '[wand125 mixed bounds evening 2026-10-04]'
+    note: >-
+      Hosono's square-packing-bounds (4 October 2026) reports s(90) >= 973/100 from a density of
+      525 uniform rectangles of total mass 8999999/100000, at core side 9977/10000 on 201 net
+      half-angles, accepted there at every angle by its research copy of Tokoharu's verify.cpp at
+      threshold one. It is above the 389/40 this case reported, from the source's mixed_n90_L9725
+      (T-082). sqverify-fast decided it here on 6 October 2026 at all 201 net directions.
+    scope: Unrestricted unit-square packing with independent rotations and disjoint interiors.
+    evidence:
+    - E-n090-wand125-mixed-973-report
+  verified_lower_bound:
+    value: '9.73'
+    exact_form: 973/100
+    evidence:
+    - E-n090-wand125-mixed-973-sqverify-fast-replay
+  rigidity:
+    property: not-rigid
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    scope: 'Square 1 of the retained witness (witness id 2) translates 0.000089 along (0.389073, 0.921207)
+      with the packing still valid, so the configuration admits a non-trivial feasible motion; 17 of its
+      90 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries
+      no linearization error, but the coordinates are the witness''s own finite-precision transcription:
+      this settles the retained configuration, not the true optimum. Rigidity and optimality are independent,
+      and this bears only on the former.'
+    certificate: atlas/known-best/translation-escape-screen.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.screen_translation_escape --check
+    evidence:
+    - E-translation-escape-not-rigid
+  conjectured_optimum: null
+  priority_notes:
+  - claim: Earlier house 10.0 from [Kingbird], the case’s ceiling until 15 November 2026; its certificate
+      and replay remain retained.
+    claimed_by: []
+    published: null
+    year: null
+  - claim: Earlier house 9.9982771669260000 from [jazivxt s90 upper bound 2026-11-15], the case’s
+      ceiling from 15 November 2026 until 16 November 2026; its certificate and replay remain retained.
+    claimed_by:
+    - jazivxt
+    published: '2026-11-15'
+    year: 2026
+  - claim: Earlier house 9.9940387666098522 from [de Winter s90 upper bound 2026-11-15], the case’s
+      ceiling from 16 November 2026 until 21 November 2026; its certificate and replay remain retained.
+    claimed_by:
+    - jazivxt
+    - Joost de Winter
+    published: '2026-11-15'
+    year: 2026
+  evidence:
+  - E-n090-wand125-mixed-973-sqverify-fast-replay
+  - E-n090-wand125-mixed-9725-sqverify-fast-replay
+  - E-n090-wand125-mixed-960-source-replay
+  - E-n090-wand125-mixed-960-report
+  - E-n090-wand125-rect-95775-sqverify-fast-replay
+  - E-n089-wand125-rect-955-sqverify-fast-replay
+  - E-wand125-rectangle-2026-09-28-monotone-report
+  - E-kingbird-upper-register
+  - E-nagamochi-lower
+  - E-basic-grid-upper
+  - E-karakus-strip-lower
+  - E-nagamochi-lemma1-counterexample
+  - E-jazivxt-989-certificate-report
+  - E-jazivxt-989-exact-feasibility
+  - E-jazivxt-989-review-exact-feasibility
+  - E-de-winter-997-certificate-report
+  - E-de-winter-997-exact-feasibility
+  - E-de-winter-997-review-exact-feasibility
+  - E-de-winter-997-followup-certificate-report
+  - E-de-winter-997-followup-exact-feasibility
+  - E-de-winter-997-followup-review-exact-feasibility
+  conflicts: []
+  blockers: []
+  resources:
+  - key: '[wand125 mixed bounds evening 2026-10-04]'
+    role: lower-bound-proof
+    local: web/wand125-mixed-bounds-evening-2026-10-04/square-packing-bounds
+    url: https://github.com/wand125/square-packing-bounds/tree/797bdf6e10eba5f9dccca9da06f8352e81ba9dde/certificates/mixed_n90_L973
+    retrieved: true
+  - key: '[wand125 mixed bounds 2026-10-03]'
+    role: lower-bound-proof
+    local: web/wand125-mixed-bounds-2026-10-03/square-packing-bounds
+    url: https://github.com/wand125/square-packing-bounds/tree/2aff2076c492d62340e986c84f60a0a29eb668df/certificates/mixed_n90_L9725
+    retrieved: true
+  - key: '[wand125 mixed bounds 2026-10-01]'
+    role: lower-bound-proof
+    local: web/wand125-point-and-mixed-2026-10-01/square-packing-bounds
+    url: https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d/certificates/mixed_n90_L960
+    retrieved: true
+  - key: '[wand125 rectangle bounds 2026-09-28]'
+    role: lower-bound-proof
+    local: web/wand125-rectangle-certificates-2026-09-28/wand125-rectangles
+    url: https://github.com/wand125/square-packing-bounds
+    retrieved: true
+  - key: '[Kingbird]'
+    role: record-catalogue
+    local: web/kingbird-squares-in-squares
+    url: https://kingbird.myphotos.cc/packing/squares_in_squares.html
+    retrieved: true
+  - key: '[Nagamochi 2005]'
+    role: lower-bound-proof
+    local: papers/nagamochi-2005-packing-unit-squares-in-a-rectangle
+    url: https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37
+    retrieved: true
+  - key: '[Friedman DS7]'
+    role: survey
+    local: papers/friedman-ds7-packing-unit-squares-in-squares
+    url: https://erich-friedman.github.io/papers/squares/squares.html
+    retrieved: true
+  - key: '[Karakuş 2026]'
+    role: lower-bound-proof
+    local: papers/karakus-2026-counterexample-nagamochi-scoring-lemma
+    url: https://arxiv.org/abs/2609.37410
+    retrieved: true
+  - key: '[jazivxt s90 upper bound 2026-11-15]'
+    role: upper-bound-report
+    local: web/jazivxt-s90-upper-bound-2026-11-15
+    url: https://github.com/dpre4ai/n90-square-packing/tree/f9b31b4ebddb278a128b6cb5c43836a305a24dca
+    retrieved: true
+  - key: '[de Winter s90 upper bound 2026-11-15]'
+    role: upper-bound-report
+    local: web/de-winter-s90-upper-bound-2026-11-15
+    url: https://github.com/JoostdeWinter/square-packing/tree/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5
+    retrieved: true
+  - key: '[de Winter issue 997 follow-up 2026-11-21]'
+    role: upper-bound-report
+    local: web/de-winter-997-followup-2026-11-21
+    url: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
+    retrieved: true
+  regularization:
+    note: 'Regularized by the Squares Project with Evan Daniel''s regularizer (evand/square-packing,
+      MIT), with the project''s modifications: port of his coincidence placement (regularize_grid_slack/2)
+      rather than his code, same-side exact re-solve (devtools.regularize_same_side). A drawing of T-338''s
+      packing at the witness''s own side: a pure regularization, which proves no new bound, so not a
+      result.'
+    items:
+    - by: project
+      credit: Regularized by the Squares Project with Evan Daniel's regularizer (evand/square-packing,
+        MIT)
+      generator: regularize_grid_slack/2
+      modifications:
+      - port of his coincidence placement (regularize_grid_slack/2) rather than his code
+      - same-side exact re-solve (devtools.regularize_same_side)
+      side: same
+      of: T-338
+      view: packing/atlas/known-best/regularized/n-090-regularized.yaml.gz
+---
+# `s(90)` — open
+
+**House adoption, 21 November 2026.** The packing jazivxt found from shifted copies of a
+crop of Joost de Winter’s n = 157 packing, improved and refined by Joost de Winter
+(T-338) is now this case’s house: its exact certificate proves
+$s(90) \le 9.9940387665828706$, the reported and the verified upper bound, rounded
+outward from its exact side.
+The exact certificate side improves the previous verified exact side by about
+`2.70e-11`. The earlier ceiling, displayed outward as $9.9940387666098522$ from
+jazivxt’s packing, improved by Joost de Winter (T-304), applied until this adoption and
+stays retained as history ([the certificate](#joost-de-winters-certificate-t-338)).
+
+**House adoption, 16 November 2026.** The packing jazivxt found from shifted copies of a
+crop of Joost de Winter’s n = 157 packing, as de Winter improved it by a local search
+(T-304) was this case’s house until 21 November 2026: its exact certificate proves
+$s(90) \le 9.9940387666098522$, the reported and the verified upper bound, rounded
+outward from its exact side.
+The exact certificate side improves the previous verified exact side by about
+`4.24e-03`. The earlier ceiling, displayed outward as $9.9982771669260000$ from
+jazivxt’s packing (T-303), applied until this adoption and stays retained as history
+([the certificate](#joost-de-winters-certificate-t-304)).
+
+**House adoption, 15 November 2026.** The packing jazivxt found from shifted copies of a
+crop of Joost de Winter’s n = 157 packing, the first below the 10 × 10 grid (T-303) was
+this case’s house until 16 November 2026: its exact certificate proves
+$s(90) \le 9.9982771669260000$, the reported and the verified upper bound, rounded
+outward from its exact side.
+The exact certificate side improves the previous verified exact side by about
+`1.72e-03`. The earlier ceiling, displayed outward as $10.0$ from the trivial grid,
+applied until this adoption and stays retained as history
+([the certificate](#jazivxts-certificate-t-303)).
+
+**External intake, 2026-10-05.** Hiroaki Hosono’s
+[mixed-certificate source](../resources/web/wand125-mixed-bounds-evening-2026-10-04/README.md)
+reports $s(90) \ge 973/100 = 9.73$ (T-091), from a density of 525 rectangles of total
+mass $8999999/100000 < 90$, accepted there at every net angle by its research copy of
+Tokoharu’s checker at threshold one.
+It is above the $389/40$ this case reported, by $0.005$. It supersedes the source’s
+`mixed_n90_L9725`. sqverify-fast, this repository’s clean-room verifier, decided it here
+on 6 October 2026 at all 201 net directions, so it is also the verified lower bound:
+confirmed, independently re-implemented.
+Hosono’s README says parts of the work were produced with AI assistance under human
+direction.
+
+**External intake, 2026-10-03.** Hosono’s
+[mixed-certificate source](../resources/web/wand125-mixed-bounds-2026-10-03/README.md)
+reports the mixed certificate `mixed_n90_L9725` at side $389/40 = 9.725$ (T-082), since
+superseded (T-091), from a density of 571 rectangles of total mass
+$8999999/100000 < 90$, accepted there at every net angle by its research copy of
+Tokoharu’s checker at threshold one.
+It is above the $48/5$ this case reported, by $0.125$, and supersedes the source’s
+`mixed_n90_L960`. sqverify-fast, this repository’s clean-room verifier, decided it here
+on 6 October 2026 at all 201 net directions: confirmed, independently re-implemented.
+The verified lower bound is unchanged, the certificate above being higher.
+Hosono’s README says parts of the work were produced with AI assistance under human
+direction.
+
+**External intake, 2026-10-01.** Hosono’s
+[mixed-certificate source](../resources/web/wand125-point-and-mixed-2026-10-01/README.md)
+reports $s(90) \ge 48/5 = 9.6$ (T-069), since superseded (T-091), from a density of 762
+rectangles of total mass $8999999/100000 < 90$, accepted there at every net angle by its
+research copy of Tokoharu’s checker at threshold one.
+Its complete replay here on 2 October 2026 returned the certificate’s own record at all
+201 directions, so it was also the verified lower bound until 6 October.
+Hosono’s README says parts of the work were produced with AI assistance under human
+direction.
+
+**External intake, 2026-09-28.** Hosono’s
+[rectangle-density source](../resources/web/wand125-rectangle-certificates-2026-09-28/README.md)
+has no certificate at $n = 90$. Its n89 certificate, of mass $8899/100 < 90$, gives
+$191/20 = 9.55$ by monotonicity, which the 2026-10-01 intake above raises.
+The n89 certificate’s complete coverage replay has not yet run here, so the verified
+lower bound is unchanged.
+Hosono’s README says parts of the work were produced with AI assistance under human
+direction.
+
+Open. The packing jazivxt found (T-303) gives $s(90) \le 9.998277166926$, and the
+verified lower bound is $s(90) \ge 973/100 = 9.73$, from Hosono’s mixed
+rectangle-density certificate of 4 October, leaving a gap of $0.2683$. Until 15 November
+2026 the trivial grid gave the ceiling, $s(90) \le 10$.
+
+## The packing
+
+The record catalogue does not picture $n = 90$. Until 15 November 2026 this case’s house
+was the trivial $\lceil\sqrt{90}\rceil = 10$ grid, and the integer side was the
+conjectured optimum.
+The house is now the packing jazivxt found from shifted copies of a crop of Joost de
+Winter’s n = 157 packing, the first packing of 90 squares below the grid on record,
+whose witness the atlas draws ([the certificate](#jazivxts-certificate-t-303)). Since
+$90 = 10^2 - 10$, it shows $s(k^2 - k) < k$ at $k = 10$, the smallest $k$ at which the
+record holds it; the counts $k^2 - k$ for $k = 11$ to $18$ were below their grids
+already, and those for $k = 4$ to $9$ stay at them.
+
+## The lower bound
+
+The verified field rests on a complete decision here
+([`E-n090-wand125-mixed-973-sqverify-fast-replay`](evidence.yaml), `V3/C3`) of Hosono’s
+mixed certificate of 4 October by sqverify-fast, this repository’s clean-room measure
+verifier: all 201 net directions of the retained candidate on 6 October 2026, with two
+mutants scaled below coverage one refused.
+It shares no code with the source’s checker, so it decides coverage a second way with
+the same method; the source’s own checker was not run here.
+
+Until 6 October 2026 the verified field rested on a complete replay here
+([`E-n090-wand125-mixed-960-source-replay`](evidence.yaml), `V3/C3`) of Hosono’s mixed
+certificate: the source’s unchanged checker and per-angle functions on the pinned
+bundle, all 201 directions on 2 October 2026, each returning the certificate’s own
+record. It runs the source’s own algorithm, so it confirms the source’s run rather than
+deciding coverage a second way.
+
+Until 2 October 2026 the verified lower bound was Nagamochi’s general closed form, now a
+reported bound (see the correction below).
+Karakuş’s general bound, independently verified here and below this certificate at this
+$n$, applies to every nonsquare $N \ge 8$:
+
+```
+s(N) ≥ ½ + √(N − ⌊√N⌋ + ¼)
+```
+
+**Correction, 2 October 2026.** Until that date the verified lower bound here was
+Nagamochi’s general closed form,
+$s(N) \ge \min(\lceil\sqrt{N}\rceil, \sqrt{N - 2\lfloor\sqrt{N}\rfloor + 1} + 1)$, which
+is stronger at this $n$ and is now recorded as a reported bound.
+Its published proof rests on Nagamochi’s Lemma 1, which Karakuş showed false; nothing is
+disproved, and no packing beating it is known
+([review of 2 October 2026](../../docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md)).
+This register had recorded that proof as verified, its own error, logged as defect
+[D-516](../../defects.md).
+
+See the [Frontier corpus summary](README.md#what-the-corpus-shows) for the current
+aggregate count; source-reported bounds are recorded separately.
+
+<!-- BEGIN verification code: written by devtools.render_case_verifiers -->
+
+## Verification Code
+
+The programs behind this case’s verified bounds, by their evidence.
+The code column says how the code that ran stands to the code its producer used.
+[`VERIFIERS.md`](VERIFIERS.md) says what each program is and whose it is.
+
+| bound | evidence | run | code | programs |
+| --- | --- | --- | --- | --- |
+| verified lower | `E-n090-wand125-mixed-973-sqverify-fast-replay` | replayed here | independent | `V-sqverify-fast` (first-party) |
+| verified upper | `E-de-winter-997-followup-exact-feasibility` | replayed here | independent | `V-sqpack-verify`, `V-check-rational-witness-independent` (first-party) |
+| verified upper | `E-de-winter-997-followup-review-exact-feasibility` | replayed here | independent | `V-de-winter-997-n90-independent-20261121` (first-party) |
+
+<!-- END verification code -->
+
+## jazivxt’s certificate (T-303)
+
+The packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157
+packing, the first below the 10 × 10 grid, reported on
+[jlevy/squares#989](https://github.com/jlevy/squares/issues/989), at exact side
+$4999138583463/500000000000$, displayed upward as $9.9982771669260000$ (T-303). The
+certificate gives a rational side and, for each of the 90 unit squares, a rational
+centre and the tangent of its half-angle; the
+[retained packet](../resources/web/jazivxt-s90-upper-bound-2026-11-15/README.md) holds
+it with the complete native jobs that decided it.
+
+Both maintained exact routes decided it here, `sqpack`’s exact separating-axis verifier
+and the independent rational corner checker, with its duplicate-square and
+outside-container controls, and the 15 November review’s clean-room checker, frozen
+before any producer or witness code was read, decided it again by separating axes in
+integers and by exact clipping in GMP rationals over every square, wall and pair; its 23
+controls, each stated beforehand, were each decided as stated.
+Both routes read the certificate through an adapter transcribed from Evan Daniel’s
+checkers, the family of the checker the issue says accepted it, Francisco Couzo’s, so
+the replay shares the producer’s components.
+The review’s checker shares no code with either maintained route or the source, and the
+independent re-implementation rests on it.
+The
+[review of 15 November 2026](../../docs/project/reviews/review-2026-11-15-jazivxt-989.md)
+accepted the replay for finite feasibility.
+That proves $s(90) \le 9.9982771669260000$, the verified upper bound until 16 November
+2026: confirmed, independently re-implemented.
+It says nothing about optimality, rigidity or a local minimum.
+
+Issue 989 and the source’s README say GPT-6 Astra Ultra was the AI collaborator on the
+search and verification; the source’s first published README named it Codex Astra Ultra.
+The issue was opened by the account dpre4ai and asks for credit to jazivxt and GPT-6
+Astra Ultra; this record credits the person.
+
+The issue says the packing was made from a rectangular crop, about 12.993303 by
+9.353384, of Joost de Winter’s packing of 157 squares (T-293), whose successive copies,
+offset horizontally by one unit, fit at a vertical pitch of 9.019403; a square window
+across two copies held 90 squares, whose positions and orientations were then tightened
+and made exact. It is the first packing of 90 squares below the 10 × 10 grid on record:
+no symmetry pairs it one to one with the grid’s squares, the optimal assignment moving
+52 beyond a tenth, and its 44 tilted squares turn 22.6 to 31.6 degrees, all one way.
+So jazivxt is the packing’s finder, after de Winter’s 157; the issue claims the upper
+bound only.
+
+The house it replaces, $10.0$ from the trivial grid, stays retained with its own replay
+as history.
+
+## Joost de Winter’s certificate (T-304)
+
+The packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157
+packing, as de Winter improved it by a local search, reported on
+[jlevy/squares#997](https://github.com/jlevy/squares/issues/997), which replaces the
+certificate of [jlevy/squares#996](https://github.com/jlevy/squares/issues/996), at
+exact side $99940387666098521323/10000000000000000000$, displayed upward as
+$9.9940387666098522$ (T-304). The certificate gives a rational side and, for each of the
+90 unit squares, a rational centre and the cosine and sine of its rotation; the
+[retained packet](../resources/web/de-winter-s90-upper-bound-2026-11-15/README.md) holds
+it with the complete native jobs that decided it.
+
+Both maintained exact routes decided it here, `sqpack`’s exact separating-axis verifier
+and the independent rational corner checker, with its duplicate-square and
+outside-container controls, and the 15 November review’s clean-room checker, frozen
+before any producer or witness code was read and run unchanged on this certificate by
+its addendum, decided it and its Witness/v2 twin again by separating axes in integers
+and by exact clipping in GMP rationals over every square, wall and pair; its 26
+controls, each stated beforehand, were each decided as stated.
+One maintained route, the independent rational corner checker, is the checker the source
+reports running, on its Witness/v2 twin, so the maintained routes’ independent
+re-implementation rests on `sqpack`’s exact verifier.
+No route here is the source’s own code, and the review’s checker shares no code with
+either maintained route or the source.
+The
+[review of 15 November 2026](../../docs/project/reviews/review-2026-11-15-de-winter-996.md)
+accepted the replay for finite feasibility.
+That proves $s(90) \le 9.9940387666098522$, the verified upper bound until 21 November
+2026: confirmed, independently re-implemented, by a Claude agent, a system family that
+also produced the certificate.
+It says nothing about optimality, rigidity or a local minimum.
+
+Issues 996 and 997 say the local search was run with GPT-6.1 Sol Max (OpenAI) and the
+local optimization, rational certificate, checks and figures were produced with Claude
+Fable 5.2 (Anthropic), both under Joost de Winter’s direction.
+
+The issues say the packing starts from T-303, jazivxt’s packing, which jazivxt built
+from a crop of de Winter’s own packing of 157 squares, and that a local search changed
+small groups of squares in position and angle, optimized the packing again after each
+change and kept the changes that gave a smaller side.
+Against T-303’s packing, this case’s house best packing before this adoption, it is a
+further arrangement: no symmetry pairs nearest centres one to one, but under the
+identity the optimal assignment moves 6 squares beyond a tenth, at most 0.645, and each
+of its 40 tilted squares pairs with one T-303 tilts the same way.
+Issue 996’s certificate, 9.09e-8 larger, which issue 997 replaced, is the same
+arrangement, no square moved beyond 0.0142. So jazivxt stays the packing’s finder and
+Joost de Winter is its improver, as the issues ask.
+
+The house it replaces, $9.9982771669260000$ from jazivxt’s packing (T-303), stays
+retained with its own replay as history.
+
+## Joost de Winter’s certificate (T-338)
+
+The packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157
+packing, improved and refined by Joost de Winter, reported in his
+[21 November follow-up to issue 997](https://github.com/jlevy/squares/issues/997#issuecomment-7058975230),
+at an exact rational side, displayed upward as $9.9940387665828706$ (T-338). The
+certificate gives a rational side and, for each of the 90 unit squares, a rational
+centre and the tangent of its signed counterclockwise half-angle; the
+[retained packet](../resources/web/de-winter-997-followup-2026-11-21/README.md) holds
+the original exact centre/half-angle gzip and its reversible reading copy with the
+complete native jobs that decided it.
+
+Both maintained exact routes decided it here, `sqpack`’s exact separating-axis verifier
+and the independent rational corner checker, with its duplicate-square and
+outside-container controls, and the 21 November independently prompted review checked
+all 90 unit squares, 1,440 vertex-wall inequalities and 4,005 pairs with 16,020
+edge-normal tests; all 13 controls declared beforehand returned their stated outcomes.
+Both maintained routes read the same exact rational certificate and share rational
+arithmetic and separating-axis methods.
+The independent review derived the corners and comparisons with separate source-only
+code; it read no producer program or maintained geometry implementation before freezing.
+The
+[review of 21 November 2026](../../docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md)
+accepted the replay for finite feasibility.
+That proves $s(90) \le 9.9940387665828706$, the verified upper bound: confirmed,
+independently re-implemented, by a Codex agent, sharing the producer’s OpenAI system
+family. It says nothing about optimality, rigidity or a local minimum.
+
+The author names GPT6.2 Astra as his AI tool for this certificate.
+
+Credit remains jazivxt, improved and refined by Joost de Winter.
+The new side is about 2.6981580737e-11 below T-304 and 8.7942390308e-12 below T-304
+contracted to its first contact, so option D admits the refinement against that
+registered predecessor.
+Nearest centres pair one to one under the identity: the largest move is 0.0304373 and
+the largest turn 0.09344 degrees; all 40 tilted squares pair with the same tilt sign.
+The final contraction of the enclosed input is only about 8.994039e-73. The
+[16 November project run of Evan Daniel’s regularizer](../cases/regularized_drawings/think-32cl-2026-11-16/README.md)
+already recorded a local-side display that matches this candidate at 65 significant
+digits. The candidate is about 9.99404e-20 below that run’s rational envelope.
+The
+[supporting scalar audit](../resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json)
+does not establish pose identity or strict order against the unrounded local minimum:
+the solved coordinates and a certified root interval are not retained.
+This is an S2 numerical refinement, without a first-discovery claim for that limiting
+value.
+
+The house it replaces, $9.9940387666098522$ from jazivxt’s packing, improved by Joost de
+Winter (T-304), stays retained with its own replay as history.
+The other certificates confirmed here at this count, T-303 at $9.998277166926$, stay
+verified and are not selected.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

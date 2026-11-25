@@ -4060,8 +4060,10 @@ world-record flags.
 **Bounds, machine-checked: 17 diffs, room `1.14087` -> `1.09647`.** `pub_bounds_check` re-reads the
 same project's live frontier table (`frontier.html`, saved), parses all 324 rows from `data-value`
 attributes, and diffs `PUB` in `Decimal` (tolerance `5e-5`); its selftest plants a false lower bound
-at n = 12 and requires the diff to be caught. Result: 16 lower bounds were transcribed from the
-PDF's rounded rendering and are **too low** (n=37 `6.44` vs `6.4975`, n=31 `5.9525` vs `5.9775`, …),
+at n = 12 and requires the diff to be caught. Result (re-attributed in run 139: these are **survey drift, not transcription** — `PUB`
+matches the 23 October PDF edition on every number it prints): 16 lower bounds tightened in the
+month since the edition (n=37 `6.44` vs `6.4975`, n=31 `5.9525` vs `5.9775`, …, four of them —
+44, 76, 95, 96 — risen to their upper bounds by new proofs),
 and **one upper bound moved**: the live table has `s(90) <= 9.9940387665828706` (jazivxt 2026) where
 the PDF said `10`, so **our row 90 at `10.0000000019` is behind by `5.96e-3` of side, worth
 `6.28e-4`** — the only row in `1..100` where a published packing beats the delivered table. Verified
@@ -4086,5 +4088,46 @@ packing through C1–C4 (the only import on the table, seven times both notches)
 Checks: `pub_bounds_check --selftest` 3; `witt_octad --selftest` 5; `glm_plan --selftest` 5;
 `sqscore` **22.218056945** (553/447); `record_guard` OK; `glm_wheels --audit` **684 functions,
 0 offenders**; full guard set green; `py_compile` OK.
+
+## Run 139 — 2026-11-25 — the deltas were drift, and the n = 90 import is real
+
+**Brief.** Two things run 138 left as claims: the 17 bound deltas were blamed on my transcription, and
+the n = 90 gain was priced from a table rather than from a packing. This run machine-checks the first
+and certifies the second. `pub_bounds_check` extended to a three-way `PDF | PUB | live`
+classification; new `scripts/import_n090.py`; ledgers `pub_bounds_check.json`, `import_n090.json`;
+the PDF edition saved with its extracted text, and the published exact rational certificate saved.
+
+**The attribution: 0 transcription errors, 17 drift.** `PUB` was transcribed from the PDF edition
+(v0.7.0, **23 October 2026**). The instrument now parses that edition's text and diffs all three
+numbers per row in `Decimal`. Result: `PUB` agrees with the edition on all 200 numbers it prints, so
+**no delta is a transcription error**; the live table is a month newer, marks **all 17** changed rows
+`recent result`, and **4 of the 16 lower-bound rises are rows 44, 76, 95, 96 — exactly the four rows
+proved optimal since the edition**, where a proved bound closes on its upper bound (`6.9725 → 7`,
+`8.965 → 9`, `9.965 → 10`, `9.97 → 10`). The other twelve are tighter bounds (`3.9715 → 3.9716` at
+n=12 … `6.44 → 6.4975` at n=37); the upper-bound move is n=90 (`10 → 9.9940387665828706`, the new
+house of 15–21 November). Verified room: unchanged, **`1.09647` over 51 rows** — it is computed from
+`live`, so it never depended on the attribution; what changes is the lesson, that `PUB` is a
+snapshot and any figure quoted from it must be re-derived live at the moment of quoting.
+
+**The import: C1 and C2 pass exactly.** The published house carries an exact rational reading copy
+(90 rows of `[cx, cy, tan(theta/2)]` with a rational `center_scale`). Because
+`cos(2 arctan t) = (1-t^2)/(1+t^2)` and `sin(2 arctan t) = 2t/(1+t^2)` are **rational** for rational
+`t`, the whole certificate lives in `Q`: corners, four-axis separating slacks and the bounding box are
+exact `Fraction`s, no float and no interval anywhere in the decision. Over 4005 pairs: **0 overlaps,
+0 zero-slack touches, minimum slack `1e-73`** (pair 15,19 — the record's own `8.994e-73` contraction
+as geometry), **side `9.9940387665828698`**, equal to the published exact decimal. Against our
+`10.0000000019` that is a margin of `5.961e-3` and a gain of **`6.283693757e-4`**
+(`22.218056945 → 22.2174286`); rendered at our `1e-9` frame convention (a CSV cannot keep a `1e-73`
+contact) the pose stays legal with `1e-9` slack at side `9.9940387755769091`, gain
+**`6.283684276e-4`**. Selftest 5 controls, including a displaced square (`-0.5` slack) so the checker
+is not vacuous and the Pythagorean `t = 1/2 → (3/5, 4/5)` rotation.
+
+**Verdict.** The `6.28e-4` is real: `6.283693757e-4` exact, `6.283684276e-4` deliverable. Nothing
+promoted — writing row 90 moves `DELIVERED_SCORE`, `record_guard`'s totals and the §1 figures of
+`README`/`STATUS` together, and that constant cascade is queued as its own change, with the
+attribution stated (doc 96 §3). Next: that promotion, then re-derive the room.
+Checks: `import_n090 --selftest` 5; `pub_bounds_check --selftest` 4; `glm_plan --selftest` 5;
+`witt_octad --selftest` 5; full guard set green; `sqscore` **22.218056945** (553/447);
+`record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
 
 no row changed |

@@ -7,6 +7,8 @@ ledgers `workspace/push/pub_bounds_check.json`, `workspace/push/witt_octad.json`
 `workspace/push/pub_frontier_20261020.html`.
 **No row changed, no score claimed, `submission.csv` and root `WHITEBOARD.md` untouched.**
 
+> **Run 139 correction.** The 17 deltas in §2 are **survey drift, not transcription errors**: `PUB` matches the 23 October PDF edition on every number it prints, and the live table marks every changed row `recent result`. The verified room and every figure below are unchanged; the three-way machine check and the correct attribution are doc 96 §1.
+
 Doc 94 left three things as prose or hand-work: it *noted* in text that row 6 is a proved
 optimum, it *quoted* a room computed from a hand-transcribed bounds table, and it *specified* an
 octad test it did not run. This run turns all three into instruments, and every one of them
@@ -49,9 +51,9 @@ world-record claims.
 instead of by eye. Its own selftest plants a false lower bound at `n = 12` and requires the diff to
 be caught.
 
-**Result: 17 of 200 numbers were wrong — and one of them matters in a way nobody expected.**
+**Result: 17 numbers differ between the PDF edition and the live table — and every one of them is the survey moving, not a misread (run 139, doc 96 §1).**
 
-| n | field | transcribed (PDF text) | source (live table) | delta |
+| n | field | `PUB` (23 Oct edition) | source (live table) | delta |
 | --- | --- | --- | --- | --- |
 | 12 | lb | 3.9715 | 3.9716 | -0.0001 |
 | 19 | lb | 4.825 | 4.8275 | -0.0025 |
@@ -71,23 +73,24 @@ be caught.
 | 96 | lb | 9.97 | 10 | -0.0300 |
 | **90** | **ub** | **10** | **9.9940387665828706** | **+0.00596** |
 
-Two different failures, both worth recording:
+Three kinds of change, all of them the survey's:
 
-* **Sixteen are lower bounds I took from the PDF's rounded rendering** (`≥ 4.905` where the table
-  holds `4.9125`). Every one makes the true room *smaller* than the figure I quoted. The verified
-  room is **`1.09647` over 51 rows**, not `1.14087` over 55 — a 4 % overstatement, and the 55→51
-  drop is four rows (44, 76, 95, 96) whose bounds are now *equal to their upper bounds*, i.e. they
-  have since been proved optimal.
+* **Four are proofs.** Rows 44, 76, 95 and 96 are exactly the four rows whose badge changed to
+  *proved optimal* since the edition: a proved row's lower bound rises to its upper bound, so
+  `6.9725 → 7`, `8.965 → 9`, `9.965 → 10`, `9.97 → 10`. The proved set went 45 → 49 in the same
+  month, which is also why four rows left the room.
+* **Twelve are tighter lower bounds**, `3.9715 → 3.9716` at `n = 12` up to `6.44 → 6.4975` at
+  `n = 37`. Each one makes the true room *smaller* than the figure transcribed in run 137.
 * **One is an upper bound where the world moved**: the live table has a packing at
-  `s(90) ≤ 9.9940387665828706` (jazivxt 2026) where the PDF still said `10`. Our row 90 is
+  `s(90) ≤ 9.9940387665828706` (jazivxt 2026) where the edition still said `10`. Our row 90 is
   `10.0000000019`, so **we are behind by `5.96e-3` of side at row 90, worth `6.28e-4` of score** —
   the first and only row in `1..100` where a published packing beats the delivered table.
 
 The ranking that doc 94 derived is unchanged by the correction (86, 68, 89, 51, 84, 55, 83, 85 stay
 the top eight, and `n = 86` is still `0.03424`), which is the reassuring part: the *conclusion* was
-robust to the transcription even though the *number* was not. The proved-optimal set grew from 45
+robust to the edition drift even though the *number* was not. The proved-optimal set grew from 45
 (PDF) to 49 (live): rows 44, 76, 95, 96 have been proved optimal since the PDF was drawn, which is
-also why four room rows disappeared.
+also why four room rows disappeared — and those four are exactly four of the delta rows.
 
 ## 3. The octad test — FAIL, structurally, and it found something better
 
@@ -135,18 +138,20 @@ predictive grip on the score, and the octad route was the last place one could h
 | `k = 3`'s prize is a ceiling "noted in prose" | **refused by the instrument (R5)** |
 | scheduled `0.19194` | **`0.07237`** (`k = 4, 5, 7`), all world-record claims |
 | the octad test is "specified, not run" | **run: FAIL, structurally, with zero cross-class exact contacts** |
+| 17 bound deltas were my transcription errors | **0 transcription errors: all 17 are survey drift (doc 96 §1)** |
 
 ## 5. Next, in order
 
 1. **Fetch and certify the `n = 90` packing** (`s(90) ≤ 9.9940387665828706`, jazivxt 2026) and put it
    through C1–C4. It is the only import on the table, it is worth `6.28e-4` — seven times the two
-   notches together — and it needs a transcription and a certificate, not a search. **Not attempted
-   in this run**: the coordinates still have to be read from the case record and gated exactly.
+   notches together — and it needs the coordinates read and certified, not a search. **Not attempted
+   in this run** (done in run 139, doc 96 §2): the coordinates are a published exact rational
+   certificate, and the gate passes exactly.
 2. The three scheduled bands are world-record claims (`0.0724`); attack by row gap, not by band.
 3. Nothing else on the table until a claim passes R1–R5.
 
-**Checks.** `pub_bounds_check --selftest` **3** (parser spot values, planted-error detection,
-proved-set size 49 and row 6 in it); `witt_octad --selftest` **5** (the design itself, the
+**Checks.** `pub_bounds_check --selftest` **4** (parser spot values, planted-error detection,
+proved-set size 49 and row 6 in it, the three-way `PDF | PUB | live` classification); `witt_octad --selftest` **5** (the design itself, the
 deleted-octad failure, the clique machinery, the cross-class-contact control, the coverage measure
 on the design); `glm_plan --selftest` **5** (R5 refusal of band `k = 3`, the three world-record
 claims, the verified room `1.09647`, one row behind at `n = 90`, and the earlier controls).
