@@ -3753,3 +3753,56 @@ at `L - 1/100` with exact overflow `1/100`, 8/384 rigidity, row 5 equal to the p
 `true_geom`; `sqscore` **22.218056945** (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0
 offenders**; `py_compile` OK. Doc 89 (new); records `workspace/push/range_leverage130.json` and
 `construct_seam130.json`.
+
+## Run 131 — band 5 by theorem, the 11 rows certified, and what the stored poses are
+
+**Request.** Attack `n = 20..23` (band `k = 5`, `d = -0.131`) directly in `Q(sqrt 2)` — construct an exact-contact
+arrangement below `L = 5`, or exhaust/bound the contact-lattice family with an exact proof; certify the 11
+pocket-net extension rows and update the extension census without touching `submission.csv`; diagnose the 33
+stored poses behind the `-22..-28` void deficit and test whether repairing them generalises; log in doc 90.
+
+**Band 5.** The delivered rows 20–24 are the plain 5×5 grid (`src = grid`, one angle class `0.0`), and the band's
+frontier is `n = 19` at `4.8856180847`. The target is only *sub*-5: 20 cells in `5 - eps` leaves 4.9 unit^2 of
+void, the same 79.6 % density the 19-cell pose already has. **The pocket mechanism is provably 3 cells short.**
+For four upright corner blocks `a_i x b_i` in exact contact with one 45° cell, the four contact equations give
+`(a1+b1)+(a4+b4) = (a2+b2)+(a3+b3) = 2L - sqrt2`, i.e. `L = (s+sqrt2)/2` with `s` integer; `L < 5` forces
+`s <= 8` (`s=8` -> `4.7071`, `s=9` -> `5.2071`), and `a*b <= (a+b)^2/4` then caps the corners at 16 cells:
+**n <= 17**. Enumerated too — 604 admissible tuples below 5, maximum 17, attained by `windmill(2)` at
+`4.7071067811` with `exact_gate` penetration `0`, so the bound is tight and the enumeration is not blind. A pure
+tilted block cannot substitute: `(p+q)/sqrt2 >= sqrt(2pq) > sqrt(pq)`, so 20 cells in one would need
+`L >= sqrt(40) = 6.3246`. No arrangement found; the exact anchor-closure builder places 6 of 20 at a 6-node cap
+(3.0 s) — recorded as a budget measurement, not a proof. **No candidate, nothing promoted.**
+
+**The 11.** Each pocket pose is now gated exactly (containment + every pair that can overlap, with the sound
+prune `|dx|,|dy| < sqrt2`): all 11 return `ok`, 0 violations, worst penetration exactly `0`. Certified sides
+`34.707106781187` (n=1157), 40.707…, 44.707…, **48.707… (n=2305, was 49.0)**, 50.707…, **52.707… (n=2705)**,
+54.707…, 58.707…, **62.707… (n=3845)**, 64.707…, 68.707… — gains 0.0416–0.2929. Three rows move **tie ->
+beaten**, so the extension's unbeaten count goes **3,195 -> 3,192** and the full measured range **3,642 -> 3,639**;
+the scored range is unchanged (553/447). The certified sides are written as a patch
+(`json/extended_table_5000_certified.json`, 11 rows with their gates); the run-41 table stays byte-identical and
+`submission.csv` is untouched.
+
+**The 33 stored poses.** 28 of 33 use exactly two angle classes `{0, pi/4}` (Göbel, 47–51 % tilted); every pose
+has thousands of pairs at *exactly* zero slack (2,470…13,338) and no overlaps, so they are contact structures, not
+sloppy ones; each pose's non-contact pairs share a **single uniform gap** (8 pairs at 0.0607 for n=1028; 942 at
+0.1011 for n=1765; five values in total: 0.0251, 0.0398, 0.0459, 0.0607, 0.1011); and a 0.5-grid probe finds **no
+free square of either orientation** in any pose above 2000 (best centres `-0.0208…-0.2433`, i.e. inside cells).
+So the `-28` is not a defective pose: `d(k) = V - (j*-1)` is negative because the extension's frontiers sit 36–61
+cells below `k^2` where the scored bands sit 18–26, so the band's area budget (60 at `k=33`) dwarfs the pose's
+void (31.9); `n` exceeds `floor(L)^2` by only 1–60, i.e. 97 % occupancy. **Repair does not generalise**: the
+sheet's `delta` is a clearance in one direction while the side is the max of two extents, so closing it moves
+nothing; recovering it needs re-tilting (off 45°, out of `Q(sqrt 2)`), i.e. a rearrangement. The only
+certificate-bearing family still gains a fixed 0.2929 at `n ≡ 1 (mod 4)` and nothing else.
+
+**Verdict.** Nothing promoted; `submission.csv` and root `WHITEBOARD.md` untouched; score `22.218056945`, 553
+beats, 447 unbeaten rows, unchanged. The extension gain (11 certified sides, 3 rows tie -> beaten) is C4 material
+in the unscored range only.
+
+**Checks.** `band5 --selftest` **4 controls** (bound 17 attained by `windmill(2)` with gate 0; `s=8` vs `s=9`;
+`(p+q)/sqrt2 >= sqrt(2pq)` on 64 `(p,q)`; the 5×5 grid holds 25 at `L=5`); `ext_census --selftest` **4** (windmill
+clean; duplicate cell refused with penetration exactly 1.0; pocket row 5 reproduces the scored pad and all 11
+certified rows are `n > 1000`; 33 poses, tilted share 0.50 at n=2036); `range_leverage` 5; `construct_seam` 4;
+`p_screen` 4; `legal_slide` 8; `structure --control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`,
+`true_geom`; `sqscore` **22.218056945** (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0
+offenders**; `py_compile` OK. Doc 90 (new); records `workspace/push/band5_131.json`,
+`workspace/push/ext_census131.json`, `json/extended_table_5000_certified.json`.

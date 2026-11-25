@@ -1,0 +1,217 @@
+{
+ "applies_to": "json/extended_table_5000.json",
+ "rule": "where L_after < L_before, L_after is the certified side",
+ "certified_by": "scripts/ext_census.py (run 131, exact Q(sqrt2) gate)",
+ "rows_changed": 11,
+ "changed": [
+  {
+   "n": 1157,
+   "k": 35,
+   "a": 17,
+   "L_before": "34.97056275042",
+   "L_after": "34.707106781186548",
+   "src_before": "closure:from-1188",
+   "src_after": "pocket-net:a=17",
+   "gain": "0.263455969",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "34.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 1601,
+   "k": 41,
+   "a": 20,
+   "L_before": "40.798989875174",
+   "L_after": "40.707106781186548",
+   "src_before": "closure:from-1624",
+   "src_after": "pocket-net:a=20",
+   "gain": "0.091883094",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "40.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 1937,
+   "k": 45,
+   "a": 22,
+   "L_before": "44.920310218739",
+   "L_after": "44.707106781186548",
+   "src_before": "closure:from-1973",
+   "src_after": "pocket-net:a=22",
+   "gain": "0.213203438",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "44.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 2305,
+   "k": 49,
+   "a": 24,
+   "L_before": "49.0",
+   "L_after": "48.707106781186548",
+   "src_before": "grid",
+   "src_after": "pocket-net:a=24",
+   "gain": "0.292893219",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "48.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "tie",
+   "status_after": "beaten"
+  },
+  {
+   "n": 2501,
+   "k": 51,
+   "a": 25,
+   "L_before": "50.748737343489",
+   "L_after": "50.707106781186548",
+   "src_before": "closure:from-2525",
+   "src_after": "pocket-net:a=25",
+   "gain": "0.041630562",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "50.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 2705,
+   "k": 53,
+   "a": 26,
+   "L_before": "53.0",
+   "L_after": "52.707106781186548",
+   "src_before": "grid",
+   "src_after": "pocket-net:a=26",
+   "gain": "0.292893219",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "52.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "tie",
+   "status_after": "beaten"
+  },
+  {
+   "n": 2917,
+   "k": 55,
+   "a": 27,
+   "L_before": "54.870057687053",
+   "L_after": "54.707106781186548",
+   "src_before": "closure:from-2956",
+   "src_after": "pocket-net:a=27",
+   "gain": "0.162950906",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "54.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 3365,
+   "k": 59,
+   "a": 29,
+   "L_before": "58.991378030615",
+   "L_after": "58.707106781186548",
+   "src_before": "closure:from-3421",
+   "src_after": "pocket-net:a=29",
+   "gain": "0.284271249",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "58.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 3845,
+   "k": 63,
+   "a": 31,
+   "L_before": "63.0",
+   "L_after": "62.707106781186548",
+   "src_before": "grid",
+   "src_after": "pocket-net:a=31",
+   "gain": "0.292893219",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "62.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "tie",
+   "status_after": "beaten"
+  },
+  {
+   "n": 4097,
+   "k": 65,
+   "a": 32,
+   "L_before": "64.819805155364",
+   "L_after": "64.707106781186548",
+   "src_before": "closure:from-4137",
+   "src_after": "pocket-net:a=32",
+   "gain": "0.112698374",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "64.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  },
+  {
+   "n": 4625,
+   "k": 69,
+   "a": 34,
+   "L_before": "68.941125498925",
+   "L_after": "68.707106781186548",
+   "src_before": "closure:from-4684",
+   "src_after": "pocket-net:a=34",
+   "gain": "0.234018718",
+   "gate": {
+    "ok": true,
+    "violations": 0,
+    "worst_pen": "0E-44",
+    "pair": null,
+    "side": "68.7071067811865475244008443621048490392848359"
+   },
+   "status_before": "beaten",
+   "status_after": "beaten"
+  }
+ ]
+}
