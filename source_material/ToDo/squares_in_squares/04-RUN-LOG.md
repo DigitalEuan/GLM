@@ -3889,3 +3889,40 @@ unchanged; the new findings are its §5.
 --control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945**
 (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK. Record
 `workspace/push/pure_slide133.json`.
+
+## Run 134 — the band-slide null over all 551 beaten rows, and why it is geometric
+
+**Request.** Extend the run-133 pure band-slide test from the top 20 rows to all 551 beaten rows, keeping the
+controls green, and say plainly whether any tightening family remains worth testing.
+
+**Coverage.** `pure_slide.py --all` over the 551 rows of `beaten_leverage.rank` (proved optima `n = 5, 10` still
+excluded), in four rank-index chunks, 1 s of search per row plus the exact per-wall diagnostics; merged record
+`workspace/push/pure_slide134_all.json`. Controls: A–D green, plus a new **E** which is load-bearing — on the
+library's gapped 4x4 the extremal cell cannot move alone (`0`) while the band through it moves `0.25` and the
+slide recovers `dL = 0.25`, so a per-cell "pinning" test cannot replace the move set. That control exists because
+this run's first draft used exactly that wrong argument (adding cells to a group removes internal constraints, so
+pinning is not monotone).
+
+**Result.** **526 rows `dL = 0` exactly; 25 rows between `2.0e-13` and `5.5e-13`** (the side-minimising search's
+tolerance, five orders below the `finalize` pad); **0 rows above `1e-9`**; 47 moves accepted, all worthless; **0
+violations at 40 digits over all 551 final poses**. The largest `dL` in the table is `5.517e-13` (`n = 917`).
+
+**Why (the part that matters).** The side is `max(span_x, span_y)` and a band/single-cell/wall-set move
+translates along one axis only. **507 of the 551 rows have `span_x = span_y = L`**, so no single-axis move can
+reduce the maximum — and all **507 return `dL = 0` exactly**, an impossibility rather than a search result. The
+**44 rows with one binding axis** are precisely where the 25 tiny `dL` values live. Exactly shrinking both spans
+at once is a uniform contraction, which run 132's `g* = 1` forbids at 40 digits: the two instruments are the two
+halves of one statement.
+
+**Verdict and recommendation.** No tightening family is left: uniform contraction (551/551 forbidden, exact),
+single-axis translation (551/551 null, 507 impossible by geometry), squeeze-and-legalise (20/20 negative under
+`dL = delta - c p L` with `p ~ delta`), and the void swap (no free square in any measured pose). **Spend the next
+budget on constructive poses at a row's own count** — and start with the 44 one-binding-axis rows, which are the
+only scored rows where a single-axis reduction is even geometrically permitted, and with band 5 (`n = 20..23`),
+where run 131 proved the pocket is 3 cells short and a new mechanism is needed. Nothing promoted;
+`submission.csv` and root `WHITEBOARD.md` untouched; score `22.218056945`, 553 beats, 447 unbeaten.
+
+**Checks.** `pure_slide --selftest` **5 controls** (A–E); `beaten_leverage` 4; `band5` 4; `ext_census` 4;
+`range_leverage` 5; `construct_seam` 4; `p_screen` 4; `legal_slide` 8 (P, N, N2, N3, E, F, S, V); `structure
+--control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945**
+(553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.

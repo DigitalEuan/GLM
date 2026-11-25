@@ -225,9 +225,50 @@ So it is not that the poses are rigid everywhere; it is that their freedom is **
 bounding box. The nine rows where §2 allows the pad (`1.6–1.7e-9` of uniform slack) also give slide `dL = 0`,
 which is consistent: that slack is reachable by a *scale*, not by a band slide, and no row exceeds its bound.
 
-**Verdict for run 133: no pure legal move alone reduces a side on any of the 20 top-leverage rows** (0/20, with
-every `dL` exactly zero), despite the path being live on the same combinatorics (control C recovers a `0.05`
-gap). Nothing to promote; `submission.csv` untouched.
+### 5b. The whole table, and why the null is geometric (run 134)
+
+The top-20 test is now extended to **all 551 beaten rows** (`--all`, run in four rank-index chunks; 1 s of
+search per row plus the exact diagnostics). Results:
+
+| | rows |
+| :--- | ---: |
+| `dL = 0` **exactly** | **526** |
+| `0 < dL <= 1e-9` (the ternary search's own tolerance) | **25** |
+| `dL > 1e-9` (a real reduction) | **0** |
+| moves accepted anywhere in the table | 47 (all of them worth nothing) |
+| violations at 40 digits, over all 551 final poses | **0** |
+
+The largest `dL` in the whole table is **`5.517e-13`** (`n = 917`), which is five orders of magnitude below the
+`finalize` pad (`2e-9` relative, i.e. `~6e-8` on a side of 30) and about twelve below anything that could move the
+metric.
+
+**The reason is geometric, and it splits the table cleanly.** The side is `max(span_x, span_y)`. A band, a single
+cell or a whole wall set translates along **one** axis, so it can only reduce the span on that axis. Therefore:
+
+* **507 of the 551 rows have `span_x = span_y = L`** — both axes attain the side. On those rows *no* single-wall
+  translation can reduce the side at all: shrinking one span leaves the other at `L`. All **507 give `dL = 0`
+  exactly**, which is not a search artefact but an impossibility (the instrument reports the attainment of both
+  axes per row, `attains_side`, as exact `Decimal` comparisons).
+* **44 rows have a single binding axis** (`n = 303, 330, 335, 365, 412, 447, 499, 501, 502, 503, 546, 548, 550,
+  593, 594, 602, 651, 652, 706, 757, 760, 801, 808, 860, 863, 917, 928, 934, 989, 995, 996, ...`). There a
+  single-wall move *can* in principle shrink the side, and those 44 are exactly where the 25 tiny `dL` values
+  live — between `2.0e-13` and `5.5e-13`, i.e. the tolerance of the side-minimising search, not a structural gain.
+
+The exact wall-set budget agrees: over the whole table the *attaining* wall's cell set moves at most
+`1.97e-7` (three rows above `1e-8`, `n = 995/996`), and on those rows the other axis is the one setting the side —
+so a movable wall there still cannot lower the maximum. Bands have room (up to `2.0`), single cells have room (up
+to `2.6e-5` for an extremal cell), and none of it reaches the boundary.
+
+**This closes the loop with run 132.** The 507 square-container rows have exactly one way to shrink: reduce
+`span_x` and `span_y` **together**, which at fixed angles is a uniform contraction — and `g* = 1` in §2 forbids
+that at 40 digits. So the two instruments are not two nulls but the *two halves of one*: the contractions rule
+out simultaneous shrinking, the slides rule out single-axis shrinking, and for 92 % of the table shrinking is
+therefore impossible without a rearrangement that changes the combinatorics.
+
+**Verdict for the slide path (runs 133–134): no pure legal move alone reduces a side, on 521 of 551 rows
+exactly zero and on the other 30 by at most `5.5e-13`; nothing above `1e-9` anywhere in the table.** The path is
+live on the same combinatorics (control C recovers a `0.05` gap), so this is a property of the poses, not of the
+instrument. Nothing to promote; `submission.csv` untouched.
 
 ## 6. Files, records, checks
 
@@ -239,6 +280,9 @@ gap). Nothing to promote; `submission.csv` untouched.
 * `scripts/pure_slide.py` (new, run 133): `slide` (ladder then exact-step, no squeeze), `wall_budget`
   (per-cell and whole-wall-set inward step), `measure`, `selftest`, `main`.
 * `workspace/push/tighten132.json` — the 20 attempts with `p`, `dL`, the conversion record and the certificate.
+* `workspace/push/pure_slide134_all.json` — all 551 rows of §5b (four chunk files merged): `dL`, moves,
+violations, per-wall extremal/band steps and `attains_side`, the exact whole-wall-set step, and the search's
+budget flag.
 * `workspace/push/pure_slide133.json` — the 20 rows of §5: `dL`, move counts, violations, per-wall single-cell
   and whole-set inward steps, `g*` and the slack bound from §2, and whether the row exceeded that bound.
 * **Controls.** `beaten_leverage --selftest` **4**: a tight 3×3 grid gives `g = 1` and gain exactly `0`; the same

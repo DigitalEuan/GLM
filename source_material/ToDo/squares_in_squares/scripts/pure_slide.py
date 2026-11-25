@@ -70,7 +70,57 @@ def slide(st, seconds, rounds=8):
             "moves_ladder": n_lad, "moves_exact": n_ex,
             "dL_ladder": L0 - s_lad, "dL": L0 - s_fin,
             "violations": viol, "worst": worst,
+            "budget_limited": bool(time.monotonic() >= deadline),
             "pose": moved2, "dirs": dr2}
+
+
+def extremal(st):
+    """The extremal cells of each wall, and how far they can move **alone**.
+
+    A diagnostic, *not* a bound.  The tempting argument is: to shrink a side,
+    every cell attaining that wall's extreme must move, so if the extremal set
+    `G` cannot move alone then nothing can.  That argument is **wrong**, and the
+    library's own gapped 4x4 is the counterexample (control E): the shifted
+    row's last cell cannot move left on its own -- it would overlap its
+    neighbour -- while the whole row can slide left by the full gap, because
+    moving a *group* keeps its internal contacts intact and so removes the very
+    constraint that blocks the single cell.  Adding cells to a group is not
+    monotone: it adds constraints against outsiders and removes them inside.
+
+    So this reports `step` for `G` and `band` for the next closure outward (the
+    slab through `G`'s first cell), and the verdict on whether a side can shrink
+    stays with the move set in `slide`/`legal_slide.tighten*`.
+    """
+    dr = LSL.directions(st)
+    idx = LSL.positions(st)
+    L = LSL.side_of(st, dr)
+    xlo, xhi, ylo, yhi = LSL.spans(st, dr)
+    Lx, Ly = xhi - xlo, yhi - ylo
+    out = {}
+    for which, axis, sign in (("xlo", 0, 1), ("xhi", 0, -1),
+                              ("ylo", 1, 1), ("yhi", 1, -1)):
+        cells = LSL.wall_cells(st, dr, which)
+        # the cells that actually attain this wall's extreme
+        ext = []
+        for i in cells:
+            x, y, t = st[i]
+            c, s = dr[i]
+            h = (abs(c) + abs(s)) / 2
+            v = x + h if which == "xhi" else (-x + h if which == "xlo" else
+                                              (y + h if which == "yhi" else -y + h))
+            ext.append((i, v))
+        if not ext:
+            continue
+        top = max(v for _i, v in ext)
+        G = [i for i, v in ext if v == top]
+        step = LSL.max_legal_step(st, dr, idx, G, axis, sign)
+        band = LSL.max_legal_step(st, dr, idx, LSL.slab(st, dr, G[0], axis),
+                                  axis, sign)
+        out[which] = {"cells_on_wall": len(cells), "extremal": len(G),
+                      "extent": str(+top), "step": str(+step),
+                      "band": str(+band),
+                      "attains_side": bool((Lx if axis == 0 else Ly) == L)}
+    return {"side": str(+L), "walls": out}
 
 
 def wall_budget(st, seconds):
@@ -152,7 +202,26 @@ def selftest() -> int:
         and r["dL"] == ZERO,
         f"0 moves, dL = {r['dL']} exactly")
 
-    print(("selftest OK" if ok else "selftest FAILED") + " (4 controls)")
+    # E -- the extremal-cell bound is NOT a bound, and this control is here
+    # because run 134's first draft used it as one.  On the gapped 4x4 the
+    # extremal cell cannot move alone (it would overlap its neighbour) and the
+    # band through it can move by exactly the gap, so a per-cell test would call
+    # a shrinkable pose unshrinkable.
+    gap = Decimal("0.25")
+    st = LSL.gapped_pose(gap)
+    ex = extremal(st)
+    w = max((k for k in ex["walls"] if ex["walls"][k]["attains_side"]),
+            key=lambda k: Decimal(ex["walls"][k]["extremal"]))
+    cell_step = Decimal(ex["walls"][w]["step"])
+    band_step = Decimal(ex["walls"][w]["band"])
+    r = slide(st, 10)
+    say("E extremal cell is not a bound",
+        cell_step == ZERO and band_step >= gap and r["dL"] == gap,
+        f"gap {gap} on wall {w}: extremal cell alone {cell_step}, band {band_step}, "
+        f"and the slide recovers dL = {r['dL']} -- so the cheap per-cell test "
+        f"cannot replace the move set")
+
+    print(("selftest OK" if ok else "selftest FAILED") + " (4 controls + E)")
     return 0 if ok else 1
 
 
@@ -160,6 +229,8 @@ def main(argv) -> int:
     if "--selftest" in argv:
         return selftest()
     rows, excluded = BL.rank(BL.load_table())
+    if "--all" in argv:
+        return run_all(rows, excluded, argv)
     count = int(argv[argv.index("--rows") + 1]) if "--rows" in argv else 20
     seconds = int(argv[argv.index("--seconds") + 1]) if "--seconds" in argv else 12
     tab = BL.load_table()
@@ -208,6 +279,63 @@ def main(argv) -> int:
         json.dump({"rows": recs, "seconds": seconds,
                    "proved_excluded": excluded}, f, indent=1)
     print(f"[write] {OUT}")
+    return 0
+
+
+def run_all(rows, excluded, argv) -> int:
+    """Every beaten row: the exact pinning verdict, plus a short search.
+
+    `pinned` is a proof per row (see its docstring); `slide` is the empirical
+    check that the search agrees, on a small budget, because the proof is about
+    translations at fixed angles and the search is the instrument that would
+    find a move if the reasoning were wrong.
+    """
+    tab = BL.load_table()
+    nmin = int(argv[argv.index("--nmin") + 1]) if "--nmin" in argv else 0
+    nmax = int(argv[argv.index("--nmax") + 1]) if "--nmax" in argv else 10 ** 9
+    secs = int(argv[argv.index("--seconds") + 1]) if "--seconds" in argv else 1
+    start = int(argv[argv.index("--start") + 1]) if "--start" in argv else 0
+    stop = int(argv[argv.index("--stop") + 1]) if "--stop" in argv else len(rows)
+    todo = [r for r in rows[start:stop] if nmin <= r["n"] <= nmax]
+    recs = []
+    for pos, r in enumerate(todo):
+        n = r["n"]
+        st = LR.as_decimal(tab[n]["state"])
+        ex = extremal(st)
+        s = slide(st, secs, rounds=4)
+        walls = {w: {"extremal": v["extremal"], "cell_step": v["step"],
+                     "band_step": v["band"], "attains_side": v["attains_side"]}
+                 for w, v in ex["walls"].items()}
+        rec = {"n": n, "k": r["k"], "src": r["src"], "room": r["room"],
+               "cells": len(st), "L0": ex["side"], "walls": walls,
+               "max_cell_step": str(max(Decimal(v["cell_step"]) for v in walls.values())),
+               "max_band_step": str(max(Decimal(v["band_step"]) for v in walls.values())),
+               "dL": str(+s["dL"]), "moves": s["moves_ladder"] + s["moves_exact"],
+               "violations": s["violations"],
+               "budget_limited": s["budget_limited"]}
+        recs.append(rec)
+        if pos % 40 == 0:
+            print(f"  .. {pos}/{len(todo)}  n={n}  band {rec['max_band_step'][:9]}  "
+                  f"dL {rec['dL'][:9]}  limited={rec['budget_limited']}", flush=True)
+    moved = [r for r in recs if Decimal(r["dL"]) > 0]
+    complete = [r for r in recs if not r["budget_limited"]]
+    print(f"[pure-slide all] {len(recs)} rows: {len(moved)} with dL > 0, "
+          f"moves accepted {sum(r['moves'] for r in recs)}, "
+          f"violations {sum(r['violations'] for r in recs)}, "
+          f"budget-complete {len(complete)} (search finished inside the budget), "
+          f"largest band step over the table "
+          f"{max(Decimal(r['max_band_step']) for r in recs):.3e}")
+    for r in recs[:3]:
+        print(f"  n={r['n']} L0={r['L0'][:16]} dL={r['dL'][:10]} "
+              f"band x/y {r['max_band_step'][:10]}")
+    tag = f"{start}_{stop}" if (start or stop < len(rows)) else (
+        f"{nmin}_{nmax}" if (nmin or nmax < 10 ** 9) else "full")
+    path = os.path.join(BL.ROOT, "workspace", "push", f"pure_slide134_{tag}.json")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        json.dump({"rows": recs, "seconds": secs,
+                   "proved_excluded": excluded}, f, indent=1)
+    print(f"[write] {path}")
     return 0
 
 
