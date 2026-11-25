@@ -728,3 +728,25 @@ poses that must give the grain its own box; the decision is that the next protot
 of the 110 two-class `(n, side)` pairs with 0 overlaps in the exact SAT), not a polycrystal sweep and
 not a contact-network edit. Nothing promoted: `submission.csv` and root `WHITEBOARD.md` untouched,
 the delivered total stands at **22.217428576** (554 beats, 446 ties). Doc 99.
+
+**Run 143 (2026-11-25) — the shared box, built and refused by its own entry test.** Part 1 widens doc 99's
+measurement to **every** priced-out class: **873 classes in 508 rows** (43,144 cells), bbox-sharing ratio pooled
+`0.918 / 0.951 / 0.973` (q1/median/q3, min 0.688), **719 of 873 at >= 0.90 and none below 0.50** (one class with
+no other cell inside, in the one row where every priced-out class is like that) — the sharing is population-wide,
+not a two-class artefact, and the 110-row probe of doc 99 is unchanged (0.879 / 0.937). Part 2 built doc 99 §9's
+constructor `scripts/shared_box.py`: two **whole** rectangle blocks of lattice in opposite corners of one shared
+box, **no deletions**, smallest legal side in **closed form** (four affine axis slacks, no bisection or scan),
+every pose re-decided by `import_n090`'s exact SAT on `Fraction` cells, 9 controls, 16 decision functions naming
+no `float`. The entry test ran **before any sweep** and **failed**: **0 of 110** delivered two-class `(n, side)`
+pairs reproduced (threshold 20); the closest configuration is the degenerate spinor `1/1` — a plain grid split —
+in **110 / 110** rows; the family's best side is **never below the grid** (equal in 106, above in 4) while the
+delivered sides sit 0.0503–0.4792 under `k`, so the deficit to the closest family pose is 0.1144 minimum
+(n = 19: 4.885618 delivered against 5), median 0.3171, max 1.3934 (n = 489: 22.606602 against 24). **No sweep was
+run.** The refusal is structural: a full block fills its own bbox, so its cell-disjointness *is* its rectangle
+disjointness and two full blocks can only share the **container** — `W H = b1b2 + (b1²+b2²) sin2theta/2 >=
+b1b2(1 + sin 2theta)` and the areas add, `L² >= n + m_B sin 2theta`; and the delivered rows are not two single
+lattices anyway — a translation-domain census at `1e-6` finds **0 / 110** rows in which both classes are one
+lattice translate, with the larger class a union of **4–54** translates in **110 / 110** rows. The next carrier
+must therefore be **sparse or notched** (fill < 1, several translation domains). Nothing promoted:
+`submission.csv` and root `WHITEBOARD.md` untouched, the delivered total stands at **22.217428576** (554 beats,
+446 ties). Doc 100.

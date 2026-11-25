@@ -105,6 +105,13 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    other lattice is inside it. **The lever is area sharing between two whole lattices** (a
    shared-box interlock), not many short grain contacts and not a better line; the two-grain
    statement holds only for poses that must give the grain its own box (doc 99 §8-§9).
+   **Run 143 has now built that constructor and refused it** (`shared_box.py`, doc 100): two whole
+   rectangle blocks in one shared box, closed-form contact side, 9 controls, entry test first —
+   **0 of 110** delivered two-class `(n, side)` pairs reproduced, the closest pose a plain grid split
+   in 110/110, the family never below the grid, because a full block fills its own bbox and two full
+   blocks can only share the *container*. Area sharing needs a **sparse carrier**: 0/110 delivered
+   two-class rows are two single lattices, and their larger class is a union of 4–54 translates.
+   The lever stands; the carrier is not a rectangle.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

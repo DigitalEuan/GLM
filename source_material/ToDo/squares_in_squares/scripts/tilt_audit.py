@@ -52,6 +52,7 @@ import json
 import os
 import sys
 from decimal import Decimal, getcontext, ROUND_HALF_EVEN
+from math import floor
 from fractions import Fraction as F
 
 getcontext().prec = 60
@@ -333,16 +334,30 @@ def audit_row(n: int, pose, tau: Decimal = TAU) -> dict:
     idx = [idx[i] for i in order]
 
     tilted = [c for c in cls if F(c["x"]) > TILT_EPS_F]
-    # does the class's own bbox belong to it alone?  Doc 98 charges a grain for its
-    # whole bbox; if other classes' cells sit inside that bbox, the charge is not paid
-    probe = next((i for i, c in enumerate(cls) if F(c["x"]) > TILT_EPS_F), 0)
-    pc = cls[probe]
-    bx_lo, bx_hi, by_lo, by_hi = pc["_bx"]
-    inside = sum(1 for i, (x, y, _) in enumerate(pose)
-                 if i not in idx[probe] and bx_lo < x < bx_hi and by_lo < y < by_hi)
-    cover = (pc["m"] + inside) / Decimal(pc["A"])
     L = (side_lo + side_hi) / 2
     density = Decimal(len(pose)) / (L * L)
+    # Does each class's own bbox belong to it alone?  Doc 98 charges a grain for its
+    # whole bbox; if other classes' cells sit inside that bbox, the charge is not paid.
+    # Measured for EVERY class (not only the largest tilted one), in one pass with a
+    # unit-bucket index, so the 508 priced-out rows can be checked class by class.
+    buckets: dict = {}
+    for i, (x, y, _) in enumerate(pose):
+        buckets.setdefault((floor(x), floor(y)), []).append(i)
+    for ci, c in enumerate(cls):
+        bx_lo, bx_hi, by_lo, by_hi = c["_bx"]
+        inside = 0
+        for gx in range(floor(bx_lo), floor(bx_hi) + 1):
+            for gy in range(floor(by_lo), floor(by_hi) + 1):
+                for i in buckets.get((gx, gy), ()):
+                    if i not in idx[ci] and bx_lo < pose[i][0] < bx_hi \
+                            and by_lo < pose[i][1] < by_hi:
+                        inside += 1
+        cover = (Decimal(c["m"]) + inside) / Decimal(c["A"])
+        c["inside"] = inside
+        c["coverage"] = _f6(cover)
+        c["cover_ratio"] = _f6(cover / density)
+    probe = next((i for i, c in enumerate(cls) if F(c["x"]) > TILT_EPS_F), 0)
+    pc = cls[probe]
     row = {
         "n": n, "grid": k, "side": str((side_lo + side_hi) / 2),
         "beat": side_hi < k,
@@ -357,10 +372,19 @@ def audit_row(n: int, pose, tau: Decimal = TAU) -> dict:
         "ambiguous": sum(1 for c in cls if c["doc98"] is None or c["bbox"] is None),
         "probe_m": pc["m"],
         "probe_x": pc["x"],
-        "probe_inside": inside,
-        "probe_coverage": _f6(cover),
+        "probe_inside": pc["inside"],
+        "probe_coverage": pc["coverage"],
         "density": _f6(density),
-        "cover_ratio": _f6(cover / density),
+        "cover_ratio": pc["cover_ratio"],
+        "po_classes": sum(1 for c in cls if c["doc98"] is False),
+        "po_cells": sum(c["m"] for c in cls if c["doc98"] is False),
+        "po_inside_zero": sum(1 for c in cls if c["doc98"] is False and c["inside"] == 0),
+        "po_ratio_ge90": sum(1 for c in cls if c["doc98"] is False
+                           and Decimal(c["cover_ratio"]) >= Decimal("0.90")),
+        "po_ratio_median": _median(
+            [Decimal(c["cover_ratio"]) for c in cls if c["doc98"] is False]),
+        "po_ratio_min": (f"{min(Decimal(c['cover_ratio']) for c in cls if c['doc98'] is False):.3f}"
+                          if any(c["doc98"] is False for c in cls) else None),
         "cls": cls,
     }
     for c in cls:                       # the probe bbox is a measurement, not data
@@ -372,6 +396,13 @@ def audit_row(n: int, pose, tau: Decimal = TAU) -> dict:
 
 def mean_res(res: list[Decimal], g: list[int]) -> Decimal:
     return sum(res[i] for i in g) / len(g)
+
+
+def _median(vals: list) -> str | None:
+    if not vals:
+        return None
+    v = sorted(vals)
+    return f"{v[len(v) // 2]:.3f}"
 
 
 # -------------------------------------------------------------------- report --
@@ -425,6 +456,24 @@ def summarise(rows: list[dict]) -> dict:
     out["compact_tilted_cells"] = sum(c["m"] for _, c in compact)
     out["compact_priced_out"] = sum(1 for _, c in compact if c["bbox"] is False)
     out["compact_priced_out_cells"] = sum(c["m"] for _, c in compact if c["bbox"] is False)
+    # ---- every priced-out class, not only the probed tilted one (run 143)
+    po_rows = [r for r in beat if r["po_classes"]]
+    po_ratios = [Decimal(c["cover_ratio"]) for r in po_rows for c in r["cls"]
+                 if c["doc98"] is False]
+    out["po_rows"] = len(po_rows)
+    out["po_classes"] = sum(r["po_classes"] for r in po_rows)
+    out["po_cells"] = sum(r["po_cells"] for r in po_rows)
+    out["po_inside_zero_classes"] = sum(r["po_inside_zero"] for r in po_rows)
+    out["po_ratio_ge90_classes"] = sum(r["po_ratio_ge90"] for r in po_rows)
+    out["po_rows_all_zero_inside"] = sum(
+        1 for r in po_rows if r["po_inside_zero"] == r["po_classes"])
+    sr = sorted(po_ratios)
+    out["po_ratio_pooled_median"] = f"{sr[len(sr) // 2]:.3f}" if sr else None
+    out["po_ratio_pooled_q1"] = f"{sr[len(sr) // 4]:.3f}" if sr else None
+    out["po_ratio_pooled_q3"] = f"{sr[3 * len(sr) // 4]:.3f}" if sr else None
+    out["po_ratio_pooled_min"] = f"{sr[0]:.3f}" if sr else None
+    out["po_ratio_pooled_ge90"] = sum(1 for v in sr if v >= Decimal("0.90"))
+    out["po_ratio_pooled_lt50"] = sum(1 for v in sr if v < Decimal("0.50"))
     out["compact_fill_median"] = (
         f"{sorted(Decimal(c['fill']) for _, c in compact)[len(compact) // 2]:.3f}"
         if compact else None)
@@ -535,6 +584,13 @@ def main() -> int:
           f"median {agg['two_class_ratio_median']} (min {agg['two_class_ratio_min']})")
     print(f"priced-out rows: two-class {agg['priced_out_two_class']}, "
           f">=3-class {agg['priced_out_ge3_class']}")
+    print(f"ALL priced-out classes: {agg['po_classes']} in {agg['po_rows']} rows "
+          f"({agg['po_cells']} cells); bbox-sharing ratio pooled "
+          f"q1/med/q3/min {agg['po_ratio_pooled_q1']}/{agg['po_ratio_pooled_median']}/"
+          f"{agg['po_ratio_pooled_q3']}/{agg['po_ratio_pooled_min']}, "
+          f">=0.90 in {agg['po_ratio_pooled_ge90']}, <0.50 in {agg['po_ratio_pooled_lt50']}; "
+          f"classes with NO other cell inside: {agg['po_inside_zero_classes']} "
+          f"(rows all such: {agg['po_rows_all_zero_inside']})")
     print(f"ambiguous {agg['ambiguous']}, class-count unstable rows "
           f"{agg['class_count_unstable']}, min |bbox margin| {agg['min_bbox_margin']}, "
           f"min |doc98 margin| {agg['min_doc98_margin']}")

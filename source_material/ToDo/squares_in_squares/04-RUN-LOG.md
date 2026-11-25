@@ -4294,3 +4294,69 @@ Checks: `tilt_audit --selftest` 8; `interleaved_boundary` 9; `twin_boundary` 5; 
 `py_compile` OK.
 
 no row changed |
+
+## Run 143 — 2026-11-25 — the shared box built, and refused by its own entry test
+
+Doc 99 §9 left a constructor spec and a gate. This run finished the coverage measurement, built the
+constructor, and ran the gate before any sweep. New `scripts/shared_box.py`, extended
+`scripts/tilt_audit.py`, ledgers `workspace/push/shared_box.json` and `workspace/push/tilt_audit.json`,
+doc 100.
+
+**Coverage, all classes.** `tilt_audit` now measures bbox fill for **every** priced-out class (a
+unit-bucket index over the row's cells; new per-class `inside` / `coverage` / `cover_ratio`, per-row
+`po_*`, aggregate `po_*`). Over the 508 beating rows: **873 priced-out classes, 43,144 cells**, pooled
+bbox-sharing ratio **0.918 / 0.951 / 0.973** (q1/median/q3) with min 0.688, **719 at >= 0.90**,
+**0 below 0.50**, and exactly **1** class with no other cell inside its bbox (in the one row where
+every priced-out class is like that). The 110-row two-class probe of doc 99 is unchanged (coverage
+median 0.879, ratio 0.937), so the sharing is population-wide and doc 99 §6 was a faithful sample.
+
+**The constructor.** `shared_box.py` builds two **whole** rectangle blocks of lattice — an axis
+`a1 x a2` block and a `b1 x b2` block at a rational spinor — in opposite corners of one square box,
+**no deletions**. The smallest legal side is **closed form**: the four axis slacks are affine in `L`,
+so `s* = max(containment, min(r_x, r_y, r_u, r_v))` — no bisection, no scan; `legal` re-decides from
+the slacks; every built pose is re-certified as exact `Fraction` cells by `import_n090.pair_slack`
+over all pairs. 9 controls, all exact: spinor identity; `4x4 + 2x2` at 53.13° giving `s* = 214/35 =
+6.1142857` exactly, legal there and illegal 1e-9 below; the built pose at **20 cells, 0 overlaps**,
+min slack exactly 0; a `1/4` squeeze breaking 2 cell pairs; the shared side beating doc 97's butted
+bound (**6.114286 < 6.800000**, saving 0.685714); the degenerate `p = q` (90°) member being the grid
+(`4x4 + 1x1` = 17 cells at side 5); `shapes(0)` empty; containment on three further configurations;
+and 16 decision functions naming no `float`. One real bug surfaced through the SAT and is fixed: the
+block must be translated by its **cell-corner** bbox, not its centre bbox, or it sits half a cell
+into its neighbour (first build: min slack `-1/2`, one overlap).
+
+**The gate.** Entry test: reproduce the delivered `(n, side)` of >= 20 of the 110 two-class rows at
+1e-8 with an exact-SAT certificate, over every split, divisor-pair shape with aspect <= 3 and the six
+spinors `1/1, 1/2, 2/3, 1/3, 1/4, 3/4`. Result **0 / 110 — FAIL**, in about 19 s, so no sweep was
+run. No row had a split that failed to fit (0), **no configuration beat the delivered side (0)**, the
+closest configuration is genuinely tilted in **0 / 110** rows (always the degenerate `1/1`, i.e. a
+plain grid split), the family's best side equals the grid `k` in **106 / 110** and is **below it in
+0**, and the deficit `|s* - L|` is **0.1144 / 0.3171 / 1.3934** (min/median/max; quartiles 0.1144 /
+0.2929 / 0.3171 / 0.4645 / 1.3934). Closest row n = 19 (delivered 4.885618 against 5, `4x4 + 1x3`),
+worst n = 489 (22.606602 against 24, `21x22 + 3x9`); delivered savings over `k` run 0.0503-0.4792.
+
+**The diagnosis.** A full `b1 x b2` block's bbox is `W H = b1b2 + (b1²+b2²) sin2theta/2 >=
+b1b2(1 + sin 2theta)`, and because a block *is* a full rectangle of unit cells, its cell-disjointness
+**is** its rectangle-disjointness (control 3 checks both directions against the cell SAT). Two disjoint
+rectangles inside a box of side `L` have areas that add: `L² >= n + m_B sin 2theta`, so a beat is only
+possible for a small tilted class near the top of a band — and the measured minimum over all splits
+never gets there (0/110 below `k`). **Two full lattices can share a container but not a bounding
+box**; filling your own bbox is exactly what makes sharing impossible. A translation-domain census of
+the delivered rows says the table does not use full blocks either: projecting each class onto its own
+lattice frame and reducing centres mod 1 at 1e-6, **0 / 110** rows are two single lattices, the
+smaller class spans 1-7 domains, the larger **4-54**, and **110 / 110** rows have a class with at
+least 4 domains. The carrier must therefore be **sparse or notched** (fill < 1, several translation
+domains), which corrects doc 99 §9's carrier while keeping its mechanism and its gate.
+
+No sparse-carrier constructor was written (it needs its own carrier spec, count law and controls).
+**Refused: the sweep. Promoted: nothing. `submission.csv` and root `WHITEBOARD.md` untouched; the
+delivered total stands at 22.217428576 (554 beats, 446 ties).**
+
+Checks: `shared_box --selftest` 9; `shared_box` entry test + census (0/110, 0/110); `tilt_audit
+--selftest` 8; `interleaved_boundary` 9; `twin_boundary` 5; `notch136`; `glm_plan` 5; `pure_slide`;
+`beaten_leverage`; `band5`; `ext_census`; `range_leverage`; `construct_seam`; `p_screen`;
+`legal_slide`; `structure --control`/`--check-solver`; `perturb`; `anchor_chain`; `void_insert`;
+`true_geom`; `row_census`; `motif_wheels` 13; `crystal_domains` 4; `import_n090` 5;
+`pub_bounds_check` 4; `witt_octad` 5; `leech_audit_fix`; `verify_certificates`; `sqscore`
+**22.217428576** (554/446); `record_guard` OK; `glm_wheels --audit` 0 offenders; `py_compile` OK.
+
+no row changed |
