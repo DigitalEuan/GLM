@@ -3850,3 +3850,42 @@ refused with one violation); `range_leverage` 5; `construct_seam` 4; `band5` 4; 
 `sqscore` **22.218056945** (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**;
 `py_compile` OK. Doc 91 (new); records `workspace/push/beaten_leverage132.json`,
 `workspace/push/tighten132.json`.
+
+## Run 133 — the pure band-slide path, with no squeeze stage
+
+**Request.** Test legal band-slide tightening *directly* on the delivered poses of the top-leverage beaten rows
+(no squeeze stage), prove the path is live first with a synthetic gapped/slideable pose, report per-row `dL`, and
+fold the findings into doc 91 without altering its run-132 numbers.
+
+**Liveness (4 controls, all green).** A: the library's 4x4 with a row shifted 0.25 — ladder path fires, side
+`4.25 -> 4.0` in 1 move. B: the same pose with a `1e-3` gap — the exact-step path fires where the ladder's 1/512
+rung cannot see the gap, side `4.001 -> 4.00000069`. C: **real combinatorics** — delivered `n = 17` with a `0.05`
+gap inserted under its top wall: side `4.725530095176 -> 4.675530095138`, `dL = 0.050000000038`, 3 moves, 0
+violations, i.e. the gap recovered to `3.8e-11` of the delivered reference using the same 17 cells and angles.
+D: a tight 4x4 grid — 0 moves, `dL = 0` exactly (the null is not vacuous).
+
+**The delivered poses (top 20 by room, 12 s each, `legal_slide.tighten` 8 rounds then `tighten_exact` 8 rounds,
+every wall's cells tried as band, single cell and whole wall set, a move taken only if the side strictly
+shrinks).** **20 rows: 0 moves accepted, 0 violations, `dL = 0` exactly on every one**, 0 rows exceeding run 132's
+slack bound. The clearance census explains the null rather than the budget: on **nine** rows a single wall cell
+has real room (`0.451` at n=18, `0.464` at n=38, `0.413` at n=55, `0.380` at n=29, `0.375` at n=68, `0.172` at
+n=27, `0.102` at n=39, `0.050` at n=52), yet the **whole wall set** moves by at most `4.2e-10` on every row —
+the `finalize` pad — so the extreme is defined by a cell in a different band that cannot move. The freedom is
+**interior** and never reaches the bounding box.
+
+**How it complements `g* = 1`.** Run 132's contraction bound is about *scaling* (all coordinates by one factor);
+a band slide is *one band translating*, outside that family, so a positive `dL` here would not have contradicted
+`g*`. It returns zero anyway, for a different reason: not "no room", but "room that does not reach the boundary".
+Two independent single-parameter families — scale and single-band translate — both fail to reduce a side, and the
+nine rows where run 132 allows the pad (`1.6–1.7e-9`) are consistent: that slack is reachable by a scale, not by
+a slide, and no row exceeds its bound.
+
+**Verdict.** Nothing promoted; 0/20 rows reduce a side by legal moves alone; `submission.csv` and root
+`WHITEBOARD.md` untouched; score `22.218056945`, 553 beats, 447 unbeaten, unchanged. §1–§4 of doc 91 are
+unchanged; the new findings are its §5.
+
+**Checks.** `pure_slide --selftest` **4** (A–D above); `beaten_leverage` 4; `band5` 4; `ext_census` 4;
+`range_leverage` 5; `construct_seam` 4; `p_screen` 4; `legal_slide` 8 (P, N, N2, N3, E, F, S, V); `structure
+--control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945**
+(553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK. Record
+`workspace/push/pure_slide133.json`.

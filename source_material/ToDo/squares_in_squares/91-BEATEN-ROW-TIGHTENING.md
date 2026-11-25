@@ -155,21 +155,103 @@ What this run does establish, and what a future run should not re-litigate:
   question asked at the wrong row; this run is the demonstration that the delivered poses themselves are not the
   seam to open.
 
-## 5. Files, records, checks
+## 5. The pure band-slide path, with no squeeze (run 133)
+
+§2 measured the *uniform* contraction bound `g*`; §3 measured the squeeze-and-legalise route. Both leave one
+family untested: a **band slide** — a wall's cells, or one cell, translate alone while the rest of the pose does
+not move. That is outside `g*`'s one-parameter family (scaling every coordinate about a centre), so a positive
+`dL` there would not contradict `g* = 1`. `pure_slide.py` runs that family **directly on the delivered poses,
+with no squeeze stage at all**: `legal_slide.tighten` (the 1/512 ladder, 8 rounds) followed by
+`legal_slide.tighten_exact` (the side-minimising step, 8 rounds), each trying every wall's cells as a band, as a
+single cell, and as the whole wall set, and each accepting a move only when the side strictly shrinks. All
+comparisons are `Decimal` at 40 digits; the only inexact quantity is the 12 s per-row budget.
+
+**Liveness, four controls, before any judgement:**
+
+| control | what it proves | result |
+| :--- | :--- | :--- |
+| A | the ladder path fires | the library's 4×4 with a row shifted 0.25: side `4.25 -> 4.0`, 1 move |
+| B | the exact-step path fires below the ladder's rung | the same pose with a `1e-3` gap: side `4.001 -> 4.00000069`, 1 move (the 1/512 rung cannot see `1e-3`) |
+| C | the path works on **real** combinatorics | delivered `n = 17` with a `0.05` gap inserted under its top wall: side `4.725530095176 -> 4.675530095138`, **dL = 0.050000000038**, 3 moves, 0 violations |
+| D | the null is not vacuous | a tight 4×4 grid: 0 moves, `dL = 0` exactly |
+
+Control C is the important one: it recovers the inserted gap to `3.8e-11` of the delivered reference (`4.675530095176`)
+using a pose of the same 17 cells and the same angles — so a null on the delivered poses means the path found
+nothing, not that it cannot act.
+
+**The delivered poses (top 20 by room):**
+
+| n | L0 | dL | max single-cell inward step | max **whole-wall-set** step |
+| ---: | ---: | ---: | ---: | ---: |
+| 11 | 3.877083591506 | **0** | 9.63e-10 | 9.62e-10 |
+| 18 | 4.822875657118 | **0** | 4.51e-1 | 4.15e-10 |
+| 17 | 4.675530095176 | **0** | 8.05e-10 | 6.39e-10 |
+| 19 | 4.885618084754 | **0** | 6.99e-10 | 4.09e-10 |
+| 26 | 5.621320345204 | **0** | 6.07e-10 | 3.56e-10 |
+| 29 | 5.933833464340 | **0** | 3.80e-1 | 3.37e-10 |
+| 28 | 5.824444618330 | **0** | 4.71e-10 | 3.43e-10 |
+| 27 | 5.707106782836 | **0** | 1.72e-1 | 3.50e-10 |
+| 39 | 6.810722084774 | **0** | 1.02e-1 | 2.93e-10 |
+| 38 | 6.707106782888 | **0** | 4.64e-1 | 2.98e-10 |
+| 37 | 6.598619610942 | **0** | 4.94e-10 | 3.03e-10 |
+| 41 | 6.926693096180 | **0** | 5.84e-10 | 2.89e-10 |
+| 40 | 6.828427126454 | **0** | 2.93e-10 | 2.93e-10 |
+| 51 | 7.690355939028 | **0** | 4.44e-10 | 2.60e-10 |
+| 53 | 7.822875657276 | **0** | 2.55e-10 | 2.55e-10 |
+| 55 | 7.945771009252 | **0** | 4.13e-1 | 2.52e-10 |
+| 50 | 7.571428573164 | **0** | 2.64e-10 | 2.64e-10 |
+| 52 | 7.707106782928 | **0** | 5.03e-2 | 2.60e-10 |
+| 54 | 7.846667194588 | **0** | 3.70e-10 | 2.55e-10 |
+| 68 | 8.798795238991 | **0** | 3.75e-1 | 2.27e-10 |
+
+**20 rows: 0 moves accepted, 0 violations, `dL = 0` exactly on every one, 0 rows exceeding §2's slack bound.**
+The interesting column is the second-from-right. On **nine** of the twenty rows a single wall cell has real room —
+`0.451` on `n = 18`, `0.464` on `n = 38`, `0.413` on `n = 55`, `0.380` on `n = 29`, `0.375` on `n = 68`, `0.172`
+on `n = 27`, `0.102` on `n = 39`, `0.050` on `n = 52` — so the pose is not "blocked" in any naive sense. But
+**the whole wall set moves by at most `4.2e-10` on every row in the table**, which is the `finalize` pad, and a
+single free cell that slides inward leaves the side where it was: the wall is defined by *another* cell of the
+same wall in a different band, and that one is pinned. This is the situation `tighten_exact`'s docstring
+describes from the other direction (run 127: a swap vacated a cell of a full column and the wall was redefined
+rather than moved), and it is why the slide is refused: a legal move that does not shrink the side is not taken.
+
+**How this complements `g* = 1`.** The two obstructions are different and now both measured:
+
+* `g*` is a statement about **scaling**: with every coordinate multiplied by one factor, the tightest pair
+  allows no factor below 1, so no uniform contraction exists (0 loose rows out of 551).
+* The slide is a statement about **translation of one band**: here the pose has local room — up to `0.464` for a
+  single cell — and still no side is reduced, because the extreme is defined by a set that cannot move together.
+
+So it is not that the poses are rigid everywhere; it is that their freedom is **interior** and never reaches the
+bounding box. The nine rows where §2 allows the pad (`1.6–1.7e-9` of uniform slack) also give slide `dL = 0`,
+which is consistent: that slack is reachable by a *scale*, not by a band slide, and no row exceeds its bound.
+
+**Verdict for run 133: no pure legal move alone reduces a side on any of the 20 top-leverage rows** (0/20, with
+every `dL` exactly zero), despite the path being live on the same combinatorics (control C recovers a `0.05`
+gap). Nothing to promote; `submission.csv` untouched.
+
+## 6. Files, records, checks
 
 * `scripts/beaten_leverage.py` (new; `Decimal` throughout, float only in the binding-pair *proposal*):
   `rank`, `room`, `float_binding`, `pair_ratio_min`, `contract`, `exact_bound`, `certify`, `selftest`, `main`.
 * `scripts/tighten.py` (new): `one` (squeeze → measure → convert), `main` with `--rows/--seconds/--seed`.
 * `workspace/push/beaten_leverage132.json` — the 551-row ranking, the 2 filtered rows, and the full contraction
   census (551 rows: `g*`, `L0`, `L1`, gain, band, per-chunk counts).
+* `scripts/pure_slide.py` (new, run 133): `slide` (ladder then exact-step, no squeeze), `wall_budget`
+  (per-cell and whole-wall-set inward step), `measure`, `selftest`, `main`.
 * `workspace/push/tighten132.json` — the 20 attempts with `p`, `dL`, the conversion record and the certificate.
+* `workspace/push/pure_slide133.json` — the 20 rows of §5: `dL`, move counts, violations, per-wall single-cell
+  and whole-set inward steps, `g*` and the slack bound from §2, and whether the row exceeded that bound.
 * **Controls.** `beaten_leverage --selftest` **4**: a tight 3×3 grid gives `g = 1` and gain exactly `0`; the same
   grid loosened to spacing `1.05` and `1.25` contracts to exactly the predicted gains `0.1` and `0.5` with
   `g = 1/s` (this control caught the per-axis/per-pair rule error that produced `g = 1.9` on a *legal* grid); the
   real delivered `n = 18` pose (angle `0.424031`, angles present) is legal at 40 digits and gains at most the pad;
-  a duplicated cell is refused with one violation at 40 digits.
+  a duplicated cell is refused with one violation at 40 digits. `pure_slide --selftest` **4**: A the ladder
+  closes a `0.25` gap to side exactly 4; B the exact step closes a `1e-3` gap the 1/512 rung cannot see; C a real
+  delivered `n = 17` pose with a `0.05` gap inserted recovers it (`dL = 0.050000000038`, 3 moves, 0 violations);
+  D a tight grid returns 0 moves and `dL = 0` exactly.
 * Guards green: `range_leverage --selftest` **5**, `construct_seam --selftest` **4**, `band5 --selftest` **4**,
-  `ext_census --selftest` **4**, `p_screen` **4**, `legal_slide` **8**, `structure --control`, `--check-solver`,
+  `ext_census --selftest` **4**, `pure_slide --selftest` **4**, `p_screen` **4**, `legal_slide` **8**,
+  `structure --control`, `--check-solver`,
   `perturb`, `anchor_chain`, `void_insert`, `true_geom`, `sqscore` **22.218056945** (553 / 447), `record_guard` OK,
   `glm_wheels --audit` **684 functions, 0 offenders** (both new scripts are discovery instruments; `tighten.py`
   delegates every comparison to the audited modules), `py_compile` OK.
