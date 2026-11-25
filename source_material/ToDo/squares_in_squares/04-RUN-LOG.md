@@ -3806,3 +3806,47 @@ certified rows are `n > 1000`; 33 poses, tilted share 0.50 at n=2036); `range_le
 `true_geom`; `sqscore` **22.218056945** (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0
 offenders**; `py_compile` OK. Doc 90 (new); records `workspace/push/band5_131.json`,
 `workspace/push/ext_census131.json`, `json/extended_table_5000_certified.json`.
+
+## Run 132 — beaten-row leverage, the slack census, and the payback on delivered rows
+
+**Request.** Rank the beaten (not proved-optimal) scored rows by unclaimed room `(L - sqrt(n))/sqrt(n)` and
+current slack; run a bounded tightening pass with coordinates *and* angles free on the top of that ranking,
+gating every candidate exactly and promoting only C1–C4 passes; log in doc 91.
+
+**The ranking.** `room = L/sqrt(n) - 1` is the row's own score. Two rows are filtered as proved-optimal — `n = 5`
+(`2 + sqrt2/2`) and `n = 10` (`3 + sqrt2/2`); the other proved values are grids or `n = 3`, so they never enter.
+That leaves **551 rows holding 14.639746101** of the 22.218056945 (the 449 grid rows hold 7.578310844). Top of
+the list: `n = 11` (3.877083591506, room 0.168985), 18 (0.136763), 17 (0.133983), 19 (0.120838), then 26, 29, 28,
+27, 39, 38. The room is a **long tail**: the top ten hold 7.8 % (1.142559), and band by band it is 0.169 at
+k=4, 0.392 at 5, 0.403 at 6, then flat 0.42–0.57 across 26 bands to k=32. `n = 17` is delivered at 4.675530 —
+*below* the pocket's 4.707107 — so the band-5 frontier is not the pocket, consistent with run 131.
+
+**The slack census (exact, all 551 rows).** A uniform contraction about the box centre is legal exactly while
+`g >= max over pairs of (min over axes of (h_a+h_b)/|d.q|)`, computed in Decimal at 40 digits and re-gated with
+`legal_slide.check_pose`. Result: **0 loose**, 246 at the `finalize` pad (`g = 1 - 1.8e-9`), **305 exactly tight**
+(`g = 1` to 40 digits); `g` ranges over `[0.99999999959, 1]`; the largest free gain anywhere is 4.745e-09 of side
+and the sum over the 551 rows is 4.798e-07 — the pad, not a pose property. **Every delivered beat is a fully
+jammed contact structure: there is no slide and no shift that reduces a side.**
+
+**The bounded pass.** `structure.attempt` from the *delivered* pose (patch relaxation of `(x, y, t)`, angles
+free) to `L0 - 0.004`, then `p_screen.measure` and `p_screen.convert` at 40 digits. Ten top-leverage rows, two
+seeds, 8 s each: **20 attempts, 20 conversions, 0 positive dL**; `dL` in `[-0.1305, -0.0021]`, median `-1.881e-2`.
+Fitting `dL = delta - c p L` gives **c = 0.578–0.835, median 0.745** (doc 87's analytic 0.83, less what the band
+slides and exact tightening recover); `p` is within a factor of two of `delta` in every attempt because the pose
+has no slack to give. Summed at the rows' margins the attempts would cost `-0.1426` of score. The smallest
+overlap (`n = 27` seed 1, `p = 1.553e-3`) gives the smallest loss (`-2.083e-3`) — the ordering of `p` is the
+ordering of `dL` almost row for row.
+
+**Verdict.** Nothing promoted; **551/551 jammed, 0/20 moved**; `submission.csv` and root `WHITEBOARD.md`
+untouched; score `22.218056945`, 553 beats, 447 unbeaten, unchanged. A bounded tightening can only pay on a pose
+that already has slack, and the census showed that set is empty — so a scored row can only move by a
+*constructive* pose at the row's own count, not by tightening the delivered one.
+
+**Checks.** `beaten_leverage --selftest` **4** (tight grid `g = 1`, gain 0; loosened grids at 1.05 and 1.25
+contract to exactly 0.1 and 0.5 with `g = 1/s` — the control that caught the max-over-axes rule bug giving
+`g = 1.9` on a legal grid; the real n=18 pose legal at 40 digits and gaining at most the pad; a duplicated cell
+refused with one violation); `range_leverage` 5; `construct_seam` 4; `band5` 4; `ext_census` 4; `p_screen` 4;
+`legal_slide` 8; `structure --control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`;
+`sqscore` **22.218056945** (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**;
+`py_compile` OK. Doc 91 (new); records `workspace/push/beaten_leverage132.json`,
+`workspace/push/tighten132.json`.
