@@ -1,0 +1,210 @@
+{
+ "targets": [
+  18,
+  19,
+  51
+ ],
+ "spinors": [
+  "1/1",
+  "1/2",
+  "1/3",
+  "2/3",
+  "1/4",
+  "3/4"
+ ],
+ "grid": 22100,
+ "price_of_tilt": {
+  "1/1": [
+   "0",
+   null
+  ],
+  "1/2": [
+   "24/25",
+   6
+  ],
+  "1/3": [
+   "24/25",
+   6
+  ],
+  "2/3": [
+   "120/169",
+   10
+  ],
+  "1/4": [
+   "240/289",
+   8
+  ],
+  "3/4": [
+   "336/625",
+   17
+  ]
+ },
+ "offsets": "corner-anchored 1/2 grid, 5x5 per substrate",
+ "results": {
+  "18": {
+   "delivered": "602859457139763/125000000000000",
+   "stats": {
+    "tried": 53700,
+    "counted": 47786,
+    "deleted": 26950,
+    "thinned": 134963,
+    "skipped": 0
+   },
+   "grid": 5,
+   "found": {
+    "side": "5",
+    "sub": "2x2 rect",
+    "a": [
+     2,
+     2
+    ],
+    "b": [
+     4,
+     4
+    ],
+    "give": "block",
+    "spinor": "1/1",
+    "offset": [
+     "0",
+     "2"
+    ],
+    "deleted": 2,
+    "thinned": 0,
+    "domains": 2,
+    "straight": "6"
+   },
+   "gate": {
+    "n": 18,
+    "side": "5",
+    "delivered": "602859457139763/125000000000000",
+    "overlaps": 0,
+    "min_slack": "0",
+    "gain": -0.04174860798833328,
+    "beats_delivered": false,
+    "passes_c2_noise": false,
+    "promotable": false
+   },
+   "beats_straight": true,
+   "three_domain": {
+    "side": "5",
+    "spinor": "1/1+1/1",
+    "deleted": 6,
+    "thinned": 0,
+    "overlaps": 0,
+    "gain": -0.04174860798833328,
+    "stats": {
+     "tried": 432,
+     "counted": 134,
+     "deleted": 727,
+     "skipped": 0
+    }
+   }
+  },
+  "19": {
+   "delivered": "4885618084754103/1000000000000000",
+   "stats": {
+    "tried": 50400,
+    "counted": 44711,
+    "deleted": 22220,
+    "thinned": 115751,
+    "skipped": 0
+   },
+   "grid": 5,
+   "found": {
+    "side": "5",
+    "sub": "2x2 rect",
+    "a": [
+     2,
+     2
+    ],
+    "b": [
+     4,
+     4
+    ],
+    "give": "block",
+    "spinor": "1/1",
+    "offset": [
+     "2",
+     "2"
+    ],
+    "deleted": 1,
+    "thinned": 0,
+    "domains": 2,
+    "straight": "6"
+   },
+   "gate": {
+    "n": 19,
+    "side": "5",
+    "delivered": "4885618084754103/1000000000000000",
+    "overlaps": 0,
+    "min_slack": "0",
+    "gain": -0.026241011027657857,
+    "beats_delivered": false,
+    "passes_c2_noise": false,
+    "promotable": false
+   },
+   "beats_straight": true,
+   "three_domain": {
+    "side": "5",
+    "spinor": "1/1+1/1",
+    "deleted": 5,
+    "thinned": 0,
+    "overlaps": 0,
+    "gain": -0.026241011027657857,
+    "stats": {
+     "tried": 720,
+     "counted": 132,
+     "deleted": 970,
+     "skipped": 0
+    }
+   }
+  },
+  "51": {
+   "delivered": "1922588984757/250000000000",
+   "stats": {
+    "tried": 165900,
+    "counted": 157724,
+    "deleted": 31210,
+    "thinned": 436732,
+    "skipped": 0
+   },
+   "grid": 8,
+   "found": {
+    "side": "8",
+    "sub": "2x2 rect",
+    "a": [
+     2,
+     2
+    ],
+    "b": [
+     7,
+     7
+    ],
+    "give": "block",
+    "spinor": "1/1",
+    "offset": [
+     "0",
+     "2"
+    ],
+    "deleted": 2,
+    "thinned": 0,
+    "domains": 2,
+    "straight": "9"
+   },
+   "gate": {
+    "n": 51,
+    "side": "8",
+    "delivered": "1922588984757/250000000000",
+    "overlaps": 0,
+    "min_slack": "0",
+    "gain": -0.043358841171664636,
+    "beats_delivered": false,
+    "passes_c2_noise": false,
+    "promotable": false
+   },
+   "beats_straight": true
+  }
+ },
+ "wins": [],
+ "seconds": 29.7
+}
