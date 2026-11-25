@@ -558,6 +558,8 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
 
 ## Current results (Run 101, 2026-11-22; last score move run 47)
 
+- **Runs 136–137 (2026-11-25)** — the two corner notches are closed by measurement (delivered-frame holes `0.7328` / `0.7612`; every cell and facing slab locked to `≤1.3e-5` against a `0.24` need; exact insertion depths `0.1555–0.2761`; total prize `8.9e-4`; doc 93), and `glm_plan` makes decidability an instrument: **4 of 30 bands decidable** (`0.19`, only `0.0723` collectible — row 6 is a proved optimum) against **26 refused**, with the delivered table **at or above the published frontier on all 100 rows n ≤ 100** (0 behind) and certified room to the proved lower bounds **1.14087** over 55 rows, top `n = 86` (`0.03424`) — rank effort per row (doc 94).
+
 | Quantity | Value |
 |---|---|
 | Submission score | **22.218056945** (rounded **22.218057**; grid ceiling 28.937670, improvement −6.719613) |

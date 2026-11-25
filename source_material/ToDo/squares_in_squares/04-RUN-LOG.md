@@ -3968,4 +3968,75 @@ a shape rather than a squashed cell — and expect to spend it on construction, 
 `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945** (553 / 447);
 `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
 
+## Run 136 — 2026-11-25 — the two corner notches: measured, priced, and closed by rigidity
+
+**Brief.** Doc 75 left two structural openings (`k = 23` hole `0.7534`, `k = 32` hole `0.7171` /
+`0.8394`) and this run went at both. Instrument `scripts/notch136.py`
+(`--diagnose`, `--room`, `--strips`, `--insert`, `--selftest`); ledger
+`workspace/push/notch136.json`.
+
+**Frame.** `table.json` stores each pose at its *construction* orientation while the scored CSV holds
+it rotated to the minimal box: `n = 509` reads `22.9935885` against `22.9897771` (`Δ = 3.81e-3`),
+`n = 998` reads `31.9968759` against `31.9862386` (`Δ = 1.06e-2`). Every notch statement is therefore
+made in the delivered frame, and run 117's "reached `31.996876`" was `1.06e-2` *worse* than the
+frontier it was aiming at — still a beat of row 999, but worth `9.9e-5` instead of `4.35e-4`.
+
+**Holes (delivered frame, `100x17` + refine).** `k = 23`: side **`0.7328`** at `(-6.9514, -4.0482)`,
+`θ = 0.2543`, `0.2672` short of a cell, an **interior void**. `k = 32`: **`0.7612`** at
+`(27.5951, 0.3916)`, `θ = 0.0292`, `0.2388` short, a **wall notch** whose floor is set by cells 594
+and 881 sitting exactly on `y = 0`.
+
+**Rigidity.** Largest legal translation of the six cells nearest each hole along ±x/±y:
+**`3.213e-10`** (`k = 23`) and **`1.3e-5`** (`k = 32`, excluding one outlier). Joint migration of the
+four facing slabs (1.6 deep, 2.6 wide, against the whole complement): **`8.7e-11`** and **`1.3e-5`**;
+the `k = 32` floor slab is empty because the hole is on the floor. The one outlier (cell 881, `0.25`
+down) is free only *out of the box* — it sets the bbox floor itself, so spending the room costs
+`0.25/√999 = 7.9e-3`, **18× the whole prize**.
+
+**Insertion, exact (40 digits).** At the best centre: `k = 23` → 4 violations, depth `0.2229` (axis)
+/ `0.2761` (45°); `k = 32` → 2 violations, `0.1555`, box growing to `32.0963`, and 3 violations,
+`0.3169` at 45°. The void is 2–4 contacts deep at every exact word.
+
+**Prize, exact.** Row 510: **`4.527e-4`**; row 999: **`4.354e-4`**; total **`8.881e-4`** — `0.38 %`
+of the `0.23251` band programme. Verdict: both notches are closed by rigidity, not failed search; a
+beat is a re-tiling, which doc 94 refuses as undecidable. Nothing promoted.
+Checks: `notch136 --selftest` **3 controls**; the frame calibration reproduces doc 75's `0.7171` on
+the table pose (`0.7151`).
+
+## Run 137 — 2026-11-25 — the worklist: 4 of 30 bands are decidable, and the table is at the world frontier
+
+**Brief.** After 136 runs the question was not geometric: which remaining claims are decidable at
+all, and whether the GLM can do more than check at the end. Instrument `scripts/glm_plan.py`
+(`--selftest`, `--frontier`); ledger `workspace/push/glm_plan.json`; claims are
+`glm_wheels.Claim` records, so `--audit` covers them.
+
+**Decidability.** Per band: cells to add `j`, doc 75's void price, the frontier pose's angle-class
+count and the prize. Four rules — R1 structured pose (`<= 4` classes), R2 small-pose regime
+(`n + j <= 64`), R3 void to save `<= 0.25` unit², R4 `V/j <= 0.999` — give **4 scheduled**
+(`k = 3, 4, 5, 7`, `0.19194`) against **26 refused** (`0.04056`). The refusals are the result: every
+refused band is a 5–26 cell obligation on a 6–189 class continuum pose (`k = 23`: 47 classes, `j = 20`;
+`k = 32`: 147 classes, `j = 26`), which is exactly why runs 116/117/136 could not decide them.
+
+**The ceiling.** `k = 3`'s `0.1196` cannot be collected: `s(6) = 3` is proved (Kearney–Shiu
+2001/2002), as are `s(5)`, `s(7)`, `s(8)`, `s(9)`. The real small prizes are `k = 4` (row 12 open,
+`4` vs LB `3.9715`), `k = 5` (row 20, `5` vs `4.905`) and `k = 7` (row 42, `7` vs `6.8475`) —
+`0.0723` together.
+
+**Frontier.** Against The Squares Project's published list (best known and best proved lower bound,
+2026-10-20) for `n <= 100`: **0 rows behind** (so nothing to import), and the certified room to the
+proved bounds is **`1.14087` over 55 rows** — 4.9× the band programme. Top: `n = 86` `0.03424`,
+68 `0.03260`, 89 `0.03177`, 51 `0.03086`, 84 `0.03005`, 55 `0.02936`, 83 `0.02906`, 85 `0.02903`.
+Each of the top ten is **38–79× a notch**, so the band/notch framing mis-ranks effort by two orders
+of magnitude.
+
+**GLM, three jobs.** Decide (new), certify (684 functions, 0 offenders), schedule (rank by measured
+room). It cannot generate a pose: every gain in the table came from a construction, never from a
+wheel. **24D/Golay:** window `11/1000` rows; **28,548** distinct angle classes (no 24-vocabulary);
+the tilt-support Golay law is false on **540/1000** rows; the codec and doc 16 §5's combinatorial
+address survive, with one finite test specified (Witt octads on the contact-class graph).
+
+**Verdict.** Nothing promoted. Four scheduled claims, of which only `0.0723` is collectible; the
+frontier ranking says to attack per row. Checks: `glm_plan --selftest` **4**; `sqscore`
+**22.218056945** (553/447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**.
+
 no row changed |
