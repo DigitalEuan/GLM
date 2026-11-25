@@ -112,6 +112,14 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    blocks can only share the *container*. Area sharing needs a **sparse carrier**: 0/110 delivered
    two-class rows are two single lattices, and their larger class is a union of 4–54 translates.
    The lever stands; the carrier is not a rectangle.
+   **Run 144 has now built the sparse carrier and refused it too** (`seam_carrier.py`, doc 101): two
+   axis runs per axis across a seam of `s·w` plus a centred 45° bar, cells dropped where they touch the
+   bar — 8 controls, fill **0.68–0.73 < 1**, axis **2–4** / tilt **1** translation domains, and an
+   entry test of **2 of 110** (threshold 20), the two calibration atoms `n = 5` and `n = 10`. **25** rows
+   hit the delivered side *and* count, but **23** of them are refused by the exact gate: the notch only
+   removes what the bar covers, so a notched **product** shares with the bar and not with itself. The
+   next carrier must be sparse **by construction** (disjoint translates by a law) or the notch must gain
+   authority over carrier-carrier overlap with a count-preserving repair.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

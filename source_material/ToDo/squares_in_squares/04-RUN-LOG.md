@@ -4360,3 +4360,57 @@ Checks: `shared_box --selftest` 9; `shared_box` entry test + census (0/110, 0/11
 **22.217428576** (554/446); `record_guard` OK; `glm_wheels --audit` 0 offenders; `py_compile` OK.
 
 no row changed |
+
+## Run 144 — 2026-11-25 — the sparse seam carrier built, and refused by its own entry test
+
+Doc 100 corrected run 143's carrier and named the next prototype: a **sparse/notched** carrier (fill
+< 1, a few translation domains) with its own spec, count law and controls, and doc 99 §9's gate run
+**first** — reproduce 20 of the 110 delivered two-class `(n, side)` pairs before any sweep.
+`seam_carrier.py` builds it: five integers `(k1, k2, o, m, s)` declare **two axis runs per axis**
+offset by a seam `s·w` (`w = √2/2`, the 45° cell's own half-extent, `w²·2 = 1` exactly) with an
+interlock `o`, plus a **centred 45° bar of `m` cells**; the carrier is the product of the two runs'
+lists (`P = (k1+k2)²` cells), a carrier cell is **dropped iff it touches a slot** (the notch), and the
+side is `L = k1 + k2 + s·w − o = a + (s/2)√2` in closed form while the count `n = P − dropped + m` is
+read off the assembled pose. Every verdict is `qsqrt2.gate` on `Q(√2)` with no tolerance, plus exact
+containment; **8 controls**, exit 0 — seam identity, the `n = 5` atom at `2 + ½√2`, a `1e-9` box
+shrink refused, the notch load-bearing (the 8 kept cells of `(2,2,1,2,1)` give **10 overlapping
+pairs**), sparseness at fill **0.6823 / 0.7277 / 0.6549 / 0.7113** with axis domains **4 / 4 / 2 / 4**
+and tilt domains **1**, containment and the two atoms (`n = 5`, `n = 10` at `3 + ½√2`, `n = 9`, `n =
+32`), the illegal `(2,3,1,3)` refused with 2 overlapping pairs, the exact side against a 60-digit
+Decimal, and **15 decision functions, 0 naming float** in bytecode.
+
+**The entry test: 2 / 110 (threshold 20) -> FAIL. No sweep was run.** The two reproduced are the
+family's own calibration atoms — `n = 5` from `(1,1,0,1,1)` and `n = 10` from `(2,2,1,2,1)` (8 cells
+dropped, 11 exact contacts) — and both are exactly the delivered rows. The failure is measured, not
+inferred, and it sorts three ways: **25** of the 110 rows have a declaration that hits the delivered
+side **and** the delivered count (`L = 1 + a + ½√2 − 1` identically, `m` at the delivered tilted-class
+size); **23 of those 25 are refused by the exact gate** because the two axis runs overlap each other
+(`n = 27, 38, 52, 67, 104, 125, 149, 174, 201, 231, 262, 296, 331, 369, 408, 449, 493, 538, 586,
+635, 686, 853, 974`) — the notch only removes cells the *bar* covers and has no authority over
+carrier-carrier overlap; **57** more rows are in the family's side group but no member reaches their
+count (`n = 65` at `5 + 5/2√2` needs `k1+k2 ≤ 7`, so `P ≤ 49` and `n ≤ 74` with no drops against a
+delivered 65); and **28** rows are not of the form `a + (s/2)√2` at all (`n = 11, 18, 19, 26, 28, 50,
+51, 54, 70, 85, 123, 126, 178, 230, 234, 295, 367, 368, 407, 448, 491, 626, 677, 730, 785, 842, 901,
+962` — 82 of 110 are in the side group, against doc 100's 101 which allowed every rational `b`). The
+give-way variant that lets run 1 win was rejected at design time (`n = 10 -> 8`, `n = 27 -> 19`: it
+over-drops and destroys the count), so the obstruction is the family's, not the implementation's: a
+**notched product** can share with the bar but not with itself, and the delivered rows need both.
+The instrument was also made fast enough to keep as the first gate of every carrier run — the
+band-restricted exact counter, an offset-keyed collision memo (the `Q2` identity-keyed memo never
+hit), and the gate's own exact `|Δ| ≥ 2` skip reused as a pre-filter (it reproduces `gate.ok` on
+every declaration it admits, and the full gate still runs on every pose the test accepts) — cutting
+the 110-row sweep from >15 min to about two minutes in `Q(√2)`.
+
+**Refused: the sweep. Promoted: nothing. `submission.csv` and root `WHITEBOARD.md` untouched; the
+delivered total stands at 22.217428576 (554 beats, 446 ties).** Doc 101.
+
+Checks: `seam_carrier --selftest` 8; `seam_carrier` entry test 2/110 (fail) + ledger; `shared_box
+--selftest` 9; `tilt_audit --selftest` 8; `interleaved_boundary` 9; `twin_boundary` 5; `notch136`;
+`glm_plan` 5; `pure_slide`; `beaten_leverage`; `band5`; `ext_census`; `range_leverage`;
+`construct_seam`; `p_screen`; `legal_slide`; `structure --control`/`--check-solver`; `perturb`;
+`anchor_chain`; `void_insert`; `true_geom`; `row_census`; `motif_wheels` 13; `crystal_domains` 4;
+`import_n090` 5; `pub_bounds_check` 4; `witt_octad` 5; `leech_audit_fix`; `verify_certificates`;
+`sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels --audit` 0 offenders;
+`py_compile` OK.
+
+no row changed |

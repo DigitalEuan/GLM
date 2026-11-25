@@ -1,0 +1,1276 @@
+{
+ "family": "two shifted axis runs + centred 45-degree bar, notched",
+ "seam_width": "1/2\u221a2",
+ "max_side": 34,
+ "max_over": 2,
+ "max_m": 90,
+ "entry_test": {
+  "rows": 110,
+  "reproduced": 2,
+  "threshold": 20,
+  "passes": false,
+  "max_side": 34,
+  "max_over": 2,
+  "max_seam": 30,
+  "max_m": 90,
+  "exact_rows": 82,
+  "count_matched": 23,
+  "gated": 2,
+  "detail": [
+   {
+    "n": 5,
+    "target": "2 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 1,
+    "reproduced": true,
+    "params": [
+     1,
+     1,
+     0,
+     1,
+     1
+    ],
+    "family_L": "2 + 1/2\u221a2",
+    "family_n": 5,
+    "dropped": 0,
+    "contacts": 4
+   },
+   {
+    "n": 10,
+    "target": "3 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 2,
+    "reproduced": true,
+    "params": [
+     2,
+     2,
+     1,
+     2,
+     1
+    ],
+    "family_L": "3 + 1/2\u221a2",
+    "family_n": 10,
+    "dropped": 8,
+    "contacts": 11
+   },
+   {
+    "n": 11,
+    "target": "3.87708359150600000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 5,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 18,
+    "target": "4.82287565711810338076867830301645689164227969851470636572922",
+    "exact": false,
+    "m_hint": 8,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 19,
+    "target": "4.88561808475410338076867830301645689164227969851470636572922",
+    "exact": false,
+    "m_hint": 8,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 26,
+    "target": "5.6213203452041033807686783030164568916422796985147063657292",
+    "exact": false,
+    "m_hint": 9,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 27,
+    "target": "5 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 5,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     5,
+     1,
+     5,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 28,
+    "target": "5.8244446183301033807686783030164568916422796985147063657292",
+    "exact": false,
+    "m_hint": 12,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 38,
+    "target": "6 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 6,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     6,
+     1,
+     6,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 40,
+    "target": "4 + 2\u221a2",
+    "exact": true,
+    "m_hint": 16,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 50,
+    "target": "7.5714285731640000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 16,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 51,
+    "target": "7.6903559390280000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 17,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 52,
+    "target": "7 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 8,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     7,
+     1,
+     8,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 54,
+    "target": "7.8466671945881033807686783030164568916422796985147063657292",
+    "exact": false,
+    "m_hint": 16,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 65,
+    "target": "5 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 66,
+    "target": "3 + 4\u221a2",
+    "exact": true,
+    "m_hint": 24,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 67,
+    "target": "8 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 9,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     8,
+     1,
+     9,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 70,
+    "target": "8.8809603733300000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 20,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 82,
+    "target": "6 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 85,
+    "target": "9.7426406889141033807686783030164568916422796985147063657292",
+    "exact": false,
+    "m_hint": 36,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 89,
+    "target": "5 + 7/2\u221a2",
+    "exact": true,
+    "m_hint": 49,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 101,
+    "target": "7 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 104,
+    "target": "10 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 12,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     10,
+     1,
+     12,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 122,
+    "target": "8 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 123,
+    "target": "11.5913781473250000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 33,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 124,
+    "target": "6 + 4\u221a2",
+    "exact": true,
+    "m_hint": 64,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 125,
+    "target": "11 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 13,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     11,
+     1,
+     13,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 126,
+    "target": "11.7426406889490000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 37,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 145,
+    "target": "9 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 147,
+    "target": "7 + 4\u221a2",
+    "exact": true,
+    "m_hint": 64,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 148,
+    "target": "7 + 4\u221a2",
+    "exact": true,
+    "m_hint": 64,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 149,
+    "target": "12 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 15,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     12,
+     1,
+     15,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 150,
+    "target": "5 + 11/2\u221a2",
+    "exact": true,
+    "m_hint": 66,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 170,
+    "target": "10 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 173,
+    "target": "8 + 4\u221a2",
+    "exact": true,
+    "m_hint": 64,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 174,
+    "target": "13 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 16,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     13,
+     1,
+     16,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 178,
+    "target": "13.8466671947000000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 32,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 197,
+    "target": "11 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 200,
+    "target": "9 + 4\u221a2",
+    "exact": true,
+    "m_hint": 64,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 201,
+    "target": "14 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 17,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     14,
+     1,
+     17,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 202,
+    "target": "2 + 9\u221a2",
+    "exact": true,
+    "m_hint": 18,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 203,
+    "target": "7 + 11/2\u221a2",
+    "exact": true,
+    "m_hint": 115,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 226,
+    "target": "12 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 230,
+    "target": "15.6829268311400000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 104,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 231,
+    "target": "15 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 19,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     15,
+     1,
+     19,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 233,
+    "target": "8 + 11/2\u221a2",
+    "exact": true,
+    "m_hint": 121,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 234,
+    "target": "15.8228756574060000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 36,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 257,
+    "target": "13 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 262,
+    "target": "16 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 20,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     16,
+     1,
+     20,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 265,
+    "target": "9 + 11/2\u221a2",
+    "exact": true,
+    "m_hint": 121,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 290,
+    "target": "14 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 291,
+    "target": "14 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 294,
+    "target": "12 + 4\u221a2",
+    "exact": true,
+    "m_hint": 120,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 295,
+    "target": "17.7042327926240000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 160,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 296,
+    "target": "17 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 22,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     17,
+     1,
+     22,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 298,
+    "target": "10 + 11/2\u221a2",
+    "exact": true,
+    "m_hint": 121,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 325,
+    "target": "15 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 95,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 326,
+    "target": "15 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 329,
+    "target": "13 + 4\u221a2",
+    "exact": true,
+    "m_hint": 120,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 331,
+    "target": "18 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 23,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     18,
+     1,
+     23,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 362,
+    "target": "16 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 363,
+    "target": "16 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 366,
+    "target": "14 + 4\u221a2",
+    "exact": true,
+    "m_hint": 120,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 367,
+    "target": "19.6923881591930000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 169,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 368,
+    "target": "19.6923881591930000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 169,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 369,
+    "target": "19 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     19,
+     1,
+     25,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 401,
+    "target": "17 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 402,
+    "target": "17 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 407,
+    "target": "20.6923881592000000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 169,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 408,
+    "target": "20 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 26,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     20,
+     1,
+     26,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 442,
+    "target": "18 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 443,
+    "target": "18 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 448,
+    "target": "21.6923881592040000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 169,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 449,
+    "target": "21 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 27,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     21,
+     1,
+     27,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 485,
+    "target": "19 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 25,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 486,
+    "target": "19 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 489,
+    "target": "12 + 15/2\u221a2",
+    "exact": true,
+    "m_hint": 225,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 491,
+    "target": "22.6923881592080000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 169,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 492,
+    "target": "22 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 29,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 493,
+    "target": "22 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 29,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     22,
+     1,
+     29,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 530,
+    "target": "20 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 130,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 531,
+    "target": "20 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 534,
+    "target": "13 + 15/2\u221a2",
+    "exact": true,
+    "m_hint": 225,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 538,
+    "target": "23 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 30,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     23,
+     1,
+     30,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 577,
+    "target": "21 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 145,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 578,
+    "target": "21 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 50,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 581,
+    "target": "14 + 15/2\u221a2",
+    "exact": true,
+    "m_hint": 225,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 584,
+    "target": "7 + 25/2\u221a2",
+    "exact": true,
+    "m_hint": 200,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 585,
+    "target": "24 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 32,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 586,
+    "target": "24 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 32,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     24,
+     1,
+     32,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 626,
+    "target": "25.5208152820920000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 627,
+    "target": "22 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 145,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 634,
+    "target": "25 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 33,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 635,
+    "target": "25 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 33,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     25,
+     1,
+     33,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 636,
+    "target": "13 + 9\u221a2",
+    "exact": true,
+    "m_hint": 324,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 677,
+    "target": "26.5208152840160000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 686,
+    "target": "26 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 34,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     26,
+     1,
+     34,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 687,
+    "target": "14 + 9\u221a2",
+    "exact": true,
+    "m_hint": 323,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 688,
+    "target": "14 + 9\u221a2",
+    "exact": true,
+    "m_hint": 324,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 730,
+    "target": "27.5208152840200000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 741,
+    "target": "15 + 9\u221a2",
+    "exact": true,
+    "m_hint": 324,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 785,
+    "target": "28.5208152840220000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 842,
+    "target": "29.5208152840240000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 850,
+    "target": "24 + 4\u221a2",
+    "exact": true,
+    "m_hint": 256,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 853,
+    "target": "29 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 39,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     29,
+     1,
+     39,
+     1
+    ],
+    "near_gap": "0"
+   },
+   {
+    "n": 901,
+    "target": "30.5208152840260000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 902,
+    "target": "27 + 5/2\u221a2",
+    "exact": true,
+    "m_hint": 180,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 909,
+    "target": "25 + 4\u221a2",
+    "exact": true,
+    "m_hint": 256,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 962,
+    "target": "31.5208152840280000000000000000000000000000000000000000000000",
+    "exact": false,
+    "m_hint": 289,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": null,
+    "near_gap": null
+   },
+   {
+    "n": 974,
+    "target": "31 + 1/2\u221a2",
+    "exact": true,
+    "m_hint": 42,
+    "reproduced": false,
+    "why": "no legal declaration with this count",
+    "near": [
+     1,
+     31,
+     1,
+     42,
+     1
+    ],
+    "near_gap": "0"
+   }
+  ]
+ }
+}
