@@ -4239,3 +4239,58 @@ green; `sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels
 --audit` 0 offenders; `py_compile` OK. No row changed.
 
 no row changed |
+
+## Run 142 — 2026-11-25 — the tilt price across the table: it is not the separator
+
+**Brief.** Doc 98 priced a single near-square grain in an axis substrate (a grain of `m` cells at
+spinor angle `theta` pays only if `sqrt(m(1+x)) - sqrt(m) < 1`, `x = sin 2theta`). Apply that
+inequality to every delivered row, class by class, extending doc 97's `crystal_domains` from 14
+targets to all 1,000; compare the 554 beats with the 446 ties and especially the 51 verified-room
+rows; decide the next constructor from the evidence. New `scripts/tilt_audit.py`, ledger
+`workspace/push/tilt_audit.json`, doc 99.
+
+**Instrument.** The deliverable CSV is read as decimal text; orientation classes are taken mod
+`pi/2` at `TAU = 1e-6` rad and re-run at `TAU/100` and `TAU*100`; `x = |sin 2theta|` is enclosed
+from a Machin-bracketed `pi` (width 2.1e-90) with Taylor tail bounds at `EPS = 1e-45`; every price
+verdict is an exact rational comparison on those endpoints. **0 ambiguous decisions**, and the
+closest doc-98 decision in the table is 7.169e-4 from its threshold. 20 decision functions, 0
+naming `float`; **8 controls** (Machin against an independent 55-digit value, sin/cos enclosures,
+doc 98's 6/6/10/8/17-cell thresholds, 522 rational cases, +-90/180-degree invariance, the gap
+rule, 554/446 against `sqscore`, bytecode).
+
+**Result.** The 446 ties are **1 class each, 205,192 cells, 0 tilted cells**, largest `|sin 2theta|`
+**1e-45** — every tie is an axis grid. The 554 beats have **0 rows without a tilt**, 125,490 tilted
+cells (42.5 %), 110 two-class rows and 444 with >= 3 classes (max 589). Doc 98's inequality **prices
+out a class in 508 of the 554 beats** — 43,144 tilted cells (34.4 %) — and in 105 of the 110
+two-class rows; of the 147 tilted classes with `m >= 20`, **144 are priced out**, and the class `x`
+quartiles are 0.000 / 0.861 / 0.995. It prices out nothing in the ties, which carry no grain at
+all. At `TAU*100` the population grows to 518 rows / 52,104 cells (merging enlarges classes) while
+the 110 two-class partitions are identical at all three tolerances. The 51 verified-room rows: 30
+carry a priced-out class, 18 are two-class, and 534 of their 651 tilted cells (82 %) are priced out.
+
+**Why the inequality does not bite.** The rejected classes do not own their bounding boxes: in the
+110 two-class beats the tilted class's bbox is filled to **median 0.879** (min 0.444, max 0.998) and
+to **0.937 of the row's own box density** (>= 0.9 in 75 rows), with gains 0.0053-0.1310. The axis
+lattice is inside the tilted class's bbox, so the box area the inequality charges for is used, not
+wasted. Doc 98 §8(3) named this interlock as the escape; the table already contains it whole.
+
+**Correction and decision.** Doc 98's "two grains cannot do it" is corrected: it is true for
+butted grains and for deletion-based interleaving, and false for area sharing (110 delivered rows,
+`n = 5..974`). Next prototype: **`shared_box.py`**, two whole lattices in one shared box with no
+deletions — not a polycrystal sweep (the class partition is tolerance-unstable on 362 rows, while
+the two-class structure is stable 110/110) and not a contact-network edit (the room rows are floppy
+and every tightening family is measured null). Area window: a beat needs `n > (k-1)^2`, so only the
+top `2k-1` counts of a band are reachable, and the frontier `j* = 18..26 <= 2k-1` for `k >= 21` is
+inside it. Entry test before any sweep: reproduce >= 20 of the 110 two-class `(n, side)` pairs with
+0 overlaps under `import_n090`'s exact SAT. No constructor was written this run (refused and
+recorded in doc 99 §10).
+
+Checks: `tilt_audit --selftest` 8; `interleaved_boundary` 9; `twin_boundary` 5; `notch136`;
+`glm_plan` 5; `pure_slide`; `beaten_leverage`; `band5`; `ext_census`; `range_leverage`;
+`construct_seam`; `p_screen`; `legal_slide`; `structure --control`/`--check-solver`; `perturb`;
+`anchor_chain`; `void_insert`; `true_geom`; `row_census`; `motif_wheels` 13/13; `crystal_domains`
+4; `import_n090` 5; `pub_bounds_check` 4; `witt_octad` 5; `leech_audit_fix`; `verify_certificates`;
+`sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels --audit` 0 offenders;
+`py_compile` OK.
+
+no row changed |

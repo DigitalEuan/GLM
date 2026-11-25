@@ -710,3 +710,21 @@ it at **6-17 cells** for `q <= 4`; the `n = 51` grain has 49. So `submission.csv
 and root `WHITEBOARD.md` are untouched, the total stands at **22.217428576**
 (554 beats, 446 ties), and the next instrument must build *many* short grain
 contacts (the delivered rows carry 2-9 orientation classes), not a better line.
+
+**Run 142 (2026-11-25) — the tilt price across the table.** `scripts/tilt_audit.py` applies doc 98's
+exact inequality (`(m x - 1)^2 < 4m`, `x = |sin 2theta|`, `pi` bracketed by the Machin series,
+enclosure `1e-45`, every verdict an exact rational comparison, 0 ambiguous decisions, 20 decision
+functions naming no `float`) to all 1,000 delivered poses class by class. **All 446 grid ties are
+single-class axis poses with zero tilted cells** (largest `|sin 2theta|` = 1e-45), so the price has
+nothing to reject there; and **508 of the 554 beats carry a class the same inequality prices out** —
+43,144 of their 125,490 tilted cells (34.4 %) — including 105 of the 110 two-class rows, while 144 of
+the 147 tilted classes with `m >= 20` are priced out. The price therefore does not separate ties
+from beats. It does not, because the rejected classes do not own their bboxes: in the 110 two-class
+beats the tilted class's bbox is filled to a median **0.879**, i.e. **0.937 of the row's own box
+density**, with the axis lattice inside it. The 51 verified-room rows behave the same way (30 priced
+out, 82 % of their tilted cells). Doc 98's "two grains cannot do it" is corrected to cover only
+poses that must give the grain its own box; the decision is that the next prototype is an
+**area-sharing two-lattice constructor** (`shared_box.py`, no deletions, entry test: reproduce >= 20
+of the 110 two-class `(n, side)` pairs with 0 overlaps in the exact SAT), not a polycrystal sweep and
+not a contact-network edit. Nothing promoted: `submission.csv` and root `WHITEBOARD.md` untouched,
+the delivered total stands at **22.217428576** (554 beats, 446 ties). Doc 99.

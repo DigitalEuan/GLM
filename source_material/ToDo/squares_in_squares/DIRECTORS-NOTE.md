@@ -38,8 +38,7 @@
 We are developing the **Geometric Language Machine (GLM)** and testing it on the 1,000-row *Squares in
 Squares* packing problem (`n = 1..1000` unit squares in a minimal square of side `L`). The Kaggle leaderboard
 score is a **public, falsifiable proof of progress — not a ceiling**: better packings exist, and our goal is to
-discover genuine geometric/algebraic structures that beat our current `22.217428576` baseline (`554` rows
-below `ceil(√n)`, `447` rows currently tied to the `L = k` standard grid; `30` bands `k = 3..32`; `303` tied
+discover genuine geometric/algebraic structures that beat our current `22.217428576` baseline (`554` rows below `ceil(√n)`, `446` rows currently tied to the `L = k` standard grid; `30` bands `k = 3..32`; `303` tied
 and `21` ahead of the Squares Project catalogue, `0` behind).
 
 ## 1. CORE OPERATING DEFINITION: "NO FLOATS" (GLM NATIVE WORK)
@@ -97,8 +96,15 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    `4.822876 / 4.885618 / 7.690356`, every winner at the degenerate spinor `1/1`. The reason is exact:
    a `b1 x b2` grain at spinor angle `theta` has `W H >= b1b2(1 + sin 2theta)`, so it can only pay for
    itself under `sqrt(m(1+sin 2theta)) - sqrt(m) < 1` — at most 6-17 cells for `q <= 4`, where a 49-cell
-   grain is priced out. **Two grains cannot do it; the lever is many short grain contacts** (2-9
-   orientation classes, doc 97 §5), not a better interface.
+   grain is priced out. **Run 142 has now audited that inequality across all 1,000 rows**
+   (`tilt_audit.py`, doc 99): every one of the 446 ties is a single-class axis pose with **zero**
+   tilted cells, while **508 of the 554 beats carry a class the inequality prices out** (43,144 of
+   their 125,490 tilted cells) — so the price does not separate ties from beats. It does not,
+   because the rejected classes do not own their bounding boxes: in the 110 two-class beats the
+   tilted class's bbox is filled to a median **0.937 of the container's own density**, i.e. the
+   other lattice is inside it. **The lever is area sharing between two whole lattices** (a
+   shared-box interlock), not many short grain contacts and not a better line; the two-grain
+   statement holds only for poses that must give the grain its own box (doc 99 §8-§9).
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the
