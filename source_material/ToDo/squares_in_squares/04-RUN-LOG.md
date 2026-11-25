@@ -3926,3 +3926,46 @@ where run 131 proved the pocket is 3 cells short and a new mechanism is needed. 
 `range_leverage` 5; `construct_seam` 4; `p_screen` 4; `legal_slide` 8 (P, N, N2, N3, E, F, S, V); `structure
 --control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945**
 (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
+
+
+## Run 135 — 2026-11-25 — constructive poses: the angle question is closed, band 5 rebuilt, and the 44 "one-axis" rows are square-tied
+
+**Brief.** Runs 132–134 left no tightening family standing (contraction `g* = 1` on 551/551, squeeze-and-legalise
+20/20 negative, band slides `<= 5.5e-13` on 551/551). This run spends the budget on **construction from
+scratch**: band 5 (`n = 20..23`, seeking `L < 5`) and the 44 rows run 134 called one-binding-axis, using exact
+multi-angle / rational-spinor lattice seams where the two axes are not forced into a square tie.
+
+**Family I — the four-corner seam at any exact angle (48 certified `(word, k, m)`).** Four axis-aligned `k x k`
+blocks plus a strip of `m` cells at angle `theta` has side `L(k,m) = 2k + 1/(c+s) + (m-1)*max(c,s)` — at
+45 degrees that is doc 47's `2k + m*sqrt2/2` exactly (control 2, and the pose is cell-for-cell equal to
+`mixed_field.strip_sentence`). Both terms are `>= sqrt2/2` **with equality iff `c = s`**, so 45 degrees is the
+unique cheapest word at every count: no exact-field angle or rational spinor can undercut it. Measured at `n = 17`:
+`4.707106781` (45 deg), `4.714285714` (3-4-5), `4.755928946` (ring `Q(sqrt 7)`), `4.764705882` (5-12-13).
+Every word caps at **17 cells below `L = 5`** (`n = 18` needs `5.414` at 45 degrees, more elsewhere); the family
+reproduces `s(5) = 2.707106781` exactly at `(k,m) = (1,1)`, which is the positive control on the assembler.
+
+**Family II — band 5 built from scratch (16 patterns, 0 hits).** Each count is the `5 x 5` grid minus
+`j = 25 - n` cells in four notch shapes, squeezed from the explicit pose (`p_screen.squeeze_from`), measured at
+40 digits and legalised exactly (`p_screen.convert`, which asserts its own output legal). **All 16 land strictly
+above 5**, from `5.001898` (n = 20, centre notch — a shortfall of `1.898e-3`, the run's closest near-miss)
+through `5.058075`. Controls: a 4x4 grid inflated to `4.2` converts to `4.15` (`dL = +0.05`, certified), and the
+same grid already at `4.0` returns `dL = -0.002643` — no fake gain at a proved optimum.
+
+**Family III — the 44 rows are not axis-free.** Exact spans at 40 digits give a free-axis slack of at most
+**`1.575e-10`** (n = 934), with **41/44 below `1e-12`** and 44/44 below `1e-9`: the second axis misses the side
+by the finaliser's own noise. So **all 551 beats are square-tied to `1.6e-10`** and run 134's 507/44 split is a
+last-digit effect, not two geometries — the tiny `dL` values there were the pad, not room. A from-scratch
+construction at `n >= 303` is outside this budget and is recorded as such: the exact anchor grammar places
+**12 cells of 303 / 330 / 335** at a 12-node cap (37.7 / 38.1 / 37.9 s, `exhausted = false`).
+
+**Verdict.** Nothing promoted; `submission.csv` and root `WHITEBOARD.md` untouched; score `22.218056945`, 553
+beats, 447 unbeaten. The constructive route is closed for band 5 on four exact words, and the one-axis premise is
+corrected. Next budget, if any: the real corner notches (`k = 23` `0.7534`, `k = 32` `0.7171`), where the void is
+a shape rather than a squashed cell — and expect to spend it on construction, not measurement. Doc 92.
+
+**Checks.** `construct92 --selftest` **5 controls**; `pure_slide` 4+E; `beaten_leverage` 4; `band5` 4;
+`ext_census` 4; `range_leverage` 5; `construct_seam` 4; `p_screen` 4; `legal_slide` 8; `structure --control`,
+`--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945** (553 / 447);
+`record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
+
+no row changed |
