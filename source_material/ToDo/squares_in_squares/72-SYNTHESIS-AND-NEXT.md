@@ -50,7 +50,7 @@ Two things follow, and the second is the important one.
    rational slack, `clearance = 0`, `void ≥ 0` at the stated side — checked by an independent verifier
    that knows nothing about how the certificate was produced (`verify_certificates.py`, 11 mutation
    controls, 7 shipped certificates re-checked on every audit).
-2. **The delivered table scores 22.218056945**, 553 of 1000 rows beating the grid, recomputed on every
+2. **The delivered table scored 22.218056945**, 553 of 1000 rows beating the grid, recomputed on every *(historical; superseded by the run-140 promotion.)*
    audit from `submission.csv` by `sqscore` (which `record_guard.py` refuses to run without).
 3. **The face squeeze is exact and its gain is the polish** (run 108): every face of n = 66 and n = 325
    has positive exact room (`231/10¹²`, `27/25·10¹⁰`), a single face cannot move a *square* container's

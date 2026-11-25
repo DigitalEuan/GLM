@@ -33,7 +33,7 @@ pass.
 SCORER (single authority).  No score is computed in this file.  The delivered
 side is `sqscore.extent`, the gain is `sqscore.row_gain`, the beat test is
 `sqscore.is_beat`, the grid is `sqscore.grid`, and `sqscore.guard()` runs before
-any spin and raises unless submission.csv is exactly 22.218056945 / 553 beats.
+any spin and raises unless submission.csv is exactly 22.217428576 / 554 beats.
 
 REFUSAL TAXONOMY.  Every refusal carries its numbers; none is dropped:
     n_cap                 n > 1000 (the submission is 1000 rows)

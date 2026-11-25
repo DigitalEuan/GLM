@@ -1,0 +1,490 @@
+{
+ "targets": [
+  11,
+  17,
+  18,
+  19,
+  51,
+  55,
+  68,
+  72,
+  83,
+  84,
+  85,
+  86,
+  88,
+  89
+ ],
+ "angles": [
+  "1/1",
+  "1/2",
+  "1/3",
+  "2/3",
+  "1/4",
+  "3/4",
+  "1/5",
+  "2/5",
+  "3/5",
+  "4/5",
+  "1/6",
+  "5/6"
+ ],
+ "gaps": [
+  "0",
+  "1/16",
+  "1/8",
+  "1/4",
+  "1/2"
+ ],
+ "wins": [],
+ "results": {
+  "11": {
+   "side": "4",
+   "a": [
+    2,
+    1
+   ],
+   "b": [
+    3,
+    3
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 3840,
+   "bound": 4,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "4",
+   "grid": 4,
+   "strictly_smaller": false,
+   "score_gain": -0.011174218954,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "1938541795753/500000000000"
+  },
+  "17": {
+   "side": "5",
+   "a": [
+    1,
+    1
+   ],
+   "b": [
+    4,
+    4
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 8040,
+   "bound": 5,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     3
+    ]
+   },
+   "side_built": "5",
+   "grid": 5,
+   "strictly_smaller": false,
+   "score_gain": -0.019086464989647,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "4675530095176001/1000000000000000"
+  },
+  "18": {
+   "side": "5",
+   "a": [
+    2,
+    1
+   ],
+   "b": [
+    4,
+    4
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 10140,
+   "bound": 5,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "5",
+   "grid": 5,
+   "strictly_smaller": false,
+   "score_gain": -0.009840241271216445,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "602859457139763/125000000000000"
+  },
+  "19": {
+   "side": "5",
+   "a": [
+    2,
+    2
+   ],
+   "b": [
+    3,
+    5
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 9600,
+   "bound": 5,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "5",
+   "grid": 5,
+   "strictly_smaller": false,
+   "score_gain": -0.006020100802415632,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "4885618084754103/1000000000000000"
+  },
+  "51": {
+   "side": "8",
+   "a": [
+    2,
+    1
+   ],
+   "b": [
+    7,
+    7
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 46320,
+   "bound": 8,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "8",
+   "grid": 8,
+   "strictly_smaller": false,
+   "score_gain": -0.006071452175921568,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "1922588984757/250000000000"
+  },
+  "55": {
+   "side": "8",
+   "a": [
+    5,
+    3
+   ],
+   "b": [
+    5,
+    8
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 48240,
+   "bound": 8,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "8",
+   "grid": 8,
+   "strictly_smaller": false,
+   "score_gain": -0.0009859816499636364,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "1986442752313/250000000000"
+  },
+  "68": {
+   "side": "9",
+   "a": [
+    4,
+    1
+   ],
+   "b": [
+    8,
+    8
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 83160,
+   "bound": 9,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "9",
+   "grid": 9,
+   "strictly_smaller": false,
+   "score_gain": -0.0029588935442499856,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "8798795238991001/1000000000000000"
+  },
+  "72": {
+   "side": "9",
+   "a": [
+    6,
+    3
+   ],
+   "b": [
+    6,
+    9
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 96780,
+   "bound": 9,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "9",
+   "grid": 9,
+   "strictly_smaller": true,
+   "score_gain": 2.4694444444444444e-11,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "4500000000889/500000000000"
+  },
+  "83": {
+   "side": "10",
+   "a": [
+    2,
+    1
+   ],
+   "b": [
+    9,
+    9
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 86160,
+   "bound": 10,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "10",
+   "grid": 10,
+   "strictly_smaller": false,
+   "score_gain": -0.004400510235855422,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "1204344706303/125000000000"
+  },
+  "84": {
+   "side": "10",
+   "a": [
+    2,
+    2
+   ],
+   "b": [
+    8,
+    10
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 122400,
+   "bound": 10,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "10",
+   "grid": 10,
+   "strictly_smaller": false,
+   "score_gain": -0.0035960142760833335,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "9697934800809/1000000000000"
+  },
+  "85": {
+   "side": "10",
+   "a": [
+    4,
+    1
+   ],
+   "b": [
+    9,
+    9
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 90720,
+   "bound": 10,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "10",
+   "grid": 10,
+   "strictly_smaller": false,
+   "score_gain": -0.0030277566010105646,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "4871320344457051/500000000000000"
+  },
+  "86": {
+   "side": "10",
+   "a": [
+    3,
+    2
+   ],
+   "b": [
+    8,
+    10
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 114000,
+   "bound": 10,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "10",
+   "grid": 10,
+   "strictly_smaller": false,
+   "score_gain": -0.002086797566360477,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "9820535409292999/1000000000000000"
+  },
+  "88": {
+   "side": "10",
+   "a": [
+    4,
+    2
+   ],
+   "b": [
+    8,
+    10
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 121200,
+   "bound": 10,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "10",
+   "grid": 10,
+   "strictly_smaller": false,
+   "score_gain": -0.0013357837241022728,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "9882451032279/1000000000000"
+  },
+  "89": {
+   "side": "10",
+   "a": [
+    8,
+    1
+   ],
+   "b": [
+    9,
+    9
+   ],
+   "spinor": "1/1",
+   "gap": "0",
+   "cands": 94920,
+   "bound": 10,
+   "verified": {
+    "overlaps": 0,
+    "min_slack": "0",
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "side_built": "10",
+   "grid": 10,
+   "strictly_smaller": false,
+   "score_gain": -0.0005646351673707866,
+   "passes_c2_noise": false,
+   "promotable": false,
+   "beats_delivered": false,
+   "theorem_holds": true,
+   "delivered": "1243718433763/125000000000"
+  }
+ }
+}

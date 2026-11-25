@@ -5,7 +5,7 @@ that half of it does not work â€” for a reason that is measurable in one line â€
 half does. It also answers the two questions attached to the nomination: the dimension theorem is
 qualified everywhere it is stated, and `--milp` is retired.
 
-No row of the table changed. The delivered total is still `22.218056945`, 553 beats, and
+No row of the table changed. The delivered total is still `22.218056945` *(historical: at that time)*, 553 beats, and
 `sqscore.guard()` holds.
 
 ## 1. What the model is, and why this is the one that must be exact

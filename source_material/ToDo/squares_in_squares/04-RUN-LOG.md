@@ -1,7 +1,7 @@
 # Run Log — Condensed Ledger
 
 Full JSON ledgers: `download/run<N>_outcomes.json`. Current score:
-**22.218056945** (553/1000 rows beat grid; guarded by `sqscore.guard`, run 52).
+**22.217428576** (554/1000 rows beat grid; guarded by `sqscore.guard`, run 140).
 The table below is the run history: the 22.887471 figure it opens with is historical,
 superseded at run 47 by the audit re-score.
 
@@ -3926,3 +3926,255 @@ where run 131 proved the pocket is 3 cells short and a new mechanism is needed. 
 `range_leverage` 5; `construct_seam` 4; `p_screen` 4; `legal_slide` 8 (P, N, N2, N3, E, F, S, V); `structure
 --control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945**
 (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
+
+
+## Run 135 — 2026-11-25 — constructive poses: the angle question is closed, band 5 rebuilt, and the 44 "one-axis" rows are square-tied
+
+**Brief.** Runs 132–134 left no tightening family standing (contraction `g* = 1` on 551/551, squeeze-and-legalise
+20/20 negative, band slides `<= 5.5e-13` on 551/551). This run spends the budget on **construction from
+scratch**: band 5 (`n = 20..23`, seeking `L < 5`) and the 44 rows run 134 called one-binding-axis, using exact
+multi-angle / rational-spinor lattice seams where the two axes are not forced into a square tie.
+
+**Family I — the four-corner seam at any exact angle (48 certified `(word, k, m)`).** Four axis-aligned `k x k`
+blocks plus a strip of `m` cells at angle `theta` has side `L(k,m) = 2k + 1/(c+s) + (m-1)*max(c,s)` — at
+45 degrees that is doc 47's `2k + m*sqrt2/2` exactly (control 2, and the pose is cell-for-cell equal to
+`mixed_field.strip_sentence`). Both terms are `>= sqrt2/2` **with equality iff `c = s`**, so 45 degrees is the
+unique cheapest word at every count: no exact-field angle or rational spinor can undercut it. Measured at `n = 17`:
+`4.707106781` (45 deg), `4.714285714` (3-4-5), `4.755928946` (ring `Q(sqrt 7)`), `4.764705882` (5-12-13).
+Every word caps at **17 cells below `L = 5`** (`n = 18` needs `5.414` at 45 degrees, more elsewhere); the family
+reproduces `s(5) = 2.707106781` exactly at `(k,m) = (1,1)`, which is the positive control on the assembler.
+
+**Family II — band 5 built from scratch (16 patterns, 0 hits).** Each count is the `5 x 5` grid minus
+`j = 25 - n` cells in four notch shapes, squeezed from the explicit pose (`p_screen.squeeze_from`), measured at
+40 digits and legalised exactly (`p_screen.convert`, which asserts its own output legal). **All 16 land strictly
+above 5**, from `5.001898` (n = 20, centre notch — a shortfall of `1.898e-3`, the run's closest near-miss)
+through `5.058075`. Controls: a 4x4 grid inflated to `4.2` converts to `4.15` (`dL = +0.05`, certified), and the
+same grid already at `4.0` returns `dL = -0.002643` — no fake gain at a proved optimum.
+
+**Family III — the 44 rows are not axis-free.** Exact spans at 40 digits give a free-axis slack of at most
+**`1.575e-10`** (n = 934), with **41/44 below `1e-12`** and 44/44 below `1e-9`: the second axis misses the side
+by the finaliser's own noise. So **all 551 beats are square-tied to `1.6e-10`** and run 134's 507/44 split is a
+last-digit effect, not two geometries — the tiny `dL` values there were the pad, not room. A from-scratch
+construction at `n >= 303` is outside this budget and is recorded as such: the exact anchor grammar places
+**12 cells of 303 / 330 / 335** at a 12-node cap (37.7 / 38.1 / 37.9 s, `exhausted = false`).
+
+**Verdict.** Nothing promoted; `submission.csv` and root `WHITEBOARD.md` untouched; score `22.218056945`, 553
+beats, 447 unbeaten. The constructive route is closed for band 5 on four exact words, and the one-axis premise is
+corrected. Next budget, if any: the real corner notches (`k = 23` `0.7534`, `k = 32` `0.7171`), where the void is
+a shape rather than a squashed cell — and expect to spend it on construction, not measurement. Doc 92.
+
+**Checks.** `construct92 --selftest` **5 controls**; `pure_slide` 4+E; `beaten_leverage` 4; `band5` 4;
+`ext_census` 4; `range_leverage` 5; `construct_seam` 4; `p_screen` 4; `legal_slide` 8; `structure --control`,
+`--check-solver`; `perturb`, `anchor_chain`, `void_insert`, `true_geom`; `sqscore` **22.218056945** (553 / 447);
+`record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
+
+## Run 136 — 2026-11-25 — the two corner notches: measured, priced, and closed by rigidity
+
+**Brief.** Doc 75 left two structural openings (`k = 23` hole `0.7534`, `k = 32` hole `0.7171` /
+`0.8394`) and this run went at both. Instrument `scripts/notch136.py`
+(`--diagnose`, `--room`, `--strips`, `--insert`, `--selftest`); ledger
+`workspace/push/notch136.json`.
+
+**Frame.** `table.json` stores each pose at its *construction* orientation while the scored CSV holds
+it rotated to the minimal box: `n = 509` reads `22.9935885` against `22.9897771` (`Δ = 3.81e-3`),
+`n = 998` reads `31.9968759` against `31.9862386` (`Δ = 1.06e-2`). Every notch statement is therefore
+made in the delivered frame, and run 117's "reached `31.996876`" was `1.06e-2` *worse* than the
+frontier it was aiming at — still a beat of row 999, but worth `9.9e-5` instead of `4.35e-4`.
+
+**Holes (delivered frame, `100x17` + refine).** `k = 23`: side **`0.7328`** at `(-6.9514, -4.0482)`,
+`θ = 0.2543`, `0.2672` short of a cell, an **interior void**. `k = 32`: **`0.7612`** at
+`(27.5951, 0.3916)`, `θ = 0.0292`, `0.2388` short, a **wall notch** whose floor is set by cells 594
+and 881 sitting exactly on `y = 0`.
+
+**Rigidity.** Largest legal translation of the six cells nearest each hole along ±x/±y:
+**`3.213e-10`** (`k = 23`) and **`1.3e-5`** (`k = 32`, excluding one outlier). Joint migration of the
+four facing slabs (1.6 deep, 2.6 wide, against the whole complement): **`8.7e-11`** and **`1.3e-5`**;
+the `k = 32` floor slab is empty because the hole is on the floor. The one outlier (cell 881, `0.25`
+down) is free only *out of the box* — it sets the bbox floor itself, so spending the room costs
+`0.25/√999 = 7.9e-3`, **18× the whole prize**.
+
+**Insertion, exact (40 digits).** At the best centre: `k = 23` → 4 violations, depth `0.2229` (axis)
+/ `0.2761` (45°); `k = 32` → 2 violations, `0.1555`, box growing to `32.0963`, and 3 violations,
+`0.3169` at 45°. The void is 2–4 contacts deep at every exact word.
+
+**Prize, exact.** Row 510: **`4.527e-4`**; row 999: **`4.354e-4`**; total **`8.881e-4`** — `0.38 %`
+of the `0.23251` band programme. Verdict: both notches are closed by rigidity, not failed search; a
+beat is a re-tiling, which doc 94 refuses as undecidable. Nothing promoted.
+Checks: `notch136 --selftest` **3 controls**; the frame calibration reproduces doc 75's `0.7171` on
+the table pose (`0.7151`).
+
+## Run 137 — 2026-11-25 — the worklist: 4 of 30 bands are decidable, and the table is at the world frontier
+
+**Brief.** After 136 runs the question was not geometric: which remaining claims are decidable at
+all, and whether the GLM can do more than check at the end. Instrument `scripts/glm_plan.py`
+(`--selftest`, `--frontier`); ledger `workspace/push/glm_plan.json`; claims are
+`glm_wheels.Claim` records, so `--audit` covers them.
+
+**Decidability.** Per band: cells to add `j`, doc 75's void price, the frontier pose's angle-class
+count and the prize. Four rules — R1 structured pose (`<= 4` classes), R2 small-pose regime
+(`n + j <= 64`), R3 void to save `<= 0.25` unit², R4 `V/j <= 0.999` — give **4 scheduled**
+(`k = 3, 4, 5, 7`, `0.19194`) against **26 refused** (`0.04056`). The refusals are the result: every
+refused band is a 5–26 cell obligation on a 6–189 class continuum pose (`k = 23`: 47 classes, `j = 20`;
+`k = 32`: 147 classes, `j = 26`), which is exactly why runs 116/117/136 could not decide them.
+
+**The ceiling.** `k = 3`'s `0.1196` cannot be collected: `s(6) = 3` is proved (Kearney–Shiu
+2001/2002), as are `s(5)`, `s(7)`, `s(8)`, `s(9)`. The real small prizes are `k = 4` (row 12 open,
+`4` vs LB `3.9715`), `k = 5` (row 20, `5` vs `4.905`) and `k = 7` (row 42, `7` vs `6.8475`) —
+`0.0723` together.
+
+**Frontier.** Against The Squares Project's published list (best known and best proved lower bound,
+2026-10-20) for `n <= 100`: **0 rows behind** (so nothing to import), and the certified room to the
+proved bounds is **`1.14087` over 55 rows** — 4.9× the band programme. Top: `n = 86` `0.03424`,
+68 `0.03260`, 89 `0.03177`, 51 `0.03086`, 84 `0.03005`, 55 `0.02936`, 83 `0.02906`, 85 `0.02903`.
+Each of the top ten is **38–79× a notch**, so the band/notch framing mis-ranks effort by two orders
+of magnitude.
+
+**GLM, three jobs.** Decide (new), certify (684 functions, 0 offenders), schedule (rank by measured
+room). It cannot generate a pose: every gain in the table came from a construction, never from a
+wheel. **24D/Golay:** window `11/1000` rows; **28,548** distinct angle classes (no 24-vocabulary);
+the tilt-support Golay law is false on **540/1000** rows; the codec and doc 16 §5's combinatorial
+address survive, with one finite test specified (Witt octads on the contact-class graph).
+
+**Verdict.** Nothing promoted. Four scheduled claims, of which only `0.0723` is collectible; the
+frontier ranking says to attack per row. Checks: `glm_plan --selftest` **4**; `sqscore`
+**22.218056945** (553/447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**.
+
+## Run 138 — 2026-11-25 — proved-optimal refusal, the verified bounds table, and the octad test
+
+**Brief.** Doc 94 left three things as prose or hand-work: the proved-optimal ceiling (noted in
+text), the published bounds table (hand-transcribed), and the Witt-octad test (specified, not run).
+This run makes all three instruments. New `scripts/pub_bounds_check.py`, `scripts/witt_octad.py`;
+`glm_plan` extended with rule **R5**; ledgers `pub_bounds_check.json`, `witt_octad.json`,
+`glm_plan.json`; the source of record saved as `workspace/push/pub_frontier_20261020.html`.
+
+**R5 — proved-optimal refusal.** If the claim's target row `n+1` is marked proved optimal in the
+frontier, the claim is refused outright: either the proved optimum is at or above the frontier side
+(impossible) or a packing attaining it already exists (already solved). The set is read from the
+source's `aria-label="optimal"` badges — **49 rows in `1..100`** — not from a literal. Band `k = 3`
+is now **refused by the instrument**: "R5 target row 6 is proved optimal (s = 3.0)". **3 scheduled
+(k = 4, 5, 7; `0.07237`) / 27 refused**, and all three carry `requires_world_record: true`
+(`s(12) <= 4`, `s(20) <= 5`, `s(42) <= 7` are all above the frontier sides `3.8771 / 4.8856 /
+6.9267`). Selftest **control 5** asserts the R5 refusal, the scheduled set `[4, 5, 7]`, and the
+world-record flags.
+
+**Bounds, machine-checked: 17 diffs, room `1.14087` -> `1.09647`.** `pub_bounds_check` re-reads the
+same project's live frontier table (`frontier.html`, saved), parses all 324 rows from `data-value`
+attributes, and diffs `PUB` in `Decimal` (tolerance `5e-5`); its selftest plants a false lower bound
+at n = 12 and requires the diff to be caught. Result (re-attributed in run 139: these are **survey drift, not transcription** — `PUB`
+matches the 23 October PDF edition on every number it prints): 16 lower bounds tightened in the
+month since the edition (n=37 `6.44` vs `6.4975`, n=31 `5.9525` vs `5.9775`, …, four of them —
+44, 76, 95, 96 — risen to their upper bounds by new proofs),
+and **one upper bound moved**: the live table has `s(90) <= 9.9940387665828706` (jazivxt 2026) where
+the PDF said `10`, so **our row 90 at `10.0000000019` is behind by `5.96e-3` of side, worth
+`6.28e-4`** — the only row in `1..100` where a published packing beats the delivered table. Verified
+room: **`1.09647` over 51 rows** (transcribed: `1.14087` over 55); the top-eight ranking is
+unchanged (`n = 86` still `0.03424`), so doc 94's conclusion survives the correction of its number.
+The proved set also grew 45 -> 49 (rows 44, 76, 95, 96 proved since the PDF).
+
+**Octad test — FAIL, structurally.** Tester validated on the design first: the 759 weight-8 Golay
+words give every 5-subset of 24 in exactly one octad, deleting one octad loses exactly `C(8,5)=56`
+5-subsets, and an injected `K8` is found as one 8-clique. On the data (79-class vocabulary of the
+596 structured rows, canonical top-24 point set, window 256): exact contact graph `|V|=64, |E|=0,
+omega=1` — **zero exact contacts between different direction classes**; near contact (`tau=0.02`)
+`|V|=64, |E|=13, omega=3`; co-occurrence `|V|=79, |E|=138, omega=4`; all-rows coverage 15/42504
+5-subsets with multiplicity 1..12. No `S(5,8,24)` acts: a block of 8 does not exist, so the axiom is
+not false but untestable. The finding to keep is that exact tangency in this table never crosses a
+direction class (doc 75's sliver picture, measured graph-theoretically), asserted as control 4 —
+row 5 is looser still, all five cells `>= 0.207` apart at a proved-optimal side.
+
+**Verdict.** Nothing promoted. Doc 94 corrected by doc 95 §4: room `1.09647`/51 rows, one row behind
+(`n = 90`, `6.28e-4`), `k = 3` refused by R5, octad test closed. Next: fetch and certify the n = 90
+packing through C1–C4 (the only import on the table, seven times both notches).
+Checks: `pub_bounds_check --selftest` 3; `witt_octad --selftest` 5; `glm_plan --selftest` 5;
+`sqscore` **22.218056945** (553/447); `record_guard` OK; `glm_wheels --audit` **684 functions,
+0 offenders**; full guard set green; `py_compile` OK.
+
+## Run 139 — 2026-11-25 — the deltas were drift, and the n = 90 import is real
+
+**Brief.** Two things run 138 left as claims: the 17 bound deltas were blamed on my transcription, and
+the n = 90 gain was priced from a table rather than from a packing. This run machine-checks the first
+and certifies the second. `pub_bounds_check` extended to a three-way `PDF | PUB | live`
+classification; new `scripts/import_n090.py`; ledgers `pub_bounds_check.json`, `import_n090.json`;
+the PDF edition saved with its extracted text, and the published exact rational certificate saved.
+
+**The attribution: 0 transcription errors, 17 drift.** `PUB` was transcribed from the PDF edition
+(v0.7.0, **23 October 2026**). The instrument now parses that edition's text and diffs all three
+numbers per row in `Decimal`. Result: `PUB` agrees with the edition on all 200 numbers it prints, so
+**no delta is a transcription error**; the live table is a month newer, marks **all 17** changed rows
+`recent result`, and **4 of the 16 lower-bound rises are rows 44, 76, 95, 96 — exactly the four rows
+proved optimal since the edition**, where a proved bound closes on its upper bound (`6.9725 → 7`,
+`8.965 → 9`, `9.965 → 10`, `9.97 → 10`). The other twelve are tighter bounds (`3.9715 → 3.9716` at
+n=12 … `6.44 → 6.4975` at n=37); the upper-bound move is n=90 (`10 → 9.9940387665828706`, the new
+house of 15–21 November). Verified room: unchanged, **`1.09647` over 51 rows** — it is computed from
+`live`, so it never depended on the attribution; what changes is the lesson, that `PUB` is a
+snapshot and any figure quoted from it must be re-derived live at the moment of quoting.
+
+**The import: C1 and C2 pass exactly.** The published house carries an exact rational reading copy
+(90 rows of `[cx, cy, tan(theta/2)]` with a rational `center_scale`). Because
+`cos(2 arctan t) = (1-t^2)/(1+t^2)` and `sin(2 arctan t) = 2t/(1+t^2)` are **rational** for rational
+`t`, the whole certificate lives in `Q`: corners, four-axis separating slacks and the bounding box are
+exact `Fraction`s, no float and no interval anywhere in the decision. Over 4005 pairs: **0 overlaps,
+0 zero-slack touches, minimum slack `1e-73`** (pair 15,19 — the record's own `8.994e-73` contraction
+as geometry), **side `9.9940387665828698`**, equal to the published exact decimal. Against our
+`10.0000000019` that is a margin of `5.961e-3` and a gain of **`6.283693757e-4`**
+(`22.218056945 → 22.2174286`); rendered at our `1e-9` frame convention (a CSV cannot keep a `1e-73`
+contact) the pose stays legal with `1e-9` slack at side `9.9940387755769091`, gain
+**`6.283684276e-4`**. Selftest 5 controls, including a displaced square (`-0.5` slack) so the checker
+is not vacuous and the Pythagorean `t = 1/2 → (3/5, 4/5)` rotation.
+
+**Verdict.** The `6.28e-4` is real: `6.283693757e-4` exact, `6.283684276e-4` deliverable. Nothing
+promoted — writing row 90 moves `DELIVERED_SCORE`, `record_guard`'s totals and the §1 figures of
+`README`/`STATUS` together, and that constant cascade is queued as its own change, with the
+attribution stated (doc 96 §3). Next: that promotion, then re-derive the room.
+Checks: `import_n090 --selftest` 5; `pub_bounds_check --selftest` 4; `glm_plan --selftest` 5;
+`witt_octad --selftest` 5; full guard set green; `sqscore` **22.218056945** (553/447);
+`record_guard` OK; `glm_wheels --audit` **684 functions, 0 offenders**; `py_compile` OK.
+
+## Run 140 — 2026-11-25 — row 90 promoted; the top-room rows are polycrystals; the twin family is dominated
+
+**Brief.** Three jobs: promote the n = 90 certificate that passed C1–C4 in run 139, diagnose the
+crystal structure of the highest-room rows, and prototype a commensurate grain-boundary constructor.
+New `scripts/promote_n090.py`, `scripts/crystal_domains.py`, `scripts/twin_boundary.py`; ledgers
+`crystal_domains.json`, `twin_boundary.json`. **One row changed: n = 90.**
+
+**Promotion.** The exact certificate (jazivxt, improved by de Winter) is inflated by `1e-9`,
+re-boxed, and written at the table's own precision (10 decimals for centres, 12 for radians). The
+render carries a proof rather than a tolerance: centres move ≤ `9.89e-11`, angles ≤ `4.35e-13`, so
+no corner moves more than `d = 9.92e-11`, pairwise slack changes by ≤ `4d`, and the written row is
+legal with **min slack `6.03e-10`** and side `≤ 9.9940387757752980`, measured at `9.9940387756`.
+Delivered score **`22.218056945 → 22.217428576`** (−`6.283680e-4`), beats **553 → 554**, grid ties
+**447 → 446**, room **`1.09647` → `1.09584` over 51 rows**, beaten-row headroom **`15.022691` →
+`15.076155`**. Every quoted total moved with it (`sqscore`, `record_guard.CANON = 22.21742`,
+`DIRECTORS-NOTE` §1, `README`, `STATUS`, `REPRODUCE`, `RECONCILIATION`, `00-OVERVIEW`,
+`05-MECHANICS`, `19-…`, `NEXT_STEPS`, `GLM_INVESTIGATION`), and six older run docs' title-block
+claims are tagged *historical: at that time* instead of rewritten. Attribution: the packing is
+jazivxt's and de Winter's; this run adds the independent exact verification and the render.
+
+**Diagnosis.** `crystal_domains` decides, in `Decimal` at 50 digits, classes (mod pi/2), contacts
+(clearance ≤ `1e-9`, edge vs corner by tight-axis count), grain boundaries, domains, same-class
+sub-domains and the `3m - 3` rigidity count. The top-room rows are **polycrystals**: 2–9 orientation
+classes, 6–35 grain contacts, one connected network (n = 86 and 88 have two domains). n = 72 is the
+control — one class, 239 contacts, zero grain contacts, the `8 x 9` grid, which only ties the grid.
+Edge contacts are **0.43–0.62** of `3m - 3`, so no row is rigid by counting. `L²/n = 1.11–1.37`, and
+the 51 room rows hold `3.72277` of geometric slack against `1.09584` of booked room: **the room is
+29 % of the distance to a zero-waste pose**.
+
+**Twin constructor.** Two rigid blocks of unit cells, B rotated by a rational spinor
+`tan(θ/2) = p/q` (so `cos, sin` are rational) and placed `a2 + g` above A: zero overlap by
+construction, exact SAT as an independent gate. **935{,}520 candidates** (12 spinors × 5 gaps ×
+every integer split × 14 rows). Result: the best side is always an integer equal to `ceil(√n)`, and
+the optimiser always picks `p/q = 1/1` — the degenerate 90° "twin", i.e. two plain grids. **Theorem:**
+for two blocks glued along a straight line, `n ≤ max(a1,b1)(a2+b2)` forces `L ≥ ceil(√n)`, so the
+family can at best tie the grid and is provably dominated on all 554 beating rows. One strict
+improvement at n = 72 (`1.78e-9`, score `2.47e-11`) is our own frame padding and sits below the C2
+noise floor: **refused, 0 promotions.**
+
+**Verdict.** +`6.2837e-4` delivered, 0 from the constructor, and a structural statement worth more
+than the search: butted blocks cannot help; the next instrument must build an *interleaved*
+commensurate interface (doc 97 §4).
+Checks: `crystal_domains --selftest` 4; `twin_boundary --selftest` 5; `import_n090 --selftest` 5;
+`pub_bounds_check --selftest` 4; `glm_plan --selftest` 5; `witt_octad --selftest` 5; full guard set
+green; `sqscore` **22.217428576** (554/446); `record_guard` OK; `glm_wheels --audit` **684
+functions, 0 offenders**; `py_compile` OK.
+
+no row changed |

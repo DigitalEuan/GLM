@@ -9,7 +9,7 @@ Two things are wrong with `workspace/submission/table.json` as it stands:
      357 of the 1000 rows are stale by more than `1e-9`, the largest by `9.0e-2`.
   2. **that is where 22.645990612927686 comes from.** The repo's own formula
      `score = sum L/sqrt(n) - 1` over the *table's* L gives `22.645990612927686`; over the
-     CSV's true sides it gives `22.218056945`, the delivered number. The gap is not a
+     CSV's true sides it gives `22.217428576`, the delivered number. The gap is not a
      discrepancy in the scoring — it is the accumulated snapping error,
      `sum (L_table - L_true)/sqrt(n) = 0.427933668...`.
 

@@ -6,7 +6,7 @@ Run 72 left n = 9 open in `(2, 3]`: the declared-axis LP gave constructions, and
 could certify stopped at n = 4. This run was meant to settle that one row. It settles **every** row,
 by an argument, and the argument turns out to explain the whole 1000-row score.
 
-No row of the table changed. The delivered total is still `22.218056945`, 553 beats, and
+No row of the table changed. The delivered total is still `22.218056945` *(historical: at that time)*, 553 beats, and
 `sqscore.guard()` holds.
 
 ## 1. The answer to the question as asked

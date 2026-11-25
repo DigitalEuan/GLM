@@ -5,7 +5,7 @@ Two cards were drafted for the cent compiler: a Target Operation Contract
 (`cent-mechanism/1`, `t1-dislocation-glide`). This record checks the figures they
 lean on against our ledgers, implements the mechanism they specify, and reports
 what it earned. Nothing here changes a row: the delivered total is still
-`22.218056945`, 553 beats, and `sqscore.guard()` holds.
+`22.218056945`, 553 beats, and `sqscore.guard()` holds. *(Historical: at that time.)*
 
 ## 1. What the cards ask for
 

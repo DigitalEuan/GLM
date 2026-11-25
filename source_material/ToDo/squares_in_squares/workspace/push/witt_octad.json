@@ -1,0 +1,112 @@
+{
+ "vocabulary_classes": 79,
+ "structured_rows": 596,
+ "exact_contact_edges": 0,
+ "near_contact_edges": 13,
+ "tau": 0.02,
+ "contact_exact": {
+  "graph": "contact_exact",
+  "vertices": 64,
+  "edges": 0,
+  "degrees_top": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "clique_number": 1,
+  "clique_example_deg": [
+   0.0
+  ],
+  "octads_in_top24": 0,
+  "axiom": {
+   "points": 24,
+   "blocks": 0,
+   "fives": 0,
+   "fives_required": 42504,
+   "min": 0,
+   "max": 0,
+   "exactly_one": false
+  },
+  "top24": 24
+ },
+ "contact_near": {
+  "graph": "contact_near",
+  "vertices": 64,
+  "edges": 13,
+  "degrees_top": [
+   2,
+   2,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "clique_number": 3,
+  "clique_example_deg": [
+   44.5635,
+   45.045,
+   45.4366
+  ],
+  "octads_in_top24": 0,
+  "axiom": {
+   "points": 24,
+   "blocks": 0,
+   "fives": 0,
+   "fives_required": 42504,
+   "min": 0,
+   "max": 0,
+   "exactly_one": false
+  },
+  "top24": 24
+ },
+ "cooccurrence": {
+  "graph": "cooccurrence",
+  "vertices": 79,
+  "edges": 138,
+  "degrees_top": [
+   78,
+   9,
+   4,
+   4,
+   3,
+   3,
+   3,
+   3
+  ],
+  "clique_number": 4,
+  "clique_example_deg": [
+   0.0,
+   43.6054,
+   53.8722,
+   43.9131
+  ],
+  "octads_in_top24": 0,
+  "axiom": {
+   "points": 24,
+   "blocks": 0,
+   "fives": 0,
+   "fives_required": 42504,
+   "min": 0,
+   "max": 0,
+   "exactly_one": false
+  },
+  "top24": 24
+ },
+ "cooccurrence_all": {
+  "points": 24,
+  "fives_required": 42504,
+  "fives_covered": 15,
+  "min": 1,
+  "max": 12,
+  "exactly_one": 13,
+  "mean": 1.8
+ },
+ "verdict": "FAIL (structural). Exact contacts between *different* classes number 0: every exact contact in the structured poses is same-class, so that graph has clique number 1. At near-contact tau=2e-2 the graph has |V|=64, |E|=13, clique number 3 < 8 -> 0 octads, 5-subset multiplicities 0..0. The co-occurrence graph has clique number 4 (per-pose class sets), 0 8-cliques in the top-24 classes, 5-subsets 0/42504. No S(5,8,24) design acts on either graph: the octad axiom is not met, it is not even testable at 8 points per block."
+}

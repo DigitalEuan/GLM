@@ -162,7 +162,7 @@ would have to be full at the row's own count; nothing in this run produces one, 
 
 ## 5. Verdict
 
-**Nothing promoted.** `submission.csv` and root `WHITEBOARD.md` are untouched; the score is `22.218056945` with
+**Nothing promoted.** `submission.csv` and root `WHITEBOARD.md` are untouched; the score is `22.218056945` with *(historical: at that time.)*
 553 beats and 447 unbeaten rows, exactly as delivered. The extension gain is recorded in the unscored range only
 (11 certified sides; 3 rows move tie → beaten), which is C4 material, not C2.
 

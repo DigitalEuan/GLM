@@ -739,3 +739,5 @@ python3 scripts/record_guard.py                 # OK
 
 **In flight.** Nothing half-written. The two-word builder of §6 is named and unbuilt; the 424
 continuous rows are measured and unclaimed.
+
+*Last altered 25 November 2026 (the Squares in Squares row 90 promoted: 22.217429 working against 22.642387 documented — the project's exact rational n = 90 certificate re-verified in exact `Fraction` arithmetic, inflated by 1e-9 and written with a rounding proof, 22.218056945 → 22.217428576 with 554 beats; and the twin-crystal constructor's butted two-block family proved unable to beat the grid, doc 97).*
