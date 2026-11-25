@@ -3696,3 +3696,60 @@ controls**; `structure --control` and `--check-solver`; `perturb`, `anchor_chain
 selftests; `sqscore` **22.218056945**, 553 beats, 447 grid; `record_guard` OK; `glm_wheels --audit` **684
 functions, 0 offenders**; `py_compile` OK; `submission.csv` and `WHITEBOARD.md` untouched. Doc 88 (new); records
 `workspace/push/p_screen129.json` and `p_screen129_confirm.json`.
+
+## Run 130 — the full range, score leverage, and a constructed pocket net: no candidate
+
+**Request.** Audit the whole row range (including `n > 1000`) and rank every unbeaten row by the marginal score
+a unit of side buys, so budget goes to high-leverage rows instead of uniform spacing; then build a structurally
+lower-residual arrangement (doc 88 §7) on the top-ranked rows with the exact-field/primitives, measuring its
+pre-relaxation side and residual `p` against the `p < gain/L` bar; then log it in doc 89 and keep every guard
+and control green.
+
+**The range.** `submission.csv` is 500,500 square entries over **1,000 rows, `n = 1..1000`** — the scored range,
+and `sqscore.guard()` asserts 1,000 rows. `json/extended_table_5000.json` measures **`n = 1001..5000`** (4,000
+rows), and doc 08 constructs designs to 9,900; nothing above 9,900 is measured. Unbeaten rows: **447 scored
+(31 area-optimal `n = k^2`, 416 with room) and 3,195 in the extension (39 / 3,156)** — 3,642 of the 5,000 rows
+measured, and 79.9 % of the extension against 44.7 % of the scored window.
+
+**Leverage.** `d(score)/dL = -1/sqrt n`, so the row weight is `sqscore.marginal(n) = 1/sqrt n`. The top 20 rows
+by that weight hold **2.013853 of the 416 scored rows' 7.195366 ceiling — 28.0 %**; but nine of the 20 are
+**proved optimal** (`s(2)=s(3)=2`, `s(6..9)=3`, `s(14)=s(15)=4`, `s(24)=5`, `s(35)=6`) and hold **1.124859 =
+55.9 %** of that top-20 room. The band price recomputed from the rows (frontier `m*` = largest beaten row of the
+band) reproduces doc 75 — `k=32` `V=25.119` `d=+0.119`, `k=23` `19.530/+0.530`, `k=5` `-0.131` — and the
+intersection of high leverage, area-affordable price and open status is exactly **`n = 20..23`** (band 5,
+`d = -0.131`) and then **`n = 12, 13`** (band 4, `+0.032`). Above 1000 the price is not merely negative but
+enormous (`k=33` **-28.08**, `k=36` -22.10): the extension's frontiers spend a third of their void budget where
+the scored frontiers spend 87-99.9 %.
+
+**The construction.** The four-corner pocket net, in `Q(sqrt 2)`: an `a x a` upright block in each corner and
+one 45-degree cell at the centre, contacts exact, `L = 2a + sqrt2/2`, `n = 4a^2+1`, beating the grid by exactly
+`1 - sqrt2/2 = 0.292893` with `p = 0`. At `a = 1` it is `2 + sqrt2/2 = s(5)`, the *proved* optimum — the
+control is a theorem, not a plausibility check. It is **rigid**: over 384 `(a,b,p)` candidates the arithmetic
+beats the grid 12 times and the exact constraint set admits **8**, all `p=1, a=b, n ≡ 1 (mod 4)` — the diagonal
+pair forces equal corners, containment forces `p/sqrt2 <= a`, and then `L < k` needs `p < sqrt2`. Its density
+deficit is `2 sqrt2 a - 1/2 ~ 2.83a` cells, so at `k=32` it gives up 41.9 cells to save 0.2929 of side.
+
+**Against the tables.** Over the 35 rows `n = 4a^2+1 <= 5000`: the family is **never** better in the scored
+range (the table beats it on 14 of its 15 rows by 0.032-0.186) and **better on 11 extension rows** by
+0.042-0.293 (median 0.234) — e.g. `n = 1157` 34.970563 -> 34.707107. Unscored, so nothing is promoted; what it
+shows is that the extension's sides are not tight, consistent with its -28 void price.
+
+**The residual measurement.** Built at the row's own count (windmill + wall-to-wall columns) and measured at
+`L_t = k - 1/8`: `p = sqrt2/2 + 1/8 + (columns-1)` exactly — a **constant**, while the bar `(1/8)/L_t` falls
+like `1/L`. So `p/bar` is **19.1x** at `k=3` (n=6,7), 32.4x at `k=5` (n=20,21), 87.8x at `k=4` (n=12,13) and
+**722.2x** at `k=32` (n=1001-1024). The exact anchor grammar was measured too, and reported as a limitation:
+`settle(6, 3)` builds 6/6 in 8.9 s, `settle(6, 2.99)` reaches 5/6 at a 60-node cap in 36.3 s, and `settle(10,
+3)` does not close in 300 nodes / 120 s.
+
+**Verdict.** No candidate; `submission.csv` and root `WHITEBOARD.md` untouched; score `22.218056945`, 553 beats,
+447 unbeaten rows, unchanged. The budget answer is `n = 20..23` then `12, 13`; the construction answer is that a
+closed-form exact-contact family pays at one count per band and nowhere else.
+
+**Checks.** `range_leverage --selftest` **5 controls** (score re-derived from `table.json`'s L strings, 553/447,
+`ceiling = 0` exactly at `n = 4, 100, 961`, strict monotonicity of `1/sqrt n`, doc 75's band price reproduced);
+`construct_seam --selftest` **4 controls** (`windmill(1) = s(5)` with `exact_gate` worst penetration 0, refusal
+at `L - 1/100` with exact overflow `1/100`, 8/384 rigidity, row 5 equal to the pad); `p_screen --selftest` 4;
+`legal_slide --selftest` 8; `structure --control`, `--check-solver`; `perturb`, `anchor_chain`, `void_insert`,
+`true_geom`; `sqscore` **22.218056945** (553 / 447); `record_guard` OK; `glm_wheels --audit` **684 functions, 0
+offenders**; `py_compile` OK. Doc 89 (new); records `workspace/push/range_leverage130.json` and
+`construct_seam130.json`.
