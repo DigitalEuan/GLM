@@ -4532,3 +4532,28 @@ already returned 0 in 949,243 trials) searches 183 (row, side) windows and **124
 `r` grows and the block beds more of the carrier, so the count surface grows without the side
 falling. No candidate, so **C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md`
 untouched; the delivered total stands at **22.217428576** (554 beats, 446 grid ties).
+
+**Run 148 (2026-11-26) — the carrier's ceiling: the whole surface swept, and the block's position
+spent.** Runs 145–147 *visited* the block-bedded carrier (19/110 reproduced, then 949,243 and 124,176
+trials, 0 beats). The count is a **step function of the side** — each carrier cell is bedded on one open
+interval of sides, so `D(L)` is a finite step function — so the family's whole `(side, count)` surface
+can be swept once, exactly, instead of probed per row: `carrier_ceil.py` puts every endpoint in
+`(m + n√2)/4` with integer `m, n` and orders them with the integer sign test, so the sweep names no
+tolerance. **At `n ≤ 100` (25,935 declarations, `K ≤ 10`, `p+q ≤ 14`, sides `< 10.5`) the family reaches
+98 of 100 counts, ties 16 rows exactly (20, 30, 40, 42, 56, 57, 58, 65, 72–74, 89, 91–94) and beats
+none**; the falsifier — 49 proved-optimal rows, which no legal pose can beat — **fires on nothing**. At
+`n ≤ 225` (213,150 declarations, `K ≤ 15`, `p+q ≤ 21`) it reaches 129 of 225 counts, **ties 24 rows
+(…, 101, 111–114, 116, 117, 124) and beats none**, with 96 counts never attained at all and 57 rows
+sitting above their delivered side by a measured deficit (`n = 28` by `0.003983`, `n = 90` by
+`0.005961`, `n = 12` by `√2 − 1`). **Band 5 is answered inside the map**: with `L < 5` the block must fit
+(`p+q ≤ 7`) and `K = 4` needs `p·q − D = 4`, and the family's least side at 20 is exactly
+`5.000000000000` — the tie, not a beat. Then the family's **last unspent parameter, the block's
+position**, is spent on the seven open (non-proved) tie rows `12, 20, 30, 42, 56, 72, 91`: 40 sides ×
+7×7 offsets × every `(K, split, shape)` = **421,713 declarations, 0 nominations**, with every proved row
+refused before any geometry is looked at. The reason is structural: a beat needs `K ≤ k−1` and `L < k`,
+so the seam gap is under one unit and the block always beds cells — the least bed slides down only to
+2, 3, 4, 5, 7, 7, 10 as `k` grows, while the count law's cheapest declaration asks for **0**. Two facts
+forbid a shortcut: the reachable bed is **not an interval** (a symmetric declaration takes only even
+values, `{8, 10, 12}`) and it **steps by up to 4**, so offsets must be enumerated, not bisected.
+**No candidate, so C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched; the
+delivered total stands at **22.217428576** (554 beats, 446 grid ties). Doc 105.

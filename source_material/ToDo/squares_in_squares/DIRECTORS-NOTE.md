@@ -157,7 +157,21 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    `seam_carrier` (a gated pose counted without its count), `shared_box` (accepted on overlaps alone,
    and a `beats_family` count with **no pose built**), `motif_wheels` (a state gated without carrying
    `n` cells), `ext_census` (a side written without the pose's count) — all repaired, **no published
-   number moved**. The rational-`b` side law is the direction left.
+   number moved**.    The rational-`b` side law is the direction left.
+   **Run 148 has now swept the family instead of probing it** (`carrier_ceil.py`, doc 105). The count
+   is a step function of the side (each carrier cell is bedded on one open interval of sides), so the
+   whole `(side, count)` surface is a finite union of open intervals, computable exactly: **0 beats in
+   25,935 declarations at `n ≤ 100`** (16 rows tied exactly: 20, 30, 40, 42, 56–58, 65, 72–74, 89,
+   91–94) **and 0 in 213,150 at `n ≤ 225`** (24 tied), with the **falsifier silent on all 48 proved
+   rows in scope** — the strongest available check, since a proved optimum cannot be beaten. The
+   family's last unspent parameter, the **block's position**, is then spent on the seven open tie rows
+   (`12, 20, 30, 42, 56, 72, 91`): **421,713 declarations over 40 sides × 7×7 offsets, 0 nominations**.
+   The reason is structural, not budgetary: a beat needs `K ≤ k−1` and `L < k`, so the seam gap is under
+   one unit and the block always beds cells — the least bed reachable grows as 2, 3, 4, 5, 7, 7, 10 with
+   `k`, while the count law's cheapest declaration asks for `0`. And the bed is **not** an interval (a
+   symmetric declaration takes only even values) and **steps by up to 4**, so no interpolation or
+   bisection on it is sound. **The carrier line is closed**: it explains the table (24 ties) and cannot
+   move it, at any split, any shape, any `r` (run 147) and any position.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the
