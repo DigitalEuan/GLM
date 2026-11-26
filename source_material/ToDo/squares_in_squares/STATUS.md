@@ -791,3 +791,27 @@ gate now **authorises a sweep**, and its question is fixed: can the family reach
 side **below** the delivered one? **No sweep ran in this visit. Nothing promoted:** `submission.csv`
 and root `WHITEBOARD.md` untouched; the delivered total stands at **22.217428576** (554 beats, 446
 ties).
+
+**Corrected in run 146.** That 48 was a counting defect, not a result: `split_counts` compared offset
+windows against absolute positions and took the near end of the second run instead of the far end, and
+the entry test never compared the gated pose's count with `n`. With the counter fixed the family
+reproduces **19 of 110 — one short of the 20-row entry gate, a FAIL**. All 19 are symmetric
+declarations (`kx = ky = K/2`) with square blocks; 63 in-group rows have no declaration at their
+count; the "45 asymmetric hits" do not exist. Doc 102 §8.
+
+**Run 146 (2026-11-26) — the beat probe: 0 beats, and the 48 was a counting defect.** The probe run
+145's gate was meant to authorise found the defect it would have been built on: `split_counts`
+compared offset windows against absolute positions and took the near end of the second run, and the
+entry test never compared a gated pose's count with `n`, so run 145's 48 "reproductions" all have
+`family_n != n`. Repaired (shift, slice, `r["n"] == n`, and control 9 over *every* split), the entry
+test is **19/110 — a FAIL by one row**, every hit a symmetric `K = 2k`, `kx = ky = k` declaration with
+a square block. The probe itself is `beat_probe.py` (doc 103): for every one of the 110 rows, every
+side in `[√n, L_del)`, every `K` with `K*K ≥ n − p*q`, every shape with `p*q ≤ 330` inside the box and
+**every split** — **910** windows, **949,243** trials, exact integer count table, gate on every count
+match — gives **0 count matches, 0 refusals, 0 beats in 23 minutes**. A beat is arithmetically
+unreachable for this family, and the sensitivity control (the same search with the delivered side
+allowed) re-finds **19/19** ties at exactly their side, so the null is a measurement. **The family
+only explains the table — 19 of 110 tied, 0 beaten.** No candidate, so **C1–C4 was not entered**;
+`submission.csv` and root `WHITEBOARD.md` untouched; the delivered total stands at **22.217428576**
+(554 beats, 446 ties). Next: `r` runs per axis (same law, bigger count surface, priced by this probe)
+and a rational-`b` side law for the 28 out-of-group rows. **Do not sweep this family.**

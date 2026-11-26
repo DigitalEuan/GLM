@@ -4426,7 +4426,7 @@ Checks: `seam_carrier --selftest` 9; `seam_carrier` entry test 2/110 (fail) + le
 
 no row changed |
 
-## Run 145 — 2026-11-26 — the block-bedded carrier: runs disjoint by law, 48 of 110
+## Run 145 — 2026-11-26 — the block-bedded carrier: runs disjoint by law, 48 *(retracted in run 146: the true number is 19/110, a FAIL — see doc 102 §8)*
 
 Doc 101 §6 closed run 144 with one instruction: the next carrier must be sparse **by construction** —
 translates disjoint by a law, not by a drop rule — because run 144's notched *product* could share
@@ -4461,4 +4461,44 @@ table" but "can it reach a row's count at a side below the delivered one" — th
 (`K ≈ √n`) and the independent splits cost one pass per `(K, kx)`, ~1.5 s per row at n ≈ 900. **No
 sweep ran in this visit; nothing promoted**: `submission.csv` and root `WHITEBOARD.md` untouched, the
 delivered total stands at **22.217428576** (554 beats, 446 ties). Doc 102.
+
+
+## Run 146 — 2026-11-26 — the beat probe: 0 beats in 949,243 trials, and the 48 was a counting defect
+
+The probe run 145's entry test was supposed to authorise ran before it was authorised, because the
+first thing it needed was a counter, and the counter was wrong. `split_counts` — the table that gives
+the bed's `D` for every y split from one x pass — compared its *offset* windows (relative to the box
+centre) against *absolute* y positions, and took the near end of the second run (`cb[:K-ky]`) where
+the runs anchor at `0` and at `L` and the far end (`cb[ky:]`) is the one a split uses. Either defect
+alone changes the count. The entry test used that table only as a filter and then gated the survivor
+— but it never compared the gated pose's count with `n`, so 48 declarations that the wrong filter
+admitted, and that the gate passed (the gate decides disjointness, not the count), were counted as
+reproductions. **All 48 of run 145's "reproductions" have `family_n != n`; the ledger's own field says
+so.** Repaired: `split_counts` shifts and slices correctly, a hit now requires `r["ok"] and r["n"] == n`,
+and control 9 compares the split table with `bed_count` on *every* split of four declarations instead
+of on one — the check whose absence let the defect through. **The corrected entry test is 19/110, one
+short of the 20-row gate: a FAIL.** Every one of the 19 is a **symmetric** declaration (`kx = ky =
+K/2`, `K = 2k`) with a **square** block (`1×1, 4×4, 5×5, 7×7, 8×8, 11×11, 15×15, 18×18`), i.e. the
+family reproduces the delivered table exactly where the delivered pose is x–y symmetric — the "45
+asymmetric hits" do not exist, and the free split is not the decisive parameter. Doc 102 §8.
+
+**The probe itself answers the question the defect was standing in front of.** A beat needs a legal
+pose of the row's `n` at a side strictly below the delivered one; every cell has area 1, so `L*L >= n`
+leaves only the window `[√n, L_del)`, and the count law `n = K*K − D + p*q` pins `K` to `√n ± 4`.
+`beat_probe.py` (new, doc 103) searches exactly that: **910** (row, side) windows over the 110 rows,
+**949,243** `(side, K, shape)` trials — every shape with `p*q ≤ 330` whose bbox fits the box, and
+**every split** `1 ≤ kx, ky ≤ K−1` — with an exact integer table `O(K²)` per shape (comparisons in
+`(A + B√2)/4`, a rounded key only to find the boundary, `_sgn` to walk it). A split whose count equals
+`K*K + pq − n` is rebuilt by `block_bed.check` and gated; a hit requires `r["n"] == n`. **Result, in
+23 minutes: 0 count matches, 0 gate refusals, 0 beats.** Not one declaration reaches a delivered count
+below its delivered side, so there was nothing for the gate to refuse — the wall is arithmetic, not
+geometry. **The sensitivity control is what makes the null mean something**: the identical search with
+the delivered side *included* re-finds **19 / 19** ties at exactly their delivered side and never
+below (same declarations as the entry test), so the search can find a tie and finds none lower.
+**The family only explains the table — 19 of 110 rows tied, 0 beaten — and only its symmetric part.**
+No candidate, so **C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched; the
+delivered total stands at **22.217428576** (554 beats, 446 ties). Doc 103. **What this redirects:**
+more translates per axis (`r` runs, `r−1` positive gaps — the law and the bed rule survive unchanged
+and this probe prices them), and a finer side law `a + b√2` for the 28 out-of-group rows. **Do not
+sweep this family:** its reach is 19 ties and none of its parameters moves a side down.
 

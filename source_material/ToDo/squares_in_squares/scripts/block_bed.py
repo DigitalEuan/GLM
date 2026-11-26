@@ -177,21 +177,28 @@ def split_counts(windows, L: Q2, K: int):
 
     The y positions a split can use are always drawn from the two full families
     `0.5 + i` (run 1) and `L - K + 0.5 + j` (run 2), so the number of x windows containing
-    each of those `2K` positions decides the bed for *every* split at once:
-    `D(ky) = sum(ca[:ky]) + sum(cb[:K-ky])`.  That is the whole reason the two axes' splits
-    can be searched independently at a cost of one pass, not one pass per split.
+    each of those `2K` positions decides the bed for *every* split at once.  Run 1 of a split
+    `ky` is the *first* `ky` positions and run 2 is the **last** `K-ky` (the runs are anchored
+    at `0` and at `L`), so `D(ky) = sum(ca[:ky]) + sum(cb[ky:])`.  That is the whole reason the
+    two axes' splits can be searched independently at a cost of one pass, not one per split.
+
+    The windows are in *offsets* from the box centre (see `dy_window`), so every comparison
+    shifts them by `L/2`; comparing an offset window against an absolute position silently
+    answers a different question, and control 9 compares this counter with `bed_count` on
+    every split of four declarations for exactly that reason.
     """
+    c = L * HALF
     A = [HALF + Q2(i) for i in range(K)]
     B = [L - Q2(K) + HALF + Q2(i) for i in range(K)]
-    ca = [sum(1 for lo, hi in windows if lo < y < hi) for y in A]
-    cb = [sum(1 for lo, hi in windows if lo < y < hi) for y in B]
+    ca = [sum(1 for lo, hi in windows if c + lo < y < c + hi) for y in A]
+    cb = [sum(1 for lo, hi in windows if c + lo < y < c + hi) for y in B]
     pa = [0]
     for v in ca:
         pa.append(pa[-1] + v)
     pb = [0]
     for v in cb:
         pb.append(pb[-1] + v)
-    return {ky: pa[ky] + pb[K - ky] for ky in range(1, K)}
+    return {ky: pa[ky] + (pb[K] - pb[ky]) for ky in range(1, K)}
 
 
 def count_windows(windows, ys, L: Q2) -> int:
@@ -404,7 +411,7 @@ def entry_test(verbose: bool = True) -> dict:
                             continue
                         counted += 1
                         r = check(a, s, K, kx, ky, p, q, stop=True)
-                        if r["ok"]:
+                        if r["ok"] and r["n"] == n:
                             solved = ((K, kx, ky, p, q), r)
                             break
                         refused += 1
@@ -576,7 +583,16 @@ def selftest() -> int:
         raw = Q.gate(kept + blk, [AXIS] * len(kept) + [W45] * len(blk))
         assert r["ok"] == (bool(raw["ok"]) and r["contained"] and r["span"]), \
             (a, s, K, kx, ky, p, q)
+        # the split table is a second counter: it must agree with `bed_count` on *every*
+        # split, not just the one that built the pose (this is the control that catches an
+        # unshifted window, the defect that made all 48 first-pass reproductions wrong)
+        wins, _L, _g = bed_profile(a, s, K, kx, p, q)
+        Ds = split_counts(wins, L, K)
+        for ky2 in range(1, K):
+            _p, D2, _l = bed_count(a, s, K, kx, ky2, p, q)
+            assert Ds[ky2] == D2, (a, s, K, kx, ky2, p, q, Ds[ky2], D2)
         print(f"  9.{a}.{s}.{K}.{kx}.{ky}.{p}x{q} counter D = {D} = assemble's drops, "
+              f"split table agrees on all {K - 1} y splits, "
               f"check ok = {r['ok']} = the raw gate's verdict")
 
     # 10. the family rebuilds the delivered pose, not merely its numbers: for three rows the

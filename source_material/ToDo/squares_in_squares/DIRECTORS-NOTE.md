@@ -124,21 +124,30 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    and refuses all five, so the refusal is the family's and not a one-bar-size artefact. The
    next carrier must be sparse **by construction** (disjoint translates by a law) or the notch must gain
    authority over carrier-carrier overlap with a count-preserving repair.
-   **Run 145 has now built that carrier and passed its entry test** (`block_bed.py`, doc 102): the
+   **Run 145 built that carrier; its entry test FAILS at 19 of 110** (`block_bed.py`, doc 102) — one
+   short of the 20-row gate. (Run 145 first claimed 48/110 PASS; that was a counting defect —
+   a split table that did not shift its windows and took the wrong end of run 2, plus an entry test
+   that never compared the gated pose's count with `n` — retracted in run 146, doc 102 §8.) The
    two runs of each axis are separated by a **positive gap** `g = L − K > 0` instead of an interlock,
    so carrier–carrier overlap is impossible by arithmetic — for any gap and any split — and the two
    axes' splits are **independent** (`kx ≠ ky` is the general case); the tilted class is a **centred
    p×q block** and a carrier cell is dropped iff its interior meets the block, one four-inequality SAT
    against the whole block rather than a pair scan. **10 controls**, **22** float-free decision
    functions, fill **0.68–0.91 < 1** (carrier **0.40–0.55**), domains axis **4** / tilt **1**. The
-   entry test runs first and **passes: 48 of 110** delivered two-class `(n, side)` pairs reproduced
-   (threshold 20) with **0 gate refusals**; **45 of the 48 need `kx ≠ ky`** (the symmetric family
-   reaches 19), so the split is the decisive parameter. What remains is arithmetic, not geometry:
-   **28** rows are outside the side group `a + (s/2)√2` and **34** are inside it with no declaration
-   at their count (four carrier translates against the delivered classes' 4–54). **The sweep is now
-   authorised**, and its question is fixed: not "can the family rebuild the table" but "can it reach a
-   row's count at a side below the delivered one" — the count law prunes it to `K ≈ √n` and the
-   independent splits cost one pass per `(K, kx)`, ~1.5 s per row at n ≈ 900.
+   entry test reaches **19 of 110** delivered two-class `(n, side)` pairs (threshold 20) with **0 gate
+   refusals**, and every hit is a **symmetric** declaration (`kx = ky = K/2`) with a square block: the
+   family reproduces the table exactly where the table is symmetric, and the free split is not the
+   decisive parameter — the **count** is. What remains is arithmetic, not geometry: **28** rows are
+   outside the side group `a + (s/2)√2` and **63** are inside it with no declaration at their count.
+   **No sweep is authorised** (19 < 20); the question a sweep would ask — "can it reach a row's count
+   at a side below the delivered one" — is instead put directly to the family by the beat probe of
+   run 146 (doc 103), because the area bound `L*L >= n` collapses the side axis to the window
+   `[√n, L_del)` and turns the sweep into a visit. **Run 146 ran that probe: 0 beats in 949,243
+   (side, K, shape) trials over all 110 rows, with the sensitivity control re-finding 19/19 ties at
+   their own sides.** So the family only explains the table — 19 tied, 0 beaten — and no parameter of
+   it moves a side down: **do not sweep it.** The two directions the probe prices are `r` runs per axis
+   (same disjointness law, `r − 1` gaps, a bigger count surface) and a rational-`b` side law `a + b√2`
+   for the 28 rows outside the halves group.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

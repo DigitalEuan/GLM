@@ -6,14 +6,14 @@
  "max_m": 330,
  "entry_test": {
   "rows": 110,
-  "reproduced": 48,
+  "reproduced": 19,
   "threshold": 20,
-  "passes": true,
+  "passes": false,
   "max_k": 34,
   "max_seam": 30,
   "max_m": 330,
   "exact_rows": 82,
-  "count_matched": 48,
+  "count_matched": 19,
   "refused": 0,
   "detail": [
    {
@@ -22,12 +22,23 @@
     "grid": 3,
     "m_hint": 1,
     "exact": true,
-    "count_matched": false,
+    "count_matched": true,
     "refused": 0,
     "a": 2,
     "s": 1,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
+    "reproduced": true,
+    "params": [
+     2,
+     1,
+     1,
+     1,
+     1
+    ],
+    "family_L": "2 + 1/2\u221a2",
+    "family_n": 5,
+    "dropped": 0,
+    "carrier": 4,
+    "contacts": 4
    },
    {
     "n": 10,
@@ -136,16 +147,16 @@
     "reproduced": true,
     "params": [
      6,
-     2,
-     1,
+     3,
+     3,
      4,
      4
     ],
     "family_L": "4 + 2\u221a2",
-    "family_n": 34,
-    "dropped": 18,
-    "carrier": 18,
-    "contacts": 71
+    "family_n": 40,
+    "dropped": 12,
+    "carrier": 24,
+    "contacts": 98
    },
    {
     "n": 50,
@@ -199,12 +210,23 @@
     "grid": 9,
     "m_hint": 25,
     "exact": true,
-    "count_matched": false,
+    "count_matched": true,
     "refused": 0,
     "a": 5,
     "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
+    "reproduced": true,
+    "params": [
+     8,
+     4,
+     4,
+     5,
+     5
+    ],
+    "family_L": "5 + 5/2\u221a2",
+    "family_n": 65,
+    "dropped": 24,
+    "carrier": 40,
+    "contacts": 172
    },
    {
     "n": 66,
@@ -212,23 +234,12 @@
     "grid": 9,
     "m_hint": 24,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 3,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     8,
-     1,
-     7,
-     3,
-     8
-    ],
-    "family_L": "3 + 4\u221a2",
-    "family_n": 50,
-    "dropped": 38,
-    "carrier": 26,
-    "contacts": 98
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 67,
@@ -260,23 +271,12 @@
     "grid": 10,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 6,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     9,
-     3,
-     8,
-     5,
-     5
-    ],
-    "family_L": "6 + 5/2\u221a2",
-    "family_n": 74,
-    "dropped": 32,
-    "carrier": 49,
-    "contacts": 171
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 85,
@@ -301,17 +301,17 @@
     "s": 7,
     "reproduced": true,
     "params": [
-     9,
+     8,
      4,
-     7,
+     4,
      7,
      7
     ],
     "family_L": "5 + 7/2\u221a2",
-    "family_n": 85,
-    "dropped": 45,
-    "carrier": 36,
-    "contacts": 236
+    "family_n": 89,
+    "dropped": 24,
+    "carrier": 40,
+    "contacts": 256
    },
    {
     "n": 101,
@@ -319,12 +319,23 @@
     "grid": 11,
     "m_hint": 25,
     "exact": true,
-    "count_matched": false,
+    "count_matched": true,
     "refused": 0,
     "a": 7,
     "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
+    "reproduced": true,
+    "params": [
+     10,
+     5,
+     5,
+     5,
+     5
+    ],
+    "family_L": "7 + 5/2\u221a2",
+    "family_n": 101,
+    "dropped": 24,
+    "carrier": 76,
+    "contacts": 292
    },
    {
     "n": 104,
@@ -345,23 +356,12 @@
     "grid": 12,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 8,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     11,
-     4,
-     10,
-     5,
-     5
-    ],
-    "family_L": "8 + 5/2\u221a2",
-    "family_n": 112,
-    "dropped": 34,
-    "carrier": 87,
-    "contacts": 297
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 123,
@@ -386,17 +386,17 @@
     "s": 8,
     "reproduced": true,
     "params": [
-     9,
-     2,
-     1,
+     10,
+     5,
+     5,
      8,
      8
     ],
     "family_L": "6 + 4\u221a2",
-    "family_n": 97,
-    "dropped": 48,
-    "carrier": 33,
-    "contacts": 278
+    "family_n": 124,
+    "dropped": 40,
+    "carrier": 60,
+    "contacts": 378
    },
    {
     "n": 125,
@@ -428,12 +428,23 @@
     "grid": 13,
     "m_hint": 25,
     "exact": true,
-    "count_matched": false,
+    "count_matched": true,
     "refused": 0,
     "a": 9,
     "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
+    "reproduced": true,
+    "params": [
+     12,
+     6,
+     6,
+     5,
+     5
+    ],
+    "family_L": "9 + 5/2\u221a2",
+    "family_n": 145,
+    "dropped": 24,
+    "carrier": 120,
+    "contacts": 444
    },
    {
     "n": 147,
@@ -441,23 +452,12 @@
     "grid": 13,
     "m_hint": 64,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 7,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     10,
-     4,
-     1,
-     8,
-     8
-    ],
-    "family_L": "7 + 4\u221a2",
-    "family_n": 119,
-    "dropped": 45,
-    "carrier": 55,
-    "contacts": 337
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 148,
@@ -471,17 +471,17 @@
     "s": 8,
     "reproduced": true,
     "params": [
-     10,
-     5,
-     1,
+     12,
+     6,
+     6,
      8,
      8
     ],
     "family_L": "7 + 4\u221a2",
-    "family_n": 120,
-    "dropped": 44,
-    "carrier": 56,
-    "contacts": 340
+    "family_n": 148,
+    "dropped": 60,
+    "carrier": 84,
+    "contacts": 454
    },
    {
     "n": 149,
@@ -502,23 +502,12 @@
     "grid": 13,
     "m_hint": 66,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 5,
     "s": 11,
-    "reproduced": true,
-    "params": [
-     10,
-     3,
-     1,
-     6,
-     11
-    ],
-    "family_L": "5 + 11/2\u221a2",
-    "family_n": 117,
-    "dropped": 49,
-    "carrier": 51,
-    "contacts": 331
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 170,
@@ -526,23 +515,12 @@
     "grid": 14,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 10,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     13,
-     5,
-     12,
-     5,
-     5
-    ],
-    "family_L": "10 + 5/2\u221a2",
-    "family_n": 160,
-    "dropped": 34,
-    "carrier": 135,
-    "contacts": 460
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 173,
@@ -550,23 +528,12 @@
     "grid": 14,
     "m_hint": 64,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 8,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     13,
-     2,
-     11,
-     8,
-     8
-    ],
-    "family_L": "8 + 4\u221a2",
-    "family_n": 157,
-    "dropped": 76,
-    "carrier": 93,
-    "contacts": 430
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 174,
@@ -598,12 +565,23 @@
     "grid": 15,
     "m_hint": 25,
     "exact": true,
-    "count_matched": false,
+    "count_matched": true,
     "refused": 0,
     "a": 11,
     "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
+    "reproduced": true,
+    "params": [
+     14,
+     7,
+     7,
+     5,
+     5
+    ],
+    "family_L": "11 + 5/2\u221a2",
+    "family_n": 197,
+    "dropped": 24,
+    "carrier": 172,
+    "contacts": 628
    },
    {
     "n": 200,
@@ -618,16 +596,16 @@
     "reproduced": true,
     "params": [
      14,
-     6,
-     3,
-     4,
-     16
+     7,
+     7,
+     8,
+     8
     ],
     "family_L": "9 + 4\u221a2",
-    "family_n": 179,
-    "dropped": 81,
-    "carrier": 115,
-    "contacts": 512
+    "family_n": 200,
+    "dropped": 60,
+    "carrier": 136,
+    "contacts": 638
    },
    {
     "n": 201,
@@ -674,23 +652,12 @@
     "grid": 16,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 12,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     15,
-     6,
-     14,
-     5,
-     5
-    ],
-    "family_L": "12 + 5/2\u221a2",
-    "family_n": 216,
-    "dropped": 34,
-    "carrier": 191,
-    "contacts": 660
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 230,
@@ -729,16 +696,16 @@
     "reproduced": true,
     "params": [
      14,
-     1,
-     3,
+     7,
+     7,
      11,
      11
     ],
     "family_L": "8 + 11/2\u221a2",
-    "family_n": 201,
-    "dropped": 116,
-    "carrier": 80,
-    "contacts": 607
+    "family_n": 233,
+    "dropped": 84,
+    "carrier": 112,
+    "contacts": 760
    },
    {
     "n": 234,
@@ -757,12 +724,23 @@
     "grid": 17,
     "m_hint": 25,
     "exact": true,
-    "count_matched": false,
+    "count_matched": true,
     "refused": 0,
     "a": 13,
     "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
+    "reproduced": true,
+    "params": [
+     16,
+     8,
+     8,
+     5,
+     5
+    ],
+    "family_L": "13 + 5/2\u221a2",
+    "family_n": 257,
+    "dropped": 24,
+    "carrier": 232,
+    "contacts": 844
    },
    {
     "n": 262,
@@ -789,17 +767,17 @@
     "s": 11,
     "reproduced": true,
     "params": [
-     14,
-     4,
-     2,
+     16,
+     8,
+     8,
      11,
      11
     ],
     "family_L": "9 + 11/2\u221a2",
-    "family_n": 220,
-    "dropped": 97,
-    "carrier": 99,
-    "contacts": 681
+    "family_n": 265,
+    "dropped": 112,
+    "carrier": 144,
+    "contacts": 872
    },
    {
     "n": 290,
@@ -807,23 +785,12 @@
     "grid": 18,
     "m_hint": 50,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 14,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     17,
-     3,
-     2,
-     5,
-     10
-    ],
-    "family_L": "14 + 5/2\u221a2",
-    "family_n": 265,
-    "dropped": 74,
-    "carrier": 215,
-    "contacts": 798
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 291,
@@ -844,23 +811,12 @@
     "grid": 18,
     "m_hint": 120,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 12,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     14,
-     6,
-     1,
-     10,
-     12
-    ],
-    "family_L": "12 + 4\u221a2",
-    "family_n": 229,
-    "dropped": 87,
-    "carrier": 109,
-    "contacts": 694
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 295,
@@ -892,23 +848,12 @@
     "grid": 18,
     "m_hint": 121,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 10,
     "s": 11,
-    "reproduced": true,
-    "params": [
-     15,
-     1,
-     1,
-     11,
-     11
-    ],
-    "family_L": "10 + 11/2\u221a2",
-    "family_n": 226,
-    "dropped": 120,
-    "carrier": 105,
-    "contacts": 663
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 325,
@@ -916,23 +861,12 @@
     "grid": 19,
     "m_hint": 95,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 15,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     17,
-     12,
-     1,
-     5,
-     19
-    ],
-    "family_L": "15 + 5/2\u221a2",
-    "family_n": 276,
-    "dropped": 108,
-    "carrier": 181,
-    "contacts": 827
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 326,
@@ -940,23 +874,12 @@
     "grid": 19,
     "m_hint": 50,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 15,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     18,
-     10,
-     2,
-     5,
-     10
-    ],
-    "family_L": "15 + 5/2\u221a2",
-    "family_n": 307,
-    "dropped": 67,
-    "carrier": 257,
-    "contacts": 963
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 329,
@@ -964,23 +887,12 @@
     "grid": 19,
     "m_hint": 120,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 13,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     16,
-     6,
-     1,
-     6,
-     20
-    ],
-    "family_L": "13 + 4\u221a2",
-    "family_n": 264,
-    "dropped": 112,
-    "carrier": 144,
-    "contacts": 824
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 331,
@@ -1001,23 +913,12 @@
     "grid": 20,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 16,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     19,
-     8,
-     18,
-     5,
-     5
-    ],
-    "family_L": "16 + 5/2\u221a2",
-    "family_n": 352,
-    "dropped": 34,
-    "carrier": 327,
-    "contacts": 1156
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 363,
@@ -1025,23 +926,12 @@
     "grid": 20,
     "m_hint": 50,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 16,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     19,
-     1,
-     1,
-     2,
-     25
-    ],
-    "family_L": "16 + 5/2\u221a2",
-    "family_n": 339,
-    "dropped": 72,
-    "carrier": 289,
-    "contacts": 1028
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 366,
@@ -1049,23 +939,12 @@
     "grid": 20,
     "m_hint": 120,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 14,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     17,
-     4,
-     1,
-     8,
-     15
-    ],
-    "family_L": "14 + 4\u221a2",
-    "family_n": 295,
-    "dropped": 114,
-    "carrier": 175,
-    "contacts": 922
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 367,
@@ -1095,42 +974,18 @@
     "grid": 20,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 19,
     "s": 1,
-    "reproduced": true,
-    "params": [
-     19,
-     8,
-     1,
-     5,
-     5
-    ],
-    "family_L": "19 + 1/2\u221a2",
-    "family_n": 352,
-    "dropped": 34,
-    "carrier": 327,
-    "contacts": 1151
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 401,
     "target": "17 + 5/2\u221a2",
     "grid": 21,
     "m_hint": 25,
-    "exact": true,
-    "count_matched": false,
-    "refused": 0,
-    "a": 17,
-    "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
-   },
-   {
-    "n": 402,
-    "target": "17 + 5/2\u221a2",
-    "grid": 21,
-    "m_hint": 50,
     "exact": true,
     "count_matched": true,
     "refused": 0,
@@ -1139,16 +994,29 @@
     "reproduced": true,
     "params": [
      20,
-     11,
-     1,
-     2,
-     25
+     10,
+     10,
+     5,
+     5
     ],
     "family_L": "17 + 5/2\u221a2",
-    "family_n": 367,
-    "dropped": 83,
-    "carrier": 317,
-    "contacts": 1125
+    "family_n": 401,
+    "dropped": 24,
+    "carrier": 376,
+    "contacts": 1372
+   },
+   {
+    "n": 402,
+    "target": "17 + 5/2\u221a2",
+    "grid": 21,
+    "m_hint": 50,
+    "exact": true,
+    "count_matched": false,
+    "refused": 0,
+    "a": 17,
+    "s": 5,
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 407,
@@ -1180,23 +1048,12 @@
     "grid": 22,
     "m_hint": 25,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 18,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     21,
-     9,
-     20,
-     5,
-     5
-    ],
-    "family_L": "18 + 5/2\u221a2",
-    "family_n": 432,
-    "dropped": 34,
-    "carrier": 407,
-    "contacts": 1452
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 443,
@@ -1204,23 +1061,12 @@
     "grid": 22,
     "m_hint": 50,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 18,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     21,
-     8,
-     1,
-     2,
-     25
-    ],
-    "family_L": "18 + 5/2\u221a2",
-    "family_n": 414,
-    "dropped": 77,
-    "carrier": 364,
-    "contacts": 1280
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 448,
@@ -1252,19 +1098,6 @@
     "grid": 23,
     "m_hint": 25,
     "exact": true,
-    "count_matched": false,
-    "refused": 0,
-    "a": 19,
-    "s": 5,
-    "reproduced": false,
-    "why": "no declaration reaches this count"
-   },
-   {
-    "n": 486,
-    "target": "19 + 5/2\u221a2",
-    "grid": 23,
-    "m_hint": 50,
-    "exact": true,
     "count_matched": true,
     "refused": 0,
     "a": 19,
@@ -1272,16 +1105,29 @@
     "reproduced": true,
     "params": [
      22,
-     1,
-     1,
-     2,
-     25
+     11,
+     11,
+     5,
+     5
     ],
     "family_L": "19 + 5/2\u221a2",
-    "family_n": 460,
-    "dropped": 74,
-    "carrier": 410,
-    "contacts": 1436
+    "family_n": 485,
+    "dropped": 24,
+    "carrier": 460,
+    "contacts": 1684
+   },
+   {
+    "n": 486,
+    "target": "19 + 5/2\u221a2",
+    "grid": 23,
+    "m_hint": 50,
+    "exact": true,
+    "count_matched": false,
+    "refused": 0,
+    "a": 19,
+    "s": 5,
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 489,
@@ -1295,17 +1141,17 @@
     "s": 15,
     "reproduced": true,
     "params": [
-     18,
-     3,
-     1,
+     22,
+     11,
+     11,
      15,
      15
     ],
     "family_L": "12 + 15/2\u221a2",
-    "family_n": 371,
-    "dropped": 178,
-    "carrier": 146,
-    "contacts": 1207
+    "family_n": 489,
+    "dropped": 220,
+    "carrier": 264,
+    "contacts": 1696
    },
    {
     "n": 491,
@@ -1350,23 +1196,12 @@
     "grid": 24,
     "m_hint": 130,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 20,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     21,
-     8,
-     1,
-     10,
-     13
-    ],
-    "family_L": "20 + 5/2\u221a2",
-    "family_n": 438,
-    "dropped": 133,
-    "carrier": 308,
-    "contacts": 1430
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 531,
@@ -1374,23 +1209,12 @@
     "grid": 24,
     "m_hint": 50,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 20,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     23,
-     9,
-     1,
-     2,
-     25
-    ],
-    "family_L": "20 + 5/2\u221a2",
-    "family_n": 501,
-    "dropped": 78,
-    "carrier": 451,
-    "contacts": 1597
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 534,
@@ -1398,23 +1222,12 @@
     "grid": 24,
     "m_hint": 225,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 13,
     "s": 15,
-    "reproduced": true,
-    "params": [
-     20,
-     4,
-     2,
-     15,
-     15
-    ],
-    "family_L": "13 + 15/2\u221a2",
-    "family_n": 432,
-    "dropped": 193,
-    "carrier": 207,
-    "contacts": 1413
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 538,
@@ -1422,23 +1235,12 @@
     "grid": 24,
     "m_hint": 30,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 23,
     "s": 1,
-    "reproduced": true,
-    "params": [
-     23,
-     10,
-     1,
-     5,
-     6
-    ],
-    "family_L": "23 + 1/2\u221a2",
-    "family_n": 517,
-    "dropped": 42,
-    "carrier": 487,
-    "contacts": 1758
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 577,
@@ -1446,23 +1248,12 @@
     "grid": 25,
     "m_hint": 145,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 21,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     23,
-     10,
-     22,
-     5,
-     29
-    ],
-    "family_L": "21 + 5/2\u221a2",
-    "family_n": 509,
-    "dropped": 165,
-    "carrier": 364,
-    "contacts": 1663
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 578,
@@ -1470,23 +1261,12 @@
     "grid": 25,
     "m_hint": 50,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 21,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     24,
-     2,
-     1,
-     2,
-     25
-    ],
-    "family_L": "21 + 5/2\u221a2",
-    "family_n": 552,
-    "dropped": 74,
-    "carrier": 502,
-    "contacts": 1774
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 581,
@@ -1500,17 +1280,17 @@
     "s": 15,
     "reproduced": true,
     "params": [
-     21,
-     6,
-     2,
+     24,
+     12,
+     12,
      15,
      15
     ],
     "family_L": "14 + 15/2\u221a2",
-    "family_n": 478,
-    "dropped": 188,
-    "carrier": 253,
-    "contacts": 1587
+    "family_n": 581,
+    "dropped": 220,
+    "carrier": 356,
+    "contacts": 2040
    },
    {
     "n": 584,
@@ -1518,23 +1298,12 @@
     "grid": 25,
     "m_hint": 200,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 7,
     "s": 25,
-    "reproduced": true,
-    "params": [
-     21,
-     3,
-     1,
-     8,
-     25
-    ],
-    "family_L": "7 + 25/2\u221a2",
-    "family_n": 464,
-    "dropped": 177,
-    "carrier": 264,
-    "contacts": 1511
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 585,
@@ -1542,23 +1311,12 @@
     "grid": 25,
     "m_hint": 32,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 24,
     "s": 1,
-    "reproduced": true,
-    "params": [
-     24,
-     10,
-     1,
-     4,
-     8
-    ],
-    "family_L": "24 + 1/2\u221a2",
-    "family_n": 564,
-    "dropped": 44,
-    "carrier": 532,
-    "contacts": 1926
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 586,
@@ -1590,23 +1348,12 @@
     "grid": 26,
     "m_hint": 145,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 22,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     24,
-     2,
-     23,
-     5,
-     29
-    ],
-    "family_L": "22 + 5/2\u221a2",
-    "family_n": 544,
-    "dropped": 177,
-    "carrier": 399,
-    "contacts": 1746
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 634,
@@ -1646,17 +1393,17 @@
     "s": 18,
     "reproduced": true,
     "params": [
-     20,
-     8,
-     3,
+     24,
+     12,
+     12,
      18,
      18
     ],
     "family_L": "13 + 9\u221a2",
-    "family_n": 539,
-    "dropped": 185,
-    "carrier": 215,
-    "contacts": 1863
+    "family_n": 636,
+    "dropped": 264,
+    "carrier": 312,
+    "contacts": 2250
    },
    {
     "n": 677,
@@ -1688,23 +1435,12 @@
     "grid": 27,
     "m_hint": 323,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 14,
     "s": 18,
-    "reproduced": true,
-    "params": [
-     21,
-     2,
-     1,
-     17,
-     19
-    ],
-    "family_L": "14 + 9\u221a2",
-    "family_n": 492,
-    "dropped": 272,
-    "carrier": 169,
-    "contacts": 1635
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 688,
@@ -1718,17 +1454,17 @@
     "s": 18,
     "reproduced": true,
     "params": [
-     20,
-     8,
-     1,
+     26,
+     13,
+     13,
      18,
      18
     ],
     "family_L": "14 + 9\u221a2",
-    "family_n": 540,
-    "dropped": 184,
-    "carrier": 216,
-    "contacts": 1850
+    "family_n": 688,
+    "dropped": 312,
+    "carrier": 364,
+    "contacts": 2446
    },
    {
     "n": 730,
@@ -1747,23 +1483,12 @@
     "grid": 28,
     "m_hint": 324,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 15,
     "s": 18,
-    "reproduced": true,
-    "params": [
-     22,
-     10,
-     1,
-     12,
-     27
-    ],
-    "family_L": "15 + 9\u221a2",
-    "family_n": 586,
-    "dropped": 222,
-    "carrier": 262,
-    "contacts": 2006
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 785,
@@ -1793,23 +1518,12 @@
     "grid": 30,
     "m_hint": 256,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 24,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     26,
-     7,
-     1,
-     16,
-     16
-    ],
-    "family_L": "24 + 4\u221a2",
-    "family_n": 680,
-    "dropped": 252,
-    "carrier": 424,
-    "contacts": 2297
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 853,
@@ -1817,23 +1531,12 @@
     "grid": 30,
     "m_hint": 39,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 29,
     "s": 1,
-    "reproduced": true,
-    "params": [
-     29,
-     11,
-     1,
-     3,
-     13
-    ],
-    "family_L": "29 + 1/2\u221a2",
-    "family_n": 822,
-    "dropped": 58,
-    "carrier": 783,
-    "contacts": 2872
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 901,
@@ -1852,23 +1555,12 @@
     "grid": 31,
     "m_hint": 180,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 27,
     "s": 5,
-    "reproduced": true,
-    "params": [
-     28,
-     11,
-     1,
-     10,
-     18
-    ],
-    "family_L": "27 + 5/2\u221a2",
-    "family_n": 780,
-    "dropped": 184,
-    "carrier": 600,
-    "contacts": 2680
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 909,
@@ -1876,23 +1568,12 @@
     "grid": 31,
     "m_hint": 256,
     "exact": true,
-    "count_matched": true,
+    "count_matched": false,
     "refused": 0,
     "a": 25,
     "s": 8,
-    "reproduced": true,
-    "params": [
-     27,
-     10,
-     1,
-     16,
-     16
-    ],
-    "family_L": "25 + 4\u221a2",
-    "family_n": 751,
-    "dropped": 234,
-    "carrier": 495,
-    "contacts": 2581
+    "reproduced": false,
+    "why": "no declaration reaches this count"
    },
    {
     "n": 962,
