@@ -226,6 +226,19 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    Q(√10) sentence, and the 448 still refused carry a median of 71 distinct angles — general-position
    poses, not hidden motifs. The re-run holds: **36,043 candidates, 900 rows, 0 beats**, with n = 500's
    best candidate improved to 23.414214 and still 0.56 short.
+   **Run 153 closed the prose beat count and added the composite family** (doc 109). R3's claim test
+   now also covers any line under a **current-state heading** (canonical / current / delivered /
+   results / status / frontier / state), decides history per **paragraph** rather than per line, and
+   skips fenced code; it flagged exactly `RECONCILIATION.md:10` (553/1000 under "## Canonical state"),
+   which is fixed, and correctly leaves `04-RUN-LOG.md`'s run-14 line and the stale-score quotes alone.
+   On the audit: the 550 trusted bases seed **family D — a base plus an exact motif in its leftover**
+   (base in `[0,L]²`, motif bbox in `[L, L+S]²`, both strips filled to the lattice,
+   `n = n_base + m + 2 nx ny`). Because `n ≤ L²`, `m ≤ S²` and the strips hold `≤ 2LS`, every composite
+   has `n ≤ (L+S)²`: it can tie the grid and never beat it. Measured over **57,388 candidates and 784
+   rows: 0 beats**, the closest at −1.448e-9 being a **grid tie** (row 111) and the second closest
+   0.0032 above — the whole audit is now **93,431 candidates, 900 rows, 0 beats**. The negative is
+   structural: (A) preserves density, (B) is capped by the grid, (C) is capped by a rotated block's bbox
+   (0.66), (D) by `(L+S)²` — no composition of rigid tiles can beat a row denser than the grid.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

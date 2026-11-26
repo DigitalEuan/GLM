@@ -26,6 +26,13 @@ compares it, *exactly*, with the delivered side of every row in 101..1000:
       greedy fill judged cell by cell with the SAT gate.  This covers the "centred /
       off-centre b x b 45-degree block" and the "rational spinor" as *constructions*: the
       count and the side are read off the pose, never off a remembered formula.
+  (D) composites (run 153).  A base and an exact motif in its leftover: the base sits in
+      `[0, L]^2`, the motif's square bbox in `[L, L+S]^2` (the far corner), and both
+      L-shaped strips — which are the whole free area, `2 L S` — are filled to the integer
+      lattice.  `n = n_base + m + 2 nx ny` with `nx = floor(L+S) - ceil(L)`, `ny = floor(L)`.
+      Because `n_base <= L^2` and `m <= S^2`, every composite satisfies `n <= (L+S)^2`: a
+      composite is a **grid-or-worse** construction by construction, which is what run 153
+      measures (one grid tie, everything else at least 3e-3 above).
 
 NOTHING IS APPROXIMATE.  The delivered sides are 45-digit Decimals computed from the
 CSV's own decimal text; the trigonometric functions are `true_geom`'s Decimal series, so
@@ -44,14 +51,16 @@ Quarter turns are the axis word, so a row turned by pi/2 is the same sentence.  
 the census from 519 rows (Run 151, 0/45 degrees only) to 552, and the ledger records the
 refusal of the other 448 by name: an angle that is not a word, or two different radicals.
 
-WHAT IT FOUND (run 151).  Zero strict beats in all three families on every row of
-101..1000.  (A) and (B) are the table's own constructions, so every row they reach is
-already at or below their side; (C)'s area ceiling is the area bound itself and the
-staircase waste in the corner fill leaves every realised pose above sqrt(n) by more than
-the delivered rows are.
+WHAT IT FOUND (runs 151-153).  Zero strict beats in any family on any row of 101..1000.
+(A) and (B) are the table's own constructions, so every row they reach is already at or
+below their side; (C)'s area ceiling is the area bound itself and the staircase waste in
+the corner fill leaves every realised pose above sqrt(n) by more than the delivered rows
+are; (D) is bounded by `(L+S)^2` and so cannot exceed grid density at all.  The pattern is
+structural, not bad luck: **a composition of rigid tiles cannot beat a row that is
+denser than the grid**, and 554 of the delivered rows are.
 
 USAGE
-    python3 scripts/scale_motifs.py --selftest   # 14 controls
+    python3 scripts/scale_motifs.py --selftest   # 15 controls
     python3 scripts/scale_motifs.py              # the audit, ledger written
     python3 scripts/scale_motifs.py --promote    # C1 on every strict beat (none)
 """
@@ -395,6 +404,102 @@ def family_rot_block(b_max: int = 20, extra_max: int = 2):
     return out
 
 
+# --------------------------------------------------------------- family (D)
+class Motif:
+    """A rigid exact pose with a square bbox: what a composite puts in the far corner."""
+
+    __slots__ = ("name", "cells", "words", "S", "n")
+
+    def __init__(self, name, cells, words, S):
+        self.name, self.cells, self.words, self.S = name, cells, words, S
+        self.n = len(cells)
+
+
+_MOTIF_CACHE = {}
+
+
+def motif_library(bases, b_max: int = 5, small_l_max: int = 6):
+    """The rigid motifs: the C poses (block + exact fill) and the smallest bases.
+
+    A base is itself a rigid pose whose bbox is a square of side L, so it is a legal motif;
+    the small ones are included because the second tile has to be cheap to place, and a
+    base is the densest tile this project owns.
+    """
+    key = (id(bases), b_max, small_l_max)
+    if key in _MOTIF_CACHE:
+        return _MOTIF_CACHE[key]
+    out = []
+    for wname, word in WORDS.items():
+        for b in range(2, b_max + 1):
+            cells, words = rot_block_cells(b, word)
+            out.append(Motif(f"{wname}/b{b}", cells, words, side(cells, words)))
+    for n, base in sorted(bases.items()):
+        if base.cls.d == 2 and base.L.floor() <= small_l_max:
+            out.append(Motif(f"base{n}", base.cells, base.words, base.L))
+    _MOTIF_CACHE[key] = out
+    return out
+
+
+def rect_counts(L, S):
+    """The integer unit cells that fit in `[L, L+S] x [0, L]`: `(nx, ny)`, exactly."""
+    nx = (L + S).floor() - L.ceil()
+    ny = L.floor()
+    return (nx if nx > 0 else 0), (ny if ny > 0 else 0)
+
+
+def composite_count(base, motif) -> int:
+    """`n + m + 2 nx ny`: the base, the motif, and both L-shaped strips filled to the lattice."""
+    nx, ny = rect_counts(base.L, motif.S)
+    return base.n + motif.n + 2 * nx * ny
+
+
+def composite_pose(base, motif, drop: int = 0):
+    """The composite's exact pose: base at the origin, motif's bbox in the far corner.
+
+    The two bboxes are `[0, L]^2` and `[L, L+S]^2`, so every cell of one is separated from
+    every cell of the other by an axis line and validity is structural; the two strips are
+    the whole free area (`(L+S)^2 - L^2 - S^2 = 2 L S`) and are filled to the integer
+    lattice, which is what `rect_counts` counts.
+    """
+    one, half = base.cls(1), base.cls(F(1, 2))
+    cells, words = list(base.cells), list(base.words)
+    for (x, y), w in zip(motif.cells, motif.words):
+        cells.append((x + base.L, y + base.L))
+        words.append(w)
+    nx, ny = rect_counts(base.L, motif.S)
+    x0 = y0 = base.L.ceil()
+    for dy in range(ny):                      # strip 1: x in [L, L+S], y in [0, L]
+        for dx in range(nx):
+            cells.append((base.cls(x0 + dx) + half, base.cls(dy) + half))
+            words.append((one, base.cls(0)))
+    for dx in range(ny):                      # strip 2: x in [0, L], y in [L, L+S]
+        for dy in range(nx):
+            cells.append((base.cls(dx) + half, base.cls(y0 + dy) + half))
+            words.append((one, base.cls(0)))
+    if drop:
+        cells, words = cells[:-drop], words[:-drop]
+    return cells, words
+
+
+def family_composite(bases, motifs, trims: int = 3):
+    """Every `(n, L)` the corner composite reaches: base + motif + both strips."""
+    out = []
+    for m, base in sorted(bases.items()):
+        if base.cls.d != 2:
+            continue                  # two radicals would need a degree-4 tower
+        for mo in motifs:
+            nx, ny = rect_counts(base.L, mo.S)
+            n0 = base.n + mo.n + 2 * nx * ny
+            S = base.L + mo.S
+            for r in range(trims):
+                n = n0 - r
+                if N_LO <= n <= N_HI:
+                    out.append({"family": "D-composite", "n": n, "L": S, "m": m,
+                                "motif": mo.name, "drop": r,
+                                "added": mo.n + 2 * nx * ny, "field": base.field})
+    return out
+
+
 # ------------------------------------------------------------------- the audit
 def compare(L: Q2, deliv_side: Decimal) -> dict:
     """`L` against a delivered side: `beat` iff `L + 1e-8 <= delivered`."""
@@ -406,7 +511,8 @@ def compare(L: Q2, deliv_side: Decimal) -> dict:
 def _rec(c, cmp):
     rec = {"family": c["family"], "n": c["n"], "L": z2dec(c["L"], 18),
            "margin": cmp["margin"], "beat": cmp["beat"]}
-    for key in ("k", "m", "drop", "steps", "added", "word", "b", "extra", "field"):
+    for key in ("k", "m", "drop", "steps", "added", "word", "b", "extra", "field",
+                "motif"):
         if key in c:
             rec[key] = c[key]
     return rec
@@ -414,7 +520,8 @@ def _rec(c, cmp):
 
 def audit(bases, deliv, verbose: bool = True):
     """Run the three families, compare exactly, report every strict beat."""
-    cands = (family_product(bases) + family_inflate(bases) + family_rot_block())
+    cands = (family_product(bases) + family_inflate(bases) + family_rot_block()
+             + family_composite(bases, motif_library(bases)))
     cands = [c for c in cands if N_LO <= c["n"] <= N_HI]
     best, beats = {}, []
     per = {}
@@ -485,6 +592,9 @@ def verify_beat(rec) -> dict:
         cells, words = product_cells(BASES[c["m"]], c["k"], drop=c["drop"])
     elif fam == "B-inflate":
         cells, words, _s = inflate_cells(BASES[c["m"]], c["steps"])
+    elif fam == "D-composite":
+        lib = {mo.name: mo for mo in motif_library(BASES)}
+        cells, words = composite_pose(BASES[c["m"]], lib[c["motif"]], c["drop"])
     else:
         cells, words = c["cells"], c["words"]
     if len(cells) != rec["n"]:
@@ -611,7 +721,7 @@ def selftest() -> int:
     g50 = b50.gate()
     assert g50["ok"], g50
     c34 = {w.name for w in [EW.classify(a) for _x, _y, a in deliv[50][1]]}
-    print(f"  10. a rational-word row joins the census: row 50 ({b50.field}, "
+    print(f"  9. a rational-word row joins the census: row 50 ({b50.field}, "
           f"{len(c34)} word classes) rebuilds at L = {z2dec(b50.L, 9):.9f}, gate ok, "
           f"{g50['contacts']} contacts")
     checks += 1
@@ -628,7 +738,7 @@ def selftest() -> int:
     g5 = gate(st5, ws5, cls5)
     assert g5["ok"], g5
     assert g5["L"] == cls5(F(9, 5)) * cls5(0, 1), (g5["L"], "3 (|c| + |s|) = 9/sqrt 5")
-    print(f"  11. a non-Q(sqrt 2) field end to end: a 3x3 grid at atan(1/2) in Q(sqrt 5) "
+    print(f"  10. a non-Q(sqrt 2) field end to end: a 3x3 grid at atan(1/2) in Q(sqrt 5) "
           f"gates at L = {z2dec(g5['L'], 9):.9f} = 9/sqrt 5 exactly")
     checks += 1
 
@@ -636,7 +746,7 @@ def selftest() -> int:
             (Decimal(0), Decimal(0), Decimal("0.523598775598"))]
     ws_f, why = row_words(fake)
     assert ws_f is None and why == "two different quadratic fields", (ws_f, why)
-    print("  12. a row mixing Q(sqrt 5) and Q(sqrt 3) needs a degree-4 tower and is "
+    print("  11. a row mixing Q(sqrt 5) and Q(sqrt 3) needs a degree-4 tower and is "
           "refused by name, not approximated")
     checks += 1
 
@@ -644,14 +754,44 @@ def selftest() -> int:
     fields = {}
     for b in bases.values():
         fields[b.field] = fields.get(b.field, 0) + 1
-    print(f"  13. the census: {len(bases)} bases recovered of {len(deliv)} (before the "
+    print(f"  12. the census: {len(bases)} bases recovered of {len(deliv)} (before the "
           f"new-sentence gate), by field {fields}")
+    checks += 1
+
+    lib = motif_library(bases)
+    b20 = bases[20]
+    mo = next(m for m in lib if m.name == "45/b3")
+    nD = composite_count(b20, mo)
+    cells, words = composite_pose(b20, mo)
+    gD = gate(cells, words)
+    nx, ny = rect_counts(b20.L, mo.S)
+    assert len(cells) == nD and gD["ok"] and gD["L"] == b20.L + mo.S, \
+        (len(cells), nD, gD["L"], b20.L + mo.S)
+    print(f"  13. the composite law: row 20 + the 45-degree 3x3 motif gives {nD} cells at "
+          f"L = {z2dec(gD['L'], 9):.9f}, exactly L + S; the strips add 2 x {nx} x {ny} = "
+          f"{2 * nx * ny}, and the built pose gates with {gD['contacts']} contacts")
+    checks += 1
+
+    probe = (20, 50, min(bases, key=lambda k: abs(k - 120)))
+    best = None
+    for n0 in probe:
+        bb = bases[n0]
+        for m in lib:
+            for r in range(3):
+                n = composite_count(bb, m) - r
+                if N_LO <= n <= N_HI:
+                    gap = deliv[n][0] - z2dec(bb.L + m.S, 45)
+                    if best is None or gap > best[0]:
+                        best = (gap, n, m.name, r)
+    print(f"  14. the composite frontier is nowhere near the table: the best of rows "
+          f"{probe} against the delivered sides is n = {best[1]} at {best[0]:+.3f} "
+          f"(motif {best[2]}, drop {best[3]})")
     checks += 1
 
     checked, offenders, skipped = EF.audit_module(
         sys.modules[__name__], exempt=EF.AUDIT_EXEMPT + ("selftest",))
     assert offenders == [], offenders
-    print(f"  14. bytecode audit: {checked} decision functions, 0 naming float "
+    print(f"  15. bytecode audit: {checked} decision functions, 0 naming float "
           f"(exempt {skipped})")
     checks += 1
     print(f"selftest OK ({checks} controls)")

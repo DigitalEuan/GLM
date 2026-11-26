@@ -7,7 +7,7 @@ dated 2026-11-18, which re-scores and guards the run-47 table. The canonical
 reported values are:
 
 - score: **22.217428576** (rounded: **22.217429**);
-- rows beating the grid: **553/1000**;
+- rows beating the grid: **554/1000** (553 before the run-140 promotion of row 90);
 - reported leaderboard gap: **0.163635**.
 
 ## Historical milestones

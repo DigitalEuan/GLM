@@ -14,11 +14,15 @@ Two fatal rules:
   R2 headline   a total quoted in a document's title block (first 10 lines)
                 must be the current one, unless the document is declared
                 historical in HISTORICAL.
-  R3 beats      a line that counts the beats — "554 / 1000", a table row whose
-                label names the beat count, or a currency claim — must quote
-                `sqscore`'s own count.  R1/R2 cannot see this: their scan is
-                anchored to score literals (`2x.xxxxxx`), so "553 / 1000" was
-                never even counted as a claim when row 90 moved it to 554.
+  R3 beats      a line that counts the beats — "554 / 1000" — must quote
+                `sqscore`'s own count when it is a claim: a table row, a
+                currency sentence, a line naming the current score, or any line
+                inside a **current-state section** (a heading naming the
+                canonical/current/delivered state, as `RECONCILIATION.md`'s
+                "## Canonical state" does).  Fenced code is not prose and is
+                skipped.  R1/R2 cannot see any of this: their scan is anchored
+                to score literals (`2x.xxxxxx`), so "553 / 1000" was never even
+                counted as a claim when row 90 moved it to 554.
 
 A line opts out explicitly by carrying one of TAGS ("historical", "stale",
 "superseded", "withdrawn"): that is the convention the prose already uses. A
@@ -52,6 +56,12 @@ SCORE_RE = re.compile(r"(?<![\d.])2[0-9]\.\d{5,9}(?![\d])")
 #: R3: a beat fraction, and the vocabulary that makes a line a *claim* about it
 BEAT_RE = re.compile(r"(?<![\d.])(\d{3})\s*/\s*1000(?![\d])")
 BEAT_LABEL_RE = re.compile(r"(beats?\b|beating\b|beat grid)", re.I)
+#: a heading that says "this section states the current system" (R3's section rule)
+CURRENT_HEAD_RE = re.compile(r"(canonical|current|delivered|results?|status|frontier|state)\b", re.I)
+
+def section_current(heading: str) -> bool:
+    """True iff a markdown heading declares a current-state section."""
+    return bool(heading) and bool(CURRENT_HEAD_RE.search(heading))
 #: a line is a *claim about the current state* only if it uses this vocabulary.
 #: "Score history: A -> B -> C" and run-log notes are history, not claims; they
 #: are inventoried below rather than failed.
@@ -70,6 +80,23 @@ def violating(line: str, lit: str) -> bool:
     if any(t in low for t in TAGS):
         return False
     return not lit.startswith(CANON)
+
+
+def stale_paragraphs(lines) -> set:
+    """Line numbers that sit in a paragraph quoting a superseded score.
+
+    A run-log entry can put its score at the end of one line and its beat count at
+    the start of the next; the paragraph, not the line, is what makes it history.
+    """
+    out, para = set(), []
+    for i, line in enumerate(lines, 1):
+        if not line.strip():
+            para = []
+            continue
+        if any(stale_score_quoted(p) for p in para[-4:]):
+            out.add(i)
+        para.append(line)
+    return out
 
 
 def stale_score_quoted(line: str) -> bool:
@@ -118,22 +145,33 @@ def main() -> int:
         name = os.path.basename(path)
         with open(path, encoding="utf-8", errors="replace") as f:
             lines = f.read().splitlines()
+        heading, fenced = "", False
+        stale_ctx = stale_paragraphs(lines)
         for i, line in enumerate(lines, 1):
-            current = any(l.startswith(CANON) for l in SCORE_RE.findall(line))
-            if "| " not in line and not CURRENCY_RE.search(line) and not current:
-                continue                       # prose history is inventory
+            if line.lstrip().startswith("```"):
+                fenced = not fenced
+                continue
+            if fenced:
+                continue                       # a code block is not prose
+            if line.startswith("#"):
+                heading = line
             counts = [int(m.group(1)) for m in BEAT_RE.finditer(line)]
+            if not counts:
+                continue
+            if not BEAT_LABEL_RE.search(line):
+                continue      # a count of something else (verified rows, support rows)
+            current = any(l.startswith(CANON) for l in SCORE_RE.findall(line))
+            claim = ("| " in line or current or section_current(heading)
+                     or CURRENCY_RE.search(line))
+            if not claim:
+                continue                       # prose history is inventory
+            beat_claims += len(counts)
             if s["beats"] in counts:
                 continue          # a correction table: the line states the true count too
+            if any(t in line.lower() for t in TAGS) or stale_score_quoted(line) \
+                    or i in stale_ctx:
+                continue
             for m in BEAT_RE.finditer(line):
-                cnt = int(m.group(1))
-                beat_claims += 1
-                if cnt == s["beats"]:
-                    continue
-                if any(t in line.lower() for t in TAGS) or stale_score_quoted(line):
-                    continue
-                if not BEAT_LABEL_RE.search(line):
-                    continue
                 bad.append((name, i, m.group(0), "R3 beat count", line.strip()))
 
     print(f"[record_guard] delivered {cur}, beats {s['beats']}, "

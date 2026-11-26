@@ -4704,3 +4704,50 @@ C1-C4 was never entered; `submission.csv` and root `WHITEBOARD.md` untouched; **
 beats, 446 ties). Controls: `exact_words` 8/8, `scale_motifs` 13/13, 25 decision functions (including a 3x3 grid at `atan(1/2)`
 in Q(sqrt 5) gating at exactly `9/sqrt 5`), `record_guard` clean. Ledger gains `base_fields`, `refused`
 and `base_gate`. Doc 108.
+
+**Run 153 (2026-11-26) — the prose beat count closed, and a composite family that is bounded by the
+area bound.** R3's claim test in run 152 knew only table rows, currency sentences and lines naming the
+score, so `RECONCILIATION.md`'s canonical block — score on one line, `rows beating the grid:
+**553/1000**` on the next, under `## Canonical state` — was invisible. Three additions close it: a line
+under a heading that declares the current state (`canonical|current|delivered|results|status|frontier|
+state`) is a claim whatever its shape; history is decided per **paragraph** (so a run-log entry with a
+superseded score at the end of one line and its beat count at the start of the next stays history); and
+fenced code is skipped. The scan examines 19 beat counts on claim lines, flags exactly
+`RECONCILIATION.md:10`, and that line is fixed (`554/1000`, noting 553 before the run-140 promotion).
+Two shapes that a naive prose rule would have flagged are correctly exempt and worth recording:
+`04-RUN-LOG.md:116` (`454/1000 beat grid`, Run 14, score on the previous line) and `09-CASCADE.md:21` /
+`NEXT_STEPS.md:44` (tables quoting the superseded `22.218056945, 553/1000`); counts of something else
+(`929/1000` verified rows, `540/1000` tilt-support rows, `875/1000` title counts) stay out because the
+beat vocabulary is still required.
+
+**Family D — composites.** The 550 trusted bases now seed a fourth family: a base in `[0, L]^2` and an
+exact motif's square bbox in `[L, L+S]^2` (the far corner), with both L-shaped strips — the whole free
+area `2 L S` — filled to the integer lattice. The motif library is the twelve C poses (3 words x
+`b = 2..5`) plus the smallest bases themselves (`L <= 6`), since a base is the densest rigid tile we
+own; the count is `n = n_base + m + 2 nx ny` with `nx = floor(L+S) - ceil(L)`, `ny = floor(L)`, both
+exact, and trims `r = 0,1,2` give three counts per `(base, motif)` at the same side (784 distinct rows
+reached). Validity is structural (the two bboxes meet only along lines); the built pose is gated in the
+selftest and in C1.
+
+**The bound, and the result.** Since `n <= L^2`, `m <= S^2` and the strips hold at most `2 L S`, every
+composite satisfies `n <= (L+S)^2`: family D can never be denser than a perfect tiling of its own frame,
+so it can tie the grid and never beat it. The measurement matches exactly — **57,388 candidates over
+784 rows, 0 strict beats**, the closest at **-1.448e-9** (row 111, `base36` in `base25`: 11.000000003
+against the delivered 11.000000002, a grid tie) and the second closest at **-0.0032** (row 110): the
+only composites near a delivered side are the ones that *are* the grid. Over the whole window 436 of the
+900 best-per-row margins are more than 1e-2 above. The full audit is now **93,431 candidates over all
+900 rows, 0 beats** — A 31,577 (best -1.498e-9, row 133), B 4,348 (+1.936e-9, row 962), C 118 (-0.177),
+D 57,388 (-1.448e-9). D is the best candidate at 70 rows and improves n=272 from 18.000000 to
+**17.742641** (still 0.777 above 16.965586); n=500 stays with A at 23.414214.
+
+**Why the negative is structural.** (A) multiplies a packing by `k^2` in side `kL` and so preserves
+density; (B) raises it toward 1 and its ceiling is the grid, which is why its best margins are +-2e-9
+and why it reproduces the table; (C) is a rotated block in its own bbox and can use at most `b^2/(bw)^2`
+of it (0.66 realised at 45 degrees); (D) is bounded by `(L+S)^2`. A composition of rigid tiles cannot
+beat a row that is denser than the grid, and 554 delivered rows are.
+
+**Controls 15/15** (run 152's 13 plus the composite law — row 20 + the 45-degree 3x3 motif = 60 cells at
+`L = 9.242640689`, exactly `L + S`, strips `2 x 3 x 5 = 30`, the built pose gating with 96 contacts —
+and the frontier probe: rows 20/50/120's best composite is n=266 at -0.177). `exact_words` 8/8,
+`record_guard` clean. **No promotion**: zero candidates cleared the margin, so C1-C4 was never entered;
+`submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446 ties). Doc 109.
