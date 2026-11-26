@@ -4816,3 +4816,32 @@ is checked between restarts, so the slow case got one attempt. The named next st
 defect-lattice seeds; until then the solver is calibrated at five and ten squares and refused at thirty-nine.
 Controls: `snap_certify` **8/8** (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15,
 `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 111.
+
+### Run 156 — 2026-11-26 — the analytic gradient lands, and the gate moves from cost to search
+
+The brief named run 155's three bottlenecks and all three are now in `scripts/proposal_anneal.py`, measured:
+**(a)** `energy_grad` returns the smooth energy and `dE/d(x, y, theta)` for all `3n` coordinates in one
+vectorised pass — penetration, softmax smooth-minimum, softplus and walls differentiated in closed form —
+verified against central differences at **`2.46e-9`** over 135 coordinates (`n = 5`, `n = 40`) inside
+`--selftest`; measured **86.1x** on 60 L-BFGS-B iterations at `n = 39` (3.12 s -> 0.04 s), one gradient
+pass costing 1.24x a value evaluation at `n = 118` (5.28 -> 6.54 ms), which means **~1,835 gradient passes
+fit in 12 s at `n = 118` where finite differences managed ~6**. **(b)** `Cap(seconds)` raises `StopRun` from
+*inside* L-BFGS-B's and basinhopping's callbacks, so a restart returns its last iterate at the cap — the
+gate's three cases now take **8.2 s / 12.3 s / 38.5 s** with 8/12/15 s per-restart caps, against run 155's
+**526 s single restart** at `n = 39`. **(c)** `seed_defect` removes the `m^2 - n` missing cells at the
+boundary and corners, and `seed_corner` builds a `floor(sqrt n) x floor(sqrt n)` block plus the leftover
+cells tilted into the margin, joining strip/lattice/random. **The gate's verdict: gradient PASS, and then
+n = 5 FAIL (`+1.450e-1`), n = 10 FAIL (`+9.333e-2`), n = 39 FAIL (`+3.626e-2`)** in 59.1 s total — so, by
+the brief's own rule, the `n > 100` run did not happen: no row of 101..1000 was searched, no candidate
+reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score still **22.217428576** (554 beats,
+446 ties). The failure is no longer about cost. Twelve configurations (both new seeds plus strip and random,
+perturbation scales 0.06-0.8 position and 0.3-1.6 radians, thousands of basin steps each) all jam at
+`8.2e-2` to `1.9e-1` at `n = 5`: the optimum at `2 + 1/sqrt 2` needs its fifth square *between* the block's
+corners, a topological rearrangement no single-square jitter can make, because the gap it must pass through
+is closed at the current pose. The named next step is therefore a **move set** — teleport-into-hole using
+run 127's `legal_slide` void seats, block swaps, or a constructive enumeration of the block-plus-`r`
+topology — not a faster version of the same perturb-and-relax. The clamped-grid floor stands unchanged from
+run 155: `snap_certify --baseline` penetrates **1.000e-4 on all twenty rows**, ten times worse than the
+`1e-5` pass line, so everything this solver produced (>= `2.7e-2`) is worse than doing nothing.
+Controls: `snap_certify` **8/8** (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15,
+`sqscore` 22.217428576, `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 112.

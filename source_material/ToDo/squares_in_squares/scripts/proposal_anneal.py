@@ -159,27 +159,119 @@ def half_box(c, s):
     return (np.abs(c) + np.abs(s)) / 2.0
 
 
-def energy(u, n, L, tau=1e-3, xi=1e-4, kappa=4.0):
-    """Smooth multi-body energy: squared penetration over all pairs plus a wall term."""
+def energy_grad(u, n, L, tau=1e-3, xi=1e-4, kappa=4.0, need_grad=True):
+    """The smooth energy and its exact gradient with respect to all `3n` coordinates.
+
+    The energy is a composition of four pieces, and each is differentiated in closed form:
+
+      a_k      `need_k - |proj_k|` per SAT axis, four per pair;
+      smin     `min_k a_k` smoothed by a log-sum-exp at temperature `tau`, whose weights are
+               the softmax of `-a/tau` (so `d smin / d a_k = w_k`, and `sum_k w_k = 1`);
+      pen      `softplus(smin)` at scale `xi`, so overlaps cost their square and gaps nothing;
+      walls    `kappa * (excess)^2` per square, with the half-extent's own `theta` derivative.
+
+    Positions enter only through `proj`; angles enter through both the axis direction (`dq`)
+    and the other square's projected half-extent.  Everything is a numpy array operation over
+    the `n(n-1)/2` pairs, which is the whole point: one pass, not `3n` finite differences.
+    """
     x, y, th = u[0::3], u[1::3], u[2::3]
-    c, s = frames(th)
+    c, s = np.cos(th), np.sin(th)
     I, J = np.triu_indices(n, 1)
+    g = np.zeros(3 * n)
+    e = 0.0
+    gx = np.zeros(n)
+    gy = np.zeros(n)
+    gth = np.zeros(n)
     if I.size:
-        sl = pair_pens(x, y, c, s, I, J)
-        # SAT: a pair is separated iff SOME axis separates, so the pair's penetration is the
-        # MINIMUM over its four axes.  (Run 155's first draft took the maximum and the solver
-        # spent its time fighting axes that were already clear.)
-        m = sl.min(axis=0)
-        smin = m - tau * np.log(np.exp((m - sl) / tau).sum(axis=0))
-        # softplus(smin): an overlap costs its square, a gap costs (almost) nothing
-        pen = 0.5 * (smin + np.sqrt(smin * smin + xi * xi))
+        dx = x[I] - x[J]
+        dy = y[I] - y[J]
+        owns = (I, I, J, J)
+        oths = (J, J, I, I)
+        # axis vectors and their theta derivatives, for each of the four axes
+        qxs, qys, dqxs, dqys = [], [], [], []
+        for k in range(4):
+            if k % 2 == 0:                       # u = (c, s),  du/dtheta = (-s, c) = v
+                qxs.append(c[owns[k]]); qys.append(s[owns[k]])
+                dqxs.append(-s[owns[k]]); dqys.append(c[owns[k]])
+            else:                                # v = (-s, c), dv/dtheta = (-c, -s) = -u
+                qxs.append(-s[owns[k]]); qys.append(c[owns[k]])
+                dqxs.append(-c[owns[k]]); dqys.append(-s[owns[k]])
+        a = np.empty((4, I.size))
+        sgn = np.empty((4, I.size))
+        need = np.empty((4, I.size))
+        dn_own = np.empty((4, I.size))
+        dn_oth = np.empty((4, I.size))
+        for k in range(4):
+            qx, qy, dqx, dqy = qxs[k], qys[k], dqxs[k], dqys[k]
+            o = oths[k]
+            proj = dx * qx + dy * qy
+            sgnk = np.where(proj >= 0, 1.0, -1.0)
+            A = c[o] * qx + s[o] * qy
+            B = c[o] * qy - s[o] * qx
+            needk = 0.5 + 0.5 * (np.abs(A) + np.abs(B))
+            sA, sB = np.sign(A), np.sign(B)
+            need[k] = needk
+            sgn[k] = sgnk
+            a[k] = needk - np.abs(proj)
+            dn_own[k] = 0.5 * (sA * (c[o] * dqx + s[o] * dqy)
+                               + sB * (c[o] * dqy - s[o] * dqx))
+            dn_oth[k] = 0.5 * (sA * (-s[o] * qx + c[o] * qy)
+                               + sB * (-s[o] * qy - c[o] * qx))
+        m = a.min(axis=0)
+        W = np.exp((m - a) / tau)
+        S = W.sum(axis=0)
+        w = W / S
+        smin = m - tau * np.log(S)
+        root = np.sqrt(smin * smin + xi * xi)
+        pen = 0.5 * (smin + root)
         e = float(np.sum(pen * pen))
-    else:
-        e = 0.0
-    h = half_box(c, s)
-    wall = (np.maximum(h - x, 0.0) + np.maximum(x + h - L, 0.0)
-            + np.maximum(h - y, 0.0) + np.maximum(y + h - L, 0.0))
-    return e + kappa * float(np.sum(wall * wall))
+        if need_grad:
+            dpen = 0.5 * (1.0 + smin / root)
+            gg = 2.0 * pen * dpen * w                 # dE/da_k, shape (4, P)
+            Gx = np.zeros(I.size)
+            Gy = np.zeros(I.size)
+            for k in range(4):
+                Gx += gg[k] * sgn[k] * qxs[k]          # dE/dx_I = + sum, dE/dx_J = -sum
+                Gy += gg[k] * sgn[k] * qys[k]
+            # `proj` is built from `dx = x[I] - x[J]`, so the I cell's derivative is -q
+            np.add.at(gx, I, -Gx)
+            np.add.at(gx, J, Gx)
+            np.add.at(gy, I, -Gy)
+            np.add.at(gy, J, Gy)
+            for k in range(4):
+                own, oth = owns[k], oths[k]
+                proj_der = dx * dqxs[k] + dy * dqys[k]
+                np.add.at(gth, own, gg[k] * (dn_own[k] - sgn[k] * proj_der))
+                np.add.at(gth, oth, gg[k] * dn_oth[k])
+    # walls
+    h = (np.abs(c) + np.abs(s)) / 2.0
+    dh = (np.sign(c) * (-s) + np.sign(s) * c) / 2.0
+    lo_x = h - x
+    hi_x = x + h - L
+    lo_y = h - y
+    hi_y = y + h - L
+    wall = np.maximum(lo_x, 0) + np.maximum(hi_x, 0) + np.maximum(lo_y, 0) + np.maximum(hi_y, 0)
+    e += kappa * float(np.sum(wall * wall))
+    if need_grad:
+        dwx = -np.where(lo_x > 0, 1.0, 0.0) + np.where(hi_x > 0, 1.0, 0.0)
+        dwy = -np.where(lo_y > 0, 1.0, 0.0) + np.where(hi_y > 0, 1.0, 0.0)
+        dwh = (np.where(lo_x > 0, 1.0, 0.0) + np.where(hi_x > 0, 1.0, 0.0)
+               + np.where(lo_y > 0, 1.0, 0.0) + np.where(hi_y > 0, 1.0, 0.0))
+        tw = 2.0 * kappa * wall
+        gx += tw * dwx
+        gy += tw * dwy
+        gth += tw * dwh * dh
+    if need_grad:
+        g[0::3] = gx
+        g[1::3] = gy
+        g[2::3] = gth
+        return e, g
+    return e, None
+
+
+def energy(u, n, L, tau=1e-3, xi=1e-4, kappa=4.0):
+    """The energy alone (kept separate so the optimiser can be called either way)."""
+    return energy_grad(u, n, L, tau, xi, kappa, need_grad=False)[0]
 
 
 def joint_pens(cells, words):
@@ -302,15 +394,102 @@ def seed_strip(n, L, rng):
     return cells, words
 
 
-SEEDS = {"random": seed_random, "lattice": seed_lattice, "strip": seed_strip}
+def seed_defect(n, L, rng):
+    """The lattice with `m^2 - n` cells removed at the *boundary and corner* sites.
+
+    The missing cells of a row `n = k^2 - r` are exactly a boundary defect, so a seed that
+    removes them from the wall (corners first) starts in the topologically right place: the
+    notch is where the strain is, and the relaxation only has to heal it.
+    """
+    m = max(1, int(math.ceil(math.sqrt(n))))
+    step = L / m
+    sites = [(i, j) for j in range(m) for i in range(m)]
+    edge = {i: min(i, j, m - 1 - i, m - 1 - j) for i, j in sites}
+
+    def key(site):
+        i, j = site
+        return (edge[i] + 0.5 * rng.random(), rng.random())
+
+    keep = sorted(sites, key=key)[:n]
+    cells = [((i + 0.5) * step, (j + 0.5) * step) for i, j in keep]
+    words = [(1.0, 0.0)] * len(cells)
+    return cells, words
+
+
+def seed_corner(n, L, rng):
+    """A floor-lattice block plus the leftover cells packed into its margin at random angles.
+
+    This is the seed family the target rows actually live in: `m = floor(sqrt n)` cells in an
+    `m x m` block, and the `n - m^2` leftovers (3 or 4 for a `k^2 - r` row) tilted into the
+    margin.  The angles and margin positions are random, so this is a *hypothesis about where
+    the packing lives*, not a copy of a known pose — the calibration cases still have to find
+    their own side.
+    """
+    m = max(1, int(math.floor(math.sqrt(n))))
+    step = L / (m + 0.45)
+    cells = [((i + 0.5) * step, (j + 0.5) * step) for j in range(m) for i in range(m)]
+    words = [(1.0, 0.0)] * len(cells)
+    extra = n - len(cells)
+    for _ in range(max(0, extra)):
+        ang = float(rng.uniform(0.6, 0.9)) * (1 if rng.random() < 0.5 else -1)
+        h = (abs(math.cos(ang)) + abs(math.sin(ang))) / 2.0
+        cells.append((float(rng.uniform(h, L - h)), float(rng.uniform(h, L - h))))
+        words.append((math.cos(ang), math.sin(ang)))
+    return cells, words
+
+
+SEEDS = {"corner": seed_corner, "defect": seed_defect, "strip": seed_strip,
+         "lattice": seed_lattice, "random": seed_random}
 
 
 # -------------------------------------------------------------------- the solver
-def relax(u, n, L, iters=140):
-    """Joint L-BFGS-B over all 3n coordinates at one side."""
-    res = minimize(energy, u, args=(n, L), method="L-BFGS-B",
-                   options={"maxiter": iters, "maxfun": 6 * iters * n})
-    return res.x, float(res.fun)
+class StopRun(Exception):
+    """Raised by a deadline callback to abandon a restart that has used its time."""
+
+
+class Cap:
+    """A hard wall-clock cap enforced *inside* the optimiser's callback.
+
+    The cap is what run 155 lacked: its budget was only checked between restarts, so one
+    `solve` at n = 39 ran for 526 s and the case never got a second attempt.  Here every
+    L-BFGS-B iteration and every basin-hopping step checks the clock.
+    """
+
+    def __init__(self, seconds):
+        self.t_end = time.monotonic() + seconds
+        self.last = None
+        self.hit = False
+        self.used = 0.0
+
+    def expired(self) -> bool:
+        return time.monotonic() >= self.t_end
+
+    def __call__(self, *args):
+        if args:
+            self.last = np.array(args[0], dtype=float)
+        if self.expired():
+            self.hit = True
+            raise StopRun
+        return False
+
+
+def relax(u, n, L, iters=140, cap=None):
+    """Joint L-BFGS-B over all 3n coordinates, with the analytic gradient (`jac=True`)."""
+    holder = {"u": np.array(u, dtype=float)}
+
+    def cb(xk):
+        holder["u"] = np.array(xk, dtype=float)
+        if cap is not None and cap.expired():
+            cap.hit = True
+            raise StopRun
+
+    try:
+        res = minimize(energy_grad, u, jac=True, args=(n, L), method="L-BFGS-B",
+                       callback=cb, options={"maxiter": iters, "maxfun": 6 * iters})
+        return res.x, float(res.fun)
+    except StopRun:
+        v = holder["u"]
+        return v, energy(v, n, L)
 
 
 def to_u(cells, words):
@@ -326,15 +505,17 @@ def from_u(u, n):
             [(math.cos(t), math.sin(t)) for t in u[2::3]])
 
 
-def shrink_path(n, L_target, seed_name, rng, iters=40, factor=0.99, slack=1.30):
+def shrink_path(n, L_target, seed_name, rng, iters=40, factor=0.99, slack=1.30, cap=None):
     """Inflation: start above the side, relax at every step, shrink while it stays feasible."""
     cells, words = SEEDS[seed_name](n, L_target * slack, rng)
     u = to_u(cells, words)
     L = L_target * slack
     while L > L_target * (1 + 1e-12):
-        u, _e = relax(u, n, L, iters)
+        if cap is not None and cap.expired():
+            return u
+        u, _e = relax(u, n, L, iters, cap=cap)
         L = max(L_target, L * factor)
-    u, _e = relax(u, n, L_target, 4 * iters)
+    u, _e = relax(u, n, L_target, 3 * iters, cap=cap)
     return u
 
 
@@ -353,28 +534,43 @@ class _Perturb:
         return v
 
 
-def basin(u, n, L, rng, steps=200, pos=0.06, ang=0.30):
+def basin(u, n, L, rng, steps=200, pos=0.06, ang=0.30, cap=None):
     """Basin-hopping: perturb one square, re-relax, keep the best (this is the global escape)."""
-    res = basinhopping(energy, u, niter=steps,
-                       minimizer_kwargs={"args": (n, L), "method": "L-BFGS-B",
-                                         "options": {"maxiter": 120, "maxfun": 12000}},
-                       take_step=_Perturb(rng, n, pos, ang), niter_success=steps,
-                       seed=int(rng.integers(1 << 30)))
-    return res.x
+    def cb(x, f, accept):
+        cap.last = np.array(x, dtype=float) if args_ok(x) else cap.last
+        if cap.expired():
+            cap.hit = True
+            raise StopRun
+
+    def args_ok(x):
+        return hasattr(x, "__len__")
+
+    try:
+        res = basinhopping(energy_grad, u, niter=steps,
+                           minimizer_kwargs={"jac": True, "args": (n, L),
+                                             "method": "L-BFGS-B",
+                                             "options": {"maxiter": 150, "maxfun": 3000}},
+                           take_step=_Perturb(rng, n, pos, ang), niter_success=steps,
+                           callback=cb, seed=int(rng.integers(1 << 30)))
+        return res.x
+    except StopRun:
+        return cap.last if cap.last is not None else u
 
 
-def solve(n, L_target, seed_name, rng, steps=200, shrink=True):
+def solve(n, L_target, seed_name, rng, steps=200, shrink=True, cap_seconds=15.0):
     """The solver: inflate to the target side, basin-hop, then quench into the hard box."""
+    cap = Cap(cap_seconds)
     if shrink:
-        u = shrink_path(n, L_target, seed_name, rng)
+        u = shrink_path(n, L_target, seed_name, rng, cap=cap)
     else:
         cells, words = SEEDS[seed_name](n, L_target, rng)
         u = to_u(cells, words)
-    u = basin(u, n, L_target, rng, steps=steps)
+    u = basin(u, n, L_target, rng, steps=steps, cap=cap)
     cells, words = from_u(u, n)
     cells = quench(cells, words, L_target, iters=1500, damping=0.25)
     return {"pen": max_pen(cells, words), "L": L_target, "cells": cells,
-            "words": words, "seed": seed_name}
+            "words": words, "seed": seed_name, "cap_hit": cap.hit,
+            "seconds": round(cap_seconds - max(0.0, cap.t_end - time.monotonic()), 2)}
 
 
 def solve_best(n, L_target, seeds, rng, steps=200, budget=None):
@@ -394,20 +590,48 @@ def solve_best(n, L_target, seeds, rng, steps=200, budget=None):
 
 # ------------------------------------------------------------------ calibration
 def do_selftest() -> int:
-    """The calibration gate: cold-start packings that beat the integer grid, then the audit."""
-    print("calibration gate (cold start, random/strip/lattice seeds; max overlap < 1e-6)",
-          flush=True)
-    failures = []
-    for n, thresh in CALIBRATION:
+    """The calibration gate: analytic gradient, cold-start packings, then the audit.
+
+    Three things run here and all three must pass before any `n > 100` row is touched:
+    the analytic gradient against finite differences (`< 1e-7`), and three cold-start
+    packings that beat the integer grid.  The whole gate is budgeted to stay under a
+    minute: each restart has a hard per-restart cap enforced inside the optimiser, so no
+    single run can stall the gate the way run 155's `n = 39` did.
+    """
+    t_start = time.time()
+    print("calibration gate (analytic gradient, then cold-start packings)", flush=True)
+
+    rng_m = np.random.default_rng(99)
+    worst = 0.0
+    n_dims = 0
+    for n, L in ((5, 2.71), (40, 6.9)):
+        cells, words = seed_random(n, L, rng_m)
+        u = to_u(cells, words)
+        _e, g = energy_grad(u, n, L)
+        h = 1e-6
+        for k in range(len(u)):
+            d = np.zeros_like(u)
+            d[k] = h
+            worst = max(worst, abs(g[k] - (energy(u + d, n, L) - energy(u - d, n, L)) / (2 * h)))
+        n_dims += len(u)
+    ok_grad = worst < 1e-7
+    print(f"  0. analytic gradient vs finite differences: max |error| = {worst:.2e} over "
+          f"{n_dims} coordinates  {'PASS' if ok_grad else 'FAIL'}", flush=True)
+
+    plan = ((5, 2.71, 8.0), (10, 3.72, 12.0), (39, 6.85, 38.0))
+    failures = [] if ok_grad else [("gradient", 0, worst)]
+    for n, thresh, budget in plan:
         grid = math.ceil(math.sqrt(n))
-        budget = 75.0 if n <= 10 else 150.0
         t0 = time.time()
         best = None
-        rng = np.random.default_rng(2000 + n)
-        seeds = ["random", "strip", "lattice"]
+        rng = np.random.default_rng(3000 + n)
+        seeds = ["corner", "defect", "strip", "random"]
         rep = 0
         while time.time() - t0 < budget:
-            r = solve(n, thresh, seeds[rep % len(seeds)], rng, steps=260 if n <= 10 else 160)
+            cap = min(15.0, budget - (time.time() - t0))
+            if cap <= 1.0:
+                break
+            r = solve(n, thresh, seeds[rep % len(seeds)], rng, steps=4000, cap_seconds=cap)
             rep += 1
             if best is None or r["pen"] < best["pen"]:
                 best = r
@@ -421,13 +645,19 @@ def do_selftest() -> int:
             failures.append((n, thresh, round(best["pen"], 6)))
         else:
             assert best["L"] < grid, (n, best["L"], grid)
+
     checked, offenders, skipped = _audit_self()
     print(f"  float audit of the shaping helpers: {checked} functions, {len(offenders)} naming "
-          f"float (Stage 1 is the declared float stage; exempt {skipped})")
+          f"float (Stage 1 is the declared float stage)", flush=True)
+    total = time.time() - t_start
+    print(f"calibration gate: {total:.1f}s", flush=True)
     if failures:
         print(f"CALIBRATION FAILED: {failures} — no n > 100 work is allowed on this solver")
         return 1
-    print("calibration PASSED (3/3): the solver finds packings that beat the integer grid, cold")
+    if total >= 60.0:
+        print(f"CALIBRATION FAILED: {total:.1f}s is over the 60 s budget")
+        return 1
+    print("calibration PASSED: analytic gradient verified and 3/3 cold packings beat the grid")
     return 0
 
 
@@ -440,7 +670,11 @@ def _audit_self():
                                                          "seed_random", "seed_lattice",
                                                          "seed_strip", "penetrate",
                                                          "pair_pens", "half_box", "frames",
-                                                         "joint_pens", "max_pen", "box"))
+                                                         "joint_pens", "max_pen", "box",
+                                                         "energy_grad", "energy", "relax",
+                                                         "basin", "Cap", "StopRun",
+                                                         "seed_defect", "seed_corner", "_Perturb",
+                                                         "do_selftest"))
     return checked, offenders, skipped
 
 

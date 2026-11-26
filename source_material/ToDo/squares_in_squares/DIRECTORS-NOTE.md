@@ -267,6 +267,18 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    instead of `3n` finite differences) and bounded per-solve restarts; do not spend target budget before the
    gate passes at 39. Doc 111.
 
+6. **The gate moved from cost to search (`run 156`):** `proposal_anneal.py` now has the exact analytic
+   gradient (`2.46e-9` against central differences, **86.1x** on 60 L-BFGS-B iterations at `n = 39`, one
+   gradient pass costing 1.24x a value at `n = 118`), a hard wall-clock `Cap` raised from *inside* both the
+   L-BFGS-B and basin-hopping callbacks (the gate's cases run 8.2 / 12.3 / 38.5 s where run 155 spent 526 s
+   in one restart), and boundary-deficit plus block-plus-margin seeds. It still fails at **n = 5** (`1.45e-1`)
+   and `n = 10` (`9.33e-2`) as well as `n = 39` (`3.63e-2`): twelve configurations, thousands of basin steps
+   each, all jam at `8e-2`-`2e-1` because the `2 + 1/sqrt 2` optimum needs its fifth square *between* the
+   block's corners, through a gap that is closed at the current pose. Speed was never going to buy that:
+   the next move is a **structural one** — teleport-into-hole on run 127's `legal_slide` void seats, block
+   swaps, or a constructive enumeration of the block-plus-`r` topology — and until it lands the gate keeps
+   refusing the `n = 101..1000` run, which is the correct outcome.
+
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
 - **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational
