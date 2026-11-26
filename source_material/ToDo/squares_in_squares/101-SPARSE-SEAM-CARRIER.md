@@ -154,9 +154,9 @@ That is the same obstruction run 143 found from the other side, restated in carr
 - the delivered rows need **both**: a carrier whose own translates are disjoint *and* which leaves the
   bar a void to sit in. The family supplies the second and not the first.
 
-Two further numbers bound what a repair can buy: on the 57 exact-side rows with no count match, the
+Two further numbers bound what a repair can buy: on the 52 exact-side rows with no count match, the
 shortfall is structural — the family's `n = (k1+k2)² − dropped + m` cannot reach the delivered count
-with `m` at the delivered tilted-class size, because `dropped` is at most the band (`≈ 3(k1+k2)`) and
+anywhere in the bar window, because `dropped` is at most the band (`≈ 3(k1+k2)`) and
 the required `P` is too small; e.g. `n = 65` at `5 + 5/2√2` needs `k1 + k2 = 5 + o ≤ 7`, so
 `P ≤ 49` and `n ≤ 49 + 25` with **no** drops, against a delivered 65.
 
