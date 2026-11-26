@@ -170,8 +170,24 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    one unit and the block always beds cells — the least bed reachable grows as 2, 3, 4, 5, 7, 7, 10 with
    `k`, while the count law's cheapest declaration asks for `0`. And the bed is **not** an interval (a
    symmetric declaration takes only even values) and **steps by up to 4**, so no interpolation or
-   bisection on it is sound. **The carrier line is closed**: it explains the table (24 ties) and cannot
-   move it, at any split, any shape, any `r` (run 147) and any position.
+   bisection on it is sound. **The carrier line is closed**: it explains the table (58 ties at `n ≤ 225`
+   once run 148's own `counts_max = 130` filter is removed — doc 105 §0; run 148 read 24 because that
+   filter dropped every count from 131 to 225 before comparing it with a row) and cannot move it, at any
+   split, any shape, any `r` (run 147) and any position.
+   **Run 149 has now decided the position instead of sampling it** (`carrier_offset.py`, doc 106). A
+   carrier cell's bed-set is four strict half-spaces in `(L, cx, cy)` — hence **convex** — so a box in
+   those three parameters carries an exact **floor** (cells bedded at every point of the box) and
+   **ceiling** (cells bedded at some point), and a branch and bound that prunes a box when the floor
+   exceeds the count law's demand `D* = K² + m − n` or the ceiling falls short **empties the box list**:
+   on the seven open, non-proved tie rows `12, 20, 30, 42, 56, 72, 91` that is **1,579 declarations,
+   15,349 boxes, 0 survivors** — no side below the grid side, no block position, no declaration. The
+   same engine takes run 148's **notched block** (`p×q` minus an `a×b` corner, `a, b ≤ 2`; the L is
+   exactly the union of two full rectangles, so its floor is the union of their forced sets and its
+   ceiling the full block's possible set) through **6,038 declarations and 69,614 boxes** with the same
+   result — the notch lowers the demand by `a·b` and must un-bed that many cells, and the band a corner
+   can free is never that wide. A planted-configuration control (plant a pose, walk the boxes that
+   contain it, no false zero) is what caught the missing seam law `L ≥ K` in the first draft. Nothing
+   promoted; **22.217428576** stands.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

@@ -74,6 +74,7 @@ from qsqrt2 import Q2, HALF                     # noqa: E402
 
 CSV = os.path.join(ROOT, "workspace/submission/submission.csv")
 LEDGER = os.path.join(ROOT, "workspace/push/carrier_ceil.json")
+LEDGER_WIDE = os.path.join(ROOT, "workspace/push/carrier_ceil_wide.json")
 
 AXIS = Q.AXIS
 W45 = Q.word_45()
@@ -335,20 +336,25 @@ def proved_rows():
     return set(proved)
 
 
-def report(kmax: int, smax: int, cap: F, up_to: int = 100, verbose: bool = True):
+def report(kmax: int, smax: int, cap: F, up_to: int = 100, verbose: bool = True,
+           ledger: str | None = None):
     import sqscore as SQ
     SQ.guard(quiet=True)
     sides = load_sides()
     proved = proved_rows()
-    best, tried = family_map(kmax, smax, cap)
+    # `counts_max` must cover every row in scope: family_map's own default (130) silently
+    # dropped every count above it, which run 148 read as "96 counts never attained"
+    best, tried = family_map(kmax, smax, cap, counts_max=up_to)
     rows = []
     beats = []
     for n in range(1, up_to + 1):
         side, k = sides[n]
-        rec = {"n": n, "k": k, "delivered": str(side)}
+        rec = {"n": n, "k": k, "delivered": str(side), "proved": n in proved}
         b = best.get(n)
         if b is None:
-            rec.update({"family": None, "verdict": "count unreachable below cap"})
+            # a statement about the declared box only: K <= kmax, p+q <= smax, L < cap
+            rec.update({"family": None,
+                        "verdict": "not attained below the cap in the declared box"})
             rows.append(rec)
             continue
         lo, hi, params = b
@@ -359,13 +365,12 @@ def report(kmax: int, smax: int, cap: F, up_to: int = 100, verbose: bool = True)
                     "pose_side": str(pose), "pose_n": r["n"], "gate_ok": r["ok"],
                     "interval": [str(dec_pair(lo)), str(dec_pair(hi))]})
         if n in proved:
-            rec["proved"] = True
-            if pose < side - MARGIN and r["ok"]:
+            if pose < side - MARGIN and r["ok"] and r["n"] == n:
                 rec["verdict"] = "FALSIFIER FIRED (bug)"
                 beats.append(rec)
             else:
                 rec["verdict"] = "no beat (proved row)"
-        elif pose < side - MARGIN and r["ok"]:
+        elif pose < side - MARGIN and r["ok"] and r["n"] == n:
             rec["verdict"] = "BEAT"
             beats.append(rec)
         elif fdec <= side + MARGIN:
@@ -385,13 +390,15 @@ def report(kmax: int, smax: int, cap: F, up_to: int = 100, verbose: bool = True)
           f"{len(beats)} beaten ({tried} declarations swept)")
     led = {"family": "seamed K x K carrier (two runs per axis, every split) + centred p x q "
                      "block, bedded; exact sweep of the (side, count) surface",
-           "kmax": kmax, "smax": smax, "cap": str(cap), "declarations": tried,
+           "kmax": kmax, "smax": smax, "cap": str(cap), "counts_max": up_to,
+           "declarations": tried,
            "rows": rows, "beats": beats,
            "summary": {"rows": len(rows), "reached": reach, "tied": hits,
                        "beaten": len(beats)}}
-    with open(LEDGER, "w") as f:
+    path = ledger or LEDGER
+    with open(path, "w") as f:
         json.dump(led, f, indent=1)
-    print(f"wrote {os.path.relpath(LEDGER, ROOT)}")
+    print(f"wrote {os.path.relpath(path, ROOT)}")
     return led
 
 
@@ -538,8 +545,9 @@ def main() -> int:
         row_detail(n)
         return 0
     if "--wide" in sys.argv:
-        # every row with ceil(sqrt n) <= 15, i.e. the whole small-pose block n <= 225
-        report(15, 21, F(31, 2), up_to=225)
+        # every row with ceil(sqrt n) <= 15, i.e. the whole small-pose block n <= 225.  It writes
+        # its own ledger so the default (n <= 100) map is not overwritten.
+        report(15, 21, F(31, 2), up_to=225, ledger=LEDGER_WIDE)
         return 0
     report(KMAX_DEFAULT, SMAX_DEFAULT, CAP_DEFAULT)
     return 0

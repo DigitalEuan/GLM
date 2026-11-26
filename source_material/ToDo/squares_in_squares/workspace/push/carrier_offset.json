@@ -1,69 +1,272 @@
 {
- "family": "block-bedded carrier with the block's position free (rational offsets)",
- "rows": [
-  {
-   "n": 12,
-   "k": 4,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 1024,
-   "least_bed_at_any_offset": 2,
-   "verdict": "no gated pose of this count below the grid side"
-  },
-  {
-   "n": 20,
-   "k": 5,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 3848,
-   "least_bed_at_any_offset": 3,
-   "verdict": "no gated pose of this count below the grid side"
-  },
-  {
-   "n": 30,
-   "k": 6,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 11934,
-   "least_bed_at_any_offset": 4,
-   "verdict": "no gated pose of this count below the grid side"
-  },
-  {
-   "n": 42,
-   "k": 7,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 28560,
-   "least_bed_at_any_offset": 5,
-   "verdict": "no gated pose of this count below the grid side"
-  },
-  {
-   "n": 56,
-   "k": 8,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 60310,
-   "least_bed_at_any_offset": 7,
-   "verdict": "no gated pose of this count below the grid side"
-  },
-  {
-   "n": 72,
-   "k": 9,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 122040,
-   "least_bed_at_any_offset": 7,
-   "verdict": "no gated pose of this count below the grid side"
-  },
-  {
-   "n": 91,
-   "k": 10,
-   "proved": false,
-   "nominations": 0,
-   "declarations_scanned": 193997,
-   "least_bed_at_any_offset": 10,
-   "verdict": "no gated pose of this count below the grid side"
-  }
- ],
- "note": "the float scan only nominates; every verdict is an exact Q(sqrt2) gate call"
+ "plain": {
+  "family": "seamed K x K carrier + p x q block",
+  "method": "certified branch and bound over (L, cx, cy): a box is pruned when its forced bed exceeds the count law's demand or its possible bed falls short of it; an empty box list is a proof",
+  "pmax": 10,
+  "smax": 13,
+  "box_cap": 200000,
+  "rows": [
+   {
+    "n": 12,
+    "k": 4,
+    "proved": false,
+    "family": "plain",
+    "declarations": 4,
+    "boxes": 26,
+    "tally": {
+     "EMPTY": 4,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 20,
+    "k": 5,
+    "proved": false,
+    "family": "plain",
+    "declarations": 37,
+    "boxes": 127,
+    "tally": {
+     "EMPTY": 37,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 30,
+    "k": 6,
+    "proved": false,
+    "family": "plain",
+    "declarations": 52,
+    "boxes": 244,
+    "tally": {
+     "EMPTY": 52,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 42,
+    "k": 7,
+    "proved": false,
+    "family": "plain",
+    "declarations": 134,
+    "boxes": 1062,
+    "tally": {
+     "EMPTY": 134,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 56,
+    "k": 8,
+    "proved": false,
+    "family": "plain",
+    "declarations": 261,
+    "boxes": 1767,
+    "tally": {
+     "EMPTY": 261,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 72,
+    "k": 9,
+    "proved": false,
+    "family": "plain",
+    "declarations": 506,
+    "boxes": 5972,
+    "tally": {
+     "EMPTY": 506,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 91,
+    "k": 10,
+    "proved": false,
+    "family": "plain",
+    "declarations": 585,
+    "boxes": 6151,
+    "tally": {
+     "EMPTY": 585,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   }
+  ]
+ },
+ "notched": {
+  "family": "seamed K x K carrier + p x q block with an a x b corner removed",
+  "method": "certified branch and bound over (L, cx, cy): a box is pruned when its forced bed exceeds the count law's demand or its possible bed falls short of it; an empty box list is a proof",
+  "pmax": 10,
+  "smax": 13,
+  "box_cap": 200000,
+  "rows": [
+   {
+    "n": 12,
+    "k": 4,
+    "proved": false,
+    "family": "notched",
+    "declarations": 7,
+    "boxes": 43,
+    "tally": {
+     "EMPTY": 7,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 20,
+    "k": 5,
+    "proved": false,
+    "family": "notched",
+    "declarations": 94,
+    "boxes": 262,
+    "tally": {
+     "EMPTY": 94,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 30,
+    "k": 6,
+    "proved": false,
+    "family": "notched",
+    "declarations": 160,
+    "boxes": 708,
+    "tally": {
+     "EMPTY": 160,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 42,
+    "k": 7,
+    "proved": false,
+    "family": "notched",
+    "declarations": 429,
+    "boxes": 3709,
+    "tally": {
+     "EMPTY": 429,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 56,
+    "k": 8,
+    "proved": false,
+    "family": "notched",
+    "declarations": 972,
+    "boxes": 7722,
+    "tally": {
+     "EMPTY": 972,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 72,
+    "k": 9,
+    "proved": false,
+    "family": "notched",
+    "declarations": 1935,
+    "boxes": 25635,
+    "tally": {
+     "EMPTY": 1935,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 91,
+    "k": 10,
+    "proved": false,
+    "family": "notched",
+    "declarations": 2441,
+    "boxes": 31535,
+    "tally": {
+     "EMPTY": 2441,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   }
+  ]
+ }
 }

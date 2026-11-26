@@ -4557,3 +4557,28 @@ forbid a shortcut: the reachable bed is **not an interval** (a symmetric declara
 values, `{8, 10, 12}`) and it **steps by up to 4**, so offsets must be enumerated, not bisected.
 **No candidate, so C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched; the
 delivered total stands at **22.217428576** (554 beats, 446 grid ties). Doc 105.
+
+**Run 149 (2026-11-26) — the block's position decided, not sampled; and three run-148 claims
+corrected.** Run 148's third measurement was a *probe* (40 sides × 7×7 offsets × every declaration =
+421,713 declarations, 0 nominations); a probe's zero is a sample. This run replaces it with a decision.
+One carrier cell against one block rectangle is the SAT test of two squares: four strict half-spaces,
+**affine in `(L, cx, cy)`**, so each cell's bed-set is **convex** and a box in those three parameters
+carries an exact floor (cells bedded at every point) and ceiling (cells bedded at some point). A branch
+and bound prunes a box when the floor exceeds the count law's demand `D* = K² + m − n` or the ceiling
+falls short; an empty box list is a theorem. On the seven open, non-proved tie rows
+`12, 20, 30, 42, 56, 72, 91`: **1,579 declarations, 15,349 boxes, every box emptied, 0 survivors** — no
+side below the grid side and no position of the block attains a row's count. The same engine runs the
+**notched** block (`p×q` minus an `a×b` corner, `a, b ≤ 2`) through **6,038 declarations and 69,614
+boxes** with the same result; the L is exactly the union of two full rectangles `(p−a)×q` and
+`a×(q−b)`, so its floor is the union of their forced sets and its ceiling the full block's possible
+set, and the notch lowers the demand by `a·b` while freeing at most the band a corner can reach.
+**8 controls**, including a planted-configuration walk (no false zero) — which is what caught the
+missing seam law `L ≥ K` in the first draft, where a "hit" turned out to be a carrier whose two runs
+overlap. **The run-148 sweep was then re-run and three of its claims corrected:** `family_map`'s default
+`counts_max = 130` was filtering the wide map, so the same 213,150 declarations reach **223 of 225**
+counts and tie **58** rows (not 129 and 24; `n = 131`, listed as never attained, is attained on
+`L ∈ (12, 12.292893218814]` by `(12,1,1,1,9)` inside that very box); "unattained below the cap" was
+written as "unattained anywhere", which the cap cannot support; and the `n ≤ 100` map's two missing
+counts are **3 and 99**, not 1 and 2. Ledgers regenerated (`carrier_ceil.json`, `carrier_ceil_wide.json`,
+`carrier_offset.json`). **No candidate, so C1–C4 was not entered**; `submission.csv` and root
+`WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446 grid ties). Doc 106; doc 105 §0.
