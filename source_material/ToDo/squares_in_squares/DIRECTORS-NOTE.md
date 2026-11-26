@@ -148,6 +148,16 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    it moves a side down: **do not sweep it.** The two directions the probe prices are `r` runs per axis
    (same disjointness law, `r − 1` gaps, a bigger count surface) and a rational-`b` side law `a + b√2`
    for the 28 rows outside the halves group.
+   **Run 147 answered both, and audited the instruments.** `r` runs per axis (`block_bed_r.py`, doc
+   104): `r = 2` is run 145's symmetric split exactly and reproduces **19/19** of its rows at **19/19**
+   declarations; `r = 3..6` adds **0** rows at the delivered sides and **0** beats below them on the 19
+   reach rows (183 windows, 124,176 trials, control re-finding 19/19 ties) — **more translates buy no
+   reach**, because the gap `(L − K)/(r − 1)` shrinks as `r` grows and the block beds more of the
+   carrier, not fewer. The same visit audited every claiming instrument for run 146's defect class:
+   `seam_carrier` (a gated pose counted without its count), `shared_box` (accepted on overlaps alone,
+   and a `beats_family` count with **no pose built**), `motif_wheels` (a state gated without carrying
+   `n` cells), `ext_census` (a side written without the pose's count) — all repaired, **no published
+   number moved**. The rational-`b` side law is the direction left.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

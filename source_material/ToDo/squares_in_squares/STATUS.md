@@ -799,6 +799,22 @@ reproduces **19 of 110 — one short of the 20-row entry gate, a FAIL**. All 19 
 declarations (`kx = ky = K/2`) with square blocks; 63 in-group rows have no declaration at their
 count; the "45 asymmetric hits" do not exist. Doc 102 §8.
 
+**Run 147 (2026-11-26) — the audit of the defect class, and the r-run carrier: more translates buy no
+reach.** The audit of the other carriers and sweep instruments found four more instances of run 146's
+class: `seam_carrier.entry_test` took a gated pose without its count (now `r["n"] == n`; control 9
+compares the counter with `assemble` on every bar size in a five-wide window), `shared_box.entry_test`
+took `overlaps == 0` alone and its `beats_family` counted closed-form "better" configurations with
+**no pose built** (now count + side required, and every `better` claim built, gated and certified —
+controls 10 and 11), `motif_wheels.judge` never required the gated state to carry `n` cells (now
+`count_mismatch`), `ext_census` never checked the pocket pose's count (now `count_ok`). **No published
+number moved** — 2/110 and 0/110 re-run identical, 13/13 and OK selftests — the defects were latent.
+`block_bed_r.py` extends the carrier to **`r` equal runs per axis** (doc 104): `r = 2` reproduces run
+145's **19/19** rows at **19/19** declarations, the entry test is **19/110** again (`r = 3..6`: **0**,
+a FAIL by one), and the beat probe over the **19 reach rows** (183 windows, **124,176** trials) gives
+**0 count matches, 0 beats**, control re-finding **19/19** ties. **Extra translates buy no reach.** No
+candidate, C1–C4 not entered; `submission.csv` untouched; the delivered total stands at
+**22.217428576** (554 beats, 446 ties).
+
 **Run 146 (2026-11-26) — the beat probe: 0 beats, and the 48 was a counting defect.** The probe run
 145's gate was meant to authorise found the defect it would have been built on: `split_counts`
 compared offset windows against absolute positions and took the near end of the second run, and the

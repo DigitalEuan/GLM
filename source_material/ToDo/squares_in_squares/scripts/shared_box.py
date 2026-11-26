@@ -251,6 +251,26 @@ def best_for_row(n: int, target: F, spinors=SPINORS) -> dict:
             "better": better, "smallest": smallest}
 
 
+def certify_better(n: int, target, bb: dict) -> dict:
+    """Build, gate and certify a "below the delivered side" claim -- or refuse it.
+
+    `beats_family` used to be a count of configurations whose *closed-form* side was below the
+    delivered one, with no pose built at all (run 147's audit).  A claim is now a pose: it must
+    carry the row's count, gate with 0 overlaps, and its measured side must be below the target.
+    """
+    ba1, ba2 = [int(t) for t in bb["split"].split("+")[0].split("x")]
+    bb1, bb2 = [int(t) for t in bb["split"].split("+")[1].split("x")]
+    bc, bs = spinor(int(bb["spinor"].split("/")[0]), int(bb["spinor"].split("/")[1]))
+    cinf = check(build(ba1, ba2, bb1, bb2, bc, bs, bb["s_star"]))
+    side = F(cinf["side"])
+    return {"split": bb["split"], "spinor": bb["spinor"], "s_star": str(bb["s_star"]),
+            "n": cinf["n"], "overlaps": cinf["overlaps"], "side": str(cinf["side"]),
+            "count_ok": cinf["n"] == n,
+            "below_target": side < target - TOL,
+            "certified": cinf["overlaps"] == 0 and cinf["n"] == n
+                         and side < target - TOL}
+
+
 def entry_test(verbose: bool = True) -> dict:
     rows = two_class_rows()
     out = []
@@ -269,6 +289,10 @@ def entry_test(verbose: bool = True) -> dict:
         tilt_wins += r["best"]["spinor"] != "1/1"
         grid_ties += r["smallest"]["s_star"] == F(k)
         ok = r["best"]["gap"] <= TOL
+        # a "better than delivered" claim is *also* a candidate: build it and gate it,
+        # or it is not a claim (run 146's audit -- this was reported uncertified)
+        better_cert = (certify_better(n, target, r["better"])
+                       if r["better"] else None)
         # an accepted row is certified by the independent exact SAT on the built pose
         cert = None
         if ok:
@@ -278,14 +302,20 @@ def entry_test(verbose: bool = True) -> dict:
             c, s = [spinor(int(t.split("/")[0]), int(t.split("/")[1]))
                     for t in [b["spinor"]]][0]
             cert = check(build(a1, a2, b1, b2, c, s, b["s_star"]))
-            ok = cert["overlaps"] == 0
+            # run 146's audit: gating is not enough.  The built pose must carry the
+            # row's count *and* the target side; the closed form only nominates.
+            ok = (cert["overlaps"] == 0 and cert["n"] == n
+                  and abs(F(cert["side"]) - target) <= TOL)
+            cert = dict(cert, side=str(cert["side"]), count_ok=cert["n"] == n,
+                        side_ok=abs(F(cert["side"]) - target) <= TOL,
+                        target=str(target))
             hits += ok
         out.append({"n": n, "target": str(target_d), "gap": str(r["best"]["gap"]),
                     "split": r["best"]["split"], "spinor": r["best"]["spinor"],
                     "s_star": str(r["best"]["s_star"]),
                     "smallest": str(r["smallest"]["s_star"]),
                     "better": (str(r["better"]["s_star"]) if r["better"] else None),
-                    "reproduced": bool(ok), "cert": cert})
+                    "better_cert": better_cert, "reproduced": bool(ok), "cert": cert})
         if verbose and (ok or len(out) % 20 == 0):
             print(f"  n={n:>4} gap={r['best']['gap']:.3e} "
                   f"{'REPRODUCED' if ok else ''} {r['best']['split']} @{r['best']['spinor']}")
@@ -295,6 +325,9 @@ def entry_test(verbose: bool = True) -> dict:
     res = {"rows": len(out), "reproduced": hits, "threshold": 20,
            "passes": hits >= 20, "no_config": sum(1 for o in out if o["gap"] is None),
            "beats_family": sum(1 for o in out if o["better"]),
+           "beats_family_certified": sum(1 for o in out
+                                         if o.get("better_cert")
+                                         and o["better_cert"]["certified"]),
            "closest_is_tilted": tilt_wins, "family_best_is_grid_side": grid_ties,
            "gap_min": f"{gaps[0]:.3e}", "gap_median": f"{gaps[len(gaps) // 2]:.3e}",
            "gap_max": f"{gaps[-1]:.3e}",
@@ -464,9 +497,38 @@ def selftest() -> int:
     checked, offenders, skipped = EF.audit_module(sys.modules[__name__],
                                                   exempt=EF.AUDIT_EXEMPT + ("selftest",))
     assert offenders == [], offenders
+    # 10. the closed form is checked against the independent exact SAT on the built
+    #     pose: min_side = the built side, the pose is legal there, and it is tight
+    #     (run 146's audit -- a fast closed form with no cross-check is the defect)
+    cases = ((4, 4, 2, 2, (1, 2)), (3, 5, 2, 1, (1, 2)), (7, 2, 3, 3, (2, 3)),
+             (5, 5, 5, 5, (1, 1)), (6, 3, 4, 2, (3, 4)), (2, 9, 5, 4, (1, 4)),
+             (8, 8, 1, 1, (1, 3)), (9, 4, 6, 6, (2, 3)))
+    for (q1, q2, r1, r2, (pp, qq)) in cases:
+        cc, ss = spinor(pp, qq)
+        s_star = min_side(q1, q2, r1, r2, cc, ss)
+        info = check(build(q1, q2, r1, r2, cc, ss, s_star))
+        assert info["n"] == q1 * q2 + r1 * r2, (q1, q2, r1, r2, info)
+        assert info["overlaps"] == 0, (q1, q2, r1, r2)
+        assert abs(F(info["side"]) - s_star) < F(1, 10 ** 12), (info["side"], s_star)
+        assert legal(q1, q2, r1, r2, cc, ss, s_star)
+        assert not legal(q1, q2, r1, r2, cc, ss, s_star - F(1, 10 ** 9))
+        print(f"  10.{q1}x{q2}+{r1}x{r2}@{pp}/{qq}: s* = {_fmt(s_star)} = built side, "
+              f"0 overlaps, illegal 1e-9 below")
+    print("  10. closed form == independent SAT on 8 configurations, tight in each")
+    # 11. a "below the delivered side" claim is a built, gated pose -- not a closed-form
+    #     number: the certificate says yes to a real saving and no when the target is not met
+    n_ctl, dec_ctl = 17, F(5)
+    bb = {"split": "4x4+1x1", "spinor": "1/1", "s_star": min_side(4, 4, 1, 1, F(0), F(1))}
+    yes = certify_better(n_ctl, dec_ctl + F(1, 10), bb)     # a target above the pose's side
+    no = certify_better(n_ctl, F(4), bb)                    # a target the pose cannot meet
+    assert yes["count_ok"] and yes["overlaps"] == 0 and yes["certified"], yes
+    assert no["count_ok"] and no["overlaps"] == 0 and not no["certified"], no
+    assert abs(F(yes["side"]) - F(5)) < F(1, 10 ** 12), yes["side"]
+    print(f"  11. better-claim certificate: built 17 cells at side {yes['side']} -- certified "
+          f"below a side-6 target, refused against side 4")
     print(f"  9. bytecode audit: {checked} decision functions, 0 naming float "
           f"(exempt {skipped})")
-    print("selftest OK (9 controls)")
+    print("selftest OK (11 controls)")
     return 0
 
 

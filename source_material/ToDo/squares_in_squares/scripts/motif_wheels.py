@@ -356,6 +356,11 @@ def judge(cell: Cell, per: dict) -> dict:
         # a declaration that could not read the row as integers (a partial
         # diamond) carries its reason in `note`; it is not a candidate
         return _refuse(out, "layout_not_enumerated", cell.note or "no state")
+    if len(cell.state) != n:                                 # run 146's audit
+        # the gate decides disjointness, not the count: a declaration whose state
+        # carries a different number of cells is not a pose of n and cannot be a win
+        return _refuse(out, "count_mismatch",
+                       f"declared n={n} carries {len(cell.state)} cells")
     # Karakus (arXiv:2609.37410, Cor. 1.2): s(N) >= 1/2 + sqrt(N - floor sqrt N
     # + 1/4) for every nonsquare N >= 8.  It is strictly stronger than the area
     # bound, and it is a theorem, so a DECLARED side below it is a builder error

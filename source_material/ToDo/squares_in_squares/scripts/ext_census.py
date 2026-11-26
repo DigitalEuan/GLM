@@ -135,6 +135,7 @@ def pocket_rows(amax: int = 35) -> list:
                     "L_table": str(got.quantize(Decimal("1e-15"))),
                     "gain": str((got - want).quantize(Decimal("1e-9"))),
                     "gate": gate, "verdict": verdict,
+                    "cells": len(cells), "count_ok": len(cells) == n,
                     "table_status": ("tie" if abs(got - k_of(n)) < 1e-12
                                      else "beaten")})
     return out
@@ -152,6 +153,8 @@ def apply_certified(rows: list) -> dict:
     changed = []
     for r in rows:
         if r["verdict"] != "pocket_better" or not r["gate"]["ok"]:
+            continue
+        if not r.get("count_ok"):                  # the pose must be a pose of n
             continue
         key = str(r["n"])
         old = Decimal(ext[key]["L"])

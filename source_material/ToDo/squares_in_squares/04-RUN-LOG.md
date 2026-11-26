@@ -4502,3 +4502,33 @@ more translates per axis (`r` runs, `r−1` positive gaps — the law and the be
 and this probe prices them), and a finer side law `a + b√2` for the 28 out-of-group rows. **Do not
 sweep this family:** its reach is 19 ties and none of its parameters moves a side down.
 
+
+**Run 147 (2026-11-26) — the audit of the defect class, and the r-run carrier: more translates buy no
+reach.** Run 146 repaired one instance of the class (an analytic count with no cross-check, a gate
+that accepted a pose without its count). The audit of the other carriers and sweep instruments found
+**four more**: `seam_carrier.entry_test` accepted `r["ok"]` alone (repaired to `and r["n"] == n`, and
+control 9 now compares the batched counter with `assemble` on **every** bar size in a five-wide window
+for eight declarations, not one size of six); `shared_box.entry_test` accepted on `overlaps == 0` alone
+(repaired to require `cert["n"] == n` and the target side) and its `beats_family` counted
+**closed-form** "better" configurations with **no pose built at all** — a beat claim with no
+certificate, now built, gated and certified row by row (`certify_better`, `better_cert`,
+`beats_family_certified`), with control 10 checking the closed form against the independent exact SAT
+on the built pose for eight configurations and control 11 checking the certificate itself;
+`motif_wheels.judge` gated a state at the declared `n` without requiring the state to carry `n`
+cells (now `count_mismatch`, selftest 13/13 still green); `ext_census` wrote a side from the
+declaration without recording the pose's count (now `count_ok`, skipped if it fails, selftest OK).
+**No published number moved**: `seam_carrier` re-runs 2/110, `shared_box` 0/110 with 0 `better` rows,
+the other two are unchanged — the defects were latent, not realised. `block_bed_r.py` (doc 104) is the
+requested extension: **r equal runs per axis** with `r - 1` equal gaps `(L - K)/(r - 1) > 0`, the same
+bedding rule and the same `n = K^2 - D + p*q`, with the analytic `D` cross-checked against
+`assemble_r` on every declaration tried and a hit requiring `r["ok"] and r["n"] == n`. **The r = 2
+member is run 145's symmetric split exactly** (control 1: same positions, same gap) and reproduces
+**19/19 of its rows at 19/19 of its declarations**. The entry test is **19/110** again — `r = 2`: 19,
+`r = 3..6`: **0** — a FAIL by one. The beat probe over the **19 reach rows** (the only rows the family
+reaches at all; a 110-row sweep at five run counts is >2 h, and run 146's full-110 `r = 2` probe
+already returned 0 in 949,243 trials) searches 183 (row, side) windows and **124,176**
+(side, K, shape) trials: **0 count matches, 0 refusals, 0 beats**, with `--control` re-finding
+**19/19** ties at exactly their delivered side. **Extra translates buy no reach**: the gap shrinks as
+`r` grows and the block beds more of the carrier, so the count surface grows without the side
+falling. No candidate, so **C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md`
+untouched; the delivered total stands at **22.217428576** (554 beats, 446 grid ties).

@@ -17,6 +17,7 @@
   "passes": false,
   "no_config": 0,
   "beats_family": 0,
+  "beats_family_certified": 0,
   "closest_is_tilted": 0,
   "family_best_is_grid_side": 106,
   "gap_min": "1.144e-1",
@@ -35,6 +36,7 @@
     "s_star": "3",
     "smallest": "3",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -47,6 +49,7 @@
     "s_star": "4",
     "smallest": "4",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -59,6 +62,7 @@
     "s_star": "4",
     "smallest": "4",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -71,6 +75,7 @@
     "s_star": "5",
     "smallest": "5",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -83,6 +88,7 @@
     "s_star": "5",
     "smallest": "5",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -95,6 +101,7 @@
     "s_star": "6",
     "smallest": "6",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -107,6 +114,7 @@
     "s_star": "6",
     "smallest": "6",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -119,6 +127,7 @@
     "s_star": "6",
     "smallest": "6",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -131,6 +140,7 @@
     "s_star": "7",
     "smallest": "7",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -143,6 +153,7 @@
     "s_star": "7",
     "smallest": "7",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -155,6 +166,7 @@
     "s_star": "8",
     "smallest": "8",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -167,6 +179,7 @@
     "s_star": "8",
     "smallest": "8",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -179,6 +192,7 @@
     "s_star": "8",
     "smallest": "8",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -191,6 +205,7 @@
     "s_star": "8",
     "smallest": "8",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -203,6 +218,7 @@
     "s_star": "9",
     "smallest": "9",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -215,6 +231,7 @@
     "s_star": "9",
     "smallest": "9",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -227,6 +244,7 @@
     "s_star": "9",
     "smallest": "9",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -239,6 +257,7 @@
     "s_star": "10",
     "smallest": "10",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -251,6 +270,7 @@
     "s_star": "10",
     "smallest": "10",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -263,6 +283,7 @@
     "s_star": "10",
     "smallest": "10",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -275,6 +296,7 @@
     "s_star": "11",
     "smallest": "11",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -287,6 +309,7 @@
     "s_star": "11",
     "smallest": "11",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -299,6 +322,7 @@
     "s_star": "11",
     "smallest": "11",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -311,6 +335,7 @@
     "s_star": "12",
     "smallest": "12",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -323,6 +348,7 @@
     "s_star": "12",
     "smallest": "12",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -335,6 +361,7 @@
     "s_star": "12",
     "smallest": "12",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -347,6 +374,7 @@
     "s_star": "12",
     "smallest": "12",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -359,6 +387,7 @@
     "s_star": "12",
     "smallest": "12",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -371,6 +400,7 @@
     "s_star": "13",
     "smallest": "13",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -383,6 +413,7 @@
     "s_star": "13",
     "smallest": "13",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -395,6 +426,7 @@
     "s_star": "13",
     "smallest": "13",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -407,6 +439,7 @@
     "s_star": "13",
     "smallest": "13",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -419,6 +452,7 @@
     "s_star": "13",
     "smallest": "13",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -431,6 +465,7 @@
     "s_star": "14",
     "smallest": "14",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -443,6 +478,7 @@
     "s_star": "14",
     "smallest": "14",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -455,6 +491,7 @@
     "s_star": "14",
     "smallest": "14",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -467,6 +504,7 @@
     "s_star": "14",
     "smallest": "14",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -479,6 +517,7 @@
     "s_star": "15",
     "smallest": "15",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -491,6 +530,7 @@
     "s_star": "15",
     "smallest": "15",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -503,6 +543,7 @@
     "s_star": "15",
     "smallest": "15",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -515,6 +556,7 @@
     "s_star": "15",
     "smallest": "15",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -527,6 +569,7 @@
     "s_star": "15",
     "smallest": "15",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -539,6 +582,7 @@
     "s_star": "16",
     "smallest": "16",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -551,6 +595,7 @@
     "s_star": "16",
     "smallest": "16",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -563,6 +608,7 @@
     "s_star": "16",
     "smallest": "16",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -575,6 +621,7 @@
     "s_star": "16",
     "smallest": "16",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -587,6 +634,7 @@
     "s_star": "16",
     "smallest": "16",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -599,6 +647,7 @@
     "s_star": "17",
     "smallest": "17",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -611,6 +660,7 @@
     "s_star": "17",
     "smallest": "17",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -623,6 +673,7 @@
     "s_star": "17",
     "smallest": "17",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -635,6 +686,7 @@
     "s_star": "18",
     "smallest": "18",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -647,6 +699,7 @@
     "s_star": "18",
     "smallest": "18",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -659,6 +712,7 @@
     "s_star": "18",
     "smallest": "18",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -671,6 +725,7 @@
     "s_star": "18",
     "smallest": "18",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -683,6 +738,7 @@
     "s_star": "18",
     "smallest": "18",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -695,6 +751,7 @@
     "s_star": "18",
     "smallest": "18",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -707,6 +764,7 @@
     "s_star": "19",
     "smallest": "19",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -719,6 +777,7 @@
     "s_star": "19",
     "smallest": "19",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -731,6 +790,7 @@
     "s_star": "19",
     "smallest": "19",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -743,6 +803,7 @@
     "s_star": "19",
     "smallest": "19",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -755,6 +816,7 @@
     "s_star": "20",
     "smallest": "20",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -767,6 +829,7 @@
     "s_star": "20",
     "smallest": "20",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -779,6 +842,7 @@
     "s_star": "20",
     "smallest": "20",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -791,6 +855,7 @@
     "s_star": "20",
     "smallest": "20",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -803,6 +868,7 @@
     "s_star": "20",
     "smallest": "20",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -815,6 +881,7 @@
     "s_star": "20",
     "smallest": "20",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -827,6 +894,7 @@
     "s_star": "21",
     "smallest": "21",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -839,6 +907,7 @@
     "s_star": "21",
     "smallest": "21",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -851,6 +920,7 @@
     "s_star": "21",
     "smallest": "21",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -863,6 +933,7 @@
     "s_star": "21",
     "smallest": "21",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -875,6 +946,7 @@
     "s_star": "22",
     "smallest": "22",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -887,6 +959,7 @@
     "s_star": "22",
     "smallest": "22",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -899,6 +972,7 @@
     "s_star": "22",
     "smallest": "22",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -911,6 +985,7 @@
     "s_star": "22",
     "smallest": "22",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -923,6 +998,7 @@
     "s_star": "23",
     "smallest": "23",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -935,6 +1011,7 @@
     "s_star": "23",
     "smallest": "23",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -947,6 +1024,7 @@
     "s_star": "24",
     "smallest": "24",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -959,6 +1037,7 @@
     "s_star": "23",
     "smallest": "23",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -971,6 +1050,7 @@
     "s_star": "23",
     "smallest": "23",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -983,6 +1063,7 @@
     "s_star": "23",
     "smallest": "23",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -995,6 +1076,7 @@
     "s_star": "24",
     "smallest": "24",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1007,6 +1089,7 @@
     "s_star": "24",
     "smallest": "24",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1019,6 +1102,7 @@
     "s_star": "24",
     "smallest": "24",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1031,6 +1115,7 @@
     "s_star": "24",
     "smallest": "24",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1043,6 +1128,7 @@
     "s_star": "25",
     "smallest": "25",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1055,6 +1141,7 @@
     "s_star": "25",
     "smallest": "25",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1067,6 +1154,7 @@
     "s_star": "26",
     "smallest": "26",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1079,6 +1167,7 @@
     "s_star": "25",
     "smallest": "25",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1091,6 +1180,7 @@
     "s_star": "25",
     "smallest": "25",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1103,6 +1193,7 @@
     "s_star": "25",
     "smallest": "25",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1115,6 +1206,7 @@
     "s_star": "26",
     "smallest": "26",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1127,6 +1219,7 @@
     "s_star": "26",
     "smallest": "26",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1139,6 +1232,7 @@
     "s_star": "26",
     "smallest": "26",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1151,6 +1245,7 @@
     "s_star": "26",
     "smallest": "26",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1163,6 +1258,7 @@
     "s_star": "26",
     "smallest": "26",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1175,6 +1271,7 @@
     "s_star": "27",
     "smallest": "27",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1187,6 +1284,7 @@
     "s_star": "27",
     "smallest": "27",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1199,6 +1297,7 @@
     "s_star": "27",
     "smallest": "27",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1211,6 +1310,7 @@
     "s_star": "27",
     "smallest": "27",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1223,6 +1323,7 @@
     "s_star": "28",
     "smallest": "28",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1235,6 +1336,7 @@
     "s_star": "28",
     "smallest": "28",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1247,6 +1349,7 @@
     "s_star": "29",
     "smallest": "29",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1259,6 +1362,7 @@
     "s_star": "30",
     "smallest": "30",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1271,6 +1375,7 @@
     "s_star": "30",
     "smallest": "30",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1283,6 +1388,7 @@
     "s_star": "30",
     "smallest": "30",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1295,6 +1401,7 @@
     "s_star": "31",
     "smallest": "31",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1307,6 +1414,7 @@
     "s_star": "31",
     "smallest": "31",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1319,6 +1427,7 @@
     "s_star": "31",
     "smallest": "31",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1331,6 +1440,7 @@
     "s_star": "32",
     "smallest": "32",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    },
@@ -1343,6 +1453,7 @@
     "s_star": "32",
     "smallest": "32",
     "better": null,
+    "better_cert": null,
     "reproduced": false,
     "cert": null
    }

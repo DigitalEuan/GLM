@@ -369,7 +369,10 @@ def entry_test(verbose: bool = True) -> dict:
                                 near = ((k1, k2, o, m, st), gap, L)
                             if gap == Q2(0):
                                 r = check(k1, k2, o, m, st, stop=True)
-                                if r["ok"]:
+                                # the analytic counter only nominates; the pose's own
+                                # count must be the row's (run 146's audit: a hit that
+                                # is gated but carries another count is not a hit)
+                                if r["ok"] and r["n"] == n:
                                     solved = ((k1, k2, o, m, st), L, r)
                                     break
                         if solved:
@@ -500,14 +503,20 @@ def selftest() -> int:
     print(f"  8. bytecode audit: {checked} decision functions, 0 naming float "
           f"(exempt {skipped})")
 
-    # 9. one counter, one gate: the batched counter agrees with `assemble`, and
+    # 9. one counter, one gate: the batched counter agrees with `assemble` on
+    #    *every* bar size in its window -- not only the one that was built -- and
     #    `check` reports exactly the raw gate's verdict (no second SAT path)
     assert "quick_ok" not in globals(), "the old pre-filter must be gone"
     for (k1, k2, o, m) in ((1, 1, 0, 1), (2, 2, 1, 2), (2, 2, 1, 3), (2, 3, 1, 3),
-                           (3, 3, 0, 4), (5, 4, 2, 7)):
-        counts, L = counts_for(k1, k2, o, [m - 1, m, m + 1], 1)
+                           (3, 3, 0, 4), (5, 4, 2, 7), (4, 4, 0, 9), (6, 5, 2, 12)):
+        window = [w for w in range(m - 2, m + 3) if 1 <= w <= MAX_M]
+        counts, L = counts_for(k1, k2, o, window, 1)
         kept, bar, L2, _d = assemble(k1, k2, o, m)
-        assert L == L2 and counts[m] == len(kept) + m, (k1, k2, o, m, counts)
+        assert L == L2, (k1, k2, o, L, L2)
+        for w in window:
+            _k, _b, _L, _d = assemble(k1, k2, o, w)
+            assert counts[w] == len(_k) + w, (k1, k2, o, w, counts)
+        assert counts[m] == len(kept) + m, (k1, k2, o, m, counts)
         r = check(k1, k2, o, m)
         g = Q.gate(kept + bar, [AXIS] * len(kept) + [W45] * len(bar))
         assert r["ok"] == (bool(g["ok"]) and r["contained"]), (k1, k2, o, m)
