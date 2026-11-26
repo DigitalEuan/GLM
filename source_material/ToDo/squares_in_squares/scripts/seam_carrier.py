@@ -37,8 +37,16 @@ reproduce the delivered `(n, side)` pair of at least 20 of the 110 two-class
 beating rows, with 0 overlaps under the exact gate.  If it cannot, the run
 records the refusal and the measured reason instead of a sweep.
 
+The bar size is searched over `m_hint - 2 .. m_hint + 2`, where `m_hint` is the
+row's delivered tilted-class size: the hint bounds *which* declarations are
+tried, never whether one is legal, so a refusal cannot be an artefact of one
+bar size.  Legality has exactly one decision procedure -- `qsqrt2.gate`, called
+from `check` -- and one counter (`counts_for`) that is a speedup of the same
+computation, so every accepted pose is judged by the same exact SAT that
+refuses every rejected one.
+
     python3 scripts/seam_carrier.py              # entry test, writes the ledger
-    python3 scripts/seam_carrier.py --selftest    # 8 controls
+    python3 scripts/seam_carrier.py --selftest    # 9 controls
 """
 from __future__ import annotations
 
@@ -68,8 +76,11 @@ W45 = Q.word_45()
 
 MAX_SIDE = 34               # k1, k2 <= this
 MAX_OVER = 2                # interlock o <= this
-MAX_M = 90                  # slots per declaration
+MAX_M = 330                 # slots per declaration: the largest delivered hinted
+                            # class is 324, so this leaves every row's +-M_WINDOW
+                            # search window non-empty (no zero-bar-size row)
 MAX_SEAM = 30               # seam width s, in units of sqrt2/2
+M_WINDOW = 2                # the bar size may differ from the hint by this much
 
 
 # ------------------------------------------------------------------ the family
@@ -154,12 +165,19 @@ def assemble(k1: int, k2: int, o: int, m: int, s: int = 1):
     return kept, bar, L, len(band) - len(kept_set)
 
 
-def check(k1: int, k2: int, o: int, m: int, s: int = 1) -> dict:
-    """Assemble, gate exactly, and report the family's numbers for a declaration."""
+def check(k1: int, k2: int, o: int, m: int, s: int = 1, stop: bool = False) -> dict:
+    """Assemble, gate exactly, and report the family's numbers for a declaration.
+
+    This is the **only** legality decision in the module: `qsqrt2.gate` on the
+    rebuilt pose, no pre-filter and no second predicate.  `stop=True` lets the
+    gate return at its first overlapping pair -- the verdict `ok` is identical,
+    only a refused pose's pair counts are cut short -- which is what keeps the
+    873 count-matched declarations of the entry test affordable.
+    """
     kept, bar, L, dropped = assemble(k1, k2, o, m, s)
     state = kept + bar
     words = [AXIS] * len(kept) + [W45] * len(bar)
-    g = Q.gate(state, words)
+    g = Q.gate(state, words, stop=stop)
     ex = [Q.frame_extent(*w) for w in words]
     contained = all(Q2(0) <= p[0] - e and p[0] + e <= L and
                     Q2(0) <= p[1] - e and p[1] + e <= L
@@ -266,54 +284,30 @@ def band_cells(k1: int, k2: int, o: int, s: int):
     return out
 
 
-def quick_ok(kept, bar, L) -> bool:
-    """Cheap exact pre-filter: no two kept cells overlap and all fit the box.
+def counts_for(k1: int, k2: int, o: int, ms, s: int = 1):
+    """({m: n}, L) for every bar size in `ms`, insertion rule applied exactly.
 
-    `assemble` has already dropped every carrier cell a slot covers, so the only
-    pairs that can still be illegal are carrier-carrier, and a bucket scan finds
-    them.  Only a declaration that passes this gets the full gate run on it.
-    """
-    state = kept + bar
-    words = [AXIS] * len(kept) + [W45] * len(bar)
-    two, zero = Q2(2), Q2(0)
-    buckets: dict = {}
-    for idx, (x, y) in enumerate(state):
-        for dx in range(-2, 3):
-            for dy in range(-2, 3):
-                for j in buckets.get((x.floor() + dx, y.floor() + dy), ()):
-                    if abs(x - state[j][0]) >= two or abs(y - state[j][1]) >= two:
-                        continue                       # the gate's own exact prune
-                    best = max(sk for _q, sk, _n, _o in
-                               Q.pair_axes(state, words, idx, j))
-                    if best < zero:
-                        return False
-        buckets.setdefault((x.floor(), y.floor()), []).append(idx)
-    for p, w in zip(state, words):
-        e = Q.frame_extent(*w)
-        if not (zero <= p[0] - e and p[0] + e <= L and
-                zero <= p[1] - e and p[1] + e <= L):
-            return False
-    return True
-
-
-def count_for(k1: int, k2: int, o: int, m: int, s: int):
-    """(n, L) for a declaration, with the insertion rule applied exactly.
-
-    The band is enumerated from run indices, the slot index window is located on
-    a Decimal shadow (a *window*, padded by one on each side), and every actual
+    This is the counter, not a decision procedure: it reports the count the
+    assembled pose would have, and legality is answered only by `check` ->
+    `qsqrt2.gate`.  One band pass serves the whole window of bar sizes: the band
+    is enumerated from run indices, the slot index window is located on a
+    Decimal shadow (a *window*, padded by one on each side), and every actual
     overlap is then decided by the exact `collide`.  So the shadow can only cost
     a wasted comparison, never a wrong count.
     """
     L = Q2(k1 + k2) + Q2(0, F(s, 2)) - Q2(o)
-    bar = slots(m, L)
+    ms = sorted({m for m in ms if 1 <= m <= MAX_M})
+    if not ms:
+        return {}, L
+    bars = {m: slots(m, L) for m in ms}
     x1 = HALF
     x2 = Q2(k1) + Q2(0, F(s, 2)) - Q2(o) + HALF
     specs = ((x1, k1), (x2, k2))
     step = _shadow(W)
     c_dec = _shadow(L) / 2
-    half_m = Decimal(m - 1) / 2
+    half_m = {m: Decimal(m - 1) / 2 for m in ms}
     base_dec = [[_shadow(bx) for _by, ny in specs] for bx, nx in specs]
-    gone = 0
+    gone = {m: 0 for m in ms}
     for a_i, (bx, nx) in enumerate(specs):
         for b_i, (by, ny) in enumerate(specs):
             d0 = bx - by
@@ -326,14 +320,15 @@ def count_for(k1: int, k2: int, o: int, m: int, s: int):
                     if not (0 <= j < ny):
                         continue
                     x, y = bx + Q2(i), by + Q2(j)
-                    k0 = int((xd0 + Decimal(i) - c_dec) / step + half_m)
-                    hit = False
-                    for kk in (k0 - 1, k0, k0 + 1, k0 + 2):
-                        if 0 <= kk < m and collide((x, y), bar[kk]):
-                            hit = True
-                            break
-                    gone += hit
-    return (k1 + k2) ** 2 - gone + m, L
+                    u_dec = xd0 + Decimal(i)
+                    for m in ms:
+                        k0 = int((u_dec - c_dec) / step + half_m[m])
+                        bar = bars[m]
+                        for kk in (k0 - 1, k0, k0 + 1, k0 + 2):
+                            if 0 <= kk < m and collide((x, y), bar[kk]):
+                                gone[m] += 1
+                                break
+    return {m: (k1 + k2) ** 2 - gone[m] + m for m in ms}, L
 
 
 def entry_test(verbose: bool = True) -> dict:
@@ -349,8 +344,10 @@ def entry_test(verbose: bool = True) -> dict:
     hits = 0
     for n, dec, k, m_tilt in rows:
         got = exact_side(dec)
+        window = [m for m in range(m_tilt - M_WINDOW, m_tilt + M_WINDOW + 1)
+                  if 1 <= m <= MAX_M]
         rec = {"n": n, "target": str(dec) if got is None else str(got[0]),
-               "exact": got is not None, "m_hint": m_tilt}
+               "exact": got is not None, "m_hint": m_tilt, "window": window}
         solved = None
         near = None
         if got is not None:
@@ -363,20 +360,15 @@ def entry_test(verbose: bool = True) -> dict:
                         k2 = ai + o - k1
                         if not (1 <= k2 <= MAX_SIDE):
                             continue
-                        P = (k1 + k2) ** 2
-                        for m in (m_tilt,):
-                            if not (1 <= m <= MAX_M):
-                                continue
-                            nn, L = count_for(k1, k2, o, m, st)
-                            if nn != n:
+                        counts, L = counts_for(k1, k2, o, window, st)
+                        for m in window:
+                            if counts[m] != n:
                                 continue
                             gap = abs(L - target)
                             if near is None or gap < near[1]:
                                 near = ((k1, k2, o, m, st), gap, L)
                             if gap == Q2(0):
-                                kept0, bar0, _L0, _d0 = assemble(k1, k2, o, m, st)
-                                r = (check(k1, k2, o, m, st) if quick_ok(kept0, bar0, L)
-                                     else {"ok": False})
+                                r = check(k1, k2, o, m, st, stop=True)
                                 if r["ok"]:
                                     solved = ((k1, k2, o, m, st), L, r)
                                     break
@@ -390,6 +382,7 @@ def entry_test(verbose: bool = True) -> dict:
         else:
             (k1, k2, o, m, st), L, r = solved
             rec.update({"reproduced": True, "params": [k1, k2, o, m, st],
+                        "m_delta": m - m_tilt,
                         "family_L": str(L), "family_n": r["n"],
                         "dropped": r["dropped"], "contacts": r["gate"]["contacts"]})
             hits += 1
@@ -399,7 +392,7 @@ def entry_test(verbose: bool = True) -> dict:
                   f"{rec.get('params', '')} {rec.get('family_L', '')}")
     res = {"rows": len(rows), "reproduced": hits, "threshold": 20,
            "passes": hits >= 20, "max_side": MAX_SIDE, "max_over": MAX_OVER,
-           "max_seam": MAX_SEAM, "max_m": MAX_M,
+           "max_seam": MAX_SEAM, "max_m": MAX_M, "m_window": M_WINDOW,
            "exact_rows": sum(1 for d in detail if d["exact"]),
            "count_matched": sum(1 for d in detail if d.get("near")),
            "gated": sum(1 for d in detail if d["reproduced"]),
@@ -421,7 +414,7 @@ def main() -> int:
     res = entry_test()
     led = {"family": "two shifted axis runs + centred 45-degree bar, notched",
            "seam_width": str(W), "max_side": MAX_SIDE, "max_over": MAX_OVER,
-           "max_m": MAX_M, "entry_test": res}
+           "max_m": MAX_M, "m_window": M_WINDOW, "entry_test": res}
     with open(LEDGER, "w") as f:
         json.dump(led, f, indent=1)
     print(f"wrote {os.path.relpath(LEDGER, ROOT)}")
@@ -506,7 +499,21 @@ def selftest() -> int:
     assert offenders == [], offenders
     print(f"  8. bytecode audit: {checked} decision functions, 0 naming float "
           f"(exempt {skipped})")
-    print("selftest OK (8 controls)")
+
+    # 9. one counter, one gate: the batched counter agrees with `assemble`, and
+    #    `check` reports exactly the raw gate's verdict (no second SAT path)
+    assert "quick_ok" not in globals(), "the old pre-filter must be gone"
+    for (k1, k2, o, m) in ((1, 1, 0, 1), (2, 2, 1, 2), (2, 2, 1, 3), (2, 3, 1, 3),
+                           (3, 3, 0, 4), (5, 4, 2, 7)):
+        counts, L = counts_for(k1, k2, o, [m - 1, m, m + 1], 1)
+        kept, bar, L2, _d = assemble(k1, k2, o, m)
+        assert L == L2 and counts[m] == len(kept) + m, (k1, k2, o, m, counts)
+        r = check(k1, k2, o, m)
+        g = Q.gate(kept + bar, [AXIS] * len(kept) + [W45] * len(bar))
+        assert r["ok"] == (bool(g["ok"]) and r["contained"]), (k1, k2, o, m)
+        print(f"  9.{k1}.{k2}.{o}.{m} counter n = {counts[m]} = assemble, "
+              f"check ok = {r['ok']} = the raw gate's verdict")
+    print("selftest OK (9 controls)")
     return 0
 
 

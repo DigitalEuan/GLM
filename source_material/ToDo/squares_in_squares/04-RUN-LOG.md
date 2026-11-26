@@ -4372,22 +4372,24 @@ interlock `o`, plus a **centred 45° bar of `m` cells**; the carrier is the prod
 lists (`P = (k1+k2)²` cells), a carrier cell is **dropped iff it touches a slot** (the notch), and the
 side is `L = k1 + k2 + s·w − o = a + (s/2)√2` in closed form while the count `n = P − dropped + m` is
 read off the assembled pose. Every verdict is `qsqrt2.gate` on `Q(√2)` with no tolerance, plus exact
-containment; **8 controls**, exit 0 — seam identity, the `n = 5` atom at `2 + ½√2`, a `1e-9` box
-shrink refused, the notch load-bearing (the 8 kept cells of `(2,2,1,2,1)` give **10 overlapping
-pairs**), sparseness at fill **0.6823 / 0.7277 / 0.6549 / 0.7113** with axis domains **4 / 4 / 2 / 4**
+containment; **9 controls**, exit 0 — seam identity, the `n = 5` atom at `2 + ½√2`, a `1e-9` box
+shrink refused, the notch load-bearing (keeping `(2,2,1,2,1)`'s 8 dropped cells gives **22
+overlapping pairs**, `(3,3,0,4)`'s **10**), sparseness at fill **0.6823 / 0.7277 / 0.6549 / 0.7113** with axis domains **4 / 4 / 2 / 4**
 and tilt domains **1**, containment and the two atoms (`n = 5`, `n = 10` at `3 + ½√2`, `n = 9`, `n =
 32`), the illegal `(2,3,1,3)` refused with 2 overlapping pairs, the exact side against a 60-digit
-Decimal, and **15 decision functions, 0 naming float** in bytecode.
+Decimal, one counter/gate agreement control (the counter reproduces `assemble` and `check` equals the
+raw gate), and **14 decision functions, 0 naming float** in bytecode.
 
 **The entry test: 2 / 110 (threshold 20) -> FAIL. No sweep was run.** The two reproduced are the
 family's own calibration atoms — `n = 5` from `(1,1,0,1,1)` and `n = 10` from `(2,2,1,2,1)` (8 cells
 dropped, 11 exact contacts) — and both are exactly the delivered rows. The failure is measured, not
-inferred, and it sorts three ways: **25** of the 110 rows have a declaration that hits the delivered
-side **and** the delivered count (`L = 1 + a + ½√2 − 1` identically, `m` at the delivered tilted-class
-size); **23 of those 25 are refused by the exact gate** because the two axis runs overlap each other
-(`n = 27, 38, 52, 67, 104, 125, 149, 174, 201, 231, 262, 296, 331, 369, 408, 449, 493, 538, 586,
-635, 686, 853, 974`) — the notch only removes cells the *bar* covers and has no authority over
-carrier-carrier overlap; **57** more rows are in the family's side group but no member reaches their
+inferred, and it sorts three ways: **30** of the 110 rows have a declaration that hits the delivered
+side **and** the delivered count (`L = 1 + a + ½√2 − 1` identically, `m` searched over the delivered
+tilted-class size ±2); **28 of those 30 are refused by the exact gate** because the two axis runs
+overlap each other
+(`n = 27, 38, 40, 52, 67, 104, 125, 149, 174, 201, 231, 262, 296, 331, 369, 408, 449, 492, 493, 538,
+585, 586, 634, 635, 686, 853, 909, 974`) — the notch only removes cells the *bar* covers and has no authority over
+carrier-carrier overlap; **52** more rows are in the family's side group but no member reaches their
 count (`n = 65` at `5 + 5/2√2` needs `k1+k2 ≤ 7`, so `P ≤ 49` and `n ≤ 74` with no drops against a
 delivered 65); and **28** rows are not of the form `a + (s/2)√2` at all (`n = 11, 18, 19, 26, 28, 50,
 51, 54, 70, 85, 123, 126, 178, 230, 234, 295, 367, 368, 407, 448, 491, 626, 677, 730, 785, 842, 901,
@@ -4395,16 +4397,25 @@ delivered 65); and **28** rows are not of the form `a + (s/2)√2` at all (`n = 
 give-way variant that lets run 1 win was rejected at design time (`n = 10 -> 8`, `n = 27 -> 19`: it
 over-drops and destroys the count), so the obstruction is the family's, not the implementation's: a
 **notched product** can share with the bar but not with itself, and the delivered rows need both.
-The instrument was also made fast enough to keep as the first gate of every carrier run — the
-band-restricted exact counter, an offset-keyed collision memo (the `Q2` identity-keyed memo never
-hit), and the gate's own exact `|Δ| ≥ 2` skip reused as a pre-filter (it reproduces `gate.ok` on
-every declaration it admits, and the full gate still runs on every pose the test accepts) — cutting
-the 110-row sweep from >15 min to about two minutes in `Q(√2)`.
+**The bar size is not the artefact, and there is one gate.** The entry test searches `m` over
+`m_hint ± 2`, with `MAX_M` raised **90 -> 330** because the largest delivered hinted class is 324 —
+at 90 it had given **36** rows an *empty* window (a worse artefact than one size). All 110 windows
+are now non-empty (3, 4 or 5 bar sizes). That buys five more rows reaching *both* delivered numbers
+(`n = 40, 492, 585, 634, 909`; **25 -> 30** count-and-side matches, **23 -> 28** refusals, the no-count
+class **57 -> 52**), and five of the refusals needed a bar size other than the hint (`n = 40` at
+`m = 18` vs 16; `492` 30/29, `585` 33/32, `634` 34/33, `909` 257/256) — the window is doing its job
+and every newcomer is still refused. The `quick_ok` bucket pre-filter is also gone: it was a second
+SAT scan beside the gate, and the module now has exactly one legality decision, `check` ->
+`qsqrt2.gate` on the rebuilt pose. The cost is that all **873** count-matched declarations per sweep
+are gated in full, so `qsqrt2.gate(..., stop=True)` was added — the same loop, predicate and `ok`,
+returning at its first overlapping pair, defaulting to `False` so every other caller is unchanged.
+The band-restricted counter (one pass for the whole window), the offset-keyed collision memo, and
+that early exit keep the 110-row sweep at **5 m 24 s** in `Q(√2)`.
 
 **Refused: the sweep. Promoted: nothing. `submission.csv` and root `WHITEBOARD.md` untouched; the
 delivered total stands at 22.217428576 (554 beats, 446 ties).** Doc 101.
 
-Checks: `seam_carrier --selftest` 8; `seam_carrier` entry test 2/110 (fail) + ledger; `shared_box
+Checks: `seam_carrier --selftest` 9; `seam_carrier` entry test 2/110 (fail) + ledger; `shared_box
 --selftest` 9; `tilt_audit --selftest` 8; `interleaved_boundary` 9; `twin_boundary` 5; `notch136`;
 `glm_plan` 5; `pure_slide`; `beaten_leverage`; `band5`; `ext_census`; `range_leverage`;
 `construct_seam`; `p_screen`; `legal_slide`; `structure --control`/`--check-solver`; `perturb`;

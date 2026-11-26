@@ -153,7 +153,7 @@ def pair_axes(state, words, i, j, cls=None):
     return out
 
 
-def gate(state, words, cls=None):
+def gate(state, words, cls=None, stop=False):
     """The exact SAT sentence gate.
 
     Args:
@@ -173,8 +173,13 @@ def gate(state, words, cls=None):
 
     Pairs whose centres differ by 2 or more on either axis are skipped: every
     half-extent is at most sqrt(2)/2, so such a pair is separated on that axis by
-    a margin of at least 2 - sqrt(2) > 0.5 and cannot be the worst pair.  The
+    a     margin of at least 2 - sqrt(2) > 0.5 and cannot be the worst pair.  The
     prune is exact (it is decided by a field comparison), not a tolerance.
+
+    `stop=True` returns at the first overlapping pair: `ok` is the same
+    predicate, decided by the same loop, but `violations` is then 1 and
+    `contacts` / `clearance` describe only the pairs already scanned.  The
+    default `False` scans every pair.
     """
     cls = field_of(state, cls)
     n = len(state)
@@ -200,6 +205,9 @@ def gate(state, words, cls=None):
                 contacts += 1
             if best < cls(0):          # a comparison, so a plain `Fraction` also gates
                 violations += 1
+                if stop:               # the same verdict, not scanned further
+                    return {"ok": False, "L": L, "clearance": best,
+                            "contacts": contacts, "violations": violations}
             if worst is None or best < worst:
                 worst = best
     return {"ok": violations == 0, "L": L, "clearance": worst,

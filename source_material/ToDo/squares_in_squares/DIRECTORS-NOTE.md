@@ -114,10 +114,14 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    The lever stands; the carrier is not a rectangle.
    **Run 144 has now built the sparse carrier and refused it too** (`seam_carrier.py`, doc 101): two
    axis runs per axis across a seam of `s·w` plus a centred 45° bar, cells dropped where they touch the
-   bar — 8 controls, fill **0.68–0.73 < 1**, axis **2–4** / tilt **1** translation domains, and an
-   entry test of **2 of 110** (threshold 20), the two calibration atoms `n = 5` and `n = 10`. **25** rows
-   hit the delivered side *and* count, but **23** of them are refused by the exact gate: the notch only
+   bar — **9 controls**, fill **0.68–0.73 < 1**, axis **2–4** / tilt **1** translation domains, one
+   legality path (`check` → `gate`, no pre-filter), and an
+   entry test of **2 of 110** (threshold 20) with the bar searched over `m_hint ± 2` (cap `90 → 330`), the
+   two calibration atoms `n = 5` and `n = 10`. **30** rows
+   hit the delivered side *and* count, but **28** of them are refused by the exact gate: the notch only
    removes what the bar covers, so a notched **product** shares with the bar and not with itself. The
+   ±2 window adds five of those refusals (`n = 40, 492, 585, 634, 909`, five at a non-hinted bar size)
+   and refuses all five, so the refusal is the family's and not a one-bar-size artefact. The
    next carrier must be sparse **by construction** (disjoint translates by a law) or the notch must gain
    authority over carrier-carrier overlap with a count-preserving repair.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90

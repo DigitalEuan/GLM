@@ -756,15 +756,19 @@ carrier is built exactly as briefed (`seam_carrier.py`): **two axis runs per axi
 (`w = √2/2`, the 45° cell's own half-extent) with an interlock `o`, plus a **centred 45° bar of `m` cells**; the
 carrier is the product of the runs (`P = (k1+k2)²`), a cell is **dropped iff it touches a slot** (the notch), the
 side is `L = a + (s/2)√2` in closed form and the count `n = P − dropped + m` by construction, every verdict
-`qsqrt2.gate` on `Q(√2)` with no tolerance — **8 controls**, fill **0.68–0.73 < 1** with axis **2–4** / tilt **1**
-translation domains, 15 decision functions **0 naming float**. The entry test runs **first** and fails: **2 / 110**
+`qsqrt2.gate` on `Q(√2)` with no tolerance — **9 controls**, fill **0.68–0.73 < 1** with axis **2–4** / tilt **1**
+translation domains, 14 decision functions **0 naming float**. The entry test runs **first** and fails: **2 / 110**
 reproduced (threshold 20), the two being the family's calibration atoms (`n = 5` at `2 + ½√2`, `n = 10` at `3 +
-½√2` with 8 cells dropped and 11 contacts), and **no sweep was run**. The diagnosis is exact and new: **25** rows
-have a declaration hitting the delivered side *and* count, but **23** of them are **refused by the gate** because
+½√2` with 8 cells dropped and 11 contacts), and **no sweep was run**. The diagnosis is exact and new: **30** rows
+have a declaration hitting the delivered side *and* count, but **28** of them are **refused by the gate** because
 the two axis runs overlap each other — the notch removes only what the bar covers, so a notched product can share
-with the bar and **not with itself**; **57** more rows are in the side group with no member at their count (`n =
+with the bar and **not with itself**; **52** more rows are in the side group with no member at their count (`n =
 65` needs `k1+k2 ≤ 7`, i.e. `n ≤ 74` with no drops against a delivered 65) and **28** are not of the form
 `a + (s/2)√2` at all (**82 of 110** in the side group, against doc 100's 101 with any rational `b`). The give-way
 variant (run 1 wins) was rejected at design time — it over-drops (`n = 10 → 8`, `n = 27 → 19`) and destroys the
 count. Nothing promoted: `submission.csv` and root `WHITEBOARD.md` untouched, the delivered total stands at
-**22.217428576** (554 beats, 446 ties). Doc 101.
+**22.217428576** (554 beats, 446 ties). Doc 101 §7 revises the run: `m` is searched over
+`m_hint ± 2` (cap **90 → 330**, so no row has an empty window) and the `quick_ok` pre-filter is folded into a
+single gate path — **2 / 110** unchanged, five more rows reaching *both* delivered numbers and all five refused
+(`n = 40, 492, 585, 634, 909`), five of the refusals at a non-hinted bar size, and `qsqrt2.gate(..., stop=True)`
+keeping the honest single-gate sweep at **5 m 24 s**.

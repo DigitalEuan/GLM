@@ -3,7 +3,8 @@
  "seam_width": "1/2\u221a2",
  "max_side": 34,
  "max_over": 2,
- "max_m": 90,
+ "max_m": 330,
+ "m_window": 2,
  "entry_test": {
   "rows": 110,
   "reproduced": 2,
@@ -12,9 +13,10 @@
   "max_side": 34,
   "max_over": 2,
   "max_seam": 30,
-  "max_m": 90,
+  "max_m": 330,
+  "m_window": 2,
   "exact_rows": 82,
-  "count_matched": 23,
+  "count_matched": 28,
   "gated": 2,
   "detail": [
    {
@@ -22,6 +24,11 @@
     "target": "2 + 1/2\u221a2",
     "exact": true,
     "m_hint": 1,
+    "window": [
+     1,
+     2,
+     3
+    ],
     "reproduced": true,
     "params": [
      1,
@@ -30,6 +37,7 @@
      1,
      1
     ],
+    "m_delta": 0,
     "family_L": "2 + 1/2\u221a2",
     "family_n": 5,
     "dropped": 0,
@@ -40,6 +48,12 @@
     "target": "3 + 1/2\u221a2",
     "exact": true,
     "m_hint": 2,
+    "window": [
+     1,
+     2,
+     3,
+     4
+    ],
     "reproduced": true,
     "params": [
      2,
@@ -48,6 +62,7 @@
      2,
      1
     ],
+    "m_delta": 0,
     "family_L": "3 + 1/2\u221a2",
     "family_n": 10,
     "dropped": 8,
@@ -58,6 +73,13 @@
     "target": "3.87708359150600000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 5,
+    "window": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -68,6 +90,13 @@
     "target": "4.82287565711810338076867830301645689164227969851470636572922",
     "exact": false,
     "m_hint": 8,
+    "window": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -78,6 +107,13 @@
     "target": "4.88561808475410338076867830301645689164227969851470636572922",
     "exact": false,
     "m_hint": 8,
+    "window": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -88,6 +124,13 @@
     "target": "5.6213203452041033807686783030164568916422796985147063657292",
     "exact": false,
     "m_hint": 9,
+    "window": [
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -98,6 +141,13 @@
     "target": "5 + 1/2\u221a2",
     "exact": true,
     "m_hint": 5,
+    "window": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -114,6 +164,13 @@
     "target": "5.8244446183301033807686783030164568916422796985147063657292",
     "exact": false,
     "m_hint": 12,
+    "window": [
+     10,
+     11,
+     12,
+     13,
+     14
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -124,6 +181,13 @@
     "target": "6 + 1/2\u221a2",
     "exact": true,
     "m_hint": 6,
+    "window": [
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -140,16 +204,36 @@
     "target": "4 + 2\u221a2",
     "exact": true,
     "m_hint": 16,
+    "window": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
-    "near": null,
-    "near_gap": null
+    "near": [
+     1,
+     5,
+     2,
+     18,
+     4
+    ],
+    "near_gap": "0"
    },
    {
     "n": 50,
     "target": "7.5714285731640000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 16,
+    "window": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -160,6 +244,13 @@
     "target": "7.6903559390280000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 17,
+    "window": [
+     15,
+     16,
+     17,
+     18,
+     19
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -170,6 +261,13 @@
     "target": "7 + 1/2\u221a2",
     "exact": true,
     "m_hint": 8,
+    "window": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -186,6 +284,13 @@
     "target": "7.8466671945881033807686783030164568916422796985147063657292",
     "exact": false,
     "m_hint": 16,
+    "window": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -196,6 +301,13 @@
     "target": "5 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -206,6 +318,13 @@
     "target": "3 + 4\u221a2",
     "exact": true,
     "m_hint": 24,
+    "window": [
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -216,6 +335,13 @@
     "target": "8 + 1/2\u221a2",
     "exact": true,
     "m_hint": 9,
+    "window": [
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -232,6 +358,13 @@
     "target": "8.8809603733300000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 20,
+    "window": [
+     18,
+     19,
+     20,
+     21,
+     22
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -242,6 +375,13 @@
     "target": "6 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -252,6 +392,13 @@
     "target": "9.7426406889141033807686783030164568916422796985147063657292",
     "exact": false,
     "m_hint": 36,
+    "window": [
+     34,
+     35,
+     36,
+     37,
+     38
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -262,6 +409,13 @@
     "target": "5 + 7/2\u221a2",
     "exact": true,
     "m_hint": 49,
+    "window": [
+     47,
+     48,
+     49,
+     50,
+     51
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -272,6 +426,13 @@
     "target": "7 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -282,6 +443,13 @@
     "target": "10 + 1/2\u221a2",
     "exact": true,
     "m_hint": 12,
+    "window": [
+     10,
+     11,
+     12,
+     13,
+     14
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -298,6 +466,13 @@
     "target": "8 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -308,6 +483,13 @@
     "target": "11.5913781473250000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 33,
+    "window": [
+     31,
+     32,
+     33,
+     34,
+     35
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -318,6 +500,13 @@
     "target": "6 + 4\u221a2",
     "exact": true,
     "m_hint": 64,
+    "window": [
+     62,
+     63,
+     64,
+     65,
+     66
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -328,6 +517,13 @@
     "target": "11 + 1/2\u221a2",
     "exact": true,
     "m_hint": 13,
+    "window": [
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -344,6 +540,13 @@
     "target": "11.7426406889490000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 37,
+    "window": [
+     35,
+     36,
+     37,
+     38,
+     39
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -354,6 +557,13 @@
     "target": "9 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -364,6 +574,13 @@
     "target": "7 + 4\u221a2",
     "exact": true,
     "m_hint": 64,
+    "window": [
+     62,
+     63,
+     64,
+     65,
+     66
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -374,6 +591,13 @@
     "target": "7 + 4\u221a2",
     "exact": true,
     "m_hint": 64,
+    "window": [
+     62,
+     63,
+     64,
+     65,
+     66
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -384,6 +608,13 @@
     "target": "12 + 1/2\u221a2",
     "exact": true,
     "m_hint": 15,
+    "window": [
+     13,
+     14,
+     15,
+     16,
+     17
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -400,6 +631,13 @@
     "target": "5 + 11/2\u221a2",
     "exact": true,
     "m_hint": 66,
+    "window": [
+     64,
+     65,
+     66,
+     67,
+     68
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -410,6 +648,13 @@
     "target": "10 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -420,6 +665,13 @@
     "target": "8 + 4\u221a2",
     "exact": true,
     "m_hint": 64,
+    "window": [
+     62,
+     63,
+     64,
+     65,
+     66
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -430,6 +682,13 @@
     "target": "13 + 1/2\u221a2",
     "exact": true,
     "m_hint": 16,
+    "window": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -446,6 +705,13 @@
     "target": "13.8466671947000000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 32,
+    "window": [
+     30,
+     31,
+     32,
+     33,
+     34
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -456,6 +722,13 @@
     "target": "11 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -466,6 +739,13 @@
     "target": "9 + 4\u221a2",
     "exact": true,
     "m_hint": 64,
+    "window": [
+     62,
+     63,
+     64,
+     65,
+     66
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -476,6 +756,13 @@
     "target": "14 + 1/2\u221a2",
     "exact": true,
     "m_hint": 17,
+    "window": [
+     15,
+     16,
+     17,
+     18,
+     19
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -492,6 +779,13 @@
     "target": "2 + 9\u221a2",
     "exact": true,
     "m_hint": 18,
+    "window": [
+     16,
+     17,
+     18,
+     19,
+     20
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -502,6 +796,13 @@
     "target": "7 + 11/2\u221a2",
     "exact": true,
     "m_hint": 115,
+    "window": [
+     113,
+     114,
+     115,
+     116,
+     117
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -512,6 +813,13 @@
     "target": "12 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -522,6 +830,13 @@
     "target": "15.6829268311400000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 104,
+    "window": [
+     102,
+     103,
+     104,
+     105,
+     106
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -532,6 +847,13 @@
     "target": "15 + 1/2\u221a2",
     "exact": true,
     "m_hint": 19,
+    "window": [
+     17,
+     18,
+     19,
+     20,
+     21
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -548,6 +870,13 @@
     "target": "8 + 11/2\u221a2",
     "exact": true,
     "m_hint": 121,
+    "window": [
+     119,
+     120,
+     121,
+     122,
+     123
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -558,6 +887,13 @@
     "target": "15.8228756574060000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 36,
+    "window": [
+     34,
+     35,
+     36,
+     37,
+     38
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -568,6 +904,13 @@
     "target": "13 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -578,6 +921,13 @@
     "target": "16 + 1/2\u221a2",
     "exact": true,
     "m_hint": 20,
+    "window": [
+     18,
+     19,
+     20,
+     21,
+     22
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -594,6 +944,13 @@
     "target": "9 + 11/2\u221a2",
     "exact": true,
     "m_hint": 121,
+    "window": [
+     119,
+     120,
+     121,
+     122,
+     123
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -604,6 +961,13 @@
     "target": "14 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -614,6 +978,13 @@
     "target": "14 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -624,6 +995,13 @@
     "target": "12 + 4\u221a2",
     "exact": true,
     "m_hint": 120,
+    "window": [
+     118,
+     119,
+     120,
+     121,
+     122
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -634,6 +1012,13 @@
     "target": "17.7042327926240000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 160,
+    "window": [
+     158,
+     159,
+     160,
+     161,
+     162
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -644,6 +1029,13 @@
     "target": "17 + 1/2\u221a2",
     "exact": true,
     "m_hint": 22,
+    "window": [
+     20,
+     21,
+     22,
+     23,
+     24
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -660,6 +1052,13 @@
     "target": "10 + 11/2\u221a2",
     "exact": true,
     "m_hint": 121,
+    "window": [
+     119,
+     120,
+     121,
+     122,
+     123
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -670,6 +1069,13 @@
     "target": "15 + 5/2\u221a2",
     "exact": true,
     "m_hint": 95,
+    "window": [
+     93,
+     94,
+     95,
+     96,
+     97
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -680,6 +1086,13 @@
     "target": "15 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -690,6 +1103,13 @@
     "target": "13 + 4\u221a2",
     "exact": true,
     "m_hint": 120,
+    "window": [
+     118,
+     119,
+     120,
+     121,
+     122
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -700,6 +1120,13 @@
     "target": "18 + 1/2\u221a2",
     "exact": true,
     "m_hint": 23,
+    "window": [
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -716,6 +1143,13 @@
     "target": "16 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -726,6 +1160,13 @@
     "target": "16 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -736,6 +1177,13 @@
     "target": "14 + 4\u221a2",
     "exact": true,
     "m_hint": 120,
+    "window": [
+     118,
+     119,
+     120,
+     121,
+     122
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -746,6 +1194,13 @@
     "target": "19.6923881591930000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 169,
+    "window": [
+     167,
+     168,
+     169,
+     170,
+     171
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -756,6 +1211,13 @@
     "target": "19.6923881591930000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 169,
+    "window": [
+     167,
+     168,
+     169,
+     170,
+     171
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -766,6 +1228,13 @@
     "target": "19 + 1/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -782,6 +1251,13 @@
     "target": "17 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -792,6 +1268,13 @@
     "target": "17 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -802,6 +1285,13 @@
     "target": "20.6923881592000000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 169,
+    "window": [
+     167,
+     168,
+     169,
+     170,
+     171
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -812,6 +1302,13 @@
     "target": "20 + 1/2\u221a2",
     "exact": true,
     "m_hint": 26,
+    "window": [
+     24,
+     25,
+     26,
+     27,
+     28
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -828,6 +1325,13 @@
     "target": "18 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -838,6 +1342,13 @@
     "target": "18 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -848,6 +1359,13 @@
     "target": "21.6923881592040000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 169,
+    "window": [
+     167,
+     168,
+     169,
+     170,
+     171
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -858,6 +1376,13 @@
     "target": "21 + 1/2\u221a2",
     "exact": true,
     "m_hint": 27,
+    "window": [
+     25,
+     26,
+     27,
+     28,
+     29
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -874,6 +1399,13 @@
     "target": "19 + 5/2\u221a2",
     "exact": true,
     "m_hint": 25,
+    "window": [
+     23,
+     24,
+     25,
+     26,
+     27
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -884,6 +1416,13 @@
     "target": "19 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -894,6 +1433,13 @@
     "target": "12 + 15/2\u221a2",
     "exact": true,
     "m_hint": 225,
+    "window": [
+     223,
+     224,
+     225,
+     226,
+     227
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -904,6 +1450,13 @@
     "target": "22.6923881592080000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 169,
+    "window": [
+     167,
+     168,
+     169,
+     170,
+     171
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -914,16 +1467,36 @@
     "target": "22 + 1/2\u221a2",
     "exact": true,
     "m_hint": 29,
+    "window": [
+     27,
+     28,
+     29,
+     30,
+     31
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
-    "near": null,
-    "near_gap": null
+    "near": [
+     1,
+     22,
+     1,
+     30,
+     1
+    ],
+    "near_gap": "0"
    },
    {
     "n": 493,
     "target": "22 + 1/2\u221a2",
     "exact": true,
     "m_hint": 29,
+    "window": [
+     27,
+     28,
+     29,
+     30,
+     31
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -940,6 +1513,13 @@
     "target": "20 + 5/2\u221a2",
     "exact": true,
     "m_hint": 130,
+    "window": [
+     128,
+     129,
+     130,
+     131,
+     132
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -950,6 +1530,13 @@
     "target": "20 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -960,6 +1547,13 @@
     "target": "13 + 15/2\u221a2",
     "exact": true,
     "m_hint": 225,
+    "window": [
+     223,
+     224,
+     225,
+     226,
+     227
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -970,6 +1564,13 @@
     "target": "23 + 1/2\u221a2",
     "exact": true,
     "m_hint": 30,
+    "window": [
+     28,
+     29,
+     30,
+     31,
+     32
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -986,6 +1587,13 @@
     "target": "21 + 5/2\u221a2",
     "exact": true,
     "m_hint": 145,
+    "window": [
+     143,
+     144,
+     145,
+     146,
+     147
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -996,6 +1604,13 @@
     "target": "21 + 5/2\u221a2",
     "exact": true,
     "m_hint": 50,
+    "window": [
+     48,
+     49,
+     50,
+     51,
+     52
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1006,6 +1621,13 @@
     "target": "14 + 15/2\u221a2",
     "exact": true,
     "m_hint": 225,
+    "window": [
+     223,
+     224,
+     225,
+     226,
+     227
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1016,6 +1638,13 @@
     "target": "7 + 25/2\u221a2",
     "exact": true,
     "m_hint": 200,
+    "window": [
+     198,
+     199,
+     200,
+     201,
+     202
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1026,16 +1655,36 @@
     "target": "24 + 1/2\u221a2",
     "exact": true,
     "m_hint": 32,
+    "window": [
+     30,
+     31,
+     32,
+     33,
+     34
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
-    "near": null,
-    "near_gap": null
+    "near": [
+     1,
+     24,
+     1,
+     33,
+     1
+    ],
+    "near_gap": "0"
    },
    {
     "n": 586,
     "target": "24 + 1/2\u221a2",
     "exact": true,
     "m_hint": 32,
+    "window": [
+     30,
+     31,
+     32,
+     33,
+     34
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -1052,6 +1701,13 @@
     "target": "25.5208152820920000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1062,6 +1718,13 @@
     "target": "22 + 5/2\u221a2",
     "exact": true,
     "m_hint": 145,
+    "window": [
+     143,
+     144,
+     145,
+     146,
+     147
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1072,16 +1735,36 @@
     "target": "25 + 1/2\u221a2",
     "exact": true,
     "m_hint": 33,
+    "window": [
+     31,
+     32,
+     33,
+     34,
+     35
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
-    "near": null,
-    "near_gap": null
+    "near": [
+     1,
+     25,
+     1,
+     34,
+     1
+    ],
+    "near_gap": "0"
    },
    {
     "n": 635,
     "target": "25 + 1/2\u221a2",
     "exact": true,
     "m_hint": 33,
+    "window": [
+     31,
+     32,
+     33,
+     34,
+     35
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -1098,6 +1781,13 @@
     "target": "13 + 9\u221a2",
     "exact": true,
     "m_hint": 324,
+    "window": [
+     322,
+     323,
+     324,
+     325,
+     326
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1108,6 +1798,13 @@
     "target": "26.5208152840160000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1118,6 +1815,13 @@
     "target": "26 + 1/2\u221a2",
     "exact": true,
     "m_hint": 34,
+    "window": [
+     32,
+     33,
+     34,
+     35,
+     36
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -1134,6 +1838,13 @@
     "target": "14 + 9\u221a2",
     "exact": true,
     "m_hint": 323,
+    "window": [
+     321,
+     322,
+     323,
+     324,
+     325
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1144,6 +1855,13 @@
     "target": "14 + 9\u221a2",
     "exact": true,
     "m_hint": 324,
+    "window": [
+     322,
+     323,
+     324,
+     325,
+     326
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1154,6 +1872,13 @@
     "target": "27.5208152840200000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1164,6 +1889,13 @@
     "target": "15 + 9\u221a2",
     "exact": true,
     "m_hint": 324,
+    "window": [
+     322,
+     323,
+     324,
+     325,
+     326
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1174,6 +1906,13 @@
     "target": "28.5208152840220000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1184,6 +1923,13 @@
     "target": "29.5208152840240000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1194,6 +1940,13 @@
     "target": "24 + 4\u221a2",
     "exact": true,
     "m_hint": 256,
+    "window": [
+     254,
+     255,
+     256,
+     257,
+     258
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1204,6 +1957,13 @@
     "target": "29 + 1/2\u221a2",
     "exact": true,
     "m_hint": 39,
+    "window": [
+     37,
+     38,
+     39,
+     40,
+     41
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
@@ -1220,6 +1980,13 @@
     "target": "30.5208152840260000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1230,6 +1997,13 @@
     "target": "27 + 5/2\u221a2",
     "exact": true,
     "m_hint": 180,
+    "window": [
+     178,
+     179,
+     180,
+     181,
+     182
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1240,16 +2014,36 @@
     "target": "25 + 4\u221a2",
     "exact": true,
     "m_hint": 256,
+    "window": [
+     254,
+     255,
+     256,
+     257,
+     258
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
-    "near": null,
-    "near_gap": null
+    "near": [
+     1,
+     26,
+     2,
+     257,
+     8
+    ],
+    "near_gap": "0"
    },
    {
     "n": 962,
     "target": "31.5208152840280000000000000000000000000000000000000000000000",
     "exact": false,
     "m_hint": 289,
+    "window": [
+     287,
+     288,
+     289,
+     290,
+     291
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": null,
@@ -1260,6 +2054,13 @@
     "target": "31 + 1/2\u221a2",
     "exact": true,
     "m_hint": 42,
+    "window": [
+     40,
+     41,
+     42,
+     43,
+     44
+    ],
     "reproduced": false,
     "why": "no legal declaration with this count",
     "near": [
