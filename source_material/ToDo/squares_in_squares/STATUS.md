@@ -772,3 +772,22 @@ count. Nothing promoted: `submission.csv` and root `WHITEBOARD.md` untouched, th
 single gate path — **2 / 110** unchanged, five more rows reaching *both* delivered numbers and all five refused
 (`n = 40, 492, 585, 634, 909`), five of the refusals at a non-hinted bar size, and `qsqrt2.gate(..., stop=True)`
 keeping the honest single-gate sweep at **5 m 24 s**.
+
+**Run 145 (2026-11-26) — the block-bedded carrier, and it passes its own entry test.** Doc 101 §6's
+instruction is carried out (`block_bed.py`, doc 102): the carrier's two runs per axis are separated by
+a **positive gap** `g = L − K > 0` instead of an interlock, so carrier–carrier overlap is impossible
+by arithmetic for any gap and any split; the two axes' splits are **independent** (`kx`, `ky`); the
+tilted class is a **centred p×q block**; a carrier cell is dropped iff its interior meets the block
+(one four-inequality SAT against the whole block, checked cell by cell against the gate), side
+`L = a + (s/2)√2` generated in closed form, count `n = K² − dropped + p·q` by construction, every
+verdict the exact `qsqrt2.gate` — **10 controls**, fill **0.68–0.91 < 1** (carrier **0.40–0.55**),
+domains axis **4** / tilt **1**, **22** float-free decision functions, and pose identity at `n = 5,
+65, 124`. The entry test runs **first** and **passes: 48 of 110** delivered two-class `(n, side)`
+pairs reproduced (threshold 20) with **0 gate refusals**; **45 of the 48 need `kx ≠ ky`** (19 with one
+split for both axes), so the split is the decisive parameter. The remaining shortfall is arithmetic,
+not geometry: **28** rows are outside the side group `a + (s/2)√2` and **34** are inside it with no
+declaration at their count (four carrier translates against the delivered classes' 4–54). The entry
+gate now **authorises a sweep**, and its question is fixed: can the family reach a row's count at a
+side **below** the delivered one? **No sweep ran in this visit. Nothing promoted:** `submission.csv`
+and root `WHITEBOARD.md` untouched; the delivered total stands at **22.217428576** (554 beats, 446
+ties).

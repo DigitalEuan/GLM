@@ -4425,3 +4425,40 @@ Checks: `seam_carrier --selftest` 9; `seam_carrier` entry test 2/110 (fail) + le
 `py_compile` OK.
 
 no row changed |
+
+## Run 145 — 2026-11-26 — the block-bedded carrier: runs disjoint by law, 48 of 110
+
+Doc 101 §6 closed run 144 with one instruction: the next carrier must be sparse **by construction** —
+translates disjoint by a law, not by a drop rule — because run 144's notched *product* could share
+area with its bar but not with itself, and 28 of its 30 count-matched rows were refused by the exact
+gate for that reason. `block_bed.py` builds that carrier. Each axis carries **two runs separated by a
+positive gap** `g = L − K > 0` (run 1 over `[0, k]`, run 2 over `[L−(K−k), L]`) — no interlock at all,
+so any two carrier cells are separated by at least `g` on one axis or by exactly `0` inside a run, for
+**any** gap and **any** split: carrier–carrier overlap is impossible by arithmetic, and the gate has
+nothing to refuse. The two axes' splits are **independent** (`kx`, `ky`), the tilted class is a
+**centred p×q block** (the closed rectangle whose edge normals are `±(√2/2, ±√2/2)`, whose union *is*
+the block's cells), and a carrier cell is **dropped iff its interior meets the block** — the bed, one
+four-inequality SAT against the whole block instead of a pair scan, checked cell by cell against the
+gate in control 7. Side `L = a + (s/2)√2` in closed form and *generated*; count `n = K² − dropped +
+p·q` by construction; every verdict `qsqrt2.gate` on `Q(√2)` with no tolerance, plus exact
+containment and the span. **10 controls**, exit 0 — the gap law on five declarations including two
+asymmetric ones, the bed load-bearing (keeping it refills 24 / 40 / 35 cells and is refused), the
+`n = 5` atom at `2 + ½√2`, a `1e-9` box shrink refused, sparseness at fill **0.6823 / 0.8579 /
+0.8922 / 0.9126 / 0.7412** (carrier **0.5458 / 0.5147 / 0.5490 / 0.4416 / 0.3980**, domains axis
+**4** / tilt **1**), containment and the family's own refusal of an oversized block, the bed rule =
+the gate's pairwise predicate on all `K²` cells of four declarations, **22** decision functions **0
+naming float**, one counter/one gate agreement on six declarations, and pose identity — at `n = 5, 65,
+124` the built pose *is* the delivered pose up to symmetry. The entry test runs **first** and
+**passes**: **48 / 110** delivered two-class `(n, side)` pairs reproduced (threshold 20) in **2 m
+40 s**, every one gated at 0 violations — **0 refusals of any kind**, so run 144's obstruction is gone
+rather than bypassed. **45 of the 48 need `kx ≠ ky`**: with one split for both axes the family reaches
+19, and a scan of the 13 symmetric one-cell misses finds no asymmetric count match either, so the
+split is the decisive parameter and not a fudge on a near miss. What remains is arithmetic: **28**
+rows are outside the side group `a + (s/2)√2` and **34** are inside it with no declaration at their
+count (the carrier has four translates; the delivered axis classes have 4–54, doc 100 §7). The entry
+gate now **authorises a sweep**, and the question it must ask is not "can the family rebuild the
+table" but "can it reach a row's count at a side below the delivered one" — the count law prunes it
+(`K ≈ √n`) and the independent splits cost one pass per `(K, kx)`, ~1.5 s per row at n ≈ 900. **No
+sweep ran in this visit; nothing promoted**: `submission.csv` and root `WHITEBOARD.md` untouched, the
+delivered total stands at **22.217428576** (554 beats, 446 ties). Doc 102.
+

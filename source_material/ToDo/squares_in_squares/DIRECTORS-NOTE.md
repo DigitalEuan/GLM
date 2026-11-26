@@ -124,6 +124,21 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    and refuses all five, so the refusal is the family's and not a one-bar-size artefact. The
    next carrier must be sparse **by construction** (disjoint translates by a law) or the notch must gain
    authority over carrier-carrier overlap with a count-preserving repair.
+   **Run 145 has now built that carrier and passed its entry test** (`block_bed.py`, doc 102): the
+   two runs of each axis are separated by a **positive gap** `g = L − K > 0` instead of an interlock,
+   so carrier–carrier overlap is impossible by arithmetic — for any gap and any split — and the two
+   axes' splits are **independent** (`kx ≠ ky` is the general case); the tilted class is a **centred
+   p×q block** and a carrier cell is dropped iff its interior meets the block, one four-inequality SAT
+   against the whole block rather than a pair scan. **10 controls**, **22** float-free decision
+   functions, fill **0.68–0.91 < 1** (carrier **0.40–0.55**), domains axis **4** / tilt **1**. The
+   entry test runs first and **passes: 48 of 110** delivered two-class `(n, side)` pairs reproduced
+   (threshold 20) with **0 gate refusals**; **45 of the 48 need `kx ≠ ky`** (the symmetric family
+   reaches 19), so the split is the decisive parameter. What remains is arithmetic, not geometry:
+   **28** rows are outside the side group `a + (s/2)√2` and **34** are inside it with no declaration
+   at their count (four carrier translates against the delivered classes' 4–54). **The sweep is now
+   authorised**, and its question is fixed: not "can the family rebuild the table" but "can it reach a
+   row's count at a side below the delivered one" — the count law prunes it to `K ≈ √n` and the
+   independent splits cost one pass per `(K, kx)`, ~1.5 s per row at n ≈ 900.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the
