@@ -5,15 +5,24 @@
 sample: it says the 49 positions tried per declaration missed, not that no position hits. This run
 replaces it with a decision, in exact arithmetic, over the **whole** legal domain:
 
-* **plain block** (`p × q`): seven rows, **1,579 declarations, 15,349 boxes, every box list emptied,
-  0 survivors** — no side below the row's grid side and no block position attains the row's count;
+* **plain block** (`p × q`): **every** open non-proved row up to `n = 100` — the sixteen the sweep calls
+  `tie reached`, plus `n = 12` — **7,381 declarations, 94,339 boxes, every box list emptied, 0
+  survivors** — no side that would beat the delivered one and no block position of any shape that fits
+  attains the row's count;
 * **notched block** (`p × q` minus an `a × b` corner, `a, b ≤ 2`), through the same engine and on the
   same rows: **6,038 declarations, 69,614 boxes, every box list emptied, 0 survivors** (parameter box
   in §4).
 
 Nothing was promoted: no candidate exists to promote, so C1–C4 was never entered, `submission.csv` and
 root `WHITEBOARD.md` are untouched, and the delivered total stands at **22.217428576** (554 beats, 446
-grid ties). The run also **re-ran the run-148 sweep** to build on it and corrected three of its claims —
+grid ties).
+
+Two defects in run 149's own framing were found while widening this run, and both are fixed below: its
+interval ended at the **grid** side, which on `n = 40, 65, 89` (delivered side 1.7e-9 *below* the grid
+side) contains the family's own tie pose, so those rows could never be emptied as stated — `n = 65`'s
+least bed under the grid-side interval is `0`, i.e. the count is attained at 8.5355 by a declaration with
+`K < k`; and its fixed `SMAX = 13` cut `p + q = 14` at `k = 10`. The `n = 12` sentence "the least bed is
+2" was also a reading of a sample; it is now a certified minimum with an exact witness. The run also **re-ran the run-148 sweep** to build on it and corrected three of its claims —
 `counts_max` was filtering the wide map at 130, "unattained everywhere" is false, and §2's two missing
 counts are `3` and `99`, not `1` and `2`. That correction lives in doc 105 §0 and is summarised in §8.
 
@@ -88,37 +97,88 @@ declaration — a carrier whose two runs *overlap*, i.e. not a pose of this fami
 carry the family's seam law `L ≥ K`, and it now does; `assemble` refuses a pose with a negative seam gap
 on its own, so a candidate cannot be reported without it.
 
-## 3. The seven rows, plain block
+## 3. The open rows, plain block
 
-The open, non-proved tie rows — the plain grid's side, where the literature has not proved the grid
-optimal. `PMAX = 10` (`p, q ≤ 10`), `SMAX = 13` (`p + q ≤ 13`), every `K ≤ k−1`, every split up to the
-box's reflection, `p ≤ q` up to the block's frame symmetry (control 7), and the count law's own
+**Which rows.** The `n ≤ 100` sweep (doc 105) reports sixteen rows where the family reaches the count
+exactly at its delivered side (`tie reached`), and the literature proves none of them optimal; those are
+the open rows. `n = 12` is carried in addition — the sweep is 0.414 *above* its delivered 4 there, so it
+is not a tie, but its delivered side is exactly the grid side and it was run 148's sharpest case.
+`open_rows()` derives the sixteen from the sweep's ledger and asserts the result against the module's
+constant, so the scope is audited rather than chosen.
+
+**The interval ends where a beat could live.** A pose beats a row only if its side is below the
+delivered side by more than the noise floor, so the search interval is
+
+```
+sqrt(n) ≤ L ≤ delivered(n) − 1e-8
+```
+
+with `delivered(n)` the submission's own side for the row, read exactly from the CSV. For the fourteen
+rows whose delivered side *is* the grid side (and for `n = 12`) this differs from run 149's `L ≤ k` by
+1.6e-9. For `n = 40, 65, 89` it differs decisively: their delivered side is 1.7e-9 **below** the grid
+side and the family attains the count there with `K < k`, i.e. *inside* `[sqrt n, k]`, so a grid-side
+interval holds an attainment by construction and could never be emptied. The minima pass found it at
+`n = 65`: under the grid-side interval its least bed is 0 — the count is attained at 8.5355 by a
+declaration with `K < k`. That is a hit and not a beat; under the delivered-side end the same
+declarations are empty.
+
+**The box is every shape that fits.** The block must sit inside a side below `k`, so `(p+q)/√2 < k`, i.e.
+`p + q ≤ isqrt(2k²−1)` — 5, 7, 8, 9, 11, 12, 14 for `k = 4..10`. Run 149's fixed `SMAX = 13` was already
+complete for `k ≤ 9` and cut `p + q = 14` at `k = 10`; the per-row bound replaces it. `PMAX = 10` was
+never binding (`pq ≤ n` together with `p + q ≤ 14` gives `p ≤ 7`). Then every `K ≤ k−1`, every split up
+to the box's reflection, `p ≤ q` up to the block's frame symmetry (control 7), and the count law's own
 `m ≥ n − K²`.
 
 | n | k | declarations | boxes | the count law's demands `D*` | verdict |
 | --- | --- | --- | --- | --- | --- |
 | 12 | 4 | 4 | 26 | 0..3 | **emptied** |
 | 20 | 5 | 37 | 127 | 0..8 | **emptied** |
-| 30 | 6 | 52 | 244 | 0..11 | **emptied** |
+| 30 | 6 | 52 | 232 | 0..11 | **emptied** |
+| 40 | 7 | 169 | 2,083 | 0..16 | **emptied** |
 | 42 | 7 | 134 | 1,062 | 0..14 | **emptied** |
-| 56 | 8 | 261 | 1,767 | 0..23 | **emptied** |
-| 72 | 9 | 506 | 5,972 | 0..28 | **emptied** |
-| 91 | 10 | 585 | 6,151 | 0..32 | **emptied** |
-| | | **1,579** | **15,349** | | **0 survivors** |
+| 56 | 8 | 261 | 1,765 | 0..23 | **emptied** |
+| 57 | 8 | 243 | 1,199 | 0..22 | **emptied** |
+| 58 | 8 | 216 | 746 | 0..21 | **emptied** |
+| 65 | 9 | 756 | 46,134 | 0..35 | **emptied** |
+| 72 | 9 | 522 | 5,988 | 0..28 | **emptied** |
+| 73 | 9 | 481 | 3,855 | 0..27 | **emptied** |
+| 74 | 9 | 431 | 2,559 | 0..26 | **emptied** |
+| 89 | 10 | 950 | 11,152 | 0..41 | **emptied** |
+| 91 | 10 | 852 | 6,442 | 0..39 | **emptied** |
+| 92 | 10 | 795 | 4,633 | 0..38 | **emptied** |
+| 93 | 10 | 763 | 3,651 | 0..37 | **emptied** |
+| 94 | 10 | 715 | 2,685 | 0..36 | **emptied** |
+| | | **7,381** | **94,339** | | **0 survivors** |
 
-**What the table says.** Every declaration the family can write for these seven rows, at every legal
-side below the grid side and every legal position of the block, beds a number of carrier cells the
-count law did not ask for. Run 148's *sample* is now a theorem on the same rows, and the structural
-reading it measured is the reason: a beat needs `K ≤ k−1` and `L < k`, so the seam gap `L − K` is under
-one unit, the block's own bbox `(p+q)/√2` is most of the box, and its play `L − 2h` is small — the bed
-cannot be pushed down to `D*`. The two cheapest demands in the whole table are `D* = 0`; the family
-never beds zero cells, because a block that fits inside the box is surrounded by the carrier on all
-four sides.
+**What the table says.** Every declaration the family can write for every open row up to 100, at every
+side that would beat the delivered one and every legal position of the block, beds a number of carrier
+cells the count law did not ask for. Run 148's *sample* is now a theorem on more than twice as many rows, and
+the structural reading it measured is the reason: a beat needs `K ≤ k−1` and a side below the delivered
+one, so the seam gap `L − K` is under one unit, the block's own bbox `(p+q)/√2` is most of the box, and
+its play `L − 2h` is small — the bed cannot be pushed down to `D*`. The cheapest demand everywhere is
+`D* = 0`; the family never beds zero cells, because a block that fits inside the box is surrounded by
+the carrier on all four sides.
 
-The `n = 12` case is the sharpest and worth naming: its only near declaration is `K = 3`, a 2×2 block,
-`D* = 1`, and the *least* bed over the whole legal domain is 2 — one cell more than the row needs, at
-every side and every position. That single cell is the difference between a beat at `L ≈ 3.92` (margin
-`0.08` over the delivered 4) and a tie at 4. It is now a proved difference, not a sampled one.
+**How many cells short.** The minima ask the same search a different question — the smallest `v` with a
+hit, after every smaller `v` has been emptied — which turns "short" into a number. At `n = 12` on the
+`K = 3`, 2×2 declaration (`D* = 1`): `D = 0` is emptied, `D = 1` is emptied, and `D = 2` is a **hit** at
+the exact rational point
+
+```
+L  = 3.999999735963447809219360
+cx = 2.025124976626836406448048
+cy = 1.560660450042059491988836
+```
+
+where the counter reads 2. So the least bed over the legal domain is **exactly 2, certified** — "0
+nowhere", "1 nowhere", "2 here" — and the row is **one cell short** on that declaration. (Run 149's
+"the least bed is 2" was a reading of a 40-side × 7×7 sample; it is now a theorem with a witness.) The
+row's cheapest demand is `D* = 0` (a `K = 3`, 1×3 block) and even there the least bed is 2, so the row is
+two cells short at that one; the 2×2 is the sharpest single declaration the family has. `n = 20` is the
+same shape of statement: at `(4,1,3,1,4)` the demand is `D* = 0` and the least bed is **5**, five cells
+short; at `(4,2,2,2,2)` it is 2. Rows whose cheapest demand is large are not minimised — the loop would
+ask dozens of attainability questions to pin a number no claim uses — and `--minima` says so rather than
+reporting a lower bound as an answer.
 
 ## 4. The notched block, through the same engine
 
@@ -135,8 +195,10 @@ so `m = p·q − a·b`, and the engine needs no new geometry: the **floor** is t
 rectangles' forced sets (a cell forced by either kept rectangle is bedded by the block), and the
 **ceiling** is the full `p × q` rectangle's possible set. The bracket is exactly the notch's own effect —
 the cells that overlap the full block only inside the removed corner — and it closes as the boxes shrink.
-The declared box is `a, b ≤ 2` with `a < p, b < q`, `PMAX = 10`, `SMAX = 13`, every `K ≤ k−1` and every
-split, on the same seven rows:
+The declared box is `a, b ≤ 2` with `a < p, b < q`, `p + q ≤ 13`, every `K ≤ k−1` and every split, on
+the same seven rows. All seven have `delivered(n) = k` to within 1.6e-9, so the interval this run used
+(the grid side) is a **superset** of the beat interval §3 now uses: the empty box lists below cover the
+smaller interval too. The notched family was not extended to the ten rows §3 added, and §5 says so.
 
 | n | k | declarations | boxes | `D*` | verdict |
 | --- | --- | --- | --- | --- | --- |
@@ -160,26 +222,32 @@ notched declaration is emptied, so the family gains nothing by cutting a corner 
 
 ## 5. What this closes, and what it leaves
 
-**Closed.** (i) The block's position is no longer a hole in the family's account: on the seven open,
-non-proved tie rows the family beats nothing at any side, at any position, for every declaration in the
-declared box — plain block and notched. (ii) The method is a decision, not a search, and it is cheap:
-15,349 boxes for 1,579 declarations (about ten boxes per declaration), because the count law's demand is
-a single integer and most declarations are pruned at the root. (iii) Band 5's tie is reproduced from
-this side too (control 6): `(5,1,1,1,2)` builds count 20 at `L = 5` exactly, and the cheapest demand for
-20 is emptied strictly below 5.
+**Closed.** (i) The block's position is no longer a hole in the family's account: on **every** open,
+non-proved row up to 100 the family beats nothing — at any side that would beat the delivered one, at
+any position, for every shape that fits: 7,381 declarations, 94,339 boxes, 0 survivors (plain block),
+and the notched block on the seven rows it was run on under a superset interval. (ii) The method is a
+decision, not a search, and it is cheap: twelve boxes per declaration on average (94,339 for 7,381),
+because the count law's demand is a single integer and most declarations are pruned at the root; `n = 65`
+is the one expensive row at 46,134 boxes, its domain holding the family's own tie at 8.5355. (iii) Band
+5's tie is reproduced from this side too (control 6): `(5,1,1,1,2)` builds count 20 at `L = 5` exactly,
+and the cheapest demand for 20 is emptied strictly below the delivered side. (iv) `n = 12`'s one-cell gap
+is a certified minimum with an exact witness, not a sampled reading (§3).
 
-**Left, honestly declared.** The declared parameter box is `p, q ≤ 10`, `p + q ≤ 13`, `a, b ≤ 2`, `K ≤
-k−1`, and the seven rows. Outside it: larger blocks (`p + q > 13`) cannot fit below these rows' grid
-sides at all for `k ≤ 8`, but for `k = 9, 10` the box is a real restriction and a wider `SMAX` is the
-first thing to try; the notch is capped at `2 × 2` and a purposeful shape (a notch that follows the
-carrier's seam, rather than a corner of the block's own frame) is not in this family; the interleaved
-interface (doc 98) remains outside every count-law family. The engine also does not *prove* a coverage
-statement about *all* families — only about the declarations it enumerates, which is why the enumeration
-is spelled out above rather than summarised.
+**Left, honestly declared.** The block's shape is complete for these rows (`p + q ≤ isqrt(2k²−1)` is
+every block whose bbox fits below the grid side) and `K ≤ k−1` is the family's own definition (`K = k`
+*is* the grid). Outside the box: **the notch is capped at `2 × 2` and was run on seven rows, not
+seventeen** — the plain block is the complete map, the notched one is a sample of rows; a purposeful
+shape (a notch that follows the carrier's seam, rather than a corner of the block's own frame) is not in
+this family; **rows above 100** are untouched by this decision (the wide sweep's ties there are doc 105
+§2); a block whose bbox needs `p + q ≥ isqrt(2k²)` cannot fit below the grid side at all, so there is
+nothing to decide there; and the engine proves nothing about *families it does not enumerate* — the
+interleaved interface (doc 98) remains outside every count-law family. The `1e-8` floor is the project's
+own (`carrier_ceil.MARGIN`): a pose that beats a row by less than that is not counted as a beat
+anywhere, including here, and the interval's end is exactly that line.
 
 ## 6. Controls
 
-`carrier_offset.py --selftest` (8):
+`carrier_offset.py --selftest` (9):
 
 1. the pair test, the four-strip form and `block_bed.in_bed` agree on 12 declaration × side pairs;
 2. the rectangle's thresholds are `block_bed.beds` exactly (no re-derivation drift) on 4 shapes;
@@ -192,10 +260,14 @@ is spelled out above rather than summarised.
    the row semantics, and it is the control that caught the missing seam law.)
 5. the notched L is exactly `R1 ∪ R2`, and its kept cells never leave the full rectangle;
 6. band 5: `(5,1,1,1,2)` builds count 20 at `L = 5` (gate ok), and the cheapest demand for 20 (`D* = 0`)
-   is emptied strictly below 5 in 5 boxes;
+   is emptied strictly below 5 in 5 boxes; and the interval's end: 4.9999999916 at row 20 (delivered
+   5.0000000016) and 8.5355338977 at row 65 (delivered 8.5355339077, grid side 9) — a pose at the
+   delivered side is never inside the box;
 7. the reflection identity `in_bed(dx, dy, q, p) = in_bed(dy, dx, p, q)` — why `p ≤ q` with every split
    is the whole family;
-8. the bytecode audit: 23 decision functions, 0 naming `float`.
+8. the bytecode audit: 30 decision functions, 0 naming `float`;
+9. the minimiser: on 3 declarations the box list empties unresolved, the constant box that set the value
+   reads it at its centre, and 125 sampled points of each domain are never below it.
 
 The falsifier is structural rather than a row list here: the family cannot beat a proved-optimal row, and
 this run adds no beat anywhere. The one proved row among the two counts the sweep misses (`n = 223`) is
@@ -204,14 +276,19 @@ consistent with that.
 ## 7. Reproduce
 
 ```
-python3 scripts/carrier_offset.py --selftest   # 8 controls
-python3 scripts/carrier_offset.py              # the seven open tie rows, plain block (~2 min)
-python3 scripts/carrier_offset.py --notched     # the same rows, notched block (~10 min)
+python3 scripts/carrier_offset.py --selftest   # 9 controls
+python3 scripts/carrier_offset.py              # every open row to 100, plain block (~13 min)
+python3 scripts/carrier_offset.py --notched     # the seven rows of §4, notched block (~25 min)
+python3 scripts/carrier_offset.py --minima      # the exact least bed where it is cheap (~5 min)
 ```
 
-Ledger: `workspace/push/carrier_offset.json`, under `plain` and `notched`: per row the declarations
-decided, the boxes visited, the tally of verdicts, the count law's demands, and — for anything that
-survives — the surviving boxes as exact decimal shadows and, for a hit, the gated pose.
+Ledgers: `workspace/push/carrier_offset.json`, under `plain` and `notched` — per row the declarations
+decided, the boxes visited, the box (with the interval's end), the tally of verdicts, the count law's
+demands, and — for anything that survives — the surviving boxes as exact decimal shadows and, for a hit,
+the gated pose; and `workspace/push/carrier_minima.json` for the exact least bed, its witness point and
+the root floor where the minimum was not asked (`rows` in that file lists exactly which rows it covers,
+so a partial run cannot be mistaken for the whole map — the minimum is a diagnostic, and the decision
+above does not depend on it).
 
 **Checks.** `sqscore.guard` green (22.217428576, 554 beats, 446 grid ties) at the start of every run; no
 row changed; `submission.csv` and root `WHITEBOARD.md` untouched.
@@ -228,6 +305,19 @@ Three claims in doc 105 were wrong and are corrected there (§0) and in the code
    `L ∈ (12, 12.292893218814]` by `(K, kx, ky, p, q) = (12, 1, 1, 1, 9)` — inside that very box.
 3. **The `n ≤ 100` map's two missing counts are `3` and `99`**, not `1` and `2`; `n = 1` is reached at
    side 2.
+
+And two corrections this run made to **its own earlier framing** (run 149's, in this doc):
+
+4. **The interval's end is the delivered side, not the grid side.** Run 149 used `L < k` everywhere. That
+   is right, and stronger than needed, for the fourteen rows and `n = 12` whose delivered side is the
+   grid side to 1.6e-9 — a beat needs `L < delivered − 1e-8 < k`. But `n = 40, 65, 89` deliver 1.7e-9
+   *below* their grid side and the family attains the count at the delivered side with `K < k`, so
+   `[sqrt n, k]` holds an attainment by construction: `n = 65`'s least bed under that interval is 0, a hit
+   that is not a beat. The interval now ends at `delivered(n) − 1e-8` (control 6), which is exactly where
+   the beat condition lives.
+5. **`SMAX = 13` was a cap only at `k = 10`.** The complete bound is `p + q ≤ isqrt(2k²−1)` (§3): for
+   `k ≤ 9` run 149's constant exceeded it, so nothing was lost there, but at `k = 10` it cut `p + q = 14`
+   and with it 89..94's 7×7 blocks.
 
 The wide and narrow ledgers were regenerated with the defect fixed (`carrier_ceil.json` for `n ≤ 100`,
 `carrier_ceil_wide.json` for `n ≤ 225`), and `carrier_ceil.py --selftest` still passes 7/7.

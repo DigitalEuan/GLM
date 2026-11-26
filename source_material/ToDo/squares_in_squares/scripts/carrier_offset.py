@@ -102,12 +102,18 @@ S2 = Q2(0, 1)                                   # sqrt 2
 ONE = Q2(1)
 ZERO = Q2(0)
 
-#: the open, non-proved tie rows: delivered side = ceil(sqrt n), not proved optimal
-ROWS = (12, 20, 30, 42, 56, 72, 91)
+#: every open, non-proved grid row up to 100: the delivered side is the plain grid's side (the 16
+#: `tie reached` rows of the `n <= 100` sweep) plus `n = 12`, which the sweep reaches 0.414 above
+#: its delivered 4 and which run 148 carried as the sharpest case.  `open_rows()` derives the set
+#: from the sweep's ledger and checks it against this constant, so the list is audited, not chosen.
+ROWS = (12, 20, 30, 40, 42, 56, 57, 58, 65, 72, 73, 74, 89, 91, 92, 93, 94)
 
-#: the declared parameter box, in the same spirit as the (unbounded-in-p) sweep of run 148
-PMAX = 10               # p, q <= PMAX
-SMAX = 13               # p + q <= SMAX: the block's bbox must fit below the grid side
+#: the declared parameter box.  The block has to fit inside a side below the grid side, so
+#: `(p+q)/sqrt2 < k`, i.e. `p + q <= isqrt(2k^2 - 1)` -- that is the *whole* box, not a cap; the
+#: per-row value is computed by `fit_bound(k)`.  For k = 4..10 it is 5, 7, 8, 9, 11, 12, 14, so
+#: run 149's fixed `SMAX = 13` was already complete for k <= 9 and cut `p+q = 14` at k = 10.
+PMAX = 10               # p, q <= PMAX (never binding: p*q <= n and p+q <= 14 give p <= 7)
+SMAX = 13               # the legacy fixed cap, kept only as a fallback
 ANOTCH = BNOTCH = 2     # a, b <= 2: the removed corner is at most 2x2 block cells
 BOX_CAP = 200000        # per declaration; a cap that is hit is reported, never hidden
 TOL = Q2(F(1, 10 ** 6))  # a box this small is decided at its centre, not by bounds
@@ -130,6 +136,36 @@ def proved_rows() -> set:
     import glm_plan as GP
     _pub, proved = GP.pub_table()
     return set(proved)
+
+
+def fit_bound(k: int) -> int:
+    """The largest `p+q` whose block bbox fits below a side `k`: `(p+q)^2 < 2 k^2`.
+
+    `sqrt2` is irrational, so `2k^2` is never a square and `isqrt(2k^2 - 1)` is exactly the
+    largest integer with `s^2 < 2k^2`; the whole parameter box in `p+q` is `s <= fit_bound(k)`.
+    """
+    return isqrt(2 * k * k - 1)
+
+
+def open_rows() -> tuple:
+    """The rows this module decides, derived from the sweep's ledger where it is available.
+
+    A row belongs when the plain grid's side is what it has to beat (the sweep reports a tie at
+    its delivered side) and the literature has not proved the grid optimal; `n = 12` is carried
+    in addition (the sweep is 0.414 *above* its delivered 4, so it is the sharpest grid row, not
+    a tie).  The derivation is checked against `ROWS`, so a hand-edit of the constant cannot
+    silently change the scope.
+    """
+    proved = proved_rows()
+    path = os.path.join(ROOT, "workspace/push/carrier_ceil.json")
+    if not os.path.exists(path):
+        return ROWS
+    with open(path) as f:
+        led = json.load(f)
+    ties = [r["n"] for r in led["rows"] if r["verdict"] == "tie reached"]
+    derived = tuple(sorted([n for n in ties if n not in proved] + [12]))
+    assert derived == tuple(sorted(ROWS)), (derived, ROWS)
+    return derived
 
 
 # ------------------------------------------------------------- the block parts
@@ -294,7 +330,62 @@ def bounds(dec: Decl, box):
     return len(low), len(upper)
 
 
-def decide(dec: Decl, n: int, box_cap: int = BOX_CAP, dom=None):
+#: the project's noise floor (`carrier_ceil.MARGIN`): a side is a *beat* only when it is at
+#: least this far below the delivered one
+MARGIN = Q2(F(1, 10 ** 8))
+
+#: the delivered sides, read once from the CSV and kept as exact rationals
+_SIDES = None
+
+
+def delivered(n: int):
+    """The delivered side for row `n`, exact, from the submission (a measurement, not a verdict).
+
+    `carrier_ceil.load_sides` is the project's one reader of the CSV; it reports a `Decimal`
+    built from the angle's float cosine, and the text of that decimal is what becomes a `Q2`
+    here.  The number is used only as the *end* of the search interval, so nothing in the
+    decision depends on a float -- the arithmetic above it is exact.
+    """
+    global _SIDES
+    if _SIDES is None:
+        import carrier_ceil as CC
+        _SIDES = {m: Q2(F(str(s[0]))) for m, s in CC.load_sides().items()}
+    return _SIDES.get(n)
+
+
+def domain(dec: Decl, n: int):
+    """`(lo, hi)`: the side interval where a **beat** could live.
+
+    `lo` is the area floor, the block's own fit (`L >= 2h`) and the seam law (`L >= K`).
+    `hi` is the **delivered side minus the noise margin**, or the grid side when that is
+    lower: a beat needs `L < delivered - 1e-8`, and for the rows whose delivered side sits
+    *below* their grid side the family's own tie pose is inside `[sqrt n, k]` -- row 65 is
+    the one that caught this, its least bed under the grid-side domain is `0`, i.e. the
+    count is attained at 8.5355 by a declaration with `K < k`.
+    """
+    lo = max(BOX_FLOOR(n), 2 * dec.h, Q2(dec.K))
+    hi = Q2(ceil_sqrt(n))
+    d = delivered(n)
+    if d is not None and d - MARGIN < hi:
+        hi = d - MARGIN
+    return lo, hi
+
+
+def root_box(dec: Decl, n: int):
+    """The initial box of the decision: the legal domain, with `cx, cy` in `[h, hi-h]`.
+
+    The `cx, cy` range is the block's own fit over the *whole* side interval (a superset of
+    `[h, L-h]` for any single `L`), so every legal pose is in the box and the proof covers the
+    illegal ones too.
+    """
+    lo, hi = domain(dec, n)
+    if lo > hi:
+        return None
+    h = dec.h
+    return (lo, hi, h, hi - h, h, hi - h)
+
+
+def decide(dec: Decl, n: int, box_cap: int = BOX_CAP, dom=None, demand: int | None = None):
     """Decide whether the declaration attains the row's count below its grid side.
 
     Verdicts:
@@ -311,21 +402,25 @@ def decide(dec: Decl, n: int, box_cap: int = BOX_CAP, dom=None):
     `tightest` is the smallest certified floor met over the transient.  It is a *valid*
     lower bound on `D` over the legal domain but not a sharp one: the proof is the emptied
     box list, not this number, which is reported only to show how the boxes closed.
+
+    `demand` overrides the count law's `D*` -- the same search asked "is `D = v` attained" for
+    a value the row does not itself need.  `least_bed` is the loop of those questions.
     """
     k = ceil_sqrt(n)
-    ds = dec.demand(n)
+    ds = dec.demand(n) if demand is None else demand
     # the legal domain: the area floor, the block must fit (L >= 2h), and the family's own
     # seam law (L >= K, otherwise the two runs on an axis overlap and the pose is not one).
     # `dom` overrides the side interval, for the completeness control only.
+    box0 = root_box(dec, n)
+    if box0 is None:
+        return "INFEASIBLE", 0, [], None
     if dom is not None:
         lo_l, hi_l = dom
-    else:
-        lo_l = max(BOX_FLOOR(n), 2 * dec.h, Q2(dec.K))
-        hi_l = Q2(k)
-    if lo_l > hi_l:
-        return "INFEASIBLE", 0, [], None
-    h = dec.h
-    boxes = [(lo_l, hi_l, h, hi_l - h, h, hi_l - h)]
+        if lo_l > hi_l:
+            return "INFEASIBLE", 0, [], None
+        h = dec.h
+        box0 = (lo_l, hi_l, h, hi_l - h, h, hi_l - h)
+    boxes = [box0]
     seen = 0
     tightest = None
     stuck = []
@@ -367,6 +462,43 @@ def decide(dec: Decl, n: int, box_cap: int = BOX_CAP, dom=None):
     if stuck:
         return "OPEN", seen, stuck, tightest
     return "EMPTY", seen, [], tightest
+
+
+def least_bed(dec: Decl, n: int, cap: int = 40, box_cap: int = BOX_CAP):
+    """The **exact least bed** over the legal domain -- the same search, not a second one.
+
+    `decide` answers "is `D = v` attained anywhere in the domain" for one `v`; the minimum is
+    the smallest `v` that gets a `HIT`, every `v` below it having been emptied.  That needs no
+    new machinery and no numeric minimisation: the floors are what prove the negative side and
+    a `HIT` carries its own witness box (non-empty, `D` constant on it).
+
+    A minimisation by floors alone would *not* close here: where the bed jumps by one, no
+    single cell is bedded across a box that straddles the jump, so the floor stays at `v-1`
+    forever even though `v` is nowhere attained.  Refusing to read that as a minimum is the
+    whole point of asking the decision instead.
+
+    Returns `(best, boxes, stuck, witness)`; `stuck` non-empty means the loop stopped on a
+    box that would not resolve (reported, never rounded), and `best is None` means "not
+    attained at any `v <= cap` -- or not decided", which the caller must not conflate.
+    """
+    total = 0
+    # start at the root box's certified floor: `D` is at least that everywhere in the domain,
+    # so no smaller `v` can be attained and asking it would only prove a known negative (and
+    # for a big block those low-`v` runs are the expensive ones: no cell is bedded everywhere,
+    # so the floor stays flat and the boxes refine for nothing)
+    box0 = root_box(dec, n)
+    if box0 is None:
+        return None, 0, [], None
+    v = int(bounds(dec, box0)[0])
+    while v <= cap:
+        verdict, seen, surv, _tight = decide(dec, n, box_cap=box_cap, demand=v)
+        total += seen
+        if verdict == "HIT":
+            return v, total, [], surv[0]
+        if verdict != "EMPTY":
+            return None, total, surv, None
+        v += 1
+    return None, total, [], None
 
 
 def BOX_FLOOR(n: int) -> Q2:
@@ -443,17 +575,22 @@ def assemble(dec: Decl, L: Q2, cx: Q2, cy: Q2):
 
 
 # ---------------------------------------------------------------- declarations
-def declarations(n: int, notched: bool = False, pmax: int = PMAX,
-                 smax: int = SMAX):
+def declarations(n: int, notched: bool = False, pmax: int | None = None,
+                 smax: int | None = None):
     """Every declaration in the declared parameter box whose count law can reach `n`.
 
-    `K <= k-1` is forced (`K = k` is the grid); `p + q <= smax` keeps the block's bbox
-    below the grid side for every admissible `L`; `m >= n - K^2` is the count law's own
-    necessary condition (`D >= 0`).  The run splits are taken up to the box's reflection
-    (`kx <-> K-kx`, `ky <-> K-ky` is the same pose mirrored), and `p <= q` up to the same
-    reflection combined with the block's frame symmetry (control 7).
-    """ 
+    `K <= k-1` is forced (`K = k` is the grid); `p + q <= fit_bound(k)` keeps the block's bbox
+    below the grid side for every admissible `L` -- and that bound is the *whole* box, every
+    shape that can fit at all; `m >= n - K^2` is the count law's own necessary condition
+    (`D >= 0`).  The run splits are taken up to the box's reflection (`kx <-> K-kx`,
+    `ky <-> K-ky` is the same pose mirrored), and `p <= q` up to the same reflection combined
+    with the block's frame symmetry (control 7).
+    """
     k = ceil_sqrt(n)
+    if smax is None:
+        smax = fit_bound(k)
+    if pmax is None:
+        pmax = max(PMAX, smax)
     out = []
     for K in range(2, k):
         for kx in range(1, K):
@@ -484,10 +621,20 @@ def declarations(n: int, notched: bool = False, pmax: int = PMAX,
 
 
 # ------------------------------------------------------------------- the run --
-def run_row(n: int, proved: set, notched: bool = False, verbose: bool = True):
+def run_row(n: int, proved: set, notched: bool = False, verbose: bool = True,
+            minima: bool = False):
     """Certify one row: every declaration either pruned to empty or reported."""
-    rec = {"n": n, "k": ceil_sqrt(n), "proved": n in proved,
-           "family": "notched" if notched else "plain"}
+    k = ceil_sqrt(n)
+    rec = {"n": n, "k": k, "proved": n in proved,
+           "family": "notched" if notched else "plain",
+           "box": {"kmax": k - 1, "smax": fit_bound(k), "pmax": max(PMAX, fit_bound(k)),
+                   "splits": "kx, ky <= K/2 (reflection)",
+                   "side_end": (str(min(Q2(k), delivered(n) - MARGIN).decimal(20))
+                                if delivered(n) is not None else str(k)),
+                   "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the "
+                           "grid side; the side interval ends at the delivered side minus "
+                           "the noise margin, and the search is over K <= k-1 (K = k is "
+                           "the grid itself)"}}
     if n in proved:
         rec["verdict"] = "REFUSED: proved optimal -- no search"
         if verbose:
@@ -525,6 +672,29 @@ def run_row(n: int, proved: set, notched: bool = False, verbose: bool = True):
     rec["boxes"] = boxes
     rec["tally"] = tally
     rec["min_floor"] = None if tight is None else tight
+    if minima and decls:
+        ds_min = min(d.demand(n) for d in decls)
+        tightest = []
+        for d in decls:
+            if d.demand(n) != ds_min:
+                continue
+            v, nb, stuckb, wit = least_bed(d, n)
+            rec_t = {"params": d.params(), "demand": ds_min, "least_bed": v,
+                     "boxes": nb, "unresolved": len(stuckb)}
+            if wit is not None:
+                # independent attainment witness: D is constant on this box, so its centre
+                # must read exactly the certified minimum
+                L = (wit[0] + wit[1]) * HALF
+                cx = (wit[2] + wit[3]) * HALF
+                cy = (wit[4] + wit[5]) * HALF
+                rec_t["witness_bed"] = bed_at(d, L, cx, cy)
+                rec_t["witness"] = {"L": str(L.decimal(20)), "cx": str(cx.decimal(20)),
+                                    "cy": str(cy.decimal(20))}
+            tightest.append(rec_t)
+            if verbose:
+                print(f"      exact least bed: {d.params()} -> D = {v} "
+                      f"({nb} boxes, {len(stuckb)} unresolved); the count law needs {ds_min}")
+        rec["minima"] = tightest
     if tally["EMPTY"] == len(decls):
         rec["verdict"] = "PROVED: no side below the grid side and no block position"
     elif tally["HIT"]:
@@ -552,11 +722,13 @@ def _show(box):
     return [str(v.decimal(20)) for v in box]
 
 
-def report(rows=ROWS, notched: bool = False):
+def report(rows=None, notched: bool = False, minima: bool = False):
     import sqscore as SQ
     SQ.guard(quiet=True)
+    if rows is None:
+        rows = open_rows()
     proved = proved_rows()
-    out = [run_row(n, proved, notched=notched) for n in rows]
+    out = [run_row(n, proved, notched=notched, minima=minima) for n in rows]
     led_key = "notched" if notched else "plain"
     led = {}
     if os.path.exists(LEDGER):
@@ -574,7 +746,10 @@ def report(rows=ROWS, notched: bool = False):
         "method": "certified branch and bound over (L, cx, cy): a box is pruned when its "
                   "forced bed exceeds the count law's demand or its possible bed falls "
                   "short of it; an empty box list is a proof",
-        "pmax": PMAX, "smax": SMAX, "box_cap": BOX_CAP,
+        "box": {"pmax": PMAX, "smax": {str(n): fit_bound(ceil_sqrt(n)) for n in rows},
+                "note": "per row p+q <= isqrt(2k^2-1): the whole box, every shape whose "
+                        "bbox fits below the grid side, not a cap"},
+        "box_cap": BOX_CAP,
         "rows": out,
     }
     with open(LEDGER, "w") as f:
@@ -726,6 +901,23 @@ def selftest() -> int:
           f"the count law's cheapest demand for 20 (`D* = 0` at K = 4, block 1x4) is emptied "
           f"strictly below 5 in {seen} boxes")
 
+    # 6b. the search interval ends where a beat could live: at the delivered side minus the
+    #     noise margin, not at the grid side.  Row 20's delivered side is 5 + 1.6e-9, so the
+    #     two coincide there; row 65's is 8.5355..., well below its grid side 9, and the
+    #     family attains 65 there with `K < k` -- the interval must stop short of it.
+    d20b = Decl(4, 1, 3, 1, 4)
+    _lo20, hi20 = domain(d20b, 20)
+    d20d = delivered(20)
+    assert hi20 == d20d - MARGIN and hi20 < Q2(5), (hi20.decimal(24),)
+    d65 = Decl(8, 1, 1, 6, 6)
+    _lo65, hi65 = domain(d65, 65)
+    d65d = delivered(65)
+    assert d65d is not None and hi65 == d65d - MARGIN and hi65 < Q2(9), (hi65.decimal(24),)
+    print(f"  6b. the side interval ends at the delivered side - 1e-8: "
+          f"{hi20.decimal(12)} at row 20 (delivered 5.0000000016, grid side 5) and "
+          f"{hi65.decimal(12)} at row 65 (delivered {d65d.decimal(12)}, grid side 9) -- "
+          f"a pose at the delivered side is never inside the box")
+
     # 7. the declarations' p <= q and kx <= K/2 pruning lose nothing: the block's frame
     #    reflection swaps the diagonal strips, so (q, p) at (kx, ky) is (p, q) at (ky, kx)
     for (dx, dy, p, q) in ((Q2(F(13, 10)), Q2(F(-7, 10)), 2, 3),
@@ -742,7 +934,33 @@ def selftest() -> int:
     assert offenders == [], offenders
     print(f"  8. bytecode audit: {checked} decision functions, 0 naming float "
           f"(exempt {skipped})")
-    print("selftest OK (8 controls)")
+
+    # 9. the minimiser certifies the exact least bed: the box list empties with nothing left
+    #    unresolved, the constant box that set the value reads the same at its centre (an
+    #    independent attainment witness), and no sampled point of the domain is below it
+    cases = 0
+    for (k, K, kx, ky, p, q) in ((4, 3, 1, 1, 2, 2), (5, 4, 1, 2, 1, 4), (6, 5, 2, 2, 2, 3)):
+        n = k * k - 1                 # the row's domain [sqrt n, k] is non-degenerate here
+        d = Decl(K, kx, ky, p, q)
+        v, nb, stuckb, wit = least_bed(d, n)
+        assert v is not None and stuckb == [] and wit is not None, \
+            (k, K, p, q, v, len(stuckb))
+        L = (wit[0] + wit[1]) * HALF
+        assert bed_at(d, L, (wit[2] + wit[3]) * HALF, (wit[4] + wit[5]) * HALF) == v, \
+            (k, K, p, q, v)
+        lo, hi = domain(d, n)
+        for i in range(5):
+            Ls = lo + (hi - lo) * Q2(F(i, 4))
+            for j in range(5):
+                for m in range(5):
+                    assert bed_at(d, Ls, d.h + (Ls - 2 * d.h) * Q2(F(j, 4)),
+                                  d.h + (Ls - 2 * d.h) * Q2(F(m, 4))) >= v, \
+                        (k, K, p, q, v, i, j, m)
+        cases += 1
+    print(f"  9. the minimiser certifies the exact least bed on {cases} declarations: the box "
+          f"list empties unresolved-free, its witness box reads the value at the centre, and "
+          f"125 sampled points per declaration are never below it")
+    print("selftest OK (9 controls)")
     return 0
 
 
@@ -756,11 +974,108 @@ def _inside(box, pt) -> bool:
     return all(box[2 * i] <= pt[i] <= box[2 * i + 1] for i in range(3))
 
 
+MINIMA_LEDGER = os.path.join(ROOT, "workspace/push/carrier_minima.json")
+
+
+def minima_report(rows=None, notched: bool = False, dstar_max: int = 3):
+    """See below.  The ledger is rewritten after every row, so a partial run is still readable and
+    says which rows it covered (`rows` is part of the file, not an assumption about the reader)."""
+    """How many cells short each row is, quantitatively and exactly where it is cheap.
+
+    Two statements per row, both certified:
+
+    * the root box's **floor** is a lower bound on the bed over the whole legal domain, so
+      `floor - D*` is a lower bound on the row's deficit -- free, and it is the whole answer
+      for a row whose cheapest declaration demands a small `D*`;
+    * for a row whose cheapest demand is small (`D* <= dstar_max`) the *exact* least bed is
+      the smallest `v` the decision can attain (`least_bed`), which turns the deficit into an
+      equation: at `n = 12` the least bed is 2 and the demand is 1, so the family is one cell
+      short -- not "short".
+
+    Rows whose cheapest demand is large are not minimised: the loop would ask dozens of
+    attainability questions per declaration to pin a number no claim uses.
+    """
+    import sqscore as SQ
+    SQ.guard(quiet=True)
+    if rows is None:
+        rows = open_rows()
+    out = []
+    for n in rows:
+        decls = declarations(n, notched)
+        if not decls:
+            continue
+        ds_min = min(d.demand(n) for d in decls)
+        recs = []
+        for d in decls:
+            if d.demand(n) != ds_min:
+                continue
+            box0 = root_box(d, n)
+            floor0 = int(bounds(d, box0)[0]) if box0 is not None else None
+            rec = {"params": d.params(), "demand": ds_min, "root_floor": floor0,
+                   "deficit_lower": None if floor0 is None else floor0 - ds_min}
+            if ds_min <= dstar_max:
+                v, nb, stuckb, wit = least_bed(d, n, cap=ds_min + 5)
+                rec.update({"least_bed": v, "boxes": nb, "unresolved": len(stuckb)})
+                if wit is not None:
+                    L = (wit[0] + wit[1]) * HALF
+                    cx = (wit[2] + wit[3]) * HALF
+                    cy = (wit[4] + wit[5]) * HALF
+                    rec["witness_bed"] = bed_at(d, L, cx, cy)
+                    rec["witness"] = {"L": str(L.decimal(20)), "cx": str(cx.decimal(20)),
+                                      "cy": str(cy.decimal(20))}
+                rec["certified"] = (v is not None and stuckb == []
+                                    and rec.get("witness_bed") == v)
+            recs.append(rec)
+        out.append({"n": n, "k": ceil_sqrt(n), "demand_min": ds_min, "minima": recs})
+        _write_minima(out, notched)
+        fl = min(r["root_floor"] for r in recs if r["root_floor"] is not None)
+        if ds_min <= dstar_max:
+            exact = [r for r in recs if r.get("least_bed") is not None]
+            best = min((r["least_bed"] for r in exact), default=None)
+            cert = bool(exact) and all(r.get("certified") for r in exact)
+            nb = sum(r["boxes"] for r in recs if r.get("boxes"))
+            if best is None:
+                print(f"n={n:>4} k={ceil_sqrt(n)}: cheapest demand D* = {ds_min}; no exact "
+                      f"minimum within the cap -- the root floor {fl} puts the deficit at "
+                      f">= {fl - ds_min} cell(s)  [{nb} boxes]")
+            else:
+                print(f"n={n:>4} k={ceil_sqrt(n)}: cheapest demand D* = {ds_min}, exact least "
+                      f"bed {best} ({'certified' if cert else 'NOT certified'}), so the row "
+                      f"is {best - ds_min} cell(s) short at that declaration"
+                      f"  [floor {fl}, {nb} boxes]")
+        else:
+            print(f"n={n:>4} k={ceil_sqrt(n)}: cheapest demand D* = {ds_min} > {dstar_max}; "
+                  f"the root floor {fl} puts the deficit at >= {fl - ds_min} cell(s), "
+                  f"no exact minimum computed")
+    led = _write_minima(out, notched)
+    print(f"wrote {os.path.relpath(MINIMA_LEDGER, ROOT)}")
+    return led
+
+
+def _write_minima(out, notched: bool):
+    """The minima ledger as it stands (`rows` lists exactly the rows computed so far)."""
+    led = {"family": "notched" if notched else "plain",
+           "note": "the exact least bed for each row's cheapest declarations, and the root "
+                   "box's certified floor where the exact minimum was not asked; a value is "
+                   "certified when every smaller demand was emptied and the witness reads it",
+           "rows": out}
+    with open(MINIMA_LEDGER, "w") as f:
+        json.dump(led, f, indent=1)
+    return led
+
+
 def main() -> int:
     if "--selftest" in sys.argv:
         return selftest()
     notched = "--notched" in sys.argv
-    report(notched=notched)
+    rows = None
+    for i, a in enumerate(sys.argv):
+        if a == "--rows" and i + 1 < len(sys.argv):
+            rows = tuple(int(t) for t in sys.argv[i + 1].split(",") if t.strip())
+    if "--minima" in sys.argv:
+        minima_report(rows=rows, notched=notched)
+        return 0
+    report(rows=rows, notched=notched)
     return 0
 
 

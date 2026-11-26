@@ -12,7 +12,7 @@ Three measurements, all exact, all in the declared family:
 | --- | --- | --- | --- | --- | --- | --- |
 | `n ≤ 100` (`p+q ≤ 14`, sides `< 10.5`) | 25,935 | 100 | 98 | **16** | **0** | 49 proved rows, silent |
 | `n ≤ 225` (`p+q ≤ 21`, sides `< 15.5`), **every count to 225** | 213,150 | 225 | **223** | **58** | **0** | 69 proved rows, silent |
-| block **position** *decided* (`carrier_offset.py`, exact — doc 106) | 1,579 | 7 open tie rows | — | — | **0** | every declaration's box list emptied |
+| block **position** *decided* (`carrier_offset.py`, exact — doc 106) | 7,381 | 17 open rows (`n ≤ 100`) | — | — | **0** | every declaration's box list emptied |
 
 **Nothing was promoted.** No candidate reached a side below a delivered row, so C1–C4 was never
 entered; `submission.csv` and root `WHITEBOARD.md` are untouched and the delivered total stands at
@@ -117,7 +117,8 @@ it is now also a statement about every declaration of the carrier.
 ## 4. The one free parameter: where the block sits
 
 > **Run 149 replaced this section's sample with a decision** (`carrier_offset.py`, doc 106: a certified
-> branch and bound over `(L, cx, cy)`, 1,579 declarations on the same seven rows, every one emptied).
+> branch and bound over `(L, cx, cy)`; run 150 then made it 7,381 declarations on every open row up to
+> 100, every one emptied).
 > The probe below is kept as the record of run 148, and its structural reading — that a beat needs
 > `K ≤ k−1` and `L < k`, so the seam gap is under one unit and the block always beds cells — is the
 > reason the decision finds nothing to keep.
@@ -203,9 +204,10 @@ python3 scripts/carrier_ceil.py --selftest        # 7 controls
 python3 scripts/carrier_ceil.py                   # the map at n <= 100   (21 s)
 python3 scripts/carrier_ceil.py --wide            # the map at n <= 225   (~14 min)
 python3 scripts/carrier_ceil.py --row 20          # every declaration that reaches 20
-python3 scripts/carrier_offset.py --selftest      # 8 controls
-python3 scripts/carrier_offset.py                 # the seven open tie rows, plain block (~2 min)
-python3 scripts/carrier_offset.py --notched        # the same rows, notched block
+python3 scripts/carrier_offset.py --selftest      # 9 controls
+python3 scripts/carrier_offset.py                 # every open row to 100, plain block (~13 min)
+python3 scripts/carrier_offset.py --notched        # the seven rows, notched block (~25 min)
+python3 scripts/carrier_offset.py --minima         # the exact least bed where it is cheap
 ```
 
 Ledgers: `workspace/push/carrier_ceil.json` (the map over `n ≤ 100`; the wide map is

@@ -179,8 +179,9 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    those three parameters carries an exact **floor** (cells bedded at every point of the box) and
    **ceiling** (cells bedded at some point), and a branch and bound that prunes a box when the floor
    exceeds the count law's demand `D* = K² + m − n` or the ceiling falls short **empties the box list**:
-   on the seven open, non-proved tie rows `12, 20, 30, 42, 56, 72, 91` that is **1,579 declarations,
-   15,349 boxes, 0 survivors** — no side below the grid side, no block position, no declaration. The
+   on **every** open, non-proved row up to 100 — the 16 `tie reached` rows plus `n = 12` — that is
+   **7,381 declarations, 94,339 boxes, 0 survivors** (run 150): no side that would beat the delivered
+   one, no block position, no shape that fits (`p + q ≤ isqrt(2k²−1)`), no declaration. The
    same engine takes run 148's **notched block** (`p×q` minus an `a×b` corner, `a, b ≤ 2`; the L is
    exactly the union of two full rectangles, so its floor is the union of their forced sets and its
    ceiling the full block's possible set) through **6,038 declarations and 69,614 boxes** with the same
@@ -188,6 +189,19 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    can free is never that wide. A planted-configuration control (plant a pose, walk the boxes that
    contain it, no false zero) is what caught the missing seam law `L ≥ K` in the first draft. Nothing
    promoted; **22.217428576** stands.
+   **Run 150 widened that decision to every open row and found two defects in run 149's framing**, both
+   now fixed. (a) The interval's end was the **grid** side; a beat needs the **delivered** side minus the
+   project's `1e-8` floor. The two coincide for fourteen of the sixteen rows and `n = 12`, and run 149's
+   domain was a *superset* there, so its verdicts stand — but `n = 40, 65, 89` deliver 1.7e-9 *below*
+   their grid side and the family attains the count at the delivered side with `K < k`, i.e. inside
+   `[√n, k]`, so those rows can never be emptied as stated. The minima pass found it: `n = 65`'s least
+   bed under the grid-side interval is `0`, a hit that is not a beat. (b) `SMAX = 13` was a cap only at
+   `k = 10` (the complete bound is 5, 7, 8, 9, 11, 12, 14 for `k = 4..10`), so 89..94 gained the `7×7`
+   block. With both fixed, seventeen rows, **7,381 declarations and 94,339 boxes, 0 survivors** (n = 65's
+   46,134 boxes are the expensive row). The `n = 12` sentence "the least bed is 2" is no longer a reading
+   of a 49-position sample: `D = 0` is emptied, `D = 1` is emptied, and `D = 2` is hit at
+   `(L, cx, cy) = (3.999999735963447809, 2.025124976626836406, 1.560660450042059492)` — one cell short,
+   certified. Nothing promoted.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

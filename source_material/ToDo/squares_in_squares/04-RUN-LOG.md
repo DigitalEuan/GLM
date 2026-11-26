@@ -4582,3 +4582,38 @@ written as "unattained anywhere", which the cap cannot support; and the `n ≤ 1
 counts are **3 and 99**, not 1 and 2. Ledgers regenerated (`carrier_ceil.json`, `carrier_ceil_wide.json`,
 `carrier_offset.json`). **No candidate, so C1–C4 was not entered**; `submission.csv` and root
 `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446 grid ties). Doc 106; doc 105 §0.
+
+**Run 150 (2026-11-26) — the same exact decision on every open row, the complete shape box, and two
+defects in run 149's own framing.** Run 149 decided the block's position on seven rows; this run decides
+every open, non-proved row up to 100 — the sixteen the sweep calls `tie reached` (`open_rows()` derives
+them from the sweep's ledger and asserts the result, so the scope is not hand-picked) plus `n = 12` — and
+widens the parameter box to the complete one. **Seventeen rows: 7,381 declarations, 94,339 boxes, every
+box list emptied, 0 survivors**; `n = 65` is the expensive row at 46,134 boxes. Four new rows are k = 9
+(65, 73, 74) and five are k = 10 (89, 92..94 plus 91 re-run).
+
+**Two defects in run 149's framing, both now fixed.** (a) *The interval's end was the grid side; a beat
+needs the delivered side minus the project's `1e-8` floor.* For fourteen of the sixteen rows (and for
+`n = 12`) the two differ by 1.6e-9 and run 149's domain was a **superset**, so its verdicts stand as
+stated. But `n = 40, 65, 89` deliver 1.7e-9 **below** their grid side and the family attains the count
+**at** the delivered side with `K < k`, i.e. inside `[√n, k]` — so those rows can never be emptied on a
+grid-side interval, and a hit there is a tie, not a beat. The minima pass found it on its own: `n = 65`'s
+least bed under the grid-side interval is **0** (its cheapest declaration attains the count at 8.5355).
+`domain()` now ends at `min(k, delivered(n) − 1e-8)` with `delivered(n)` read exactly from the CSV.
+(b) *`SMAX = 13` was a cap only at `k = 10`.* The complete bound is `p + q ≤ isqrt(2k²−1)` — 5, 7, 8, 9,
+11, 12, 14 for `k = 4..10` — so nothing was lost for `k ≤ 9`, but `k = 10` gained `p + q = 14` and with it
+the 7×7 block. `PMAX = 10` was never binding.
+
+**`n = 12`'s minimum is certified rather than read off a sample.** The minima ask the same search for the
+least `v` with a hit, every smaller `v` having been emptied: `D = 0` is emptied, `D = 1` is emptied, `D = 2`
+is a **hit** at `(L, cx, cy) = (3.999999735963447809, 2.025124976626836406, 1.560660450042059492)`, where
+the counter reads 2. So the least bed over the legal domain is **exactly 2** and the row is one cell short
+at the `K = 3`, 2×2 declaration (`D* = 1`); the row's cheapest demand `D* = 0` (a `K = 3`, 1×3 block) is
+still 2 cells short. `n = 20` reads 5 against `D* = 0` at `(4,1,3,1,4)` and 2 at `(4,2,2,2,2)`. Rows whose
+cheapest demand is larger are reported with the root floor and *not* minimised — no number is dressed up
+as an answer it is not.
+
+**Controls 9/9** (the minimiser added as 9, the interval end as 6b: 4.9999999916 at row 20, 8.5355338977 at
+row 65). Ledgers `carrier_offset.json` (plain: 17 rows) and `carrier_minima.json` (new). The notched
+family is unchanged: seven rows, an interval that is a superset of the beat interval there. **No
+candidate, so C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched;
+**22.217428576** (554 beats, 446 grid ties). Docs 105 (three figures) and 106 (§3 rewritten, §5, §6, §7, §8).
