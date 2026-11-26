@@ -14,6 +14,11 @@ Two fatal rules:
   R2 headline   a total quoted in a document's title block (first 10 lines)
                 must be the current one, unless the document is declared
                 historical in HISTORICAL.
+  R3 beats      a line that counts the beats — "554 / 1000", a table row whose
+                label names the beat count, or a currency claim — must quote
+                `sqscore`'s own count.  R1/R2 cannot see this: their scan is
+                anchored to score literals (`2x.xxxxxx`), so "553 / 1000" was
+                never even counted as a claim when row 90 moved it to 554.
 
 A line opts out explicitly by carrying one of TAGS ("historical", "stale",
 "superseded", "withdrawn"): that is the convention the prose already uses. A
@@ -44,6 +49,9 @@ import sqscore                  # noqa: E402
 
 CANON = "22.21742"              # prefix of 22.217428576 and every rounding of it
 SCORE_RE = re.compile(r"(?<![\d.])2[0-9]\.\d{5,9}(?![\d])")
+#: R3: a beat fraction, and the vocabulary that makes a line a *claim* about it
+BEAT_RE = re.compile(r"(?<![\d.])(\d{3})\s*/\s*1000(?![\d])")
+BEAT_LABEL_RE = re.compile(r"(beats?\b|beating\b|beat grid)", re.I)
 #: a line is a *claim about the current state* only if it uses this vocabulary.
 #: "Score history: A -> B -> C" and run-log notes are history, not claims; they
 #: are inventoried below rather than failed.
@@ -62,6 +70,17 @@ def violating(line: str, lit: str) -> bool:
     if any(t in low for t in TAGS):
         return False
     return not lit.startswith(CANON)
+
+
+def stale_score_quoted(line: str) -> bool:
+    """True iff the line names a score and none of them is the current one.
+
+    A beat count printed next to a *superseded* score is describing that
+    superseded state (the run-38 quote in `09-CASCADE.md`), not claiming the
+    current one; the same convention R1 already uses for history lines.
+    """
+    lits = SCORE_RE.findall(line)
+    return bool(lits) and not any(l.startswith(CANON) for l in lits)
 
 
 def main() -> int:
@@ -93,8 +112,33 @@ def main() -> int:
                     continue
                 bad.append((name, i, lit, kind, line.strip()))
 
+    # ---- R3: the beat count is a separate record from the score, and it drifts
+    beat_claims = 0
+    for path in docs:
+        name = os.path.basename(path)
+        with open(path, encoding="utf-8", errors="replace") as f:
+            lines = f.read().splitlines()
+        for i, line in enumerate(lines, 1):
+            current = any(l.startswith(CANON) for l in SCORE_RE.findall(line))
+            if "| " not in line and not CURRENCY_RE.search(line) and not current:
+                continue                       # prose history is inventory
+            counts = [int(m.group(1)) for m in BEAT_RE.finditer(line)]
+            if s["beats"] in counts:
+                continue          # a correction table: the line states the true count too
+            for m in BEAT_RE.finditer(line):
+                cnt = int(m.group(1))
+                beat_claims += 1
+                if cnt == s["beats"]:
+                    continue
+                if any(t in line.lower() for t in TAGS) or stale_score_quoted(line):
+                    continue
+                if not BEAT_LABEL_RE.search(line):
+                    continue
+                bad.append((name, i, m.group(0), "R3 beat count", line.strip()))
+
     print(f"[record_guard] delivered {cur}, beats {s['beats']}, "
-          f"rows {s['rows']}; scanned {len(docs)} docs, {claims} totals")
+          f"rows {s['rows']}; scanned {len(docs)} docs, {claims} totals, "
+          f"{beat_claims} beat counts")
     for name, i, lit, kind, text in bad:
         print(f"  {name}:{i}: {lit}  [{kind}]\n      {text[:110]}")
     if bad:

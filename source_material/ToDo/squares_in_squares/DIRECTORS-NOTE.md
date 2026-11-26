@@ -214,6 +214,18 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    1.9e-9 rendering. The parametric family's ceiling is arithmetic, not parametric: its realised slack is
    5.9–11.6 % above √n where the table sits at 0–4.4 %, and its best members are grid ties. Zero
    promotions; **22.217428576** stands.
+   **Run 152 fixed the record and widened the base census** (doc 108). The README/STATUS tables still
+   said **553 / 1000** beats against `sqscore`'s 554, and `record_guard` passed them because both of
+   its rules are anchored to score literals (`2x.xxxxxx`) — a beat count was never read as a claim.
+   Five lines were fixed and **R3** now checks the count on table rows, currency sentences and lines
+   naming the current score (a line naming only a superseded score stays history); its line-scoped
+   limit is stated, not hidden. On the bases: `exact_words.py` decides every **degree-2** word — the
+   rational words and every `Q(√k)` word, with quarter turns recognised as the **axis word** — lifting
+   the census from 519 to **552 recovered / 550 trusted**; rows 678–679 turn out *not* to be exact 45°
+   sentences (they overlap by 3.34e-10) and are dropped. No row in 1..1000 is a Q(√3), Q(√5) or
+   Q(√10) sentence, and the 448 still refused carry a median of 71 distinct angles — general-position
+   poses, not hidden motifs. The re-run holds: **36,043 candidates, 900 rows, 0 beats**, with n = 500's
+   best candidate improved to 23.414214 and still 0.56 short.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

@@ -4655,3 +4655,52 @@ audit). Ledger `workspace/push/scale_motifs.json` (base census, per-family censu
 none, and the best candidate at every row). **No promotion: zero candidates passed the margin, so C1-C4
 was never entered**; `submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446
 grid ties). Doc 107.
+
+**Run 152 (2026-11-26) — the beat count the guard could not see, and exact bases beyond Q(sqrt 2).**
+Two defects, both closed by measurement.
+
+*The record.* The README summary said **553 / 1000** rows beat the grid while `sqscore` reported **554**,
+and `record_guard` passed it. Nothing in the guard was broken: both of its fatal rules key off
+`SCORE_RE = 2[0-9]\.[0-9]{5,9}`, so a beat count was never *looked at* — row 90's promotion moved the
+score and the beat count in the same commit, every document updated for the score passed, and `553/1000`
+stayed. Five lines carried the stale count with current-state context: `README.md:48`, `STATUS.md:386`
+(also `Grid-tied 447` and `Total improvement -6.719613`), `STATUS.md:569`, `REPRODUCE.md:6` and
+`00-OVERVIEW.md:14`; all five are fixed (554, 446, -6.720241). **R3 is new**: a line that counts the
+beats must quote `sqscore.summarise()`'s count when it is a claim — a table row, a currency sentence, or
+a line naming the *current* score; a line naming only a superseded score is history (the `09-CASCADE.md`
+run-38 quote stays), same TAGS opt-out as R1/R2. On the fixed record R3 flags nothing and the guard
+reads `delivered 22.217428576, beats 554 ... 401 totals, 21 beat counts`. Its limit is stated: R3 is
+**line-scoped**, so `REPRODUCE.md` and `00-OVERVIEW.md`, which put the score on one line and the count on
+the next, were invisible to it and were fixed by hand.
+
+*The bases.* `scripts/exact_words.py` (new, 10 decision functions, 0 naming float, 8 controls) decides
+which rows are exact sentences over the whole **degree-2 catalogue**: the rational words (Pythagorean and
+half-angle, all in Q), and every word with `cos^2`, `sin^2` rational in `Q(sqrt k)` — 45 degrees is k=2,
+`atan(1/2)` is `cos^2 = 4/5` (k=5), `atan(1/3)` is `9/10` (k=10), 30 degrees is `3/4` (k=3). Quarter
+turns are the **axis word** (the unit square is invariant), which run 151's 0/pi/pi4 test refused — that
+is where most of the new rows come from. The fit is sized to the data: `cos^2` within **1e-10** of a
+rational with denominator <= 2000 (the 12-decimal angle perturbs it by ~1e-12; a random real misses by
+~1e-7), `sin^2` taken as the exact complement and required to match to the same band, and the rebuilt
+side must reproduce the delivered side to 5e-9.
+
+The census goes from **519 to 552 recovered bases** (Q 450, Q(sqrt 2) 102) and the 33 new rows are
+`19, 26, 50, 66, 85, 104, 125, 149, 171, 174, 198, 201, 202, 230, 231, 262, 296, 331, 369, 408, 449,
+492, 493, 538, 585, 586, 634, 635, 678, 679, 686, 853, 974`. **Two of them are not exact sentences:**
+at 45 degrees, rows **678** and **679** overlap by one pair at clearance **-3.34e-10** — their poses rest
+on a 45-degree block that is off by ~1e-10 rad. Run 152 gates the extension's 33 inferred sentences
+before trusting them, so both are dropped: **550 trusted bases** (Q 450, Q(sqrt 2) 100; words axis 446,
+mixed 104) and **450 refused** (448 not a declared word + 2 overlapping at the gate). The other
+quadratic fields are **empty — measured, not assumed**: no row in 1..1000 is a Q(sqrt 3), Q(sqrt 5) or
+Q(sqrt 10) sentence, though the classifier's controls recover `atan(1/2)`, `atan(1/3)` and 30 degrees
+from the angle alone. The 448 refusals are not near-misses: median **71 distinct angle values** per row
+(min 2, max 998) — general-position poses, not lattice motifs.
+
+*The re-run.* **36,043 candidates over all 900 rows of 101..1000, 0 strict beats**: A 31,577 candidates
+(900 rows, best -1.498e-9 at row 133), B 4,348 (554 rows, best +1.936e-9 at row 962), C 118 (91 rows,
+best -0.177). The wider census moves exactly one frontier side: at n=500 the newly recovered row 125 gives
+a 2x2 product at **23.414214** where run 151's best was 23.485281 — still **0.56 above** the delivered
+22.850605. n=272 stays 18.000000 against 16.965586. No promotion: zero candidates cleared the margin, so
+C1-C4 was never entered; `submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554
+beats, 446 ties). Controls: `exact_words` 8/8, `scale_motifs` 13/13, 25 decision functions (including a 3x3 grid at `atan(1/2)`
+in Q(sqrt 5) gating at exactly `9/sqrt 5`), `record_guard` clean. Ledger gains `base_fields`, `refused`
+and `base_gate`. Doc 108.

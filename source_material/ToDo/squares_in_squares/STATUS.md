@@ -382,9 +382,9 @@ source was right and the instrument learned.
 |---|---|
 | Submission score | **22.217428576** (rounded **22.217429**) |
 | Grid ceiling | 28.937670 |
-| Total improvement | −6.719613 |
-| Puzzles beating the grid | **553 / 1000** |
-| Grid-tied | 447 (of which **152 are proven floors**) |
+| Total improvement | −6.720241 |
+| Puzzles beating the grid | **554 / 1000** |
+| Grid-tied | 446 (of which **152 are proven floors**) |
 | Open rows (attackable set) | **305** (root_audit run 34) |
 | Leaderboard best (user-reported 2026-11-05) | 22.0544214515 |
 | Gap to leader | **0.163635** |
@@ -566,7 +566,7 @@ operating loop — is the system record in `STATUS.md`. More operatiors and more
 | Quantity | Value |
 |---|---|
 | Submission score | **22.217428576** (rounded **22.217429**; grid ceiling 28.937670, improvement −6.720241) |
-| Puzzles beating the plain grid | **553 / 1000** |
+| Puzzles beating the plain grid | **554 / 1000** |
 | Leaderboard best (reported) | 22.0544214515 → gap **0.163635** |
 | Certification | 1000/1000 packings SAT-verified + 500,500-row CSV round-trip (0 issues; Run 36 record) |
 | Golay/Leech verification | 28/28 + 14/14 assertions, integer-exact |

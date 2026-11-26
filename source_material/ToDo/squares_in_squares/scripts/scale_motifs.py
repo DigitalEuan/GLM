@@ -29,11 +29,20 @@ compares it, *exactly*, with the delivered side of every row in 101..1000:
 
 NOTHING IS APPROXIMATE.  The delivered sides are 45-digit Decimals computed from the
 CSV's own decimal text; the trigonometric functions are `true_geom`'s Decimal series, so
-no float touches them.  Every candidate side is an element of Q(sqrt 2) (`qsqrt2.Q2`)
-read off an exact pose, and the comparison is `L + 1e-8 <= delivered(n)` with `1e-8` an
-exact Fraction, i.e. a candidate must beat the delivered row by the project's whole
-margin.  A strict beat is then *verified*: the exact SAT gate (`qsqrt2.gate`) plus a
-certificate in `verify_certificates`' schema, at clearance >= 0.
+no float touches them.  Every candidate side is an element of the base's own quadratic
+field — `Q(sqrt k)` for the k of its words, `Q(sqrt 2)` when they are rational — read off
+an exact pose, and the comparison is `L + 1e-8 <= delivered(n)` with `1e-8` an exact
+Fraction, i.e. a candidate must beat the delivered row by the project's whole margin.  A
+strict beat is then *verified*: the exact SAT gate (`qsqrt2.gate`, which is one procedure
+over any `exact_field.Quad(d)`) plus a certificate in `verify_certificates`' schema, at
+clearance >= 0.
+
+WHICH ROWS ARE BASES (run 152).  A row is rebuilt when every angle is a declared word of
+the unit circle of degree <= 2: the rational words (Pythagorean / half-angle, in Q), the
+45-degree word, and every word with `cos^2`, `sin^2` rational (`exact_words.classify`).
+Quarter turns are the axis word, so a row turned by pi/2 is the same sentence.  That lifts
+the census from 519 rows (Run 151, 0/45 degrees only) to 552, and the ledger records the
+refusal of the other 448 by name: an angle that is not a word, or two different radicals.
 
 WHAT IT FOUND (run 151).  Zero strict beats in all three families on every row of
 101..1000.  (A) and (B) are the table's own constructions, so every row they reach is
@@ -42,7 +51,7 @@ staircase waste in the corner fill leaves every realised pose above sqrt(n) by m
 the delivered rows are.
 
 USAGE
-    python3 scripts/scale_motifs.py --selftest   # 9 controls
+    python3 scripts/scale_motifs.py --selftest   # 14 controls
     python3 scripts/scale_motifs.py              # the audit, ledger written
     python3 scripts/scale_motifs.py --promote    # C1 on every strict beat (none)
 """
@@ -60,7 +69,8 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 import exact_field as EF          # noqa: E402  (the bytecode audit)
-import qsqrt2 as QS              # noqa: E402  (Q(sqrt 2): Q2, gate, side, words)
+import exact_words as EW          # noqa: E402  (the word catalogue: Q and Q(sqrt k))
+import qsqrt2 as QS              # noqa: E402  (the gate, side, words; Q2 is its default)
 import verify_certificates as VC  # noqa: E402  (C1: the certificate schema)
 
 from qsqrt2 import AXIS, Q2, gate, side, word_45  # noqa: E402
@@ -78,9 +88,10 @@ MARGIN = F(1, 10 ** 8)
 N_LO, N_HI = 101, 1000
 
 #: a CSV angle is "the 45-degree word" when it is within this of pi/4, in decimal text
-HALF_DEG = Decimal("1e-9")
-PI4 = Decimal("0.78539816339744830961566084581987572104929234984378")
-PI = Decimal("3.14159265358979323846264338327950288419716939937511")
+#: (kept for the docstring's vocabulary; the classifier decides the words now)
+
+#: the base must reproduce the delivered side to this, or it is not that row's sentence
+REPRO = Decimal("5e-9")
 
 #: the rational words of the parametric family, all exact
 WORDS = {"45": word_45(),
@@ -92,28 +103,36 @@ BASES: dict = {}
 
 
 # ---------------------------------------------------------------- decimal shadow
-def z2dec(z: Q2, places: int = 45) -> Decimal:
-    """`a + b sqrt 2` as a Decimal at `places`, for display and for the CSV comparison.
+def z2dec(z, places: int = 45) -> Decimal:
+    """`z` (an element of any `Q(sqrt k)`) as a Decimal at `places`.
 
-    This is the only place a side leaves `Q2`.  The true value differs from this shadow
-    by less than 10^-places, and every comparison is made with an 1e-8 margin, so no
-    decision can depend on the shadow's last digits.
+    `Quad.decimal` takes sqrt(k) by Decimal's own sqrt at the working precision, so this
+    shadow differs from the true value by less than 10^-places; every comparison is made
+    with an 1e-8 margin, so no decision can depend on the shadow's last digits.
     """
-    with localcontext() as ctx:
-        ctx.prec = places
-        return (Decimal(z.a.numerator) / Decimal(z.a.denominator)
-                + Decimal(z.b.numerator) / Decimal(z.b.denominator)
-                * Decimal(2).sqrt())
-
-
-def q2_of_dec(d: Decimal) -> Q2:
-    """An exact `Q2` from a decimal string's value (a rational; no float anywhere)."""
-    return Q2(F(d))
+    with localcontext() as ctx:          # callers set their own ambient precision
+        ctx.prec = max(places + 20, 60)
+        return Decimal(z.decimal(places))
 
 
 def grid(n: int) -> int:
     k = math.isqrt(n)
     return k if k * k == n else k + 1
+
+
+#: run 151's base rule, kept so the extension's *new* sentences can be named and gated
+_OLD_TOL = Decimal("1e-9")
+_OLD_PI4 = Decimal("0.7853981633974483096")
+_OLD_PI = Decimal("3.1415926535897932384")
+
+
+def old_rule_row(cells) -> bool:
+    """Run 151's rule: every angle is 0, pi or pi/4 within the CSV's own 1e-9."""
+    for _x, _y, a in cells:
+        if abs(a) <= _OLD_TOL or abs(a - _OLD_PI) <= _OLD_TOL or abs(a - _OLD_PI4) <= _OLD_TOL:
+            continue
+        return False
+    return True
 
 
 # ---------------------------------------------------------------- the delivered table
@@ -141,48 +160,75 @@ def load_delivered():
 
 # ------------------------------------------------------------------- exact bases
 class Base:
-    """A delivered row rebuilt exactly in `Q(sqrt 2)`: the pose a family grows from."""
+    """A delivered row rebuilt exactly in its own field: the pose a family grows from."""
 
-    __slots__ = ("n", "cells", "words", "L", "kind", "gated")
+    __slots__ = ("n", "cells", "words", "L", "kind", "field", "cls", "gated")
 
-    def __init__(self, n, cells, words, L, kind):
-        self.n, self.cells, self.words, self.L, self.kind = n, cells, words, L, kind
+    def __init__(self, n, cells, words, L, kind, cls, field):
+        self.n, self.cells, self.words, self.L = n, cells, words, L
+        self.kind, self.cls, self.field = kind, cls, field
         self.gated = None
 
     def gate(self):
         if self.gated is None:
-            self.gated = gate(self.cells, self.words)
+            self.gated = gate(self.cells, self.words, self.cls)
         return self.gated
 
 
-def base_of(n: int, deliv) -> Base | None:
-    """Rebuild row `n` exactly, if every angle is the 0- or the 45-degree word.
+def row_words(cells):
+    """`(words, k)` when every angle is a declared word in one field, else `(None, reason)`.
 
-    The centres are the CSV's own decimal text, hence exact rationals, and the words are
-    exact, so the pose is a `Q2` sentence.  A row with any other angle is refused: its
-    geometry is not in this field, and replaying its *decimals* would make the audit
-    approximate in exactly the place it must not be.
+    A word is a point of the unit circle algebraic of degree <= 2: the rational words
+    (`k = 1`), the 45-degree word, and every word with `cos^2`, `sin^2` rational in
+    `Q(sqrt k)` (`exact_words.classify`).  A row mixing two different radicals needs a
+    degree-4 tower and is refused rather than approximated.
     """
-    _side, cells = deliv[n]
-    st, ws = [], []
-    saw45 = saw0 = False
-    for x, y, a in cells:
-        if abs(a) <= HALF_DEG or abs(a - PI) <= HALF_DEG:
-            w, saw0 = AXIS, True
-        elif abs(a - PI4) <= HALF_DEG:
-            w, saw45 = word_45(), True
-        else:
-            return None
-        st.append((q2_of_dec(x), q2_of_dec(y)))
+    ws, k = [], 1
+    for _x, _y, a in cells:
+        w = EW.classify(a)
+        if w is None:
+            return (None, "an angle that is not a declared word")
+        if w.k > 1:
+            if k != 1 and k != w.k:
+                return (None, "two different quadratic fields")
+            k = w.k
         ws.append(w)
+    return (ws, k)
+
+
+def base_of(n: int, deliv) -> Base | None:
+    """Rebuild row `n` exactly in the row's own field, if every angle is a declared word.
+
+    The centres are the CSV's own decimal text, hence exact rationals; the words are exact
+    elements of `Q(sqrt k)`; so the pose is an exact sentence.  Two guards keep the base
+    honest: every word's `cos^2 + sin^2 = 1` is checked in the field, and the rebuilt side
+    must reproduce the delivered side to `REPRO` -- a row whose angles merely *look* like
+    a word cannot enter the census as that row.
+    """
+    side_d, cells = deliv[n]
+    ws, k = row_words(cells)
+    if ws is None:                            # `k` carries the refusal reason
+        return None
+    kk = k if k > 1 else 2
+    cls = EW.quad(kk)
+    st, words = [], []
+    for (x, y, _a), w in zip(cells, ws):
+        c, s = w.element(kk)
+        st.append((cls(F(x)), cls(F(y))))
+        words.append((c, s))
     if len(st) != n:
         return None
-    ex = [QS.frame_extent(w[0], w[1]) for w in ws]
+    ex = [QS.frame_extent(c, s, cls) for c, s in words]
     lo_x = min(st[i][0] - ex[i] for i in range(n))
     lo_y = min(st[i][1] - ex[i] for i in range(n))
     st = [(x - lo_x, y - lo_y) for x, y in st]
-    kind = "45" if saw45 and not saw0 else ("axis" if saw0 and not saw45 else "mixed")
-    return Base(n, st, ws, side(st, ws), kind)
+    L = side(st, words, cls)
+    if abs(z2dec(L, 45) - side_d) > REPRO:
+        return None                       # the row is not this sentence
+    tags = {w.name for w in ws}
+    kind = "45" if tags == {"45"} else ("axis" if tags == {"axis"} else "mixed")
+    field = "Q" if k == 1 else f"Q(sqrt {kk})"
+    return Base(n, st, words, L, kind, cls, field)
 
 
 # ------------------------------------------------------------------- family (A)
@@ -198,7 +244,7 @@ def product_cells(base: Base, k: int, drop: int = 0):
         for i in range(k):
             if len(cells) >= want:
                 return cells, words
-            dx, dy = Q2(i) * base.L, Q2(j) * base.L
+            dx, dy = base.cls(i) * base.L, base.cls(j) * base.L
             for idx in range(base.n):
                 if len(cells) >= want:
                     return cells, words
@@ -217,36 +263,37 @@ def family_product(bases):
             lo_n = hi_n - (m - 1)
             if hi_n < N_LO or lo_n > N_HI:
                 continue
-            L = Q2(k) * base.L
+            L = base.L * base.cls(k)
             for r in range(0, m):
                 n = hi_n - r
                 if N_LO <= n <= N_HI:
                     out.append({"family": "A-product", "n": n, "L": L, "k": k,
-                                "m": m, "drop": r})
+                                "m": m, "drop": r, "field": base.field})
     return out
 
 
 # ------------------------------------------------------------------- family (B)
-def border_count(L: Q2) -> int:
-    """`2 floor(L+1) - 1`, the cells a unit border adds.  Exact."""
-    return 2 * (QS.floor_q2(L) + 1) - 1
+def border_count(L) -> int:
+    """`2 floor(L+1) - 1`, the cells a unit border adds.  Exact in any `Quad`."""
+    return 2 * (L.floor() + 1) - 1
 
 
 def inflate_cells(base: Base, steps: int):
     """The pose after `steps` border inflations and the side after each one."""
+    one, half = base.cls(1), base.cls(F(1, 2))
     cells, words, L = list(base.cells), list(base.words), base.L
     sides = []
     for _ in range(steps):
-        row = QS.floor_q2(L + Q2(1))
-        moved = [(x + Q2(1), y + Q2(1)) for x, y in cells]
+        row = (L + one).floor()
+        moved = [(x + one, y + one) for x, y in cells]
         mw = list(words)
         for j in range(row):                      # vertical strip: x in [0,1]
-            moved.append((Q2(F(1, 2)), Q2(j) + Q2(F(1, 2))))
-            mw.append(AXIS)
+            moved.append((half, base.cls(j) + half))
+            mw.append((one, base.cls(0)))
         for i in range(1, row):                   # horizontal strip: y in [0,1]
-            moved.append((Q2(i) + Q2(F(1, 2)), Q2(F(1, 2))))
-            mw.append(AXIS)
-        cells, words, L = moved, mw, L + Q2(1)
+            moved.append((base.cls(i) + half, half))
+            mw.append((one, base.cls(0)))
+        cells, words, L = moved, mw, L + one
         sides.append(L)
     return cells, words, sides
 
@@ -258,12 +305,12 @@ def family_inflate(bases, steps_max: int = 12):
         n, L = m, base.L
         for j in range(1, steps_max + 1):
             add = border_count(L)
-            n2, L2 = n + add, L + Q2(1)
+            n2, L2 = n + add, L + base.cls(1)
             if n2 > N_HI:
                 break
             if n2 >= N_LO:
                 out.append({"family": "B-inflate", "n": n2, "L": L2, "steps": j,
-                            "m": m, "added": add})
+                            "m": m, "added": add, "field": base.field})
             n, L = n2, L2
     return out
 
@@ -359,7 +406,7 @@ def compare(L: Q2, deliv_side: Decimal) -> dict:
 def _rec(c, cmp):
     rec = {"family": c["family"], "n": c["n"], "L": z2dec(c["L"], 18),
            "margin": cmp["margin"], "beat": cmp["beat"]}
-    for key in ("k", "m", "drop", "steps", "added", "word", "b", "extra"):
+    for key in ("k", "m", "drop", "steps", "added", "word", "b", "extra", "field"):
         if key in c:
             rec[key] = c[key]
     return rec
@@ -413,9 +460,9 @@ def z2dec_z(d: Decimal) -> Decimal:
 
 
 # --------------------------------------------------- C1 on a strict beat
-def certificate(cells, words, n: int, L: Q2, cid: str) -> dict:
-    """A `verify_certificates` document for a `Q2` pose (canonical fraction strings)."""
-    out = {"id": cid, "field": "Quad(2)", "N": n,
+def certificate(cells, words, n: int, L, cid: str) -> dict:
+    """A `verify_certificates` document for the pose, in its own field `Quad(d)`."""
+    out = {"id": cid, "field": f"Quad({type(L).d})", "N": n,
            "L": [str(L.a), str(L.b)], "origin": ["0", "0"],
            "family": "scale-motifs", "expected": {"ok": True, "violations": 0},
            "cells": []}
@@ -424,7 +471,7 @@ def certificate(cells, words, n: int, L: Q2, cid: str) -> dict:
             "x": [str(x.a), str(x.b)], "y": [str(y.a), str(y.b)],
             # the frame is [R0, R1, R2, R3] with u = (R0, R2), v = (R1, R3)
             "r": [[str(c.a), str(c.b)],
-                  [str((Q2(0) - si).a), str((Q2(0) - si).b)],
+                  [str((-si).a), str((-si).b)],
                   [str(si.a), str(si.b)],
                   [str(c.a), str(c.b)]]})
     return out
@@ -559,10 +606,52 @@ def selftest() -> int:
           f"{d120:.12f}): 11 is not a beat (margin {c_eq['margin']:+.1e}), 11 - 1e-6 is")
     checks += 1
 
+    b50 = base_of(50, deliv)
+    assert b50 is not None and b50.field == "Q", b50
+    g50 = b50.gate()
+    assert g50["ok"], g50
+    c34 = {w.name for w in [EW.classify(a) for _x, _y, a in deliv[50][1]]}
+    print(f"  10. a rational-word row joins the census: row 50 ({b50.field}, "
+          f"{len(c34)} word classes) rebuilds at L = {z2dec(b50.L, 9):.9f}, gate ok, "
+          f"{g50['contacts']} contacts")
+    checks += 1
+
+    cls5 = EW.quad(5)
+    c5, s5 = EW.root_in(cls5, F(4, 5)), EW.root_in(cls5, F(1, 5))   # 2/sqrt 5, 1/sqrt 5
+    assert c5 * c5 == cls5(F(4, 5)) and s5 * s5 == cls5(F(1, 5))
+    st5, ws5 = [], []
+    for j in (-1, 0, 1):
+        for i in (-1, 0, 1):
+            u, v = cls5(i), cls5(j)
+            st5.append((c5 * u - s5 * v, c5 * v + s5 * u))
+            ws5.append((c5, s5))
+    g5 = gate(st5, ws5, cls5)
+    assert g5["ok"], g5
+    assert g5["L"] == cls5(F(9, 5)) * cls5(0, 1), (g5["L"], "3 (|c| + |s|) = 9/sqrt 5")
+    print(f"  11. a non-Q(sqrt 2) field end to end: a 3x3 grid at atan(1/2) in Q(sqrt 5) "
+          f"gates at L = {z2dec(g5['L'], 9):.9f} = 9/sqrt 5 exactly")
+    checks += 1
+
+    fake = [(Decimal(0), Decimal(0), Decimal("0.463647609001")),
+            (Decimal(0), Decimal(0), Decimal("0.523598775598"))]
+    ws_f, why = row_words(fake)
+    assert ws_f is None and why == "two different quadratic fields", (ws_f, why)
+    print("  12. a row mixing Q(sqrt 5) and Q(sqrt 3) needs a degree-4 tower and is "
+          "refused by name, not approximated")
+    checks += 1
+
+    bases = {n: b for n in range(1, N_HI + 1) if (b := base_of(n, deliv)) is not None}
+    fields = {}
+    for b in bases.values():
+        fields[b.field] = fields.get(b.field, 0) + 1
+    print(f"  13. the census: {len(bases)} bases recovered of {len(deliv)} (before the "
+          f"new-sentence gate), by field {fields}")
+    checks += 1
+
     checked, offenders, skipped = EF.audit_module(
         sys.modules[__name__], exempt=EF.AUDIT_EXEMPT + ("selftest",))
     assert offenders == [], offenders
-    print(f"  9. bytecode audit: {checked} decision functions, 0 naming float "
+    print(f"  14. bytecode audit: {checked} decision functions, 0 naming float "
           f"(exempt {skipped})")
     checks += 1
     print(f"selftest OK ({checks} controls)")
@@ -583,14 +672,46 @@ def main() -> int:
         if b is not None:
             bases[n] = b
             BASES[n] = b
-    kinds = {}
+    # the extension's sentences are *inferred* from the angle, so they are gated before
+    # they are trusted; run 151's own 519 rows are the table's declared words and are not
+    # re-gated here (C1 gates every candidate that would be promoted, from any base).
+    new_bases = [n for n in sorted(bases) if not old_rule_row(deliv[n][1])]
+    dropped = []
+    for n in new_bases:
+        g = bases[n].gate()
+        if not g["ok"]:
+            dropped.append({"n": n, "violations": g["violations"],
+                            "clearance": str(z2dec(g["clearance"], 12))})
+    for rec in dropped:
+        bases.pop(rec["n"], None)
+        BASES.pop(rec["n"], None)
+    print(f"new sentences: {len(new_bases)} recovered beyond run 151's rule, "
+          f"{len(new_bases) - len(dropped)} pass the exact gate, {len(dropped)} dropped "
+          f"{[(r['n'], r['violations']) for r in dropped]} (clearance "
+          f"{[r['clearance'] for r in dropped]})")
+    kinds, fields = {}, {}
     for b in bases.values():
         kinds[b.kind] = kinds.get(b.kind, 0) + 1
-    print(f"exact bases (0/45-degree rows): {len(bases)} of {len(deliv)}  {kinds}")
+        fields[b.field] = fields.get(b.field, 0) + 1
+    refused = {}
+    for n in range(1, N_HI + 1):
+        if n in bases:
+            continue
+        _ws, why = row_words(deliv[n][1])
+        if _ws is None:                    # else it was recovered but failed the gate
+            refused[why] = refused.get(why, 0) + 1
+    for rec in dropped:
+        refused["the inferred sentence overlaps at the exact gate"] = \
+            refused.get("the inferred sentence overlaps at the exact gate", 0) + 1
+    print(f"exact bases: {len(bases)} of {len(deliv)}  words {kinds}  fields {fields}")
+    print(f"refused: {sum(refused.values())}  {refused}")
     res = audit(bases, deliv, verbose=True)
     out = {"instrument": "scale_motifs.py", "schema": "scale-motifs/1",
            "window": [N_LO, N_HI], "margin": str(MARGIN_D),
            "bases": {k: v for k, v in kinds.items()},
+           "base_fields": {k: v for k, v in fields.items()},
+           "refused": {k: v for k, v in refused.items()},
+           "base_gate": {"new_sentences": len(new_bases), "dropped": dropped},
            "candidates": res["candidates"], "rows_reached": res["rows"],
            "summary": {k: {kk: (str(vv) if isinstance(vv, Decimal) else vv)
                            for kk, vv in v.items()}
