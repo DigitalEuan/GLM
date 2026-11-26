@@ -5581,8 +5581,9 @@ def main(argv=None) -> int:
         import interval_verifier as IV
         import anchor_chain as ACH
         import legal_slide as LSL
+        import snap_certify as SNC
         mods = [EF, Q, sys.modules[__name__], LAT, VC, L65, R47, R47P, R47L, C105, C106, OCH,
-                FSL, SPL, TG, RT, IV, ACH, LSL]
+                FSL, SPL, TG, RT, IV, ACH, LSL, SNC]
         total, bad = 0, []
         for m in mods:
             checked, offenders, skipped = EF.audit_module(m, exempt=EF.AUDIT_EXEMPT)

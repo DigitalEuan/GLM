@@ -244,6 +244,17 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    of that room, and it needs no new construction, only a tighter polish than the one that produced the
    record. Grid-row beats (all 30 band tops by inheritance) are worth `+0.23251` in total.
 
+4. **Proposal engines with the exact pipeline as judge (`run 154`):** `proposal_anneal.py` (float, isolated)
+   + `snap_certify.py` (zero float, audited) is the first end-to-end *propose -> snap -> gate* loop, and it
+   refuses on exactly one axis: free-angle annealing lands on the `k x k` lattice it starts from, so at
+   `k - 1e-4` its best pose is `1.5e-2 .. 3.6e-2` illegal — 1,490x to 3,600x over the `1e-5` line — and an
+   exact repair cannot help, because a pair separated in an over-full box hands its overlap to the
+   neighbour (it *raised* the residual on 18 of 20 rows). The route is not dead, its variable is wrong: a
+   spinor with denominator `<= 32` quantises to ~`1e-3` rad (`1.5e-2` of slop at `k = 15`), so a proposal
+   good enough to survive the snap must already be a word construction. **Next: anneal on the word alphabet**
+   (`t = p/q`, `q <= 32` as the rotation move set), which makes Stage 2's snap the identity and turns the
+   `1e-5` rule into a statement about the pose. Doc 110.
+
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
 - **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational

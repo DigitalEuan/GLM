@@ -4751,3 +4751,38 @@ beat a row that is denser than the grid, and 554 delivered rows are.
 and the frontier probe: rows 20/50/120's best composite is n=266 at -0.177). `exact_words` 8/8,
 `record_guard` clean. **No promotion**: zero candidates cleared the margin, so C1-C4 was never entered;
 `submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446 ties). Doc 109.
+
+**Run 154 (2026-11-26) — the two-stage solver built, and the annealer's 1e-2 wall.**
+The brief was the one thing 153 runs had never done: stop asking the exact machinery to *find* a
+packing and let a numerical search *propose* one, then force it through the exact pipeline. So this run
+built the missing half. `scripts/proposal_anneal.py` is Stage 1 and the only float in the campaign:
+perturbed-grid, strip, 45-degree-wedge and random seeds; squared-penetration energy over the four SAT
+axes plus a boundary term; a shrink continuation `k -> k - 5e-5 -> k - 1e-4` with a **hard** box; four
+seconds per seed. `scripts/snap_certify.py` is Stage 2 and has no float at all: it turns each angle into
+`t = sin/(1+cos)` in `Decimal`, fits `t` to a rational with denominator `<= 32`, rebuilds the orientation
+as the rational spinor `((1-t^2)/(1+t^2), 2t/(1+t^2))`, snaps the centres to rationals with denominator
+`<= 1e9`, repairs overlaps by an exact Gauss-Seidel sweep (each sweep pushes the later square of a pair
+along its best axis by exactly the penetration and clamps it into `[0, L]^2`), and adjudicates with
+`qsqrt2.gate(..., exact_field.Q)` plus `verify_certificates` in field `"Q"`. **The targets** were measured
+exactly, not by float: of the 446 grid ties, 249 have deficit `r = k^2 - n <= 12`, and excluding
+Nagamochi's proved `r = 1, 2` and applying the brief's priority (`r = 3, 4` at `k = 11..15`) gives 20 rows
+— tier A 117, 140, 118, 165, 141, 192, 221, 166, 193, 222; tier B 111, 133, 112, 157, 134, 113, 158, 135,
+184, 159 — every one with a delivered side of exactly `k`. **Stage 1 found nothing that qualifies:** at
+`k - 1e-4`, inside the container to the last digit, the best worst-penetration is **1.49e-2** (n = 112)
+and the worst **3.60e-2** (n = 133), i.e. 1,490x to 3,600x above the `1e-5` pass line, with a tight
+distribution that is the signature of a search stuck on the lattice it starts from. **Stage 2 ran on all
+twenty anyway** for conversion diagnostics: the snap is nearly free on near-lattice poses (most rows
+unchanged, `t = 0` exactly representable), while the exact repair *raises* the worst penetration on 18 of
+20 rows (up to 5.9x) because separating a pair in an over-full box hands the overlap to the neighbour —
+and the exact gate then refuses all 20 at `ok`, before the margin is ever consulted. **0 of 20 pass
+C1-C2**; `submission.csv` and root `WHITEBOARD.md` untouched; score **22.217428576**, 554 beats, 446
+grid ties. Controls: `snap_certify` **7/7** (spinor identity, the CSV angle 0.927295218001612 re-snapping
+to `t = 1/2`, a rational 3x3 grid gating with 20 contacts and passing C1/C2, a 0.1-overlap chain
+repaired to residual 0 in 2 sweeps, an illegal pose refused at the gate, a legal tie refused at C2, and
+the module's own bytecode audit at 0 float offenders); `exact_words` 8/8; `scale_motifs` 15/15;
+`record_guard` clean; `glm_wheels --audit` **703 functions, 0 offenders** with `snap_certify` added to
+the audited list and `proposal_anneal` deliberately excluded as the declared float stage. The finding is
+structural, not budgetary: a `1e-4` shrink of a jammed `k x k` lattice needs a rearrangement, and a
+spinor with denominator <= 32 quantises to ~1e-3 rad (1.5e-2 of slop at k = 15), so a proposal that only
+just clears `1e-5` cannot survive the snap — the next version must **anneal on the word alphabet itself**
+(rational spinors as the move set), which makes the snap the identity. Doc 110.
