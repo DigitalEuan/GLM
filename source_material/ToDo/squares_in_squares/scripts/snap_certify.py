@@ -59,7 +59,7 @@ PROPOSALS = os.path.join(ROOT, "workspace/push/anneal.jsonl")
 
 MARGIN = Decimal("1e-8")
 SHRINK = F(1, 10 ** 4)            # the target side is k - 1e-4, exactly
-QMAX = 32                         # spinor denominator bound
+QMAX = 100_000                    # spinor denominator bound (CF convergents)
 DENS = 10 ** 9                    # centre denominator bound
 PLACES = 12                       # CSV decimals
 
@@ -78,17 +78,44 @@ def spinor(t: F):
     return (1 - t * t) / den, (2 * t) / den
 
 
+def cf_convergents(t: F, qmax: int = QMAX):
+    """The continued-fraction convergents `p/q` of `t` with `q <= qmax`, in order.
+
+    A convergent is the best rational approximation of its size, and two consecutive ones
+    bracket `t`, so the last one returned is the best `t` can do inside the bound.  Run 154
+    used `limit_denominator(32)`; at `k = 15` that is ~`1e-3` rad of angle, i.e. `1.5e-2` of
+    positional slop — larger than the overlaps being chased.  At `q <= 1e5` the angle is good
+    to `~1e-10` rad, and the snap costs nothing that matters.
+    """
+    p0, q0, p1, q1 = 0, 1, 1, 0
+    out = []
+    v = t
+    for _ in range(64):
+        a = v.numerator // v.denominator
+        p0, p1 = p1, a * p1 + p0
+        q0, q1 = q1, a * q1 + q0
+        if q1 > qmax:
+            break
+        out.append(F(p1, q1))
+        rest = v - a
+        if rest == 0:
+            break
+        v = 1 / rest
+    return out
+
+
 def snap_t(theta: Decimal, qmax: int = QMAX) -> F:
-    """`tan(theta/2)` as a Fraction with denominator <= qmax, from the decimal angle.
+    """`tan(theta/2)` as the last continued-fraction convergent with denominator <= qmax.
 
     `t = sin / (1 + cos)` is used instead of `tan` so that a right angle does not divide by
-    zero; the division is Decimal, and only the final rational fit loses anything.
+    zero; the division is Decimal at 60 digits, so the only loss is the rational fit itself.
     """
     with localcontext() as ctx:
         ctx.prec = 60
         c, s = TG.cos_sin(theta)
         t = F(s / (1 + c))
-    return t.limit_denominator(qmax)
+    conv = cf_convergents(t, qmax)
+    return conv[-1] if conv else F(0)
 
 
 def snap_pos(v: Decimal, dens: int = DENS) -> F:
@@ -157,51 +184,74 @@ def clamp_into(cell, word, L):
     return (x, y)
 
 
-def repair(cells, words, L, iters: int = 40):
-    """Exact sweep separation: push the later square of every overlapping pair away.
-
-    A Gauss-Seidel sweep in exact arithmetic: for each overlapping pair, in index order, the
-    later square is moved along that pair's best axis by exactly the penetration, then clamped
-    into `[0, L]^2`; if the container pins it, the earlier square is offered the move instead.
-    One sweep separates a chain (`0.5, 1.4, 2.3` becomes `0.5, 1.5, 2.5`), and repeated
-    sweeps settle a lattice.  A pose the box genuinely jams stalls with a non-zero residual,
-    which is reported exactly — never rounded away.
-
-    Returns `(cells, sweeps, residual)`.
-    """
-    cells = list(cells)
+def violations(cells, words):
+    """Every overlapping pair, exactly: `[(i, j, qx, qy, sign, pen)]`."""
+    out = []
     n = len(cells)
     two = Q(2)
-    for sweep in range(1, iters + 1):
-        moved = 0
-        for i in range(n):
-            for j in range(i + 1, n):
-                if abs(cells[j][0] - cells[i][0]) >= two or abs(cells[j][1] - cells[i][1]) >= two:
-                    continue
-                best = None
-                for q, slack, _need, owner in QS.pair_axes(cells, words, i, j, Q):
-                    if best is None or slack > best[1]:
-                        best = (q, slack, owner)
-                if best is None or best[1] >= Q(0):
-                    continue
-                pen = -best[1]
-                qx, qy = best[0]
-                proj = (cells[j][0] - cells[i][0]) * qx + (cells[j][1] - cells[i][1]) * qy
-                sign = Q(1) if proj >= 0 else Q(-1)
-                # sweep order: the later square gives way first, the earlier one only if the
-                # container pins it -- pushing `i` first would undo the previous pair
-                for k, d in ((j, sign * pen), (i, -sign * pen)):
-                    fresh = clamp_into((cells[k][0] + d * qx, cells[k][1] + d * qy),
-                                       words[k], L)
-                    if fresh != cells[k]:
-                        cells[k] = fresh
-                        moved += 1
-                        break
-        if moved == 0:
+    for i in range(n):
+        xi, yi = cells[i]
+        for j in range(i + 1, n):
+            if abs(cells[j][0] - xi) >= two or abs(cells[j][1] - yi) >= two:
+                continue
+            best = None
+            for q, slack, _need, _owner in QS.pair_axes(cells, words, i, j, Q):
+                # SAT: the pair is separated iff SOME axis separates, so the binding axis is
+                # the one with the LARGEST slack and the penetration is its negative
+                if best is None or slack > best[1]:
+                    best = (q, slack)
+            if best is None or best[1] >= Q(0):
+                continue
+            qx, qy = best[0]
+            proj = (cells[j][0] - cells[i][0]) * qx + (cells[j][1] - cells[i][1]) * qy
+            out.append((i, j, qx, qy, Q(1) if proj >= 0 else Q(-1), -best[1]))
+    return out
+
+
+EPS = F(1, 10 ** 18)              # the exact closure epsilon: 10 orders under the 1e-8 floor
+
+
+def relax_simultaneous(cells, words, L, iters: int = 240, damping: F = F(1, 2),
+                       closure: int = 400):
+    """Simultaneous damped-residual relaxation, in exact `Fraction` arithmetic.
+
+    Every violating pair contributes a displacement to *both* its squares before anything
+    moves — the Jacobi step run 154's sequential sweep was not.  Sequential pushing hands one
+    pair's overlap to its neighbour (18 of 20 rows got worse); here the residuals are summed
+    and damped, and the container clamp is applied once per iteration to the whole pose.
+
+    Returns `(cells, iterations, residual)` with the residual exact.
+    """
+    cells = [clamp_into(cells[i], words[i], L) for i in range(len(cells))]
+    it = 0
+    for it in range(1, iters + 1):
+        bad = violations(cells, words)
+        if not bad:
+            return cells, it, Q(0)
+        acc = [(Q(0), Q(0)) for _ in cells]
+        for i, j, qx, qy, sgn, pen in bad:
+            d = damping * pen
+            acc[i] = (acc[i][0] - sgn * d * qx, acc[i][1] - sgn * d * qy)
+            acc[j] = (acc[j][0] + sgn * d * qx, acc[j][1] + sgn * d * qy)
+        cells = [clamp_into((cells[k][0] + acc[k][0], cells[k][1] + acc[k][1]), words[k], L)
+                 for k in range(len(cells))]
+    # Exact closure: damped Jacobi converges geometrically and leaves residuals at the 1e-24
+    # scale.  The gate is exact, so a 1e-24 overlap is still an overlap; the last step
+    # separates the worst pair by `pen + EPS` split between both cells, which lands the pose
+    # on strict clearance (EPS = 1e-30) instead of asymptotically short of it.
+    for _ in range(closure):
+        bad = violations(cells, words)
+        if not bad:
             break
-    cells = [clamp_into(cells[i], words[i], L) for i in range(n)]
-    wp = worst_pair(cells, words)
-    return cells, sweep, (Q(0) if wp is None else wp[0])
+        i, j, qx, qy, sgn, pen = max(bad, key=lambda v: v[5])
+        d = (pen + EPS) / Q(2)
+        cells[i] = clamp_into((cells[i][0] - sgn * d * qx, cells[i][1] - sgn * d * qy),
+                              words[i], L)
+        cells[j] = clamp_into((cells[j][0] + sgn * d * qx, cells[j][1] + sgn * d * qy),
+                              words[j], L)
+    bad = violations(cells, words)
+    res = Q(0) if not bad else max(v[5] for v in bad)
+    return cells, it, res
 
 
 # --------------------------------------------------------------- adjudication
@@ -285,6 +335,51 @@ def _atan_dec(r: Decimal, terms: int = 80) -> Decimal:
     return total
 
 
+# --------------------------------------------------------------------- baseline
+def clamped_grid(n, k):
+    """The trivial pose: the k x k lattice, clamped into the target container."""
+    L = Q(k) - Q(SHRINK)
+    cells, words = [], []
+    for j in range(k):
+        for i in range(k):
+            if len(cells) >= n:
+                break
+            cells.append((Q(i) + Q(F(1, 2)), Q(j) + Q(F(1, 2))))
+            words.append((Q(1), Q(0)))
+    cells = [clamp_into(c, w, L) for c, w in zip(cells, words)]
+    return cells, words, L
+
+
+def baseline(rows) -> list:
+    """Every target row's floor: the clamped grid's exact penetration at `k - 1e-4`."""
+    out = []
+    for rec in rows:
+        n, k = rec["n"], rec["k"]
+        cells, words, L = clamped_grid(n, k)
+        bad = violations(cells, words)
+        pen = max((v[5] for v in bad), default=Q(0))
+        g = QS.gate(cells, words, Q)
+        out.append({"n": n, "k": k, "r": rec["r"], "tier": rec["tier"], "L": str(L),
+                    "pen": str(pen), "ok": g["ok"], "violations": g["violations"],
+                    "cells": len(cells)})
+    return out
+
+
+def do_baseline(path: str) -> int:
+    with open(os.path.join(ROOT, "workspace/push/anneal_targets.json")) as f:
+        rows = json.load(f)
+    out = baseline(rows)
+    dst = os.path.join(ROOT, path)
+    with open(dst, "w") as f:
+        json.dump(out, f, indent=1)
+    print(f"{'n':>4} {'k':>2} {'r':>2} {'tier':>4} {'clamped-grid pen':>18} {'violations':>10}")
+    for rec in out:
+        print(f"{rec['n']:>4} {rec['k']:>2} {rec['r']:>2} {rec['tier']:>4} "
+              f"{dec(Q(F(rec['pen']))):>18.3e} {rec['violations']:>10}")
+    print(f"baseline: {path}")
+    return 0
+
+
 # ------------------------------------------------------------------- selftest
 def selftest() -> int:
     checks = 0
@@ -319,11 +414,11 @@ def selftest() -> int:
     bw = [(Q(1), Q(0))] * 3
     gb = QS.gate(bad, bw, Q)
     assert not gb["ok"], gb
-    fixed, it, res = repair(bad, bw, Q(F(7, 2)))
+    fixed, it, res = relax_simultaneous(bad, bw, Q(F(7, 2)))
     gf = QS.gate(fixed, bw, Q)
     assert gf["ok"] and res == 0, (it, res, gf["violations"])
-    print(f"  4. repair: three unit cells at 0.9 spacing overlap by 0.1; the exact "
-          f"projection reaches 0 residual in {it} iterations and the gate passes")
+    print(f"  4. simultaneous relaxation: three unit cells at 0.9 spacing overlap by 0.1; the "
+          f"damped Jacobi step reaches 0 residual in {it} iterations and the gate passes")
     checks += 1
 
     big = [(Q(F(1, 2)), Q(F(1, 2))), (Q(F(14, 10)), Q(F(1, 2))),
@@ -340,6 +435,26 @@ def selftest() -> int:
     assert v3["ok"] and "C1" not in v3 and "no strict beat" in v3["why"], v3
     print("  6. a legal pose that only ties the delivered side fails C2 (no strict beat at "
           "the 1e-8 margin)")
+    checks += 1
+
+    # control 8: the continued fraction recovers an exact word, and bounds the slop
+    t345 = snap_t(Decimal("0.927295218001612"))
+    assert t345 == F(1, 2), t345          # atan(4/3): the 3-4-5 word has t = sin/(1+cos) = 1/2
+    half = TG.HALF_PI / 2
+    t45 = snap_t(half)
+    c45, s45 = spinor(t45)
+    assert c45 * c45 + s45 * s45 == 1
+    err = abs(F(Decimal(half).__str__()) if False else F(2) - F(0))
+    with localcontext() as ctx:
+        ctx.prec = 60
+        cdec, sdec = TG.cos_sin(half)
+        tdec = sdec / (1 + cdec)
+        err = abs(tdec - (Decimal(t45.numerator) / Decimal(t45.denominator)))
+    assert err < Decimal("1e-10"), err
+    assert Decimal(15) * 2 * err < Decimal("3e-9"), err
+    print(f"  8. continued fractions at q <= 100000: the 3-4-5 angle gives t = 1/2 exactly, the "
+          f"45-degree angle gives q = {t45.denominator} with |t - p/q| = {err:.2e} (< 1e-10), "
+          f"i.e. under 3e-9 of positional slop at k = 15")
     checks += 1
 
     checked, offenders, skipped = EF.audit_module(
@@ -381,7 +496,7 @@ def run(write: bool = False) -> int:
         if not pre["ok"]:
             wp = worst_pair(cells, words)
             pen_before = str(wp[0]) if wp else "0"
-        fixed, iters, res = repair(cells, words, target_L)
+        fixed, iters, res = relax_simultaneous(cells, words, target_L)
         poses[n] = (fixed, words, target_L)
         v = adjudicate(n, fixed, words, target_L, deliv[n])
         out = {"n": n, "k": k, "rank": rec["rank"], "tier": rec["tier"],
@@ -468,6 +583,11 @@ def promote(passed, deliv, poses) -> int:
 def main() -> int:
     if "--selftest" in sys.argv:
         return selftest()
+    if "--baseline" in sys.argv:
+        path = (sys.argv[sys.argv.index("--baseline") + 1]
+                if sys.argv.index("--baseline") + 1 < len(sys.argv) else
+                "workspace/push/clamped_baseline.json")
+        return do_baseline(path)
     return run(write="--write" in sys.argv)
 
 

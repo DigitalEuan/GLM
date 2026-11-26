@@ -4786,3 +4786,33 @@ structural, not budgetary: a `1e-4` shrink of a jammed `k x k` lattice needs a r
 spinor with denominator <= 32 quantises to ~1e-3 rad (1.5e-2 of slop at k = 15), so a proposal that only
 just clears `1e-5` cannot survive the snap — the next version must **anneal on the word alphabet itself**
 (rational spinors as the move set), which makes the snap the identity. Doc 110.
+
+**Run 155 (2026-11-26) — the calibration gate, and the solver it stopped.** The brief put a tripwire in
+front of the target run: `proposal_anneal.py --selftest` must discover packings that beat the integer grid,
+cold, at `n = 5` (`L <= 2.71`), `n = 10` (`L <= 3.72`) and `n = 39` (`L <= 6.85`), with max overlap
+`< 1e-6`, and no `n > 100` work is allowed until it does. Both stages were rebuilt first. **Stage 1** is now
+a genuine multi-body solver: a smooth SAT energy (log-sum-exp over the four axes of every pair, softplus'd so
+overlaps cost their square), joint **L-BFGS-B over all 3n coordinates**, a **Lubachevsky-Stillinger inflation**
+(1% side steps with a relaxed pose at each), **basin-hopping** as the global escape, and a simultaneous Jacobi
+**quench** instead of run 154's sequential sweep. **Stage 2** got the precision and the repair the brief asked
+for: `cf_convergents` walks the continued fraction of `t = sin/(1+cos)` and keeps the last convergent with
+`q <= 100000` (the 3-4-5 angle returns `t = 1/2` exactly; 45 degrees gives `q = 80782`, `|t - p/q| = 5.42e-11`,
+i.e. under `3e-9` of slop at `k = 15`), and `relax_simultaneous` replaces the sequential push with an exact
+**damped Jacobi** residual field over `Fraction`s plus an exact closure at `pen + 1e-18`. **The gate's verdict:
+5 PASS (`-1.367e-4` at 2.71, 51 s), 10 PASS (`+4.441e-16` at 3.72, 97 s), 39 FAIL (`+3.301e-2` at 6.85, one
+restart, 526 s)** — so, by the brief's own rule, the target run did not happen: no row of 101..1000 was
+searched, no candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score still
+**22.217428576** (554 beats, 446 ties). The gate earned its keep twice on the way: it caught the SAT measure
+being **inverted** (the pair's state is the MINIMUM penetration / MAXIMUM slack — the first draft took the
+other one and reported a full unit of overlap for a legal five-square lattice) and a shrink schedule six
+times too coarse. It also forced the **clamped-grid floor** the brief asked for: `snap_certify --baseline`
+measures the trivial lattice at `L = k - 1e-4` exactly in `Q` and gets **1.000e-4 on all twenty rows**
+(11-26 violations) — ten times *worse* than the `1e-5` pass line, and 149x better than run 154's best
+proposal (`1.49e-2`), which is the clearest statement yet of how far that solver was from useful. The failure
+is a cost failure, not a mystery: one `solve` at `n = 39` takes ~8 minutes (160 basin-hopping steps, each an
+L-BFGS run with a numeric gradient), `n = 118` has 19x the pairs and 3x the coordinates, and the gate's budget
+is checked between restarts, so the slow case got one attempt. The named next step is the **analytic gradient**
+(one pass instead of `3n` finite differences, ~100x at `n = 118`) plus bounded per-solve restarts and
+defect-lattice seeds; until then the solver is calibrated at five and ten squares and refused at thirty-nine.
+Controls: `snap_certify` **8/8** (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15,
+`record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 111.

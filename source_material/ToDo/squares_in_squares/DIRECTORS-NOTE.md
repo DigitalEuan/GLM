@@ -255,6 +255,18 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    (`t = p/q`, `q <= 32` as the rotation move set), which makes Stage 2's snap the identity and turns the
    `1e-5` rule into a statement about the pose. Doc 110.
 
+5. **The calibration gate is the cheap experiment (`run 155`):** `proposal_anneal.py --selftest` now has to
+   find cold packings that beat the integer grid at `n = 5` (2.71), `n = 10` (3.72) and `n = 39` (6.85) before
+   any row above 100 is touched, and it **fails at 39** (`+3.3e-2`): the rebuilt solver (joint L-BFGS-B,
+   Lubachevsky-Stillinger inflation, basin-hopping, simultaneous quench) is calibrated where it is cheap and
+   unaffordable where it matters — one `solve` at 39 squares is ~8 minutes, and 118 squares is 19x the pairs.
+   The gate cost 14 minutes and stopped a target run that would have spent hours to produce another 1e-2
+   negative; it also caught the SAT measure **inverted** and gave the project its floor — the clamped `k x k`
+   grid at `k - 1e-4` penetrates exactly **1e-4**, ten times worse than the `1e-5` pass line, so any solver
+   result above 1e-4 is worse than doing nothing. **Next for this route: the analytic gradient** (one pass
+   instead of `3n` finite differences) and bounded per-solve restarts; do not spend target budget before the
+   gate passes at 39. Doc 111.
+
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
 - **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational
