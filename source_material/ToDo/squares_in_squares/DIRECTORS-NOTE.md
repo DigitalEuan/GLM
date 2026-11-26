@@ -279,6 +279,17 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    swaps, or a constructive enumeration of the block-plus-`r` topology — and until it lands the gate keeps
    refusing the `n = 101..1000` run, which is the correct outcome.
 
+7. **The structural move works at five and ten (`run 157`):** `squeeze_ladder` drops a jittered
+   45-degree cell near the centroid, lets L-BFGS-B re-form, and keeps only improvements — the one move
+   that can put a square *inside* a jammed block, which is what `n = 5`'s `2 + 1/sqrt 2` pose needs
+   (four corners plus a 45-degree centre). Teleport-into-seat (run 127's `void_seats`, pinned to
+   `legal_slide.slack` exactly) and block swap join it. The gate now reads **n = 5 PASS `-7.5e-05` in
+   3.3 s** and **n = 10 PASS `-4.6e-05` in 4.7 s**, where run 156 failed at `1.45e-1` and `9.33e-2`;
+   **n = 39 still fails at `+2.7e-2`** in 41 s, and that is the whole remaining blocker: at 83% density
+   a five-cell squeeze does not open a 39-cell pose, so the next move has to be scale-aware (local
+   compression of a block, a row shuffle, or a squeeze repeated along a line). Until it lands the gate
+   keeps refusing `n = 101..1000`.
+
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
 - **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational

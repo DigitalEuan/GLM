@@ -519,6 +519,143 @@ def shrink_path(n, L_target, seed_name, rng, iters=40, factor=0.99, slack=1.30, 
     return u
 
 
+def own_pen(cells, words):
+    """Each cell's worst penetration over its pairs -- who is being squeezed the hardest."""
+    n = len(cells)
+    if n < 2:
+        return np.zeros(n)
+    I, J = np.triu_indices(n, 1)
+    pen = pair_pens(cells[:, 0], cells[:, 1], words[:, 0], words[:, 1], I, J).min(axis=0)
+    out = np.full(n, -np.inf)
+    np.maximum.at(out, I, pen)
+    np.maximum.at(out, J, pen)
+    return out
+
+
+def cell_slack(cx, cy, cc, cs, cells, words):
+    """Run 127's exact `slack` for one probe cell against every cell, vectorised.
+
+    `legal_slide.slack` is `max` over the **four** separating axes -- both squares' own frames,
+    two axes each -- of `|proj| - (h_probe + h_other)`: two convex sets are disjoint when at
+    least one axis separates them, so the pair's state is the *largest* slack.  (The energy uses
+    the complementary view, `min` penetration; the two are negative of each other, and it is
+    worth keeping them separate in the head because run 155's inverted-measure bug lived here.)
+    The probe is a unit cell, so in its own frame `h_probe = 1/2` exactly, and in the other's
+    frame `h_other = 1/2`; both are added back explicitly -- omitting either is a silent
+    half-unit error, which is what the exact seat control in `--selftest` caught.
+
+    Returns `(K,)`: the worst separation each of the `K` probe candidates achieves.
+    """
+    dx = cells[None, :, 0] - cx[:, None]
+    dy = cells[None, :, 1] - cy[:, None]
+    ax, ay = words[None, :, 0], words[None, :, 1]
+    cc, cs = cc[:, None], cs[:, None]
+    h_oth_p = 0.5 * (np.abs(ax * cc + ay * cs) + np.abs(ay * cc - ax * cs))
+    h_probe_o = 0.5 * (np.abs(cc * ax + cs * ay) + np.abs(cc * ay - cs * ax))
+    four = np.stack([np.abs(dx * cc + dy * cs) - (0.5 + h_oth_p),
+                     np.abs(-dx * cs + dy * cc) - (0.5 + h_oth_p),
+                     np.abs(dx * ax + dy * ay) - (0.5 + h_probe_o),
+                     np.abs(-dx * ay + dy * ax) - (0.5 + h_probe_o)])
+    return four.max(axis=0).min(axis=1)
+
+
+def void_seat(cells, words, moving, L, grid=9, angles=(0.0, 0.4, 0.785398, 1.2, 1.570796)):
+    """The best seat for cell `moving`: the centre that leaves it the most room, walls first.
+
+    This is `legal_slide.void_seats`'s question -- *where can this cell go?* -- asked of a
+    continuous pose instead of a whole-cell lattice: the scan is a `grid x grid` of centres
+    at each of `angles`, scored by the four-axis slack of run 127 against the other cells and
+    minus the wall excess, so a genuine void (slack `>= 0`) is preferred but a jammed pose
+    still yields its deepest gap.  The gate pins this against the exact seat finder on the
+    lattice control, because a re-implementation has to be anchored to its source.
+    """
+    rest = np.delete(np.arange(len(cells)), moving)
+    lo, hi = 0.0, L
+    xs = np.linspace(lo, hi, grid)
+    gx, gy = np.meshgrid(xs, xs, indexing="ij")
+    cx0 = gx.reshape(-1)
+    cy0 = gy.reshape(-1)
+    best = None
+    for ang in angles:
+        cc = np.full(cx0.shape, math.cos(ang))
+        cs = np.full(cx0.shape, math.sin(ang))
+        h = (abs(math.cos(ang)) + abs(math.sin(ang))) / 2.0
+        wall = (np.maximum(h - cx0, 0) + np.maximum(cx0 + h - L, 0)
+                + np.maximum(h - cy0, 0) + np.maximum(cy0 + h - L, 0))
+        sc = cell_slack(cx0, cy0, cc, cs, cells[rest], words[rest]) - 8.0 * wall
+        k = int(np.argmax(sc))
+        if best is None or sc[k] >= best[0]:
+            best = (float(sc[k]), float(cx0[k]), float(cy0[k]), float(ang))
+    return best[1], best[2], best[3]
+
+
+class _StructStep:
+    """Run 127's move set as basin-hopping's step: jitter, **teleport into a seat**, or swap.
+
+    A jitter cannot cross a closed gap, which is exactly why the gate's `n = 5` case jammed at
+    1.45e-1 in run 156: the `2 + 1/sqrt 2` pose needs its fifth square *between* the block's
+    corners.  The teleport move asks the seat finder where that square has the most room and
+    puts it there outright -- the relaxation that follows then decides whether the block yields.
+    The swap exchanges a lattice-aligned cell with a tilted one, which changes *which* cell
+    carries the angle without moving the block at all.
+    """
+
+    def __init__(self, rng, n, L, pos=0.06, ang=0.30, p_squeeze=0.25, p_teleport=0.15,
+                 p_swap=0.15):
+        self.rng, self.n, self.L = rng, n, L
+        self.pos, self.ang = pos, ang
+        self.p_squeeze, self.p_teleport, self.p_swap = p_squeeze, p_teleport, p_swap
+
+    def __call__(self, u):
+        v = np.array(u, dtype=float).reshape(self.n, 3)
+        r = float(self.rng.random())
+        if r < self.p_swap:
+            self._swap(v)
+        elif r < self.p_swap + self.p_teleport:
+            self._teleport(v)
+        elif r < self.p_swap + self.p_teleport + self.p_squeeze:
+            self._squeeze(v)
+        else:
+            k = int(self.rng.integers(self.n))
+            v[k, 0] += float(self.rng.normal(0, self.pos))
+            v[k, 1] += float(self.rng.normal(0, self.pos))
+            v[k, 2] += float(self.rng.normal(0, self.ang))
+        return v.reshape(-1)
+
+    def _squeeze(self, v):
+        """Put a tilted cell where the pose is most crowded, then let the relaxation decide.
+
+        This is the move the `n = 5` gate needed.  The jammed pose is a solid block of five
+        axis-aligned squares, and no jitter or seat search can put a square *inside* it: every
+        seat with room is outside.  Squeezing a 45-degree cell into the centroid makes the
+        cell illegal on purpose, and L-BFGS-B then has to open the block around it -- which is
+        exactly the pinwheel/centre-diamond rearrangement the `2 + 1/sqrt 2` optimum needs.  The
+        jitter matters: the exact centroid at exactly 45 degrees is a symmetric jam that
+        relaxes back, and the perturbed version finds a pose with `-5.4e-5` clearance in ~0.3 s.
+        """
+        k = int(self.rng.integers(self.n))
+        v[k, 0] = float(v[:, 0].mean() + self.rng.normal(0, 0.15))
+        v[k, 1] = float(v[:, 1].mean() + self.rng.normal(0, 0.15))
+        v[k, 2] = math.pi / 4 + float(self.rng.normal(0, 0.2))
+
+    def _teleport(self, v):
+        cells = v[:, :2].copy()
+        words = np.stack([np.cos(v[:, 2]), np.sin(v[:, 2])], axis=1)
+        worst = int(np.argmax(own_pen(cells, words)))
+        x, y, a = void_seat(cells, words, worst, self.L)
+        v[worst, 0], v[worst, 1], v[worst, 2] = x, y, a
+
+    def _swap(self, v):
+        s2 = np.abs(np.sin(2.0 * v[:, 2]))
+        flat = np.where(s2 < 0.30)[0]
+        tilt = np.where(s2 > 0.70)[0]
+        if len(flat) == 0 or len(tilt) == 0:
+            return
+        i = int(flat[self.rng.integers(len(flat))])
+        j = int(tilt[self.rng.integers(len(tilt))])
+        v[i], v[j] = v[j], v[i].copy()
+
+
 class _Perturb:
     """Basin-hopping move: displace one square and re-orient it a little."""
 
@@ -534,10 +671,17 @@ class _Perturb:
         return v
 
 
-def basin(u, n, L, rng, steps=200, pos=0.06, ang=0.30, cap=None):
+def basin(u, n, L, rng, steps=200, pos=0.06, ang=0.30, cap=None, step=None):
     """Basin-hopping: perturb one square, re-relax, keep the best (this is the global escape)."""
+    best = {"f": float("inf"), "x": np.array(u, dtype=float)}
+
     def cb(x, f, accept):
-        cap.last = np.array(x, dtype=float) if args_ok(x) else cap.last
+        # accumulating the *best* here is not bookkeeping: `basinhopping` returns its best local
+        # minimum only on a clean exit, so without this a cap abort returned the last step and
+        # threw away the good pose the structural stage had just found (n = 5 fell from -4e-5
+        # back to 3.6e-1 before this line existed).
+        if args_ok(x) and f < best["f"]:
+            best["f"], best["x"] = float(f), np.array(x, dtype=float)
         if cap.expired():
             cap.hit = True
             raise StopRun
@@ -550,27 +694,110 @@ def basin(u, n, L, rng, steps=200, pos=0.06, ang=0.30, cap=None):
                            minimizer_kwargs={"jac": True, "args": (n, L),
                                              "method": "L-BFGS-B",
                                              "options": {"maxiter": 150, "maxfun": 3000}},
-                           take_step=_Perturb(rng, n, pos, ang), niter_success=steps,
+                           take_step=step if step is not None else _Perturb(rng, n, pos, ang),
+                           niter_success=steps,
                            callback=cb, seed=int(rng.integers(1 << 30)))
         return res.x
     except StopRun:
-        return cap.last if cap.last is not None else u
+        return best["x"]
+
+
+def squeeze_ladder(u, n, L, rng, cap, target=TARGET_OVERLAP, iters=600, quench_iters=2000):
+    """Hill-climb with the structural move: squeeze a tilted cell into the centroid, relax, keep.
+
+    This is the move that changes the pose's *topology* rather than its detail.  The jitter and
+    seat moves in `_StructStep` search around the current basin; this one deliberately breaks it
+    and asks the relaxation to re-form, and it keeps the best pose so a failed squeeze costs
+    nothing but time.  Returns the last accepted pose (an `u` vector) and leaves the clock to
+    `cap`, which is raised from inside `relax`.
+    """
+    best = (max_pen(*from_u(u, n)), u)
+    while not cap.expired():
+        if best[0] < target:
+            break
+        cells, words = from_u(best[1], n)
+        v = np.column_stack([np.asarray(cells, float),
+                             np.arctan2(np.asarray(words, float)[:, 1],
+                                        np.asarray(words, float)[:, 0])])
+        k = int(rng.integers(n))
+        if rng.random() < 0.6:                       # the centroid squeeze: the n = 5 move
+            v[k, 0] = float(v[:, 0].mean() + rng.normal(0, 0.18))
+            v[k, 1] = float(v[:, 1].mean() + rng.normal(0, 0.18))
+            ang0 = math.pi / 4
+        else:                                        # a random point, a random tilt
+            v[k, 0] = float(rng.uniform(0.5, max(0.6, L - 0.5)))
+            v[k, 1] = float(rng.uniform(0.5, max(0.6, L - 0.5)))
+            ang0 = float(rng.uniform(0.0, math.pi / 2))
+        v[k, 2] = ang0 + float(rng.normal(0, 0.2))
+        if n > 8 and rng.random() < 0.35:
+            # a second cell as well: one 45-degree square opens a five-cell block, but a 39-cell
+            # pose needs a bigger hole before the relaxation can re-form around it
+            j = int(rng.integers(n))
+            if j != k:
+                v[j, 0] = float(v[:, 0].mean() + rng.normal(0, 0.30))
+                v[j, 1] = float(v[:, 1].mean() + rng.normal(0, 0.30))
+                v[j, 2] = ang0 + math.pi / 2 + float(rng.normal(0, 0.2))
+        cand, _e = relax(v.reshape(-1), n, L, iters, cap=cap)
+        cc, ww = from_u(cand, n)
+        cc = quench(cc, ww, L, iters=quench_iters, damping=0.25)
+        p = max_pen(cc, ww)
+        if p < best[0]:
+            best = (p, to_u(cc, ww))
+    return best[1]
 
 
 def solve(n, L_target, seed_name, rng, steps=200, shrink=True, cap_seconds=15.0):
-    """The solver: inflate to the target side, basin-hop, then quench into the hard box."""
-    cap = Cap(cap_seconds)
+    """The solver: inflate, squeeze a fresh block, then basin-hop -- each stage with its share.
+
+    The order and the shares both matter, and both were learned the hard way in run 157:
+
+    * the ladder must not run last -- run 156's first version let basin-hopping spend the whole
+      cap, so the structural move never started and `n = 5` sat at `1.45e-1` with a working move
+      sitting unused at the end of the pipeline;
+    * it must not run on the inflation's output either -- that pose is already smeared by
+      hundreds of L-BFGS steps and the squeeze's clean block is gone (`n = 5` failed there at
+      8.2e-2 over ten tries);
+    * it passes in 0-1.5 s on a *fresh* lattice block, which is what the seed at the target side
+      gives after one short relaxation.
+
+    So: inflate for structure-agnostic breadth, squeeze a fresh block for the topological move,
+    then basin-hop around whichever pose is better with what time is left.
+    """
+    t_all = float(cap_seconds)
+    t0 = time.monotonic()
+    caps = []
+    cap = Cap(0.25 * t_all)
+    caps.append(cap)
     if shrink:
         u = shrink_path(n, L_target, seed_name, rng, cap=cap)
     else:
         cells, words = SEEDS[seed_name](n, L_target, rng)
         u = to_u(cells, words)
-    u = basin(u, n, L_target, rng, steps=steps, cap=cap)
+    cap = Cap(0.45 * t_all)
+    caps.append(cap)
+    cells, words = SEEDS[seed_name](n, L_target, rng)
+    fresh, _e = relax(to_u(cells, words), n, L_target, 400, cap=cap)
+    fresh = squeeze_ladder(fresh, n, L_target, rng, cap)
+    if max_pen(*from_u(fresh, n)) < max_pen(*from_u(u, n)):
+        u = fresh
+    if max_pen(*from_u(u, n)) < TARGET_OVERLAP:      # solved: do not spend the rest of the cap
+        cells, words = from_u(u, n)
+        return {"pen": max_pen(cells, words), "L": L_target, "cells": cells,
+                "words": words, "seed": seed_name, "cap_hit": any(c.hit for c in caps),
+                "seconds": round(time.monotonic() - t0, 2)}
+    left = max(0.5, t_all - (time.monotonic() - t0))
+    cap = Cap(left)
+    caps.append(cap)
+    keep = (max_pen(*from_u(u, n)), np.array(u, dtype=float))
+    u = basin(u, n, L_target, rng, steps=steps, cap=cap,
+              step=_StructStep(rng, n, L_target))
     cells, words = from_u(u, n)
     cells = quench(cells, words, L_target, iters=1500, damping=0.25)
+    if max_pen(cells, words) > keep[0]:          # the last stage may not give a good pose back
+        cells, words = from_u(keep[1], n)
     return {"pen": max_pen(cells, words), "L": L_target, "cells": cells,
-            "words": words, "seed": seed_name, "cap_hit": cap.hit,
-            "seconds": round(cap_seconds - max(0.0, cap.t_end - time.monotonic()), 2)}
+            "words": words, "seed": seed_name, "cap_hit": any(c.hit for c in caps),
+            "seconds": round(time.monotonic() - t0, 2)}
 
 
 def solve_best(n, L_target, seeds, rng, steps=200, budget=None):
@@ -618,8 +845,41 @@ def do_selftest() -> int:
     print(f"  0. analytic gradient vs finite differences: max |error| = {worst:.2e} over "
           f"{n_dims} coordinates  {'PASS' if ok_grad else 'FAIL'}", flush=True)
 
-    plan = ((5, 2.71, 8.0), (10, 3.72, 12.0), (39, 6.85, 38.0))
+    # 1. the seat finder and its slack are pinned to run 127's exact versions, because a
+    #    re-implementation of an exact routine has to be anchored to its source.  The first
+    #    port of this was wrong by exactly half a unit per axis (the probe's own half-extent was
+    #    missing) and took the min over the four axes where run 127 takes the max; the control
+    #    below catches both, on the 3x3-minus-centre pose that has seven exact seats.
+    import legal_slide as LS
+    st = LS.holed_pose()
+    dr = LS.directions(st)
+    sc = np.array([[float(q[0]), float(q[1])] for q in st])
+    sw = np.array([[float(c), float(s)] for c, s in dr])
+    worst_seat = 0.0
+    for i in range(len(st)):
+        for j in range(len(st)):
+            if i == j:
+                continue
+            ex = float(LS.slack((st[i][0], st[i][1], dr[i][0], dr[i][1]),
+                                (st[j][0], st[j][1], dr[j][0], dr[j][1])))
+            my = float(cell_slack(np.array([sc[i, 0]]), np.array([sc[i, 1]]),
+                                  np.array([sw[i, 0]]), np.array([sw[i, 1]]),
+                                  sc[j:j + 1], sw[j:j + 1])[0])
+            worst_seat = max(worst_seat, abs(ex - my))
+    seats = LS.void_seats(st, dr, moving=0)
+    legal = bool(seats) and all(
+        float(cell_slack(np.array([float(q[0])]), np.array([float(q[1])]),
+                         np.array([sw[0, 0]]), np.array([sw[0, 1]]), sc[1:], sw[1:])[0]) >= -1e-12
+        for q in seats)
+    ok_seat = worst_seat < 1e-12 and legal
+    print(f"  1. seat finder vs run 127: {len(st) * (len(st) - 1)} pair slacks agree to "
+          f"{worst_seat:.1e}, {len(seats)} exact seat(s) all legal  "
+          f"{'PASS' if ok_seat else 'FAIL'}", flush=True)
+
+    plan = ((5, 2.71, 8.0), (10, 3.72, 10.0), (39, 6.85, 42.0))
     failures = [] if ok_grad else [("gradient", 0, worst)]
+    if not ok_seat:
+        failures.append(("seat", worst_seat, 0))
     for n, thresh, budget in plan:
         grid = math.ceil(math.sqrt(n))
         t0 = time.time()
@@ -628,7 +888,7 @@ def do_selftest() -> int:
         seeds = ["corner", "defect", "strip", "random"]
         rep = 0
         while time.time() - t0 < budget:
-            cap = min(15.0, budget - (time.time() - t0))
+            cap = min(20.0, budget - (time.time() - t0))
             if cap <= 1.0:
                 break
             r = solve(n, thresh, seeds[rep % len(seeds)], rng, steps=4000, cap_seconds=cap)

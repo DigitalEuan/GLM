@@ -4845,3 +4845,27 @@ run 155: `snap_certify --baseline` penetrates **1.000e-4 on all twenty rows**, t
 `1e-5` pass line, so everything this solver produced (>= `2.7e-2`) is worse than doing nothing.
 Controls: `snap_certify` **8/8** (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15,
 `sqscore` 22.217428576, `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 112.
+
+### Run 157 — 2026-11-26 — the structural move, and the gate opening at five and ten
+
+Run 156 named a move set as the next step and this is it. **`squeeze_ladder`** takes the jam apart
+deliberately: pick a cell, drop it near the centroid at 45 degrees (both jittered), let L-BFGS-B
+re-form around it, quench, keep only improvements. A jitter and a seat search cannot put a square
+*inside* a solid block -- every seat with room is outside it -- which is exactly why `n = 5` sat at
+`1.45e-1`; the squeeze makes the cell illegal on purpose and the block opens into the `2 + 1/sqrt 2`
+arrangement of four corner squares plus a 45-degree centre. Two more seat moves from run 127's family
+join it in `_StructStep`, scored by the exact four-axis slack: **teleport into a void seat** and
+**block swap** (a lattice cell and a tilted one exchange places). The gate now reads **n = 5 PASS
+`-7.514e-05` in 3.3 s**, **n = 10 PASS `-4.632e-05` in 4.7 s**, **n = 39 FAIL `+2.727e-2` in 41.0 s**,
+**49.1 s total**, with the two new controls green: gradient `2.46e-9`, and the seat finder pinned to
+`legal_slide` on the 3x3-minus-centre pose (72 pair slacks agree to `0.0e+00`, all 7 exact seats
+legal). Four bugs stood between the move and the pass and each is recorded in doc 112 section 6: the
+slack port was short by half a unit and took the min where run 127 takes the max; the cap abort
+returned the last step instead of the best pose (a `-4e-5` pose came back as `3.6e-1`); the ladder
+ran last so it never ran; and it ran on the inflation's smeared output where it fails ten times in a
+row, passing only on a fresh lattice block (1-6 attempts). **n = 39 is still refused** -- 83% density
+needs a scale-aware move (a five-cell squeeze does not open a 39-cell pose) -- so no row of 101..1000
+was searched, no candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score
+still **22.217428576** (554 beats, 446 ties). Controls: `snap_certify` **8/8** (24 decision functions,
+0 float), `exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean, `glm_wheels --audit`
+**0 offenders**. Doc 112.

@@ -120,3 +120,71 @@ the same regime. The gate exists so that number is never mistaken for progress.
 `proposal_anneal` remains the declared float stage; its shaping helpers are audited in `--selftest` for
 information, and the analytic gradient is the only new decision-bearing arithmetic in it, checked
 against finite differences at `2.46e-9`. `n <= 100` was not touched and no candidate reached C1.
+
+## 6. Run 157 — the structural move, and the gate opening at five and ten
+
+Run 156 ended by naming a move set as the next step. This is that move set, and it works: **n = 5
+now passes the gate from a cold start in 3.3 s** (run 156: FAIL at `+1.450e-1`), and **n = 10 passes
+in 4.7 s** (run 156: FAIL at `+9.333e-2`). n = 39 does not, so the gate still refuses the `n > 100`
+run and nothing is promoted.
+
+    calibration gate (analytic gradient, then cold-start packings)
+      0. analytic gradient vs finite differences: max |error| = 2.46e-09 over 135 coordinates  PASS
+      1. seat finder vs run 127: 72 pair slacks agree to 0.0e+00, 7 exact seat(s) all legal  PASS
+      n= 5  L <= 2.71  grid side 3  found L = 2.710000  max overlap -7.514e-05  restarts 1  (3.3s)  PASS
+      n=10  L <= 3.72  grid side 4  found L = 3.720000  max overlap -4.632e-05  restarts 1  (4.7s)  PASS
+      n=39  L <= 6.85  grid side 7  found L = 6.850000  max overlap +2.727e-02  restarts 2  (41.0s)  FAIL
+    calibration gate: 49.1s
+
+### The move: squeeze, not jitter
+
+The `n = 5` optimum at `2 + 1/sqrt 2` is **four corner squares plus a 45-degree square in the
+centre**, and the jammed pose is a solid block of five axis-aligned squares. No jitter and no seat
+search can put a square *inside* that block — every seat with room is outside it. The move that
+crosses the gap is therefore deliberately illegal: pick a cell, drop it near the centroid at 45
+degrees (both jittered), and let L-BFGS-B re-form around it. The block opens into the corner
+arrangement, and the quench lands at `-7.5e-5`.
+
+`squeeze_ladder` applies that move as hill-climbing: keep the best pose, squeeze, relax, quench,
+accept only improvements, stop at the target or the cap. Measured hit rates, `n = 5`, one attempt
+~0.3 s: from a fresh lattice block **1-6 attempts** (0-1.5 s); from the inflation's smeared output
+**10 attempts, none** (8.2e-2); jitter-only basin-hopping **thousands of steps, none** (1.45e-1).
+
+Two seat moves from run 127's family are also in `_StructStep` alongside the squeeze, both scored by
+the exact four-axis slack: **teleport into a void seat** (`void_seat`, the best centre at each of
+five angles over the box) and **block swap** (exchange a lattice-aligned cell with a tilted one, so
+the angle changes hands without moving the block). The cross-check control `1.` pins the port to
+`legal_slide.slack` and `legal_slide.void_seats` on the 3x3-minus-centre pose: 72 pair slacks agree
+to **0.0e+00** and all 7 exact seats come back legal.
+
+### Four bugs between the move and the pass
+
+Each one hid the move behind something else, and each is worth the sentence:
+
+1. **The slack port was wrong by half a unit and inverted.** The probe's own `1/2` half-extent was
+   missing, and the port took the `min` over the four axes where run 127 takes the `max` (two convex
+   sets are disjoint when *at least one* axis separates them). The exact seat control caught both in
+   one line: `-0.5` where the exact answer was `3.0`.
+2. **The cap abort threw away the best pose.** `basinhopping` returns its best minimum only on a
+   clean exit; the `StopRun` path returned the *last* step, so the pose the ladder had just found at
+   `-4e-5` came back as `3.6e-1`. The callback now accumulates the best `(x, f)` itself.
+3. **The ladder ran last, so it never ran.** With `basin` bounded only by the restart cap, the whole
+   budget went to jitter and the structural move had no time.
+4. **The ladder ran on the wrong pose.** Applied to the inflation's output — hundreds of L-BFGS
+   steps deep, angles already smeared — it failed ten times in a row; applied to a fresh lattice
+   block at the target side it passes in one to six. `solve` now seeds a fresh block for the
+   structural stage specifically, and keeps whichever of the two poses is better.
+
+### Where it stops
+
+`n = 39` at `6.85` is 83% density, and one or two squeezed cells do not open a hole big enough for
+the relaxation to re-form the pose: two restarts over 41.0 s leave `+2.727e-2`, and 20 s single
+restarts from three seeds give `2.50e-2`-`3.09e-2`. The squeeze is a five-cell-scale move; at
+thirty-nine the deficit is distributed and the move needs to be scale-aware (a local compression of
+a block, a row shuffle, or a repeated squeeze along a line). Until that lands, the gate keeps
+refusing `n = 101..1000`, which is still the correct outcome.
+
+**Unchanged and kept green:** score **22.217428576** (554 beats, 446 grid ties), `submission.csv`
+and root `WHITEBOARD.md` untouched, `n <= 100` frozen, no candidate reached C1; `snap_certify --selftest`
+8/8 (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean,
+`glm_wheels --audit` 0 offenders.
