@@ -202,6 +202,18 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    of a 49-position sample: `D = 0` is emptied, `D = 1` is emptied, and `D = 2` is hit at
    `(L, cx, cy) = (3.999999735963447809, 2.025124976626836406, 1.560660450042059492)` — one cell short,
    certified. Nothing promoted.
+   **Run 151 closed the `n ≤ 100` block and audited the high rows' scalable motifs exactly** (doc 107).
+   Above 100 the question was whether the table had actually used the literature's scalable families:
+   recursive grid products (with cell trims), Friedman's unit-border inflation (`n → n + 2⌊L⌋ + 1` at
+   `L + 1`, iterated), and the parametric strip / 45° / rational-rotation motifs. Rebuilt from their own
+   laws in Q(√2) from **519 exactly reconstructed bases** (the other 481 rows carry arbitrary angles and
+   cannot be replayed without a float), the three families produce **33,074 candidates over all 900 rows
+   of 101..1000 and not one strict beat** — best margins −1.5e-9 (products), +1.9e-9 (inflation), −0.177
+   (parametric). The near-zero ones are the finding: **425 of the 900 rows are reproduced to 1e-6 by
+   these very constructions**, and row 962 is the table's own cascade from row 901 to within the CSV's
+   1.9e-9 rendering. The parametric family's ceiling is arithmetic, not parametric: its realised slack is
+   5.9–11.6 % above √n where the table sits at 0–4.4 %, and its best members are grid ties. Zero
+   promotions; **22.217428576** stands.
 4. **The guaranteed payer:** the `554` beaten rows leave `15.076155` score unclaimed below them (the row-90
    promotion added its own `0.053464`); a uniform `1 %` capture is `+0.15076` and `5 %` is `+0.75381` — the whole `0.163635` gap to the reported leader is `1.1 %`
    of that room, and it needs no new construction, only a tighter polish than the one that produced the

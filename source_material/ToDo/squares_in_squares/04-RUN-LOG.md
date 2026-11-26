@@ -4617,3 +4617,41 @@ row 65). Ledgers `carrier_offset.json` (plain: 17 rows) and `carrier_minima.json
 family is unchanged: seven rows, an interval that is a superset of the beat interval there. **No
 candidate, so C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched;
 **22.217428576** (554 beats, 446 grid ties). Docs 105 (three figures) and 106 (§3 rewritten, §5, §6, §7, §8).
+
+**Run 151 (2026-11-26) — the n <= 100 block frozen, and the high rows' scalable motifs audited
+exactly.** Part 1 closed the block: `b9c211a` and `1c82914` are pushed (branch
+`freebuff/4f844fe855227d42b936412b`), and nothing below 101 was touched again. Part 2 asked the
+question the brief put in front of the campaign — have the delivered rows in 101..1000 actually
+*exploited* the literature's scalable constructions? — with an instrument instead of an opinion.
+
+`scripts/scale_motifs.py` (new, float-free, 24 decision functions / 0 naming float) rebuilds every row
+whose cells are 0/45-degree words as an exact Q(sqrt 2) pose from the CSV's decimal text: **519 of the
+1000 rows** (446 all-axis, 73 with 45-degree cells). From those bases it grows the three families of the
+brief, each from its own law: **(A)** k x k products with cell trims — every n in
+[`k^2 m - m + 1`, `k^2 m`] at side `kL`; **(B)** Friedman's unit-border inflation
+`n -> n + 2 floor(L) + 1` at `L + 1`, iterated to 12 steps, the floor exact in Q(sqrt 2); **(C)** a b x b
+block at the 45-degree / 8-15-17 / 3-4-5 word with an exact greedy corner fill (each cell adjudicated by
+the SAT predicate, bucketed by integer cell).
+
+**Result: 33,074 candidates over all 900 rows of the window, 0 strict beats.** A 28,904 candidates over
+900 rows, best margin **-1.5e-9** (row 133: a 2x2 product of row 34 gives 12.000000003 against a
+delivered 12.000000002). B 4,052 over 547 rows, best margin **+1.9e-9**: row 962 is reached by twelve
+different bases, and the cascade from row 901 lands at 31.520815300 against the rendered 31.520815284 —
+the table's row *is* the cascade, and the 1.9e-9 is the CSV's 12-dp rendering. C 118 over 91 rows, best
+margin -0.177: the parametric family lands on grid ties and is 1-2 units above the table everywhere
+(45-degree b=10: 166 cells at 14.142 = 9.8 % above sqrt n, against the delivered 13.000 at 0.9 %; 8-15-17
+b=10: 147 at 13.529 = 11.6 % against 12.657 = 4.4 %). Across the window **425 of the 900 rows are
+reproduced to 1e-6** by these families, 17 are within 1e-2, 458 are more than 1e-2 above.
+
+**The named motifs, specifically.** The brief's `n = 272` (delivered **16.965586**, a general-angle pose —
+it is *not* an exact 0/45-degree base) is not in the rational-block family's count law at any `b <= 20`,
+`extra <= 2`: its neighbours are 259 (17.588 vs 16.591), 289 (18.000 vs 17.000) and 293 (18.941 vs
+17.623), 1.0-1.3 above. So the spinor motif as reconstructed cannot reach the row, and the delivered pose
+at 272 is not the motif.
+
+**Controls 9/9** (the CSV read exactly, the 3x3 gate, row 20's rebuild, the product and border count laws,
+the planted duplicate, both words at b=6 with their spare area, the margin rule at row 120, the bytecode
+audit). Ledger `workspace/push/scale_motifs.json` (base census, per-family census, every strict beat —
+none, and the best candidate at every row). **No promotion: zero candidates passed the margin, so C1-C4
+was never entered**; `submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446
+grid ties). Doc 107.
