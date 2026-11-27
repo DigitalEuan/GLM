@@ -20,6 +20,7 @@
 | 552 rows hold standalone zero-clearance `galois-certificate/1` proofs | confirmed (552 of 554 beaten rows certified; the promoted row 90 carries the project's exact rational certificate instead, re-verified by `import_n090.py`) | `verify_certificates.py`, run 106 |
 | 613 core decision functions, 0 float offenders | confirmed | `glm_wheels.py --audit` |
 | **"Grid-frontier rows (`n = k² − 1`) are uniformly compressed"** | **WRONG** — the frontier row of band k is `m* = k² − j*` with `j* = 18…26` at `k >= 21` (e.g. band 23: `m* = 509`, `j* = 20`; band 32: `m* = 998`, `j* = 26`). `n = k² − 1` is not a frontier row anywhere in the table | doc 75 §2 |
+| mixed rational spinors certify without a `Quad(d)` word | confirmed: axis + 3-4-5 + 5-12-13 passes the exact `field: "Q"` certificate and C2; `interval_verifier` has an exact `spin(c,s)` direction | `snap_certify` control 9, `interval_verifier` control 8, doc 117 |
 | free cell `0.9994–0.9999` at the compressed frontier | **[corrected in run 161]** the reading was the `table.json` *grid* state, not the delivered CSV pose: `reconcile_table.py` rewrote `L` only, leaving the unclosed `k×k` margin grid in `state` for ten bands. The delivered pockets are **0.761940** at k = 26 (2.38108, 8.38097) and **0.732771** at k = 32 (27.59, 0.40); `provenance_repair.py` now copies the CSV state into all 1000 rows and `record_guard` enforces it | doc 115, doc 116 §1, `provenance_repair.py` |
 | real corner notches `k = 23` (`0.7534`) and `k = 32` (`0.7171`); `n = 999` costs `+0.120` | confirmed (`+0.1195` for the k = 32 next row) | doc 75 §2–§3 |
 | Block45 / Block45Half / ridge beat the grid on 369 already-beaten counts, and come within `+0.0711` on n = 212, 242, 243, 244 | confirmed (0 of 444 unbeaten rows beaten; median deficit `+0.6066`) | doc 75 §6, `grid_families.py` |
@@ -84,8 +85,8 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    rather than locally. Instrument: `resqueeze.py` (patch-coordinate relaxation with a container hinge).
 2. **Notch-Band Rearrangements (`k = 23`, `k = 32`):** exploit the delivered `0.7320` (k = 23 scan) and
    `0.7328` (k = 32 direct) corner holes (`n = 999`, the k = 32 next row, is the lowest-cost large-band
-   breakthrough at `+0.120`). Run 161's bounded 4-cell modules reached residual 0.024 at both, but no
-   pack-legal pose; doc 116 §3.
+   breakthrough at `+0.120`). Run 162's 16-cell analytic module reached residual `0.014819` at 509→510
+   and `0.018633` at 655→656, but no pack-legal pose; 998→999 prefers 4 cells (`0.043369`). Doc 117 §2.
 3. **Near-Misses & Interior Seams:** push the four `+0.0711` `Block45` near-misses (`n = 212, 242, 243, 244`)
    and **interior tilted seams** (`(Z + 4/7)²` / rational-sheared interfaces where tilted cells interlock
    inside a seam rather than on a solid wall), and unify `verify_certificates.py` (exact contact) with
@@ -341,11 +342,21 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
     Nothing promoted. The next blocker is C1 for arbitrary angles: `Q`/`Quad(d)` certificates do not cover
     the delivered mixed poses, so a legal D1 pose still needs a rational-angle interval certificate or an
     exact-word module. Doc 116.
-
-## 4. PROMOTION GATE (C1–C4)
+11. **Rational-spinor C1 and widened D1 (`run 162`):** the mixed-angle C1 block is cleared. `snap_certify`
+    writes exact `field: "Q"` frames from rational spinors; control 9 (axis + 3-4-5 + 5-12-13, L = 4)
+    passes C1 and C2 against a delivered 4.1, and `interval_verifier` now accepts an exact `spin(c,s)`
+    direction with control 8. D1 was widened to 16 cells with a vectorized analytic gradient (verified
+    against central differences), a clamped axis-aligned seed, and a local damped projection that is
+    reverted when worse. Twenty-four bounded records: 16 cells improves the residual at 55, 211, 509,
+    604, 655 and 998 (655: `0.021513 → 0.018633`; 509: `0.021520 → 0.014819`; 55: `0.027390 → 0.016633`),
+    while 4 cells remains better at 29 (`0.007303`) and 998 (`0.043369`); 20 cells at 655 is worse
+    (`0.029871`). **Zero pack-legal candidates**, so C1/C2 were not entered and nothing was promoted.
+    The closest residual (`0.000950` at 184) still has `L = 14.000000001858`, above the grid. Doc 117. (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
 - **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational
-  interval proof (`interval_verifier.py`).
+  interval proof (`interval_verifier.py`). A pose snapped to rational spinors
+  `(c,s) = ((1−t²)/(1+t²), 2t/(1+t²))` is a `field: "Q"` frame and needs **no** global 0°/45° `Quad(d)`
+  word; `snap_certify --selftest` control 9 certifies an axis + 3-4-5 + 5-12-13 pose at L = 4, C1 and C2.
 - **C2 (Margin):** strictly smaller `40-digit` true side (`true_geom.py`: `L_true < L_delivered`, `0`
   overlap), and above the ε/rendering noise floor so the metric actually moves.
 - **C3 (Integrity):** `sqscore` + `record_guard.py` + `glm_wheels --audit` (`0` floats) all green.
