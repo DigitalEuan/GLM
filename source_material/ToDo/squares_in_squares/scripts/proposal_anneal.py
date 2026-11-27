@@ -38,6 +38,22 @@ The last step is deliberately *simultaneous* (every violating pair moves both it
 by half its penetration along the binding axis) rather than the sequential Gauss-Seidel sweep
 run 154 used, which pushed the overlap from one pair to the next and made 18 of 20 rows worse.
 
+THE COLLECTIVE MOVES (run 158).  Run 157's structural move was a *single* cell: a 45-degree square
+squeezed into the centroid, which is exactly what `n = 5` needs and exactly what `n = 39` does not.
+At 83 % density the pose has to re-orient whole strips, so the move set now acts on groups:
+
+  band_shear      shift a contiguous band of squares transversely (whole rows, columns or the two
+diagonal directions) and lean the boundary strips on both sides of the new seam into it;
+  bundle_rotate   take a linear chain of adjacent squares and rotate the whole bundle coherently
+about its centroid, so a ribbon changes orientation without any cell moving relative to its
+neighbours -- the interior of a dense pose is unlocked without opening a hole first;
+  seed_bridge     two axis sub-grids in *opposite* corners, separated by a diagonal seam that is
+filled with tilted cells seated where they have the most room -- the n = 39 / n = 86 topology,
+whose 24 axis cells sit in two staircases and whose 15 tilted cells bridge the diagonal.
+
+The three are tried from the same keep-best ladder (`struct_ladder`), so a failed move costs
+one relaxation and nothing else.
+
 USAGE
     python3 scripts/proposal_anneal.py --selftest          # the calibration gate
     python3 scripts/proposal_anneal.py --rank
@@ -136,6 +152,11 @@ def do_rank() -> int:
 
 
 # ------------------------------------------------------------------- geometry
+#: the four band directions: x, y and both diagonals
+_AXES = ((1.0, 0.0), (0.0, 1.0), (math.sqrt(0.5), math.sqrt(0.5)),
+         (math.sqrt(0.5), -math.sqrt(0.5)))
+
+
 def frames(th):
     return np.cos(th), np.sin(th)
 
@@ -438,8 +459,51 @@ def seed_corner(n, L, rng):
     return cells, words
 
 
+def seed_bridge(n, L, rng, grid=11):
+    """Two axis sub-grids in *opposite* corners, bridged by tilted cells seated in the diagonal seam.
+
+    This is the `n = 39` / `n = 86` topology, and it is not a copy of any pose: the split between the
+    two sub-grids, their staircases, the fill angles and every seat are random.  The point is the
+    *structure* -- a dense pose of this count is two axis-aligned domains joined along a diagonal
+    seam, not one lattice with a tilted fringe.  The seam is where the leftovers go, and the seats
+    are chosen by run 127's four-axis slack, so a seated cell is legal if the pose has room and in
+    the deepest gap if it does not.  The relaxation that follows decides the rest.
+    """
+    m = max(1, int(math.ceil(math.sqrt(n))))
+    p = L / m
+    frac = float(rng.uniform(0.45, 0.70))
+    n_axis = max(2, min(n - 1, int(round(frac * n))))
+    corner_a = "bl" if rng.random() < 0.5 else "br"
+    corner_b = "tr" if corner_a == "bl" else "tl"
+    cells, words = [], []
+    for corner, cnt in ((corner_a, n_axis // 2), (corner_b, n_axis - n_axis // 2)):
+        if cnt <= 0:
+            continue
+        cols = max(1, min(cnt, int(round(math.sqrt(cnt * float(rng.uniform(1.2, 2.0)))))))
+        h = [1] * cols
+        for _ in range(cnt - cols):
+            h[int(rng.integers(cols))] += 1
+        h.sort(reverse=True)
+        for ci, hh in enumerate(h):
+            for ri in range(hh):
+                x = (0.5 + ci * p) if corner in ("bl", "tl") else (L - 0.5 - ci * p)
+                y = (0.5 + ri * p) if corner in ("bl", "br") else (L - 0.5 - ri * p)
+                cells.append((x + rng.normal(0, 0.01), y + rng.normal(0, 0.01)))
+                words.append((1.0, 0.0))
+    left = n - len(cells)
+    base = float(rng.choice([math.pi / 4, math.radians(38.0), math.radians(52.0), 0.0]))
+    for _ in range(max(0, left)):
+        ang = base + float(rng.normal(0, 0.09))
+        sc = np.asarray(cells, dtype=float)
+        sw = np.asarray(words, dtype=float)
+        x, y = seat_at_angle(sc, sw, ang, L, grid=grid)
+        cells.append((x, y))
+        words.append((math.cos(ang), math.sin(ang)))
+    return cells, words
+
+
 SEEDS = {"corner": seed_corner, "defect": seed_defect, "strip": seed_strip,
-         "lattice": seed_lattice, "random": seed_random}
+         "lattice": seed_lattice, "random": seed_random, "bridge": seed_bridge}
 
 
 # -------------------------------------------------------------------- the solver
@@ -559,6 +623,103 @@ def cell_slack(cx, cy, cc, cs, cells, words):
     return four.max(axis=0).min(axis=1)
 
 
+def seat_at_angle(cells, words, ang, L, grid=11):
+    """The centre that leaves a unit cell *tilted at `ang`* the most room, walls first.
+
+    `void_seat` searches the tilt as well; this fixes the tilt and searches only the position, which
+    is what a constructive seed needs when the tilt is the hypothesis ("the seam is at 45 degrees")
+    and the position is the unknown.  The score is run 127's four-axis slack, so a seat is legal
+    exactly when the slack is non-negative, and the wall excess is subtracted so that a pose with
+    no legal seat still yields its deepest gap rather than a cell halfway through a wall.
+    """
+    ang = float(ang)
+    cc0, cs0 = math.cos(ang), math.sin(ang)
+    xs = np.linspace(0.0, L, grid)
+    gx, gy = np.meshgrid(xs, xs, indexing="ij")
+    cx0, cy0 = gx.reshape(-1), gy.reshape(-1)
+    if len(cells) == 0:
+        h = (abs(cc0) + abs(cs0)) / 2.0
+        return L / 2.0, L / 2.0
+    cc = np.full(cx0.shape, cc0)
+    cs = np.full(cx0.shape, cs0)
+    h = (abs(cc0) + abs(cs0)) / 2.0
+    wall = (np.maximum(h - cx0, 0) + np.maximum(cx0 + h - L, 0)
+            + np.maximum(h - cy0, 0) + np.maximum(cy0 + h - L, 0))
+    sc = cell_slack(cx0, cy0, cc, cs, cells, words) - 8.0 * wall
+    k = int(np.argmax(sc))
+    return float(cx0[k]), float(cy0[k])
+
+
+def band_shear(v, rng, L, tilt=0.40, shift=0.10):
+    """Whole-row / column / diagonal-band shear, with the boundary strips leaning into the seam.
+
+    A single cell cannot re-orient a dense packing, but a *band* can: shifting a contiguous run of
+    squares transversely opens a seam along its whole length at once, and tilting the strips on the
+    two sides of that seam gives the relaxation a shear direction to follow instead of a symmetric
+    jam.  The band is chosen by projection on one of four axes (x, y and both diagonals), so the
+    same move covers row shuffles, column shuffles and the diagonal-bridge rearrangements; the two
+    boundary strips are the cells immediately outside the band in that order, tilted with a common
+    sign (they lean into the same seam) and a small per-cell jitter.
+    """
+    n = len(v)
+    if n < 4:
+        return v
+    dx, dy = _AXES[int(rng.integers(4))]
+    t = v[:, 0] * dx + v[:, 1] * dy
+    order = np.argsort(t)
+    k = int(rng.integers(max(2, n // 6), max(3, n // 3) + 1))
+    k = min(k, n - 2)
+    i0 = int(rng.integers(0, n - k))
+    band = order[i0:i0 + k]
+    delta = float(rng.normal(0.0, shift))
+    v[band, 0] += -dy * delta
+    v[band, 1] += dx * delta
+    lean = float(rng.uniform(0.15, tilt)) * (1.0 if delta >= 0 else -1.0)
+    for strip in (order[max(0, i0 - 3):i0], order[i0 + k:i0 + k + 3]):
+        if len(strip):
+            v[strip, 2] += lean + rng.normal(0.0, 0.05, len(strip))
+    return v
+
+
+def bundle_rotate(v, rng, L, reach=1.75, turn=0.45):
+    """Rotate a linear chain of adjacent squares coherently about the chain's centroid.
+
+    This is the move a dense pose needs and a jitter cannot make: the chain keeps its own internal
+    contacts (it is rotated rigidly), so nothing has to open first.  The chain is grown by nearest
+    neighbour from a random cell and stopped when the next cell is further than `reach`, which makes
+    it a *ribbon* along the pose's own grain rather than a disc around a point.  Every cell of the
+    chain gains the same angle, so a strip that was axis-aligned comes out of the move as one tilted
+    bundle -- the strip-bundle rotation of the run-158 brief.
+    """
+    n = len(v)
+    if n < 4:
+        return v
+    k_s = int(rng.integers(3, max(4, n // 3) + 1))
+    start = int(rng.integers(n))
+    chain = [start]
+    used = {start}
+    cur = start
+    while len(chain) < k_s:
+        d = np.hypot(v[:, 0] - v[cur, 0], v[:, 1] - v[cur, 1])
+        d[list(used)] = np.inf
+        j = int(np.argmin(d))
+        if not np.isfinite(d[j]) or d[j] > reach:
+            break
+        chain.append(j)
+        used.add(j)
+        cur = j
+    if len(chain) < 3:
+        return v
+    cx, cy = float(v[chain, 0].mean()), float(v[chain, 1].mean())
+    th = float(rng.uniform(-turn, turn))
+    c, s = math.cos(th), math.sin(th)
+    px, py = v[chain, 0] - cx, v[chain, 1] - cy
+    v[chain, 0] = cx + c * px - s * py
+    v[chain, 1] = cy + s * px + c * py
+    v[chain, 2] += th
+    return v
+
+
 def void_seat(cells, words, moving, L, grid=9, angles=(0.0, 0.4, 0.785398, 1.2, 1.570796)):
     """The best seat for cell `moving`: the centre that leaves it the most room, walls first.
 
@@ -600,20 +761,25 @@ class _StructStep:
     carries the angle without moving the block at all.
     """
 
-    def __init__(self, rng, n, L, pos=0.06, ang=0.30, p_squeeze=0.25, p_teleport=0.15,
-                 p_swap=0.15):
+    def __init__(self, rng, n, L, pos=0.06, ang=0.30, p_squeeze=0.20, p_teleport=0.10,
+                 p_swap=0.10, p_shear=0.20, p_bundle=0.20):
         self.rng, self.n, self.L = rng, n, L
         self.pos, self.ang = pos, ang
         self.p_squeeze, self.p_teleport, self.p_swap = p_squeeze, p_teleport, p_swap
+        self.p_shear, self.p_bundle = p_shear, p_bundle
 
     def __call__(self, u):
         v = np.array(u, dtype=float).reshape(self.n, 3)
         r = float(self.rng.random())
-        if r < self.p_swap:
+        if r < self.p_shear:
+            band_shear(v, self.rng, self.L)
+        elif r < self.p_shear + self.p_bundle:
+            bundle_rotate(v, self.rng, self.L)
+        elif r < self.p_shear + self.p_bundle + self.p_swap:
             self._swap(v)
-        elif r < self.p_swap + self.p_teleport:
+        elif r < self.p_shear + self.p_bundle + self.p_swap + self.p_teleport:
             self._teleport(v)
-        elif r < self.p_swap + self.p_teleport + self.p_squeeze:
+        elif r < self.p_shear + self.p_bundle + self.p_swap + self.p_teleport + self.p_squeeze:
             self._squeeze(v)
         else:
             k = int(self.rng.integers(self.n))
@@ -702,14 +868,40 @@ def basin(u, n, L, rng, steps=200, pos=0.06, ang=0.30, cap=None, step=None):
         return best["x"]
 
 
-def squeeze_ladder(u, n, L, rng, cap, target=TARGET_OVERLAP, iters=600, quench_iters=2000):
-    """Hill-climb with the structural move: squeeze a tilted cell into the centroid, relax, keep.
+def _squeeze_cell(v, n, L, rng):
+    """Put a jittered 45-degree cell near the pose's centroid -- the single-cell move of run 157."""
+    k = int(rng.integers(n))
+    if rng.random() < 0.6:                           # the centroid squeeze: the n = 5 move
+        v[k, 0] = float(v[:, 0].mean() + rng.normal(0, 0.18))
+        v[k, 1] = float(v[:, 1].mean() + rng.normal(0, 0.18))
+        ang0 = math.pi / 4
+    else:                                            # a random point, a random tilt
+        v[k, 0] = float(rng.uniform(0.5, max(0.6, L - 0.5)))
+        v[k, 1] = float(rng.uniform(0.5, max(0.6, L - 0.5)))
+        ang0 = float(rng.uniform(0.0, math.pi / 2))
+    v[k, 2] = ang0 + float(rng.normal(0, 0.2))
+    if n > 8 and rng.random() < 0.35:
+        # a second cell as well: one 45-degree square opens a five-cell block, but a 39-cell
+        # pose needs a bigger hole before the relaxation can re-form around it
+        j = int(rng.integers(n))
+        if j != k:
+            v[j, 0] = float(v[:, 0].mean() + rng.normal(0, 0.30))
+            v[j, 1] = float(v[:, 1].mean() + rng.normal(0, 0.30))
+            v[j, 2] = ang0 + math.pi / 2 + float(rng.normal(0, 0.2))
+    return v
 
-    This is the move that changes the pose's *topology* rather than its detail.  The jitter and
-    seat moves in `_StructStep` search around the current basin; this one deliberately breaks it
-    and asks the relaxation to re-form, and it keeps the best pose so a failed squeeze costs
-    nothing but time.  Returns the last accepted pose (an `u` vector) and leaves the clock to
-    `cap`, which is raised from inside `relax`.
+
+def struct_ladder(u, n, L, rng, cap, target=TARGET_OVERLAP, iters=600, quench_iters=2000,
+                  p_cell=0.40):
+    """Hill-climb with the structural moves, one relaxation per move, keep only improvements.
+
+    Four moves share the ladder, and the mixture is the point: a single-cell squeeze is what a
+    five-cell pose needs and what a 39-cell pose cannot use (the hole is too small), a band shear
+    moves a whole row or diagonal band at once, and a bundle rotation turns a whole ribbon without
+    opening anything first.  The squeeze keeps `p_cell` of the budget so the cheap cases stay cheap;
+    the rest goes to the collective moves.  Every candidate is a full relaxation followed by the
+    simultaneous quench, and a failed move costs nothing but its own time -- the ladder always
+    returns the best pose it has seen, never the last one.
     """
     best = (max_pen(*from_u(u, n)), u)
     while not cap.expired():
@@ -719,24 +911,17 @@ def squeeze_ladder(u, n, L, rng, cap, target=TARGET_OVERLAP, iters=600, quench_i
         v = np.column_stack([np.asarray(cells, float),
                              np.arctan2(np.asarray(words, float)[:, 1],
                                         np.asarray(words, float)[:, 0])])
-        k = int(rng.integers(n))
-        if rng.random() < 0.6:                       # the centroid squeeze: the n = 5 move
-            v[k, 0] = float(v[:, 0].mean() + rng.normal(0, 0.18))
-            v[k, 1] = float(v[:, 1].mean() + rng.normal(0, 0.18))
-            ang0 = math.pi / 4
-        else:                                        # a random point, a random tilt
-            v[k, 0] = float(rng.uniform(0.5, max(0.6, L - 0.5)))
-            v[k, 1] = float(rng.uniform(0.5, max(0.6, L - 0.5)))
-            ang0 = float(rng.uniform(0.0, math.pi / 2))
-        v[k, 2] = ang0 + float(rng.normal(0, 0.2))
-        if n > 8 and rng.random() < 0.35:
-            # a second cell as well: one 45-degree square opens a five-cell block, but a 39-cell
-            # pose needs a bigger hole before the relaxation can re-form around it
-            j = int(rng.integers(n))
-            if j != k:
-                v[j, 0] = float(v[:, 0].mean() + rng.normal(0, 0.30))
-                v[j, 1] = float(v[:, 1].mean() + rng.normal(0, 0.30))
-                v[j, 2] = ang0 + math.pi / 2 + float(rng.normal(0, 0.2))
+        r = float(rng.random())
+        if r < p_cell:
+            v = _squeeze_cell(v, n, L, rng)
+        elif r < p_cell + (1.0 - p_cell) * 0.5:
+            v = band_shear(v, rng, L)
+        elif r < p_cell + (1.0 - p_cell) * 0.85:
+            v = bundle_rotate(v, rng, L)
+        else:
+            # a bundle rotation *and* a seam to rotate it into: the diagonal-bridge rearrangement
+            v = bundle_rotate(v, rng, L)
+            v = band_shear(v, rng, L)
         cand, _e = relax(v.reshape(-1), n, L, iters, cap=cap)
         cc, ww = from_u(cand, n)
         cc = quench(cc, ww, L, iters=quench_iters, damping=0.25)
@@ -777,7 +962,7 @@ def solve(n, L_target, seed_name, rng, steps=200, shrink=True, cap_seconds=15.0)
     caps.append(cap)
     cells, words = SEEDS[seed_name](n, L_target, rng)
     fresh, _e = relax(to_u(cells, words), n, L_target, 400, cap=cap)
-    fresh = squeeze_ladder(fresh, n, L_target, rng, cap)
+    fresh = struct_ladder(fresh, n, L_target, rng, cap)
     if max_pen(*from_u(fresh, n)) < max_pen(*from_u(u, n)):
         u = fresh
     if max_pen(*from_u(u, n)) < TARGET_OVERLAP:      # solved: do not spend the rest of the cap
@@ -876,7 +1061,7 @@ def do_selftest() -> int:
           f"{worst_seat:.1e}, {len(seats)} exact seat(s) all legal  "
           f"{'PASS' if ok_seat else 'FAIL'}", flush=True)
 
-    plan = ((5, 2.71, 8.0), (10, 3.72, 10.0), (39, 6.85, 42.0))
+    plan = ((5, 2.71, 8.0), (10, 3.72, 10.0), (39, 6.85, 30.0))
     failures = [] if ok_grad else [("gradient", 0, worst)]
     if not ok_seat:
         failures.append(("seat", worst_seat, 0))
@@ -885,7 +1070,10 @@ def do_selftest() -> int:
         t0 = time.time()
         best = None
         rng = np.random.default_rng(3000 + n)
-        seeds = ["corner", "defect", "strip", "random"]
+        # the bridge seed is the one that carries the diagonal-seam topology, so a dense case tries
+        # it first; the small cases stay with the seeds they already pass on, in their old order
+        seeds = (["bridge", "corner", "defect", "strip", "random"] if n >= 20
+                 else ["corner", "defect", "bridge", "strip", "random"])
         rep = 0
         while time.time() - t0 < budget:
             cap = min(20.0, budget - (time.time() - t0))
@@ -934,6 +1122,9 @@ def _audit_self():
                                                          "energy_grad", "energy", "relax",
                                                          "basin", "Cap", "StopRun",
                                                          "seed_defect", "seed_corner", "_Perturb",
+                                                         "seat_at_angle", "band_shear",
+                                                         "bundle_rotate", "seed_bridge",
+                                                         "struct_ladder", "_squeeze_cell",
                                                          "do_selftest"))
     return checked, offenders, skipped
 

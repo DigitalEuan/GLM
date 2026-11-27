@@ -4869,3 +4869,30 @@ was searched, no candidate reached C1, `submission.csv` and root `WHITEBOARD.md`
 still **22.217428576** (554 beats, 446 ties). Controls: `snap_certify` **8/8** (24 decision functions,
 0 float), `exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean, `glm_wheels --audit`
 **0 offenders**. Doc 112.
+
+### Run 158 — 2026-11-27 — band shear, strip rotation, and a calibration case that measures the wrong job
+
+Run 157 named a scale-aware move as the fix for `n = 39`; this run builds the three the brief names and
+measures what the case costs. **`band_shear`** takes a contiguous run of cells on one of four axes (x, y,
+both diagonals), shifts it transversely and leans the boundary strips on both sides into the seam with a
+common sign; **`bundle_rotate`** grows a nearest-neighbour chain and rotates it *rigidly* about its
+centroid, so a ribbon turns without any cell moving relative to its neighbours; **`seed_bridge`** puts two
+axis sub-grids in opposite corners and seats the leftovers at a fixed tilt in the diagonal seam
+(`seat_at_angle`, run 127's four-axis slack over an `11 x 11` centre scan); `struct_ladder` gives them the
+keep-best ladder (40 % cell squeeze, 30 % shear, 20 % bundle, 10 % bundle+seam) and `_StructStep` spends
+40 % of its moves on the two collective moves. Gate: **n = 5 PASS `-7.215e-05` in 3.3 s**, **n = 10 PASS
+`-4.632e-05` in 4.0 s**, **n = 39 FAIL `+2.500e-02` in 30.4 s**, **37.9 s total**, gradient `2.46e-09`,
+seat control 72/72 slacks to `0.0e+00`. The collective moves bought `2.3e-3` at 39 — nothing. Four
+measurements say why: the case's side 6.85 is **0.57 % above the best known packing in the world**
+(6.81072208306864, Schadt 2026, degree 5, Galois `S5`); forty bridge variants land at best `+2.5775e-02`
+(median `6.748e-02`); deflation from a *valid* 7.00 pose floors at `+1.1778e-02` at 6.95 and `+3.541e-02`
+at 6.85, unchanged when the path and the per-step relaxation are doubled (`3.5413e-2` against `3.5414e-2`)
+— a jam, not a budget; and the solver *passes the work it is for*: **`n = 39` at `L = 6.9999` gives
+`+4.663e-15` in 5.3 s**. The target regime is close but not open either — `n = 118` at 10.9999 reaches
+`+2.069e-05` with `defect` (50 s), twice the `1e-5` line, while `bridge` (`1.35e-1`) and `strip`
+(`9.11e-2`) are actively harmful there. **So the gate still refuses: no row of 101..1000 was searched, no
+candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score still 22.217428576**
+(554 beats, 446 ties). Doc 113 recommends (and does not action) replacing the third case with the target
+regime — `n = 39` at `7 - 1e-4`, or `n = 118` at `11 - 1e-4` — because as written the case asks for a
+record packing, not for the job. Controls: `snap_certify` **8/8** (24 decision functions, 0 float),
+`exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 113.

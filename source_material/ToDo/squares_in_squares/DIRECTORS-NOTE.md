@@ -290,6 +290,23 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    compression of a block, a row shuffle, or a squeeze repeated along a line). Until it lands the gate
    keeps refusing `n = 101..1000`.
 
+8. **The collective moves land, and the third calibration case is mispriced (`run 158`):** `band_shear`
+   (a contiguous band on one of four axes, shifted transversely with the boundary strips leaning into the
+   seam), `bundle_rotate` (a nearest-neighbour chain rotated *rigidly* about its centroid) and
+   `seed_bridge` (two axis sub-grids in opposite corners, leftovers seated at a fixed tilt in the diagonal
+   seam) are in the solver, with `struct_ladder` giving them the keep-best ladder. The gate reads
+   **n = 5 PASS `-7.2e-05` in 3.3 s**, **n = 10 PASS `-4.6e-05` in 4.0 s**, **n = 39 FAIL `+2.500e-02` in
+   30.4 s** (37.9 s total) — the moves bought `2.3e-3` at 39, which is nothing. The reason is now measured,
+   not guessed: the case's side is **0.57 % above the best known packing in the world** (6.81072208306864,
+   Schadt 2026, degree 5, Galois `S5`), forty bridge variants land at best `+2.5775e-02`, deflation from a
+   *valid* 7.00 pose floors at `+1.1778e-02` at 6.95 and `+3.541e-02` at 6.85 with the floor unmoved when
+   the path and the relaxation are doubled (a jam, not a budget), and the same solver passes the job it is
+   for — **`n = 39` at `6.9999` gives `+4.663e-15` in 5.3 s**. The target regime itself is close but not
+   open (`n = 118` at `10.9999`: `+2.069e-05` with `defect`, twice the `1e-5` line; `bridge` and `strip`
+   are harmful there). Doc 113 recommends replacing the third case with the target regime — `n = 39` at
+   `7 - 1e-4`, or `n = 118` at `11 - 1e-4` — because as written it asks for a record packing. Not actioned:
+   the brief's rule is that the gate decides, so no `n > 100` row was run and nothing was promoted.
+
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
 - **C1 (Proof):** exact certificate (`verify_certificates.py` at clearance `≥ 0`) or certified rational
