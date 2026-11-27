@@ -1,0 +1,315 @@
+{
+ "family": "plain",
+ "note": "the exact least bed for each row's cheapest declarations, and the root box's certified floor where the exact minimum was not asked; a value is certified when every smaller demand was emptied and the witness reads it",
+ "rows": [
+  {
+   "n": 12,
+   "k": 4,
+   "demand_min": 0,
+   "minima": [
+    {
+     "params": [
+      3,
+      1,
+      1,
+      1,
+      3,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 2,
+     "boxes": 477,
+     "unresolved": 0,
+     "witness_bed": 2,
+     "witness": {
+      "L": "3.99999973596344780922",
+      "cx": "1.58578571024363410382",
+      "cy": "1.58578571024363410382"
+     },
+     "certified": true
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "k": 5,
+   "demand_min": 0,
+   "minima": [
+    {
+     "params": [
+      4,
+      1,
+      1,
+      1,
+      4,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 5,
+     "boxes": 561,
+     "unresolved": 0,
+     "witness_bed": 5,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "2.79289188614094398418",
+      "cy": "2.50000034495592328722"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      1,
+      1,
+      2,
+      2,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 2,
+     "boxes": 228,
+     "unresolved": 0,
+     "witness_bed": 2,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "2.03584854811777701080",
+      "cy": "1.54993712542311683310"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      1,
+      2,
+      1,
+      4,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 5,
+     "boxes": 374,
+     "unresolved": 0,
+     "witness_bed": 5,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "3.15218799575226710524",
+      "cy": "3.14070425743535057759"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      1,
+      2,
+      2,
+      2,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 2,
+     "boxes": 182,
+     "unresolved": 0,
+     "witness_bed": 2,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "2.08578540881764922295",
+      "cy": "2.50000025467165866540"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      2,
+      1,
+      1,
+      4,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 5,
+     "boxes": 374,
+     "unresolved": 0,
+     "witness_bed": 5,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "3.15218799575226710524",
+      "cy": "3.14070425743535057759"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      2,
+      1,
+      2,
+      2,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 2,
+     "boxes": 174,
+     "unresolved": 0,
+     "witness_bed": 2,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "3.08568443881918376297",
+      "cy": "1.50010122467012412538"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      2,
+      2,
+      1,
+      4,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 5,
+     "boxes": 296,
+     "unresolved": 0,
+     "witness_bed": 5,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "3.15218799575226710524",
+      "cy": "3.14070425743535057759"
+     },
+     "certified": true
+    },
+    {
+     "params": [
+      4,
+      2,
+      2,
+      2,
+      2,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": 2,
+     "boxes": 170,
+     "unresolved": 0,
+     "witness_bed": 2,
+     "witness": {
+      "L": "4.99999973989435749054",
+      "cx": "3.08578539876606326739",
+      "cy": "2.50000025467165866540"
+     },
+     "certified": true
+    }
+   ]
+  },
+  {
+   "n": 30,
+   "k": 6,
+   "demand_min": 0,
+   "minima": [
+    {
+     "params": [
+      5,
+      1,
+      1,
+      1,
+      5,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": null,
+     "boxes": 306,
+     "unresolved": 0,
+     "certified": false
+    },
+    {
+     "params": [
+      5,
+      1,
+      2,
+      1,
+      5,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": null,
+     "boxes": 308,
+     "unresolved": 0,
+     "certified": false
+    },
+    {
+     "params": [
+      5,
+      2,
+      1,
+      1,
+      5,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": null,
+     "boxes": 310,
+     "unresolved": 0,
+     "certified": false
+    },
+    {
+     "params": [
+      5,
+      2,
+      2,
+      1,
+      5,
+      0,
+      0
+     ],
+     "demand": 0,
+     "root_floor": 0,
+     "deficit_lower": 0,
+     "least_bed": null,
+     "boxes": 306,
+     "unresolved": 0,
+     "certified": false
+    }
+   ]
+  }
+ ]
+}

@@ -4532,3 +4532,400 @@ already returned 0 in 949,243 trials) searches 183 (row, side) windows and **124
 `r` grows and the block beds more of the carrier, so the count surface grows without the side
 falling. No candidate, so **C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md`
 untouched; the delivered total stands at **22.217428576** (554 beats, 446 grid ties).
+
+**Run 148 (2026-11-26) — the carrier's ceiling: the whole surface swept, and the block's position
+spent.** Runs 145–147 *visited* the block-bedded carrier (19/110 reproduced, then 949,243 and 124,176
+trials, 0 beats). The count is a **step function of the side** — each carrier cell is bedded on one open
+interval of sides, so `D(L)` is a finite step function — so the family's whole `(side, count)` surface
+can be swept once, exactly, instead of probed per row: `carrier_ceil.py` puts every endpoint in
+`(m + n√2)/4` with integer `m, n` and orders them with the integer sign test, so the sweep names no
+tolerance. **At `n ≤ 100` (25,935 declarations, `K ≤ 10`, `p+q ≤ 14`, sides `< 10.5`) the family reaches
+98 of 100 counts, ties 16 rows exactly (20, 30, 40, 42, 56, 57, 58, 65, 72–74, 89, 91–94) and beats
+none**; the falsifier — 49 proved-optimal rows, which no legal pose can beat — **fires on nothing**. At
+`n ≤ 225` (213,150 declarations, `K ≤ 15`, `p+q ≤ 21`) it reaches 129 of 225 counts, **ties 24 rows
+(…, 101, 111–114, 116, 117, 124) and beats none**, with 96 counts never attained at all and 57 rows
+sitting above their delivered side by a measured deficit (`n = 28` by `0.003983`, `n = 90` by
+`0.005961`, `n = 12` by `√2 − 1`). **Band 5 is answered inside the map**: with `L < 5` the block must fit
+(`p+q ≤ 7`) and `K = 4` needs `p·q − D = 4`, and the family's least side at 20 is exactly
+`5.000000000000` — the tie, not a beat. Then the family's **last unspent parameter, the block's
+position**, is spent on the seven open (non-proved) tie rows `12, 20, 30, 42, 56, 72, 91`: 40 sides ×
+7×7 offsets × every `(K, split, shape)` = **421,713 declarations, 0 nominations**, with every proved row
+refused before any geometry is looked at. The reason is structural: a beat needs `K ≤ k−1` and `L < k`,
+so the seam gap is under one unit and the block always beds cells — the least bed slides down only to
+2, 3, 4, 5, 7, 7, 10 as `k` grows, while the count law's cheapest declaration asks for **0**. Two facts
+forbid a shortcut: the reachable bed is **not an interval** (a symmetric declaration takes only even
+values, `{8, 10, 12}`) and it **steps by up to 4**, so offsets must be enumerated, not bisected.
+**No candidate, so C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched; the
+delivered total stands at **22.217428576** (554 beats, 446 grid ties). Doc 105.
+
+**Run 149 (2026-11-26) — the block's position decided, not sampled; and three run-148 claims
+corrected.** Run 148's third measurement was a *probe* (40 sides × 7×7 offsets × every declaration =
+421,713 declarations, 0 nominations); a probe's zero is a sample. This run replaces it with a decision.
+One carrier cell against one block rectangle is the SAT test of two squares: four strict half-spaces,
+**affine in `(L, cx, cy)`**, so each cell's bed-set is **convex** and a box in those three parameters
+carries an exact floor (cells bedded at every point) and ceiling (cells bedded at some point). A branch
+and bound prunes a box when the floor exceeds the count law's demand `D* = K² + m − n` or the ceiling
+falls short; an empty box list is a theorem. On the seven open, non-proved tie rows
+`12, 20, 30, 42, 56, 72, 91`: **1,579 declarations, 15,349 boxes, every box emptied, 0 survivors** — no
+side below the grid side and no position of the block attains a row's count. The same engine runs the
+**notched** block (`p×q` minus an `a×b` corner, `a, b ≤ 2`) through **6,038 declarations and 69,614
+boxes** with the same result; the L is exactly the union of two full rectangles `(p−a)×q` and
+`a×(q−b)`, so its floor is the union of their forced sets and its ceiling the full block's possible
+set, and the notch lowers the demand by `a·b` while freeing at most the band a corner can reach.
+**8 controls**, including a planted-configuration walk (no false zero) — which is what caught the
+missing seam law `L ≥ K` in the first draft, where a "hit" turned out to be a carrier whose two runs
+overlap. **The run-148 sweep was then re-run and three of its claims corrected:** `family_map`'s default
+`counts_max = 130` was filtering the wide map, so the same 213,150 declarations reach **223 of 225**
+counts and tie **58** rows (not 129 and 24; `n = 131`, listed as never attained, is attained on
+`L ∈ (12, 12.292893218814]` by `(12,1,1,1,9)` inside that very box); "unattained below the cap" was
+written as "unattained anywhere", which the cap cannot support; and the `n ≤ 100` map's two missing
+counts are **3 and 99**, not 1 and 2. Ledgers regenerated (`carrier_ceil.json`, `carrier_ceil_wide.json`,
+`carrier_offset.json`). **No candidate, so C1–C4 was not entered**; `submission.csv` and root
+`WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446 grid ties). Doc 106; doc 105 §0.
+
+**Run 150 (2026-11-26) — the same exact decision on every open row, the complete shape box, and two
+defects in run 149's own framing.** Run 149 decided the block's position on seven rows; this run decides
+every open, non-proved row up to 100 — the sixteen the sweep calls `tie reached` (`open_rows()` derives
+them from the sweep's ledger and asserts the result, so the scope is not hand-picked) plus `n = 12` — and
+widens the parameter box to the complete one. **Seventeen rows: 7,381 declarations, 94,339 boxes, every
+box list emptied, 0 survivors**; `n = 65` is the expensive row at 46,134 boxes. Four new rows are k = 9
+(65, 73, 74) and five are k = 10 (89, 92..94 plus 91 re-run).
+
+**Two defects in run 149's framing, both now fixed.** (a) *The interval's end was the grid side; a beat
+needs the delivered side minus the project's `1e-8` floor.* For fourteen of the sixteen rows (and for
+`n = 12`) the two differ by 1.6e-9 and run 149's domain was a **superset**, so its verdicts stand as
+stated. But `n = 40, 65, 89` deliver 1.7e-9 **below** their grid side and the family attains the count
+**at** the delivered side with `K < k`, i.e. inside `[√n, k]` — so those rows can never be emptied on a
+grid-side interval, and a hit there is a tie, not a beat. The minima pass found it on its own: `n = 65`'s
+least bed under the grid-side interval is **0** (its cheapest declaration attains the count at 8.5355).
+`domain()` now ends at `min(k, delivered(n) − 1e-8)` with `delivered(n)` read exactly from the CSV.
+(b) *`SMAX = 13` was a cap only at `k = 10`.* The complete bound is `p + q ≤ isqrt(2k²−1)` — 5, 7, 8, 9,
+11, 12, 14 for `k = 4..10` — so nothing was lost for `k ≤ 9`, but `k = 10` gained `p + q = 14` and with it
+the 7×7 block. `PMAX = 10` was never binding.
+
+**`n = 12`'s minimum is certified rather than read off a sample.** The minima ask the same search for the
+least `v` with a hit, every smaller `v` having been emptied: `D = 0` is emptied, `D = 1` is emptied, `D = 2`
+is a **hit** at `(L, cx, cy) = (3.999999735963447809, 2.025124976626836406, 1.560660450042059492)`, where
+the counter reads 2. So the least bed over the legal domain is **exactly 2** and the row is one cell short
+at the `K = 3`, 2×2 declaration (`D* = 1`); the row's cheapest demand `D* = 0` (a `K = 3`, 1×3 block) is
+still 2 cells short. `n = 20` reads 5 against `D* = 0` at `(4,1,3,1,4)` and 2 at `(4,2,2,2,2)`. Rows whose
+cheapest demand is larger are reported with the root floor and *not* minimised — no number is dressed up
+as an answer it is not.
+
+**Controls 9/9** (the minimiser added as 9, the interval end as 6b: 4.9999999916 at row 20, 8.5355338977 at
+row 65). Ledgers `carrier_offset.json` (plain: 17 rows) and `carrier_minima.json` (new). The notched
+family is unchanged: seven rows, an interval that is a superset of the beat interval there. **No
+candidate, so C1–C4 was not entered**; `submission.csv` and root `WHITEBOARD.md` untouched;
+**22.217428576** (554 beats, 446 grid ties). Docs 105 (three figures) and 106 (§3 rewritten, §5, §6, §7, §8).
+
+**Run 151 (2026-11-26) — the n <= 100 block frozen, and the high rows' scalable motifs audited
+exactly.** Part 1 closed the block: `b9c211a` and `1c82914` are pushed (branch
+`freebuff/4f844fe855227d42b936412b`), and nothing below 101 was touched again. Part 2 asked the
+question the brief put in front of the campaign — have the delivered rows in 101..1000 actually
+*exploited* the literature's scalable constructions? — with an instrument instead of an opinion.
+
+`scripts/scale_motifs.py` (new, float-free, 24 decision functions / 0 naming float) rebuilds every row
+whose cells are 0/45-degree words as an exact Q(sqrt 2) pose from the CSV's decimal text: **519 of the
+1000 rows** (446 all-axis, 73 with 45-degree cells). From those bases it grows the three families of the
+brief, each from its own law: **(A)** k x k products with cell trims — every n in
+[`k^2 m - m + 1`, `k^2 m`] at side `kL`; **(B)** Friedman's unit-border inflation
+`n -> n + 2 floor(L) + 1` at `L + 1`, iterated to 12 steps, the floor exact in Q(sqrt 2); **(C)** a b x b
+block at the 45-degree / 8-15-17 / 3-4-5 word with an exact greedy corner fill (each cell adjudicated by
+the SAT predicate, bucketed by integer cell).
+
+**Result: 33,074 candidates over all 900 rows of the window, 0 strict beats.** A 28,904 candidates over
+900 rows, best margin **-1.5e-9** (row 133: a 2x2 product of row 34 gives 12.000000003 against a
+delivered 12.000000002). B 4,052 over 547 rows, best margin **+1.9e-9**: row 962 is reached by twelve
+different bases, and the cascade from row 901 lands at 31.520815300 against the rendered 31.520815284 —
+the table's row *is* the cascade, and the 1.9e-9 is the CSV's 12-dp rendering. C 118 over 91 rows, best
+margin -0.177: the parametric family lands on grid ties and is 1-2 units above the table everywhere
+(45-degree b=10: 166 cells at 14.142 = 9.8 % above sqrt n, against the delivered 13.000 at 0.9 %; 8-15-17
+b=10: 147 at 13.529 = 11.6 % against 12.657 = 4.4 %). Across the window **425 of the 900 rows are
+reproduced to 1e-6** by these families, 17 are within 1e-2, 458 are more than 1e-2 above.
+
+**The named motifs, specifically.** The brief's `n = 272` (delivered **16.965586**, a general-angle pose —
+it is *not* an exact 0/45-degree base) is not in the rational-block family's count law at any `b <= 20`,
+`extra <= 2`: its neighbours are 259 (17.588 vs 16.591), 289 (18.000 vs 17.000) and 293 (18.941 vs
+17.623), 1.0-1.3 above. So the spinor motif as reconstructed cannot reach the row, and the delivered pose
+at 272 is not the motif.
+
+**Controls 9/9** (the CSV read exactly, the 3x3 gate, row 20's rebuild, the product and border count laws,
+the planted duplicate, both words at b=6 with their spare area, the margin rule at row 120, the bytecode
+audit). Ledger `workspace/push/scale_motifs.json` (base census, per-family census, every strict beat —
+none, and the best candidate at every row). **No promotion: zero candidates passed the margin, so C1-C4
+was never entered**; `submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446
+grid ties). Doc 107.
+
+**Run 152 (2026-11-26) — the beat count the guard could not see, and exact bases beyond Q(sqrt 2).**
+Two defects, both closed by measurement.
+
+*The record.* The README summary said **553 / 1000** rows beat the grid while `sqscore` reported **554**,
+and `record_guard` passed it. Nothing in the guard was broken: both of its fatal rules key off
+`SCORE_RE = 2[0-9]\.[0-9]{5,9}`, so a beat count was never *looked at* — row 90's promotion moved the
+score and the beat count in the same commit, every document updated for the score passed, and `553/1000`
+stayed. Five lines carried the stale count with current-state context: `README.md:48`, `STATUS.md:386`
+(also `Grid-tied 447` and `Total improvement -6.719613`), `STATUS.md:569`, `REPRODUCE.md:6` and
+`00-OVERVIEW.md:14`; all five are fixed (554, 446, -6.720241). **R3 is new**: a line that counts the
+beats must quote `sqscore.summarise()`'s count when it is a claim — a table row, a currency sentence, or
+a line naming the *current* score; a line naming only a superseded score is history (the `09-CASCADE.md`
+run-38 quote stays), same TAGS opt-out as R1/R2. On the fixed record R3 flags nothing and the guard
+reads `delivered 22.217428576, beats 554 ... 401 totals, 21 beat counts`. Its limit is stated: R3 is
+**line-scoped**, so `REPRODUCE.md` and `00-OVERVIEW.md`, which put the score on one line and the count on
+the next, were invisible to it and were fixed by hand.
+
+*The bases.* `scripts/exact_words.py` (new, 10 decision functions, 0 naming float, 8 controls) decides
+which rows are exact sentences over the whole **degree-2 catalogue**: the rational words (Pythagorean and
+half-angle, all in Q), and every word with `cos^2`, `sin^2` rational in `Q(sqrt k)` — 45 degrees is k=2,
+`atan(1/2)` is `cos^2 = 4/5` (k=5), `atan(1/3)` is `9/10` (k=10), 30 degrees is `3/4` (k=3). Quarter
+turns are the **axis word** (the unit square is invariant), which run 151's 0/pi/pi4 test refused — that
+is where most of the new rows come from. The fit is sized to the data: `cos^2` within **1e-10** of a
+rational with denominator <= 2000 (the 12-decimal angle perturbs it by ~1e-12; a random real misses by
+~1e-7), `sin^2` taken as the exact complement and required to match to the same band, and the rebuilt
+side must reproduce the delivered side to 5e-9.
+
+The census goes from **519 to 552 recovered bases** (Q 450, Q(sqrt 2) 102) and the 33 new rows are
+`19, 26, 50, 66, 85, 104, 125, 149, 171, 174, 198, 201, 202, 230, 231, 262, 296, 331, 369, 408, 449,
+492, 493, 538, 585, 586, 634, 635, 678, 679, 686, 853, 974`. **Two of them are not exact sentences:**
+at 45 degrees, rows **678** and **679** overlap by one pair at clearance **-3.34e-10** — their poses rest
+on a 45-degree block that is off by ~1e-10 rad. Run 152 gates the extension's 33 inferred sentences
+before trusting them, so both are dropped: **550 trusted bases** (Q 450, Q(sqrt 2) 100; words axis 446,
+mixed 104) and **450 refused** (448 not a declared word + 2 overlapping at the gate). The other
+quadratic fields are **empty — measured, not assumed**: no row in 1..1000 is a Q(sqrt 3), Q(sqrt 5) or
+Q(sqrt 10) sentence, though the classifier's controls recover `atan(1/2)`, `atan(1/3)` and 30 degrees
+from the angle alone. The 448 refusals are not near-misses: median **71 distinct angle values** per row
+(min 2, max 998) — general-position poses, not lattice motifs.
+
+*The re-run.* **36,043 candidates over all 900 rows of 101..1000, 0 strict beats**: A 31,577 candidates
+(900 rows, best -1.498e-9 at row 133), B 4,348 (554 rows, best +1.936e-9 at row 962), C 118 (91 rows,
+best -0.177). The wider census moves exactly one frontier side: at n=500 the newly recovered row 125 gives
+a 2x2 product at **23.414214** where run 151's best was 23.485281 — still **0.56 above** the delivered
+22.850605. n=272 stays 18.000000 against 16.965586. No promotion: zero candidates cleared the margin, so
+C1-C4 was never entered; `submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554
+beats, 446 ties). Controls: `exact_words` 8/8, `scale_motifs` 13/13, 25 decision functions (including a 3x3 grid at `atan(1/2)`
+in Q(sqrt 5) gating at exactly `9/sqrt 5`), `record_guard` clean. Ledger gains `base_fields`, `refused`
+and `base_gate`. Doc 108.
+
+**Run 153 (2026-11-26) — the prose beat count closed, and a composite family that is bounded by the
+area bound.** R3's claim test in run 152 knew only table rows, currency sentences and lines naming the
+score, so `RECONCILIATION.md`'s canonical block — score on one line, `rows beating the grid:
+**553/1000**` on the next, under `## Canonical state` — was invisible. Three additions close it: a line
+under a heading that declares the current state (`canonical|current|delivered|results|status|frontier|
+state`) is a claim whatever its shape; history is decided per **paragraph** (so a run-log entry with a
+superseded score at the end of one line and its beat count at the start of the next stays history); and
+fenced code is skipped. The scan examines 19 beat counts on claim lines, flags exactly
+`RECONCILIATION.md:10`, and that line is fixed (`554/1000`, noting 553 before the run-140 promotion).
+Two shapes that a naive prose rule would have flagged are correctly exempt and worth recording:
+`04-RUN-LOG.md:116` (`454/1000 beat grid`, Run 14, score on the previous line) and `09-CASCADE.md:21` /
+`NEXT_STEPS.md:44` (tables quoting the superseded `22.218056945, 553/1000`); counts of something else
+(`929/1000` verified rows, `540/1000` tilt-support rows, `875/1000` title counts) stay out because the
+beat vocabulary is still required.
+
+**Family D — composites.** The 550 trusted bases now seed a fourth family: a base in `[0, L]^2` and an
+exact motif's square bbox in `[L, L+S]^2` (the far corner), with both L-shaped strips — the whole free
+area `2 L S` — filled to the integer lattice. The motif library is the twelve C poses (3 words x
+`b = 2..5`) plus the smallest bases themselves (`L <= 6`), since a base is the densest rigid tile we
+own; the count is `n = n_base + m + 2 nx ny` with `nx = floor(L+S) - ceil(L)`, `ny = floor(L)`, both
+exact, and trims `r = 0,1,2` give three counts per `(base, motif)` at the same side (784 distinct rows
+reached). Validity is structural (the two bboxes meet only along lines); the built pose is gated in the
+selftest and in C1.
+
+**The bound, and the result.** Since `n <= L^2`, `m <= S^2` and the strips hold at most `2 L S`, every
+composite satisfies `n <= (L+S)^2`: family D can never be denser than a perfect tiling of its own frame,
+so it can tie the grid and never beat it. The measurement matches exactly — **57,388 candidates over
+784 rows, 0 strict beats**, the closest at **-1.448e-9** (row 111, `base36` in `base25`: 11.000000003
+against the delivered 11.000000002, a grid tie) and the second closest at **-0.0032** (row 110): the
+only composites near a delivered side are the ones that *are* the grid. Over the whole window 436 of the
+900 best-per-row margins are more than 1e-2 above. The full audit is now **93,431 candidates over all
+900 rows, 0 beats** — A 31,577 (best -1.498e-9, row 133), B 4,348 (+1.936e-9, row 962), C 118 (-0.177),
+D 57,388 (-1.448e-9). D is the best candidate at 70 rows and improves n=272 from 18.000000 to
+**17.742641** (still 0.777 above 16.965586); n=500 stays with A at 23.414214.
+
+**Why the negative is structural.** (A) multiplies a packing by `k^2` in side `kL` and so preserves
+density; (B) raises it toward 1 and its ceiling is the grid, which is why its best margins are +-2e-9
+and why it reproduces the table; (C) is a rotated block in its own bbox and can use at most `b^2/(bw)^2`
+of it (0.66 realised at 45 degrees); (D) is bounded by `(L+S)^2`. A composition of rigid tiles cannot
+beat a row that is denser than the grid, and 554 delivered rows are.
+
+**Controls 15/15** (run 152's 13 plus the composite law — row 20 + the 45-degree 3x3 motif = 60 cells at
+`L = 9.242640689`, exactly `L + S`, strips `2 x 3 x 5 = 30`, the built pose gating with 96 contacts —
+and the frontier probe: rows 20/50/120's best composite is n=266 at -0.177). `exact_words` 8/8,
+`record_guard` clean. **No promotion**: zero candidates cleared the margin, so C1-C4 was never entered;
+`submission.csv` and root `WHITEBOARD.md` untouched; **22.217428576** (554 beats, 446 ties). Doc 109.
+
+**Run 154 (2026-11-26) — the two-stage solver built, and the annealer's 1e-2 wall.**
+The brief was the one thing 153 runs had never done: stop asking the exact machinery to *find* a
+packing and let a numerical search *propose* one, then force it through the exact pipeline. So this run
+built the missing half. `scripts/proposal_anneal.py` is Stage 1 and the only float in the campaign:
+perturbed-grid, strip, 45-degree-wedge and random seeds; squared-penetration energy over the four SAT
+axes plus a boundary term; a shrink continuation `k -> k - 5e-5 -> k - 1e-4` with a **hard** box; four
+seconds per seed. `scripts/snap_certify.py` is Stage 2 and has no float at all: it turns each angle into
+`t = sin/(1+cos)` in `Decimal`, fits `t` to a rational with denominator `<= 32`, rebuilds the orientation
+as the rational spinor `((1-t^2)/(1+t^2), 2t/(1+t^2))`, snaps the centres to rationals with denominator
+`<= 1e9`, repairs overlaps by an exact Gauss-Seidel sweep (each sweep pushes the later square of a pair
+along its best axis by exactly the penetration and clamps it into `[0, L]^2`), and adjudicates with
+`qsqrt2.gate(..., exact_field.Q)` plus `verify_certificates` in field `"Q"`. **The targets** were measured
+exactly, not by float: of the 446 grid ties, 249 have deficit `r = k^2 - n <= 12`, and excluding
+Nagamochi's proved `r = 1, 2` and applying the brief's priority (`r = 3, 4` at `k = 11..15`) gives 20 rows
+— tier A 117, 140, 118, 165, 141, 192, 221, 166, 193, 222; tier B 111, 133, 112, 157, 134, 113, 158, 135,
+184, 159 — every one with a delivered side of exactly `k`. **Stage 1 found nothing that qualifies:** at
+`k - 1e-4`, inside the container to the last digit, the best worst-penetration is **1.49e-2** (n = 112)
+and the worst **3.60e-2** (n = 133), i.e. 1,490x to 3,600x above the `1e-5` pass line, with a tight
+distribution that is the signature of a search stuck on the lattice it starts from. **Stage 2 ran on all
+twenty anyway** for conversion diagnostics: the snap is nearly free on near-lattice poses (most rows
+unchanged, `t = 0` exactly representable), while the exact repair *raises* the worst penetration on 18 of
+20 rows (up to 5.9x) because separating a pair in an over-full box hands the overlap to the neighbour —
+and the exact gate then refuses all 20 at `ok`, before the margin is ever consulted. **0 of 20 pass
+C1-C2**; `submission.csv` and root `WHITEBOARD.md` untouched; score **22.217428576**, 554 beats, 446
+grid ties. Controls: `snap_certify` **7/7** (spinor identity, the CSV angle 0.927295218001612 re-snapping
+to `t = 1/2`, a rational 3x3 grid gating with 20 contacts and passing C1/C2, a 0.1-overlap chain
+repaired to residual 0 in 2 sweeps, an illegal pose refused at the gate, a legal tie refused at C2, and
+the module's own bytecode audit at 0 float offenders); `exact_words` 8/8; `scale_motifs` 15/15;
+`record_guard` clean; `glm_wheels --audit` **703 functions, 0 offenders** with `snap_certify` added to
+the audited list and `proposal_anneal` deliberately excluded as the declared float stage. The finding is
+structural, not budgetary: a `1e-4` shrink of a jammed `k x k` lattice needs a rearrangement, and a
+spinor with denominator <= 32 quantises to ~1e-3 rad (1.5e-2 of slop at k = 15), so a proposal that only
+just clears `1e-5` cannot survive the snap — the next version must **anneal on the word alphabet itself**
+(rational spinors as the move set), which makes the snap the identity. Doc 110.
+
+**Run 155 (2026-11-26) — the calibration gate, and the solver it stopped.** The brief put a tripwire in
+front of the target run: `proposal_anneal.py --selftest` must discover packings that beat the integer grid,
+cold, at `n = 5` (`L <= 2.71`), `n = 10` (`L <= 3.72`) and `n = 39` (`L <= 6.85`), with max overlap
+`< 1e-6`, and no `n > 100` work is allowed until it does. Both stages were rebuilt first. **Stage 1** is now
+a genuine multi-body solver: a smooth SAT energy (log-sum-exp over the four axes of every pair, softplus'd so
+overlaps cost their square), joint **L-BFGS-B over all 3n coordinates**, a **Lubachevsky-Stillinger inflation**
+(1% side steps with a relaxed pose at each), **basin-hopping** as the global escape, and a simultaneous Jacobi
+**quench** instead of run 154's sequential sweep. **Stage 2** got the precision and the repair the brief asked
+for: `cf_convergents` walks the continued fraction of `t = sin/(1+cos)` and keeps the last convergent with
+`q <= 100000` (the 3-4-5 angle returns `t = 1/2` exactly; 45 degrees gives `q = 80782`, `|t - p/q| = 5.42e-11`,
+i.e. under `3e-9` of slop at `k = 15`), and `relax_simultaneous` replaces the sequential push with an exact
+**damped Jacobi** residual field over `Fraction`s plus an exact closure at `pen + 1e-18`. **The gate's verdict:
+5 PASS (`-1.367e-4` at 2.71, 51 s), 10 PASS (`+4.441e-16` at 3.72, 97 s), 39 FAIL (`+3.301e-2` at 6.85, one
+restart, 526 s)** — so, by the brief's own rule, the target run did not happen: no row of 101..1000 was
+searched, no candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score still
+**22.217428576** (554 beats, 446 ties). The gate earned its keep twice on the way: it caught the SAT measure
+being **inverted** (the pair's state is the MINIMUM penetration / MAXIMUM slack — the first draft took the
+other one and reported a full unit of overlap for a legal five-square lattice) and a shrink schedule six
+times too coarse. It also forced the **clamped-grid floor** the brief asked for: `snap_certify --baseline`
+measures the trivial lattice at `L = k - 1e-4` exactly in `Q` and gets **1.000e-4 on all twenty rows**
+(11-26 violations) — ten times *worse* than the `1e-5` pass line, and 149x better than run 154's best
+proposal (`1.49e-2`), which is the clearest statement yet of how far that solver was from useful. The failure
+is a cost failure, not a mystery: one `solve` at `n = 39` takes ~8 minutes (160 basin-hopping steps, each an
+L-BFGS run with a numeric gradient), `n = 118` has 19x the pairs and 3x the coordinates, and the gate's budget
+is checked between restarts, so the slow case got one attempt. The named next step is the **analytic gradient**
+(one pass instead of `3n` finite differences, ~100x at `n = 118`) plus bounded per-solve restarts and
+defect-lattice seeds; until then the solver is calibrated at five and ten squares and refused at thirty-nine.
+Controls: `snap_certify` **8/8** (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15,
+`record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 111.
+
+### Run 156 — 2026-11-26 — the analytic gradient lands, and the gate moves from cost to search
+
+The brief named run 155's three bottlenecks and all three are now in `scripts/proposal_anneal.py`, measured:
+**(a)** `energy_grad` returns the smooth energy and `dE/d(x, y, theta)` for all `3n` coordinates in one
+vectorised pass — penetration, softmax smooth-minimum, softplus and walls differentiated in closed form —
+verified against central differences at **`2.46e-9`** over 135 coordinates (`n = 5`, `n = 40`) inside
+`--selftest`; measured **86.1x** on 60 L-BFGS-B iterations at `n = 39` (3.12 s -> 0.04 s), one gradient
+pass costing 1.24x a value evaluation at `n = 118` (5.28 -> 6.54 ms), which means **~1,835 gradient passes
+fit in 12 s at `n = 118` where finite differences managed ~6**. **(b)** `Cap(seconds)` raises `StopRun` from
+*inside* L-BFGS-B's and basinhopping's callbacks, so a restart returns its last iterate at the cap — the
+gate's three cases now take **8.2 s / 12.3 s / 38.5 s** with 8/12/15 s per-restart caps, against run 155's
+**526 s single restart** at `n = 39`. **(c)** `seed_defect` removes the `m^2 - n` missing cells at the
+boundary and corners, and `seed_corner` builds a `floor(sqrt n) x floor(sqrt n)` block plus the leftover
+cells tilted into the margin, joining strip/lattice/random. **The gate's verdict: gradient PASS, and then
+n = 5 FAIL (`+1.450e-1`), n = 10 FAIL (`+9.333e-2`), n = 39 FAIL (`+3.626e-2`)** in 59.1 s total — so, by
+the brief's own rule, the `n > 100` run did not happen: no row of 101..1000 was searched, no candidate
+reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score still **22.217428576** (554 beats,
+446 ties). The failure is no longer about cost. Twelve configurations (both new seeds plus strip and random,
+perturbation scales 0.06-0.8 position and 0.3-1.6 radians, thousands of basin steps each) all jam at
+`8.2e-2` to `1.9e-1` at `n = 5`: the optimum at `2 + 1/sqrt 2` needs its fifth square *between* the block's
+corners, a topological rearrangement no single-square jitter can make, because the gap it must pass through
+is closed at the current pose. The named next step is therefore a **move set** — teleport-into-hole using
+run 127's `legal_slide` void seats, block swaps, or a constructive enumeration of the block-plus-`r`
+topology — not a faster version of the same perturb-and-relax. The clamped-grid floor stands unchanged from
+run 155: `snap_certify --baseline` penetrates **1.000e-4 on all twenty rows**, ten times worse than the
+`1e-5` pass line, so everything this solver produced (>= `2.7e-2`) is worse than doing nothing.
+Controls: `snap_certify` **8/8** (24 decision functions, 0 float), `exact_words` 8/8, `scale_motifs` 15/15,
+`sqscore` 22.217428576, `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 112.
+
+### Run 157 — 2026-11-26 — the structural move, and the gate opening at five and ten
+
+Run 156 named a move set as the next step and this is it. **`squeeze_ladder`** takes the jam apart
+deliberately: pick a cell, drop it near the centroid at 45 degrees (both jittered), let L-BFGS-B
+re-form around it, quench, keep only improvements. A jitter and a seat search cannot put a square
+*inside* a solid block -- every seat with room is outside it -- which is exactly why `n = 5` sat at
+`1.45e-1`; the squeeze makes the cell illegal on purpose and the block opens into the `2 + 1/sqrt 2`
+arrangement of four corner squares plus a 45-degree centre. Two more seat moves from run 127's family
+join it in `_StructStep`, scored by the exact four-axis slack: **teleport into a void seat** and
+**block swap** (a lattice cell and a tilted one exchange places). The gate now reads **n = 5 PASS
+`-7.514e-05` in 3.3 s**, **n = 10 PASS `-4.632e-05` in 4.7 s**, **n = 39 FAIL `+2.727e-2` in 41.0 s**,
+**49.1 s total**, with the two new controls green: gradient `2.46e-9`, and the seat finder pinned to
+`legal_slide` on the 3x3-minus-centre pose (72 pair slacks agree to `0.0e+00`, all 7 exact seats
+legal). Four bugs stood between the move and the pass and each is recorded in doc 112 section 6: the
+slack port was short by half a unit and took the min where run 127 takes the max; the cap abort
+returned the last step instead of the best pose (a `-4e-5` pose came back as `3.6e-1`); the ladder
+ran last so it never ran; and it ran on the inflation's smeared output where it fails ten times in a
+row, passing only on a fresh lattice block (1-6 attempts). **n = 39 is still refused** -- 83% density
+needs a scale-aware move (a five-cell squeeze does not open a 39-cell pose) -- so no row of 101..1000
+was searched, no candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score
+still **22.217428576** (554 beats, 446 ties). Controls: `snap_certify` **8/8** (24 decision functions,
+0 float), `exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean, `glm_wheels --audit`
+**0 offenders**. Doc 112.
+
+### Run 158 — 2026-11-27 — band shear, strip rotation, and a calibration case that measures the wrong job
+
+Run 157 named a scale-aware move as the fix for `n = 39`; this run builds the three the brief names and
+measures what the case costs. **`band_shear`** takes a contiguous run of cells on one of four axes (x, y,
+both diagonals), shifts it transversely and leans the boundary strips on both sides into the seam with a
+common sign; **`bundle_rotate`** grows a nearest-neighbour chain and rotates it *rigidly* about its
+centroid, so a ribbon turns without any cell moving relative to its neighbours; **`seed_bridge`** puts two
+axis sub-grids in opposite corners and seats the leftovers at a fixed tilt in the diagonal seam
+(`seat_at_angle`, run 127's four-axis slack over an `11 x 11` centre scan); `struct_ladder` gives them the
+keep-best ladder (40 % cell squeeze, 30 % shear, 20 % bundle, 10 % bundle+seam) and `_StructStep` spends
+40 % of its moves on the two collective moves. Gate: **n = 5 PASS `-7.215e-05` in 3.3 s**, **n = 10 PASS
+`-4.632e-05` in 4.0 s**, **n = 39 FAIL `+2.500e-02` in 30.4 s**, **37.9 s total**, gradient `2.46e-09`,
+seat control 72/72 slacks to `0.0e+00`. The collective moves bought `2.3e-3` at 39 — nothing. Four
+measurements say why: the case's side 6.85 is **0.57 % above the best known packing in the world**
+(6.81072208306864, Schadt 2026, degree 5, Galois `S5`); forty bridge variants land at best `+2.5775e-02`
+(median `6.748e-02`); deflation from a *valid* 7.00 pose floors at `+1.1778e-02` at 6.95 and `+3.541e-02`
+at 6.85, unchanged when the path and the per-step relaxation are doubled (`3.5413e-2` against `3.5414e-2`)
+— a jam, not a budget; and the solver *passes the work it is for*: **`n = 39` at `L = 6.9999` gives
+`+4.663e-15` in 5.3 s**. The target regime is close but not open either — `n = 118` at 10.9999 reaches
+`+2.069e-05` with `defect` (50 s), twice the `1e-5` line, while `bridge` (`1.35e-1`) and `strip`
+(`9.11e-2`) are actively harmful there. **So the gate still refuses: no row of 101..1000 was searched, no
+candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score still 22.217428576**
+(554 beats, 446 ties). Doc 113 recommends (and does not action) replacing the third case with the target
+regime — `n = 39` at `7 - 1e-4`, or `n = 118` at `11 - 1e-4` — because as written the case asks for a
+record packing, not for the job. Controls: `snap_certify` **8/8** (24 decision functions, 0 float),
+`exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 113.
+
+### Run 159 — 2026-11-27 — the landscape, and the ten-row list aimed at proved optima
+
+The brief asked to close the last factor of two at `n = 118, L = 11 - 1e-4` and then run the ten open ties.
+The first is impossible: **`s(k^2 - 3) = k` is proved for every `k >= 6`** (Daniel 2026, Lean, `Valid7`,
+rebuilt by the Squares Project with two exact checkers), and the catalogue records **`n = 118` proved with
+upper = lower = 11**; its companion **`s(k^2 - 4) = k` (k >= 5)** covers `117, 140, 165, 192, 221` as
+reported-proved (`ValidTilt9`, reported independently by Hosono). So the whole ten-row list of runs 154-158
+was a list of rows that can neither be beaten nor promoted, and **nothing was re-cut and nothing was run**.
+The same wall shows on an *open* row: `n = 111` (k=11, r=10, catalogue best known = the grid) at
+`L = 10.9999` lands at **`+2.151e-05`**, twice the `1e-5` line -- `k - 1e-4` on an open tie means beating the
+best packing known to anyone by `1e-4`, and a 97.5 %-dense pose has no slack to give. Two real `--run`
+defects fell out of using it: `--budget 6` took **80.1 s** (the clock was checked only between passes and
+each seed kept its own 15 s cap; `solve_best` now splits the remaining budget across the seeds, and the
+uncapped quench is scaled to the time left -- the same row costs **6.2 s**), and the seed order is now wired
+as run 158 measured it (**`defect` first**). THE LANDSCAPE: the score recomputes to `22.217428576459`
+(= `15.076155` beaten + `7.141273` tied); of the 446 ties **152 rows / 2.5008 are locked by proof** (`r <= 4`
+or a proved case) and **293 rows / 4.6029 are open**. The r-frontier is measured and clean: `0/120` beaten at
+`r <= 3`, a single `1e-9`-pad "beat" at `r = 4`, then `1/28, 2/28, ... 19/19` rising to **every row beaten at
+`r >= 27`** -- so the frontier is exactly `r = 5..26`. No known family reaches that band: the October 2026
+L-shaped result (grid plus two tilted bands) covers `r >= 8 sqrt(K) + 21` (66 at K=32), i.e. the region this
+table has already beaten. The catalogue audit found **30 rows where its verified bound is now below ours**
+(the card's "0 behind" was true of the September snapshot; `n = 127`'s `11.810878789` is exactly the
+catalogue's previous ceiling, superseded on 16 November 2026): imports worth **+0.008891**, certain, no
+search. The leader's `0.163635` is a **1 % side reduction across the 554 beaten rows** -- 1.1 % of their
+`15.076` headroom, i.e. polish, not records. Added `scripts/target_audit.py` (import / beaten / open tie /
+locked for all 1000 rows, with the score at stake and the frontier table) and
+`workspace/catalogue/frontier.json` (324 case records, retrieved 2026-11-27); `PROVED_R` is now `(0,1,2,3,4)`
+with the `r <= 12` cap gone, so `--rank` returns the open band (111, 133, 112, 157, 134, ...) instead of the
+proved rows. No promotion, `submission.csv` and root `WHITEBOARD.md` untouched, score still
+**22.217428576**. Controls: `sqscore` 22.217428576 (554 beats, 446 grid), `record_guard` clean,
+`glm_wheels --audit` **708 functions, 0 offenders**, `snap_certify` **8/8** (24 decision functions, 0 float),
+gate unchanged (`n = 5` PASS, `n = 10` PASS, `n = 39` FAIL `+2.556e-02`). Doc 114.

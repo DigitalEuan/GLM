@@ -3,7 +3,7 @@
 > **Snapshot note (2026-11-18):** The first verification block below is the
 > historical Run 15 chain. The canonical state represented by the latest run
 > records is Run 140: score **22.217428576** (rounded **22.217429**), with
-> 553/1000 rows beating grid — recompute it with `python3 scripts/sqscore.py`,
+> 554/1000 rows beating grid — recompute it with `python3 scripts/sqscore.py`,
 > which asserts those numbers. The Run 15/35/36 records remain in
 > `RECONCILIATION.md`.
 

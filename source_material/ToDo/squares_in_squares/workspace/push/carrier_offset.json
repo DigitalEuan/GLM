@@ -1,0 +1,609 @@
+{
+ "plain": {
+  "family": "seamed K x K carrier + p x q block",
+  "method": "certified branch and bound over (L, cx, cy): a box is pruned when its forced bed exceeds the count law's demand or its possible bed falls short of it; an empty box list is a proof",
+  "box": {
+   "pmax": 10,
+   "smax": {
+    "12": 5,
+    "20": 7,
+    "30": 8,
+    "40": 9,
+    "42": 9,
+    "56": 11,
+    "57": 11,
+    "58": 11,
+    "65": 12,
+    "72": 12,
+    "73": 12,
+    "74": 12,
+    "89": 14,
+    "91": 14,
+    "92": 14,
+    "93": 14,
+    "94": 14
+   },
+   "note": "per row p+q <= isqrt(2k^2-1): the whole box, every shape whose bbox fits below the grid side, not a cap"
+  },
+  "box_cap": 200000,
+  "rows": [
+   {
+    "n": 12,
+    "k": 4,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 3,
+     "smax": 5,
+     "pmax": 10,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "3.99999999150000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 4,
+    "boxes": 26,
+    "tally": {
+     "EMPTY": 4,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 20,
+    "k": 5,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 4,
+     "smax": 7,
+     "pmax": 10,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "4.99999999160000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 37,
+    "boxes": 127,
+    "tally": {
+     "EMPTY": 37,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 30,
+    "k": 6,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 5,
+     "smax": 8,
+     "pmax": 10,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "5.99999999166600000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 52,
+    "boxes": 232,
+    "tally": {
+     "EMPTY": 52,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 40,
+    "k": 7,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 6,
+     "smax": 9,
+     "pmax": 10,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "6.82842711645400000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 169,
+    "boxes": 2083,
+    "tally": {
+     "EMPTY": 169,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 42,
+    "k": 7,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 6,
+     "smax": 9,
+     "pmax": 10,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "6.99999999171400000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 134,
+    "boxes": 1062,
+    "tally": {
+     "EMPTY": 134,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 56,
+    "k": 8,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 7,
+     "smax": 11,
+     "pmax": 11,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "7.99999999175000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 261,
+    "boxes": 1765,
+    "tally": {
+     "EMPTY": 261,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 57,
+    "k": 8,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 7,
+     "smax": 11,
+     "pmax": 11,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "7.99999999175000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 243,
+    "boxes": 1199,
+    "tally": {
+     "EMPTY": 243,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 58,
+    "k": 8,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 7,
+     "smax": 11,
+     "pmax": 11,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "7.99999999175000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 216,
+    "boxes": 746,
+    "tally": {
+     "EMPTY": 216,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 65,
+    "k": 9,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 8,
+     "smax": 12,
+     "pmax": 12,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "8.53553389769900000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 756,
+    "boxes": 46134,
+    "tally": {
+     "EMPTY": 756,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 72,
+    "k": 9,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 8,
+     "smax": 12,
+     "pmax": 12,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "8.99999999177800000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 522,
+    "boxes": 5988,
+    "tally": {
+     "EMPTY": 522,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 73,
+    "k": 9,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 8,
+     "smax": 12,
+     "pmax": 12,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "8.99999999177800000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 481,
+    "boxes": 3855,
+    "tally": {
+     "EMPTY": 481,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 74,
+    "k": 9,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 8,
+     "smax": 12,
+     "pmax": 12,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "8.99999999177800000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 431,
+    "boxes": 2559,
+    "tally": {
+     "EMPTY": 431,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 89,
+    "k": 10,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 9,
+     "smax": 14,
+     "pmax": 14,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "9.94974746010400000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 950,
+    "boxes": 11152,
+    "tally": {
+     "EMPTY": 950,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 91,
+    "k": 10,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 9,
+     "smax": 14,
+     "pmax": 14,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "9.99999999180000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 852,
+    "boxes": 6442,
+    "tally": {
+     "EMPTY": 852,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 92,
+    "k": 10,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 9,
+     "smax": 14,
+     "pmax": 14,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "9.99999999180000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 795,
+    "boxes": 4633,
+    "tally": {
+     "EMPTY": 795,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 93,
+    "k": 10,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 9,
+     "smax": 14,
+     "pmax": 14,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "9.99999999180000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 763,
+    "boxes": 3651,
+    "tally": {
+     "EMPTY": 763,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 94,
+    "k": 10,
+    "proved": false,
+    "family": "plain",
+    "box": {
+     "kmax": 9,
+     "smax": 14,
+     "pmax": 14,
+     "splits": "kx, ky <= K/2 (reflection)",
+     "side_end": "9.99999999180000000000",
+     "note": "p+q <= isqrt(2k^2-1) is every shape whose bbox fits below the grid side; the side interval ends at the delivered side minus the noise margin, and the search is over K <= k-1 (K = k is the grid itself)"
+    },
+    "declarations": 715,
+    "boxes": 2685,
+    "tally": {
+     "EMPTY": 715,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   }
+  ]
+ },
+ "notched": {
+  "family": "seamed K x K carrier + p x q block with an a x b corner removed",
+  "method": "certified branch and bound over (L, cx, cy): a box is pruned when its forced bed exceeds the count law's demand or its possible bed falls short of it; an empty box list is a proof",
+  "pmax": 10,
+  "smax": 13,
+  "box_cap": 200000,
+  "rows": [
+   {
+    "n": 12,
+    "k": 4,
+    "proved": false,
+    "family": "notched",
+    "declarations": 7,
+    "boxes": 43,
+    "tally": {
+     "EMPTY": 7,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 20,
+    "k": 5,
+    "proved": false,
+    "family": "notched",
+    "declarations": 94,
+    "boxes": 262,
+    "tally": {
+     "EMPTY": 94,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 30,
+    "k": 6,
+    "proved": false,
+    "family": "notched",
+    "declarations": 160,
+    "boxes": 708,
+    "tally": {
+     "EMPTY": 160,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 42,
+    "k": 7,
+    "proved": false,
+    "family": "notched",
+    "declarations": 429,
+    "boxes": 3709,
+    "tally": {
+     "EMPTY": 429,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 56,
+    "k": 8,
+    "proved": false,
+    "family": "notched",
+    "declarations": 972,
+    "boxes": 7722,
+    "tally": {
+     "EMPTY": 972,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 72,
+    "k": 9,
+    "proved": false,
+    "family": "notched",
+    "declarations": 1935,
+    "boxes": 25635,
+    "tally": {
+     "EMPTY": 1935,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   },
+   {
+    "n": 91,
+    "k": 10,
+    "proved": false,
+    "family": "notched",
+    "declarations": 2441,
+    "boxes": 31535,
+    "tally": {
+     "EMPTY": 2441,
+     "HIT": 0,
+     "OPEN": 0,
+     "CAP": 0,
+     "INFEASIBLE": 0
+    },
+    "min_floor": 0,
+    "verdict": "PROVED: no side below the grid side and no block position",
+    "open": []
+   }
+  ]
+ }
+}

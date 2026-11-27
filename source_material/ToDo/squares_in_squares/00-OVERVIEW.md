@@ -11,7 +11,7 @@ squares into the smallest square container, scored as
 
 **Current canonical score: 22.217428576** (rounded **22.217429**; set by the run-140
 n = 90 promotion, after the run-47
-re-score, 553/1000 rows beat grid, gap to the reported leader 0.163635).
+re-score, 554/1000 rows beat grid, gap to the reported leader 0.163635).
 Enforced by `scripts/sqscore.py`'s `guard()` and checked against every document
 by `scripts/record_guard.py` since Run 52. Run 15's 22.823536, Run 32's
 22.645991 and Run 36's 22.642386651 remain historical milestones.
