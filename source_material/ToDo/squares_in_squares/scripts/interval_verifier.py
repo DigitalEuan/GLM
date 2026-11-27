@@ -67,6 +67,7 @@ def dir_iv(spec, bits=BITS):
       ("axis",)          (1, 0)
       ("quarter",)       (√2/2, √2/2)
       ("slope", p, q)    (q, p) / r,  r = √(p² + q²)   -- tan t = p/q
+      ("spin", c, s)     an exact rational point of the unit circle, c² + s² = 1
     """
     kind = spec[0]
     if kind == "axis":
@@ -84,6 +85,11 @@ def dir_iv(spec, bits=BITS):
             return (F(q, r), F(q, r)), (F(p, r), F(p, r))
         lo, hi = sqrt_iv(n, bits)          # 1/r lies strictly between 1/hi and 1/lo
         return (F(q) / hi, F(q) / lo), (F(p) / hi, F(p) / lo)
+    if kind == "spin":
+        c, s = F(spec[1]), F(spec[2])
+        if c * c + s * s != 1:
+            raise ValueError(f"spin needs c^2 + s^2 = 1: {(c, s)}")
+        return (c, c), (s, s)
     raise ValueError(f"unknown direction spec: {spec!r}")
 
 
@@ -364,6 +370,16 @@ def selftest():
     assert F(1, 2) < tall[1] < F(1, 2) + F(1, 1000), tall
     assert tall[1] < cell(F(0), F(0), ("slope", 1, 10))["h"][1]
 
+    # a mixed rational spinor is an exact direction, not only the slope family
+    sp = cell(F(1, 2), F(1, 2), ("spin", F(3, 5), F(4, 5)))
+    assert sp["c"] == (F(3, 5), F(3, 5)) and sp["s"] == (F(4, 5), F(4, 5))
+    assert sp["h"] == (F(7, 10), F(7, 10)), sp["h"]
+    spin_near = verify([(F(1, 2), F(1, 2), ("axis",)),
+                        (F(3, 2) + F(1, 5) + gap, F(7, 10),
+                         ("spin", F(3, 5), F(4, 5)))])
+    assert spin_near["verdict"] == "certified", spin_near
+    assert F(spin_near["min_certified_slack"]) > 0, spin_near
+
     # the side law: two axis squares two apart have side exactly 3, no enclosure slop
     two = verify([(F(1, 2), F(1, 2), ("axis",)), (F(5, 2), F(1, 2), ("axis",))])
     assert F(two["L_lo"]) == 3 and F(two["L_hi"]) == 3, two
@@ -384,7 +400,9 @@ def selftest():
           "7/10); 5-12-13 is 17/26; a large denominator approaches 1/2.")
     print("control 7 -- the side law is exact on axis cells, the wall test refuses a 45-degree "
           "square in a box of side 1, and both recipe shapes parse to the same sentence.")
-    print("interval_verifier: OK (7 controls)")
+    print("control 8 -- an exact rational spin (3/5, 4/5) is a certified direction with "
+          "half-extent 7/10 and positive slack.")
+    print("interval_verifier: OK (8 controls)")
 
 
 def main(argv):

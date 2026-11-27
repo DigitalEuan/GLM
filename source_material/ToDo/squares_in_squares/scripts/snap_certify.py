@@ -457,6 +457,22 @@ def selftest() -> int:
           f"i.e. under 3e-9 of positional slop at k = 15")
     checks += 1
 
+    # control 9: a genuinely mixed-angle pose -- axis, 3-4-5 and 5-12-13 spinors --
+    # passes the exact Q certificate and C2.  This is the route the Q/Quad-only
+    # certificate could not express: no cell is at 0 or 45 degrees except the first.
+    mixed_cells = [(Q(F(1, 2)), Q(F(1, 2))), (Q(F(19, 10)), Q(F(19, 10))),
+                   (Q(F(33, 10)), Q(F(33, 10)))]
+    mixed_words = [(Q(1), Q(0)), spinor(F(1, 2)), spinor(F(1, 3))]
+    gm = QS.gate(mixed_cells, mixed_words, Q)
+    assert gm["ok"] and gm["L"] == Q(4), gm
+    vm = adjudicate(3, mixed_cells, mixed_words, Q(4), Decimal("4.1"))
+    assert vm["C1"] and vm["C2"], vm
+    cm = certificate(mixed_cells, mixed_words, 3, Q(4))
+    assert cm["field"] == "Q" and cm["cells"][1]["r"] == ["3/5", "-4/5", "4/5", "3/5"]
+    print("  9. mixed rational spinors: axis + 3-4-5 + 5-12-13, L = 4 exactly, "
+          "C1 certificate passes, C2 beats a delivered 4.1")
+    checks += 1
+
     checked, offenders, skipped = EF.audit_module(
         sys.modules[__name__], exempt=EF.AUDIT_EXEMPT + ("selftest",))
     assert offenders == [], offenders
