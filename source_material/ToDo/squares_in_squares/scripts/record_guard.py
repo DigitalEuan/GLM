@@ -43,6 +43,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -228,6 +229,15 @@ def main() -> int:
             if rmax < lmax[0]:
                 print(f"[record_guard] note: run log stops at run {rmax} but "
                       f"{lmax[1]} is run {lmax[0]} — log an entry")
+
+    # ---- provenance: table.json must be the CSV pose, not an older grid
+    r = subprocess.run([sys.executable, os.path.join(HERE, "provenance_repair.py"),
+                        "--guard"], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
+        print((r.stdout or "").strip())
+        print((r.stderr or "").strip())
+        print("[record_guard] FAILED: table.json is not the delivered CSV pose")
+        return 1
     return 0
 
 
