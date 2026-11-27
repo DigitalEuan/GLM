@@ -1,0 +1,22 @@
+{
+ "rows": 1000,
+ "problems": [],
+ "worst_side_error": "0",
+ "worst_overlap": -6.141354091937501e-11,
+ "score": "22.217428576459144153009191977302028683060624983564",
+ "beats": 554,
+ "grid": 446,
+ "csv_sha256": "29d7f43637216599a9982611ff644f987e26a856f75b441f55b10c4087df1990",
+ "changed_rows": 358,
+ "changed_L_rows": [
+  {
+   "n": 90,
+   "L_old": "10.00000000180000000000000000000000000000",
+   "L_csv": "9.994038775600000000000000000000000000000"
+  }
+ ],
+ "changed_by_kind": {
+  "coords": 358
+ },
+ "backup": "workspace/push/table_before_provenance.json"
+}

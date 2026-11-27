@@ -48,6 +48,7 @@ cells, 0 feasible, 0 gated. Four of the cards' figures do not survive the check
 | Puzzles beating the plain grid | **554 / 1000** |
 | Leaderboard best (reported) | 22.0544214515 → gap **0.163635** |
 | Certification | 1000/1000 packings SAT-verified + 500,500-row CSV round-trip (0 issues; Run 36 record) |
+| Provenance (Run 161) | **`table.json` is now the CSV pose, not an older grid**: `provenance_repair.py` copied **358** stale states and fixed the one post-reconcile side (n = 90, `10.0000000018 → 9.9940387756`); every row carries `state_src`, `state_digest`, and the guard enforces `|extent−L| ≤ 1e-9`, **0** overlap (`packlib.verify`) and the unchanged **22.217428576** / 554 / 446. `reconcile_table` reads **0 stale sides**; `record_guard` calls the guard. The 293 open ties contain **26** with a beaten predecessor (top pockets 656 `0.762`, 56 `0.745`, 999 `0.733`); bounded D1 insertions on 29→30, 55→56, 509→510, 655→656, 998→999 produced **0 pack-legal candidates** (closest 29→30 residual `0.006773`), so nothing was promoted. Doc 116 |
 | Golay/Leech verification | 28/28 + 14/14 assertions, integer-exact |
 | Algebraic certificates | 1169 (7 angle families + surveys + run-11 census) |
 | Proven-optimal rows | 156 (152 tied at grid + 4 below-grid: s(5), s(11), s(17), s(19)) |

@@ -1,10 +1,15 @@
 {
- "note": "L is the true side of the row at 40 decimal digits (true_geom); L_model is the snapped-word value the earlier runs compared against. The repo score is sum L/sqrt(n) - 1 over these true sides.",
+ "note": "L is the true side of the row at 40 decimal digits (true_geom); L_model is the original snapped-word side, preserved as history. score_true is over L, score_model over L_model. The repo score is sum L/sqrt(n) - 1 over the true sides.",
  "rows": 1000,
- "score_true": "22.21805694487378859203915735929767058414",
+ "score_true": "22.217428576459144153009191977302028683060624983564",
  "score_model": "22.64599061292768562796437945960500640382",
- "gap": "0.42793366805389703592522210030733581968",
- "stale_rows_over_1e-9": 357,
- "stale_rows_over_1e-3": 343,
- "generated_by": "scripts/reconcile_table.py --write"
+ "gap": "0.4285620364685414749551874823",
+ "stale_rows_over_1e-9": 0,
+ "stale_rows_over_1e-3": 0,
+ "generated_by": "scripts/provenance_repair.py --write (meta refreshed run 161)",
+ "state_src": "submission.csv",
+ "state_rows_replaced": 358,
+ "L_rows_replaced": 1,
+ "state_guard": "extent<=1e-9, packlib 0 overlap, sqscore unchanged",
+ "csv_sha256": "29d7f43637216599a9982611ff644f987e26a856f75b441f55b10c4087df1990"
 }

@@ -166,7 +166,7 @@ def pen_vec(ax, ay, at, bx, by, bt, eps=0.0):
     return np.clip(eps - best, 0.0, None)
 
 
-def seat(m, grid=120, angles=25, max_offend=6, margin=1e-3):
+def seat(m, grid=120, angles=25, max_offend=8, margin=1e-4):
     """Try to seat one more cell in the frontier pose of row m.
 
     The frontier pose of row m has side L(m) < k = grid(m+1), so ANY legal
@@ -211,8 +211,9 @@ def seat(m, grid=120, angles=25, max_offend=6, margin=1e-3):
     # fits in it has side < k, so a legal seating here IS a beat.
     kk = SQ.grid(m + 1)
     half = (kk - margin) / 2.0
-    xmid = 0.5 * (float(x.min()) + float(x.max()))
-    ymid = 0.5 * (float(y.min()) + float(y.max()))
+    bx0, bx1, by0, by1 = half_ext(x, y, t)
+    xmid = 0.5 * (float(bx0.min()) + float(bx1.max()))
+    ymid = 0.5 * (float(by0.min()) + float(by1.max()))
     lo_x, hi_x = xmid - half, xmid + half
     lo_y, hi_y = ymid - half, ymid + half
 
@@ -322,7 +323,7 @@ if __name__ == "__main__":
         out = []
         for a in args[1:]:
             k = int(a)
-            rec, _cand = seat(fr[k]) if k < 32 else (None, None)
+            rec, _cand = seat(fr[k]) if k in fr else (None, None)
             if rec:
                 out.append(rec)
         os.makedirs(os.path.dirname(OUT), exist_ok=True)

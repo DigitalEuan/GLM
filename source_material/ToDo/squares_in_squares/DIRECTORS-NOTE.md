@@ -20,7 +20,7 @@
 | 552 rows hold standalone zero-clearance `galois-certificate/1` proofs | confirmed (552 of 554 beaten rows certified; the promoted row 90 carries the project's exact rational certificate instead, re-verified by `import_n090.py`) | `verify_certificates.py`, run 106 |
 | 613 core decision functions, 0 float offenders | confirmed | `glm_wheels.py --audit` |
 | **"Grid-frontier rows (`n = k² − 1`) are uniformly compressed"** | **WRONG** — the frontier row of band k is `m* = k² − j*` with `j* = 18…26` at `k >= 21` (e.g. band 23: `m* = 509`, `j* = 20`; band 32: `m* = 998`, `j* = 26`). `n = k² − 1` is not a frontier row anywhere in the table | doc 75 §2 |
-| free cell `0.9994–0.9999` at the compressed frontier | confirmed (and equal to `1 − (k−L)/k` within `6e-4` in ten of eleven bands) | doc 75 §3, `void_insert.py` |
+| free cell `0.9994–0.9999` at the compressed frontier | **[corrected in run 161]** the reading was the `table.json` *grid* state, not the delivered CSV pose: `reconcile_table.py` rewrote `L` only, leaving the unclosed `k×k` margin grid in `state` for ten bands. The delivered pockets are **0.761940** at k = 26 (2.38108, 8.38097) and **0.732771** at k = 32 (27.59, 0.40); `provenance_repair.py` now copies the CSV state into all 1000 rows and `record_guard` enforces it | doc 115, doc 116 §1, `provenance_repair.py` |
 | real corner notches `k = 23` (`0.7534`) and `k = 32` (`0.7171`); `n = 999` costs `+0.120` | confirmed (`+0.1195` for the k = 32 next row) | doc 75 §2–§3 |
 | Block45 / Block45Half / ridge beat the grid on 369 already-beaten counts, and come within `+0.0711` on n = 212, 242, 243, 244 | confirmed (0 of 444 unbeaten rows beaten; median deficit `+0.6066`) | doc 75 §6, `grid_families.py` |
 | `1e-9` face-squeeze saved `−7.89e-9`, `submission_candidate.csv` only | confirmed | run 108 |
@@ -60,12 +60,15 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
     requires tilted cells or non-lattice seams.
   - *Solid-wall fringe cap (`T2`):* a one-cell tilted fringe glued onto a solid upright wall holds at most
     `floor(L)²`.
-  - *Compression wall (`k >= 21`):* **[corrected]** the *frontier pose* of a band (`m* = k² − j*`,
-    `j* = 18…26`) is a uniformly compressed lattice — the largest square fitting its free space is
-    `0.9994–0.9999` of a cell, equal to `1 − (k−L)/k` within `6e-4` in ten of eleven bands — so every void in
-    it is a squashed unit cell, not a hole. **Two bands are real corner notches:** `k = 23` (`0.7534` hole)
-    and `k = 32` (`0.7171` hole; its next row `n = 999` costs only `+0.120` to crack, the cheapest large-band
-    price in the table).
+  - *The high-band wall is one pocket, not a uniform compression:* **[corrected in run 161]** the
+    `0.9994–0.9999` free square was the `table.json` *grid state* for ten bands (`k = 21, 22, 24…31`):
+    `reconcile_table.py` rewrote `L` only, so `state` still held the unclosed `k×k` margin grid with its
+    `j` unit holes. The delivered CSV poses are mixed and carry a real pocket: **0.761940** at
+    `k = 26` (`n = 655`, centre `(2.38108, 8.38097)`; binds cells 26/29/51/64) and **0.732771** at
+    `k = 32` (`n = 998`, centre `(27.59, 0.40)`; binds 848/881). The two notch bands were real even in the
+    stale states (`k = 23` 0.7534, `k = 32` 0.7171); the delivered k = 32 pocket is 0.7328 and the k = 23
+    CSV scan is 0.7320. `provenance_repair.py` now makes the CSV state the table's, and `record_guard`
+    calls its guard.
   - *Existing family baseline:* `Block45`, `Block45Half` and `ridge` beat the grid on `369` already-beaten
     counts and come within **`+0.0711`** of beating it on four near-miss rows (`n = 212, 242, 243, 244`);
     on the `444` unbeaten rows they cover, they beat the base **zero** times (median deficit `+0.6066`, max
@@ -79,8 +82,10 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
 1. **Dynamic Re-Squeeze Block Substitution (`run 116`):** replace `pq` cells with `pq + 1` at larger pitch
    *while allowing the surrounding pose to expand and re-squeeze*, so compression redistributes globally
    rather than locally. Instrument: `resqueeze.py` (patch-coordinate relaxation with a container hinge).
-2. **Notch-Band Rearrangements (`k = 23`, `k = 32`):** exploit the real `0.7534` and `0.7171` corner holes
-   (`n = 999`, the k = 32 next row, is the lowest-cost large-band breakthrough at `+0.120`).
+2. **Notch-Band Rearrangements (`k = 23`, `k = 32`):** exploit the delivered `0.7320` (k = 23 scan) and
+   `0.7328` (k = 32 direct) corner holes (`n = 999`, the k = 32 next row, is the lowest-cost large-band
+   breakthrough at `+0.120`). Run 161's bounded 4-cell modules reached residual 0.024 at both, but no
+   pack-legal pose; doc 116 §3.
 3. **Near-Misses & Interior Seams:** push the four `+0.0711` `Block45` near-misses (`n = 212, 242, 243, 244`)
    and **interior tilted seams** (`(Z + 4/7)²` / rational-sheared interfaces where tilted cells interlock
    inside a seam rather than on a solid wall), and unify `verify_certificates.py` (exact contact) with
@@ -326,6 +331,16 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    the catalogue every run (`scripts/target_audit.py`); build the side-reduction (polish) loop and test it on
    one beaten row; treat open ties only as record attempts at small `k` (`n = 20` alone is `0.118` if it
    could reach `sqrt 20`). Doc 114.
+10. **D0 makes the CSV pose the table's, and D1 prices the open ties (`run 161`):** `provenance_repair.py`
+    copied all **358** stale `table.json` states from `submission.csv` and fixed the one post-reconcile side
+    (n = 90, `10.0000000018 → 9.9940387756`); `record_guard` now calls its guard, which enforces
+    `|extent−L| ≤ 1e-9`, `0` overlap and the unchanged `sqscore` on all 1000 rows. Of the 293 open ties,
+    **26** have a beaten predecessor; measured predecessor pockets lead with 656 (`0.762`), 56 (`0.745`),
+    999 (`0.733`), 30 (`0.727`). Bounded 4–8-cell insertion was run on 29→30, 55→56, 509→510, 655→656 and
+    998→999: **0 pack-legal candidates**, closest 29→30 at residual `0.006773` (side `5.966913431` vs grid 6).
+    Nothing promoted. The next blocker is C1 for arbitrary angles: `Q`/`Quad(d)` certificates do not cover
+    the delivered mixed poses, so a legal D1 pose still needs a rational-angle interval certificate or an
+    exact-word module. Doc 116.
 
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
