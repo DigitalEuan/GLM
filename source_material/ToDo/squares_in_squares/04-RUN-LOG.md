@@ -4896,3 +4896,36 @@ candidate reached C1, `submission.csv` and root `WHITEBOARD.md` untouched, score
 regime — `n = 39` at `7 - 1e-4`, or `n = 118` at `11 - 1e-4` — because as written the case asks for a
 record packing, not for the job. Controls: `snap_certify` **8/8** (24 decision functions, 0 float),
 `exact_words` 8/8, `scale_motifs` 15/15, `record_guard` clean, `glm_wheels --audit` **0 offenders**. Doc 113.
+
+### Run 159 — 2026-11-27 — the landscape, and the ten-row list aimed at proved optima
+
+The brief asked to close the last factor of two at `n = 118, L = 11 - 1e-4` and then run the ten open ties.
+The first is impossible: **`s(k^2 - 3) = k` is proved for every `k >= 6`** (Daniel 2026, Lean, `Valid7`,
+rebuilt by the Squares Project with two exact checkers), and the catalogue records **`n = 118` proved with
+upper = lower = 11**; its companion **`s(k^2 - 4) = k` (k >= 5)** covers `117, 140, 165, 192, 221` as
+reported-proved (`ValidTilt9`, reported independently by Hosono). So the whole ten-row list of runs 154-158
+was a list of rows that can neither be beaten nor promoted, and **nothing was re-cut and nothing was run**.
+The same wall shows on an *open* row: `n = 111` (k=11, r=10, catalogue best known = the grid) at
+`L = 10.9999` lands at **`+2.151e-05`**, twice the `1e-5` line -- `k - 1e-4` on an open tie means beating the
+best packing known to anyone by `1e-4`, and a 97.5 %-dense pose has no slack to give. Two real `--run`
+defects fell out of using it: `--budget 6` took **80.1 s** (the clock was checked only between passes and
+each seed kept its own 15 s cap; `solve_best` now splits the remaining budget across the seeds, and the
+uncapped quench is scaled to the time left -- the same row costs **6.2 s**), and the seed order is now wired
+as run 158 measured it (**`defect` first**). THE LANDSCAPE: the score recomputes to `22.217428576459`
+(= `15.076155` beaten + `7.141273` tied); of the 446 ties **152 rows / 2.5008 are locked by proof** (`r <= 4`
+or a proved case) and **293 rows / 4.6029 are open**. The r-frontier is measured and clean: `0/120` beaten at
+`r <= 3`, a single `1e-9`-pad "beat" at `r = 4`, then `1/28, 2/28, ... 19/19` rising to **every row beaten at
+`r >= 27`** -- so the frontier is exactly `r = 5..26`. No known family reaches that band: the October 2026
+L-shaped result (grid plus two tilted bands) covers `r >= 8 sqrt(K) + 21` (66 at K=32), i.e. the region this
+table has already beaten. The catalogue audit found **30 rows where its verified bound is now below ours**
+(the card's "0 behind" was true of the September snapshot; `n = 127`'s `11.810878789` is exactly the
+catalogue's previous ceiling, superseded on 16 November 2026): imports worth **+0.008891**, certain, no
+search. The leader's `0.163635` is a **1 % side reduction across the 554 beaten rows** -- 1.1 % of their
+`15.076` headroom, i.e. polish, not records. Added `scripts/target_audit.py` (import / beaten / open tie /
+locked for all 1000 rows, with the score at stake and the frontier table) and
+`workspace/catalogue/frontier.json` (324 case records, retrieved 2026-11-27); `PROVED_R` is now `(0,1,2,3,4)`
+with the `r <= 12` cap gone, so `--rank` returns the open band (111, 133, 112, 157, 134, ...) instead of the
+proved rows. No promotion, `submission.csv` and root `WHITEBOARD.md` untouched, score still
+**22.217428576**. Controls: `sqscore` 22.217428576 (554 beats, 446 grid), `record_guard` clean,
+`glm_wheels --audit` **708 functions, 0 offenders**, `snap_certify` **8/8** (24 decision functions, 0 float),
+gate unchanged (`n = 5` PASS, `n = 10` PASS, `n = 39` FAIL `+2.556e-02`). Doc 114.

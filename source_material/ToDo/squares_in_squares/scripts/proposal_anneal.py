@@ -87,8 +87,17 @@ TARGET_OVERLAP = 1e-6            # the calibration gate's "valid packing" line
 CALIBRATION = ((5, 2.71), (10, 3.72), (39, 6.85))
 
 TIER_A_K = (11, 12, 13, 14, 15)
-TIER_A_R = (3, 4)
-PROVED_R = (1, 2)
+#: the frontier band: `target_audit.py` measures that beats climb from 1 row at r = 5 to 19 of 19 at
+#: r >= 26, so the band where a beat is both conceivable and still missing is r = 5..25
+TIER_A_R = tuple(range(5, 13))
+
+#: families whose side is exactly `k`, so a row with that `r` can never be promoted and must never be
+#: targeted.  r = 0 is the area floor; r = 1, 2 Nagamochi 2005; r = 3 Daniel 2026 (Lean-checked, and the
+#: catalogue records `n = 118` as proved); r = 4 Daniel 2026 (reported, `ValidTilt9` reported
+#: independently by Hosono).  Run 158 found this the hard way: the ten-row list of runs 154-157 was
+#: entirely r = 3, 4 rows, i.e. provably optimal at `k`, so it could never have promoted.
+PROVED_R = (0, 1, 2, 3, 4)
+PROVED_R_NOTE = {"Nagamochi 2005": (1, 2), "Daniel 2026": (3, 4), "area floor": (0,)}
 
 
 # ------------------------------------------------------------------- ranking
@@ -117,7 +126,9 @@ def rank_targets(limit: int = 20):
         if k * k < n:
             k += 1
         r = k * k - n
-        if r < 1 or r in PROVED_R or r > 12:
+        # no `r` cap: the tie test below is the real filter (run 158 measured that every row with
+        # r >= 27 is already beaten in this table, while the frontier band r = 5..26 still has ties)
+        if r < 1 or r in PROVED_R:
             continue
         if abs(deliv[n] - k) >= Decimal("1e-8"):
             continue
@@ -924,7 +935,11 @@ def struct_ladder(u, n, L, rng, cap, target=TARGET_OVERLAP, iters=600, quench_it
             v = band_shear(v, rng, L)
         cand, _e = relax(v.reshape(-1), n, L, iters, cap=cap)
         cc, ww = from_u(cand, n)
-        cc = quench(cc, ww, L, iters=quench_iters, damping=0.25)
+        # the quench is not a clock-aware optimiser, so its length is scaled by what is left of the
+        # cap: without this a 1.5 s solve still paid a full 2000-step quench and `--budget` leaked
+        # (run 159: 80.1 s for 6 s; the relax cap alone left 11.3 s)
+        left = max(0.0, cap.t_end - time.monotonic()) if hasattr(cap, "t_end") else 1.0
+        cc = quench(cc, ww, L, iters=int(max(100, min(quench_iters, 400 * left))), damping=0.25)
         p = max_pen(cc, ww)
         if p < best[0]:
             best = (p, to_u(cc, ww))
@@ -986,16 +1001,24 @@ def solve(n, L_target, seed_name, rng, steps=200, shrink=True, cap_seconds=15.0)
 
 
 def solve_best(n, L_target, seeds, rng, steps=200, budget=None):
-    """Try each seed; keep the best pose.  `budget` (seconds) bounds the whole call."""
+    """Try each seed; keep the best pose.  `budget` (seconds) bounds the whole call.
+
+    The budget is spent *inside* the seeds, not between them: run 159 caught `--run --budget 6`
+    taking 80.1 s on one row, because each seed's `solve` kept its own 15 s default cap and the
+    loop only checked the clock after a whole pass.  Each seed now gets what is left divided by
+    the seeds still untried, so a row costs its budget whatever it finds.
+    """
     best = None
     t0 = time.time()
-    for name in seeds:
-        r = solve(n, L_target, name, rng, steps=steps)
+    for i, name in enumerate(seeds):
+        left = None if budget is None else budget - (time.time() - t0)
+        if left is not None and left <= 1.0:
+            break
+        cap = 15.0 if left is None else max(1.5, min(15.0, left / (len(seeds) - i)))
+        r = solve(n, L_target, name, rng, steps=steps, cap_seconds=cap)
         if best is None or r["pen"] < best["pen"]:
             best = r
         if best["pen"] < TARGET_OVERLAP:
-            break
-        if budget is not None and time.time() - t0 > budget:
             break
     return best
 
@@ -1166,7 +1189,11 @@ def main() -> int:
             t0 = time.time()
             best = None
             while time.time() - t0 < budget:
-                r = solve_best(n, target_L, ["strip", "lattice", "random"], rng)
+                # run 158 measured the seed order at the target side: `defect` is the only family that
+                # reaches the `1e-5` line at n = 118 (`2.069e-05`), while `strip` (`9.11e-02`) and the
+                # bridge seed (`1.35e-01`) are worse than doing nothing there.  `defect` first.
+                r = solve_best(n, target_L, ["defect", "strip", "lattice", "random"], rng,
+                               budget=budget - (time.time() - t0))
                 if best is None or r["pen"] < best["pen"]:
                     best = r
                 if best["pen"] < PASS_PEN:

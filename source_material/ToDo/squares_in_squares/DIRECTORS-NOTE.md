@@ -15,8 +15,8 @@
 | claim | verdict | source |
 | --- | --- | --- |
 | score `22.217428576`, 554 rows below `ceil(√n)` | confirmed (re-checked after the run-140 n = 90 promotion; was `22.218056945`, 553) | `sqscore.py` `guard()` |
-| 446 rows tied to `L = k` (the standard grid), 30 bands `k = 3..32` | confirmed (446 includes n = 1; 445 at n >= 2; row 90 left the grid ties when it was promoted in run 140; 30 frontier bands, band 32 clamped at n = 1000) | doc 75 §2, run 115 |
-| 303 tied / 21 ahead / 0 behind the Squares Project catalogue | confirmed (303 equal, 21 ahead by `0.006414`, 0 behind) | doc 75 §1 |
+| 446 rows tied to `L = k` (the standard grid), 30 bands `k = 3..32` | confirmed (446 includes n = 1; 445 at n >= 2; row 90 left the grid ties when it was promoted in run 140; 30 frontier bands, band 32 clamped at n = 1000). Run 159 splits them: **152 rows are locked by proof** (`r <= 4` or a proved case, `2.5008` of score) and **293 are open** (`4.6029`) | doc 75 §2, run 115, doc 114 §2 |
+| 303 tied / 21 ahead / 0 behind the Squares Project catalogue | **[corrected in run 159]** the 0-behind reading was true of the September snapshot. Against the catalogue retrieved 2026-11-27 we are **21 ahead, 273 tied, 30 behind**, worth `+0.008891` of score; the import list is `workspace/push/target_audit.json` | doc 114 §3, `workspace/catalogue/frontier.json` |
 | 552 rows hold standalone zero-clearance `galois-certificate/1` proofs | confirmed (552 of 554 beaten rows certified; the promoted row 90 carries the project's exact rational certificate instead, re-verified by `import_n090.py`) | `verify_certificates.py`, run 106 |
 | 613 core decision functions, 0 float offenders | confirmed | `glm_wheels.py --audit` |
 | **"Grid-frontier rows (`n = k² − 1`) are uniformly compressed"** | **WRONG** — the frontier row of band k is `m* = k² − j*` with `j* = 18…26` at `k >= 21` (e.g. band 23: `m* = 509`, `j* = 20`; band 32: `m* = 998`, `j* = 26`). `n = k² − 1` is not a frontier row anywhere in the table | doc 75 §2 |
@@ -304,8 +304,28 @@ and `21` ahead of the Squares Project catalogue, `0` behind).
    for — **`n = 39` at `6.9999` gives `+4.663e-15` in 5.3 s**. The target regime itself is close but not
    open (`n = 118` at `10.9999`: `+2.069e-05` with `defect`, twice the `1e-5` line; `bridge` and `strip`
    are harmful there). Doc 113 recommends replacing the third case with the target regime — `n = 39` at
-   `7 - 1e-4`, or `n = 118` at `11 - 1e-4` — because as written it asks for a record packing. Not actioned:
+   `7 - 1e-4`, or `n = 118` at `11 - 1e-4` —    because as written it asks for a record packing. Not actioned:
    the brief's rule is that the gate decides, so no `n > 100` row was run and nothing was promoted.
+
+9. **The landscape, and the target list was aimed at proved optima (`run 159`):** `s(k^2 - 3) = k` is
+   **proved** for every `k >= 6` (Daniel 2026, Lean, rebuilt by the Squares Project; the catalogue records
+   `n = 118` proved with upper = lower = 11) and `s(k^2 - 4) = k` covers `117, 140, 165, 192, 221`
+   (`ValidTilt9`, reported independently by Hosono). So the ten-row list of runs 154-158 could not be beaten
+   at any budget, and `n = 118` at `11 - 1e-4` was *impossible*, not hard. Even an **open** tie at the target
+   side is out of reach: `n = 111` at `10.9999` lands at `+2.151e-05`, twice the `1e-5` line, because
+   `k - 1e-4` there means beating the best packing known to anyone. The score decomposes exactly as
+   `22.217428576459 = 15.076155` (554 beaten) `+ 7.141273` (446 tied), and the ties split into **152 locked
+   by proof** (`2.5008`) and **293 open** (`4.6029`). The measured frontier is `r = 5..26`: `0/120` beaten at
+   `r <= 3`, one `1e-9`-pad artefact at `r = 4`, then a monotone climb to **every row beaten at `r >= 27`**;
+   no known family reaches the band (the L-shaped bands cover `r >= 8 sqrt(K) + 21`, i.e. the region already
+   beaten). Three stale facts were fixed: the **proved list** (`PROVED_R = (0,1,2,3,4)`, `r <= 12` cap gone,
+   so `--rank` now returns 111, 133, 112, 157, 134, ...), the **catalogue snapshot** (30 rows now have a
+   verified bound below ours, `+0.008891`), and **`--budget`** (80.1 s for a 6 s request, now 6.2 s). The
+   leader's `0.163635` is a **1 % side reduction across the 554 beaten rows** — 1.1 % of their 15.076
+   headroom, i.e. **polish, not records**. Ranked next: import the 30 rows (**+0.0089**, certain); re-audit
+   the catalogue every run (`scripts/target_audit.py`); build the side-reduction (polish) loop and test it on
+   one beaten row; treat open ties only as record attempts at small `k` (`n = 20` alone is `0.118` if it
+   could reach `sqrt 20`). Doc 114.
 
 ## 4. PROMOTION GATE (C1–C4)
 Keep `submission.csv` and root `WHITEBOARD.md` untouched until a candidate passes:
